@@ -27,7 +27,7 @@ export default function BrandsPage() {
         {brands.map((brand) => (
           <Link
             key={brand.id}
-            href={`/preview/brendovi/${brand.slug}`}
+            href={`/brendovi/${brand.slug}`}
             className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-8 transition-shadow hover:shadow-lg"
           >
             <div className="relative h-16 w-32">

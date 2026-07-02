@@ -1,0 +1,6 @@
+<svg width="240" height="96" viewBox="0 0 240 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Befar">
+  <rect x="1" y="1" width="238" height="94" rx="18" fill="#F7F8FA" stroke="#D8DDE5" stroke-width="2"/>
+  <path d="M32 28H72C83.046 28 92 36.9543 92 48C92 59.0457 83.046 68 72 68H32V28Z" fill="#20242C"/>
+  <path d="M50 39H70C75.523 39 80 43.4772 80 49C80 54.5228 75.523 59 70 59H50V39Z" fill="#F7F8FA"/>
+  <text x="112" y="58" fill="#20242C" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="800" letter-spacing="0">BEFAR</text>
+</svg>

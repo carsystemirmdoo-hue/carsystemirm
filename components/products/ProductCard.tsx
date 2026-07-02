@@ -9,7 +9,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link
-      href={`/preview/proizvodi/${product.slug}`}
+      href="/katalog"
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-shadow hover:shadow-lg"
     >
       <div className="relative aspect-square w-full overflow-hidden bg-surface-muted">

@@ -2,21 +2,38 @@
 
 import { useEffect, useState } from "react";
 
+const THEME_STORAGE_KEY = "theme";
+
+function readCurrentTheme() {
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+}
+
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
+    setIsDark(readCurrentTheme() === "dark");
+
+    function handleStorage(event: StorageEvent) {
+      if (event.key !== THEME_STORAGE_KEY) return;
+      if (event.newValue === "light" || event.newValue === "dark") {
+        setIsDark(event.newValue === "dark");
+      }
+    }
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   function toggle() {
     const next = !isDark;
     setIsDark(next);
     document.documentElement.classList.toggle("dark", next);
+    document.documentElement.dataset.theme = next ? "dark" : "light";
     try {
-      localStorage.setItem("theme", next ? "dark" : "light");
+      localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
     } catch {
-      // localStorage unavailable (private mode etc.) — theme just won't persist.
+      // localStorage unavailable, theme just won't persist.
     }
   }
 
@@ -26,7 +43,9 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? "Uključi svetlu temu" : "Uključi tamnu temu"}
       aria-pressed={isDark}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-surface-muted"
+      className="cs-interactive-surface inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-surface-muted"
+      data-cursor="button"
+      data-motion-surface
     >
       <span aria-hidden="true">{isDark ? "☀" : "☾"}</span>
     </button>

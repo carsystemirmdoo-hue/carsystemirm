@@ -1,0 +1,10 @@
+<svg width="900" height="620" viewBox="0 0 900 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Befar sunđer crni 50 x 150 mm">
+  <rect width="900" height="620" rx="36" fill="#F7F8FA"/>
+  <rect x="92" y="72" width="716" height="476" rx="28" fill="#FFFFFF" stroke="#D9DEE7" stroke-width="2"/>
+  <path d="M210 328C210 244.052 278.052 176 362 176H538C621.948 176 690 244.052 690 328C690 411.948 621.948 480 538 480H362C278.052 480 210 411.948 210 328Z" fill="#15171B"/>
+  <path d="M262 328C262 272.772 306.772 228 362 228H538C593.228 228 638 272.772 638 328C638 383.228 593.228 428 538 428H362C306.772 428 262 383.228 262 328Z" fill="#2A2E35" opacity="0.86"/>
+  <rect x="296" y="492" width="308" height="36" rx="18" fill="#15171B" opacity="0.12"/>
+  <text x="450" y="136" text-anchor="middle" fill="#181B20" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="800">BEFAR</text>
+  <text x="450" y="176" text-anchor="middle" fill="#5C6470" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">sunđer za poliranje</text>
+  <text x="450" y="529" text-anchor="middle" fill="#181B20" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">Crni · 50 x 150 mm</text>
+</svg>

@@ -33,8 +33,8 @@ export default function PreviewHomePage() {
               osnovnih stranica pre javnog puštanja.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/preview/proizvodi">Pogledaj proizvode</Button>
-              <Button href="/preview/brendovi" variant="secondary">
+              <Button href="/katalog">Pogledaj proizvode</Button>
+              <Button href="/brendovi" variant="secondary">
                 Brendovi u ponudi
               </Button>
             </div>
@@ -93,7 +93,7 @@ export default function PreviewHomePage() {
             </p>
           </div>
           <Link
-            href="/preview/proizvodi"
+            href="/katalog"
             className="text-sm font-semibold text-accent hover:underline"
           >
             Ceo katalog

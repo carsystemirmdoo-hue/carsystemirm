@@ -45,13 +45,13 @@ export function ProductDetail({ product }: { product: Product }) {
       <div className="flex flex-col">
         <div className="flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">
           {brand && (
-            <Link href={`/preview/brendovi/${brand.slug}`} className="hover:text-foreground">
+            <Link href={`/brendovi/${brand.slug}`} className="hover:text-foreground">
               {brand.name}
             </Link>
           )}
           {brand && category && <span aria-hidden="true">·</span>}
           {category && (
-            <Link href={`/preview/kategorije/${category.slug}`} className="hover:text-foreground">
+            <Link href="/katalog" className="hover:text-foreground">
               {category.name}
             </Link>
           )}
@@ -99,7 +99,7 @@ export function ProductDetail({ product }: { product: Product }) {
         )}
 
         <div className="mt-10">
-          <Button href={`/preview/kontakt?proizvod=${encodeURIComponent(product.name)}`}>
+          <Button href={`/kontakt?tema=proizvod&proizvod=${product.slug}`}>
             Pošaljite upit
           </Button>
         </div>

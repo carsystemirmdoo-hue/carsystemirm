@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { ComingSoonProgress } from "@/app/ComingSoonProgress";
+import {
+  getLocalSiteAccessPassword,
+  getSiteAccessPasswordState,
+} from "@/lib/site-access";
 
 export const metadata: Metadata = {
   title: "Sajt u pripremi | Carsystem i R-M Inđija",
@@ -27,7 +31,55 @@ const mistParticles = [
   { delay: "3.1s", duration: "8.8s", size: "0.3rem", x: "34%", y: "62%" },
 ];
 
-export default function SiteInPreparationPage() {
+type SiteInPreparationPageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function firstParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] ?? "" : value ?? "";
+}
+
+function accessMessage(status: string, passwordState: ReturnType<typeof getSiteAccessPasswordState>) {
+  if (passwordState === "missing") {
+    return {
+      tone: "danger",
+      text: "Pristupna lozinka nije podešena. Dodajte SITE_ACCESS_PASSWORD na Vercel-u.",
+    };
+  }
+
+  if (status === "invalid") {
+    return { tone: "danger", text: "Kod nije ispravan. Proverite pristupnu lozinku." };
+  }
+
+  if (status === "missing") {
+    return { tone: "danger", text: "Unesite pristupni kod za otključavanje sajta." };
+  }
+
+  if (status === "not-configured") {
+    return {
+      tone: "danger",
+      text: "Pristup trenutno nije konfigurisan. Potrebna je SITE_ACCESS_PASSWORD env varijabla.",
+    };
+  }
+
+  if (passwordState === "local-fallback") {
+    return {
+      tone: "muted",
+      text: `Local/dev pristupni kod: ${getLocalSiteAccessPassword()}`,
+    };
+  }
+
+  return { tone: "muted", text: "Unesite interni pristupni kod za pregled pravog sajta." };
+}
+
+export default async function SiteInPreparationPage({
+  searchParams,
+}: SiteInPreparationPageProps) {
+  const params = (await searchParams) ?? {};
+  const passwordState = getSiteAccessPasswordState();
+  const message = accessMessage(firstParam(params.access), passwordState);
+  const canUnlock = passwordState !== "missing";
+
   return (
     <main className="coming-soon" aria-labelledby="maintenance-title">
       <div className="scene" aria-hidden="true">
@@ -72,7 +124,7 @@ export default function SiteInPreparationPage() {
 
           <div className="brand-meta" aria-hidden="true">
             <span>Studio One showcase</span>
-            <span className="brand-meta-index">Public preview locked</span>
+            <span className="brand-meta-index">Access locked</span>
           </div>
         </header>
 
@@ -85,6 +137,32 @@ export default function SiteInPreparationPage() {
             Pripremamo javni katalog, pregled programa, lokator partnerskih
             prodavnica i osnovu za budući B2B pristup.
           </p>
+          <form
+            action="/site-u-pripremi/access"
+            className="access-panel reveal reveal-5"
+            method="post"
+          >
+            <label className="access-label" htmlFor="site-access-code">
+              Interni pristup
+            </label>
+            <div className="access-row">
+              <input
+                autoComplete="current-password"
+                className="access-input"
+                disabled={!canUnlock}
+                id="site-access-code"
+                name="accessCode"
+                placeholder="Pristupni kod"
+                type="password"
+              />
+              <button className="access-button" disabled={!canUnlock} type="submit">
+                Otključaj sajt
+              </button>
+            </div>
+            <p className="access-message" data-tone={message.tone}>
+              {message.text}
+            </p>
+          </form>
           <ComingSoonProgress />
         </section>
 

@@ -4,37 +4,40 @@ Ovo je preporučena deployment varijanta dok kod Burina.net postoji samo domen/D
 
 ## Rute
 
-- `https://carsystemirm.com/` je javna "Sajt je u pripremi" stranica.
-- `https://carsystemirm.com/preview` i sve `/preview/...` rute su zaštićene Basic Auth-om.
+- Kada je `MAINTENANCE_MODE=true`, javne rute vode na `/site-u-pripremi`.
+- Nakon uspešnog internog pristupa, pravi sajt radi na `/`, `/katalog`, `/prodavnice`, `/kontakt` i ostalim javnim rutama.
+- `/preview` i sve `/preview/...` rute ne prikazuju posebnu preview verziju sajta.
 
-## Preview zaštita
+## Maintenance pristup
 
 Zaštita je implementirana u root `middleware.ts`.
 
 Middleware:
 
-- štiti samo `/preview` i `/preview/...`,
-- ne štiti `/`,
+- čita `MAINTENANCE_MODE`;
+- dozvoljava `/site-u-pripremi` i `/site-u-pripremi/access`;
 - ne štiti statičke assete,
-- čita kredencijale isključivo iz env varijabli,
-- vraća `401` ako env varijable nisu podešene,
-- vraća `WWW-Authenticate: Basic realm="Carsystem RM Preview"` kada auth nije validan.
+- proverava `httpOnly` access cookie za otključan pristup,
+- preusmerava `/preview` na `/site-u-pripremi` bez cookie-ja ili na `/` sa validnim cookie-jem.
 
 ## Env varijable
 
 U Vercel Project Settings → Environment Variables dodati:
 
 ```txt
-PREVIEW_USERNAME
-PREVIEW_PASSWORD
+MAINTENANCE_MODE=true
+SITE_ACCESS_PASSWORD
 ```
 
-Podesiti ih za environment-e koji služe internu preview zonu, najčešće:
+`PREVIEW_ACCESS_PASSWORD` je podržan kao fallback naziv, ali preporučeni naziv
+za novi flow je `SITE_ACCESS_PASSWORD`.
+
+Podesiti ih za environment-e koji treba da budu zaključani, najčešće:
 
 - Production
 - Preview
 
-Ne upisivati prave kredencijale u kod, dokumentaciju, `.env.local`, commit ili chat log.
+Ne upisivati pravu lozinku u kod, dokumentaciju, `.env.local`, commit ili chat log.
 
 ## Build
 
@@ -44,7 +47,8 @@ Vercel treba da koristi standardni Next.js build:
 npm run build
 ```
 
-Projekat više ne koristi `output: "export"` za Vercel, jer Vercel preview zaštita zavisi od Next middleware-a.
+Projekat više ne koristi `output: "export"` za Vercel, jer maintenance zaštita
+zavisi od Next middleware-a i route handlera.
 
 ## DNS napomena
 

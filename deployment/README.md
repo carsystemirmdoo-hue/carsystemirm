@@ -9,7 +9,9 @@ Ovaj projekat sada ima dve jasno odvojene deployment varijante:
 
 Koristiti Vercel deployment.
 
-Javna ruta `/` ostaje otvorena, a sve rute koje počinju sa `/preview` štiti Next middleware preko Basic Auth-a i env varijabli.
+Kada je `MAINTENANCE_MODE=true`, javne rute vode na `/site-u-pripremi`.
+Interni pristup otključava pravi sajt server-side cookie-jem. Ruta `/preview`
+više ne prikazuje posebnu preview verziju sajta, već se preusmerava.
 
 ## Važna razlika
 

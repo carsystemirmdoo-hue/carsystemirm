@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function PreviewRedirectPage() {
+export default function PreviewCatchAllRedirectPage() {
   redirect("/");
 }

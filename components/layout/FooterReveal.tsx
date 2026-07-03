@@ -3,13 +3,9 @@
 import { useEffect } from "react";
 
 /**
- * Drives the footer reveal via IntersectionObserver. The footer is only
- * "armed" (hidden) after JS confirms it is below the viewport, so a
- * missing/failed script can never leave the footer invisible. Arming is
- * retried once shortly after mount because content-heavy pages can still
- * be laying out when the effect first runs. A CSS view() timeline is
- * intentionally avoided: it breaks when the footer is nested in an
- * overflow-clipped wrapper (e.g. the catalog shell).
+ * Drives a sticky curtain reveal without hiding the footer. If JS is missing,
+ * the footer remains a normal block; if reduced motion is requested, the
+ * component leaves the DOM untouched.
  */
 export function FooterReveal() {
   useEffect(() => {
@@ -18,38 +14,44 @@ export function FooterReveal() {
     const footer = document.querySelector<HTMLElement>(".cs-animated-footer");
     if (!footer) return undefined;
 
-    let observer: IntersectionObserver | null = null;
-    let retryTimer: number | null = null;
+    const footerElement = footer;
+    let animationFrame = 0;
+    let settleTimer: number | null = null;
 
-    function arm() {
-      if (!footer) return false;
-      if (footer.getBoundingClientRect().top < window.innerHeight) return false;
+    function updateReveal() {
+      animationFrame = 0;
 
-      footer.dataset.revealArmed = "true";
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((entry) => entry.isIntersecting)) {
-            footer.dataset.revealed = "true";
-            observer?.disconnect();
-          }
-        },
-        { threshold: 0.08 },
+      const rect = footerElement.getBoundingClientRect();
+      const revealDistance = Math.min(
+        Math.max(rect.height * 0.72, 260),
+        window.innerHeight * 0.78,
       );
+      const visibleDistance = window.innerHeight - rect.top;
+      const progress = Math.min(Math.max(visibleDistance / revealDistance, 0), 1);
 
-      observer.observe(footer);
-      return true;
+      footerElement.dataset.revealArmed = "true";
+      footerElement.style.setProperty("--cs-footer-reveal", progress.toFixed(3));
+      footerElement.dataset.revealed = progress > 0.96 ? "true" : "false";
     }
 
-    if (!arm()) {
-      retryTimer = window.setTimeout(arm, 700);
+    function scheduleUpdate() {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateReveal);
     }
+
+    scheduleUpdate();
+    settleTimer = window.setTimeout(scheduleUpdate, 500);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      if (retryTimer !== null) window.clearTimeout(retryTimer);
-      observer?.disconnect();
-      delete footer.dataset.revealArmed;
-      delete footer.dataset.revealed;
+      if (settleTimer !== null) window.clearTimeout(settleTimer);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      delete footerElement.dataset.revealArmed;
+      delete footerElement.dataset.revealed;
+      footerElement.style.removeProperty("--cs-footer-reveal");
     };
   }, []);
 

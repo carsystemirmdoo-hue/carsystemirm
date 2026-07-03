@@ -1,46 +1,15 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import {
+  isEnabled,
+  isValidSiteAccessToken,
+  SITE_ACCESS_COOKIE_NAME,
+} from "./lib/site-access";
 
-const AUTH_HEADER = 'Basic realm="Carsystem RM Preview"';
 const MAINTENANCE_ROUTE = "/site-u-pripremi";
+const SITE_ACCESS_ROUTE = "/site-u-pripremi/access";
 
 const PUBLIC_FILE_PATTERN = /\.(?:avif|css|gif|ico|jpg|jpeg|js|map|pdf|png|svg|txt|webp|xml)$/i;
-
-function unauthorized() {
-  return new NextResponse("Authentication required", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": AUTH_HEADER,
-      "Cache-Control": "no-store",
-    },
-  });
-}
-
-function parseBasicAuth(header: string | null) {
-  if (!header?.startsWith("Basic ")) {
-    return null;
-  }
-
-  try {
-    const decoded = atob(header.slice("Basic ".length).trim());
-    const separatorIndex = decoded.indexOf(":");
-
-    if (separatorIndex === -1) {
-      return null;
-    }
-
-    return {
-      username: decoded.slice(0, separatorIndex),
-      password: decoded.slice(separatorIndex + 1),
-    };
-  } catch {
-    return null;
-  }
-}
-
-function isEnabled(value: string | undefined) {
-  return ["1", "true", "yes", "on"].includes(value?.toLowerCase() ?? "");
-}
 
 function isMaintenanceEnabled() {
   return isEnabled(process.env.MAINTENANCE_MODE);
@@ -54,6 +23,7 @@ function isBypassedRoute(pathname: string) {
   return (
     pathname === MAINTENANCE_ROUTE ||
     pathname.startsWith(`${MAINTENANCE_ROUTE}/`) ||
+    pathname === SITE_ACCESS_ROUTE ||
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/images/") ||
     pathname.startsWith("/brands/") ||
@@ -70,43 +40,37 @@ function isBypassedRoute(pathname: string) {
   );
 }
 
-function requirePreviewAuth(request: NextRequest) {
-  const expectedUsername = process.env.PREVIEW_USERNAME;
-  const expectedPassword = process.env.PREVIEW_PASSWORD;
+function redirectTo(request: NextRequest, pathname: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = pathname;
+  url.search = "";
 
-  if (!expectedUsername || !expectedPassword) {
-    return unauthorized();
-  }
-
-  const credentials = parseBasicAuth(request.headers.get("authorization"));
-
-  if (
-    credentials?.username === expectedUsername &&
-    credentials.password === expectedPassword
-  ) {
-    return NextResponse.next();
-  }
-
-  return unauthorized();
+  return NextResponse.redirect(url);
 }
 
-export function middleware(request: NextRequest) {
+async function hasSiteAccess(request: NextRequest) {
+  return isValidSiteAccessToken(request.cookies.get(SITE_ACCESS_COOKIE_NAME)?.value);
+}
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const maintenanceEnabled = isMaintenanceEnabled();
+  const hasAccess = await hasSiteAccess(request);
 
   if (isPreviewRoute(pathname)) {
-    return requirePreviewAuth(request);
+    return redirectTo(request, maintenanceEnabled && !hasAccess ? MAINTENANCE_ROUTE : "/");
+  }
+
+  if (pathname === MAINTENANCE_ROUTE && maintenanceEnabled && hasAccess) {
+    return redirectTo(request, "/");
   }
 
   if (isBypassedRoute(pathname)) {
     return NextResponse.next();
   }
 
-  if (isMaintenanceEnabled()) {
-    const url = request.nextUrl.clone();
-    url.pathname = MAINTENANCE_ROUTE;
-    url.search = "";
-
-    return NextResponse.redirect(url);
+  if (maintenanceEnabled && !hasAccess) {
+    return redirectTo(request, MAINTENANCE_ROUTE);
   }
 
   return NextResponse.next();

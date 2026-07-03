@@ -28,14 +28,7 @@ function cx(...classes: Array<string | false | null | undefined>) {
 }
 
 function publicPathname(pathname: string) {
-  const path =
-    pathname === "/preview"
-      ? "/"
-      : pathname.startsWith("/preview/")
-        ? pathname.slice("/preview".length)
-        : pathname;
-
-  return path.length > 1 ? path.replace(/\/$/, "") : path;
+  return pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
 }
 
 function isActive(activeKey: NavLink["activeKey"], pathname: string) {

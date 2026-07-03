@@ -569,36 +569,52 @@ body {
 }
 
 .cs-animated-footer {
+  --cs-footer-reveal: 1;
+  --cs-footer-lift: clamp(2.75rem, 7vw, 5.25rem);
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
 
-/* Footer reveal vodi FooterReveal (IntersectionObserver): reveal se "naoruža"
-   tek kada JS potvrdi da je footer ispod viewporta, pa footer bez JS-a ostaje
-   normalno vidljiv. CSS view() timeline je izbegnut namerno — lomi se kada je
-   footer ugnježden u wrapper sa overflow clip (npr. katalog shell). */
 .cs-animated-footer[data-reveal-armed] {
-  opacity: 0;
-  transform: translateY(36px);
+  position: sticky;
+  bottom: 0;
+  z-index: 0;
+  margin-top: calc(var(--cs-footer-lift) * -1);
+  padding-top: var(--cs-footer-lift);
+  box-shadow:
+    0 -1px 0 color-mix(in oklch, var(--foreground), transparent 90%),
+    0 -1.6rem 4.2rem color-mix(in oklch, var(--foreground), transparent 91%);
+  transform: translate3d(0, calc((1 - var(--cs-footer-reveal)) * var(--cs-footer-lift)), 0);
   transition:
-    opacity 620ms var(--cs-ease-polish),
-    transform 620ms var(--cs-ease-polish);
-  will-change: opacity, transform;
+    box-shadow 220ms var(--cs-ease-polish),
+    transform 120ms var(--cs-ease-polish);
+  will-change: transform;
+}
+
+.cs-animated-footer[data-reveal-armed]::before {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: var(--cs-footer-lift);
+  background:
+    linear-gradient(180deg, var(--background) 0%, color-mix(in oklch, var(--background), transparent 14%) 42%, transparent 100%),
+    linear-gradient(90deg, transparent, color-mix(in oklch, var(--cs-orb-core), transparent 82%), transparent);
+  content: "";
+  opacity: calc(0.58 + (var(--cs-footer-reveal) * 0.32));
+  pointer-events: none;
+  transform: translate3d(0, calc((1 - var(--cs-footer-reveal)) * -0.85rem), 0);
+  transition:
+    opacity 160ms var(--cs-ease-polish),
+    transform 120ms var(--cs-ease-polish);
 }
 
 .cs-animated-footer[data-reveal-armed] > *:not(.cs-footer-ambient) {
-  opacity: 0;
-  transform: translateY(22px);
+  opacity: calc(0.84 + (var(--cs-footer-reveal) * 0.16));
+  transform: translate3d(0, calc((1 - var(--cs-footer-reveal)) * 1.15rem), 0);
   transition:
-    opacity 640ms var(--cs-ease-polish) 110ms,
-    transform 640ms var(--cs-ease-polish) 110ms;
-}
-
-.cs-animated-footer[data-reveal-armed][data-revealed="true"],
-.cs-animated-footer[data-reveal-armed][data-revealed="true"] > *:not(.cs-footer-ambient) {
-  opacity: 1;
-  transform: translateY(0);
+    opacity 180ms var(--cs-ease-polish),
+    transform 120ms var(--cs-ease-polish);
 }
 
 .cs-footer-ambient {
@@ -902,7 +918,10 @@ a[data-cursor="link"]:focus-visible {
 
   .cs-animated-footer {
     animation: none;
+    margin-top: 0;
+    padding-top: 0;
     opacity: 1;
+    position: relative;
     transform: none;
     will-change: auto;
   }
@@ -1303,6 +1322,99 @@ a[data-cursor="link"]:focus-visible {
   text-transform: uppercase;
 }
 
+.coming-soon .access-panel {
+  display: grid;
+  gap: 0.72rem;
+  width: min(31rem, 100%);
+  margin: clamp(1.35rem, 3vh, 2rem) auto 0;
+  border: 1px solid oklch(0.9 0.01 25 / 0.2);
+  background:
+    linear-gradient(135deg, oklch(0.22 0.014 25 / 0.9), oklch(0.12 0.01 25 / 0.76)),
+    oklch(0.14 0.01 25 / 0.88);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 1.4rem 4rem oklch(0.02 0.006 25 / 0.42),
+    0 0 0 1px oklch(0.58 0.235 26 / 0.08),
+    inset 0 1px 0 oklch(0.96 0.01 25 / 0.08);
+  padding: clamp(0.78rem, 1.6vw, 1rem);
+  text-align: left;
+}
+
+.coming-soon .access-label {
+  color: var(--cs-ink-muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.coming-soon .access-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.62rem;
+}
+
+.coming-soon .access-input,
+.coming-soon .access-button {
+  min-height: 2.9rem;
+  border-radius: 0.28rem;
+  font: inherit;
+}
+
+.coming-soon .access-input {
+  width: 100%;
+  border: 1px solid oklch(0.9 0.01 25 / 0.16);
+  background: oklch(0.08 0.008 25 / 0.74);
+  color: var(--cs-ink);
+  padding: 0 0.92rem;
+  outline: none;
+}
+
+.coming-soon .access-input::placeholder {
+  color: var(--cs-ink-dim);
+}
+
+.coming-soon .access-input:focus {
+  border-color: oklch(0.66 0.24 27 / 0.72);
+  box-shadow: 0 0 0 3px oklch(0.58 0.235 26 / 0.18);
+}
+
+.coming-soon .access-button {
+  border: 0;
+  background: linear-gradient(135deg, var(--cs-red-bright), var(--cs-red));
+  color: oklch(0.98 0.006 25);
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 760;
+  padding: 0 1.15rem;
+  transition:
+    filter 180ms var(--cs-ease-premium),
+    transform 180ms var(--cs-ease-premium);
+}
+
+.coming-soon .access-button:hover,
+.coming-soon .access-button:focus-visible {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.coming-soon .access-input:disabled,
+.coming-soon .access-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.54;
+}
+
+.coming-soon .access-message {
+  margin: 0;
+  color: var(--cs-ink-dim);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.coming-soon .access-message[data-tone="danger"] {
+  color: oklch(0.78 0.13 27);
+}
+
 .coming-soon .features-wrap {
   position: relative;
   padding-top: clamp(0.9rem, 2vh, 1.5rem);
@@ -1585,6 +1697,18 @@ a[data-cursor="link"]:focus-visible {
     margin-top: 0.68rem;
     font-size: 0.55rem;
     letter-spacing: 0.12em;
+  }
+
+  .coming-soon .access-panel {
+    width: min(20.5rem, 88vw);
+  }
+
+  .coming-soon .access-row {
+    grid-template-columns: 1fr;
+  }
+
+  .coming-soon .access-button {
+    width: 100%;
   }
 
   .coming-soon .brand-symbol {

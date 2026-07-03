@@ -95,12 +95,13 @@ export function RelatedProducts({
                 </div>
                 <div className={styles.relatedActions}>
                   <Link
-                    className={`${styles.relatedPrimaryAction} cs-magnetic-cta`}
+                    className={`${styles.relatedPrimaryAction} cs-magnetic-cta cs-theme-wipe-card`}
                     href={inquiryHref}
                     data-cursor="button"
                     data-motion-surface
+                    data-motion="theme-wipe"
                   >
-                    Pošalji upit
+                    <span>Pošalji upit</span>
                   </Link>
                   <Link className={`${styles.relatedDetailLink} cs-link-reveal`} href={productHref} data-cursor="link">
                     Detalji →

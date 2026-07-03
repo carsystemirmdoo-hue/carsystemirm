@@ -67,13 +67,14 @@ export function CatalogProductGrid({
           <p className={styles.kicker}>Nema rezultata</p>
           <h3>Nema proizvoda za izabrane filtere.</h3>
           <button
-            className={`${styles.primaryButton} cs-magnetic-cta`}
+            className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
             type="button"
             data-cursor="button"
             data-motion-surface
+            data-motion="theme-wipe"
             onClick={onReset}
           >
-            Resetuj filtere
+            <span>Resetuj filtere</span>
           </button>
         </div>
       )}

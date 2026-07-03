@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMotionTransition } from "@/components/motion/MotionConfigProvider";
 
 const THEME_STORAGE_KEY = "theme";
 
@@ -10,6 +11,7 @@ function readCurrentTheme() {
 
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
+  const runThemeTransition = useMotionTransition();
 
   useEffect(() => {
     setIsDark(readCurrentTheme() === "dark");
@@ -25,8 +27,7 @@ export function ThemeToggle() {
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
-  function toggle() {
-    const next = !isDark;
+  function applyTheme(next: boolean) {
     setIsDark(next);
     document.documentElement.classList.toggle("dark", next);
     document.documentElement.dataset.theme = next ? "dark" : "light";
@@ -35,6 +36,11 @@ export function ThemeToggle() {
     } catch {
       // localStorage unavailable, theme just won't persist.
     }
+  }
+
+  function toggle() {
+    const next = !isDark;
+    runThemeTransition(() => applyTheme(next));
   }
 
   return (

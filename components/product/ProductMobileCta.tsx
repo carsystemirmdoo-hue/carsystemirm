@@ -35,12 +35,13 @@ export function ProductMobileCta({ product }: { product: CarsystemProduct }) {
         <span>Upit i savet za izbor proizvoda</span>
       </span>
       <Link
-        className={`${styles.mobileCtaButton} cs-magnetic-cta`}
+        className={`${styles.mobileCtaButton} cs-magnetic-cta cs-theme-wipe-card`}
         href={`/kontakt?tema=proizvod&proizvod=${product.slug}`}
         data-cursor="button"
         data-motion-surface
+        data-motion="theme-wipe"
       >
-        Pošalji upit
+        <span>Pošalji upit</span>
       </Link>
     </div>
   );

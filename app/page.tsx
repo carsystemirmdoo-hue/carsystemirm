@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CarsystemHomePage } from "@/components/home/CarsystemHomePage";
+import { Footer } from "@/components/layout/Footer";
 import { jsonLd, organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -17,6 +18,7 @@ export default function Home() {
         dangerouslySetInnerHTML={jsonLd(organizationJsonLd())}
       />
       <CarsystemHomePage />
+      <Footer />
     </>
   );
 }

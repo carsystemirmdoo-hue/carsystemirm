@@ -29,14 +29,17 @@ export function StoreCard({
           <p className={styles.cardLabel}>{store.region}</p>
           <h3>{store.name}</h3>
         </div>
-        <button
-          className={styles.nearestCity}
-          type="button"
-          onClick={() => onSelect(store.id)}
-          aria-pressed={isActive}
-        >
-          {store.city}
-        </button>
+        <span className={styles.storeHeaderBadges}>
+          {store.featured ? <span className={styles.centralBadge}>Centrala</span> : null}
+          <button
+            className={styles.nearestCity}
+            type="button"
+            onClick={() => onSelect(store.id)}
+            aria-pressed={isActive}
+          >
+            {store.city}
+          </button>
+        </span>
       </div>
 
       <p className={styles.storeDescription}>{store.description}</p>
@@ -60,8 +63,14 @@ export function StoreCard({
       </div>
 
       <div className={styles.storeActions}>
-        <a className={styles.primaryButton} href={telHref(store.phone)}>
-          Pozovi
+        <a
+          className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
+          href={telHref(store.phone)}
+          data-cursor="button"
+          data-motion-surface
+          data-motion="theme-wipe"
+        >
+          <span>Pozovi</span>
         </a>
         <a
           className={styles.secondaryButton}
@@ -72,10 +81,13 @@ export function StoreCard({
           Prikaži rutu
         </a>
         <a
-          className={styles.ghostButton}
+          className={`${styles.ghostButton} cs-magnetic-cta cs-theme-wipe-card`}
           href={`/kontakt?tema=prodavnica&prodavnica=${store.id}`}
+          data-cursor="button"
+          data-motion-surface
+          data-motion="theme-wipe"
         >
-          Pošalji upit
+          <span>Pošalji upit</span>
         </a>
       </div>
     </article>

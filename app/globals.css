@@ -72,6 +72,8 @@ body {
 :root {
   --cs-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --cs-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --cs-ease-polish: cubic-bezier(0.22, 1, 0.36, 1);
+  --cs-ease-wipe: cubic-bezier(0.76, 0, 0.24, 1);
   --cs-orb-core: oklch(0.58 0.22 27);
   --cs-orb-core-glow: oklch(0.58 0.22 27 / 0.35);
   --cs-orb-halo: oklch(0.24 0.028 250 / 0.11);
@@ -195,9 +197,8 @@ body {
 .cs-pigment-cursor-halo[data-state="button"] {
   width: 40px;
   height: 40px;
-  border-color: color-mix(in oklch, var(--cs-orb-core), transparent 42%);
-  background: color-mix(in oklch, var(--cs-orb-core), transparent 86%);
-  box-shadow: 0 0 24px color-mix(in oklch, var(--cs-orb-core), transparent 74%);
+  border-color: var(--cs-orb-ring-strong);
+  background: transparent;
 }
 
 .cs-pigment-cursor-halo[data-state="card"] {
@@ -248,7 +249,8 @@ body {
 .cs-magnetic-cta,
 .cs-gloss-card,
 .cs-image-surface,
-.cs-process-surface {
+.cs-process-surface,
+.cs-theme-wipe-card {
   --mx: 50%;
   --my: 50%;
   --motion-shift-x: 0px;
@@ -286,17 +288,40 @@ body {
   opacity: 1;
 }
 
+/* Primarna (wipe) CTA dugmad: tamni wipe je jedini hover sloj — bez crvenog
+   gloss bloba koji prati kursor preko overlay-a. */
+.cs-theme-wipe-card.cs-magnetic-cta::before,
+.cs-theme-wipe-card.cs-interactive-surface::before {
+  content: none;
+}
+
+.cs-interactive-surface > *,
+.cs-magnetic-cta > *,
+.cs-gloss-card > *,
+.cs-process-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
 .cs-magnetic-cta {
   overflow: hidden;
   transition:
-    transform 150ms var(--cs-ease-out),
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
+    transform 220ms var(--cs-ease-polish),
+    border-color 220ms var(--cs-ease-polish),
+    background 220ms var(--cs-ease-polish),
+    background-color 220ms var(--cs-ease-polish),
+    box-shadow 220ms var(--cs-ease-polish),
+    color 220ms var(--cs-ease-polish);
+  will-change: transform, background-color, border-color, box-shadow, color;
 }
 
 .cs-magnetic-cta[data-pointer-active="true"] {
   transform: translate3d(var(--motion-shift-x), var(--motion-shift-y), 0);
+}
+
+.cs-magnetic-cta:hover:not([data-pointer-active="true"]),
+.cs-magnetic-cta:focus-visible:not([data-pointer-active="true"]) {
+  transform: translateY(-1px);
 }
 
 .cs-magnetic-cta:active,
@@ -345,58 +370,85 @@ body {
 }
 
 .cs-theme-wipe-card {
-  --wipe-bg: oklch(0.12 0.014 250);
-  --wipe-fg: oklch(0.96 0.008 250);
+  --wipe-bg: oklch(0.075 0.01 255);
+  --wipe-fg: oklch(0.98 0.006 250);
   overflow: hidden;
   color: inherit;
 }
 
 .dark .cs-theme-wipe-card {
-  --wipe-bg: oklch(0.94 0.016 83);
-  --wipe-fg: oklch(0.13 0.014 250);
+  --wipe-bg: oklch(0.07 0.01 255);
+  --wipe-fg: oklch(0.98 0.006 250);
 }
 
 .cs-theme-wipe-card::after {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
+  top: var(--my, 50%);
+  left: var(--mx, 50%);
+  z-index: -1;
+  width: 300%;
+  aspect-ratio: 1;
+  border-radius: 999px;
   background:
-    radial-gradient(circle at var(--mx) var(--my), color-mix(in oklch, var(--wipe-bg), var(--cs-transition-gloss) 8%), var(--wipe-bg) 68%),
+    radial-gradient(circle, color-mix(in oklch, var(--wipe-bg), var(--cs-transition-gloss) 12%) 0 16%, var(--wipe-bg) 44% 100%),
     var(--wipe-bg);
-  clip-path: circle(0 at var(--mx) var(--my));
   content: "";
   opacity: 0;
   pointer-events: none;
+  transform: translate3d(-50%, -50%, 0) scale(0.16);
+  transform-origin: center;
   transition:
-    clip-path 240ms var(--cs-ease-out),
-    opacity 140ms ease;
+    transform 280ms var(--cs-ease-polish),
+    opacity 180ms var(--cs-ease-polish);
+  will-change: transform, opacity;
 }
 
 .cs-theme-wipe-card > * {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  transition: color 200ms var(--cs-ease-polish);
 }
 
-.cs-theme-wipe-card[data-pointer-active="true"] {
+.cs-theme-wipe-card[data-pointer-active="true"],
+.cs-theme-wipe-card:hover,
+.cs-theme-wipe-card:focus-visible,
+.cs-theme-wipe-card:focus-within {
   border-color: color-mix(in oklch, var(--wipe-bg), transparent 22%) !important;
   color: var(--wipe-fg) !important;
 }
 
-.cs-theme-wipe-card[data-pointer-active="true"]::after {
-  clip-path: circle(132% at var(--mx) var(--my));
+.cs-theme-wipe-card[data-pointer-active="true"]::after,
+.cs-theme-wipe-card:hover::after,
+.cs-theme-wipe-card:focus-visible::after,
+.cs-theme-wipe-card:focus-within::after {
   opacity: 1;
+  transform: translate3d(-50%, -50%, 0) scale(1);
 }
 
 .cs-theme-wipe-card[data-pointer-active="true"] svg,
 .cs-theme-wipe-card[data-pointer-active="true"] a,
 .cs-theme-wipe-card[data-pointer-active="true"] span,
-.cs-theme-wipe-card[data-pointer-active="true"] strong {
+.cs-theme-wipe-card[data-pointer-active="true"] strong,
+.cs-theme-wipe-card:hover svg,
+.cs-theme-wipe-card:hover a,
+.cs-theme-wipe-card:hover span,
+.cs-theme-wipe-card:hover strong,
+.cs-theme-wipe-card:focus-visible svg,
+.cs-theme-wipe-card:focus-visible a,
+.cs-theme-wipe-card:focus-visible span,
+.cs-theme-wipe-card:focus-visible strong,
+.cs-theme-wipe-card:focus-within svg,
+.cs-theme-wipe-card:focus-within a,
+.cs-theme-wipe-card:focus-within span,
+.cs-theme-wipe-card:focus-within strong {
   color: var(--wipe-fg) !important;
   stroke: currentColor;
 }
 
-.cs-theme-wipe-card[data-pointer-active="true"] > a {
+.cs-theme-wipe-card[data-pointer-active="true"] > a,
+.cs-theme-wipe-card:hover > a,
+.cs-theme-wipe-card:focus-visible > a,
+.cs-theme-wipe-card:focus-within > a {
   border-color: transparent !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -405,6 +457,8 @@ body {
 .cs-product-motion-card {
   --product-accent: var(--cs-orb-core);
   --product-hover-bg: color-mix(in oklch, var(--product-accent), transparent 94%);
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
 }
 
@@ -414,15 +468,16 @@ body {
   z-index: 0;
   border-radius: inherit;
   background:
-    linear-gradient(180deg, transparent, color-mix(in oklch, var(--product-accent), transparent 90%), transparent),
-    radial-gradient(circle at var(--mx) var(--my), color-mix(in oklch, var(--product-accent), transparent 90%), transparent 44%);
+    linear-gradient(180deg, transparent, color-mix(in oklch, var(--product-accent), transparent 94%), transparent),
+    radial-gradient(circle at var(--mx) var(--my), color-mix(in oklch, var(--product-accent), transparent 88%), transparent 48%);
   content: "";
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-102%);
+  transform: scale(0.98);
+  transform-origin: center;
   transition:
-    opacity 180ms ease,
-    transform 280ms var(--cs-ease-out);
+    opacity 220ms ease,
+    transform 260ms var(--cs-ease-out);
 }
 
 .cs-product-motion-card > * {
@@ -431,32 +486,36 @@ body {
 }
 
 .cs-product-motion-card[data-pointer-active="true"],
-.cs-product-motion-card[data-product-hover-active="true"] {
+.cs-product-motion-card[data-product-hover-active="true"],
+.cs-product-motion-card:hover,
+.cs-product-motion-card:focus-within {
   background: var(--product-hover-bg) !important;
   border-color: color-mix(in oklch, var(--product-accent), transparent 68%) !important;
 }
 
 .cs-product-motion-card[data-hover-direction="top"]::after {
-  transform: translateY(-102%);
+  transform: scale(0.98);
 }
 
 .cs-product-motion-card[data-hover-direction="bottom"]::after {
-  transform: translateY(102%);
+  transform: scale(0.98);
 }
 
 .cs-product-motion-card[data-hover-direction="side"]::after {
-  transform: translateX(-102%) skewX(-9deg);
+  transform: scale(0.98);
 }
 
 .cs-product-motion-card[data-pointer-active="true"]::after,
-.cs-product-motion-card[data-product-hover-active="true"]::after {
-  opacity: 0.34;
-  transform: translate3d(0, 0, 0);
+.cs-product-motion-card[data-product-hover-active="true"]::after,
+.cs-product-motion-card:hover::after,
+.cs-product-motion-card:focus-within::after {
+  opacity: 0.22;
+  transform: scale(1);
 }
 
 .cs-product-motion-card[data-hover-direction="side"][data-pointer-active="true"]::after,
 .cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"]::after {
-  transform: translate3d(0, 0, 0) skewX(-9deg);
+  transform: scale(1);
 }
 
 [data-product-image-motion] img,
@@ -472,7 +531,7 @@ body {
 .cs-product-motion-card[data-hover-direction="top"][data-product-hover-active="true"] [data-product-image-motion] img,
 .cs-product-motion-card[data-hover-direction="top"][data-product-hover-active="true"] [data-product-image-motion] [class*="Shot"],
 .cs-product-motion-card[data-hover-direction="top"][data-product-hover-active="true"] [data-product-image-motion] [class*="Placeholder"] {
-  transform: translateY(-1px) scale(1.008);
+  transform: scale(1.012);
 }
 
 .cs-product-motion-card[data-hover-direction="bottom"][data-pointer-active="true"] [data-product-image-motion] img,
@@ -481,7 +540,7 @@ body {
 .cs-product-motion-card[data-hover-direction="bottom"][data-product-hover-active="true"] [data-product-image-motion] img,
 .cs-product-motion-card[data-hover-direction="bottom"][data-product-hover-active="true"] [data-product-image-motion] [class*="Shot"],
 .cs-product-motion-card[data-hover-direction="bottom"][data-product-hover-active="true"] [data-product-image-motion] [class*="Placeholder"] {
-  transform: translateY(1px) scale(0.992);
+  transform: scale(1.008);
 }
 
 .cs-product-motion-card[data-hover-direction="side"][data-pointer-active="true"] [data-product-image-motion] img,
@@ -490,13 +549,56 @@ body {
 .cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"] [data-product-image-motion] img,
 .cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"] [data-product-image-motion] [class*="Shot"],
 .cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"] [data-product-image-motion] [class*="Placeholder"] {
-  transform: translateX(2px) scale(1.006);
+  transform: scale(1.01);
+}
+
+.cs-product-motion-card:hover [data-product-image-motion] img,
+.cs-product-motion-card:hover [data-product-image-motion] [class*="Shot"],
+.cs-product-motion-card:hover [data-product-image-motion] [class*="Placeholder"],
+.cs-product-motion-card:focus-within [data-product-image-motion] img,
+.cs-product-motion-card:focus-within [data-product-image-motion] [class*="Shot"],
+.cs-product-motion-card:focus-within [data-product-image-motion] [class*="Placeholder"] {
+  transform: scale(1.012);
+}
+
+.cs-product-motion-card[data-pointer-active="true"] .cs-link-reveal,
+.cs-product-motion-card[data-product-hover-active="true"] .cs-link-reveal,
+.cs-product-motion-card:hover .cs-link-reveal,
+.cs-product-motion-card:focus-within .cs-link-reveal {
+  background-size: 100% 1px;
 }
 
 .cs-animated-footer {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+}
+
+/* Footer reveal vodi FooterReveal (IntersectionObserver): reveal se "naoruža"
+   tek kada JS potvrdi da je footer ispod viewporta, pa footer bez JS-a ostaje
+   normalno vidljiv. CSS view() timeline je izbegnut namerno — lomi se kada je
+   footer ugnježden u wrapper sa overflow clip (npr. katalog shell). */
+.cs-animated-footer[data-reveal-armed] {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 620ms var(--cs-ease-polish),
+    transform 620ms var(--cs-ease-polish);
+  will-change: opacity, transform;
+}
+
+.cs-animated-footer[data-reveal-armed] > *:not(.cs-footer-ambient) {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 640ms var(--cs-ease-polish) 110ms,
+    transform 640ms var(--cs-ease-polish) 110ms;
+}
+
+.cs-animated-footer[data-reveal-armed][data-revealed="true"],
+.cs-animated-footer[data-reveal-armed][data-revealed="true"] > *:not(.cs-footer-ambient) {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cs-footer-ambient {
@@ -537,10 +639,11 @@ a[data-cursor="link"] {
   background-position: 0 100%;
   background-repeat: no-repeat;
   background-size: 0 1px;
+  text-decoration: none;
   transition:
-    background-size 180ms var(--cs-ease-out),
-    color 160ms ease,
-    transform 150ms var(--cs-ease-out);
+    background-size 320ms var(--cs-ease-polish),
+    color 240ms var(--cs-ease-polish),
+    transform 220ms var(--cs-ease-polish);
 }
 
 .cs-link-reveal:hover,
@@ -641,138 +744,52 @@ a[data-cursor="link"]:focus-visible {
   width: 62%;
 }
 
-.cs-page-transition {
+.cs-route-transition {
   position: fixed;
   inset: 0;
-  z-index: 2147482500;
+  z-index: 2147483600;
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 120ms ease;
+  visibility: hidden;
+  transition:
+    opacity 80ms linear,
+    visibility 0ms linear 670ms;
 }
 
-.cs-page-transition[data-phase="leaving"],
-.cs-page-transition[data-phase="revealing"] {
+.cs-route-transition[data-phase="covering"],
+.cs-route-transition[data-phase="covered"],
+.cs-route-transition[data-phase="revealing"],
+.cs-route-transition[data-phase="fade"] {
   opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 80ms linear,
+    visibility 0ms linear 0ms;
 }
 
-.cs-page-transition-blur,
-.cs-page-transition-veil,
-.cs-page-transition-curtain,
-.cs-page-transition-edge,
-.cs-page-transition-gloss {
+.cs-route-transition-screen {
   position: absolute;
-  pointer-events: none;
-}
-
-.cs-page-transition-blur {
-  inset: 0;
-  background: color-mix(in oklch, var(--cs-transition-veil), transparent 60%);
-  backdrop-filter: blur(1px);
-  opacity: 0;
-}
-
-.cs-page-transition-veil {
   inset: 0;
   background:
-    radial-gradient(circle at var(--tx) var(--ty), color-mix(in oklch, var(--cs-orb-core), transparent 78%), transparent 17rem),
-    linear-gradient(180deg, transparent, color-mix(in oklch, var(--cs-transition-surface), transparent 52%));
-  opacity: 0;
-}
-
-.cs-page-transition-curtain {
-  left: 0;
-  width: 100%;
-  height: calc(50% + 1px);
-  background:
-    radial-gradient(circle at var(--tx) var(--ty), color-mix(in oklch, var(--cs-transition-gloss), transparent 90%), transparent 18rem),
-    var(--cs-transition-surface);
+    linear-gradient(180deg, oklch(0.09 0.008 255), oklch(0.045 0.006 255)),
+    oklch(0.055 0.006 255);
+  box-shadow: 0 1.4rem 4rem oklch(0.01 0.004 255 / 0.52);
+  transform: translateY(-101%);
   will-change: transform;
 }
 
-.cs-page-transition-curtain-top {
-  top: 0;
-  transform: translateY(-101%);
+.cs-route-transition[data-phase="covering"] .cs-route-transition-screen {
+  animation: cs-route-cover 480ms var(--cs-ease-wipe) forwards;
 }
 
-.cs-page-transition-curtain-bottom {
-  bottom: 0;
-  transform: translateY(101%);
+.cs-route-transition[data-phase="covered"] .cs-route-transition-screen,
+.cs-route-transition[data-phase="fade"] .cs-route-transition-screen {
+  transform: translateY(0);
 }
 
-.cs-page-transition-edge {
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cs-transition-gloss), transparent);
-  opacity: 0;
-  transform: translateY(-50%) scaleX(0.42);
-  transform-origin: 50% 50%;
-}
-
-.cs-page-transition-gloss {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 18%;
-  background: linear-gradient(90deg, transparent, var(--cs-transition-gloss), transparent);
-  opacity: 0;
-  transform: translateX(-50%) skewX(-12deg) scaleX(0.7);
-}
-
-.cs-page-transition[data-phase="leaving"] .cs-page-transition-blur {
-  animation: cs-page-blur-in 120ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="leaving"] .cs-page-transition-veil {
-  animation: cs-page-veil-in 170ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="leaving"] .cs-page-transition-curtain-top {
-  animation: cs-page-curtain-top-close 200ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="leaving"] .cs-page-transition-curtain-bottom {
-  animation: cs-page-curtain-bottom-close 200ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="leaving"] .cs-page-transition-edge {
-  animation: cs-page-edge-close 220ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="leaving"] .cs-page-transition-gloss {
-  animation: cs-page-gloss 280ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="revealing"] .cs-page-transition-curtain-top {
-  animation: cs-page-curtain-top-open 250ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="revealing"] .cs-page-transition-curtain-bottom {
-  animation: cs-page-curtain-bottom-open 250ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="revealing"] .cs-page-transition-edge {
-  animation: cs-page-edge-open 220ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-phase="revealing"] .cs-page-transition-veil {
-  animation: cs-page-reveal 250ms var(--cs-ease-out) forwards;
-}
-
-.cs-page-transition[data-variant="gloss"] .cs-page-transition-veil {
-  background:
-    linear-gradient(110deg, transparent 24%, color-mix(in oklch, var(--cs-transition-gloss), transparent 68%) 50%, transparent 74%),
-    color-mix(in oklch, var(--cs-transition-surface), transparent 38%);
-}
-
-.cs-page-transition[data-variant="blur"] .cs-page-transition-blur {
-  background: color-mix(in oklch, var(--cs-transition-veil), transparent 48%);
-}
-
-.cs-page-transition[data-variant="glossveil"] .cs-page-transition-veil {
-  background: color-mix(in oklch, var(--cs-transition-surface), transparent 50%);
+.cs-route-transition[data-phase="revealing"] .cs-route-transition-screen {
+  animation: cs-route-reveal 590ms var(--cs-ease-wipe) forwards;
 }
 
 @keyframes cs-skeleton-sheen {
@@ -781,93 +798,21 @@ a[data-cursor="link"]:focus-visible {
   }
 }
 
-@keyframes cs-page-blur-in {
-  to {
-    opacity: 0.54;
-  }
-}
-
-@keyframes cs-page-veil-in {
-  to {
-    opacity: 0.32;
-  }
-}
-
-@keyframes cs-page-curtain-top-close {
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes cs-page-curtain-bottom-close {
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes cs-page-curtain-top-open {
+@keyframes cs-route-cover {
   from {
-    transform: translateY(0);
-  }
-  to {
     transform: translateY(-101%);
   }
+  to {
+    transform: translateY(0);
+  }
 }
 
-@keyframes cs-page-curtain-bottom-open {
+@keyframes cs-route-reveal {
   from {
     transform: translateY(0);
   }
   to {
     transform: translateY(101%);
-  }
-}
-
-@keyframes cs-page-edge-close {
-  0% {
-    opacity: 0;
-    transform: translateY(-50%) scaleX(0.18);
-  }
-  58% {
-    opacity: 0.54;
-  }
-  100% {
-    opacity: 0.34;
-    transform: translateY(-50%) scaleX(1);
-  }
-}
-
-@keyframes cs-page-edge-open {
-  from {
-    opacity: 0.3;
-    transform: translateY(-50%) scaleX(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-50%) scaleX(0.5);
-  }
-}
-
-@keyframes cs-page-gloss {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) skewX(-12deg) scaleX(0.5);
-  }
-  32% {
-    opacity: 0.24;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) skewX(-12deg) scaleX(2.2);
-  }
-}
-
-@keyframes cs-page-reveal {
-  from {
-    opacity: 0.46;
-  }
-  to {
-    opacity: 0;
   }
 }
 
@@ -879,6 +824,7 @@ a[data-cursor="link"]:focus-visible {
     transform: translate3d(calc(18px + var(--motion-shift-x, 0px) * 2), calc(-10px + var(--motion-shift-y, 0px) * 2), 0);
   }
 }
+
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   body.cs-pigment-cursor-enabled,
@@ -914,11 +860,16 @@ a[data-cursor="link"]:focus-visible {
   .cs-gloss-card::before,
   .cs-image-surface::before,
   .cs-image-surface::after,
-  .cs-theme-wipe-card::after,
   .cs-product-motion-card::after,
   .cs-process-surface::before,
   .cs-process-surface::after {
     opacity: 0 !important;
+  }
+
+  /* Wipe overlay ostaje vidljiv (instant) da hover boja teksta ne ostane bez podloge. */
+  .cs-theme-wipe-card::after {
+    transition: none !important;
+    transform: translate3d(-50%, -50%, 0) scale(1);
   }
 
   .cs-magnetic-cta[data-pointer-active="true"],
@@ -931,19 +882,13 @@ a[data-cursor="link"]:focus-visible {
     transform: none;
   }
 
-  .cs-page-transition-blur {
-    backdrop-filter: none;
+  .cs-route-transition-screen {
+    transform: translateY(0);
   }
 
-  .cs-page-transition[data-phase="leaving"] .cs-page-transition-blur,
-  .cs-page-transition[data-phase="leaving"] .cs-page-transition-veil,
-  .cs-page-transition[data-phase="leaving"] .cs-page-transition-gloss,
-  .cs-page-transition[data-phase="leaving"] .cs-page-transition-curtain,
-  .cs-page-transition[data-phase="leaving"] .cs-page-transition-edge,
-  .cs-page-transition[data-phase="revealing"] .cs-page-transition-curtain,
-  .cs-page-transition[data-phase="revealing"] .cs-page-transition-edge,
-  .cs-page-transition[data-phase="revealing"] .cs-page-transition-veil {
-    animation-duration: 120ms !important;
+  .cs-route-transition[data-phase="covering"] .cs-route-transition-screen,
+  .cs-route-transition[data-phase="revealing"] .cs-route-transition-screen {
+    animation: none !important;
   }
 
   .cs-skeleton-card::before {
@@ -952,6 +897,19 @@ a[data-cursor="link"]:focus-visible {
 
   .cs-footer-ambient {
     animation: none;
+    transform: none;
+  }
+
+  .cs-animated-footer {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .cs-animated-footer > * {
+    animation: none;
+    opacity: 1;
     transform: none;
   }
 }
@@ -973,6 +931,10 @@ a[data-cursor="link"]:focus-visible {
     radial-gradient(circle at 52% 40%, oklch(0.19 0.018 25 / 0.36), transparent 31rem),
     linear-gradient(145deg, oklch(0.135 0.01 25), var(--cs-surface) 54%, oklch(0.09 0.01 25));
   color: var(--cs-ink);
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  isolation: isolate;
   font-family: "Helvetica Neue", "Nimbus Sans L", Helvetica, Arial, sans-serif;
   overflow: hidden;
   text-rendering: optimizeLegibility;
@@ -1166,6 +1128,9 @@ a[data-cursor="link"]:focus-visible {
 }
 
 .coming-soon .brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -1237,6 +1202,7 @@ a[data-cursor="link"]:focus-visible {
   width: min(58rem, 100%);
   margin-inline: auto;
   padding-block: clamp(2.6rem, 9vh, 6.3rem) clamp(5.8rem, 12vh, 8.4rem);
+  text-align: center;
 }
 
 .coming-soon .eyebrow {

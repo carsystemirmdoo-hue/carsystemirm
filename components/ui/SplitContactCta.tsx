@@ -11,22 +11,27 @@ export function SplitContactCta({
   className,
   inquiryHref = "/kontakt",
   inquiryLabel = "Pošalji upit",
+  variant = "vertical",
 }: {
   callLabel?: string;
   className?: string;
   inquiryHref?: string;
   inquiryLabel?: string;
+  variant?: "vertical";
 }) {
   return (
     <span
       className={cx(styles.root, "cs-magnetic-cta cs-theme-wipe-card", className)}
+      data-variant={variant}
       data-cursor="button"
       data-motion-surface
       data-motion="theme-wipe"
     >
-      <a className={styles.callAction} href={companyContact.phoneHref}>
-        {callLabel}
-      </a>
+      <span className={styles.callSlot}>
+        <a className={styles.callAction} href={companyContact.phoneHref}>
+          {callLabel}
+        </a>
+      </span>
       <Link className={styles.inquiryAction} href={inquiryHref}>
         {inquiryLabel}
       </Link>

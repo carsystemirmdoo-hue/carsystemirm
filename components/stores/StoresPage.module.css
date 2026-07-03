@@ -149,9 +149,12 @@
   justify-content: center;
   font-weight: 900;
   transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease;
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .topbarCta,
@@ -483,6 +486,107 @@
   gap: 14px;
 }
 
+.cityGroup {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cityGroupHeader {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--stores-border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--stores-panel-strong) 88%, transparent);
+  color: var(--stores-ink);
+  padding: 14px 16px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.cityGroupHeader:hover,
+.cityGroupHeader:focus-visible,
+.cityGroupHeader[aria-expanded="true"] {
+  border-color: oklch(0.58 0.22 27 / 0.42);
+  background: color-mix(in srgb, var(--stores-panel) 92%, oklch(0.58 0.22 27 / 0.1));
+  box-shadow: 0 12px 30px oklch(0.05 0.01 250 / 0.12);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.cityGroupHeader span {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.cityGroupHeader strong {
+  overflow: hidden;
+  color: var(--stores-ink);
+  font-size: 16px;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cityGroupHeader small {
+  overflow: hidden;
+  color: var(--stores-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cityGroupHeader b {
+  flex: 0 0 auto;
+  border: 1px solid oklch(0.58 0.22 27 / 0.26);
+  border-radius: 999px;
+  background: oklch(0.58 0.22 27 / 0.1);
+  color: var(--stores-red-bright);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.cityStoreList {
+  display: grid;
+  gap: 12px;
+  padding-left: 12px;
+}
+
+.cityPendingNotice {
+  display: grid;
+  gap: 6px;
+  border: 1px dashed oklch(0.58 0.22 27 / 0.32);
+  border-radius: 14px;
+  background: oklch(0.58 0.22 27 / 0.08);
+  padding: 14px 16px;
+}
+
+.cityPendingNotice strong {
+  color: var(--stores-red-bright);
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.cityPendingNotice p {
+  margin: 0;
+  color: var(--stores-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .storeCard {
   display: grid;
   gap: 14px;
@@ -519,6 +623,24 @@
 .storeMeta strong {
   color: var(--stores-ink);
   font-weight: 900;
+}
+
+.storeHeaderBadges {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.centralBadge {
+  border: 1px solid oklch(0.58 0.22 27 / 0.36);
+  border-radius: 999px;
+  background: oklch(0.58 0.22 27 / 0.14);
+  color: var(--stores-red-bright);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 950;
 }
 
 .storeActions {
@@ -660,20 +782,61 @@
 .pinButton {
   position: absolute;
   z-index: 4;
-  width: 24px;
-  height: 24px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
   border: 2px solid oklch(0.98 0.006 250 / 0.95);
   border-radius: 999px;
-  background: oklch(0.72 0.04 250);
-  color: transparent;
+  background: oklch(0.48 0.055 250);
+  color: oklch(0.98 0.006 250);
   cursor: pointer;
-  box-shadow: 0 0 0 5px oklch(0.72 0.04 250 / 0.2);
+  box-shadow: 0 0 0 5px oklch(0.48 0.055 250 / 0.18);
   transform: translate(-50%, -50%);
   transition:
     width 160ms ease,
     height 160ms ease,
     background 160ms ease,
     box-shadow 160ms ease;
+}
+
+.pinCount {
+  position: relative;
+  z-index: 2;
+  color: currentColor;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.pinCity {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  z-index: 1;
+  border: 1px solid oklch(0.98 0.006 250 / 0.2);
+  border-radius: 999px;
+  background: oklch(0.08 0.01 250 / 0.86);
+  color: oklch(0.98 0.006 250);
+  padding: 5px 8px;
+  font-size: 10.5px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-3px);
+  transition:
+    opacity 160ms ease,
+    transform 180ms ease;
+  white-space: nowrap;
+}
+
+:global(html:not(.dark)) .pinCity {
+  border-color: oklch(0.24 0.02 250 / 0.16);
+  background: oklch(0.98 0.006 250 / 0.92);
+  color: var(--stores-ink);
 }
 
 .pinButton:hover,
@@ -684,12 +847,19 @@
 }
 
 .pinButtonActive {
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   background: var(--stores-red);
   box-shadow:
     0 0 0 8px oklch(0.58 0.22 27 / 0.22),
     0 16px 32px oklch(0.05 0.01 250 / 0.42);
+}
+
+.pinButton:hover .pinCity,
+.pinButton:focus-visible .pinCity,
+.pinButtonActive .pinCity {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .selectedPanel {
@@ -910,6 +1080,19 @@
     display: grid;
   }
 
+  .cityGroupHeader {
+    display: grid;
+    gap: 10px;
+  }
+
+  .cityGroupHeader b {
+    width: fit-content;
+  }
+
+  .cityStoreList {
+    padding-left: 0;
+  }
+
   .mobileStickyCta {
     display: flex;
   }
@@ -951,6 +1134,7 @@
   .ghostButton,
   .filterToggle,
   .storeCard,
+  .cityGroupHeader,
   .pinButton {
     transition: none;
   }
@@ -960,6 +1144,7 @@
   .secondaryButton:hover,
   .ghostButton:hover,
   .filterToggle:hover,
+  .cityGroupHeader:hover,
   .storeCard:hover {
     transform: none;
   }

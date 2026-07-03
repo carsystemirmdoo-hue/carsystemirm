@@ -2,6 +2,9 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const AUTH_HEADER = 'Basic realm="Carsystem RM Preview"';
+const MAINTENANCE_ROUTE = "/site-u-pripremi";
+
+const PUBLIC_FILE_PATTERN = /\.(?:avif|css|gif|ico|jpg|jpeg|js|map|pdf|png|svg|txt|webp|xml)$/i;
 
 function unauthorized() {
   return new NextResponse("Authentication required", {
@@ -35,7 +38,39 @@ function parseBasicAuth(header: string | null) {
   }
 }
 
-export function middleware(request: NextRequest) {
+function isEnabled(value: string | undefined) {
+  return ["1", "true", "yes", "on"].includes(value?.toLowerCase() ?? "");
+}
+
+function isMaintenanceEnabled() {
+  return isEnabled(process.env.MAINTENANCE_MODE);
+}
+
+function isPreviewRoute(pathname: string) {
+  return pathname === "/preview" || pathname.startsWith("/preview/");
+}
+
+function isBypassedRoute(pathname: string) {
+  return (
+    pathname === MAINTENANCE_ROUTE ||
+    pathname.startsWith(`${MAINTENANCE_ROUTE}/`) ||
+    pathname.startsWith("/_next/") ||
+    pathname.startsWith("/images/") ||
+    pathname.startsWith("/brands/") ||
+    pathname.startsWith("/products/") ||
+    pathname.startsWith("/maps/") ||
+    pathname === "/favicon.ico" ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    pathname === "/login" ||
+    pathname.startsWith("/login/") ||
+    pathname === "/admin" ||
+    pathname.startsWith("/admin/") ||
+    PUBLIC_FILE_PATTERN.test(pathname)
+  );
+}
+
+function requirePreviewAuth(request: NextRequest) {
   const expectedUsername = process.env.PREVIEW_USERNAME;
   const expectedPassword = process.env.PREVIEW_PASSWORD;
 
@@ -55,6 +90,28 @@ export function middleware(request: NextRequest) {
   return unauthorized();
 }
 
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (isPreviewRoute(pathname)) {
+    return requirePreviewAuth(request);
+  }
+
+  if (isBypassedRoute(pathname)) {
+    return NextResponse.next();
+  }
+
+  if (isMaintenanceEnabled()) {
+    const url = request.nextUrl.clone();
+    url.pathname = MAINTENANCE_ROUTE;
+    url.search = "";
+
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
+}
+
 export const config = {
-  matcher: ["/preview", "/preview/:path*"],
+  matcher: ["/((?!api/|_next/static|_next/image|favicon.ico).*)"],
 };

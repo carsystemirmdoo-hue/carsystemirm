@@ -3,10 +3,26 @@
   --split-ink: var(--product-ink, var(--catalog-ink, var(--entity-ink, var(--text, oklch(0.18 0.018 250)))));
   --split-panel: var(--product-panel, var(--catalog-panel, var(--entity-panel, var(--card, oklch(0.98 0.004 250)))));
   --split-border: var(--product-border, var(--catalog-border, var(--entity-border, var(--border, oklch(0.3 0.02 250 / 0.14)))));
-  display: inline-flex;
-  align-items: stretch;
+  display: inline-grid;
+  grid-template-rows: 0fr auto;
+  width: min(100%, 18.5rem);
   min-width: 0;
+  gap: 0;
   border-radius: 13px;
+  vertical-align: top;
+  transition:
+    grid-template-rows 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    gap 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.callSlot {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px) scale(0.985);
+  transition:
+    opacity 210ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 230ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .callAction,
@@ -15,29 +31,28 @@
   min-height: 48px;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   font-size: 14px;
   font-weight: 900;
+  line-height: 1.15;
   text-decoration: none;
   white-space: nowrap;
   transition:
-    max-width 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 180ms ease,
-    padding 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-radius 180ms ease,
-    transform 160ms ease,
-    background 160ms ease;
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .callAction {
-  max-width: 0;
-  overflow: hidden;
+  width: 100%;
   border: 1px solid color-mix(in oklch, var(--split-accent), transparent 62%);
-  border-right: 0;
-  border-radius: 13px 0 0 13px;
+  border-radius: 13px;
   background: color-mix(in oklch, var(--split-accent), transparent 88%);
   color: var(--split-ink);
-  opacity: 0;
-  padding: 0;
+  padding: 0 15px;
 }
 
 .inquiryAction {
@@ -49,16 +64,18 @@
   box-shadow: 0 14px 32px color-mix(in oklch, var(--split-accent), transparent 70%);
 }
 
-.root:hover .callAction,
-.root:focus-within .callAction {
-  max-width: 16rem;
-  opacity: 1;
-  padding: 0 15px;
+.root[data-pointer-active="true"],
+.root:hover,
+.root:focus-within {
+  grid-template-rows: 1fr auto;
+  gap: 8px;
 }
 
-.root:hover .inquiryAction,
-.root:focus-within .inquiryAction {
-  border-radius: 0 13px 13px 0;
+.root[data-pointer-active="true"] .callSlot,
+.root:hover .callSlot,
+.root:focus-within .callSlot {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .callAction:hover,
@@ -75,8 +92,17 @@
 @media (max-width: 767px) {
   .root {
     display: grid;
+    grid-template-rows: auto auto;
     width: 100%;
     gap: 8px;
+  }
+
+  .callSlot,
+  .root:hover .callSlot,
+  .root:focus-within .callSlot {
+    overflow: visible;
+    opacity: 1;
+    transform: none;
   }
 
   .callAction,
@@ -86,18 +112,23 @@
   .root:hover .inquiryAction,
   .root:focus-within .inquiryAction {
     width: 100%;
+    max-height: none;
     max-width: none;
     border-radius: 13px;
+    white-space: normal;
   }
 
   .callAction {
     border: 1px solid color-mix(in oklch, var(--split-accent), transparent 62%);
-    opacity: 1;
+    min-height: 48px;
     padding: 0 15px;
+    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .root,
+  .callSlot,
   .callAction,
   .inquiryAction {
     transition: none;

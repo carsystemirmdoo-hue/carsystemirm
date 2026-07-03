@@ -169,8 +169,14 @@ export function ContactForm({
         </Field>
 
         <div className={styles.formFooter}>
-          <button className={styles.primaryButton} type="submit">
-            Pripremi upit
+          <button
+            className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
+            type="submit"
+            data-cursor="button"
+            data-motion-surface
+            data-motion="theme-wipe"
+          >
+            <span>Pripremi upit</span>
           </button>
           <p>
             Slanjem se ne šalje email automatski. Direktan kontakt je dostupan

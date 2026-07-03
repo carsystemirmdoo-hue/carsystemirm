@@ -6,7 +6,8 @@ import { Header } from "@/components/layout/Header";
 
 export function PublicSiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const usesCustomChrome = pathname === "/" || pathname.startsWith("/preview");
+  const usesCustomChrome =
+    pathname.startsWith("/preview") || pathname.startsWith("/site-u-pripremi");
 
   if (usesCustomChrome) return <>{children}</>;
 

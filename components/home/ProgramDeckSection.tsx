@@ -1,28 +1,22 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { BrandLogoPlate, brandLogos, type BrandKey } from "./BrandLogoPlate";
+import {
+  BrandEcosystemDesktopCards,
+  BrandEcosystemMobileCards,
+  BrandPreviewPanel,
+  type BrandCatalogPreview,
+  type ProgramCategory,
+} from "@/components/home/animations/BrandEcosystemCards";
+import {
+  BrandEcosystemControls,
+  BrandEcosystemMobileControls,
+} from "@/components/home/animations/BrandEcosystemControls";
+import { brandLogos, type BrandKey } from "./BrandLogoPlate";
 import {
   getCarsystemProductsByBrandSlug,
-  type CarsystemProduct,
 } from "@/lib/carsystem-data";
 import styles from "./CarsystemHomePage.module.css";
-
-type ProgramCategory = {
-  id: string;
-  number: string;
-  title: string;
-  description: string;
-  logos: BrandKey[];
-  hints: string[];
-};
-
-type BrandCatalogPreview = {
-  brandSlug: string;
-  products: CarsystemProduct[];
-};
 
 const programCategories: ProgramCategory[] = [
   {
@@ -98,29 +92,20 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
-function getCircularPosition(index: number, activeIndex: number) {
-  const count = programCategories.length;
-  const raw = (index - activeIndex + count) % count;
-  return raw > count / 2 ? raw - count : raw;
-}
-
-function getPositionClass(position: number) {
-  if (position === 0) return styles.programDeckCardActive;
-  if (position === -1) return styles.programDeckCardPrevious;
-  if (position === 1) return styles.programDeckCardNext;
-  if (position === -2) return styles.programDeckCardFarPrevious;
-  return styles.programDeckCardFarNext;
-}
-
 export function ProgramDeckSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const mobileTrackRef = useRef<HTMLDivElement | null>(null);
   const mobileCardRefs = useRef<Array<HTMLElement | null>>([]);
   const rafRef = useRef<number | null>(null);
   const mobileRafRef = useRef<number | null>(null);
+  const previewCloseTimerRef = useRef<number | null>(null);
+  const manualNavigationTimerRef = useRef<number | null>(null);
+  const manualTargetIndexRef = useRef<number | null>(null);
   const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndexState] = useState(0);
+  const [deckProgress, setDeckProgress] = useState(0);
   const [activePreviewBrandSlug, setActivePreviewBrandSlug] = useState<string | null>(null);
+  const [previewExiting, setPreviewExiting] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
   const setActiveIndex = useCallback((index: number) => {
@@ -129,9 +114,52 @@ export function ProgramDeckSection() {
     setActiveIndexState(nextIndex);
   }, []);
 
-  const closePreview = useCallback(() => {
-    setActivePreviewBrandSlug(null);
+  const releaseManualNavigation = useCallback(() => {
+    manualTargetIndexRef.current = null;
+
+    if (manualNavigationTimerRef.current !== null) {
+      window.clearTimeout(manualNavigationTimerRef.current);
+      manualNavigationTimerRef.current = null;
+    }
   }, []);
+
+  const beginManualNavigation = useCallback(
+    (index: number) => {
+      releaseManualNavigation();
+      manualTargetIndexRef.current = clamp(index, 0, programCategories.length - 1);
+      manualNavigationTimerRef.current = window.setTimeout(() => {
+        manualNavigationTimerRef.current = null;
+        manualTargetIndexRef.current = null;
+      }, 950);
+    },
+    [releaseManualNavigation],
+  );
+
+  const clearPreviewCloseTimer = useCallback(() => {
+    if (previewCloseTimerRef.current === null) return;
+    window.clearTimeout(previewCloseTimerRef.current);
+    previewCloseTimerRef.current = null;
+  }, []);
+
+  const closePreview = useCallback(() => {
+    if (activePreviewBrandSlug === null || previewExiting) return;
+
+    clearPreviewCloseTimer();
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setPreviewExiting(false);
+      setActivePreviewBrandSlug(null);
+      return;
+    }
+
+    setPreviewExiting(true);
+    previewCloseTimerRef.current = window.setTimeout(() => {
+      previewCloseTimerRef.current = null;
+      setPreviewExiting(false);
+      setActivePreviewBrandSlug(null);
+    }, 180);
+  }, [activePreviewBrandSlug, clearPreviewCloseTimer, previewExiting]);
 
   const openBrandPreview = useCallback((brandKey: BrandKey) => {
     const brand = brandLogos[brandKey];
@@ -139,7 +167,15 @@ export function ProgramDeckSection() {
 
     if (!brand.src || !preview) return;
 
+    clearPreviewCloseTimer();
+    setPreviewExiting(false);
     setActivePreviewBrandSlug(preview.brandSlug);
+  }, [clearPreviewCloseTimer]);
+
+  const canPreviewBrand = useCallback((brandKey: BrandKey) => {
+    const brand = brandLogos[brandKey];
+
+    return Boolean(brand.src && getBrandCatalogPreview(brandKey));
   }, []);
 
   const updateFromScroll = useCallback(() => {
@@ -156,12 +192,26 @@ export function ProgramDeckSection() {
     const travel = Math.max(1, section.offsetHeight - viewportHeight);
     const progress = clamp(-rect.top / travel, 0, 1);
     const nextIndex = Math.round(progress * (programCategories.length - 1));
+    const manualTargetIndex = manualTargetIndexRef.current;
+
+    if (manualTargetIndex !== null) {
+      const targetProgress = manualTargetIndex / Math.max(1, programCategories.length - 1);
+      setDeckProgress(targetProgress);
+
+      if (Math.abs(progress - targetProgress) < 0.035) {
+        releaseManualNavigation();
+      }
+
+      return;
+    }
+
+    setDeckProgress(progress);
 
     if (nextIndex !== activeIndexRef.current) {
       setActiveIndex(nextIndex);
-      setActivePreviewBrandSlug(null);
+      closePreview();
     }
-  }, [setActiveIndex]);
+  }, [closePreview, releaseManualNavigation, setActiveIndex]);
 
   useEffect(() => {
     const media = window.matchMedia(
@@ -204,6 +254,13 @@ export function ProgramDeckSection() {
       }
     };
   }, [isDesktop, updateFromScroll]);
+
+  useEffect(() => {
+    return () => {
+      clearPreviewCloseTimer();
+      releaseManualNavigation();
+    };
+  }, [clearPreviewCloseTimer, releaseManualNavigation]);
 
   useEffect(() => {
     if (activePreviewBrandSlug === null) return undefined;
@@ -273,16 +330,28 @@ export function ProgramDeckSection() {
         }
       });
 
+      const manualTargetIndex = manualTargetIndexRef.current;
+      if (manualTargetIndex !== null) {
+        if (closestIndex === manualTargetIndex) {
+          releaseManualNavigation();
+        }
+
+        return;
+      }
+
       if (closestIndex !== activeIndexRef.current) {
         setActiveIndex(closestIndex);
-        setActivePreviewBrandSlug(null);
+        setDeckProgress(closestIndex / Math.max(1, programCategories.length - 1));
+        closePreview();
       }
     });
   }
 
   function scrollMobileCardIntoView(index: number) {
+    beginManualNavigation(index);
     setActiveIndex(index);
-    setActivePreviewBrandSlug(null);
+    setDeckProgress(index / Math.max(1, programCategories.length - 1));
+    closePreview();
     mobileCardRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
@@ -291,8 +360,10 @@ export function ProgramDeckSection() {
   }
 
   function activateProgramIndex(index: number) {
+    beginManualNavigation(index);
     setActiveIndex(index);
-    setActivePreviewBrandSlug(null);
+    setDeckProgress(index / Math.max(1, programCategories.length - 1));
+    closePreview();
 
     if (!isDesktop || !sectionRef.current) return;
 
@@ -335,22 +406,12 @@ export function ProgramDeckSection() {
             </p>
           </div>
 
-          <div className={styles.programDeckProgress} aria-label="Izaberi programsku celinu">
-            <span>{programCategories[activeIndex].number}</span>
-            <div>
-              {programCategories.map((category, index) => (
-                <button
-                  type="button"
-                  key={category.id}
-                  className={index === activeIndex ? styles.programDeckProgressActive : ""}
-                  aria-label={`Idi na korak ${index + 1}: ${category.title}`}
-                  aria-pressed={index === activeIndex}
-                  data-cursor="button"
-                  onClick={() => activateProgramIndex(index)}
-                />
-              ))}
-            </div>
-          </div>
+          <BrandEcosystemControls
+            activeIndex={activeIndex}
+            categories={programCategories}
+            deckProgress={deckProgress}
+            onActivate={activateProgramIndex}
+          />
         </div>
 
         <div
@@ -366,20 +427,12 @@ export function ProgramDeckSection() {
           }}
         >
           <div className={styles.programDeckDesktop} aria-label="Program po kategorijama">
-            {programCategories.map((category, index) => {
-              const position = getCircularPosition(index, activeIndex);
-              const isActive = position === 0;
-
-              return (
-                <ProgramCard
-                  key={category.id}
-                  category={category}
-                  className={getPositionClass(position)}
-                  isActive={isActive}
-                  onBrandPreview={openBrandPreview}
-                />
-              );
-            })}
+            <BrandEcosystemDesktopCards
+              activeIndex={activeIndex}
+              canPreviewBrand={canPreviewBrand}
+              categories={programCategories}
+              onBrandPreview={openBrandPreview}
+            />
           </div>
 
           <div className={styles.programMobileShell}>
@@ -389,32 +442,22 @@ export function ProgramDeckSection() {
               onScroll={handleMobileScroll}
               aria-label="Program po kategorijama"
             >
-              {programCategories.map((category, index) => (
-                <ProgramCard
-                  key={category.id}
-                  category={category}
-                  className={index === activeIndex ? styles.programMobileCardActive : ""}
-                  isActive={index === activeIndex}
-                  onBrandPreview={openBrandPreview}
-                  setRef={(node) => {
-                    mobileCardRefs.current[index] = node;
-                  }}
-                />
-              ))}
+              <BrandEcosystemMobileCards
+                activeIndex={activeIndex}
+                canPreviewBrand={canPreviewBrand}
+                categories={programCategories}
+                onBrandPreview={openBrandPreview}
+                setCardRef={(index, node) => {
+                  mobileCardRefs.current[index] = node;
+                }}
+              />
             </div>
 
-            <div className={styles.programMobileControls} aria-label="Izaberi program">
-              {programCategories.map((category, index) => (
-                <button
-                  type="button"
-                  key={category.id}
-                  className={index === activeIndex ? styles.programMobileDotActive : ""}
-                  onClick={() => scrollMobileCardIntoView(index)}
-                  aria-label={`Prikaži ${category.title}`}
-                  aria-pressed={index === activeIndex}
-                />
-              ))}
-            </div>
+            <BrandEcosystemMobileControls
+              activeIndex={activeIndex}
+              categories={programCategories}
+              onActivate={scrollMobileCardIntoView}
+            />
           </div>
 
           {activePreviewBrandKey && activeBrandPreview && isDesktop ? (
@@ -422,6 +465,7 @@ export function ProgramDeckSection() {
               brandKey={activePreviewBrandKey}
               preview={activeBrandPreview}
               onClose={closePreview}
+              exiting={previewExiting}
             />
           ) : null}
         </div>
@@ -444,186 +488,12 @@ export function ProgramDeckSection() {
             brandKey={activePreviewBrandKey}
             preview={activeBrandPreview}
             onClose={closePreview}
+            exiting={previewExiting}
             titleId="program-mobile-preview-title"
             mobile
           />
         </div>
       ) : null}
     </section>
-  );
-}
-
-function ProgramCard({
-  category,
-  className,
-  isActive,
-  onBrandPreview,
-  setRef,
-}: {
-  category: ProgramCategory;
-  className: string;
-  isActive: boolean;
-  onBrandPreview: (brandKey: BrandKey) => void;
-  setRef?: (node: HTMLElement | null) => void;
-}) {
-  return (
-    <article
-      ref={setRef}
-      data-brand-preview-region={isActive ? "card" : undefined}
-      className={`${styles.programDeckCard} ${className}`}
-      aria-current={isActive ? "step" : undefined}
-    >
-      <div className={styles.programCardInner}>
-        <div className={styles.programCardTop}>
-          <span className={styles.programNumber}>{category.number}</span>
-          <span className={styles.programCardLabel}>Program</span>
-        </div>
-
-        <div className={styles.programCardBody}>
-          <h3>{category.title}</h3>
-          <p>{category.description}</p>
-        </div>
-
-        <div className={styles.programLogoGrid} aria-label={`Brendovi za ${category.title}`}>
-          {category.logos.map((brandKey) => (
-            <ProgramBrandLogo
-              key={brandKey}
-              brandKey={brandKey}
-              isActive={isActive}
-              onBrandPreview={onBrandPreview}
-            />
-          ))}
-        </div>
-
-        <div className={styles.programHints} aria-label="Program obuhvata">
-          {category.hints.map((hint) => (
-            <span key={hint}>{hint}</span>
-          ))}
-        </div>
-
-        <a
-          className={styles.programPreviewButton}
-          href={`/program/${category.id}`}
-          tabIndex={isActive ? 0 : -1}
-        >
-          Pogledaj program
-        </a>
-      </div>
-    </article>
-  );
-}
-
-function ProgramBrandLogo({
-  brandKey,
-  isActive,
-  onBrandPreview,
-}: {
-  brandKey: BrandKey;
-  isActive: boolean;
-  onBrandPreview: (brandKey: BrandKey) => void;
-}) {
-  const brand = brandLogos[brandKey];
-  const canPreview = Boolean(brand.src && getBrandCatalogPreview(brandKey));
-
-  if (!canPreview) {
-    return <BrandLogoPlate brandKey={brandKey} />;
-  }
-
-  return (
-    <button
-      type="button"
-      className={styles.programBrandLogoButton}
-      disabled={!isActive}
-      tabIndex={isActive ? 0 : -1}
-      aria-haspopup="dialog"
-      aria-label={`Pregled kataloga brenda ${brand.name}`}
-      onMouseEnter={() => {
-        if (isActive) onBrandPreview(brandKey);
-      }}
-      onPointerEnter={(event) => {
-        if (isActive && event.pointerType !== "touch") onBrandPreview(brandKey);
-      }}
-      onFocus={() => {
-        if (isActive) onBrandPreview(brandKey);
-      }}
-      onClick={(event) => {
-        event.stopPropagation();
-        if (isActive) onBrandPreview(brandKey);
-      }}
-    >
-      <BrandLogoPlate brandKey={brandKey} />
-    </button>
-  );
-}
-
-function BrandPreviewPanel({
-  brandKey,
-  preview,
-  onClose,
-  titleId = "brand-preview-title",
-  mobile = false,
-}: {
-  brandKey: BrandKey;
-  preview: BrandCatalogPreview;
-  onClose: () => void;
-  titleId?: string;
-  mobile?: boolean;
-}) {
-  const brand = brandLogos[brandKey];
-  const brandHref = `/brendovi/${preview.brandSlug}`;
-
-  return (
-    <div
-      data-brand-preview-region="panel"
-      role={mobile ? undefined : "dialog"}
-      aria-modal={mobile ? undefined : false}
-      aria-labelledby={titleId}
-      className={`${styles.programPreviewPanel} ${mobile ? styles.programPreviewPanelMobile : ""}`}
-    >
-      <div className={styles.programPreviewTop}>
-        <span>Pregled kataloga</span>
-        <button type="button" onClick={onClose} aria-label="Zatvori pregled kataloga brenda">
-          ×
-        </button>
-      </div>
-
-      <div className={styles.programPreviewBody}>
-        <div className={styles.programPreviewBrand}>
-          <BrandLogoPlate brandKey={brandKey} />
-          <div>
-            <small>Brend program</small>
-            <strong>{brand.name}</strong>
-          </div>
-        </div>
-
-        <h3 id={titleId}>Pregled kataloga</h3>
-        <span>Proizvodi iz {brand.name} programa</span>
-
-        <div className={styles.programPreviewGrid}>
-          {preview.products.map((product) => (
-            <Link href={`/proizvodi/${product.slug}`} key={product.slug}>
-              <span className={styles.programPreviewThumb}>
-                {product.productImage ? (
-                  <Image
-                    src={product.productImage.src}
-                    alt={product.productImage.alt}
-                    width={96}
-                    height={72}
-                  />
-                ) : (
-                  <span className={styles.programPreviewPlaceholder}>Slika u pripremi</span>
-                )}
-              </span>
-              <small>{product.badges[0] ?? product.sku}</small>
-              <strong>{product.name}</strong>
-            </Link>
-          ))}
-        </div>
-
-        <Link className={styles.programPreviewCta} href={brandHref}>
-          Pogledaj katalog brenda
-        </Link>
-      </div>
-    </div>
   );
 }

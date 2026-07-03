@@ -491,17 +491,18 @@ export function CatalogExplorer({
         {hasMoreProducts && (
           <div className={styles.loadMoreWrap}>
             <button
-              className={`${styles.loadMoreButton} cs-magnetic-cta`}
+              className={`${styles.loadMoreButton} cs-magnetic-cta cs-theme-wipe-card`}
               type="button"
               data-cursor="button"
               data-motion-surface
+              data-motion="theme-wipe"
               onClick={() =>
                 setVisibleCount((count) =>
                   Math.min(count + CATALOG_PAGE_SIZE, filteredProducts.length),
                 )
               }
             >
-              Prikaži još proizvoda
+              <span>Prikaži još proizvoda</span>
             </button>
             <p className={styles.loadMoreMeta}>
               Prikazano {visibleProducts.length} od {filteredProducts.length}

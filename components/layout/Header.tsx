@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- The supplied outline logo is a static public SVG used with img as requested. */
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -58,6 +59,7 @@ export function Header() {
   const mobileProgramId = useId();
   const mobileBrandId = useId();
   const headerRef = useRef<HTMLElement>(null);
+  const dropdownCloseTimerRef = useRef<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<DropdownKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<DropdownKey | null>("programi");
@@ -68,6 +70,7 @@ export function Header() {
   const brandActive = pathname === "/brendovi" || pathname.startsWith("/brendovi/");
 
   useEffect(() => {
+    clearDropdownCloseTimer();
     setOpenDropdown(null);
     setMobileOpen(false);
     setHeaderHidden(false);
@@ -77,6 +80,7 @@ export function Header() {
   useEffect(() => {
     function handlePointerDown(event: PointerEvent) {
       if (!headerRef.current?.contains(event.target as Node)) {
+        clearDropdownCloseTimer();
         setOpenDropdown(null);
         setMobileOpen(false);
       }
@@ -84,6 +88,7 @@ export function Header() {
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
+        clearDropdownCloseTimer();
         setOpenDropdown(null);
         setMobileOpen(false);
       }
@@ -96,6 +101,10 @@ export function Header() {
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
+  }, []);
+
+  useEffect(() => {
+    return () => clearDropdownCloseTimer();
   }, []);
 
   useEffect(() => {
@@ -144,8 +153,33 @@ export function Header() {
     const nextTarget = event.relatedTarget;
 
     if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
+      clearDropdownCloseTimer();
       setOpenDropdown((current) => (current === dropdown ? null : current));
     }
+  }
+
+  function clearDropdownCloseTimer() {
+    if (dropdownCloseTimerRef.current === null) return;
+    window.clearTimeout(dropdownCloseTimerRef.current);
+    dropdownCloseTimerRef.current = null;
+  }
+
+  function openDesktopDropdown(dropdown: DropdownKey) {
+    clearDropdownCloseTimer();
+    setOpenDropdown(dropdown);
+  }
+
+  function closeDesktopDropdown() {
+    clearDropdownCloseTimer();
+    setOpenDropdown(null);
+  }
+
+  function scheduleDesktopDropdownClose() {
+    clearDropdownCloseTimer();
+    dropdownCloseTimerRef.current = window.setTimeout(() => {
+      dropdownCloseTimerRef.current = null;
+      setOpenDropdown(null);
+    }, 90);
   }
 
   function toggleMobileSection(section: DropdownKey) {
@@ -170,8 +204,13 @@ export function Header() {
           aria-label="Carsystem i R-M Inđija početna"
           aria-current={pathname === "/" ? "page" : undefined}
         >
-          <span className={styles.brandSymbol} aria-hidden="true">
-            RM
+          <span className={styles.brandSymbol}>
+            <img
+              src="/carsystem-logo-outline.svg"
+              alt="Carsystem logo"
+              className={styles.brandMarkLogo}
+              decoding="async"
+            />
           </span>
           <span className={styles.brandText}>
             <span>Carsystem</span>
@@ -182,20 +221,18 @@ export function Header() {
         <nav aria-label="Glavna navigacija" className={styles.desktopNav}>
           <Link
             href={MAIN_LINKS[0].href}
-            className={cx(styles.navLink, "cs-link-reveal")}
+            className={styles.navLink}
             aria-current={isActive(MAIN_LINKS[0].activeKey, pathname) ? "page" : undefined}
             data-active={isActive(MAIN_LINKS[0].activeKey, pathname) || undefined}
-            data-cursor="link"
           >
             {MAIN_LINKS[0].label}
           </Link>
 
           <Link
             href={MAIN_LINKS[1].href}
-            className={cx(styles.navLink, "cs-link-reveal")}
+            className={styles.navLink}
             aria-current={isActive(MAIN_LINKS[1].activeKey, pathname) ? "page" : undefined}
             data-active={isActive(MAIN_LINKS[1].activeKey, pathname) || undefined}
-            data-cursor="link"
           >
             {MAIN_LINKS[1].label}
           </Link>
@@ -205,11 +242,13 @@ export function Header() {
             label="Programi"
             active={programActive}
             open={openDropdown === "programi"}
-            onOpen={() => setOpenDropdown("programi")}
-            onToggle={() =>
-              setOpenDropdown((current) => (current === "programi" ? null : "programi"))
-            }
-            onClose={() => setOpenDropdown(null)}
+            onOpen={() => openDesktopDropdown("programi")}
+            onToggle={() => {
+              clearDropdownCloseTimer();
+              setOpenDropdown((current) => (current === "programi" ? null : "programi"));
+            }}
+            onClose={closeDesktopDropdown}
+            onLeave={scheduleDesktopDropdownClose}
             onBlur={(event) => handleDropdownBlur(event, "programi")}
             featured={{
               href: "/program",
@@ -227,11 +266,13 @@ export function Header() {
             label="Brendovi"
             active={brandActive}
             open={openDropdown === "brendovi"}
-            onOpen={() => setOpenDropdown("brendovi")}
-            onToggle={() =>
-              setOpenDropdown((current) => (current === "brendovi" ? null : "brendovi"))
-            }
-            onClose={() => setOpenDropdown(null)}
+            onOpen={() => openDesktopDropdown("brendovi")}
+            onToggle={() => {
+              clearDropdownCloseTimer();
+              setOpenDropdown((current) => (current === "brendovi" ? null : "brendovi"));
+            }}
+            onClose={closeDesktopDropdown}
+            onLeave={scheduleDesktopDropdownClose}
             onBlur={(event) => handleDropdownBlur(event, "brendovi")}
             featured={{
               href: "/brendovi",
@@ -249,10 +290,9 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={cx(styles.navLink, "cs-link-reveal")}
+              className={styles.navLink}
               aria-current={isActive(link.activeKey, pathname) ? "page" : undefined}
               data-active={isActive(link.activeKey, pathname) || undefined}
-              data-cursor="link"
             >
               {link.label}
             </Link>
@@ -309,7 +349,14 @@ export function Header() {
             aria-label="Mobilna navigacija"
           >
             <div className={styles.mobilePanelHeader}>
-              <span>
+              <span className={styles.mobilePanelBrand}>
+                <span className={styles.mobilePanelLogo}>
+                  <img
+                    src="/carsystem-logo-outline.svg"
+                    alt="Carsystem logo"
+                    decoding="async"
+                  />
+                </span>
                 Carsystem <strong>R-M</strong>
               </span>
               <button
@@ -410,6 +457,7 @@ function DesktopMegaMenu({
   onOpen,
   onToggle,
   onClose,
+  onLeave,
   onBlur,
   featured,
   links,
@@ -423,6 +471,7 @@ function DesktopMegaMenu({
   onOpen: () => void;
   onToggle: () => void;
   onClose: () => void;
+  onLeave: () => void;
   onBlur: (event: FocusEvent<HTMLDivElement>) => void;
   featured: {
     href: string;
@@ -438,17 +487,16 @@ function DesktopMegaMenu({
     <div
       className={styles.navItem}
       onMouseEnter={onOpen}
-      onMouseLeave={onClose}
+      onMouseLeave={onLeave}
       onFocus={onOpen}
       onBlur={onBlur}
       data-open={open || undefined}
     >
       <span className={styles.navTrigger} data-active={active || undefined}>
         <Link
-          className={cx(styles.navTriggerLabel, "cs-link-reveal")}
+          className={styles.navTriggerLabel}
           href={featured.href}
           aria-current={active ? "page" : undefined}
-          data-cursor="link"
           onClick={onClose}
         >
           {label}
@@ -464,7 +512,21 @@ function DesktopMegaMenu({
           aria-haspopup="true"
           onClick={onToggle}
         >
-          <span className={styles.triggerChevron} aria-hidden="true" />
+          <svg
+            className={styles.triggerChevron}
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 12 8"
+            fill="none"
+          >
+            <path
+              d="M1.5 1.75 6 6.25l4.5-4.5"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       </span>
 

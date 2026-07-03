@@ -74,9 +74,12 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-2 inline-flex w-fit items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+        className="cs-magnetic-cta cs-theme-wipe-card mt-2 inline-flex w-fit items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground"
+        data-cursor="button"
+        data-motion-surface
+        data-motion="theme-wipe"
       >
-        Pošaljite upit
+        <span>Pošaljite upit</span>
       </button>
     </form>
   );

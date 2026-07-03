@@ -11,6 +11,7 @@ export const motionSurfaceSelector = [
   ".cs-gloss-card",
   ".cs-image-surface",
   ".cs-process-surface",
+  ".cs-theme-wipe-card",
 ].join(",");
 
 export function setLocalPointerVars(element: HTMLElement, event: PointerEvent) {

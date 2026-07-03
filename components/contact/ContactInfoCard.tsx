@@ -33,14 +33,26 @@ export function ContactInfoCard({ contact }: { contact: CompanyContact }) {
       </dl>
 
       <div className={styles.infoActions}>
-        <a className={styles.primaryButton} href={contact.phoneHref}>
-          Pozovi
+        <a
+          className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
+          href={contact.phoneHref}
+          data-cursor="button"
+          data-motion-surface
+          data-motion="theme-wipe"
+        >
+          <span>Pozovi</span>
         </a>
         <a className={styles.secondaryButton} href={contact.emailHref}>
           Pošalji email
         </a>
-        <Link className={styles.ghostButton} href="/prodavnice">
-          Pronađi prodavnicu
+        <Link
+          className={`${styles.ghostButton} cs-magnetic-cta cs-theme-wipe-card`}
+          href="/prodavnice"
+          data-cursor="button"
+          data-motion-surface
+          data-motion="theme-wipe"
+        >
+          <span>Pronađi prodavnicu</span>
         </Link>
       </div>
 

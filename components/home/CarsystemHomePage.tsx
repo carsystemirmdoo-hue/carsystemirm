@@ -3,18 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  type FocusEvent,
   useEffect,
-  useId,
   useMemo,
-  useRef,
   useState,
 } from "react";
-import {
-  BRAND_LINKS,
-  PROGRAM_LINKS,
-  type MegaLink,
-} from "@/components/layout/navigation-data";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
 import {
   BrandLogoPlate,
@@ -22,99 +14,21 @@ import {
   type BrandKey,
   trustBrandKeys,
 } from "./BrandLogoPlate";
+import { HomeSectionRail } from "./HomeSectionRail";
 import { ProcessSection } from "./ProcessSection";
 import { ProgramDeckSection } from "./ProgramDeckSection";
 import { companyContact } from "@/lib/company-contact";
+import { partnerStores } from "@/lib/partner-stores";
+import {
+  getCityDisplayEntries,
+  type CityDisplayEntry,
+} from "@/components/stores/store-locator-display";
 import styles from "./CarsystemHomePage.module.css";
 
 type Theme = "dark" | "light";
-type DropdownKey = "programi" | "brendovi";
 
-type Store = {
-  city: string;
-  name: string;
-  address: string;
-  detail: string;
-  region: string;
-};
-
-const mobileNavLinks = [
-  { href: "/katalog", label: "Katalog" },
-  { href: "/program", label: "Programi" },
-  { href: "/brendovi", label: "Brendovi" },
-  { href: "/prodavnice", label: "Prodavnice" },
-  { href: "/kontakt", label: "Kontakt" },
-] as const;
-
-const footerCatalogLinks = [
-  { href: "/katalog", label: "Katalog proizvoda" },
-  { href: "/program/boje-i-lakovi", label: "Boje i lakovi" },
-  { href: "/program/priprema-i-abrazivi", label: "Priprema i abrazivi" },
-  { href: "/program/pistolji-i-oprema", label: "Pištolji i oprema" },
-  { href: "/program/poliranje", label: "Poliranje" },
-  { href: "/program/potrosni-materijal", label: "Potrošni materijal" },
-] as const;
-
-const footerBrandLinks = [
-  { href: "/brendovi/rm", label: "R-M" },
-  { href: "/brendovi/carsystem", label: "Carsystem" },
-  { href: "/brendovi/baslac", label: "Baslac" },
-  { href: "/brendovi/sata", label: "SATA" },
-  { href: "/brendovi/carfit", label: "Car Fit" },
-  { href: "/brendovi/cosmos-spray", label: "Cosmos Spray" },
-] as const;
-
-const footerSupportLinks = [
-  { href: "/prodavnice", label: "Prodavnice" },
-  { href: "/kontakt", label: "Kontakt" },
-  { href: "/kontakt", label: "Pošalji upit" },
-  { href: "/kontakt?tema=b2b", label: "B2B saradnja" },
-] as const;
-
-const stores: Store[] = [
-  {
-    city: "Inđija",
-    name: "Carsystem i R-M Inđija",
-    address: "Centrala, Inđija",
-    detail: "Veleprodaja i tehnička podrška",
-    region: "Srem",
-  },
-  {
-    city: "Beograd",
-    name: "Partnerska mreža, Beograd",
-    address: "Kontakt za najbližu prodavnicu u regionu",
-    detail: "Rutiranje preko centrale",
-    region: "Beograd",
-  },
-  {
-    city: "Novi Sad",
-    name: "Partnerska mreža, Novi Sad",
-    address: "Kontakt za najbližu prodavnicu u regionu",
-    detail: "Rutiranje preko centrale",
-    region: "Vojvodina",
-  },
-  {
-    city: "Niš",
-    name: "Partnerska mreža, Niš",
-    address: "Kontakt za najbližu prodavnicu u regionu",
-    detail: "Rutiranje preko centrale",
-    region: "Jug Srbije",
-  },
-  {
-    city: "Kragujevac",
-    name: "Partnerska mreža, Kragujevac",
-    address: "Kontakt za najbližu prodavnicu u regionu",
-    detail: "Rutiranje preko centrale",
-    region: "Šumadija",
-  },
-  {
-    city: "Subotica",
-    name: "Partnerska mreža, Subotica",
-    address: "Kontakt za najbližu prodavnicu u regionu",
-    detail: "Rutiranje preko centrale",
-    region: "Sever Srbije",
-  },
-];
+const cityEntries = getCityDisplayEntries(partnerStores);
+const defaultCity = cityEntries[0]?.city ?? "Inđija";
 
 const trustBrandLinks: Partial<Record<BrandKey, string>> = {
   rm: "/brendovi/rm",
@@ -169,88 +83,35 @@ function IconLocation() {
   );
 }
 
-const THEME_STORAGE_KEY = "theme";
-
-function getStoredTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-
-  try {
-    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored === "light" || stored === "dark") return stored;
-  } catch {
-    // Fall back to the class set by ThemeScript.
-  }
-
-  return document.documentElement.classList.contains("dark") ? "dark" : "light";
-}
-
-function applyStoredTheme(theme: Theme) {
-  document.documentElement.classList.toggle("dark", theme === "dark");
-  document.documentElement.dataset.theme = theme;
-
-  try {
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-  } catch {
-    // Theme still works for the current session.
-  }
-}
-
 export function CarsystemHomePage() {
-  const programPanelId = useId();
-  const brandPanelId = useId();
-  const headerRef = useRef<HTMLElement>(null);
   const [theme, setTheme] = useState<Theme>("dark");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<DropdownKey | null>(null);
-  const [selectedCity, setSelectedCity] = useState("Inđija");
+  const [selectedCity, setSelectedCity] = useState(defaultCity);
   const [locatorStatus, setLocatorStatus] = useState(
     "Ručno izaberi grad ili dozvoli lokaciju.",
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
-  const [headerHidden, setHeaderHidden] = useState(false);
-  const [headerCompact, setHeaderCompact] = useState(false);
 
   const selectedStore = useMemo(
-    () => stores.find((store) => store.city === selectedCity) ?? stores[0],
+    () => cityEntries.find((entry) => entry.city === selectedCity) ?? cityEntries[0],
     [selectedCity],
   );
 
+  // The hero image and PerfectFinishProcess canvas need the theme as a JS
+  // value, so mirror the global .dark class (the single source of truth).
   useEffect(() => {
-    setTheme(getStoredTheme());
-
-    function handleStorage(event: StorageEvent) {
-      if (event.key !== THEME_STORAGE_KEY) return;
-      if (event.newValue === "light" || event.newValue === "dark") {
-        setTheme(event.newValue);
-      }
+    function syncTheme() {
+      setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
     }
 
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, []);
+    syncTheme();
 
-  useEffect(() => {
-    function handlePointerDown(event: globalThis.PointerEvent) {
-      if (!headerRef.current?.contains(event.target as Node)) {
-        setOpenDropdown(null);
-        setMenuOpen(false);
-      }
-    }
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setOpenDropdown(null);
-        setMenuOpen(false);
-      }
-    }
-
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -268,56 +129,6 @@ export function CarsystemHomePage() {
     };
   }, []);
 
-  useEffect(() => {
-    let previousY = window.scrollY;
-    let ticking = false;
-
-    function updateHeaderVisibility() {
-      const nextY = window.scrollY;
-      const delta = nextY - previousY;
-
-      setHeaderCompact(nextY > 24);
-      setHeaderHidden(nextY > 132 && delta > 0);
-
-      if (delta < -6 || nextY < 48) {
-        setHeaderHidden(false);
-      }
-
-      previousY = Math.max(nextY, 0);
-      ticking = false;
-    }
-
-    function handleScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(updateHeaderVisibility);
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    updateHeaderVisibility();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    applyStoredTheme(nextTheme);
-  }
-
-  function handleDropdownBlur(event: FocusEvent<HTMLDivElement>, dropdown: DropdownKey) {
-    const nextTarget = event.relatedTarget;
-
-    if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
-      setOpenDropdown((current) => (current === dropdown ? null : current));
-    }
-  }
-
-  function closeNavigation() {
-    setOpenDropdown(null);
-    setMenuOpen(false);
-  }
-
   function handleLocationRequest() {
     if (!("geolocation" in navigator)) {
       setLocatorStatus("Lokacija nije dostupna u ovom browseru. Izaberi grad ručno.");
@@ -328,7 +139,7 @@ export function CarsystemHomePage() {
 
     navigator.geolocation.getCurrentPosition(
       () => {
-        setSelectedCity("Inđija");
+        setSelectedCity(defaultCity);
         setLocatorStatus("Lokacija je aktivirana. Prikazana je preporučena lokacija za upit.");
       },
       () => {
@@ -339,160 +150,9 @@ export function CarsystemHomePage() {
   }
 
   return (
-    <main className={styles.home} data-theme={theme}>
-      <header
-        ref={headerRef}
-        className={styles.header}
-        data-compact={headerCompact || undefined}
-        data-hidden={headerHidden && !menuOpen ? true : undefined}
-      >
-        <nav className={styles.nav} aria-label="Glavna navigacija">
-          <Link
-            className={`${styles.brandMark} cs-link-reveal`}
-            href="/"
-            aria-label="Carsystem i R-M početna"
-            data-cursor="link"
-          >
-            <BrandLogoPlate brandKey="carsystem" variant="header" />
-            <span className={styles.brandText}>
-              <span>Carsystem</span>
-              <strong>R-M Inđija</strong>
-            </span>
-          </Link>
-
-          <div className={styles.navLinks}>
-            <Link href="/katalog" className="cs-link-reveal" data-cursor="link">
-              Katalog
-            </Link>
-            <HomeDesktopMegaMenu
-              id={programPanelId}
-              label="Programi"
-              href="/program"
-              open={openDropdown === "programi"}
-              onOpen={() => setOpenDropdown("programi")}
-              onToggle={() =>
-                setOpenDropdown((current) => (current === "programi" ? null : "programi"))
-              }
-              onClose={() => setOpenDropdown(null)}
-              onBlur={(event) => handleDropdownBlur(event, "programi")}
-              featured={{
-                href: "/program",
-                title: "Program po fazama procesa",
-                description: "Priprema, podloga, boja, lak i poliranje povezani sa proizvodima.",
-                cta: "Svi programi",
-              }}
-              links={PROGRAM_LINKS}
-            />
-            <HomeDesktopMegaMenu
-              id={brandPanelId}
-              label="Brendovi"
-              href="/brendovi"
-              open={openDropdown === "brendovi"}
-              onOpen={() => setOpenDropdown("brendovi")}
-              onToggle={() =>
-                setOpenDropdown((current) => (current === "brendovi" ? null : "brendovi"))
-              }
-              onClose={() => setOpenDropdown(null)}
-              onBlur={(event) => handleDropdownBlur(event, "brendovi")}
-              featured={{
-                href: "/brendovi",
-                title: "Brendovi u Carsystem programu",
-                description: "Refinish sistemi, oprema i materijali kroz partnersku mrežu.",
-                cta: "Svi brendovi",
-              }}
-              links={BRAND_LINKS}
-              withLogos
-            />
-            <Link href="/prodavnice" className="cs-link-reveal" data-cursor="link">
-              Prodavnice
-            </Link>
-            <Link href="/kontakt" className="cs-link-reveal" data-cursor="link">
-              Kontakt
-            </Link>
-          </div>
-
-          <div className={styles.navActions}>
-            <button
-              type="button"
-              className={styles.iconButton}
-              data-cursor="button"
-              data-motion-surface
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Uključi svetlu temu" : "Uključi tamnu temu"}
-            >
-              <span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span>
-            </button>
-            <a
-              className={`${styles.subtleButton} cs-interactive-surface`}
-              href="/kontakt?tema=b2b"
-              data-cursor="button"
-              data-motion-surface
-            >
-              B2B saradnja
-            </a>
-            <a
-              className={`${styles.headerCta} cs-magnetic-cta cs-theme-wipe-card`}
-              href="/prodavnice"
-              data-cursor="button"
-              data-motion-surface
-              data-motion="theme-wipe"
-            >
-              <span className={styles.buttonIcon}>
-                <IconLocation />
-              </span>
-              <span>Prodavnice</span>
-            </a>
-            <button
-              type="button"
-              className={styles.menuButton}
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              aria-label="Otvori meni"
-            >
-              <span />
-              <span />
-              <span />
-            </button>
-          </div>
-        </nav>
-
-        {menuOpen && (
-          <div id="mobile-menu" className={styles.mobileMenu}>
-            {mobileNavLinks.map((link) => (
-              <Link key={link.href} href={link.href} onClick={closeNavigation}>
-                {link.label}
-              </Link>
-            ))}
-            <div className={styles.mobileMenuGroups}>
-              <div>
-                {PROGRAM_LINKS.map((link) => (
-                  <Link key={link.href} href={link.href} onClick={closeNavigation}>
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-              <div>
-                {BRAND_LINKS.slice(0, 6).map((link) => (
-                  <Link key={link.href} href={link.href} onClick={closeNavigation}>
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className={styles.mobileMenuActions}>
-              <Link href="/kontakt?tema=b2b" onClick={closeNavigation}>
-                B2B saradnja
-              </Link>
-              <Link href="/prodavnice" onClick={closeNavigation}>
-                Prodavnice
-              </Link>
-            </div>
-          </div>
-        )}
-      </header>
-
-      <section id="top" className={styles.hero} aria-labelledby="homepage-title">
+    <main className={styles.home}>
+      <HomeSectionRail />
+      <section className={styles.hero} aria-labelledby="homepage-title">
         <div className={styles.heroMedia} aria-hidden="true">
           <Image
             src={theme === "dark" ? "/images/home/hero-dark.png" : "/images/home/hero-light.png"}
@@ -625,7 +285,7 @@ export function CarsystemHomePage() {
 
       <ProcessSection theme={theme} />
 
-      <section id="mreza" className={styles.sectionAlt} aria-labelledby="network-title">
+      <section className={styles.sectionAlt} aria-labelledby="network-title">
         <div className={styles.sectionHeader}>
           <div>
             <p className={styles.sectionKicker}>Partnerska mreža, Srbija</p>
@@ -655,19 +315,22 @@ export function CarsystemHomePage() {
               }}
               className={styles.citySelect}
             >
-              {stores.map((store) => (
-                <option key={store.city}>{store.city}</option>
+              {cityEntries.map((entry) => (
+                <option key={entry.city}>{entry.city}</option>
               ))}
             </select>
             <button
               type="button"
-              className={styles.locationButton}
+              className={`${styles.locationButton} cs-magnetic-cta cs-theme-wipe-card`}
               onClick={handleLocationRequest}
+              data-cursor="button"
+              data-motion-surface
+              data-motion="theme-wipe"
             >
               <span className={styles.buttonIcon}>
                 <IconLocation />
               </span>
-              Dozvoli lokaciju
+              <span>Dozvoli lokaciju</span>
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreview store={selectedStore} />
@@ -703,7 +366,7 @@ export function CarsystemHomePage() {
 
       <ProgramDeckSection />
 
-      <section id="podrska" className={styles.section} aria-labelledby="support-title">
+      <section className={styles.section} aria-labelledby="support-title">
         <div className={styles.supportBand}>
           <div className={styles.supportStatement}>
             <p className={styles.sectionKicker}>Tehnička podrška, mikseri boja</p>
@@ -753,11 +416,13 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <section id="edukacija" className={styles.section} aria-labelledby="education-title">
+      <section className={styles.section} aria-labelledby="education-title">
         <div className={styles.educationIndexLayout}>
           <div className={styles.educationIntro}>
             <p className={styles.sectionKicker}>Edukacija i znanje</p>
-            <h2 id="education-title">Znanje koje pravi razliku u radionici.</h2>
+            <h2 id="education-title">
+              Znanje koje pravi razliku u radionici.
+            </h2>
             <p>
               Kratak, tehnički indeks tema za pripremu upita, razgovor sa
               podrškom i stabilniji radni proces.
@@ -772,7 +437,6 @@ export function CarsystemHomePage() {
                 key={item.slug}
                 href={`/kontakt?tema=tehnicka-podrska&tema-saznanja=${item.slug}`}
                 className={`${styles.educationIndexRow} cs-interactive-surface`}
-                data-cursor="link"
                 data-motion-surface
               >
                 <span className={styles.educationIndex}>{String(index + 1).padStart(2, "0")}</span>
@@ -786,7 +450,7 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <section id="kontakt" className={styles.sectionAlt} aria-labelledby="contact-title">
+      <section className={styles.sectionAlt} aria-labelledby="contact-title">
         <div className={styles.contactGrid}>
           <div className={styles.contactPanel}>
             <p className={styles.sectionKicker}>Centrala, Inđija</p>
@@ -858,49 +522,6 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <footer className={`${styles.footer} cs-animated-footer`} data-motion-surface>
-        <span className="cs-footer-ambient" aria-hidden="true" />
-        <div className={styles.footerGrid}>
-          <div>
-            <strong className={styles.footerBrand}>Carsystem i R-M Inđija</strong>
-            <p>
-              Profesionalni program za pripremu, farbanje, opremu i završnu
-              obradu vozila.
-            </p>
-            <div className={styles.footerActions}>
-              <a className={`${styles.primaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/kontakt" data-cursor="button" data-motion-surface data-motion="theme-wipe">
-                <span>Pošalji upit</span>
-              </a>
-              <a className={`${styles.secondaryCta} cs-interactive-surface`} href="/prodavnice" data-cursor="button" data-motion-surface>
-                Pronađi prodavnicu
-              </a>
-            </div>
-          </div>
-          <FooterColumn title="Katalog" links={footerCatalogLinks} />
-          <FooterColumn title="Brendovi" links={footerBrandLinks} />
-          <FooterColumn title="Podrška" links={footerSupportLinks} />
-          <div>
-            <h3>Kontakt</h3>
-            <strong>{companyContact.name}</strong>
-            <span>{companyContact.locationLabel}</span>
-            <a href={companyContact.phoneHref}>{companyContact.phone}</a>
-            <a href={companyContact.emailHref}>{companyContact.email}</a>
-            <span>{companyContact.workingHours}</span>
-            <p>{companyContact.editableNote}</p>
-          </div>
-        </div>
-        <div className={styles.footerBottom}>
-          <span>
-            © {new Date().getFullYear()} Carsystem i R-M Inđija. Sva prava zadržana.
-          </span>
-          <span>
-            Dizajn i razvoj:{" "}
-            <a href="https://studio-one.rs" rel="noreferrer" target="_blank">
-              Studio One
-            </a>
-          </span>
-        </div>
-      </footer>
     </main>
   );
 }
@@ -912,7 +533,7 @@ function LocatorCard({
   onCityChange,
   onLocationRequest,
 }: {
-  selectedStore: Store;
+  selectedStore: CityDisplayEntry;
   selectedCity: string;
   locatorStatus: string;
   onCityChange: (city: string) => void;
@@ -928,11 +549,18 @@ function LocatorCard({
         <small>Mreža</small>
       </header>
       <div className={styles.locatorBody}>
-        <button type="button" className={styles.locationButton} onClick={onLocationRequest}>
+        <button
+          type="button"
+          className={`${styles.locationButton} cs-magnetic-cta cs-theme-wipe-card`}
+          onClick={onLocationRequest}
+          data-cursor="button"
+          data-motion-surface
+          data-motion="theme-wipe"
+        >
           <span className={styles.buttonIcon}>
             <IconLocation />
           </span>
-          Dozvoli lokaciju
+          <span>Dozvoli lokaciju</span>
         </button>
         <select
           value={selectedCity}
@@ -940,8 +568,8 @@ function LocatorCard({
           aria-label="Izaberi grad"
           className={styles.citySelect}
         >
-          {stores.map((store) => (
-            <option key={store.city}>{store.city}</option>
+          {cityEntries.map((entry) => (
+            <option key={entry.city}>{entry.city}</option>
           ))}
         </select>
         <StorePreview store={selectedStore} />
@@ -951,7 +579,7 @@ function LocatorCard({
   );
 }
 
-function StorePreview({ store }: { store: Store }) {
+function StorePreview({ store }: { store: CityDisplayEntry }) {
   return (
     <article className={styles.storePreview}>
       <span className={styles.availableDot} />
@@ -964,140 +592,5 @@ function StorePreview({ store }: { store: Store }) {
         <span>{store.detail}</span>
       </div>
     </article>
-  );
-}
-
-function HomeDesktopMegaMenu({
-  featured,
-  href,
-  id,
-  label,
-  links,
-  onBlur,
-  onClose,
-  onOpen,
-  onToggle,
-  open,
-  withLogos = false,
-}: {
-  featured: {
-    href: string;
-    title: string;
-    description: string;
-    cta: string;
-  };
-  href: string;
-  id: string;
-  label: string;
-  links: MegaLink[];
-  onBlur: (event: FocusEvent<HTMLDivElement>) => void;
-  onClose: () => void;
-  onOpen: () => void;
-  onToggle: () => void;
-  open: boolean;
-  withLogos?: boolean;
-}) {
-  return (
-    <div
-      className={styles.navMegaItem}
-      data-open={open || undefined}
-      onBlur={onBlur}
-      onFocus={onOpen}
-      onMouseEnter={onOpen}
-      onMouseLeave={onClose}
-    >
-      <span className={styles.navMegaTrigger}>
-        <Link
-          className={`${styles.navMegaLabel} cs-link-reveal`}
-          href={href}
-          onClick={onClose}
-          data-cursor="link"
-        >
-          {label}
-        </Link>
-        <button
-          type="button"
-          aria-controls={id}
-          aria-expanded={open}
-          aria-haspopup="true"
-          aria-label={`${open ? "Sakrij" : "Prikaži"} ${label.toLowerCase()} meni`}
-          className={styles.navMegaButton}
-          data-cursor="button"
-          data-motion-surface
-          onClick={onToggle}
-        >
-          <span aria-hidden="true" />
-        </button>
-      </span>
-
-      {open ? (
-        <div id={id} className={styles.navMegaPanel} aria-label={`${label} navigacija`}>
-          <Link
-            className={`${styles.navMegaFeatured} cs-gloss-card`}
-            href={featured.href}
-            onClick={onClose}
-            data-cursor="card"
-            data-motion-surface
-          >
-            <small>Pregled sistema</small>
-            <strong>{featured.title}</strong>
-            <span>{featured.description}</span>
-            <em>{featured.cta}</em>
-          </Link>
-          <div className={withLogos ? styles.navMegaLogoGrid : styles.navMegaGrid}>
-            {links.map((link) => (
-              <Link
-                className={`${styles.navMegaLink} cs-gloss-card`}
-                href={link.href}
-                key={link.href}
-                onClick={onClose}
-                data-cursor={withLogos ? "image" : "card"}
-                data-motion-surface
-              >
-                {withLogos ? (
-                  <span className={styles.navMegaLogo} aria-hidden="true">
-                    {link.logo ? (
-                      <Image src={link.logo} alt="" width={82} height={42} />
-                    ) : (
-                      link.title
-                    )}
-                  </span>
-                ) : (
-                  <i aria-hidden="true" />
-                )}
-                <span>
-                  <strong>{link.title}</strong>
-                  <small>{link.meta ?? link.description}</small>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
-function FooterColumn({
-  title,
-  links,
-}: {
-  title: string;
-  links: ReadonlyArray<{ href: string; label: string }>;
-}) {
-  return (
-    <div>
-      <h3>{title}</h3>
-      {links.map((link) => (
-        <a
-          className="cs-link-reveal"
-          href={link.href}
-          key={`${title}-${link.href}-${link.label}`}
-          data-cursor="link"
-        >
-          {link.label}
-        </a>
-      ))}
-    </div>
   );
 }

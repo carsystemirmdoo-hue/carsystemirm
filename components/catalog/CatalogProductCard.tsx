@@ -86,13 +86,14 @@ export function CatalogProductCard({
 
         <div className={styles.productActions}>
           <Link
-            className={`${styles.primaryButton} cs-magnetic-cta`}
+            className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
             href={inquiryHref}
             aria-label={`Pošalji upit za proizvod: ${product.name}`}
             data-cursor="button"
             data-motion-surface
+            data-motion="theme-wipe"
           >
-            Pošalji upit
+            <span>Pošalji upit</span>
           </Link>
           <Link className={`${styles.detailLink} cs-link-reveal`} href={productHref} data-cursor="link">
             Detalji →

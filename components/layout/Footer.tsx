@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { FooterReveal } from "@/components/layout/FooterReveal";
+import { SplitContactCta } from "@/components/ui/SplitContactCta";
 import { companyContact } from "@/lib/company-contact";
 
 const catalogLinks = [
@@ -34,6 +36,7 @@ export function Footer() {
       className="cs-animated-footer mt-auto border-t border-border bg-surface text-foreground"
       data-motion-surface
     >
+      <FooterReveal />
       <span className="cs-footer-ambient" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_1.6fr_0.95fr] lg:gap-12">
@@ -45,16 +48,8 @@ export function Footer() {
               Profesionalni program za pripremu, farbanje, opremu i završnu
               obradu vozila.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                className="cs-magnetic-cta cs-theme-wipe-card inline-flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 text-sm font-extrabold !text-accent-foreground transition-transform hover:-translate-y-0.5"
-                href="/kontakt"
-                data-cursor="button"
-                data-motion-surface
-                data-motion="theme-wipe"
-              >
-                <span>Pošalji upit</span>
-              </Link>
+            <div className="mt-6 flex flex-wrap items-start gap-3">
+              <SplitContactCta inquiryHref="/kontakt" />
               <Link
                 className="cs-interactive-surface inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 text-sm font-extrabold !text-foreground transition-colors hover:bg-surface-muted"
                 href="/prodavnice"

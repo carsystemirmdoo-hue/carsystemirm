@@ -1,37 +1,61 @@
 "use client";
 
-import { useEffect } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { useEffect, useRef } from "react";
 
-/**
- * Drives a sticky curtain reveal without hiding the footer. If JS is missing,
- * the footer remains a normal block; if reduced motion is requested, the
- * component leaves the DOM untouched.
- */
-export function FooterReveal() {
+type FooterRevealStyle = CSSProperties & {
+  "--footer-reveal-progress": string;
+  "--footer-reveal-opacity": string;
+  "--footer-reveal-y": string;
+  "--footer-mask-y": string;
+};
+
+const initialFooterRevealStyle: FooterRevealStyle = {
+  "--footer-reveal-progress": "1",
+  "--footer-reveal-opacity": "1",
+  "--footer-reveal-y": "0px",
+  "--footer-mask-y": "-100%",
+};
+
+export function FooterReveal({ children }: { children: ReactNode }) {
+  const rollerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const rollerElement = rollerRef.current;
+    if (!rollerElement) return undefined;
+    const roller = rollerElement;
 
-    const footer = document.querySelector<HTMLElement>(".cs-animated-footer");
-    if (!footer) return undefined;
-
-    const footerElement = footer;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
     let settleTimer: number | null = null;
+
+    function setProgress(progress: number) {
+      const clampedProgress = Math.min(Math.max(progress, 0), 1);
+      const opacity = Math.min(Math.max((clampedProgress - 0.08) * 2.4, 0), 1);
+
+      roller.style.setProperty("--footer-reveal-progress", clampedProgress.toFixed(3));
+      roller.style.setProperty("--footer-reveal-opacity", opacity.toFixed(3));
+      roller.style.setProperty(
+        "--footer-reveal-y",
+        `${((1 - clampedProgress) * 18).toFixed(2)}px`,
+      );
+      roller.style.setProperty("--footer-mask-y", `${(clampedProgress * -100).toFixed(2)}%`);
+    }
 
     function updateReveal() {
       animationFrame = 0;
 
-      const rect = footerElement.getBoundingClientRect();
-      const revealDistance = Math.min(
-        Math.max(rect.height * 0.72, 260),
-        window.innerHeight * 0.78,
-      );
-      const visibleDistance = window.innerHeight - rect.top;
-      const progress = Math.min(Math.max(visibleDistance / revealDistance, 0), 1);
+      if (reducedMotionQuery.matches) {
+        setProgress(1);
+        return;
+      }
 
-      footerElement.dataset.revealArmed = "true";
-      footerElement.style.setProperty("--cs-footer-reveal", progress.toFixed(3));
-      footerElement.dataset.revealed = progress > 0.96 ? "true" : "false";
+      const rect = roller.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const revealDistance = Math.min(Math.max(rect.height, 260), viewportHeight * 0.92);
+      const visibleDistance = viewportHeight - rect.top;
+
+      setProgress(visibleDistance / revealDistance);
     }
 
     function scheduleUpdate() {
@@ -39,21 +63,36 @@ export function FooterReveal() {
       animationFrame = window.requestAnimationFrame(updateReveal);
     }
 
-    scheduleUpdate();
-    settleTimer = window.setTimeout(scheduleUpdate, 500);
+    updateReveal();
+    roller.dataset.footerRevealReady = "true";
+    settleTimer = window.setTimeout(scheduleUpdate, 300);
+
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
+    reducedMotionQuery.addEventListener("change", scheduleUpdate);
 
     return () => {
       if (settleTimer !== null) window.clearTimeout(settleTimer);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
-      delete footerElement.dataset.revealArmed;
-      delete footerElement.dataset.revealed;
-      footerElement.style.removeProperty("--cs-footer-reveal");
+      reducedMotionQuery.removeEventListener("change", scheduleUpdate);
+      delete roller.dataset.footerRevealReady;
+      roller.style.removeProperty("--footer-reveal-progress");
+      roller.style.removeProperty("--footer-reveal-opacity");
+      roller.style.removeProperty("--footer-reveal-y");
+      roller.style.removeProperty("--footer-mask-y");
     };
   }, []);
 
-  return null;
+  return (
+    <div
+      ref={rollerRef}
+      className="footerRevealRoller mt-auto"
+      style={initialFooterRevealStyle}
+    >
+      <div className="footerRevealRoller__footer">{children}</div>
+      <span className="footerRevealRoller__mask" aria-hidden="true" />
+    </div>
+  );
 }

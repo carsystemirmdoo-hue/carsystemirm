@@ -1,12 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   getCarsystemBrandBySlug,
   getProductPublicStatus,
   getProgramGroupBySlug,
+  getRefinishPhaseBySlug,
   type CarsystemProduct,
 } from "@/lib/carsystem-data";
-import { getProductMotionStyle } from "@/components/product/productMotion";
+import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import styles from "./ProductDetailPage.module.css";
 
 export function RelatedProducts({
@@ -32,52 +32,37 @@ export function RelatedProducts({
         {products.map((product) => {
           const brand = getCarsystemBrandBySlug(product.brandSlug);
           const program = getProgramGroupBySlug(product.programSlug);
+          const phase = getRefinishPhaseBySlug(product.phaseSlug);
           const image = product.productImage ?? product.galleryImages[0] ?? null;
           const productHref = `/proizvodi/${product.slug}`;
           const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
           const packageSummary = product.packages.map((item) => item.label).join(" / ");
           const publicStatus = getProductPublicStatus(product);
-          const usesStructuredShot =
-            !image || image.src.includes("placeholder-product");
 
           return (
             <article
-              className={`${styles.relatedCard} cs-gloss-card`}
+              className={`${styles.relatedCard} cs-product-motion-card`}
               key={product.slug}
               data-cursor="card"
               data-motion-surface
               data-product-card-motion
-              style={getProductMotionStyle(product)}
             >
               <Link
-                className={`${styles.relatedImageFrame} cs-image-surface`}
+                className={styles.relatedImageFrame}
                 href={productHref}
+                aria-label={`Pogledaj proizvod ${product.name}`}
                 data-cursor="image"
-                data-motion-surface
-                data-product-image-motion
               >
-                {usesStructuredShot ? (
-                  <span className={styles.relatedShot}>
-                    <small>PRODUCT SHOT</small>
-                    <strong>{brand?.name ?? "Carsystem"}</strong>
-                    <span>{product.name}</span>
-                    <em>studio · seamless grey</em>
-                  </span>
-                ) : image ? (
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(min-width: 1180px) 22vw, (min-width: 768px) 33vw, 88vw"
-                    className={styles.relatedImage}
-                  />
-                ) : (
-                  <span className={styles.thumbnailFallback}>Proizvod</span>
-                )}
+                <ProductVisualSurface
+                  brandName={brand?.name ?? "Carsystem"}
+                  image={image}
+                  product={product}
+                  sizes="(min-width: 1180px) 22vw, (min-width: 768px) 33vw, 88vw"
+                />
               </Link>
               <div className={styles.relatedBody}>
                 <span className={styles.relatedMeta}>
-                  {[brand?.name, program?.shortName].filter(Boolean).join(" / ")}
+                  {[brand?.name, program?.shortName, phase?.name].filter(Boolean).join(" / ")}
                 </span>
                 <h3 className={styles.relatedName}>
                   <Link href={productHref}>{product.name}</Link>

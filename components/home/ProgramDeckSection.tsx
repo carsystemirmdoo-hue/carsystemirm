@@ -24,7 +24,7 @@ const programCategories: ProgramCategory[] = [
     number: "01",
     title: "Boje i lakovi",
     description:
-      "Profesionalni sistemi bojenja, bazne boje, pigmenti i bezbojni lakovi za završni sloj visokog kvaliteta.",
+      "Sistemi bojenja, bazne boje, pigmenti i bezbojni lakovi za kontrolisan završni sloj.",
     logos: ["rm", "baslac", "norbin"],
     hints: ["Bazne boje i pigmenti", "Bezbojni lakovi", "Sistemi bojenja", "Razređivači"],
   },
@@ -40,7 +40,7 @@ const programCategories: ProgramCategory[] = [
     id: "pistolji-i-oprema",
     number: "03",
     title: "Pištolji i oprema",
-    description: "Profesionalna oprema, pištolji i pribor za precizan rad u radionici.",
+    description: "Pištolji, pribor i radionička oprema za precizan nanos i pouzdan rad.",
     logos: ["sata", "carsystem", "autofit"],
     hints: ["Pištolji", "Oprema", "Pribor", "Potrošni delovi"],
   },
@@ -48,7 +48,7 @@ const programCategories: ProgramCategory[] = [
     id: "poliranje",
     number: "04",
     title: "Poliranje",
-    description: "Rešenja za završnu obradu, sjaj, korekciju površine i profesionalno poliranje.",
+    description: "Rešenja za korekciju površine, završni sjaj i profesionalnu doradu.",
     logos: ["rupes", "carsystem"],
     hints: ["Polirke", "Paste", "Sunđeri", "Završna obrada"],
   },
@@ -56,7 +56,7 @@ const programCategories: ProgramCategory[] = [
     id: "potrosni-materijal",
     number: "05",
     title: "Potrošni materijal",
-    description: "Sve što radionici treba za svakodnevni rad, zaštitu, pripremu i završnu obradu.",
+    description: "Radionički materijal za zaštitu, pripremu, nanos i svakodnevni tempo rada.",
     logos: ["carsystem", "cosmosLac", "befar"],
     hints: ["Trake", "Zaštita", "Čaše", "Krpe"],
   },
@@ -398,11 +398,11 @@ export function ProgramDeckSection() {
       <div className={styles.programDeckSticky}>
         <div className={styles.programDeckHeader}>
           <div>
-            <p className={styles.sectionKicker}>Brend ekosistem</p>
-            <h2 id="brands-title">Program za svaki korak refinish procesa.</h2>
+            <p className={styles.sectionKicker}>Program proizvoda</p>
+            <h2 id="brands-title">Sistemi za ceo refinish tok.</h2>
             <p>
-              Pet programskih celina pokrivaju ceo refinish tok, od sistema bojenja
-              do svakodnevnog potrošnog materijala u radionici.
+              Pet programskih celina povezuje boje, pripremu, opremu, poliranje
+              i potrošni materijal u pregledan katalog za radionice.
             </p>
           </div>
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { StoresPage } from "@/components/stores/StoresPage";
-import { getAllPartnerStores } from "@/lib/partner-stores";
+import { getPublicPartnerStores } from "@/lib/partner-stores";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -11,5 +11,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function StoresRoute() {
-  return <StoresPage stores={getAllPartnerStores()} />;
+  return <StoresPage stores={getPublicPartnerStores()} />;
 }

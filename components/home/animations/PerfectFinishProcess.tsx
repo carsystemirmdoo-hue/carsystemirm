@@ -1,12 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import styles from "../CarsystemHomePage.module.css";
-
-type Theme = "dark" | "light";
 
 type ProcessPhase = {
   title: string;
@@ -26,7 +23,7 @@ const processPhases: ProcessPhase[] = [
     process: "prep",
     eyebrow: "Faza 01",
     description:
-      "Čišćenje, odmašćivanje i brušenje površine do stabilne osnove za svaki naredni sloj.",
+      "Čišćenje, odmašćivanje i brušenje stvaraju stabilnu osnovu za svaki naredni sloj.",
     tags: ["Odmašćivači", "Abrazivi", "Maskiranje"],
     tint: "90 99 110",
     shiftX: "0%",
@@ -38,7 +35,7 @@ const processPhases: ProcessPhase[] = [
     process: "primer",
     eyebrow: "Faza 02",
     description:
-      "Prajmer, ispuna i izolacija daju površini ujednačenost, prianjanje i zaštitu.",
+      "Prajmeri, punila i izolatori daju površini ujednačenost, prianjanje i zaštitu.",
     tags: ["Prajmeri", "Punila", "Izolatori"],
     tint: "91 125 166",
     shiftX: "-1.2%",
@@ -50,7 +47,7 @@ const processPhases: ProcessPhase[] = [
     process: "paint",
     eyebrow: "Faza 03",
     description:
-      "Bazni sloj i precizna nijansa, uz mikseve boja i tehničku proveru za savršen ton.",
+      "Bazni sloj i precizna nijansa, uz miks sistem i tehničku proveru tona.",
     tags: ["Bazne boje", "Miks sistem", "Formule"],
     tint: "229 50 42",
     shiftX: "1.2%",
@@ -62,8 +59,8 @@ const processPhases: ProcessPhase[] = [
     process: "clearcoat",
     eyebrow: "Faza 04",
     description:
-      "Završni clear coat donosi dubinu, zaštitu i kontrolisan sjaj u profesionalnoj obradi.",
-    tags: ["Clear coat", "Učvršćivači", "Razređivači"],
+      "Bezbojni lak donosi dubinu, zaštitu i kontrolisan sjaj u završnoj obradi.",
+    tags: ["Bezbojni lak", "Učvršćivači", "Razređivači"],
     tint: "255 90 82",
     shiftX: "-0.8%",
     shiftY: "-1.1%",
@@ -74,7 +71,7 @@ const processPhases: ProcessPhase[] = [
     process: "polish",
     eyebrow: "Faza 05",
     description:
-      "Finalna dorada vraća površini visok sjaj, čist odsjaj i stabilan završni rezultat.",
+      "Finalna dorada uklanja sitne tragove i podiže završni sjaj površine.",
     tags: ["Paste", "Podloške", "Mašine"],
     tint: "200 210 220",
     shiftX: "0.6%",
@@ -87,7 +84,7 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
-export function PerfectFinishProcess({ theme }: { theme: Theme }) {
+export function PerfectFinishProcess() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const phaseRefs = useRef<Array<HTMLElement | null>>([]);
   const rafRef = useRef<number | null>(null);
@@ -171,11 +168,11 @@ export function PerfectFinishProcess({ theme }: { theme: Theme }) {
       aria-labelledby="process-title"
     >
       <div className={styles.sectionIntro}>
-        <p className={styles.sectionKicker}>Refinish proces, 5 faza</p>
-        <h2 id="process-title">Proces savršenog finiša.</h2>
+        <p className={styles.sectionKicker}>Refinish proces</p>
+        <h2 id="process-title">Od podloge do završnog sjaja.</h2>
         <p>
-          Vodimo profesionalce kroz svaki korak, sa pravim materijalima, opremom
-          i tehničkom podrškom u svakoj fazi.
+          Program prati logiku rada u lakirnici: priprema, podloga, boja, lak i
+          završna obrada, uz materijale i podršku za svaku fazu.
         </p>
       </div>
 
@@ -187,12 +184,8 @@ export function PerfectFinishProcess({ theme }: { theme: Theme }) {
             data-motion-surface
             data-process={phase.process}
           >
-            <Image
-              src={theme === "dark" ? "/images/home/hero-dark.png" : "/images/home/hero-light.png"}
-              alt="Profesionalni lakirer radi na braniku u komori"
-              fill
-              priority
-              sizes="(min-width: 900px) 42vw, 100vw"
+            <span
+              aria-hidden="true"
               className={styles.processImage}
               style={
                 {

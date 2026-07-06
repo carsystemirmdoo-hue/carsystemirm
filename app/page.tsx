@@ -6,7 +6,7 @@ import { jsonLd, organizationJsonLd, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Carsystem i R-M Inđija | Profesionalni refinish program",
   description:
-    "Profesionalni program za pripremu, farbanje, opremu i završnu obradu vozila kroz mrežu partnera u Srbiji.",
+    "Distribucija profesionalnih refinish materijala, boja, lakova, opreme i tehničke podrške kroz partnersku mrežu u Srbiji.",
   path: "/",
 });
 

@@ -5,9 +5,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { RouteTransitionPhase } from "@/components/motion/RouteTransitionOverlay";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 
-const COVER_DURATION = 480;
-const HOLD_DURATION = 110;
-const REVEAL_DURATION = 590;
+const COVER_DURATION = 420;
+const HOLD_DURATION = 80;
+const REVEAL_DURATION = 460;
 const REDUCED_DURATION = 120;
 const ROUTE_FALLBACK_DURATION = 1600;
 
@@ -33,6 +33,7 @@ export function useRouteTransition() {
   const transitioningRef = useRef(false);
   const transitionTokenRef = useRef(0);
   const timersRef = useRef<number[]>([]);
+  const entryFrameRef = useRef<number | null>(null);
   const [phase, setPhase] = useState<RouteTransitionPhase>("idle");
 
   const clearTimers = useCallback(() => {
@@ -185,7 +186,17 @@ export function useRouteTransition() {
     };
   }, [router, startTransition]);
 
-  useEffect(() => clearTimers, [clearTimers]);
+  useEffect(
+    () => () => {
+      clearTimers();
+
+      if (entryFrameRef.current !== null) {
+        window.cancelAnimationFrame(entryFrameRef.current);
+        entryFrameRef.current = null;
+      }
+    },
+    [clearTimers],
+  );
 
   return {
     phase,

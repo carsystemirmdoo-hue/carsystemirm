@@ -550,7 +550,7 @@
   display: inline-flex;
   border: 1px solid var(--header-red);
   background: var(--header-red);
-  color: oklch(0.98 0.006 255);
+  color: #fff !important;
 }
 
 .secondaryCta {
@@ -843,7 +843,7 @@
 .mobilePrimary {
   border: 1px solid var(--header-red);
   background: var(--header-red);
-  color: oklch(0.98 0.006 255);
+  color: #fff !important;
 }
 
 .mobileSecondary {

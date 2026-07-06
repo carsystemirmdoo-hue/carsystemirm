@@ -59,7 +59,7 @@
   border: 1px solid color-mix(in oklch, var(--split-accent), transparent 8%);
   border-radius: 13px;
   background: var(--split-accent);
-  color: oklch(0.985 0.004 250);
+  color: #fff !important;
   padding: 14px 18px;
   box-shadow: 0 14px 32px color-mix(in oklch, var(--split-accent), transparent 70%);
 }

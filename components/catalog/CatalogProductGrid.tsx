@@ -65,7 +65,10 @@ export function CatalogProductGrid({
       ) : (
         <div className={styles.emptyState}>
           <p className={styles.kicker}>Nema rezultata</p>
-          <h3>Nema proizvoda za izabrane filtere.</h3>
+          <h3>Za izabranu kombinaciju filtera trenutno nema proizvoda.</h3>
+          <p className={styles.emptyStateHint}>
+            Promenite filtere ili pošaljite upit našem timu za materijal koji vam treba.
+          </p>
           <button
             className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
             type="button"

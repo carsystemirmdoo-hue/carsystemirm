@@ -1,6 +1,12 @@
 "use client";
 
-export type RouteTransitionPhase = "idle" | "covering" | "covered" | "revealing" | "fade";
+export type RouteTransitionPhase =
+  | "idle"
+  | "entry"
+  | "covering"
+  | "covered"
+  | "revealing"
+  | "fade";
 
 export function RouteTransitionOverlay({
   phase,

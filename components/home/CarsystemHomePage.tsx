@@ -8,6 +8,9 @@ import {
   useState,
 } from "react";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
+import { CounterUp } from "@/components/ui/CounterUp";
+import { CompanyLocationMap } from "@/components/map/CompanyLocationMap";
+import { PartnerMap } from "@/components/stores/PartnerMap";
 import {
   BrandLogoPlate,
   brandLogos,
@@ -18,17 +21,24 @@ import { HomeSectionRail } from "./HomeSectionRail";
 import { ProcessSection } from "./ProcessSection";
 import { ProgramDeckSection } from "./ProgramDeckSection";
 import { companyContact } from "@/lib/company-contact";
-import { partnerStores } from "@/lib/partner-stores";
+import { findNearestPartnerStore } from "@/lib/nearest-store";
+import {
+  getPartnerCityLabel,
+  getPartnerLocationStats,
+  getPublicPartnerStores,
+} from "@/lib/partner-stores";
 import {
   getCityDisplayEntries,
   type CityDisplayEntry,
 } from "@/components/stores/store-locator-display";
 import styles from "./CarsystemHomePage.module.css";
 
-type Theme = "dark" | "light";
-
-const cityEntries = getCityDisplayEntries(partnerStores);
-const defaultCity = cityEntries[0]?.city ?? "Inđija";
+const publicPartnerStores = getPublicPartnerStores();
+const cityEntries = getCityDisplayEntries(publicPartnerStores);
+const defaultCityEntry = cityEntries[0];
+const defaultCity = defaultCityEntry?.city ?? "";
+const locationStats = getPartnerLocationStats(publicPartnerStores);
+const homeVisibleStoreIds = new Set(publicPartnerStores.map((store) => store.id));
 
 const trustBrandLinks: Partial<Record<BrandKey, string>> = {
   rm: "/brendovi/rm",
@@ -44,31 +54,31 @@ const trustBrandLinks: Partial<Record<BrandKey, string>> = {
 const educationItems = [
   {
     category: "Priprema",
-    title: "Priprema površine bez grešaka",
+    title: "Priprema površine pre prajmera",
     readTime: "4 min",
     slug: "priprema-povrsine",
   },
   {
     category: "Boje",
-    title: "Kako izabrati pravi lak",
+    title: "Izbor laka za završni sloj",
     readTime: "5 min",
     slug: "izbor-laka",
   },
   {
     category: "Poliranje",
-    title: "Poliranje do visokog sjaja",
+    title: "Korekcija i završni sjaj",
     readTime: "4 min",
     slug: "poliranje-visoki-sjaj",
   },
   {
     category: "Problemi",
-    title: "Najčešće greške u farbanju",
+    title: "Greške koje narušavaju finiš",
     readTime: "6 min",
     slug: "greske-u-farbanju",
   },
   {
     category: "Proces",
-    title: "Redosled rada od podloge do završnog sloja",
+    title: "Redosled rada kroz refinish proces",
     readTime: "7 min",
     slug: "redosled-refinish-procesa",
   },
@@ -83,11 +93,18 @@ function IconLocation() {
   );
 }
 
+function formatDistanceKm(distanceKm: number) {
+  return `${Math.max(1, Math.round(distanceKm))} km`;
+}
+
 export function CarsystemHomePage() {
-  const [theme, setTheme] = useState<Theme>("dark");
   const [selectedCity, setSelectedCity] = useState(defaultCity);
+  const [selectedMapStoreId, setSelectedMapStoreId] = useState(defaultCityEntry?.id ?? "");
+  const [networkMapFailed, setNetworkMapFailed] = useState(false);
   const [locatorStatus, setLocatorStatus] = useState(
-    "Ručno izaberi grad ili dozvoli lokaciju.",
+    cityEntries.length > 0
+      ? "Izaberite grad ili koristite lokaciju za najbližu dostupnu tačku u mreži."
+      : "Potvrđene javne lokacije još nisu unete u lokator.",
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
 
@@ -95,24 +112,6 @@ export function CarsystemHomePage() {
     () => cityEntries.find((entry) => entry.city === selectedCity) ?? cityEntries[0],
     [selectedCity],
   );
-
-  // The hero image and PerfectFinishProcess canvas need the theme as a JS
-  // value, so mirror the global .dark class (the single source of truth).
-  useEffect(() => {
-    function syncTheme() {
-      setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
-    }
-
-    syncTheme();
-
-    const observer = new MutationObserver(syncTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     function updateMobileLocator() {
@@ -129,23 +128,67 @@ export function CarsystemHomePage() {
     };
   }, []);
 
-  function handleLocationRequest() {
-    if (!("geolocation" in navigator)) {
-      setLocatorStatus("Lokacija nije dostupna u ovom browseru. Izaberi grad ručno.");
+  function handleCityChange(city: string) {
+    if (!city) {
+      setSelectedCity("");
+      setLocatorStatus("Potvrđene javne lokacije još nisu unete u lokator.");
       return;
     }
 
-    setLocatorStatus("Tražimo najbližu prodavnicu...");
+    setSelectedCity(city);
+    setSelectedMapStoreId(cityEntries.find((entry) => entry.city === city)?.id ?? "");
+    setLocatorStatus(`Prikazana je partnerska tačka za grad ${city}.`);
+  }
+
+  function handleMapStoreSelect(storeId: string) {
+    const store = publicPartnerStores.find((item) => item.id === storeId);
+    if (!store) return;
+
+    const city = getPartnerCityLabel(store);
+    setSelectedCity(city);
+    setSelectedMapStoreId(store.id);
+    setLocatorStatus(`Prikazana je partnerska lokacija: ${store.name}, ${city}.`);
+  }
+
+  function handleLocationRequest() {
+    if (publicPartnerStores.length === 0) {
+      setLocatorStatus("Nema potvrđenih javnih lokacija za poređenje udaljenosti.");
+      return;
+    }
+
+    if (!("geolocation" in navigator)) {
+      setLocatorStatus("Lokacija nije dostupna u ovom pregledaču. Izaberite grad ručno.");
+      return;
+    }
+
+    setLocatorStatus("Tražimo najbližu dostupnu tačku u partnerskoj mreži...");
 
     navigator.geolocation.getCurrentPosition(
-      () => {
-        setSelectedCity(defaultCity);
-        setLocatorStatus("Lokacija je aktivirana. Prikazana je preporučena lokacija za upit.");
+      (position) => {
+        const nearest = findNearestPartnerStore(publicPartnerStores, {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+
+        if (!nearest) {
+          setLocatorStatus(
+            "Trenutno ne možemo da uporedimo lokacije. Izaberite grad ručno iz liste.",
+          );
+          return;
+        }
+
+        setSelectedCity(getPartnerCityLabel(nearest.store));
+        setSelectedMapStoreId(nearest.store.id);
+        setLocatorStatus(
+          `Najbliža dostupna tačka: ${nearest.store.city}, oko ${formatDistanceKm(
+            nearest.distanceKm,
+          )}. Dostupnost proizvoda potvrđuje se kroz upit.`,
+        );
       },
       () => {
-        setLocatorStatus("Lokacija nije odobrena. Izaberi grad ručno.");
+        setLocatorStatus("Lokacija nije odobrena. Izaberite grad ručno iz liste.");
       },
-      { enableHighAccuracy: false, timeout: 7000, maximumAge: 300000 },
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 },
     );
   }
 
@@ -154,14 +197,7 @@ export function CarsystemHomePage() {
       <HomeSectionRail />
       <section className={styles.hero} aria-labelledby="homepage-title">
         <div className={styles.heroMedia} aria-hidden="true">
-          <Image
-            src={theme === "dark" ? "/images/home/hero-dark.png" : "/images/home/hero-light.png"}
-            alt=""
-            fill
-            priority
-            sizes="(min-width: 900px) 68vw, 100vw"
-            className={styles.heroImage}
-          />
+          <span className={styles.heroImage} />
           <span className={styles.mistOne} />
           <span className={styles.mistTwo} />
           <span className={styles.mistThree} />
@@ -170,7 +206,7 @@ export function CarsystemHomePage() {
 
         <div className={styles.processBadge}>
           <span className={styles.liveDot} />
-          Refinish proces
+          Refinish tok
           <span className={styles.badgeBars} aria-hidden="true">
             <span />
             <span />
@@ -181,17 +217,17 @@ export function CarsystemHomePage() {
 
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
-            <p className={styles.kicker}>Profesionalni refinish sistem, Srbija</p>
+            <p className={styles.kicker}>Carsystem i R-M Inđija, Srbija</p>
             <h1 id="homepage-title" className={styles.heroTitle}>
-              Tehnologija.
+              Profesionalni
               <br />
-              Kvalitet.
+              refinish program
               <br />
-              <span>Poverenje.</span>
+              <span>za siguran rezultat.</span>
             </h1>
             <p className={styles.heroIntro}>
-              Carsystem i R-M Inđija povezuje profesionalne refinish brendove,
-              katalog proizvoda, tehničku podršku i partnersku mrežu prodavnica.
+              Distribucija boja, lakova, pripremnih materijala i opreme za
+              lakirnice, uz tehničku podršku i partnersku mrežu u Srbiji i regionu.
             </p>
             <div className={styles.ctaRow}>
               <a
@@ -204,23 +240,23 @@ export function CarsystemHomePage() {
                 <span className={styles.buttonIcon}>
                   <IconLocation />
                 </span>
-                <span>Pronađi najbližu prodavnicu</span>
+                <span>Pronađite prodavnicu</span>
               </a>
               <a className={`${styles.secondaryCta} cs-interactive-surface`} href="/katalog" data-cursor="button" data-motion-surface>
-                Pregledaj katalog
+                Pregledajte katalog
               </a>
               <a className={`${styles.textCta} cs-link-reveal`} href="/kontakt?tema=b2b" data-cursor="link">
-                B2B saradnja
+                Upit za saradnju
               </a>
             </div>
             <p className={styles.proofLine}>
               <span />
-              Stručna tehnička podrška i mešanje boja po formuli proizvođača.
+              Nijansiranje po formuli proizvođača i podrška pri izboru sistema.
             </p>
             <div className={styles.heroChips} aria-label="Glavne mogućnosti">
-              <span>Brendovi u ponudi</span>
-              <span>Partner lokator</span>
-              <span>B2B spremno</span>
+              <span>Boje i lakovi</span>
+              <span>Partnerska mreža</span>
+              <span>Tehnička podrška</span>
             </div>
           </div>
         </div>
@@ -229,7 +265,7 @@ export function CarsystemHomePage() {
           selectedStore={selectedStore}
           selectedCity={selectedCity}
           locatorStatus={locatorStatus}
-          onCityChange={setSelectedCity}
+          onCityChange={handleCityChange}
           onLocationRequest={handleLocationRequest}
         />
       </section>
@@ -244,9 +280,11 @@ export function CarsystemHomePage() {
           <IconLocation />
         </span>
         <span>
-          <strong>Pronađi najbližu prodavnicu</strong>
+          <strong>Prodavnice u mreži</strong>
           <small>
-            {selectedStore.city} · {selectedStore.region}
+            {selectedStore
+              ? `${selectedStore.city} · ${selectedStore.region}`
+              : "Nema potvrđenih javnih lokacija"}
           </small>
         </span>
       </a>
@@ -254,7 +292,7 @@ export function CarsystemHomePage() {
       <section className={styles.trustStrip} aria-labelledby="brand-strip-title">
         <div className={styles.trustInner}>
           <p id="brand-strip-title" className={styles.trustLabel}>
-            Brendovi u ponudi
+            Programski brendovi
           </p>
           <div className={styles.brandRail} aria-label="Brendovi">
             {trustBrandKeys.map((brandKey) => {
@@ -283,41 +321,58 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <ProcessSection theme={theme} />
+      <ProcessSection />
 
       <section className={styles.sectionAlt} aria-labelledby="network-title">
         <div className={styles.sectionHeader}>
           <div>
-            <p className={styles.sectionKicker}>Partnerska mreža, Srbija</p>
-            <h2 id="network-title">Pronađi prodavnicu u svom regionu.</h2>
+            <p className={styles.sectionKicker}>Partnerska mreža, Srbija i region</p>
+            <h2 id="network-title">Prodavnice i podrška za vaš region.</h2>
             <p>
-              Lokator je prva tačka javnog sajta: korisnik bira grad, zatim šalje
-              upit ili traži najbližu partnersku prodavnicu.
+              Izaberite grad ili koristite lokaciju da brzo dođete do najbliže
+              dostupne partnerske tačke. Za dostupnost proizvoda i tehnički
+              savet, upit ide Carsystem i R-M timu.
             </p>
           </div>
           <div className={styles.statPills}>
-            <span>Lokalno rutiranje</span>
-            <span>Ručni fallback</span>
+            <span>
+              <strong>
+                <CounterUp value={locationStats.locationCount} />
+              </strong>
+              <small>Lokacija</small>
+            </span>
+            <span>
+              <strong>
+                <CounterUp value={locationStats.cityCount} />
+              </strong>
+              <small>Gradova</small>
+            </span>
+            <span>
+              <strong>
+                <CounterUp value={locationStats.prodajnoMestoCount} />
+              </strong>
+              <small>Prodajnih mesta</small>
+            </span>
           </div>
         </div>
 
         <div className={styles.networkGrid}>
           <div className={styles.locatorPanel}>
             <label className={styles.fieldLabel} htmlFor="city-select">
-              Izaberi grad ili region
+              Grad ili region
             </label>
             <select
               id="city-select"
               value={selectedCity}
-              onChange={(event) => {
-                setSelectedCity(event.target.value);
-                setLocatorStatus("Prikazan je rezultat za izabrani grad.");
-              }}
+              onChange={(event) => handleCityChange(event.target.value)}
               className={styles.citySelect}
+              disabled={cityEntries.length === 0}
             >
-              {cityEntries.map((entry) => (
-                <option key={entry.city}>{entry.city}</option>
-              ))}
+              {cityEntries.length > 0 ? (
+                cityEntries.map((entry) => <option key={entry.city}>{entry.city}</option>)
+              ) : (
+                <option value="">Nema potvrđenih lokacija</option>
+              )}
             </select>
             <button
               type="button"
@@ -330,36 +385,39 @@ export function CarsystemHomePage() {
               <span className={styles.buttonIcon}>
                 <IconLocation />
               </span>
-              <span>Dozvoli lokaciju</span>
+              <span>Koristi moju lokaciju</span>
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreview store={selectedStore} />
           </div>
 
           <div className={styles.mapPanel} aria-label="Mapa partnerske mreže">
-            <div className={styles.mapGrid} />
-            <span className={styles.serbiaMapShape} aria-hidden="true" />
-            <svg className={styles.mapLines} viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M50 24 L40 40 L62 38 L48 58 L70 56 L36 70" />
-            </svg>
-            {[
-              ["Inđija", 50, 24, true],
-              ["Beograd", 40, 40, false],
-              ["Novi Sad", 62, 38, false],
-              ["Kragujevac", 48, 58, false],
-              ["Niš", 70, 56, false],
-              ["Subotica", 36, 70, false],
-            ].map(([city, left, top, active]) => (
-              <span
-                key={String(city)}
-                className={`${styles.mapPin} ${active ? styles.mapPinActive : ""}`}
-                style={{ left: `${left}%`, top: `${top}%` }}
-              >
-                <i />
-                <b>{city}</b>
-              </span>
-            ))}
-            <p>Mapa je pripremljena za OpenStreetMap/Leaflet integraciju.</p>
+            {publicPartnerStores.length > 0 && !networkMapFailed ? (
+              <PartnerMap
+                badgeLabel="Partnerska mreža"
+                className={styles.homeNetworkMapCanvas}
+                hoveredId=""
+                onError={() => setNetworkMapFailed(true)}
+                onReady={() => setNetworkMapFailed(false)}
+                onSelect={handleMapStoreSelect}
+                selectedId={selectedMapStoreId}
+                stores={publicPartnerStores}
+                visibleIds={homeVisibleStoreIds}
+              />
+            ) : (
+              <div className={styles.homeMapFallback}>
+                <strong>
+                  {publicPartnerStores.length > 0
+                    ? "Mapa trenutno nije dostupna."
+                    : "Mapa čeka potvrđene javne lokacije."}
+                </strong>
+                <span>
+                  {publicPartnerStores.length > 0
+                    ? "Partnerska lista ostaje dostupna na stranici prodavnica."
+                    : "Demo i nepotpuni zapisi se ne prikazuju javno."}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -369,15 +427,15 @@ export function CarsystemHomePage() {
       <section className={styles.section} aria-labelledby="support-title">
         <div className={styles.supportBand}>
           <div className={styles.supportStatement}>
-            <p className={styles.sectionKicker}>Tehnička podrška, mikseri boja</p>
-            <h2 id="support-title">Podrška koja rešava problem, ne samo prodaje proizvod.</h2>
+            <p className={styles.sectionKicker}>Tehnička podrška i mikseri boja</p>
+            <h2 id="support-title">Pravi izbor proizvoda počinje dobrim savetom.</h2>
             <p className={styles.sectionLead}>
-              Mešanje i nijansiranje po formuli proizvođača, savetovanje i
-              komercijalna podrška, uz tim koji razume rad u lakirnici.
+              Nijansiranje po formuli proizvođača, savetovanje za pripremu i
+              lakiranje, kao i komercijalna podrška za radionice i partnere.
             </p>
             <SplitContactCta
               inquiryHref="/kontakt?tema=tehnicka-podrska"
-              inquiryLabel="Pošalji upit podršci"
+              inquiryLabel="Pošaljite upit podršci"
             />
           </div>
 
@@ -397,9 +455,9 @@ export function CarsystemHomePage() {
 
           <div className={styles.supportServiceGrid}>
             {[
-              ["Mikseri boja", "Precizno nijansiranje po formuli proizvođača."],
-              ["Tehnička podrška", "Savetovanje za podlogu, lakiranje i završnu obradu."],
-              ["Komercijalni tim", "Rutiranje upita prema najbližoj prodavnici i regionu."],
+              ["Mikseri boja", "Nijansiranje prema formuli proizvođača i sistemu koji se koristi."],
+              ["Tehnička podrška", "Smernice za podlogu, lakiranje i završnu obradu."],
+              ["Komercijalni tim", "Usmeravanje upita ka odgovarajućoj prodavnici ili regionu."],
             ].map(([title, text]) => (
               <article
                 className="cs-gloss-card"
@@ -421,14 +479,14 @@ export function CarsystemHomePage() {
           <div className={styles.educationIntro}>
             <p className={styles.sectionKicker}>Edukacija i znanje</p>
             <h2 id="education-title">
-              Znanje koje pravi razliku u radionici.
+              Znanje za stabilniji rad u lakirnici.
             </h2>
             <p>
-              Kratak, tehnički indeks tema za pripremu upita, razgovor sa
-              podrškom i stabilniji radni proces.
+              Kratke teme za izbor materijala, pripremu upita i razgovor sa
+              tehničkom podrškom.
             </p>
             <Link className={styles.textLink} href="/kontakt?tema=tehnicka-podrska">
-              Sve teme
+              Zatraži tehnički savet
             </Link>
           </div>
           <div className={styles.educationIndexRows}>
@@ -462,30 +520,25 @@ export function CarsystemHomePage() {
               </span>
               <span>
                 <b>Upiti</b>
-                Veleprodaja, tehnička podrška i partnerska mreža
+                Veleprodaja, tehnička podrška i partnerska mreža.
               </span>
               <span>
                 <b>Kontakt</b>
                 <a href={companyContact.phoneHref}>{companyContact.phone}</a>
-                <small>ili pošalji upit za najbližu prodavnicu i podršku</small>
+                <small>ili pošaljite upit za prodavnicu, proizvode ili podršku</small>
               </span>
             </div>
             <div className={styles.ctaRow}>
               <a className={`${styles.primaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/kontakt" data-cursor="button" data-motion-surface data-motion="theme-wipe">
-                <span>Kontaktiraj veleprodaju</span>
+                <span>Kontaktirajte veleprodaju</span>
               </a>
               <a className={`${styles.secondaryCta} cs-interactive-surface`} href="/prodavnice" data-cursor="button" data-motion-surface>
-                Sve lokacije
+                Prodavnice u mreži
               </a>
             </div>
           </div>
           <div className={styles.contactMap}>
-            <div className={styles.mapGrid} />
-            <span className={styles.serbiaMapShape} aria-hidden="true" />
-            <span className={styles.centerPin}>
-              <i />
-              Centrala, Inđija
-            </span>
+            <CompanyLocationMap className={styles.contactMapCanvas} />
           </div>
         </div>
       </section>
@@ -502,21 +555,21 @@ export function CarsystemHomePage() {
         <div className={styles.finalContent}>
           <p>Carsystem i R-M, Inđija</p>
           <h2 id="final-cta-title">
-            Pronađite najbližu prodavnicu ili pripremite upit za saradnju.
+            Pronađite prodavnicu ili pripremite upit za saradnju.
           </h2>
           <span>
-            Profesionalni refinish program, tehnička podrška i partnerska mreža,
-            sve na jednom mestu.
+            Profesionalni refinish program, tehnička podrška i partnerska mreža
+            za radionice i servise.
           </span>
           <div className={styles.finalActions}>
             <a className={`${styles.primaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/prodavnice" data-cursor="button" data-motion-surface data-motion="theme-wipe">
-              <span>Pronađi prodavnicu</span>
+              <span>Prodavnice u mreži</span>
             </a>
             <a className={`${styles.secondaryOnDark} cs-interactive-surface`} href="/katalog" data-cursor="button" data-motion-surface>
-              Pregledaj katalog
+              Katalog proizvoda
             </a>
             <a className={`${styles.secondaryOnDark} cs-interactive-surface`} href="/kontakt?tema=b2b" data-cursor="button" data-motion-surface>
-              B2B saradnja
+              Upit za saradnju
             </a>
           </div>
         </div>
@@ -533,7 +586,7 @@ function LocatorCard({
   onCityChange,
   onLocationRequest,
 }: {
-  selectedStore: CityDisplayEntry;
+  selectedStore?: CityDisplayEntry;
   selectedCity: string;
   locatorStatus: string;
   onCityChange: (city: string) => void;
@@ -545,7 +598,7 @@ function LocatorCard({
         <span className={styles.buttonIcon}>
           <IconLocation />
         </span>
-        Pronađi najbližu prodavnicu
+        Pronađite prodavnicu u mreži
         <small>Mreža</small>
       </header>
       <div className={styles.locatorBody}>
@@ -560,17 +613,20 @@ function LocatorCard({
           <span className={styles.buttonIcon}>
             <IconLocation />
           </span>
-          <span>Dozvoli lokaciju</span>
+          <span>Koristi moju lokaciju</span>
         </button>
         <select
           value={selectedCity}
           onChange={(event) => onCityChange(event.target.value)}
-          aria-label="Izaberi grad"
+          aria-label="Izaberite grad"
           className={styles.citySelect}
+          disabled={cityEntries.length === 0}
         >
-          {cityEntries.map((entry) => (
-            <option key={entry.city}>{entry.city}</option>
-          ))}
+          {cityEntries.length > 0 ? (
+            cityEntries.map((entry) => <option key={entry.city}>{entry.city}</option>)
+          ) : (
+            <option value="">Nema potvrđenih lokacija</option>
+          )}
         </select>
         <StorePreview store={selectedStore} />
         <p className={styles.locatorStatus}>{locatorStatus}</p>
@@ -579,7 +635,23 @@ function LocatorCard({
   );
 }
 
-function StorePreview({ store }: { store: CityDisplayEntry }) {
+function StorePreview({ store }: { store?: CityDisplayEntry }) {
+  if (!store) {
+    return (
+      <article className={styles.storePreview}>
+        <span className={styles.availableDot} />
+        <div>
+          <header>
+            <strong>Nema javnih lokacija</strong>
+            <small>U pripremi</small>
+          </header>
+          <p>Potvrđene prodajne lokacije biće prikazane tek kada podaci budu uneti.</p>
+          <span>Bez demo adresa u public lokatoru</span>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article className={styles.storePreview}>
       <span className={styles.availableDot} />

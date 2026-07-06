@@ -156,7 +156,7 @@ function ProgramCard({
           href={`/program/${category.id}`}
           tabIndex={isActive ? 0 : -1}
         >
-          Pogledaj program
+          Pogledajte program
         </a>
       </div>
     </article>
@@ -245,7 +245,7 @@ export function BrandPreviewPanel({
         <div className={styles.programPreviewBrand}>
           <BrandLogoPlate brandKey={brandKey} />
           <div>
-            <small>Brend program</small>
+            <small>Program brenda</small>
             <strong>{brand.name}</strong>
           </div>
         </div>
@@ -275,7 +275,7 @@ export function BrandPreviewPanel({
         </div>
 
         <Link className={styles.programPreviewCta} href={brandHref}>
-          Pogledaj katalog brenda
+          Pogledajte katalog brenda
         </Link>
       </div>
     </div>

@@ -245,6 +245,13 @@
   box-shadow: 0 18px 44px oklch(0.04 0.01 250 / 0.26);
 }
 
+.heroVisualSurface {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(350px, 36vw, 540px);
+  border-bottom: 0;
+}
+
 :global(.dark) .stage {
   background:
     linear-gradient(to right, oklch(0.92 0.008 250 / 0.08) 1px, transparent 1px),
@@ -352,6 +359,12 @@
   background:
     radial-gradient(circle at 50% 35%, oklch(0.78 0.03 250 / 0.42), transparent 7rem),
     var(--product-panel);
+}
+
+.thumbnailVisualSurface {
+  height: 100%;
+  min-height: 112px;
+  border-bottom: 0;
 }
 
 .thumbnail img {
@@ -537,7 +550,7 @@
 
 .primaryAction {
   background: var(--product-red);
-  color: oklch(0.985 0.004 250);
+  color: #fff !important;
 }
 
 .secondaryAction {
@@ -768,6 +781,84 @@
   background-size: 28px 28px, 28px 28px, auto;
 }
 
+.referenceDetailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.referenceCopyPanel,
+.referenceFactPanel {
+  border: 1px solid var(--product-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(to right, var(--product-reference-panel-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--product-reference-panel-grid) 1px, transparent 1px),
+    var(--product-panel);
+  background-size: 28px 28px, 28px 28px, auto;
+}
+
+.referenceCopyPanel {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 20px;
+}
+
+.referenceCopyPanel strong {
+  color: var(--product-ink);
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.referenceCopyPanel p {
+  margin: 0 0 12px;
+  color: var(--product-muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.referenceFactPanel {
+  display: grid;
+  overflow: hidden;
+  margin: 0;
+}
+
+.referenceFactPanel div {
+  display: grid;
+  grid-template-columns: minmax(108px, 0.42fr) minmax(0, 1fr);
+  border-bottom: 1px solid var(--product-border-soft);
+}
+
+.referenceFactPanel div:last-child {
+  border-bottom: 0;
+}
+
+.referenceFactPanel dt,
+.referenceFactPanel dd {
+  min-width: 0;
+  padding: 12px;
+}
+
+.referenceFactPanel dt {
+  border-right: 1px solid var(--product-border-soft);
+  color: var(--product-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.referenceFactPanel dd {
+  margin: 0;
+  color: var(--product-ink);
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
 .specRow {
   display: grid;
   grid-template-columns: minmax(112px, 0.34fr) minmax(0, 1fr);
@@ -937,6 +1028,77 @@
   font-weight: 850;
 }
 
+.processRail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(132px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0 4px;
+  scrollbar-width: thin;
+}
+
+.processRailLine {
+  position: absolute;
+  top: 28px;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: var(--product-border);
+}
+
+.processRailItem {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  justify-items: center;
+  gap: 9px;
+  color: var(--product-muted);
+  text-align: center;
+}
+
+.processRailNode {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--product-border);
+  border-radius: 999px;
+  background: var(--product-panel-strong);
+  color: var(--product-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.processRailItem strong {
+  color: currentColor;
+  font-size: 14px;
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.processRailItem small {
+  max-width: 22ch;
+  color: var(--product-faint);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.processRailItemActive {
+  color: var(--product-ink);
+}
+
+.processRailItemActive .processRailNode {
+  border-color: oklch(0.58 0.22 27 / 0.44);
+  background: var(--product-red);
+  color: oklch(0.985 0.004 250);
+  box-shadow: 0 0 0 7px oklch(0.58 0.22 27 / 0.16);
+}
+
 .processTrack {
   display: flex;
   gap: 10px;
@@ -1029,72 +1191,14 @@
   overflow: hidden;
   border-radius: 12px;
   transition:
-    transform 160ms ease,
     border-color 160ms ease,
-    box-shadow 160ms ease;
-}
-
-.relatedCard:hover {
-  transform: translateY(-2px);
-  border-color: oklch(0.58 0.22 27 / 0.36);
-  box-shadow: 0 16px 42px oklch(0.2 0.025 250 / 0.08);
+    background 160ms ease;
 }
 
 .relatedImageFrame {
   position: relative;
-  display: grid;
-  min-height: 178px;
+  display: block;
   overflow: hidden;
-  place-items: center;
-  border-bottom: 1px solid var(--product-border-soft);
-  background:
-    linear-gradient(to right, oklch(0.76 0.012 250 / 0.18) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.76 0.012 250 / 0.14) 1px, transparent 1px),
-    linear-gradient(145deg, var(--product-panel-strong), var(--product-panel));
-  background-size: 28px 28px, 28px 28px, auto;
-}
-
-.relatedImage {
-  object-fit: contain;
-  padding: 28px;
-}
-
-.relatedShot {
-  display: grid;
-  width: min(78%, 220px);
-  min-height: 126px;
-  place-items: center;
-  gap: 4px;
-  border: 1px solid var(--product-border-soft);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--product-panel) 86%, transparent);
-  padding: 16px;
-  text-align: center;
-}
-
-.relatedShot small,
-.relatedShot em {
-  color: var(--product-faint);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.relatedShot strong {
-  color: var(--product-ink);
-  font-size: 16px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.relatedShot span {
-  color: var(--product-muted);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.2;
 }
 
 .relatedBody {
@@ -1185,7 +1289,7 @@
   justify-content: center;
   border-radius: 10px;
   background: var(--product-red);
-  color: oklch(0.985 0.004 250);
+  color: #fff !important;
   padding: 11px 13px;
   font-size: 13px;
   font-weight: 900;
@@ -1298,7 +1402,7 @@
   min-height: 42px;
   border-radius: 12px;
   background: var(--product-red);
-  color: oklch(0.985 0.004 250);
+  color: #fff !important;
   padding: 12px 14px;
   font-size: 13px;
   font-weight: 900;
@@ -1427,6 +1531,7 @@
   }
 
   .metaGrid,
+  .referenceDetailGrid,
   .relatedGrid,
   .trustStrip {
     grid-template-columns: 1fr;
@@ -1460,6 +1565,15 @@
   }
 
   .specRow dt {
+    border-right: 0;
+    border-bottom: 1px solid var(--product-border-soft);
+  }
+
+  .referenceFactPanel div {
+    grid-template-columns: 1fr;
+  }
+
+  .referenceFactPanel dt {
     border-right: 0;
     border-bottom: 1px solid var(--product-border-soft);
   }
@@ -1525,7 +1639,6 @@
   .secondaryAction:hover,
   .tertiaryAction:hover,
   .documentAction:hover,
-  .relatedCard:hover,
   .relatedPrimaryAction:hover,
   .relatedDetailLink:hover {
     transform: none;

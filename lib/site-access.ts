@@ -29,7 +29,7 @@ export function getLocalSiteAccessPassword() {
 }
 
 export function isEnabled(value: string | undefined) {
-  return ["1", "true", "yes", "on"].includes(value?.toLowerCase() ?? "");
+  return ["1", "true", "yes", "on"].includes(value?.trim().toLowerCase() ?? "");
 }
 
 export async function createSiteAccessToken() {

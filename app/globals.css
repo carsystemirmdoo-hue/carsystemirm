@@ -371,14 +371,14 @@ body {
 
 .cs-theme-wipe-card {
   --wipe-bg: oklch(0.075 0.01 255);
-  --wipe-fg: oklch(0.98 0.006 250);
+  --wipe-fg: #fff;
   overflow: hidden;
   color: inherit;
 }
 
 .dark .cs-theme-wipe-card {
   --wipe-bg: oklch(0.07 0.01 255);
-  --wipe-fg: oklch(0.98 0.006 250);
+  --wipe-fg: #fff;
 }
 
 .cs-theme-wipe-card::after {
@@ -455,29 +455,10 @@ body {
 }
 
 .cs-product-motion-card {
-  --product-accent: var(--cs-orb-core);
-  --product-hover-bg: color-mix(in oklch, var(--product-accent), transparent 94%);
+  --product-visual-accent: var(--cs-orb-core);
   position: relative;
   isolation: isolate;
   overflow: hidden;
-}
-
-.cs-product-motion-card::after {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(180deg, transparent, color-mix(in oklch, var(--product-accent), transparent 94%), transparent),
-    radial-gradient(circle at var(--mx) var(--my), color-mix(in oklch, var(--product-accent), transparent 88%), transparent 48%);
-  content: "";
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.98);
-  transform-origin: center;
-  transition:
-    opacity 220ms ease,
-    transform 260ms var(--cs-ease-out);
 }
 
 .cs-product-motion-card > * {
@@ -486,83 +467,11 @@ body {
 }
 
 .cs-product-motion-card[data-pointer-active="true"],
-.cs-product-motion-card[data-product-hover-active="true"],
-.cs-product-motion-card:hover,
-.cs-product-motion-card:focus-within {
-  background: var(--product-hover-bg) !important;
-  border-color: color-mix(in oklch, var(--product-accent), transparent 68%) !important;
-}
-
-.cs-product-motion-card[data-hover-direction="top"]::after {
-  transform: scale(0.98);
-}
-
-.cs-product-motion-card[data-hover-direction="bottom"]::after {
-  transform: scale(0.98);
-}
-
-.cs-product-motion-card[data-hover-direction="side"]::after {
-  transform: scale(0.98);
-}
-
-.cs-product-motion-card[data-pointer-active="true"]::after,
-.cs-product-motion-card[data-product-hover-active="true"]::after,
-.cs-product-motion-card:hover::after,
-.cs-product-motion-card:focus-within::after {
-  opacity: 0.22;
-  transform: scale(1);
-}
-
-.cs-product-motion-card[data-hover-direction="side"][data-pointer-active="true"]::after,
-.cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"]::after {
-  transform: scale(1);
-}
-
-[data-product-image-motion] img,
-[data-product-image-motion] [class*="Shot"],
-[data-product-image-motion] [class*="Placeholder"] {
-  transition: transform 240ms var(--cs-ease-out);
-  will-change: transform;
-}
-
-.cs-product-motion-card[data-hover-direction="top"][data-pointer-active="true"] [data-product-image-motion] img,
-.cs-product-motion-card[data-hover-direction="top"][data-pointer-active="true"] [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card[data-hover-direction="top"][data-pointer-active="true"] [data-product-image-motion] [class*="Placeholder"],
-.cs-product-motion-card[data-hover-direction="top"][data-product-hover-active="true"] [data-product-image-motion] img,
-.cs-product-motion-card[data-hover-direction="top"][data-product-hover-active="true"] [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card[data-hover-direction="top"][data-product-hover-active="true"] [data-product-image-motion] [class*="Placeholder"] {
-  transform: scale(1.012);
-}
-
-.cs-product-motion-card[data-hover-direction="bottom"][data-pointer-active="true"] [data-product-image-motion] img,
-.cs-product-motion-card[data-hover-direction="bottom"][data-pointer-active="true"] [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card[data-hover-direction="bottom"][data-pointer-active="true"] [data-product-image-motion] [class*="Placeholder"],
-.cs-product-motion-card[data-hover-direction="bottom"][data-product-hover-active="true"] [data-product-image-motion] img,
-.cs-product-motion-card[data-hover-direction="bottom"][data-product-hover-active="true"] [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card[data-hover-direction="bottom"][data-product-hover-active="true"] [data-product-image-motion] [class*="Placeholder"] {
-  transform: scale(1.008);
-}
-
-.cs-product-motion-card[data-hover-direction="side"][data-pointer-active="true"] [data-product-image-motion] img,
-.cs-product-motion-card[data-hover-direction="side"][data-pointer-active="true"] [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card[data-hover-direction="side"][data-pointer-active="true"] [data-product-image-motion] [class*="Placeholder"],
-.cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"] [data-product-image-motion] img,
-.cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"] [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card[data-hover-direction="side"][data-product-hover-active="true"] [data-product-image-motion] [class*="Placeholder"] {
-  transform: scale(1.01);
-}
-
-.cs-product-motion-card:hover [data-product-image-motion] img,
-.cs-product-motion-card:hover [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card:hover [data-product-image-motion] [class*="Placeholder"],
-.cs-product-motion-card:focus-within [data-product-image-motion] img,
-.cs-product-motion-card:focus-within [data-product-image-motion] [class*="Shot"],
-.cs-product-motion-card:focus-within [data-product-image-motion] [class*="Placeholder"] {
-  transform: scale(1.012);
+.cs-product-motion-card.cs-gloss-card[data-pointer-active="true"] {
+  transform: none;
 }
 
 .cs-product-motion-card[data-pointer-active="true"] .cs-link-reveal,
-.cs-product-motion-card[data-product-hover-active="true"] .cs-link-reveal,
 .cs-product-motion-card:hover .cs-link-reveal,
 .cs-product-motion-card:focus-within .cs-link-reveal {
   background-size: 100% 1px;
@@ -573,10 +482,13 @@ body {
   --footer-reveal-opacity: 1;
   --footer-reveal-y: 0px;
   --footer-mask-y: -100%;
+  --footer-reveal-bg: color-mix(in oklch, var(--surface), var(--background) 20%);
+  --footer-reveal-edge: color-mix(in oklch, var(--accent), transparent 22%);
+  --footer-reveal-edge-shadow: color-mix(in oklch, var(--accent), transparent 76%);
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #050608;
+  background: var(--footer-reveal-bg);
 }
 
 .footerRevealRoller__footer {
@@ -594,9 +506,9 @@ body {
   background:
     linear-gradient(
       180deg,
-      rgba(5, 6, 8, 1) 0%,
-      rgba(5, 6, 8, 0.99) 60%,
-      rgba(5, 6, 8, 0.98) 100%
+      var(--footer-reveal-bg) 0%,
+      color-mix(in oklch, var(--footer-reveal-bg), transparent 1%) 60%,
+      color-mix(in oklch, var(--footer-reveal-bg), transparent 2%) 100%
     );
   pointer-events: none;
   transform: translate3d(0, var(--footer-mask-y), 0);
@@ -612,10 +524,10 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 45, 45, 0.78),
+    var(--footer-reveal-edge),
     transparent
   );
-  box-shadow: 0 0 30px rgba(255, 45, 45, 0.24);
+  box-shadow: 0 0 30px var(--footer-reveal-edge-shadow);
   content: "";
 }
 
@@ -783,6 +695,7 @@ a[data-cursor="link"]:focus-visible {
 
 .cs-route-transition[data-phase="covering"],
 .cs-route-transition[data-phase="covered"],
+.cs-route-transition[data-phase="entry"],
 .cs-route-transition[data-phase="revealing"],
 .cs-route-transition[data-phase="fade"] {
   opacity: 1;
@@ -795,25 +708,24 @@ a[data-cursor="link"]:focus-visible {
 .cs-route-transition-screen {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, oklch(0.09 0.008 255), oklch(0.045 0.006 255)),
-    oklch(0.055 0.006 255);
-  box-shadow: 0 1.4rem 4rem oklch(0.01 0.004 255 / 0.52);
+  background: var(--cs-transition-surface);
+  box-shadow: none;
   transform: translateY(-101%);
   will-change: transform;
 }
 
 .cs-route-transition[data-phase="covering"] .cs-route-transition-screen {
-  animation: cs-route-cover 480ms var(--cs-ease-wipe) forwards;
+  animation: cs-route-cover 420ms var(--cs-ease-wipe) forwards;
 }
 
 .cs-route-transition[data-phase="covered"] .cs-route-transition-screen,
+.cs-route-transition[data-phase="entry"] .cs-route-transition-screen,
 .cs-route-transition[data-phase="fade"] .cs-route-transition-screen {
   transform: translateY(0);
 }
 
 .cs-route-transition[data-phase="revealing"] .cs-route-transition-screen {
-  animation: cs-route-reveal 590ms var(--cs-ease-wipe) forwards;
+  animation: cs-route-reveal 460ms var(--cs-ease-wipe) forwards;
 }
 
 @keyframes cs-skeleton-sheen {
@@ -884,7 +796,6 @@ a[data-cursor="link"]:focus-visible {
   .cs-gloss-card::before,
   .cs-image-surface::before,
   .cs-image-surface::after,
-  .cs-product-motion-card::after,
   .cs-process-surface::before,
   .cs-process-surface::after {
     opacity: 0 !important;
@@ -899,9 +810,6 @@ a[data-cursor="link"]:focus-visible {
   .cs-magnetic-cta[data-pointer-active="true"],
   .cs-gloss-card[data-pointer-active="true"],
   .cs-product-motion-card[data-pointer-active="true"],
-  [data-product-image-motion] img,
-  [data-product-image-motion] [class*="Shot"],
-  [data-product-image-motion] [class*="Placeholder"],
   .cs-process-surface[data-pointer-active="true"] {
     transform: none;
   }

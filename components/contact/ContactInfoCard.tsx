@@ -1,62 +1,52 @@
-import Link from "next/link";
 import type { CompanyContact } from "@/lib/company-contact";
 import styles from "./ContactPage.module.css";
 
 export function ContactInfoCard({ contact }: { contact: CompanyContact }) {
+  const rows = [
+    {
+      label: "Telefon",
+      value: contact.phone,
+      href: contact.phoneHref,
+    },
+    {
+      label: "Email",
+      value: contact.email,
+      href: contact.emailHref,
+    },
+    {
+      label: "Lokacija",
+      value: contact.locationLabel,
+    },
+    {
+      label: "Radno vreme",
+      value: contact.workingHours,
+    },
+  ];
+
   return (
-    <section className={styles.infoCard} id="contact-info" aria-labelledby="company-card-title">
-      <p className={styles.sectionKicker}>Centrala</p>
-      <h2 id="company-card-title">{contact.name}</h2>
-      <p>{contact.partnerNetworkNote}</p>
-
-      <dl className={styles.infoList}>
-        <div>
-          <dt>Lokacija</dt>
-          <dd>{contact.locationLabel}</dd>
-        </div>
-        <div>
-          <dt>Telefon</dt>
-          <dd>
-            <a href={contact.phoneHref}>{contact.phone}</a>
-          </dd>
-        </div>
-        <div>
-          <dt>Email</dt>
-          <dd>
-            <a href={contact.emailHref}>{contact.email}</a>
-          </dd>
-        </div>
-        <div>
-          <dt>Radno vreme</dt>
-          <dd>{contact.workingHours}</dd>
-        </div>
-      </dl>
-
-      <div className={styles.infoActions}>
-        <a
-          className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
-          href={contact.phoneHref}
-          data-cursor="button"
-          data-motion-surface
-          data-motion="theme-wipe"
-        >
-          <span>Pozovi</span>
-        </a>
-        <a className={styles.secondaryButton} href={contact.emailHref}>
-          Pošalji email
-        </a>
-        <Link
-          className={`${styles.ghostButton} cs-magnetic-cta cs-theme-wipe-card`}
-          href="/prodavnice"
-          data-cursor="button"
-          data-motion-surface
-          data-motion="theme-wipe"
-        >
-          <span>Pronađi prodavnicu</span>
-        </Link>
+    <section className={styles.directory} id="contact-info" aria-labelledby="contact-directory-title">
+      <div>
+        <p className={styles.indexKicker}>02 · Direktan kontakt</p>
+        <h2 className="sr-only" id="contact-directory-title">
+          Direktan kontakt
+        </h2>
       </div>
 
-      <p className={styles.editableNote}>{contact.editableNote}</p>
+      <dl className={styles.directoryGrid}>
+        {rows.map((row) => {
+          const value = row.href ? <a href={row.href}>{row.value}</a> : row.value;
+
+          return (
+            <div className={styles.directoryRow} key={row.label}>
+              <dt>{row.label}</dt>
+              <dd>{value}</dd>
+              <span aria-hidden="true">{row.href ? "→" : ""}</span>
+            </div>
+          );
+        })}
+      </dl>
+
+      <p className={styles.directoryNote}>{contact.partnerNetworkNote}</p>
     </section>
   );
 }

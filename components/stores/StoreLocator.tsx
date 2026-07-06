@@ -1,20 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { StoreCard } from "@/components/stores/StoreCard";
-import { StoreFilters } from "@/components/stores/StoreFilters";
-import { StoreMap } from "@/components/stores/StoreMap";
-import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
+import { PartnerMap } from "@/components/stores/PartnerMap";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
-import type { PartnerStore } from "@/lib/partner-stores";
 import {
-  formatStoreCount,
-  getCityBadgeLabel,
-  getCityDisplayCount,
-  getCityDisplayLabel,
-  getCityPendingCount,
-  getDisplayNetworkTotal,
-} from "./store-locator-display";
+  getLocationTypeOptions,
+  getPartnerLocationStats,
+  getPartnerLocationTypeLabel,
+  hasPartnerLocationType,
+  type PartnerLocationType,
+  type PartnerStore,
+} from "@/lib/partner-stores";
 import styles from "./StoresPage.module.css";
 
 function normalize(value: string) {
@@ -24,169 +20,96 @@ function normalize(value: string) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function uniqueSorted(values: string[]) {
-  return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, "sr-Latn"));
+function telHref(phone: string) {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
 
-function getCityGroups(stores: PartnerStore[]) {
-  const groups = new Map<string, PartnerStore[]>();
+function routeHref(store: PartnerStore) {
+  if (store.coordinates) {
+    return `https://www.openstreetmap.org/?mlat=${store.coordinates.lat}&mlon=${store.coordinates.lng}#map=15/${store.coordinates.lat}/${store.coordinates.lng}`;
+  }
 
-  stores.forEach((store) => {
-    const cityStores = groups.get(store.city) ?? [];
-    cityStores.push(store);
-    groups.set(store.city, cityStores);
-  });
-
-  return Array.from(groups.entries())
-    .map(([groupCity, cityStores]) => {
-      const regions = uniqueSorted(cityStores.map((store) => store.region));
-      const displayCount = getCityDisplayCount(groupCity, cityStores.length);
-      const pendingCount = getCityPendingCount(groupCity, cityStores.length);
-
-      return {
-        badgeLabel: getCityBadgeLabel(groupCity, cityStores.length),
-        city: groupCity,
-        displayCount,
-        label: getCityDisplayLabel(groupCity),
-        pendingCount,
-        representative: cityStores.find((store) => store.featured) ?? cityStores[0],
-        regions,
-        stores: cityStores,
-      };
-    })
-    .sort((a, b) => a.city.localeCompare(b.city, "sr-Latn"));
+  const countryHint = store.region.includes("BiH") ? "Bosna i Hercegovina" : "Srbija";
+  const query = [store.name, store.address, store.city, countryHint].join(", ");
+  return `https://www.openstreetmap.org/search?query=${encodeURIComponent(query)}`;
 }
 
 export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
   const searchRef = useRef<HTMLInputElement>(null);
-  const cityGroupRefs = useRef<Map<string, HTMLElement>>(new Map());
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const initialStore = stores.find((store) => store.featured) ?? stores[0];
-  const [query, setQuery] = useState("");
-  const [region, setRegion] = useState("");
-  const [city, setCity] = useState("");
-  const [brandProgram, setBrandProgram] = useState("");
-  const [filtersOpen, setFiltersOpen] = useState(false);
-  const [mapVisible, setMapVisible] = useState(false);
-  const [expandedCity, setExpandedCity] = useState(initialStore?.city ?? "");
-  const [selectedStoreId, setSelectedStoreId] = useState(initialStore?.id ?? "");
-  const [locatorStatus, setLocatorStatus] = useState(
-    "Možete dozvoliti lokaciju ili ručno izabrati grad iz liste partnera.",
-  );
+  const railRef = useRef<HTMLDivElement>(null);
+  const resultRefs = useRef<Map<string, HTMLElement>>(new Map());
+  const hasPublicStores = stores.length > 0;
 
-  const regionOptions = useMemo(
-    () => uniqueSorted(stores.map((store) => store.region)),
-    [stores],
-  );
-  const cityOptions = useMemo(
-    () => uniqueSorted(stores.map((store) => store.city)),
-    [stores],
-  );
-  const brandProgramOptions = useMemo(
-    () =>
-      uniqueSorted(
-        stores.flatMap((store) => [...store.brands, ...store.programs]),
-      ),
-    [stores],
-  );
+  const [query, setQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState<PartnerLocationType | "">("");
+  const [selectedId, setSelectedId] = useState("");
+  const [hoveredId, setHoveredId] = useState("");
+  const [mapFailed, setMapFailed] = useState(false);
+  const [locatorStatus, setLocatorStatus] = useState("");
+
+  const typeOptions = useMemo(() => getLocationTypeOptions(stores), [stores]);
+  const stats = useMemo(() => getPartnerLocationStats(stores), [stores]);
 
   const filteredStores = useMemo(() => {
     const normalizedQuery = normalize(query.trim());
 
     return stores.filter((store) => {
-      if (region && store.region !== region) return false;
-      if (city && store.city !== city) return false;
-      if (
-        brandProgram &&
-        !store.brands.includes(brandProgram) &&
-        !store.programs.includes(brandProgram)
-      ) {
-        return false;
-      }
-
+      if (typeFilter && !hasPartnerLocationType(store, typeFilter)) return false;
       if (!normalizedQuery) return true;
 
-      const haystack = normalize(
-        [
-          store.name,
-          store.city,
-          store.region,
-          store.address,
-          store.description,
-          store.brands.join(" "),
-          store.programs.join(" "),
-        ].join(" "),
+      return [store.name, store.city, store.address].some((field) =>
+        normalize(field).includes(normalizedQuery),
       );
-
-      return haystack.includes(normalizedQuery);
     });
-  }, [brandProgram, city, query, region, stores]);
+  }, [query, stores, typeFilter]);
 
-  const cityGroups = useMemo(() => getCityGroups(filteredStores), [filteredStores]);
-  const enteredStoreCount = stores.length;
-  const networkStoreCount = useMemo(() => getDisplayNetworkTotal(stores), [stores]);
-  const visibleNetworkStoreCount = useMemo(
-    () => cityGroups.reduce((total, group) => total + group.displayCount, 0),
-    [cityGroups],
+  const visibleIds = useMemo(
+    () => new Set(filteredStores.map((store) => store.id)),
+    [filteredStores],
   );
-  const selectedStore =
-    filteredStores.find((store) => store.id === selectedStoreId) ??
-    filteredStores.find((store) => store.featured) ??
-    filteredStores[0];
+  const selectedStore = stores.find((store) => store.id === selectedId) ?? null;
 
+  // Map and list must always agree: a selection excluded by the current
+  // search/filter state is cleared instead of lingering as a stale marker.
   useEffect(() => {
-    if (!selectedStore) return;
-    if (!filteredStores.some((store) => store.id === selectedStoreId)) {
-      setSelectedStoreId(selectedStore.id);
+    if (selectedId && !visibleIds.has(selectedId)) {
+      setSelectedId("");
     }
-  }, [filteredStores, selectedStore, selectedStoreId]);
+  }, [selectedId, visibleIds]);
 
-  useEffect(() => {
-    if (!selectedStore) return;
-    if (expandedCity === selectedStore.city) return;
+  function scrollResultIntoView(storeId: string) {
+    const rail = railRef.current;
+    const item = resultRefs.current.get(storeId);
+    if (!rail || !item) return;
 
-    setExpandedCity(selectedStore.city);
-  }, [expandedCity, selectedStore]);
-
-  function clearFilters() {
-    setQuery("");
-    setRegion("");
-    setCity("");
-    setBrandProgram("");
-    setExpandedCity(initialStore?.city ?? "");
-    setFiltersOpen(false);
-    setLocatorStatus("Filteri su resetovani. Prikazana je početna partnerska mreža.");
-  }
-
-  function scrollListToCity(groupCity: string) {
-    cityGroupRefs.current.get(groupCity)?.scrollIntoView({
-      behavior: prefersReducedMotion ? "instant" : "smooth",
-      block: "nearest",
+    // Manual scrollTop keeps the page itself from jumping, unlike
+    // scrollIntoView on nested scroll containers.
+    const target = item.offsetTop - rail.offsetTop - 12;
+    rail.scrollTo({
+      top: Math.max(0, target),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
     });
   }
 
-  function scrollMapIntoViewIfStacked() {
-    // Only on stacked layouts (map below the list); the desktop map is sticky.
-    if (!window.matchMedia("(max-width: 1023px)").matches) return;
-
-    const mapColumn = document.querySelector("[data-store-map-column]");
-    if (mapColumn instanceof HTMLElement && mapColumn.offsetParent !== null) {
-      mapColumn.scrollIntoView({
-        behavior: prefersReducedMotion ? "instant" : "smooth",
-        block: "nearest",
-      });
-    }
+  function handleSelectFromList(storeId: string) {
+    setSelectedId(storeId);
   }
 
-  function formatDistanceKm(distanceKm: number) {
-    return `${Math.max(1, Math.round(distanceKm))} km`;
+  function handleSelectFromMap(storeId: string) {
+    setSelectedId(storeId);
+    scrollResultIntoView(storeId);
   }
 
   function handleLocationRequest() {
+    if (!hasPublicStores) {
+      setLocatorStatus("Nema potvrđenih javnih lokacija za poređenje udaljenosti.");
+      return;
+    }
+
     if (!("geolocation" in navigator)) {
-      setLocatorStatus(
-        "Geolokacija nije podržana u ovom pregledaču. Izaberite grad ručno iz liste.",
-      );
+      setLocatorStatus("Geolokacija nije podržana u ovom pregledaču. Koristite pretragu.");
       return;
     }
 
@@ -200,308 +123,255 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         });
 
         if (!nearest) {
-          setLocatorStatus(
-            "Lokacije sa koordinatama trenutno nisu dostupne za poređenje. Izaberite grad ručno.",
-          );
+          setLocatorStatus("Koordinate trenutno nisu dostupne za poređenje. Koristite pretragu.");
           return;
         }
 
-        setSelectedStoreId(nearest.store.id);
-        setExpandedCity(nearest.store.city);
-        setCity(nearest.store.city);
-        setRegion("");
         setQuery("");
-        setBrandProgram("");
+        setTypeFilter("");
+        setSelectedId(nearest.store.id);
+        scrollResultIntoView(nearest.store.id);
         setLocatorStatus(
-          `Najbliža dostupna lokacija u mreži: ${nearest.store.city}, oko ${formatDistanceKm(nearest.distanceKm)}. Tačno rutiranje se potvrđuje kroz kontakt sa timom.`,
+          `Najbliža dostupna lokacija: ${nearest.store.name}, ${nearest.store.city} — oko ${Math.max(1, Math.round(nearest.distanceKm))} km.`,
         );
-        scrollListToCity(nearest.store.city);
       },
       () => {
-        setLocatorStatus(
-          "Lokacija nije odobrena. Izaberite grad ručno ili koristite pretragu.",
-        );
+        setLocatorStatus("Lokacija nije odobrena. Unesite grad u pretragu.");
       },
       { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 },
     );
   }
 
-  function handleManualCity() {
-    setFiltersOpen(true);
-    setLocatorStatus("Izaberite grad ili unesite naziv prodavnice u polje za pretragu.");
-    window.setTimeout(() => searchRef.current?.focus(), 0);
-  }
+  const resultCountLabel =
+    filteredStores.length === stores.length
+      ? `Prikazano svih ${stores.length} lokacija.`
+      : `Prikazano ${filteredStores.length} od ${stores.length} lokacija.`;
 
-  function handleCityChange(value: string) {
-    setCity(value);
-    setRegion("");
-    setQuery("");
-    if (value) {
-      const cityStore =
-        stores.find((store) => store.city === value && store.featured) ??
-        stores.find((store) => store.city === value);
-      if (cityStore) {
-        setSelectedStoreId(cityStore.id);
-        setExpandedCity(cityStore.city);
-      }
-      setLocatorStatus(`Prikazane su prodavnice za grad ${value}.`);
-    } else {
-      setExpandedCity(selectedStore?.city ?? initialStore?.city ?? "");
-    }
-  }
-
-  function handleSelectStore(storeId: string) {
-    setSelectedStoreId(storeId);
-    const store = stores.find((item) => item.id === storeId);
-    if (store) {
-      setExpandedCity(store.city);
-      setLocatorStatus(`Izabrana lokacija: ${store.city}.`);
-    }
-  }
-
-  function handleSelectFromMap(storeId: string) {
-    handleSelectStore(storeId);
-    const store = stores.find((item) => item.id === storeId);
-    if (store) {
-      scrollListToCity(store.city);
-    }
-  }
-
-  function handleCityGroupSelect(groupCity: string, representative: PartnerStore, count: number) {
-    setExpandedCity(groupCity);
-    setSelectedStoreId(representative.id);
-    setLocatorStatus(`${groupCity}: ${formatStoreCount(count)} u mreži.`);
-    scrollMapIntoViewIfStacked();
-  }
-
-  const hasActiveFilters =
-    Boolean(query.trim()) || Boolean(region) || Boolean(city) || Boolean(brandProgram);
+  const showMap = hasPublicStores && !mapFailed;
 
   return (
     <main className={styles.main}>
       <section className={styles.hero} aria-labelledby="stores-title">
-        <div className={styles.heroCopy}>
-          <p className={styles.kicker}>Partnerska mreža</p>
-          <h1 id="stores-title" className={styles.title}>
-            Pronađite najbližu prodavnicu
+        <p className={`${styles.kicker} ${styles.heroEyebrow}`}>Partnerska mreža</p>
+        <div className={styles.heroGrid}>
+          <h1 className={`${styles.title} ${styles.titleReveal}`} id="stores-title">
+            Pronađite najbliže prodajno mesto
           </h1>
-          <p className={styles.subtitle}>
-            Carsystem i R-M program dostupan je kroz mrežu partnera širom Srbije.
+          <p className={`${styles.subtitle} ${styles.subtitleReveal}`}>
+            {hasPublicStores
+              ? `${stats.locationCount} partnerskih lokacija u ${stats.cityCount} gradova — potvrđena prodajna mesta, servisi i podrška programa.`
+              : "Lokator prikazuje samo potvrđene javne prodajne lokacije, bez demo adresa."}
           </p>
-          <div className={styles.heroActions}>
-            <button
-              className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
-              type="button"
-              onClick={handleLocationRequest}
-              data-cursor="button"
-              data-motion-surface
-              data-motion="theme-wipe"
-            >
-              <span>Dozvoli lokaciju</span>
-            </button>
-            <button className={styles.secondaryButton} type="button" onClick={handleManualCity}>
-              Ručno izaberi grad
-            </button>
-          </div>
         </div>
-
-        <aside className={styles.statusPanel} aria-label="Status lokatora">
-          <p className={styles.sectionKicker}>Lokator</p>
-          <strong>{selectedStore?.city ?? "Srbija"}</strong>
-          <p>{locatorStatus}</p>
-          <div className={styles.quickStats}>
-            <span>{formatStoreCount(networkStoreCount)} u mreži</span>
-            <span>{regionOptions.length} regiona</span>
-            <span>Tehnička mapa</span>
-          </div>
-        </aside>
       </section>
 
-      <StoreFilters
-        brandProgram={brandProgram}
-        brandProgramOptions={brandProgramOptions}
-        city={city}
-        cityOptions={cityOptions}
-        filtersOpen={filtersOpen}
-        hasActiveFilters={hasActiveFilters}
-        onBrandProgramChange={setBrandProgram}
-        onCityChange={handleCityChange}
-        onClear={clearFilters}
-        onFiltersToggle={() => setFiltersOpen((open) => !open)}
-        onQueryChange={setQuery}
-        onRegionChange={(value) => {
-          setRegion(value);
-          setCity("");
-          setExpandedCity(selectedStore?.city ?? initialStore?.city ?? "");
-        }}
-        query={query}
-        region={region}
-        regionOptions={regionOptions}
-        searchInputRef={searchRef}
-      />
+      <section className={`${styles.controls} ${styles.controlsReveal}`} aria-label="Pretraga i filteri">
+        <div className={styles.searchBox}>
+          <label className="sr-only" htmlFor="store-search">
+            Pretraga lokacija
+          </label>
+          <input
+            className={styles.searchInput}
+            id="store-search"
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Pretraži grad ili naziv..."
+            ref={searchRef}
+            type="search"
+            value={query}
+          />
+        </div>
 
-      <section className={styles.locatorLayout} aria-label="Rezultati lokatora">
-        <div className={styles.listColumn} id="store-locator-list">
-          <div className={styles.resultHeader}>
-            <strong>Prodavnice</strong>
-            <span>
-              {formatStoreCount(visibleNetworkStoreCount)} u mreži · {enteredStoreCount} sa
-              dostupnim detaljima
-            </span>
+        <div className={styles.typeChips} role="group" aria-label="Tip lokacije">
+          <button
+            aria-pressed={typeFilter === ""}
+            className={`${styles.typeChip} ${typeFilter === "" ? styles.typeChipActive : ""}`}
+            onClick={() => setTypeFilter("")}
+            type="button"
+          >
+            Sve
+          </button>
+          {typeOptions.map((option) => (
             <button
-              className={styles.mobileMapToggle}
+              aria-pressed={typeFilter === option.value}
+              className={`${styles.typeChip} ${
+                typeFilter === option.value ? styles.typeChipActive : ""
+              }`}
+              key={option.value}
+              onClick={() =>
+                setTypeFilter((current) => (current === option.value ? "" : option.value))
+              }
               type="button"
-              onClick={() => setMapVisible((visible) => !visible)}
-              aria-expanded={mapVisible}
             >
-              {mapVisible ? "Sakrij mapu" : "Prikaži mapu"}
+              {option.label}
             </button>
-          </div>
+          ))}
+        </div>
 
-          {selectedStore ? (
-            <section className={styles.nearestCard} aria-labelledby="nearest-store-title">
-              <div className={styles.nearestHeader}>
-                <div>
-                  <p className={styles.cardLabel}>Izdvojena lokacija</p>
-                  <h2 id="nearest-store-title">{selectedStore.name}</h2>
-                </div>
-                <span className={styles.nearestCity}>{selectedStore.city}</span>
-              </div>
-              <p className={styles.storeDescription}>{selectedStore.description}</p>
-              <div className={styles.storeTags}>
-                {selectedStore.programs.slice(0, 4).map((program) => (
-                  <span key={program}>{program}</span>
-                ))}
-              </div>
-            </section>
-          ) : null}
+        <button className={styles.locateButton} onClick={handleLocationRequest} type="button">
+          Koristi moju lokaciju
+        </button>
+      </section>
 
-          {filteredStores.length > 0 ? (
-            <div className={styles.storeList}>
-              {cityGroups.map((group) => {
-                const isExpanded = expandedCity === group.city;
-                const groupId = `store-city-${normalize(group.city).replace(/\s+/g, "-")}`;
-                const regionSummary = [
-                  group.regions.join(" / "),
-                  group.pendingCount > 0
-                    ? `${group.stores.length} sa detaljima · ${group.pendingCount} u dopuni`
-                    : group.label,
-                ]
-                  .filter(Boolean)
-                  .join(" · ");
+      <div className={styles.resultsMeta}>
+        <span>{resultCountLabel}</span>
+        <span aria-live="polite">{locatorStatus}</span>
+      </div>
 
-                return (
-                  <section
-                    className={styles.cityGroup}
-                    key={group.city}
-                    ref={(node) => {
-                      if (node) {
-                        cityGroupRefs.current.set(group.city, node);
-                      } else {
-                        cityGroupRefs.current.delete(group.city);
-                      }
-                    }}
-                  >
-                    <button
-                      type="button"
-                      className={styles.cityGroupHeader}
-                      onClick={() =>
-                        handleCityGroupSelect(group.city, group.representative, group.displayCount)
-                      }
-                      aria-expanded={isExpanded}
-                      aria-controls={groupId}
+      <section className={styles.locatorShell} aria-label="Mapa i rezultati">
+        <div className={styles.mapColumn}>
+          {showMap ? (
+            <>
+              <PartnerMap
+                hoveredId={hoveredId}
+                onError={() => setMapFailed(true)}
+                onReady={() => setMapFailed(false)}
+                onSelect={handleSelectFromMap}
+                selectedId={selectedId}
+                stores={stores}
+                visibleIds={visibleIds}
+              />
+              {selectedStore ? (
+                <div className={styles.selectedSummary} data-selected-summary>
+                  <p className={styles.summaryKicker}>
+                    {getPartnerLocationTypeLabel(selectedStore)} · {selectedStore.city}
+                  </p>
+                  <strong>{selectedStore.name}</strong>
+                  <span>{selectedStore.address}</span>
+                  <div className={styles.summaryActions}>
+                    <a className={styles.summaryCall} href={telHref(selectedStore.phone)}>
+                      Pozovi
+                    </a>
+                    <a
+                      className={styles.summaryRoute}
+                      href={routeHref(selectedStore)}
+                      rel="noreferrer"
+                      target="_blank"
                     >
-                      <span>
-                        <strong>{group.city}</strong>
-                        <small>{regionSummary}</small>
-                      </span>
-                      <b>{group.label ? group.badgeLabel : `${group.badgeLabel} u mreži`}</b>
-                    </button>
-                    {isExpanded ? (
-                      <div className={styles.cityStoreList} id={groupId}>
-                        {group.stores.map((store) => (
-                          <StoreCard
-                            isActive={store.id === selectedStore?.id}
-                            key={store.id}
-                            onSelect={handleSelectStore}
-                            store={store}
-                          />
-                        ))}
-                        {group.pendingCount > 0 ? (
-                          <div className={styles.cityPendingNotice}>
-                            <strong>
-                              Još {formatStoreCount(group.pendingCount)} u mreži za grad{" "}
-                              {group.city}.
-                            </strong>
-                            <p>
-                              Detalji za pojedinačne partnere se dopunjuju. Za tačno
-                              rutiranje pošaljite upit ili pozovite centralu u Inđiji.
-                            </p>
-                          </div>
-                        ) : null}
-                      </div>
-                    ) : null}
-                  </section>
-                );
-              })}
-            </div>
+                      Ruta →
+                    </a>
+                  </div>
+                </div>
+              ) : null}
+            </>
           ) : (
-            <div className={styles.emptyState}>
-              <strong>Nema prodavnica za izabrane filtere.</strong>
-              <p>Resetujte filtere ili pošaljite upit za rutiranje preko centrale.</p>
-              <button className={styles.clearButton} type="button" onClick={clearFilters}>
-                Resetuj filtere
-              </button>
+            <div className={styles.mapFallback}>
+              <strong>
+                {hasPublicStores
+                  ? "Mapa trenutno nije dostupna."
+                  : "Mapa čeka potvrđene javne lokacije."}
+              </strong>
+              <p>
+                {hasPublicStores
+                  ? "Lista partnerskih lokacija ispod ostaje potpuna — izaberite lokaciju i pozovite direktno."
+                  : "Demo i nepotpuni zapisi se ne prikazuju javno."}
+              </p>
             </div>
           )}
         </div>
 
-        {selectedStore ? (
-          <StoreMap
-            onSelect={handleSelectFromMap}
-            selectedStore={selectedStore}
-            storeDisplayCount={visibleNetworkStoreCount}
-            stores={filteredStores}
-            visibleOnMobile={mapVisible}
-          />
-        ) : (
-          <aside
-            className={`${styles.mapColumn} ${mapVisible ? styles.mapColumnVisible : ""}`}
-            data-store-map-column
-            aria-label="Mapa partnerskih prodavnica"
-          >
+        <div className={styles.resultsRail} ref={railRef}>
+          {filteredStores.length > 0 ? (
+            filteredStores.map((store) => {
+              const isSelected = store.id === selectedId;
+
+              return (
+                <article
+                  className={`${styles.resultItem} ${
+                    isSelected ? styles.resultItemSelected : ""
+                  } cs-interactive-surface`}
+                  data-motion-surface
+                  key={store.id}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setHoveredId((current) => (current === store.id ? "" : current));
+                    }
+                  }}
+                  onFocus={() => setHoveredId(store.id)}
+                  onMouseEnter={() => setHoveredId(store.id)}
+                  onMouseLeave={() =>
+                    setHoveredId((current) => (current === store.id ? "" : current))
+                  }
+                  ref={(node) => {
+                    if (node) {
+                      resultRefs.current.set(store.id, node);
+                    } else {
+                      resultRefs.current.delete(store.id);
+                    }
+                  }}
+                >
+                  <button
+                    aria-pressed={isSelected}
+                    className={styles.resultButton}
+                    onClick={() => handleSelectFromList(store.id)}
+                    type="button"
+                  >
+                    <span className={styles.resultKicker}>
+                      {getPartnerLocationTypeLabel(store)} · {store.city}
+                      <i aria-hidden="true" />
+                    </span>
+                    <strong>{store.name}</strong>
+                    <span className={styles.resultAddress}>{store.address}</span>
+                    {!store.coordinates ? (
+                      <span className={styles.resultNote}>
+                        Koordinate još nisu dostupne — lokacija je vidljiva samo u listi.
+                      </span>
+                    ) : null}
+                  </button>
+
+                  {isSelected ? (
+                    <div className={styles.resultActions}>
+                      <a
+                        className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
+                        data-cursor="button"
+                        data-motion-surface
+                        data-motion="theme-wipe"
+                        href={telHref(store.phone)}
+                      >
+                        <span>Pozovi</span>
+                      </a>
+                      <a
+                        className={styles.secondaryButton}
+                        href={routeHref(store)}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Ruta →
+                      </a>
+                      <a className={styles.ghostAction} href={`/kontakt?tema=prodavnica&prodavnica=${store.id}`}>
+                        Pošalji upit
+                      </a>
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })
+          ) : (
             <div className={styles.emptyState}>
-              <strong>Mapa nema pinove za izabrane filtere.</strong>
-              <p>Resetujte filtere da biste ponovo videli celu partnersku mrežu.</p>
-              <button className={styles.clearButton} type="button" onClick={clearFilters}>
-                Resetuj filtere
+              <strong>
+                {hasPublicStores
+                  ? "Nema lokacija za izabranu pretragu."
+                  : "Nema potvrđenih javnih lokacija."}
+              </strong>
+              <p>
+                {hasPublicStores
+                  ? "Proverite unos ili resetujte filter tipa lokacije."
+                  : "Demo i nepotpuni zapisi su zadržani u data source-u, ali se ne prikazuju javno."}
+              </p>
+              <button
+                className={styles.secondaryButton}
+                onClick={() => {
+                  setQuery("");
+                  setTypeFilter("");
+                  searchRef.current?.focus();
+                }}
+                type="button"
+              >
+                Resetuj pretragu
               </button>
             </div>
-          </aside>
-        )}
-      </section>
-
-      {selectedStore ? (
-        <div
-          className={styles.mobileStickyCta}
-          data-mobile-sticky-cta
-          aria-label="Brzi pristup prodavnici"
-        >
-          <span>
-            <strong>{selectedStore.city}</strong>
-            <small>{selectedStore.region}</small>
-          </span>
-          <a
-            className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
-            href="#store-locator-list"
-            data-cursor="button"
-            data-motion-surface
-            data-motion="theme-wipe"
-          >
-            <span>Pronađi prodavnicu</span>
-          </a>
+          )}
         </div>
-      ) : null}
+      </section>
     </main>
   );
 }

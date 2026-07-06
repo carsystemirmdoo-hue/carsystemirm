@@ -1,5 +1,5 @@
 import type { CarsystemProduct } from "@/lib/carsystem-data";
-import { refinishPhases } from "@/lib/carsystem-data";
+import { ProcessRail } from "@/components/product/ProcessRail";
 import styles from "./ProductDetailPage.module.css";
 
 export function ProductProcessPhase({ product }: { product: CarsystemProduct }) {
@@ -16,22 +16,7 @@ export function ProductProcessPhase({ product }: { product: CarsystemProduct }) 
         </p>
       </div>
 
-      <div className={styles.processTrack} aria-label="Faze refinish procesa">
-        {refinishPhases.map((phase) => {
-          const isActive = phase.slug === product.phaseSlug;
-          return (
-            <div
-              className={`${styles.phaseItem} ${isActive ? styles.phaseActive : ""}`}
-              aria-current={isActive ? "step" : undefined}
-              key={phase.slug}
-            >
-              <span className={styles.phaseIndex}>{phase.step}</span>
-              <span className={styles.phaseName}>{phase.name}</span>
-              <p className={styles.phaseDescription}>{phase.description}</p>
-            </div>
-          );
-        })}
-      </div>
+      <ProcessRail activePhaseSlug={product.phaseSlug} />
     </section>
   );
 }

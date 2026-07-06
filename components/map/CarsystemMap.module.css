@@ -1,0 +1,264 @@
+/* Shared Carsystem MapLibre presentation: canvas frame, loading surface,
+   diamond marker geometry and attribution integration. Locator-only concerns
+   (clusters, result sync, summary overlay) stay in StoresPage.module.css. */
+
+.mapCanvasShell {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+
+.mapCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- MapLibre controls ---------- */
+
+.mapCanvas :global(.maplibregl-ctrl-group) {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.mapCanvas :global(.maplibregl-ctrl-group button) {
+  border-radius: 0;
+}
+
+/* ---------- attribution: kept functional, visually integrated ---------- */
+
+.mapCanvas :global(.maplibregl-ctrl-attrib) {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 10px;
+}
+
+.mapCanvas :global(.maplibregl-ctrl-attrib a) {
+  color: var(--muted-foreground);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mapCanvas :global(.maplibregl-ctrl-attrib-button) {
+  border-radius: 0;
+  background-color: transparent;
+  background-image: none;
+  transition: color 180ms ease;
+}
+
+.mapCanvas :global(.maplibregl-ctrl-attrib-button)::after {
+  content: "i";
+  display: block;
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.mapCanvas :global(.maplibregl-ctrl-attrib-button:hover)::after,
+.mapCanvas :global(.maplibregl-ctrl-attrib-button:focus-visible)::after {
+  color: var(--foreground);
+}
+
+.mapCanvas :global(.maplibregl-ctrl-attrib-button:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.mapCanvas :global(.maplibregl-compact-show.maplibregl-ctrl-attrib) {
+  background: var(--surface);
+}
+
+/* ---------- loading surface ---------- */
+
+.mapLoading {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px),
+    var(--surface-muted);
+  background-size: 28px 28px;
+  animation: mapLoadingFade 240ms ease both;
+}
+
+.mapLoading span {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  animation: mapLoadingPulse 900ms var(--cs-ease-in-out) infinite alternate;
+}
+
+@keyframes mapLoadingFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mapLoadingPulse {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- diamond marker geometry ---------- */
+
+.mapMarker {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mapMarker::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--foreground);
+  outline: 2px solid var(--background);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition:
+    background 200ms var(--cs-ease-polish),
+    width 200ms var(--cs-ease-polish),
+    height 200ms var(--cs-ease-polish);
+  animation: markerIn 300ms var(--cs-ease-out) both;
+}
+
+@keyframes markerIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+  }
+}
+
+@media (hover: hover) {
+  .mapMarker:hover::before,
+  .mapMarkerHover::before {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.mapMarker:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mapMarkerSelected::before {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  animation: markerPop 340ms var(--cs-ease-polish) 1;
+}
+
+@keyframes markerPop {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+  }
+  45% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.35);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+  }
+}
+
+.mapMarkerDimmed {
+  opacity: 0.22;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+/* Static single-location (company) marker: accent fill, no interaction. */
+.mapMarkerCompany {
+  cursor: default;
+}
+
+.mapMarkerCompany::before {
+  width: 13px;
+  height: 13px;
+  background: var(--accent);
+}
+
+/* ---------- shared badge / fallback ---------- */
+
+.mapBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 7px 11px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.mapFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  padding: 20px;
+  background: var(--surface-muted);
+  text-align: center;
+}
+
+.mapFallback strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mapFallback span {
+  color: var(--muted-foreground);
+  font-size: 12.5px;
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .mapLoading,
+  .mapLoading span,
+  .mapMarker::before,
+  .mapMarkerSelected::before {
+    animation: none;
+  }
+
+  .mapMarker::before,
+  .mapMarkerDimmed {
+    transition: none;
+  }
+}

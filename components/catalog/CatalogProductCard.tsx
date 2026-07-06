@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   getProductPublicStatus,
@@ -7,7 +6,7 @@ import {
   type ProgramGroup,
   type RefinishPhase,
 } from "@/lib/carsystem-data";
-import { getProductMotionStyle } from "@/components/product/productMotion";
+import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import styles from "./CatalogPage.module.css";
 
 export function CatalogProductCard({
@@ -22,50 +21,36 @@ export function CatalogProductCard({
   program: ProgramGroup;
 }) {
   const image = product.productImage ?? product.galleryImages[0] ?? null;
-  const usesStructuredShot = !image || image.src.includes("placeholder-product");
   const packageSummary = product.packages.map((item) => item.label).join(" / ");
   const publicStatus = getProductPublicStatus(product);
+  const isOnRequest = publicStatus.toLowerCase().includes("upit");
   const productHref = `/proizvodi/${product.slug}`;
   const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
 
   return (
     <article
-      className={`${styles.productCard} cs-gloss-card cs-product-motion-card`}
+      className={`${styles.productCard} cs-product-motion-card`}
       data-cursor="card"
       data-motion-surface
       data-product-card-motion
-      style={getProductMotionStyle(product)}
     >
       <Link
-        className={`${styles.productImageLink} cs-image-surface`}
+        className={styles.productImageLink}
         href={productHref}
         aria-label={`Pogledaj proizvod ${product.name}`}
         data-cursor="image"
-        data-motion-surface
-        data-product-image-motion
       >
-        <span className={styles.brandBadge}>{brand.name}</span>
-        {!usesStructuredShot && image ? (
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1180px) 27vw, (min-width: 768px) 42vw, 92vw"
-            className={styles.productImage}
-          />
-        ) : (
-          <span className={styles.productShotPlaceholder}>
-            <small>PRODUCT SHOT</small>
-            <strong>{brand.name}</strong>
-            <span>{product.name}</span>
-            <em>studio · seamless grey</em>
-          </span>
-        )}
+        <ProductVisualSurface
+          brandName={brand.name}
+          image={image}
+          product={product}
+          sizes="(min-width: 1180px) 27vw, (min-width: 768px) 42vw, 92vw"
+        />
       </Link>
 
       <div className={styles.productBody}>
         <p className={styles.productMetaLine}>
-          {program.shortName} · {phase.name}
+          {brand.name} · {program.shortName} · {phase.name}
         </p>
 
         <Link href={productHref} className={styles.productTitleLink}>
@@ -78,7 +63,7 @@ export function CatalogProductCard({
             <small>Pakovanje</small>
             <strong>{packageSummary}</strong>
           </span>
-          <span>
+          <span className={isOnRequest ? styles.productDataCellHighlight : undefined}>
             <small>Status</small>
             <strong>{publicStatus}</strong>
           </span>

@@ -4,6 +4,7 @@ import { ProductDocuments } from "@/components/product/ProductDocuments";
 import { ProductHero } from "@/components/product/ProductHero";
 import { ProductMobileCta } from "@/components/product/ProductMobileCta";
 import { ProductProcessPhase } from "@/components/product/ProductProcessPhase";
+import { ProductReferenceDetails } from "@/components/product/ProductReferenceDetails";
 import { ProductSpecs } from "@/components/product/ProductSpecs";
 import { ProductTrustStrip } from "@/components/product/ProductTrustStrip";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
@@ -45,6 +46,7 @@ export function ProductDetailPage({
           </div>
 
           <div className={styles.contentStack}>
+            <ProductReferenceDetails product={product} brand={brand} program={program} />
             <ProductSpecs product={product} />
             <ProductDocuments product={product} />
             <ProductProcessPhase product={product} />

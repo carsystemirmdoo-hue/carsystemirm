@@ -24,6 +24,7 @@
   --brand-pill-bg: linear-gradient(180deg, oklch(0.98 0.004 255 / 0.92), oklch(0.91 0.012 255 / 0.82));
   --brand-pill-border: oklch(0.98 0.004 255 / 0.22);
   --brand-pill-shadow: 0 18px 42px oklch(0.04 0.01 255 / 0.24);
+  --home-refinish-image: url("/images/home/hero-dark.png");
   --container: 1320px;
   min-height: 100vh;
   overflow-x: clip;
@@ -55,6 +56,7 @@
   --brand-pill-bg: linear-gradient(180deg, oklch(0.99 0.004 255 / 0.78), oklch(0.94 0.01 255 / 0.56));
   --brand-pill-border: oklch(0.31 0.02 255 / 0.12);
   --brand-pill-shadow: 0 14px 32px oklch(0.24 0.024 255 / 0.1);
+  --home-refinish-image: url("/images/home/hero-light.png");
   color-scheme: light;
 }
 
@@ -146,7 +148,7 @@
 .locationButton {
   border: 0;
   background: var(--red-grad);
-  color: oklch(0.99 0.004 255);
+  color: #fff !important;
   box-shadow: 0 14px 32px oklch(0.52 0.2 27 / 0.35);
 }
 
@@ -186,14 +188,21 @@
   overflow: hidden;
 }
 
-.heroImage,
-.processImage,
 .finalImage {
   object-fit: cover;
 }
 
+.heroImage,
+.processImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-image: var(--home-refinish-image);
+  background-size: cover;
+}
+
 .heroImage {
-  object-position: 72% center;
+  background-position: 72% center;
 }
 
 .heroMedia::after {
@@ -462,7 +471,6 @@
 }
 
 .heroChips span,
-.statPills span,
 .tagRow span {
   border: 1px solid var(--border);
   border-radius: 7px;
@@ -591,7 +599,7 @@
   border-radius: 14px;
   background: var(--red-grad);
   box-shadow: 0 16px 38px oklch(0.52 0.2 27 / 0.5);
-  color: oklch(0.99 0.004 255);
+  color: #fff !important;
 }
 
 .mobileLocator span:nth-child(2) {
@@ -809,18 +817,43 @@
 }
 
 .statPills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  width: min(540px, 100%);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-self: stretch;
   color: var(--text3);
   font-family: var(--font-technical), monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .statPills span {
-  padding: 8px 12px;
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  gap: 8px;
+  padding: clamp(16px, 2.4vw, 28px) clamp(14px, 2vw, 28px);
+}
+
+.statPills span + span {
+  border-left: 1px solid var(--border-soft);
+}
+
+.statPills strong {
+  color: var(--text);
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(46px, 5.2vw, 72px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.85;
+}
+
+.statPills small {
+  color: var(--text3);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  line-height: 1.3;
+  text-wrap: balance;
 }
 
 .processGrid {
@@ -883,7 +916,7 @@
 }
 
 .processImage {
-  object-position: center;
+  background-position: center;
   transform: translate3d(var(--process-x, 0), var(--process-y, 0), 0) scale(var(--process-scale, 1));
   transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
@@ -1156,110 +1189,44 @@
   background: var(--bg);
 }
 
-.mapGrid {
+.homeNetworkMapCanvas,
+.contactMap .contactMapCanvas {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--border-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
-  background-size: 38px 38px;
+  border: 0;
+  background: transparent;
 }
 
-.mapPanel::after,
-.contactMap::after {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(60% 55% at 52% 42%, oklch(0.59 0.22 27 / 0.13), transparent 72%),
-    linear-gradient(180deg, transparent 62%, oklch(0.04 0.01 255 / 0.14));
-  content: "";
-  pointer-events: none;
-}
-
-.serbiaMapShape {
-  position: absolute;
-  inset: 58px 10% 40px;
-  z-index: 1;
-  background:
-    radial-gradient(circle at 55% 38%, oklch(0.59 0.22 27 / 0.15), transparent 10rem),
-    linear-gradient(155deg, oklch(0.35 0.03 250 / 0.74), oklch(0.16 0.016 255 / 0.82));
-  filter: drop-shadow(0 18px 36px oklch(0.04 0.01 255 / 0.28));
-  mask: url("/maps/serbia-outline.png") center / contain no-repeat;
-  -webkit-mask: url("/maps/serbia-outline.png") center / contain no-repeat;
-}
-
-:global(html:not(.dark)) .home .serbiaMapShape {
-  background:
-    radial-gradient(circle at 55% 38%, oklch(0.59 0.22 27 / 0.12), transparent 10rem),
-    linear-gradient(155deg, oklch(0.88 0.014 255 / 0.9), oklch(0.74 0.026 250 / 0.76));
-}
-
-.mapLines {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
+.homeNetworkMapCanvas {
   width: 100%;
   height: 100%;
-  opacity: 0.55;
 }
 
-.mapLines path {
-  fill: none;
-  stroke: var(--steel);
-  stroke-dasharray: 1.4 1.4;
-  stroke-width: 0.3;
-}
-
-.mapPin {
+.homeMapFallback {
   position: absolute;
-  z-index: 3;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  padding: 24px;
+  background:
+    linear-gradient(var(--border-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-soft) 1px, transparent 1px),
+    var(--bg);
+  background-size: 34px 34px;
+  color: var(--text);
+  text-align: center;
 }
 
-.mapPin i,
-.centerPin i {
-  display: block;
-  width: 9px;
-  height: 9px;
-  margin-inline: auto;
-  border-radius: 999px;
-  background: var(--steel-bright);
-  box-shadow: 0 0 0 5px oklch(0.57 0.08 250 / 0.16);
+.homeMapFallback strong {
+  font-size: 15px;
+  font-weight: 850;
 }
 
-.mapPinActive i {
-  width: 13px;
-  height: 13px;
-  background: var(--red);
-  box-shadow: 0 0 0 6px oklch(0.59 0.22 27 / 0.18), 0 0 18px oklch(0.59 0.22 27 / 0.55);
-}
-
-.mapPin b,
-.centerPin {
-  display: block;
-  margin-top: 9px;
+.homeMapFallback span {
   color: var(--text3);
-  font-family: var(--font-technical), monospace;
-  font-size: 9.5px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.mapPinActive b {
-  color: var(--text2);
-}
-
-.mapPanel p {
-  position: absolute;
-  bottom: 14px;
-  left: 16px;
-  z-index: 4;
-  margin: 0;
-  color: var(--text3);
-  font-family: var(--font-technical), monospace;
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .programDeckSection {
@@ -1702,7 +1669,7 @@
   border: 0;
   border-radius: 11px;
   background: var(--red-grad);
-  color: oklch(0.99 0.004 255);
+  color: #fff !important;
   cursor: pointer;
   font-weight: 800;
   font-size: 13px;
@@ -1949,7 +1916,7 @@
   margin-top: 14px;
   border-radius: 13px;
   background: var(--red-grad);
-  color: oklch(0.99 0.004 255);
+  color: #fff !important;
   font-weight: 800;
   padding: 13px 16px;
 }
@@ -2070,6 +2037,80 @@
 
   .programPreviewGrid a {
     min-height: 132px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .programDeckSticky {
+    max-width: min(100%, calc(100vw - 72px));
+  }
+
+  .programDeckHeader {
+    width: min(100%, calc(100vw - 96px));
+  }
+
+  .programDeckHeader > div:first-child {
+    max-width: clamp(340px, 33vw, 430px);
+  }
+
+  .programDeckHeader h2 {
+    max-width: clamp(340px, 33vw, 430px);
+    font-size: clamp(24px, 2.25vw, 32px);
+  }
+
+  .programDeckHeader p:not(.sectionKicker) {
+    max-width: clamp(210px, 18vw, 238px);
+  }
+
+  .programDeckViewport {
+    left: 55%;
+    width: min(100%, 780px);
+  }
+
+  .programDeckCard {
+    width: clamp(300px, 26vw, 354px);
+  }
+
+  .programDeckCardPrevious {
+    transform: translate(-50%, -50%) translateX(-27%) translateY(12px) rotate(-4deg) scale(0.88);
+  }
+
+  .programDeckCardNext {
+    transform: translate(-50%, -50%) translateX(27%) translateY(12px) rotate(4deg) scale(0.88);
+  }
+
+  .programDeckCardFarPrevious {
+    transform: translate(-50%, -50%) translateX(-43%) translateY(28px) rotate(-7deg) scale(0.76);
+  }
+
+  .programDeckCardFarNext {
+    transform: translate(-50%, -50%) translateX(43%) translateY(28px) rotate(7deg) scale(0.76);
+  }
+
+  .programPreviewPanel {
+    right: -8px;
+    width: clamp(340px, 30vw, 400px);
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .programDeckHeader {
+    width: min(100%, 960px);
+  }
+
+  .programDeckHeader > div:first-child,
+  .programDeckHeader h2 {
+    max-width: 440px;
+  }
+
+  .programDeckViewport {
+    width: min(100%, 900px);
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1660px) {
+  .programDeckViewport {
+    top: calc(50% + clamp(32px, 3vw, 48px));
   }
 }
 
@@ -2839,7 +2880,7 @@
   }
 
   .heroTitle {
-    font-size: clamp(36px, 11vw, 52px);
+    font-size: clamp(32px, 9.6vw, 46px);
   }
 
   .ctaRow,
@@ -2855,10 +2896,29 @@
     border-radius: 13px;
   }
 
-  .heroChips,
-  .statPills {
+  .heroChips {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .statPills {
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .statPills span {
+    gap: 6px;
+    padding: 13px 8px;
+  }
+
+  .statPills strong {
+    font-size: clamp(38px, 14vw, 54px);
+  }
+
+  .statPills small {
+    font-size: 8px;
+    letter-spacing: 0.045em;
+    overflow-wrap: anywhere;
   }
 
   .mapPanel,

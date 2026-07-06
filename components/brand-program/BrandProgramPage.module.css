@@ -165,7 +165,7 @@
 .topbarCta,
 .primaryButton {
   background: var(--entity-red);
-  color: oklch(0.985 0.004 250);
+  color: #fff !important;
 }
 
 .topbarCta {
@@ -203,7 +203,6 @@
 .primaryButton:hover,
 .secondaryButton:hover,
 .ghostButton:hover,
-.productCard:hover,
 .programCard:hover,
 .brandCardActive:hover {
   transform: translateY(-1px);
@@ -801,55 +800,17 @@
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  border-radius: 11px;
+  border-radius: 16px;
   background: var(--entity-panel);
   transition:
-    transform 160ms ease,
     border-color 160ms ease,
-    box-shadow 160ms ease;
-}
-
-.productCard:hover {
-  border-color: color-mix(in srgb, var(--entity-ink) 34%, var(--entity-border));
-  box-shadow: var(--entity-shadow);
-  transform: translateY(-2px);
+    background 160ms ease;
 }
 
 .productMedia {
   position: relative;
-  display: grid;
-  aspect-ratio: 4 / 3;
-  min-height: 0;
-  place-items: center;
+  display: block;
   overflow: hidden;
-  border-bottom: 1px solid var(--entity-border);
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--entity-border) 38%, transparent) 1px, transparent 1px),
-    linear-gradient(180deg, color-mix(in srgb, var(--entity-border) 32%, transparent) 1px, transparent 1px),
-    var(--entity-panel-strong);
-  background-size: 24px 24px;
-}
-
-.productImage {
-  object-fit: contain;
-  padding: clamp(18px, 2vw, 26px);
-}
-
-.productBrand {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-  border: 1px solid var(--entity-border);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--entity-panel) 92%, transparent);
-  color: var(--entity-ink);
-  padding: 6px 9px;
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .productBody {
@@ -944,20 +905,6 @@
   font-size: 13px;
   font-weight: 900;
   white-space: nowrap;
-}
-
-.productShotPlaceholder {
-  display: grid;
-  width: min(88%, 284px);
-  min-height: 72%;
-  align-content: center;
-  justify-items: start;
-  gap: 7px;
-  border: 1px solid var(--entity-border);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--entity-panel) 86%, transparent);
-  color: var(--entity-muted);
-  padding: 18px;
 }
 
 .entityMobileFilterBar {
@@ -1194,36 +1141,6 @@
   .entityProductLayoutCollapsed .productGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-}
-
-.productShotPlaceholder small,
-.productShotPlaceholder em {
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.productShotPlaceholder strong {
-  color: var(--entity-ink);
-  font-size: 22px;
-  font-weight: 950;
-  letter-spacing: 0;
-  line-height: 1;
-}
-
-.productShotPlaceholder span {
-  color: var(--entity-muted);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.productShotPlaceholder em {
-  color: var(--entity-faint);
-  font-size: 9.5px;
 }
 
 .emptyState {
@@ -1530,10 +1447,6 @@
     font-size: 20px;
   }
 
-  .productMedia {
-    min-height: 190px;
-  }
-
   .productActions {
     align-items: stretch;
     flex-direction: column;
@@ -1592,7 +1505,6 @@
   .primaryButton:hover,
   .secondaryButton:hover,
   .ghostButton:hover,
-  .productCard:hover,
   .programCard:hover,
   .brandCardActive:hover {
     transform: none;

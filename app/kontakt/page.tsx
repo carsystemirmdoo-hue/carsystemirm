@@ -8,7 +8,7 @@ import {
   getPublicProgramGroupBySlug,
 } from "@/lib/carsystem-data";
 import { companyContact } from "@/lib/company-contact";
-import { partnerStores } from "@/lib/partner-stores";
+import { getPublicPartnerStores } from "@/lib/partner-stores";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -76,7 +76,7 @@ function resolveContext(params: Record<string, string | string[] | undefined>) {
 
   if (storeParam) {
     const normalizedStore = storeParam.toLowerCase();
-    const store = partnerStores.find((item) => {
+    const store = getPublicPartnerStores().find((item) => {
       return (
         item.id === storeParam ||
         item.city.toLowerCase() === normalizedStore ||
@@ -104,6 +104,7 @@ export default async function KontaktRoute({ searchParams }: ContactRouteProps) 
         message: "",
         topic,
       }}
+      stores={getPublicPartnerStores()}
     />
   );
 }

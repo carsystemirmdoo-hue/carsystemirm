@@ -1,0 +1,874 @@
+.surface {
+  --product-visual-accent: oklch(0.58 0.08 245);
+  --product-visual-complement: oklch(0.68 0.12 195);
+  --product-visual-duration: 390ms;
+  --product-visual-settle-y: 3px;
+  --product-visual-settle-r: 0deg;
+  --product-visual-current-y: 0px;
+  --product-visual-current-r: 0deg;
+  --product-visual-pointer-x: 50%;
+  --product-visual-pointer-y: 50%;
+  --product-visual-paint-product-scale: 1;
+  --product-visual-core-scale: 0.96;
+  --product-visual-core-opacity: 0;
+  --product-visual-wash-opacity: 0;
+  --product-visual-matte-opacity: 0;
+  --product-visual-grain-opacity: 0;
+  --product-visual-abrasive-opacity: 0;
+  --product-visual-trace-opacity: 0;
+  --product-visual-sheen-opacity: 0;
+  --product-visual-sweep-opacity: 0;
+  --product-visual-sweep-x: -150%;
+  --product-visual-shadow-width: 78px;
+  --product-visual-shadow-height: 13px;
+  --product-visual-shadow-blur: 9px;
+  --product-visual-shadow-opacity: 0.22;
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 176px;
+  place-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in oklch, var(--foreground), transparent 86%);
+  background:
+    radial-gradient(
+      ellipse at 50% 82%,
+      color-mix(in oklch, var(--product-visual-accent), transparent 90%),
+      transparent 58%
+    ),
+    linear-gradient(
+      155deg,
+      color-mix(in oklch, var(--surface), white 48%) 0%,
+      color-mix(in oklch, var(--surface-muted), white 32%) 56%,
+      color-mix(in oklch, var(--surface), black 4%) 100%
+    );
+  color: var(--foreground);
+  isolation: isolate;
+  transition:
+    background-color var(--product-visual-duration) var(--cs-ease-out),
+    border-color 220ms ease;
+}
+
+.surface[data-product-visual-treatment="paint"] {
+  --product-visual-duration: 360ms;
+  --product-visual-settle-y: 0px;
+  --product-visual-settle-r: 0deg;
+  background: color-mix(in oklch, var(--surface), white 44%);
+}
+
+.surface[data-product-visual-treatment="clearcoat"] {
+  --product-visual-duration: 440ms;
+  --product-visual-settle-y: 4px;
+  --product-visual-settle-r: -0.35deg;
+}
+
+.surface[data-product-visual-treatment="fabric"] {
+  --product-visual-duration: 360ms;
+  --product-visual-settle-y: 2px;
+  --product-visual-settle-r: 0deg;
+}
+
+.surface[data-product-visual-treatment="foam"] {
+  --product-visual-duration: 360ms;
+  --product-visual-settle-y: 2px;
+  --product-visual-settle-r: 0deg;
+}
+
+.surface[data-product-visual-treatment="matte"] {
+  --product-visual-duration: 360ms;
+  --product-visual-settle-y: 3px;
+}
+
+.surface[data-product-visual-treatment="abrasive"] {
+  --product-visual-duration: 360ms;
+  --product-visual-settle-y: 2px;
+}
+
+.surface[data-product-visual-treatment="polish"] {
+  --product-visual-duration: 400ms;
+  --product-visual-settle-y: 3px;
+}
+
+:global(.dark) .surface {
+  border-bottom-color: color-mix(in oklch, var(--foreground), transparent 86%);
+  background:
+    radial-gradient(
+      ellipse at 50% 82%,
+      color-mix(in oklch, var(--product-visual-accent), transparent 86%),
+      transparent 58%
+    ),
+    linear-gradient(
+      155deg,
+      color-mix(in oklch, var(--surface-muted), black 8%) 0%,
+      color-mix(in oklch, var(--surface), black 34%) 58%,
+      oklch(0.06 0.01 250) 100%
+    );
+}
+
+:global(.dark) .surface[data-product-visual-treatment="paint"] {
+  background: color-mix(in oklch, var(--surface), black 44%);
+}
+
+:global(.cs-product-motion-card:hover) .surface,
+:global(.cs-product-motion-card:focus-within) .surface,
+:global(.cs-product-motion-card[data-pointer-active="true"]) .surface,
+.surface[data-product-visual-pointer-active="true"],
+.surface:hover,
+.surface:focus-within {
+  --product-visual-current-y: var(--product-visual-settle-y);
+  --product-visual-current-r: var(--product-visual-settle-r);
+  --product-visual-core-scale: 1;
+  --product-visual-core-opacity: 0.88;
+  --product-visual-wash-opacity: 0.82;
+  --product-visual-matte-opacity: 0.82;
+  --product-visual-grain-opacity: 0.54;
+  --product-visual-abrasive-opacity: 0.74;
+  --product-visual-trace-opacity: 0.46;
+  --product-visual-sheen-opacity: 0.84;
+  --product-visual-sweep-opacity: 0.62;
+  --product-visual-sweep-x: 230%;
+  --product-visual-shadow-width: 124px;
+  --product-visual-shadow-height: 7px;
+  --product-visual-shadow-blur: 18px;
+  --product-visual-shadow-opacity: 0.3;
+}
+
+:global(.cs-product-motion-card:hover) .surface[data-product-visual-treatment="paint"],
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"],
+:global(.cs-product-motion-card[data-pointer-active="true"]) .surface[data-product-visual-treatment="paint"],
+.surface[data-product-visual-treatment="paint"][data-product-visual-pointer-active="true"],
+.surface[data-product-visual-treatment="paint"]:hover,
+.surface[data-product-visual-treatment="paint"]:focus-within {
+  --product-visual-current-y: 0px;
+  --product-visual-current-r: 0deg;
+  --product-visual-core-opacity: 0;
+  --product-visual-wash-opacity: 0;
+  --product-visual-sheen-opacity: 0;
+  --product-visual-sweep-opacity: 0;
+  --product-visual-shadow-width: 86px;
+  --product-visual-shadow-height: 9px;
+  --product-visual-shadow-blur: 13px;
+  --product-visual-shadow-opacity: 0.16;
+}
+
+:global(.cs-product-motion-card:hover) .surface[data-product-visual-treatment="clearcoat"],
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="clearcoat"],
+:global(.cs-product-motion-card[data-pointer-active="true"]) .surface[data-product-visual-treatment="clearcoat"],
+.surface[data-product-visual-treatment="clearcoat"][data-product-visual-pointer-active="true"],
+.surface[data-product-visual-treatment="clearcoat"]:hover,
+.surface[data-product-visual-treatment="clearcoat"]:focus-within {
+  --product-visual-core-opacity: 0.68;
+  --product-visual-wash-opacity: 0.46;
+  --product-visual-sheen-opacity: 0.9;
+  --product-visual-sweep-opacity: 0.68;
+  --product-visual-shadow-width: 136px;
+  --product-visual-shadow-blur: 20px;
+}
+
+:global(.cs-product-motion-card:hover) .surface[data-product-visual-treatment="fabric"],
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="fabric"],
+:global(.cs-product-motion-card[data-pointer-active="true"]) .surface[data-product-visual-treatment="fabric"],
+.surface[data-product-visual-treatment="fabric"][data-product-visual-pointer-active="true"],
+.surface[data-product-visual-treatment="fabric"]:hover,
+.surface[data-product-visual-treatment="fabric"]:focus-within {
+  --product-visual-matte-opacity: 0.76;
+  --product-visual-grain-opacity: 0.72;
+  --product-visual-shadow-width: 112px;
+  --product-visual-shadow-opacity: 0.24;
+}
+
+:global(.cs-product-motion-card:hover) .surface[data-product-visual-treatment="foam"],
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="foam"],
+:global(.cs-product-motion-card[data-pointer-active="true"]) .surface[data-product-visual-treatment="foam"],
+.surface[data-product-visual-treatment="foam"][data-product-visual-pointer-active="true"],
+.surface[data-product-visual-treatment="foam"]:hover,
+.surface[data-product-visual-treatment="foam"]:focus-within {
+  --product-visual-matte-opacity: 0.8;
+  --product-visual-grain-opacity: 0.68;
+  --product-visual-shadow-width: 116px;
+  --product-visual-shadow-opacity: 0.25;
+}
+
+.baseLayer,
+.floodWash,
+.floodCore,
+.matteField,
+.matteGrain,
+.abrasiveWash,
+.abrasiveTrace,
+.polishSheen,
+.polishSweep,
+.contactShadow {
+  position: absolute;
+  pointer-events: none;
+}
+
+.baseLayer {
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground), transparent 91%) 0.8px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground), transparent 95%) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in oklch, var(--foreground), transparent 96%) 1px, transparent 1px);
+  background-size: 10px 10px, 34px 34px, 34px 34px;
+  opacity: 0.38;
+}
+
+.contactShadow {
+  left: 50%;
+  bottom: clamp(16px, 8%, 28px);
+  z-index: 2;
+  width: var(--product-visual-shadow-width);
+  height: var(--product-visual-shadow-height);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--foreground), transparent 62%);
+  filter: blur(var(--product-visual-shadow-blur));
+  opacity: var(--product-visual-shadow-opacity);
+  transform: translateX(-50%);
+  transition:
+    width var(--product-visual-duration) var(--cs-ease-out),
+    height var(--product-visual-duration) var(--cs-ease-out),
+    filter var(--product-visual-duration) var(--cs-ease-out),
+    opacity var(--product-visual-duration) var(--cs-ease-out);
+}
+
+.floodWash {
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse at 54% 82%,
+      color-mix(in oklch, var(--product-visual-accent), white 28%) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      155deg,
+      color-mix(in oklch, var(--product-visual-accent), white 70%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), white 46%) 48%,
+      color-mix(in oklch, var(--product-visual-accent), black 10%) 118%
+    );
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 420ms var(--cs-ease-out),
+    transform 420ms var(--cs-ease-polish);
+}
+
+.surface[data-product-visual-treatment="paint"] .baseLayer {
+  opacity: 0;
+}
+
+.surface[data-product-visual-treatment="paint"] .floodWash {
+  inset: -1px;
+  background: var(--product-visual-accent);
+  opacity: 1;
+  transform: translate3d(0, var(--product-visual-paint-field-y, -104%), 0);
+  transition: transform var(--product-visual-duration) var(--cs-ease-wipe);
+}
+
+.surface[data-product-visual-treatment="paint"][data-paint-hover-direction="from-top"] .floodWash {
+  --product-visual-paint-field-y: -104%;
+}
+
+.surface[data-product-visual-treatment="paint"][data-paint-hover-direction="from-bottom"] .floodWash {
+  --product-visual-paint-field-y: 104%;
+}
+
+.surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"] .floodWash,
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] .floodWash {
+  transform: translate3d(0, 0, 0);
+}
+
+.surface[data-product-visual-treatment="paint"] .floodCore {
+  display: none;
+  opacity: 0;
+}
+
+.surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"] .floodCore,
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] .floodCore {
+  opacity: 0;
+}
+
+.surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"],
+:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] {
+  --product-visual-paint-product-scale: 0.976;
+}
+
+.surface[data-product-visual-treatment="paint"] .polishSheen,
+.surface[data-product-visual-treatment="paint"] .polishSweep {
+  display: none;
+}
+
+.surface[data-product-visual-treatment="clearcoat"] .floodWash {
+  background:
+    linear-gradient(
+      108deg,
+      color-mix(in oklch, var(--product-visual-accent), white 76%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.99 0.004 92) 56%) 38%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.74 0.018 245) 32%) 100%
+    );
+  opacity: var(--product-visual-wash-opacity);
+}
+
+.floodCore {
+  left: -34%;
+  top: -18%;
+  z-index: 1;
+  width: 168%;
+  height: 184%;
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle at 52% 72%,
+      color-mix(in oklch, var(--product-visual-accent), white 22%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), transparent 18%) 28%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse at 50% 94%,
+      color-mix(in oklch, black, transparent 88%),
+      transparent 44%
+    );
+  opacity: 0;
+  transform: scale(var(--product-visual-core-scale));
+  transform-origin: 50% 78%;
+  transition:
+    opacity 400ms var(--cs-ease-out),
+    transform 400ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="clearcoat"] .floodCore {
+  background:
+    radial-gradient(
+      ellipse at 46% 30%,
+      oklch(1 0 0 / 0.34) 0%,
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 54% 82%,
+      color-mix(in oklch, var(--product-visual-accent), white 22%) 0%,
+      transparent 66%
+    );
+  opacity: var(--product-visual-core-opacity);
+}
+
+.matteField {
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse at 46% 80%,
+      color-mix(in oklch, var(--product-visual-accent), var(--surface) 18%) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in oklch, var(--product-visual-accent), white 62%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), var(--surface-muted) 52%) 54%,
+      color-mix(in oklch, var(--surface-muted), black 6%) 100%
+    );
+  opacity: 0;
+  transform: scale(var(--product-visual-core-scale));
+  transform-origin: 50% 78%;
+  transition:
+    opacity 360ms var(--cs-ease-out),
+    transform 360ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="matte"] .matteField {
+  opacity: var(--product-visual-matte-opacity);
+}
+
+.surface[data-product-visual-treatment="fabric"] .matteField {
+  background:
+    linear-gradient(
+      140deg,
+      color-mix(in oklch, var(--product-visual-accent), white 64%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), var(--surface-muted) 46%) 100%
+    );
+  opacity: var(--product-visual-matte-opacity);
+}
+
+.surface[data-product-visual-treatment="foam"] .matteField {
+  background:
+    radial-gradient(
+      ellipse at 48% 78%,
+      color-mix(in oklch, var(--product-visual-accent), white 38%) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in oklch, var(--product-visual-accent), white 60%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), var(--surface-muted) 44%) 100%
+    );
+  opacity: var(--product-visual-matte-opacity);
+}
+
+.matteGrain {
+  inset: 0;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground), transparent 86%) 0.7px, transparent 1px),
+    repeating-linear-gradient(
+      36deg,
+      transparent 0 13px,
+      color-mix(in oklch, var(--foreground), transparent 94%) 13px 14px,
+      transparent 14px 26px
+    );
+  background-size: 7px 7px, 42px 42px;
+  opacity: 0;
+  transition: opacity 360ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="matte"] .matteGrain {
+  opacity: var(--product-visual-grain-opacity);
+}
+
+.surface[data-product-visual-treatment="fabric"] .matteGrain {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in oklch, var(--foreground), transparent 93%) 0 1px,
+      transparent 1px 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--foreground), transparent 94%) 0 1px,
+      transparent 1px 9px
+    ),
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground), transparent 90%) 0.45px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 6px 6px;
+  opacity: var(--product-visual-grain-opacity);
+}
+
+.surface[data-product-visual-treatment="foam"] .matteGrain {
+  background-image:
+    radial-gradient(circle at 4px 4px, color-mix(in oklch, var(--foreground), transparent 86%) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 10px 12px, color-mix(in oklch, var(--foreground), transparent 92%) 0 1.4px, transparent 2.1px);
+  background-size: 18px 18px, 24px 24px;
+  opacity: var(--product-visual-grain-opacity);
+}
+
+.abrasiveWash {
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse at 42% 78%,
+      color-mix(in oklch, var(--product-visual-accent), var(--foreground) 10%) 0%,
+      transparent 58%
+    ),
+    linear-gradient(
+      152deg,
+      color-mix(in oklch, var(--product-visual-accent), white 58%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), var(--surface-muted) 38%) 52%,
+      color-mix(in oklch, var(--product-visual-accent), black 12%) 120%
+    );
+  opacity: 0;
+  transition: opacity 360ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="abrasive"] .abrasiveWash {
+  opacity: var(--product-visual-abrasive-opacity);
+}
+
+.abrasiveTrace {
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground), transparent 82%) 0.65px, transparent 1px),
+    repeating-linear-gradient(
+      176deg,
+      transparent 0 8px,
+      color-mix(in oklch, var(--product-visual-accent), var(--foreground) 18%) 8px 9px,
+      transparent 9px 16px
+    ),
+    repeating-linear-gradient(
+      92deg,
+      color-mix(in oklch, var(--foreground), transparent 95%) 0 1px,
+      transparent 1px 6px
+    );
+  background-size: 8px 8px, 100% 100%, 100% 100%;
+  opacity: 0;
+  transition: opacity 360ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="abrasive"] .abrasiveTrace {
+  opacity: var(--product-visual-trace-opacity);
+}
+
+.polishSheen {
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse at 48% 78%,
+      color-mix(in oklch, var(--product-visual-accent), white 72%) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in oklch, var(--surface), white 38%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), white 70%) 46%,
+      color-mix(in oklch, var(--product-visual-accent), var(--surface) 48%) 100%
+    );
+  opacity: 0;
+  transform: scale(var(--product-visual-core-scale));
+  transform-origin: 50% 74%;
+  transition:
+    opacity 400ms var(--cs-ease-out),
+    transform 400ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="polish"] .polishSheen {
+  opacity: var(--product-visual-sheen-opacity);
+}
+
+.surface[data-product-visual-treatment="clearcoat"] .polishSheen {
+  inset: -24%;
+  background:
+    radial-gradient(
+      ellipse at 38% 18%,
+      oklch(1 0 0 / 0.36) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 82% 86%,
+      oklch(1 0 0 / 0.14) 0%,
+      transparent 42%
+    ),
+    linear-gradient(
+      155deg,
+      transparent 12%,
+      oklch(1 0 0 / 0.2) 45%,
+      transparent 78%
+    );
+  filter: blur(8px);
+  mask-image: radial-gradient(ellipse at 54% 52%, black 0 58%, transparent 82%);
+  opacity: var(--product-visual-sheen-opacity);
+}
+
+.polishSweep {
+  left: -58%;
+  top: -10%;
+  bottom: -10%;
+  z-index: 1;
+  width: 58%;
+  background:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      oklch(1 0 0 / 0.05) 28%,
+      oklch(0.99 0.003 250 / 0.38) 48%,
+      transparent 72%
+    );
+  filter: blur(0.2px);
+  opacity: 0;
+  transform: rotate(-9deg) translateX(var(--product-visual-sweep-x));
+  transition:
+    opacity 280ms var(--cs-ease-out),
+    transform 420ms var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="polish"] .polishSweep {
+  opacity: var(--product-visual-sweep-opacity);
+}
+
+.surface[data-product-visual-treatment="clearcoat"] .polishSweep {
+  top: -28%;
+  bottom: -28%;
+  left: -64%;
+  width: 70%;
+  background:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      oklch(1 0 0 / 0.035) 24%,
+      oklch(0.99 0.003 250 / 0.28) 48%,
+      transparent 76%
+    );
+  filter: blur(7px);
+  mask-image: linear-gradient(90deg, transparent 0%, black 22%, black 72%, transparent 100%);
+  opacity: var(--product-visual-sweep-opacity);
+}
+
+.brandMark {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 4;
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--foreground), transparent 86%);
+  border-radius: 8px;
+  background: color-mix(in oklch, var(--surface), transparent 5%);
+  color: var(--foreground);
+  padding: 6px 9px;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.objectWrap {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  width: min(82%, 318px);
+  height: 84%;
+  min-height: 132px;
+  place-items: center;
+  transform: translateY(var(--product-visual-current-y)) rotate(var(--product-visual-current-r));
+  transform-origin: 50% 84%;
+  transition: transform var(--product-visual-duration) var(--cs-ease-out);
+}
+
+.surface[data-product-visual-treatment="paint"] .objectWrap {
+  transform: scale(var(--product-visual-paint-product-scale));
+  transition: transform var(--product-visual-duration) var(--cs-ease-out);
+}
+
+.surface[data-product-visual-real-image="true"] .objectWrap {
+  width: min(92%, 390px);
+  height: 90%;
+}
+
+.productImage {
+  object-fit: contain;
+  padding: clamp(6px, 1.5vw, 16px);
+  filter: drop-shadow(0 20px 28px color-mix(in oklch, var(--foreground), transparent 70%));
+}
+
+.surface[data-product-visual-treatment="paint"] .productImage {
+  filter: none;
+}
+
+.placeholderVisual {
+  display: grid;
+  width: min(100%, 270px);
+  min-height: 72%;
+  align-content: center;
+  justify-items: start;
+  gap: 7px;
+  border: 1px solid color-mix(in oklch, var(--foreground), transparent 86%);
+  border-radius: 12px;
+  background: color-mix(in oklch, var(--surface), transparent 7%);
+  color: var(--muted-foreground);
+  padding: 18px;
+}
+
+:global(.dark) .floodWash {
+  background:
+    radial-gradient(
+      ellipse at 54% 82%,
+      color-mix(in oklch, var(--product-visual-accent), white 8%) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      155deg,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.28 0.018 250) 44%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.14 0.012 250) 42%) 54%,
+      color-mix(in oklch, var(--product-visual-accent), black 48%) 120%
+    );
+}
+
+:global(.dark) .surface[data-product-visual-treatment="paint"] .floodWash {
+  background: var(--product-visual-accent);
+}
+
+:global(.dark) .surface[data-product-visual-treatment="clearcoat"] .floodWash {
+  background:
+    linear-gradient(
+      108deg,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.24 0.014 250) 56%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.14 0.012 250) 42%) 44%,
+      color-mix(in oklch, var(--product-visual-accent), black 42%) 100%
+    );
+}
+
+:global(.dark) .floodCore {
+  background:
+    radial-gradient(
+      circle at 52% 72%,
+      color-mix(in oklch, var(--product-visual-accent), white 6%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), transparent 32%) 30%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse at 50% 94%,
+      oklch(0 0 0 / 0.34),
+      transparent 44%
+    );
+}
+
+:global(.dark) .surface[data-product-visual-treatment="clearcoat"] .floodCore {
+  background:
+    radial-gradient(
+      ellipse at 46% 30%,
+      oklch(1 0 0 / 0.18) 0%,
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 54% 82%,
+      color-mix(in oklch, var(--product-visual-accent), white 8%) 0%,
+      transparent 66%
+    );
+}
+
+:global(.dark) .matteField {
+  background:
+    radial-gradient(
+      ellipse at 46% 80%,
+      color-mix(in oklch, var(--product-visual-accent), white 4%) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.25 0.015 250) 54%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.12 0.012 250) 58%) 54%,
+      oklch(0.07 0.01 250) 100%
+    );
+}
+
+:global(.dark) .surface[data-product-visual-treatment="fabric"] .matteField {
+  background:
+    linear-gradient(
+      140deg,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.24 0.016 250) 58%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.1 0.012 250) 54%) 100%
+    );
+}
+
+:global(.dark) .surface[data-product-visual-treatment="foam"] .matteField {
+  background:
+    radial-gradient(
+      ellipse at 48% 78%,
+      color-mix(in oklch, var(--product-visual-accent), white 8%) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.24 0.016 250) 58%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.1 0.012 250) 54%) 100%
+    );
+}
+
+:global(.dark) .abrasiveWash {
+  background:
+    radial-gradient(
+      ellipse at 42% 78%,
+      color-mix(in oklch, var(--product-visual-accent), white 4%) 0%,
+      transparent 58%
+    ),
+    linear-gradient(
+      152deg,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.24 0.016 250) 54%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.12 0.012 250) 50%) 52%,
+      color-mix(in oklch, var(--product-visual-accent), black 46%) 120%
+    );
+}
+
+:global(.dark) .polishSheen {
+  background:
+    radial-gradient(
+      ellipse at 48% 78%,
+      color-mix(in oklch, var(--product-visual-accent), white 18%) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in oklch, var(--surface-muted), white 4%) 0%,
+      color-mix(in oklch, var(--product-visual-accent), oklch(0.2 0.014 250) 58%) 46%,
+      color-mix(in oklch, var(--product-visual-accent), black 42%) 100%
+    );
+}
+
+.placeholderMark {
+  width: 34px;
+  height: 20px;
+  border: 2px solid color-mix(in oklch, var(--product-visual-accent), var(--foreground) 20%);
+  border-radius: 7px;
+  background:
+    linear-gradient(90deg, transparent 44%, color-mix(in oklch, var(--foreground), transparent 82%) 45% 55%, transparent 56%),
+    color-mix(in oklch, var(--product-visual-accent), transparent 88%);
+}
+
+.placeholderVisual small {
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.placeholderVisual strong {
+  color: var(--foreground);
+  font-size: 18px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.placeholderVisual span:not(.placeholderMark) {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.28;
+}
+
+@media (max-width: 520px) {
+  .surface {
+    min-height: 206px;
+  }
+
+  .brandMark {
+    max-width: calc(100% - 20px);
+    top: 10px;
+    left: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surface,
+  .surface * {
+    transition: none !important;
+  }
+
+  :global(.cs-product-motion-card:hover) .surface,
+  :global(.cs-product-motion-card:focus-within) .surface,
+  :global(.cs-product-motion-card[data-pointer-active="true"]) .surface,
+  .surface[data-product-visual-pointer-active="true"],
+  .surface:hover,
+  .surface:focus-within {
+    --product-visual-current-y: 0px;
+    --product-visual-current-r: 0deg;
+    --product-visual-sweep-x: -18%;
+    --product-visual-shadow-width: 72px;
+    --product-visual-shadow-height: 10px;
+    --product-visual-shadow-blur: 10px;
+  }
+
+  .objectWrap {
+    transform: none !important;
+  }
+
+  .surface[data-product-visual-treatment="paint"] .floodWash {
+    opacity: 0;
+    transform: none !important;
+  }
+
+  .surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"] .floodWash,
+  :global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] .floodWash {
+    opacity: 1;
+    transform: none !important;
+  }
+
+  .polishSweep {
+    transform: rotate(-10deg) translateX(-18%) !important;
+  }
+}

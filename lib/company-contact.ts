@@ -12,6 +12,31 @@ export type CompanyContact = {
   editableNote: string;
 };
 
+export type CompanyLocation = {
+  name: string;
+  city: string;
+  label: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  dataNote: string;
+};
+
+/**
+ * Canonical company/headquarters location. Every single-location map
+ * (contact teaser, homepage preview) must read coordinates from here —
+ * never duplicate lat/lng in components.
+ */
+export const companyLocation: CompanyLocation = {
+  name: "Carsystem i R-M Inđija",
+  city: "Inđija",
+  label: "Centrala · Inđija",
+  coordinates: { lat: 45.0482, lng: 20.0817 },
+  dataNote:
+    "Koordinate su na nivou grada Inđije; zameniti tačnom adresom centrale kada bude potvrđena.",
+};
+
 export const companyContact: CompanyContact = {
   name: "Carsystem i R-M Inđija",
   city: "Inđija",

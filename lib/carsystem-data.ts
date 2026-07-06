@@ -1222,6 +1222,7 @@ export const products: CarsystemProduct[] = [
       "R-M DIAMONT bazna boja u limenci",
     ),
   }),
+  archivedProduct("rm-diamont-bezbojni-lak"),
   createProduct({
     slug: "rm-body-filler-white-b-2e11",
     name: "R-M Body Filler White B 2E11",

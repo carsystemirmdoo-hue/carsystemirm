@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   getProductPublicStatus,
@@ -7,7 +6,7 @@ import {
   type ProgramGroup,
   type RefinishPhase,
 } from "@/lib/carsystem-data";
-import { getProductMotionStyle } from "@/components/product/productMotion";
+import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import styles from "./BrandProgramPage.module.css";
 
 export function EntityProductCard({
@@ -22,7 +21,6 @@ export function EntityProductCard({
   program: ProgramGroup;
 }) {
   const image = product.productImage ?? product.galleryImages[0] ?? null;
-  const usesStructuredShot = !image || image.src.includes("placeholder-product");
   const packageSummary = product.packages.map((item) => item.label).join(" / ");
   const publicStatus = getProductPublicStatus(product);
   const productHref = `/proizvodi/${product.slug}`;
@@ -30,42 +28,28 @@ export function EntityProductCard({
 
   return (
     <article
-      className={`${styles.productCard} cs-gloss-card cs-product-motion-card`}
+      className={`${styles.productCard} cs-product-motion-card`}
       data-cursor="card"
       data-motion-surface
       data-product-card-motion
-      style={getProductMotionStyle(product)}
     >
       <Link
-        className={`${styles.productMedia} cs-image-surface`}
+        className={styles.productMedia}
         href={productHref}
         aria-label={`Pogledaj proizvod ${product.name}`}
         data-cursor="image"
-        data-motion-surface
-        data-product-image-motion
       >
-        <span className={styles.productBrand}>{brand.name}</span>
-        {!usesStructuredShot && image ? (
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1180px) 28vw, (min-width: 768px) 44vw, 92vw"
-            className={styles.productImage}
-          />
-        ) : (
-          <span className={styles.productShotPlaceholder}>
-            <small>PRODUCT SHOT</small>
-            <strong>{brand.name}</strong>
-            <span>{product.name}</span>
-            <em>studio · seamless grey</em>
-          </span>
-        )}
+        <ProductVisualSurface
+          brandName={brand.name}
+          image={image}
+          product={product}
+          sizes="(min-width: 1180px) 28vw, (min-width: 768px) 44vw, 92vw"
+        />
       </Link>
 
       <div className={styles.productBody}>
         <p className={styles.productMetaLine}>
-          {program.shortName} · {phase.name}
+          {brand.name} · {program.shortName} · {phase.name}
         </p>
 
         <Link href={productHref}>

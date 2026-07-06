@@ -17,6 +17,7 @@ export function CatalogFilters({
   onClear,
   onPhaseChange,
   onProgramChange,
+  onMobileClose,
   onStatusChange,
   onTypeChange,
   phases,
@@ -37,6 +38,7 @@ export function CatalogFilters({
   onClear: () => void;
   onPhaseChange: (value: string) => void;
   onProgramChange: (value: string) => void;
+  onMobileClose: () => void;
   onStatusChange: (value: string) => void;
   onTypeChange: (value: string) => void;
   phases: RefinishPhase[];
@@ -80,6 +82,17 @@ export function CatalogFilters({
             onClick={() => onDesktopCollapseChange(true)}
           >
             <span aria-hidden="true">«</span>
+          </button>
+          <button
+            className={`${styles.mobileFilterClose} cs-interactive-surface`}
+            type="button"
+            aria-label="Zatvori filtere"
+            aria-controls="catalog-filters"
+            data-cursor="button"
+            data-motion-surface
+            onClick={onMobileClose}
+          >
+            <span aria-hidden="true">×</span>
           </button>
         </div>
       </div>

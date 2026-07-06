@@ -30,7 +30,7 @@ export function BrandEcosystemControls({
   onActivate: (index: number) => void;
 }) {
   return (
-    <div className={styles.programDeckProgress} aria-label="Izaberi programsku celinu">
+    <div className={styles.programDeckProgress} aria-label="Izaberite programsku celinu">
       <span>{categories[activeIndex].number}</span>
       <div>
         {categories.map((category, index) => (
@@ -38,7 +38,7 @@ export function BrandEcosystemControls({
             type="button"
             key={category.id}
             className={index === activeIndex ? styles.programDeckProgressActive : ""}
-            aria-label={`Idi na program ${index + 1}: ${category.title}`}
+            aria-label={`Pređite na program ${index + 1}: ${category.title}`}
             aria-pressed={index === activeIndex}
             data-cursor="button"
             data-complete={index < activeIndex || undefined}
@@ -70,7 +70,7 @@ export function BrandEcosystemMobileControls({
   onActivate: (index: number) => void;
 }) {
   return (
-    <div className={styles.programMobileControls} aria-label="Izaberi program">
+    <div className={styles.programMobileControls} aria-label="Izaberite program">
       {categories.map((category, index) => (
         <button
           type="button"

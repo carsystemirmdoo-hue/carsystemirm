@@ -223,6 +223,15 @@ export function CatalogExplorer({
   const activeModuleConfig = catalogModules.find(
     (catalogModule) => catalogModule.key === activeModule,
   );
+  const phaseTabs = useMemo(
+    () => [
+      { label: "Svi proizvodi", slug: "" },
+      ...[...phases]
+        .sort((first, second) => first.step - second.step)
+        .map((phase) => ({ label: phase.name, slug: phase.slug })),
+    ],
+    [phases],
+  );
 
   useEffect(() => {
     currentUrlFiltersRef.current = currentUrlFilters;
@@ -337,9 +346,9 @@ export function CatalogExplorer({
     setActiveModule("");
   }
 
-  function selectModule(catalogModule: CatalogModule) {
-    setActiveModule((current) => (current === catalogModule.key ? "" : catalogModule.key));
-    setProgramSlug("");
+  function selectPhaseTab(nextPhaseSlug: string) {
+    setPhaseSlug(nextPhaseSlug);
+    setActiveModule("");
     setFiltersOpen(false);
   }
 
@@ -366,7 +375,9 @@ export function CatalogExplorer({
             Katalog proizvoda
           </h1>
           <p className={styles.subtitle}>
-            Profesionalni program za pripremu, farbanje i završnu obradu vozila.
+            Pregled programa za pripremu, bojenje, lakiranje i završnu obradu vozila.
+            Izaberite kategoriju, uporedite proizvode i pošaljite upit za materijal koji
+            odgovara vašem poslu.
           </p>
         </div>
 
@@ -392,28 +403,26 @@ export function CatalogExplorer({
         </div>
       </section>
 
-      <section className={styles.programRail} aria-labelledby="catalog-programs-title">
-        <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>Programi</p>
-          <h2 id="catalog-programs-title">Pregled po programu</h2>
-        </div>
+      <section className={styles.phaseRail} aria-label="Faze refinish procesa">
+        <div className={styles.phaseTabs}>
+          {phaseTabs.map((phaseTab) => {
+            const isActive = phaseSlug === phaseTab.slug;
 
-        <div className={styles.programChips}>
-          {catalogModules.map((catalogModule) => (
-            <button
-              className={`${styles.programChip} cs-interactive-surface ${
-                activeModule === catalogModule.key ? styles.programChipActive : ""
-              }`}
-              key={catalogModule.key}
-              type="button"
-              data-cursor="button"
-              data-motion-surface
-              onClick={() => selectModule(catalogModule)}
-            >
-              <span>{catalogModule.label}</span>
-              <small>{catalogModule.detail}</small>
-            </button>
-          ))}
+            return (
+              <button
+                className={`${styles.phaseTab} ${isActive ? styles.phaseTabActive : ""}`}
+                key={phaseTab.slug || "all"}
+                type="button"
+                aria-pressed={isActive}
+                data-cursor="button"
+                data-motion-surface
+                onClick={() => selectPhaseTab(phaseTab.slug)}
+              >
+                {phaseTab.label}
+                <span aria-hidden="true" />
+              </button>
+            );
+          })}
         </div>
       </section>
 
@@ -448,6 +457,7 @@ export function CatalogExplorer({
             onBrandChange={(value) => updateScopedFilter(setBrandSlug, value)}
             onClear={clearFilters}
             onDesktopCollapseChange={setDesktopFiltersCollapsed}
+            onMobileClose={() => setFiltersOpen(false)}
             onPhaseChange={(value) => updateScopedFilter(setPhaseSlug, value)}
             onProgramChange={(value) => {
               setProgramSlug(value);

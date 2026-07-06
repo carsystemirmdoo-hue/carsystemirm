@@ -207,15 +207,19 @@
 /* ---------- shell ---------- */
 
 .locatorShell {
+  --locator-map-height: 560px;
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: clamp(16px, 2vw, 24px);
   align-items: stretch;
+  min-height: 0;
 }
 
 .mapColumn {
   position: relative;
   display: grid;
+  min-width: 0;
+  min-height: 0;
   gap: 12px;
   align-content: start;
 }
@@ -223,7 +227,7 @@
 /* Shared canvas/loading/marker presentation lives in
    components/map/CarsystemMap.module.css; this sizes the locator instance. */
 .locatorCanvas {
-  height: 560px;
+  height: var(--locator-map-height);
 }
 
 .mapFallback {
@@ -350,17 +354,41 @@
 /* ---------- results rail ---------- */
 
 .resultsRail {
-  display: grid;
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  height: var(--locator-map-height);
+  max-height: var(--locator-map-height);
+  flex-direction: column;
   gap: 12px;
-  align-content: start;
-  max-height: 560px;
   overflow-y: auto;
-  padding-right: 4px;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+  scrollbar-color: color-mix(in oklch, var(--accent), transparent 24%) transparent;
   scrollbar-width: thin;
+}
+
+.resultsRail::-webkit-scrollbar {
+  width: 8px;
+}
+
+.resultsRail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.resultsRail::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--accent), transparent 24%);
+  background-clip: padding-box;
 }
 
 .resultItem {
   position: relative;
+  flex: 0 0 auto;
+  min-height: 106px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -455,6 +483,8 @@
 
 .resultButton {
   display: grid;
+  min-height: 106px;
+  align-content: start;
   gap: 5px;
   width: 100%;
   padding: 16px 18px;
@@ -473,7 +503,7 @@
 
 .resultKicker {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
   color: var(--muted-foreground);
@@ -484,7 +514,13 @@
   text-transform: uppercase;
 }
 
+.resultKicker span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .resultKicker i {
+  margin-top: 3px;
   width: 8px;
   height: 8px;
   background: var(--accent);
@@ -497,18 +533,22 @@
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .resultAddress {
   color: var(--muted-foreground);
   font-size: 13.5px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .resultNote {
   color: var(--muted-foreground);
   font-size: 12px;
   font-style: italic;
+  overflow-wrap: anywhere;
 }
 
 .resultActions {
@@ -613,9 +653,11 @@
   }
 
   .resultsRail {
+    height: auto;
     max-height: none;
     overflow: visible;
     padding-right: 0;
+    scrollbar-gutter: auto;
   }
 }
 

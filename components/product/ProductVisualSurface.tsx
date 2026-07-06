@@ -79,8 +79,6 @@ export function ProductVisualSurface({
   }, [isSurfacePointerActive]);
 
   function updatePointerPosition(event: PointerEvent<HTMLSpanElement>) {
-    if (!isPaintTreatment) return;
-
     const rect = event.currentTarget.getBoundingClientRect();
     if (rect.width <= 0 || rect.height <= 0) return;
 
@@ -199,6 +197,7 @@ export function ProductVisualSurface({
           </span>
         )}
       </span>
+      <span className={styles.pointerLens} aria-hidden="true" />
     </span>
   );
 }

@@ -84,7 +84,9 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
     // Manual scrollTop keeps the page itself from jumping, unlike
     // scrollIntoView on nested scroll containers.
-    const target = item.offsetTop - rail.offsetTop - 12;
+    const railRect = rail.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const target = rail.scrollTop + itemRect.top - railRect.top - 12;
     rail.scrollTo({
       top: Math.max(0, target),
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -306,7 +308,9 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                     type="button"
                   >
                     <span className={styles.resultKicker}>
-                      {getPartnerLocationTypeLabel(store)} · {store.city}
+                      <span>
+                        {getPartnerLocationTypeLabel(store)} · {store.city}
+                      </span>
                       <i aria-hidden="true" />
                     </span>
                     <strong>{store.name}</strong>

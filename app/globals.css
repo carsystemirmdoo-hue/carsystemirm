@@ -211,12 +211,14 @@ body {
 .cs-pigment-cursor-halo[data-state="image"] {
   width: 46px;
   height: 46px;
-  border-color: var(--cs-orb-ring-strong);
+  border-color: oklch(1 0 0 / 0.72);
   background: transparent;
+  mix-blend-mode: difference;
 }
 
 .cs-pigment-cursor-halo[data-state="image"] .cs-pigment-cursor-plus {
-  opacity: 0.78;
+  color: #fff;
+  opacity: 0.9;
 }
 
 .cs-pigment-cursor-halo[data-state="process"] {

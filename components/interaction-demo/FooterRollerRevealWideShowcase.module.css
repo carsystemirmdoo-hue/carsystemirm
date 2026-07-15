@@ -1,0 +1,153 @@
+/*
+ * Horizontal 16:9 recording stage for the footer roller reveal showcase.
+ * Designed for a 1920×1080 frame at the native desktop rem scale: fixed
+ * editorial typography holds the left lane, quiet approach content sits in
+ * a right-hand rail so nothing collides with the title at the end state,
+ * and the untouched production Footer/FooterReveal is the hero.
+ */
+.stage {
+  min-height: 100svh;
+  background: var(--background);
+}
+
+/*
+ * Static editorial identity, fixed in the upper-left. Pointer-events off
+ * and no animation: it frames the interaction and must never compete with
+ * it or affect scroll geometry.
+ */
+.editorialFrame {
+  position: fixed;
+  top: 96px;
+  left: 96px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.eyebrow {
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  color: var(--foreground);
+}
+
+.editorialTitle {
+  margin-top: 20px;
+  color: var(--foreground);
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+/*
+ * Approach surface: the left lane stays clear for the fixed typography;
+ * the placeholder rail rides the right side of the frame.
+ */
+.prelude {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: 150svh;
+  padding: 0 120px 96px 96px;
+  overflow: hidden;
+}
+
+/* Faint ruler ticks along the right edge so the auto-scroll motion is
+   readable even over an otherwise empty surface. */
+.prelude::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 44px;
+  width: 14px;
+  background: repeating-linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--foreground), transparent 88%) 0 1px,
+    transparent 1px 84px
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.preludeRail {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: min(46%, 640px);
+}
+
+/* Abstract tail-of-page content: quiet placeholder panels that communicate
+   the viewer is approaching the end of a page. */
+.preludeBlock {
+  height: 120px;
+  border: 1px solid color-mix(in oklch, var(--border), transparent 25%);
+  border-radius: 14px;
+  background: color-mix(in oklch, var(--surface), transparent 45%);
+}
+
+.preludeBlock[data-variant="tall"] {
+  height: 170px;
+}
+
+.preludeCaption {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.preludeCaptionRule {
+  flex: 1;
+  height: 1px;
+  background: color-mix(in oklch, var(--foreground), transparent 84%);
+}
+
+/*
+ * Static Studio One signature band below the footer: portfolio editorial
+ * metadata closing the frame at the end of the take. In-flow, so it never
+ * covers footer content; the production reveal completes on real scroll
+ * before the page end regardless of the extra page height.
+ */
+.signature {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+  height: 150px;
+  padding: 0 96px;
+  border-top: 1px solid color-mix(in oklch, var(--border), transparent 30%);
+  background: var(--background);
+}
+
+.signatureName {
+  color: var(--foreground);
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signatureRole {
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}

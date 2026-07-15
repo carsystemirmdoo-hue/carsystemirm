@@ -1,4 +1,7 @@
-import type { PartnerStore } from "@/lib/partner-stores";
+import {
+  hasPartnerCoordinates,
+  type PartnerStore,
+} from "@/lib/partner-stores";
 
 export type GeoPoint = {
   lat: number;
@@ -29,8 +32,7 @@ export function haversineDistanceKm(a: GeoPoint, b: GeoPoint) {
 }
 
 /**
- * Nearest partner store by real coordinates. Stores without lat/lng are
- * skipped — coordinates are never guessed.
+ * Nearest public partner location by stored, verified coordinates.
  */
 export function findNearestPartnerStore(
   stores: PartnerStore[],
@@ -39,9 +41,11 @@ export function findNearestPartnerStore(
   let nearest: NearestStoreResult | null = null;
 
   for (const store of stores) {
-    if (!store.coordinates) continue;
-
-    const distanceKm = haversineDistanceKm(point, store.coordinates);
+    if (!hasPartnerCoordinates(store)) continue;
+    const distanceKm = haversineDistanceKm(point, {
+      lat: store.latitude,
+      lng: store.longitude,
+    });
     if (!nearest || distanceKm < nearest.distanceKm) {
       nearest = { store, distanceKm };
     }

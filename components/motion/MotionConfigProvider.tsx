@@ -21,11 +21,11 @@ export function MotionConfigProvider({ children }: { children: ReactNode }) {
     <MotionTransitionContext.Provider
       value={{ runThemeTransition: routeTransition.runThemeTransition }}
     >
-      {children}
       <RouteTransitionOverlay
         phase={routeTransition.phase}
         reducedMotion={routeTransition.reducedMotion}
       />
+      {children}
     </MotionTransitionContext.Provider>
   );
 }

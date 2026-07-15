@@ -1,0 +1,80 @@
+.stage {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(20px, 4vw, 64px);
+}
+
+.cardRow {
+  display: grid;
+  width: min(100%, 1180px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.4vw, 30px);
+  align-items: start;
+}
+
+/*
+ * Showcase-only inward drift: the packshot eases a few px toward the stage
+ * center (per-card --showcase-drift-x) on the same active states that drive
+ * the production reveal, so ?demo=1 triggers it through data-pointer-active.
+ */
+.card img {
+  transition: transform 680ms var(--cs-ease-out);
+}
+
+.card:hover img,
+.card:focus-within img,
+.card[data-pointer-active="true"] img {
+  transform: translateX(var(--showcase-drift-x, 0px)) scale(1.04);
+}
+
+.surfaceTrigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+/*
+ * No focus ring on the recording stage; keyboard focus is still visible
+ * through the production :focus-within roller reveal.
+ */
+.surfaceTrigger:focus-visible {
+  outline: none;
+}
+
+.cardLabel {
+  display: block;
+  padding: 14px 16px 16px;
+  color: var(--catalog-ink);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .cardRow {
+    grid-template-columns: minmax(0, 420px);
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card img {
+    transition: none;
+  }
+
+  .card:hover img,
+  .card:focus-within img,
+  .card[data-pointer-active="true"] img {
+    transform: none;
+  }
+}

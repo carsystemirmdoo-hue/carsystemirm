@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "locations:analyze": "node scripts/analyze-location-import.mjs",
+    "locations:build": "node scripts/build-public-locations.mjs",
+    "locations:validate": "node scripts/validate-public-locations.mjs",
+    "locations:import": "npm run locations:analyze && npm run locations:build && npm run locations:validate",
+    "locations:geocode": "node scripts/geocode-location-review.mjs --allow-network --limit=150 && npm run locations:build"
   },
   "dependencies": {
     "maplibre-gl": "^5.24.0",

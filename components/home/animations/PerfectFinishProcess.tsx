@@ -1,9 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  observeSiteTheme,
+  readSiteTheme,
+} from "@/components/map/carsystem-map-style";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import styles from "../CarsystemHomePage.module.css";
+
+type SiteTheme = "light" | "dark";
+
+type ProcessVisual = {
+  phaseIndex: number;
+  theme: SiteTheme;
+};
 
 type ProcessPhase = {
   title: string;
@@ -15,6 +27,11 @@ type ProcessPhase = {
   shiftX: string;
   shiftY: string;
   scale: number;
+  image: {
+    alt: string;
+    dark: string;
+    light: string;
+  };
 };
 
 const processPhases: ProcessPhase[] = [
@@ -29,6 +46,11 @@ const processPhases: ProcessPhase[] = [
     shiftX: "0%",
     shiftY: "0%",
     scale: 1,
+    image: {
+      alt: "Priprema branika abrazivom pre nanošenja refinish sistema",
+      dark: "/images/process/dark/new-01.webp",
+      light: "/images/process/light/new-01.webp",
+    },
   },
   {
     title: "Podloga",
@@ -41,6 +63,11 @@ const processPhases: ProcessPhase[] = [
     shiftX: "-1.2%",
     shiftY: "0.7%",
     scale: 1.025,
+    image: {
+      alt: "Ujednačena podloga naneta na pripremljen branik",
+      dark: "/images/process/dark/new-02.webp",
+      light: "/images/process/light/new-02.webp",
+    },
   },
   {
     title: "Boja",
@@ -53,6 +80,11 @@ const processPhases: ProcessPhase[] = [
     shiftX: "1.2%",
     shiftY: "-0.8%",
     scale: 1.045,
+    image: {
+      alt: "Nanošenje crvene bazne boje pištoljem za lakiranje",
+      dark: "/images/process/dark/new-03.webp",
+      light: "/images/process/light/new-03.webp",
+    },
   },
   {
     title: "Lak",
@@ -65,6 +97,11 @@ const processPhases: ProcessPhase[] = [
     shiftX: "-0.8%",
     shiftY: "-1.1%",
     scale: 1.035,
+    image: {
+      alt: "Nanošenje bezbojnog laka za dubinu i zaštitu završnog sloja",
+      dark: "/images/process/dark/new-04.webp",
+      light: "/images/process/light/new-04.webp",
+    },
   },
   {
     title: "Poliranje",
@@ -77,6 +114,11 @@ const processPhases: ProcessPhase[] = [
     shiftX: "0.6%",
     shiftY: "0.4%",
     scale: 1.015,
+    image: {
+      alt: "Mašinsko poliranje branika do završnog visokog sjaja",
+      dark: "/images/process/dark/new-05.webp",
+      light: "/images/process/light/new-05.webp",
+    },
   },
 ];
 
@@ -88,10 +130,145 @@ export function PerfectFinishProcess() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const phaseRefs = useRef<Array<HTMLElement | null>>([]);
   const rafRef = useRef<number | null>(null);
+  const visualRequestRef = useRef(0);
+  const visualRafRef = useRef<number | null>(null);
+  const visualTimerRef = useRef<number | null>(null);
   const activePhaseRef = useRef(0);
   const prefersReducedMotion = usePrefersReducedMotion();
   const [activePhase, setActivePhase] = useState(0);
+  const [theme, setTheme] = useState<SiteTheme | null>(null);
+  const [displayedVisual, setDisplayedVisual] = useState<ProcessVisual | null>(null);
+  const [previousVisual, setPreviousVisual] = useState<ProcessVisual | null>(null);
+  const [imageTransitionReady, setImageTransitionReady] = useState(true);
+  const [isRevealed, setIsRevealed] = useState(false);
   const phase = processPhases[activePhase];
+  const visualPhase = displayedVisual
+    ? processPhases[displayedVisual.phaseIndex]
+    : phase;
+
+  useEffect(() => {
+    setTheme(readSiteTheme());
+    return observeSiteTheme(setTheme);
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || prefersReducedMotion) {
+      setIsRevealed(true);
+      return undefined;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setIsRevealed(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setIsRevealed(true);
+        observer.disconnect();
+      },
+      {
+        rootMargin: "0px 0px -10%",
+        threshold: 0.14,
+      },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!theme) return undefined;
+
+    const targetVisual: ProcessVisual = { phaseIndex: activePhase, theme };
+    const targetPhase = processPhases[targetVisual.phaseIndex];
+    const targetSrc = targetPhase.image[targetVisual.theme];
+
+    if (!displayedVisual) {
+      setDisplayedVisual(targetVisual);
+      return undefined;
+    }
+
+    if (
+      displayedVisual.phaseIndex === targetVisual.phaseIndex &&
+      displayedVisual.theme === targetVisual.theme
+    ) {
+      return undefined;
+    }
+
+    const requestId = visualRequestRef.current + 1;
+    visualRequestRef.current = requestId;
+    let cancelled = false;
+    const preload = new window.Image();
+    preload.decoding = "async";
+
+    const promoteVisual = () => {
+      if (cancelled || requestId !== visualRequestRef.current) return;
+
+      if (visualTimerRef.current !== null) {
+        window.clearTimeout(visualTimerRef.current);
+        visualTimerRef.current = null;
+      }
+      if (visualRafRef.current !== null) {
+        window.cancelAnimationFrame(visualRafRef.current);
+        visualRafRef.current = null;
+      }
+
+      if (prefersReducedMotion) {
+        setPreviousVisual(null);
+        setDisplayedVisual(targetVisual);
+        setImageTransitionReady(true);
+        return;
+      }
+
+      setPreviousVisual(displayedVisual);
+      setDisplayedVisual(targetVisual);
+      setImageTransitionReady(false);
+      visualRafRef.current = window.requestAnimationFrame(() => {
+        visualRafRef.current = null;
+        setImageTransitionReady(true);
+        visualTimerRef.current = window.setTimeout(() => {
+          visualTimerRef.current = null;
+          setPreviousVisual(null);
+        }, 300);
+      });
+    };
+
+    preload.onload = () => {
+      if (typeof preload.decode === "function") {
+        void preload.decode().catch(() => undefined).finally(promoteVisual);
+        return;
+      }
+      promoteVisual();
+    };
+    preload.onerror = promoteVisual;
+    preload.src = targetSrc;
+
+    if (preload.complete) {
+      preload.onload = null;
+      if (typeof preload.decode === "function") {
+        void preload.decode().catch(() => undefined).finally(promoteVisual);
+      } else {
+        promoteVisual();
+      }
+    }
+
+    return () => {
+      cancelled = true;
+      preload.onload = null;
+      preload.onerror = null;
+    };
+  }, [activePhase, displayedVisual, prefersReducedMotion, theme]);
+
+  useEffect(() => {
+    return () => {
+      visualRequestRef.current += 1;
+      if (visualRafRef.current !== null) window.cancelAnimationFrame(visualRafRef.current);
+      if (visualTimerRef.current !== null) window.clearTimeout(visualTimerRef.current);
+    };
+  }, []);
 
   const setPhase = useCallback((index: number) => {
     const nextPhase = clamp(index, 0, processPhases.length - 1);
@@ -163,11 +340,12 @@ export function PerfectFinishProcess() {
     <section
       id="program"
       ref={sectionRef}
-      className={styles.section}
-      data-active-process={phase.process}
+      className={`${styles.section} ${styles.railTarget}`}
+      data-active-process={visualPhase.process}
+      data-process-revealed={isRevealed ? "true" : "false"}
       aria-labelledby="process-title"
     >
-      <div className={styles.sectionIntro}>
+      <div className={`${styles.sectionIntro} ${styles.processRevealIntro}`}>
         <p className={styles.sectionKicker}>Refinish proces</p>
         <h2 id="process-title">Od podloge do završnog sjaja.</h2>
         <p>
@@ -177,49 +355,93 @@ export function PerfectFinishProcess() {
       </div>
 
       <div className={styles.processGrid}>
-        <div className={styles.processVisual}>
+        <div className={`${styles.processVisual} ${styles.processRevealVisual}`}>
           <div
             className={`${styles.processImageFrame} cs-image-surface`}
             data-cursor="image"
+            data-image-transition-ready={imageTransitionReady ? "true" : "false"}
             data-motion-surface
-            data-process={phase.process}
+            data-process={visualPhase.process}
           >
             <span
               aria-hidden="true"
               className={styles.processImage}
               style={
                 {
-                  "--process-x": phase.shiftX,
-                  "--process-y": phase.shiftY,
-                  "--process-scale": phase.scale,
+                  "--process-x": visualPhase.shiftX,
+                  "--process-y": visualPhase.shiftY,
+                  "--process-scale": visualPhase.scale,
                 } as CSSProperties
               }
             />
+            {[previousVisual, displayedVisual]
+              .filter((visual): visual is ProcessVisual => visual !== null)
+              .filter(
+                (visual, index, visuals) =>
+                  visuals.findIndex(
+                    (item) =>
+                      item.phaseIndex === visual.phaseIndex && item.theme === visual.theme,
+                  ) === index,
+              )
+              .map((visual) => {
+                const imagePhase = processPhases[visual.phaseIndex];
+                const isCurrent =
+                  displayedVisual?.phaseIndex === visual.phaseIndex &&
+                  displayedVisual.theme === visual.theme;
+
+                return (
+                  <Image
+                    alt={isCurrent ? imagePhase.image.alt : ""}
+                    aria-hidden={isCurrent ? undefined : true}
+                    className={`${styles.processImageAsset} ${
+                      isCurrent
+                        ? styles.processImageAssetCurrent
+                        : styles.processImageAssetPrevious
+                    }`}
+                    fill
+                    key={`${visual.theme}-${imagePhase.process}`}
+                    onError={(event) => {
+                      event.currentTarget.style.display = "none";
+                    }}
+                    sizes="(max-width: 860px) 100vw, 46vw"
+                    src={imagePhase.image[visual.theme]}
+                    style={
+                      {
+                        "--process-x": imagePhase.shiftX,
+                        "--process-y": imagePhase.shiftY,
+                        "--process-scale": imagePhase.scale,
+                      } as CSSProperties
+                    }
+                  />
+                );
+              })}
             <div
               className={styles.processTint}
-              style={{ "--phase-tint": phase.tint } as CSSProperties}
+              style={{ "--phase-tint": visualPhase.tint } as CSSProperties}
             />
             <div className={styles.phasePips} aria-hidden="true">
               {processPhases.map((item, index) => (
                 <span
                   key={item.title}
-                  className={index === activePhase ? styles.activePip : undefined}
+                  className={
+                    index === displayedVisual?.phaseIndex ? styles.activePip : undefined
+                  }
                 />
               ))}
             </div>
             <div className={styles.processOverlay}>
               <span className={styles.processNumber}>
-                {String(activePhase + 1).padStart(2, "0")}
+                {String((displayedVisual?.phaseIndex ?? activePhase) + 1).padStart(2, "0")}
               </span>
               <div>
-                <h3>{phase.title}</h3>
-                <p>{phase.description}</p>
+                <h3>{visualPhase.title}</h3>
+                <p>{visualPhase.description}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className={styles.phaseList}>
+        <div className={`${styles.phaseList} ${styles.processRevealList}`}>
           {processPhases.map((item, index) => (
             <article
               key={item.title}

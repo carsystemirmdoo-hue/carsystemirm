@@ -9,14 +9,12 @@ import {
   type PointerEvent,
 } from "react";
 import type { CarsystemProduct, ProductImageAsset } from "@/lib/carsystem-data";
-import { getProductVisualPreset, getProductVisualStyle } from "@/components/product/productMotion";
+import {
+  getProductRevealDirection,
+  getProductVisualPreset,
+  getProductVisualStyle,
+} from "@/components/product/productMotion";
 import styles from "./ProductVisualSurface.module.css";
-
-type PaintHoverDirection = "from-top" | "from-bottom";
-
-function pickPaintHoverDirection(): PaintHoverDirection {
-  return Math.random() < 0.5 ? "from-top" : "from-bottom";
-}
 
 export function ProductVisualSurface({
   brandName,
@@ -38,13 +36,9 @@ export function ProductVisualSurface({
     selectedImage && !selectedImage.src.includes("placeholder-product"),
   );
   const visual = getProductVisualPreset(product);
-  const isPaintTreatment = visual.treatment === "paint";
-  const [paintHoverDirection, setPaintHoverDirection] =
-    useState<PaintHoverDirection>("from-top");
-  const [isPaintHoverActive, setIsPaintHoverActive] = useState(false);
+  const revealDirection = getProductRevealDirection(product);
   const [isSurfacePointerActive, setIsSurfacePointerActive] = useState(false);
   const surfaceRef = useRef<HTMLSpanElement | null>(null);
-  const paintHoverActiveRef = useRef(false);
   const surfaceClassName = [styles.surface, className].filter(Boolean).join(" ");
 
   useEffect(() => {
@@ -67,8 +61,6 @@ export function ProductVisualSurface({
       if (isInside) return;
 
       setIsSurfacePointerActive(false);
-      paintHoverActiveRef.current = false;
-      setIsPaintHoverActive(false);
     }
 
     document.addEventListener("pointermove", handleDocumentPointerMove, { passive: true });
@@ -89,17 +81,6 @@ export function ProductVisualSurface({
     event.currentTarget.style.setProperty("--product-visual-pointer-y", `${y.toFixed(2)}%`);
   }
 
-  function activatePaintHover(pointerType: string) {
-    if (!isPaintTreatment || pointerType === "touch") return;
-
-    if (!paintHoverActiveRef.current) {
-      setPaintHoverDirection(pickPaintHoverDirection());
-    }
-
-    paintHoverActiveRef.current = true;
-    setIsPaintHoverActive(true);
-  }
-
   function activateSurfacePointer(pointerType: string) {
     if (pointerType === "touch") return;
 
@@ -109,19 +90,15 @@ export function ProductVisualSurface({
   function handlePointerEnter(event: PointerEvent<HTMLSpanElement>) {
     updatePointerPosition(event);
     activateSurfacePointer(event.pointerType);
-    activatePaintHover(event.pointerType);
   }
 
   function handlePointerMove(event: PointerEvent<HTMLSpanElement>) {
     updatePointerPosition(event);
     activateSurfacePointer(event.pointerType);
-    activatePaintHover(event.pointerType);
   }
 
   function handlePointerLeave() {
     setIsSurfacePointerActive(false);
-    paintHoverActiveRef.current = false;
-    setIsPaintHoverActive(false);
   }
 
   function handlePointerOut(event: PointerEvent<HTMLSpanElement>) {
@@ -150,13 +127,12 @@ export function ProductVisualSurface({
     <span
       ref={surfaceRef}
       className={surfaceClassName}
-      data-paint-hover-active={isPaintHoverActive ? "true" : undefined}
-      data-paint-hover-direction={paintHoverDirection}
       data-product-image-motion
       data-product-visual-real-image={hasProductAsset ? "true" : "false"}
       data-product-visual-pointer-active={isSurfacePointerActive ? "true" : undefined}
       data-product-visual-surface
       data-product-visual-treatment={visual.treatment}
+      data-reveal-direction={revealDirection}
       onPointerCancel={handlePointerLeave}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
@@ -166,14 +142,21 @@ export function ProductVisualSurface({
       style={getProductVisualStyle(product)}
     >
       <span className={styles.baseLayer} aria-hidden="true" />
-      <span className={styles.floodWash} aria-hidden="true" />
-      <span className={styles.floodCore} aria-hidden="true" />
-      <span className={styles.matteField} aria-hidden="true" />
-      <span className={styles.matteGrain} aria-hidden="true" />
-      <span className={styles.abrasiveWash} aria-hidden="true" />
-      <span className={styles.abrasiveTrace} aria-hidden="true" />
-      <span className={styles.polishSheen} aria-hidden="true" />
-      <span className={styles.polishSweep} aria-hidden="true" />
+      <span className={styles.effectStack} aria-hidden="true">
+        <span className={styles.effectPane}>
+          <span className={styles.effectInner}>
+            <span className={styles.floodWash} />
+            <span className={styles.floodCore} />
+            <span className={styles.matteField} />
+            <span className={styles.matteGrain} />
+            <span className={styles.abrasiveWash} />
+            <span className={styles.abrasiveTrace} />
+            <span className={styles.polishSheen} />
+            <span className={styles.polishSweep} />
+          </span>
+        </span>
+        <span className={styles.rollerEdge} />
+      </span>
       <span className={styles.contactShadow} aria-hidden="true" />
 
       <span className={styles.brandMark}>{brandName}</span>

@@ -20,8 +20,11 @@ export type ProgramCategory = {
 };
 
 export type BrandCatalogPreview = {
-  brandSlug: string;
+  ctaHref: string;
+  ctaLabel: string;
+  description: string;
   products: CarsystemProduct[];
+  title: string;
 };
 
 function getCircularPosition(index: number, activeIndex: number, count: number) {
@@ -40,12 +43,12 @@ function getPositionClass(position: number) {
 
 export function BrandEcosystemDesktopCards({
   activeIndex,
-  canPreviewBrand,
+  activePreviewBrandKey,
   categories,
   onBrandPreview,
 }: {
   activeIndex: number;
-  canPreviewBrand: (brandKey: BrandKey) => boolean;
+  activePreviewBrandKey: BrandKey | null;
   categories: ProgramCategory[];
   onBrandPreview: (brandKey: BrandKey) => void;
 }) {
@@ -60,9 +63,9 @@ export function BrandEcosystemDesktopCards({
             key={category.id}
             category={category}
             className={getPositionClass(position)}
-            canPreviewBrand={canPreviewBrand}
             isActive={isActive}
             onBrandPreview={onBrandPreview}
+            selectedBrandKey={isActive ? activePreviewBrandKey : null}
           />
         );
       })}
@@ -72,13 +75,13 @@ export function BrandEcosystemDesktopCards({
 
 export function BrandEcosystemMobileCards({
   activeIndex,
-  canPreviewBrand,
+  activePreviewBrandKey,
   categories,
   onBrandPreview,
   setCardRef,
 }: {
   activeIndex: number;
-  canPreviewBrand: (brandKey: BrandKey) => boolean;
+  activePreviewBrandKey: BrandKey | null;
   categories: ProgramCategory[];
   onBrandPreview: (brandKey: BrandKey) => void;
   setCardRef: (index: number, node: HTMLElement | null) => void;
@@ -90,9 +93,9 @@ export function BrandEcosystemMobileCards({
           key={category.id}
           category={category}
           className={index === activeIndex ? styles.programMobileCardActive : ""}
-          canPreviewBrand={canPreviewBrand}
           isActive={index === activeIndex}
           onBrandPreview={onBrandPreview}
+          selectedBrandKey={index === activeIndex ? activePreviewBrandKey : null}
           setRef={(node) => setCardRef(index, node)}
         />
       ))}
@@ -103,16 +106,16 @@ export function BrandEcosystemMobileCards({
 function ProgramCard({
   category,
   className,
-  canPreviewBrand,
   isActive,
   onBrandPreview,
+  selectedBrandKey,
   setRef,
 }: {
   category: ProgramCategory;
   className: string;
-  canPreviewBrand: (brandKey: BrandKey) => boolean;
   isActive: boolean;
   onBrandPreview: (brandKey: BrandKey) => void;
+  selectedBrandKey: BrandKey | null;
   setRef?: (node: HTMLElement | null) => void;
 }) {
   return (
@@ -138,8 +141,8 @@ function ProgramCard({
             <ProgramBrandLogo
               key={brandKey}
               brandKey={brandKey}
-              canPreview={canPreviewBrand(brandKey)}
               isActive={isActive}
+              isSelected={isActive && selectedBrandKey === brandKey}
               onBrandPreview={onBrandPreview}
             />
           ))}
@@ -165,20 +168,16 @@ function ProgramCard({
 
 function ProgramBrandLogo({
   brandKey,
-  canPreview,
   isActive,
+  isSelected,
   onBrandPreview,
 }: {
   brandKey: BrandKey;
-  canPreview: boolean;
   isActive: boolean;
+  isSelected: boolean;
   onBrandPreview: (brandKey: BrandKey) => void;
 }) {
   const brand = brandLogos[brandKey];
-
-  if (!canPreview) {
-    return <BrandLogoPlate brandKey={brandKey} />;
-  }
 
   return (
     <button
@@ -186,11 +185,9 @@ function ProgramBrandLogo({
       className={styles.programBrandLogoButton}
       disabled={!isActive}
       tabIndex={isActive ? 0 : -1}
-      aria-haspopup="dialog"
-      aria-label={`Pregled kataloga brenda ${brand.name}`}
-      onMouseEnter={() => {
-        if (isActive) onBrandPreview(brandKey);
-      }}
+      aria-pressed={isSelected}
+      aria-label={`Prikaži proizvode brenda ${brand.name}`}
+      data-selected={isSelected || undefined}
       onPointerEnter={(event) => {
         if (isActive && event.pointerType !== "touch") onBrandPreview(brandKey);
       }}
@@ -209,36 +206,24 @@ function ProgramBrandLogo({
 
 export function BrandPreviewPanel({
   brandKey,
-  exiting,
   preview,
-  onClose,
   titleId = "brand-preview-title",
-  mobile = false,
 }: {
   brandKey: BrandKey;
-  exiting: boolean;
   preview: BrandCatalogPreview;
-  onClose: () => void;
   titleId?: string;
-  mobile?: boolean;
 }) {
   const brand = brandLogos[brandKey];
-  const brandHref = `/brendovi/${preview.brandSlug}`;
 
   return (
     <div
       data-brand-preview-region="panel"
-      role={mobile ? undefined : "dialog"}
-      aria-modal={mobile ? undefined : false}
+      role="region"
       aria-labelledby={titleId}
-      data-state={exiting ? "closing" : "open"}
-      className={`${styles.programPreviewPanel} ${mobile ? styles.programPreviewPanelMobile : ""}`}
+      className={`${styles.programPreviewPanel} ${styles.programPreviewPanelInline}`}
     >
       <div className={styles.programPreviewTop}>
-        <span>Pregled kataloga</span>
-        <button type="button" onClick={onClose} aria-label="Zatvori pregled kataloga brenda">
-          &times;
-        </button>
+        <span>Aktivni pregled</span>
       </div>
 
       <div className={styles.programPreviewBody}>
@@ -250,8 +235,8 @@ export function BrandPreviewPanel({
           </div>
         </div>
 
-        <h3 id={titleId}>Pregled kataloga</h3>
-        <span>Proizvodi iz {brand.name} programa</span>
+        <h3 id={titleId}>{preview.title}</h3>
+        <span>{preview.description}</span>
 
         <div className={styles.programPreviewGrid}>
           {preview.products.map((product) => (
@@ -274,8 +259,14 @@ export function BrandPreviewPanel({
           ))}
         </div>
 
-        <Link className={styles.programPreviewCta} href={brandHref}>
-          Pogledajte katalog brenda
+        <Link
+          className={`${styles.programPreviewCta} cs-magnetic-cta cs-theme-wipe-card`}
+          data-cursor="button"
+          data-motion="theme-wipe"
+          data-motion-surface
+          href={preview.ctaHref}
+        >
+          <span>{preview.ctaLabel}</span>
         </Link>
       </div>
     </div>

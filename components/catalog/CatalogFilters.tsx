@@ -4,6 +4,7 @@ import type {
   ProgramGroup,
   RefinishPhase,
 } from "@/lib/carsystem-data";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import styles from "./CatalogPage.module.css";
 
 export function CatalogFilters({
@@ -105,74 +106,88 @@ export function CatalogFilters({
       )}
 
       <FilterField label="Brend" htmlFor="brand-filter">
-        <select
+        <SearchableCombobox
+          ariaLabel="Brend"
+          emptyMessage="Nema brendova koji odgovaraju pretrazi."
           id="brand-filter"
+          onChange={onBrandChange}
+          options={[
+            { label: "Svi brendovi", value: "" },
+            ...brands.map((brand) => ({ label: brand.name, value: brand.slug })),
+          ]}
+          placeholder="Svi brendovi"
+          searchPlaceholder="Pretražite brend"
+          sheetTitle="Izaberite brend"
           value={brandSlug}
-          onChange={(event) => onBrandChange(event.target.value)}
-        >
-          <option value="">Svi brendovi</option>
-          {brands.map((brand) => (
-            <option key={brand.slug} value={brand.slug}>
-              {brand.name}
-            </option>
-          ))}
-        </select>
+        />
       </FilterField>
 
       <FilterField label="Program" htmlFor="program-filter">
-        <select
+        <SearchableCombobox
+          ariaLabel="Program"
+          emptyMessage="Nema programa koji odgovaraju pretrazi."
           id="program-filter"
+          onChange={onProgramChange}
+          options={[
+            { label: "Svi programi", value: "" },
+            ...programs.map((program) => ({ label: program.name, value: program.slug })),
+          ]}
+          placeholder="Svi programi"
+          searchPlaceholder="Pretražite program"
+          sheetTitle="Izaberite program"
           value={programSlug}
-          onChange={(event) => onProgramChange(event.target.value)}
-        >
-          <option value="">Svi programi</option>
-          {programs.map((program) => (
-            <option key={program.slug} value={program.slug}>
-              {program.name}
-            </option>
-          ))}
-        </select>
+        />
       </FilterField>
 
       <FilterField label="Faza procesa" htmlFor="phase-filter">
-        <select
+        <SearchableCombobox
+          ariaLabel="Faza procesa"
+          emptyMessage="Nema faza koje odgovaraju pretrazi."
           id="phase-filter"
+          onChange={onPhaseChange}
+          options={[
+            { label: "Sve faze", value: "" },
+            ...phases.map((phase) => ({ label: phase.name, value: phase.slug })),
+          ]}
+          placeholder="Sve faze"
+          searchPlaceholder="Pretražite fazu"
+          sheetTitle="Izaberite fazu"
           value={phaseSlug}
-          onChange={(event) => onPhaseChange(event.target.value)}
-        >
-          <option value="">Sve faze</option>
-          {phases.map((phase) => (
-            <option key={phase.slug} value={phase.slug}>
-              {phase.name}
-            </option>
-          ))}
-        </select>
+        />
       </FilterField>
 
       <FilterField label="Dostupnost" htmlFor="status-filter">
-        <select
+        <SearchableCombobox
+          ariaLabel="Dostupnost"
+          emptyMessage="Nema statusa koji odgovaraju pretrazi."
           id="status-filter"
+          onChange={onStatusChange}
+          options={[
+            { label: "Svi statusi", value: "" },
+            { label: "Na upit", value: "na-upit" },
+          ]}
+          placeholder="Svi statusi"
+          searchPlaceholder="Pretražite status"
+          sheetTitle="Izaberite dostupnost"
           value={status}
-          onChange={(event) => onStatusChange(event.target.value)}
-        >
-          <option value="">Svi statusi</option>
-          <option value="na-upit">Na upit</option>
-        </select>
+        />
       </FilterField>
 
       <FilterField label="Namena / tip" htmlFor="type-filter">
-        <select
+        <SearchableCombobox
+          ariaLabel="Namena ili tip"
+          emptyMessage="Nema tipova koji odgovaraju pretrazi."
           id="type-filter"
+          onChange={onTypeChange}
+          options={[
+            { label: "Svi tipovi", value: "" },
+            ...typeOptions.map((option) => ({ label: option, value: option })),
+          ]}
+          placeholder="Svi tipovi"
+          searchPlaceholder="Pretražite tip"
+          sheetTitle="Izaberite namenu ili tip"
           value={typeTag}
-          onChange={(event) => onTypeChange(event.target.value)}
-        >
-          <option value="">Svi tipovi</option>
-          {typeOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+        />
       </FilterField>
     </aside>
   );

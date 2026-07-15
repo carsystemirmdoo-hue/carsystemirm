@@ -1,0 +1,184 @@
+/*
+ * Horizontal 16:9 recording stage for the split contact CTA showcase.
+ * Designed for a 1920×1080 frame at the native desktop rem scale: fixed
+ * editorial typography holds the left lane, the untouched production
+ * SplitContactCta is the hero in the right-of-center area, and a static
+ * signature closes the lower-left.
+ */
+.stage {
+  position: relative;
+  min-height: 100svh;
+  background: var(--background);
+  overflow: hidden;
+}
+
+/*
+ * Static editorial identity, fixed in the upper-left. Pointer-events off and
+ * no animation: it frames the interaction and never competes with it.
+ */
+.editorialFrame {
+  position: fixed;
+  top: 96px;
+  left: 96px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.eyebrow {
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  color: var(--foreground);
+}
+
+.editorialTitle {
+  margin-top: 20px;
+  color: var(--foreground);
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+/*
+ * Interaction lane: the hero rides the right-of-center of the wide canvas,
+ * clear of the left editorial lane, with room for the split expansion and both
+ * option lifts.
+ */
+.ctaStage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding-left: 46%;
+  padding-right: 120px;
+}
+
+/* Route-scoped scale that keeps the untouched production component intact:
+   transform only sizes the visual for a 1920-wide frame; layout, hover, focus
+   and the demo pathway are unaffected. The record pipeline supersamples
+   (deviceScaleFactor 2 -> downscale) so scaling stays crisp with no clip seam. */
+.ctaFrame {
+  transform: scale(2.1);
+  transform-origin: center;
+}
+
+.cta {
+  width: 18.5rem;
+}
+
+/* =========================================================================
+ * Split choreography (showcase layer). Production SplitContactCta timing on the
+ * live site is intentionally left untouched; here the split is staged so it
+ * reads: arrive -> arm -> expand -> separate -> collapse. Higher specificity
+ * via .ctaFrame overrides the component module without editing it, and it
+ * drives the real CSS states (data-demo-armed for the armed hold,
+ * data-pointer-active for the split, data-demo-hover for the option lifts),
+ * so the recording shows the real state pathway rather than a faked overlay.
+ * ========================================================================= */
+
+/* Root: default (leaving) transitions are quick so the collapse stays crisp. */
+.ctaFrame .cta {
+  transition:
+    grid-template-rows 260ms cubic-bezier(0.4, 0, 0.2, 1),
+    gap 240ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* State B -- armed: the pointer lands and the resting CTA lifts. */
+.ctaFrame .cta[data-demo-armed="true"],
+.ctaFrame .cta:hover,
+.ctaFrame .cta:focus-within {
+  transform: translateY(-3px) scale(1.015);
+}
+
+/* Accent ring, only while armed but not yet split (resting button still
+ * visible). box-shadow sits on the root so the component's overflow:hidden
+ * does not clip it. */
+.ctaFrame .cta[data-demo-armed="true"]:not([data-pointer-active="true"]) {
+  box-shadow:
+    0 22px 48px color-mix(in oklch, var(--split-accent), transparent 62%),
+    0 0 0 4px color-mix(in oklch, var(--split-accent), transparent 82%);
+}
+
+/* States C + D -- expansion + separation: a gentle "entering" ease on the row
+ * height, a slightly wider final gap for legibility, and the gap delayed after
+ * the height so the container feels like it makes room first. */
+.ctaFrame .cta[data-pointer-active="true"],
+.ctaFrame .cta:hover,
+.ctaFrame .cta:focus-within {
+  transition:
+    grid-template-rows 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    gap 320ms cubic-bezier(0.16, 1, 0.3, 1) 80ms,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  gap: 12px;
+}
+
+/* The call slot emerges *after* the container has begun expanding (delay) with
+ * a longer slide, so the option reads as separating out of the CTA. The base
+ * (leaving) transition is quick and undelayed for a clean collapse. */
+.ctaFrame .cta > span {
+  transition:
+    opacity 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ctaFrame .cta[data-pointer-active="true"] > span,
+.ctaFrame .cta:hover > span,
+.ctaFrame .cta:focus-within > span {
+  transition:
+    opacity 300ms cubic-bezier(0.22, 1, 0.36, 1) 170ms,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1) 170ms;
+}
+
+/* State E -- option reaction: the production hover lift, made a touch more
+ * legible at showcase scale; rides the production anchor transition. */
+.ctaFrame .cta a[data-demo-hover="true"] {
+  transform: translateY(-2px) scale(1.015);
+}
+
+/*
+ * Static Studio One signature, fixed in the lower-left, aligned to the
+ * editorial lane.
+ */
+.signature {
+  position: fixed;
+  bottom: 84px;
+  left: 96px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.signatureName {
+  color: var(--foreground);
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signatureRole {
+  margin-top: 6px;
+  color: var(--muted-foreground);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta a[data-demo-hover="true"] {
+    transform: none;
+  }
+}

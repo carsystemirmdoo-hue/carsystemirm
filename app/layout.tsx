@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Geist, Geist_Mono, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { PublicSiteChrome } from "@/components/layout/PublicSiteChrome";
 import { MotionSystem } from "@/components/motion/MotionSystem";
+import { SiteAccessHandoffScript } from "@/components/layout/SiteAccessHandoffScript";
 import { ThemeScript } from "@/components/layout/ThemeScript";
 import { siteConfig } from "@/lib/seo";
 import "./globals.css";
@@ -70,6 +71,7 @@ export default function RootLayout({
     >
       <head>
         <ThemeScript />
+        <SiteAccessHandoffScript />
       </head>
       <body className="min-h-full bg-background text-foreground">
         <MotionSystem>

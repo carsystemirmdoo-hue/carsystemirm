@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { EntityProductCard } from "@/components/brand-program/EntityProductCard";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import type {
   CarsystemBrand,
   CarsystemProduct,
@@ -223,72 +224,89 @@ export function EntityProductFilters({
             </label>
 
             {!fixedBrandSlug && (
-              <label className={styles.entityField} htmlFor={`${idPrefix}-brand`}>
+              <div className={styles.entityField}>
                 <span>Brend</span>
-                <select
+                <SearchableCombobox
+                  ariaLabel="Brend"
+                  emptyMessage="Nema brendova koji odgovaraju pretrazi."
                   id={`${idPrefix}-brand`}
+                  onChange={setBrandSlug}
+                  options={[
+                    { label: "Svi brendovi", value: "" },
+                    ...visibleBrandOptions.map((brand) => ({
+                      label: brand.name,
+                      value: brand.slug,
+                    })),
+                  ]}
+                  placeholder="Svi brendovi"
+                  searchPlaceholder="Pretražite brend"
+                  sheetTitle="Izaberite brend"
                   value={brandSlug}
-                  onChange={(event) => setBrandSlug(event.target.value)}
-                >
-                  <option value="">Svi brendovi</option>
-                  {visibleBrandOptions.map((brand) => (
-                    <option key={brand.slug} value={brand.slug}>
-                      {brand.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+                />
+              </div>
             )}
 
             {!fixedProgramSlug && (
-              <label className={styles.entityField} htmlFor={`${idPrefix}-program`}>
+              <div className={styles.entityField}>
                 <span>Program</span>
-                <select
+                <SearchableCombobox
+                  ariaLabel="Program"
+                  emptyMessage="Nema programa koji odgovaraju pretrazi."
                   id={`${idPrefix}-program`}
+                  onChange={setProgramSlug}
+                  options={[
+                    { label: "Svi programi", value: "" },
+                    ...visibleProgramOptions.map((program) => ({
+                      label: program.name,
+                      value: program.slug,
+                    })),
+                  ]}
+                  placeholder="Svi programi"
+                  searchPlaceholder="Pretražite program"
+                  sheetTitle="Izaberite program"
                   value={programSlug}
-                  onChange={(event) => setProgramSlug(event.target.value)}
-                >
-                  <option value="">Svi programi</option>
-                  {visibleProgramOptions.map((program) => (
-                    <option key={program.slug} value={program.slug}>
-                      {program.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+                />
+              </div>
             )}
 
-            <label className={styles.entityField} htmlFor={`${idPrefix}-phase`}>
+            <div className={styles.entityField}>
               <span>Faza</span>
-              <select
+              <SearchableCombobox
+                ariaLabel="Faza"
+                emptyMessage="Nema faza koje odgovaraju pretrazi."
                 id={`${idPrefix}-phase`}
+                onChange={setPhaseSlug}
+                options={[
+                  { label: "Sve faze", value: "" },
+                  ...visiblePhaseOptions.map((phase) => ({
+                    label: phase.name,
+                    value: phase.slug,
+                  })),
+                ]}
+                placeholder="Sve faze"
+                searchPlaceholder="Pretražite fazu"
+                sheetTitle="Izaberite fazu"
                 value={phaseSlug}
-                onChange={(event) => setPhaseSlug(event.target.value)}
-              >
-                <option value="">Sve faze</option>
-                {visiblePhaseOptions.map((phase) => (
-                  <option key={phase.slug} value={phase.slug}>
-                    {phase.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+              />
+            </div>
 
-            <label className={styles.entityField} htmlFor={`${idPrefix}-type`}>
+            <div className={styles.entityField}>
               <span>Namena / tip</span>
-              <select
+              <SearchableCombobox
+                ariaLabel="Namena ili tip"
+                emptyMessage="Nema tipova koji odgovaraju pretrazi."
                 id={`${idPrefix}-type`}
+                onChange={setTypeTag}
+                options={[
+                  { label: "Svi tipovi", value: "" },
+                  ...typeOptions.map((option) => ({ label: option, value: option })),
+                ]}
+                placeholder="Svi tipovi"
+                searchPlaceholder="Pretražite tip"
+                sheetTitle="Izaberite namenu ili tip"
                 value={typeTag}
-                onChange={(event) => setTypeTag(event.target.value)}
-              >
-                <option value="">Svi tipovi</option>
-                {typeOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </label>
+              />
+            </div>
           </aside>
 
           <button

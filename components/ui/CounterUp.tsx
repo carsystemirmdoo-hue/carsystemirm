@@ -4,14 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 
 export function CounterUp({
-  durationMs = 760,
+  delayMs = 0,
+  durationMs = 1450,
+  suffix = "",
+  threshold = 0.45,
   value,
 }: {
+  delayMs?: number;
   durationMs?: number;
+  suffix?: string;
+  threshold?: number;
   value: number;
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const frameRef = useRef(0);
+  const delayRef = useRef(0);
   const ref = useRef<HTMLSpanElement>(null);
   const hasStartedRef = useRef(false);
   const [displayValue, setDisplayValue] = useState(0);
@@ -26,10 +33,7 @@ export function CounterUp({
     const node = ref.current;
     if (!node) return undefined;
 
-    function start() {
-      if (hasStartedRef.current) return;
-      hasStartedRef.current = true;
-
+    function startCount() {
       const startedAt = performance.now();
       function tick(now: number) {
         const progress = Math.min((now - startedAt) / durationMs, 1);
@@ -44,43 +48,73 @@ export function CounterUp({
       frameRef.current = window.requestAnimationFrame(tick);
     }
 
+    function start() {
+      if (hasStartedRef.current) return;
+      hasStartedRef.current = true;
+
+      delayRef.current = window.setTimeout(startCount, delayMs);
+    }
+
     if (!("IntersectionObserver" in window)) {
       start();
-      return () => window.cancelAnimationFrame(frameRef.current);
+      return () => {
+        window.clearTimeout(delayRef.current);
+        window.cancelAnimationFrame(frameRef.current);
+      };
     }
 
-    const rect = node.getBoundingClientRect();
-    const isAlreadyVisible =
-      rect.top < window.innerHeight &&
-      rect.bottom > 0 &&
-      rect.left < window.innerWidth &&
-      rect.right > 0;
-
-    if (isAlreadyVisible) {
-      start();
-      return () => window.cancelAnimationFrame(frameRef.current);
-    }
+    const target = node.closest<HTMLElement>("[data-counter-group]") ?? node;
+    let visibilityFallbackTimer = 0;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry?.isIntersecting) return;
+        if (!entry?.isIntersecting || entry.intersectionRatio < threshold) return;
         observer.disconnect();
         start();
       },
-      { threshold: 0.35 },
+      { threshold },
     );
 
-    observer.observe(node);
+    observer.observe(target);
+
+    function checkVisibleFallback() {
+      if (hasStartedRef.current) return;
+
+      const rect = target.getBoundingClientRect();
+      const visibleWidth = Math.max(
+        0,
+        Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0),
+      );
+      const visibleHeight = Math.max(
+        0,
+        Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0),
+      );
+      const area = rect.width * rect.height;
+      const visibleRatio = area > 0 ? (visibleWidth * visibleHeight) / area : 0;
+
+      if (visibleRatio >= threshold) {
+        observer.disconnect();
+        start();
+        return;
+      }
+
+      visibilityFallbackTimer = window.setTimeout(checkVisibleFallback, 600);
+    }
+
+    checkVisibleFallback();
 
     return () => {
       observer.disconnect();
+      window.clearTimeout(visibilityFallbackTimer);
+      window.clearTimeout(delayRef.current);
       window.cancelAnimationFrame(frameRef.current);
     };
-  }, [durationMs, prefersReducedMotion, value]);
+  }, [delayMs, durationMs, prefersReducedMotion, threshold, value]);
 
   return (
     <span ref={ref} suppressHydrationWarning>
       {displayValue.toLocaleString("sr-Latn")}
+      {suffix}
     </span>
   );
 }

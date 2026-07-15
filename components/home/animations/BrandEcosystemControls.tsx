@@ -4,30 +4,20 @@ import type { CSSProperties } from "react";
 import type { ProgramCategory } from "@/components/home/animations/BrandEcosystemCards";
 import styles from "../CarsystemHomePage.module.css";
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function getProgressDashFill(index: number, activeIndex: number, progress: number, count: number) {
-  const maxIndex = Math.max(1, count - 1);
-
-  if (index < activeIndex) return 1;
-  if (index > activeIndex) return 0;
-  if (index === maxIndex) return 1;
-
-  return clamp((progress - index / maxIndex) * maxIndex, 0, 1);
-}
-
 export function BrandEcosystemControls({
   activeIndex,
+  autoplayMs,
   categories,
-  deckProgress,
+  isAutoplayRunning,
   onActivate,
+  progressCycle,
 }: {
   activeIndex: number;
+  autoplayMs: number;
   categories: ProgramCategory[];
-  deckProgress: number;
+  isAutoplayRunning: boolean;
   onActivate: (index: number) => void;
+  progressCycle: number;
 }) {
   return (
     <div className={styles.programDeckProgress} aria-label="Izaberite programsku celinu">
@@ -41,19 +31,25 @@ export function BrandEcosystemControls({
             aria-label={`Pređite na program ${index + 1}: ${category.title}`}
             aria-pressed={index === activeIndex}
             data-cursor="button"
-            data-complete={index < activeIndex || undefined}
             style={
               {
-                "--dash-fill": getProgressDashFill(
-                  index,
-                  activeIndex,
-                  deckProgress,
-                  categories.length,
-                ),
+                "--autoplay-ms": `${autoplayMs}ms`,
               } as CSSProperties
             }
+            onPointerEnter={(event) => {
+              if (event.pointerType !== "touch") onActivate(index);
+            }}
+            onFocus={() => onActivate(index)}
             onClick={() => onActivate(index)}
-          />
+          >
+            {index === activeIndex && isAutoplayRunning ? (
+              <span
+                key={`${index}-${progressCycle}`}
+                className={styles.programDeckProgressFill}
+                aria-hidden="true"
+              />
+            ) : null}
+          </button>
         ))}
       </div>
     </div>
@@ -76,6 +72,7 @@ export function BrandEcosystemMobileControls({
           type="button"
           key={category.id}
           className={index === activeIndex ? styles.programMobileDotActive : ""}
+          onFocus={() => onActivate(index)}
           onClick={() => onActivate(index)}
           aria-label={`Prikaži ${category.title}`}
           aria-pressed={index === activeIndex}

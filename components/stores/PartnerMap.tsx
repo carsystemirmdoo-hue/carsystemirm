@@ -9,14 +9,21 @@ import maplibregl, {
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
-import type { PartnerStore } from "@/lib/partner-stores";
+import {
+  hasPartnerCoordinates,
+  type PartnerStore,
+} from "@/lib/partner-stores";
 import {
   loadCarsystemMapStyle,
   observeSiteTheme,
   readSiteTheme,
 } from "@/components/map/carsystem-map-style";
 import mapStyles from "@/components/map/CarsystemMap.module.css";
-import { getPartnerBounds, toPartnerFeatureCollection } from "./partner-map-style";
+import {
+  getPartnerBounds,
+  getPartnerMarkerCoordinateMap,
+  toPartnerFeatureCollection,
+} from "./partner-map-style";
 import styles from "./StoresPage.module.css";
 
 const SOURCE_ID = "partner-locations";
@@ -66,8 +73,12 @@ export function PartnerMap({
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
 
   const storesWithCoords = useMemo(
-    () => stores.filter((store) => Boolean(store.coordinates)),
+    () => stores.filter(hasPartnerCoordinates),
     [stores],
+  );
+  const markerCoordinates = useMemo(
+    () => getPartnerMarkerCoordinateMap(storesWithCoords),
+    [storesWithCoords],
   );
   const visibleStores = useMemo(
     () => storesWithCoords.filter((store) => visibleIds.has(store.id)),
@@ -189,6 +200,7 @@ export function PartnerMap({
         type: "geojson",
         data: toPartnerFeatureCollection(
           storesWithCoords.filter((store) => visibleIdsRef.current.has(store.id)),
+          storesWithCoords,
         ),
         cluster: true,
         clusterMaxZoom: 11,
@@ -310,7 +322,7 @@ export function PartnerMap({
 
     const source = map.getSource(SOURCE_ID) as GeoJSONSource | undefined;
     if (source) {
-      source.setData(toPartnerFeatureCollection(visibleStores));
+      source.setData(toPartnerFeatureCollection(visibleStores, storesWithCoords));
     }
 
     // Stores excluded by search/filter stay in place at reduced opacity
@@ -331,12 +343,12 @@ export function PartnerMap({
     nextDimmedIds.forEach((id) => {
       if (dimmed.has(id)) return;
       const store = storesWithCoords.find((item) => item.id === id);
-      if (!store?.coordinates) return;
+      if (!store) return;
       const element = document.createElement("span");
       element.className = `${mapStyles.mapMarker} ${mapStyles.mapMarkerDimmed}`;
       element.setAttribute("aria-hidden", "true");
       const marker = new maplibregl.Marker({ element })
-        .setLngLat([store.coordinates.lng, store.coordinates.lat])
+        .setLngLat(markerCoordinates.get(store.id) ?? [store.longitude, store.latitude])
         .addTo(map);
       dimmed.set(id, marker);
     });
@@ -362,7 +374,14 @@ export function PartnerMap({
         });
       }
     }
-  }, [prefersReducedMotion, status, storesWithCoords, visibleIds, visibleStores]);
+  }, [
+    markerCoordinates,
+    prefersReducedMotion,
+    status,
+    storesWithCoords,
+    visibleIds,
+    visibleStores,
+  ]);
 
   /* ---------- hover sync (visual emphasis only, never the camera) ---------- */
 
@@ -395,9 +414,9 @@ export function PartnerMap({
     lastCameraTargetRef.current = selectedId;
 
     const store = storesWithCoords.find((item) => item.id === selectedId);
-    if (!store?.coordinates) return;
+    if (!store) return;
 
-    const center: [number, number] = [store.coordinates.lng, store.coordinates.lat];
+    const center = markerCoordinates.get(store.id) ?? [store.longitude, store.latitude];
     const zoom = Math.max(map.getZoom(), SELECTED_ZOOM);
 
     if (prefersReducedMotion) {
@@ -405,7 +424,7 @@ export function PartnerMap({
     } else {
       map.easeTo({ center, zoom, duration: 500 });
     }
-  }, [prefersReducedMotion, selectedId, status, storesWithCoords]);
+  }, [markerCoordinates, prefersReducedMotion, selectedId, status, storesWithCoords]);
 
   return (
     <div className={`${mapStyles.mapCanvasShell} ${className}`}>

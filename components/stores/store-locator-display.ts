@@ -1,5 +1,6 @@
 import {
   getPartnerCityLabel,
+  getPartnerCityKey,
   getPartnerLocationTypeLabel,
   type PartnerStore,
 } from "@/lib/partner-stores";
@@ -23,9 +24,9 @@ export function getCityDisplayCount(city: string, enteredCount: number) {
 }
 
 export function getCityDisplayLabel(city: string, stores?: PartnerStore[]) {
-  return stores?.some((store) => getPartnerCityLabel(store) === city && store.featured)
-    ? "Centrala"
-    : undefined;
+  void city;
+  void stores;
+  return undefined;
 }
 
 export function getCityBadgeLabel(city: string, enteredCount: number, stores?: PartnerStore[]) {
@@ -34,13 +35,12 @@ export function getCityBadgeLabel(city: string, enteredCount: number, stores?: P
 
 export type CityDisplayEntry = {
   id: string;
+  key: string;
   city: string;
   name: string;
   address: string;
   detail: string;
-  region: string;
   type: string;
-  featured: boolean;
 };
 
 /**
@@ -48,38 +48,57 @@ export type CityDisplayEntry = {
  * surfaces like the home locator card stay consistent with /prodavnice.
  */
 export function getCityDisplayEntries(stores: PartnerStore[]): CityDisplayEntry[] {
-  const byCity = new Map<string, PartnerStore[]>();
+  const byCity = new Map<
+    string,
+    {
+      labels: Set<string>;
+      stores: PartnerStore[];
+    }
+  >();
 
   stores.forEach((store) => {
-    const city = getPartnerCityLabel(store);
-    const cityStores = byCity.get(city) ?? [];
-    cityStores.push(store);
-    byCity.set(city, cityStores);
+    const key = getPartnerCityKey(store);
+    const group = byCity.get(key) ?? { labels: new Set<string>(), stores: [] };
+    group.labels.add(getPartnerCityLabel(store).trim().replace(/\s+/g, " "));
+    group.stores.push(store);
+    byCity.set(key, group);
   });
 
   return Array.from(byCity.entries())
-    .map(([city, cityStores]) => {
-      const representative =
-        cityStores.find((store) => store.featured) ?? cityStores[0];
+    .map(([key, group]) => {
+      const city = getPreferredCityLabel(group.labels);
+      const cityStores = group.stores;
+      const representative = cityStores[0];
       const label = getCityDisplayLabel(city, cityStores);
 
       return {
         id: representative.id,
+        key,
         city,
         name: representative.name,
         address: representative.address,
         detail: label
           ? `${label} · ${getPartnerLocationTypeLabel(representative)}`
           : `${getPartnerLocationTypeLabel(representative)} · ${formatStoreCount(cityStores.length)}`,
-        region: representative.region,
         type: getPartnerLocationTypeLabel(representative),
-        featured: Boolean(representative.featured),
       };
     })
-    .sort((a, b) => {
-      if (a.featured !== b.featured) return a.featured ? -1 : 1;
-      return a.city.localeCompare(b.city, "sr-Latn");
-    });
+    .sort((a, b) => a.city.localeCompare(b.city, "sr-Latn"));
+}
+
+function getPreferredCityLabel(labels: Set<string>) {
+  const preferred = Array.from(labels).sort((left, right) => {
+    const leftDiacritics = left.match(/[čćžšđ]/giu)?.length ?? 0;
+    const rightDiacritics = right.match(/[čćžšđ]/giu)?.length ?? 0;
+    if (leftDiacritics !== rightDiacritics) return rightDiacritics - leftDiacritics;
+    return left.localeCompare(right, "sr-Latn");
+  })[0] ?? "";
+
+  return preferred
+    .toLocaleLowerCase("sr-Latn")
+    .replace(/(^|[\s/-])(\p{L})/gu, (_, separator: string, letter: string) =>
+      `${separator}${letter.toLocaleUpperCase("sr-Latn")}`,
+    );
 }
 
 export function getDisplayNetworkTotal(stores: PartnerStore[]) {

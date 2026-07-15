@@ -13,9 +13,8 @@ import {
   BrandEcosystemMobileControls,
 } from "@/components/home/animations/BrandEcosystemControls";
 import { brandLogos, type BrandKey } from "./BrandLogoPlate";
-import {
-  getCarsystemProductsByBrandSlug,
-} from "@/lib/carsystem-data";
+import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
+import { getCarsystemProductsByBrandSlug } from "@/lib/carsystem-data";
 import styles from "./CarsystemHomePage.module.css";
 
 const programCategories: ProgramCategory[] = [
@@ -72,20 +71,63 @@ const brandSlugByKey: Partial<Record<BrandKey, string>> = {
   cosmosLac: "cosmos-spray",
 };
 
-function getBrandCatalogPreview(brandKey: BrandKey): BrandCatalogPreview | null {
+const AUTOPLAY_MS = 4400;
+const MANUAL_PAUSE_MS = 7000;
+const MOBILE_SCROLL_RELEASE_MS = 700;
+
+function getDirectBrandCatalogPreview(brandKey: BrandKey): BrandCatalogPreview | null {
   const brandSlug = brandSlugByKey[brandKey];
   if (!brandSlug) return null;
 
   const products = getCarsystemProductsByBrandSlug(brandSlug).slice(0, 3);
   if (products.length === 0) return null;
 
-  return { brandSlug, products };
+  const brand = brandLogos[brandKey];
+  return {
+    ctaHref: `/brendovi/${brandSlug}`,
+    ctaLabel: "Pogledajte katalog brenda",
+    description: `Proizvodi iz ${brand.name} programa`,
+    products,
+    title: `${brand.name}: pregled kataloga`,
+  };
 }
 
-function getBrandKeyBySlug(slug: string) {
-  const entry = Object.entries(brandSlugByKey).find(([, brandSlug]) => brandSlug === slug);
+function getCategoryProducts(category: ProgramCategory) {
+  const products = category.logos.flatMap((brandKey) => {
+    const brandSlug = brandSlugByKey[brandKey];
+    return brandSlug ? getCarsystemProductsByBrandSlug(brandSlug) : [];
+  });
 
-  return entry?.[0] as BrandKey | undefined;
+  return Array.from(new Map(products.map((product) => [product.slug, product])).values()).slice(
+    0,
+    3,
+  );
+}
+
+function getBrandCatalogPreview(
+  brandKey: BrandKey,
+  category: ProgramCategory,
+): BrandCatalogPreview | null {
+  const directPreview = getDirectBrandCatalogPreview(brandKey);
+  if (directPreview) return directPreview;
+
+  const products = getCategoryProducts(category);
+  if (products.length === 0) return null;
+
+  const brand = brandLogos[brandKey];
+  return {
+    ctaHref: `/program/${category.id}`,
+    ctaLabel: "Pogledajte ceo program",
+    description: `Izbor proizvoda iz programa ${category.title.toLowerCase()} za ${brand.name}.`,
+    products,
+    title: `${brand.name}: pregled programa`,
+  };
+}
+
+function getDefaultPreviewBrandKey(category: ProgramCategory) {
+  return category.logos.find((brandKey) => getDirectBrandCatalogPreview(brandKey)) ??
+    category.logos[0] ??
+    null;
 }
 
 function clamp(value: number, min: number, max: number) {
@@ -96,122 +138,64 @@ export function ProgramDeckSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const mobileTrackRef = useRef<HTMLDivElement | null>(null);
   const mobileCardRefs = useRef<Array<HTMLElement | null>>([]);
-  const rafRef = useRef<number | null>(null);
   const mobileRafRef = useRef<number | null>(null);
-  const previewCloseTimerRef = useRef<number | null>(null);
-  const manualNavigationTimerRef = useRef<number | null>(null);
-  const manualTargetIndexRef = useRef<number | null>(null);
-  const activeIndexRef = useRef(0);
-  const [activeIndex, setActiveIndexState] = useState(0);
-  const [deckProgress, setDeckProgress] = useState(0);
-  const [activePreviewBrandSlug, setActivePreviewBrandSlug] = useState<string | null>(null);
-  const [previewExiting, setPreviewExiting] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  const setActiveIndex = useCallback((index: number) => {
-    const nextIndex = clamp(index, 0, programCategories.length - 1);
-    activeIndexRef.current = nextIndex;
-    setActiveIndexState(nextIndex);
-  }, []);
-
-  const releaseManualNavigation = useCallback(() => {
-    manualTargetIndexRef.current = null;
-
-    if (manualNavigationTimerRef.current !== null) {
-      window.clearTimeout(manualNavigationTimerRef.current);
-      manualNavigationTimerRef.current = null;
-    }
-  }, []);
-
-  const beginManualNavigation = useCallback(
-    (index: number) => {
-      releaseManualNavigation();
-      manualTargetIndexRef.current = clamp(index, 0, programCategories.length - 1);
-      manualNavigationTimerRef.current = window.setTimeout(() => {
-        manualNavigationTimerRef.current = null;
-        manualTargetIndexRef.current = null;
-      }, 950);
-    },
-    [releaseManualNavigation],
+  const autoplayTimerRef = useRef<number | null>(null);
+  const mobileScrollReleaseTimerRef = useRef<number | null>(null);
+  const programmaticMobileScrollRef = useRef(false);
+  const pauseUntilRef = useRef(0);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activePreviewBrandKey, setActivePreviewBrandKey] = useState<BrandKey | null>(() =>
+    getDefaultPreviewBrandKey(programCategories[0]),
   );
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
+  const [isPageVisible, setIsPageVisible] = useState(true);
+  const [usesDesktopDeck, setUsesDesktopDeck] = useState(false);
+  const [autoplayPhase, setAutoplayPhase] = useState<"paused" | "running">("running");
+  const [autoplayCycle, setAutoplayCycle] = useState(0);
 
-  const clearPreviewCloseTimer = useCallback(() => {
-    if (previewCloseTimerRef.current === null) return;
-    window.clearTimeout(previewCloseTimerRef.current);
-    previewCloseTimerRef.current = null;
+  const clearAutoplayTimer = useCallback(() => {
+    if (autoplayTimerRef.current === null) return;
+    window.clearTimeout(autoplayTimerRef.current);
+    autoplayTimerRef.current = null;
   }, []);
 
-  const closePreview = useCallback(() => {
-    if (activePreviewBrandSlug === null || previewExiting) return;
-
-    clearPreviewCloseTimer();
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      setPreviewExiting(false);
-      setActivePreviewBrandSlug(null);
-      return;
-    }
-
-    setPreviewExiting(true);
-    previewCloseTimerRef.current = window.setTimeout(() => {
-      previewCloseTimerRef.current = null;
-      setPreviewExiting(false);
-      setActivePreviewBrandSlug(null);
-    }, 180);
-  }, [activePreviewBrandSlug, clearPreviewCloseTimer, previewExiting]);
-
-  const openBrandPreview = useCallback((brandKey: BrandKey) => {
-    const brand = brandLogos[brandKey];
-    const preview = getBrandCatalogPreview(brandKey);
-
-    if (!brand.src || !preview) return;
-
-    clearPreviewCloseTimer();
-    setPreviewExiting(false);
-    setActivePreviewBrandSlug(preview.brandSlug);
-  }, [clearPreviewCloseTimer]);
-
-  const canPreviewBrand = useCallback((brandKey: BrandKey) => {
-    const brand = brandLogos[brandKey];
-
-    return Boolean(brand.src && getBrandCatalogPreview(brandKey));
+  const showProgram = useCallback((index: number) => {
+    const nextIndex = clamp(index, 0, programCategories.length - 1);
+    setActiveIndex(nextIndex);
+    setActivePreviewBrandKey(getDefaultPreviewBrandKey(programCategories[nextIndex]));
   }, []);
 
-  const updateFromScroll = useCallback(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  const pauseAutoRotation = useCallback(() => {
+    clearAutoplayTimer();
+    pauseUntilRef.current = Date.now() + MANUAL_PAUSE_MS;
+    setAutoplayPhase("paused");
+    setAutoplayCycle((cycle) => cycle + 1);
+  }, [clearAutoplayTimer]);
 
-    const rect = section.getBoundingClientRect();
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const centerMobileCard = useCallback(
+    (index: number, behavior: ScrollBehavior = "smooth") => {
+      const track = mobileTrackRef.current;
+      const card = mobileCardRefs.current[index];
+      if (!track || !card) return;
 
-    if (rect.bottom < 0 || rect.top > viewportHeight) {
-      return;
-    }
-
-    const travel = Math.max(1, section.offsetHeight - viewportHeight);
-    const progress = clamp(-rect.top / travel, 0, 1);
-    const nextIndex = Math.round(progress * (programCategories.length - 1));
-    const manualTargetIndex = manualTargetIndexRef.current;
-
-    if (manualTargetIndex !== null) {
-      const targetProgress = manualTargetIndex / Math.max(1, programCategories.length - 1);
-      setDeckProgress(targetProgress);
-
-      if (Math.abs(progress - targetProgress) < 0.035) {
-        releaseManualNavigation();
+      programmaticMobileScrollRef.current = true;
+      if (mobileScrollReleaseTimerRef.current !== null) {
+        window.clearTimeout(mobileScrollReleaseTimerRef.current);
       }
 
-      return;
-    }
+      track.scrollTo({
+        left: card.offsetLeft - (track.clientWidth - card.clientWidth) / 2,
+        behavior,
+      });
 
-    setDeckProgress(progress);
-
-    if (nextIndex !== activeIndexRef.current) {
-      setActiveIndex(nextIndex);
-      closePreview();
-    }
-  }, [closePreview, releaseManualNavigation, setActiveIndex]);
+      mobileScrollReleaseTimerRef.current = window.setTimeout(() => {
+        programmaticMobileScrollRef.current = false;
+        mobileScrollReleaseTimerRef.current = null;
+      }, behavior === "smooth" ? MOBILE_SCROLL_RELEASE_MS : 0);
+    },
+    [],
+  );
 
   useEffect(() => {
     const media = window.matchMedia(
@@ -219,95 +203,105 @@ export function ProgramDeckSection() {
     );
 
     function updateMode() {
-      setIsDesktop(media.matches);
+      setUsesDesktopDeck(media.matches);
     }
 
     updateMode();
     media.addEventListener("change", updateMode);
-
     return () => media.removeEventListener("change", updateMode);
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) return undefined;
-
-    function scheduleUpdate() {
-      if (rafRef.current !== null) return;
-
-      rafRef.current = window.requestAnimationFrame(() => {
-        rafRef.current = null;
-        updateFromScroll();
-      });
-    }
-
-    scheduleUpdate();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-
-    return () => {
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-
-      if (rafRef.current !== null) {
-        window.cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-    };
-  }, [isDesktop, updateFromScroll]);
+    if (usesDesktopDeck) return;
+    centerMobileCard(activeIndex, prefersReducedMotion ? "auto" : "smooth");
+  }, [activeIndex, centerMobileCard, prefersReducedMotion, usesDesktopDeck]);
 
   useEffect(() => {
-    return () => {
-      clearPreviewCloseTimer();
-      releaseManualNavigation();
-    };
-  }, [clearPreviewCloseTimer, releaseManualNavigation]);
-
-  useEffect(() => {
-    if (activePreviewBrandSlug === null) return undefined;
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        closePreview();
-      }
+    const section = sectionRef.current;
+    if (!section || !("IntersectionObserver" in window)) {
+      setIsSectionVisible(true);
+      return undefined;
     }
 
-    function handlePointerDown(event: PointerEvent) {
-      const target = event.target;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = Boolean(entry?.isIntersecting);
+        if (!isVisible) clearAutoplayTimer();
+        setIsSectionVisible(isVisible);
+        if (isVisible) setAutoplayCycle((cycle) => cycle + 1);
+      },
+      { rootMargin: "-12% 0px", threshold: 0.16 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [clearAutoplayTimer]);
 
-      if (!(target instanceof Element)) {
-        closePreview();
+  useEffect(() => {
+    clearAutoplayTimer();
+    if (prefersReducedMotion || !isSectionVisible || !isPageVisible) return undefined;
+
+    const remainingPause = Math.max(0, pauseUntilRef.current - Date.now());
+    const delay = autoplayPhase === "paused" ? remainingPause : AUTOPLAY_MS;
+
+    autoplayTimerRef.current = window.setTimeout(() => {
+      autoplayTimerRef.current = null;
+
+      if (autoplayPhase === "paused") {
+        pauseUntilRef.current = 0;
+        setAutoplayPhase("running");
+        setAutoplayCycle((cycle) => cycle + 1);
         return;
       }
 
-      if (target.closest("[data-brand-preview-region]")) {
-        return;
-      }
+      const nextIndex = (activeIndex + 1) % programCategories.length;
+      showProgram(nextIndex);
+      setAutoplayCycle((cycle) => cycle + 1);
+    }, delay);
 
-      closePreview();
+    return clearAutoplayTimer;
+  }, [
+    activeIndex,
+    autoplayPhase,
+    clearAutoplayTimer,
+    isPageVisible,
+    isSectionVisible,
+    prefersReducedMotion,
+    showProgram,
+  ]);
+
+  useEffect(() => {
+    function handleVisibilityChange() {
+      const isVisible = !document.hidden;
+      if (!isVisible) clearAutoplayTimer();
+      setIsPageVisible(isVisible);
+      if (isVisible) setAutoplayCycle((cycle) => cycle + 1);
     }
 
-    function handlePointerMove(event: PointerEvent) {
-      if (!isDesktop) return;
+    setIsPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [clearAutoplayTimer]);
 
-      const target = event.target;
-      if (target instanceof Element && target.closest("[data-brand-preview-region]")) return;
-
-      closePreview();
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("pointermove", handlePointerMove);
-
+  useEffect(() => {
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("pointermove", handlePointerMove);
+      if (mobileRafRef.current !== null) window.cancelAnimationFrame(mobileRafRef.current);
+      if (mobileScrollReleaseTimerRef.current !== null) {
+        window.clearTimeout(mobileScrollReleaseTimerRef.current);
+      }
+      clearAutoplayTimer();
     };
-  }, [activePreviewBrandSlug, closePreview, isDesktop]);
+  }, [clearAutoplayTimer]);
+
+  const openBrandPreview = useCallback(
+    (brandKey: BrandKey) => {
+      pauseAutoRotation();
+      setActivePreviewBrandKey(brandKey);
+    },
+    [pauseAutoRotation],
+  );
 
   function handleMobileScroll() {
-    if (mobileRafRef.current !== null) return;
+    if (programmaticMobileScrollRef.current || mobileRafRef.current !== null) return;
 
     mobileRafRef.current = window.requestAnimationFrame(() => {
       mobileRafRef.current = null;
@@ -316,86 +310,47 @@ export function ProgramDeckSection() {
 
       const trackRect = track.getBoundingClientRect();
       const center = trackRect.left + trackRect.width / 2;
-      let closestIndex = activeIndexRef.current;
+      let closestIndex = activeIndex;
       let closestDistance = Number.POSITIVE_INFINITY;
 
       mobileCardRefs.current.forEach((card, index) => {
         if (!card) return;
         const cardRect = card.getBoundingClientRect();
         const distance = Math.abs(cardRect.left + cardRect.width / 2 - center);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
-        }
+        if (distance >= closestDistance) return;
+        closestDistance = distance;
+        closestIndex = index;
       });
 
-      const manualTargetIndex = manualTargetIndexRef.current;
-      if (manualTargetIndex !== null) {
-        if (closestIndex === manualTargetIndex) {
-          releaseManualNavigation();
-        }
-
-        return;
+      if (closestIndex !== activeIndex) {
+        pauseAutoRotation();
+        showProgram(closestIndex);
       }
-
-      if (closestIndex !== activeIndexRef.current) {
-        setActiveIndex(closestIndex);
-        setDeckProgress(closestIndex / Math.max(1, programCategories.length - 1));
-        closePreview();
-      }
-    });
-  }
-
-  function scrollMobileCardIntoView(index: number) {
-    beginManualNavigation(index);
-    setActiveIndex(index);
-    setDeckProgress(index / Math.max(1, programCategories.length - 1));
-    closePreview();
-    mobileCardRefs.current[index]?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
     });
   }
 
   function activateProgramIndex(index: number) {
-    beginManualNavigation(index);
-    setActiveIndex(index);
-    setDeckProgress(index / Math.max(1, programCategories.length - 1));
-    closePreview();
-
-    if (!isDesktop || !sectionRef.current) return;
-
-    const section = sectionRef.current;
-    const rect = section.getBoundingClientRect();
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-    const travel = Math.max(1, section.offsetHeight - viewportHeight);
-    const progress = index / Math.max(1, programCategories.length - 1);
-    const top = window.scrollY + rect.top + travel * progress;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    window.scrollTo({
-      top,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
+    pauseAutoRotation();
+    showProgram(index);
   }
 
-  const activePreviewBrandKey =
-    activePreviewBrandSlug === null ? null : getBrandKeyBySlug(activePreviewBrandSlug);
-  const activeBrandPreview =
-    activePreviewBrandKey === null || activePreviewBrandKey === undefined
-      ? null
-      : getBrandCatalogPreview(activePreviewBrandKey);
+  const activeBrandPreview = activePreviewBrandKey
+    ? getBrandCatalogPreview(activePreviewBrandKey, programCategories[activeIndex])
+    : null;
+  const isAutoplayRunning =
+    autoplayPhase === "running" &&
+    isSectionVisible &&
+    isPageVisible &&
+    !prefersReducedMotion;
 
   return (
     <section
       id="brendovi"
       ref={sectionRef}
-      className={styles.programDeckSection}
+      className={`${styles.programDeckSection} ${styles.programDeckLiveSection} ${styles.railTarget}`}
       aria-labelledby="brands-title"
     >
-      <div className={styles.programDeckSticky}>
+      <div className={`${styles.programDeckSticky} ${styles.programDeckLiveSticky}`}>
         <div className={styles.programDeckHeader}>
           <div>
             <p className={styles.sectionKicker}>Program proizvoda</p>
@@ -408,28 +363,19 @@ export function ProgramDeckSection() {
 
           <BrandEcosystemControls
             activeIndex={activeIndex}
+            autoplayMs={AUTOPLAY_MS}
             categories={programCategories}
-            deckProgress={deckProgress}
+            isAutoplayRunning={isAutoplayRunning}
             onActivate={activateProgramIndex}
+            progressCycle={autoplayCycle}
           />
         </div>
 
-        <div
-          className={styles.programDeckViewport}
-          onBlurCapture={(event) => {
-            const nextTarget = event.relatedTarget;
-
-            if (nextTarget instanceof Node && event.currentTarget.contains(nextTarget)) {
-              return;
-            }
-
-            closePreview();
-          }}
-        >
+        <div className={`${styles.programDeckViewport} ${styles.programDeckLiveViewport}`}>
           <div className={styles.programDeckDesktop} aria-label="Program po kategorijama">
             <BrandEcosystemDesktopCards
               activeIndex={activeIndex}
-              canPreviewBrand={canPreviewBrand}
+              activePreviewBrandKey={activePreviewBrandKey}
               categories={programCategories}
               onBrandPreview={openBrandPreview}
             />
@@ -444,7 +390,7 @@ export function ProgramDeckSection() {
             >
               <BrandEcosystemMobileCards
                 activeIndex={activeIndex}
-                canPreviewBrand={canPreviewBrand}
+                activePreviewBrandKey={activePreviewBrandKey}
                 categories={programCategories}
                 onBrandPreview={openBrandPreview}
                 setCardRef={(index, node) => {
@@ -456,44 +402,20 @@ export function ProgramDeckSection() {
             <BrandEcosystemMobileControls
               activeIndex={activeIndex}
               categories={programCategories}
-              onActivate={scrollMobileCardIntoView}
+              onActivate={activateProgramIndex}
             />
           </div>
 
-          {activePreviewBrandKey && activeBrandPreview && isDesktop ? (
+          {activePreviewBrandKey && activeBrandPreview ? (
             <BrandPreviewPanel
+              key={`${activeIndex}-${activePreviewBrandKey}`}
               brandKey={activePreviewBrandKey}
               preview={activeBrandPreview}
-              onClose={closePreview}
-              exiting={previewExiting}
+              titleId="program-live-preview-title"
             />
           ) : null}
         </div>
       </div>
-
-      {activePreviewBrandKey && activeBrandPreview && !isDesktop ? (
-        <div
-          className={styles.programPreviewOverlay}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="program-mobile-preview-title"
-        >
-          <button
-            type="button"
-            className={styles.programPreviewBackdrop}
-            aria-label="Zatvori pregled dodirivanjem pozadine"
-            onClick={closePreview}
-          />
-          <BrandPreviewPanel
-            brandKey={activePreviewBrandKey}
-            preview={activeBrandPreview}
-            onClose={closePreview}
-            exiting={previewExiting}
-            titleId="program-mobile-preview-title"
-            mobile
-          />
-        </div>
-      ) : null}
     </section>
   );
 }

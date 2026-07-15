@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { InquiryTypeCards } from "@/components/contact/InquiryTypeCards";
 import { StoreLocatorTeaser } from "@/components/contact/StoreLocatorTeaser";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import type { CompanyContact } from "@/lib/company-contact";
 import type { PartnerStore } from "@/lib/partner-stores";
 import styles from "./ContactPage.module.css";
@@ -326,17 +327,17 @@ export function ContactForm({
             </Field>
 
             <Field label="Tema upita" htmlFor="contact-topic">
-              <select
+              <SearchableCombobox
+                ariaLabel="Tema upita"
+                emptyMessage="Nema tema koje odgovaraju pretrazi."
                 id="contact-topic"
-                onChange={(event) => handleTopicSelect(event.target.value as InquiryTopic)}
+                onChange={(nextTopic) => handleTopicSelect(nextTopic as InquiryTopic)}
+                options={topicOptions.map((option) => ({ label: option, value: option }))}
+                placeholder="Izaberite temu"
+                searchPlaceholder="Pretražite temu"
+                sheetTitle="Izaberite temu upita"
                 value={topic}
-              >
-                {topicOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              />
             </Field>
 
             <Field
@@ -425,9 +426,9 @@ function Field({
   label: string;
 }) {
   return (
-    <label className={`${styles.field} ${className ?? ""}`} htmlFor={htmlFor}>
-      <span>{label}</span>
+    <div className={`${styles.field} ${className ?? ""}`}>
+      <label htmlFor={htmlFor}>{label}</label>
       {children}
-    </label>
+    </div>
   );
 }

@@ -454,7 +454,7 @@
   min-width: 0;
 }
 
-.field > span {
+.field > label {
   color: var(--muted-foreground);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 10.5px;
@@ -464,7 +464,6 @@
 }
 
 .field input,
-.field select,
 .field textarea {
   width: 100%;
   padding: 12px 14px;
@@ -485,7 +484,6 @@
 }
 
 .field input:focus-visible,
-.field select:focus-visible,
 .field textarea:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -1px;

@@ -4,12 +4,26 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { RouteTransitionPhase } from "@/components/motion/RouteTransitionOverlay";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
+import {
+  clearSiteAccessHandoff,
+  readSiteAccessHandoff,
+  SITE_ACCESS_HANDOFF_EVENT,
+  SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS,
+  waitForActiveHomeHero,
+} from "@/lib/site-access-handoff";
 
 const COVER_DURATION = 420;
 const HOLD_DURATION = 80;
 const REVEAL_DURATION = 460;
 const REDUCED_DURATION = 120;
 const ROUTE_FALLBACK_DURATION = 1600;
+const ACCESS_HANDOFF_MIN_HOLD = 140;
+
+type TransitionOptions = {
+  fallbackDuration?: number;
+  onFallback?: () => void;
+  waitForPathChange: boolean;
+};
 
 function isModifiedClick(event: MouseEvent) {
   return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
@@ -33,7 +47,6 @@ export function useRouteTransition() {
   const transitioningRef = useRef(false);
   const transitionTokenRef = useRef(0);
   const timersRef = useRef<number[]>([]);
-  const entryFrameRef = useRef<number | null>(null);
   const [phase, setPhase] = useState<RouteTransitionPhase>("idle");
 
   const clearTimers = useCallback(() => {
@@ -75,7 +88,7 @@ export function useRouteTransition() {
   );
 
   const startTransition = useCallback(
-    (onCovered: () => void, options: { waitForPathChange: boolean }) => {
+    (onCovered: () => void, options: TransitionOptions) => {
       clearTimers();
 
       const token = transitionTokenRef.current + 1;
@@ -91,8 +104,9 @@ export function useRouteTransition() {
         } else {
           schedule(() => {
             if (!pendingNavigationRef.current) return;
+            options.onFallback?.();
             revealTransition(token);
-          }, REDUCED_DURATION + ROUTE_FALLBACK_DURATION);
+          }, REDUCED_DURATION + (options.fallbackDuration ?? ROUTE_FALLBACK_DURATION));
         }
         return;
       }
@@ -112,8 +126,9 @@ export function useRouteTransition() {
         schedule(() => {
           if (!pendingNavigationRef.current) return;
           pendingNavigationRef.current = false;
+          options.onFallback?.();
           revealTransition(token);
-        }, ROUTE_FALLBACK_DURATION);
+        }, options.fallbackDuration ?? ROUTE_FALLBACK_DURATION);
       }, COVER_DURATION);
     },
     [clearTimers, completeTransition, revealTransition, schedule],
@@ -136,6 +151,40 @@ export function useRouteTransition() {
   }, [reducedMotion]);
 
   useEffect(() => {
+    const handoff = readSiteAccessHandoff();
+    if (!handoff || pathname.startsWith("/site-u-pripremi")) return;
+
+    clearTimers();
+    const token = transitionTokenRef.current + 1;
+    transitionTokenRef.current = token;
+    transitioningRef.current = true;
+    pendingNavigationRef.current = false;
+    setPhase(reducedMotionRef.current ? "fade" : "entry");
+
+    let cancelled = false;
+    const minimumHold = new Promise<void>((resolve) => {
+      schedule(resolve, ACCESS_HANDOFF_MIN_HOLD);
+    });
+    const heroReady = pathname === "/" ? waitForActiveHomeHero() : Promise.resolve();
+
+    Promise.all([minimumHold, heroReady]).then(() => {
+      if (cancelled || transitionTokenRef.current !== token) return;
+
+      clearSiteAccessHandoff();
+      if (reducedMotionRef.current) {
+        schedule(() => completeTransition(token), REDUCED_DURATION);
+        return;
+      }
+
+      revealTransition(token);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [clearTimers, completeTransition, pathname, revealTransition, schedule]);
+
+  useEffect(() => {
     if (!pendingNavigationRef.current) return;
 
     const token = transitionTokenRef.current;
@@ -145,6 +194,24 @@ export function useRouteTransition() {
       reducedMotionRef.current ? REDUCED_DURATION : HOLD_DURATION,
     );
   }, [pathname, revealTransition, schedule]);
+
+  useEffect(() => {
+    function handleSiteAccessHandoff() {
+      if (transitioningRef.current) return;
+
+      startTransition(() => undefined, {
+        fallbackDuration: SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS,
+        onFallback: clearSiteAccessHandoff,
+        waitForPathChange: true,
+      });
+    }
+
+    window.addEventListener(SITE_ACCESS_HANDOFF_EVENT, handleSiteAccessHandoff);
+
+    return () => {
+      window.removeEventListener(SITE_ACCESS_HANDOFF_EVENT, handleSiteAccessHandoff);
+    };
+  }, [startTransition]);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -189,11 +256,6 @@ export function useRouteTransition() {
   useEffect(
     () => () => {
       clearTimers();
-
-      if (entryFrameRef.current !== null) {
-        window.cancelAnimationFrame(entryFrameRef.current);
-        entryFrameRef.current = null;
-      }
     },
     [clearTimers],
   );

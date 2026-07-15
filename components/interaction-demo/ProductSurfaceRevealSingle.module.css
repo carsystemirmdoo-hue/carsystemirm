@@ -1,0 +1,75 @@
+/*
+ * Vertical 9:16 recording stage for the single-product social showcase.
+ * One oversized card centered in the frame; the production surface pipeline
+ * stays untouched and is only triggered through data-pointer-active.
+ */
+.stage {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(24px, 6vw, 72px);
+}
+
+.cardColumn {
+  width: min(88%, 920px);
+}
+
+/*
+ * Social-stage settling motion: no horizontal drift for a centered product —
+ * the packshot eases a few px down and up to 1.05 scale, reading as settling
+ * into the active surface. Triggered by the same states as the production
+ * reveal, so ?demo=1 drives it through data-pointer-active.
+ */
+.card img {
+  transition: transform 680ms var(--cs-ease-out);
+}
+
+.card:hover img,
+.card:focus-within img,
+.card[data-pointer-active="true"] img {
+  transform: translateY(4px) scale(1.05);
+}
+
+.surfaceTrigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+/*
+ * No focus ring on the recording stage; keyboard focus is still visible
+ * through the production :focus-within roller reveal.
+ */
+.surfaceTrigger:focus-visible {
+  outline: none;
+}
+
+.cardLabel {
+  display: block;
+  padding: 18px 20px 20px;
+  color: var(--catalog-ink);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card img {
+    transition: none;
+  }
+
+  .card:hover img,
+  .card:focus-within img,
+  .card[data-pointer-active="true"] img {
+    transform: none;
+  }
+}

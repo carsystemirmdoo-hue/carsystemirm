@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import { CounterUp } from "@/components/ui/CounterUp";
 import { CompanyLocationMap } from "@/components/map/CompanyLocationMap";
 import { PartnerMap } from "@/components/stores/PartnerMap";
@@ -18,26 +19,29 @@ import {
   trustBrandKeys,
 } from "./BrandLogoPlate";
 import { HomeSectionRail } from "./HomeSectionRail";
+import { HomeHeroImage } from "./HomeHeroImage";
 import { ProcessSection } from "./ProcessSection";
 import { ProgramDeckSection } from "./ProgramDeckSection";
 import { companyContact } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
   getPartnerCityLabel,
-  getPartnerLocationStats,
+  getPartnerCityKey,
+  getPartnerLocationTypeLabel,
   getPublicPartnerStores,
+  type PartnerStore,
 } from "@/lib/partner-stores";
-import {
-  getCityDisplayEntries,
-  type CityDisplayEntry,
-} from "@/components/stores/store-locator-display";
+import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
 import styles from "./CarsystemHomePage.module.css";
 
 const publicPartnerStores = getPublicPartnerStores();
 const cityEntries = getCityDisplayEntries(publicPartnerStores);
 const defaultCityEntry = cityEntries[0];
-const defaultCity = defaultCityEntry?.city ?? "";
-const locationStats = getPartnerLocationStats(publicPartnerStores);
+const defaultCity = defaultCityEntry?.key ?? "";
+const cityOptions = [
+  { label: "Svi gradovi", value: "" },
+  ...cityEntries.map((entry) => ({ label: entry.city, value: entry.key })),
+];
 const homeVisibleStoreIds = new Set(publicPartnerStores.map((store) => store.id));
 
 const trustBrandLinks: Partial<Record<BrandKey, string>> = {
@@ -108,9 +112,20 @@ export function CarsystemHomePage() {
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
 
-  const selectedStore = useMemo(
-    () => cityEntries.find((entry) => entry.city === selectedCity) ?? cityEntries[0],
+  const selectedStores = useMemo(
+    () =>
+      selectedCity
+        ? publicPartnerStores.filter(
+            (store) => getPartnerCityKey(store) === selectedCity,
+          )
+        : publicPartnerStores,
     [selectedCity],
+  );
+  const selectedStore = useMemo(
+    () =>
+      selectedStores.find((store) => store.id === selectedMapStoreId) ??
+      selectedStores[0],
+    [selectedMapStoreId, selectedStores],
   );
 
   useEffect(() => {
@@ -128,16 +143,23 @@ export function CarsystemHomePage() {
     };
   }, []);
 
-  function handleCityChange(city: string) {
-    if (!city) {
+  function handleCityChange(cityKey: string) {
+    if (!cityKey) {
       setSelectedCity("");
-      setLocatorStatus("Potvrđene javne lokacije još nisu unete u lokator.");
+      setSelectedMapStoreId("");
+      setLocatorStatus(`Prikazano je svih ${publicPartnerStores.length} lokacija u mreži.`);
       return;
     }
 
-    setSelectedCity(city);
-    setSelectedMapStoreId(cityEntries.find((entry) => entry.city === city)?.id ?? "");
-    setLocatorStatus(`Prikazana je partnerska tačka za grad ${city}.`);
+    const cityEntry = cityEntries.find((entry) => entry.key === cityKey);
+    const cityStores = publicPartnerStores.filter(
+      (store) => getPartnerCityKey(store) === cityKey,
+    );
+    setSelectedCity(cityKey);
+    setSelectedMapStoreId(cityStores[0]?.id ?? "");
+    setLocatorStatus(
+      `Prikazano ${cityStores.length} ${cityStores.length === 1 ? "lokacija" : "lokacije"} za grad ${cityEntry?.city ?? cityKey}.`,
+    );
   }
 
   function handleMapStoreSelect(storeId: string) {
@@ -145,7 +167,7 @@ export function CarsystemHomePage() {
     if (!store) return;
 
     const city = getPartnerCityLabel(store);
-    setSelectedCity(city);
+    setSelectedCity(getPartnerCityKey(store));
     setSelectedMapStoreId(store.id);
     setLocatorStatus(`Prikazana je partnerska lokacija: ${store.name}, ${city}.`);
   }
@@ -177,7 +199,7 @@ export function CarsystemHomePage() {
           return;
         }
 
-        setSelectedCity(getPartnerCityLabel(nearest.store));
+        setSelectedCity(getPartnerCityKey(nearest.store));
         setSelectedMapStoreId(nearest.store.id);
         setLocatorStatus(
           `Najbliža dostupna tačka: ${nearest.store.city}, oko ${formatDistanceKm(
@@ -195,9 +217,14 @@ export function CarsystemHomePage() {
   return (
     <main className={styles.home}>
       <HomeSectionRail />
-      <section className={styles.hero} aria-labelledby="homepage-title">
+      <section
+        id="pocetna"
+        className={`${styles.hero} ${styles.railTarget}`}
+        aria-labelledby="homepage-title"
+      >
         <div className={styles.heroMedia} aria-hidden="true">
-          <span className={styles.heroImage} />
+          <span className={styles.heroImage} data-critical-hero />
+          <HomeHeroImage className={styles.heroImageAsset} />
           <span className={styles.mistOne} />
           <span className={styles.mistTwo} />
           <span className={styles.mistThree} />
@@ -283,7 +310,7 @@ export function CarsystemHomePage() {
           <strong>Prodavnice u mreži</strong>
           <small>
             {selectedStore
-              ? `${selectedStore.city} · ${selectedStore.region}`
+              ? `${selectedStore.city} · ${getPartnerLocationTypeLabel(selectedStore)}`
               : "Nema potvrđenih javnih lokacija"}
           </small>
         </span>
@@ -323,36 +350,42 @@ export function CarsystemHomePage() {
 
       <ProcessSection />
 
-      <section className={styles.sectionAlt} aria-labelledby="network-title">
+      <section
+        id="prodavnice-mreza"
+        className={`${styles.sectionAlt} ${styles.railTarget}`}
+        aria-labelledby="network-title"
+      >
         <div className={styles.sectionHeader}>
           <div>
-            <p className={styles.sectionKicker}>Partnerska mreža, Srbija i region</p>
-            <h2 id="network-title">Prodavnice i podrška za vaš region.</h2>
+            <p className={styles.sectionKicker}>Prodajna i partnerska mreža</p>
+            <h2 id="network-title">Pronađite proverenu lokaciju u svom regionu.</h2>
             <p>
               Izaberite grad ili koristite lokaciju da brzo dođete do najbliže
               dostupne partnerske tačke. Za dostupnost proizvoda i tehnički
               savet, upit ide Carsystem i R-M timu.
             </p>
           </div>
-          <div className={styles.statPills}>
+          <div className={styles.statPills} data-counter-group>
             <span>
               <strong>
-                <CounterUp value={locationStats.locationCount} />
+                <CounterUp
+                  delayMs={250}
+                  durationMs={1450}
+                  value={publicPartnerStores.length}
+                />
               </strong>
               <small>Lokacija</small>
             </span>
             <span>
               <strong>
-                <CounterUp value={locationStats.cityCount} />
+                <CounterUp delayMs={250} durationMs={1450} value={cityEntries.length} />
               </strong>
               <small>Gradova</small>
             </span>
-            <span>
-              <strong>
-                <CounterUp value={locationStats.prodajnoMestoCount} />
-              </strong>
-              <small>Prodajnih mesta</small>
-            </span>
+            <p className={styles.statContext}>
+              <strong>Provereni podaci</strong>
+              <span>Objavljuju se samo odobrene javne lokacije</span>
+            </p>
           </div>
         </div>
 
@@ -361,19 +394,18 @@ export function CarsystemHomePage() {
             <label className={styles.fieldLabel} htmlFor="city-select">
               Grad ili region
             </label>
-            <select
-              id="city-select"
-              value={selectedCity}
-              onChange={(event) => handleCityChange(event.target.value)}
-              className={styles.citySelect}
+            <SearchableCombobox
+              ariaLabel="Grad ili region"
               disabled={cityEntries.length === 0}
-            >
-              {cityEntries.length > 0 ? (
-                cityEntries.map((entry) => <option key={entry.city}>{entry.city}</option>)
-              ) : (
-                <option value="">Nema potvrđenih lokacija</option>
-              )}
-            </select>
+              emptyMessage="Nema gradova koji odgovaraju pretrazi."
+              id="city-select"
+              onChange={handleCityChange}
+              options={cityOptions}
+              placeholder="Izaberite grad"
+              searchPlaceholder="Pretražite grad"
+              sheetTitle="Izaberite grad"
+              value={selectedCity}
+            />
             <button
               type="button"
               className={`${styles.locationButton} cs-magnetic-cta cs-theme-wipe-card`}
@@ -388,7 +420,11 @@ export function CarsystemHomePage() {
               <span>Koristi moju lokaciju</span>
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
-            <StorePreview store={selectedStore} />
+            <StorePreviewList
+              onSelect={handleMapStoreSelect}
+              selectedId={selectedMapStoreId}
+              stores={selectedStores}
+            />
           </div>
 
           <div className={styles.mapPanel} aria-label="Mapa partnerske mreže">
@@ -543,7 +579,11 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <section className={styles.finalCta} aria-labelledby="final-cta-title">
+      <section
+        id="zavrsni-poziv"
+        className={`${styles.finalCta} ${styles.railTarget}`}
+        aria-labelledby="final-cta-title"
+      >
         <Image
           src="/images/home/hero-dark.png"
           alt=""
@@ -562,7 +602,7 @@ export function CarsystemHomePage() {
             za radionice i servise.
           </span>
           <div className={styles.finalActions}>
-            <a className={`${styles.primaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/prodavnice" data-cursor="button" data-motion-surface data-motion="theme-wipe">
+            <a className={`${styles.primaryCta} ${styles.finalPrimaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/prodavnice" data-cursor="button" data-motion-surface data-motion="theme-wipe">
               <span>Prodavnice u mreži</span>
             </a>
             <a className={`${styles.secondaryOnDark} cs-interactive-surface`} href="/katalog" data-cursor="button" data-motion-surface>
@@ -586,7 +626,7 @@ function LocatorCard({
   onCityChange,
   onLocationRequest,
 }: {
-  selectedStore?: CityDisplayEntry;
+  selectedStore?: PartnerStore;
   selectedCity: string;
   locatorStatus: string;
   onCityChange: (city: string) => void;
@@ -615,19 +655,17 @@ function LocatorCard({
           </span>
           <span>Koristi moju lokaciju</span>
         </button>
-        <select
-          value={selectedCity}
-          onChange={(event) => onCityChange(event.target.value)}
-          aria-label="Izaberite grad"
-          className={styles.citySelect}
+        <SearchableCombobox
+          ariaLabel="Izaberite grad"
           disabled={cityEntries.length === 0}
-        >
-          {cityEntries.length > 0 ? (
-            cityEntries.map((entry) => <option key={entry.city}>{entry.city}</option>)
-          ) : (
-            <option value="">Nema potvrđenih lokacija</option>
-          )}
-        </select>
+          emptyMessage="Nema gradova koji odgovaraju pretrazi."
+          onChange={onCityChange}
+          options={cityOptions}
+          placeholder="Izaberite grad"
+          searchPlaceholder="Pretražite grad"
+          sheetTitle="Izaberite grad"
+          value={selectedCity}
+        />
         <StorePreview store={selectedStore} />
         <p className={styles.locatorStatus}>{locatorStatus}</p>
       </div>
@@ -635,7 +673,12 @@ function LocatorCard({
   );
 }
 
-function StorePreview({ store }: { store?: CityDisplayEntry }) {
+function phoneHref(phone: string) {
+  const primaryNumber = phone.split("/")[0]?.trim() ?? phone;
+  return `tel:${primaryNumber.replace(/[^\d+]/g, "")}`;
+}
+
+function StorePreview({ store }: { store?: PartnerStore }) {
   if (!store) {
     return (
       <article className={styles.storePreview}>
@@ -656,13 +699,67 @@ function StorePreview({ store }: { store?: CityDisplayEntry }) {
     <article className={styles.storePreview}>
       <span className={styles.availableDot} />
       <div>
-        <header>
-          <strong>{store.name}</strong>
-          <small>{store.region}</small>
+          <header>
+            <strong>{store.name}</strong>
+            <small>{getPartnerLocationTypeLabel(store)}</small>
         </header>
         <p>{store.address}</p>
-        <span>{store.detail}</span>
+        <span>
+          {getPartnerCityLabel(store)} · {getPartnerLocationTypeLabel(store)}
+        </span>
       </div>
     </article>
+  );
+}
+
+function StorePreviewList({
+  onSelect,
+  selectedId,
+  stores,
+}: {
+  onSelect: (storeId: string) => void;
+  selectedId: string;
+  stores: PartnerStore[];
+}) {
+  if (stores.length === 0) return <StorePreview />;
+
+  return (
+    <div className={styles.storePreviewList} aria-label="Lokacije u izabranom gradu">
+      {stores.map((store) => {
+        const isActive = store.id === selectedId;
+
+        return (
+          <article
+            className={styles.storePreviewItem}
+            data-active={isActive || undefined}
+            key={store.id}
+          >
+            <button
+              aria-pressed={isActive}
+              className={styles.storePreviewSelect}
+              onClick={() => onSelect(store.id)}
+              type="button"
+            >
+              <span className={styles.availableDot} aria-hidden="true" />
+              <span className={styles.storePreviewContent}>
+                <span className={styles.storePreviewHeading}>
+                  <strong>{store.name}</strong>
+                  <small>{getPartnerLocationTypeLabel(store)}</small>
+                </span>
+                <span>{store.address}</span>
+                <span>
+                  {getPartnerCityLabel(store)} · {getPartnerLocationTypeLabel(store)}
+                </span>
+              </span>
+            </button>
+            {store.phone ? (
+              <a className={styles.storePreviewPhone} href={phoneHref(store.phone)}>
+                {store.phone}
+              </a>
+            ) : null}
+          </article>
+        );
+      })}
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import {
   getLocationTypeOptions,
   getPartnerLocationStats,
   getPartnerLocationTypeLabel,
+  hasPartnerCoordinates,
   hasPartnerLocationType,
   type PartnerLocationType,
   type PartnerStore,
@@ -15,9 +16,12 @@ import styles from "./StoresPage.module.css";
 
 function normalize(value: string) {
   return value
-    .toLowerCase()
+    .toLocaleLowerCase("sr-Latn")
+    .replaceAll("đ", "dj")
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
 }
 
 function telHref(phone: string) {
@@ -25,13 +29,36 @@ function telHref(phone: string) {
 }
 
 function routeHref(store: PartnerStore) {
-  if (store.coordinates) {
-    return `https://www.openstreetmap.org/?mlat=${store.coordinates.lat}&mlon=${store.coordinates.lng}#map=15/${store.coordinates.lat}/${store.coordinates.lng}`;
-  }
+  if (!hasPartnerCoordinates(store)) return null;
+  return `https://www.openstreetmap.org/?mlat=${store.latitude}&mlon=${store.longitude}#map=15/${store.latitude}/${store.longitude}`;
+}
 
-  const countryHint = store.region.includes("BiH") ? "Bosna i Hercegovina" : "Srbija";
-  const query = [store.name, store.address, store.city, countryHint].join(", ");
-  return `https://www.openstreetmap.org/search?query=${encodeURIComponent(query)}`;
+function locationNotice(store: PartnerStore) {
+  if (store.coordinateStatus === "approximate") {
+    return "Približna lokacija — tačna pozicija još nije potvrđena.";
+  }
+  if (store.coordinateStatus === "unavailable") {
+    return "Lokacija je dostupna u listi, ali pozicija na mapi još nije određena.";
+  }
+  return null;
+}
+
+function formatMarkerCount(count: number) {
+  const lastDigit = count % 10;
+  const lastTwoDigits = count % 100;
+  if (lastDigit === 1 && lastTwoDigits !== 11) return `${count} javni marker`;
+  if (lastDigit >= 2 && lastDigit <= 4 && (lastTwoDigits < 12 || lastTwoDigits > 14)) {
+    return `${count} javna markera`;
+  }
+  return `${count} javnih markera`;
+}
+
+function listOnlyCountLabel(count: number) {
+  if (count === 1) return "Još 1 lokacija je dostupna samo u listi.";
+  if (count >= 2 && count <= 4) {
+    return `Još ${count} lokacije su dostupne samo u listi.`;
+  }
+  return `Još ${count} lokacija je dostupno samo u listi.`;
 }
 
 export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
@@ -49,6 +76,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
   const typeOptions = useMemo(() => getLocationTypeOptions(stores), [stores]);
   const stats = useMemo(() => getPartnerLocationStats(stores), [stores]);
+  const mappableStores = useMemo(() => stores.filter(hasPartnerCoordinates), [stores]);
 
   const filteredStores = useMemo(() => {
     const normalizedQuery = normalize(query.trim());
@@ -57,7 +85,12 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
       if (typeFilter && !hasPartnerLocationType(store, typeFilter)) return false;
       if (!normalizedQuery) return true;
 
-      return [store.name, store.city, store.address].some((field) =>
+      return [
+        store.name,
+        store.city,
+        store.address,
+        ...(store.alternativeNames ?? []),
+      ].some((field) =>
         normalize(field).includes(normalizedQuery),
       );
     });
@@ -144,25 +177,31 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
     );
   }
 
+  const filteredMarkerCount = filteredStores.filter(hasPartnerCoordinates).length;
+  const filteredListOnlyCount = filteredStores.length - filteredMarkerCount;
+  const markerResultLabel =
+    filteredMarkerCount === mappableStores.length
+      ? `Prikazano svih ${formatMarkerCount(mappableStores.length)}.`
+      : `Prikazano ${formatMarkerCount(filteredMarkerCount)} od ${formatMarkerCount(mappableStores.length)}.`;
   const resultCountLabel =
-    filteredStores.length === stores.length
-      ? `Prikazano svih ${stores.length} lokacija.`
-      : `Prikazano ${filteredStores.length} od ${stores.length} lokacija.`;
+    filteredListOnlyCount > 0
+      ? `${markerResultLabel} ${listOnlyCountLabel(filteredListOnlyCount)}`
+      : markerResultLabel;
 
-  const showMap = hasPublicStores && !mapFailed;
+  const showMap = mappableStores.length > 0 && !mapFailed;
 
   return (
     <main className={styles.main}>
       <section className={styles.hero} aria-labelledby="stores-title">
-        <p className={`${styles.kicker} ${styles.heroEyebrow}`}>Partnerska mreža</p>
+        <p className={`${styles.kicker} ${styles.heroEyebrow}`}>Lokator mreže</p>
         <div className={styles.heroGrid}>
           <h1 className={`${styles.title} ${styles.titleReveal}`} id="stores-title">
-            Pronađite najbliže prodajno mesto
+            Prodajna i partnerska mreža
           </h1>
           <p className={`${styles.subtitle} ${styles.subtitleReveal}`}>
             {hasPublicStores
-              ? `${stats.locationCount} partnerskih lokacija u ${stats.cityCount} gradova — potvrđena prodajna mesta, servisi i podrška programa.`
-              : "Lokator prikazuje samo potvrđene javne prodajne lokacije, bez demo adresa."}
+              ? `${stats.locationCount} javnih markera u ${stats.cityCount} gradova u internom preview prikazu. Poslovni kontakti bez preciznijeg tipa označeni su kao partnerske lokacije.`
+              : "Lokator trenutno nema poslovnih lokacija spremnih za interni preview prikaz."}
           </p>
         </div>
       </section>
@@ -176,38 +215,42 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
             className={styles.searchInput}
             id="store-search"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Pretraži grad ili naziv..."
+            placeholder="Pretraži grad, naziv ili adresu..."
             ref={searchRef}
             type="search"
             value={query}
           />
         </div>
 
-        <div className={styles.typeChips} role="group" aria-label="Tip lokacije">
-          <button
-            aria-pressed={typeFilter === ""}
-            className={`${styles.typeChip} ${typeFilter === "" ? styles.typeChipActive : ""}`}
-            onClick={() => setTypeFilter("")}
-            type="button"
-          >
-            Sve
-          </button>
-          {typeOptions.map((option) => (
+        {typeOptions.length > 1 ? (
+          <div className={styles.typeChips} role="group" aria-label="Tip lokacije">
             <button
-              aria-pressed={typeFilter === option.value}
-              className={`${styles.typeChip} ${
-                typeFilter === option.value ? styles.typeChipActive : ""
-              }`}
-              key={option.value}
-              onClick={() =>
-                setTypeFilter((current) => (current === option.value ? "" : option.value))
-              }
+              aria-pressed={typeFilter === ""}
+              className={`${styles.typeChip} ${typeFilter === "" ? styles.typeChipActive : ""}`}
+              onClick={() => setTypeFilter("")}
               type="button"
             >
-              {option.label}
+              Sve
             </button>
-          ))}
-        </div>
+            {typeOptions.map((option) => (
+              <button
+                aria-pressed={typeFilter === option.value}
+                className={`${styles.typeChip} ${
+                  typeFilter === option.value ? styles.typeChipActive : ""
+                }`}
+                key={option.value}
+                onClick={() =>
+                  setTypeFilter((current) =>
+                    current === option.value ? "" : option.value,
+                  )
+                }
+                type="button"
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        ) : null}
 
         <button className={styles.locateButton} onClick={handleLocationRequest} type="button">
           Koristi moju lokaciju
@@ -239,18 +282,25 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                   </p>
                   <strong>{selectedStore.name}</strong>
                   <span>{selectedStore.address}</span>
+                  {locationNotice(selectedStore) ? (
+                    <span className={styles.resultNote}>{locationNotice(selectedStore)}</span>
+                  ) : null}
                   <div className={styles.summaryActions}>
-                    <a className={styles.summaryCall} href={telHref(selectedStore.phone)}>
-                      Pozovi
-                    </a>
-                    <a
-                      className={styles.summaryRoute}
-                      href={routeHref(selectedStore)}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Ruta →
-                    </a>
+                    {selectedStore.phone ? (
+                      <a className={styles.summaryCall} href={telHref(selectedStore.phone)}>
+                        Pozovi
+                      </a>
+                    ) : null}
+                    {routeHref(selectedStore) ? (
+                      <a
+                        className={styles.summaryRoute}
+                        href={routeHref(selectedStore) ?? undefined}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Ruta →
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               ) : null}
@@ -264,8 +314,8 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
               </strong>
               <p>
                 {hasPublicStores
-                  ? "Lista partnerskih lokacija ispod ostaje potpuna — izaberite lokaciju i pozovite direktno."
-                  : "Demo i nepotpuni zapisi se ne prikazuju javno."}
+                  ? "Lista poslovnih lokacija ostaje dostupna. Lokacije bez pouzdanih koordinata nemaju marker ni navigaciju."
+                  : "Lokacije za interni preview još nisu pripremljene."}
               </p>
             </div>
           )}
@@ -315,32 +365,34 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                     </span>
                     <strong>{store.name}</strong>
                     <span className={styles.resultAddress}>{store.address}</span>
-                    {!store.coordinates ? (
-                      <span className={styles.resultNote}>
-                        Koordinate još nisu dostupne — lokacija je vidljiva samo u listi.
-                      </span>
+                    {locationNotice(store) ? (
+                      <span className={styles.resultNote}>{locationNotice(store)}</span>
                     ) : null}
                   </button>
 
                   {isSelected ? (
                     <div className={styles.resultActions}>
-                      <a
-                        className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
-                        data-cursor="button"
-                        data-motion-surface
-                        data-motion="theme-wipe"
-                        href={telHref(store.phone)}
-                      >
-                        <span>Pozovi</span>
-                      </a>
-                      <a
-                        className={styles.secondaryButton}
-                        href={routeHref(store)}
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        Ruta →
-                      </a>
+                      {store.phone ? (
+                        <a
+                          className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
+                          data-cursor="button"
+                          data-motion-surface
+                          data-motion="theme-wipe"
+                          href={telHref(store.phone)}
+                        >
+                          <span>Pozovi</span>
+                        </a>
+                      ) : null}
+                      {routeHref(store) ? (
+                        <a
+                          className={styles.secondaryButton}
+                          href={routeHref(store) ?? undefined}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          Ruta →
+                        </a>
+                      ) : null}
                       <a className={styles.ghostAction} href={`/kontakt?tema=prodavnica&prodavnica=${store.id}`}>
                         Pošalji upit
                       </a>
@@ -359,7 +411,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
               <p>
                 {hasPublicStores
                   ? "Proverite unos ili resetujte filter tipa lokacije."
-                  : "Demo i nepotpuni zapisi su zadržani u data source-u, ali se ne prikazuju javno."}
+                  : "Neodobreni kandidati su zadržani samo u internom review fajlu."}
               </p>
               <button
                 className={styles.secondaryButton}

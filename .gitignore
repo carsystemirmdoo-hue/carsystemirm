@@ -49,3 +49,9 @@ out
 
 # local AI/tooling state
 .claude/
+
+# private location imports and generated internal review artifacts
+/_incoming/*.csv
+/data/internal/location-import-review.csv
+/data/internal/location-import-summary.json
+/data/internal/geocoding-cache.json

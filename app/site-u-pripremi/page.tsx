@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { ComingSoonProgress } from "@/app/ComingSoonProgress";
+import { SiteAccessForm } from "@/components/site-access/SiteAccessForm";
 import {
   getLocalSiteAccessPassword,
   getSiteAccessPasswordState,
@@ -137,32 +138,7 @@ export default async function SiteInPreparationPage({
             Pripremamo javni katalog, pregled programa, lokator partnerskih
             prodavnica i osnovu za budući B2B pristup.
           </p>
-          <form
-            action="/site-u-pripremi/access"
-            className="access-panel reveal reveal-5"
-            method="post"
-          >
-            <label className="access-label" htmlFor="site-access-code">
-              Interni pristup
-            </label>
-            <div className="access-row">
-              <input
-                autoComplete="current-password"
-                className="access-input"
-                disabled={!canUnlock}
-                id="site-access-code"
-                name="accessCode"
-                placeholder="Pristupni kod"
-                type="password"
-              />
-              <button className="access-button" disabled={!canUnlock} type="submit">
-                Otključaj sajt
-              </button>
-            </div>
-            <p className="access-message" data-tone={message.tone}>
-              {message.text}
-            </p>
-          </form>
+          <SiteAccessForm canUnlock={canUnlock} message={message} />
           <ComingSoonProgress />
         </section>
 

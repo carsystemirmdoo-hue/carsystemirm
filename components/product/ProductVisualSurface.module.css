@@ -9,7 +9,9 @@
   --product-visual-pointer-x: 50%;
   --product-visual-pointer-y: 50%;
   --product-visual-paint-product-scale: 1;
-  --product-visual-core-scale: 0.96;
+  --product-visual-reveal-duration: 460ms;
+  --product-visual-reveal-pane-y: -112%;
+  --product-visual-reveal-content-y: 112%;
   --product-visual-core-opacity: 0;
   --product-visual-wash-opacity: 0;
   --product-visual-matte-opacity: 0;
@@ -53,8 +55,14 @@
     border-color 220ms ease;
 }
 
+.surface[data-reveal-direction="from-bottom"] {
+  --product-visual-reveal-pane-y: 112%;
+  --product-visual-reveal-content-y: -112%;
+}
+
 .surface[data-product-visual-treatment="paint"] {
   --product-visual-duration: 360ms;
+  --product-visual-reveal-duration: 560ms;
   --product-visual-settle-y: 0px;
   --product-visual-settle-r: 0deg;
   background: color-mix(in oklch, var(--surface), white 44%);
@@ -121,7 +129,8 @@
 .surface:focus-within {
   --product-visual-current-y: var(--product-visual-settle-y);
   --product-visual-current-r: var(--product-visual-settle-r);
-  --product-visual-core-scale: 1;
+  --product-visual-reveal-pane-y: 0%;
+  --product-visual-reveal-content-y: 0%;
   --product-visual-core-opacity: 0.88;
   --product-visual-wash-opacity: 0.82;
   --product-visual-matte-opacity: 0.82;
@@ -130,7 +139,7 @@
   --product-visual-trace-opacity: 0.46;
   --product-visual-sheen-opacity: 0.84;
   --product-visual-sweep-opacity: 0.62;
-  --product-visual-sweep-x: 230%;
+  --product-visual-sweep-x: 320%;
   --product-visual-shadow-width: 124px;
   --product-visual-shadow-height: 7px;
   --product-visual-shadow-blur: 18px;
@@ -150,6 +159,7 @@
 .surface[data-product-visual-treatment="paint"]:focus-within {
   --product-visual-current-y: 0px;
   --product-visual-current-r: 0deg;
+  --product-visual-paint-product-scale: 0.976;
   --product-visual-core-opacity: 0;
   --product-visual-wash-opacity: 0;
   --product-visual-sheen-opacity: 0;
@@ -224,6 +234,77 @@
   opacity: 0.38;
 }
 
+/*
+ * Roller reveal: .effectPane is the moving clip window (overflow hidden),
+ * .effectInner counter-translates by the exact opposite amount so the effect
+ * layers stay pinned to the surface while the pane edge sweeps across them.
+ * .rollerEdge shares the pane transform so it tracks the reveal boundary,
+ * and .effectStack clips it away at rest and at completion.
+ */
+.effectStack {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.effectPane {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: translate3d(0, var(--product-visual-reveal-pane-y), 0);
+  transition: transform var(--product-visual-reveal-duration) var(--cs-ease-wipe);
+}
+
+.effectInner {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(0, var(--product-visual-reveal-content-y), 0);
+  transition: transform var(--product-visual-reveal-duration) var(--cs-ease-wipe);
+}
+
+/*
+ * Full height so the percentage translate resolves to the same pixel distance
+ * as the pane (translate % is relative to the element's own box); only a thin
+ * band at the boundary end of the element is painted.
+ */
+.rollerEdge {
+  --product-visual-roller-shade: color-mix(in oklch, var(--foreground), transparent 70%);
+  --product-visual-roller-shade-soft: color-mix(in oklch, var(--foreground), transparent 88%);
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transform: translate3d(0, var(--product-visual-reveal-pane-y), 0);
+  transition: transform var(--product-visual-reveal-duration) var(--cs-ease-wipe);
+}
+
+.surface[data-reveal-direction="from-top"] .rollerEdge {
+  top: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--product-visual-roller-shade) 0px,
+    var(--product-visual-roller-shade-soft) 5px,
+    transparent 14px
+  );
+}
+
+.surface[data-reveal-direction="from-bottom"] .rollerEdge {
+  bottom: 100%;
+  background: linear-gradient(
+    0deg,
+    var(--product-visual-roller-shade) 0px,
+    var(--product-visual-roller-shade-soft) 5px,
+    transparent 14px
+  );
+}
+
+.surface[data-product-visual-treatment="paint"] .rollerEdge {
+  --product-visual-roller-shade: color-mix(in oklch, var(--product-visual-accent), black 30%);
+  --product-visual-roller-shade-soft: color-mix(in oklch, var(--product-visual-accent), transparent 62%);
+}
+
 .contactShadow {
   left: 50%;
   bottom: clamp(16px, 8%, 28px);
@@ -282,10 +363,7 @@
       color-mix(in oklch, var(--product-visual-accent), black 10%) 118%
     );
   opacity: 0;
-  transform: translate3d(0, 0, 0);
-  transition:
-    opacity 420ms var(--cs-ease-out),
-    transform 420ms var(--cs-ease-polish);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="paint"] .baseLayer {
@@ -296,36 +374,12 @@
   inset: -1px;
   background: var(--product-visual-accent);
   opacity: 1;
-  transform: translate3d(0, var(--product-visual-paint-field-y, -104%), 0);
-  transition: transform var(--product-visual-duration) var(--cs-ease-wipe);
-}
-
-.surface[data-product-visual-treatment="paint"][data-paint-hover-direction="from-top"] .floodWash {
-  --product-visual-paint-field-y: -104%;
-}
-
-.surface[data-product-visual-treatment="paint"][data-paint-hover-direction="from-bottom"] .floodWash {
-  --product-visual-paint-field-y: 104%;
-}
-
-.surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"] .floodWash,
-:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] .floodWash {
-  transform: translate3d(0, 0, 0);
+  transition: none;
 }
 
 .surface[data-product-visual-treatment="paint"] .floodCore {
   display: none;
   opacity: 0;
-}
-
-.surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"] .floodCore,
-:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] .floodCore {
-  opacity: 0;
-}
-
-.surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"],
-:global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] {
-  --product-visual-paint-product-scale: 0.976;
 }
 
 .surface[data-product-visual-treatment="paint"] .polishSheen,
@@ -364,11 +418,7 @@
       transparent 44%
     );
   opacity: 0;
-  transform: scale(var(--product-visual-core-scale));
-  transform-origin: 50% 78%;
-  transition:
-    opacity 400ms var(--cs-ease-out),
-    transform 400ms var(--cs-ease-out);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="clearcoat"] .floodCore {
@@ -402,11 +452,7 @@
       color-mix(in oklch, var(--surface-muted), black 6%) 100%
     );
   opacity: 0;
-  transform: scale(var(--product-visual-core-scale));
-  transform-origin: 50% 78%;
-  transition:
-    opacity 360ms var(--cs-ease-out),
-    transform 360ms var(--cs-ease-out);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="matte"] .matteField {
@@ -451,7 +497,7 @@
     );
   background-size: 7px 7px, 42px 42px;
   opacity: 0;
-  transition: opacity 360ms var(--cs-ease-out);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="matte"] .matteGrain {
@@ -499,7 +545,7 @@
       color-mix(in oklch, var(--product-visual-accent), black 12%) 120%
     );
   opacity: 0;
-  transition: opacity 360ms var(--cs-ease-out);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="abrasive"] .abrasiveWash {
@@ -524,7 +570,7 @@
     );
   background-size: 8px 8px, 100% 100%, 100% 100%;
   opacity: 0;
-  transition: opacity 360ms var(--cs-ease-out);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="abrasive"] .abrasiveTrace {
@@ -547,16 +593,10 @@
       color-mix(in oklch, var(--product-visual-accent), var(--surface) 48%) 100%
     );
   opacity: 0;
-  transform: scale(var(--product-visual-core-scale));
-  transform-origin: 50% 74%;
-  transition:
-    opacity 400ms var(--cs-ease-out),
-    transform 400ms var(--cs-ease-out);
+  transition: opacity 240ms var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="polish"] .polishSheen {
-  -webkit-mask-image: linear-gradient(180deg, black 0%, black calc(100% - 18px), transparent 100%);
-  mask-image: linear-gradient(180deg, black 0%, black calc(100% - 18px), transparent 100%);
   opacity: var(--product-visual-sheen-opacity);
 }
 
@@ -905,15 +945,8 @@
     display: none;
   }
 
-  .surface[data-product-visual-treatment="paint"] .floodWash {
-    opacity: 0;
-    transform: none !important;
-  }
-
-  .surface[data-product-visual-treatment="paint"][data-paint-hover-active="true"] .floodWash,
-  :global(.cs-product-motion-card:focus-within) .surface[data-product-visual-treatment="paint"] .floodWash {
-    opacity: 1;
-    transform: none !important;
+  .rollerEdge {
+    display: none;
   }
 
   .polishSweep {

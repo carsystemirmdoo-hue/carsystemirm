@@ -28,6 +28,32 @@ export function FooterReveal({ children }: { children: ReactNode }) {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
     let settleTimer: number | null = null;
+    const interactiveElements = Array.from(
+      roller.querySelectorAll<HTMLElement>(
+        'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      ),
+    );
+    const originalInertState = new Map(
+      interactiveElements.map((element) => [element, element.inert]),
+    );
+
+    function syncCoveredInteractions(progress: number) {
+      const rollerRect = roller.getBoundingClientRect();
+      const coveredBottom = rollerRect.top + rollerRect.height * (1 - progress);
+
+      interactiveElements.forEach((element) => {
+        if (originalInertState.get(element)) return;
+
+        const elementRect = element.getBoundingClientRect();
+        const isCovered =
+          progress < 1 &&
+          elementRect.bottom > rollerRect.top &&
+          elementRect.top < coveredBottom;
+
+        element.inert = isCovered;
+        element.toggleAttribute("data-footer-covered", isCovered);
+      });
+    }
 
     function setProgress(progress: number) {
       const clampedProgress = Math.min(Math.max(progress, 0), 1);
@@ -40,6 +66,7 @@ export function FooterReveal({ children }: { children: ReactNode }) {
         `${((1 - clampedProgress) * 18).toFixed(2)}px`,
       );
       roller.style.setProperty("--footer-mask-y", `${(clampedProgress * -100).toFixed(2)}%`);
+      syncCoveredInteractions(clampedProgress);
     }
 
     function updateReveal() {
@@ -82,6 +109,10 @@ export function FooterReveal({ children }: { children: ReactNode }) {
       roller.style.removeProperty("--footer-reveal-opacity");
       roller.style.removeProperty("--footer-reveal-y");
       roller.style.removeProperty("--footer-mask-y");
+      originalInertState.forEach((wasInert, element) => {
+        element.inert = wasInert;
+        element.removeAttribute("data-footer-covered");
+      });
     };
   }, []);
 
@@ -92,7 +123,11 @@ export function FooterReveal({ children }: { children: ReactNode }) {
       style={initialFooterRevealStyle}
     >
       <div className="footerRevealRoller__footer">{children}</div>
-      <span className="footerRevealRoller__mask" aria-hidden="true" />
+      <span
+        className="footerRevealRoller__mask"
+        data-footer-interaction-blocker
+        aria-hidden="true"
+      />
     </div>
   );
 }

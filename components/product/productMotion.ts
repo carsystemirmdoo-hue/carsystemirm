@@ -16,6 +16,26 @@ export type ProductVisualPreset = {
   complement?: string;
 };
 
+export type ProductRevealDirection = "from-top" | "from-bottom";
+
+/*
+ * Salt tuned so the catalogue lands near a 75/25 top-to-bottom split and the
+ * flagship paint cards read top-down; changing it reshuffles every direction.
+ */
+const revealDirectionSalt = ":v1";
+
+export function getProductRevealDirection(product: CarsystemProduct): ProductRevealDirection {
+  const key = product.slug + revealDirectionSalt;
+  let hash = 0x811c9dc5;
+
+  for (let index = 0; index < key.length; index += 1) {
+    hash ^= key.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+
+  return (hash >>> 0) % 4 === 3 ? "from-bottom" : "from-top";
+}
+
 const brandAccent: Record<string, string> = {
   rm: "oklch(0.58 0.22 27)",
   carsystem: "oklch(0.55 0.075 245)",

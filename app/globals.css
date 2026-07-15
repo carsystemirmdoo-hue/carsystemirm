@@ -362,9 +362,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transform: skewX(-16deg);
-  transition:
-    left 220ms var(--cs-ease-out),
-    opacity 180ms ease;
+  transition: opacity 180ms ease;
 }
 
 .cs-image-surface[data-pointer-active="true"]::after {
@@ -512,7 +510,8 @@ body {
       color-mix(in oklch, var(--footer-reveal-bg), transparent 1%) 60%,
       color-mix(in oklch, var(--footer-reveal-bg), transparent 2%) 100%
     );
-  pointer-events: none;
+  pointer-events: auto;
+  touch-action: pan-y;
   transform: translate3d(0, var(--footer-mask-y), 0);
   will-change: transform;
 }
@@ -707,6 +706,15 @@ a[data-cursor="link"]:focus-visible {
     visibility 0ms linear 0ms;
 }
 
+html[data-site-access-handoff="starting"] .cs-route-transition[data-phase="idle"],
+html[data-site-access-handoff="covered"] .cs-route-transition[data-phase="idle"] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 80ms linear,
+    visibility 0ms linear 0ms;
+}
+
 .cs-route-transition-screen {
   position: absolute;
   inset: 0;
@@ -718,6 +726,18 @@ a[data-cursor="link"]:focus-visible {
 
 .cs-route-transition[data-phase="covering"] .cs-route-transition-screen {
   animation: cs-route-cover 420ms var(--cs-ease-wipe) forwards;
+}
+
+html[data-site-access-handoff="starting"]
+  .cs-route-transition[data-phase="idle"]
+  .cs-route-transition-screen {
+  animation: cs-route-cover 420ms var(--cs-ease-wipe) forwards;
+}
+
+html[data-site-access-handoff="covered"]
+  .cs-route-transition[data-phase="idle"]
+  .cs-route-transition-screen {
+  transform: translateY(0);
 }
 
 .cs-route-transition[data-phase="covered"] .cs-route-transition-screen,

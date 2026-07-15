@@ -1,4 +1,7 @@
-import type { PartnerStore } from "@/lib/partner-stores";
+import {
+  hasPartnerCoordinates,
+  type PartnerStore,
+} from "@/lib/partner-stores";
 
 /**
  * Locator-only map data helpers. The shared Carsystem MapLibre style/theme
@@ -15,14 +18,55 @@ type PartnerFeature = {
   };
 };
 
-export function toPartnerFeatureCollection(stores: PartnerStore[]) {
+export function getPartnerMarkerCoordinateMap(stores: PartnerStore[]) {
+  const groups = new Map<string, PartnerStore[]>();
+  stores.filter(hasPartnerCoordinates).forEach((store) => {
+    const key = `${store.latitude.toFixed(6)},${store.longitude.toFixed(6)}`;
+    const group = groups.get(key) ?? [];
+    group.push(store);
+    groups.set(key, group);
+  });
+
+  const coordinates = new Map<string, [number, number]>();
+  for (const group of groups.values()) {
+    const sorted = [...group].sort((left, right) => left.id.localeCompare(right.id));
+    if (sorted.length === 1) {
+      const store = sorted[0];
+      if (hasPartnerCoordinates(store)) {
+        coordinates.set(store.id, [store.longitude, store.latitude]);
+      }
+      continue;
+    }
+
+    sorted.forEach((store, index) => {
+      if (!hasPartnerCoordinates(store)) return;
+      const ring = Math.floor(index / 10) + 1;
+      const angle = (index / Math.min(sorted.length, 10)) * Math.PI * 2;
+      const latitudeOffset = Math.sin(angle) * 0.00014 * ring;
+      const longitudeScale = Math.max(Math.cos((store.latitude * Math.PI) / 180), 0.35);
+      const longitudeOffset = (Math.cos(angle) * 0.00014 * ring) / longitudeScale;
+      coordinates.set(store.id, [
+        store.longitude + longitudeOffset,
+        store.latitude + latitudeOffset,
+      ]);
+    });
+  }
+
+  return coordinates;
+}
+
+export function toPartnerFeatureCollection(
+  stores: PartnerStore[],
+  referenceStores: PartnerStore[] = stores,
+) {
+  const markerCoordinates = getPartnerMarkerCoordinateMap(referenceStores);
   const features: PartnerFeature[] = stores
-    .filter((store) => Boolean(store.coordinates))
+    .filter(hasPartnerCoordinates)
     .map((store) => ({
       type: "Feature",
       geometry: {
         type: "Point",
-        coordinates: [store.coordinates!.lng, store.coordinates!.lat],
+        coordinates: markerCoordinates.get(store.id) ?? [store.longitude, store.latitude],
       },
       properties: {
         city: store.city,
@@ -36,8 +80,8 @@ export function toPartnerFeatureCollection(stores: PartnerStore[]) {
 
 export function getPartnerBounds(stores: PartnerStore[]) {
   const coords = stores
-    .map((store) => store.coordinates)
-    .filter((value): value is NonNullable<PartnerStore["coordinates"]> => Boolean(value));
+    .filter(hasPartnerCoordinates)
+    .map((store) => ({ lat: store.latitude, lng: store.longitude }));
 
   if (coords.length === 0) return null;
 

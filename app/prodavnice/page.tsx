@@ -4,9 +4,9 @@ import { getPublicPartnerStores } from "@/lib/partner-stores";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Prodavnice i partneri",
+  title: "Prodajna i partnerska mreža",
   description:
-    "Pronađite najbližu prodavnicu i partnersku mrežu za Carsystem i R-M program u Srbiji.",
+    "Pronađite proverena prodajna mesta, servise i partnerske lokacije za Carsystem i R-M program u Srbiji.",
   path: "/prodavnice",
 });
 

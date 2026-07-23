@@ -1,0 +1,92 @@
+[
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-acrylicpaints-acryl-fresh.png",
+    "sourceSha256": "ec0ec8c9ce3f72c19a10599bda0e289904c530de00b52ff839b60802c67b10e2",
+    "suspectedLine": "Acrylic Paints",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za namenu proizvoda."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-plasticpaints-plastic-paint-fresh.png",
+    "sourceSha256": "7a0e558cce549a634341e3b1f0b27bf2585fb9538358e99aa09b8aa7a6678ab3",
+    "suspectedLine": "Plastic Paints",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za namenu proizvoda."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-black-2mm.png",
+    "sourceSha256": "bb9660f4f655aa1dd2fbdf0e98f49713933db7821398eeaed1470294d451f442",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-blue-2mm.png",
+    "sourceSha256": "b8ede382b478a426a886c7274b3c80777e2893425b0994fee2ed5d644a2ebe97",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-green-2mm.png",
+    "sourceSha256": "30cb2f70ba70615483f09d1cdbdfe8c161b9d83943717e7cb94edf92868e7365",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-light-blue-2mm.png",
+    "sourceSha256": "dc2fdc9e757b097d8719d9be5a2a4c7c6ed121fdfbe58ff040395e82341c2578",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-orange-2mm.png",
+    "sourceSha256": "886e90214416a996cd55732efbfb6490d87d20e4840d5cf060088d92102a7e6c",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-pink-2mm.png",
+    "sourceSha256": "21d21c73a7caee5c79e6af4fdecfa42d5118fd752ea27b29299c86fdd9c8a6dd",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-purple-2mm.png",
+    "sourceSha256": "6f1943dc1cbea17e93870da39d746f950da91b1e2a9e9b55f65c9145853f1ba7",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-red-2mm.png",
+    "sourceSha256": "1a1dbfa1b6dbccf930c5e5c358559e98bc49f1dd173012d975ca5864961afcbe",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-white-2mm.png",
+    "sourceSha256": "e9e118317932cb49c7886177797582865be703e73b2a6b82a4dc0a3107b0e726",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-sportpens-sportpens-standard-yellow-2mm.png",
+    "sourceSha256": "811889198debcf8294d48d3d6d65ab6323f28c30d8353864770630aa559c1f60",
+    "suspectedLine": "Sportpens",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za ovu liniju."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-woodglue-wood-glue-crystalise-175gr.png",
+    "sourceSha256": "79287947543aa8ec50ad4094b33aedcf6eb60e2719a6a8b9a3a83a8ea4bab8ed",
+    "suspectedLine": "Wood Glue",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za potvrdu varijante."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-woodglue-wood-glue-crystalise-1kg.png",
+    "sourceSha256": "419a637ef9301a84745847ef88609fa1ca54bf972b2ed03e4e0f4efac1e82837",
+    "suspectedLine": "Wood Glue",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za potvrdu varijante."
+  },
+  {
+    "sourceAsset": "tmp/cosmos-lac-assets/selected-products/archive-01--products-pngs-transparent-800x800px-144dpi-other-products-woodglue-wood-glue-crystalise-750gr.png",
+    "sourceSha256": "9adfc608cab654ee3eae6a4042593edbc58363b437629bf3cb0ff210a5948ca2",
+    "suspectedLine": "Wood Glue",
+    "reason": "Nema odgovarajućeg engleskog kataloškog ili TDS izvora za potvrdu varijante."
+  }
+]

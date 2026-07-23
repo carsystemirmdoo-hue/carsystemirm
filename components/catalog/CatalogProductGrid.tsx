@@ -1,4 +1,5 @@
 import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
+import type { Ref } from "react";
 import type {
   CarsystemBrand,
   CarsystemProduct,
@@ -10,22 +11,26 @@ import styles from "./CatalogPage.module.css";
 
 export function CatalogProductGrid({
   brandBySlug,
+  gridRef,
   onReset,
   phaseBySlug,
+  preloadTriggerIndex,
+  preloadTriggerRef,
   products,
   programBySlug,
   resultCount,
   shownCount,
-  totalCount,
 }: {
   brandBySlug: Map<string, CarsystemBrand>;
+  gridRef: Ref<HTMLDivElement>;
   onReset: () => void;
   phaseBySlug: Map<RefinishPhaseSlug, RefinishPhase>;
+  preloadTriggerIndex: number;
+  preloadTriggerRef: Ref<HTMLAnchorElement>;
   products: CarsystemProduct[];
   programBySlug: Map<string, ProgramGroup>;
   resultCount: number;
   shownCount: number;
-  totalCount: number;
 }) {
   const resultLabel =
     shownCount === resultCount
@@ -34,17 +39,13 @@ export function CatalogProductGrid({
 
   return (
     <div className={styles.results}>
-      <div className={styles.resultsHeader}>
-        <div>
-          <p className={styles.kicker}>Rezultati</p>
-          <h2>{resultLabel}</h2>
-        </div>
-        <span>{totalCount} ukupno u katalogu</span>
-      </div>
+      <p className="sr-only" role="status" aria-atomic="true" aria-live="polite">
+        {resultLabel}
+      </p>
 
       {products.length > 0 ? (
-        <div className={styles.productGrid}>
-          {products.map((product) => {
+        <div className={styles.productGrid} ref={gridRef}>
+          {products.map((product, index) => {
             const brand = brandBySlug.get(product.brandSlug);
             const program = programBySlug.get(product.programSlug);
             const phase = phaseBySlug.get(product.phaseSlug);
@@ -56,6 +57,7 @@ export function CatalogProductGrid({
                 brand={brand}
                 key={product.slug}
                 phase={phase}
+                preloadRef={index === preloadTriggerIndex ? preloadTriggerRef : undefined}
                 product={product}
                 program={program}
               />

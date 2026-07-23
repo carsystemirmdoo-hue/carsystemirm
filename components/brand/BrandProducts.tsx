@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { EntityProductFilters } from "@/components/brand-program/EntityProductFilters";
 import type {
   CarsystemBrand,
@@ -24,7 +25,7 @@ export function BrandProducts({
     <section id="brand-products" className={styles.section} aria-labelledby="brand-products-title">
       <div className={styles.sectionHeader}>
         <p className={styles.sectionKicker}>Proizvodi</p>
-        <h2 id="brand-products-title">Izbor proizvoda iz {brand.name} programa</h2>
+        <h2 id="brand-products-title">{brand.name} proizvodi</h2>
         <p>
           Pregled vodi na postojeće stranice proizvoda. Za dostupnost i tehnički izbor
           pošaljite upit timu Carsystem i R-M.
@@ -39,7 +40,14 @@ export function BrandProducts({
         phases={Array.from(phaseBySlug.values())}
         products={products}
         programs={Array.from(programBySlug.values())}
+        showQuickPhaseFilters
       />
+
+      <div className={styles.brandCatalogCta}>
+        <Link className={styles.secondaryButton} href={brand.routes.catalog}>
+          Pogledajte sve proizvode
+        </Link>
+      </div>
     </section>
   );
 }

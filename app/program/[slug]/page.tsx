@@ -10,6 +10,7 @@ import {
   getRefinishPhaseBySlug,
   programGroups,
   refinishPhases,
+  toProductListingProduct,
 } from "@/lib/carsystem-data";
 import type { BrandReference } from "@/lib/carsystem-data";
 import type { RefinishPhase } from "@/lib/carsystem-data";
@@ -70,7 +71,9 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
         brands={brands}
         phaseBySlug={new Map(refinishPhases.map((phase) => [phase.slug, phase]))}
         phases={phases}
-        products={getCarsystemProductsByPublicProgramSlug(program.slug)}
+        products={getCarsystemProductsByPublicProgramSlug(program.slug).map(
+          toProductListingProduct,
+        )}
         program={program}
         programBySlug={new Map(programGroups.map((item) => [item.slug, item]))}
       />

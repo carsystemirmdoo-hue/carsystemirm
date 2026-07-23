@@ -66,6 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="sr-Latn"
+      data-scroll-behavior="smooth"
       className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >

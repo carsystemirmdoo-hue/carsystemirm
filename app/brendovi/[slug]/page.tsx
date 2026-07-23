@@ -8,6 +8,7 @@ import {
   getPublicProgramGroupsForBrand,
   programGroups,
   refinishPhases,
+  toProductListingProduct,
 } from "@/lib/carsystem-data";
 import { brandJsonLd, breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
@@ -38,7 +39,9 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
   const brand = getCarsystemBrandBySlug(slug);
   if (!brand) notFound();
 
-  const products = getCarsystemProductsByBrandSlug(brand.slug);
+  const products = getCarsystemProductsByBrandSlug(brand.slug).map(
+    toProductListingProduct,
+  );
   const publicPrograms = getPublicProgramGroupsForBrand(brand.slug);
 
   return (

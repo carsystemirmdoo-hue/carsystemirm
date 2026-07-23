@@ -53,7 +53,7 @@ export default function BrandsIndexPage() {
               return (
                 <Link
                   className={`${styles.brandCard} ${styles.brandCardActive}`}
-                  href={`/brendovi/${brand.slug}`}
+                  href={brand.routes.landing}
                   key={brand.slug}
                 >
                   <span className={styles.brandLogoFrame}>

@@ -1,0 +1,241 @@
+/* Namenski, samostalan motion kadar: tamna pozadina, spray artwork iza
+   proizvoda, minimalan caption. Bez web UI elemenata i bez zavisnosti od
+   stilova javnog sajta. Svi delay-i uključuju var(--seek) da bi statički
+   render režim mogao da pauzira scenu na tačnom trenutku. */
+
+.viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: oklch(0.1 0.01 255);
+}
+
+.stage {
+  --stage-bg: oklch(0.135 0.012 255);
+  --stage-bg-deep: oklch(0.095 0.01 255);
+  --caption-color: oklch(0.96 0.006 255);
+  --caption-muted: oklch(0.7 0.015 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 86% at 50% 30%, var(--stage-bg), var(--stage-bg-deep) 78%);
+  font-family: var(--font-body), system-ui, sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Suptilni glow u boji spreja, diše iza kompozicije. */
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--glow-color), transparent 62%);
+  opacity: 0;
+  transform: translate(-50%, -58%);
+  filter: blur(40px);
+}
+
+.stage[data-play="true"] .glow {
+  animation: spray-glow-in 1400ms ease calc(400ms + var(--seek, 0ms)) both;
+}
+
+@keyframes spray-glow-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.composition {
+  position: absolute;
+  inset: 0;
+}
+
+/* Spray artwork iza proizvoda; blagi drift kroz ceo klip da kadar ne bude
+   statičan. Reveal potez-po-potez dolazi iz ProductHeroSpraySvg maski. */
+.artFrame {
+  --art-width: 1500px;
+  position: absolute;
+  top: var(--art-top, 46%);
+  left: 50%;
+  width: var(--art-width);
+  aspect-ratio: 1536 / 1024;
+  transform: translate(-50%, -50%);
+}
+
+.artFrame > svg {
+  overflow: visible;
+}
+
+.stage[data-play="true"] .artFrame {
+  animation: spray-art-drift var(--total-ms, 5600ms) linear var(--seek, 0ms) both;
+}
+
+@keyframes spray-art-drift {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.035) translateY(-6px);
+  }
+}
+
+.floorShadow {
+  position: absolute;
+  top: calc(var(--product-center, 50%) + var(--product-h, 720px) / 2 - 12px);
+  left: 50%;
+  width: calc(var(--product-h, 720px) * 0.72);
+  height: 64px;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, oklch(0.03 0.005 255 / 0.65), transparent);
+  opacity: 0;
+  transform: translateX(-50%);
+  filter: blur(6px);
+}
+
+.product {
+  position: absolute;
+  top: var(--product-center, 50%);
+  left: 50%;
+  height: var(--product-h, 720px);
+  width: auto;
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(30px) scale(0.96);
+  filter: drop-shadow(0 30px 60px oklch(0.03 0.005 255 / 0.55));
+}
+
+.stage[data-play="true"] .product {
+  animation: spray-product-in 720ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(1250ms + var(--seek, 0ms)) both;
+}
+
+.stage[data-play="true"] .floorShadow {
+  animation: spray-glow-in 720ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(1250ms + var(--seek, 0ms)) both;
+}
+
+@keyframes spray-product-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(30px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+}
+
+/* Minimalan caption: logo pločica + naziv proizvoda. */
+.caption {
+  position: absolute;
+  bottom: var(--caption-bottom, 96px);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  opacity: 0;
+  transform: translateX(-50%) translateY(14px);
+  white-space: nowrap;
+}
+
+.stage[data-play="true"] .caption {
+  animation: spray-caption-in 620ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(3600ms + var(--seek, 0ms)) both;
+}
+
+@keyframes spray-caption-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.captionLogo {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 92px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, oklch(0.98 0.004 255), oklch(0.92 0.012 255));
+  box-shadow: 0 14px 34px oklch(0.03 0.005 255 / 0.4);
+}
+
+.captionLogo img {
+  max-width: 76%;
+  max-height: 62%;
+  object-fit: contain;
+}
+
+.caption strong {
+  color: var(--caption-color);
+  font-family: var(--font-display), sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.loading {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  margin: 0;
+  color: var(--caption-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+/* Statički seek: sve pauzirano na tačnom pomaku (delay nosi -seek). */
+.stage[data-render-static] * {
+  animation-play-state: paused !important;
+}
+
+/* Raspored po formatu (fiksni pikseli, bez responsive pomeranja). */
+.stage[data-export-format="story"] {
+  --art-width: 1560px;
+  --art-top: 45%;
+  --product-h: 780px;
+  --product-center: 48%;
+  --caption-bottom: 150px;
+}
+
+.stage[data-export-format="feed"] {
+  --art-width: 1460px;
+  --art-top: 44%;
+  --product-h: 700px;
+  --product-center: 47%;
+  --caption-bottom: 110px;
+}
+
+.stage[data-export-format="square"] {
+  --art-width: 1360px;
+  --art-top: 46%;
+  --product-h: 600px;
+  --product-center: 47%;
+  --caption-bottom: 84px;
+}
+
+.stage[data-export-format="wide"] {
+  --art-width: 1560px;
+  --art-top: 48%;
+  --product-h: 640px;
+  --product-center: 49%;
+  --caption-bottom: 72px;
+}

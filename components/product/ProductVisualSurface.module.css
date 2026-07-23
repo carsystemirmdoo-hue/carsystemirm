@@ -1,6 +1,7 @@
 .surface {
   --product-visual-accent: oklch(0.58 0.08 245);
   --product-visual-complement: oklch(0.68 0.12 195);
+  --product-visual-background-color: var(--surface-muted);
   --product-visual-duration: 390ms;
   --product-visual-settle-y: 3px;
   --product-visual-settle-r: 0deg;
@@ -8,7 +9,13 @@
   --product-visual-current-r: 0deg;
   --product-visual-pointer-x: 50%;
   --product-visual-pointer-y: 50%;
+  --product-visual-motion-x: 0px;
+  --product-visual-motion-y: 0px;
+  --product-visual-tilt-x: 0deg;
+  --product-visual-tilt-y: 0deg;
   --product-visual-paint-product-scale: 1;
+  --product-color-reveal-enter-duration: 520ms;
+  --product-color-reveal-exit-duration: 420ms;
   --product-visual-reveal-duration: 460ms;
   --product-visual-reveal-pane-y: -112%;
   --product-visual-reveal-content-y: 112%;
@@ -36,23 +43,11 @@
   place-items: center;
   overflow: hidden;
   border-bottom: 1px solid color-mix(in oklch, var(--foreground), transparent 86%);
-  background:
-    radial-gradient(
-      ellipse at 50% 82%,
-      color-mix(in oklch, var(--product-visual-accent), transparent 90%),
-      transparent 58%
-    ),
-    linear-gradient(
-      155deg,
-      color-mix(in oklch, var(--surface), white 48%) 0%,
-      color-mix(in oklch, var(--surface-muted), white 32%) 56%,
-      color-mix(in oklch, var(--surface), black 4%) 100%
-    );
+  background-color: var(--surface-muted);
+  background-image: none;
   color: var(--foreground);
   isolation: isolate;
-  transition:
-    background-color var(--product-visual-duration) var(--cs-ease-out),
-    border-color 220ms ease;
+  transition: border-color 220ms ease;
 }
 
 .surface[data-reveal-direction="from-bottom"] {
@@ -65,7 +60,6 @@
   --product-visual-reveal-duration: 560ms;
   --product-visual-settle-y: 0px;
   --product-visual-settle-r: 0deg;
-  background: color-mix(in oklch, var(--surface), white 44%);
 }
 
 .surface[data-product-visual-treatment="clearcoat"] {
@@ -103,22 +97,13 @@
 
 :global(.dark) .surface {
   border-bottom-color: color-mix(in oklch, var(--foreground), transparent 86%);
-  background:
-    radial-gradient(
-      ellipse at 50% 82%,
-      color-mix(in oklch, var(--product-visual-accent), transparent 86%),
-      transparent 58%
-    ),
-    linear-gradient(
-      155deg,
-      color-mix(in oklch, var(--surface-muted), black 8%) 0%,
-      color-mix(in oklch, var(--surface), black 34%) 58%,
-      oklch(0.06 0.01 250) 100%
-    );
+  background-color: var(--surface);
+  background-image: none;
 }
 
 :global(.dark) .surface[data-product-visual-treatment="paint"] {
-  background: color-mix(in oklch, var(--surface), black 44%);
+  background-color: var(--surface);
+  background-image: none;
 }
 
 :global(.cs-product-motion-card:hover) .surface,
@@ -209,6 +194,7 @@
 }
 
 .baseLayer,
+.colorReveal,
 .floodWash,
 .floodCore,
 .matteField,
@@ -232,6 +218,42 @@
     linear-gradient(180deg, color-mix(in oklch, var(--foreground), transparent 96%) 1px, transparent 1px);
   background-size: 10px 10px, 34px 34px, 34px 34px;
   opacity: 0.38;
+}
+
+.colorReveal {
+  inset: 0;
+  z-index: 1;
+  background-color: var(--product-active-color);
+  background-image: none;
+  opacity: 1;
+  transform: scaleY(0);
+  transform-origin: center top;
+  transition: transform var(--product-color-reveal-exit-duration) var(--cs-ease-wipe);
+}
+
+.surface[data-reveal-direction="from-bottom"] .colorReveal {
+  transform-origin: center bottom;
+}
+
+.surface[data-product-visual-mode="color-on-hover"][data-product-visual-state="active"]
+  .colorReveal {
+  transform: scaleY(1);
+  transition-duration: var(--product-color-reveal-enter-duration);
+}
+
+.surface[data-product-visual-mode="color-on-hover"][data-product-visual-state="exiting"]
+  .colorReveal {
+  transform: scaleY(0);
+  transition-duration: var(--product-color-reveal-exit-duration);
+}
+
+.surface[data-product-visual-mode="always-color"] .colorReveal {
+  transform: scaleY(1);
+  transition: none;
+}
+
+.surface[data-product-visual-mode="neutral"] .colorReveal {
+  display: none;
 }
 
 /*
@@ -372,7 +394,8 @@
 
 .surface[data-product-visual-treatment="paint"] .floodWash {
   inset: -1px;
-  background: var(--product-visual-accent);
+  background-color: var(--product-visual-background-color);
+  background-image: none;
   opacity: 1;
   transition: none;
 }
@@ -701,13 +724,22 @@
   height: 84%;
   min-height: 132px;
   place-items: center;
-  transform: translateY(var(--product-visual-current-y)) rotate(var(--product-visual-current-r));
+  transform:
+    perspective(900px)
+    translate3d(
+      var(--product-visual-motion-x),
+      calc(var(--product-visual-current-y) + var(--product-visual-motion-y)),
+      0
+    )
+    rotateX(var(--product-visual-tilt-x))
+    rotateY(var(--product-visual-tilt-y))
+    rotate(var(--product-visual-current-r))
+    scale(var(--product-visual-paint-product-scale));
   transform-origin: 50% 84%;
   transition: transform var(--product-visual-duration) var(--cs-ease-out);
 }
 
 .surface[data-product-visual-treatment="paint"] .objectWrap {
-  transform: scale(var(--product-visual-paint-product-scale));
   transition: transform var(--product-visual-duration) var(--cs-ease-out);
 }
 
@@ -756,7 +788,8 @@
 }
 
 :global(.dark) .surface[data-product-visual-treatment="paint"] .floodWash {
-  background: var(--product-visual-accent);
+  background-color: var(--product-visual-background-color);
+  background-image: none;
 }
 
 :global(.dark) .surface[data-product-visual-treatment="clearcoat"] .floodWash {
@@ -899,6 +932,54 @@
   line-height: 1.28;
 }
 
+/*
+ * Visual modes are explicit so paint tokens cannot leak into unrelated cards.
+ * Cosmos Lac uses color-on-hover: its dataset color is applied directly, with
+ * no gradient, opacity layer, color-mix or animated interpolation.
+ */
+.surface[data-product-visual-mode="neutral"],
+.surface[data-product-visual-mode="color-on-hover"],
+.surface[data-product-visual-mode="always-color"] {
+  background-color: var(--surface-muted);
+  background-image: none;
+}
+
+:global(.dark) .surface[data-product-visual-mode="neutral"],
+:global(.dark) .surface[data-product-visual-mode="color-on-hover"],
+:global(.dark) .surface[data-product-visual-mode="always-color"] {
+  background-color: var(--surface);
+  background-image: none;
+}
+
+.surface[data-product-visual-mode="neutral"] .baseLayer,
+.surface[data-product-visual-mode="neutral"] .effectStack,
+.surface[data-product-visual-mode="neutral"] .pointerLens,
+.surface[data-product-visual-mode="color-on-hover"] .baseLayer,
+.surface[data-product-visual-mode="color-on-hover"] .effectStack,
+.surface[data-product-visual-mode="color-on-hover"] .pointerLens,
+.surface[data-product-visual-mode="always-color"] .baseLayer,
+.surface[data-product-visual-mode="always-color"] .effectStack,
+.surface[data-product-visual-mode="always-color"] .pointerLens {
+  display: none;
+}
+
+.surface[data-product-visual-mode][data-product-visual-treatment][data-product-visual-state="active"] {
+  --product-visual-current-y: -2px;
+  --product-visual-current-r: 0deg;
+  --product-visual-paint-product-scale: 1.012;
+  --product-visual-shadow-width: 112px;
+  --product-visual-shadow-height: 8px;
+  --product-visual-shadow-blur: 15px;
+  --product-visual-shadow-opacity: 0.25;
+}
+
+.surface[data-product-visual-mode][data-product-visual-treatment][data-product-visual-state="idle"],
+.surface[data-product-visual-mode][data-product-visual-treatment][data-product-visual-state="exiting"] {
+  --product-visual-current-y: 0px;
+  --product-visual-current-r: 0deg;
+  --product-visual-paint-product-scale: 1;
+}
+
 @media (max-width: 520px) {
   .surface {
     min-height: 206px;
@@ -939,6 +1020,16 @@
 
   .objectWrap {
     transform: none !important;
+  }
+
+  .surface[data-product-visual-mode="color-on-hover"][data-product-visual-state="active"]
+    .colorReveal {
+    transform: scaleY(1);
+  }
+
+  .surface[data-product-visual-mode="color-on-hover"]:not([data-product-visual-state="active"])
+    .colorReveal {
+    transform: scaleY(0);
   }
 
   .pointerLens {

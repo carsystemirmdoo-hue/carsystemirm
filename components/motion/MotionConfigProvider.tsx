@@ -5,10 +5,15 @@ import {
   type ReactNode,
   useContext,
 } from "react";
-import { RouteTransitionOverlay } from "@/components/motion/RouteTransitionOverlay";
+import {
+  RouteTransitionOverlay,
+  type RouteTransitionPhase,
+} from "@/components/motion/RouteTransitionOverlay";
 import { useRouteTransition } from "@/components/motion/useRouteTransition";
 
 type MotionTransitionContextValue = {
+  phase: RouteTransitionPhase;
+  reducedMotion: boolean;
   runThemeTransition: (swapTheme: () => void) => void;
 };
 
@@ -19,7 +24,11 @@ export function MotionConfigProvider({ children }: { children: ReactNode }) {
 
   return (
     <MotionTransitionContext.Provider
-      value={{ runThemeTransition: routeTransition.runThemeTransition }}
+      value={{
+        phase: routeTransition.phase,
+        reducedMotion: routeTransition.reducedMotion,
+        runThemeTransition: routeTransition.runThemeTransition,
+      }}
     >
       <RouteTransitionOverlay
         phase={routeTransition.phase}
@@ -36,4 +45,13 @@ export function useMotionTransition() {
   if (context) return context.runThemeTransition;
 
   return (swapTheme: () => void) => swapTheme();
+}
+
+export function useMotionTransitionState() {
+  const context = useContext(MotionTransitionContext);
+
+  return {
+    phase: context?.phase ?? "idle",
+    reducedMotion: context?.reducedMotion ?? false,
+  } as const;
 }

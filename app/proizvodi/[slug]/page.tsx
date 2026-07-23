@@ -5,9 +5,10 @@ import {
   getAllCarsystemProducts,
   getCarsystemBrandBySlug,
   getCarsystemProductBySlug,
+  getManualProductRecommendations,
+  getProductCompatibleProducts,
   getProgramGroupBySlug,
   getRefinishPhaseBySlug,
-  getRelatedProducts,
 } from "@/lib/carsystem-data";
 import { breadcrumbJsonLd, jsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
 
@@ -51,7 +52,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           breadcrumbJsonLd([
             { name: "Početna", path: "/" },
             { name: "Katalog", path: "/katalog" },
-            { name: brand.name, path: `/brendovi/${brand.slug}` },
+            { name: brand.name, path: brand.routes.landing },
             { name: product.name, path: `/proizvodi/${product.slug}` },
           ]),
         )}
@@ -64,7 +65,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         product={product}
         brand={brand}
         program={program}
-        relatedProducts={getRelatedProducts(product)}
+        compatibleProducts={getProductCompatibleProducts(product)}
+        similarProducts={getManualProductRecommendations(product)}
       />
     </>
   );

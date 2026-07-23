@@ -2,7 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
+import {
+  CATALOG_BATCH_SIZE,
+  getCatalogGridColumnCount,
+  getCatalogNextVisibleCount,
+  getCatalogPreloadTriggerIndex,
+} from "@/components/catalog/catalogInfiniteScroll.mjs";
 import { CatalogProductGrid } from "@/components/catalog/CatalogProductGrid";
 import { CatalogSupportCta } from "@/components/catalog/CatalogSupportCta";
 import type {
@@ -29,8 +36,6 @@ type CatalogUrlFilters = {
   query: string;
   status: string;
 };
-
-const CATALOG_PAGE_SIZE = 48;
 
 const catalogModules: CatalogModule[] = [
   {
@@ -103,7 +108,8 @@ function parseCatalogUrlFilters({
   programSlugs: Set<string>;
   searchParams: URLSearchParams;
 }): CatalogUrlFilters {
-  const brandParam = firstParam(searchParams, "brand");
+  const brandParam =
+    firstParam(searchParams, "brend") || firstParam(searchParams, "brand");
   const programParam = firstParam(searchParams, "program");
   const phaseParam = firstParam(searchParams, "faza");
   const statusParam = firstParam(searchParams, "dostupnost");
@@ -120,13 +126,20 @@ function parseCatalogUrlFilters({
   };
 }
 
-function buildCatalogSearch(filters: CatalogUrlFilters) {
-  const params = new URLSearchParams();
+function buildCatalogSearch(filters: CatalogUrlFilters, currentSearch = "") {
+  const params = new URLSearchParams(currentSearch);
   const activeCatalogModule = catalogModules.find(
     (catalogModule) => catalogModule.key === filters.activeModule,
   );
 
-  if (filters.brandSlug) params.set("brand", filters.brandSlug);
+  params.delete("brand");
+  params.delete("brend");
+  params.delete("program");
+  params.delete("faza");
+  params.delete("dostupnost");
+  params.delete("q");
+
+  if (filters.brandSlug) params.set("brend", filters.brandSlug);
   if (activeCatalogModule) params.set("program", activeCatalogModule.slug);
   else if (filters.programSlug) params.set("program", filters.programSlug);
   if (filters.phaseSlug) params.set("faza", filters.phaseSlug);
@@ -179,10 +192,38 @@ export function CatalogExplorer({
   const [phaseSlug, setPhaseSlug] = useState(urlFilters.phaseSlug);
   const [status, setStatus] = useState(urlFilters.status);
   const [typeTag, setTypeTag] = useState("");
+  const [productLine, setProductLine] = useState("");
+  const [technicalCategory, setTechnicalCategory] = useState("");
+  const [finish, setFinish] = useState("");
   const [activeModule, setActiveModule] = useState(urlFilters.activeModule);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [desktopFiltersCollapsed, setDesktopFiltersCollapsed] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(CATALOG_PAGE_SIZE);
+  const paginationKey = [
+    query.trim(),
+    brandSlug,
+    programSlug,
+    phaseSlug,
+    status,
+    typeTag,
+    productLine,
+    technicalCategory,
+    finish,
+    activeModule,
+  ].join("\u001f");
+  const [pagination, setPagination] = useState({
+    key: paginationKey,
+    count: CATALOG_BATCH_SIZE,
+  });
+  const [productGridElement, setProductGridElement] = useState<HTMLDivElement | null>(
+    null,
+  );
+  const [preloadTriggerElement, setPreloadTriggerElement] =
+    useState<HTMLAnchorElement | null>(null);
+  const [gridColumnCount, setGridColumnCount] = useState(1);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadingNextBatchRef = useRef(false);
+  const paginationKeyRef = useRef(paginationKey);
+  const filteredProductsLengthRef = useRef(products.length);
 
   const currentUrlFilters = useMemo(
     () => ({
@@ -219,6 +260,39 @@ export function CatalogExplorer({
     });
     return Array.from(tags).sort((a, b) => a.localeCompare(b, "sr-Latn"));
   }, [products]);
+  const productLineOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          products
+            .map((product) => product.catalogMetadata?.line)
+            .filter((value): value is string => Boolean(value)),
+        ),
+      ).sort((first, second) => first.localeCompare(second, "sr-Latn")),
+    [products],
+  );
+  const technicalCategoryOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          products
+            .map((product) => product.catalogMetadata?.technicalCategory)
+            .filter((value): value is string => Boolean(value)),
+        ),
+      ).sort((first, second) => first.localeCompare(second, "sr-Latn")),
+    [products],
+  );
+  const finishOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          products
+            .map((product) => product.catalogMetadata?.finish)
+            .filter((value): value is string => Boolean(value)),
+        ),
+      ).sort((first, second) => first.localeCompare(second, "sr-Latn")),
+    [products],
+  );
 
   const activeModuleConfig = catalogModules.find(
     (catalogModule) => catalogModule.key === activeModule,
@@ -256,6 +330,9 @@ export function CatalogExplorer({
     setStatus(urlFilters.status);
     setActiveModule(urlFilters.activeModule);
     setTypeTag("");
+    setProductLine("");
+    setTechnicalCategory("");
+    setFinish("");
     setFiltersOpen(false);
   }, [searchParamsKey, urlFilters]);
 
@@ -265,7 +342,7 @@ export function CatalogExplorer({
       return;
     }
 
-    const nextSearch = buildCatalogSearch(currentUrlFilters);
+    const nextSearch = buildCatalogSearch(currentUrlFilters, searchParamsKey);
     if (nextSearch === searchParamsKey) return;
 
     lastWrittenSearchRef.current = nextSearch;
@@ -292,6 +369,14 @@ export function CatalogExplorer({
       if (phaseSlug && product.phaseSlug !== phaseSlug) return false;
       if (status === "na-upit" && !product.badges.includes("Na upit")) return false;
       if (typeTag && !product.badges.includes(typeTag)) return false;
+      if (productLine && product.catalogMetadata?.line !== productLine) return false;
+      if (
+        technicalCategory &&
+        product.catalogMetadata?.technicalCategory !== technicalCategory
+      ) {
+        return false;
+      }
+      if (finish && product.catalogMetadata?.finish !== finish) return false;
 
       if (!normalizedQuery) return true;
 
@@ -306,6 +391,14 @@ export function CatalogExplorer({
           program?.name ?? "",
           phase?.name ?? "",
           product.badges.join(" "),
+          product.catalogMetadata?.officialName ?? "",
+          product.catalogMetadata?.displayNameSr ?? "",
+          product.catalogMetadata?.cosmosCode ?? "",
+          product.catalogMetadata?.ralCode ?? "",
+          product.catalogMetadata?.colorName ?? "",
+          product.catalogMetadata?.line ?? "",
+          product.catalogMetadata?.technicalCategory ?? "",
+          product.catalogMetadata?.finish ?? "",
         ].join(" "),
       );
 
@@ -323,11 +416,53 @@ export function CatalogExplorer({
     query,
     status,
     typeTag,
+    productLine,
+    technicalCategory,
+    finish,
   ]);
 
+  paginationKeyRef.current = paginationKey;
+  filteredProductsLengthRef.current = filteredProducts.length;
+
   useEffect(() => {
-    setVisibleCount(CATALOG_PAGE_SIZE);
-  }, [currentUrlFilters, typeTag]);
+    observerRef.current?.disconnect();
+    observerRef.current = null;
+    loadingNextBatchRef.current = false;
+    setPagination((current) =>
+      current.key === paginationKey && current.count === CATALOG_BATCH_SIZE
+        ? current
+        : { key: paginationKey, count: CATALOG_BATCH_SIZE },
+    );
+  }, [paginationKey]);
+
+  useEffect(() => {
+    const grid = productGridElement;
+    if (!grid) return undefined;
+    const activeGrid = grid;
+
+    function updateGridColumnCount() {
+      const nextColumnCount = getCatalogGridColumnCount(
+        window.getComputedStyle(activeGrid).gridTemplateColumns,
+      );
+      setGridColumnCount((current) =>
+        current === nextColumnCount ? current : nextColumnCount,
+      );
+    }
+
+    updateGridColumnCount();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateGridColumnCount);
+      return () => window.removeEventListener("resize", updateGridColumnCount);
+    }
+
+    const resizeObserver = new ResizeObserver(updateGridColumnCount);
+    resizeObserver.observe(activeGrid);
+    return () => resizeObserver.disconnect();
+  }, [productGridElement]);
+
+  const visibleCount =
+    pagination.key === paginationKey ? pagination.count : CATALOG_BATCH_SIZE;
 
   const visibleProducts = useMemo(
     () => filteredProducts.slice(0, visibleCount),
@@ -335,6 +470,57 @@ export function CatalogExplorer({
   );
 
   const hasMoreProducts = visibleProducts.length < filteredProducts.length;
+  const preloadTriggerIndex = hasMoreProducts
+    ? getCatalogPreloadTriggerIndex(visibleProducts.length, gridColumnCount)
+    : -1;
+
+  useEffect(() => {
+    observerRef.current?.disconnect();
+    observerRef.current = null;
+
+    if (!hasMoreProducts || !preloadTriggerElement) return undefined;
+
+    const observedPaginationKey = paginationKey;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (
+          !entry?.isIntersecting ||
+          loadingNextBatchRef.current ||
+          paginationKeyRef.current !== observedPaginationKey
+        ) {
+          return;
+        }
+
+        observer.disconnect();
+        loadingNextBatchRef.current = true;
+
+        setPagination((current) => {
+          if (paginationKeyRef.current !== observedPaginationKey) return current;
+
+          const currentCount =
+            current.key === observedPaginationKey ? current.count : CATALOG_BATCH_SIZE;
+          const nextCount = getCatalogNextVisibleCount(
+            currentCount,
+            filteredProductsLengthRef.current,
+          );
+
+          if (nextCount <= currentCount) return current;
+          return { key: observedPaginationKey, count: nextCount };
+        });
+
+        loadingNextBatchRef.current = false;
+      },
+      { threshold: 0.01 },
+    );
+
+    observerRef.current = observer;
+    observer.observe(preloadTriggerElement);
+
+    return () => {
+      observer.disconnect();
+      if (observerRef.current === observer) observerRef.current = null;
+    };
+  }, [hasMoreProducts, paginationKey, preloadTriggerElement]);
 
   function clearFilters() {
     setQuery("");
@@ -343,6 +529,9 @@ export function CatalogExplorer({
     setPhaseSlug("");
     setStatus("");
     setTypeTag("");
+    setProductLine("");
+    setTechnicalCategory("");
+    setFinish("");
     setActiveModule("");
   }
 
@@ -364,6 +553,9 @@ export function CatalogExplorer({
     Boolean(phaseSlug) ||
     Boolean(status) ||
     Boolean(typeTag) ||
+    Boolean(productLine) ||
+    Boolean(technicalCategory) ||
+    Boolean(finish) ||
     Boolean(activeModule);
 
   return (
@@ -403,6 +595,18 @@ export function CatalogExplorer({
         </div>
       </section>
 
+      <div className={styles.manufacturerRail}>
+        <ManufacturerRail
+          brands={brands}
+          description="Izbor proizvođača zadržava aktivnu fazu, kategoriju, pretragu i ostale kompatibilne filtere."
+          id="catalog-manufacturers"
+          mode="filter"
+          selectedSlug={brandSlug}
+          title="Izaberite proizvođača"
+          onSelect={setBrandSlug}
+        />
+      </div>
+
       <section className={styles.phaseRail} aria-label="Faze refinish procesa">
         <div className={styles.phaseTabs}>
           {phaseTabs.map((phaseTab) => {
@@ -438,7 +642,6 @@ export function CatalogExplorer({
         >
           Filteri
         </button>
-        <p>{filteredProducts.length} proizvoda</p>
       </div>
 
       <section
@@ -454,7 +657,7 @@ export function CatalogExplorer({
             brandSlug={brandSlug}
             filtersOpen={filtersOpen}
             hasActiveFilters={hasActiveFilters}
-            onBrandChange={(value) => updateScopedFilter(setBrandSlug, value)}
+            onBrandChange={setBrandSlug}
             onClear={clearFilters}
             onDesktopCollapseChange={setDesktopFiltersCollapsed}
             onMobileClose={() => setFiltersOpen(false)}
@@ -465,6 +668,11 @@ export function CatalogExplorer({
             }}
             onStatusChange={(value) => updateScopedFilter(setStatus, value)}
             onTypeChange={(value) => updateScopedFilter(setTypeTag, value)}
+            onProductLineChange={(value) => updateScopedFilter(setProductLine, value)}
+            onTechnicalCategoryChange={(value) =>
+              updateScopedFilter(setTechnicalCategory, value)
+            }
+            onFinishChange={(value) => updateScopedFilter(setFinish, value)}
             phases={phases}
             phaseSlug={phaseSlug}
             programs={programs}
@@ -472,6 +680,12 @@ export function CatalogExplorer({
             status={status}
             typeOptions={typeOptions}
             typeTag={typeTag}
+            productLine={productLine}
+            productLineOptions={productLineOptions}
+            technicalCategory={technicalCategory}
+            technicalCategoryOptions={technicalCategoryOptions}
+            finish={finish}
+            finishOptions={finishOptions}
           />
           <button
             className={`${styles.filtersExpandTab} cs-interactive-surface`}
@@ -489,36 +703,16 @@ export function CatalogExplorer({
 
         <CatalogProductGrid
           brandBySlug={brandBySlug}
+          gridRef={setProductGridElement}
           onReset={clearFilters}
           phaseBySlug={phaseBySlug}
+          preloadTriggerIndex={preloadTriggerIndex}
+          preloadTriggerRef={setPreloadTriggerElement}
           products={visibleProducts}
           programBySlug={programBySlug}
           resultCount={filteredProducts.length}
           shownCount={visibleProducts.length}
-          totalCount={products.length}
         />
-
-        {hasMoreProducts && (
-          <div className={styles.loadMoreWrap}>
-            <button
-              className={`${styles.loadMoreButton} cs-magnetic-cta cs-theme-wipe-card`}
-              type="button"
-              data-cursor="button"
-              data-motion-surface
-              data-motion="theme-wipe"
-              onClick={() =>
-                setVisibleCount((count) =>
-                  Math.min(count + CATALOG_PAGE_SIZE, filteredProducts.length),
-                )
-              }
-            >
-              <span>Prikaži još proizvoda</span>
-            </button>
-            <p className={styles.loadMoreMeta}>
-              Prikazano {visibleProducts.length} od {filteredProducts.length}
-            </p>
-          </div>
-        )}
       </section>
 
       <CatalogSupportCta />

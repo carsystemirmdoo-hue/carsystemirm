@@ -185,7 +185,24 @@ export function SearchableCombobox({
       searchRef.current?.focus({ preventScroll: true });
     });
 
-    function handleViewportChange() {
+    function handleViewportChange(event?: Event) {
+      const scrollContainer = triggerRef.current?.closest(
+        "[data-combobox-scroll-container]",
+      );
+
+      if (
+        event?.type === "scroll" &&
+        !isMobile &&
+        scrollContainer &&
+        !(
+          event.target instanceof Node &&
+          panelRef.current?.contains(event.target)
+        )
+      ) {
+        closeMenu(false);
+        return;
+      }
+
       updatePanelPosition();
     }
 
@@ -206,7 +223,7 @@ export function SearchableCombobox({
       window.removeEventListener("scroll", handleViewportChange, true);
       document.removeEventListener("pointerdown", handleOutsidePointer);
     };
-  }, [closeMenu, open, updatePanelPosition]);
+  }, [closeMenu, isMobile, open, updatePanelPosition]);
 
   useEffect(() => {
     if (!open || !isMobile) return undefined;

@@ -3,15 +3,21 @@ import {
   SITE_ACCESS_HANDOFF_MAX_AGE_MS,
   SITE_ACCESS_HANDOFF_STORAGE_KEY,
 } from "@/lib/site-access-handoff";
+import { HEADER_ENTRANCE_STORAGE_KEY } from "@/lib/header-entrance";
 
 const SITE_ACCESS_HANDOFF_SCRIPT = `
 (function () {
   try {
     var path = window.location.pathname;
     var storageKey = ${JSON.stringify(SITE_ACCESS_HANDOFF_STORAGE_KEY)};
+    var headerEntranceStorageKey = ${JSON.stringify(HEADER_ENTRANCE_STORAGE_KEY)};
     var maxAge = ${SITE_ACCESS_HANDOFF_MAX_AGE_MS};
     var isMaintenance = path.indexOf("/site-u-pripremi") === 0;
     var raw = window.sessionStorage.getItem(storageKey);
+
+    if (window.sessionStorage.getItem(headerEntranceStorageKey) === "seen") {
+      document.documentElement.dataset.headerEntrance = "seen";
+    }
 
     if (isMaintenance) {
       window.sessionStorage.removeItem(storageKey);

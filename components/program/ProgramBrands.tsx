@@ -29,7 +29,7 @@ export function ProgramBrands({
         {activeBrands.map((brand) => (
           <Link
             className={`${styles.brandCard} ${styles.brandCardActive}`}
-            href={`/brendovi/${brand.slug}`}
+            href={brand.routes.landing}
             key={brand.slug}
           >
             <BrandCardContent brand={brand} />

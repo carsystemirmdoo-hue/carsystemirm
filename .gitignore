@@ -55,3 +55,8 @@ out
 /data/internal/location-import-review.csv
 /data/internal/location-import-summary.json
 /data/internal/geocoding-cache.json
+
+# Local generated and review artifacts
+tmp/
+review-screenshots/
+docs/audit-screenshots/

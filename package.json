@@ -8,11 +8,22 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test:catalog": "node --test components/catalog/catalogInfiniteScroll.test.mjs",
+    "test:product-motion": "node --test components/product/*.test.mjs",
     "locations:analyze": "node scripts/analyze-location-import.mjs",
     "locations:build": "node scripts/build-public-locations.mjs",
     "locations:validate": "node scripts/validate-public-locations.mjs",
     "locations:import": "npm run locations:analyze && npm run locations:build && npm run locations:validate",
-    "locations:geocode": "node scripts/geocode-location-review.mjs --allow-network --limit=150 && npm run locations:build"
+    "locations:geocode": "node scripts/geocode-location-review.mjs --allow-network --limit=150 && npm run locations:build",
+    "cosmos:colors": "python3 scripts/extract-cosmos-lac-color-charts.py",
+    "cosmos:build": "node scripts/generate-cosmos-lac-catalog.mjs",
+    "cosmos:validate": "node scripts/validate-cosmos-lac-catalog.mjs",
+    "cosmos:update": "npm run cosmos:colors && npm run cosmos:build && npm run cosmos:validate",
+    "render:refinish-systems": "node scripts/render-refinish-systems.mjs",
+    "render:spray-reveal": "node scripts/render-spray-reveal.mjs",
+    "render:product-showcase": "node scripts/render-product-showcase.mjs",
+    "cikica-spray:prepare-frames": "python3 scripts/prepare-cikica-frames.py",
+    "cikica-spray:render-overlay": "python3 scripts/render-cikica-spray-overlay.py"
   },
   "dependencies": {
     "maplibre-gl": "^5.24.0",
@@ -27,6 +38,7 @@
     "@types/react-dom": "^18",
     "eslint": "^9",
     "eslint-config-next": "15.5.19",
+    "playwright-core": "^1.61.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

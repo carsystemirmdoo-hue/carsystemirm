@@ -52,13 +52,16 @@ export function ProductHero({
               ))}
           </div>
 
-          <h1 id="product-title" className={styles.title}>
+          <h1 id="product-title" className={styles.title} data-cursor="headline">
             {product.name}
           </h1>
           <p className={styles.brandLine}>
-            Brend: <strong>{brand.name}</strong>
+            Brend:{" "}
+            <Link href={brand.routes.landing}>
+              <strong>{brand.name}</strong>
+            </Link>
           </p>
-          <p className={styles.shortDescription}>{product.shortDescription}</p>
+          <p className={styles.shortDescription} data-cursor="text">{product.shortDescription}</p>
 
           <div className={styles.statusLine} aria-label="Status proizvoda">
             <span>Status</span>

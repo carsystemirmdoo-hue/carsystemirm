@@ -1,6 +1,8 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { SupportBand } from "@/components/brand-program/SupportBand";
 import { BrandHero } from "@/components/brand/BrandHero";
+import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
 import { BrandProducts } from "@/components/brand/BrandProducts";
 import { Footer } from "@/components/layout/Footer";
 import type {
@@ -27,11 +29,30 @@ export function BrandPage({
   programBySlug: Map<string, ProgramGroup>;
   publicPrograms: PublicProgramGroup[];
 }) {
+  const brandStyle = {
+    "--brand-accent": brand.presentation.accentColor,
+    "--brand-accent-contrast": brand.presentation.accentContrastColor,
+    "--brand-accent-on-dark": brand.presentation.accentOnDarkColor,
+    "--brand-accent-on-dark-contrast":
+      brand.presentation.accentOnDarkContrastColor,
+  } as CSSProperties;
+  const brands = Array.from(brandBySlug.values());
+
   return (
-    <div className={styles.pageShell}>
+    <div className={styles.pageShell} style={brandStyle}>
       <main className={styles.main}>
-        <BrandHero brand={brand} productCount={products.length} programs={publicPrograms} />
+        <BrandHero brand={brand} programs={publicPrograms} />
         <BrandOverview brand={brand} products={products} programs={publicPrograms} />
+        <div className={styles.manufacturerRailSection}>
+          <ManufacturerRail
+            brands={brands}
+            description="Otvorite stranicu drugog proizvođača bez povratka na indeks brendova."
+            id={`brand-${brand.slug}-manufacturers`}
+            mode="links"
+            selectedSlug={brand.slug}
+            title="Pogledajte druge proizvođače"
+          />
+        </div>
         <BrandProducts
           brand={brand}
           brandBySlug={brandBySlug}
@@ -41,7 +62,7 @@ export function BrandPage({
         />
         <SupportBand
           body="Pošaljite upit za izbor proizvoda, tehničku smernicu ili najbližu prodavnicu u partnerskoj mreži."
-          primaryHref={`/kontakt?tema=proizvod&brand=${brand.slug}`}
+          primaryHref={brand.routes.contact}
           primaryLabel="Pošalji upit"
           title={`Treba vam proizvod iz ${brand.name} programa?`}
         />
@@ -60,16 +81,25 @@ function BrandOverview({
   products: CarsystemProduct[];
   programs: PublicProgramGroup[];
 }) {
+  const productLines = Array.from(
+    new Set(
+      products
+        .map((product) => product.catalogMetadata?.line)
+        .filter((line): line is string => Boolean(line)),
+    ),
+  ).sort((first, second) => first.localeCompare(second, "sr-Latn"));
+
   return (
     <section
       className={`${styles.section} ${styles.gatewaySection}`}
       aria-labelledby="brand-overview-title"
     >
       <div className={styles.sectionHeader}>
-        <p className={styles.sectionKicker}>Ulaz u brend</p>
-        <h2 id="brand-overview-title">Programi u kojima se koristi {brand.name}</h2>
+        <p className={styles.sectionKicker}>Program brenda</p>
+        <h2 id="brand-overview-title">Programi i proizvodi brenda {brand.name}</h2>
         <p>
-          Pregled programskih celina, put ka katalogu i jasan kontakt za upit.
+          Pregled stvarnih programskih celina i linija koje su povezane sa javnim
+          katalogom.
         </p>
       </div>
 
@@ -77,23 +107,17 @@ function BrandOverview({
         <div className={styles.gatewayPanel}>
           <p>{brand.overview ?? brand.description}</p>
 
-          <div className={styles.overviewFacts} aria-label="Brzi pregled brenda">
-            <div className={styles.fact}>
-              <span>Programi</span>
-              <strong>{programs.length}</strong>
+          {productLines.length > 0 && (
+            <div className={styles.programPills} aria-label={`Linije brenda ${brand.name}`}>
+              {productLines.slice(0, 12).map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+              {productLines.length > 12 && <span>+{productLines.length - 12} linija</span>}
             </div>
-            <div className={styles.fact}>
-              <span>Proizvodi</span>
-              <strong>{products.length}</strong>
-            </div>
-            <div className={styles.fact}>
-              <span>Status</span>
-              <strong>Na upit</strong>
-            </div>
-          </div>
+          )}
 
-          <Link className={styles.secondaryButton} href={`/katalog?brand=${brand.slug}`}>
-            Pogledaj katalog
+          <Link className={styles.secondaryButton} href={brand.routes.catalog}>
+            Pogledajte sve proizvode
           </Link>
         </div>
 

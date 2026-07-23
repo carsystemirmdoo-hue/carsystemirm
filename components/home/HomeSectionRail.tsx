@@ -6,9 +6,7 @@ import styles from "./CarsystemHomePage.module.css";
 
 const homeSectionItems = [
   { id: "pocetna", label: "Idi na početnu sekciju" },
-  { id: "program", label: "Idi na proces" },
   { id: "prodavnice-mreza", label: "Idi na prodavnice" },
-  { id: "brendovi", label: "Idi na programe proizvoda" },
   { id: "zavrsni-poziv", label: "Idi na završni poziv" },
 ] as const;
 

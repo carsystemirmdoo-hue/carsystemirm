@@ -19,7 +19,7 @@ const brandLinks = [
   { href: "/brendovi/norbin", label: "Norbin" },
   { href: "/brendovi/sata", label: "SATA" },
   { href: "/brendovi/carfit", label: "Car Fit" },
-  { href: "/brendovi/cosmos-spray", label: "Cosmos Spray" },
+  { href: "/brendovi/cosmos-lac", label: "Cosmos Lac" },
   { href: "/brendovi/befar", label: "Befar" },
 ];
 

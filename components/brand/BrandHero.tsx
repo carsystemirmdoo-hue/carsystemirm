@@ -5,11 +5,9 @@ import styles from "@/components/brand-program/BrandProgramPage.module.css";
 
 export function BrandHero({
   brand,
-  productCount,
   programs,
 }: {
   brand: CarsystemBrand;
-  productCount: number;
   programs: PublicProgramGroup[];
 }) {
   const positioning = brand.overview ?? brand.description;
@@ -38,7 +36,7 @@ export function BrandHero({
 
       <section className={`${styles.hero} ${styles.brandHero}`} aria-labelledby="brand-title">
         <div className={styles.heroCopy}>
-          <p className={styles.kicker}>Brend program</p>
+          <p className={styles.kicker}>{brand.presentation.heroKicker}</p>
           <h1 id="brand-title" className={styles.title}>
             {brand.name}
           </h1>
@@ -47,19 +45,18 @@ export function BrandHero({
 
           <div className={styles.badgeRow} aria-label="Pregled brenda">
             <span className={styles.badge}>{programs.length} programa</span>
-            <span className={styles.badge}>{productCount} proizvoda</span>
-            <span className={styles.availabilityChip}>Na upit</span>
+            <span className={styles.availabilityChip}>Dostupnost na upit</span>
           </div>
 
           <div className={styles.heroActions}>
             <Link
               className={styles.primaryButton}
-              href={`/kontakt?tema=proizvod&brand=${brand.slug}`}
+              href="#brand-products"
             >
-              Pošalji upit
+              {brand.presentation.productsCtaLabel}
             </Link>
-            <Link className={styles.secondaryButton} href={`/katalog?brand=${brand.slug}`}>
-              Pogledaj proizvode
+            <Link className={styles.secondaryButton} href={brand.routes.contact}>
+              {brand.presentation.contactCtaLabel}
             </Link>
             <Link className={styles.ghostButton} href="/prodavnice">
               Pronađi prodavnicu
@@ -72,7 +69,7 @@ export function BrandHero({
             <div className={styles.logoChip}>
               <Image
                 src={brand.logo}
-                alt={`${brand.name} logo`}
+                alt={`Logo brenda ${brand.name}`}
                 width={320}
                 height={190}
                 className={styles.logoImage}

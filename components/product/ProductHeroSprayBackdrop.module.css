@@ -1,0 +1,99 @@
+.backdrop {
+  --spray-default-scale: 1.06;
+  --spray-scale: var(--product-stage-spray-scale, var(--spray-default-scale));
+  --spray-opacity: 1;
+  --spray-offset-x: var(--product-stage-spray-offset-x, 0px);
+  --spray-offset-y: var(--product-stage-spray-offset-y, 4px);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.patternFrame {
+  position: absolute;
+  inset: 0;
+  opacity: var(--spray-opacity);
+  transform: translate(var(--spray-offset-x), var(--spray-offset-y))
+    scale(var(--spray-scale));
+}
+
+.spraySvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--product-visual-background-color);
+  pointer-events: none;
+}
+
+.revealPath {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.spraySvg[data-phase="running"] .revealPath01 {
+  animation: spray-draw var(--spray-duration-01) var(--spray-easing)
+    var(--spray-start-01) forwards;
+}
+
+.spraySvg[data-phase="running"] .revealPath02 {
+  animation: spray-draw var(--spray-duration-02) var(--spray-easing)
+    var(--spray-start-02) forwards;
+}
+
+.spraySvg[data-phase="running"] .revealPath03 {
+  animation: spray-draw var(--spray-duration-03) var(--spray-easing)
+    var(--spray-start-03) forwards;
+}
+
+.spraySvg[data-phase="running"] .revealPath04 {
+  animation: spray-draw var(--spray-duration-04) var(--spray-easing)
+    var(--spray-start-04) forwards;
+}
+
+.spraySvg[data-phase="running"] .revealPath05 {
+  animation: spray-draw var(--spray-duration-05) var(--spray-easing)
+    var(--spray-start-05) forwards;
+}
+
+.spraySvg[data-phase="running"] .revealPath06 {
+  animation: spray-draw var(--spray-duration-06) var(--spray-easing)
+    var(--spray-start-06) forwards;
+}
+
+.spraySvg[data-phase="complete"] .revealPath,
+.spraySvg[data-phase="static"] .revealPath {
+  stroke-dashoffset: 0;
+  animation: none;
+}
+
+@keyframes spray-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .backdrop {
+    --spray-default-scale: 0.84;
+  }
+}
+
+@media (max-width: 520px) {
+  .backdrop {
+    --spray-default-scale: 0.94;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealPath {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}

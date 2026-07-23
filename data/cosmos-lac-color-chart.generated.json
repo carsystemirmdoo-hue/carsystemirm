@@ -1,0 +1,2164 @@
+{
+  "schemaVersion": 1,
+  "note": "Screen RGB approximations extracted from vector swatches in official Cosmos Lac color charts. Physical samples remain authoritative.",
+  "entries": {
+    "CL:300": {
+      "hex": "#000000",
+      "label": "RAL 9010 GLOSS WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:301": {
+      "hex": "#000000",
+      "label": "RAL 9010 MATT WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:302": {
+      "hex": "#F4D091",
+      "label": "RAL 1014 IVORY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:303": {
+      "hex": "#171511",
+      "label": "RAL 9005 GLOSS BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:304": {
+      "hex": "#171511",
+      "label": "RAL 9005 MATT BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:305": {
+      "hex": "#54626A",
+      "label": "RAL 7011 IRON GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:306": {
+      "hex": "#A6ABAA",
+      "label": "RAL 7042 TRAFFIC GREY A",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:311": {
+      "hex": "#A52935",
+      "label": "RAL 3003 RUBY RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:312": {
+      "hex": "#C61B21",
+      "label": "RAL 3020 TRAFFIC RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:313": {
+      "hex": "#FCEB3D",
+      "label": "RAL 1018 ZINC YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:314": {
+      "hex": "#235244",
+      "label": "RAL 6005 MOSS GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:315": {
+      "hex": "#784B48",
+      "label": "RAL 8011 NUT BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:316": {
+      "hex": "#2B316E",
+      "label": "RAL 5010 GENTIAN BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:317": {
+      "hex": "#2E88C1",
+      "label": "RAL 5012 LIGHT BLUΕ",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:318": {
+      "hex": "#3F2A2B",
+      "label": "RAL 8017 CHOCOLATE BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:319": {
+      "hex": "#CDD3D1",
+      "label": "RAL 7035 LIGHT GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:320": {
+      "hex": "#F7A600",
+      "label": "RAL 1028 MELON YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:321": {
+      "hex": "#E88936",
+      "label": "RAL 1007 DAFFODIL YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:322": {
+      "hex": "#314551",
+      "label": "RAL 7016 ANTHRACITE GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:323": {
+      "hex": "#171511",
+      "label": "RAL 9005 SEMIGLOSS BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:324": {
+      "hex": "#7E451C",
+      "label": "RAL 8003 CLAY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:325": {
+      "hex": "#801D17",
+      "label": "RAL 3009 OXIDE RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:329": {
+      "hex": "#EC6725",
+      "label": "RAL 2003 PASTEL ORANGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:330": {
+      "hex": "#B51412",
+      "label": "RAL 3000 FLAME RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:331": {
+      "hex": "#E63616",
+      "label": "RAL 2010 SIGNAL ORANGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:332": {
+      "hex": "#174471",
+      "label": "BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:334": {
+      "hex": "#317044",
+      "label": "GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:335": {
+      "hex": "#171511",
+      "label": "BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:336": {
+      "hex": "#962920",
+      "label": "RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:341": {
+      "hex": "#10629F",
+      "label": "RAL 5017 TRAFFIC BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:347": {
+      "hex": "#FEE9BF",
+      "label": "RAL 1015 LIGHT IVORY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:351": {
+      "hex": "#171511",
+      "label": "BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:352": {
+      "hex": "#000000",
+      "label": "WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:353": {
+      "hex": "#962920",
+      "label": "RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:356": {
+      "hex": "#314551",
+      "label": "ANTHRACITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:380": {
+      "hex": "#000000",
+      "label": "ALUMINIUM WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:402": {
+      "hex": "#000000",
+      "label": "WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:411": {
+      "hex": "#8B929B",
+      "label": "RAL 7001 SILVER GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:412": {
+      "hex": "#EDEBDD",
+      "label": "RAL 9002 GREY WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:413": {
+      "hex": "#102757",
+      "label": "RAL 5013 COBALT BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:414": {
+      "hex": "#924622",
+      "label": "RAL 8004 COPPER BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:415": {
+      "hex": "#F5E7D3",
+      "label": "RAL 1013 OYSTER WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:416": {
+      "hex": "#602C1F",
+      "label": "RAL 8016 MAHOGANY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:417": {
+      "hex": "#253081",
+      "label": "RAL 5002 ULTRAMARINE BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:418": {
+      "hex": "#008B93",
+      "label": "RAL 5018 TURQUOISE BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:419": {
+      "hex": "#332C2E",
+      "label": "RAL 8019 GREY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:420": {
+      "hex": "#162125",
+      "label": "RAL 7021 BLACK GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:425": {
+      "hex": "#F5F0E0",
+      "label": "RAL 9001 CREAM",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:426": {
+      "hex": "#F5F0E0",
+      "label": "RAL 9003 SIGNAL WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:427": {
+      "hex": "#A19C9A",
+      "label": "RAL 9007 GREY ALUMINIUM",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:428": {
+      "hex": "#24523E",
+      "label": "RAL 6028 PINE GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:453": {
+      "hex": "#FCC34F",
+      "label": "RAL 1023 TRAFFIC YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:455": {
+      "hex": "#002B1A",
+      "label": "RAL 6009 FIR GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:460": {
+      "hex": "#1F8242",
+      "label": "RAL 6002 LEAF GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:462": {
+      "hex": "#3B7D34",
+      "label": "RAL 6001 EMERALD GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:463": {
+      "hex": "#50AF47",
+      "label": "RAL 6018 YELLOW GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:464": {
+      "hex": "#673434",
+      "label": "RAL 3004 PURPLE RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:465": {
+      "hex": "#EDAFB5",
+      "label": "RAL 3015 LIGHT PINK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:466": {
+      "hex": "#966D38",
+      "label": "RAL 8000 GREEN BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:468": {
+      "hex": "#E4528E",
+      "label": "RAL 4003 HEATHER VIOLET",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:469": {
+      "hex": "#876195",
+      "label": "RAL 4005 BLUE LILAC",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:490": {
+      "hex": "#E40428",
+      "label": "RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:491": {
+      "hex": "#EA5813",
+      "label": "ORANGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:493": {
+      "hex": "#A8C813",
+      "label": "GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:494": {
+      "hex": "#FFF051",
+      "label": "YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:560": {
+      "hex": "#000000",
+      "label": "WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:561": {
+      "hex": "#171511",
+      "label": "BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:562": {
+      "hex": "#5C6062",
+      "label": "GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:563": {
+      "hex": "#314551",
+      "label": "ANTHRACITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:564": {
+      "hex": "#171511",
+      "label": "BLACK STRUCTURE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:800": {
+      "hex": "#171511",
+      "label": "WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:801": {
+      "hex": "#F5F0E0",
+      "label": "CREAM WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:802": {
+      "hex": "#EDEBDD",
+      "label": "GREY WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:803": {
+      "hex": "#171511",
+      "label": "BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:804": {
+      "hex": "#162125",
+      "label": "BLACK GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:805": {
+      "hex": "#48565C",
+      "label": "IRON GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:806": {
+      "hex": "#4C4C4F",
+      "label": "DARK GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:807": {
+      "hex": "#AFADAC",
+      "label": "GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:809": {
+      "hex": "#F5E5C0",
+      "label": "LIGHT IVORY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:810": {
+      "hex": "#80152A",
+      "label": "PURPLE RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:811": {
+      "hex": "#C13733",
+      "label": "DARK RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:812": {
+      "hex": "#C13733",
+      "label": "RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:813": {
+      "hex": "#F5CD0C",
+      "label": "YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:814": {
+      "hex": "#317044",
+      "label": "DARK GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:815": {
+      "hex": "#532B0C",
+      "label": "BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:816": {
+      "hex": "#0F5196",
+      "label": "DARK BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:817": {
+      "hex": "#4596D0",
+      "label": "BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:818": {
+      "hex": "#00478A",
+      "label": "GENTIAN BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:819": {
+      "hex": "#008B93",
+      "label": "TURQUOISE BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:830": {
+      "hex": "#7E451C",
+      "label": "CLAY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:831": {
+      "hex": "#D75827",
+      "label": "ORANGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:860": {
+      "hex": "#7DBA2E",
+      "label": "GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:861": {
+      "hex": "#004939",
+      "label": "MOSS GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:868": {
+      "hex": "#D8356E",
+      "label": "MAGENTA",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:870": {
+      "hex": "#9373B1",
+      "label": "BLUE LILAC",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:871": {
+      "hex": "#E8D5BF",
+      "label": "PASTEL BEIGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:872": {
+      "hex": "#F8C6CF",
+      "label": "PASTEL PINK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:873": {
+      "hex": "#C7E4DD",
+      "label": "PASTEL GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:874": {
+      "hex": "#FBEC95",
+      "label": "PASTEL YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:875": {
+      "hex": "#D1EAF0",
+      "label": "PASTEL BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:876": {
+      "hex": "#E7DDCF",
+      "label": "PASTEL MOCCA",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N01": {
+      "hex": "#171511",
+      "label": "CHARCOAL",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N02": {
+      "hex": "#EDECE8",
+      "label": "PURE WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N03": {
+      "hex": "#EDECE8",
+      "label": "CLOUDY WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N04": {
+      "hex": "#FFFAEC",
+      "label": "CREAM",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N05": {
+      "hex": "#A7ADAC",
+      "label": "DOLPHIN GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N06": {
+      "hex": "#E8E7CA",
+      "label": "ENGLISH MANOR",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N07": {
+      "hex": "#9DB5C3",
+      "label": "DUCK EGG BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N08": {
+      "hex": "#8BB39A",
+      "label": "SCOTTISH GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N09": {
+      "hex": "#D6EBE9",
+      "label": "MOROCCAN TURQUOISE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N10": {
+      "hex": "#CAB7B6",
+      "label": "DIRTY LILAC",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N11": {
+      "hex": "#F9E8E9",
+      "label": "BUDAPEST PINK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N12": {
+      "hex": "#F6CCCF",
+      "label": "BUBBLEGUM",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N13": {
+      "hex": "#FFF39A",
+      "label": "RUSSIAN VANILLA",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N14": {
+      "hex": "#B0DEF1",
+      "label": "GREEK BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N15": {
+      "hex": "#174471",
+      "label": "ROYAL BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N16": {
+      "hex": "#0E6EB6",
+      "label": "AEGEAN BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N17": {
+      "hex": "#F2A534",
+      "label": "TUSCAN SUNSET",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N18": {
+      "hex": "#6E6A3C",
+      "label": "INDIAN GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N19": {
+      "hex": "#962920",
+      "label": "DARK SANGRIA",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N20": {
+      "hex": "#5C6062",
+      "label": "SHADOW GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N21": {
+      "hex": "#A3534E",
+      "label": "CORAL BLUSH",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N22": {
+      "hex": "#064147",
+      "label": "BLOODSTONE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N23": {
+      "hex": "#845A35",
+      "label": "KHAKI BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "CL:N24": {
+      "hex": "#C3AB85",
+      "label": "LATTE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2"
+    },
+    "FB:100": {
+      "hex": "#F5E17D",
+      "label": "VANILLA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:1000": {
+      "hex": "#FAE600",
+      "label": "FLUO YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:1002": {
+      "hex": "#E75E0D",
+      "label": "FLUO ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:1004": {
+      "hex": "#E0006C",
+      "label": "FLUO PINK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:1006": {
+      "hex": "#36A336",
+      "label": "FLUO GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:102": {
+      "hex": "#FDDC32",
+      "label": "ZINC YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:104": {
+      "hex": "#FCD800",
+      "label": "CADMIUM YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:106": {
+      "hex": "#F7CE00",
+      "label": "SIGNAL YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:110": {
+      "hex": "#F6BD00",
+      "label": "MELON YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:112": {
+      "hex": "#FAC255",
+      "label": "SAFFRON",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:114": {
+      "hex": "#FABE34",
+      "label": "DAHLIA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:200": {
+      "hex": "#F5B877",
+      "label": "PEACH",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:202": {
+      "hex": "#EC8A00",
+      "label": "PASTEL ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:204": {
+      "hex": "#E66E12",
+      "label": "LIGHT ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:208": {
+      "hex": "#F4DBC0",
+      "label": "COLD PEACH",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:210": {
+      "hex": "#ED803D",
+      "label": "APRICOT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:212": {
+      "hex": "#D54F17",
+      "label": "ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:214": {
+      "hex": "#CF3D17",
+      "label": "RED ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:3000": {
+      "hex": "#36A336",
+      "label": "TRANSPARENT WHITE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:304": {
+      "hex": "#D32C23",
+      "label": "SIGNAL RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:306": {
+      "hex": "#8B2B26",
+      "label": "RUBY RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:308": {
+      "hex": "#EDA1B5",
+      "label": "PIGLET PINK LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:310": {
+      "hex": "#E33C5A",
+      "label": "PIGLET PINK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:311": {
+      "hex": "#BC1F32",
+      "label": "CRAZY CHERRY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:312": {
+      "hex": "#C23228",
+      "label": "FIRE RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:313": {
+      "hex": "#9F182B",
+      "label": "CHERRY DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:318": {
+      "hex": "#43183B",
+      "label": "TRAFFIC PURPLE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:320": {
+      "hex": "#731B2C",
+      "label": "BURGUNDY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:322": {
+      "hex": "#693C45",
+      "label": "AUBERGINE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:399": {
+      "hex": "#DCAACE",
+      "label": "ERICA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:400": {
+      "hex": "#DF6699",
+      "label": "ERICA VIOLET",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:401": {
+      "hex": "#E7C7D5",
+      "label": "ERICA PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:402": {
+      "hex": "#D72C66",
+      "label": "TELEMAGENTA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:404": {
+      "hex": "#8E2270",
+      "label": "TRAFFIC PURPLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:406": {
+      "hex": "#D8DBEF",
+      "label": "LAVENDER",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:408": {
+      "hex": "#9E68A0",
+      "label": "GRAPE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:410": {
+      "hex": "#714078",
+      "label": "BLACKBERRY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:412": {
+      "hex": "#543256",
+      "label": "CURRANT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:414": {
+      "hex": "#D1D6ED",
+      "label": "VIOLA PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:416": {
+      "hex": "#C3BDDE",
+      "label": "VIOLA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:418": {
+      "hex": "#6966A4",
+      "label": "VIOLA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:420": {
+      "hex": "#343478",
+      "label": "VIOLA DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:424": {
+      "hex": "#7A7BB7",
+      "label": "COSMOS BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:426": {
+      "hex": "#444290",
+      "label": "COSMOS BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:428": {
+      "hex": "#342A5A",
+      "label": "COSMOS BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:502": {
+      "hex": "#BDDCF3",
+      "label": "LIGHTING BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:504": {
+      "hex": "#A2CBE9",
+      "label": "LIGHT BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:508": {
+      "hex": "#4D96D2",
+      "label": "LIGHT BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:510": {
+      "hex": "#196BB0",
+      "label": "SKY BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:512": {
+      "hex": "#15498E",
+      "label": "SIGNAL BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:514": {
+      "hex": "#274383",
+      "label": "TRUE BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:516": {
+      "hex": "#8AACC7",
+      "label": "CREAM BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:518": {
+      "hex": "#2685C4",
+      "label": "CREAM BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:520": {
+      "hex": "#17598D",
+      "label": "CREAM BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:522": {
+      "hex": "#202D56",
+      "label": "SAPPHIRE BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:524": {
+      "hex": "#C3D7F1",
+      "label": "DENIM BLUE PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:526": {
+      "hex": "#A1C8EA",
+      "label": "DENIM BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:528": {
+      "hex": "#5289B4",
+      "label": "DENIM BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:530": {
+      "hex": "#40576E",
+      "label": "DENIM BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:600": {
+      "hex": "#C1E2E8",
+      "label": "RIVIERA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:602": {
+      "hex": "#74C0B4",
+      "label": "RIVIERA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:604": {
+      "hex": "#009F8D",
+      "label": "LAGOON BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:606": {
+      "hex": "#0E7075",
+      "label": "OCEAN BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:614": {
+      "hex": "#A2D4EC",
+      "label": "AQUA PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:616": {
+      "hex": "#2C97BD",
+      "label": "AQUA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:618": {
+      "hex": "#164E5B",
+      "label": "AQUA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:620": {
+      "hex": "#0B4F4A",
+      "label": "AQUA DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:624": {
+      "hex": "#DED422",
+      "label": "PISTACHIO LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:626": {
+      "hex": "#C2C21E",
+      "label": "PISTACHIO",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:628": {
+      "hex": "#91A834",
+      "label": "GRASS GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:630": {
+      "hex": "#6E973A",
+      "label": "FERN GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:632": {
+      "hex": "#51843D",
+      "label": "LEAF GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:634": {
+      "hex": "#316F3E",
+      "label": "MOSS GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:636": {
+      "hex": "#335F53",
+      "label": "FIR GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:638": {
+      "hex": "#EEE100",
+      "label": "KIWI PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:640": {
+      "hex": "#BFCD2E",
+      "label": "KIWI LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:642": {
+      "hex": "#86B626",
+      "label": "KIWI",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:644": {
+      "hex": "#6D912D",
+      "label": "KIWI DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:654": {
+      "hex": "#CDDA84",
+      "label": "PRIMAVERA GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:656": {
+      "hex": "#9BB473",
+      "label": "TARZAN GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:658": {
+      "hex": "#7A784C",
+      "label": "CAMO GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:660": {
+      "hex": "#2A3A2E",
+      "label": "OLIVE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:662": {
+      "hex": "#CDE2C0",
+      "label": "MENTHOL PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:664": {
+      "hex": "#9DCAAD",
+      "label": "MENTHOL LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:666": {
+      "hex": "#7CBE97",
+      "label": "MENTHOL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:668": {
+      "hex": "#1C463A",
+      "label": "MENTHOL DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:670": {
+      "hex": "#199D74",
+      "label": "TURQUOISE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:672": {
+      "hex": "#0C8652",
+      "label": "TURQUOISE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:674": {
+      "hex": "#286141",
+      "label": "TURQUOISE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:702": {
+      "hex": "#F1E4BD",
+      "label": "IVORY LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:704": {
+      "hex": "#C59C56",
+      "label": "BEIGE BROWN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:706": {
+      "hex": "#A36C28",
+      "label": "OCHER",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:708": {
+      "hex": "#784B48",
+      "label": "NUT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:710": {
+      "hex": "#564037",
+      "label": "CHOCOLATE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:716": {
+      "hex": "#F8E9DC",
+      "label": "COOKIE DOUGH PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:717": {
+      "hex": "#DBCFA6",
+      "label": "COOKIE DOUGH",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:718": {
+      "hex": "#E9CAB6",
+      "label": "MACADAMIA BEIGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:719": {
+      "hex": "#AD8D79",
+      "label": "MACADAMIA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:732": {
+      "hex": "#BCA886",
+      "label": "GREY BEIGE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:734": {
+      "hex": "#AA9061",
+      "label": "GREY BEIGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:736": {
+      "hex": "#786038",
+      "label": "KHAKI GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:737": {
+      "hex": "#453627",
+      "label": "DARK BROWN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:808": {
+      "hex": "#D1C1BB",
+      "label": "TERRACOTTA GREY PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:810": {
+      "hex": "#B0908E",
+      "label": "TERRACOTTA GREY LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:812": {
+      "hex": "#8B6D6D",
+      "label": "TERRACOTTA GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:820": {
+      "hex": "#705D6C",
+      "label": "VIOLET GREY MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:822": {
+      "hex": "#5D4A5D",
+      "label": "VIOLET GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:834": {
+      "hex": "#E3DBD5",
+      "label": "LIGHT GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:836": {
+      "hex": "#B9B4B1",
+      "label": "MIDDLE GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:838": {
+      "hex": "#878685",
+      "label": "GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:840": {
+      "hex": "#8E8582",
+      "label": "DARK GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:842": {
+      "hex": "#565551",
+      "label": "ANTHRACITE GREY MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:844": {
+      "hex": "#47484A",
+      "label": "ANTHRACITE GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:846": {
+      "hex": "#3C3735",
+      "label": "ANTHRACITE GREY DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:900": {
+      "hex": "#FFFFFF",
+      "label": "PURE WHITE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FB:904": {
+      "hex": "#090909",
+      "label": "DEEP BLACK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:100": {
+      "hex": "#F5E27D",
+      "label": "VANILLA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:102": {
+      "hex": "#FEDE2F",
+      "label": "ZINC YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:104": {
+      "hex": "#FCD900",
+      "label": "CADMIUM YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:106": {
+      "hex": "#F7CE00",
+      "label": "SIGNAL YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:107": {
+      "hex": "#F9B700",
+      "label": "MELON LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:110": {
+      "hex": "#F4BC00",
+      "label": "MELON YELLOW",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:111": {
+      "hex": "#F5AD00",
+      "label": "MELON DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:113": {
+      "hex": "#ED823E",
+      "label": "CURRY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:198": {
+      "hex": "#F7C8A9",
+      "label": "PEACH MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:200": {
+      "hex": "#F6B977",
+      "label": "PEACH",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:202": {
+      "hex": "#EE8A04",
+      "label": "PASTEL ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:204": {
+      "hex": "#E76D0E",
+      "label": "LIGHT ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:205": {
+      "hex": "#F29A7A",
+      "label": "PEACH DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:208": {
+      "hex": "#F4DCC0",
+      "label": "COLD PEACH",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:210": {
+      "hex": "#ED823E",
+      "label": "APRICOT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:212": {
+      "hex": "#D54F17",
+      "label": "ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:214": {
+      "hex": "#D03C17",
+      "label": "RED ORANGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:303": {
+      "hex": "#D53F39",
+      "label": "RED PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:304": {
+      "hex": "#D42C24",
+      "label": "SIGNAL RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:305": {
+      "hex": "#D14E4A",
+      "label": "CORAL RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:306": {
+      "hex": "#8B2B26",
+      "label": "RUBY RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:307": {
+      "hex": "#E66261",
+      "label": "CORAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:308": {
+      "hex": "#EEA1B6",
+      "label": "PIGLET PINK LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:309": {
+      "hex": "#F0A3B7",
+      "label": "PIGLET PINK MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:310": {
+      "hex": "#E43A5A",
+      "label": "PIGLET PINK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:311": {
+      "hex": "#BC1F32",
+      "label": "CRAZY CHERRY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:312": {
+      "hex": "#C23128",
+      "label": "FIRE RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:313": {
+      "hex": "#9F192B",
+      "label": "CHERRY DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:314": {
+      "hex": "#BB1822",
+      "label": "PIGLET PINK DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:318": {
+      "hex": "#43183B",
+      "label": "TRAFFIC PURPLE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:320": {
+      "hex": "#6D1A30",
+      "label": "BURGUNDY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:322": {
+      "hex": "#5C3035",
+      "label": "AUBERGINE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:323": {
+      "hex": "#584442",
+      "label": "AUBERGINE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:396": {
+      "hex": "#A65998",
+      "label": "VIOLET",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:397": {
+      "hex": "#874278",
+      "label": "CRAZY VIOLET",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:398": {
+      "hex": "#6D4175",
+      "label": "DEEP VIOLET",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:399": {
+      "hex": "#DDA7C7",
+      "label": "ERICA VIOLET LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:400": {
+      "hex": "#DD6B9C",
+      "label": "ERICA VIOLET",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:401": {
+      "hex": "#E0AFC4",
+      "label": "ERICA PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:402": {
+      "hex": "#D72C66",
+      "label": "TELEMAGENTA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:403": {
+      "hex": "#704757",
+      "label": "DEEP VIOLET DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:404": {
+      "hex": "#8E2070",
+      "label": "TRAFFIC PURPLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:405": {
+      "hex": "#D8B7B6",
+      "label": "ERICA PASTEL MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:407": {
+      "hex": "#CC8689",
+      "label": "ERICA VIOLET MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:408": {
+      "hex": "#9D66A0",
+      "label": "GRAPE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:409": {
+      "hex": "#D2B8C6",
+      "label": "ERICA PINK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:410": {
+      "hex": "#714078",
+      "label": "BLACKBERRY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:412": {
+      "hex": "#543256",
+      "label": "CURRANT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:415": {
+      "hex": "#BFB0D7",
+      "label": "CROCUS",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:416": {
+      "hex": "#C4BCDE",
+      "label": "VIOLA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:418": {
+      "hex": "#6865A3",
+      "label": "VIOLA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:420": {
+      "hex": "#353378",
+      "label": "VIOLA DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:422": {
+      "hex": "#99AAD7",
+      "label": "COSMOS BLUE PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:424": {
+      "hex": "#7A7BB8",
+      "label": "COSMOS BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:426": {
+      "hex": "#444190",
+      "label": "COSMOS BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:428": {
+      "hex": "#2C2554",
+      "label": "COSMOS BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:502": {
+      "hex": "#82CAEB",
+      "label": "LIGHTING BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:504": {
+      "hex": "#A2CBE9",
+      "label": "LIGHT BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:508": {
+      "hex": "#4D96D2",
+      "label": "LIGHT BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:510": {
+      "hex": "#1B6AB1",
+      "label": "SKY BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:511": {
+      "hex": "#0287C2",
+      "label": "CRAZY BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:512": {
+      "hex": "#18488E",
+      "label": "SIGNAL BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:514": {
+      "hex": "#284283",
+      "label": "TRUE BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:515": {
+      "hex": "#1D315A",
+      "label": "ULTRAMARINE BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:516": {
+      "hex": "#81A8C4",
+      "label": "CREAM BLUE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:518": {
+      "hex": "#3685C4",
+      "label": "CREAM BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:520": {
+      "hex": "#005C8E",
+      "label": "CREAM BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:522": {
+      "hex": "#1D3360",
+      "label": "SAPPHIRE BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:523": {
+      "hex": "#424353",
+      "label": "SAPPHIRE BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:531": {
+      "hex": "#99BFBD",
+      "label": "VERDIGRIS LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:532": {
+      "hex": "#85A9A8",
+      "label": "VERDIGRIS MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:533": {
+      "hex": "#6D9193",
+      "label": "VERDIGRIS",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:601": {
+      "hex": "#4DB39B",
+      "label": "CRAZY RIVIERA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:602": {
+      "hex": "#73C1B4",
+      "label": "RIVIERA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:604": {
+      "hex": "#009F8D",
+      "label": "LAGOON BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:605": {
+      "hex": "#009F8E",
+      "label": "LAGOON BLUE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:606": {
+      "hex": "#0E7075",
+      "label": "OCEAN BLUE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:608": {
+      "hex": "#A0B1A5",
+      "label": "SAGE MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:609": {
+      "hex": "#85A891",
+      "label": "SAGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:610": {
+      "hex": "#567A65",
+      "label": "SAGE DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:613": {
+      "hex": "#D4E4ED",
+      "label": "AQUA PASTEL LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:614": {
+      "hex": "#A1D6EE",
+      "label": "AQUA PASTEL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:615": {
+      "hex": "#67ABD2",
+      "label": "CRAZY AQUA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:616": {
+      "hex": "#2F97BF",
+      "label": "AQUA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:618": {
+      "hex": "#1D5A6A",
+      "label": "AQUA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:621": {
+      "hex": "#E7B724",
+      "label": "MUSTARD MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:622": {
+      "hex": "#EFBC00",
+      "label": "MUSTARD LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:623": {
+      "hex": "#E6DD00",
+      "label": "CRAZY GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:624": {
+      "hex": "#DED525",
+      "label": "PISTACHIO LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:625": {
+      "hex": "#CDA508",
+      "label": "MUSTARD",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:627": {
+      "hex": "#9DB91E",
+      "label": "CRAZY GRASS",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:628": {
+      "hex": "#92A835",
+      "label": "GRASS GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:629": {
+      "hex": "#008938",
+      "label": "JUICE GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:631": {
+      "hex": "#A9821B",
+      "label": "MUSTARD DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:632": {
+      "hex": "#50843D",
+      "label": "LEAF GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:633": {
+      "hex": "#8C6C1C",
+      "label": "KHAKI GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:636": {
+      "hex": "#315E53",
+      "label": "FIR GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:637": {
+      "hex": "#C1B638",
+      "label": "PEAR LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:639": {
+      "hex": "#ACA433",
+      "label": "PEAR",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:640": {
+      "hex": "#C0CD2F",
+      "label": "KIWI LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:641": {
+      "hex": "#827C26",
+      "label": "PEAR DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:642": {
+      "hex": "#85B727",
+      "label": "KIWI",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:644": {
+      "hex": "#6D932E",
+      "label": "KIWI DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:663": {
+      "hex": "#B8D9AD",
+      "label": "MINT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:664": {
+      "hex": "#9ECCAE",
+      "label": "MENTHOL LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:666": {
+      "hex": "#7ABD97",
+      "label": "MENTHOL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:667": {
+      "hex": "#71B462",
+      "label": "CRAZY MENTHOL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:670": {
+      "hex": "#25A37D",
+      "label": "TURQUOISE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:672": {
+      "hex": "#0C8652",
+      "label": "TURQUOISE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:675": {
+      "hex": "#006B47",
+      "label": "EMERALD GREEN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:697": {
+      "hex": "#D6827A",
+      "label": "COCOA LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:698": {
+      "hex": "#A64F48",
+      "label": "COCOA",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:699": {
+      "hex": "#8E2720",
+      "label": "BROWN RED",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:702": {
+      "hex": "#EDE0B7",
+      "label": "IVORY LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:703": {
+      "hex": "#DCCDB1",
+      "label": "MILK COFFEE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:704": {
+      "hex": "#C89D56",
+      "label": "BEIGE BROWN",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:706": {
+      "hex": "#A36B29",
+      "label": "OCHER",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:708": {
+      "hex": "#784B48",
+      "label": "CHOCOLATE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:710": {
+      "hex": "#2D170D",
+      "label": "NUT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:732": {
+      "hex": "#BDA987",
+      "label": "GREY BEIGE LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:734": {
+      "hex": "#AB9260",
+      "label": "GREY BEIGE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:736": {
+      "hex": "#786038",
+      "label": "KHAKI GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:830": {
+      "hex": "#E0DCD1",
+      "label": "STONE GREY LIGHT",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:831": {
+      "hex": "#BBB7AB",
+      "label": "STONE GREY MIDDLE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:832": {
+      "hex": "#9A9488",
+      "label": "STONE GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:833": {
+      "hex": "#6A6356",
+      "label": "STONE GREY DARK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:834": {
+      "hex": "#E3DBD5",
+      "label": "LIGHT GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:836": {
+      "hex": "#B9B4B2",
+      "label": "MIDDLE GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:840": {
+      "hex": "#8E8482",
+      "label": "DARK GREY NEUTRAL",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:844": {
+      "hex": "#5C595D",
+      "label": "ANTHRACITE GREY",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:900": {
+      "hex": "#5C595D",
+      "label": "PURE WHITE",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:901": {
+      "hex": "#191713",
+      "label": "THICK BLACK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "FO:904": {
+      "hex": "#191713",
+      "label": "DEEP BLACK",
+      "source": "FLAME_Colourchart2023_LEAFLET_DIGITAL USE.pdf, p. 2"
+    },
+    "RAL:1007": {
+      "hex": "#E88936",
+      "label": "RAL 1007 DAFFODIL YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "321"
+    },
+    "RAL:1013": {
+      "hex": "#F5E7D3",
+      "label": "RAL 1013 OYSTER WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "415"
+    },
+    "RAL:1014": {
+      "hex": "#F4D091",
+      "label": "RAL 1014 IVORY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "302"
+    },
+    "RAL:1015": {
+      "hex": "#FEE9BF",
+      "label": "RAL 1015 LIGHT IVORY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "347"
+    },
+    "RAL:1018": {
+      "hex": "#FCEB3D",
+      "label": "RAL 1018 ZINC YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "313"
+    },
+    "RAL:1023": {
+      "hex": "#FCC34F",
+      "label": "RAL 1023 TRAFFIC YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "453"
+    },
+    "RAL:1028": {
+      "hex": "#F7A600",
+      "label": "RAL 1028 MELON YELLOW",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "320"
+    },
+    "RAL:2003": {
+      "hex": "#EC6725",
+      "label": "RAL 2003 PASTEL ORANGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "329"
+    },
+    "RAL:2010": {
+      "hex": "#E63616",
+      "label": "RAL 2010 SIGNAL ORANGE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "331"
+    },
+    "RAL:3000": {
+      "hex": "#B51412",
+      "label": "RAL 3000 FLAME RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "330"
+    },
+    "RAL:3003": {
+      "hex": "#A52935",
+      "label": "RAL 3003 RUBY RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "311"
+    },
+    "RAL:3004": {
+      "hex": "#673434",
+      "label": "RAL 3004 PURPLE RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "464"
+    },
+    "RAL:3009": {
+      "hex": "#801D17",
+      "label": "RAL 3009 OXIDE RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "325"
+    },
+    "RAL:3015": {
+      "hex": "#EDAFB5",
+      "label": "RAL 3015 LIGHT PINK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "465"
+    },
+    "RAL:3020": {
+      "hex": "#C61B21",
+      "label": "RAL 3020 TRAFFIC RED",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "312"
+    },
+    "RAL:4003": {
+      "hex": "#E4528E",
+      "label": "RAL 4003 HEATHER VIOLET",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "468"
+    },
+    "RAL:4005": {
+      "hex": "#876195",
+      "label": "RAL 4005 BLUE LILAC",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "469"
+    },
+    "RAL:5002": {
+      "hex": "#253081",
+      "label": "RAL 5002 ULTRAMARINE BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "417"
+    },
+    "RAL:5010": {
+      "hex": "#2B316E",
+      "label": "RAL 5010 GENTIAN BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "316"
+    },
+    "RAL:5012": {
+      "hex": "#2E88C1",
+      "label": "RAL 5012 LIGHT BLUΕ",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "317"
+    },
+    "RAL:5013": {
+      "hex": "#102757",
+      "label": "RAL 5013 COBALT BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "413"
+    },
+    "RAL:5017": {
+      "hex": "#10629F",
+      "label": "RAL 5017 TRAFFIC BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "341"
+    },
+    "RAL:5018": {
+      "hex": "#008B93",
+      "label": "RAL 5018 TURQUOISE BLUE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "418"
+    },
+    "RAL:6001": {
+      "hex": "#3B7D34",
+      "label": "RAL 6001 EMERALD GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "462"
+    },
+    "RAL:6002": {
+      "hex": "#1F8242",
+      "label": "RAL 6002 LEAF GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "460"
+    },
+    "RAL:6005": {
+      "hex": "#235244",
+      "label": "RAL 6005 MOSS GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "314"
+    },
+    "RAL:6009": {
+      "hex": "#002B1A",
+      "label": "RAL 6009 FIR GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "455"
+    },
+    "RAL:6018": {
+      "hex": "#50AF47",
+      "label": "RAL 6018 YELLOW GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "463"
+    },
+    "RAL:6028": {
+      "hex": "#24523E",
+      "label": "RAL 6028 PINE GREEN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "428"
+    },
+    "RAL:7001": {
+      "hex": "#8B929B",
+      "label": "RAL 7001 SILVER GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "411"
+    },
+    "RAL:7011": {
+      "hex": "#54626A",
+      "label": "RAL 7011 IRON GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "305"
+    },
+    "RAL:7016": {
+      "hex": "#314551",
+      "label": "RAL 7016 ANTHRACITE GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "322"
+    },
+    "RAL:7021": {
+      "hex": "#162125",
+      "label": "RAL 7021 BLACK GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "420"
+    },
+    "RAL:7035": {
+      "hex": "#CDD3D1",
+      "label": "RAL 7035 LIGHT GREY",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "319"
+    },
+    "RAL:7042": {
+      "hex": "#A6ABAA",
+      "label": "RAL 7042 TRAFFIC GREY A",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "306"
+    },
+    "RAL:8000": {
+      "hex": "#966D38",
+      "label": "RAL 8000 GREEN BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "466"
+    },
+    "RAL:8003": {
+      "hex": "#7E451C",
+      "label": "RAL 8003 CLAY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "324"
+    },
+    "RAL:8004": {
+      "hex": "#924622",
+      "label": "RAL 8004 COPPER BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "414"
+    },
+    "RAL:8011": {
+      "hex": "#784B48",
+      "label": "RAL 8011 NUT BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "315"
+    },
+    "RAL:8016": {
+      "hex": "#602C1F",
+      "label": "RAL 8016 MAHOGANY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "416"
+    },
+    "RAL:8017": {
+      "hex": "#3F2A2B",
+      "label": "RAL 8017 CHOCOLATE BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "318"
+    },
+    "RAL:8019": {
+      "hex": "#332C2E",
+      "label": "RAL 8019 GREY BROWN",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "419"
+    },
+    "RAL:9001": {
+      "hex": "#F5F0E0",
+      "label": "RAL 9001 CREAM",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "425"
+    },
+    "RAL:9002": {
+      "hex": "#EDEBDD",
+      "label": "RAL 9002 GREY WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "412"
+    },
+    "RAL:9003": {
+      "hex": "#F5F0E0",
+      "label": "RAL 9003 SIGNAL WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "426"
+    },
+    "RAL:9005": {
+      "hex": "#171511",
+      "label": "RAL 9005 MATT BLACK",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "304"
+    },
+    "RAL:9007": {
+      "hex": "#A19C9A",
+      "label": "RAL 9007 GREY ALUMINIUM",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "427"
+    },
+    "RAL:9010": {
+      "hex": "#000000",
+      "label": "RAL 9010 MATT WHITE",
+      "source": "Colourchart2023_LEAFLET-DIGITAL USE.pdf, p. 2",
+      "cosmosCode": "301"
+    }
+  }
+}

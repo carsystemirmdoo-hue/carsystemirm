@@ -1,0 +1,46 @@
+{
+  "_comment": "Centralna konfiguracija za Cikica spray-overlay compositing test. Sve vrednosti su u video-frejmovima na 60fps.",
+
+  "video": {
+    "input": "assets/cikica-spray/source/spray-reveal-story.mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "totalFrames": 336
+  },
+
+  "character": {
+    "sourceDir": "assets/cikica-spray/processed",
+    "frameCount": 8,
+    "canvasWidth": 1086,
+    "canvasHeight": 1448,
+    "_comment": "floorY i feetCenterX izmereni iz processed frejmova (prepare-cikica-frames.py) - identicni u svih 8 nakon normalizacije.",
+    "floorY": 1230,
+    "feetCenterX": 542
+  },
+
+  "position": {
+    "_comment": "x/y = gornji-levi ugao SKALIRANOG character canvas-a na 1080x1920 video platnu. Vizuelno potvrdjeno (bez preklapanja sa limenkom). NE MENJATI bez ponovne vizuelne provere - telo mora ostati fiksirano (bez klizanja, bez promene scale-a).",
+    "scale": 0.94,
+    "x": -230,
+    "y": 714
+  },
+
+  "fadeInFrames": 8,
+  "fadeOutFrames": 12,
+
+  "_lines_comment": "Svaka linija = jedan zaseban crveni spray potez, identifikovan merenjem crvenih piksela po frejmu (limenka proizvoda iskljucena iz merenja da ne kontaminira signal - videti izvestaj). Svaka linija MORA da prikaze svih 8 PNG frejmova STROGO REDOM (1->2->3->4->5->6->7->8), mapirano preko: progress=(F-startFrame)/(endFrame-startFrame), poza=min(8, floor(progress*8)+1). Trajanja linija se prirodno razlikuju (8 do 31 video-frejma) - to je stvarna karakteristika videa, nije greska.",
+  "lines": [
+    { "id": 1, "startFrame": 34, "endFrame": 64, "_desc": "gornji potez (najduzi, 31 frejm, ima blagu unutrasnju pauzu ~44-56 - deo iste linije, ne nova linija)" },
+    { "id": 2, "startFrame": 71, "endFrame": 81, "_desc": "potez levo od limenke (11 frejmova)" },
+    { "id": 3, "startFrame": 87, "endFrame": 96, "_desc": "potez desno od limenke (10 frejmova)" },
+    { "id": 4, "startFrame": 102, "endFrame": 110, "_desc": "donji-levi potez (9 frejmova)" },
+    { "id": 5, "startFrame": 115, "endFrame": 122, "_desc": "donji potez, poslednji (8 frejmova - tacno 1 frejm po pozi)" }
+  ],
+
+  "_hold_comment": "Izmedju linija (i posle poslednje linije) ruka drzi POSLEDNJU pozu prethodne linije (poza 8) - nema reseta na pozu 1 dok ne pocne sledeca linija. Reset 8->1 se desava TACNO na startFrame sledece linije, kada nova crvena boja pocinje da se pojavljuje (sakriveno iza novog vizuelnog dogadjaja). Pre prve linije (tokom fade-in) drzi se poza 1 (mirna/pocetna).",
+
+  "startFrame": 22,
+  "endFrame": 155,
+  "_startEnd_comment": "startFrame=22: fade-in pocinje ~0.2s pre linije 1 (frame34). endFrame=155: hold na pozi 8 posle linije 5 (frame122) pa fade-out 143-155, zavrseno davno pre logo-a (frame217)."
+}

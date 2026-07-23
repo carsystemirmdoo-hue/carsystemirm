@@ -1,3 +1,13 @@
+import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
+import type {
+  ProductCatalogStrategy,
+  ProductDetailContent,
+  ProductFamilyIdentity,
+  ProductRecommendation,
+  ProductVariantColumn,
+  ProductVariantSelectorSection,
+} from "@/types/product-detail";
+
 export type CarsystemBrand = {
   slug: string;
   name: string;
@@ -5,6 +15,21 @@ export type CarsystemBrand = {
   description: string;
   overview?: string;
   programSlugs?: string[];
+  catalogOrder: number;
+  presentation: {
+    accentColor: string;
+    accentContrastColor: string;
+    accentOnDarkColor: string;
+    accentOnDarkContrastColor: string;
+    heroKicker: string;
+    productsCtaLabel: string;
+    contactCtaLabel: string;
+  };
+  routes: {
+    landing: string;
+    catalog: string;
+    contact: string;
+  };
 };
 
 export type ProgramGroup = {
@@ -92,6 +117,55 @@ export type ProductStockStatus =
   | "backorder"
   | "unavailable";
 
+export type ProductCatalogMetadata = {
+  id: string;
+  baseProductSlug: string;
+  variantId: string;
+  line: string;
+  officialName: string;
+  displayNameSr: string;
+  cosmosCode: string | null;
+  ralCode: string | null;
+  colorName: string | null;
+  finish: string | null;
+  volume: string | null;
+  technicalCategory: string;
+  verificationStatus: string;
+  sourceReference: string | null;
+  colorSource: ProductColorSource;
+  colorConfidence: ProductColorConfidence;
+};
+
+export type ProductVisualMode = "neutral" | "color-on-hover" | "always-color";
+
+export type ProductVisualType =
+  | "spray"
+  | "color"
+  | "abrasive"
+  | "foam"
+  | "filler"
+  | "primer"
+  | "clearcoat"
+  | "neutral";
+
+export type ProductColorSource =
+  | "official-chart"
+  | "ral"
+  | "cap-sample"
+  | "name-derived"
+  | "manual-estimate";
+
+export type ProductColorConfidence = "verified" | "derived" | "provisional";
+
+export type ProductVisualTokens = {
+  treatment: "paint" | "clearcoat" | "fabric" | "foam" | "matte" | "abrasive" | "polish";
+  productType: ProductVisualType;
+  visualMode: ProductVisualMode;
+  backgroundColor: string;
+  foregroundTone: "light" | "dark";
+  colorSource: ProductColorSource;
+};
+
 export type CarsystemProduct = {
   slug: string;
   name: string;
@@ -117,14 +191,40 @@ export type CarsystemProduct = {
   relatedProductSlugs: string[];
   seoTitle?: string;
   seoDescription?: string;
+  catalogMetadata?: ProductCatalogMetadata;
+  visual?: ProductVisualTokens;
+  /** Commercial family shared by one or more selectable variants. */
+  family?: ProductFamilyIdentity;
+  /** Controls whether the public catalog lists a family, its variants, or both. */
+  catalogStrategy?: ProductCatalogStrategy;
+  /** Stable identity and option values for a concrete commercial variant. */
+  variantId?: string;
+  variantOptions?: Record<string, string>;
+  /** Reviewed recommendation records; internal reasons are never rendered publicly. */
+  recommendations?: ProductRecommendation[];
+  /** Optional, reviewed content used by the canonical product-detail template. */
+  detail?: ProductDetailContent;
 };
 
 export function getProductPublicStatus(product: CarsystemProduct): ProductPublicStatus {
   return product.publicStatus ?? "Na upit";
 }
 
+type CarsystemBrandSeed = Omit<CarsystemBrand, "routes">;
+
+function defineCarsystemBrand(brand: CarsystemBrandSeed): CarsystemBrand {
+  return {
+    ...brand,
+    routes: {
+      landing: `/brendovi/${brand.slug}`,
+      catalog: `/katalog?brend=${brand.slug}`,
+      contact: `/kontakt?tema=proizvod&brend=${brand.slug}`,
+    },
+  };
+}
+
 export const brands: CarsystemBrand[] = [
-  {
+  defineCarsystemBrand({
     slug: "rm",
     name: "R-M",
     logo: "/brands/rm.svg",
@@ -133,8 +233,18 @@ export const brands: CarsystemBrand[] = [
     overview:
       "R-M u Carsystem i R-M programu pokriva sisteme bojenja, bazne boje, završne lakove i tehničku podršku za izbor formule i refinish procesa.",
     programSlugs: ["boje-i-lakovi", "priprema-povrsine", "poliranje"],
-  },
-  {
+    catalogOrder: 1,
+    presentation: {
+      accentColor: "#E31822",
+      accentContrastColor: "#FAFAFA",
+      accentOnDarkColor: "#E31822",
+      accentOnDarkContrastColor: "#FAFAFA",
+      heroKicker: "R-M refinish program",
+      productsCtaLabel: "Pogledajte R-M proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
     slug: "carsystem",
     name: "Carsystem",
     logo: "/brands/carsystem.svg",
@@ -143,8 +253,18 @@ export const brands: CarsystemBrand[] = [
     overview:
       "Carsystem povezuje pripremu površine, abrazive, poliranje i potrošni materijal za svakodnevni rad u lakirnici.",
     programSlugs: ["priprema-povrsine", "abrazivi", "poliranje", "potrosni-materijal"],
-  },
-  {
+    catalogOrder: 2,
+    presentation: {
+      accentColor: "#E30613",
+      accentContrastColor: "#FFFFFF",
+      accentOnDarkColor: "#E30613",
+      accentOnDarkContrastColor: "#FFFFFF",
+      heroKicker: "Carsystem radionički program",
+      productsCtaLabel: "Pogledajte Carsystem proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
     slug: "sata",
     name: "SATA",
     logo: "/brands/sata.svg",
@@ -153,8 +273,18 @@ export const brands: CarsystemBrand[] = [
     overview:
       "SATA je deo programa za profesionalne pištolje, opremu i kontrolisano nanošenje materijala u refinish procesu.",
     programSlugs: ["oprema"],
-  },
-  {
+    catalogOrder: 8,
+    presentation: {
+      accentColor: "#E2001A",
+      accentContrastColor: "#FFFFFF",
+      accentOnDarkColor: "#E2001A",
+      accentOnDarkContrastColor: "#FFFFFF",
+      heroKicker: "SATA oprema za nanošenje",
+      productsCtaLabel: "Pogledajte SATA proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
     slug: "carfit",
     name: "Car Fit",
     logo: "/brands/carfit.svg",
@@ -163,28 +293,58 @@ export const brands: CarsystemBrand[] = [
     overview:
       "Car Fit pokriva praktične materijale za pripremu, podlogu i stabilan radni tok pre nanošenja boje.",
     programSlugs: ["priprema-povrsine", "potrosni-materijal"],
-  },
-  {
-    slug: "cosmos-spray",
-    name: "Cosmos Spray",
+    catalogOrder: 7,
+    presentation: {
+      accentColor: "#E20613",
+      accentContrastColor: "#FFFFFF",
+      accentOnDarkColor: "#E20613",
+      accentOnDarkContrastColor: "#FFFFFF",
+      heroKicker: "Car Fit program pripreme",
+      productsCtaLabel: "Pogledajte Car Fit proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
+    slug: "cosmos-lac",
+    name: "Cosmos Lac",
     logo: "/brands/cosmos-spray.svg",
     description:
-      "Aerosol program za brze intervencije, pripremu i pomoćne radove u servisu i radionici.",
+      "Aerosolne boje, tehnički sprejevi i specijalizovane linije za automotive, industrijsku i dekorativnu primenu.",
     overview:
-      "Cosmos Spray je povezan sa sprejevima, pomoćnim artiklima i potrošnim programom za brzu radioničku dopunu.",
-    programSlugs: ["aerosoli", "potrosni-materijal"],
-  },
-  {
+      "Cosmos Lac program povezuje RAL i akrilne nijanse, prajmere, lakove, automotive proizvode i specijalizovane linije kroz proverene šifre i varijante.",
+    programSlugs: ["aerosoli", "boje-i-lakovi", "priprema-povrsine", "potrosni-materijal"],
+    catalogOrder: 5,
+    presentation: {
+      accentColor: "#20242C",
+      accentContrastColor: "#F7F8FA",
+      accentOnDarkColor: "#F7F8FA",
+      accentOnDarkContrastColor: "#20242C",
+      heroKicker: "Cosmos Lac aerosolni program",
+      productsCtaLabel: "Pogledajte Cosmos Lac proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
     slug: "baslac",
-    name: "Baslac",
+    name: "baslac",
     logo: "/brands/baslac.svg",
     description:
       "Refinish sistem za radionice kojima je potreban pregledan, pouzdan i praktičan program boja i lakova.",
     overview:
       "Baslac u ponudi pokriva boje, lakove i prateće materijale za radionice kojima je važan pregledan refinish sistem.",
     programSlugs: ["boje-i-lakovi", "poliranje"],
-  },
-  {
+    catalogOrder: 3,
+    presentation: {
+      accentColor: "#21A0D2",
+      accentContrastColor: "#14171C",
+      accentOnDarkColor: "#21A0D2",
+      accentOnDarkContrastColor: "#14171C",
+      heroKicker: "baslac refinish program",
+      productsCtaLabel: "Pogledajte baslac proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
     slug: "norbin",
     name: "Norbin",
     logo: "/brands/norbin.svg",
@@ -193,8 +353,18 @@ export const brands: CarsystemBrand[] = [
     overview:
       "Norbin je aktivan brend u programu boja i lakova, sa fokusom na završne slojeve i radioničku podršku kroz upit.",
     programSlugs: ["boje-i-lakovi"],
-  },
-  {
+    catalogOrder: 4,
+    presentation: {
+      accentColor: "#0082BB",
+      accentContrastColor: "#05080B",
+      accentOnDarkColor: "#21A0D2",
+      accentOnDarkContrastColor: "#14171C",
+      heroKicker: "Norbin program boja i lakova",
+      productsCtaLabel: "Pogledajte Norbin proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
+  defineCarsystemBrand({
     slug: "befar",
     name: "Befar",
     logo: "/brands/befar.svg",
@@ -203,7 +373,17 @@ export const brands: CarsystemBrand[] = [
     overview:
       "Befar u javnom katalogu pokriva sunđere za poliranje po boji, dimenziji i nameni, sa jasnim upitom za dostupnost.",
     programSlugs: ["poliranje"],
-  },
+    catalogOrder: 6,
+    presentation: {
+      accentColor: "#20242C",
+      accentContrastColor: "#F7F8FA",
+      accentOnDarkColor: "#F7F8FA",
+      accentOnDarkContrastColor: "#20242C",
+      heroKicker: "Befar program poliranja",
+      productsCtaLabel: "Pogledajte Befar proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
 ];
 
 export const futureBrands: FutureBrand[] = [
@@ -316,7 +496,7 @@ export const publicProgramGroups: PublicProgramGroup[] = [
     badges: ["Bazni sloj", "Lak", "Nijansiranje"],
     internalProgramSlugs: ["boje-i-lakovi"],
     phaseSlugs: ["boja", "lak"],
-    brandSlugs: ["rm", "baslac", "norbin"],
+    brandSlugs: ["rm", "baslac", "norbin", "cosmos-lac"],
     guidanceTitle: "Sistemi, finiš i podrška za nijansu",
     guidanceText:
       "Program boja i lakova povezuje bazni sloj, završni lak, izbor nijanse i tehničku podršku za stabilan rezultat u lakirnici.",
@@ -330,7 +510,7 @@ export const publicProgramGroups: PublicProgramGroup[] = [
     badges: ["Git", "Prajmer", "Brušenje"],
     internalProgramSlugs: ["priprema-povrsine", "abrazivi"],
     phaseSlugs: ["priprema", "podloga"],
-    brandSlugs: ["carsystem", "carfit", "rm"],
+    brandSlugs: ["carsystem", "carfit", "rm", "cosmos-lac"],
     guidanceTitle: "Priprema površine bez preskakanja faza",
     guidanceText:
       "Ovaj program pokriva ravnanje, izolaciju, brušenje i završnu pripremu površine pre nanošenja baznog sloja.",
@@ -372,7 +552,7 @@ export const publicProgramGroups: PublicProgramGroup[] = [
     badges: ["Maskiranje", "Sprejevi", "Radionica"],
     internalProgramSlugs: ["potrosni-materijal", "aerosoli"],
     phaseSlugs: ["priprema", "podloga", "poliranje"],
-    brandSlugs: ["carsystem", "carfit", "cosmos-spray"],
+    brandSlugs: ["carsystem", "carfit", "cosmos-lac"],
     guidanceTitle: "Materijali za dnevni ritam radionice",
     guidanceText:
       "Potrošni program pokriva maskiranje, zaštitu, pomoćne sprejeve i artikle koji održavaju stabilan radni tok u radionici.",
@@ -692,7 +872,7 @@ const legacyProducts: CarsystemProduct[] = [
     relatedProductSlugs: [
       "rm-diamont-bazna-boja",
       "baslac-30-s510-s-serija",
-      "cosmos-spray-335-crni",
+      "cosmos-lac-ral-cl-304-ral-9005-sjaj-400-ml-500-ml-ral-9005-gloss-black",
       "carsystem-p19-brusni-diskovi",
     ],
     seoTitle: "SATAjet X 5500",
@@ -760,7 +940,7 @@ const legacyProducts: CarsystemProduct[] = [
   {
     slug: "cosmos-spray-sprej",
     name: "Cosmos Spray sprej",
-    brandSlug: "cosmos-spray",
+    brandSlug: "cosmos-lac",
     programSlug: "aerosoli",
     phaseSlug: "podloga",
     shortDescription:
@@ -1028,7 +1208,7 @@ const legacyProducts: CarsystemProduct[] = [
       "carsystem-abraziv-p80-p2000",
       "carsystem-soft-plus-git",
       "car-fit-prajmer",
-      "cosmos-spray-sprej",
+      "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
     ],
   },
 ];
@@ -1143,6 +1323,7 @@ const befarPadColors = [
     labelTitle: "Narandžasti",
     slug: "narandzasti",
     sku: "OR",
+    swatch: "oklch(0.72 0.17 55)",
     role: "Srednja korekcija i ujednačavanje traga poliranja.",
   },
   {
@@ -1150,6 +1331,7 @@ const befarPadColors = [
     labelTitle: "Crni",
     slug: "crni",
     sku: "BK",
+    swatch: "oklch(0.2 0.01 255)",
     role: "Fina završna obrada i kontrola holograma.",
   },
   {
@@ -1157,6 +1339,7 @@ const befarPadColors = [
     labelTitle: "Beli",
     slug: "beli",
     sku: "WH",
+    swatch: "oklch(0.94 0.01 255)",
     role: "Kontrolisana korekcija na pripremljenom laku.",
   },
   {
@@ -1164,6 +1347,7 @@ const befarPadColors = [
     labelTitle: "Plavi",
     slug: "plavi",
     sku: "BL",
+    swatch: "oklch(0.58 0.19 255)",
     role: "Završni sjaj i finalno ujednačavanje površine.",
   },
 ] as const;
@@ -1211,11 +1395,24 @@ const befarPadProducts = befarPadColors.flatMap((color) =>
         "carsystem-finish-serija",
         "rm-pasta-190-1l",
       ],
+      family: {
+        id: "befar-polishing-pads",
+        label: "Befar sunđeri za poliranje",
+        catalogStrategy: "hybrid",
+      },
+      catalogStrategy: "hybrid",
+      variantId: `${color.slug}-${size.slug}`,
+      variantOptions: {
+        color: color.labelTitle,
+        colorSwatch: color.swatch,
+        role: color.role,
+        size: size.label,
+      },
     }),
   ),
 );
 
-export const products: CarsystemProduct[] = [
+const productRecords: CarsystemProduct[] = [
   withProductAssets(archivedProduct("rm-diamont-bazna-boja"), {
     productImage: productAsset(
       "/products/rm/rm-diamont-bazna-boja.jpg",
@@ -1455,17 +1652,18 @@ export const products: CarsystemProduct[] = [
   }),
   createProduct({
     slug: "carsystem-f23-brusni-diskovi",
-    name: "Carsystem F23 brusni diskovi",
+    name: "Carsystem Sanding Disc F.23 Ceramic",
     brandSlug: "carsystem",
     programSlug: "abrazivi",
     phaseSlug: "priprema",
-    shortDescription: "Nova serija brusnih diskova za preciznu pripremu površine.",
+    shortDescription:
+      "Keramički filmski brusni disk prečnika 150 mm sa Carsystem rasporedom od 25 rupa.",
     longDescription:
-      "Carsystem F23 je prikazan kao nova generacija abrazivnog programa, sa fokusom na stabilan radni tok i izbor granulacije prema fazi obrade.",
-    sku: "CS-F23-DISC",
-    packages: [{ label: "Granulacije na upit", detail: "Nova serija" }],
-    purpose: "Precizna priprema i međufazna obrada površine",
-    badges: ["Abrazivi", "Nova serija", "Na upit"],
+      "F.23 Ceramic je filmski abraziv sa mešavinom mineralnog i keramičkog zrna. Namenjen je radovima brušenja od grube do fine obrade, uz izbor odgovarajuće granulacije za konkretnu fazu rada.",
+    sku: "159.218–159.226",
+    packages: [{ label: "50 kom.", detail: "Fabričko pakovanje po granulaciji" }],
+    purpose: "Brušenje od grube obrade do fine pripreme površine",
+    badges: ["Filmski abraziv", "P80–P800", "150 mm", "Na upit"],
     productImage: productAsset(
       "/products/carsystem/carsystem-f23-brusni-diskovi.png",
       "Carsystem F23 brusni disk",
@@ -1481,16 +1679,198 @@ export const products: CarsystemProduct[] = [
       "/documents/products/carsystem/carsystem-f23-brusni-diskovi-tds.pdf",
     ),
     specifications: [
-      { label: "Serija", value: "F23" },
-      { label: "Forma", value: "Brusni diskovi" },
-      { label: "Granulacija", value: "Potvrđuje se kroz upit" },
-      { label: "Primena", value: "Priprema površine i međufaze" },
+      { label: "Prečnik", value: "150 mm" },
+      { label: "Raspored rupa", value: "25 rupa i ovalni centralni otvor" },
+      { label: "Nosač", value: "Poliesterski film" },
+      { label: "Zrno", value: "Mešavina mineralnog zrna sa keramičkim sadržajem" },
+      { label: "Granulacije", value: "P80, P120, P180, P240, P320, P400, P500, P600, P800" },
     ],
     relatedProductSlugs: [
       "carsystem-f19-brusni-diskovi",
       "carsystem-p23-brusni-diskovi",
       "carsystem-git-elastic-weiss",
     ],
+    family: {
+      id: "carsystem-f23",
+      label: "Carsystem F.23",
+      catalogStrategy: "family-card",
+      visualIdentity: {
+        accent: "oklch(0.52 0.15 300)",
+        softAccent: "oklch(0.72 0.08 300 / 0.14)",
+        optionShape: "pill",
+      },
+    },
+    catalogStrategy: "family-card",
+    detail: {
+      reviewStatus: "confirmed",
+      hero: {
+        kicker: "Carsystem abrazivni program",
+        subtype: "Filmski abraziv · 150 mm · 25 rupa",
+        lead:
+          "Keramičko zrno, stearatni premaz i otporan filmski nosač za kontrolisano brušenje od grube do fine obrade.",
+      },
+      quickFacts: {
+        reviewStatus: "confirmed",
+        content: [
+          { label: "Prečnik", value: "150 mm", reviewStatus: "confirmed" },
+          { label: "Raspored", value: "25 rupa", reviewStatus: "confirmed" },
+          { label: "Granulacije", value: "P80–P800", reviewStatus: "confirmed" },
+          { label: "Nosač", value: "Poliesterski film", reviewStatus: "confirmed" },
+        ],
+      },
+      variants: {
+        reviewStatus: "confirmed",
+        content: {
+          title: "Granulacije i šifre artikala",
+          description:
+            "Svaka granulacija ima zasebnu proizvođačku šifru. Dostupnost na domaćem tržištu proverava se kroz upit.",
+          columns: [
+            { key: "article", label: "Šifra artikla" },
+            { key: "grit", label: "Granulacija" },
+            { key: "pack", label: "Fabričko pakovanje" },
+            { key: "status", label: "Javni status" },
+          ],
+          rows: [
+            { id: "159.218", values: { article: "159.218", grit: "P80", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.219", values: { article: "159.219", grit: "P120", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.220", values: { article: "159.220", grit: "P180", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.221", values: { article: "159.221", grit: "P240", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.222", values: { article: "159.222", grit: "P320", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.223", values: { article: "159.223", grit: "P400", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.224", values: { article: "159.224", grit: "P500", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.225", values: { article: "159.225", grit: "P600", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "159.226", values: { article: "159.226", grit: "P800", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+          ],
+          note: "Šifre i fabričko pakovanje preuzeti su iz Carsystem kataloga proizvoda 2025.",
+        },
+      },
+      benefits: {
+        reviewStatus: "confirmed",
+        content: {
+          title: "Zašto F.23 Ceramic",
+          description:
+            "Prednosti koje direktno proizlaze iz konstrukcije abraziva.",
+          items: [
+            {
+              title: "Brzo skidanje materijala",
+              description: "Keramičko abrazivno zrno omogućava efikasno uklanjanje materijala.",
+              reviewStatus: "confirmed",
+            },
+            {
+              title: "Dug radni vek",
+              description: "Keramički sadržaj doprinosi trajnosti i stabilnom radu diska.",
+              reviewStatus: "confirmed",
+            },
+            {
+              title: "Manje zapunjavanja",
+              description: "Stearatni premaz smanjuje lepljenje prašine i zapunjavanje površine diska.",
+              reviewStatus: "confirmed",
+            },
+            {
+              title: "Ujednačen trag brušenja",
+              description: "Otporan filmski nosač pomaže da rezultat brušenja ostane homogen.",
+              reviewStatus: "confirmed",
+            },
+          ],
+        },
+      },
+      process: {
+        reviewStatus: "confirmed",
+        content: {
+          title: "Primena kroz više faza brušenja",
+          description:
+            "F.23 Ceramic nije vezan za samo jedan linearni korak. Granulacija se bira prema podlozi, cilju obrade i narednom materijalu u sistemu.",
+          mode: "supporting-process",
+          stages: [
+            { label: "Gruba obrada", detail: "P80–P180", reviewStatus: "confirmed" },
+            { label: "Međufazna priprema", detail: "P240–P400", reviewStatus: "confirmed" },
+            { label: "Fina obrada", detail: "P500–P800", reviewStatus: "confirmed" },
+          ],
+        },
+      },
+      technology: {
+        reviewStatus: "confirmed",
+        content: {
+          kicker: "Ključna tehnologija",
+          title: "Keramičko zrno na otpornom filmskom nosaču",
+          description:
+            "Mešavina mineralnog zrna sa keramičkim sadržajem kombinuje reznu sposobnost sa dugotrajnošću, dok stearatni premaz pomaže kontroli zapunjavanja tokom rada.",
+          facts: [
+            { label: "Zrno", value: "Keramički sadržaj", reviewStatus: "confirmed" },
+            { label: "Premaz", value: "Stearatni", reviewStatus: "confirmed" },
+            { label: "Nosač", value: "Poliesterski film", reviewStatus: "confirmed" },
+          ],
+        },
+      },
+      technicalFacts: {
+        reviewStatus: "confirmed",
+        content: [
+          { label: "Tip proizvoda", value: "Filmski abrazivni disk", reviewStatus: "confirmed" },
+          { label: "Prečnik", value: "150 mm", reviewStatus: "confirmed" },
+          { label: "Raspored rupa", value: "25 rupa i ovalni centralni otvor", reviewStatus: "confirmed" },
+          { label: "Materijal nosača", value: "Poliester", reviewStatus: "confirmed" },
+          { label: "Vrsta zrna", value: "Mešavina mineralnog zrna sa keramičkim sadržajem", reviewStatus: "confirmed" },
+          { label: "Raspon granulacija", value: "P80–P800", reviewStatus: "confirmed" },
+        ],
+      },
+      documents: {
+        reviewStatus: "confirmed",
+        content: [
+          {
+            id: "f23-tds-en-v01",
+            title: "Tehnički list proizvođača",
+            kind: "tds",
+            availability: "available",
+            href: "/documents/products/carsystem/carsystem-f23-brusni-diskovi-tds.pdf",
+            language: "Engleski",
+            version: "V01",
+            publishedAt: "02/2024",
+            reviewStatus: "confirmed",
+          },
+        ],
+      },
+      compatibleProducts: {
+        reviewStatus: "needs_confirmation",
+        reviewerNote:
+          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19, ali odgovarajući lokalni product zapisi još nisu potvrđeni.",
+        content: {
+          title: "Koristi se zajedno sa",
+          description:
+            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom i lokalnim product zapisom.",
+          items: [
+            {
+              productSlug: "carsystem-interface-pad",
+              note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
+              reviewStatus: "needs_confirmation",
+            },
+            {
+              productSlug: "carsystem-excenter-back-pad-t19",
+              note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
+              reviewStatus: "needs_confirmation",
+            },
+          ],
+        },
+      },
+      alternativeProducts: {
+        reviewStatus: "confirmed",
+        content: {
+          title: "Alternative iz iste kategorije",
+          description:
+            "Drugi Carsystem abrazivni diskovi za grubu, međufaznu i finu obradu.",
+          items: [
+            { productSlug: "carsystem-f19-brusni-diskovi", reviewStatus: "confirmed" },
+            { productSlug: "carsystem-p19-brusni-diskovi", reviewStatus: "confirmed" },
+          ],
+        },
+      },
+      finalCta: {
+        title: "Niste sigurni koja granulacija odgovara vašem procesu?",
+        description:
+          "Pošaljite nam podatke o podlozi i fazi rada. Pomoći ćemo vam da preciznije definišete izbor pre kupovine.",
+        inquiryLabel: "Zatraži savet za izbor",
+        storeLabel: "Pronađi prodavnicu",
+      },
+    },
   }),
   createProduct({
     slug: "carsystem-p23-brusni-diskovi",
@@ -1597,7 +1977,7 @@ export const products: CarsystemProduct[] = [
     relatedProductSlugs: [
       "carfit-maskirna-folija-4x150m",
       "carsystem-p19-brusni-diskovi",
-      "cosmos-spray-300",
+      "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
     ],
   }),
   createProduct({
@@ -1769,7 +2149,11 @@ export const products: CarsystemProduct[] = [
       { label: "Primena", value: "Zaštita vozila i delova" },
       { label: "Faza", value: "Priprema" },
     ],
-    relatedProductSlugs: ["carfit-maskirna-folija-4x150m", "carsystem-zastitno-odelo", "cosmos-spray-300"],
+    relatedProductSlugs: [
+      "carfit-maskirna-folija-4x150m",
+      "carsystem-zastitno-odelo",
+      "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
+    ],
   }),
   createProduct({
     slug: "carfit-maskirna-folija-4x150m",
@@ -1793,107 +2177,76 @@ export const products: CarsystemProduct[] = [
     relatedProductSlugs: ["carfit-maskirna-folija-4x5m", "carsystem-zastitno-odelo", "carsystem-p19-brusni-diskovi"],
   }),
   ...befarPadProducts,
-  createProduct({
-    slug: "cosmos-spray-335-crni",
-    name: "Cosmos Spray 335 crni",
-    brandSlug: "cosmos-spray",
-    programSlug: "aerosoli",
-    phaseSlug: "podloga",
-    shortDescription: "Crni aerosol iz Cosmos Spray programa za brze radioničke intervencije.",
-    longDescription:
-      "Cosmos Spray 335 crni je aerosol artikal za pomoćne radioničke radove, manje intervencije i dopunu potrošnog programa.",
-    sku: "COSMOS-335-BLACK",
-    packages: [{ label: "Na upit", detail: "Aerosol pakovanje" }],
-    purpose: "Brza intervencija i pomoćna aerosol primena",
-    badges: ["Aerosol", "Crni", "Na upit"],
-    productImage: productAsset(
-      "/products/cosmos-spray/cosmos-spray-335-crni.png",
-      "Cosmos Spray 335 crni aerosol",
-    ),
-    specifications: [
-      { label: "Šifra", value: "335" },
-      { label: "Boja", value: "Crna" },
-      { label: "Forma", value: "Aerosol" },
-      { label: "Primena", value: "Prema uputstvu na ambalaži" },
-    ],
-    relatedProductSlugs: ["cosmos-spray-300", "cosmos-flame-blue-fb-904-deep-black", "carfit-maskirna-folija-4x5m"],
-  }),
-  createProduct({
-    slug: "cosmos-spray-300",
-    name: "Cosmos Spray 300",
-    brandSlug: "cosmos-spray",
-    programSlug: "aerosoli",
-    phaseSlug: "podloga",
-    shortDescription: "Aerosol artikal iz Cosmos Spray programa za servisne i pomoćne radove.",
-    longDescription:
-      "Cosmos Spray 300 je prikazan kao aerosol proizvod za brzu dopunu radioničkog programa, sa tehničkim detaljima koji se potvrđuju kroz upit.",
-    sku: "COSMOS-300",
-    packages: [{ label: "Na upit", detail: "Aerosol pakovanje" }],
-    purpose: "Pomoćni aerosol radovi u servisu i radionici",
-    badges: ["Aerosol", "Servisna upotreba", "Na upit"],
-    productImage: productAsset(
-      "/products/cosmos-spray/cosmos-spray-300.png",
-      "Cosmos Lac aerosol proizvod",
-    ),
-    specifications: [
-      { label: "Šifra", value: "300" },
-      { label: "Forma", value: "Aerosol" },
-      { label: "Primena", value: "Prema nameni i pripremi podloge" },
-      { label: "Status", value: "Dostupnost se potvrđuje kroz upit" },
-    ],
-    relatedProductSlugs: ["cosmos-spray-335-crni", "cosmos-flame-orange-fo-420-viola-dark", "carsystem-zastitno-odelo"],
-  }),
-  createProduct({
-    slug: "cosmos-flame-blue-fb-904-deep-black",
-    name: "Flame Blue FB 904 Deep Black",
-    brandSlug: "cosmos-spray",
-    programSlug: "aerosoli",
-    phaseSlug: "boja",
-    shortDescription: "Aerosol nijansa Deep Black u pakovanju 400 ml.",
-    longDescription:
-      "Flame Blue FB 904 Deep Black je aerosol proizvod u pakovanju 400 ml, prikazan kao konkretna nijansa za upit i tehničku proveru.",
-    sku: "COSMOS-FB-904",
-    packages: [{ label: "400 ml" }],
-    purpose: "Aerosol bojenje i lokalna dopuna nijanse",
-    badges: ["Aerosol", "400 ml", "Deep Black", "Na upit"],
-    specifications: [
-      { label: "Šifra", value: "FB 904" },
-      { label: "Nijansa", value: "Deep Black" },
-      { label: "Pakovanje", value: "400 ml" },
-      { label: "Forma", value: "Aerosol" },
-    ],
-    relatedProductSlugs: ["cosmos-flame-orange-fo-420-viola-dark", "cosmos-spray-335-crni", "satajet-x-5500"],
-  }),
-  createProduct({
-    slug: "cosmos-flame-orange-fo-420-viola-dark",
-    name: "Flame Orange FO 420 Viola Dark",
-    brandSlug: "cosmos-spray",
-    programSlug: "aerosoli",
-    phaseSlug: "boja",
-    shortDescription: "Aerosol nijansa Viola Dark u pakovanju 400 ml.",
-    longDescription:
-      "Flame Orange FO 420 Viola Dark je konkretan aerosol artikal za javni katalog, sa pakovanjem, šifrom i upitom za dostupnost.",
-    sku: "COSMOS-FO-420",
-    packages: [{ label: "400 ml" }],
-    purpose: "Aerosol bojenje i lokalne popravke prema nijansi",
-    badges: ["Aerosol", "400 ml", "Viola Dark", "Na upit"],
-    specifications: [
-      { label: "Šifra", value: "FO 420" },
-      { label: "Nijansa", value: "Viola Dark" },
-      { label: "Pakovanje", value: "400 ml" },
-      { label: "Forma", value: "Aerosol" },
-    ],
-    relatedProductSlugs: ["cosmos-flame-blue-fb-904-deep-black", "cosmos-spray-300", "rm-diamont-bazna-boja"],
-  }),
+  ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),
 ];
+
+function withCatalogArchitecture(product: CarsystemProduct): CarsystemProduct {
+  if (product.family && product.catalogStrategy) return product;
+
+  const catalogStrategy: ProductCatalogStrategy =
+    product.brandSlug === "rm" || product.brandSlug === "baslac"
+      ? "family-card"
+      : product.catalogStrategy ?? "family-card";
+
+  return {
+    ...product,
+    catalogStrategy,
+    family:
+      product.family ??
+      ({
+        id: product.slug,
+        label: product.name,
+        catalogStrategy,
+      } satisfies ProductFamilyIdentity),
+  };
+}
+
+export const products: CarsystemProduct[] = productRecords.map(withCatalogArchitecture);
 
 export function getAllCarsystemProducts() {
   return [...products];
 }
 
+/**
+ * Keeps listing routes on the shared Carsystem product model while avoiding
+ * serialization of detail-only specifications, documents and relations into
+ * client-side catalog bundles.
+ */
+export function toProductListingProduct(product: CarsystemProduct): CarsystemProduct {
+  return {
+    slug: product.slug,
+    name: product.name,
+    brandSlug: product.brandSlug,
+    programSlug: product.programSlug,
+    phaseSlug: product.phaseSlug,
+    shortDescription: product.shortDescription,
+    longDescription: product.longDescription,
+    sku: product.sku,
+    packages: product.packages,
+    purpose: product.purpose,
+    badges: product.badges,
+    publicStatus: product.publicStatus,
+    stockStatus: product.stockStatus,
+    stockManaged: product.stockManaged,
+    productImage: product.productImage,
+    galleryImages: [],
+    specifications: [],
+    documents: [],
+    relatedProductSlugs: [],
+    catalogMetadata: product.catalogMetadata,
+    visual: product.visual,
+    family: product.family,
+    catalogStrategy: product.catalogStrategy,
+    variantId: product.variantId,
+    variantOptions: product.variantOptions,
+  };
+}
+
 export function getAllCarsystemBrands() {
-  return [...brands];
+  return [...brands].sort(
+    (first, second) => first.catalogOrder - second.catalogOrder,
+  );
 }
 
 export function getAllPublicProgramGroups() {
@@ -1902,6 +2255,238 @@ export function getAllPublicProgramGroups() {
 
 export function getCarsystemProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+function getPrimaryVariantColumn(columns: ProductVariantColumn[]) {
+  const priority = [
+    "color",
+    "shade",
+    "grit",
+    "hardness",
+    "size",
+    "volume",
+    "speed",
+    "pack",
+  ];
+
+  return (
+    priority
+      .map((key) => columns.find((column) => column.key === key))
+      .find((column): column is ProductVariantColumn => Boolean(column)) ?? columns[0]
+  );
+}
+
+function getVariantSectionTitle(key: string, fallback: string) {
+  const titles: Record<string, string> = {
+    color: "Dostupne boje",
+    shade: "Modeli i nijanse",
+    grit: "Granulacije",
+    hardness: "Dostupne tvrdoće",
+    size: "Dimenzije",
+    volume: "Pakovanja",
+    pack: "Pakovanja",
+  };
+
+  return titles[key] ?? fallback;
+}
+
+function getReviewedDetailVariantSelector(
+  product: CarsystemProduct,
+): ProductVariantSelectorSection | undefined {
+  const reviewed = product.detail?.variants;
+  if (
+    product.detail?.reviewStatus !== "confirmed" ||
+    reviewed?.reviewStatus !== "confirmed"
+  ) {
+    return undefined;
+  }
+
+  const rows = reviewed.content.rows.filter(
+    (row) => row.reviewStatus === "confirmed",
+  );
+  const primaryColumn = getPrimaryVariantColumn(reviewed.content.columns);
+  if (!primaryColumn || rows.length < 2 || !product.family) return undefined;
+
+  const dimension = product.specifications.find(
+    (fact) => fact.label.toLocaleLowerCase("sr-Latn") === "prečnik",
+  )?.value;
+
+  return {
+    title: getVariantSectionTitle(primaryColumn.key, reviewed.content.title),
+    description: reviewed.content.description,
+    family: product.family,
+    groups: [
+      {
+        id: primaryColumn.key,
+        label: primaryColumn.label,
+        kind: primaryColumn.key === "color" ? "color" : "text",
+        options: rows.map((row) => ({
+          id: row.id,
+          label: row.values[primaryColumn.key] || row.id,
+          code: row.values.article,
+          swatch: row.swatch,
+          image: row.image,
+        })),
+      },
+    ],
+    variants: rows.map((row) => ({
+      id: row.id,
+      label: row.values[primaryColumn.key] || row.id,
+      optionValueIds: { [primaryColumn.key]: row.id },
+      sku: row.values.article ?? row.id,
+      package: row.values.pack,
+      dimension,
+      status: row.values.status,
+      slug: row.slug,
+      image: row.image,
+      reviewStatus: "confirmed",
+    })),
+    initialVariantId: rows.find((row) => row.isActive)?.id ?? rows[0].id,
+    note: reviewed.content.note,
+  };
+}
+
+function getCosmosVariantSelector(
+  product: CarsystemProduct,
+): ProductVariantSelectorSection | undefined {
+  const familyId = product.catalogMetadata?.baseProductSlug;
+  if (!familyId || !product.family) return undefined;
+
+  const familyProducts = products.filter(
+    (item) =>
+      item.catalogMetadata?.baseProductSlug === familyId &&
+      item.catalogMetadata.verificationStatus === "verified-official-source",
+  );
+  if (familyProducts.length < 2) return undefined;
+
+  const hasNamedColors = familyProducts.some(
+    (item) => item.catalogMetadata?.colorName || item.catalogMetadata?.ralCode,
+  );
+  const groupId = "variant";
+
+  return {
+    title: hasNamedColors ? "Dostupne boje" : "Dostupne varijante",
+    description: `${product.family.label} varijante iz potvrđenog lokalnog kataloga.`,
+    family: product.family,
+    groups: [
+      {
+        id: groupId,
+        label: hasNamedColors ? "Boja i završnica" : "Varijanta",
+        kind: hasNamedColors ? "color" : "image",
+        options: familyProducts.map((item) => {
+          const metadata = item.catalogMetadata;
+          const finish = metadata?.finish ? ` · ${metadata.finish}` : "";
+          return {
+            id: item.variantId ?? item.slug,
+            label:
+              metadata?.colorName ??
+              (metadata?.ralCode ? `RAL ${metadata.ralCode}` : item.name),
+            code: [
+              metadata?.cosmosCode,
+              metadata?.ralCode ? `RAL ${metadata.ralCode}` : undefined,
+            ]
+              .filter(Boolean)
+              .join(" · ") + finish,
+            swatch: item.visual?.backgroundColor,
+            image: item.productImage?.src,
+          };
+        }),
+      },
+    ],
+    variants: familyProducts.map((item) => ({
+      id: item.variantId ?? item.slug,
+      label:
+        item.catalogMetadata?.colorName ??
+        (item.catalogMetadata?.ralCode
+          ? `RAL ${item.catalogMetadata.ralCode}`
+          : item.catalogMetadata?.cosmosCode ?? item.name),
+      optionValueIds: { [groupId]: item.variantId ?? item.slug },
+      sku: item.catalogMetadata?.cosmosCode ?? item.sku,
+      package: item.catalogMetadata?.volume ?? item.packages[0]?.label,
+      status: getProductPublicStatus(item),
+      slug: item.slug,
+      image: item.productImage?.src,
+      reviewStatus: "confirmed",
+    })),
+    initialVariantId: product.variantId ?? product.slug,
+  };
+}
+
+function getBefarVariantSelector(
+  product: CarsystemProduct,
+): ProductVariantSelectorSection | undefined {
+  if (product.family?.id !== "befar-polishing-pads") return undefined;
+
+  const familyProducts = products.filter(
+    (item) => item.family?.id === product.family?.id && item.variantOptions,
+  );
+  if (familyProducts.length < 2) return undefined;
+
+  const uniqueBy = (key: "color" | "size") =>
+    familyProducts.filter(
+      (item, index, all) =>
+        all.findIndex(
+          (candidate) => candidate.variantOptions?.[key] === item.variantOptions?.[key],
+        ) === index,
+    );
+
+  return {
+    title: "Dostupne boje i dimenzije",
+    description:
+      "Boja je prikazana zajedno sa potvrđenom namenom, bez pretpostavljanja nepotvrđene tvrdoće sunđera.",
+    family: product.family,
+    groups: [
+      {
+        id: "color",
+        label: "Boja i namena",
+        kind: "color",
+        options: uniqueBy("color").map((item) => ({
+          id: `color:${item.variantOptions?.color}`,
+          label: item.variantOptions?.color ?? "Varijanta",
+          detail: item.variantOptions?.role,
+          swatch: item.variantOptions?.colorSwatch,
+          image: item.productImage?.src,
+        })),
+      },
+      {
+        id: "size",
+        label: "Dimenzija",
+        kind: "text",
+        options: uniqueBy("size").map((item) => ({
+          id: `size:${item.variantOptions?.size}`,
+          label: item.variantOptions?.size ?? "Dimenzija",
+        })),
+      },
+    ],
+    variants: familyProducts.map((item) => ({
+      id: item.variantId ?? item.slug,
+      label: [item.variantOptions?.color, item.variantOptions?.size]
+        .filter(Boolean)
+        .join(" · "),
+      optionValueIds: {
+        color: `color:${item.variantOptions?.color}`,
+        size: `size:${item.variantOptions?.size}`,
+      },
+      sku: item.sku,
+      package: item.packages[0]?.label,
+      dimension: item.variantOptions?.size,
+      status: getProductPublicStatus(item),
+      slug: item.slug,
+      image: item.productImage?.src,
+      reviewStatus: "confirmed",
+    })),
+    initialVariantId: product.variantId ?? product.slug,
+  };
+}
+
+export function getProductVariantSelector(
+  product: CarsystemProduct,
+): ProductVariantSelectorSection | undefined {
+  return (
+    getReviewedDetailVariantSelector(product) ??
+    getCosmosVariantSelector(product) ??
+    getBefarVariantSelector(product)
+  );
 }
 
 export function getCarsystemBrandBySlug(slug: string) {
@@ -1985,4 +2570,62 @@ export function getRelatedProducts(product: CarsystemProduct, limit = 4) {
   return [...explicit, ...similar]
     .filter((item, index, all) => all.findIndex((candidate) => candidate.slug === item.slug) === index)
     .slice(0, limit);
+}
+
+export function getManualProductRecommendations(
+  product: CarsystemProduct,
+  limit = 6,
+) {
+  const reviewed = product.recommendations
+    ?.filter(
+      (recommendation) =>
+        recommendation.status === "confirmed" &&
+        recommendation.relationType !== "compatible",
+    )
+    .sort((first, second) => (first.priority ?? 999) - (second.priority ?? 999))
+    .map((recommendation) => recommendation.productId);
+  const slugs = reviewed?.length ? reviewed : product.relatedProductSlugs;
+
+  return slugs
+    .map((slug) => getCarsystemProductBySlug(slug))
+    .filter((item): item is CarsystemProduct => Boolean(item))
+    .filter(
+      (item, index, all) =>
+        item.slug !== product.slug &&
+        all.findIndex((candidate) => candidate.slug === item.slug) === index,
+    )
+    .slice(0, limit);
+}
+
+function getReviewedRelationshipProducts(
+  product: CarsystemProduct,
+  relationship: "compatibleProducts" | "alternativeProducts",
+  limit: number,
+) {
+  const section = product.detail?.[relationship];
+  if (
+    product.detail?.reviewStatus !== "confirmed" ||
+    !section ||
+    section.reviewStatus !== "confirmed"
+  ) {
+    return [];
+  }
+
+  return section.content.items
+    .filter((item) => item.reviewStatus === "confirmed")
+    .map((item) => getCarsystemProductBySlug(item.productSlug))
+    .filter((item): item is CarsystemProduct => Boolean(item))
+    .filter(
+      (item, index, all) =>
+        all.findIndex((candidate) => candidate.slug === item.slug) === index,
+    )
+    .slice(0, limit);
+}
+
+export function getProductCompatibleProducts(product: CarsystemProduct, limit = 4) {
+  return getReviewedRelationshipProducts(product, "compatibleProducts", limit);
+}
+
+export function getProductAlternativeProducts(product: CarsystemProduct, limit = 4) {
+  return getReviewedRelationshipProducts(product, "alternativeProducts", limit);
 }

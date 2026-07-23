@@ -214,8 +214,7 @@
   object-fit: cover;
 }
 
-.heroImage,
-.processImage {
+.heroImage {
   position: absolute;
   inset: 0;
   display: block;
@@ -502,8 +501,7 @@
   text-transform: uppercase;
 }
 
-.heroChips span,
-.tagRow span {
+.heroChips span {
   border: 1px solid var(--border);
   border-radius: 7px;
 }
@@ -898,6 +896,102 @@
   margin-inline: auto;
 }
 
+.categorySection {
+  --product-category-ink: var(--text);
+  --product-category-border: var(--border);
+  --product-category-accent: var(--red);
+  --product-category-accent-ink: oklch(0.99 0.003 255);
+  border-block: 1px solid var(--border-soft);
+  background: var(--bg2);
+  padding: clamp(64px, 7vw, 104px) clamp(20px, 4vw, 56px);
+}
+
+.categorySectionInner {
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.categorySectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.categorySectionHeader > div:first-child {
+  max-width: 640px;
+}
+
+.categorySectionHeader h2 {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+
+.categorySectionHeader p {
+  max-width: 580px;
+  margin: 0;
+  color: var(--text2);
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+.categorySectionActions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.categorySection .categoryCatalogCta {
+  min-height: 46px;
+  color: var(--accent-foreground);
+  white-space: nowrap;
+}
+
+.categorySearchLink {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 18px;
+  transition:
+    border-color 190ms var(--cs-ease-polish),
+    background-color 190ms var(--cs-ease-polish),
+    color 190ms var(--cs-ease-polish);
+}
+
+.categorySearchLink svg {
+  width: 17px;
+  height: 17px;
+  color: var(--red-bright);
+}
+
+.categorySearchLink svg * {
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.categorySearchLink:hover,
+.categorySearchLink:focus-visible {
+  border-color: color-mix(in oklch, var(--red) 58%, var(--border));
+  background: color-mix(in oklch, var(--red) 8%, transparent);
+}
+
 .sectionIntro,
 .sectionHeader {
   margin-bottom: clamp(28px, 4vw, 52px);
@@ -1000,346 +1094,6 @@
   margin-right: 0.65em;
   color: var(--red-bright);
   content: "·";
-}
-
-.processGrid {
-  display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
-  align-items: start;
-  gap: clamp(24px, 4vw, 64px);
-}
-
-.processVisual {
-  position: sticky;
-  top: 13vh;
-}
-
-.processImageFrame {
-  --phase-border: color-mix(in oklch, var(--red), transparent 64%);
-  --phase-glow: oklch(0.59 0.22 27 / 0.14);
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  transition:
-    border-color 260ms ease,
-    box-shadow 260ms ease;
-}
-
-.processImageFrame[data-process] {
-  border-color: var(--phase-border);
-  box-shadow:
-    var(--shadow),
-    0 0 0 1px color-mix(in oklch, var(--phase-border), transparent 66%),
-    0 0 30px var(--phase-glow);
-}
-
-.processImageFrame[data-process="prep"] {
-  --phase-border: oklch(0.66 0.035 245 / 0.44);
-  --phase-glow: oklch(0.56 0.035 245 / 0.16);
-}
-
-.processImageFrame[data-process="primer"] {
-  --phase-border: oklch(0.62 0.075 248 / 0.48);
-  --phase-glow: oklch(0.55 0.075 248 / 0.2);
-}
-
-.processImageFrame[data-process="paint"] {
-  --phase-border: oklch(0.59 0.22 27 / 0.54);
-  --phase-glow: oklch(0.59 0.22 27 / 0.2);
-}
-
-.processImageFrame[data-process="clearcoat"] {
-  --phase-border: oklch(0.68 0.2 25 / 0.5);
-  --phase-glow: oklch(0.66 0.18 25 / 0.18);
-}
-
-.processImageFrame[data-process="polish"] {
-  --phase-border: oklch(0.84 0.018 245 / 0.48);
-  --phase-glow: oklch(0.84 0.018 245 / 0.18);
-}
-
-.processImage,
-.processImageAsset {
-  background-position: center;
-  transform: translate3d(var(--process-x, 0), var(--process-y, 0), 0) scale(var(--process-scale, 1));
-  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-.processImageAsset {
-  z-index: 1;
-  opacity: 0;
-  object-fit: cover;
-  object-position: center;
-  transition:
-    opacity 260ms var(--cs-ease-out),
-    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.processImageAssetCurrent {
-  opacity: 0;
-}
-
-.processImageAssetPrevious {
-  opacity: 1;
-}
-
-.processImageFrame[data-image-transition-ready="true"] .processImageAssetCurrent {
-  opacity: 1;
-}
-
-.processImageFrame[data-image-transition-ready="true"] .processImageAssetPrevious {
-  opacity: 0;
-}
-
-.processTint {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(var(--phase-tint) / 0) 0%, rgb(var(--phase-tint) / 0.62) 100%);
-  transition: background 500ms ease;
-}
-
-.phasePips {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 3;
-  display: flex;
-  gap: 6px;
-}
-
-.phasePips span {
-  width: 26px;
-  height: 4px;
-  border-radius: 999px;
-  background: oklch(0.99 0.004 255 / 0.32);
-  transition: width 240ms ease, background-color 240ms ease;
-}
-
-.phasePips .activePip {
-  width: 34px;
-  background: var(--red-bright);
-  box-shadow: 0 0 16px oklch(0.59 0.22 27 / 0.54);
-}
-
-.processOverlay {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: flex-end;
-  gap: 14px;
-  padding: clamp(18px, 2.5vw, 28px);
-  background: linear-gradient(180deg, transparent, oklch(0.05 0.01 255 / 0.62));
-  color: oklch(0.99 0.004 255);
-}
-
-.processNumber {
-  color: var(--red-bright);
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 900;
-  line-height: 0.8;
-  text-shadow: 0 0 22px oklch(0.59 0.22 27 / 0.34);
-}
-
-.processOverlay h3 {
-  margin: 0;
-  color: var(--red-bright);
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(20px, 2.4vw, 28px);
-  font-weight: 800;
-}
-
-.processOverlay p {
-  max-width: 340px;
-  margin: 4px 0 0;
-  color: oklch(0.99 0.004 255 / 0.82);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.phaseList {
-  display: flex;
-  flex-direction: column;
-}
-
-.processRevealIntro,
-.processRevealVisual,
-.processRevealList {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity 560ms var(--cs-ease-out),
-    transform 560ms var(--cs-ease-out);
-}
-
-.processRevealVisual {
-  transition-delay: 70ms;
-}
-
-.processRevealList {
-  transition-delay: 140ms;
-}
-
-.section[data-process-revealed="true"] .processRevealIntro,
-.section[data-process-revealed="true"] .processRevealVisual,
-.section[data-process-revealed="true"] .processRevealList {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.phaseBlock {
-  display: flex;
-  min-height: 60vh;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.phaseCard {
-  position: relative;
-  width: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--card);
-  color: var(--text);
-  opacity: 0.58;
-  outline: none;
-  padding: clamp(20px, 2.4vw, 30px);
-  text-align: left;
-  transition:
-    opacity 240ms ease,
-    border-color 240ms ease,
-    box-shadow 240ms ease,
-    background-color 240ms ease,
-    transform 240ms ease;
-}
-
-.phaseCard::before {
-  position: absolute;
-  top: 18px;
-  bottom: 18px;
-  left: 0;
-  width: 3px;
-  border-radius: 0 999px 999px 0;
-  background: transparent;
-  content: "";
-  opacity: 0;
-  transition:
-    background-color 240ms ease,
-    box-shadow 240ms ease,
-    opacity 240ms ease;
-}
-
-.phaseCardActive {
-  border-color: var(--red);
-  background:
-    linear-gradient(135deg, oklch(0.59 0.22 27 / 0.16), transparent 42%),
-    var(--surface-strong);
-  box-shadow:
-    0 18px 42px oklch(0.04 0.01 255 / 0.28),
-    0 0 0 1px oklch(0.59 0.22 27 / 0.12),
-    0 0 28px oklch(0.59 0.22 27 / 0.18);
-  opacity: 1;
-}
-
-.phaseCardActive::before {
-  background: var(--red);
-  box-shadow: 0 0 18px oklch(0.59 0.22 27 / 0.5);
-  opacity: 1;
-}
-
-.phaseCard:hover {
-  transform: translateY(-2px);
-}
-
-.phaseCard:focus-visible {
-  outline: 2px solid var(--red-bright);
-  outline-offset: 4px;
-}
-
-.phaseCard > * {
-  position: relative;
-  z-index: 1;
-}
-
-.phaseMeta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  color: var(--text3);
-  font-family: var(--font-technical), monospace;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.phaseMeta span {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: var(--text3);
-}
-
-.phaseCardActive .phaseMeta span {
-  background: var(--red);
-  box-shadow: 0 0 18px oklch(0.59 0.22 27 / 0.62);
-}
-
-.phaseCard h3 {
-  margin: 0 0 10px;
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 800;
-}
-
-.phaseCardActive h3,
-.phaseCardActive .phaseMeta {
-  color: var(--red-bright);
-}
-
-.phaseCard p {
-  margin: 0 0 16px;
-  color: var(--text2);
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.phaseCardActive p {
-  color: var(--text);
-}
-
-.phaseCardActive .tagRow span {
-  border-color: oklch(0.59 0.22 27 / 0.2);
-  background: oklch(0.59 0.22 27 / 0.08);
-  color: var(--red-bright);
-}
-
-.tagRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tagRow span {
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 6px 10px;
-  color: var(--text3);
-  font-family: var(--font-technical), monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  transition:
-    background-color 220ms ease,
-    border-color 220ms ease,
-    color 220ms ease;
 }
 
 .networkGrid,
@@ -3060,8 +2814,8 @@
   }
 
   .trustInner,
+  .categorySectionHeader,
   .sectionHeader,
-  .processGrid,
   .networkGrid,
   .contactGrid {
     grid-template-columns: 1fr;
@@ -3070,6 +2824,15 @@
   .trustInner {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .categorySectionHeader {
+    display: grid;
+    align-items: start;
+  }
+
+  .categorySectionActions {
+    justify-content: flex-start;
   }
 
   .brandRail {
@@ -3082,28 +2845,6 @@
 
   .sectionHeader {
     display: grid;
-  }
-
-  .processVisual {
-    position: relative;
-    top: auto;
-  }
-
-  .processImageFrame {
-    aspect-ratio: 16 / 11;
-  }
-
-  .phaseBlock {
-    min-height: auto;
-    padding-block: 8px;
-  }
-
-  .phaseCard {
-    opacity: 0.74;
-  }
-
-  .phaseCardActive {
-    opacity: 1;
   }
 
   .supportMetricStrip {
@@ -3147,9 +2888,15 @@
   }
 
   .ctaRow,
+  .categorySectionActions,
   .finalActions {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .categorySection .categoryCatalogCta,
+  .categorySearchLink {
+    width: 100%;
   }
 
   .textCta {
@@ -3248,14 +2995,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .educationIndexRow::after {
-    transition: none;
-  }
-
-  .processRevealIntro,
-  .processRevealVisual,
-  .processRevealList {
-    opacity: 1;
-    transform: none;
     transition: none;
   }
 
@@ -3487,4 +3226,281 @@
   .programPreviewPanelInline .programPreviewBrand {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Interni video eksport (/social-exports/refinish-systems).
+   Koristi postojeći programDeck vizuelni sistem; fiksne px vrednosti drže
+   kadar stabilnim nezavisno od viewport-a tokom snimanja, a pointer-events
+   isključuje hover zavisnosti. Živi u ovom modulu jer override-uje hash-ovane
+   programDeck klase. */
+
+.exportViewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: oklch(0.09 0.01 255);
+}
+
+.exportStage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg), var(--bg2) 48%, var(--bg));
+  pointer-events: none;
+  user-select: none;
+}
+
+.exportScaleLayer {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+
+.exportStage[data-export-ready="true"] .exportScaleLayer {
+  opacity: 1;
+}
+
+.exportStage[data-export-format="story"] .exportScaleLayer {
+  zoom: 1.5;
+  width: 720px;
+  height: 1280px;
+}
+
+.exportStage[data-export-format="feed"] .exportScaleLayer {
+  zoom: 1.35;
+  width: 800px;
+  height: 1000px;
+}
+
+.exportStage[data-export-format="square"] .exportScaleLayer {
+  zoom: 1.35;
+  width: 800px;
+  height: 800px;
+}
+
+.exportHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 44px 44px 0;
+}
+
+.exportHeader h2 {
+  max-width: 430px;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.exportHeader > div > p:not(.sectionKicker) {
+  margin: 10px 0 0;
+  color: var(--text3);
+  font-size: 15px;
+}
+
+.exportStage .programDeckProgress > span {
+  font-size: 44px;
+}
+
+.exportBody {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.exportDeckArea {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.exportStage .programDeckDesktop {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  height: auto;
+}
+
+.exportPanelArea {
+  padding: 0 44px 44px;
+}
+
+.exportStage[data-export-format="story"] .exportPanelArea {
+  padding: 0 56px 46px;
+}
+
+.exportStage[data-export-format="feed"] .exportBody,
+.exportStage[data-export-format="square"] .exportBody {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 0 34px 34px;
+}
+
+.exportStage[data-export-format="feed"] .exportDeckArea,
+.exportStage[data-export-format="square"] .exportDeckArea {
+  flex: 1.08;
+  align-self: stretch;
+}
+
+.exportStage[data-export-format="feed"] .exportPanelArea,
+.exportStage[data-export-format="square"] .exportPanelArea {
+  flex: 1;
+  padding: 0;
+}
+
+.exportStage .programDeckCard {
+  width: 380px;
+  height: 500px;
+  min-height: 500px;
+}
+
+.exportStage .programCardInner {
+  min-height: 500px;
+  padding: 20px;
+}
+
+.exportStage[data-export-format="feed"] .programDeckCard,
+.exportStage[data-export-format="square"] .programDeckCard {
+  width: 330px;
+  height: 440px;
+  min-height: 440px;
+}
+
+.exportStage[data-export-format="feed"] .programCardInner,
+.exportStage[data-export-format="square"] .programCardInner {
+  min-height: 440px;
+  padding: 18px;
+}
+
+.exportStage .programCardBody h3 {
+  font-size: 2rem;
+}
+
+.exportStage .programCardBody p {
+  font-size: 13px;
+}
+
+.exportStage .programPreviewPanel {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 100%;
+  max-height: none;
+  margin: 0;
+  transform: none;
+}
+
+.exportStage .programPreviewGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.exportStage .programPreviewGrid a {
+  min-height: 150px;
+}
+
+.exportStage[data-export-format="square"] .programPreviewBody h3 {
+  font-size: 24px;
+}
+
+.exportEndFrame {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 30px;
+  padding: 80px;
+  text-align: center;
+  background:
+    radial-gradient(60% 42% at 50% 20%, oklch(0.59 0.22 27 / 0.14), transparent 70%),
+    linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
+  opacity: 0;
+  transition: opacity 480ms ease;
+}
+
+.exportEndFrame[data-visible="true"] {
+  opacity: 1;
+}
+
+.exportEndLogo {
+  display: grid;
+  justify-content: center;
+}
+
+.exportEndLogo .brandLogoPlate {
+  width: 300px;
+  min-height: 200px;
+  padding: 32px 52px;
+}
+
+.exportEndLogo .brandLogoImage {
+  max-height: 124px;
+}
+
+.exportEndFrame strong {
+  max-width: 760px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.exportEndFrame span {
+  color: var(--text2);
+  font-size: 26px;
+}
+
+.exportEndFrame small {
+  color: var(--text3);
+  font-family: var(--font-technical), monospace;
+  font-size: 20px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.exportLoading {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  margin: 0;
+  color: var(--text3);
+  font-family: var(--font-technical), monospace;
+  font-size: 16px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+/* Render režim MP4 eksporta: bez uvodnog fade-a (snimak počinje čistim
+   kadrom), a u statičkom time= pregledu tranzicije su isključene i progress
+   je pauziran na tačnom pomaku unutar koraka. */
+.exportStage[data-render-mode] .exportScaleLayer {
+  opacity: 1;
+  transition: none;
+}
+
+.exportStage[data-render-static] *,
+.exportStage[data-render-static] *::before,
+.exportStage[data-render-static] *::after {
+  transition: none !important;
+}
+
+.exportStage[data-render-static] .programPreviewPanel {
+  animation: none !important;
+}
+
+.exportStage[data-render-static] .programDeckProgressFill {
+  animation-delay: var(--render-fill-delay, 0ms);
+  animation-play-state: paused;
 }

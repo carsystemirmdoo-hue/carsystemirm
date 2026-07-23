@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { CatalogPage } from "@/components/catalog/CatalogPage";
 import {
-  brands,
+  getAllCarsystemBrands,
   getAllCarsystemProducts,
   programGroups,
   refinishPhases,
+  toProductListingProduct,
 } from "@/lib/carsystem-data";
 import { pageMetadata } from "@/lib/seo";
 
@@ -18,8 +19,8 @@ export const metadata: Metadata = pageMetadata({
 export default function KatalogPage() {
   return (
     <CatalogPage
-      products={getAllCarsystemProducts()}
-      brands={brands}
+      products={getAllCarsystemProducts().map(toProductListingProduct)}
+      brands={getAllCarsystemBrands()}
       programs={programGroups}
       phases={refinishPhases}
     />

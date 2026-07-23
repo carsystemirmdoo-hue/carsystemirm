@@ -7,6 +7,9 @@ import {
   useMemo,
   useState,
 } from "react";
+import { ProductCategoryGrid } from "@/components/categories/ProductCategoryGrid";
+import { PRODUCT_CATEGORIES } from "@/components/layout/navigation-data";
+import { Button } from "@/components/ui/Button";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
 import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import { CounterUp } from "@/components/ui/CounterUp";
@@ -20,8 +23,6 @@ import {
 } from "./BrandLogoPlate";
 import { HomeSectionRail } from "./HomeSectionRail";
 import { HomeHeroImage } from "./HomeHeroImage";
-import { ProcessSection } from "./ProcessSection";
-import { ProgramDeckSection } from "./ProgramDeckSection";
 import { companyContact } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
@@ -51,7 +52,7 @@ const trustBrandLinks: Partial<Record<BrandKey, string>> = {
   norbin: "/brendovi/norbin",
   sata: "/brendovi/sata",
   carfit: "/brendovi/carfit",
-  cosmosLac: "/brendovi/cosmos-spray",
+  cosmosLac: "/brendovi/cosmos-lac",
   befar: "/brendovi/befar",
 };
 
@@ -93,6 +94,15 @@ function IconLocation() {
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
       <path d="M12 21s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12Z" />
       <circle cx="12" cy="9" r="2.4" />
+    </svg>
+  );
+}
+
+function CategorySearchIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+      <circle cx="10.8" cy="10.8" r="6.1" />
+      <path d="m15.3 15.3 4 4" />
     </svg>
   );
 }
@@ -222,7 +232,7 @@ export function CarsystemHomePage() {
         className={`${styles.hero} ${styles.railTarget}`}
         aria-labelledby="homepage-title"
       >
-        <div className={styles.heroMedia} aria-hidden="true">
+        <div className={styles.heroMedia} aria-hidden="true" data-cursor="image">
           <span className={styles.heroImage} data-critical-hero />
           <HomeHeroImage className={styles.heroImageAsset} />
           <span className={styles.mistOne} />
@@ -245,14 +255,14 @@ export function CarsystemHomePage() {
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <p className={styles.kicker}>Carsystem i R-M Inđija, Srbija</p>
-            <h1 id="homepage-title" className={styles.heroTitle}>
+            <h1 id="homepage-title" className={styles.heroTitle} data-cursor="headline">
               Profesionalni
               <br />
               refinish program
               <br />
               <span>za siguran rezultat.</span>
             </h1>
-            <p className={styles.heroIntro}>
+            <p className={styles.heroIntro} data-cursor="text">
               Distribucija boja, lakova, pripremnih materijala i opreme za
               lakirnice, uz tehničku podršku i partnersku mrežu u Srbiji i regionu.
             </p>
@@ -295,6 +305,45 @@ export function CarsystemHomePage() {
           onCityChange={handleCityChange}
           onLocationRequest={handleLocationRequest}
         />
+      </section>
+
+      <section
+        id="kategorije-proizvoda"
+        className={styles.categorySection}
+        aria-labelledby="homepage-categories-title"
+      >
+        <div className={styles.categorySectionInner}>
+          <div className={styles.categorySectionHeader}>
+            <div>
+              <h2 id="homepage-categories-title" data-cursor="headline">
+                Kategorije proizvoda
+              </h2>
+              <p>
+                Direktan pristup materijalima, opremi i priboru za profesionalni
+                refinish proces.
+              </p>
+            </div>
+            <div className={styles.categorySectionActions}>
+              <Button href="/katalog" className={styles.categoryCatalogCta}>
+                Pogledajte ceo katalog
+              </Button>
+              <Link
+                href="/katalog#catalog-search"
+                className={`${styles.categorySearchLink} cs-interactive-surface`}
+                data-cursor="link"
+                data-motion-surface
+              >
+                <CategorySearchIcon />
+                Pretražite proizvode
+              </Link>
+            </div>
+          </div>
+
+          <ProductCategoryGrid
+            categories={PRODUCT_CATEGORIES}
+            layout="homepage"
+          />
+        </div>
       </section>
 
       <a
@@ -348,8 +397,6 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <ProcessSection />
-
       <section
         id="prodavnice-mreza"
         className={`${styles.sectionAlt} ${styles.railTarget}`}
@@ -358,7 +405,7 @@ export function CarsystemHomePage() {
         <div className={styles.sectionHeader}>
           <div>
             <p className={styles.sectionKicker}>Prodajna i partnerska mreža</p>
-            <h2 id="network-title">Pronađite proverenu lokaciju u svom regionu.</h2>
+            <h2 id="network-title" data-cursor="headline">Pronađite proverenu lokaciju u svom regionu.</h2>
             <p>
               Izaberite grad ili koristite lokaciju da brzo dođete do najbliže
               dostupne partnerske tačke. Za dostupnost proizvoda i tehnički
@@ -458,13 +505,11 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <ProgramDeckSection />
-
       <section className={styles.section} aria-labelledby="support-title">
         <div className={styles.supportBand}>
           <div className={styles.supportStatement}>
             <p className={styles.sectionKicker}>Tehnička podrška i mikseri boja</p>
-            <h2 id="support-title">Pravi izbor proizvoda počinje dobrim savetom.</h2>
+            <h2 id="support-title" data-cursor="headline">Pravi izbor proizvoda počinje dobrim savetom.</h2>
             <p className={styles.sectionLead}>
               Nijansiranje po formuli proizvođača, savetovanje za pripremu i
               lakiranje, kao i komercijalna podrška za radionice i partnere.
@@ -514,7 +559,7 @@ export function CarsystemHomePage() {
         <div className={styles.educationIndexLayout}>
           <div className={styles.educationIntro}>
             <p className={styles.sectionKicker}>Edukacija i znanje</p>
-            <h2 id="education-title">
+            <h2 id="education-title" data-cursor="headline">
               Znanje za stabilniji rad u lakirnici.
             </h2>
             <p>
@@ -548,7 +593,7 @@ export function CarsystemHomePage() {
         <div className={styles.contactGrid}>
           <div className={styles.contactPanel}>
             <p className={styles.sectionKicker}>Centrala, Inđija</p>
-            <h2 id="contact-title">Carsystem i R-M Inđija d.o.o.</h2>
+            <h2 id="contact-title" data-cursor="headline">Carsystem i R-M Inđija d.o.o.</h2>
             <div className={styles.contactRows}>
               <span>
                 <b>Lokacija</b>
@@ -594,7 +639,7 @@ export function CarsystemHomePage() {
         <div className={styles.finalShade} />
         <div className={styles.finalContent}>
           <p>Carsystem i R-M, Inđija</p>
-          <h2 id="final-cta-title">
+          <h2 id="final-cta-title" data-cursor="headline">
             Pronađite prodavnicu ili pripremite upit za saradnju.
           </h2>
           <span>

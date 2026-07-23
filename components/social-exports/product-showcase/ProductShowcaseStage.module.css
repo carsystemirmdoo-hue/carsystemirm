@@ -1,0 +1,300 @@
+/* Product page showcase: hero blok stranice proizvoda (pills, naslov, lead,
+   vizuelna površina sa spray artworkom i packshotom) u light i dark temi.
+   Samostalna scena — paleta prati product page vizuelni jezik, bez zavisnosti
+   od stilova javnog sajta. Delay-i uključuju var(--seek) za deterministički
+   render po vremenu. */
+
+.viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: oklch(0.1 0.01 255);
+}
+
+.viewport[data-theme="light"] {
+  background: oklch(0.9 0.008 255);
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  font-family: var(--font-body), system-ui, sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Tematske palete — inspirisane product page tokenima (panel/border/ink). */
+.stage[data-theme="light"] {
+  --page-bg: oklch(0.965 0.005 255);
+  --page-bg-deep: oklch(0.93 0.008 255);
+  --panel: oklch(0.99 0.004 255);
+  --panel-deep: oklch(0.955 0.007 255);
+  --border: oklch(0.31 0.02 255 / 0.14);
+  --border-soft: oklch(0.31 0.02 255 / 0.09);
+  --ink: oklch(0.2 0.016 255);
+  --muted: oklch(0.45 0.022 255);
+  --surface-shadow: 0 30px 70px oklch(0.24 0.024 255 / 0.16);
+  --product-drop-shadow: drop-shadow(0 24px 34px oklch(0.08 0.01 250 / 0.24));
+  background: radial-gradient(120% 90% at 50% 0%, var(--page-bg), var(--page-bg-deep) 82%);
+}
+
+.stage[data-theme="dark"] {
+  --page-bg: oklch(0.145 0.013 255);
+  --page-bg-deep: oklch(0.105 0.011 255);
+  --panel: oklch(0.175 0.014 255);
+  --panel-deep: oklch(0.135 0.012 255);
+  --border: oklch(0.92 0.008 255 / 0.14);
+  --border-soft: oklch(0.92 0.008 255 / 0.08);
+  --ink: oklch(0.96 0.006 255);
+  --muted: oklch(0.72 0.016 255);
+  --surface-shadow: 0 34px 80px oklch(0.04 0.01 255 / 0.5);
+  --product-drop-shadow: drop-shadow(0 0 1px oklch(0.92 0.008 250 / 0.34))
+    drop-shadow(0 24px 34px oklch(0.02 0.01 250 / 0.46));
+  background: radial-gradient(120% 90% at 50% 0%, var(--page-bg), var(--page-bg-deep) 82%);
+}
+
+.pageFrame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--frame-gap, 44px);
+  padding: var(--frame-pad, 84px 84px 96px);
+}
+
+/* Tekstualni deo hero bloka. */
+.copyBlock {
+  display: grid;
+  gap: 26px;
+  max-width: var(--copy-max, 100%);
+}
+
+.stage[data-play="true"] .copyBlock > * {
+  animation: showcase-rise 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.stage[data-play="true"] .pillRow {
+  animation-delay: calc(240ms + var(--seek, 0ms));
+}
+
+.stage[data-play="true"] .title {
+  animation-delay: calc(340ms + var(--seek, 0ms));
+}
+
+.stage[data-play="true"] .lead {
+  animation-delay: calc(460ms + var(--seek, 0ms));
+}
+
+.stage[data-play="false"] .copyBlock > * {
+  opacity: 0;
+}
+
+@keyframes showcase-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 74%, transparent);
+  color: var(--muted);
+  padding: 12px 20px;
+  font-family: var(--font-technical), monospace;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--title-size, 92px);
+  font-weight: 900;
+  line-height: 0.98;
+}
+
+.lead {
+  margin: 0;
+  max-width: var(--lead-max, 760px);
+  color: var(--muted);
+  font-size: var(--lead-size, 30px);
+  line-height: 1.45;
+}
+
+/* Vizuelna površina proizvoda — kao heroVisualSurface na product page-u. */
+.visualSurface {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-radius: 28px;
+  background:
+    radial-gradient(90% 70% at 50% 28%, color-mix(in oklch, var(--spray-color), transparent 88%), transparent 74%),
+    linear-gradient(175deg, var(--panel), var(--panel-deep));
+  box-shadow: var(--surface-shadow);
+  isolation: isolate;
+}
+
+.brandMark {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  z-index: 4;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  color: var(--ink);
+  padding: 12px 18px;
+  font-family: var(--font-technical), monospace;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.artFrame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--art-width, 1300px);
+  aspect-ratio: 1536 / 1024;
+  transform: translate(-50%, -50%);
+}
+
+.artFrame > svg {
+  overflow: visible;
+}
+
+.stage[data-play="true"] .artFrame {
+  animation: showcase-art-drift var(--total-ms, 6000ms) linear var(--seek, 0ms) both;
+}
+
+@keyframes showcase-art-drift {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+}
+
+.product {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: var(--product-h, 620px);
+  width: auto;
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(24px) scale(0.97);
+  filter: var(--product-drop-shadow);
+}
+
+.stage[data-play="true"] .product {
+  animation: showcase-product-in 720ms cubic-bezier(0.16, 1, 0.3, 1)
+    calc(1500ms + var(--seek, 0ms)) both;
+}
+
+@keyframes showcase-product-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(24px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+}
+
+.loading {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+/* Statički seek: sve pauzirano na tačnom pomaku. */
+.stage[data-render-static] * {
+  animation-play-state: paused !important;
+}
+
+/* Raspored po formatu (fiksni pikseli, pažljivo po kadru). */
+.stage[data-export-format="story"] {
+  --frame-pad: 96px 84px 100px;
+  --frame-gap: 56px;
+  --title-size: 96px;
+  --lead-size: 31px;
+  --art-width: 1420px;
+  --product-h: 730px;
+}
+
+.stage[data-export-format="feed"] {
+  --frame-pad: 80px 80px 88px;
+  --frame-gap: 44px;
+  --title-size: 88px;
+  --lead-size: 29px;
+  --art-width: 1280px;
+  --product-h: 560px;
+}
+
+.stage[data-export-format="square"] {
+  --frame-pad: 72px 76px 78px;
+  --frame-gap: 38px;
+  --title-size: 76px;
+  --lead-size: 27px;
+  --lead-max: 860px;
+  --art-width: 1180px;
+  --product-h: 470px;
+}
+
+.stage[data-export-format="wide"] {
+  --frame-pad: 84px 96px 92px;
+  --frame-gap: 0px;
+  --title-size: 82px;
+  --lead-size: 28px;
+  --art-width: 1200px;
+  --product-h: 520px;
+}
+
+/* Wide: tekst levo, vizuel desno. */
+.stage[data-export-format="wide"] .pageFrame {
+  flex-direction: row;
+  align-items: center;
+  gap: 72px;
+}
+
+.stage[data-export-format="wide"] .copyBlock {
+  flex: 0 0 620px;
+}
+
+.stage[data-export-format="wide"] .visualSurface {
+  align-self: stretch;
+}

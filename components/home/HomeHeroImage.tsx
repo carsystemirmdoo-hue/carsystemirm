@@ -29,7 +29,7 @@ export function HomeHeroImage({ className }: { className: string }) {
       fetchPriority="high"
       loading="eager"
       priority
-      sizes="100vw"
+      sizes="(min-width: 2625px) 1680px, (min-width: 1700px) 64vw, (min-width: 1600px) 1088px, (max-width: 860px) 100vw, 68vw"
       src={HOME_HERO_ASSETS[theme]}
       unoptimized
     />

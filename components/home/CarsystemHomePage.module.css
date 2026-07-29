@@ -757,6 +757,31 @@
   letter-spacing: 0.06em;
 }
 
+@media (min-width: 1600px) {
+  .hero {
+    --hero-wide-inset: clamp(140px, calc(50vw - 1200px), 520px);
+    --hero-media-inset: clamp(0px, calc(45vw - 720px), 24vw);
+  }
+
+  .heroMedia {
+    right: var(--hero-media-inset);
+    width: clamp(1088px, 64vw, 1680px);
+  }
+
+  .heroFade {
+    inset-inline: var(--hero-media-inset);
+  }
+
+  .heroInner {
+    max-width: calc(100% - var(--hero-wide-inset) - var(--hero-wide-inset));
+  }
+
+  .processBadge,
+  .locatorCard {
+    right: max(56px, calc(var(--hero-media-inset) + 24px));
+  }
+}
+
 .trustStrip {
   border-top: 1px solid var(--border-soft);
   background: var(--bg);

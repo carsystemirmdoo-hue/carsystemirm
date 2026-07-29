@@ -10,7 +10,9 @@ import {
   getProgramGroupBySlug,
   getRefinishPhaseBySlug,
 } from "@/lib/carsystem-data";
-import { breadcrumbJsonLd, jsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
+import { buildProductMetadata } from "@/lib/seo/metadata-builders";
+import { getProductBreadcrumbItems } from "@/lib/seo/product-breadcrumbs";
+import { breadcrumbJsonLd, jsonLd, productJsonLd } from "@/lib/seo";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -26,12 +28,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getCarsystemProductBySlug(slug);
   if (!product) return {};
+  const brand = getCarsystemBrandBySlug(product.brandSlug);
+  if (!brand) return {};
 
-  return pageMetadata({
-    title: product.name,
-    description: product.seoDescription ?? product.shortDescription,
-    path: `/proizvodi/${product.slug}`,
-  });
+  return buildProductMetadata({ brand, product });
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -43,6 +43,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const program = getProgramGroupBySlug(product.programSlug);
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
   if (!brand || !program || !phase) notFound();
+  const breadcrumbItems = getProductBreadcrumbItems({ brand, product, program });
 
   return (
     <>
@@ -50,10 +51,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(
           breadcrumbJsonLd([
-            { name: "Početna", path: "/" },
-            { name: "Katalog", path: "/katalog" },
-            { name: brand.name, path: brand.routes.landing },
-            { name: product.name, path: `/proizvodi/${product.slug}` },
+            ...breadcrumbItems,
           ]),
         )}
       />
@@ -65,6 +63,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         product={product}
         brand={brand}
         program={program}
+        breadcrumbItems={breadcrumbItems}
         compatibleProducts={getProductCompatibleProducts(product)}
         similarProducts={getManualProductRecommendations(product)}
       />

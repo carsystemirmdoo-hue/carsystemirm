@@ -12,7 +12,6 @@ import {
   getProductVariantSelector,
   getProgramGroupBySlug,
   getRefinishPhaseBySlug,
-  publicProgramGroups,
   type CarsystemBrand,
   type CarsystemProduct,
   type ProgramGroup,
@@ -22,6 +21,7 @@ import type {
   ProductRelationshipSection,
   ProductTechnicalFact,
 } from "@/types/product-detail";
+import type { SeoBreadcrumbItem } from "@/components/seo/SeoBreadcrumbs";
 import styles from "./ProductDetailExperience.module.css";
 
 type ProductDetailPageProps = {
@@ -30,6 +30,7 @@ type ProductDetailPageProps = {
   program: ProgramGroup;
   compatibleProducts: CarsystemProduct[];
   similarProducts: CarsystemProduct[];
+  breadcrumbItems: SeoBreadcrumbItem[];
 };
 
 function isConfirmed(status: string | undefined) {
@@ -42,6 +43,7 @@ export function ProductDetailPage({
   program,
   compatibleProducts,
   similarProducts,
+  breadcrumbItems,
 }: ProductDetailPageProps) {
   const detail = isConfirmed(product.detail?.reviewStatus) ? product.detail : undefined;
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
@@ -78,7 +80,7 @@ export function ProductDetailPage({
   return (
     <div className={styles.pageShell}>
       <main className={styles.pageMain}>
-        <ProductBreadcrumb product={product} brand={brand} program={program} />
+        <ProductBreadcrumb items={breadcrumbItems} />
 
         <div className={styles.narrativeGrid}>
           <div className={styles.stickyRail}>
@@ -258,38 +260,19 @@ function ProductJoinedRecommendations({
   );
 }
 
-function ProductBreadcrumb({
-  product,
-  brand,
-  program,
-}: {
-  product: CarsystemProduct;
-  brand: CarsystemBrand;
-  program: ProgramGroup;
-}) {
-  const publicProgram = publicProgramGroups.find((item) =>
-    item.internalProgramSlugs.includes(program.slug),
-  );
-  const items = [
-    { href: "/", label: "Početna" },
-    { href: "/katalog", label: "Katalog" },
-    {
-      href: `/program/${publicProgram?.slug ?? program.slug}`,
-      label: publicProgram?.name ?? program.name,
-    },
-    { href: brand.routes.landing, label: brand.name },
-  ];
-
+function ProductBreadcrumb({ items }: { items: SeoBreadcrumbItem[] }) {
   return (
     <nav className={styles.breadcrumb} aria-label="Putanja">
       <ol>
-        {items.map((item) => (
-          <li key={item.href}>
-            <Link href={item.href}>{item.label}</Link>
-            <span aria-hidden="true">/</span>
-          </li>
-        ))}
-        <li aria-current="page">{product.name}</li>
+        {items.map((item, index) => {
+          const isCurrent = index === items.length - 1;
+          return (
+            <li key={`${item.path}-${item.name}`} aria-current={isCurrent ? "page" : undefined}>
+              {isCurrent ? item.name : <Link href={item.path}>{item.name}</Link>}
+              {!isCurrent ? <span aria-hidden="true">/</span> : null}
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );

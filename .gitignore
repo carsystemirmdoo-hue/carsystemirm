@@ -60,3 +60,6 @@ out
 tmp/
 review-screenshots/
 docs/audit-screenshots/
+
+# Local QA screenshots and reports
+artifacts/

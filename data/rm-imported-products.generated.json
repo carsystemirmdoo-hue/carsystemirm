@@ -1,0 +1,3122 @@
+{
+  "schemaVersion": 1,
+  "audit": {
+    "folderCount": 61,
+    "foldersWithDocumentation": 60,
+    "foldersWithImage": 60,
+    "uniqueProductCount": 59,
+    "duplicateFolders": [
+      "CLEAR Harden-R H 2P15",
+      "H 2P15 CLEAR Harden-R"
+    ],
+    "duplicateCanonicalSlug": "h-2p15-clear-harden-r",
+    "duplicateImageGroupCount": 1,
+    "duplicatePdfGroupCount": 1,
+    "emptyFolders": [
+      "CRYSTAL BASE"
+    ],
+    "canonicalProductInformationPdfCount": 59,
+    "canonicalTechnicalPdfCount": 58,
+    "contentReviewCount": 3
+  },
+  "sources": [
+    {
+      "sourceFolder": "A 2210 ONYX ACTIVATOR",
+      "canonicalName": "A 2210 ONYX ACTIVATOR",
+      "productCode": "A 2210",
+      "imagePath": "/images/brands/rm/products/onyx/rm-2210-onyx-activator.webp",
+      "productPdfPath": "/documents/products/rm/2210-onyx-activator/rm-2210-onyx-activator-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2210-onyx-activator/rm-2210-onyx-activator-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "A 2220 AGILIS ACTIVATOR",
+      "canonicalName": "A 2220 AGILIS ACTIVATOR",
+      "productCode": "A 2220",
+      "imagePath": "/images/brands/rm/products/agilis/rm-2220-agilis-activator.webp",
+      "productPdfPath": "/documents/products/rm/2220-agilis-activator/rm-2220-agilis-activator-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2220-agilis-activator/rm-2220-agilis-activator-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "A 2520 ONYX EASY BLENDER",
+      "canonicalName": "A 2520 ONYX EASY BLENDER",
+      "productCode": "A 2520",
+      "imagePath": "/images/brands/rm/products/onyx/rm-2520-onyx-easy-blender.webp",
+      "productPdfPath": "/documents/products/rm/2520-onyx-easy-blender/rm-2520-onyx-easy-blender-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2520-onyx-easy-blender/rm-2520-onyx-easy-blender-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "A 2530 AGILIS BLENDER",
+      "canonicalName": "A 2530 AGILIS BLENDER",
+      "productCode": "A 2530",
+      "imagePath": "/images/brands/rm/products/agilis/rm-2530-agilis-blender.webp",
+      "productPdfPath": "/documents/products/rm/2530-agilis-blender/rm-2530-agilis-blender-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2530-agilis-blender/rm-2530-agilis-blender-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "A 2560 AGILIS AMPLIFIER",
+      "canonicalName": "A 2560 AGILIS AMPLIFIER",
+      "productCode": "A 2560",
+      "imagePath": "/images/brands/rm/products/agilis/rm-2560-agilis-amplifier.webp",
+      "productPdfPath": "/documents/products/rm/2560-agilis-amplifier/rm-2560-agilis-amplifier-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2560-agilis-amplifier/rm-2560-agilis-amplifier-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "A 2P15 AIR Tune-R",
+      "canonicalName": "A 2P15 AIR Tune-R",
+      "productCode": "A 2P15",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-2p15-air-tune-r.webp",
+      "productPdfPath": "/documents/products/rm/2p15-air-tune-r/rm-2p15-air-tune-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2p15-air-tune-r/rm-2p15-air-tune-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "A 2P80 TEXTURE Tune-R",
+      "canonicalName": "A 2P80 TEXTURE Tune-R",
+      "productCode": "A 2P80",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-2p80-texture-tune-r.webp",
+      "productPdfPath": "/documents/products/rm/2p80-texture-tune-r/rm-2p80-texture-tune-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/2p80-texture-tune-r/rm-2p80-texture-tune-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "B 2P93 UV Bodyfill-R",
+      "canonicalName": "B 2P93 UV Bodyfill-R",
+      "productCode": "B 2P93",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-b-2p93-uv-bodyfill-r.webp",
+      "productPdfPath": "/documents/products/rm/b-2p93-uv-bodyfill-r/rm-b-2p93-uv-bodyfill-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/b-2p93-uv-bodyfill-r/rm-b-2p93-uv-bodyfill-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A40 AirTOP",
+      "canonicalName": "C 2A40 AirTOP",
+      "productCode": "C 2A40",
+      "imagePath": "/images/brands/rm/products/onyx/rm-c-2a40-airtop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A46 UltraTOP",
+      "canonicalName": "C 2A46 UltraTOP",
+      "productCode": "C 2A46",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a46-ultratop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A54 PerformTOP",
+      "canonicalName": "C 2A54 PerformTOP",
+      "productCode": "C 2A54",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a54-performtop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A57 MixTOP",
+      "canonicalName": "C 2A57 MixTOP",
+      "productCode": "C 2A57",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a57-mixtop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a57-mixtop/rm-c-2a57-mixtop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a57-mixtop/rm-c-2a57-mixtop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A63 GlossTOP",
+      "canonicalName": "C 2A63 GlossTOP",
+      "productCode": "C 2A63",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a63-glosstop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A64 GlossTOP+",
+      "canonicalName": "C 2A64 GlossTOP+",
+      "productCode": "C 2A64",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a64-glosstop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2A93 MatTOP+",
+      "canonicalName": "C 2A93 MatTOP+",
+      "productCode": "C 2A93",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a93-mattop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a93-mattop/rm-c-2a93-mattop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a93-mattop/rm-c-2a93-mattop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2E10 Clear coat, premixed",
+      "canonicalName": "C 2E10 Clear coat, premixed",
+      "productCode": "C 2E10",
+      "imagePath": "/images/brands/rm/products/element/rm-c-2e10-clear-coat-premixed.webp",
+      "productPdfPath": "/documents/products/rm/c-2e10-clear-coat-premixed/rm-c-2e10-clear-coat-premixed-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2e10-clear-coat-premixed/rm-c-2e10-clear-coat-premixed-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2E50 Clear coat",
+      "canonicalName": "C 2E50 Clear coat",
+      "productCode": "C 2E50",
+      "imagePath": "/images/brands/rm/products/element/rm-c-2e50-clear-coat.webp",
+      "productPdfPath": "/documents/products/rm/c-2e50-clear-coat/rm-c-2e50-clear-coat-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2e50-clear-coat/rm-c-2e50-clear-coat-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P30 UV Finish-R",
+      "canonicalName": "C 2P30 UV Finish-R",
+      "productCode": "C 2P30",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p30-uv-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p30-uv-finish-r/rm-c-2p30-uv-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p30-uv-finish-r/rm-c-2p30-uv-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P42 RACE Finish-R",
+      "canonicalName": "C 2P42 RACE Finish-R",
+      "productCode": "C 2P42",
+      "imagePath": "/images/brands/rm/products/agilis/rm-c-2p42-race-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p42-race-finish-r/rm-c-2p42-race-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p42-race-finish-r/rm-c-2p42-race-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P45 SPEED Finish-R",
+      "canonicalName": "C 2P45 SPEED Finish-R",
+      "productCode": "C 2P45",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p45-speed-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P55 MULTI Finish-R",
+      "canonicalName": "C 2P55 MULTI Finish-R",
+      "productCode": "C 2P55",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p55-multi-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P62 BRIGHT Finish-R",
+      "canonicalName": "C 2P62 BRIGHT Finish-R",
+      "productCode": "C 2P62",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p62-bright-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P85 POWER Finish-R",
+      "canonicalName": "C 2P85 POWER Finish-R",
+      "productCode": "C 2P85",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p85-power-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P91 MAT Finish-R",
+      "canonicalName": "C 2P91 MAT Finish-R",
+      "productCode": "C 2P91",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p91-mat-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p91-mat-finish-r/rm-c-2p91-mat-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p91-mat-finish-r/rm-c-2p91-mat-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 2P96 SATIN Finish-R",
+      "canonicalName": "C 2P96 SATIN Finish-R",
+      "productCode": "C 2P96",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p96-satin-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p96-satin-finish-r/rm-c-2p96-satin-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p96-satin-finish-r/rm-c-2p96-satin-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "C 5450 GHD CLEAR",
+      "canonicalName": "C 5450 GHD CLEAR",
+      "productCode": "C 5450",
+      "imagePath": "/images/brands/rm/products/graphite/rm-c-5450-ghd-clear.webp",
+      "productPdfPath": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "CLEAR Harden-R H 2P15",
+      "canonicalName": "H 2P15 CLEAR Harden-R",
+      "productCode": "H 2P15",
+      "imagePath": "/images/brands/rm/products/agilis/rm-h-2p15-clear-harden-r.webp",
+      "productPdfPath": "/documents/products/rm/h-2p15-clear-harden-r/rm-h-2p15-clear-harden-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/h-2p15-clear-harden-r/rm-h-2p15-clear-harden-r-technical-data-sheet.pdf",
+      "isDuplicate": true,
+      "importStatus": "duplicate",
+      "duplicateOf": "h-2p15-clear-harden-r"
+    },
+    {
+      "sourceFolder": "CRYSTAL BASE",
+      "canonicalName": "CRYSTAL BASE",
+      "productCode": null,
+      "imagePath": null,
+      "productPdfPath": null,
+      "technicalPdfPath": null,
+      "isDuplicate": false,
+      "importStatus": "missing-image",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "EASY C 2P15",
+      "canonicalName": "EASY C 2P15",
+      "productCode": "C 2P15",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p15-easy-finish-r.webp",
+      "productPdfPath": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "GHD TOPCOAT",
+      "canonicalName": "GHD TOPCOAT",
+      "productCode": "GHD TOPCOAT",
+      "imagePath": "/images/brands/rm/products/graphite/rm-ghd-topcoat.webp",
+      "productPdfPath": "/documents/products/rm/ghd-topcoat/rm-ghd-topcoat-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/ghd-topcoat/rm-ghd-topcoat-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "H 2A14 TopCURE",
+      "canonicalName": "H 2A14 TopCURE",
+      "productCode": "H 2A14",
+      "imagePath": "/images/brands/rm/products/onyx/rm-h-2a14-topcure.webp",
+      "productPdfPath": "/documents/products/rm/h-2a14-topcure/rm-h-2a14-topcure-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/h-2a14-topcure/rm-h-2a14-topcure-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "H 2E20 Hardener",
+      "canonicalName": "H 2E20 Hardener",
+      "productCode": "H 2E20",
+      "imagePath": "/images/brands/rm/products/element/rm-h-2e20-hardener.webp",
+      "productPdfPath": "/documents/products/rm/h-2e20-hardener/rm-h-2e20-hardener-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/h-2e20-hardener/rm-h-2e20-hardener-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "H 2P05 CLEAR Harden-R",
+      "canonicalName": "H 2P05 CLEAR Harden-R",
+      "productCode": "H 2P05",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-h-2p05-clear-harden-r.webp",
+      "productPdfPath": "/documents/products/rm/h-2p05-clear-harden-r/rm-h-2p05-clear-harden-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/h-2p05-clear-harden-r/rm-h-2p05-clear-harden-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "H 2P15 CLEAR Harden-R",
+      "canonicalName": "H 2P15 CLEAR Harden-R",
+      "productCode": "H 2P15",
+      "imagePath": "/images/brands/rm/products/agilis/rm-h-2p15-clear-harden-r.webp",
+      "productPdfPath": "/documents/products/rm/h-2p15-clear-harden-r/rm-h-2p15-clear-harden-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/h-2p15-clear-harden-r/rm-h-2p15-clear-harden-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "H 380 GHD HARDENER",
+      "canonicalName": "H 380 GHD HARDENER",
+      "productCode": "H 380",
+      "imagePath": "/images/brands/rm/products/graphite/rm-h-380-ghd-hardener.webp",
+      "productPdfPath": "/documents/products/rm/h-380-ghd-hardener/rm-h-380-ghd-hardener-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/h-380-ghd-hardener/rm-h-380-ghd-hardener-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "HB 032 HYDROMIX",
+      "canonicalName": "HB 032 HYDROMIX",
+      "productCode": "HB 032",
+      "imagePath": "/images/brands/rm/products/onyx/rm-hb-032-hydromix.webp",
+      "productPdfPath": "/documents/products/rm/hb-032-hydromix/rm-hb-032-hydromix-product-information.pdf",
+      "technicalPdfPath": null,
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "HB 036 HYDROMIX TROPICAL",
+      "canonicalName": "HB 036 HYDROMIX TROPICAL",
+      "productCode": "HB 036",
+      "imagePath": "/images/brands/rm/products/onyx/rm-hb-036-hydromix-tropical.webp",
+      "productPdfPath": "/documents/products/rm/hb-036-hydromix-tropical/rm-hb-036-hydromix-tropical-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/hb-036-hydromix-tropical/rm-hb-036-hydromix-tropical-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2A41 PerformFILLER White",
+      "canonicalName": "P 2A41 PerformFILLER White",
+      "productCode": "P 2A41",
+      "imagePath": "/images/brands/rm/products/onyx/rm-p-2a41-performfiller-white.webp",
+      "productPdfPath": "/documents/products/rm/p-2a41-performfiller-white/rm-p-2a41-performfiller-white-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2a41-performfiller-white/rm-p-2a41-performfiller-white-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2A61 MultiPROTECT White",
+      "canonicalName": "P 2A61 MultiPROTECT White",
+      "productCode": "P 2A61",
+      "imagePath": "/images/brands/rm/products/advance/rm-p-2a61-multiprotect-white.webp",
+      "productPdfPath": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2A63 MultiPROTECT Grey",
+      "canonicalName": "P 2A63 MultiPROTECT Grey",
+      "productCode": "P 2A63",
+      "imagePath": "/images/brands/rm/products/advance/rm-p-2a63-multiprotect-grey.webp",
+      "productPdfPath": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2A65 MultiPROTECT Black",
+      "canonicalName": "P 2A65 MultiPROTECT Black",
+      "productCode": "P 2A65",
+      "imagePath": "/images/brands/rm/products/advance/rm-p-2a65-multiprotect-black.webp",
+      "productPdfPath": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2E23 Primer filler, grey",
+      "canonicalName": "P 2E23 Primer filler, grey",
+      "productCode": "P 2E23",
+      "imagePath": "/images/brands/rm/products/element/rm-p-2e23-primer-filler-grey.webp",
+      "productPdfPath": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P23 AIR Purpos-R Grey",
+      "canonicalName": "P 2P23 AIR Purpos-R Grey",
+      "productCode": "P 2P23",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p23-air-purpos-r-grey.webp",
+      "productPdfPath": "/documents/products/rm/p-2p23-air-purpos-r-grey/rm-p-2p23-air-purpos-r-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p23-air-purpos-r-grey/rm-p-2p23-air-purpos-r-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P51 SANDING Fill-R+ White",
+      "canonicalName": "P 2P51 SANDING Fill-R+ White",
+      "productCode": "P 2P51",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p51-sanding-fill-r-white.webp",
+      "productPdfPath": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P55 SANDING Fill-R+ Black",
+      "canonicalName": "P 2P55 SANDING Fill-R+ Black",
+      "productCode": "P 2P55",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p55-sanding-fill-r-black.webp",
+      "productPdfPath": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P63 MULTI Purpos-R Grey",
+      "canonicalName": "P 2P63 MULTI Purpos-R Grey",
+      "productCode": "P 2P63",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p63-multi-purpos-r-grey.webp",
+      "productPdfPath": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P81 Race WET Fill-R White",
+      "canonicalName": "P 2P81 Race WET Fill-R White",
+      "productCode": "P 2P81",
+      "imagePath": "/images/brands/rm/products/agilis/rm-p-2p81-race-wet-fill-r-white.webp",
+      "productPdfPath": "/documents/products/rm/p-2p81-race-wet-fill-r-white/rm-p-2p81-race-wet-fill-r-white-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p81-race-wet-fill-r-white/rm-p-2p81-race-wet-fill-r-white-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P85 Race WET Fill-R Black",
+      "canonicalName": "P 2P85 Race WET Fill-R Black",
+      "productCode": "P 2P85",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p85-race-wet-fill-r-black.webp",
+      "productPdfPath": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P92 UV Fill-R Light Grey",
+      "canonicalName": "P 2P92 UV Fill-R Light Grey",
+      "productCode": "P 2P92",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p92-uv-fill-r-light-grey.webp",
+      "productPdfPath": "/documents/products/rm/p-2p92-uv-fill-r-light-grey/rm-p-2p92-uv-fill-r-light-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p92-uv-fill-r-light-grey/rm-p-2p92-uv-fill-r-light-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 2P94 UV Fill-R Dark Grey",
+      "canonicalName": "P 2P94 UV Fill-R Dark Grey",
+      "productCode": "P 2P94",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-p-2p94-uv-fill-r-dark-grey.webp",
+      "productPdfPath": "/documents/products/rm/p-2p94-uv-fill-r-dark-grey/rm-p-2p94-uv-fill-r-dark-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-2p94-uv-fill-r-dark-grey/rm-p-2p94-uv-fill-r-dark-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 5480 GHD UNIVERSAL EPOXY",
+      "canonicalName": "P 5480 GHD UNIVERSAL EPOXY",
+      "productCode": "P 5480",
+      "imagePath": "/images/brands/rm/products/graphite/rm-p-5480-ghd-universal-epoxy.webp",
+      "productPdfPath": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "P 5530 GHD UNI WASH",
+      "canonicalName": "P 5530 GHD UNI WASH",
+      "productCode": "P 5530",
+      "imagePath": "/images/brands/rm/products/graphite/rm-p-5530-ghd-uni-wash.webp",
+      "productPdfPath": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "PM 2E32 Filler, light grey",
+      "canonicalName": "PM 2E32 Filler, light grey",
+      "productCode": "PM 2E32",
+      "imagePath": "/images/brands/rm/products/element/rm-pm-2e32-filler-light-grey.webp",
+      "productPdfPath": "/documents/products/rm/pm-2e32-filler-light-grey/rm-pm-2e32-filler-light-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/pm-2e32-filler-light-grey/rm-pm-2e32-filler-light-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "PM 2E34 Filler, dark grey",
+      "canonicalName": "PM 2E34 Filler, dark grey",
+      "productCode": "PM 2E34",
+      "imagePath": "/images/brands/rm/products/element/rm-pm-2e34-filler-dark-grey.webp",
+      "productPdfPath": "/documents/products/rm/pm-2e34-filler-dark-grey/rm-pm-2e34-filler-dark-grey-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/pm-2e34-filler-dark-grey/rm-pm-2e34-filler-dark-grey-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "ProtectTOP C 2A84",
+      "canonicalName": "ProtectTOP C 2A84",
+      "productCode": "C 2A84",
+      "imagePath": "/images/brands/rm/products/advance/rm-c-2a84-protecttop.webp",
+      "productPdfPath": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "R 2A10 AirtopTHINN",
+      "canonicalName": "R 2A10 AirtopTHINN",
+      "productCode": "R 2A10",
+      "imagePath": "/images/brands/rm/products/onyx/rm-r-2a10-airtopthinn.webp",
+      "productPdfPath": "/documents/products/rm/r-2a10-airtopthinn/rm-r-2a10-airtopthinn-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/r-2a10-airtopthinn/rm-r-2a10-airtopthinn-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "R 2A14 MultiTHINN",
+      "canonicalName": "R 2A14 MultiTHINN",
+      "productCode": "R 2A14",
+      "imagePath": "/images/brands/rm/products/advance/rm-r-2a14-multithinn.webp",
+      "productPdfPath": "/documents/products/rm/r-2a14-multithinn/rm-r-2a14-multithinn-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/r-2a14-multithinn/rm-r-2a14-multithinn-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "R 2E10 Thinner, fast",
+      "canonicalName": "R 2E10 Thinner, fast",
+      "productCode": "R 2E10",
+      "imagePath": "/images/brands/rm/products/element/rm-r-2e10-thinner-fast.webp",
+      "productPdfPath": "/documents/products/rm/r-2e10-thinner-fast/rm-r-2e10-thinner-fast-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/r-2e10-thinner-fast/rm-r-2e10-thinner-fast-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "R 2P15 CLEAR Thinn-R",
+      "canonicalName": "R 2P15 CLEAR Thinn-R",
+      "productCode": "R 2P15",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-r-2p15-clear-thinn-r.webp",
+      "productPdfPath": "/documents/products/rm/r-2p15-clear-thinn-r/rm-r-2p15-clear-thinn-r-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/r-2p15-clear-thinn-r/rm-r-2p15-clear-thinn-r-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "R 2P20 UNDER Thinn-R Medium",
+      "canonicalName": "R 2P20 UNDER Thinn-R Medium",
+      "productCode": "R 2P20",
+      "imagePath": "/images/brands/rm/products/pioneer/rm-r-2p20-under-thinn-r-medium.webp",
+      "productPdfPath": "/documents/products/rm/r-2p20-under-thinn-r-medium/rm-r-2p20-under-thinn-r-medium-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/r-2p20-under-thinn-r-medium/rm-r-2p20-under-thinn-r-medium-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    },
+    {
+      "sourceFolder": "RA 050X AGILIS MIX",
+      "canonicalName": "RA 050X AGILIS MIX",
+      "productCode": "RA 050X",
+      "imagePath": "/images/brands/rm/products/agilis/rm-ra-050x-agilis-mix.webp",
+      "productPdfPath": "/documents/products/rm/ra-050x-agilis-mix/rm-ra-050x-agilis-mix-product-information.pdf",
+      "technicalPdfPath": "/documents/products/rm/ra-050x-agilis-mix/rm-ra-050x-agilis-mix-technical-data-sheet.pdf",
+      "isDuplicate": false,
+      "importStatus": "ready",
+      "duplicateOf": null
+    }
+  ],
+  "products": [
+    {
+      "slug": "2210-onyx-activator",
+      "canonicalName": "A 2210 ONYX ACTIVATOR",
+      "productCode": "A 2210",
+      "image": {
+        "alt": "A 2210 ONYX ACTIVATOR, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "A 2210.png",
+        "sourceSha256": "43af09663176f7cb271c9b3f7aada8842cb5188198fc92089132d40dacb81c3f",
+        "src": "/images/brands/rm/products/onyx/rm-2210-onyx-activator.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2210-onyx-activator/rm-2210-onyx-activator-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2210-onyx-activator/rm-2210-onyx-activator-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "onyx-hd",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Aditiv za posebne ONYX HD primene i solid-color bazne slojeve prema tehničkom listu.",
+        "context": "ONYX HD",
+        "purpose": "Aditiv za posebne ONYX HD primene i solid-color bazne slojeve prema tehničkom listu.",
+        "shortDescription": "Aditiv za posebne ONYX HD primene i solid-color bazne slojeve prema tehničkom listu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2210 ONYX ACTIVATOR",
+        "technicalPdfOriginalFilename": "A 2210-Waterborne basecoat activator.pdf",
+        "productPdfOriginalFilename": "rm-long-2210-onyx-activator-1662.pdf"
+      }
+    },
+    {
+      "slug": "2220-agilis-activator",
+      "canonicalName": "A 2220 AGILIS ACTIVATOR",
+      "productCode": "A 2220",
+      "image": {
+        "alt": "A 2220 AGILIS ACTIVATOR, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "A 2220.png",
+        "sourceSha256": "fc8a712e4443b625ec55d74a232c9143ca9442fed0de4c5ee69e4671d60eab4e",
+        "src": "/images/brands/rm/products/agilis/rm-2220-agilis-activator.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2220-agilis-activator/rm-2220-agilis-activator-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2220-agilis-activator/rm-2220-agilis-activator-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "agilis",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Aditiv za AGILIS enterijerske aplikacije i učvršćivač za AGILIS AMPLIFIER A 2560.",
+        "context": "AGILIS",
+        "purpose": "Aditiv za AGILIS enterijerske aplikacije i učvršćivač za AGILIS AMPLIFIER A 2560.",
+        "shortDescription": "Aditiv za AGILIS enterijerske aplikacije i učvršćivač za AGILIS AMPLIFIER A 2560.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2220 AGILIS ACTIVATOR",
+        "technicalPdfOriginalFilename": "A 2220-Activator for Interior.pdf",
+        "productPdfOriginalFilename": "rm-long-2220-agilis-activator-1641.pdf"
+      }
+    },
+    {
+      "slug": "2520-onyx-easy-blender",
+      "canonicalName": "A 2520 ONYX EASY BLENDER",
+      "productCode": "A 2520",
+      "image": {
+        "alt": "A 2520 ONYX EASY BLENDER, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R-M_ONYX_EASY_BLENDER_1L_A_2520_50448681.png",
+        "sourceSha256": "e90589aab6c1d9daf949b25b98c04a6ac596cd33a1a8d8b48c433889cbc02248",
+        "src": "/images/brands/rm/products/onyx/rm-2520-onyx-easy-blender.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2520-onyx-easy-blender/rm-2520-onyx-easy-blender-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2520-onyx-easy-blender/rm-2520-onyx-easy-blender-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "onyx-hd",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni predpremaz.",
+        "context": "ONYX HD",
+        "purpose": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni predpremaz.",
+        "shortDescription": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni predpremaz.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2520 ONYX EASY BLENDER",
+        "technicalPdfOriginalFilename": "A 2520-Additive for blending repairs.pdf",
+        "productPdfOriginalFilename": "rm-long-2520-onyx-easy-blender-1663.pdf"
+      }
+    },
+    {
+      "slug": "2530-agilis-blender",
+      "canonicalName": "A 2530 AGILIS BLENDER",
+      "productCode": "A 2530",
+      "image": {
+        "alt": "A 2530 AGILIS BLENDER, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "A 2530_0.png",
+        "sourceSha256": "1adb269580c99f0ff4e247af6330ad36e70935fc5a8df7ede9fe236bb7d6af75",
+        "src": "/images/brands/rm/products/agilis/rm-2530-agilis-blender.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2530-agilis-blender/rm-2530-agilis-blender-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2530-agilis-blender/rm-2530-agilis-blender-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "agilis",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Optimizuje orijentaciju efektnih čestica u zoni blend-in popravke; isporučuje se spreman za upotrebu.",
+        "context": "AGILIS",
+        "purpose": "Optimizuje orijentaciju efektnih čestica u zoni blend-in popravke; isporučuje se spreman za upotrebu.",
+        "shortDescription": "Optimizuje orijentaciju efektnih čestica u zoni blend-in popravke; isporučuje se spreman za upotrebu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2530 AGILIS BLENDER",
+        "technicalPdfOriginalFilename": "A 2530-Blender.pdf",
+        "productPdfOriginalFilename": "rm-long-2530-agilis-blender-1643.pdf"
+      }
+    },
+    {
+      "slug": "2560-agilis-amplifier",
+      "canonicalName": "A 2560 AGILIS AMPLIFIER",
+      "productCode": "A 2560",
+      "image": {
+        "alt": "A 2560 AGILIS AMPLIFIER, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "A 2560_0.png",
+        "sourceSha256": "981ef8f771966de10e204876c701a9537b5ab006e00fd53941020ef6eec15d60",
+        "src": "/images/brands/rm/products/agilis/rm-2560-agilis-amplifier.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2560-agilis-amplifier/rm-2560-agilis-amplifier-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2560-agilis-amplifier/rm-2560-agilis-amplifier-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "agilis",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Tonirajuća AGILIS komponenta za wet-on-wet rad na OEM e-coat panelima i unutrašnjim zonama.",
+        "context": "AGILIS",
+        "purpose": "Tonirajuća AGILIS komponenta za wet-on-wet rad na OEM e-coat panelima i unutrašnjim zonama.",
+        "shortDescription": "Tonirajuća AGILIS komponenta za wet-on-wet rad na OEM e-coat panelima i unutrašnjim zonama.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2560 AGILIS AMPLIFIER",
+        "technicalPdfOriginalFilename": "A 2560-Tintable Amplifier for AGILIS.pdf",
+        "productPdfOriginalFilename": "rm-long-2560-agilis-amplifier-1642.pdf"
+      }
+    },
+    {
+      "slug": "2p15-air-tune-r",
+      "canonicalName": "A 2P15 AIR Tune-R",
+      "productCode": "A 2P15",
+      "image": {
+        "alt": "A 2P15 AIR Tune-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "A 2P15_0.png",
+        "sourceSha256": "efdf59107240b0f863ea79d4febff008d6ddf166fe9b20b328073ca63b041e2e",
+        "src": "/images/brands/rm/products/pioneer/rm-2p15-air-tune-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2p15-air-tune-r/rm-2p15-air-tune-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2p15-air-tune-r/rm-2p15-air-tune-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "air-drying"
+      },
+      "content": {
+        "benefit": "Dodatak Pioneer lakovima za bržu površinu bez prašine i raniju spremnost za završnu obradu.",
+        "context": "Pioneer Series",
+        "purpose": "Dodatak Pioneer lakovima za bržu površinu bez prašine i raniju spremnost za završnu obradu.",
+        "shortDescription": "Dodatak Pioneer lakovima za bržu površinu bez prašine i raniju spremnost za završnu obradu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2P15 AIR Tune-R",
+        "technicalPdfOriginalFilename": "A 2P15-eSense air drying additive.pdf",
+        "productPdfOriginalFilename": "rm-long-2p15-air-tune-r-1500.pdf"
+      }
+    },
+    {
+      "slug": "2p80-texture-tune-r",
+      "canonicalName": "A 2P80 TEXTURE Tune-R",
+      "productCode": "A 2P80",
+      "image": {
+        "alt": "A 2P80 TEXTURE Tune-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "A 2P80.png",
+        "sourceSha256": "896838ab4cca7c25728382cd1a1619bd7509951920ee8ad1e478d5f6f36bc765",
+        "src": "/images/brands/rm/products/pioneer/rm-2p80-texture-tune-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/2p80-texture-tune-r/rm-2p80-texture-tune-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/2p80-texture-tune-r/rm-2p80-texture-tune-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "additive",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Dodatak za kontrolisano formiranje teksture u kompatibilnim Pioneer bezbojnim lakovima.",
+        "context": "Pioneer Series",
+        "purpose": "Dodatak za kontrolisano formiranje teksture u kompatibilnim Pioneer bezbojnim lakovima.",
+        "shortDescription": "Dodatak za kontrolisano formiranje teksture u kompatibilnim Pioneer bezbojnim lakovima.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "A 2P80 TEXTURE Tune-R",
+        "technicalPdfOriginalFilename": "A 2P80-eSense texture additive.pdf",
+        "productPdfOriginalFilename": "rm-long-2p80-texture-tune-r-1505.pdf"
+      }
+    },
+    {
+      "slug": "b-2p93-uv-bodyfill-r",
+      "canonicalName": "B 2P93 UV Bodyfill-R",
+      "productCode": "B 2P93",
+      "image": {
+        "alt": "B 2P93 UV Bodyfill-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "B 2P93.png",
+        "sourceSha256": "412e5da296eedc9563c805a2abbb9f59e4910bcaa62399a181bb34e21ccd96e3",
+        "src": "/images/brands/rm/products/pioneer/rm-b-2p93-uv-bodyfill-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/b-2p93-uv-bodyfill-r/rm-b-2p93-uv-bodyfill-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/b-2p93-uv-bodyfill-r/rm-b-2p93-uv-bodyfill-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "bodyfiller",
+        "finish": null,
+        "phaseSlug": "priprema",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": "uv"
+      },
+      "content": {
+        "benefit": "UV fini kit sa brzim procesom, dobrom obradivošću i antikorozivnom zaštitom prema tehničkom listu.",
+        "context": "Pioneer Series",
+        "purpose": "UV fini kit sa brzim procesom, dobrom obradivošću i antikorozivnom zaštitom prema tehničkom listu.",
+        "shortDescription": "UV fini kit sa brzim procesom, dobrom obradivošću i antikorozivnom zaštitom prema tehničkom listu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "B 2P93 UV Bodyfill-R",
+        "technicalPdfOriginalFilename": "B 2P93-UV body filler.pdf",
+        "productPdfOriginalFilename": "rm-long-b-2p93-uv-bodyfill-r-1523.pdf"
+      }
+    },
+    {
+      "slug": "c-2a40-airtop",
+      "canonicalName": "C 2A40 AirTOP",
+      "productCode": "C 2A40",
+      "image": {
+        "alt": "C 2A40 AirTOP, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A40.png",
+        "sourceSha256": "ee4d2f026d71ebf3e1a126b4b251baad8422a1dae6cb676abf32ceff193c3027",
+        "src": "/images/brands/rm/products/onyx/rm-c-2a40-airtop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": "onyx-hd",
+        "technology": "air-drying"
+      },
+      "content": {
+        "benefit": "Vazdušno sušeći Advance bezbojni lak za produktivan rad, od manjih popravki do bočne strane vozila.",
+        "context": "ONYX HD",
+        "purpose": "Vazdušno sušeći Advance bezbojni lak za produktivan rad, od manjih popravki do bočne strane vozila.",
+        "shortDescription": "Vazdušno sušeći Advance bezbojni lak za produktivan rad, od manjih popravki do bočne strane vozila.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A40 AirTOP",
+        "technicalPdfOriginalFilename": "C 2A40-Clear coat air drying.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a40-airtop-1524.pdf"
+      }
+    },
+    {
+      "slug": "c-2a46-ultratop",
+      "canonicalName": "C 2A46 UltraTOP",
+      "productCode": "C 2A46",
+      "image": {
+        "alt": "C 2A46 UltraTOP, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A46.png",
+        "sourceSha256": "516831d7540a6231c354773e3f8c2ed1bb3d855d11854eaeb9fb636d7bf844fe",
+        "src": "/images/brands/rm/products/advance/rm-c-2a46-ultratop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Produktivan Advance bezbojni lak sa kratkim vremenom sušenja i smanjenom energijom očvršćavanja.",
+        "context": "Advance Series",
+        "purpose": "Produktivan Advance bezbojni lak sa kratkim vremenom sušenja i smanjenom energijom očvršćavanja.",
+        "shortDescription": "Produktivan Advance bezbojni lak sa kratkim vremenom sušenja i smanjenom energijom očvršćavanja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A46 UltraTOP",
+        "technicalPdfOriginalFilename": "C 2A46-Clear coat performance.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a46-ultratop-2007.pdf"
+      }
+    },
+    {
+      "slug": "c-2a54-performtop",
+      "canonicalName": "C 2A54 PerformTOP",
+      "productCode": "C 2A54",
+      "image": {
+        "alt": "C 2A54 PerformTOP, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A54_0.png",
+        "sourceSha256": "f046ce474883658a21b5d45fc2254f7a7adfc77d42a7e02d34456dbcbe952329",
+        "src": "/images/brands/rm/products/advance/rm-c-2a54-performtop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Univerzalni Advance bezbojni lak za širok spektar primena i jednostavan rad.",
+        "context": "Advance Series",
+        "purpose": "Univerzalni Advance bezbojni lak za širok spektar primena i jednostavan rad.",
+        "shortDescription": "Univerzalni Advance bezbojni lak za širok spektar primena i jednostavan rad.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A54 PerformTOP",
+        "technicalPdfOriginalFilename": "C 2A54-Clear coat universal.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a54-performtop-1526.pdf"
+      }
+    },
+    {
+      "slug": "c-2a57-mixtop",
+      "canonicalName": "C 2A57 MixTOP",
+      "productCode": "C 2A57",
+      "image": {
+        "alt": "C 2A57 MixTOP, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A57.png",
+        "sourceSha256": "b0bd7c5f3716de662138d3edcc32d83bb88200073218a7f7a7307dd6548dd3e2",
+        "src": "/images/brands/rm/products/advance/rm-c-2a57-mixtop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a57-mixtop/rm-c-2a57-mixtop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a57-mixtop/rm-c-2a57-mixtop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Advance bezbojni lak pripremljen kao premixed rešenje prema zvaničnoj dokumentaciji.",
+        "context": "Advance Series",
+        "purpose": "Advance bezbojni lak pripremljen kao premixed rešenje prema zvaničnoj dokumentaciji.",
+        "shortDescription": "Advance bezbojni lak pripremljen kao premixed rešenje prema zvaničnoj dokumentaciji.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A57 MixTOP",
+        "technicalPdfOriginalFilename": "C 2A57-Clear coat premixed.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a57-mixtop-1527.pdf"
+      }
+    },
+    {
+      "slug": "c-2a63-glosstop",
+      "canonicalName": "C 2A63 GlossTOP",
+      "productCode": "C 2A63",
+      "image": {
+        "alt": "C 2A63 GlossTOP, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A63.png",
+        "sourceSha256": "c4cd30a959e0c58f5d04eb09a0b54c9981c174ac1b8a518305e755f854d52f83",
+        "src": "/images/brands/rm/products/advance/rm-c-2a63-glosstop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Advance bezbojni lak za završnicu visokog sjaja.",
+        "context": "Advance Series",
+        "purpose": "Advance bezbojni lak za završnicu visokog sjaja.",
+        "shortDescription": "Advance bezbojni lak za završnicu visokog sjaja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A63 GlossTOP",
+        "technicalPdfOriginalFilename": "C 2A63-Clear coat high gloss.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a63-glosstop-1528.pdf"
+      }
+    },
+    {
+      "slug": "c-2a64-glosstop",
+      "canonicalName": "C 2A64 GlossTOP+",
+      "productCode": "C 2A64",
+      "image": {
+        "alt": "C 2A64 GlossTOP+, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A64.png",
+        "sourceSha256": "55e2293b58bb99b4833d7ce907e67f20b2507c965b9088d25797ee25ac7e893d",
+        "src": "/images/brands/rm/products/advance/rm-c-2a64-glosstop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Advance bezbojni lak za superioran sjaj i završni rezultat visokog nivoa.",
+        "context": "Advance Series",
+        "purpose": "Advance bezbojni lak za superioran sjaj i završni rezultat visokog nivoa.",
+        "shortDescription": "Advance bezbojni lak za superioran sjaj i završni rezultat visokog nivoa.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A64 GlossTOP+",
+        "technicalPdfOriginalFilename": "C 2A64-Clear coat superior gloss.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a64-glosstop-1529.pdf"
+      }
+    },
+    {
+      "slug": "c-2a93-mattop",
+      "canonicalName": "C 2A93 MatTOP+",
+      "productCode": "C 2A93",
+      "image": {
+        "alt": "C 2A93 MatTOP+, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A93.png",
+        "sourceSha256": "8e4b0ddfe920f708179437e0033d157d0985fc17a0159ffcc7cea6ded0a0b429",
+        "src": "/images/brands/rm/products/advance/rm-c-2a93-mattop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a93-mattop/rm-c-2a93-mattop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a93-mattop/rm-c-2a93-mattop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "matte",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Mat Advance bezbojni lak namenjen popravci posebnih OEM mat završnica.",
+        "context": "Advance Series",
+        "purpose": "Mat Advance bezbojni lak namenjen popravci posebnih OEM mat završnica.",
+        "shortDescription": "Mat Advance bezbojni lak namenjen popravci posebnih OEM mat završnica.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2A93 MatTOP+",
+        "technicalPdfOriginalFilename": "C 2A93-Clear coat mat.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a93-mattop-1531.pdf"
+      }
+    },
+    {
+      "slug": "c-2e10-clear-coat-premixed",
+      "canonicalName": "C 2E10 Clear coat, premixed",
+      "productCode": "C 2E10",
+      "image": {
+        "alt": "C 2E10 Clear coat, premixed, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2E10.png",
+        "sourceSha256": "7e767d82ccb93060bb5e1ef4da929e6c6311c020fc77f32557c63037a5fe42cf",
+        "src": "/images/brands/rm/products/element/rm-c-2e10-clear-coat-premixed.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2e10-clear-coat-premixed/rm-c-2e10-clear-coat-premixed-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2e10-clear-coat-premixed/rm-c-2e10-clear-coat-premixed-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "element",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Element premixed bezbojni lak za primene od pojedinačnih panela do kompletnog prelakiranja.",
+        "context": "Element Series",
+        "purpose": "Element premixed bezbojni lak za primene od pojedinačnih panela do kompletnog prelakiranja.",
+        "shortDescription": "Element premixed bezbojni lak za primene od pojedinačnih panela do kompletnog prelakiranja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2E10 Clear coat, premixed",
+        "technicalPdfOriginalFilename": "C 2E10-Clear coat premixed.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2e10-clear-coat-premixed-1631.pdf"
+      }
+    },
+    {
+      "slug": "c-2e50-clear-coat",
+      "canonicalName": "C 2E50 Clear coat",
+      "productCode": "C 2E50",
+      "image": {
+        "alt": "C 2E50 Clear coat, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2E50.png",
+        "sourceSha256": "4ca576c2c61a2d454dc1d83099f42e715483892bed36363bd6609191b7b40e6b",
+        "src": "/images/brands/rm/products/element/rm-c-2e50-clear-coat.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2e50-clear-coat/rm-c-2e50-clear-coat-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2e50-clear-coat/rm-c-2e50-clear-coat-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "element",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Element bezbojni lak za primene od pojedinačnih panela do kompletnog prelakiranja.",
+        "context": "Element Series",
+        "purpose": "Element bezbojni lak za primene od pojedinačnih panela do kompletnog prelakiranja.",
+        "shortDescription": "Element bezbojni lak za primene od pojedinačnih panela do kompletnog prelakiranja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2E50 Clear coat",
+        "technicalPdfOriginalFilename": "C 2E50-Clear coat.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2e50-clear-coat-1632.pdf"
+      }
+    },
+    {
+      "slug": "c-2p30-uv-finish-r",
+      "canonicalName": "C 2P30 UV Finish-R",
+      "productCode": "C 2P30",
+      "image": {
+        "alt": "C 2P30 UV Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P30.png",
+        "sourceSha256": "65bdcb55b78071fac2ec03423d55a0e25a00a3624641e2648b050e9cff273955",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p30-uv-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p30-uv-finish-r/rm-c-2p30-uv-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p30-uv-finish-r/rm-c-2p30-uv-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "uv"
+      },
+      "content": {
+        "benefit": "UVA-otvrdnjavajući Pioneer eSense lak za BLEND'ART i veoma kratak proces.",
+        "context": "Pioneer Series",
+        "purpose": "UVA-otvrdnjavajući Pioneer eSense lak za BLEND'ART i veoma kratak proces.",
+        "shortDescription": "UVA-otvrdnjavajući Pioneer eSense lak za BLEND'ART i veoma kratak proces.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P30 UV Finish-R",
+        "technicalPdfOriginalFilename": "C 2P30-UV Finish-R.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p30-uv-finish-r-1534.pdf"
+      }
+    },
+    {
+      "slug": "c-2p42-race-finish-r",
+      "canonicalName": "C 2P42 RACE Finish-R",
+      "productCode": "C 2P42",
+      "image": {
+        "alt": "C 2P42 RACE Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P42.png",
+        "sourceSha256": "135d67053b82943147203bfdf4dd1a18009836aef31e53c57419d61d3ad4c726",
+        "src": "/images/brands/rm/products/agilis/rm-c-2p42-race-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p42-race-finish-r/rm-c-2p42-race-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p42-race-finish-r/rm-c-2p42-race-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": "agilis",
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Pioneer eSense bezbojni lak sa fleksibilnim procesom i optimizovanim vremenom rada.",
+        "context": "AGILIS",
+        "purpose": "Pioneer eSense bezbojni lak sa fleksibilnim procesom i optimizovanim vremenom rada.",
+        "shortDescription": "Pioneer eSense bezbojni lak sa fleksibilnim procesom i optimizovanim vremenom rada.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P42 RACE Finish-R",
+        "technicalPdfOriginalFilename": "C 2P42-eSense clear coat ultimate drying.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p42-race-finish-r-2006.pdf"
+      }
+    },
+    {
+      "slug": "c-2p45-speed-finish-r",
+      "canonicalName": "C 2P45 SPEED Finish-R",
+      "productCode": "C 2P45",
+      "image": {
+        "alt": "C 2P45 SPEED Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P45.png",
+        "sourceSha256": "b0cf6e911803151e5e2a0da575805b8007e7da7dcadc6f791c8653fe35fa9753",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p45-speed-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Brzosušeći Pioneer eSense bezbojni lak za više panela i manje popravke.",
+        "context": "Pioneer Series",
+        "purpose": "Brzosušeći Pioneer eSense bezbojni lak za više panela i manje popravke.",
+        "shortDescription": "Brzosušeći Pioneer eSense bezbojni lak za više panela i manje popravke.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P45 SPEED Finish-R",
+        "technicalPdfOriginalFilename": "C 2P45-eSense clear coat fast drying.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p45-speed-finish-r-1535.pdf"
+      }
+    },
+    {
+      "slug": "c-2p55-multi-finish-r",
+      "canonicalName": "C 2P55 MULTI Finish-R",
+      "productCode": "C 2P55",
+      "image": {
+        "alt": "C 2P55 MULTI Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P55.png",
+        "sourceSha256": "6100e3fca7ce7a77014cdf1a49b575b72be0319e24aed298801fd1b72d3bfd41",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p55-multi-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Višenamenski Pioneer eSense bezbojni lak sa jednostavnom primenom.",
+        "context": "Pioneer Series",
+        "purpose": "Višenamenski Pioneer eSense bezbojni lak sa jednostavnom primenom.",
+        "shortDescription": "Višenamenski Pioneer eSense bezbojni lak sa jednostavnom primenom.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P55 MULTI Finish-R",
+        "technicalPdfOriginalFilename": "C 2P55-eSense clear coat universal.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p55-multi-finish-r-1537.pdf"
+      }
+    },
+    {
+      "slug": "c-2p62-bright-finish-r",
+      "canonicalName": "C 2P62 BRIGHT Finish-R",
+      "productCode": "C 2P62",
+      "image": {
+        "alt": "C 2P62 BRIGHT Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P62.png",
+        "sourceSha256": "9621bc2fdab51b81dd96fb61bd90991abb438ecb89c1b4e7e6dbf7dcfd6ab7f6",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p62-bright-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Pioneer eSense bezbojni lak za završnicu naglašenog sjaja.",
+        "context": "Pioneer Series",
+        "purpose": "Pioneer eSense bezbojni lak za završnicu naglašenog sjaja.",
+        "shortDescription": "Pioneer eSense bezbojni lak za završnicu naglašenog sjaja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P62 BRIGHT Finish-R",
+        "technicalPdfOriginalFilename": "C 2P62-eSense clear coat superior gloss.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p62-bright-finish-r-1538.pdf"
+      }
+    },
+    {
+      "slug": "c-2p85-power-finish-r",
+      "canonicalName": "C 2P85 POWER Finish-R",
+      "productCode": "C 2P85",
+      "image": {
+        "alt": "C 2P85 POWER Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P85.png",
+        "sourceSha256": "900793b10d77eace93a1f5ef738d40813cb7e07c96817dd933e4c90aab7baf46",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p85-power-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Scratch-resistant Pioneer eSense bezbojni lak za visoku površinsku zaštitu.",
+        "context": "Pioneer Series",
+        "purpose": "Scratch-resistant Pioneer eSense bezbojni lak za visoku površinsku zaštitu.",
+        "shortDescription": "Scratch-resistant Pioneer eSense bezbojni lak za visoku površinsku zaštitu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P85 POWER Finish-R",
+        "technicalPdfOriginalFilename": "C 2P85-eSense clear coat scratch resistant.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p85-power-finish-r-1540.pdf"
+      }
+    },
+    {
+      "slug": "c-2p91-mat-finish-r",
+      "canonicalName": "C 2P91 MAT Finish-R",
+      "productCode": "C 2P91",
+      "image": {
+        "alt": "C 2P91 MAT Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P91.png",
+        "sourceSha256": "fc8ff6550fb8928f4825c35c573f610fe8954d5a3a986fc584ca5099fc7c8160",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p91-mat-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p91-mat-finish-r/rm-c-2p91-mat-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p91-mat-finish-r/rm-c-2p91-mat-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "matte",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Mat Pioneer eSense bezbojni lak za popravku OEM mat završnica.",
+        "context": "Pioneer Series",
+        "purpose": "Mat Pioneer eSense bezbojni lak za popravku OEM mat završnica.",
+        "shortDescription": "Mat Pioneer eSense bezbojni lak za popravku OEM mat završnica.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P91 MAT Finish-R",
+        "technicalPdfOriginalFilename": "C 2P91-eSense clear coat mat.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p91-mat-finish-r-1541.pdf"
+      }
+    },
+    {
+      "slug": "c-2p96-satin-finish-r",
+      "canonicalName": "C 2P96 SATIN Finish-R",
+      "productCode": "C 2P96",
+      "image": {
+        "alt": "C 2P96 SATIN Finish-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P96.png",
+        "sourceSha256": "206014bc88f94a45724f3925459074371a4c1cd2283fdce1c08c9489ef4b5be4",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p96-satin-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p96-satin-finish-r/rm-c-2p96-satin-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p96-satin-finish-r/rm-c-2p96-satin-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "satin",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Satin Pioneer eSense bezbojni lak za popravku OEM mat i svilenkasto-mat završnica.",
+        "context": "Pioneer Series",
+        "purpose": "Satin Pioneer eSense bezbojni lak za popravku OEM mat i svilenkasto-mat završnica.",
+        "shortDescription": "Satin Pioneer eSense bezbojni lak za popravku OEM mat i svilenkasto-mat završnica.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 2P96 SATIN Finish-R",
+        "technicalPdfOriginalFilename": "C 2P96-eSense clear coat silk mat.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p96-satin-finish-r-1542.pdf"
+      }
+    },
+    {
+      "slug": "c-5450-ghd-clear",
+      "canonicalName": "C 5450 GHD CLEAR",
+      "productCode": "C 5450",
+      "image": {
+        "alt": "C 5450 GHD CLEAR, dostavljeni prikaz proizvoda",
+        "assetSource": "user-prepared",
+        "originalFilename": "ChatGPT Image Jul 29, 2026, 09_50_21 AM.png",
+        "sourceSha256": "4f3fea6b5b48eeb87817114de3a3bbedeb0192e171694987a93df5637aa6ae65",
+        "src": "/images/brands/rm/products/graphite/rm-c-5450-ghd-clear.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "graphite-hd",
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "GRAPHITE HD bezbojni lak za velike površine, sa dobrim nivelisanjem, UV otpornošću i visokim sjajem.",
+        "context": "GRAPHITE HD",
+        "purpose": "GRAPHITE HD bezbojni lak za velike površine, sa dobrim nivelisanjem, UV otpornošću i visokim sjajem.",
+        "shortDescription": "GRAPHITE HD bezbojni lak za velike površine, sa dobrim nivelisanjem, UV otpornošću i visokim sjajem.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "C 5450 GHD CLEAR",
+        "technicalPdfOriginalFilename": "C 5450-GRAPHITE HD CLEAR.pdf",
+        "productPdfOriginalFilename": "rm-long-c-5450-ghd-clear-1675.pdf"
+      }
+    },
+    {
+      "slug": "c-2p15-easy-finish-r",
+      "canonicalName": "EASY C 2P15",
+      "productCode": "C 2P15",
+      "image": {
+        "alt": "EASY C 2P15, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2P15.png",
+        "sourceSha256": "2461445904ce8839dabf02013293c858c95c345b808ee17591021ecbc7f6a213",
+        "src": "/images/brands/rm/products/pioneer/rm-c-2p15-easy-finish-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Pioneer eSense bezbojni lak sa jednostavnom pripremom za širok spektar primena.",
+        "context": "Pioneer Series",
+        "purpose": "Pioneer eSense bezbojni lak sa jednostavnom pripremom za širok spektar primena.",
+        "shortDescription": "Pioneer eSense bezbojni lak sa jednostavnom pripremom za širok spektar primena.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "EASY C 2P15",
+        "technicalPdfOriginalFilename": "C 2P15-eSense clear coat premixed.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2p15-easy-finish-r-1533.pdf"
+      }
+    },
+    {
+      "slug": "ghd-topcoat",
+      "canonicalName": "GHD TOPCOAT",
+      "productCode": "GHD TOPCOAT",
+      "image": {
+        "alt": "GHD TOPCOAT, dostavljeni prikaz proizvoda",
+        "assetSource": "user-prepared",
+        "originalFilename": "ChatGPT Image Jul 29, 2026, 09_43_23 AM.png",
+        "sourceSha256": "33fc23a6b1424ffba8feb5d634b3dc08ba717b80706245c82b59ecc0edf0d660",
+        "src": "/images/brands/rm/products/graphite/rm-ghd-topcoat.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/ghd-topcoat/rm-ghd-topcoat-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/ghd-topcoat/rm-ghd-topcoat-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "basecoat",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "graphite-hd",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "GRAPHITE HD završni premaz za velike površine, sa dobrim nivelisanjem, pokrivnošću i brzim sušenjem.",
+        "context": "GRAPHITE HD",
+        "purpose": "GRAPHITE HD završni premaz za velike površine, sa dobrim nivelisanjem, pokrivnošću i brzim sušenjem.",
+        "shortDescription": "GRAPHITE HD završni premaz za velike površine, sa dobrim nivelisanjem, pokrivnošću i brzim sušenjem.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "needs_confirmation",
+        "notes": [
+          "Dostavljena i izričito odobrena slika u GHD TOPCOAT folderu na etiketi prikazuje GHD HARDENER H 750."
+        ]
+      },
+      "source": {
+        "sourceFolder": "GHD TOPCOAT",
+        "technicalPdfOriginalFilename": "GHD TOPCOAT-Glossy.pdf",
+        "productPdfOriginalFilename": "rm-long-ghd-topcoat-1679.pdf"
+      }
+    },
+    {
+      "slug": "h-2a14-topcure",
+      "canonicalName": "H 2A14 TopCURE",
+      "productCode": "H 2A14",
+      "image": {
+        "alt": "H 2A14 TopCURE, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "H 2A14.png",
+        "sourceSha256": "827497572f59e635966e4ff2f6cbca21a4b3a7c49f42509f5913d1afc401dcd5",
+        "src": "/images/brands/rm/products/onyx/rm-h-2a14-topcure.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/h-2a14-topcure/rm-h-2a14-topcure-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/h-2a14-topcure/rm-h-2a14-topcure-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "hardener",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": "onyx-hd",
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Učvršćivač iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "ONYX HD",
+        "purpose": "Učvršćivač iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Učvršćivač iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "H 2A14 TopCURE",
+        "technicalPdfOriginalFilename": "H 2A14-Topcoat hardener fast.pdf",
+        "productPdfOriginalFilename": "rm-long-h-2a14-topcure-1543.pdf"
+      }
+    },
+    {
+      "slug": "h-2e20-hardener",
+      "canonicalName": "H 2E20 Hardener",
+      "productCode": "H 2E20",
+      "image": {
+        "alt": "H 2E20 Hardener, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "H 2E20.png",
+        "sourceSha256": "5fdafa6a4c58a283501246582290b3997de6fda648e15c405189b23fe7ac545f",
+        "src": "/images/brands/rm/products/element/rm-h-2e20-hardener.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/h-2e20-hardener/rm-h-2e20-hardener-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/h-2e20-hardener/rm-h-2e20-hardener-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "hardener",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "element",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Učvršćivač iz Element Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "Element Series",
+        "purpose": "Učvršćivač iz Element Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Učvršćivač iz Element Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "H 2E20 Hardener",
+        "technicalPdfOriginalFilename": "H 2E20-Hardener.pdf",
+        "productPdfOriginalFilename": "rm-long-h-2e20-hardener-1633.pdf"
+      }
+    },
+    {
+      "slug": "h-2p05-clear-harden-r",
+      "canonicalName": "H 2P05 CLEAR Harden-R",
+      "productCode": "H 2P05",
+      "image": {
+        "alt": "H 2P05 CLEAR Harden-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "H 2P05.png",
+        "sourceSha256": "2170ee34b85ce0c449a067371c033365953dedfb31adb024d94b9652143ed981",
+        "src": "/images/brands/rm/products/pioneer/rm-h-2p05-clear-harden-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/h-2p05-clear-harden-r/rm-h-2p05-clear-harden-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/h-2p05-clear-harden-r/rm-h-2p05-clear-harden-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "hardener",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Učvršćivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "Pioneer Series",
+        "purpose": "Učvršćivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Učvršćivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "H 2P05 CLEAR Harden-R",
+        "technicalPdfOriginalFilename": "H 2P05-eSense topcoat hardener plus.pdf",
+        "productPdfOriginalFilename": "rm-long-h-2p05-clear-harden-r-1553.pdf"
+      }
+    },
+    {
+      "slug": "h-2p15-clear-harden-r",
+      "canonicalName": "H 2P15 CLEAR Harden-R",
+      "productCode": "H 2P15",
+      "image": {
+        "alt": "H 2P15 CLEAR Harden-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "H 2P15.png",
+        "sourceSha256": "7bfae12a311cf98a0c99a167e49196e1351539d0d2486aa0bf0eaeb5e6417e31",
+        "src": "/images/brands/rm/products/agilis/rm-h-2p15-clear-harden-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/h-2p15-clear-harden-r/rm-h-2p15-clear-harden-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/h-2p15-clear-harden-r/rm-h-2p15-clear-harden-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "hardener",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": "agilis",
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Učvršćivač iz AGILIS programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "AGILIS",
+        "purpose": "Učvršćivač iz AGILIS programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Učvršćivač iz AGILIS programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "H 2P15 CLEAR Harden-R",
+        "technicalPdfOriginalFilename": "H 2P15-eSense topcoat hardener fast.pdf",
+        "productPdfOriginalFilename": "rm-long-h-2p15-clear-harden-r-1554.pdf"
+      }
+    },
+    {
+      "slug": "h-380-ghd-hardener",
+      "canonicalName": "H 380 GHD HARDENER",
+      "productCode": "H 380",
+      "image": {
+        "alt": "H 380 GHD HARDENER, dostavljeni prikaz proizvoda",
+        "assetSource": "user-prepared",
+        "originalFilename": "ChatGPT Image Jul 29, 2026, 09_57_26 AM.png",
+        "sourceSha256": "73f17876da8b23db2f7192a2550aa4508a1d9c74a0b466a8be0e7240f3856c42",
+        "src": "/images/brands/rm/products/graphite/rm-h-380-ghd-hardener.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/h-380-ghd-hardener/rm-h-380-ghd-hardener-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/h-380-ghd-hardener/rm-h-380-ghd-hardener-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "hardener",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": null,
+        "system": "graphite-hd",
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Učvršćivač iz GRAPHITE HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "GRAPHITE HD",
+        "purpose": "Učvršćivač iz GRAPHITE HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Učvršćivač iz GRAPHITE HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "H 380 GHD HARDENER",
+        "technicalPdfOriginalFilename": "H 380-Filler hardener.pdf",
+        "productPdfOriginalFilename": "rm-long-h-380-ghd-hardener-1686.pdf"
+      }
+    },
+    {
+      "slug": "hb-032-hydromix",
+      "canonicalName": "HB 032 HYDROMIX",
+      "productCode": "HB 032",
+      "image": {
+        "alt": "HB 032 HYDROMIX, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R-M_ONYX_HD_HB_032_54956960.png",
+        "sourceSha256": "a7bb8f5da55216d27fc85cb0eb7cd719187fb7eeee0e4a912af0ea86d1f2fdf5",
+        "src": "/images/brands/rm/products/onyx/rm-hb-032-hydromix.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/hb-032-hydromix/rm-hb-032-hydromix-product-information.pdf",
+        "technicalDataSheet": null
+      },
+      "taxonomy": {
+        "category": "basecoat",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "onyx-hd",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Bazna boja iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "ONYX HD",
+        "purpose": "Bazna boja iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Bazna boja iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "needs_confirmation"
+      },
+      "contentReview": {
+        "status": "needs_confirmation",
+        "notes": [
+          "Folder sadrži product-information PDF, ali nema zaseban tehnički list."
+        ]
+      },
+      "source": {
+        "sourceFolder": "HB 032 HYDROMIX",
+        "technicalPdfOriginalFilename": null,
+        "productPdfOriginalFilename": "rm-long-hb-032-hydromix-1658.pdf"
+      }
+    },
+    {
+      "slug": "hb-036-hydromix-tropical",
+      "canonicalName": "HB 036 HYDROMIX TROPICAL",
+      "productCode": "HB 036",
+      "image": {
+        "alt": "HB 036 HYDROMIX TROPICAL, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R-M_5L_ONYX-HD---HYDROMIX-HB-036-TROPIC_50339688.png",
+        "sourceSha256": "8cffd1b0e8b9940ae2aa4e383737b295399efc7253db1caef0f83c7243cc3c4e",
+        "src": "/images/brands/rm/products/onyx/rm-hb-036-hydromix-tropical.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/hb-036-hydromix-tropical/rm-hb-036-hydromix-tropical-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/hb-036-hydromix-tropical/rm-hb-036-hydromix-tropical-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "basecoat",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "onyx-hd",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "Bazna boja iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "ONYX HD",
+        "purpose": "Bazna boja iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Bazna boja iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "HB 036 HYDROMIX TROPICAL",
+        "technicalPdfOriginalFilename": "HB 036 TROPIC-HYDROMIX tropical.pdf",
+        "productPdfOriginalFilename": "rm-long-hb-036-hydromix-tropical-1660.pdf"
+      }
+    },
+    {
+      "slug": "p-2a41-performfiller-white",
+      "canonicalName": "P 2A41 PerformFILLER White",
+      "productCode": "P 2A41",
+      "image": {
+        "alt": "P 2A41 PerformFILLER White, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2A41.png",
+        "sourceSha256": "c7a25a0db55dbaddc4e8f21c1a8eccab20e1702cd314b51a602a1ad0c8486e00",
+        "src": "/images/brands/rm/products/onyx/rm-p-2a41-performfiller-white.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2a41-performfiller-white/rm-p-2a41-performfiller-white-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2a41-performfiller-white/rm-p-2a41-performfiller-white-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "advance",
+        "system": "onyx-hd",
+        "technology": null
+      },
+      "content": {
+        "benefit": "Advance prajmer-punilac sa dobrim antikorozivnim, vremenskim i brusnim svojstvima.",
+        "context": "ONYX HD",
+        "purpose": "Advance prajmer-punilac sa dobrim antikorozivnim, vremenskim i brusnim svojstvima.",
+        "shortDescription": "Advance prajmer-punilac sa dobrim antikorozivnim, vremenskim i brusnim svojstvima.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2A41 PerformFILLER White",
+        "technicalPdfOriginalFilename": "P 2A41-Sanding primer filler white.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2a41-performfiller-white-1570.pdf"
+      }
+    },
+    {
+      "slug": "p-2a61-multiprotect-white",
+      "canonicalName": "P 2A61 MultiPROTECT White",
+      "productCode": "P 2A61",
+      "image": {
+        "alt": "P 2A61 MultiPROTECT White, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2A61.png",
+        "sourceSha256": "b740dd614f72d93507c56a7beddd935a6cc404d293602a08139dbdd2757249cb",
+        "src": "/images/brands/rm/products/advance/rm-p-2a61-multiprotect-white.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "advance",
+        "system": null,
+        "technology": "dtm"
+      },
+      "content": {
+        "benefit": "Beli Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "context": "Advance Series",
+        "purpose": "Beli Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "shortDescription": "Beli Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2A61 MultiPROTECT White",
+        "technicalPdfOriginalFilename": "P 2A61-DTM primer filler white.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2a61-multiprotect-white-1572.pdf"
+      }
+    },
+    {
+      "slug": "p-2a63-multiprotect-grey",
+      "canonicalName": "P 2A63 MultiPROTECT Grey",
+      "productCode": "P 2A63",
+      "image": {
+        "alt": "P 2A63 MultiPROTECT Grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2A63.png",
+        "sourceSha256": "69a86d7e27fcbd4312b8317380b9bc99660aad97655b4cd909bb3416b3b03bfe",
+        "src": "/images/brands/rm/products/advance/rm-p-2a63-multiprotect-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "advance",
+        "system": null,
+        "technology": "dtm"
+      },
+      "content": {
+        "benefit": "Sivi Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "context": "Advance Series",
+        "purpose": "Sivi Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "shortDescription": "Sivi Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2A63 MultiPROTECT Grey",
+        "technicalPdfOriginalFilename": "P 2A63-DTM primer filler grey.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2a63-multiprotect-grey-1573.pdf"
+      }
+    },
+    {
+      "slug": "p-2a65-multiprotect-black",
+      "canonicalName": "P 2A65 MultiPROTECT Black",
+      "productCode": "P 2A65",
+      "image": {
+        "alt": "P 2A65 MultiPROTECT Black, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2A65.png",
+        "sourceSha256": "00367cc9a2ac93bbd20afd4e7f1ffe8b4eca5f0c62cefb9da871a97aa9f3e41b",
+        "src": "/images/brands/rm/products/advance/rm-p-2a65-multiprotect-black.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "advance",
+        "system": null,
+        "technology": "dtm"
+      },
+      "content": {
+        "benefit": "Crni Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "context": "Advance Series",
+        "purpose": "Crni Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "shortDescription": "Crni Advance DTM prajmer-punilac za direktnu primenu na metalnu podlogu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2A65 MultiPROTECT Black",
+        "technicalPdfOriginalFilename": "P 2A65-DTM primer filler black.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2a65-multiprotect-black-1574.pdf"
+      }
+    },
+    {
+      "slug": "p-2e23-primer-filler-grey",
+      "canonicalName": "P 2E23 Primer filler, grey",
+      "productCode": "P 2E23",
+      "image": {
+        "alt": "P 2E23 Primer filler, grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2E23.png",
+        "sourceSha256": "18c3300a1a360f91bb05d2bf85e0fc397b10752e0b1bc47a91873712ae0d9882",
+        "src": "/images/brands/rm/products/element/rm-p-2e23-primer-filler-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "element",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Dvokomponentni Element poliuretanski punilac sa dobrim punjenjem i obradom brušenjem.",
+        "context": "Element Series",
+        "purpose": "Dvokomponentni Element poliuretanski punilac sa dobrim punjenjem i obradom brušenjem.",
+        "shortDescription": "Dvokomponentni Element poliuretanski punilac sa dobrim punjenjem i obradom brušenjem.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2E23 Primer filler, grey",
+        "technicalPdfOriginalFilename": "P 2E23-Primer filler grey.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2e23-primer-filler-grey-1635.pdf"
+      }
+    },
+    {
+      "slug": "p-2p23-air-purpos-r-grey",
+      "canonicalName": "P 2P23 AIR Purpos-R Grey",
+      "productCode": "P 2P23",
+      "image": {
+        "alt": "P 2P23 AIR Purpos-R Grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2P23.png",
+        "sourceSha256": "6ccd8195662f05281fd6d42444902fa69de5df6aa8a3a4019934ee32efd66bdd",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p23-air-purpos-r-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p23-air-purpos-r-grey/rm-p-2p23-air-purpos-r-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p23-air-purpos-r-grey/rm-p-2p23-air-purpos-r-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": "air-drying"
+      },
+      "content": {
+        "benefit": "Vazdušno sušeći Pioneer eSense DTM prajmer-punilac za zaštitu od korozije i dobru obradivost.",
+        "context": "Pioneer Series",
+        "purpose": "Vazdušno sušeći Pioneer eSense DTM prajmer-punilac za zaštitu od korozije i dobru obradivost.",
+        "shortDescription": "Vazdušno sušeći Pioneer eSense DTM prajmer-punilac za zaštitu od korozije i dobru obradivost.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P23 AIR Purpos-R Grey",
+        "technicalPdfOriginalFilename": "P 2P23-eSense air-drying DTM grey.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p23-air-purpos-r-grey-1580.pdf"
+      }
+    },
+    {
+      "slug": "p-2p51-sanding-fill-r-white",
+      "canonicalName": "P 2P51 SANDING Fill-R+ White",
+      "productCode": "P 2P51",
+      "image": {
+        "alt": "P 2P51 SANDING Fill-R+ White, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2P51.png",
+        "sourceSha256": "5d4d26ec5bf72be237d2ea226d6f3ff57d0895235113108ed391f4ec44b39d84",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p51-sanding-fill-r-white.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Beli Pioneer eSense prajmer-punilac za produktivno brušenje, stabilnu završnicu i zaštitu podloge.",
+        "context": "Pioneer Series",
+        "purpose": "Beli Pioneer eSense prajmer-punilac za produktivno brušenje, stabilnu završnicu i zaštitu podloge.",
+        "shortDescription": "Beli Pioneer eSense prajmer-punilac za produktivno brušenje, stabilnu završnicu i zaštitu podloge.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P51 SANDING Fill-R+ White",
+        "technicalPdfOriginalFilename": "P 2P51-eSense primer filler white.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p51-sanding-fill-r-white-1584.pdf"
+      }
+    },
+    {
+      "slug": "p-2p55-sanding-fill-r-black",
+      "canonicalName": "P 2P55 SANDING Fill-R+ Black",
+      "productCode": "P 2P55",
+      "image": {
+        "alt": "P 2P55 SANDING Fill-R+ Black, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2P55.png",
+        "sourceSha256": "db739c785a86580358318802dba631164d8bb884bd531c475f66455053779d12",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p55-sanding-fill-r-black.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Crni Pioneer eSense prajmer-punilac za produktivno brušenje, stabilnu završnicu i zaštitu podloge.",
+        "context": "Pioneer Series",
+        "purpose": "Crni Pioneer eSense prajmer-punilac za produktivno brušenje, stabilnu završnicu i zaštitu podloge.",
+        "shortDescription": "Crni Pioneer eSense prajmer-punilac za produktivno brušenje, stabilnu završnicu i zaštitu podloge.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P55 SANDING Fill-R+ Black",
+        "technicalPdfOriginalFilename": "P 2P55-eSense primer filler black.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p55-sanding-fill-r-black-1586.pdf"
+      }
+    },
+    {
+      "slug": "p-2p63-multi-purpos-r-grey",
+      "canonicalName": "P 2P63 MULTI Purpos-R Grey",
+      "productCode": "P 2P63",
+      "image": {
+        "alt": "P 2P63 MULTI Purpos-R Grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2P63.png",
+        "sourceSha256": "7a4209e181b696e80e7879b8e6181f057a1e97252f6e9153032977ed75c9110b",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p63-multi-purpos-r-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": "dtm"
+      },
+      "content": {
+        "benefit": "Sivi Pioneer eSense DTM prajmer-punilac za direktnu primenu na metal i antikorozivnu zaštitu.",
+        "context": "Pioneer Series",
+        "purpose": "Sivi Pioneer eSense DTM prajmer-punilac za direktnu primenu na metal i antikorozivnu zaštitu.",
+        "shortDescription": "Sivi Pioneer eSense DTM prajmer-punilac za direktnu primenu na metal i antikorozivnu zaštitu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P63 MULTI Purpos-R Grey",
+        "technicalPdfOriginalFilename": "P 2P63-eSense DTM grey.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p63-multi-purpos-r-grey-1588.pdf"
+      }
+    },
+    {
+      "slug": "p-2p81-race-wet-fill-r-white",
+      "canonicalName": "P 2P81 Race WET Fill-R White",
+      "productCode": "P 2P81",
+      "image": {
+        "alt": "P 2P81 Race WET Fill-R White, dostavljeni prikaz proizvoda",
+        "assetSource": "user-prepared",
+        "originalFilename": "ChatGPT Image Jul 28, 2026, 10_28_30 PM.png",
+        "sourceSha256": "96aa6cfef0ef380cf3fe369edbc3f7475bdae9d7fc29f4629b1a6bcee855a176",
+        "src": "/images/brands/rm/products/agilis/rm-p-2p81-race-wet-fill-r-white.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p81-race-wet-fill-r-white/rm-p-2p81-race-wet-fill-r-white-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p81-race-wet-fill-r-white/rm-p-2p81-race-wet-fill-r-white-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": "agilis",
+        "technology": "wet-on-wet"
+      },
+      "content": {
+        "benefit": "Beli Pioneer eSense wet-on-wet punilac za brz rad na novim e-coat panelima bez brušenja.",
+        "context": "AGILIS",
+        "purpose": "Beli Pioneer eSense wet-on-wet punilac za brz rad na novim e-coat panelima bez brušenja.",
+        "shortDescription": "Beli Pioneer eSense wet-on-wet punilac za brz rad na novim e-coat panelima bez brušenja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "needs_confirmation",
+        "notes": [
+          "Dostavljena i izričito odobrena slika u P 2P81 folderu na etiketi prikazuje kod P 2P91."
+        ]
+      },
+      "source": {
+        "sourceFolder": "P 2P81 Race WET Fill-R White",
+        "technicalPdfOriginalFilename": "P 2P81-eSense wet-on-wet filler white.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p81-race-wet-fill-r-white-2053.pdf"
+      }
+    },
+    {
+      "slug": "p-2p85-race-wet-fill-r-black",
+      "canonicalName": "P 2P85 Race WET Fill-R Black",
+      "productCode": "P 2P85",
+      "image": {
+        "alt": "P 2P85 Race WET Fill-R Black, dostavljeni prikaz proizvoda",
+        "assetSource": "user-prepared",
+        "originalFilename": "ChatGPT Image Jul 28, 2026, 10_37_36 PM.png",
+        "sourceSha256": "58a9228aa5e5165ce39ad2995ee88421a79971193c2c4057daefadbccec1614f",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p85-race-wet-fill-r-black.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": "wet-on-wet"
+      },
+      "content": {
+        "benefit": "Crni Pioneer eSense wet-on-wet punilac za brz rad na novim e-coat panelima bez brušenja.",
+        "context": "Pioneer Series",
+        "purpose": "Crni Pioneer eSense wet-on-wet punilac za brz rad na novim e-coat panelima bez brušenja.",
+        "shortDescription": "Crni Pioneer eSense wet-on-wet punilac za brz rad na novim e-coat panelima bez brušenja.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P85 Race WET Fill-R Black",
+        "technicalPdfOriginalFilename": "P 2P85-eSense wet-on-wet filler black.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p85-race-wet-fill-r-black-2054.pdf"
+      }
+    },
+    {
+      "slug": "p-2p92-uv-fill-r-light-grey",
+      "canonicalName": "P 2P92 UV Fill-R Light Grey",
+      "productCode": "P 2P92",
+      "image": {
+        "alt": "P 2P92 UV Fill-R Light Grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2P92.png",
+        "sourceSha256": "0bd4ba97a8634bd03c2b5eca6620c14f46082a81de8757d619bed3c030196728",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p92-uv-fill-r-light-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p92-uv-fill-r-light-grey/rm-p-2p92-uv-fill-r-light-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p92-uv-fill-r-light-grey/rm-p-2p92-uv-fill-r-light-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": "uv"
+      },
+      "content": {
+        "benefit": "Svetlosivi Pioneer eSense UV prajmer-punilac za antikorozivnu zaštitu i stabilnu završnicu.",
+        "context": "Pioneer Series",
+        "purpose": "Svetlosivi Pioneer eSense UV prajmer-punilac za antikorozivnu zaštitu i stabilnu završnicu.",
+        "shortDescription": "Svetlosivi Pioneer eSense UV prajmer-punilac za antikorozivnu zaštitu i stabilnu završnicu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P92 UV Fill-R Light Grey",
+        "technicalPdfOriginalFilename": "P 2P92-eSense UV primer filler light grey.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p92-uv-fill-r-light-grey-1592.pdf"
+      }
+    },
+    {
+      "slug": "p-2p94-uv-fill-r-dark-grey",
+      "canonicalName": "P 2P94 UV Fill-R Dark Grey",
+      "productCode": "P 2P94",
+      "image": {
+        "alt": "P 2P94 UV Fill-R Dark Grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 2P94.png",
+        "sourceSha256": "9481a411f3637d54ed5c4900fa89a7ea5cba9d57e0cce0a64c4c26eae07ce282",
+        "src": "/images/brands/rm/products/pioneer/rm-p-2p94-uv-fill-r-dark-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-2p94-uv-fill-r-dark-grey/rm-p-2p94-uv-fill-r-dark-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-2p94-uv-fill-r-dark-grey/rm-p-2p94-uv-fill-r-dark-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "pioneer",
+        "system": null,
+        "technology": "uv"
+      },
+      "content": {
+        "benefit": "Tamnosivi Pioneer eSense UV prajmer-punilac za antikorozivnu zaštitu i stabilnu završnicu.",
+        "context": "Pioneer Series",
+        "purpose": "Tamnosivi Pioneer eSense UV prajmer-punilac za antikorozivnu zaštitu i stabilnu završnicu.",
+        "shortDescription": "Tamnosivi Pioneer eSense UV prajmer-punilac za antikorozivnu zaštitu i stabilnu završnicu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 2P94 UV Fill-R Dark Grey",
+        "technicalPdfOriginalFilename": "P 2P94-eSense UV primer fillerdark grey.pdf",
+        "productPdfOriginalFilename": "rm-long-p-2p94-uv-fill-r-dark-grey-1594.pdf"
+      }
+    },
+    {
+      "slug": "p-5480-ghd-universal-epoxy",
+      "canonicalName": "P 5480 GHD UNIVERSAL EPOXY",
+      "productCode": "P 5480",
+      "image": {
+        "alt": "P 5480 GHD UNIVERSAL EPOXY, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 5480.png",
+        "sourceSha256": "c64d1350546e5ec3d391a95570f1077ca9af900a09fc0ed9ffd9b9d062983bd1",
+        "src": "/images/brands/rm/products/graphite/rm-p-5480-ghd-universal-epoxy.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": null,
+        "system": "graphite-hd",
+        "technology": "dtm"
+      },
+      "content": {
+        "benefit": "Univerzalni GRAPHITE HD epoksidni prajmer za različite metalne podloge i antikorozivnu zaštitu.",
+        "context": "GRAPHITE HD",
+        "purpose": "Univerzalni GRAPHITE HD epoksidni prajmer za različite metalne podloge i antikorozivnu zaštitu.",
+        "shortDescription": "Univerzalni GRAPHITE HD epoksidni prajmer za različite metalne podloge i antikorozivnu zaštitu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 5480 GHD UNIVERSAL EPOXY",
+        "technicalPdfOriginalFilename": "P 5480-GHD UNIVERSAL EPOXY.pdf",
+        "productPdfOriginalFilename": "rm-long-p-5480-ghd-universal-epoxy-1671.pdf"
+      }
+    },
+    {
+      "slug": "p-5530-ghd-uni-wash",
+      "canonicalName": "P 5530 GHD UNI WASH",
+      "productCode": "P 5530",
+      "image": {
+        "alt": "P 5530 GHD UNI WASH, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "P 5530.png",
+        "sourceSha256": "d592a8193e7a747154369dd1387cd23e0ac815ce88f9b2d14f787b87e70dedc9",
+        "src": "/images/brands/rm/products/graphite/rm-p-5530-ghd-uni-wash.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": null,
+        "system": "graphite-hd",
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "GRAPHITE HD wash prajmer za velike površine, brzo sušenje i antikorozivnu zaštitu.",
+        "context": "GRAPHITE HD",
+        "purpose": "GRAPHITE HD wash prajmer za velike površine, brzo sušenje i antikorozivnu zaštitu.",
+        "shortDescription": "GRAPHITE HD wash prajmer za velike površine, brzo sušenje i antikorozivnu zaštitu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "P 5530 GHD UNI WASH",
+        "technicalPdfOriginalFilename": "P 5530-GHD UNI WASH beige.pdf",
+        "productPdfOriginalFilename": "rm-long-p-5530-ghd-uni-wash-1697.pdf"
+      }
+    },
+    {
+      "slug": "pm-2e32-filler-light-grey",
+      "canonicalName": "PM 2E32 Filler, light grey",
+      "productCode": "PM 2E32",
+      "image": {
+        "alt": "PM 2E32 Filler, light grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "PM 2E32.png",
+        "sourceSha256": "8a391da6e1ea774dfcc70dfa1c05b78501399c54a8497cb4a889e36a6bcb4f13",
+        "src": "/images/brands/rm/products/element/rm-pm-2e32-filler-light-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/pm-2e32-filler-light-grey/rm-pm-2e32-filler-light-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/pm-2e32-filler-light-grey/rm-pm-2e32-filler-light-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "element",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Svetlosivi 1K Element punilac u aerosolu za reparaturnu primenu.",
+        "context": "Element Series",
+        "purpose": "Svetlosivi 1K Element punilac u aerosolu za reparaturnu primenu.",
+        "shortDescription": "Svetlosivi 1K Element punilac u aerosolu za reparaturnu primenu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "PM 2E32 Filler, light grey",
+        "technicalPdfOriginalFilename": "PM 2E32-Filler light grey.pdf",
+        "productPdfOriginalFilename": "rm-long-pm-2e32-filler-light-grey-1636.pdf"
+      }
+    },
+    {
+      "slug": "pm-2e34-filler-dark-grey",
+      "canonicalName": "PM 2E34 Filler, dark grey",
+      "productCode": "PM 2E34",
+      "image": {
+        "alt": "PM 2E34 Filler, dark grey, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "PM 2E34.png",
+        "sourceSha256": "d2cb97b7c3ca313af8e25e2bc778c5f1f3607e1ee144e364157572795327258c",
+        "src": "/images/brands/rm/products/element/rm-pm-2e34-filler-dark-grey.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/pm-2e34-filler-dark-grey/rm-pm-2e34-filler-dark-grey-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/pm-2e34-filler-dark-grey/rm-pm-2e34-filler-dark-grey-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "primer-filler",
+        "finish": null,
+        "phaseSlug": "podloga",
+        "programSlug": "priprema-povrsine",
+        "series": "element",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Tamnosivi 1K Element punilac u aerosolu za reparaturnu primenu.",
+        "context": "Element Series",
+        "purpose": "Tamnosivi 1K Element punilac u aerosolu za reparaturnu primenu.",
+        "shortDescription": "Tamnosivi 1K Element punilac u aerosolu za reparaturnu primenu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "PM 2E34 Filler, dark grey",
+        "technicalPdfOriginalFilename": "PM 2E34-Filler dark grey.pdf",
+        "productPdfOriginalFilename": "rm-long-pm-2e34-filler-dark-grey-1637.pdf"
+      }
+    },
+    {
+      "slug": "c-2a84-protecttop",
+      "canonicalName": "ProtectTOP C 2A84",
+      "productCode": "C 2A84",
+      "image": {
+        "alt": "ProtectTOP C 2A84, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "C 2A84.png",
+        "sourceSha256": "5a232e273bc0a9bb690bc1b1e133798ea3d06eff14ac49593b6c6e869d9794b2",
+        "src": "/images/brands/rm/products/advance/rm-c-2a84-protecttop.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "clearcoat",
+        "finish": "gloss",
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": "2k"
+      },
+      "content": {
+        "benefit": "Scratch-resistant Advance bezbojni lak za povećanu površinsku zaštitu.",
+        "context": "Advance Series",
+        "purpose": "Scratch-resistant Advance bezbojni lak za povećanu površinsku zaštitu.",
+        "shortDescription": "Scratch-resistant Advance bezbojni lak za povećanu površinsku zaštitu.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "ProtectTOP C 2A84",
+        "technicalPdfOriginalFilename": "C 2A84-Clear coat scratch resistant.pdf",
+        "productPdfOriginalFilename": "rm-long-c-2a84-protecttop-1530.pdf"
+      }
+    },
+    {
+      "slug": "r-2a10-airtopthinn",
+      "canonicalName": "R 2A10 AirtopTHINN",
+      "productCode": "R 2A10",
+      "image": {
+        "alt": "R 2A10 AirtopTHINN, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R 2A10.png",
+        "sourceSha256": "588e80423e92a470f9db4dad865c18b167102d4e0b8664ab39e38e2d94ccf066",
+        "src": "/images/brands/rm/products/onyx/rm-r-2a10-airtopthinn.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/r-2a10-airtopthinn/rm-r-2a10-airtopthinn-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/r-2a10-airtopthinn/rm-r-2a10-airtopthinn-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "thinner",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": "onyx-hd",
+        "technology": "air-drying"
+      },
+      "content": {
+        "benefit": "Razređivač iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "ONYX HD",
+        "purpose": "Razređivač iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Razređivač iz ONYX HD programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "R 2A10 AirtopTHINN",
+        "technicalPdfOriginalFilename": "R 2A10-Advance Series Thinner fast.pdf",
+        "productPdfOriginalFilename": "rm-long-r-2a10-airtopthinn-1612.pdf"
+      }
+    },
+    {
+      "slug": "r-2a14-multithinn",
+      "canonicalName": "R 2A14 MultiTHINN",
+      "productCode": "R 2A14",
+      "image": {
+        "alt": "R 2A14 MultiTHINN, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R 2A14.png",
+        "sourceSha256": "e56cd3130fe8dae66984f551fcb365dd4893a5e7ec4387ae9d4ddb86f49c99e0",
+        "src": "/images/brands/rm/products/advance/rm-r-2a14-multithinn.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/r-2a14-multithinn/rm-r-2a14-multithinn-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/r-2a14-multithinn/rm-r-2a14-multithinn-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "thinner",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "advance",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Razređivač iz Advance Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "Advance Series",
+        "purpose": "Razređivač iz Advance Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Razređivač iz Advance Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "R 2A14 MultiTHINN",
+        "technicalPdfOriginalFilename": "R 2A14-Thinner fast.pdf",
+        "productPdfOriginalFilename": "rm-long-r-2a14-multithinn-1613.pdf"
+      }
+    },
+    {
+      "slug": "r-2e10-thinner-fast",
+      "canonicalName": "R 2E10 Thinner, fast",
+      "productCode": "R 2E10",
+      "image": {
+        "alt": "R 2E10 Thinner, fast, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R 2E10.png",
+        "sourceSha256": "c57f3ba238697df07d800ee7823720f55102affafe0fbc5f955ed3bf21b0e748",
+        "src": "/images/brands/rm/products/element/rm-r-2e10-thinner-fast.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/r-2e10-thinner-fast/rm-r-2e10-thinner-fast-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/r-2e10-thinner-fast/rm-r-2e10-thinner-fast-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "thinner",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "element",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Razređivač iz Element Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "Element Series",
+        "purpose": "Razređivač iz Element Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Razređivač iz Element Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "R 2E10 Thinner, fast",
+        "technicalPdfOriginalFilename": "R 2E10-Thinner fast.pdf",
+        "productPdfOriginalFilename": "rm-long-r-2e10-thinner-fast-1638.pdf"
+      }
+    },
+    {
+      "slug": "r-2p15-clear-thinn-r",
+      "canonicalName": "R 2P15 CLEAR Thinn-R",
+      "productCode": "R 2P15",
+      "image": {
+        "alt": "R 2P15 CLEAR Thinn-R, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R 2P15.png",
+        "sourceSha256": "77ee2951cc5b5a9f3ff679aa5edda58b65962f19bdc72f3e3bf530bc6a1dd45a",
+        "src": "/images/brands/rm/products/pioneer/rm-r-2p15-clear-thinn-r.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/r-2p15-clear-thinn-r/rm-r-2p15-clear-thinn-r-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/r-2p15-clear-thinn-r/rm-r-2p15-clear-thinn-r-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "thinner",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Razređivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "Pioneer Series",
+        "purpose": "Razređivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Razređivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "R 2P15 CLEAR Thinn-R",
+        "technicalPdfOriginalFilename": "R 2P15-eSense thinner fast.pdf",
+        "productPdfOriginalFilename": "rm-long-r-2p15-clear-thinn-r-1617.pdf"
+      }
+    },
+    {
+      "slug": "r-2p20-under-thinn-r-medium",
+      "canonicalName": "R 2P20 UNDER Thinn-R Medium",
+      "productCode": "R 2P20",
+      "image": {
+        "alt": "R 2P20 UNDER Thinn-R Medium, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "R 2P20.png",
+        "sourceSha256": "234b4605d529d5028e69606357d8570d60baf9e33d1f8929823355aec9139564",
+        "src": "/images/brands/rm/products/pioneer/rm-r-2p20-under-thinn-r-medium.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/r-2p20-under-thinn-r-medium/rm-r-2p20-under-thinn-r-medium-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/r-2p20-under-thinn-r-medium/rm-r-2p20-under-thinn-r-medium-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "thinner",
+        "finish": null,
+        "phaseSlug": "lak",
+        "programSlug": "boje-i-lakovi",
+        "series": "pioneer",
+        "system": null,
+        "technology": null
+      },
+      "content": {
+        "benefit": "Razređivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "context": "Pioneer Series",
+        "purpose": "Razređivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "shortDescription": "Razređivač iz Pioneer Series programa, dokumentovan kroz dostavljeni zvanični R-M materijal.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "R 2P20 UNDER Thinn-R Medium",
+        "technicalPdfOriginalFilename": "R 2P20-eSense undercoat thinner medium.pdf",
+        "productPdfOriginalFilename": "rm-long-r-2p20-under-thinn-r-medium-1618.pdf"
+      }
+    },
+    {
+      "slug": "ra-050x-agilis-mix",
+      "canonicalName": "RA 050X AGILIS MIX",
+      "productCode": "RA 050X",
+      "image": {
+        "alt": "RA 050X AGILIS MIX, dostavljeni prikaz proizvoda",
+        "assetSource": "supplied-product-archive",
+        "originalFilename": "RA 050X_1.png",
+        "sourceSha256": "180692cbfba2851077ec26bd2668fa127d72f7a4a20ebe769ff67c78e39719b4",
+        "src": "/images/brands/rm/products/agilis/rm-ra-050x-agilis-mix.webp"
+      },
+      "documents": {
+        "productInformation": "/documents/products/rm/ra-050x-agilis-mix/rm-ra-050x-agilis-mix-product-information.pdf",
+        "technicalDataSheet": "/documents/products/rm/ra-050x-agilis-mix/rm-ra-050x-agilis-mix-technical-data-sheet.pdf"
+      },
+      "taxonomy": {
+        "category": "thinner",
+        "finish": null,
+        "phaseSlug": "boja",
+        "programSlug": "boje-i-lakovi",
+        "series": null,
+        "system": "agilis",
+        "technology": "waterborne"
+      },
+      "content": {
+        "benefit": "AGILIS razređivač za visoku temperaturu, nisku vlažnost i veće površine; koristi se sa solid i effect nijansama.",
+        "context": "AGILIS",
+        "purpose": "AGILIS razređivač za visoku temperaturu, nisku vlažnost i veće površine; koristi se sa solid i effect nijansama.",
+        "shortDescription": "AGILIS razređivač za visoku temperaturu, nisku vlažnost i veće površine; koristi se sa solid i effect nijansama.",
+        "technicalReviewStatus": "confirmed"
+      },
+      "contentReview": {
+        "status": "confirmed",
+        "notes": []
+      },
+      "source": {
+        "sourceFolder": "RA 050X AGILIS MIX",
+        "technicalPdfOriginalFilename": "RA 050X-Thinner.pdf",
+        "productPdfOriginalFilename": "rm-long-ra-050x-agilis-mix-1647.pdf"
+      }
+    }
+  ]
+}

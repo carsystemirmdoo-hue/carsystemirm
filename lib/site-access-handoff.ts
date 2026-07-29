@@ -1,7 +1,7 @@
 export const SITE_ACCESS_HANDOFF_STORAGE_KEY = "carsystem-site-access-handoff-v1";
 export const SITE_ACCESS_HANDOFF_EVENT = "carsystem:site-access-handoff";
 export const SITE_ACCESS_HANDOFF_MAX_AGE_MS = 20_000;
-export const SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS = 8_000;
+export const SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS = 5_500;
 
 export const HOME_HERO_ASSETS = {
   dark: "/images/home/hero-dark.png",
@@ -64,7 +64,7 @@ export function clearSiteAccessHandoff() {
   delete document.documentElement.dataset.siteAccessHandoff;
 }
 
-export function waitForActiveHomeHero(maxWaitMs = 1_100) {
+export function waitForActiveHomeHero() {
   return new Promise<void>((resolve) => {
     const image = new window.Image();
     let settled = false;
@@ -72,13 +72,11 @@ export function waitForActiveHomeHero(maxWaitMs = 1_100) {
     const finish = () => {
       if (settled) return;
       settled = true;
-      window.clearTimeout(timeout);
       image.onload = null;
       image.onerror = null;
       resolve();
     };
 
-    const timeout = window.setTimeout(finish, maxWaitMs);
     image.decoding = "async";
     image.fetchPriority = "high";
     image.onload = () => {

@@ -110,6 +110,79 @@ body {
   --cs-process-polish: oklch(0.86 0.03 245 / 0.16);
 }
 
+/*
+ * Paint takeover chapter signal.
+ *
+ * --paint-chapter je kontinualna vrednost 0..1 koju svaki frame postavlja
+ * usePaintTakeoverMotion iz pozicije skrola. Sve što menja boju tokom
+ * takeovera interpolira po njoj, umesto da reaguje na diskretnu promenu
+ * atributa sa vremenskom tranzicijom — to je bio uzrok sevanja.
+ *
+ * Signal raste još u bloku partnerske mreže, drži 1 kroz takeover i opada na
+ * prag (~0.34) u sekcijama ispod, tako da se oseti da je sajt prešao u novo
+ * poglavlje.
+ */
+:root {
+  --chapter: clamp(0, var(--paint-chapter, 0), 1);
+  --chapter-mix: calc(var(--chapter) * 100%);
+}
+
+:root {
+  --cs-orb-core: color-mix(
+    in oklab,
+    oklch(0.58 0.22 27),
+    #ff4ca5 var(--chapter-mix)
+  );
+  --cs-orb-core-glow: color-mix(
+    in oklab,
+    oklch(0.58 0.22 27 / 0.35),
+    rgb(255 76 165 / 0.5) var(--chapter-mix)
+  );
+  --cs-orb-halo: color-mix(
+    in oklab,
+    oklch(0.24 0.028 250 / 0.11),
+    rgb(244 241 235 / 0.11) var(--chapter-mix)
+  );
+  --cs-orb-ring: color-mix(
+    in oklab,
+    oklch(0.24 0.028 250 / 0.34),
+    rgb(244 241 235 / 0.48) var(--chapter-mix)
+  );
+  --cs-orb-ring-strong: color-mix(
+    in oklab,
+    oklch(0.24 0.028 250 / 0.48),
+    rgb(244 241 235 / 0.72) var(--chapter-mix)
+  );
+}
+
+:root.dark {
+  --cs-orb-core: color-mix(
+    in oklab,
+    oklch(0.68 0.22 27),
+    #ff4ca5 var(--chapter-mix)
+  );
+  --cs-orb-core-glow: color-mix(
+    in oklab,
+    oklch(0.62 0.22 27 / 0.48),
+    rgb(255 76 165 / 0.5) var(--chapter-mix)
+  );
+  --cs-orb-halo: color-mix(
+    in oklab,
+    oklch(0.98 0.004 250 / 0.075),
+    rgb(244 241 235 / 0.11) var(--chapter-mix)
+  );
+  --cs-orb-ring: color-mix(
+    in oklab,
+    oklch(0.98 0.004 250 / 0.34),
+    rgb(244 241 235 / 0.48) var(--chapter-mix)
+  );
+  --cs-orb-ring-strong: color-mix(
+    in oklab,
+    oklch(0.98 0.004 250 / 0.58),
+    rgb(244 241 235 / 0.72) var(--chapter-mix)
+  );
+}
+
 .cs-pigment-cursor {
   position: fixed;
   top: 0;
@@ -695,12 +768,38 @@ a[data-cursor="link"]:focus-visible {
     visibility 0ms linear 670ms;
 }
 
-.cs-route-transition[data-phase="covering"],
+html:is(
+    [data-route-transition="booting"],
+    [data-route-transition="closing"],
+    [data-route-transition="covered"],
+    [data-route-transition="navigating"],
+    [data-route-transition="opening"]
+  ):not([data-paint-wash-disabled="true"]),
+html:is(
+    [data-route-transition="booting"],
+    [data-route-transition="closing"],
+    [data-route-transition="covered"],
+    [data-route-transition="navigating"],
+    [data-route-transition="opening"]
+  ):not([data-paint-wash-disabled="true"])
+  body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html[data-paint-wash-disabled="true"] .cs-route-transition {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.cs-route-transition[data-phase="booting"],
+.cs-route-transition[data-phase="closing"],
 .cs-route-transition[data-phase="covered"],
-.cs-route-transition[data-phase="entry"],
-.cs-route-transition[data-phase="revealing"],
-.cs-route-transition[data-phase="fade"] {
+.cs-route-transition[data-phase="navigating"],
+.cs-route-transition[data-phase="opening"],
+html[data-route-transition="navigating"] .cs-route-transition {
   opacity: 1;
+  pointer-events: auto;
   visibility: visible;
   transition:
     opacity 80ms linear,
@@ -710,6 +809,7 @@ a[data-cursor="link"]:focus-visible {
 html[data-site-access-handoff="starting"] .cs-route-transition[data-phase="idle"],
 html[data-site-access-handoff="covered"] .cs-route-transition[data-phase="idle"] {
   opacity: 1;
+  pointer-events: auto;
   visibility: visible;
   transition:
     opacity 80ms linear,
@@ -725,7 +825,7 @@ html[data-site-access-handoff="covered"] .cs-route-transition[data-phase="idle"]
   will-change: transform;
 }
 
-.cs-route-transition[data-phase="covering"] .cs-route-transition-screen {
+.cs-route-transition[data-phase="closing"] .cs-route-transition-screen {
   animation: cs-route-cover 420ms var(--cs-ease-wipe) forwards;
 }
 
@@ -741,13 +841,25 @@ html[data-site-access-handoff="covered"]
   transform: translateY(0);
 }
 
+.cs-route-transition[data-phase="booting"] .cs-route-transition-screen,
 .cs-route-transition[data-phase="covered"] .cs-route-transition-screen,
-.cs-route-transition[data-phase="entry"] .cs-route-transition-screen,
-.cs-route-transition[data-phase="fade"] .cs-route-transition-screen {
+.cs-route-transition[data-phase="navigating"] .cs-route-transition-screen,
+html[data-route-transition="navigating"] .cs-route-transition-screen {
   transform: translateY(0);
 }
 
-.cs-route-transition[data-phase="revealing"] .cs-route-transition-screen {
+.cs-route-transition[data-phase="opening"] .cs-route-transition-screen {
+  animation: cs-route-reveal 460ms var(--cs-ease-wipe) forwards;
+}
+
+html[data-route-transition="fallback"] .cs-route-transition {
+  opacity: 1;
+  pointer-events: none;
+  visibility: visible;
+  animation: cs-route-fallback-hide 0ms linear 460ms forwards;
+}
+
+html[data-route-transition="fallback"] .cs-route-transition-screen {
   animation: cs-route-reveal 460ms var(--cs-ease-wipe) forwards;
 }
 
@@ -772,6 +884,13 @@ html[data-site-access-handoff="covered"]
   }
   to {
     transform: translateY(101%);
+  }
+}
+
+@keyframes cs-route-fallback-hide {
+  to {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -841,8 +960,8 @@ html[data-site-access-handoff="covered"]
     transform: translateY(0);
   }
 
-  .cs-route-transition[data-phase="covering"] .cs-route-transition-screen,
-  .cs-route-transition[data-phase="revealing"] .cs-route-transition-screen {
+  .cs-route-transition[data-phase="closing"] .cs-route-transition-screen,
+  .cs-route-transition[data-phase="opening"] .cs-route-transition-screen {
     animation: none !important;
   }
 

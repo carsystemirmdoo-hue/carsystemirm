@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://carsystemirm.com/#organization",
+      "name": "Carsystem i R-M Inđija",
+      "url": "https://carsystemirm.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://carsystemirm.com/carsystem-logo-outline.svg"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://carsystemirm.com/#website",
+      "url": "https://carsystemirm.com/",
+      "name": "Carsystem i R-M Inđija",
+      "inLanguage": "sr-Latn",
+      "publisher": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://carsystemirm.com/#webpage",
+      "url": "https://carsystemirm.com/",
+      "name": "Carsystem i R-M | Auto lakovi, boje i oprema",
+      "description": "Profesionalni auto lakovi, boje, materijali i oprema za autolakirnice, uz tehničku podršku i partnersku mrežu u Srbiji.",
+      "inLanguage": "sr-Latn",
+      "isPartOf": {
+        "@id": "https://carsystemirm.com/#website"
+      },
+      "about": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    }
+  ]
+}

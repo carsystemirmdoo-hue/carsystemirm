@@ -328,6 +328,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
               return (
                 <article
+                  id={store.id}
                   className={`${styles.resultItem} ${
                     isSelected ? styles.resultItemSelected : ""
                   } cs-interactive-surface`}

@@ -41,20 +41,49 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Carsystem i R-M Inđija | Profesionalni refinish program",
-    template: `%s | ${siteConfig.name}`,
+    default: siteConfig.defaultTitle,
+    template: `%s | ${siteConfig.titleSuffix}`,
   },
-  description:
-    "Profesionalni program za pripremu, farbanje, opremu i završnu obradu vozila kroz mrežu partnera u Srbiji.",
-  alternates: { canonical: "/" },
+  description: siteConfig.defaultDescription,
+  applicationName: siteConfig.applicationName,
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  robots: {
+    index: siteConfig.indexingEnabled,
+    follow: siteConfig.indexingEnabled,
+    noarchive: !siteConfig.indexingEnabled,
+    googleBot: {
+      index: siteConfig.indexingEnabled,
+      follow: siteConfig.indexingEnabled,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Carsystem i R-M Inđija | Profesionalni refinish program",
-    description:
-      "Profesionalni program za pripremu, farbanje, opremu i završnu obradu vozila kroz mrežu partnera u Srbiji.",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
     type: "website",
     locale: siteConfig.locale,
     siteName: siteConfig.name,
     url: siteConfig.url,
+    images: [
+      {
+        url: siteConfig.defaultOgImage,
+        width: 1672,
+        height: 941,
+        alt: "Carsystem i R-M profesionalni refinish program",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    images: [siteConfig.defaultOgImage],
   },
 };
 
@@ -67,6 +96,7 @@ export default function RootLayout({
     <html
       lang="sr-Latn"
       data-scroll-behavior="smooth"
+      data-route-transition="booting"
       className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
@@ -74,7 +104,11 @@ export default function RootLayout({
         <ThemeScript />
         <SiteAccessHandoffScript />
       </head>
-      <body className="min-h-full bg-background text-foreground">
+      <body
+        aria-busy="true"
+        className="min-h-full bg-background text-foreground"
+        suppressHydrationWarning
+      >
         <MotionSystem>
           <PublicSiteChrome>{children}</PublicSiteChrome>
         </MotionSystem>

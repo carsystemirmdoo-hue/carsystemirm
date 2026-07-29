@@ -1,0 +1,63 @@
+.artwork > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.artwork :global(.paint-stroke) {
+  clip-path: var(--group-clip-path, inset(0));
+  opacity: calc(
+    var(--stroke-opacity, 1) * var(--group-opacity, 0)
+  ) !important;
+}
+
+.artwork :global([data-part="contact"]) {
+  opacity: var(--part-contact, 0);
+  transform: scale(calc(0.88 + var(--part-contact, 0) * 0.12));
+}
+
+.artwork :global([data-part="core"]) {
+  opacity: var(--part-core, 0);
+}
+
+.artwork :global([data-part="bristles"]) {
+  opacity: var(--part-bristles, 0);
+}
+
+.artwork :global([data-part="fragments"]),
+.artwork :global([data-part="detached-fragments"]) {
+  opacity: var(--part-fragments, 0);
+  transform: translate3d(var(--part-shift, 0), 0, 0);
+}
+
+.artwork :global([data-part="near-overspray"]) {
+  opacity: var(--part-near, 0);
+}
+
+.artwork :global([data-part="far-overspray"]),
+.artwork :global([data-part="far-particles"]) {
+  opacity: var(--part-far, 0);
+}
+
+.artwork :global([data-part="release"]),
+.artwork :global([data-part="drips"]) {
+  opacity: var(--part-release, 0);
+  transform: translate3d(var(--release-shift, 0), 0, 0);
+}
+
+.artwork
+  :global(
+    [data-reveal-mode*="path"] [data-part="core"] path[fill="none"],
+    [data-reveal-mode*="path"] > path,
+    [data-reveal-mode*="particle"] [data-part="near-overspray"] path
+  ) {
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--path-offset, 1);
+}
+
+@media (max-width: 720px) {
+  .artwork :global(.paint-stroke[data-mobile="hide"]) {
+    display: none;
+  }
+}

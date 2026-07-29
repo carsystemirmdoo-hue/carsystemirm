@@ -103,6 +103,8 @@ export function Header() {
   const desktopOpenFrameRef = useRef<number | null>(null);
   const desktopFocusFrameRef = useRef<number | null>(null);
   const desktopMenuStateRef = useRef<DesktopMenuState>("closed");
+  const scrollFrameRef = useRef<number | null>(null);
+  const lastScrollYRef = useRef(0);
   const restoreDesktopFocusRef = useRef(false);
   const focusDesktopPanelOnOpenRef = useRef(false);
   const entranceStartedRef = useRef(false);
@@ -117,6 +119,7 @@ export function Header() {
     useState<DesktopMenuState>("closed");
   const [desktopMenuSwitching, setDesktopMenuSwitching] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollHidden, setScrollHidden] = useState(false);
   const [mobileSection, setMobileSection] = useState<HeaderMenuKey | null>(
     "proizvodi",
   );
@@ -205,7 +208,7 @@ export function Header() {
       return;
     }
 
-    if (transitionPhase === "revealing") {
+    if (transitionPhase === "opening") {
       revealHeader(true);
       return;
     }
@@ -243,8 +246,52 @@ export function Header() {
     setOpenMenu(null);
     setDesktopMenuState("closed");
     setMobileOpen(false);
+    setScrollHidden(false);
     mobileHistoryEntryRef.current = false;
   }, [pathname]);
+
+  useEffect(() => {
+    lastScrollYRef.current = Math.max(0, window.scrollY);
+
+    function syncHeaderVisibility() {
+      scrollFrameRef.current = null;
+      const nextScrollY = Math.max(0, window.scrollY);
+      const delta = nextScrollY - lastScrollYRef.current;
+      const headerOwnsFocus = Boolean(
+        headerRef.current?.contains(document.activeElement),
+      );
+
+      if (
+        nextScrollY <= 40 ||
+        delta < -6 ||
+        mobileOpen ||
+        Boolean(openMenu) ||
+        headerOwnsFocus
+      ) {
+        setScrollHidden(false);
+      } else if (delta > 8 && nextScrollY > 136) {
+        setScrollHidden(true);
+      }
+
+      lastScrollYRef.current = nextScrollY;
+    }
+
+    function handleScroll() {
+      if (scrollFrameRef.current !== null) return;
+      scrollFrameRef.current = window.requestAnimationFrame(
+        syncHeaderVisibility,
+      );
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+        scrollFrameRef.current = null;
+      }
+    };
+  }, [mobileOpen, openMenu]);
 
   useEffect(
     () => () => {
@@ -696,6 +743,7 @@ export function Header() {
       className={styles.header}
       data-entrance-state={entranceState}
       data-menu-switching={desktopMenuSwitching || undefined}
+      data-scroll-hidden={scrollHidden || undefined}
     >
       <div ref={headerShellRef} className={styles.shell}>
         <Link
@@ -709,6 +757,8 @@ export function Header() {
             <img
               src="/brands/carsystem.svg"
               alt=""
+              width="595"
+              height="595"
               className={styles.brandMarkLogo}
               decoding="async"
             />
@@ -996,7 +1046,13 @@ export function Header() {
                 onClick={closeMobileForNavigation}
               >
                 <span className={styles.mobilePanelLogo}>
-                  <img src="/brands/carsystem.svg" alt="" decoding="async" />
+                  <img
+                    src="/brands/carsystem.svg"
+                    alt=""
+                    width="595"
+                    height="595"
+                    decoding="async"
+                  />
                 </span>
               </Link>
               <button

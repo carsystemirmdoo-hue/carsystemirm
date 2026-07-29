@@ -1,0 +1,3 @@
+"source URL","target URL","status","reason"
+"/proizvodi/clear-harden-r-h-2p15","/proizvodi/h-2p15-clear-harden-r","308","Dva dostavljena foldera predstavljaju isti potvrđeni proizvod; zadržan jedan canonical PDP."
+"Produkcioni non-canonical host, uključujući Vercel alias","https://carsystemirm.com/isti-path-i-query","308","Konsolidacija host signala na potvrđeni produkcioni apex domen."

@@ -1,0 +1,322 @@
+.section {
+  --intro-surface: var(--bg2, #e9e5dc);
+  --return-surface: var(--bg, #070910);
+  /*
+   * Ranije ravan #070910. Kadar je zbog toga u prozoru p≈0.20–0.24 padao na
+   * srednju luminansu ~15 pa se vraćao na ~33 kada stignu painterly slojevi —
+   * taj propad je bio "pale/dark blink". Sada je osnova painterly i po
+   * luminansi bliska završnom stanju, pa je silazak monoton.
+   */
+  --takeover-canvas: #14161f;
+  --takeover-bloom-a: #c51765;
+  --takeover-bloom-b: #195ac6;
+  --surface-offset: 30svh;
+  --artwork-offset: 18svh;
+  --background-opacity: 0;
+  --background-scale: 1.015;
+  --background-x: -0.55vw;
+  --background-y: 8px;
+  --hero-global-opacity: 1;
+  --content-opacity: 0;
+  --content-offset: 26px;
+  --contrast-opacity: 0;
+  --exit-lift: 0svh;
+  --color-wash-opacity: 0;
+  position: relative;
+  z-index: 1;
+  /*
+   * Skraćeno sa 220svh. Ulazak sada počinje još u prethodnom bloku, pa sekciji
+   * ne treba toliki scroll opseg — a kraći opseg je i ono što ubrzava
+   * povlačenje poteza: isti prozor timeline-a preslikan na manje piksela.
+   */
+  height: 190vh;
+  height: 190svh;
+  overflow: clip;
+  background: var(--return-surface);
+  color: #f4f1eb;
+  isolation: isolate;
+}
+
+/*
+ * Dark tema: okolna stranica je već tamna, pa promena same svetline ne bi
+ * bila primetna (izmereno: 11.2 → 10.4 kroz ceo ulazak). Zato takeover u dark
+ * temi menja ton i zasićenje — duboka šljiva/indigo osnova sa jačim bloom-om,
+ * umesto još jednog neutralnog crnog bloka.
+ */
+:global(html.dark) .section {
+  --takeover-canvas: #191026;
+  --takeover-bloom-a: #ff2e86;
+  --takeover-bloom-b: #2f7bff;
+}
+
+.section[data-paint-debug-layout="true"] {
+  outline: 2px solid #ffd84a;
+  outline-offset: -2px;
+}
+
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  min-height: 540px;
+  overflow: hidden;
+  background: var(--intro-surface);
+  isolation: isolate;
+}
+
+.takeoverSurface {
+  position: absolute;
+  inset: -30svh 0 0;
+  pointer-events: none;
+}
+
+.takeoverSurface {
+  z-index: 0;
+  transform: translate3d(0, var(--surface-offset), 0);
+  will-change: transform;
+}
+
+.takeoverSurface svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.backgroundArtwork,
+.heroArtwork,
+.contentContrast,
+.colorWash {
+  position: absolute;
+  inset: -3svh -3vw;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backgroundArtwork {
+  z-index: 1;
+  aspect-ratio: 16 / 9;
+  background-image: image-set(
+    url("/art/paint-takeover/paint-takeover-background.avif") type("image/avif"),
+    url("/art/paint-takeover/paint-takeover-background.webp") type("image/webp")
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: var(--background-opacity);
+  transform: translate3d(
+      var(--background-x),
+      calc(var(--surface-offset) + var(--background-y) + var(--exit-lift)),
+      0
+    )
+    scale(var(--background-scale));
+  transform-origin: center;
+  will-change: opacity, transform;
+}
+
+.heroArtwork {
+  z-index: 2;
+  opacity: var(--hero-global-opacity);
+  transform: translate3d(
+    0,
+    calc(var(--artwork-offset) + var(--exit-lift)),
+    0
+  );
+  will-change: opacity, transform;
+}
+
+.contentContrast {
+  z-index: 3;
+  background:
+    radial-gradient(
+      ellipse at 16% 63%,
+      rgb(5 7 12 / calc(var(--contrast-opacity) * 0.86)) 0 23%,
+      rgb(5 7 12 / calc(var(--contrast-opacity) * 0.56)) 36%,
+      transparent 66%
+    ),
+    linear-gradient(
+      90deg,
+      rgb(5 7 12 / calc(var(--contrast-opacity) * 0.62)),
+      transparent 57%
+    );
+  transform: translate3d(0, var(--surface-offset), 0);
+}
+
+.colorWash {
+  z-index: 4;
+  background: rgb(7 9 16 / 0.08);
+  opacity: var(--color-wash-opacity);
+  will-change: opacity;
+}
+
+.section[data-wash-disabled="true"] .contentContrast,
+.section[data-wash-disabled="true"] .colorWash {
+  opacity: 0;
+}
+
+.copy {
+  position: absolute;
+  top: 51%;
+  left: clamp(24px, 5vw, 78px);
+  z-index: 6;
+  width: min(63vw, 1060px);
+  opacity: var(--content-opacity);
+  transform: translate3d(0, var(--content-offset), 0);
+  will-change: opacity, transform;
+}
+
+.eyebrow {
+  margin: 0 0 clamp(18px, 2.2vw, 32px);
+  color: rgb(244 241 235 / 0.74);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: clamp(9px, 0.7vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.copy h2 {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(58px, 7vw, 126px);
+  font-weight: 880;
+  letter-spacing: -0.065em;
+  line-height: 0.85;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.copy h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: 50ch;
+  margin: clamp(24px, 3vw, 42px) 0 0;
+  color: rgb(244 241 235 / 0.76);
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: 1.55;
+}
+
+.primaryCta {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  gap: 28px;
+  margin-top: clamp(24px, 2.8vw, 40px);
+  padding: 0 18px;
+  border: 1px solid rgb(244 241 235 / 0.54);
+  color: #f4f1eb;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.primaryCta:hover,
+.primaryCta:focus-visible {
+  border-color: #f4f1eb;
+  background: #f4f1eb;
+  color: #14161e;
+}
+
+.primaryCta:focus-visible {
+  outline: 2px solid #00c8e8;
+  outline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    height: 176vh;
+    height: 176svh;
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    height: 164vh;
+    height: 164svh;
+  }
+
+  .stickyViewport {
+    min-height: 500px;
+  }
+
+  .backgroundArtwork,
+  .heroArtwork,
+  .contentContrast,
+  .colorWash {
+    inset: -2svh -12vw;
+  }
+
+  .backgroundArtwork {
+    background-position: 57% center;
+  }
+
+  .heroArtwork > svg {
+    width: 124%;
+    margin-left: -12%;
+  }
+
+  .contentContrast {
+    background:
+      radial-gradient(
+        ellipse at 30% 61%,
+        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.9)) 0 24%,
+        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.62)) 42%,
+        transparent 74%
+      ),
+      linear-gradient(
+        90deg,
+        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.7)) 0%,
+        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.42)) 78%,
+        transparent 112%
+      );
+  }
+
+  .copy {
+    top: 48%;
+    left: max(20px, env(safe-area-inset-left));
+    width: calc(
+      100% - max(20px, env(safe-area-inset-left)) -
+        max(20px, env(safe-area-inset-right))
+    );
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+    font-size: 9px;
+  }
+
+  .copy h2 {
+    font-size: clamp(36px, 10.2vw, 54px);
+    line-height: 0.87;
+  }
+
+  .description {
+    max-width: 33ch;
+    margin-top: 22px;
+    font-size: 13px;
+  }
+
+  .primaryCta {
+    margin-top: 22px;
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .takeoverSurface,
+  .backgroundArtwork,
+  .heroArtwork,
+  .copy {
+    will-change: auto;
+  }
+}

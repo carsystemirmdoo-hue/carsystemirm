@@ -5,6 +5,7 @@ import {
   isValidSiteAccessToken,
   SITE_ACCESS_COOKIE_NAME,
 } from "./lib/site-access";
+import { seoSiteConfig } from "./lib/seo/site-config";
 
 const MAINTENANCE_ROUTE = "/site-u-pripremi";
 const SITE_ACCESS_ROUTE = "/site-u-pripremi/access";
@@ -40,6 +41,35 @@ function isBypassedRoute(pathname: string) {
   );
 }
 
+function shouldNoindexQuery(request: NextRequest) {
+  return (
+    Boolean(request.nextUrl.search) &&
+    (request.nextUrl.pathname === "/katalog" ||
+      request.nextUrl.pathname === "/kontakt")
+  );
+}
+
+function shouldNoindexInternalRoute(pathname: string) {
+  return (
+    pathname === MAINTENANCE_ROUTE ||
+    pathname.startsWith(`${MAINTENANCE_ROUTE}/`) ||
+    pathname === "/interaction-demo" ||
+    pathname.startsWith("/interaction-demo/") ||
+    pathname === "/social-exports" ||
+    pathname.startsWith("/social-exports/")
+  );
+}
+
+function nextResponse(request: NextRequest) {
+  const response = NextResponse.next();
+  if (shouldNoindexQuery(request)) {
+    response.headers.set("X-Robots-Tag", "noindex, follow, noarchive");
+  } else if (shouldNoindexInternalRoute(request.nextUrl.pathname)) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+  return response;
+}
+
 function redirectTo(request: NextRequest, pathname: string) {
   const url = request.nextUrl.clone();
   url.pathname = pathname;
@@ -54,6 +84,17 @@ async function hasSiteAccess(request: NextRequest) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const isProductionDeployment = process.env.VERCEL_ENV === "production";
+  const canonicalHost = new URL(seoSiteConfig.url).host;
+  if (
+    isProductionDeployment &&
+    request.nextUrl.host !== canonicalHost
+  ) {
+    const canonicalUrl = request.nextUrl.clone();
+    canonicalUrl.protocol = "https:";
+    canonicalUrl.host = canonicalHost;
+    return NextResponse.redirect(canonicalUrl, 308);
+  }
   const maintenanceEnabled = isMaintenanceEnabled();
   const hasAccess = await hasSiteAccess(request);
 
@@ -66,14 +107,14 @@ export async function middleware(request: NextRequest) {
   }
 
   if (isBypassedRoute(pathname)) {
-    return NextResponse.next();
+    return nextResponse(request);
   }
 
   if (maintenanceEnabled && !hasAccess) {
     return redirectTo(request, MAINTENANCE_ROUTE);
   }
 
-  return NextResponse.next();
+  return nextResponse(request);
 }
 
 export const config = {

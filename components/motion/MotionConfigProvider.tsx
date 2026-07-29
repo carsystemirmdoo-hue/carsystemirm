@@ -2,9 +2,12 @@
 
 import {
   createContext,
+  Suspense,
   type ReactNode,
   useContext,
+  useEffect,
 } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   RouteTransitionOverlay,
   type RouteTransitionPhase,
@@ -19,6 +22,23 @@ type MotionTransitionContextValue = {
 
 const MotionTransitionContext = createContext<MotionTransitionContextValue | null>(null);
 
+function RouteCommitObserver({
+  onRouteCommit,
+}: {
+  onRouteCommit: (routeKey: string) => void;
+}) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const search = searchParams.toString();
+  const routeKey = `${pathname}${search ? `?${search}` : ""}`;
+
+  useEffect(() => {
+    onRouteCommit(routeKey);
+  }, [onRouteCommit, routeKey]);
+
+  return null;
+}
+
 export function MotionConfigProvider({ children }: { children: ReactNode }) {
   const routeTransition = useRouteTransition();
 
@@ -31,9 +51,14 @@ export function MotionConfigProvider({ children }: { children: ReactNode }) {
       }}
     >
       <RouteTransitionOverlay
+        onCoverComplete={routeTransition.onCoverComplete}
+        onOpenComplete={routeTransition.onOpenComplete}
         phase={routeTransition.phase}
         reducedMotion={routeTransition.reducedMotion}
       />
+      <Suspense fallback={null}>
+        <RouteCommitObserver onRouteCommit={routeTransition.onRouteCommit} />
+      </Suspense>
       {children}
     </MotionTransitionContext.Provider>
   );

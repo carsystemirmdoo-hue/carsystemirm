@@ -33,7 +33,10 @@ import {
   type PartnerStore,
 } from "@/lib/partner-stores";
 import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
+import type { FinalHeroManifest } from "@/components/paint-takeover/paintTakeoverTypes";
 import styles from "./CarsystemHomePage.module.css";
+import { PaintEntryBridge } from "./PaintEntryBridge";
+import { PaintTakeoverHomeSection } from "./PaintTakeoverHomeSection";
 
 const publicPartnerStores = getPublicPartnerStores();
 const cityEntries = getCityDisplayEntries(publicPartnerStores);
@@ -111,7 +114,15 @@ function formatDistanceKm(distanceKm: number) {
   return `${Math.max(1, Math.round(distanceKm))} km`;
 }
 
-export function CarsystemHomePage() {
+type CarsystemHomePageProps = {
+  paintTakeoverArtwork: string;
+  paintTakeoverManifest: FinalHeroManifest;
+};
+
+export function CarsystemHomePage({
+  paintTakeoverArtwork,
+  paintTakeoverManifest,
+}: CarsystemHomePageProps) {
   const [selectedCity, setSelectedCity] = useState(defaultCity);
   const [selectedMapStoreId, setSelectedMapStoreId] = useState(defaultCityEntry?.id ?? "");
   const [networkMapFailed, setNetworkMapFailed] = useState(false);
@@ -121,6 +132,10 @@ export function CarsystemHomePage() {
       : "Potvrđene javne lokacije još nisu unete u lokator.",
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
+  const [paintDiagnostics, setPaintDiagnostics] = useState({
+    debug: false,
+    washDisabled: false,
+  });
 
   const selectedStores = useMemo(
     () =>
@@ -151,6 +166,22 @@ export function CarsystemHomePage() {
       window.removeEventListener("scroll", updateMobileLocator);
       window.removeEventListener("resize", updateMobileLocator);
     };
+  }, []);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const debug = searchParams.get("paintDebug") === "1";
+    const washDisabled = debug && searchParams.get("wash") === "off";
+    const root = document.documentElement;
+
+    setPaintDiagnostics({ debug, washDisabled });
+    if (washDisabled) {
+      root.setAttribute("data-paint-wash-disabled", "true");
+    } else {
+      root.removeAttribute("data-paint-wash-disabled");
+    }
+
+    return () => root.removeAttribute("data-paint-wash-disabled");
   }, []);
 
   function handleCityChange(cityKey: string) {
@@ -399,9 +430,19 @@ export function CarsystemHomePage() {
 
       <section
         id="prodavnice-mreza"
-        className={`${styles.sectionAlt} ${styles.railTarget}`}
+        className={`${styles.sectionAlt} ${styles.networkSection} ${styles.railTarget}`}
+        data-paint-debug-layout={
+          paintDiagnostics.debug ? "true" : undefined
+        }
         aria-labelledby="network-title"
       >
+        <div
+          className={styles.partnersBackground}
+          data-partners-background=""
+          aria-hidden="true"
+        />
+        <PaintEntryBridge debug={paintDiagnostics.debug} />
+
         <div className={styles.sectionHeader}>
           <div>
             <p className={styles.sectionKicker}>Prodajna i partnerska mreža</p>
@@ -437,7 +478,7 @@ export function CarsystemHomePage() {
         </div>
 
         <div className={styles.networkGrid}>
-          <div className={styles.locatorPanel}>
+          <div className={styles.locatorPanel} data-locator-card="">
             <label className={styles.fieldLabel} htmlFor="city-select">
               Grad ili region
             </label>
@@ -474,7 +515,11 @@ export function CarsystemHomePage() {
             />
           </div>
 
-          <div className={styles.mapPanel} aria-label="Mapa partnerske mreže">
+          <div
+            className={styles.mapPanel}
+            data-map-wrapper=""
+            aria-label="Mapa partnerske mreže"
+          >
             {publicPartnerStores.length > 0 && !networkMapFailed ? (
               <PartnerMap
                 badgeLabel="Partnerska mreža"
@@ -505,7 +550,17 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="support-title">
+      <PaintTakeoverHomeSection
+        debugEnabled={paintDiagnostics.debug}
+        heroArtwork={paintTakeoverArtwork}
+        manifest={paintTakeoverManifest}
+        washDisabled={paintDiagnostics.washDisabled}
+      />
+
+      <section
+        className={`${styles.section} ${styles.chapterAfter} ${styles.chapterThreshold}`}
+        aria-labelledby="support-title"
+      >
         <div className={styles.supportBand}>
           <div className={styles.supportStatement}>
             <p className={styles.sectionKicker}>Tehnička podrška i mikseri boja</p>
@@ -555,7 +610,10 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="education-title">
+      <section
+        className={`${styles.section} ${styles.chapterAfter}`}
+        aria-labelledby="education-title"
+      >
         <div className={styles.educationIndexLayout}>
           <div className={styles.educationIntro}>
             <p className={styles.sectionKicker}>Edukacija i znanje</p>
@@ -589,7 +647,10 @@ export function CarsystemHomePage() {
         </div>
       </section>
 
-      <section className={styles.sectionAlt} aria-labelledby="contact-title">
+      <section
+        className={`${styles.sectionAlt} ${styles.chapterAfter}`}
+        aria-labelledby="contact-title"
+      >
         <div className={styles.contactGrid}>
           <div className={styles.contactPanel}>
             <p className={styles.sectionKicker}>Centrala, Inđija</p>

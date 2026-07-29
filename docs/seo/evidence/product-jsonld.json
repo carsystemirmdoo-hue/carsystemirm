@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://carsystemirm.com/proizvodi/2220-agilis-activator#product",
+  "url": "https://carsystemirm.com/proizvodi/2220-agilis-activator",
+  "name": "A 2220 AGILIS ACTIVATOR",
+  "description": "Aditiv za AGILIS enterijerske aplikacije i učvršćivač za AGILIS AMPLIFIER A 2560.",
+  "image": [
+    "https://carsystemirm.com/images/brands/rm/products/agilis/rm-2220-agilis-activator.webp"
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": "R-M"
+  },
+  "category": "Boje i lakovi",
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "R-M oznaka",
+      "value": "A 2220"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Sistem / serija",
+      "value": "AGILIS"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Kategorija",
+      "value": "Aditiv"
+    }
+  ]
+}

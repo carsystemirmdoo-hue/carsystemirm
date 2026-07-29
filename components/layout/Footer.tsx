@@ -10,6 +10,9 @@ const catalogLinks = [
   { href: "/program/pistolji-i-oprema", label: "Pištolji i oprema" },
   { href: "/program/poliranje", label: "Poliranje" },
   { href: "/program/potrosni-materijal", label: "Potrošni materijal" },
+  { href: "/kategorije/bezbojni-lakovi", label: "Bezbojni lakovi" },
+  { href: "/kategorije/prajmeri-i-punioci", label: "Prajmeri i punioci" },
+  { href: "/kategorije/bazne-boje", label: "Bazne boje" },
 ];
 
 const brandLinks = [

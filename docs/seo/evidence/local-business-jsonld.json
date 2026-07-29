@@ -1,0 +1,213 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://carsystemirm.com/prodavnice#webpage",
+      "url": "https://carsystemirm.com/prodavnice",
+      "name": "Prodajna i partnerska mreža",
+      "inLanguage": "sr-Latn",
+      "isPartOf": {
+        "@id": "https://carsystemirm.com/#website"
+      }
+    },
+    {
+      "@type": "Store",
+      "@id": "https://carsystemirm.com/prodavnice#automotive-color-shop-batajnica",
+      "name": "Automotive Color Shop",
+      "url": "https://carsystemirm.com/prodavnice#automotive-color-shop-batajnica",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Majora Zorana Radosavljevića 108, 11080 Batajnica",
+        "addressLocality": "Batajnica / Beograd",
+        "addressCountry": "RS"
+      },
+      "telephone": "011 450 75 92",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 44.9010783,
+        "longitude": 20.2829458
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=44.9010783&mlon=20.2829458",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "Store",
+      "@id": "https://carsystemirm.com/prodavnice#igor-automotive-beograd",
+      "name": "Igor Automotive",
+      "url": "https://carsystemirm.com/prodavnice#igor-automotive-beograd",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Grčića Milenka 73, 11000 Beograd",
+        "addressLocality": "Beograd",
+        "addressCountry": "RS"
+      },
+      "telephone": "011 386 33 60 / 063 528 477",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 44.7840781,
+        "longitude": 20.4860137
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=44.7840781&mlon=20.4860137",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://carsystemirm.com/prodavnice#markus-professional-nis",
+      "name": "Markus Professional",
+      "url": "https://carsystemirm.com/prodavnice#markus-professional-nis",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Dušana Životića 15, Niš (Čalije)",
+        "addressLocality": "Niš",
+        "addressCountry": "RS"
+      },
+      "telephone": "065 4141 421 / 018 571 172",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.3331289,
+        "longitude": 21.9447743
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=43.3331289&mlon=21.9447743",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://carsystemirm.com/prodavnice#vmtim-maki-nis",
+      "name": "VMTIM-MAKI Niš",
+      "url": "https://carsystemirm.com/prodavnice#vmtim-maki-nis",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Lelice Kostić 15, 18000 Niš",
+        "addressLocality": "Niš",
+        "addressCountry": "RS"
+      },
+      "telephone": "063 119 2771",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.344869,
+        "longitude": 21.883094
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=43.344869&mlon=21.883094",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "Store",
+      "@id": "https://carsystemirm.com/prodavnice#irko-novi-pazar",
+      "name": "IRKO",
+      "url": "https://carsystemirm.com/prodavnice#irko-novi-pazar",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Zmaj Jovina 48, 36300 Novi Pazar",
+        "addressLocality": "Novi Pazar",
+        "addressCountry": "RS"
+      },
+      "telephone": "020 381 919 / 063 611 512",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.1303828,
+        "longitude": 20.5168764
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=43.1303828&mlon=20.5168764",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "Store",
+      "@id": "https://carsystemirm.com/prodavnice#bast-doo-novi-sad",
+      "name": "BAST DOO",
+      "url": "https://carsystemirm.com/prodavnice#bast-doo-novi-sad",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Temerinska 4, Novi Sad",
+        "addressLocality": "Novi Sad",
+        "addressCountry": "RS"
+      },
+      "telephone": "021 553 993",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.2608852,
+        "longitude": 19.8433522
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=45.2608852&mlon=19.8433522",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "Store",
+      "@id": "https://carsystemirm.com/prodavnice#intercolor-novi-sad",
+      "name": "Intercolor",
+      "url": "https://carsystemirm.com/prodavnice#intercolor-novi-sad",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Partizanskih baza 4, 21137 Novi Sad",
+        "addressLocality": "Novi Sad",
+        "addressCountry": "RS"
+      },
+      "telephone": "021 6402 853",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.2517594,
+        "longitude": 19.8031672
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=45.2517594&mlon=19.8031672",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "Store",
+      "@id": "https://carsystemirm.com/prodavnice#spektar-mb-sremska-mitrovica",
+      "name": "Spektar MB",
+      "url": "https://carsystemirm.com/prodavnice#spektar-mb-sremska-mitrovica",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Miloša Obilića 35, 22000 Sremska Mitrovica",
+        "addressLocality": "Sremska Mitrovica",
+        "addressCountry": "RS"
+      },
+      "telephone": "022 622 907 / 064 644 9 339",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 44.979577,
+        "longitude": 19.6067663
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=44.979577&mlon=19.6067663",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://carsystemirm.com/prodavnice#vukonjanski-zrenjanin",
+      "name": "Zoran Vukonjanski / Vukonjanski",
+      "url": "https://carsystemirm.com/prodavnice#vukonjanski-zrenjanin",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Elemirski put 13, 23101 Zrenjanin",
+        "addressLocality": "Zrenjanin",
+        "addressCountry": "RS"
+      },
+      "telephone": "060 644 6403",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.4079876,
+        "longitude": 20.3523777
+      },
+      "hasMap": "https://www.openstreetmap.org/?mlat=45.4079876&mlon=20.3523777",
+      "parentOrganization": {
+        "@id": "https://carsystemirm.com/#organization"
+      }
+    }
+  ]
+}

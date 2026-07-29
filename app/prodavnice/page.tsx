@@ -1,15 +1,33 @@
 import type { Metadata } from "next";
 import { StoresPage } from "@/components/stores/StoresPage";
 import { getPublicPartnerStores } from "@/lib/partner-stores";
-import { pageMetadata } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  jsonLd,
+  localBusinessJsonLd,
+} from "@/lib/seo";
+import { buildStoreMetadata } from "@/lib/seo/metadata-builders";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Prodajna i partnerska mreža",
-  description:
-    "Pronađite proverena prodajna mesta, servise i partnerske lokacije za Carsystem i R-M program u Srbiji.",
-  path: "/prodavnice",
-});
+export const metadata: Metadata = buildStoreMetadata();
 
 export default function StoresRoute() {
-  return <StoresPage stores={getPublicPartnerStores()} />;
+  const stores = getPublicPartnerStores();
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(
+          breadcrumbJsonLd([
+            { name: "Početna", path: "/" },
+            { name: "Prodavnice", path: "/prodavnice" },
+          ]),
+        )}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(localBusinessJsonLd(stores))}
+      />
+      <StoresPage stores={stores} />
+    </>
+  );
 }

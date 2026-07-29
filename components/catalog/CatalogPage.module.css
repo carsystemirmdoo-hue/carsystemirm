@@ -169,6 +169,92 @@
   padding: 34px 48px 96px;
 }
 
+.staticCatalogSection {
+  margin-top: 2.5rem;
+}
+
+.categoryLandingRail {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.45fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin: 0 0 2.5rem;
+  border-top: 1px solid var(--catalog-border);
+  border-bottom: 1px solid var(--catalog-border);
+  padding: 1.25rem 0;
+}
+
+.categoryLandingRail h2 {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  text-transform: uppercase;
+}
+
+.categoryLandingRail nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.categoryLandingRail a {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--catalog-border);
+  border-radius: 0.75rem;
+  background: var(--catalog-panel);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+
+.categoryLandingRail a:hover,
+.categoryLandingRail a:focus-visible {
+  border-color: var(--catalog-red);
+}
+
+.catalogPagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--catalog-border);
+  border-bottom: 1px solid var(--catalog-border);
+  padding: 1rem 0;
+  color: var(--catalog-muted);
+  font-size: 0.875rem;
+}
+
+.catalogPagination p {
+  margin: 0;
+}
+
+.catalogPagination div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.catalogPagination a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border: 1px solid var(--catalog-border);
+  border-radius: 0.65rem;
+  background: var(--catalog-panel);
+  padding: 0.65rem 0.9rem;
+  color: var(--catalog-ink);
+  font-weight: 700;
+}
+
+.catalogPagination a:hover,
+.catalogPagination a:focus-visible {
+  border-color: var(--catalog-red);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.72fr);
@@ -1085,6 +1171,20 @@
 
   .supportActions {
     display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .catalogPagination {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .categoryLandingRail {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .categoryLandingRail nav {
     grid-template-columns: 1fr;
   }
 }

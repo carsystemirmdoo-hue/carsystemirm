@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BaslacBrandPage } from "@/components/baslac-brand/BaslacBrandPage";
 import { BrandPage } from "@/components/brand/BrandPage";
+import { RmBrandPage } from "@/components/rm-brand/RmBrandPage";
 import {
   getAllCarsystemBrands,
   getCarsystemBrandBySlug,
@@ -10,7 +12,8 @@ import {
   refinishPhases,
   toProductListingProduct,
 } from "@/lib/carsystem-data";
-import { brandJsonLd, breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
+import { brandJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/seo";
+import { buildBrandMetadata } from "@/lib/seo/metadata-builders";
 
 type BrandRouteProps = {
   params: Promise<{ slug: string }>;
@@ -27,11 +30,7 @@ export async function generateMetadata({
   const brand = getCarsystemBrandBySlug(slug);
   if (!brand) return {};
 
-  return pageMetadata({
-    title: `${brand.name} program | Carsystem i R-M Inđija`,
-    description: brand.description,
-    path: `/brendovi/${brand.slug}`,
-  });
+  return buildBrandMetadata(brand);
 }
 
 export default async function BrandRoute({ params }: BrandRouteProps) {
@@ -43,6 +42,7 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
     toProductListingProduct,
   );
   const publicPrograms = getPublicProgramGroupsForBrand(brand.slug);
+  const allBrands = getAllCarsystemBrands();
 
   return (
     <>
@@ -60,14 +60,25 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(brandJsonLd(brand))}
       />
-      <BrandPage
-        brand={brand}
-        brandBySlug={new Map(getAllCarsystemBrands().map((item) => [item.slug, item]))}
-        phaseBySlug={new Map(refinishPhases.map((phase) => [phase.slug, phase]))}
-        products={products}
-        programBySlug={new Map(programGroups.map((program) => [program.slug, program]))}
-        publicPrograms={publicPrograms}
-      />
+      {brand.slug === "rm" ? (
+        <RmBrandPage
+          brand={brand}
+          phases={refinishPhases}
+          products={products}
+          programs={programGroups}
+        />
+      ) : brand.slug === "baslac" ? (
+        <BaslacBrandPage products={products} />
+      ) : (
+        <BrandPage
+          brand={brand}
+          brandBySlug={new Map(allBrands.map((item) => [item.slug, item]))}
+          phaseBySlug={new Map(refinishPhases.map((phase) => [phase.slug, phase]))}
+          products={products}
+          programBySlug={new Map(programGroups.map((program) => [program.slug, program]))}
+          publicPrograms={publicPrograms}
+        />
+      )}
     </>
   );
 }

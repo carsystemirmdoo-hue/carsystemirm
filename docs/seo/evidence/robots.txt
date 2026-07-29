@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /site-u-pripremi/access
+
+Host: https://carsystemirm.com
+Sitemap: https://carsystemirm.com/sitemap.xml

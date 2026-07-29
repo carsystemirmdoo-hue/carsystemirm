@@ -24,6 +24,7 @@ export function HomeHeroImage({ className }: { className: string }) {
     <Image
       alt=""
       className={className}
+      data-route-critical="true"
       fill
       fetchPriority="high"
       loading="eager"

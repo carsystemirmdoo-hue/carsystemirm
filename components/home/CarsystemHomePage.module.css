@@ -86,6 +86,9 @@
   z-index: 60;
   display: none;
   gap: 2px;
+  /* Prigušuje se po istom kontinualnom signalu kao i header — bez vremenske
+     tranzicije koja bi mogla da odsvetli nezavisno od skrola. */
+  opacity: calc(1 - clamp(0, var(--paint-chapter, 0), 1) * 0.76);
   pointer-events: none;
   transform: translateY(-50%);
 }
@@ -719,6 +722,21 @@
   background: var(--red-grad);
   box-shadow: 0 16px 38px oklch(0.52 0.2 27 / 0.5);
   color: #fff !important;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, calc(100% + 24px), 0);
+  transition:
+    opacity 220ms var(--cs-ease-polish),
+    transform 280ms var(--cs-ease-polish);
+}
+
+:global(html[data-paint-takeover="entering"]) .mobileLocator,
+:global(html[data-paint-takeover="active"]) .mobileLocator,
+:global(html[data-paint-takeover="leaving"]) .mobileLocator,
+:global(html[data-paint-takeover="after"]) .mobileLocator {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, calc(100% + 24px), 0);
 }
 
 .mobileLocator span:nth-child(2) {
@@ -896,6 +914,35 @@
   margin-inline: auto;
 }
 
+.networkSection {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  overflow: visible;
+  background: transparent;
+}
+
+
+.partnersBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  max-width: none;
+  margin: 0;
+  background: var(--bg2);
+  pointer-events: none;
+}
+
+.networkSection > :global([data-paint-entry-bridge]) {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.networkSection[data-paint-debug-layout="true"] {
+  outline: 2px solid #00c8e8;
+  outline-offset: -2px;
+}
+
 .categorySection {
   --product-category-ink: var(--text);
   --product-category-border: var(--border);
@@ -1003,6 +1050,8 @@
 
 .sectionHeader {
   display: flex;
+  position: relative;
+  z-index: 2;
   align-items: flex-end;
   justify-content: space-between;
   gap: 18px;
@@ -1104,6 +1153,8 @@
 }
 
 .networkGrid {
+  position: relative;
+  z-index: 2;
   grid-template-columns: minmax(280px, 0.82fr) 1.48fr;
 }
 
@@ -1118,6 +1169,8 @@
 }
 
 .locatorPanel {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -1139,6 +1192,10 @@
   min-height: 420px;
   border-color: color-mix(in oklch, var(--border), var(--red) 18%);
   background: var(--bg);
+}
+
+.mapPanel {
+  z-index: 2;
 }
 
 .homeNetworkMapCanvas,
@@ -2811,6 +2868,9 @@
 
   .mobileLocatorVisible {
     display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
   }
 
   .trustInner,
@@ -3503,4 +3563,59 @@
 .exportStage[data-render-static] .programDeckProgressFill {
   animation-delay: var(--render-fill-delay, 0ms);
   animation-play-state: paused;
+}
+
+/* ---------- downstream chapter ---------- */
+
+/*
+ * Sekcije ispod takeovera. Chapter signal ne pada na nulu kada takeover izađe
+ * iz kadra nego se zaustavlja na pragu (~0.34), pa ovi blokovi zadrže tonalitet
+ * novog poglavlja umesto da se sve odmah vrati na staro.
+ *
+ * Mereno pre izmene: srednja luminansa je odmah po izlasku skakala 39 → 101,
+ * što je i bio osećaj da je takeover izolovan blok ubačen između sekcija.
+ *
+ * Tint ide kroz background-image (dodatni sloj), ne kroz background shorthand,
+ * da ne pregazi postojeće pozadine sekcija. Zato blok stoji na kraju fajla —
+ * posle svih pravila koja definišu te pozadine.
+ */
+.chapterAfter {
+  --chapter: clamp(0, var(--paint-chapter, 0), 1);
+  --chapter-mix: calc(var(--chapter) * 100%);
+  --chapter-tint: color-mix(
+    in oklab,
+    transparent,
+    oklch(0.26 0.075 320 / 0.5) var(--chapter-mix)
+  );
+  position: relative;
+  background-image: linear-gradient(
+    var(--chapter-tint),
+    var(--chapter-tint)
+  );
+}
+
+:global(html.dark) .chapterAfter {
+  --chapter-tint: color-mix(
+    in oklab,
+    transparent,
+    oklch(0.5 0.14 330 / 0.22) var(--chapter-mix)
+  );
+}
+
+/* Painterly prag na vrhu prve sekcije posle takeovera. */
+.chapterThreshold::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, transparent, #ef0b82 var(--chapter-mix)) 24%,
+    color-mix(in oklab, transparent, #00b9d7 var(--chapter-mix)) 76%,
+    transparent
+  );
+  content: "";
+  pointer-events: none;
 }

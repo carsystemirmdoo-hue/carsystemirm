@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
+import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
 import {
   getAllPublicProgramGroups,
@@ -8,7 +9,12 @@ import {
   refinishPhases,
 } from "@/lib/carsystem-data";
 import type { RefinishPhase } from "@/lib/carsystem-data";
-import { pageMetadata } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  collectionPageJsonLd,
+  jsonLd,
+  pageMetadata,
+} from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Programi",
@@ -23,7 +29,34 @@ export default function ProgramIndexPage() {
 
   return (
     <div className={styles.pageShell}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(
+          collectionPageJsonLd({
+            name: "Programi",
+            description:
+              "Programske celine za boje, pripremu, opremu, poliranje i potrošni materijal.",
+            path: "/program",
+            itemUrls: programs.map((program) => `/program/${program.slug}`),
+          }),
+        )}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(
+          breadcrumbJsonLd([
+            { name: "Početna", path: "/" },
+            { name: "Programi", path: "/program" },
+          ]),
+        )}
+      />
       <main className={styles.main}>
+        <SeoBreadcrumbs
+          items={[
+            { name: "Početna", path: "/" },
+            { name: "Programi", path: "/program" },
+          ]}
+        />
         <section className={styles.indexIntro} aria-labelledby="programs-title">
           <div className={styles.indexIntroCopy}>
             <p className={styles.sectionKicker}>Programi</p>

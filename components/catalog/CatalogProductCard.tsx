@@ -60,6 +60,7 @@ export function CatalogProductCard({
       ref={preloadRef}
       className={`${styles.productCard} cs-product-motion-card ${className ?? ""}`}
       href={productHref}
+      prefetch={false}
       aria-label={`Pogledaj proizvod ${product.name}`}
       data-cursor="card"
       data-infinite-scroll-trigger={preloadRef ? "true" : undefined}

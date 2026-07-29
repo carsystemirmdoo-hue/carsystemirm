@@ -192,6 +192,8 @@ function ProductCategoryContent({
           <img
             src={category.icon}
             alt=""
+            width="104"
+            height="92"
             className={styles.icon}
             decoding="async"
             draggable="false"

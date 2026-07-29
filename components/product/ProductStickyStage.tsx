@@ -66,6 +66,7 @@ export function ProductStickyStage({
                 key={activeImage.src}
                 src={activeImage.src}
                 alt={activeImage.alt}
+                data-route-critical="true"
                 fill
                 priority
                 sizes="(min-width: 1180px) 32vw, (min-width: 896px) 34vw, 94vw"

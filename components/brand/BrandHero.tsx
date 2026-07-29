@@ -70,6 +70,7 @@ export function BrandHero({
               <Image
                 src={brand.logo}
                 alt={`Logo brenda ${brand.name}`}
+                data-route-critical="true"
                 width={320}
                 height={190}
                 className={styles.logoImage}

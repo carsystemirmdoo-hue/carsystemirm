@@ -1,0 +1,322 @@
+{
+  "generatedAt": "2026-07-24T06:30:54.552Z",
+  "proofAsset": "public/art/paint-takeover/paint-takeover-hero-strokes-reference-proof.svg",
+  "immutableSourceAsset": "public/art/paint-takeover/paint-takeover-hero-strokes.svg",
+  "selectedGroups": [
+    {
+      "proofId": "reference-stroke-01",
+      "originalId": "hero-stroke-01",
+      "label": "Magenta left-entry broad",
+      "family": "broad-brush",
+      "origin": "left",
+      "direction": "bottom-left-to-top-right",
+      "source": "/art/paint-takeover/brush-library/direct-shapes/carsystem-isolated-pass-clean.svg",
+      "sourceLabel": "Carsystem isolated pass"
+    },
+    {
+      "proofId": "reference-stroke-02",
+      "originalId": "hero-stroke-02",
+      "label": "Blue / indigo right counter",
+      "family": "broad-brush",
+      "origin": "right",
+      "direction": "top-right-to-bottom-left",
+      "source": "/art/paint-takeover/brush-library/direct-shapes/brush-broad-01.svg",
+      "sourceLabel": "brush-broad-01"
+    },
+    {
+      "proofId": "reference-stroke-03",
+      "originalId": "hero-stroke-03",
+      "label": "Cream curved top sweep",
+      "family": "curved-sweep",
+      "origin": "top",
+      "direction": "curved-clockwise",
+      "source": "/art/paint-takeover/brush-library/direct-shapes/curved-sweep-01.svg",
+      "sourceLabel": "curved-sweep-01"
+    },
+    {
+      "proofId": "reference-stroke-04",
+      "originalId": "hero-stroke-04",
+      "label": "Red / violet bottom sweep",
+      "family": "broad-brush",
+      "origin": "bottom",
+      "direction": "bottom-left-to-top-right",
+      "source": "/art/paint-takeover/brush-library/direct-shapes/brush-broad-02.svg",
+      "sourceLabel": "brush-broad-02"
+    },
+    {
+      "proofId": "reference-stroke-07",
+      "originalId": "hero-stroke-07",
+      "label": "Burgundy dry-brush field",
+      "family": "dry-brush",
+      "origin": "left",
+      "direction": "left-to-right",
+      "source": "/art/paint-takeover/brush-library/masks/dry-brush-01.svg",
+      "sourceLabel": "dry-brush-01"
+    },
+    {
+      "proofId": "reference-stroke-12",
+      "originalId": "hero-stroke-12",
+      "label": "Cyan spray drag",
+      "family": "spray-drag",
+      "origin": "right",
+      "direction": "curved-counter-clockwise",
+      "source": "/art/paint-takeover/brush-library/spray/spray-drag-01.svg",
+      "sourceLabel": "spray-drag-01"
+    }
+  ],
+  "selectedLibraryFiles": [
+    {
+      "file": "direct-shapes/carsystem-isolated-pass-clean.svg",
+      "bytes": 128212
+    },
+    {
+      "file": "direct-shapes/brush-broad-01.svg",
+      "bytes": 9053
+    },
+    {
+      "file": "direct-shapes/brush-broad-02.svg",
+      "bytes": 10856
+    },
+    {
+      "file": "direct-shapes/curved-sweep-01.svg",
+      "bytes": 12518
+    },
+    {
+      "file": "masks/dry-brush-01.svg",
+      "bytes": 13296
+    },
+    {
+      "file": "masks/dry-brush-02.svg",
+      "bytes": 11650
+    },
+    {
+      "file": "bristles/bristle-overlay-01.svg",
+      "bytes": 13413
+    },
+    {
+      "file": "spray/spray-drag-01.svg",
+      "bytes": 16947
+    },
+    {
+      "file": "spray/spray-burst-01.svg",
+      "bytes": 18232
+    },
+    {
+      "file": "splatter/splatter-01.svg",
+      "bytes": 14054
+    }
+  ],
+  "perStrokeMetrics": [
+    {
+      "id": "reference-stroke-01",
+      "originalId": "hero-stroke-01",
+      "label": "Magenta left-entry broad",
+      "source": "Carsystem isolated pass",
+      "current": {
+        "paths": 9,
+        "circles": 0,
+        "ellipses": 0,
+        "groups": 1,
+        "masks": 3,
+        "filters": 1,
+        "bytes": 3624,
+        "runtimeDomNodes": 10
+      },
+      "adapted": {
+        "paths": 17,
+        "circles": 7,
+        "ellipses": 5,
+        "groups": 9,
+        "masks": 4,
+        "filters": 1,
+        "bytes": 6508,
+        "runtimeDomNodes": 40
+      },
+      "runtimeDomIncrease": 30
+    },
+    {
+      "id": "reference-stroke-02",
+      "originalId": "hero-stroke-02",
+      "label": "Blue / indigo right counter",
+      "source": "brush-broad-01",
+      "current": {
+        "paths": 8,
+        "circles": 0,
+        "ellipses": 0,
+        "groups": 1,
+        "masks": 3,
+        "filters": 1,
+        "bytes": 3364,
+        "runtimeDomNodes": 9
+      },
+      "adapted": {
+        "paths": 15,
+        "circles": 6,
+        "ellipses": 4,
+        "groups": 9,
+        "masks": 4,
+        "filters": 1,
+        "bytes": 6004,
+        "runtimeDomNodes": 36
+      },
+      "runtimeDomIncrease": 27
+    },
+    {
+      "id": "reference-stroke-03",
+      "originalId": "hero-stroke-03",
+      "label": "Cream curved top sweep",
+      "source": "curved-sweep-01",
+      "current": {
+        "paths": 8,
+        "circles": 0,
+        "ellipses": 0,
+        "groups": 1,
+        "masks": 3,
+        "filters": 1,
+        "bytes": 3394,
+        "runtimeDomNodes": 9
+      },
+      "adapted": {
+        "paths": 15,
+        "circles": 5,
+        "ellipses": 4,
+        "groups": 9,
+        "masks": 4,
+        "filters": 1,
+        "bytes": 6001,
+        "runtimeDomNodes": 35
+      },
+      "runtimeDomIncrease": 26
+    },
+    {
+      "id": "reference-stroke-04",
+      "originalId": "hero-stroke-04",
+      "label": "Red / violet bottom sweep",
+      "source": "brush-broad-02",
+      "current": {
+        "paths": 8,
+        "circles": 0,
+        "ellipses": 0,
+        "groups": 1,
+        "masks": 3,
+        "filters": 1,
+        "bytes": 3349,
+        "runtimeDomNodes": 9
+      },
+      "adapted": {
+        "paths": 15,
+        "circles": 5,
+        "ellipses": 4,
+        "groups": 9,
+        "masks": 4,
+        "filters": 1,
+        "bytes": 5964,
+        "runtimeDomNodes": 35
+      },
+      "runtimeDomIncrease": 26
+    },
+    {
+      "id": "reference-stroke-07",
+      "originalId": "hero-stroke-07",
+      "label": "Burgundy dry-brush field",
+      "source": "dry-brush-01",
+      "current": {
+        "paths": 6,
+        "circles": 0,
+        "ellipses": 0,
+        "groups": 1,
+        "masks": 3,
+        "filters": 0,
+        "bytes": 2030,
+        "runtimeDomNodes": 7
+      },
+      "adapted": {
+        "paths": 13,
+        "circles": 5,
+        "ellipses": 4,
+        "groups": 9,
+        "masks": 4,
+        "filters": 0,
+        "bytes": 4528,
+        "runtimeDomNodes": 33
+      },
+      "runtimeDomIncrease": 26
+    },
+    {
+      "id": "reference-stroke-12",
+      "originalId": "hero-stroke-12",
+      "label": "Cyan spray drag",
+      "source": "spray-drag-01",
+      "current": {
+        "paths": 2,
+        "circles": 5,
+        "ellipses": 0,
+        "groups": 1,
+        "masks": 0,
+        "filters": 0,
+        "bytes": 1319,
+        "runtimeDomNodes": 8
+      },
+      "adapted": {
+        "paths": 9,
+        "circles": 12,
+        "ellipses": 5,
+        "groups": 9,
+        "masks": 1,
+        "filters": 0,
+        "bytes": 3891,
+        "runtimeDomNodes": 37
+      },
+      "runtimeDomIncrease": 29
+    }
+  ],
+  "remainingGroupRecommendation": {
+    "total": 26,
+    "directShapeAdaptation": {
+      "count": 6,
+      "groups": [
+        "hero-stroke-05",
+        "hero-stroke-06",
+        "hero-stroke-17",
+        "hero-stroke-18",
+        "hero-stroke-19",
+        "hero-stroke-20"
+      ]
+    },
+    "reusableMask": {
+      "count": 4,
+      "groups": [
+        "hero-stroke-08",
+        "hero-stroke-09",
+        "hero-stroke-10",
+        "hero-stroke-11"
+      ]
+    },
+    "bristleOrOversprayOverlay": {
+      "count": 11,
+      "groups": [
+        "hero-stroke-13",
+        "hero-stroke-14",
+        "hero-stroke-15",
+        "hero-stroke-16",
+        "hero-stroke-21",
+        "hero-stroke-22",
+        "hero-stroke-23",
+        "hero-stroke-24",
+        "hero-stroke-28",
+        "hero-stroke-29",
+        "hero-stroke-30"
+      ]
+    },
+    "keepCurrent": {
+      "count": 5,
+      "groups": [
+        "hero-stroke-25",
+        "hero-stroke-26",
+        "hero-stroke-27",
+        "hero-stroke-31",
+        "hero-stroke-32"
+      ]
+    }
+  }
+}

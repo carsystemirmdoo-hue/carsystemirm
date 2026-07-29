@@ -1,16 +1,61 @@
 .header {
   --header-height: 5.5rem;
-  --header-shell: color-mix(in oklch, var(--surface) 97%, transparent);
-  --header-panel: var(--surface);
-  --header-panel-muted: var(--surface-muted);
-  --header-ink: var(--foreground);
-  --header-muted: var(--muted-foreground);
-  --header-border: var(--border);
+  /*
+   * Paint takeover: header se boji interpolacijom po kontinualnom
+   * --paint-chapter signalu koji postavlja usePaintTakeoverMotion. Ranije je
+   * ovo bio diskretni attribute swap sa 220ms tranzicijom — pošto je ta
+   * tranzicija bila vremenska, a sve ostalo vezano za skrol, header je pri
+   * bržem skrolu "sevao" nezavisno od ostatka kadra. Sada je i on čista
+   * funkcija pozicije skrola, pa flash nije moguć.
+   */
+  --chapter: clamp(0, var(--paint-chapter, 0), 1);
+  --chapter-mix: calc(var(--chapter) * 100%);
+  --paint-header-surface: color-mix(
+    in oklab,
+    color-mix(in oklch, var(--surface) 97%, transparent),
+    rgb(9 11 19 / 0.9) var(--chapter-mix)
+  );
+  --paint-header-foreground: color-mix(
+    in oklab,
+    var(--foreground),
+    #f4f1eb var(--chapter-mix)
+  );
+  --header-shell: var(--paint-header-surface);
+  --header-panel: color-mix(
+    in oklab,
+    var(--surface),
+    #0d0f18 var(--chapter-mix)
+  );
+  --header-panel-muted: color-mix(
+    in oklab,
+    var(--surface-muted),
+    #171a25 var(--chapter-mix)
+  );
+  --header-ink: var(--paint-header-foreground);
+  --header-muted: color-mix(
+    in oklab,
+    var(--muted-foreground),
+    rgb(244 241 235 / 0.66) var(--chapter-mix)
+  );
+  --header-border: color-mix(
+    in oklab,
+    var(--border),
+    rgb(244 241 235 / 0.2) var(--chapter-mix)
+  );
   --header-red: var(--accent);
   --header-red-ink: var(--accent-foreground);
   --header-red-soft: color-mix(in oklch, var(--accent) 11%, transparent);
-  --header-hover: color-mix(in oklch, var(--surface-muted) 76%, transparent);
-  --header-shadow: 0 1.5rem 4.5rem oklch(0.12 0.016 255 / 0.16);
+  --header-hover: color-mix(
+    in oklab,
+    color-mix(in oklch, var(--surface-muted) 76%, transparent),
+    rgb(244 241 235 / 0.08) var(--chapter-mix)
+  );
+  --header-shadow: 0 1.5rem 4.5rem
+    color-mix(
+      in oklab,
+      oklch(0.12 0.016 255 / 0.16),
+      rgb(0 0 0 / 0.42) var(--chapter-mix)
+    );
   --header-ease: cubic-bezier(0.16, 1, 0.3, 1);
   position: sticky;
   top: 0;
@@ -21,6 +66,37 @@
   background: var(--header-shell);
   color: var(--header-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  transition:
+    background-color 420ms var(--header-ease),
+    border-color 420ms var(--header-ease),
+    color 420ms var(--header-ease),
+    transform 280ms var(--header-ease);
+  will-change: transform;
+}
+
+:global(html[data-rm-atmosphere="refinity"]) .header {
+  --header-shell: oklch(0.12 0.024 238 / 0.94);
+  --header-panel: oklch(0.14 0.026 238);
+  --header-panel-muted: oklch(0.18 0.028 235);
+  --header-ink: oklch(0.95 0.01 225);
+  --header-muted: oklch(0.72 0.03 225);
+  --header-border: oklch(0.47 0.055 220 / 0.34);
+  --header-hover: oklch(0.76 0.08 212 / 0.08);
+}
+
+:global(html[data-rm-atmosphere="agilis"]) .header {
+  --header-shell: oklch(0.943 0.021 86 / 0.95);
+  --header-panel: oklch(0.97 0.015 86);
+  --header-panel-muted: oklch(0.925 0.023 86);
+  --header-ink: oklch(0.18 0.012 72);
+  --header-muted: oklch(0.47 0.025 72);
+  --header-border: oklch(0.75 0.025 76 / 0.58);
+  --header-hover: oklch(0.86 0.035 78 / 0.62);
+}
+
+.header[data-scroll-hidden] {
+  pointer-events: none;
+  transform: translate3d(0, -101%, 0);
 }
 
 .header[data-entrance-state="pending"] {
@@ -527,6 +603,10 @@
 }
 
 .megaPanel {
+  --product-category-ink: var(--header-ink);
+  --product-category-border: var(--header-border);
+  --product-category-accent: var(--header-red);
+  --product-category-accent-ink: var(--header-red-ink);
   position: relative;
   z-index: 1;
   display: grid;
@@ -548,6 +628,22 @@
   pointer-events: auto;
   transform-origin: top center;
   transition: clip-path 280ms var(--header-ease) 90ms;
+}
+
+:global(html[data-rm-atmosphere="refinity"])
+  .megaPanel
+  [aria-label="Kategorije proizvoda"]
+  img:not([data-preserve-white-details]) {
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+
+:global(html[data-rm-atmosphere="agilis"])
+  .megaPanel
+  [aria-label="Kategorije proizvoda"]
+  img:not([data-preserve-white-details]) {
+  filter: none;
+  mix-blend-mode: multiply;
 }
 
 .megaLayer[data-state="opening"] .megaPanel {
@@ -1489,6 +1585,10 @@
   .header[data-entrance-state="pending"] .actions {
     opacity: 1;
     transform: none;
+  }
+
+  .header[data-scroll-hidden] {
+    transform: translate3d(0, -101%, 0);
   }
 
   .menuRevealRail {

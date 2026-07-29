@@ -1,4 +1,5 @@
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
+import { rmImportedProducts } from "@/lib/rm-imported-products";
 import type {
   ProductCatalogStrategy,
   ProductDetailContent,
@@ -136,6 +137,60 @@ export type ProductCatalogMetadata = {
   colorConfidence: ProductColorConfidence;
 };
 
+export const rmSystemSlugs = [
+  "agilis",
+  "onyx-hd",
+  "diamont",
+  "uno-hd",
+  "crystal-base",
+  "graphite-hd",
+] as const;
+
+export type RmSystemSlug = (typeof rmSystemSlugs)[number];
+
+export const rmSeriesSlugs = ["pioneer", "advance", "element"] as const;
+
+export type RmSeriesSlug = (typeof rmSeriesSlugs)[number];
+
+export const rmCategorySlugs = [
+  "basecoat",
+  "clearcoat",
+  "primer-filler",
+  "bodyfiller",
+  "hardener",
+  "thinner",
+  "additive",
+  "cleaner",
+  "polishing-compound",
+] as const;
+
+export type RmCategorySlug = (typeof rmCategorySlugs)[number];
+
+export type RmTechnologySlug =
+  | "waterborne"
+  | "solvent"
+  | "2k"
+  | "uv"
+  | "air-drying"
+  | "wet-on-wet"
+  | "dtm";
+
+export type RmFinishSlug =
+  | "gloss"
+  | "matte"
+  | "satin"
+  | "solid"
+  | "metallic"
+  | "pearl";
+
+export type RmProductMetadata = {
+  system: RmSystemSlug | null;
+  series: RmSeriesSlug | null;
+  category: RmCategorySlug;
+  technology: RmTechnologySlug | null;
+  finish: RmFinishSlug | null;
+};
+
 export type ProductVisualMode = "neutral" | "color-on-hover" | "always-color";
 
 export type ProductVisualType =
@@ -192,6 +247,8 @@ export type CarsystemProduct = {
   seoTitle?: string;
   seoDescription?: string;
   catalogMetadata?: ProductCatalogMetadata;
+  /** Optional R-M-only taxonomy used by the brand landing and catalog deep links. */
+  rmMetadata?: RmProductMetadata;
   visual?: ProductVisualTokens;
   /** Commercial family shared by one or more selectable variants. */
   family?: ProductFamilyIdentity;
@@ -329,9 +386,9 @@ export const brands: CarsystemBrand[] = [
     name: "baslac",
     logo: "/brands/baslac.svg",
     description:
-      "Refinish sistem za radionice kojima je potreban pregledan, pouzdan i praktičan program boja i lakova.",
+      "Profesionalni automotive refinish sistem koji povezuje pripremu podloge, vodene i solventne boje, bezbojne lakove i digitalnu koloristiku.",
     overview:
-      "Baslac u ponudi pokriva boje, lakove i prateće materijale za radionice kojima je važan pregledan refinish sistem.",
+      "baslac povezuje pripremu, boju, završni lak i pomoćne proizvode u pregledan sistem za radionice kojima su važni jednostavniji izbor i kontrolisan proces.",
     programSlugs: ["boje-i-lakovi", "poliranje"],
     catalogOrder: 3,
     presentation: {
@@ -580,6 +637,13 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     purpose: "Usklađivanje nijanse i bazni sloj pre bezbojnog laka",
     badges: ["Bazna boja", "R-M sistem", "Na upit"],
+    rmMetadata: {
+      system: "diamont",
+      series: null,
+      category: "basecoat",
+      technology: "solvent",
+      finish: null,
+    },
     productImage: {
       src: placeholderProductImage,
       alt: "R-M DIAMONT bazna boja, ilustrativni prikaz ambalaže",
@@ -650,6 +714,13 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     purpose: "Završni sloj, sjaj i zaštita nakon bazne boje",
     badges: ["Bezbojni lak", "Završni sloj", "Na upit"],
+    rmMetadata: {
+      system: "diamont",
+      series: null,
+      category: "clearcoat",
+      technology: "2k",
+      finish: "gloss",
+    },
     productImage: {
       src: placeholderProductImage,
       alt: "R-M DIAMONT bezbojni lak, ilustrativni prikaz ambalaže",
@@ -1413,6 +1484,7 @@ const befarPadProducts = befarPadColors.flatMap((color) =>
 );
 
 const productRecords: CarsystemProduct[] = [
+  ...rmImportedProducts,
   withProductAssets(archivedProduct("rm-diamont-bazna-boja"), {
     productImage: productAsset(
       "/products/rm/rm-diamont-bazna-boja.jpg",
@@ -1433,6 +1505,13 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "Na upit", detail: "Pakovanje se potvrđuje kroz upit" }],
     purpose: "Gitovanje, ravnanje i lokalna priprema površine",
     badges: ["Body filler", "Git", "Priprema", "Na upit"],
+    rmMetadata: {
+      system: null,
+      series: null,
+      category: "bodyfiller",
+      technology: null,
+      finish: null,
+    },
     productImage: productAsset(
       "/products/rm/rm-body-filler-white-b-2e11.jpg",
       "R-M Body Filler White B 2E11 sa učvršćivačem",
@@ -1462,6 +1541,13 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "1 L" }],
     purpose: "Korekcija površine i priprema finalnog sjaja",
     badges: ["Pasta", "Poliranje", "Na upit"],
+    rmMetadata: {
+      system: null,
+      series: null,
+      category: "polishing-compound",
+      technology: null,
+      finish: null,
+    },
     productImage: productAsset(
       "/products/rm/rm-pasta-190-1l.jpg",
       "R-M DIAMONT BC 190 proizvod u limenci",
@@ -1487,6 +1573,13 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "5 L" }],
     purpose: "Poliranje većeg obima i završna obrada lakirane površine",
     badges: ["Pasta", "Radioničko pakovanje", "Na upit"],
+    rmMetadata: {
+      system: null,
+      series: null,
+      category: "polishing-compound",
+      technology: null,
+      finish: null,
+    },
     productImage: productAsset(
       "/products/rm/rm-pasta-190-5l.jpg",
       "R-M DIAMONT BC 605 proizvod u limenci",
@@ -2235,6 +2328,7 @@ export function toProductListingProduct(product: CarsystemProduct): CarsystemPro
     documents: [],
     relatedProductSlugs: [],
     catalogMetadata: product.catalogMetadata,
+    rmMetadata: product.rmMetadata,
     visual: product.visual,
     family: product.family,
     catalogStrategy: product.catalogStrategy,

@@ -47,6 +47,17 @@ const SITE_ACCESS_HANDOFF_SCRIPT = `
         document.head.appendChild(preload);
       }
     }
+
+    /*
+     * Last-resort boot protection. The React state machine normally clears the
+     * boot phase much earlier. This only runs if hydration or its JS chunk
+     * never becomes operational.
+     */
+    window.setTimeout(function () {
+      if (document.documentElement.dataset.routeTransition !== "booting") return;
+      document.documentElement.dataset.routeTransition = "fallback";
+      if (document.body) document.body.removeAttribute("aria-busy");
+    }, 6000);
   } catch (error) {
     delete document.documentElement.dataset.siteAccessHandoff;
   }

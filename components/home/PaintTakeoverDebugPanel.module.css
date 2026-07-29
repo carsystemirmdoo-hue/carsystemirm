@@ -1,0 +1,75 @@
+.panel {
+  position: fixed;
+  top: calc(6.25rem + env(safe-area-inset-top));
+  right: 1rem;
+  z-index: 2147483001;
+  width: min(23rem, calc(100vw - 2rem));
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 0.75rem;
+  background: rgb(7 9 16 / 0.94);
+  box-shadow: 0 1.25rem 3.5rem rgb(0 0 0 / 0.32);
+  color: #f4f1eb;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.title {
+  margin: 0 0 0.85rem;
+  color: #ff69b4;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.42rem 0.85rem;
+  margin: 0;
+}
+
+.grid dt {
+  color: rgb(244 241 235 / 0.58);
+}
+
+.grid dd {
+  max-width: 13rem;
+  margin: 0;
+  color: #f4f1eb;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.mutation {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.mutation span {
+  color: rgb(244 241 235 / 0.58);
+}
+
+.mutation strong {
+  color: #7fe6f4;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .panel {
+    top: auto;
+    right: 0.75rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
+    left: 0.75rem;
+    width: auto;
+    max-height: min(48svh, 25rem);
+    overflow: hidden;
+  }
+}

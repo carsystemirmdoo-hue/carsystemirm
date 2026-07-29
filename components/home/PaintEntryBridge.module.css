@@ -1,0 +1,101 @@
+/*
+ * Sloj je namerno visok i zahvata sredinu bloka partnerske mreže, a ne samo
+ * donji padding. Ranija verzija je stajala pri dnu sekcije, pa se potez čitao
+ * kao "jedna linija preko praznog prostora" umesto kao gesta koja prolazi iza
+ * mape i kartice.
+ */
+.bridge {
+  --approach: clamp(0, var(--paint-approach, 0), 1);
+  position: absolute;
+  top: 34%;
+  right: 0;
+  bottom: -7rem;
+  left: 0;
+  z-index: 1;
+  max-width: none;
+  margin: 0;
+  /* Reveal je vezan za skrol kroz --paint-approach: potez se povlači levo → desno. */
+  clip-path: inset(0 calc((1 - var(--approach)) * 104%) 0 0);
+  opacity: clamp(0, calc(var(--approach) * 3.2), 1);
+  pointer-events: none;
+}
+
+.bridge svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.haze {
+  fill: #b3175c;
+  opacity: 0.26;
+}
+
+.underpull {
+  fill: #8d073f;
+  opacity: 0.5;
+}
+
+.brushCore {
+  fill: #ef0b82;
+  opacity: 0.82;
+}
+
+.dryBrush {
+  fill: #ff4ca5;
+  opacity: 0.66;
+}
+
+.dryBrushFar {
+  fill: #ff7cbe;
+  opacity: 0.42;
+}
+
+.spray {
+  fill: #f50087;
+  opacity: 0.6;
+}
+
+.sprayBlue {
+  fill: #00b9d7;
+  opacity: 0.62;
+}
+
+/* U dark temi potezi moraju da nose više svetla da ne propadnu u podlogu. */
+:global(html.dark) .haze {
+  opacity: 0.34;
+}
+
+:global(html.dark) .brushCore {
+  fill: #ff2e86;
+  opacity: 0.86;
+}
+
+:global(html.dark) .dryBrushFar {
+  opacity: 0.5;
+}
+
+.bridge[data-debug-outline="true"] {
+  outline: 2px solid #ff4ca5;
+  outline-offset: -2px;
+}
+
+@media (max-width: 720px) {
+  .bridge {
+    top: 26%;
+    bottom: -4.5rem;
+  }
+
+  .bridge svg {
+    width: 148%;
+    margin-left: -28%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bridge {
+    clip-path: none;
+    opacity: 1;
+  }
+}

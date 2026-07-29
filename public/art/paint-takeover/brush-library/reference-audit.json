@@ -1,0 +1,1588 @@
+{
+  "generatedAt": "2026-07-24T06:07:32.320Z",
+  "files": [
+    {
+      "fileName": "spray-six-pass.svg",
+      "filePath": "/Users/miledulic/Desktop/Projects/carsystem/public/product-hero-patterns/spray-six-pass.svg",
+      "bytes": 1098013,
+      "root": {
+        "viewBox": "0 0 1536 1024",
+        "width": "1536",
+        "height": "1024"
+      },
+      "topLevelGroups": [
+        {
+          "id": "spray-pass-01",
+          "label": null
+        },
+        {
+          "id": "spray-pass-02",
+          "label": null
+        },
+        {
+          "id": "spray-pass-03",
+          "label": null
+        },
+        {
+          "id": "spray-pass-04",
+          "label": null
+        },
+        {
+          "id": "spray-pass-05",
+          "label": null
+        },
+        {
+          "id": "spray-pass-06",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "spray-pass-01",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "spray-pass-02",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "spray-pass-03",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "spray-pass-04",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "spray-pass-05",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "spray-pass-06",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 6,
+        "paths": 42,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 48,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 42,
+        "totalCommands": 129006,
+        "approximateAnchorPairs": 114490,
+        "pathDataBytes": 1094891,
+        "maxCommandsPerPath": 10824,
+        "maxCoordinateNumbersPerPath": 18300
+      },
+      "browserSafe": true,
+      "family": "full composition / reference sheet",
+      "recommendedUse": "Quality, structure and full-composition reference only"
+    },
+    {
+      "fileName": "jedna linija.svg",
+      "filePath": "/Users/miledulic/Desktop/Projects/carsystem/public/product-hero-patterns/jedna linija.svg",
+      "bytes": 127729,
+      "root": {
+        "viewBox": "0 0 1536 1024",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "spray-pass-03",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "spray-pass-03",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 1,
+        "paths": 7,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [
+          "Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)"
+        ],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 9,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 7,
+        "totalCommands": 26205,
+        "approximateAnchorPairs": 13436,
+        "pathDataBytes": 126732,
+        "maxCommandsPerPath": 8953,
+        "maxCoordinateNumbersPerPath": 8953
+      },
+      "browserSafe": true,
+      "family": "isolated broad spray-brush pass",
+      "recommendedUse": "Primary isolated model for one hero stroke; clean and decompose before use"
+    },
+    {
+      "fileName": "bristle-overlay-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/bristle-overlay-01.svg",
+      "bytes": 13413,
+      "root": {
+        "viewBox": "0 0 1600 500",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "bo01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "bo01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-long-bristles",
+          "dataPart": "long-bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-short-bristles",
+          "dataPart": "short-bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 4,
+        "paths": 61,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 4,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 61,
+        "totalCommands": 426,
+        "approximateAnchorPairs": 669,
+        "pathDataBytes": 10116,
+        "maxCommandsPerPath": 10,
+        "maxCoordinateNumbersPerPath": 34
+      },
+      "browserSafe": true,
+      "family": "bristle overlay",
+      "recommendedUse": "Bristle/fragment overlay candidate"
+    },
+    {
+      "fileName": "brush-broad-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/brush-broad-01.svg",
+      "bytes": 9053,
+      "root": {
+        "viewBox": "0 0 1600 600",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "bb01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "bb01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-overspray",
+          "dataPart": "overspray",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 5,
+        "paths": 24,
+        "circles": 0,
+        "ellipses": 16,
+        "masks": 1,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 6,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 24,
+        "totalCommands": 235,
+        "approximateAnchorPairs": 398,
+        "pathDataBytes": 5958,
+        "maxCommandsPerPath": 42,
+        "maxCoordinateNumbersPerPath": 162
+      },
+      "browserSafe": true,
+      "family": "broad brush",
+      "recommendedUse": "Direct-shape adaptation candidate"
+    },
+    {
+      "fileName": "brush-broad-02.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/brush-broad-02.svg",
+      "bytes": 10856,
+      "root": {
+        "viewBox": "0 0 1600 800",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "bb02-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "bb02-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-overspray",
+          "dataPart": "overspray",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 5,
+        "paths": 25,
+        "circles": 0,
+        "ellipses": 18,
+        "masks": 1,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 6,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 25,
+        "totalCommands": 259,
+        "approximateAnchorPairs": 443,
+        "pathDataBytes": 6803,
+        "maxCommandsPerPath": 46,
+        "maxCoordinateNumbersPerPath": 178
+      },
+      "browserSafe": true,
+      "family": "broad brush",
+      "recommendedUse": "Direct-shape adaptation candidate"
+    },
+    {
+      "fileName": "brush-svg-reference-sheet.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/brush-svg-reference-sheet.svg",
+      "bytes": 140216,
+      "root": {
+        "viewBox": "0 0 4800 7530",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [],
+      "groupInventory": [
+        {
+          "id": "bb01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb01-overspray",
+          "dataPart": "overspray",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bb02-overspray",
+          "dataPart": "overspray",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-main-fragments",
+          "dataPart": "main-fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-fine-bristles",
+          "dataPart": "fine-bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-detached-fragments",
+          "dataPart": "detached-fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-core-fragments",
+          "dataPart": "core-fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-release-fragments",
+          "dataPart": "release-fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-near-overspray",
+          "dataPart": "near-overspray",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-far-particles",
+          "dataPart": "far-particles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-end-accent",
+          "dataPart": "end-accent",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-near-particles",
+          "dataPart": "near-particles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-far-particles",
+          "dataPart": "far-particles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-drips",
+          "dataPart": "drips",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-release",
+          "dataPart": "release",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-long-bristles",
+          "dataPart": "long-bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-short-bristles",
+          "dataPart": "short-bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "bo01-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-core-blots",
+          "dataPart": "core-blots",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-medium-drops",
+          "dataPart": "medium-drops",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-fine-drops",
+          "dataPart": "fine-drops",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-top-paint",
+          "dataPart": "top-paint",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-main-drips",
+          "dataPart": "main-drips",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-end-drops",
+          "dataPart": "end-drops",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "tf01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "tf01-primary",
+          "dataPart": "primary",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "tf01-secondary",
+          "dataPart": "secondary",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-long-scratches",
+          "dataPart": "long-scratches",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-short-scratches",
+          "dataPart": "short-scratches",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-broken-scratches",
+          "dataPart": "broken-scratches",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 52,
+        "paths": 305,
+        "circles": 0,
+        "ellipses": 348,
+        "masks": 2,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 36
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 36,
+          "internal": 36,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 66,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 305,
+        "totalCommands": 2556,
+        "approximateAnchorPairs": 4257,
+        "pathDataBytes": 63772,
+        "maxCommandsPerPath": 70,
+        "maxCoordinateNumbersPerPath": 274
+      },
+      "browserSafe": true,
+      "family": "full composition / reference sheet",
+      "recommendedUse": "Visual catalogue only; do not place directly in the runtime DOM"
+    },
+    {
+      "fileName": "curved-sweep-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/curved-sweep-01.svg",
+      "bytes": 12518,
+      "root": {
+        "viewBox": "0 0 1600 900",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "cs01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "cs01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-fragments",
+          "dataPart": "fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "cs01-release",
+          "dataPart": "release",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 5,
+        "paths": 38,
+        "circles": 0,
+        "ellipses": 14,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 5,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 38,
+        "totalCommands": 352,
+        "approximateAnchorPairs": 590,
+        "pathDataBytes": 9053,
+        "maxCommandsPerPath": 70,
+        "maxCoordinateNumbersPerPath": 274
+      },
+      "browserSafe": true,
+      "family": "curved sweep",
+      "recommendedUse": "Direct-shape adaptation candidate"
+    },
+    {
+      "fileName": "drip-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/drip-01.svg",
+      "bytes": 3107,
+      "root": {
+        "viewBox": "0 0 800 1200",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "dr01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "dr01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-top-paint",
+          "dataPart": "top-paint",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-main-drips",
+          "dataPart": "main-drips",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "dr01-end-drops",
+          "dataPart": "end-drops",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 4,
+        "paths": 8,
+        "circles": 0,
+        "ellipses": 5,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 4,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 8,
+        "totalCommands": 80,
+        "approximateAnchorPairs": 136,
+        "pathDataBytes": 1970,
+        "maxCommandsPerPath": 38,
+        "maxCoordinateNumbersPerPath": 146
+      },
+      "browserSafe": true,
+      "family": "drip",
+      "recommendedUse": "Sparse accent source; use selectively"
+    },
+    {
+      "fileName": "dry-brush-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/dry-brush-01.svg",
+      "bytes": 13296,
+      "root": {
+        "viewBox": "0 0 1600 500",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "db01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "db01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-main-fragments",
+          "dataPart": "main-fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-fine-bristles",
+          "dataPart": "fine-bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db01-detached-fragments",
+          "dataPart": "detached-fragments",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 4,
+        "paths": 62,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 4,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 62,
+        "totalCommands": 420,
+        "approximateAnchorPairs": 654,
+        "pathDataBytes": 9935,
+        "maxCommandsPerPath": 10,
+        "maxCoordinateNumbersPerPath": 34
+      },
+      "browserSafe": true,
+      "family": "dry brush",
+      "recommendedUse": "Reusable mask candidate"
+    },
+    {
+      "fileName": "dry-brush-02.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/dry-brush-02.svg",
+      "bytes": 11650,
+      "root": {
+        "viewBox": "0 0 1400 650",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "db02-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "db02-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-core-fragments",
+          "dataPart": "core-fragments",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-bristles",
+          "dataPart": "bristles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "db02-release-fragments",
+          "dataPart": "release-fragments",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 4,
+        "paths": 51,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 4,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 51,
+        "totalCommands": 370,
+        "approximateAnchorPairs": 587,
+        "pathDataBytes": 8828,
+        "maxCommandsPerPath": 10,
+        "maxCoordinateNumbersPerPath": 34
+      },
+      "browserSafe": true,
+      "family": "dry brush",
+      "recommendedUse": "Reusable mask candidate"
+    },
+    {
+      "fileName": "scratch-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/scratch-01.svg",
+      "bytes": 2649,
+      "root": {
+        "viewBox": "0 0 1600 500",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "sc01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "sc01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-long-scratches",
+          "dataPart": "long-scratches",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-short-scratches",
+          "dataPart": "short-scratches",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sc01-broken-scratches",
+          "dataPart": "broken-scratches",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 4,
+        "paths": 11,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 4,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 11,
+        "totalCommands": 23,
+        "approximateAnchorPairs": 47,
+        "pathDataBytes": 426,
+        "maxCommandsPerPath": 3,
+        "maxCoordinateNumbersPerPath": 14
+      },
+      "browserSafe": true,
+      "family": "scratch",
+      "recommendedUse": "Reusable mask candidate"
+    },
+    {
+      "fileName": "splatter-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/splatter-01.svg",
+      "bytes": 14054,
+      "root": {
+        "viewBox": "0 0 1000 1000",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "sp01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "sp01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-core-blots",
+          "dataPart": "core-blots",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-medium-drops",
+          "dataPart": "medium-drops",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sp01-fine-drops",
+          "dataPart": "fine-drops",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 4,
+        "paths": 9,
+        "circles": 0,
+        "ellipses": 80,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 4,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 9,
+        "totalCommands": 111,
+        "approximateAnchorPairs": 195,
+        "pathDataBytes": 2912,
+        "maxCommandsPerPath": 17,
+        "maxCoordinateNumbersPerPath": 62
+      },
+      "browserSafe": true,
+      "family": "splatter",
+      "recommendedUse": "Sparse accent source; use selectively"
+    },
+    {
+      "fileName": "spray-burst-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/spray-burst-01.svg",
+      "bytes": 18232,
+      "root": {
+        "viewBox": "0 0 1000 1000",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "sb01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "sb01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-near-particles",
+          "dataPart": "near-particles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-far-particles",
+          "dataPart": "far-particles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sb01-drips",
+          "dataPart": "drips",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 5,
+        "paths": 6,
+        "circles": 0,
+        "ellipses": 121,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 5,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 6,
+        "totalCommands": 74,
+        "approximateAnchorPairs": 136,
+        "pathDataBytes": 1881,
+        "maxCommandsPerPath": 16,
+        "maxCoordinateNumbersPerPath": 58
+      },
+      "browserSafe": true,
+      "family": "spray burst",
+      "recommendedUse": "Spray/overspray source candidate"
+    },
+    {
+      "fileName": "spray-drag-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/spray-drag-01.svg",
+      "bytes": 16947,
+      "root": {
+        "viewBox": "0 0 1600 600",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "sd01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "sd01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-core",
+          "dataPart": "core",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-near-overspray",
+          "dataPart": "near-overspray",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-far-particles",
+          "dataPart": "far-particles",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "sd01-end-accent",
+          "dataPart": "end-accent",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 5,
+        "paths": 5,
+        "circles": 0,
+        "ellipses": 94,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 5,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 5,
+        "totalCommands": 194,
+        "approximateAnchorPairs": 376,
+        "pathDataBytes": 5651,
+        "maxCommandsPerPath": 58,
+        "maxCoordinateNumbersPerPath": 226
+      },
+      "browserSafe": true,
+      "family": "spray drag",
+      "recommendedUse": "Spray/overspray source candidate"
+    },
+    {
+      "fileName": "thin-flick-01.svg",
+      "filePath": "/Users/miledulic/Downloads/brush-svg-references.zip::brush-svg-references/thin-flick-01.svg",
+      "bytes": 1329,
+      "root": {
+        "viewBox": "0 0 1600 450",
+        "width": null,
+        "height": null
+      },
+      "topLevelGroups": [
+        {
+          "id": "tf01-root",
+          "label": null
+        }
+      ],
+      "groupInventory": [
+        {
+          "id": "tf01-root",
+          "dataPart": null,
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "tf01-primary",
+          "dataPart": "primary",
+          "className": null,
+          "label": null
+        },
+        {
+          "id": "tf01-secondary",
+          "dataPart": "secondary",
+          "className": null,
+          "label": null
+        }
+      ],
+      "elements": {
+        "groups": 3,
+        "paths": 5,
+        "circles": 0,
+        "ellipses": 0,
+        "masks": 0,
+        "clipPaths": 0,
+        "filters": 0,
+        "images": 0,
+        "uses": 0
+      },
+      "embeddedOrExternal": {
+        "base64Payloads": 0,
+        "hrefs": {
+          "total": 0,
+          "internal": 0,
+          "data": 0,
+          "external": []
+        },
+        "externalUrlOccurrences": 1
+      },
+      "authoringMarkers": {
+        "illustratorOrEditorNamespaces": [],
+        "generatorComments": [],
+        "hasDoctype": false,
+        "hasEntities": false
+      },
+      "ids": {
+        "total": 3,
+        "duplicates": []
+      },
+      "anchorComplexity": {
+        "pathCount": 5,
+        "totalCommands": 12,
+        "approximateAnchorPairs": 26,
+        "pathDataBytes": 239,
+        "maxCommandsPerPath": 3,
+        "maxCoordinateNumbersPerPath": 14
+      },
+      "browserSafe": true,
+      "family": "thin flick",
+      "recommendedUse": "Low-cost directional companion stroke"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-07-29T13:44:36.174Z",
+  "robots": {
+    "status": 200
+  },
+  "sitemap": {
+    "status": 200,
+    "urlCount": 872
+  },
+  "filterQuery": {
+    "status": 200,
+    "xRobotsTag": "noindex, follow, noarchive"
+  },
+  "contactQuery": {
+    "status": 200,
+    "xRobotsTag": "noindex, follow, noarchive"
+  },
+  "pdf": {
+    "status": 200,
+    "xRobotsTag": "noindex, follow"
+  },
+  "duplicateRedirect": {
+    "status": 308,
+    "location": "/proizvodi/h-2p15-clear-harden-r"
+  },
+  "notFound": {
+    "status": 404,
+    "robots": "noindex",
+    "canonicalPresent": false
+  }
+}

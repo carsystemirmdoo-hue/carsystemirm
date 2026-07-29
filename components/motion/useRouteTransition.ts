@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { RouteTransitionPhase } from "@/components/motion/RouteTransitionOverlay";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
@@ -15,14 +15,24 @@ import {
 const COVER_DURATION = 420;
 const HOLD_DURATION = 80;
 const REVEAL_DURATION = 460;
-const REDUCED_DURATION = 120;
-const ROUTE_FALLBACK_DURATION = 1600;
-const ACCESS_HANDOFF_MIN_HOLD = 140;
+const VISUAL_EVENT_GRACE = 140;
+const ROUTE_FALLBACK_DURATION = 5_500;
 
-type TransitionOptions = {
-  fallbackDuration?: number;
-  onFallback?: () => void;
-  waitForPathChange: boolean;
+type TransitionKind =
+  | "boot"
+  | "route"
+  | "popstate"
+  | "theme"
+  | "handoff";
+
+type TransitionMachine = {
+  expectedRouteKey: string | null;
+  focusAfterNavigation: boolean;
+  kind: TransitionKind;
+  navigation: (() => void) | null;
+  phase: RouteTransitionPhase;
+  sourceRouteKey: string;
+  token: number;
 };
 
 function isModifiedClick(event: MouseEvent) {
@@ -38,171 +48,348 @@ function isSkippableHref(href: string) {
   );
 }
 
+function getLocationRouteKey() {
+  return `${window.location.pathname}${window.location.search}`;
+}
+
+function getUrlRouteKey(url: URL) {
+  return `${url.pathname}${url.search}`;
+}
+
+function prefersReducedMotionNow() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function nextFrames(count: number) {
+  return new Promise<void>((resolve) => {
+    function advance(remaining: number) {
+      window.requestAnimationFrame(() => {
+        if (remaining <= 1) {
+          resolve();
+          return;
+        }
+
+        advance(remaining - 1);
+      });
+    }
+
+    advance(Math.max(1, count));
+  });
+}
+
+async function waitForImage(image: HTMLImageElement) {
+  if (!image.complete) {
+    await new Promise<void>((resolve) => {
+      const finish = () => {
+        image.removeEventListener("load", finish);
+        image.removeEventListener("error", finish);
+        resolve();
+      };
+
+      image.addEventListener("load", finish, { once: true });
+      image.addEventListener("error", finish, { once: true });
+    });
+  }
+
+  if (image.complete && image.naturalWidth > 0 && typeof image.decode === "function") {
+    await image.decode().catch(() => undefined);
+  }
+}
+
+async function waitForCriticalRouteAssets() {
+  const criticalImages = Array.from(
+    document.querySelectorAll<HTMLImageElement>('img[data-route-critical="true"]'),
+  );
+  const fontsReady =
+    "fonts" in document ? document.fonts.ready.then(() => undefined) : Promise.resolve();
+  const homeHeroReady =
+    window.location.pathname === "/" ? waitForActiveHomeHero() : Promise.resolve();
+
+  await Promise.all([
+    fontsReady,
+    homeHeroReady,
+    ...criticalImages.map((image) => waitForImage(image)),
+  ]);
+}
+
+function focusRouteLandmark() {
+  const landmark = document.querySelector<HTMLElement>("main h1, main");
+  if (!landmark) return;
+
+  const hadTabIndex = landmark.hasAttribute("tabindex");
+  if (!hadTabIndex) landmark.setAttribute("tabindex", "-1");
+  landmark.focus({ preventScroll: true });
+
+  if (!hadTabIndex) {
+    landmark.addEventListener(
+      "blur",
+      () => landmark.removeAttribute("tabindex"),
+      { once: true },
+    );
+  }
+}
+
+function syncDocumentPhase(phase: RouteTransitionPhase) {
+  if (phase === "idle") {
+    delete document.documentElement.dataset.routeTransition;
+    document.body.removeAttribute("aria-busy");
+    return;
+  }
+
+  document.documentElement.dataset.routeTransition = phase;
+  document.body.setAttribute("aria-busy", "true");
+}
+
 export function useRouteTransition() {
-  const pathname = usePathname();
   const router = useRouter();
   const reducedMotion = usePrefersReducedMotion();
   const reducedMotionRef = useRef(reducedMotion);
-  const pendingNavigationRef = useRef(false);
-  const transitioningRef = useRef(false);
-  const transitionTokenRef = useRef(0);
-  const timersRef = useRef<number[]>([]);
-  const [phase, setPhase] = useState<RouteTransitionPhase>("idle");
+  const machineRef = useRef<TransitionMachine>({
+    expectedRouteKey: null,
+    focusAfterNavigation: false,
+    kind: "boot",
+    navigation: null,
+    phase: "booting",
+    sourceRouteKey: "",
+    token: 0,
+  });
+  const lastCommittedRouteRef = useRef("");
+  const readinessRequestRef = useRef("");
+  const timersRef = useRef<Set<number>>(new Set());
+  const [phase, setPhase] = useState<RouteTransitionPhase>("booting");
 
   const clearTimers = useCallback(() => {
     timersRef.current.forEach((timer) => window.clearTimeout(timer));
-    timersRef.current = [];
+    timersRef.current.clear();
   }, []);
 
   const schedule = useCallback((callback: () => void, delay: number) => {
     const timer = window.setTimeout(() => {
-      timersRef.current = timersRef.current.filter((item) => item !== timer);
+      timersRef.current.delete(timer);
       callback();
     }, delay);
 
-    timersRef.current.push(timer);
+    timersRef.current.add(timer);
   }, []);
 
-  const completeTransition = useCallback(
+  const commitMachine = useCallback((nextMachine: TransitionMachine) => {
+    machineRef.current = nextMachine;
+    setPhase(nextMachine.phase);
+    syncDocumentPhase(nextMachine.phase);
+  }, []);
+
+  const finishOpening = useCallback(
     (token: number) => {
-      if (transitionTokenRef.current !== token) return;
+      const current = machineRef.current;
+      if (current.token !== token || current.phase !== "opening") return;
 
-      pendingNavigationRef.current = false;
-      transitioningRef.current = false;
-      setPhase("idle");
-    },
-    [],
-  );
-
-  const revealTransition = useCallback(
-    (token: number) => {
-      if (transitionTokenRef.current !== token) return;
-
-      setPhase("revealing");
-      schedule(
-        () => completeTransition(token),
-        reducedMotionRef.current ? REDUCED_DURATION : REVEAL_DURATION,
-      );
-    },
-    [completeTransition, schedule],
-  );
-
-  const startTransition = useCallback(
-    (onCovered: () => void, options: TransitionOptions) => {
+      const shouldFocus = current.focusAfterNavigation;
       clearTimers();
+      readinessRequestRef.current = "";
+      commitMachine({
+        expectedRouteKey: null,
+        focusAfterNavigation: false,
+        kind: current.kind,
+        navigation: null,
+        phase: "idle",
+        sourceRouteKey: getLocationRouteKey(),
+        token,
+      });
 
-      const token = transitionTokenRef.current + 1;
-      transitionTokenRef.current = token;
-      transitioningRef.current = true;
-      pendingNavigationRef.current = options.waitForPathChange;
+      if (shouldFocus) {
+        window.requestAnimationFrame(focusRouteLandmark);
+      }
+    },
+    [clearTimers, commitMachine],
+  );
 
-      if (reducedMotionRef.current) {
-        setPhase("fade");
-        onCovered();
-        if (!options.waitForPathChange) {
-          schedule(() => completeTransition(token), REDUCED_DURATION);
-        } else {
-          schedule(() => {
-            if (!pendingNavigationRef.current) return;
-            options.onFallback?.();
-            revealTransition(token);
-          }, REDUCED_DURATION + (options.fallbackDuration ?? ROUTE_FALLBACK_DURATION));
-        }
+  const beginOpening = useCallback(
+    (token: number) => {
+      const current = machineRef.current;
+      if (
+        current.token !== token ||
+        current.phase === "idle" ||
+        current.phase === "opening"
+      ) {
         return;
       }
 
-      setPhase("covering");
-      schedule(() => {
-        if (transitionTokenRef.current !== token) return;
+      clearTimers();
+      clearSiteAccessHandoff();
+      commitMachine({ ...current, phase: "opening" });
 
-        setPhase("covered");
-        onCovered();
+      if (reducedMotionRef.current || prefersReducedMotionNow()) {
+        void nextFrames(1).then(() => finishOpening(token));
+        return;
+      }
 
-        if (!options.waitForPathChange) {
-          schedule(() => revealTransition(token), HOLD_DURATION);
-          return;
-        }
-
-        schedule(() => {
-          if (!pendingNavigationRef.current) return;
-          pendingNavigationRef.current = false;
-          options.onFallback?.();
-          revealTransition(token);
-        }, options.fallbackDuration ?? ROUTE_FALLBACK_DURATION);
-      }, COVER_DURATION);
+      schedule(
+        () => finishOpening(token),
+        REVEAL_DURATION + VISUAL_EVENT_GRACE,
+      );
     },
-    [clearTimers, completeTransition, revealTransition, schedule],
+    [clearTimers, commitMachine, finishOpening, schedule],
+  );
+
+  const revealWhenReady = useCallback(
+    async (token: number, routeKey: string) => {
+      const requestKey = `${token}:${routeKey}`;
+      if (readinessRequestRef.current === requestKey) return;
+      readinessRequestRef.current = requestKey;
+
+      await waitForCriticalRouteAssets();
+      await nextFrames(2);
+
+      const current = machineRef.current;
+      if (
+        current.token !== token ||
+        (current.phase !== "booting" && current.phase !== "navigating")
+      ) {
+        return;
+      }
+
+      beginOpening(token);
+    },
+    [beginOpening],
+  );
+
+  const scheduleRouteFallback = useCallback(
+    (token: number, duration = ROUTE_FALLBACK_DURATION) => {
+      schedule(() => {
+        const current = machineRef.current;
+        if (current.token !== token || current.phase === "idle") return;
+        beginOpening(token);
+      }, duration);
+    },
+    [beginOpening, schedule],
+  );
+
+  const handleCoverComplete = useCallback(() => {
+    const current = machineRef.current;
+    if (current.phase !== "closing") return;
+
+    commitMachine({ ...current, phase: "covered" });
+
+    if (current.kind === "theme") {
+      current.navigation?.();
+      schedule(() => beginOpening(current.token), HOLD_DURATION);
+      return;
+    }
+
+    if (current.kind === "route") {
+      commitMachine({ ...current, phase: "navigating" });
+      try {
+        current.navigation?.();
+      } catch {
+        beginOpening(current.token);
+      }
+      return;
+    }
+
+    if (current.kind === "handoff") {
+      commitMachine({ ...current, phase: "navigating" });
+    }
+  }, [beginOpening, commitMachine, schedule]);
+
+  const beginClosing = useCallback(
+    ({
+      expectedRouteKey,
+      fallbackDuration,
+      focusAfterNavigation,
+      kind,
+      navigation,
+    }: {
+      expectedRouteKey: string | null;
+      fallbackDuration?: number;
+      focusAfterNavigation: boolean;
+      kind: "route" | "theme" | "handoff";
+      navigation: (() => void) | null;
+    }) => {
+      clearTimers();
+      const token = machineRef.current.token + 1;
+      const nextMachine: TransitionMachine = {
+        expectedRouteKey,
+        focusAfterNavigation,
+        kind,
+        navigation,
+        phase: "closing",
+        sourceRouteKey: getLocationRouteKey(),
+        token,
+      };
+      commitMachine(nextMachine);
+      scheduleRouteFallback(token, fallbackDuration);
+
+      if (reducedMotionRef.current || prefersReducedMotionNow()) {
+        void nextFrames(1).then(handleCoverComplete);
+      } else {
+        schedule(
+          handleCoverComplete,
+          COVER_DURATION + VISUAL_EVENT_GRACE,
+        );
+      }
+    },
+    [
+      clearTimers,
+      commitMachine,
+      handleCoverComplete,
+      schedule,
+      scheduleRouteFallback,
+    ],
   );
 
   const runThemeTransition = useCallback(
     (swapTheme: () => void) => {
-      if (transitioningRef.current) {
+      if (machineRef.current.phase !== "idle") {
         swapTheme();
         return;
       }
 
-      startTransition(swapTheme, { waitForPathChange: false });
+      beginClosing({
+        expectedRouteKey: null,
+        focusAfterNavigation: false,
+        kind: "theme",
+        navigation: swapTheme,
+      });
     },
-    [startTransition],
+    [beginClosing],
   );
 
-  useEffect(() => {
-    reducedMotionRef.current = reducedMotion;
-  }, [reducedMotion]);
+  const onRouteCommit = useCallback(
+    (routeKey: string) => {
+      const previousRouteKey = lastCommittedRouteRef.current;
+      lastCommittedRouteRef.current = routeKey;
 
-  useEffect(() => {
-    const handoff = readSiteAccessHandoff();
-    if (!handoff || pathname.startsWith("/site-u-pripremi")) return;
-
-    clearTimers();
-    const token = transitionTokenRef.current + 1;
-    transitionTokenRef.current = token;
-    transitioningRef.current = true;
-    pendingNavigationRef.current = false;
-    setPhase(reducedMotionRef.current ? "fade" : "entry");
-
-    let cancelled = false;
-    const minimumHold = new Promise<void>((resolve) => {
-      schedule(resolve, ACCESS_HANDOFF_MIN_HOLD);
-    });
-    const heroReady = pathname === "/" ? waitForActiveHomeHero() : Promise.resolve();
-
-    Promise.all([minimumHold, heroReady]).then(() => {
-      if (cancelled || transitionTokenRef.current !== token) return;
-
-      clearSiteAccessHandoff();
-      if (reducedMotionRef.current) {
-        schedule(() => completeTransition(token), REDUCED_DURATION);
+      const current = machineRef.current;
+      if (current.phase !== "navigating") return;
+      if (
+        routeKey === current.sourceRouteKey &&
+        routeKey !== current.expectedRouteKey &&
+        routeKey === previousRouteKey
+      ) {
         return;
       }
 
-      revealTransition(token);
-    });
+      void revealWhenReady(current.token, routeKey);
+    },
+    [revealWhenReady],
+  );
 
-    return () => {
-      cancelled = true;
-    };
-  }, [clearTimers, completeTransition, pathname, revealTransition, schedule]);
-
-  useEffect(() => {
-    if (!pendingNavigationRef.current) return;
-
-    const token = transitionTokenRef.current;
-    pendingNavigationRef.current = false;
-    schedule(
-      () => revealTransition(token),
-      reducedMotionRef.current ? REDUCED_DURATION : HOLD_DURATION,
-    );
-  }, [pathname, revealTransition, schedule]);
+  const onOpenComplete = useCallback(() => {
+    const current = machineRef.current;
+    if (current.phase !== "opening") return;
+    finishOpening(current.token);
+  }, [finishOpening]);
 
   useEffect(() => {
     function handleSiteAccessHandoff() {
-      if (transitioningRef.current) return;
+      if (machineRef.current.phase !== "idle") return;
 
-      startTransition(() => undefined, {
+      beginClosing({
+        expectedRouteKey: null,
         fallbackDuration: SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS,
-        onFallback: clearSiteAccessHandoff,
-        waitForPathChange: true,
+        focusAfterNavigation: false,
+        kind: "handoff",
+        navigation: null,
       });
     }
 
@@ -211,11 +398,11 @@ export function useRouteTransition() {
     return () => {
       window.removeEventListener(SITE_ACCESS_HANDOFF_EVENT, handleSiteAccessHandoff);
     };
-  }, [startTransition]);
+  }, [beginClosing]);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
-      if (event.defaultPrevented || isModifiedClick(event) || transitioningRef.current) return;
+      if (event.defaultPrevented || isModifiedClick(event)) return;
 
       const target = event.target instanceof Element ? event.target : null;
       const anchor = target?.closest<HTMLAnchorElement>("a[href]");
@@ -226,7 +413,13 @@ export function useRouteTransition() {
       const rawHref = anchor.getAttribute("href");
       if (!rawHref || isSkippableHref(rawHref)) return;
 
-      const nextUrl = new URL(rawHref, window.location.href);
+      let nextUrl: URL;
+      try {
+        nextUrl = new URL(rawHref, window.location.href);
+      } catch {
+        return;
+      }
+
       if (nextUrl.origin !== window.location.origin) return;
 
       const currentUrl = new URL(window.location.href);
@@ -240,10 +433,15 @@ export function useRouteTransition() {
       if (destination === `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`) return;
 
       event.preventDefault();
-      startTransition(
-        () => router.push(destination),
-        { waitForPathChange: nextUrl.pathname !== currentUrl.pathname },
-      );
+
+      if (machineRef.current.phase !== "idle") return;
+
+      beginClosing({
+        expectedRouteKey: getUrlRouteKey(nextUrl),
+        focusAfterNavigation: nextUrl.pathname !== currentUrl.pathname,
+        kind: "route",
+        navigation: () => router.push(destination),
+      });
     }
 
     document.addEventListener("click", handleClick, { capture: true });
@@ -251,11 +449,92 @@ export function useRouteTransition() {
     return () => {
       document.removeEventListener("click", handleClick, { capture: true });
     };
-  }, [router, startTransition]);
+  }, [beginClosing, router]);
+
+  useEffect(() => {
+    function handlePopState() {
+      const targetRouteKey = getLocationRouteKey();
+      if (targetRouteKey === lastCommittedRouteRef.current) return;
+
+      clearTimers();
+      const token = machineRef.current.token + 1;
+      const nextMachine: TransitionMachine = {
+        expectedRouteKey: targetRouteKey,
+        focusAfterNavigation: false,
+        kind: "popstate",
+        navigation: null,
+        phase: "navigating",
+        sourceRouteKey: lastCommittedRouteRef.current,
+        token,
+      };
+
+      /*
+       * popstate cannot be delayed cross-browser. Setting the root attribute
+       * synchronously guarantees a fully covered screen before the browser can
+       * paint the new React tree.
+       */
+      syncDocumentPhase("navigating");
+      commitMachine(nextMachine);
+      scheduleRouteFallback(token);
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [clearTimers, commitMachine, scheduleRouteFallback]);
+
+  useEffect(() => {
+    function blockKeyboardNavigation(event: KeyboardEvent) {
+      if (event.key === "Tab" && machineRef.current.phase !== "idle") {
+        event.preventDefault();
+      }
+    }
+
+    document.addEventListener("keydown", blockKeyboardNavigation, {
+      capture: true,
+    });
+    return () => {
+      document.removeEventListener("keydown", blockKeyboardNavigation, {
+        capture: true,
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    reducedMotionRef.current = reducedMotion;
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    const routeKey = getLocationRouteKey();
+    lastCommittedRouteRef.current = routeKey;
+    readSiteAccessHandoff();
+
+    if (document.documentElement.dataset.routeTransition === "fallback") {
+      clearTimers();
+      commitMachine({
+        ...machineRef.current,
+        kind: "boot",
+        phase: "idle",
+        sourceRouteKey: routeKey,
+      });
+      return;
+    }
+
+    syncDocumentPhase("booting");
+    clearTimers();
+    scheduleRouteFallback(machineRef.current.token);
+    void revealWhenReady(machineRef.current.token, routeKey);
+  }, [
+    clearTimers,
+    commitMachine,
+    revealWhenReady,
+    scheduleRouteFallback,
+  ]);
 
   useEffect(
     () => () => {
       clearTimers();
+      delete document.documentElement.dataset.routeTransition;
+      document.body.removeAttribute("aria-busy");
     },
     [clearTimers],
   );
@@ -264,5 +543,8 @@ export function useRouteTransition() {
     phase,
     reducedMotion,
     runThemeTransition,
+    onCoverComplete: handleCoverComplete,
+    onOpenComplete,
+    onRouteCommit,
   };
 }

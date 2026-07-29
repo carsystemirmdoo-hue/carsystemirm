@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-07-29T13:34:26.814Z",
+  "summary": {
+    "auditedRoutes": 896,
+    "htmlPages": 894,
+    "indexable": 872,
+    "noindex": 19,
+    "redirects": 2,
+    "missingTitle": 0,
+    "duplicateTitlePages": 0,
+    "missingDescription": 0,
+    "duplicateDescriptionPages": 0,
+    "missingCanonical": 0,
+    "wrongCanonical": 0,
+    "missingH1": 0,
+    "multipleH1": 0,
+    "missingOgImage": 0,
+    "missingStructuredData": 0,
+    "pagesWithBrokenLinks": 0,
+    "uniqueBrokenLinks": 0,
+    "orphanPages": 0,
+    "imagesMissingAlt": 0,
+    "imagesEmptyAlt": 54573,
+    "imagesMissingDimensions": 11,
+    "indexableFilterSamples": 0,
+    "indexablePreviewDemo": 0,
+    "noindexUrlsInSitemap": 0,
+    "sitemapUrls": 872,
+    "productPagesWithoutProductSchema": 0,
+    "pagesWithoutBreadcrumbSchema": 0
+  },
+  "issues": []
+}

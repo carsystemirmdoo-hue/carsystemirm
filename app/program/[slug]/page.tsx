@@ -14,7 +14,8 @@ import {
 } from "@/lib/carsystem-data";
 import type { BrandReference } from "@/lib/carsystem-data";
 import type { RefinishPhase } from "@/lib/carsystem-data";
-import { breadcrumbJsonLd, jsonLd, pageMetadata, programJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, jsonLd, programJsonLd } from "@/lib/seo";
+import { buildProgramMetadata } from "@/lib/seo/metadata-builders";
 
 type ProgramRouteProps = {
   params: Promise<{ slug: string }>;
@@ -31,11 +32,7 @@ export async function generateMetadata({
   const program = getPublicProgramGroupBySlug(slug);
   if (!program) return {};
 
-  return pageMetadata({
-    title: `${program.name} | Carsystem i R-M Inđija`,
-    description: program.description,
-    path: `/program/${program.slug}`,
-  });
+  return buildProgramMetadata(program);
 }
 
 export default async function ProgramRoute({ params }: ProgramRouteProps) {

@@ -1,7 +1,10 @@
+import { Suspense } from "react";
 import { ContactForm, type ContactInitialValues } from "@/components/contact/ContactForm";
+import { ContactQueryForm } from "@/components/contact/ContactQueryForm";
 import { ContactInfoCard } from "@/components/contact/ContactInfoCard";
 import { Footer } from "@/components/layout/Footer";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
+import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import type { CompanyContact } from "@/lib/company-contact";
 import type { PartnerStore } from "@/lib/partner-stores";
 import styles from "./ContactPage.module.css";
@@ -18,6 +21,12 @@ export function ContactPage({
   return (
     <div className={styles.pageShell}>
       <main className={styles.main}>
+        <SeoBreadcrumbs
+          items={[
+            { name: "Početna", path: "/" },
+            { name: "Kontakt", path: "/kontakt" },
+          ]}
+        />
         <section className={styles.hero} aria-labelledby="contact-title">
           <p className={`${styles.kicker} ${styles.heroEyebrow}`}>Kontakt i upiti</p>
           <div className={styles.heroGrid}>
@@ -32,7 +41,17 @@ export function ContactPage({
           </div>
         </section>
 
-        <ContactForm contact={contact} initialValues={initialValues} stores={stores} />
+        <Suspense
+          fallback={
+            <ContactForm
+              contact={contact}
+              initialValues={initialValues}
+              stores={stores}
+            />
+          }
+        >
+          <ContactQueryForm contact={contact} stores={stores} />
+        </Suspense>
 
         <ContactInfoCard contact={contact} />
 

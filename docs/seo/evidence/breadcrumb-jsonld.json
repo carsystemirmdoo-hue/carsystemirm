@@ -1,0 +1,37 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": "https://carsystemirm.com/proizvodi/2220-agilis-activator#breadcrumb",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Početna",
+      "item": "https://carsystemirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Katalog",
+      "item": "https://carsystemirm.com/katalog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "R-M",
+      "item": "https://carsystemirm.com/brendovi/rm"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Boje i lakovi",
+      "item": "https://carsystemirm.com/program/boje-i-lakovi"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "A 2220 AGILIS ACTIVATOR",
+      "item": "https://carsystemirm.com/proizvodi/2220-agilis-activator"
+    }
+  ]
+}

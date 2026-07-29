@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
+import { CatalogPaginationNav } from "@/components/catalog/CatalogSeoContent";
 import {
   CATALOG_BATCH_SIZE,
   getCatalogGridColumnCount,
@@ -12,11 +13,17 @@ import {
 } from "@/components/catalog/catalogInfiniteScroll.mjs";
 import { CatalogProductGrid } from "@/components/catalog/CatalogProductGrid";
 import { CatalogSupportCta } from "@/components/catalog/CatalogSupportCta";
-import type {
-  CarsystemBrand,
-  CarsystemProduct,
-  ProgramGroup,
-  RefinishPhase,
+import {
+  rmCategorySlugs,
+  rmSeriesSlugs,
+  rmSystemSlugs,
+  type RmCategorySlug,
+  type RmSeriesSlug,
+  type RmSystemSlug,
+  type CarsystemBrand,
+  type CarsystemProduct,
+  type ProgramGroup,
+  type RefinishPhase,
 } from "@/lib/carsystem-data";
 import styles from "./CatalogPage.module.css";
 
@@ -34,7 +41,37 @@ type CatalogUrlFilters = {
   phaseSlug: string;
   programSlug: string;
   query: string;
+  rmCategory: string;
+  rmSeries: string;
+  rmSystem: string;
   status: string;
+};
+
+const rmSystemLabels: Record<RmSystemSlug, string> = {
+  agilis: "AGILIS",
+  "onyx-hd": "ONYX HD",
+  diamont: "DIAMONT",
+  "uno-hd": "UNO HD",
+  "crystal-base": "CRYSTAL BASE",
+  "graphite-hd": "GRAPHITE HD",
+};
+
+const rmSeriesLabels: Record<RmSeriesSlug, string> = {
+  pioneer: "Pioneer Series",
+  advance: "Advance Series",
+  element: "Element Series",
+};
+
+const rmCategoryLabels: Record<RmCategorySlug, string> = {
+  basecoat: "Bazne boje",
+  clearcoat: "Bezbojni lakovi",
+  "primer-filler": "Prajmeri i punioci",
+  bodyfiller: "Kitovi",
+  hardener: "Učvršćivači",
+  thinner: "Razređivači",
+  additive: "Aditivi",
+  cleaner: "Čistači",
+  "polishing-compound": "Paste za poliranje",
 };
 
 const catalogModules: CatalogModule[] = [
@@ -93,6 +130,9 @@ function filtersEqual(first: CatalogUrlFilters, second: CatalogUrlFilters) {
     first.phaseSlug === second.phaseSlug &&
     first.programSlug === second.programSlug &&
     first.query === second.query &&
+    first.rmCategory === second.rmCategory &&
+    first.rmSeries === second.rmSeries &&
+    first.rmSystem === second.rmSystem &&
     first.status === second.status
   );
 }
@@ -114,6 +154,9 @@ function parseCatalogUrlFilters({
   const phaseParam = firstParam(searchParams, "faza");
   const statusParam = firstParam(searchParams, "dostupnost");
   const queryParam = firstParam(searchParams, "q").slice(0, 80);
+  const rmSystemParam = firstParam(searchParams, "sistem");
+  const rmSeriesParam = firstParam(searchParams, "serija");
+  const rmCategoryParam = firstParam(searchParams, "rm-kategorija");
   const catalogModule = catalogModules.find((item) => item.slug === programParam);
 
   return {
@@ -122,6 +165,15 @@ function parseCatalogUrlFilters({
     phaseSlug: phaseSlugs.has(phaseParam) ? phaseParam : "",
     programSlug: !catalogModule && programSlugs.has(programParam) ? programParam : "",
     query: queryParam,
+    rmCategory: rmCategorySlugs.includes(rmCategoryParam as RmCategorySlug)
+      ? rmCategoryParam
+      : "",
+    rmSeries: rmSeriesSlugs.includes(rmSeriesParam as RmSeriesSlug)
+      ? rmSeriesParam
+      : "",
+    rmSystem: rmSystemSlugs.includes(rmSystemParam as RmSystemSlug)
+      ? rmSystemParam
+      : "",
     status: statusParam === "na-upit" ? statusParam : "",
   };
 }
@@ -138,6 +190,9 @@ function buildCatalogSearch(filters: CatalogUrlFilters, currentSearch = "") {
   params.delete("faza");
   params.delete("dostupnost");
   params.delete("q");
+  params.delete("sistem");
+  params.delete("serija");
+  params.delete("rm-kategorija");
 
   if (filters.brandSlug) params.set("brend", filters.brandSlug);
   if (activeCatalogModule) params.set("program", activeCatalogModule.slug);
@@ -145,6 +200,9 @@ function buildCatalogSearch(filters: CatalogUrlFilters, currentSearch = "") {
   if (filters.phaseSlug) params.set("faza", filters.phaseSlug);
   if (filters.status) params.set("dostupnost", filters.status);
   if (filters.query.trim()) params.set("q", filters.query.trim());
+  if (filters.rmSystem) params.set("sistem", filters.rmSystem);
+  if (filters.rmSeries) params.set("serija", filters.rmSeries);
+  if (filters.rmCategory) params.set("rm-kategorija", filters.rmCategory);
 
   return params.toString();
 }
@@ -191,6 +249,9 @@ export function CatalogExplorer({
   const [programSlug, setProgramSlug] = useState(urlFilters.programSlug);
   const [phaseSlug, setPhaseSlug] = useState(urlFilters.phaseSlug);
   const [status, setStatus] = useState(urlFilters.status);
+  const [rmSystem, setRmSystem] = useState(urlFilters.rmSystem);
+  const [rmSeries, setRmSeries] = useState(urlFilters.rmSeries);
+  const [rmCategory, setRmCategory] = useState(urlFilters.rmCategory);
   const [typeTag, setTypeTag] = useState("");
   const [productLine, setProductLine] = useState("");
   const [technicalCategory, setTechnicalCategory] = useState("");
@@ -204,6 +265,9 @@ export function CatalogExplorer({
     programSlug,
     phaseSlug,
     status,
+    rmSystem,
+    rmSeries,
+    rmCategory,
     typeTag,
     productLine,
     technicalCategory,
@@ -232,9 +296,22 @@ export function CatalogExplorer({
       phaseSlug,
       programSlug,
       query,
+      rmCategory,
+      rmSeries,
+      rmSystem,
       status,
     }),
-    [activeModule, brandSlug, phaseSlug, programSlug, query, status],
+    [
+      activeModule,
+      brandSlug,
+      phaseSlug,
+      programSlug,
+      query,
+      rmCategory,
+      rmSeries,
+      rmSystem,
+      status,
+    ],
   );
   const currentUrlFiltersRef = useRef(currentUrlFilters);
 
@@ -293,6 +370,30 @@ export function CatalogExplorer({
       ).sort((first, second) => first.localeCompare(second, "sr-Latn")),
     [products],
   );
+  const rmSystemOptions = useMemo(
+    () =>
+      rmSystemSlugs.map((value) => ({
+        label: rmSystemLabels[value],
+        value,
+      })),
+    [],
+  );
+  const rmSeriesOptions = useMemo(
+    () =>
+      rmSeriesSlugs.map((value) => ({
+        label: rmSeriesLabels[value],
+        value,
+      })),
+    [],
+  );
+  const rmCategoryOptions = useMemo(
+    () =>
+      rmCategorySlugs.map((value) => ({
+        label: rmCategoryLabels[value],
+        value,
+      })),
+    [],
+  );
 
   const activeModuleConfig = catalogModules.find(
     (catalogModule) => catalogModule.key === activeModule,
@@ -328,6 +429,9 @@ export function CatalogExplorer({
     setProgramSlug(urlFilters.programSlug);
     setPhaseSlug(urlFilters.phaseSlug);
     setStatus(urlFilters.status);
+    setRmSystem(urlFilters.rmSystem);
+    setRmSeries(urlFilters.rmSeries);
+    setRmCategory(urlFilters.rmCategory);
     setActiveModule(urlFilters.activeModule);
     setTypeTag("");
     setProductLine("");
@@ -368,6 +472,9 @@ export function CatalogExplorer({
       }
       if (phaseSlug && product.phaseSlug !== phaseSlug) return false;
       if (status === "na-upit" && !product.badges.includes("Na upit")) return false;
+      if (rmSystem && product.rmMetadata?.system !== rmSystem) return false;
+      if (rmSeries && product.rmMetadata?.series !== rmSeries) return false;
+      if (rmCategory && product.rmMetadata?.category !== rmCategory) return false;
       if (typeTag && !product.badges.includes(typeTag)) return false;
       if (productLine && product.catalogMetadata?.line !== productLine) return false;
       if (
@@ -414,6 +521,9 @@ export function CatalogExplorer({
     programBySlug,
     programSlug,
     query,
+    rmCategory,
+    rmSeries,
+    rmSystem,
     status,
     typeTag,
     productLine,
@@ -528,6 +638,9 @@ export function CatalogExplorer({
     setProgramSlug("");
     setPhaseSlug("");
     setStatus("");
+    setRmSystem("");
+    setRmSeries("");
+    setRmCategory("");
     setTypeTag("");
     setProductLine("");
     setTechnicalCategory("");
@@ -541,6 +654,16 @@ export function CatalogExplorer({
     setFiltersOpen(false);
   }
 
+  function selectBrand(nextBrandSlug: string) {
+    setBrandSlug(nextBrandSlug);
+
+    if (nextBrandSlug !== "rm") {
+      setRmSystem("");
+      setRmSeries("");
+      setRmCategory("");
+    }
+  }
+
   function updateScopedFilter(setter: (value: string) => void, value: string) {
     setter(value);
     setActiveModule("");
@@ -552,6 +675,9 @@ export function CatalogExplorer({
     Boolean(programSlug) ||
     Boolean(phaseSlug) ||
     Boolean(status) ||
+    Boolean(rmSystem) ||
+    Boolean(rmSeries) ||
+    Boolean(rmCategory) ||
     Boolean(typeTag) ||
     Boolean(productLine) ||
     Boolean(technicalCategory) ||
@@ -559,42 +685,7 @@ export function CatalogExplorer({
     Boolean(activeModule);
 
   return (
-    <main className={styles.main}>
-      <section className={styles.hero} aria-labelledby="catalog-title">
-        <div className={styles.heroCopy}>
-          <p className={styles.kicker}>Katalog, Carsystem i R-M</p>
-          <h1 id="catalog-title" className={styles.title}>
-            Katalog proizvoda
-          </h1>
-          <p className={styles.subtitle}>
-            Pregled programa za pripremu, bojenje, lakiranje i završnu obradu vozila.
-            Izaberite kategoriju, uporedite proizvode i pošaljite upit za materijal koji
-            odgovara vašem poslu.
-          </p>
-        </div>
-
-        <div className={styles.heroTools}>
-          <label className={styles.searchLabel} htmlFor="catalog-search">
-            Pretraga
-          </label>
-          <input
-            id="catalog-search"
-            className={styles.searchInput}
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value.slice(0, 80))}
-            placeholder="Pretraži proizvode..."
-          />
-
-          <div className={styles.quickStats} aria-label="Brzi pregled kataloga">
-            <span>{brands.length} brendova</span>
-            <span>{programs.length} programa</span>
-            <span>Tehnička podrška</span>
-            <span>Na upit</span>
-          </div>
-        </div>
-      </section>
-
+    <>
       <div className={styles.manufacturerRail}>
         <ManufacturerRail
           brands={brands}
@@ -603,7 +694,7 @@ export function CatalogExplorer({
           mode="filter"
           selectedSlug={brandSlug}
           title="Izaberite proizvođača"
-          onSelect={setBrandSlug}
+          onSelect={selectBrand}
         />
       </div>
 
@@ -657,7 +748,7 @@ export function CatalogExplorer({
             brandSlug={brandSlug}
             filtersOpen={filtersOpen}
             hasActiveFilters={hasActiveFilters}
-            onBrandChange={setBrandSlug}
+            onBrandChange={selectBrand}
             onClear={clearFilters}
             onDesktopCollapseChange={setDesktopFiltersCollapsed}
             onMobileClose={() => setFiltersOpen(false)}
@@ -666,6 +757,9 @@ export function CatalogExplorer({
               setProgramSlug(value);
               setActiveModule("");
             }}
+            onRmCategoryChange={(value) => updateScopedFilter(setRmCategory, value)}
+            onRmSeriesChange={(value) => updateScopedFilter(setRmSeries, value)}
+            onRmSystemChange={(value) => updateScopedFilter(setRmSystem, value)}
             onStatusChange={(value) => updateScopedFilter(setStatus, value)}
             onTypeChange={(value) => updateScopedFilter(setTypeTag, value)}
             onProductLineChange={(value) => updateScopedFilter(setProductLine, value)}
@@ -677,6 +771,12 @@ export function CatalogExplorer({
             phaseSlug={phaseSlug}
             programs={programs}
             programSlug={programSlug}
+            rmCategory={rmCategory}
+            rmCategoryOptions={rmCategoryOptions}
+            rmSeries={rmSeries}
+            rmSeriesOptions={rmSeriesOptions}
+            rmSystem={rmSystem}
+            rmSystemOptions={rmSystemOptions}
             status={status}
             typeOptions={typeOptions}
             typeTag={typeTag}
@@ -715,7 +815,11 @@ export function CatalogExplorer({
         />
       </section>
 
+      <CatalogPaginationNav
+        currentPage={1}
+        totalPages={Math.ceil(products.length / CATALOG_BATCH_SIZE)}
+      />
       <CatalogSupportCta />
-    </main>
+    </>
   );
 }

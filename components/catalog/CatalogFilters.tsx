@@ -19,6 +19,9 @@ export function CatalogFilters({
   onPhaseChange,
   onProgramChange,
   onMobileClose,
+  onRmCategoryChange,
+  onRmSeriesChange,
+  onRmSystemChange,
   onStatusChange,
   onTypeChange,
   onProductLineChange,
@@ -28,6 +31,12 @@ export function CatalogFilters({
   phaseSlug,
   programs,
   programSlug,
+  rmCategory,
+  rmCategoryOptions,
+  rmSeries,
+  rmSeriesOptions,
+  rmSystem,
+  rmSystemOptions,
   status,
   typeOptions,
   typeTag,
@@ -49,6 +58,9 @@ export function CatalogFilters({
   onPhaseChange: (value: string) => void;
   onProgramChange: (value: string) => void;
   onMobileClose: () => void;
+  onRmCategoryChange: (value: string) => void;
+  onRmSeriesChange: (value: string) => void;
+  onRmSystemChange: (value: string) => void;
   onStatusChange: (value: string) => void;
   onTypeChange: (value: string) => void;
   onProductLineChange: (value: string) => void;
@@ -58,6 +70,12 @@ export function CatalogFilters({
   phaseSlug: string;
   programs: ProgramGroup[];
   programSlug: string;
+  rmCategory: string;
+  rmCategoryOptions: { label: string; value: string }[];
+  rmSeries: string;
+  rmSeriesOptions: { label: string; value: string }[];
+  rmSystem: string;
+  rmSystemOptions: { label: string; value: string }[];
   status: string;
   typeOptions: string[];
   typeTag: string;
@@ -207,6 +225,61 @@ export function CatalogFilters({
             value={status}
           />
         </FilterField>
+
+        {(brandSlug === "rm" || rmSystem || rmSeries || rmCategory) && (
+          <>
+            <FilterField label="R-M sistem" htmlFor="rm-system-filter">
+              <SearchableCombobox
+                ariaLabel="R-M sistem"
+                emptyMessage="Nema R-M sistema koji odgovaraju pretrazi."
+                id="rm-system-filter"
+                onChange={onRmSystemChange}
+                options={[
+                  { label: "Svi R-M sistemi", value: "" },
+                  ...rmSystemOptions,
+                ]}
+                placeholder="Svi R-M sistemi"
+                searchPlaceholder="Pretražite R-M sistem"
+                sheetTitle="Izaberite R-M sistem"
+                value={rmSystem}
+              />
+            </FilterField>
+
+            <FilterField label="R-M serija" htmlFor="rm-series-filter">
+              <SearchableCombobox
+                ariaLabel="R-M serija"
+                emptyMessage="Nema R-M serija koje odgovaraju pretrazi."
+                id="rm-series-filter"
+                onChange={onRmSeriesChange}
+                options={[
+                  { label: "Sve R-M serije", value: "" },
+                  ...rmSeriesOptions,
+                ]}
+                placeholder="Sve R-M serije"
+                searchPlaceholder="Pretražite R-M seriju"
+                sheetTitle="Izaberite R-M seriju"
+                value={rmSeries}
+              />
+            </FilterField>
+
+            <FilterField label="R-M grupa proizvoda" htmlFor="rm-category-filter">
+              <SearchableCombobox
+                ariaLabel="R-M grupa proizvoda"
+                emptyMessage="Nema R-M grupa koje odgovaraju pretrazi."
+                id="rm-category-filter"
+                onChange={onRmCategoryChange}
+                options={[
+                  { label: "Sve R-M grupe", value: "" },
+                  ...rmCategoryOptions,
+                ]}
+                placeholder="Sve R-M grupe"
+                searchPlaceholder="Pretražite R-M grupu"
+                sheetTitle="Izaberite R-M grupu proizvoda"
+                value={rmCategory}
+              />
+            </FilterField>
+          </>
+        )}
 
         {productLineOptions.length > 0 && (
           <FilterField label="Linija proizvoda" htmlFor="product-line-filter">

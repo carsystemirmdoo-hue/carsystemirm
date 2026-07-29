@@ -638,6 +638,18 @@
   }
 }
 
+@media (min-width: 1600px) {
+  .main {
+    max-width: min(2120px, calc(100vw - clamp(144px, 12vw, 480px)));
+  }
+
+  .locatorShell {
+    --locator-map-height: clamp(560px, min(34vw, 64vh), 720px);
+    grid-template-columns: minmax(0, 1fr) minmax(480px, clamp(480px, 31vw, 560px));
+    gap: clamp(24px, 2vw, 36px);
+  }
+}
+
 @media (max-width: 920px) {
   .heroGrid {
     grid-template-columns: 1fr;

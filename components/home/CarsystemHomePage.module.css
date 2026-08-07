@@ -757,31 +757,6 @@
   letter-spacing: 0.06em;
 }
 
-@media (min-width: 1600px) {
-  .hero {
-    --hero-wide-inset: clamp(140px, calc(50vw - 1200px), 520px);
-    --hero-media-inset: clamp(0px, calc(45vw - 720px), 24vw);
-  }
-
-  .heroMedia {
-    right: var(--hero-media-inset);
-    width: clamp(1088px, 64vw, 1680px);
-  }
-
-  .heroFade {
-    inset-inline: var(--hero-media-inset);
-  }
-
-  .heroInner {
-    max-width: calc(100% - var(--hero-wide-inset) - var(--hero-wide-inset));
-  }
-
-  .processBadge,
-  .locatorCard {
-    right: max(56px, calc(var(--hero-media-inset) + 24px));
-  }
-}
-
 .trustStrip {
   border-top: 1px solid var(--border-soft);
   background: var(--bg);
@@ -2327,47 +2302,79 @@
   }
 }
 
+/*
+ * Ranije je ovo bila svetla kartica sa senkom, jer je sekcija ispod bila tamna.
+ * U Light Commerce dizajnu je sama sekcija svetla, pa kartica-na-svetlom vise
+ * nema smisla: povrsina je ravna, a hijerarhiju drze tanke linije iz dizajna.
+ */
 .supportBand {
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background:
-    linear-gradient(to right, var(--border-soft) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border-soft) 1px, transparent 1px),
-    radial-gradient(circle at 86% 0%, color-mix(in oklch, var(--red), transparent 82%), transparent 28rem),
-    var(--card);
-  background-size: 48px 48px, 48px 48px, auto, auto;
-  box-shadow: var(--shadow);
+  --support-ink: var(--lc-ink);
+  --support-muted: var(--lc-muted);
+  --support-line: var(--lc-line);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--support-ink);
 }
 
+/* Dizajn: 1.1fr / 0.9fr, centrirano; padding nosi sama sekcija. */
 .supportStatement {
   display: grid;
-  max-width: 980px;
-  gap: 18px;
-  padding: clamp(28px, 5vw, 58px);
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(28px, 4.4vw, 64px);
+  padding: 0 0 clamp(36px, 4.4vw, 64px);
+}
+
+.supportCopy {
+  display: grid;
+  max-width: 920px;
+  gap: 16px;
+}
+
+.supportCopy .sectionKicker {
+  margin: 0;
 }
 
 .supportStatement h2 {
-  max-width: 820px;
+  max-width: 860px;
+  margin: 0;
+  color: var(--support-ink);
+  font-size: clamp(32px, 3.45vw, 52px);
+  letter-spacing: -0.025em;
+  line-height: 0.98;
 }
 
 .supportStatement .sectionLead {
   max-width: 72ch;
+  color: var(--support-muted);
+}
+
+.supportContactCta {
+  --split-accent: #c2160f;
+  --split-border: var(--lc-line);
+  --split-ink: var(--support-ink);
+  --split-panel: transparent;
+  width: min(100%, 22rem);
+  margin-top: 8px;
 }
 
 .supportMetricStrip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-block: 1px solid var(--border-soft);
-  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  gap: clamp(20px, 2.8vw, 40px);
+  border-block: 1px solid var(--support-line);
+  padding: clamp(20px, 2vw, 28px) 0;
+  background: none;
 }
 
 .supportMetricStrip span {
   display: grid;
   min-width: 0;
-  gap: 5px;
-  border-right: 1px solid var(--border-soft);
-  padding: 16px clamp(14px, 2vw, 22px);
+  gap: 6px;
+  border-right: 1px solid var(--support-line);
+  padding: 15px clamp(16px, 2vw, 26px);
 }
 
 .supportMetricStrip span:last-child {
@@ -2375,7 +2382,7 @@
 }
 
 .supportMetricStrip small {
-  color: var(--text3);
+  color: var(--support-muted);
   font-family: var(--font-technical), monospace;
   font-size: 10px;
   letter-spacing: 0.16em;
@@ -2384,53 +2391,58 @@
 
 .supportMetricStrip strong {
   overflow-wrap: anywhere;
-  color: var(--text);
-  font-size: clamp(15px, 1.5vw, 19px);
+  color: var(--support-ink);
+  font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 900;
 }
 
 .supportServiceGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(28px, 3.4vw, 44px);
+  background: none;
 }
 
 .supportServiceGrid article {
   display: grid;
   min-width: 0;
-  gap: 12px;
-  border-right: 1px solid var(--border-soft);
-  padding: clamp(20px, 3vw, 30px);
+  gap: 10px;
+  border-right: 1px solid var(--support-line);
+  padding: 0 clamp(20px, 2.4vw, 32px);
+}
+
+.supportServiceGrid article:first-child {
+  padding-left: 0;
 }
 
 .supportServiceGrid article:last-child {
   border-right: 0;
 }
 
-/* Kartice su zaptivene uz ivicu supportBand okvira (overflow: hidden), pa bi
-   translateY lift na dnu otkrio prazan procep — hover ostaje na gloss sloju. */
-.supportServiceGrid article[data-pointer-active="true"] {
-  transform: none;
-}
-
 .supportServiceGrid article > span {
-  width: 36px;
-  height: 4px;
-  border-radius: 999px;
-  background: var(--red-grad);
+  width: 30px;
+  height: 3px;
+  background: #c51e2a;
 }
 
 .supportServiceGrid strong {
-  color: var(--text);
+  color: var(--support-ink);
   font-family: var(--font-display), sans-serif;
-  font-size: 20px;
+  font-size: clamp(17px, 1.4vw, 20px);
   font-weight: 900;
 }
 
 .supportServiceGrid p {
   margin: 0;
-  color: var(--text3);
+  color: var(--support-muted);
   font-size: 13.5px;
   line-height: 1.55;
+}
+
+.section.supportChapter {
+  max-width: min(1760px, 100%);
+  padding-top: clamp(22px, 3vw, 42px);
+  padding-bottom: clamp(64px, 7vw, 104px);
 }
 
 .mixConsole {
@@ -2932,6 +2944,20 @@
     display: grid;
   }
 
+  .supportStatement {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 24px;
+  }
+
+  .supportServiceGrid article:first-child {
+    padding-left: clamp(20px, 2.4vw, 32px);
+  }
+
+  .supportContactCta {
+    justify-self: start;
+  }
+
   .supportMetricStrip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2941,7 +2967,7 @@
   }
 
   .supportMetricStrip span:nth-child(-n + 2) {
-    border-bottom: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--support-line);
   }
 
   .supportServiceGrid,
@@ -2951,7 +2977,7 @@
 
   .supportServiceGrid article {
     border-right: 0;
-    border-bottom: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--support-line);
   }
 
   .supportServiceGrid article:last-child {
@@ -2960,6 +2986,21 @@
 
   .educationIntro {
     position: static;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 860px) {
+  .supportServiceGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .supportServiceGrid article {
+    border-right: 1px solid var(--support-line);
+    border-bottom: 0;
+  }
+
+  .supportServiceGrid article:last-child {
+    border-right: 0;
   }
 }
 
@@ -3030,6 +3071,18 @@
 
   .supportMetricStrip {
     grid-template-columns: 1fr;
+  }
+
+  .supportStatement {
+    padding: 0 0 26px;
+  }
+
+  .supportStatement h2 {
+    font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .supportContactCta {
+    width: 100%;
   }
 
   .supportMetricStrip span,
@@ -3590,57 +3643,377 @@
   animation-play-state: paused;
 }
 
-/* ---------- downstream chapter ---------- */
+/* ---------- downstream chapter: Light Commerce ---------- */
 
 /*
- * Sekcije ispod takeovera. Chapter signal ne pada na nulu kada takeover izađe
- * iz kadra nego se zaustavlja na pragu (~0.34), pa ovi blokovi zadrže tonalitet
- * novog poglavlja umesto da se sve odmah vrati na staro.
+ * Design: "Homepage Light Commerce — High Fidelity Redesign".
  *
- * Mereno pre izmene: srednja luminansa je odmah po izlasku skakala 39 → 101,
- * što je i bio osećaj da je takeover izolovan blok ubačen između sekcija.
+ * Ranije su sekcije ispod takeovera nosile tamni chapter tint vozen iz
+ * --paint-chapter, da bi se osecalo "novo poglavlje". Novi dizajn to resava
+ * drugacije i namerno: posle tamnog repa takeovera ide izdvojen gradijentni
+ * pojas (.chapterTransition), pa se stranica vraca u svetlu komercijalnu zonu.
+ * Prelaz je i dalje rezisiran, ali kroz eksplicitan hand-off umesto kroz tint
+ * koji je bojio ceo donji deo stranice.
  *
- * Tint ide kroz background-image (dodatni sloj), ne kroz background shorthand,
- * da ne pregazi postojeće pozadine sekcija. Zato blok stoji na kraju fajla —
- * posle svih pravila koja definišu te pozadine.
+ * Tokeni su preuzeti direktno iz dizajna. Full-bleed ide kroz pseudo-sloj, ne
+ * kroz background shorthand, da na sirokim ekranima povrsina ne ostane
+ * zarobljena u uskoj koloni sadrzaja.
  */
 .chapterAfter {
-  --chapter: clamp(0, var(--paint-chapter, 0), 1);
-  --chapter-mix: calc(var(--chapter) * 100%);
-  --chapter-tint: color-mix(
-    in oklab,
-    transparent,
-    oklch(0.26 0.075 320 / 0.5) var(--chapter-mix)
-  );
+  --lc-surface: #f3f1ec;
+  --lc-surface-alt: #ece8dd;
+  --lc-panel: #eae6db;
+  --lc-ink: #15161a;
+  --lc-muted: #5b5d63;
+  --lc-kicker: #9a9c9f;
+  --lc-line: rgb(0 0 0 / 0.1);
   position: relative;
-  background-image: linear-gradient(
-    var(--chapter-tint),
-    var(--chapter-tint)
-  );
+  isolation: isolate;
+  background-image: none;
+  color: var(--lc-ink);
 }
 
-:global(html.dark) .chapterAfter {
-  --chapter-tint: color-mix(
-    in oklab,
-    transparent,
-    oklch(0.5 0.14 330 / 0.22) var(--chapter-mix)
-  );
-}
-
-/* Painterly prag na vrhu prve sekcije posle takeovera. */
-.chapterThreshold::before {
+.chapterAfter::after {
   position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in oklab, transparent, #ef0b82 var(--chapter-mix)) 24%,
-    color-mix(in oklab, transparent, #00b9d7 var(--chapter-mix)) 76%,
-    transparent
-  );
+  inset-block: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  background: var(--lc-surface);
   content: "";
   pointer-events: none;
+  transform: translateX(-50%);
+}
+
+/* Srednja sekcija (edukacija) je za nijansu tamnija — razdvaja tri zone. */
+.educationChapter.chapterAfter::after {
+  background: var(--lc-surface-alt);
+}
+
+/*
+ * Dark tema nije deo dizajna (koji je light-only), ali je podrzana na sajtu.
+ * Tokeni se preslikavaju na tamne ekvivalente da se zadrzi ista hijerarhija
+ * povrsina umesto da svetle vrednosti probiju kroz tamnu temu.
+ */
+:global(html.dark) .chapterAfter {
+  --lc-surface: #101218;
+  --lc-surface-alt: #0c0e13;
+  /* Svetliji od povrsine: proizvod na slici je skoro crn i inace propadne. */
+  --lc-panel: #262a34;
+  --lc-ink: #f2f0ea;
+  --lc-muted: #a2a6ae;
+  --lc-kicker: #7c8089;
+  --lc-line: rgb(255 255 255 / 0.1);
+}
+
+/*
+ * Gradijentni pojas izmedju tamnog repa takeovera i svetle zone. Vrednosti su
+ * 1:1 iz dizajna. Ovo je jedini element koji nosi prelaz — sekcije ispod su
+ * ravne povrsine.
+ */
+.chapterTransition {
+  height: 150px;
+  background: linear-gradient(
+    180deg,
+    #0a0b0e 0%,
+    #171814 18%,
+    #5c5a4e 50%,
+    #dcd8cc 82%,
+    #f3f1ec 100%
+  );
+}
+
+:global(html.dark) .chapterTransition {
+  background: linear-gradient(180deg, #0a0b0e 0%, #0c0e13 46%, #101218 100%);
+}
+
+@media (max-width: 720px) {
+  .chapterTransition {
+    height: 90px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .chapterTransition {
+    will-change: auto;
+  }
+}
+
+/*
+ * Laptop ostaje referentna kompozicija. Iznad 1600px sadržaj raste
+ * kontinualno iz 1320px osnove, ali se zaustavlja na 2240px da ultra-wide
+ * prikazi zadrže jasnu hijerarhiju i mirne bočne margine.
+ */
+@media (min-width: 1600px) {
+  .home {
+    --home-wide-container: min(2240px, calc(75vw + 120px));
+    --home-wide-reading-container: calc(var(--home-wide-container) - 112px);
+    --home-wide-gutter: clamp(56px, 3vw, 96px);
+    --home-wide-outer: calc(
+      var(--home-wide-reading-container) + var(--home-wide-gutter) +
+        var(--home-wide-gutter)
+    );
+  }
+
+  .hero {
+    min-height: clamp(660px, 58svh, 780px);
+  }
+
+  .heroMedia {
+    right: 0;
+    width: 68%;
+  }
+
+  .heroFade {
+    inset: 0;
+  }
+
+  .heroInner {
+    max-width: var(--home-wide-container);
+    min-height: clamp(660px, 58svh, 780px);
+    padding-inline: var(--home-wide-gutter);
+  }
+
+  .processBadge,
+  .locatorCard {
+    right: var(--home-wide-gutter);
+  }
+
+  .trustInner {
+    max-width: var(--home-wide-outer);
+    padding-inline: var(--home-wide-gutter);
+  }
+
+  .brandRail {
+    justify-content: space-between;
+    gap: clamp(12px, 1vw, 24px);
+  }
+
+  .brandRailLink,
+  .brandRailStatic {
+    max-width: 190px;
+    flex: 1 1 0;
+  }
+
+  .brandRailLogo {
+    width: 100%;
+  }
+
+  .categorySection,
+  .section,
+  .sectionAlt {
+    padding-inline: var(--home-wide-gutter);
+  }
+
+  .categorySectionInner,
+  .networkSection > .sectionHeader,
+  .networkSection > .networkGrid,
+  .sectionAlt > .contactGrid {
+    max-width: var(--home-wide-container);
+  }
+
+  .section {
+    max-width: var(--home-wide-outer);
+  }
+
+  .networkGrid {
+    grid-template-columns: minmax(360px, 480px) minmax(0, 1fr);
+    gap: clamp(18px, 1.4vw, 30px);
+  }
+
+  .mapPanel,
+  .contactMap {
+    min-height: clamp(420px, 22vw, 540px);
+  }
+
+  .educationIndexLayout {
+    grid-template-columns: clamp(420px, 23vw, 520px) minmax(0, 1fr);
+    gap: clamp(66px, 6vw, 160px);
+  }
+
+  .contactGrid {
+    gap: clamp(18px, 1.4vw, 30px);
+  }
+}
+
+
+/* ---------- Light Commerce: product visual ---------- */
+
+/*
+ * Desna kolona prve sekcije. Dizajn: kutija #EAE6DB, slika `contain` na
+ * ~72%/82% povrsine sa mekom senkom, i mono labela u gornjem levom uglu.
+ */
+.supportVisual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*
+   * Definisana visina, ne min-height: slika koristi `max-height: 82%` iz
+   * dizajna, a procenat se ne razresava ako je visina kontejnera `auto` —
+   * tada slika naraste na punu sirinu i razvuce panel.
+   */
+  height: clamp(240px, 26vw, 340px);
+  margin: 0;
+  overflow: hidden;
+  background: var(--lc-panel);
+}
+
+.supportVisual img {
+  width: auto;
+  max-width: 72%;
+  height: auto;
+  max-height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 26px rgb(0 0 0 / 0.14));
+}
+
+.supportVisual figcaption {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #8a8c7e;
+  font-family: var(--font-technical), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+:global(html.dark) .supportVisual figcaption {
+  color: var(--lc-kicker);
+}
+
+@media (max-width: 900px) {
+  .supportVisual {
+    height: 200px;
+  }
+
+  .supportVisual img {
+    max-width: 70%;
+    max-height: 78%;
+  }
+}
+
+@media (max-width: 720px) {
+  .supportVisual {
+    height: 180px;
+  }
+}
+
+/* ---------- Light Commerce: sekcije 2 i 3 ---------- */
+
+/*
+ * Edukacija i kontakt su ranije bili kartice sa senkom na tamnoj podlozi.
+ * Dizajn ih trazi ravno: povrsina sekcije nosi ton, hijerarhiju drze tanke
+ * linije. Sve je skupirano pod .chapterAfter da se ne dira isti komponentni
+ * stil na /kontakt i /prodavnice stranicama.
+ */
+.chapterAfter .educationIntro h2 {
+  color: var(--lc-ink);
+  font-size: clamp(26px, 2.5vw, 34px);
+  line-height: 1.1;
+  /* Dizajn ima recenicni slog, ne verzal. */
+  text-transform: none;
+}
+
+.chapterAfter .educationIntro p:not(.sectionKicker) {
+  max-width: 34ch;
+  color: var(--lc-muted);
+  font-size: 14.5px;
+}
+
+.chapterAfter .educationIndexRows {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.chapterAfter .educationIndexRow {
+  border-bottom: 1px solid var(--lc-line);
+  padding: 20px 0;
+}
+
+.chapterAfter .educationIndexRow:first-child {
+  border-top: 1px solid var(--lc-line);
+}
+
+.chapterAfter .educationIndexRow::after {
+  right: 0;
+  left: 0;
+}
+
+.chapterAfter .educationIndexRow strong {
+  color: var(--lc-ink);
+}
+
+.chapterAfter .educationIndexRow small,
+.chapterAfter .educationIndexRow em {
+  color: var(--lc-kicker);
+}
+
+/* Kontakt: ravan raspored, panel mape u tonu iz dizajna. */
+.chapterAfter .contactPanel {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.chapterAfter .contactMap {
+  border: 0;
+  border-radius: 0;
+  background: var(--lc-panel);
+}
+
+.chapterAfter .contactRows {
+  color: var(--lc-muted);
+}
+
+.chapterAfter .contactRows b {
+  color: var(--lc-ink);
+}
+
+.chapterAfter .sectionKicker {
+  color: var(--lc-kicker);
+}
+
+/*
+ * Dizajn: crveni link u recenicnom slogu sa strelicom, ne mono verzal.
+ * Skupirano na Light Commerce poglavlje — isti .textLink se koristi drugde.
+ */
+.chapterAfter .textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #c2160f;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.chapterAfter .textLink::after {
+  content: "→";
+  font-size: 14px;
+  transition: transform 220ms var(--cs-ease-polish);
+}
+
+.chapterAfter .textLink:hover {
+  color: #951009;
+}
+
+.chapterAfter .textLink:hover::after {
+  transform: translateX(3px);
+}
+
+:global(html.dark) .chapterAfter .textLink {
+  color: #ff6b62;
+}
+
+:global(html.dark) .chapterAfter .textLink:hover {
+  color: #ff9a94;
 }

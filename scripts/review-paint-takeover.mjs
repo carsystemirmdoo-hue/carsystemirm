@@ -211,18 +211,35 @@ async function runSweep(page, args) {
   return { metrics, rows, jumps, reversals };
 }
 
+/*
+ * Faze su definisane u jedinicama JEDINSTVENOG timeline-a (approach + sticky),
+ * a ne kao frakcije sticky opsega. Approach lead je jedna viewport visina, pa
+ * se udeo izvodi isto kao u `entryShareFor`. Kad se geometrija scene promeni,
+ * kadrovi i dalje padaju na isti trenutak prelaza.
+ */
+function scrollForTimeline(m, t) {
+  const share = m.viewport / (m.viewport + m.range);
+  if (t <= share) {
+    const approach = t / share;
+    return m.takeover.top - Math.round(m.viewport * (1 - approach));
+  }
+  const progress = (t - share) / (1 - share);
+  return m.takeover.top + Math.round(m.range * progress);
+}
+
 const PHASES = [
-  { key: "01-before", at: (m) => m.takeover.top - Math.round(m.viewport * 0.75) },
-  { key: "02-entry-brush", at: (m) => m.takeover.top - Math.round(m.viewport * 0.3) },
-  { key: "03-threshold", at: (m) => m.takeover.top + Math.round(m.range * 0.08) },
-  { key: "04-takeover-rise", at: (m) => m.takeover.top + Math.round(m.range * 0.3) },
-  { key: "05-takeover-active", at: (m) => m.takeover.top + Math.round(m.range * 0.62) },
-  { key: "06-takeover-hold", at: (m) => m.takeover.top + Math.round(m.range * 0.9) },
-  {
-    key: "07-downstream",
-    at: (m) => (m.after ? m.after.top + 120 : m.takeover.top + m.range + 400),
-  },
-];
+  { key: "01-before", t: 0 },
+  { key: "02-entry-brush", t: 0.22 },
+  { key: "03-threshold", t: 0.45 },
+  { key: "04-takeover-rise", t: 0.68 },
+  { key: "05-takeover-active", t: 0.84 },
+  { key: "06-takeover-hold", t: 0.96 },
+].map((phase) => ({ key: phase.key, at: (m) => scrollForTimeline(m, phase.t) }));
+
+PHASES.push({
+  key: "07-downstream",
+  at: (m) => (m.after ? m.after.top + 120 : m.takeover.top + m.range + 400),
+});
 
 async function runShots(page, args, label) {
   const metrics = await sectionMetrics(page);

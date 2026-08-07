@@ -45,26 +45,33 @@ export function RmCampaignStage() {
   const [transitionPhase, setTransitionPhase] =
     useState<HeroTransitionPhase>("idle");
   const [direction, setDirection] = useState<"next" | "previous">("next");
+  const [documentIsVisible, setDocumentIsVisible] = useState(true);
+  const [isHeroAboveViewport, setIsHeroAboveViewport] = useState(false);
   const [pauseReasons, setPauseReasons] = useState<
     ReadonlySet<AutoplayPauseReason>
-  >(() => new Set());
+  >(() => new Set<AutoplayPauseReason>());
+  const [autoplayCycle, setAutoplayCycle] = useState(0);
   const activeIndexRef = useRef(0);
   const assetReadinessRef = useRef(new Map<number, Promise<void>>());
-  const autoplayFrameRef = useRef<number | null>(null);
+  const autoplayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const progressFrameRef = useRef<number | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
   const focusFrameRef = useRef<number | null>(null);
   const pauseReasonsRef = useRef<ReadonlySet<AutoplayPauseReason>>(new Set());
+  const documentIsVisibleRef = useRef(true);
+  const isHeroAboveViewportRef = useRef(false);
   const pendingIndexRef = useRef<number | null>(null);
   const progressRef = useRef(0);
   const progressFillRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const pendingRequestRef = useRef(false);
+  const requestTokenRef = useRef(0);
   const reducedMotionRef = useRef(false);
-  const requestSlideRef = useRef<
-    ((requestedIndex: number, manual?: boolean) => Promise<void>) | null
-  >(null);
   const transitionFallbackRef = useRef<number | null>(null);
   const transitionPhaseRef = useRef<HeroTransitionPhase>("idle");
   const transitionWasManualRef = useRef(false);
-  const manualHoldRemainingRef = useRef(0);
+  const manualHoldDelayRef = useRef(0);
   const mountedRef = useRef(true);
   const pointerRef = useRef<{
     id: number;
@@ -108,6 +115,48 @@ export function RmCampaignStage() {
     },
     [updatePauseReason],
   );
+
+  const clearAutoplayTimer = useCallback(() => {
+    if (autoplayTimerRef.current === null) return;
+    clearTimeout(autoplayTimerRef.current);
+    autoplayTimerRef.current = null;
+  }, []);
+
+  const clearProgressFrame = useCallback(() => {
+    if (progressFrameRef.current === null) return;
+    window.cancelAnimationFrame(progressFrameRef.current);
+    progressFrameRef.current = null;
+  }, []);
+
+  const clearTransitionFallback = useCallback(() => {
+    if (transitionFallbackRef.current === null) return;
+    window.clearTimeout(transitionFallbackRef.current);
+    transitionFallbackRef.current = null;
+  }, []);
+
+  const normalizeTransition = useCallback(() => {
+    requestTokenRef.current += 1;
+    pendingRequestRef.current = false;
+    pendingIndexRef.current = null;
+    transitionWasManualRef.current = false;
+    manualHoldDelayRef.current = 0;
+    updatePauseReason("manual-hold", false);
+    clearTransitionFallback();
+    setPendingIndex(null);
+    paintProgress(0, activeIndexRef.current);
+
+    if (transitionPhaseRef.current === "idle") {
+      updatePauseReason("transition", false);
+      return;
+    }
+
+    updateTransitionPhase("idle");
+  }, [
+    clearTransitionFallback,
+    paintProgress,
+    updatePauseReason,
+    updateTransitionPhase,
+  ]);
 
   const preloadSlide = useCallback((index: number) => {
     const cached = assetReadinessRef.current.get(index);
@@ -159,12 +208,17 @@ export function RmCampaignStage() {
       ) {
         return;
       }
+      if (isHeroAboveViewportRef.current || !documentIsVisibleRef.current) {
+        return;
+      }
 
       const nextDirection =
         nextIndex === (currentIndex - 1 + slideCount) % slideCount
           ? "previous"
           : "next";
 
+      const requestToken = requestTokenRef.current + 1;
+      requestTokenRef.current = requestToken;
       pendingRequestRef.current = true;
       pendingIndexRef.current = nextIndex;
       transitionWasManualRef.current = manual;
@@ -172,13 +226,20 @@ export function RmCampaignStage() {
       setPendingIndex(nextIndex);
 
       if (manual) {
-        manualHoldRemainingRef.current = 0;
+        manualHoldDelayRef.current = 0;
         updatePauseReason("manual-hold", false);
         paintProgress(0, currentIndex);
       }
 
       await preloadSlide(nextIndex);
-      if (!mountedRef.current) return;
+      if (
+        !mountedRef.current ||
+        requestTokenRef.current !== requestToken ||
+        isHeroAboveViewportRef.current ||
+        !documentIsVisibleRef.current
+      ) {
+        return;
+      }
 
       if (reducedMotionRef.current) {
         activeIndexRef.current = nextIndex;
@@ -187,7 +248,7 @@ export function RmCampaignStage() {
         setPendingIndex(null);
         pendingRequestRef.current = false;
         paintProgress(0, nextIndex);
-        manualHoldRemainingRef.current = manual ? MANUAL_PAUSE_MS : 0;
+        manualHoldDelayRef.current = manual ? MANUAL_PAUSE_MS : 0;
         updatePauseReason("manual-hold", manual);
         return;
       }
@@ -201,7 +262,6 @@ export function RmCampaignStage() {
       updateTransitionPhase,
     ],
   );
-  requestSlideRef.current = requestSlide;
 
   const showPrevious = useCallback(
     (manual = true) => requestSlide(activeIndexRef.current - 1, manual),
@@ -216,22 +276,28 @@ export function RmCampaignStage() {
     mountedRef.current = true;
     return () => {
       mountedRef.current = false;
-      if (autoplayFrameRef.current !== null) {
-        window.cancelAnimationFrame(autoplayFrameRef.current);
-      }
+      clearAutoplayTimer();
+      clearProgressFrame();
       if (focusFrameRef.current !== null) {
         window.cancelAnimationFrame(focusFrameRef.current);
       }
-      if (transitionFallbackRef.current !== null) {
-        window.clearTimeout(transitionFallbackRef.current);
-      }
+      clearTransitionFallback();
     };
-  }, []);
+  }, [clearAutoplayTimer, clearProgressFrame, clearTransitionFallback]);
 
   useEffect(() => {
     function syncVisibility() {
       const isHidden = document.visibilityState !== "visible";
+      documentIsVisibleRef.current = !isHidden;
+      setDocumentIsVisible(!isHidden);
       updatePauseReason("document-hidden", isHidden);
+
+      if (isHidden) {
+        clearAutoplayTimer();
+        clearProgressFrame();
+        normalizeTransition();
+        return;
+      }
 
       if (!isHidden) {
         const stage = stageRef.current;
@@ -248,40 +314,74 @@ export function RmCampaignStage() {
     syncVisibility();
     document.addEventListener("visibilitychange", syncVisibility);
     return () => document.removeEventListener("visibilitychange", syncVisibility);
-  }, [updatePauseReason]);
+  }, [
+    clearAutoplayTimer,
+    clearProgressFrame,
+    normalizeTransition,
+    updatePauseReason,
+  ]);
 
   useEffect(() => {
     const stage = stageRef.current;
-    if (!stage || typeof IntersectionObserver === "undefined") {
-      updatePauseReason("offscreen", false);
-      return;
-    }
+    if (!stage) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const isVisible = Boolean(
-          entry.isIntersecting && entry.boundingClientRect.height > 0,
-        );
-        updatePauseReason("offscreen", !isVisible);
+    const updateHeroPosition = () => {
+      scrollFrameRef.current = null;
 
-        if (!isVisible) {
-          updatePauseReason("hover", false);
-          return;
-        }
+      const hero = stageRef.current;
+      if (!hero) return;
 
-        const hoverCapable = window.matchMedia(
-          "(hover: hover) and (pointer: fine)",
-        ).matches;
-        updatePauseReason(
-          "hover",
-          hoverCapable && stage.matches(":hover"),
-        );
-      },
-      { threshold: 0.12 },
-    );
-    observer.observe(stage);
-    return () => observer.disconnect();
-  }, [updatePauseReason]);
+      const rect = hero.getBoundingClientRect();
+      const nextIsAboveViewport = rect.bottom <= 0;
+      const wasAboveViewport = isHeroAboveViewportRef.current;
+      if (nextIsAboveViewport === wasAboveViewport) return;
+
+      isHeroAboveViewportRef.current = nextIsAboveViewport;
+      setIsHeroAboveViewport(nextIsAboveViewport);
+      updatePauseReason("offscreen", nextIsAboveViewport);
+
+      if (nextIsAboveViewport) {
+        clearAutoplayTimer();
+        clearProgressFrame();
+        normalizeTransition();
+        updatePauseReason("hover", false);
+        return;
+      }
+
+      normalizeTransition();
+      const hoverCapable = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+      ).matches;
+      updatePauseReason("hover", hoverCapable && hero.matches(":hover"));
+    };
+
+    const requestPositionUpdate = () => {
+      if (scrollFrameRef.current !== null) return;
+      scrollFrameRef.current = window.requestAnimationFrame(
+        updateHeroPosition,
+      );
+    };
+
+    updateHeroPosition();
+    window.addEventListener("scroll", requestPositionUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", requestPositionUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestPositionUpdate);
+      window.removeEventListener("resize", requestPositionUpdate);
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+        scrollFrameRef.current = null;
+      }
+    };
+  }, [
+    clearAutoplayTimer,
+    clearProgressFrame,
+    normalizeTransition,
+    updatePauseReason,
+  ]);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -307,6 +407,10 @@ export function RmCampaignStage() {
   }, [reducedMotion, updatePauseReason]);
 
   useEffect(() => {
+    if (isHeroAboveViewport || !documentIsVisible || reducedMotion) {
+      return;
+    }
+
     void preloadSlide(activeIndex);
     void preloadSlide((activeIndex + 1) % rmCampaignSlides.length);
 
@@ -322,7 +426,13 @@ export function RmCampaignStage() {
     }
 
     return undefined;
-  }, [activeIndex, preloadSlide]);
+  }, [
+    activeIndex,
+    documentIsVisible,
+    isHeroAboveViewport,
+    preloadSlide,
+    reducedMotion,
+  ]);
 
   const autoplayPaused = pauseReasons.size > 0 || pendingIndex !== null;
   const autoplayState = pauseReasons.has("transition")
@@ -330,60 +440,92 @@ export function RmCampaignStage() {
     : autoplayPaused
       ? "paused"
       : "running";
+  const hasBlockingPauseReason = Array.from(pauseReasons).some(
+    (reason) => reason !== "manual-hold",
+  );
+  const shouldAutoplay =
+    !isHeroAboveViewport &&
+    documentIsVisible &&
+    !reducedMotion &&
+    rmCampaignSlides.length > 1 &&
+    !hasBlockingPauseReason &&
+    pendingIndex === null &&
+    transitionPhase === "idle";
 
   useEffect(() => {
-    let previousTimestamp: number | null = null;
+    clearAutoplayTimer();
+    clearProgressFrame();
 
-    function tick(timestamp: number) {
-      const delta =
-        previousTimestamp === null
-          ? 0
-          : Math.min(timestamp - previousTimestamp, 250);
-      previousTimestamp = timestamp;
+    const scheduledIndex = activeIndexRef.current;
+    paintProgress(0, scheduledIndex);
+    if (!shouldAutoplay) return;
 
-      const activeReasons = pauseReasonsRef.current;
-      const transitionOwnsTime =
-        transitionPhaseRef.current !== "idle" ||
-        pendingIndexRef.current !== null;
-      const hasBlockingPause = Array.from(activeReasons).some(
-        (reason) => reason !== "manual-hold" && reason !== "transition",
-      );
+    if (manualHoldDelayRef.current > 0) {
+      autoplayTimerRef.current = setTimeout(() => {
+        autoplayTimerRef.current = null;
+        manualHoldDelayRef.current = 0;
+        updatePauseReason("manual-hold", false);
+        setAutoplayCycle((current) => current + 1);
+      }, manualHoldDelayRef.current);
 
-      if (transitionOwnsTime || hasBlockingPause) {
-        // Keep elapsed time frozen until every active reason is cleared.
-      } else if (
-        activeReasons.has("manual-hold") &&
-        manualHoldRemainingRef.current > 0
-      ) {
-        manualHoldRemainingRef.current = Math.max(
-          0,
-          manualHoldRemainingRef.current - delta,
-        );
-        if (manualHoldRemainingRef.current === 0) {
-          updatePauseReason("manual-hold", false);
-        }
-      } else {
-        const nextProgress =
-          progressRef.current + delta / AUTOPLAY_INTERVAL_MS;
-        const currentIndex = activeIndexRef.current;
-        paintProgress(nextProgress, currentIndex);
-
-        if (progressRef.current >= 1 && !pendingRequestRef.current) {
-          void requestSlideRef.current?.(currentIndex + 1, false);
-        }
-      }
-
-      autoplayFrameRef.current = window.requestAnimationFrame(tick);
+      return clearAutoplayTimer;
     }
 
-    autoplayFrameRef.current = window.requestAnimationFrame(tick);
-    return () => {
-      if (autoplayFrameRef.current !== null) {
-        window.cancelAnimationFrame(autoplayFrameRef.current);
-        autoplayFrameRef.current = null;
+    const startedAt = Date.now();
+    const updateProgress = () => {
+      if (autoplayTimerRef.current === null) {
+        progressFrameRef.current = null;
+        return;
+      }
+
+      paintProgress(
+        (Date.now() - startedAt) / AUTOPLAY_INTERVAL_MS,
+        scheduledIndex,
+      );
+
+      if (progressRef.current < 1) {
+        progressFrameRef.current =
+          window.requestAnimationFrame(updateProgress);
+      } else {
+        progressFrameRef.current = null;
       }
     };
-  }, [paintProgress, updatePauseReason]);
+
+    progressFrameRef.current = window.requestAnimationFrame(updateProgress);
+    autoplayTimerRef.current = setTimeout(() => {
+      autoplayTimerRef.current = null;
+      clearProgressFrame();
+      paintProgress(1, scheduledIndex);
+
+      if (
+        isHeroAboveViewportRef.current ||
+        !documentIsVisibleRef.current ||
+        reducedMotionRef.current ||
+        pauseReasonsRef.current.size > 0 ||
+        transitionPhaseRef.current !== "idle" ||
+        pendingIndexRef.current !== null ||
+        pendingRequestRef.current ||
+        activeIndexRef.current !== scheduledIndex
+      ) {
+        return;
+      }
+
+      void requestSlide(activeIndexRef.current + 1, false);
+    }, AUTOPLAY_INTERVAL_MS);
+
+    return () => {
+      clearAutoplayTimer();
+      clearProgressFrame();
+    };
+  }, [
+    autoplayCycle,
+    clearAutoplayTimer,
+    clearProgressFrame,
+    paintProgress,
+    requestSlide,
+    shouldAutoplay,
+    updatePauseReason,
+  ]);
 
   const completeTransitionPhase = useCallback(
     (phase: Exclude<HeroTransitionPhase, "idle">) => {
@@ -401,7 +543,7 @@ export function RmCampaignStage() {
       }
 
       const manual = transitionWasManualRef.current;
-      manualHoldRemainingRef.current = manual ? MANUAL_PAUSE_MS : 0;
+      manualHoldDelayRef.current = manual ? MANUAL_PAUSE_MS : 0;
       updatePauseReason("manual-hold", manual);
       pendingIndexRef.current = null;
       setPendingIndex(null);
@@ -412,10 +554,7 @@ export function RmCampaignStage() {
   );
 
   useEffect(() => {
-    if (transitionFallbackRef.current !== null) {
-      window.clearTimeout(transitionFallbackRef.current);
-      transitionFallbackRef.current = null;
-    }
+    clearTransitionFallback();
 
     if (transitionPhase === "idle") return;
 
@@ -426,21 +565,19 @@ export function RmCampaignStage() {
     );
 
     return () => {
-      if (transitionFallbackRef.current !== null) {
-        window.clearTimeout(transitionFallbackRef.current);
-        transitionFallbackRef.current = null;
-      }
+      clearTransitionFallback();
     };
-  }, [completeTransitionPhase, transitionPhase]);
+  }, [
+    clearTransitionFallback,
+    completeTransitionPhase,
+    transitionPhase,
+  ]);
 
   function handleWipeAnimationEnd(event: AnimationEvent<HTMLSpanElement>) {
     if (event.target !== event.currentTarget) return;
     if (transitionPhaseRef.current === "idle") return;
 
-    if (transitionFallbackRef.current !== null) {
-      window.clearTimeout(transitionFallbackRef.current);
-      transitionFallbackRef.current = null;
-    }
+    clearTransitionFallback();
 
     completeTransitionPhase(transitionPhaseRef.current);
   }

@@ -66,11 +66,10 @@
   background: var(--header-shell);
   color: var(--header-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
-  transition:
-    background-color 420ms var(--header-ease),
-    border-color 420ms var(--header-ease),
-    color 420ms var(--header-ease),
-    transform 280ms var(--header-ease);
+  /* Boje su direktna funkcija --paint-chapter scroll signala. Vremenska
+     tranzicija bi na svakom frame-u jurila prethodnu vrednost i kasnila za
+     takeoverom, zato ovde animiramo samo hide/show transform. */
+  transition: transform 280ms var(--header-ease);
   will-change: transform;
 }
 
@@ -94,7 +93,9 @@
   --header-hover: oklch(0.86 0.035 78 / 0.62);
 }
 
-.header[data-scroll-hidden] {
+.header[data-scroll-hidden],
+.header[data-entrance-state][data-scroll-hidden] {
+  animation: none;
   pointer-events: none;
   transform: translate3d(0, -101%, 0);
 }
@@ -1187,6 +1188,7 @@
   inset: 0;
   display: flex;
   justify-content: flex-end;
+  overflow: hidden;
 }
 
 .mobileScrim {

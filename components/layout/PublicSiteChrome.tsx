@@ -9,7 +9,8 @@ export function PublicSiteChrome({ children }: { children: ReactNode }) {
   const usesCustomChrome =
     pathname.startsWith("/site-u-pripremi") ||
     pathname.startsWith("/interaction-demo") ||
-    pathname.startsWith("/social-exports");
+    pathname.startsWith("/social-exports") ||
+    pathname.startsWith("/portal");
 
   if (usesCustomChrome) return <>{children}</>;
 

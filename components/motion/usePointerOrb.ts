@@ -117,18 +117,35 @@ export function usePointerOrb({
     const dotPosition = { ...target };
     let frame = 0;
     let enabled = false;
+    let visible = false;
     let stateKey = "";
+
+    function cancelFrame() {
+      if (!frame) return;
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+    }
+
+    function requestFrame() {
+      if (!frame && enabled && visible) {
+        frame = window.requestAnimationFrame(tick);
+      }
+    }
 
     function setEnabled(next: boolean) {
       enabled = next;
       document.body.classList.toggle("cs-pigment-cursor-enabled", next);
       halo.dataset.enabled = next ? "true" : "false";
       dot.dataset.enabled = next ? "true" : "false";
+      if (!next) cancelFrame();
     }
 
     function setVisible(next: boolean) {
+      visible = next;
       halo.dataset.visible = next ? "true" : "false";
       dot.dataset.visible = next ? "true" : "false";
+      if (next) requestFrame();
+      else cancelFrame();
     }
 
     function updateState(eventTarget: EventTarget | null) {
@@ -149,6 +166,7 @@ export function usePointerOrb({
       target.y = event.clientY;
       updateState(event.target);
       setVisible(true);
+      requestFrame();
     }
 
     function leave() {
@@ -156,6 +174,9 @@ export function usePointerOrb({
     }
 
     function tick() {
+      frame = 0;
+      if (!enabled || !visible) return;
+
       const haloEase = 0.16;
       const dotEase = 0.36;
       haloPosition.x += (target.x - haloPosition.x) * haloEase;
@@ -165,26 +186,33 @@ export function usePointerOrb({
 
       halo.style.transform = `translate3d(${haloPosition.x}px, ${haloPosition.y}px, 0) translate(-50%, -50%)`;
       dot.style.transform = `translate3d(${dotPosition.x}px, ${dotPosition.y}px, 0) translate(-50%, -50%)`;
-      frame = window.requestAnimationFrame(tick);
+
+      const remainingDistance = Math.max(
+        Math.abs(target.x - haloPosition.x),
+        Math.abs(target.y - haloPosition.y),
+        Math.abs(target.x - dotPosition.x),
+        Math.abs(target.y - dotPosition.y),
+      );
+      if (remainingDistance > 0.1) requestFrame();
     }
 
     function updateEnabled() {
-      setEnabled(canUseOrb());
-      if (!canUseOrb()) setVisible(false);
+      const nextEnabled = canUseOrb();
+      setEnabled(nextEnabled);
+      if (!nextEnabled) setVisible(false);
     }
 
     updateEnabled();
     media.addEventListener("change", updateEnabled);
     document.addEventListener("pointermove", move, { passive: true });
     document.addEventListener("pointerleave", leave);
-    frame = window.requestAnimationFrame(tick);
 
     return () => {
       media.removeEventListener("change", updateEnabled);
       document.removeEventListener("pointermove", move);
       document.removeEventListener("pointerleave", leave);
       document.body.classList.remove("cs-pigment-cursor-enabled");
-      if (frame) window.cancelAnimationFrame(frame);
+      cancelFrame();
     };
   }, [dotRef, haloRef]);
 }

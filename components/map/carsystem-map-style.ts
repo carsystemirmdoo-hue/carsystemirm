@@ -73,10 +73,87 @@ async function resolveSourceTileJson(style: StyleSpecification) {
   return style;
 }
 
+/* ---------- korporativni prikaz granica ---------- */
+
+/**
+ * Srpski korporativni prikaz: unutrašnja linija između Srbije i Kosova se ne
+ * iscrtava, a Kosovo se ne obeležava kao zasebna država.
+ *
+ * Ovo je isključivo sloj prikaza (style filter). Vektorski tile-ovi ostaju
+ * nepromenjeni OpenStreetMap podaci i ovde se ništa ne "prepisuje".
+ *
+ * Provereno nad OpenFreeMap planet tile-ovima (20260802):
+ *
+ * - Granica Srbija–Kosovo NIJE `disputed: 1`. Dolazi kroz `boundary_2` sloj
+ *   kao obična `admin_level: 2` linija, pa sakrivanje `boundary_disputed`
+ *   sloja ne bi imalo nikakvog efekta.
+ * - Linija se pouzdano prepoznaje po paru `adm0_l`/`adm0_r` = XKK/SRB.
+ *   Potvrđeno na z=5, 6, 7, 8, 9, 11 i 13.
+ * - Granice Kosova prema ALB, MKD i MNE se NAMERNO zadržavaju: u ovom prikazu
+ *   one postaju spoljna granica Srbije. Sakrivanje svih XKK linija bi ostavilo
+ *   rupu u spoljnoj konturi.
+ * - Kosovo ima i `place` labelu klase `country` (iso_a2 = XK, rank 3), pa se i
+ *   ona izostavlja. Labele gradova unutar teritorije ostaju.
+ *
+ * OGRANIČENJE: na z ≤ 4 tile-ovi uopšte ne nose `adm0_l`/`adm0_r` atribute, pa
+ * se na tim nivoima linija ne može razlikovati od ostalih državnih granica i
+ * ostaje iscrtana. Sve mape na sajtu rade na znatno većim zumovima (Srbija je
+ * na z ≤ 4 manja od nekoliko piksela), pa to praktično nije vidljivo.
+ */
+const KOSOVO_ADM0 = "XKK";
+const SERBIA_ADM0 = "SRB";
+
+function withoutInternalSerbiaBoundary(filter: unknown): unknown {
+  const exclusion = [
+    "!",
+    [
+      "any",
+      [
+        "all",
+        ["==", ["get", "adm0_l"], KOSOVO_ADM0],
+        ["==", ["get", "adm0_r"], SERBIA_ADM0],
+      ],
+      [
+        "all",
+        ["==", ["get", "adm0_l"], SERBIA_ADM0],
+        ["==", ["get", "adm0_r"], KOSOVO_ADM0],
+      ],
+    ],
+  ];
+
+  return filter === undefined ? exclusion : ["all", filter, exclusion];
+}
+
+function withoutKosovoCountryLabel(filter: unknown): unknown {
+  const exclusion = ["!=", ["get", "iso_a2"], "XK"];
+  return filter === undefined ? exclusion : ["all", filter, exclusion];
+}
+
+export function applySerbianCorporateBoundaries(
+  style: StyleSpecification,
+): StyleSpecification {
+  for (const layer of style.layers) {
+    const sourceLayer = (layer as { "source-layer"?: string })["source-layer"];
+    const target = layer as { filter?: unknown };
+
+    if (sourceLayer === "boundary" && layer.type === "line") {
+      target.filter = withoutInternalSerbiaBoundary(target.filter);
+      continue;
+    }
+
+    if (sourceLayer === "place" && layer.id.startsWith("label_country")) {
+      target.filter = withoutKosovoCountryLabel(target.filter);
+    }
+  }
+
+  return style;
+}
+
 export function loadCarsystemMapStyle(theme: "light" | "dark") {
   if (!lightStylePromise) {
     lightStylePromise = fetchJsonWithRetry<StyleSpecification>(LIGHT_STYLE_URL)
       .then((style) => resolveSourceTileJson(style))
+      .then((style) => applySerbianCorporateBoundaries(style))
       .catch((error) => {
         // Never cache a failed load; the next call should retry from scratch.
         lightStylePromise = null;

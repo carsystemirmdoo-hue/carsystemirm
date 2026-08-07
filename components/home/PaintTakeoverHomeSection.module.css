@@ -8,15 +8,13 @@
    * luminansi bliska završnom stanju, pa je silazak monoton.
    */
   --takeover-canvas: #14161f;
-  --takeover-bloom-a: #c51765;
-  --takeover-bloom-b: #195ac6;
-  --surface-offset: 30svh;
+  --surface-offset: -32svh;
   --artwork-offset: 18svh;
   --background-opacity: 0;
   --background-scale: 1.015;
   --background-x: -0.55vw;
   --background-y: 8px;
-  --hero-global-opacity: 1;
+  --hero-global-opacity: 0;
   --content-opacity: 0;
   --content-offset: 26px;
   --contrast-opacity: 0;
@@ -25,12 +23,18 @@
   position: relative;
   z-index: 1;
   /*
-   * Skraćeno sa 220svh. Ulazak sada počinje još u prethodnom bloku, pa sekciji
-   * ne treba toliki scroll opseg — a kraći opseg je i ono što ubrzava
-   * povlačenje poteza: isti prozor timeline-a preslikan na manje piksela.
+   * MORA da prati STICKY_TRAVEL_VH iz paintTakeoverMotionConfig.ts:
+   * height = (1 + STICKY_TRAVEL_VH) * 100svh = (1 + 0.55) * 100 = 155svh.
+   *
+   * Approach lead (1svh) i sticky travel (0.55svh) dele isti budžet piksela i
+   * iz njih se izvodi ENTRY_SHARE, pa je brzina timeline-a konstantna kroz
+   * pinovanje. Bez toga je na pinu skakala ~7.9× i wipe se završavao u ~60px.
+   *
+   * Visina je namerno ista na svim breakpointima: odnos approach/sticky mora
+   * ostati konstantan da bi prozori slojeva značili isto na svakom ekranu.
    */
-  height: 190vh;
-  height: 190svh;
+  height: 155vh;
+  height: 155svh;
   overflow: clip;
   background: var(--return-surface);
   color: #f4f1eb;
@@ -42,11 +46,13 @@
  * bila primetna (izmereno: 11.2 → 10.4 kroz ceo ulazak). Zato takeover u dark
  * temi menja ton i zasićenje — duboka šljiva/indigo osnova sa jačim bloom-om,
  * umesto još jednog neutralnog crnog bloka.
+ *
+ * Podloga je pomerena dublje u šljivu (#1d0f2e) i dobija chapter bloom kroz
+ * colorWash, pa je razlika u odnosu na #070910 okoline hue + chroma, a ne samo
+ * svetlina koju dark tema ionako ne bi prenela.
  */
 :global(html.dark) .section {
-  --takeover-canvas: #191026;
-  --takeover-bloom-a: #ff2e86;
-  --takeover-bloom-b: #2f7bff;
+  --takeover-canvas: #1d0f2e;
 }
 
 .section[data-paint-debug-layout="true"] {
@@ -67,14 +73,13 @@
 
 .takeoverSurface {
   position: absolute;
-  inset: -30svh 0 0;
+  inset: 0;
   pointer-events: none;
 }
 
 .takeoverSurface {
   z-index: 0;
   transform: translate3d(0, var(--surface-offset), 0);
-  will-change: transform;
 }
 
 .takeoverSurface svg {
@@ -96,7 +101,12 @@
 
 .backgroundArtwork {
   z-index: 1;
-  aspect-ratio: 16 / 9;
+  /*
+   * Bez aspect-ratio. Uz `inset` je 16/9 obarao visinu sloja ispod visine
+   * kadra (na 1440×900 na ~810px), pa je pri dnu ostajala svetla traka i kada
+   * je takeover potpuno aktivan. `background-size: cover` ionako čuva odnos
+   * same slike.
+   */
   background-image: image-set(
     url("/art/paint-takeover/paint-takeover-background.avif") type("image/avif"),
     url("/art/paint-takeover/paint-takeover-background.webp") type("image/webp")
@@ -107,12 +117,11 @@
   opacity: var(--background-opacity);
   transform: translate3d(
       var(--background-x),
-      calc(var(--surface-offset) + var(--background-y) + var(--exit-lift)),
+      calc(var(--artwork-offset) + var(--background-y) + var(--exit-lift)),
       0
     )
     scale(var(--background-scale));
   transform-origin: center;
-  will-change: opacity, transform;
 }
 
 .heroArtwork {
@@ -123,7 +132,19 @@
     calc(var(--artwork-offset) + var(--exit-lift)),
     0
   );
-  will-change: opacity, transform;
+}
+
+.heroArtwork > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.heroArtwork [data-paint-line] {
+  opacity: 0;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 }
 
 .contentContrast {
@@ -140,14 +161,33 @@
       rgb(5 7 12 / calc(var(--contrast-opacity) * 0.62)),
       transparent 57%
     );
-  transform: translate3d(0, var(--surface-offset), 0);
+  transform: translate3d(0, var(--artwork-offset), 0);
 }
 
 .colorWash {
   z-index: 4;
   background: rgb(7 9 16 / 0.08);
   opacity: var(--color-wash-opacity);
-  will-change: opacity;
+}
+
+/*
+ * U dark temi wash prestaje da bude zatamnjenje (podloga je već tamna) i
+ * postaje bloom: topli magenta u zoni sudara poteza i hladni cyan u gornjem
+ * desnom uglu. Time se poglavlje razlikuje po boji, a ne po svetlini.
+ * Opacity i dalje vozi isti monotoni --color-wash-opacity, pa nema treperenja.
+ */
+:global(html.dark) .colorWash {
+  background:
+    radial-gradient(
+      ellipse 62% 54% at 62% 58%,
+      rgb(239 11 130 / 0.16),
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 48% 44% at 88% 12%,
+      rgb(0 185 215 / 0.11),
+      transparent 70%
+    );
 }
 
 .section[data-wash-disabled="true"] .contentContrast,
@@ -163,7 +203,17 @@
   width: min(63vw, 1060px);
   opacity: var(--content-opacity);
   transform: translate3d(0, var(--content-offset), 0);
+}
+
+.section[data-motion-active="true"] .takeoverSurface,
+.section[data-motion-active="true"] .backgroundArtwork,
+.section[data-motion-active="true"] .heroArtwork,
+.section[data-motion-active="true"] .copy {
   will-change: opacity, transform;
+}
+
+.section[data-motion-active="true"] .colorWash {
+  will-change: opacity;
 }
 
 .eyebrow {
@@ -232,19 +282,7 @@
   outline-offset: 3px;
 }
 
-@media (max-width: 1024px) {
-  .section {
-    height: 176vh;
-    height: 176svh;
-  }
-}
-
 @media (max-width: 720px) {
-  .section {
-    height: 164vh;
-    height: 164svh;
-  }
-
   .stickyViewport {
     min-height: 500px;
   }
@@ -258,11 +296,6 @@
 
   .backgroundArtwork {
     background-position: 57% center;
-  }
-
-  .heroArtwork > svg {
-    width: 124%;
-    margin-left: -12%;
   }
 
   .contentContrast {
@@ -316,7 +349,8 @@
   .takeoverSurface,
   .backgroundArtwork,
   .heroArtwork,
-  .copy {
+  .copy,
+  .colorWash {
     will-change: auto;
   }
 }

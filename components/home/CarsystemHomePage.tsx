@@ -33,7 +33,6 @@ import {
   type PartnerStore,
 } from "@/lib/partner-stores";
 import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
-import type { FinalHeroManifest } from "@/components/paint-takeover/paintTakeoverTypes";
 import styles from "./CarsystemHomePage.module.css";
 import { PaintEntryBridge } from "./PaintEntryBridge";
 import { PaintTakeoverHomeSection } from "./PaintTakeoverHomeSection";
@@ -114,15 +113,7 @@ function formatDistanceKm(distanceKm: number) {
   return `${Math.max(1, Math.round(distanceKm))} km`;
 }
 
-type CarsystemHomePageProps = {
-  paintTakeoverArtwork: string;
-  paintTakeoverManifest: FinalHeroManifest;
-};
-
-export function CarsystemHomePage({
-  paintTakeoverArtwork,
-  paintTakeoverManifest,
-}: CarsystemHomePageProps) {
+export function CarsystemHomePage() {
   const [selectedCity, setSelectedCity] = useState(defaultCity);
   const [selectedMapStoreId, setSelectedMapStoreId] = useState(defaultCityEntry?.id ?? "");
   const [networkMapFailed, setNetworkMapFailed] = useState(false);
@@ -154,17 +145,30 @@ export function CarsystemHomePage({
   );
 
   useEffect(() => {
+    let scrollFrame = 0;
+
     function updateMobileLocator() {
       setShowMobileLocator(window.scrollY > window.innerHeight * 0.72);
     }
 
+    function requestMobileLocatorUpdate() {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = 0;
+        updateMobileLocator();
+      });
+    }
+
     updateMobileLocator();
-    window.addEventListener("scroll", updateMobileLocator, { passive: true });
-    window.addEventListener("resize", updateMobileLocator);
+    window.addEventListener("scroll", requestMobileLocatorUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", requestMobileLocatorUpdate);
 
     return () => {
-      window.removeEventListener("scroll", updateMobileLocator);
-      window.removeEventListener("resize", updateMobileLocator);
+      window.removeEventListener("scroll", requestMobileLocatorUpdate);
+      window.removeEventListener("resize", requestMobileLocatorUpdate);
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
     };
   }, []);
 
@@ -524,6 +528,7 @@ export function CarsystemHomePage({
               <PartnerMap
                 badgeLabel="Partnerska mreža"
                 className={styles.homeNetworkMapCanvas}
+                cooperativeGestures
                 hoveredId=""
                 onError={() => setNetworkMapFailed(true)}
                 onReady={() => setNetworkMapFailed(false)}
@@ -552,27 +557,45 @@ export function CarsystemHomePage({
 
       <PaintTakeoverHomeSection
         debugEnabled={paintDiagnostics.debug}
-        heroArtwork={paintTakeoverArtwork}
-        manifest={paintTakeoverManifest}
         washDisabled={paintDiagnostics.washDisabled}
       />
 
+      {/*
+        Hand-off iz tamnog repa takeovera u svetlu komercijalnu zonu. Nosi ga
+        jedan namenski gradijentni pojas iz dizajna, umesto ranijeg chapter
+        tinta koji je bojio sve sekcije ispod.
+      */}
+      <div className={styles.chapterTransition} aria-hidden="true" />
+
       <section
-        className={`${styles.section} ${styles.chapterAfter} ${styles.chapterThreshold}`}
+        className={`${styles.section} ${styles.supportChapter} ${styles.chapterAfter}`}
         aria-labelledby="support-title"
       >
         <div className={styles.supportBand}>
           <div className={styles.supportStatement}>
-            <p className={styles.sectionKicker}>Tehnička podrška i mikseri boja</p>
-            <h2 id="support-title" data-cursor="headline">Pravi izbor proizvoda počinje dobrim savetom.</h2>
-            <p className={styles.sectionLead}>
-              Nijansiranje po formuli proizvođača, savetovanje za pripremu i
-              lakiranje, kao i komercijalna podrška za radionice i partnere.
-            </p>
-            <SplitContactCta
-              inquiryHref="/kontakt?tema=tehnicka-podrska"
-              inquiryLabel="Pošaljite upit podršci"
-            />
+            <div className={styles.supportCopy}>
+              <p className={styles.sectionKicker}>Tehnička podrška i mikseri boja</p>
+              <h2 id="support-title" data-cursor="headline">Pravi izbor proizvoda počinje dobrim savetom.</h2>
+              <p className={styles.sectionLead}>
+                Nijansiranje po formuli proizvođača, savetovanje za pripremu i
+                lakiranje, kao i komercijalna podrška za radionice i partnere.
+              </p>
+              <SplitContactCta
+                className={styles.supportContactCta}
+                inquiryHref="/kontakt?tema=tehnicka-podrska"
+                inquiryLabel="Pošaljite upit podršci"
+              />
+            </div>
+            <figure className={styles.supportVisual}>
+              <Image
+                src="/products/carsystem/carsystem-finish-serija.png"
+                alt="Carsystem Finish serija"
+                width={660}
+                height={662}
+                sizes="(max-width: 900px) 92vw, 38vw"
+              />
+              <figcaption>Carsystem Finish serija</figcaption>
+            </figure>
           </div>
 
           <div className={styles.supportMetricStrip} aria-label="Podaci o podršci">
@@ -595,12 +618,7 @@ export function CarsystemHomePage({
               ["Tehnička podrška", "Smernice za podlogu, lakiranje i završnu obradu."],
               ["Komercijalni tim", "Usmeravanje upita ka odgovarajućoj prodavnici ili regionu."],
             ].map(([title, text]) => (
-              <article
-                className="cs-gloss-card"
-                key={title}
-                data-cursor="card"
-                data-motion-surface
-              >
+              <article key={title}>
                 <span aria-hidden="true" />
                 <strong>{title}</strong>
                 <p>{text}</p>
@@ -611,7 +629,7 @@ export function CarsystemHomePage({
       </section>
 
       <section
-        className={`${styles.section} ${styles.chapterAfter}`}
+        className={`${styles.section} ${styles.educationChapter} ${styles.chapterAfter}`}
         aria-labelledby="education-title"
       >
         <div className={styles.educationIndexLayout}>

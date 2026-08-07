@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BaslacBrandPage } from "@/components/baslac-brand/BaslacBrandPage";
 import { BrandPage } from "@/components/brand/BrandPage";
+import { CarsystemBrandPage } from "@/components/carsystem-brand/CarsystemBrandPage";
+import { carsystemSeo } from "@/components/carsystem-brand/carsystemBrandData";
 import { RmBrandPage } from "@/components/rm-brand/RmBrandPage";
 import {
   getAllCarsystemBrands,
@@ -13,7 +15,10 @@ import {
   toProductListingProduct,
 } from "@/lib/carsystem-data";
 import { brandJsonLd, breadcrumbJsonLd, jsonLd } from "@/lib/seo";
-import { buildBrandMetadata } from "@/lib/seo/metadata-builders";
+import {
+  buildBrandMetadata,
+  buildPageMetadata,
+} from "@/lib/seo/metadata-builders";
 
 type BrandRouteProps = {
   params: Promise<{ slug: string }>;
@@ -29,6 +34,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const brand = getCarsystemBrandBySlug(slug);
   if (!brand) return {};
+
+  if (brand.slug === "carsystem") {
+    return buildPageMetadata(carsystemSeo);
+  }
 
   return buildBrandMetadata(brand);
 }
@@ -67,6 +76,8 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
           products={products}
           programs={programGroups}
         />
+      ) : brand.slug === "carsystem" ? (
+        <CarsystemBrandPage products={products} />
       ) : brand.slug === "baslac" ? (
         <BaslacBrandPage products={products} />
       ) : (

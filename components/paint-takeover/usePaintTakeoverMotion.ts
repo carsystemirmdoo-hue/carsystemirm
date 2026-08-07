@@ -1,10 +1,15 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
+import { useLayoutEffect, useRef, type RefObject } from "react";
 import {
   clamp,
   clipForGroup,
+  easeBrushStroke,
+  ENTRY_LEAD_VH,
+  entryShareFor,
+  LINE_WINDOWS,
   mapProgress,
+  normalize,
   phaseFor,
   remapStrokeWindow,
   TIMELINE,
@@ -21,8 +26,9 @@ import type {
 
 type UsePaintTakeoverMotionOptions = {
   sectionRef: RefObject<HTMLElement | null>;
-  heroArtworkRef: RefObject<HTMLDivElement | null>;
-  manifest: FinalHeroManifest;
+  heroArtworkRef?: RefObject<HTMLDivElement | null>;
+  lineworkRef?: RefObject<HTMLDivElement | null>;
+  manifest?: FinalHeroManifest;
   mode?: FinalReviewMode;
   debug?: boolean;
   onDebugSnapshot?: (snapshot: PaintTakeoverDebugSnapshot) => void;
@@ -106,6 +112,7 @@ function stateControlsChrome(
 export function usePaintTakeoverMotion({
   sectionRef,
   heroArtworkRef,
+  lineworkRef,
   manifest,
   mode = "final",
   debug = false,
@@ -116,18 +123,31 @@ export function usePaintTakeoverMotion({
 }: UsePaintTakeoverMotionOptions) {
   const debugProgressRef = useRef(-1);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
-    const heroLayer = heroArtworkRef.current;
-    if (!section || !heroLayer) return;
+    const heroLayer = heroArtworkRef?.current ?? null;
+    const lineworkLayer = lineworkRef?.current ?? null;
+    if (!section) return;
 
     const root = document.documentElement;
+    const groups = manifest?.groups ?? [];
     const groupElements = new Map(
-      manifest.groups.map((group) => [
+      groups.map((group) => [
         group.id,
-        heroLayer.querySelector<SVGGElement>(`#${group.id}`),
+        heroLayer?.querySelector<SVGGElement>(`#${group.id}`) ?? null,
       ]),
     );
+    const animateArtworkGroups = Boolean(heroLayer && groups.length);
+    const lineElements = lineworkLayer
+      ? Array.from(
+          lineworkLayer.querySelectorAll<SVGPathElement>("[data-paint-line]"),
+        )
+      : [];
+    const detailReveal =
+      lineworkLayer?.querySelector<SVGRectElement>(
+        "[data-paint-detail-reveal]",
+      ) ?? null;
+    const animateLinework = lineElements.length > 0;
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
@@ -142,6 +162,7 @@ export function usePaintTakeoverMotion({
       section.dataset.resolvedGroups = String(
         [...groupElements.values()].filter(Boolean).length,
       );
+      section.dataset.resolvedLines = String(lineElements.length);
     }
 
     const publishState = (nextState: PaintTakeoverState) => {
@@ -207,10 +228,22 @@ export function usePaintTakeoverMotion({
         const viewportHeight = window.innerHeight;
         const scrollRange = Math.max(1, section.offsetHeight - viewportHeight);
         const progress = clamp(-bounds.top / scrollRange);
-        // Approach: 0 kada gornja ivica sekcije uđe u dno viewporta, 1 kada se
-        // sekcija pinuje. Cela ova faza se odigrava u bloku partnerske mreže.
-        const approach = clamp((viewportHeight - bounds.top) / viewportHeight);
-        const timeline = toTimeline(approach, progress);
+        // Approach: 0 kada je gornja ivica sekcije ENTRY_LEAD_VH viewporta
+        // ispod vrha, 1 kada se sekcija pinuje. Cela ova faza se odigrava u
+        // bloku partnerske mreže.
+        //
+        // Lead je namerno kraći od jednog viewporta: udeo u timeline-u se
+        // izvodi iz istih tih piksela, pa je brzina timeline-a ista pre i posle
+        // pinovanja. Ranije je approach išao preko cele viewport visine dok je
+        // sticky kadar imao upola manje piksela za 82% timeline-a — na pinu je
+        // brzina skakala ~7.9× i to je bio izvor sevanja.
+        const entryLead = Math.max(1, viewportHeight * ENTRY_LEAD_VH);
+        const approach = clamp((entryLead - bounds.top) / entryLead);
+        const timeline = toTimeline(
+          approach,
+          progress,
+          entryShareFor(entryLead, scrollRange),
+        );
         // Odlazak: koliko je sekcija otišla iznad viewporta — nosi chapter
         // signal naniže bez naglog reseta.
         const departure = clamp(
@@ -222,6 +255,15 @@ export function usePaintTakeoverMotion({
           mapProgress(timeline, ...TIMELINE.chapter) *
           (1 - departure * (1 - CHAPTER_FLOOR));
         const reducedMotion = reducedMotionQuery.matches;
+        if (
+          !reducedMotion &&
+          bounds.top < viewportHeight &&
+          bounds.bottom > 0
+        ) {
+          section.dataset.motionActive = "true";
+        } else {
+          delete section.dataset.motionActive;
+        }
         if (previousProgress !== null) {
           const delta = progress - previousProgress;
           if (delta > 0.0001) direction = "down";
@@ -279,16 +321,36 @@ export function usePaintTakeoverMotion({
                 ? 1
                 : mapProgress(timeline, ...contentWindow)
               : 0;
-        const finalGlobalArtwork = 1;
+        const finalGlobalArtwork = animateArtworkGroups || animateLinework
+          ? 1
+          : forceStatic
+            ? 1
+            : showMotion
+              ? mapProgress(
+                  timeline,
+                  TIMELINE.strokes[0],
+                  TIMELINE.strokes[0] + 0.17,
+                )
+              : 0;
         const holdDrift =
           reducedMotion || mode !== "final"
             ? 0
             : mapProgress(timeline, ...TIMELINE.hold) * -1.6;
+        /*
+         * Izlazak: 0 kroz celu scenu, 1 pred njen kraj. Gasi painterly slojeve
+         * da tamna scena zavrsi kao miran taman kadar i da nijedan potez ne
+         * ostane uz prelaz u svetlu komercijalnu zonu.
+         */
+        const outro =
+          reducedMotion || mode !== "final"
+            ? 0
+            : mapProgress(timeline, ...TIMELINE.outro);
+        const settle = 1 - outro;
         const colorWashOpacity = washDisabled
           ? 0
           : reducedMotion
             ? 1
-            : mapProgress(timeline, ...TIMELINE.background);
+            : mapProgress(timeline, ...TIMELINE.background) * settle;
 
         section.dataset.reducedMotion = reducedMotion ? "true" : "false";
         // Kontinualni signali na <html>: header, orb i sekcije ispod se boje
@@ -296,9 +358,15 @@ export function usePaintTakeoverMotion({
         // koja bi mogla da odsvetli nezavisno od skrola.
         root.style.setProperty(CHAPTER_VARIABLE, chapter.toFixed(4));
         root.style.setProperty(APPROACH_VARIABLE, approach.toFixed(4));
+        /*
+         * Wipe ide naniže: krivina je u artworku na ~28.7% kadra, pa offset od
+         * -32svh drži tamno tačno iznad gornje ivice, a +102svh ga spušta ispod
+         * donje. Ranije je bilo `18 - surface * 90` (kretanje naviše sa dna),
+         * zbog čega je pri ulasku ploča ostajala prazno bela.
+         */
         section.style.setProperty(
           "--surface-offset",
-          `${((1 - surface) * 30).toFixed(3)}svh`,
+          `${(-32 + surface * 134).toFixed(3)}svh`,
         );
         section.style.setProperty(
           "--artwork-offset",
@@ -306,7 +374,8 @@ export function usePaintTakeoverMotion({
         );
         section.style.setProperty(
           "--background-opacity",
-          backgroundProgress.toFixed(4),
+          // Podloga zadrzi malo teksture da kadar ne postane ravna ploca.
+          (backgroundProgress * (1 - outro * 0.78)).toFixed(4),
         );
         section.style.setProperty(
           "--background-scale",
@@ -322,19 +391,34 @@ export function usePaintTakeoverMotion({
         );
         section.style.setProperty(
           "--hero-global-opacity",
-          finalGlobalArtwork.toFixed(4),
+          // Potezi se gase do nule — oni pripadaju iskljucivo tamnoj sceni.
+          (finalGlobalArtwork * settle).toFixed(4),
         );
-        section.style.setProperty("--content-opacity", content.toFixed(4));
+        section.style.setProperty(
+          "--content-opacity",
+          // Dizajn tamnog repa drzi tekst na ~0.55 dok scena izlazi.
+          (content * (1 - outro * 0.45)).toFixed(4),
+        );
         section.style.setProperty(
           "--content-offset",
           `${((1 - content) * 26).toFixed(3)}px`,
         );
+        // Smirivanje leve zone ide po svom prozoru, malo pre teksta, da beli
+        // tekst nikad ne stigne na još svetlu podlogu.
+        const contrastProgress =
+          washDisabled || mode !== "final"
+            ? mode === "text-contrast"
+              ? 1
+              : 0
+            : reducedMotion
+              ? 1
+              : mapProgress(timeline, ...TIMELINE.contrast);
         section.style.setProperty(
           "--contrast-opacity",
           (
             washDisabled
               ? 0
-              : Math.max(content * 0.92, backgroundProgress * 0.4)
+              : Math.max(contrastProgress * 0.92, backgroundProgress * 0.4)
           ).toFixed(4),
         );
         section.style.setProperty(
@@ -350,8 +434,37 @@ export function usePaintTakeoverMotion({
           colorWashOpacity.toFixed(4),
         );
 
+        const lineworkProgress = forceStatic
+          ? 1
+          : showMotion
+            ? mapProgress(timeline, ...TIMELINE.strokes)
+            : 0;
+        let activeLines = 0;
+        for (let index = 0; index < lineElements.length; index += 1) {
+          const line = lineElements[index];
+          const window = LINE_WINDOWS[index] ?? LINE_WINDOWS.at(-1)!;
+          // Ease-out umesto smoothstep-a: kontakt četke je trenutan, pa se
+          // potez u istom prozoru skrola čita kao brz gest, a ne kao sporo
+          // izvlačenje linije.
+          const localProgress = easeBrushStroke(
+            normalize(lineworkProgress, window[0], window[1]),
+          );
+          if (localProgress > 0.001 && localProgress < 0.999) {
+            activeLines += 1;
+          }
+          line.style.strokeDashoffset = (1 - localProgress).toFixed(5);
+          line.style.opacity = mapProgress(localProgress, 0, 0.08).toFixed(4);
+        }
+        if (detailReveal) {
+          detailReveal.style.opacity = mapProgress(
+            lineworkProgress,
+            0.76,
+            0.96,
+          ).toFixed(4);
+        }
+
         let activeGroups = 0;
-        for (const group of manifest.groups) {
+        for (const group of groups) {
           const element = groupElements.get(group.id);
           if (!element) continue;
 
@@ -414,7 +527,7 @@ export function usePaintTakeoverMotion({
           );
           element.style.setProperty("--path-offset", (1 - core).toFixed(5));
 
-          if (directShape) {
+          if (directShape && heroLayer) {
             const suffix = group.id.slice(-2);
             heroLayer.style.setProperty(
               `--hero-mask-offset-${suffix}`,
@@ -422,6 +535,7 @@ export function usePaintTakeoverMotion({
             );
           }
         }
+        activeGroups += activeLines;
 
         if (
           debug &&
@@ -489,12 +603,19 @@ export function usePaintTakeoverMotion({
         window.cancelAnimationFrame(animationFrame);
         animationFrame = 0;
       }
+      delete section.dataset.motionActive;
       clearChrome(restingChapter());
     };
 
     const clearChromeOnNavigation = () => clearChrome();
     window.addEventListener("pagehide", clearChromeOnNavigation);
     window.addEventListener("popstate", clearChromeOnNavigation);
+
+    // Restore the exact scroll-derived state before the browser paints. This
+    // covers refreshes, history restoration and client navigation back to a
+    // homepage that mounts halfway through the sticky range. The observer
+    // only controls continued listening, not the initial visual state.
+    update();
 
     let observer: IntersectionObserver | null = null;
     if ("IntersectionObserver" in window) {
@@ -526,7 +647,8 @@ export function usePaintTakeoverMotion({
     controlPageChrome,
     debug,
     heroArtworkRef,
-    manifest.groups,
+    lineworkRef,
+    manifest?.groups,
     mode,
     onDebugSnapshot,
     onRuntimeSnapshot,

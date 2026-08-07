@@ -1,35 +1,78 @@
 /*
- * Sloj je namerno visok i zahvata sredinu bloka partnerske mreže, a ne samo
- * donji padding. Ranija verzija je stajala pri dnu sekcije, pa se potez čitao
- * kao "jedna linija preko praznog prostora" umesto kao gesta koja prolazi iza
- * mape i kartice.
+ * Zero-footprint overlay vezan za DONJU GRANICU bloka partnerske mreže.
+ *
+ * Wrapper ima height: 0 i bottom: 0 — ne učestvuje u flow-u, ne rezerviše
+ * nijedan piksel visine i njegov koordinatni sistem je sama granica sekcije.
+ * Sve što crta stoji u `.canvas`, apsolutno pozicioniranom u odnosu na tu
+ * granicu, pa je linija matematički vezana za sekciju, a ne za viewport.
  */
 .bridge {
   --approach: clamp(0, var(--paint-approach, 0), 1);
   position: absolute;
-  top: 34%;
   right: 0;
-  bottom: -7rem;
+  bottom: 0;
   left: 0;
   z-index: 1;
+  height: 0;
   max-width: none;
   margin: 0;
-  /* Reveal je vezan za skrol kroz --paint-approach: potez se povlači levo → desno. */
-  clip-path: inset(0 calc((1 - var(--approach)) * 104%) 0 0);
-  opacity: clamp(0, calc(var(--approach) * 3.2), 1);
+  overflow: visible;
   pointer-events: none;
 }
 
-.bridge svg {
+/*
+ * Ovde je bio pravi uzrok "široke roze mrlje".
+ *
+ * Ranije: viewBox 1920×760 razvučen preko boksa 1536×1318 uz
+ * `preserveAspectRatio="none"`. Horizontalna skala 0.80, vertikalna 1.73 —
+ * dakle 2.17× anizotropno rastezanje po visini (na 390px širine čak 4.1×).
+ * Potez debljine ~40px je postajao ~87px, a feGaussianBlur od 22 je efektivno
+ * radio na ~48px. Otud mrlja umesto poteza.
+ *
+ * Sada `aspect-ratio` drži originalni odnos viewBox-a, pa je skala izotropna i
+ * potez zadržava debljinu koju ima u artworku — na svakoj širini ekrana.
+ */
+.canvas {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1920 / 760;
+  /*
+   * Pomeraj je procenat SOPSTVENE visine elementa (translate % se računa u
+   * odnosu na sam element), pa je nezavisan od viewporta i od visine sekcije.
+   * Dijagonala time prolazi iza mape i kartice, a rep prelazi granicu naniže.
+   */
+  transform: translateY(16%);
+  /*
+   * Reveal levo → desno kroz --paint-approach. Mask stoji OVDE, ne na
+   * wrapperu: wrapper ima visinu 0 pa bi maska nad njim bila prazna.
+   */
+  --reveal: calc(var(--approach) * 122%);
+  mask-image: linear-gradient(
+    90deg,
+    #000 calc(var(--reveal) - 16%),
+    rgb(0 0 0 / 0.5) calc(var(--reveal) - 6%),
+    transparent var(--reveal)
+  );
+  opacity: clamp(0, calc(var(--approach) * 4.5), 1);
+}
+
+.canvas svg {
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
+/*
+ * Glow je sveden na jedan diskretan sloj. Ranije je `haze` bio širok nanos sa
+ * blur-om 22 preko rastegnutog boksa — najskuplji i vizuelno najprljaviji deo.
+ */
 .haze {
   fill: #b3175c;
-  opacity: 0.26;
+  opacity: 0.13;
 }
 
 .underpull {
@@ -64,7 +107,7 @@
 
 /* U dark temi potezi moraju da nose više svetla da ne propadnu u podlogu. */
 :global(html.dark) .haze {
-  opacity: 0.34;
+  opacity: 0.18;
 }
 
 :global(html.dark) .brushCore {
@@ -76,26 +119,27 @@
   opacity: 0.5;
 }
 
-.bridge[data-debug-outline="true"] {
+.bridge[data-debug-outline="true"] .canvas {
   outline: 2px solid #ff4ca5;
   outline-offset: -2px;
 }
 
+/*
+ * Na uskim ekranima je odnos viewBox-a previše plosnat da bi se gest video, pa
+ * se crta šire od kadra — i dalje izotropno, samo sa širim boksom.
+ */
 @media (max-width: 720px) {
-  .bridge {
-    top: 26%;
-    bottom: -4.5rem;
-  }
-
-  .bridge svg {
-    width: 148%;
-    margin-left: -28%;
+  .canvas {
+    right: auto;
+    left: -26%;
+    width: 152%;
+    transform: translateY(12%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bridge {
-    clip-path: none;
+  .canvas {
+    mask-image: none;
     opacity: 1;
   }
 }

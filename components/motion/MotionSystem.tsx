@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { MotionConfigProvider } from "@/components/motion/MotionConfigProvider";
 import { PigmentCursor } from "@/components/motion/PigmentCursor";
 import {
@@ -10,6 +11,14 @@ import {
 } from "@/components/motion/useLocalPointerVars";
 
 export function MotionSystem({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/portal")) return <>{children}</>;
+
+  return <PublicMotionSystem>{children}</PublicMotionSystem>;
+}
+
+function PublicMotionSystem({ children }: { children: ReactNode }) {
   const activeSurfaceRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {

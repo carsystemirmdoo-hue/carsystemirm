@@ -40,6 +40,7 @@ const SELECTED_ZOOM = 14;
 export function PartnerMap({
   badgeLabel = "Partnerska mreža · Srbija",
   className = styles.locatorCanvas,
+  cooperativeGestures = false,
   hoveredId,
   onError,
   onReady,
@@ -50,6 +51,7 @@ export function PartnerMap({
 }: {
   badgeLabel?: string;
   className?: string;
+  cooperativeGestures?: boolean;
   hoveredId: string;
   onError: () => void;
   onReady: () => void;
@@ -230,7 +232,7 @@ export function PartnerMap({
           center: [20.6, 44.2],
           zoom: 6,
           attributionControl: { compact: true },
-          cooperativeGestures: false,
+          cooperativeGestures,
         });
         mapRef.current = map;
 

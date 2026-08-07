@@ -37,6 +37,8 @@ function isBypassedRoute(pathname: string) {
     pathname.startsWith("/login/") ||
     pathname === "/admin" ||
     pathname.startsWith("/admin/") ||
+    pathname === "/portal" ||
+    pathname.startsWith("/portal/") ||
     PUBLIC_FILE_PATTERN.test(pathname)
   );
 }
@@ -56,7 +58,9 @@ function shouldNoindexInternalRoute(pathname: string) {
     pathname === "/interaction-demo" ||
     pathname.startsWith("/interaction-demo/") ||
     pathname === "/social-exports" ||
-    pathname.startsWith("/social-exports/")
+    pathname.startsWith("/social-exports/") ||
+    pathname === "/portal" ||
+    pathname.startsWith("/portal/")
   );
 }
 

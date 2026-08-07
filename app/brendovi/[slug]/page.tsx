@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BaslacBrandPage } from "@/components/baslac-brand/BaslacBrandPage";
 import { BrandPage } from "@/components/brand/BrandPage";
+import { CarfitBrandPage } from "@/components/brand/carfit/CarfitBrandPage";
 import { CarsystemBrandPage } from "@/components/carsystem-brand/CarsystemBrandPage";
 import { carsystemSeo } from "@/components/carsystem-brand/carsystemBrandData";
 import { RmBrandPage } from "@/components/rm-brand/RmBrandPage";
+import { CARFIT_BRAND_SLUG } from "@/lib/carfit-brand-data";
 import {
   getAllCarsystemBrands,
   getCarsystemBrandBySlug,
@@ -37,6 +39,16 @@ export async function generateMetadata({
 
   if (brand.slug === "carsystem") {
     return buildPageMetadata(carsystemSeo);
+  }
+
+  if (brand.slug === CARFIT_BRAND_SLUG) {
+    return buildPageMetadata({
+      title: `${brand.name} program za radionicu`,
+      description:
+        "Car Fit program za svakodnevni rad u lakirerskoj radionici — priprema, maskiranje, reparacija, lakiranje i završna obrada. Pronađite materijal prema poslu koji radite.",
+      path: `/brendovi/${brand.slug}`,
+      imageAlt: `${brand.name} program za svakodnevni rad u radionici`,
+    });
   }
 
   return buildBrandMetadata(brand);
@@ -80,6 +92,8 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
         <CarsystemBrandPage products={products} />
       ) : brand.slug === "baslac" ? (
         <BaslacBrandPage products={products} />
+      ) : brand.slug === CARFIT_BRAND_SLUG ? (
+        <CarfitBrandPage brand={brand} />
       ) : (
         <BrandPage
           brand={brand}

@@ -16,6 +16,12 @@ export type CarsystemBrand = {
   description: string;
   overview?: string;
   programSlugs?: string[];
+  /**
+   * Zvanični brand lockup, kada se razlikuje od kanonskog naziva u katalogu.
+   * Koristi se samo za tipografski prikaz na brend stranici; katalog, navigacija
+   * i nazivi proizvoda i dalje koriste `name`.
+   */
+  wordmark?: string;
   catalogOrder: number;
   presentation: {
     accentColor: string;
@@ -344,6 +350,7 @@ export const brands: CarsystemBrand[] = [
   defineCarsystemBrand({
     slug: "carfit",
     name: "Car Fit",
+    wordmark: "C.A.R.FIT",
     logo: "/brands/carfit.svg",
     description:
       "Materijali za pripremu i podlogu, namenjeni svakodnevnom radu u profesionalnoj radionici.",

@@ -1,0 +1,1861 @@
+/*
+ * Car Fit brend stranica — "workshop grid" vizuelni sistem.
+ *
+ * Namerno se razlikuje od `BrandProgramPage.module.css` (generičke brend/program
+ * stranice): oštre ivice, tehničke etikete, modularna mreža i crvena samo kao
+ * marker. Tipografija, breakpointi i fokus stilovi ostaju zajednički.
+ */
+
+.pageShell {
+  --cf-red: #e2231a;
+  --cf-red-ink: #ffffff;
+  --cf-red-soft: oklch(0.58 0.21 28 / 0.12);
+
+  --cf-paper: #ffffff;
+  --cf-paper-off: #f4f5f6;
+  --cf-steel: #e7e9eb;
+  --cf-steel-deep: #d5d8dc;
+  --cf-graphite: #1b1d20;
+  --cf-graphite-deep: #101113;
+
+  --cf-ink: #15171a;
+  --cf-ink-muted: #5a6068;
+  --cf-ink-faint: #878d95;
+  --cf-line: #dcdfe3;
+  --cf-line-strong: #c3c7cc;
+
+  --cf-invert-ink: #f3f4f5;
+  --cf-invert-muted: #a2a7ad;
+  --cf-invert-line: oklch(0.98 0.003 250 / 0.14);
+  --cf-invert-line-strong: oklch(0.98 0.003 250 / 0.28);
+
+  --cf-gutter: clamp(1rem, 4vw, 3rem);
+  --cf-max: 82.5rem;
+  --cf-nav-offset: 4.35rem;
+  --cf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--cf-paper);
+  color: var(--cf-ink);
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:global(.dark) .pageShell {
+  --cf-red: #f0463c;
+  --cf-red-soft: oklch(0.62 0.21 28 / 0.16);
+
+  --cf-paper: #101113;
+  --cf-paper-off: #16181b;
+  --cf-steel: #1c1f22;
+  --cf-steel-deep: #232629;
+  --cf-graphite: #0a0b0c;
+  --cf-graphite-deep: #060607;
+
+  --cf-ink: #eef0f1;
+  --cf-ink-muted: #9aa0a7;
+  --cf-ink-faint: #767c83;
+  --cf-line: oklch(0.98 0.003 250 / 0.12);
+  --cf-line-strong: oklch(0.98 0.003 250 / 0.22);
+}
+
+.pageShell a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.main {
+  display: block;
+}
+
+/* ---------------------------------------------------------------- primitives */
+
+.container {
+  width: 100%;
+  max-width: var(--cf-max);
+  margin-inline: auto;
+  padding-inline: var(--cf-gutter);
+}
+
+.technical {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+/* Workshop grid: tanke linije koje se provlače kroz sekcije. */
+.gridSkin {
+  position: relative;
+  isolation: isolate;
+}
+
+.gridSkin::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--cf-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cf-line) 1px, transparent 1px);
+  background-size: 5.5rem 5.5rem;
+  content: "";
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.gridSkinInvert::before {
+  background-image:
+    linear-gradient(to right, var(--cf-invert-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cf-invert-line) 1px, transparent 1px);
+  opacity: 1;
+}
+
+.section {
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.sectionPaper {
+  background: var(--cf-paper);
+}
+
+.sectionOff {
+  background: var(--cf-paper-off);
+  border-block: 1px solid var(--cf-line);
+}
+
+.sectionSteel {
+  background: var(--cf-steel);
+  border-block: 1px solid var(--cf-line);
+}
+
+.sectionDark {
+  --cf-ink: var(--cf-invert-ink);
+  --cf-ink-muted: var(--cf-invert-muted);
+  --cf-ink-faint: var(--cf-invert-muted);
+  --cf-line: var(--cf-invert-line);
+  --cf-line-strong: var(--cf-invert-line-strong);
+  background: var(--cf-graphite);
+  color: var(--cf-invert-ink);
+}
+
+.sectionHead {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.sectionKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--cf-ink-muted);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sectionKicker::before {
+  width: 1.5rem;
+  height: 2px;
+  background: var(--cf-red);
+  content: "";
+}
+
+.sectionTitle {
+  composes: display;
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+}
+
+.sectionLead {
+  max-width: 42rem;
+  color: var(--cf-ink-muted);
+  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------ buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 2.875rem;
+  padding: 0.7rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  transition:
+    background-color 180ms var(--cf-ease),
+    border-color 180ms var(--cf-ease),
+    color 180ms var(--cf-ease),
+    transform 180ms var(--cf-ease);
+}
+
+.btnPrimary {
+  background: var(--cf-red);
+  color: var(--cf-red-ink);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--cf-red) 88%, #000);
+}
+
+.btnSecondary {
+  border-color: var(--cf-line-strong);
+  background: transparent;
+  color: var(--cf-ink);
+}
+
+.btnSecondary:hover {
+  border-color: var(--cf-red);
+  color: var(--cf-red);
+}
+
+.btnLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  color: var(--cf-ink);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.btnLink::after {
+  width: 0;
+  height: 1px;
+  background: var(--cf-red);
+  content: "";
+  transition: width 200ms var(--cf-ease);
+}
+
+.btnLink:hover::after,
+.btnLink:focus-visible::after {
+  width: 1.5rem;
+}
+
+/* --------------------------------------------------------------- breadcrumb */
+
+.breadcrumb {
+  background: var(--cf-graphite-deep);
+  color: var(--cf-invert-muted);
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.9rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.breadcrumb a:hover {
+  color: var(--cf-invert-ink);
+}
+
+.breadcrumbSeparator {
+  margin-inline: 0.45rem;
+  opacity: 0.5;
+}
+
+.breadcrumbCurrent {
+  color: var(--cf-invert-ink);
+}
+
+/* --------------------------------------------------------------------- hero */
+
+.hero {
+  --cf-ink: var(--cf-invert-ink);
+  --cf-ink-muted: var(--cf-invert-muted);
+  --cf-line: var(--cf-invert-line);
+  --cf-line-strong: var(--cf-invert-line-strong);
+  position: relative;
+  overflow: hidden;
+  background: var(--cf-graphite);
+  color: var(--cf-invert-ink);
+}
+
+.heroInner {
+  display: grid;
+  align-items: center;
+  gap: clamp(2.25rem, 4vw, 3.5rem);
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.heroCopy {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 34rem;
+}
+
+.heroEyebrow {
+  composes: technical;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--cf-invert-muted);
+}
+
+.heroEyebrow::before {
+  width: 2rem;
+  height: 2px;
+  flex: 0 0 auto;
+  background: var(--cf-red);
+  content: "";
+}
+
+.heroTitle {
+  composes: display;
+  font-size: clamp(2.25rem, 5.4vw, 4.15rem);
+}
+
+.heroLead {
+  max-width: 32rem;
+  color: var(--cf-invert-muted);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  line-height: 1.62;
+}
+
+.heroSecondary {
+  composes: technical;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--cf-red);
+  color: var(--cf-invert-ink);
+  letter-spacing: 0.1em;
+  text-transform: none;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.heroStage {
+  position: relative;
+}
+
+/* Workbench: modularna mreža koja drži proizvode i tehničke oznake. */
+.stage {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: minmax(4.75rem, auto);
+  gap: 1px;
+  padding: 1px;
+  border: 1px solid var(--cf-invert-line-strong);
+  background: var(--cf-invert-line);
+}
+
+.stageCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding: 0.95rem;
+  background: var(--cf-graphite);
+}
+
+/* Eksplicitno postavljanje: mreža mora ostati bez praznih polja. */
+.stageCellWide {
+  grid-column: 1 / 5;
+  grid-row: 1 / 4;
+}
+
+.stageCellSide {
+  grid-column: 5 / 7;
+  grid-row: 1 / 3;
+}
+
+.stageCellStrip {
+  grid-column: span 1;
+}
+
+.stageCellRow {
+  grid-column: 1 / 7;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stageSpacer {
+  flex: 1 1 auto;
+}
+
+.stageCode {
+  composes: technical;
+  color: var(--cf-invert-muted);
+  font-size: 0.625rem;
+}
+
+.stageLabel {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.stageNote {
+  color: var(--cf-invert-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.stageMedia {
+  position: relative;
+  display: grid;
+  flex: 1 1 auto;
+  place-items: center;
+  min-height: 11rem;
+  overflow: hidden;
+}
+
+.stageImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Task markeri preko workbench-a. */
+.markerRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--cf-invert-line-strong);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--cf-invert-muted);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--cf-ease),
+    color 180ms var(--cf-ease);
+}
+
+.marker::before {
+  width: 2px;
+  height: 0.75rem;
+  background: var(--cf-invert-line-strong);
+  content: "";
+  transition: background-color 180ms var(--cf-ease);
+}
+
+.marker:hover,
+.marker:focus-visible {
+  border-color: var(--cf-red);
+  color: var(--cf-invert-ink);
+}
+
+.marker:hover::before,
+.marker:focus-visible::before {
+  background: var(--cf-red);
+}
+
+/* ---------------------------------------------------------------- local nav */
+
+.localNav {
+  position: sticky;
+  top: var(--cf-nav-offset);
+  z-index: 20;
+  border-block: 1px solid var(--cf-line);
+  background: color-mix(in srgb, var(--cf-paper) 92%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.localNavList {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  list-style: none;
+}
+
+.localNavList::-webkit-scrollbar {
+  display: none;
+}
+
+.localNavLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding-inline: 0.85rem;
+  color: var(--cf-ink-muted);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 180ms var(--cf-ease);
+}
+
+.localNavLink::before {
+  width: 2px;
+  height: 0.75rem;
+  background: transparent;
+  content: "";
+  transition: background-color 180ms var(--cf-ease);
+}
+
+.localNavLink:hover {
+  color: var(--cf-ink);
+}
+
+.localNavLink[aria-current="true"] {
+  color: var(--cf-ink);
+  font-weight: 700;
+}
+
+.localNavLink[aria-current="true"]::before {
+  background: var(--cf-red);
+}
+
+.anchor {
+  scroll-margin-top: 8rem;
+}
+
+/* ------------------------------------------------------------ task selector */
+
+.taskLayout {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.taskList {
+  display: none;
+  border-top: 1px solid var(--cf-line);
+}
+
+.taskTab {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  min-height: 3.75rem;
+  padding: 0.85rem 0.9rem;
+  border: 0;
+  border-bottom: 1px solid var(--cf-line);
+  background: transparent;
+  color: var(--cf-ink-muted);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 180ms var(--cf-ease),
+    color 180ms var(--cf-ease);
+}
+
+.taskTab:hover {
+  background: var(--cf-paper-off);
+  color: var(--cf-ink);
+}
+
+.taskTabCode {
+  composes: technical;
+  color: var(--cf-ink-faint);
+  font-size: 0.625rem;
+}
+
+.taskTabLabel {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.taskTabMarker {
+  composes: technical;
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--cf-ink-faint);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+}
+
+.taskTab[aria-selected="true"] {
+  position: relative;
+  background: var(--cf-paper-off);
+  color: var(--cf-ink);
+}
+
+.taskTab[aria-selected="true"]::before {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 0;
+  width: 3px;
+  background: var(--cf-red);
+  content: "";
+}
+
+.taskTab[aria-selected="true"] .taskTabCode,
+.taskTab[aria-selected="true"] .taskTabMarker {
+  color: var(--cf-red);
+}
+
+.taskTab[aria-selected="true"] .taskTabLabel {
+  font-weight: 800;
+}
+
+/* Mobilni: horizontalni strip umesto vertikalne liste. */
+.taskStrip {
+  display: flex;
+  gap: 0.4rem;
+  margin-inline: calc(var(--cf-gutter) * -1);
+  padding-inline: var(--cf-gutter);
+  padding-bottom: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.taskStrip::-webkit-scrollbar {
+  display: none;
+}
+
+.taskChip {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--cf-line-strong);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--cf-ink-muted);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--cf-ease),
+    background-color 180ms var(--cf-ease),
+    color 180ms var(--cf-ease);
+}
+
+.taskChip .taskTabCode {
+  font-size: 0.5625rem;
+}
+
+.taskChip[aria-selected="true"] {
+  border-color: var(--cf-red);
+  background: var(--cf-red-soft);
+  color: var(--cf-ink);
+}
+
+.taskChip[aria-selected="true"] .taskTabCode {
+  color: var(--cf-red);
+}
+
+.taskPanel {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  border: 1px solid var(--cf-line);
+  background: var(--cf-paper);
+}
+
+.taskPanel:focus-visible {
+  outline: 2px solid var(--cf-red);
+  outline-offset: 2px;
+}
+
+.taskPanelHead {
+  display: grid;
+  gap: 0.65rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  padding-bottom: 0;
+}
+
+.taskPanelCode {
+  composes: technical;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.taskPanelTitle {
+  composes: display;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.taskPanelBody {
+  max-width: 40rem;
+  color: var(--cf-ink-muted);
+  font-size: 0.9688rem;
+  line-height: 1.6;
+}
+
+.taskPanelGrid {
+  display: grid;
+  gap: 1px;
+  background: var(--cf-line);
+  border-top: 1px solid var(--cf-line);
+}
+
+.taskPanelCol {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  background: var(--cf-paper);
+}
+
+.taskColTitle {
+  composes: technical;
+  color: var(--cf-ink-faint);
+  font-size: 0.625rem;
+}
+
+.workflow {
+  display: grid;
+  gap: 0.85rem;
+  list-style: none;
+}
+
+.workflowItem {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--cf-line);
+}
+
+.workflowItem:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.workflowCode {
+  composes: technical;
+  padding-top: 0.15rem;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.workflowTitle {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.workflowNote {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--cf-ink-muted);
+  font-size: 0.8438rem;
+  line-height: 1.5;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--cf-line-strong);
+  border-radius: 2px;
+  color: var(--cf-ink-muted);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tagLink:hover {
+  border-color: var(--cf-red);
+  color: var(--cf-ink);
+}
+
+/* Kompaktna lista proizvoda unutar taska. */
+.miniProducts {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--cf-line);
+  background: var(--cf-line);
+}
+
+.miniProduct {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem;
+  background: var(--cf-paper);
+  transition: background-color 180ms var(--cf-ease);
+}
+
+.miniProduct:hover {
+  background: var(--cf-paper-off);
+}
+
+.miniThumb {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--cf-line);
+  background: var(--cf-paper-off);
+}
+
+.miniThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.miniName {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.miniMeta {
+  composes: technical;
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--cf-ink-faint);
+  font-size: 0.5625rem;
+}
+
+/* Kada task nema lokalne artikle: tehnički opis programa, bez tvrdnje o zalihama. */
+.scopeNote {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.95rem;
+  border: 1px solid var(--cf-line);
+  border-left: 2px solid var(--cf-red);
+  background: var(--cf-paper-off);
+}
+
+.scopeNoteTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.scopeNoteBody {
+  color: var(--cf-ink-muted);
+  font-size: 0.8438rem;
+  line-height: 1.5;
+}
+
+.taskMedia {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid var(--cf-line);
+}
+
+.taskMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------- media fallback (bez fotke) */
+
+.mediaFallback {
+  position: relative;
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  min-height: 8rem;
+  padding: 1.25rem;
+  background-image:
+    linear-gradient(to right, var(--cf-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cf-line) 1px, transparent 1px);
+  background-size: 2.25rem 2.25rem;
+  text-align: center;
+}
+
+.mediaFallbackCode {
+  composes: technical;
+  color: var(--cf-ink-faint);
+  font-size: 0.625rem;
+}
+
+.mediaFallbackMark {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.mediaFallbackMark span {
+  color: var(--cf-red);
+}
+
+.mediaFallback::after {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-right: 2px solid var(--cf-red);
+  border-bottom: 2px solid var(--cf-red);
+  content: "";
+}
+
+/* ----------------------------------------------------------- workbench zones */
+
+.zoneGrid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--cf-line-strong);
+  background: var(--cf-line-strong);
+}
+
+.zone {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+  padding: clamp(1.25rem, 2.4vw, 1.85rem);
+  background: var(--cf-paper);
+}
+
+.zoneCode {
+  composes: technical;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.zoneCode::after {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--cf-line);
+  content: "";
+}
+
+.zoneTitle {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.zoneLead {
+  color: var(--cf-ink-muted);
+  font-size: 0.875rem;
+}
+
+.zoneItems {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  list-style: none;
+}
+
+.zoneItems li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--cf-line);
+  font-size: 0.875rem;
+}
+
+.zoneItems li::before {
+  width: 0.4rem;
+  height: 1px;
+  margin-top: 0.65rem;
+  background: var(--cf-red);
+  content: "";
+}
+
+/* -------------------------------------------------------- abrasive gradation */
+
+.gradationLayout {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.gradationSteps {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--cf-line);
+}
+
+.gradationStep {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, auto) minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1.05rem;
+  border-bottom: 1px solid var(--cf-line);
+}
+
+.gradationCode {
+  composes: technical;
+  color: var(--cf-red);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+}
+
+.gradationTitle {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.gradationNote {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--cf-ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.gradationDisc {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  max-width: 24rem;
+  margin-inline: auto;
+  border: 1px solid var(--cf-line-strong);
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 0.55rem,
+      var(--cf-line) 0.55rem calc(0.55rem + 1px)
+    );
+}
+
+.gradationDiscInner {
+  display: grid;
+  place-items: center;
+  gap: 0.35rem;
+  width: 46%;
+  aspect-ratio: 1;
+  border: 1px solid var(--cf-red);
+  border-radius: 50%;
+  background: var(--cf-graphite);
+  text-align: center;
+}
+
+.gradationDiscLabel {
+  composes: technical;
+  color: var(--cf-invert-muted);
+  font-size: 0.5625rem;
+}
+
+.gradationDiscValue {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+}
+
+.footnote {
+  margin-top: 1.5rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--cf-line-strong);
+  color: var(--cf-ink-faint);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+/* -------------------------------------------------------------- family grid */
+
+.familyGrid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--cf-line-strong);
+  background: var(--cf-line-strong);
+}
+
+.family {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  min-height: 13rem;
+  padding: clamp(1.15rem, 2.2vw, 1.75rem);
+  background: var(--cf-paper);
+  transition: background-color 200ms var(--cf-ease);
+}
+
+.family:hover {
+  background: var(--cf-paper-off);
+}
+
+.familyHead {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.familyCode {
+  composes: technical;
+  color: var(--cf-ink-faint);
+  font-size: 0.625rem;
+}
+
+.familyName {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.familyClaim {
+  color: var(--cf-ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.familyMedia {
+  position: relative;
+  overflow: hidden;
+  min-height: 6rem;
+  border: 1px solid var(--cf-line);
+}
+
+.familyMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.familyFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.familyCount {
+  composes: technical;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.familyCount::before {
+  width: 2px;
+  height: 0.7rem;
+  background: var(--cf-red);
+  content: "";
+}
+
+/* --------------------------------------------------------- category index */
+
+.categoryBoard {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--cf-line-strong);
+  background: var(--cf-line-strong);
+}
+
+.category {
+  display: grid;
+  align-content: space-between;
+  gap: 1.15rem;
+  min-height: 9.5rem;
+  padding: clamp(1rem, 2vw, 1.4rem);
+  background: var(--cf-paper);
+  transition:
+    background-color 180ms var(--cf-ease),
+    color 180ms var(--cf-ease);
+}
+
+.categoryLink:hover {
+  background: var(--cf-graphite);
+  color: var(--cf-invert-ink);
+}
+
+.categoryLink:hover .categoryNote,
+.categoryLink:hover .categoryCode {
+  color: var(--cf-invert-muted);
+}
+
+.categoryCode {
+  composes: technical;
+  color: var(--cf-ink-faint);
+  font-size: 0.625rem;
+  transition: color 180ms var(--cf-ease);
+}
+
+.categoryName {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.categoryNote {
+  margin-top: 0.3rem;
+  color: var(--cf-ink-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  transition: color 180ms var(--cf-ease);
+}
+
+.categoryFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.categoryCount {
+  composes: technical;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.categoryArrow {
+  color: var(--cf-red);
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------- story rows */
+
+.storyRow {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.storyMedia {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--cf-line);
+}
+
+.storyMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.calloutList {
+  display: grid;
+  gap: 0;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--cf-line);
+  list-style: none;
+}
+
+.callout {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding-block: 0.95rem;
+  border-bottom: 1px solid var(--cf-line);
+}
+
+.calloutCode {
+  composes: technical;
+  padding-top: 0.15rem;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.calloutTitle {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.calloutNote {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--cf-ink-muted);
+  font-size: 0.8438rem;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------- product showcase */
+
+.productFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
+}
+
+.productFilter {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--cf-line-strong);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--cf-ink-muted);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--cf-ease),
+    background-color 180ms var(--cf-ease),
+    color 180ms var(--cf-ease);
+}
+
+.productFilter:hover:not(:disabled) {
+  border-color: var(--cf-red);
+  color: var(--cf-ink);
+}
+
+.productFilter[aria-pressed="true"] {
+  border-color: var(--cf-red);
+  background: var(--cf-red);
+  color: var(--cf-red-ink);
+}
+
+.productFilter:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* Namerno asimetrično: jedan veliki modul + dva manja. */
+.productShowcase {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--cf-line-strong);
+  background: var(--cf-line-strong);
+}
+
+.productCard {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 1.15rem;
+  min-height: 15rem;
+  padding: clamp(1.15rem, 2.2vw, 1.75rem);
+  background: var(--cf-paper);
+  transition: background-color 200ms var(--cf-ease);
+}
+
+.productCard:hover {
+  background: var(--cf-paper-off);
+}
+
+.productCardLead {
+  grid-row: span 2;
+}
+
+.productMedia {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 9rem;
+  /* Bez granice visok kvadratni product asset razvuče ceo modul. */
+  max-height: 18rem;
+  overflow: hidden;
+  border: 1px solid var(--cf-line);
+  background: var(--cf-paper-off);
+}
+
+.productCardLead .productMedia {
+  max-height: 24rem;
+}
+
+.productMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.productBody {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.productMeta {
+  composes: technical;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cf-ink-faint);
+  font-size: 0.5625rem;
+}
+
+.productName {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(1.0625rem, 1.6vw, 1.375rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.productPurpose {
+  color: var(--cf-ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.productSpecs {
+  display: grid;
+  gap: 0;
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--cf-line);
+}
+
+.productSpec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--cf-line);
+  font-size: 0.8125rem;
+}
+
+.productSpec dt {
+  color: var(--cf-ink-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.productSpec dd {
+  font-weight: 600;
+  text-align: right;
+}
+
+.productStatus {
+  composes: technical;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--cf-ink-muted);
+  font-size: 0.5625rem;
+}
+
+.productStatus::before {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--cf-red);
+  content: "";
+}
+
+.productActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--cf-line);
+}
+
+.showcaseFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+/* ------------------------------------------------------------- documentation */
+
+.docGrid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--cf-line-strong);
+  background: var(--cf-line-strong);
+}
+
+.doc {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  padding: clamp(1.15rem, 2.2vw, 1.6rem);
+  background: var(--cf-paper);
+}
+
+.docCode {
+  composes: technical;
+  color: var(--cf-red);
+  font-size: 0.625rem;
+}
+
+.docTitle {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.docNote {
+  color: var(--cf-ink-muted);
+  font-size: 0.8438rem;
+  line-height: 1.5;
+}
+
+/* -------------------------------------------------------------- brand story */
+
+.storyPanel {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 44rem;
+  padding-left: clamp(1rem, 2vw, 1.75rem);
+  border-left: 2px solid var(--cf-red);
+}
+
+.storyBody {
+  color: var(--cf-ink-muted);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.65;
+}
+
+.storyMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.storyMetaText {
+  composes: technical;
+  color: var(--cf-ink-faint);
+  font-size: 0.625rem;
+}
+
+.storyTag {
+  composes: technical;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--cf-red);
+  border-radius: 2px;
+  color: var(--cf-red);
+  font-size: 0.5625rem;
+  letter-spacing: 0.24em;
+}
+
+/* ---------------------------------------------------------------- final cta */
+
+.finalCta {
+  --cf-ink: var(--cf-invert-ink);
+  --cf-ink-muted: var(--cf-invert-muted);
+  --cf-line: var(--cf-invert-line);
+  --cf-line-strong: var(--cf-invert-line-strong);
+  background: var(--cf-graphite);
+  color: var(--cf-invert-ink);
+}
+
+.finalCtaInner {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: end;
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.finalCtaCopy {
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+}
+
+.finalCtaTitle {
+  composes: display;
+  font-size: clamp(1.75rem, 3.6vw, 2.85rem);
+}
+
+.finalCtaBody {
+  color: var(--cf-invert-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.finalCtaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.finalCtaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--cf-invert-line-strong);
+  background: var(--cf-invert-line);
+}
+
+.finalCtaCell {
+  display: grid;
+  gap: 0.3rem;
+  min-height: 6.5rem;
+  padding: 1rem;
+  background: var(--cf-graphite);
+}
+
+.finalCtaCellCode {
+  composes: technical;
+  color: var(--cf-red);
+  font-size: 0.5625rem;
+}
+
+.finalCtaCellLabel {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.finalCtaCellNote {
+  color: var(--cf-invert-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+/* ------------------------------------------------------------------- reveal */
+
+.pageShell :global([data-cf-reveal]) {
+  opacity: 0;
+  transform: translateY(0.875rem);
+  transition:
+    opacity 520ms var(--cf-ease),
+    transform 520ms var(--cf-ease);
+  transition-delay: var(--cf-reveal-delay, 0ms);
+}
+
+.pageShell :global([data-cf-reveal="in"]) {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pageShell :global([data-cf-reveal]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------- breakpoints */
+
+@media (min-width: 40rem) {
+  .zoneGrid,
+  .docGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .categoryBoard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .familyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 48rem) {
+  .heroInner {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+  }
+
+  .productShowcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .productCardLead {
+    grid-column: span 2;
+  }
+
+  .productShowcase[data-count="2"] .productCardLead {
+    grid-column: span 1;
+  }
+
+  .storyRow {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+
+  .storyRowReverse .storyMedia {
+    order: -1;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pageShell {
+    --cf-nav-offset: 4.35rem;
+  }
+
+  .heroInner {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .taskLayout {
+    grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .taskList {
+    display: block;
+  }
+
+  .taskStrip {
+    display: none;
+  }
+
+  .taskPanelGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .zoneGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .docGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .categoryBoard {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .gradationLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  }
+
+  .familyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(13rem, auto);
+  }
+
+  .familyHero {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .familyTall {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .familyWide {
+    grid-column: span 3;
+  }
+
+  .familyUnit {
+    grid-column: span 1;
+  }
+
+  .productShowcase {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+  }
+
+  .productCardLead {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  /* Jedan ili dva artikla ne smeju ostaviti prazno polje u mreži. */
+  .productShowcase[data-count="1"] .productCardLead {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .productShowcase[data-count="2"] .productCardLead {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .finalCtaInner {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  }
+}
+
+@media (max-width: 63.9375rem) {
+  .taskPanelHead {
+    padding: 1.15rem;
+    padding-bottom: 0;
+  }
+
+  /* Ispod desktop širine workbench prelazi na dve kolone, bez praznih polja. */
+  .stage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stageCellWide,
+  .stageCellSide,
+  .stageCellRow {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+
+  .stageCellStrip {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .pageShell {
+    --cf-nav-offset: 4.25rem;
+  }
+
+  .stageCellRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gridSkin::before {
+    background-size: 3.5rem 3.5rem;
+  }
+
+  .workflowItem {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+
+  .gradationStep {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
+  }
+}

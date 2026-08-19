@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import { ProductHeroSprayBackdrop } from "@/components/product/ProductHeroSprayBackdrop";
+import { PuttyMaterialTrace } from "@/components/product/PuttyMaterialTrace";
 import {
   getProductVisualPreset,
   getProductVisualStyle,
@@ -18,6 +19,12 @@ import {
   resolveQuantityLabel,
   resolveSizeClass,
 } from "@/lib/product-scale";
+import {
+  hasPuttyMaterialTrace,
+  PUTTY_MATERIAL_TRACE_OPTICAL_Y,
+  PUTTY_MATERIAL_TRACE_PRODUCT_ENVELOPE,
+  PUTTY_MATERIAL_TRACE_STAGE_ASPECT,
+} from "@/lib/putty-material-trace";
 import fit from "./ProductImageFit.generated.module.css";
 import styles from "./ProductDetailExperience.module.css";
 
@@ -65,6 +72,27 @@ export function ProductStickyStage({
   const [isZoomed, setIsZoomed] = useState(false);
   const activeImage = images[activeIndex] ?? null;
 
+  /*
+   * Trag kita se prikazuje samo proizvodima sa odobrenom geometrijom — po
+   * stabilnom slugu, nikad po nazivu. Kad je uključen, panel drži 4:3 i na
+   * mobilnom, a envelope proizvoda se spušta na 39cqw da bi materijal ostao
+   * vidljiv sa sve četiri strane limenke.
+   */
+  const showPuttyTrace = hasPuttyMaterialTrace(product.slug);
+  /*
+   * Promenljive idu na SPOLJNI wrapper, ne na `.stage`: custom properties se
+   * nasleđuju, inline deklaracija tuče i media query koji na mobilnom vraća
+   * panel na 1:1, a `.stage` zadržava svoj postojeći `style` izraz netaknut —
+   * scena sprejeva i boja se ne dodiruje.
+   */
+  const puttyStyle: CSSProperties | undefined = showPuttyTrace
+    ? ({
+        "--product-stage-aspect": PUTTY_MATERIAL_TRACE_STAGE_ASPECT,
+        "--product-envelope-w": PUTTY_MATERIAL_TRACE_PRODUCT_ENVELOPE,
+        "--product-optical-y": PUTTY_MATERIAL_TRACE_OPTICAL_Y,
+      } as CSSProperties)
+    : undefined;
+
   return (
     <div
       className={styles.stickyStage}
@@ -74,6 +102,8 @@ export function ProductStickyStage({
       data-product-size-class={sizeClass}
       data-stage-format={stageFormat}
       data-product-has-image={activeImage ? "true" : "false"}
+      data-putty-trace={showPuttyTrace ? "true" : undefined}
+      style={puttyStyle}
     >
       <div
         className={`${styles.stage} ${fit.fit}`}
@@ -86,6 +116,9 @@ export function ProductStickyStage({
       >
         <span className={styles.stagePlate} aria-hidden="true" />
         {hasSprayBackdrop ? <ProductHeroSprayBackdrop /> : null}
+        {showPuttyTrace ? (
+          <PuttyMaterialTrace sizes="(min-width: 1180px) 32vw, (min-width: 896px) 34vw, 94vw" />
+        ) : null}
         <span className={styles.stageHalo} aria-hidden="true" />
 
         <span className={styles.heroProductObject}>

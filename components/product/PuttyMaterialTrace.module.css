@@ -1,0 +1,29 @@
+/*
+ * Trag kita iza proizvoda — statični dekorativni sloj (Faza 2G).
+ *
+ * Oba asseta žive u ISTOM wrapperu i oba su `inset: 0`, pa dele dimenzije,
+ * poziciju i transformaciju po konstrukciji. Poravnanje ne zavisi ni od jedne
+ * dodatne vrednosti i ne može da se razdvoji izmenom samo jednog sloja.
+ */
+
+.trace {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: var(--layer-art);
+  display: block;
+  width: var(--putty-trace-width, 78%);
+  aspect-ratio: var(--putty-trace-aspect, 1413 / 1086);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/*
+ * `contain` uz wrapper koji već nosi tačan odnos canvas-a znači da se sloj
+ * poklapa piksel u piksel — nema ni croppinga ni pillarboxa, pa se tanke niti
+ * na desnom završetku ne seku ni na jednoj širini.
+ */
+.layer {
+  object-fit: contain;
+  pointer-events: none;
+}

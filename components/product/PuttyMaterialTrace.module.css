@@ -1,9 +1,13 @@
 /*
- * Trag kita iza proizvoda — statični dekorativni sloj (Faza 2G).
+ * Trag kita iza proizvoda — statični slojevi (Faza 2G) i povlačenje (2H-A).
  *
  * Oba asseta žive u ISTOM wrapperu i oba su `inset: 0`, pa dele dimenzije,
  * poziciju i transformaciju po konstrukciji. Poravnanje ne zavisi ni od jedne
  * dodatne vrednosti i ne može da se razdvoji izmenom samo jednog sloja.
+ *
+ * Otkrivanje se radi `clip-path`-om na wrapperu, pa jedna maska nužno važi za
+ * oba sloja. Rasteri se ne diraju: nema ni opacity, ni scale, ni filtera nad
+ * fotografijom.
  */
 
 .trace {
@@ -19,11 +23,20 @@
 }
 
 /*
- * `contain` uz wrapper koji već nosi tačan odnos canvas-a znači da se sloj
- * poklapa piksel u piksel — nema ni croppinga ni pillarboxa, pa se tanke niti
- * na desnom završetku ne seku ni na jednoj širini.
+ * SVG nosi oba rastera i masku. Wrapper već drži tačan odnos canvas-a, pa
+ * `xMidYMid meet` daje poklapanje piksel u piksel — nema ni croppinga ni
+ * pillarboxa, i tanke niti na desnom završetku se ne seku ni na jednoj širini.
  */
-.layer {
-  object-fit: contain;
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
   pointer-events: none;
 }
+
+/*
+ * Pomeraj maske vodi SMIL (vidi komponentu), pa ovde nema keyframe-ova.
+ * Odlaganje starta je u komponenti, a `prefers-reduced-motion` se rešava time
+ * što se animacija uopšte ne pokreće i maska odmah stoji u završnoj poziciji.
+ */

@@ -26,7 +26,10 @@ export const PUTTY_MATERIAL_TRACE_ASSETS = {
   material: "/products/carsystem/putty-smear-fine-material-v2.png",
 } as const;
 
-/** Canvas oba asseta: 1413 × 1086 px. Sloj zadržava taj odnos. */
+/** Canvas oba asseta. Ujedno je i user space SVG-a u kome se autoriše maska. */
+export const PUTTY_MATERIAL_TRACE_CANVAS = { width: 1413, height: 1086 } as const;
+
+/** Sloj zadržava odnos canvas-a. */
 export const PUTTY_MATERIAL_TRACE_ASPECT = "1413 / 1086";
 
 /** Širina canvas-a traga u odnosu na panel. */
@@ -54,3 +57,50 @@ export const PUTTY_MATERIAL_TRACE_STAGE_ASPECT = "4 / 3";
  * odobrenu kompoziciju u kojoj je materijal vidljiv sa sve četiri strane.
  */
 export const PUTTY_MATERIAL_TRACE_OPTICAL_Y = "50%";
+
+/**
+ * Vodeća ivica maske za otkrivanje, u koordinatama asseta (1413 × 1086).
+ *
+ * Oblik pokriva sve levo od ivice i proteže se daleko van kadra, pa se
+ * prevlačenjem po X otkriva postojeća fotografska tekstura — bez pravougaonog
+ * wipe-a, bez gradijenta i bez blura.
+ *
+ * Ivica ide od x≈78 na vrhu do x≈21 na dnu: nagib od približno 3°, pa gornji
+ * deo prolazi neznatno ranije od donjeg. Duž nje su tri mekane lobe od oko
+ * ±22 jedinice — na panelu je to 6–7 px, dovoljno da se ne čita kao prava
+ * linija, a premalo da bi se videlo kao talasanje.
+ */
+export const PUTTY_MATERIAL_TRACE_REVEAL_PATH = [
+  "M -1600 -60",
+  "L -1600 1146",
+  "L 21 1146",
+  "C 30 1090, 56 1050, 70 1000",
+  "C 84 950, 58 880, 42 820",
+  "C 26 760, 74 700, 88 640",
+  "C 102 580, 68 520, 58 470",
+  "C 48 420, 76 350, 90 300",
+  "C 104 250, 60 190, 52 140",
+  "C 44 90, 66 30, 78 -60",
+  "Z",
+].join(" ");
+
+/**
+ * Krajnje pozicije maske, u koordinatama asseta (0–1413 po X).
+ *
+ * Start drži ivicu levo od kadra, pa ništa nije otkriveno. Kraj je gura 42 px
+ * izvan desne ivice: dovoljno da ni najtanja završna nit ne ostane pod maskom,
+ * a da se poslednji deo trajanja ne potroši na prazan hod.
+ */
+export const PUTTY_MATERIAL_TRACE_REVEAL_START = -70;
+export const PUTTY_MATERIAL_TRACE_REVEAL_END = 1455;
+
+/**
+ * Krivа povlačenja. Blag ulazak, gotovo ravnomerna sredina, mek završetak —
+ * jedan miran potez. Kontrolne tačke moraju rasti po X; obrnut redosled pravi
+ * prestrmu sredinu i otkrivanje se završi pre kraja trajanja.
+ */
+export const PUTTY_MATERIAL_TRACE_REVEAL_SPLINE = "0.25 0.1 0.35 1";
+
+/** Trajanje i odlaganje povlačenja. Jednom, bez loopa i bez povratka. */
+export const PUTTY_MATERIAL_TRACE_REVEAL_DURATION_MS = 1180;
+export const PUTTY_MATERIAL_TRACE_REVEAL_DELAY_MS = 100;

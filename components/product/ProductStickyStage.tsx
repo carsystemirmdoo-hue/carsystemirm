@@ -117,7 +117,7 @@ export function ProductStickyStage({
         <span className={styles.stagePlate} aria-hidden="true" />
         {hasSprayBackdrop ? <ProductHeroSprayBackdrop /> : null}
         {showPuttyTrace ? (
-          <PuttyMaterialTrace sizes="(min-width: 1180px) 32vw, (min-width: 896px) 34vw, 94vw" />
+          <PuttyMaterialTrace />
         ) : null}
         <span className={styles.stageHalo} aria-hidden="true" />
 

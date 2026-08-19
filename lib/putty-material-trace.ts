@@ -1,23 +1,176 @@
 /**
- * Statični trag kita iza proizvoda (Faza 2G).
+ * Trag kita iza proizvoda — konfiguracija po proizvodu (Faze 2G–2I).
  *
- * Namerno je vezan za eksplicitnu listu slugova, ne za kategoriju `kitovi`:
- * geometrija je odobrena za jedan konkretan proizvod, a ostali kitovi još
- * nemaju ni potvrđenu boju ni potvrđenu geometriju (vidi Fazu 1). Kategorijska
- * provera bi ih sve uključila i tvrdila nešto što nije potvrđeno.
- *
- * Asseti su fotografski master iz Faze 2E/2F, razdvojen na dva sloja:
- * materijal nosi svoju boju, senka je čista crna sa alfom (množenje), pa
- * ostaje neutralna nezavisno od podloge panela.
+ * Geometrija, maska i animacija su ZAJEDNIČKE. Po proizvodu se menjaju samo
+ * potvrđeni materijalni parametri, kroz mapu ispod. Nema komponente po
+ * proizvodu i nema provere po kategoriji: kategorija `kitovi` sadrži i smole
+ * koje se ne nanose špahtlom, i vlaknaste gitove kojima ovaj gladak trag ne
+ * odgovara, i materijale bez potvrđene boje. Blanket primena bi tvrdila
+ * stvari koje nisu potvrđene.
  */
 
-/** Proizvodi kojima je odobren trag kita. Slug je stabilan ključ kataloga. */
-const PUTTY_MATERIAL_TRACE_SLUGS = new Set<string>([
-  "carsystem-git-elastic-weiss",
-]);
+export type PuttyMaterialFamily =
+  | "fine-light"
+  | "fine-colored"
+  | "fiber"
+  | "uv-special"
+  | "resin-excluded";
+
+export type PuttyRolloutStatus =
+  | "IMPLEMENTED"
+  | "PENDING COMPOSITION"
+  | "PENDING DEDICATED FIBER MATERIAL"
+  | "PENDING MATERIAL VERIFICATION"
+  | "EXCLUDED — NOT PUTTY SMEAR";
+
+export type PuttyColorPresetId = "original" | "multi-green";
+
+/**
+ * Boja se menja SVG filterom nad `<image>` slojem materijala, nikad nad
+ * senkom. Postupak je duotone preko luminanse: `saturate 0` daje svetlinu
+ * materijala, a linearni prenos je preslikava na rampu ka ciljnoj nijansi.
+ * Time ostaju sačuvani brazde, vrhovi i doline. Nema `hue-rotate` i nema
+ * novih rastera.
+ */
+export const PUTTY_COLOR_PRESETS: Record<
+  PuttyColorPresetId,
+  { label: string; note: string; target: [number, number, number] | null }
+> = {
+  original: {
+    label: "Fine White — original",
+    note: "Boja iz fotografskog mastera, bez filtera.",
+    target: null,
+  },
+  "multi-green": {
+    label: "Multi Green",
+    note: "CONFIRMED COLOR FAMILY / PROVISIONAL DIGITAL SHADE",
+    target: [118, 143, 92],
+  },
+};
+
+/** Srednja luminansa neprovidne mase u masteru; referenca za duotone rampu. */
+const MASTER_REFERENCE_LUMA = 0.804;
+
+/** Nagib i odsečak linearnog prenosa po kanalu, za dati ciljni ton. */
+export function puttyDuotoneTransfer(target: [number, number, number]) {
+  return target.map((channel) => {
+    const top = channel / 255;
+    const intercept = top * 0.1;
+    return { intercept, slope: (top - intercept) / MASTER_REFERENCE_LUMA };
+  });
+}
+
+export type PuttyMaterialTraceConfig = {
+  slug: string;
+  name: string;
+  family: PuttyMaterialFamily;
+  status: PuttyRolloutStatus;
+  colorPreset: PuttyColorPresetId;
+  reason: string;
+};
+
+/**
+ * Mapa svih osam proizvoda kategorije `kitovi`. Slug je stabilan ključ; naziv
+ * se nikad ne koristi za poklapanje.
+ */
+export const PUTTY_MATERIAL_TRACE_MAP: readonly PuttyMaterialTraceConfig[] = [
+  {
+    slug: "carsystem-git-elastic-weiss",
+    name: "Carsystem Git Elastic Weiss",
+    family: "fine-light",
+    status: "IMPLEMENTED",
+    colorPreset: "original",
+    reason:
+      "TDS: polyester fine putty, Shade: white. Boja i geometrija potvrđene; " +
+      "silueta 1,76 staje u zaključanih 39 % i ostavlja materijal vidljiv sa " +
+      "sve četiri strane.",
+  },
+  {
+    slug: "cosmos-lac-putties-acrylic-putty-water-based",
+    name: "Cosmos Lac Acrylic Putty Water Based",
+    family: "fine-light",
+    status: "PENDING COMPOSITION",
+    colorPreset: "original",
+    reason:
+      "TDS: COLOR RANGE WHITE, nanosi se špahtlom — materijalno odgovara. Ali " +
+      "silueta je odnosa 1,10, pa na 39 % širine zauzima 47,2 % visine panela, " +
+      "iznad trake materijala od 39,0 %. Materijal ne bi bio vidljiv iznad i " +
+      "ispod, a kompozicija je zaključana.",
+  },
+  {
+    slug: "carsystem-git-multi-green",
+    name: "Carsystem Git Multi Green",
+    family: "fiber",
+    status: "PENDING DEDICATED FIBER MATERIAL",
+    colorPreset: "multi-green",
+    reason:
+      "Boja potvrđena TDS-om (green). Ali asset proizvoda prikazuje MULTI " +
+      "GREEN GLAS, Art.-Nr. 146.707, Polyester Glasfaserspachtel — vlaknasti " +
+      "git, dok je TDS u repou za obični multifunkcionalni Multi Green. " +
+      "Nerazrešen identitet; zeleni pravac je zaustavljen do ispravnog asseta.",
+  },
+  {
+    slug: "b-2p93-uv-bodyfill-r",
+    name: "B 2P93 UV Bodyfill-R",
+    family: "uv-special",
+    status: "PENDING MATERIAL VERIFICATION",
+    colorPreset: "original",
+    reason:
+      "R-M TDS 07/2026 pročitan u celosti — polje boje ne postoji. Ne sme se " +
+      "pretpostaviti bela, niti izvesti siva iz srodnog UV Fill-R Grey.",
+  },
+  {
+    slug: "rm-body-filler-white-b-2e11",
+    name: "R-M Body Filler White B 2E11",
+    family: "uv-special",
+    status: "PENDING MATERIAL VERIFICATION",
+    colorPreset: "original",
+    reason:
+      "Nema ni TDS ni SDS; „White“ postoji samo u nazivu i internom spec polju. " +
+      "Boja provisional, geometrija nepotvrđena.",
+  },
+  {
+    slug: "carsystem-soft-plus-git",
+    name: "Carsystem Soft Plus git",
+    family: "uv-special",
+    status: "PENDING MATERIAL VERIFICATION",
+    colorPreset: "original",
+    reason:
+      "Nijedan Carsystem dokument; uparivanje sa zvaničnim katalogom je " +
+      "ambiguous i nije primenjeno. Slika proizvoda je placeholder.",
+  },
+  {
+    slug: "cosmos-lac-putties-1-kg-fiberglass-premium-thixotropic-resin-1kg",
+    name: "Cosmos Lac Fiberglass Premium Thixotropic Resin 1 kg",
+    family: "resin-excluded",
+    status: "EXCLUDED — NOT PUTTY SMEAR",
+    colorPreset: "original",
+    reason:
+      "TDS: 2K tiksotropna poliesterska smola, nanošenje četkom ili valjkom, " +
+      "COLOR RANGE TRANSPARENT BLUE. Nije git za špahtlu.",
+  },
+  {
+    slug: "cosmos-lac-putties-5-kg-fiberglass-premium-thixotropic-resin-5kg",
+    name: "Cosmos Lac Fiberglass Premium Thixotropic Resin 5 kg",
+    family: "resin-excluded",
+    status: "EXCLUDED — NOT PUTTY SMEAR",
+    colorPreset: "original",
+    reason: "Isto kao pakovanje od 1 kg.",
+  },
+];
+
+const BY_SLUG = new Map(PUTTY_MATERIAL_TRACE_MAP.map((item) => [item.slug, item]));
+
+/** Konfiguracija traga za proizvod, ili `undefined` ako nije implementiran. */
+export function getPuttyMaterialTrace(
+  slug: string,
+): PuttyMaterialTraceConfig | undefined {
+  const config = BY_SLUG.get(slug);
+  return config?.status === "IMPLEMENTED" ? config : undefined;
+}
 
 export function hasPuttyMaterialTrace(slug: string): boolean {
-  return PUTTY_MATERIAL_TRACE_SLUGS.has(slug);
+  return getPuttyMaterialTrace(slug) !== undefined;
 }
 
 /** Slojevi se nižu senka → materijal; oba dele isti canvas i poravnanje. */

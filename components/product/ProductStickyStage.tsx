@@ -20,7 +20,7 @@ import {
   resolveSizeClass,
 } from "@/lib/product-scale";
 import {
-  hasPuttyMaterialTrace,
+  getPuttyMaterialTrace,
   PUTTY_MATERIAL_TRACE_OPTICAL_Y,
   PUTTY_MATERIAL_TRACE_PRODUCT_ENVELOPE,
   PUTTY_MATERIAL_TRACE_STAGE_ASPECT,
@@ -78,7 +78,8 @@ export function ProductStickyStage({
    * mobilnom, a envelope proizvoda se spušta na 39cqw da bi materijal ostao
    * vidljiv sa sve četiri strane limenke.
    */
-  const showPuttyTrace = hasPuttyMaterialTrace(product.slug);
+  const puttyTrace = getPuttyMaterialTrace(product.slug);
+  const showPuttyTrace = puttyTrace !== undefined;
   /*
    * Promenljive idu na SPOLJNI wrapper, ne na `.stage`: custom properties se
    * nasleđuju, inline deklaracija tuče i media query koji na mobilnom vraća
@@ -117,7 +118,7 @@ export function ProductStickyStage({
         <span className={styles.stagePlate} aria-hidden="true" />
         {hasSprayBackdrop ? <ProductHeroSprayBackdrop /> : null}
         {showPuttyTrace ? (
-          <PuttyMaterialTrace />
+          <PuttyMaterialTrace config={puttyTrace} />
         ) : null}
         <span className={styles.stageHalo} aria-hidden="true" />
 

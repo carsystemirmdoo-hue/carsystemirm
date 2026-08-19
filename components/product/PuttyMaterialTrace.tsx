@@ -2,6 +2,9 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import {
+  PUTTY_COLOR_PRESETS,
+  puttyDuotoneTransfer,
+  type PuttyMaterialTraceConfig,
   PUTTY_MATERIAL_TRACE_ASPECT,
   PUTTY_MATERIAL_TRACE_ASSETS,
   PUTTY_MATERIAL_TRACE_CANVAS,
@@ -34,13 +37,22 @@ import styles from "./PuttyMaterialTrace.module.css";
  * osvežava ispravno, a kao bonus user space SVG-a JESTE koordinatni sistem
  * asseta (1413 × 1086), pa se maska autoriše u njegovim jedinicama.
  */
-export function PuttyMaterialTrace() {
+export function PuttyMaterialTrace({ config }: { config: PuttyMaterialTraceConfig }) {
   /*
    * `useId` daje jedinstven id po instanci, pa dva panela na istoj stranici ne
    * dele masku. Dvotačke iz React formata se uklanjaju jer `url(#…)` sa njima
    * nije pouzdan u CSS-u.
    */
-  const clipId = `putty-reveal-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
+  const clipId = `putty-reveal-${uid}`;
+  const tintId = `putty-tint-${uid}`;
+
+  /*
+   * Boja se menja samo na sloju materijala. Senka je crna sa alfom i mora
+   * ostati neutralna, pa filter nikada ne dodiruje njen `<image>`.
+   */
+  const preset = PUTTY_COLOR_PRESETS[config.colorPreset];
+  const transfer = preset.target ? puttyDuotoneTransfer(preset.target) : null;
   const sweepRef = useRef<SVGPathElement | null>(null);
   const animateRef = useRef<SVGAnimateTransformElement | null>(null);
   const [isReady, setReady] = useState(false);
@@ -107,6 +119,8 @@ export function PuttyMaterialTrace() {
       aria-hidden="true"
       data-putty-material-trace
       data-putty-reveal={isReady ? "running" : "idle"}
+      data-putty-family={config.family}
+      data-putty-color={config.colorPreset}
     >
       <svg
         className={styles.canvas}
@@ -142,6 +156,17 @@ export function PuttyMaterialTrace() {
               />
             </path>
           </clipPath>
+
+          {transfer ? (
+            <filter id={tintId} colorInterpolationFilters="sRGB">
+              <feColorMatrix type="saturate" values="0" />
+              <feComponentTransfer>
+                <feFuncR type="linear" slope={transfer[0].slope} intercept={transfer[0].intercept} />
+                <feFuncG type="linear" slope={transfer[1].slope} intercept={transfer[1].intercept} />
+                <feFuncB type="linear" slope={transfer[2].slope} intercept={transfer[2].intercept} />
+              </feComponentTransfer>
+            </filter>
+          ) : null}
         </defs>
 
         <g clipPath={`url(#${clipId})`}>
@@ -160,6 +185,7 @@ export function PuttyMaterialTrace() {
             width={PUTTY_MATERIAL_TRACE_CANVAS.width}
             height={PUTTY_MATERIAL_TRACE_CANVAS.height}
             data-putty-trace-layer="material"
+            filter={transfer ? `url(#${tintId})` : undefined}
           />
         </g>
       </svg>

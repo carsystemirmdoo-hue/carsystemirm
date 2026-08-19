@@ -8,7 +8,17 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"],
+    // `.next-verify` je izlaz komande `npm run build:check` (vidi next.config.ts).
+    ignores: [
+      ".next/**",
+      ".next-verify/**",
+      ".next-dev/**",
+      // Izlaz izolovanog dev servera za search QA (`npm run dev:search`).
+      ".next-search-dev/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+    ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];

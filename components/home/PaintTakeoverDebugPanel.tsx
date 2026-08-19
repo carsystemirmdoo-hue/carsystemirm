@@ -20,11 +20,8 @@ type PaintTakeoverDebugPanelProps = {
 };
 
 type PaintLayoutSnapshot = {
-  bridgeParent: string;
   partnersTop: number;
   partnersBottom: number;
-  bridgeTop: number;
-  bridgeBottom: number;
   takeoverTop: number;
   takeoverBottom: number;
   zIndices: string;
@@ -57,37 +54,25 @@ export function PaintTakeoverDebugPanel({
       const partners = document.querySelector<HTMLElement>(
         "#prodavnice-mreza",
       );
-      const background = document.querySelector<HTMLElement>(
-        "[data-partners-background]",
-      );
-      const bridge = document.querySelector<HTMLElement>(
-        "[data-paint-entry-bridge]",
-      );
       const locator = document.querySelector<HTMLElement>(
         "[data-locator-card]",
       );
       const map = document.querySelector<HTMLElement>("[data-map-wrapper]");
       const takeover =
         document.querySelector<HTMLElement>("#paint-takeover");
-      if (!partners || !bridge || !takeover) return;
+      if (!partners || !takeover) return;
 
       const partnersRect = partners.getBoundingClientRect();
-      const bridgeRect = bridge.getBoundingClientRect();
       const takeoverRect = takeover.getBoundingClientRect();
       const zIndexFor = (element: HTMLElement | null) =>
         element ? getComputedStyle(element).zIndex : "—";
 
       setLayoutSnapshot({
-        bridgeParent: bridge.parentElement?.id
-          ? `#${bridge.parentElement.id}`
-          : (bridge.parentElement?.tagName.toLowerCase() ?? "—"),
         partnersTop: partnersRect.top,
         partnersBottom: partnersRect.bottom,
-        bridgeTop: bridgeRect.top,
-        bridgeBottom: bridgeRect.bottom,
         takeoverTop: takeoverRect.top,
         takeoverBottom: takeoverRect.bottom,
-        zIndices: `partners ${zIndexFor(partners)} · bg ${zIndexFor(background)} · bridge ${zIndexFor(bridge)} · locator ${zIndexFor(locator)} · map ${zIndexFor(map)} · takeover ${zIndexFor(takeover)}`,
+        zIndices: `partners ${zIndexFor(partners)} · locator ${zIndexFor(locator)} · map ${zIndexFor(map)} · takeover ${zIndexFor(takeover)}`,
       });
     });
 
@@ -179,17 +164,10 @@ export function PaintTakeoverDebugPanel({
         <dd>{snapshot ? (snapshot.reducedMotion ? "da" : "ne") : "—"}</dd>
         <dt>Aktivni RAF</dt>
         <dd>{snapshot?.activeRafCallbacks ?? "—"}</dd>
-        <dt>Bridge parent</dt>
-        <dd>{layoutSnapshot?.bridgeParent ?? "—"}</dd>
         <dt>Partners top / bottom</dt>
         <dd>
           {formatNumber(layoutSnapshot?.partnersTop, 1)} /{" "}
           {formatNumber(layoutSnapshot?.partnersBottom, 1)}
-        </dd>
-        <dt>Bridge top / bottom</dt>
-        <dd>
-          {formatNumber(layoutSnapshot?.bridgeTop, 1)} /{" "}
-          {formatNumber(layoutSnapshot?.bridgeBottom, 1)}
         </dd>
         <dt>Takeover top / bottom</dt>
         <dd>

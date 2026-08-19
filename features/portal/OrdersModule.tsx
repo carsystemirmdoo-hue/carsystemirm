@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { customers, portalUsers, products } from "@/mock-data/portal";
+import { customers, portalUsers, products } from "@/fixtures/dev/portal";
 import { can, canAccessOrder } from "@/permissions/portal-permissions";
 import { mockPortalService } from "@/services/portal/portal-service";
 import type { OrderItem, OrderSource, OrderStatus } from "@/types/portal";

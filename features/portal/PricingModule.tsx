@@ -7,7 +7,7 @@ import {
   manufacturers,
   productGroups,
   products,
-} from "@/mock-data/portal";
+} from "@/fixtures/dev/portal";
 import { can } from "@/permissions/portal-permissions";
 import { mockPortalService } from "@/services/portal/portal-service";
 import type {

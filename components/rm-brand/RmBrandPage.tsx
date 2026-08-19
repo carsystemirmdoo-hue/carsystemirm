@@ -158,6 +158,7 @@ function RmAgilisFeature({
         : "R-M proizvod",
       href: `/proizvodi/${product.slug}`,
       name: product.name,
+      product,
     })),
     ...(agilisSystem?.slots ?? [])
       .slice(agilisProducts.length, 4)
@@ -167,6 +168,7 @@ function RmAgilisFeature({
         group: slot.group,
         href: rmCatalogHref({ system: "agilis" }),
         name: slot.name,
+        product: undefined,
       })),
   ].slice(0, 4);
 
@@ -190,9 +192,8 @@ function RmAgilisFeature({
 
       <div className={styles.agilisLayout}>
         <div className={styles.agilisBenefits}>
-          {rmAgilisBenefits.map((benefit, index) => (
+          {rmAgilisBenefits.map((benefit) => (
             <article key={benefit}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{benefit}</h3>
             </article>
           ))}
@@ -209,11 +210,6 @@ function RmAgilisFeature({
           />
           <span className={styles.agilisArc} aria-hidden="true" />
           <span className={styles.agilisSpectralLine} aria-hidden="true" />
-          <div>
-            <Image src="/brands/rm.svg" alt="R-M" width={176} height={78} />
-            <strong>AGILIS</strong>
-            <small>WATERBORNE BASECOAT SYSTEM</small>
-          </div>
         </div>
       </div>
 
@@ -229,6 +225,7 @@ function RmAgilisFeature({
             group={item.group}
             href={item.href}
             key={item.name}
+            product={item.product}
             productName={item.name}
             role={item.group}
             sizes="(min-width: 70rem) 18vw, (min-width: 48rem) 24vw, 84vw"
@@ -309,9 +306,8 @@ function RmRefinitySection() {
       </figure>
 
       <div id="refinity-tools" className={styles.refinityAreas}>
-        {rmRefinityAreas.map((area, index) => (
+        {rmRefinityAreas.map((area) => (
           <article key={area}>
-            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <h3>{area}</h3>
           </article>
         ))}
@@ -448,9 +444,6 @@ function RmColorSystems({ products }: { products: CarsystemProduct[] }) {
               key={system.system}
             >
               <header className={styles.systemCardHeader}>
-                <span className={styles.systemIndex}>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <p>{system.technology}</p>
               </header>
 

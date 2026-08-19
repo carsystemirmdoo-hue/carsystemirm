@@ -1,0 +1,290 @@
+/*
+ * Static storyboards for the three leading scene concepts — INTERNAL.
+ *
+ * STATIC ONLY. There is no animation in this file and no component that could
+ * start one: the review asked for sketches to judge the idea, not another
+ * motion demo.
+ */
+
+.page {
+  --sb-ink: oklch(0.2 0.014 255);
+  --sb-muted: oklch(0.52 0.02 255);
+  --sb-line: oklch(0.28 0.016 255 / 0.16);
+  min-height: 100vh;
+  background: oklch(0.97 0.005 255);
+  color: var(--sb-ink);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2.5rem) 6rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.masthead {
+  max-width: 58rem;
+  margin-bottom: 2.4rem;
+}
+
+.masthead h1 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.masthead p {
+  margin: 0 0 0.5rem;
+  max-width: 50rem;
+  color: var(--sb-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--sb-line);
+  padding: 0.28rem 0.55rem;
+  color: oklch(0.55 0.2 27);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.concept {
+  margin-bottom: 3.2rem;
+  border-top: 1px solid var(--sb-line);
+  padding-top: 1.1rem;
+}
+
+.conceptHead h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.conceptHead p {
+  margin: 0 0 1rem;
+  max-width: 52rem;
+  color: var(--sb-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.9rem;
+}
+
+.card {
+  border: 1px solid var(--sb-line);
+  background: oklch(1 0 0);
+}
+
+.cardMeta {
+  display: grid;
+  gap: 0.18rem;
+  border-top: 1px solid var(--sb-line);
+  padding: 0.5rem 0.6rem 0.65rem;
+}
+
+.cardMeta strong {
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.cardMeta small {
+  color: var(--sb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared stage                                                       */
+/* ------------------------------------------------------------------ */
+
+.stage {
+  position: relative;
+  display: block;
+  aspect-ratio: 5 / 6;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    oklch(0.99 0.003 255),
+    oklch(0.935 0.009 255)
+  );
+  container-type: size;
+  isolation: isolate;
+}
+
+.stage[data-format="square"] {
+  aspect-ratio: 1 / 1;
+}
+
+.stage[data-format="landscape"] {
+  aspect-ratio: 4 / 3;
+}
+
+.darkBlock {
+  background: oklch(0.115 0.011 255);
+  padding: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.darkBlock .stage {
+  background: linear-gradient(
+    180deg,
+    oklch(0.148 0.013 255),
+    oklch(0.105 0.011 255)
+  );
+}
+
+.darkBlock .card {
+  border-color: oklch(0.9 0.01 255 / 0.14);
+  background: oklch(0.15 0.013 255);
+  color: oklch(0.93 0.008 255);
+}
+
+.darkBlock .cardMeta {
+  border-color: oklch(0.9 0.01 255 / 0.14);
+}
+
+.darkBlock .cardMeta small {
+  color: oklch(0.68 0.02 255);
+}
+
+/* The product layer — same content-fit maths as production. */
+.product {
+  --sb-envelope-w: 60cqw;
+  --sb-envelope-h: 70cqh;
+  --sb-fit-w: min(
+    var(--sb-envelope-w),
+    calc(var(--sb-envelope-h) * var(--product-content-aspect))
+  );
+  position: absolute;
+  z-index: 3;
+  top: 47%;
+  left: 50%;
+  width: calc(var(--sb-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  transform: translate(
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+    calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+  );
+}
+
+.product img {
+  object-fit: contain;
+}
+
+/* ------------------------------------------------------------------ */
+/* 1 · Product Echo                                                   */
+/* ------------------------------------------------------------------ */
+
+/*
+ * The echo IS the product: the same render, enlarged, offset and flattened to a
+ * single tone. Nothing is drawn, so nothing can be generic and nothing can
+ * claim a feature the product does not have.
+ */
+.echo {
+  position: absolute;
+  z-index: 1;
+  top: 47%;
+  left: 50%;
+  width: calc(var(--sb-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  opacity: 0.14;
+  filter: grayscale(1) brightness(0) blur(0.4px);
+  transform: translate(
+      calc(
+        (var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100% +
+          var(--sb-echo-x, 9cqw)
+      ),
+      calc(
+        (var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100% +
+          var(--sb-echo-y, -3cqh)
+      )
+    )
+    scale(var(--sb-echo-scale, 1.42));
+}
+
+.echoFar {
+  --sb-echo-x: -13cqw;
+  --sb-echo-y: 2cqh;
+  --sb-echo-scale: 1.85;
+  opacity: 0.07;
+  z-index: 1;
+}
+
+.darkBlock .echo {
+  filter: grayscale(1) brightness(3) blur(0.4px);
+  opacity: 0.13;
+}
+
+.darkBlock .echoFar {
+  opacity: 0.07;
+}
+
+.echo img {
+  object-fit: contain;
+}
+
+/* ------------------------------------------------------------------ */
+/* 2 · Material Signature                                             */
+/* ------------------------------------------------------------------ */
+
+/*
+ * One trace per group, describing what the product DOES: friction wears a
+ * surface, filler is dragged, film folds over itself. The trace passes behind
+ * the product and leaves on both sides, the same spatial rule the approved
+ * spray composition uses.
+ */
+.signature {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.signature svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------------ */
+/* 3 · Negative-space Reveal                                          */
+/* ------------------------------------------------------------------ */
+
+/*
+ * The scene is built by SUBTRACTION: a solid field in the group tone, with an
+ * opening cut out of it. The product is what the opening exposes, so the
+ * decoration is the absence rather than the addition.
+ */
+.negative {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--sb-negative-tone, oklch(0.62 0.03 248));
+  opacity: 0.16;
+  pointer-events: none;
+  clip-path: var(--sb-negative-shape);
+}
+
+.darkBlock .negative {
+  opacity: 0.2;
+}
+
+.negativeEdge {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  pointer-events: none;
+  background: var(--sb-negative-tone, oklch(0.62 0.03 248));
+  opacity: 0.34;
+  clip-path: var(--sb-negative-edge);
+}

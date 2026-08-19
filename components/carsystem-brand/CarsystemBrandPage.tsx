@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
+import { DocumentCard } from "@/components/documents/DocumentCard";
 import { Footer } from "@/components/layout/Footer";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import { getFeaturedDocuments } from "@/lib/documents";
+import { CarsystemFinishSystem } from "./CarsystemFinishSystem";
 import { CarsystemHero } from "./CarsystemHero";
-import { CarsystemMediaSlot } from "./CarsystemMediaSlot";
+import { CarsystemMultiChanger } from "./CarsystemMultiChanger";
 import { CarsystemPageShell } from "./CarsystemPageShell";
 import { CarsystemProcess } from "./CarsystemProcess";
 import { CarsystemProducts } from "./CarsystemProducts";
@@ -13,11 +16,8 @@ import {
   carsystemDocumentation,
   carsystemFamilies,
   carsystemFinalCta,
-  carsystemMedia,
   carsystemMetrics,
   carsystemSectionNavItems,
-  carsystemWorkflow,
-  type CarsystemMediaAvailability,
 } from "./carsystemBrandData";
 import { getCarsystemMediaAvailability } from "./carsystemMedia.server";
 import styles from "./CarsystemBrandPage.module.css";
@@ -45,11 +45,13 @@ export function CarsystemBrandPage({
           availability={mediaAvailability}
           products={products}
         />
-        <WorkflowStory availability={mediaAvailability} />
         <Families productBySlug={productBySlug} />
         <CarsystemUseCases products={products} />
         <CarsystemProducts products={products} />
         <Documentation />
+        <DocumentLibrary />
+        <CarsystemFinishSystem />
+        <CarsystemMultiChanger />
         <FinalCta productBySlug={productBySlug} />
       </main>
       <Footer />
@@ -94,49 +96,6 @@ function Metrics({ products }: { products: CarsystemProduct[] }) {
           </div>
         ))}
       </dl>
-    </section>
-  );
-}
-
-function WorkflowStory({
-  availability,
-}: {
-  availability: CarsystemMediaAvailability;
-}) {
-  return (
-    <section
-      className={`${styles.section} ${styles.workflowSection}`}
-      aria-labelledby="carsystem-workflow-title"
-      data-cs-reveal
-    >
-      <header className={styles.workflowHeader}>
-        <p className={styles.sectionKicker}>Povezan rezultat</p>
-        <h2 id="carsystem-workflow-title">{carsystemWorkflow.title}</h2>
-        <p>{carsystemWorkflow.description}</p>
-      </header>
-
-      <div className={styles.workflowTrack}>
-        <span className={styles.workflowLine} aria-hidden="true" />
-        {carsystemWorkflow.stages.map((stage) => {
-          const media = carsystemMedia[stage.mediaId];
-
-          return (
-            <article key={stage.title}>
-              <CarsystemMediaSlot
-                availability={availability[media.id]}
-                className={styles.workflowMedia}
-                media={media}
-                sizes="(min-width: 64rem) 24vw, (min-width: 40rem) 45vw, 88vw"
-              />
-              <div>
-                <span>{stage.index}</span>
-                <h3>{stage.title}</h3>
-                <p>{stage.description}</p>
-              </div>
-            </article>
-          );
-        })}
-      </div>
     </section>
   );
 }
@@ -290,6 +249,45 @@ function Documentation() {
             <span aria-hidden="true">↗</span>
           </Link>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function DocumentLibrary() {
+  const documents = getFeaturedDocuments("carsystem");
+  if (documents.length === 0) return null;
+
+  return (
+    <section
+      className={`${styles.section} ${styles.documentLibrarySection}`}
+      aria-labelledby="carsystem-document-library-title"
+      data-cs-reveal
+    >
+      <header className={styles.sectionHeader}>
+        <div>
+          <p className={styles.sectionKicker}>Katalozi i stručna dokumentacija</p>
+          <h2 id="carsystem-document-library-title">
+            Zvanični materijal iz prve ruke
+          </h2>
+        </div>
+        <p>
+          Kompletan katalog i ključne brošure proizvodnih sistema, direktno od
+          Carsystem/Vosschemie.
+        </p>
+      </header>
+
+      <div className={styles.documentLibraryGrid}>
+        {documents.map((document) => (
+          <DocumentCard key={document.id} document={document} />
+        ))}
+      </div>
+
+      <div className={styles.documentLibraryActions}>
+        <Link className={styles.secondaryButton} href="/katalozi?brand=carsystem">
+          Svi Carsystem katalozi i dokumenti
+          <span aria-hidden="true">↗</span>
+        </Link>
       </div>
     </section>
   );

@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-07-29T13:34:26.814Z",
+  "generatedAt": "2026-08-08T03:55:32.424Z",
   "summary": {
-    "auditedRoutes": 896,
-    "htmlPages": 894,
-    "indexable": 872,
-    "noindex": 19,
+    "auditedRoutes": 953,
+    "htmlPages": 951,
+    "indexable": 913,
+    "noindex": 35,
     "redirects": 2,
     "missingTitle": 0,
     "duplicateTitlePages": 0,
@@ -12,6 +12,7 @@
     "duplicateDescriptionPages": 0,
     "missingCanonical": 0,
     "wrongCanonical": 0,
+    "consolidatedVariantCanonicals": 715,
     "missingH1": 0,
     "multipleH1": 0,
     "missingOgImage": 0,
@@ -20,14 +21,111 @@
     "uniqueBrokenLinks": 0,
     "orphanPages": 0,
     "imagesMissingAlt": 0,
-    "imagesEmptyAlt": 54573,
+    "imagesEmptyAlt": 54630,
     "imagesMissingDimensions": 11,
     "indexableFilterSamples": 0,
     "indexablePreviewDemo": 0,
     "noindexUrlsInSitemap": 0,
-    "sitemapUrls": 872,
+    "sitemapUrls": 198,
     "productPagesWithoutProductSchema": 0,
     "pagesWithoutBreadcrumbSchema": 0
   },
-  "issues": []
+  "issues": [
+    {
+      "route": "/portal",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/aktivnosti",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/bex",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/biznissoft",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/cene",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/cene/istorija",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/cene/pravila",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/komercijalisti",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/kupci",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/odobrenja",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/podesavanja",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/porudzbine",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/porudzbine/nova",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/prijava",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/portal/proizvodi",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    },
+    {
+      "route": "/vodici",
+      "code": "unexpected-noindex",
+      "severity": "critical",
+      "message": "Produkcioni URL nije indeksabilan."
+    }
+  ]
 }

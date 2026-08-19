@@ -5,8 +5,8 @@
   --baslac-ink: #18232a;
   --baslac-muted: #5d686c;
   --baslac-border: rgb(24 35 42 / 0.13);
-  --baslac-accent: #9bcf37;
-  --baslac-accent-ink: #152207;
+  --baslac-accent: #3f7ea6;
+  --baslac-accent-ink: #ffffff;
   --baslac-cyan: #cbe9e8;
   --baslac-process-bg: #e9eeed;
   --baslac-process-ink: #17242b;
@@ -23,16 +23,6 @@
   background: var(--baslac-bg);
   color: var(--baslac-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
-}
-
-.baslacPage[data-baslac-theme="process"] {
-  --baslac-process-bg: #10242d;
-  --baslac-process-ink: #f3f8f4;
-  --baslac-process-muted: #b9c9c9;
-  --baslac-process-border: rgb(203 233 232 / 0.2);
-  --brand-nav-surface: rgb(16 36 45 / 0.94);
-  --brand-nav-border: rgb(203 233 232 / 0.18);
-  --brand-nav-ink: #f3f8f4;
 }
 
 .baslacPage main {
@@ -71,7 +61,7 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  width: min(100%, 86rem);
+  width: min(100%, var(--ds-container-max, 1208px));
   margin-inline: auto;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
@@ -97,7 +87,7 @@
   grid-template-columns: minmax(22rem, 0.86fr) minmax(34rem, 1.14fr);
   align-items: center;
   gap: clamp(2rem, 5vw, 6rem);
-  width: min(100%, 86rem);
+  width: min(100%, var(--ds-container-max, 1208px));
   min-height: 34rem;
   margin: 1.4rem auto 0;
 }
@@ -146,14 +136,6 @@
 .heroMessage {
   position: relative;
   min-height: 15.25rem;
-}
-
-.heroMessage > span {
-  display: block;
-  margin-bottom: 0.8rem;
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.72rem;
 }
 
 .heroMessage h1 {
@@ -214,7 +196,7 @@
 
 .primaryButton:hover,
 .primaryButton:focus-visible {
-  background: #addf4b;
+  background: #366e92;
 }
 
 .secondaryButton,
@@ -243,98 +225,6 @@
 .heroMedia img {
   object-fit: contain;
   background: #dce4e1;
-}
-
-.heroControls {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 1rem;
-  width: min(100%, 86rem);
-  margin: 0.75rem auto 0;
-  border-top: 1px solid var(--baslac-border);
-}
-
-.heroTabs {
-  display: grid;
-  flex: 1;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.heroTabs button {
-  position: relative;
-  display: flex;
-  min-height: 3.7rem;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.75rem;
-  border: 0;
-  border-right: 1px solid var(--baslac-border);
-  background: transparent;
-  color: var(--baslac-muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-align: left;
-}
-
-.heroTabs button::before {
-  position: absolute;
-  inset: -1px 0 auto;
-  height: 2px;
-  background: var(--baslac-accent);
-  content: "";
-  opacity: 0;
-  transform: scaleX(0.25);
-  transform-origin: left;
-  transition:
-    opacity 180ms ease,
-    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.heroTabs button > span {
-  color: color-mix(in oklab, var(--baslac-muted) 76%, transparent);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-}
-
-.heroTabs button[data-active] {
-  color: var(--baslac-ink);
-}
-
-.heroTabs button[data-active]::before {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.heroArrows {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.heroArrows button {
-  display: grid;
-  width: 2.65rem;
-  height: 2.65rem;
-  place-items: center;
-  border: 1px solid var(--baslac-border);
-  background: transparent;
-  color: var(--baslac-ink);
-  cursor: pointer;
-  font: inherit;
-}
-
-.heroArrows > span {
-  min-width: 3rem;
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.67rem;
-  text-align: center;
 }
 
 .mediaSlot {
@@ -378,48 +268,39 @@
   display: grid;
   align-content: center;
   justify-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
   padding: 1.25rem;
-  background: #dfe5e2;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #dfe5e2 0 10px,
+      #e7ece9 10px 20px
+    );
   text-align: center;
 }
 
-.mediaPlaceholder::before {
-  width: 2.8rem;
-  height: 1.8rem;
-  border: 1px solid currentColor;
-  content: "";
-  opacity: 0.34;
-}
-
-.mediaPlaceholder span {
-  color: #6f7a7c;
-  font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-}
-
-.mediaPlaceholder strong,
-.mediaPlaceholder small {
-  overflow-wrap: anywhere;
-  font-family: var(--font-technical), monospace;
-  font-weight: 500;
+.mediaPlaceholderMark {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgb(48 61 66 / 0.28);
+  color: #303d42;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .mediaPlaceholder strong {
-  max-width: 30rem;
-  color: #303d42;
-  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
-}
-
-.mediaPlaceholder small {
-  color: #6f7a7c;
-  font-size: 0.62rem;
+  max-width: 20rem;
+  color: #566366;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .section {
-  width: min(100% - clamp(2rem, 8vw, 8rem), 86rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
   padding-block: clamp(5.5rem, 10vw, 9rem);
 }
@@ -483,33 +364,26 @@
   align-self: end;
 }
 
-.positionBody dl {
+.positionFacts {
   margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.positionBody dl > div {
-  display: grid;
-  grid-template-columns: 2.25rem 1fr;
-  gap: 1rem;
+.positionFacts li {
   padding-block: 0.9rem;
   border-top: 1px solid var(--baslac-border);
-}
-
-.positionBody dt {
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.65rem;
-}
-
-.positionBody dd {
-  margin: 0;
   font-size: 0.88rem;
   line-height: 1.45;
 }
 
 .repairRhythm {
   width: 100%;
-  padding: clamp(5.5rem, 9vw, 8rem) max(calc((100% - 86rem) / 2), clamp(1rem, 4vw, 4rem));
+  padding: clamp(5.5rem, 9vw, 8rem)
+    max(
+      var(--ds-gutter, clamp(20px, 4vw, 56px)),
+      calc((100% - var(--ds-container-max, 1208px)) / 2)
+    );
   background: var(--baslac-process-bg);
   color: var(--baslac-process-ink);
   transition:
@@ -554,9 +428,12 @@
   background: color-mix(in oklab, var(--baslac-process-bg) 80%, #8a9694);
 }
 
-.repairRhythm .mediaPlaceholder strong,
-.repairRhythm .mediaPlaceholder span,
-.repairRhythm .mediaPlaceholder small {
+.repairRhythm .mediaPlaceholder strong {
+  color: var(--baslac-process-ink);
+}
+
+.repairRhythm .mediaPlaceholderMark {
+  border-color: color-mix(in oklab, var(--baslac-process-ink) 30%, transparent);
   color: var(--baslac-process-ink);
 }
 
@@ -570,12 +447,10 @@
 }
 
 .repairRhythmSelector button {
-  display: grid;
+  display: flex;
   min-height: 4.4rem;
-  grid-template-columns: 1.6rem 1fr;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.85rem 0.6rem;
+  padding: 0.85rem 0.9rem;
   border: 0;
   border-right: 1px solid var(--baslac-process-border);
   border-bottom: 1px solid var(--baslac-process-border);
@@ -593,11 +468,6 @@
 
 .repairRhythmSelector button:nth-child(2n) {
   border-right: 0;
-}
-
-.repairRhythmSelector button span {
-  font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
 }
 
 .repairRhythmSelector button[data-active] {
@@ -934,18 +804,12 @@
 
 .clearcoatMatrix article {
   display: grid;
-  grid-template-columns: 3rem minmax(16rem, 0.9fr) minmax(20rem, 1fr) 12rem;
+  grid-template-columns: minmax(16rem, 0.9fr) minmax(20rem, 1fr) 12rem;
   gap: clamp(1rem, 3vw, 3rem);
   align-items: center;
   min-height: 9.5rem;
   padding-block: 1.35rem;
   border-bottom: 1px solid var(--baslac-border);
-}
-
-.clearcoatIndex {
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.63rem;
 }
 
 .clearcoatMatrix article > div > p {
@@ -1069,14 +933,13 @@
 
 .primerStack article {
   display: grid;
-  grid-template-columns: 2rem minmax(10rem, 0.72fr) minmax(12rem, 1fr);
+  grid-template-columns: minmax(10rem, 0.72fr) minmax(12rem, 1fr);
   gap: 1.2rem;
   align-items: center;
   min-height: 7.25rem;
   border-bottom: 1px solid var(--baslac-border);
 }
 
-.primerStack article > span,
 .primerStack article > div > p {
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
@@ -1099,6 +962,68 @@
   color: var(--baslac-muted);
   font-size: 0.78rem;
   line-height: 1.5;
+}
+
+.greyShadeSection {
+  border-top: 1px solid var(--baslac-process-border);
+  background: var(--baslac-process-bg);
+  color: var(--baslac-process-ink);
+  transition:
+    background-color 420ms ease,
+    color 420ms ease;
+}
+
+.greyShadeSection[data-active="true"] {
+  --baslac-process-bg: #10242d;
+  --baslac-process-ink: #f3f8f4;
+  --baslac-process-muted: #b9c9c9;
+  --baslac-process-border: rgb(203 233 232 / 0.2);
+}
+
+.greyShadeIntro {
+  max-width: 46rem;
+}
+
+.greyShadeIntro p:last-child {
+  margin-top: 1rem;
+  color: var(--baslac-process-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.greyShadePoster {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.greyShadePoster li {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.greyShadeSwatch {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--baslac-process-border);
+}
+
+.greyShadePoster strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.95rem;
+}
+
+.greyShadePoster small {
+  color: var(--baslac-process-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .colorSection {
@@ -1236,21 +1161,15 @@
 .supportList article {
   display: grid;
   min-height: 18rem;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
   padding: 1.5rem;
   border-right: 1px solid var(--baslac-border);
   border-bottom: 1px solid var(--baslac-border);
   background: var(--baslac-surface);
 }
 
-.supportList article > span {
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-}
-
 .supportList h3 {
-  margin: 2.5rem 0 0;
+  margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: 1.65rem;
   letter-spacing: -0.035em;
@@ -1312,13 +1231,21 @@
   transform: scale(1.025);
 }
 
-.catalogImage > span {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
+.documentsSection {
+  --background: var(--baslac-bg);
+  --foreground: var(--baslac-ink);
+  --border: var(--baslac-border);
+  --surface: var(--baslac-surface-strong);
+  --surface-muted: var(--baslac-surface);
+  --muted-foreground: var(--baslac-muted);
+  --accent: var(--baslac-accent);
+  border-top: 1px solid var(--baslac-border);
+}
+
+.documentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
 }
 
 .catalogCopy {
@@ -1383,7 +1310,11 @@
   grid-template-columns: 8rem minmax(0, 1fr) minmax(18rem, auto);
   gap: clamp(1.5rem, 5vw, 5rem);
   align-items: center;
-  padding: clamp(3rem, 7vw, 6rem) max(calc((100% - 86rem) / 2), clamp(1rem, 4vw, 4rem));
+  padding: clamp(3rem, 7vw, 6rem)
+    max(
+      var(--ds-gutter, clamp(20px, 4vw, 56px)),
+      calc((100% - var(--ds-container-max, 1208px)) / 2)
+    );
   overflow: hidden;
   background: #182a31;
   color: #f4f8f4;
@@ -1447,17 +1378,25 @@
 }
 
 :global(html[data-theme="dark"]) .mediaSlot,
-:global(html[data-theme="dark"]) .mediaPlaceholder,
 :global(html[data-theme="dark"]) .catalogImage {
   background: #202b2e;
 }
 
-:global(html[data-theme="dark"]) .mediaPlaceholder strong {
+:global(html[data-theme="dark"]) .mediaPlaceholder {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #202b2e 0 10px,
+      #26332f 10px 20px
+    );
+}
+
+:global(html[data-theme="dark"]) .mediaPlaceholderMark {
+  border-color: rgb(215 224 220 / 0.32);
   color: #d7e0dc;
 }
 
-:global(html[data-theme="dark"]) .mediaPlaceholder span,
-:global(html[data-theme="dark"]) .mediaPlaceholder small {
+:global(html[data-theme="dark"]) .mediaPlaceholder strong {
   color: #9aa8a6;
 }
 
@@ -1473,13 +1412,6 @@
 
   .heroMessage h1 {
     font-size: clamp(2.7rem, 5.5vw, 4.4rem);
-  }
-
-  .heroTabs button {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.15rem;
   }
 
   .linesGrid {
@@ -1499,11 +1431,11 @@
   }
 
   .clearcoatMatrix article {
-    grid-template-columns: 2rem minmax(14rem, 0.9fr) minmax(18rem, 1fr);
+    grid-template-columns: minmax(14rem, 0.9fr) minmax(18rem, 1fr);
   }
 
   .clearcoatMatrix article > a {
-    grid-column: 2 / -1;
+    grid-column: 1 / -1;
   }
 
   .catalogGrid {
@@ -1547,25 +1479,6 @@
     margin-inline: auto;
   }
 
-  .heroControls {
-    align-items: center;
-    margin-top: 1.5rem;
-  }
-
-  .heroTabs {
-    display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .heroTabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .heroTabs button {
-    min-width: 8.5rem;
-    min-height: 3.5rem;
-  }
 
   .sectionHeader,
   .repairRhythmHeader,
@@ -1695,14 +1608,6 @@
     width: 100%;
   }
 
-  .heroControls {
-    display: grid;
-  }
-
-  .heroArrows {
-    justify-content: flex-end;
-  }
-
   .mediaSlot {
     aspect-ratio: var(--baslac-media-mobile-ratio);
   }
@@ -1787,14 +1692,9 @@
   }
 
   .clearcoatMatrix article {
-    grid-template-columns: 2rem 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem;
     padding-block: 1.5rem;
-  }
-
-  .clearcoatMatrix article dl,
-  .clearcoatMatrix article > a {
-    grid-column: 2;
   }
 
   .clearcoatMatrix dl {
@@ -1808,13 +1708,9 @@
   }
 
   .primerStack article {
-    grid-template-columns: 1.5rem 1fr;
+    grid-template-columns: 1fr;
     gap: 0.8rem;
     padding-block: 1rem;
-  }
-
-  .primerStack article > p {
-    grid-column: 2;
   }
 
   .catalogGrid {
@@ -1851,7 +1747,7 @@
 @media (prefers-reduced-motion: reduce) {
   .baslacPage,
   .repairRhythm,
-  .heroTabs button::before,
+  .greyShadeSection,
   .catalogImage img,
   .primaryButton,
   .secondaryButton,

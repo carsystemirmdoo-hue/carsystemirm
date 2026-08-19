@@ -7,6 +7,10 @@ import { ProductStickyStage } from "@/components/product/ProductStickyStage";
 import { ProductVariantOptions } from "@/components/product/ProductVariantOptions";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import {
+  getProductStageFormat,
+  getProductStageImages,
+} from "@/components/product/productStageImages";
+import {
   getCarsystemBrandBySlug,
   getProductPublicStatus,
   getProductVariantSelector,
@@ -76,6 +80,10 @@ export function ProductDetailPage({
     storeLabel: "Pronađi prodavnicu",
   };
   const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
+  // Resolved here, on the server, so the stage receives one small array instead
+  // of importing the image-metrics manifest into the client bundle.
+  const stageImages = getProductStageImages(product);
+  const stageFormat = getProductStageFormat(stageImages);
 
   return (
     <div className={styles.pageShell}>
@@ -84,7 +92,12 @@ export function ProductDetailPage({
 
         <div className={styles.narrativeGrid}>
           <div className={styles.stickyRail}>
-            <ProductStickyStage product={product} brandName={brand.name} />
+            <ProductStickyStage
+              brandName={brand.name}
+              images={stageImages}
+              product={product}
+              stageFormat={stageFormat}
+            />
           </div>
 
           <div className={styles.narrativeContent}>

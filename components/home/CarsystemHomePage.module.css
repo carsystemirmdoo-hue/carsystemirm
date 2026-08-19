@@ -352,12 +352,11 @@
   position: relative;
   z-index: 6;
   display: flex;
-  max-width: var(--container);
+  width: min(var(--ds-container-max, var(--container)), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   min-height: 660px;
   flex-direction: column;
   justify-content: center;
   margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 56px);
 }
 
 .heroCopy {
@@ -764,11 +763,11 @@
 
 .trustInner {
   display: flex;
-  max-width: var(--container);
+  width: min(var(--ds-container-max, var(--container)), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   align-items: center;
   gap: clamp(18px, 3vw, 40px);
   margin-inline: auto;
-  padding: clamp(20px, 2.6vw, 30px) clamp(20px, 4vw, 56px);
+  padding-block: clamp(20px, 2.6vw, 30px);
 }
 
 .trustLabel {
@@ -896,11 +895,11 @@
 
 .section,
 .sectionAlt {
-  padding: clamp(56px, 7vw, 100px) clamp(20px, 4vw, 56px);
+  padding-block: var(--ds-space-section, clamp(56px, 7vw, 100px));
 }
 
 .section {
-  max-width: var(--container);
+  width: min(var(--ds-container-max, var(--container)), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
 }
 
@@ -910,32 +909,28 @@
 }
 
 .sectionAlt > * {
-  max-width: var(--container);
+  width: min(var(--ds-container-max, var(--container)), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
 }
 
+/*
+ * Podloga sekcije je sada sam element, bez dekorativnog panela ispod sadržaja.
+ *
+ * Ranije je površinu crtao apsolutni `.partnersBackground` sa `inset: 0`, ali
+ * je na njega padalo i `.sectionAlt > *` pravilo (`width: min(container, 100% -
+ * 2*gutter)`). Apsolutni element sa left/right/width je over-constrained, pa je
+ * `right` ignorisan: podloga je ostajala široka koliko i sadržaj i uz desnu
+ * ivicu je ostajala nepokrivena traka od jednog gutter-a (na 1280px = 102px),
+ * kroz koju se video `--bg` stranice — to je bio "sivi vertikalni bar".
+ *
+ * `.sectionAlt` već nosi `background: var(--bg2)` na samom <section>, koji je
+ * full-bleed po definiciji, pa je dovoljno ne gasiti ga.
+ */
 .networkSection {
   position: relative;
   z-index: 2;
   isolation: isolate;
   overflow: visible;
-  background: transparent;
-}
-
-
-.partnersBackground {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  max-width: none;
-  margin: 0;
-  background: var(--bg2);
-  pointer-events: none;
-}
-
-.networkSection > :global([data-paint-entry-bridge]) {
-  max-width: none;
-  margin-inline: 0;
 }
 
 .networkSection[data-paint-debug-layout="true"] {
@@ -950,11 +945,11 @@
   --product-category-accent-ink: oklch(0.99 0.003 255);
   border-block: 1px solid var(--border-soft);
   background: var(--bg2);
-  padding: clamp(64px, 7vw, 104px) clamp(20px, 4vw, 56px);
+  padding-block: clamp(64px, 7vw, 104px);
 }
 
 .categorySectionInner {
-  max-width: var(--container);
+  width: min(var(--ds-container-max, var(--container)), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
 }
 
@@ -1010,10 +1005,14 @@
   gap: 9px;
   border: 1px solid var(--border);
   border-radius: 999px;
+  /* Kontrola je `button` (otvara panel pretrage), pa nosi i reset dugmeta. */
+  background: transparent;
   color: var(--text);
+  font-family: inherit;
   font-size: 14px;
   font-weight: 700;
   padding: 0 18px;
+  cursor: pointer;
   transition:
     border-color 190ms var(--cs-ease-polish),
     background-color 190ms var(--cs-ease-polish),
@@ -1175,6 +1174,28 @@
   flex-direction: column;
   gap: 14px;
   padding: 20px;
+  /*
+   * Lokalni reset --cs-orb-* na bazne (ne-chapter) vrednosti. --paint-chapter
+   * raste dok se ovaj blok približava Paint Takeoveru (namerno, vodi header/orb
+   * ambijent), ali ove promenljive su definisane samo na :root — potomci ih
+   * nasleđuju već izmešane. Sam --paint-chapter ovde ne pomaže (nije ponovo
+   * deklarisan tamo gde se --cs-orb-* računa), zato se resetuju direktno, samo
+   * u ovom podstablu — locator kartica i store-result lista ne smeju da dobiju
+   * magenta/lavanda boju iz Paint Takeover signala.
+   */
+  --cs-orb-core: oklch(0.58 0.22 27);
+  --cs-orb-core-glow: oklch(0.58 0.22 27 / 0.35);
+  --cs-orb-halo: oklch(0.24 0.028 250 / 0.11);
+  --cs-orb-ring: oklch(0.24 0.028 250 / 0.34);
+  --cs-orb-ring-strong: oklch(0.24 0.028 250 / 0.48);
+}
+
+:global(.dark) .locatorPanel {
+  --cs-orb-core: oklch(0.68 0.22 27);
+  --cs-orb-core-glow: oklch(0.62 0.22 27 / 0.48);
+  --cs-orb-halo: oklch(0.98 0.004 250 / 0.075);
+  --cs-orb-ring: oklch(0.98 0.004 250 / 0.34);
+  --cs-orb-ring-strong: oklch(0.98 0.004 250 / 0.58);
 }
 
 .fieldLabel {
@@ -1196,9 +1217,19 @@
 
 .mapPanel {
   z-index: 2;
+  /*
+   * Locator panel je bordovana kartica sa 20px unutrašnjim razmakom;
+   * mapa je ranije bila bez okvira i bez uvlačenja, pa je par delovao
+   * neusklađeno (glavni sadržaj lokator panela vizuelno uvučen 21px od
+   * spine, mapa nalepljena na ivicu). Ista okvir/radius/uvlačenje daje
+   * paru dosledan, uparen izgled bez pomeranja spine-a same sekcije.
+   */
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
 }
 
-.homeNetworkMapCanvas,
 .contactMap .contactMapCanvas {
   position: absolute;
   inset: 0;
@@ -1207,8 +1238,10 @@
 }
 
 .homeNetworkMapCanvas {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 20px;
+  border: 0;
+  background: transparent;
 }
 
 .homeMapFallback {

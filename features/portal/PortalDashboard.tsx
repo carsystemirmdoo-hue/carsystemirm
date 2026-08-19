@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { customers, products } from "@/mock-data/portal";
+import { customers, products } from "@/fixtures/dev/portal";
 import {
   Badge,
   Delta,

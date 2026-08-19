@@ -1,0 +1,28 @@
+{
+  "brandSlug": "rupes",
+  "brandName": "Rupes",
+  "manufacturer": "nije utvrđen",
+  "generatedAt": "2026-08-08T09:50:44.816Z",
+  "source": {
+    "officialWebsite": "https://www.rupes.com/",
+    "acquisitionFeasibility": "product-pages",
+    "verifiedAt": "2026-08-08",
+    "notes": [
+      "Brend je u projektu označen kao placeholder; nema nijedan proizvod u katalogu.",
+      "Nije istraživan u dubinu jer Carsystem još nije potvrdio da je deo ponude."
+    ]
+  },
+  "localInventory": {
+    "productsInCarsystemCatalogue": 0,
+    "localImages": 0,
+    "localDocuments": 0
+  },
+  "acquisition": {
+    "documentsAcquiredThisPhase": 0,
+    "technicalClaimsExtracted": 0,
+    "productsMatchedToCarsystemCatalogue": 0,
+    "manufacturerCandidateProducts": 0
+  },
+  "families": [],
+  "products": []
+}

@@ -16,8 +16,10 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { ProductCategoryGrid } from "@/components/categories/ProductCategoryGrid";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { useProductSearchDialog } from "@/components/search/ProductSearchProvider";
 import { useMotionTransitionState } from "@/components/motion/MotionConfigProvider";
 import { Button } from "@/components/ui/Button";
 import { HEADER_ENTRANCE_STORAGE_KEY } from "@/lib/header-entrance";
@@ -80,6 +82,7 @@ function getFocusableElements(container: HTMLElement | null) {
 export function Header() {
   const pathname = publicPathname(usePathname());
   const { phase: transitionPhase, reducedMotion } = useMotionTransitionState();
+  const { openSearch } = useProductSearchDialog();
   const productPanelId = useId();
   const brandPanelId = useId();
   const systemPanelId = useId();
@@ -95,6 +98,10 @@ export function Header() {
   const mobilePanelRef = useRef<HTMLElement>(null);
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  /** Lupa u desktop akcijama — i okidač panela i mesto povratka fokusa. */
+  const searchTriggerRef = useRef<HTMLButtonElement>(null);
+  /** Mobilna navigacija predaje fokus panelu pretrage, ne vraća ga na hamburger. */
+  const handoffFocusRef = useRef(false);
   const mobileHistoryEntryRef = useRef(false);
   const openMenuRef = useRef<HeaderMenuKey | null>(null);
   const desktopHoverOpenTimerRef = useRef<number | null>(null);
@@ -119,6 +126,7 @@ export function Header() {
     useState<DesktopMenuState>("closed");
   const [desktopMenuSwitching, setDesktopMenuSwitching] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileLayerMounted, setMobileLayerMounted] = useState(false);
   const [scrollHidden, setScrollHidden] = useState(false);
   const [mobileSection, setMobileSection] = useState<HeaderMenuKey | null>(
     "proizvodi",
@@ -134,6 +142,8 @@ export function Header() {
     pathname === "/program" || pathname.startsWith("/program/");
   const storeActive =
     pathname === "/prodavnice" || pathname.startsWith("/prodavnice/");
+  const katalozActive =
+    pathname === "/katalozi" || pathname.startsWith("/katalozi/");
   const supportActive = pathname === "/kontakt";
 
   const revealHeader = useCallback((animate: boolean) => {
@@ -181,6 +191,10 @@ export function Header() {
     layer.style.setProperty("--menu-panel-left", `${panelLeft}px`);
     layer.style.setProperty("--menu-panel-width", `${panelWidth}px`);
     layer.style.setProperty("--menu-anchor-x", `${anchorX}px`);
+  }, []);
+
+  useEffect(() => {
+    setMobileLayerMounted(true);
   }, []);
 
   useEffect(() => {
@@ -460,9 +474,16 @@ export function Header() {
       document.removeEventListener("keydown", keepFocusInside);
       document.body.style.overflow = previousOverflow;
       document.body.style.paddingRight = previousPaddingRight;
-      if (!mobileHistoryEntryRef.current) {
+      /*
+       * Kada se mobilna navigacija zatvara zato što otvara pretragu, fokus
+       * pripada polju za unos. Bez ove zastavice bi ovaj `requestAnimationFrame`
+       * pukao kadar kasnije i vratio fokus na hamburger — korisnik bi ostao sa
+       * otvorenim panelom u koji ne može da kuca.
+       */
+      if (!mobileHistoryEntryRef.current && !handoffFocusRef.current) {
         window.requestAnimationFrame(() => mobileToggle?.focus());
       }
+      handoffFocusRef.current = false;
     };
   }, [mobileOpen]);
 
@@ -810,13 +831,18 @@ export function Header() {
                     Pogledajte ceo katalog
                     <ArrowIcon />
                   </Button>
-                  <Link
-                    href="/katalog#catalog-search"
-                    onClick={() => closeDesktopMenu(false)}
+                  <button
+                    type="button"
+                    aria-haspopup="dialog"
+                    data-cursor="button"
+                    onClick={() => {
+                      closeDesktopMenu(false);
+                      openSearch(searchTriggerRef.current);
+                    }}
                   >
                     <SearchIcon />
                     Pretražite proizvode
-                  </Link>
+                  </button>
                 </div>
               </MegaMenuFrame>
             </HeaderDisclosure>
@@ -946,6 +972,18 @@ export function Header() {
               </Link>
             </li>
 
+            <li className={styles.navItem}>
+              <Link
+                href="/katalozi"
+                className={styles.navLink}
+                aria-current={katalozActive ? "page" : undefined}
+                data-active={katalozActive || undefined}
+                onClick={() => closeDesktopMenu(false)}
+              >
+                Katalozi
+              </Link>
+            </li>
+
             <HeaderDisclosure
               menuKey="podrska"
               label="Podrška"
@@ -981,15 +1019,21 @@ export function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <Link
-            href="/katalog#catalog-search"
+          <button
+            ref={searchTriggerRef}
+            type="button"
             className={styles.iconAction}
             aria-label="Pretražite proizvode"
-            title="Pretražite proizvode"
-            onClick={() => closeDesktopMenu(false)}
+            aria-haspopup="dialog"
+            title="Pretražite proizvode (Cmd/Ctrl + K)"
+            data-cursor="button"
+            onClick={() => {
+              closeDesktopMenu(false);
+              openSearch(searchTriggerRef.current);
+            }}
           >
             <SearchIcon />
-          </Link>
+          </button>
           <span className={styles.themeSlot}>
             <ThemeToggle />
           </span>
@@ -1021,7 +1065,7 @@ export function Header() {
         </div>
       </div>
 
-      {mobileOpen && (
+      {mobileLayerMounted && mobileOpen && createPortal(
         <div className={styles.mobileLayer}>
           <button
             type="button"
@@ -1147,6 +1191,13 @@ export function Header() {
                   onNavigate={closeMobileForNavigation}
                 />
                 <MobileMenuLink
+                  href="/katalozi"
+                  label="Katalozi"
+                  active={katalozActive}
+                  primary
+                  onNavigate={closeMobileForNavigation}
+                />
+                <MobileMenuLink
                   href="/kontakt?tema=tehnicka-podrska"
                   label="Podrška"
                   active={supportActive}
@@ -1157,15 +1208,19 @@ export function Header() {
             </nav>
 
             <div className={styles.mobileActions}>
-              <Link
-                href="/katalog#catalog-search"
-                replace
+              <button
+                type="button"
                 className={styles.mobileSearch}
-                onClick={closeMobileForNavigation}
+                aria-haspopup="dialog"
+                onClick={() => {
+                  handoffFocusRef.current = true;
+                  closeMobileNav();
+                  openSearch(mobileToggleRef.current);
+                }}
               >
                 <SearchIcon />
                 Pretražite proizvode
-              </Link>
+              </button>
               <Link
                 href="/kontakt"
                 replace
@@ -1177,7 +1232,8 @@ export function Header() {
               </Link>
             </div>
           </section>
-        </div>
+        </div>,
+        document.body,
       )}
     </header>
   );

@@ -1,0 +1,1511 @@
+{
+  "summary": {
+    "generatedAt": "2026-08-08T16:30:08.176Z",
+    "brand": "C.A.R.FIT",
+    "manufacturer": "August Handel GmbH",
+    "ourProducts": 3,
+    "manufacturerProducts": 123,
+    "byConfidence": {
+      "ambiguous": 2,
+      "exact-name": 1
+    },
+    "reliable": 1,
+    "ambiguous": 2,
+    "unmatched": 0,
+    "manufacturerOnlyCandidates": 112,
+    "bareNumericAcceptances": 0,
+    "duplicateArticleNumbersInSource": 3,
+    "appliedToPublicCatalogue": 0
+  },
+  "matches": [
+    {
+      "localSlug": "car-fit-prajmer",
+      "localName": "Car Fit prajmer",
+      "localSku": "CF-PRIMER",
+      "localPackages": [
+        "1 L",
+        "5 L",
+        "Aerosol",
+        "Mešanje",
+        "Nanošenje",
+        "Sušenje",
+        "Površina",
+        "Rok trajanja"
+      ],
+      "concepts": [
+        "primer"
+      ],
+      "confidence": "ambiguous",
+      "searchStage": "expected-family-multiple",
+      "candidateCount": 8,
+      "applied": false,
+      "candidates": [
+        {
+          "officialName": "Kunststoffgrundierung",
+          "sourceUrl": "https://carfitrepair.com/kunststoffgrundierung/",
+          "category": "fueller",
+          "articleNumbers": [
+            "4-355-1000"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "2K Epoxid Grundierfüller 1:1",
+          "sourceUrl": "https://carfitrepair.com/2k-epoxid-grundierfueller-11/",
+          "category": "fueller",
+          "articleNumbers": [
+            "4-390-0500",
+            "4-415-0500"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "2K Washprimer 2:1",
+          "sourceUrl": "https://carfitrepair.com/2k-washprimer-21/",
+          "category": "fueller",
+          "articleNumbers": [
+            "4-398-0800",
+            "4-420-0400"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "2K HS Acryl Grundierfüller 4:1",
+          "sourceUrl": "https://carfitrepair.com/2k-hs-acryl-grundierfueller-41/",
+          "category": "fueller",
+          "articleNumbers": [
+            "4-103-0800",
+            "4-104-0800",
+            "4-105-0800",
+            "4-203-3600",
+            "4-304-3600",
+            "4-205-3600",
+            "4-211-0200",
+            "4-211-0900"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "2K Fast Air Grundierfüller 3:1",
+          "sourceUrl": "https://carfitrepair.com/2k-fast-air-grundierfueller-31/",
+          "category": "fueller",
+          "articleNumbers": [
+            "4-420-1000",
+            "4-425-1000",
+            "4-426-1000",
+            "4-420-3000",
+            "4-425-3000",
+            "4-420-3000",
+            "4-421-0330",
+            "4-421-1000"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "1K Kunststoff Primer Spray",
+          "sourceUrl": "https://carfitrepair.com/1k-kunststoff-primer-spray/",
+          "category": "aerosole",
+          "articleNumbers": [
+            "4-435-0400"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "1K Hi-Build Grundierfüller Spray",
+          "sourceUrl": "https://carfitrepair.com/1k-hi-build-grundierfueller-spray/",
+          "category": "aerosole",
+          "articleNumbers": [
+            "4-500-0400",
+            "4-501-0400",
+            "4-502-0400"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "1K Etch Primer Spray",
+          "sourceUrl": "https://carfitrepair.com/1k-etch-primer-spray/",
+          "category": "aerosole",
+          "articleNumbers": [
+            "4-430-0400"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        }
+      ]
+    },
+    {
+      "localSlug": "carfit-maskirna-folija-4x5m",
+      "localName": "Car Fit maskirna folija 4 x 5 m",
+      "localSku": "CARFIT-FILM-4X5M",
+      "localPackages": [
+        "4 x 5 m",
+        "Dimenzija",
+        "Tip",
+        "Primena",
+        "Faza"
+      ],
+      "concepts": [
+        "masking film"
+      ],
+      "confidence": "exact-name",
+      "searchStage": "expected-family-dimension",
+      "candidateCount": 1,
+      "applied": false,
+      "candidates": [
+        {
+          "officialName": "Abdeckmaterial mit elektrostatischen Eigenschaften",
+          "sourceUrl": "https://carfitrepair.com/abdeckmaterial-mit-elektrostatischen-eigenschaften/",
+          "category": "abdeckmaterial-abdeckfolien",
+          "articleNumbers": [
+            "1-201-0450",
+            "1-201-0470",
+            "1-201-0570"
+          ],
+          "matchedArticleNumbers": [
+            "1-201-0450"
+          ],
+          "nameSimilarity": 0,
+          "dimensionAgrees": true,
+          "inExpectedFamily": true
+        }
+      ]
+    },
+    {
+      "localSlug": "carfit-maskirna-folija-4x150m",
+      "localName": "Car Fit maskirna folija 4 x 150 m",
+      "localSku": "CARFIT-FILM-4X150M",
+      "localPackages": [
+        "4 x 150 m",
+        "Dimenzija",
+        "Tip",
+        "Primena",
+        "Faza",
+        "Boja i namena",
+        "Dimenzija"
+      ],
+      "concepts": [
+        "masking film"
+      ],
+      "confidence": "ambiguous",
+      "searchStage": "expected-family-multiple",
+      "candidateCount": 3,
+      "applied": false,
+      "candidates": [
+        {
+          "officialName": "Abdeckmaterial mit elektrostatischen Eigenschaften",
+          "sourceUrl": "https://carfitrepair.com/abdeckmaterial-mit-elektrostatischen-eigenschaften/",
+          "category": "abdeckmaterial-abdeckfolien",
+          "articleNumbers": [
+            "1-201-0450",
+            "1-201-0470",
+            "1-201-0570"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "Abdeckfolie mit Klebeband",
+          "sourceUrl": "https://carfitrepair.com/abdeckfolie-mit-klebeband/",
+          "category": "abdeckmaterial-abdeckfolien",
+          "articleNumbers": [
+            "1-200-1800",
+            "1-200-2700",
+            "1-200-0550"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        },
+        {
+          "officialName": "Abdeckfolie mit elektrostatischen Eigenschaften",
+          "sourceUrl": "https://carfitrepair.com/abdeckfolie-mit-elektrostatischen-eigenschaften/",
+          "category": "abdeckmaterial-abdeckfolien",
+          "articleNumbers": [
+            "1-202-4020",
+            "1-202-4030",
+            "1-202-5020"
+          ],
+          "matchedArticleNumbers": [],
+          "nameSimilarity": 0,
+          "dimensionAgrees": false,
+          "inExpectedFamily": true
+        }
+      ]
+    }
+  ],
+  "manufacturerOnly": [
+    {
+      "officialName": "Sponge Cut",
+      "sourceUrl": "https://carfitrepair.com/sehr-feines-und-ultra-feines-schleifvlies-2/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-200-0006",
+        "6-200-0005",
+        "6-200-0004"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Silikonentferner Spray „Erdbeere“",
+      "sourceUrl": "https://carfitrepair.com/silikonentferner-spray-erdbeere/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "7-500-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K Klarlack Spray",
+      "sourceUrl": "https://carfitrepair.com/2k-klarlack-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "7-204-0200"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Purple Ceramic Film",
+      "sourceUrl": "https://carfitrepair.com/gold-paper-disc-2/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-510-0040",
+        "6-510-0060",
+        "6-510-0080",
+        "6-510-0100",
+        "6-510-0120",
+        "6-510-0150",
+        "6-510-0180",
+        "6-510-0220",
+        "6-510-0240",
+        "6-510-0280",
+        "6-510-0320",
+        "6-510-0400",
+        "6-510-0500",
+        "6-510-0600",
+        "6-510-0800"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schwemmzinnersatz",
+      "sourceUrl": "https://carfitrepair.com/schwemmzinnersatz/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-184-0200"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Ozongenerator",
+      "sourceUrl": "https://carfitrepair.com/ozongenerator/",
+      "category": "zubehoer-ozongenerator",
+      "articleNumbers": [],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Unterbodenschutz Bitumen Spray",
+      "sourceUrl": "https://carfitrepair.com/unterbodenschutz-bitumen-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "5-400-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Abdeckpapier wasserabweisend",
+      "sourceUrl": "https://carfitrepair.com/abdeck-papier-wasserabweisend/",
+      "category": "abdeckmaterial-abdeckpapier",
+      "articleNumbers": [
+        "1-232-1320",
+        "1-232-9030",
+        "1-232-9045",
+        "1-230-6045",
+        "1-232-2030",
+        "1-232-2045"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Faltbarer Premium X-Lackierständer",
+      "sourceUrl": "https://carfitrepair.com/faltbarer-premium-x-lackierstaender/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "6-915-1002"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Touch-Up Micro Applicator",
+      "sourceUrl": "https://carfitrepair.com/touch-up-micro-applicator/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-116-0101",
+        "3-117-0101",
+        "3-118-0101"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Staubbindetuch",
+      "sourceUrl": "https://carfitrepair.com/staubbindetuch/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "6-100-0005",
+        "6-101-0001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Staubbindetuch „Super Wave“",
+      "sourceUrl": "https://carfitrepair.com/staubbindetuch-super-wave/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "6-110-0001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Metalltestkarten",
+      "sourceUrl": "https://carfitrepair.com/metalltestkarten/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "7-700-0020",
+        "7-700-0050",
+        "7-700-0100"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Rührstäbe Mix-S-Stick",
+      "sourceUrl": "https://carfitrepair.com/ruehrstaebe-mix-s-stick/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "7-761-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Farbsiebe",
+      "sourceUrl": "https://carfitrepair.com/farbsiebe/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "7-850-0125",
+        "7-850-0190"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "SCR Siebe",
+      "sourceUrl": "https://carfitrepair.com/scr-siebe/",
+      "category": "zubehoer-mischbecher",
+      "articleNumbers": [
+        "3-230-0130",
+        "3-230-0200"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "SCR System Deckel",
+      "sourceUrl": "https://carfitrepair.com/scr-system-deckel/",
+      "category": "zubehoer-mischbecher",
+      "articleNumbers": [
+        "3-230-0002"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Mischbecher & Deckel",
+      "sourceUrl": "https://carfitrepair.com/mischbecher-deckel/",
+      "category": "zubehoer-mischbecher",
+      "articleNumbers": [
+        "3-200-0290",
+        "3-200-0385",
+        "3-200-0750",
+        "3-200-1400",
+        "3-200-2300",
+        "3-223-0385",
+        "3-223-0750",
+        "3-223-1400",
+        "3-223-2300"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Fast Paint System",
+      "sourceUrl": "https://carfitrepair.com/fast-paint-system/",
+      "category": "zubehoer-mischbecher",
+      "articleNumbers": [
+        "3-225-0002",
+        "3-225-0125",
+        "3-225-0190",
+        "3-226-0001",
+        "3-226-0002",
+        "3-226-0003",
+        "3-226-0004",
+        "3-226-0005",
+        "3-226-0006"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Kunststoff Reparatur Set",
+      "sourceUrl": "https://carfitrepair.com/kunststoff-reparatur-set/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "8-100-0000",
+        "8-100-0300"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2-lagiges Putztuch",
+      "sourceUrl": "https://carfitrepair.com/2-lagiges-putztuch/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "8-802-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Micofaser Reinigungstuch",
+      "sourceUrl": "https://carfitrepair.com/microfaser-reinigungstuch/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "8-803-0002"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Entfettungstuch SONTARA®",
+      "sourceUrl": "https://carfitrepair.com/entfettugstuch-sontara/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "8-804-0125",
+        "8-804-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Rollbarer Spender Abdeck Papier",
+      "sourceUrl": "https://carfitrepair.com/rollbarer-spender-abdeck-papier/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "1-225-0001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Sitzbezüge",
+      "sourceUrl": "https://carfitrepair.com/sitzbezuege/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-120-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schutzanzug für Maler und Lackierarbeiten",
+      "sourceUrl": "https://carfitrepair.com/schutzanzug-fuer-maler-und-lackierarbeiten/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-267-0009",
+        "3-267-0016",
+        "3-267-0017",
+        "3-267-0018",
+        "3-267-0019"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Rührstab",
+      "sourceUrl": "https://carfitrepair.com/ruehrstab/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "7-760-1020",
+        "7-760-1027",
+        "7-760-1120",
+        "7-760-1127"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Lackierständer",
+      "sourceUrl": "https://carfitrepair.com/lackierstaender/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "6-915-1001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Einwegfußmatte",
+      "sourceUrl": "https://carfitrepair.com/einwegfussmatte/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-100-0501"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Polyethylen Fahrzeugabdeckung",
+      "sourceUrl": "https://carfitrepair.com/polyethylen-fahrzeugabdeckung/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-150-0020"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Putztuch Multi",
+      "sourceUrl": "https://carfitrepair.com/putztuch-multi/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "8-801-0035",
+        "8-801-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Parksensor Abdeckung",
+      "sourceUrl": "https://carfitrepair.com/parksensor-abdeckung/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "9-185-0060"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Logo-Klebestreifen",
+      "sourceUrl": "https://carfitrepair.com/logo-klebestreifen/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "9-180-2110"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Folienradierer und Adapter",
+      "sourceUrl": "https://carfitrepair.com/folienradierer-und-adapter/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-804-1001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Pinselfläschchen",
+      "sourceUrl": "https://carfitrepair.com/pinselflaeschchen/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-115-0001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Nitrilhandschuhe mit strukturierten Fingern",
+      "sourceUrl": "https://carfitrepair.com/nitrilhandschuhe-mit-strukturierten-fingern/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-260-0460",
+        "3-260-0560"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Sprühpumpe",
+      "sourceUrl": "https://carfitrepair.com/spruehpumpe/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-255-0001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schleifkontroll und -pulver Set",
+      "sourceUrl": "https://carfitrepair.com/schleifkontroll-und-pulver-set/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "5-201-0150",
+        "5-200-0150"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Professionelle Nitrilhandschuhe",
+      "sourceUrl": "https://carfitrepair.com/professionelle-nitrilhandschuhe/",
+      "category": "zubehoer-lackierzubehoer",
+      "articleNumbers": [
+        "3-261-0150",
+        "3-261-0250",
+        "3-261-0350",
+        "3-261-0450"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Spritzpistolen-Reiniger",
+      "sourceUrl": "https://carfitrepair.com/spritzpistolen-reiniger/",
+      "category": "verduenner-silikonentferner",
+      "articleNumbers": [
+        "8-102-5000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Beispritzverdünnung",
+      "sourceUrl": "https://carfitrepair.com/beispritzverduennung/",
+      "category": "verduenner-silikonentferner",
+      "articleNumbers": [
+        "7-557-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Universalverdünner",
+      "sourceUrl": "https://carfitrepair.com/universalverduenner/",
+      "category": "verduenner-silikonentferner",
+      "articleNumbers": [
+        "7-602-1000",
+        "7-602-5000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Silikonentferner",
+      "sourceUrl": "https://carfitrepair.com/silikonentferner/",
+      "category": "verduenner-silikonentferner",
+      "articleNumbers": [
+        "7-501-1000",
+        "7-501-5000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Silikonentferner „Erdbeere“",
+      "sourceUrl": "https://carfitrepair.com/silikonentferner-erdbeere/",
+      "category": "verduenner-silikonentferner",
+      "articleNumbers": [
+        "7-551-1000",
+        "7-551-5000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Staubschutzlack für Lackierkabinen",
+      "sourceUrl": "https://carfitrepair.com/staubschutzlack-fuer-lackierkabinen/",
+      "category": "unterbodenschutz-klebstoffe",
+      "articleNumbers": [
+        "3-402-0005"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "PU Kleb- und Dichtmasse",
+      "sourceUrl": "https://carfitrepair.com/pu-kleb-und-dichtmasse/",
+      "category": "unterbodenschutz-klebstoffe",
+      "articleNumbers": [
+        "5-113-0310",
+        "5-115-0310",
+        "5-140-0310"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Scheibenkleber schwarz",
+      "sourceUrl": "https://carfitrepair.com/scheibenkleber-schwarz/",
+      "category": "unterbodenschutz-klebstoffe",
+      "articleNumbers": [
+        "5-132-0310"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Steinschlagschutz",
+      "sourceUrl": "https://carfitrepair.com/steinschlagschutz/",
+      "category": "unterbodenschutz-klebstoffe",
+      "articleNumbers": [
+        "5-600-1000",
+        "5-601-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Soft Plus Spachtel",
+      "sourceUrl": "https://carfitrepair.com/soft-plus-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-124-0500",
+        "2-124-1000",
+        "2-124-1800"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Carbon Spachtel",
+      "sourceUrl": "https://carfitrepair.com/carbon-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-125-1800"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Glas Plus Spachtel",
+      "sourceUrl": "https://carfitrepair.com/glas-plus-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-144-0500",
+        "2-144-1000",
+        "2-144-1800"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Kunststoffspachtel",
+      "sourceUrl": "https://carfitrepair.com/kunststoffspachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-160-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Multi Spachtel",
+      "sourceUrl": "https://carfitrepair.com/multi-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-210-2000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Kunststoff Reparaturset",
+      "sourceUrl": "https://carfitrepair.com/kunststoff-reparaturset/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-221-0250"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Spritzspachtel",
+      "sourceUrl": "https://carfitrepair.com/spritzspachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-251-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Multi Soft Spachtel",
+      "sourceUrl": "https://carfitrepair.com/multi-soft-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-250-0900",
+        "2-250-1400",
+        "2-250-1800",
+        "2-250-3000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Perfect Multi Green Spachtel",
+      "sourceUrl": "https://carfitrepair.com/perfect-multi-green-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-251-1800"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Handschleifblock",
+      "sourceUrl": "https://carfitrepair.com/handschleifblock/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "5-170-0001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Flacher Schleifblock",
+      "sourceUrl": "https://carfitrepair.com/flacher-schleifblock/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "5-170-0005"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Halbrunder Schleifblock",
+      "sourceUrl": "https://carfitrepair.com/halbrunder-schleifblock/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "5-170-0006"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Nass-Schleifpapier",
+      "sourceUrl": "https://carfitrepair.com/nass-schleifpapier/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-305-0600",
+        "6-305-0800",
+        "6-305-1000",
+        "6-305-1200",
+        "6-305-2000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Sehr feines und ultra feines Schleifvlies",
+      "sourceUrl": "https://carfitrepair.com/sehr-feines-und-ultra-feines-schleifvlies/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-901-0001",
+        "6-901-0002",
+        "6-902-0001",
+        "6-902-0002"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Gummi Schleifblock",
+      "sourceUrl": "https://carfitrepair.com/gummi-schleifblock/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "5-170-0002"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Manuelles Polier und Schleifpad",
+      "sourceUrl": "https://carfitrepair.com/manuelles-polier-und-schleifpad/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "5-170-0004"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Gold Paper Disc",
+      "sourceUrl": "https://carfitrepair.com/gold-paper-disc/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-300-0040",
+        "6-300-0060",
+        "6-300-0080",
+        "6-300-0100",
+        "6-300-0120",
+        "6-300-0150",
+        "6-300-0180",
+        "6-300-0220",
+        "6-300-0240",
+        "6-300-0280",
+        "6-300-0320",
+        "6-300-0400",
+        "6-300-0500",
+        "6-301-0080",
+        "6-301-0120",
+        "6-301-0180",
+        "6-301-0240",
+        "6-301-0320",
+        "6-302-0080",
+        "6-302-0120",
+        "6-302-0180",
+        "6-302-0240"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Color Net Disc – Netzschleifscheibe",
+      "sourceUrl": "https://carfitrepair.com/color-net-disc-netzschleifscheibe/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-700-0080",
+        "6-700-0120",
+        "6-700-0150",
+        "6-700-0180",
+        "6-700-0220",
+        "6-700-0240",
+        "6-700-0280",
+        "6-700-0320",
+        "6-700-0400",
+        "6-700-0500",
+        "6-701-0080",
+        "6-701-0120",
+        "6-701-0180",
+        "6-701-0220",
+        "6-701-0240",
+        "6-701-0280",
+        "6-701-0320",
+        "6-701-0400",
+        "6-701-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Red Film Schleifscheibe",
+      "sourceUrl": "https://carfitrepair.com/red-film-schleifscheibe/",
+      "category": "schleifmittel",
+      "articleNumbers": [
+        "6-500-0040",
+        "6-500-0060",
+        "6-500-0080",
+        "6-500-0100",
+        "6-500-0120",
+        "6-500-0150",
+        "6-500-0180",
+        "6-500-0220",
+        "6-500-0240",
+        "6-500-0280",
+        "6-500-0320",
+        "6-500-0400",
+        "6-500-0500",
+        "6-500-0600",
+        "6-500-0800",
+        "6-500-1000",
+        "6-500-1500",
+        "6-500-2000",
+        "6-501-0080",
+        "6-501-0120",
+        "6-501-0180",
+        "6-501-0240",
+        "6-501-0320",
+        "6-502-0080",
+        "6-502-0120",
+        "6-502-0180",
+        "6-502-0240",
+        "6-502-0320"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Auflage für Polierscheiben",
+      "sourceUrl": "https://carfitrepair.com/auflage-fuer-polierscheiben/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-0001",
+        "5-100-0002"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Lammfellpolierscheiben Klett",
+      "sourceUrl": "https://carfitrepair.com/lammfellpolierscheiben-klett/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-0150",
+        "5-100-0180"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Vlies Poliertuch",
+      "sourceUrl": "https://carfitrepair.com/vlies-poliertuch/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "8-800-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Universelle Polierpaste",
+      "sourceUrl": "https://carfitrepair.com/universelle-polierpaste/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-101-0250",
+        "5-101-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schleifpolitur",
+      "sourceUrl": "https://carfitrepair.com/schleifpolitur/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Interface Pads",
+      "sourceUrl": "https://carfitrepair.com/interface-pads/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-170-0014",
+        "5-170-0015"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Soft Interface Pads Micro",
+      "sourceUrl": "https://carfitrepair.com/soft-interface-pads-micro/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-102-0005",
+        "5-102-0010"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Polierschwamm konisch",
+      "sourceUrl": "https://carfitrepair.com/polierschwamm-konisch/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-1500",
+        "5-100-1501",
+        "5-100-1502"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Hochglanzpolitur",
+      "sourceUrl": "https://carfitrepair.com/hochglanzpolitur/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-1001"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schaumstoff-Polierscheiben mit Klettsystem",
+      "sourceUrl": "https://carfitrepair.com/schaumstoff-polierscheiben-mit-klettsystem/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-0165",
+        "5-100-0168",
+        "5-100-0169"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schleifpaste",
+      "sourceUrl": "https://carfitrepair.com/schleifpaste/",
+      "category": "poliermittel",
+      "articleNumbers": [
+        "5-100-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K MS Industrie Klarlack",
+      "sourceUrl": "https://carfitrepair.com/2k-ms-industrie-klarlack/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-153-1500",
+        "7-154-1500",
+        "7-153-5000",
+        "7-363-2500",
+        "7-365-2500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Klarlack Spray",
+      "sourceUrl": "https://carfitrepair.com/klarlack-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "7-201-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Rapid Air Klarlack VOC",
+      "sourceUrl": "https://carfitrepair.com/rapid-air-klarlack-voc/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-325-1000",
+        "7-326-5000",
+        "7-336-1000",
+        "7-337-2500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Matt Klarlack",
+      "sourceUrl": "https://carfitrepair.com/matt-klarlack/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-440-1000",
+        "7-440-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K HS Kratzfester Klarlack 2:1",
+      "sourceUrl": "https://carfitrepair.com/2k-hs-kratzfester-klarlack-21/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-221-1000",
+        "7-221-5000",
+        "7-320-0501",
+        "7-320-2501",
+        "7-321-0501",
+        "7-321-2501",
+        "7-322-0501",
+        "7-322-2501"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K UHS LOW VOC Klarlack",
+      "sourceUrl": "https://carfitrepair.com/2k-uhs-low-voc-klarlack/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-401-1000",
+        "7-401-5000",
+        "7-357-0500",
+        "7-357-2500",
+        "7-358-0500",
+        "7-358-2500",
+        "7-359-0500",
+        "7-359-2500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K Ultra HS Klarlack",
+      "sourceUrl": "https://carfitrepair.com/2k-ultra-hs-klarlack/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-401-1000",
+        "7-401-5000",
+        "7-435-0501",
+        "7-435-2501",
+        "7-436-0501",
+        "7-436-2501",
+        "7-437-0501",
+        "7-437-2501"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K HS Perfekt Klarlack",
+      "sourceUrl": "https://carfitrepair.com/2k-hs-perfekt-klarlack/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-122-1500",
+        "7-123-1500",
+        "7-124-1500",
+        "7-122-5000",
+        "7-370-2500",
+        "7-371-2500",
+        "7-372-2500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Expressklarlack",
+      "sourceUrl": "https://carfitrepair.com/expressklarlack/",
+      "category": "klarlack",
+      "articleNumbers": [
+        "7-156-1500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "2K US Füller 4:1",
+      "sourceUrl": "https://carfitrepair.com/2k-us-fueller-41/",
+      "category": "fueller",
+      "articleNumbers": [
+        "4-240-1000",
+        "4-240-4000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Perfekt Füller 4:1 Grau",
+      "sourceUrl": "https://carfitrepair.com/perfekt-fueller-41-grau/",
+      "category": "fueller",
+      "articleNumbers": [
+        "4-403-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schwarz Spray",
+      "sourceUrl": "https://carfitrepair.com/schwarz-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "4-141-0400",
+        "4-142-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Felgensilber Spray",
+      "sourceUrl": "https://carfitrepair.com/felgensilber-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "4-143-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Thermo Spray 650°C",
+      "sourceUrl": "https://carfitrepair.com/thermo-spray-650c/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "4-151-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Strukturlack Spray",
+      "sourceUrl": "https://carfitrepair.com/strukturlack-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "4-171-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Zink Spray",
+      "sourceUrl": "https://carfitrepair.com/zink-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "4-399-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Unterbodenschutz Bitumen",
+      "sourceUrl": "https://carfitrepair.com/unterbodenschutz-bitumen/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "5-700-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Hohlraumkonservierung Spray",
+      "sourceUrl": "https://carfitrepair.com/hohlraumkonservierung-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "5-500-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Beispritzverdünnung Spray",
+      "sourceUrl": "https://carfitrepair.com/beispritzverduennung-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "7-551-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Steinschlagschutz Spray",
+      "sourceUrl": "https://carfitrepair.com/steinschlagschutz-spray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "5-601-0500",
+        "5-602-0500"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Befüllbare Spraydose",
+      "sourceUrl": "https://carfitrepair.com/befuellbare-spraydose/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "7-501-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Abbeizerspray",
+      "sourceUrl": "https://carfitrepair.com/abbeizspray/",
+      "category": "aerosole",
+      "articleNumbers": [
+        "7-553-0400"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schaumdichtband",
+      "sourceUrl": "https://carfitrepair.com/schaumdichtband/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-109-1350"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Schaumstoffklebeband",
+      "sourceUrl": "https://carfitrepair.com/schaumstoffklebeband/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-112-2005"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Abdeckklebeband Orange 100°C",
+      "sourceUrl": "https://carfitrepair.com/abdeckklebeband-orange-100c/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-130-1850"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Zierlinienband",
+      "sourceUrl": "https://carfitrepair.com/zierlinienband/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-141-0333",
+        "9-141-0633",
+        "9-141-1233"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Gewebeband",
+      "sourceUrl": "https://carfitrepair.com/gewebeband/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-150-5050"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Lifting Tape",
+      "sourceUrl": "https://carfitrepair.com/lifting-tape-gruen/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-160-5010"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Montageklebeband PE",
+      "sourceUrl": "https://carfitrepair.com/montageklebeband-pe/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-171-0905",
+        "9-171-1205",
+        "9-171-1905"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Abdeckklebeband wasserfest 120°C",
+      "sourceUrl": "https://carfitrepair.com/abdeckklebeband-wasserfest-120c/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-120-1019",
+        "9-120-0025",
+        "9-120-0030",
+        "9-120-0038",
+        "9-120-0050"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Doppelseitiges Klebeband",
+      "sourceUrl": "https://carfitrepair.com/doppelseitiges-klebeband/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-171-1905"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Abdeckklebeband 80°C",
+      "sourceUrl": "https://carfitrepair.com/abdeckklebeband-80c/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-100-0019",
+        "9-100-0025",
+        "9-100-0038",
+        "9-100-0050"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Abdeckklebeband 100°C",
+      "sourceUrl": "https://carfitrepair.com/abdeckklebeband-100c/",
+      "category": "abdeckmaterial-abdeckklebeband",
+      "articleNumbers": [
+        "9-100-1019",
+        "9-100-1025",
+        "9-100-1038",
+        "9-100-1050"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    },
+    {
+      "officialName": "Alu & Soft Spachtel",
+      "sourceUrl": "https://carfitrepair.com/alu-soft-spachtel/",
+      "category": "spachtel",
+      "articleNumbers": [
+        "2-181-1000"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate"
+    }
+  ],
+  "duplicateArticles": [
+    {
+      "articleNumber": "7-401-1000",
+      "products": [
+        "2K UHS LOW VOC Klarlack",
+        "2K Ultra HS Klarlack"
+      ],
+      "sourceUrls": [
+        "https://carfitrepair.com/2k-uhs-low-voc-klarlack/",
+        "https://carfitrepair.com/2k-ultra-hs-klarlack/"
+      ]
+    },
+    {
+      "articleNumber": "7-401-5000",
+      "products": [
+        "2K UHS LOW VOC Klarlack",
+        "2K Ultra HS Klarlack"
+      ],
+      "sourceUrls": [
+        "https://carfitrepair.com/2k-uhs-low-voc-klarlack/",
+        "https://carfitrepair.com/2k-ultra-hs-klarlack/"
+      ]
+    },
+    {
+      "articleNumber": "9-171-1905",
+      "products": [
+        "Montageklebeband PE",
+        "Doppelseitiges Klebeband"
+      ],
+      "sourceUrls": [
+        "https://carfitrepair.com/montageklebeband-pe/",
+        "https://carfitrepair.com/doppelseitiges-klebeband/"
+      ]
+    }
+  ]
+}

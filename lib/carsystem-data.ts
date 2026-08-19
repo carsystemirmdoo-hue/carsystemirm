@@ -1,5 +1,6 @@
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
+import type { ProductSize } from "@/lib/product-scale";
 import type {
   ProductCatalogStrategy,
   ProductDetailContent,
@@ -265,6 +266,12 @@ export type CarsystemProduct = {
   variantOptions?: Record<string, string>;
   /** Reviewed recommendation records; internal reasons are never rendered publicly. */
   recommendations?: ProductRecommendation[];
+  /**
+   * Fizička veličina pakovanja (foundation, Phase 1). Opciono — odsustvo znači
+   * "unknown", ne grešku. Vidi lib/product-scale.ts za resolver koji ovo polje
+   * kombinuje sa `catalogMetadata.volume` i `packages[]` bez izmišljanja podataka.
+   */
+  size?: ProductSize;
   /** Optional, reviewed content used by the canonical product-detail template. */
   detail?: ProductDetailContent;
 };
@@ -413,9 +420,9 @@ export const brands: CarsystemBrand[] = [
     name: "Norbin",
     logo: "/brands/norbin.svg",
     description:
-      "Program boja, lakova i pratećih materijala za profesionalnu obradu u lakirnici.",
+      "Kratak, zatvoren program bezbojnih lakova, punilaca i učvršćivača koji rade u tačno propisanim odnosima mešanja — bez sopstvenog sistema boje.",
     overview:
-      "Norbin je aktivan brend u programu boja i lakova, sa fokusom na završne slojeve i radioničku podršku kroz upit.",
+      "Norbin je deo Surventis refinish porodice (ranije BASF Coatings), pozicioniran uz Glasurit, R-M i baslac kao vrednosno pristupačan pomoćni program za lakirnicu.",
     programSlugs: ["boje-i-lakovi"],
     catalogOrder: 4,
     presentation: {
@@ -423,7 +430,7 @@ export const brands: CarsystemBrand[] = [
       accentContrastColor: "#05080B",
       accentOnDarkColor: "#21A0D2",
       accentOnDarkContrastColor: "#14171C",
-      heroKicker: "Norbin program boja i lakova",
+      heroKicker: "Pomoćni program za lakirnicu",
       productsCtaLabel: "Pogledajte Norbin proizvode",
       contactCtaLabel: "Kontaktirajte nas",
     },
@@ -1402,7 +1409,10 @@ const befarPadColors = [
     slug: "narandzasti",
     sku: "OR",
     swatch: "oklch(0.72 0.17 55)",
-    role: "Srednja korekcija i ujednačavanje traga poliranja.",
+    // Befarova zvanična hardness legenda (katalog, str. 4-20): ORANGE = ★★★★★,
+    // najtvrđa pena u osnovnoj liniji, uz tečnu ili kremastu pastu. Prethodni
+    // opis („srednja korekcija“) je bio netačan — ispravljeno 2026-08-09.
+    role: "Najtvrđa izvedba: najagresivnija korekcija uz tečnu ili kremastu pastu.",
   },
   {
     label: "crni",
@@ -2172,6 +2182,31 @@ const productRecords: CarsystemProduct[] = [
       "/products/baslac/baslac-60-20-razredjivac.jpg",
       "Baslac proizvod iz programa boja i lakova",
     ),
+    // Jedini baslac artikal čija se zvanična oznaka (60-20) poklapa sa oznakom
+    // dokumenta. Ostala tri artikla nose mixing kodove (35-M214, 35-M331,
+    // 30-S510) za koje postoji samo tehnički list linije, ne artikla — vidi
+    // docs/BASLAC_PDP_DOCUMENT_MAP.md i scripts/match-baslac-documents.mjs.
+    documents: [
+      {
+        title: "Tehnički list",
+        kind: "PDF",
+        href: "/documents/products/baslac/60-20.pdf",
+        status: "available",
+        note: "Zvanični baslac tehnički list za artikal 60-20 (Reducer Universal Normal).",
+      },
+      {
+        title: "Bezbednosni list",
+        kind: "PDF",
+        status: "placeholder",
+        note: "Dostupno na upit za Baslac 60-20 razređivač.",
+      },
+      {
+        title: "Uputstvo za upotrebu",
+        kind: "PDF",
+        status: "disabled",
+        note: "U pripremi za javni katalog.",
+      },
+    ],
     specifications: [
       { label: "Pakovanje", value: "5 L" },
       { label: "Tip", value: "Razređivač" },

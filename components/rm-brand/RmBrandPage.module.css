@@ -89,7 +89,7 @@
   left: 50%;
   z-index: 8;
   display: flex;
-  width: min(calc(100% - 2rem), 80rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   align-items: center;
   gap: 0.55rem;
   padding-top: 1rem;
@@ -1039,7 +1039,7 @@
 }
 
 .rmSection {
-  width: min(calc(100% - 2rem), 80rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
   padding-block: clamp(5rem, 9vw, 9rem);
 }
@@ -1214,7 +1214,10 @@
   background: var(--rm-agilis-background);
   color: var(--rm-agilis-foreground);
   padding-block: clamp(4.5rem, 7vw, 7rem);
-  padding-inline: max(1rem, calc((100vw - 80rem) / 2));
+  padding-inline: max(
+    var(--ds-gutter, clamp(20px, 4vw, 56px)),
+    calc((100vw - var(--ds-container-max, 1208px)) / 2)
+  );
 }
 
 .agilisSection::before {
@@ -1270,15 +1273,9 @@
   padding: 1rem;
 }
 
-.agilisBenefits article span {
-  color: var(--rm-red);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.65rem;
-}
-
 .agilisBenefits article h3 {
   max-width: 12ch;
-  margin: 2rem 0 0;
+  margin: 0;
   font-family: var(--font-display), system-ui, sans-serif;
   font-size: 1.3rem;
   line-height: 1.05;
@@ -1313,37 +1310,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center 48%;
-}
-
-.agilisTechnicalVisual > div {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  width: 52%;
-  gap: 0.25rem;
-  background: oklch(0.985 0.004 250);
-  color: oklch(0.18 0.016 250);
-  padding: 2.2rem;
-  box-shadow: 0 2rem 6rem oklch(0.24 0.12 28 / 0.34);
-  transform: rotate(-4deg);
-}
-
-.agilisTechnicalVisual img {
-  width: 42%;
-  height: auto;
-}
-
-.agilisTechnicalVisual strong {
-  margin-top: 1.2rem;
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
-  letter-spacing: -0.04em;
-}
-
-.agilisTechnicalVisual small {
-  font-family: var(--font-technical), monospace;
-  font-size: 0.54rem;
-  letter-spacing: 0.11em;
 }
 
 .agilisTechnicalVisual > p {
@@ -1420,7 +1386,7 @@
 
 .agilisProductGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-top: clamp(2.5rem, 4vw, 4rem);
 }
@@ -1536,7 +1502,7 @@
 
 .refinitySection {
   position: relative;
-  width: min(calc(100% - 2rem), 80rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
   color: var(--rm-dark-ink);
   padding-block: clamp(4rem, 8vw, 8rem);
@@ -1785,20 +1751,16 @@
 }
 
 .refinityAreas article {
+  display: flex;
+  align-items: center;
   min-height: 12rem;
   background: var(--rm-graphite-deep);
   padding: 1.25rem;
 }
 
-.refinityAreas article span {
-  color: oklch(0.74 0.16 212);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.63rem;
-}
-
 .refinityAreas h3 {
   max-width: 12ch;
-  margin: 4.2rem 0 0;
+  margin: 0;
   font-family: var(--font-display), system-ui, sans-serif;
   font-size: clamp(1.2rem, 2vw, 1.75rem);
   line-height: 1.05;
@@ -2055,16 +2017,8 @@
 .systemCardHeader {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
-}
-
-.systemIndex {
-  color: currentColor;
-  font-family: var(--font-technical), monospace;
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
 }
 
 .systemCardHeader p {
@@ -2262,7 +2216,7 @@
 
 .compatibleBrandsHeader {
   display: grid;
-  width: min(calc(100% - 2rem), 80rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.62fr);
   align-items: end;
   gap: 1rem 3rem;
@@ -2607,7 +2561,7 @@
   grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.65fr);
   align-items: center;
   gap: clamp(2rem, 5vw, 5rem);
-  width: min(calc(100% - 2rem), 80rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin: clamp(3rem, 6vw, 6rem) auto clamp(5rem, 8vw, 8rem);
   overflow: hidden;
   background: var(--rm-graphite);
@@ -2670,7 +2624,7 @@
 }
 
 .systemGallery {
-  width: min(calc(100% - 2rem), 88rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   padding-block: clamp(3.5rem, 5vw, 5rem);
 }
 
@@ -2856,6 +2810,67 @@
   padding: 7%;
 }
 
+.productImageSlotMedia[data-product-size-class="S"] > img {
+  padding: 17%;
+}
+
+.productImageSlotMedia[data-product-size-class="M"] > img {
+  padding: 12%;
+}
+
+.productImageSlotMedia[data-product-size-class="L"] > img {
+  padding: 8%;
+}
+
+.productImageSlotMedia[data-product-size-class="XL"] > img {
+  padding: 4%;
+}
+
+.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="S"] > img {
+  padding-bottom: calc(17% + 2rem);
+}
+
+.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="M"] > img {
+  padding-bottom: calc(12% + 2rem);
+}
+
+.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="L"] > img {
+  padding-bottom: calc(8% + 2rem);
+}
+
+.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="XL"] > img {
+  padding-bottom: calc(4% + 2rem);
+}
+
+.productSlotQuantityBadge {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.6rem;
+  z-index: 4;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.32rem 0.5rem 0.38rem;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.productSlotQuantityBadge[data-status="inferred"] {
+  background: #2b2b2e;
+}
+
+.productSlotQuantityBadgeRule {
+  display: block;
+  height: 1px;
+  background: #fff;
+  opacity: 0.9;
+}
+
 .productImagePlaceholder {
   position: absolute;
   inset: 0;
@@ -3002,30 +3017,11 @@
 .systemGalleryFooter {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 2rem;
   margin-top: 1.5rem;
   border-top: 1px solid var(--rm-line);
   padding-top: 1.5rem;
-}
-
-.systemGalleryFooter > p {
-  display: flex;
-  align-items: baseline;
-  gap: 0.7rem;
-  margin: 0;
-}
-
-.systemGalleryFooter > p strong {
-  color: var(--rm-red);
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: 2rem;
-}
-
-.systemGalleryFooter > p span {
-  max-width: 15rem;
-  color: var(--rm-muted);
-  font-size: 0.7rem;
 }
 
 .systemGalleryFooter > div {
@@ -3035,7 +3031,7 @@
 }
 
 .productFamilies {
-  width: min(calc(100% - 2rem), 88rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   border-top: 1px solid var(--rm-line);
 }
 
@@ -3070,16 +3066,9 @@
   align-self: center;
 }
 
-.productFamilyCopy > span {
-  color: var(--rm-red);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
-}
-
 .productFamilyCopy h3 {
   max-width: 10ch;
-  margin: 1rem 0 0;
+  margin: 0;
   font-family: var(--font-display), system-ui, sans-serif;
   font-size: clamp(2.5rem, 5vw, 5.5rem);
   letter-spacing: -0.055em;
@@ -3118,34 +3107,33 @@
 }
 
 .productFamilyLineup {
-  display: flex;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
   gap: 0.8rem;
   min-width: 0;
-  overflow-x: auto;
-  padding-bottom: 0.6rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--rm-red) transparent;
 }
 
 .productFamilyLineup > figure {
-  min-width: min(15rem, 43%);
-  flex: 1 0 min(15rem, 43%);
+  min-width: 0;
 }
 
-.productFamilyLineup > figure:first-child {
-  min-width: min(19rem, 52%);
-  flex-basis: min(19rem, 52%);
-}
+@media (min-width: 50.0625rem) {
+  .productFamilyLineup:has(> figure:only-child) {
+    grid-template-columns: minmax(0, 22rem);
+  }
 
-.productFamilyLineup:has(> figure:nth-child(4)) > figure {
-  min-width: min(11rem, 21%);
-  flex-basis: min(11rem, 21%);
-}
+  .productFamilyLineup:has(> figure:nth-child(2):last-child) {
+    grid-template-columns: 1fr 1fr;
+  }
 
-.productFamilyLineup:has(> figure:nth-child(4)) > figure:first-child {
-  min-width: min(14rem, 28%);
-  flex-basis: min(14rem, 28%);
+  .productFamilyLineup:has(> figure:nth-child(3):last-child) {
+    grid-template-columns: 1.25fr 1fr 1fr;
+  }
+
+  .productFamilyLineup:has(> figure:nth-child(4):last-child) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -3270,8 +3258,7 @@
     border-top: 0;
   }
 
-  .rmProductGrid,
-  .agilisProductGrid {
+  .rmProductGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -3926,14 +3913,6 @@
 
   .agilisBenefits article {
     min-height: 8.5rem;
-  }
-
-  .agilisBenefits article h3 {
-    margin-top: 2rem;
-  }
-
-  .agilisTechnicalVisual > div {
-    width: 70%;
   }
 
   .productEmptyState {

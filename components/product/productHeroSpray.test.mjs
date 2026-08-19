@@ -203,7 +203,14 @@ test("complete and reduced-motion states reveal the same six masked passes", asy
     styles,
     /@media \(prefers-reduced-motion: reduce\)[\s\S]*stroke-dashoffset:\s*0[\s\S]*animation:\s*none/,
   );
-  assert.match(styles, /color:\s*var\(--product-visual-background-color\)/);
+  // The stroke reads `--product-art-color`, the contrast-corrected tone the
+  // stage sets per measured product lightness, and only falls back to the raw
+  // product colour when no decision was made. Painting it in the product's own
+  // shade is what let a black bottle vanish into a black stroke.
+  assert.match(
+    styles,
+    /color:\s*var\(--product-art-color, var\(--product-visual-background-color\)\)/,
+  );
   assert.match(gallery, /style=\{getProductVisualStyle\(product\)\}/);
   assert.match(
     motion,
@@ -285,25 +292,39 @@ test("spray is category-gated behind color products and stays out of catalog sur
   assert.match(cosmosData, /return "primer"/);
   assert.match(cosmosData, /cosmosColorCategories\.has\(record\.technicalCategory\)/);
   assert.match(cosmosData, /return "color"/);
+  /*
+   * The stage owns its own proportions and layer order. Physical product size
+   * is no longer a per-treatment image scale — it is the S/M/L/XL envelope
+   * applied to the image's measured content box — so the spray treatment may
+   * only influence the DECORATION (its scale and offset), never how large the
+   * product is drawn.
+   */
+  assert.match(detailStyles, /\.stickyStage\s*\{[\s\S]*--product-stage-aspect:\s*5 \/ 6/);
+  assert.doesNotMatch(detailStyles, /--product-stage-image-scale/);
+  assert.doesNotMatch(detailStyles, /--product-hero-image-scale/);
   assert.match(
     detailStyles,
-    /\.stickyStage\s*\{[\s\S]*--product-stage-image-scale:\s*0\.94/,
+    /\.stickyStage\[data-product-stage-spray="true"\][\s\S]*--product-stage-spray-scale:\s*1\.12/,
+  );
+  assert.doesNotMatch(
+    detailStyles.slice(
+      detailStyles.indexOf('.stickyStage[data-product-stage-spray="true"]'),
+    ).split("}")[0],
+    /--product-envelope-/,
   );
   assert.match(
     detailStyles,
-    /\.stickyStage\[data-product-stage-spray="true"\][\s\S]*--product-stage-image-scale:\s*0\.92[\s\S]*--product-stage-spray-scale:\s*1\.12/,
+    /\.heroProductObject\s*\{[\s\S]*z-index:\s*var\(--layer-product\)[\s\S]*width:\s*calc\(var\(--product-fit-w\) \/ var\(--product-content-fill-x\)\)[\s\S]*aspect-ratio:\s*var\(--product-canvas-aspect\)/,
+  );
+  assert.match(detailStyles, /\.heroProductImage\s*\{[\s\S]*object-fit:\s*contain/);
+  // Decoration sits behind the product, controls sit in front of both.
+  assert.match(
+    detailStyles,
+    /--layer-art:\s*1[\s\S]*--layer-halo:\s*2[\s\S]*--layer-product:\s*3[\s\S]*--layer-ui:\s*4/,
   );
   assert.match(
     detailStyles,
-    /\.heroProductObject\s*\{[\s\S]*--product-hero-image-scale:\s*var\(--product-stage-image-scale\)[\s\S]*z-index:\s*3[\s\S]*transform:\s*translate3d/,
-  );
-  assert.match(
-    detailStyles,
-    /\.heroProductImage\s*\{[\s\S]*transform:\s*scale\(var\(--product-hero-image-scale\)\)[\s\S]*transform-origin:\s*center center/,
-  );
-  assert.match(
-    detailStyles,
-    /@media \(max-width: 1023px\)[\s\S]*\.stickyStage\s*\{[\s\S]*--product-stage-image-scale:\s*1/,
+    /@media \(max-width: 47\.99rem\)[\s\S]*\.stickyStage\s*\{[\s\S]*--product-stage-aspect:\s*1 \/ 1/,
   );
   assert.equal(gallery.match(/<ProductHeroSprayBackdrop\b/g)?.length ?? 0, 1);
   assert.doesNotMatch(relatedProducts, /ProductHeroSprayBackdrop|data-product-hero-spray/);

@@ -1,0 +1,303 @@
+/*
+ * Spray composition study — INTERNAL lab surface. No public route imports this.
+ *
+ * The stage below reproduces the production PDP stage geometry
+ * (`ProductDetailExperience.module.css`): 5:6 frame, size container, neutral
+ * plate, the same layer order, and the SAME content-fit maths driven by the
+ * generated `ProductImageFit` custom properties. That matters — the point of
+ * the study is that the product is measured identically in all three columns
+ * and only the SCENE relationship changes.
+ */
+
+.page {
+  --study-ink: oklch(0.2 0.014 255);
+  --study-muted: oklch(0.52 0.02 255);
+  --study-line: oklch(0.28 0.016 255 / 0.16);
+  min-height: 100vh;
+  background: oklch(0.97 0.005 255);
+  color: var(--study-ink);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2.5rem) 6rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.masthead {
+  max-width: 60rem;
+  margin-bottom: 2.5rem;
+}
+
+.masthead h1 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+
+.masthead p {
+  margin: 0 0 0.5rem;
+  max-width: 52rem;
+  color: var(--study-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--study-line);
+  padding: 0.28rem 0.55rem;
+  color: oklch(0.55 0.2 27);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.caseBlock {
+  margin-bottom: 3rem;
+  border-top: 1px solid var(--study-line);
+  padding-top: 1.1rem;
+}
+
+.caseHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.caseHead h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.caseHead span {
+  color: var(--study-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+}
+
+/* Three equal columns: an unequal comparison is not a comparison. */
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.column {
+  border: 1px solid var(--study-line);
+  background: oklch(1 0 0);
+}
+
+.columnMeta {
+  display: grid;
+  gap: 0.2rem;
+  border-top: 1px solid var(--study-line);
+  padding: 0.55rem 0.6rem 0.7rem;
+}
+
+.columnMeta strong {
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.columnMeta small {
+  color: var(--study-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------ */
+/* The stage — mirrors the production PDP panel                        */
+/* ------------------------------------------------------------------ */
+
+.stage {
+  --layer-plate: 0;
+  --layer-art: 1;
+  --layer-halo: 2;
+  --layer-product: 3;
+  --product-stage-aspect: 5 / 6;
+  --product-optical-y: 48%;
+  position: relative;
+  display: block;
+  aspect-ratio: var(--product-stage-aspect);
+  overflow: hidden;
+  border-bottom: 1px solid var(--study-line);
+  container-type: size;
+  isolation: isolate;
+}
+
+.stage[data-stage-format="square"] {
+  --product-stage-aspect: 1 / 1;
+}
+
+.stage[data-stage-format="landscape"] {
+  --product-stage-aspect: 4 / 3;
+}
+
+.plate {
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-plate);
+  background: linear-gradient(
+    180deg,
+    oklch(0.99 0.003 255),
+    oklch(0.935 0.009 255)
+  );
+}
+
+.dark .plate,
+.stage[data-scene-theme="dark"] .plate {
+  background: linear-gradient(
+    180deg,
+    oklch(0.145 0.013 255),
+    oklch(0.105 0.011 255)
+  );
+}
+
+.halo {
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-halo);
+  opacity: 0;
+  background: radial-gradient(
+    58% 46% at 50% var(--product-optical-y),
+    var(--study-halo, transparent) 0%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+.stage[data-product-contrast="dark-product"] .halo {
+  --study-halo: oklch(0.72 0.012 250 / 0.3);
+  opacity: 1;
+}
+
+.stage[data-product-contrast="light-product"] .halo {
+  --study-halo: oklch(0.32 0.014 250 / 0.16);
+  opacity: 1;
+}
+
+.stage[data-scene-theme="dark"][data-product-contrast="dark-product"] .halo {
+  --study-halo: oklch(0.78 0.014 250 / 0.24);
+}
+
+.stage[data-scene-theme="dark"][data-product-contrast="light-product"] .halo {
+  --study-halo: oklch(0.24 0.014 250 / 0.34);
+}
+
+/*
+ * Identical content-fit maths to production. `--study-product-scale` is the ONLY
+ * addition: a lab-only multiplier on the size-class envelope, so the three
+ * columns differ in scene relationship and in nothing else. The alpha
+ * bounding-box system underneath is untouched.
+ */
+.productLayer {
+  --product-envelope-w: 58cqw;
+  --product-envelope-h: 74cqh;
+  --study-product-scale: 1;
+  --product-fit-w: min(
+    calc(var(--product-envelope-w) * var(--study-product-scale)),
+    calc(
+      var(--product-envelope-h) * var(--study-product-scale) *
+        var(--product-content-aspect)
+    )
+  );
+  position: absolute;
+  z-index: var(--layer-product);
+  top: var(--product-optical-y);
+  left: 50%;
+  width: calc(var(--product-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  transform: translate(
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+    calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+  );
+}
+
+.stage[data-size-class="M"] .productLayer {
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 80cqh;
+}
+
+.stage[data-size-class="L"] .productLayer {
+  --product-envelope-w: 74cqw;
+  --product-envelope-h: 86cqh;
+}
+
+.stage[data-size-class="XL"] .productLayer {
+  --product-envelope-w: 82cqw;
+  --product-envelope-h: 92cqh;
+}
+
+.productLayer img {
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px oklch(0.08 0.01 250 / 0.24));
+}
+
+.stage[data-scene-theme="dark"] .productLayer img {
+  filter:
+    drop-shadow(0 0 1px oklch(0.92 0.008 250 / 0.34))
+    drop-shadow(0 18px 24px oklch(0.02 0.01 250 / 0.44));
+}
+
+.darkBlock {
+  background: oklch(0.115 0.011 255);
+  padding: 1rem;
+}
+
+.darkBlock .column {
+  border-color: oklch(0.9 0.01 255 / 0.14);
+  background: oklch(0.15 0.013 255);
+  color: oklch(0.93 0.008 255);
+}
+
+.darkBlock .columnMeta {
+  border-color: oklch(0.9 0.01 255 / 0.14);
+}
+
+.darkBlock .columnMeta small {
+  color: oklch(0.68 0.02 255);
+}
+
+.note {
+  margin: 0.9rem 0 0;
+  border-left: 2px solid oklch(0.55 0.2 27);
+  color: var(--study-muted);
+  padding-left: 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.replay {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 4;
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, canvas 82%, transparent);
+  color: inherit;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-family: var(--font-technical), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.replay:hover {
+  opacity: 1;
+}

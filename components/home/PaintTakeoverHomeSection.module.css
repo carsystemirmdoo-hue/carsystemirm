@@ -18,7 +18,6 @@
   --content-opacity: 0;
   --content-offset: 26px;
   --contrast-opacity: 0;
-  --exit-lift: 0svh;
   --color-wash-opacity: 0;
   position: relative;
   z-index: 1;
@@ -117,7 +116,7 @@
   opacity: var(--background-opacity);
   transform: translate3d(
       var(--background-x),
-      calc(var(--artwork-offset) + var(--background-y) + var(--exit-lift)),
+      calc(var(--artwork-offset) + var(--background-y)),
       0
     )
     scale(var(--background-scale));
@@ -127,11 +126,7 @@
 .heroArtwork {
   z-index: 2;
   opacity: var(--hero-global-opacity);
-  transform: translate3d(
-    0,
-    calc(var(--artwork-offset) + var(--exit-lift)),
-    0
-  );
+  transform: translate3d(0, var(--artwork-offset), 0);
 }
 
 .heroArtwork > svg {

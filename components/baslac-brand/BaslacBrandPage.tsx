@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
+import { DocumentCard } from "@/components/documents/DocumentCard";
 import { Footer } from "@/components/layout/Footer";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import { getFeaturedDocuments } from "@/lib/documents";
+import { BaslacGreyShade } from "./BaslacGreyShade";
 import { BaslacHero } from "./BaslacHero";
 import { BaslacMediaSlot } from "./BaslacMediaSlot";
 import { BaslacPageShell } from "./BaslacPageShell";
@@ -45,10 +48,12 @@ export function BaslacBrandPage({
         <ProcessSection />
         <ClearcoatSection availability={mediaAvailability} />
         <PrimerSection availability={mediaAvailability} />
+        <BaslacGreyShade />
         <ColorWorkflow availability={mediaAvailability} />
         <CommercialSection availability={mediaAvailability} />
         <SupportSection />
         <CatalogPreview products={catalogProducts} />
+        <DocumentLibrary />
         <FinalCta />
       </main>
       <Footer />
@@ -77,24 +82,12 @@ function BrandPosition() {
           pripreme podloge, preko sistema boje, do završnog laka i tehničke
           podrške.
         </p>
-        <dl>
-          <div>
-            <dt>01</dt>
-            <dd>Kompletan sistem od pripreme do završnog sloja</dd>
-          </div>
-          <div>
-            <dt>02</dt>
-            <dd>Vodene, solventne i direct-gloss linije</dd>
-          </div>
-          <div>
-            <dt>03</dt>
-            <dd>Digitalna koloristika i podrška pri izboru nijanse</dd>
-          </div>
-          <div>
-            <dt>04</dt>
-            <dd>Program za putnička i komercijalna vozila</dd>
-          </div>
-        </dl>
+        <ul className={styles.positionFacts}>
+          <li>Kompletan sistem od pripreme do završnog sloja</li>
+          <li>Vodene, solventne i direct-gloss linije</li>
+          <li>Digitalna koloristika i podrška pri izboru nijanse</li>
+          <li>Program za putnička i komercijalna vozila</li>
+        </ul>
       </div>
     </section>
   );
@@ -247,11 +240,8 @@ function ClearcoatSection({
       />
 
       <div className={styles.clearcoatMatrix}>
-        {baslacClearcoats.map((clearcoat, index) => (
+        {baslacClearcoats.map((clearcoat) => (
           <article key={clearcoat.code}>
-            <span className={styles.clearcoatIndex}>
-              {String(index + 1).padStart(2, "0")}
-            </span>
             <div>
               <p>{clearcoat.role}</p>
               <h3>{clearcoat.code}</h3>
@@ -351,9 +341,8 @@ function PrimerSection({
       />
 
       <div className={styles.primerStack}>
-        {primerGroups.map((group, index) => (
+        {primerGroups.map((group) => (
           <article key={group.title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
             <div>
               <p>{group.code}</p>
               <h3>{group.title}</h3>
@@ -506,21 +495,18 @@ function CommercialSection({
 function SupportSection() {
   const support = [
     {
-      index: "01",
       title: "Tehnički listovi",
       text: "Odnos mešanja, sušenje, aplikacija i dozvoljene podloge iz konkretnog TDS dokumenta.",
       href: "https://techinfo.baslac.com/en/",
       external: true,
     },
     {
-      index: "02",
       title: "Koloristička podrška",
       text: "Pomoć pri merenju, izboru formule i pripremi test karte.",
       href: "/kontakt?tema=podrska&brend=baslac&oblast=koloristika",
       external: false,
     },
     {
-      index: "03",
       title: "Obuka i procesi",
       text: "Strukturisanje standardnih, wet-on-wet, ambient i CV radnih tokova.",
       href: "/kontakt?tema=podrska&brend=baslac&oblast=obuka",
@@ -550,7 +536,6 @@ function SupportSection() {
       <div className={styles.supportList}>
         {support.map((item) => (
           <article key={item.title}>
-            <span>{item.index}</span>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
             {item.external ? (
@@ -593,7 +578,7 @@ function CatalogPreview({ products }: { products: CarsystemProduct[] }) {
 
       {products.length > 0 ? (
         <div className={styles.catalogGrid}>
-          {products.slice(0, 4).map((product, index) => (
+          {products.slice(0, 4).map((product) => (
             <Link href={`/proizvodi/${product.slug}`} key={product.slug}>
               <div className={styles.catalogImage}>
                 {product.productImage ? (
@@ -604,7 +589,6 @@ function CatalogPreview({ products }: { products: CarsystemProduct[] }) {
                     sizes="(min-width: 70rem) 18rem, (min-width: 45rem) 40vw, 82vw"
                   />
                 ) : null}
-                <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
               <div className={styles.catalogCopy}>
                 <p>{product.sku}</p>
@@ -630,6 +614,44 @@ function CatalogPreview({ products }: { products: CarsystemProduct[] }) {
         </p>
         <Link className={styles.outlineButton} href={baslacCatalogHref()}>
           Svi baslac proizvodi
+          <span aria-hidden="true">↗</span>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function DocumentLibrary() {
+  const documents = getFeaturedDocuments("baslac");
+  if (documents.length === 0) return null;
+
+  return (
+    <section
+      className={`${styles.section} ${styles.documentsSection}`}
+      aria-labelledby="baslac-documents-title"
+    >
+      <header className={styles.sectionHeader}>
+        <div>
+          <p className={styles.sectionKicker}>Tehnička dokumentacija</p>
+          <h2 id="baslac-documents-title">
+            Sistemi i tehnički vodiči direktno od baslac.
+          </h2>
+        </div>
+        <p>
+          Karbon, hrom, plastika i kontrola sjaja — konkretni sistemi iz
+          zvanične baslac tehničke dokumentacije.
+        </p>
+      </header>
+
+      <div className={styles.documentsGrid}>
+        {documents.map((document) => (
+          <DocumentCard key={document.id} document={document} />
+        ))}
+      </div>
+
+      <div className={styles.catalogFooter}>
+        <Link className={styles.outlineButton} href="/katalozi?brand=baslac">
+          Svi baslac dokumenti
           <span aria-hidden="true">↗</span>
         </Link>
       </div>

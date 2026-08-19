@@ -15,6 +15,13 @@ import {
   TIMELINE,
   toTimeline,
 } from "./paintTakeoverMotionConfig";
+import {
+  ACTIVE_ATTRIBUTE,
+  createChromeOwnership,
+  probeLineFor,
+  resolveTakeoverChrome,
+} from "./paintTakeoverChrome";
+import { resolveTakeoverScene } from "./paintTakeoverScene";
 import type {
   FinalHeroManifest,
   FinalReviewMode,
@@ -37,77 +44,6 @@ type UsePaintTakeoverMotionOptions = {
   washDisabled?: boolean;
 };
 
-const ACTIVE_ATTRIBUTE = "data-paint-takeover";
-/** Kontinualni signal koji nose header, orb i sekcije ispod takeovera. */
-const CHAPTER_VARIABLE = "--paint-chapter";
-/** Signal approach faze — koriste ga painterly potezi u prethodnom bloku. */
-const APPROACH_VARIABLE = "--paint-approach";
-/**
- * Koliko "novog poglavlja" ostaje u sekcijama ispod takeovera. Ne vraća se na
- * nulu jer je cilj da se oseti da je sajt prešao u drugu etapu.
- */
-const CHAPTER_FLOOR = 0.34;
-/** Preko koliko viewport visina chapter signal opada nakon izlaska. */
-const CHAPTER_DECAY_VIEWPORTS = 1.2;
-const ENTER_START = 0.08;
-const ENTER_ACTIVE = 0.15;
-const ENTER_REVERSE = 0.07;
-const ENTER_BEFORE = 0.025;
-const EXIT_START = 0.95;
-const EXIT_ACTIVE_REVERSE = 0.925;
-const EXIT_AFTER = 0.998;
-const EXIT_REVERSE = 0.985;
-
-function initialStateFor(progress: number): PaintTakeoverState {
-  if (progress < ENTER_START) return "before";
-  if (progress < ENTER_ACTIVE) return "entering";
-  if (progress < EXIT_START) return "active";
-  if (progress < EXIT_AFTER) return "leaving";
-  return "after";
-}
-
-function resolveState(
-  current: PaintTakeoverState,
-  progress: number,
-): PaintTakeoverState {
-  let next = current;
-
-  for (let index = 0; index < 4; index += 1) {
-    const previous = next;
-
-    if (next === "before" && progress >= ENTER_START) {
-      next = "entering";
-    } else if (next === "entering") {
-      if (progress <= ENTER_BEFORE) next = "before";
-      else if (progress >= ENTER_ACTIVE) next = "active";
-    } else if (next === "active") {
-      if (progress <= ENTER_REVERSE) next = "entering";
-      else if (progress >= EXIT_START) next = "leaving";
-    } else if (next === "leaving") {
-      if (progress <= EXIT_ACTIVE_REVERSE) next = "active";
-      else if (progress >= EXIT_AFTER) next = "after";
-    } else if (next === "after" && progress <= EXIT_REVERSE) {
-      next = "leaving";
-    }
-
-    if (next === previous) break;
-  }
-
-  return next;
-}
-
-function stateControlsChrome(
-  state: PaintTakeoverState,
-  sectionBottom: number,
-  headerBottom: number,
-) {
-  return (
-    state === "entering" ||
-    state === "active" ||
-    state === "leaving" ||
-    (state === "after" && sectionBottom > headerBottom)
-  );
-}
 
 export function usePaintTakeoverMotion({
   sectionRef,
@@ -154,9 +90,15 @@ export function usePaintTakeoverMotion({
     let animationFrame = 0;
     let listening = false;
     let paintState: PaintTakeoverState | null = null;
-    let chromeAttribute: PaintTakeoverState | null = null;
     let previousProgress: number | null = null;
     let direction: PaintTakeoverDirection = "idle";
+    /**
+     * Vizuelni prikaz sekcije sme samo napred: jednom odigrano ostaje
+     * odigrano, reverse skrol ga ne vraća unazad niti resetuje. Chrome/FAB
+     * (`nextState`, `syncPageChrome`) i dalje prate pravi `progress`, da se
+     * `.mobileLocator` ispravno vrati kad se korisnik odskroluje od sekcije.
+     */
+    let maxProgress = 0;
 
     if (debug) {
       section.dataset.resolvedGroups = String(
@@ -170,53 +112,23 @@ export function usePaintTakeoverMotion({
       paintState = nextState;
     };
 
-    const syncPageChrome = (
-      nextState: PaintTakeoverState,
-      sectionBottom: number,
-    ) => {
-      if (!controlPageChrome) return;
-      const headerBottom =
-        document.querySelector<HTMLElement>("header")?.getBoundingClientRect()
-          .bottom ?? 88;
-      const nextAttribute = stateControlsChrome(
-        nextState,
-        sectionBottom,
-        headerBottom,
-      )
-        ? nextState
-        : null;
-
-      if (chromeAttribute === nextAttribute) return;
-      chromeAttribute = nextAttribute;
-
-      if (nextAttribute) {
-        root.setAttribute(ACTIVE_ATTRIBUTE, nextState);
-      } else {
-        root.removeAttribute(ACTIVE_ATTRIBUTE);
-      }
-    };
-
     /**
-     * `resting` zadržava chapter signal kada posmatrač prestane da prati
-     * sekciju: ispod takeovera ostaje prag novog poglavlja, iznad se vraća na
-     * nulu. Bez toga bi izlazak iz observer opsega naglo obrisao boju.
+     * Header temu drži isključivo geometrija: probe linija ispod sticky
+     * Headera i stvarne granice sekcije. Nema smera skrola, nema zapamćenog
+     * stanja, pa je isti rezultat i za skok, i za reload, i za resize.
+     *
+     * `clear()` otpušta vlasništvo bez ostatka — ranije je ostajao prag
+     * chapter signala (`CHAPTER_FLOOR`), pa je Header i posle izlaska,
+     * unmount-a i route promene nosio deo tamne teme.
      */
-    const clearChrome = (resting: number | null = null) => {
-      paintState = null;
-      chromeAttribute = null;
-      root.removeAttribute(ACTIVE_ATTRIBUTE);
-      root.style.removeProperty(APPROACH_VARIABLE);
-      if (resting === null) {
-        root.style.removeProperty(CHAPTER_VARIABLE);
-      } else {
-        root.style.setProperty(CHAPTER_VARIABLE, resting.toFixed(4));
-      }
-    };
+    const ownership = createChromeOwnership({
+      root,
+      enabled: controlPageChrome,
+    });
 
-    /** Sekcija je iznad viewporta → poglavlje ispod zadržava prag. */
-    const restingChapter = () => {
-      const bounds = section.getBoundingClientRect();
-      return bounds.bottom <= 0 ? CHAPTER_FLOOR : 0;
+    const clearChrome = () => {
+      paintState = null;
+      ownership.clear();
     };
 
     const update = () => {
@@ -239,21 +151,28 @@ export function usePaintTakeoverMotion({
         // brzina skakala ~7.9× i to je bio izvor sevanja.
         const entryLead = Math.max(1, viewportHeight * ENTRY_LEAD_VH);
         const approach = clamp((entryLead - bounds.top) / entryLead);
+        if (progress > maxProgress) maxProgress = progress;
         const timeline = toTimeline(
           approach,
-          progress,
+          maxProgress,
           entryShareFor(entryLead, scrollRange),
         );
-        // Odlazak: koliko je sekcija otišla iznad viewporta — nosi chapter
-        // signal naniže bez naglog reseta.
-        const departure = clamp(
-          -bounds.bottom / (viewportHeight * CHAPTER_DECAY_VIEWPORTS),
-        );
-        // Chapter signal: raste kroz ulazak, drži se kroz takeover, pa opada
-        // do praga koji ostaje u sekcijama ispod.
-        const chapter =
-          mapProgress(timeline, ...TIMELINE.chapter) *
-          (1 - departure * (1 - CHAPTER_FLOOR));
+        // Header tema: probe linija ispod sticky Headera protiv stvarnih
+        // granica sekcije. Jedina tačka odlučivanja, ista u oba smera skrola.
+        const chrome = resolveTakeoverChrome({
+          sectionTop: bounds.top,
+          sectionBottom: bounds.bottom,
+          /*
+           * Visina Headera, ne njegova trenutna donja ivica: header se pri
+           * skrolu nadole sakriva (`data-scroll-hidden`), pa bi rect.bottom
+           * vratio negativnu vrednost i probe linija bi zavisila od SMERA
+           * skrola — tačno ono što ovde ne sme da postoji.
+           */
+          probeLine: probeLineFor(
+            document.querySelector<HTMLElement>("header")?.offsetHeight,
+          ),
+        });
+        const chapter = chrome.chapter;
         const reducedMotion = reducedMotionQuery.matches;
         if (
           !reducedMotion &&
@@ -271,10 +190,7 @@ export function usePaintTakeoverMotion({
         }
         previousProgress = progress;
 
-        const nextState =
-          paintState === null
-            ? initialStateFor(progress)
-            : resolveState(paintState, progress);
+        const nextState = chrome.phase;
 
         if (debug) {
           section.dataset.paintDebugProgress = progress.toFixed(5);
@@ -283,7 +199,7 @@ export function usePaintTakeoverMotion({
           section.dataset.paintDebugDirection = direction;
         }
         publishState(nextState);
-        syncPageChrome(nextState, bounds.bottom);
+        ownership.sync(chrome);
 
         const mobile = window.innerWidth <= 720;
         const forceStatic =
@@ -291,154 +207,72 @@ export function usePaintTakeoverMotion({
           mode === "hero-static" ||
           mode === "mask-debug" ||
           mode === "text-contrast";
-        const showBackground =
-          mode === "final" ||
-          mode === "background" ||
-          mode === "text-contrast" ||
-          mode === "mask-debug";
         const showMotion = mode === "final" || mode === "hero-motion";
-        const surface =
-          mode === "final"
-            ? reducedMotion
-              ? 1
-              : mapProgress(timeline, ...TIMELINE.surface)
-            : 1;
-        const backgroundProgress = showBackground
-          ? mode === "final"
-            ? reducedMotion
-              ? 1
-              : mapProgress(timeline, ...TIMELINE.background)
-            : 1
-          : 0;
-        const contentWindow: readonly [number, number] = mobile
-          ? TIMELINE.contentMobile
-          : TIMELINE.content;
-        const content =
-          mode === "text-contrast"
-            ? 1
-            : mode === "final"
-              ? reducedMotion
-                ? 1
-                : mapProgress(timeline, ...contentWindow)
-              : 0;
-        const finalGlobalArtwork = animateArtworkGroups || animateLinework
-          ? 1
-          : forceStatic
-            ? 1
-            : showMotion
-              ? mapProgress(
-                  timeline,
-                  TIMELINE.strokes[0],
-                  TIMELINE.strokes[0] + 0.17,
-                )
-              : 0;
-        const holdDrift =
-          reducedMotion || mode !== "final"
-            ? 0
-            : mapProgress(timeline, ...TIMELINE.hold) * -1.6;
         /*
-         * Izlazak: 0 kroz celu scenu, 1 pred njen kraj. Gasi painterly slojeve
-         * da tamna scena zavrsi kao miran taman kadar i da nijedan potez ne
-         * ostane uz prelaz u svetlu komercijalnu zonu.
+         * Ceo kadar je jedna čista funkcija timeline-a (vidi
+         * `paintTakeoverScene.mjs`). Ovde ostaje samo upis u CSS varijable, pa
+         * nijedan sloj ne može da dobije sopstvenu fazu mimo timeline-a — a
+         * baš to je bio `outro`, koji je posle završene animacije gasio poteze
+         * i zatamnjivao tekst.
          */
-        const outro =
-          reducedMotion || mode !== "final"
-            ? 0
-            : mapProgress(timeline, ...TIMELINE.outro);
-        const settle = 1 - outro;
-        const colorWashOpacity = washDisabled
-          ? 0
-          : reducedMotion
-            ? 1
-            : mapProgress(timeline, ...TIMELINE.background) * settle;
+        const scene = resolveTakeoverScene({
+          timeline,
+          windows: TIMELINE,
+          mode,
+          reducedMotion,
+          mobile,
+          washDisabled,
+          hasArtwork: animateArtworkGroups || animateLinework,
+        });
+        const colorWashOpacity = scene.colorWashOpacity;
 
         section.dataset.reducedMotion = reducedMotion ? "true" : "false";
-        // Kontinualni signali na <html>: header, orb i sekcije ispod se boje
-        // interpolacijom po ovim vrednostima, pa nema vremenske tranzicije
-        // koja bi mogla da odsvetli nezavisno od skrola.
-        root.style.setProperty(CHAPTER_VARIABLE, chapter.toFixed(4));
-        root.style.setProperty(APPROACH_VARIABLE, approach.toFixed(4));
-        /*
-         * Wipe ide naniže: krivina je u artworku na ~28.7% kadra, pa offset od
-         * -32svh drži tamno tačno iznad gornje ivice, a +102svh ga spušta ispod
-         * donje. Ranije je bilo `18 - surface * 90` (kretanje naviše sa dna),
-         * zbog čega je pri ulasku ploča ostajala prazno bela.
-         */
         section.style.setProperty(
           "--surface-offset",
-          `${(-32 + surface * 134).toFixed(3)}svh`,
+          `${scene.surfaceOffsetSvh.toFixed(3)}svh`,
         );
         section.style.setProperty(
           "--artwork-offset",
-          `${((1 - surface) * 18).toFixed(3)}svh`,
+          `${scene.artworkOffsetSvh.toFixed(3)}svh`,
         );
         section.style.setProperty(
           "--background-opacity",
-          // Podloga zadrzi malo teksture da kadar ne postane ravna ploca.
-          (backgroundProgress * (1 - outro * 0.78)).toFixed(4),
+          scene.backgroundOpacity.toFixed(4),
         );
         section.style.setProperty(
           "--background-scale",
-          (reducedMotion ? 1 : 1 + (1 - backgroundProgress) * 0.015).toFixed(5),
+          scene.backgroundScale.toFixed(5),
         );
         section.style.setProperty(
           "--background-x",
-          `${(reducedMotion ? 0 : (1 - backgroundProgress) * -0.55).toFixed(3)}vw`,
+          `${scene.backgroundXVw.toFixed(3)}vw`,
         );
         section.style.setProperty(
           "--background-y",
-          `${(reducedMotion ? 0 : (1 - backgroundProgress) * 8 + holdDrift).toFixed(3)}px`,
+          `${scene.backgroundYPx.toFixed(3)}px`,
         );
         section.style.setProperty(
           "--hero-global-opacity",
-          // Potezi se gase do nule — oni pripadaju iskljucivo tamnoj sceni.
-          (finalGlobalArtwork * settle).toFixed(4),
+          scene.heroOpacity.toFixed(4),
         );
         section.style.setProperty(
           "--content-opacity",
-          // Dizajn tamnog repa drzi tekst na ~0.55 dok scena izlazi.
-          (content * (1 - outro * 0.45)).toFixed(4),
+          scene.contentOpacity.toFixed(4),
         );
         section.style.setProperty(
           "--content-offset",
-          `${((1 - content) * 26).toFixed(3)}px`,
+          `${scene.contentOffsetPx.toFixed(3)}px`,
         );
-        // Smirivanje leve zone ide po svom prozoru, malo pre teksta, da beli
-        // tekst nikad ne stigne na još svetlu podlogu.
-        const contrastProgress =
-          washDisabled || mode !== "final"
-            ? mode === "text-contrast"
-              ? 1
-              : 0
-            : reducedMotion
-              ? 1
-              : mapProgress(timeline, ...TIMELINE.contrast);
         section.style.setProperty(
           "--contrast-opacity",
-          (
-            washDisabled
-              ? 0
-              : Math.max(contrastProgress * 0.92, backgroundProgress * 0.4)
-          ).toFixed(4),
-        );
-        section.style.setProperty(
-          "--exit-lift",
-          `${
-            reducedMotion
-              ? "0.000"
-              : (mapProgress(timeline, 0.96, 1) * -3).toFixed(3)
-          }svh`,
+          scene.contrastOpacity.toFixed(4),
         );
         section.style.setProperty(
           "--color-wash-opacity",
           colorWashOpacity.toFixed(4),
         );
 
-        const lineworkProgress = forceStatic
-          ? 1
-          : showMotion
-            ? mapProgress(timeline, ...TIMELINE.strokes)
-            : 0;
+        const lineworkProgress = scene.lineworkProgress;
         let activeLines = 0;
         for (let index = 0; index < lineElements.length; index += 1) {
           const line = lineElements[index];
@@ -604,12 +438,19 @@ export function usePaintTakeoverMotion({
         animationFrame = 0;
       }
       delete section.dataset.motionActive;
-      clearChrome(restingChapter());
+      clearChrome();
     };
 
     const clearChromeOnNavigation = () => clearChrome();
+    /*
+     * Back/Forward iz bfcache-a vraća stranicu sa živim listenerima ali bez
+     * scroll događaja: bez ovoga bi prvi kadar posle povratka nosio temu koju
+     * je `pagehide` obrisao, iako je viewport i dalje u sekciji.
+     */
+    const restoreOnPageShow = () => requestUpdate();
     window.addEventListener("pagehide", clearChromeOnNavigation);
     window.addEventListener("popstate", clearChromeOnNavigation);
+    window.addEventListener("pageshow", restoreOnPageShow);
 
     // Restore the exact scroll-derived state before the browser paints. This
     // covers refreshes, history restoration and client navigation back to a
@@ -627,8 +468,9 @@ export function usePaintTakeoverMotion({
             stopListening();
           }
         },
-        // Gornja margina mora da pokrije chapter decay ispod sekcije, inače bi
-        // posmatrač prestao da prati baš usred opadanja signala.
+        // Margine su šire od kadra da posmatrač počne da prati pre nego što
+        // granica sekcije stigne do probe linije; prelaz teme se time nikad ne
+        // odigrava u trenutku kada slušanje tek počinje.
         { rootMargin: "200% 0px 120% 0px" },
       );
       observer.observe(section);
@@ -641,6 +483,7 @@ export function usePaintTakeoverMotion({
       stopListening();
       window.removeEventListener("pagehide", clearChromeOnNavigation);
       window.removeEventListener("popstate", clearChromeOnNavigation);
+      window.removeEventListener("pageshow", restoreOnPageShow);
       clearChrome();
     };
   }, [

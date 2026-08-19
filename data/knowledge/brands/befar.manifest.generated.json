@@ -1,0 +1,36 @@
+{
+  "brandSlug": "befar",
+  "brandName": "Befar",
+  "manufacturer": "Befar Otomotiv San. Tic. Ltd. Şti.",
+  "generatedAt": "2026-08-08T09:50:44.816Z",
+  "correctedAt": "2026-08-09",
+  "correctionNote": "Polje `manufacturer` i blok `source` ispravljeni su ručno 2026-08-09 nakon Faze 0 istraživanja (docs/BEFAR_BRAND_RESEARCH.md). Generator scripts/build-brand-manifests.mjs nije pokrenut jer bi regenerisao manifeste svih brendova i docs/seo/BRAND_GAP_REPORT.md, što je van Befar scope-a. Brojevi u `localInventory` i `acquisition` nisu menjani i odnose se na stanje od 2026-08-08.",
+  "source": {
+    "officialWebsite": "https://www.befar.com.tr/",
+    "cataloguePdf": "https://www.befar.com.tr/_files/ugd/446a5e_9192e551cfa540ae95f10c5247f2587b.pdf",
+    "acquisitionFeasibility": "catalogue-pdf-only",
+    "verifiedAt": "2026-08-09",
+    "notes": [
+      "Proizvođač je Befar Otomotiv San. Tic. Ltd. Şti., Bursa, Turska; porodična firma koja proizvodi od 2002.",
+      "Prethodni zapis „no-official-source-found“ (2026-08-08) bio je netačan i ispravljen je 2026-08-09.",
+      "Identitet potvrđen kroz tri dokaza: arhivirani logo sa carsystemirm.com, imena fajlova naših starih slika koja su Befar šifre (240100 → 02401, 930150 → 93015), i Srbija na Befarovoj štampanoj listi izvoznih tržišta.",
+      "Zvanični katalog je dvojezični PDF od 48 strana, ko-brendiran sa izvoznom firmom Nargil Dış Ticaret.",
+      "Drugi zvanični izvor: https://www.nargildisticaret.com/ (engleski izvozni sajt, slike adresirane po Befar šifri).",
+      "TDS, SDS i sertifikati nisu objavljeni ni na jednom zvaničnom izvoru.",
+      "Ne mešati sa Befar Group Co., Ltd. / 滨化集团 (befar.com), kineskom petrohemijskom kompanijom."
+    ]
+  },
+  "localInventory": {
+    "productsInCarsystemCatalogue": 8,
+    "localImages": 8,
+    "localDocuments": 0
+  },
+  "acquisition": {
+    "documentsAcquiredThisPhase": 0,
+    "technicalClaimsExtracted": 0,
+    "productsMatchedToCarsystemCatalogue": 0,
+    "manufacturerCandidateProducts": 0
+  },
+  "families": [],
+  "products": []
+}

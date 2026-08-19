@@ -1,0 +1,3075 @@
+{
+  "summary": {
+    "generatedAt": "2026-08-08T15:59:57.885Z",
+    "brand": "Carsystem",
+    "websiteClaims": 1909,
+    "tdsClaims": 1911,
+    "comparisons": 282,
+    "byClassification": {
+      "TDS_MORE_SPECIFIC": 106,
+      "WEBSITE_MORE_SPECIFIC": 71,
+      "CONSISTENT": 80,
+      "NOT_COMPARABLE": 19,
+      "VALUE_CONFLICT": 4,
+      "CONDITIONAL_DIFFERENCE": 2
+    },
+    "conflicts": 4,
+    "autoResolved": 0
+  },
+  "comparisons": [
+    {
+      "productSlug": "abdeckfolie-blau-abdeckfolie-rolle",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bis 110 °C",
+      "tdsDocument": "tm-abdeckfolie-blau.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "abdeckfolie-gelb-abdeckfolie-rolle",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bis 110 °C",
+      "tdsDocument": "tm-abdeckfolie-gelb.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "abdeckfolie-gruen-abdeckfolie-rolle",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bis 110 °C",
+      "tdsDocument": "tm-abdeckfolie-gruen.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "auto-mask-handliche-abdeckfolie-inkl-klebeband",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Transparent",
+      "tdsDocument": "tm-auto-mask.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "crash-film-selbstklebende-abdeck-schutzfolie",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "G",
+      "tdsDocument": "tm-crash-film-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "easy-mask-ii-abdeckfolie-transparent-rolle",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Transparent mit TOP/ OBEN Aufdruck",
+      "tdsDocument": "tm-easy-mask-II-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "fine-line-tape-blue-spezialabdeckband",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "155 °C",
+      "tdsDocument": "tm-fine-line-tape-blue-v03.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "fine-line-tape-blue-spezialabdeckband",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "blau",
+      "tdsDocument": "tm-fine-line-tape-blue-v03.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "fine-line-tape-blue-spezialabdeckband",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-fine-line-tape-blue-v03.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "foam-tape-schaumdichtband",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "80 °C",
+      "tdsValue": "80 °C / 1 Stunde",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig bis 80 °C / 1 Std.",
+      "tdsExcerpt": "Temperaturbeständigkeit: 80 °C / 1 Stunde",
+      "tdsDocument": "tm-foam-tape.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "foam-tape-schaumdichtband",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "transparent",
+      "tdsDocument": "tm-foam-tape.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "foam-tape-t-soft-schaumdichtband",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "80 °C",
+      "tdsDocument": "tm-foam-tape-t-soft.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "hand-mask-handliche-abdeckfolie-inkl-klebeband",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "80°C / 176° F",
+      "tdsDocument": "tm-hand-mask.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "liquid-masking-fluessige-abdeckfolie",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Transparent-rot",
+      "tdsValue": "transparent, rot",
+      "websiteExcerpt": "Farbe: Transparent-rot",
+      "tdsExcerpt": "Farbe: transparent, rot",
+      "tdsDocument": "tm-liquid-masking-v-06.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "master-tape-green-abdeckband",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "110 °C",
+      "tdsValue": "110°C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig bis 110 °C / 1 Std.",
+      "tdsExcerpt": "Temperaturbeständigkeit: 110°C",
+      "tdsDocument": "tm-master-tape-green.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "master-tape-ii-abdeckband",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "120 °C",
+      "tdsValue": "120 °C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig bis 120 °C / 1 Std.",
+      "tdsExcerpt": "Temperaturbeständigkeit : 120 °C",
+      "tdsDocument": "tm-carsystem-master-tape-II.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "mmir-mask-aqua-tec-abdeckpapier-rolle",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "blue / transparent",
+      "tdsDocument": "tm-mmir-mask-aqua-tec.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "mmir-mask-light-green-abdeckfolie-rolle",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "grün / transparent",
+      "tdsDocument": "tm-mmir-mask-light-green.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "red-tape-abdeckband",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "bis zu 110 °C",
+      "tdsValue": "> 110 °C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständigkeit bis zu 110 °C",
+      "tdsExcerpt": "Temperaturbeständigkeit: > 110 °C",
+      "tdsDocument": "tm-red-tape-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "red-tape-abdeckband",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-red-tape-v01.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "schutzfolie-spf-oberflaechenschutzfolie-60-cm-x-20-m",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "80 °C",
+      "tdsDocument": "tm-schutzfolie-spf-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "schutzfolie-spf-oberflaechenschutzfolie-60-cm-x-20-m",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Weiß",
+      "tdsDocument": "tm-schutzfolie-spf-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "schutzfolie-spf-oberflaechenschutzfolie-60-cm-x-20-m",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-schutzfolie-spf-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "silver-tape-gewebeband",
+      "field": "temperatureResistance",
+      "classification": "VALUE_CONFLICT",
+      "websiteValue": "80 °C",
+      "tdsValue": "-15°C bis +60°C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig bis 80 °C / 3 Std.",
+      "tdsExcerpt": "Temperaturbeständigkeit: -15°C bis +60°C",
+      "tdsDocument": "tm-silver-tape-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "silver-tape-gewebeband",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "silber",
+      "tdsDocument": "tm-silver-tape-v04.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "slim-tape-spezialabdeckband",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "100 °C",
+      "tdsValue": "100° C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig bis 100 °C / 1 Std.",
+      "tdsExcerpt": "Temperaturbeständigkeit max: 100° C",
+      "tdsDocument": "tm-carsystem-slim-tape.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "slim-tape-spezialabdeckband",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-carsystem-slim-tape.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "top-tape-abdeckband",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "80 °C",
+      "tdsValue": "80° C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig bis 80 °C / 1 Std.",
+      "tdsExcerpt": "Temperaturbeständigkeit: 80° C",
+      "tdsDocument": "tm-carsystem-top-tape.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "wr-lifting-tape-abdeckband-mit-kunststoffstreifen",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "120°C",
+      "tdsDocument": "tm-wr-lifting-tape-v02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "wr-lifting-tape-premium-abdeckband-perforiert",
+      "field": "temperatureResistance",
+      "classification": "VALUE_CONFLICT",
+      "websiteValue": "120 °C",
+      "tdsValue": "kurzfristig bis 110 °C",
+      "tdsUnit": "g",
+      "websiteExcerpt": "Temperaturbeständig bis 120 °C",
+      "tdsExcerpt": "Temperaturbeständigkeit: kurzfristig bis 110 °C",
+      "tdsDocument": "tm-wr-lifting-tape-premium-v03.pdf",
+      "tdsRevision": "v03",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "wr-lifting-tape-premium-abdeckband-perforiert",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "beige",
+      "tdsDocument": "tm-wr-lifting-tape-premium-v03.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "wr-lifting-tape-premium-abdeckband-perforiert",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Tape + Kunststoffkante sind perforiert für einfaches Abtrennen der gewünschten Länge",
+      "tdsExcerpt": "∙ Kunststoffkante sitzt unter dem Gummi und ist danach „unsichtbar“ - sorgt für besonders saubere Linien",
+      "tdsDocument": "tm-wr-lifting-tape-premium-v03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "bodyshirt-black-funktionsshirt-kurzarm",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-body-shirt-V01.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "bodyshirt-black-funktionsshirt-kurzarm",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: schwarz",
+      "tdsExcerpt": "• Farbe: schwarz",
+      "tdsDocument": "tm-body-shirt-V01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "coverall-black-suit-schutzanzug",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-coverall-black-suit.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "hand-cleaner-extreme-handreiniger",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Beige",
+      "tdsDocument": "tm-carsystem-hand-cleaner-extreme.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "hand-cleaner-handreiniger",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Hellbraun",
+      "tdsDocument": "tm-hand-cleaner-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "latex-gloves-high-risk-long-dark-blue-schutzhandschuh",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Dunkelblau",
+      "tdsDocument": "tm-latex-hand-I-premium.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "latex-handschuh-schutzhandschuh",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Natur",
+      "tdsDocument": "tm-latex-handschuh-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "neopren-hand-schutzhandschuh",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Schwarz",
+      "tdsDocument": "tm-neopren-hand-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "nitril-hand-premium-schwarz-schutzhandschuh",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Schw arz",
+      "tdsDocument": "tm-nitril-hand-premium-schwarz-v02.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "prep-hand-ii-arbeitshandschuh",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Weiß",
+      "tdsDocument": "tm-prep-hand-II.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "super-nitril-hand-i-schutzhandschuh",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Grün",
+      "tdsDocument": "tm-Super-Nitril-Hand-I-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "c-wax-c-80-hochglanzversiegelung",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Weiß",
+      "tdsDocument": "tm-c-wax-c-80-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "finish-kontrollschaum-c-99-kontrollschaum",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Weiß",
+      "tdsValue": "Weiß",
+      "websiteExcerpt": "Farbe: Weiß",
+      "tdsExcerpt": "Farbe: Weiß",
+      "tdsDocument": "tm-finish-kontrollschaum-c-99.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "mikrofasertuch-2-in-1",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-mikrofasertuch-2in1.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "mikrofasertuch-fluffy",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-mikrofasertuch-fluffy.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "mikrofasertuch-polish-extreme",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-mikrofasertuch-polish-extreme.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "mikrofasertuch-sky-blue",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-mikrofasertuch-sky-blue.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "mikrofasertuch-wave-cut",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "30 °C",
+      "tdsDocument": "tm-mikrofasertuch-wave-cut.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "nano-carnauba-wax-hochglanzwachs-und-versiegelung",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Gelb",
+      "tdsValue": "Gelb",
+      "websiteExcerpt": "Farbe: Gelb",
+      "tdsExcerpt": "Farbe: Gelb",
+      "tdsDocument": "tm-nano-carnauba-wax.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "polish-c-05-cut-schleifpaste",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Grün",
+      "tdsDocument": "TM-Carsystem-Polish-C-05-Cut-Schleifpaste-DE.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "polish-c-07-cut-schleifpolitur",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Gelb",
+      "tdsDocument": "TM-Carsystem-Polish-C-07-Hochleistungsschleifpolitur-DE.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "polish-c-10-strong-schleifpolitur",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Weiß",
+      "tdsDocument": "TM-Carsystem-Polish-C10-Strong-Hochleistungspolitur-DE.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "polish-c-30-finish-anti-hologramm-politur",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Anthrazit",
+      "tdsDocument": "tm-carsystem-polish-c30-finish.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "refinish-1-schleifpaste",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Hellgrau",
+      "tdsDocument": "tm-refinish-1.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "refinish-restorer-kunststoffauffrischer",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Gelblich-transparent",
+      "tdsDocument": "tm-refinish-restorer.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "refinish-restorer-kunststoffauffrischer",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-refinish-restorer.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "wax-puck-auftragshilfe",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbe: schwarz",
+      "tdsDocument": "tm-wax-puck.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "antidroehnplatten-antidroehnplatten",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "80 °C",
+      "tdsDocument": "tm-antidroehnplatten-v04.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "antidroehnplatten-antidroehnplatten",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "schwarz",
+      "tdsDocument": "tm-antidroehnplatten-v04.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "hs-acryl-tape-doppelseitiges-klebeband",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-40°C bis 150°C",
+      "tdsDocument": "tm-hs-acryl-tape.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "hs-acryl-tape-doppelseitiges-klebeband",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Grauer Acrylschaum",
+      "tdsDocument": "tm-hs-acryl-tape.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "hs-acryl-tape-doppelseitiges-klebeband",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-hs-acryl-tape.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "ks-100-unterbodenschutz-bitumen",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "Schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: Schwarz",
+      "tdsDocument": "tm-ks-100.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-1000-karosserieschutz",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "schwarz / grau / weiß",
+      "tdsDocument": "tm-ks-1000-v08.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-1050-karosserieschutz",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "grau",
+      "tdsDocument": "tm-ks-1050.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-200-hohlraumkonservierung",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "-25°C bis +80°C",
+      "tdsDocument": "tm-KS-200-v04.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-200-hohlraumkonservierung",
+      "field": "colour",
+      "classification": "CONDITIONAL_DIFFERENCE",
+      "websiteValue": "Braun-transparent",
+      "tdsValue": "hellbraun transparent",
+      "tdsCondition": "amber",
+      "websiteExcerpt": "Farbe: Braun-transparent",
+      "tdsExcerpt": "Farbe: hellbraun transparent (amber)",
+      "tdsDocument": "tm-KS-200-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-200-hohlraumkonservierung",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-KS-200-v04.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "ks-250-hohlraumkonservierung",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "transparent",
+      "tdsDocument": "tm-ks-250_V05.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-250-hohlraumkonservierung",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-ks-250_V05.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "ks-3000-plus-hs-karosserieschutz",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "-40°C bis + 90°C",
+      "tdsDocument": "tm-ks-3000-plus.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-3000-plus-hs-karosserieschutz",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "weiß, grau, schwarz",
+      "tdsDocument": "tm-ks-3000-plus.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-3002-hohlraumwachs",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bis zu 90 °C",
+      "tdsDocument": "tm-ks-300.2-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-3002-hohlraumwachs",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Weiß-transparent",
+      "tdsValue": "milchig hell/ transparent",
+      "tdsUnit": "g",
+      "websiteExcerpt": "Farbe: Weiß-transparent",
+      "tdsExcerpt": "Farbe: milchig hell/ transparent",
+      "tdsDocument": "tm-ks-300.2-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-3002-hohlraumwachs",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-ks-300.2-v01.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "ks-400-korrosionsschutzwachs",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "- 25 °C bis 160 °C",
+      "tdsValue": "- 25°C bis + 160°C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständigkeit: - 25 °C bis 160 °C",
+      "tdsExcerpt": "Temperaturbeständigkeit: - 25°C bis + 160°C",
+      "tdsDocument": "tm-ks-400.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-400-korrosionsschutzwachs",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Transparent",
+      "tdsValue": "weiß-transparent",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "Farbton: weiß-transparent",
+      "tdsDocument": "tm-ks-400.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-40002-karosserieschutz-wasserbasis",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "graublau / farbumschlag zu: schwarz",
+      "tdsDocument": "tm-ks-4000.2-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ks-5002-unterbodenschutz-bitumen",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbe: schwarz",
+      "tdsDocument": "tm-ks-500.2-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-502-karosserie-dichtmasse-streichbar",
+      "field": "temperatureResistance",
+      "classification": "CONSISTENT",
+      "websiteValue": "-25 °C bis 80 °C",
+      "tdsValue": "-25°C bis +80°C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Temperaturbeständig: -25 °C bis 80 °C",
+      "tdsExcerpt": "Temperaturbeständigkeit: -25°C bis +80°C",
+      "tdsDocument": "tm-ks-50.2-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-502-karosserie-dichtmasse-streichbar",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbe: grau",
+      "tdsDocument": "tm-ks-50.2-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-550-unterbodenschutz-bitumen",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "Schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: Schwarz",
+      "tdsDocument": "tm-ks-550.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-800-unterbodenschutzwachs",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: schwarz",
+      "tdsDocument": "tm-ks-800.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ks-850-unterbodenschutzwachs",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "25 °C bis 80 °C",
+      "tdsDocument": "tm-ks-850.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "ks-850-unterbodenschutzwachs",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Braun",
+      "tdsValue": "braun-transparent",
+      "websiteExcerpt": "Farbe: Braun",
+      "tdsExcerpt": "Farbton: braun-transparent",
+      "tdsDocument": "tm-ks-850.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "mount-tape-doppelseitiges-klebeband",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-40°C bis 120°C",
+      "tdsDocument": "tm-mount-tape.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "power-pu-bond-2k-pu-kleber",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "-",
+      "tdsDocument": "tm-power-pu-bond-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "power-pu-bond-2k-pu-kleber",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-power-pu-bond-v01.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uniflex-glas-fast-primer-feuchtigkeitsaushaertender-glas-haftgrund",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Schwarz",
+      "tdsDocument": "tm-uniflex-glas-fast-primer.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uniflex-glas-fast-primer-feuchtigkeitsaushaertender-glas-haftgrund",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "staklo",
+        "label": "staklo",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-uniflex-glas-fast-primer.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uniflex-glas-hm-scheibenkleber-hochmodulig-niederleitfaehig",
+      "field": "temperatureResistance",
+      "classification": "VALUE_CONFLICT",
+      "websiteValue": "5 °C bis 40 °C",
+      "tdsValue": "-40°C / +100°C mit kurzen Spitzen bei 140°C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Wegfahrbereit: 30 min (23 °C und 50 % relativer Feuchtigkeit) bei Fahrzeugen mit Fahrer- und Beifahrerairbags.Verarbeitungstemperatur: 5 °C ",
+      "tdsExcerpt": "Temperaturbeständigkeit: -40°C / +100°C mit kurzen Spitzen bei 140°C",
+      "tdsDocument": "tm-uniflex-glas-hm-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "uniflex-glas-hm-scheibenkleber-hochmodulig-niederleitfaehig",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Schwarz",
+      "tdsDocument": "tm-uniflex-glas-hm-v04.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uniflex-glas-scheibenkleber",
+      "field": "temperatureResistance",
+      "classification": "VALUE_CONFLICT",
+      "websiteValue": "5 °C bis 40 °C",
+      "tdsValue": "-40°C / +100°C mit kurzen Spitzen bei 140°C",
+      "tdsUnit": "°C",
+      "websiteExcerpt": "Wegfahrbereit: 2 Std. (23 °C und 50 % relativer Feuchtigkeit) bei Fahrzeugen mit Fahrer- und Beifahrerairbags.Verarbeitungstemperatur: 5 °C ",
+      "tdsExcerpt": "Temperaturbeständigkeit: -40°C / +100°C mit kurzen Spitzen bei 140°C",
+      "tdsDocument": "tm-uniflex-glas-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "uniflex-glas-scheibenkleber",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Schwarz",
+      "tdsDocument": "tm-uniflex-glas-v04.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uniflex-ms-spritzbare-nahtabdichtung",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "-40°C / +100°C mit kurzen Spitzen bei +/- 120°C",
+      "tdsDocument": "tm-uniflex-ms-v07.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "uniflex-ms-spritzbare-nahtabdichtung",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Grau, Schwarz, Beige",
+      "tdsDocument": "tm-uniflex-ms-v07.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "uniflex-ms-spritzbare-nahtabdichtung",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-uniflex-ms-v07.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uniflex-pu-kleb-und-dichtmasse",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "-40 - +100 °C",
+      "tdsDocument": "tm-uniflex-pu-v10.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "uniflex-pu-kleb-und-dichtmasse",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Weiß, Grau, Schwarz",
+      "tdsDocument": "tm-uniflex-pu-v10.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "ausblasstift-ausblasstift",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-40 °C bis +150 °C",
+      "tdsDocument": "tm-ausblasstift.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "booth-mask-kabinenschutzlack",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Transparent",
+      "tdsValue": "Transparent",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "Farbe: Transparent",
+      "tdsDocument": "tm-booth-mask-v06.pdf",
+      "tdsRevision": "v06",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "booth-mask-stick-kabinenschutzlack",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Transparent",
+      "tdsValue": "Bräunlich Transparent",
+      "tdsUnit": "h",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "Farbe: Bräunlich Transparent",
+      "tdsDocument": "tm-booth-mask-stick.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "booth-mask-stick-kabinenschutzlack",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm-booth-mask-stick.pdf",
+      "tdsPage": 3,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "booth-mask-white-kabinenschutzlack",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Weiß",
+      "tdsValue": "Weiß",
+      "websiteExcerpt": "Farbe: Weiß",
+      "tdsExcerpt": "Farbton: Weiß",
+      "tdsDocument": "tm-booth-mask-white.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "colour-match-lampe-tageslichtlampe",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-10 °C bis + 40 °C",
+      "tdsDocument": "tm-colour-match-lamp-v03.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "led-lampe-led-lampe",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-10 °C bis + 40 °C",
+      "tdsDocument": "tm-led-lampe.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "paint-arrestor-ii-farbnebelabscheider",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "bis 120°C",
+      "tdsDocument": "tm-paint-arrestor-II-v01.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uv-led-lampe-uv-led-lampe",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-10 °C bis +40 °C",
+      "tdsDocument": "tm-uv-led-lampe.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "uv-smart-lampe-uv-smart-lampe",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "-10 °C bis + 40 °C",
+      "tdsDocument": "tm-uv-smart-lampe.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "1k-easy-filler-1k-dickschichtfueller",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "weiß, hellgrau, schwarz",
+      "tdsDocument": "tm-1k-easy-filler.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "1k-easy-filler-1k-dickschichtfueller",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm-1k-easy-filler.pdf",
+      "tdsPage": 3,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "1k-easy-primer-1k-fuellprimer",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "weiß, grau, schwarz",
+      "tdsDocument": "tm-1k-easy-primer.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "1k-epoxy-primer-1k-epoxy-grundierung",
+      "field": "temperatureResistance",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bis 90°C",
+      "tdsDocument": "tm-1k-epoxy-primer.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "1k-epoxy-primer-1k-epoxy-grundierung",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbe: grau",
+      "tdsDocument": "tm-1k-epoxy-primer.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "1k-epoxy-primer-1k-epoxy-grundierung",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-1k-epoxy-primer.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "2k-epoxy-grundierfueller-2k-spot-repair-epoxy-grundierung",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Beige",
+      "tdsValue": "Beige",
+      "websiteExcerpt": "Farbe: Beige",
+      "tdsExcerpt": "∙ Farbe: Beige",
+      "tdsDocument": "tm-2k-epoxy-grundierfueller-v03.pdf",
+      "tdsRevision": "v03",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "2k-filler-vario-plus-2k-acryl-fueller",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "hellgrau",
+      "tdsDocument": "tm-2k-filler-vario-plus.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "2k-filler-wet-on-wet-plus-2k-acryl-fueller",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "e-coat",
+        "label": "KTL / e-coat",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-2k-fueller-wet-on-wet-plus.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "2k-high-speed-klarlack-2k-spot-repair-klarlack",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Transparent",
+      "tdsDocument": "tm-2k-high-speed-klarlack-spray-v02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "abtoenpaste-fueller-pigment-paste",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "schwarz, blau, grün, rot",
+      "tdsDocument": "tm-abtoenpaste-fueller.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "acryl-thinner-acryl-verduenner",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Transparent",
+      "tdsValue": "Farblos",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "Farbe: Farblos",
+      "tdsDocument": "tm-acryl-thinner.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "acryl-thinner-acryl-verduenner",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "temeljna-boja",
+        "label": "temeljni sloj / filer",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-acryl-thinner.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "activator-trocknungsbeschleuniger",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "klar",
+      "tdsDocument": "tm-activator.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "activator-trocknungsbeschleuniger",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "temeljna-boja",
+        "label": "temeljni sloj / filer",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-activator.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "af21-1k-filler-1k-hybrid-fueller",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "Grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbe: Grau",
+      "tdsDocument": "tm-af-21-1k-filler-v02.pdf",
+      "tdsRevision": "v02",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "af21-1k-filler-1k-hybrid-fueller",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-af-21-1k-filler-v02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "af21-x-pert-2k-acryl-fueller",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "celik",
+        "label": "čelik / gvožđe",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-af.21-x-pert-v05.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "af25-primer-wet-on-wet-2k-acryl-fueller",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "celik",
+        "label": "čelik / gvožđe",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-AF.25-Primer-WetonWet-v02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "bumper-paint-spray-stossstangen-spray",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Schwarz oder Grau",
+      "tdsDocument": "tm-bumper-paint-spray.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "bumper-paint-spray-stossstangen-spray",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-bumper-paint-spray.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "bumper-paint-strukturlack-fuer-kunststoffe",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: schwarz",
+      "tdsDocument": "tm-bumper-paint-v2.pdf",
+      "tdsRevision": "v2",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "bumper-paint-strukturlack-fuer-kunststoffe",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Bildet Struktur auf strukturierten Kunststoffteilen nach",
+      "tdsExcerpt": "Strukturlack für Kunststoffe",
+      "tdsDocument": "tm-bumper-paint-v2.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "bumper-structurant-spray-stossstangen-strukturspray-schwarz",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "Schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: Schwarz",
+      "tdsDocument": "tm-bumper-structurant-spray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "bumper-structurant-spray-stossstangen-strukturspray-schwarz",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-bumper-structurant-spray.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "ef21-ep-grundierfueller-2k-hybrid-fueller",
+      "field": "colour",
+      "classification": "CONDITIONAL_DIFFERENCE",
+      "websiteValue": "Kieselgrau (ca. RAL 7032)",
+      "tdsValue": "Kieselgrau",
+      "tdsCondition": "ca. RAL 7032",
+      "websiteExcerpt": "Farbe: Kieselgrau (ca. RAL 7032)",
+      "tdsExcerpt": "∙ Farbe: Kieselgrau (ca. RAL 7032)",
+      "tdsDocument": "tm-ef.21-ep-grundierfueller-v05.pdf",
+      "tdsRevision": "v05",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "ef21-ep-grundierfueller-2k-hybrid-fueller",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "celik",
+        "label": "čelik / gvožđe",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-ef.21-ep-grundierfueller-v05.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "etch-primer-grundierung",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "Grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbton: Grau",
+      "tdsDocument": "tm-etch-primer-grundierung_v03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "etch-primer-grundierung",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Gezielte Ausbesserung von Werksgrundierung auf Alu-Karossen",
+      "tdsExcerpt": "Aluminium Untergründen für Spot- und Teillackierungen.",
+      "tdsDocument": "tm-etch-primer-grundierung_v03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "felgensilber-felgensilber-spray",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Silber",
+      "tdsValue": "silber",
+      "websiteExcerpt": "Farbe: Silber",
+      "tdsExcerpt": "Farbton: silber",
+      "tdsDocument": "tm-felgensilber.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "high-gloss-additive-hochglanz-additiv",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Transparent",
+      "tdsValue": "farblos",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "Farbe: farblos",
+      "tdsDocument": "tm-high-gloss-additive.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "hpp-primer-1k-kunststoffprimer",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "schwarz, grau, weiß",
+      "tdsDocument": "TM-Carsystem-HpP-Primer-1K-Kunststoffprimer-DE.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "hpp-primer-1k-kunststoffprimer",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Nass in nass Grundierung für Kunststoffoberflächen",
+      "tdsExcerpt": "Der 1K Kunststoffprimer wird für den Gebrauch auf lösemittelresistenten Kunststoffen (z.B. PP , PVC,",
+      "tdsDocument": "TM-Carsystem-HpP-Primer-1K-Kunststoffprimer-DE.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "hpp-primer-1k-kunststoffprimer",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Nass in nass Grundierung für Kunststoffoberflächen",
+      "tdsExcerpt": "Für den Einsatz auf lösemittelbeständigen Kunststoffen geeignet. Es wird dringend empfohlen, mit",
+      "tdsDocument": "TM-Carsystem-HpP-Primer-1K-Kunststoffprimer-DE.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "klarlack-spray-klarlackspray",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Transparent - glänzend",
+      "tdsValue": "Transparent-glänzend",
+      "websiteExcerpt": "Farbe: Transparent - glänzend",
+      "tdsExcerpt": "Farbton: Transparent-glänzend",
+      "tdsDocument": "tm-klarlack-spray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "lackiergrundierung-haftgrundierung",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbton: grau",
+      "tdsDocument": "tm-lackiergrundierung.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "lackiergrundierung-haftgrundierung",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "temeljna-boja",
+        "label": "temeljni sloj / filer",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-lackiergrundierung.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "plastic-primer-kunststoffhaftvermittler",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "farblos",
+      "tdsDocument": "tm-plastic-primer-v03.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "plastic-primer-kunststoffhaftvermittler",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Einsetzbar auf folgenden Kunststoffen: PP, PP/EPDM, ABS, SAN, PUR-RIM, R-TRU, PPO, PBT, PUR Weichschaum, UP-GF Kunststoffen. Nicht geeignet ",
+      "tdsExcerpt": "• Haftvermittler für alle gängigen PKW- / LKW Kunststoffteile im Innen- und Außenbereich",
+      "tdsDocument": "tm-plastic-primer-v03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "primer-spray-haftgrundierung",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "rotbraun",
+      "tdsDocument": "tm-primer-spray-haftgrundierung.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "primer-spray-haftgrundierung",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-primer-spray-haftgrundierung.pdf",
+      "tdsPage": 1,
+      "note": "Podloga navedena samo u tehničkom listu."
+    },
+    {
+      "productSlug": "rallye-spray-glaenzend-farbspray-glaenzend",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Schwarz glänzend",
+      "tdsDocument": "tm-rallye-spray-glaenzend.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "rallye-spray-matt-farbspray-matt",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Schwarz matt",
+      "tdsDocument": "tm-rallye-spray-matt.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "rallye-spray-premium-farbspray-schwarz-glaenzend",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz glänzend",
+      "tdsValue": "schwarz glänzend",
+      "websiteExcerpt": "Farbe: Schwarz glänzend",
+      "tdsExcerpt": "Farbton: schwarz glänzend",
+      "tdsDocument": "tm-rallye-spray-premium-schwarz-glaenzend.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "rallye-spray-premium-farbspray-schwarz-glaenzend",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm-rallye-spray-premium-schwarz-glaenzend.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "rallye-spray-premium-farbspray-schwarz-matt",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz matt",
+      "tdsValue": "schwarz matt",
+      "websiteExcerpt": "Farbe: Schwarz matt",
+      "tdsExcerpt": "Farbton: schwarz matt",
+      "tdsDocument": "tm-rallye-spray-premium-schwarz-matt.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "rallye-spray-premium-farbspray-schwarz-matt",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm-rallye-spray-premium-schwarz-matt.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "spotblender-beispritzverduennung",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "farblos",
+      "tdsDocument": "tm-spotblender.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "spotblender-spray-beispritzverduennung-spray",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Transparent",
+      "tdsValue": "farblos",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "Farbton: farblos",
+      "tdsDocument": "tm-spotblender-spray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "spotblender-spray-beispritzverduennung-spray",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm-spotblender-spray.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "spritzspachtel-spritzspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbton: grau",
+      "tdsDocument": "tm-spritzspachtel.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "thermo-spray-farbspray-hitzebestaendig",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "bis 650 °C",
+      "tdsDocument": "tm-thermo-spray.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "thermo-spray-farbspray-hitzebestaendig",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "silber",
+      "tdsDocument": "tm-thermo-spray.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "uv-clear-transparenter-uv-klarlack",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "transparent",
+      "tdsDocument": "tm-uv-clear.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "uv-filler-spray-uv-fueller-spray",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau-Beige",
+      "tdsValue": "Grau-Beige",
+      "websiteExcerpt": "Farbe: Grau-Beige",
+      "tdsExcerpt": "∙ Farbe: Grau-Beige",
+      "tdsDocument": "tm-uv-filler-spray-v07.pdf",
+      "tdsRevision": "v07",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "uv-filler-spray-uv-fueller-spray",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "celik",
+        "label": "čelik / gvožđe",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-uv-filler-spray-v07.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "zink-spray-korrosionsschutz",
+      "field": "temperatureResistance",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "bis 490 °C (gemäß DIN 50976, 53167, 5002",
+      "tdsDocument": "tm-zinkspray.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "zink-spray-korrosionsschutz",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "Farbton: grau",
+      "tdsDocument": "tm-zinkspray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "car-clean-double-blue-papierputztuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "blau",
+      "tdsDocument": "tm-car-clean-double-blue.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "car-clean-multi-extreme-box-zellstoffputztuch",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Türkis",
+      "tdsValue": "türkis",
+      "websiteExcerpt": "Farbe: Türkis",
+      "tdsExcerpt": "Farbe: türkis",
+      "tdsDocument": "tm-car-clean-multi-extreme-v02.pdf",
+      "tdsRevision": "v02",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "car-clean-multi-extreme-box-zellstoffputztuch",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "drvo",
+        "label": "drvo",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "drvo",
+        "label": "drvo",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Geeignet für folgende Oberflächen: Lack, Metall und glatte Holzoberflächen",
+      "tdsExcerpt": "∙ Geeignet für folgende Oberflächen: Lack-, Metall- und glatte Holzoberflächen",
+      "tdsDocument": "tm-car-clean-multi-extreme-v02.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "car-clean-multi-reinigungstuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "blau",
+      "tdsDocument": "tm-car-clean-multi-v03.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "car-clean-multi-reinigungstuch",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "drvo",
+        "label": "drvo",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "drvo",
+        "label": "drvo",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Geeignet für Lack-, Metall- und glatte Holzoberflächen",
+      "tdsExcerpt": "• Geeignet für folgende Oberflächen: Lack-, Metall- und glatte Holzoberflächen",
+      "tdsDocument": "tm-car-clean-multi-v03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "cockpit-spray-reinigungsspray",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Transparent",
+      "tdsDocument": "tm-cockpit-spray.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "cockpit-spray-reinigungsspray",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-cockpit-spray.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "h2o-cleaner-reiniger",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "temeljna-boja",
+        "label": "temeljni sloj / filer",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-h2o-cleaner.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "iso-ve-7030-isopropanolreiniger",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Farblos",
+      "tdsDocument": "tm-iso-ve-7030.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "iso-ve-7030-isopropanolreiniger",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-iso-ve-7030.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "multi-reinigungstuch-reinigungstuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Blaues Reinigungstuch, getränkt mit leicht trüber Flüssigkeit",
+      "tdsDocument": "tm-multi-reinigungstuch-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "pump-sprayer-druckpumpzerstaeuber",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Weiß, transluzent",
+      "tdsDocument": "tm-pump-spray-v04.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "silicone-remover-mild-silikonentferner-loesemittelbasis",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "farblos",
+      "tdsDocument": "tm-silicone-remover-mild.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "silicone-remover-water-20-silikonentferner-wasserbasis",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "temeljna-boja",
+        "label": "temeljni sloj / filer",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-silicone-remover-water-2.0-v02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "spraygun-cleaner-lackierpistolenreiniger",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "transparent",
+      "tdsDocument": "tm-spraygun-cleaner-V01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "staub-stop-staubbindetuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Weiß",
+      "tdsDocument": "tm-staub-stop.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "staub-stop-super-wave-staubbindetuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Naturfarben",
+      "tdsDocument": "tm-staub-stop-super-wave-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "staub-stop-water-black-staubbindetuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "schwarz",
+      "tdsDocument": "tm-staub-stop-water-black-v02.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "staub-stop-water-staubbindetuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "hellblau",
+      "tdsDocument": "tm-staub-stop-water-v03.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "wischtuecher-wischtuch",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "weiß",
+      "tdsDocument": "tm-wischtuecher-soft.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "control-spray-schleifkontrollspray",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: schwarz",
+      "tdsDocument": "tm-control-spray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "dry-coat-20-schleifkontroll-system",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Schwarz - für helle Untergründe",
+      "tdsDocument": "tm-dry-coat-2.0-v03.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "prep-scuff-mattierungsgel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellgrün",
+      "tdsValue": "Hellgrün",
+      "websiteExcerpt": "Farbe: Hellgrün",
+      "tdsExcerpt": "Farbe: Hellgrün",
+      "tdsDocument": "tm-prep-scuff.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "proflex-jupiter-folienschleifmittel-152-mm",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Korund",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Korund",
+      "tdsDocument": "tm-proflex-jupiter-scheibe-152-0.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "proflex-jupiter-folienschleifmittel-152-mm-15-loch",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Korund",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Korund",
+      "tdsDocument": "tm-proflex-jupiter-152-mm-15-loch-v02-.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "proflex-jupiter-folienschleifmittel-75-mm",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Korund",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Korund",
+      "tdsDocument": "tm-proflex-jupiter-scheibe-75-0.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "proflex-jupiter-soft-folienschleifmittel-152-mm-multilochung",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-proflex-jupiter-soft-scheibe-152-multi-loch.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "proflex-jupiter-soft-folienschleifmittel-75-mm-multilochung",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-proflex-jupiter-soft-scheibe-77-multi-loch.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "proflex-jupiter-soft-h2o-folienschleifmittel-152-mm-multilochung",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-proflex-jupiter-soft-h2o-152mm-V02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "proflex-jupiter-soft-h2o-folienschleifmittel-77-mm-multilochung",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-proflex-jupiter-soft-h2o-scheibe-77-multi.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "proflex-mercury-folienschleifmittel-29-x-35-mm",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Korund",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Korund",
+      "tdsDocument": "tm-proflex-mercury-29-35.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "proflex-neptune-folienschleifmittel-130-x-170-mm",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-proflex-neptune-130-170.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "proflex-neptune-pad-max-grip-hand-pad-120-x-75-x-6-mm-multilochung",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Orange",
+      "tdsDocument": "tm-proFlex-neptune-pad-maxgrip.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "proflex-neptune-soft-folienschleifmittel-130-x-85-mm-multilochung",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-proflex-neptune-soft.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "proflex-pluto-folienschleifmittel-oe-34-mm",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Korund",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Korund",
+      "tdsDocument": "tm-proflex-pluto-34.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "sanding-disc-f19-finish-folienschleifmittel-152-mm-15-loch",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-sanding-disc-f19-finish-152-15.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "sanding-disc-f19-finish-folienschleifmittel-77-mm",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-sanding-disc-f19-finish-77.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "sanding-disc-f19-folienschleifmittel-150-mm-25-loch",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Aluminiumoxid",
+      "tdsUnit": "min",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Aluminiumoxid",
+      "tdsDocument": "tm-carsystem-sanding-disc-f19.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "sanding-disc-f19-folienschleifmittel-77-mm",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Aluminiumoxid",
+      "tdsUnit": "min",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Aluminiumoxid",
+      "tdsDocument": "tm-sanding-Disc-F19-77mm-V01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "sanding-disc-f19-soft-folienschleifmittel-152-mm-multilochung",
+      "field": "abrasiveGrainType",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsDocument": "tm-sanding-disc-f19-soft-152-multiloch.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "sanding-disc-f23-ceramic-folienschleifmittel-150-mm-25-loch",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Kornmischung mit Keramikanteil",
+      "tdsDocument": "tm-sanding-disc-f-23-ceramic-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "sanding-disc-p19-papierschleifmittel-150-mm-25-loch",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Korund",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Korund",
+      "tdsDocument": "tm-sanding-disc-150-25-p19.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "sanding-disc-p25-ceramic-papierschleifmittel-150mm-25-loch",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Rot",
+      "tdsValue": "Rot",
+      "websiteExcerpt": "Farbe: Rot",
+      "tdsExcerpt": "∙ Farbe: Rot",
+      "tdsDocument": "tm-p.25c-sanding-disc-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "sanding-disc-p25-ceramic-papierschleifmittel-150mm-25-loch",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Kornmischung mit Keramikanteil",
+      "tdsDocument": "tm-p.25c-sanding-disc-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "sanding-strips-f23-ceramic-folienschleifmittel-rolle-70-mm-x-12-m",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Kornmischung mit Keramikanteil",
+      "tdsDocument": "tm-sanding-strips-f-23-v01.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "schleifvlies-v19-schleifvlies-pad-115-x-230-mm",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Aluminiumoxid",
+      "tdsDocument": "tm-carsystem-schleifvlies-v19-pad.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "schleifvlies-v19-schleifvlies-rolle-115-mm-x-10-m",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Aluminiumoxid",
+      "tdsDocument": "tm-carsystem-schleifvlies-v19-rolle.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "schleifvlies-v19-schleifvlies-scheibe",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "Aluminiumoxid",
+      "tdsDocument": "tm-carsystem-schleifvlies-v19-scheibe.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "schleifvlies-v19-schleifvlies-scheibe",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "temeljna-boja",
+        "label": "temeljni sloj / filer",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-carsystem-schleifvlies-v19-scheibe.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "tec-line-matt-matting-mousse-mattierungspaste",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellgrau",
+      "tdsValue": "Hellgrau",
+      "websiteExcerpt": "Farbe: Hellgrau",
+      "tdsExcerpt": "Farbe: Hellgrau",
+      "tdsDocument": "tm-tec-line-matt-matting-mousse.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "tec-line-matt-matting-mousse-mattierungspaste",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Geeignet für Karosserie- und Kunststoffteile",
+      "tdsExcerpt": "Ideal für Säubern und Abreiben von Kunststoffstoßfängern und Gummiteilen",
+      "tdsDocument": "tm-tec-line-matt-matting-mousse.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "tec-line-n20-netzschleifmittel-70-x-400-mm",
+      "field": "abrasiveGrainType",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Aluminiumoxid-Korn",
+      "tdsValue": "Aluminiumoxid",
+      "tdsUnit": "min",
+      "websiteExcerpt": "Aluminiumoxid-Korn",
+      "tdsExcerpt": "Kornart: Aluminiumoxid",
+      "tdsDocument": "tm-tec-line-n20.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "topline-wp-s-papierschleifmittel-230-x-280-mm",
+      "field": "abrasiveGrainType",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Siliziumkarbid-Korn",
+      "tdsValue": "Siliziumkarbid",
+      "websiteExcerpt": "Siliziumkarbid-Korn",
+      "tdsExcerpt": "Kornart: Siliziumkarbid",
+      "tdsDocument": "tm-topline-wp-s.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "1k-nc-filler-1k-nitrocellulose-fueller",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellgrau",
+      "tdsValue": "hellgrau",
+      "websiteExcerpt": "Farbe: Hellgrau",
+      "tdsExcerpt": "• Farbe: hellgrau",
+      "tdsDocument": "tm-1k-nc-filler-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "alu-spezial-polyester-hartspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellgrau",
+      "tdsValue": "hellgrau",
+      "websiteExcerpt": "Farbe: Hellgrau",
+      "tdsExcerpt": "- Farbton: hellgrau",
+      "tdsDocument": "tm-alu-spezial.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "alu-spezial-polyester-hartspachtel",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Zinnersatz für Aluminium",
+      "tdsExcerpt": "Alu - Spezial ist ein spezieller Polyester Hartspachtel für Aluminiumuntergründe",
+      "tdsDocument": "tm-alu-spezial.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "alu-spezial-polyester-hartspachtel",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Zinnersatz für Aluminium",
+      "tdsExcerpt": "- Geeignet für spezielle Reparaturen auf Aluminium",
+      "tdsDocument": "tm-alu-spezial.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "alu-spezial-polyester-hartspachtel",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Zinnersatz für Aluminium",
+      "tdsExcerpt": "- Ein spezieller Spachtel für arbeiten auf Aluminium Untergründen.",
+      "tdsDocument": "tm-alu-spezial.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "anti-rust-putty-anti-korrosionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Rotbraun",
+      "tdsValue": "rotbraun",
+      "websiteExcerpt": "Farbe: Rotbraun",
+      "tdsExcerpt": "Farbton: rotbraun",
+      "tdsDocument": "tm_anti_rust_putty_V03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "anti-rust-putty-anti-korrosionsspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "pocinkovani-lim",
+        "label": "cink / pocinkovano",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm_anti_rust_putty_V03.pdf",
+      "tdsPage": 2,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "carbo-putty-polyester-carbonspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Transparent",
+      "tdsValue": "transparent",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "- Farbton: transparent",
+      "tdsDocument": "tm-carbo-putty.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "carbo-putty-polyester-carbonspachtel",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "drvo",
+        "label": "drvo",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-carbo-putty.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "carbo-spray-spritzspachtel-fuer-carbonteile",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Transparent",
+      "tdsValue": "transparent",
+      "websiteExcerpt": "Farbe: Transparent",
+      "tdsExcerpt": "- Farbton: transparent",
+      "tdsDocument": "tm-carbo-spray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "elastic-beige-polyester-feinspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Beige",
+      "tdsValue": "beige",
+      "websiteExcerpt": "Farbe: Beige",
+      "tdsExcerpt": "- Farbton: beige",
+      "tdsDocument": "tm-elastic-beige.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "elastic-beige-polyester-feinspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-elastic-beige.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "elastic-green-polyester-feinspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "- Farbton: grün",
+      "tdsDocument": "tm-elastic-green.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "elastic-green-polyester-feinspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-elastic-green.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "elastic-weiss-polyester-feinspachtel",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Weiß",
+      "tdsValue": "weiss",
+      "websiteExcerpt": "Farbe: Weiß",
+      "tdsExcerpt": "Farbton: weiss",
+      "tdsDocument": "tm-elastic-weiss-v05.pdf",
+      "tdsRevision": "v05",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "faser-polyester-faserspachtel",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Bräunlich-transparent",
+      "tdsValue": "bräunlich - transparent",
+      "tdsUnit": "h",
+      "websiteExcerpt": "Farbe: Bräunlich-transparent",
+      "tdsExcerpt": "- Farbton: bräunlich - transparent",
+      "tdsDocument": "tm-faser.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "faser-polyester-faserspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-faser.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "faserspachtel-polyester-glasfaserspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "- Farbton: grün",
+      "tdsDocument": "tm-faserspachtel.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "faserspachtel-polyester-glasfaserspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-faserspachtel.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "feinspachtel-polyester-feinspachtel",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Weiß",
+      "tdsValue": "weiss",
+      "websiteExcerpt": "Farbe: Weiß",
+      "tdsExcerpt": "- Farbton: weiss",
+      "tdsDocument": "tm-feinspachtel.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "feinspachtel-polyester-feinspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-feinspachtel.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "flex-polyester-kunststoffkonturspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz-grau",
+      "tdsValue": "schwarz-grau",
+      "websiteExcerpt": "Farbe: Schwarz-grau",
+      "tdsExcerpt": "- Farbton: schwarz-grau",
+      "tdsDocument": "tm-flex.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "flex-polyester-kunststoffkonturspachtel",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-flex.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "fuellspachtel-polyester-fuellspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "- Farbton: grau",
+      "tdsDocument": "tm-fuellspachtel.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "fuellspachtel-polyester-fuellspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-fuellspachtel.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "glas-polyester-glasfaserspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "Farbton: grün",
+      "tdsDocument": "tm-glas-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "glas-weiss-polyester-glasfaserspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Weiß",
+      "tdsValue": "weiß",
+      "websiteExcerpt": "Farbe: Weiß",
+      "tdsExcerpt": "- Farbton: weiß",
+      "tdsDocument": "tm-glas-weiss.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "glas-weiss-polyester-glasfaserspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-glas-weiss.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "liquid-putty-polyester-fluessigspachtel",
+      "field": "colour",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": "Beige",
+      "tdsDocument": "tm-liquid-putty-v02.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "metallic-polyester-fuellspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Silber",
+      "tdsValue": "silber",
+      "websiteExcerpt": "Farbe: Silber",
+      "tdsExcerpt": "- Farbton: silber",
+      "tdsDocument": "tm-metallic.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "metallic-polyester-fuellspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-metallic.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "multi-black-rapid-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "Schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "∙ Farbe: Schwarz",
+      "tdsDocument": "tm-multi-black-rapid-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-blue-rapid-changer-sf-polyester-multifunktionsspachtel-styrolfrei",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Von blau zu grau (während der Aushärtung",
+      "tdsValue": "Blau",
+      "websiteExcerpt": "Farbe: Von blau zu grau (während der Aushärtungsphase)",
+      "tdsExcerpt": "Farbton: Blau",
+      "tdsDocument": "tm-multi-blue-rapid-changer-sf-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-flow-polyester-multi-leichtspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellblau",
+      "tdsValue": "hellblau",
+      "websiteExcerpt": "Farbe: Hellblau",
+      "tdsExcerpt": "∙ Farbe: hellblau",
+      "tdsDocument": "tm-multi-flow-v01.pdf",
+      "tdsRevision": "v01",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-flow-polyester-multi-leichtspachtel",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "metal",
+        "label": "metal",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-multi-flow-v01.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "multi-green-changer-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "Farbton: grün",
+      "tdsDocument": "tm-multi-green-changer-v03.pdf",
+      "tdsRevision": "v03",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-green-glas-light-polyester-multifunktions-glasfaserspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "• Farbe: grün",
+      "tdsDocument": "tm-multi-green-glas-light-v-03.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-green-glas-polyester-multifunktions-glasfaserspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "- Farbton: grün",
+      "tdsDocument": "tm-multi-green-glas-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-green-plus-10-super-light-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "websiteValue": "Grün",
+      "tdsValue": "2004/42/IIB (b) (250) < 220g/l",
+      "tdsUnit": "g/l",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "- Farbton: 2004/42/IIB (b) (250) < 220g/l",
+      "tdsDocument": "tm-multi-green-plus-1.0-super-light-v04.pdf",
+      "tdsRevision": "v04",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-green-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "Farbton: grün",
+      "tdsDocument": "tm-Multi-Green.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-green-rapid-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "Farbton: grün",
+      "tdsDocument": "tm-multi-green-rapid-v03.pdf",
+      "tdsRevision": "v03",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-green-sf-polyester-multifunktionsspachtel-styrolfrei",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grün",
+      "tdsValue": "grün",
+      "websiteExcerpt": "Farbe: Grün",
+      "tdsExcerpt": "- Farbton: grün",
+      "tdsDocument": "tm-multi-green-sf.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-light-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Beige",
+      "tdsValue": "Beige",
+      "websiteExcerpt": "Farbe: Beige",
+      "tdsExcerpt": "Farbton: Beige",
+      "tdsDocument": "tm-multi-light-v06.pdf",
+      "tdsRevision": "v06",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-plus-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellgrau",
+      "tdsValue": "hellgrau",
+      "websiteExcerpt": "Farbe: Hellgrau",
+      "tdsExcerpt": "Farbton: hellgrau",
+      "tdsDocument": "tm-multi-plus-v06.pdf",
+      "tdsRevision": "v06",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Beige",
+      "tdsValue": "beige",
+      "websiteExcerpt": "Farbe: Beige",
+      "tdsExcerpt": "- Farbton: beige",
+      "tdsDocument": "tm-multi-v05.pdf",
+      "tdsRevision": "v05",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-silver-light-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Silber",
+      "tdsValue": "silber",
+      "websiteExcerpt": "Farbe: Silber",
+      "tdsExcerpt": "- Farbton: silber",
+      "tdsDocument": "tm-multi-silver-light.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-soft-polyester-multifunktionsspachtel",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Hellgrau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Hellgrau",
+      "tdsExcerpt": "- Farbton: grau",
+      "tdsDocument": "tm-multi-soft.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "multi-super-flex-polyesterspachtel-hochelastisch",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Dunkelgrau",
+      "tdsValue": "dunkelgrau",
+      "websiteExcerpt": "Farbe: Dunkelgrau",
+      "tdsExcerpt": "Farbton: dunkelgrau",
+      "tdsDocument": "tm-multi-super-flex-v03.pdf",
+      "tdsRevision": "v03",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "plastic-pro-polyester-kunststoffkonturspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Schwarz",
+      "tdsValue": "schwarz",
+      "websiteExcerpt": "Farbe: Schwarz",
+      "tdsExcerpt": "Farbton: schwarz",
+      "tdsDocument": "tm-plastic-pro.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "plastic-pro-polyester-kunststoffkonturspachtel",
+      "field": "substrate",
+      "classification": "CONSISTENT",
+      "websiteValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "tdsValue": {
+        "substrate": "plastika",
+        "label": "plastika",
+        "suitability": "stated-suitable"
+      },
+      "websiteExcerpt": "Zum Füllen von kleinen Kratzern und Fehlstellen auf Kunststoffuntergründen",
+      "tdsExcerpt": "Plastic Pro ist ein Polyesterspachtel speziell für das Spachteln auf Kunststoffteilen.",
+      "tdsDocument": "tm-plastic-pro.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "polyester-reparaturharz-polyester-reparaturharz",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bräunlich",
+      "tdsDocument": "tm-polyester-reparaturharz.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "polyester-reparaturharz-polyester-reparaturharz",
+      "field": "substrate",
+      "classification": "WEBSITE_MORE_SPECIFIC",
+      "websiteValue": {
+        "substrate": "stakloplastika",
+        "label": "GFK / SMC",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-polyester-reparaturharz.pdf",
+      "note": "Podatak postoji samo na sajtu proizvođača."
+    },
+    {
+      "productSlug": "polyester-reparaturset-polyester-reparaturset",
+      "field": "colour",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": "bräunlich",
+      "tdsDocument": "tm-polyester-reparaturset.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "soft-polyester-fuellspachtel",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Beige",
+      "tdsValue": "beige",
+      "websiteExcerpt": "Farbe: Beige",
+      "tdsExcerpt": "- Farbton: beige",
+      "tdsDocument": "tm-soft.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "soft-polyester-fuellspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-soft.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "spray-plus-polyester-spritzfueller",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Hellgrau",
+      "tdsValue": "hellgrau",
+      "websiteExcerpt": "Farbe: Hellgrau",
+      "tdsExcerpt": "Farbton: hellgrau",
+      "tdsDocument": "tm-Spray_Plus_V09.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "spray-polyester-spritzfueller",
+      "field": "colour",
+      "classification": "CONSISTENT",
+      "websiteValue": "Grau",
+      "tdsValue": "grau",
+      "websiteExcerpt": "Farbe: Grau",
+      "tdsExcerpt": "- Farbton: grau",
+      "tdsDocument": "tm-spray.pdf",
+      "tdsPage": 1
+    },
+    {
+      "productSlug": "spray-polyester-spritzfueller",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "aluminijum",
+        "label": "aluminijum",
+        "suitability": "not-suitable"
+      },
+      "tdsDocument": "tm-spray.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    },
+    {
+      "productSlug": "steel-polyester-hartspachtel",
+      "field": "colour",
+      "classification": "NOT_COMPARABLE",
+      "websiteValue": "Silber",
+      "tdsValue": "alu/grau",
+      "websiteExcerpt": "Farbe: Silber",
+      "tdsExcerpt": "Farbton: alu/grau",
+      "tdsDocument": "tm-steel.pdf",
+      "tdsPage": 2
+    },
+    {
+      "productSlug": "steel-polyester-hartspachtel",
+      "field": "substrate",
+      "classification": "TDS_MORE_SPECIFIC",
+      "tdsValue": {
+        "substrate": "celik",
+        "label": "čelik",
+        "suitability": "stated-suitable"
+      },
+      "tdsDocument": "tm-steel.pdf",
+      "tdsPage": 1,
+      "note": "Podatak postoji samo u tehničkom listu."
+    }
+  ]
+}

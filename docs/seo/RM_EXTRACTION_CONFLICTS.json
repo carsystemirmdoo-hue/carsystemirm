@@ -1,0 +1,844 @@
+{
+  "generatedAt": "2026-08-08T09:25:14.508Z",
+  "total": 62,
+  "byType": {
+    "referenced-product-not-in-catalogue": 60,
+    "differing-mixing-ratio-within-system": 2
+  },
+  "conflicts": [
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "2520-onyx-easy-blender",
+      "productCode": "A 2520",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: HB 034.",
+      "sourceExcerpt": "Thinner HB 032 HB 034 - HYDROMIX slow",
+      "documentHref": "/documents/products/rm/2520-onyx-easy-blender/rm-2520-onyx-easy-blender-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "2560-agilis-amplifier",
+      "productCode": "A 2560",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (RA 050) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner 50 part(s) by weight RA 050 - Thinner Stir IMMEDIATELY after addingt.",
+      "documentHref": "/documents/products/rm/2560-agilis-amplifier/rm-2560-agilis-amplifier-technical-data-sheet.pdf",
+      "page": 2,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a40-airtop",
+      "productCode": "C 2A40",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2A20) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2A20 - Advance Series Hardener 102 g",
+      "documentHref": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a40-airtop",
+      "productCode": "C 2A40",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A20.",
+      "sourceExcerpt": "Thinner R 2A20 - Advance Series Thinner R 2A10 - Advance Series Thinner, fast 18 g",
+      "documentHref": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a46-ultratop",
+      "productCode": "C 2A46",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2A24, H 2A34.",
+      "sourceExcerpt": "Hardener H 2A14 - Topcoat hardener, fast H 2A24 - Topcoat hardener, medium H 2A34 - Topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a46-ultratop",
+      "productCode": "C 2A46",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a54-performtop",
+      "productCode": "C 2A54",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2A24, H 2A34.",
+      "sourceExcerpt": "Hardener H 2A14 - Topcoat hardener, fast H 2A24 - Topcoat hardener, medium H 2A34 - Topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a54-performtop",
+      "productCode": "C 2A54",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a57-mixtop",
+      "productCode": "C 2A57",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2A24, H 2A34.",
+      "sourceExcerpt": "Hardener H 2A14 - Topcoat hardener, fast H 2A24 - Topcoat hardener, medium H 2A34 - Topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2a57-mixtop/rm-c-2a57-mixtop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a63-glosstop",
+      "productCode": "C 2A63",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2A24, H 2A34.",
+      "sourceExcerpt": "Hardener H 2A14 - Topcoat hardener, fast H 2A24 - Topcoat hardener, medium H 2A34 - Topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a63-glosstop",
+      "productCode": "C 2A63",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a64-glosstop",
+      "productCode": "C 2A64",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2A24, H 2A34.",
+      "sourceExcerpt": "Hardener H 2A14 - Topcoat hardener, fast H 2A24 - Topcoat hardener, medium H 2A34 - Topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a64-glosstop",
+      "productCode": "C 2A64",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a93-mattop",
+      "productCode": "C 2A93",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2A94) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2A94 - Hardener, mat",
+      "documentHref": "/documents/products/rm/c-2a93-mattop/rm-c-2a93-mattop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2e50-clear-coat",
+      "productCode": "C 2E50",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2E20, R 2E30.",
+      "sourceExcerpt": "Thinner R 2E10 - Thinner, fast R 2E20 - Thinner, medium R 2E30 - Thinner, slow",
+      "documentHref": "/documents/products/rm/c-2e50-clear-coat/rm-c-2e50-clear-coat-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p30-uv-finish-r",
+      "productCode": "C 2P30",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (R 2P30) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner 100 % by weight R 2P30 - PIONEER Series Thinner",
+      "documentHref": "/documents/products/rm/c-2p30-uv-finish-r/rm-c-2p30-uv-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p42-race-finish-r",
+      "productCode": "C 2P42",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2P25, H 2P35.",
+      "sourceExcerpt": "Hardener H 2P15 - eSense topcoat hardener, fast H 2P05 - eSense topcoat hardener, plus H 2P25 - eSense topcoat hardener, medium H 2P35 - eSense topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2p42-race-finish-r/rm-c-2p42-race-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p42-race-finish-r",
+      "productCode": "C 2P42",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow",
+      "documentHref": "/documents/products/rm/c-2p42-race-finish-r/rm-c-2p42-race-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p45-speed-finish-r",
+      "productCode": "C 2P45",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2P25, H 2P35.",
+      "sourceExcerpt": "Hardener H 2P05 - eSense topcoat hardener, plus H 2P15 - eSense topcoat hardener, fast H 2P25 - eSense topcoat hardener, medium H 2P35 - eSense topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p45-speed-finish-r",
+      "productCode": "C 2P45",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow",
+      "documentHref": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p55-multi-finish-r",
+      "productCode": "C 2P55",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2P25, H 2P35.",
+      "sourceExcerpt": "Hardener H 2P05 - eSense topcoat hardener, plus H 2P15 - eSense topcoat hardener, fast H 2P25 - eSense topcoat hardener, medium H 2P35 - eSense topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p55-multi-finish-r",
+      "productCode": "C 2P55",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow",
+      "documentHref": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p62-bright-finish-r",
+      "productCode": "C 2P62",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2P25, H 2P35.",
+      "sourceExcerpt": "Hardener H 2P15 - eSense topcoat hardener, fast H 2P25 - eSense topcoat hardener, medium H 2P35 - eSense topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p62-bright-finish-r",
+      "productCode": "C 2P62",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35, R 2P45.",
+      "sourceExcerpt": "Thinner R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow R 2P45 - eSense thinner, extra slow",
+      "documentHref": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p85-power-finish-r",
+      "productCode": "C 2P85",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2P25, H 2P35.",
+      "sourceExcerpt": "Hardener H 2P05 - eSense topcoat hardener, plus H 2P15 - eSense topcoat hardener, fast H 2P25 - eSense topcoat hardener, medium H 2P35 - eSense topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p85-power-finish-r",
+      "productCode": "C 2P85",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow",
+      "documentHref": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p91-mat-finish-r",
+      "productCode": "C 2P91",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P95, H 2P96) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P95 - eSense topcoat hardener, mat H 2P96 - eSense topcoat hardener, mat slow",
+      "documentHref": "/documents/products/rm/c-2p91-mat-finish-r/rm-c-2p91-mat-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p96-satin-finish-r",
+      "productCode": "C 2P96",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P95, H 2P96) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P95 - eSense topcoat hardener, mat H 2P96 - eSense topcoat hardener, mat slow",
+      "documentHref": "/documents/products/rm/c-2p96-satin-finish-r/rm-c-2p96-satin-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-5450-ghd-clear",
+      "productCode": "C 5450",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 750, H 700, H 770) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 750 - Topcoat hardener, normal H 700 - Topcoat hardener, fast H 770 - Topcoat hardener, slow premium",
+      "documentHref": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-5450-ghd-clear",
+      "productCode": "C 5450",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (GV 300, GV 400, GV 200) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner GV 300 - Thinner, slow GV 400 - Thinner, very slow GV 200 - Thinner, medium",
+      "documentHref": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2p15-easy-finish-r",
+      "productCode": "C 2P15",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2P25, H 2P35.",
+      "sourceExcerpt": "Hardener H 2P05 - eSense topcoat hardener, plus H 2P15 - eSense topcoat hardener, fast H 2P25 - eSense topcoat hardener, medium H 2P35 - eSense topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "ghd-topcoat",
+      "productCode": "GHD TOPCOAT",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 750, H 770, H 700) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 750 - Topcoat hardener, normal H 770 - Topcoat hardener, slow premium H 700 - Topcoat hardener, fast",
+      "documentHref": "/documents/products/rm/ghd-topcoat/rm-ghd-topcoat-technical-data-sheet.pdf",
+      "page": 2,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "ghd-topcoat",
+      "productCode": "GHD TOPCOAT",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (GV 300, GV 400, GV 200) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner GV 300 - Thinner, slow GV 400 - Thinner, very slow GV 200 - Thinner, medium",
+      "documentHref": "/documents/products/rm/ghd-topcoat/rm-ghd-topcoat-technical-data-sheet.pdf",
+      "page": 2,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a41-performfiller-white",
+      "productCode": "P 2A41",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2A30, H 2A31) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2A30 - Primer filler hardener H 2A31 - Primer filler hardener, slow",
+      "documentHref": "/documents/products/rm/p-2a41-performfiller-white/rm-p-2a41-performfiller-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a41-performfiller-white",
+      "productCode": "P 2A41",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/p-2a41-performfiller-white/rm-p-2a41-performfiller-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a61-multiprotect-white",
+      "productCode": "P 2A61",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2A60) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2A60 - Multi protect hardener",
+      "documentHref": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a61-multiprotect-white",
+      "productCode": "P 2A61",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a63-multiprotect-grey",
+      "productCode": "P 2A63",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2A60) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2A60 - Multi protect hardener",
+      "documentHref": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a63-multiprotect-grey",
+      "productCode": "P 2A63",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a65-multiprotect-black",
+      "productCode": "P 2A65",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2A60) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2A60 - Multi protect hardener",
+      "documentHref": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2a65-multiprotect-black",
+      "productCode": "P 2A65",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2e23-primer-filler-grey",
+      "productCode": "P 2E23",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2E23) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2E23 - Filler hardener",
+      "documentHref": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2e23-primer-filler-grey",
+      "productCode": "P 2E23",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2E20, R 2E30.",
+      "sourceExcerpt": "Thinner R 2E10 - Thinner, fast R 2E20 - Thinner, medium R 2E30 - Thinner, slow",
+      "documentHref": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p23-air-purpos-r-grey",
+      "productCode": "P 2P23",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P20) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P20 - eSense AIR Purpos-R hardener",
+      "documentHref": "/documents/products/rm/p-2p23-air-purpos-r-grey/rm-p-2p23-air-purpos-r-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p51-sanding-fill-r-white",
+      "productCode": "P 2P51",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P84) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P84 - eSense Fill-R hardener",
+      "documentHref": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p51-sanding-fill-r-white",
+      "productCode": "P 2P51",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P20 - eSense undercoat thinner, medium R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow",
+      "documentHref": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p55-sanding-fill-r-black",
+      "productCode": "P 2P55",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P84) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P84 - eSense Fill-R hardener",
+      "documentHref": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p55-sanding-fill-r-black",
+      "productCode": "P 2P55",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P20 - eSense undercoat thinner, medium R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow",
+      "documentHref": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p63-multi-purpos-r-grey",
+      "productCode": "P 2P63",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P60) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P60 - eSense MULTI Purpos-R hardener",
+      "documentHref": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p63-multi-purpos-r-grey",
+      "productCode": "P 2P63",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2P25, R 2P35.",
+      "sourceExcerpt": "Thinner R 2P15 - eSense thinner, fast R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow R 2P20 - eSense undercoat thinner, medium",
+      "documentHref": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p81-race-wet-fill-r-white",
+      "productCode": "P 2P81",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P80) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P80 - eSense filler hardener",
+      "documentHref": "/documents/products/rm/p-2p81-race-wet-fill-r-white/rm-p-2p81-race-wet-fill-r-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p81-race-wet-fill-r-white",
+      "productCode": "P 2P81",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (R 2P25, R 2P35, R 2P45) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow R 2P45 - eSense thinner, extra slow",
+      "documentHref": "/documents/products/rm/p-2p81-race-wet-fill-r-white/rm-p-2p81-race-wet-fill-r-white-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p85-race-wet-fill-r-black",
+      "productCode": "P 2P85",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 2P80) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 2P80 - eSense filler hardener",
+      "documentHref": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-2p85-race-wet-fill-r-black",
+      "productCode": "P 2P85",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (R 2P25, R 2P35, R 2P45) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner R 2P25 - eSense thinner, medium R 2P35 - eSense thinner, slow R 2P45 - eSense thinner, extra slow",
+      "documentHref": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-5480-ghd-universal-epoxy",
+      "productCode": "P 5480",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 5480) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 5480 - GHD UNIVERSAL EP HARDENER",
+      "documentHref": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-technical-data-sheet.pdf",
+      "page": 2,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-5480-ghd-universal-epoxy",
+      "productCode": "P 5480",
+      "field": "thinnerProductSlugs",
+      "detail": "Navedene šifre (A 5480) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Thinner A 5480 - GHD ADDITIVE for UNIVERSAL EP",
+      "documentHref": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-technical-data-sheet.pdf",
+      "page": 2,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-5530-ghd-uni-wash",
+      "productCode": "P 5530",
+      "field": "hardenerProductSlugs",
+      "detail": "Navedene šifre (H 5430) nisu u Carsystem katalogu.",
+      "sourceExcerpt": "Hardener H 5430 - GHD SLOW ACTIVATOR",
+      "documentHref": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "p-5530-ghd-uni-wash",
+      "productCode": "P 5530",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: GV 300, GV 400.",
+      "sourceExcerpt": "Thinner GV 300 - Thinner, slow GV 400 - Thinner, very slow Technical Information GHD UNI WASH P 5530 GHD UNI WASH, beige Page 2 of 3 07/2026",
+      "documentHref": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a84-protecttop",
+      "productCode": "C 2A84",
+      "field": "hardenerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: H 2A24, H 2A34.",
+      "sourceExcerpt": "Hardener H 2A14 - Topcoat hardener, fast H 2A24 - Topcoat hardener, medium H 2A34 - Topcoat hardener, slow",
+      "documentHref": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "referenced-product-not-in-catalogue",
+      "productSlug": "c-2a84-protecttop",
+      "productCode": "C 2A84",
+      "field": "thinnerProductSlugs",
+      "detail": "Deo navedenih šifara nije u katalogu: R 2A24, R 2A34.",
+      "sourceExcerpt": "Thinner R 2A14 - Thinner, fast R 2A24 - Thinner, medium R 2A34 - Thinner, slow",
+      "documentHref": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-technical-data-sheet.pdf",
+      "page": 1,
+      "resolution": "EXPERT REVIEW REQUIRED"
+    },
+    {
+      "type": "differing-mixing-ratio-within-system",
+      "group": "clearcoat::—",
+      "detail": "Ista kategorija i sistem, različiti odnosi mešanja: 2:1 + 10% / 2:1 / 4:1 / 3:1:1 / 1:1.",
+      "sources": [
+        {
+          "productCode": "C 2A46",
+          "ratio": "2:1 + 10%",
+          "documentHref": "/documents/products/rm/c-2a46-ultratop/rm-c-2a46-ultratop-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2A54",
+          "ratio": "2:1 + 10%",
+          "documentHref": "/documents/products/rm/c-2a54-performtop/rm-c-2a54-performtop-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2A57",
+          "ratio": "2:1",
+          "documentHref": "/documents/products/rm/c-2a57-mixtop/rm-c-2a57-mixtop-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2A63",
+          "ratio": "2:1 + 10%",
+          "documentHref": "/documents/products/rm/c-2a63-glosstop/rm-c-2a63-glosstop-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2A64",
+          "ratio": "2:1 + 10%",
+          "documentHref": "/documents/products/rm/c-2a64-glosstop/rm-c-2a64-glosstop-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2A93",
+          "ratio": "2:1",
+          "documentHref": "/documents/products/rm/c-2a93-mattop/rm-c-2a93-mattop-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2E10",
+          "ratio": "4:1",
+          "documentHref": "/documents/products/rm/c-2e10-clear-coat-premixed/rm-c-2e10-clear-coat-premixed-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2E50",
+          "ratio": "3:1:1",
+          "documentHref": "/documents/products/rm/c-2e50-clear-coat/rm-c-2e50-clear-coat-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P30",
+          "ratio": "1:1",
+          "documentHref": "/documents/products/rm/c-2p30-uv-finish-r/rm-c-2p30-uv-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P45",
+          "ratio": "3:1:1",
+          "documentHref": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P55",
+          "ratio": "3:1:1",
+          "documentHref": "/documents/products/rm/c-2p55-multi-finish-r/rm-c-2p55-multi-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P62",
+          "ratio": "3:1:1",
+          "documentHref": "/documents/products/rm/c-2p62-bright-finish-r/rm-c-2p62-bright-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P85",
+          "ratio": "3:1:1",
+          "documentHref": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P91",
+          "ratio": "2:1",
+          "documentHref": "/documents/products/rm/c-2p91-mat-finish-r/rm-c-2p91-mat-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P96",
+          "ratio": "2:1",
+          "documentHref": "/documents/products/rm/c-2p96-satin-finish-r/rm-c-2p96-satin-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2P15",
+          "ratio": "4:1",
+          "documentHref": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "C 2A84",
+          "ratio": "2:1 + 10%",
+          "documentHref": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-technical-data-sheet.pdf",
+          "page": 1
+        }
+      ],
+      "resolution": "EXPERT REVIEW REQUIRED",
+      "note": "Razlika je verovatno legitimna (različiti proizvodi), ali nije potvrđena izvorom. Ne razrešavati automatski."
+    },
+    {
+      "type": "differing-mixing-ratio-within-system",
+      "group": "primer-filler::—",
+      "detail": "Ista kategorija i sistem, različiti odnosi mešanja: 5:1:1 / 4:1:1 / 3:1:1.",
+      "sources": [
+        {
+          "productCode": "P 2A61",
+          "ratio": "5:1:1",
+          "documentHref": "/documents/products/rm/p-2a61-multiprotect-white/rm-p-2a61-multiprotect-white-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2A63",
+          "ratio": "5:1:1",
+          "documentHref": "/documents/products/rm/p-2a63-multiprotect-grey/rm-p-2a63-multiprotect-grey-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2A65",
+          "ratio": "5:1:1",
+          "documentHref": "/documents/products/rm/p-2a65-multiprotect-black/rm-p-2a65-multiprotect-black-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2E23",
+          "ratio": "4:1:1",
+          "documentHref": "/documents/products/rm/p-2e23-primer-filler-grey/rm-p-2e23-primer-filler-grey-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2P23",
+          "ratio": "4:1:1",
+          "documentHref": "/documents/products/rm/p-2p23-air-purpos-r-grey/rm-p-2p23-air-purpos-r-grey-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2P51",
+          "ratio": "4:1:1",
+          "documentHref": "/documents/products/rm/p-2p51-sanding-fill-r-white/rm-p-2p51-sanding-fill-r-white-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2P55",
+          "ratio": "4:1:1",
+          "documentHref": "/documents/products/rm/p-2p55-sanding-fill-r-black/rm-p-2p55-sanding-fill-r-black-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2P63",
+          "ratio": "5:1:1",
+          "documentHref": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+          "page": 1
+        },
+        {
+          "productCode": "P 2P85",
+          "ratio": "3:1:1",
+          "documentHref": "/documents/products/rm/p-2p85-race-wet-fill-r-black/rm-p-2p85-race-wet-fill-r-black-technical-data-sheet.pdf",
+          "page": 1
+        }
+      ],
+      "resolution": "EXPERT REVIEW REQUIRED",
+      "note": "Razlika je verovatno legitimna (različiti proizvodi), ali nije potvrđena izvorom. Ne razrešavati automatski."
+    }
+  ]
+}

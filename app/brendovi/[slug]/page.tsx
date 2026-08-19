@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BaslacBrandPage } from "@/components/baslac-brand/BaslacBrandPage";
+import { BefarBrandPage } from "@/components/brand/befar/BefarBrandPage";
 import { BrandPage } from "@/components/brand/BrandPage";
 import { CarfitBrandPage } from "@/components/brand/carfit/CarfitBrandPage";
+import { CosmosBrandPage } from "@/components/brand/cosmos/CosmosBrandPage";
 import { CarsystemBrandPage } from "@/components/carsystem-brand/CarsystemBrandPage";
 import { carsystemSeo } from "@/components/carsystem-brand/carsystemBrandData";
+import { NorbinBrandPage } from "@/components/norbin-brand/NorbinBrandPage";
 import { RmBrandPage } from "@/components/rm-brand/RmBrandPage";
+import { BEFAR_BRAND_SLUG } from "@/lib/befar-brand-data";
 import { CARFIT_BRAND_SLUG } from "@/lib/carfit-brand-data";
 import {
   getAllCarsystemBrands,
@@ -51,6 +55,16 @@ export async function generateMetadata({
     });
   }
 
+  if (brand.slug === BEFAR_BRAND_SLUG) {
+    return buildPageMetadata({
+      title: `${brand.name} — pene, podloške i međupodloške za poliranje`,
+      description:
+        "Befar program u ponudi Carsystem i R-M: pene za poliranje po tvrdoći, podloške i međupodloške sa 7, 15 i 62 otvora, brusni blokovi i hemija za korekciju i zaštitu laka.",
+      path: `/brendovi/${brand.slug}`,
+      imageAlt: `${brand.name} program pena, podloški i međupodloški za poliranje`,
+    });
+  }
+
   return buildBrandMetadata(brand);
 }
 
@@ -92,8 +106,14 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
         <CarsystemBrandPage products={products} />
       ) : brand.slug === "baslac" ? (
         <BaslacBrandPage products={products} />
+      ) : brand.slug === "norbin" ? (
+        <NorbinBrandPage products={products} />
       ) : brand.slug === CARFIT_BRAND_SLUG ? (
         <CarfitBrandPage brand={brand} />
+      ) : brand.slug === "cosmos-lac" ? (
+        <CosmosBrandPage brand={brand} products={products} />
+      ) : brand.slug === BEFAR_BRAND_SLUG ? (
+        <BefarBrandPage brand={brand} products={products} />
       ) : (
         <BrandPage
           brand={brand}

@@ -76,7 +76,12 @@ test("accordion state cannot key or remount the sticky media subtree", async () 
     readFile(stageUrl, "utf8"),
   ]);
 
-  assert.match(page, /<ProductStickyStage product=\{product\}/);
+  // The stage is mounted once, with plain props and no `key`, so nothing the
+  // accordion does can remount the media subtree. `images` is resolved on the
+  // server (productStageImages.ts) precisely so the stage stays a leaf.
+  assert.match(page, /<ProductStickyStage\b[\s\S]{0,200}?product=\{product\}/);
+  assert.doesNotMatch(page, /<ProductStickyStage[^>]*\skey=/);
+  assert.match(page, /const stageImages = getProductStageImages\(product\)/);
   assert.doesNotMatch(page, /openSectionIds/);
   assert.doesNotMatch(stage, /openSectionIds|accordion|key=\{.*open/);
   assert.match(stage, /const \[activeIndex, setActiveIndex\] = useState\(0\)/);

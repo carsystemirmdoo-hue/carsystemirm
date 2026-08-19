@@ -10,11 +10,16 @@ import {
 } from "react";
 import type { CarsystemProduct, ProductImageAsset } from "@/lib/carsystem-data";
 import {
-  getProductVisualPreset,
-  getProductVisualStyle,
-} from "@/components/product/productMotion";
+  toProductVisualPresentation,
+  type ProductVisualPresentation,
+} from "@/components/product/productVisualPresentation";
 import { nextRevealDirection } from "@/components/product/productRevealDirection.mjs";
+import fit from "./ProductImageFit.generated.module.css";
 import { resetLocalPointerVars } from "@/components/motion/useLocalPointerVars";
+import {
+  registerProductSurface,
+  type ProductSurfaceRegistration,
+} from "@/components/motion/productSurfaceLifecycle";
 import styles from "./ProductVisualSurface.module.css";
 
 type ProductInteractionPhase = "idle" | "active" | "exiting";
@@ -63,10 +68,20 @@ function resetSurfacePointerMotion(surface: HTMLElement) {
   surface.style.setProperty("--product-visual-tilt-y", "0deg");
 }
 
+/**
+ * Accepts either a full `CarsystemProduct` (PDP, brand pages, related rows) or a
+ * pre-resolved `presentation` (catalog cards).
+ *
+ * The catalog path exists because this is a client component: passing the rich
+ * product here re-serialised the whole record into the RSC payload once per
+ * rendered card. The rendered markup is identical either way — the presentation
+ * is produced by the same two helpers this component would otherwise call.
+ */
 export function ProductVisualSurface({
   brandName,
   className,
   image,
+  presentation,
   priority = false,
   product,
   sizes,
@@ -74,15 +89,30 @@ export function ProductVisualSurface({
   brandName: string;
   className?: string;
   image?: ProductImageAsset | null;
+  presentation?: ProductVisualPresentation;
   priority?: boolean;
-  product: CarsystemProduct;
+  product?: CarsystemProduct;
   sizes: string;
 }) {
-  const selectedImage = image ?? product.productImage ?? product.galleryImages[0] ?? null;
+  const resolved: ProductVisualPresentation =
+    presentation ??
+    toProductVisualPresentation(
+      product as CarsystemProduct,
+      image ?? undefined,
+    );
+  const selectedImage = image ?? resolved.image;
   const hasProductAsset = Boolean(
     selectedImage && !selectedImage.src.includes("placeholder-product"),
   );
-  const visual = getProductVisualPreset(product);
+  const visual = {
+    treatment: resolved.treatment,
+    productType: resolved.productType,
+    visualMode: resolved.visualMode,
+  };
+  const productSize = { volumeStatus: resolved.volumeStatus };
+  const sizeClass = resolved.sizeClass;
+  const quantityLabel = resolved.quantityLabel;
+  const productSlug = resolved.slug;
   const [interactionPhase, setInteractionPhase] =
     useState<ProductInteractionPhase>("idle");
   const [revealDirection, setRevealDirection] = useState<RevealDirection>("top");
@@ -96,7 +126,18 @@ export function ProductVisualSurface({
   const stationaryPointerSuppressedRef = useRef(false);
   const lastPointerPositionRef = useRef<{ x: number; y: number } | null>(null);
   const exitTimerRef = useRef<number | null>(null);
-  const surfaceClassName = [styles.surface, className].filter(Boolean).join(" ");
+  const registrationRef = useRef<ProductSurfaceRegistration | null>(null);
+  /*
+   * `fit.fit` publishes this image's content box as custom properties (see
+   * `ProductImageFit.generated.module.css`). It is a stylesheet rather than a
+   * lookup the component could call because the catalog renders its cards from
+   * a client component: a table covering all 826 renders would otherwise have
+   * to ship as JavaScript. An image with no rule falls back to canvas-fit, so
+   * SVG illustrations and placeholders keep their previous behaviour.
+   */
+  const surfaceClassName = [styles.surface, fit.fit, className]
+    .filter(Boolean)
+    .join(" ");
 
   const clearExitTimer = useCallback(() => {
     if (exitTimerRef.current === null) return;
@@ -109,6 +150,9 @@ export function ProductVisualSurface({
     interactionPhaseRef.current = "idle";
     setInteractionPhase("idle");
     setIsSurfacePointerActive(false);
+    // Idle instanca izlazi iz hub dispatch skupa — scroll i pointercancel je
+    // više ne dodiruju dok se ponovo ne aktivira.
+    registrationRef.current?.setActive(false);
   }, [clearExitTimer]);
 
   const resetPointerMotion = useCallback(() => {
@@ -126,14 +170,15 @@ export function ProductVisualSurface({
 
     if (interactionPhaseRef.current === "idle" && visual.visualMode === "color-on-hover") {
       const selectedDirection =
-        getDevelopmentDirectionOverride() ?? nextRevealDirection(product.slug);
+        getDevelopmentDirectionOverride() ?? nextRevealDirection(productSlug);
       setRevealDirection(selectedDirection);
     }
 
     interactionPhaseRef.current = "active";
     setInteractionPhase("active");
     setIsSurfacePointerActive(true);
-  }, [clearExitTimer, product.slug, visual.visualMode]);
+    registrationRef.current?.setActive(true);
+  }, [clearExitTimer, productSlug, visual.visualMode]);
 
   const beginExit = useCallback(() => {
     if (interactionPhaseRef.current === "idle" || interactionPhaseRef.current === "exiting") {
@@ -234,24 +279,9 @@ export function ProductVisualSurface({
       if (event.pointerType !== "touch" || touchPointerIdRef.current !== null) return;
       stationaryPointerSuppressedRef.current = false;
       touchPointerIdRef.current = event.pointerId;
+      registrationRef.current?.setTouchPointerId(event.pointerId);
       updateSurfacePointerMotion(activeSurface, event);
       activateInteraction();
-    }
-
-    function finishTouchPointer(event: globalThis.PointerEvent) {
-      if (touchPointerIdRef.current !== event.pointerId) return;
-      touchPointerIdRef.current = null;
-      exitWhenInactive();
-    }
-
-    function handlePointerCancel(event: globalThis.PointerEvent) {
-      if (event.pointerType === "touch") {
-        finishTouchPointer(event);
-        return;
-      }
-
-      pointerSessionRef.current = false;
-      exitWhenInactive();
     }
 
     function handleFocusIn(event: FocusEvent) {
@@ -284,6 +314,7 @@ export function ProductVisualSurface({
       pointerSessionRef.current = false;
       focusSessionRef.current = false;
       touchPointerIdRef.current = null;
+      registrationRef.current?.setTouchPointerId(null);
       stationaryPointerSuppressedRef.current = true;
       resetPointerMotion();
       beginExit();
@@ -292,13 +323,10 @@ export function ProductVisualSurface({
     function handleScroll() {
       pointerSessionRef.current = false;
       touchPointerIdRef.current = null;
+      registrationRef.current?.setTouchPointerId(null);
       stationaryPointerSuppressedRef.current = true;
       resetPointerMotion();
       exitWhenInactive();
-    }
-
-    function handleVisibilityChange() {
-      if (document.visibilityState === "hidden") forceInteractionCleanup();
     }
 
     function handleWindowFocus() {
@@ -312,29 +340,46 @@ export function ProductVisualSurface({
       }
     }
 
-    const pointerStateObserver =
+    /*
+     * Globalni deo lifecycle-a je zajednički za sve surface instance na
+     * dokumentu (jedan listener po događaju, jedan MutationObserver ukupno).
+     * Hub prosleđuje događaj samo instanci koja može da reaguje, pa scroll bez
+     * aktivne kartice ne radi ništa po kartici.
+     */
+    registrationRef.current =
       interactionRoot === activeSurface
         ? null
-        : new MutationObserver(() => {
-            if (interactionRoot.dataset.pointerActive === "true") {
-              if (stationaryPointerSuppressedRef.current) return;
-              if (!pointerSessionRef.current) {
-                pointerSessionRef.current = true;
-                activateInteraction();
-              }
-              return;
-            }
-
-            if (pointerSessionRef.current) {
+        : registerProductSurface(interactionRoot, {
+            onTouchPointerRelease() {
+              const pointerId = touchPointerIdRef.current;
+              if (pointerId === null) return;
+              touchPointerIdRef.current = null;
+              registrationRef.current?.setTouchPointerId(null);
+              exitWhenInactive();
+            },
+            onPointerCancel() {
               pointerSessionRef.current = false;
               exitWhenInactive();
-            }
-          });
+            },
+            onScroll: handleScroll,
+            onForceCleanup: forceInteractionCleanup,
+            onWindowFocus: handleWindowFocus,
+            onPointerActiveChange() {
+              if (interactionRoot.dataset.pointerActive === "true") {
+                if (stationaryPointerSuppressedRef.current) return;
+                if (!pointerSessionRef.current) {
+                  pointerSessionRef.current = true;
+                  activateInteraction();
+                }
+                return;
+              }
 
-    pointerStateObserver?.observe(interactionRoot, {
-      attributes: true,
-      attributeFilter: ["data-pointer-active"],
-    });
+              if (pointerSessionRef.current) {
+                pointerSessionRef.current = false;
+                exitWhenInactive();
+              }
+            },
+          });
 
     interactionRoot.addEventListener("pointerenter", handlePointerEnter);
     interactionRoot.addEventListener("pointermove", handlePointerMove, { passive: true });
@@ -342,31 +387,16 @@ export function ProductVisualSurface({
     interactionRoot.addEventListener("pointerdown", handlePointerDown, { passive: true });
     interactionRoot.addEventListener("focusin", handleFocusIn);
     interactionRoot.addEventListener("focusout", handleFocusOut);
-    document.addEventListener("pointerup", finishTouchPointer, { passive: true });
-    document.addEventListener("pointercancel", handlePointerCancel, { passive: true });
-    document.addEventListener("lostpointercapture", handlePointerCancel, true);
-    document.addEventListener("scroll", handleScroll, true);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("blur", forceInteractionCleanup);
-    window.addEventListener("focus", handleWindowFocus);
-    window.addEventListener("pagehide", forceInteractionCleanup);
 
     return () => {
-      pointerStateObserver?.disconnect();
+      registrationRef.current?.release();
+      registrationRef.current = null;
       interactionRoot.removeEventListener("pointerenter", handlePointerEnter);
       interactionRoot.removeEventListener("pointermove", handlePointerMove);
       interactionRoot.removeEventListener("pointerleave", handlePointerLeave);
       interactionRoot.removeEventListener("pointerdown", handlePointerDown);
       interactionRoot.removeEventListener("focusin", handleFocusIn);
       interactionRoot.removeEventListener("focusout", handleFocusOut);
-      document.removeEventListener("pointerup", finishTouchPointer);
-      document.removeEventListener("pointercancel", handlePointerCancel);
-      document.removeEventListener("lostpointercapture", handlePointerCancel, true);
-      document.removeEventListener("scroll", handleScroll, true);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("blur", forceInteractionCleanup);
-      window.removeEventListener("focus", handleWindowFocus);
-      window.removeEventListener("pagehide", forceInteractionCleanup);
       clearExitTimer();
       resetSurfacePointerMotion(activeSurface);
       if (interactionRoot !== activeSurface) resetLocalPointerVars(interactionRoot, true);
@@ -395,6 +425,7 @@ export function ProductVisualSurface({
       ref={surfaceRef}
       className={surfaceClassName}
       data-product-image-motion
+      data-product-fit={hasProductAsset ? selectedImage?.src : undefined}
       data-product-visual-real-image={hasProductAsset ? "true" : "false"}
       data-product-visual-pointer-active={isSurfacePointerActive ? "true" : undefined}
       data-product-visual-surface
@@ -402,8 +433,9 @@ export function ProductVisualSurface({
       data-product-visual-type={visual.productType}
       data-product-visual-mode={visual.visualMode}
       data-product-visual-state={interactionPhase}
+      data-product-size-class={sizeClass}
       data-reveal-direction={`from-${revealDirection}`}
-      style={getProductVisualStyle(product)}
+      style={resolved.style}
     >
       <span className={styles.baseLayer} aria-hidden="true" />
       <span
@@ -445,10 +477,17 @@ export function ProductVisualSurface({
             <span className={styles.placeholderMark} />
             <small>Vizuel u pripremi</small>
             <strong>{brandName}</strong>
-            <span>{product.name}</span>
+            <span>{resolved.name}</span>
           </span>
         )}
       </span>
+
+      {quantityLabel ? (
+        <span className={styles.quantityBadge} data-status={productSize.volumeStatus}>
+          <span className={styles.quantityBadgeRule} aria-hidden="true" />
+          {quantityLabel}
+        </span>
+      ) : null}
       <span className={styles.pointerLens} aria-hidden="true" />
     </span>
   );

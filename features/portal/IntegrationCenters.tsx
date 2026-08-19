@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { customers, products } from "@/mock-data/portal";
+import { customers, products } from "@/fixtures/dev/portal";
 import type { BexShipment, BizniSoftSyncRecord } from "@/types/portal";
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import { usePortal } from "@/components/portal/PortalProvider";

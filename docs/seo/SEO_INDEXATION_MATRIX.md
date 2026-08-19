@@ -11,6 +11,10 @@ Produkcioni canonical origin je https://carsystemirm.com. Preview/development ok
 | brand | /brendovi/rm | da | self | index, follow | da | Brand, CollectionPage, BreadcrumbList | programi, kategorije, PDP, kontakt |
 | program | /program/boje-i-lakovi | da | self | index, follow | da | CollectionPage, BreadcrumbList | brendovi, povezani PDP |
 | product | /proizvodi/2220-agilis-activator | da | self | index, follow | da | Product, BreadcrumbList | brand, program/category, povezani PDP, kontakt |
+| product group | /proizvodi/grupa/cosmos-lac-flame-orange | da | self | index, follow | da | ProductGroup, BreadcrumbList | brand, varijante, katalog |
+| product variant | /proizvodi/cosmos-lac-flame-orange-fo-100-... | konsolidovano | **grupa** | index, follow | **ne** | Product + isVariantOf, BreadcrumbList | grupa, sestrinske varijante, brand |
+| guide index | /vodici | samo ako postoji objavljen vodič | self | noindex dok je prazan | samo ako nije prazan | nema | kontakt, katalog |
+| guide | /vodici/[slug] | samo ako je expert-verified | self | index, follow | da | Article, BreadcrumbList | proizvodi, srodni vodiči |
 | store locator | /prodavnice | da | self | index, follow | da | CollectionPage, Store/LocalBusiness samo za verifikovane lokacije, BreadcrumbList | kontakt, katalog |
 | contact | /kontakt | da | self | index, follow | da | BreadcrumbList | prodavnice, katalog |
 | filtered catalog | /katalog?brend=rm | ne | /katalog | X-Robots-Tag noindex, follow | ne | nije target landing | čiste kategorije i PDP ostaju crawlable |
@@ -29,6 +33,8 @@ Produkcioni canonical origin je https://carsystemirm.com. Preview/development ok
 - lib/seo.ts: JSON-LD helperi sa bezbednim serijalizovanjem.
 - middleware.ts: canonical host i HTTP robots direktive za query/internal rute.
 - app/sitemap.ts i app/robots.ts: crawl ulazi.
+- lib/product-families.ts: izvođenje grupa proizvoda i jedini predikat za konsolidaciju varijanti.
+- lib/knowledge/*: domenski sloj, poreklo tvrdnji i status stručnog pregleda.
 
 ## Pravila
 
@@ -38,3 +44,7 @@ Produkcioni canonical origin je https://carsystemirm.com. Preview/development ok
 - Noindex i redirect rute nemaju canonical koji bi lažno predstavljao drugi sadržaj.
 - PDF noindex nije robots.txt disallow; crawler mora da vidi response header.
 - Ne postoji Offer markup bez potvrđene cene, valute, dostupnosti i uslova.
+- Varijanta koja se konsoliduje na grupu nikada ne dobija noindex — canonical i noindex zajedno su kontradiktoran signal.
+- URL koji nije u sitemapu mora ili da bude konsolidovan na grupu ili da bude noindex; ne sme biti indeksabilan siroče-duplikat.
+- Nijedna indeksabilna stranica ne postoji samo zato što postoji zapis u podacima. Vodič bez stručno potvrđenog teksta nema URL.
+- Schema se emituje samo za odnose koji su vidljivi na stranici.

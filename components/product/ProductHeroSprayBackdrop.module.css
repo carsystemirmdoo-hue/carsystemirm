@@ -19,12 +19,19 @@
     scale(var(--spray-scale));
 }
 
+/*
+ * The stroke takes its colour from `--product-art-color`, which the stage sets
+ * per contrast mode, and only falls back to the raw product colour when no
+ * decision was made. Painting the stroke in the product's own shade is what put
+ * a black bottle in front of a black stroke; the art has to stay a decoration
+ * that the product can be read against, not a copy of it.
+ */
 .spraySvg {
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
-  color: var(--product-visual-background-color);
+  color: var(--product-art-color, var(--product-visual-background-color));
   pointer-events: none;
 }
 

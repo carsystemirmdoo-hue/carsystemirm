@@ -79,7 +79,14 @@ const technicalCategoryLabels: Record<string, string> = {
   "ral-spray": "RAL sprej",
 };
 
-const cosmosColorCategories = new Set([
+/**
+ * Technical categories whose variants genuinely differ by colour.
+ *
+ * Exported because `variesBy` on the family ProductGroup must not infer
+ * "colour" from the presence of a `colorName`: the generator also uses that
+ * field as a generic variant label, so lubricants and cleaners carry one too.
+ */
+export const cosmosColorCategories = new Set([
   "acrylic-spray",
   "art-and-graffiti",
   "automotive-paint",

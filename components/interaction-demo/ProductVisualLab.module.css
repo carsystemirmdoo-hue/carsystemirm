@@ -1,0 +1,482 @@
+/*
+ * Visual lab styles — INTERNAL, non-production.
+ *
+ * Nothing in this file is imported by a public route. The scene layers below
+ * are candidate directions for review; only the production surfaces they wrap
+ * (`ProductVisualSurface`, the PDP stage) ship today.
+ */
+
+.page {
+  --lab-ink: oklch(0.2 0.014 255);
+  --lab-muted: oklch(0.52 0.02 255);
+  --lab-line: oklch(0.28 0.016 255 / 0.16);
+  --lab-bg: oklch(0.97 0.005 255);
+  --lab-surface: oklch(1 0 0);
+  min-height: 100vh;
+  background: var(--lab-bg);
+  color: var(--lab-ink);
+  padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 4vw, 3rem) 6rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.masthead {
+  max-width: 62rem;
+  margin-bottom: 3rem;
+}
+
+.masthead h1 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.masthead p {
+  margin: 0 0 0.6rem;
+  max-width: 52rem;
+  color: var(--lab-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  border: 1px solid var(--lab-line);
+  padding: 0.3rem 0.6rem;
+  color: oklch(0.55 0.2 27);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section {
+  margin-bottom: 4.5rem;
+  scroll-margin-top: 2rem;
+}
+
+.sectionHead {
+  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--lab-line);
+  padding-top: 1rem;
+}
+
+.sectionHead h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.sectionHead p {
+  margin: 0;
+  max-width: 56rem;
+  color: var(--lab-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+}
+
+.toc a {
+  border: 1px solid var(--lab-line);
+  background: var(--lab-surface);
+  color: inherit;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.1rem;
+}
+
+.gridWide {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  display: grid;
+  overflow: hidden;
+  align-content: start;
+  border: 1px solid var(--lab-line);
+  background: var(--lab-surface);
+}
+
+.cardMeta {
+  display: grid;
+  gap: 0.28rem;
+  border-top: 1px solid var(--lab-line);
+  padding: 0.65rem 0.7rem 0.8rem;
+}
+
+.cardMeta strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cardMeta dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.1rem 0.5rem;
+  margin: 0.3rem 0 0;
+}
+
+.cardMeta dt {
+  color: var(--lab-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cardMeta dd {
+  margin: 0;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.65rem;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid var(--lab-line);
+  padding: 0.1rem 0.35rem;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scene layers — experimental                                        */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Every scene is a single decorative plane behind the product. They are all
+ * static and deterministic: geometry comes from the product's own seed, so a
+ * given product always draws the same scene on the server and in the browser.
+ */
+.scene {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    oklch(0.985 0.003 255),
+    oklch(0.945 0.007 255)
+  );
+  container-type: size;
+  isolation: isolate;
+}
+
+.sceneArt {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sceneArt svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sceneHalo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    56% 46% at 50% 48%,
+    var(--lab-halo, transparent) 0%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+.sceneProduct {
+  --lab-envelope-w: 66cqw;
+  --lab-envelope-h: 80cqh;
+  --lab-fit-w: min(
+    var(--lab-envelope-w),
+    calc(var(--lab-envelope-h) * var(--product-content-aspect))
+  );
+  position: absolute;
+  z-index: 3;
+  top: 48%;
+  left: 50%;
+  width: calc(var(--lab-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  transform: translate(
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+    calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+  );
+}
+
+.sceneProduct img {
+  object-fit: contain;
+}
+
+/*
+ * The "before" column. Reproduces the geometry this pass replaced — the scale
+ * envelope applied to the image FILE with a hard px ceiling — so the two
+ * columns differ only in what the envelope measures.
+ */
+.legacyProduct {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(66cqw, 260px);
+  height: 66cqh;
+  transform: translate(-50%, -50%);
+}
+
+.legacyProduct img {
+  object-fit: contain;
+  transform: scale(0.92);
+}
+
+/* Scale ladder demo: one product, four envelopes. */
+.scaleS {
+  --lab-envelope-w: 58cqw;
+  --lab-envelope-h: 74cqh;
+}
+
+.scaleM {
+  --lab-envelope-w: 66cqw;
+  --lab-envelope-h: 80cqh;
+}
+
+.scaleL {
+  --lab-envelope-w: 74cqw;
+  --lab-envelope-h: 86cqh;
+}
+
+.scaleXL {
+  --lab-envelope-w: 82cqw;
+  --lab-envelope-h: 92cqh;
+}
+
+.darkFrame {
+  background: oklch(0.115 0.011 255);
+  padding: 1.1rem;
+}
+
+.darkFrame .scene {
+  background: linear-gradient(
+    180deg,
+    oklch(0.16 0.013 255),
+    oklch(0.128 0.011 255)
+  );
+}
+
+.darkFrame .card {
+  border-color: oklch(0.9 0.01 255 / 0.14);
+  background: oklch(0.15 0.013 255);
+  color: oklch(0.93 0.008 255);
+}
+
+.darkFrame .cardMeta {
+  border-color: oklch(0.9 0.01 255 / 0.14);
+}
+
+.darkFrame .cardMeta dt {
+  color: oklch(0.68 0.02 255);
+}
+
+.note {
+  margin: 1rem 0 0;
+  border-left: 2px solid oklch(0.55 0.2 27);
+  color: var(--lab-muted);
+  padding-left: 0.8rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.7rem;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--lab-line);
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table th {
+  color: var(--lab-muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Directions in context                                              */
+/* ------------------------------------------------------------------ */
+
+.directionRow {
+  margin-bottom: 2.2rem;
+}
+
+.directionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.directionHead strong {
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.directionHead p {
+  flex: 1 1 100%;
+  margin: 0.2rem 0 0;
+  color: var(--lab-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.tag[data-maturity="production-ready"] {
+  border-color: oklch(0.55 0.15 145);
+  color: oklch(0.42 0.15 145);
+}
+
+.tag[data-maturity="needs refinement"] {
+  border-color: oklch(0.68 0.14 75);
+  color: oklch(0.48 0.14 75);
+}
+
+.tag[data-maturity="experiment only"] {
+  border-color: oklch(0.6 0.02 250);
+  color: var(--lab-muted);
+}
+
+/*
+ * Three surfaces, one row. The ratios are the real ones: the catalog card is
+ * 1.1:1 (CatalogPage.module.css), the PDP panel 5:6 in portrait format
+ * (ProductDetailExperience.module.css), and a group hero would be 16:9.
+ */
+.contextRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.78fr) minmax(0, 1.6fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+.contextCard {
+  aspect-ratio: 1.1 / 1;
+}
+
+.contextPdp {
+  aspect-ratio: 5 / 6;
+}
+
+.contextHero {
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 900px) {
+  .contextRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Icon rain → pile                                                   */
+/* ------------------------------------------------------------------ */
+
+.rainFrame {
+  aspect-ratio: 4 / 3;
+  --rain-color: oklch(0.45 0.03 250);
+  --rain-floor-color: oklch(0.35 0.02 250 / 0.22);
+  background: linear-gradient(
+    180deg,
+    oklch(0.985 0.003 255),
+    oklch(0.94 0.008 255)
+  );
+}
+
+.darkFrame .rainFrame {
+  --rain-color: oklch(0.72 0.025 250);
+  --rain-floor-color: oklch(0.02 0.01 250 / 0.5);
+  background: linear-gradient(
+    180deg,
+    oklch(0.17 0.013 255),
+    oklch(0.125 0.011 255)
+  );
+}
+
+/*
+ * The product sits on the same content-fit geometry as production, so the pile
+ * is judged against a correctly sized product rather than a stand-in.
+ */
+.rainProduct {
+  --rain-envelope-w: 46cqw;
+  --rain-envelope-h: 62cqh;
+  --rain-fit-w: min(
+    var(--rain-envelope-w),
+    calc(var(--rain-envelope-h) * var(--product-content-aspect))
+  );
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: calc(var(--rain-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  transform: translate(
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+    calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+  );
+}
+
+.rainProduct img {
+  object-fit: contain;
+}
+
+/* ------------------------------------------------------------------ */
+/* V1 / V2 side by side                                               */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Two equal columns, V1 left and V2 right. Equal on purpose: a comparison where
+ * one side gets more room is not a comparison.
+ */
+.compareRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+@media (max-width: 760px) {
+  .compareRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

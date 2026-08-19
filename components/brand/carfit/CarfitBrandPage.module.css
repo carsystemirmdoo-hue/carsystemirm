@@ -7,31 +7,43 @@
  */
 
 .pageShell {
-  --cf-red: #e2231a;
+  /*
+   * Brand tokeni su očitani direktno iz originalnog lockupa
+   * `public/brands/carfit.svg`: crvena `#e20613` nosi slova C.A.R i REBEL FLAIR,
+   * siva `#a7a6a6` nosi FIT i tačke-separatore. Ne procenjivati od oka.
+   */
+  --cf-red: #e20613;
   --cf-red-ink: #ffffff;
-  --cf-red-soft: oklch(0.58 0.21 28 / 0.12);
+  --cf-red-soft: color-mix(in srgb, #e20613 10%, transparent);
+  --cf-gray: #a7a6a6;
+  --cf-gray-soft: color-mix(in srgb, #a7a6a6 22%, transparent);
 
   --cf-paper: #ffffff;
-  --cf-paper-off: #f4f5f6;
-  --cf-steel: #e7e9eb;
-  --cf-steel-deep: #d5d8dc;
-  --cf-graphite: #1b1d20;
-  --cf-graphite-deep: #101113;
+  --cf-paper-off: #f5f5f4;
+  --cf-steel: #ebebe9;
+  --cf-steel-deep: #d8d8d6;
+  --cf-graphite: #1a1a1c;
+  --cf-graphite-deep: #0e0e10;
 
-  --cf-ink: #15171a;
-  --cf-ink-muted: #5a6068;
-  --cf-ink-faint: #878d95;
-  --cf-line: #dcdfe3;
-  --cf-line-strong: #c3c7cc;
+  --cf-ink: #17181a;
+  --cf-ink-muted: #5c5f63;
+  --cf-ink-faint: #8b8d90;
+  --cf-line: #e0e0de;
+  --cf-line-strong: var(--cf-gray);
 
-  --cf-invert-ink: #f3f4f5;
-  --cf-invert-muted: #a2a7ad;
-  --cf-invert-line: oklch(0.98 0.003 250 / 0.14);
-  --cf-invert-line-strong: oklch(0.98 0.003 250 / 0.28);
+  --cf-invert-ink: #f4f4f3;
+  --cf-invert-muted: #a7a6a6;
+  --cf-invert-line: oklch(0.98 0.002 90 / 0.14);
+  --cf-invert-line-strong: oklch(0.98 0.002 90 / 0.3);
 
-  --cf-gutter: clamp(1rem, 4vw, 3rem);
-  --cf-max: 82.5rem;
-  --cf-nav-offset: 4.35rem;
+  /* Tema za zajednički `BrandSectionNav`. */
+  --brand-nav-surface: rgb(255 255 255 / 0.94);
+  --brand-nav-border: color-mix(in srgb, #a7a6a6 55%, transparent);
+  --brand-nav-ink: #17181a;
+  --brand-nav-accent: #e20613;
+
+  --cf-gutter: var(--ds-gutter, clamp(20px, 4vw, 56px));
+  --cf-max: var(--ds-container-max, 1208px);
   --cf-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   min-height: 100vh;
@@ -44,21 +56,30 @@
 }
 
 :global(.dark) .pageShell {
-  --cf-red: #f0463c;
-  --cf-red-soft: oklch(0.62 0.21 28 / 0.16);
+  /* Brand crvena `#e20613` na skoro crnoj podlozi pada ispod AA, pa se u tamnoj
+     temi posvetljuje. Kanonska vrednost ostaje u svetloj temi i na logotipu. */
+  --cf-red: #ff3b30;
+  --cf-red-soft: color-mix(in srgb, #ff3b30 14%, transparent);
+  --cf-gray: #8e8e8d;
+  --cf-gray-soft: color-mix(in srgb, #a7a6a6 18%, transparent);
 
-  --cf-paper: #101113;
-  --cf-paper-off: #16181b;
-  --cf-steel: #1c1f22;
-  --cf-steel-deep: #232629;
-  --cf-graphite: #0a0b0c;
+  --cf-paper: #0f0f11;
+  --cf-paper-off: #161618;
+  --cf-steel: #1c1c1e;
+  --cf-steel-deep: #232325;
+  --cf-graphite: #0a0a0b;
   --cf-graphite-deep: #060607;
 
-  --cf-ink: #eef0f1;
-  --cf-ink-muted: #9aa0a7;
-  --cf-ink-faint: #767c83;
-  --cf-line: oklch(0.98 0.003 250 / 0.12);
-  --cf-line-strong: oklch(0.98 0.003 250 / 0.22);
+  --cf-ink: #f0f0ef;
+  --cf-ink-muted: #9c9c9e;
+  --cf-ink-faint: #78787a;
+  --cf-line: oklch(0.98 0.002 90 / 0.12);
+  --cf-line-strong: oklch(0.98 0.002 90 / 0.24);
+
+  --brand-nav-surface: rgb(15 15 17 / 0.94);
+  --brand-nav-border: oklch(0.98 0.002 90 / 0.16);
+  --brand-nav-ink: #f0f0ef;
+  --brand-nav-accent: #ff3b30;
 }
 
 .pageShell a {
@@ -229,17 +250,17 @@
   color: var(--cf-red);
 }
 
+/* Monospace je rezervisan za tehničke oznake; akcije koriste body font. */
 .btnLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   min-height: 2.75rem;
   color: var(--cf-ink);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .btnLink::after {
@@ -258,7 +279,7 @@
 /* --------------------------------------------------------------- breadcrumb */
 
 .breadcrumb {
-  background: var(--cf-graphite-deep);
+  background: transparent;
   color: var(--cf-invert-muted);
 }
 
@@ -267,7 +288,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  padding-block: 0.9rem;
+  padding-top: 1.35rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
@@ -305,7 +326,18 @@
   display: grid;
   align-items: center;
   gap: clamp(2.25rem, 4vw, 3.5rem);
-  padding-block: clamp(3rem, 6vw, 5.5rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+}
+
+/* Originalni C.A.R.FIT lockup — ne rekonstruisati wordmark tekstom. */
+.heroBrandMark {
+  margin: 0;
+}
+
+.heroLogo {
+  width: clamp(10rem, 17vw, 14.5rem);
+  height: auto;
 }
 
 .heroCopy {
@@ -490,68 +522,18 @@
   background: var(--cf-red);
 }
 
-/* ---------------------------------------------------------------- local nav */
+/* ----------------------------------------------------------- section nav */
 
-.localNav {
-  position: sticky;
-  top: var(--cf-nav-offset);
-  z-index: 20;
-  border-block: 1px solid var(--cf-line);
-  background: color-mix(in srgb, var(--cf-paper) 92%, transparent);
-  backdrop-filter: blur(14px);
-}
-
-.localNavList {
-  display: flex;
-  gap: 0.25rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-  list-style: none;
-}
-
-.localNavList::-webkit-scrollbar {
-  display: none;
-}
-
-.localNavLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 3rem;
-  padding-inline: 0.85rem;
-  color: var(--cf-ink-muted);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: color 180ms var(--cf-ease);
-}
-
-.localNavLink::before {
-  width: 2px;
-  height: 0.75rem;
-  background: transparent;
-  content: "";
-  transition: background-color 180ms var(--cf-ease);
-}
-
-.localNavLink:hover {
-  color: var(--cf-ink);
-}
-
-.localNavLink[aria-current="true"] {
-  color: var(--cf-ink);
-  font-weight: 700;
-}
-
-.localNavLink[aria-current="true"]::before {
-  background: var(--cf-red);
-}
+/*
+ * Lokalna sekcijska navigacija koristi zajednički `BrandSectionNav`, koji sam
+ * meri visinu globalnog headera i reaguje na njegov auto-hide. Ovde se samo
+ * tematizuje u Car Fit paletu.
+ */
 
 .anchor {
-  scroll-margin-top: 8rem;
+  scroll-margin-top: calc(
+    var(--brand-section-header-offset, 5.5rem) + var(--brand-section-nav-height, 3.75rem) + 1rem
+  );
 }
 
 /* ------------------------------------------------------------ task selector */
@@ -909,9 +891,9 @@
   min-height: 8rem;
   padding: 1.25rem;
   background-image:
-    linear-gradient(to right, var(--cf-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cf-line) 1px, transparent 1px);
-  background-size: 2.25rem 2.25rem;
+    linear-gradient(to right, var(--cf-gray-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cf-gray-soft) 1px, transparent 1px);
+  background-size: 2.75rem 2.75rem;
   text-align: center;
 }
 
@@ -1156,6 +1138,8 @@
   position: relative;
   overflow: hidden;
   min-height: 6rem;
+  /* Prazan modul ne sme da rastegne karticu — whitespace umesto praznog okvira. */
+  max-height: 16rem;
   border: 1px solid var(--cf-line);
 }
 
@@ -1334,14 +1318,13 @@
   min-height: 2.5rem;
   padding: 0.45rem 0.9rem;
   border: 1px solid var(--cf-line-strong);
-  border-radius: 2px;
+  border-radius: 999px;
   background: transparent;
   color: var(--cf-ink-muted);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6875rem;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   cursor: pointer;
   transition:
     border-color 180ms var(--cf-ease),
@@ -1540,6 +1523,24 @@
   color: var(--cf-ink-muted);
   font-size: 0.8438rem;
   line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ katalozi */
+
+.katalogSection {
+  --background: var(--cf-paper);
+  --foreground: var(--cf-ink);
+  --border: var(--cf-line);
+  --surface: var(--cf-paper);
+  --surface-muted: var(--cf-steel);
+  --muted-foreground: var(--cf-ink-muted);
+  --accent: var(--cf-red);
+}
+
+.katalogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
 }
 
 /* -------------------------------------------------------------- brand story */

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { customers, portalUsers } from "@/mock-data/portal";
+import { customers, portalUsers } from "@/fixtures/dev/portal";
 import { can, canAccessCustomer } from "@/permissions/portal-permissions";
 import type { Customer, PriceRule } from "@/types/portal";
 import { PortalIcon } from "@/components/portal/PortalIcon";

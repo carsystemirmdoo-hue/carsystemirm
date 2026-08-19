@@ -41,7 +41,10 @@
 }
 
 .pageMain {
-  width: min(calc(100% - 2rem), 76rem);
+  /* 76rem (1216px) + flat 2rem gutter je već bio gotovo identičan foundation
+     spine-u (1208px, merenih 116px ivica @1440 na Homepage/Catalog) — ovo ga
+     čini tačnim, bez vidljivog pomeranja postojećeg PDP sadržaja. */
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
   padding: clamp(1.25rem, 2.6vw, 2.25rem) 0 clamp(5rem, 9vw, 8rem);
 }
@@ -104,82 +107,237 @@
 }
 
 .stickyStage {
-  --product-stage-min-height: clamp(430px, 44vw, 650px);
-  --product-stage-object-width: min(100%, 440px);
-  --product-stage-object-height: 94%;
-  --product-stage-object-min-height: 250px;
-  --product-stage-image-scale: 0.94;
-  --product-stage-object-shift-x: 0px;
-  --product-stage-object-shift-y: 0px;
+  /*
+   * Layer contract for the stage. Every child declares its plane through one of
+   * these, so "what sits in front of what" is readable in one place instead of
+   * being spread over a dozen magic z-indexes.
+   */
+  --layer-plate: 0;
+  --layer-art: 1;
+  --layer-halo: 2;
+  --layer-product: 3;
+  --layer-ui: 4;
+
+  /*
+   * The stage owns its own proportions. It used to be a `min-height` only,
+   * which let a tall right column dictate how much empty space appeared around
+   * the product; a declared ratio makes the panel a fixed object that the
+   * narrative column cannot stretch.
+   */
+  --product-stage-aspect: 5 / 6;
+  --product-stage-max-height: calc(100svh - 9.5rem);
+
+  /*
+   * Optical centre. Slightly above geometric centre because the bottom strip is
+   * reserved for the quantity badge and the zoom control — a product centred at
+   * exactly 50% reads as sitting *on* those controls.
+   */
+  --product-optical-y: 48%;
+  --product-zoom-scale: 1;
   display: grid;
   gap: 0.75rem;
 }
 
+/*
+ * Canonical product-scale envelope (lib/product-scale.ts) — the same
+ * S / M / L / XL ladder the catalog uses, so one physical hierarchy holds
+ * across the site.
+ *
+ * What changed: the envelope now bounds the product's OWN silhouette, not the
+ * image file around it. Measured across all 826 product renders, the median
+ * file fills just 39% of its canvas width, and the spread runs from 20% to
+ * 100% — so "66% of the stage" used to mean anything between 13% and 66% of
+ * actual product, decided by however much transparent padding a supplier baked
+ * into that particular export. Fitting the content box (see
+ * `ProductImageFit.generated.module.css`) makes the ladder describe the
+ * product again, which is why the percentages sit higher than before: they now
+ * have to do the whole job themselves.
+ */
+.stickyStage[data-product-size-class="S"] {
+  --product-envelope-w: 58cqw;
+  --product-envelope-h: 74cqh;
+}
+
+.stickyStage[data-product-size-class="M"] {
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 80cqh;
+}
+
+.stickyStage[data-product-size-class="L"] {
+  --product-envelope-w: 74cqw;
+  --product-envelope-h: 86cqh;
+}
+
+.stickyStage[data-product-size-class="XL"] {
+  --product-envelope-w: 82cqw;
+  --product-envelope-h: 92cqh;
+}
+
 .stickyStage[data-product-stage-spray="true"] {
-  --product-stage-object-width: min(94%, 420px);
-  --product-stage-object-height: 92%;
-  --product-stage-image-scale: 0.92;
-  --product-stage-object-shift-x: clamp(6px, 1.2vw, 14px);
-  --product-stage-object-shift-y: 2px;
   --product-stage-spray-scale: 1.12;
   --product-stage-spray-offset-x: clamp(-12px, -0.8vw, -5px);
 }
 
-.stickyStage[data-product-stage-treatment="abrasive"] {
-  --product-stage-min-height: clamp(420px, 42vw, 620px);
-  --product-stage-object-width: min(82%, 410px);
-  --product-stage-object-height: 86%;
-  --product-stage-image-scale: 0.9;
+/*
+ * The frame follows the product's measured silhouette
+ * (`productStageImages.ts` → `resolveStageFormat`).
+ *
+ * This is not cosmetic. Because the envelope bounds the product by BOTH stage
+ * dimensions, a squat 1 L tin in a 5:6 frame is limited by width and can never
+ * use the height: it filled 29% of the stage no matter how the percentages were
+ * tuned. Matching the frame to the shape is the only fix that does not either
+ * crop the product or let it burst its panel.
+ */
+.stickyStage[data-stage-format="square"] {
+  --product-stage-aspect: 1 / 1;
 }
 
-.stickyStage[data-product-stage-treatment="foam"] {
-  --product-stage-min-height: clamp(420px, 42vw, 620px);
-  --product-stage-object-width: min(86%, 420px);
-  --product-stage-object-height: 88%;
-  --product-stage-image-scale: 0.92;
+.stickyStage[data-stage-format="landscape"] {
+  --product-stage-aspect: 4 / 3;
 }
 
-.stickyStage[data-product-stage-treatment="fabric"] {
-  --product-stage-object-width: min(88%, 350px);
-  --product-stage-object-height: 92%;
-  --product-stage-image-scale: 0.9;
-}
-
-.stickyStage[data-product-stage-treatment="polish"] {
-  --product-stage-min-height: clamp(350px, 34vw, 510px);
-  --product-stage-object-width: min(100%, 390px);
-  --product-stage-object-height: 90%;
+/*
+ * With no render there is no silhouette to fit, so the fallback card keeps a
+ * modest fixed box and stays clear of the brand mark in the top-left corner.
+ */
+.stickyStage[data-product-has-image="false"] .heroProductObject {
+  width: min(74cqw, 320px);
+  aspect-ratio: auto;
+  height: auto;
+  max-height: 62cqh;
+  transform: translate(-50%, -50%);
 }
 
 .stage {
   position: relative;
-  display: grid;
-  min-height: var(--product-stage-min-height);
+  display: block;
+  aspect-ratio: var(--product-stage-aspect);
+  max-height: var(--product-stage-max-height);
+  min-height: 320px;
   overflow: hidden;
-  place-items: center;
   border: 1px solid var(--detail-border);
-  border-radius: var(--detail-radius);
-  background: transparent;
-  box-shadow: 0 16px 40px oklch(0.04 0.01 250 / 0.16);
-}
-
-.heroVisualSurface {
-  position: relative;
-  display: grid;
-  width: 100%;
-  height: 100%;
-  min-height: var(--product-stage-min-height);
-  overflow: hidden;
-  place-items: center;
+  border-radius: var(--ds-radius, 2px);
   background: transparent;
   isolation: isolate;
+  /* See ProductVisualSurface.module.css — the stage is the coordinate system
+     the product envelope is expressed in, so one `min()` can bound the
+     silhouette by both stage width and stage height. */
+  container-type: size;
+}
+
+/*
+ * Layer 0 — the stage plate.
+ *
+ * A neutral, product-independent ground. Previously the surface was fully
+ * transparent, so on a dark theme a dark product sat on the page background
+ * with nothing to separate the two.
+ */
+.stagePlate {
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-plate);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--detail-surface) 88%, transparent),
+      color-mix(in oklch, var(--detail-surface-muted) 92%, transparent)
+    );
+}
+
+/*
+ * Layer 2 — separation halo.
+ *
+ * Only rendered where the product would otherwise merge into the decoration:
+ * a black bottle in front of a black graffiti stroke, or a white canister on a
+ * light plate. It is a soft radial lift centred on the product, never an
+ * outline, so it does not read as a border the product does not have.
+ */
+.stageHalo {
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-halo);
+  opacity: 0;
+  background: radial-gradient(
+    58% 46% at 50% var(--product-optical-y),
+    var(--product-halo-color, transparent) 0%,
+    transparent 72%
+  );
+  transition: opacity 240ms var(--cs-ease-out);
+  pointer-events: none;
+}
+
+.stage[data-product-contrast="dark-product"] .stageHalo {
+  --product-halo-color: oklch(0.72 0.012 250 / 0.3);
+  opacity: 1;
+}
+
+.stage[data-product-contrast="light-product"] .stageHalo {
+  --product-halo-color: oklch(0.32 0.014 250 / 0.16);
+  opacity: 1;
+}
+
+:global(.dark) .stage[data-product-contrast="dark-product"] .stageHalo {
+  --product-halo-color: oklch(0.78 0.014 250 / 0.24);
+}
+
+:global(.dark) .stage[data-product-contrast="light-product"] .stageHalo {
+  --product-halo-color: oklch(0.24 0.014 250 / 0.34);
+}
+
+/*
+ * Layer 1 — decorative art tone.
+ *
+ * The graffiti stroke used to be painted in `--product-visual-background-color`,
+ * the product's own shade. For the 442 renders measured as dark or very dark
+ * that means black-on-black in the dark theme, and the 129 light ones have the
+ * mirror problem in the light theme. The tone is therefore pulled away from the
+ * product rather than copied from it: enough of the shade survives for the art
+ * to still belong to this product, but never enough to swallow its silhouette.
+ *
+ * `contrastMode` comes from measured pixels (lib/product-image-metrics.ts), so
+ * this reacts to the packaging you see, not to the shade the product applies.
+ */
+.stage {
+  --product-art-color: var(--product-visual-background-color);
+}
+
+.stage[data-product-contrast="dark-product"] {
+  --product-art-color: color-mix(
+    in oklch,
+    var(--product-visual-background-color) 42%,
+    oklch(0.55 0.012 250)
+  );
+}
+
+.stage[data-product-contrast="light-product"] {
+  --product-art-color: color-mix(
+    in oklch,
+    var(--product-visual-background-color) 46%,
+    oklch(0.46 0.016 250)
+  );
+}
+
+:global(.dark) .stage[data-product-contrast="dark-product"] {
+  --product-art-color: color-mix(
+    in oklch,
+    var(--product-visual-background-color) 34%,
+    oklch(0.62 0.014 250)
+  );
+}
+
+:global(.dark) .stage[data-product-contrast="light-product"] {
+  --product-art-color: color-mix(
+    in oklch,
+    var(--product-visual-background-color) 40%,
+    oklch(0.3 0.016 250)
+  );
 }
 
 .heroBrandMark {
   position: absolute;
   top: 12px;
   left: 12px;
-  z-index: 4;
+  z-index: var(--layer-ui);
   max-width: calc(100% - 24px);
   overflow: hidden;
   border: 1px solid var(--detail-border);
@@ -199,7 +357,7 @@
 
 .galleryIndex {
   position: absolute;
-  z-index: 4;
+  z-index: var(--layer-ui);
   top: 17px;
   right: 12px;
   color: var(--detail-faint);
@@ -210,34 +368,108 @@
   text-transform: uppercase;
 }
 
+/*
+ * Layer 3 — the product.
+ *
+ * Geometry, in one place:
+ *
+ *   `--product-fit-w` fits the product's CONTENT box inside the size-class
+ *   envelope, doing in `min()` exactly what `object-fit: contain` would do —
+ *   except against the silhouette rather than the file. The second term
+ *   converts an envelope expressed in stage HEIGHT into a stage-WIDTH
+ *   percentage, which is why the stage ratio has to be a plain number.
+ *
+ *   The box itself is then widened to the full canvas (`/ fill-x`) and given
+ *   the canvas aspect, so `object-fit: contain` inside it letterboxes by
+ *   nothing and the image draws 1:1 into the box.
+ *
+ *   Finally `translate` puts the CONTENT centre — not the file centre — on the
+ *   stage's optical centre. Percentages in `translate` resolve against the
+ *   element's own box, so the offsets are exact.
+ *
+ * All of it is static CSS fed by build-time numbers: no measurement in the
+ * browser, so nothing shifts after hydration.
+ */
 .heroProductObject {
-  --product-hero-image-scale: var(--product-stage-image-scale);
-  position: relative;
-  z-index: 3;
-  display: grid;
-  width: var(--product-stage-object-width);
-  height: var(--product-stage-object-height);
-  min-height: var(--product-stage-object-min-height);
-  place-items: center;
-  transform: translate3d(
-    var(--product-stage-object-shift-x),
-    var(--product-stage-object-shift-y),
-    0
+  --product-fit-w: min(
+    var(--product-envelope-w, 74cqw),
+    calc(var(--product-envelope-h, 86cqh) * var(--product-content-aspect))
   );
+  position: absolute;
+  z-index: var(--layer-product);
+  display: grid;
+  place-items: center;
+  top: var(--product-optical-y);
+  left: 50%;
+  width: calc(var(--product-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  transform:
+    translate(
+      calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+      calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+    )
+    scale(var(--product-zoom-scale));
+  transition: transform 320ms var(--cs-ease-out);
+}
+
+.stage[data-product-zoom="true"] {
+  --product-zoom-scale: 1.28;
 }
 
 .heroProductImage {
   object-fit: contain;
-  padding: clamp(2px, 0.7vw, 8px);
   filter: drop-shadow(0 18px 24px oklch(0.08 0.01 250 / 0.24));
-  transform: scale(var(--product-hero-image-scale));
-  transform-origin: center center;
 }
 
 :global(.dark) .heroProductImage {
   filter:
     drop-shadow(0 0 1px oklch(0.92 0.008 250 / 0.34))
     drop-shadow(0 18px 24px oklch(0.02 0.01 250 / 0.44));
+}
+
+/*
+ * Layer 4 — zoom.
+ *
+ * Pinned to the corner opposite the quantity badge and sized so its hit area
+ * never reaches the product envelope. It scales the product layer only, so
+ * pressing it cannot move a single element of the page.
+ */
+.zoomControl {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: var(--layer-ui);
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--detail-border-strong);
+  border-radius: var(--ds-radius, 2px);
+  background: color-mix(in srgb, var(--detail-surface) 92%, transparent);
+  color: var(--detail-ink);
+  cursor: pointer;
+  transition:
+    border-color 170ms var(--cs-ease-out),
+    background-color 170ms var(--cs-ease-out);
+}
+
+.zoomControl:hover {
+  border-color: color-mix(in oklch, var(--detail-red) 60%, var(--detail-border));
+  background: var(--detail-surface);
+}
+
+.zoomControl:focus-visible {
+  outline: 2px solid var(--detail-red);
+  outline-offset: 2px;
+}
+
+.zoomControl svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
 }
 
 .heroProductFallback {
@@ -248,10 +480,39 @@
   justify-items: start;
   gap: 7px;
   border: 1px solid oklch(0.2 0.012 250 / 0.14);
-  border-radius: 12px;
+  border-radius: var(--ds-radius, 2px);
   background-color: oklch(0.965 0.006 250);
   color: oklch(0.38 0.016 250);
   padding: 18px;
+}
+
+.quantityBadge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: var(--layer-ui);
+  display: grid;
+  gap: 4px;
+  padding: 5px 8px 6px;
+  background: #000;
+  color: #fff;
+  font-family: var(--ds-font-label, var(--font-technical), monospace);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.quantityBadge[data-status="inferred"] {
+  background: #2b2b2e;
+}
+
+.quantityBadgeRule {
+  display: block;
+  height: 1px;
+  background: #fff;
+  opacity: 0.9;
 }
 
 .heroProductFallback small {
@@ -331,10 +592,15 @@
   padding: 18px;
 }
 
+/*
+ * Top-aligned, not centred. The old `min-height` + `align-items: center` pair
+ * meant the first line of the narrative column floated to wherever the copy
+ * happened to balance, so the stage's top edge and the taxonomy chips never
+ * agreed on where the page starts. Both columns now begin on the same line.
+ */
 .hero {
   display: grid;
-  min-height: min(42rem, calc(100svh - 9rem));
-  align-items: center;
+  align-items: start;
 }
 
 .fullWidthContinuation {
@@ -342,7 +608,7 @@
 }
 
 .heroCopy {
-  padding-block: 1rem;
+  padding-block: 0 1rem;
 }
 
 .heroTaxonomy {
@@ -355,7 +621,7 @@
 .heroTaxonomy a,
 .heroTaxonomy span {
   border: 1px solid var(--detail-border);
-  border-radius: 999px;
+  border-radius: var(--ds-radius, 2px);
   color: var(--detail-muted);
   font-size: 0.7rem;
   font-weight: 650;
@@ -376,14 +642,23 @@
   text-transform: uppercase;
 }
 
+/*
+ * Sized against the product, not against the column. At the previous
+ * 5.15vw / 5.7rem ceiling a long name ran to four lines of 90 px type beside a
+ * product drawn at a fraction of that, and the page read as a headline with an
+ * illustration. A slightly tighter ceiling and a wider measure keep long
+ * Cosmos variant names (up to 44 characters in this catalogue) to two or three
+ * lines without shrinking short ones into captions.
+ */
 .heroTitle {
-  max-width: 11ch;
+  max-width: 14ch;
   margin: 0;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(3rem, 5.15vw, 5.7rem);
+  font-size: clamp(2.75rem, 4.5vw, 4.6rem);
   font-weight: 850;
-  letter-spacing: -0.052em;
-  line-height: 0.88;
+  letter-spacing: -0.048em;
+  line-height: 0.9;
+  overflow-wrap: break-word;
   text-wrap: balance;
 }
 
@@ -1617,7 +1892,9 @@ a.colorOptionContent:active {
 .joinedProductRow {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(13rem, 1fr);
+  /* 13rem (208px) je davao ~6 vidljivih kartica i previše gust prikaz —
+     19rem (304px) je odobreni desktop target: 76rem kontejner / 19rem ≈ 4. */
+  grid-auto-columns: minmax(19rem, 1fr);
   gap: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -1781,19 +2058,7 @@ a.colorOptionContent:active {
 }
 
 @media (max-width: 1023px) {
-  .stage,
-  .heroVisualSurface {
-    min-height: clamp(320px, 58vw, 480px);
-  }
-
-  .stickyStage {
-    --product-stage-image-scale: 1;
-  }
-
   .stickyStage[data-product-stage-spray="true"] {
-    --product-stage-image-scale: 0.96;
-    --product-stage-object-shift-x: clamp(4px, 1vw, 10px);
-    --product-stage-object-shift-y: 0px;
     --product-stage-spray-scale: 1.05;
     --product-stage-spray-offset-x: -5px;
   }
@@ -1871,19 +2136,18 @@ a.colorOptionContent:active {
     max-width: 14rem;
   }
 
-  .stage,
-  .heroVisualSurface {
-    min-height: clamp(280px, 76vw, 360px);
-  }
-
-  .heroProductObject {
-    width: min(88%, 310px);
-    min-height: 220px;
+  /*
+   * One column: the stage is no longer competing with a narrative column for
+   * width, so a squarer frame keeps the product large without pushing the copy
+   * a full screen down. The envelope ladder is unchanged — it is a percentage
+   * of the stage, so it scales with the phone instead of needing px ceilings.
+   */
+  .stickyStage {
+    --product-stage-aspect: 1 / 1;
+    --product-stage-max-height: 62svh;
   }
 
   .stickyStage[data-product-stage-spray="true"] {
-    --product-stage-image-scale: 0.94;
-    --product-stage-object-shift-x: 5px;
     --product-stage-spray-scale: 1.02;
     --product-stage-spray-offset-x: -3px;
   }

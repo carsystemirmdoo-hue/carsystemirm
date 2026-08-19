@@ -13,8 +13,8 @@ import {
   getAllCarsystemProducts,
   programGroups,
   refinishPhases,
-  toProductListingProduct,
 } from "@/lib/carsystem-data";
+import { toCatalogListingEntity } from "@/lib/catalog-listing";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
@@ -73,7 +73,7 @@ export default async function CatalogPaginationRoute({
   const start = (page - 1) * CATALOG_BATCH_SIZE;
   const products = allProducts
     .slice(start, start + CATALOG_BATCH_SIZE)
-    .map(toProductListingProduct);
+    .map(toCatalogListingEntity);
   const brands = getAllCarsystemBrands();
   const route = `/katalog/strana/${page}`;
   const breadcrumbs = [
@@ -95,7 +95,7 @@ export default async function CatalogPaginationRoute({
             name: `Katalog proizvoda, strana ${page}`,
             description: `Proizvodi ${start + 1}–${start + products.length} u Carsystem i R-M katalogu.`,
             path: route,
-            itemUrls: products.map((product) => `/proizvodi/${product.slug}`),
+            itemUrls: products.map((product) => product.href),
           }),
         )}
       />
@@ -109,7 +109,7 @@ export default async function CatalogPaginationRoute({
         <CatalogStaticProductGrid
           brands={brands}
           phases={refinishPhases}
-          products={products}
+          entities={products}
           programs={programGroups}
         />
         <CatalogPaginationNav currentPage={page} totalPages={totalPages} />

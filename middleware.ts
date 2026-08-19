@@ -1,5 +1,13 @@
+import NextAuth from "next-auth";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { authConfig } from "./auth.config";
+import {
+  CALLBACK_PARAM,
+  LOGIN_ROUTE,
+  loginUrlFor,
+  normalizeCallback,
+} from "./lib/authz/redirects.mjs";
 import {
   isEnabled,
   isValidSiteAccessToken,
@@ -9,6 +17,12 @@ import { seoSiteConfig } from "./lib/seo/site-config";
 
 const MAINTENANCE_ROUTE = "/site-u-pripremi";
 const SITE_ACCESS_ROUTE = "/site-u-pripremi/access";
+
+
+// Edge-bezbedna instanca: dekodira token sesije bez dodirivanja baze.
+// Ovo je samo preusmeravanje radi udobnosti — dozvole se proveravaju na serveru,
+// u svakoj stranici i route handler-u (lib/authz/session.ts).
+const { auth: withAuth } = NextAuth(authConfig);
 
 const PUBLIC_FILE_PATTERN = /\.(?:avif|css|gif|ico|jpg|jpeg|js|map|pdf|png|svg|txt|webp|xml)$/i;
 
@@ -33,14 +47,26 @@ function isBypassedRoute(pathname: string) {
     pathname === "/favicon.ico" ||
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
-    pathname === "/login" ||
-    pathname.startsWith("/login/") ||
-    pathname === "/admin" ||
-    pathname.startsWith("/admin/") ||
-    pathname === "/portal" ||
-    pathname.startsWith("/portal/") ||
+    isLoginRoute(pathname) ||
+    // Portal se namerno više ne preskače ovde: pristup mu odlučuje prijava,
+    // a ne režim održavanja javnog sajta. Ranije je bio dostupan svakome.
+    isPortalRoute(pathname) ||
     PUBLIC_FILE_PATTERN.test(pathname)
   );
+}
+
+function isPortalRoute(pathname: string) {
+  return pathname === "/portal" || pathname.startsWith("/portal/");
+}
+
+function isPortalPublicRoute(pathname: string) {
+  // Stara adresa prijave ostaje dostupna jer preusmerava na novu.
+  return pathname === "/portal/prijava" || pathname.startsWith("/api/auth/");
+}
+
+/** Prijava je javna i mora zaobići i režim održavanja javnog sajta. */
+function isLoginRoute(pathname: string) {
+  return pathname === LOGIN_ROUTE;
 }
 
 function shouldNoindexQuery(request: NextRequest) {
@@ -86,7 +112,40 @@ async function hasSiteAccess(request: NextRequest) {
   return isValidSiteAccessToken(request.cookies.get(SITE_ACCESS_COOKIE_NAME)?.value);
 }
 
-export async function middleware(request: NextRequest) {
+function redirectToPortalLogin(request: NextRequest) {
+  // `loginUrlFor` gradi `/prijava?callbackUrl=…`. Putanja se nikada ne
+  // nadovezuje na adresu prijave — to bi dalo nepostojeće `/prijava/dozvole`.
+  const target = loginUrlFor(
+    `${request.nextUrl.pathname}${request.nextUrl.search}`,
+  );
+  return NextResponse.redirect(new URL(target, request.nextUrl.origin));
+}
+
+export default withAuth(async function middleware(request) {
+  const { pathname } = request.nextUrl;
+
+  // Stara adresa prijave se preusmerava ovde, a ne u samoj strani: layout
+  // portala traži prijavljenog korisnika i preusmerio bi pre nego što strana
+  // stigne da pročita `callbackUrl`.
+  if (pathname === "/portal/prijava") {
+    const raw =
+      request.nextUrl.searchParams.get(CALLBACK_PARAM) ??
+      request.nextUrl.searchParams.get("nastavak");
+    const callback = normalizeCallback(raw);
+    const target = callback
+      ? `${LOGIN_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(callback)}`
+      : LOGIN_ROUTE;
+    return NextResponse.redirect(new URL(target, request.nextUrl.origin));
+  }
+
+  if (isPortalRoute(pathname) && !isPortalPublicRoute(pathname)) {
+    if (!request.auth?.user?.id) return redirectToPortalLogin(request);
+  }
+
+  return handleSiteRouting(request);
+});
+
+async function handleSiteRouting(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isProductionDeployment = process.env.VERCEL_ENV === "production";
   const canonicalHost = new URL(seoSiteConfig.url).host;

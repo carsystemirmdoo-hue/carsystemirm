@@ -126,3 +126,31 @@ If an agent or developer proposes a paid tool, they must document:
 - recommendation.
 
 No paid tool should be implemented without explicit approval.
+
+## 11. Odluke — poslovni sistem (faza 1, 15.08.2026)
+
+Interni poslovni sistem na `/portal` je dobio bazu, prijavu i ovlašćivanje.
+Odabrane su samo besplatne i otvorene komponente; **nijedan plaćeni mesečni alat
+nije uveden**.
+
+| Potreba | Odabrano | Trošak | Zašto ne nešto drugo |
+|---|---|---|---|
+| Baza | Postgres na Neon ili Supabase besplatnom nivou | 0 | Odgovara `ARCHITECTURE.md`. Plaćeni nivo tek kada obim faktura to zatraži |
+| Pristup bazi i migracije | `drizzle-orm` + `drizzle-kit` | 0, MIT | Bez plaćenog sloja; migracije su obični SQL fajlovi u repozitorijumu |
+| Drajver | `postgres` (postgres.js) | 0, Unlicense | — |
+| Prijava | `next-auth` (Auth.js v5), credentials | 0, ISC | Bez plaćenog servisa za identitet |
+| Lozinke | `scrypt` iz `node:crypto` | 0 | Bez dodatne zavisnosti tipa bcrypt |
+| Provera unosa | `zod` | 0, MIT | — |
+| Granica server/klijent | `server-only` | 0, MIT | Sprečava da kod za bazu završi u pregledaču |
+
+Zadržano kao pravilo za naredne faze:
+
+- **BEX** se koristi kao postojeći ugovoreni prevoznik; integracija ne uvodi nov
+  mesečni trošak. Procenjeni i fakturisani trošak isporuke se vode odvojeno i
+  ništa se ne knjiži automatski.
+- **Bez integracije sa bankom.** Ne traže se, ne čuvaju i ne obrađuju bankarski
+  pristupni podaci, i nijedno plaćanje se ne pokreće.
+- Izvoz u XLSX, CSV i PDF se radi otvorenim bibliotekama, bez plaćenih servisa za
+  generisanje dokumenata.
+- Uvoz faktura ide preko sopstvenog lokalnog konektora, bez platforme za
+  automatizaciju sa pretplatom.

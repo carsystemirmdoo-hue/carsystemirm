@@ -7,6 +7,11 @@
    * tranzicija bila vremenska, a sve ostalo vezano za skrol, header je pri
    * bržem skrolu "sevao" nezavisno od ostatka kadra. Sada je i on čista
    * funkcija pozicije skrola, pa flash nije moguć.
+   *
+   * Vlasništvo nad signalom je geometrijsko: 1 dok probe linija ispod ovog
+   * sticky Headera stoji unutar sekcije takeovera, 0 pre i posle nje. Header
+   * zato nema sopstveni theme state koji bi mogao da ostane zaglavljen — ni
+   * pri izlasku nadole, ni pri povratku nagore, ni posle route promene.
    */
   --chapter: clamp(0, var(--paint-chapter, 0), 1);
   --chapter-mix: calc(var(--chapter) * 100%);
@@ -1059,7 +1064,13 @@
   padding-top: 0.85rem;
 }
 
-.panelFooter a {
+/*
+ * Podnožje mega-menija ima dve kontrole: link na katalog i okidač pretrage.
+ * Okidač je `button` (otvara dijalog, ne navigira), pa selektori pokrivaju oba
+ * elementa — inače bi dugme ostalo sa podrazumevanim izgledom dugmeta.
+ */
+.panelFooter a,
+.panelFooter button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1067,21 +1078,25 @@
   text-decoration: none;
 }
 
-.panelFooter a:not(.catalogCta) {
+.panelFooter a:not(.catalogCta),
+.panelFooter button {
   min-height: 2.35rem;
   border: 1px solid var(--header-border);
   border-radius: 0.45rem;
+  background: transparent;
   color: var(--header-ink);
+  font-family: inherit;
   font-size: 0.8rem;
   font-weight: 750;
   padding: 0 0.8rem;
+  cursor: pointer;
   transition:
     background-color 190ms var(--header-ease),
     border-color 190ms var(--header-ease),
     color 190ms var(--header-ease);
 }
 
-.panelFooter a:not(.catalogCta):first-child {
+.panelFooter button {
   border-color: color-mix(
     in oklch,
     var(--header-red) 38%,
@@ -1090,7 +1105,9 @@
 }
 
 .panelFooter a:not(.catalogCta):hover,
-.panelFooter a:not(.catalogCta):focus-visible {
+.panelFooter a:not(.catalogCta):focus-visible,
+.panelFooter button:hover,
+.panelFooter button:focus-visible {
   background: var(--header-hover);
   border-color: var(--header-red);
   color: var(--header-ink);
@@ -1183,6 +1200,24 @@
 }
 
 .mobileLayer {
+  /*
+   * Portaled to document.body (fix za containing-block bug: .header ima
+   * transform-baziranu entrance/scroll-hide animaciju, pa position:fixed
+   * potomci uzimaju header-ov box kao containing block umesto viewporta —
+   * inset:0 se tada svodi na header-ovu visinu, ne ceo ekran). Van header
+   * DOM podstabla, --header-* custom properties definisane na .header vise
+   * se ne nasleđuju, zato se ovde ponavljaju sa stabilnim baznim tokenima
+   * (bez paint-chapter interpolacije i R-M atmosphere override-a — modal
+   * preko celog ekrana ne treba da prati prolazno skrol/atmosphere bojenje
+   * header chrome-a).
+   */
+  --header-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --header-panel: var(--surface);
+  --header-ink: var(--foreground);
+  --header-muted: var(--muted-foreground);
+  --header-border: var(--border);
+  --header-red: var(--accent);
+  --header-red-ink: var(--accent-foreground);
   position: fixed;
   z-index: 80;
   inset: 0;
@@ -1402,10 +1437,14 @@
   gap: 0.5rem;
   border: 1px solid var(--header-border);
   border-radius: 0.5rem;
+  /* `.mobileSearch` je `button` (otvara panel), pa mu treba i reset dugmeta. */
+  background: transparent;
   color: var(--header-ink);
+  font-family: inherit;
   font-size: 0.82rem;
   font-weight: 750;
   padding: 0 0.85rem;
+  cursor: pointer;
   text-decoration: none;
 }
 

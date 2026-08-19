@@ -1,0 +1,383 @@
+/*
+ * Panel pretrage.
+ *
+ * Koristi globalne tokene (`--surface`, `--foreground`, `--accent`…), a NE
+ * header chapter promenljive: panel se renderuje u `document.body`, iznad
+ * tamne paint-takeover sekcije, pa mora da bude čitljiv nezavisno od toga gde
+ * je stranica u tom scroll signalu. Time se i ne dodiruje Header theme
+ * lifecycle.
+ */
+
+.layer {
+  --panel-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --panel-radius: 1.15rem;
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(3rem, 12vh, 8rem) 1.25rem 2rem;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: oklch(0.09 0.012 255 / 0.55);
+  opacity: 0;
+  animation: scrimIn 180ms var(--panel-ease) forwards;
+}
+
+@supports (backdrop-filter: blur(1rem)) {
+  .scrim {
+    backdrop-filter: blur(0.35rem) saturate(1.05);
+  }
+}
+
+.panel {
+  position: relative;
+  display: grid;
+  width: min(46rem, 100%);
+  max-height: min(34rem, calc(100dvh - 6rem));
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--panel-radius);
+  background: var(--surface);
+  box-shadow: 0 2rem 5rem oklch(0.08 0.012 255 / 0.28);
+  color: var(--foreground);
+  animation: panelIn 200ms var(--panel-ease) both;
+}
+
+.searchBar {
+  display: grid;
+  min-height: 3.9rem;
+  align-items: center;
+  gap: 0.65rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  border-bottom: 1px solid var(--border);
+  padding: 0 0.9rem;
+  transition: border-color 180ms var(--panel-ease);
+}
+
+/*
+ * Fokus polja se pokazuje na celoj traci, ne prstenom oko inputa: pun crveni
+ * outline preko širine panela izgleda kao greška validacije, a ne kao „ovde
+ * kucate". Traka je i dalje jasno vidljiv indikator za tastaturu.
+ */
+.searchBar:focus-within {
+  border-bottom-color: var(--accent);
+}
+
+.searchBar:focus-within .searchIcon {
+  color: var(--accent);
+}
+
+.searchIcon {
+  display: grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  color: var(--muted-foreground);
+}
+
+.searchIcon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.7;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/*
+ * Globalni `:focus-visible` prsten (app/globals.css) ovde se gasi namerno:
+ * crveni okvir preko celog polja u dijalogu čije je polje UVEK fokusirano čita
+ * se kao greška validacije, a ne kao pokazivač fokusa. Vidljivost fokusa
+ * preuzima traka — donja ivica i ikona prelaze u akcentnu boju (`:focus-within`
+ * iznad), što je i dalje jasan, neprekidan signal za tastaturu.
+ */
+.input:focus-visible {
+  outline: none;
+}
+
+.close {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface-muted);
+  padding: 0.3rem 0.55rem;
+  color: var(--muted-foreground);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 160ms var(--panel-ease), border-color 160ms var(--panel-ease);
+}
+
+.close:hover {
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+
+.body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hint {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.5rem 1.15rem 1.7rem;
+}
+
+.hintTitle {
+  color: var(--foreground);
+  font-size: 0.94rem;
+  font-weight: 650;
+}
+
+.hintText {
+  max-width: 34rem;
+  color: var(--muted-foreground);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.retry {
+  justify-self: start;
+  margin-top: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface-muted);
+  padding: 0.45rem 0.85rem;
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retry:hover {
+  border-color: var(--accent);
+}
+
+.list {
+  display: grid;
+  padding: 0.4rem;
+  gap: 0.1rem;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  align-items: center;
+  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  border-radius: 0.7rem;
+  padding: 0.5rem 0.6rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.row[data-active="true"] {
+  background: var(--surface-muted);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.rowMember {
+  padding-left: 2.1rem;
+}
+
+.thumb {
+  display: grid;
+  overflow: hidden;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface-muted);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumbFallback {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 0.2rem;
+  background: var(--border);
+}
+
+.rowText {
+  display: grid;
+  min-width: 0;
+  gap: 0.15rem;
+}
+
+.rowName {
+  overflow: hidden;
+  color: var(--foreground);
+  font-size: 0.88rem;
+  font-weight: 620;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowMeta {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.55rem;
+  color: var(--muted-foreground);
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+.rowMeta span + span::before {
+  margin-right: 0.55rem;
+  content: "·";
+}
+
+.rowAside {
+  display: grid;
+  justify-items: end;
+  gap: 0.15rem;
+}
+
+.rowKind,
+.rowCount {
+  color: var(--muted-foreground);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rowCount {
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.showAll,
+.showAllStatic {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+  color: var(--foreground);
+  font-size: 0.84rem;
+  font-weight: 620;
+  text-decoration: none;
+}
+
+.showAll {
+  margin-top: 0.3rem;
+  border-radius: 0 0 calc(var(--panel-radius) - 0.15rem) calc(var(--panel-radius) - 0.15rem);
+}
+
+.showAll[data-active="true"] {
+  background: var(--surface-muted);
+}
+
+.showAll:hover,
+.showAllStatic:hover {
+  color: var(--accent);
+}
+
+.row:focus-visible,
+.showAll:focus-visible,
+.showAllStatic:focus-visible,
+.close:focus-visible,
+.retry:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@keyframes scrimIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.6rem) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * Mobilni: panel je praktično pun ekran, jer tastatura pojede pola visine i
+ * „lebdeći" dijalog bi ostao stisnut u traku od dva reda. `100dvh` prati
+ * stvarnu visinu vidljivog dela, pa se unos ne skriva iza tastature.
+ */
+@media (max-width: 47.99rem) {
+  .layer {
+    padding: 0;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    border: 0;
+    border-radius: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .searchBar {
+    min-height: 3.4rem;
+  }
+
+  /* Touch target: red mora imati bar ~44px visine i na najužem ekranu. */
+  .row {
+    min-height: 3.1rem;
+  }
+
+  .rowKind {
+    display: none;
+  }
+
+  .rowAside:empty {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim,
+  .panel {
+    animation-duration: 1ms;
+  }
+}

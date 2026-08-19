@@ -89,6 +89,11 @@ export function BrandSectionNav({
       }
     };
 
+    // Offset se upisuje odmah, ne tek u sledećem animation frame-u. Bez ovoga
+    // sticky nav ostaje na `top: 0` i završi iza globalnog headera ako se efekat
+    // ponovo pokrene (nestabilan `items` niz) pre nego što rAF stigne da odradi.
+    setOffsets();
+
     const resizeObserver = new ResizeObserver(scheduleSync);
     resizeObserver.observe(nav);
     if (header) resizeObserver.observe(header);
@@ -117,8 +122,8 @@ export function BrandSectionNav({
       window.removeEventListener("pageshow", scheduleSync);
       resizeObserver.disconnect();
       headerObserver?.disconnect();
-      page.style.removeProperty("--brand-section-header-offset");
-      page.style.removeProperty("--brand-section-nav-height");
+      // Izmerene vrednosti se namerno ne brišu: čišćenje na svaku promenu
+      // zavisnosti vratilo bi nav na `0px` fallback i gurnulo ga pod header.
     };
   }, [items, pageSelector]);
 

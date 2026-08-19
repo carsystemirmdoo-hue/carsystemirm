@@ -302,13 +302,25 @@ async function fetchPage(route) {
   const indexable = response.status >= 200 && response.status < 300 && isHtml && !noindex;
   const expectedCanonical = `${canonicalOrigin}${normalizePath(requestedUrl.pathname)}`;
   let canonicalCorrect = false;
+  let canonicalConsolidated = false;
   if (canonical) {
     try {
       const canonicalUrl = new URL(canonical, canonicalOrigin);
+      const sameOrigin = canonicalUrl.origin === canonicalOrigin;
+      const selfReferencing =
+        normalizePath(canonicalUrl.pathname) === normalizePath(requestedUrl.pathname);
+      // A product variant intentionally canonicalises to its ProductGroup page.
+      // That is a correct consolidation, not a canonical error, so it is
+      // tracked separately rather than counted as `wrongCanonical`.
+      canonicalConsolidated =
+        sameOrigin &&
+        !selfReferencing &&
+        requestedUrl.pathname.startsWith("/proizvodi/") &&
+        canonicalUrl.pathname.startsWith("/proizvodi/grupa/");
       canonicalCorrect =
-        canonicalUrl.origin === canonicalOrigin &&
-        normalizePath(canonicalUrl.pathname) === normalizePath(requestedUrl.pathname) &&
-        canonicalUrl.search === "";
+        sameOrigin &&
+        canonicalUrl.search === "" &&
+        (selfReferencing || canonicalConsolidated);
     } catch {
       canonicalCorrect = false;
     }
@@ -331,6 +343,7 @@ async function fetchPage(route) {
     canonical,
     expectedCanonical,
     canonicalCorrect,
+    canonicalConsolidated,
     canonicalStatus: null,
     lang: getAttribute(htmlTag, "lang"),
     h1: headings.filter((heading) => heading.level === 1).map((heading) => heading.text),
@@ -581,6 +594,9 @@ async function main() {
     wrongCanonical: indexablePages.filter(
       (page) => page.canonical && !page.canonicalCorrect,
     ).length,
+    consolidatedVariantCanonicals: indexablePages.filter(
+      (page) => page.canonicalConsolidated,
+    ).length,
     missingH1: indexablePages.filter((page) => page.h1Count === 0).length,
     multipleH1: indexablePages.filter((page) => page.h1Count > 1).length,
     missingOgImage: indexablePages.filter((page) => !page.ogImage).length,
@@ -741,6 +757,10 @@ async function main() {
     ["Sa dupliranim opisom", summary.duplicateDescriptionPages],
     ["Bez canonical-a", summary.missingCanonical],
     ["Sa pogrešnim canonical-om", summary.wrongCanonical],
+    [
+      "Varijanti konsolidovanih na grupu (namerno)",
+      summary.consolidatedVariantCanonicals,
+    ],
     ["Bez H1", summary.missingH1],
     ["Sa više H1", summary.multipleH1],
     ["Bez Open Graph slike", summary.missingOgImage],

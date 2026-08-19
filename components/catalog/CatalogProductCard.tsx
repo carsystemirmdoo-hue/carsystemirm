@@ -5,88 +5,111 @@ import {
   type ProgramGroup,
   type RefinishPhase,
 } from "@/lib/carsystem-data";
+import {
+  toCatalogListingEntity,
+  type CatalogListingEntity,
+} from "@/lib/catalog-listing";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import type { Ref } from "react";
 import styles from "./CatalogPage.module.css";
-
-function getProductTechnicalLine(product: CarsystemProduct) {
-  const metadata = product.catalogMetadata;
-  const code =
-    metadata?.cosmosCode ??
-    (metadata?.ralCode ? `RAL ${metadata.ralCode}` : null) ??
-    (product.sku.length <= 24 ? product.sku : null);
-  const packageSummary =
-    metadata?.volume ??
-    product.packages
-      .map((item) => item.label)
-      .filter((label) => !label.toLocaleLowerCase("sr-Latn").includes("upit"))
-      .slice(0, 2)
-      .join(" / ");
-  const parts = [code, packageSummary, metadata?.finish]
-    .filter((value): value is string => Boolean(value))
-    .filter((value, index, values) => values.indexOf(value) === index);
-
-  return parts.slice(0, 3).join(" · ");
-}
 
 export function CatalogProductCard({
   brand,
   className,
   contextLabel,
+  entity,
   phase,
   preloadRef,
   product,
   program,
   variant = "catalog",
+  catalogSystem = false,
 }: {
   brand: CarsystemBrand;
   className?: string;
   contextLabel?: string;
+  /**
+   * Canonical listing entity (catalog browse). When absent the card falls back
+   * to deriving one from `product`, which is how the locked surfaces — PDP
+   * related row, Cosmos brand page — keep calling it unchanged.
+   */
+  entity?: CatalogListingEntity;
   phase: RefinishPhase;
   preloadRef?: Ref<HTMLAnchorElement>;
-  product: CarsystemProduct;
+  product?: CarsystemProduct;
   program: ProgramGroup;
   variant?: "catalog" | "joined-row";
+  /**
+   * Uključuje finalni B-system hijerarhijski jezik kartice (SKU/kod →
+   * naziv → sekundarni metapodaci, radius 2). Namerno OPT-IN i odvojen od
+   * `variant`: ista kartica se deli sa PDP related-products redom
+   * (`variant="joined-row"`) i partnerskim brand stranicama (npr. Cosmos),
+   * koje moraju zadržati postojeći izgled. Samo stvarni /katalog pozivaoci
+   * (CatalogProductGrid, CatalogSeoContent) prosleđuju `catalogSystem`.
+   */
+  catalogSystem?: boolean;
 }) {
-  const image = product.productImage ?? product.galleryImages[0] ?? null;
-  const productHref = `/proizvodi/${product.slug}`;
-  const metaItems = product.catalogMetadata?.line
-    ? [brand.name, product.catalogMetadata.line]
+  const listing = entity ?? toCatalogListingEntity(product as CarsystemProduct);
+  const isFamily = listing.kind === "family";
+
+  /*
+   * Bez B-system rasporeda kartica nema zaseban red za šifru, pa se ona (kad je
+   * kratka) uklapa u tehničku liniju — tačno kako je bilo pre uvođenja listing
+   * entiteta. Cosmos i PDP related red zavise od tog rasporeda.
+   */
+  const technicalLine = catalogSystem
+    ? listing.technicalLine
+    : [listing.shortCode, listing.technicalLine].filter(Boolean).join(" · ");
+
+  const metaItems = listing.line
+    ? [brand.name, listing.line]
     : [brand.name, program.shortName, phase.name];
-  const technicalLine = getProductTechnicalLine(product);
 
   return (
     <Link
       ref={preloadRef}
       className={`${styles.productCard} cs-product-motion-card ${className ?? ""}`}
-      href={productHref}
+      href={listing.href}
       prefetch={false}
-      aria-label={`Pogledaj proizvod ${product.name}`}
+      aria-label={
+        isFamily
+          ? `Pogledaj grupu proizvoda ${listing.name}, ${listing.variantCount} varijanti`
+          : `Pogledaj proizvod ${listing.name}`
+      }
       data-cursor="card"
       data-infinite-scroll-trigger={preloadRef ? "true" : undefined}
       data-motion-surface
       data-product-card-motion
       data-card-variant={variant}
+      data-card-kind={listing.kind}
+      data-card-system={catalogSystem ? "b" : undefined}
     >
       <ProductVisualSurface
         brandName={brand.name}
         className={styles.catalogProductVisual}
-        image={image}
+        presentation={listing.presentation}
         product={product}
         sizes="(min-width: 1180px) 27vw, (min-width: 768px) 42vw, 92vw"
       />
 
       <span className={styles.productBody}>
-        <p className={styles.productMetaLine}>
-          {metaItems.join(" · ")}
-        </p>
+        {catalogSystem && <p className={styles.productCode}>{listing.productCode}</p>}
+
+        {!catalogSystem && (
+          <p className={styles.productMetaLine}>{metaItems.join(" · ")}</p>
+        )}
 
         <span className={styles.productTitleRow}>
-          <h3>{product.name}</h3>
+          <h3>{listing.name}</h3>
           <span className={styles.productTitleArrow} aria-hidden="true">
             ↗
           </span>
         </span>
+
+        {/* B-system hijerarhija: SKU/kod → naziv → sekundarni metapodaci. */}
+        {catalogSystem && (
+          <p className={styles.productMetaLine}>{metaItems.join(" · ")}</p>
+        )}
 
         {(contextLabel || technicalLine) && (
           <p className={styles.productTechnicalLine}>{contextLabel ?? technicalLine}</p>

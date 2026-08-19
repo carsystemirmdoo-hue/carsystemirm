@@ -1,0 +1,96 @@
+/*
+ * Envelope po klasi je CSS `inset` na .frame, ne JS transform. Vrednosti su
+ * izvedene iz validirane envelope lestvice (S 0.46×0.40 · M 0.62×0.56 ·
+ * L 0.78×0.74 · XL 0.92×0.88 udela stage-a) kao (1 − udeo) / 2 po osi.
+ * Donja ivica dodatno uračunava --ds-badge-reserve, tako da slika nikad ne
+ * ulazi u traku rezervisanu za quantity badge — bez obzira da li je badge
+ * prikazan za taj proizvod.
+ */
+
+.stage {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ds-surface-stage, var(--surface-muted));
+  border: 1px solid var(--ds-line-color-structural, var(--border));
+  border-radius: var(--ds-radius, 2px);
+}
+
+.frame {
+  position: absolute;
+  inset: 22% 22% calc(19% + var(--ds-badge-reserve, 40px)) 22%;
+}
+
+.stage[data-size-class="S"] .frame {
+  inset: 30% 30% calc(27% + var(--ds-badge-reserve, 40px)) 30%;
+}
+
+.stage[data-size-class="M"] .frame {
+  inset: 22% 22% calc(19% + var(--ds-badge-reserve, 40px)) 22%;
+}
+
+.stage[data-size-class="L"] .frame {
+  inset: 13% 13% calc(11% + var(--ds-badge-reserve, 40px)) 13%;
+}
+
+.stage[data-size-class="XL"] .frame {
+  inset: 6% 6% calc(4% + var(--ds-badge-reserve, 40px)) 6%;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.placeholderMark {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--ds-line-color-accent, var(--accent));
+  transform: rotate(45deg);
+  opacity: 0.5;
+}
+
+.badge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: grid;
+  gap: 4px;
+  padding: 5px 8px 6px;
+  background: #000;
+  color: #fff;
+  font-family: var(--ds-font-label);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  pointer-events: none;
+}
+
+.badge[data-status="inferred"] {
+  background: #2b2b2e;
+}
+
+.badgeRule {
+  display: block;
+  height: 1px;
+  background: #fff;
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .frame {
+    transition: none;
+  }
+}

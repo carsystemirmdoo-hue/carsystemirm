@@ -1,6 +1,6 @@
-import { OrderDetail } from "@/features/portal/OrdersModule";
+import { redirect } from "next/navigation";
 
-export default async function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  return <OrderDetail orderId={id}/>;
+/** Detalj porudžbine se popunjava u fazi 4. */
+export default function Page() {
+  redirect("/portal/porudzbine");
 }

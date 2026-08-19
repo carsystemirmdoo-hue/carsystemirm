@@ -1,20 +1,21 @@
 {
-  "generatedAt": "2026-07-29T13:34:36.056Z",
+  "generatedAt": "2026-08-09T06:06:12.727Z",
   "baseUrl": "http://localhost:3100",
   "canonicalOrigin": "https://carsystemirm.com",
   "summary": {
-    "sitemapUrls": 872,
-    "productPages": 832,
+    "sitemapUrls": 198,
+    "productPages": 158,
     "rmProducts": 59,
     "pdfFiles": 117,
     "failures": 0,
     "warnings": 0
   },
   "pass": [
-    "872 sitemap URL-ova vraća 200, ima produkcioni canonical, title, description, H1 i OG sliku.",
-    "832 PDP stranica ima jedinstven canonical i Product JSON-LD bez Offer/cene/lagera.",
+    "198 sitemap URL-ova vraća 200, ima produkcioni canonical, title, description, H1 i OG sliku.",
+    "158 PDP stranica ima jedinstven canonical i Product JSON-LD bez Offer/cene/lagera.",
     "Svih 59 R-M PDP stranica ima kod u title-u, R-M schema podatke, BreadcrumbList i zasebnu OG sliku.",
-    "117 lokalnih R-M PDF dokumenata je dostupno uz X-Robots-Tag noindex."
+    "117 lokalnih R-M PDF dokumenata je dostupno uz X-Robots-Tag noindex.",
+    "715 povezanih varijanti van sitemapa vraća 200 i canonical na stranicu grupe."
   ],
   "failures": [],
   "warnings": []

@@ -5,6 +5,7 @@ import type {
   PublicProgramGroup,
 } from "@/lib/carsystem-data";
 import type { PartnerStore } from "@/lib/partner-stores";
+import type { ProductFamily } from "@/lib/product-families";
 import {
   buildPageMetadata,
   titleWithSite,
@@ -216,10 +217,61 @@ function visibleProductFacts(product: CarsystemProduct) {
   return product.specifications.filter((fact) => fact.label && fact.value);
 }
 
+/**
+ * `ProductGroup` for a product family.
+ *
+ * Emitted only on the family page, which is the indexable entity. `hasVariant`
+ * lists every variant as a `Product` stub with its own `@id`, so the variant
+ * pages' own `Product` nodes resolve to the same entities rather than
+ * competing with them.
+ *
+ * No `offers` anywhere, consistent with the existing rule: prices are not
+ * public, so there is no honest offer to declare.
+ */
+export function productGroupJsonLd(family: ProductFamily) {
+  const url = absoluteUrl(`/proizvodi/grupa/${family.slug}`);
+  const variesByLabels: Record<string, string> = {
+    color: "color",
+    size: "size",
+    volume: "size",
+    finish: "pattern",
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProductGroup",
+    "@id": `${url}#productgroup`,
+    url,
+    name: family.name,
+    description: `${family.name} — ${family.variants.length} varijanti u Carsystem i R-M ponudi.`,
+    inLanguage: siteConfig.language,
+    brand: {
+      "@type": "Brand",
+      name: family.brandName,
+    },
+    productGroupID: family.baseProductSlug,
+    // Omitted rather than guessed when no axis is defensible.
+    variesBy: family.variesBy.length
+      ? family.variesBy.map((axis) => variesByLabels[axis] ?? axis)
+      : undefined,
+    hasVariant: family.variants.map((variant) => ({
+      "@type": "Product",
+      "@id": `${absoluteUrl(`/proizvodi/${variant.slug}`)}#product`,
+      name: variant.name,
+      url: absoluteUrl(`/proizvodi/${variant.slug}`),
+      sku: variant.catalogMetadata?.cosmosCode ?? variant.sku,
+      image: variant.productImage
+        ? absoluteUrl(variant.productImage.src)
+        : undefined,
+    })),
+  };
+}
+
 export function productJsonLd(
   product: CarsystemProduct,
   brandName: string,
   categoryName?: string,
+  family?: ProductFamily,
 ) {
   const url = absoluteUrl(`/proizvodi/${product.slug}`);
   const images = [product.productImage, ...product.galleryImages]
@@ -245,10 +297,72 @@ export function productJsonLd(
       name: brandName,
     },
     category: categoryName,
+    // Ties a consolidated variant back to its group, matching the canonical.
+    isVariantOf: family
+      ? {
+          "@type": "ProductGroup",
+          "@id": `${absoluteUrl(`/proizvodi/grupa/${family.slug}`)}#productgroup`,
+          name: family.name,
+        }
+      : undefined,
     additionalProperty: additionalProperty.length
       ? additionalProperty
       : undefined,
   };
+}
+
+/**
+ * Relationship edges for a product, derived from data already reviewed in
+ * `lib/carsystem-data.ts`.
+ *
+ * Only emitted for relationships that are also rendered on the page — the
+ * schema must not assert a connection a reader cannot see.
+ */
+export function productRelationshipJsonLd({
+  product,
+  compatibleProducts,
+  similarProducts,
+  documents,
+}: {
+  product: CarsystemProduct;
+  compatibleProducts: CarsystemProduct[];
+  similarProducts: CarsystemProduct[];
+  documents: { title: string; href: string }[];
+}) {
+  const url = absoluteUrl(`/proizvodi/${product.slug}`);
+  const toRef = (item: CarsystemProduct) => ({
+    "@type": "Product" as const,
+    "@id": `${absoluteUrl(`/proizvodi/${item.slug}`)}#product`,
+    name: item.name,
+    url: absoluteUrl(`/proizvodi/${item.slug}`),
+  });
+
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${url}#product`,
+  };
+
+  if (compatibleProducts.length) {
+    node.isRelatedTo = compatibleProducts.map(toRef);
+  }
+  if (similarProducts.length) {
+    node.isSimilarTo = similarProducts.map(toRef);
+  }
+  if (documents.length) {
+    node.subjectOf = documents.map((document) => ({
+      "@type": "DigitalDocument",
+      name: document.title,
+      url: absoluteUrl(document.href),
+      encodingFormat: "application/pdf",
+      inLanguage: siteConfig.language,
+    }));
+  }
+
+  const hasEdges = Boolean(
+    node.isRelatedTo || node.isSimilarTo || node.subjectOf,
+  );
+  return hasEdges ? node : undefined;
 }
 
 export function localBusinessJsonLd(stores: PartnerStore[]) {

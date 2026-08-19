@@ -1,3 +1,10 @@
+import {
+  clamp as clampImpl,
+  easeBrushStroke as easeBrushStrokeImpl,
+  mapProgress as mapProgressImpl,
+  normalize as normalizeImpl,
+  toTimeline as toTimelineImpl,
+} from "./paintTakeoverScene.mjs";
 import type { FinalReviewMode } from "./paintTakeoverTypes";
 
 export const TAKEOVER_SURFACE_PATH =
@@ -57,11 +64,6 @@ export const ENTRY_SHARE =
  */
 export const TIMELINE = {
   /**
-   * Painterly potezi u prethodnom bloku (iza mape i kartice). Završavaju se
-   * pre pina, tako da je gest dovučen taman kad površina preuzme kadar.
-   */
-  entryBrush: [0.0, 0.58] as const,
-  /**
    * Tamna površina koja preuzima svetlu. Kreće na 0.05 — praktično čim scena
    * uđe u viewport — pa nema faze u kojoj se skroluje kroz praznu belu ploču.
    * Glavni deo prelaza pada na sredinu scene i završava se na 0.70.
@@ -78,18 +80,17 @@ export const TIMELINE = {
   chapter: [0.08, 0.66] as const,
   /** Hero potezi: ceo staggerovani set staje u pinovani kadar. */
   strokes: [0.6, 0.92] as const,
-  /** Poslednjih ~10%: kratko smirivanje i prirodan izlazak. */
+  /** Poslednjih ~10%: kratko smirivanje, bez gubitka završnog stanja. */
   hold: [0.9, 1.0] as const,
-  /**
-   * Izlazak scene. Painterly slojevi (potezi, sprej, color wash) se gase pre
-   * kraja sekcije, tako da tamna scena zavrsava kao miran taman kadar.
+  /*
+   * Namerno NEMA `outro` prozora.
    *
-   * Bez ovoga je poslednji kadar bio artwork u punom intenzitetu, pa su roze
-   * i magenta potezi stajali neposredno uz prelaz u svetlu komercijalnu zonu i
-   * citali se kao uvodna dekoracija tog bloka. Potez sada pripada iskljucivo
-   * tamnoj sceni i nestaje u njoj.
+   * Ranije je postojao ([0.80, 0.96]) i gasio je painterly slojeve pred kraj
+   * sekcije: potezi na 0, tekst na 0.55, podloga na 0.22. Efekat je bio da se
+   * scena, pošto je animacija već odigrana, dodatno zatamni i izgubi linije
+   * dok korisnik nastavlja kroz sekciju. Završno stanje je sada terminalno:
+   * timeline stane na 1 i tu ostane do izlaska iz sekcije.
    */
-  outro: [0.8, 0.96] as const,
 } as const;
 
 /**
@@ -126,8 +127,7 @@ export function toTimeline(
   progress: number,
   share: number = ENTRY_SHARE,
 ) {
-  if (progress <= 0) return clamp(approach) * share;
-  return share + clamp(progress) * (1 - share);
+  return toTimelineImpl(approach, progress, share) as number;
 }
 
 /**
@@ -160,17 +160,21 @@ export const paintTakeoverReviewModes: Array<{
   { mode: "mask-debug", label: "MASK DEBUG" },
 ];
 
+/*
+ * Matematika kadra živi u `paintTakeoverScene.mjs` — tamo je vozi i `node
+ * --test`, pa postoji tačno jedna implementacija. Ovde su samo tipizovani
+ * ulazi, da postojeći uvozi iz ovog modula ostanu nepromenjeni.
+ */
 export function clamp(value: number, min = 0, max = 1) {
-  return Math.min(Math.max(value, min), max);
+  return clampImpl(value, min, max) as number;
 }
 
 export function normalize(progress: number, start: number, end: number) {
-  return clamp((progress - start) / Math.max(0.0001, end - start));
+  return normalizeImpl(progress, start, end) as number;
 }
 
 export function mapProgress(progress: number, start: number, end: number) {
-  const normalized = normalize(progress, start, end);
-  return normalized * normalized * (3 - 2 * normalized);
+  return mapProgressImpl(progress, start, end) as number;
 }
 
 /**
@@ -179,8 +183,7 @@ export function mapProgress(progress: number, start: number, end: number) {
  * osetno življe jer se najveći deo poteza povuče na početku gesta.
  */
 export function easeBrushStroke(progress: number) {
-  const normalized = clamp(progress);
-  return 1 - Math.pow(1 - normalized, 2.2);
+  return easeBrushStrokeImpl(progress) as number;
 }
 
 /** Faze se čitaju u `timeline` skali (approach + sticky kadar). */

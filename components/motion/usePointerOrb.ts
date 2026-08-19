@@ -1,6 +1,12 @@
 "use client";
 
 import { type RefObject, useEffect } from "react";
+import {
+  createPigmentCursorRuntime,
+  type PigmentCursorElement,
+  type PigmentCursorState,
+} from "@/components/motion/pigmentCursorRuntime";
+import type { PointerPoint } from "@/components/motion/pointerLifecycle";
 
 type CursorState =
   | "default"
@@ -43,55 +49,66 @@ const textualTags = new Set([
   "STRONG",
 ]);
 
-function canUseOrb() {
-  return window.matchMedia(
-    "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
-  ).matches;
-}
-
 function hasDirectText(element: Element) {
   return Array.from(element.childNodes).some(
     (node) => node.nodeType === Node.TEXT_NODE && Boolean(node.textContent?.trim()),
   );
 }
 
+/**
+ * Klasifikacija cilja ispod kursora. Ostaje DOM-specifična i van runtime-a:
+ * runtime zna samo za `{state, process, element}`, pa se njegov lifecycle može
+ * voziti u `node --test` bez DOM-a.
+ */
 function getCursorState(target: EventTarget | null): {
+  element: Element | null;
   process: string;
   state: CursorState;
 } {
-  if (!(target instanceof Element)) return { process: "", state: "default" };
+  if (!(target instanceof Element)) {
+    return { element: null, process: "", state: "default" };
+  }
 
   const explicit = target.closest<HTMLElement>(cursorSelector);
   const cursor = explicit?.dataset.cursor;
 
-  if (cursor === "text") return { process: "", state: "text" };
-  if (cursor === "smalltext") return { process: "", state: "smalltext" };
-  if (cursor === "link") return { process: "", state: "link" };
-  if (cursor === "button" || cursor === "cta") return { process: "", state: "button" };
-  if (cursor === "card") return { process: "", state: "card" };
-  if (cursor === "image") return { process: "", state: "image" };
+  if (cursor === "text") return { element: explicit, process: "", state: "text" };
+  if (cursor === "smalltext") {
+    return { element: explicit, process: "", state: "smalltext" };
+  }
+  if (cursor === "link") return { element: explicit, process: "", state: "link" };
+  if (cursor === "button" || cursor === "cta") {
+    return { element: explicit, process: "", state: "button" };
+  }
+  if (cursor === "card") return { element: explicit, process: "", state: "card" };
+  if (cursor === "image") return { element: explicit, process: "", state: "image" };
   if (cursor === "process" || cursor === "phase") {
     return {
+      element: explicit,
       process: explicit?.dataset.process ?? explicit?.dataset.phase ?? "",
       state: "process",
     };
   }
 
   if (explicit?.matches("button, [role='button'], input, select, textarea")) {
-    return { process: "", state: "button" };
+    return { element: explicit, process: "", state: "button" };
   }
 
   if (explicit?.matches("a[href]")) {
-    return { process: "", state: "link" };
+    return { element: explicit, process: "", state: "link" };
   }
 
   const textElement = target.closest<HTMLElement>(Array.from(textualTags).join(","));
   if (textElement && hasDirectText(textElement)) {
     const fontSize = Number.parseFloat(window.getComputedStyle(textElement).fontSize);
-    return { process: "", state: fontSize >= 26 ? "text" : "smalltext" };
+    return {
+      element: textElement,
+      process: "",
+      state: fontSize >= 26 ? "text" : "smalltext",
+    };
   }
 
-  return { process: "", state: "default" };
+  return { element: target, process: "", state: "default" };
 }
 
 export function usePointerOrb({
@@ -106,113 +123,28 @@ export function usePointerOrb({
     const currentDot = dotRef.current;
     if (!currentHalo || !currentDot) return undefined;
 
-    const halo: HTMLDivElement = currentHalo;
-    const dot: HTMLDivElement = currentDot;
+    const resolveFromEvent = (event: PointerEvent): PigmentCursorState =>
+      getCursorState(event.target);
+    const resolveFromPoint = (point: PointerPoint): PigmentCursorState =>
+      getCursorState(document.elementFromPoint(point.x, point.y));
 
-    const media = window.matchMedia(
-      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
-    );
-    const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const haloPosition = { ...target };
-    const dotPosition = { ...target };
-    let frame = 0;
-    let enabled = false;
-    let visible = false;
-    let stateKey = "";
+    const runtime = createPigmentCursorRuntime({
+      halo: currentHalo as unknown as PigmentCursorElement,
+      dot: currentDot as unknown as PigmentCursorElement,
+      env: {
+        document,
+        window,
+        matchMedia: (query) => window.matchMedia(query),
+        bodyClassList: document.body.classList,
+        resolveStateFromEvent: resolveFromEvent,
+        resolveStateFromPoint: resolveFromPoint,
+        viewportCenter: () => ({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+        }),
+      },
+    });
 
-    function cancelFrame() {
-      if (!frame) return;
-      window.cancelAnimationFrame(frame);
-      frame = 0;
-    }
-
-    function requestFrame() {
-      if (!frame && enabled && visible) {
-        frame = window.requestAnimationFrame(tick);
-      }
-    }
-
-    function setEnabled(next: boolean) {
-      enabled = next;
-      document.body.classList.toggle("cs-pigment-cursor-enabled", next);
-      halo.dataset.enabled = next ? "true" : "false";
-      dot.dataset.enabled = next ? "true" : "false";
-      if (!next) cancelFrame();
-    }
-
-    function setVisible(next: boolean) {
-      visible = next;
-      halo.dataset.visible = next ? "true" : "false";
-      dot.dataset.visible = next ? "true" : "false";
-      if (next) requestFrame();
-      else cancelFrame();
-    }
-
-    function updateState(eventTarget: EventTarget | null) {
-      const { process, state } = getCursorState(eventTarget);
-      const nextKey = `${state}:${process}`;
-      if (nextKey === stateKey) return;
-
-      stateKey = nextKey;
-      halo.dataset.state = state;
-      dot.dataset.state = state;
-      halo.dataset.process = process;
-      dot.dataset.process = process;
-    }
-
-    function move(event: PointerEvent) {
-      if (!enabled || event.pointerType !== "mouse") return;
-      target.x = event.clientX;
-      target.y = event.clientY;
-      updateState(event.target);
-      setVisible(true);
-      requestFrame();
-    }
-
-    function leave() {
-      setVisible(false);
-    }
-
-    function tick() {
-      frame = 0;
-      if (!enabled || !visible) return;
-
-      const haloEase = 0.16;
-      const dotEase = 0.36;
-      haloPosition.x += (target.x - haloPosition.x) * haloEase;
-      haloPosition.y += (target.y - haloPosition.y) * haloEase;
-      dotPosition.x += (target.x - dotPosition.x) * dotEase;
-      dotPosition.y += (target.y - dotPosition.y) * dotEase;
-
-      halo.style.transform = `translate3d(${haloPosition.x}px, ${haloPosition.y}px, 0) translate(-50%, -50%)`;
-      dot.style.transform = `translate3d(${dotPosition.x}px, ${dotPosition.y}px, 0) translate(-50%, -50%)`;
-
-      const remainingDistance = Math.max(
-        Math.abs(target.x - haloPosition.x),
-        Math.abs(target.y - haloPosition.y),
-        Math.abs(target.x - dotPosition.x),
-        Math.abs(target.y - dotPosition.y),
-      );
-      if (remainingDistance > 0.1) requestFrame();
-    }
-
-    function updateEnabled() {
-      const nextEnabled = canUseOrb();
-      setEnabled(nextEnabled);
-      if (!nextEnabled) setVisible(false);
-    }
-
-    updateEnabled();
-    media.addEventListener("change", updateEnabled);
-    document.addEventListener("pointermove", move, { passive: true });
-    document.addEventListener("pointerleave", leave);
-
-    return () => {
-      media.removeEventListener("change", updateEnabled);
-      document.removeEventListener("pointermove", move);
-      document.removeEventListener("pointerleave", leave);
-      document.body.classList.remove("cs-pigment-cursor-enabled");
-      cancelFrame();
-    };
+    return () => runtime.destroy();
   }, [dotRef, haloRef]);
 }

@@ -10,25 +10,25 @@ import { CATALOG_BATCH_SIZE } from "@/components/catalog/catalogInfiniteScroll.m
 import { Footer } from "@/components/layout/Footer";
 import type {
   CarsystemBrand,
-  CarsystemProduct,
   ProgramGroup,
   RefinishPhase,
 } from "@/lib/carsystem-data";
+import type { CatalogListingEntity } from "@/lib/catalog-listing";
 import styles from "./CatalogPage.module.css";
 
 export function CatalogPage({
-  products,
+  canonical,
   brands,
   programs,
   phases,
 }: {
-  products: CarsystemProduct[];
+  canonical: CatalogListingEntity[];
   brands: CarsystemBrand[];
   programs: ProgramGroup[];
   phases: RefinishPhase[];
 }) {
-  const firstPageProducts = products.slice(0, CATALOG_BATCH_SIZE);
-  const totalPages = Math.ceil(products.length / CATALOG_BATCH_SIZE);
+  const firstPageProducts = canonical.slice(0, CATALOG_BATCH_SIZE);
+  const totalPages = Math.ceil(canonical.length / CATALOG_BATCH_SIZE);
 
   return (
     <div className={styles.catalogShell}>
@@ -40,8 +40,8 @@ export function CatalogPage({
             <>
               <CatalogStaticProductGrid
                 brands={brands}
+                entities={firstPageProducts}
                 phases={phases}
-                products={firstPageProducts}
                 programs={programs}
               />
               <CatalogPaginationNav currentPage={1} totalPages={totalPages} />
@@ -49,7 +49,7 @@ export function CatalogPage({
           }
         >
           <CatalogExplorer
-            products={products}
+            canonical={canonical}
             brands={brands}
             programs={programs}
             phases={phases}

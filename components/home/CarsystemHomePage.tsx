@@ -5,9 +5,11 @@ import Link from "next/link";
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { ProductCategoryGrid } from "@/components/categories/ProductCategoryGrid";
+import { useProductSearchDialog } from "@/components/search/ProductSearchProvider";
 import { PRODUCT_CATEGORIES } from "@/components/layout/navigation-data";
 import { Button } from "@/components/ui/Button";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
@@ -34,7 +36,6 @@ import {
 } from "@/lib/partner-stores";
 import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
 import styles from "./CarsystemHomePage.module.css";
-import { PaintEntryBridge } from "./PaintEntryBridge";
 import { PaintTakeoverHomeSection } from "./PaintTakeoverHomeSection";
 
 const publicPartnerStores = getPublicPartnerStores();
@@ -114,6 +115,8 @@ function formatDistanceKm(distanceKm: number) {
 }
 
 export function CarsystemHomePage() {
+  const { openSearch } = useProductSearchDialog();
+  const searchTriggerRef = useRef<HTMLButtonElement>(null);
   const [selectedCity, setSelectedCity] = useState(defaultCity);
   const [selectedMapStoreId, setSelectedMapStoreId] = useState(defaultCityEntry?.id ?? "");
   const [networkMapFailed, setNetworkMapFailed] = useState(false);
@@ -342,64 +345,6 @@ export function CarsystemHomePage() {
         />
       </section>
 
-      <section
-        id="kategorije-proizvoda"
-        className={styles.categorySection}
-        aria-labelledby="homepage-categories-title"
-      >
-        <div className={styles.categorySectionInner}>
-          <div className={styles.categorySectionHeader}>
-            <div>
-              <h2 id="homepage-categories-title" data-cursor="headline">
-                Kategorije proizvoda
-              </h2>
-              <p>
-                Direktan pristup materijalima, opremi i priboru za profesionalni
-                refinish proces.
-              </p>
-            </div>
-            <div className={styles.categorySectionActions}>
-              <Button href="/katalog" className={styles.categoryCatalogCta}>
-                Pogledajte ceo katalog
-              </Button>
-              <Link
-                href="/katalog#catalog-search"
-                className={`${styles.categorySearchLink} cs-interactive-surface`}
-                data-cursor="link"
-                data-motion-surface
-              >
-                <CategorySearchIcon />
-                Pretražite proizvode
-              </Link>
-            </div>
-          </div>
-
-          <ProductCategoryGrid
-            categories={PRODUCT_CATEGORIES}
-            layout="homepage"
-          />
-        </div>
-      </section>
-
-      <a
-        className={`${styles.mobileLocator} ${
-          showMobileLocator ? styles.mobileLocatorVisible : ""
-        }`}
-        href="/prodavnice"
-      >
-        <span className={styles.buttonIcon}>
-          <IconLocation />
-        </span>
-        <span>
-          <strong>Prodavnice u mreži</strong>
-          <small>
-            {selectedStore
-              ? `${selectedStore.city} · ${getPartnerLocationTypeLabel(selectedStore)}`
-              : "Nema potvrđenih javnih lokacija"}
-          </small>
-        </span>
-      </a>
-
       <section className={styles.trustStrip} aria-labelledby="brand-strip-title">
         <div className={styles.trustInner}>
           <p id="brand-strip-title" className={styles.trustLabel}>
@@ -433,6 +378,71 @@ export function CarsystemHomePage() {
       </section>
 
       <section
+        id="kategorije-proizvoda"
+        className={styles.categorySection}
+        aria-labelledby="homepage-categories-title"
+      >
+        <div className={styles.categorySectionInner}>
+          <div className={styles.categorySectionHeader}>
+            <div>
+              <h2 id="homepage-categories-title" data-cursor="headline">
+                Kategorije proizvoda
+              </h2>
+              <p>
+                Direktan pristup materijalima, opremi i priboru za profesionalni
+                refinish proces.
+              </p>
+            </div>
+            <div className={styles.categorySectionActions}>
+              <Button href="/katalog" className={styles.categoryCatalogCta}>
+                Pogledajte ceo katalog
+              </Button>
+              {/*
+                Isti panel koji otvara lupa u Headeru — Homepage nema svoju
+                pretragu, samo drugu ulaznu tačku u zajedničku.
+              */}
+              <button
+                ref={searchTriggerRef}
+                type="button"
+                className={`${styles.categorySearchLink} cs-interactive-surface`}
+                aria-haspopup="dialog"
+                data-cursor="button"
+                data-motion-surface
+                onClick={() => openSearch(searchTriggerRef.current)}
+              >
+                <CategorySearchIcon />
+                Pretražite proizvode
+              </button>
+            </div>
+          </div>
+
+          <ProductCategoryGrid
+            categories={PRODUCT_CATEGORIES}
+            layout="homepage"
+          />
+        </div>
+      </section>
+
+      <a
+        className={`${styles.mobileLocator} ${
+          showMobileLocator ? styles.mobileLocatorVisible : ""
+        }`}
+        href="/prodavnice"
+      >
+        <span className={styles.buttonIcon}>
+          <IconLocation />
+        </span>
+        <span>
+          <strong>Prodavnice u mreži</strong>
+          <small>
+            {selectedStore
+              ? `${selectedStore.city} · ${getPartnerLocationTypeLabel(selectedStore)}`
+              : "Nema potvrđenih javnih lokacija"}
+          </small>
+        </span>
+      </a>
+
+      <section
         id="prodavnice-mreza"
         className={`${styles.sectionAlt} ${styles.networkSection} ${styles.railTarget}`}
         data-paint-debug-layout={
@@ -440,13 +450,6 @@ export function CarsystemHomePage() {
         }
         aria-labelledby="network-title"
       >
-        <div
-          className={styles.partnersBackground}
-          data-partners-background=""
-          aria-hidden="true"
-        />
-        <PaintEntryBridge debug={paintDiagnostics.debug} />
-
         <div className={styles.sectionHeader}>
           <div>
             <p className={styles.sectionKicker}>Prodajna i partnerska mreža</p>

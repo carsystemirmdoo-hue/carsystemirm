@@ -4,6 +4,7 @@ import type {
   CarsystemProduct,
   PublicProgramGroup,
 } from "@/lib/carsystem-data";
+import type { ProductFamily } from "@/lib/product-families";
 import type { SeoCategoryLanding } from "@/lib/seo/category-landings";
 import { getRmCategorySingularName } from "@/lib/seo/category-landings";
 import {
@@ -20,6 +21,14 @@ type PageMetadataInput = {
   type?: "website" | "article";
   index?: boolean;
   follow?: boolean;
+  /**
+   * Canonical target when it differs from the page's own path.
+   *
+   * Used to consolidate near-duplicate product variants onto their family page.
+   * Defaults to `path`, so self-canonicalisation stays the norm and a
+   * cross-canonical is always a deliberate, visible decision at the call site.
+   */
+  canonicalPath?: string;
 };
 
 function normalizeText(value: string) {
@@ -54,10 +63,13 @@ export function buildPageMetadata({
   type = "website",
   index = true,
   follow = true,
+  canonicalPath,
 }: PageMetadataInput): Metadata {
   const absoluteTitle = titleWithSite(title);
   const normalizedDescription = trimAtWord(description);
-  const canonicalUrl = absoluteSeoUrl(path);
+  // og:url follows the canonical, not the page path, so a shared variant link
+  // resolves to the same entity the search index consolidates on.
+  const canonicalUrl = absoluteSeoUrl(canonicalPath ?? path);
   const socialImage = absoluteSeoUrl(image);
   const shouldIndex = seoSiteConfig.indexingEnabled && index;
 
@@ -100,12 +112,29 @@ export function buildPageMetadata({
   };
 }
 
+export function buildProductFamilyMetadata(family: ProductFamily) {
+  const variantCount = family.variants.length;
+  const axisLabel = family.variesBy.includes("color") ? "nijansi i varijanti" : "varijanti";
+  const description = `${family.name} — pregled od ${variantCount} ${axisLabel} u Carsystem i R-M ponudi. Uporedite šifre i pakovanja i pošaljite upit za dostupnost.`;
+
+  return buildPageMetadata({
+    title: `${family.name} — sve varijante`,
+    description,
+    path: `/proizvodi/grupa/${family.slug}`,
+    image: family.representative.productImage?.src ?? seoSiteConfig.defaultOgImage,
+    imageAlt: `${family.name}, pregled varijanti`,
+  });
+}
+
 export function buildProductMetadata({
   brand,
   product,
+  canonicalPath,
 }: {
   brand: CarsystemBrand;
   product: CarsystemProduct;
+  /** Family page URL when this product is a consolidated variant. */
+  canonicalPath?: string;
 }) {
   const category = product.rmMetadata
     ? getRmCategorySingularName(product.rmMetadata.category)
@@ -129,6 +158,7 @@ export function buildProductMetadata({
     title,
     description,
     path: `/proizvodi/${product.slug}`,
+    canonicalPath,
     image,
     imageAlt: `${product.name}, ${brand.name} proizvod`,
   });

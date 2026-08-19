@@ -1,0 +1,244 @@
+{
+  "generatedAt": "2026-08-08T09:25:14.536Z",
+  "before": {
+    "answerable-now": 0,
+    "partially-answerable": 11,
+    "blocked-by-technical-data": 1,
+    "blocked-by-expert-validation": 8
+  },
+  "after": {
+    "answerable-now": 0,
+    "partially-answerable": 1,
+    "blocked-by-technical-data": 1,
+    "blocked-by-expert-validation": 18
+  },
+  "changed": 10,
+  "withEvidence": 10,
+  "rows": [
+    {
+      "slug": "prajmer-za-aluminijum",
+      "question": "Koji prajmer koristiti na aluminijumu?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "podloga \"aluminijum\": 14 proizvoda (9 direktno, 5 uz temeljenje) — po kategoriji: primer-filler 13, bodyfiller 1"
+      ],
+      "supportingProductCount": 14
+    },
+    {
+      "slug": "prajmer-za-plastiku",
+      "question": "Koji prajmer ide na plastiku, na primer na branik?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "podloga \"plastika\": 1 proizvoda (1 direktno, 0 uz temeljenje) — po kategoriji: bodyfiller 1"
+      ],
+      "supportingProductCount": 1
+    },
+    {
+      "slug": "prajmer-za-pocinkovani-lim",
+      "question": "Koji prajmer na pocinkovani lim?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "podloga \"pocinkovani-lim\": 13 proizvoda (8 direktno, 5 uz temeljenje) — po kategoriji: primer-filler 12, bodyfiller 1"
+      ],
+      "supportingProductCount": 13
+    },
+    {
+      "slug": "priprema-povrsine-pre-lakiranja",
+      "question": "Kako se priprema površina pre lakiranja?",
+      "priority": "high",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "odnos-mesanja-bezbojnog-laka",
+      "question": "Koji je odnos mešanja za bezbojni lak?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "polje \"mixingRatio\": 34 proizvoda",
+        "polje \"hardenerProductSlugs\": 16 proizvoda",
+        "polje \"thinnerProductSlugs\": 23 proizvoda"
+      ],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "razlika-2k-i-1k",
+      "question": "Koja je razlika između 2K i 1K laka?",
+      "priority": "medium",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "sta-je-vodena-baza",
+      "question": "Šta je vodena baza (waterborne)?",
+      "priority": "medium",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "koliko-slojeva-bezbojnog-laka",
+      "question": "Koliko slojeva bezbojnog laka treba naneti?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "polje \"coats\": 41 proizvoda",
+        "polje \"filmThicknessMicrons\": 37 proizvoda"
+      ],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "pomorandzina-kora-uzrok",
+      "question": "Zašto nastaje pomorandžina kora?",
+      "priority": "medium",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "krateri-u-laku",
+      "question": "Kako ukloniti kratere u laku?",
+      "priority": "medium",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "lak-za-felne",
+      "question": "Koji lak koristiti za felne?",
+      "priority": "medium",
+      "before": "partially-answerable",
+      "after": "partially-answerable",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "boja-otporna-na-visoke-temperature",
+      "question": "Koja boja je otporna na visoke temperature?",
+      "priority": "medium",
+      "before": "blocked-by-technical-data",
+      "after": "blocked-by-technical-data",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "kit-za-rupe-na-limu",
+      "question": "Koji kit koristiti za rupe na limu?",
+      "priority": "medium",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "podloga \"celik\": 14 proizvoda (9 direktno, 5 uz temeljenje) — po kategoriji: primer-filler 13, bodyfiller 1"
+      ],
+      "supportingProductCount": 14
+    },
+    {
+      "slug": "kako-se-bira-nijansa",
+      "question": "Kako se bira nijansa ili RAL boja?",
+      "priority": "high",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "razlika-agilis-onyx",
+      "question": "Šta je AGILIS, a šta ONYX HD?",
+      "priority": "medium",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "koliko-se-susi-lak",
+      "question": "Koliko se suši lak i na kojoj temperaturi?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "polje \"dryingProfile\": 29 proizvoda"
+      ],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "koji-razredjivac-za-koji-lak",
+      "question": "Koji razređivač ide uz koji lak?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "polje \"thinnerProductSlugs\": 23 proizvoda"
+      ],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "koja-dizna-za-bezbojni-lak",
+      "question": "Koja dizna na pištolju se koristi za bezbojni lak?",
+      "priority": "medium",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "polje \"sprayGun\": 11 proizvoda"
+      ],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "gde-kupiti-auto-lakove",
+      "question": "Gde kupiti auto lakove u Srbiji?",
+      "priority": "high",
+      "before": "blocked-by-expert-validation",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": false,
+      "evidenceDetails": [],
+      "supportingProductCount": 0
+    },
+    {
+      "slug": "sta-treba-za-lakiranje-jednog-dela",
+      "question": "Šta je sve potrebno za lakiranje jednog dela?",
+      "priority": "high",
+      "before": "partially-answerable",
+      "after": "blocked-by-expert-validation",
+      "hasEvidence": true,
+      "evidenceDetails": [
+        "polje \"mixingRatio\": 34 proizvoda",
+        "polje \"coats\": 41 proizvoda",
+        "polje \"dryingProfile\": 29 proizvoda"
+      ],
+      "supportingProductCount": 0
+    }
+  ]
+}

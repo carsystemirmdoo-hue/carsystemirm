@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { customers, portalUsers } from "@/mock-data/portal";
+import { customers, portalUsers } from "@/fixtures/dev/portal";
 import {
   can,
   ROLE_LABELS,

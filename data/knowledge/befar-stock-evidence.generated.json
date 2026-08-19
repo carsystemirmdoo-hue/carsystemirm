@@ -1,0 +1,904 @@
+{
+ "$comment": "Generisano skriptom scripts/extract-befar-stock-evidence.py. Sadrži isključivo dokaz o aktivnosti artikla — bez količina, cena i vrednosti lagera. Status nije tvrdnja o dostupnosti danas.",
+ "generatedAt": "2026-08-09T05:28:53+00:00",
+ "source": {
+  "label": "lager 23.7.26.pdf",
+  "printedOn": "2026-07-23",
+  "kind": "carsystem-stock-report",
+  "note": "Izveštaj nije u repozitorijumu jer sadrži cene i količine. Ovaj JSON je izvedeni, objavljivo-bezbedan artefakt."
+ },
+ "reconciliation": {
+  "status": "SOURCE_PENDING_RECONCILIATION",
+  "expectedSource": "lager_23-7-26_filtrirani_proizvodi.xlsx",
+  "expectedSourceFound": false,
+  "detail": "Naručeni izvor je filtrirani XLSX. On nije pronađen na mašini. Parsiran je pun PDF izveštaj sa istim datumom štampe. Razlike nisu poređene i nijedan javni sadržaj ne sme se menjati na osnovu razlike dok se XLSX ne dostavi."
+ },
+ "counts": {
+  "articles": 110,
+  "recentStockEvidence": 106,
+  "recentZeroStock": 4,
+  "families": 22
+ },
+ "articles": [
+  {
+   "reportCode": "088010",
+   "befarCode": "88010",
+   "name": "BEFAR BRUSNI BLOK MEKI MALI ORANZ",
+   "family": "Brusni blokovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "088015",
+   "befarCode": "88015",
+   "name": "BEFAR BRUSNI BLOK MEKI SREDNJI ORANZ",
+   "family": "Brusni blokovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "088020",
+   "befarCode": "88020",
+   "name": "BEFAR BRUSNI BLOK MEKI VELIKI ORANZ",
+   "family": "Brusni blokovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "089010",
+   "befarCode": "89010",
+   "name": "BEFAR BRUSNI BLOK TVRDI MALI CRVENI",
+   "family": "Brusni blokovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "089015",
+   "befarCode": "89015",
+   "name": "BEFAR BRUSNI BLOK TVRDI SREDNJI CRVENI",
+   "family": "Brusni blokovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "089020",
+   "befarCode": "89020",
+   "name": "BEFAR BRUSNI BLOK TVRDI VELIKI CRVENI",
+   "family": "Brusni blokovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "020101",
+   "befarCode": "20101",
+   "name": "BEFAR ELIPS CICAK SUNDJER ZA POLIRANJE BELI 180 X 35 MM",
+   "family": "Elips pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "020102",
+   "befarCode": "20102",
+   "name": "BEFAR ELIPS CICAK SUNDJER ZA POLIRANJE ORANZ 180 X 35 MM",
+   "family": "Elips pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "020103",
+   "befarCode": "20103",
+   "name": "BEFAR ELIPS CICAK SUNDJER ZA POLIRANJE CRNI 180 X 35 MM",
+   "family": "Elips pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "020104",
+   "befarCode": "20104",
+   "name": "BEFAR ELIPS CICAK SUNDJER ZA POLIRANJE ZUTI 180 X 35 MM",
+   "family": "Elips pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "020105",
+   "befarCode": "20105",
+   "name": "BEFAR ELIPS CICAK SUNDJER ZA POL.PLAVI 180 X 35 MM",
+   "family": "Elips pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "075011",
+   "befarCode": "75011",
+   "name": "BEFAR LIQUID COMPOUND STD 1000G",
+   "family": "Hemija 1000 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "080011",
+   "befarCode": "80011",
+   "name": "BEFAR POLISH STD 1000G",
+   "family": "Hemija 1000 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "085011",
+   "befarCode": "85011",
+   "name": "BEFAR ANTI HOLOGRAM STD 1000G",
+   "family": "Hemija 1000 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "090011",
+   "befarCode": "90011",
+   "name": "BEFAR PAINT PROTECTOR STD 1000G",
+   "family": "Hemija 1000 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "075250",
+   "befarCode": "75250",
+   "name": "BEFAR POLIR PASTA LIQUID 250 GR",
+   "family": "Hemija 250 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "080250",
+   "befarCode": "80250",
+   "name": "BEFAR POLIR PASTA AUTO POLISH 250 GR",
+   "family": "Hemija 250 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "085250",
+   "befarCode": "85250",
+   "name": "BEFAR POLIR PASTA ANTI HOLOGRAM 250 GR",
+   "family": "Hemija 250 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "090250",
+   "befarCode": "90250",
+   "name": "BEFAR POLIR PASTA PAINT PROTECT 250 GR",
+   "family": "Hemija 250 g",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "001407",
+   "befarCode": "1407",
+   "name": "BEFAR PLUS MIKROFIBER KRPA",
+   "family": "Krpe i potrošno",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "034510",
+   "befarCode": "34510",
+   "name": "BEFAR MEDENE KRPE",
+   "family": "Krpe i potrošno",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "034515",
+   "befarCode": "34515",
+   "name": "BEFAR TACK CLOTH SOFT",
+   "family": "Krpe i potrošno",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "079150",
+   "befarCode": "79150",
+   "name": "BEFAR POLUANTISTATIK FOLIJA 4X150M",
+   "family": "Krpe i potrošno",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "088180",
+   "befarCode": "88180",
+   "name": "LEO MIKROFIBER SUNDJER ČIČAK 160MM",
+   "family": "Krpe i potrošno",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "000812",
+   "befarCode": "812",
+   "name": "LEO PLUS APLIKATOR ZA KERAMIKU CRNI",
+   "family": "Leo keramika",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "008012",
+   "befarCode": "8012",
+   "name": "LEO PLUS APLIKATOR ZA KERAMIKU ZUTI",
+   "family": "Leo keramika",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "010175",
+   "befarCode": "10175",
+   "name": "LEO PLUS KRPA ZA KERAMIČKU ZAŠTITU",
+   "family": "Leo keramika",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "080012",
+   "befarCode": "80012",
+   "name": "LEO PLUS APLIKATOR ZA KERAMIKU ORANZ",
+   "family": "Leo keramika",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "098050",
+   "befarCode": "98050",
+   "name": "LEO PLUS SET NANO KERAMICKA ZASTITA",
+   "family": "Leo keramika",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "800012",
+   "befarCode": "800012",
+   "name": "LEO PLUS APLIKATOR ZA KERAMIKU CRVENI",
+   "family": "Leo keramika",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "081011",
+   "befarCode": "81011",
+   "name": "LEO MAGIČNI SUNDJER",
+   "family": "Leo ostalo",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "002401",
+   "befarCode": "2401",
+   "name": "BEFAR SUNDJER 150X50 M14 BELI",
+   "family": "M14 pene",
+   "attachment": "m14",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "002402",
+   "befarCode": "2402",
+   "name": "BEFAR SUNDJER 150X50 M14 ORANZ",
+   "family": "M14 pene",
+   "attachment": "m14",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "002403",
+   "befarCode": "2403",
+   "name": "BEFAR SUNDJER 150X45 M14 CRNI",
+   "family": "M14 pene",
+   "attachment": "m14",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "002404",
+   "befarCode": "2404",
+   "name": "BEFAR SUNDJER 150X50 M14 ŽUTI",
+   "family": "M14 pene",
+   "attachment": "m14",
+   "status": "RECENT_ZERO_STOCK"
+  },
+  {
+   "reportCode": "002405",
+   "befarCode": "2405",
+   "name": "BEFAR SUNDJER 150X50 M14 PLAVI",
+   "family": "M14 pene",
+   "attachment": "m14",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093007",
+   "befarCode": "93007",
+   "name": "BEFAR MEDJUPODLOSKA MEKA 150 MM 7 RUPA",
+   "family": "Međupodloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093015",
+   "befarCode": "93015",
+   "name": "BEFAR MEDJUPODLOŠKA MEKA 150 MM 15 RUPA",
+   "family": "Međupodloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093062",
+   "befarCode": "93062",
+   "name": "BEFAR MEDJUPODLOSKA MEKA 150 MM 62 RUPE",
+   "family": "Međupodloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_ZERO_STOCK"
+  },
+  {
+   "reportCode": "093107",
+   "befarCode": "93107",
+   "name": "BEFAR MEDJUPODLOSKA TVRDA 150 MM 7 RUPA",
+   "family": "Međupodloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093115",
+   "befarCode": "93115",
+   "name": "BEFAR MEDJUPODLOŠKA TVRDA 150 MM 15 RUPA",
+   "family": "Međupodloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093162",
+   "befarCode": "93162",
+   "name": "BEFAR MEDJUPODLOSKA TVRDA 150MM 62 RUPE",
+   "family": "Međupodloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "091025",
+   "befarCode": "91025",
+   "name": "BEFAR NETKANI ABRAZIV TABAK CRVENI",
+   "family": "Netkani abraziv",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "091030",
+   "befarCode": "91030",
+   "name": "BEFAR NETKANI ABRAZIV TABAK SIVI",
+   "family": "Netkani abraziv",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "131011",
+   "befarCode": "131011",
+   "name": "BEFAR KONUSNI SUNDJER ZA VOSAK BELI",
+   "family": "Pene za vosak",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "131021",
+   "befarCode": "131021",
+   "name": "BEFAR KONUSNI SUNDJER ZA VOSAK ORANZ",
+   "family": "Pene za vosak",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "056401",
+   "befarCode": "56401",
+   "name": "BEFAR PLUS 16 RUPA ORBITAL CICAK SUNDJER ZA POLIR. BELI 180MM",
+   "family": "Plus orbital pene",
+   "attachment": "cicak-orbital",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "056402",
+   "befarCode": "56402",
+   "name": "BEFAR PLUS 16 RUPA ORBITAL CICAK SUNDJER ZA POL. ORANZ 180MM",
+   "family": "Plus orbital pene",
+   "attachment": "cicak-orbital",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "056403",
+   "befarCode": "56403",
+   "name": "BEFAR PLUS 16 RUPA ORBITAL CICAK SUNDJER ZA POL. CRNI 180 MM",
+   "family": "Plus orbital pene",
+   "attachment": "cicak-orbital",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "056405",
+   "befarCode": "56405",
+   "name": "BEFAR PLUS 16 RUPA ORBITAL CICAK SUNDJER ZA POL. PLAVI 180 MM",
+   "family": "Plus orbital pene",
+   "attachment": "cicak-orbital",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "056407",
+   "befarCode": "56407",
+   "name": "BEFAR PLUS 16 RUPA ORBITAL CICAK SUNDJER ZA POL. VISNJA 180 MM",
+   "family": "Plus orbital pene",
+   "attachment": "cicak-orbital",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044805",
+   "befarCode": "44805",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE PLAVI 80 X 25 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044807",
+   "befarCode": "44807",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE VISNJA 80 X 25 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044808",
+   "befarCode": "44808",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE ORANŽ 80 X 25 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044809",
+   "befarCode": "44809",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE BELI 80 X 25 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "054401",
+   "befarCode": "54401",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE BELI 150 X 25 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "055401",
+   "befarCode": "55401",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE BELI 150 X 50 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "055402",
+   "befarCode": "55402",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE ORANZ 150 X 50 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "055403",
+   "befarCode": "55403",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE CRNI 150 X 50 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "055405",
+   "befarCode": "55405",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE PLAVI 150 X 50 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "055407",
+   "befarCode": "55407",
+   "name": "BEFAR PLUS CICAK SUNDJER ZA POLIRANJE VISNJA 150 X 50 MM",
+   "family": "Plus pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "008400",
+   "befarCode": "8400",
+   "name": "BEFAR CICAK PODLOSKA MEKA 75 MM",
+   "family": "Podloške / nosači",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "008401",
+   "befarCode": "8401",
+   "name": "BEFAR PODLOŠKA ZA SUNDJER MEKA 125MM",
+   "family": "Podloške / nosači",
+   "attachment": "podloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "008402",
+   "befarCode": "8402",
+   "name": "BEFAR PODLOŠKA ZA SUNDJER MEKA 150MM",
+   "family": "Podloške / nosači",
+   "attachment": "podloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "009401",
+   "befarCode": "9401",
+   "name": "BEFAR PODLOŠKA ZA SUNDJER TVRDA 125MM",
+   "family": "Podloške / nosači",
+   "attachment": "podloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "009402",
+   "befarCode": "9402",
+   "name": "BEFAR PODLOŠKA ZA SUNDJER TVRDA 150MM",
+   "family": "Podloške / nosači",
+   "attachment": "podloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "009450",
+   "befarCode": "9450",
+   "name": "BEFAR ČIČAK PODLOSKA TVRDA 75MM",
+   "family": "Podloške / nosači",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "009901",
+   "befarCode": "9901",
+   "name": "LEO PLUS DATAILING CICAK PODLOSKA 125 MM",
+   "family": "Podloške / nosači",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "009902",
+   "befarCode": "9902",
+   "name": "LEO PLUS DETAILING CICAK PODLOSKA 145 MM",
+   "family": "Podloške / nosači",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "059533",
+   "befarCode": "59533",
+   "name": "LEO PLUS DETAILING CICAK PODLOSKA 3 U 1",
+   "family": "Podloške / nosači",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "012101",
+   "befarCode": "12101",
+   "name": "BEFAR RUCNI SUNDJER ZA POLIRANJE BELI 145 X 25 MM",
+   "family": "Ručne pene za poliranje",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "012102",
+   "befarCode": "12102",
+   "name": "BEFAR RUCNI SUNDJER ZA POLIRANJE ORANZ 145 X 25 MM",
+   "family": "Ručne pene za poliranje",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "012103",
+   "befarCode": "12103",
+   "name": "BEFAR RUCNI SUNDJER ZA POLIRANJE CRNI 145 X 25 MM",
+   "family": "Ručne pene za poliranje",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "012104",
+   "befarCode": "12104",
+   "name": "BEFAR RUCNI SUNDJER ZA POLIRANJE ZUTI 145 X 25 MM",
+   "family": "Ručne pene za poliranje",
+   "attachment": "rucno",
+   "status": "RECENT_ZERO_STOCK"
+  },
+  {
+   "reportCode": "012105",
+   "befarCode": "12105",
+   "name": "BEFAR RUCNI SUNDJER ZA POLIRANJE PLAVI 145 X 25 MM",
+   "family": "Ručne pene za poliranje",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "012107",
+   "befarCode": "12107",
+   "name": "BEFAR RUCNI SUNDJER ZA POLIRANJE VISNJA 145 X 25MM",
+   "family": "Ručne pene za poliranje",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "095001",
+   "befarCode": "95001",
+   "name": "BEFAR RUCNI SUNDJER MEKI",
+   "family": "Ručni brusni sunđeri",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "095002",
+   "befarCode": "95002",
+   "name": "BEFAR RUCNI SUNDJER TVRDI",
+   "family": "Ručni brusni sunđeri",
+   "attachment": "rucno",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "005712",
+   "befarCode": "5712",
+   "name": "LEO PLUS DETAILING SET MINI SUNDJER",
+   "family": "Setovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "005812",
+   "befarCode": "5812",
+   "name": "BEFAR SET ZA POLIRANJE FAROVA",
+   "family": "Setovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "150221",
+   "befarCode": "150221",
+   "name": "LEO PLUS SET ZA POLIRANJE",
+   "family": "Setovi",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "083424",
+   "befarCode": "83424",
+   "name": "BEFAR SUNDJER ZA FAROVE",
+   "family": "Specijalni sunđeri",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "097200",
+   "befarCode": "97200",
+   "name": "BEFAR SUNDJER ZA FELNE",
+   "family": "Specijalni sunđeri",
+   "attachment": "none",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "007404",
+   "befarCode": "7404",
+   "name": "BEFAR CICAK VUNENI DISK BELI 150 MM",
+   "family": "Vuneni diskovi",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "007604",
+   "befarCode": "7604",
+   "name": "BEFAR PLUS CICAK VUNENI DISK ZUTI 150 MM",
+   "family": "Vuneni diskovi",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "448011",
+   "befarCode": "448011",
+   "name": "BEFAR WAFFLE CICAK SUNDJER ZA POLIRANJE BELI 80 X 25 MM",
+   "family": "Waffle pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "448021",
+   "befarCode": "448021",
+   "name": "BEFAR WAFFLE CICAK SUNDJER ZA POLIRANJE ORANZ 80 X 25 MM",
+   "family": "Waffle pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "448031",
+   "befarCode": "448031",
+   "name": "BEFAR WAFFLE CICAK SUNDJER ZA POLIRANJE CRNI 80 X 25 MM",
+   "family": "Waffle pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "448041",
+   "befarCode": "448041",
+   "name": "BEFAR WAFFLE CICAK SUNDJER ZA POLIRANJE ZUTI 80 X 25 MM",
+   "family": "Waffle pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093207",
+   "befarCode": "93207",
+   "name": "BEFAR ZASTITA PODLOSKE 150 MM 7 RUPA",
+   "family": "Zaštita podloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093215",
+   "befarCode": "93215",
+   "name": "BEFAR ZASTITA PODLOSKE 150 MM 15 RUPA",
+   "family": "Zaštita podloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "093262",
+   "befarCode": "93262",
+   "name": "BEFAR ZASTITA PODLOSKE 150 MM 62 RUPE",
+   "family": "Zaštita podloške",
+   "attachment": "medjupodloska",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "003401",
+   "befarCode": "3401",
+   "name": "BEFAR SUNDJER CICAK 150X50 BELI",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "003402",
+   "befarCode": "3402",
+   "name": "BEFAR SUNDJER CICAK 150X50 ORANZ",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "003403",
+   "befarCode": "3403",
+   "name": "BEFAR SUNDJER CICAK 150X45 CRNI",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "003405",
+   "befarCode": "3405",
+   "name": "BEFAR SUNDJER CICAK 150X50 PLAVI",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "004401",
+   "befarCode": "4401",
+   "name": "BEFAR SUNDJER CICAK 150X25 BELI",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "004402",
+   "befarCode": "4402",
+   "name": "BEFAR SUNDJER CICAK 150X25 ORANZ",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "004403",
+   "befarCode": "4403",
+   "name": "BEFAR SUNDJER CICAK 150X25 CRNI",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "004405",
+   "befarCode": "4405",
+   "name": "BEFAR SUNDJER CICAK 150X25 PLAVI",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "006401",
+   "befarCode": "6401",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE BELI 180 X 35 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "006402",
+   "befarCode": "6402",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE ORANZ 180 X 35 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "006403",
+   "befarCode": "6403",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE CRNI 180 X 35 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "006404",
+   "befarCode": "6404",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE ZUTI 180 X 35 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "006405",
+   "befarCode": "6405",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE PLAVI 180 X 35 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044801",
+   "befarCode": "44801",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE BELI 80 X 25 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044802",
+   "befarCode": "44802",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE ORANŽ 80 X 25 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044803",
+   "befarCode": "44803",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE CRNI 80 X 25 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_STOCK_EVIDENCE"
+  },
+  {
+   "reportCode": "044804",
+   "befarCode": "44804",
+   "name": "BEFAR CICAK SUNDJER ZA POLIRANJE ZUTI 80 X 25 MM",
+   "family": "Čičak pene",
+   "attachment": "cicak",
+   "status": "RECENT_ZERO_STOCK"
+  },
+  {
+   "reportCode": "052507",
+   "befarCode": "52507",
+   "name": "LEO PLUS ORBITAL CICAK SUNDJER ZA POL. 150 MM VISNJA",
+   "family": "Čičak pene",
+   "attachment": "cicak-orbital",
+   "status": "RECENT_STOCK_EVIDENCE"
+  }
+ ]
+}

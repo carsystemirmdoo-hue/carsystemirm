@@ -1,0 +1,2172 @@
+{
+  "summary": {
+    "generatedAt": "2026-08-08T20:17:27.231Z",
+    "brand": "NORBIN",
+    "manufacturer": "BASF Coatings GmbH",
+    "brandOwnerVerifiedFrom": "https://www.norbin-paint.com/en/norbin-range.html (footer: “NORBIN® is a registered Trademark of BASF Coatings GmbH”)",
+    "source": "https://www.norbin-paint.com",
+    "sourceArchitecture": "static HTML, one range page per region; no CMS, no REST API, no sitemap, no robots.txt",
+    "regionsProbed": 6,
+    "regionStatus": {
+      "en": {
+        "published": true,
+        "tdsLinks": 7,
+        "msdsLinks": 17,
+        "unlinkedInSource": 2
+      },
+      "me": {
+        "published": false,
+        "stubMarker": "Inhalte ME",
+        "tdsLinks": 0,
+        "msdsLinks": 0,
+        "unlinkedInSource": 0
+      },
+      "de": {
+        "published": false,
+        "stubMarker": "Inhalte DE",
+        "tdsLinks": 0,
+        "msdsLinks": 0,
+        "unlinkedInSource": 0
+      },
+      "pl": {
+        "published": false,
+        "stubMarker": "Inhalte PL",
+        "tdsLinks": 0,
+        "msdsLinks": 0,
+        "unlinkedInSource": 0
+      },
+      "tr": {
+        "published": true,
+        "tdsLinks": 13,
+        "msdsLinks": 23,
+        "unlinkedInSource": 33
+      },
+      "kz": {
+        "published": true,
+        "tdsLinks": 1,
+        "msdsLinks": 4,
+        "unlinkedInSource": 0
+      }
+    },
+    "publishedRegions": 3,
+    "unpublishedRegions": [
+      "me",
+      "de",
+      "pl"
+    ],
+    "products": 24,
+    "liveProducts": 18,
+    "unlinkedOnlyProducts": 6,
+    "productsByRegion": {
+      "en": 13,
+      "kz": 2,
+      "tr": 17
+    },
+    "withOfficialName": 18,
+    "withTds": 19,
+    "withSds": 18,
+    "variants": 22,
+    "documents": 100,
+    "documentsLive": 65,
+    "documentsUnlinked": 35,
+    "brochures": 2,
+    "productPages": 0,
+    "productImages": 0
+  },
+  "products": [
+    {
+      "code": "N15-020",
+      "officialName": "N15-020 Clear",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "1 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF"
+          ]
+        },
+        {
+          "packSize": "5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+        "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+        "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N15-120",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [],
+      "regionsUnlinkedOnly": [
+        "tr"
+      ],
+      "availability": "unlinked-in-source",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N15-120.pdf"
+      ],
+      "sdsDocuments": [],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N15-V20",
+      "officialName": "N15-V20 Clear VOC",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "4 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N15-V20.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N15-V25",
+      "officialName": "N15-V25 Fast Clear VOC",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-015",
+      "officialName": "N55-015 1K Plastic Primer",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "1 L",
+          "regions": [
+            "en"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N55-015-NORBIN_1K_Plastic_Primer_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-110",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [],
+      "regionsUnlinkedOnly": [
+        "tr"
+      ],
+      "availability": "unlinked-in-source",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N55-110.pdf"
+      ],
+      "sdsDocuments": [],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-115",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [],
+      "regionsUnlinkedOnly": [
+        "tr"
+      ],
+      "availability": "unlinked-in-source",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N55-115.pdf"
+      ],
+      "sdsDocuments": [],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-120",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [],
+      "regionsUnlinkedOnly": [
+        "tr"
+      ],
+      "availability": "unlinked-in-source",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N55-120.pdf"
+      ],
+      "sdsDocuments": [],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-121",
+      "officialName": "N55-121 Dolgu Astarı",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "1 L",
+          "regions": [
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121 2KPrimerFiller1L_TR.PDF"
+          ]
+        },
+        {
+          "packSize": "2.5 L",
+          "regions": [
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121 2KPrimerFiller2.5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N55-121_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121 2KPrimerFiller1L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121 2KPrimerFiller2.5L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-V15",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [],
+      "regionsUnlinkedOnly": [
+        "tr"
+      ],
+      "availability": "unlinked-in-source",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N55-V15.pdf"
+      ],
+      "sdsDocuments": [],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-V20",
+      "officialName": "N55-V20 2K Primer Filler grey",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "2.5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2.5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N55-V20_2K_Primer_Filler_tr_v2_new.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2.5L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N55-V29",
+      "officialName": "N55-V29 2K Primer Filler black",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "2.5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5l_tr.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N55-V29_2K_Primer_Filler_black_tr_new.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5l_tr.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N60-100",
+      "officialName": "N60-100 Universal Macun",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "2.7 KG",
+          "regions": [
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/N60-100_Universal_TR2.pdf"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N60-100_Universal_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/N60-100_Universal_TR2.pdf",
+        "https://www.norbin-paint.com/files/MSDS/N60-100_Sertlestirici_TR.pdf"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N60-V20",
+      "officialName": "N60-V20 Multifunctional Body Filler + Hardener",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "1.95 KG",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_tr.PDF"
+          ]
+        },
+        {
+          "packSize": "0.05 KG",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N75-020",
+      "officialName": "N75-020 Hardener Fast",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "0.5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0.5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0.5L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N75-021",
+      "officialName": "N75-021 Hardener Normal",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "0.5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_0.5L_TR.PDF"
+          ]
+        },
+        {
+          "packSize": "2.5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_2.5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_0.5L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_2.5L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_0,5L_ru.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_2,5L_ru.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N75-022",
+      "officialName": "N75-022 Hardener Slow",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "2.5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_2.5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_2.5L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N75-121",
+      "officialName": "N75-121 Sertleştirici Normal",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "0.25 L",
+          "regions": [
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121 HardenerNormal0.25L_TR.PDF"
+          ]
+        },
+        {
+          "packSize": "1 L",
+          "regions": [
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121 HardenerNormal1L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N75-121_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121 HardenerNormal0.25L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121 HardenerNormal1L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N75-V21",
+      "officialName": "N75-V21 Clear Hardener VOC",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "1 L",
+          "regions": [
+            "en"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N85-021",
+      "officialName": "N85-021 Thinner",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "1 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_TR.PDF"
+          ]
+        },
+        {
+          "packSize": "5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_tiner_5L_tr.pdf"
+          ]
+        }
+      ],
+      "tdsDocuments": [],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_TR.PDF",
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_tiner_5L_tr.pdf"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N85-120",
+      "officialName": "N85-120 Tiner Normal",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N85-120_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N85-120 ThinnerNormal1L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N85-121",
+      "officialName": "N85-121 Tiner Yavaş",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N85-121_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/MSDS_N85-121 ThinnerSlow1L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N95-060",
+      "officialName": "N95-060 Silicone cleaner",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "regionsUnlinkedOnly": [],
+      "availability": "live",
+      "variants": [
+        {
+          "packSize": "5 L",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_TR.PDF"
+          ]
+        }
+      ],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+        "https://www.norbin-paint.com/files/TDS/TR/N95-060 - NORBIN_Silicone_Cleaner_TR.pdf"
+      ],
+      "sdsDocuments": [
+        "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF",
+        "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_TR.PDF"
+      ],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "code": "N95-150",
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false,
+      "regions": [],
+      "regionsUnlinkedOnly": [
+        "tr"
+      ],
+      "availability": "unlinked-in-source",
+      "variants": [],
+      "tdsDocuments": [
+        "https://www.norbin-paint.com/files/TDS/TR/N95-150.pdf"
+      ],
+      "sdsDocuments": [],
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    }
+  ],
+  "documents": [
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+      "fileName": "NORBIN_TDS_N15-020_Clear_2022.pdf",
+      "label": "NORBIN ® N15-020 Clear",
+      "code": "N15-020",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+      "fileName": "NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+      "label": "NORBIN ® N15-V20 Clear VOC",
+      "code": "N15-V20",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+      "fileName": "N15-V25_Fast_Clear_VOC_2.pdf",
+      "label": "NORBIN ® N15-V25 Fast Clear VOC",
+      "code": "N15-V25",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+      "fileName": "N55-015_1K_Plastic_Primer.pdf",
+      "label": "NORBIN ® N55-015 1K Plastic Primer",
+      "code": "N55-015",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+      "fileName": "N55-V29_2K_Primer_Filler_black.pdf",
+      "label": "NORBIN ® N55-V29 2K Primer Filler black",
+      "code": "N55-V29",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+      "fileName": "N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+      "label": "NORBIN ® N60-V20 Multifunctional Body Filler + Hardener",
+      "code": "N60-V20",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+      "fileName": "N95-060_Silicone_Cleaner.pdf",
+      "label": "NORBIN ® N95-060 Silicone cleaner",
+      "code": "N95-060",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf",
+      "fileName": "NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+      "fileName": "N15-020_Clear_1L.PDF",
+      "label": "NORBIN ® N15-020 Clear 1L",
+      "code": "N15-020",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+      "fileName": "N15-020_Clear_5L.PDF",
+      "label": "NORBIN ® N15-020 Clear 5L",
+      "code": "N15-020",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+      "fileName": "MSDS_N15-V20_4L_en.PDF",
+      "label": "NORBIN ® N15-V20 Clear VOC 4L",
+      "code": "N15-V20",
+      "packSize": "4 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+      "fileName": "SDS_N15-V25_5L_en.PDF",
+      "label": "NORBIN ® N15-V25 Fast Clear VOC 5L",
+      "code": "N15-V25",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+      "fileName": "SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+      "label": "NORBIN ® N55-015 1K Plastic Primer 1L",
+      "code": "N55-015",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF",
+      "fileName": "SDS_N55-V20_2_5L_en.PDF",
+      "label": "NORBIN ® N55-V20 2K Primer Filler grey 2,5L",
+      "code": "N55-V20",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF",
+      "fileName": "SDS_N55-V29_2-5L_en.PDF",
+      "label": "NORBIN ® N55-V29 2K Primer Filler black 2,5L",
+      "code": "N55-V29",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+      "fileName": "SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+      "label": "NORBIN ® N60-V20 Multifunctional Body Filler 1,95 kg",
+      "code": "N60-V20",
+      "packSize": "1.95 KG",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+      "fileName": "SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+      "label": "NORBIN ® N60-V20 Hardener for Body Filler 0,05kg",
+      "code": "N60-V20",
+      "packSize": "0.05 KG",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF",
+      "fileName": "SDS_N75-020_0_5L_en.PDF",
+      "label": "NORBIN ® N75-020 Hardener Fast 0,5L",
+      "code": "N75-020",
+      "packSize": "0.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF",
+      "fileName": "SDS_N75-021_new_0_5L_en.PDF",
+      "label": "NORBIN ® N75-021 Hardener Normal 0,5L",
+      "code": "N75-021",
+      "packSize": "0.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF",
+      "fileName": "SDS_N75-021_new_2_5L_en.PDF",
+      "label": "NORBIN ® N75-021 Hardener Normal 2,5L",
+      "code": "N75-021",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF",
+      "fileName": "SDS_N75-022_0_5L_en.PDF",
+      "label": "NORBIN ® N75-022 Hardener Slow 2,5L",
+      "code": "N75-022",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF",
+      "fileName": "MSDS_N75-V21_1L_en.PDF",
+      "label": "NORBIN ® N75-V21 Clear Hardener VOC 1L",
+      "code": "N75-V21",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF",
+      "fileName": "SDS_N85-021_1L_en.PDF",
+      "label": "NORBIN ® N85-021 Thinner 1L",
+      "code": "N85-021",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf",
+      "fileName": "MSDS_N85-021_thinner_5L_en.pdf",
+      "label": "NORBIN ® N85-021 Thinner 5L",
+      "code": "N85-021",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF",
+      "fileName": "SDS_N95-060SiliconeCleaner_5L_en.PDF",
+      "label": "NORBIN ® N95-060 Silicone Cleaner 5L",
+      "code": "N95-060",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/N55-V15_1K_Primer_Filler_VOC_1L.PDF",
+      "fileName": "N55-V15_1K_Primer_Filler_VOC_1L.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+      "fileName": "N15-020.pdf",
+      "label": "NORBIN ® N15-020 Vernik",
+      "code": "N15-020",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N15-V20.pdf",
+      "fileName": "N15-V20.pdf",
+      "label": "NORBIN ® N15-V20 Vernik VOC",
+      "code": "N15-V20",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf",
+      "fileName": "N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf",
+      "label": "NORBIN ® N15-V25 Hızlı Vernik VOC",
+      "code": "N15-V25",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-015-NORBIN_1K_Plastic_Primer_TR.pdf",
+      "fileName": "N55-015-NORBIN_1K_Plastic_Primer_TR.pdf",
+      "label": "NORBIN ® N55-015 1K Plastik Astar",
+      "code": "N55-015",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+      "fileName": "N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+      "label": "NORBIN ® N55-V20 2K Astar-Gri",
+      "code": "N55-V20",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-V29_2K_Primer_Filler_black_tr_new.pdf",
+      "fileName": "N55-V29_2K_Primer_Filler_black_tr_new.pdf",
+      "label": "NORBIN ® N55-V29 2K Astar-Siyah",
+      "code": "N55-V29",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-121_TR.pdf",
+      "fileName": "N55-121_TR.pdf",
+      "label": "NORBIN ® N55-121 Dolgu Astarı",
+      "code": "N55-121",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf",
+      "fileName": "N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf",
+      "label": "NORBIN ® N60-V20 Multifonksiyonel Macun + Sertleştirici",
+      "code": "N60-V20",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N60-100_Universal_TR.pdf",
+      "fileName": "N60-100_Universal_TR.pdf",
+      "label": "NORBIN ® N60-100 Universal Macun 2.7kg",
+      "code": "N60-100",
+      "packSize": "2.7 KG",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N75-121_TR.pdf",
+      "fileName": "N75-121_TR.pdf",
+      "label": "NORBIN ® N75-121 Sertleştirici Normal",
+      "code": "N75-121",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N85-120_TR.pdf",
+      "fileName": "N85-120_TR.pdf",
+      "label": "NORBIN ® N85-120 Tiner Normal",
+      "code": "N85-120",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N85-121_TR.pdf",
+      "fileName": "N85-121_TR.pdf",
+      "label": "NORBIN ® N85-121 Tiner Yavaş",
+      "code": "N85-121",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N95-060 - NORBIN_Silicone_Cleaner_TR.pdf",
+      "fileName": "N95-060 - NORBIN_Silicone_Cleaner_TR.pdf",
+      "label": "NORBIN ® N95-060 Silikon Temizleme Maddesi",
+      "code": "N95-060",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N15-120.pdf",
+      "fileName": "N15-120.pdf",
+      "code": "N15-120",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-110.pdf",
+      "fileName": "N55-110.pdf",
+      "code": "N55-110",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-115.pdf",
+      "fileName": "N55-115.pdf",
+      "code": "N55-115",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-120.pdf",
+      "fileName": "N55-120.pdf",
+      "code": "N55-120",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-V15.pdf",
+      "fileName": "N55-V15.pdf",
+      "code": "N55-V15",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N95-150.pdf",
+      "fileName": "N95-150.pdf",
+      "code": "N95-150",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+      "fileName": "SDS_N15-020_1L_TR.PDF",
+      "label": "NORBIN ® N15-020 Vernik 1L",
+      "code": "N15-020",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+      "fileName": "SDS_N15-020_5L_TR.PDF",
+      "label": "NORBIN ® N15-020 Vernik 5L",
+      "code": "N15-020",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF",
+      "fileName": "SDS_N15-V20_4L_TR.PDF",
+      "label": "NORBIN ® N15-V20 Vernik VOC 4L",
+      "code": "N15-V20",
+      "packSize": "4 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF",
+      "fileName": "SDS_N15-V25_5L_TR.PDF",
+      "label": "NORBIN ® N15-V25 Hızlı vernik VOC 5L",
+      "code": "N15-V25",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2.5L_TR.PDF",
+      "fileName": "SDS_N55-V20_2.5L_TR.PDF",
+      "label": "NORBIN ® N55-V20 2K Astar-Gri 2,5L",
+      "code": "N55-V20",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5l_tr.PDF",
+      "fileName": "SDS_N55-V29_2-5l_tr.PDF",
+      "label": "NORBIN ® N55-V29 2K Astar-Siyah 2,5L",
+      "code": "N55-V29",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121 2KPrimerFiller1L_TR.PDF",
+      "fileName": "MSDS_N55-121 2KPrimerFiller1L_TR.PDF",
+      "label": "NORBIN ® N55-121 Dolgu Astarı 1L",
+      "code": "N55-121",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121 2KPrimerFiller2.5L_TR.PDF",
+      "fileName": "MSDS_N55-121 2KPrimerFiller2.5L_TR.PDF",
+      "label": "NORBIN ® N55-121 Dolgu Astarı 2.5L",
+      "code": "N55-121",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+      "fileName": "SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+      "label": "NORBIN ® N60-V20 Multifonksiyonel Macun 1.95kg",
+      "code": "N60-V20",
+      "packSize": "1.95 KG",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF",
+      "fileName": "SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF",
+      "label": "NORBIN ® N60-V20 Sertleştirici Macun 0.05kg",
+      "code": "N60-V20",
+      "packSize": "0.05 KG",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/N60-100_Universal_TR2.pdf",
+      "fileName": "N60-100_Universal_TR2.pdf",
+      "label": "NORBIN ® N60-100 Universal Macun 2.7kg",
+      "code": "N60-100",
+      "packSize": "2.7 KG",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/N60-100_Sertlestirici_TR.pdf",
+      "fileName": "N60-100_Sertlestirici_TR.pdf",
+      "label": "NORBIN ® N60-100 Sertleştirici Macun",
+      "code": "N60-100",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0.5L_TR.PDF",
+      "fileName": "SDS_N75-020_0.5L_TR.PDF",
+      "label": "NORBIN ® N75-020 Sertleiştirici-Hızlı 0,5L",
+      "code": "N75-020",
+      "packSize": "0.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_0.5L_TR.PDF",
+      "fileName": "SDS_N75-021_0.5L_TR.PDF",
+      "label": "NORBIN ® N75-021 Sertleştirici-Normal 0,5L",
+      "code": "N75-021",
+      "packSize": "0.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_2.5L_TR.PDF",
+      "fileName": "SDS_N75-021_2.5L_TR.PDF",
+      "label": "NORBIN ® N75-021 Sertleştici Normal 2,5L",
+      "code": "N75-021",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_2.5L_TR.PDF",
+      "fileName": "SDS_N75-022_2.5L_TR.PDF",
+      "label": "NORBIN ® N75-022 Sertleştici-Yavaş 2,5L",
+      "code": "N75-022",
+      "packSize": "2.5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121 HardenerNormal0.25L_TR.PDF",
+      "fileName": "MSDS_N75-121 HardenerNormal0.25L_TR.PDF",
+      "label": "NORBIN ® N75-121 Sertleştirici Normal 0.25L",
+      "code": "N75-121",
+      "packSize": "0.25 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121 HardenerNormal1L_TR.PDF",
+      "fileName": "MSDS_N75-121 HardenerNormal1L_TR.PDF",
+      "label": "NORBIN ® N75-121 Sertleştirici Normal 1L",
+      "code": "N75-121",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_TR.PDF",
+      "fileName": "SDS_N85-021_1L_TR.PDF",
+      "label": "NORBIN ® N85-021 Tiner 1L",
+      "code": "N85-021",
+      "packSize": "1 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_tiner_5L_tr.pdf",
+      "fileName": "MSDS_N85-021_tiner_5L_tr.pdf",
+      "label": "NORBIN ® N85-021 Tiner 5L",
+      "code": "N85-021",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-120 ThinnerNormal1L_TR.PDF",
+      "fileName": "MSDS_N85-120 ThinnerNormal1L_TR.PDF",
+      "label": "NORBIN ® N85-120 Tiner Normal",
+      "code": "N85-120",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-121 ThinnerSlow1L_TR.PDF",
+      "fileName": "MSDS_N85-121 ThinnerSlow1L_TR.PDF",
+      "label": "NORBIN ® N85-121 Tiner Yavaş",
+      "code": "N85-121",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_TR.PDF",
+      "fileName": "SDS_N95-060SiliconeCleaner_5L_TR.PDF",
+      "label": "NORBIN ® N95-060 Silikon Temizleme Maddesi 5L",
+      "code": "N95-060",
+      "packSize": "5 L",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-120_1L_TR.PDF",
+      "fileName": "SDS_N15-120_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-120_2.5L_TR.PDF",
+      "fileName": "SDS_N15-120_2.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N15-120_5L_TR.PDF",
+      "fileName": "SDS_N15-120_5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-015_1KPlasticPrimer_1L_TR.PDF",
+      "fileName": "SDS_N55-015_1KPlasticPrimer_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-110_1L_TR.PDF",
+      "fileName": "SDS_N55-110_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-110_2.5L_TR.PDF",
+      "fileName": "SDS_N55-110_2.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-115_1L_TR.PDF",
+      "fileName": "SDS_N55-115_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-120_1L_TR.PDF",
+      "fileName": "SDS_N55-120_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-120_2L_TR.PDF",
+      "fileName": "SDS_N55-120_2L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V15_1L_TR.PDF",
+      "fileName": "SDS_N55-V15_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-120_0.5L_TR.PDF",
+      "fileName": "SDS_N75-120_0.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-120_1L_TR.PDF",
+      "fileName": "SDS_N75-120_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-120_2.5L_TR.PDF",
+      "fileName": "SDS_N75-120_2.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-121_0.5L_TR.PDF",
+      "fileName": "SDS_N75-121_0.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-121_1L_TR.PDF",
+      "fileName": "SDS_N75-121_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-121_2.5L_TR.PDF",
+      "fileName": "SDS_N75-121_2.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-122_0.5L_TR.PDF",
+      "fileName": "SDS_N75-122_0.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-122_1L_TR.PDF",
+      "fileName": "SDS_N75-122_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-122_2.5L_TR.PDF",
+      "fileName": "SDS_N75-122_2.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N75-V21_1L_TR.PDF",
+      "fileName": "SDS_N75-V21_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N85-120_1L_TR.PDF",
+      "fileName": "SDS_N85-120_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N85-120_5L_TR.PDF",
+      "fileName": "SDS_N85-120_5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N85-140_1L_TR.PDF",
+      "fileName": "SDS_N85-140_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N95-110_0.25L_TR.PDF",
+      "fileName": "SDS_N95-110_0.25L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N95-120_0.5L_TR.PDF",
+      "fileName": "SDS_N95-120_0.5L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N95-150_1kg_TR.PDF",
+      "fileName": "SDS_N95-150_1kg_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "unlinked-in-source",
+      "region": "tr",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/SDS_N95-160_1L_TR.PDF",
+      "fileName": "SDS_N95-160_1L_TR.PDF",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "tds",
+      "availability": "live",
+      "region": "kz",
+      "sourceUrl": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf",
+      "fileName": "NORBIN_TDS_N15-020_Clear_RUS.pdf",
+      "label": "NORBIN ® Лак N15-020",
+      "code": "N15-020",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "kz",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+      "fileName": "MSDS_N15-020_1L_ru.PDF",
+      "label": "NORBIN ® N15-020 лак 1 л",
+      "code": "N15-020",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "kz",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF",
+      "fileName": "MSDS_N15-020_5L_ru.PDF",
+      "label": "NORBIN ® N15-020 лак 5 л",
+      "code": "N15-020",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "kz",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_0,5L_ru.PDF",
+      "fileName": "MSDS_N75-021_0,5L_ru.PDF",
+      "label": "NORBIN ® N75-021 отвердитель 0,5 л",
+      "code": "N75-021",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "sds",
+      "availability": "live",
+      "region": "kz",
+      "sourceUrl": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_2,5L_ru.PDF",
+      "fileName": "MSDS_N75-021_2,5L_ru.PDF",
+      "label": "NORBIN ® N75-021 отвердитель 2,5 л",
+      "code": "N75-021",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    }
+  ],
+  "brochures": [
+    {
+      "documentType": "brochure",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/NORBIN_Broch_EN_2024_mai.pdf",
+      "fileName": "NORBIN_Broch_EN_2024_mai.pdf",
+      "label": "Refinish a winner with NORBIN ® (EN)",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    },
+    {
+      "documentType": "technical-poster",
+      "availability": "live",
+      "region": "en",
+      "sourceUrl": "https://www.norbin-paint.com/files/NORBIN_A3-Sheet_Tech-Info_Grey-Shades_230221b_druck.pdf",
+      "fileName": "NORBIN_A3-Sheet_Tech-Info_Grey-Shades_230221b_druck.pdf",
+      "label": "Grey shade poster",
+      "manufacturer": "BASF Coatings GmbH",
+      "brand": "NORBIN",
+      "accessedAt": "2026-08-08T20:17:27.231Z",
+      "published": false
+    }
+  ]
+}

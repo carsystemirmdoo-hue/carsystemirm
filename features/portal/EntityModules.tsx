@@ -9,7 +9,7 @@ import {
   orders,
   portalUsers,
   products,
-} from "@/mock-data/portal";
+} from "@/fixtures/dev/portal";
 import { can } from "@/permissions/portal-permissions";
 import type { Product } from "@/types/portal";
 import { PortalIcon } from "@/components/portal/PortalIcon";

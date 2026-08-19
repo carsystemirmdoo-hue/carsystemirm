@@ -18,7 +18,7 @@ import {
   orders as initialOrders,
   priceRules as initialPriceRules,
   tasks as initialTasks,
-} from "@/mock-data/portal";
+} from "@/fixtures/dev/portal";
 import type {
   ApprovalRequest,
   AuditEvent,

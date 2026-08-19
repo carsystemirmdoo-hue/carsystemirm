@@ -8,8 +8,8 @@ import {
   getAllCarsystemBrands,
   programGroups,
   refinishPhases,
-  toProductListingProduct,
 } from "@/lib/carsystem-data";
+import { toCatalogListingEntity } from "@/lib/catalog-listing";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
@@ -46,7 +46,7 @@ export default async function CategoryRoute({ params }: CategoryRouteProps) {
   const category = getSeoCategoryLanding(slug);
   if (!category) notFound();
 
-  const products = getSeoCategoryProducts(category).map(toProductListingProduct);
+  const products = getSeoCategoryProducts(category).map(toCatalogListingEntity);
   const route = `/kategorije/${category.slug}`;
   const breadcrumbs = [
     { name: "Početna", path: "/" },
@@ -67,7 +67,7 @@ export default async function CategoryRoute({ params }: CategoryRouteProps) {
             name: category.title,
             description: category.description,
             path: route,
-            itemUrls: products.map((product) => `/proizvodi/${product.slug}`),
+            itemUrls: products.map((product) => product.href),
           }),
         )}
       />
@@ -95,7 +95,7 @@ export default async function CategoryRoute({ params }: CategoryRouteProps) {
         <CatalogStaticProductGrid
           brands={getAllCarsystemBrands()}
           phases={refinishPhases}
-          products={products}
+          entities={products}
           programs={programGroups}
         />
       </main>

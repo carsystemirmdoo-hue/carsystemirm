@@ -369,6 +369,45 @@
   margin: 0 0 28px;
 }
 
+/*
+  Aktivna kategorija stiže iz URL-a (Header/Homepage deep link), pa se prikazuje
+  kao uklonjiv chip iznad faza — ne kao još jedno polje u sidebar filterima,
+  koji su na mobilnom skupljeni i ne bi pokazali šta filtrira listu.
+*/
+.activeCategoryBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin: 0 0 22px;
+}
+
+.activeCategoryChip {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--catalog-border-soft);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.activeCategoryChip:hover {
+  border-color: currentColor;
+}
+
+.activeCategoryHint {
+  margin: 0;
+  color: var(--catalog-faint);
+  font-size: 13px;
+}
+
 .phaseTabs {
   display: flex;
   flex-wrap: wrap;
@@ -527,10 +566,16 @@
   z-index: 1;
   display: grid;
   flex: 0 0 auto;
-  gap: 8px;
+  gap: 4px;
   border-bottom: 1px solid var(--catalog-border-soft);
   background: color-mix(in srgb, var(--catalog-panel) 94%, transparent);
-  padding: 20px 20px 12px;
+  /*
+   * Bottom padding smanjen 12px→2px (Phase 3.1): header i .filtersResetSlot
+   * (32px, i dalje netaknut — 1:1 sa .clearButton min-height, čuva ga da bez
+   * skoka layout-a kad se pojavi "Resetuj filtere") ostaju isti, samo se
+   * uklanja dodatni vazduh IZNAD granice pre prvog filtera.
+   */
+  padding: 20px 20px 2px;
 }
 
 .filtersHeader {
@@ -572,7 +617,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior-y: auto;
-  padding: 15px 20px 30px;
+  /* Top padding smanjen 15px→4px (Phase 3.1) — isti fix kao gore, sa druge strane granice. Field-to-field gap (15px) i bottom padding (30px) nepromenjeni. */
+  padding: 4px 20px 30px;
   scroll-padding-block: 12px 30px;
   scrollbar-color:
     color-mix(in srgb, var(--catalog-muted) 42%, transparent)
@@ -753,10 +799,84 @@
   min-width: 0;
 }
 
+.resultBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin: 0 0 14px;
+}
+
+.resultCount {
+  margin: 0;
+  color: var(--catalog-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sortRail {
+  display: flex;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  gap: 4px;
+  scrollbar-width: none;
+}
+
+.sortRail::-webkit-scrollbar {
+  display: none;
+}
+
+.sortTab {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--catalog-faint);
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.sortTab:hover {
+  color: var(--catalog-ink);
+}
+
+.sortTabActive {
+  background: color-mix(in srgb, var(--catalog-red-bright) 12%, transparent);
+  color: var(--catalog-red-bright);
+}
+
+.sortTab:focus-visible {
+  outline: 2px solid var(--catalog-red);
+  outline-offset: 2px;
+}
+
 .productGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 248px), 1fr));
   gap: 16px;
+}
+
+@media (min-width: 1200px) {
+  /*
+   * auto-fit je ranije puštao rezultate da preuzmu širinu kad sidebar
+   * nestane i tako doda 4. kolonu (istorijski poznat problem). Fiksan
+   * broj kolona po širini viewporta drži isti broj kartica bez obzira na
+   * stanje sidebar-a — kartice se samo šire kad sidebar kolabira.
+   */
+  .productGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .productCard .catalogProductVisual {
@@ -792,12 +912,34 @@
   outline-offset: 3px;
 }
 
+/*
+ * Finalni B-system: radius 2 umesto 16, samo za stvarne /katalog kartice
+ * (data-card-system="b" — vidi CatalogProductCard.tsx). Partner brand
+ * stranice (npr. Cosmos) i PDP joined-row dele istu komponentu, ali ne
+ * prosleđuju ovaj prop, pa zadržavaju postojeći izgled bez izmene.
+ */
+.productCard[data-card-system="b"] {
+  border-radius: var(--ds-radius, 2px);
+}
+
 .productBody {
   display: flex;
   min-height: 140px;
   flex-direction: column;
   gap: 10px;
   padding: 16px 17px 18px;
+}
+
+.productCode {
+  margin: 0;
+  color: var(--catalog-red-bright);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 10.5px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .productMetaLine {
@@ -1152,7 +1294,8 @@
   }
 
   .productGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .productTitleRow h3 {

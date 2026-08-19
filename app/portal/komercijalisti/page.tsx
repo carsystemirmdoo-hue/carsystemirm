@@ -1,3 +1,10 @@
-import { SalesRepsAdmin } from "@/features/portal/EntityModules";
+import { redirect } from "next/navigation";
 
-export default function SalesRepsPage() { return <SalesRepsAdmin/>; }
+/**
+ * Ruta iz ranije verzije portala. Ekran nije deo dizajna „Poslovni sistem v2",
+ * a prikazivao je demo podatke, pa vodi na odgovarajući aktuelni ekran.
+ * Sam modul nije obrisan — vidi features/portal/.
+ */
+export default function Page() {
+  redirect("/portal/dozvole");
+}

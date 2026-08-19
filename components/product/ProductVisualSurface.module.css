@@ -41,6 +41,14 @@
   aspect-ratio: 4 / 3;
   min-height: 176px;
   place-items: center;
+  /*
+   * Size containment turns the surface into the coordinate system the product
+   * layer measures itself against: `cqw`/`cqh` let one `min()` express "fit the
+   * silhouette inside 58% of the width AND 72% of the height" without the rule
+   * having to know this surface's aspect ratio — which differs per variant
+   * (1.1:1 in the catalog grid, free-height in the PDP related row).
+   */
+  container-type: size;
   overflow: hidden;
   border-bottom: 1px solid color-mix(in oklch, var(--foreground), transparent 86%);
   background-color: var(--surface-muted);
@@ -716,15 +724,41 @@
   white-space: nowrap;
 }
 
+/*
+ * The product layer.
+ *
+ * Same geometry as the PDP stage (`ProductDetailExperience.module.css`), so a
+ * card and a detail page draw the same product at the same relative size:
+ * `--product-fit-w` fits the CONTENT box inside the size-class envelope, the
+ * box is then widened to the whole canvas and given the canvas aspect, and the
+ * translate puts the content centre — not the file centre — on the surface's
+ * optical centre.
+ *
+ * `--product-surface-ratio` is the surface's own 4:3 written as a number,
+ * because the second term of the `min()` converts a height-based envelope into
+ * a width percentage and CSS cannot divide by a ratio literal.
+ */
 .objectWrap {
-  position: relative;
+  --product-optical-y: 49%;
+  --product-envelope-w: 84cqw;
+  --product-envelope-h: 84cqh;
+  --product-fit-w: min(
+    var(--product-envelope-w),
+    calc(var(--product-envelope-h) * var(--product-content-aspect))
+  );
+  position: absolute;
   z-index: 3;
   display: grid;
-  width: min(82%, 318px);
-  height: 84%;
-  min-height: 132px;
+  top: var(--product-optical-y);
+  left: 50%;
+  width: calc(var(--product-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
   place-items: center;
   transform:
+    translate(
+      calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+      calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+    )
     perspective(900px)
     translate3d(
       var(--product-visual-motion-x),
@@ -735,22 +769,91 @@
     rotateY(var(--product-visual-tilt-y))
     rotate(var(--product-visual-current-r))
     scale(var(--product-visual-paint-product-scale));
-  transform-origin: 50% 84%;
+  transform-origin:
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * 100%)
+    calc((var(--product-content-offset-y) + var(--product-content-fill-y) * 0.92) * 100%);
   transition: transform var(--product-visual-duration) var(--cs-ease-out);
 }
 
-.surface[data-product-visual-treatment="paint"] .objectWrap {
-  transition: transform var(--product-visual-duration) var(--cs-ease-out);
+/*
+ * Without a real render there is no content box to fit, so the placeholder card
+ * keeps the plain percentage box it always had.
+ */
+.surface[data-product-visual-real-image="false"] .objectWrap {
+  width: min(82%, 318px);
+  aspect-ratio: auto;
+  height: 84%;
+  min-height: 132px;
+  transform: none;
 }
 
-.surface[data-product-visual-real-image="true"] .objectWrap {
-  width: min(92%, 390px);
-  height: 90%;
+/*
+ * Size-class envelope (lib/product-scale.ts): a spray must not read like a
+ * canister, nor a canister like a spray.
+ *
+ * The percentages are higher than the previous ladder (66 / 76 / 84 / 92 with
+ * px ceilings) because they changed meaning: they used to bound the image FILE,
+ * whose product-to-canvas ratio varies from 20% to 100% across this catalogue,
+ * and they now bound the product's own silhouette. The px ceilings are gone for
+ * the same reason — they existed to stop a heavily padded file from ballooning,
+ * which the content box now handles directly.
+ */
+.surface[data-product-visual-real-image="true"][data-product-size-class="S"] .objectWrap {
+  --product-envelope-w: 58cqw;
+  --product-envelope-h: 72cqh;
 }
 
+.surface[data-product-visual-real-image="true"][data-product-size-class="M"] .objectWrap {
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 78cqh;
+}
+
+.surface[data-product-visual-real-image="true"][data-product-size-class="L"] .objectWrap {
+  --product-envelope-w: 74cqw;
+  --product-envelope-h: 84cqh;
+}
+
+.surface[data-product-visual-real-image="true"][data-product-size-class="XL"] .objectWrap {
+  --product-envelope-w: 82cqw;
+  --product-envelope-h: 90cqh;
+}
+
+.quantityBadge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 4;
+  display: grid;
+  gap: 4px;
+  padding: 5px 8px 6px;
+  background: #000;
+  color: #fff;
+  font-family: var(--ds-font-label, var(--font-technical), monospace);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.quantityBadge[data-status="inferred"] {
+  background: #2b2b2e;
+}
+
+.quantityBadgeRule {
+  display: block;
+  height: 1px;
+  background: #fff;
+  opacity: 0.9;
+}
+
+/*
+ * No padding here any more. The object box is now the image's own canvas box,
+ * so any padding would shrink the render inside it and silently undo the
+ * content fit; breathing room is the size-class envelope's job.
+ */
 .productImage {
   object-fit: contain;
-  padding: clamp(6px, 1.5vw, 16px);
   filter: drop-shadow(0 20px 28px color-mix(in oklch, var(--foreground), transparent 70%));
 }
 
@@ -1018,7 +1121,20 @@
     --product-visual-shadow-blur: 10px;
   }
 
+  /*
+   * Reduced motion drops the pointer tilt and settle, but NOT the centring
+   * translate — that one is layout, not animation. Zeroing the whole transform
+   * here would knock every product out of the middle of its card.
+   */
   .objectWrap {
+    transform:
+      translate(
+        calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+        calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+      ) !important;
+  }
+
+  .surface[data-product-visual-real-image="false"] .objectWrap {
     transform: none !important;
   }
 

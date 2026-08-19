@@ -8,6 +8,7 @@ import {
   carsystemCatalogHref,
   carsystemProductFilters,
   carsystemProductOrder,
+  carsystemRangeCategories,
 } from "./carsystemBrandData";
 import styles from "./CarsystemBrandPage.module.css";
 
@@ -54,6 +55,17 @@ export function CarsystemProducts({
           javni i proveravaju se kroz upit.
         </p>
       </header>
+
+      <div className={styles.rangeCoverage}>
+        <p>Carsystem asortiman pokriva</p>
+        <ul>
+          {carsystemRangeCategories.map((category) => (
+            <li key={category}>
+              <Link href={carsystemCatalogHref()}>{category}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div
         className={styles.productFilters}

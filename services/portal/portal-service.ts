@@ -6,7 +6,7 @@ import {
   orders,
   priceRules,
   products,
-} from "@/mock-data/portal";
+} from "@/fixtures/dev/portal";
 import type {
   ApprovalRequest,
   BexShipment,

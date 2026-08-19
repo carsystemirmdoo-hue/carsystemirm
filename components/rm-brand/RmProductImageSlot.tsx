@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import type { ProductImageAsset } from "@/lib/carsystem-data";
+import type { CarsystemProduct, ProductImageAsset } from "@/lib/carsystem-data";
+import {
+  resolveProductVolume,
+  resolveQuantityLabel,
+  resolveSizeClass,
+} from "@/lib/product-scale";
 import styles from "./RmBrandPage.module.css";
 
 const PLACEHOLDER_ASSET = "/images/products/placeholder-product.svg";
@@ -14,6 +19,7 @@ export function RmProductImageSlot({
   href,
   feature,
   priority = false,
+  product,
   productName,
   role,
   sizes = "(min-width: 70rem) 26vw, (min-width: 48rem) 42vw, 82vw",
@@ -26,6 +32,7 @@ export function RmProductImageSlot({
   group: string;
   href?: string;
   priority?: boolean;
+  product?: CarsystemProduct;
   productName: string;
   role?: string;
   sizes?: string;
@@ -34,6 +41,11 @@ export function RmProductImageSlot({
   const hasApprovedAsset = Boolean(
     asset?.src && asset.src !== PLACEHOLDER_ASSET,
   );
+  const productSize = product ? resolveProductVolume(product) : undefined;
+  const sizeClass = resolveSizeClass(productSize);
+  const quantityLabel = hasApprovedAsset
+    ? resolveQuantityLabel(productSize)
+    : null;
 
   return (
     <figure
@@ -41,7 +53,11 @@ export function RmProductImageSlot({
       data-has-asset={hasApprovedAsset || undefined}
       style={{ "--rm-slot-ratio": aspectRatio } as CSSProperties}
     >
-      <div className={styles.productImageSlotMedia}>
+      <div
+        className={styles.productImageSlotMedia}
+        data-product-size-class={hasApprovedAsset ? sizeClass : undefined}
+        data-has-quantity-badge={quantityLabel ? "true" : undefined}
+      >
         {hasApprovedAsset && asset ? (
           <Image
             src={asset.src}
@@ -66,6 +82,19 @@ export function RmProductImageSlot({
             </div>
           </div>
         )}
+
+        {quantityLabel ? (
+          <span
+            className={styles.productSlotQuantityBadge}
+            data-status={productSize?.volumeStatus}
+          >
+            <span
+              className={styles.productSlotQuantityBadgeRule}
+              aria-hidden="true"
+            />
+            {quantityLabel}
+          </span>
+        ) : null}
       </div>
       <figcaption>
         <span>{system}</span>

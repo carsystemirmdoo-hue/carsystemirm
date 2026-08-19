@@ -118,9 +118,9 @@ body {
  * takeovera interpolira po njoj, umesto da reaguje na diskretnu promenu
  * atributa sa vremenskom tranzicijom — to je bio uzrok sevanja.
  *
- * Signal raste još u bloku partnerske mreže, drži 1 kroz takeover i opada na
- * prag (~0.34) u sekcijama ispod, tako da se oseti da je sajt prešao u novo
- * poglavlje.
+ * Signal je 1 samo dok probe linija ispod sticky Headera stoji unutar sekcije
+ * takeovera, a 0 iznad i ispod nje — u oba smera skrola, bez praga koji ostaje.
+ * Vidi components/paint-takeover/paintTakeoverChrome.mjs.
  */
 :root {
   --chapter: clamp(0, var(--paint-chapter, 0), 1);
@@ -1840,4 +1840,84 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ============================================================================
+ * FOUNDATION DESIGN TOKENS — Phase 1
+ *
+ * Ovaj blok je isključivo ADITIVAN: ne redefiniše, ne uklanja i ne preimenuje
+ * nijedan postojeći token (--background, --accent, --border, --cs-ease-*, ...).
+ * Nijedna postojeća komponenta danas ne čita ove promenljive, pa uvođenje ovog
+ * bloka ne menja vizuelni rezultat nijedne stranice. Primenu na komponente
+ * radi Phase 2, postepeno, modul po modul.
+ *
+ * `--ds-*` = design-system prefiks, odvojen od `--cs-*` (koji je već zauzet
+ * efekt-specifičnim tokenima: pigment kursor, route tranzicija, process boje).
+ * ========================================================================== */
+:root {
+  /* --- Spacing ladder — 8 koraka (audit: 747 clamp() poziva, 517 različitih) */
+  --ds-space-xs: 4px;
+  --ds-space-s: 8px;
+  --ds-space-m: 16px;
+  --ds-space-l: 24px;
+  --ds-space-xl: 40px;
+  --ds-space-2xl: 64px;
+  --ds-space-section: clamp(56px, 7vw, 96px);
+  --ds-space-major: clamp(80px, 10vw, 144px);
+
+  /* --- Container / alignment spine ------------------------------------- */
+  /* content = min(1208px, 100% - 2*gutter); gutter raste sa viewportom.
+     Rešava izmereno skakanje leve ivice (116 → 60 → 72 → 56 → 116 → 60px). */
+  --ds-container-max: 1208px;
+  --ds-gutter: clamp(20px, 4vw, 56px);
+
+  /* --- Radius — jedna vrednost (audit: broj radijusa ne korelira sa
+     premium percepcijom; problem je varijansa, ne konkretna vrednost) ----- */
+  --ds-radius: 2px;
+
+  /* --- Line hierarchy — tri nivoa. Alias na postojeće boje gde je moguće,
+     da linije prate temu (light/dark) bez novog izvora istine. ----------- */
+  --ds-line-color-structural: var(--border);
+  --ds-line-color-ui: color-mix(in oklch, var(--border), var(--foreground) 12%);
+  --ds-line-color-accent: var(--accent);
+  --ds-line-width-hairline: 1px;
+  --ds-line-width-accent: 2px;
+
+  /* --- Semantic surface roles — alias na postojeće boje. `--surface-muted`
+     je već de facto "stage" ton (ProductVisualSurface ga koristi kao
+     --product-visual-background-color), pa se ovde samo formalizuje uloga. */
+  --ds-surface-page: var(--background);
+  --ds-surface-section: var(--surface);
+  --ds-surface-section-alt: var(--surface-muted);
+  --ds-surface-card: var(--surface);
+  --ds-surface-stage: var(--surface-muted);
+
+  /* --- Motion — 4 trajanja, alias na postojeće easing krive (već de facto
+     usvojene: 109/118 hardkodiranih cubic-bezier vrednosti u projektu su
+     tačno --cs-ease-out i --cs-ease-polish). Ne uvodi se nova kriva. ------ */
+  --ds-duration-1: 120ms;
+  --ds-duration-2: 200ms;
+  --ds-duration-3: 320ms;
+  --ds-duration-4: 520ms;
+  --ds-ease-out: var(--cs-ease-out);
+  --ds-ease-emphasis: var(--cs-ease-polish);
+
+  /* --- Typography roles — i dalje na postojećem font stack-u (Archivo /
+     IBM Plex Sans / IBM Plex Mono). Web licenca za Helvetica Now Text nije
+     zaključena, pa se font NE dodaje u repo. Kada licenca bude rešena,
+     menja se SAMO vrednost ovih tokena — komponente koje ih koriste (Phase 2)
+     ne zahtevaju izmenu. */
+  --ds-font-display: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  --ds-font-body: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  --ds-font-technical: var(--font-technical), var(--font-geist-mono), monospace;
+  --ds-font-label: var(--font-technical), var(--font-geist-mono), monospace;
+
+  /* --- Product scale primitive (vidi components/product/ProductStage) --- */
+  --ds-badge-reserve: 40px;
+}
+
+/* Container primitiv — utility klasa, ne aplicira se nigde automatski. */
+.ds-container {
+  width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));
+  margin-inline: auto;
 }

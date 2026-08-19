@@ -1,0 +1,1151 @@
+/*
+ * COSMOS LAC brand page — implements docs/COSMOS_LAC_DESIGN_SPECIFICATION.md
+ *
+ * Rail geometry is entirely CSS. JavaScript supplies exactly two values:
+ *   --rail-progress  (0..1)  and  --rail-width (px, measured, excludes scrollbar)
+ * Everything else is derived, so travel always equals the horizontal overflow.
+ */
+
+.page {
+  --cl-void: #08090a;
+  --cl-paper: #f7f7f8;
+  --cl-ink: #0b0b0c;
+  --cl-chalk: #f4f7f2;
+  --cl-hairline: rgba(244, 247, 242, 0.14);
+
+  --cl-gutter: clamp(20px, 4vw, 60px);
+  --cl-display: clamp(56px, 5.2vw, 76px);
+  --cl-eyebrow: 13px;
+
+  background: var(--cl-paper);
+  color: var(--cl-ink);
+}
+
+/*
+ * The shared global footer inherits its typography from the page shell on every
+ * other route — each shell sets the site body stack, and `body` itself defaults
+ * to Geist. This page root deliberately sets no font of its own, which left the
+ * footer as the only one on the site rendering in Geist instead of IBM Plex
+ * Sans. Scoped to the footer alone so no COSMOS section is affected, and the
+ * shared footer component is left untouched.
+ */
+.page :global(.cs-animated-footer) {
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Two-step type scale: display and eyebrow, with nothing in between. */
+.display {
+  font-size: var(--cl-display);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  transform: scaleX(0.93);
+  transform-origin: left center;
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: var(--cl-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.62;
+  margin: 0;
+}
+
+/*
+ * `46ch` is a measure cap, not a width. Without the `min(..., 100%)` it sizes
+ * the grid column wider than the container on narrow viewports and pushes the
+ * whole document into horizontal overflow.
+ */
+.body {
+  font-size: clamp(15px, 1.1vw, 16px);
+  line-height: 1.5;
+  max-width: min(46ch, 100%);
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- 01 HERO */
+
+/*
+ * The global Carsystem header is `position: sticky` and in normal flow, so a
+ * 100svh hero would push its own CTAs below the fold by exactly the header's
+ * height. 5.5rem mirrors --header-height in components/layout/Header.module.css.
+ */
+.hero {
+  position: relative;
+  /* The browser keeps handling vertical panning natively; the rotation hook
+     only ever claims horizontal gestures, so page scroll is never trapped. */
+  touch-action: pan-y;
+  min-height: calc(100svh - 5.5rem);
+  background: var(--cl-void);
+  color: var(--cl-chalk);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+}
+
+/* Soft colour field behind the arc so the black never reads as an empty div. */
+.heroGlow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(
+      46% 42% at 58% 52%,
+      color-mix(in srgb, var(--hero-accent, #e63616) 70%, transparent) 0%,
+      transparent 70%
+    );
+  opacity: 0.4;
+  transform: translate3d(0, calc(var(--hero-progress, 0) * 50%), 0);
+  will-change: transform;
+}
+
+.heroArc {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: grab;
+}
+
+.hero[data-dragging="true"] .heroArc {
+  cursor: grabbing;
+}
+
+/* Individual cans must not swallow the gesture — the whole arc is the handle. */
+.heroArc img {
+  pointer-events: none;
+}
+
+/*
+ * Arc slots.
+ *
+ * The source packshots hold ~201x628px of real can inside an 800x800 canvas,
+ * so nothing may be displayed far above ~470px without visible softening at 2x.
+ * Authority comes from depth and mass — six real cans at descending scale —
+ * rather than from one enlarged can. Only slot 0 exceeds its native size, and
+ * only by ~1.35x, on a near-black field where that is least visible.
+ */
+/*
+ * `--can-spin`, `--can-float`, `--can-spin-blur`, `--can-shade` and
+ * `--can-shadow-x` are written per frame by useHeroRotation. The perspective is
+ * applied inline so the Y-rotation reads as a turning object rather than a
+ * flat card scaling horizontally.
+ */
+.heroCan {
+  position: absolute;
+  bottom: var(--can-bottom);
+  left: var(--can-left);
+  width: auto;
+  height: var(--can-height);
+  transform: translate3d(
+      -50%,
+      calc(
+        var(--hero-progress, 0) * var(--can-parallax, 60px) +
+          var(--can-float, 0px)
+      ),
+      0
+    )
+    rotate(var(--can-rotate, 0deg)) perspective(920px)
+    rotateY(var(--can-spin, 0deg));
+  filter: blur(calc(var(--can-blur, 0px) + var(--can-spin-blur, 0px)))
+    brightness(calc(var(--can-brightness, 1) * var(--can-shade, 1)));
+  opacity: 0;
+  animation: canArrive 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--can-delay, 0ms);
+  will-change: transform, filter;
+  backface-visibility: hidden;
+}
+
+/* The directional shadow is worth its cost on the two foreground cans only. */
+.heroCan[data-slot="0"],
+.heroCan[data-slot="1"] {
+  filter: blur(calc(var(--can-blur, 0px) + var(--can-spin-blur, 0px)))
+    brightness(calc(var(--can-brightness, 1) * var(--can-shade, 1)))
+    drop-shadow(var(--can-shadow-x, 0px) 22px 26px rgba(0, 0, 0, 0.55));
+}
+
+/*
+ * Arc slots.
+ *
+ * The source packshots hold ~201x628px of real can inside an 800x800 canvas,
+ * so nothing may be displayed far above ~470px without visible softening at 2x.
+ * Authority comes from depth and mass — six real cans at descending scale —
+ * rather than from one enlarged can. Only slot 0 exceeds its native size, and
+ * only by ~1.35x, on a near-black field where that is least visible.
+ */
+.heroCan[data-slot="0"] {
+  --can-height: 470px;
+  --can-left: 59%;
+  --can-bottom: 9%;
+  --can-rotate: -7deg;
+  --can-blur: 0px;
+  --can-brightness: 1;
+  --can-parallax: 150px;
+  --can-delay: 0ms;
+}
+
+.heroCan[data-slot="1"] {
+  --can-height: 358px;
+  --can-left: 77%;
+  --can-bottom: 25%;
+  --can-rotate: 6deg;
+  --can-blur: 0.5px;
+  --can-brightness: 0.86;
+  --can-parallax: 190px;
+  --can-delay: 90ms;
+}
+
+.heroCan[data-slot="2"] {
+  --can-height: 288px;
+  --can-left: 42%;
+  --can-bottom: 31%;
+  --can-rotate: -13deg;
+  --can-blur: 1px;
+  --can-brightness: 0.72;
+  --can-parallax: 220px;
+  --can-delay: 180ms;
+}
+
+.heroCan[data-slot="3"] {
+  --can-height: 228px;
+  --can-left: 89%;
+  --can-bottom: 46%;
+  --can-rotate: 11deg;
+  --can-blur: 1.5px;
+  --can-brightness: 0.58;
+  --can-parallax: 250px;
+  --can-delay: 270ms;
+}
+
+.heroCan[data-slot="4"] {
+  --can-height: 182px;
+  --can-left: 29%;
+  --can-bottom: 50%;
+  --can-rotate: -18deg;
+  --can-blur: 2px;
+  --can-brightness: 0.46;
+  --can-parallax: 275px;
+  --can-delay: 360ms;
+}
+
+.heroCan[data-slot="5"] {
+  --can-height: 146px;
+  --can-left: 66%;
+  --can-bottom: 60%;
+  --can-rotate: 3deg;
+  --can-blur: 2.6px;
+  --can-brightness: 0.38;
+  --can-parallax: 300px;
+  --can-delay: 450ms;
+}
+
+@keyframes canArrive {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, 40px, 0) rotate(var(--can-rotate, 0deg))
+      perspective(920px) rotateY(var(--can-spin, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(
+        -50%,
+        calc(
+          var(--hero-progress, 0) * var(--can-parallax, 60px) +
+            var(--can-float, 0px)
+        ),
+        0
+      )
+      rotate(var(--can-rotate, 0deg)) perspective(920px)
+      rotateY(var(--can-spin, 0deg));
+  }
+}
+
+/* Affordance hint, retired for good once the user has rotated anything. */
+.heroHint {
+  position: absolute;
+  right: var(--cl-gutter);
+  bottom: clamp(28px, 5vh, 56px);
+  z-index: 2;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cl-chalk);
+  opacity: 0.42;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.hero[data-hinted="done"] .heroHint,
+.hero[data-dragging="true"] .heroHint {
+  opacity: 0;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--cl-gutter) clamp(48px, 7vh, 88px);
+  width: min(100%, 760px);
+  display: grid;
+  /*
+   * An implicit `auto` column sizes to its items' content, so a wide CTA row
+   * widened the column past the container and pushed the whole document into
+   * horizontal overflow at 375px. `minmax(0, 1fr)` pins the column to the
+   * container and lets the items wrap instead.
+   */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.heroContent > * {
+  min-width: 0;
+}
+
+.heroContent .display {
+  color: var(--cl-chalk);
+}
+
+.heroCtas {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--cl-chalk);
+  color: var(--cl-ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 220ms ease;
+}
+
+.ctaPrimary:hover,
+.ctaPrimary:focus-visible {
+  transform: translateY(-2px);
+  background: #ffffff;
+}
+
+.ctaSecondary {
+  color: var(--cl-chalk);
+  font-size: 15px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(244, 247, 242, 0.4);
+  padding-bottom: 3px;
+  transition: border-color 220ms ease;
+}
+
+.ctaSecondary:hover,
+.ctaSecondary:focus-visible {
+  border-bottom-color: var(--cl-chalk);
+}
+
+/* ---------------------------------------------------------------- 02 RAIL */
+
+.rail {
+  --rail-visible: 4;
+  --rail-panel-h: 520px;
+  --rail-panel-w: calc(var(--rail-width, 100vw) / var(--rail-visible));
+  --rail-travel: calc((8 - var(--rail-visible)) * var(--rail-panel-w));
+
+  position: relative;
+  background: var(--cl-void);
+  color: var(--cl-chalk);
+  height: calc(var(--rail-panel-h) + var(--rail-travel));
+}
+
+/*
+ * The band is bounded top and bottom by hairlines. Without them the panels read
+ * as text floating in an unexplained void, because panel backgrounds are
+ * transparent until a family is active.
+ */
+.railSticky {
+  position: sticky;
+  top: calc((100svh - var(--rail-panel-h)) / 2);
+  height: var(--rail-panel-h);
+  overflow: hidden;
+  border-top: 1px solid var(--cl-hairline);
+  border-bottom: 1px solid var(--cl-hairline);
+}
+
+.railTrack {
+  display: flex;
+  height: 100%;
+  width: calc(8 * var(--rail-panel-w));
+  transform: translate3d(calc(var(--rail-progress, 0) * var(--rail-travel) * -1), 0, 0);
+  will-change: transform;
+}
+
+.panel {
+  position: relative;
+  flex: 0 0 var(--rail-panel-w);
+  width: var(--rail-panel-w);
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 10px;
+  padding: 38px 24px 34px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  border-right: 1px solid var(--cl-hairline);
+  background-color: transparent;
+  transition:
+    background-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 220ms ease;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--panel-accent);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.panel:hover,
+.panel:focus-visible,
+.panel[data-active="true"] {
+  color: var(--panel-accent-text);
+}
+
+.panel:hover::before,
+.panel:focus-visible::before,
+.panel[data-active="true"]::before {
+  clip-path: inset(0 0 0 0);
+}
+
+.panelName {
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transform: scaleX(0.93);
+  margin: 0;
+}
+
+.panelCanWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.panelCan {
+  height: 245px;
+  width: auto;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel:hover .panelCan,
+.panel:focus-visible .panelCan,
+.panel[data-active="true"] .panelCan {
+  transform: scale(1.04);
+}
+
+.panelCta {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  justify-self: center;
+  padding-bottom: 3px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 260ms ease 80ms,
+    transform 260ms ease 80ms;
+}
+
+.panel:hover .panelCta,
+.panel:focus-visible .panelCta,
+.panel[data-active="true"] .panelCta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Terminal panel — the seven families are not the whole catalogue. */
+.panelTerminal {
+  display: grid;
+  place-content: center;
+  gap: 14px;
+}
+
+.panelTerminalArrow {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid var(--cl-hairline);
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  font-size: 20px;
+  transition:
+    background-color 260ms ease,
+    color 260ms ease;
+}
+
+.panelTerminal:hover .panelTerminalArrow,
+.panelTerminal:focus-visible .panelTerminalArrow {
+  background: var(--cl-chalk);
+  color: var(--cl-ink);
+}
+
+/* ---------------------------------------------------------------- BANDS */
+
+.band {
+  background: var(--cl-void);
+  color: var(--cl-chalk);
+  padding: clamp(38px, 5vh, 56px) 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(244, 247, 242, 0.07);
+}
+
+.bandTrack {
+  display: flex;
+  width: max-content;
+  animation: bandScroll 42s linear infinite;
+}
+
+.bandRun {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding-right: 34px;
+  flex: 0 0 auto;
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: scaleX(0.93);
+}
+
+.bandDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--cl-chalk);
+  opacity: 0.5;
+  flex: 0 0 auto;
+  transform: rotate(45deg);
+}
+
+@keyframes bandScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* --------------------------------------------------------------- 04 RANGE */
+
+.range {
+  background: var(--cl-void);
+  color: var(--cl-chalk);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(64px, 9vh, 104px) var(--cl-gutter);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 18px;
+}
+
+/*
+ * A full-bleed rank of real cans behind the numeral — the range claim is made
+ * with the range itself. Held low enough in contrast that it reads as texture
+ * and never competes with the number for the eye.
+ */
+.rangeSilhouettes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(6px, 1.4vw, 18px);
+  padding: 0 clamp(8px, 2vw, 40px);
+  opacity: 0.16;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+}
+
+.rangeSilhouettes img {
+  height: clamp(96px, 17vh, 168px);
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.rangeNumber {
+  position: relative;
+  font-size: clamp(96px, 17vw, 240px);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  transform: scaleX(0.93);
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.rangeWord {
+  position: relative;
+  font-size: clamp(38px, 6.4vw, 92px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transform: scaleX(0.93);
+  margin: 0;
+}
+
+.rangeMeta {
+  position: relative;
+  margin-top: 6px;
+}
+
+/* --------------------------------------------------- 05 APPLICATION FINDER */
+
+.finder {
+  background: var(--cl-paper);
+  color: var(--cl-ink);
+  padding: clamp(72px, 10vh, 120px) var(--cl-gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 34px;
+}
+
+.finderOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.finderOption {
+  min-height: 56px;
+  padding: 0 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 11, 12, 0.18);
+  background: transparent;
+  color: var(--cl-ink);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease;
+}
+
+.finderOption[aria-checked="true"] {
+  background: var(--cl-ink);
+  color: var(--cl-paper);
+  border-color: var(--cl-ink);
+}
+
+.finderResult {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+}
+
+.finderProducts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.finderProduct {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(11, 11, 12, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.finderProduct:hover,
+.finderProduct:focus-visible {
+  transform: translateY(-3px);
+}
+
+.finderProduct img {
+  height: 150px;
+  width: auto;
+  justify-self: center;
+}
+
+.finderProductName {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.finderLink {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cl-ink);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+  text-decoration: none;
+  justify-self: start;
+}
+
+/* ------------------------------------------------ 06 COMMERCIAL BOUNDARY */
+
+.commerce {
+  background: var(--cl-paper);
+  padding: 0 clamp(16px, 2.2vw, 32px) clamp(56px, 8vh, 96px);
+}
+
+/* Full-bleed becomes an inset card — the geometric signal that the brand
+   experience has ended and Carsystem commerce has begun. */
+.commerceCard {
+  background: var(--cl-void);
+  color: var(--cl-chalk);
+  border-radius: 20px;
+  padding: clamp(44px, 6vh, 72px) clamp(24px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+}
+
+.commerceHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  max-width: 760px;
+}
+
+.commerceHead .display {
+  color: var(--cl-chalk);
+}
+
+.commerceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.commerceFoot {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 6px;
+}
+
+.commerceLink {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cl-chalk);
+  border-bottom: 1px solid rgba(244, 247, 242, 0.45);
+  padding-bottom: 4px;
+  text-decoration: none;
+  transition: border-color 200ms ease;
+}
+
+.commerceLink:hover,
+.commerceLink:focus-visible {
+  border-bottom-color: var(--cl-chalk);
+}
+
+/* -------------------------------------------------------- 06.5 DOCUMENTS */
+
+.documentsSection {
+  --background: var(--cl-paper);
+  --foreground: var(--cl-ink);
+  --border: rgba(11, 11, 12, 0.14);
+  --surface: #ffffff;
+  --surface-muted: var(--cl-chalk);
+  --muted-foreground: rgba(11, 11, 12, 0.6);
+  --accent: var(--cl-ink);
+
+  background: var(--cl-paper);
+  color: var(--cl-ink);
+  padding: 0 var(--cl-gutter) clamp(56px, 8vh, 96px);
+}
+
+.documentsHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  max-width: 760px;
+  margin-block-end: 30px;
+}
+
+.documentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.documentsLink {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cl-ink);
+  border-bottom: 1px solid rgba(11, 11, 12, 0.35);
+  padding-bottom: 4px;
+  text-decoration: none;
+  transition: border-color 200ms ease;
+}
+
+.documentsLink:hover,
+.documentsLink:focus-visible {
+  border-bottom-color: var(--cl-ink);
+}
+
+/* --------------------------------------------------------- 07 CREDIBILITY */
+
+.credibility {
+  background: var(--cl-paper);
+  color: var(--cl-ink);
+  padding: clamp(56px, 8vh, 96px) var(--cl-gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  max-width: 900px;
+}
+
+.credibilityStatement {
+  font-size: clamp(20px, 2.1vw, 28px);
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------- 08 CTA */
+
+.finalCta {
+  background: var(--cl-void);
+  color: var(--cl-chalk);
+  padding: clamp(72px, 10vh, 128px) var(--cl-gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  justify-items: start;
+}
+
+.finalCta .display {
+  color: var(--cl-chalk);
+}
+
+/* ------------------------------------------------------------ REVEALS */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+ * Inline text links sit around 27px tall from their own line box. That clears
+ * WCAG 2.5.8 on desktop, but on touch they deserve a real thumb target, so the
+ * hit area is padded out to 44px without changing how they look.
+ */
+@media (pointer: coarse) {
+  .ctaSecondary,
+  .finderLink,
+  .commerceLink {
+    display: inline-block;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+}
+
+/* ------------------------------------------------------------ BREAKPOINTS */
+
+@media (max-width: 1279px) {
+  .rail {
+    --rail-visible: 3;
+    --rail-panel-h: 500px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .rail {
+    --rail-panel-h: 460px;
+  }
+  .panelCan {
+    height: 180px;
+  }
+  .finderProducts,
+  .commerceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Below 768 the rail stops pinning and becomes a native snap carousel.
+   Seven families then cost one fixed screen instead of seven. */
+@media (max-width: 767px) {
+  .rail {
+    height: auto;
+    padding: 8px 0 4px;
+  }
+
+  .railSticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .railTrack {
+    width: auto;
+    transform: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 12px;
+    gap: 12px;
+  }
+
+  .railTrack::-webkit-scrollbar {
+    display: none;
+  }
+
+  .panel {
+    flex: 0 0 78vw;
+    width: 78vw;
+    height: 520px;
+    scroll-snap-align: center;
+    border-right: none;
+    border-radius: 16px;
+    border: 1px solid var(--cl-hairline);
+    padding: 34px 20px 30px;
+  }
+
+  .panel::before {
+    border-radius: 15px;
+  }
+
+  /* No hover on touch — the active panel carries the colour instead. */
+  .panelCta {
+    opacity: 1;
+    transform: none;
+  }
+
+  .panelCan {
+    height: 190px;
+  }
+
+  .railProgress {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 18px 0 4px;
+  }
+
+  .railProgressSegment {
+    height: 3px;
+    width: 26px;
+    border-radius: 2px;
+    background: rgba(244, 247, 242, 0.22);
+    transition: background-color 300ms ease;
+  }
+
+  .railProgressSegment[data-active="true"] {
+    background: var(--segment-accent, var(--cl-chalk));
+  }
+
+  .finderProducts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /*
+   * The shared Carsystem product card clips its own product names when squeezed
+   * into a half-width column at this size. It is a shared component, so give it
+   * the width it was designed for rather than restyling its internals.
+   */
+  .commerceGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heroContent {
+    width: 100%;
+  }
+
+  /*
+   * Mobile is not the desktop arc scaled down. The copy block occupies the
+   * lower half of a 390px frame, so a sweeping arc would run straight through
+   * the headline. Three cans only, lifted into the upper half, with the lead
+   * can still clearly dominant.
+   */
+  .heroCan[data-slot="0"] {
+    --can-height: 255px;
+    --can-left: 62%;
+    --can-bottom: 62%;
+    --can-rotate: -6deg;
+    --can-parallax: 110px;
+  }
+
+  .heroCan[data-slot="1"] {
+    --can-height: 175px;
+    --can-left: 24%;
+    --can-bottom: 68%;
+    --can-rotate: 8deg;
+    --can-brightness: 0.7;
+    --can-parallax: 140px;
+  }
+
+  .heroCan[data-slot="2"] {
+    --can-height: 135px;
+    --can-left: 88%;
+    --can-bottom: 73%;
+    --can-rotate: -12deg;
+    --can-brightness: 0.5;
+    --can-parallax: 165px;
+  }
+
+  /* Four onwards would only add noise at this width. */
+  .heroCan[data-slot="3"],
+  .heroCan[data-slot="4"],
+  .heroCan[data-slot="5"] {
+    display: none;
+  }
+
+  .heroGlow {
+    background: radial-gradient(
+      64% 26% at 58% 30%,
+      color-mix(in srgb, var(--hero-accent, #e63616) 70%, transparent) 0%,
+      transparent 72%
+    );
+  }
+}
+
+@media (min-width: 768px) {
+  .railProgress {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------- REDUCED MOTION */
+
+/*
+ * Reduced motion removes every scroll-linked and autoplaying behaviour while
+ * keeping all content and both navigation modes. The rail simply stops pinning
+ * and becomes a scroll-snap list — shorter and calmer, never broken.
+ */
+@media (prefers-reduced-motion: reduce) {
+  /*
+   * Reduced motion removes the arrival stagger, the ambient float and the
+   * scroll parallax, but deliberately keeps direct manipulation: rotation the
+   * user initiates themselves is not unsolicited motion, and removing it would
+   * take away a feature rather than calm the page. The hook stops its loop
+   * entirely once the can has settled.
+   */
+  .heroCan {
+    animation: none;
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0) rotate(var(--can-rotate, 0deg))
+      perspective(920px) rotateY(var(--can-spin, 0deg));
+  }
+
+  .heroGlow {
+    transform: none;
+  }
+
+  .rail {
+    height: auto;
+  }
+
+  .railSticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .railTrack {
+    width: auto;
+    transform: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .panel {
+    flex: 0 0 min(78vw, 360px);
+    width: min(78vw, 360px);
+    height: 500px;
+    scroll-snap-align: center;
+    border-right: none;
+  }
+
+  .panel::before,
+  .panelCan,
+  .panelCta,
+  .ctaPrimary,
+  .finderProduct {
+    transition-duration: 1ms;
+  }
+
+  .panelCta {
+    opacity: 1;
+    transform: none;
+  }
+
+  .bandTrack {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

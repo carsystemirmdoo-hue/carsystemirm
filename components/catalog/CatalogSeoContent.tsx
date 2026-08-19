@@ -4,10 +4,10 @@ import { CatalogHeroSearch } from "@/components/catalog/CatalogHeroSearch";
 import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
 import type {
   CarsystemBrand,
-  CarsystemProduct,
   ProgramGroup,
   RefinishPhase,
 } from "@/lib/carsystem-data";
+import type { CatalogListingEntity } from "@/lib/catalog-listing";
 import { seoCategoryLandings } from "@/lib/seo/category-landings";
 import styles from "./CatalogPage.module.css";
 
@@ -71,12 +71,12 @@ export function CatalogHero({
 export function CatalogStaticProductGrid({
   brands,
   phases,
-  products,
+  entities,
   programs,
 }: {
   brands: CarsystemBrand[];
   phases: RefinishPhase[];
-  products: CarsystemProduct[];
+  entities: CatalogListingEntity[];
   programs: ProgramGroup[];
 }) {
   const brandBySlug = new Map(brands.map((brand) => [brand.slug, brand]));
@@ -91,22 +91,23 @@ export function CatalogStaticProductGrid({
           <h2 id="catalog-products-title">Početak kataloga</h2>
         </div>
         <p>
-          Prvih {products.length} proizvoda dostupno je i bez JavaScript-a.
+          Prvih {entities.length} proizvoda dostupno je i bez JavaScript-a.
           Sledeće stranice kataloga povezane su ispod liste.
         </p>
       </div>
       <div className={styles.productGrid}>
-        {products.map((product) => {
-          const brand = brandBySlug.get(product.brandSlug);
-          const program = programBySlug.get(product.programSlug);
-          const phase = phaseBySlug.get(product.phaseSlug);
+        {entities.map((entity) => {
+          const brand = brandBySlug.get(entity.brandSlug);
+          const program = programBySlug.get(entity.programSlug);
+          const phase = phaseBySlug.get(entity.phaseSlug);
           if (!brand || !program || !phase) return null;
           return (
             <CatalogProductCard
               brand={brand}
-              key={product.slug}
+              catalogSystem
+              entity={entity}
+              key={entity.id}
               phase={phase}
-              product={product}
               program={program}
             />
           );

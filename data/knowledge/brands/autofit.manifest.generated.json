@@ -1,0 +1,28 @@
+{
+  "brandSlug": "autofit",
+  "brandName": "A.U.T.O. Fit",
+  "manufacturer": "nije utvrđen",
+  "generatedAt": "2026-08-08T09:50:44.816Z",
+  "source": {
+    "acquisitionFeasibility": "no-official-source-found",
+    "verifiedAt": "2026-08-08",
+    "notes": [
+      "Brend „A.U.T.O. Fit“ je u projektu placeholder, bez proizvoda.",
+      "Zvanični izvor nije utvrđen; naziv je previše generički za pouzdanu identifikaciju.",
+      "Zahteva podatak od Carsystem-a o kom proizvođaču je reč."
+    ]
+  },
+  "localInventory": {
+    "productsInCarsystemCatalogue": 0,
+    "localImages": 0,
+    "localDocuments": 0
+  },
+  "acquisition": {
+    "documentsAcquiredThisPhase": 0,
+    "technicalClaimsExtracted": 0,
+    "productsMatchedToCarsystemCatalogue": 0,
+    "manufacturerCandidateProducts": 0
+  },
+  "families": [],
+  "products": []
+}

@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-08-08T15:59:58.049Z",
+  "brand": "Carsystem",
+  "NO_EVIDENCE": 0,
+  "EVIDENCE_AVAILABLE_NEEDS_REVIEW": 12,
+  "EXPERT_VERIFIED": 0,
+  "PUBLISHABLE": 0,
+  "intents": [
+    {
+      "intent": "Na koje podloge sme ovaj kit / prajmer?",
+      "evidence": 55,
+      "field": "substrate",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koja granulacija za koju fazu brušenja?",
+      "evidence": 13,
+      "field": "abrasiveGrit",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koja je temperaturna otpornost trake / lepka?",
+      "evidence": 34,
+      "field": "temperatureResistance",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koji odnos mešanja i vreme upotrebljivosti?",
+      "evidence": 5,
+      "field": "mixingRatio",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koliko se suši i kada se može brusiti?",
+      "evidence": 26,
+      "field": "dryingTime",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koja dizna i pritisak za nanošenje?",
+      "evidence": 38,
+      "field": "nozzleSize",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Kolika je izdašnost / potrošnja?",
+      "evidence": 25,
+      "field": "coverage",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koji je VOC sadržaj?",
+      "evidence": 78,
+      "field": "voc",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koje su dimenzije i debljina?",
+      "evidence": 86,
+      "field": "dimensions",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Šta se NE sme koristiti na kojoj podlozi?",
+      "evidence": 25,
+      "field": "substrate-negative",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koji pribor ide uz koji alat?",
+      "evidence": 9,
+      "field": "relationships",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    },
+    {
+      "intent": "Koliki je rok trajanja i kako se skladišti?",
+      "evidence": 85,
+      "field": "shelfLife",
+      "status": "EVIDENCE_AVAILABLE_NEEDS_REVIEW"
+    }
+  ]
+}

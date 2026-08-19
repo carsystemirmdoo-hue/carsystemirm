@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# .env.example sadrži samo imena promenljivih, bez vrednosti — mora u repozitorijum.
+!.env.example
 
 # vercel
 .vercel
@@ -63,3 +65,16 @@ docs/audit-screenshots/
 
 # Local QA screenshots and reports
 artifacts/
+
+# Manufacturer assets staged for review (not published)
+assets/manufacturer/
+.cache/
+
+# izlaz provere builda (npm run build:check)
+.next-verify
+
+# izolovani izlaz dev servera (npm run dev)
+.next-dev
+
+# izolovani izlaz dev servera za search QA (paralelni Next proces ne sme deliti dist)
+.next-search-dev

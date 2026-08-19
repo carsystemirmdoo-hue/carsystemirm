@@ -26,8 +26,6 @@ export function BaslacRepairRhythm({
     <section
       id="repair-rhythm"
       className={`${styles.section} ${styles.repairRhythm}`}
-      data-baslac-theme="process"
-      data-baslac-theme-zone="process"
       aria-labelledby="baslac-rhythm-title"
     >
       <div className={styles.repairRhythmHeader}>
@@ -59,7 +57,7 @@ export function BaslacRepairRhythm({
             role="group"
             aria-label="Izaberite proces popravke"
           >
-            {baslacRepairProcesses.map((process, index) => (
+            {baslacRepairProcesses.map((process) => (
               <button
                 type="button"
                 aria-pressed={activeId === process.id}
@@ -67,7 +65,6 @@ export function BaslacRepairRhythm({
                 key={process.id}
                 onClick={() => setActiveId(process.id)}
               >
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 {process.shortTitle}
               </button>
             ))}

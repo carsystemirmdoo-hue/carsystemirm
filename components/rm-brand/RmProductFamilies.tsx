@@ -33,7 +33,7 @@ export function RmProductFamilies({
       </div>
 
       <div className={styles.productFamilyList}>
-        {rmProductFamilies.map((family, index) => {
+        {rmProductFamilies.map((family) => {
           const familyProducts = family.productSlugs
             ? family.productSlugs
                 .map((slug) => products.find((product) => product.slug === slug))
@@ -48,7 +48,6 @@ export function RmProductFamilies({
           return (
             <article id={`rm-family-${family.id}`} key={family.id}>
               <div className={styles.productFamilyCopy}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{family.label}</h3>
                 <p>{family.description}</p>
                 <div aria-label={`Osobine grupe ${family.label}`}>
@@ -83,6 +82,7 @@ export function RmProductFamilies({
                         : family.href
                     }
                     key={`${item.name}-${itemIndex}`}
+                    product={item.product}
                     productName={item.name}
                     role={`Deo grupe ${family.label}`}
                     sizes="(min-width: 70rem) 18vw, (min-width: 48rem) 28vw, 62vw"

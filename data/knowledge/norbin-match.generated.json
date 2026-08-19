@@ -1,0 +1,428 @@
+{
+  "summary": {
+    "generatedAt": "2026-08-08T20:17:29.258Z",
+    "brand": "NORBIN",
+    "manufacturer": "BASF Coatings GmbH",
+    "ourProducts": 3,
+    "manufacturerProducts": 24,
+    "byConfidence": {
+      "ambiguous": 1,
+      "exact-code": 2
+    },
+    "reliable": 2,
+    "ambiguous": 1,
+    "unmatched": 0,
+    "manufacturerOnlyCandidates": 21,
+    "bareNumericAcceptances": 0,
+    "appliedToPublicCatalogue": 0,
+    "localRecordsSharingOneCode": 2,
+    "distinctCodesMatched": 1
+  },
+  "matches": [
+    {
+      "localSlug": "norbin-2k-bezbojni-lak",
+      "localName": "Norbin 2K bezbojni lak",
+      "localSku": "NORBIN-2K-CLEAR",
+      "localPackages": [
+        "1 L",
+        "5 L",
+        "Set",
+        "Mešanje",
+        "Nanošenje",
+        "Sušenje",
+        "Površina",
+        "Rok trajanja"
+      ],
+      "confidence": "ambiguous",
+      "searchStage": "concept-name",
+      "candidateCount": 3,
+      "applied": false,
+      "candidates": [
+        {
+          "code": "N15-020",
+          "officialName": "N15-020 Clear",
+          "availability": "live",
+          "regions": [
+            "en",
+            "kz",
+            "tr"
+          ],
+          "variants": [
+            "1 L",
+            "5 L"
+          ],
+          "tdsDocuments": [
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF"
+          ],
+          "nameSimilarity": 0
+        },
+        {
+          "code": "N15-V20",
+          "officialName": "N15-V20 Clear VOC",
+          "availability": "live",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "variants": [
+            "4 L"
+          ],
+          "tdsDocuments": [
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+            "https://www.norbin-paint.com/files/TDS/TR/N15-V20.pdf"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF"
+          ],
+          "nameSimilarity": 0
+        },
+        {
+          "code": "N15-V25",
+          "officialName": "N15-V25 Fast Clear VOC",
+          "availability": "live",
+          "regions": [
+            "en",
+            "tr"
+          ],
+          "variants": [
+            "5 L"
+          ],
+          "tdsDocuments": [
+            "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+            "https://www.norbin-paint.com/files/TDS/TR/N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF"
+          ],
+          "nameSimilarity": 0
+        }
+      ],
+      "evidence": [
+        "Naš naziv označava: clearcoat.",
+        "3 kandidata dele isti koncept; naziv kod nas je generički i ne bira nijedan."
+      ]
+    },
+    {
+      "localSlug": "norbin-n15-020-5l",
+      "localName": "Norbin N15-020 5 L",
+      "localSku": "NORBIN-N15-020-5L",
+      "localPackages": [
+        "5 L",
+        "Šifra",
+        "Pakovanje",
+        "Program",
+        "Status"
+      ],
+      "confidence": "exact-code",
+      "searchStage": "declared-code",
+      "code": "N15-020",
+      "variantMatched": "5 L",
+      "variantMatchesManufacturer": true,
+      "candidateCount": 1,
+      "applied": false,
+      "candidates": [
+        {
+          "code": "N15-020",
+          "officialName": "N15-020 Clear",
+          "availability": "live",
+          "regions": [
+            "en",
+            "kz",
+            "tr"
+          ],
+          "variants": [
+            "1 L",
+            "5 L"
+          ],
+          "tdsDocuments": [
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF"
+          ],
+          "nameSimilarity": 0.67
+        }
+      ],
+      "evidence": [
+        "Šifra `N15-020` je zapisana kod nas i postoji u katalogu proizvođača.",
+        "Pakovanje 5L postoji kod proizvođača (bezbednosni list za tu veličinu)."
+      ]
+    },
+    {
+      "localSlug": "norbin-n15-020-1l",
+      "localName": "Norbin N15-020 1 L",
+      "localSku": "NORBIN-N15-020-1L",
+      "localPackages": [
+        "1 L",
+        "Šifra",
+        "Pakovanje",
+        "Program",
+        "Status"
+      ],
+      "confidence": "exact-code",
+      "searchStage": "declared-code",
+      "code": "N15-020",
+      "variantMatched": "1 L",
+      "variantMatchesManufacturer": true,
+      "candidateCount": 1,
+      "applied": false,
+      "candidates": [
+        {
+          "code": "N15-020",
+          "officialName": "N15-020 Clear",
+          "availability": "live",
+          "regions": [
+            "en",
+            "kz",
+            "tr"
+          ],
+          "variants": [
+            "1 L",
+            "5 L"
+          ],
+          "tdsDocuments": [
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+            "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf"
+          ],
+          "sdsDocuments": [
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+            "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+            "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF"
+          ],
+          "nameSimilarity": 0.67
+        }
+      ],
+      "evidence": [
+        "Šifra `N15-020` je zapisana kod nas i postoji u katalogu proizvođača.",
+        "Pakovanje 1L postoji kod proizvođača (bezbednosni list za tu veličinu)."
+      ]
+    }
+  ],
+  "manufacturerOnly": [
+    {
+      "code": "N15-120",
+      "availability": "unlinked-in-source",
+      "regions": [],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-015",
+      "officialName": "N55-015 1K Plastic Primer",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-110",
+      "availability": "unlinked-in-source",
+      "regions": [],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-115",
+      "availability": "unlinked-in-source",
+      "regions": [],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-120",
+      "availability": "unlinked-in-source",
+      "regions": [],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-121",
+      "officialName": "N55-121 Dolgu Astarı",
+      "availability": "live",
+      "regions": [
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-V15",
+      "availability": "unlinked-in-source",
+      "regions": [],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-V20",
+      "officialName": "N55-V20 2K Primer Filler grey",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N55-V29",
+      "officialName": "N55-V29 2K Primer Filler black",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N60-100",
+      "officialName": "N60-100 Universal Macun",
+      "availability": "live",
+      "regions": [
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N60-V20",
+      "officialName": "N60-V20 Multifunctional Body Filler + Hardener",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N75-020",
+      "officialName": "N75-020 Hardener Fast",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N75-021",
+      "officialName": "N75-021 Hardener Normal",
+      "availability": "live",
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N75-022",
+      "officialName": "N75-022 Hardener Slow",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N75-121",
+      "officialName": "N75-121 Sertleştirici Normal",
+      "availability": "live",
+      "regions": [
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N75-V21",
+      "officialName": "N75-V21 Clear Hardener VOC",
+      "availability": "live",
+      "regions": [
+        "en"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N85-021",
+      "officialName": "N85-021 Thinner",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N85-120",
+      "officialName": "N85-120 Tiner Normal",
+      "availability": "live",
+      "regions": [
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N85-121",
+      "officialName": "N85-121 Tiner Yavaş",
+      "availability": "live",
+      "regions": [
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N95-060",
+      "officialName": "N95-060 Silicone cleaner",
+      "availability": "live",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    },
+    {
+      "code": "N95-150",
+      "availability": "unlinked-in-source",
+      "regions": [],
+      "catalogStatus": "manufacturer-catalog-candidate",
+      "soldByCarsystem": false
+    }
+  ]
+}

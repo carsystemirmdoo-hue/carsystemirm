@@ -292,15 +292,43 @@ async function validate() {
     fail("duplicate-product-slug", "/proizvodi", "Duplirani product slug.");
   }
 
+  // A product link is valid when it resolves, not when it appears in the
+  // sitemap. Since the ProductGroup consolidation, variant pages are
+  // deliberately excluded from the sitemap while remaining fully crawlable and
+  // linked, so sitemap membership is no longer the right test.
   const sitemapProductSet = new Set(productSlugs);
+  const linkedProductPaths = new Set();
   for (const page of pages) {
     for (const href of page.internalProductLinks) {
-      const pathname = new URL(href, canonicalOrigin).pathname;
-      if (!sitemapProductSet.has(pathname)) {
-        fail("broken-internal-product-link", page.route, pathname);
-      }
+      linkedProductPaths.add(new URL(href, canonicalOrigin).pathname);
     }
   }
+
+  const offSitemapLinks = [...linkedProductPaths].filter(
+    (pathname) => !sitemapProductSet.has(pathname),
+  );
+
+  await mapConcurrent(offSitemapLinks, concurrency, async (pathname) => {
+    const response = await fetchLocal(pathname);
+    if (response.status !== 200) {
+      fail("broken-internal-product-link", pathname, `HTTP ${response.status}`);
+      return;
+    }
+    // Anything linked but off-sitemap must be a consolidated variant, i.e. it
+    // must canonicalise to a family page. A 200 page that is neither in the
+    // sitemap nor consolidated would be an orphaned indexable duplicate.
+    const html = await response.text();
+    const canonical = getCanonical(html) ?? "";
+    if (!canonical.includes("/proizvodi/grupa/")) {
+      fail(
+        "off-sitemap-product-without-group-canonical",
+        pathname,
+        `Nije u sitemapu, a canonical nije grupa: ${canonical || "nedostaje"}`,
+      );
+    }
+  });
+
+  const consolidatedVariantCount = offSitemapLinks.length;
 
   const ogImages = [...new Set(pages.map((page) => page.ogImage).filter(Boolean))];
   await mapConcurrent(ogImages, concurrency, async (image) => {
@@ -480,6 +508,7 @@ async function validate() {
       `${productPages.length} PDP stranica ima jedinstven canonical i Product JSON-LD bez Offer/cene/lagera.`,
       "Svih 59 R-M PDP stranica ima kod u title-u, R-M schema podatke, BreadcrumbList i zasebnu OG sliku.",
       `${pdfFiles.length} lokalnih R-M PDF dokumenata je dostupno uz X-Robots-Tag noindex.`,
+      `${consolidatedVariantCount} povezanih varijanti van sitemapa vraća 200 i canonical na stranicu grupe.`,
     );
   }
 

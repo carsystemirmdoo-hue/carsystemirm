@@ -1,0 +1,2954 @@
+{
+  "summary": {
+    "documentFound": true,
+    "pages": 48,
+    "articleRows": 296,
+    "distinctArticleNumbers": 293,
+    "familiesNamed": 56,
+    "byComponentRole": {
+      "hardener": 40,
+      "main": 252,
+      "thinner": 4
+    },
+    "duplicateArticleNumbers": 3,
+    "generatedAt": "2026-08-08T19:39:45.980Z",
+    "source": "https://carfitrepair.com/wp-content/uploads/2025/09/CARFIT-FINAL-2026.pdf"
+  },
+  "rows": [
+    {
+      "articleNumber": "2-251-1800",
+      "description": "Perfect Multi Green Putty, 1.6 kg (can), with hardener Perfect Multi Green Spachtel, 1,6 kg, inkl. Härter",
+      "family": "PERFECT MULTI GREEN MASTIC",
+      "componentRole": "hardener",
+      "cataloguePage": 4,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-250-1800",
+      "description": "Multi Soft Putty 1.8 kg (can), w / hardener Multi Soft Spachtel ,1,8 kg (Dose), inkl. Härter",
+      "family": "MASTIC MULTI SOFT",
+      "componentRole": "hardener",
+      "cataloguePage": 5,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-253-1800",
+      "description": "Premium Soft Putty, with hardener, 1.8Kg Premium Soft Spachtel inkl. Harter 1,8 kg",
+      "family": "PREMIUM SOFT PLUS MASTIC",
+      "componentRole": "hardener",
+      "cataloguePage": 5,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-253-4700",
+      "description": "Premium Soft Putty, with hardener, 4.7Kg Premium Soft Spachtel inkl. Harter 4,7kg",
+      "family": "PREMIUM SOFT PLUS MASTIC",
+      "componentRole": "hardener",
+      "cataloguePage": 5,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-181-1000",
+      "description": "Alu&Soft Putty, 1 kg (can), w. hardener Alu&Soft Spachtel, 1Kg (Dose) mit Härter",
+      "family": "ALU&SOFT MASTIC",
+      "componentRole": "hardener",
+      "cataloguePage": 6,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-125-1800",
+      "description": "Carbon Putty 1.8 kg (can), w / hardener Carbon Spachtel 1,8 kg (Dose), inkl. Härter",
+      "family": "MASTIC CARBONE",
+      "componentRole": "hardener",
+      "cataloguePage": 6,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-124-0500",
+      "description": "Soft Plus Putty 0.5 kg (can), w / hardener Soft Plus Spachtel, 0,5 kg (Dose), mit Härter",
+      "family": "MASTIC SOFT PLUS",
+      "componentRole": "hardener",
+      "cataloguePage": 7,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-124-1000",
+      "description": "Soft Plus Putty 1 kg (can), w / hardener Soft Plus Spachtel, 1kg (Dose), mit Härter",
+      "family": "MASTIC SOFT PLUS",
+      "componentRole": "hardener",
+      "cataloguePage": 7,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-124-1800",
+      "description": "Soft Plus Putty 1.8 kg (can), w / hardener Soft Plus Spachtel, 1,8 kg (Dose), mit Härter",
+      "family": "MASTIC SOFT PLUS",
+      "componentRole": "hardener",
+      "cataloguePage": 7,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-210-2000",
+      "description": "Multi Putty 2 kg (can), w / hardener Multi Spachtel, 2kg(Dose), inkl. Härter",
+      "family": "MULTI-PUTTY",
+      "componentRole": "hardener",
+      "cataloguePage": 7,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-160-0500",
+      "description": "Plastic Putty 0.5 kg, w/hardener Kunststoffspachtel, 0,5 kg, inkl. Härter Mastic Soft Plus 0.5 kg (pot), w / durcisseur",
+      "family": "KUNSTSTOFFSPACHTEL",
+      "componentRole": "hardener",
+      "cataloguePage": 8,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-310-0120",
+      "description": "Plastic Spreaders Red Kunsstoffverteiler Rot Diffuseur pour plastique Red 50 Two component high-plasticity polyester putty for plastic parts repair. Excellent adhesion to plastics, fast drying and easy sanding.",
+      "family": "KUNSTSTOFFSPACHTEL",
+      "componentRole": "main",
+      "cataloguePage": 8,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-144-0500",
+      "description": "Glass Plus Putty 0.5 kg (can), w / hardener Glas Plus Spachtel, 0,5 kg (Dose), mit Härter",
+      "family": "MASTIC GLASS PLUS",
+      "componentRole": "hardener",
+      "cataloguePage": 8,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-144-1000",
+      "description": "Glass Plus Putty 1.0 kg (can), w / hardener Glas Plus Spachtel, 1 kg (Dose), mit Härter",
+      "family": "MASTIC GLASS PLUS",
+      "componentRole": "hardener",
+      "cataloguePage": 8,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-144-1800",
+      "description": "Glass Plus Putty 1.8 kg (can), w / hardener Glas Plus Spachtel, 1,8 kg (Dose), mit Härter",
+      "family": "MASTIC GLASS PLUS",
+      "componentRole": "hardener",
+      "cataloguePage": 8,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-251-1000",
+      "description": "Spray Putty, 1.0 kg (can), with hardener Spritzspachtel, 1 kg, inkl. Härter Mastic Pistolable, 1 kg (pot), avec durcisseur",
+      "family": "MASTIC PISTOLABLE",
+      "componentRole": "hardener",
+      "cataloguePage": 9,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "2-221-0250",
+      "description": "0.25 kg (can), w. hardener Kunststoff Reparaturset,0,25 kg (Dose), mit Härter 0.25 (pot) a durcrisseur 12 Repair kit for restoration of damaged steel and glass",
+      "family": "PLASTIQUE",
+      "componentRole": "hardener",
+      "cataloguePage": 9,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-403-1000",
+      "description": "Perfect Filler 0.8 L filler + 0.2 L hardener Perfekt Füller 0,8L plus 0,2L Härter",
+      "family": "PERFEKT FÜLLER 4:1",
+      "componentRole": "hardener",
+      "cataloguePage": 10,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-240-1000",
+      "description": "2K US Filler, 1L, Grey 2KUS Füller, 1L, Grau 2K Appret US, Gris, 1L 6",
+      "family": "US FÜLLER 4:1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-240-4000",
+      "description": "2K US Filler, 4L, Grey 2K US Füller, 1L, Grau 2K Appret US, Gris, 4L 2",
+      "family": "US FÜLLER 4:1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-241-0250",
+      "description": "Hardener, 0.25L Härter 0,25L Durcisseur, 0.25L 12",
+      "family": "US FÜLLER 4:1",
+      "componentRole": "hardener",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-241-1000",
+      "description": "Hardener, 1L Härter, 1L Durcisseur, 1L 6",
+      "family": "US FÜLLER 4:1",
+      "componentRole": "hardener",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-242-1000",
+      "description": "2K US Filler 4:1 WHITE 1L 2K US Füller Weiß 1L 2K Appret US Blanche 1L 6",
+      "family": "US FÜLLER 4:1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-242-1000",
+      "description": "2K US Filler 4:1 BLACK  1L 2K US Füller SCHWARZ 1L 2K Appret US NOIR 1L 6 Fast drying and easy sanding two component filler for car refinish. The material has high filling power and good adhesion. Provides excellent prot",
+      "family": "US FÜLLER 4:1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-103-0800",
+      "description": "0.8 L, 2K HS Acryl Filler grey 2K HS Acryl Füller GRAU 0,8 L 0.8 L, Apprêt acrylique 2K HS gris 6",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-104-0800",
+      "description": "0.8 L, 2K HS Acryl Filler black 2K HS Acryl Filler SCHWARZ 0,8 L 0.8 L, Apprêt acrylique 2K HS noir 6",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-105-0800",
+      "description": "0.8 L, 2K HS Acryl Filler white 2K HS Acryl Filler WEIß , 0,8 L 0.8 L, Apprêt acrylique 2K HS blanc 6",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-203-3600",
+      "description": "3.6 L, 2K HS Acryl Filler grey 2K HS Acryl Filler GRAU, 3,6 L 3.6 L, Apprêt acrylique 2K HS gris 2",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-204-3600",
+      "description": "3.6 L, 2K HS Acryl Filler black 2K HS Acryl Filler SCHWARZ 3,6 L 3.6 L, Apprêt acrylique 2K HS noir 2",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-205-3600",
+      "description": "3.6 L, 2K HS Acryl Filler white 2K HS Acryl Filler WEIß 3,6 L 3.6 L, Apprêt acrylique 2K HS blanc 2",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "main",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-211-0200",
+      "description": "0.2 L, Standard hardener Standard Härter 0,2 L 0.2 L, durcisseur standard 6",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-211-0900",
+      "description": "0.9 L, Standard hardener Standard Härter 0,9L 0.9 L, durcisseur standard 6 High quality two component acrylic primer filler for treatment of automotive parts made of various standard materials. This is the ideal product ",
+      "family": "ACRYLIQUE 2K HS 4 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 11,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-355-1000",
+      "description": "1K Plastic Primer Silver, 1 L 1K Kunststoff Primer, 1L Primaire synthétique Argent1K, 1 L 12 One component adhesion promoter for plastic substrates. SUBSTRATES ABS (acrylonitrile-butadiene-styrene copolymer), EP",
+      "family": "KUNSTSTOFFGRUNDIERUNG",
+      "componentRole": "main",
+      "cataloguePage": 12,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-390-0500",
+      "description": "2k Epoxy Primer , 0.5 L 2K EPOXID GRUNDIERFÜLLER 1:1, 0,5L Primaire époxyde, 2K 0.5 L 6",
+      "family": "2K EPOXID GRUNDIERFÜLLER 1:1",
+      "componentRole": "main",
+      "cataloguePage": 12,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-415-0500",
+      "description": "0.5L Härter Härter für 2K EPOXID GRUNDIERFÜLLER 1:1 0,5L Durcisseur pour Primaire époxyde 2K, 0,5L 6 High quality two component epoxy primer can be used",
+      "family": "2K EPOXID GRUNDIERFÜLLER 1:1",
+      "componentRole": "hardener",
+      "cataloguePage": 12,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-398-0800",
+      "description": "2K Wash Primer 0,8L Washprimer 0,8L Primaire réactif 2K 0,8L 6",
+      "family": "WASHPRIMER",
+      "componentRole": "main",
+      "cataloguePage": 13,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-420-0400",
+      "description": "Activator for 2K Wash Primer 0,4L 0.4L Aktivator Activateur pour Primaire réactif 2K 0,4L 6 Two component wash primer with excellent anticorrosion properties for car refinishing.. SUBSTRATES",
+      "family": "WASHPRIMER",
+      "componentRole": "hardener",
+      "cataloguePage": 13,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-442-1000",
+      "description": "Antirust Primer 1 Kg Rostschutz Primer 1Kg Primaire Anrirouille 1 Kg 6 Fast-drying synthetic high-build primer with active corrosion protection (zinc-phosphate) for steel substrates. For interior and exterior use. Recoat",
+      "family": "PRIMAIRE ANTIROUILLE",
+      "componentRole": "main",
+      "cataloguePage": 13,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-122-1500",
+      "description": "2K HS Clearcoat +0.5L hardener 2K HS  Klarlack, 1L  + 0,5 Härter 2K HS   VERNIS TRANSPARENT  1L + 0.5L durcisseur 6",
+      "family": "PARFAIT 2K HS",
+      "componentRole": "hardener",
+      "cataloguePage": 14,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-122-5000",
+      "description": "2K HS Clearcoat 5L 2K HS Klarlack  5L 2K HS Vernis , 5L 4",
+      "family": "PARFAIT 2K HS",
+      "componentRole": "main",
+      "cataloguePage": 14,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-370-2500",
+      "description": "2.5L Standard hardener 2,5 L Standard Härter 2.5 L durcisseur standard 4 Two-component High Solid acrylic clear coat for complete or partial car refinish using two-coat technology „base coat + clear coat“. This product i",
+      "family": "PARFAIT 2K HS",
+      "componentRole": "hardener",
+      "cataloguePage": 14,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-401-1000",
+      "description": "1 L, 2 K Ultra HS Clear Coat 1L 2K HS Klarlack 1 L, Vernis 2 K Ultra HS 6",
+      "family": "2K ULTRA HS",
+      "componentRole": "main",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-401-5000",
+      "description": "5 L, 2K Ultra HS Clear Coat 5L 2K HS Klarlack 5 L, Vernis 2K Ultra HS 4",
+      "family": "2K ULTRA HS",
+      "componentRole": "main",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-435-0501",
+      "description": "0.5 L, Standard hardener 0,5 L, Standard Härter 0.5 L, Durcisseur standard 6",
+      "family": "2K ULTRA HS",
+      "componentRole": "hardener",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-435-2501",
+      "description": "2.5 L, Standard hardener 2,5 L, Standard Härter 2.5 L, Durcisseur standard 4",
+      "family": "2K ULTRA HS",
+      "componentRole": "hardener",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-436-0501",
+      "description": "0.5 L, Slow hardener 0,5 L, Langsamer Härter 0.5 L, Durcisseur lent 6",
+      "family": "2K ULTRA HS",
+      "componentRole": "hardener",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-437-0501",
+      "description": "0.5 L, Fast hardener 0,5 L, Schneller Härter 0.5 L, Durcisseur rapide 6",
+      "family": "2K ULTRA HS",
+      "componentRole": "hardener",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-437-2501",
+      "description": "0.2 L, Standard hardener 2,5 L, Schneller Härter 2.5 L, Durcisseur rapide 4 Two-component Ultra High Solid acrylic clear coat is a special finishing coating with excellent appearance and scratch resistant properties. The",
+      "family": "2K ULTRA HS",
+      "componentRole": "hardener",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-440-1000",
+      "description": "2K Matt Clearcoat, 1L 2K Klarlack,Matt, 1L 2K Vernis transparent Mat 1L 6",
+      "family": "VERNIS TRANSPARENT MAT",
+      "componentRole": "main",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-440-0500",
+      "description": "0.5 L, Standard Hardener 0,5 L, Standard Härter 0.5 L, durcisseur standard 6 2K acrylic clear coat with gloss level of 15-20 units at 60° angle. SURFACES",
+      "family": "VERNIS TRANSPARENT MAT",
+      "componentRole": "hardener",
+      "cataloguePage": 15,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-221-1000",
+      "description": "1 L, 2k Scratch Resistant Clearcoat 1L, 2K  Kratzfester Klarlack 1L, 2K Vernis résistant aux rayures 6",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "main",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-221-5000",
+      "description": "5 L, 2k Scratch Resistant Clearcoat 5L, 2K  Kratzfester Klarlack 5L, 2K Vernis résistant aux rayures 4",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "main",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-320-0501",
+      "description": "0.5 L, Hardener Standard 0,5 L, Härter Standard 0.5 L, Durcisseur standard 6",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-321-2501",
+      "description": "0,5 L Fast Hardener 0,5 L, Schneller Härter 0.5 L, Durcisseur lent 4",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-322-0501",
+      "description": "0.5 L, Hardener Slow 0,5 L, Langsamer Härter 0.5 L, Durcisseur rapide 6",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-320-2501",
+      "description": "2.5 L, Hardener Standard 2,5 L, Härter Standard 2.5 L, Durcisseur standard 4",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-321-0501",
+      "description": "2.5 L, Fast Hardener 2,5 L, Schneller Härter 2.5 L, Durcisseur lent 6",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-322-0501",
+      "description": "2.5 L, Hardener Slow 2,5 L, Langsamer Härter 2.5 L, Durcisseur rapide 6 Two-component high gloss acrylic clear coat is a special finishing coating with excellent appearance and high scratch resistant properties. The prod",
+      "family": "AUX RAYURES 2K HS 2 :1",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-156-1500",
+      "description": "1L Clearcoat + 0,5 l Hardener standard    1L Klarlack +0,5 standard Härter 1 L Vernis +Durcisseur standard 6 C.A.R. Fit Expressclearcoat is a clearcoat of low viscosity for a quick and efficient refinish (Express Technol",
+      "family": "2K VERNIS EXPRESS",
+      "componentRole": "hardener",
+      "cataloguePage": 16,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-153-1500",
+      "description": "1 L MS Clearcoat + 0.5 L Standard Hardener 1 L Klarlack + 0,5 L Härter Standard",
+      "family": "2K MS VERNIS TRANSPARENT",
+      "componentRole": "hardener",
+      "cataloguePage": 17,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-154-1500",
+      "description": "1 L MS Clearcoat + 0.5 L Fast Hardener 1 L Klarlack +0,5L schneller Härter",
+      "family": "2K MS VERNIS TRANSPARENT",
+      "componentRole": "hardener",
+      "cataloguePage": 17,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-141-0400",
+      "description": "Paint Spray Black matt, 400 ml Matt, 400 ml Aérosol peinture noir mat, 400 ml 6",
+      "family": "SCHWARZ PAINT SPRAY",
+      "componentRole": "main",
+      "cataloguePage": 18,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-142-0400",
+      "description": "Paint Spray Black glossy, 400 ml Glänzend, 400 ml Aérosol peinture noir brillant, 400 ml 6 UHS acrylic clear coat with excellent gloss. Its extreme short drying time does not affect its perfect appearance. SURFACES",
+      "family": "SCHWARZ PAINT SPRAY",
+      "componentRole": "main",
+      "cataloguePage": 18,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-500-0400",
+      "description": "1K Hi Build Primer Filler Spray Grey, 400 ml 1K Hi-Build Grundierfüller Grau, 400ml",
+      "family": "HI-BUILD 1K",
+      "componentRole": "main",
+      "cataloguePage": 18,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-501-0400",
+      "description": "1K Hi Build Primer Filler Spray White, 400 ml 1K Hi-Build Grundierfüller Weiß, 400ml",
+      "family": "HI-BUILD 1K",
+      "componentRole": "main",
+      "cataloguePage": 18,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-502-0400",
+      "description": "1K Hi Build Primer Filler Spray Black, 400 ml 1K Hi-Build Grundierfüller Schwarz, 400ml",
+      "family": "HI-BUILD 1K",
+      "componentRole": "main",
+      "cataloguePage": 18,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-143-0400",
+      "description": "Wheel Spray Silver, 400 ml Felgensilber Spray, 400 ml Aérosol pour jantes Argent, 400 ml 6 High quality fast drying paint spray. SURFACES Primed metal parts, fully cured old / OEM coatings, wood,",
+      "family": "FELGENSILBER SPRAY",
+      "componentRole": "main",
+      "cataloguePage": 19,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-201-0400",
+      "description": "1K High Gloss Clearcoat Spray, 400 ml HIGH GLOSS KLARLACK SPRAY, 400ml",
+      "family": "TRANSPARENT BRILLANT",
+      "componentRole": "main",
+      "cataloguePage": 19,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-151-0400",
+      "description": "Termo Paint Spray Black 650°C , 400 ml Thermo Spray, 400 ml Aérosol thermorésistant noir 650°C, 400 ml 6 High quality heat-resistant black paint spray is used for treating parts exposed to high-temperature heating. SURFA",
+      "family": "THERMO SPRAY 650°C",
+      "componentRole": "main",
+      "cataloguePage": 20,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-204-0400",
+      "description": "2K Clear coat spray, 400 ml 2K Klarlack Spray, 400ml 2K Vernis, 400 ml 6 Carfit 2K clear coat is a high-gloss, extremely scratch-resistant 2-component clear coat with very high resistance to petrol, UV rays and weatherin",
+      "family": "2K CARFIT VERNIS",
+      "componentRole": "main",
+      "cataloguePage": 20,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-390-0400",
+      "description": "1K Epoxy Primer Filler Spray Grey 400ml Epoxid Füller Grau, 400ml Mastic synthétique aerosol Gris, 400ml   6 Carfit 1K Epoxy Primer is a high-quality universal primer for the pre-treatment of steel, stainless steel,galva",
+      "family": "CARFIT 1K EPOXY PRIMER",
+      "componentRole": "main",
+      "cataloguePage": 21,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "4-171-0400",
+      "description": "Texture Paint Spray Black, 400 ml Strukturklarlack Spray, 400 ml Aérosol peinture texturée noire, 400 ml 6 High quality fast drying texture paint for restoring original structure of damaged plastic car parts, e.g. bumper",
+      "family": "STRUKTURLACK SPRAY",
+      "componentRole": "main",
+      "cataloguePage": 21,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-553-0400",
+      "description": "Paint remover Spray, 400ml Abbeizerspray, 400ml   Décapant en spray, 400ml    12 C.A.R. Fit Paint remover Spray is a sprayable paint stripper without CHC, NMP and aromatics for removing old layers of paint and varnish ba",
+      "family": "C.A.R. FIT PAINT REMOVER SPRAY",
+      "componentRole": "main",
+      "cataloguePage": 22,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-500-0400",
+      "description": "Silikone Remover «Strawberry» Spray, 400ml Silikone Remover «Strawberry» Spray, 400ml",
+      "family": "SILIKONENTFERNER SPRAY",
+      "componentRole": "main",
+      "cataloguePage": 22,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-501-0400",
+      "description": "Fillable Spray Can, 400 ml  BEFÜLLBARE SPRAY DOSE, 400ml Bombe aérosol à remplir, 400 ml 6 C.A.R.FIT Fillable Spray Can is an alternative to conventional spray guns used for small or spot repairs of cars. Any 1K material",
+      "family": "BEFÜLLBARE SPRAY DOSE",
+      "componentRole": "main",
+      "cataloguePage": 23,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-551-0400",
+      "description": "Fade out thinner, 400ml        Diluant de fondu, 400ml     Beispritzverdünnung Spray, 400ml  6 Fade out thinner for spot repairs, for use on clear coats and 2K paints. The product was specially developed for blending in,",
+      "family": "DILUANT DE FONDU",
+      "componentRole": "thinner",
+      "cataloguePage": 23,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-400-0500",
+      "description": "Underbody Protection Bitumen Spray, 500 ml Unterbodenschutz, 500ml Aérosol bitumineux, 500 ml 6 High quality bitumen spray for vehicle underbody protection.",
+      "family": "PROTECTION DU BAS DE CAISSE",
+      "componentRole": "main",
+      "cataloguePage": 24,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-500-0500",
+      "description": "Cavity Protection Spray, 500 ml HohlraumKonservierung Spray, 500ml Aérosol de traitement anticorrosion, 500 ml",
+      "family": "ANTICORROSION",
+      "componentRole": "main",
+      "cataloguePage": 24,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-601-0500",
+      "description": "Stone Chip Protection Spray Black, 500 ml Steinschlagschutz Spray, Schwarz, 500ml",
+      "family": "SOUBASSEMENT",
+      "componentRole": "main",
+      "cataloguePage": 25,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-602-0500",
+      "description": "Stone Chip Protection Spray Grey, 500 ml Steinschlagschutz Spray, Grau, 500ml",
+      "family": "SOUBASSEMENT",
+      "componentRole": "main",
+      "cataloguePage": 25,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-700-1000",
+      "description": "Bitumen underbody protection, 1L Unterbodenschutz Bitumen, 1L Protection bitume pour soubassement, 1L 12 Stone chip spray is ideal coating for underbody protection from road gravel. The product forms durable elastic film",
+      "family": "SOUBASSEMENT",
+      "componentRole": "main",
+      "cataloguePage": 25,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-604-1000",
+      "description": "Stone Chip Protection Black ,1Kg 1Kg Steinschlagschutz, Schwarz Protection anti gravillons Noir, 1Kg 12",
+      "family": "PROTECTION ANTI GRAVILLONS",
+      "componentRole": "main",
+      "cataloguePage": 26,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-603-1000",
+      "description": "Stone Chip Protection Grey ,1Kg 1Kg Steinschlagschutz, Grau Protection anti gravillons Gris, 1Kg 12 Synthetic resin-based stone chip protection of vehicle underbody and lower body. The coating can be primed or overpainte",
+      "family": "PROTECTION ANTI GRAVILLONS",
+      "componentRole": "main",
+      "cataloguePage": 26,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-113-0310",
+      "description": "PU Adhesive and Sealant Grey, 310 ml PU KLEB- UND DICHTMASSE, 310ml , grau",
+      "family": "PU KLEB- UND DICHTMASSE",
+      "componentRole": "main",
+      "cataloguePage": 26,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-115-0310",
+      "description": "PU Adhesive and Sealant Black, 310 ml PU KLEB- UND DICHTMASSE, 310ml , schwarz",
+      "family": "PU KLEB- UND DICHTMASSE,",
+      "componentRole": "main",
+      "cataloguePage": 26,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-402-0005",
+      "description": "Tack Coating for Spraybooth, 5 L STAUBSCHUTZLACK FÜR LACKIERKABINEN Vernis protecteur pour cabines de pulvérisation, 5 L",
+      "family": "VERNIS PROTECTEUR POUR",
+      "componentRole": "main",
+      "cataloguePage": 27,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-402-0010",
+      "description": "Tack Coating for Spraybooth, 10 L STAUBSCHUTZLACK FÜR LACKIERKABINEN, 10L Vernis protecteur pour cabines de pulvérisation, 10L",
+      "family": "LACKIERKABINEN",
+      "componentRole": "main",
+      "cataloguePage": 27,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-551-1000",
+      "description": "Silicone Remover Strawberry, 1 L Silikonentferner Erdbeere, 1L Décapant antisilicone à la fraise, 1 L 6",
+      "family": "SILICONE REMOVER",
+      "componentRole": "main",
+      "cataloguePage": 28,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-551-5000",
+      "description": "Silicone Remover Strawberry, 5L Silikonentferner Erdbeere, 5L Décapant antisilicone à la fraise, 5L 3 Strawberry scented cleaning compound based on organic solvents for initial cleaning of old / OEM coatings, primed and ",
+      "family": "SILICONE REMOVER",
+      "componentRole": "main",
+      "cataloguePage": 28,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-501-1000",
+      "description": "Silicone Remover , 1L Silikonentferner Erdbeere, 1L Décapant antisilicone, 1L 6",
+      "family": "SILIKONENTFERNER",
+      "componentRole": "main",
+      "cataloguePage": 28,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-501-5000",
+      "description": "Silicone Remover, 5L Silikonentferner, 5L Décapant antisilicone, 5L 3 Cleaning compound based on organic solvents for initial cleaning of old / OEM coatings, primed and filled surfaces as well as plastics from resins, si",
+      "family": "SILIKONENTFERNER",
+      "componentRole": "main",
+      "cataloguePage": 28,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-602-1000",
+      "description": "Acryl Thinner, 1L Acryl-Verdünnung, 1L Acryl Diluent, 1L 6",
+      "family": "ACRYL DILUANT",
+      "componentRole": "thinner",
+      "cataloguePage": 29,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-602-5000",
+      "description": "Acryl Thinner, 5L Acryl-Verdünnung, 5L Acryl Diluent, 5L 4 Product for thinning all kinds of C.A.R.FIT refinishing materials and it is also compatible with competitor brands. SURFACES",
+      "family": "ACRYL DILUANT",
+      "componentRole": "thinner",
+      "cataloguePage": 29,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-557-1000",
+      "description": "Fade Out Thinner , 1 L Beispritzverdünnung 1L Diluant Fade Out, 1 L 6 C.A.R. Fit Fade out thinner is a special mixture of solvents (fade-out thinner) to “melt” edges of spot repairs and fade-out areas.",
+      "family": "DILUANT FADE OUT",
+      "componentRole": "thinner",
+      "cataloguePage": 29,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "8-102-5000",
+      "description": "Gun Cleaner, 5 L Spritzpistolen-Reiniger, 5 L Produit nettoyant pour pistolet pulvérisateur, 5 L 4 Effective solvent-based cleaning agent with high dissolving ability. It is recommended to use the product together with a",
+      "family": "PRODUIT NETTOYANT POUR",
+      "componentRole": "main",
+      "cataloguePage": 30,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-1001",
+      "description": "Black Label Finishing Compound, 1L Finishing Compound, 1L Pâte coupante Black Label, 1L 8 BLACK LABEL Finishing Compound guarantees a perfect end -finish on dark paintwork. Thanks to a microfine, high- purity aluminium o",
+      "family": "FINISHING COMPOUND",
+      "componentRole": "main",
+      "cataloguePage": 31,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-1000",
+      "description": "Cutting compound, 1L      hleifpaste Cutting Compound, 1L        Pâte coupante Black Label, 1L 8 The BLACK LABEL sanding paste can be used for applications on used and weathered paints. The unique powder technology ensur",
+      "family": "HLEIFPASTE CUTTING COMPOUND",
+      "componentRole": "main",
+      "cataloguePage": 31,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-101-0250",
+      "description": "Universal Polishing Compound 0.25L UNIVERSAL POLIERPASTE 0,25L Pâte à polir universelle 0.25L 15",
+      "family": "UNIVERSAL POLIERPASTE",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-101-1000",
+      "description": "Universal Polishing Compound 1L UNIVERSAL POLIERPASTE 1L Pâte à polir universelle 1L 8 Universal polishing paste is a very efficient 1-step polishing paste that offers a wide range of applications on all common paint sys",
+      "family": "UNIVERSAL POLIERPASTE",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0151",
+      "description": "Diam. 150 mm Diam. 150 mm Diam. 150 mm 1",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0181",
+      "description": "Diam. 180 mm Diam. 180 mm Diam. 180 mm 1 Articles Description Beschreibung Description Pcs./pack",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0001",
+      "description": "180mm, M14 180mm, M14 180mm, M14 1",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0002",
+      "description": "150mm, M14 150mm, M14 150mm, M14 1 Articles Description Beschreibung Description Pcs./pack",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-1500",
+      "description": "Polishing sponge blue, D-125-150 mm, hard Polierschwamm blau, D-125-150 mm, hart",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-1501",
+      "description": "Polishing sponge yellow, D-125-150 mm, medium hard Polierschwamm gelb, D-125-150 mm, mittel hart",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-1502",
+      "description": "Polishing sponge black, D125-150 mm, soft Polierschwamm schwarz, D125-150 mm, weich",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0021",
+      "description": "Winner Pad 15 Holes  - 5/16”+M8, Medium Density Winner Pad 15 Löcher-5/16”+M8, mittlere Dichte",
+      "family": "AUFLAGE FÜR POLIERSCHEIBEN",
+      "componentRole": "main",
+      "cataloguePage": 32,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0165",
+      "description": "Polishing Disc Velcro Orange / medium hard Polierschwamm Velcro , mittel hart, orange, 150mm",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0168",
+      "description": "Polishing Disc Velcro White / very hard Polierschwamm Velcro , sehr hart, weiß, 150mm",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-100-0169",
+      "description": "Polishing Disc Velcro Black/ soft Polierschwamm Velcro , weich, schwarz, 150mm Disque de polissage Velcro Noir / soft 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0014",
+      "description": "Soft Interface Pad, D150mm, 15 holes, 5mm Soft interface Pad, D 150 mm, 15 Löcher, 5 mm",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0015",
+      "description": "Soft Interface Pad, D150mm, 15 holes, 10mm Soft interface Pad, D 150 mm, 15 Löcher, 10 mm",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-102-0005",
+      "description": "Soft Interface Pad, Velcro D 150mm, 5mm Soft interface pad Micro, D 150 mm,  5 mm",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-102-0010",
+      "description": "Soft Interface Pad, Velcro D 150mm, 10mm Soft interface pad Micro, D 150 mm,  10 mm",
+      "componentRole": "main",
+      "cataloguePage": 33,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-100-0019",
+      "description": "Masking Tape 19 mmx45m, thickness 90 ± 15 μm Abdeckband  19 mm x 45m, Dicke 90 ± 15 μm",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-100-0025",
+      "description": "Masking Tape 25 mmx45m, thickness 90 ± 15 μm Abdeckband  25 mm x 45m, Dicke 90 ± 15 μm",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-100-0038",
+      "description": "Masking Tape 38 mmx45m, thickness 90 ± 15 μm Abdeckband  38 mm x 45m, Dicke 90 ± 15 μm",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-100-0050",
+      "description": "Masking Tape 50 mmx45m, thickness 90 ± 15 μm Abdeckband  50 mm x 45m, Dicke 90 ± 15 μm",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-112-2005",
+      "description": "No Edge Blending Tape, 20 mm x 5 m, thickness 3 mm No Edge Schaumklebeband 20mm x 5m, Dicke 3mm",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-109-1350",
+      "description": "Masking Foam Tape, 13 mm x 50m Schaumdichtband, 13mm x 50m Ruban cache en mousse, 13mm x 50m",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-111-2050",
+      "description": "Universal Foam Masking Tape 20mm x 50m Universelles Schaum-Abdeckband 20mm x 50m",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-160-5010",
+      "description": "Lifting Tape, 50 mm x 10m Lifting Tape, 50 mm x 10m Ruban Lifting, 50 mm x 10m 24 Perforated Trim Masking Tape is a combination of high temperature impregnated medium crepe paper and rubber pressure sensitive adhesive. T",
+      "componentRole": "main",
+      "cataloguePage": 34,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-141-0333",
+      "description": "Blue Fine Line Tape, 3 mm x 33m Zierlinienband 3mm x 33m Ruban-cache en ligne fine, Bleu, 3 mm x 33m 10",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-141-0633",
+      "description": "Blue Fine Line Tape, 6 mm x 33m Zierlinienband 6mm x 33m Ruban-cache en ligne fine, Bleu, 6 mm x 33m 10",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-141-1233",
+      "description": "Blue Fine Line Tape, 12 mm x 33m Zierlinienband 12mm x 33m Ruban-cache en ligne fine, Bleu, 12 mm x 33m 10 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "9-150-5050",
+      "description": "50 mm x 50 m, thickness 0.3 mm 50 mm x 50 m, Dicke 0.3 mm 50 mm x 50 m, épaisseur 0.3 mm 24 Fine Line Masking Tape is a combination of thermally stabilized PVC backing and rubber based pressure sensitive adhesive. It is ",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-200-0450",
+      "description": "Masking Film 4m x 5m, 0.07mm Abdeckfolie, 4m x 5m, 0,07mm Film de masquage, 4m x 5m, 0.07mm 40",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-200-0470",
+      "description": "Masking Film 4m x 7m, 0.07mm Abdeckfolie, 4m x 7m, 0,07mm Film de masquage, 4m x 7m, 0.07mm 40",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-200-0570",
+      "description": "Masking Film, 5m x 7m, 0.07m Abdeckfolie, 5m x 7m, 0,07mm Film de masquage, 5m x 7m, 0.07mm 42",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-204-4020",
+      "description": "Masking Film 4m x 200m, 0.1mm Abdeckfolie, 4m x 200m, 0,1mm Film de masquage, 4m x 200m, 0.1mm 1",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-204-4030",
+      "description": "Masking Film 4m x 300m, 0.1mm Abdeckfolie, 4m x 300m, 0,1mm Film de masquage, 4m x 300m, 0.1mm 1",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-204-5020",
+      "description": "Masking Film 5m x 200m, 0.1mm Abdeckfolie, 5m x 200m, 0,1mm Film de masquage, 5m x 200m, 0.1mm 1",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-204-6010",
+      "description": "Masking Film 6m x 100m, 0.1mm Abdeckfolie, 6m x 100m, 0,1mm Film de masquage, 6m x 100m, 0.1mm 1",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-204-5012",
+      "description": "CF Masking Film green, 5m x 120m  0,17mm Abdeckfolie (grün), 5m x 120m  0,17mm",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-200-0550",
+      "description": "Pretaped Masking Film, 0.55m x 33m Abdeckfolie mit Klebeband, 0.55m x 33m",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-200-1800",
+      "description": "Pretaped Masking Film, 1.8m x 33m Abdeckfolie mit Klebeband, 1.8m x 33m",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-200-2700",
+      "description": "Pretaped Masking Film, 2.7m x 20m Abdeckfolie mit Klebeband, 2.7m x 20m",
+      "componentRole": "main",
+      "cataloguePage": 35,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-2045",
+      "description": "Masking Paper 0,2m x 450m Abdeckpapier 0,2m x 450m Papier de masquage 0,2m x 450m 1",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-4020",
+      "description": "Masking Paper 0,4m x 200m Abdeckpapier 0,4m x 200m Papier de masquage 0,4m x 200m 1",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-6020",
+      "description": "Masking Paper 0,6m x 200m Abdeckpapier 0,6m x 200m Papier de masquage 0,6m x 200m 1",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-6045",
+      "description": "Masking Paper 0,6m x 450m Abdeckpapier 0,6m x 450m Papier de masquage 0,6m x 450m 1",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-9020",
+      "description": "Masking Paper 0,9m x 200m Abdeckpapier 0,9m x 200m Papier de masquage 0,9m x 200m 1",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-9030",
+      "description": "Masking Paper 0,9m x 300m Abdeckpapier 0,9m x 300m Papier de masquage 0,9m x 300m 1",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-220-9045",
+      "description": "Masking Paper 0,9m x 450m Abdeckpapier 0,9m x 450m Papier de masquage 0,9m x 450m 1 Articles Description Beschreibung Description Pcs./pack",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-120-0500",
+      "description": "Disposable Seat Covers   Sitzbezüge Housses de siège jetables 500 Mechanically and solvent proof high-quality masking paper for overspray protection of vehicle surfaces that are not subject to refinish. Due to special tr",
+      "family": "NETTOYAGE & ACCESSOIRESNETTOYAGE & ACCESSOIRES",
+      "componentRole": "main",
+      "cataloguePage": 36,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0007",
+      "description": "Disposable Coverall White, M Lackier-Overall, Weiß, M Combinaison blanche, M 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0008",
+      "description": "Disposable Coverall White, L Lackier-Overall, Weiß, L Combinaison blanche, L 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0009",
+      "description": "Disposable Coverall  White, XL Lackier-Overall, Weiß, XL Combinaison blanche, XL 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0010",
+      "description": "Disposable Coverall White, XXL Lackier-Overall, Weiß, XXL Combinaison blanche, XXL 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0015",
+      "description": "Black Label Overall, S Black Label Lackier-Overall, Schwarz, S Combinaison noire, S 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0016",
+      "description": "Black Label Overall, M Black Label Lackier-Overall, Schwarz, M Combinaison noire, M 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0017",
+      "description": "Black Label Overall, L Black Label Lackier-Overall, Schwarz, L Combinaison noire, L 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0018",
+      "description": "Black Label Overall, XL Black Label Lackier-Overall, Schwarz, XL Combinaison noire, XL 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0019",
+      "description": "Black Label Overall, XXL Black Label Lackier-Overall, Schwarz, XXL Combinaison noire, XXL 1",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-266-0020",
+      "description": "Black Label Overall, XXXL Black Label Lackier-Overall, Schwarz, XXXL Combinaison noire, XXXL 1 Paint Coverall: Light and comfortable overall, prevents skin exposure to liquid and aerosol materials. Comes in 2 types of de",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-100-0005",
+      "description": "Tack Cloth «Wrinkle Free» 80 cm x 50 cm Staubbindetuch, 80 cm x 50 cm Chiffon à poussière non pelucheux 80 cm x 50 cm",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-101-0001",
+      "description": "Tack Cloth «Wrinkle Free» 80 cm x 50 cm Staubbindetuch, 80 cm x 50 cm Chiffon à poussière non pelucheux 80 cm x 50 cm",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-110-0001",
+      "description": "Tack Cloth «Super Wave» 80cm x 80cm Staubbindetuch „Super Wave“ 80cm x 80cm",
+      "componentRole": "main",
+      "cataloguePage": 37,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-910-1001",
+      "description": "Rotating Paint Stand with 6 extensions Lackierständer mit 6 Befestigungen Chevalet rotatif avec 6 extensions 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-915-1001",
+      "description": "Paint Stand X-form X Ständer Support en X 1",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-915-1002",
+      "description": "Paint stand X-form Premium Premium X Ständer Support en X Premium 1 Multipurpose rotating paint stand with spray gun holders and a set of fixtures for extensions. The paint stand is a helper in refinishing car doors, bon",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "1-225-0001",
+      "description": "Mobile Masking Paper Dispenser Rollbarer Spender Abdeck Papier Dérouleur mobile de papier de masquage 1 Articles Description Beschreibung Description",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-268-1000",
+      "description": "Silicone Body Half Mask (Set filters+holders) Halbmaske aus Silikon (inklusive Filter und Halterungen)",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-268-1001",
+      "description": "Organic Gas & Vapor Cartridge (pair) Filterkartuschen für organische Gase und Dämpfe (Paar) Cartouches pour gaz et vapeurs organiques (paire)",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-268-1002",
+      "description": "Prefilter for Half Mask (20 pcs) Vorfilter für Halbmaske (20 Stück) Préfiltre pour demi-masque (20 pièces)",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-268-1003",
+      "description": "Prefilter Holder for Half Mask (10 pcs) Vorfilter für Halbmaske (10 Stück) Préfiltre pour demi-masque (10 pièces) Dispenser accommodating 3 separate rolls of masking paper at a time, fitted with masking tape-removing rol",
+      "componentRole": "main",
+      "cataloguePage": 38,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-260-0350",
+      "description": "Nitrile Glove 6MIL, M Nitril-Handschuhe, M Gants Nitriles 6MIL, M 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-260-0450",
+      "description": "Nitrile Glove 6MIL, L Nitril-Handschuhe, L Gants Nitriles 6MIL, L 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-260-0550",
+      "description": "Nitrile Glove 6MIL, XL Nitril-Handschuhe, XL Gants Nitriles 6MIL, XL 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-260-0650",
+      "description": "Nitrile Glove 6MIL, XXL Nitril-Handschuhe, XXL Gants Nitriles 6MIL, XXL 100 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-261-0150",
+      "description": "Professional Nitrile Gloves, Size M Professional Nitrile Gloves, Size M Gants nitrile professionnels, taille M 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-261-0250",
+      "description": "Professional Nitrile Gloves, Size L Professional Nitrile Gloves, Size L Gants nitrile professionnels, taille L 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-261-0350",
+      "description": "Professional Nitrile Gloves, Size XL  Professional Nitrile Gloves, Size XL Gants nitrile professionnels, taille XL 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-261-0450",
+      "description": "Professional Nitrile Gloves, Size XXL  Professional Nitrile Gloves, Size XXL Gants nitrile professionnels, taille XXL 100 100% synthetic nitrile rubber gloves with higher resistance to a wide range of chemicals than natu",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-200-0385",
+      "description": "Mixing Cup 0.385 L Mischbecher 0,385 L Godet de mélange 0.385 L 200",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-200-0750",
+      "description": "Mixing Cup 0.750 L Mischbecher 0,750 L Godet de mélange 0.750 L 200",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-200-1400",
+      "description": "Mixing Cup 1.4 L Mischbecher 1,4 L Godet de mélange 1.4 L 200",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-200-2300",
+      "description": "Mixing Cup 2.3 L Mischbecher 2,3 L Godet de mélange 2.3 L 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-223-0385",
+      "description": "lid for cup 0.385 L Deckel für Mischbecher 0,385 L Couvercle pour godet de 0.385 L 200",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-223-0750",
+      "description": "lid for cup 0.750 L Deckel für Mischbecher 0,750 L Couvercle pour godet de 0.750 L 200",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-223-1400",
+      "description": "lid for cup 1.4 L Deckel für Mischbecher 1,4 L Couvercle pour godet de 1.4 L 200",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-223-2301",
+      "description": "lid for cup 2.3 L Deckel für Mischbecher 2,3 L Couvercle pour godet de 2.3 L 200 High-quality solvent proof plastic cups with lids designed for mixing of paintwork materials with hardeners and thinners in different ratio",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-115-0002",
+      "description": "Touch Up Bottles, 20ml Pinselfläschchen 20ml Flacons de retouche 20ml 100",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-115-0003",
+      "description": "Touch Up Bottles, 50ml Pinselfläschchen 50ml Flacons de retouche 50ml 50 Customer hand out unbreakable and transparent bottle with a brush for spot repairs, such as stone chip damages. Solvent resistant. Includes mix-bal",
+      "componentRole": "main",
+      "cataloguePage": 39,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-225-0200",
+      "description": "CF Fast Paint System 200 ml (1 hard cup, 1 collar) CF Fast Paint System 200 ml (1 hard cup, 1 collar)",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-227-2125",
+      "description": "CF Fast Paint System 200ml (50i. cup,50li.,24c.)125μ CF Fast Paint System 200ml (50i. cup,50li.,24c.)125μ",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-225-0400",
+      "description": "CF Fast Paint System 400 ml (1 hard cup, 1 collar) CF Fast Paint System 400 ml (1 hard cup, 1 collar)",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-227-4125",
+      "description": "CF Fast Paint System 400ml (50i. cup,50li.,24c.)125μ CF Fast Paint System 400ml (50i. cup,50li.,24c.)125μ",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-225-0002",
+      "description": "CF Fast Paint System 650ml  (1 hard cup, 1 collar) CF Fast Paint System 650ml  (1 hard cup, 1 collar)",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-227-6125",
+      "description": "CF Fast Paint System 650ml (50i. cup,50li.,24c.)125μ CF Fast Paint System 650ml (50i. cup,50li.,24c.)125μ",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-225-0850",
+      "description": "CF Fast Paint System 850 ml (1 hard cup, 1 collar) CF Fast Paint System 850 ml (1 hard cup, 1 collar)",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-227-8125",
+      "description": "CF Fast Paint System 850ml (50i. cup,50li.,24c.)125μ CF Fast Paint System 850ml (50i. cup,50li.,24c.)125μ",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0000",
+      "description": "CF Fast Paint System Adapter A0  CF Fast Paint System Adapter A0  CF Fast Paint System Adapter A0  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0001",
+      "description": "CF Fast Paint System Adapter A1  CF Fast Paint System Adapter A1  CF Fast Paint System Adapter A1  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0002",
+      "description": "CF Fast Paint System Adapter A2  CF Fast Paint System Adapter A2  CF Fast Paint System Adapter A2  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0003",
+      "description": "CF Fast Paint System Adapter A3  CF Fast Paint System Adapter A3  CF Fast Paint System Adapter A3  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0004",
+      "description": "CF Fast Paint System Adapter A4   CF Fast Paint System Adapter A4   CF Fast Paint System Adapter A4   1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0005",
+      "description": "CF Fast Paint System Adapter A5  CF Fast Paint System Adapter A5  CF Fast Paint System Adapter A5  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0006",
+      "description": "CF Fast Paint System Adapter A6  CF Fast Paint System Adapter A6  CF Fast Paint System Adapter A6  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0007",
+      "description": "CF Fast Paint System Adapter A7  CF Fast Paint System Adapter A7  CF Fast Paint System Adapter A7  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0008",
+      "description": "CF Fast Paint System Adapter A8  CF Fast Paint System Adapter A8  CF Fast Paint System Adapter A8  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0009",
+      "description": "CF Fast Paint System Adapter A9  CF Fast Paint System Adapter A9  CF Fast Paint System Adapter A9  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0011",
+      "description": "CF Fast Paint System Adapter A11  CF Fast Paint System Adapter A11  CF Fast Paint System Adapter A11  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0012",
+      "description": "CF Fast Paint System Adapter A12  CF Fast Paint System Adapter A12  CF Fast Paint System Adapter A12  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0013",
+      "description": "CF Fast Paint System Adapter A13  CF Fast Paint System Adapter A13  CF Fast Paint System Adapter A13  1",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-228-0014",
+      "description": "CF Fast Paint System Adapter A14  CF Fast Paint System Adapter A14  CF Fast Paint System Adapter A14  1 The C.A.R.FIT Fast Paint System (FPS) is a new and modern paint preparation system designed for mixing, filling and ",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-116-0101",
+      "description": "Touch-up Micro Applicator, Regular Mikroapplikator standard Micro Applicateur de retouches, Normal 100",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-117-0101",
+      "description": "Touch-up Micro Applicator, Fine Mikroapplikator fein Micro Applicateur de retouches, Fin 100",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-118-0101",
+      "description": "Touch-up Micro Applicator, Superfine Mikroapplikator superfein Micro Applicateur de retouches, Superfin 100 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-200-0150",
+      "description": "Control Powder, Black Schleifkontrollpulver , Schwarz Poudre de contrôle, noir 8",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-201-0150",
+      "description": "Control Powder, Black, with applicator Schleifkontrollpulver, Set, Schwarz Poudre de contrôle, noir, avec applicateur",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-202-0150",
+      "description": "Control Powder, Orange, Set Schleifkontrollpulver, Orange, Set Poudre de contrôle, Orange, Set 20 Applicator for small, accurate touch-up works during paintwork. Sanding control system is used for highlighting imperfecti",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-804-1001",
+      "description": "Eraser pad & adapter, 1 disc + 1 adapter Radiergummi-Polster & Adapter, 1 Scheibe + 1 Adapter",
+      "componentRole": "main",
+      "cataloguePage": 40,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-700-0020",
+      "description": "Metal Test Cards, Dark Grey Metalltestkarten, dunkel grau Cartes de test en métal, Gris sombre 20",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-700-0050",
+      "description": "Metal Test Cards , Grey Metalltestkarten, grau Cartes de test en métal, Gris 50",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-700-0100",
+      "description": "Metal Test Cards, White Grey Metalltestkarten, Weiß Cartes de test en métal, Gris clair 100 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-761-0500",
+      "description": "Mixing S-Sticks, lenght 20 cm Rührstäbe Mix-S-Sticks, 20cm Agitateurs Mix S-Sticks, longueur 20 cm 500 Metal test card with size 105x150 mm for testing automobile paints prior to application. Suitable for application of ",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-850-0125",
+      "description": "Disposable Paint Strainers, 125 μm Papierfilter, 125-μm Filtres à peinture jetables, 125 μm 1000",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "7-850-0190",
+      "description": "Disposable Paint Strainers , 190 μm Papierfilter 190-μm Filtres à peinture jetables, 190 μm 1000 A plastic stick for stirring paints and clear coats. It is made of mechanically strong polypropylene which is not affected ",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "8-800-0400",
+      "description": "Nonwoven Polishing Cloth, 320 mm x 360 mm Vlies Poliertuch, 320 mm x 360 mm",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "8-801-0500",
+      "description": "Car Clear Multi, 380 mm x 320 mm, rolls Putztuch Multi, 380 mm x 320 mm, Rolle",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "8-801-0035",
+      "description": "Car Clear Multi, 320mm x 360mm Putztuch Multi, 320mm x 360mm Chiffon de nettoyage Multi, 320mm x 360mm 35 Soft lint-free polishing cloth made of synthetic non woven fabric for the manual",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "8-802-1000",
+      "description": "Double Layer Cleaning Cloth, 380 mm x 370 mm, 1000 2-lagiges Putztuch, 380mm x 370 mm",
+      "componentRole": "main",
+      "cataloguePage": 41,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-980-0001",
+      "description": "Ozone Generator Ozongenerator    Générateur d’ozone 1 CARFIT Ozone Generator is designed for cleaning and disinfection of air, surfaces and parts of cars, vans, trailers, as well as rooms with a volume of up to 50 m³ fro",
+      "componentRole": "main",
+      "cataloguePage": 42,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "8-100-0000",
+      "description": "Plastic Stapler Kit Kunststoff Reparatur Set Kit de réparation par agrafeuse 1 There are lots of parts in modern cars that are made of plastics. The most frequently repaired parts are the most expensive ones – bumpers, l",
+      "family": "AVANTAGES",
+      "componentRole": "main",
+      "cataloguePage": 42,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "3-255-0001",
+      "description": "Pump Spray, 1 L Sprühpumpe, 1L Pompe de vaporisation, 1 L 1 The sprayer with an air pump is intended for spraying silicone and cleaners. It is made of plastic that is resistant to mentioned materials. Die mit einer Luftp",
+      "family": "AVANTAGES",
+      "componentRole": "main",
+      "cataloguePage": 42,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0040",
+      "description": "P40, D 150 mm 50",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0060",
+      "description": "P60, D 150 mm 50",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0080",
+      "description": "P80, D 150 mm 50",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0100",
+      "description": "P100, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0120",
+      "description": "P120, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0150",
+      "description": "P150, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0180",
+      "description": "P180, D 150 mm 100 Articles Description/Beschreibung/ Description Pcs./pack",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0220",
+      "description": "P220, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0240",
+      "description": "P0240, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0280",
+      "description": "P280, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0320",
+      "description": "P320, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-300-0400",
+      "description": "P400, D 150 mm 100",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0500",
+      "description": "P500, D 150 mm 100 Gold Paper Disc – abrasive disk of 150 mm diameter with 15 holes for surface treatment in such areas as car repair, aircraft- and shipbuilding, manufacturing and processing of composite materials and p",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-902-0001",
+      "description": "Very Fine, roll 115x10m, red Very Fine, Rolle 115x10m, Rot Très Fin, rouleau 115x10m, rouge 1",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-902-0002",
+      "description": "Ultra Fine, roll 115x10m, grey Ultra Fine, Rolle 115x10m, Grau Ultra Fin, rouleau 115x10m, gris 1",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-901-0001",
+      "description": "Very Fine, sheets 115x230mm, red Very Fine, sheets 115x230mm, Rot Très Fin, feuilles 115x230mm, rouge 20",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-901-0002",
+      "description": "Ultra Fine, sheets 115x230mm, grey Ultra Fine, sheets 115x230mm, Grau Ultra Fin, feuilles 115x230mm, gris 20 Abrasive non-woven material in sheets or rolls on the bases of nylon fiber with impregnation of synthetic rubbe",
+      "family": "ABRASIFSABRASIFS",
+      "componentRole": "main",
+      "cataloguePage": 43,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0060",
+      "description": "P60, D 150 mm 50",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0080",
+      "description": "P80, D 150 mm 50",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0100",
+      "description": "P100, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0120",
+      "description": "P120, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0150",
+      "description": "P150, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0180",
+      "description": "P180, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0220",
+      "description": "P220, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0240",
+      "description": "P240, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0280",
+      "description": "P280, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0320",
+      "description": "P320, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0400",
+      "description": "P400, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0500",
+      "description": "P500, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0600",
+      "description": "P600, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-0800",
+      "description": "P800, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-1000",
+      "description": "P1000, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-1500",
+      "description": "P1500, D 150 mm 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-500-2000",
+      "description": "P2000, D 150 mm 100 Abrasives • Schleifmittel • Abrasifs",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0040",
+      "description": "Purple Ceramic Film, Disks, D 150 mm, 21 Holes/Löcher/Trous,P40 50",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0060",
+      "description": "Purple Ceramic Film, Disks, D 150 mm, 21 Holes/Löcher/Trous,P60 50",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0080",
+      "description": "Purple Ceramic Film, Disks, D 150 mm, 21 Holes/Löcher/Trous,P80 50",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0100",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P100 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0120",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P120 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0150",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P150 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0180",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P180 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0220",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P220 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0240",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P240 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0280",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P280 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0320",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P320 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0400",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P400 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0500",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P500 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0600",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P600 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-0800",
+      "description": "Purple Ceramic Film, Disks, D 150 mm,21 Holes/Löcher/Trous,P800 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-1000",
+      "description": "Purple Ceramic Film, Disks,D 150 mm,21 Holes/Löcher/Trous,P1000 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-1500",
+      "description": "Purple Ceramic Film, Disks,D 150 mm,21 Holes/Löcher/Trous,P1500 100",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-510-2000",
+      "description": "Purple Ceramic Film, Disks,D 150 mm,21 Holes/Löcher/Trous,P2000 100 Film abrasive discs of the Purple Ceramic Film series are used for machine “dry” and “wet” sanding. The presence of a self-sharpening ceramic grain in t",
+      "componentRole": "main",
+      "cataloguePage": 44,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-200-0001",
+      "description": "Spongecut, micro fine, purple (100 pcs/Stk/pièces)",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-200-0002",
+      "description": "Spongecut, super fine, green (100 pcs/Stk/pièces)",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-200-0003",
+      "description": "Spongecut, fine, brown (100 pcs/Stk/pièces)",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-200-0004",
+      "description": "Spongecut, micro fine, purple (15 pcs/Stk/pièces)",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-200-0005",
+      "description": "Spongecut, super fine, green (15 pcs/Stk/pièces)",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-200-0006",
+      "description": "Spongecut, fine, brown (15 pcs/Stk/pièces) Articles Description",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-400-3075",
+      "description": "CF Abrasives Grey Matt, D 75mm, P3000, 6 Pcs/ Stk./ pieces/pack",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-400-3150",
+      "description": "CF Abrasives Grey Matt, D 150mm, P3000, 6 Pcs/ Stk./ pieces/pack",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-400-5075",
+      "description": "CF Abrasives Grey Matt, D 75mm, P5000, 6 Pcs/ Stk./ pieces/pack",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "6-400-5150",
+      "description": "CF Abrasives Grey Matt, D 150mm, P5000, 6 Pcs/ Stk./ pieces/pack Durable double-sided abrasive on foam backing for hard-to-reach areas. Can be used for primer filler and intermediate sanding of paints. For refining sand ",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0009",
+      "description": "Sanding Block ,Polyurethane, Velcro Polyurethane, Velcro Blocs de ponçage, Polyuréthane, Velcro 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0002",
+      "description": "Rubber Sanding Block, 67 x 125mm Gummi, 67 x 125 mm Bloc de ponçage caoutchouc, 67 x 125 mm 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0005",
+      "description": "Flat Sanding Block, 70 x 198 mm 70 x 198 mm Bloc de ponçage plat, 70 x 198 mm 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0006",
+      "description": "Semi Round Sanding Block, 70 x 198 mm 70 x 198 mm Bloc de ponçage demi-circulaire 70 x 198 mm",
+      "componentRole": "main",
+      "cataloguePage": 45,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0016",
+      "description": "Hand Block Kit 70x198 mm, Set     Polyurethane  Handschleifblock 70x198 mm, Set  Bloc manuel 70x198mm, Set 1",
+      "componentRole": "main",
+      "cataloguePage": 46,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0019",
+      "description": "Hand Block Kit 70x198, 1 pcs     Polyurethane  Handschleifblock 70x198 mm, 1Stk Bloc manuel 70x98mm, 1 pcs. 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 46,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0017",
+      "description": "Hand Block Kit 70x400, 1 pcs Polyurethane  Handschleifblock 70x400 mm, 1Stk Bloc manuel 70x400mm, 1 pcs 1 Articles Description Beschreibung Description Pcs./pack",
+      "componentRole": "main",
+      "cataloguePage": 46,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    },
+    {
+      "articleNumber": "5-170-0018",
+      "description": "Adjustable Radius Flex Longboard Hand Sanding File Block, 70 x 400mm Verstellbarer Radius Flex Longboard",
+      "componentRole": "main",
+      "cataloguePage": 46,
+      "sourceType": "manufacturer-catalogue",
+      "status": "machine-extracted"
+    }
+  ],
+  "nameBridge": [
+    {
+      "en": "PERFECT MULTI GREEN PUTTY",
+      "de": "PERFECT MULTI GREEN",
+      "fr": "SPACHTEL",
+      "cataloguePage": 4
+    },
+    {
+      "en": "MULTI SOFT PUTTY",
+      "de": "MULTI SOFT SPACHTEL",
+      "fr": "MASTIC MULTI SOFT",
+      "cataloguePage": 5
+    },
+    {
+      "en": "PREMIUM SOFT PLUS PUTTY",
+      "de": "PREMIUM SOFT SPACHTEL",
+      "fr": "PREMIUM SOFT PLUS MASTIC",
+      "cataloguePage": 5
+    },
+    {
+      "en": "ALU & SOFT PUTTY",
+      "de": "ALU & SOFT SPACHTEL",
+      "fr": "ALU&SOFT MASTIC",
+      "cataloguePage": 6
+    },
+    {
+      "en": "CARBON PUTTY",
+      "de": "CARBON SPACHTEL",
+      "fr": "MASTIC CARBONE",
+      "cataloguePage": 6
+    },
+    {
+      "en": "SOFT PLUS PUTTY",
+      "de": "SOFT PLUS SPACHTEL",
+      "fr": "MASTIC SOFT PLUS",
+      "cataloguePage": 7
+    },
+    {
+      "en": "MULTI PUTTY",
+      "de": "MULTI SPACHTEL",
+      "fr": "MULTI-PUTTY",
+      "cataloguePage": 7
+    },
+    {
+      "en": "PLASTIC PUTTY",
+      "de": "KUNSTSTOFFSPACHTEL",
+      "fr": "MASTIC SYNTHÉTIQUE",
+      "cataloguePage": 8
+    },
+    {
+      "en": "GLASS PLUS PUTTY",
+      "de": "GLASS PLUS SPACHTEL",
+      "fr": "MASTIC GLASS PLUS",
+      "cataloguePage": 8
+    },
+    {
+      "en": "SPRAY PUTTY",
+      "de": "SPRITZSPACHTEL",
+      "fr": "MASTIC PISTOLABLE",
+      "cataloguePage": 9
+    },
+    {
+      "en": "PLASTIC REPAIR KIT",
+      "de": "KUNSTSTOFF REPARATURSET",
+      "fr": "KIT DE RÉPARATION DU",
+      "cataloguePage": 9
+    },
+    {
+      "en": "PERFECT FILLER 4:1 GREY",
+      "de": "PERFEKT FÜLLER 4:1",
+      "fr": "APPRÊT PARFAIT 4:1 GRIS",
+      "cataloguePage": 10
+    },
+    {
+      "en": "2K US FILLER 4:1",
+      "de": "US FÜLLER 4:1",
+      "fr": "APPRÊT 2K US 4 :1",
+      "cataloguePage": 11
+    },
+    {
+      "en": "2K HS ACRYL PRIMER FILLER 4:1",
+      "de": "2 K HS ACRYL",
+      "fr": "GRUNDIERFÜLLER 4:1",
+      "cataloguePage": 11
+    },
+    {
+      "en": "PLASTIC PRIMER",
+      "de": "KUNSTSTOFFGRUNDIERUNG",
+      "fr": "PRIMAIRE SYNTHÉTIQUE",
+      "cataloguePage": 12
+    },
+    {
+      "en": "2K EPOXY PRIMER 1:1",
+      "de": "2K EPOXID GRUNDIERFÜLLER 1:1",
+      "fr": "PRIMAIRE ÉPOXYDE 2K 1:1",
+      "cataloguePage": 12
+    },
+    {
+      "en": "2K WASH PRIMER 2:1",
+      "de": "WASHPRIMER",
+      "fr": "PRIMAIRE RÉACTIF 2K 2 :1",
+      "cataloguePage": 13
+    },
+    {
+      "en": "ANTIRUST PRIMER",
+      "de": "ROSTSCHUTZ PRIMER",
+      "fr": "PRIMAIRE ANTIROUILLE",
+      "cataloguePage": 13
+    },
+    {
+      "en": "2K HS PERFECT CLEARCOAT",
+      "de": "PERFEKT KLARLACK",
+      "fr": "VERNIS TRANSPARENT",
+      "cataloguePage": 14
+    },
+    {
+      "en": "2K ULTRA HS CLEAR COAT",
+      "de": "2K ULTRA HS KLARLACK",
+      "fr": "VERNIS TRANSPARENT",
+      "cataloguePage": 15
+    },
+    {
+      "en": "MATT CLEARCOAT",
+      "de": "MATT KLARLACK",
+      "fr": "VERNIS TRANSPARENT MAT",
+      "cataloguePage": 15
+    },
+    {
+      "en": "2K HS SCRATCH RESISTANT",
+      "de": "CLEARCOAT 2:1",
+      "fr": "2K HS KRATZFESTER KLARLACK",
+      "cataloguePage": 16
+    },
+    {
+      "en": "2K  EXPRESS CLEARCOAT",
+      "de": "2K EXPRESSKLARLACK",
+      "fr": "2K VERNIS EXPRESS",
+      "cataloguePage": 16
+    },
+    {
+      "en": "2K MS CLEARCOAT",
+      "de": "INDUSTRIAL USE",
+      "fr": "2K MS INDUSTRIE KLARLACK",
+      "cataloguePage": 17
+    },
+    {
+      "en": "BLACK PAINT SPRAY",
+      "de": "SCHWARZ PAINT SPRAY",
+      "fr": "AÉROSOL PEINTURE NOIRE",
+      "cataloguePage": 18
+    },
+    {
+      "en": "1K HI-BUILD PRIMER",
+      "de": "FILLER SPRAY",
+      "fr": "1K HI-BUILD",
+      "cataloguePage": 18
+    },
+    {
+      "en": "WHEEL SPRAY SILVER",
+      "de": "FELGENSILBER SPRAY",
+      "fr": "AÉROSOL POUR JANTES ARGENT",
+      "cataloguePage": 19
+    },
+    {
+      "en": "HIGH GLOSS CLEARCOAT SPRAY",
+      "de": "HIGH GLOSS KLARLACK SPRAY",
+      "fr": "AÉROSOL VERNIS",
+      "cataloguePage": 19
+    },
+    {
+      "en": "THERMO PAINT SPRAY 650°",
+      "de": "THERMO SPRAY 650°C",
+      "fr": "AÉROSOL PEINTURE",
+      "cataloguePage": 20
+    },
+    {
+      "en": "CARFIT 2K CLEARCOAT",
+      "de": "CARFIT 2K-KLARLACK",
+      "fr": "2K CARFIT VERNIS",
+      "cataloguePage": 20
+    },
+    {
+      "en": "CARFIT 1K EPOXY PRIMER",
+      "de": "CARFIT 1K EPOXY PRIMER",
+      "fr": "CARFIT 1K EPOXY PRIMER",
+      "cataloguePage": 21
+    },
+    {
+      "en": "TEXTURE PAINT SPRAY",
+      "de": "STRUKTURLACK SPRAY",
+      "fr": "AÉROSOL PEINTURE TEXTURÉE",
+      "cataloguePage": 21
+    },
+    {
+      "en": "C.A.R. FIT PAINT REMOVER SPRAY",
+      "de": "C.A.R. FIT ABBEIZERSPRAY",
+      "fr": "C.A.R. FIT PAINT REMOVER SPRAY",
+      "cataloguePage": 22
+    },
+    {
+      "en": "SILIKONE REMOVER",
+      "de": "“STRAWBERRY” SPRAY",
+      "fr": "SILIKONENTFERNER SPRAY",
+      "cataloguePage": 22
+    },
+    {
+      "en": "FILLABLE SPRAY CAN",
+      "de": "BEFÜLLBARE SPRAY DOSE",
+      "fr": "BOMBE AÉROSOL À REMPLIR",
+      "cataloguePage": 23
+    },
+    {
+      "en": "FADE OUT THINNER",
+      "de": "BEISPRITZVERDÜNNUNG SPRAY",
+      "fr": "DILUANT DE FONDU",
+      "cataloguePage": 23
+    },
+    {
+      "en": "UNDERBODY PROTECTION",
+      "de": "BITUMEN SPRAY",
+      "fr": "UNTERBODENSCHUTZ",
+      "cataloguePage": 24
+    },
+    {
+      "en": "CAVITY PROTECTION SPRAY",
+      "de": "HOHLRAUMKONSERVIERUNG SPRAY",
+      "fr": "AÉROSOL DE TRAITEMENT",
+      "cataloguePage": 24
+    },
+    {
+      "en": "STONE CHIP PROTECTION",
+      "de": "STEINSCHLAGSCHUTZ",
+      "fr": "PROTECTION ANTI GRAVILLONS",
+      "cataloguePage": 26
+    },
+    {
+      "en": "PU ADHESIVE AND SEALANT",
+      "de": "PU KLEB- UND DICHTMASSE",
+      "fr": "PU ADHÉSIF ET ENDUIT",
+      "cataloguePage": 26
+    },
+    {
+      "en": "TACK COATING FOR SPRAY BOOTH",
+      "de": "STAUBSCHUTZLACK FÜR",
+      "fr": "LACKIERKABINEN",
+      "cataloguePage": 27
+    },
+    {
+      "en": "SILICONE REMOVER",
+      "de": "«STRAWBERRY»",
+      "fr": "SILIKONENTFERNER „ERDBEERE“",
+      "cataloguePage": 28
+    },
+    {
+      "en": "SILICONE REMOVER",
+      "de": "SILIKONENTFERNER",
+      "fr": "DÉCAPANT ANTISILICONE",
+      "cataloguePage": 28
+    },
+    {
+      "en": "ACRYL THINNER",
+      "de": "ACRYL-VERDÜNNUNG",
+      "fr": "ACRYL DILUANT",
+      "cataloguePage": 29
+    },
+    {
+      "en": "FADE OUT THINNER",
+      "de": "BEISPRITZVERDÜNNUNG",
+      "fr": "DILUANT FADE OUT",
+      "cataloguePage": 29
+    },
+    {
+      "en": "GUN CLEANER",
+      "de": "SPRITZPISTOLEN-REINIGER",
+      "fr": "PRODUIT NETTOYANT POUR",
+      "cataloguePage": 30
+    },
+    {
+      "en": "FINISHING COMPOUND",
+      "de": "FINISHING COMPOUND",
+      "fr": "PÂTE COUPANTE BLACK LABEL",
+      "cataloguePage": 31
+    },
+    {
+      "en": "CUTTING COMPOUND",
+      "de": "HLEIFPASTE CUTTING COMPOUND",
+      "fr": "PÂTE COUPANTE BLACK LABEL",
+      "cataloguePage": 31
+    },
+    {
+      "en": "UNIVERSAL POLISHING COMPOUND",
+      "de": "UNIVERSAL POLIERPASTE",
+      "fr": "PÂTE À POLIR UNIVERSELLE",
+      "cataloguePage": 32
+    },
+    {
+      "en": "Winner Pad 15 Holes  - 5/16”+M8, Medium Density",
+      "de": "Winner Pad 15 Löcher-5/16”+M8 ,mittlere Dichte",
+      "fr": "Winner Pad à 15 trous – 5/16” + M8, densité moyenne",
+      "cataloguePage": 32
+    },
+    {
+      "en": "Lifting Tape",
+      "de": "Lifting Tape",
+      "fr": "Ruban Lifting",
+      "cataloguePage": 34
+    },
+    {
+      "en": "Coverall",
+      "de": "Lackier-Overall",
+      "fr": "Combinaison de peintre",
+      "cataloguePage": 37
+    },
+    {
+      "en": "Microfibre Cleaning Cloth",
+      "de": "Microfaser Reinigungstuch",
+      "fr": "Chiffon nettoyant en microfibre",
+      "cataloguePage": 37
+    },
+    {
+      "en": "Mixing Cup",
+      "de": "Mischbecher",
+      "fr": "Godets de mélange",
+      "cataloguePage": 39
+    },
+    {
+      "en": "Touch Up Bottles",
+      "de": "Pinselfläschchen",
+      "fr": "Flacons de retouche",
+      "cataloguePage": 39
+    },
+    {
+      "en": "Fast Paint System",
+      "de": "Fast Paint System",
+      "fr": "Matériaux non-tissés",
+      "cataloguePage": 40
+    },
+    {
+      "en": "Tape-off Disk Premium",
+      "de": "Folienradierer und Adapter",
+      "fr": "Disque de décollage Premium",
+      "cataloguePage": 40
+    },
+    {
+      "en": "Disposable Paint Strainer",
+      "de": "Farsiebe",
+      "fr": "Filtres à peinture jetables",
+      "cataloguePage": 41
+    },
+    {
+      "en": "Double Layer Cleaning Cloth",
+      "de": "2-lagiges Putztuch",
+      "fr": "Chiffon nettoyant double épaisseur",
+      "cataloguePage": 41
+    },
+    {
+      "en": "Ozone Generator",
+      "de": "Ozongenerator",
+      "fr": "Générateur d’ozone",
+      "cataloguePage": 42
+    },
+    {
+      "en": "Plastic Stapler Kit",
+      "de": "Kunststoff Reparatur Set",
+      "fr": "Kit de réparation par agrafeuse",
+      "cataloguePage": 42
+    },
+    {
+      "en": "Pump Spray",
+      "de": "Sprühpumpe",
+      "fr": "Pompe de vaporisation",
+      "cataloguePage": 42
+    },
+    {
+      "en": "Gold Paper Disc",
+      "de": "Gold Paper Disc",
+      "fr": "Disque de papier Or",
+      "cataloguePage": 43
+    },
+    {
+      "en": "Vlies Non-woven",
+      "de": "Vlies Non-woven",
+      "fr": "Matériaux non-tissés",
+      "cataloguePage": 43
+    },
+    {
+      "en": "Red Film Disc",
+      "de": "Rote Filmschleifscheibe",
+      "fr": "Disque rouge",
+      "cataloguePage": 44
+    },
+    {
+      "en": "Purple Ceramic Discs",
+      "de": "Vlies Non-woven",
+      "fr": "Matériaux non-tissés",
+      "cataloguePage": 44
+    }
+  ],
+  "duplicates": [
+    {
+      "articleNumber": "4-242-1000",
+      "descriptions": [
+        "2K US Filler 4:1 WHITE 1L 2K US Füller Weiß 1L 2K Appret US Blanche 1L 6",
+        "2K US Filler 4:1 BLACK  1L 2K US Füller SCHWARZ 1L 2K Appret US NOIR 1L 6 Fast d"
+      ],
+      "pages": [
+        11,
+        11
+      ]
+    },
+    {
+      "articleNumber": "7-322-0501",
+      "descriptions": [
+        "0.5 L, Hardener Slow 0,5 L, Langsamer Härter 0.5 L, Durcisseur rapide 6",
+        "2.5 L, Hardener Slow 2,5 L, Langsamer Härter 2.5 L, Durcisseur rapide 6 Two-comp"
+      ],
+      "pages": [
+        16,
+        16
+      ]
+    },
+    {
+      "articleNumber": "6-500-0500",
+      "descriptions": [
+        "P500, D 150 mm 100 Gold Paper Disc – abrasive disk of 150 mm diameter with 15 ho",
+        "P500, D 150 mm 100"
+      ],
+      "pages": [
+        43,
+        44
+      ]
+    }
+  ]
+}

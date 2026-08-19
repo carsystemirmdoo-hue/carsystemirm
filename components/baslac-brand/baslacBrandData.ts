@@ -300,6 +300,11 @@ export const baslacSectionNavItems: BaslacSectionNavItem[] = [
   },
   { label: "Prajmeri", href: "#primers", sectionId: "primers" },
   {
+    label: "Sive nijanse",
+    href: "#grey-shade",
+    sectionId: "grey-shade",
+  },
+  {
     label: "Koloristika",
     href: "#koloristika",
     sectionId: "koloristika",

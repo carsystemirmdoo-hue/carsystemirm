@@ -1,0 +1,297 @@
+/*
+ * Icon rain → pile V2 — INTERNAL lab scene. No public route imports this.
+ *
+ * V1's stylesheet is untouched; this is a parallel file so V2 can be removed by
+ * deleting it.
+ */
+
+.frame {
+  /*
+   * Contrast tokens, per theme, set once here rather than being nudged per
+   * scene. V1 drew every glyph at 0.16–0.30 opacity in a single grey, which on
+   * a light plate read as smudges and in the dark theme lost the dark glyphs
+   * entirely. The two themes now get their own ink and their own range, and the
+   * per-piece `weight` from the plan modulates within that range.
+   */
+  --v2-ink: oklch(0.44 0.024 250);
+  --v2-alpha-front: 0.5;
+  --v2-alpha-back: 0.3;
+  --v2-stroke: 1.7;
+  --v2-floor-ink: oklch(0.32 0.02 250);
+  --v2-floor-alpha: 0.2;
+  --v2-floor-core-alpha: 0.3;
+
+  position: relative;
+  display: block;
+  overflow: hidden;
+  container-type: size;
+  isolation: isolate;
+}
+
+:global(.dark) .frame,
+.frame[data-scene-theme="dark"] {
+  --v2-ink: oklch(0.86 0.02 250);
+  --v2-alpha-front: 0.5;
+  --v2-alpha-back: 0.3;
+  --v2-stroke: 1.6;
+  --v2-floor-ink: oklch(0.02 0.008 250);
+  --v2-floor-alpha: 0.42;
+  --v2-floor-core-alpha: 0.55;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: var(--v2-ink);
+  pointer-events: none;
+}
+
+.glyph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--g-size);
+  height: var(--g-size);
+  margin-top: calc(var(--g-size) / -2);
+  margin-left: calc(var(--g-size) / -2);
+  /*
+   * `weight` places each piece between the back and front alpha, so the base
+   * row reads as nearest and the rows behind recede — a depth cue instead of a
+   * flat field of identical marks.
+   */
+  opacity: calc(
+    var(--v2-alpha-back) +
+      (var(--v2-alpha-front) - var(--v2-alpha-back)) * var(--g-weight)
+  );
+  /* Idle IS the finished pile: what the server renders, what reduced motion
+     keeps, and what remains if the script never runs. */
+  transform: translate3d(var(--g-rest-x), var(--g-rest-y), 0) rotate(var(--g-rest-r));
+  transform-origin: 50% 50%;
+}
+
+.glyph svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  stroke-width: var(--v2-stroke);
+}
+
+/*
+ * `will-change` is scoped to the playing phase ONLY. V1 left it on every glyph
+ * for the life of the page, which pins 24–34 compositor layers in memory long
+ * after anything is moving.
+ */
+.frame[data-phase="playing"] .glyph {
+  animation: cs-rain-v2-drop var(--g-duration) var(--g-delay) both;
+  will-change: transform, opacity;
+}
+
+.frame[data-phase="complete"] .glyph {
+  will-change: auto;
+}
+
+@keyframes cs-rain-v2-drop {
+  0% {
+    transform: translate3d(var(--g-release-x), var(--g-release-y), 0)
+      rotate(var(--g-release-r));
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.45, 0.05, 0.75, 0.35);
+  }
+
+  14% {
+    opacity: calc(
+      var(--v2-alpha-back) +
+        (var(--v2-alpha-front) - var(--v2-alpha-back)) * var(--g-weight)
+    );
+  }
+
+  60% {
+    transform: translate3d(var(--g-contact-x), var(--g-contact-y), 0)
+      rotate(var(--g-contact-r));
+    animation-timing-function: cubic-bezier(0.2, 0.86, 0.34, 1);
+  }
+
+  78% {
+    transform: translate3d(var(--g-bounce-x), var(--g-bounce-y), 0)
+      rotate(var(--g-bounce-r));
+    animation-timing-function: cubic-bezier(0.4, 0, 0.55, 1);
+  }
+
+  100% {
+    transform: translate3d(var(--g-rest-x), var(--g-rest-y), 0)
+      rotate(var(--g-rest-r));
+    opacity: calc(
+      var(--v2-alpha-back) +
+        (var(--v2-alpha-front) - var(--v2-alpha-back)) * var(--g-weight)
+    );
+  }
+}
+
+/*
+ * Two-part contact, both sized from the plan's own footprint rather than from
+ * the frame. The spread reads as the pile's shadow; the core is a tight, darker
+ * band directly under the base row, which is what stops the heap from looking
+ * like it is hovering over a blur.
+ */
+.floorSpread,
+.floorCore {
+  position: absolute;
+  z-index: 1;
+  left: var(--pile-center-x);
+  pointer-events: none;
+}
+
+.floorSpread {
+  top: calc(var(--pile-floor-y) - 3.4cqh);
+  width: var(--pile-width);
+  height: 7cqh;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in oklch, var(--v2-floor-ink) calc(var(--v2-floor-alpha) * 100%), transparent)
+      0%,
+    transparent 74%
+  );
+  transform: translateX(-50%);
+}
+
+.floorCore {
+  top: calc(var(--pile-floor-y) - 1.5cqh);
+  width: var(--pile-core-width);
+  height: 3cqh;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(
+        in oklch,
+        var(--v2-floor-ink) calc(var(--v2-floor-core-alpha) * 100%),
+        transparent
+      )
+      0%,
+    transparent 70%
+  );
+  transform: translateX(-50%);
+}
+
+.frame[data-phase="playing"] .floorSpread,
+.frame[data-phase="playing"] .floorCore {
+  animation: cs-rain-v2-floor var(--rain-total) both;
+}
+
+@keyframes cs-rain-v2-floor {
+  0%,
+  40% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+ * Separation halo. Rendered only when the product's MEASURED lightness says it
+ * would otherwise merge into the scene — a black bottle on the dark plate, or a
+ * white canister on the light one. Products in the middle get nothing, which is
+ * why this is an attribute selector and not a blanket glow.
+ */
+.halo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  background: radial-gradient(
+    50% 42% at 50% var(--product-center-y, 46%),
+    var(--v2-halo-color, transparent) 0%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+.frame[data-product-contrast="dark-product"] .halo {
+  --v2-halo-color: oklch(0.74 0.014 250 / 0.3);
+  opacity: 1;
+}
+
+.frame[data-product-contrast="light-product"] .halo {
+  --v2-halo-color: oklch(0.34 0.016 250 / 0.16);
+  opacity: 1;
+}
+
+:global(.dark) .frame[data-product-contrast="dark-product"] .halo,
+.frame[data-scene-theme="dark"][data-product-contrast="dark-product"] .halo {
+  --v2-halo-color: oklch(0.8 0.016 250 / 0.3);
+}
+
+:global(.dark) .frame[data-product-contrast="light-product"] .halo,
+.frame[data-scene-theme="dark"][data-product-contrast="light-product"] .halo {
+  --v2-halo-color: oklch(0.2 0.014 250 / 0.42);
+}
+
+/*
+ * The product, sitting directly above the pile. `--product-bottom-y` comes from
+ * the plan's pile top, so the gap between the two is a consequence of the pile
+ * rather than a guessed offset — V1 left a visible band of empty plate between
+ * product and heap.
+ */
+.product {
+  --v2-envelope-w: 44cqw;
+  --v2-envelope-h: 58cqh;
+  --v2-fit-w: min(
+    var(--v2-envelope-w),
+    calc(var(--v2-envelope-h) * var(--product-content-aspect))
+  );
+  position: absolute;
+  z-index: 3;
+  bottom: calc(100cqh - var(--product-bottom-y));
+  left: 50%;
+  width: calc(var(--v2-fit-w) / var(--product-content-fill-x));
+  aspect-ratio: var(--product-canvas-aspect);
+  transform: translate(
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+    calc((1 - var(--product-content-offset-y) - var(--product-content-fill-y)) * 100%)
+  );
+}
+
+.product img {
+  object-fit: contain;
+}
+
+/* Lab affordance only — no production surface passes `showReplay`. */
+.replay {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 4;
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, canvas 82%, transparent);
+  color: inherit;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-family: var(--font-technical), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.replay:hover {
+  opacity: 1;
+}
+
+.replay:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/*
+ * Reduced motion never reaches `playing` — the component checks the query
+ * before it schedules anything. This is a second line of defence.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .frame[data-phase="playing"] .glyph,
+  .frame[data-phase="playing"] .floorSpread,
+  .frame[data-phase="playing"] .floorCore {
+    animation: none;
+    will-change: auto;
+  }
+}

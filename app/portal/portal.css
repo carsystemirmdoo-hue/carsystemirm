@@ -19,6 +19,10 @@
   --p-amber-soft: oklch(0.96 0.035 80);
   --p-blue: oklch(0.55 0.12 247);
   --p-blue-soft: oklch(0.95 0.028 247);
+  /* Dizajn traži ~252px prošireno i 56–68px skupljeno.
+     Iste vrednosti drži components/portal/sidebarState.mjs. */
+  --p-sidebar-expanded: 252px;
+  --p-sidebar-collapsed: 64px;
   min-height: 100vh;
   overflow-x: clip;
   isolation: isolate;
@@ -143,7 +147,7 @@ body:has(.portal-login-root) {
   inset: 0 auto 0 0;
   z-index: 40;
   display: flex;
-  width: 252px;
+  width: var(--p-sidebar-expanded);
   flex-direction: column;
   overflow: hidden;
   color: oklch(0.93 0.008 255);
@@ -153,26 +157,86 @@ body:has(.portal-login-root) {
 }
 
 .portal-root[data-sidebar="collapsed"] .portal-sidebar {
-  width: 76px;
+  width: var(--p-sidebar-collapsed);
 }
 .portal-root[data-sidebar="collapsed"] .portal-sidebar-context,
 .portal-root[data-sidebar="collapsed"] .portal-sidebar-foot,
-.portal-root[data-sidebar="collapsed"] .portal-nav-link span,
+.portal-root[data-sidebar="collapsed"] .portal-company-mark > span:last-child,
+.portal-root[data-sidebar="collapsed"] .portal-nav-group-label,
 .portal-root[data-sidebar="collapsed"] .portal-nav-link b {
   display: none;
+}
+/* Naziv stavke se sakriva vizuelno, ali ostaje u stablu pristupačnosti —
+   `display:none` bi ga uklonio i iz čitača ekrana, pa bi skupljena navigacija
+   za korisnika čitača bila samo niz neimenovanih ikonica. */
+.portal-root[data-sidebar="collapsed"] .portal-nav-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .portal-root[data-sidebar="collapsed"] .portal-nav-link {
   justify-content: center;
   padding-inline: 0;
 }
+.portal-root[data-sidebar="collapsed"] .portal-nav-link[data-active="true"]::after {
+  display: none;
+}
 .portal-root[data-sidebar="collapsed"] .portal-sidebar-brand {
   justify-content: center;
-  padding-inline: 12px;
+  gap: 6px;
+  padding-inline: 8px;
 }
-.portal-root[data-sidebar="collapsed"] .portal-sidebar-collapse {
-  position: absolute;
-  top: 66px;
-  left: 22px;
+
+.portal-nav-group {
+  display: grid;
+  gap: 2px;
+}
+.portal-nav-group-label {
+  padding: 12px 10px 5px;
+  color: oklch(0.55 0.012 255);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.portal-root[data-sidebar="collapsed"] .portal-nav-group + .portal-nav-group {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid oklch(0.29 0.016 255);
+}
+
+/* Oblačić sa nazivom stavke, obavezan kada su vidljive samo ikonice.
+   Prikazuje se i na prelazu mišem i na fokus tastaturom. */
+/* `position: fixed` je ovde nužno: navigacija ima `overflow: hidden` zbog
+   skrolovanja dugačke liste, pa bi apsolutno pozicioniran oblačić bio odsečen
+   na ivici od 64px. Tačne koordinate postavlja PortalShell pri prelazu mišem
+   i pri fokusu tastaturom. */
+.portal-nav-tip {
+  position: fixed;
+  z-index: 60;
+  display: none;
+  padding: 6px 10px;
+  transform: translateY(-50%);
+  color: oklch(0.985 0.003 255);
+  border: 1px solid oklch(0.36 0.02 255);
+  border-radius: 7px;
+  background: oklch(0.24 0.018 255);
+  box-shadow: 0 8px 22px oklch(0.15 0.02 255 / 0.45);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.portal-root[data-sidebar="collapsed"] .portal-nav-link:hover .portal-nav-tip,
+.portal-root[data-sidebar="collapsed"]
+  .portal-nav-link:focus-visible
+  .portal-nav-tip {
+  display: block;
 }
 
 .portal-sidebar-brand {
@@ -345,13 +409,15 @@ body:has(.portal-login-root) {
   box-shadow: 0 0 0 3px oklch(0.69 0.17 151 / 0.12);
 }
 
+/* Radna površina prati širinu navigacije tačno u piksel: sadržaj ne sme da
+   ostane ispod navigacije, ni da se posle skupljanja zadrži prazan pojas. */
 .portal-workspace {
   min-width: 0;
   min-height: 100vh;
-  margin-left: 252px;
+  margin-left: var(--p-sidebar-expanded);
 }
 .portal-root[data-sidebar="collapsed"] .portal-workspace {
-  margin-left: 76px;
+  margin-left: var(--p-sidebar-collapsed);
 }
 .portal-topbar {
   position: sticky;
@@ -493,6 +559,52 @@ body:has(.portal-login-root) {
 .portal-search-trigger span {
   overflow: hidden;
   font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Pretraga još nije povezana. Prikazuje se isključeno, sa vidljivim razlogom,
+   umesto da izgleda upotrebljivo i ne radi ništa. */
+.portal-search-trigger[data-disabled="true"] {
+  color: var(--p-faint);
+  border-style: dashed;
+  cursor: not-allowed;
+}
+
+.portal-profile {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 6px;
+}
+.portal-profile-avatar {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: oklch(0.94 0.018 25);
+  border-radius: 8px;
+  background: var(--p-graphite);
+  font-size: 10px;
+  font-weight: 750;
+}
+.portal-profile-meta {
+  display: grid;
+  min-width: 0;
+  max-width: 150px;
+  text-align: left;
+}
+.portal-profile-meta strong {
+  overflow: hidden;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.portal-profile-meta small {
+  overflow: hidden;
+  color: var(--p-muted);
+  font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1891,11 +2003,36 @@ body:has(.portal-login-root) {
   .portal-sidebar[data-mobile-open="true"] {
     transform: translateX(0);
   }
+  /* Na telefonu je navigacija fioka, pa se skupljeno stanje sa desktopa
+     poništava — fioka se uvek otvara u punom prikazu, sa nazivima stavki. */
   .portal-root[data-sidebar="collapsed"] .portal-sidebar-context,
   .portal-root[data-sidebar="collapsed"] .portal-sidebar-foot,
-  .portal-root[data-sidebar="collapsed"] .portal-nav-link span,
+  .portal-root[data-sidebar="collapsed"] .portal-company-mark > span:last-child,
   .portal-root[data-sidebar="collapsed"] .portal-nav-link b {
     display: flex;
+  }
+  .portal-root[data-sidebar="collapsed"] .portal-nav-group-label {
+    display: block;
+  }
+  .portal-root[data-sidebar="collapsed"] .portal-nav-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+  }
+  .portal-root[data-sidebar="collapsed"] .portal-nav-group + .portal-nav-group {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .portal-root[data-sidebar="collapsed"]
+    .portal-nav-link[data-active="true"]::after {
+    display: block;
+  }
+  .portal-nav-tip {
+    display: none !important;
   }
   .portal-root[data-sidebar="collapsed"] .portal-nav-link {
     justify-content: flex-start;
@@ -1942,6 +2079,9 @@ body:has(.portal-login-root) {
   }
   .portal-search-trigger span,
   .portal-search-trigger kbd {
+    display: none;
+  }
+  .portal-profile-meta {
     display: none;
   }
   .portal-grid[data-layout="wide-left"],
@@ -6405,4 +6545,246 @@ body:has(.portal-login-root) {
   .portal-rebate-confirm > footer {
     flex-direction: column;
   }
+}
+
+/* ---- Stanje ekrana koji čeka izvor podataka ---- */
+.portal-phase-notice {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 16px 18px 18px;
+  border-top: 1px solid var(--p-line);
+}
+.portal-phase-notice h3 {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.portal-phase-notice ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--p-muted);
+  font-size: 12px;
+}
+.portal-phase-notice-tag {
+  margin: 2px 0 0;
+  color: var(--p-faint);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Vrednost koju trenutni izvor podataka ne može da potvrdi. */
+.portal-unavailable {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  color: oklch(0.47 0.105 72);
+  border: 1px dashed oklch(0.85 0.08 80);
+  border-radius: 6px;
+  background: var(--p-amber-soft);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+/* ---- Matrica dozvola ---- */
+.portal-permission-reason {
+  display: grid;
+  gap: 6px;
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--p-line);
+}
+.portal-permission-reason label {
+  display: grid;
+  gap: 6px;
+  max-width: 520px;
+}
+.portal-permission-reason span {
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+.portal-permission-reason input {
+  height: 36px;
+  padding: 0 10px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-surface);
+  font-size: 12px;
+}
+.portal-permission-reason small {
+  color: oklch(0.47 0.105 72);
+  font-size: 10.5px;
+}
+.portal-permission-ok {
+  margin: 0;
+  padding: 10px 18px;
+  color: oklch(0.39 0.11 153);
+  background: var(--p-green-soft);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.portal-permission-table {
+  min-width: 1120px;
+}
+.portal-permission-table th[scope="row"] {
+  text-align: left;
+}
+.portal-permission-table th[scope="row"] small {
+  display: block;
+  margin-top: 2px;
+  color: var(--p-faint);
+  font-size: 9px;
+  font-weight: 400;
+}
+.portal-permission-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-bg);
+  color: var(--p-faint);
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.portal-permission-toggle[data-on="true"] {
+  color: oklch(0.39 0.11 153);
+  border-color: oklch(0.84 0.06 153);
+  background: var(--p-green-soft);
+}
+.portal-permission-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.portal-inline-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.portal-inline-form select {
+  height: 30px;
+  padding: 0 6px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-surface);
+  font-size: 11px;
+}
+.portal-inline-form button {
+  padding: 5px 9px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-surface);
+  font-size: 10.5px;
+  font-weight: 650;
+}
+.portal-inline-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* ---- Sistemski pragovi ---- */
+.portal-settings-form {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  padding: 16px 18px 20px;
+}
+.portal-settings-form label {
+  display: grid;
+  gap: 5px;
+  align-content: start;
+}
+.portal-settings-form span {
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+.portal-settings-form input {
+  height: 36px;
+  padding: 0 10px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-surface);
+  font-size: 12px;
+}
+.portal-settings-form input:disabled {
+  color: var(--p-faint);
+  background: var(--p-bg);
+  cursor: not-allowed;
+}
+.portal-settings-form small {
+  color: var(--p-faint);
+  font-size: 10.5px;
+}
+.portal-settings-reason {
+  grid-column: 1 / -1;
+}
+.portal-settings-form > button {
+  justify-self: start;
+  grid-column: 1 / -1;
+}
+.portal-settings-form > p {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+/* ---- Faza 2: izvoz i metrike ---- */
+.portal-export-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+.portal-metrics {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  padding: 16px 18px;
+}
+.portal-metric {
+  display: grid;
+  gap: 4px;
+  padding: 14px 15px 12px;
+  border: 1px solid var(--p-line);
+  border-bottom: 2px solid var(--p-line-strong);
+  border-radius: 9px;
+  background: var(--p-surface);
+}
+.portal-metric[data-tone="success"] { border-bottom-color: var(--p-green); }
+.portal-metric[data-tone="warning"] { border-bottom-color: var(--p-amber); }
+.portal-metric[data-tone="danger"] { border-bottom-color: var(--p-red); }
+.portal-metric[data-tone="info"] { border-bottom-color: var(--p-blue); }
+.portal-metric-label {
+  color: var(--p-muted);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.portal-metric-value {
+  color: var(--p-ink);
+  font-size: 21px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.portal-metric-context {
+  color: var(--p-faint);
+  font-size: 10.5px;
+}
+.portal-table tr[data-active="true"] th,
+.portal-table tr[data-active="true"] td {
+  background: var(--p-surface-subtle);
+}
+.portal-table code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
 }

@@ -109,14 +109,23 @@ export function CarsystemUseCases({
           key={activeUseCase.id}
         >
           <div className={styles.useCaseResultHeader}>
-            <p>Preporučeni tok / {String(activeIndex + 1).padStart(2, "0")}</p>
+            <p>Preporučeni tok</p>
             <h3>{activeUseCase.title}</h3>
             <span>{activeUseCase.description}</span>
-            <div aria-label="Preporučene kategorije">
-              {activeUseCase.categories.map((category) => (
-                <strong key={category}>{category}</strong>
+            <ol className={styles.useCaseSequence} aria-label="Redosled kategorija za ovaj posao">
+              {activeUseCase.categories.map((category, index) => (
+                <li key={category}>
+                  <strong>{category}</strong>
+                  {index < activeUseCase.categories.length - 1 ? (
+                    <span aria-hidden="true">→</span>
+                  ) : null}
+                </li>
               ))}
-            </div>
+            </ol>
+            <p className={styles.useCaseSequenceNote}>
+              Redosled kategorija, ne obavezna kompatibilnost tačno određenih
+              artikala — konačan izbor potvrđuje se prema tehničkom listu.
+            </p>
           </div>
 
           <div className={styles.useCaseProducts}>

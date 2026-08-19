@@ -1,0 +1,934 @@
+/*
+ * Norbin brend stranica — "Ukrštanje" (The Crossing).
+ * Direction B iz docs/NORBIN_DESIGN_BLUEPRINT.md — jedina interpretacija
+ * izvedena iz stvarne Norbin grafike (ukrštene trake na zvaničnom logu),
+ * ne iz dekoracije. Vidi blueprint §5 za poreklo svake boje.
+ */
+
+.norbinPage {
+  /* Zvanične vrednosti — iz public/brands/norbin.svg */
+  --nb-blue: #0082bb;
+  --nb-gold: #ebb700;
+  --nb-green: #739600;
+  --nb-logo-grey: #4d5357;
+
+  /* Sample-ovane vrednosti — sa zvaničnog materijala, nikad specifikacija */
+  --nb-ink: #204552;
+  --nb-hardener: #c23557;
+
+  /* Pristupačni derivati */
+  --nb-blue-text: #006594;
+  --nb-green-text: #5c7700;
+
+  --nb-white: #ffffff;
+  --nb-paper: #f6f8f9;
+  --nb-line: #dde3e5;
+  --nb-line-strong: #b9c4c8;
+  --nb-muted: #5b6670;
+  --nb-deep: #10222b;
+
+  --brand-nav-surface: rgb(255 255 255 / 0.94);
+  --brand-nav-border: #dde3e5;
+  --brand-nav-ink: #204552;
+  --brand-nav-accent: #0082bb;
+
+  --nb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--nb-white);
+  color: var(--nb-ink);
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.norbinPage a {
+  color: inherit;
+}
+
+.container {
+  width: min(
+    var(--ds-container-max, 1208px),
+    100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2)
+  );
+  margin-inline: auto;
+}
+
+.anchor {
+  scroll-margin-top: calc(
+    var(--brand-section-header-offset, 5.5rem) +
+      var(--brand-section-nav-height, 3.5rem) + 1rem
+  );
+}
+
+.section {
+  padding-block: clamp(4rem, 8vw, 8.5rem);
+  border-top: 1px solid var(--nb-line);
+}
+
+.sectionKicker {
+  margin: 0 0 0.6rem;
+  color: var(--nb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  max-width: 26ch;
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.sectionLead {
+  max-width: 46rem;
+  margin: 1rem 0 0;
+  color: var(--nb-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  position: relative;
+  padding-block: clamp(2rem, 4vw, 3rem) 0;
+  background: var(--nb-white);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+  color: var(--nb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.breadcrumb a:hover,
+.breadcrumb a:focus-visible {
+  color: var(--nb-ink);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(20rem, 0.96fr) minmax(24rem, 1.04fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.heroIdentity {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.heroIdentity img {
+  width: auto;
+  height: 1.9rem;
+}
+
+.heroIdentity div {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.heroIdentity strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.heroIdentity span {
+  color: var(--nb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.heroKicker {
+  margin: 0 0 0.8rem;
+  color: var(--nb-blue-text);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  max-width: 15ch;
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+.heroLead {
+  max-width: 34ch;
+  margin: 1.1rem 0 0;
+  color: var(--nb-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.heroFacts {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.8rem 0 0;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--nb-line);
+}
+
+.heroFacts div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.heroFacts strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.3rem;
+}
+
+.heroFacts span {
+  color: var(--nb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.buttonPrimary,
+.buttonSecondary,
+.buttonText {
+  display: inline-flex;
+  min-height: 2.85rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid transparent;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 180ms var(--nb-ease), border-color 180ms var(--nb-ease);
+}
+
+.buttonPrimary {
+  background: var(--nb-blue-text);
+  color: var(--nb-white);
+}
+
+.buttonPrimary:hover,
+.buttonPrimary:focus-visible {
+  background: color-mix(in srgb, var(--nb-blue-text) 82%, black);
+}
+
+.buttonSecondary {
+  border-color: var(--nb-line-strong);
+  color: var(--nb-ink);
+}
+
+.buttonSecondary:hover,
+.buttonSecondary:focus-visible {
+  border-color: var(--nb-ink);
+  background: var(--nb-paper);
+}
+
+.buttonText {
+  padding: 0.7rem 0;
+  color: var(--nb-blue-text);
+  font-size: 0.78rem;
+}
+
+/* ---- ribbon crossing ---- */
+
+.heroCrossing {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background: var(--nb-paper);
+  border: 1px solid var(--nb-line);
+}
+
+.heroRibbon {
+  position: absolute;
+  inset: -10% -10%;
+  clip-path: polygon(0 62%, 100% 18%, 100% 40%, 0 84%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: nb-ribbon-draw 620ms var(--nb-ease) both;
+}
+
+.heroRibbonBlue {
+  background: linear-gradient(100deg, var(--nb-blue), #25aae3);
+  animation-delay: 0ms;
+}
+
+.heroRibbonGold {
+  clip-path: polygon(0 92%, 100% 46%, 100% 66%, 0 112%);
+  background: var(--nb-gold);
+  animation-delay: 90ms;
+}
+
+.heroPhotoWedge {
+  position: absolute;
+  inset: 12% 8%;
+  overflow: hidden;
+  clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
+  background: var(--nb-paper);
+}
+
+.heroPhotoWedge img {
+  object-fit: cover;
+}
+
+.heroPhotoWedgeEmpty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--nb-line-strong);
+  background: var(--nb-paper);
+  color: var(--nb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@keyframes nb-ribbon-draw {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroRibbon {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
+/* ===================== SECTION 2 — program ===================== */
+
+.programGrid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.programRule {
+  background: var(--nb-line-strong);
+}
+
+.programColumn h3 {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+}
+
+.programColumn ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.programColumn li {
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--nb-line);
+  font-size: 0.9rem;
+}
+
+.programNo li {
+  color: var(--nb-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--nb-line-strong);
+}
+
+/* ===================== SECTION 3 — kod ===================== */
+
+.codeRow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  background: var(--nb-line);
+  border: 1px solid var(--nb-line);
+}
+
+.codeChip {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.1rem 0.8rem;
+  background: var(--nb-white);
+  text-align: center;
+  text-decoration: none;
+}
+
+.codeChip strong {
+  color: var(--nb-blue-text);
+  font-family: var(--font-technical), monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.codeChip span {
+  color: var(--nb-muted);
+  font-size: 0.66rem;
+  line-height: 1.3;
+}
+
+/* ===================== SECTION 4 — odnos ===================== */
+
+.ratioList {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--nb-line);
+}
+
+.ratioRow {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.85fr) 1fr minmax(12rem, 0.95fr);
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--nb-line);
+}
+
+.ratioBase,
+.ratioPartners {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.ratioBase strong,
+.ratioPartners strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.92rem;
+}
+
+.ratioBase small,
+.ratioPartners small {
+  color: var(--nb-muted);
+  font-size: 0.72rem;
+}
+
+.ratioPartners ul {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ratioPartners li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.78rem;
+}
+
+.ratioPartnerHardener {
+  color: var(--nb-hardener);
+}
+
+.ratioStockedTag {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.03em;
+  color: var(--nb-green-text);
+  text-transform: uppercase;
+}
+
+.ratioCrossing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 3.4rem;
+}
+
+.ratioCrossing::before,
+.ratioCrossing::after {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  content: "";
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 480ms var(--nb-ease);
+}
+
+.ratioCrossing::before {
+  left: 0;
+  width: 44%;
+  background: var(--nb-blue);
+}
+
+.ratioCrossing::after {
+  right: 0;
+  left: 56%;
+  width: 44%;
+  background: var(--nb-hardener);
+}
+
+.ratioRow[data-revealed="true"] .ratioCrossing::before,
+.ratioRow[data-revealed="true"] .ratioCrossing::after {
+  transform: scaleX(1);
+}
+
+.ratioValue {
+  position: relative;
+  z-index: 1;
+  padding: 0.3rem 0.7rem;
+  background: var(--nb-white);
+  color: var(--nb-ink);
+  font-family: var(--font-technical), monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.ratioNote {
+  grid-column: 1 / -1;
+  margin: -0.4rem 0 0;
+  color: var(--nb-muted);
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ratioCrossing::before,
+  .ratioCrossing::after {
+    transition: none;
+    transform: scaleX(1);
+  }
+}
+
+/* ===================== SECTION 5 — proces ===================== */
+
+.processSpine {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  background: var(--nb-line);
+  border: 1px solid var(--nb-line);
+}
+
+.processStep {
+  display: grid;
+  gap: 0.5rem;
+  min-height: 8rem;
+  padding: 1.1rem;
+  background: var(--nb-white);
+}
+
+.processStepEmpty {
+  align-content: center;
+  justify-items: center;
+  border: 1px dashed var(--nb-line-strong);
+  background: var(--nb-paper);
+  text-align: center;
+}
+
+.processStep h3 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+}
+
+.processStep p {
+  margin: 0;
+  color: var(--nb-muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.processStepEmpty p {
+  color: var(--nb-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ===================== SECTION 6 — sivi tonovi ===================== */
+
+.greyBar {
+  position: relative;
+  height: 2.6rem;
+  margin-top: 2.5rem;
+  background: linear-gradient(90deg, #4b5257, #7f858a);
+  border: 1px solid var(--nb-line);
+}
+
+.greyMarker {
+  position: absolute;
+  top: -0.4rem;
+  bottom: -0.4rem;
+  width: 3px;
+  background: var(--nb-blue-text);
+  transition: left 240ms var(--nb-ease);
+}
+
+.greyStops {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+
+.greyStops button {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.3rem 0;
+  border: none;
+  background: none;
+  color: var(--nb-muted);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.greyStops button[aria-checked="true"] {
+  color: var(--nb-ink);
+}
+
+.greyStops strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.78rem;
+}
+
+.greyStops span {
+  font-size: 0.68rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .greyMarker {
+    transition: none;
+  }
+}
+
+/* ===================== SECTION 7 — naš program ===================== */
+
+.programLayout {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.55fr) minmax(16rem, 0.45fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.stockedGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stockedCard {
+  border: 1px solid var(--nb-line);
+  text-decoration: none;
+}
+
+.stockedMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--nb-paper);
+  border-bottom: 1px solid var(--nb-line);
+}
+
+.stockedMedia img {
+  object-fit: contain;
+  padding: 12%;
+}
+
+.stockedNoImage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  background:
+    repeating-linear-gradient(135deg, var(--nb-paper) 0 10px, #eef2f3 10px 20px);
+}
+
+.stockedNoImageMark {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--nb-line-strong);
+  color: var(--nb-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.stockedCopy {
+  padding: 0.9rem;
+}
+
+.stockedCopy strong {
+  display: block;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.9rem;
+}
+
+.stockedCopy small {
+  color: var(--nb-muted);
+  font-size: 0.7rem;
+}
+
+.systemPanel {
+  padding: 1.5rem;
+  background: var(--nb-paper);
+  border: 1px solid var(--nb-line);
+}
+
+.systemPanel p {
+  margin: 0 0 1rem;
+  color: var(--nb-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.systemPanel p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===================== SECTION 8 — tehnički podaci ===================== */
+
+.techLayout {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.techItem {
+  border-bottom: 1px solid var(--nb-line);
+}
+
+.techItem summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1rem;
+  cursor: pointer;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.techTable {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 0 1.2rem;
+}
+
+.techTable div {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 1rem;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.78rem;
+}
+
+.techTable dt {
+  color: var(--nb-muted);
+}
+
+.techNoData {
+  padding: 0 0 1.2rem;
+  color: var(--nb-muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* ===================== SECTION 9 — dokumentacija ===================== */
+
+.docGroups {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.docGroup h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.82rem;
+}
+
+.docGroup ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.docGroup a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--nb-line);
+  font-size: 0.74rem;
+  text-decoration: none;
+}
+
+.docGroup a:hover,
+.docGroup a:focus-visible {
+  border-color: var(--nb-blue-text);
+  color: var(--nb-blue-text);
+}
+
+/* ===================== SECTION 10 — poreklo ===================== */
+
+.originSection {
+  padding-block: clamp(4rem, 8vw, 8.5rem);
+  background: var(--nb-deep);
+  color: var(--nb-white);
+}
+
+.originGrid {
+  display: grid;
+  grid-template-columns: minmax(20rem, 1fr) minmax(18rem, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.originGrid .sectionKicker {
+  color: rgb(255 255 255 / 0.6);
+}
+
+.originGrid .sectionTitle {
+  color: var(--nb-white);
+}
+
+.originGrid p {
+  max-width: 42ch;
+  margin: 1.2rem 0 0;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.originGrid .heroActions {
+  margin-top: 2rem;
+}
+
+.originGrid .buttonSecondary {
+  border-color: rgb(255 255 255 / 0.32);
+  color: var(--nb-white);
+}
+
+.originGrid .buttonText {
+  color: #7fd0f0;
+}
+
+.originMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%);
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.originMediaEmpty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgb(255 255 255 / 0.4);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 64rem) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCrossing {
+    order: -1;
+    aspect-ratio: 4 / 5;
+  }
+
+  .programGrid,
+  .programLayout,
+  .originGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .programRule {
+    height: 1px;
+  }
+
+  .codeRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ratioRow {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    text-align: center;
+  }
+
+  .ratioCrossing {
+    height: 2.6rem;
+  }
+
+  .processSpine {
+    grid-template-columns: 1fr;
+  }
+
+  .stockedGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 30rem) {
+  .heroFacts {
+    overflow-x: auto;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .codeRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

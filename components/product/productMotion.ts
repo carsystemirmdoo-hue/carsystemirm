@@ -301,7 +301,39 @@ function getFallbackProductType(
   return "neutral";
 }
 
-function getFallbackAccent(product: CarsystemProduct) {
+/** Tipovi proizvoda čija je sopstvena boja deo identiteta — reveal ima smisla. */
+function isColorBearingType(productType: ProductVisualType) {
+  return (
+    productType === "color" ||
+    productType === "spray" ||
+    productType === "filler" ||
+    productType === "foam"
+  );
+}
+
+/**
+ * Fallback za proizvode bez ručno definisanog preseta. Ranije je bio fiksni
+ * "neutral", pa je svaki novododati proizvod ostajao bez reveal efekta samo
+ * zato što nije ručno unet u productVisualPresets. Reveal ima smisla jedino
+ * kad boja proizvoda nosi identitet (color/spray/filler/foam) — za
+ * clearcoat/abrasive/polish/primer "neutral" je i dalje ispravan izbor, ne bag.
+ */
+function getFallbackVisualMode(productType: ProductVisualType): ProductVisualMode {
+  return isColorBearingType(productType) ? "color-on-hover" : "neutral";
+}
+
+function getFallbackAccent(product: CarsystemProduct, productType: ProductVisualType) {
+  if (isColorBearingType(productType)) {
+    /*
+     * Reveal boja mora imati kontrast prema samom proizvodu. Brend/faza
+     * akcenat (npr. R-M/Carsystem crvena) ume da se poklopi sa bojom
+     * crvenog proizvoda i progutati mu siluetu. Bez ručno overenog i
+     * proverenog accenta (curated preset iznad), koristi stabilan neutralan
+     * ton — isti onaj koji je ovaj sistem već definisao kao CSS default
+     * (ProductVisualSurface.module.css, --product-visual-accent).
+     */
+    return "oklch(0.58 0.08 245)";
+  }
   return brandAccent[product.brandSlug] ?? phaseAccent[product.phaseSlug] ?? "oklch(0.58 0.045 245)";
 }
 
@@ -330,8 +362,8 @@ export function getProductVisualPreset(product: CarsystemProduct): Required<Prod
   return {
     treatment,
     productType,
-    visualMode: preset?.visualMode ?? "neutral",
-    accent: preset?.accent ?? getFallbackAccent(product),
+    visualMode: preset?.visualMode ?? getFallbackVisualMode(productType),
+    accent: preset?.accent ?? getFallbackAccent(product, productType),
     complement: preset?.complement ?? getFallbackComplement(treatment),
   };
 }

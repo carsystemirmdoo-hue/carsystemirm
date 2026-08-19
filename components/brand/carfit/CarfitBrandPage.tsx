@@ -26,13 +26,24 @@ import {
   type CarsystemProduct,
 } from "@/lib/carsystem-data";
 import { CarfitHeroMarkers } from "./CarfitHeroMarkers";
-import { CarfitLocalNav } from "./CarfitLocalNav";
+import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { CarfitMedia } from "./CarfitMedia";
 import { CarfitProductShowcase } from "./CarfitProductShowcase";
 import { CarfitReveal } from "./CarfitReveal";
 import { CarfitTaskSelector } from "./CarfitTaskSelector";
 import type { CarfitProductView, CarfitTaskView } from "./carfit-view";
+import { DocumentCard } from "@/components/documents/DocumentCard";
+import { getFeaturedDocuments } from "@/lib/documents";
 import styles from "./CarfitBrandPage.module.css";
+
+/** Stabilna referenca — `BrandSectionNav` je drži u zavisnostima efekta. */
+const carfitSectionNavItems = carfitNav.map((item) => ({
+  href: `#${item.id}`,
+  label: item.label,
+  sectionId: item.id,
+}));
+
+const carfitFeaturedDocuments = getFeaturedDocuments("carfit");
 
 const programNameBySlug = new Map(programGroups.map((program) => [program.slug, program.shortName]));
 const phaseNameBySlug = new Map(refinishPhases.map((phase) => [phase.slug, phase.name]));
@@ -112,7 +123,6 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
   const productViews = products.map(toProductView);
   const taskViews = buildTaskViews();
   const heroProduct = productViews.find((product) => product.image) ?? null;
-  const coveredTaskCount = taskViews.filter((task) => task.products.length > 0).length;
 
   const categoryViews = carfitCategories.map((category) => ({
     ...category,
@@ -129,43 +139,57 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
   });
 
   return (
-    <div className={styles.pageShell}>
+    // `data-brand-page` uključuje stranicu u zajednički sistem sticky offseta
+    // (`BrandSectionNav` na njega upisuje stvarnu visinu globalnog headera).
+    <div className={styles.pageShell} data-brand-page>
       <noscript>
         {/* Bez JavaScripta reveal stanje se ne primenjuje — sadržaj je odmah vidljiv. */}
         <style>{`[data-cf-reveal]{opacity:1 !important;transform:none !important}`}</style>
       </noscript>
 
       <main className={styles.main}>
-        <nav className={styles.breadcrumb} aria-label="Putanja">
-          <div className={styles.container}>
-            <ol>
-              <li>
-                <Link href="/">Početna</Link>
-                <span className={styles.breadcrumbSeparator} aria-hidden="true">
-                  /
-                </span>
-              </li>
-              <li>
-                <Link href="/brendovi">Brendovi</Link>
-                <span className={styles.breadcrumbSeparator} aria-hidden="true">
-                  /
-                </span>
-              </li>
-              <li className={styles.breadcrumbCurrent} aria-current="page">
-                {brand.name}
-              </li>
-            </ol>
-          </div>
-        </nav>
-
         {/* ---------------------------------------------------------- hero */}
         <section
           className={`${styles.hero} ${styles.gridSkin} ${styles.gridSkinInvert} ${styles.anchor}`}
           id="pregled"
           aria-labelledby="carfit-title"
         >
+          {/* Breadcrumb živi unutar hero površine — poseban tamni bar odmah ispod
+              globalnog headera čitao se kao drugi header. */}
+          <nav className={styles.breadcrumb} aria-label="Putanja">
+            <div className={styles.container}>
+              <ol>
+                <li>
+                  <Link href="/">Početna</Link>
+                  <span className={styles.breadcrumbSeparator} aria-hidden="true">
+                    /
+                  </span>
+                </li>
+                <li>
+                  <Link href="/brendovi">Brendovi</Link>
+                  <span className={styles.breadcrumbSeparator} aria-hidden="true">
+                    /
+                  </span>
+                </li>
+                <li className={styles.breadcrumbCurrent} aria-current="page">
+                  {brand.name}
+                </li>
+              </ol>
+            </div>
+          </nav>
+
           <div className={`${styles.container} ${styles.heroInner}`}>
             <div className={styles.heroCopy}>
+              <p className={styles.heroBrandMark}>
+                <Image
+                  alt={`${wordmark} logo`}
+                  className={styles.heroLogo}
+                  height={329}
+                  priority
+                  src={brand.logo}
+                  width={1989}
+                />
+              </p>
               <p className={styles.heroEyebrow}>{carfitHero.eyebrow}</p>
               <h1 className={styles.heroTitle} id="carfit-title">
                 {carfitHero.title}
@@ -231,7 +255,8 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                 <div className={`${styles.stageCell} ${styles.stageCellSide}`}>
                   <p className={styles.stageCode}>Program</p>
                   <div>
-                    <p className={styles.stageLabel}>{wordmark}</p>
+                    {/* Wordmark već stoji u hero lockupu — ovde ide sadržaj, ne ponavljanje. */}
+                    <p className={styles.stageLabel}>Ceo radni tok</p>
                     <p className={styles.stageNote}>
                       Priprema, reparacija, lakiranje i završna obrada u jednom programu.
                     </p>
@@ -257,7 +282,70 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
           </div>
         </section>
 
-        <CarfitLocalNav items={carfitNav} />
+        <BrandSectionNav
+          ariaLabel="Brzi pristup Car Fit programu"
+          items={carfitSectionNavItems}
+        />
+
+        {/* ----------------------------------------------- category index */}
+        <section
+          className={`${styles.section} ${styles.sectionOff} ${styles.gridSkin} ${styles.anchor}`}
+          id="kategorije"
+          aria-labelledby="carfit-categories-title"
+        >
+          <div className={styles.container}>
+            <CarfitReveal className={styles.sectionHead}>
+              <p className={styles.sectionKicker}>Kategorije</p>
+              <h2 className={styles.sectionTitle} id="carfit-categories-title">
+                Brzo do pravog proizvoda.
+              </h2>
+              <p className={styles.sectionLead}>
+                Ako već znate šta tražite, uđite direktno kroz kategoriju — stvarna organizacija
+                celog Car Fit programa. Pregled vodi na naš katalog sa odgovarajućim filterom.
+              </p>
+            </CarfitReveal>
+
+            <CarfitReveal className={styles.categoryBoard} delay={60}>
+              {categoryViews.map((category) => {
+                const body = (
+                  <>
+                    <div>
+                      <p className={styles.categoryCode}>{category.code}</p>
+                      <h3 className={styles.categoryName}>{category.name}</h3>
+                      <p className={styles.categoryNote}>{category.note}</p>
+                    </div>
+                    <div className={styles.categoryFoot}>
+                      {category.count > 0 ? (
+                        <span className={styles.categoryCount}>{category.count}</span>
+                      ) : (
+                        <span />
+                      )}
+                      {category.catalogTarget ? (
+                        <span className={styles.categoryArrow} aria-hidden="true">
+                          →
+                        </span>
+                      ) : null}
+                    </div>
+                  </>
+                );
+
+                return category.catalogTarget ? (
+                  <Link
+                    className={`${styles.category} ${styles.categoryLink}`}
+                    href={category.catalogTarget.href}
+                    key={category.id}
+                  >
+                    {body}
+                  </Link>
+                ) : (
+                  <div className={styles.category} key={category.id}>
+                    {body}
+                  </div>
+                );
+              })}
+            </CarfitReveal>
+          </div>
+        </section>
 
         {/* ------------------------------------------------- task selector */}
         <section
@@ -322,7 +410,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
         {/* -------------------------------------------- abrasive gradation */}
         <section
-          className={`${styles.section} ${styles.sectionDark} ${styles.gridSkin} ${styles.gridSkinInvert}`}
+          className={`${styles.section} ${styles.sectionSteel} ${styles.gridSkin}`}
           aria-labelledby="carfit-gradation-title"
         >
           <div className={styles.container}>
@@ -425,65 +513,6 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
           </div>
         </section>
 
-        {/* ----------------------------------------------- category index */}
-        <section
-          className={`${styles.section} ${styles.sectionOff} ${styles.gridSkin}`}
-          aria-labelledby="carfit-categories-title"
-        >
-          <div className={styles.container}>
-            <CarfitReveal className={styles.sectionHead}>
-              <p className={styles.sectionKicker}>Kategorije</p>
-              <h2 className={styles.sectionTitle} id="carfit-categories-title">
-                Brzo do pravog proizvoda.
-              </h2>
-              <p className={styles.sectionLead}>
-                Ako već znate šta tražite, uđite direktno kroz kategoriju. Pregled vodi na naš
-                katalog sa odgovarajućim filterom.
-              </p>
-            </CarfitReveal>
-
-            <CarfitReveal className={styles.categoryBoard} delay={60}>
-              {categoryViews.map((category) => {
-                const body = (
-                  <>
-                    <div>
-                      <p className={styles.categoryCode}>{category.code}</p>
-                      <h3 className={styles.categoryName}>{category.name}</h3>
-                      <p className={styles.categoryNote}>{category.note}</p>
-                    </div>
-                    <div className={styles.categoryFoot}>
-                      {category.count > 0 ? (
-                        <span className={styles.categoryCount}>{category.count}</span>
-                      ) : (
-                        <span />
-                      )}
-                      {category.catalogTarget ? (
-                        <span className={styles.categoryArrow} aria-hidden="true">
-                          →
-                        </span>
-                      ) : null}
-                    </div>
-                  </>
-                );
-
-                return category.catalogTarget ? (
-                  <Link
-                    className={`${styles.category} ${styles.categoryLink}`}
-                    href={category.catalogTarget.href}
-                    key={category.id}
-                  >
-                    {body}
-                  </Link>
-                ) : (
-                  <div className={styles.category} key={category.id}>
-                    {body}
-                  </div>
-                );
-              })}
-            </CarfitReveal>
-          </div>
-        </section>
-
         {/* ------------------------------------------------- masking story */}
         <section
           className={`${styles.section} ${styles.sectionPaper}`}
@@ -524,7 +553,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
         {/* -------------------------------------------------- finish story */}
         <section
-          className={`${styles.section} ${styles.sectionDark} ${styles.gridSkin} ${styles.gridSkinInvert}`}
+          className={`${styles.section} ${styles.sectionSteel} ${styles.gridSkin}`}
           aria-labelledby="carfit-finish-title"
         >
           <div className={styles.container}>
@@ -547,6 +576,11 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                     </li>
                   ))}
                 </ol>
+
+                <p className={styles.footnote}>
+                  Black Label — premium linija paste i pribora za najzahtevnije poslove,
+                  uz standardnu Red Label liniju za svakodnevni rad.
+                </p>
               </div>
 
               <div className={styles.storyMedia}>
@@ -583,8 +617,8 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
               <div className={styles.showcaseFoot}>
                 <p className={styles.footnote}>
-                  Katalog se dopunjava. {coveredTaskCount} od {taskViews.length} poslova već ima
-                  povezan {brand.name} artikal, ostali vode na odgovarajuću kategoriju kataloga.
+                  Katalog se dopunjava. Poslovi bez direktno povezanog {brand.name} artikla vode na
+                  odgovarajuću kategoriju kataloga.
                 </p>
                 <Link
                   className={`${styles.btn} ${styles.btnSecondary}`}
@@ -636,6 +670,38 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
             </div>
           </div>
         </section>
+
+        {/* -------------------------------------------------- katalozi */}
+        {carfitFeaturedDocuments.length > 0 ? (
+          <section
+            className={`${styles.section} ${styles.katalogSection}`}
+            aria-labelledby="carfit-katalozi-title"
+          >
+            <div className={styles.container}>
+              <CarfitReveal className={styles.sectionHead}>
+                <p className={styles.sectionKicker}>Katalozi</p>
+                <h2 className={styles.sectionTitle} id="carfit-katalozi-title">
+                  Zvanični C.A.R.FIT katalog
+                </h2>
+                <p className={styles.sectionLead}>
+                  Kompletan program u jednom PDF-u — kitovi, punioci, klar lakovi, aerosoli i pribor.
+                </p>
+              </CarfitReveal>
+
+              <CarfitReveal className={styles.katalogGrid} delay={60}>
+                {carfitFeaturedDocuments.map((document) => (
+                  <DocumentCard key={document.id} document={document} />
+                ))}
+              </CarfitReveal>
+
+              <div className={styles.showcaseFoot}>
+                <Link className={`${styles.btn} ${styles.btnSecondary}`} href="/katalozi?brand=carfit">
+                  Svi C.A.R.FIT dokumenti
+                </Link>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         {/* -------------------------------------------------- brand story */}
         <section

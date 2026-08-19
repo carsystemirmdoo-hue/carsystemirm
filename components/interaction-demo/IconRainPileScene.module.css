@@ -1,0 +1,182 @@
+/*
+ * Icon rain → pile — INTERNAL lab scene, not used by any public route.
+ *
+ * The whole animation is four CSS keyframe stops per glyph, driven by custom
+ * properties that `iconRainPile.mjs` computed from a seed. No JavaScript runs
+ * per frame, and nothing is measured in the browser, so the composition is
+ * identical on the server and on the client.
+ */
+
+.frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  container-type: size;
+  isolation: isolate;
+}
+
+/*
+ * The decorative layer. `pointer-events: none` so it can never intercept a
+ * click meant for the product or a control, and the whole layer is
+ * `aria-hidden` in the markup.
+ */
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: var(--rain-color, oklch(0.55 0.03 250));
+  pointer-events: none;
+}
+
+.glyph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--g-size);
+  height: var(--g-size);
+  margin-top: calc(var(--g-size) / -2);
+  margin-left: calc(var(--g-size) / -2);
+  opacity: var(--g-opacity);
+  /*
+   * Idle IS the finished pile. That matters for three separate reasons: it is
+   * what renders on the server, it is what a reader with `prefers-reduced-motion`
+   * sees, and it is what remains if JavaScript never runs. The animation only
+   * ever adds a way of arriving at a state the page already had.
+   */
+  transform: translate3d(var(--g-rest-x), var(--g-rest-y), 0) rotate(var(--g-rest-r));
+  transform-origin: 50% 50%;
+}
+
+.glyph svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.frame[data-phase="playing"] .glyph {
+  animation: cs-rain-drop var(--g-duration) var(--g-delay) both;
+  will-change: transform, opacity;
+}
+
+/*
+ * Release → fall → first contact (overshooting the resting line) → rebound →
+ * rest. The easing changes per segment: gravity going down, a sharp decelerate
+ * on impact, a soft settle out of the bounce.
+ */
+@keyframes cs-rain-drop {
+  0% {
+    transform: translate3d(var(--g-release-x), var(--g-release-y), 0)
+      rotate(var(--g-release-r));
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.45, 0.05, 0.75, 0.35);
+  }
+
+  12% {
+    opacity: var(--g-opacity);
+  }
+
+  62% {
+    transform: translate3d(var(--g-contact-x), var(--g-contact-y), 0)
+      rotate(var(--g-contact-r));
+    animation-timing-function: cubic-bezier(0.2, 0.85, 0.35, 1);
+  }
+
+  78% {
+    transform: translate3d(var(--g-bounce-x), var(--g-bounce-y), 0)
+      rotate(var(--g-bounce-r));
+    animation-timing-function: cubic-bezier(0.4, 0, 0.55, 1);
+  }
+
+  100% {
+    transform: translate3d(var(--g-rest-x), var(--g-rest-y), 0)
+      rotate(var(--g-rest-r));
+    opacity: var(--g-opacity);
+  }
+}
+
+/*
+ * Contact with the floor. Without it the heap reads as glyphs suspended in the
+ * lower third of the frame rather than resting on a surface. It fades in over
+ * the second half of the sequence, so the shadow arrives with the pieces.
+ */
+.floor {
+  position: absolute;
+  bottom: 2cqh;
+  left: 50%;
+  z-index: 1;
+  width: var(--rain-floor-width, 74cqw);
+  height: 9cqh;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    var(--rain-floor-color, oklch(0.35 0.02 250 / 0.22)) 0%,
+    transparent 72%
+  );
+  opacity: 1;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.frame[data-phase="playing"] .floor {
+  animation: cs-rain-floor var(--rain-total) both;
+}
+
+@keyframes cs-rain-floor {
+  0%,
+  42% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* The product sits above the decoration and is never touched by it. */
+.product {
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 100%;
+}
+
+/*
+ * Replay is a lab affordance only — `IconRainPileScene` renders it just when a
+ * caller opts in, and no production surface does.
+ */
+.replay {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 3;
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, canvas 82%, transparent);
+  color: inherit;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-family: var(--font-technical), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.replay:hover {
+  opacity: 1;
+}
+
+.replay:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/*
+ * Reduced motion never reaches `data-phase="playing"` — the component checks the
+ * query before it schedules anything, so this is a second line of defence
+ * rather than the only one.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .frame[data-phase="playing"] .glyph,
+  .frame[data-phase="playing"] .floor {
+    animation: none;
+  }
+}

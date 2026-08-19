@@ -602,6 +602,25 @@ export const carsystemProductOrder = [
   "carsystem-zastitno-odelo",
 ] as const;
 
+/**
+ * Realna kategorijska širina Carsystem asortimana (10 kategorija, prema
+ * zvaničnoj carsystem.org taksonomiji) — informativni prikaz obima programa,
+ * ne filter vezan za lokalno uvezenih 9 SKU. Svaka kategorija vodi na opšti
+ * filtrirani katalog dok ne postoje potvrđeni lokalni zapisi po kategoriji.
+ */
+export const carsystemRangeCategories = [
+  "Brušenje",
+  "Kitovanje",
+  "Maskiranje",
+  "Lakiranje",
+  "Završna obrada",
+  "Lepljenje i premazi",
+  "Čišćenje",
+  "Zaštita na radu",
+  "Pribor za lakiranje",
+  "Promotivni materijal",
+] as const;
+
 export const carsystemProductFilters = [
   {
     id: "all",
@@ -714,6 +733,81 @@ export const carsystemDocumentation = {
       variant: "secondary",
     },
   ],
+} as const;
+
+/**
+ * Finish system spotlight (Polish X-Serie, official Carsystem source, 2026).
+ * Two real steps, not an invented three-stage sequence: Compound X1500 is a
+ * self-refining compound (coarse cut in the first ~10s, breaks down finer
+ * after ~15s of polishing), and Polish X8000 is the separate final finishing
+ * step. See docs/CARSYSTEM_DOCUMENT_SOURCE_MAP.md for the source excerpt.
+ */
+export const carsystemFinishSystem = {
+  title: "Finiš sistem koji sam sebe fino podešava",
+  description:
+    "Polish X-Serie: Compound X1500 kombinuje grubo i fino poliranje u jednom prolazu, Polish X8000 uklanja holograme i zatvara sjaj.",
+  steps: [
+    {
+      id: "compound-x1500",
+      index: "01",
+      label: "Cut & Refine",
+      title: "Compound X1500",
+      description:
+        "Vrlo visok cut u prvih 10 sekundi; nakon oko 15 sekundi poliranja zrno se usitni i ostavlja miran, sjajan trag — i na tamnim lakovima.",
+      pads: ["Polishing Pad HC X1500", "Polishing Pad MC X1500"],
+    },
+    {
+      id: "polish-x8000",
+      index: "02",
+      label: "Finish",
+      title: "Polish X8000",
+      description:
+        "Mikroskopski sitno zrno uklanja holograme i fine ogrebotine, bez silikona — poslednji korak pre isporuke vozila.",
+      pads: ["Polishing Pad AH X8000"],
+    },
+  ],
+  accessory: {
+    title: "Microfiber X300 Duo",
+    description:
+      "Dvobojne mikrofiber krpe razdvajaju grubu i finu poliru u istom radnom procesu.",
+  },
+  cta: {
+    href: carsystemCatalogHref({ program: "poliranje" }),
+    label: "Otvorite Carsystem poliranje",
+  },
+  documentId: "carsystem-polish-x-serie",
+} as const;
+
+/**
+ * Multi Changer spotlight (official Carsystem source, 2021/2026).
+ * Color change is a process-visibility aid during drying/curing — the source
+ * does not claim it proves full cure, and neither does this copy.
+ */
+export const carsystemMultiChanger = {
+  title: "Git koji vam pokazuje gde je u procesu",
+  description:
+    "Multi Changer serija menja boju tokom sušenja/očvršćavanja — vizuelni signal toka rada, ne zamena za tehnički list.",
+  variants: [
+    {
+      id: "multi-blue-changer",
+      title: "Multi Blue Changer",
+      from: "Plava",
+      to: "Siva",
+      phase: "tokom sušenja",
+      productCode: "157.623",
+      href: carsystemCatalogHref({ query: "git" }),
+    },
+    {
+      id: "multi-green-changer",
+      title: "Multi Green Changer",
+      from: "Zelena",
+      to: "Žuta",
+      phase: "tokom očvršćavanja",
+      productCode: "157.622",
+      href: "/proizvodi/carsystem-git-multi-green",
+    },
+  ],
+  documentId: "carsystem-multi-changer",
 } as const;
 
 export const carsystemFinalCta = {

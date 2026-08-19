@@ -69,7 +69,7 @@
 }
 
 .section {
-  width: min(calc(100% - clamp(2rem, 8vw, 8rem)), 94rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
   padding-block: clamp(5.5rem, 10vw, 10rem);
 }
@@ -183,7 +183,7 @@
 .breadcrumb {
   position: absolute;
   top: clamp(1rem, 2vw, 1.6rem);
-  left: max(clamp(1rem, 4vw, 4rem), calc((100% - 94rem) / 2));
+  left: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   z-index: 4;
   display: flex;
   align-items: center;
@@ -302,7 +302,7 @@
   position: relative;
   min-height: clamp(47rem, calc(92svh - 5.5rem), 62rem);
   padding: clamp(4.2rem, 7vw, 6.5rem)
-    max(clamp(1rem, 4vw, 4rem), calc((100% - 94rem) / 2))
+    max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2))
     clamp(1.5rem, 2.4vw, 2.4rem);
   border-bottom: 1px solid var(--cs-line);
   background:
@@ -649,7 +649,7 @@
 
 .metrics {
   position: relative;
-  width: min(calc(100% - clamp(2rem, 8vw, 8rem)), 94rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   margin-inline: auto;
   padding-block: clamp(2.2rem, 4vw, 3.8rem);
 }
@@ -1076,7 +1076,7 @@
 
 .workflowSection {
   width: 100%;
-  padding-inline: max(clamp(1rem, 4vw, 4rem), calc((100% - 94rem) / 2));
+  padding-inline: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   background: var(--cs-dark);
   color: var(--cs-dark-ink);
 }
@@ -1438,7 +1438,7 @@
 
 .useCasesSection {
   width: 100%;
-  padding-inline: max(clamp(1rem, 4vw, 4rem), calc((100% - 94rem) / 2));
+  padding-inline: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   background: var(--cs-paper-muted);
 }
 
@@ -1548,19 +1548,42 @@
   line-height: 1.6;
 }
 
-.useCaseResultHeader > div {
+.useCaseSequence {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-block-start: 1.2rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.useCaseResultHeader > div strong {
+.useCaseSequence li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.useCaseSequence strong {
   padding: 0.42rem 0.6rem;
   border: 1px solid var(--cs-line);
   color: var(--cs-ink-soft);
   font-size: 0.64rem;
   font-weight: 600;
+}
+
+.useCaseSequence span {
+  color: var(--cs-red-strong);
+  font-size: 0.8rem;
+}
+
+.useCaseSequenceNote {
+  max-width: 42ch;
+  margin: 0.7rem 0 0;
+  color: var(--cs-ink-faint);
+  font-size: 0.68rem;
+  font-style: italic;
+  line-height: 1.5;
 }
 
 .useCaseProducts {
@@ -1651,6 +1674,45 @@
 
 .productsSection {
   padding-block-end: clamp(6rem, 11vw, 11rem);
+}
+
+.rangeCoverage {
+  margin-block-end: clamp(1.5rem, 3vw, 2.5rem);
+  padding-block-end: clamp(1.5rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--cs-line);
+}
+
+.rangeCoverage > p {
+  margin: 0 0 0.7rem;
+  color: var(--cs-ink-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rangeCoverage ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rangeCoverage a {
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--cs-line);
+  color: var(--cs-ink-soft);
+  font-size: 0.72rem;
+  text-decoration: none;
+}
+
+.rangeCoverage a:hover,
+.rangeCoverage a:focus-visible {
+  border-color: var(--cs-red-strong);
+  color: var(--cs-red-strong);
 }
 
 .productFilters {
@@ -1840,6 +1902,211 @@
   line-height: 1.55;
 }
 
+/* Document library (curated Carsystem catalogs/brochures rail) */
+
+.documentLibrarySection {
+  --background: var(--cs-paper-strong);
+  --foreground: var(--cs-ink);
+  --border: var(--cs-line);
+  --surface: var(--cs-paper-strong);
+  --surface-muted: var(--cs-paper-muted);
+  --muted-foreground: var(--cs-ink-soft);
+  --accent: var(--cs-red);
+}
+
+.documentLibraryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--ds-space-m, 16px);
+}
+
+.documentLibraryActions {
+  display: flex;
+  margin-block-start: clamp(2rem, 4vw, 3rem);
+}
+
+/* Finish system spotlight (Polish X-Serie) */
+
+.finishSystemSection {
+  border-block-start: 1px solid var(--cs-line);
+}
+
+.finishSteps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.finishStep {
+  border: 1px solid var(--cs-line);
+  border-radius: var(--ds-radius, 2px);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.finishStepIndex {
+  display: block;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cs-ink-faint);
+}
+
+.finishStepLabel {
+  margin-block-start: 0.5rem;
+  color: var(--cs-red-strong);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.finishStep h3 {
+  margin-block-start: 0.6rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.finishStep > p {
+  margin-block-start: 0.6rem;
+  color: var(--cs-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.finishStepPads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-block-start: 0.9rem;
+  padding: 0;
+  list-style: none;
+}
+
+.finishStepPads li {
+  border: 1px solid var(--cs-line);
+  border-radius: var(--ds-radius, 2px);
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--cs-ink-soft);
+}
+
+.finishAccessory {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-block-start: 1.5rem;
+  padding-block-start: 1.5rem;
+  border-block-start: 1px solid var(--cs-line);
+  color: var(--cs-ink-soft);
+  font-size: 0.88rem;
+}
+
+.finishAccessory strong {
+  color: var(--cs-ink);
+}
+
+.finishActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-block-start: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.finishBrochureLink {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cs-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.finishBrochureLink:hover,
+.finishBrochureLink:focus-visible {
+  color: var(--cs-ink);
+}
+
+/* Multi Changer spotlight */
+
+.multiChangerSection {
+  border-block-start: 1px solid var(--cs-line);
+}
+
+.multiChangerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.multiChangerCard {
+  display: block;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--ds-radius, 2px);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 220ms var(--cs-ease);
+}
+
+.multiChangerCard:hover,
+.multiChangerCard:focus-visible {
+  border-color: var(--cs-red);
+}
+
+.multiChangerSwatches {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.multiChangerSwatches span {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--cs-line);
+}
+
+.multiChangerSwatches i {
+  font-style: normal;
+  color: var(--cs-ink-faint);
+}
+
+.multiChangerCard h3 {
+  margin-block-start: 1rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.multiChangerCard > p {
+  margin-block-start: 0.4rem;
+  color: var(--cs-ink-soft);
+  font-size: 0.9rem;
+}
+
+.multiChangerCard > p span {
+  display: block;
+  margin-block-start: 0.2rem;
+  font-size: 0.76rem;
+  color: var(--cs-ink-faint);
+}
+
+.multiChangerCode {
+  display: inline-block;
+  margin-block-start: 0.75rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  color: var(--cs-ink-faint);
+}
+
 /* Documentation */
 
 .documentationSection {
@@ -1848,7 +2115,7 @@
   grid-template-columns: minmax(18rem, 0.56fr) minmax(0, 1fr);
   gap: clamp(3rem, 7vw, 8rem);
   padding: clamp(5.5rem, 10vw, 10rem)
-    max(clamp(1rem, 4vw, 4rem), calc((100% - 94rem) / 2));
+    max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   background:
     linear-gradient(
       to right,
@@ -1961,7 +2228,7 @@
 .finalCta {
   position: relative;
   display: grid;
-  width: min(calc(100% - clamp(2rem, 8vw, 8rem)), 94rem);
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   min-height: clamp(37rem, 58vw, 52rem);
   grid-template-columns: minmax(22rem, 0.9fr) minmax(28rem, 1.1fr);
   gap: clamp(2rem, 5vw, 6rem);
@@ -2413,6 +2680,12 @@
 
   .sectionHeader > p {
     margin-block-start: 1.4rem;
+  }
+
+  .finishSteps,
+  .multiChangerGrid,
+  .documentLibraryGrid {
+    grid-template-columns: 1fr;
   }
 
   .breadcrumb {

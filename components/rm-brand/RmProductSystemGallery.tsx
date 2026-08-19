@@ -124,6 +124,7 @@ export function RmProductSystemGallery({
                 group={centralItem.group}
                 href={getItemHref(centralItem, activeSystem)}
                 priority
+                product={centralItem.product}
                 productName={centralItem.name}
                 role={centralItem.group}
                 system={activeSystem.label}
@@ -143,6 +144,7 @@ export function RmProductSystemGallery({
                     feature={getItemTechnology(item, activeSystem)}
                     group={item.group}
                     href={getItemHref(item, activeSystem)}
+                    product={item.product}
                     productName={item.name}
                     role={item.group}
                     sizes="(min-width: 70rem) 12vw, (min-width: 48rem) 22vw, 54vw"
@@ -154,14 +156,6 @@ export function RmProductSystemGallery({
           </div>
 
           <footer className={styles.systemGalleryFooter}>
-            <p>
-              <strong>{catalogProducts.length}</strong>
-              <span>
-                {catalogProducts.length === 1
-                  ? "potvrđen artikal u javnom katalogu"
-                  : "potvrđenih artikala u javnom katalogu"}
-              </span>
-            </p>
             <div>
               <Link
                 className={styles.rmOutlineButton}

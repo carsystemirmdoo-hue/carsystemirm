@@ -1,0 +1,2083 @@
+/*
+ * Befar brend stranica — vizuelni sistem "Industrial Object".
+ *
+ * Izveden iz Befarovog pakovanja i samih proizvoda, ne iz njihovog sajta:
+ * ravne pune ploče, oštre horizontalne ivice, antracit i off-white kao dve
+ * podloge koje se naizmenično smenjuju, crvena samo kao strukturni signal
+ * (brojevi sekcija, primarni CTA), i boje pene isključivo na elementima koji
+ * se odnose na tvrdoću.
+ *
+ * Namerno se razlikuje od `CarfitBrandPage.module.css` (workshop grid),
+ * `CosmosBrandPage.module.css` (hromatski) i R-M/baslac stranica (procesne).
+ */
+
+.pageShell {
+  /* Crvena je uzorkovana iz zvaničnog logo fajla
+     `public/brands/befar/brand/befar-logo-white-on-red.png`. Befar ne objavljuje
+     brand guidelines, pa je ovo najbolja dostupna digitalna referenca. */
+  --bf-red: #ea080b;
+  --bf-red-ink: #ffffff;
+
+  --bf-charcoal: #16191e;
+  --bf-ink: #0b0a10;
+  --bf-surface: #f4f3f0;
+  --bf-surface-deep: #e7e5e0;
+
+  --bf-text: #16191e;
+  --bf-text-muted: #5b5f66;
+  --bf-text-faint: #868b92;
+  --bf-line: #d6d3cd;
+
+  --bf-invert-text: #f4f3f0;
+  --bf-invert-muted: #9aa0a8;
+  --bf-invert-faint: #6d747d;
+  --bf-invert-line: rgb(244 243 240 / 0.16);
+  --bf-invert-line-strong: rgb(244 243 240 / 0.32);
+
+  /* Tema za zajednički `BrandSectionNav`. */
+  --brand-nav-surface: rgb(22 25 30 / 0.94);
+  --brand-nav-border: rgb(244 243 240 / 0.16);
+  --brand-nav-ink: #f4f3f0;
+  --brand-nav-accent: #ea080b;
+
+  --bf-gutter: var(--ds-gutter, clamp(20px, 4vw, 56px));
+  --bf-max: var(--ds-container-max, 1208px);
+  --bf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bf-section-y: clamp(4rem, 8vw, 8.5rem);
+
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--bf-surface);
+  color: var(--bf-text);
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.pageShell a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.main {
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--bf-max);
+  margin-inline: auto;
+  padding-inline: var(--bf-gutter);
+}
+
+.anchor {
+  scroll-margin-top: calc(
+    var(--brand-section-header-offset, 5.5rem) + var(--brand-section-nav-height, 3.5rem) + 1rem
+  );
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -------------------------------------------------------------- primitives */
+
+/* Broj sekcije u crvenom bloku — preuzeto sa Befarovog kataloškog taba. */
+.sectionIndex {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-text-muted);
+}
+
+.sectionIndex > span:first-child {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  padding: 0.2rem 0.4rem;
+  background: var(--bf-red);
+  color: var(--bf-red-ink);
+  font-weight: 700;
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  max-width: 34ch;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.9rem, 4.2vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.sectionLead {
+  margin: 0 0 2.5rem;
+  max-width: 58ch;
+  font-size: clamp(1rem, 1.3vw, 1.14rem);
+  line-height: 1.6;
+  color: var(--bf-text-muted);
+}
+
+/*
+ * Kompaktna varijanta zaglavlja: broj i naslov u istom redu, lead uz njih.
+ * Postoji da se `eyebrow + ogroman naslov + pasus` ne ponavlja u svih devet
+ * sekcija — kompozicija se menja, familija fonta ne.
+ */
+.sectionHeaderInline {
+  display: grid;
+  gap: 0.75rem 2rem;
+  align-items: baseline;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.sectionHeaderInline .sectionIndex,
+.sectionHeaderInline .sectionTitle,
+.sectionHeaderInline .sectionLead {
+  margin: 0;
+}
+
+.sectionHeaderInline .sectionTitle {
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  max-width: 26ch;
+}
+
+@media (min-width: 64rem) {
+  .sectionHeaderInline {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  }
+
+  .sectionHeaderInline .sectionIndex {
+    grid-column: 1 / -1;
+  }
+}
+
+.codeChip {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--bf-line);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--bf-text);
+  background: transparent;
+}
+
+.inlineLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  /* Tekstualni link, ali na dodir mora imati upotrebljivu površinu. Visina se
+     dobija paddingom, a linija ostaje uz sam tekst preko `box-shadow`. */
+  min-height: 2.75rem;
+  padding-block: 0.5rem;
+  box-shadow: inset 0 -0.55rem 0 -0.5rem currentcolor;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.6rem;
+  border: 1px solid transparent;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 180ms var(--bf-ease), color 180ms var(--bf-ease);
+}
+
+.buttonPrimary {
+  background: var(--bf-red);
+  color: var(--bf-red-ink);
+}
+
+.buttonPrimary:hover {
+  background: color-mix(in srgb, var(--bf-red) 82%, black);
+}
+
+.buttonSecondary {
+  border-color: currentcolor;
+  color: inherit;
+}
+
+.buttonSecondary:hover {
+  background: color-mix(in srgb, currentcolor 10%, transparent);
+}
+
+.starMeter {
+  display: inline-flex;
+  gap: 0.18rem;
+}
+
+.starMeter > span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid currentcolor;
+  opacity: 0.35;
+}
+
+.starMeter > span[data-on] {
+  background: currentcolor;
+  opacity: 1;
+}
+
+/* ================================================================= 01 hero */
+
+.hero {
+  position: relative;
+  background: var(--bf-charcoal);
+  color: var(--bf-invert-text);
+  overflow: clip;
+}
+
+.breadcrumb {
+  padding-block: 1rem 0.25rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.breadcrumb a:hover {
+  color: var(--bf-invert-text);
+}
+
+.breadcrumb li[aria-current] {
+  color: var(--bf-invert-text);
+}
+
+/* Ogromna tehnička oznaka u pozadini — deo kompozicije, ne dekoracija.
+   Sedi unutar containera da je gutter drži u kadru; ranije je bila vezana za
+   sekciju i isticala se van viewporta. */
+/*
+ * Ghost šifra sedi u koloni sa tekstom, iza naslova.
+ *
+ * Dok je objekat bio krug, oznaka je bila desno i disk ju je pokrivao. Sada je
+ * desna strana puna, neprozirna ploča, pa desno poravnanje znači da se oznaka ne
+ * vidi uopšte. Levo, iza teških belih verzala, čita se kao vodeni znak i pravi
+ * odnos: broj iza tipografije, materijal desno.
+ */
+.heroBackdrop {
+  position: absolute;
+  inset-inline-start: var(--bf-gutter);
+  inset-block: 0;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0.35rem;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.heroBackdropCode {
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(4.5rem, 13vw, 11.5rem);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  color: rgb(244 243 240 / 0.09);
+}
+
+.heroBackdropMeta {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(244 243 240 / 0.18);
+}
+
+.heroInner {
+  position: relative;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
+  align-items: center;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.heroLogo {
+  width: clamp(7.5rem, 12vw, 10.5rem);
+  height: auto;
+}
+
+.heroKicker {
+  margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bf-invert-muted);
+}
+
+.heroTitle {
+  display: grid;
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(2.6rem, 7.4vw, 6.2rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.heroLead {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--bf-invert-muted);
+}
+
+.heroCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  min-height: 2.75rem;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--bf-invert-line-strong);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bf-invert-text);
+}
+
+.heroCue:hover {
+  border-bottom-color: var(--bf-red);
+}
+
+/*
+ * Objekat je strukturna ploča, ne maskirana fotografija.
+ *
+ * Prva verzija je fotografiju rotirala kao pravougaonik — videli su se uglovi i
+ * čitalo se kao nakošen packshot. Druga je bila krug, ali je i to bila „slika
+ * maskirana u krug“, a sadržaj (naslagane ivice pene) ne čita se kao jedan disk.
+ *
+ * Rešenje: ploča je fiksna i beži van desne i donje ivice sekcije, pa nema
+ * lebdećeg okvira — ostaju samo gornja i leva ivica, oštre i namerne, kao i
+ * ostale ravni u sistemu. Rotira se SLIKA unutar isečene ploče, pa se materijal
+ * pomera a ploča stoji. Nikada se ne vidi ivica fotografije.
+ */
+.heroObject {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: #000000;
+  /*
+   * Beži do stvarne ivice viewporta, ne samo do ivice containera: container ima
+   * `max-width`, pa sam negativni gutter ostavlja prazninu na širokim ekranima.
+   * Drugi član oduzima i polovinu razlike između viewporta i max-width-a.
+   */
+  margin-inline-end: calc(
+    var(--bf-gutter) * -1 - max(0px, (100vw - var(--bf-max)) / 2)
+  );
+  margin-block-end: calc(var(--bf-section-y) * -0.5);
+  aspect-ratio: 5 / 4;
+}
+
+.heroObjectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Uvećanje pokriva uglove dok se slika rotira unutar isečene ploče. */
+  transform: scale(1.1) rotate(var(--befar-hero-rotate, 0deg))
+    translateY(var(--befar-hero-lift, 0px));
+  transition: transform 120ms linear;
+  will-change: transform;
+}
+
+/* ============================================================ 02 materijal */
+
+.material {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-surface);
+}
+
+.materialGrid {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.materialCard {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.materialMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bf-surface-deep);
+}
+
+.materialMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.materialLabel {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.materialBody {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--bf-text-muted);
+}
+
+/* ============================================================== 03 tvrdoća */
+
+.hardness {
+  background: var(--bf-charcoal);
+  color: var(--bf-invert-text);
+}
+
+.hardnessIntro {
+  padding-block: var(--bf-section-y) 0;
+}
+
+.hardnessIntro .sectionIndex {
+  color: var(--bf-invert-muted);
+}
+
+.hardnessIntro .sectionLead {
+  margin-bottom: 0;
+  color: var(--bf-invert-muted);
+}
+
+.hardnessTrack {
+  position: relative;
+  padding-block: clamp(2rem, 5vw, 3.5rem) var(--bf-section-y);
+}
+
+/* Markeri daju scroll poziciji deterministički izvor. Bez visine na mobilnom. */
+.hardnessMarkers {
+  display: none;
+}
+
+.hardnessStage {
+  position: relative;
+}
+
+.hardnessGrid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/*
+ * Bez `min-width: 0` grid kolona uzima min-content širinu svog sadržaja, pa se
+ * horizontalna traka tvrdoće (overflow-x: auto) raširila na 524px u 375px
+ * viewportu. `overflow-x: clip` na shell-u je to sakrio, ali su poslednji koraci
+ * skale ostajali odsečeni i nedostupni.
+ */
+.hardnessGrid > * {
+  min-width: 0;
+}
+
+.hardnessNavLabel,
+.hardnessSpecLabel {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+/* Na mobilnom je skala horizontalna traka sa snap tačkama — vertikalni scroll
+   stranice ostaje netaknut jer nema custom touch handlera. */
+.hardnessOptions {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  margin-inline: calc(var(--bf-gutter) * -1);
+  padding-inline: var(--bf-gutter);
+  -webkit-overflow-scrolling: touch;
+}
+
+.hardnessOption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+  min-width: 5.5rem;
+  min-height: 3.25rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--bf-invert-line);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  scroll-snap-align: center;
+  text-align: left;
+  transition: border-color 160ms var(--bf-ease), background 160ms var(--bf-ease);
+}
+
+.hardnessOption:hover {
+  border-color: var(--bf-invert-line-strong);
+}
+
+.hardnessOption[data-active] {
+  border-color: var(--bf-red);
+  background: rgb(234 8 11 / 0.1);
+}
+
+.hardnessBar {
+  display: block;
+  width: 100%;
+  height: 0.45rem;
+}
+
+.hardnessBar[data-outline] {
+  box-shadow: inset 0 0 0 1px rgb(22 25 30 / 0.55);
+}
+
+.hardnessOptionText {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.hardnessOptionName {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hardnessOptionStars {
+  color: var(--bf-invert-muted);
+}
+
+.hardnessOption[data-active] .hardnessOptionStars {
+  color: var(--bf-invert-text);
+}
+
+.hardnessLineNote {
+  margin: 1rem 0 0;
+  max-width: 40ch;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--bf-invert-faint);
+}
+
+.hardnessObject {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+}
+
+.hardnessObjectFrame {
+  position: relative;
+  width: min(100%, 30rem);
+  aspect-ratio: 3 / 2;
+}
+
+/*
+ * Crossfade treba da čita kao „isti proizvod menja varijantu“, ne kao pet slika
+ * koje blinkaju. Tri stvari to rade:
+ *
+ *  1. Pozadine snimaka su normalizovane pri pripremi asseta — raspon sivog je
+ *     spao sa 64 na 26 nivoa, pa podloga ne poskakuje na svaki prelaz.
+ *  2. Radijalna maska gasi ivice kadra u antracit, tako da se ostatak razlike u
+ *     pozadini ne vidi i objekat izgleda kao da lebdi u istoj sceni.
+ *  3. Prelaz je duži i asimetričan: nova varijanta se pojavljuje sporije nego
+ *     što stara nestaje, pa nema trenutka u kome se dve jednako vide.
+ *
+ * Bez deformacije pene — fotografije su ravne i „kompresija“ bi izgledala gumeno.
+ */
+.hardnessObjectFrame {
+  -webkit-mask-image: radial-gradient(
+    ellipse 76% 78% at 50% 47%,
+    #000 58%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(ellipse 76% 78% at 50% 47%, #000 58%, transparent 100%);
+}
+
+.hardnessObjectLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translate(var(--befar-offset-x, 0%), var(--befar-offset-y, 0%)) scale(0.99);
+  transition: opacity 180ms var(--bf-ease), transform 420ms var(--bf-ease);
+  pointer-events: none;
+}
+
+.hardnessObjectLayer[data-active] {
+  opacity: 1;
+  transform: translate(var(--befar-offset-x, 0%), var(--befar-offset-y, 0%)) scale(1);
+  transition-duration: 300ms, 420ms;
+}
+
+.hardnessObjectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 46%;
+  display: block;
+}
+
+.hardnessObjectCaption {
+  margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.hardnessSpec {
+  border-top: 1px solid var(--bf-invert-line);
+  padding-top: 1.25rem;
+}
+
+.hardnessSpecStars {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.6rem;
+  color: var(--bf-red);
+}
+
+.hardnessSpecStarsText {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--bf-invert-muted);
+}
+
+.hardnessSpecTitle {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.hardnessSpecPurpose {
+  margin: 0 0 1.25rem;
+  max-width: 40ch;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--bf-invert-muted);
+}
+
+.hardnessSpecList {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+}
+
+.hardnessSpecList dt {
+  margin-bottom: 0.35rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.hardnessSpecList dd {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--bf-invert-text);
+}
+
+.hardnessCodes {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hardnessCodes li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--bf-invert-muted);
+}
+
+.hardness .codeChip {
+  border-color: var(--bf-invert-line-strong);
+  color: var(--bf-invert-text);
+}
+
+.hardnessAttachment {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.hardnessFlag {
+  padding: 0.1rem 0.35rem;
+  border: 1px dashed var(--bf-invert-line-strong);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.hardnessNote {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 0.9rem;
+  border-left: 2px solid var(--bf-red);
+  max-width: 44ch;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--bf-invert-muted);
+  background: rgb(244 243 240 / 0.04);
+}
+
+.hardnessSpec .inlineLink {
+  color: var(--bf-invert-text);
+}
+
+/* =========================================================== 04 geometrija */
+
+.geometry {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-surface);
+}
+
+.perfGrid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+/* Broj i disk se optički vezuju: broj sedi uz gornju ivicu, disk visi ispod i
+   blago ulazi u prostor broja, pa se čita kao oznaka na objektu, ne kao naslov. */
+.perfCard {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  padding-top: 0.9rem;
+  border-top: 2px solid var(--bf-text);
+}
+
+.perfNumber {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(3.25rem, 6.2vw, 5.25rem);
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.perfDisc {
+  width: min(100%, 13.5rem);
+  height: auto;
+  margin-block: -0.35rem 0.35rem;
+}
+
+.perfDisc :global(.befarDiscEdge) {
+  fill: #d9662a;
+}
+
+.perfDisc :global(.befarDiscBody) {
+  fill: #1e2126;
+}
+
+.perfDisc :global(.befarDiscHoles) circle {
+  fill: var(--bf-surface);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/*
+ * Perforation reveal vezan za ulazak u viewport, ne za trenutak učitavanja.
+ * `view()` timeline znači nula JavaScripta i nula rada dok je sekcija van ekrana.
+ * Gde `animation-timeline` nije podržan, otvori su prosto odmah vidljivi —
+ * potpuno upotrebljivo statično stanje.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .perfDisc :global(.befarDiscHoles) circle {
+      animation: befarHoleIn linear both;
+      animation-timeline: view();
+      animation-range: entry calc(6% + var(--befar-hole-index) * 0.5%) entry
+        calc(32% + var(--befar-hole-index) * 0.5%);
+    }
+  }
+}
+
+@keyframes befarHoleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.perfLabel {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.perfPurpose {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--bf-text-muted);
+}
+
+.perfCodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.perfCodes li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bf-text-muted);
+}
+
+.perfOrbital {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: center;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--bf-charcoal);
+  color: var(--bf-invert-text);
+}
+
+.perfOrbital .perfPurpose {
+  color: var(--bf-invert-muted);
+}
+
+.perfOrbital .perfCodes li {
+  color: var(--bf-invert-muted);
+}
+
+.perfOrbital .codeChip {
+  border-color: var(--bf-invert-line-strong);
+  color: var(--bf-invert-text);
+}
+
+.perfOrbitalNumber {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: var(--bf-red);
+}
+
+.perfOrbitalMedia {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.perfOrbitalMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profiles {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.profilesTitle {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.profilesList {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profilesList li {
+  display: grid;
+  gap: 0.4rem;
+  align-content: start;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--bf-line);
+}
+
+.profileGlyph {
+  width: 4rem;
+  height: auto;
+}
+
+.profileGlyph path {
+  fill: none;
+  stroke: var(--bf-text);
+  stroke-width: 1.5;
+}
+
+.profileLabel {
+  margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.profileBody {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--bf-text-muted);
+}
+
+.profileCodes {
+  margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--bf-text-faint);
+}
+
+/* =========================================================== 05 uparivanje */
+
+/*
+ * Ritam: 04 Geometrija i 05 Uparivanje su obe svetle i zajedno su čitale kao
+ * jedna preduga tehnička zona. Uparivanje se zato steže — uža mera, niža
+ * vertikala, crvena linija preko cele širine kao rez — pa je pauza vidljiva bez
+ * ubacivanja nove sekcije samo da preseče boju.
+ */
+.pairing {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  background: var(--bf-surface-deep);
+  border-top: 3px solid var(--bf-red);
+}
+
+.pairing .container {
+  max-width: 66rem;
+}
+
+.pairing .sectionLead {
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  max-width: 52ch;
+}
+
+.pairingLayout {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+}
+
+.pairingControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.pairingButton {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-height: 3rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--bf-line);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  transition: border-color 160ms var(--bf-ease), background 160ms var(--bf-ease);
+}
+
+.pairingButton:hover {
+  border-color: var(--bf-text);
+}
+
+.pairingButton[data-active] {
+  border-color: var(--bf-red);
+  background: color-mix(in srgb, var(--bf-red) 8%, transparent);
+}
+
+.pairingButtonFoam {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.pairingButtonArrow {
+  color: var(--bf-red);
+}
+
+.pairingButtonPlate {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--bf-text-muted);
+}
+
+.pairingButtonUnit {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-text-faint);
+}
+
+.pairingFigure {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.pairingRings {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.pairingFoamRing,
+.pairingPlateRing {
+  position: absolute;
+  display: grid;
+  place-items: end center;
+  border-radius: 50%;
+  /* Relativna skala prečnika: 1 = najveći prečnik u setu. */
+  width: calc(var(--befar-ring-scale, 1) * 100%);
+  aspect-ratio: 1;
+  transition: width 260ms var(--bf-ease);
+}
+
+.pairingFoamRing {
+  border: 2px solid var(--bf-text);
+  background: color-mix(in srgb, var(--bf-text) 6%, transparent);
+}
+
+.pairingPlateRing {
+  border: 2px dashed var(--bf-red);
+}
+
+.pairingRingLabel {
+  transform: translateY(50%);
+  padding: 0.1rem 0.4rem;
+  background: var(--bf-surface-deep);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.pairingPlateRing .pairingRingLabel {
+  color: var(--bf-red);
+}
+
+.pairingCaption {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--bf-text-muted);
+  text-align: center;
+}
+
+.pairingSpec {
+  align-self: start;
+}
+
+.pairingSpecLabel {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-text-faint);
+}
+
+.pairingCodes {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pairingCodes li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--bf-text-muted);
+}
+
+.pairingCodeSize {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  color: var(--bf-text-faint);
+}
+
+.pairingEmpty,
+.pairingNote,
+.pairingFootnote {
+  margin: 0 0 0.75rem;
+  max-width: 46ch;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--bf-text-muted);
+}
+
+.pairingFootnote {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bf-line);
+  color: var(--bf-text-faint);
+}
+
+/* ============================================================= 06 porodice */
+
+.families {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-charcoal);
+  color: var(--bf-invert-text);
+}
+
+.families .sectionIndex,
+.families .sectionLead {
+  color: var(--bf-invert-muted);
+}
+
+.familyGrid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.familyCard {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bf-invert-line);
+}
+
+.familyMedia {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--bf-ink);
+}
+
+.familyCard[data-weight="dominant"] .familyMedia {
+  aspect-ratio: 16 / 10;
+}
+
+.familyMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Podlinija sa sopstvenim identitetom: logo + njena boja na spec labelama.
+   Ostaje isti stil kartice — menja se samo akcent. */
+.familyLogo {
+  width: 7.5rem;
+  height: auto;
+  margin: 0 0 0.75rem;
+}
+
+.familyCard[data-accent] .familySpecs dt {
+  color: var(--bf-family-accent, var(--bf-red));
+}
+
+.familyCard[data-accent] {
+  border-top-color: var(--bf-family-accent, var(--bf-invert-line));
+}
+
+.familyKicker {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.familyName {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.3rem, 2.6vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.familyCard[data-weight="dominant"] .familyName {
+  font-size: clamp(1.7rem, 3.6vw, 2.9rem);
+}
+
+.familyText {
+  margin: 0 0 1rem;
+  max-width: 52ch;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--bf-invert-muted);
+}
+
+.familySpecs {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.familySpecs > div {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, auto) 1fr;
+  gap: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--bf-invert-line);
+}
+
+.familySpecs dt {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-red);
+}
+
+.familySpecs dd {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--bf-invert-muted);
+}
+
+.families .inlineLink {
+  color: var(--bf-invert-text);
+}
+
+/* ============================================================= 07 opencell */
+
+.opencell {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-ink);
+  color: var(--bf-invert-text);
+}
+
+.opencell .sectionIndex,
+.opencell .sectionLead {
+  color: var(--bf-invert-muted);
+}
+
+.opencellInner {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+/* Namerno nestilizovano — nema zvaničnog Opencell vektora i ne imitiramo ga. */
+.opencellLabel {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bf-invert-text);
+}
+
+.opencellQuote {
+  margin: 0 0 1.75rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--bf-red);
+}
+
+.opencellQuote p {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--bf-invert-text);
+}
+
+.opencellQuoteTranslation {
+  color: var(--bf-invert-muted) !important;
+  font-size: 0.88rem !important;
+}
+
+.opencellQuote cite,
+.manufacturerQuote cite {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.opencellScale {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.opencellScale li {
+  display: grid;
+  grid-template-columns: 0.9rem auto 1fr;
+  gap: 0.6rem 0.75rem;
+  align-items: center;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--bf-invert-line);
+}
+
+.opencellSwatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  box-shadow: inset 0 0 0 1px rgb(244 243 240 / 0.3);
+}
+
+.opencellScaleName {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.opencellScaleStars {
+  color: var(--bf-red);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.opencellScaleApply {
+  grid-column: 2 / -1;
+  font-size: 0.8rem;
+  color: var(--bf-invert-faint);
+}
+
+.opencellDisclaimer {
+  margin: 0 0 1.5rem;
+  max-width: 46ch;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--bf-invert-faint);
+}
+
+.opencellMedia {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.opencellMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.opencell .buttonSecondary {
+  color: var(--bf-invert-text);
+}
+
+/* =============================================================== 08 detalj */
+
+.detail {
+  background: var(--bf-ink);
+  color: var(--bf-invert-text);
+}
+
+/* Vizuelna pauza: kadrovi moraju biti veliki. U mreži 4×1 na 1280px svaki je
+   ispadao 320×240 i sekcija je bila traka od ~240px, a ne makro trenutak. */
+.detailStrip {
+  display: grid;
+  gap: 2px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.detailFrame {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bf-charcoal);
+}
+
+.detailFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.01);
+  transition: transform 600ms var(--bf-ease);
+}
+
+.detailFrame:hover img {
+  transform: scale(1.045);
+}
+
+.detailFrame figcaption {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: 0;
+  padding: 0.5rem 0.75rem;
+  background: rgb(11 10 16 / 0.72);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-invert-text);
+}
+
+/* =============================================================== 09 u radu */
+
+.inUse {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-surface);
+}
+
+.useSteps {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: befar-use;
+}
+
+.useSteps li {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.useMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bf-surface-deep);
+}
+
+.useMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.useIndex {
+  margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bf-red);
+}
+
+.useLabel {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.useBody {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--bf-text-muted);
+}
+
+/* ============================================================ 10 proizvodi */
+
+.discovery {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-surface-deep);
+}
+
+/*
+ * Kartica proizvoda bez kartice.
+ *
+ * Fotografija je sama površina — studijska pozadina snimka je normalizovana pri
+ * pripremi asseta, pa četiri kadra daju istu podlogu i ne treba im ni beli
+ * plate, ni border, ni badge. Ostaje naziv, jedan parametar i dva linka.
+ */
+.productGrid {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  padding: 0;
+  list-style: none;
+}
+
+.productCard {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.productMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.productMedia img {
+  width: 100%;
+  height: 100%;
+  /* Kontrolisan crop: pene sede blago iznad centra kadra. */
+  object-fit: cover;
+  object-position: center 44%;
+  display: block;
+  transform: scale(1.01);
+  transition: transform 420ms var(--bf-ease);
+}
+
+.productCard:hover .productMedia img {
+  transform: scale(1.035);
+}
+
+.productName {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-text-faint);
+}
+
+.productName > span {
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--bf-text);
+}
+
+.productRole {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--bf-text-muted);
+}
+
+.productVariants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.productVariants a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.5rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--bf-line);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  transition: border-color 160ms var(--bf-ease), color 160ms var(--bf-ease);
+}
+
+.productVariants a:hover {
+  border-color: var(--bf-red);
+  color: var(--bf-red);
+}
+
+.discoveryFamilies {
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.discoveryFamiliesLabel {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bf-text-faint);
+}
+
+.discoveryFamilies ul {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--bf-line);
+}
+
+.discoveryFamilies li {
+  border-bottom: 1px solid var(--bf-line);
+}
+
+.discoveryFamilies a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding-block: 0.75rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.discoveryFamilies a:hover {
+  color: var(--bf-red);
+}
+
+.discoveryFamilyDetail {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bf-text-faint);
+}
+
+/* ================================================= 11 proizvođač i CTA */
+
+.closing {
+  padding-block: var(--bf-section-y);
+  background: var(--bf-charcoal);
+  color: var(--bf-invert-text);
+}
+
+.closing .sectionIndex,
+.closing .sectionLead {
+  color: var(--bf-invert-muted);
+}
+
+.closingInner {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.manufacturerFacts {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.75rem;
+}
+
+.manufacturerFacts > div {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bf-invert-line);
+}
+
+.manufacturerFacts dt {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bf-invert-faint);
+}
+
+.manufacturerFacts dd {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.manufacturerQuote {
+  margin: 0 0 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--bf-red);
+}
+
+.manufacturerQuote p {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  color: var(--bf-invert-text);
+}
+
+.manufacturerDisclaimer {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--bf-invert-faint);
+}
+
+.cta {
+  align-self: start;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--bf-invert-line);
+}
+
+.ctaTitle {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.ctaActions {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+
+.ctaActions .buttonPrimary,
+.ctaActions .buttonSecondary {
+  width: 100%;
+}
+
+.cta .inlineLink {
+  color: var(--bf-invert-muted);
+}
+
+/* ============================================================= responsive */
+
+@media (min-width: 48rem) {
+  .materialGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .heroBackdrop {
+    inset-block-start: 18%;
+  }
+
+  .perfOrbital {
+    grid-template-columns: auto 1fr;
+  }
+
+  /*
+   * Macro material study, ne galerija: jedan dominantan kadar preko cele širine,
+   * pa tri tiša u nizu. Četiri jednaka kadra su se čitala kao foto galerija.
+   */
+  .detailStrip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .detailFrame {
+    aspect-ratio: 1;
+  }
+
+  .detailFrame:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 21 / 8;
+  }
+}
+
+@media (min-width: 64rem) {
+  .heroInner {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    min-height: min(84vh, 46rem);
+  }
+
+  .hardnessGrid {
+    grid-template-columns: minmax(11rem, 0.7fr) minmax(0, 1.5fr) minmax(17rem, 1fr);
+    align-items: center;
+  }
+
+  /* Skala postaje vertikalna lista, bez horizontalnog scrolla. */
+  .hardnessOptions {
+    flex-direction: column;
+    overflow: visible;
+    scroll-snap-type: none;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+    gap: 0.4rem;
+  }
+
+  .hardnessOption {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .hardnessBar {
+    width: 0.45rem;
+    height: 2.1rem;
+    flex: 0 0 auto;
+  }
+
+  /* Sticky scena: markeri daju visinu tracku, stage stoji u sredini. */
+  .hardnessTrack {
+    --befar-step-height: 80vh;
+    height: calc(5 * var(--befar-step-height));
+    padding-block: 0;
+  }
+
+  .hardnessMarkers {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+  }
+
+  .hardnessMarker {
+    flex: 1 1 0;
+  }
+
+  .hardnessStage {
+    position: sticky;
+    top: calc(
+      var(--brand-section-header-offset, 0px) + var(--brand-section-nav-height, 0px)
+    );
+    display: grid;
+    align-items: center;
+    height: calc(
+      100vh - var(--brand-section-header-offset, 0px) - var(--brand-section-nav-height, 0px)
+    );
+  }
+
+  .hardnessSpec {
+    border-top: none;
+    border-left: 1px solid var(--bf-invert-line);
+    padding-top: 0;
+    padding-left: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  .pairingLayout {
+    grid-template-columns: minmax(9rem, 0.6fr) minmax(0, 1.2fr) minmax(14rem, 0.9fr);
+  }
+
+  .pairingControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /*
+   * Editorial ritam, ne masonry: jedan dominantan trenutak preko cele širine,
+   * dva sekundarna u paru, tri tiša u nizu. Razlika ide kroz površinu, skalu i
+   * whitespace — svih šest kartica koriste isti stil.
+   */
+  .familyGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    row-gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .familyCard {
+    grid-column: span 2;
+  }
+
+  .familyCard[data-weight="dominant"] {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top-width: 2px;
+    border-top-color: var(--bf-red);
+  }
+
+  .familyCard[data-weight="major"] {
+    grid-column: span 3;
+  }
+
+  .familyCard[data-weight="minor"] {
+    grid-column: span 2;
+  }
+
+  /* Tiše kartice dobijaju manju sliku i uži tekst da se hijerarhija čita. */
+  .familyCard[data-weight="minor"] .familyMedia {
+    aspect-ratio: 3 / 2;
+  }
+
+  .familyCard[data-weight="minor"] .familyText {
+    font-size: 0.88rem;
+  }
+
+  .opencellInner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+
+  .closingInner {
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.75fr);
+  }
+
+  .ctaActions .buttonPrimary,
+  .ctaActions .buttonSecondary {
+    width: auto;
+  }
+}
+
+/* Četiri kartice u 2 × 2: na 1920px četiri u redu daju 284px i proizvod se čita
+   kao thumbnail. U dve kolone kadar je ~600px i proizvod je krupan. */
+@media (min-width: 48rem) {
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Na uskim ekranima makro prikaz gubi smisao ako je premali — dva kadra od
+   četiri se skrivaju, ostala dva ostaju u punoj širini. */
+@media (max-width: 47.99rem) {
+  .detailFrame:nth-child(n + 3) {
+    display: none;
+  }
+
+  /* Na mobilnom oznaka pada iza logotipa i kickera, pa se stišava da čita kao
+     tekstura, a ne kao tekst koji se bori sa njima. */
+  .heroBackdropCode {
+    font-size: clamp(5rem, 30vw, 11rem);
+    color: rgb(244 243 240 / 0.055);
+  }
+
+  /* Meta linija se na 375px seče na pola reči — na mobilnom je izostavljamo,
+     isti podatak stoji u sekciji tvrdoće. */
+  .heroBackdropMeta {
+    display: none;
+  }
+}
+
+/* ========================================================== reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .heroObjectImage {
+    transform: scale(1.02);
+    transition: none;
+  }
+
+  .hardnessObjectLayer,
+  .hardnessObjectLayer[data-active] {
+    transform: translate(var(--befar-offset-x, 0%), var(--befar-offset-y, 0%));
+    transition: none;
+  }
+
+  .perfDisc :global(.befarDiscHoles) circle {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .pairingFoamRing,
+  .pairingPlateRing,
+  .detailFrame img,
+  .productCard,
+  .buttonPrimary,
+  .buttonSecondary,
+  .hardnessOption,
+  .pairingButton {
+    transition: none;
+  }
+
+  .detailFrame img {
+    transform: none;
+  }
+
+  .detailFrame:hover img {
+    transform: none;
+  }
+
+  .productCard:hover {
+    transform: none;
+  }
+}

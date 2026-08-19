@@ -116,7 +116,8 @@ function programTarget(programSlug: string, label: string): CarfitCatalogTarget 
 }
 
 export const carfitHero = {
-  eyebrow: "C.A.R.FIT · PROFESIONALNI REFINISH MATERIJAL",
+  // Wordmark nosi originalni logo asset u hero-u, pa ga eyebrow ne ponavlja.
+  eyebrow: "Profesionalni refinish materijal",
   title: "Sve što svakodnevni posao traži.",
   lead:
     "Od maskiranja i pripreme površine do bezbojnog laka i završnog poliranja — Car Fit donosi praktične proizvode za poslove koji se svakodnevno ponavljaju u radionici.",
@@ -140,6 +141,7 @@ export const carfitHero = {
 
 export const carfitNav: CarfitNavItem[] = [
   { id: "pregled", label: "Pregled" },
+  { id: "kategorije", label: "Kategorije" },
   { id: "poslovi", label: "Poslovi" },
   { id: "program", label: "Program" },
   { id: "proizvodi", label: "Proizvodi" },

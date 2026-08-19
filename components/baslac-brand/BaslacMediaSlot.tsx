@@ -14,10 +14,6 @@ type BaslacMediaSlotProps = {
   priority?: boolean;
 };
 
-function getFilename(src: string) {
-  return src.split("/").at(-1) ?? src;
-}
-
 export function BaslacMediaSlot({
   availability,
   className,
@@ -60,12 +56,13 @@ export function BaslacMediaSlot({
           />
         </picture>
       ) : (
-        <div className={styles.mediaPlaceholder}>
-          <span>IMAGE SLOT</span>
-          <strong>{getFilename(media.desktopSrc)}</strong>
-          {media.mobileSrc ? (
-            <small>mobile: {getFilename(media.mobileSrc)}</small>
-          ) : null}
+        <div
+          className={styles.mediaPlaceholder}
+          role="img"
+          aria-label={`Fotografija za ${media.section} još nije dostupna`}
+        >
+          <span className={styles.mediaPlaceholderMark}>baslac</span>
+          <strong>Fotografija u pripremi</strong>
         </div>
       )}
       <figcaption>{media.section}</figcaption>

@@ -101,6 +101,13 @@ export const PUTTY_MATERIAL_TRACE_REVEAL_END = 1455;
  */
 export const PUTTY_MATERIAL_TRACE_REVEAL_SPLINE = "0.25 0.1 0.35 1";
 
-/** Trajanje i odlaganje povlačenja. Jednom, bez loopa i bez povratka. */
+/** Trajanje povlačenja. Jednom, bez loopa i bez povratka. */
 export const PUTTY_MATERIAL_TRACE_REVEAL_DURATION_MS = 1180;
-export const PUTTY_MATERIAL_TRACE_REVEAL_DELAY_MS = 100;
+
+/**
+ * Čekanje pre početka povlačenja, mereno od trenutka kada su OBA rastera u
+ * kešu — to je jedini signal spremnosti koji panel ima. Glavni stage nema
+ * pojam „aktivnog slajda": `activeIndex` u `ProductStickyStage` bira sliku u
+ * galeriji, a sam panel je uvek aktivan, pa nova slider logika nije uvedena.
+ */
+export const PUTTY_MATERIAL_TRACE_REVEAL_DELAY_MS = 600;

@@ -5,6 +5,7 @@ import {
   PUTTY_MATERIAL_TRACE_ASPECT,
   PUTTY_MATERIAL_TRACE_ASSETS,
   PUTTY_MATERIAL_TRACE_CANVAS,
+  PUTTY_MATERIAL_TRACE_REVEAL_DELAY_MS,
   PUTTY_MATERIAL_TRACE_REVEAL_DURATION_MS,
   PUTTY_MATERIAL_TRACE_REVEAL_END,
   PUTTY_MATERIAL_TRACE_REVEAL_PATH,
@@ -85,7 +86,15 @@ export function PuttyMaterialTrace() {
       );
       return;
     }
-    animateRef.current?.beginElement();
+    /*
+     * Kratka pauza pre poteza. Ranije je konstanta postojala ali se nigde nije
+     * primenjivala, pa je povlačenje kretalo istog trenutka.
+     */
+    const timer = window.setTimeout(() => {
+      animateRef.current?.beginElement();
+    }, PUTTY_MATERIAL_TRACE_REVEAL_DELAY_MS);
+
+    return () => window.clearTimeout(timer);
   }, [isReady]);
 
   return (

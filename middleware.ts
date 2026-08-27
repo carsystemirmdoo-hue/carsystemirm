@@ -66,7 +66,14 @@ function isPortalPublicRoute(pathname: string) {
 
 /** Prijava je javna i mora zaobići i režim održavanja javnog sajta. */
 function isLoginRoute(pathname: string) {
-  return pathname === LOGIN_ROUTE;
+  /*
+   * Cela grana `/prijava`, ne samo tačna adresa.
+   *
+   * `/prijava/reset` otvara čovek koji ne može da uđe. Da je pokriven režimom
+   * održavanja, ostao bi zaključan napolju baš onda kada mu je oporavak
+   * najpotrebniji.
+   */
+  return pathname === LOGIN_ROUTE || pathname.startsWith(`${LOGIN_ROUTE}/`);
 }
 
 function shouldNoindexQuery(request: NextRequest) {

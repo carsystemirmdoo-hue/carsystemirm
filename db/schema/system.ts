@@ -19,10 +19,21 @@ export const auditLog = pgTable(
   "audit_log",
   {
     id: bigserial("id", { mode: "number" }).primaryKey(),
+    /*
+     * `restrict`, ne `set null`.
+     *
+     * Nad ovom tabelom stoji okidač koji zabranjuje `UPDATE`. Sa `set null`
+     * brisanje korisnika bi pokrenulo izmenu koju okidač odbija — pa bi model
+     * protivrečio sam sebi, a poruka o grešci pokazivala na okidač umesto na
+     * uzrok.
+     *
+     * Odluka je da se trag ne menja: korisnik koji u njemu figurira se NE briše.
+     * Za prestanak rada postoje deaktivacija i reaktivacija.
+     */
     actorUserId: uuid("actor_user_id").references(() => users.id, {
-      onDelete: "set null",
+      onDelete: "restrict",
     }),
-    /** Ime i uloga u trenutku radnje — ostaje čitljivo i ako korisnik kasnije bude obrisan. */
+    /** Ime i uloga u trenutku radnje — ostaje čitljivo i posle deaktivacije naloga. */
     actorLabel: text("actor_label").notNull(),
     action: text("action").notNull(),
     entityType: text("entity_type").notNull(),
@@ -47,8 +58,10 @@ export const auditLog = pgTable(
 export const systemSettings = pgTable("system_settings", {
   key: text("key").primaryKey(),
   value: jsonb("value").notNull(),
+  // „Ko je promenio prag" ne sme da ispari brisanjem naloga — isti razlog kao
+  // kod traga revizije.
   updatedBy: uuid("updated_by").references(() => users.id, {
-    onDelete: "set null",
+    onDelete: "restrict",
   }),
   updatedAt: timestamp("updated_at", { withTimezone: true })
     .notNull()

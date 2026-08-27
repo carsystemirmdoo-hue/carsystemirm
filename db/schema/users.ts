@@ -34,6 +34,15 @@ export const users = pgTable(
     role: userRole("role").notNull(),
     active: boolean("active").notNull().default(true),
     failedLoginAttempts: integer("failed_login_attempts").notNull().default(0),
+    /**
+     * Brojač koji obesmišljava sve ranije izdate tokene ovog korisnika.
+     *
+     * Odjava briše kolačić u tom pregledaču, ali ukraden JWT ostaje važeći do
+     * isteka od osam sati — Auth.js ga ne poništava. Povećanjem ove vrednosti
+     * svaka postojeća sesija pada pri sledećem zahtevu, jer se broj u tokenu
+     * više ne poklapa sa brojem u bazi. Vidi `lib/authz/user-repository.ts`.
+     */
+    sessionVersion: integer("session_version").notNull().default(0),
     lockedUntil: timestamp("locked_until", { withTimezone: true }),
     lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true })

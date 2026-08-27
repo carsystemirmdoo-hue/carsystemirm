@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import {
+  noStoreHeaders,
+  NO_STORE_PATHS,
+  securityHeaders,
+} from "./lib/security/http-headers.mjs";
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
@@ -19,6 +24,31 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      {
+        /*
+         * Bezbednosna zaglavlja za sve rute.
+         *
+         * Politika je podeljena na deo koji je na snazi i deo koji samo
+         * prijavljuje prekršaje — vidi `lib/security/http-headers.mjs` za
+         * razlog. Ništa ovde ne zahteva dinamičko renderovanje, pa statička
+         * generacija ostaje netaknuta.
+         */
+        source: "/:path*",
+        headers: securityHeaders({
+          VERCEL_ENV: process.env.VERCEL_ENV,
+          NODE_ENV: process.env.NODE_ENV,
+        }),
+      },
+      /*
+       * Osetljive rute nikad u keš.
+       *
+       * Ide POSLE opšteg pravila da bi se `Cache-Control` primenio na te
+       * putanje; Next spaja zaglavlja iz svih pravila koja se poklope.
+       */
+      ...NO_STORE_PATHS.map((source) => ({
+        source,
+        headers: noStoreHeaders(),
+      })),
       {
         source: "/documents/products/rm/:path*",
         headers: [

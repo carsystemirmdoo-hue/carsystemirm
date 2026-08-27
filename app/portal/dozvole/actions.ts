@@ -1,7 +1,7 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getDb } from "@/db/client";
@@ -11,6 +11,12 @@ import { hashPassword } from "@/lib/auth/password.mjs";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { PACKAGE_KEYS, ROLE_LABELS } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
+import {
+  removesActiveOwner,
+  requireSecurityAdmin,
+  SecurityActionError,
+  withOwnerGuard,
+} from "@/lib/authz/security-admin";
 
 export type AdminActionState = { error: string | null; ok: string | null };
 
@@ -25,6 +31,8 @@ const roleSchema = z.object({
   userId: z.string().uuid(),
   role: z.enum(userRole.enumValues),
   reason: z.string().trim().min(3).max(500),
+  // Promena uloge je visokorizična radnja: vidi `changeRoleAction`.
+  token: z.string().trim().min(6).max(8),
 });
 
 /**
@@ -201,55 +209,119 @@ export async function createUserAction(
   return { error: null, ok: `Nalog ${email} je otvoren.` };
 }
 
-/** Menja osnovnu ulogu korisnika. Uloga „Menadžer“ ne postoji u modelu. */
+/**
+ * Menja osnovnu ulogu korisnika. Uloga „Menadžer“ ne postoji u modelu.
+ *
+ * Ide kroz istu kapiju kao reset lozinke i poništavanje faktora — puna sesija,
+ * sposobnost za bezbednost naloga i **svež kod iz aplikacije**.
+ *
+ * Razlog: promena uloge je jedan od načina da se preuzme ili obori tuđ pristup.
+ * Prebacivanje poslednjeg vlasnika u drugu ulogu nikoga ne isključuje, ali
+ * ostavlja firmu bez upravljanja nalozima; dodela uloge „gazda“ radi suprotno.
+ * Kapija je ista, pa se pravila ne mogu razići.
+ */
 export async function changeRoleAction(
   _previous: AdminActionState,
   formData: FormData,
 ): Promise<AdminActionState> {
-  const actor = await requireCapability("users:manage", "/portal/dozvole");
-
   const parsed = roleSchema.safeParse({
     userId: formData.get("userId"),
     role: formData.get("role"),
     reason: formData.get("reason") ?? "",
+    token: formData.get("token") ?? "",
   });
   if (!parsed.success) {
-    return { error: "Razlog izmene je obavezan (najmanje 3 znaka).", ok: null };
+    return {
+      error: "Unesite razlog (najmanje 3 znaka) i kod iz aplikacije.",
+      ok: null,
+    };
+  }
+
+  let actor;
+  try {
+    actor = await requireSecurityAdmin(parsed.data.token);
+  } catch (error) {
+    if (error instanceof SecurityActionError) {
+      return { error: error.message, ok: null };
+    }
+    throw error;
   }
 
   const { userId, role, reason } = parsed.data;
   const db = getDb();
   const target = await db
-    .select({ id: users.id, name: users.name, role: users.role })
+    .select({
+      id: users.id,
+      name: users.name,
+      role: users.role,
+      active: users.active,
+    })
     .from(users)
     .where(eq(users.id, userId))
     .limit(1);
   if (target.length === 0) return { error: "Korisnik ne postoji.", ok: null };
-  if (target[0].role === role) return { error: null, ok: "Uloga je nepromenjena." };
+  if (target[0].role === role)
+    return { error: null, ok: "Uloga je nepromenjena." };
 
   const correlationId = randomUUID();
 
-  await db.transaction(async (tx) => {
-    await tx
-      .update(users)
-      .set({ role, updatedAt: new Date() })
-      .where(eq(users.id, userId));
-
-    await recordAudit(
+  /*
+   * Promena uloge je jedan od puteva koji mogu ostaviti sistem bez vlasnika.
+   *
+   * Deaktivacija je očigledan put; ovaj je podmukliji — poslednji „gazda"
+   * prebačen u „komercijalista" nikoga ne isključuje, ali niko više ne može da
+   * upravlja nalozima. Zato ide kroz istu bravu, a ne kroz sopstvenu proveru:
+   * dva puta ka istoj posledici moraju deliti istu zaštitu.
+   */
+  try {
+    await withOwnerGuard(
       {
-        actor: { id: actor.id, name: actor.name, role: actor.role },
-        action: AUDIT_ACTIONS.roleChanged,
-        entityType: "Korisnik",
-        entityId: userId,
-        entityLabel: target[0].name,
-        before: { uloga: ROLE_LABELS[target[0].role] },
-        after: { uloga: ROLE_LABELS[role] },
-        reason,
-        correlationId,
+        targetId: userId,
+        removesOwner: removesActiveOwner(target[0], { nextRole: role }),
       },
-      tx,
+      async (tx) => {
+        await tx
+          .update(users)
+          .set({
+            role,
+            /*
+             * Promena uloge poništava sve otvorene sesije tog korisnika.
+             *
+             * Same dozvole bi se promenile i bez ovoga — čitaju se iz baze pri
+             * svakom zahtevu. Opoziv je tu zbog onoga što se ne vidi iz dozvola:
+             * ako je uloga menjana zato što je nalog kompromitovan ili je čovek
+             * promenio posao, token u tuđim rukama ne sme da preživi tu odluku.
+             *
+             * Kolona se povećava u istoj transakciji kao i uloga, pa ne postoji
+             * trenutak u kome je uloga nova a sesija stara.
+             */
+            sessionVersion: sql`${users.sessionVersion} + 1`,
+            updatedAt: new Date(),
+          })
+          .where(eq(users.id, userId));
+
+        await recordAudit(
+          {
+            actor: { id: actor.id, name: actor.name, role: actor.role },
+            action: AUDIT_ACTIONS.roleChanged,
+            entityType: "Korisnik",
+            entityId: userId,
+            entityLabel: target[0].name,
+            before: { uloga: ROLE_LABELS[target[0].role] },
+            after: { uloga: ROLE_LABELS[role] },
+            reason,
+            correlationId,
+          },
+          tx,
+        );
+      },
     );
-  });
+  } catch (error) {
+    if (error instanceof SecurityActionError) {
+      return { error: error.message, ok: null };
+    }
+    throw error;
+  }
 
   revalidatePath("/portal/dozvole");
   return {

@@ -6788,3 +6788,258 @@ body:has(.portal-login-root) {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 10px;
 }
+
+/* =========================================================================
+ * Bezbednost naloga — Faza 1B
+ *
+ * Ekrani se koriste retko i pod pritiskom (izgubljen telefon, kompromitovan
+ * nalog), pa je ovde čitljivost ispred gustine: velika meta za klik, jasan
+ * razmak između radnji različite težine i kodovi u fontu u kome se `0` i `O`
+ * razlikuju.
+ * ====================================================================== */
+
+.portal-account-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.portal-account-row {
+  width: 100%;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  border: 1px solid var(--portal-border, rgb(0 0 0 / 0.12));
+  border-radius: 0.6rem;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+}
+
+.portal-account-row:hover {
+  border-color: var(--portal-accent, currentColor);
+}
+
+.portal-account-row[aria-pressed="true"] {
+  border-color: var(--portal-accent, currentColor);
+  box-shadow: inset 0 0 0 1px var(--portal-accent, currentColor);
+}
+
+.portal-account-name {
+  font-weight: 600;
+}
+
+.portal-account-email,
+.portal-account-meta {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.portal-security-action {
+  margin-top: 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--portal-border, rgb(0 0 0 / 0.12));
+  border-radius: 0.6rem;
+}
+
+/* Radnje koje se ne opozivaju nose vidljivu razliku, ne samo drugu reč. */
+.portal-security-action[data-destructive="true"] {
+  border-color: var(--portal-danger, rgb(180 40 40 / 0.5));
+}
+
+.portal-security-action > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.portal-issued-code code {
+  display: block;
+  margin: 0.75rem 0;
+  padding: 0.85rem 1rem;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  word-break: break-all;
+  border-radius: 0.5rem;
+  background: var(--portal-surface-2, rgb(0 0 0 / 0.05));
+}
+
+.portal-form-ok {
+  color: var(--portal-success, rgb(20 120 60));
+  font-size: 0.9rem;
+}
+
+/*
+ * Okvir za sesiju koja sme samo na vezivanje drugog faktora.
+ *
+ * Namerno bez navigacije i bez ijedne poslovne komponente: korisnik na ovom
+ * ekranu nema portal pristup, pa ne treba da vidi ni obrise onoga što mu je
+ * zatvoreno.
+ */
+.portal-enrollment-frame {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 3.5rem) 1.25rem;
+}
+
+/* =========================================================================
+ * Bezbednosni ekrani — obrasci i jednokratni materijal
+ *
+ * Pisano posle prvog pravog browser prolaza, koji je pokazao da ekran za
+ * vezivanje drugog faktora nema nijedan stil: polja su bila nevidljiva, a
+ * rezervni kodovi zbijeni u red teksta. Klase su postojale u komponenti, ali
+ * nikada u ovom fajlu.
+ *
+ * Ovo nije kozmetika. Kroz ovaj ekran mora proći svaki zaposleni, jednom, pod
+ * pritiskom — a rezervne kodove mora moći da prepiše bez greške.
+ * ====================================================================== */
+
+/* Polja unutar panela dobijaju isti oblik kao na prijavi. */
+.portal-panel form {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  max-width: 32rem;
+}
+
+.portal-panel form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+}
+
+.portal-panel form input:not([type="checkbox"]),
+.portal-panel form select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--portal-border, rgb(0 0 0 / 0.18));
+  border-radius: 0.55rem;
+  background: var(--portal-surface, #fff);
+  color: inherit;
+  font: inherit;
+}
+
+.portal-panel form input:focus-visible,
+.portal-panel form select:focus-visible {
+  outline: 2px solid var(--portal-accent, #c8102e);
+  outline-offset: 1px;
+}
+
+.portal-panel form input[aria-invalid="true"] {
+  border-color: var(--portal-danger, #b42828);
+}
+
+.portal-panel form small {
+  font-size: 0.8rem;
+  opacity: 0.72;
+}
+
+.portal-panel form button {
+  margin-top: 1rem;
+  justify-self: start;
+}
+
+/*
+ * Ključ za vezivanje.
+ *
+ * Prikazuje se tačno jednom i prepisuje se rukom u aplikaciju na telefonu, pa
+ * mora biti u fontu u kome se `0` i `O` razlikuju, i dovoljno velik da se ne
+ * pogreši.
+ */
+.portal-mfa-key {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid var(--portal-border, rgb(0 0 0 / 0.12));
+  border-radius: 0.6rem;
+  background: var(--portal-surface-2, rgb(0 0 0 / 0.04));
+}
+
+.portal-mfa-key dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.portal-mfa-key dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.portal-mfa-key code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  word-break: break-all;
+}
+
+.portal-mfa-note {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: 0.75rem;
+}
+
+/*
+ * Rezervni kodovi.
+ *
+ * Dve kolone jer ih je deset: jedna kolona bi na mobilnom pravila predugu
+ * listu, a četiri bi na desktopu razbile red čitanja.
+ */
+.portal-recovery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid var(--portal-border, rgb(0 0 0 / 0.12));
+  border-radius: 0.6rem;
+  background: var(--portal-surface-2, rgb(0 0 0 / 0.04));
+  list-style-position: inside;
+}
+
+.portal-recovery-list code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.portal-recovery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.portal-recovery-confirm {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.25rem 0 0.5rem;
+  font-weight: 600;
+}
+
+.portal-recovery-confirm input {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.portal-mfa-regen {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--portal-border, rgb(0 0 0 / 0.12));
+}
+
+.portal-mfa-regen > summary {
+  cursor: pointer;
+  font-weight: 600;
+}

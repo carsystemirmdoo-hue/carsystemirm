@@ -27,6 +27,9 @@ export async function signInAction(
     await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
+      // Prazno polje se šalje kao prazan string; `authorize` ga tako i tretira.
+      // Vrednost NIKADA ne ide u adresu — ostaje u telu POST zahteva.
+      secondFactor: formData.get("secondFactor") ?? "",
       redirectTo: safeRedirect,
     });
     return { error: null };

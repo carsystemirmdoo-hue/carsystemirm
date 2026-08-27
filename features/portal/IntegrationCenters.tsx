@@ -6,7 +6,6 @@ import type { BexShipment, BizniSoftSyncRecord } from "@/types/portal";
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import { usePortal } from "@/components/portal/PortalProvider";
 import {
-  AccessGuard,
   Badge,
   BulkToolbar,
   formatCurrency,
@@ -21,6 +20,7 @@ import {
   statusTone,
   useDialogDismiss,
 } from "@/components/portal/PortalPrimitives";
+import { AccessGuard } from "@/features/portal/LegacyAccessGuard";
 
 export function BexCenter() {
   const {

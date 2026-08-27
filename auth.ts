@@ -5,18 +5,130 @@ import { z } from "zod";
 import { authConfig } from "./auth.config";
 import { getDb } from "./db/client";
 import { users } from "./db/schema";
-import { verifyPassword } from "./lib/auth/password.mjs";
+import {
+  ABSENT_USER_PASSWORD_RECORD,
+  verifyPassword,
+} from "./lib/auth/password.mjs";
+import {
+  resolveCredentialsLogin,
+  shouldCountFailedAttempt,
+} from "./lib/auth/credentials-login.mjs";
 import { AUDIT_ACTIONS, recordAudit } from "./lib/audit/record";
 import { findUserByEmail } from "./lib/authz/user-repository";
+import {
+  clearAccountAttempts,
+  isBucketBlocked,
+  registerAttempt,
+} from "./lib/auth/rate-limit-service";
+import { clientIpFromRequest } from "./lib/auth/client-ip";
+import {
+  ACCESS_DENIED,
+  ACCESS_FULL,
+  describeMfaMode,
+  mfaStateFrom,
+  resolveMfaMode,
+  resolvePortalAccess,
+  validateMfaConfiguration,
+} from "./lib/auth/mfa-policy.mjs";
+import { isMfaConfigured } from "./lib/auth/mfa-crypto.mjs";
+import { hasOpenEnrollmentGrant } from "./lib/auth/enrollment-grant";
+import { looksLikeRecoveryCode } from "./lib/auth/recovery-codes.mjs";
+import {
+  consumeRecoveryCode,
+  readMfaStatus,
+  verifyTotpForUser,
+} from "./lib/auth/mfa-service";
 
 const credentialsSchema = z.object({
   email: z.string().email().max(254),
   password: z.string().min(1).max(200),
+  // Jedno polje za oba oblika drugog faktora. Iz odgovora se nikad ne sme
+  // zaključiti koji je od njih korisnik uneo.
+  secondFactor: z.string().max(64).optional(),
 });
+
+/**
+ * Režim se razrešava i proverava na granici zahteva, ne pri uvozu modula.
+ *
+ * Pri uvozu bi provera pala tokom `next build`, kada promenljive okruženja
+ * najčešće ne postoje — a build 1.114 javnih statičkih strana ne sme da zavisi
+ * od podešavanja portala.
+ *
+ * Naziv režima se ispiše jednom po procesu. U dnevnik ide isključivo ime režima
+ * i okruženja; nijedan ključ, kod ni tajna.
+ */
+let mfaModeAnnounced = false;
+
+function resolveMfaRuntime() {
+  const resolved = resolveMfaMode(process.env);
+
+  if (!mfaModeAnnounced) {
+    mfaModeAnnounced = true;
+    const note = describeMfaMode(resolved);
+    if (note.level === "warn") console.warn(note.message);
+    else console.info(note.message);
+  }
+
+  const configuration = validateMfaConfiguration({
+    mode: resolved.mode,
+    mfaConfigured: isMfaConfigured(process.env),
+  });
+
+  return { ...resolved, configuration };
+}
 
 /** Posle ovoliko uzastopnih promašaja nalog se zaključava na kratko. */
 const MAX_FAILED_ATTEMPTS = 8;
 const LOCK_MINUTES = 15;
+
+/**
+ * Posledice neuspele lozinke: brojač, zaključavanje i audit.
+ *
+ * Izdvojeno iz `authorize` da bi redosled provera tamo ostao čitljiv.
+ */
+async function recordPasswordFailure(
+  user: { id: string; name: string; role: string; email: string; failedLoginAttempts: number; lockedUntil: Date | null },
+  reason: string,
+  rateLimited: boolean,
+) {
+  if (rateLimited) {
+    await recordAudit({
+      actor: { id: user.id, name: user.name, role: user.role },
+      action: AUDIT_ACTIONS.rateLimitBlocked,
+      entityType: "Korisnik",
+      entityId: user.id,
+      entityLabel: user.email,
+      reason: "Previše neuspelih pokušaja prijave",
+    });
+    return;
+  }
+
+  if (!shouldCountFailedAttempt(reason)) return;
+
+  const attempts = user.failedLoginAttempts + 1;
+  const shouldLock = attempts >= MAX_FAILED_ATTEMPTS;
+  await getDb()
+    .update(users)
+    .set({
+      failedLoginAttempts: attempts,
+      lockedUntil: shouldLock
+        ? new Date(Date.now() + LOCK_MINUTES * 60 * 1000)
+        : user.lockedUntil,
+      updatedAt: new Date(),
+    })
+    .where(eq(users.id, user.id));
+
+  await recordAudit({
+    actor: { id: user.id, name: user.name, role: user.role },
+    action: shouldLock ? AUDIT_ACTIONS.loginLocked : AUDIT_ACTIONS.loginFailed,
+    entityType: "Korisnik",
+    entityId: user.id,
+    entityLabel: user.email,
+    reason: shouldLock
+      ? `${attempts} uzastopnih neuspelih prijava — nalog zaključan ${LOCK_MINUTES} minuta`
+      : `Neuspeli pokušaj prijave (${attempts})`,
+  });
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -30,47 +142,159 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const parsed = credentialsSchema.safeParse(rawCredentials);
         if (!parsed.success) return null;
 
-        const email = parsed.data.email.trim().toLowerCase();
-        const user = await findUserByEmail(email);
+        const identifier = parsed.data.email.trim().toLowerCase();
+        const clientIp = await clientIpFromRequest();
 
-        // Svi neuspesi vraćaju isti rezultat: iz odgovora se ne sme zaključiti
-        // da li nalog postoji, da li je deaktiviran ili je lozinka pogrešna.
-        if (!user || !user.active) return null;
-
-        if (user.lockedUntil && user.lockedUntil > new Date()) return null;
-
-        const valid = await verifyPassword(parsed.data.password, user.passwordHash);
-        const db = getDb();
-
-        if (!valid) {
-          const attempts = user.failedLoginAttempts + 1;
-          const shouldLock = attempts >= MAX_FAILED_ATTEMPTS;
-          await db
-            .update(users)
-            .set({
-              failedLoginAttempts: attempts,
-              lockedUntil: shouldLock
-                ? new Date(Date.now() + LOCK_MINUTES * 60 * 1000)
-                : user.lockedUntil,
-              updatedAt: new Date(),
-            })
-            .where(eq(users.id, user.id));
-
-          await recordAudit({
-            actor: { id: user.id, name: user.name, role: user.role },
-            action: shouldLock
-              ? AUDIT_ACTIONS.loginLocked
-              : AUDIT_ACTIONS.loginFailed,
-            entityType: "Korisnik",
-            entityId: user.id,
-            entityLabel: user.email,
-            reason: shouldLock
-              ? `${attempts} uzastopnih neuspelih prijava — nalog zaključan ${LOCK_MINUTES} minuta`
-              : `Neuspeli pokušaj prijave (${attempts})`,
-          });
+        /*
+         * 1. Brojači se proveravaju PRE skupog posla.
+         *
+         * scrypt traje ~100 ms; kada je bucket već blokiran, taj rad je čist
+         * poklon napadaču. Zato se blokada gleda pre provere lozinke.
+         */
+        if (await isBucketBlocked({ scope: "password", accountIdentifier: identifier, clientIp })) {
           return null;
         }
 
+        /*
+         * 2. Odluka o lozinci — tačno jedna provera, i za nepostojeći nalog.
+         *    Vidi `lib/auth/credentials-login.mjs`.
+         */
+        const decision = await resolveCredentialsLogin({
+          email: parsed.data.email,
+          password: parsed.data.password,
+          loadUser: findUserByEmail,
+          verify: verifyPassword,
+          absentUserHash: ABSENT_USER_PASSWORD_RECORD,
+        });
+
+        const { outcome, reason, user } = decision;
+
+        // 3. Neuspeh lozinke se broji, bez obzira na to da li nalog postoji.
+        if (outcome === "denied") {
+          const limit = await registerAttempt({
+            scope: "password",
+            accountIdentifier: identifier,
+            clientIp,
+          });
+          if (!user) return null;
+          await recordPasswordFailure(user, reason, limit.allowed === false);
+          return null;
+        }
+
+        if (!user) return null;
+
+        /*
+         * 4. Drugi faktor.
+         *
+         * Odluku donosi ISKLJUČIVO `resolvePortalAccess`. Ovde se samo
+         * prikuplja stanje koje ta odluka traži — nijedna grana ispod ne sme
+         * sama zaključiti da korisnik sme unutra.
+         */
+        const { mode, environment, configuration } = resolveMfaRuntime();
+
+        /*
+         * Nepotpuna konfiguracija odbija prijavu, ne preskače MFA.
+         *
+         * `enroll` i `enforced` bez ključa znače da niko ne može ni da veže ni
+         * da potvrdi faktor. Propustiti takvu prijavu značilo bi da nedostatak
+         * ključa tiho ukida drugi faktor — tačno suprotno od namere režima.
+         */
+        if (!configuration.ok) {
+          console.error(configuration.reason);
+          return null;
+        }
+
+        const status = await readMfaStatus(user.id);
+        const submitted = parsed.data.secondFactor?.trim() ?? "";
+
+        let factor: "none" | "totp" | "recovery" = "none";
+
+        if (status.enabled) {
+          if (submitted === "") return null;
+
+          const scope = looksLikeRecoveryCode(submitted) ? "recovery" : "totp";
+          if (await isBucketBlocked({ scope, accountIdentifier: identifier, clientIp })) {
+            return null;
+          }
+
+          /*
+           * Rezervni kod se troši TEK OVDE — posle tačne lozinke. Napadač bez
+           * lozinke ne sme moći da iscrpi tuđe rezervne kodove.
+           */
+          const verified =
+            scope === "recovery"
+              ? await consumeRecoveryCode({ userId: user.id, code: submitted })
+              : await verifyTotpForUser({ userId: user.id, token: submitted });
+
+          if (!verified) {
+            const limit = await registerAttempt({
+              scope,
+              accountIdentifier: identifier,
+              clientIp,
+            });
+            if (!limit.allowed) {
+              await recordAudit({
+                actor: { id: user.id, name: user.name, role: user.role },
+                action: AUDIT_ACTIONS.mfaVerificationBlocked,
+                entityType: "Korisnik",
+                entityId: user.id,
+                entityLabel: user.email,
+                reason: "Previše neuspelih provera drugog faktora",
+              });
+            }
+            return null;
+          }
+
+          factor = scope === "recovery" ? "recovery" : "totp";
+
+          if (factor === "recovery") {
+            await recordAudit({
+              actor: { id: user.id, name: user.name, role: user.role },
+              action: AUDIT_ACTIONS.recoveryCodeUsed,
+              entityType: "Korisnik",
+              entityId: user.id,
+              entityLabel: user.email,
+              // Sam kod se NIKADA ne beleži.
+              reason: "Prijava rezervnim kodom umesto aplikacijom",
+            });
+          }
+        }
+
+        /*
+         * Dozvola za vezivanje se čita samo kada je odluka od nje zavisi.
+         *
+         * U režimu `enforced` bez aktivnog faktora, korisnik sme unutra samo ako
+         * ima važeću dozvolu — inače bi `enforced` bio slabiji od `enroll`, jer
+         * bi svako sa lozinkom mogao da veže svoj uređaj.
+         */
+        const grantAvailable =
+          mode === "enforced" && !status.enabled
+            ? await hasOpenEnrollmentGrant(user.id)
+            : false;
+
+        const accessDecision = resolvePortalAccess({
+          mode,
+          environment,
+          /*
+           * `resolveCredentialsLogin` već odbija isključen nalog, ali vrednost
+           * ide i ovde: politika mora videti pravo stanje, a ne tvrdnju pozivaoca.
+           * Dupla provera je jeftina; propušten isključen nalog nije.
+           */
+          accountActive: user.active,
+          mfaState: mfaStateFrom(status),
+          factor,
+          grantAvailable,
+        });
+
+        /*
+         * Odbijanje je tiho i generično.
+         *
+         * „Nemate dozvolu za vezivanje" reklo bi napadaču sa tačnom lozinkom da
+         * je pogodio nalog i da mu nedostaje samo još jedan korak.
+         */
+        if (accessDecision.access === ACCESS_DENIED) return null;
+
+        const db = getDb();
         await db
           .update(users)
           .set({
@@ -81,7 +305,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           })
           .where(eq(users.id, user.id));
 
-        return { id: user.id, name: user.name, email: user.email };
+        // 5. Tek posle KOMPLETNO uspešne prijave se čisti brojač po nalogu.
+        //    Brojač po adresi ostaje — vidi `clearAccountAttempts`.
+        await clearAccountAttempts("password", identifier);
+        if (status.enabled) {
+          await clearAccountAttempts(
+            factor === "recovery" ? "recovery" : "totp",
+            identifier,
+          );
+        }
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          sessionVersion: user.sessionVersion,
+          // Nivo potvrde dolazi iz odluke, ne iz lokalne promenljive: token ne
+          // sme tvrditi više nego što je politika priznala.
+          assurance: accessDecision.assurance,
+          mfaVerifiedAt: accessDecision.access === ACCESS_FULL && factor !== "none"
+            ? Date.now()
+            : null,
+        };
       },
     }),
   ],

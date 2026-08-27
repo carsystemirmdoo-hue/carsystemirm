@@ -15,7 +15,6 @@ import type { Product } from "@/types/portal";
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import { usePortal } from "@/components/portal/PortalProvider";
 import {
-  AccessGuard,
   Badge,
   BulkToolbar,
   Delta,
@@ -33,6 +32,7 @@ import {
   TinyBars,
   useDialogDismiss,
 } from "@/components/portal/PortalPrimitives";
+import { AccessGuard } from "@/features/portal/LegacyAccessGuard";
 
 export function ProductsAdmin() {
   const { role } = usePortal();

@@ -3,7 +3,10 @@ import { redirect } from "next/navigation";
 import { PortalLoginForm } from "@/features/portal/PortalLoginForm";
 import { landingRouteFor } from "@/lib/authz/permissions.mjs";
 import { resolvePostLoginTarget } from "@/lib/authz/redirects.mjs";
-import { getPortalUser } from "@/lib/authz/session";
+import {
+  loadAuthenticatedSession,
+  MFA_ENROLLMENT_ROUTE,
+} from "@/lib/authz/session";
 import "../portal/portal.css";
 
 export const metadata: Metadata = {
@@ -24,10 +27,20 @@ export default async function LoginPage({
   searchParams: Promise<{ callbackUrl?: string }>;
 }) {
   const { callbackUrl } = await searchParams;
-  const user = await getPortalUser();
+  const session = await loadAuthenticatedSession();
 
-  if (user) {
-    redirect(resolvePostLoginTarget(callbackUrl, landingRouteFor(user)));
+  /*
+   * Sesija samo za vezivanje ide pravo na vezivanje.
+   *
+   * Bez ovoga bi takav korisnik video obrazac za prijavu, uspešno se prijavio,
+   * dobio istu ograničenu sesiju i vratio se ovde — petlja bez objašnjenja.
+   */
+  if (session?.enrollmentOnly) redirect(MFA_ENROLLMENT_ROUTE);
+
+  if (session?.fullAccess) {
+    redirect(
+      resolvePostLoginTarget(callbackUrl, landingRouteFor(session.fullAccess)),
+    );
   }
 
   return <PortalLoginForm callbackUrl={callbackUrl ?? ""} />;

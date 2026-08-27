@@ -7,8 +7,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from "react";
-import type { DemoDataState, Permission } from "@/types/portal";
-import { can } from "@/permissions/portal-permissions";
+import type { DemoDataState } from "@/types/portal";
 import { usePortal } from "./PortalProvider";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
 
@@ -374,18 +373,6 @@ export function ModuleState({
       />
     </Panel>
   );
-}
-
-export function AccessGuard({
-  permission,
-  children,
-}: {
-  permission: Permission;
-  children: ReactNode;
-}) {
-  const { role } = usePortal();
-  if (!can(role, permission)) return <StateView state="permission" />;
-  return <>{children}</>;
 }
 
 export function TinyBars({

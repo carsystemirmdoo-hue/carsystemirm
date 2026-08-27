@@ -19,7 +19,6 @@ import type {
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import { usePortal } from "@/components/portal/PortalProvider";
 import {
-  AccessGuard,
   Badge,
   Delta,
   formatCurrency,
@@ -36,6 +35,7 @@ import {
   statusTone,
   useDialogDismiss,
 } from "@/components/portal/PortalPrimitives";
+import { AccessGuard } from "@/features/portal/LegacyAccessGuard";
 
 const priceTypeLabels: Record<PriceChangeType, string> = {
   fixed: "Fiksna cena",

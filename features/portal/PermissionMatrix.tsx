@@ -45,6 +45,15 @@ export function PermissionMatrix({
   // Razlog je uslov za svaku izmenu — bez njega trag revizije ne bi objasnio
   // zašto je pristup promenjen.
   const [reason, setReason] = useState("");
+  /*
+   * Promena uloge dodatno traži svež kod iz aplikacije.
+   *
+   * Dodela paketa i promena uloge nisu iste težine: paket širi pristup unutar
+   * postojeće uloge, a uloga menja ko sme da upravlja nalozima. Zato kod stoji
+   * uz obrazac za ulogu, a ne uz celu tabelu.
+   */
+  const [roleToken, setRoleToken] = useState("");
+  const roleTokenMissing = roleToken.trim().length < 6;
 
   const [createState, createAction, createPending] = useActionState(
     createUserAction,
@@ -140,8 +149,25 @@ export function PermissionMatrix({
               placeholder="npr. potreba za dubljom analizom prodaje"
             />
           </label>
+          <label>
+            <span>Kod iz aplikacije (samo za promenu uloge)</span>
+            <input
+              value={roleToken}
+              onChange={(event) => setRoleToken(event.target.value)}
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              maxLength={8}
+              placeholder="šestocifreni kod"
+            />
+          </label>
           {reasonMissing ? (
             <small>Unesite razlog pre nego što promenite dozvolu ili ulogu.</small>
+          ) : null}
+          {!reasonMissing && roleTokenMissing ? (
+            <small>
+              Promena uloge traži i svež kod iz vaše aplikacije za jednokratne
+              kodove. Dodela paketa ga ne traži.
+            </small>
           ) : null}
         </div>
       ) : null}
@@ -182,10 +208,11 @@ export function PermissionMatrix({
                     <form action={roleAction} className="portal-inline-form">
                       <input type="hidden" name="userId" value={user.id} />
                       <input type="hidden" name="reason" value={reason} />
+                      <input type="hidden" name="token" value={roleToken} />
                       <select
                         name="role"
                         defaultValue={user.role}
-                        disabled={pending || reasonMissing}
+                        disabled={pending || reasonMissing || roleTokenMissing}
                         aria-label={`Uloga korisnika ${user.name}`}
                       >
                         {ROLES.map((role) => (
@@ -196,11 +223,13 @@ export function PermissionMatrix({
                       </select>
                       <button
                         type="submit"
-                        disabled={pending || reasonMissing}
+                        disabled={pending || reasonMissing || roleTokenMissing}
                         title={
                           reasonMissing
                             ? "Prvo unesite razlog izmene"
-                            : "Sačuvaj ulogu"
+                            : roleTokenMissing
+                              ? "Unesite kod iz aplikacije"
+                              : "Sačuvaj ulogu"
                         }
                       >
                         Sačuvaj

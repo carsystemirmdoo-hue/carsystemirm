@@ -9,10 +9,26 @@ import {
   resolveCapabilities,
 } from "@/lib/authz/permissions.mjs";
 import {
+  isSessionVersionCurrent,
   loadAssignedCustomerIds,
   loadPortalUser,
   type PortalUser,
 } from "@/lib/authz/user-repository";
+import {
+  ASSURANCE_PASSWORD,
+  isMfaRecent,
+  isSecondFactorSatisfied,
+} from "@/lib/auth/session-assurance.mjs";
+import {
+  ACCESS_DENIED,
+  ACCESS_ENROLLMENT_ONLY,
+  ACCESS_FULL,
+  mfaStateFrom,
+  resolveMfaMode,
+  resolvePortalAccess,
+  type AccessLevel,
+} from "@/lib/auth/mfa-policy.mjs";
+import { hasOpenEnrollmentGrant } from "@/lib/auth/enrollment-grant";
 
 export type { PortalUser };
 
@@ -21,10 +37,145 @@ export type { PortalUser };
  * pozivu — token sesije nosi samo identitet.
  */
 export async function getPortalUser(): Promise<PortalUser | null> {
+  return (await loadAuthenticatedSession())?.fullAccess ?? null;
+}
+
+/**
+ * Sesija sa izričitim nivoom pristupa.
+ *
+ * `access` je izvor istine i ima tri vrednosti — `denied`, `enrollment-only`,
+ * `full`. Polja `fullAccess` i `enrollmentOnly` su izvedena iz njega, radi
+ * pozivalaca kojima treba sam korisnik.
+ *
+ * Zašto izričito, a ne „nema punog znači vezivanje"
+ * ------------------------------------------------
+ * Kada je nivo pristupa samo odsustvo nečega, dovoljna je jedna provera koja
+ * gleda pogrešno polje — ili jedan `if (user)` nad nepotpunim objektom — da
+ * neverifikovan korisnik prođe kao pun. Sa tri imenovane vrednosti takva
+ * greška ne izgleda kao ispravan kod.
+ */
+export type AuthenticatedSession = {
+  user: PortalUser;
+  /** Jedini izvor istine o nivou pristupa. */
+  access: AccessLevel;
+  assurance: string;
+  mfaVerifiedAt: number | null;
+  /** Izvedeno iz `access`; `null` kada pristup nije pun. */
+  fullAccess: PortalUser | null;
+  /** Izvedeno iz `access`; `null` kada sesija nije samo za vezivanje. */
+  enrollmentOnly: PortalUser | null;
+};
+
+export async function loadAuthenticatedSession(): Promise<AuthenticatedSession | null> {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) return null;
-  return loadPortalUser(userId);
+
+  const user = await loadPortalUser(userId);
+  if (!user) return null;
+
+  const assurance = session.user.assurance ?? ASSURANCE_PASSWORD;
+  const mfaVerifiedAt = session.user.mfaVerifiedAt ?? null;
+
+  /*
+   * Stanje MFA se čita iz BAZE, ne iz tokena: kada vlasnik poništi tuđi faktor,
+   * to mora delovati odmah, a ne tek pri sledećoj prijavi.
+   */
+  const { readMfaStatus } = await import("@/lib/auth/mfa-service");
+  const mfa = await readMfaStatus(user.id);
+  const mfaState = mfaStateFrom(mfa);
+
+  const { mode, environment } = resolveMfaMode(process.env);
+
+  // Dozvola se čita samo kada od nje zavisi odluka — vidi `resolvePortalAccess`.
+  const grantAvailable =
+    mode === "enforced" && mfaState !== "active"
+      ? await hasOpenEnrollmentGrant(user.id)
+      : false;
+
+  /*
+   * Ista funkcija koja je odlučivala pri prijavi odlučuje i ovde.
+   *
+   * Ranije su to bile dve odvojene grane, i za režim `enroll` su davale
+   * suprotne odgovore. Sada postoji jedan poziv — ako se pravilo promeni,
+   * promeni se na oba mesta istovremeno, jer je mesto jedno.
+   */
+  const decision = resolvePortalAccess({
+    mode,
+    environment,
+    accountActive: user.active,
+    sessionVersionCurrent: isSessionVersionCurrent(
+      session.user.sessionVersion,
+      user.sessionVersion,
+    ),
+    mfaState,
+    // Token nosi šta je potvrđeno; `isSecondFactorSatisfied` to prevodi u faktor.
+    factor: isSecondFactorSatisfied(assurance)
+      ? assurance === "recovery"
+        ? "recovery"
+        : "totp"
+      : "none",
+    grantAvailable,
+  });
+
+  if (decision.access === ACCESS_DENIED) return null;
+
+  return {
+    user,
+    access: decision.access,
+    assurance,
+    mfaVerifiedAt,
+    fullAccess: decision.access === ACCESS_FULL ? user : null,
+    enrollmentOnly: decision.access === ACCESS_ENROLLMENT_ONLY ? user : null,
+  };
+}
+
+/** Jedina ruta koja prima sesiju samo za vezivanje. */
+export const MFA_ENROLLMENT_ROUTE = "/portal/bezbednost/mfa";
+
+/**
+ * Korisnik koji sme samo na vezivanje drugog faktora.
+ *
+ * Pun korisnik takođe sme na taj ekran — tamo menja uređaj i izdaje nove
+ * rezervne kodove.
+ */
+export async function requireEnrollmentUser(): Promise<PortalUser> {
+  const session = await loadAuthenticatedSession();
+  const user = session?.fullAccess ?? session?.enrollmentOnly;
+  if (!user) redirect(loginUrlFor(MFA_ENROLLMENT_ROUTE));
+  return user;
+}
+
+/**
+ * Korisnik sa punim portal pristupom.
+ *
+ * Enrollment-only sesija se NE odbija na prijavu nego šalje na vezivanje.
+ * Slanje na prijavu bi bila petlja: korisnik se uspešno prijavi, dobije istu
+ * ograničenu sesiju i vrati se na isti ekran, bez ijednog objašnjenja šta od
+ * njega traže.
+ *
+ * Odbijanje ostaje odbijanje: nijedna portal ruta ne renderuje sadržaj takvoj
+ * sesiji, bez obzira na to kuda je preusmerena.
+ */
+export async function requireFullPortalUser(callbackPath?: string): Promise<PortalUser> {
+  const session = await loadAuthenticatedSession();
+  if (session?.fullAccess) return session.fullAccess;
+  if (session?.enrollmentOnly) redirect(MFA_ENROLLMENT_ROUTE);
+  redirect(loginUrlFor(callbackPath));
+}
+
+/**
+ * Osetljiva radnja traži SVEŽU potvrdu drugog faktora.
+ *
+ * Sesija traje osam sati; brisanje naloga ili promena tuđe lozinke ne smeju
+ * proći na osnovu potvrde od jutros.
+ */
+export async function requireRecentMfa(): Promise<PortalUser> {
+  const session = await loadAuthenticatedSession();
+  if (!session?.fullAccess) forbidden();
+  if (!isSecondFactorSatisfied(session.assurance)) forbidden();
+  if (!isMfaRecent(session.mfaVerifiedAt)) forbidden();
+  return session.fullAccess;
 }
 
 /**
@@ -32,10 +183,8 @@ export async function getPortalUser(): Promise<PortalUser | null> {
  * putanjom na koju se vraća posle uspešne prijave.
  */
 export async function requireUser(callbackPath?: string): Promise<PortalUser> {
-  const user = await getPortalUser();
-  if (user) return user;
-
-  redirect(loginUrlFor(callbackPath));
+  // Isti put kao `requireFullPortalUser`: jedno pravilo, jedno ponašanje.
+  return requireFullPortalUser(callbackPath);
 }
 
 /**

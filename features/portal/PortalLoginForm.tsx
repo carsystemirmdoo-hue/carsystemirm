@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import Link from "next/link";
+import { useActionState, useId } from "react";
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import { signInAction, type LoginState } from "@/app/portal/actions";
 import { CALLBACK_PARAM } from "@/lib/authz/redirects.mjs";
@@ -9,6 +10,7 @@ const INITIAL: LoginState = { error: null };
 
 export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
   const [state, formAction, pending] = useActionState(signInAction, INITIAL);
+  const secondFactorHintId = useId();
 
   return (
     <main className="portal-login-root">
@@ -93,6 +95,34 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             </div>
           </label>
 
+          {/*
+            * Jedno polje za oba oblika drugog faktora.
+            *
+            * Namerno je uvek vidljivo i uvek opciono: kada bi se prikazivalo
+            * tek pošto server potvrdi lozinku, sam prikaz bi odao da nalog
+            * postoji i da ima MFA. Pomoćni tekst je neutralan iz istog razloga.
+            */}
+          <label className="portal-login-field">
+            <span>Kod iz autentikator aplikacije ili rezervni kod</span>
+            <div>
+              <PortalIcon name="lock" />
+              <input
+                type="text"
+                name="secondFactor"
+                // `one-time-code` daje predlog iz SMS/authenticator-a na mobilnom;
+                // `off` bi značio da menadžer lozinki pokuša da ga zapamti.
+                autoComplete="one-time-code"
+                inputMode="text"
+                maxLength={64}
+                aria-describedby={secondFactorHintId}
+                aria-invalid={Boolean(state.error)}
+              />
+            </div>
+            <small id={secondFactorHintId} className="portal-login-hint">
+              Popunite samo ako je za vaš nalog uključena dvofaktorska prijava.
+            </small>
+          </label>
+
           {state.error ? (
             <div className="portal-login-error" role="alert">
               <PortalIcon name="warning" />
@@ -116,10 +146,16 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             {pending ? "Provera pristupa…" : "Prijavi se"}
           </button>
 
+          {/* Ikona i tekst su zasebne stavke u flex redu; bez omotača bi svaki
+              odlomak teksta oko linka postao svoja kolona i poruka bi se
+              rasula u tri stupca. */}
           <p className="portal-login-note">
             <PortalIcon name="lock" />
-            Zaboravljenu lozinku za sada resetuje Gazda. Posle više uzastopnih
-            pogrešnih pokušaja nalog se privremeno zaključava.
+            <span>
+              Zaboravljenu lozinku menjate kodom koji izdaje Gazda —{" "}
+              <Link href="/prijava/reset">unesite kod ovde</Link>. Posle više
+              uzastopnih pogrešnih pokušaja nalog se privremeno zaključava.
+            </span>
           </p>
         </form>
       </section>

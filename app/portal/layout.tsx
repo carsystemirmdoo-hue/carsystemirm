@@ -7,7 +7,9 @@ import {
   SIDEBAR_PREFERENCE_KEY,
 } from "@/components/portal/sidebarState.mjs";
 import { navGroupsFor, ROLE_LABELS } from "@/lib/authz/permissions.mjs";
-import { requireUser } from "@/lib/authz/session";
+import { loadAuthenticatedSession } from "@/lib/authz/session";
+import { loginUrlFor } from "@/lib/authz/redirects.mjs";
+import { redirect } from "next/navigation";
 import { readUserPreference } from "@/lib/authz/user-repository";
 import { signOutAction } from "./actions";
 import "./portal.css";
@@ -27,8 +29,26 @@ export default async function PortalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Prijava je van /portal, pa svaka ruta ovde zahteva prijavljenog korisnika.
-  const user = await requireUser();
+  const session = await loadAuthenticatedSession();
+  if (!session) redirect(loginUrlFor());
+
+  /*
+   * Sesija samo za vezivanje dobija okvir BEZ portala.
+   *
+   * Ekran za vezivanje živi pod `/portal`, pa bi layout koji traži pun pristup
+   * zaključao korisnika napolju: preusmerio bi ga na vezivanje, a vezivanje je
+   * iza istog layouta. Zato ovde postoji drugi, prazan okvir.
+   *
+   * Prazan je namerno — bez navigacije i bez ijedne poslovne komponente. Ono
+   * što se ne montira ne može ni da procuri, a stranice ionako svaka za sebe
+   * odbijaju ovakvu sesiju.
+   */
+  if (session.enrollmentOnly) {
+    return <main className="portal-enrollment-frame">{children}</main>;
+  }
+
+  const user = session.fullAccess;
+  if (!user) redirect(loginUrlFor());
 
   const cookieStore = await cookies();
   const cookieState = cookieStore.get(SIDEBAR_COOKIE)?.value;

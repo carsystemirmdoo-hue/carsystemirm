@@ -738,56 +738,20 @@
   position: absolute;
   inset: -12% -25%;
   z-index: 5;
-  background:
-    linear-gradient(
-      104deg,
-      var(--rm-red-deep) 0 18%,
-      var(--rm-red) 18% 76%,
-      oklch(0.66 0.225 29) 76%
-    );
+  background: linear-gradient(
+    104deg,
+    var(--campaign-transition-from, #05090c) 0 30%,
+    color-mix(
+        in oklab,
+        var(--campaign-transition-from, #05090c),
+        var(--campaign-transition-to, #1b2430)
+      )
+      30% 62%,
+    var(--campaign-transition-to, #1b2430) 62%
+  );
   pointer-events: none;
   opacity: 0;
   transform: translate3d(-130%, 0, 0) skewX(-14deg);
-}
-
-.campaignStage[data-wipe-theme="agilis-performance"] .campaignWipe {
-  background:
-    linear-gradient(
-      104deg,
-      oklch(0.09 0.02 245) 0 22%,
-      oklch(0.2 0.05 226) 22% 76%,
-      var(--rm-spectrum) 76%
-    );
-}
-
-.campaignStage[data-wipe-theme="agilis-color"] .campaignWipe {
-  background:
-    linear-gradient(
-      104deg,
-      oklch(0.15 0.04 45) 0 20%,
-      oklch(0.48 0.15 57) 20% 78%,
-      oklch(0.79 0.16 72) 78%
-    );
-}
-
-.campaignStage[data-wipe-theme="esense"] .campaignWipe {
-  background:
-    linear-gradient(
-      104deg,
-      var(--rm-red) 0 18%,
-      var(--rm-agilis-surface) 18% 78%,
-      oklch(0.74 0.17 132) 78%
-    );
-}
-
-.campaignStage[data-wipe-theme="refinity"] .campaignWipe {
-  background:
-    linear-gradient(
-      103deg,
-      oklch(0.08 0.018 250) 0 18%,
-      oklch(0.19 0.052 235) 18% 74%,
-      oklch(0.72 0.2 306) 74%
-    );
 }
 
 .campaignStage[data-direction="previous"] .campaignWipe {
@@ -913,28 +877,10 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--rm-red);
+  background: var(--campaign-progress-color, currentColor);
   transform: scaleX(0);
   transform-origin: left center;
   will-change: transform;
-}
-
-.campaignStage[data-active-slide="agilis-performance"]
-  .campaignPaginationTrack
-  i {
-  background: oklch(0.92 0.09 157);
-}
-
-.campaignStage[data-active-slide="agilis-color"] .campaignPaginationTrack i {
-  background: oklch(0.84 0.17 78);
-}
-
-.campaignStage[data-active-slide="refinity"] .campaignPaginationTrack i {
-  background: oklch(0.83 0.17 218);
-}
-
-.campaignStage[data-active-slide="esense"] .campaignPaginationTrack i {
-  background: oklch(0.65 0.19 133);
 }
 
 .campaignPagination button[aria-pressed="true"] {

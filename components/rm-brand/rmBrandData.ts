@@ -12,6 +12,14 @@ export type RmCampaignVisual =
   | "esense";
 
 export type RmCampaignSlideData = {
+  /**
+   * Statička paleta tranzicije. Definiše se ručno po kampanji — slike se ne
+   * uzorkuju dinamički u browseru.
+   */
+  transitionFrom: string;
+  transitionTo: string;
+  progressColor: string;
+  controlTheme: "on-dark" | "on-light";
   contentAlign: "left" | "right";
   desktopImage: string;
   id: string;
@@ -137,6 +145,10 @@ export function rmCatalogHref({
 export const rmCampaignSlides: RmCampaignSlideData[] = [
   {
     id: "agilis-performance",
+    transitionFrom: "#06140f",
+    transitionTo: "#1f7a52",
+    progressColor: "#8ee06a",
+    controlTheme: "on-dark",
     contentAlign: "left",
     desktopImage:
       "/images/brands/rm/campaign/rm-hero-agilis-performance-desktop.webp",
@@ -167,6 +179,10 @@ export const rmCampaignSlides: RmCampaignSlideData[] = [
   },
   {
     id: "agilis-color",
+    transitionFrom: "#170b04",
+    transitionTo: "#b5541a",
+    progressColor: "#f0a03c",
+    controlTheme: "on-dark",
     contentAlign: "left",
     desktopImage:
       "/images/brands/rm/campaign/rm-hero-agilis-color-desktop.webp",
@@ -196,6 +212,10 @@ export const rmCampaignSlides: RmCampaignSlideData[] = [
   },
   {
     id: "refinity",
+    transitionFrom: "#070d1c",
+    transitionTo: "#2b2f8f",
+    progressColor: "#7b5cf0",
+    controlTheme: "on-dark",
     contentAlign: "left",
     desktopImage: "/images/brands/rm/campaign/rm-hero-refinity-desktop.webp",
     mobileImage: "/images/brands/rm/campaign/rm-hero-refinity-mobile.webp",
@@ -224,6 +244,10 @@ export const rmCampaignSlides: RmCampaignSlideData[] = [
   },
   {
     id: "esense",
+    transitionFrom: "#f3f5ec",
+    transitionTo: "#8fbf3f",
+    progressColor: "#5aa61e",
+    controlTheme: "on-light",
     contentAlign: "left",
     desktopImage: "/images/brands/rm/campaign/rm-hero-esense-desktop.webp",
     mobileImage: "/images/brands/rm/campaign/rm-hero-esense-mobile.webp",

@@ -274,8 +274,16 @@ export function productJsonLd(
   family?: ProductFamily,
 ) {
   const url = absoluteUrl(`/proizvodi/${product.slug}`);
+  /*
+   * `placeholder-product` je sistemski „vizuel u pripremi" prikaz, ne slika
+   * proizvoda. `ProductVisualSurface` ga već tretira kao odsustvo slike; ovde
+   * se izostavlja iz istog razloga — `Product.image` mora da pokazuje na
+   * stvarnu sliku proizvoda ili da ga uopšte nema. Ispravljeno 2026-08-20 dok
+   * je SATA stranica bila prvi slučaj koji je to izneo na videlo.
+   */
   const images = [product.productImage, ...product.galleryImages]
     .filter((image): image is NonNullable<typeof image> => Boolean(image))
+    .filter((image) => !image.src.includes("placeholder-product"))
     .map((image) => absoluteUrl(image.src))
     .filter((image, index, all) => all.indexOf(image) === index);
   const additionalProperty = visibleProductFacts(product).map((fact) => ({

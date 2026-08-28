@@ -339,12 +339,18 @@ export const brands: CarsystemBrand[] = [
     name: "SATA",
     logo: "/brands/sata.svg",
     description:
-      "Oprema za profesionalno nanošenje materijala u lakirnici, sa fokusom na kontrolu i ponovljiv rezultat.",
+      "Pištolji, cup sistemi, priprema komprimovanog vazduha i merenje pritiska — oprema kojom se materijal nanosi.",
     overview:
-      "SATA je deo programa za profesionalne pištolje, opremu i kontrolisano nanošenje materijala u refinish procesu.",
+      "SATA (Kornwestheim, Nemačka) proizvodi opremu za mokro nanošenje premaza, ne premaze. Program pokriva pištolje za završni sloj, prajmere i punila, male površine i rad pod pritiskom, cup sisteme, filtraciju vazduha, respiratornu zaštitu i digitalno merenje pritiska.",
     programSlugs: ["oprema"],
     catalogOrder: 8,
     presentation: {
+      /*
+       * `#E2001A` je boja SATA logotipa, potvrđena iz `public/brands/sata.svg`.
+       * Namenska stranica koristi plavu kao ownership signal — to je naša UI
+       * odluka i živi u `components/brand/sata/SataBrandPage.module.css`, ne
+       * ovde, jer zvanični SATA HEX za plavu nije verifikovan.
+       */
       accentColor: "#E2001A",
       accentContrastColor: "#FFFFFF",
       accentOnDarkColor: "#E2001A",
@@ -907,51 +913,64 @@ const legacyProducts: CarsystemProduct[] = [
     ],
   },
   {
+    /*
+     * SATAjet X 5500 — jedini SATA artikal evidentiran u našem online katalogu.
+     * Evidencija NIJE potvrda prodaje, zaliha ni komercijalnog statusa;
+     * komercijalni status za SATA nije potvrđen (docs/SATA_RESEARCH.md §5).
+     *
+     * Očišćeno 2026-08-20. Uklonjeni su: placeholder slika i galerija (proizvod
+     * sada koristi sistemski „nema slike" prikaz, isto kao Norbin 5 L), lažni
+     * link na `placeholder-tds.pdf` i specifikacije koje nisu bile podatak nego
+     * popuna. Ostale su samo tvrdnje potvrđene na zvaničnoj SATA stranici
+     * porodice — vidi `docs/SATA_RESEARCH.md` §3, art. 1061564.
+     *
+     * `sku` ostaje interna kataloška referenca, ista konvencija kao kod svih
+     * ostalih proizvoda. To NIJE SATA artikl-broj — SATA broji artikle po
+     * konfiguraciji (tehnologija × mlaz × veličina mlaznice × čaša) i njeni
+     * brojevi se ne mogu izvesti iz naziva porodice.
+     */
     slug: "satajet-x-5500",
     name: "SATAjet X 5500",
     brandSlug: "sata",
     programSlug: "oprema",
     phaseSlug: "boja",
     shortDescription:
-      "Profesionalni pištolj za lakiranje za kontrolisano nanošenje materijala.",
+      "Premium pištolj sa X-nozzle sistemom, za bazne boje i lakove.",
     longDescription:
-      "SATAjet X 5500 je predstavljen kao profesionalna oprema koja se povezuje sa fazama boje i laka. Stranica omogućava prikaz ključnih parametara opreme bez javnog naručivanja.",
+      "SATAjet X 5500 je premium gravitacioni pištolj sa X-nozzle sistemom, koji nudi izbor između I i O mlaznice u RP i u HVLP tehnologiji. Whisper mlaznice imaju optimizovanu geometriju toka koja, prema proizvođaču, smanjuje nivo buke. Konkretna konfiguracija — tehnologija, oznaka mlaza i veličina mlaznice — bira se prema materijalu i vazduhu u radionici i potvrđuje se kroz upit.",
     sku: "SATA-X5500",
-    packages: [
-      { label: "Pištolj" },
-      { label: "Set dizni", detail: "Konfiguracija po upitu" },
-    ],
-    purpose: "Nanošenje baznih boja i lakova u profesionalnoj lakirnici",
-    badges: ["Oprema", "Lakiranje", "Na upit"],
+    /*
+     * Nemamo nijednu SATA fotografiju sa potvrđenim pravom korišćenja.
+     * Ovo NIJE lažni packshot: `ProductVisualSurface` prepoznaje
+     * `placeholder-product` i renderuje svoje „Vizuel u pripremi" stanje.
+     * Ista konvencija koju koristi svaki proizvod bez slike (npr. Norbin 5 L);
+     * `productImage: null` bi promašio metrics lookup i pomerio prikaz.
+     */
     productImage: {
       src: placeholderProductImage,
-      alt: "SATAjet X 5500, ilustrativni prikaz proizvoda",
+      alt: "SATAjet X 5500 — vizuel u pripremi",
     },
-    galleryImages: [
-      {
-        src: placeholderProductImage,
-        alt: "SATAjet X 5500, detalj proizvoda",
-      },
+    galleryImages: [],
+    packages: [
+      { label: "Konfiguracija po upitu", detail: "RP ili HVLP, mlaz I ili O" },
     ],
+    purpose: "Nanošenje baznih boja i lakova u profesionalnoj lakirnici",
+    badges: ["Oprema", "X-nozzle", "Na upit"],
     specifications: [
-      { label: "Nanošenje", value: "Bazne boje i lakovi, prema konfiguraciji" },
-      { label: "Površina", value: "Radionički refinish proces" },
-      { label: "Potrošnja", value: "Zavisi od podešavanja i materijala" },
-      { label: "Dokumentacija", value: "Model i konfiguracija se potvrđuju kroz upit" },
+      { label: "Tip", value: "Gravitacioni pištolj za završni sloj" },
+      { label: "Tehnologija", value: "RP ili HVLP" },
+      { label: "Mlaz", value: "I za kontrolu, O za brzinu nanošenja" },
+      { label: "Ulazni pritisak", value: "0,5 – 2,4 bar" },
+      { label: "Preporučeno rastojanje", value: "17 – 21 cm" },
+      { label: "Čaša", value: "RPS, QCC priključak bez adaptera" },
+      { label: "Dostupnost", value: "Konfiguracija i dostupnost se potvrđuju kroz upit" },
     ],
     documents: [
       {
-        title: "Tehnički list",
+        title: "Tehnička dokumentacija",
         kind: "PDF",
         status: "disabled",
-        note: "Povezuje se sa tačnim modelom",
-      },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        href: "/documents/placeholder-tds.pdf",
-        status: "placeholder",
-        note: "Dokument se potvrđuje kroz upit",
+        note: "Uputstvo i deklaracija se vode po tačnom artiklu na sata.com",
       },
     ],
     relatedProductSlugs: [
@@ -962,7 +981,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "SATAjet X 5500",
     seoDescription:
-      "SATAjet X 5500 u katalogu Carsystem i R-M Inđija, sa upitom i povezanim refinish proizvodima.",
+      "SATAjet X 5500 — premium pištolj sa X-nozzle sistemom, RP ili HVLP, mlaz I ili O. Konfiguracija i dostupnost na upit kod Carsystem i R-M Inđija.",
   },
   {
     slug: "car-fit-prajmer",

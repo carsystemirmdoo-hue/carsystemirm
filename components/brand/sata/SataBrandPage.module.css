@@ -1,0 +1,1272 @@
+/*
+ * SATA brend stranica — vizuelni sistem.
+ *
+ * Direction B (digital system) sa SATA ownership slojem. Pravila:
+ *
+ *  - SATA plava nosi vlasništvo stranice. To je NAŠA UI aproksimacija; zvanični
+ *    SATA brand HEX za plavu nije verifikovan (vidi docs/SATA_RESEARCH.md §6).
+ *    Crvena `#E2001A` ostaje boja logotipa u podacima brenda i namerno se ovde
+ *    ne koristi kao dekoracija.
+ *  - Carsystem crvena se ne pojavljuje — na ovoj stranici nema stanja koje bi
+ *    je opravdalo kao action marker.
+ *  - Radijusi su 1–2 px. Nema velikih zaobljenih SaaS kartica.
+ *  - Nema gradijenata osim jednog vrlo tihog polja u hero-u koje razdvaja
+ *    hero od sekcija; nema dekoracije koja ne nosi informaciju.
+ *  - Sve fotografije bi bile SATA vlasništvo bez potvrđenih prava, pa ih nema.
+ *    Vizuelni teret nose tipografija, brojevi i SVG dijagrami.
+ *
+ * Motion: samo prelazi na hover/fokus i jedan opcioni view-timeline ulaz koji
+ * je progresivno poboljšanje. Sadržaj je vidljiv i bez ijedne animacije.
+ */
+
+.page {
+  /* Ownership */
+  --sata-blue: #0a4a8f;
+  --sata-blue-deep: #06264a;
+  --sata-blue-bright: #2e86d6;
+
+  /* Površine */
+  --sata-ink: #0d1117;
+  --sata-paper: #f4f6f8;
+  --sata-paper-raised: #ffffff;
+  --sata-void: #071624;
+  --sata-chalk: #e8eef4;
+
+  /* Linije — sistemski jezik stranice je linija, ne senka. */
+  --sata-line: rgb(13 17 23 / 0.14);
+  --sata-line-strong: rgb(13 17 23 / 0.26);
+  --sata-line-dark: rgb(232 238 244 / 0.16);
+
+  --sata-muted: #4d5765;
+  --sata-muted-dark: rgb(232 238 244 / 0.66);
+
+  --sata-gutter: clamp(1.25rem, 4vw, 4rem);
+  --sata-shell: min(100%, 94rem);
+  --sata-radius: 2px;
+
+  /* Vrednosti koje čita zajednički BrandSectionNav. */
+  --brand-nav-surface: rgb(244 246 248 / 0.94);
+  --brand-nav-border: var(--sata-line);
+  --brand-nav-ink: var(--sata-ink);
+  --brand-nav-accent: var(--sata-blue);
+
+  background: var(--sata-paper);
+  color: var(--sata-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  /* Nijedan potomak ne sme da probije širinu dokumenta. */
+  overflow-x: clip;
+}
+
+/* Deljeni globalni footer nasleđuje tipografiju iz shell-a na svakoj drugoj
+   ruti; ovaj page root ne postavlja font za footer da ne bi ispao iz sistema. */
+.page :global(.cs-animated-footer) {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* ----------------------------------------------------------- Tipografija */
+
+.eyebrow {
+  margin: 0;
+  color: var(--sata-blue);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mono {
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Oznaka mlaznice u tekućem tekstu ne sme da se prelomi između slova i zagrade. */
+.nozzleLead .mono {
+  white-space: nowrap;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ Breadcrumb */
+
+.breadcrumb {
+  width: var(--sata-shell);
+  margin-inline: auto;
+  padding: 1.25rem var(--sata-gutter) 0;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--sata-muted);
+  font-size: 0.75rem;
+}
+
+.breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover,
+.breadcrumb a:focus-visible {
+  color: var(--sata-blue);
+  text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+  opacity: 0.45;
+}
+
+/* ----------------------------------------------------------------- HERO */
+
+.hero {
+  position: relative;
+  margin-top: 1rem;
+  padding-block: clamp(2.5rem, 7vw, 6rem);
+  background: var(--sata-void);
+  color: var(--sata-chalk);
+  isolation: isolate;
+}
+
+/* Jedino obojeno polje na stranici. Nosi vlasništvo brenda, ništa drugo. */
+.hero::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: radial-gradient(
+    62% 78% at 78% 22%,
+    color-mix(in srgb, var(--sata-blue) 46%, transparent) 0%,
+    transparent 68%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  width: var(--sata-shell);
+  margin-inline: auto;
+  padding-inline: var(--sata-gutter);
+}
+
+@media (min-width: 64rem) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: start;
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(3.5rem, 13vw, 9rem);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.heroLead {
+  max-width: min(46ch, 100%);
+  margin: 0;
+  font-size: clamp(1.0625rem, 1.7vw, 1.375rem);
+  line-height: 1.42;
+}
+
+.heroBody {
+  max-width: min(52ch, 100%);
+  margin: 0;
+  color: var(--sata-muted-dark);
+  font-size: clamp(0.9375rem, 1.1vw, 1rem);
+  line-height: 1.6;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* ------------------------------------------------------------------ CTA */
+
+.ctaPrimary,
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* 44 px minimalna dodirna površina na svim širinama. */
+  min-height: 2.75rem;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: var(--sata-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.ctaPrimary {
+  background: var(--sata-blue-bright);
+  color: #04121f;
+}
+
+.ctaPrimary:hover,
+.ctaPrimary:focus-visible {
+  background: #55a3e6;
+}
+
+.ctaSecondary {
+  border-color: currentColor;
+  color: inherit;
+}
+
+.ctaSecondary:hover,
+.ctaSecondary:focus-visible {
+  border-color: var(--sata-blue-bright);
+  color: var(--sata-blue-bright);
+}
+
+/* Na svetloj podlozi primarni CTA nosi punu plavu. */
+.localCta .ctaPrimary {
+  background: var(--sata-blue);
+  color: #ffffff;
+}
+
+.localCta .ctaPrimary:hover,
+.localCta .ctaPrimary:focus-visible {
+  background: var(--sata-blue-deep);
+}
+
+.localCta .ctaSecondary {
+  border-color: var(--sata-line-strong);
+  color: var(--sata-ink);
+}
+
+.localCta .ctaSecondary:hover,
+.localCta .ctaSecondary:focus-visible {
+  border-color: var(--sata-blue);
+  color: var(--sata-blue);
+}
+
+/* -------------------------------------------------------- Hero readouts */
+
+.heroVisual {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--sata-line-dark);
+  border-radius: var(--sata-radius);
+  background: rgb(4 12 20 / 0.42);
+}
+
+.readouts {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.readout {
+  display: grid;
+  gap: 0.15rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--sata-line-dark);
+}
+
+.readout:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.readoutLabel {
+  color: var(--sata-muted-dark);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.readoutValue {
+  margin: 0;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.readoutScope {
+  margin: 0;
+  color: var(--sata-muted-dark);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  /* Duga oznaka artikla ne sme da razvuče grid. */
+  overflow-wrap: anywhere;
+}
+
+.readoutFoot {
+  margin: 0;
+  color: var(--sata-muted-dark);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+}
+
+.traceSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.traceTarget {
+  stroke: var(--sata-blue-bright);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+}
+
+.traceLimit {
+  stroke: rgb(232 238 244 / 0.22);
+  stroke-width: 1;
+}
+
+.traceActual {
+  stroke: var(--sata-chalk);
+  stroke-linecap: round;
+  stroke-width: 1.6;
+}
+
+/* ------------------------------------------------------------- Sekcije */
+
+.section,
+.systemSection,
+.techSection,
+.localSection {
+  width: var(--sata-shell);
+  margin-inline: auto;
+  padding: clamp(3rem, 7vw, 5.5rem) var(--sata-gutter);
+  /* Sticky header + sticky sekcijska navigacija. */
+  scroll-margin-top: calc(
+    var(--brand-section-header-offset, 0px) + var(--brand-section-nav-height, 0px)
+  );
+}
+
+.systemSection,
+.techSection {
+  width: 100%;
+  max-width: none;
+}
+
+.systemSection {
+  background: var(--sata-ink);
+  color: var(--sata-chalk);
+}
+
+.techSection {
+  background: var(--sata-paper-raised);
+  border-block: 1px solid var(--sata-line);
+}
+
+.systemSection > *,
+.techSection > * {
+  width: var(--sata-shell);
+  margin-inline: auto;
+}
+
+.systemSection .eyebrow {
+  color: var(--sata-blue-bright);
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.sectionTitle {
+  max-width: min(24ch, 100%);
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.75rem, 4.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.sectionLead {
+  max-width: min(58ch, 100%);
+  margin: 0;
+  color: var(--sata-muted);
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  line-height: 1.6;
+}
+
+.systemSection .sectionLead {
+  color: var(--sata-muted-dark);
+}
+
+/* ------------------------------------------------------------- 02 Zašto */
+
+.argumentList {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--sata-line);
+  background: var(--sata-line);
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .argumentList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 80rem) {
+  .argumentList {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.argument {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  background: var(--sata-paper-raised);
+}
+
+.argumentIndex {
+  margin: 0;
+  color: var(--sata-blue);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.argumentTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.argumentBody {
+  margin: 0;
+  color: var(--sata-muted);
+  font-size: 0.9375rem;
+  line-height: 1.58;
+}
+
+.argumentEvidence {
+  margin: 0.25rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--sata-line);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------ 03 Sistem */
+
+.chain {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--sata-line-dark);
+  background: var(--sata-line-dark);
+  list-style: none;
+}
+
+@media (min-width: 48rem) {
+  .chain {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 80rem) {
+  .chain {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.chainStage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  background: var(--sata-ink);
+}
+
+.chainStep {
+  margin: 0;
+  color: var(--sata-blue-bright);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.chainTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.18;
+}
+
+.chainBody {
+  margin: 0;
+  color: var(--sata-muted-dark);
+  font-size: 0.9375rem;
+  line-height: 1.58;
+}
+
+.chainParts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chainParts li {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--sata-line-dark);
+  border-radius: var(--sata-radius);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.chainDiagram {
+  margin-top: 0.75rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--sata-line-dark);
+}
+
+.filterSvg {
+  display: block;
+  width: 100%;
+  max-width: 17rem;
+  height: auto;
+}
+
+.filterCell {
+  fill: none;
+  stroke: var(--sata-line-dark);
+  stroke-width: 1;
+}
+
+.filterMesh {
+  stroke: var(--sata-blue-bright);
+  stroke-width: 0.75;
+  opacity: 0.7;
+}
+
+.filterIndex {
+  fill: var(--sata-blue-bright);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.filterLimit {
+  fill: var(--sata-muted-dark);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 9px;
+}
+
+.filterFlow {
+  stroke: var(--sata-line-dark);
+  stroke-width: 1;
+}
+
+.chainDiagramNote {
+  margin: 0.6rem 0 0;
+  color: var(--sata-muted-dark);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------- 04 Program */
+
+.scopeNotice {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+  padding: clamp(0.9rem, 2vw, 1.15rem) clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid var(--sata-line-strong);
+  border-left: 3px solid var(--sata-blue);
+  border-radius: var(--sata-radius);
+  background: var(--sata-paper-raised);
+  font-size: 0.9375rem;
+  line-height: 1.58;
+}
+
+.scopeNotice strong {
+  font-weight: 700;
+}
+
+.familyGrid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--sata-line);
+  background: var(--sata-line);
+}
+
+@media (min-width: 48rem) {
+  .familyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 80rem) {
+  .familyGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.familyGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  background: var(--sata-paper-raised);
+}
+
+.familyGroupTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+.familyGroupBody {
+  margin: 0;
+  color: var(--sata-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.familyList {
+  display: grid;
+  gap: 0;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.familyItem {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--sata-line);
+}
+
+.familyName {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.familyTag {
+  padding: 0.1rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--sata-blue) 40%, transparent);
+  border-radius: var(--sata-radius);
+  color: var(--sata-blue);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.familyRole {
+  margin: 0.2rem 0 0;
+  color: var(--sata-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------- 05 Tehnologija */
+
+.techGrid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+@media (min-width: 60rem) {
+  .techGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.techColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 2.6vw, 2rem);
+  border: 1px solid var(--sata-line);
+  border-radius: var(--sata-radius);
+  background: var(--sata-paper);
+}
+
+/* Aktuelna referenca dobija jaču ivicu — jedina hijerarhijska razlika. */
+.techColumn[data-lead] {
+  border-color: color-mix(in srgb, var(--sata-blue) 55%, transparent);
+  border-top-width: 3px;
+}
+
+.techStanding {
+  margin: 0;
+  color: var(--sata-blue);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.techName {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.techLead {
+  max-width: min(48ch, 100%);
+  margin: 0;
+  color: var(--sata-muted);
+  font-size: 0.9375rem;
+  line-height: 1.58;
+}
+
+.techFeatures {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.techFeatures li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.techFeatures li::before {
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--sata-blue);
+  content: "";
+}
+
+.techSpecs {
+  display: grid;
+  gap: 0;
+  margin: 0.85rem 0 0;
+  border-top: 1px solid var(--sata-line);
+}
+
+.techSpecRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--sata-line);
+}
+
+.techSpecRow dt {
+  color: var(--sata-muted);
+  font-size: 0.8125rem;
+}
+
+.techSpecRow dd {
+  margin: 0;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.techScope {
+  margin: 0.5rem 0 0;
+  color: var(--sata-muted);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------- 05b Mlaznice */
+
+.nozzleBlock {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  border-top: 1px solid var(--sata-line);
+}
+
+.nozzleTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.25rem, 2.6vw, 1.625rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.nozzleLead {
+  max-width: min(60ch, 100%);
+  margin: 0.5rem 0 0;
+  color: var(--sata-muted);
+  font-size: 0.9375rem;
+  line-height: 1.58;
+}
+
+.nozzleGrid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+}
+
+@media (min-width: 48rem) {
+  .nozzleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.nozzle {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  align-items: start;
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  border: 1px solid var(--sata-line);
+  border-radius: var(--sata-radius);
+  background: var(--sata-paper);
+}
+
+.fanSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fanOuter {
+  fill: color-mix(in srgb, var(--sata-blue) 10%, transparent);
+  stroke: color-mix(in srgb, var(--sata-blue) 45%, transparent);
+  stroke-dasharray: 3 3;
+  stroke-width: 1;
+}
+
+.fanCore {
+  fill: color-mix(in srgb, var(--sata-blue) 42%, transparent);
+}
+
+.fanCore[data-dry] {
+  fill: color-mix(in srgb, var(--sata-blue) 26%, transparent);
+}
+
+.fanAxis {
+  stroke: var(--sata-line-strong);
+  stroke-dasharray: 2 4;
+  stroke-width: 1;
+}
+
+.nozzleLetter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.nozzleName {
+  color: var(--sata-blue);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nozzleBody {
+  margin: 0.5rem 0 0;
+  color: var(--sata-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* ------------------------------------------------------------- 06 Izbor */
+
+.selectorList {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--sata-line);
+  background: var(--sata-line);
+  list-style: none;
+}
+
+.selectorRow {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  background: var(--sata-paper-raised);
+}
+
+@media (min-width: 64rem) {
+  .selectorRow {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.1fr);
+    gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+}
+
+.selectorTask {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.selectorMeta {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  min-width: 0;
+}
+
+@media (min-width: 48rem) {
+  .selectorMeta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.75rem);
+  }
+}
+
+.selectorMeta > div {
+  min-width: 0;
+}
+
+.selectorMeta dt {
+  color: var(--sata-muted);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.selectorMeta dd {
+  margin: 0.3rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------ 07 Servis */
+
+.serviceGrid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--sata-line);
+  background: var(--sata-line);
+}
+
+@media (min-width: 60rem) {
+  .serviceGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.serviceCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  background: var(--sata-paper-raised);
+}
+
+.serviceTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.serviceBody {
+  flex: 1;
+  margin: 0;
+  color: var(--sata-muted);
+  font-size: 0.875rem;
+  line-height: 1.58;
+}
+
+.serviceLink {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 2.75rem;
+  color: var(--sata-blue);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.serviceLink:hover,
+.serviceLink:focus-visible {
+  text-decoration: underline;
+}
+
+.serviceNote {
+  margin: clamp(1.25rem, 3vw, 1.75rem) 0 0;
+  color: var(--sata-muted);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.serviceNote a {
+  color: var(--sata-blue);
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------- 08 Kod nas */
+
+.localSection {
+  border-top: 1px solid var(--sata-line);
+}
+
+.localLead {
+  max-width: min(64ch, 100%);
+  margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+  line-height: 1.6;
+}
+
+/*
+ * Katalog trenutno ima jednu potvrđenu SATA stavku, pa se sekcija ne pravi da
+ * je red kartica. Kartice stoje levo, a desno stoji objašnjenje zašto ih je
+ * toliko malo. Kada ih bude više, `auto-fill` popunjava levu kolonu bez
+ * promene layouta.
+ */
+.localBody {
+  display: grid;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
+}
+
+@media (min-width: 64rem) {
+  .localBody {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+}
+
+.localGrid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  min-width: 0;
+}
+
+.localAside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: clamp(1.15rem, 2.4vw, 1.75rem);
+  border: 1px solid var(--sata-line);
+  border-left: 3px solid var(--sata-line-strong);
+  border-radius: var(--sata-radius);
+  background: var(--sata-paper-raised);
+}
+
+.localAsideTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.localAsideBody {
+  margin: 0;
+  color: var(--sata-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.localCount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.localCountValue {
+  color: var(--sata-blue);
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.localCta {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  border: 1px solid var(--sata-line-strong);
+  border-top: 3px solid var(--sata-blue);
+  border-radius: var(--sata-radius);
+  background: var(--sata-paper-raised);
+}
+
+@media (min-width: 64rem) {
+  .localCta {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+    align-items: center;
+  }
+}
+
+.localCtaTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.localCtaBody {
+  max-width: min(56ch, 100%);
+  margin: 0.5rem 0 0;
+  color: var(--sata-muted);
+  font-size: 0.9375rem;
+  line-height: 1.58;
+}
+
+.localCtaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* --------------------------------------------------------------- Fokus */
+
+.page a:focus-visible,
+.page button:focus-visible {
+  outline: 2px solid var(--sata-blue-bright);
+  outline-offset: 3px;
+}
+
+.hero a:focus-visible {
+  outline-color: #ffffff;
+}
+
+/* --------------------------------------------------------------- Motion */
+
+/*
+ * Jedini ulazni motion na stranici. `animation-timeline: view()` je progresivno
+ * poboljšanje — bez podrške sadržaj je već na finalnoj vrednosti, jer se
+ * `@starting-style` ne koristi i početno stanje živi samo unutar keyframe-a.
+ * Nema scroll listenera, nema IntersectionObservera, nema layout thrashinga.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .argument,
+    .chainStage,
+    .familyGroup,
+    .techColumn,
+    .selectorRow,
+    .serviceCard {
+      animation: sata-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 26%;
+    }
+  }
+}
+
+/* Početna vrednost je namerno visoka: element koji još nije ušao u viewport
+   mora da se čita kao sadržaj, a ne kao onemogućen element. */
+@keyframes sata-rise {
+  from {
+    opacity: 0.62;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page *,
+  .page *::before,
+  .page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

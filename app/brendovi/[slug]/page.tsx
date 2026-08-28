@@ -9,8 +9,10 @@ import { CarsystemBrandPage } from "@/components/carsystem-brand/CarsystemBrandP
 import { carsystemSeo } from "@/components/carsystem-brand/carsystemBrandData";
 import { NorbinBrandPage } from "@/components/norbin-brand/NorbinBrandPage";
 import { RmBrandPage } from "@/components/rm-brand/RmBrandPage";
+import { SataBrandPage } from "@/components/brand/sata/SataBrandPage";
 import { BEFAR_BRAND_SLUG } from "@/lib/befar-brand-data";
 import { CARFIT_BRAND_SLUG } from "@/lib/carfit-brand-data";
+import { SATA_BRAND_SLUG, sataSeo } from "@/lib/sata-brand-data";
 import {
   getAllCarsystemBrands,
   getCarsystemBrandBySlug,
@@ -53,6 +55,10 @@ export async function generateMetadata({
       path: `/brendovi/${brand.slug}`,
       imageAlt: `${brand.name} program za svakodnevni rad u radionici`,
     });
+  }
+
+  if (brand.slug === SATA_BRAND_SLUG) {
+    return buildPageMetadata(sataSeo);
   }
 
   if (brand.slug === BEFAR_BRAND_SLUG) {
@@ -112,6 +118,8 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
         <CarfitBrandPage brand={brand} />
       ) : brand.slug === "cosmos-lac" ? (
         <CosmosBrandPage brand={brand} products={products} />
+      ) : brand.slug === SATA_BRAND_SLUG ? (
+        <SataBrandPage brand={brand} products={products} />
       ) : brand.slug === BEFAR_BRAND_SLUG ? (
         <BefarBrandPage brand={brand} products={products} />
       ) : (

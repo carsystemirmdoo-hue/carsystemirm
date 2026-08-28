@@ -778,13 +778,24 @@
 /*
  * Without a real render there is no content box to fit, so the placeholder card
  * keeps the plain percentage box it always had.
+ *
+ * FIX 2026-08-20: ovde je stajalo `transform: none`, što je gasilo i centrirajući
+ * translate — a `.objectWrap` je i dalje `position: absolute; top: 49%; left: 50%`.
+ * Posledica: placeholder je počinjao na sredini površine i bio odsečen desno svuda
+ * gde površina nije kvadratna (kartica u gridu). Prvi put vidljivo na SATA brend
+ * stranici, koja je prva koja renderuje proizvod bez slike kroz `CatalogProductCard`.
+ * Bez fit podataka su `offset-*` = 0 i `fill-*` = 1, pa se izraz svodi na
+ * `translate(-50%, -50%)` — tačno centriranje, bez ijedne animirane komponente.
  */
 .surface[data-product-visual-real-image="false"] .objectWrap {
   width: min(82%, 318px);
   aspect-ratio: auto;
   height: 84%;
   min-height: 132px;
-  transform: none;
+  transform: translate(
+    calc((var(--product-content-offset-x) + var(--product-content-fill-x) / 2) * -100%),
+    calc((var(--product-content-offset-y) + var(--product-content-fill-y) / 2) * -100%)
+  );
 }
 
 /*
@@ -1134,9 +1145,12 @@
       ) !important;
   }
 
-  .surface[data-product-visual-real-image="false"] .objectWrap {
-    transform: none !important;
-  }
+  /*
+   * Isti razlog kao gore: reduced motion sklanja tilt i settle, ali centriranje
+   * mora ostati. Placeholder deli generički `.objectWrap` translate iz ovog
+   * bloka, pa mu ovde ne treba zaseban override — pravilo je uklonjeno
+   * 2026-08-20 zajedno sa `transform: none` u osnovnom bloku.
+   */
 
   .surface[data-product-visual-mode="color-on-hover"][data-product-visual-state="active"]
     .colorReveal {

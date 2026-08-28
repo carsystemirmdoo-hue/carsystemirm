@@ -24,7 +24,9 @@ import {
   productGroupJsonLd,
 } from "@/lib/seo";
 import { buildProductFamilyMetadata } from "@/lib/seo/metadata-builders";
+import { BaslacSystemPdp } from "@/components/baslac-brand/BaslacSystemPdp";
 import { ProductDetailPage } from "@/components/product/ProductDetailPage";
+import { baslacSystemFamilies } from "@/lib/baslac-catalog-products";
 import styles from "@/components/catalog/CatalogPage.module.css";
 
 type FamilyRouteProps = {
@@ -51,6 +53,9 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
   if (!family) notFound();
 
   const brand = getCarsystemBrandBySlug(family.brandSlug);
+  const baslacSystem = baslacSystemFamilies.find(
+    (entry) => entry.baseProductSlug === family.slug,
+  );
   const products = family.variants.map(toCatalogListingEntity);
   const route = `/proizvodi/grupa/${family.slug}`;
   const breadcrumbs = [
@@ -60,15 +65,39 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
     { name: family.name, path: route },
   ];
 
-  /*
-   * `variant-pdp` porodice SU proizvod.
-   *
-   * Njihove varijante se razlikuju samo po boji, pakovanju ili izvedbi, pa je
-   * family adresa ujedno i stranica proizvoda. Genericki group hero, CTA
-   * kartica i mreza kartica se za njih uopste ne renderuju — ne skrivaju se
-   * CSS-om, nego se ne montiraju.
-   */
+  const variationLabel = family.variesBy.includes("color")
+    ? "nijansi i varijanti"
+    : "varijanti";
+
+  // `variant-pdp` porodice SU proizvod. Generički group hero, CTA kartica i
+  // mreža kartica se za njih uopšte ne renderuju — ne skrivaju se CSS-om.
   if (family.presentation === "variant-pdp") {
+    if (baslacSystem) {
+      return (
+        <div className={styles.catalogShell}>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd(breadcrumbs))}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={jsonLd(productGroupJsonLd(family))}
+          />
+          <main className={styles.main}>
+            <SeoBreadcrumbs items={breadcrumbs} />
+            <BaslacSystemPdp
+              familyName={family.name}
+              intro={baslacSystem.intro}
+              system={baslacSystem.system}
+              systemName={baslacSystem.name}
+            />
+          </main>
+          <Footer />
+        </div>
+      );
+    }
+
+    // Ostale variant porodice koriste postojeći product-detail sloj.
     const representative = family.representative;
     const productBrand = getCarsystemBrandBySlug(representative.brandSlug);
     const productProgram = getProgramGroupBySlug(representative.programSlug);
@@ -96,10 +125,6 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
     );
   }
 
-  const variationLabel = family.variesBy.includes("color")
-    ? "nijansi i varijanti"
-    : "varijanti";
-
   return (
     <div className={styles.catalogShell}>
       <script
@@ -119,10 +144,9 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
               {family.name}
             </h1>
             <p className={styles.subtitle}>
-              {family.variants.length} {variationLabel} unutar iste grupe
-              proizvoda. Sve varijante dele istu namenu, a razlikuju se po{" "}
-              {family.variesBy.includes("color") ? "nijansi" : "izvedbi"} i
-              oznaci.
+              {baslacSystem
+                ? `${family.variants.length} dostupnih baza. Izaberite bazu desno, podesite količinu i dodajte je u listu za upit.`
+                : `${family.variants.length} ${variationLabel} unutar iste grupe proizvoda. Sve varijante dele istu namenu, a razlikuju se po ${family.variesBy.includes("color") ? "nijansi" : "izvedbi"} i oznaci.`}
             </p>
           </div>
           <div className={styles.heroTools}>
@@ -139,12 +163,23 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
             ) : null}
           </div>
         </section>
-        <CatalogStaticProductGrid
-          brands={getAllCarsystemBrands()}
-          phases={refinishPhases}
-          entities={products}
-          programs={programGroups}
-        />
+        {baslacSystem ? (
+          // Baslac sistemi su pravi PDP odmah — bez međukoraka i bez
+          // ponovnog biranja istog sistema.
+          <BaslacSystemPdp
+            familyName={family.name}
+            intro={baslacSystem.intro}
+            system={baslacSystem.system}
+            systemName={baslacSystem.name}
+          />
+        ) : (
+          <CatalogStaticProductGrid
+            brands={getAllCarsystemBrands()}
+            phases={refinishPhases}
+            entities={products}
+            programs={programGroups}
+          />
+        )}
       </main>
       <Footer />
     </div>

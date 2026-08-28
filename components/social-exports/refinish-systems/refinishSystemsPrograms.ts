@@ -57,6 +57,9 @@ export const programCategories: ProgramCategory[] = [
 export const brandSlugByKey: Partial<Record<BrandKey, string>> = {
   rm: "rm",
   carsystem: "carsystem",
+  // Vrednost je SLUG, ne prikazna labela. Poredi se strogo (`===`) sa
+  // `product.brandSlug` i ulazi u `/brendovi/${brandSlug}`, a i podaci i
+  // `generateStaticParams` nose `"baslac"` malim slovima.
   baslac: "baslac",
   norbin: "norbin",
   sata: "sata",

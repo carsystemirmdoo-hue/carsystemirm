@@ -16,7 +16,7 @@ export function BaslacProcessNavigator() {
 
   return (
     <div className={styles.processNavigator}>
-      <div className={styles.processRail} aria-label="Faze baslac procesa">
+      <div className={styles.processRail} aria-label="Faze Baslac procesa">
         {baslacProcessSteps.map((step) => (
           <button
             type="button"

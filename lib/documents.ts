@@ -313,7 +313,7 @@ export const brandDocuments: BrandDocument[] = [
     file: "/documents/baslac/guides/baslac-gloss-levels.pdf",
     cover: "/brands/baslac/documents/baslac-gloss-levels-cover.webp",
     description:
-      "Proces postizanja ujednačenog sjaja za baslac 40-620, 40-440 i 40-450 mat/VOC klar lakove.",
+      "Proces postizanja ujednačenog sjaja za Baslac 40-620, 40-440 i 40-450 mat/VOC klar lakove.",
     public: true,
   },
   {
@@ -349,7 +349,7 @@ export const brandDocuments: BrandDocument[] = [
     pages: 1,
     file: "/documents/baslac/guides/baslac-temp-chart-voc.pdf",
     cover: "/brands/baslac/documents/baslac-temp-chart-voc-cover.webp",
-    description: "Preporuke tvrdilaca i razređivača po temperaturi za baslac VOC klar lakove.",
+    description: "Preporuke tvrdilaca i razređivača po temperaturi za Baslac VOC klar lakove.",
     public: true,
   },
   {
@@ -361,7 +361,7 @@ export const brandDocuments: BrandDocument[] = [
     pages: 1,
     file: "/documents/baslac/guides/baslac-temp-chart-non-voc.pdf",
     cover: "/brands/baslac/documents/baslac-temp-chart-non-voc-cover.webp",
-    description: "Preporuke tvrdilaca i razređivača po temperaturi za baslac non-VOC klar lakove.",
+    description: "Preporuke tvrdilaca i razređivača po temperaturi za Baslac non-VOC klar lakove.",
     public: true,
   },
   {

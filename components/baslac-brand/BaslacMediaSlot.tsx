@@ -61,7 +61,7 @@ export function BaslacMediaSlot({
           role="img"
           aria-label={`Fotografija za ${media.section} još nije dostupna`}
         >
-          <span className={styles.mediaPlaceholderMark}>baslac</span>
+          <span className={styles.mediaPlaceholderMark}>Baslac</span>
           <strong>Fotografija u pripremi</strong>
         </div>
       )}

@@ -1,0 +1,262 @@
+/*
+ * Baslac tokeni se definišu ovde, a ne nasleđuju iz `.baslacPage`.
+ *
+ * PDP se renderuje na `/proizvodi/grupa/...`, gde tog wrappera nema — sve
+ * `var(--baslac-*)` vrednosti su tada nedefinisane, `border: 1px solid
+ * var(--baslac-border)` postaje nevažeća deklaracija i računa se kao 0px, a
+ * pozadine i CTA ostaju providni. To je bio uzrok „nedovršenog" izgleda.
+ */
+.pdp {
+  --baslac-ink: #18232a;
+  --baslac-muted: #5d686c;
+  --baslac-border: rgb(24 35 42 / 0.14);
+  --baslac-surface: #f6f8f7;
+  --baslac-surface-strong: #ffffff;
+  --baslac-accent: #1d7fb0;
+  --baslac-accent-ink: #ffffff;
+  --baslac-radius: 10px;
+  color: var(--baslac-ink);
+}
+
+:global(html[data-theme="dark"]) .pdp {
+  --baslac-ink: #edf2ee;
+  --baslac-muted: #9fb0b5;
+  --baslac-border: rgb(237 242 238 / 0.16);
+  --baslac-surface: #16211f;
+  --baslac-surface-strong: #1b2724;
+  --baslac-accent: #3fa5d8;
+  --baslac-accent-ink: #06171f;
+}
+
+/* Raspored prati postojeći Cosmos variant PDP: velika limenka levo,
+   sve varijante odmah desno, bez međustranice. */
+.pdp {
+  display: grid;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.stageColumn { position: sticky; top: 6rem; display: grid; gap: 0.75rem; }
+
+.stage {
+  position: relative; display: grid; min-height: 26rem; place-items: center;
+  padding: 1.5rem; border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong);
+}
+.stage img { width: auto; max-width: 100%; max-height: 24rem; height: auto; object-fit: contain; }
+.stage[data-pending] { border-style: dashed; }
+.stagePlaceholder { display: grid; gap: 0.6rem; justify-items: center; text-align: center; }
+.stagePlaceholder span {
+  color: var(--baslac-accent); font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 2.2rem; font-weight: 800; opacity: 0.45;
+}
+.stagePlaceholder p { margin: 0; max-width: 16rem; color: var(--baslac-muted); font-size: 0.82rem; line-height: 1.5; }
+.stageMeta { position: absolute; top: 1rem; right: 1rem; left: 1rem; display: flex; justify-content: space-between; }
+.brandMark, .volumeMark {
+  color: var(--baslac-muted); font-family: var(--font-technical), monospace;
+  font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.volumeMark { color: var(--baslac-ink); font-weight: 700; }
+.stageNote { margin: 0; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.55; }
+
+.pickerColumn { display: grid; min-width: 0; gap: 1rem; }
+.pickerHeader h2 { margin: 0.15rem 0 0.5rem; font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; }
+.kicker { margin: 0; color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.intro { margin: 0; max-width: 46rem; color: var(--baslac-muted); font-size: 0.95rem; line-height: 1.6; }
+
+.filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0.75rem; }
+@media (max-width: 48rem) { .filters { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; min-width: 0; gap: 0.3rem; }
+.field label { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.field input, .field select {
+  width: 100%; min-width: 0; min-height: 2.75rem; padding: 0.5rem 0.7rem;
+  border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
+  color: inherit; font: inherit; font-size: 0.92rem;
+}
+.count { margin: 0; color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.7rem; }
+
+.grid {
+  display: grid; max-height: 30rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: 0.5rem; margin: 0; padding: 0.15rem; overflow-y: auto; list-style: none; overscroll-behavior: contain;
+}
+.grid > li { position: relative; min-width: 0; }
+
+.card {
+  display: flex; width: 100%; min-width: 0; align-items: center; gap: 0.6rem;
+  padding: 0.6rem 2.1rem 0.6rem 0.6rem; border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong); color: inherit; cursor: pointer; text-align: left;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.card:hover { border-color: var(--baslac-accent); }
+/* Aktivna baza i grupni izbor moraju izgledati različito. */
+.card[data-active] { border-color: var(--baslac-accent); box-shadow: inset 0 0 0 2px var(--baslac-accent); }
+.card[data-picked] { background: color-mix(in oklab, var(--baslac-accent) 10%, transparent); }
+.card:focus-visible, .pick input:focus-visible { outline: 2px solid var(--baslac-accent); outline-offset: 2px; }
+
+.swatch { flex: none; width: 1.9rem; height: 1.9rem; border: 1px solid rgb(24 35 42 / 0.25); border-radius: 3px; }
+.swatch[data-finish="metallic"] { background-image: linear-gradient(115deg, rgb(255 255 255 / 0.55) 0 12%, transparent 12% 30%, rgb(255 255 255 / 0.35) 30% 42%, transparent 42%); }
+.swatch[data-finish="pearl"], .swatch[data-finish="xirallic"] { background-image: linear-gradient(135deg, rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.1) 40%, rgb(140 190 255 / 0.35) 70%, rgb(255 220 240 / 0.45)); }
+.swatch[data-finish="transparent"] { opacity: 0.55; }
+.swatch[data-finish="converter"], .swatch[data-finish="additive"], .swatch[data-finish="technical"] {
+  background-image: repeating-linear-gradient(45deg, rgb(24 35 42 / 0.12) 0 3px, transparent 3px 6px);
+}
+
+.cardBody { display: grid; min-width: 0; gap: 0.05rem; }
+.cardBody strong { font-family: var(--font-technical), monospace; font-size: 0.78rem; }
+/* Nazivi se ne odsecaju — prelamaju se u dva reda. */
+.cardName { overflow-wrap: anywhere; font-size: 0.8rem; line-height: 1.25; }
+.cardBody small { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.63rem; }
+
+.pick { position: absolute; top: 0.5rem; right: 0.5rem; display: grid; place-items: center; }
+.pick input { position: absolute; width: 1.5rem; height: 1.5rem; margin: 0; cursor: pointer; opacity: 0; }
+.pick span {
+  display: grid; width: 1.5rem; height: 1.5rem; place-items: center;
+  border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
+  color: var(--baslac-muted); font-size: 0.9rem; line-height: 1; pointer-events: none;
+}
+.pick input:checked + span { border-color: var(--baslac-accent); background: var(--baslac-accent); color: var(--baslac-accent-ink); }
+
+.activePanel {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem 1.15rem; border: 1px solid var(--baslac-accent);
+  background: color-mix(in oklab, var(--baslac-accent) 8%, transparent);
+}
+.activeInfo h3 { margin: 0.2rem 0 0.25rem; font-size: 1.05rem; font-weight: 800; }
+.activeMeta { margin: 0; color: var(--baslac-muted); font-size: 0.85rem; }
+.availability {
+  margin: 0.4rem 0 0; color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.activeActions { display: flex; align-items: flex-end; gap: 0.6rem; }
+.qtyField { display: grid; gap: 0.25rem; }
+.qtyField span { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.62rem; text-transform: uppercase; }
+.qtyField input {
+  width: 4.5rem; min-height: 2.75rem; padding: 0.3rem; border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong); color: inherit; font: inherit; text-align: center;
+}
+.addButton {
+  min-height: 2.75rem; padding: 0 1.1rem; border: 0; background: var(--baslac-accent);
+  color: var(--baslac-accent-ink); cursor: pointer; font-size: 0.86rem; font-weight: 800;
+}
+.ghostButton {
+  min-height: 2.75rem; padding: 0 0.9rem; border: 1px solid var(--baslac-border);
+  background: transparent; color: inherit; cursor: pointer; font-size: 0.82rem;
+}
+.message { margin: 0; color: var(--baslac-accent); font-family: var(--font-technical), monospace; font-size: 0.74rem; }
+.swatchNote { margin: 0; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.55; }
+.empty { grid-column: 1 / -1; padding: 1rem; color: var(--baslac-muted); font-size: 0.9rem; }
+
+/* Quick Add traka — ne prekriva sadržaj, ima svoju sigurnu zonu. */
+.quickAdd {
+  position: sticky; bottom: 0; z-index: 5; grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+  margin-top: 1rem; padding: 0.85rem 1rem;
+  border: 1px solid var(--baslac-accent); background: var(--baslac-surface-strong);
+  box-shadow: 0 -0.5rem 1.5rem rgb(24 35 42 / 0.12);
+}
+.quickAddList { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.quickAddList strong { font-size: 1.1rem; }
+.quickAddList > span { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.68rem; text-transform: uppercase; }
+.quickAddList ul { display: flex; max-width: 100%; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+.quickAddList li { display: flex; align-items: center; gap: 0.3rem; padding: 0.15rem 0.35rem; border: 1px solid var(--baslac-border); }
+.quickAddList li span { font-family: var(--font-technical), monospace; font-size: 0.68rem; }
+.quickAddList li input {
+  width: 2.9rem; min-height: 1.9rem; padding: 0.1rem; border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong); color: inherit; font: inherit; font-size: 0.72rem; text-align: center;
+}
+.quickAddActions { display: flex; gap: 0.5rem; }
+
+@media (max-width: 60rem) {
+  .pdp { grid-template-columns: minmax(0, 1fr); }
+  .stageColumn { position: static; }
+  .stage { min-height: 18rem; }
+  .stage img { max-height: 16rem; }
+  .grid { max-height: none; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)); }
+  /* Quick Add traka ne sme da prekrije poslednje kartice ni CTA. */
+  .pickerColumn { padding-bottom: 1rem; }
+}
+
+/* --- Zaglavlje PDP-a ---------------------------------------------------- */
+.pageHeader { grid-column: 1 / -1; max-width: 52rem; margin-bottom: 0.5rem; }
+.eyebrow {
+  margin: 0 0 0.5rem; color: var(--baslac-accent);
+  font-family: var(--font-technical), monospace; font-size: 0.68rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.pageHeader h1 {
+  margin: 0 0 0.6rem; font-size: clamp(1.9rem, 3.4vw, 2.9rem); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.05;
+}
+.lead { margin: 0; color: var(--baslac-muted); font-size: 1rem; line-height: 1.6; }
+
+/* --- Kartice baza ------------------------------------------------------- */
+.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; }
+@media (max-width: 82rem) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 60rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 26rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.card {
+  position: relative; display: grid; min-height: 6.5rem; align-content: start;
+  padding: 0.7rem 2.6rem 0.7rem 0.7rem; border-radius: var(--baslac-radius);
+  gap: 0.5rem; grid-template-columns: auto minmax(0, 1fr); align-items: start;
+}
+.cardName {
+  display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; overflow-wrap: anywhere; font-size: 0.82rem; line-height: 1.3;
+}
+.card[data-active] { box-shadow: inset 0 0 0 2px var(--baslac-accent); }
+.activeTick {
+  position: absolute; right: 0.55rem; bottom: 0.55rem; display: grid;
+  width: 1.15rem; height: 1.15rem; place-items: center; border-radius: 50%;
+  background: var(--baslac-accent); color: var(--baslac-accent-ink); font-size: 0.7rem;
+}
+
+/* Quick Add kontrola — jasna, sa ikonicom, dovoljno velika. */
+.pickButton {
+  position: absolute; top: 0.5rem; right: 0.5rem; display: grid;
+  width: 2.25rem; height: 2.25rem; place-items: center; border-radius: 8px;
+  border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
+  color: var(--baslac-muted); cursor: pointer; transition: all 140ms ease;
+}
+.pickButton:hover { border-color: var(--baslac-accent); color: var(--baslac-accent); }
+.pickButton[data-picked] {
+  border-color: var(--baslac-accent); background: var(--baslac-accent); color: var(--baslac-accent-ink);
+}
+.pickButton:focus-visible { outline: 2px solid var(--baslac-accent); outline-offset: 2px; }
+
+/* --- Quantity stepper i CTA -------------------------------------------- */
+.stepper { display: grid; gap: 0.3rem; }
+.stepperLabel { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.62rem; text-transform: uppercase; }
+.stepperControls { display: flex; align-items: stretch; border: 1px solid var(--baslac-border); border-radius: 8px; overflow: hidden; }
+.stepperControls button {
+  width: 2.5rem; border: 0; background: var(--baslac-surface-strong);
+  color: inherit; cursor: pointer; font-size: 1.05rem; line-height: 1;
+}
+.stepperControls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.stepperControls input {
+  width: 3.25rem; border: 0; border-inline: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong); color: inherit; font: inherit; text-align: center;
+}
+.addButton {
+  display: inline-flex; min-height: 3rem; align-items: center; gap: 0.55rem;
+  padding: 0 1.3rem; border-radius: 8px; font-size: 0.9rem;
+}
+.addButton[data-state="success"] { background: #1f8a55; }
+.addButton:hover { filter: brightness(1.08); }
+.addButton:active { transform: translateY(1px); }
+.addButton:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- Media stage ------------------------------------------------------- */
+.stage { border-radius: var(--baslac-radius); background: var(--baslac-surface-strong); }
+.stagePlaceholder strong { display: block; font-size: 0.9rem; }
+
+/* Javni CTA je upit, ne kupovina. */
+.inquiryButton {
+  display: inline-flex; min-height: 3rem; align-items: center; gap: 0.7rem;
+  padding: 0 1.4rem; border-radius: 8px; background: var(--baslac-accent);
+  color: var(--baslac-accent-ink); font-size: 0.9rem; font-weight: 800; text-decoration: none;
+}
+.inquiryButton:hover { filter: brightness(1.08); }
+.inquiryButton:focus-visible { outline: 2px solid var(--baslac-accent); outline-offset: 3px; }
+.inquiryNote { margin: 0.5rem 0 0; max-width: 22rem; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.5; }

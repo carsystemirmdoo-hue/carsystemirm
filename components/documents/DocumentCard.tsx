@@ -5,7 +5,7 @@ import styles from "./DocumentLibraryPage.module.css";
 const brandLabels: Record<string, string> = {
   carsystem: "Carsystem",
   rm: "R-M",
-  baslac: "baslac",
+  baslac: "Baslac",
   norbin: "NORBIN",
   befar: "Befar",
   carfit: "C.A.R.FIT",

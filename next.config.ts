@@ -62,9 +62,34 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Traženi oblik `/proizvodi/baslac-line-35?varijanta=35-M214` vodi na
+      // postojeću canonical family rutu; query se prenosi.
+      {
+        source: "/proizvodi/baslac-line-:system(30|35|45)",
+        destination: "/proizvodi/grupa/baslac-line-:system",
+        permanent: false,
+      },
       {
         source: "/proizvodi/clear-harden-r-h-2p15",
         destination: "/proizvodi/h-2p15-clear-harden-r",
+        permanent: true,
+      },
+      /*
+       * Baslac legacy slug, isti obrazac kao red iznad.
+       *
+       * `baslac-35-m331-pasta` je bio drugi zapis za `35-M331 Red Xirallic
+       * 0,5 L`; canonical je sada generisani `baslac-35-m331`. Odredište je
+       * namerno canonical PDP ruta, a ne family URL sa `?varijanta=` — tu
+       * adresu razrešava `variantRedirectTarget()` u istom zahtevu, pa se
+       * znanje o porodici ne duplira u konfiguraciji.
+       *
+       * Izvor istine je `BASLAC_LEGACY_SLUGS` u `lib/baslac-catalog-products.ts`;
+       * test `lib/catalog/baslacDuplicates.test.mjs` obara build ako se ovaj
+       * unos i ta mapa raziđu.
+       */
+      {
+        source: "/proizvodi/baslac-35-m331-pasta",
+        destination: "/proizvodi/baslac-35-m331",
         permanent: true,
       },
     ];

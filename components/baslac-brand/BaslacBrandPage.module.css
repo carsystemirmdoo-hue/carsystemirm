@@ -35,24 +35,425 @@
   );
 }
 
-.hero {
+/* ---------------------------------------------------------------------------
+   Kampanjski hero slider
+   Autoplay, tranzicija i interakcija dolaze iz deljenog
+   `useBrandCampaignCarousel` hook-a (isti kao R-M kampanjski hero).
+   --------------------------------------------------------------------------- */
+
+.campaignStage {
+  --baslac-campaign-ink: #f4f8f9;
+  --baslac-campaign-muted: rgb(233 243 246 / 0.74);
+  --baslac-campaign-surface: #0b1418;
+  --baslac-campaign-surface-deep: #060d10;
+  --baslac-campaign-cyan: #29a3dc;
+  --baslac-campaign-gutter: clamp(1rem, 4vw, 4rem);
+  /* Stabilna visina: identicna za oba slajda, bez layout shift-a. */
+  --baslac-campaign-height: 44rem;
+  --baslac-campaign-inline: max(
+    var(--baslac-campaign-gutter),
+    calc((100% - var(--ds-container-max, 1208px)) / 2)
+  );
   position: relative;
-  min-height: 43rem;
-  padding: 1.1rem clamp(1rem, 4vw, 4rem) 1.25rem;
   overflow: hidden;
-  background: #e5ebe9;
-  border-bottom: 1px solid var(--baslac-border);
+  background: var(--baslac-campaign-surface-deep);
+  color: var(--baslac-campaign-ink);
+  border-bottom: 1px solid rgb(244 248 249 / 0.1);
   isolation: isolate;
   touch-action: pan-y;
 }
 
-.hero::before {
+.campaignBreadcrumb {
   position: absolute;
-  inset: 0 auto 0 0;
-  width: 1px;
-  background: var(--baslac-accent);
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 8;
+  width: min(100% - (var(--baslac-campaign-gutter) * 2), var(--ds-container-max, 1208px));
+  padding-top: 1.05rem;
+  color: rgb(244 248 249 / 0.66);
+}
+
+.campaignBreadcrumb a:hover,
+.campaignBreadcrumb a:focus-visible {
+  color: var(--baslac-campaign-ink);
+}
+
+.campaignBreadcrumb strong {
+  color: var(--baslac-campaign-ink);
+  font-weight: 600;
+}
+
+.campaignViewport {
+  position: relative;
+  min-height: var(--baslac-campaign-height);
+  overflow: hidden;
+  background: var(--baslac-campaign-surface-deep);
+  touch-action: pan-y pinch-zoom;
+}
+
+.campaignSlides {
+  position: absolute;
+  inset: 0;
+}
+
+.campaignSlide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(4.5rem, 9vh, 6.5rem) var(--baslac-campaign-inline)
+    clamp(7rem, 13vh, 8.5rem);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.campaignSlide[data-active] {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Kontrolisana tamna baslac povrsina iza providnog artworka. */
+.campaignSlide[data-visual="artwork"] {
+  background:
+    radial-gradient(
+      circle at 72% 46%,
+      rgb(41 163 220 / 0.24),
+      transparent 46%
+    ),
+    linear-gradient(114deg, var(--baslac-campaign-surface-deep), #101f26 74%);
+}
+
+.campaignCopy {
+  position: relative;
+  z-index: 4;
+  width: min(50%, 34rem);
+  max-width: 34rem;
+}
+
+.campaignSlide[data-active] .campaignCopy > * {
+  animation: baslacCampaignCopyIn 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.campaignSlide[data-active] .campaignCopy > :nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.campaignSlide[data-active] .campaignCopy > :nth-child(3) {
+  animation-delay: 110ms;
+}
+
+.campaignSlide[data-active] .campaignCopy > :nth-child(4) {
+  animation-delay: 175ms;
+}
+
+.campaignEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  color: var(--baslac-campaign-ink);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.campaignEyebrow::before {
+  width: 2.5rem;
+  height: 0.14rem;
+  background: var(--baslac-campaign-cyan);
   content: "";
-  opacity: 0.8;
+}
+
+.campaignTitle {
+  max-width: 15ch;
+  margin: clamp(1.1rem, 2.2vw, 1.9rem) 0 0;
+  color: var(--baslac-campaign-ink);
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(2.4rem, 3.7vw, 4.15rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+
+.campaignDescription {
+  max-width: 34rem;
+  margin: clamp(1.1rem, 2vw, 1.7rem) 0 0;
+  color: var(--baslac-campaign-muted);
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+  line-height: 1.62;
+}
+
+.campaignActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.5rem, 2.6vw, 2.3rem);
+}
+
+.campaignActions .primaryButton {
+  background: var(--baslac-campaign-cyan);
+  color: #06171f;
+}
+
+.campaignActions .primaryButton:hover,
+.campaignActions .primaryButton:focus-visible {
+  background: #4fbdef;
+  color: #06171f;
+}
+
+/* --- Vizuelni slojevi -------------------------------------------------- */
+
+.campaignVisual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  min-width: 0;
+}
+
+.campaignVisual picture,
+.campaignVisual img {
+  position: absolute;
+  display: block;
+}
+
+/* Fotografija: full-bleed, focal point desno. */
+.campaignVisual[data-visual="photo"] picture,
+.campaignVisual[data-visual="photo"] img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.campaignVisual[data-visual="photo"] img {
+  object-fit: cover;
+  /* Desna ivica je usidrena, pa grupa zastava nikada ne izlazi iz kadra. */
+  object-position: 100% 22%;
+}
+
+/* Gradient sluzi samo citljivosti teksta i ne pokriva desni motiv. */
+.campaignVisual[data-visual="photo"]::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    92deg,
+    var(--baslac-campaign-surface-deep) 0 14%,
+    rgb(6 13 16 / 0.82) 30%,
+    rgb(6 13 16 / 0.35) 44%,
+    transparent 56%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+/*
+ * Donji scrim pokriva samo zonu jarbola ispod zastava, radi citljivosti
+ * kontrola. Ne zadire u sam motiv zastava.
+ */
+.campaignVisual[data-visual="photo"]::after {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 32%;
+  background: linear-gradient(180deg, transparent, rgb(6 13 16 / 0.62));
+  content: "";
+  pointer-events: none;
+}
+
+/*
+ * Artwork: zaseban foreground sloj desno. `contain` garantuje da ceo broj 20
+ * i kantica ostanu vidljivi na svakoj sirini, bez isecanja.
+ */
+.campaignVisual[data-visual="artwork"] {
+  z-index: 3;
+  inset: clamp(4rem, 8vh, 5.5rem) var(--baslac-campaign-inline)
+    clamp(6.5rem, 12vh, 8rem) auto;
+  width: min(40%, 30rem);
+  pointer-events: none;
+}
+
+.campaignVisual[data-visual="artwork"] picture,
+.campaignVisual[data-visual="artwork"] img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center right;
+}
+
+/* --- Wipe tranzicija ---------------------------------------------------- */
+
+.campaignWipe {
+  position: absolute;
+  inset: -12% -25%;
+  z-index: 5;
+  background: linear-gradient(
+    104deg,
+    var(--campaign-transition-from, #05090c) 0 30%,
+    color-mix(
+        in oklab,
+        var(--campaign-transition-from, #05090c),
+        var(--campaign-transition-to, #1b2430)
+      )
+      30% 62%,
+    var(--campaign-transition-to, #1b2430) 62%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-130%, 0, 0) skewX(-14deg);
+}
+
+.campaignStage[data-direction="previous"] .campaignWipe {
+  transform: translate3d(130%, 0, 0) skewX(-14deg);
+}
+
+.campaignStage[data-transition-phase="covering"] .campaignWipe {
+  animation: baslacCampaignCoverNext 500ms cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+
+.campaignStage[data-direction="previous"][data-transition-phase="covering"]
+  .campaignWipe {
+  animation-name: baslacCampaignCoverPrevious;
+}
+
+.campaignStage[data-transition-phase="revealing"] .campaignWipe {
+  animation: baslacCampaignRevealNext 580ms cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+
+.campaignStage[data-direction="previous"][data-transition-phase="revealing"]
+  .campaignWipe {
+  animation-name: baslacCampaignRevealPrevious;
+}
+
+/* --- Kontrole ----------------------------------------------------------- */
+
+.campaignControls {
+  position: absolute;
+  right: var(--baslac-campaign-inline);
+  bottom: 2.2rem;
+  left: var(--baslac-campaign-inline);
+  z-index: 7;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.campaignArrows {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.campaignArrows button,
+.campaignPagination button {
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.campaignArrows button:disabled,
+.campaignPagination button:disabled {
+  cursor: wait;
+}
+
+.campaignArrows button {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid rgb(244 248 249 / 0.28);
+  background: rgb(6 13 16 / 0.42);
+  color: var(--baslac-campaign-ink);
+  font-size: 1.1rem;
+  transition:
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms ease;
+}
+
+.campaignArrows button:hover:not(:disabled),
+.campaignArrows button:focus-visible {
+  background: rgb(41 163 220 / 0.34);
+}
+
+.campaignPagination {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 26rem;
+}
+
+.campaignPagination button {
+  display: grid;
+  min-width: 0;
+  min-height: 3rem;
+  align-content: end;
+  gap: 0.6rem;
+  background: transparent;
+  color: rgb(244 248 249 / 0.58);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  text-align: left;
+  transition: color 180ms ease;
+}
+
+.campaignPagination button[aria-pressed="true"] {
+  color: var(--baslac-campaign-ink);
+}
+
+.campaignPaginationLabel {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.campaignPaginationLabel strong {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.campaignPaginationLabel small {
+  overflow: hidden;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campaignPaginationTrack {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0.25rem;
+  overflow: hidden;
+  background: rgb(244 248 249 / 0.2);
+  contain: paint;
+}
+
+.campaignPagination button[aria-pressed="true"] .campaignPaginationTrack {
+  background: rgb(244 248 249 / 0.32);
+}
+
+.campaignPaginationTrack i {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--campaign-progress-color, currentColor);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .breadcrumb {
@@ -80,84 +481,6 @@
   color: var(--baslac-ink);
 }
 
-.heroStage {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(22rem, 0.86fr) minmax(34rem, 1.14fr);
-  align-items: center;
-  gap: clamp(2rem, 5vw, 6rem);
-  width: min(100%, var(--ds-container-max, 1208px));
-  min-height: 34rem;
-  margin: 1.4rem auto 0;
-}
-
-.heroCopy {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  align-content: center;
-  min-width: 0;
-}
-
-.heroBrand {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: clamp(1.5rem, 4vh, 3rem);
-}
-
-.heroBrand p {
-  max-width: 17rem;
-  margin: 0;
-  color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-
-.heroLogoPlate {
-  display: grid;
-  width: 4rem;
-  height: 3.55rem;
-  place-items: center;
-  border: 1px solid var(--baslac-border);
-  background: #fff;
-}
-
-.heroLogoPlate img {
-  width: 2.85rem;
-  height: auto;
-}
-
-.heroMessage {
-  position: relative;
-  min-height: 15.25rem;
-}
-
-.heroMessage h1 {
-  max-width: 10.5ch;
-  margin: 0;
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(2.8rem, 4.8vw, 5.35rem);
-  font-weight: 700;
-  letter-spacing: -0.058em;
-  line-height: 0.95;
-  text-wrap: balance;
-}
-
-.heroDescription {
-  max-width: 39rem;
-  margin: 1.35rem 0 0;
-  color: var(--baslac-muted);
-  font-size: clamp(0.96rem, 1.25vw, 1.08rem);
-  line-height: 1.65;
-}
-
-.heroActions,
 .colorActions,
 .finalCtaActions {
   display: flex;
@@ -212,19 +535,6 @@
 .outlineButton:focus-visible {
   border-color: var(--baslac-ink);
   background: rgb(255 255 255 / 0.45);
-}
-
-.heroMedia {
-  width: 100%;
-  min-width: 0;
-  max-height: 34rem;
-  align-self: center;
-  box-shadow: 0 2rem 5rem rgb(28 45 50 / 0.12);
-}
-
-.heroMedia img {
-  object-fit: contain;
-  background: #dce4e1;
 }
 
 .mediaSlot {
@@ -1369,14 +1679,6 @@
   --brand-nav-ink: #edf2ee;
 }
 
-:global(html[data-theme="dark"]) .hero {
-  background: #162023;
-}
-
-:global(html[data-theme="dark"]) .heroLogoPlate {
-  background: #fff;
-}
-
 :global(html[data-theme="dark"]) .mediaSlot,
 :global(html[data-theme="dark"]) .catalogImage {
   background: #202b2e;
@@ -1401,19 +1703,6 @@
 }
 
 @media (max-width: 70rem) {
-  .hero {
-    min-height: 42rem;
-  }
-
-  .heroStage {
-    grid-template-columns: minmax(20rem, 0.92fr) minmax(26rem, 1.08fr);
-    gap: 2.5rem;
-  }
-
-  .heroMessage h1 {
-    font-size: clamp(2.7rem, 5.5vw, 4.4rem);
-  }
-
   .linesGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1444,41 +1733,6 @@
 }
 
 @media (max-width: 54rem) {
-  .hero {
-    min-height: auto;
-    padding-bottom: 1rem;
-  }
-
-  .heroStage {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    min-height: 0;
-    margin-top: 2rem;
-  }
-
-  .heroCopy {
-    min-height: 27rem;
-  }
-
-  .heroBrand {
-    margin-bottom: 1.7rem;
-  }
-
-  .heroMessage {
-    min-height: 11.75rem;
-  }
-
-  .heroMessage h1 {
-    max-width: 12ch;
-    font-size: clamp(2.6rem, 8vw, 4.5rem);
-  }
-
-  .heroMedia {
-    width: min(100%, 45rem);
-    max-height: none;
-    margin-inline: auto;
-  }
-
 
   .sectionHeader,
   .repairRhythmHeader,
@@ -1569,45 +1823,9 @@
   .baslacPage {
     --brand-section-nav-height: 3.35rem;
   }
-
-  .hero {
-    padding-inline: 1rem;
-  }
-
   .breadcrumb {
     font-size: 0.6rem;
   }
-
-  .heroCopy {
-    min-height: 28rem;
-  }
-
-  .heroLogoPlate {
-    width: 3.55rem;
-    height: 3.2rem;
-  }
-
-  .heroMessage {
-    min-height: 13rem;
-  }
-
-  .heroMessage h1 {
-    font-size: clamp(2.45rem, 12.5vw, 3.6rem);
-  }
-
-  .heroDescription {
-    font-size: 0.9rem;
-  }
-
-  .heroActions {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .heroActions a {
-    width: 100%;
-  }
-
   .mediaSlot {
     aspect-ratio: var(--baslac-media-mobile-ratio);
   }
@@ -1755,3 +1973,636 @@
     transition-duration: 0.01ms;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Kampanjski hero — responsive
+   --------------------------------------------------------------------------- */
+
+@media (max-width: 70rem) {
+  .campaignStage {
+    --baslac-campaign-height: 41rem;
+  }
+
+  .campaignCopy {
+    width: min(56%, 30rem);
+  }
+
+  .campaignVisual[data-visual="artwork"] {
+    width: min(42%, 22rem);
+  }
+
+  /*
+   * Sto je viewport uzi, to je kadar fotografije tesnji, pa zona citljivosti
+   * mora dalje udesno. Krajnja desna zastava ostaje netaknuta.
+   */
+  .campaignVisual[data-visual="photo"]::before {
+    background: linear-gradient(
+      92deg,
+      var(--baslac-campaign-surface-deep) 0 18%,
+      rgb(6 13 16 / 0.88) 38%,
+      rgb(6 13 16 / 0.5) 54%,
+      transparent 68%
+    );
+  }
+}
+
+@media (max-width: 50rem) {
+  .campaignStage {
+    --baslac-campaign-height: 52rem;
+  }
+
+  .campaignBreadcrumb {
+    width: calc(100% - (var(--baslac-campaign-gutter) * 2));
+  }
+
+  .campaignSlide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.1rem, 4vw, 1.8rem);
+    padding: 3.2rem var(--baslac-campaign-gutter) 7.6rem;
+  }
+
+  .campaignCopy {
+    width: auto;
+    max-width: none;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /*
+   * Vizual ide u gornju zonu, a tekst u donju sigurnu zonu istog hero bloka.
+   * Ista `aspect-ratio` za oba slajda cuva stabilnu visinu heroja.
+   */
+  .campaignVisual,
+  .campaignVisual[data-visual="artwork"] {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    width: 100%;
+    /*
+     * Ista, sirinom vodjena ali ogranicena visina za oba slajda: hero ostaje
+     * stabilan, a na tabletu vizual ne pojede prostor namenjen tekstu.
+     */
+    height: min(74vw, 20rem);
+    grid-row: 1;
+    padding: 0;
+  }
+
+  .campaignVisual[data-visual="artwork"] img {
+    object-position: right center;
+  }
+
+  .campaignVisual[data-visual="photo"] picture,
+  .campaignVisual[data-visual="photo"] img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .campaignVisual[data-visual="photo"] img {
+    /* Cuva vrhove zastava kada je okvir siri od art-directed kadra. */
+    object-position: center 20%;
+  }
+
+  /* Bez teksta preko fotografije na mobilnom — samo blago stapanje ka dnu. */
+  .campaignVisual[data-visual="photo"]::before {
+    background: linear-gradient(
+      180deg,
+      transparent 62%,
+      rgb(6 13 16 / 0.55) 88%,
+      var(--baslac-campaign-surface-deep) 100%
+    );
+  }
+
+  .campaignTitle {
+    max-width: 18ch;
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 8.4vw, 2.9rem);
+  }
+
+  .campaignDescription {
+    margin-top: 0.9rem;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .campaignActions {
+    margin-top: 1.3rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  .campaignStage {
+    --baslac-campaign-height: 50rem;
+  }
+
+  .campaignTitle {
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+  }
+
+  .campaignDescription {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  .campaignActions a {
+    width: 100%;
+  }
+
+  .campaignArrows button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .campaignPaginationLabel small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaignSlide[data-active] .campaignCopy > *,
+  .campaignStage[data-transition-phase] .campaignWipe {
+    animation: none !important;
+  }
+
+  .campaignWipe {
+    display: none;
+  }
+
+  .campaignArrows button {
+    transition: none;
+  }
+}
+
+@keyframes baslacCampaignCopyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes baslacCampaignCoverNext {
+  from {
+    opacity: 1;
+    transform: translate3d(-130%, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+}
+
+@keyframes baslacCampaignRevealNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(130%, 0, 0) skewX(-14deg);
+  }
+}
+
+@keyframes baslacCampaignCoverPrevious {
+  from {
+    opacity: 1;
+    transform: translate3d(130%, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+}
+
+@keyframes baslacCampaignRevealPrevious {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(-130%, 0, 0) skewX(-14deg);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Baslac sistemi i proizvodi — grupe + selektor baza
+   --------------------------------------------------------------------------- */
+
+.systemGroup {
+  margin-top: clamp(1.75rem, 3vw, 2.75rem);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface);
+}
+
+.systemGroupHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.systemGroupHeader h3 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.systemGroupHeader p {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--baslac-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.systemGroupCount {
+  flex: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--baslac-border);
+  color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.baseSelector {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.baseFilters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 48rem) {
+  .baseFilters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.baseField {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.baseField label {
+  color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.baseField input,
+.baseField select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong);
+  color: inherit;
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.baseField input:focus-visible,
+.baseField select:focus-visible,
+.baseList button:focus-visible {
+  outline: 2px solid var(--baslac-accent);
+  outline-offset: 2px;
+}
+
+.baseCount {
+  margin: 0;
+  color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+}
+
+.baseList {
+  display: grid;
+  max-height: 26rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  overscroll-behavior: contain;
+}
+
+.baseList button {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.baseList button:hover {
+  border-color: var(--baslac-accent);
+}
+
+.baseList button[data-active] {
+  border-color: var(--baslac-accent);
+  background: color-mix(in oklab, var(--baslac-accent) 12%, transparent);
+}
+
+.baseSwatch {
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid rgb(24 35 42 / 0.25);
+  border-radius: 3px;
+}
+
+.baseSwatch[data-finish="metallic"] {
+  background-image: linear-gradient(
+    115deg,
+    rgb(255 255 255 / 0.55) 0 12%,
+    transparent 12% 30%,
+    rgb(255 255 255 / 0.35) 30% 42%,
+    transparent 42%
+  );
+}
+
+.baseSwatch[data-finish="pearl"],
+.baseSwatch[data-finish="xirallic"] {
+  background-image: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.6),
+    rgb(255 255 255 / 0.1) 40%,
+    rgb(140 190 255 / 0.35) 70%,
+    rgb(255 220 240 / 0.45)
+  );
+}
+
+.baseSwatch[data-finish="transparent"] {
+  opacity: 0.55;
+}
+
+.baseSwatch[data-finish="converter"],
+.baseSwatch[data-finish="additive"],
+.baseSwatch[data-finish="technical"] {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgb(24 35 42 / 0.12) 0 3px,
+    transparent 3px 6px
+  );
+}
+
+.baseInfo {
+  display: grid;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.baseInfo strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.baseInfo small {
+  overflow: hidden;
+  color: var(--baslac-muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.baseMeta {
+  display: grid;
+  flex: none;
+  gap: 0.15rem;
+  margin-left: auto;
+  color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.66rem;
+  text-align: right;
+}
+
+.baseMeta i {
+  font-style: normal;
+  opacity: 0.75;
+}
+
+.baseEmpty {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  color: var(--baslac-muted);
+  font-size: 0.9rem;
+}
+
+.baseDetail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--baslac-accent);
+  background: color-mix(in oklab, var(--baslac-accent) 8%, transparent);
+}
+
+.baseDetailKicker {
+  margin: 0 0 0.2rem;
+  color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.baseDetail h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.baseDetailMeta {
+  margin: 0.25rem 0 0;
+  color: var(--baslac-muted);
+  font-size: 0.85rem;
+}
+
+.baseAvailability {
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.baseSwatchNote {
+  margin: 0;
+  color: var(--baslac-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.catalogImage[data-pending] img {
+  opacity: 0.55;
+}
+
+.systemGroupBody {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+@media (max-width: 60rem) {
+  .systemGroupBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.familyPackshot {
+  display: grid;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--baslac-border);
+  background: var(--baslac-surface-strong);
+  gap: 0.6rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.familyPackshot img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 17rem;
+  object-fit: contain;
+}
+
+.familyPackshot figcaption,
+.familyPackshot p {
+  margin: 0;
+  color: var(--baslac-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.familyPackshot[data-pending] {
+  min-height: 12rem;
+  align-content: center;
+  border-style: dashed;
+}
+
+.familyPackshotMark {
+  color: var(--baslac-accent);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  opacity: 0.5;
+}
+
+.primerPackshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0;
+}
+
+.primerPackshots figure {
+  display: grid;
+  margin: 0;
+  gap: 0.5rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.primerPackshots img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 12rem;
+  object-fit: contain;
+}
+
+.primerPackshots figcaption {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.primerPackshots figcaption strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.8rem;
+}
+
+.primerPackshots figcaption span {
+  color: var(--baslac-muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.quickAddBar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.75rem; padding: 0.65rem 0.85rem;
+  border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
+}
+.quickAddBar span {
+  color: var(--baslac-muted); font-family: var(--font-technical), monospace;
+  font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.quickAddBar button {
+  min-height: 2.6rem; padding: 0 1rem; border: 0;
+  background: var(--baslac-accent); color: var(--baslac-accent-ink);
+  cursor: pointer; font-size: 0.82rem; font-weight: 800;
+}
+.quickAddBar button:disabled { opacity: 0.45; cursor: not-allowed; }
+.quickAddFeedback {
+  margin: 0; color: var(--baslac-accent);
+  font-family: var(--font-technical), monospace; font-size: 0.72rem;
+}
+.baseRow { display: flex; min-width: 0; align-items: center; gap: 0.4rem; }
+.basePick { display: grid; flex: none; place-items: center; }
+.basePick input { width: 1.1rem; height: 1.1rem; cursor: pointer; }
+.baseQty {
+  width: 3.25rem; min-height: 2.1rem; flex: none; padding: 0.2rem 0.3rem;
+  border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
+  color: inherit; font: inherit; font-size: 0.78rem; text-align: center;
+}
+.baseRow > button { flex: 1; min-width: 0; }
+.baseRow input:focus-visible { outline: 2px solid var(--baslac-accent); outline-offset: 2px; }
+
+.systemGroupCopy { display: grid; align-content: start; gap: 1rem; justify-items: start; }
+.systemGroupCopy p { margin: 0; max-width: 34rem; color: var(--baslac-muted); font-size: 0.95rem; line-height: 1.6; }

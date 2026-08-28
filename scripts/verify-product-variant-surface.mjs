@@ -14,6 +14,9 @@ const BASE = process.argv[2] || "http://localhost:3310";
 const SHOTS = "review-screenshots/product-variant-surface";
 
 const COSMOS = "/proizvodi/grupa/cosmos-lac-easy-max";
+// Ne-Cosmos porodica sa stvarne dve varijante (1 L i 4 L). Dokaz da mehanizam
+// nije vezan za jedan brend.
+const BASLAC = "/proizvodi/grupa/20-24-2k-primerfiller-grey";
 
 const failures = [];
 const check = (ok, label, detail = "") => {
@@ -342,18 +345,30 @@ const browser = await chromium.launch({ channel: "chrome" });
 }
 
 /* ---------------------------------------------------------------------------
- * 4. Ne-Cosmos porodica — stize uz Baslac commit
- *
- * Broj koraka je namerno zadrzan prazan. Dokaz da mehanizam nije vezan za jedan
- * brend trazi porodicu drugog brenda sa dve stvarne varijante, a jedina takva
- * (/proizvodi/grupa/20-24-2k-primerfiller-grey) dolazi Baslac commitom.
- * Otvaranje rute koja ne postoji dalo bi 404 i lazan pad, pa se korak ne
- * simulira nego izostavlja dok ruta ne postoji.
- *
- * Brand-agnosticnost je do tada pokrivena staticki:
- * components/product/productVariantSurface.test.mjs obara build ako se u
- * zajednickom sloju pojavi grananje po brendu ili hardkodovana sifra.
+ * 4. Ne-Cosmos porodica (Baslac, 1 L / 4 L)
  * ------------------------------------------------------------------------ */
+{
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto(BASE + BASLAC, { waitUntil: "networkidle" });
+  await settle(page);
+  const before = await page.evaluate(SNAPSHOT);
+
+  const net = newRecorder(page);
+  await page.click('[data-variant-option]:has-text("4 L")');
+  await settle(page);
+  const after = await page.evaluate(SNAPSHOT);
+  await page.screenshot({ path: `${SHOTS}/baslac-primerfiller-4l-1440.png` });
+
+  check(before.h1 !== after.h1, "ne-Cosmos: naslov prati varijantu", `${before.h1} → ${after.h1}`);
+  check(before.sku !== after.sku, "ne-Cosmos: šifra prati varijantu", `${before.sku} → ${after.sku}`);
+  check(before.cta !== after.cta, "ne-Cosmos: CTA prati varijantu", after.cta ?? "");
+  check(after.url.includes("varijanta="), "ne-Cosmos: URL nosi varijantu", after.url);
+  check(net.document.length === 0, "ne-Cosmos: nema document zahteva", net.document.join(", "));
+  check(net.rsc.length === 0, "ne-Cosmos: nema RSC navigacije", net.rsc.join(", "));
+  check(before.scrollY === after.scrollY, "ne-Cosmos: skrol očuvan");
+
+  await page.close();
+}
 
 /* ---------------------------------------------------------------------------
  * 5. Pristupačnost selektora
@@ -428,7 +443,7 @@ const browser = await chromium.launch({ channel: "chrome" });
  * ------------------------------------------------------------------------ */
 {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  for (const route of [COSMOS, "/", "/katalog"]) {
+  for (const route of [COSMOS, BASLAC, "/", "/katalog"]) {
     await page.goto(BASE + route, { waitUntil: "networkidle" });
     const cart = await page.evaluate(() => {
       const text = document.body.innerText;

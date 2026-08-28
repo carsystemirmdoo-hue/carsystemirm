@@ -5,6 +5,11 @@ import { DocumentCard } from "@/components/documents/DocumentCard";
 import { Footer } from "@/components/layout/Footer";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { getFeaturedDocuments } from "@/lib/documents";
+import {
+  baslacFamilyPackshots,
+  baslacPublicBases,
+  type BaslacSystemId,
+} from "@/lib/baslac-systems";
 import { BaslacGreyShade } from "./BaslacGreyShade";
 import { BaslacHero } from "./BaslacHero";
 import { BaslacMediaSlot } from "./BaslacMediaSlot";
@@ -28,18 +33,16 @@ export function BaslacBrandPage({
   products: CarsystemProduct[];
 }) {
   const mediaAvailability = getBaslacMediaAvailability();
-  const catalogProducts = products.filter(
-    (product) =>
-      product.productImage &&
-      !product.productImage.src.includes("placeholder-product"),
-  );
+  // Proizvodi se više ne filtriraju po tome da li imaju fotografiju — pogrešna
+  // fotografija je gora od kontrolisanog placeholdera.
+  const catalogProducts = products;
 
   return (
     <BaslacPageShell>
       <main>
-        <BaslacHero availability={mediaAvailability} />
+        <BaslacHero />
         <BrandSectionNav
-          ariaLabel="Brzi pristup baslac programu"
+          ariaLabel="Brzi pristup Baslac programu"
           items={baslacSectionNavItems}
         />
         <BrandPosition />
@@ -47,12 +50,12 @@ export function BaslacBrandPage({
         <SystemLines availability={mediaAvailability} />
         <ProcessSection />
         <ClearcoatSection availability={mediaAvailability} />
-        <PrimerSection availability={mediaAvailability} />
+        <PrimerSection />
         <BaslacGreyShade />
         <ColorWorkflow availability={mediaAvailability} />
         <CommercialSection availability={mediaAvailability} />
         <SupportSection />
-        <CatalogPreview products={catalogProducts} />
+        <BaslacSystemsAndProducts products={catalogProducts} />
         <DocumentLibrary />
         <FinalCta />
       </main>
@@ -78,7 +81,7 @@ function BrandPosition() {
       </div>
       <div className={styles.positionBody}>
         <p>
-          baslac portfolio organizovan je kao povezan refinish sistem: od
+          Baslac portfolio organizovan je kao povezan refinish sistem: od
           pripreme podloge, preko sistema boje, do završnog laka i tehničke
           podrške.
         </p>
@@ -144,7 +147,7 @@ function SystemLines({
                     ? baslacCatalogHref({ query: "30-" })
                     : line.id === "line-30-cv"
                       ? "#commercial"
-                      : "/kontakt?tema=proizvod&brend=baslac&sistem=45-line"
+                      : "/kontakt?tema=proizvod&brend=Baslac&sistem=45-line"
               }
             >
               {line.id === "line-45"
@@ -308,13 +311,14 @@ const primerGroups = [
   },
 ];
 
-function PrimerSection({
-  availability,
-}: {
-  availability: BaslacMediaAvailability;
-}) {
-  const media = baslacMedia["primer-process"];
-
+/*
+ * Sekcija prajmera nema medijski slot.
+ *
+ * `availability` i `baslacMedia["primer-process"]` su ostali iz ranije verzije
+ * koja je ovde imala sliku; sadrzaj je od tada iskljucivo tekstualan, pa se ni
+ * jedno ni drugo vise ne cita.
+ */
+function PrimerSection() {
   return (
     <section
       id="primers"
@@ -334,11 +338,32 @@ function PrimerSection({
         </Link>
       </div>
 
-      <BaslacMediaSlot
-        availability={availability[media.id]}
-        className={styles.primerMedia}
-        media={media}
-      />
+      <div className={styles.primerPackshots}>
+        {[
+          ["/products/baslac/baslac--20-24-2k-primerfiller-grey-1l-packshot.webp", "20-24", "2K Primerfiller Grey, 1 L"],
+          ["/products/baslac/baslac--20-34-2k-primerfiller-white-4l-packshot.webp", "20-34", "2K Primerfiller White, 4 L"],
+          ["/products/baslac/baslac--20-35-2k-primerfiller-wet-on-wet-white-3l-packshot.webp", "20-35", "Wet-on-Wet White, 3 L"],
+          ["/products/baslac/baslac--20-94-2k-primerfiller-black-4l-packshot.webp", "20-94", "2K Primerfiller Black, 4 L"],
+          ["/products/baslac/baslac--20-95-2k-primerfiller-wet-on-wet-black-3l-packshot.webp", "20-95", "Wet-on-Wet Black, 3 L"],
+          ["/products/baslac/baslac--25-30-2k-ep-primerfiller-4l-packshot.webp", "25-30", "2K Primerfiller EP, 4 L"],
+          ["/products/baslac/baslac--27-10-2k-washprimer-4l-packshot.webp", "27-10", "2K Washprimer, 4 L"],
+        ].map(([src, code, label]) => (
+          <figure key={code}>
+            <Image
+              src={src}
+              alt={`Baslac ${code} — ${label}`}
+              width={300}
+              height={400}
+              sizes="(max-width: 48rem) 40vw, 12rem"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>{code}</strong>
+              <span>{label}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
 
       <div className={styles.primerStack}>
         {primerGroups.map((group) => (
@@ -414,7 +439,7 @@ function ColorWorkflow({
         <article>
           <span>FORMULE</span>
           <h3>Formula Finder</h3>
-          <p>Pristup baslac formulama i izboru odgovarajućeg sistema boje.</p>
+          <p>Pristup Baslac formulama i izboru odgovarajućeg sistema boje.</p>
         </article>
         <article>
           <span>PLATFORMA</span>
@@ -556,7 +581,64 @@ function SupportSection() {
   );
 }
 
-function CatalogPreview({ products }: { products: CarsystemProduct[] }) {
+function BaslacFamilyPackshot({ system }: { system: BaslacSystemId }) {
+  const packshot = baslacFamilyPackshots[system];
+
+  if (!packshot.src) {
+    return (
+      <div className={styles.familyPackshot} data-pending="true">
+        <span className={styles.familyPackshotMark} aria-hidden="true">
+          Baslac
+        </span>
+        <p>Zvanična fotografija ambalaže je u pripremi.</p>
+      </div>
+    );
+  }
+
+  return (
+    <figure className={styles.familyPackshot}>
+      <Image
+        src={packshot.src}
+        alt={packshot.alt}
+        width={420}
+        height={560}
+        sizes="(max-width: 60rem) 40vw, 15rem"
+        loading="lazy"
+      />
+      <figcaption>Zajednička ambalaža porodice</figcaption>
+    </figure>
+  );
+}
+
+function BaslacSystemsAndProducts({
+  products,
+}: {
+  products: CarsystemProduct[];
+}) {
+  const groups = [
+    {
+      id: "sistem-line-45",
+      title: "Line 45 — vodeni bazni sistem",
+      text: "Vodeni mixing sistem sa solid, transparent, metallic i pearl komponentama, reducerom i aditivima.",
+      count: baslacPublicBases("line-45").length,
+      selector: "line-45" as const,
+    },
+    {
+      id: "sistem-line-35",
+      title: "Line 35 — konvencionalni bazni sistem",
+      text: "Mixing sistem sa solid, transparent, metallic, pearl i Xirallic baznim komponentama. Nijansa se meša po formuli.",
+      count: baslacPublicBases("line-35").length,
+      selector: "line-35" as const,
+    },
+    {
+      id: "sistem-line-30",
+      title: "Line 30 — 2K završne boje",
+      text: "Pigmentirani 2K sistem sa direktnim sjajem, uključujući mixing clear i converter za komercijalna vozila.",
+      count: baslacPublicBases("line-30").length,
+      selector: "line-30" as const,
+    },
+  ];
+
   return (
     <section
       id="products"
@@ -565,55 +647,94 @@ function CatalogPreview({ products }: { products: CarsystemProduct[] }) {
     >
       <header className={styles.sectionHeader}>
         <div>
-          <p className={styles.sectionKicker}>Dostupno u javnom katalogu</p>
-          <h2 id="baslac-catalog-title">
-            baslac proizvodi sa postojećim lokalnim zapisom.
-          </h2>
+          <p className={styles.sectionKicker}>Program po sistemima</p>
+          <h2 id="baslac-catalog-title">Baslac sistemi i proizvodi</h2>
         </div>
         <p>
-          Prikazujemo samo postojeće javne Carsystem zapise. Cenu, pakovanje i
-          dostupnost potvrđujemo kroz upit.
+          Izaberite sistem boja, pripremni materijal ili završni proizvod.
+          Unutar svake porodice dostupne su odgovarajuće varijante, pakovanja i
+          tehnička dokumentacija.
         </p>
       </header>
 
+      {groups.map((group) => (
+        <article className={styles.systemGroup} id={group.id} key={group.id}>
+          <div className={styles.systemGroupHeader}>
+            <div>
+              <h3>{group.title}</h3>
+              <p>{group.text}</p>
+            </div>
+            <span className={styles.systemGroupCount}>
+              {group.count} baza
+            </span>
+          </div>
+          <div className={styles.systemGroupBody}>
+            <BaslacFamilyPackshot system={group.selector} />
+            <div className={styles.systemGroupCopy}>
+              <p>
+                Sve baze, pretraga, filteri i dodavanje u listu nalaze se na
+                stranici sistema.
+              </p>
+              <Link
+                className={styles.primaryButton}
+                href={`/proizvodi/grupa/baslac-${group.selector}`}
+              >
+                Otvorite {group.title.split(" — ")[0]}
+                <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </div>
+        </article>
+      ))}
+
       {products.length > 0 ? (
-        <div className={styles.catalogGrid}>
-          {products.slice(0, 4).map((product) => (
-            <Link href={`/proizvodi/${product.slug}`} key={product.slug}>
-              <div className={styles.catalogImage}>
-                {product.productImage ? (
-                  <Image
-                    src={product.productImage.src}
-                    alt={product.productImage.alt}
-                    fill
-                    sizes="(min-width: 70rem) 18rem, (min-width: 45rem) 40vw, 82vw"
-                  />
-                ) : null}
-              </div>
-              <div className={styles.catalogCopy}>
-                <p>{product.sku}</p>
-                <h3>{product.name}</h3>
-                <span>
-                  Otvorite proizvod
-                  <i aria-hidden="true">↗</i>
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <p className={styles.emptyCatalog}>
-          Javni katalog trenutno nema potvrđene baslac fotografije proizvoda.
-        </p>
-      )}
+        <article className={styles.systemGroup}>
+          <div className={styles.systemGroupHeader}>
+            <div>
+              <h3>Proizvodi sa otvorenom stranicom</h3>
+              <p>
+                Artikli koji već imaju svoju stranicu sa tehničkim podacima i
+                dokumentacijom.
+              </p>
+            </div>
+          </div>
+          <div className={styles.catalogGrid}>
+            {products.slice(0, 4).map((product) => (
+              <Link href={`/proizvodi/${product.slug}`} key={product.slug}>
+                <div className={styles.catalogImage} data-pending={
+                  product.productImage?.src.includes("placeholder-product") ||
+                  undefined
+                }>
+                  {product.productImage ? (
+                    <Image
+                      src={product.productImage.src}
+                      alt={product.productImage.alt}
+                      fill
+                      sizes="(min-width: 70rem) 18rem, (min-width: 45rem) 40vw, 82vw"
+                    />
+                  ) : null}
+                </div>
+                <div className={styles.catalogCopy}>
+                  <p>{product.sku}</p>
+                  <h4>{product.name}</h4>
+                  <span>
+                    Otvorite proizvod
+                    <i aria-hidden="true">↗</i>
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </article>
+      ) : null}
 
       <div className={styles.catalogFooter}>
         <p>
-          Potreban vam je proizvod koji još nije prikazan? Pošaljite kod ili
-          fotografiju etikete, bez pretpostavke o lokalnom stanju.
+          Ne vidite artikal koji vam treba? Pošaljite oznaku sa etikete i
+          potvrđujemo pakovanje, dokumentaciju i dostupnost.
         </p>
         <Link className={styles.outlineButton} href={baslacCatalogHref()}>
-          Svi baslac proizvodi
+          Svi Baslac proizvodi
           <span aria-hidden="true">↗</span>
         </Link>
       </div>
@@ -622,7 +743,7 @@ function CatalogPreview({ products }: { products: CarsystemProduct[] }) {
 }
 
 function DocumentLibrary() {
-  const documents = getFeaturedDocuments("baslac");
+  const documents = getFeaturedDocuments("Baslac");
   if (documents.length === 0) return null;
 
   return (
@@ -680,7 +801,7 @@ function FinalCta() {
           <span aria-hidden="true">↗</span>
         </Link>
         <Link href={baslacCatalogHref()}>
-          Pogledajte sve baslac proizvode
+          Pogledajte sve Baslac proizvode
         </Link>
       </div>
     </section>

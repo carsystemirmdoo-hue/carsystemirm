@@ -1,5 +1,10 @@
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
+import { baslacCatalogProducts } from "@/lib/baslac-catalog-products";
+import {
+  applyBaslacEnrichment,
+  assertBaslacEnrichmentKeys,
+} from "@/lib/baslac-enrichment";
 import type { ProductSize } from "@/lib/product-scale";
 import type {
   ProductCatalogStrategy,
@@ -245,8 +250,34 @@ export type CarsystemProduct = {
   erpSku?: string;
   externalSku?: string;
   biznisSoftSku?: string;
+  /**
+   * Naša interna poslovna šifra artikla — glavni poslovni identifikator.
+   *
+   * UVEK string. Vodeća nula je deo šifre, ne formatiranje: `"005500"` i `5500`
+   * nisu ista vrednost, a `Number("005500")` trajno gubi razliku. Nikad ne
+   * pisati `Number(...)`, `parseInt(...)`, `+code` ni `JSON` numerički parser
+   * nad ovom vrednošću, i nikad je ne koristiti kao ključ sortiranja po broju.
+   *
+   * U finalnom katalogu se očekuje tačno šest cifara (`/^\d{6}$/`). Polje je
+   * opciono jer se popunjava postepeno — odsustvo znači „još nije povezano“,
+   * ne grešku.
+   *
+   * Ne zamenjuje `sku`: `sku` je danas semantički preopterećen (šifra
+   * proizvođača kod R-M i Baslac-a, izvedeni ID kod Cosmos Lac-a), pa se ovo
+   * vodi kao zasebno polje.
+   */
+  internalCode?: string;
+  /**
+   * Potvrđena šifra proizvođača.
+   *
+   * `null` = provereno, proizvođač je ne daje ili nije potvrđena.
+   * `undefined` = još nije provereno.
+   * Nikada se ne izvodi iz naziva, sluga ni iz `internalCode`.
+   */
+  manufacturerCode?: string | null;
   stockManaged?: boolean;
   productImage: ProductImageAsset | null;
+  visualIdentity?: ProductVisualIdentity;
   galleryImages: ProductImageAsset[];
   specifications: ProductSpecification[];
   documents: ProductDocument[];
@@ -403,12 +434,12 @@ export const brands: CarsystemBrand[] = [
   }),
   defineCarsystemBrand({
     slug: "baslac",
-    name: "baslac",
+    name: "Baslac",
     logo: "/brands/baslac.svg",
     description:
       "Profesionalni automotive refinish sistem koji povezuje pripremu podloge, vodene i solventne boje, bezbojne lakove i digitalnu koloristiku.",
     overview:
-      "baslac povezuje pripremu, boju, završni lak i pomoćne proizvode u pregledan sistem za radionice kojima su važni jednostavniji izbor i kontrolisan proces.",
+      "Baslac povezuje pripremu, boju, završni lak i pomoćne proizvode u pregledan sistem za radionice kojima su važni jednostavniji izbor i kontrolisan proces.",
     programSlugs: ["boje-i-lakovi", "poliranje"],
     catalogOrder: 3,
     presentation: {
@@ -416,8 +447,8 @@ export const brands: CarsystemBrand[] = [
       accentContrastColor: "#14171C",
       accentOnDarkColor: "#21A0D2",
       accentOnDarkContrastColor: "#14171C",
-      heroKicker: "baslac refinish program",
-      productsCtaLabel: "Pogledajte baslac proizvode",
+      heroKicker: "Baslac refinish program",
+      productsCtaLabel: "Pogledajte Baslac proizvode",
       contactCtaLabel: "Kontaktirajte nas",
     },
   }),
@@ -428,7 +459,7 @@ export const brands: CarsystemBrand[] = [
     description:
       "Kratak, zatvoren program bezbojnih lakova, punilaca i učvršćivača koji rade u tačno propisanim odnosima mešanja — bez sopstvenog sistema boje.",
     overview:
-      "Norbin je deo Surventis refinish porodice (ranije BASF Coatings), pozicioniran uz Glasurit, R-M i baslac kao vrednosno pristupačan pomoćni program za lakirnicu.",
+      "Norbin je deo Surventis refinish porodice (ranije BASF Coatings), pozicioniran uz Glasurit, R-M i Baslac kao vrednosno pristupačan pomoćni program za lakirnicu.",
     programSlugs: ["boje-i-lakovi"],
     catalogOrder: 4,
     presentation: {
@@ -635,6 +666,28 @@ export const publicProgramGroups: PublicProgramGroup[] = [
       "Potrošni program pokriva maskiranje, zaštitu, pomoćne sprejeve i artikle koji održavaju stabilan radni tok u radionici.",
   },
 ];
+
+/**
+ * Opisuje da li je slika proizvoda njegov sopstveni packshot ili generička
+ * porodična ambalaža. Polje je opciono: postojeći zapisi ga ne moraju imati.
+ *
+ * Bez ovoga desetine Line 35/45 tonera izgledaju kao da svaki ima jedinstvenu
+ * fotografiju, iako svi dele istu limenku.
+ */
+export type ProductVisualIdentity = {
+  /** `specific` — tačna ambalaža ovog SKU-a. `family` — generička limenka linije. */
+  packshotKind: "specific" | "family";
+  /** Vizuelna porodica, npr. `baslac-line-35`. */
+  visualFamily?: string;
+  /** Nijansa za swatch prikaz varijante. */
+  swatch?: string;
+  finishType?: "solid" | "transparent" | "metallic" | "pearl" | "xirallic" | "mat";
+  imageConfidence: "confirmed" | "family-only" | "unverified" | "conflicting";
+  imageSource?: string;
+  imageSourceUrl?: string;
+  /** Npr. `basf-era` za staru „A brand of BASF" ambalažu. */
+  packagingEra?: string;
+};
 
 const placeholderProductImage = "/images/products/placeholder-product.svg";
 
@@ -1521,6 +1574,9 @@ const befarPadProducts = befarPadColors.flatMap((color) =>
 
 const productRecords: CarsystemProduct[] = [
   ...rmImportedProducts,
+  // Baslac sistemske baze (samo ACTIVE_CONFIRMED) i pripremni proizvodi.
+  // Generišu se iz `lib/baslac-systems.ts`; phase-out i UNVERIFIED ne ulaze.
+  ...baslacCatalogProducts,
   withProductAssets(archivedProduct("rm-diamont-bazna-boja"), {
     productImage: productAsset(
       "/products/rm/rm-diamont-bazna-boja.jpg",
@@ -2109,48 +2165,43 @@ const productRecords: CarsystemProduct[] = [
       "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
     ],
   }),
-  createProduct({
-    slug: "baslac-35-m331-pasta",
-    name: "Baslac 35-M331 pasta",
-    brandSlug: "baslac",
-    programSlug: "poliranje",
-    phaseSlug: "poliranje",
-    shortDescription: "Pasta u pakovanju 0.5 L za korekciju i završnu obradu.",
-    longDescription:
-      "Baslac 35-M331 pasta je deo programa za završnu obradu, prikazana sa jasnim pakovanjem i upitom za tehničku potvrdu primene.",
-    sku: "BASLAC-35-M331",
-    packages: [{ label: "0.5 L" }],
-    purpose: "Poliranje i završno ujednačavanje površine",
-    badges: ["Pasta", "0.5 L", "Na upit"],
-    productImage: productAsset(
-      "/products/baslac/baslac-35-m331-pasta.webp",
-      "Baslac proizvod iz programa boja i lakova",
-    ),
-    specifications: [
-      { label: "Pakovanje", value: "0.5 L" },
-      { label: "Primena", value: "Završna obrada laka" },
-      { label: "Nanošenje", value: "Mašinski ili ručno prema procesu" },
-      { label: "Faza", value: "Poliranje" },
-    ],
-    relatedProductSlugs: ["befar-sundjer-beli-50x150", "rm-pasta-190-1l", "carsystem-finish-serija"],
-  }),
+  /*
+   * `baslac-35-m331-pasta` je uklonjen 2026-08-25.
+   *
+   * Bio je drugi runtime zapis za isti fizički artikal `35-M331 Red Xirallic
+   * 0,5 L`, koji generator već proizvodi kao `baslac-35-m331` — sa potvrđenim
+   * pakovanjem, `variantId`-jem i pripadnošću porodici `baslac-line-35`, čega
+   * ovaj zapis nije imao. Stari slug ostaje dostupan kroz `BASLAC_LEGACY_SLUGS`
+   * i preusmerenje u `next.config.ts`. Jedini podatak koji generator nije imao
+   * (`imageSourceUrl`) prenet je u `lib/baslac-enrichment.ts`; tamošnji
+   * komentar objašnjava zašto se `relatedProductSlugs` NISU preneli.
+   */
   createProduct({
     slug: "baslac-30-s510-s-serija",
-    name: "Baslac 30-S510 S serija",
+    visualIdentity: {
+      packshotKind: "family",
+      visualFamily: "baslac-line-30",
+      imageConfidence: "conflicting",
+    },
+    // Oznaka `30-S510` nije pronađena u KLW katalogu (najbliže: 30-S511 Blue
+    // Red, 30-S530 Blue). Naziv se ne pretpostavlja — vidi lib/baslac-systems.ts.
+    name: "Baslac 30-S510",
     brandSlug: "baslac",
     programSlug: "boje-i-lakovi",
     phaseSlug: "boja",
-    shortDescription: "Baslac S serija za rad u sistemu boja i pratećih materijala.",
+    shortDescription:
+      "2K završna boja linije 30. Tačna oznaka nijanse se potvrđuje pre isporuke.",
     longDescription:
       "Baslac 30-S510 S serija je prikazana kao proizvod iz programa boja i lakova, sa pakovanjem koje se potvrđuje kroz upit.",
     sku: "BASLAC-30-S510",
     packages: [{ label: "Na upit", detail: "Pakovanje se potvrđuje kroz upit" }],
     purpose: "Rad u sistemu boja i pratećih materijala",
-    badges: ["S serija", "Boje i lakovi", "Na upit"],
-    productImage: productAsset(
-      "/products/baslac/baslac-30-s510-s-serija.webp",
-      "Baslac proizvod iz programa boja i lakova",
-    ),
+    badges: ["Line 30", "2K završna boja", "Na upit"],
+    // Etiketa na staroj slici čita `35-M1020` — drugi proizvod. Uklonjena.
+    productImage: {
+      src: placeholderProductImage,
+      alt: "Baslac 30-S510 — fotografija u pripremi",
+    },
     specifications: [
       { label: "Serija", value: "30-S510 S" },
       { label: "Program", value: "Boje i lakovi" },
@@ -2159,33 +2210,25 @@ const productRecords: CarsystemProduct[] = [
     ],
     relatedProductSlugs: ["baslac-60-20-razredjivac", "baslac-35-m214", "rm-diamont-bazna-boja"],
   }),
-  createProduct({
-    slug: "baslac-35-m214",
-    name: "Baslac 35-M214",
-    brandSlug: "baslac",
-    programSlug: "boje-i-lakovi",
-    phaseSlug: "lak",
-    shortDescription: "Baslac 35-M214 u pakovanju 3.5 L za završni refinish proces.",
-    longDescription:
-      "Baslac 35-M214 je proizvod iz programa boja i lakova sa naglašenim pakovanjem 3.5 L i upitom za potvrdu tehničke namene.",
-    sku: "BASLAC-35-M214",
-    packages: [{ label: "3.5 L" }],
-    purpose: "Završni refinish rad prema tehničkom sistemu",
-    badges: ["3.5 L", "Boje i lakovi", "Na upit"],
-    productImage: productAsset(
-      "/products/baslac/baslac-35-m214.jpg",
-      "Baslac proizvod iz programa boja i lakova",
-    ),
-    specifications: [
-      { label: "Pakovanje", value: "3.5 L" },
-      { label: "Program", value: "Boje i lakovi" },
-      { label: "Primena", value: "Prema tehničkom listu" },
-      { label: "Faza", value: "Lak / završni sloj" },
-    ],
-    relatedProductSlugs: ["baslac-30-s510-s-serija", "baslac-60-20-razredjivac", "satajet-x-5500"],
-  }),
+  /*
+   * `baslac-35-m214` (ručni, `sku: "BASLAC-35-M214"`) je uklonjen 2026-08-25.
+   *
+   * Nosio je ISTI slug kao generisani zapis, pa je katalog imao dva proizvoda
+   * na jednoj adresi — `getCarsystemProductBySlug()` je vraćao samo prvi, a
+   * search asset je nosio duplirani id. Generisani zapis je canonical: ima
+   * potvrđeno pakovanje 3,5 L, `sku: "35-M214"`, `externalSku: "53224337"`,
+   * stvarni Line 35 family packshot i pripada porodici `baslac-line-35`.
+   *
+   * `relatedProductSlugs` i `imageSourceUrl` odavde su preneti u
+   * `lib/baslac-enrichment.ts`. Napomena o ranije pogrešnoj fotografiji
+   * (limenka `45-W1120`) ostaje interna i namerno nije postala javni sadržaj.
+   */
   createProduct({
     slug: "baslac-60-20-razredjivac",
+    visualIdentity: {
+      packshotKind: "specific",
+      imageConfidence: "conflicting",
+    },
     name: "Baslac 60-20 razređivač",
     brandSlug: "baslac",
     programSlug: "boje-i-lakovi",
@@ -2197,10 +2240,11 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "5 L" }],
     purpose: "Podešavanje sistema prema tehničkom listu",
     badges: ["Razređivač", "5 L", "Na upit"],
-    productImage: productAsset(
-      "/products/baslac/baslac-60-20-razredjivac.jpg",
-      "Baslac proizvod iz programa boja i lakova",
-    ),
+    // Ista pogrešna fotografija kao kod 35-M214 (`45-W1120` limenka). Uklonjena.
+    productImage: {
+      src: placeholderProductImage,
+      alt: "Baslac 60-20 razređivač — fotografija u pripremi",
+    },
     // Jedini baslac artikal čija se zvanična oznaka (60-20) poklapa sa oznakom
     // dokumenta. Ostala tri artikla nose mixing kodove (35-M214, 35-M331,
     // 30-S510) za koje postoji samo tehnički list linije, ne artikla — vidi
@@ -2211,7 +2255,7 @@ const productRecords: CarsystemProduct[] = [
         kind: "PDF",
         href: "/documents/products/baslac/60-20.pdf",
         status: "available",
-        note: "Zvanični baslac tehnički list za artikal 60-20 (Reducer Universal Normal).",
+        note: "Zvanični Baslac tehnički list za artikal 60-20 (Reducer Universal Normal).",
       },
       {
         title: "Bezbednosni list",
@@ -2356,7 +2400,29 @@ function withCatalogArchitecture(product: CarsystemProduct): CarsystemProduct {
   };
 }
 
-export const products: CarsystemProduct[] = productRecords.map(withCatalogArchitecture);
+/**
+ * Konačni katalog.
+ *
+ * Poslednji korak je kontrolisano obogaćivanje generisanih Baslac zapisa
+ * (`lib/baslac-enrichment.ts`). Radi se tek ovde jer preporuke pokazuju i na
+ * proizvode definisane u ovom fajlu, pa se validnost sluga može proveriti tek
+ * kad je ceo skup poznat. Enrichment ne može da promeni identitet — vidi
+ * ograničenja tipa `BaslacEnrichment`.
+ */
+const architecturedProducts = productRecords.map(withCatalogArchitecture);
+const knownProductSlugs = new Set(architecturedProducts.map((product) => product.slug));
+
+assertBaslacEnrichmentKeys(
+  architecturedProducts
+    .filter((product) => product.brandSlug === "baslac")
+    .map((product) => product.slug),
+);
+
+export const products: CarsystemProduct[] = architecturedProducts.map((product) =>
+  product.brandSlug === "baslac"
+    ? applyBaslacEnrichment(product, (slug) => knownProductSlugs.has(slug))
+    : product,
+);
 
 export function getAllCarsystemProducts() {
   return [...products];

@@ -1,8 +1,4 @@
 export type BaslacMediaId =
-  | "hero-system"
-  | "hero-45-line"
-  | "hero-color-tools"
-  | "hero-fast-process"
   | "repair-rhythm"
   | "line-45-system"
   | "clearcoat-range"
@@ -31,15 +27,33 @@ export type BaslacMediaAvailability = Record<
   }
 >;
 
-export type BaslacHeroSlide = {
-  id: "system" | "line-45" | "color" | "fast-process";
+export type BaslacCampaignSlideId = "20-years" | "surventis";
+
+export type BaslacCampaignSlide = {
+  id: BaslacCampaignSlideId;
+  /**
+   * `artwork` je providni foreground sloj iznad kontrolisane tamne povrsine.
+   * `photo` je full-bleed fotografija sa gradijentom samo radi citljivosti.
+   */
+  visual: "artwork" | "photo";
+  desktopImage: string;
+  /** Art-directed kadar; koristi se preko `<source media>`, ne preko cover crop-a. */
+  mobileImage: string;
+  imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
+  mobileImageWidth: number;
+  mobileImageHeight: number;
   eyebrow: string;
   title: string;
   description: string;
   primaryCta: { href: string; label: string };
-  secondaryCta: { href: string; label: string };
-  mediaId: BaslacMediaId;
   controlLabel: string;
+  /** Statička paleta tranzicije, ručno definisana po kampanji. */
+  transitionFrom: string;
+  transitionTo: string;
+  progressColor: string;
+  controlTheme: "on-dark" | "on-light";
 };
 
 export type BaslacSectionNavItem = {
@@ -81,7 +95,7 @@ export function baslacCatalogHref({
   phase?: string;
   query?: string;
 } = {}) {
-  const params = new URLSearchParams({ brend: "baslac" });
+  const params = new URLSearchParams({ brend: "Baslac" });
 
   if (phase) params.set("faza", phase);
   if (query) params.set("q", query);
@@ -90,60 +104,6 @@ export function baslacCatalogHref({
 }
 
 export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
-  "hero-system": {
-    id: "hero-system",
-    section: "Hero 1",
-    desktopSrc:
-      "/images/brands/baslac/banners/baslac-system-desktop.webp",
-    mobileSrc: "/images/brands/baslac/banners/baslac-system-mobile.webp",
-    width: 1600,
-    height: 1080,
-    mobileWidth: 900,
-    mobileHeight: 1080,
-    alt: "Organizovan prikaz kompletnog baslac sistema proizvoda",
-    priority: "high",
-  },
-  "hero-45-line": {
-    id: "hero-45-line",
-    section: "Hero 2",
-    desktopSrc:
-      "/images/brands/baslac/banners/baslac-45-line-desktop.webp",
-    mobileSrc: "/images/brands/baslac/banners/baslac-45-line-mobile.webp",
-    width: 1600,
-    height: 1080,
-    mobileWidth: 900,
-    mobileHeight: 1080,
-    alt: "45 Line vodeni sistem boja u profesionalnoj primeni",
-    priority: "high",
-  },
-  "hero-color-tools": {
-    id: "hero-color-tools",
-    section: "Hero 3",
-    desktopSrc:
-      "/images/brands/baslac/banners/baslac-color-tools-desktop.webp",
-    mobileSrc:
-      "/images/brands/baslac/banners/baslac-color-tools-mobile.webp",
-    width: 1600,
-    height: 1080,
-    mobileWidth: 900,
-    mobileHeight: 1080,
-    alt: "Digitalni baslac koloristički alati i workflow mešanja",
-    priority: "high",
-  },
-  "hero-fast-process": {
-    id: "hero-fast-process",
-    section: "Hero 4",
-    desktopSrc:
-      "/images/brands/baslac/banners/baslac-fast-process-desktop.webp",
-    mobileSrc:
-      "/images/brands/baslac/banners/baslac-fast-process-mobile.webp",
-    width: 1600,
-    height: 1080,
-    mobileWidth: 900,
-    mobileHeight: 1080,
-    alt: "Kontrolisan profesionalni proces sušenja u radionici",
-    priority: "high",
-  },
   "repair-rhythm": {
     id: "repair-rhythm",
     section: "Glavni proces",
@@ -175,7 +135,7 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
       "/images/brands/baslac/clearcoats/baslac-clearcoat-range.webp",
     width: 1600,
     height: 1000,
-    alt: "Grupa baslac bezbojnih lakova organizovana prema procesu",
+    alt: "Grupa Baslac bezbojnih lakova organizovana prema procesu",
     priority: "medium",
   },
   "primer-process": {
@@ -185,7 +145,7 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
       "/images/brands/baslac/primers/baslac-primer-process.webp",
     width: 1400,
     height: 1050,
-    alt: "Priprema podloge i nanošenje baslac primer-filler sistema",
+    alt: "Priprema podloge i nanošenje Baslac primer-filler sistema",
     priority: "medium",
   },
   "color-workflow": {
@@ -210,74 +170,58 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
   },
 };
 
-export const baslacHeroSlides: BaslacHeroSlide[] = [
+const BASLAC_CAMPAIGN_DIR = "/images/brands/baslac/campaign";
+
+export const baslacCampaignSlides: BaslacCampaignSlide[] = [
   {
-    id: "system",
-    eyebrow: "baslac kompletan program",
-    title: "Od pripreme podloge do završnog sjaja.",
+    id: "20-years",
+    visual: "artwork",
+    desktopImage: `${BASLAC_CAMPAIGN_DIR}/baslac-20-years-artwork.webp`,
+    mobileImage: `${BASLAC_CAMPAIGN_DIR}/baslac-20-years-artwork.webp`,
+    imageAlt:
+      "Jubilarni Baslac vizual: broj 20 sastavljen od ilustracija i kantica Baslac boje",
+    imageWidth: 798,
+    imageHeight: 871,
+    mobileImageWidth: 798,
+    mobileImageHeight: 871,
+    eyebrow: "BASLAC · 20 GODINA",
+    title: "20 godina pametnog reparaturnog lakiranja.",
     description:
-      "Povezan sistem kitova, prajmera, boja, lakova i pomoćnih proizvoda za profesionalne refinish popravke.",
+      "Dve decenije boje koja daje rezultate, vrednosti koja ima smisla i partnerstva koje traje. A ovo je tek početak.",
     primaryCta: {
       href: baslacCatalogHref(),
-      label: "Svi baslac proizvodi",
+      label: "Pogledajte Baslac proizvode",
     },
-    secondaryCta: {
-      href: "#repair-process",
-      label: "Pogledajte kompletan proces",
-    },
-    mediaId: "hero-system",
-    controlLabel: "Kompletan program",
+    controlLabel: "20 godina",
+    transitionFrom: "#04090c",
+    transitionTo: "#1d7fb0",
+    progressColor: "#29a3dc",
+    controlTheme: "on-dark",
   },
   {
-    id: "line-45",
-    eyebrow: "Vodeni sistem boja",
-    title: "45 Line. Precizna nijansa u savremenom vodenom sistemu.",
+    id: "surventis",
+    visual: "photo",
+    desktopImage: `${BASLAC_CAMPAIGN_DIR}/baslac-surventis-desktop.webp`,
+    mobileImage: `${BASLAC_CAMPAIGN_DIR}/baslac-surventis-mobile.webp`,
+    imageAlt:
+      "Surventis zastave na jarbolima ispred vedrog neba",
+    imageWidth: 3440,
+    imageHeight: 1440,
+    mobileImageWidth: 1800,
+    mobileImageHeight: 1440,
+    eyebrow: "NOVO POGLAVLJE",
+    title: "Sledeći korak jednostavno ima smisla.",
     description:
-      "Solid, metallic i pearl basecoat uz povezanu koloristiku, blendovanje i odgovarajući clearcoat proces.",
+      "Baslac ulazi u novo poglavlje sa istim praktičnim pristupom i podrškom kompanije Surventis, ostajući pouzdan izbor za ekonomična rešenja u reparaturnom lakiranju.",
     primaryCta: {
-      href: "#line-45",
-      label: "Pogledajte 45 Line",
+      href: "#overview",
+      label: "Upoznajte Baslac",
     },
-    secondaryCta: {
-      href: "/kontakt?tema=podrska&brend=baslac&oblast=nijansa",
-      label: "Pronađite nijansu",
-    },
-    mediaId: "hero-45-line",
-    controlLabel: "45 Line",
-  },
-  {
-    id: "color",
-    eyebrow: "Digital Color Management",
-    title: "Od očitavanja nijanse do spremne formule.",
-    description:
-      "e-finder star, Formula Finder i Refinity povezuju merenje, formulu i pripremu boje.",
-    primaryCta: {
-      href: "#koloristika",
-      label: "Istražite koloristiku",
-    },
-    secondaryCta: {
-      href: "/kontakt?tema=podrska&brend=baslac&oblast=nijansa",
-      label: "Zatražite pomoć za nijansu",
-    },
-    mediaId: "hero-color-tools",
-    controlLabel: "Koloristika",
-  },
-  {
-    id: "fast-process",
-    eyebrow: "Brži protok kroz radionicu",
-    title: "Izaberite sistem prema ritmu popravke.",
-    description:
-      "Standardni, brzi, wet-on-wet i ambient proces povezuju različite faze i grupe proizvoda.",
-    primaryCta: {
-      href: "#repair-rhythm",
-      label: "Uporedite procese",
-    },
-    secondaryCta: {
-      href: "#clearcoats",
-      label: "Pogledajte bezbojne lakove",
-    },
-    mediaId: "hero-fast-process",
-    controlLabel: "Ritam popravke",
+    controlLabel: "Novo poglavlje",
+    transitionFrom: "#0d2436",
+    transitionTo: "#4f8fc0",
+    progressColor: "#7bb7e0",
+    controlTheme: "on-dark",
   },
 ];
 

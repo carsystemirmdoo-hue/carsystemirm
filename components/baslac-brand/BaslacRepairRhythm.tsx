@@ -94,7 +94,7 @@ export function BaslacRepairRhythm({
             </div>
 
             <Link href={baslacCatalogHref()}>
-              Otvorite baslac katalog
+              Otvorite Baslac katalog
               <span aria-hidden="true">↗</span>
             </Link>
           </div>

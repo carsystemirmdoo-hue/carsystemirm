@@ -7,6 +7,9 @@ import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import {
   getAllCarsystemBrands,
   getCarsystemBrandBySlug,
+  getManualProductRecommendations,
+  getProductCompatibleProducts,
+  getProgramGroupBySlug,
   programGroups,
   refinishPhases,
 } from "@/lib/carsystem-data";
@@ -21,6 +24,7 @@ import {
   productGroupJsonLd,
 } from "@/lib/seo";
 import { buildProductFamilyMetadata } from "@/lib/seo/metadata-builders";
+import { ProductDetailPage } from "@/components/product/ProductDetailPage";
 import styles from "@/components/catalog/CatalogPage.module.css";
 
 type FamilyRouteProps = {
@@ -55,6 +59,42 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
     ...(brand ? [{ name: brand.name, path: brand.routes.landing }] : []),
     { name: family.name, path: route },
   ];
+
+  /*
+   * `variant-pdp` porodice SU proizvod.
+   *
+   * Njihove varijante se razlikuju samo po boji, pakovanju ili izvedbi, pa je
+   * family adresa ujedno i stranica proizvoda. Genericki group hero, CTA
+   * kartica i mreza kartica se za njih uopste ne renderuju — ne skrivaju se
+   * CSS-om, nego se ne montiraju.
+   */
+  if (family.presentation === "variant-pdp") {
+    const representative = family.representative;
+    const productBrand = getCarsystemBrandBySlug(representative.brandSlug);
+    const productProgram = getProgramGroupBySlug(representative.programSlug);
+    if (!productBrand || !productProgram) notFound();
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd(breadcrumbs))}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(productGroupJsonLd(family))}
+        />
+        <ProductDetailPage
+          brand={productBrand}
+          breadcrumbItems={breadcrumbs}
+          compatibleProducts={getProductCompatibleProducts(representative)}
+          product={representative}
+          variantSelectInPlace
+          program={productProgram}
+          similarProducts={getManualProductRecommendations(representative)}
+        />
+      </>
+    );
+  }
 
   const variationLabel = family.variesBy.includes("color")
     ? "nijansi i varijanti"

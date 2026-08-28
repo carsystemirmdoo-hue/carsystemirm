@@ -1,83 +1,133 @@
 #!/usr/bin/env node
 /**
- * Canonical listing model validator.
+ * Validator canonical listing modela.
  *
- * Re-derives the entity split from the same generated data the runtime model
- * builds from, and asserts the invariants the catalog now depends on:
+ * Ranija verzija je populaciju rekonstruisala iz `data/cosmos-lac-products.generated.json`
+ * i poredila je sa hardkodiranim `TOTAL_PRODUCTS = 832`. Ta rekonstrukcija nije
+ * videla 163 Baslac zapisa koje generiše `lib/baslac-catalog-products.ts`, pa je
+ * validator prolazio tvrdeći 832 proizvoda i 41 porodicu dok ih je runtime imao
+ * 991 i 48. Svaki snapshot broj zastari čim se uveze nova roba.
  *
- *   - 41 canonical families covering 715 variants;
- *   - 117 standalone entities;
- *   - 158 browse entities in total;
- *   - one card per family (no duplicate family entities);
- *   - every family route in the sitemap is reachable as a browse entity.
+ * Zato ovde više nema očekivanog ukupnog broja. Model se učitava iz istog
+ * runtime izvora koji renderuje javni sajt (`scripts/lib/catalog-runtime.mjs` →
+ * `getCatalogListingData()`, `getAllProductFamilies()`), zbirne vrednosti se
+ * MERE i ispisuju, a proveravaju se INVARIJANTE — tvrdnje koje moraju važiti za
+ * bilo koji katalog, i danas i posle uvoza:
  *
- * The numbers are asserted, not printed, because the whole point of P1-02 is
- * that catalog discovery and the canonical/sitemap architecture describe the
- * same entities — a silent drift between them is the bug.
+ *   - varijante + samostalni === ukupno proizvoda;
+ *   - browse (canonical) === porodice + samostalni;
+ *   - jedna porodica daje tačno jedan browse entitet;
+ *   - browse nikada ne prikazuje varijantu;
+ *   - svaka porodica ima najmanje `FAMILY_MIN_VARIANTS` varijanti;
+ *   - svaka porodica je dostupna sa svoje canonical rute;
+ *   - svaka varijanta pripada porodici koja postoji u browse skupu.
+ *
+ * Jedini zaključani poslovni ugovori su izdvojeni u `BUSINESS_CONTRACT` — to su
+ * namerne odluke, ne izmereni brojevi.
  */
 
-import { readFileSync } from "node:fs";
+import {
+  loadCatalogRuntime,
+  summarizeCatalogRuntime,
+} from "./lib/catalog-runtime.mjs";
+
+/**
+ * Namerno zaključane poslovne odluke. NE zbir trenutnog kataloga.
+ *
+ * `familyMinVariants` prati `FAMILY_MIN_VARIANTS` u `lib/product-families.ts`:
+ * grupa od jednog člana nije porodica nego proizvod, i to se ne menja rastom
+ * asortimana.
+ */
+const BUSINESS_CONTRACT = {
+  familyMinVariants: 2,
+};
 
 const failures = [];
 const expect = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-const cosmosRaw = JSON.parse(
-  readFileSync("data/cosmos-lac-products.generated.json", "utf8"),
-);
-const cosmos = Array.isArray(cosmosRaw) ? cosmosRaw : cosmosRaw.products;
+const { families, listing, variantSlugs, familyPath } = loadCatalogRuntime();
+const summary = summarizeCatalogRuntime();
+const { canonical, variants } = listing;
 
-const groups = new Map();
-for (const record of cosmos) {
-  const bucket = groups.get(record.baseProductSlug) ?? [];
-  bucket.push(record);
-  groups.set(record.baseProductSlug, bucket);
-}
+/* -- Invarijante zbira ----------------------------------------------------- */
 
-const families = [...groups.values()].filter((variants) => variants.length >= 2);
-const cosmosSingletons = [...groups.values()].filter((variants) => variants.length === 1);
-const variantCount = families.reduce((total, variants) => total + variants.length, 0);
-
-const TOTAL_PRODUCTS = 832;
-const nonCosmos = TOTAL_PRODUCTS - cosmos.length;
-const standalone = cosmosSingletons.length + nonCosmos;
-const canonical = families.length + standalone;
-
-expect(families.length === 41, `Očekivana 41 porodica, pronađeno ${families.length}.`);
-expect(variantCount === 715, `Očekivano 715 varijanti u porodicama, pronađeno ${variantCount}.`);
-expect(standalone === 117, `Očekivano 117 samostalnih entiteta, pronađeno ${standalone}.`);
-expect(canonical === 158, `Očekivano 158 browse entiteta, pronađeno ${canonical}.`);
 expect(
-  variantCount + standalone === TOTAL_PRODUCTS,
-  `Varijante + samostalni (${variantCount + standalone}) ne daju ${TOTAL_PRODUCTS}.`,
+  summary.variants + summary.standalone === summary.total,
+  `Varijante (${summary.variants}) + samostalni (${summary.standalone}) ne daju ukupno (${summary.total}).`,
 );
 
-/* Jedna porodica = jedan browse entitet. */
-const baseSlugs = families.map((variants) => variants[0].baseProductSlug);
 expect(
-  new Set(baseSlugs).size === families.length,
-  "Porodice nisu jedinstvene po baseProductSlug — moguća duplirana family kartica.",
+  canonical.length === summary.families + summary.standalone,
+  `Browse entiteta ${canonical.length}, a porodica + samostalnih ${summary.families + summary.standalone}.`,
 );
 
-/* Reprezentativna varijanta mora biti deterministička (prva u redosledu). */
-for (const variants of families) {
+expect(
+  variants.length === summary.variants,
+  `Listing nosi ${variants.length} varijanti, a katalog ih ima ${summary.variants}.`,
+);
+
+/* -- Jedna porodica = jedan browse entitet --------------------------------- */
+
+const familyEntities = canonical.filter((entity) => entity.kind === "family");
+expect(
+  familyEntities.length === families.length,
+  `Family entiteta ${familyEntities.length}, a porodica ${families.length} — moguća duplirana ili izgubljena kartica.`,
+);
+expect(
+  new Set(familyEntities.map((entity) => entity.id)).size === familyEntities.length,
+  "Dva family entiteta dele isti id — duplirana family kartica u katalogu.",
+);
+expect(
+  new Set(canonical.map((entity) => entity.id)).size === canonical.length,
+  "Browse skup sadrži dva entiteta sa istim id-om.",
+);
+
+/* Browse je skup canonical entiteta; varijanta se prikazuje samo na upit. */
+expect(
+  canonical.every((entity) => entity.kind !== "variant"),
+  "Browse skup sadrži varijantu — katalog i canonical/sitemap bi opisivali različite entitete.",
+);
+
+/* -- Porodice -------------------------------------------------------------- */
+
+for (const family of families) {
   expect(
-    Boolean(variants[0]?.slug),
-    "Porodica nema deterministički prvu varijantu za reprezentativni vizuel.",
+    family.variants.length >= BUSINESS_CONTRACT.familyMinVariants,
+    `Porodica "${family.slug}" ima ${family.variants.length} varijanti, a ugovor traži najmanje ${BUSINESS_CONTRACT.familyMinVariants}.`,
+  );
+  expect(
+    Boolean(family.representative?.slug),
+    `Porodica "${family.slug}" nema determinističku reprezentativnu varijantu.`,
   );
 }
 
-/* Katalog i sitemap moraju opisivati iste entitete. */
-const listing = readFileSync("lib/catalog-listing.ts", "utf8");
+/* Svaka canonical family ruta mora biti dostižna kao browse entitet. */
+const canonicalHrefs = new Set(canonical.map((entity) => entity.href));
+for (const family of families) {
+  expect(
+    canonicalHrefs.has(familyPath(family)),
+    `Canonical ruta ${familyPath(family)} nije dostižna iz browse skupa.`,
+  );
+}
+
+/* -- Varijante ------------------------------------------------------------- */
+
+const familySlugs = new Set(families.map((family) => family.slug));
+for (const variant of variants) {
+  expect(
+    familySlugs.has(variant.familySlug),
+    `Varijanta "${variant.id}" pokazuje na nepostojeću porodicu "${variant.familySlug}".`,
+  );
+}
+
 expect(
-  listing.includes("familyPath(family)"),
-  "Family entitet ne koristi postojeći `familyPath` — moguć paralelni family sistem.",
+  variants.every((variant) => variantSlugs.has(variant.id)),
+  "Listing nosi varijantu koju family sloj ne prepoznaje kao konsolidovanu.",
 );
-expect(
-  listing.includes('href: `/proizvodi/${product.slug}`'),
-  "Samostalni entitet ne koristi svoj PDP href.",
-);
+
+/* -- Izlaz ----------------------------------------------------------------- */
 
 if (failures.length) {
   console.error(`Catalog listing validacija nije prošla (${failures.length}):`);
@@ -88,11 +138,18 @@ if (failures.length) {
 console.log(
   JSON.stringify(
     {
-      families: families.length,
-      variantsInFamilies: variantCount,
-      standalone,
-      browseEntities: canonical,
-      totalProducts: TOTAL_PRODUCTS,
+      source: "runtime (lib/catalog-listing.ts + lib/product-families.ts)",
+      measured: {
+        totalProducts: summary.total,
+        families: summary.families,
+        variants: summary.variants,
+        standalone: summary.standalone,
+        browseEntities: canonical.length,
+        byBrand: summary.byBrand,
+        familiesByBrand: summary.familiesByBrand,
+        familiesByPresentation: summary.familiesByPresentation,
+      },
+      businessContract: BUSINESS_CONTRACT,
     },
     null,
     2,

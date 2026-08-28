@@ -2482,18 +2482,60 @@ function getReviewedDetailVariantSelector(
   };
 }
 
-function getCosmosVariantSelector(
+/**
+ * Statusi pod kojima varijanta sme u selektor.
+ *
+ * Spisak je eksplicitan, a ne „sve što nije odbijeno": nepotvrđena varijanta u
+ * biraču izgleda kao ponuda, a nije. Cosmos i Baslac koriste različite oznake
+ * istog značenja, pa su obe navedene — bez provere po brendu.
+ */
+const SELECTABLE_VARIANT_STATUSES = new Set([
+  "verified-official-source",
+  "ACTIVE_CONFIRMED",
+]);
+
+/**
+ * Selektor varijanti za bilo koju porodicu iz `catalogMetadata.baseProductSlug`.
+ *
+ * Namerno bez ijedne provere po brendu. Porodica je pojam kataloga, ne Cosmosa —
+ * Baslac pripremni proizvodi (isti artikal u 1 L i 4 L) su ista struktura i
+ * dobijaju isti birač. Identitet porodice se uzima iz proizvoda kada ga ima, a
+ * inače se izvodi iz `catalogMetadata`, pa porodica ne mora unapred da nosi
+ * `family` blok da bi imala biranje varijante.
+ */
+function getFamilyVariantSelector(
   product: CarsystemProduct,
 ): ProductVariantSelectorSection | undefined {
-  const familyId = product.catalogMetadata?.baseProductSlug;
-  if (!familyId || !product.family) return undefined;
+  const metadata = product.catalogMetadata;
+  const familyId = metadata?.baseProductSlug;
+  if (!familyId) return undefined;
 
   const familyProducts = products.filter(
     (item) =>
       item.catalogMetadata?.baseProductSlug === familyId &&
-      item.catalogMetadata.verificationStatus === "verified-official-source",
+      SELECTABLE_VARIANT_STATUSES.has(item.catalogMetadata.verificationStatus),
   );
   if (familyProducts.length < 2) return undefined;
+
+  /*
+   * Prava porodica, a ne ona sintetizovana po proizvodu.
+   *
+   * `withCatalogArchitecture` svakom proizvodu bez porodice dodeli zamenu oblika
+   * `{ id: slug, label: name }`. To je identitet JEDNOG proizvoda — kada bi se
+   * upotrebio kao oznaka porodice, zaglavlje selektora bi nosilo naziv i
+   * pakovanje reprezentativne varijante („… Grey 1 L") i ostalo bi takvo i
+   * pošto korisnik izabere 4 L. Zamena se prepoznaje po tome što joj je `id`
+   * jednak slugu proizvoda.
+   */
+  const declaredFamily =
+    product.family && product.family.id !== product.slug ? product.family : null;
+
+  const family: ProductFamilyIdentity = declaredFamily ?? {
+    id: familyId,
+    // `officialName` je naziv bez pakovanja — zajednički svim članovima.
+    label: metadata?.officialName ?? metadata?.line ?? product.name,
+    catalogStrategy: product.catalogStrategy ?? "hybrid",
+  };
 
   const hasNamedColors = familyProducts.some(
     (item) => item.catalogMetadata?.colorName || item.catalogMetadata?.ralCode,
@@ -2502,8 +2544,8 @@ function getCosmosVariantSelector(
 
   return {
     title: hasNamedColors ? "Dostupne boje" : "Dostupne varijante",
-    description: `${product.family.label} varijante iz potvrđenog lokalnog kataloga.`,
-    family: product.family,
+    description: `${family.label} varijante iz potvrđenog lokalnog kataloga.`,
+    family,
     groups: [
       {
         id: groupId,
@@ -2516,7 +2558,11 @@ function getCosmosVariantSelector(
             id: item.variantId ?? item.slug,
             label:
               metadata?.colorName ??
-              (metadata?.ralCode ? `RAL ${metadata.ralCode}` : item.name),
+              (metadata?.ralCode
+                ? `RAL ${metadata.ralCode}`
+                : // Porodice koje se razlikuju po pakovanju biraju se po
+                  // zapremini; naziv proizvoda je za sve članove isti.
+                  (metadata?.volume ?? item.name)),
             code: [
               metadata?.cosmosCode,
               metadata?.ralCode ? `RAL ${metadata.ralCode}` : undefined,
@@ -2535,7 +2581,9 @@ function getCosmosVariantSelector(
         item.catalogMetadata?.colorName ??
         (item.catalogMetadata?.ralCode
           ? `RAL ${item.catalogMetadata.ralCode}`
-          : item.catalogMetadata?.cosmosCode ?? item.name),
+          : item.catalogMetadata?.cosmosCode ??
+            item.catalogMetadata?.volume ??
+            item.name),
       optionValueIds: { [groupId]: item.variantId ?? item.slug },
       sku: item.catalogMetadata?.cosmosCode ?? item.sku,
       package: item.catalogMetadata?.volume ?? item.packages[0]?.label,
@@ -2620,7 +2668,7 @@ export function getProductVariantSelector(
 ): ProductVariantSelectorSection | undefined {
   return (
     getReviewedDetailVariantSelector(product) ??
-    getCosmosVariantSelector(product) ??
+    getFamilyVariantSelector(product) ??
     getBefarVariantSelector(product)
   );
 }

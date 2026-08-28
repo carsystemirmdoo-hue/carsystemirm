@@ -330,9 +330,12 @@ export function expandVariant(
     ...family,
     kind: "variant",
     id: variant.id,
-    // `/proizvodi/<slug>` je jedini oblik variant rute, pa se izvodi umesto da
-    // se 715 puta ponavlja u payload-u.
-    href: `/proizvodi/${variant.id}`,
+    // Varijanta vodi na canonical family PDP sa preselektovanom varijantom, a
+    // ne na zasebnu variant stranicu — korisnik nikada ne dolazi na generički
+    // group listing. `family.href` je već `familyPath`.
+    href: variant.productCode
+      ? `${family.href}?varijanta=${encodeURIComponent(variant.productCode)}`
+      : `/proizvodi/${variant.id}`,
     name: variant.name,
     productCode: variant.productCode,
     shortCode: variant.productCode,

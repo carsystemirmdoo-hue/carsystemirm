@@ -24,6 +24,7 @@
  * fully usable and link-equity-passing.
  */
 
+import { canonicalVariantKey } from "@/lib/catalog/variant-key";
 import {
   getAllCarsystemProducts,
   getCarsystemBrandBySlug,
@@ -49,7 +50,32 @@ export type ProductFamily = {
   representative: CarsystemProduct;
   /** What distinguishes the variants, for `ProductGroup.variesBy`. */
   variesBy: ("color" | "size" | "volume" | "finish")[];
+  /**
+   * How the family route presents itself.
+   *
+   * `variant-pdp` — the variants are one product in many colours or pack
+   *   sizes, so the family URL *is* the product page. It renders the real
+   *   product-detail experience with a variant selector; the generic group
+   *   hero and card grid are never mounted.
+   * `collection` — the members are genuinely different products, so the group
+   *   listing is the right presentation.
+   */
+  presentation: "variant-pdp" | "collection";
 };
+
+/**
+ * A family is a variant PDP when its members differ only by colour, pack size
+ * or finish. That is the definition of a variant, so this is derived rather
+ * than listed per slug — no family gets a special case.
+ */
+function resolvePresentation(
+  variesBy: ProductFamily["variesBy"],
+): ProductFamily["presentation"] {
+  const variantAxes = new Set(["color", "size", "volume", "finish"]);
+  const differsOnlyByVariantAxis =
+    variesBy.length > 0 && variesBy.every((axis) => variantAxes.has(axis));
+  return differsOnlyByVariantAxis ? "variant-pdp" : "collection";
+}
 
 const FAMILY_MIN_VARIANTS = 2;
 
@@ -190,6 +216,7 @@ function buildFamilies(): ProductFamily[] {
       preferred && !usedSlugs.has(preferred) ? preferred : baseProductSlug;
     usedSlugs.add(slug);
 
+    const variesBy = detectVariesBy(variants);
     families.push({
       slug,
       baseProductSlug,
@@ -201,7 +228,8 @@ function buildFamilies(): ProductFamily[] {
       phaseSlug: representative.phaseSlug,
       variants,
       representative,
-      variesBy: detectVariesBy(variants),
+      variesBy,
+      presentation: resolvePresentation(variesBy),
     });
   }
 
@@ -252,4 +280,27 @@ export function familyPath(family: ProductFamily) {
 /** Product slugs consolidated into a family, hence excluded from the sitemap. */
 export function getConsolidatedVariantSlugs() {
   return new Set(variantIndex().keys());
+}
+
+
+/**
+ * Stari variant URL vodi na canonical family rutu sa preselektovanom
+ * varijantom — za svaku `variant-pdp` porodicu, ne samo za jedan brend.
+ */
+export function variantRedirectTarget(product: CarsystemProduct): string | null {
+  const family = getFamilyForProduct(product);
+  if (!family || family.presentation !== "variant-pdp") return null;
+
+  /*
+   * Ista formula koju PDP upisuje pri izboru na strani.
+   *
+   * Ranije je ovde stajala prepisana, sa `variantId` pre `sku` — pa je 56
+   * varijanti bez `cosmosCode` imalo jednu adresu iz preusmerenja i drugu iz
+   * izbora. `canonicalVariantKey` uvek vraća vrednost (slug je poslednja
+   * odbrana), pa provere na `null` više nema: varijanta `variant-pdp`
+   * porodice uvek ima adresu.
+   */
+  const code = canonicalVariantKey(product);
+
+  return `${familyPath(family)}?varijanta=${encodeURIComponent(code)}`;
 }

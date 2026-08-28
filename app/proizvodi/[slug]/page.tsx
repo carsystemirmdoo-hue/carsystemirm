@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ProductDetailPage } from "@/components/product/ProductDetailPage";
 import {
   getAllCarsystemProducts,
@@ -18,7 +18,12 @@ import {
   productJsonLd,
   productRelationshipJsonLd,
 } from "@/lib/seo";
-import { familyPath, getFamilyForProduct } from "@/lib/product-families";
+import {
+  familyPath,
+  getFamilyForProduct,
+  variantRedirectTarget,
+} from "@/lib/product-families";
+
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -49,6 +54,14 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
+  {
+    // Baslac sistemske baze nemaju sopstvenu stranicu — vode na family PDP sa
+    // već izabranom varijantom, bez međukoraka.
+    const { slug: requestedSlug } = await params;
+    const requested = getCarsystemProductBySlug(requestedSlug);
+    const target = requested ? variantRedirectTarget(requested) : null;
+    if (target) redirect(target);
+  }
   const { slug } = await params;
   const product = getCarsystemProductBySlug(slug);
   if (!product) notFound();

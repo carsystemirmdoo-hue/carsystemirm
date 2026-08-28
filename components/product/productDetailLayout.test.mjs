@@ -16,7 +16,10 @@ const headerUrl = new URL("../layout/Header.tsx", import.meta.url);
 test("variant selector follows the declaration while accordion stays in the sticky narrative", async () => {
   const page = await readFile(pageUrl, "utf8");
   const narrativeStart = page.indexOf("<div className={styles.narrativeGrid}>");
-  const declaration = page.indexOf("className={styles.heroReference}", narrativeStart);
+  // Deklaracija identiteta (naslov, šifra, nijansa, status) je klijentska
+  // komponenta otkad prati aktivnu varijantu; redosled koji štiti ovaj test je
+  // isti — identitet, pa selektor, pa harmonika.
+  const declaration = page.indexOf("<ProductIdentity", narrativeStart);
   const variants = page.indexOf("<ProductVariantOptions", declaration);
   const information = page.indexOf("<ProductInformationAccordion", variants);
   const continuation = page.indexOf(
@@ -77,14 +80,19 @@ test("accordion state cannot key or remount the sticky media subtree", async () 
   ]);
 
   // The stage is mounted once, with plain props and no `key`, so nothing the
-  // accordion does can remount the media subtree. `images` is resolved on the
-  // server (productStageImages.ts) precisely so the stage stays a leaf.
-  assert.match(page, /<ProductStickyStage\b[\s\S]{0,200}?product=\{product\}/);
+  // accordion does can remount the media subtree. Slike su i dalje razrešene na
+  // serveru (productVariantView.ts) upravo zato da stage ostane list.
+  assert.match(page, /<ProductStickyStage\b[\s\S]{0,200}?stageFormat=\{stageFormat\}/);
   assert.doesNotMatch(page, /<ProductStickyStage[^>]*\skey=/);
-  assert.match(page, /const stageImages = getProductStageImages\(product\)/);
+  assert.match(page, /const variantViews = toProductVariantViews\(/);
+  // Ni provider ne sme da remountuje stranu: promenljiv `key` na njemu bi
+  // obesmislio ceo poduhvat — izgubili bi se skrol i stanje harmonike.
+  assert.doesNotMatch(page, /<ProductVariantProvider[^>]*\skey=/);
   assert.doesNotMatch(page, /openSectionIds/);
   assert.doesNotMatch(stage, /openSectionIds|accordion|key=\{.*open/);
-  assert.match(stage, /const \[activeIndex, setActiveIndex\] = useState\(0\)/);
+  // Indeks galerije je i dalje lokalno stanje scene; vezan je za ključ
+  // varijante samo da bi se vratio na glavnu sliku kad se varijanta promeni.
+  assert.match(stage, /const \[gallery, setGallery\] = useState\(\{ key: activeVariant\.key, index: 0 \}\)/);
   assert.match(accordion, /const \[openSectionIds, setOpenSectionIds\]/);
 });
 
@@ -146,9 +154,12 @@ test("stage sizing and sticky boundary retain the approved narrative layout", as
     readFile(stylesUrl, "utf8"),
   ]);
 
-  assert.match(stage, /const visualPreset = useMemo/);
-  assert.match(stage, /data-product-stage-treatment=\{visualPreset\.treatment\}/);
-  assert.match(stage, /data-product-stage-type=\{visualPreset\.productType\}/);
+  // Vizuelni preset se razrešava na serveru i stiže kroz aktivnu varijantu, pa
+  // grafit i tip scene prate izbor umesto reprezentativne varijante.
+  assert.match(stage, /const \{ activeVariant, interactive \} = useProductVariant\(\)/);
+  assert.match(stage, /data-product-stage-treatment=\{activeVariant\.treatment\}/);
+  assert.match(stage, /data-product-stage-type=\{activeVariant\.productType\}/);
+  assert.match(stage, /style=\{activeVariant\.style\}/);
   assert.match(
     styles,
     /grid-template-columns:\s*minmax\(360px, 0\.86fr\) minmax\(0, 1fr\)/,

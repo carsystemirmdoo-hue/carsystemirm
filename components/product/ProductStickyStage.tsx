@@ -1,26 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import { ProductHeroSprayBackdrop } from "@/components/product/ProductHeroSprayBackdrop";
 import { PuttyMaterialTrace } from "@/components/product/PuttyMaterialTrace";
+import { useProductVariant } from "@/components/product/ProductVariantProvider";
+import type { ProductStageFormat } from "@/components/product/productStageImages";
 import {
-  getProductVisualPreset,
-  getProductVisualStyle,
-  shouldRenderProductHeroSpray,
-} from "@/components/product/productMotion";
-import type {
-  ProductStageFormat,
-  ProductStageImage,
-} from "@/components/product/productStageImages";
-import type { CarsystemProduct } from "@/lib/carsystem-data";
-import {
-  resolveProductVolume,
-  resolveQuantityLabel,
-  resolveSizeClass,
-} from "@/lib/product-scale";
-import {
-  getPuttyMaterialTrace,
   PUTTY_MATERIAL_TRACE_OPTICAL_Y,
   PUTTY_MATERIAL_TRACE_PRODUCT_ENVELOPE,
   PUTTY_MATERIAL_TRACE_STAGE_ASPECT,
@@ -48,29 +34,40 @@ import styles from "./ProductDetailExperience.module.css";
  */
 export function ProductStickyStage({
   brandName,
-  images,
-  product,
   stageFormat,
 }: {
   brandName: string;
-  images: ProductStageImage[];
-  product: CarsystemProduct;
+  /**
+   * Format panela je NAMERNO na nivou porodice, ne varijante.
+   *
+   * Isti razlog zbog kog se format ne menja po slici u galeriji: menjanje okvira
+   * dok korisnik bira boju pomerilo bi stranu pod njim. Boja, slika i mere
+   * proizvoda prate varijantu; proporcija panela je zaključana.
+   */
   stageFormat: ProductStageFormat;
 }) {
-  const visualPreset = useMemo(() => getProductVisualPreset(product), [product]);
-  const hasSprayBackdrop = useMemo(
-    () => shouldRenderProductHeroSpray(product),
-    [product],
-  );
-  const productSize = useMemo(() => resolveProductVolume(product), [product]);
-  const sizeClass = useMemo(() => resolveSizeClass(productSize), [productSize]);
-  const quantityLabel = useMemo(
-    () => resolveQuantityLabel(productSize),
-    [productSize],
-  );
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { activeVariant, interactive } = useProductVariant();
+  const images = activeVariant.images;
+
+  const [gallery, setGallery] = useState({ key: activeVariant.key, index: 0 });
+  // Izbor slike u galeriji pripada varijanti. Kada se varijanta promeni, indeks
+  // se vraća na glavnu sliku — bez efekta, jer bi efekat prvo iscrtao pogrešnu
+  // sliku pa je tek onda ispravio.
+  const activeIndex = gallery.key === activeVariant.key ? gallery.index : 0;
+  const setActiveIndex = (index: number) =>
+    setGallery({ key: activeVariant.key, index });
   const [isZoomed, setIsZoomed] = useState(false);
   const activeImage = images[activeIndex] ?? null;
+
+  /*
+   * Kratak crossfade se pali SAMO na izbor napravljen na strani.
+   *
+   * Prva slika je `priority` i nosi LCP strane; animacija neprozirnosti na njoj
+   * bi odložila najveće iscrtavanje. Zato prelaz ćuti pri učitavanju, na
+   * direktnom `?varijanta=` linku i na Back/Forward — a radi kada korisnik
+   * klikne ili izabere tastaturom, gde promena i treba da bude vidljiva.
+   */
+  const crossfade = interactive;
 
   /*
    * Trag kita se prikazuje samo proizvodima sa odobrenom geometrijom — po
@@ -78,8 +75,8 @@ export function ProductStickyStage({
    * mobilnom, a envelope proizvoda se spušta na 39cqw da bi materijal ostao
    * vidljiv sa sve četiri strane limenke.
    */
-  const puttyTrace = getPuttyMaterialTrace(product.slug);
-  const showPuttyTrace = puttyTrace !== undefined;
+  const puttyTrace = activeVariant.puttyTrace;
+  const showPuttyTrace = puttyTrace !== null;
   /*
    * Promenljive idu na SPOLJNI wrapper, ne na `.stage`: custom properties se
    * nasleđuju, inline deklaracija tuče i media query koji na mobilnom vraća
@@ -97,10 +94,10 @@ export function ProductStickyStage({
   return (
     <div
       className={styles.stickyStage}
-      data-product-stage-treatment={visualPreset.treatment}
-      data-product-stage-type={visualPreset.productType}
-      data-product-stage-spray={hasSprayBackdrop ? "true" : "false"}
-      data-product-size-class={sizeClass}
+      data-product-stage-treatment={activeVariant.treatment}
+      data-product-stage-type={activeVariant.productType}
+      data-product-stage-spray={activeVariant.hasSprayBackdrop ? "true" : "false"}
+      data-product-size-class={activeVariant.sizeClass}
       data-stage-format={stageFormat}
       data-product-has-image={activeImage ? "true" : "false"}
       data-putty-trace={showPuttyTrace ? "true" : undefined}
@@ -113,10 +110,10 @@ export function ProductStickyStage({
         data-product-contrast={activeImage?.contrastMode ?? "balanced"}
         data-product-zoom={isZoomed ? "true" : "false"}
         data-product-fit={activeImage?.src}
-        style={getProductVisualStyle(product)}
+        style={activeVariant.style}
       >
         <span className={styles.stagePlate} aria-hidden="true" />
-        {hasSprayBackdrop ? <ProductHeroSprayBackdrop /> : null}
+        {activeVariant.hasSprayBackdrop ? <ProductHeroSprayBackdrop /> : null}
         {showPuttyTrace ? (
           <PuttyMaterialTrace config={puttyTrace} />
         ) : null}
@@ -125,10 +122,30 @@ export function ProductStickyStage({
         <span className={styles.heroProductObject}>
           {activeImage ? (
             <Image
-              key={activeImage.src}
+              /*
+               * Ključ nosi identitet VARIJANTE, ne samo adresu slike.
+               *
+               * Crossfade je CSS animacija na `data-variant-crossfade="true"`.
+               * Ta zastavica ostaje uključena posle prvog izbora, pa se
+               * animacija ponovo pokreće samo ako se čvor iznova montira.
+               * Dok je ključ bio isključivo `activeImage.src`, remount je
+               * zavisio od SADRŽAJA: dve varijante koje dele isti packshot
+               * (porodice po pakovanju, `packshotKind: "family"`) dobile bi
+               * prelaz jednom i nikad više. Ponašanje ne sme da zavisi od toga
+               * da li se dve slike slučajno razlikuju.
+               *
+               * Slika ostaje u ključu da bi se i promena unutar galerije iste
+               * varijante i dalje ponašala kao i do sada.
+               *
+               * Ovo NE remontira ni providera ni PDP — menja se ključ jednog
+               * `<Image>` čvora. Prvo učitavanje i Back/Forward i dalje ćute,
+               * jer tada `interactive` stoji na `false` i atributa nema.
+               */
+              key={`${activeVariant.key}:${activeImage.src}`}
               src={activeImage.src}
               alt={activeImage.alt}
               data-route-critical="true"
+              data-variant-crossfade={crossfade ? "true" : undefined}
               fill
               priority
               sizes="(min-width: 1180px) 32vw, (min-width: 896px) 34vw, 94vw"
@@ -138,7 +155,7 @@ export function ProductStickyStage({
             <span className={styles.heroProductFallback} aria-hidden="true">
               <small>Vizuel u pripremi</small>
               <strong>{brandName}</strong>
-              <span>{product.name}</span>
+              <span>{activeVariant.name}</span>
             </span>
           )}
         </span>
@@ -153,10 +170,10 @@ export function ProductStickyStage({
         {/* Quantity is shown only when `lib/product-scale.ts` could confirm it
             from real package data — an unknown volume renders no badge at all
             rather than a guessed one. */}
-        {quantityLabel ? (
-          <span className={styles.quantityBadge} data-status={productSize.volumeStatus}>
+        {activeVariant.quantityLabel ? (
+          <span className={styles.quantityBadge} data-status={activeVariant.volumeStatus}>
             <span className={styles.quantityBadgeRule} aria-hidden="true" />
-            {quantityLabel}
+            {activeVariant.quantityLabel}
           </span>
         ) : null}
 

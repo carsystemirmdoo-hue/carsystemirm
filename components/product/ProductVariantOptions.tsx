@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState, type CSSProperties } from "react";
+import { useMemo, type CSSProperties } from "react";
+import { useProductVariant } from "@/components/product/ProductVariantProvider";
+import { findVariantByKey } from "@/components/product/productVariantState.mjs";
 import type {
   ProductCommercialVariant,
   ProductVariantOption,
@@ -18,22 +20,38 @@ type FamilyStyle = CSSProperties & {
 
 export function ProductVariantOptions({
   currentSlug,
-  inquiryHref,
   section,
+  selectInPlace = false,
 }: {
   currentSlug: string;
-  inquiryHref: string;
   section: ProductVariantSelectorSection;
+  /**
+   * Na canonical family ruti varijanta se bira u mestu — klik ne vodi na
+   * zaseban variant URL, nego menja izbor i `?varijanta=` parametar.
+   */
+  selectInPlace?: boolean;
 }) {
+  const { activeKey, findVariant, inquiryHref: activeInquiryHref, selectVariant } =
+    useProductVariant();
+
   const initialVariant =
     section.variants.find((variant) => variant.id === section.initialVariantId) ??
     section.variants[0];
-  const [activeVariantId, setActiveVariantId] = useState(initialVariant.id);
+
+  /*
+   * Izbor se NE drži ovde.
+   *
+   * Ranije je aktivna varijanta bila lokalni `useState` ove komponente, pa su
+   * naslov, šifra, slika i grafit ostajali na varijanti koju je izabrao server —
+   * menjala se samo kartica. Sada je izvor istine `ProductVariantProvider`, a
+   * ovaj red se samo preslikava na njega.
+   */
   const activeVariant =
-    section.variants.find((variant) => variant.id === activeVariantId) ?? initialVariant;
-  const [selectedOptions, setSelectedOptions] = useState(
-    activeVariant.optionValueIds,
-  );
+    (findVariantByKey(section.variants, activeKey) as
+      | ProductCommercialVariant
+      | null) ?? initialVariant;
+  const selectedOptions = activeVariant.optionValueIds;
+
   const familyStyle = useMemo<FamilyStyle>(
     () => ({
       "--family-accent": section.family.visualIdentity?.accent,
@@ -42,7 +60,8 @@ export function ProductVariantOptions({
     [section.family.visualIdentity],
   );
 
-  function findVariant(groupId: string, optionId: string) {
+  /** Varijanta koja odgovara izboru u jednoj grupi, uz zadržane ostale grupe. */
+  function variantForOption(groupId: string, optionId: string) {
     return section.variants.find((variant) =>
       section.groups.every((group) => {
         const expectedOption = group.id === groupId ? optionId : selectedOptions[group.id];
@@ -51,9 +70,20 @@ export function ProductVariantOptions({
     );
   }
 
-  function selectVariant(variant: ProductCommercialVariant) {
-    setActiveVariantId(variant.id);
-    setSelectedOptions(variant.optionValueIds);
+  /**
+   * Klik na red selektora → izbor u zajedničkom kontekstu.
+   *
+   * Red se preslikava na varijantu preko slug-a, pa šifre, pa id-a: dva modela
+   * ne moraju deliti isto polje, a poklapanje mora biti pouzdano. Ako varijanta
+   * nema odgovarajući zapis, izbor se ne menja — bolje nego tiho odvesti
+   * korisnika na pogrešan proizvod.
+   */
+  function chooseVariant(candidate: ProductCommercialVariant) {
+    const view =
+      findVariant(candidate.slug) ??
+      findVariant(candidate.sku) ??
+      findVariant(candidate.id);
+    if (view) selectVariant(view);
   }
 
   return (
@@ -80,7 +110,7 @@ export function ProductVariantOptions({
               data-option-count={group.options.length > 12 ? "many" : undefined}
             >
               {group.options.map((option) => {
-                const candidate = findVariant(group.id, option.id);
+                const candidate = variantForOption(group.id, option.id);
                 const isSelected = selectedOptions[group.id] === option.id;
                 const content = (
                   <VariantOptionContent option={option} selected={isSelected} />
@@ -100,7 +130,7 @@ export function ProductVariantOptions({
                   );
                 }
 
-                if (candidate.slug && candidate.slug !== currentSlug) {
+                if (!selectInPlace && candidate.slug && candidate.slug !== currentSlug) {
                   return (
                     <Link
                       className={styles.variantOptionControl}
@@ -122,7 +152,7 @@ export function ProductVariantOptions({
                     data-selected={isSelected || undefined}
                     type="button"
                     aria-pressed={isSelected}
-                    onClick={() => selectVariant(candidate)}
+                    onClick={() => chooseVariant(candidate)}
                     data-variant-option
                     key={option.id}
                   >
@@ -174,7 +204,8 @@ export function ProductVariantOptions({
         </dl>
         <Link
           className={styles.variantInquiryLink}
-          href={`${inquiryHref}&varijanta=${encodeURIComponent(activeVariant.id)}`}
+          href={activeInquiryHref}
+          data-product-inquiry
         >
           Upit za ovu varijantu
           <ArrowIcon />

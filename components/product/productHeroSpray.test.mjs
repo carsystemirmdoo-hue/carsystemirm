@@ -8,6 +8,7 @@ const svgComponentUrl = new URL("./ProductHeroSpraySvg.tsx", import.meta.url);
 const stylesUrl = new URL("./ProductHeroSprayBackdrop.module.css", import.meta.url);
 const galleryUrl = new URL("./ProductStickyStage.tsx", import.meta.url);
 const motionUrl = new URL("./productMotion.ts", import.meta.url);
+const variantViewUrl = new URL("./productVariantView.ts", import.meta.url);
 const detailStylesUrl = new URL("./ProductDetailExperience.module.css", import.meta.url);
 const dataUrl = new URL("../../lib/carsystem-data.ts", import.meta.url);
 const cosmosDataUrl = new URL("../../lib/cosmos-lac-data.ts", import.meta.url);
@@ -182,13 +183,15 @@ test("SSR starts idle, waits for the hero image, and runs once with approved tim
 });
 
 test("complete and reduced-motion states reveal the same six masked passes", async () => {
-  const [backdrop, component, styles, gallery, motion] = await Promise.all([
-    readFile(backdropUrl, "utf8"),
-    readFile(svgComponentUrl, "utf8"),
-    readFile(stylesUrl, "utf8"),
-    readFile(galleryUrl, "utf8"),
-    readFile(motionUrl, "utf8"),
-  ]);
+  const [backdrop, component, styles, gallery, motion, variantView] =
+    await Promise.all([
+      readFile(backdropUrl, "utf8"),
+      readFile(svgComponentUrl, "utf8"),
+      readFile(stylesUrl, "utf8"),
+      readFile(galleryUrl, "utf8"),
+      readFile(motionUrl, "utf8"),
+      readFile(variantViewUrl, "utf8"),
+    ]);
 
   assert.match(backdrop, /prefers-reduced-motion: reduce/);
   assert.match(backdrop, /setPhase\("static"\)/);
@@ -211,7 +214,10 @@ test("complete and reduced-motion states reveal the same six masked passes", asy
     styles,
     /color:\s*var\(--product-art-color, var\(--product-visual-background-color\)\)/,
   );
-  assert.match(gallery, /style=\{getProductVisualStyle\(product\)\}/);
+  // Stil se i dalje gradi istim resolverom, samo se sada razrešava na serveru po
+  // varijanti i do scene stiže kao `activeVariant.style` — pa grafit prati izbor.
+  assert.match(variantView, /style: getProductVisualStyle\(product\)/);
+  assert.match(gallery, /style=\{activeVariant\.style\}/);
   assert.match(
     motion,
     /"--product-visual-background-color": product\.visual\?\.backgroundColor \?\? accent/,
@@ -230,6 +236,7 @@ test("spray is category-gated behind color products and stays out of catalog sur
     cosmosData,
     relatedProducts,
     catalogCard,
+    variantView,
   ] =
     await Promise.all([
       readFile(backdropUrl, "utf8"),
@@ -241,6 +248,7 @@ test("spray is category-gated behind color products and stays out of catalog sur
       readFile(cosmosDataUrl, "utf8"),
       readFile(relatedProductsUrl, "utf8"),
       readFile(catalogCardUrl, "utf8"),
+      readFile(variantViewUrl, "utf8"),
     ]);
 
   assert.doesNotMatch(
@@ -280,13 +288,16 @@ test("spray is category-gated behind color products and stays out of catalog sur
     motion,
     /return productType === "spray" \|\| productType === "color"/,
   );
-  assert.match(gallery, /const hasSprayBackdrop = useMemo/);
+  assert.match(variantView, /hasSprayBackdrop: shouldRenderProductHeroSpray\(product\)/);
   assert.match(
     gallery,
-    /\{hasSprayBackdrop \? <ProductHeroSprayBackdrop \/> : null\}/,
+    /\{activeVariant\.hasSprayBackdrop \? <ProductHeroSprayBackdrop \/> : null\}/,
   );
-  assert.match(gallery, /data-product-stage-type=\{visualPreset\.productType\}/);
-  assert.match(gallery, /data-product-stage-spray=\{hasSprayBackdrop \? "true" : "false"\}/);
+  assert.match(gallery, /data-product-stage-type=\{activeVariant\.productType\}/);
+  assert.match(
+    gallery,
+    /data-product-stage-spray=\{activeVariant\.hasSprayBackdrop \? "true" : "false"\}/,
+  );
   assert.match(cosmosData, /function getCosmosProductVisualType/);
   assert.match(cosmosData, /record\.technicalCategory === "primer"/);
   assert.match(cosmosData, /return "primer"/);

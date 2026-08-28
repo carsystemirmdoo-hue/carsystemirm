@@ -1,18 +1,22 @@
 import Link from "next/link";
 import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
 import { Footer } from "@/components/layout/Footer";
+import { ProductIdentity } from "@/components/product/ProductIdentity";
 import { ProductInformationAccordion } from "@/components/product/ProductInformationAccordion";
+import { ProductInquiryLink } from "@/components/product/ProductInquiryLink";
 import { ProductMobileCta } from "@/components/product/ProductMobileCta";
 import { ProductStickyStage } from "@/components/product/ProductStickyStage";
 import { ProductVariantOptions } from "@/components/product/ProductVariantOptions";
+import { ProductVariantProvider } from "@/components/product/ProductVariantProvider";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
+import { getProductStageFormat } from "@/components/product/productStageImages";
 import {
-  getProductStageFormat,
-  getProductStageImages,
-} from "@/components/product/productStageImages";
+  productVariantKey,
+  toProductVariantViews,
+} from "@/components/product/productVariantView";
 import {
   getCarsystemBrandBySlug,
-  getProductPublicStatus,
+  getCarsystemProductBySlug,
   getProductVariantSelector,
   getProgramGroupBySlug,
   getRefinishPhaseBySlug,
@@ -20,6 +24,7 @@ import {
   type CarsystemProduct,
   type ProgramGroup,
 } from "@/lib/carsystem-data";
+import { getFamilyForProduct } from "@/lib/product-families";
 import type {
   ProductDetailDocument,
   ProductRelationshipSection,
@@ -48,10 +53,10 @@ export function ProductDetailPage({
   compatibleProducts,
   similarProducts,
   breadcrumbItems,
-}: ProductDetailPageProps) {
+  variantSelectInPlace = false,
+}: ProductDetailPageProps & { variantSelectInPlace?: boolean }) {
   const detail = isConfirmed(product.detail?.reviewStatus) ? product.detail : undefined;
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
-  const publicStatus = getProductPublicStatus(product);
   const quickFacts = isConfirmed(detail?.quickFacts?.reviewStatus)
     ? detail?.quickFacts?.content.filter((item) => isConfirmed(item.reviewStatus)) ?? []
     : [];
@@ -79,13 +84,42 @@ export function ProductDetailPage({
     inquiryLabel: "Pošalji upit",
     storeLabel: "Pronađi prodavnicu",
   };
-  const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
-  // Resolved here, on the server, so the stage receives one small array instead
-  // of importing the image-metrics manifest into the client bundle.
-  const stageImages = getProductStageImages(product);
-  const stageFormat = getProductStageFormat(stageImages);
+  /*
+   * Varijante, razrešene na serveru.
+   *
+   * Skup se izvodi iz SELEKTORA, ne iz porodice: tako red u selektoru i zapis u
+   * kontekstu ne mogu da se raziđu ni za jednu varijantu. Upravo je to
+   * razilaženje i bilo kvar — kartica se menjala, a naslov, šifra, slika i
+   * grafit su ostajali na varijanti koju je izabrao server.
+   *
+   * Manifest metrika slika (~300 KB) ostaje na serveru; klijent dobija samo
+   * nekoliko stringova po varijanti.
+   */
+  const family = getFamilyForProduct(product);
+  const selectorProducts = (variantSelector?.variants ?? [])
+    .map((variant) => (variant.slug ? getCarsystemProductBySlug(variant.slug) : null))
+    .filter((entry): entry is CarsystemProduct => Boolean(entry));
+  const variantProducts =
+    selectorProducts.length > 0 ? selectorProducts : [product];
+  const variantViews = toProductVariantViews(variantProducts, family?.slug ?? null);
+  const initialVariantKey = productVariantKey(product);
+
+  /*
+   * Format panela se računa JEDNOM, iz reprezentativne varijante, i ostaje
+   * zaključan dok korisnik bira boje. Isti razlog zbog kog se ne menja ni po
+   * slici u galeriji: pomeranje okvira pomerilo bi stranu pod korisnikom.
+   */
+  const stageFormat = getProductStageFormat(
+    variantViews.find((view) => view.key === initialVariantKey)?.images ??
+      variantViews[0]?.images ??
+      [],
+  );
 
   return (
+    <ProductVariantProvider
+      initialKey={initialVariantKey}
+      variants={variantViews}
+    >
     <div className={styles.pageShell}>
       <main className={styles.pageMain}>
         <ProductBreadcrumb items={breadcrumbItems} />
@@ -94,8 +128,6 @@ export function ProductDetailPage({
           <div className={styles.stickyRail}>
             <ProductStickyStage
               brandName={brand.name}
-              images={stageImages}
-              product={product}
               stageFormat={stageFormat}
             />
           </div>
@@ -109,49 +141,28 @@ export function ProductDetailPage({
                   {phase ? <span>{phase.name}</span> : null}
                 </div>
 
-                {detail?.hero?.kicker ? (
-                  <p className={styles.heroKicker}>{detail.hero.kicker}</p>
-                ) : null}
-                <h1 id="product-title" className={styles.heroTitle} data-cursor="headline">
-                  {product.name}
-                </h1>
-                {detail?.hero?.subtype ? (
-                  <p className={styles.heroSubtype}>{detail.hero.subtype}</p>
-                ) : null}
-                <p className={styles.heroLead} data-cursor="text">
-                  {detail?.hero?.lead ?? product.shortDescription}
-                </p>
-
-                <div className={styles.heroReference}>
-                  {product.sku ? (
-                    <span>
-                      <small>Šifre artikala</small>
-                      <strong>{product.sku}</strong>
-                    </span>
-                  ) : null}
-                  <span>
-                    <small>Status</small>
-                    <strong className={styles.statusValue}>{publicStatus}</strong>
-                  </span>
-                </div>
+                <ProductIdentity
+                  kicker={detail?.hero?.kicker}
+                  lead={detail?.hero?.lead}
+                  subtype={detail?.hero?.subtype}
+                />
 
                 {variantSelector ? (
                   <ProductVariantOptions
+                    selectInPlace={variantSelectInPlace}
                     currentSlug={product.slug}
-                    inquiryHref={inquiryHref}
                     section={variantSelector}
                   />
                 ) : null}
 
                 <div className={styles.heroActions}>
-                  <Link
+                  <ProductInquiryLink
                     className={styles.primaryAction}
-                    href={inquiryHref}
-                    data-cursor="button"
+                    cursor="button"
                   >
                     Pošalji upit
                     <ArrowIcon />
-                  </Link>
+                  </ProductInquiryLink>
                   <Link
                     className={styles.secondaryAction}
                     href="/prodavnice"
@@ -210,10 +221,10 @@ export function ProductDetailPage({
               <span>{finalCta.description}</span>
             </div>
             <div className={styles.finalCtaActions}>
-              <Link className={styles.finalPrimaryAction} href={inquiryHref}>
+              <ProductInquiryLink className={styles.finalPrimaryAction}>
                 {finalCta.inquiryLabel}
                 <ArrowIcon />
-              </Link>
+              </ProductInquiryLink>
               {finalCta.storeLabel ? (
                 <Link className={styles.finalSecondaryAction} href="/prodavnice">
                   {finalCta.storeLabel}
@@ -225,8 +236,9 @@ export function ProductDetailPage({
       </main>
 
       <Footer />
-      <ProductMobileCta product={product} />
+      <ProductMobileCta />
     </div>
+    </ProductVariantProvider>
   );
 }
 

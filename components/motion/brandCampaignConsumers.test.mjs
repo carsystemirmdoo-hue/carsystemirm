@@ -11,8 +11,8 @@
  * pauzira i nastavlja u pretrazivacu proverava se browser dokazom, ne ovde.
  *
  * Istorija: tvrdnja je izdvojena iz `brandCampaignCarousel.test.mjs` pri commitu
- * jezgra, jer tada nijedan potrosac jos nije bio prelazen na hook. Sada su oba
- * u repozitorijumu, pa se vraca kao zajednicki ugovor.
+ * jezgra, jer tada nijedan potrosac jos nije bio prelazen na hook. Sada su sva tri
+ * potrosaca u repozitorijumu, pa vazi kao zajednicki ugovor.
  */
 
 import assert from "node:assert/strict";
@@ -22,12 +22,13 @@ import test from "node:test";
 const POTROSACI = [
   ["BaslacHero.tsx", new URL("../baslac-brand/BaslacHero.tsx", import.meta.url)],
   ["RmCampaignStage.tsx", new URL("../rm-brand/RmCampaignStage.tsx", import.meta.url)],
+  ["HomeCampaignCarousel.tsx", new URL("../home/HomeCampaignCarousel.tsx", import.meta.url)],
 ];
 
 /** Izvor bez komentara — komentar sme da pomene ono sto kod ne sme da radi. */
 const codeOf = (source) => source.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
 
-test("[source-contract] oba brend heroja uvoze isti hook", async () => {
+test("[source-contract] sva tri potrosaca uvoze isti hook", async () => {
   for (const [ime, url] of POTROSACI) {
     const code = codeOf(await readFile(url, "utf8"));
     assert.match(

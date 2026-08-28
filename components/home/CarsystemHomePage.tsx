@@ -23,8 +23,8 @@ import {
   type BrandKey,
   trustBrandKeys,
 } from "./BrandLogoPlate";
+import { HomeCampaignCarousel } from "./HomeCampaignCarousel";
 import { HomeSectionRail } from "./HomeSectionRail";
-import { HomeHeroImage } from "./HomeHeroImage";
 import { companyContact } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
@@ -265,85 +265,7 @@ export function CarsystemHomePage() {
   return (
     <main className={styles.home}>
       <HomeSectionRail />
-      <section
-        id="pocetna"
-        className={`${styles.hero} ${styles.railTarget}`}
-        aria-labelledby="homepage-title"
-      >
-        <div className={styles.heroMedia} aria-hidden="true" data-cursor="image">
-          <span className={styles.heroImage} data-critical-hero />
-          <HomeHeroImage className={styles.heroImageAsset} />
-          <span className={styles.mistOne} />
-          <span className={styles.mistTwo} />
-          <span className={styles.mistThree} />
-        </div>
-        <div className={styles.heroFade} />
-
-        <div className={styles.processBadge}>
-          <span className={styles.liveDot} />
-          Refinish tok
-          <span className={styles.badgeBars} aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-          </span>
-        </div>
-
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <p className={styles.kicker}>Carsystem i R-M Inđija, Srbija</p>
-            <h1 id="homepage-title" className={styles.heroTitle} data-cursor="headline">
-              Profesionalni
-              <br />
-              refinish program
-              <br />
-              <span>za siguran rezultat.</span>
-            </h1>
-            <p className={styles.heroIntro} data-cursor="text">
-              Distribucija boja, lakova, pripremnih materijala i opreme za
-              lakirnice, uz tehničku podršku i partnersku mrežu u Srbiji i regionu.
-            </p>
-            <div className={styles.ctaRow}>
-              <a
-                className={`${styles.primaryCta} cs-magnetic-cta cs-theme-wipe-card`}
-                href="/prodavnice"
-                data-cursor="button"
-                data-motion-surface
-                data-motion="theme-wipe"
-              >
-                <span className={styles.buttonIcon}>
-                  <IconLocation />
-                </span>
-                <span>Pronađite prodavnicu</span>
-              </a>
-              <a className={`${styles.secondaryCta} cs-interactive-surface`} href="/katalog" data-cursor="button" data-motion-surface>
-                Pregledajte katalog
-              </a>
-              <a className={`${styles.textCta} cs-link-reveal`} href="/kontakt?tema=b2b" data-cursor="link">
-                Upit za saradnju
-              </a>
-            </div>
-            <p className={styles.proofLine}>
-              <span />
-              Nijansiranje po formuli proizvođača i podrška pri izboru sistema.
-            </p>
-            <div className={styles.heroChips} aria-label="Glavne mogućnosti">
-              <span>Boje i lakovi</span>
-              <span>Partnerska mreža</span>
-              <span>Tehnička podrška</span>
-            </div>
-          </div>
-        </div>
-
-        <LocatorCard
-          selectedStore={selectedStore}
-          selectedCity={selectedCity}
-          locatorStatus={locatorStatus}
-          onCityChange={handleCityChange}
-          onLocationRequest={handleLocationRequest}
-        />
-      </section>
+      <HomeCampaignCarousel />
 
       <section className={styles.trustStrip} aria-labelledby="brand-strip-title">
         <div className={styles.trustInner}>
@@ -374,6 +296,44 @@ export function CarsystemHomePage() {
               );
             })}
           </div>
+
+          {/*
+            Sadržaj sačuvan iz prethodnog homepage hero bloka: proof linija,
+            mogućnosti i brzi pristup lokatoru. Više ne pripada glavnom hero
+            mestu, ali ostaje iznad prve velike sekcije.
+          */}
+        </div>
+
+        <div className={styles.trustSecondRow}>
+          <div className={styles.trustHandoff}>
+            <p className={styles.trustProofLine}>
+              <span aria-hidden="true" />
+              Nijansiranje po formuli proizvođača i podrška pri izboru sistema.
+            </p>
+            <div className={styles.trustCapabilities} aria-label="Glavne mogućnosti">
+              <span>Boje i lakovi</span>
+              <span>Partnerska mreža</span>
+              <span>Tehnička podrška</span>
+            </div>
+            <div className={styles.trustQuickLinks}>
+              <Link className={styles.trustQuickLink} href="/katalog">
+                Pregledajte katalog
+                <span aria-hidden="true">↗</span>
+              </Link>
+              <Link className={styles.trustQuickLink} href="/kontakt?tema=b2b">
+                Upit za saradnju
+                <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </div>
+
+          <LocatorCard
+            selectedStore={selectedStore}
+            selectedCity={selectedCity}
+            locatorStatus={locatorStatus}
+            onCityChange={handleCityChange}
+            onLocationRequest={handleLocationRequest}
+          />
         </div>
       </section>
 

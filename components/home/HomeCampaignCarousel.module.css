@@ -1,0 +1,670 @@
+/*
+ * Homepage kampanjski carousel.
+ *
+ * Autoplay, vidljivost, pauze, swipe i tastatura dolaze iz deljenog
+ * `useBrandCampaignCarousel` hooka — ovde nema sopstvenog state machine-a
+ * ni dodatnih globalnih listenera.
+ */
+
+.campaignStage {
+  --home-campaign-ink: #f6f8f9;
+  --home-campaign-muted: rgb(240 245 247 / 0.76);
+  --home-campaign-gutter: clamp(1rem, 4vw, 4rem);
+  --home-campaign-inline: max(
+    var(--home-campaign-gutter),
+    calc((100% - var(--ds-container-max, 1208px)) / 2)
+  );
+  /* Stabilna visina: ista za sve slajdove, bez CLS-a. */
+  --home-campaign-height: min(46rem, calc(100svh - 4.5rem));
+  position: relative;
+  overflow: hidden;
+  background: var(--home-campaign-background, #0b0e12);
+  color: var(--home-campaign-ink);
+  isolation: isolate;
+  touch-action: pan-y;
+  /* HomeSectionRail skroluje na `#pocetna`; sticky header ne sme da prekrije vrh. */
+  scroll-margin-top: clamp(76px, 8vw, 96px);
+}
+
+.campaignViewport {
+  position: relative;
+  min-height: var(--home-campaign-height);
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+}
+
+.campaignSlides {
+  position: absolute;
+  inset: 0;
+}
+
+.campaignSlide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(3.5rem, 8vh, 5.5rem) var(--home-campaign-inline)
+    clamp(7rem, 13vh, 8.5rem);
+  background: var(--home-campaign-background);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.campaignSlide[data-active] {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.campaignSlide[data-visual="artwork"] {
+  background:
+    radial-gradient(circle at 72% 46%, rgb(41 163 220 / 0.22), transparent 46%),
+    linear-gradient(114deg, var(--home-campaign-background), #101f26 74%);
+}
+
+.campaignCopy {
+  position: relative;
+  z-index: 4;
+  width: min(50%, 34rem);
+  max-width: 34rem;
+}
+
+.campaignSlide[data-active] .campaignCopy > * {
+  animation: homeCampaignCopyIn 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.campaignSlide[data-active] .campaignCopy > :nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.campaignSlide[data-active] .campaignCopy > :nth-child(3) {
+  animation-delay: 110ms;
+}
+
+.campaignSlide[data-active] .campaignCopy > :nth-child(4) {
+  animation-delay: 175ms;
+}
+
+.campaignEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  color: var(--home-campaign-ink);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.campaignEyebrow::before {
+  width: 2.5rem;
+  height: 0.14rem;
+  background: var(--home-campaign-accent);
+  content: "";
+}
+
+.campaignTitle {
+  max-width: 17ch;
+  margin: clamp(1.1rem, 2.2vw, 1.9rem) 0 0;
+  color: var(--home-campaign-ink);
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(2.3rem, 3.6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+  text-wrap: balance;
+}
+
+.campaignDescription {
+  max-width: 34rem;
+  margin: clamp(1.1rem, 2vw, 1.7rem) 0 0;
+  color: var(--home-campaign-muted);
+  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
+  line-height: 1.62;
+}
+
+.campaignActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.5rem, 2.6vw, 2.3rem);
+}
+
+.campaignPrimaryCta {
+  display: inline-flex;
+  min-height: 3.15rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.9rem 1.4rem;
+  background: var(--home-campaign-accent);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 180ms ease;
+}
+
+.campaignSlide[data-visual="artwork"] .campaignPrimaryCta {
+  color: #06171f;
+}
+
+.campaignPrimaryCta:hover,
+.campaignPrimaryCta:focus-visible {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+/* --- Vizuelni slojevi -------------------------------------------------- */
+
+.campaignVisual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  min-width: 0;
+}
+
+.campaignVisual picture,
+.campaignVisual img {
+  position: absolute;
+  display: block;
+}
+
+.campaignVisual[data-visual="photo"] picture,
+.campaignVisual[data-visual="photo"] img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.campaignVisual[data-visual="photo"] img {
+  object-fit: cover;
+  object-position: var(--home-campaign-focal-desktop, 50% 50%);
+}
+
+/* Gradijent služi samo čitljivosti teksta i ne pokriva desni motiv. */
+.campaignSlide[data-gradient="to-right"] .campaignVisual::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    92deg,
+    var(--home-campaign-background) 0 12%,
+    rgb(5 9 12 / 0.86) 30%,
+    rgb(5 9 12 / 0.44) 46%,
+    transparent 62%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+/* Donji scrim drži kontrole čitljivim nad svetlim delovima fotografije. */
+.campaignVisual[data-visual="photo"]::after {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 30%;
+  background: linear-gradient(180deg, transparent, rgb(5 9 12 / 0.66));
+  content: "";
+  pointer-events: none;
+}
+
+/*
+ * Providni artwork je zaseban foreground sloj desno. `contain` garantuje da
+ * ceo motiv ostane vidljiv na svakoj širini, bez isecanja.
+ */
+.campaignVisual[data-visual="artwork"] {
+  z-index: 3;
+  inset: clamp(3.2rem, 7vh, 4.5rem) var(--home-campaign-inline)
+    clamp(6.5rem, 12vh, 8rem) auto;
+  width: min(38%, 27rem);
+  pointer-events: none;
+}
+
+.campaignVisual[data-visual="artwork"] picture,
+.campaignVisual[data-visual="artwork"] img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center right;
+}
+
+/* --- Wipe tranzicija ---------------------------------------------------- */
+
+.campaignWipe {
+  position: absolute;
+  inset: -12% -25%;
+  z-index: 5;
+  background: linear-gradient(
+    104deg,
+    var(--campaign-transition-from, #05090c) 0 30%,
+    color-mix(
+        in oklab,
+        var(--campaign-transition-from, #05090c),
+        var(--campaign-transition-to, #1b2430)
+      )
+      30% 62%,
+    var(--campaign-transition-to, #1b2430) 62%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-130%, 0, 0) skewX(-14deg);
+}
+
+.campaignStage[data-direction="previous"] .campaignWipe {
+  transform: translate3d(130%, 0, 0) skewX(-14deg);
+}
+
+.campaignStage[data-transition-phase="covering"] .campaignWipe {
+  animation: homeCampaignCoverNext 500ms cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+
+.campaignStage[data-direction="previous"][data-transition-phase="covering"]
+  .campaignWipe {
+  animation-name: homeCampaignCoverPrevious;
+}
+
+.campaignStage[data-transition-phase="revealing"] .campaignWipe {
+  animation: homeCampaignRevealNext 580ms cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+
+.campaignStage[data-direction="previous"][data-transition-phase="revealing"]
+  .campaignWipe {
+  animation-name: homeCampaignRevealPrevious;
+}
+
+/* --- Kontrole ----------------------------------------------------------- */
+
+.campaignControls {
+  position: absolute;
+  right: var(--home-campaign-inline);
+  bottom: 2.2rem;
+  left: var(--home-campaign-inline);
+  z-index: 7;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.campaignArrows {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.campaignArrows button,
+.campaignPagination button {
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.campaignArrows button:disabled,
+.campaignPagination button:disabled {
+  cursor: wait;
+}
+
+.campaignArrows button {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid rgb(246 248 249 / 0.28);
+  background: rgb(5 9 12 / 0.46);
+  color: var(--home-campaign-ink);
+  font-size: 1.1rem;
+  transition:
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms ease;
+}
+
+.campaignArrows button:hover:not(:disabled),
+.campaignArrows button:focus-visible {
+  background: rgb(246 248 249 / 0.18);
+}
+
+.campaignPagination {
+  display: grid;
+  max-width: 42rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.campaignPagination button {
+  display: grid;
+  min-width: 0;
+  min-height: 3rem;
+  align-content: end;
+  gap: 0.6rem;
+  background: transparent;
+  color: rgb(246 248 249 / 0.58);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6rem;
+  text-align: left;
+  transition: color 180ms ease;
+}
+
+.campaignPagination button[aria-pressed="true"] {
+  color: var(--home-campaign-ink);
+}
+
+.campaignPaginationLabel {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.campaignPaginationLabel strong {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.campaignPaginationLabel small {
+  overflow: hidden;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campaignPaginationTrack {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0.25rem;
+  overflow: hidden;
+  background: rgb(246 248 249 / 0.2);
+  contain: paint;
+}
+
+.campaignPagination button[aria-pressed="true"] .campaignPaginationTrack {
+  background: rgb(246 248 249 / 0.32);
+}
+
+.campaignPaginationTrack i {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--campaign-progress-color, currentColor);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 70rem) {
+  .campaignStage {
+    --home-campaign-height: min(42rem, calc(100svh - 4.5rem));
+  }
+
+  .campaignCopy {
+    width: min(60%, 30rem);
+  }
+
+  .campaignVisual[data-visual="artwork"] {
+    width: min(40%, 20rem);
+  }
+
+  .campaignSlide[data-gradient="to-right"] .campaignVisual::before {
+    background: linear-gradient(
+      92deg,
+      var(--home-campaign-background) 0 16%,
+      rgb(5 9 12 / 0.9) 38%,
+      rgb(5 9 12 / 0.56) 56%,
+      transparent 72%
+    );
+  }
+}
+
+@media (max-width: 53.75rem) {
+  .campaignStage {
+    --home-campaign-height: 46rem;
+  }
+
+  .campaignSlide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.1rem, 4vw, 1.8rem);
+    padding: 2.2rem var(--home-campaign-gutter) 7.6rem;
+  }
+
+  .campaignCopy {
+    width: auto;
+    max-width: none;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /*
+   * Vizual ide u gornju zonu, tekst u donju sigurnu zonu istog bloka. Ista,
+   * širinom vođena ali ograničena visina za sve slajdove drži hero stabilnim.
+   */
+  .campaignVisual,
+  .campaignVisual[data-visual="artwork"] {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    width: 100%;
+    height: min(64vw, 17rem);
+    grid-row: 1;
+    padding: 0;
+  }
+
+  .campaignVisual[data-visual="photo"] picture,
+  .campaignVisual[data-visual="photo"] img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .campaignVisual[data-visual="photo"] img {
+    object-position: var(--home-campaign-focal-mobile, 50% 50%);
+  }
+
+  .campaignVisual[data-visual="artwork"] img {
+    object-position: right center;
+  }
+
+  /* Bez teksta preko fotografije na mobilnom — samo stapanje ka dnu. */
+  .campaignSlide[data-gradient="to-right"] .campaignVisual::before {
+    background: linear-gradient(
+      180deg,
+      transparent 58%,
+      rgb(5 9 12 / 0.5) 86%,
+      var(--home-campaign-background) 100%
+    );
+  }
+
+  .campaignVisual[data-visual="photo"]::after {
+    display: none;
+  }
+
+  .campaignTitle {
+    max-width: 20ch;
+    margin-top: 0.9rem;
+    font-size: clamp(1.95rem, 8vw, 2.8rem);
+  }
+
+  .campaignDescription {
+    margin-top: 0.9rem;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .campaignActions {
+    margin-top: 1.3rem;
+  }
+
+  .campaignPagination {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  .campaignStage {
+    --home-campaign-height: 44rem;
+  }
+
+  .campaignTitle {
+    font-size: clamp(1.8rem, 7.6vw, 2.35rem);
+  }
+
+  .campaignDescription {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  .campaignActions a {
+    width: 100%;
+  }
+
+  .campaignArrows button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .campaignPaginationLabel small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaignSlide[data-active] .campaignCopy > *,
+  .campaignStage[data-transition-phase] .campaignWipe {
+    animation: none !important;
+  }
+
+  .campaignWipe {
+    display: none;
+  }
+
+  .campaignArrows button,
+  .campaignPrimaryCta {
+    transition: none;
+  }
+}
+
+@keyframes homeCampaignCopyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes homeCampaignCoverNext {
+  from {
+    opacity: 1;
+    transform: translate3d(-130%, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+}
+
+@keyframes homeCampaignRevealNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(130%, 0, 0) skewX(-14deg);
+  }
+}
+
+@keyframes homeCampaignCoverPrevious {
+  from {
+    opacity: 1;
+    transform: translate3d(130%, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+}
+
+@keyframes homeCampaignRevealPrevious {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(-130%, 0, 0) skewX(-14deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * Stabilan naslov početne strane
+ *
+ * Stoji iznad carousel viewporta i ne menja se sa slajdom. Namerno je vidljiv,
+ * ne `sr-only`: naslov strane mora da postoji i za oko, ne samo za čitač.
+ * -------------------------------------------------------------------------- */
+
+.campaignPageHeading {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 5vw, 4rem) 0;
+}
+
+.campaignPageKicker {
+  margin: 0;
+  font-size: clamp(0.72rem, 1.4vw, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cs-text-muted, #6b7280);
+}
+
+.campaignPageTitle {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--cs-text-strong, #0b0e12);
+}
+
+@media (max-width: 720px) {
+  .campaignPageHeading {
+    padding: 1.1rem 1.1rem 0;
+  }
+
+  .campaignPageTitle {
+    max-width: none;
+  }
+}

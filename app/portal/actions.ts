@@ -1,11 +1,18 @@
 "use server";
 
 import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";
 import { CALLBACK_PARAM, LOGIN_ROUTE, normalizeCallback } from "@/lib/authz/redirects.mjs";
 
+/**
+ * Auth.js post-login redirect callback ne sme da odlucuje odrediste ODJAVE:
+ * prima samo `/portal…`, pa bi odjavu odveo nazad na portal. Zato se sesija
+ * prvo gasi sa `redirect: false`, a Next zatim eksplicitno vodi na `LOGIN_ROUTE`.
+ */
 export async function signOutAction() {
-  await signOut({ redirectTo: LOGIN_ROUTE });
+  await signOut({ redirect: false });
+  redirect(LOGIN_ROUTE);
 }
 
 /** Ista poruka za svaki neuspeh — iz odgovora se ne sme zaključiti da li nalog postoji. */

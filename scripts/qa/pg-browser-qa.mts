@@ -24,9 +24,14 @@ import {
   SAFETY_MESSAGES,
 } from "../../db/integration/safety.mjs";
 import { checkQaMasterKey, QA_ENV_MESSAGES, qaCryptoEnv } from "./qa-env.mjs";
+import { jeLoginPathname } from "./logout-predicate.mjs";
 import { hashPassword, verifyPassword } from "@/lib/auth/password.mjs";
 import { issueEnrollmentGrant } from "@/lib/auth/enrollment-grant";
 import { issuePasswordResetCode } from "@/lib/auth/password-reset";
+import {
+  beginMfaEnrollment,
+  confirmMfaEnrollment,
+} from "@/lib/auth/mfa-service";
 
 const PORT = Number(process.env.QA_PORT ?? 3240);
 const BASE = `http://127.0.0.1:${PORT}`;
@@ -86,8 +91,32 @@ process.env.DATABASE_URL = process.env.TEST_DATABASE_URL;
 
 /* ------------------------------------------------------------- izveštaj */
 
-/** Poslednji redovi sa servera; koriste se samo kao dokaz uz pad. */
-const serverLog: string[] = [];
+/**
+ * Poslednji redovi sa servera; koriste se samo kao dokaz uz pad.
+ *
+ * Svaki red nosi redni broj jer se niz skracuje sa pocetka — indeks nije
+ * stabilan, pa kursor mora biti redni broj, a ne pozicija. Bez toga bi dokaz
+ * jednog koraka nosio redove nastale u prethodnim koracima: namerno odbijene
+ * prijave iz koraka 6 i 11 izgledale bi kao kvar tekuceg koraka.
+ */
+const serverLog: { n: number; red: string }[] = [];
+let serverLogSeq = 0;
+
+/** Od kog rednog broja dokazi smeju da citaju serverski dnevnik. */
+let logKursor = 0;
+
+/**
+ * Brise dijagnosticki trag prethodnog koraka.
+ *
+ * `poslednjiLanac` i `poslednjaFaza` puni `prijava()`. Ako se ne resetuju pre
+ * radnje koja nije prijava, `dokazi()` uz pad te radnje prikaze lanac i fazu
+ * PRETHODNE prijave — dokaz koji opisuje tudji dogadjaj.
+ */
+function resetDijagnostiku() {
+  poslednjiLanac = [];
+  poslednjaFaza = "";
+  logKursor = serverLogSeq;
+}
 
 /**
  * Ograde pokrivenosti: tvrdnje koje su prošle, ali NISU bile na punom ispitu.
@@ -186,6 +215,12 @@ const PREDUSLOVI: Record<string, () => string | null> = {
   // Administracija traži STVARNO uspelu prijavu, ne samo postojanje tajne.
   "8": trebaPunuSesiju,
   "12": trebaTajna,
+  // Koraci korpe traze vlasnikov drugi faktor i stvarno uspelu prijavu.
+  "14": trebaPunuSesiju,
+  "15": trebaPunuSesiju,
+  // Deljeni context vozi tri prijave zaredom, sve tri sa drugim faktorom.
+  "16": trebaPunuSesiju,
+  "17": trebaTajna,
 };
 
 /** Redni broj koraka iz njegovog imena („5. prijava kodom…" → „5"). */
@@ -318,6 +353,14 @@ function startServer() {
         AUTH_URL: BASE,
         AUTH_TRUST_HOST: "true",
         PORTAL_MFA_MODE: process.env.PORTAL_MFA_MODE ?? "enroll",
+        /*
+         * Korpa se ukljucuje ISKLJUCIVO u ovom QA potprocesu.
+         *
+         * Produkcijska i `.env.example` vrednost ostaju `off`. Ukljucena ovde
+         * ujedno pooštrava korake 1 i 2: enrollment-only izolacija se dokazuje
+         * u okruzenju u kome korpa POSTOJI, a ne u kome je ionako iskljucena.
+         */
+        PORTAL_COMMERCE: "on",
         // Iste vrednosti koje koristi i roditeljski proces — vidi `QA_TAJNE`.
         ...QA_TAJNE,
       },
@@ -330,7 +373,8 @@ function startServer() {
     process.stderr.write(`[server] ${tekst}`);
     // Zadnjih nekoliko redova ide uz dokaze kada korak padne.
     for (const red of tekst.split("\n").map((r) => r.trim()).filter(Boolean)) {
-      serverLog.push(red);
+      serverLogSeq += 1;
+      serverLog.push({ n: serverLogSeq, red });
       if (serverLog.length > 40) serverLog.shift();
     }
   });
@@ -556,6 +600,32 @@ async function otvori(
 }
 
 /**
+ * Čeka da PUTANJA postane tražena — mereno sa Node strane.
+ *
+ * `sacekajSmirenuAdresu` vraća prvu adresu koja miruje 1,2 s. U lancu
+ * `/portal/korpa` → `/portal` → `/prijava` to ume da bude MEĐUKORAK: prolaz je
+ * tako izmerio `/portal` i prijavio da odjava nije završila na prijavi, iako
+ * jeste. Ovde se čeka baš odredište; ako ne stigne, vraća se poslednja viđena
+ * adresa da bi se videlo gde je lanac zastao.
+ *
+ * @returns poslednja adresa i da li je odredište stvarno dosegnuto
+ */
+async function sacekajPutanju(
+  page: Page,
+  putanja: string,
+  rokMs = AKCIJA_TIMEOUT_MS,
+): Promise<{ url: string; stigao: boolean }> {
+  const kraj = Date.now() + rokMs;
+  let poslednja = page.url();
+  while (Date.now() < kraj) {
+    poslednja = page.url();
+    if (new URL(poslednja, BASE).pathname === putanja) return { url: poslednja, stigao: true };
+    await page.waitForTimeout(200);
+  }
+  return { url: poslednja, stigao: false };
+}
+
+/**
  * Čeka da adresa bude TAČNO ona ugovorena.
  *
  * Tok sme privremeno proći kroz međukorake; jedino je bitno gde se zaustavi.
@@ -660,7 +730,10 @@ async function dokazi(page: Page, sta: string, userId?: string): Promise<string>
    * `at async …` ne kaže ništa o uzroku, a istiskuje poruku koja bi rekla.
    */
   const bitni = serverLog
-    .filter((r) => !/^at\s/.test(r) && !/^\s*$/.test(r))
+    // Samo redovi nastali OD pocetka tekuceg koraka.
+    .filter((r) => r.n > logKursor)
+    .map((r) => r.red)
+    .filter((red) => !/^at\s/.test(red) && !/^\s*$/.test(red))
     .slice(-3)
     .join(" | ");
   if (bitni) delovi.push(`server: ${bitni}`);
@@ -1224,6 +1297,624 @@ try {
       if (!cc.includes("s-maxage")) throw new Error(`${ruta} je izgubio javni keš: ${cc}`);
     }
     return "keš javnih strana netaknut";
+  });
+
+  /* ===================================================================== *
+   * Korpa portala (koraci 14–17)
+   *
+   * Korpa je lista za upit: nema cene, ukupnog iznosa, checkouta ni kreiranja
+   * porudzbine. Cuva se iskljucivo u pretrazivacu, pod kljucem vezanim za UUID
+   * prijavljenog korisnika. Ovi koraci dokazuju i bezbednosnu granicu i
+   * izolaciju izmedju naloga.
+   * ===================================================================== */
+
+  await tok("14. korpa: vlasnik sa sposobnoscu je otvara, radnik je ne dobija", async () => {
+    const s = await svezaSesija();
+    try {
+      const kod = await svezTotp(ownerSecret);
+      const url = await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(s.page, "vlasnik se nije prijavio", nalozi.owner.id));
+      }
+
+      const res = await s.page.goto(`${BASE}/portal/korpa`, {
+        waitUntil: "domcontentloaded",
+      });
+      if ((res?.status() ?? 0) !== 200) {
+        throw new Error(
+          await dokazi(s.page, `vlasnik ne dobija korpu: HTTP ${res?.status()}`, nalozi.owner.id),
+        );
+      }
+      const stanje = await s.page.evaluate(() => ({
+        naslov: document.querySelector("h1")?.textContent?.trim() ?? null,
+        prazna: /nema izabranih|lista je prazna|prazn/i.test(document.body.innerText),
+        cena: /\bRSD\b|\bEUR\b|ukupno za napla|\bcena\b/i.test(document.body.innerText),
+        checkout: /checkout|plati|pla[ćc]anje|poru[dž]bina je/i.test(document.body.innerText),
+        kljucevi: Object.keys(window.localStorage).filter((k) => k.startsWith("carsystem.cart")),
+      }));
+      if (stanje.cena) throw new Error(await dokazi(s.page, "korpa prikazuje cenu", nalozi.owner.id));
+      if (stanje.checkout) {
+        throw new Error(await dokazi(s.page, "korpa nudi checkout ili tvrdi porudzbinu", nalozi.owner.id));
+      }
+      // Kljuc mora nositi CEO UUID, ne skraceni otisak.
+      for (const k of stanje.kljucevi) {
+        if (!/^carsystem\.cart\.v3\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(k)) {
+          throw new Error(await dokazi(s.page, "cart kljuc nije v3 UUID namespace", nalozi.owner.id));
+        }
+      }
+      return `korpa otvorena, prazna=${stanje.prazna}, bez cene i checkouta`;
+    } finally {
+      await s.zatvori();
+    }
+  });
+
+  await tok("15. korpa: ucitavanje scoped zapisa, dve varijante, refresh cuva", async () => {
+    const s = await svezaSesija();
+    try {
+      const kod = await svezTotp(ownerSecret);
+      await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+      await s.page.goto(`${BASE}/portal/korpa`, { waitUntil: "domcontentloaded" });
+
+      /*
+       * OGRADA: ovo NIJE dokaz dodavanja ni spajanja.
+       *
+       * U ovom commitu jos ne postoji produkcijski ulaz koji puni korpu — nema
+       * „Dodaj u korpu" dugmeta ni na javnom sajtu ni u portalu. Zato runner
+       * ne moze da klikne stvarnu putanju, pa upisuje fixture zapis pod
+       * kljucem koji je APLIKACIJA vec napravila (format i vlasnik se ne
+       * izmisljaju). Dokazuje se samo: ucitavanje scoped zapisa, prikaz dve
+       * odvojene varijante i opstanak posle refresh-a.
+       *
+       * `addToCart` i spajanje iste varijante dokazuju izvrsni testovi u
+       * `lib/cart/cart-model.test.mjs`. QA-only backdoor se namerno NE pravi.
+       */
+      const kljuc = await s.page.evaluate(
+        () => Object.keys(window.localStorage).find((k) => k.startsWith("carsystem.cart.v3.")) ?? null,
+      );
+      if (!kljuc) throw new Error(await dokazi(s.page, "cart kljuc nije nastao", nalozi.owner.id));
+
+      /*
+       * Zapis se sastavlja i serijalizuje U NODE PROCESU.
+       *
+       * Prvi prolaz je ovde pao sa `ReferenceError: __name is not defined`.
+       * Callback je imao lokalnu imenovanu funkciju (`const stavka = …`), a tsx
+       * je pod `--keep-names` obavija esbuild helperom `__name`. Playwright
+       * salje telo funkcije kao tekst; helper ostaje u Node modulu i u
+       * pretrazivacu ga nema.
+       *
+       * Zato browser callback prima gotov string i radi jednu jedinu stvar.
+       * Bez lokalnih funkcija, bez `map`/`filter` callbacka, bez zatvorenih
+       * promenljivih i bez uvezenih helpera.
+       */
+      const zapis = JSON.stringify({
+        items: ["35-M1010", "35-M1021"].map((variantId) => ({
+          id: `baslac-line-35::${variantId}`,
+          productSlug: "baslac-line-35",
+          familySlug: "baslac-line-35",
+          variantId,
+          sku: variantId,
+          name: `Baslac ${variantId}`,
+          image: null,
+          volume: "3,5 L",
+          brandSlug: "baslac",
+          inventoryKey: null,
+          quantity: 2,
+        })),
+      });
+      await s.page.evaluate(
+        (a: [string, string]) => window.localStorage.setItem(a[0], a[1]),
+        [kljuc, zapis] as [string, string],
+      );
+
+      await s.page.reload({ waitUntil: "domcontentloaded" });
+      const posle = await s.page.evaluate((k) => {
+        const zapis = JSON.parse(window.localStorage.getItem(k) ?? "{}");
+        return {
+          stavki: zapis.items?.length ?? 0,
+          idjevi: (zapis.items ?? []).map((i: { id: string }) => i.id),
+          // Samo boolean: sadrzaj korpe se ne ispisuje.
+          kolicineOk: (zapis.items ?? []).every(
+            (i: { quantity: number }) => Number.isInteger(i.quantity) && i.quantity >= 1,
+          ),
+        };
+      }, kljuc);
+
+      if (posle.stavki !== 2) {
+        throw new Error(await dokazi(s.page, `refresh nije sacuvao dve stavke (${posle.stavki})`, nalozi.owner.id));
+      }
+      if (new Set(posle.idjevi).size !== 2) {
+        throw new Error(await dokazi(s.page, "dve varijante dele identitet", nalozi.owner.id));
+      }
+      ograde.push(
+        "Korak 15 NE dokazuje dodavanje ni spajanje: u ovom commitu nema produkcijskog " +
+          "ulaza koji puni korpu, pa je zapis upisan kao fixture pod kljucem aplikacije. " +
+          "Dokazano je ucitavanje scoped zapisa, dve odvojene varijante i persistence posle " +
+          "refresh-a. add/merge logiku pokrivaju izvrsni testovi lib/cart/cart-model.test.mjs.",
+      );
+      return `refresh cuva ${posle.stavki} odvojene stavke, sve sa validnom kolicinom=${posle.kolicineOk}`;
+    } finally {
+      await s.zatvori();
+    }
+  });
+
+  await tok("16. korpa: isti context, A -> B -> A, bez curenja izmedju naloga", async () => {
+    /*
+     * Zasto ovaj korak postoji pored 14 i 15.
+     *
+     * Koraci 14, 15, 17 i 18 svaki uzimaju SVEZ kontekst, pa drugi nalog uvek
+     * zatekne prazan `localStorage`. Time se dokazuje da nema curenja kroz
+     * mrezu ili server, ali NE dokazuje ono sto je zaista u pitanju: deljeni
+     * racunar, gde posle odjave u istom pretrazivacu ostaje sve sto je
+     * prethodni korisnik zapisao.
+     *
+     * Zato ceo scenario zivi u JEDNOM kontekstu, a izmedju prijava se namerno
+     * NE poziva `context.clearCookies()`, `context.clearPermissions()` ni
+     * `localStorage.clear()` i ne pravi se nov kontekst. Zaostali zapis je
+     * predmet testa, ne smetnja.
+     *
+     * Odjava ide kroz stvarni tok aplikacije — dugme u `PortalShell` koje gadja
+     * `signOutAction` — a ne kroz brisanje kolacica iz test koda.
+     */
+    const setup2 = await beginMfaEnrollment({
+      userId: nalozi.owner2.id,
+      accountLabel: nalozi.owner2.email,
+    });
+    const potvrda2 = await confirmMfaEnrollment({
+      userId: nalozi.owner2.id,
+      token: await svezTotp(setup2.base32),
+    });
+    if (!potvrda2.ok) throw new Error("drugi vlasnik nije vezao drugi faktor");
+
+    /* Markeri postoje samo da bi se curenje moglo prepoznati; ne ispisuju se. */
+    const MARKER_A = "QA-KORPA-ALFA";
+    const MARKER_B = "QA-KORPA-BETA";
+
+    const s = await svezaSesija();
+    try {
+      const UUID_KLJUC =
+        /^carsystem\.cart\.v3\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+
+      /** Kljucevi ostaju u Node-u radi poredjenja; nikada ne idu u izlaz. */
+      const cartKljucevi = (): Promise<string[]> =>
+        s.page.evaluate(() =>
+          Object.keys(window.localStorage).filter((k) => k.startsWith("carsystem.cart")),
+        );
+
+      const prijaviSe = async (nalog: { email: string; password: string; id: string }, base32: string) => {
+        const url = await prijava(s.page, nalog.email, nalog.password, await svezTotp(base32));
+        if (url.includes("/prijava")) {
+          throw new Error(await dokazi(s.page, "prijava u deljenom contextu nije prosla", nalog.id));
+        }
+      };
+
+      const otvoriKorpu = async () => {
+        const res = await s.page.goto(`${BASE}/portal/korpa`, { waitUntil: "domcontentloaded" });
+        if ((res?.status() ?? 0) !== 200) {
+          throw new Error(await dokazi(s.page, `korpa nije otvorena: HTTP ${res?.status()}`));
+        }
+        await s.page.waitForSelector("main h1", { timeout: AKCIJA_TIMEOUT_MS });
+      };
+
+      /** Sta korisnik VIDI: broj prikazanih stavki i da li se vidi tudji marker. */
+      const vidljivo = (tudjiMarker: string) =>
+        s.page.evaluate((marker: string) => {
+          const tekst = document.body.innerText;
+          return {
+            stavki: document.querySelectorAll("main ul li").length,
+            tudje: tekst.includes(marker),
+          };
+        }, tudjiMarker);
+
+      /**
+       * Fixture zapis pod kljucem koji je APLIKACIJA napravila (vidi ogradu u koraku 15).
+       *
+       * Serijalizacija ide u Node-u; browser callback je primitivan iz istog
+       * razloga kao u koraku 15 (`__name`).
+       */
+      const upisiFixture = async (kljuc: string, marker: string, varijante: string[]) => {
+        const zapis = JSON.stringify({
+          items: varijante.map((variantId) => ({
+            id: `baslac-line-35::${variantId}`,
+            productSlug: "baslac-line-35",
+            familySlug: "baslac-line-35",
+            variantId,
+            sku: variantId,
+            name: `${marker} ${variantId}`,
+            image: null,
+            volume: "3,5 L",
+            brandSlug: "baslac",
+            inventoryKey: null,
+            quantity: 1,
+          })),
+        });
+        await s.page.evaluate(
+          (a: [string, string]) => window.localStorage.setItem(a[0], a[1]),
+          [kljuc, zapis] as [string, string],
+        );
+        await s.page.reload({ waitUntil: "domcontentloaded" });
+        await s.page.waitForSelector("main h1", { timeout: AKCIJA_TIMEOUT_MS });
+      };
+
+      /**
+       * Ima li auth endpoint jos uvek korisnika.
+       *
+       * `page.request` deli kolacice sa kontekstom, pa ovo cita BAS onu sesiju
+       * koju nosi pretrazivac — bez diranja kolacica.
+       */
+      const sesijaAktivna = async (): Promise<boolean> => {
+        const r = await s.page.request.get(`${BASE}/api/auth/session`);
+        if (!r.ok()) return false;
+        const telo = (await r.text()).trim();
+        if (telo === "" || telo === "null" || telo === "{}") return false;
+        try {
+          const j = JSON.parse(telo) as { user?: unknown } | null;
+          return Boolean(j && j.user);
+        } catch {
+          return false;
+        }
+      };
+
+      /** Postoji li auth session kolacic. Vraca SAMO boolean — ni ime ni vrednost. */
+      const imaSessionCookie = async (): Promise<boolean> =>
+        (await s.page.context().cookies(BASE)).some((c) =>
+          /(?:^|-)authjs\.session-token$/.test(c.name),
+        );
+
+      /**
+       * Obavezna kapija PRE klika na odjavu.
+       *
+       * Bez nje klik ne dokazuje nista. Zasebna privremena dijagnostika je pala
+       * bas ovde: prijava nije bila gotova, pa je „logout ne radi" zapravo
+       * znacilo „korisnik nije ni bio prijavljen". Kapija tu razliku cini
+       * nemogucom — ako preduslov ne stoji, korak pada kao PRECONDITION, ne kao
+       * kvar odjave.
+       */
+      const preduslovOdjave = async () => {
+        const ruta = new URL(s.page.url()).pathname;
+        const imaUser = await sesijaAktivna();
+        const imaCookie = await imaSessionCookie();
+        const pogodaka = await s.page.evaluate(
+          () => document.querySelectorAll('form button[aria-label="Odjava"]').length,
+        );
+        const vidljiv = await s.page
+          .isVisible('form button[aria-label="Odjava"]')
+          .catch(() => false);
+        const zasticena = await s.page.request.get(`${BASE}/portal/korpa`);
+        const status = zasticena.status();
+
+        if (!imaUser || !imaCookie || pogodaka !== 1 || !vidljiv || status !== 200) {
+          throw new Error(
+            await dokazi(
+              s.page,
+              "PRECONDITION FAILED — LOGIN: " +
+                `ruta=${ruta} sesija_user=${imaUser} session_cookie=${imaCookie} ` +
+                `logout_pogodaka=${pogodaka} logout_vidljiv=${vidljiv} ` +
+                `zasticena_ruta=HTTP ${status}`,
+              nalozi.owner.id,
+            ),
+          );
+        }
+        return { ruta, pogodaka };
+      };
+
+      /**
+       * Odjava kroz STVARNI tok aplikacije, uz tri odvojeno merena dokaza.
+       *
+       * Zasto ne `waitForFunction`
+       * --------------------------
+       * Ranija verzija je cekala `location.pathname` in-page pollerom i hvatala
+       * svaki ishod sa `.catch(() => false)`. Serverska akcija rusi izvrsni
+       * kontekst pri navigaciji, pa poller odbija sa „Execution context was
+       * destroyed" — a `catch` je tu gresku pretvarao u „nije zavrsila na
+       * prijavi", iako je odjava uspela. Poruka je opisivala pogresan dogadjaj.
+       *
+       * Sada se meri sa Node strane i razdvojeno, da bi se faza kvara videla iz
+       * samog izlaza:
+       *   sesija_aktivna=true                → produkcijski logout defekt
+       *   sesija ugasena, url_na_prijavi=false → produkcijski redirect/cache defekt
+       *   sve tri ok                          → odjava je stvarno prosla
+       * Neuspeh selektora ne stize dovde — `waitForSelector` pada sa svojom porukom.
+       */
+      const odjava = async () => {
+        // Kapija PRE svega: klik na odjavu nema smisla bez dokazane sesije.
+        await preduslovOdjave();
+
+        // Kursor se resetuje NEPOSREDNO pre klika: dokaz ovog koraka ne sme
+        // nositi lanac prijave A ni namerno odbijene prijave iz koraka 6 i 11.
+        resetDijagnostiku();
+
+        /*
+         * Kolektori se kace tek sada i skidaju odmah posle klika.
+         *
+         * Bez toga bi u snimku bili i zahtevi prijave A. Odgovori se skupljaju
+         * kao objekti pa citaju POSLE cekanja: Playwright ne ceka async
+         * slusaoce, a `headersArray()` je async.
+         */
+        const postovi: string[] = [];
+        const odgovori: import("playwright-core").Response[] = [];
+        const greske: string[] = [];
+        const onReq = (r: import("playwright-core").Request) => {
+          if (r.method() !== "POST") return;
+          const h = r.headers();
+          postovi.push(
+            `${new URL(r.url()).pathname} next-action=${h["next-action"] ? "da" : "ne"}`,
+          );
+        };
+        const onRes = (r: import("playwright-core").Response) => {
+          if (r.request().method() === "POST") odgovori.push(r);
+        };
+        const onErr = (e: Error) => greske.push(e.message.slice(0, 160));
+        const onCon = (m: import("playwright-core").ConsoleMessage) => {
+          if (m.type() === "error") greske.push(m.text().slice(0, 160));
+        };
+        s.page.on("request", onReq);
+        s.page.on("response", onRes);
+        s.page.on("pageerror", onErr);
+        s.page.on("console", onCon);
+
+        const dugme = await s.page.waitForSelector('form button[aria-label="Odjava"]', {
+          timeout: AKCIJA_TIMEOUT_MS,
+        });
+        await dugme.click();
+
+        /*
+         * 1) Stanje ODMAH posle klika, PRE ijedne dalje navigacije.
+         *
+         * Ranije se konacna adresa citala tek posle probe zasticene rute, pa je
+         * dokaz nosio ishod te probe umesto ishoda odjave. Ove dve vrednosti se
+         * od sada cuvaju odvojeno i prva se nikada ne prepisuje drugom.
+         */
+        const posleKlika = await sacekajPutanju(s.page, "/prijava");
+        const urlPosleKlika = posleKlika.url;
+        const pathPosleKlika = new URL(urlPosleKlika, BASE).pathname;
+        // Ugovor je PUTANJA; `?callbackUrl=…` je dozvoljen i nije pad.
+        const urlNaPrijavi = jeLoginPathname(urlPosleKlika);
+
+        // Sta korisnik STVARNO vidi na toj adresi.
+        const prikaz = await s.page.evaluate(() => ({
+          loginForma:
+            document.querySelector('input[name="email"]') !== null &&
+            document.querySelector('input[name="password"]') !== null,
+          portalSadrzaj: document.querySelector(".portal-shell, [data-portal-nav]") !== null,
+          odjavaDugmadi: document.querySelectorAll('form button[aria-label="Odjava"]').length,
+          naslov: (document.querySelector("h1, h2")?.textContent ?? "").trim().slice(0, 40),
+        }));
+
+        // 2) Sesija na auth endpointu.
+        let aktivna = true;
+        const kraj = Date.now() + AKCIJA_TIMEOUT_MS;
+        while (Date.now() < kraj) {
+          aktivna = await sesijaAktivna();
+          if (!aktivna) break;
+          await s.page.waitForTimeout(250);
+        }
+
+        s.page.off("request", onReq);
+        s.page.off("response", onRes);
+        s.page.off("pageerror", onErr);
+        s.page.off("console", onCon);
+
+        // 3) Auth session kolacic i zasticena ruta — odvojeno, TEK SADA.
+        const cookiePosle = await imaSessionCookie();
+        await s.page.goto(`${BASE}/portal/korpa`, { waitUntil: "domcontentloaded" });
+        const posleProvere = await sacekajPutanju(s.page, "/prijava");
+        const urlPosleProvere = posleProvere.url;
+        const rutaVraca = jeLoginPathname(urlPosleProvere);
+
+        if (
+          aktivna ||
+          cookiePosle ||
+          !urlNaPrijavi ||
+          !prikaz.loginForma ||
+          prikaz.portalSadrzaj ||
+          !rutaVraca
+        ) {
+          /*
+           * Snimak mreze se cita SAMO kada odjava padne.
+           *
+           * Iz njega se vidi koji je clan lanca popustio: nema POST-a → forma
+           * nije poslata; POST bez `next-action` → nije server akcija; POST sa
+           * greskom → server akcija; POST 200 bez brisanja kolacica → `signOut`
+           * ili konfiguracija kolacica; brisanje pa ponovno postavljanje →
+           * nesto na odgovoru vraca sesiju.
+           */
+          const snimak: string[] = [];
+          for (const r of odgovori) {
+            let hs: { name: string; value: string }[] = [];
+            try {
+              hs = await r.headersArray();
+            } catch {
+              /* odgovor vise nije dostupan */
+            }
+            const lok = hs.find((h) => /^(location|x-action-redirect)$/i.test(h.name));
+            // Iz Set-Cookie se uzimaju SAMO ime i da li taj zapis brise kolacic.
+            const kolacici = hs
+              .filter((h) => h.name.toLowerCase() === "set-cookie")
+              .map((h) => ({
+                ime: h.value.split("=")[0].trim(),
+                brise:
+                  /;\s*Max-Age=0\b/i.test(h.value) ||
+                  /;\s*Expires=Thu, 01 Jan 1970/i.test(h.value) ||
+                  /^[^=]+=;/.test(h.value),
+              }));
+            snimak.push(
+              `${new URL(r.url()).pathname} → ${r.status()} ` +
+                `redirect=${lok ? new URL(lok.value, BASE).pathname : "(nema)"} ` +
+                `set-cookie=${JSON.stringify(kolacici)}`,
+            );
+          }
+
+          throw new Error(
+            await dokazi(
+              s.page,
+              "odjava nije potvrdjena: " +
+                `sesija_aktivna=${aktivna} session_cookie_ostao=${cookiePosle} ` +
+                `pathname_odmah_posle_klika=${pathPosleKlika} ` +
+                `url_na_prijavi=${urlNaPrijavi} ` +
+                `login_forma_vidljiva=${prikaz.loginForma} ` +
+                `portal_sadrzaj_vidljiv=${prikaz.portalSadrzaj} ` +
+                `odjava_dugmadi=${prikaz.odjavaDugmadi} naslov="${prikaz.naslov}" | ` +
+                `pathname_posle_provere_zasticene_rute=${new URL(urlPosleProvere, BASE).pathname} ` +
+                `zasticena_ruta_vraca_na_prijavu=${rutaVraca} | ` +
+                `POST=${postovi.length ? JSON.stringify(postovi) : "(nijedan)"} | ` +
+                `odgovori=${snimak.length ? JSON.stringify(snimak) : "(nijedan)"} | ` +
+                `greske=${greske.length ? JSON.stringify(greske.slice(-3)) : "(nema)"}`,
+            ),
+          );
+        }
+      };
+
+      /* ---- A: prva prijava u praznom contextu ---- */
+      await prijaviSe(nalozi.owner, ownerSecret!);
+      await otvoriKorpu();
+      const kljuceviA = await cartKljucevi();
+      if (kljuceviA.length !== 1 || !UUID_KLJUC.test(kljuceviA[0])) {
+        throw new Error(await dokazi(s.page, "A nije dobio tacno jedan v3 UUID namespace", nalozi.owner.id));
+      }
+      await upisiFixture(kljuceviA[0], MARKER_A, ["35-M1010", "35-M1021"]);
+      const aPrvi = await vidljivo(MARKER_B);
+      if (aPrvi.stavki !== 2) {
+        throw new Error(await dokazi(s.page, `A ne vidi svoje dve stavke (${aPrvi.stavki})`, nalozi.owner.id));
+      }
+
+      /* ---- odjava kroz aplikaciju; NISTA se ne cisti ---- */
+      await odjava();
+      const posleOdjave = await cartKljucevi();
+      if (posleOdjave.length !== 1) {
+        /*
+         * Ako zapis nestane pri odjavi, test vise ne meri ono zbog cega postoji:
+         * B bi zatekao cist storage i „izolacija" bi bila lazna.
+         */
+        throw new Error(
+          await dokazi(s.page, "zapis A je nestao pri odjavi — scenario vise ne meri deljeni racunar"),
+        );
+      }
+
+      /* ---- B: druga prijava u ISTOM contextu ---- */
+      await prijaviSe(nalozi.owner2, setup2.base32);
+      await otvoriKorpu();
+      const bPrazan = await vidljivo(MARKER_A);
+      if (bPrazan.stavki !== 0 || bPrazan.tudje) {
+        throw new Error(
+          await dokazi(s.page, "B vidi stavke naloga A u istom contextu", nalozi.owner2.id),
+        );
+      }
+      const kljuceviB = await cartKljucevi();
+      const noviB = kljuceviB.filter((k) => !kljuceviA.includes(k));
+      if (kljuceviB.length !== 2 || noviB.length !== 1 || !UUID_KLJUC.test(noviB[0])) {
+        throw new Error(
+          await dokazi(s.page, "B nije dobio sopstveni v3 UUID namespace", nalozi.owner2.id),
+        );
+      }
+      await upisiFixture(noviB[0], MARKER_B, ["35-M2200"]);
+      const bSvoj = await vidljivo(MARKER_A);
+      if (bSvoj.stavki !== 1 || bSvoj.tudje) {
+        throw new Error(
+          await dokazi(s.page, `B ne vidi tacno svoju stavku (${bSvoj.stavki})`, nalozi.owner2.id),
+        );
+      }
+
+      /* ---- povratak na A u ISTOM contextu ---- */
+      await odjava();
+      await prijaviSe(nalozi.owner, ownerSecret!);
+      await otvoriKorpu();
+      const aPovratak = await vidljivo(MARKER_B);
+      if (aPovratak.stavki !== 2 || aPovratak.tudje) {
+        throw new Error(
+          await dokazi(s.page, `A po povratku ne vidi samo svoje (${aPovratak.stavki})`, nalozi.owner.id),
+        );
+      }
+
+      /* Samo broj; same vrednosti kljuceva ostaju u Node-u i ne ispisuju se. */
+      const odvojenihNamespacea = kljuceviB.length;
+
+      /*
+       * OGRADA: ovo je izolacija po nalogu unutar JEDNOG pretrazivaca, ne
+       * bezbednosna granica. `localStorage` je citljiv svakome ko ima pristup
+       * profilu na tom racunaru. Trajna, serverska korpa po korisniku/tenantu
+       * je posao buduce faze.
+       */
+      ograde.push(
+        "Korak 16 dokazuje izolaciju po nalogu unutar jednog pretrazivaca. `localStorage` " +
+          "nije bezbednosna granica: zapis ostaje citljiv svakome sa pristupom profilu na tom " +
+          "racunaru. Serverska korpa po korisniku/tenantu je posao buduce faze.",
+      );
+
+      return (
+        `isti context: A=${aPrvi.stavki} stavke, B posle prijave=${bPrazan.stavki} ` +
+        `(tudje vidljivo=${bPrazan.tudje}), B svoje=${bSvoj.stavki}, ` +
+        `A po povratku=${aPovratak.stavki} (tudje vidljivo=${aPovratak.tudje}), ` +
+        `odvojenih namespace-a=${odvojenihNamespacea}`
+      );
+    } finally {
+      await s.zatvori();
+    }
+  });
+
+  await tok("17. korpa: komercijalista bez sposobnosti je ne dobija", async () => {
+    // Radnik dobija svoj drugi faktor kroz isti servis koji koristi i obrazac.
+    const setup = await beginMfaEnrollment({
+      userId: nalozi.worker.id,
+      accountLabel: nalozi.worker.email,
+    });
+    const workerTotp = await svezTotp(setup.base32);
+    const potvrda = await confirmMfaEnrollment({ userId: nalozi.worker.id, token: workerTotp });
+    if (!potvrda.ok) throw new Error("radnicki nalog nije vezao drugi faktor");
+
+    const s = await svezaSesija();
+    try {
+      const kod = await svezTotp(setup.base32);
+      const url = await prijava(s.page, nalozi.worker.email, nalozi.worker.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(s.page, "radnik se nije prijavio", nalozi.worker.id));
+      }
+
+      /*
+       * Radnik je `komercijalista` — nema `customer_orders:create`. Korpa mu se
+       * ne sme otvoriti, a odbijanje ne sme procuriti poslovni sadrzaj.
+       */
+      const res = await s.page.goto(`${BASE}/portal/korpa`, { waitUntil: "domcontentloaded" });
+      const status = res?.status() ?? 0;
+      const sadrzaj = await s.page.evaluate(() => ({
+        cartKontrola: document.querySelectorAll('[data-cart],[aria-label*="korp" i]').length,
+        stavke: /Baslac 35-M10/i.test(document.body.innerText),
+        kljucevi: Object.keys(window.localStorage).filter((k) => k.startsWith("carsystem.cart")),
+      }));
+
+      if (status === 200 && sadrzaj.cartKontrola > 0) {
+        throw new Error(await dokazi(s.page, "radnik bez dozvole dobio korpu", nalozi.worker.id));
+      }
+      if (sadrzaj.stavke) {
+        throw new Error(await dokazi(s.page, "radnik vidi stavke drugog naloga", nalozi.worker.id));
+      }
+      return `radnik odbijen (HTTP ${status}), bez tudjih stavki i bez cart kontrola`;
+    } finally {
+      await s.zatvori();
+    }
+  });
+
+  await tok("18. korpa: javne strane ne montiraju cart sloj", async () => {
+    const s = await svezaSesija();
+    try {
+      for (const ruta of ["/", "/brendovi/baslac", "/proizvodi/grupa/baslac-line-35", "/katalog"]) {
+        const res = await s.page.goto(`${BASE}${ruta}`, { waitUntil: "domcontentloaded" });
+        if ((res?.status() ?? 0) !== 200) throw new Error(`${ruta} → HTTP ${res?.status()}`);
+        const v = await s.page.evaluate(() => ({
+          cartKontrola: document.querySelectorAll('[data-cart],[aria-label*="korp" i],[data-cart-count]').length,
+          dodaj: /dodaj u korpu|quick ?add/i.test(document.body.innerText),
+          storage: Object.keys(window.localStorage).filter((k) => k.startsWith("carsystem.cart")),
+        }));
+        if (v.cartKontrola > 0 || v.dodaj) {
+          throw new Error(await dokazi(s.page, `${ruta} ima cart kontrolu`));
+        }
+        if (v.storage.length > 0) {
+          throw new Error(await dokazi(s.page, `${ruta} pise cart localStorage`));
+        }
+      }
+      return "4 javne rute bez cart sloja i bez localStorage zapisa";
+    } finally {
+      await s.zatvori();
+    }
   });
 } catch (error) {
   zabelezi("runner", false, (error as Error).message);

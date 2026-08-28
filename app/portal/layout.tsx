@@ -11,6 +11,9 @@ import { loadAuthenticatedSession } from "@/lib/authz/session";
 import { loginUrlFor } from "@/lib/authz/redirects.mjs";
 import { redirect } from "next/navigation";
 import { readUserPreference } from "@/lib/authz/user-repository";
+import { CartDrawer } from "@/components/cart/CartDrawer";
+import { CartProvider } from "@/components/cart/CartProvider";
+import { getPortalCommerceAccess } from "@/lib/commerce/portal-commerce";
 import { signOutAction } from "./actions";
 import "./portal.css";
 
@@ -39,9 +42,9 @@ export default async function PortalLayout({
    * zaključao korisnika napolju: preusmerio bi ga na vezivanje, a vezivanje je
    * iza istog layouta. Zato ovde postoji drugi, prazan okvir.
    *
-   * Prazan je namerno — bez navigacije i bez ijedne poslovne komponente. Ono
-   * što se ne montira ne može ni da procuri, a stranice ionako svaka za sebe
-   * odbijaju ovakvu sesiju.
+   * Prazan je namerno — bez navigacije, bez korpe, bez ijedne poslovne
+   * komponente. Ono što se ne montira ne može ni da procuri, a stranice ionako
+   * svaka za sebe odbijaju ovakvu sesiju.
    */
   if (session.enrollmentOnly) {
     return <main className="portal-enrollment-frame">{children}</main>;
@@ -49,6 +52,9 @@ export default async function PortalLayout({
 
   const user = session.fullAccess;
   if (!user) redirect(loginUrlFor());
+
+  // Korpa se montira samo uz uključen portal commerce i ovlašćenu sesiju.
+  const commerce = await getPortalCommerceAccess();
 
   const cookieStore = await cookies();
   const cookieState = cookieStore.get(SIDEBAR_COOKIE)?.value;
@@ -63,7 +69,7 @@ export default async function PortalLayout({
       ? parseSidebarState(cookieState)
       : savedPreference === true;
 
-  return (
+  const shell = (
     <PortalShell
       user={{
         name: user.name,
@@ -73,8 +79,20 @@ export default async function PortalLayout({
       navGroups={navGroupsFor(user)}
       initialCollapsed={collapsed}
       onSignOut={signOutAction}
+      showCart={commerce.allowed}
     >
       {children}
     </PortalShell>
+  );
+
+  // Bez dozvole se cart sloj uopšte ne montira — nema providera, drawera ni
+  // čitanja cart localStorage stanja.
+  if (!commerce.allowed) return shell;
+
+  return (
+    <CartProvider userScope={user.id}>
+      {shell}
+      <CartDrawer />
+    </CartProvider>
   );
 }

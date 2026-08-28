@@ -1,0 +1,15 @@
+.button {
+  position: relative; display: grid; width: 2.75rem; height: 2.75rem; place-items: center;
+  border: 1px solid var(--border, rgb(127 127 127 / 0.24)); border-radius: 999px;
+  background: transparent; color: inherit; cursor: pointer;
+}
+.button:hover { border-color: currentColor; }
+.button svg { display: block; }
+.button:focus-visible { outline: 2px solid var(--accent, #e0242c); outline-offset: 2px; }
+.badge {
+  position: absolute;
+  box-sizing: border-box; top: -0.4rem; right: -0.4rem; min-width: 1.15rem; padding: 0 0.25rem;
+  border-radius: 999px; background: var(--accent, #e0242c); color: #fff;
+  font-family: var(--font-technical), monospace; font-size: 0.62rem; font-weight: 700;
+  line-height: 1.15rem; text-align: center;
+}

@@ -1,0 +1,52 @@
+.overlay { position: fixed; inset: 0; z-index: 90; display: flex; justify-content: flex-end; }
+.scrim { position: absolute; inset: 0; border: 0; background: rgb(10 12 14 / 0.5); cursor: pointer; }
+.drawer {
+  position: relative; display: flex; width: min(26rem, 100%); flex-direction: column;
+  background: var(--bg2, #fff); box-shadow: -1rem 0 3rem rgb(10 12 14 / 0.22);
+}
+.drawerHeader {
+  display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--border, rgb(127 127 127 / 0.2));
+}
+.drawerHeader h2 { margin: 0; font-size: 1.05rem; font-weight: 800; }
+.drawerHeader span {
+  color: var(--text2, #5d686c); font-family: var(--font-technical), monospace; font-size: 0.7rem;
+}
+.drawerHeader button {
+  margin-left: auto; min-width: 2.25rem; min-height: 2.25rem;
+  border: 1px solid var(--border, rgb(127 127 127 / 0.2)); background: transparent; cursor: pointer;
+}
+.list { flex: 1; margin: 0; padding: 0.5rem; overflow-y: auto; list-style: none; }
+.list li {
+  display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: 0.65rem;
+  padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--border-soft, rgb(127 127 127 / 0.12));
+}
+.thumb { display: grid; height: 4.5rem; place-items: center; background: var(--bg, #f4f5f6); }
+.thumb img { width: auto; max-height: 100%; object-fit: contain; }
+.itemInfo { display: grid; min-width: 0; gap: 0.1rem; }
+.itemInfo strong { font-family: var(--font-technical), monospace; font-size: 0.78rem; }
+.itemInfo span { overflow: hidden; font-size: 0.82rem; text-overflow: ellipsis; white-space: nowrap; }
+.itemInfo small { color: var(--text2, #5d686c); font-size: 0.7rem; }
+.itemActions { display: grid; gap: 0.3rem; justify-items: end; }
+.itemActions input {
+  width: 3.75rem; min-height: 2.25rem; padding: 0.25rem 0.4rem;
+  border: 1px solid var(--border, rgb(127 127 127 / 0.24)); background: var(--bg2, #fff);
+  color: inherit; font: inherit; text-align: center;
+}
+.itemActions button {
+  border: 0; background: transparent; color: var(--text2, #5d686c);
+  cursor: pointer; font-size: 0.72rem; text-decoration: underline;
+}
+.empty { flex: 1; margin: 0; padding: 2rem 1.15rem; color: var(--text2, #5d686c); font-size: 0.9rem; }
+.drawerFooter { padding: 1rem 1.15rem; border-top: 1px solid var(--border, rgb(127 127 127 / 0.2)); }
+.note { margin: 0 0 0.75rem; color: var(--text2, #5d686c); font-size: 0.78rem; line-height: 1.5; }
+.footerActions { display: flex; gap: 0.6rem; }
+.primary {
+  flex: 1; display: inline-flex; min-height: 2.85rem; align-items: center; justify-content: center;
+  background: var(--accent, #e0242c); color: #fff; font-size: 0.86rem; font-weight: 800; text-decoration: none;
+}
+.ghost {
+  min-height: 2.85rem; padding: 0 0.9rem; border: 1px solid var(--border, rgb(127 127 127 / 0.24));
+  background: transparent; color: inherit; cursor: pointer; font-size: 0.82rem;
+}
+.overlay :focus-visible, .drawer :focus-visible { outline: 2px solid var(--accent, #e0242c); outline-offset: 2px; }

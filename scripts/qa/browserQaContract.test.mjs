@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import test from "node:test";
+import { jeLoginPathname } from "./logout-predicate.mjs";
 
 /**
  * Ugovor browser QA runnera.
@@ -35,6 +37,15 @@ const preduslovi = (() => {
 
 const broj = (naziv) => naziv.split(".")[0].trim();
 
+/**
+ * Isecak bez komentara.
+ *
+ * Tvrdnje oblika „ovoga NEMA u kodu" moraju gledati kod. Objasnjenje zasto se
+ * nesto NE radi legitimno pominje tu istu konstrukciju, pa bi nad sirovim
+ * izvorom oborilo sopstveni test.
+ */
+const bezKomentara = (tekst) => tekst.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
+
 /** Telo jednog koraka, od njegovog `tok(` do sledeceg. */
 function telo(naziv) {
   const start = izvor.indexOf(`await tok("${naziv}"`);
@@ -43,9 +54,10 @@ function telo(naziv) {
 }
 
 test("svi koraci su prisutni i jedinstveno numerisani", () => {
-  assert.equal(koraci.length, 13, `ocekivano 13 koraka, nadjeno ${koraci.length}`);
+  // 13 koraka Faze 1B + 5 koraka korpe.
+  assert.equal(koraci.length, 18, `ocekivano 18 koraka, nadjeno ${koraci.length}`);
   const brojevi = koraci.map(broj);
-  assert.equal(new Set(brojevi).size, 13, `duplirani brojevi: ${brojevi.join(", ")}`);
+  assert.equal(new Set(brojevi).size, 18, `duplirani brojevi: ${brojevi.join(", ")}`);
 });
 
 test("korak koji proizvodi tajnu nema preduslov nad sopstvenim rezultatom", () => {
@@ -192,7 +204,7 @@ test("svaki scenario prijave koristi svez kontekst pretrazivaca", () => {
   // `clearCookies()` ne dira `sessionStorage` ni kes; pending stanje jednog
   // pokusaja moglo bi da utice na sledeci.
   assert.match(izvor, /async function svezaSesija/);
-  assert.ok(!/context\.clearCookies\(\)/.test(izvor), "vraceno je brisanje kolacica");
+  assert.ok(!/context\.clearCookies\(\)/.test(kod), "vraceno je brisanje kolacica");
 });
 
 test("dijagnostika ne cita Next-ov najavljivac rute kao gresku", () => {
@@ -247,7 +259,7 @@ test("dokazi se ne seku i ne nose stack trace", () => {
     !/\(error as Error\)\.message\.slice\(/.test(izvor),
     "poruka greske se ponovo sece",
   );
-  assert.match(izvor, /!\/\^at\\s\/\.test\(r\)/);
+  assert.match(izvor, /!\/\^at\\s\/\.test\(red\)/);
 });
 
 test("izostanak porasta brojaca se tumaci, ne prijavljuje kao nepoznato", () => {
@@ -560,4 +572,527 @@ test("opciona ruta se ne moze tiho pretvoriti u preskocenu", () => {
   assert.equal(preskakanja.length, 1, "postoji vise od jednog izlaza iz provere");
   const pre = korak2Kod.slice(0, preskakanja[0].index);
   assert.ok(pre.includes("if (status === 404)"), "preskakanje nije vezano za 404");
+});
+
+/* =========================================================================
+ * Korpa portala — koraci 14–17
+ *
+ * Ugovor brani OBLIK runnera, ne njegovo ponasanje: da browser QA stvarno
+ * proverava granicu korpe, a ne da je samo pominje. Ponasanje dokazuje jedino
+ * stvarni prolaz nad PostgreSQL bazom.
+ * ====================================================================== */
+
+const koraciKorpe = koraci.filter((n) => /korpa:/.test(n));
+
+test("korpa se ukljucuje samo u QA potprocesu, ne u roditeljskom okruzenju", () => {
+  const startBlok = izvor.slice(
+    izvor.indexOf("function startServer()"),
+    izvor.indexOf("async function cekajServer"),
+  );
+  assert.match(startBlok, /PORTAL_COMMERCE: "on"/, "flag nije u env potprocesa");
+  // Roditeljski process.env se ne dira.
+  assert.doesNotMatch(kod, /process\.env\.PORTAL_COMMERCE\s*=/);
+});
+
+test("koraci korpe pokrivaju obe strane granice", () => {
+  assert.ok(koraciKorpe.length >= 5, `ocekivano bar 5 koraka korpe, ima ${koraciKorpe.length}`);
+  assert.ok(koraciKorpe.some((n) => /vlasnik sa sposobnoscu/i.test(n)), "nema dozvoljene sesije");
+  assert.ok(koraciKorpe.some((n) => /isti context/i.test(n)), "nema izolacije u deljenom contextu");
+  assert.ok(
+    koraciKorpe.some((n) => /komercijalista bez sposobnosti/i.test(n)),
+    "nema odbijanja naloga bez sposobnosti",
+  );
+  assert.ok(koraciKorpe.some((n) => /javne strane/i.test(n)), "nema javnih strana");
+  assert.ok(koraciKorpe.some((n) => /refresh cuva/i.test(n)), "nema provere trajnosti");
+});
+
+test("korak korpe odbija cenu, checkout i tvrdnju o porudzbini", () => {
+  const k14 = telo(koraciKorpe.find((n) => /^14\./.test(n)));
+  assert.match(k14, /korpa prikazuje cenu/);
+  assert.match(k14, /nudi checkout ili tvrdi porudzbinu/);
+});
+
+test("korak korpe trazi pun UUID namespace, ne skraceni otisak", () => {
+  const k14 = telo(koraciKorpe.find((n) => /^14\./.test(n)));
+  assert.match(k14, /carsystem\\\.cart\\\.v3/, "ne proverava se v3 prefiks");
+  assert.match(k14, /\{12\}/, "ne proverava se pun UUID (poslednja grupa)");
+  assert.match(k14, /cart kljuc nije v3 UUID namespace/);
+});
+
+test("korak odbijanja koristi nalog BEZ commerce sposobnosti", () => {
+  const k17 = telo(koraciKorpe.find((n) => /^17\./.test(n)));
+  // `worker` je komercijalista — nema `customer_orders:create`.
+  assert.match(k17, /nalozi\.worker/);
+  assert.match(k17, /radnik bez dozvole dobio korpu/);
+  assert.match(k17, /radnik vidi stavke drugog naloga/);
+});
+
+test("svaki korak korpe pocinje svezim kontekstom i zatvara ga", () => {
+  /*
+   * „Svez kontekst" znaci: scenario POCINJE od nule. Ne znaci da svaka prijava
+   * unutar scenarija dobija svoj kontekst — korak 16 namerno vozi tri prijave
+   * kroz JEDAN kontekst, i to je njegov predmet.
+   */
+  for (const naziv of koraciKorpe) {
+    const t = telo(naziv);
+    assert.equal(
+      (t.match(/await svezaSesija\(\)/g) ?? []).length,
+      1,
+      `${naziv}: ocekivan tacno jedan svez kontekst po scenariju`,
+    );
+    assert.match(t, /zatvori\(\)/, `${naziv}: kontekst se ne zatvara`);
+  }
+});
+
+/* =========================================================================
+ * Korak 16 — izolacija naloga u ISTOM browser contextu
+ *
+ * Svez kontekst po koraku dokazuje da nema curenja kroz server, ali ne dokazuje
+ * deljeni racunar: tamo drugi korisnik zatice sve sto je prvi ostavio u
+ * `localStorage`. Zato ovaj scenario mora ostati u jednom kontekstu, a testovi
+ * ispod cuvaju bas to — da ga niko kasnije ne „popravi" ciscenjem.
+ * ====================================================================== */
+
+const k16 = telo(koraciKorpe.find((n) => /^16\./.test(n)));
+
+test("korak 16 vozi ceo scenario kroz JEDAN kontekst", () => {
+  assert.equal((k16.match(/await svezaSesija\(\)/g) ?? []).length, 1, "vise od jednog konteksta");
+  assert.equal(
+    (bezKomentara(k16).match(/browser!?\.newContext\(/g) ?? []).length,
+    0,
+    "pravi se nov kontekst",
+  );
+});
+
+test("korak 16 ne cisti stanje izmedju prijava", () => {
+  const k16Kod = bezKomentara(k16);
+  for (const zabranjeno of [
+    /clearCookies\(/,
+    /clearPermissions\(/,
+    /localStorage\.clear\(/,
+    /removeItem\(/,
+    /storageState\(/,
+  ]) {
+    assert.doesNotMatch(k16Kod, zabranjeno, `korak 16 cisti stanje: ${zabranjeno}`);
+  }
+});
+
+test("korak 16 se odjavljuje kroz stvarni tok aplikacije", () => {
+  // Dugme iz `PortalShell` koje gadja `signOutAction` — ne test-side brisanje.
+  assert.match(k16, /form button\[aria-label="Odjava"\]/);
+  // Dokaz je ishod odjave, ne prolazna adresa: vidi tvrdnje o tri signala nize.
+  assert.match(k16, /await dugme\.click\(\)/);
+});
+
+test("korak 16 ide A -> B -> A i broji tri prijave", () => {
+  assert.equal((k16.match(/await prijaviSe\(/g) ?? []).length, 3, "nema tri prijave");
+  assert.equal((k16.match(/await odjava\(\)/g) ?? []).length, 2, "nema dve odjave");
+  // Prvi i treci put isti nalog, drugi put drugi nalog.
+  const redosled = [...k16.matchAll(/await prijaviSe\(nalozi\.(\w+)/g)].map((m) => m[1]);
+  assert.deepEqual(redosled, ["owner", "owner2", "owner"]);
+});
+
+test("korak 16 tvrdi da B ne vidi nista od A i da dobija svoj namespace", () => {
+  assert.match(k16, /B vidi stavke naloga A u istom contextu/);
+  assert.match(k16, /B nije dobio sopstveni v3 UUID namespace/);
+  assert.match(k16, /A po povratku ne vidi samo svoje/);
+  // Namespace se poredi kao razlika skupova, ne po broju.
+  assert.match(k16, /kljuceviB\.filter\(\(k\) => !kljuceviA\.includes\(k\)\)/);
+  assert.match(k16, /UUID_KLJUC\.test\(noviB\[0\]\)/);
+});
+
+test("korak 16 dokazuje da odjava NIJE obrisala zapis", () => {
+  /*
+   * Bez ove provere scenario bi mogao tiho da prestane da meri ono zbog cega
+   * postoji: ako odjava obrise zapis, B zatice cist storage i „izolacija"
+   * postaje posledica ciscenja, a ne politike.
+   */
+  const posle = k16.slice(k16.indexOf("await odjava();"));
+  assert.match(posle, /posleOdjave\.length !== 1/);
+  assert.match(posle, /scenario vise ne meri deljeni racunar/);
+});
+
+test("korak 16 ne ispisuje kljuceve, UUID-eve ni sadrzaj korpe", () => {
+  const ret = k16.slice(k16.lastIndexOf("return ("));
+  for (const zabranjeno of [/kljucevi[AB]/, /noviB/, /MARKER_/, /UUID/i]) {
+    assert.doesNotMatch(ret, zabranjeno, `u izlaz curi ${zabranjeno}`);
+  }
+  // U izlazu smeju samo brojevi i boolean vrednosti.
+  assert.match(ret, /stavki\}/);
+  assert.match(ret, /tudje\}/);
+});
+
+test("nijedan korak korpe ne ispisuje sadrzaj korpe ni identifikatore", () => {
+  /*
+   * Izlaz runnera zavrsava u terminalu i u CI dnevniku. Sme da nosi brojeve i
+   * boolean vrednosti; ne sme nazive stavki, sifre varijanti, kolicine, kljuceve
+   * ni UUID-eve. UUID je pseudonimni identifikator poveziv sa nalogom.
+   */
+  for (const naziv of koraciKorpe) {
+    const t = bezKomentara(telo(naziv));
+    for (const [m] of t.matchAll(/return \(?\s*`[\s\S]*?;/g)) {
+      for (const zabranjeno of [
+        /\bidjevi\b/,
+        /\bkolicine\b/,
+        /\bkljucev/i,
+        /\bnoviB\b/,
+        /\bMARKER_/,
+        /\.email\b/,
+        /\.id\b/,
+        /\bname\b/,
+        /\bsku\b/,
+      ]) {
+        assert.doesNotMatch(m, zabranjeno, `${naziv}: u izlaz curi ${zabranjeno}`);
+      }
+    }
+  }
+});
+
+/* =========================================================================
+ * Serijalizacija `page.evaluate` callbacka
+ *
+ * Prolaz je pao sa `ReferenceError: __name is not defined`. Playwright salje
+ * telo callbacka kao TEKST; tsx pod `--keep-names` obavija svaku IMENOVANU
+ * funkciju esbuild helperom `__name`, a taj helper ostaje u Node modulu.
+ * Anoniman `map` callback se ne obavija — zato je padao samo jedan korak.
+ *
+ * Regex nad celim telom koraka ne bi razlikovao callback od okoline, pa se
+ * argument izvlaci balansiranjem zagrada.
+ * ====================================================================== */
+
+/** Prvi argument svakog `.evaluate(` / `.waitForFunction(` poziva. */
+function evaluateCallbacks(tekst) {
+  const nadjeni = [];
+  const re = /\.(evaluate|waitForFunction)\(/g;
+  let m;
+  while ((m = re.exec(tekst)) !== null) {
+    let i = m.index + m[0].length;
+    let dubina = 1;
+    const pocetak = i;
+    let kraj = -1;
+    for (; i < tekst.length; i += 1) {
+      const c = tekst[i];
+      if (c === "(" || c === "[" || c === "{") dubina += 1;
+      else if (c === ")" || c === "]" || c === "}") {
+        dubina -= 1;
+        if (dubina === 0) {
+          kraj = i;
+          break;
+        }
+      } else if (c === "," && dubina === 1) {
+        kraj = i;
+        break;
+      }
+    }
+    if (kraj > pocetak) nadjeni.push(tekst.slice(pocetak, kraj));
+  }
+  return nadjeni;
+}
+
+test("nijedan browser callback u runneru ne sadrzi imenovanu funkciju", () => {
+  /*
+   * Pravilo vazi za CEO runner, ne samo za korake korpe: isti kvar bi pogodio
+   * bilo koji korak, a otkriva se tek u pretrazivacu, uz prava vrata i pravu
+   * bazu — najskuplje mesto za otkrivanje.
+   */
+  const svi = evaluateCallbacks(kod);
+  assert.ok(svi.length >= 10, `ocekivano bar 10 browser callbacka, nadjeno ${svi.length}`);
+  for (const cb of svi) {
+    const kratko = cb.replace(/\s+/g, " ").trim().slice(0, 70);
+    assert.doesNotMatch(
+      cb,
+      /\b(?:const|let|var)\s+\w+\s*=\s*(?:async\s*)?(?:\([^)]*\)|\w+)\s*=>/,
+      `callback ima imenovanu strelicu — esbuild je obavija sa __name: ${kratko}`,
+    );
+    assert.doesNotMatch(cb, /\bfunction\s+\w+/, `callback ima imenovanu funkciju: ${kratko}`);
+    assert.doesNotMatch(cb, /\bclass\s+\w+/, `callback ima klasu: ${kratko}`);
+  }
+});
+
+test("fixture se serijalizuje u Node-u, ne u pretrazivacu", () => {
+  for (const naziv of koraciKorpe) {
+    const t = bezKomentara(telo(naziv));
+    for (const cb of evaluateCallbacks(t)) {
+      if (!/setItem/.test(cb)) continue;
+      // Callback prima gotov string i radi jednu stvar.
+      assert.match(
+        cb.replace(/\s+/g, " ").trim(),
+        /^\(a: \[string, string\]\) => window\.localStorage\.setItem\(a\[0\], a\[1\]\)$/,
+        `${naziv}: upis u localStorage nije primitivan inline callback`,
+      );
+      assert.doesNotMatch(cb, /JSON\.stringify/, `${naziv}: serijalizacija je u pretrazivacu`);
+      assert.doesNotMatch(cb, /\.map\(|\.filter\(|\.reduce\(/, `${naziv}: callback ima iterator callback`);
+    }
+  }
+});
+
+/* =========================================================================
+ * Odjava — tri odvojeno merena signala
+ *
+ * Ranija verzija je cekala `location.pathname` in-page pollerom i hvatala sve
+ * sa `.catch(() => false)`. Navigacija rusi izvrsni kontekst, poller odbija, a
+ * `catch` je tu gresku prikazivao kao „nije zavrsila na prijavi". Snimak pada
+ * je pokazivao `/prijava` — dokaz je opisivao pogresan dogadjaj.
+ * ====================================================================== */
+
+const odjavaTelo = (() => {
+  const i = k16.indexOf("const odjava = async () =>");
+  const j = k16.indexOf("/* ---- A:", i);
+  return bezKomentara(k16.slice(i, j === -1 ? undefined : j));
+})();
+
+/** Sam uslov pada odjave, spljosten — prelomi redova nisu deo ugovora. */
+const uslovPada = (() => {
+  const i = odjavaTelo.indexOf("if (");
+  const j = odjavaTelo.indexOf("{", odjavaTelo.indexOf("rutaVraca", i));
+  return odjavaTelo.slice(i, j).replace(/\s+/g, "");
+})();
+
+test("odjava ima obaveznu precondition kapiju PRE klika", () => {
+  /*
+   * Zasebna privremena dijagnostika je pala pre logouta: prijava nije bila
+   * gotova, pa je „logout ne radi" zapravo znacilo „korisnik nije ni bio
+   * prijavljen". Kapija tu dvosmislenost cini nemogucom.
+   */
+  const doKlika = odjavaTelo.slice(0, odjavaTelo.indexOf("dugme.click()"));
+  assert.match(doKlika, /await preduslovOdjave\(\)/, "nema kapije pre klika");
+  // Kapija ide PRE reseta kolektora, a oba pre klika.
+  assert.ok(
+    doKlika.indexOf("preduslovOdjave()") < doKlika.indexOf("resetDijagnostiku()"),
+    "kapija se proverava posle reseta",
+  );
+});
+
+test("precondition kapija meri svih pet uslova i pada imenovanom porukom", () => {
+  const kapija = bezKomentara(
+    k16.slice(k16.indexOf("const preduslovOdjave"), k16.indexOf("const odjava = async")),
+  );
+  assert.match(kapija, /sesijaAktivna\(\)/, "ne proverava se session user");
+  assert.match(kapija, /imaSessionCookie\(\)/, "ne proverava se auth cookie");
+  assert.match(kapija, /querySelectorAll\('form button\[aria-label="Odjava"\]'\)/);
+  assert.match(kapija, /isVisible\('form button\[aria-label="Odjava"\]'\)/);
+  assert.match(kapija, /request\.get\(`\$\{BASE\}\/portal\/korpa`\)/);
+  // Tacno jedan vidljiv pogodak, ne „bar jedan".
+  assert.match(kapija, /pogodaka !== 1/);
+  assert.match(kapija, /status !== 200/);
+  assert.match(kapija, /PRECONDITION FAILED — LOGIN/);
+});
+
+test("auth cookie se prijavljuje samo kao boolean", () => {
+  const fn = bezKomentara(
+    k16.slice(k16.indexOf("const imaSessionCookie"), k16.indexOf("const preduslovOdjave")),
+  );
+  assert.match(fn, /Promise<boolean>/, "vraca se nesto osim boolean-a");
+  assert.match(fn, /\.some\(/, "ne svodi se na boolean");
+  assert.doesNotMatch(fn, /c\.value/, "cita se vrednost kolacica");
+  // Ni jedno mesto u koraku ne sme ispisati vrednost kolacica.
+  assert.doesNotMatch(bezKomentara(k16), /cookies\([^)]*\)[\s\S]{0,80}\.value/);
+});
+
+test("klik se snima: POST, status, Next-Action, redirect, Set-Cookie bez vrednosti", () => {
+  assert.match(odjavaTelo, /next-action.*\? "da" : "ne"/, "ne belezi se Next-Action");
+  assert.match(odjavaTelo, /new URL\(r\.url\(\)\)\.pathname/, "belezi se pun URL umesto putanje");
+  assert.match(odjavaTelo, /r\.status\(\)/);
+  assert.match(odjavaTelo, /location\|x-action-redirect/i, "ne cita se redirect odrediste");
+  // Set-Cookie se svodi na ime + da li brise; vrednost se nikada ne ispisuje.
+  assert.match(odjavaTelo, /ime: h\.value\.split\("="\)\[0\]\.trim\(\)/);
+  assert.match(odjavaTelo, /brise:/);
+  assert.doesNotMatch(
+    odjavaTelo.slice(odjavaTelo.indexOf("snimak.push(")),
+    /h\.value(?!\.split|\))/,
+    "u snimak curi vrednost Set-Cookie zaglavlja",
+  );
+});
+
+test("kolektori se kace tek pred klik i skidaju posle merenja", () => {
+  for (const dogadjaj of ["request", "response", "pageerror", "console"]) {
+    assert.match(odjavaTelo, new RegExp(`s\\.page\\.on\\("${dogadjaj}"`), `nema on(${dogadjaj})`);
+    assert.match(odjavaTelo, new RegExp(`s\\.page\\.off\\("${dogadjaj}"`), `nema off(${dogadjaj})`);
+  }
+  const on = odjavaTelo.indexOf('s.page.on("request"');
+  const klik = odjavaTelo.indexOf("dugme.click()");
+  const off = odjavaTelo.indexOf('s.page.off("request"');
+  assert.ok(on < klik && klik < off, "kolektori ne obuhvataju bas klik");
+  // Kacenje ide POSLE reseta kursora, da ne pokupi prijavu A.
+  assert.ok(odjavaTelo.indexOf("resetDijagnostiku()") < on, "kolektori hvataju i prethodni korak");
+});
+
+test("odjava meri i auth cookie posle klika, ne samo sesiju", () => {
+  assert.match(odjavaTelo, /const cookiePosle = await imaSessionCookie\(\)/);
+  // Svi clanovi uslova pada, bez obzira na prelome redova.
+  for (const clan of ["aktivna", "cookiePosle", "!urlNaPrijavi", "!prikaz.loginForma",
+    "prikaz.portalSadrzaj", "!rutaVraca"]) {
+    assert.ok(uslovPada.includes(clan), `uslov pada ne sadrzi ${clan}`);
+  }
+  assert.match(odjavaTelo, /session_cookie_ostao=/);
+});
+
+test("[izvrsni] predikat prijave gleda PUTANJU, a query je dozvoljen", () => {
+  /*
+   * Prolaz je prijavio `url_na_prijavi=false` iako je odjava uspela. Predikat
+   * je bio `adresa.includes("/prijava")` nad punim URL-om i merio je pogresnu
+   * stvar. Ovaj test izvrsava pravu funkciju, ne cita izvor.
+   */
+  assert.equal(jeLoginPathname("http://127.0.0.1:3240/prijava"), true);
+  assert.equal(
+    jeLoginPathname("http://127.0.0.1:3240/prijava?callbackUrl=%2Fportal%2Fkorpa"),
+    true,
+    "callbackUrl sam po sebi nije pad",
+  );
+  assert.equal(jeLoginPathname("http://127.0.0.1:3240/portal"), false);
+  // Relativne putanje daju isti odgovor kao apsolutne.
+  assert.equal(jeLoginPathname("/prijava"), true);
+  assert.equal(jeLoginPathname("/prijava?x=1"), true);
+  assert.equal(jeLoginPathname("/portal/korpa"), false);
+  // Podruta prijave nije prijava.
+  assert.equal(jeLoginPathname("/prijava/reset"), false);
+  // Niz znakova negde u adresi ne sme da prevari predikat.
+  assert.equal(jeLoginPathname("http://127.0.0.1:3240/portal?next=/prijava"), false);
+  assert.equal(jeLoginPathname("http://127.0.0.1:3240/portal/prijava"), false);
+  for (const los of ["", null, undefined, 42]) {
+    assert.equal(jeLoginPathname(los), false, `nevalidan ulaz ${JSON.stringify(los)}`);
+  }
+});
+
+test("predikat prijave prati LOGIN_ROUTE, ne hardkodovan niz", () => {
+  const izvorPredikata = readFileSync(
+    new URL("./logout-predicate.mjs", import.meta.url),
+    "utf8",
+  );
+  assert.match(izvorPredikata, /import \{ LOGIN_ROUTE \}/);
+  assert.match(izvorPredikata, /=== LOGIN_ROUTE/);
+  assert.doesNotMatch(
+    izvorPredikata.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, ""),
+    /"\/prijava"/,
+    "putanja je hardkodovana pored LOGIN_ROUTE",
+  );
+});
+
+test("odjava koristi predikat, ne includes nad punim URL-om", () => {
+  assert.match(odjavaTelo, /jeLoginPathname\(urlPosleKlika\)/);
+  assert.match(odjavaTelo, /jeLoginPathname\(urlPosleProvere\)/);
+  assert.doesNotMatch(odjavaTelo, /\.includes\("\/prijava"\)/, "vracen je substring nad URL-om");
+});
+
+test("stanje odmah posle klika se meri PRE probe zasticene rute", () => {
+  const kl = odjavaTelo.indexOf("const posleKlika = await sacekajPutanju");
+  const prikaz = odjavaTelo.indexOf("const prikaz = await s.page.evaluate");
+  const proba = odjavaTelo.indexOf('s.page.goto(`${BASE}/portal/korpa`');
+  const posle = odjavaTelo.indexOf("const posleProvere = await sacekajPutanju");
+  assert.ok(kl > 0 && prikaz > kl, "prikaz se cita pre adrese");
+  assert.ok(proba > prikaz, "zasticena ruta se otvara pre merenja prikaza");
+  assert.ok(posle > proba, "adresa posle provere se cita pre same provere");
+  // Prva vrednost se NIKADA ne prepisuje drugom.
+  assert.match(odjavaTelo, /const urlPosleKlika = posleKlika\.url/);
+  assert.match(odjavaTelo, /const urlPosleProvere = posleProvere\.url/);
+  assert.equal(
+    (odjavaTelo.match(/urlPosleKlika\s*=/g) ?? []).length,
+    1,
+    "prva adresa se negde prepisuje",
+  );
+});
+
+test("odjava trazi vidljivu login formu i odsustvo portal sadrzaja", () => {
+  assert.match(odjavaTelo, /loginForma:/);
+  assert.match(odjavaTelo, /input\[name="email"\]/);
+  assert.match(odjavaTelo, /input\[name="password"\]/);
+  assert.match(odjavaTelo, /portalSadrzaj:/);
+  assert.match(odjavaTelo, /\.portal-shell, \[data-portal-nav\]/);
+  // Oba ulaze u uslov pada.
+  assert.match(odjavaTelo, /!prikaz\.loginForma/);
+  assert.match(odjavaTelo, /prikaz\.portalSadrzaj/);
+});
+
+test("poruka pada nosi obe adrese odvojeno", () => {
+  const poruka = odjavaTelo.slice(odjavaTelo.indexOf("odjava nije potvrdjena"));
+  for (const znak of [
+    "pathname_odmah_posle_klika=",
+    "pathname_posle_provere_zasticene_rute=",
+    "login_forma_vidljiva=",
+    "portal_sadrzaj_vidljiv=",
+  ]) {
+    assert.ok(poruka.includes(znak), `poruka ne nosi ${znak}`);
+  }
+});
+
+test("cekanje na putanju je Node-side i vraca gde je lanac zastao", () => {
+  const fn = bezKomentara(
+    izvor.slice(izvor.indexOf("async function sacekajPutanju"), izvor.indexOf("async function sacekajRutu")),
+  );
+  assert.match(fn, /new URL\(poslednja, BASE\)\.pathname === putanja/);
+  assert.match(fn, /return \{ url: poslednja, stigao: false \}/, "ne vraca se gde je lanac zastao");
+  assert.doesNotMatch(fn, /waitForFunction/, "in-page poller");
+});
+
+test("odjava meri sesiju, adresu i zasticenu rutu ODVOJENO", () => {
+  assert.match(odjavaTelo, /sesijaAktivna\(\)/, "sesija se ne meri");
+  assert.match(odjavaTelo, /urlNaPrijavi/, "adresa se ne meri");
+  assert.match(odjavaTelo, /rutaVraca/, "zasticena ruta se ne meri");
+  // Sva tri ulaze u istu poruku, da se faza vidi iz izlaza.
+  const poruka = odjavaTelo.slice(odjavaTelo.indexOf("odjava nije potvrdjena"));
+  for (const znak of ["sesija_aktivna=", "url_na_prijavi=", "zasticena_ruta_vraca_na_prijavu="]) {
+    assert.ok(poruka.includes(znak), `poruka ne nosi ${znak}`);
+  }
+});
+
+test("odjava cita sesiju sa auth endpointa, bez diranja kolacica", () => {
+  assert.match(k16, /request\.get\(`\$\{BASE\}\/api\/auth\/session`\)/);
+  assert.match(k16, /Boolean\(j && j\.user\)/);
+});
+
+test("odjava ne koristi in-page poller sa progutanom greskom", () => {
+  assert.doesNotMatch(odjavaTelo, /waitForFunction/, "vracen je in-page poller");
+  assert.doesNotMatch(odjavaTelo, /\.catch\(\(\) => false\)/, "greska se guta");
+  assert.match(odjavaTelo, /sacekajPutanju\(s\.page, "\/prijava"\)/, "adresa se ne meri sa Node strane");
+});
+
+test("odjava resetuje dijagnostiku NEPOSREDNO pre klika", () => {
+  const doKlika = odjavaTelo.slice(0, odjavaTelo.indexOf("dugme.click()"));
+  assert.match(doKlika, /resetDijagnostiku\(\)/, "kursor se ne resetuje pre klika");
+  // Reset mora zaista brisati sva tri traga.
+  const fn = bezKomentara(
+    izvor.slice(izvor.indexOf("function resetDijagnostiku"), izvor.indexOf("/** Redni broj koraka")),
+  );
+  assert.match(fn, /poslednjiLanac = \[\]/);
+  assert.match(fn, /poslednjaFaza = ""/);
+  assert.match(fn, /logKursor = serverLogSeq/);
+});
+
+test("dokazi citaju samo serverske redove tekuceg koraka", () => {
+  const fn = bezKomentara(
+    izvor.slice(izvor.indexOf("async function dokazi"), izvor.indexOf("async function porukaGreske")),
+  );
+  assert.match(fn, /filter\(\(r\) => r\.n > logKursor\)/, "dnevnik se ne sece po kursoru");
+  // Redni broj mora rasti pri svakom upisu — niz se skracuje, indeks nije stabilan.
+  assert.match(izvor, /serverLogSeq \+= 1;/);
+  assert.match(izvor, /serverLog\.push\(\{ n: serverLogSeq, red \}\)/);
+});
+
+test("prijava B pocinje tek posle dokazane ugasene sesije", () => {
+  const kod16 = bezKomentara(k16);
+  const prvaOdjava = kod16.indexOf("await odjava();");
+  const prijavaB = kod16.indexOf("await prijaviSe(nalozi.owner2");
+  assert.ok(prvaOdjava > 0 && prijavaB > prvaOdjava, "B se prijavljuje pre odjave A");
+  // Odjava baca ako ijedan od tri signala nije zadovoljen, pa B ni ne krece.
+  for (const clan of ["aktivna", "cookiePosle", "!urlNaPrijavi", "!rutaVraca"]) {
+    assert.ok(uslovPada.includes(clan), `uslov pada ne sadrzi ${clan}`);
+  }
+  assert.match(odjavaTelo, /throw new Error\(/);
+});
+
+test("odjava ide kroz klik, ne kroz direktan poziv server akcije", () => {
+  assert.doesNotMatch(odjavaTelo, /signOutAction/, "server akcija se zove direktno");
+  assert.doesNotMatch(odjavaTelo, /\/api\/auth\/signout/i, "gadja se signout endpoint");
+  assert.match(odjavaTelo, /dugme\.click\(\)/);
+});
+
+test("korak 15 je oznacen kao ucitavanje, ne kao dodavanje ili spajanje", () => {
+  const naziv15 = koraciKorpe.find((n) => /^15\./.test(n));
+  assert.doesNotMatch(naziv15, /spajanje|dodavanje|merge/i, "naziv tvrdi vise nego sto dokazuje");
+  assert.match(naziv15, /ucitavanje scoped zapisa/);
+  const k15 = telo(naziv15);
+  // Ograda mora biti u izvestaju, ne samo u komentaru.
+  assert.match(k15, /ograde\.push\(/);
+  assert.match(k15, /nema produkcijskog\s*" \+\s*\n?\s*"?\s*ulaza koji puni korpu|nema produkcijskog/);
+  assert.match(k15, /cart-model\.test\.mjs/);
 });

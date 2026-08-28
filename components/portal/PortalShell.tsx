@@ -1,5 +1,6 @@
 "use client";
 
+import { CartButton } from "@/components/cart/CartButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -32,6 +33,8 @@ interface PortalShellProps {
   /** Pročitano iz kolačića na serveru, da navigacija ne bljesne pri učitavanju. */
   initialCollapsed: boolean;
   onSignOut: () => Promise<void>;
+  /** Korpa se prikazuje samo kada portal commerce kapija to dozvoli. */
+  showCart?: boolean;
   children: React.ReactNode;
 }
 
@@ -79,6 +82,7 @@ export function PortalShell({
   initialCollapsed,
   onSignOut,
   children,
+  showCart = false,
 }: PortalShellProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(initialCollapsed);
@@ -298,6 +302,7 @@ export function PortalShell({
               <PortalIcon name="bell" />
             </Link>
 
+            {showCart ? <CartButton /> : null}
             <div className="portal-profile">
               <span className="portal-profile-avatar" aria-hidden="true">
                 {user.initials}

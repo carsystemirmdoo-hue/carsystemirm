@@ -164,7 +164,8 @@
     "test:commercial": "node --test lib/commercial/*.test.mjs",
     "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs",
     "test:pricing": "node --test lib/pricing/*.test.mjs",
-    "test:consent": "node --test lib/customers/*.test.mjs"
+    "test:consent": "node --test lib/customers/*.test.mjs",
+    "fixtures:biznisoft": "node scripts/fixtures/build-biznisoft-fixtures.mjs"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2",
@@ -176,6 +177,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "server-only": "^0.0.1",
+    "unpdf": "^1.8.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {

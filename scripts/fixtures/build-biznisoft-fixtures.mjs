@@ -13,10 +13,18 @@ import { writePdf } from "./pdf-writer.mjs";
 
 const OUT = new URL("../../fixtures/dev/biznisoft/", import.meta.url);
 
-/** X koordinate kolona — izmerene nad realnim uzorcima, vrednosti izmišljene. */
+/**
+ * X koordinate kolona — izmerene nad realnim uzorcima, vrednosti izmišljene.
+ *
+ * Stvarni dokument brojeve DESNO poravnava, pa vrednost počinje levo od
+ * izmerene tačke. Generator piše levo poravnato, pa se koordinate rabata i
+ * PDV-a razmiču da širi tekst („10,00") ne bi ušao u susednu kolonu. Bez toga
+ * fixture pada na proveri koju stvarni dokumenti prolaze — dakle greška bi bila
+ * u fixture-u, ne u parseru.
+ */
 const X = {
   rb: 30, sifra: 50, naziv: 84, barkod: 218, jm: 272,
-  kol: 318, cena: 379, rabat: 413, pdv: 440, iznos: 482, vrednost: 535,
+  kol: 305, cena: 350, rabat: 402, pdv: 445, iznos: 475, vrednost: 515,
 };
 
 const dec = (n, d = 2) =>
@@ -50,10 +58,19 @@ function tableHead(y) {
   ];
 }
 
-/** Jedan red stavke; vrednosti se RAČUNAJU, pa fixture nikad ne laže o zbiru. */
+/**
+ * Jedan red stavke; vrednosti se RAČUNAJU, pa fixture nikad ne laže o zbiru.
+ *
+ * Zaokružuje se PO REDU, pa se zbir dokumenta sabira iz zaokruženih vrednosti —
+ * tako radi i stvarna faktura. Sabiranje nezaokruženih vrednosti bi na
+ * dokumentu sa više stavki proizvelo zbir koji se ne poklapa sa onim što je
+ * odštampano, pa bi fixture lažno padao na proveri.
+ */
+const round2 = (n) => Math.round(n * 100) / 100;
+
 function line(y, i, it) {
-  const neto = it.kol * it.cena * (1 - it.rabat / 100);
-  const pdvIznos = neto * (it.pdv / 100);
+  const neto = round2(it.kol * it.cena * (1 - it.rabat / 100));
+  const pdvIznos = round2(neto * (it.pdv / 100));
   return {
     cells: [
       { x: X.rb, y, text: `${i}.` },

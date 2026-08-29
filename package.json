@@ -12,7 +12,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "node db/migrate.mjs",
     "db:seed": "node db/seed.mjs",
-    "test": "npm run test:authz && npm run test:db-safety && npm run test:qa-env && npm run test:auth-hardening && npm run test:mfa && npm run test:rate-limit && npm run test:auth-flow && npm run test:enrollment && npm run test:authz-matrix && npm run test:export-safety && npm run test:auth && npm run test:audit && npm run test:sidebar && npm run test:import && npm run test:sales && npm run test:product-variant && npm run test:family-presentation && npm run test:variant-experience && npm run test:optical && npm run test:catalog-identity && npm run test:carousel-core && npm run test:sata && npm run test:baslac-catalog && npm run test:baslac-assets && npm run test:baslac-variant && npm run test:baslac-carousel && npm run test:rm-carousel && npm run test:carousel-consumers && npm run test:home-campaign && npm run test:portal-commerce && npm run test:cart && npm run test:content-assets && npm run test:commercial && npm run test:customer-isolation && npm run test:pricing && npm run test:consent",
+    "test": "npm run test:authz && npm run test:db-safety && npm run test:qa-env && npm run test:auth-hardening && npm run test:mfa && npm run test:rate-limit && npm run test:auth-flow && npm run test:enrollment && npm run test:authz-matrix && npm run test:export-safety && npm run test:auth && npm run test:audit && npm run test:sidebar && npm run test:import && npm run test:sales && npm run test:product-variant && npm run test:family-presentation && npm run test:variant-experience && npm run test:optical && npm run test:catalog-identity && npm run test:carousel-core && npm run test:sata && npm run test:baslac-catalog && npm run test:baslac-assets && npm run test:baslac-variant && npm run test:baslac-carousel && npm run test:rm-carousel && npm run test:carousel-consumers && npm run test:home-campaign && npm run test:portal-commerce && npm run test:cart && npm run test:content-assets && npm run test:commercial && npm run test:customer-isolation && npm run test:pricing && npm run test:consent && npm run test:pdf",
     "test:authz": "node --test lib/authz/*.test.mjs",
     "test:sidebar": "node --test components/portal/*.test.mjs",
     "test:audit": "node --test lib/audit/*.test.mjs",
@@ -165,6 +165,7 @@
     "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs",
     "test:pricing": "node --test lib/pricing/*.test.mjs",
     "test:consent": "node --test lib/customers/*.test.mjs",
+    "test:pdf": "node --test lib/pdf/*.test.mjs",
     "fixtures:biznisoft": "node scripts/fixtures/build-biznisoft-fixtures.mjs"
   },
   "dependencies": {

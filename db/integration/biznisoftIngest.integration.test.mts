@@ -201,3 +201,37 @@ test("dokument ne moze sam sebe da zameni", async (t) => {
     /source_documents_no_self_revision_ck/,
   );
 });
+
+test("M-3: dva ISTOVREMENA uvoza istog fajla — jedan pobedjuje, drugi je uredan duplikat", async (t) => {
+  if (guard(t)) return;
+  const { ingestBiznisoftPdf } = await import("@/lib/pdf/ingest");
+  await clean();
+
+  const bytes = await bytesOf("jedna-stavka.pdf");
+
+  /*
+   * Provera duplikata na pocetku vidi stanje PRE svog upisa, pa oba paralelna
+   * poziva prodju kroz nju. Jedinstveni indeks potom propusta tacno jedan.
+   *
+   * Pre popravke je gubitnik dobijao sirovu Postgres gresku i rusio ceo grupni
+   * uvoz; sada dobija isti uredan odgovor kao da je stigao sekundu kasnije.
+   */
+  const ishodi = await Promise.all([
+    ingestBiznisoftPdf({ bytes, fileName: "a.pdf", issuerCode: ISSUER }, actor),
+    ingestBiznisoftPdf({ bytes, fileName: "b.pdf", issuerCode: ISSUER }, actor),
+  ]);
+
+  const rezultati = ishodi.map((o) => o.result).sort();
+  assert.deepEqual(rezultati, ["awaiting_customer_mapping", "duplicate_file"]);
+
+  // Oba pokazuju na ISTI dokument, i taj dokument je jedini.
+  assert.equal(ishodi[0].sourceDocumentId, ishodi[1].sourceDocumentId);
+  const [{ count }] = await db.sql<{ count: number }[]>`
+    SELECT count(*)::int AS count FROM source_documents`;
+  assert.equal(count, 1, "istovremeni uvoz je napravio dva dokumenta");
+
+  // Stavke se ne udvostrucuju.
+  const [{ lines }] = await db.sql<{ lines: number }[]>`
+    SELECT count(*)::int AS lines FROM source_document_lines`;
+  assert.equal(lines, 1);
+});

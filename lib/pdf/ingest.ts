@@ -53,6 +53,26 @@ export function redactDocumentRef(doc: {
 }
 
 /**
+ * Da li je greška sudar sa zadatim jedinstvenim indeksom.
+ *
+ * Ide kroz `cause` lanac zato što ORM omotava izvornu grešku drajvera, pa
+ * `code` i naziv ograničenja nisu na vrhu.
+ *
+ * Namerno se traži KONKRETAN indeks, a ne bilo koji `23505`: „neko drugi je
+ * upravo uveo isti fajl" i „prekršeno neko drugo jedinstveno ograničenje" su
+ * različite stvari, i drugu ne smemo prijaviti kao uredan duplikat.
+ */
+function isUniqueViolation(error: unknown, constraint: string): boolean {
+  let current: unknown = error;
+  for (let depth = 0; current && depth < 5; depth += 1) {
+    const candidate = current as { code?: unknown; constraint_name?: unknown; cause?: unknown };
+    if (candidate.code === "23505" && candidate.constraint_name === constraint) return true;
+    current = candidate.cause;
+  }
+  return false;
+}
+
+/**
  * Uvozi jedan PDF.
  *
  * Ceo posao je JEDNA transakcija: izvorni dokument, njegove stavke, faktura i
@@ -98,7 +118,8 @@ export async function ingestBiznisoftPdf(
 
   const correlationId = randomUUID();
 
-  return db.transaction(async (tx) => {
+  try {
+    return await db.transaction(async (tx) => {
     /*
      * Drugi fajl sa istim poslovnim ključem.
      *
@@ -270,12 +291,44 @@ export async function ingestBiznisoftPdf(
 
     const invoiceId = await postSourceDocument(tx, created.id, customerId, actor);
 
-    return {
-      result: "ingested" as const,
-      sourceDocumentId: created.id,
-      invoiceId,
-    };
-  });
+      return {
+        result: "ingested" as const,
+        sourceDocumentId: created.id,
+        invoiceId,
+      };
+    });
+  } catch (error) {
+    /*
+     * Isti fajl je stigao dvaput ISTOVREMENO.
+     *
+     * Provera duplikata na početku vidi stanje pre svog upisa, pa dva
+     * paralelna uvoza istog sadržaja oba prođu kroz nju. Jedinstveni indeks
+     * potom propušta tačno jedan — to je ispravan ishod po podacima, ali je
+     * gubitnik do sada dobijao sirovu grešku baze i rušio ceo grupni uvoz.
+     *
+     * Ovde se ta greška prevodi u isti uredan odgovor koji bi dobio i da je
+     * stigao sekundu kasnije.
+     */
+    if (isUniqueViolation(error, "source_documents_file_hash_key")) {
+      const twin = await db
+        .select({ id: sourceDocuments.id })
+        .from(sourceDocuments)
+        .where(eq(sourceDocuments.fileHash, parsed.fileHash))
+        .limit(1);
+      if (twin[0]) {
+        await recordAudit({
+          actor,
+          action: AUDIT_ACTIONS.pdfDuplicateSkipped,
+          entityType: "Izvorni dokument",
+          entityId: twin[0].id,
+          entityLabel: redactDocumentRef(parsed),
+          reason: "Isti fajl je uvezen istovremeno drugim prolazom; ništa nije promenjeno.",
+        });
+        return { result: "duplicate_file", sourceDocumentId: twin[0].id };
+      }
+    }
+    throw error;
+  }
 }
 
 /** Tip transakcije koji Drizzle daje `db.transaction`. */

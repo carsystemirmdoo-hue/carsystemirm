@@ -51,7 +51,7 @@ async function clean() {
   await db.sql`DELETE FROM invoices`;
   await db.sql`DELETE FROM customer_external_identifiers`;
   await db.sql`DELETE FROM article_catalog_mappings`;
-  await db.sql`DELETE FROM articles WHERE code LIKE '9000%'`;
+  await db.sql`DELETE FROM articles WHERE code LIKE '900%' OR code LIKE '800%'`;
   await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%'`;
 }
 

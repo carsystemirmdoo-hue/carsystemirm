@@ -134,6 +134,7 @@ const OUTCOME_LABELS: Record<string, string> = {
   ingested: "proknjiženo",
   awaiting_customer_mapping: "čeka mapiranje kupca",
   business_key_conflict: "sudar sa postojećim dokumentom",
+  already_imported_other_source: "već knjiženo iz drugog izvora — traži pregled",
   quarantined: "karantin — traži pregled",
   duplicate_file: "isti fajl, preskočeno",
   prevelik_fajl: "odbijeno, prevelik fajl",

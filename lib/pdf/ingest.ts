@@ -34,6 +34,19 @@ export type IngestOutcome =
   | { result: "quarantined"; sourceDocumentId: string; status: string }
   /** Prošao, ali kupac nije mapiran — faktura još ne postoji. */
   | { result: "awaiting_customer_mapping"; sourceDocumentId: string; partnerCode: string }
+  /**
+   * Faktura sa istim poslovnim identitetom već postoji iz drugog izvora.
+   *
+   * Tipično raniji CSV uvoz iz knjigovodstva. NIJE `duplicate_file`: to bi
+   * tvrdilo da je sadržaj isti, a sadržaj CSV zapisa se sa PDF-om ne može
+   * dokazano uporediti — CSV ne čuva stavke onako kako ih čuva izvorni
+   * dokument. Zato ide na ručni pregled.
+   */
+  | {
+      result: "already_imported_other_source";
+      sourceDocumentId: string | null;
+      invoiceId: string;
+    }
   /** Prošao i proknjižen. */
   | { result: "ingested"; sourceDocumentId: string; invoiceId: string };
 
@@ -289,7 +302,45 @@ export async function ingestBiznisoftPdf(
       };
     }
 
-    const invoiceId = await postSourceDocument(tx, created.id, customerId, actor);
+      /*
+       * Faktura sa istim poslovnim identitetom već postoji iz drugog izvora.
+       *
+       * Najčešće raniji CSV uvoz iz knjigovodstva. Bez ove provere bi upis
+       * udario u `invoices_identity_key` i celu transakciju poništio, pa bi
+       * operater dobio poruku da dokument nije pročitan — a pročitan je
+       * savršeno, samo je već knjižen drugim putem.
+       *
+       * Dokument se ČUVA, u stanju sudara i na ručnom pregledu: postojeća
+       * faktura se ne dira, druga se ne pravi, i nijedan red prometa se ne
+       * menja. Ne zove se `duplicate_file` jer se sadržaj CSV zapisa i PDF-a
+       * ne može dokazano uporediti.
+       */
+      const postojeca = await existingInvoiceFor(tx, {
+        issuerCode: input.issuerCode,
+        number: docNumber!,
+        year: Number((parsed.header.documentDate.value ?? "0000").slice(0, 4)),
+      });
+      if (postojeca) {
+        await tx
+          .update(sourceDocuments)
+          .set({
+            revisionStatus: "conflict",
+            conflictReason:
+              "Faktura sa istim poslovnim identitetom već postoji iz drugog izvora. " +
+              "Sadržaj se ne može automatski uporediti — potreban je ručni pregled.",
+            manualReview: "pending",
+            updatedAt: sql`now()`,
+          })
+          .where(eq(sourceDocuments.id, created.id));
+
+        return {
+          result: "already_imported_other_source" as const,
+          sourceDocumentId: created.id,
+          invoiceId: postojeca,
+        };
+      }
+
+      const invoiceId = await postSourceDocument(tx, created.id, customerId, actor);
 
       return {
         result: "ingested" as const,
@@ -327,12 +378,70 @@ export async function ingestBiznisoftPdf(
         return { result: "duplicate_file", sourceDocumentId: twin[0].id };
       }
     }
+
+    /*
+     * Trka sa paralelnim uvozom iz drugog izvora.
+     *
+     * Provera iznad gleda stanje pre svog upisa, pa CSV uvoz koji se dogodi u
+     * međuvremenu i dalje može da pogodi `invoices_identity_key`. Transakcija
+     * je tada poništena i izvorni dokument ne postoji — ali ishod mora ostati
+     * razumljiv, a ne "PDF nije pročitan".
+     */
+    if (isUniqueViolation(error, "invoices_identity_key") && docNumber) {
+      const postojeca = await db
+        .select({ id: invoices.id })
+        .from(invoices)
+        .where(
+          and(
+            eq(invoices.companyId, input.issuerCode),
+            eq(invoices.documentKind, "faktura"),
+            eq(invoices.number, docNumber),
+            eq(invoices.year, Number((parsed.header.documentDate.value ?? "0000").slice(0, 4))),
+          ),
+        )
+        .limit(1);
+      if (postojeca[0]) {
+        return {
+          result: "already_imported_other_source",
+          sourceDocumentId: null,
+          invoiceId: postojeca[0].id,
+        };
+      }
+    }
+
     throw error;
   }
 }
 
 /** Tip transakcije koji Drizzle daje `db.transaction`. */
 type Tx = Parameters<Parameters<ReturnType<typeof getDb>["transaction"]>[0]>[0];
+
+/**
+ * Postojeća faktura sa istim poslovnim identitetom.
+ *
+ * Identitet je `(pravno lice, vrsta, broj, godina)` — isti ključ koji nosi
+ * `invoices_identity_key`. Provera se radi UNAPRED, da bi ishod bio odluka a
+ * ne uhvaćen izuzetak: uhvaćen izuzetak bi značio poništenu transakciju i
+ * dokument koji nigde nije zabeležen.
+ */
+async function existingInvoiceFor(
+  tx: Tx,
+  key: { issuerCode: string; number: string; year: number },
+): Promise<string | null> {
+  const rows = await tx
+    .select({ id: invoices.id })
+    .from(invoices)
+    .where(
+      and(
+        eq(invoices.companyId, key.issuerCode),
+        eq(invoices.documentKind, "faktura"),
+        eq(invoices.number, key.number),
+        eq(invoices.year, key.year),
+      ),
+    )
+    .limit(1);
+  return rows[0]?.id ?? null;
+}
 
 /** Kupac po tačnoj šifri partnera. Bez fuzzy poklapanja, bez naziva. */
 async function resolveMappedCustomer(
@@ -395,6 +504,23 @@ async function postSourceDocument(
   }
   if (!doc.businessDocumentNumber || !doc.documentDate) {
     throw new IngestError("Dokument bez broja ili datuma se ne knjiži.", "incomplete");
+  }
+
+  /*
+   * Odbrana u dubini: dva izvorna dokumenta ne smeju napraviti dve fakture za
+   * isti poslovni dokument. Ograničenje `invoices_identity_key` to sprečava i
+   * u bazi; ovde postoji da poruka bude razumljiva.
+   */
+  const zauzeta = await existingInvoiceFor(tx, {
+    issuerCode: doc.issuerCode,
+    number: doc.businessDocumentNumber,
+    year: Number(doc.documentDate.slice(0, 4)),
+  });
+  if (zauzeta) {
+    throw new IngestError(
+      "Faktura sa istim poslovnim identitetom već postoji.",
+      "invoice_exists",
+    );
   }
 
   const lines = await tx

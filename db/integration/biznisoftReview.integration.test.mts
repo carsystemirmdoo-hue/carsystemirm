@@ -51,8 +51,11 @@ async function clean() {
   await db.sql`DELETE FROM invoices`;
   await db.sql`DELETE FROM customer_external_identifiers`;
   await db.sql`DELETE FROM article_catalog_mappings`;
-  await db.sql`DELETE FROM articles WHERE code LIKE '9000%'`;
-  await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%'`;
+  await db.sql`DELETE FROM articles WHERE code LIKE '900%' OR code LIKE '800%'`;
+  await db.sql`DELETE FROM import_rows`;
+  await db.sql`DELETE FROM import_runs`;
+  await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%' OR pib LIKE '90000%'`;
+  await db.sql`DELETE FROM user_permissions`;
 }
 
 test("karantinski dokument je u spisku, ali bez ijednog reda prometa", async (t) => {
@@ -382,4 +385,260 @@ test("H-2: pun scenario A -> B -> izbor B -> knjizenje tacno jednom", async (t) 
   assert.equal(posle, 7, "ponovljena akcija je duplirala promet");
   const [{ f2 }] = await db.sql<{ f2: number }[]>`SELECT count(*)::int AS f2 FROM invoices`;
   assert.equal(f2, 1);
+});
+
+/* -------------------------------------------------------------------------
+ * H-2, trajna regresija: verzije A i B moraju biti STVARNO različite.
+ *
+ * Test iznad pravi B dopisivanjem komentara na iste bajtove, pa dokazuje samo
+ * da se broj redova ne menja. Da `retargetInvoice` prepiše pogrešnu verziju
+ * ili ne prepiše ništa, taj test bi i dalje bio zelen — a razlika bi se videla
+ * tek na fakturi kupca.
+ *
+ * Ovde se A i B razlikuju u svemu: šiframa, broju stavki, količinama, cenama,
+ * rabatima, stopama, iznosima stavki i zbiru zaglavlja. Očekivane vrednosti su
+ * ISPISANE, ne izračunate istom formulom kojom ih generator pravi — inače bi
+ * test ponavljao grešku generatora umesto da je otkrije.
+ * ---------------------------------------------------------------------- */
+
+/** Isti poslovni ključ za obe verzije — to ih i čini sudarom. */
+const REV_BROJ = "99-RN900000901";
+const REV_DATUM = "07.01.2026";
+
+/** Verzija A: dve stavke, bez rabata, jedna stopa. */
+const VERZIJA_A = [
+  { sifra: "900101", naziv: "STARA STAVKA JEDAN", jm: "KOM", kol: 1, cena: 100, rabat: 0, pdv: 20 },
+  { sifra: "900102", naziv: "STARA STAVKA DVA", jm: "LIT", kol: 2, cena: 200, rabat: 0, pdv: 20 },
+];
+
+/** Verzija B: tri stavke, druge šifre, decimalne količine, rabati, dve stope. */
+const VERZIJA_B = [
+  { sifra: "800011", naziv: "NOVA STAVKA JEDAN", jm: "KOM", kol: 3.5, cena: 55, rabat: 10, pdv: 20 },
+  { sifra: "800022", naziv: "NOVA STAVKA DVA", jm: "KOM", kol: 7, cena: 12, rabat: 0, pdv: 10 },
+  { sifra: "800033", naziv: "NOVA STAVKA TRI", jm: "LIT", kol: 1.25, cena: 480, rabat: 5, pdv: 20 },
+];
+
+/** Ono što posle izbora B mora stajati u fakturi i u ledgeru. */
+const OCEKIVANO_B = [
+  { article_code: "800011", quantity: "3.500", unit_price: "55.0000", discount_percent: "10.000", line_amount: "173.25" },
+  { article_code: "800022", quantity: "7.000", unit_price: "12.0000", discount_percent: "0.000", line_amount: "84.00" },
+  { article_code: "800033", quantity: "1.250", unit_price: "480.0000", discount_percent: "5.000", line_amount: "570.00" },
+];
+const ZBIR_B = { net_amount: "827.25", tax_amount: "157.05", total_amount: "984.30" };
+
+test("H-2 regresija: izbor verzije B menja STAVKE I IZNOSE na B, ne samo broj redova", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { document } = await import("../../scripts/fixtures/biznisoft-document.mjs");
+  const { ingestBiznisoftPdf, resolveDocumentRevision } = await import("@/lib/pdf/ingest");
+  const { can } = await import("@/lib/authz/permissions.mjs");
+
+  await mappedCustomer();
+  const napravi = (items: typeof VERZIJA_A) =>
+    document({ broj: REV_BROJ, partner: "09002", datum: REV_DATUM, items }) as Uint8Array;
+
+  // 1. A se uvozi i knjiži.
+  const a = await ingestBiznisoftPdf(
+    { bytes: napravi(VERZIJA_A), fileName: "a.pdf", issuerCode: ISSUER }, actor);
+  assert.equal(a.result, "ingested");
+  const prometA = await db.sql<{ article_code: string }[]>`
+    SELECT article_code FROM effective_sales_ledger ORDER BY article_code`;
+  assert.deepEqual([...prometA.map((r) => r.article_code)], ["900101", "900102"]);
+
+  // 2. B sa istim poslovnim ključem pravi sudar.
+  const b = await ingestBiznisoftPdf(
+    { bytes: napravi(VERZIJA_B), fileName: "b.pdf", issuerCode: ISSUER }, actor);
+  assert.equal(b.result, "business_key_conflict");
+
+  // 3. Dok sudar traje, ledger nema nijedan red.
+  const [{ uSudaru }] = await db.sql<{ uSudaru: number }[]>`
+    SELECT count(*)::int AS "uSudaru" FROM effective_sales_ledger`;
+  assert.equal(uSudaru, 0);
+
+  /*
+   * 4. Bira kancelarija SA sposobnošću `documents:resolve`.
+   *
+   * Sposobnost se ovde i proverava, jer je odluka o verziji upravo ono što je
+   * odvojeno od pukog pregleda uvoza.
+   */
+  await db.sql`
+    INSERT INTO user_permissions (user_id, permission_key, granted_by, reason)
+    VALUES (${actor.id}, 'mapiranja', ${actor.id}, 'QA: paket za odlucivanje')`;
+  const odlucuje = { role: actor.role, permissions: ["mapiranja"] };
+  assert.equal(can(odlucuje, "documents:resolve"), true, "odluku donosi nalog bez sposobnosti");
+  assert.equal(
+    can({ role: actor.role, permissions: [] }, "documents:resolve"),
+    false,
+    "sposobnost je dostupna i bez paketa",
+  );
+
+  const out = await resolveDocumentRevision(
+    { supersededId: a.sourceDocumentId, supersedingId: b.sourceDocumentId, reason: "QA: B vazi" },
+    actor,
+  );
+  assert.equal(out.posted, true);
+
+  // 5. A ostaje `superseded`, sa sačuvanim izvornim stavkama.
+  const [staraVerzija] = await db.sql<{
+    revision_status: string; superseded_by_id: string | null; invoice_id: string | null;
+  }[]>`SELECT revision_status, superseded_by_id, invoice_id
+         FROM source_documents WHERE id = ${a.sourceDocumentId}`;
+  assert.equal(staraVerzija.revision_status, "superseded");
+  assert.equal(staraVerzija.superseded_by_id, b.sourceDocumentId);
+  assert.equal(staraVerzija.invoice_id, null);
+  const sacuvaneA = await db.sql<{ article_code: string }[]>`
+    SELECT article_code FROM source_document_lines
+     WHERE source_document_id = ${a.sourceDocumentId} ORDER BY line_number`;
+  assert.deepEqual(
+    [...sacuvaneA.map((r) => r.article_code)],
+    ["900101", "900102"],
+    "izvorne stavke verzije A su izgubljene",
+  );
+
+  // 6. Tačno jedna faktura.
+  const fakture = await db.sql<{ id: string }[]>`SELECT id FROM invoices`;
+  assert.equal(fakture.length, 1, "nastala je druga faktura za isti poslovni dokument");
+
+  /*
+   * 7. `invoice_lines` i ledger nose ISKLJUČIVO vrednosti iz B.
+   *
+   * Redovi se prepisuju u obične objekte: drajver vraća svoj podtip niza, a
+   * `deepEqual` poredi i prototip, pa bi poređenje palo i na identičnim
+   * vrednostima.
+   */
+  const obicni = <T>(rows: readonly T[]) => rows.map((row) => ({ ...row }));
+
+  const stavke = await db.sql<typeof OCEKIVANO_B>`
+    SELECT article_code, quantity, unit_price, discount_percent, line_amount
+      FROM invoice_lines ORDER BY article_code`;
+  assert.deepEqual(obicni(stavke), OCEKIVANO_B, "invoice_lines ne nose vrednosti iz B");
+
+  const promet = await db.sql<typeof OCEKIVANO_B>`
+    SELECT article_code, quantity, unit_price, discount_percent, line_amount
+      FROM effective_sales_ledger ORDER BY article_code`;
+  assert.deepEqual(obicni(promet), OCEKIVANO_B, "ledger ne nosi vrednosti iz B");
+
+  // 8. Nijedna šifra ni vrednost iz A nije ostala u efektivnom prometu.
+  for (const izA of VERZIJA_A) {
+    assert.ok(
+      !promet.some((r) => r.article_code === izA.sifra),
+      `sifra ${izA.sifra} iz verzije A je ostala u prometu`,
+    );
+  }
+  assert.ok(
+    !promet.some((r) => r.line_amount === "100.00" || r.line_amount === "400.00"),
+    "iznos iz verzije A je ostao u prometu",
+  );
+
+  // 9. Zaglavlje fakture odgovara zbiru verzije B.
+  const [zaglavlje] = await db.sql<(typeof ZBIR_B)[]>`
+    SELECT net_amount, tax_amount, total_amount FROM invoices`;
+  assert.deepEqual({ ...zaglavlje }, ZBIR_B, "zaglavlje fakture nosi zbir verzije A");
+
+  // 10. Ponovljeno razrešenje je no-op.
+  const ponovo = await resolveDocumentRevision(
+    { supersededId: a.sourceDocumentId, supersedingId: b.sourceDocumentId, reason: "QA ponovo" },
+    actor,
+  );
+  assert.equal(ponovo.posted, false);
+  assert.equal(ponovo.invoiceId, fakture[0].id);
+  const posle = await db.sql<typeof OCEKIVANO_B>`
+    SELECT article_code, quantity, unit_price, discount_percent, line_amount
+      FROM effective_sales_ledger ORDER BY article_code`;
+  assert.deepEqual(obicni(posle), OCEKIVANO_B, "ponovljeno razresenje je promenilo promet");
+  const [{ f }] = await db.sql<{ f: number }[]>`SELECT count(*)::int AS f FROM invoices`;
+  assert.equal(f, 1);
+});
+
+test("faktura vec uvezena CSV putem: kontrolisan ishod, bez druge fakture i bez duplog prometa", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { document } = await import("../../scripts/fixtures/biznisoft-document.mjs");
+  const { ingestBiznisoftPdf } = await import("@/lib/pdf/ingest");
+  const { importInvoiceFile, parseDelimited } = await import("@/lib/import/invoiceImport");
+
+  const BROJ = "99-RN900000902";
+  /*
+   * PIB je devetocifren jer ga CSV put proverava po obliku — isti kupac mora
+   * biti dohvatljiv i iz knjigovodstvenog izvoza i iz PDF-a.
+   */
+  const PIB = "900000902";
+  const [kupac] = await db.sql<{ id: string }[]>`
+    INSERT INTO customers (pib, name) VALUES (${PIB}, 'QA Kupac') RETURNING id`;
+  await db.sql`
+    INSERT INTO customer_external_identifiers
+      (source_system, issuer_code, external_partner_code, customer_id, status)
+    VALUES ('biznisoft', ${ISSUER}, '09002', ${kupac.id}, 'mapped')`;
+
+  /*
+   * 1. Faktura nastaje POSTOJECIM CSV putem — isti put kojim je knjigovodstvo
+   *    do sada punilo sistem.
+   */
+  const csv = [
+    "pravno_lice;pib;kupac;broj_dokumenta;datum;vrsta_dokumenta;sifra_artikla;kolicina;cena;iznos_stavke",
+    `${ISSUER};${PIB};QA Kupac;${BROJ};08.01.2026;faktura;700001;1;100,00;100,00`,
+  ].join("\n");
+  const uvoz = await importInvoiceFile(
+    { fileName: "legacy.csv", sourcePath: "QA", content: csv, rows: parseDelimited(csv), dataDate: null },
+    actor,
+  );
+  assert.notEqual(uvoz.status, "greska", "CSV uvoz nije prosao");
+
+  const [{ preFaktura }] = await db.sql<{ preFaktura: number }[]>`
+    SELECT count(*)::int AS "preFaktura" FROM invoices`;
+  assert.equal(preFaktura, 1);
+  const [{ prePromet }] = await db.sql<{ prePromet: number }[]>`
+    SELECT count(*)::int AS "prePromet" FROM effective_sales_ledger`;
+  assert.equal(prePromet, 1, "CSV faktura nije u prometu");
+
+  // 2. Isti poslovni dokument stize i kao PDF.
+  const pdf = document({
+    broj: BROJ, partner: "09002", datum: "08.01.2026",
+    items: [{ sifra: "800044", naziv: "PDF STAVKA", jm: "KOM", kol: 2, cena: 300, rabat: 0, pdv: 20 }],
+  }) as Uint8Array;
+  const out = await ingestBiznisoftPdf({ bytes: pdf, fileName: "b.pdf", issuerCode: ISSUER }, actor);
+
+  /*
+   * 3. Ishod je kontrolisan i tacan. Pre popravke je `invoices_identity_key`
+   *    rusio celu transakciju, pa je operater dobijao "dokument se ne moze
+   *    procitati" — a dokument je procitan savrseno, samo je vec knjizen.
+   */
+  assert.equal(out.result, "already_imported_other_source");
+  assert.ok("invoiceId" in out && out.invoiceId, "ishod ne pokazuje na postojecu fakturu");
+
+  // 4. I dalje TACNO jedna faktura, sa jednom stavkom iz CSV-a.
+  const [{ posleFaktura }] = await db.sql<{ posleFaktura: number }[]>`
+    SELECT count(*)::int AS "posleFaktura" FROM invoices`;
+  assert.equal(posleFaktura, 1, "nastala je druga faktura");
+  const stavke = await db.sql<{ article_code: string }[]>`SELECT article_code FROM invoice_lines`;
+  assert.deepEqual([...stavke.map((r) => r.article_code)], ["700001"], "PDF je prepisao CSV stavke");
+
+  // 5. Promet nije dupliran i nije promenjen.
+  const [{ poslePromet }] = await db.sql<{ poslePromet: number }[]>`
+    SELECT count(*)::int AS "poslePromet" FROM effective_sales_ledger`;
+  assert.equal(poslePromet, 1, "promet je dupliran");
+
+  /*
+   * 6. Dokument JE sacuvan — u stanju sudara i na rucnom pregledu, kao i svaki
+   *    drugi sporan dokument. To nije delimican upis nego namerno vidljiv trag:
+   *    sadrzaj CSV zapisa i PDF-a se ne moze automatski uporediti.
+   */
+  const [sd] = await db.sql<{
+    revision_status: string; manual_review: string; invoice_id: string | null; conflict_reason: string | null;
+  }[]>`SELECT revision_status, manual_review, invoice_id, conflict_reason FROM source_documents`;
+  assert.equal(sd.revision_status, "conflict");
+  assert.equal(sd.manual_review, "pending");
+  assert.equal(sd.invoice_id, null, "sporan dokument je vezan za tudju fakturu");
+
+  // 7. Poruka operateru nije "PDF nije procitan", i ne odaje SQL ni ime ogranicenja.
+  assert.ok(sd.conflict_reason, "nema obrazlozenja");
+  assert.match(sd.conflict_reason!, /već postoji iz drugog izvora/);
+  for (const zabranjeno of ["invoices_identity_key", "duplicate key", "23505", "SQL", "at ", "/Users/"]) {
+    assert.ok(!sd.conflict_reason!.includes(zabranjeno), `poruka nosi tehnicki trag: ${zabranjeno}`);
+  }
+  const [{ nijeProcitan }] = await db.sql<{ nijeProcitan: number }[]>`
+    SELECT count(*)::int AS "nijeProcitan" FROM source_documents WHERE validation_status <> 'valid'`;
+  assert.equal(nijeProcitan, 0, "dokument je prijavljen kao neprocitan");
+
+  await db.sql`DELETE FROM articles WHERE code LIKE '700%'`;
 });

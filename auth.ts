@@ -38,6 +38,15 @@ import {
   readMfaStatus,
   verifyTotpForUser,
 } from "./lib/auth/mfa-service";
+import {
+  canCustomerSignIn,
+  SUBJECT_CUSTOMER,
+  SUBJECT_INTERNAL,
+} from "./lib/authz/customer-scope.mjs";
+import {
+  findCustomerAccountByEmail,
+  markCustomerSignedIn,
+} from "./lib/customers/account-service";
 
 const credentialsSchema = z.object({
   email: z.string().email().max(254),
@@ -45,6 +54,12 @@ const credentialsSchema = z.object({
   // Jedno polje za oba oblika drugog faktora. Iz odgovora se nikad ne sme
   // zaključiti koji je od njih korisnik uneo.
   secondFactor: z.string().max(64).optional(),
+});
+
+/** Kupčeva prijava nema drugi faktor u ovoj fazi — vidi provajder ispod. */
+const customerCredentialsSchema = z.object({
+  email: z.string().email().max(254),
+  password: z.string().min(1).max(200),
 });
 
 /**
@@ -320,12 +335,95 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: user.name,
           email: user.email,
           sessionVersion: user.sessionVersion,
+          subject: SUBJECT_INTERNAL,
           // Nivo potvrde dolazi iz odluke, ne iz lokalne promenljive: token ne
           // sme tvrditi više nego što je politika priznala.
           assurance: accessDecision.assurance,
           mfaVerifiedAt: accessDecision.access === ACCESS_FULL && factor !== "none"
             ? Date.now()
             : null,
+        };
+      },
+    }),
+
+    /*
+     * Kupčeva prijava — ODVOJEN provajder, odvojena tabela, odvojen `subject`.
+     *
+     * Interni provajder iznad se ne dira. Da je kupac dodat u njega, jedan
+     * `authorize` bi morao da bira između dve tabele naloga — a grana koja bira
+     * je grana koja jednom izabere pogrešno.
+     *
+     * MFA se ovde NE traži: politika drugog faktora je pisana za interne naloge
+     * (`resolvePortalAccess`), i primeniti je na kupce bez odluke vlasnika
+     * značilo bi ili zaključati sve kupce napolju ili tiho oslabiti internu
+     * politiku. Vidi docs/b2b/02-auth-roles-tenancy.md, §5.
+     */
+    Credentials({
+      id: "customer",
+      name: "Kupac",
+      credentials: {
+        email: { label: "E-pošta", type: "email" },
+        password: { label: "Lozinka", type: "password" },
+      },
+      async authorize(rawCredentials) {
+        const parsed = customerCredentialsSchema.safeParse(rawCredentials);
+        if (!parsed.success) return null;
+
+        const identifier = parsed.data.email.trim().toLowerCase();
+        const clientIp = await clientIpFromRequest();
+
+        // Isti brojači kao kod internih naloga; skup posao ide tek posle njih.
+        if (
+          await isBucketBlocked({
+            scope: "password",
+            accountIdentifier: identifier,
+            clientIp,
+          })
+        ) {
+          return null;
+        }
+
+        /*
+         * Jedna provera lozinke i za nepostojeći nalog — isti razlog i isti
+         * modul kao interna prijava. Bez toga bi vreme odgovora odalo koje
+         * adrese imaju otvoren nalog kod kog kupca.
+         */
+        const decision = await resolveCredentialsLogin({
+          email: parsed.data.email,
+          password: parsed.data.password,
+          loadUser: findCustomerAccountByEmail,
+          verify: verifyPassword,
+          absentUserHash: ABSENT_USER_PASSWORD_RECORD,
+          /*
+           * Kupčev nalog nema `active`, nego `status`. Prevod je ovde, jer
+           * `resolveCredentialsLogin` namerno ne poznaje dva modela naloga.
+           */
+          isActive: (account) => canCustomerSignIn(account.status),
+        });
+
+        if (decision.outcome === "denied" || !decision.user) {
+          await registerAttempt({
+            scope: "password",
+            accountIdentifier: identifier,
+            clientIp,
+          });
+          return null;
+        }
+
+        const account = decision.user;
+
+        await markCustomerSignedIn(account.id);
+        await clearAccountAttempts("password", identifier);
+
+        return {
+          id: account.id,
+          name: account.name,
+          email: account.email,
+          sessionVersion: account.sessionVersion,
+          subject: SUBJECT_CUSTOMER,
+          // Kupčeva sesija nikada ne tvrdi drugi faktor koji nije dat.
+          assurance: "password",
+          mfaVerifiedAt: null,
         };
       },
     }),

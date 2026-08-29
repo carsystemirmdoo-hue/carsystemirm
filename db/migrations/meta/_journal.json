@@ -64,6 +64,13 @@
       "when": 1787588098265,
       "tag": "0008_commercial_identity",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1787588098266,
+      "tag": "0009_customer_accounts",
+      "breakpoints": true
     }
   ]
 }

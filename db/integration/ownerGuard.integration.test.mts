@@ -129,16 +129,30 @@ test("dve istovremene deaktivacije poslednja dva vlasnika — prolazi tacno jedn
   }
 
   /*
-   * Dokaz da je druga STVARNO čekala.
+   * Dokaz da se dve radnje nisu preklopile.
    *
-   * Da brava ne serijalizuje, obe bi se preklopile i ceo posao bi trajao oko
-   * jedne pauze. Serijalizovane, traju bar dve — pa ukupno vreme mora biti
-   * osetno veće od jedne pauze.
+   * Ranije se ovde merilo UKUPNO trajanje i tražilo da bude veće od jedne i po
+   * pauze. Ta mera je pogrešna, i pada na brzoj bazi iz ispravnog razloga:
+   * gubitnik uopšte NE ulazi u zaštićeni deo. `withOwnerGuard` broji vlasnike
+   * pošto uzme bravu i pre nego što pozove `mutate`, pa odbijena strana nikad
+   * ne stigne do `pg_sleep`. Nad lokalnim PostgreSQL-om ceo posao zato traje
+   * oko jedne pauze (~420 ms), i stara tvrdnja je prijavljivala preklapanje
+   * tamo gde ga nema. Nad udaljenom bazom je prolazila samo zato što je
+   * mrežno kašnjenje popunjavalo razliku — dakle merila je mrežu, ne bravu.
+   *
+   * Provera ispod ne zavisi ni od mreže ni od brzine mašine: u zaštićeni deo
+   * sme ući najviše JEDNA strana, a ako ikad uđu obe, druga sme ući tek pošto
+   * je prva odspavala svoje.
    */
+  const ulasci = Object.entries(usaoU);
+  assert.ok(ulasci.length >= 1, "nijedna strana nije usla u zasticeni deo");
   assert.ok(
-    ukupnoTrajanje > SLEEP_S * 1000 * 1.5,
-    `obe transakcije su se preklopile: ukupno ${ukupnoTrajanje} ms za pauzu od ${SLEEP_S * 1000} ms`,
+    ulasci.length === 1 ||
+      Math.max(...ulasci.map(([, ms]) => ms)) >= SLEEP_S * 1000,
+    `obe strane su usle u zasticeni deo bez cekanja: ${JSON.stringify(usaoU)}`,
   );
+  // Ukupno trajanje ostaje u izvestaju kao kontekst, ne kao tvrdnja.
+  console.log(`  ukupno trajanje: ${ukupnoTrajanje} ms (pauza ${SLEEP_S * 1000} ms)`);
 
   assert.equal(uspele.length, 1, "obe deaktivacije su prošle — brava ne serijalizuje");
   assert.equal(pale.length, 1);

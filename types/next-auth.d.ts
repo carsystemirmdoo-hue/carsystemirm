@@ -15,6 +15,13 @@ declare module "next-auth" {
        * se i dalje čitaju iz baze.
        */
       sessionVersion?: number;
+      /**
+       * `internal` | `customer` — kojoj tabeli naloga identitet pripada.
+       *
+       * Odsustvo znači interni nalog (tokeni izdati pre uvođenja polja).
+       * Kupčeva kapija traži izričitu vrednost — vidi `lib/authz/customer-scope.mjs`.
+       */
+      subject?: string;
       /** `password` | `mfa` | `recovery` — čime je sesija potvrđena. */
       assurance?: string;
       /** Kada je drugi faktor potvrđen; osnova za „sudo" prozor. */
@@ -26,6 +33,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     sessionVersion?: number;
+    subject?: string;
     assurance?: string;
     mfaVerifiedAt?: number;
   }

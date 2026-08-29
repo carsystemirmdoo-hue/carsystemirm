@@ -45,6 +45,16 @@ export type TestDatabase = {
 let cached: TestDatabase | null = null;
 
 /**
+ * Instrumentisana konekcija koju `installInstrumentedDb` gura u `globalThis`.
+ *
+ * Drži se odvojeno od `cached.sql` zato što se MORA zatvoriti: postgres.js pool
+ * drži otvorene socket-e, a otvoren socket drži event loop. Bez ovoga proces
+ * prođe sve testove i onda nikad ne izađe — što izgleda kao da se suite obesio,
+ * a zapravo je završio.
+ */
+let instrumented: postgres.Sql | null = null;
+
+/**
  * Razlog preskakanja, ili `null` kada se sme nastaviti.
  *
  * Testovi ga zovu PRE ijedne mutacije i, kada nije `null`, preskaču se uz
@@ -324,6 +334,13 @@ export async function resetQaDatabase(db: TestDatabase): Promise<string[]> {
 
 /** Zatvara vezu. Poziva se iz `after` u svakom test fajlu. */
 export async function closeTestDatabase(): Promise<void> {
+  if (instrumented) {
+    await instrumented.end();
+    instrumented = null;
+    // Referenca u `globalThis` bi inače držala zatvoren pool i sledeći
+    // `getDb()` bi gađao vezu koje više nema.
+    delete (globalThis as unknown as { carsystemDb?: unknown }).carsystemDb;
+  }
   if (!cached) return;
   await cached.sql.end();
   cached = null;
@@ -439,6 +456,7 @@ function installInstrumentedDb(url: string): void {
     },
   });
 
+  instrumented = client;
   const globalForDb = globalThis as unknown as { carsystemDb?: unknown };
   globalForDb.carsystemDb = drizzle(client, { schema });
 }

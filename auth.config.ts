@@ -1,5 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
-import { normalizeCallback } from "./lib/authz/redirects.mjs";
+import { normalizeAnyCallback } from "./lib/authz/redirects.mjs";
 import { sessionCookieContract } from "./lib/auth/cookie-policy.mjs";
 
 /*
@@ -65,7 +65,8 @@ export const authConfig = {
       const candidate = url.startsWith(baseUrl)
         ? url.slice(baseUrl.length) || "/"
         : url;
-      const safe = normalizeCallback(candidate);
+      // Prihvata i `/portal…` i `/kupac…`; sve ostalo i dalje pada.
+      const safe = normalizeAnyCallback(candidate);
       // Bez ispravnog odredišta ide se na `/portal`, koji dalje šalje korisnika
       // na početni ekran njegove uloge.
       return `${baseUrl}${safe ?? "/portal"}`;
@@ -90,6 +91,20 @@ export const authConfig = {
        * dobio pun portal. Sam nivo NE daje nikakvo pravo — samo kaže čime je
        * sesija potvrđena; dozvole se i dalje čitaju iz baze.
        */
+      /*
+       * `subject` razdvaja interni nalog od kupčevog.
+       *
+       * Bez njega bi se dva identiteta razlikovala samo po tome u kojoj tabeli
+       * postoji `token.sub` — što je provera koju bi svaka nova ruta morala da
+       * ponovi. Ovako je razlika u samom tokenu.
+       *
+       * Odsustvo se tumači kao INTERNI: tokeni izdati pre uvođenja ovog polja
+       * moraju nastaviti da važe, a podrazumevana vrednost sme da vodi samo ka
+       * manjem pristupu. Kupčeva kapija traži izričito `"customer"`.
+       */
+      if (user && "subject" in user) {
+        token.subject = String(user.subject);
+      }
       if (user && "assurance" in user) {
         token.assurance = String(user.assurance);
         const verifiedAt = (user as { mfaVerifiedAt?: number | null }).mfaVerifiedAt;
@@ -107,6 +122,7 @@ export const authConfig = {
       // prenosi dalje, jer edge runtime nema pristup bazi.
       if (session.user) {
         session.user.sessionVersion = token.sessionVersion ?? 0;
+        session.user.subject = token.subject;
         session.user.assurance = token.assurance;
         session.user.mfaVerifiedAt = token.mfaVerifiedAt;
       }

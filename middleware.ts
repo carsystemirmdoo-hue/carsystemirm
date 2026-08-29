@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 import { authConfig } from "./auth.config";
 import {
   CALLBACK_PARAM,
+  CUSTOMER_HOME_ROUTE,
+  CUSTOMER_LOGIN_ROUTE,
   LOGIN_ROUTE,
   loginUrlFor,
   normalizeCallback,
@@ -51,12 +53,28 @@ function isBypassedRoute(pathname: string) {
     // Portal se namerno više ne preskače ovde: pristup mu odlučuje prijava,
     // a ne režim održavanja javnog sajta. Ranije je bio dostupan svakome.
     isPortalRoute(pathname) ||
+    isCustomerRoute(pathname) ||
     PUBLIC_FILE_PATTERN.test(pathname)
   );
 }
 
 function isPortalRoute(pathname: string) {
   return pathname === "/portal" || pathname.startsWith("/portal/");
+}
+
+/**
+ * Kupčev prostor.
+ *
+ * Odvojena grana od `/portal`: kupčev token nema šta da traži u internom
+ * prostoru, ni interni u kupčevom. Ovde se proverava samo da postoji sesija —
+ * ČIJA je i sme li da uđe odlučuje `requireCustomerSession()` na serveru, gde
+ * se podaci naloga čitaju iz baze pri svakom zahtevu.
+ */
+function isCustomerRoute(pathname: string) {
+  return (
+    pathname === CUSTOMER_HOME_ROUTE ||
+    pathname.startsWith(`${CUSTOMER_HOME_ROUTE}/`)
+  );
 }
 
 function isPortalPublicRoute(pathname: string) {
@@ -93,7 +111,8 @@ function shouldNoindexInternalRoute(pathname: string) {
     pathname === "/social-exports" ||
     pathname.startsWith("/social-exports/") ||
     pathname === "/portal" ||
-    pathname.startsWith("/portal/")
+    pathname.startsWith("/portal/") ||
+    isCustomerRoute(pathname)
   );
 }
 
@@ -147,6 +166,12 @@ export default withAuth(async function middleware(request) {
 
   if (isPortalRoute(pathname) && !isPortalPublicRoute(pathname)) {
     if (!request.auth?.user?.id) return redirectToPortalLogin(request);
+  }
+
+  if (isCustomerRoute(pathname) && !request.auth?.user?.id) {
+    return NextResponse.redirect(
+      new URL(CUSTOMER_LOGIN_ROUTE, request.nextUrl.origin),
+    );
   }
 
   return handleSiteRouting(request);

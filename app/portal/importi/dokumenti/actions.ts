@@ -38,19 +38,27 @@ export async function resolveRevisionAction(
     return { error: "Izaberite obe verzije i unesite razlog.", ok: null };
   }
 
+  let posted = false;
   try {
-    await resolveDocumentRevision(parsed.data, {
+    const outcome = await resolveDocumentRevision(parsed.data, {
       id: actor.id,
       name: actor.name,
       role: actor.role,
     });
+    posted = outcome.posted;
   } catch (error) {
     if (error instanceof IngestError) return { error: error.message, ok: null };
     throw error;
   }
 
   revalidatePath("/portal/importi/dokumenti");
-  return { error: null, ok: "Zabeleženo je koja verzija važi." };
+  revalidatePath("/portal/importi");
+  return {
+    error: null,
+    ok: posted
+      ? "Zabeleženo je koja verzija važi i ona je proknjižena."
+      : "Zabeleženo je koja verzija važi. Knjiženje čeka mapiranje kupca.",
+  };
 }
 
 const reviewSchema = z.object({

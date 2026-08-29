@@ -155,6 +155,16 @@ test("razresenje sudara zamenjuje raniju verziju, ali je ne brise", async (t) =>
            'conflict', 'QA sudar', 'pending'
       FROM source_documents WHERE id = ${first.sourceDocumentId}
     RETURNING id`;
+  // Blizanac nosi i stavke — bez njih ne bi mogao da preuzme fakturu.
+  await db.sql`
+    INSERT INTO source_document_lines
+      (source_document_id, line_number, article_code, description, unit, quantity,
+       unit_price, discount_percent, tax_percent, tax_amount, gross_amount,
+       raw_cells, line_status)
+    SELECT ${twin.id}, line_number, article_code, description, unit, quantity,
+           unit_price, discount_percent, tax_percent, tax_amount, gross_amount,
+           raw_cells, line_status
+      FROM source_document_lines WHERE source_document_id = ${first.sourceDocumentId}`;
 
   await resolveDocumentRevision(
     {
@@ -173,10 +183,16 @@ test("razresenje sudara zamenjuje raniju verziju, ali je ne brise", async (t) =>
   assert.equal(older.revisionStatus, "superseded");
   assert.equal(newer.revisionStatus, "original");
 
-  // I ispada iz ledgera, pa promet nije prebrojan dvaput.
+  /*
+   * Promet je u ledgeru TACNO jednom: faktura je presla na verziju koja vazi,
+   * a zamenjena verzija je iz ledgera ispala. Ni nula (izgubljen promet) ni
+   * cetrnaest (dvostruko brojanje) nisu tacan odgovor.
+   */
   const [{ n }] = await db.sql<{ n: number }[]>`
     SELECT count(*)::int AS n FROM effective_sales_ledger`;
-  assert.equal(n, 0, "zamenjena verzija je ostala u prometu");
+  assert.equal(n, 7, "promet nije tacno jednom u ledgeru");
+  const [{ f }] = await db.sql<{ f: number }[]>`SELECT count(*)::int AS f FROM invoices`;
+  assert.equal(f, 1, "nastala je druga faktura za isti poslovni dokument");
 });
 
 test("dokument ne moze sam sebe da zameni ni preko servisa", async (t) => {
@@ -291,4 +307,79 @@ test("H-1: sudar karantinira OBE verzije — ledger pada na nulu", async (t) => 
   // Faktura NIJE obrisana — samo je iskljucena iz ledgera.
   const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM invoices`;
   assert.equal(n, 1, "istorija je obrisana");
+});
+
+test("H-2: pun scenario A -> B -> izbor B -> knjizenje tacno jednom", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { ingestBiznisoftPdf, resolveDocumentRevision } = await import("@/lib/pdf/ingest");
+  const customerId = await mappedCustomer();
+
+  // 1. Verzija A se uveze i proknjizi.
+  const bytes = await bytesOf("vise-stavki.pdf");
+  const a = await ingestBiznisoftPdf({ bytes, fileName: "a.pdf", issuerCode: ISSUER }, actor);
+  assert.equal(a.result, "ingested");
+
+  // 2. Verzija B sa istim poslovnim kljucem pravi sudar.
+  const b = await ingestBiznisoftPdf(
+    { bytes: sameDocumentOtherBytes(bytes), fileName: "b.pdf", issuerCode: ISSUER }, actor);
+  assert.equal(b.result, "business_key_conflict");
+
+  // 3. Dok sudar traje, ledger nema nijedan red za taj dokument.
+  const [{ zaSudara }] = await db.sql<{ zaSudara: number }[]>`
+    SELECT count(*)::int AS "zaSudara" FROM effective_sales_ledger`;
+  assert.equal(zaSudara, 0);
+
+  // 4. Kancelarija bira verziju B.
+  const out = await resolveDocumentRevision(
+    { supersededId: a.sourceDocumentId, supersedingId: b.sourceDocumentId, reason: "QA: B vazi" },
+    actor,
+  );
+  assert.equal(out.posted, true, "pobednicka verzija nije proknjizena");
+
+  // 5. A ostaje `superseded` i vise ne drzi fakturu; istorija je citava.
+  const [staraVerzija] = await db.sql<{
+    revision_status: string; superseded_by_id: string | null; invoice_id: string | null;
+  }[]>`SELECT revision_status, superseded_by_id, invoice_id
+         FROM source_documents WHERE id = ${a.sourceDocumentId}`;
+  assert.equal(staraVerzija.revision_status, "superseded");
+  assert.equal(staraVerzija.superseded_by_id, b.sourceDocumentId, "lanac verzija je prekinut");
+  assert.equal(staraVerzija.invoice_id, null);
+
+  const [{ stavkiA }] = await db.sql<{ stavkiA: number }[]>`
+    SELECT count(*)::int AS "stavkiA" FROM source_document_lines
+     WHERE source_document_id = ${a.sourceDocumentId}`;
+  assert.equal(stavkiA, 7, "stavke ranije verzije su obrisane");
+
+  // 6. B je proknjizen TACNO jednom.
+  const [{ faktura }] = await db.sql<{ faktura: number }[]>`
+    SELECT count(*)::int AS faktura FROM invoices`;
+  assert.equal(faktura, 1, "nastala je druga faktura za isti poslovni dokument");
+
+  const redovi = await db.sql<{ customer_id: string }[]>`
+    SELECT customer_id FROM effective_sales_ledger`;
+  assert.equal(redovi.length, 7, "promet nije tacno jednom u ledgeru");
+  assert.equal(redovi[0].customer_id, customerId);
+
+  const [novaVerzija] = await db.sql<{
+    revision_status: string; manual_review: string; invoice_id: string | null;
+  }[]>`SELECT revision_status, manual_review, invoice_id
+         FROM source_documents WHERE id = ${b.sourceDocumentId}`;
+  assert.equal(novaVerzija.revision_status, "original");
+  assert.equal(novaVerzija.manual_review, "resolved");
+  assert.ok(novaVerzija.invoice_id, "pobednik nije vezan za fakturu");
+
+  // 7. Ponavljanje akcije ne duplira promet.
+  const ponovo = await resolveDocumentRevision(
+    { supersededId: a.sourceDocumentId, supersedingId: b.sourceDocumentId, reason: "QA ponovo" },
+    actor,
+  );
+  assert.equal(ponovo.posted, false, "ponovljena akcija je ponovo knjizila");
+  assert.equal(ponovo.invoiceId, novaVerzija.invoice_id, "faktura se promenila");
+
+  const [{ posle }] = await db.sql<{ posle: number }[]>`
+    SELECT count(*)::int AS posle FROM effective_sales_ledger`;
+  assert.equal(posle, 7, "ponovljena akcija je duplirala promet");
+  const [{ f2 }] = await db.sql<{ f2: number }[]>`SELECT count(*)::int AS f2 FROM invoices`;
+  assert.equal(f2, 1);
 });

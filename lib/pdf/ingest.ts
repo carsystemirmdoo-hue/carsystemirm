@@ -382,28 +382,10 @@ async function postSourceDocument(
      * postojeći red za mapiranje na katalog. Bez ovoga bi se šifra videla samo
      * kao tekst na stavci i nikada ne bi stigla ni do jednog ekrana.
      */
-    let articleId: string | null = null;
-    if (line.articleCode) {
-      await tx
-        .insert(articles)
-        .values({
-          code: line.articleCode,
-          name: line.description ?? line.articleCode,
-          unit: line.unit,
-        })
-        .onConflictDoNothing();
-      const found = await tx
-        .select({ id: articles.id })
-        .from(articles)
-        .where(eq(articles.code, line.articleCode))
-        .limit(1);
-      articleId = found[0]?.id ?? null;
-    }
-
     await tx.insert(invoiceLines).values({
       invoiceId: invoice.id,
       lineNumber: line.lineNumber,
-      articleId,
+      articleId: await ensureArticle(tx, line),
       articleCode: line.articleCode ?? "",
       description: line.description,
       quantity: String(line.quantity ?? 0),
@@ -437,6 +419,35 @@ async function postSourceDocument(
   );
 
   return invoice.id;
+}
+
+/**
+ * Artikal iz stavke, upisan u registar ako ga još nema.
+ *
+ * Nepoznata šifra ne blokira fakturu, ali se ni ne proguta: upisuje se u
+ * postojeći `articles`, pa je zatiče postojeći red za mapiranje na katalog.
+ * Postojeći naziv se NE prepisuje — katalog je merodavniji od naziva na
+ * jednoj fakturi.
+ */
+async function ensureArticle(
+  tx: Tx,
+  line: { articleCode: string | null; description: string | null; unit: string | null },
+): Promise<string | null> {
+  if (!line.articleCode) return null;
+  await tx
+    .insert(articles)
+    .values({
+      code: line.articleCode,
+      name: line.description ?? line.articleCode,
+      unit: line.unit,
+    })
+    .onConflictDoNothing();
+  const found = await tx
+    .select({ id: articles.id })
+    .from(articles)
+    .where(eq(articles.code, line.articleCode))
+    .limit(1);
+  return found[0]?.id ?? null;
 }
 
 /**
@@ -629,7 +640,7 @@ export async function countSourceDocuments(): Promise<Record<string, number>> {
 export async function resolveDocumentRevision(
   input: { supersededId: string; supersedingId: string; reason: string },
   actor: IngestActor,
-): Promise<void> {
+): Promise<{ invoiceId: string | null; posted: boolean }> {
   const reason = input.reason.trim();
   if (reason.length < 3) {
     throw new IngestError("Razrešenje traži razlog (najmanje 3 znaka).", "missing_reason");
@@ -639,41 +650,114 @@ export async function resolveDocumentRevision(
   }
 
   const db = getDb();
-  await db.transaction(async (tx) => {
-    const rows = await tx
-      .select({ id: sourceDocuments.id, fileHash: sourceDocuments.fileHash })
-      .from(sourceDocuments)
-      .where(eq(sourceDocuments.id, input.supersededId))
-      .limit(1);
-    if (!rows[0]) throw new IngestError("Dokument ne postoji.", "not_found");
+  return db.transaction(async (tx) => {
+    const loser = await loadDocument(tx, input.supersededId);
+    const winner = await loadDocument(tx, input.supersedingId);
+    if (winner.validationStatus !== "valid") {
+      throw new IngestError(
+        "Verzija koja nije prošla proveru ne može biti proglašena važećom.",
+        "not_valid",
+      );
+    }
 
+    const stamp = {
+      manualReview: "resolved" as const,
+      manualReviewNote: reason,
+      manualReviewBy: actor.id,
+      manualReviewAt: new Date(),
+      updatedAt: sql`now()`,
+    };
+
+    /*
+     * 1. Ranija verzija ispada iz prometa i OTPUŠTA fakturu.
+     *
+     * `invoice_id` se oslobađa zato što je faktura jedan poslovni dokument, a
+     * ne kopija fajla: postoji tačno jedna i sada pripada verziji koja važi.
+     * Sam zapis ranije verzije, njene stavke i njen otisak ostaju netaknuti —
+     * `superseded_by_id` vodi na naslednika, pa se lanac čita unazad.
+     */
+    const inheritedInvoiceId = loser.invoiceId;
     await tx
       .update(sourceDocuments)
       .set({
+        ...stamp,
         revisionStatus: "superseded",
         supersededById: input.supersedingId,
         revisionConfirmedBy: actor.id,
         revisionConfirmedAt: new Date(),
-        manualReview: "resolved",
-        manualReviewNote: reason,
-        manualReviewBy: actor.id,
-        manualReviewAt: new Date(),
-        updatedAt: sql`now()`,
+        invoiceId: null,
       })
       .where(eq(sourceDocuments.id, input.supersededId));
 
+    /*
+     * 2. Ostale sporne verzije istog poslovnog dokumenta takođe ispadaju.
+     *
+     * Bez ovog koraka bi treća verzija ostala u `conflict` dok pobednik već
+     * ulazi u promet — stanje u kom ekran tvrdi da spor traje, a izveštaj se
+     * ponaša kao da je rešen.
+     */
+    if (winner.businessDocumentNumber) {
+      await tx
+        .update(sourceDocuments)
+        .set({
+          ...stamp,
+          revisionStatus: "superseded",
+          supersededById: input.supersedingId,
+          revisionConfirmedBy: actor.id,
+          revisionConfirmedAt: new Date(),
+          invoiceId: null,
+        })
+        .where(
+          and(
+            eq(sourceDocuments.issuerCode, winner.issuerCode),
+            eq(sourceDocuments.businessDocumentNumber, winner.businessDocumentNumber),
+            ne(sourceDocuments.revisionStatus, "superseded"),
+            ne(sourceDocuments.id, input.supersedingId),
+          ),
+        );
+    }
+
+    // 3. Pobednik postaje važeća verzija.
     await tx
       .update(sourceDocuments)
       .set({
         revisionStatus: "original",
         supersedesId: input.supersededId,
         conflictReason: null,
-        manualReview: "resolved",
-        manualReviewNote: reason,
-        manualReviewBy: actor.id,
-        manualReviewAt: new Date(),
         updatedAt: sql`now()`,
       })
+      .where(eq(sourceDocuments.id, input.supersedingId));
+
+    /*
+     * 4. Knjiženje TAČNO JEDNOM.
+     *
+     * Tri slučaja, i nijedan ne sme napraviti drugu fakturu:
+     *   - pobednik je već proknjižen  → ništa;
+     *   - faktura je nasleđena od ranije verzije → preuzima se, jer poslovni
+     *     dokument ostaje isti i njegov identitet je zauzet u `invoices`;
+     *   - niko nije proknjižen → obično knjiženje, ako je kupac mapiran.
+     */
+    let invoiceId: string | null = winner.invoiceId;
+    let posted = false;
+    if (!invoiceId && inheritedInvoiceId) {
+      await retargetInvoice(tx, inheritedInvoiceId, input.supersedingId, actor);
+      invoiceId = inheritedInvoiceId;
+      posted = true;
+    } else if (!invoiceId && winner.externalPartnerCode) {
+      const customerId = await resolveMappedCustomer(tx, {
+        issuerCode: winner.issuerCode,
+        externalPartnerCode: winner.externalPartnerCode,
+      });
+      if (customerId) {
+        invoiceId = await postSourceDocument(tx, input.supersedingId, customerId, actor);
+        posted = true;
+      }
+    }
+
+    // 5. Pregled je zatvoren tek kada je knjiženje odlučeno.
+    await tx
+      .update(sourceDocuments)
+      .set(stamp)
       .where(eq(sourceDocuments.id, input.supersedingId));
 
     await recordAudit(
@@ -682,13 +766,108 @@ export async function resolveDocumentRevision(
         action: AUDIT_ACTIONS.pdfRevisionResolved,
         entityType: "Izvorni dokument",
         entityId: input.supersedingId,
-        entityLabel: redactDocumentRef(rows[0]),
-        after: { zamenjen: input.supersededId, vazi: input.supersedingId },
+        entityLabel: redactDocumentRef(winner),
+        before: { zamenjen: input.supersededId },
+        after: { vazi: input.supersedingId, proknjizeno: posted },
         reason,
       },
       tx,
     );
+
+    return { invoiceId, posted };
   });
+}
+
+/** Jedan izvorni dokument, ili greška sa razumljivom porukom. */
+async function loadDocument(tx: Tx, id: string) {
+  const rows = await tx
+    .select({
+      id: sourceDocuments.id,
+      fileHash: sourceDocuments.fileHash,
+      issuerCode: sourceDocuments.issuerCode,
+      businessDocumentNumber: sourceDocuments.businessDocumentNumber,
+      externalPartnerCode: sourceDocuments.externalPartnerCode,
+      validationStatus: sourceDocuments.validationStatus,
+      invoiceId: sourceDocuments.invoiceId,
+    })
+    .from(sourceDocuments)
+    .where(eq(sourceDocuments.id, id))
+    .limit(1);
+  if (!rows[0]) throw new IngestError("Dokument ne postoji.", "not_found");
+  return rows[0];
+}
+
+/**
+ * Postojeća faktura prelazi na verziju koja važi.
+ *
+ * Faktura je JEDAN poslovni dokument — njen identitet (izdavalac, vrsta, broj,
+ * godina) je jedinstven u bazi, pa druga faktura za isti dokument ne može ni
+ * da nastane. Zato se ne pravi nova nego se postojeća prepisuje sadržajem
+ * pobedničke verzije.
+ *
+ * Prepisuju se SAMO stavke i zbirovi, izvedeni podaci. Oba izvorna dokumenta i
+ * sve njihove pročitane stavke ostaju netaknuti, pa se razlika između verzija
+ * i posle ovoga može pročitati u celini.
+ */
+async function retargetInvoice(
+  tx: Tx,
+  invoiceId: string,
+  sourceDocumentId: string,
+  actor: IngestActor,
+): Promise<void> {
+  const doc = await loadDocument(tx, sourceDocumentId);
+  const lines = await tx
+    .select()
+    .from(sourceDocumentLines)
+    .where(eq(sourceDocumentLines.sourceDocumentId, sourceDocumentId))
+    .orderBy(sourceDocumentLines.lineNumber);
+  if (lines.length === 0) {
+    throw new IngestError("Verzija bez stavki ne može preuzeti fakturu.", "no_lines");
+  }
+
+  await tx.delete(invoiceLines).where(eq(invoiceLines.invoiceId, invoiceId));
+  for (const line of lines) {
+    await tx.insert(invoiceLines).values({
+      invoiceId,
+      lineNumber: line.lineNumber,
+      articleId: await ensureArticle(tx, line),
+      articleCode: line.articleCode ?? "",
+      description: line.description,
+      quantity: String(line.quantity ?? 0),
+      unitPrice: String(line.unitPrice ?? 0),
+      discountPercent: String(line.discountPercent ?? 0),
+      taxPercent: String(line.taxPercent ?? 0),
+      lineAmount: String(round2(netOf(line))),
+    });
+  }
+
+  await tx
+    .update(invoices)
+    .set({
+      netAmount: String(round2(lines.reduce((sum, l) => sum + netOf(l), 0))),
+      taxAmount: String(round2(lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0))),
+      totalAmount: String(round2(lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0))),
+      updatedAt: sql`now()`,
+    })
+    .where(eq(invoices.id, invoiceId));
+
+  await tx
+    .update(sourceDocuments)
+    .set({ invoiceId, updatedAt: sql`now()` })
+    .where(eq(sourceDocuments.id, sourceDocumentId));
+
+  await recordAudit(
+    {
+      actor,
+      action: AUDIT_ACTIONS.pdfPosted,
+      entityType: "Izvorni dokument",
+      entityId: sourceDocumentId,
+      entityLabel: redactDocumentRef(doc),
+      after: { invoiceId, stavki: lines.length, preuzeta: true },
+      reason: "Faktura je prešla na verziju koja važi.",
+    },
+    tx,
+  );
 }
 
 /**

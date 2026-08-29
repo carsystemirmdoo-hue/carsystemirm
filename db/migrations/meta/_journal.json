@@ -99,6 +99,13 @@
       "when": 1787588098271,
       "tag": "0013_customer_lifecycle",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1787588098272,
+      "tag": "0014_contact_consents",
+      "breakpoints": true
     }
   ]
 }

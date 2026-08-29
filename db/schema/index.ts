@@ -8,3 +8,4 @@ export * from "./commercial";
 export * from "./customer-accounts";
 export * from "./pricing";
 export * from "./notifications";
+export * from "./consents";

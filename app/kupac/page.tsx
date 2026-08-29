@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { customerSignOutAction } from "@/app/prijava/kupac/actions";
 import {
   PageHeader,
@@ -94,6 +95,12 @@ export default async function CustomerHomePage() {
           Cene i uslovi se potvrđuju uz porudžbinu. Ovaj pregled ih ne prikazuje.
         </p>
       </Panel>
+
+      <p>
+        <Link href="/kupac/saglasnosti">
+          Saglasnosti za obaveštenja i oglase
+        </Link>
+      </p>
 
       <form action={customerSignOutAction}>
         <button className="portal-login-submit" type="submit">

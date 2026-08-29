@@ -268,6 +268,25 @@ export async function cleanupQa(db: TestDatabase): Promise<{
  * nad već izmenjenom šemom.
  */
 const RESETTABLE_TABLES = [
+  /*
+   * Tabele uvedene migracijama 0008–0014.
+   *
+   * Bez njih se redovi gomilaju izmedju prolaza, pa sigurnosna kapija
+   * (`initTestDatabase`, brojanje redova u poslovnim tabelama) posle prvog
+   * neuspelog `after()` hooka odbija bazu porukom „ne izgleda kao prazna test
+   * meta". Kvar je izgledao kao greska u novom testu, a bio je u ciscenju.
+   */
+  "customer_contact_consents",
+  "customer_account_tokens",
+  "customer_message_outbox",
+  "customer_users",
+  "notifications",
+  "price_rules",
+  "customer_group_members",
+  "customer_groups",
+  "article_catalog_mappings",
+  "customer_external_identifiers",
+
   "audit_log",
   "auth_rate_limits",
   "user_mfa",

@@ -134,6 +134,13 @@
       "when": 1787588098276,
       "tag": "0018_source_documents",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1787588098277,
+      "tag": "0019_effective_sales_ledger",
+      "breakpoints": true
     }
   ]
 }

@@ -27,7 +27,7 @@ function catalogCandidates() {
 
 const decideSchema = z.object({
   articleId: z.string().uuid(),
-  status: z.enum(["mapped", "rejected", "unmapped"]),
+  status: z.enum(["mapped", "rejected", "revoked", "unmapped"]),
   catalogProductSlug: z.string().trim().max(200).nullable(),
   catalogVariantId: z.string().trim().max(200).nullable(),
   note: z.string().trim().min(3).max(500),

@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, asc, count, eq, ne, sql } from "drizzle-orm";
+import { and, asc, count, eq, notInArray, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
   articleCatalogMappings,
@@ -124,7 +124,10 @@ export async function proposeMappingForArticle(
 export async function decideMapping(
   input: {
     articleId: string;
-    status: Extract<ProductMappingStatus, "mapped" | "rejected" | "unmapped">;
+    status: Extract<
+      ProductMappingStatus,
+      "mapped" | "rejected" | "revoked" | "unmapped"
+    >;
     catalogProductSlug?: string | null;
     catalogVariantId?: string | null;
     note: string;
@@ -166,6 +169,18 @@ export async function decideMapping(
       conflictReason: null,
       confirmedBy: input.status === "mapped" ? actor.id : null,
       confirmedAt: input.status === "mapped" ? sql`now()` : null,
+      /*
+       * Prethodna veza se pamti SAMO pri poništavanju potvrđene.
+       *
+       * `rejected` je odbijen predlog i nema šta da sačuva; `revoked` ima, i
+       * baza to i traži (`article_catalog_mappings_revoked_ck`).
+       */
+      previousCatalogProductSlug:
+        input.status === "revoked" ? (live?.catalogProductSlug ?? null) : null,
+      previousCatalogVariantId:
+        input.status === "revoked" ? (live?.catalogVariantId ?? null) : null,
+      revokedBy: input.status === "revoked" ? actor.id : null,
+      revokedAt: input.status === "revoked" ? sql`now()` : null,
       updatedAt: sql`now()`,
     };
 
@@ -184,12 +199,19 @@ export async function decideMapping(
         action:
           input.status === "mapped"
             ? AUDIT_ACTIONS.productMappingConfirmed
-            : AUDIT_ACTIONS.productMappingRevoked,
+            : input.status === "revoked"
+              ? AUDIT_ACTIONS.productMappingRevoked
+              : AUDIT_ACTIONS.productMappingRejected,
         entityType: "Mapiranje artikla",
         entityId: input.articleId,
         entityLabel: `${article.code} — ${article.name}`,
         before: { status: from, slug: live?.catalogProductSlug ?? null },
-        after: { status: input.status, slug: values.catalogProductSlug },
+        after: {
+          status: input.status,
+          slug: values.catalogProductSlug,
+          // Kod poništavanja trag nosi i šta je veza BILA.
+          prethodniSlug: values.previousCatalogProductSlug,
+        },
         reason: note,
         correlationId,
       },
@@ -242,12 +264,13 @@ async function loadLiveMapping(articleId: string) {
       id: articleCatalogMappings.id,
       status: articleCatalogMappings.status,
       catalogProductSlug: articleCatalogMappings.catalogProductSlug,
+      catalogVariantId: articleCatalogMappings.catalogVariantId,
     })
     .from(articleCatalogMappings)
     .where(
       and(
         eq(articleCatalogMappings.articleId, articleId),
-        ne(articleCatalogMappings.status, "rejected"),
+        notInArray(articleCatalogMappings.status, ["rejected", "revoked"]),
       ),
     )
     .limit(1);
@@ -303,7 +326,7 @@ export async function listArticleMappings(filter?: {
       articleCatalogMappings,
       and(
         eq(articleCatalogMappings.articleId, articles.id),
-        ne(articleCatalogMappings.status, "rejected"),
+        notInArray(articleCatalogMappings.status, ["rejected", "revoked"]),
       ),
     )
     .where(conditions.length > 0 ? and(...conditions) : undefined)
@@ -331,7 +354,7 @@ export async function countArticleMappingsByStatus(): Promise<
       articleCatalogMappings,
       and(
         eq(articleCatalogMappings.articleId, articles.id),
-        ne(articleCatalogMappings.status, "rejected"),
+        notInArray(articleCatalogMappings.status, ["rejected", "revoked"]),
       ),
     )
     .groupBy(sql`coalesce(${articleCatalogMappings.status}, 'unmapped')`);
@@ -342,6 +365,7 @@ export async function countArticleMappingsByStatus(): Promise<
     mapped: 0,
     conflict: 0,
     rejected: 0,
+    revoked: 0,
   };
   for (const row of rows) empty[row.status] = row.total;
   return empty;

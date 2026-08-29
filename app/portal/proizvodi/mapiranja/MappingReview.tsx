@@ -159,7 +159,17 @@ export function MappingReview({
           <Field label="Odluka" required>
             <select name="status" defaultValue="mapped" required>
               <option value="mapped">Potvrdi vezu</option>
-              <option value="rejected">Odbij vezu</option>
+              {/*
+                * Odbijanje i poništavanje su različiti događaji i ne nude se
+                * zajedno: predlog se odbija, potvrđena veza se poništava.
+                * Ponuda oba iz istog stanja bi značila da razlika zavisi od
+                * toga šta je korisnik slučajno izabrao.
+                */}
+              {open.status === "mapped" ? (
+                <option value="revoked">Poništi potvrđenu vezu</option>
+              ) : (
+                <option value="rejected">Odbij predlog</option>
+              )}
               <option value="unmapped">Vrati u nemapirano</option>
             </select>
           </Field>

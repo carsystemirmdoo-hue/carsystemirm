@@ -58,7 +58,8 @@ export const PRODUCT_MAPPING_LABELS: Record<string, string> = {
   suggested: "Predložena veza",
   mapped: "Potvrđena veza",
   conflict: "Konflikt",
-  rejected: "Odbijeno",
+  rejected: "Odbijen predlog",
+  revoked: "Poništena veza",
 };
 
 export const PRODUCT_MAPPING_TONES: Record<string, Tone> = {
@@ -68,6 +69,7 @@ export const PRODUCT_MAPPING_TONES: Record<string, Tone> = {
   mapped: "success",
   conflict: "danger",
   rejected: "neutral",
+  revoked: "warning",
 };
 
 export const CUSTOMER_ACCOUNT_LABELS: Record<string, string> = {

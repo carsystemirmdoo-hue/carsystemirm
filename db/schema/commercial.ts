@@ -127,7 +127,16 @@ export const productMappingStatus = pgEnum("product_mapping_status", [
   "suggested",
   "mapped",
   "conflict",
+  /** Predlog nikada nije prihvaćen. */
   "rejected",
+  /**
+   * Ranije POTVRĐENA veza je poništena.
+   *
+   * Odvojeno od `rejected` jer su to različiti poslovni događaji: odbijen
+   * predlog kupcu nikad ništa nije pokazao, poništena veza jeste pa je
+   * oduzeto. Uz `revoked` se čuva i na šta je artikal bio mapiran.
+   */
+  "revoked",
 ]);
 
 export type ProductMappingStatus =
@@ -158,6 +167,19 @@ export const articleCatalogMappings = pgTable(
     note: text("note"),
     /** Šta se sudarilo, kada je stanje `conflict`. */
     conflictReason: text("conflict_reason"),
+    /**
+     * Na šta je artikal bio mapiran pre poništavanja.
+     *
+     * `catalog_product_slug` se pri poništavanju i dalje prazni — popunjen slug
+     * uz neaktivno stanje bi negde procurio kao „skoro potvrđen". Ali ono što
+     * je bilo mora ostati zapisano, i to je ovde.
+     */
+    previousCatalogProductSlug: text("previous_catalog_product_slug"),
+    previousCatalogVariantId: text("previous_catalog_variant_id"),
+    revokedBy: uuid("revoked_by").references(() => users.id, {
+      onDelete: "restrict",
+    }),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
     proposedBy: uuid("proposed_by").references(() => users.id, {
       onDelete: "restrict",
     }),
@@ -184,7 +206,7 @@ export const articleCatalogMappings = pgTable(
      */
     uniqueIndex("article_catalog_mappings_live_key")
       .on(table.articleId)
-      .where(sql`status <> 'rejected'`),
+      .where(sql`status NOT IN ('rejected', 'revoked')`),
     index("article_catalog_mappings_status_idx").on(table.status),
     index("article_catalog_mappings_slug_idx").on(table.catalogProductSlug),
   ],

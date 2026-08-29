@@ -7,8 +7,6 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from "react";
-import type { DemoDataState } from "@/types/portal";
-import { usePortal } from "./PortalProvider";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
 
 export function formatCurrency(value: number, compact = false) {
@@ -290,88 +288,6 @@ export function Field({
         <small>{hint}</small>
       ) : null}
     </label>
-  );
-}
-
-export function StateView({
-  state,
-  title,
-  description,
-  action,
-}: {
-  state: Exclude<DemoDataState, "normal"> | "permission";
-  title?: string;
-  description?: string;
-  action?: ReactNode;
-}) {
-  if (state === "loading")
-    return (
-      <div className="portal-skeleton-stack" aria-label="Učitavanje">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-    );
-  const defaults = {
-    empty: ["Nema rezultata", "Promenite filtere ili dodajte prvi zapis."],
-    error: [
-      "Nešto nije u redu",
-      "Mock servis trenutno ne može da prikaže podatke. Pokušajte ponovo.",
-    ],
-    offline: [
-      "Integracija nije dostupna",
-      "Lokalni podaci ostaju vidljivi, sinhronizacija će čekati ponovno povezivanje.",
-    ],
-    permission: [
-      "Nemate dozvolu za ovaj prikaz",
-      "Dostupnost podataka i akcija zavisi od izabrane uloge.",
-    ],
-  } as const;
-  const [fallbackTitle, fallbackDescription] = defaults[state];
-  return (
-    <div className="portal-state" data-state={state}>
-      <span className="portal-state-icon">
-        <PortalIcon
-          name={
-            state === "permission"
-              ? "lock"
-              : state === "offline"
-                ? "sync"
-                : state === "error"
-                  ? "warning"
-                  : "search"
-          }
-        />
-      </span>
-      <h2>{title || fallbackTitle}</h2>
-      <p>{description || fallbackDescription}</p>
-      {action}
-    </div>
-  );
-}
-
-export function ModuleState({
-  children,
-  allowEmpty = true,
-}: {
-  children: ReactNode;
-  allowEmpty?: boolean;
-}) {
-  const { uiState, setUiState } = usePortal();
-  if (uiState === "normal" || (!allowEmpty && uiState === "empty"))
-    return <>{children}</>;
-  return (
-    <Panel>
-      <StateView
-        state={uiState}
-        action={
-          <PortalButton onClick={() => setUiState("normal")}>
-            Vrati normalno stanje
-          </PortalButton>
-        }
-      />
-    </Panel>
   );
 }
 

@@ -234,8 +234,8 @@ stateDiagram-v2
 | 9 | **MFA (TOTP) za interne naloge** | **1B** | 🔴 |
 | 10 | Oduzeti `UPDATE`/`DELETE` nad `audit_log` aplikativnoj ulozi | 1B | 🔴 |
 | 11 | Reset lozinke + opoziv pri promeni | 1B | 🔴 |
-| 12 | `customer_users` + `requireCustomerSession()` | 2 | 🔴 |
-| 13 | Invite/approval tok | 2 | 🔴 |
+| 12 | `customer_users` + `requireCustomerSession()` | 2 | ✅ |
+| 13 | Invite/approval tok | 2 | 🟡 delimično — nalog otvara kancelarija sa početnom lozinkom; jednokratni link e-poštom nije urađen |
 | 14 | Uklanjanje `'unsafe-inline'` iz CSP | 6 | 🔴 |
 
 ### Napomena o dometu TOTP zaštite
@@ -245,7 +245,10 @@ koji unese kod na lažnu stranu daje napadaču i drugi faktor, jer kod nije veza
 za adresu sajta. Passkeys/WebAuthn to rešavaju vezivanjem za poreklo i ostaju
 buduće poboljšanje — van dometa Faze 1B.
 
-> **Tenant izolacija kupca NIJE rešena.** Faza 1A je dirala samo interni auth
-> temelj. Kupac kao subjekt i dalje ne postoji — vidi §3 i §4.
+> **Tenant izolacija kupca je rešena u Fazi 2.** `customer_users`,
+> `requireCustomerSession()` i opseg u `WHERE` postoje u kodu, sa jediničnim i
+> integracionim testovima nad pravim PostgreSQL-om. Vidi `14-commercial-foundation.md`, §5.
+>
+> Ostaje otvoreno: MFA za kupčeve naloge i invite tok e-poštom (🟡, §11 tamo).
 
 Sve je **aditivno** — nijedna stavka ne menja postojeće ponašanje internog portala.

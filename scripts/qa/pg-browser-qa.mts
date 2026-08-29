@@ -1325,13 +1325,27 @@ try {
           await dokazi(s.page, `vlasnik ne dobija korpu: HTTP ${res?.status()}`, nalozi.owner.id),
         );
       }
-      const stanje = await s.page.evaluate(() => ({
-        naslov: document.querySelector("h1")?.textContent?.trim() ?? null,
-        prazna: /nema izabranih|lista je prazna|prazn/i.test(document.body.innerText),
-        cena: /\bRSD\b|\bEUR\b|ukupno za napla|\bcena\b/i.test(document.body.innerText),
-        checkout: /checkout|plati|pla[ćc]anje|poru[dž]bina je/i.test(document.body.innerText),
-        kljucevi: Object.keys(window.localStorage).filter((k) => k.startsWith("carsystem.cart")),
-      }));
+      const stanje = await s.page.evaluate(() => {
+        /*
+         * Tvrdnja je o SADRZAJU korpe, ne o okviru portala.
+         *
+         * Ranije se skenirao ceo `body`, pa je svaka stavka navigacije koja
+         * sadrzi rec „cena" obarala proveru — a bocna traka nije korpa i nikad
+         * nije bila deo tvrdnje. `main` je tacno ono sto ova ruta renderuje.
+         */
+        const sadrzaj =
+          (document.querySelector("main") as HTMLElement | null)?.innerText ??
+          document.body.innerText;
+        return {
+          naslov: document.querySelector("h1")?.textContent?.trim() ?? null,
+          prazna: /nema izabranih|lista je prazna|prazn/i.test(sadrzaj),
+          cena: /\bRSD\b|\bEUR\b|ukupno za napla|\bcena\b/i.test(sadrzaj),
+          checkout: /checkout|plati|pla[ćc]anje|poru[dž]bina je/i.test(sadrzaj),
+          kljucevi: Object.keys(window.localStorage).filter((k) =>
+            k.startsWith("carsystem.cart"),
+          ),
+        };
+      });
       if (stanje.cena) throw new Error(await dokazi(s.page, "korpa prikazuje cenu", nalozi.owner.id));
       if (stanje.checkout) {
         throw new Error(await dokazi(s.page, "korpa nudi checkout ili tvrdi porudzbinu", nalozi.owner.id));
@@ -1354,6 +1368,17 @@ try {
       const kod = await svezTotp(ownerSecret);
       await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
       await s.page.goto(`${BASE}/portal/korpa`, { waitUntil: "domcontentloaded" });
+      /*
+       * Ceka se da se strana STVARNO montira pre upisa fixture zapisa.
+       *
+       * `domcontentloaded` je zavrsen pre nego sto React odradi efekte. Cart
+       * sloj pri montiranju upisuje svoje pocetno (prazno) stanje pod isti
+       * kljuc. Bez ovog cekanja upis testa i upis aplikacije se utrkuju, pa je
+       * korak povremeno padao sa „refresh nije sacuvao dve stavke (0)" — bez
+       * ikakve veze sa onim sto korak tvrdi. Isti obrazac cekanja koristi i
+       * korak 17.
+       */
+      await s.page.waitForSelector("main h1", { timeout: AKCIJA_TIMEOUT_MS });
 
       /*
        * OGRADA: ovo NIJE dokaz dodavanja ni spajanja.
@@ -1406,7 +1431,28 @@ try {
         [kljuc, zapis] as [string, string],
       );
 
+      /*
+       * Potvrda da je upis stvarno legao, pre nego sto se strana ponovo ucita.
+       *
+       * Ako je aplikacija u medjuvremenu pregazila kljuc, greska mora reci
+       * TO — a ne da refresh nije sacuvao stavke, sto bi optuzilo pogresan kod.
+       */
+      const preRefresh = await s.page.evaluate(
+        (k) => JSON.parse(window.localStorage.getItem(k) ?? "{}").items?.length ?? 0,
+        kljuc,
+      );
+      if (preRefresh !== 2) {
+        throw new Error(
+          await dokazi(
+            s.page,
+            `fixture nije legao pre refresh-a (${preRefresh}) — cart sloj je pregazio kljuc`,
+            nalozi.owner.id,
+          ),
+        );
+      }
+
       await s.page.reload({ waitUntil: "domcontentloaded" });
+      await s.page.waitForSelector("main h1", { timeout: AKCIJA_TIMEOUT_MS });
       const posle = await s.page.evaluate((k) => {
         const zapis = JSON.parse(window.localStorage.getItem(k) ?? "{}");
         return {

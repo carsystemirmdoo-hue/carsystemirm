@@ -22,6 +22,29 @@ Načelo: **svaka faza je isporučiva i proverljiva sama za sebe.** Nijedna ne sm
 
 ---
 
+## FAZA 2 — Komercijalna i identitetska osnova ✅ ZAVRŠENO
+
+**Grana:** `feature/b2b-commercial-foundation` · **Detaljno:** `14-commercial-foundation.md`
+
+Aditivno; nijedna postojeća tabela nije izgubila kolonu ni ograničenje,
+`users.role` i dalje ima četiri interne uloge.
+
+| # | Zadatak | Migracija | Testovi |
+|---|---|---|---|
+| 1 | Uklonjen mrtav paralelni RBAC i mock pricing (12 fajlova) | — | `capabilityMatrix` +2 |
+| 2 | Spoljni identitet kupca (šifra partnera kao `text`) | 0008 | `externalIdentity` 15 |
+| 3 | Mapiranje artikla na katalog, bez fuzzy povezivanja | 0008 | `productMapping` 16 |
+| 4 | Kupčev nalog kao odvojen identitet + `requireCustomerSession()` | 0009 | `customerIsolation` 15 + 8 integracionih |
+| 5 | Pravila cene, 12 klasa prvenstva, konflikt umesto izbora | 0010 | `precedence` 26 + 13 integracionih |
+| 6 | Tok odobrenja, audit i obaveštenja | 0011 | `workflow` 19 + 15 integracionih |
+| 7 | Portal ekrani nad stvarnim podacima | — | browser QA 18/18 |
+
+**Nije rađeno (van dometa):** PDF parser, Windows konektor, invoice revision,
+preporuke, prognoza potražnje, automatska porudžbina, obračun marže, BizniSoft
+write-back, uvoz kataloga.
+
+---
+
 ## FAZA 1A — Postojeće rupe i konsolidacija auth osnove ✅ ZAVRŠENO
 
 **Datum:** 2026-08-24 · **Nema novih zavisnosti. Javni vizuelni sistem nije dirán.**

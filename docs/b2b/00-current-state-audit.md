@@ -327,3 +327,12 @@ U ovoj fazi nije pokrenut dev server niti build.
 2. **Razrešiti `orders:create`** — jedna dozvola danas pokriva nabavku i (buduću) kupčevu porudžbinu.
 3. **Ukloniti ili izolovati legacy model dozvola** (`permissions/portal-permissions.ts`, `PortalPrimitives.tsx:PermissionGate`).
 4. **Tražiti stvaran BizniSoft izvoz.** Sve o formatu je nagađanje dok ga nema — vidi `09-owner-decisions-and-blockers.md`.
+
+---
+
+## Dopuna posle Faze 2 (grana `feature/b2b-commercial-foundation`)
+
+Nalazi ovog dokumenta koji se tiču mrtvog paralelnog modela dozvola
+(`permissions/portal-permissions.ts`, `features/portal/*`, `mockPortalService`)
+**više ne važe**: ti fajlovi su uklonjeni, a ne samo izolovani. Vidi
+`14-commercial-foundation.md`, §1.

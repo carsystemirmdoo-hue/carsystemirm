@@ -3,6 +3,10 @@ import { SourceDocumentReview } from "@/features/portal/SourceDocumentReview";
 import { requireCapability } from "@/lib/authz/session";
 import { can } from "@/lib/authz/permissions.mjs";
 import { countSourceDocuments, listSourceDocuments } from "@/lib/pdf/ingest";
+import {
+  resolveLedgerScope,
+  unlinkedCorrectiveDocuments,
+} from "@/lib/ledger/effective-sales";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +37,16 @@ export default async function SourceDocumentsPage({
 
   const counts = await countSourceDocuments();
   const rows = await listSourceDocuments(queryFor(active));
+
+  /*
+   * Red korektivnih dokumenata bez dokazane veze.
+   *
+   * Čita se kroz opseg korisnika, kao i svaki drugi pogled na promet — ekran
+   * uvoza nije izuzetak od ograničenja na dodeljene kupce.
+   */
+  const corrective = await unlinkedCorrectiveDocuments(await resolveLedgerScope(user), {
+    limit: 100,
+  });
 
   return (
     <>
@@ -107,6 +121,50 @@ export default async function SourceDocumentsPage({
           posted: row.invoiceId !== null,
         }))}
       />
+
+      <section className="portal-panel">
+        <div className="portal-section-header">
+          <div>
+            <h2>Povrat, storno i korekcija bez dokazane veze</h2>
+            <p>
+              Ovi dokumenti se vide u prometu, ali NE umanjuju neto dok se ne
+              povežu sa dokumentom koji ispravljaju. Veza traži izričitu
+              referencu u samom dokumentu; dok je nema, sistem ne pogađa.
+            </p>
+          </div>
+        </div>
+        <div className="portal-table-wrap">
+          <table className="portal-table">
+            <thead>
+              <tr>
+                <th scope="col">Datum</th>
+                <th scope="col">Vrsta</th>
+                <th scope="col">Kofa</th>
+                <th scope="col">Stavki</th>
+                <th scope="col">Iznos</th>
+              </tr>
+            </thead>
+            <tbody>
+              {corrective.map((row) => (
+                <tr key={row.invoiceId}>
+                  <th scope="row">{row.issuedOn}</th>
+                  <td>{row.documentKind}</td>
+                  <td>{row.bucket}</td>
+                  <td className="portal-table-number">{row.lines}</td>
+                  <td className="portal-table-number">{row.amount}</td>
+                </tr>
+              ))}
+              {corrective.length === 0 ? (
+                <tr>
+                  <td colSpan={5}>
+                    Nema nijednog korektivnog dokumenta u vašem opsegu.
+                  </td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section className="portal-panel">
         <div className="portal-section-header">

@@ -85,6 +85,26 @@ async function ingestMapped() {
   return out;
 }
 
+/** Rucno unet dokument bez izvornog PDF-a — kao iz ranijeg CSV uvoza. */
+async function manualInvoice(
+  owner: string,
+  kind: string,
+  issuedOn: string,
+  number: string,
+) {
+  const [inv] = await db.sql<{ id: string }[]>`
+    INSERT INTO invoices (company_id, document_kind, number, year, issued_on,
+                          customer_id, net_amount, total_amount)
+    VALUES (${ISSUER}, ${kind}, ${number}, ${Number(issuedOn.slice(0, 4))},
+            ${issuedOn}, ${owner}, '100.00', '120.00')
+    RETURNING id`;
+  await db.sql`
+    INSERT INTO invoice_lines (invoice_id, line_number, article_code, quantity,
+                               unit_price, line_amount)
+    VALUES (${inv.id}, 1, '900001', '1.000', '100.0000', '100.00')`;
+  return inv.id;
+}
+
 test("promet ulazi u ledger tacno jednom", async (t) => {
   if (guard(t)) return;
   const { ledgerTotals } = await import("@/lib/ledger/effective-sales");
@@ -231,4 +251,33 @@ test("poslednja fakturisana cena dolazi iz ledgera i nosi datum", async (t) => {
     await lastInvoicedPrice(customerLedgerScope(drugi.id), { customerId, articleCode: "900001" }),
     null,
   );
+});
+
+test("korektivni dokumenti bez veze imaju svoj red, u opsegu korisnika", async (t) => {
+  if (guard(t)) return;
+  const { unlinkedCorrectiveDocuments } = await import("@/lib/ledger/effective-sales");
+
+  await ingestMapped();
+  const mine = customerId;
+  const [other] = await db.sql<{ id: string }[]>`
+    INSERT INTO customers (pib, name)
+    VALUES (${`QA${randomUUID().slice(0, 6)}`}, 'QA Kupac 2') RETURNING id`;
+
+  await manualInvoice(mine, "povrat_robe", "2026-04-01", "K1");
+  await manualInvoice(mine, "storno", "2026-04-02", "K2");
+  await manualInvoice(other.id, "povrat_robe", "2026-04-04", "K3");
+
+  const moji = await unlinkedCorrectiveDocuments({ customerIds: [mine] });
+  assert.equal(moji.length, 2, "faktura je usla u red korektivnih");
+  assert.deepEqual(
+    moji.map((r) => r.bucket).sort(),
+    ["cancellations", "returns"],
+  );
+
+  // Prodaja NE ulazi u ovaj red, a tudji povrat se ne vidi.
+  assert.ok(!moji.some((r) => r.bucket === "gross_sales"), "faktura je usla u red");
+  assert.ok(!moji.some((r) => r.issuedOn === "2026-04-04"), "tudji dokument je vidljiv");
+
+  // Bez opsega nema nijednog reda.
+  assert.equal((await unlinkedCorrectiveDocuments({ customerIds: [] })).length, 0);
 });

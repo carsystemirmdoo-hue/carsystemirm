@@ -169,6 +169,49 @@ export async function ledgerLines(
 }
 
 /**
+ * Korektivni dokumenti bez dokazane veze sa originalom.
+ *
+ * Povrat, storno i knjižno odobrenje se PRIKAZUJU u svojim kofama, ali ne
+ * umanjuju neto dok se ne poveže sa dokumentom koji ispravljaju. Veza traži
+ * izričitu referencu u dokumentu, a nijedan stvaran uzorak je još ne pokazuje —
+ * pa je danas ovaj red jednak spisku svih korektivnih dokumenata.
+ *
+ * Red postoji upravo zato: bez njega bi razlika između bruto i neto prometa
+ * bila nevidljiva, i neko bi je pripisao grešci u računu.
+ */
+export async function unlinkedCorrectiveDocuments(
+  scope: LedgerScope,
+  filter?: { limit?: number },
+): Promise<
+  { invoiceId: string; issuedOn: string; documentKind: string; bucket: LedgerBucket; lines: number; amount: string }[]
+> {
+  const db = getDb();
+  const rows = await db.execute<{
+    invoice_id: string; issued_on: string; document_kind: string;
+    bucket: LedgerBucket; lines: number; amount: string;
+  }>(sql`
+    SELECT invoice_id, issued_on, document_kind, bucket,
+           count(*)::int AS lines,
+           coalesce(sum(line_amount), 0)::text AS amount
+      FROM effective_sales_ledger
+     WHERE ${scopeCondition(scope)}
+       AND NOT enters_net
+       AND bucket <> 'unclassified'
+     GROUP BY invoice_id, issued_on, document_kind, bucket
+     ORDER BY issued_on DESC
+     LIMIT ${filter?.limit ?? 200}
+  `);
+  return rows.map((r) => ({
+    invoiceId: r.invoice_id,
+    issuedOn: String(r.issued_on).slice(0, 10),
+    documentKind: r.document_kind,
+    bucket: r.bucket,
+    lines: r.lines,
+    amount: r.amount,
+  }));
+}
+
+/**
  * Stavke fakture za par (kupac, artikal) — dokazni materijal usaglašavanja.
  *
  * Vraća i identitet stavke, jer je upravo ta stavka jedini dokaz koji se

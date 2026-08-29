@@ -276,6 +276,8 @@ const RESETTABLE_TABLES = [
    * neuspelog `after()` hooka odbija bazu porukom „ne izgleda kao prazna test
    * meta". Kvar je izgledao kao greska u novom testu, a bio je u ciscenju.
    */
+  "source_document_lines",
+  "source_documents",
   "customer_contact_consents",
   "customer_account_tokens",
   "customer_message_outbox",

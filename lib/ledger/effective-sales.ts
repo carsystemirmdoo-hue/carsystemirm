@@ -169,6 +169,47 @@ export async function ledgerLines(
 }
 
 /**
+ * Stavke fakture za par (kupac, artikal) — dokazni materijal usaglašavanja.
+ *
+ * Vraća i identitet stavke, jer je upravo ta stavka jedini dokaz koji se
+ * kasnije može otvoriti. Ide kroz ledger, pa zamenjeni i sporni dokumenti ne
+ * mogu potvrditi nijedno pravilo cene.
+ */
+export async function reconciliationEvidence(
+  scope: LedgerScope,
+  input: { customerId: string; articleCode: string },
+): Promise<
+  {
+    invoiceId: string;
+    invoiceLineId: string;
+    issuedOn: string;
+    unitPrice: number;
+    discountPercent: number;
+  }[]
+> {
+  const db = getDb();
+  const rows = await db.execute<{
+    invoice_id: string; invoice_line_id: string; issued_on: string;
+    unit_price: string; discount_percent: string;
+  }>(sql`
+    SELECT invoice_id, invoice_line_id, issued_on, unit_price, discount_percent
+      FROM effective_sales_ledger
+     WHERE ${scopeCondition(scope)}
+       AND customer_id = ${input.customerId}
+       AND article_code = ${input.articleCode}
+       AND enters_net
+     ORDER BY issued_on, invoice_id, line_number
+  `);
+  return rows.map((r) => ({
+    invoiceId: r.invoice_id,
+    invoiceLineId: r.invoice_line_id,
+    issuedOn: String(r.issued_on).slice(0, 10),
+    unitPrice: Number(r.unit_price),
+    discountPercent: Number(r.discount_percent),
+  }));
+}
+
+/**
  * Poslednja FAKTURISANA cena za par (kupac, artikal).
  *
  * Vraća i datum, jer se bez njega ne sme prikazati: istorijska cena bez datuma

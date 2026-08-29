@@ -5,7 +5,7 @@ import { getDb } from "@/db/client";
 import { articles, priceRules } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { reconciliationEvidence } from "@/lib/ledger/effective-sales";
-import { reconcileRule } from "@/lib/pricing/reconciliation.mjs";
+import { reconcileRule, SUPPORTED_CURRENCY } from "@/lib/pricing/reconciliation.mjs";
 import {
   ACTOR_SYSTEM,
   rejectTransition,
@@ -78,6 +78,7 @@ export async function reconcilePriceRule(
       productScope: priceRules.productScope,
       articleId: priceRules.articleId,
       valueKind: priceRules.valueKind,
+      currency: priceRules.currency,
       discountPercent: priceRules.discountPercent,
       netPrice: priceRules.netPrice,
       effectiveFrom: priceRules.effectiveFrom,
@@ -100,6 +101,7 @@ export async function reconcilePriceRule(
   }
 
   const shaped = {
+    currency: rule.currency,
     customerScope: rule.customerScope,
     productScope: rule.productScope,
     valueKind: rule.valueKind,
@@ -116,7 +118,12 @@ export async function reconcilePriceRule(
    * nema ni izgovora da se „našlo nešto blizu".
    */
   let evidence: Awaited<ReturnType<typeof reconciliationEvidence>> = [];
-  if (rule.customerScope === "customer" && rule.productScope === "article" && rule.customerId) {
+  if (
+    rule.currency === SUPPORTED_CURRENCY &&
+    rule.customerScope === "customer" &&
+    rule.productScope === "article" &&
+    rule.customerId
+  ) {
     const article = rule.articleId
       ? await db
           .select({ code: articles.code })

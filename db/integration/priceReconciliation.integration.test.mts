@@ -83,6 +83,7 @@ async function fixture(over: {
 
 /** Pravilo dovedeno do `office_recorded` direktnim upisom stanja. */
 async function officeRecordedRule(f: { customerId: string; articleId: string }, over: {
+  currency?: string;
   valueKind?: string;
   discountPercent?: number | null;
   netPrice?: number | null;
@@ -94,7 +95,7 @@ async function officeRecordedRule(f: { customerId: string; articleId: string }, 
   const [row] = await db.sql<{ id: string }[]>`
     INSERT INTO price_rules
       (customer_scope, customer_id, product_scope, article_id, precedence_level,
-       scope_key, value_kind, discount_percent, net_price, effective_from,
+       scope_key, value_kind, discount_percent, net_price, currency, effective_from,
        effective_to, status, reason, office_recorded_by, office_recorded_at,
        office_record_note)
     VALUES (${over.customerScope ?? "customer"}, ${f.customerId},
@@ -102,7 +103,7 @@ async function officeRecordedRule(f: { customerId: string; articleId: string }, 
             ${`customer:${f.customerId}|article:${f.articleId}`},
             ${over.valueKind ?? "discount_percent"},
             ${over.discountPercent === undefined ? 15 : over.discountPercent},
-            ${over.netPrice ?? null},
+            ${over.netPrice ?? null}, ${over.currency ?? "RSD"},
             ${over.effectiveFrom ?? "2026-01-01"}, ${over.effectiveTo ?? null},
             'office_recorded', 'QA razlog', ${actor.id}, now(),
             'QA napomena o unosu')
@@ -336,4 +337,37 @@ test("paketna obrada vraca nalaz za svako pravilo koje ceka", async (t) => {
   assert.equal(results.length, 2);
   const outcomes = results.map((r) => r.outcome).sort();
   assert.deepEqual(outcomes, ["confirmed", "failed"]);
+});
+
+test("M-2: pravilo u drugoj valuti se ne potvrdjuje dinarskom fakturom", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { reconcilePriceRule } = await import("@/lib/pricing/reconciliation-service");
+
+  // Faktura NOSI trazeni uslov brojcano — jedina razlika je valuta pravila.
+  const f = await fixture({ unitPrice: 100, discountPercent: 10 });
+  const ruleId = await officeRecordedRule(f, {
+    currency: "EUR", valueKind: "net_price", discountPercent: null, netPrice: 90,
+  });
+
+  const out = await reconcilePriceRule(ruleId, actor);
+  assert.equal(out.outcome, "not_applicable", "pravilo u EUR je potvrdjeno RSD fakturom");
+
+  const row = await statusOf(ruleId);
+  assert.equal(row.status, "office_recorded");
+  assert.equal(row.reconciled_invoice_id, null);
+});
+
+test("M-2: isto pravilo u RSD se potvrdjuje — razlika je iskljucivo valuta", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { reconcilePriceRule } = await import("@/lib/pricing/reconciliation-service");
+
+  const f = await fixture({ unitPrice: 100, discountPercent: 10 });
+  const ruleId = await officeRecordedRule(f, {
+    currency: "RSD", valueKind: "net_price", discountPercent: null, netPrice: 90,
+  });
+
+  assert.equal((await reconcilePriceRule(ruleId, actor)).outcome, "confirmed");
+  assert.equal((await statusOf(ruleId)).status, "confirmed");
 });

@@ -5,6 +5,7 @@ import { Badge, Field, PortalButton } from "@/components/portal/PortalPrimitives
 import {
   issueInvitationAction,
   proposeContactAction,
+  recordOfflineConsentAction,
   setAccountStatusAction,
   type AccountActionState,
 } from "@/app/portal/kupci/nalozi/actions";
@@ -50,7 +51,12 @@ export function AccountsAdmin({
     setAccountStatusAction,
     INITIAL,
   );
+  const [consentState, consentAction, savingConsent] = useActionState(
+    recordOfflineConsentAction,
+    INITIAL,
+  );
   const [openId, setOpenId] = useState<string | null>(null);
+  const [consentId, setConsentId] = useState<string | null>(null);
 
   return (
     <>
@@ -210,6 +216,18 @@ export function AccountsAdmin({
                         >
                           {openId === account.id ? "Zatvori" : "Promeni stanje"}
                         </PortalButton>
+                        <PortalButton
+                          variant="ghost"
+                          onClick={() =>
+                            setConsentId(
+                              consentId === account.id ? null : account.id,
+                            )
+                          }
+                        >
+                          {consentId === account.id
+                            ? "Zatvori"
+                            : "Evidentiraj saglasnost"}
+                        </PortalButton>
                       </td>
                     ) : null}
                   </tr>
@@ -238,6 +256,63 @@ export function AccountsAdmin({
             </Field>
             <PortalButton type="submit" variant="primary" disabled={changing}>
               {changing ? "Čuvanje…" : "Sačuvaj"}
+            </PortalButton>
+          </form>
+        ) : null}
+
+        {canManage && consentId ? (
+          <form action={consentAction} className="portal-form">
+            <input type="hidden" name="accountId" value={consentId} />
+            <h3>Odluka doneta van sistema</h3>
+            <p>
+              Zapisujete <strong>kupčevu</strong> odluku, ne svoju. Zapis nosi
+              vaš potpis i referencu na zahtev. Ovo ne utiče na nalog, cene,
+              dokumente ni prijavu.
+            </p>
+            {consentState.error ? (
+              <div className="portal-login-error" role="alert">
+                <span>
+                  <strong>Nije evidentirano</strong>
+                  <small>{consentState.error}</small>
+                </span>
+              </div>
+            ) : null}
+            {consentState.ok ? (
+              <p className="portal-login-hint" role="status">
+                {consentState.ok}
+              </p>
+            ) : null}
+            <Field label="Svrha" required>
+              <select name="purpose" defaultValue="email_marketing" required>
+                <option value="email_marketing">Obaveštenja e-poštom</option>
+                <option value="ad_personalization">Prilagođavanje oglasa</option>
+              </select>
+            </Field>
+            <Field label="Odluka kupca" required>
+              {/*
+                * Povlačenje je podrazumevano: to je odluka koja najčešće stiže
+                * van sistema — telefonom ili pisanim zahtevom.
+                */}
+              <select name="action" defaultValue="withdrawn" required>
+                <option value="withdrawn">Povukao saglasnost</option>
+                <option value="granted">Dao saglasnost</option>
+              </select>
+            </Field>
+            <Field
+              label="Referenca na zahtev"
+              required
+              hint={'Kratka referenca, npr. „telefonski zahtev 12.09." — NE prepisujte sadržaj poruke.'}
+            >
+              <input
+                type="text"
+                name="requestReference"
+                minLength={3}
+                maxLength={300}
+                required
+              />
+            </Field>
+            <PortalButton type="submit" variant="primary" disabled={savingConsent}>
+              {savingConsent ? "Čuvanje…" : "Evidentiraj"}
             </PortalButton>
           </form>
         ) : null}

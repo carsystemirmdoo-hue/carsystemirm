@@ -9,6 +9,10 @@ import {
   setCustomerAccountStatus,
 } from "@/lib/customers/account-service";
 import {
+  ConsentError,
+  recordOfflineConsentDecision,
+} from "@/lib/customers/consent-service";
+import {
   issueInvitation,
   markOutboxHandedOver,
 } from "@/lib/customers/invitation-service";
@@ -190,5 +194,72 @@ export async function setAccountStatusAction(
   return {
     error: null,
     ok: "Stanje naloga je promenjeno; sve postojeće sesije tog naloga su opozvane.",
+  };
+}
+
+const consentSchema = z.object({
+  accountId: z.string().uuid(),
+  purpose: z.enum(["email_marketing", "ad_personalization"]),
+  action: z.enum(["granted", "withdrawn"]),
+  requestReference: z.string().trim().min(3).max(300),
+});
+
+/**
+ * Kancelarija evidentira saglasnost koju je kupac doneo VAN sistema.
+ *
+ * Kupac sme da opozove saglasnost telefonom, e-poštom, pisanim zahtevom ili
+ * lično. Dok to nije moglo da se evidentira, u sistemu je stajao kao saglasan —
+ * teže pravilo je proizvodilo netačan zapis.
+ *
+ * Kapija je `customer_accounts:manage`: komercijalista bez tog paketa ne može
+ * dirati tuđu saglasnost.
+ */
+export async function recordOfflineConsentAction(
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  const actor = await requireCapability(
+    "customer_accounts:manage",
+    "/portal/kupci/nalozi",
+  );
+
+  const parsed = consentSchema.safeParse({
+    accountId: formData.get("accountId"),
+    purpose: formData.get("purpose"),
+    action: formData.get("action"),
+    requestReference: formData.get("requestReference") ?? "",
+  });
+  if (!parsed.success) {
+    return {
+      error:
+        "Izaberite svrhu i odluku, i unesite referencu na zahtev (najmanje 3 znaka).",
+      ok: null,
+    };
+  }
+
+  let result: { recorded: boolean; reason: string | null };
+  try {
+    result = await recordOfflineConsentDecision(
+      {
+        customerUserId: parsed.data.accountId,
+        purpose: parsed.data.purpose,
+        action: parsed.data.action,
+        requestReference: parsed.data.requestReference,
+      },
+      { kind: "staff", id: actor.id, name: actor.name, role: actor.role },
+    );
+  } catch (error) {
+    if (error instanceof ConsentError) return { error: error.message, ok: null };
+    throw error;
+  }
+
+  revalidatePath("/portal/kupci/nalozi");
+  return {
+    error: null,
+    ok: result.recorded
+      ? parsed.data.action === "withdrawn"
+        ? "Povlačenje saglasnosti je evidentirano. Nalog, cene i prijava ostaju nepromenjeni."
+        : "Pristanak je evidentiran."
+      : (result.reason ?? "Stanje je već takvo."),
   };
 }

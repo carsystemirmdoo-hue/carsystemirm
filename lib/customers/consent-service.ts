@@ -12,6 +12,7 @@ import {
   ConsentError,
   CURRENT_CONSENT_TEXT_VERSION,
   effectiveConsents,
+  isRedundantConsentEvent,
   rejectConsentEvent,
 } from "@/lib/customers/consent.mjs";
 
@@ -89,7 +90,7 @@ export async function recordConsentEvent(
     note?: string | null;
   },
   actor: ConsentActor,
-): Promise<void> {
+): Promise<{ recorded: boolean; reason: string | null }> {
   const consentTextVersion =
     input.consentTextVersion ?? CURRENT_CONSENT_TEXT_VERSION;
   const recordedBy = actor.kind === "staff" ? actor.id : null;
@@ -100,6 +101,7 @@ export async function recordConsentEvent(
     source: input.source,
     consentTextVersion,
     recordedBy,
+    note: input.note,
   });
   if (refusal) throw new ConsentError(refusal, "bad_event");
 
@@ -114,6 +116,32 @@ export async function recordConsentEvent(
       "Saglasnost se upisuje isključivo za sopstveni nalog.",
       "forbidden",
     );
+  }
+
+  /*
+   * Ponovljena ISTA odluka se ne upisuje.
+   *
+   * Append-only dnevnik beleži promene, ne ponovljene tvrdnje o istom stanju.
+   * Dvaput kliknuto „povuci" ostavilo bi dva identična reda, a spisak koji se
+   * puni istim redom prestaje da bude čitljiv kao istorija odluka.
+   *
+   * Ovo NIJE tiho progutan poziv: pozivalac dobija `recorded: false` i razlog,
+   * pa ekran može reći da je stanje već takvo.
+   */
+  const current = await loadConsentState(input.customerUserId);
+  if (
+    isRedundantConsentEvent(current[input.purpose], {
+      action: input.action,
+      consentTextVersion,
+    })
+  ) {
+    return {
+      recorded: false,
+      reason:
+        input.action === "withdrawn"
+          ? "Saglasnost je već povučena — nov zapis nije potreban."
+          : "Saglasnost po istom tekstu već važi — nov zapis nije potreban.",
+    };
   }
 
   const db = getDb();
@@ -157,14 +185,58 @@ export async function recordConsentEvent(
           verzijaTeksta: consentTextVersion,
         },
         reason:
-          input.action === "granted"
-            ? "Kupac dao saglasnost."
-            : "Kupac povukao saglasnost.",
+          input.source === "office_recorded_offline"
+            ? `Kancelarija evidentirala odluku donetu van sistema: ${
+                input.action === "granted" ? "pristanak" : "povlačenje"
+              }.`
+            : input.action === "granted"
+              ? "Kupac dao saglasnost."
+              : "Kupac povukao saglasnost.",
         correlationId,
       },
       tx,
     );
   });
+
+  return { recorded: true, reason: null };
+}
+
+/**
+ * Kancelarija/gazda evidentira odluku koju je kupac doneo VAN sistema.
+ *
+ * Zaseban ulaz, a ne zastavica na `recordConsentEvent`, zato što je ovo druga
+ * radnja sa drugom kapijom: kupac odlučuje o sebi, zaposleni ZAPISUJE tuđu
+ * odluku i za to odgovara potpisom i referencom na zahtev.
+ *
+ * Kapiju (`customer_accounts:manage`) proverava pozivalac; ovde se traži da
+ * akter bude zaposleni, jer bi `kind: "customer"` zaobišao potpis.
+ */
+export async function recordOfflineConsentDecision(
+  input: {
+    customerUserId: string;
+    purpose: ConsentPurpose;
+    action: ConsentAction;
+    /** Kratka referenca na zahtev — ne sadržaj privatne poruke. */
+    requestReference: string;
+  },
+  actor: Extract<ConsentActor, { kind: "staff" }>,
+): Promise<{ recorded: boolean; reason: string | null }> {
+  if (actor.kind !== "staff") {
+    throw new ConsentError(
+      "Offline odluku evidentira zaposleni, ne kupac.",
+      "forbidden",
+    );
+  }
+  return recordConsentEvent(
+    {
+      customerUserId: input.customerUserId,
+      purpose: input.purpose,
+      action: input.action,
+      source: "office_recorded_offline",
+      note: input.requestReference,
+    },
+    actor,
+  );
 }
 
 export { ConsentError };

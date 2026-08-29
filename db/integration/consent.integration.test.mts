@@ -219,9 +219,11 @@ test("kupac ne moze upisati saglasnost za tudji nalog", async (t) => {
   assert.equal(count, 0, "odbijen upis je ipak nesto ostavio");
 });
 
-test("kancelarija sme da evidentira offline pristanak, ali ne i povlacenje", async (t) => {
+test("kancelarija evidentira i offline pristanak i offline povlacenje", async (t) => {
   if (guard(t)) return;
-  const { recordConsentEvent } = await import("@/lib/customers/consent-service");
+  const { loadConsentState, recordOfflineConsentDecision } = await import(
+    "@/lib/customers/consent-service"
+  );
   await clearConsents();
 
   const staff = {
@@ -231,30 +233,291 @@ test("kancelarija sme da evidentira offline pristanak, ali ne i povlacenje", asy
     role: "kancelarija",
   };
 
+  await recordOfflineConsentDecision(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "granted",
+      requestReference: "Potpisan formular na sajmu",
+    },
+    staff,
+  );
+  assert.equal((await loadConsentState(fixture.accountA)).email_marketing.granted, true);
+
+  /*
+   * Ovo je jezgro izmene: kupac je opozvao telefonom, i to sada MOZE da se
+   * evidentira. Ranije nije moglo, pa bi u sistemu i dalje stajao kao saglasan.
+   */
+  const povuceno = await recordOfflineConsentDecision(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "withdrawn",
+      requestReference: "Telefonski zahtev 12.09.",
+    },
+    staff,
+  );
+  assert.equal(povuceno.recorded, true);
+  assert.equal(
+    (await loadConsentState(fixture.accountA)).email_marketing.granted,
+    false,
+    "effective status posle offline povlacenja nije false",
+  );
+});
+
+test("offline povlacenje radi i za pristanak dat KROZ PORTAL", async (t) => {
+  if (guard(t)) return;
+  const { loadConsentHistory, loadConsentState, recordConsentEvent,
+          recordOfflineConsentDecision } = await import(
+    "@/lib/customers/consent-service"
+  );
+  await clearConsents();
+
+  // Pristanak kroz portal…
+  await recordConsentEvent(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "ad_personalization",
+      action: "granted",
+      source: "customer_self_service",
+    },
+    asCustomer(),
+  );
+
+  // …pa povlacenje evidentirano u kancelariji.
+  await recordOfflineConsentDecision(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "ad_personalization",
+      action: "withdrawn",
+      requestReference: "Pisani zahtev, protokol 41/26",
+    },
+    { kind: "staff", id: fixture.staffId, name: fixture.staffName, role: "kancelarija" },
+  );
+
+  assert.equal(
+    (await loadConsentState(fixture.accountA)).ad_personalization.granted,
+    false,
+  );
+  const istorija = await loadConsentHistory(fixture.accountA);
+  assert.equal(istorija.length, 2, "raniji zapis je nestao");
+  assert.deepEqual(
+    istorija.map((r) => r.source),
+    ["customer_self_service", "office_recorded_offline"],
+  );
+});
+
+test("kupac sam povlaci pristanak koji je evidentiran offline", async (t) => {
+  if (guard(t)) return;
+  const { loadConsentState, recordConsentEvent, recordOfflineConsentDecision } =
+    await import("@/lib/customers/consent-service");
+  await clearConsents();
+
+  await recordOfflineConsentDecision(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "granted",
+      requestReference: "Formular sa sajma",
+    },
+    { kind: "staff", id: fixture.staffId, name: fixture.staffName, role: "kancelarija" },
+  );
+
+  await recordConsentEvent(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "withdrawn",
+      source: "customer_self_service",
+    },
+    asCustomer(),
+  );
+
+  assert.equal(
+    (await loadConsentState(fixture.accountA)).email_marketing.granted,
+    false,
+  );
+});
+
+test("ponovljeno isto povlacenje ne pravi drugi red", async (t) => {
+  if (guard(t)) return;
+  const { loadConsentHistory, recordConsentEvent } = await import(
+    "@/lib/customers/consent-service"
+  );
+  await clearConsents();
+
   await recordConsentEvent(
     {
       customerUserId: fixture.accountA,
       purpose: "email_marketing",
       action: "granted",
-      source: "office_recorded_offline",
-      note: "Potpisan formular na sajmu",
+      source: "customer_self_service",
     },
-    staff,
+    asCustomer(),
   );
+  const prvo = await recordConsentEvent(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "withdrawn",
+      source: "customer_self_service",
+    },
+    asCustomer(),
+  );
+  const drugo = await recordConsentEvent(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "withdrawn",
+      source: "customer_self_service",
+    },
+    asCustomer(),
+  );
+
+  assert.equal(prvo.recorded, true);
+  assert.equal(drugo.recorded, false, "ponovljeno povlacenje je napravilo duplikat");
+  assert.match(drugo.reason ?? "", /vec povucena|već povučena/);
+  assert.equal((await loadConsentHistory(fixture.accountA)).length, 2);
+});
+
+test("re-grant posle povlacenja trazi nov eksplicitan dogadjaj", async (t) => {
+  if (guard(t)) return;
+  const { loadConsentHistory, loadConsentState, recordConsentEvent } =
+    await import("@/lib/customers/consent-service");
+  await clearConsents();
+
+  for (const action of ["granted", "withdrawn", "granted"] as const) {
+    await recordConsentEvent(
+      {
+        customerUserId: fixture.accountA,
+        purpose: "email_marketing",
+        action,
+        source: "customer_self_service",
+      },
+      asCustomer(),
+    );
+  }
+
+  const istorija = await loadConsentHistory(fixture.accountA);
+  assert.equal(istorija.length, 3, "re-grant nije zabelezen kao nov dogadjaj");
+  assert.equal(
+    (await loadConsentState(fixture.accountA)).email_marketing.granted,
+    true,
+  );
+});
+
+test("povlacenje ne dira stanje naloga", async (t) => {
+  if (guard(t)) return;
+  const { recordOfflineConsentDecision } = await import(
+    "@/lib/customers/consent-service"
+  );
+  await clearConsents();
+
+  const [pre] = await db.sql<{ status: string; session_version: number }[]>`
+    SELECT status, session_version FROM customer_users WHERE id = ${fixture.accountA}`;
+
+  await recordOfflineConsentDecision(
+    {
+      customerUserId: fixture.accountA,
+      purpose: "email_marketing",
+      action: "withdrawn",
+      requestReference: "Telefonski zahtev",
+    },
+    { kind: "staff", id: fixture.staffId, name: fixture.staffName, role: "kancelarija" },
+  );
+
+  const [posle] = await db.sql<{ status: string; session_version: number }[]>`
+    SELECT status, session_version FROM customer_users WHERE id = ${fixture.accountA}`;
+
+  assert.equal(posle.status, pre.status, "povlacenje je promenilo stanje naloga");
+  assert.equal(
+    posle.session_version,
+    pre.session_version,
+    "povlacenje je opozvalo sesiju",
+  );
+});
+
+test("offline zapis bez reference na zahtev se odbija", async (t) => {
+  if (guard(t)) return;
+  const { recordOfflineConsentDecision } = await import(
+    "@/lib/customers/consent-service"
+  );
+  await clearConsents();
+
+  await assert.rejects(
+    () =>
+      recordOfflineConsentDecision(
+        {
+          customerUserId: fixture.accountA,
+          purpose: "email_marketing",
+          action: "withdrawn",
+          requestReference: "x",
+        },
+        { kind: "staff", id: fixture.staffId, name: fixture.staffName, role: "kancelarija" },
+      ),
+    /referencu na zahtev/,
+  );
+});
+
+test("komercijalista bez sposobnosti ne moze menjati tudju saglasnost", async (t) => {
+  if (guard(t)) return;
+  const { resolveCapabilities } = await import("@/lib/authz/permissions.mjs");
+  const { recordOfflineConsentDecision } = await import(
+    "@/lib/customers/consent-service"
+  );
+  await clearConsents();
+
+  /*
+   * Kapija je `customer_accounts:manage` i proverava je server akcija.
+   * Ovde se dokazuje da je komercijalista sa svojim uobicajenim paketima
+   * NEMA — dakle ruta ga odbija pre nego sto servis uopste bude pozvan.
+   */
+  const rep = resolveCapabilities("komercijalista", ["cene_predlog", "mapiranja"]);
+  assert.equal(
+    rep.has("customer_accounts:manage"),
+    false,
+    "komercijalista je dobio pravo nad tudjom saglasnoscu",
+  );
+
+  // A i sam servis odbija kupca koji bi se predstavio kao akter nad tudjim nalogom.
+  await assert.rejects(
+    () =>
+      recordOfflineConsentDecision(
+        {
+          customerUserId: fixture.accountB,
+          purpose: "email_marketing",
+          action: "withdrawn",
+          requestReference: "pokusaj",
+        },
+        // @ts-expect-error namerno pogresan akter — servis mora da ga odbije
+        { kind: "customer", accountId: fixture.accountA, email: fixture.emailA, customerName: "X" },
+      ),
+    /zaposleni, ne kupac|sopstveni nalog/,
+  );
+});
+
+test("kupac ne moze povuci saglasnost drugog kupca", async (t) => {
+  if (guard(t)) return;
+  const { recordConsentEvent } = await import("@/lib/customers/consent-service");
+  await clearConsents();
 
   await assert.rejects(
     () =>
       recordConsentEvent(
         {
-          customerUserId: fixture.accountA,
+          customerUserId: fixture.accountB,
           purpose: "email_marketing",
           action: "withdrawn",
-          source: "office_recorded_offline",
+          source: "customer_self_service",
         },
-        staff,
+        asCustomer(),
       ),
-    /kupac radi sam/,
+    /sopstveni nalog/,
   );
+
+  const [{ count }] = await db.sql<{ count: number }[]>`
+    SELECT count(*)::int AS count FROM customer_contact_consents`;
+  assert.equal(count, 0);
 });
 
 /* -------------------------------------------------------------------------

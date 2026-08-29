@@ -120,6 +120,13 @@
       "when": 1787588098274,
       "tag": "0016_mapping_revoked",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1787588098275,
+      "tag": "0017_offline_consent_withdrawal",
+      "breakpoints": true
     }
   ]
 }

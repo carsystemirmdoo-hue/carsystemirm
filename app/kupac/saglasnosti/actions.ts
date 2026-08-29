@@ -40,8 +40,9 @@ export async function setConsentAction(
     return { error: "Radnja nije prepoznata.", ok: null };
   }
 
+  let result: { recorded: boolean; reason: string | null };
   try {
-    await recordConsentEvent(
+    result = await recordConsentEvent(
       {
         customerUserId: session.accountId,
         purpose: parsed.data.purpose as "email_marketing" | "ad_personalization",
@@ -62,11 +63,17 @@ export async function setConsentAction(
   }
 
   revalidatePath("/kupac/saglasnosti");
+  /*
+   * Ponovljena ista odluka nije greška, ali se ne prikazuje kao nov zapis —
+   * inače bi kupac video „povučeno" i drugi put, pa poverovao da prvi put nije
+   * uspelo.
+   */
   return {
     error: null,
-    ok:
-      parsed.data.action === "granted"
+    ok: result.recorded
+      ? parsed.data.action === "granted"
         ? "Saglasnost je zabeležena."
-        : "Saglasnost je povučena. Raniji zapis ostaje u istoriji.",
+        : "Saglasnost je povučena. Raniji zapis ostaje u istoriji."
+      : (result.reason ?? "Stanje je već takvo."),
   };
 }

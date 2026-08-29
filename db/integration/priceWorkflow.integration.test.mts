@@ -329,6 +329,8 @@ test("office_recorded ucestvuje u ceni, ali preview ga NE prijavljuje kao potvrd
     customerId: fixture.customerId,
     articleId: fixture.articleId,
     onDate: "2026-06-15",
+    // Od F-2 preview trazi posmatraca: `customerId` mora proci kapiju pre upita.
+    viewer: asPortalUser(fixture.owner, []),
   });
   assert.ok(preview.winner, "office_recorded pravilo ne ucestvuje u ceni");
   assert.equal(preview.winner.status, "office_recorded");

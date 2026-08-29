@@ -38,6 +38,28 @@ let fixture: {
   actorId: string;
 };
 
+/**
+ * Gazda kao posmatrac.
+ *
+ * `previewPricing`, `listRuleConflicts` i `listPriceRules` od F-2 traze
+ * posmatraca, jer `customerId` po pravilu stize iz adrese i mora proci kapiju
+ * pre nego sto udje u upit. Ovaj fajl dokazuje MATRICU PRVENSTVA, pa namerno
+ * gleda kroz nalog koji vidi sve kupce — opseg komercijaliste se dokazuje u
+ * `pricingScope.integration.test.mts`, da se dve stvari ne mesaju u istom testu.
+ */
+function ownerViewer() {
+  return {
+    id: fixture.actorId,
+    email: `${fixture.actorId}@qa-1b.invalid`,
+    name: "QA gazda",
+    initials: "QA",
+    role: "gazda" as const,
+    active: true,
+    sessionVersion: 0,
+    permissions: [] as string[],
+  };
+}
+
 before(async () => {
   if (reason) return;
   ensureTestCryptoEnv();
@@ -158,6 +180,7 @@ test("svih 12 klasa: uzi opseg pobedjuje, kroz pravi SQL upit", async (t) => {
       customerId: fixture.customerId,
       articleId: fixture.articleId,
       onDate: "2026-06-15",
+      viewer: ownerViewer(),
     });
     assert.equal(preview.conflict.length, 0, `konflikt na klasi ${expected}`);
     assert.ok(preview.winner, `nema pobednika na klasi ${expected}`);
@@ -171,6 +194,7 @@ test("svih 12 klasa: uzi opseg pobedjuje, kroz pravi SQL upit", async (t) => {
     customerId: fixture.customerId,
     articleId: fixture.articleId,
     onDate: "2026-06-15",
+    viewer: ownerViewer(),
   });
   assert.equal(prazno.winner, null);
 });
@@ -187,6 +211,7 @@ test("kupac bez grupe ne dobija nijedno grupno pravilo", async (t) => {
     customerId: fixture.otherCustomerId,
     articleId: fixture.articleId,
     onDate: "2026-06-15",
+    viewer: ownerViewer(),
   });
   assert.equal(preview.winner, null, "grupno pravilo je pokrilo kupca van grupe");
   assert.equal(preview.considered.length, 0);
@@ -204,6 +229,7 @@ test("dva pravila iste klase i istog opsega daju konflikt, ne izbor", async (t) 
     customerId: fixture.customerId,
     articleId: fixture.articleId,
     onDate: "2026-06-15",
+    viewer: ownerViewer(),
   });
   assert.equal(preview.winner, null, "sistem je izabrao pobednika");
   assert.equal(preview.conflict.length, 2);
@@ -213,14 +239,16 @@ test("dva pravila iste klase i istog opsega daju konflikt, ne izbor", async (t) 
 test("izvestaj o konfliktima ne prijavljuje pravila koja se smenjuju kroz vreme", async (t) => {
   if (guard(t)) return;
   const { listRuleConflicts } = await import("@/lib/pricing/evaluation-service");
+  // Gazda: `customerIds: null` znaci „bez ogranicenja", ne „prazan opseg".
+  const OWNER_SCOPE = { seesAll: true, customerIds: null, groupIds: null };
 
   await db.sql`DELETE FROM price_rules`;
   await insertRule(1, { effectiveFrom: "2026-01-01", effectiveTo: "2026-05-31" });
   await insertRule(1, { effectiveFrom: "2026-06-01", effectiveTo: null });
-  assert.deepEqual(await listRuleConflicts(), []);
+  assert.deepEqual(await listRuleConflicts(OWNER_SCOPE), []);
 
   await insertRule(1, { effectiveFrom: "2026-06-15", effectiveTo: null });
-  const conflicts = await listRuleConflicts();
+  const conflicts = await listRuleConflicts(OWNER_SCOPE);
   assert.equal(conflicts.length, 1);
   assert.equal(conflicts[0].precedenceLevel, 1);
   assert.equal(conflicts[0].total, 2);
@@ -241,6 +269,7 @@ test("odobreno pravilo vazi, ali NIJE potvrdjeno iz BizniSofta", async (t) => {
     customerId: fixture.customerId,
     articleId: fixture.articleId,
     onDate: "2026-06-15",
+    viewer: ownerViewer(),
   });
   assert.ok(preview.winner);
   assert.equal(preview.winner.status, "approved_pending_biznisoft");
@@ -263,6 +292,7 @@ test("predlog koji niko nije odobrio ne utice na cenu", async (t) => {
       customerId: fixture.customerId,
       articleId: fixture.articleId,
       onDate: "2026-06-15",
+      viewer: ownerViewer(),
     });
     assert.equal(preview.winner, null, `stanje ${status} je uticalo na cenu`);
     await db.sql`DELETE FROM price_rules`;

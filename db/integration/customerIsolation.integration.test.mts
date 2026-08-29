@@ -107,26 +107,65 @@ test("kupac A ne vidi nijedan dokument kupca B", async (t) => {
   }
 });
 
-test("promena trazenog ID-a ne menja opseg — vraca se ID iz sesije", async (t) => {
+test("customerId dolazi iz veze nalog→kupac, a ne od pozivaoca", async (t) => {
   if (guard(t)) return;
-  const { resolveCustomerScope } = await import("@/lib/authz/customer-scope.mjs");
   const { loadCustomerDocuments } = await import("@/lib/customers/customer-queries");
   const seeded = await seedTwoCustomers();
 
-  // Kupac A pokušava da traži kupca B.
-  const scope = resolveCustomerScope({
-    sessionCustomerId: seeded.a.customerId,
-    requestedCustomerId: seeded.b.customerId,
-  });
-  assert.equal(scope.refused, true);
-  assert.equal(scope.customerId, seeded.a.customerId);
+  /*
+   * Ranije je ovaj test zvao `resolveCustomerScope`, koji je uzimao „trazeni"
+   * ID i vracao onaj iz sesije. Taj helper je uklonjen (postflight F-9) jer ga
+   * nijedna produkcijska putanja nije zvala — bio je bezbednosna kontrola koja
+   * se nigde ne izvrsava, sto je gore od njenog odsustva.
+   *
+   * Ono sto STVARNO drzi pravilo danas nema parametar za tudjeg kupca:
+   * `getCustomerSession` cita `customer_id` iz reda naloga, a `app/kupac`
+   * ne prima ni `searchParams` ni `params`. Zato se ovde dokazuje sama ta veza:
+   * ID naloga jednoznacno odredjuje kupca, i dokumenti pod tim ID-em ne sadrze
+   * nijedan tudji red.
+   */
+  const [vezaA] = await db.sql<{ customer_id: string }[]>`
+    SELECT customer_id FROM customer_users WHERE id = ${seeded.a.accountId}`;
+  const [vezaB] = await db.sql<{ customer_id: string }[]>`
+    SELECT customer_id FROM customer_users WHERE id = ${seeded.b.accountId}`;
 
-  // Upit sa razrešenim opsegom vraća isključivo dokumente kupca A.
-  const rows = await loadCustomerDocuments(scope.customerId);
+  assert.equal(vezaA.customer_id, seeded.a.customerId);
+  assert.equal(vezaB.customer_id, seeded.b.customerId);
+  assert.notEqual(vezaA.customer_id, vezaB.customer_id);
+
+  const zaA = await loadCustomerDocuments(vezaA.customer_id);
   const [{ count }] = await db.sql<{ count: number }[]>`
-    SELECT count(*)::int AS count FROM invoices WHERE customer_id = ${seeded.a.customerId}
-  `;
-  assert.equal(rows.length, count);
+    SELECT count(*)::int AS count FROM invoices WHERE customer_id = ${seeded.a.customerId}`;
+  assert.equal(zaA.length, count);
+
+  const idsB = new Set(
+    (await loadCustomerDocuments(vezaB.customer_id)).map((row) => row.id),
+  );
+  for (const row of zaA) {
+    assert.ok(!idsB.has(row.id), "dokument kupca B se pojavio u opsegu kupca A");
+  }
+});
+
+test("kupceva putanja nema nijednu funkciju koja prima tudji customerId", async (t) => {
+  if (guard(t)) return;
+  const { readFile } = await import("node:fs/promises");
+  const source = await readFile(
+    new URL("../../lib/customers/customer-queries.ts", import.meta.url),
+    "utf8",
+  );
+
+  /*
+   * Strukturna garancija umesto obecanja: nijedna izvezena funkcija u kupcevoj
+   * putanji ne sme imati drugi parametar za identitet kupca. Dok takav
+   * parametar ne postoji, „promena ID-a u adresi" nema gde da udje.
+   */
+  const potpisi = [...source.matchAll(/export async function (\w+)\(([^)]*)\)/g)];
+  assert.ok(potpisi.length > 0, "modul nema nijednu izvezenu funkciju");
+  for (const [, ime, argumenti] of potpisi) {
+    const pojave = (argumenti.match(/customerId/g) ?? []).length;
+    assert.equal(pojave, 1, `${ime} prima customerId ${pojave} puta`);
+    assert.match(argumenti.trim(), /^customerId: string/, ime);
+  }
 });
 
 test("prazan customer_id ne moze da izvrsi upit", async (t) => {

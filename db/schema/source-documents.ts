@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   date,
   index,
@@ -180,7 +181,16 @@ export const sourceDocuments = pgTable(
     ),
     index("source_documents_validation_idx").on(table.validationStatus),
     index("source_documents_review_idx").on(table.manualReview),
-    index("source_documents_invoice_idx").on(table.invoiceId),
+    /*
+     * Jedna faktura — najviše jedan izvorni dokument.
+     *
+     * Ledger spaja fakture i izvorne dokumente preko `invoice_id`; dva
+     * dokumenta na istu fakturu udvostručila bi svaki njen red u pogledu.
+     * Delimičan, jer `NULL` nosi sve što još nije proknjiženo.
+     */
+    uniqueIndex("source_documents_invoice_key")
+      .on(table.invoiceId)
+      .where(sql`${table.invoiceId} IS NOT NULL`),
   ],
 );
 

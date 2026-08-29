@@ -281,3 +281,39 @@ test("korektivni dokumenti bez veze imaju svoj red, u opsegu korisnika", async (
   // Bez opsega nema nijednog reda.
   assert.equal((await unlinkedCorrectiveDocuments({ customerIds: [] })).length, 0);
 });
+
+test("C-1: dva izvorna dokumenta na istu fakturu — baza odbija, promet se ne udvostrucuje", async (t) => {
+  if (guard(t)) return;
+  const first = await ingestMapped();
+
+  const [{ pre }] = await db.sql<{ pre: number }[]>`
+    SELECT count(*)::int AS pre FROM effective_sales_ledger`;
+  assert.equal(pre, 7);
+
+  /*
+   * Pokusaj da se ista faktura zakaci za jos jedan izvorni dokument.
+   *
+   * Ledger spaja fakture i izvorne dokumente preko `invoice_id`, pa bi drugi
+   * red udvostrucio SVAKI red te fakture — i to tiho, kao veci promet.
+   * Pre migracije 0022 ovaj upis je prolazio i ledger je skakao na 14.
+   */
+  await assert.rejects(
+    () => db.sql`
+      INSERT INTO source_documents
+        (file_hash, file_name, page_count, line_count, issuer_code,
+         business_document_type, business_document_number, external_partner_code,
+         document_date, parser_version, validation_status, revision_status,
+         manual_review, invoice_id)
+      SELECT ${randomUUID().replace(/-/g, "")}, 'drugi.pdf', page_count, line_count,
+             issuer_code, business_document_type, business_document_number,
+             external_partner_code, document_date, parser_version, 'valid',
+             'original', 'not_required', invoice_id
+        FROM source_documents WHERE id = ${first.sourceDocumentId}`,
+    /source_documents_invoice_key|duplicate key/i,
+    "baza je dozvolila drugi izvorni dokument na istu fakturu",
+  );
+
+  const [{ post }] = await db.sql<{ post: number }[]>`
+    SELECT count(*)::int AS post FROM effective_sales_ledger`;
+  assert.equal(post, 7, "promet je udvostrucen");
+});

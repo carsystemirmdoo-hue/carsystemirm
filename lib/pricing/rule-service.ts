@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, or, sql } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
 import { getDb } from "@/db/client";
 import {
@@ -17,6 +17,7 @@ import { resolveCapabilities } from "@/lib/authz/permissions.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { notify } from "@/lib/notifications/notification-service";
+import type { PricingScope } from "@/lib/pricing/pricing-scope";
 import {
   precedenceLabelFor,
   precedenceLevelFor,
@@ -403,12 +404,24 @@ export type PriceRuleView = PriceRuleRow & {
   officeRecordedByName: string | null;
 };
 
-/** Pravila sa čitljivim nazivima opsega, za ekrane. */
-export async function listPriceRules(filter?: {
-  statuses?: PriceRuleStatus[];
-  customerId?: string;
-  limit?: number;
-}): Promise<PriceRuleView[]> {
+/**
+ * Pravila sa čitljivim nazivima opsega, za ekrane.
+ *
+ * `scope` je OBAVEZAN. Ranije je ova funkcija vraćala sva pravila svakome ko
+ * ima `view:cene` — a taj capability ima i komercijalista sa paketom
+ * `cene_predlog`, koji nema `customers:view_all`. Postflight audit (F-2).
+ *
+ * Obavezan parametar je namerno: podrazumevana vrednost „bez ograničenja" je
+ * tačno greška koja se ne primeti pri dodavanju novog pozivaoca.
+ */
+export async function listPriceRules(
+  scope: PricingScope,
+  filter?: {
+    statuses?: PriceRuleStatus[];
+    customerId?: string;
+    limit?: number;
+  },
+): Promise<PriceRuleView[]> {
   const db = getDb();
   const conditions = [];
   if (filter?.statuses?.length) {
@@ -417,6 +430,9 @@ export async function listPriceRules(filter?: {
   if (filter?.customerId) {
     conditions.push(eq(priceRules.customerId, filter.customerId));
   }
+
+  const scopeCondition = priceRuleScopeCondition(scope);
+  if (scopeCondition) conditions.push(scopeCondition);
 
   /*
    * Imena ljudi se spajaju u upitu, ne dovlace posebno po redu.
@@ -462,6 +478,47 @@ export async function listPriceRules(filter?: {
     decidedByName: row.decidedByName,
     officeRecordedByName: row.officeRecordedByName,
   }));
+}
+
+/**
+ * SQL uslov koji ograničava pravila na opseg korisnika.
+ *
+ * Vraća `null` samo kada korisnik sme da vidi sve. U svakom drugom slučaju
+ * vraća uslov — uključujući `sql\`false\`` za prazan opseg, koji je jedini
+ * ispravan prevod za „komercijalista bez ijedne dodele".
+ *
+ * Šta korisnik sa ograničenim opsegom vidi:
+ *   - pravila za SVOJE kupce;
+ *   - grupna pravila samo za grupe koje sadrže bar jednog njegovog kupca;
+ *   - globalna pravila, jer ona dodiruju i njegove kupce a ne otkrivaju nikoga.
+ */
+function priceRuleScopeCondition(scope: PricingScope) {
+  if (scope.seesAll) return null;
+
+  const customerIds = scope.customerIds ?? [];
+  const groupIds = scope.groupIds ?? [];
+
+  const branches = [
+    // Globalno pravilo ne otkriva nijednog drugog kupca.
+    eq(priceRules.customerScope, "all"),
+  ];
+  if (customerIds.length > 0) {
+    branches.push(
+      and(
+        eq(priceRules.customerScope, "customer"),
+        inArray(priceRules.customerId, customerIds),
+      )!,
+    );
+  }
+  if (groupIds.length > 0) {
+    branches.push(
+      and(
+        eq(priceRules.customerScope, "group"),
+        inArray(priceRules.customerGroupId, groupIds),
+      )!,
+    );
+  }
+  return or(...branches);
 }
 
 export { PricingRuleError, WorkflowError };

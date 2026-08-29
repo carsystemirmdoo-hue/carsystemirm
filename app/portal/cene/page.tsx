@@ -2,9 +2,14 @@ import Link from "next/link";
 import { asc } from "drizzle-orm";
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
-import { articles, customers } from "@/db/schema";
+import { articles } from "@/db/schema";
 import { requireCapability } from "@/lib/authz/session";
 import { listRuleConflicts, previewPricing } from "@/lib/pricing/evaluation-service";
+import {
+  listScopedCustomers,
+  PricingScopeError,
+  resolvePricingScope,
+} from "@/lib/pricing/pricing-scope";
 import { precedenceLabelFor, PRECEDENCE_LEVELS } from "@/lib/pricing/precedence.mjs";
 import {
   PRICE_RULE_STATUS_LABELS,
@@ -25,32 +30,43 @@ export default async function PricesOverviewPage({
 }: {
   searchParams: Promise<{ kupac?: string; artikal?: string; datum?: string }>;
 }) {
-  await requireCapability("view:cene", "/portal/cene");
+  const user = await requireCapability("view:cene", "/portal/cene");
   const params = await searchParams;
 
   const db = getDb();
+  const scope = await resolvePricingScope(user);
+
   const [customerOptions, articleOptions, conflicts] = await Promise.all([
-    db
-      .select({ id: customers.id, name: customers.name, pib: customers.pib })
-      .from(customers)
-      .orderBy(asc(customers.name))
-      .limit(1000),
+    // Izbornik je već skopiran — ne nudi kupca kog korisnik ne sme da dodirne.
+    listScopedCustomers(user),
     db
       .select({ id: articles.id, code: articles.code, name: articles.name })
       .from(articles)
       .orderBy(asc(articles.code))
       .limit(1000),
-    listRuleConflicts(),
+    listRuleConflicts(scope),
   ]);
 
-  const preview =
-    params.kupac && params.artikal
-      ? await previewPricing({
-          customerId: params.kupac,
-          articleId: params.artikal,
-          onDate: params.datum,
-        })
-      : null;
+  /*
+   * `params.kupac` dolazi iz adrese. `previewPricing` ga provlači kroz
+   * `assertPricingCustomerAccess` PRE ijednog upita; odbijanje je 403, ne
+   * prazan rezultat — pokušaj mora biti vidljiv.
+   */
+  let preview = null;
+  let previewError: string | null = null;
+  if (params.kupac && params.artikal) {
+    try {
+      preview = await previewPricing({
+        customerId: params.kupac,
+        articleId: params.artikal,
+        onDate: params.datum,
+        viewer: user,
+      });
+    } catch (error) {
+      if (error instanceof PricingScopeError) previewError = error.message;
+      else throw error;
+    }
+  }
 
   return (
     <>
@@ -147,6 +163,15 @@ export default async function PricesOverviewPage({
             Provera traži bar jednog kupca i jedan artikal iz uvoza. Do tada nema
             šta da se proveri — i namerno se ne prikazuje primer.
           </p>
+        ) : null}
+
+        {previewError ? (
+          <div className="portal-login-error" role="alert">
+            <span>
+              <strong>Prikaz odbijen</strong>
+              <small>{previewError}</small>
+            </span>
+          </div>
         ) : null}
 
         {preview ? (

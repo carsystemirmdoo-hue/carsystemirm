@@ -1,11 +1,14 @@
 import { asc } from "drizzle-orm";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
-import { articles, customerGroups, customers } from "@/db/schema";
-import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { articles, customerGroups } from "@/db/schema";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
 import { listPriceRules } from "@/lib/pricing/rule-service";
+import {
+  listScopedCustomers,
+  resolvePricingScope,
+} from "@/lib/pricing/pricing-scope";
 import { RuleForm } from "../RuleForm";
 import { RuleTable } from "../RuleTable";
 
@@ -18,22 +21,15 @@ export default async function PriceRulesPage() {
   const db = getDb();
 
   /*
-   * Spisak kupaca u obrascu je ograničen na opseg korisnika.
+   * Isti opseg za obrazac i za spisak.
    *
-   * Servis to i sam proverava, ali obrazac koji nudi kupca kog korisnik ne sme
-   * da dodirne uči ga da pokušava — i pretvara zaštitu u prepreku umesto u
-   * granicu koja se ne vidi jer je nigde ne dodiruje.
+   * Ranije je obrazac bio skopiran, a spisak ispod nije — pa je write path bio
+   * zaštićen a read path nije. Postflight audit, F-2.
    */
-  const assigned = seesAllCustomers(user)
-    ? null
-    : await loadAssignedCustomerIds(user.id);
+  const scope = await resolvePricingScope(user);
 
-  const [allCustomers, groups, articleRows, rules] = await Promise.all([
-    db
-      .select({ id: customers.id, name: customers.name, pib: customers.pib })
-      .from(customers)
-      .orderBy(asc(customers.name))
-      .limit(1000),
+  const [scopedCustomers, groups, articleRows, rules] = await Promise.all([
+    listScopedCustomers(user),
     db
       .select({ id: customerGroups.id, name: customerGroups.name })
       .from(customerGroups)
@@ -49,12 +45,8 @@ export default async function PriceRulesPage() {
       .from(articles)
       .orderBy(asc(articles.code))
       .limit(1000),
-    listPriceRules({ limit: 200 }),
+    listPriceRules(scope, { limit: 200 }),
   ]);
-
-  const scopedCustomers = assigned
-    ? allCustomers.filter((customer) => assigned.includes(customer.id))
-    : allCustomers;
 
   const productGroups = [
     ...new Set(articleRows.map((row) => row.productGroup).filter(Boolean)),

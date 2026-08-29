@@ -19,6 +19,11 @@ import {
   isBiznisoftConfirmed,
   isOfficeRecorded,
 } from "@/lib/pricing/workflow.mjs";
+import {
+  assertPricingCustomerAccess,
+  type PricingScope,
+} from "@/lib/pricing/pricing-scope";
+import type { PortalUser } from "@/lib/authz/user-repository";
 
 /**
  * Stanja u kojima pravilo UOPŠTE učestvuje u odlučivanju.
@@ -76,7 +81,17 @@ export async function previewPricing(input: {
   customerId: string;
   articleId: string;
   onDate?: string;
+  /**
+   * Korisnik koji traži cenu. OBAVEZAN.
+   *
+   * `customerId` po pravilu stiže iz `searchParams`, pa mora proći kapiju pre
+   * nego što uđe u ijedan upit — postflight audit, F-2. Parametar je obavezan
+   * da bi novi pozivalac morao da se izjasni, umesto da nasledi rupu.
+   */
+  viewer: PortalUser;
 }): Promise<PricingPreview> {
+  await assertPricingCustomerAccess(input.viewer, input.customerId);
+
   const onDate = input.onDate ?? new Date().toISOString().slice(0, 10);
   const db = getDb();
 
@@ -206,10 +221,24 @@ export function resolveNetPrice(
  * artikla. Konflikt otkriven tek pri pogledu na jedan artikal je konflikt koji
  * je već neko vreme davao pogrešan odgovor.
  */
-export async function listRuleConflicts(): Promise<
+export async function listRuleConflicts(
+  scope: PricingScope,
+): Promise<
   { precedenceLevel: number; scopeKey: string; ruleIds: string[]; total: number }[]
 > {
   const db = getDb();
+
+  /*
+   * Konflikti se takođe skopiraju.
+   *
+   * Neskopiran izveštaj bi komercijalisti otkrio `scope_key` tuđih pravila —
+   * a taj ključ sadrži ID kupca. Postflight audit, F-2.
+   */
+  const scopeCondition = conflictScopeCondition(scope);
+  const baseWhere = scopeCondition
+    ? and(inArray(priceRules.status, ACTIVE_RULE_STATUSES), scopeCondition)
+    : inArray(priceRules.status, ACTIVE_RULE_STATUSES);
+
   const rows = await db
     .select({
       precedenceLevel: priceRules.precedenceLevel,
@@ -218,7 +247,7 @@ export async function listRuleConflicts(): Promise<
       total: sql<number>`count(*)::int`,
     })
     .from(priceRules)
-    .where(inArray(priceRules.status, ACTIVE_RULE_STATUSES))
+    .where(baseWhere)
     .groupBy(priceRules.precedenceLevel, priceRules.scopeKey)
     .having(sql`count(*) > 1`);
 
@@ -264,6 +293,32 @@ export async function listRuleConflicts(): Promise<
     }
   }
   return conflicts;
+}
+
+/** Isti opseg kao `priceRuleScopeCondition`, izražen nad `price_rules`. */
+function conflictScopeCondition(scope: PricingScope) {
+  if (scope.seesAll) return null;
+  const customerIds = scope.customerIds ?? [];
+  const groupIds = scope.groupIds ?? [];
+
+  const branches = [eq(priceRules.customerScope, "all")];
+  if (customerIds.length > 0) {
+    branches.push(
+      and(
+        eq(priceRules.customerScope, "customer"),
+        inArray(priceRules.customerId, customerIds),
+      )!,
+    );
+  }
+  if (groupIds.length > 0) {
+    branches.push(
+      and(
+        eq(priceRules.customerScope, "group"),
+        inArray(priceRules.customerGroupId, groupIds),
+      )!,
+    );
+  }
+  return or(...branches);
 }
 
 export type { PricingRuleError };

@@ -2,6 +2,7 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { listPriceRules } from "@/lib/pricing/rule-service";
+import { resolvePricingScope } from "@/lib/pricing/pricing-scope";
 import { RuleTable } from "../RuleTable";
 
 export const dynamic = "force-dynamic";
@@ -15,13 +16,25 @@ export const dynamic = "force-dynamic";
  * nema svoje mesto, a upravo ona je tihi otkaz koji ovaj model treba da hvata.
  */
 export default async function PriceApprovalPage() {
-  const user = await requireCapability("view:cene", "/portal/cene/odobravanje");
+  /*
+   * Kapija je UŽA od `view:cene`.
+   *
+   * Ranije je red čekanja odluka bio otvoren svakome ko vidi cene — dakle i
+   * komercijalisti sa paketom `cene_predlog`, koji ovde nema šta da radi.
+   * Postflight audit, F-2.
+   */
+  const user = await requireCapability(
+    "view:cene_odobravanje",
+    "/portal/cene/odobravanje",
+  );
   const canDecide = can(user, "prices:approve") || can(user, "prices:apply");
+  const scope = await resolvePricingScope(user);
 
-  const [waiting, approved, failed] = await Promise.all([
-    listPriceRules({ statuses: ["pending_approval"] }),
-    listPriceRules({ statuses: ["approved_pending_biznisoft"] }),
-    listPriceRules({ statuses: ["reconciliation_failed"] }),
+  const [waiting, approved, recorded, failed] = await Promise.all([
+    listPriceRules(scope, { statuses: ["pending_approval"] }),
+    listPriceRules(scope, { statuses: ["approved_pending_biznisoft"] }),
+    listPriceRules(scope, { statuses: ["office_recorded"] }),
+    listPriceRules(scope, { statuses: ["reconciliation_failed"] }),
   ]);
 
   return (
@@ -45,6 +58,15 @@ export default async function PriceApprovalPage() {
         </p>
       </section>
       <RuleTable rows={approved} showActions={canDecide} />
+
+      <section className="portal-panel">
+        <h2>Evidentiran unos — čeka usaglašavanje sa fakturom ({recorded.length})</h2>
+        <p>
+          Kancelarija je evidentirala unos u BizniSoft. To je tvrdnja čoveka, ne
+          dokaz — potvrdu daje tek usaglašavanje sa fakturom.
+        </p>
+      </section>
+      <RuleTable rows={recorded} showActions={canDecide} />
 
       {failed.length > 0 ? (
         <>

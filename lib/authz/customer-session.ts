@@ -1,5 +1,5 @@
 import "server-only";
-import { forbidden, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { auth } from "@/auth";
 import { getDb } from "@/db/client";
@@ -8,7 +8,6 @@ import type { CustomerAccountStatus } from "@/db/schema/customer-accounts";
 import {
   canCustomerSignIn,
   isCustomerSubject,
-  resolveCustomerScope,
 } from "@/lib/authz/customer-scope.mjs";
 import { isSessionVersionCurrent } from "@/lib/authz/user-repository";
 
@@ -22,7 +21,8 @@ export interface CustomerSession {
    * Kupac kome nalog pripada.
    *
    * Uvek iz baze, po ID-u iz sesije. Nijedan handler ne sme čitati ovu vrednost
-   * iz `searchParams`, `params` ni tela zahteva — vidi `assertCustomerScope`.
+   * iz `searchParams`, `params` ni tela zahteva; `app/kupac/**` strane ne
+   * primaju nijedan takav prop, pa ga ni ne mogu pročitati.
    */
   customerId: string;
   customerName: string;
@@ -96,39 +96,14 @@ export async function requireCustomerSession(): Promise<CustomerSession> {
   return session;
 }
 
-/**
- * Kapija za rute koje nose `customerId` u adresi.
+/*
+ * `requireCustomerApiSession` i `assertCustomerScope` su UKLONJENI.
  *
- * Postoji zato što će takve rute postojati (deljivi linkovi, bookmark-ovi), a
- * ne sme se desiti da promena ID-a u adresi tiho vrati kupcu njegove podatke —
- * to bi značilo da opseg izgleda kao da radi, a nikad nije bio proveren.
- * Neslaganje je 403, ne preusmeravanje.
+ * Postojali su za kupčeve rute koje primaju `customerId` iz adrese — a takva
+ * ruta ne postoji: `app/kupac/page.tsx` ne prima nijedan prop. Bili su dakle
+ * bezbednosne kontrole koje se nigde ne izvršavaju, a bile su unit-testirane,
+ * pa su stvarale utisak zaštite koja radi. Postflight audit, F-9.
+ *
+ * Kada kupčeva ruta sa ID-em u adresi bude postojala, kapija se dodaje ZAJEDNO
+ * sa njom i sa IDOR testom nad tom rutom — ne unapred i ne bez potrošača.
  */
-export async function assertCustomerScope(
-  requestedCustomerId: string | null | undefined,
-): Promise<CustomerSession> {
-  const session = await requireCustomerSession();
-  const { refused } = resolveCustomerScope({
-    sessionCustomerId: session.customerId,
-    requestedCustomerId,
-  });
-  if (refused) forbidden();
-  return session;
-}
-
-export class CustomerApiError extends Error {
-  constructor(
-    readonly status: 401 | 403,
-    message: string,
-  ) {
-    super(message);
-    this.name = "CustomerApiError";
-  }
-}
-
-/** Varijanta za route handler-e: status umesto preusmeravanja. */
-export async function requireCustomerApiSession(): Promise<CustomerSession> {
-  const session = await getCustomerSession();
-  if (!session) throw new CustomerApiError(401, "Potrebna je prijava.");
-  return session;
-}

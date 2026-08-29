@@ -3,6 +3,7 @@ import { forbidden, redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { loginUrlFor } from "@/lib/authz/redirects.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
+import { isInternalSubject } from "@/lib/authz/customer-scope.mjs";
 import {
   can,
   landingRouteFor,
@@ -70,6 +71,21 @@ export async function loadAuthenticatedSession(): Promise<AuthenticatedSession |
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) return null;
+
+  /*
+   * Interna kapija odbija kupčev token IZRIČITO.
+   *
+   * Razdvojenost tabela je i dalje glavna garancija — kupčev ID ne postoji u
+   * `users`, pa `loadPortalUser` vraća `null`. Ali oslanjati se samo na to
+   * znači da je kontrola nevidljiva i da je nova šema može tiho ukinuti. Ovde
+   * je izgovorena, i postflight audit (F-3) je tražio upravo to: helper koji je
+   * bio testiran kao kapija, a nigde nije pozvan.
+   *
+   * Fail-closed: `customer` pada; odsustvo claim-a se i dalje tumači kao
+   * interni nalog, jer tokeni izdati pre uvođenja polja moraju nastaviti da
+   * važe, a podrazumevana vrednost vodi ka MANJEM pristupu.
+   */
+  if (!isInternalSubject(session.user)) return null;
 
   const user = await loadPortalUser(userId);
   if (!user) return null;

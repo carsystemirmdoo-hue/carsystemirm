@@ -4,54 +4,60 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { requireCapability } from "@/lib/authz/session";
 import {
-  createCustomerAccount,
   CustomerAccountError,
+  proposeCustomerContact,
   setCustomerAccountStatus,
 } from "@/lib/customers/account-service";
+import {
+  issueInvitation,
+  markOutboxHandedOver,
+} from "@/lib/customers/invitation-service";
+import { requireCustomerAccess } from "@/lib/authz/session";
 
 export type AccountActionState = { error: string | null; ok: string | null };
 
-const createSchema = z.object({
+const proposeSchema = z.object({
   customerId: z.string().uuid(),
   email: z.string().trim().toLowerCase().email().max(254),
   name: z.string().trim().min(2).max(120),
-  password: z.string().min(12).max(200),
   reason: z.string().trim().min(3).max(500),
 });
 
 /**
- * Otvaranje kupčevog naloga.
+ * Predlog kontakt-osobe kupca.
  *
- * Lozinka se prosleđuje serveru i odmah hešira; nigde se ne vraća u odgovor i
- * ne ulazi u trag revizije. Predaja lozinke kupcu je van sistema — isti obrazac
- * kao kod internog reseta (`docs/b2b/11-account-recovery-runbook.md`).
+ * NE prima lozinku — polje za nju ne postoji. Nalog nastaje u stanju
+ * `requested`, bez prava prijave. Komercijalista sme ovo samo za dodeljenog
+ * kupca; kapija je `requireCustomerAccess`, isti put kojim je već zaštićen
+ * ekran kupca.
  */
-export async function createAccountAction(
+export async function proposeContactAction(
   _previous: AccountActionState,
   formData: FormData,
 ): Promise<AccountActionState> {
   const actor = await requireCapability(
-    "customer_accounts:manage",
+    "customer_accounts:propose",
     "/portal/kupci/nalozi",
   );
 
-  const parsed = createSchema.safeParse({
+  const parsed = proposeSchema.safeParse({
     customerId: formData.get("customerId"),
     email: formData.get("email"),
     name: formData.get("name"),
-    password: formData.get("password"),
     reason: formData.get("reason") ?? "",
   });
   if (!parsed.success) {
     return {
-      error:
-        "Proverite unos: kupac, ispravna e-pošta, ime, lozinka od najmanje 12 znakova i razlog.",
+      error: "Proverite unos: kupac, ispravna e-pošta, ime i razlog.",
       ok: null,
     };
   }
 
+  // `customerId` stiže iz forme — mora proći kapiju opsega.
+  await requireCustomerAccess(actor, parsed.data.customerId);
+
   try {
-    await createCustomerAccount(parsed.data, {
+    await proposeCustomerContact(parsed.data, {
       id: actor.id,
       name: actor.name,
       role: actor.role,
@@ -66,8 +72,81 @@ export async function createAccountAction(
   revalidatePath("/portal/kupci/nalozi");
   return {
     error: null,
-    ok: "Nalog je otvoren. Lozinku predajte kupcu van sistema — nigde se ne prikazuje ponovo.",
+    ok: "Kontakt je predložen. Nalog još nema pristup — poziv izdaje kancelarija.",
   };
+}
+
+const inviteSchema = z.object({
+  accountId: z.string().uuid(),
+  reason: z.string().trim().min(3).max(500),
+});
+
+/**
+ * Izdaje poziv i vraća link TAČNO JEDNOM.
+ *
+ * Link se posle ovog odgovora više ne može prikazati: u bazi stoji samo HMAC
+ * otisak tokena. Kancelarija ga predaje kupcu van sistema (provajder e-pošte
+ * ne postoji i ne dodaje se — COST_CONTROL).
+ */
+export async function issueInvitationAction(
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState & { link: string | null }> {
+  const actor = await requireCapability(
+    "customer_accounts:manage",
+    "/portal/kupci/nalozi",
+  );
+
+  const parsed = inviteSchema.safeParse({
+    accountId: formData.get("accountId"),
+    reason: formData.get("reason") ?? "",
+  });
+  if (!parsed.success) {
+    return { error: "Unesite razlog (najmanje 3 znaka).", ok: null, link: null };
+  }
+
+  try {
+    const { token, expiresAt } = await issueInvitation(parsed.data, {
+      id: actor.id,
+      name: actor.name,
+      role: actor.role,
+    });
+    revalidatePath("/portal/kupci/nalozi");
+    return {
+      error: null,
+      ok: `Poziv važi do ${expiresAt.toLocaleString("sr-Latn-RS")}. Link se prikazuje samo sada.`,
+      link: `/prijava/kupac/aktivacija?token=${encodeURIComponent(token)}`,
+    };
+  } catch (error) {
+    if (error instanceof CustomerAccountError) {
+      return { error: error.message, ok: null, link: null };
+    }
+    throw error;
+  }
+}
+
+const outboxSchema = z.coerce.number().int().positive();
+
+export async function markHandedOverAction(
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  const actor = await requireCapability(
+    "customer_accounts:manage",
+    "/portal/kupci/nalozi",
+  );
+  const parsed = outboxSchema.safeParse(formData.get("id"));
+  if (!parsed.success) return { error: "Stavka nije prepoznata.", ok: null };
+
+  const done = await markOutboxHandedOver(parsed.data, {
+    id: actor.id,
+    name: actor.name,
+    role: actor.role,
+  });
+  revalidatePath("/portal/kupci/nalozi");
+  return done
+    ? { error: null, ok: "Označeno kao predato." }
+    : { error: "Stavka nije dostupna.", ok: null };
 }
 
 const statusSchema = z.object({

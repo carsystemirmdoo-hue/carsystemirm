@@ -44,8 +44,9 @@ import {
   SUBJECT_INTERNAL,
 } from "./lib/authz/customer-scope.mjs";
 import {
-  findCustomerAccountByEmail,
+  loadCustomerAccountForLogin,
   markCustomerSignedIn,
+  recordCustomerLoginFailure,
 } from "./lib/customers/account-service";
 
 const credentialsSchema = z.object({
@@ -391,7 +392,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const decision = await resolveCredentialsLogin({
           email: parsed.data.email,
           password: parsed.data.password,
-          loadUser: findCustomerAccountByEmail,
+          // Nalog bez lozinke košta isto — vidi `loadCustomerAccountForLogin`.
+          loadUser: loadCustomerAccountForLogin,
           verify: verifyPassword,
           absentUserHash: ABSENT_USER_PASSWORD_RECORD,
           /*
@@ -401,18 +403,35 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           isActive: (account) => canCustomerSignIn(account.status),
         });
 
-        if (decision.outcome === "denied" || !decision.user) {
-          await registerAttempt({
+        if (decision.outcome === "denied") {
+          const limit = await registerAttempt({
             scope: "password",
             accountIdentifier: identifier,
             clientIp,
           });
+          /*
+           * Neuspeh se BELEŽI i BROJI — postflight audit F-4 i F-5.
+           *
+           * Ranije je customer grana samo uvećavala IP/nalog bucket: kolone
+           * `failed_login_attempts` i `locked_until` su postojale i proveravale
+           * se, ali ih niko nije popunjavao, a nijedan neuspeh nije ostavljao
+           * trag. Napad na kupčev nalog bio je nevidljiv.
+           */
+          if (decision.user) {
+            await recordCustomerLoginFailure({
+              accountId: decision.user.id,
+              email: decision.user.email,
+              reason: decision.reason as "bad_password" | "inactive" | "locked",
+              rateLimited: limit.allowed === false,
+            });
+          }
           return null;
         }
+        if (!decision.user) return null;
 
         const account = decision.user;
 
-        await markCustomerSignedIn(account.id);
+        await markCustomerSignedIn(account.id, account.email);
         await clearAccountAttempts("password", identifier);
 
         return {

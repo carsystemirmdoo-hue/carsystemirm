@@ -3,7 +3,8 @@
 import { useActionState, useState } from "react";
 import { Badge, Field, PortalButton } from "@/components/portal/PortalPrimitives";
 import {
-  createAccountAction,
+  issueInvitationAction,
+  proposeContactAction,
   setAccountStatusAction,
   type AccountActionState,
 } from "@/app/portal/kupci/nalozi/actions";
@@ -30,14 +31,20 @@ export function AccountsAdmin({
   accounts,
   customers,
   canManage,
+  canPropose,
 }: {
   accounts: AccountRow[];
   customers: CustomerOption[];
   canManage: boolean;
+  canPropose: boolean;
 }) {
   const [createState, createAction, creating] = useActionState(
-    createAccountAction,
+    proposeContactAction,
     INITIAL,
+  );
+  const [inviteState, inviteAction, inviting] = useActionState(
+    issueInvitationAction,
+    { error: null, ok: null, link: null as string | null },
   );
   const [statusState, statusAction, changing] = useActionState(
     setAccountStatusAction,
@@ -47,12 +54,14 @@ export function AccountsAdmin({
 
   return (
     <>
-      {canManage ? (
+      {canPropose ? (
         <section className="portal-panel">
-          <h2>Otvori nalog kupcu</h2>
+          <h2>Predloži kontakt kupca</h2>
           <p>
             Kupčev nalog je odvojen identitet — ne dobija nijednu internu ulogu i
-            vidi isključivo podatke svoje firme.
+            vidi isključivo podatke svoje firme.{" "}
+            <strong>Lozinku ne unosite i nikada je ne saznajete</strong> —
+            postavlja je kupac kroz jednokratni poziv.
           </p>
           {createState.error ? (
             <div className="portal-login-error" role="alert">
@@ -88,33 +97,41 @@ export function AccountsAdmin({
               <Field label="Ime i prezime" required>
                 <input type="text" name="name" minLength={2} maxLength={120} required />
               </Field>
-              <Field
-                label="Početna lozinka"
-                required
-                hint="Najmanje 12 znakova. Predaje se kupcu van sistema; nigde se ne prikazuje ponovo."
-              >
-                <input
-                  type="password"
-                  name="password"
-                  minLength={12}
-                  maxLength={200}
-                  autoComplete="new-password"
-                  required
-                />
-              </Field>
               <Field label="Razlog" required hint="Upisuje se u trag revizije.">
                 <input type="text" name="reason" minLength={3} maxLength={500} required />
               </Field>
               <PortalButton type="submit" variant="primary" disabled={creating}>
-                {creating ? "Otvaranje…" : "Otvori nalog"}
+                {creating ? "Slanje…" : "Predloži kontakt"}
               </PortalButton>
             </form>
           )}
         </section>
       ) : null}
 
+      {canManage && inviteState.link ? (
+        <section className="portal-panel" data-accent="warning">
+          <h2>Link za aktivaciju — prikazuje se samo sada</h2>
+          <p>{inviteState.ok}</p>
+          <p>
+            <code>{inviteState.link}</code>
+          </p>
+          <p className="portal-login-hint">
+            U bazi stoji samo otisak tokena. Kada zatvorite ovaj ekran, link se
+            ne može ponovo prikazati — izdaje se nov poziv.
+          </p>
+        </section>
+      ) : null}
+
       <section className="portal-panel">
         <h2>Nalozi kupaca ({accounts.length})</h2>
+        {inviteState.error ? (
+          <div className="portal-login-error" role="alert">
+            <span>
+              <strong>Poziv nije izdat</strong>
+              <small>{inviteState.error}</small>
+            </span>
+          </div>
+        ) : null}
         {statusState.error ? (
           <div className="portal-login-error" role="alert">
             <span>
@@ -168,6 +185,23 @@ export function AccountsAdmin({
                     </td>
                     {canManage ? (
                       <td>
+                        <form action={inviteAction} style={{ display: "inline" }}>
+                          <input type="hidden" name="accountId" value={account.id} />
+                          <input
+                            type="hidden"
+                            name="reason"
+                            value="Izdavanje poziva kupcu"
+                          />
+                          <PortalButton
+                            type="submit"
+                            variant="ghost"
+                            disabled={inviting}
+                          >
+                            {account.status === "requested"
+                              ? "Odobri i pozovi"
+                              : "Izdaj nov poziv"}
+                          </PortalButton>
+                        </form>
                         <PortalButton
                           variant="ghost"
                           onClick={() =>

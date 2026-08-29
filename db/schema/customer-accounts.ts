@@ -1,4 +1,5 @@
 import {
+  bigserial,
   index,
   integer,
   pgEnum,
@@ -19,11 +20,16 @@ import { users } from "./users";
  * i „odbijeno" su stanja koja boolean ne ume da razlikuje od „isključeno".
  */
 export const customerAccountStatus = pgEnum("customer_account_status", [
-  /** Zatražen pristup; još nema odluke. Ne sme se prijaviti. */
+  /** Zatražen pristup (predložio komercijalista ili kupac). Bez lozinke. */
   "requested",
-  /** Odobren, nalog otvoren, još se nijednom nije prijavio. */
+  /**
+   * Odobren i pozvan — poziv izdat, nalog JOŠ NEMA lozinku.
+   *
+   * Ne sme se prijaviti. Prijava postaje moguća tek pošto kupac sam postavi
+   * lozinku kroz jednokratni pozivni token.
+   */
   "approved",
-  /** Odobren i bar jednom prijavljen. */
+  /** Kupac aktivirao nalog i postavio SVOJU lozinku. */
   "active",
   /** Privremeno isključen odlukom kancelarije ili gazde. */
   "suspended",
@@ -65,7 +71,14 @@ export const customerUsers = pgTable(
     /** Uvek u malim slovima; prijava normalizuje unos. */
     email: text("email").notNull(),
     name: text("name").notNull(),
-    passwordHash: text("password_hash").notNull(),
+    /**
+     * `null` sve dok kupac sam ne postavi lozinku kroz pozivni token.
+     *
+     * Kancelarija je NIKADA ne unosi i nikada ne saznaje. Baza to sprovodi:
+     * `customer_users_password_lifecycle_ck` zabranjuje lozinku u stanjima
+     * `requested`/`approved` i zahteva je u stanju `active`.
+     */
+    passwordHash: text("password_hash"),
     status: customerAccountStatus("status").notNull().default("requested"),
     /** Isti mehanizam opoziva kao kod internih naloga (`users.session_version`). */
     sessionVersion: integer("session_version").notNull().default(0),
@@ -101,3 +114,120 @@ export const customerUsers = pgTable(
 );
 
 export type CustomerUserRow = typeof customerUsers.$inferSelect;
+
+/* =========================================================================
+ * Jednokratni tokeni kupčevog naloga
+ * ====================================================================== */
+
+export const customerTokenPurpose = pgEnum("customer_token_purpose", [
+  "invitation",
+  "password_reset",
+]);
+
+export type CustomerTokenPurpose =
+  (typeof customerTokenPurpose.enumValues)[number];
+
+/**
+ * Poziv i reset lozinke — isti obrazac kao `mfa_enrollment_grants`.
+ *
+ * Čuva se ISKLJUČIVO HMAC otisak; sam token postoji jednom, u trenutku
+ * izdavanja, i nigde se ne beleži — ni u logu, ni u auditu, ni u obaveštenju.
+ *
+ * Prethodni neiskorišćeni tokeni iste svrhe se poništavaju pri izdavanju novog:
+ * u svakom trenutku sme da važi najviše jedan, pa zaboravljen stari ne ostaje
+ * kao otvorena vrata.
+ */
+export const customerAccountTokens = pgTable(
+  "customer_account_tokens",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    customerUserId: uuid("customer_user_id")
+      .notNull()
+      .references(() => customerUsers.id, { onDelete: "cascade" }),
+    purpose: customerTokenPurpose("purpose").notNull(),
+    /** HMAC-SHA256 tokena. Sam token se ne čuva nigde. */
+    tokenFingerprint: text("token_fingerprint").notNull(),
+    keyVersion: integer("key_version").notNull(),
+    /** Ko je izdao; `null` za samoposlužni reset koji je kupac sam pokrenuo. */
+    issuedBy: uuid("issued_by").references(() => users.id, {
+      onDelete: "restrict",
+    }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    supersededAt: timestamp("superseded_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("customer_account_tokens_fingerprint_key").on(
+      table.tokenFingerprint,
+    ),
+    index("customer_account_tokens_open_idx").on(
+      table.customerUserId,
+      table.purpose,
+      table.usedAt,
+    ),
+  ],
+);
+
+export type CustomerAccountTokenRow =
+  typeof customerAccountTokens.$inferSelect;
+
+/* =========================================================================
+ * Outbox — provider-neutralan ugovor za slanje
+ * ====================================================================== */
+
+export const outboxKind = pgEnum("customer_outbox_kind", [
+  "invitation",
+  "password_reset",
+  "security_notice",
+]);
+
+export const outboxStatus = pgEnum("customer_outbox_status", [
+  /** Čeka da ga neko isporuči. */
+  "pending",
+  /** Kancelarija je preuzela link i predaje ga van sistema. */
+  "handed_over",
+  /** Poslato kroz provajdera (kada provajder bude postojao). */
+  "sent",
+  "failed",
+]);
+
+/**
+ * Šta treba poslati kupcu — bez ijednog tokena.
+ *
+ * Provajder e-pošte NE postoji i ne dodaje se (COST_CONTROL). Ovo je ugovor:
+ * red se upisuje kada nastane razlog za poruku, a isporuku obavlja ili
+ * kancelarija ručno (`handed_over`), ili budući provajder (`sent`).
+ *
+ * Token NAMERNO nije ovde. Da jeste, kopija ove tabele bi bila kopija svih
+ * otvorenih poziva i resetâ. Kancelarija link vidi tačno jednom, u odgovoru
+ * radnje koja ga je izdala.
+ */
+export const customerMessageOutbox = pgTable(
+  "customer_message_outbox",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    customerUserId: uuid("customer_user_id")
+      .notNull()
+      .references(() => customerUsers.id, { onDelete: "cascade" }),
+    kind: outboxKind("kind").notNull(),
+    status: outboxStatus("status").notNull().default("pending"),
+    /** Kada je link predat čoveku; posle toga se više ne može prikazati. */
+    handedOverAt: timestamp("handed_over_at", { withTimezone: true }),
+    handedOverBy: uuid("handed_over_by").references(() => users.id, {
+      onDelete: "restrict",
+    }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index("customer_message_outbox_status_idx").on(table.status, table.createdAt),
+    index("customer_message_outbox_user_idx").on(table.customerUserId),
+  ],
+);
+
+export type CustomerMessageOutboxRow =
+  typeof customerMessageOutbox.$inferSelect;

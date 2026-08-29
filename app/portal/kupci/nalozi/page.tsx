@@ -1,10 +1,8 @@
-import { asc } from "drizzle-orm";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
-import { getDb } from "@/db/client";
-import { customers } from "@/db/schema";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { listCustomerAccounts } from "@/lib/customers/account-service";
+import { listScopedCustomers } from "@/lib/pricing/pricing-scope";
 import { AccountsAdmin } from "./AccountsAdmin";
 
 export const dynamic = "force-dynamic";
@@ -12,14 +10,17 @@ export const dynamic = "force-dynamic";
 export default async function CustomerAccountsPage() {
   const user = await requireCapability("view:kupacki_nalozi", "/portal/kupci/nalozi");
   const canManage = can(user, "customer_accounts:manage");
+  const canPropose = can(user, "customer_accounts:propose");
 
+  /*
+   * Izbornik kupaca je skopiran na dodeljene.
+   *
+   * Komercijalista sme da predloži kontakt samo za svog kupca; obrazac zato ni
+   * ne nudi tuđeg. Server to i sam proverava (`requireCustomerAccess`).
+   */
   const [accounts, customerRows] = await Promise.all([
     listCustomerAccounts(),
-    getDb()
-      .select({ id: customers.id, name: customers.name, pib: customers.pib })
-      .from(customers)
-      .orderBy(asc(customers.name))
-      .limit(1000),
+    listScopedCustomers(user),
   ]);
 
   return (
@@ -36,6 +37,7 @@ export default async function CustomerAccountsPage() {
           label: `${customer.name} · PIB ${customer.pib}`,
         }))}
         canManage={canManage}
+        canPropose={canPropose}
       />
     </>
   );

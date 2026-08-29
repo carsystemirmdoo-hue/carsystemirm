@@ -95,6 +95,14 @@ export const sourceDocuments = pgTable(
     /** Ponovo se koristi postojeći rečnik iz `sales.ts`, bez novog. */
     businessDocumentType: documentKind("business_document_type").notNull(),
     businessDocumentNumber: text("business_document_number"),
+    /**
+     * Šifra partnera sa dokumenta, tekst, sa vodećim nulama.
+     *
+     * Postoji da bi dokument koji čeka mapiranje mogao da se proknjiži kada
+     * čovek poveže šifru sa kupcem, bez ponovnog čitanja PDF-a. Original se
+     * posle uvoza više ne dodiruje.
+     */
+    externalPartnerCode: text("external_partner_code"),
     documentDate: date("document_date"),
 
     /* --- obrada --- */

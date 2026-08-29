@@ -12,10 +12,18 @@ import {
   sourceDocuments,
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
-import { parseBiznisoftPdf, type ParsedDocument } from "@/lib/pdf/extract";
+import { parseBiznisoftPdf } from "@/lib/pdf/extract";
 import { normalizePartnerCode } from "@/lib/commercial/externalIdentity.mjs";
 
 export type IngestActor = { id: string; name: string; role: string };
+
+/** Odbijeno knjiženje. Poruka je za ekran i ne sadrži podatke o kupcu. */
+export class IngestError extends Error {
+  constructor(message: string, readonly code: string) {
+    super(message);
+    this.name = "IngestError";
+  }
+}
 
 export type IngestOutcome =
   /** Isti fajl je već uvezen. Nije greška i ne menja ništa. */
@@ -86,6 +94,7 @@ export async function ingestBiznisoftPdf(
 
   const partnerCode = parsed.header.partnerCode.value;
   const docNumber = parsed.header.documentNumber.value;
+  const code = partnerCode ? normalizePartnerCode(partnerCode) : null;
 
   /*
    * Drugi fajl sa istim poslovnim ključem.
@@ -128,6 +137,7 @@ export async function ingestBiznisoftPdf(
         issuerCode: input.issuerCode,
         businessDocumentType: parsed.documentKind as "faktura" | "nepoznato",
         businessDocumentNumber: docNumber,
+        externalPartnerCode: code,
         documentDate: parsed.header.documentDate.value,
         ingestionRunId: input.runId ?? null,
         parserVersion: parsed.parserVersion,
@@ -203,21 +213,10 @@ export async function ingestBiznisoftPdf(
      * kupca po šifri sa fakture značilo bi da promet ulazi u ledger pre nego
      * što je iko potvrdio čiji je — a to se ispravlja teže nego što se čeka.
      */
-    const code = normalizePartnerCode(partnerCode);
-    const mapped = await tx
-      .select({ customerId: customerExternalIdentifiers.customerId })
-      .from(customerExternalIdentifiers)
-      .where(
-        and(
-          eq(customerExternalIdentifiers.sourceSystem, "biznisoft"),
-          eq(customerExternalIdentifiers.issuerCode, input.issuerCode),
-          eq(customerExternalIdentifiers.externalPartnerCode, code),
-          eq(customerExternalIdentifiers.status, "mapped"),
-        ),
-      )
-      .limit(1);
-
-    const customerId = mapped[0]?.customerId ?? null;
+    const customerId = await resolveMappedCustomer(tx, {
+      issuerCode: input.issuerCode,
+      externalPartnerCode: code!,
+    });
 
     if (!customerId) {
       // Šifra ulazi u red za ručno razrešavanje, ako već nije tamo.
@@ -226,7 +225,7 @@ export async function ingestBiznisoftPdf(
         .values({
           sourceSystem: "biznisoft",
           issuerCode: input.issuerCode,
-          externalPartnerCode: code,
+          externalPartnerCode: code!,
           status: "unmapped",
           createdBy: actor.id,
         })
@@ -240,72 +239,252 @@ export async function ingestBiznisoftPdf(
       return {
         result: "awaiting_customer_mapping" as const,
         sourceDocumentId: created.id,
-        partnerCode: code,
+        partnerCode: code!,
       };
     }
 
-    const [invoice] = await tx
-      .insert(invoices)
-      .values({
-        companyId: input.issuerCode,
-        documentKind: "faktura",
-        sourceDocumentType: "Račun-otpremnica",
-        number: docNumber!,
-        year: Number((parsed.header.documentDate.value ?? "0000").slice(0, 4)),
-        issuedOn: parsed.header.documentDate.value!,
-        customerId,
-        netAmount: String(round2(sumNet(parsed))),
-        taxAmount: String(round2(sumTax(parsed))),
-        totalAmount: String(round2(parsed.header.printedGrossTotal.value ?? 0)),
-      })
-      .returning({ id: invoices.id });
-
-    /*
-     * Artikal se vezuje EXACT po šifri; nepoznata šifra ne blokira fakturu.
-     * `invoice_lines.article_code` je i onako tekst, pa promet ostaje tačan a
-     * artikal ide u red za mapiranje.
-     */
-    for (const line of parsed.lines) {
-      const known = line.articleCode
-        ? await tx
-            .select({ id: articles.id })
-            .from(articles)
-            .where(eq(articles.code, line.articleCode))
-            .limit(1)
-        : [];
-
-      await tx.insert(invoiceLines).values({
-        invoiceId: invoice.id,
-        lineNumber: line.lineNumber,
-        articleId: known[0]?.id ?? null,
-        articleCode: line.articleCode ?? "",
-        description: line.description,
-        quantity: String(line.quantity ?? 0),
-        unitPrice: String(line.unitPrice ?? 0),
-        discountPercent: String(line.discountPercent ?? 0),
-        taxPercent: String(line.taxPercent ?? 0),
-        lineAmount: String(round2(line.netAmount ?? 0)),
-      });
-    }
-
-    await tx
-      .update(sourceDocuments)
-      .set({ invoiceId: invoice.id, updatedAt: sql`now()` })
-      .where(eq(sourceDocuments.id, created.id));
+    const invoiceId = await postSourceDocument(tx, created.id, customerId, actor);
 
     return {
       result: "ingested" as const,
       sourceDocumentId: created.id,
-      invoiceId: invoice.id,
+      invoiceId,
     };
   });
 }
 
+/** Tip transakcije koji Drizzle daje `db.transaction`. */
+type Tx = Parameters<Parameters<ReturnType<typeof getDb>["transaction"]>[0]>[0];
+
+/** Kupac po tačnoj šifri partnera. Bez fuzzy poklapanja, bez naziva. */
+async function resolveMappedCustomer(
+  tx: Tx,
+  key: { issuerCode: string; externalPartnerCode: string },
+): Promise<string | null> {
+  const rows = await tx
+    .select({ customerId: customerExternalIdentifiers.customerId })
+    .from(customerExternalIdentifiers)
+    .where(
+      and(
+        eq(customerExternalIdentifiers.sourceSystem, "biznisoft"),
+        eq(customerExternalIdentifiers.issuerCode, key.issuerCode),
+        eq(customerExternalIdentifiers.externalPartnerCode, key.externalPartnerCode),
+        eq(customerExternalIdentifiers.status, "mapped"),
+      ),
+    )
+    .limit(1);
+  return rows[0]?.customerId ?? null;
+}
+
+/**
+ * Knjiži jedan izvorni dokument u postojeće `invoices` / `invoice_lines`.
+ *
+ * Čita iz SAČUVANIH stavki, ne iz PDF-a. Zahvaljujući tome se original posle
+ * uvoza više nikad ne otvara — ni kada se kupac mapira mesecima kasnije — pa
+ * fajl ne mora da se čuva u sistemu.
+ *
+ * Ovo je JEDINO mesto koje pravi fakturu iz PDF-a. Druga putanja knjiženja bi
+ * značila dva pravila za istu stvar i tiho razilaženje ledgera.
+ */
+async function postSourceDocument(
+  tx: Tx,
+  sourceDocumentId: string,
+  customerId: string,
+  actor: IngestActor,
+): Promise<string> {
+  const docs = await tx
+    .select()
+    .from(sourceDocuments)
+    .where(eq(sourceDocuments.id, sourceDocumentId))
+    .limit(1);
+  const doc = docs[0];
+  if (!doc) throw new IngestError("Izvorni dokument ne postoji.", "not_found");
+
+  /*
+   * Knjiženje se odbija za sve što nije čist original.
+   *
+   * Ista pravila stoje i kao CHECK u bazi i kao uslov u pogledu ledgera; ovde
+   * postoje da bi poruka bila razumljiva, ne da bi bila jedina odbrana.
+   */
+  if (doc.invoiceId) {
+    throw new IngestError("Dokument je već proknjižen.", "already_posted");
+  }
+  if (doc.validationStatus !== "valid") {
+    throw new IngestError("Nevalidan dokument se ne knjiži.", "not_valid");
+  }
+  if (doc.revisionStatus !== "original") {
+    throw new IngestError("Zamenjen ili sporan dokument se ne knjiži.", "not_original");
+  }
+  if (!doc.businessDocumentNumber || !doc.documentDate) {
+    throw new IngestError("Dokument bez broja ili datuma se ne knjiži.", "incomplete");
+  }
+
+  const lines = await tx
+    .select()
+    .from(sourceDocumentLines)
+    .where(eq(sourceDocumentLines.sourceDocumentId, sourceDocumentId))
+    .orderBy(sourceDocumentLines.lineNumber);
+
+  if (lines.length === 0) {
+    throw new IngestError("Dokument bez stavki se ne knjiži.", "no_lines");
+  }
+
+  const net = lines.reduce((sum, l) => sum + netOf(l), 0);
+  const tax = lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0);
+  const gross = lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0);
+
+  const [invoice] = await tx
+    .insert(invoices)
+    .values({
+      companyId: doc.issuerCode,
+      documentKind: "faktura",
+      sourceDocumentType: "Račun-otpremnica",
+      number: doc.businessDocumentNumber,
+      year: Number(doc.documentDate.slice(0, 4)),
+      issuedOn: doc.documentDate,
+      customerId,
+      netAmount: String(round2(net)),
+      taxAmount: String(round2(tax)),
+      totalAmount: String(round2(gross)),
+    })
+    .returning({ id: invoices.id });
+
+  for (const line of lines) {
+    /*
+     * Nepoznata šifra artikla NE blokira fakturu, ali se ni ne progutа.
+     *
+     * Artikal se upisuje u postojeći registar `articles`, pa ga zatiče
+     * postojeći red za mapiranje na katalog. Bez ovoga bi se šifra videla samo
+     * kao tekst na stavci i nikada ne bi stigla ni do jednog ekrana.
+     */
+    let articleId: string | null = null;
+    if (line.articleCode) {
+      await tx
+        .insert(articles)
+        .values({
+          code: line.articleCode,
+          name: line.description ?? line.articleCode,
+          unit: line.unit,
+        })
+        .onConflictDoNothing();
+      const found = await tx
+        .select({ id: articles.id })
+        .from(articles)
+        .where(eq(articles.code, line.articleCode))
+        .limit(1);
+      articleId = found[0]?.id ?? null;
+    }
+
+    await tx.insert(invoiceLines).values({
+      invoiceId: invoice.id,
+      lineNumber: line.lineNumber,
+      articleId,
+      articleCode: line.articleCode ?? "",
+      description: line.description,
+      quantity: String(line.quantity ?? 0),
+      unitPrice: String(line.unitPrice ?? 0),
+      discountPercent: String(line.discountPercent ?? 0),
+      taxPercent: String(line.taxPercent ?? 0),
+      lineAmount: String(round2(netOf(line))),
+    });
+  }
+
+  await tx
+    .update(sourceDocuments)
+    .set({
+      invoiceId: invoice.id,
+      manualReview: "not_required",
+      updatedAt: sql`now()`,
+    })
+    .where(eq(sourceDocuments.id, sourceDocumentId));
+
+  await recordAudit(
+    {
+      actor,
+      action: AUDIT_ACTIONS.pdfPosted,
+      entityType: "Izvorni dokument",
+      entityId: sourceDocumentId,
+      entityLabel: redactDocumentRef(doc),
+      after: { invoiceId: invoice.id, stavki: lines.length },
+      reason: "Dokument proknjižen u fakture.",
+    },
+    tx,
+  );
+
+  return invoice.id;
+}
+
+/**
+ * Neto stavke iz sačuvanih vrednosti.
+ *
+ * Bruto sa dokumenta sadrži PDV, a `invoice_lines.line_amount` je osnovica, pa
+ * se oduzima odštampani iznos poreza umesto da se osnovica ponovo računa iz
+ * količine i cene. Ponovno računanje bi na dužim dokumentima davalo drugi
+ * zaokruženi zbir od onog koji piše na papiru.
+ */
+function netOf(line: { grossAmount: string | null; taxAmount: string | null }): number {
+  return Number(line.grossAmount ?? 0) - Number(line.taxAmount ?? 0);
+}
+
+/**
+ * Knjiži dokumente koji su čekali mapiranje šifre partnera.
+ *
+ * Poziva se pošto čovek poveže šifru sa kupcem. Sam ne odlučuje ništa: ako
+ * šifra i dalje nije `mapped`, ne knjiži se ništa.
+ */
+export async function postAwaitingMapping(
+  key: { issuerCode: string; externalPartnerCode: string },
+  actor: IngestActor,
+): Promise<{ posted: string[]; failed: { sourceDocumentId: string; reason: string }[] }> {
+  const db = getDb();
+  const code = normalizePartnerCode(key.externalPartnerCode);
+
+  return db.transaction(async (tx) => {
+    const customerId = await resolveMappedCustomer(tx, {
+      issuerCode: key.issuerCode,
+      externalPartnerCode: code,
+    });
+    if (!customerId) {
+      throw new IngestError(
+        "Šifra partnera nije povezana sa kupcem — nema šta da se knjiži.",
+        "not_mapped",
+      );
+    }
+
+    const waiting = await tx
+      .select({ id: sourceDocuments.id })
+      .from(sourceDocuments)
+      .where(
+        and(
+          eq(sourceDocuments.issuerCode, key.issuerCode),
+          eq(sourceDocuments.externalPartnerCode, code),
+          eq(sourceDocuments.validationStatus, "valid"),
+          eq(sourceDocuments.revisionStatus, "original"),
+          isNull(sourceDocuments.invoiceId),
+        ),
+      )
+      .orderBy(sourceDocuments.documentDate);
+
+    const posted: string[] = [];
+    const failed: { sourceDocumentId: string; reason: string }[] = [];
+    for (const row of waiting) {
+      try {
+        await postSourceDocument(tx, row.id, customerId, actor);
+        posted.push(row.id);
+      } catch (error) {
+        /*
+         * Jedan neknjiživ dokument ne ruši ceo prolaz, ali se ni ne prećutkuje.
+         * Poruka je iz `IngestError` — bez naziva kupca i bez broja dokumenta.
+         */
+        if (!(error instanceof IngestError)) throw error;
+        failed.push({ sourceDocumentId: row.id, reason: error.message });
+      }
+    }
+    return { posted, failed };
+  });
+}
+
 const round2 = (value: number) => Math.round(value * 100) / 100;
-const sumNet = (doc: ParsedDocument) =>
-  doc.lines.reduce((sum, l) => sum + (l.netAmount ?? 0), 0);
-const sumTax = (doc: ParsedDocument) =>
-  doc.lines.reduce((sum, l) => sum + (l.taxAmount ?? 0), 0);
 
 /** Otvara `import_runs` zapis za jedan prolaz uvoza. */
 export async function openIngestionRun(

@@ -35,6 +35,9 @@ after(async () => {
     await db.sql`DELETE FROM invoice_lines`;
     await db.sql`DELETE FROM invoices`;
     await db.sql`DELETE FROM customer_external_identifiers`;
+    // Uvoz sam upisuje artikle u registar, pa ih i cisti.
+    await db.sql`DELETE FROM article_catalog_mappings`;
+    await db.sql`DELETE FROM articles WHERE code LIKE '9000%'`;
     await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%'`;
     await cleanupQa(db);
   }
@@ -47,6 +50,9 @@ async function clean() {
   await db.sql`DELETE FROM invoice_lines`;
   await db.sql`DELETE FROM invoices`;
   await db.sql`DELETE FROM customer_external_identifiers`;
+  // Uvoz sam upisuje artikle u registar, pa ih i cisti.
+  await db.sql`DELETE FROM article_catalog_mappings`;
+  await db.sql`DELETE FROM articles WHERE code LIKE '9000%'`;
 }
 
 test("validan dokument bez mapiranog kupca NE pravi fakturu", async (t) => {

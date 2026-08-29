@@ -24,6 +24,15 @@ export type NotificationInput = {
   actionHref?: string | null;
   context?: Record<string, unknown> | null;
   correlationId?: string | null;
+  /**
+   * Ključ istovetnosti.
+   *
+   * Kada je zadat, ponovno slanje istog uslova dok je prethodno obaveštenje
+   * otvoreno NE pravi nov red. Bez njega bi svaka mutacija koja ponovo primeti
+   * konflikt dodala jedan red, a lista koja se puni istim redom prestaje da se
+   * čita — to je nacin na koji obavestenja umiru u praksi.
+   */
+  dedupeKey?: string | null;
 };
 
 /**
@@ -90,7 +99,7 @@ export async function notify(
   assertSafeContext(input.context);
 
   const executor = tx ?? getDb();
-  await executor.insert(notifications).values({
+  const values = {
     kind: input.kind,
     severity: input.severity ?? "info",
     requiredCapability: input.requiredCapability,
@@ -101,7 +110,33 @@ export async function notify(
     actionHref: input.actionHref ?? null,
     context: input.context ?? null,
     correlationId: input.correlationId ?? null,
-  });
+    dedupeKey: input.dedupeKey ?? null,
+  };
+
+  if (!input.dedupeKey) {
+    await executor.insert(notifications).values(values);
+    return;
+  }
+
+  /*
+   * Idempotentnost se sprovodi PARCIJALNIM UNIQUE INDEKSOM, ne prethodnim
+   * `SELECT`-om. Provera pa upis su dve naredbe i dve paralelne mutacije bi
+   * prosle obe — a upravo mutacije koje se dese istovremeno i proizvode isti
+   * uslov.
+   */
+  /*
+   * `where` ponavlja predikat PARCIJALNOG indeksa.
+   *
+   * Bez njega Postgres ne ume da zakljuci koji indeks se gadja i odbija naredbu
+   * — parcijalni indeks se pogadja samo ako se predikat doslovno poklopi.
+   */
+  await executor
+    .insert(notifications)
+    .values(values)
+    .onConflictDoNothing({
+      target: notifications.dedupeKey,
+      where: sql`${notifications.dedupeKey} IS NOT NULL AND ${notifications.status} <> 'resolved'`,
+    });
 }
 
 /**

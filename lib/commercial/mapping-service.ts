@@ -8,6 +8,7 @@ import {
   type ProductMappingStatus,
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { notify } from "@/lib/notifications/notification-service";
 import {
   ProductMappingError,
   proposeExactMapping,
@@ -194,6 +195,42 @@ export async function decideMapping(
       },
       tx,
     );
+
+    /*
+     * Obavestenje ide SAMO kada se menja ono sto kupac vidi.
+     *
+     * Ulazak u `mapped` otvara sliku i PDP; izlazak iz `mapped` ih zatvara.
+     * Prelazi izmedju `unmapped`, `suggested` i `conflict` kupcu ne menjaju
+     * nista, pa bi obavestenje o njima bilo sum koji uci ljude da preskacu
+     * listu.
+     */
+    const bilo = from === "mapped";
+    const jeste = input.status === "mapped";
+    if (bilo !== jeste) {
+      await notify(
+        {
+          kind: "mapping_customer_facing_changed",
+          severity: "warning",
+          requiredCapability: "mappings:manage",
+          title: jeste
+            ? "Artikal je dobio kataloski identitet"
+            : "Artiklu je oduzet kataloski identitet",
+          body:
+            `${article.code} — ${article.name}: ` +
+            (jeste
+              ? `povezan sa „${values.catalogProductSlug}". Od sada sme da prikaze sliku i PDP.`
+              : "veza je ponistena. Artikal ostaje vidljiv interno, ali bez slike i PDP-a."),
+          entityType: "Mapiranje artikla",
+          entityId: input.articleId,
+          actionHref: "/portal/proizvodi/mapiranja",
+          // Sifra artikla je poslovni identifikator, ne osetljiv podatak.
+          context: { sifra: article.code, stanje: input.status },
+          correlationId,
+          dedupeKey: `mapping_customer_facing:${input.articleId}:${input.status}`,
+        },
+        tx,
+      );
+    }
   });
 }
 

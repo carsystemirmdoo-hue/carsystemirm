@@ -82,6 +82,14 @@ export const notifications = pgTable(
     context: jsonb("context"),
     /** Povezuje obaveštenje sa audit zapisom iste radnje. */
     correlationId: text("correlation_id"),
+    /**
+     * Ključ istovetnosti, za idempotentno slanje.
+     *
+     * Dok je obaveštenje otvoreno, isti ključ ne pravi nov red — mutacija koja
+     * ponovo primeti isti uslov ne puni listu. Kada se zatvori, ponovna pojava
+     * je nov događaj i sme da napravi nov red; vidi migraciju 0015.
+     */
+    dedupeKey: text("dedupe_key"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

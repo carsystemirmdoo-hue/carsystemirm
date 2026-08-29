@@ -5,6 +5,7 @@ import { getDb } from "@/db/client";
 import { customers, customerUsers } from "@/db/schema";
 import type { CustomerAccountStatus } from "@/db/schema/customer-accounts";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { notify } from "@/lib/notifications/notification-service";
 import { canCustomerSignIn } from "@/lib/authz/customer-scope.mjs";
 
 export type AccountActor = { id: string; name: string; role: string };
@@ -238,6 +239,10 @@ export async function setCustomerAccountStatus(
   const row = rows[0];
   if (!row) throw new CustomerAccountError("Nalog ne postoji.", "not_found");
 
+  // Isti trag za audit i obavestenje — bez toga se dva zapisa iste radnje ne
+  // mogu povezati pri kasnijem pregledu.
+  const correlationId = randomUUID();
+
   await db.transaction(async (tx) => {
     await tx
       .update(customerUsers)
@@ -261,7 +266,33 @@ export async function setCustomerAccountStatus(
         before: { status: row.status },
         after: { status: input.status },
         reason,
-        correlationId: randomUUID(),
+        correlationId,
+      },
+      tx,
+    );
+
+    /*
+     * Iskljucenje i vracanje naloga menjaju spoljni pristup jedne firme.
+     *
+     * Ide `warning`, ne `info`: nalog koji je nekome oduzet je odluka koju
+     * gazda mora da vidi i kada je doneo neko drugi.
+     */
+    await notify(
+      {
+        kind: "customer_account_status_changed",
+        severity: input.status === "approved" ? "info" : "warning",
+        requiredCapability: "customer_accounts:manage",
+        title: "Promenjeno stanje kupcevog naloga",
+        body:
+          `Nalog kupca prelazi iz „${row.status}" u „${input.status}". ` +
+          `Razlog: ${reason}`,
+        entityType: "Kupcev nalog",
+        entityId: input.accountId,
+        actionHref: "/portal/kupci/nalozi",
+        // Bez e-poste: `assertSafeContext` je odbija, i s pravom.
+        context: { staro: row.status, novo: input.status },
+        correlationId,
+        dedupeKey: `customer_account_status:${input.accountId}:${input.status}`,
       },
       tx,
     );

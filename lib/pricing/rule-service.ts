@@ -2,7 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { and, desc, eq, inArray, or, sql } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
-import { getDb } from "@/db/client";
+import { getDb, type Database } from "@/db/client";
 import {
   articles,
   customerGroups,
@@ -17,6 +17,7 @@ import { resolveCapabilities } from "@/lib/authz/permissions.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { notify } from "@/lib/notifications/notification-service";
+import { ACTIVE_RULE_STATUSES } from "@/lib/pricing/evaluation-service";
 import type { PricingScope } from "@/lib/pricing/pricing-scope";
 import {
   precedenceLabelFor,
@@ -28,9 +29,12 @@ import {
 import {
   ACTOR_HUMAN,
   actionFor,
+  participatesInPricing,
   rejectTransition,
   WorkflowError,
 } from "@/lib/pricing/workflow.mjs";
+
+type Transaction = Parameters<Parameters<Database["transaction"]>[0]>[0];
 
 export type RuleDraft = {
   customerScope: "customer" | "group" | "all";
@@ -268,7 +272,66 @@ export async function transitionPriceRule(
     if (notification) {
       await notify({ ...notification, correlationId }, tx);
     }
+
+    /*
+     * Konflikt se prijavljuje iz MUTACIJE, ne iz otvaranja ekrana.
+     *
+     * Ekran koji bi ga prijavljivao pravio bi nov red pri svakom osvezavanju.
+     * Ovde se gleda samo kada pravilo udje u stanje koje ucestvuje u ceni — to
+     * je jedini trenutak u kome konflikt moze da NASTANE.
+     */
+    if (participatesInPricing(input.to)) {
+      await notifyRuleConflict(tx, rule, correlationId);
+    }
   });
+}
+
+/**
+ * Prijavljuje sudar ako posle prelaza postoje dva aktivna pravila iste klase i
+ * istog opsega sa preklopljenim važenjem.
+ *
+ * `dedupeKey` je (klasa, opseg): dok je obaveštenje otvoreno, svaki naredni
+ * prelaz koji primeti isti sudar ne pravi nov red.
+ */
+async function notifyRuleConflict(
+  tx: Transaction,
+  rule: PriceRuleRow,
+  correlationId: string,
+): Promise<void> {
+  const rows = await tx
+    .select({ id: priceRules.id })
+    .from(priceRules)
+    .where(
+      and(
+        eq(priceRules.precedenceLevel, rule.precedenceLevel),
+        eq(priceRules.scopeKey, rule.scopeKey),
+        inArray(priceRules.status, ACTIVE_RULE_STATUSES),
+        sql`${priceRules.effectiveFrom} <= coalesce(${rule.effectiveTo}, 'infinity'::date)`,
+        sql`coalesce(${priceRules.effectiveTo}, 'infinity'::date) >= ${rule.effectiveFrom}`,
+      ),
+    );
+
+  if (rows.length < 2) return;
+
+  await notify(
+    {
+      kind: "price_rule_conflict",
+      severity: "critical",
+      requiredCapability: "prices:approve",
+      title: "Dva aktivna pravila iste klase za isti opseg",
+      body:
+        `Klasa ${rule.precedenceLevel} (${precedenceLabelFor(rule.precedenceLevel)}) ` +
+        `ima ${rows.length} aktivna pravila sa preklopljenim važenjem. ` +
+        "Dok traje sudar, cena za taj par se ne izvodi.",
+      entityType: "Pravilo cene",
+      entityId: rule.id,
+      actionHref: "/portal/cene",
+      context: { klasa: rule.precedenceLevel, opseg: rule.scopeKey, broj: rows.length },
+      correlationId,
+      dedupeKey: `price_rule_conflict:${rule.precedenceLevel}:${rule.scopeKey}`,
+    },
+    tx,
+  );
 }
 
 /** Obaveštenje koje prati dati prelaz, ili `null` kada ga ne treba slati. */

@@ -8,6 +8,7 @@ import {
   type ExternalIdentityStatus,
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { notify } from "@/lib/notifications/notification-service";
 import {
   decideIdentityWrite,
   ExternalIdentityError,
@@ -176,6 +177,33 @@ export async function registerExternalIdentifier(
         after: { status: "conflict", pokusaniKupac: input.customerId ?? null },
         reason: decision.reason ?? "Konflikt spoljnog identiteta.",
         correlationId,
+      },
+      tx,
+    );
+
+    /*
+     * Konflikt sifre partnera menja ono sto kupac vidi: dok traje, sifra ne
+     * pokazuje ni na jednog kupca, pa se njegova istorija ne moze povezati.
+     * Zato ide kao `critical`, iz mutacije koja ga je i napravila.
+     *
+     * Kontekst nosi sifru i izdavaoca — poslovne identifikatore — ali NE PIB
+     * ni naziv, koje `assertSafeContext` ionako odbija.
+     */
+    await notify(
+      {
+        kind: "external_identity_conflict",
+        severity: "critical",
+        requiredCapability: "mappings:manage",
+        title: "Konflikt sifre partnera",
+        body:
+          `Sifra ${input.issuerCode}/${code} vec pokazuje na drugog kupca. ` +
+          "Sistem ne bira izmedju dva kupca — vezu razresava covek.",
+        entityType: "Sifra partnera",
+        entityId: row.id,
+        actionHref: "/portal/kupci/mapiranja",
+        context: { izdavalac: input.issuerCode, sifra: code },
+        correlationId,
+        dedupeKey: `external_identity_conflict:${row.id}`,
       },
       tx,
     );

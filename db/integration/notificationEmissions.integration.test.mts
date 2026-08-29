@@ -164,9 +164,14 @@ test("mapiranje emituje samo kada se menja ono sto kupac vidi", async (t) => {
   );
   assert.equal(await countKind("mapping_customer_facing_changed"), 1);
 
-  // mapped → rejected: kupac ih gubi. Nov dogadjaj, nov kljuc.
+  /*
+   * mapped → revoked: kupac ih gubi. Nov dogadjaj, nov kljuc.
+   *
+   * `revoked`, ne `rejected` — od F-10 su to razliciti dogadjaji i potvrdjena
+   * veza se ponistava, ne odbija.
+   */
   await decideMapping(
-    { articleId: fx.articleId, status: "rejected", note: "pogresna veza" },
+    { articleId: fx.articleId, status: "revoked", note: "pogresna veza" },
     staff(fx.office),
   );
   assert.equal(await countKind("mapping_customer_facing_changed"), 2);

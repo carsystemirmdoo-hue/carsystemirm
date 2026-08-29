@@ -78,3 +78,8 @@ assets/manufacturer/
 
 # izolovani izlaz dev servera za search QA (paralelni Next proces ne sme deliti dist)
 .next-search-dev
+
+# Local content-asset intake
+/_incoming/assets/
+._*
+__MACOSX/

@@ -200,11 +200,22 @@ potvrđeni SKU ili oznaku varijante. Primer iz ovog registra: Cosmos Lac
 6. **Izvedenice** — generišu se samo potrebne desktop/mobile varijante
    (`scripts/build-home-campaign-assets.py`,
    `scripts/build-baslac-campaign-assets.py`).
-7. **Vizuelni QA** ciljane rute:
+7. **Vizuelni QA.** Automatski ugovori koji moraju ostati zeleni:
 
    ```bash
-   node scripts/verify-campaign-carousels.mjs
+   npm run test:carousel-core
+   npm run test:carousel-consumers
+   npm run test:home-campaign
+   npm run test:rm-carousel
+   npm run test:baslac-carousel
    ```
+
+   Uz to je potreban **ručni vizuelni pregled** ruta `/`, `/brendovi/rm` i
+   `/brendovi/baslac`, na desktop i mobilnom viewportu.
+
+   Trajan automatski screenshot gate **trenutno ne postoji** — testovi iznad
+   proveravaju podatke, redosled i ponašanje karusela, ali ne i to kako slika
+   izgleda na ekranu.
 8. **Slot prelazi u `READY`** i briše se iz registra pri sledećem generisanju.
 
 ---

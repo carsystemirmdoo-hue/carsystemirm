@@ -1,7 +1,9 @@
 # SATA — Content & Asset Map
 
 **Datum:** 2026-08-20
-**Vezano za:** `docs/SATA_RESEARCH.md`, `docs/SATA_IMPLEMENTATION_QA.md`
+**Vezano za:** `docs/SATA_RESEARCH.md`, `lib/sataBrandData.test.mts`
+(izvršni ugovor SATA podataka, `npm run test:sata`) i kanonski
+content-asset registar `CONTENT-ASSET-REGISTER.md` za slotove koji čekaju asset.
 **Metod:** iscrpna pretraga repozitorija (`public/`, `assets/`, `data/`, `docs/`,
 `_incoming/`, `artifacts/`, `tmp/`) po obrascima `sata`, `SATA`, `satajet`,
 `X 5500`, `x5500`, plus provera svih `scripts/acquire-*`, `extract-*`, `match-*`

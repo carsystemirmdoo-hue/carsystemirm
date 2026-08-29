@@ -217,6 +217,13 @@ const PREDUSLOVI: Record<string, () => string | null> = {
   "12": trebaTajna,
   // Koraci korpe traze vlasnikov drugi faktor i stvarno uspelu prijavu.
   "14": trebaPunuSesiju,
+  /*
+   * `14b` je PODKORAK koraka 14: meri isto (cena i kupovina), ali nad
+   * otvorenim drawerom i nad javnom stranom. Slovna oznaka cuva vezu sa
+   * korakom iz koga je izrastao — prenumerisanje svega iza njega bi razbilo
+   * poklapanje sa ranijim QA izvestajima.
+   */
+  "14b": trebaPunuSesiju,
   "15": trebaPunuSesiju,
   // Deljeni context vozi tri prijave zaredom, sve tri sa drugim faktorom.
   "16": trebaPunuSesiju,

@@ -29,7 +29,7 @@ const preduslovi = (() => {
     izvor.indexOf("const PREDUSLOVI"),
     izvor.indexOf("};", izvor.indexOf("const PREDUSLOVI")),
   );
-  return [...blok.matchAll(/"(\d+)":\s*(treba\w+)/g)].map((m) => ({
+  return [...blok.matchAll(/"(\d+[a-z]?)":\s*(treba\w+)/g)].map((m) => ({
     korak: m[1],
     preduslov: m[2],
   }));
@@ -54,10 +54,19 @@ function telo(naziv) {
 }
 
 test("svi koraci su prisutni i jedinstveno numerisani", () => {
-  // 13 koraka Faze 1B + 5 koraka korpe.
-  assert.equal(koraci.length, 18, `ocekivano 18 koraka, nadjeno ${koraci.length}`);
+  /*
+   * 13 koraka Faze 1B + 6 koraka korpe.
+   *
+   * Oznaka sme da nosi slovni sufiks (`14b`): podkorak koji meri isto sto i
+   * njegov roditelj, ali nad drugim delom stranice. Prenumerisanje svega iza
+   * njega bi razbilo poklapanje sa ranijim QA izvestajima.
+   */
+  assert.equal(koraci.length, 19, `ocekivano 19 koraka, nadjeno ${koraci.length}`);
   const brojevi = koraci.map(broj);
-  assert.equal(new Set(brojevi).size, 18, `duplirani brojevi: ${brojevi.join(", ")}`);
+  assert.equal(new Set(brojevi).size, 19, `duplirani brojevi: ${brojevi.join(", ")}`);
+  for (const b of brojevi) {
+    assert.match(b, /^\d+[a-z]?$/, `oznaka koraka „${b}" nije u dozvoljenom obliku`);
+  }
 });
 
 test("korak koji proizvodi tajnu nema preduslov nad sopstvenim rezultatom", () => {

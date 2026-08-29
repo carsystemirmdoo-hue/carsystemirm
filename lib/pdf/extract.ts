@@ -3,6 +3,9 @@ import { createHash } from "node:crypto";
 import { getDocumentProxy } from "unpdf";
 import {
   detectDocumentKind,
+  looksLikePdf,
+  MAX_LINES,
+  MAX_PAGES,
   hasTableContinuation,
   isLineRow,
   parseHeader,
@@ -57,6 +60,14 @@ export function fileHashOf(bytes: Uint8Array): string {
  */
 async function readPages(bytes: Uint8Array) {
   const pdf = await getDocumentProxy(new Uint8Array(bytes));
+  /*
+   * Broj strana se proverava PRE nego što se ijedna pročita.
+   *
+   * Provera posle čitanja ne bi ništa štitila — trošak je upravo u čitanju.
+   */
+  if (pdf.numPages > MAX_PAGES) {
+    return { pageCount: pdf.numPages, pages: [], tooManyPages: true as const };
+  }
   const pages = [];
   for (let n = 1; n <= pdf.numPages; n += 1) {
     const content = await (await pdf.getPage(n)).getTextContent();
@@ -76,7 +87,7 @@ async function readPages(bytes: Uint8Array) {
     const items = positioned;
     pages.push({ items, rows: toRows(items), text: items.map((i) => i.str).join(" ") });
   }
-  return { pageCount: pdf.numPages, pages };
+  return { pageCount: pdf.numPages, pages, tooManyPages: false as const };
 }
 
 /**
@@ -88,7 +99,52 @@ async function readPages(bytes: Uint8Array) {
  */
 export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocument> {
   const fileHash = fileHashOf(bytes);
-  const { pageCount, pages } = await readPages(bytes);
+
+  const emptyBase = {
+    fileHash,
+    pageCount: 0,
+    parserVersion: PARSER_VERSION,
+    header: parseHeader(""),
+    lines: [] as ParsedLine[],
+    totals: validateTotals([], null),
+  };
+
+  /*
+   * Zaglavlje fajla se proverava pre nego što ijedan čitač vidi bajtove.
+   *
+   * Jeftino je, i sprečava da se tuđi format uopšte otvara.
+   */
+  if (!looksLikePdf(bytes)) {
+    return {
+      ...emptyBase,
+      documentKind: "nepoznato",
+      validationStatus: "unparsable",
+      validationDetail: "Fajl ne počinje kao PDF.",
+    };
+  }
+
+  /*
+   * Neuspelo čitanje je ISHOD, ne izuzetak.
+   *
+   * Šifrovan, skraćen ili oštećen PDF baca iz čitača. Ako to izađe iz ove
+   * funkcije, jedan loš fajl obori ceo grupni uvoz i devetnaest uspešnih
+   * dokumenata nestane iz izveštaja zajedno sa dvadesetim.
+   *
+   * Poruka čitača se NE prenosi dalje: ume da sadrži deo teksta dokumenta, a
+   * to je poslovna prepiska sa imenom i adresom kupca.
+   */
+  let read: Awaited<ReturnType<typeof readPages>>;
+  try {
+    read = await readPages(bytes);
+  } catch {
+    return {
+      ...emptyBase,
+      documentKind: "nepoznato",
+      validationStatus: "unparsable",
+      validationDetail: "Dokument se ne može pročitati (oštećen, skraćen ili zaštićen lozinkom).",
+    };
+  }
+  const { pageCount, pages, tooManyPages } = read;
   const fullText = pages.map((p) => p.text).join("\n");
   const header = parseHeader(fullText);
 
@@ -100,6 +156,15 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
     lines: [] as ParsedLine[],
     totals: validateTotals([], null),
   };
+
+  if (tooManyPages) {
+    return {
+      ...base,
+      documentKind: "nepoznato",
+      validationStatus: "unsupported_requires_sample",
+      validationDetail: `Dokument ima više od ${MAX_PAGES} strana. Za taj obim ne postoji potvrđen uzorak.`,
+    };
+  }
 
   if (!header.isBiznisoft) {
     return {
@@ -142,6 +207,15 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
       if (!isLineRow(row)) continue;
       lines.push({ ...parseLine(row.cells), lineNumber: lines.length + 1, raw: row.raw });
     }
+  }
+
+  if (lines.length > MAX_LINES) {
+    return {
+      ...base,
+      documentKind: kind.kind,
+      validationStatus: "unsupported_requires_sample",
+      validationDetail: `Dokument ima više od ${MAX_LINES} stavki. Za taj obim ne postoji potvrđen uzorak.`,
+    };
   }
 
   if (lines.length === 0) {

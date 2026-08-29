@@ -88,3 +88,54 @@ test("verzija parsera se prenosi u rezultat", async () => {
   const doc = await parse("jedna-stavka.pdf");
   assert.match(doc.parserVersion, /^biznisoft-pdf-\d+$/);
 });
+
+test("H-4: neispravan, skracen ili polyglot fajl je ISHOD, ne izuzetak", async () => {
+  const enc = new TextEncoder();
+  const dobar = new Uint8Array(await readFile(FIXTURE("jedna-stavka.pdf")));
+
+  /*
+   * Pre popravke je svaki od ovih ulaza bacao iz citaca. Kako je grupni uvoz
+   * obradjivao fajlove u petlji, jedan los dokument je obarao ceo prolaz i
+   * operater nije dobijao izvestaj ni o onima koji su prosli.
+   */
+  const slucajevi: [string, Uint8Array][] = [
+    ["prazan fajl", new Uint8Array(0)],
+    ["obican tekst", enc.encode("ovo nije pdf")],
+    ["zaglavlje pa smece", enc.encode("%PDF-1.7\n" + "A".repeat(500))],
+    ["skracen validan PDF", dobar.slice(0, Math.floor(dobar.length / 2))],
+    ["polyglot ZIP+PDF", new Uint8Array([0x50, 0x4b, 0x03, 0x04, ...dobar])],
+  ];
+
+  for (const [ime, bytes] of slucajevi) {
+    const out = await parseBiznisoftPdf(bytes);
+    assert.equal(out.validationStatus, "unparsable", `${ime}: pogresan status`);
+    assert.equal(out.lines.length, 0, `${ime}: nastale su stavke`);
+
+    // Poruka ne sme nositi sirov tekst dokumenta ni tehnicki trag.
+    const detalj = out.validationDetail ?? "";
+    assert.ok(detalj.length > 0 && detalj.length < 200, `${ime}: poruka nije kratka`);
+    for (const zabranjeno of ["Error", "at ", "/Users/", "node_modules", "stack"]) {
+      assert.ok(!detalj.includes(zabranjeno), `${ime}: poruka nosi tehnicki trag`);
+    }
+  }
+});
+
+test("H-3: dokument preko granice obima ide u unsupported_requires_sample", async () => {
+  const { MAX_PAGES } = await import("@/lib/pdf/biznisoftLayout.mjs");
+  const { writePdf } = await import("../../scripts/fixtures/pdf-writer.mjs");
+
+  /*
+   * PDF od nekoliko megabajta moze nositi desetine hiljada strana, a citanje
+   * raste brze od linearnog. Bez granice jedan fajl zauzme server na minute.
+   */
+  const strane = Array.from({ length: MAX_PAGES + 1 }, () => [
+    { x: 40, y: 700, text: "www.biznisoft.com" },
+    { x: 40, y: 680, text: "Racun-otpremnica" },
+  ]);
+  const poceo = Date.now();
+  const out = await parseBiznisoftPdf(writePdf(strane));
+
+  assert.equal(out.validationStatus, "unsupported_requires_sample");
+  assert.equal(out.lines.length, 0, "strane su ipak procitane");
+  assert.ok(Date.now() - poceo < 3000, "granica je proverena tek posle citanja");
+});

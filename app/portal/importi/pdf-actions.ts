@@ -16,13 +16,19 @@ const MAX_BYTES = 20 * 1024 * 1024;
 const MAX_FILES = 200;
 
 /**
- * Otpremanje BizniSoft PDF-ova.
+ * Budžet jednog prolaza.
  *
- * Fajl se čita u memoriji i NE snima se na server: sadržaj je poslovna
- * prepiska sa imenom, PIB-om i adresom kupca, a sve što sistemu treba posle
- * uvoza već stoji u `source_documents` i `source_document_lines`. Otisak
- * sadržaja ostaje, pa se ponovni uvoz i dalje prepoznaje.
+ * Broj fajlova sam po sebi ne ograničava posao: dvesta fajlova po dvadeset
+ * megabajta je četiri gigabajta čitanja u jednoj akciji. Ova dva broja
+ * zaustavljaju prolaz kada je posao već obavljen dovoljno, umesto da server
+ * radi dok ga platforma ne prekine — a operater ostane bez ijednog izveštaja.
+ *
+ * Prekid NIJE greška: sve što je do tada obrađeno je proknjiženo i prijavljeno,
+ * a ostatak se otprema u sledećem prolazu.
  */
+const MAX_BATCH_BYTES = 200 * 1024 * 1024;
+const MAX_BATCH_MS = 90 * 1000;
+
 export async function importPdfAction(
   _previous: PdfImportState,
   formData: FormData,
@@ -51,35 +57,63 @@ export async function importPdfAction(
 
   const actor = { id: user.id, name: user.name, role: user.role };
   const tally = new Map<string, number>();
-  let refused = 0;
+  const bump = (key: string) => tally.set(key, (tally.get(key) ?? 0) + 1);
+
+  const started = Date.now();
+  let bytesRead = 0;
+  let obradjeno = 0;
 
   for (const file of files) {
-    if (file.size > MAX_BYTES) {
-      refused += 1;
+    if (bytesRead >= MAX_BATCH_BYTES || Date.now() - started >= MAX_BATCH_MS) {
+      bump("prekinut_prolaz");
       continue;
     }
-    const bytes = new Uint8Array(await file.arrayBuffer());
+    if (file.size > MAX_BYTES) {
+      bump("prevelik_fajl");
+      continue;
+    }
 
     /*
-     * Prolaz se otvara po fajlu, ne po otpremanju.
+     * Svaki fajl se obrađuje IZOLOVANO.
      *
-     * Tako `import_runs` i dalje nosi otisak konkretnog dokumenta i ostaje
-     * idempotentan, umesto da jedan prolaz „pokrije" dvadeset fajlova od kojih
-     * je polovina već uvezena.
+     * Jedan neispravan, šifrovan ili skraćen PDF ne sme oboriti ceo prolaz:
+     * bez ovoga je devetnaest uspešno uvezenih dokumenata nestajalo iz
+     * izveštaja zajedno sa dvadesetim koji je pukao, i operater nije imao
+     * način da sazna šta je prošlo.
      */
-    const runId = await openIngestionRun(
-      { fileName: file.name, fileHash: fileHashOf(bytes) },
-      actor,
-    );
+    try {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      bytesRead += bytes.byteLength;
+      obradjeno += 1;
 
-    const outcome = await ingestBiznisoftPdf(
-      { bytes, fileName: file.name, issuerCode, runId: runId ?? undefined },
-      actor,
-    );
-    tally.set(outcome.result, (tally.get(outcome.result) ?? 0) + 1);
+      /*
+       * Prolaz se otvara po fajlu, ne po otpremanju.
+       *
+       * Tako `import_runs` i dalje nosi otisak konkretnog dokumenta i ostaje
+       * idempotentan, umesto da jedan prolaz „pokrije" dvadeset fajlova od
+       * kojih je polovina već uvezena.
+       */
+      const runId = await openIngestionRun(
+        { fileName: file.name, fileHash: fileHashOf(bytes) },
+        actor,
+      );
+
+      const outcome = await ingestBiznisoftPdf(
+        { bytes, fileName: file.name, issuerCode, runId: runId ?? undefined },
+        actor,
+      );
+      bump(outcome.result);
+    } catch {
+      /*
+       * Greška se NE prosleđuje dalje ni u kom obliku.
+       *
+       * Poruka čitača ume da sadrži deo teksta dokumenta, a stack trace odaje
+       * putanje servera. Ekran dobija samo brojku; sam dokument nije nastao,
+       * pa nema ni šta da se pregleda.
+       */
+      bump("neuspelo_citanje");
+    }
   }
-
-  if (refused > 0) tally.set("prevelik_fajl", refused);
 
   revalidatePath("/portal/importi");
   revalidatePath("/portal/importi/dokumenti");
@@ -91,7 +125,7 @@ export async function importPdfAction(
 
   return {
     error: null,
-    ok: `Obrađeno dokumenata: ${files.length}.`,
+    ok: `Obrađeno dokumenata: ${obradjeno} od ${files.length}.`,
     summary,
   };
 }
@@ -103,4 +137,6 @@ const OUTCOME_LABELS: Record<string, string> = {
   quarantined: "karantin — traži pregled",
   duplicate_file: "isti fajl, preskočeno",
   prevelik_fajl: "odbijeno, prevelik fajl",
+  neuspelo_citanje: "nije pročitano — fajl odbijen",
+  prekinut_prolaz: "nije obrađeno — budžet prolaza iscrpljen",
 };

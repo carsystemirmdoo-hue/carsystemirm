@@ -216,7 +216,7 @@ test("odobreno pravilo je approved_pending_biznisoft, NE confirmed", async (t) =
   assert.match(notice.body, /NIJE potvrđen/);
 });
 
-test("kancelarija evidentira primenu i tek tada je confirmed", async (t) => {
+test("kancelarija evidentira unos — stanje je office_recorded, NE confirmed", async (t) => {
   if (guard(t)) return;
   const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
   const created = await freshProposal();
@@ -228,18 +228,112 @@ test("kancelarija evidentira primenu i tek tada je confirmed", async (t) => {
   await transitionPriceRule(
     {
       ruleId: created.id,
-      to: "confirmed",
-      confirmationNote: "Upisano u BizniSoft 15.06.",
+      to: "office_recorded",
+      officeRecordNote: "Upisano u BizniSoft 15.06.",
     },
     asPortalUser(fixture.office, ["cene_primena"]),
   );
 
   const [rule] = await db.sql<
-    { status: string; confirmed_by: string; confirmation_note: string }[]
-  >`SELECT status, confirmed_by, confirmation_note FROM price_rules WHERE id = ${created.id}`;
-  assert.equal(rule.status, "confirmed");
-  assert.equal(rule.confirmed_by, fixture.office.id);
-  assert.match(rule.confirmation_note, /BizniSoft/);
+    {
+      status: string;
+      office_recorded_by: string;
+      office_record_note: string;
+      confirmed_by: string | null;
+      reconciled_invoice_id: string | null;
+    }[]
+  >`SELECT status, office_recorded_by, office_record_note, confirmed_by, reconciled_invoice_id
+      FROM price_rules WHERE id = ${created.id}`;
+  assert.equal(rule.status, "office_recorded");
+  assert.equal(rule.office_recorded_by, fixture.office.id);
+  assert.match(rule.office_record_note, /BizniSoft/);
+  // Ljudska radnja NE sme popuniti nijedno polje dokaza.
+  assert.equal(rule.confirmed_by, null);
+  assert.equal(rule.reconciled_invoice_id, null);
+});
+
+test("nijedan covek ne moze postaviti confirmed kroz servis", async (t) => {
+  if (guard(t)) return;
+  const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
+  const created = await freshProposal();
+
+  await transitionPriceRule(
+    { ruleId: created.id, to: "approved_pending_biznisoft" },
+    asPortalUser(fixture.owner, []),
+  );
+  await transitionPriceRule(
+    { ruleId: created.id, to: "office_recorded", officeRecordNote: "uneto" },
+    asPortalUser(fixture.office, ["cene_primena"]),
+  );
+
+  for (const account of [fixture.owner, fixture.office]) {
+    await assert.rejects(
+      () =>
+        transitionPriceRule(
+          { ruleId: created.id, to: "confirmed" },
+          asPortalUser(account, ["cene_primena"]),
+        ),
+      /usaglašavanje sa fakturom/,
+    );
+  }
+
+  const [rule] = await db.sql<{ status: string }[]>`
+    SELECT status FROM price_rules WHERE id = ${created.id}`;
+  assert.equal(rule.status, "office_recorded", "stanje se ipak promenilo");
+});
+
+test("baza odbija confirmed bez reference na fakturu", async (t) => {
+  if (guard(t)) return;
+  const created = await freshProposal();
+
+  await assert.rejects(
+    () => db.sql`
+      UPDATE price_rules
+         SET status = 'confirmed', confirmed_by = ${fixture.office.id}, confirmed_at = now()
+       WHERE id = ${created.id}`,
+    /price_rules_confirmed_needs_invoice_ck/,
+    "confirmed je prosao bez dokaza sa fakture",
+  );
+});
+
+test("office_recorded bez napomene se ne moze upisati ni direktno", async (t) => {
+  if (guard(t)) return;
+  const created = await freshProposal();
+
+  await assert.rejects(
+    () => db.sql`
+      UPDATE price_rules
+         SET status = 'office_recorded', office_recorded_by = ${fixture.office.id},
+             office_recorded_at = now(), office_record_note = NULL
+       WHERE id = ${created.id}`,
+    /price_rules_office_recorded_ck/,
+  );
+});
+
+test("office_recorded ucestvuje u ceni, ali preview ga NE prijavljuje kao potvrdjen", async (t) => {
+  if (guard(t)) return;
+  const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
+  const { previewPricing } = await import("@/lib/pricing/evaluation-service");
+  const created = await freshProposal();
+
+  await transitionPriceRule(
+    { ruleId: created.id, to: "approved_pending_biznisoft" },
+    asPortalUser(fixture.owner, []),
+  );
+  await transitionPriceRule(
+    { ruleId: created.id, to: "office_recorded", officeRecordNote: "uneto" },
+    asPortalUser(fixture.office, ["cene_primena"]),
+  );
+
+  const preview = await previewPricing({
+    customerId: fixture.customerId,
+    articleId: fixture.articleId,
+    onDate: "2026-06-15",
+  });
+  assert.ok(preview.winner, "office_recorded pravilo ne ucestvuje u ceni");
+  assert.equal(preview.winner.status, "office_recorded");
+  assert.equal(preview.confirmed, false, "evidencija je prijavljena kao potvrda");
+  assert.equal(preview.officeRecorded, true);
 });
 
 test("komercijalista ne moze ni odobriti ni potvrditi", async (t) => {
@@ -286,7 +380,7 @@ test("odbijanje trazi razlog i belezi ga", async (t) => {
   assert.match(rule.decision_reason, /dogovoreni okvir/);
 });
 
-test("reconciliation_failed salje kriticno obavestenje gazdi", async (t) => {
+test("covek ne moze proglasiti neuspelo usaglasavanje", async (t) => {
   if (guard(t)) return;
   const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
   const created = await freshProposal();
@@ -296,19 +390,45 @@ test("reconciliation_failed salje kriticno obavestenje gazdi", async (t) => {
     asPortalUser(fixture.owner, []),
   );
   await transitionPriceRule(
-    {
-      ruleId: created.id,
-      to: "reconciliation_failed",
-      reason: "Uslov nije pronadjen u BizniSoftu ni posle 5 dana",
-    },
+    { ruleId: created.id, to: "office_recorded", officeRecordNote: "uneto" },
+    asPortalUser(fixture.office, ["cene_primena"]),
+  );
+  // `reconciliation_failed` je nalaz usaglašavanja — čovek ga ne postavlja,
+  // ni iz stanja iz kojeg je prelaz inače dozvoljen.
+  await assert.rejects(
+    () =>
+      transitionPriceRule(
+        {
+          ruleId: created.id,
+          to: "reconciliation_failed",
+          reason: "Uslov nije pronadjen u BizniSoftu ni posle 5 dana",
+        },
+        asPortalUser(fixture.office, ["cene_primena"]),
+      ),
+    /usaglašavanje sa fakturom/,
+  );
+});
+
+test("evidencija kancelarije obavestava gazdu, uz izricitu ogradu", async (t) => {
+  if (guard(t)) return;
+  const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
+  const created = await freshProposal();
+
+  await transitionPriceRule(
+    { ruleId: created.id, to: "approved_pending_biznisoft" },
+    asPortalUser(fixture.owner, []),
+  );
+  await transitionPriceRule(
+    { ruleId: created.id, to: "office_recorded", officeRecordNote: "uneto 15.06." },
     asPortalUser(fixture.office, ["cene_primena"]),
   );
 
-  const [notice] = await db.sql<{ severity: string; required_capability: string }[]>`
-    SELECT severity, required_capability FROM notifications
-    WHERE entity_id = ${created.id} AND kind = 'price_rule_reconciliation_failed'`;
-  assert.equal(notice.severity, "critical");
-  assert.equal(notice.required_capability, "prices:approve");
+  const notices = await db.sql<{ required_capability: string; body: string }[]>`
+    SELECT required_capability, body FROM notifications
+    WHERE entity_id = ${created.id} AND kind = 'price_rule_approved'
+    ORDER BY id DESC`;
+  assert.ok(notices.length >= 1);
+  assert.match(notices[0].body, /NIJE potvrđeno fakturom/);
 });
 
 /* -------------------------------------------------------------------------
@@ -342,7 +462,7 @@ test("svaki prelaz ostavlja svoj zapis, i stari ostaju netaknuti", async (t) => 
     asPortalUser(fixture.owner, []),
   );
   await transitionPriceRule(
-    { ruleId: created.id, to: "confirmed", confirmationNote: "upisano" },
+    { ruleId: created.id, to: "office_recorded", officeRecordNote: "upisano" },
     asPortalUser(fixture.office, ["cene_primena"]),
   );
 
@@ -353,7 +473,7 @@ test("svaki prelaz ostavlja svoj zapis, i stari ostaju netaknuti", async (t) => 
   assert.equal(entries.length, 3, "nedostaje zapis o nekom prelazu");
   assert.deepEqual(
     entries.map((row) => row.value_after.status),
-    ["pending_approval", "approved_pending_biznisoft", "confirmed"],
+    ["pending_approval", "approved_pending_biznisoft", "office_recorded"],
   );
 });
 

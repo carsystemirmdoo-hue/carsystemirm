@@ -15,6 +15,10 @@ import {
   precedenceLabelFor,
   type PricingRuleError,
 } from "@/lib/pricing/precedence.mjs";
+import {
+  isBiznisoftConfirmed,
+  isOfficeRecorded,
+} from "@/lib/pricing/workflow.mjs";
 
 /**
  * Stanja u kojima pravilo UOPŠTE učestvuje u odlučivanju.
@@ -28,6 +32,7 @@ import {
  */
 export const ACTIVE_RULE_STATUSES: PriceRuleStatus[] = [
   "approved_pending_biznisoft",
+  "office_recorded",
   "confirmed",
 ];
 
@@ -50,12 +55,14 @@ export type PricingPreview = {
   effectiveFrom: string | null;
   effectiveTo: string | null;
   /**
-   * Da li je uslov potvrđen kao upisan u BizniSoft.
+   * Da li je uslov POTVRĐEN FAKTUROM.
    *
-   * `false` kod `approved_pending_biznisoft`. Svaki ekran koji prikazuje cenu
-   * mora prikazati i ovo — odobrena cena nije fakturisana cena.
+   * `false` i za `approved_pending_biznisoft` i za `office_recorded`.
+   * Evidencija kancelarije je tvrdnja čoveka, ne dokaz — vidi `officeRecorded`.
    */
   confirmed: boolean;
+  /** Da li je kancelarija evidentirala ručni unos u BizniSoft. */
+  officeRecorded: boolean;
 };
 
 /**
@@ -161,7 +168,8 @@ export async function previewPricing(input: {
     conflict: decision.conflict,
     effectiveFrom: decision.effectiveFrom,
     effectiveTo: decision.effectiveTo,
-    confirmed: decision.winner?.status === "confirmed",
+    confirmed: isBiznisoftConfirmed(decision.winner?.status ?? ""),
+    officeRecorded: isOfficeRecorded(decision.winner?.status ?? ""),
   };
 }
 

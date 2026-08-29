@@ -25,6 +25,7 @@ import {
   scopeKeyFor,
 } from "@/lib/pricing/precedence.mjs";
 import {
+  ACTOR_HUMAN,
   actionFor,
   rejectTransition,
   WorkflowError,
@@ -173,7 +174,8 @@ export async function transitionPriceRule(
     ruleId: string;
     to: PriceRuleStatus;
     reason?: string | null;
-    confirmationNote?: string | null;
+    /** Napomena kancelarije o tome ŠTA je uneto u BizniSoft; obavezna za `office_recorded`. */
+    officeRecordNote?: string | null;
   },
   actor: PortalUser,
 ): Promise<void> {
@@ -187,16 +189,30 @@ export async function transitionPriceRule(
   if (!rule) throw new WorkflowError("Pravilo cene ne postoji.", "not_found");
 
   const capabilities = resolveCapabilities(actor.role, actor.permissions);
+  /*
+   * Napomena kancelarije je „razlog" za `office_recorded`.
+   *
+   * Spajanje ta dva polja ovde znači da se pravilo „ova radnja traži
+   * obrazloženje" proverava na JEDNOM mestu, umesto da svaki prelaz nosi svoju
+   * varijantu iste provere.
+   */
+  const transitionReason =
+    input.to === "office_recorded"
+      ? (input.officeRecordNote ?? input.reason)
+      : input.reason;
+
   const refusal = rejectTransition({
     from: rule.status,
     to: input.to,
     capabilities,
-    reason: input.reason,
+    reason: transitionReason,
     actorIsProposer: rule.proposedBy === actor.id,
+    // Nijedan ljudski put ne prosleđuje `system` — vidi `SYSTEM_ONLY_STATUSES`.
+    actorKind: ACTOR_HUMAN,
   });
   if (refusal) throw new WorkflowError(refusal, "bad_transition");
 
-  const reason = input.reason?.trim() || null;
+  const reason = transitionReason?.trim() || null;
   const correlationId = randomUUID();
   const action = actionFor(rule.status, input.to);
 
@@ -208,13 +224,19 @@ export async function transitionPriceRule(
         decidedBy: actor.id,
         decidedAt: sql`now()`,
         decisionReason: reason,
-        confirmedBy: input.to === "confirmed" ? actor.id : rule.confirmedBy,
-        confirmedAt:
-          input.to === "confirmed" ? sql`now()` : rule.confirmedAt,
-        confirmationNote:
-          input.to === "confirmed"
-            ? (input.confirmationNote?.trim() ?? null)
-            : rule.confirmationNote,
+        /*
+         * `confirmed*` polja se NE diraju ovde ni u jednom slučaju.
+         *
+         * Njih popunjava budući reconciliation servis, zajedno sa
+         * `reconciled_invoice_id`. Ljudski put upisuje isključivo evidenciju
+         * kancelarije.
+         */
+        officeRecordedBy:
+          input.to === "office_recorded" ? actor.id : rule.officeRecordedBy,
+        officeRecordedAt:
+          input.to === "office_recorded" ? sql`now()` : rule.officeRecordedAt,
+        officeRecordNote:
+          input.to === "office_recorded" ? reason : rule.officeRecordNote,
         updatedAt: sql`now()`,
       })
       .where(
@@ -282,6 +304,22 @@ function notificationForTransition(
         requiredCapability: "prices:propose",
         title: "Predlog promene cene je odbijen",
         body: `${label} — odbio ${actor.name}. Razlog: ${reason ?? "nije naveden"}`,
+        entityType: "Pravilo cene",
+        entityId: rule.id,
+        actionHref: "/portal/cene/istorija",
+        context: { klasa: rule.precedenceLevel, opseg: rule.scopeKey },
+      };
+    case "office_recorded":
+      return {
+        kind: "price_rule_approved" as const,
+        severity: "info" as const,
+        /*
+         * Gazdi, jer je on odobrio i mora znati da je kancelarija unela.
+         * Poruka izričito kaže da fakturska potvrda i dalje ne postoji.
+         */
+        requiredCapability: "prices:approve" as const,
+        title: "Kancelarija evidentirala unos u BizniSoft",
+        body: `${label} — evidentirao ${actor.name}. NIJE potvrđeno fakturom; potvrdu daje tek usaglašavanje.`,
         entityType: "Pravilo cene",
         entityId: rule.id,
         actionHref: "/portal/cene/istorija",
@@ -362,7 +400,7 @@ export type PriceRuleView = PriceRuleRow & {
   precedenceLabel: string | null;
   proposedByName: string | null;
   decidedByName: string | null;
-  confirmedByName: string | null;
+  officeRecordedByName: string | null;
 };
 
 /** Pravila sa čitljivim nazivima opsega, za ekrane. */
@@ -389,7 +427,7 @@ export async function listPriceRules(filter?: {
    */
   const proposer = alias(users, "proposer");
   const decider = alias(users, "decider");
-  const confirmer = alias(users, "confirmer");
+  const recorder = alias(users, "recorder");
 
   const rows = await db
     .select({
@@ -400,7 +438,7 @@ export async function listPriceRules(filter?: {
       articleName: articles.name,
       proposedByName: proposer.name,
       decidedByName: decider.name,
-      confirmedByName: confirmer.name,
+      officeRecordedByName: recorder.name,
     })
     .from(priceRules)
     .leftJoin(customers, eq(customers.id, priceRules.customerId))
@@ -408,7 +446,7 @@ export async function listPriceRules(filter?: {
     .leftJoin(articles, eq(articles.id, priceRules.articleId))
     .leftJoin(proposer, eq(proposer.id, priceRules.proposedBy))
     .leftJoin(decider, eq(decider.id, priceRules.decidedBy))
-    .leftJoin(confirmer, eq(confirmer.id, priceRules.confirmedBy))
+    .leftJoin(recorder, eq(recorder.id, priceRules.officeRecordedBy))
     .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(desc(priceRules.createdAt))
     .limit(filter?.limit ?? 200);
@@ -422,7 +460,7 @@ export async function listPriceRules(filter?: {
     precedenceLabel: precedenceLabelFor(row.rule.precedenceLevel),
     proposedByName: row.proposedByName,
     decidedByName: row.decidedByName,
-    confirmedByName: row.confirmedByName,
+    officeRecordedByName: row.officeRecordedByName,
   }));
 }
 

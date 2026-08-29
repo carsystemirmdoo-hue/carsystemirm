@@ -106,16 +106,22 @@ export async function proposeRuleAction(
 
 const transitionSchema = z.object({
   ruleId: z.string().uuid(),
+  /*
+   * `confirmed` i `reconciliation_failed` NISU u spisku.
+   *
+   * Prva odbrana: schema ih ne prihvata, pa ni ručno sastavljen POST ne prolazi.
+   * Druga: `rejectTransition` traži `actorKind: "system"`. Treća: baza traži
+   * `reconciled_invoice_id`. Tri nezavisna sloja, jer je ovo tvrdnja o novcu.
+   */
   to: z.enum([
     "approved_pending_biznisoft",
-    "confirmed",
+    "office_recorded",
     "rejected",
-    "reconciliation_failed",
     "revoked",
     "expired",
   ]),
   reason: z.string().trim().max(500).nullable(),
-  confirmationNote: z.string().trim().max(500).nullable(),
+  officeRecordNote: z.string().trim().max(500).nullable(),
 });
 
 export async function transitionRuleAction(
@@ -130,7 +136,7 @@ export async function transitionRuleAction(
     ruleId: formData.get("ruleId"),
     to: formData.get("to"),
     reason: optionalString(formData.get("reason")),
-    confirmationNote: optionalString(formData.get("confirmationNote")),
+    officeRecordNote: optionalString(formData.get("officeRecordNote")),
   });
   if (!parsed.success) return { error: "Radnja nije prepoznata.", ok: null };
 

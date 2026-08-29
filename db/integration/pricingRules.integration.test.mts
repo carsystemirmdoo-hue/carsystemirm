@@ -93,7 +93,14 @@ async function insertRule(
 ) {
   const { PRECEDENCE_LEVELS, scopeKeyFor } = await import("@/lib/pricing/precedence.mjs");
   const spec = PRECEDENCE_LEVELS.find((entry) => entry.level === level)!;
-  const status = overrides.status ?? "confirmed";
+  /*
+   * Podrazumevano `office_recorded`, ne `confirmed`.
+   *
+   * `confirmed` sada trazi referencu na fakturu (`price_rules_confirmed_needs_invoice_ck`),
+   * a ovi testovi dokazuju prvenstvo, ne usaglasavanje. `office_recorded` isto
+   * ucestvuje u odlucivanju o ceni.
+   */
+  const status = overrides.status ?? "office_recorded";
 
   const rule = {
     customerScope: spec.customerScope,
@@ -115,7 +122,7 @@ async function insertRule(
       precedence_level, scope_key,
       value_kind, discount_percent,
       effective_from, effective_to, status, reason,
-      confirmed_by, confirmed_at, decision_reason
+      office_recorded_by, office_recorded_at, office_record_note, decision_reason
     ) VALUES (
       ${rule.customerScope}, ${rule.customerId}, ${rule.customerGroupId},
       ${rule.productScope}, ${rule.articleId}, ${rule.productGroup}, ${rule.brand},
@@ -125,8 +132,9 @@ async function insertRule(
       ${overrides.effectiveTo ?? null},
       ${status},
       'QA pravilo',
-      ${status === "confirmed" ? fixture.actorId : null},
-      ${status === "confirmed" ? new Date() : null},
+      ${status === "office_recorded" ? fixture.actorId : null},
+      ${status === "office_recorded" ? new Date() : null},
+      ${status === "office_recorded" ? "QA evidencija" : null},
       ${status === "rejected" || status === "revoked" ? "QA odluka" : null}
     ) RETURNING id`;
   return row.id;
@@ -241,6 +249,7 @@ test("odobreno pravilo vazi, ali NIJE potvrdjeno iz BizniSofta", async (t) => {
     false,
     "odobreno pravilo je prikazano kao potvrdjeno",
   );
+  assert.equal(preview.officeRecorded, false);
 });
 
 test("predlog koji niko nije odobrio ne utice na cenu", async (t) => {
@@ -330,16 +339,35 @@ test("baza cuva sve 12 klase kada su tacno izracunate", async (t) => {
   assert.equal(count, 12);
 });
 
-test("confirmed bez potpisa se ne moze upisati", async (t) => {
+test("confirmed bez dokaza sa fakture se ne moze upisati", async (t) => {
+  if (guard(t)) return;
+  /*
+   * Ovo je brava iza F-1: `confirmed` traži red iz `invoices`, a te redove
+   * pravi uvoz iz knjigovodstva — ne portal i ne čovek.
+   */
+  await assert.rejects(
+    () => db.sql`
+      INSERT INTO price_rules (
+        customer_scope, product_scope, precedence_level, scope_key,
+        value_kind, discount_percent, effective_from, status, reason,
+        confirmed_by, confirmed_at
+      ) VALUES ('all', 'all', 12, 'all|all', 'discount_percent', 5,
+                '2026-01-01', 'confirmed', 'QA', ${fixture.actorId}, now())`,
+    /price_rules_confirmed_needs_invoice_ck/,
+  );
+});
+
+test("office_recorded bez napomene se ne moze upisati", async (t) => {
   if (guard(t)) return;
   await assert.rejects(
     () => db.sql`
       INSERT INTO price_rules (
         customer_scope, product_scope, precedence_level, scope_key,
-        value_kind, discount_percent, effective_from, status, reason
+        value_kind, discount_percent, effective_from, status, reason,
+        office_recorded_by, office_recorded_at
       ) VALUES ('all', 'all', 12, 'all|all', 'discount_percent', 5,
-                '2026-01-01', 'confirmed', 'QA')`,
-    /price_rules_confirmed_ck/,
+                '2026-01-01', 'office_recorded', 'QA', ${fixture.actorId}, now())`,
+    /price_rules_office_recorded_ck/,
   );
 });
 

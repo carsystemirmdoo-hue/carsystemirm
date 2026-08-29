@@ -109,6 +109,8 @@ export const priceRuleStatus = pgEnum("price_rule_status", [
   "draft",
   "pending_approval",
   "approved_pending_biznisoft",
+  /** Kancelarija evidentirala ručni unos u BizniSoft — NIJE dokaz sa fakture. */
+  "office_recorded",
   "confirmed",
   "rejected",
   "reconciliation_failed",
@@ -182,9 +184,32 @@ export const priceRules = pgTable(
     /**
      * Ko je evidentirao da je uslov RUČNO upisan u BizniSoft.
      *
-     * Ovo nije potvrda iz BizniSofta — to je izjava čoveka iz kancelarije da je
-     * upisao. Prava potvrda dolazi kasnije, kroz read-only PDF sistem.
+     * Ovo NIJE potvrda sa fakture — to je izjava čoveka iz kancelarije da je
+     * upisao. Napomena je obavezna (`price_rules_office_recorded_ck`) jer je
+     * jedini trag o tome ŠTA je tačno uneto.
      */
+    officeRecordedBy: uuid("office_recorded_by").references(() => users.id, {
+      onDelete: "restrict",
+    }),
+    officeRecordedAt: timestamp("office_recorded_at", { withTimezone: true }),
+    officeRecordNote: text("office_record_note"),
+
+    /**
+     * Dokaz sa fakture — popunjava ga isključivo budući read-only
+     * reconciliation servis.
+     *
+     * `price_rules_confirmed_needs_invoice_ck` čini `confirmed` nemogućim bez
+     * `reconciled_invoice_id`. Zabrana živi u bazi, ne u dobroj nameri
+     * pozivaoca: nijedan UI, servis ni ručni SQL kroz aplikativnu rolu ne može
+     * proglasiti pravilo potvrđenim bez reda iz `invoices`.
+     *
+     * Matching algoritam NIJE deo ove faze — ovo je samo mesto na koje se kači.
+     */
+    reconciledInvoiceId: uuid("reconciled_invoice_id"),
+    reconciledInvoiceLineId: uuid("reconciled_invoice_line_id"),
+    reconciledAt: timestamp("reconciled_at", { withTimezone: true }),
+    reconciliationNote: text("reconciliation_note"),
+
     confirmedBy: uuid("confirmed_by").references(() => users.id, {
       onDelete: "restrict",
     }),

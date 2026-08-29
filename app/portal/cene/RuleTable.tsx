@@ -36,10 +36,11 @@ export type RuleRow = {
   effectiveTo: string | null;
   reason: string;
   decisionReason: string | null;
-  confirmationNote: string | null;
+  officeRecordNote: string | null;
+  reconciliationNote: string | null;
   proposedByName: string | null;
   decidedByName: string | null;
-  confirmedByName: string | null;
+  officeRecordedByName: string | null;
 };
 
 /** Prelazi ponuđeni iz datog stanja, sa nazivom radnje. */
@@ -49,17 +50,32 @@ const ACTIONS: Record<string, { to: string; label: string; needsReason: boolean 
     { to: "rejected", label: "Odbij", needsReason: true },
     { to: "revoked", label: "Opozovi", needsReason: true },
   ],
+  /*
+   * `confirmed` i `reconciliation_failed` NAMERNO nisu ponuđeni nigde.
+   *
+   * Ta dva stanja nisu odluka nego nalaz usaglašavanja sa fakturom, i postavlja
+   * ih isključivo budući read-only reconciliation servis. Čovek iz portala ne
+   * vidi fakturu — vidi samo šta misli da je uneo u BizniSoft.
+   */
   approved_pending_biznisoft: [
-    { to: "confirmed", label: "Evidentiraj upis u BizniSoft", needsReason: false },
     {
-      to: "reconciliation_failed",
-      label: "Usaglašavanje nije uspelo",
+      to: "office_recorded",
+      label: "Evidentiraj unos u BizniSoft",
       needsReason: true,
     },
     { to: "revoked", label: "Opozovi", needsReason: true },
+    { to: "expired", label: "Označi isteklim", needsReason: false },
+  ],
+  office_recorded: [
+    { to: "revoked", label: "Opozovi", needsReason: true },
+    { to: "expired", label: "Označi isteklim", needsReason: false },
   ],
   reconciliation_failed: [
-    { to: "confirmed", label: "Evidentiraj upis u BizniSoft", needsReason: false },
+    {
+      to: "office_recorded",
+      label: "Ponovo evidentiraj unos u BizniSoft",
+      needsReason: true,
+    },
     { to: "revoked", label: "Opozovi", needsReason: true },
   ],
   confirmed: [
@@ -137,10 +153,16 @@ export function RuleTable({
                     * ne samo bojom. Boja se izgubi u štampi i u izvozu.
                     */}
                   {row.status === "approved_pending_biznisoft" ? (
-                    <small>Nije potvrđeno kao upisano u BizniSoft.</small>
+                    <small>Još nije uneto u BizniSoft.</small>
                   ) : null}
-                  {row.status === "confirmed" && row.confirmationNote ? (
-                    <small>{row.confirmationNote}</small>
+                  {row.status === "office_recorded" ? (
+                    <small>
+                      Tvrdnja kancelarije, ne dokaz sa fakture.
+                      {row.officeRecordNote ? ` ${row.officeRecordNote}` : ""}
+                    </small>
+                  ) : null}
+                  {row.status === "confirmed" && row.reconciliationNote ? (
+                    <small>{row.reconciliationNote}</small>
                   ) : null}
                 </td>
                 <td>
@@ -150,8 +172,8 @@ export function RuleTable({
                     <small>Odlučio: {row.decidedByName}</small>
                   ) : null}
                   {row.decisionReason ? <small>{row.decisionReason}</small> : null}
-                  {row.confirmedByName ? (
-                    <small>Primenu evidentirao: {row.confirmedByName}</small>
+                  {row.officeRecordedByName ? (
+                    <small>Unos evidentirao: {row.officeRecordedByName}</small>
                   ) : null}
                 </td>
                 {showActions ? (
@@ -196,10 +218,10 @@ export function RuleTable({
             <input type="text" name="reason" maxLength={500} />
           </Field>
           <Field
-            label="Napomena o upisu u BizniSoft"
-            hint="Popunjava se pri evidentiranju primene."
+            label="Napomena o unosu u BizniSoft"
+            hint="Obavezna pri evidentiranju unosa — jedini trag o tome ŠTA je uneto."
           >
-            <input type="text" name="confirmationNote" maxLength={500} />
+            <input type="text" name="officeRecordNote" maxLength={500} />
           </Field>
           <PortalButton type="submit" variant="primary" disabled={pending}>
             {pending ? "Čuvanje…" : "Potvrdi radnju"}

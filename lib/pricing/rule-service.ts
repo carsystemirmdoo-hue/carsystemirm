@@ -1,12 +1,14 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 import { getDb } from "@/db/client";
 import {
   articles,
   customerGroups,
   customers,
   priceRules,
+  users,
   type PriceRuleRow,
   type PriceRuleStatus,
 } from "@/db/schema";
@@ -358,6 +360,9 @@ export type PriceRuleView = PriceRuleRow & {
   articleCode: string | null;
   articleName: string | null;
   precedenceLabel: string | null;
+  proposedByName: string | null;
+  decidedByName: string | null;
+  confirmedByName: string | null;
 };
 
 /** Pravila sa čitljivim nazivima opsega, za ekrane. */
@@ -375,6 +380,17 @@ export async function listPriceRules(filter?: {
     conditions.push(eq(priceRules.customerId, filter.customerId));
   }
 
+  /*
+   * Imena ljudi se spajaju u upitu, ne dovlace posebno po redu.
+   *
+   * Ekran odobravanja mora u istom pogledu pokazati ko je predlozio, ko odlucio
+   * i ko evidentirao primenu — bez toga „ko stoji iza ove cene" postaje pitanje
+   * na koje se odgovara pretragom kroz Aktivnosti.
+   */
+  const proposer = alias(users, "proposer");
+  const decider = alias(users, "decider");
+  const confirmer = alias(users, "confirmer");
+
   const rows = await db
     .select({
       rule: priceRules,
@@ -382,11 +398,17 @@ export async function listPriceRules(filter?: {
       customerGroupName: customerGroups.name,
       articleCode: articles.code,
       articleName: articles.name,
+      proposedByName: proposer.name,
+      decidedByName: decider.name,
+      confirmedByName: confirmer.name,
     })
     .from(priceRules)
     .leftJoin(customers, eq(customers.id, priceRules.customerId))
     .leftJoin(customerGroups, eq(customerGroups.id, priceRules.customerGroupId))
     .leftJoin(articles, eq(articles.id, priceRules.articleId))
+    .leftJoin(proposer, eq(proposer.id, priceRules.proposedBy))
+    .leftJoin(decider, eq(decider.id, priceRules.decidedBy))
+    .leftJoin(confirmer, eq(confirmer.id, priceRules.confirmedBy))
     .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(desc(priceRules.createdAt))
     .limit(filter?.limit ?? 200);
@@ -398,6 +420,9 @@ export async function listPriceRules(filter?: {
     articleCode: row.articleCode,
     articleName: row.articleName,
     precedenceLabel: precedenceLabelFor(row.rule.precedenceLevel),
+    proposedByName: row.proposedByName,
+    decidedByName: row.decidedByName,
+    confirmedByName: row.confirmedByName,
   }));
 }
 

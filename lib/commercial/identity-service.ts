@@ -364,3 +364,6 @@ export async function findCustomerByPartnerCode(query: {
     .limit(1);
   return rows[0]?.customerId ?? null;
 }
+
+// Pozivaoci moraju moci da razlikuju poslovno odbijanje od stvarne greske.
+export { ExternalIdentityError };

@@ -7043,3 +7043,98 @@ body:has(.portal-login-root) {
   cursor: pointer;
   font-weight: 600;
 }
+
+/* =========================================================================
+ * Komercijalna faza: mapiranja, pravila cene, nalozi kupaca, obaveštenja
+ *
+ * Namerno bez novih tokena boje — koriste se postojeći, da bi novi ekrani
+ * izgledali kao deo istog sistema, a ne kao dodatak.
+ * ====================================================================== */
+
+.portal-form {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: end;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--portal-border, rgba(148, 163, 184, 0.24));
+}
+
+/* Naslov i dugme zauzimaju ceo red — inače bi se rasuli u kolonu obrasca. */
+.portal-form > h3,
+.portal-form > .portal-button {
+  grid-column: 1 / -1;
+}
+
+.portal-form > .portal-button {
+  justify-self: start;
+}
+
+.portal-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+}
+
+.portal-filters .portal-field {
+  min-width: 200px;
+}
+
+.portal-notification-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.portal-notification-list li {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 16px;
+  border: 1px solid var(--portal-border, rgba(148, 163, 184, 0.24));
+  border-radius: 12px;
+}
+
+/* Nepročitano se razlikuje i bez boje — traka radi i u štampi. */
+.portal-notification-list li[data-status="unread"] {
+  border-left-width: 4px;
+}
+
+.portal-notification-list li[data-status="resolved"] {
+  opacity: 0.7;
+}
+
+.portal-notification-list li > div:first-child {
+  flex: 1 1 320px;
+  display: grid;
+  gap: 6px;
+}
+
+.portal-notification-list li > div:last-child {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.portal-notification-list p {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .portal-form,
+  .portal-filters {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .portal-filters .portal-field {
+    min-width: 0;
+  }
+}

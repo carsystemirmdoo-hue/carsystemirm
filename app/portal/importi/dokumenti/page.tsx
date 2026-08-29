@@ -104,7 +104,7 @@ export default async function SourceDocumentsPage({
       </section>
 
       <SourceDocumentReview
-        canManage={can(user, "view:importi")}
+        canManage={can(user, "documents:resolve")}
         rows={rows.map((row) => ({
           id: row.id,
           fileHash: row.fileHash,

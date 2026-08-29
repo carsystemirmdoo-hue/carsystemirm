@@ -70,6 +70,37 @@ test("ruta izvornih dokumenata trazi istu sposobnost kao uvoz", async (t) => {
   assert.equal(can({ role: "kupac", permissions: [] }, "view:importi"), false);
 });
 
+test("M-1: odluka o verziji NIJE ista sposobnost kao pregled uvoza", async (t) => {
+  if (guard(t)) return;
+  const { can, CAPABILITIES, resolveCapabilities } =
+    await import("@/lib/authz/permissions.mjs");
+
+  assert.ok(CAPABILITIES.includes("documents:resolve"), "sposobnost ne postoji");
+
+  /*
+   * Kancelarija bazno VIDI uvoz, ali ne odlucuje koja verzija vazi. Pre
+   * popravke je jedna ista sposobnost pokrivala oba, pa je svako ko sme da
+   * pogleda uvoz smeo i da odredi koja se faktura racuna.
+   */
+  const kancelarija = { role: "kancelarija", permissions: [] as string[] };
+  assert.equal(can(kancelarija, "view:importi"), true);
+  assert.equal(can(kancelarija, "documents:resolve"), false);
+
+  // Dobija je tek uz paket mapiranja — isti paket koji vec nosi razresenje sifri.
+  const saPaketom = { role: "kancelarija", permissions: ["mapiranja"] };
+  assert.equal(can(saPaketom, "documents:resolve"), true);
+
+  // Gazda je ima bazno; magacioner i kupac ni sa cim.
+  assert.equal(can({ role: "gazda", permissions: [] }, "documents:resolve"), true);
+  assert.equal(can({ role: "magacioner", permissions: [] }, "documents:resolve"), false);
+  assert.equal(can({ role: "kupac", permissions: [] }, "documents:resolve"), false);
+
+  // Paket „analitika" daje pregled uvoza, ali ne i odluku.
+  const analiticar = resolveCapabilities("komercijalista", ["analitika"]);
+  assert.equal(analiticar.has("view:importi"), true);
+  assert.equal(analiticar.has("documents:resolve"), false);
+});
+
 test("trag revizije ne sadrzi naziv kupca, PIB ni ceo broj dokumenta", async (t) => {
   if (guard(t)) return;
   await clean();

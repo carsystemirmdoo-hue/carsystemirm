@@ -27,7 +27,7 @@ export async function resolveRevisionAction(
   _previous: DocumentReviewState,
   formData: FormData,
 ): Promise<DocumentReviewState> {
-  const actor = await requireCapability("view:importi", "/portal/importi/dokumenti");
+  const actor = await requireCapability("documents:resolve", "/portal/importi/dokumenti");
 
   const parsed = revisionSchema.safeParse({
     supersededId: formData.get("supersededId"),
@@ -76,7 +76,7 @@ export async function closeReviewAction(
   _previous: DocumentReviewState,
   formData: FormData,
 ): Promise<DocumentReviewState> {
-  const actor = await requireCapability("view:importi", "/portal/importi/dokumenti");
+  const actor = await requireCapability("documents:resolve", "/portal/importi/dokumenti");
 
   const parsed = reviewSchema.safeParse({
     sourceDocumentId: formData.get("sourceDocumentId"),

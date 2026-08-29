@@ -46,9 +46,17 @@ export function fileHashOf(bytes: Uint8Array): string {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-/** Čita PDF u strane sa pozicioniranim elementima. */
+/**
+ * Čita PDF u strane sa pozicioniranim elementima.
+ *
+ * Radi nad KOPIJOM bajtova. pdf.js prenosi (`transfer`) prosleđeni buffer u
+ * svoj worker i time ga odvaja, pa bi pozivaočev niz posle prvog poziva bio
+ * prazan. Bez kopije drugi `parseBiznisoftPdf` nad istim nizom puca sa
+ * „Unable to deserialize cloned data" — a upravo to radi provera duplikata,
+ * koja isti fajl parsira dvaput.
+ */
 async function readPages(bytes: Uint8Array) {
-  const pdf = await getDocumentProxy(bytes);
+  const pdf = await getDocumentProxy(new Uint8Array(bytes));
   const pages = [];
   for (let n = 1; n <= pdf.numPages; n += 1) {
     const content = await (await pdf.getPage(n)).getTextContent();

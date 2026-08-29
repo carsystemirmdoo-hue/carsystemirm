@@ -6,6 +6,7 @@ import {
   looksLikePdf,
   MAX_LINES,
   MAX_PAGES,
+  MAX_QUANTITY_DECIMALS,
   hasTableContinuation,
   isLineRow,
   parseHeader,
@@ -215,6 +216,27 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
       documentKind: kind.kind,
       validationStatus: "unsupported_requires_sample",
       validationDetail: `Dokument ima više od ${MAX_LINES} stavki. Za taj obim ne postoji potvrđen uzorak.`,
+    };
+  }
+
+  /*
+   * Količina preciznija nego što baza može da sačuva.
+   *
+   * `invoice_lines.quantity` je `numeric(14,3)`; četvrtu decimalu bi Postgres
+   * tiho zaokružio, pa bi u bazi stajala količina koja ne piše na dokumentu.
+   * Tiho odstupanje u količini je gore od odbijenog dokumenta — vidi se tek
+   * kada se ne poklopi sa magacinom.
+   */
+  const preciznije = lines.filter((l) => l.quantityDecimals > MAX_QUANTITY_DECIMALS);
+  if (preciznije.length > 0) {
+    return {
+      ...base,
+      lines,
+      documentKind: kind.kind,
+      validationStatus: "unsupported_requires_sample",
+      validationDetail:
+        `Količina je zapisana na više od ${MAX_QUANTITY_DECIMALS} decimale. ` +
+        "Za taj oblik ne postoji potvrđen uzorak.",
     };
   }
 

@@ -198,7 +198,7 @@ test("prazan assignment daje prazan ledger, nikad ceo promet", async (t) => {
   assert.deepEqual(scope.customerIds, []);
   const totals = await ledgerTotals(scope);
   assert.equal(totals.gross_sales.lines, 0);
-  assert.equal(totals.net_effective_sales.amount, 0);
+  assert.equal(totals.net_effective_sales.amount, "0");
 });
 
 test("komercijalista vidi samo dodeljenog kupca", async (t) => {
@@ -316,4 +316,27 @@ test("C-1: dva izvorna dokumenta na istu fakturu — baza odbija, promet se ne u
   const [{ post }] = await db.sql<{ post: number }[]>`
     SELECT count(*)::int AS post FROM effective_sales_ledger`;
   assert.equal(post, 7, "promet je udvostrucen");
+});
+
+test("zbir prometa je EGZAKTAN tekst iz baze, ne JS float", async (t) => {
+  if (guard(t)) return;
+  const { ledgerTotals } = await import("@/lib/ledger/effective-sales");
+  await ingestMapped();
+
+  /*
+   * Iznos koji se u JS-u sabira postaje binarni float pre nego sto ga iko
+   * vidi. Kako je ovaj modul jedini ulaz u promet, svaki kasniji potrosac bi
+   * nasledio istu gresku — zato zbir racuna baza i vraca ga kao tekst.
+   */
+  const totals = await ledgerTotals({ customerIds: null });
+  assert.equal(typeof totals.gross_sales.amount, "string");
+  assert.equal(typeof totals.net_effective_sales.amount, "string");
+  assert.match(totals.gross_sales.amount, /^-?\d+(\.\d+)?$/);
+
+  // Egzaktno se poklapa sa zbirom koji baza vidi nad istim redovima.
+  const [{ iz_baze }] = await db.sql<{ iz_baze: string }[]>`
+    SELECT coalesce(sum(line_amount), 0)::text AS iz_baze
+      FROM effective_sales_ledger WHERE enters_net`;
+  assert.equal(totals.net_effective_sales.amount, iz_baze);
+  assert.equal(totals.gross_sales.lines, 7);
 });

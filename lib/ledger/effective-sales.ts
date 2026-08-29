@@ -63,17 +63,28 @@ function scopeCondition(scope: LedgerScope) {
   return sql`customer_id IN (${list})`;
 }
 
-export type LedgerTotals = Record<LedgerBucket, { lines: number; amount: number }> & {
-  net_effective_sales: { lines: number; amount: number };
+/**
+ * Zbirke po kofama.
+ *
+ * `amount` je TEKST, ne broj.
+ *
+ * Zbir se računa u bazi nad `numeric` kolonama i egzaktan je. Pretvaranje u
+ * JS broj bi ga vratilo u binarni float pre nego što ga iko vidi — a ovaj
+ * modul je jedini ulaz u promet, pa bi svaki kasniji potrošač nasledio istu
+ * grešku. Ko treba da prikaže iznos, formatira tekst; ko treba da računa,
+ * računa u bazi.
+ */
+export type LedgerTotals = Record<LedgerBucket, { lines: number; amount: string }> & {
+  net_effective_sales: { lines: number; amount: string };
 };
 
 const EMPTY: LedgerTotals = {
-  gross_sales: { lines: 0, amount: 0 },
-  returns: { lines: 0, amount: 0 },
-  cancellations: { lines: 0, amount: 0 },
-  corrections: { lines: 0, amount: 0 },
-  unclassified: { lines: 0, amount: 0 },
-  net_effective_sales: { lines: 0, amount: 0 },
+  gross_sales: { lines: 0, amount: "0" },
+  returns: { lines: 0, amount: "0" },
+  cancellations: { lines: 0, amount: "0" },
+  corrections: { lines: 0, amount: "0" },
+  unclassified: { lines: 0, amount: "0" },
+  net_effective_sales: { lines: 0, amount: "0" },
 };
 
 /**
@@ -82,6 +93,8 @@ const EMPTY: LedgerTotals = {
  * `net_effective_sales` NIJE zbir svih kofa. Sabira samo redove kojima pogled
  * kaže `enters_net` — dakle prodaju. Povrat, storno i korekcija se prikazuju
  * odvojeno i ne umanjuju neto dok veza sa originalom nije dokazana.
+ *
+ * Oba zbira računa baza. U JS-u se ništa ne sabira, pa se ni ne zaokružuje.
  */
 export async function ledgerTotals(
   scope: LedgerScope,
@@ -94,28 +107,29 @@ export async function ledgerTotals(
   const where = sql.join(conditions, sql` AND `);
 
   const rows = await db.execute<{
-    bucket: LedgerBucket;
-    enters_net: boolean;
+    bucket: LedgerBucket | null;
     lines: number;
     amount: string;
   }>(sql`
-    SELECT bucket, enters_net,
-           count(*)::int AS lines,
+    SELECT bucket, count(*)::int AS lines,
            coalesce(sum(line_amount), 0)::text AS amount
       FROM effective_sales_ledger
      WHERE ${where}
-     GROUP BY bucket, enters_net
+     GROUP BY bucket
+     UNION ALL
+    SELECT NULL, count(*)::int,
+           coalesce(sum(line_amount), 0)::text
+      FROM effective_sales_ledger
+     WHERE ${where} AND enters_net
   `);
 
   const totals: LedgerTotals = structuredClone(EMPTY);
   for (const row of rows) {
-    const bucket = totals[row.bucket] ?? totals.unclassified;
-    bucket.lines += row.lines;
-    bucket.amount += Number(row.amount);
-    if (row.enters_net) {
-      totals.net_effective_sales.lines += row.lines;
-      totals.net_effective_sales.amount += Number(row.amount);
-    }
+    // `bucket IS NULL` je red sa neto zbirom iz drugog dela unije.
+    const key = row.bucket ?? "net_effective_sales";
+    const target = totals[key as keyof LedgerTotals] ?? totals.unclassified;
+    target.lines = row.lines;
+    target.amount = row.amount;
   }
   return totals;
 }

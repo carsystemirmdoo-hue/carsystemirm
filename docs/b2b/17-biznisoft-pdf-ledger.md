@@ -65,10 +65,34 @@ jedan broj. 🟢
 „za svaki slučaj" značilo bi granu koju nijedan dokument ne izvršava, a koja bi
 pri prvom skeniranom dokumentu radila neproverena.
 
+### Granice obima
+
+| | |
+|---|---|
+| Veličina fajla | 20 MB |
+| Dokumenata po prolazu | 200 |
+| Strana po dokumentu | **40** |
+| Stavki po dokumentu | **500** |
+| Decimala u količini | **3** (`invoice_lines.quantity` je `numeric(14,3)`) |
+| Budžet prolaza | 200 MB / 90 s |
+
+Brojevi su daleko iznad svega što stvarni uzorci pokazuju (najviše 2 strane i
+13 stavki), pa granica ne može zaustaviti stvaran dokument a da to ne bude vest
+sama po sebi. Prekoračenje **nije greška fajla** nego oblik bez potvrđenog
+uzorka. Broj strana se proverava pre nego što se ijedna pročita — trošak je
+upravo u čitanju.
+
+Iscrpljen budžet prolaza takođe nije greška: sve obrađeno je proknjiženo i
+prijavljeno, ostatak ide u sledeći prolaz.
+
 ### Redosled provera
 
 Namerno od najgrublje ka najfinijoj:
 
+0. fajl ne počinje sa `%PDF-` → `unparsable` (polyglot se odbija, iako ga
+   čitači tolerišu);
+0b. čitač baca (oštećen, skraćen, zaštićen lozinkom) → `unparsable`, bez
+   prenošenja poruke čitača — ona ume da sadrži deo teksta dokumenta;
 1. nije BizniSoft → `unparsable`;
 2. naslov nije prepoznat → `unsupported_requires_sample`;
 3. tabela se nastavlja na sledeću stranu → `unsupported_requires_sample` 🔴;
@@ -116,12 +140,27 @@ namerno: dve verzije istog dokumenta moraju moći da postoje istovremeno da bi
 čovek video obe i rekao koja važi.
 
 **Sistem nikada ne bira „poslednju".** Ni po datumu fajla, ni po redosledu
-uvoza. Datum fajla se menja kopiranjem i ne kaže ništa o dokumentu. Obe verzije
-čekaju, nijedna ne ulazi u ledger dok se sudar ne razreši.
+uvoza. Datum fajla se menja kopiranjem i ne kaže ništa o dokumentu. Kada se
+sudar otkrije, **obe** verzije u istoj transakciji dobijaju `conflict` i
+`pending`, pa nijedna ne ulazi u ledger dok se spor ne razreši — uključujući i
+onu koja je već bila proknjižena. Njena faktura se ne briše, samo prestaje da
+se računa.
 
-Razrešenje je **aditivno**: ranija verzija dobija `superseded` i ispada iz
-ledgera, novija ostaje `original`. Nijedan raniji zapis se ne briše i ne
-prepisuje.
+Razrešenje je **aditivno**: ranija verzija dobija `superseded`, novija ostaje
+`original`. Nijedan izvorni dokument i nijedna njegova pročitana stavka se ne
+brišu; `superseded_by_id` vodi na naslednika, pa se lanac čita unazad.
+
+Pobednička verzija se **knjiži tačno jednom**. Faktura je jedan poslovni
+dokument i njen identitet je jedinstven u bazi, pa se ne pravi nova nego
+postojeća **prelazi** na verziju koja važi: prepisuju se samo stavke i zbirovi,
+izvedeni podaci. Ponovljeno razrešenje je no-op.
+
+Na nivou baze, jedna faktura sme imati **najviše jedan** izvorni dokument
+(`source_documents_invoice_key`). Bez tog ograničenja bi dva dokumenta na istu
+fakturu udvostručila svaki njen red u pogledu — tiho, kao veći promet.
+
+Istovremeni uvoz istog fajla: jedinstveni indeks propušta tačno jedan, a
+gubitnik dobija isti uredan `duplicate_file` koji bi dobio i sekundu kasnije.
 
 ---
 
@@ -180,6 +219,11 @@ nijedno pravilo, a povrat ne ulazi u promet i ne potvrđuje ništa.
 
 `confirmed_by` ostaje prazan: potvrdu nije dao čovek, i trag to razlikuje.
 
+**Valuta.** `invoices` i `invoice_lines` nemaju kolonu valute — svaki iznos je
+implicitno dinar. Pravilo u bilo kojoj drugoj valuti vraća `not_applicable`:
+sto evra i sto dinara su isti broj, pa poređenje ne bi bilo pogrešno za dlaku
+nego potpuno. Valuta se proverava pre opsega, da poruka bude tačna.
+
 > **Granica dokaza.** 🔴 Nijedan stvaran uzorak nema ponovljen par (kupac,
 > artikal), pa nad realnim podacima ovaj servis danas ne može vratiti ništa osim
 > `no_evidence_yet`. Logika je dokazana sintetičkim fixture-ima; prvo stvarno
@@ -191,6 +235,13 @@ nijedno pravilo, a povrat ne ulazi u promet i ne potvrđuje ništa.
 
 `/portal/importi` i `/portal/importi/dokumenti` traže `view:importi`.
 Komercijalista, magacioner i kupački nalog je bez paketa nemaju.
+
+Trajne odluke nad dokumentima — biranje koja verzija važi i zatvaranje ručnog
+pregleda — traže **`documents:resolve`**, ne `view:importi`. Pregled uvoza je
+svakodnevni posao i ima ga cela kancelarija; odluka menja ono što ulazi u
+promet i ne poništava se. Sposobnost nosi gazda bazno i paket „Mapiranja", uz
+razrešavanje šifri partnera — iste su vrste, oboje menjaju čija je i koja je
+istorija.
 
 Usaglašavanje traži `prices:apply` — istu dozvolu koja sme da evidentira upis u
 BizniSoft. To **nije** dozvola da se pravilo potvrdi: ishod određuje faktura, i
@@ -222,6 +273,8 @@ Pravila koja se sprovode kodom i testovima:
   fakture nije stvaran. Generiše ih `npm run fixtures:biznisoft`.
 - **Stvarni PDF-ovi ostaju van Gita.** Provera nad njima se pokreće lokalno
   (§8) i ispisuje samo anonimne oznake, statuse i brojeve.
+- **Poruke o neuspelom čitanju ne nose ni tekst dokumenta ni tehnički trag.**
+  Poruka čitača ume da sadrži deo sadržaja, a stack trace odaje putanje servera.
 - **Ništa se ne šalje cloud, OCR ni SaaS servisu.**
 
 ---
@@ -241,8 +294,10 @@ BIZNISOFT_SAMPLES=/putanja/do/foldera \
   scripts/local/biznisoft-acceptance.mjs
 ```
 
-Skripta ispisuje isključivo anonimne oznake, statuse i zbirove. Ako putanja nije
-zadata, ništa se ne pokreće.
+Skripta ispisuje isključivo anonimne oznake, statuse i zbirove. **Putanja je
+obavezna** — podrazumevane nema. Ranije se podrazumevao `~/Downloads`, pa bi
+skripta pokrenuta bez promenljive prošla kroz lični folder i čitala tuđe
+PDF-ove.
 
 ---
 

@@ -18,9 +18,22 @@ import { homedir } from "node:os";
 import path from "node:path";
 import { parseBiznisoftPdf } from "../../lib/pdf/extract.ts";
 
-const dir = process.env.BIZNISOFT_SAMPLES
-  ? process.env.BIZNISOFT_SAMPLES.replace(/^~/, homedir())
-  : path.join(homedir(), "Downloads");
+/*
+ * Putanja mora biti ZADATA.
+ *
+ * Ranije se podrazumevalo `~/Downloads`. Skripta bi tada, pokrenuta bez
+ * promenljive, prošla kroz lični folder i čitala tuđe PDF-ove — tačno ono što
+ * pravilo o privatnosti zabranjuje. Nema bezbedne podrazumevane putanje do
+ * privatnih dokumenata, pa je nema ni ovde.
+ */
+if (!process.env.BIZNISOFT_SAMPLES) {
+  console.error(
+    "Postavite BIZNISOFT_SAMPLES na folder sa uzorcima.\n" +
+      "Podrazumevane putanje nema — skripta ne sme sama da bira šta će čitati.",
+  );
+  process.exit(1);
+}
+const dir = process.env.BIZNISOFT_SAMPLES.replace(/^~/, homedir());
 
 const prefix = process.env.BIZNISOFT_PREFIX ?? "";
 const files = (await readdir(dir))

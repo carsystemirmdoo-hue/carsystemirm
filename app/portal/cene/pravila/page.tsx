@@ -9,6 +9,7 @@ import {
   listScopedCustomers,
   resolvePricingScope,
 } from "@/lib/pricing/pricing-scope";
+import { ReconciliationPanel } from "@/features/portal/ReconciliationPanel";
 import { RuleForm } from "../RuleForm";
 import { RuleTable } from "../RuleTable";
 
@@ -94,6 +95,12 @@ export default async function PriceRulesPage() {
           </p>
         </section>
       )}
+
+      {can(user, "prices:apply") ? (
+        <ReconciliationPanel
+          pending={rules.filter((rule) => rule.status === "office_recorded").length}
+        />
+      ) : null}
 
       <RuleTable rows={rules} />
     </>

@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
   // stilova. Zato `npm run build:check` gradi u zaseban folder.
   // Vercel ne postavlja ovu promenljivu i i dalje koristi `.next`.
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  /*
+   * `unpdf` se ne pakuje u bundle, nego se učitava iz `node_modules`.
+   *
+   * Unutra je pdf.js, koji koristi `import.meta` na način koji webpack ume
+   * samo da upozori i ostavi. Upozorenje je bezbedno, ali stoji na svakom
+   * buildu i sakriva sledeće koje neće biti. Biblioteka se ionako izvršava
+   * isključivo na serveru.
+   */
+  serverExternalPackages: ["unpdf"],
   experimental: {
     // Omogućava `forbidden()` iz next/navigation, da zabranjena ruta portala
     // vrati pravi 403 status umesto preusmeravanja na stranicu sa porukom.

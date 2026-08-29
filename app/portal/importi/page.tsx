@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { importRows, importRuns } from "@/db/schema";
 import { ImportUpload } from "@/features/portal/ImportUpload";
+import { PdfImportUpload } from "@/features/portal/PdfImportUpload";
 import { requireCapability } from "@/lib/authz/session";
 
 export const dynamic = "force-dynamic";
@@ -50,6 +51,8 @@ export default async function ImportsPage({
         title="Importi"
         description="Svaki uvoz ostavlja trag: pročitani redovi, ispravni, upozorenja, greške i otisak fajla. Izvorni fajlovi se nikada ne menjaju."
       />
+
+      <PdfImportUpload />
 
       <ImportUpload />
 

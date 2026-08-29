@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, eq, isNull, ne, sql } from "drizzle-orm";
+import { and, desc, eq, isNull, ne, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
   articles,
@@ -503,6 +503,217 @@ export async function openIngestionRun(
     .onConflictDoNothing()
     .returning({ id: importRuns.id });
   return rows[0]?.id ?? null;
+}
+
+/**
+ * Pregled izvornih dokumenata za portal.
+ *
+ * Vraća SAMO interna polja: otisak, status, broj stavki, šifru partnera. Naziv
+ * kupca, PIB i adresa se ovde ne izvlače — ekran ih nema odakle prikazati, pa
+ * ne mogu ni da procure u snimak ekrana ni u izveštaj.
+ */
+export type SourceDocumentView = {
+  id: string;
+  fileHash: string;
+  fileName: string;
+  pageCount: number;
+  lineCount: number;
+  issuerCode: string;
+  externalPartnerCode: string | null;
+  documentDate: string | null;
+  validationStatus: string;
+  validationDetail: string | null;
+  revisionStatus: string;
+  conflictReason: string | null;
+  manualReview: string;
+  invoiceId: string | null;
+  createdAt: Date;
+};
+
+export async function listSourceDocuments(filter?: {
+  validationStatus?: string;
+  revisionStatus?: string;
+  manualReview?: string;
+  onlyUnposted?: boolean;
+  limit?: number;
+}): Promise<SourceDocumentView[]> {
+  const db = getDb();
+  const conditions = [];
+  if (filter?.validationStatus) {
+    conditions.push(eq(sourceDocuments.validationStatus, filter.validationStatus as "valid"));
+  }
+  if (filter?.revisionStatus) {
+    conditions.push(eq(sourceDocuments.revisionStatus, filter.revisionStatus as "original"));
+  }
+  if (filter?.manualReview) {
+    conditions.push(eq(sourceDocuments.manualReview, filter.manualReview as "pending"));
+  }
+  if (filter?.onlyUnposted) conditions.push(isNull(sourceDocuments.invoiceId));
+
+  const rows = await db
+    .select({
+      id: sourceDocuments.id,
+      fileHash: sourceDocuments.fileHash,
+      fileName: sourceDocuments.fileName,
+      pageCount: sourceDocuments.pageCount,
+      lineCount: sourceDocuments.lineCount,
+      issuerCode: sourceDocuments.issuerCode,
+      externalPartnerCode: sourceDocuments.externalPartnerCode,
+      documentDate: sourceDocuments.documentDate,
+      validationStatus: sourceDocuments.validationStatus,
+      validationDetail: sourceDocuments.validationDetail,
+      revisionStatus: sourceDocuments.revisionStatus,
+      conflictReason: sourceDocuments.conflictReason,
+      manualReview: sourceDocuments.manualReview,
+      invoiceId: sourceDocuments.invoiceId,
+      createdAt: sourceDocuments.createdAt,
+    })
+    .from(sourceDocuments)
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
+    .orderBy(desc(sourceDocuments.createdAt))
+    .limit(filter?.limit ?? 200);
+  return rows;
+}
+
+/** Zbir dokumenata po ishodu — brojevi za zaglavlje ekrana. */
+export async function countSourceDocuments(): Promise<Record<string, number>> {
+  const db = getDb();
+  const rows = await db.execute<{ kljuc: string; broj: number }>(sql`
+    SELECT 'validation:' || validation_status AS kljuc, count(*)::int AS broj
+      FROM source_documents GROUP BY validation_status
+    UNION ALL
+    SELECT 'revision:' || revision_status, count(*)::int
+      FROM source_documents GROUP BY revision_status
+    UNION ALL
+    SELECT 'review:pending', count(*)::int
+      FROM source_documents WHERE manual_review = 'pending'
+    UNION ALL
+    SELECT 'unposted', count(*)::int
+      FROM source_documents WHERE invoice_id IS NULL AND validation_status = 'valid'
+  `);
+  return Object.fromEntries(rows.map((r) => [r.kljuc, r.broj]));
+}
+
+/**
+ * Razrešenje sudara: čovek kaže koja verzija važi.
+ *
+ * Sistem ne bira — ni po datumu fajla, ni po redosledu uvoza. Stara verzija
+ * postaje `superseded` i time ispada iz ledgera; nova ostaje `original`.
+ * Nijedan raniji zapis se ne briše i ne prepisuje.
+ */
+export async function resolveDocumentRevision(
+  input: { supersededId: string; supersedingId: string; reason: string },
+  actor: IngestActor,
+): Promise<void> {
+  const reason = input.reason.trim();
+  if (reason.length < 3) {
+    throw new IngestError("Razrešenje traži razlog (najmanje 3 znaka).", "missing_reason");
+  }
+  if (input.supersededId === input.supersedingId) {
+    throw new IngestError("Dokument ne može sam sebe da zameni.", "self_reference");
+  }
+
+  const db = getDb();
+  await db.transaction(async (tx) => {
+    const rows = await tx
+      .select({ id: sourceDocuments.id, fileHash: sourceDocuments.fileHash })
+      .from(sourceDocuments)
+      .where(eq(sourceDocuments.id, input.supersededId))
+      .limit(1);
+    if (!rows[0]) throw new IngestError("Dokument ne postoji.", "not_found");
+
+    await tx
+      .update(sourceDocuments)
+      .set({
+        revisionStatus: "superseded",
+        supersededById: input.supersedingId,
+        revisionConfirmedBy: actor.id,
+        revisionConfirmedAt: new Date(),
+        manualReview: "resolved",
+        manualReviewNote: reason,
+        manualReviewBy: actor.id,
+        manualReviewAt: new Date(),
+        updatedAt: sql`now()`,
+      })
+      .where(eq(sourceDocuments.id, input.supersededId));
+
+    await tx
+      .update(sourceDocuments)
+      .set({
+        revisionStatus: "original",
+        supersedesId: input.supersededId,
+        conflictReason: null,
+        manualReview: "resolved",
+        manualReviewNote: reason,
+        manualReviewBy: actor.id,
+        manualReviewAt: new Date(),
+        updatedAt: sql`now()`,
+      })
+      .where(eq(sourceDocuments.id, input.supersedingId));
+
+    await recordAudit(
+      {
+        actor,
+        action: AUDIT_ACTIONS.pdfRevisionResolved,
+        entityType: "Izvorni dokument",
+        entityId: input.supersedingId,
+        entityLabel: redactDocumentRef(rows[0]),
+        after: { zamenjen: input.supersededId, vazi: input.supersedingId },
+        reason,
+      },
+      tx,
+    );
+  });
+}
+
+/**
+ * Zatvaranje ručnog pregleda bez promene stanja dokumenta.
+ *
+ * Koristi se kada je dokument pregledan i zaključeno je da ništa ne treba
+ * menjati. Dokument u karantinu time NE postaje validan — pregled je zatvoren,
+ * promet i dalje ne postoji.
+ */
+export async function closeManualReview(
+  input: { sourceDocumentId: string; note: string },
+  actor: IngestActor,
+): Promise<void> {
+  const note = input.note.trim();
+  if (note.length < 3) {
+    throw new IngestError("Zatvaranje pregleda traži napomenu.", "missing_reason");
+  }
+
+  const db = getDb();
+  const rows = await db
+    .select({ id: sourceDocuments.id, fileHash: sourceDocuments.fileHash })
+    .from(sourceDocuments)
+    .where(eq(sourceDocuments.id, input.sourceDocumentId))
+    .limit(1);
+  if (!rows[0]) throw new IngestError("Dokument ne postoji.", "not_found");
+
+  await db.transaction(async (tx) => {
+    await tx
+      .update(sourceDocuments)
+      .set({
+        manualReview: "resolved",
+        manualReviewNote: note,
+        manualReviewBy: actor.id,
+        manualReviewAt: new Date(),
+        updatedAt: sql`now()`,
+      })
+      .where(eq(sourceDocuments.id, input.sourceDocumentId));
+
+    await recordAudit(
+      {
+        actor,
+        action: AUDIT_ACTIONS.pdfManualReviewResolved,
+        entityType: "Izvorni dokument",
+        entityId: input.sourceDocumentId,
+        entityLabel: redactDocumentRef(rows[0]),
+        reason: note,
+      },
+      tx,
+    );
+  });
 }
 
 /** Dokumenti koji čekaju ručni pregled. */

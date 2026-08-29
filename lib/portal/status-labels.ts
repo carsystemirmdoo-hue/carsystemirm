@@ -148,3 +148,73 @@ export function describeValue(rule: {
   }
   return `Rabat ${rule.discountPercent}%`;
 }
+
+/**
+ * Stanja izvornog PDF dokumenta.
+ *
+ * `unsupported_requires_sample` namerno nije „greška": dokument je možda
+ * savršeno ispravan, samo za njegov oblik ne postoji potvrđen uzorak. Boja to
+ * mora razlikovati od pokvarenog fajla, inače će neko počеti da „popravlja"
+ * dokumente koji nisu pokvareni.
+ */
+export const SOURCE_DOCUMENT_VALIDATION_LABELS: Record<string, string> = {
+  valid: "Pročitano i provereno",
+  totals_mismatch: "Zbir se ne poklapa",
+  unparsable: "Nije pročitano",
+  unsupported_requires_sample: "Oblik bez potvrđenog uzorka",
+};
+
+export const SOURCE_DOCUMENT_VALIDATION_TONES: Record<string, Tone> = {
+  valid: "success",
+  totals_mismatch: "danger",
+  unparsable: "danger",
+  unsupported_requires_sample: "info",
+};
+
+export const SOURCE_DOCUMENT_REVISION_LABELS: Record<string, string> = {
+  original: "Važeća verzija",
+  superseded: "Zamenjeno novijom verzijom",
+  conflict: "Sudar — čeka odluku",
+  pending_review: "Čeka pregled",
+};
+
+export const SOURCE_DOCUMENT_REVISION_TONES: Record<string, Tone> = {
+  original: "success",
+  superseded: "neutral",
+  conflict: "danger",
+  pending_review: "warning",
+};
+
+export const MANUAL_REVIEW_LABELS: Record<string, string> = {
+  not_required: "Nije potreban",
+  pending: "Čeka pregled",
+  resolved: "Pregledano",
+};
+
+export const MANUAL_REVIEW_TONES: Record<string, Tone> = {
+  not_required: "neutral",
+  pending: "warning",
+  resolved: "success",
+};
+
+/**
+ * Ishodi usaglašavanja pravila cene sa fakturom.
+ *
+ * `not_applicable` nije neuspeh — opseg pravila je širi od onoga što jedna
+ * stavka fakture može da dokaže.
+ */
+export const RECONCILIATION_OUTCOME_LABELS: Record<string, string> = {
+  confirmed: "Potvrđeno sa fakture",
+  failed: "Uslov nije pronađen na fakturi",
+  no_evidence_yet: "Još nema fakturisane stavke",
+  not_applicable: "Opseg se ne dokazuje jednom stavkom",
+  not_eligible: "Nije u fazi za usaglašavanje",
+};
+
+export const RECONCILIATION_OUTCOME_TONES: Record<string, Tone> = {
+  confirmed: "success",
+  failed: "danger",
+  no_evidence_yet: "info",
+  not_applicable: "warning",
+  not_eligible: "neutral",
+};

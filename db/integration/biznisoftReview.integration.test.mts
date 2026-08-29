@@ -233,3 +233,62 @@ const newCustomer = async () => {
     VALUES (${`QA${randomUUID().slice(0, 6)}`}, 'QA Kupac') RETURNING id`;
   return row.id;
 };
+
+/**
+ * Ista poslovna faktura, druga sadrzina.
+ *
+ * Dopisan komentar posle `%%EOF` menja otisak fajla, a ne menja nista sto
+ * parser cita — tacno oblik "reprint istog dokumenta" koji se u praksi javlja.
+ */
+const sameDocumentOtherBytes = (bytes: Uint8Array) =>
+  new Uint8Array([...bytes, ...new TextEncoder().encode("\n% ponovna stampa\n")]);
+
+async function mappedCustomer() {
+  const id = await newCustomer();
+  await db.sql`
+    INSERT INTO customer_external_identifiers
+      (source_system, issuer_code, external_partner_code, customer_id, status)
+    VALUES ('biznisoft', ${ISSUER}, '09002', ${id}, 'mapped')`;
+  return id;
+}
+
+test("H-1: sudar karantinira OBE verzije — ledger pada na nulu", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { ingestBiznisoftPdf } = await import("@/lib/pdf/ingest");
+  await mappedCustomer();
+
+  const bytes = await bytesOf("vise-stavki.pdf");
+  const a = await ingestBiznisoftPdf(
+    { bytes, fileName: "a.pdf", issuerCode: ISSUER }, actor);
+  assert.equal(a.result, "ingested");
+
+  const [{ pre }] = await db.sql<{ pre: number }[]>`
+    SELECT count(*)::int AS pre FROM effective_sales_ledger`;
+  assert.equal(pre, 7, "prva verzija nije usla u promet");
+
+  const b = await ingestBiznisoftPdf(
+    { bytes: sameDocumentOtherBytes(bytes), fileName: "b.pdf", issuerCode: ISSUER }, actor);
+  assert.equal(b.result, "business_key_conflict");
+
+  // OBE verzije su u sudaru i na rucnom pregledu.
+  const docs = await db.sql<{ revision_status: string; manual_review: string }[]>`
+    SELECT revision_status, manual_review FROM source_documents ORDER BY created_at`;
+  assert.equal(docs.length, 2);
+  for (const doc of docs) {
+    assert.equal(doc.revision_status, "conflict");
+    assert.equal(doc.manual_review, "pending");
+  }
+
+  /*
+   * Pre popravke je ranija verzija ostajala `original`/`not_required` i njenih
+   * 7 redova je i dalje bilo u prometu, dok je ekran pisao "ceka odluku".
+   */
+  const [{ post }] = await db.sql<{ post: number }[]>`
+    SELECT count(*)::int AS post FROM effective_sales_ledger`;
+  assert.equal(post, 0, "sporna verzija je ostala u prometu");
+
+  // Faktura NIJE obrisana — samo je iskljucena iz ledgera.
+  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM invoices`;
+  assert.equal(n, 1, "istorija je obrisana");
+});

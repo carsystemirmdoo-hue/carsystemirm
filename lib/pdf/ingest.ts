@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, desc, eq, isNull, ne, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, ne, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
   articles,
@@ -96,36 +96,40 @@ export async function ingestBiznisoftPdf(
   const docNumber = parsed.header.documentNumber.value;
   const code = partnerCode ? normalizePartnerCode(partnerCode) : null;
 
-  /*
-   * Drugi fajl sa istim poslovnim ključem.
-   *
-   * Ne bira se „poslednji" — ni po datumu fajla, ni po redosledu uvoza. Obe
-   * verzije se čuvaju, obe idu u ručni pregled, i NIJEDNA ne ulazi u ledger dok
-   * čovek ne kaže koja važi.
-   */
-  let conflictsWith: string | null = null;
-  if (parsed.validationStatus === "valid" && docNumber) {
-    const twin = await db
-      .select({ id: sourceDocuments.id })
-      .from(sourceDocuments)
-      .where(
-        and(
-          eq(sourceDocuments.issuerCode, input.issuerCode),
-          eq(sourceDocuments.businessDocumentType, "faktura"),
-          eq(sourceDocuments.businessDocumentNumber, docNumber),
-          ne(sourceDocuments.revisionStatus, "superseded"),
-        ),
-      )
-      .limit(1);
-    conflictsWith = twin[0]?.id ?? null;
-  }
-
   const correlationId = randomUUID();
 
   return db.transaction(async (tx) => {
-    const conflictReason = conflictsWith
-      ? "Drugi fajl tvrdi da je isti poslovni dokument. Sistem ne bira — obe verzije čekaju odluku."
-      : null;
+    /*
+     * Drugi fajl sa istim poslovnim ključem.
+     *
+     * Ne bira se „poslednji" — ni po datumu fajla, ni po redosledu uvoza. Obe
+     * verzije se čuvaju, obe idu u ručni pregled, i NIJEDNA ne ulazi u ledger
+     * dok čovek ne kaže koja važi.
+     *
+     * Pretraga je UNUTAR transakcije, zajedno sa upisom koji iz nje sledi. Van
+     * transakcije bi između nalaza i upisa postojao prozor u kom neko drugi
+     * proknjiži blizanca, pa bi „obe čekaju odluku" bilo tačno samo za jednu.
+     */
+    let conflictsWith: string[] = [];
+    if (parsed.validationStatus === "valid" && docNumber) {
+      const twins = await tx
+        .select({ id: sourceDocuments.id })
+        .from(sourceDocuments)
+        .where(
+          and(
+            eq(sourceDocuments.issuerCode, input.issuerCode),
+            eq(sourceDocuments.businessDocumentType, "faktura"),
+            eq(sourceDocuments.businessDocumentNumber, docNumber),
+            ne(sourceDocuments.revisionStatus, "superseded"),
+          ),
+        );
+      conflictsWith = twins.map((row) => row.id);
+    }
+
+    const conflictReason =
+      conflictsWith.length > 0
+        ? "Drugi fajl tvrdi da je isti poslovni dokument. Sistem ne bira — obe verzije čekaju odluku."
+        : null;
 
     const [created] = await tx
       .insert(sourceDocuments)
@@ -143,10 +147,12 @@ export async function ingestBiznisoftPdf(
         parserVersion: parsed.parserVersion,
         validationStatus: parsed.validationStatus as "valid",
         validationDetail: parsed.validationDetail,
-        revisionStatus: conflictsWith ? "conflict" : "original",
+        revisionStatus: conflictsWith.length > 0 ? "conflict" : "original",
         conflictReason,
         manualReview:
-          conflictsWith || parsed.validationStatus !== "valid" ? "pending" : "not_required",
+          conflictsWith.length > 0 || parsed.validationStatus !== "valid"
+            ? "pending"
+            : "not_required",
       })
       .returning({ id: sourceDocuments.id });
 
@@ -190,11 +196,30 @@ export async function ingestBiznisoftPdf(
       tx,
     );
 
-    if (conflictsWith) {
+    if (conflictsWith.length > 0) {
+      /*
+       * Sudar karantinira i RANIJU verziju, u istoj transakciji.
+       *
+       * Bez ovoga bi već proknjižena verzija ostala `original` i nastavila da
+       * ulazi u promet, dok ekran piše „sudar, čeka odluku". Čovek bi gledao
+       * poruku da odluka nije doneta, a izveštaj bi već računao jednu stranu
+       * spora. Njena faktura se NE briše — samo prestaje da ulazi u ledger dok
+       * se sudar ne razreši.
+       */
+      await tx
+        .update(sourceDocuments)
+        .set({
+          revisionStatus: "conflict",
+          conflictReason,
+          manualReview: "pending",
+          updatedAt: sql`now()`,
+        })
+        .where(inArray(sourceDocuments.id, conflictsWith));
+
       return {
         result: "business_key_conflict" as const,
         sourceDocumentId: created.id,
-        conflictsWith,
+        conflictsWith: conflictsWith[0],
       };
     }
 

@@ -1327,36 +1327,208 @@ try {
       }
       const stanje = await s.page.evaluate(() => {
         /*
-         * Tvrdnja je o SADRZAJU korpe, ne o okviru portala.
+         * SEMANTICKA provera, ne skeniranje reci (postflight F-8).
          *
-         * Ranije se skenirao ceo `body`, pa je svaka stavka navigacije koja
-         * sadrzi rec „cena" obarala proveru — a bocna traka nije korpa i nikad
-         * nije bila deo tvrdnje. `main` je tacno ono sto ova ruta renderuje.
+         * Prva verzija je skenirala ceo `body` regexom `\bcena\b` i padala je
+         * cim bi navigacija dobila stavku sa tom recju — naziv menija je
+         * odlucivao da li test prolazi. Druga verzija je suzila skener na
+         * `main`, sto je popravilo lazni pad ali je izbacilo topbar i otvoreni
+         * drawer iz opsega: buduca cena u zaglavlju bi prosla neprimeceno.
+         *
+         * Ova verzija gleda ISTA TRI PODRUCJA koja korisnik zaista vidi —
+         * `main`, topbar i svaki otvoren dijalog/drawer — ali trazi CENOVNI
+         * OBLIK (iznos uz valutu ili uz oznaku ukupno), ne golu rec. „Istorija
+         * cena" u meniju nije cena; „1.234,00 RSD" jeste.
          */
-        const sadrzaj =
-          (document.querySelector("main") as HTMLElement | null)?.innerText ??
-          document.body.innerText;
+        /*
+         * BEZ lokalnih imenovanih funkcija.
+         *
+         * `tsx` pod `--keep-names` obavija `const f = () => …` esbuild
+         * helperom `__name`, koji u pretrazivacu ne postoji — ista zamka koju
+         * korak 15 vec dokumentuje. Zato su ispod samo petlje i anonimni
+         * callback-ovi.
+         */
+        const podrucja: { ime: string; tekst: string }[] = [];
+        const kandidati: [string, Element | null][] = [
+          ["main", document.querySelector("main")],
+          ["topbar", document.querySelector("header")],
+        ];
+        for (const dialog of Array.from(document.querySelectorAll('[role="dialog"]'))) {
+          kandidati.push(["dialog", dialog]);
+        }
+        for (const [ime, el] of kandidati) {
+          const tekst = (el as HTMLElement | null)?.innerText ?? "";
+          if (tekst.trim()) podrucja.push({ ime, tekst });
+        }
+
+        /*
+         * Iznos uz valutu, ili izricita formulacija ukupnog za naplatu.
+         * `1.234,00 RSD`, `RSD 1.234`, `12,50 EUR`, „ukupno za naplatu".
+         * Gola rec „cena" NIJE cena — inace naziv menija odlucuje o testu.
+         */
+        const CENOVNI_OBLIK =
+          /(\d[\d.,\s]*\s?(RSD|EUR|din\b))|((RSD|EUR)\s?\d)|ukupno za napla/i;
+        const KUPOVNA_RADNJA =
+          /\bcheckout\b|\bplati\b|\bplacanje\b|\bplaćanje\b|poru[dž]bina je (poslata|kreirana|potvr)/i;
+
+        const cenaU: string[] = [];
+        const checkoutU: string[] = [];
+        const imena: string[] = [];
+        for (const p of podrucja) {
+          imena.push(p.ime);
+          if (CENOVNI_OBLIK.test(p.tekst)) cenaU.push(p.ime);
+          if (KUPOVNA_RADNJA.test(p.tekst)) checkoutU.push(p.ime);
+        }
+
+        let glavni = "";
+        for (const p of podrucja) if (p.ime === "main") glavni = p.tekst;
+
         return {
           naslov: document.querySelector("h1")?.textContent?.trim() ?? null,
-          prazna: /nema izabranih|lista je prazna|prazn/i.test(sadrzaj),
-          cena: /\bRSD\b|\bEUR\b|ukupno za napla|\bcena\b/i.test(sadrzaj),
-          checkout: /checkout|plati|pla[ćc]anje|poru[dž]bina je/i.test(sadrzaj),
+          prazna: /nema izabranih|lista je prazna|prazn/i.test(glavni),
+          // Imena podrucja, da poruka o padu kaze GDE je cena procurila.
+          cenaU,
+          checkoutU,
+          pokrivenaPodrucja: imena,
           kljucevi: Object.keys(window.localStorage).filter((k) =>
             k.startsWith("carsystem.cart"),
           ),
         };
       });
-      if (stanje.cena) throw new Error(await dokazi(s.page, "korpa prikazuje cenu", nalozi.owner.id));
-      if (stanje.checkout) {
-        throw new Error(await dokazi(s.page, "korpa nudi checkout ili tvrdi porudzbinu", nalozi.owner.id));
+
+      /*
+       * Pokrivenost je deo tvrdnje.
+       *
+       * Bez ove provere bi test „prolazio" i kada selektor prestane da pogadja
+       * isceg — a prazna pretraga uvek nalazi nula cena.
+       */
+      if (!stanje.pokrivenaPodrucja.includes("main")) {
+        throw new Error(
+          await dokazi(s.page, "QA nije video `main` — provera nije pokrila sadrzaj", nalozi.owner.id),
+        );
+      }
+      if (!stanje.pokrivenaPodrucja.includes("topbar")) {
+        throw new Error(
+          await dokazi(s.page, "QA nije video topbar — zaglavlje bi ostalo nepokriveno", nalozi.owner.id),
+        );
+      }
+
+      const stanjeSpojeno = {
+        naslov: stanje.naslov,
+        prazna: stanje.prazna,
+        cena: stanje.cenaU.length > 0,
+        checkout: stanje.checkoutU.length > 0,
+        kljucevi: stanje.kljucevi,
+      };
+      if (stanjeSpojeno.cena) {
+        throw new Error(
+          await dokazi(
+            s.page,
+            `korpa prikazuje cenu u: ${stanje.cenaU.join(", ")}`,
+            nalozi.owner.id,
+          ),
+        );
+      }
+      if (stanjeSpojeno.checkout) {
+        throw new Error(
+          await dokazi(
+            s.page,
+            `korpa nudi checkout ili tvrdi porudzbinu u: ${stanje.checkoutU.join(", ")}`,
+            nalozi.owner.id,
+          ),
+        );
       }
       // Kljuc mora nositi CEO UUID, ne skraceni otisak.
-      for (const k of stanje.kljucevi) {
+      for (const k of stanjeSpojeno.kljucevi) {
         if (!/^carsystem\.cart\.v3\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(k)) {
           throw new Error(await dokazi(s.page, "cart kljuc nije v3 UUID namespace", nalozi.owner.id));
         }
       }
-      return `korpa otvorena, prazna=${stanje.prazna}, bez cene i checkouta`;
+      return (
+        `korpa otvorena, prazna=${stanjeSpojeno.prazna}, bez cene i checkouta ` +
+        `(pokriveno: ${stanje.pokrivenaPodrucja.join(", ")})`
+      );
+    } finally {
+      await s.zatvori();
+    }
+  });
+
+  await tok("14b. otvoren drawer i javne strane ne prikazuju cenu ni kupovinu", async () => {
+    const s = await svezaSesija();
+    try {
+      /*
+       * Dopuna F-8: korak 14 gleda ZATVOREN drawer, jer ga ne otvara.
+       * `CartDrawer` renderuje `null` dok je zatvoren, pa bi buduca cena u
+       * njemu prosla neprimeceno. Ovde se drawer OTVARA i meri isto.
+       */
+      const kod = await svezTotp(ownerSecret);
+      await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+      await s.page.goto(`${BASE}/portal`, { waitUntil: "domcontentloaded" });
+      await s.page.waitForSelector("main h1", { timeout: AKCIJA_TIMEOUT_MS });
+
+      const otvoren = await s.page.evaluate(() => {
+        const dugme = Array.from(document.querySelectorAll("button")).find((b) =>
+          /korp/i.test(b.getAttribute("aria-label") ?? ""),
+        );
+        if (!dugme) return false;
+        dugme.click();
+        return true;
+      });
+
+      if (!otvoren) {
+        // Bez cart sposobnosti dugme ne postoji; tada nema ni sta da procuri.
+        return "cart dugme nije montirano — nema drawera za proveru";
+      }
+
+      await s.page.waitForSelector('[role="dialog"]', { timeout: AKCIJA_TIMEOUT_MS });
+
+      const uDraweru = await s.page.evaluate(() => {
+        const el = document.querySelector('[role="dialog"]') as HTMLElement | null;
+        const tekst = el?.innerText ?? "";
+        return {
+          video: Boolean(el),
+          cena: /(\d[\d.,\s]*\s?(RSD|EUR|din\b))|((RSD|EUR)\s?\d)|ukupno za napla/i.test(tekst),
+          checkout: /\bcheckout\b|\bplati\b|\bplacanje\b|\bplaćanje\b/i.test(tekst),
+        };
+      });
+
+      if (!uDraweru.video) {
+        throw new Error(await dokazi(s.page, "drawer se nije otvorio", nalozi.owner.id));
+      }
+      if (uDraweru.cena) {
+        throw new Error(await dokazi(s.page, "otvoren drawer prikazuje cenu", nalozi.owner.id));
+      }
+      if (uDraweru.checkout) {
+        throw new Error(await dokazi(s.page, "otvoren drawer nudi kupovinu", nalozi.owner.id));
+      }
+
+      /*
+       * Javna strana, BEZ prijave: ni cene ni kupovine.
+       *
+       * Ovo je tvrdnja koju korak 18 dodiruje samo kroz odsustvo cart sloja;
+       * ovde se meri isto sto i za portal, istim cenovnim oblikom.
+       */
+      const javna = await svezaSesija();
+      try {
+        await javna.page.goto(`${BASE}/katalog`, { waitUntil: "domcontentloaded" });
+        const javnoStanje = await javna.page.evaluate(() => {
+          const tekst = document.body.innerText;
+          return {
+            cena: /(\d[\d.,\s]*\s?(RSD|EUR|din\b))|((RSD|EUR)\s?\d)|ukupno za napla/i.test(tekst),
+            kupovina: /\bcheckout\b|dodaj u korpu|\bplati\b/i.test(tekst),
+          };
+        });
+        if (javnoStanje.cena) {
+          throw new Error("javni katalog prikazuje cenu neprijavljenom posetiocu");
+        }
+        if (javnoStanje.kupovina) {
+          throw new Error("javni katalog nudi kupovinu neprijavljenom posetiocu");
+        }
+      } finally {
+        await javna.zatvori();
+      }
+
+      return "drawer i javni katalog bez cene i bez kupovine";
     } finally {
       await s.zatvori();
     }

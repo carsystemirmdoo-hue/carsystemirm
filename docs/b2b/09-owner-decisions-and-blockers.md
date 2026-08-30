@@ -116,6 +116,15 @@ Poređano po tome koliko blokira — ne po redosledu faza.
 
 **Ako je istorija kratka:** prva verzija preporuka koristi samo „šta je kupac već kupovao", bez sezonalnosti, uz nizak `confidence`. To je pošteno i korisno.
 
+**Šta se već meri:** ekran `/portal/importi/spremnost` prikazuje koliko je istorije
+**uvezeno** — raspon datuma, fakture po mesecu, parove (kupac, artikal) koji se
+ponavljaju. Vidi [18 — spremnost podataka](18-data-readiness.md).
+
+To **ne odgovara** na P7. Uvezeni raspon pokazuje samo šta jeste ušlo u sistem;
+da bi sistem znao šta nedostaje, morao bi znati za dokument koji nikada nije
+uvezen. Pitanje 1 iznad — od kog datuma BizniSoft ima upotrebljivu istoriju —
+ostaje otvoreno i traži spoljnu evidenciju.
+
 ---
 
 ### P8 — Sme li tačan lager i tačna cena napustiti kancelariju? 🟡

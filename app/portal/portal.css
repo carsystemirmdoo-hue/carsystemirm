@@ -7138,3 +7138,61 @@ body:has(.portal-login-root) {
     min-width: 0;
   }
 }
+
+/* =========================================================================
+ * Spremnost podataka
+ *
+ * Ekran je gust tekstom namerno: svaki broj nosi ogradu o tome sta se iz njega
+ * NE sme zakljuciti, i te ograde moraju biti citljive, ne sitan otpad na dnu.
+ * Zato note ima istu velicinu kao sadrzaj tabele, a ne velicinu fusnote.
+ * ====================================================================== */
+
+.portal-readiness-note {
+  margin: 0;
+  padding: 12px 18px;
+  border-top: 1px solid var(--p-line);
+  color: var(--p-muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.portal-readiness-note[data-tone="warning"] {
+  color: var(--p-ink);
+  background: oklch(0.985 0.01 80);
+}
+
+.portal-readiness-note[data-tone="danger"] {
+  color: var(--p-ink);
+  background: oklch(0.985 0.008 25);
+}
+
+/* Spisak ograda: isti ritam kao note, sa vidljivim znakom stavke. */
+.portal-readiness-limits {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 16px 18px 18px 34px;
+  color: var(--p-muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.portal-readiness-limits li {
+  list-style: disc;
+}
+
+/*
+ * Imenitelj stoji ISPOD naziva reda — procenat bez njega se pogresno cita kao
+ * tvrdnja o svim kupcima firme.
+ *
+ * Selektor je vezan za ovaj ekran, ne za `.portal-table` uopste: `<small>` u
+ * zaglavlju reda vec koriste mapiranja i importi, i njihov izgled nije predmet
+ * ove faze.
+ */
+.portal-readiness-table th small {
+  display: block;
+  margin-top: 3px;
+  color: var(--p-faint);
+  font-weight: 450;
+  line-height: 1.5;
+}

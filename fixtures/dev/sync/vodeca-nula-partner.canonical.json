@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "canonicalization_version": 1,
+  "parser_version": "biznisoft-pdf-1",
+  "source_system": "biznisoft",
+  "issuer": {
+    "code": "QA01"
+  },
+  "document": {
+    "kind": "faktura",
+    "number": "99-RN900000004",
+    "issued_on": "2026-01-04",
+    "trade_date": null,
+    "date_basis": "issued_on",
+    "currency": "RSD"
+  },
+  "partner": {
+    "external_code": "00042"
+  },
+  "totals": {
+    "printed_gross_total": "288.00"
+  },
+  "lines": [
+    {
+      "line_number": 1,
+      "article_code": "900002",
+      "description": "SINTETICKI ARTIKAL 2",
+      "unit": "LIT",
+      "quantity": "2.000",
+      "unit_price": "120.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "20.000",
+      "tax_amount": "48.00",
+      "gross_amount": "288.00"
+    }
+  ],
+  "parser_meta": {
+    "page_count": 1,
+    "line_count": 1
+  },
+  "source_hash": "sha256:fa62f4daff1a51f4dce84713bd547367a54ba7501a1845dc43ce757ac1957124",
+  "semantic_hash": "sha256:4c2fbe5e59217177d37dd19f487254796ee440c99fff42361a6b2cd36df7bef1"
+}

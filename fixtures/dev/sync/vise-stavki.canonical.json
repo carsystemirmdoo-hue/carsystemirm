@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "canonicalization_version": 1,
+  "parser_version": "biznisoft-pdf-1",
+  "source_system": "biznisoft",
+  "issuer": {
+    "code": "QA01"
+  },
+  "document": {
+    "kind": "faktura",
+    "number": "99-RN900000002",
+    "issued_on": "2026-01-02",
+    "trade_date": null,
+    "date_basis": "issued_on",
+    "currency": "RSD"
+  },
+  "partner": {
+    "external_code": "09002"
+  },
+  "totals": {
+    "printed_gross_total": "3538.20"
+  },
+  "lines": [
+    {
+      "line_number": 1,
+      "article_code": "900001",
+      "description": "SINTETICKI ARTIKAL 1",
+      "unit": "KOM",
+      "quantity": "1.500",
+      "unit_price": "110.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "20.000",
+      "tax_amount": "33.00",
+      "gross_amount": "198.00"
+    },
+    {
+      "line_number": 2,
+      "article_code": "900002",
+      "description": "SINTETICKI ARTIKAL 2",
+      "unit": "LIT",
+      "quantity": "2.000",
+      "unit_price": "120.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "20.000",
+      "tax_amount": "48.00",
+      "gross_amount": "288.00"
+    },
+    {
+      "line_number": 3,
+      "article_code": "900003",
+      "description": "SINTETICKI ARTIKAL 3",
+      "unit": "KOM",
+      "quantity": "2.500",
+      "unit_price": "130.0000",
+      "discount_percent": "10.000",
+      "tax_percent": "20.000",
+      "tax_amount": "58.50",
+      "gross_amount": "351.00"
+    },
+    {
+      "line_number": 4,
+      "article_code": "900004",
+      "description": "SINTETICKI ARTIKAL 4",
+      "unit": "LIT",
+      "quantity": "3.000",
+      "unit_price": "140.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "10.000",
+      "tax_amount": "42.00",
+      "gross_amount": "462.00"
+    },
+    {
+      "line_number": 5,
+      "article_code": "900005",
+      "description": "SINTETICKI ARTIKAL 5",
+      "unit": "KOM",
+      "quantity": "3.500",
+      "unit_price": "150.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "20.000",
+      "tax_amount": "105.00",
+      "gross_amount": "630.00"
+    },
+    {
+      "line_number": 6,
+      "article_code": "900006",
+      "description": "SINTETICKI ARTIKAL 6",
+      "unit": "LIT",
+      "quantity": "4.000",
+      "unit_price": "160.0000",
+      "discount_percent": "10.000",
+      "tax_percent": "20.000",
+      "tax_amount": "115.20",
+      "gross_amount": "691.20"
+    },
+    {
+      "line_number": 7,
+      "article_code": "900007",
+      "description": "SINTETICKI ARTIKAL 7",
+      "unit": "KOM",
+      "quantity": "4.500",
+      "unit_price": "170.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "20.000",
+      "tax_amount": "153.00",
+      "gross_amount": "918.00"
+    }
+  ],
+  "parser_meta": {
+    "page_count": 1,
+    "line_count": 7
+  },
+  "source_hash": "sha256:799f828129ca03284c72fea4e7d5698b8324cfd6afcc8cdfca55c23a53c9c6f9",
+  "semantic_hash": "sha256:3c1f8126b443d17e4ee23ae562cd88ef4b5d360518d52b26671ed987c196bd5e"
+}

@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://carsystemirm.com/contracts/invoice-ingest/v1/schema.json",
+  "title": "BizniSoft canonical invoice ingest v1",
+  "description": "Autoritativni ugovor. Ovaj fajl je JEDINA definicija oblika; validator u lib/sync/contract/ ga cita, ne duplira. Sve novcane i kolicinske vrednosti su decimalni STRINGOVI sa tackom — JSON broj bi ih vratio u binarni float pre nego sto ih iko validira.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canonicalization_version",
+    "parser_version",
+    "source_system",
+    "issuer",
+    "document",
+    "partner",
+    "totals",
+    "lines",
+    "parser_meta",
+    "source_hash",
+    "semantic_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Verzija ovog ugovora. Nepoznata vrednost se ODBIJA, ne tumaci.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "canonicalization_version": {
+      "description": "Verzija pravila normalizacije koja ulaze u semantic_hash. Vezana je u sam hash, pa promena algoritma ne moze proci nevidljivo.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "parser_version": {
+      "description": "Verzija citaca koji je proizveo sadrzaj. Postoji izricita podrzana lista; nema automatskog prihvatanja proizvoljne verzije.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$"
+    },
+    "source_system": {
+      "description": "Sistem iz koga dokument potice.",
+      "type": "string",
+      "enum": ["biznisoft"]
+    },
+    "issuer": {
+      "description": "Izdavalac (pravno lice). Opseg — server ga poredi sa pouzdanim kontekstom i NE veruje dostavljenoj vrednosti.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code"],
+      "properties": {
+        "code": {
+          "description": "Oznaka izdavaoca, tekst. Isto polje kao invoices.company_id.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^\\S(.*\\S)?$"
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "number", "issued_on", "trade_date", "date_basis", "currency"],
+      "properties": {
+        "kind": {
+          "description": "Vrsta dokumenta iz izvora. Ugovor moze izraziti i korektivne vrste; podrzani podskup je uzi (vidi validator).",
+          "type": "string",
+          "enum": [
+            "faktura",
+            "povrat_robe",
+            "storno",
+            "knjizno_odobrenje",
+            "korekcija_cene",
+            "korekcija_popusta"
+          ]
+        },
+        "number": {
+          "description": "PUN broj dokumenta, tacno kako stoji na dokumentu. Tekst — vodeca nula i serija su deo broja i ne smeju se skratiti.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^\\S(.*\\S)?$"
+        },
+        "business_year": {
+          "description": "Opciono. Kada je prisutna, mora se poklopiti sa godinom iz issued_on — poslovni kljuc se ne sme tiho svesti na uzi.",
+          "type": "integer",
+          "minimum": 1900,
+          "maximum": 2999
+        },
+        "issued_on": {
+          "description": "Datum izdavanja dokumenta, ISO. Mora biti stvaran kalendarski datum.",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "trade_date": {
+          "description": "Datum prometa. `null` kada izvor ne daje taj podatak. Ugovor ga moze izraziti; P1 ga NE moze sacuvati i zato odbija svaku vrednost razlicitu od null.",
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "date_basis": {
+          "description": "Koji datum nosi poslovno znacenje. Mora odgovarati datumu koji je stvarno dostupan.",
+          "type": "string",
+          "enum": ["issued_on", "trade_date"]
+        },
+        "currency": {
+          "description": "Valuta iznosa, izricito. Nikada se ne podrazumeva iz odsustva.",
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        }
+      }
+    },
+    "partner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["external_code"],
+      "properties": {
+        "external_code": {
+          "description": "Sifra partnera tacno kako stoji na dokumentu. TEKST: `00042` nije `42`.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^\\S(.*\\S)?$"
+        }
+      }
+    },
+    "totals": {
+      "description": "Zbirovi zaglavlja, potrebni da server nezavisno proveri stavke.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["printed_gross_total"],
+      "properties": {
+        "printed_gross_total": {
+          "description": "Odstampan ukupan iznos sa PDV. Decimalni string.",
+          "type": "string",
+          "pattern": "^-?[0-9]{1,12}(\\.[0-9]{1,2})?$"
+        }
+      }
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "line_number",
+          "article_code",
+          "description",
+          "unit",
+          "quantity",
+          "unit_price",
+          "discount_percent",
+          "tax_percent",
+          "tax_amount",
+          "gross_amount"
+        ],
+        "properties": {
+          "line_number": {
+            "description": "Redni broj stavke na dokumentu, od 1. Cuva redosled i identitet stavke.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          },
+          "article_code": {
+            "description": "Sifra artikla, TEKST. `001234` nije `1234`.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^\\S(.*\\S)?$"
+          },
+          "description": {
+            "description": "Naziv sa dokumenta u trenutku izdavanja (snapshot). `null` kada ga izvor ne daje.",
+            "type": ["string", "null"],
+            "maxLength": 512
+          },
+          "unit": {
+            "description": "Jedinica mere sa dokumenta. `null` kada je izvor ne daje.",
+            "type": ["string", "null"],
+            "maxLength": 32
+          },
+          "quantity": {
+            "description": "Kolicina. Najvise 3 decimale — tacno onoliko koliko invoice_lines.quantity numeric(14,3) moze da sacuva. Cetvrta bi bila tiho zaokruzena.",
+            "type": "string",
+            "pattern": "^-?[0-9]{1,11}(\\.[0-9]{1,3})?$"
+          },
+          "unit_price": {
+            "description": "Jedinicna cena. Najvise 4 decimale — numeric(14,4).",
+            "type": "string",
+            "pattern": "^-?[0-9]{1,10}(\\.[0-9]{1,4})?$"
+          },
+          "discount_percent": {
+            "description": "Rabat u procentima. numeric(6,3).",
+            "type": "string",
+            "pattern": "^-?[0-9]{1,3}(\\.[0-9]{1,3})?$"
+          },
+          "tax_percent": {
+            "description": "Poreska stopa u procentima. numeric(6,3).",
+            "type": "string",
+            "pattern": "^-?[0-9]{1,3}(\\.[0-9]{1,3})?$"
+          },
+          "tax_amount": {
+            "description": "Odstampan iznos poreza stavke. `null` kada ga dokument ne stampa.",
+            "type": ["string", "null"],
+            "pattern": "^-?[0-9]{1,12}(\\.[0-9]{1,2})?$"
+          },
+          "gross_amount": {
+            "description": "Odstampan bruto iznos stavke.",
+            "type": "string",
+            "pattern": "^-?[0-9]{1,12}(\\.[0-9]{1,2})?$"
+          }
+        }
+      }
+    },
+    "parser_meta": {
+      "description": "Najmanji skup podataka o citanju. BEZ sirovog teksta PDF-a, bez lokalne putanje, bez originalnog imena fajla i bez slobodnih beleski — sve troje ume da nosi licne podatke.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page_count", "line_count"],
+      "properties": {
+        "page_count": { "type": "integer", "minimum": 1, "maximum": 40 },
+        "line_count": { "type": "integer", "minimum": 1, "maximum": 500 }
+      }
+    },
+    "source_hash": {
+      "description": "SHA-256 tacnih PDF bajtova. TVRDNJA ovlascenog izvora: server bez bajtova ne moze da je nezavisno proveri prema samom PDF-u.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "semantic_hash": {
+      "description": "SHA-256 canonical poslovnog sadrzaja. Server ga PONOVO RACUNA iz validiranog sadrzaja i poredi; dostavljenoj vrednosti se ne veruje.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

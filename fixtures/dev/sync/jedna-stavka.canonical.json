@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "canonicalization_version": 1,
+  "parser_version": "biznisoft-pdf-1",
+  "source_system": "biznisoft",
+  "issuer": {
+    "code": "QA01"
+  },
+  "document": {
+    "kind": "faktura",
+    "number": "99-RN900000001",
+    "issued_on": "2026-01-01",
+    "trade_date": null,
+    "date_basis": "issued_on",
+    "currency": "RSD"
+  },
+  "partner": {
+    "external_code": "09001"
+  },
+  "totals": {
+    "printed_gross_total": "198.00"
+  },
+  "lines": [
+    {
+      "line_number": 1,
+      "article_code": "900001",
+      "description": "SINTETICKI ARTIKAL 1",
+      "unit": "KOM",
+      "quantity": "1.500",
+      "unit_price": "110.0000",
+      "discount_percent": "0.000",
+      "tax_percent": "20.000",
+      "tax_amount": "33.00",
+      "gross_amount": "198.00"
+    }
+  ],
+  "parser_meta": {
+    "page_count": 1,
+    "line_count": 1
+  },
+  "source_hash": "sha256:dae6b401a37c90746ddde9e817a104aa955f9ebb96c2a4ebcef9ea930e2b8f69",
+  "semantic_hash": "sha256:5c10bda98ddc249ac1735f465094b54a2dd7efbf71bd52ee3db4c4e87e6102f0"
+}

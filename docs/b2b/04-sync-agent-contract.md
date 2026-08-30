@@ -1,5 +1,19 @@
 # 04 — Ugovor lokalnog Sync Agenta
 
+> ## ⚠️ Delimično NEUSAGLAŠENO sa izgrađenim sistemom
+>
+> Vidi [19 — kanonski ugovor](19-canonical-ingest-contract.md), §8.
+>
+> - **Model.** Ovaj dokument opisuje *snapshot/dataset* ovojnicu
+>   (`customer_effective_prices`, `business_date`, „snapshot postaje active“).
+>   Izgrađen je **dokument-orijentisan** model (`source_documents` → `invoices`).
+>   Ovojnica iz §3 se **ne primenjuje doslovno**.
+> - **Potpis.** §5 predlaže **HMAC**. Za P2 je odlučen **asimetrični** potpis —
+>   privatni ključ na uređaju, javni na serveru. HMAC **nije** odobrena zamena.
+>
+> **Ostaje na snazi:** sedam nepregovarljivih pravila (§1), provera stabilnosti
+> fajla (§2), prozor ±5 min i `nonce` protiv replay-a (§5).
+
 > **Stanje: 🔵 u celini predloženo. Ništa od ovoga ne postoji u kodu.** 🟢
 >
 > `grep INGEST_API_KEY` i `grep FEATURE_FOLDER_CONNECTOR` daju pogotke isključivo

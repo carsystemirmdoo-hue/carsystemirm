@@ -17,6 +17,16 @@
 > Canonical shema se **može implementirati odmah** — ne zavisi od izvora.
 > Adapter se **ne piše** dok P1–P4 nemaju odgovor.
 
+> ## ⚠️ Za FAKTURE je nadmašen
+>
+> Kanonski ugovor za uvoz faktura je od P1 **`contracts/invoice-ingest/v1/schema.json`**,
+> opisan u [19](19-canonical-ingest-contract.md). On je autoritativan i
+> dokument-orijentisan; „pun dnevni snapshot“ iz ovog nacrta se na fakture **ne
+> odnosi**.
+>
+> Ostali modeli ovde (kupci, proizvodi, zalihe, cene, korpa, porudžbine) ostaju
+> nacrt i nisu dirani.
+
 Oznake: 🟢 potvrđeno u kodu · 🔵 predloženo · 🔴 blokirano
 
 ---

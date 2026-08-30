@@ -228,6 +228,8 @@ const PREDUSLOVI: Record<string, () => string | null> = {
   // Deljeni context vozi tri prijave zaredom, sve tri sa drugim faktorom.
   "16": trebaPunuSesiju,
   "17": trebaTajna,
+  // Spremnost trazi vlasnikovu STVARNO uspelu prijavu, ne samo postojanje tajne.
+  "19": trebaPunuSesiju,
 };
 
 /** Redni broj koraka iz njegovog imena („5. prijava kodom…" → „5"). */
@@ -2139,6 +2141,175 @@ try {
       return "4 javne rute bez cart sloja i bez localStorage zapisa";
     } finally {
       await s.zatvori();
+    }
+  });
+
+  await tok("19. spremnost podataka: vlasnik je vidi, komercijalista ne, bez preporuka", async () => {
+    const RUTA = "/portal/importi/spremnost";
+
+    /* --- 19a. Vlasnik otvara ekran i vidi dijagnostiku, ne ocenu. ------ */
+    const s = await svezaSesija();
+    try {
+      const kod = await svezTotp(ownerSecret);
+      const url = await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(s.page, "prijava pred spremnost odbijena", nalozi.owner.id));
+      }
+
+      const nav = await otvori(s.page, RUTA, ".portal-table");
+      if (!nav.stigao || (nav.status ?? 0) !== 200) {
+        throw new Error(
+          await dokazi(s.page, `spremnost nedostupna vlasniku: HTTP=${nav.status}`, nalozi.owner.id),
+        );
+      }
+
+      const v = await s.page.evaluate(() => {
+        const t = document.body.innerText;
+        return {
+          tekst: t,
+          /*
+           * QA baza je resetovana, pa je ovo ujedno provera PRAZNE baze na
+           * stvarnom ekranu: nulti imenitelj mora dati „nije dostupno“.
+           */
+          nijeDostupno: /nije dostupno/i.test(t),
+          procenatNula: /\b0\.0%/.test(t),
+          procenatSto: /\b100\.0%/.test(t),
+          nijeProvereno: (t.match(/nije provereno/gi) ?? []).length,
+        };
+      });
+
+      /*
+       * Zabranjen recnik — ali samo u TVRDNJI, ne u ogradi.
+       *
+       * Ekran mora da sme da kaze „nema predloga kupovine ni rejtinga kupca";
+       * to je upravo poruka koju nosi. Zato prosta pretraga termina ne radi —
+       * oborila bi sopstvene ograde, sto je i uradila u prvom prolazu.
+       *
+       * Proverava se svaki RED u kome se termin pojavljuje: ako u tom redu
+       * nema negacije, termin je upotrebljen kao tvrdnja. Dopisana sekcija sa
+       * preporukama ovo ne bi prosla — „Predlog kupovine: …" nema negaciju.
+       */
+      const termini = [
+        /preporuč/i, /preporuk/i, /predlog kupovine/i, /predlaž/i,
+        /sledeća porudžbina/i, /očekivan[au] (količin|porudžbin)/i,
+        /predviđen/i, /rejting/i, /ocena kupca/i, /spreman za preporuke/i,
+      ];
+      // `i` je obavezno: recenica pocinje velikim slovom („Nema predloga…").
+      const NEGACIJA = /\bnema\b|\bnije\b|\bnisu\b|\bne\b|\bbez\b|\bniti\b|\bnijedn/i;
+      const tvrdnje = v.tekst
+        .split(/\n+/)
+        .filter((red) => termini.some((r) => r.test(red)) && !NEGACIJA.test(red));
+      if (tvrdnje.length > 0) {
+        throw new Error(
+          await dokazi(
+            s.page,
+            `spremnost tvrdi preporuku (red bez negacije): ${tvrdnje[0].slice(0, 120)}`,
+          ),
+        );
+      }
+
+      /*
+       * Kontrola same provere: ograde MORAJU postojati. Bez ovoga bi test
+       * prosao i na ekranu koji je te recenice izgubio — a tada bi filter
+       * iznad merio prazan skup i izgledao zeleno bez ijedne tvrdnje.
+       */
+      if (!/nema predloga kupovine/i.test(v.tekst) || !/rejtinga kupca/i.test(v.tekst)) {
+        throw new Error(await dokazi(s.page, "ekran je izgubio ogradu o preporukama"));
+      }
+
+      if (!v.nijeDostupno) {
+        throw new Error(await dokazi(s.page, "nulti imenitelj nije prikazan kao „nije dostupno“"));
+      }
+      if (v.procenatNula || v.procenatSto) {
+        throw new Error(
+          await dokazi(s.page, "nulti imenitelj je prikazan kao 0.0% ili 100.0%"),
+        );
+      }
+      /*
+       * Tri spoljna kriterijuma moraju stajati kao neprovereni i na ekranu, ne
+       * samo u jedinicnim testovima. Prolazak ovog runnera ih NE potvrdjuje.
+       */
+      if (v.nijeProvereno < 3) {
+        throw new Error(
+          await dokazi(s.page, `očekivano ≥3 „nije provereno“, nađeno ${v.nijeProvereno}`),
+        );
+      }
+
+      await s.page.screenshot({ path: `${SHOTS}/06-spremnost-1280.png`, fullPage: true });
+
+      /*
+       * Mobilni prikaz. Ekran je gust tabelama, a AGENTS.md trazi da se
+       * pogodjeni UI proveri i na telefonu. Snimak sam po sebi nije dokaz —
+       * zato se prvo tvrdi da smo i dalje na trazenoj strani, pa se meri da
+       * telo ne izlazi iz sirine ekrana. Vodoravno curenje je tipican kvar
+       * siroke tabele i vidi se samo ovde.
+       */
+      await s.page.setViewportSize({ width: 390, height: 844 });
+      await s.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+      const mob = await sacekajSmirenuAdresu(s.page);
+      if (!mob.includes(RUTA)) {
+        throw new Error(await dokazi(s.page, "mobilna spremnost nije otvorena", nalozi.owner.id));
+      }
+      const siri = await s.page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      if (siri > 1) {
+        throw new Error(await dokazi(s.page, `mobilni prikaz curi vodoravno za ${siri}px`));
+      }
+      await s.page.screenshot({ path: `${SHOTS}/15-spremnost-390.png`, fullPage: true });
+    } finally {
+      await s.zatvori();
+    }
+
+    /* --- 19b. Komercijalista bez `view:importi` ne dobija ekran. ------- */
+    const setup = await beginMfaEnrollment({
+      userId: nalozi.worker.id,
+      accountLabel: nalozi.worker.email,
+    });
+    const workerTotp = await svezTotp(setup.base32);
+    const potvrda = await confirmMfaEnrollment({ userId: nalozi.worker.id, token: workerTotp });
+    if (!potvrda.ok) throw new Error("radnicki nalog nije vezao drugi faktor");
+
+    const w = await svezaSesija();
+    try {
+      const kod = await svezTotp(setup.base32);
+      const url = await prijava(w.page, nalozi.worker.email, nalozi.worker.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(w.page, "radnik se nije prijavio", nalozi.worker.id));
+      }
+
+      const res = await w.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+      const status = res?.status() ?? 0;
+      const v = await w.page.evaluate(() => ({
+        naslov: /Spremnost podataka/i.test(document.body.innerText),
+        // Nijedan broj iz dijagnostike ne sme da procuri u odbijanje.
+        metrike: document.querySelectorAll(".portal-metric").length,
+        navStavka: [...document.querySelectorAll("a")].filter((a) =>
+          (a.getAttribute("href") ?? "").includes("/importi/spremnost"),
+        ).length,
+      }));
+
+      if (status === 200 && v.naslov) {
+        throw new Error(
+          await dokazi(w.page, "komercijalista bez view:importi dobio spremnost", nalozi.worker.id),
+        );
+      }
+      if (v.metrike > 0) {
+        throw new Error(await dokazi(w.page, "odbijanje je procurilo metrike", nalozi.worker.id));
+      }
+      if (v.navStavka > 0) {
+        throw new Error(
+          await dokazi(w.page, "navigacija nudi spremnost nalogu bez dozvole", nalozi.worker.id),
+        );
+      }
+
+      return (
+        `vlasnik: HTTP 200 bez rečnika preporuka, nulti imenitelj = „nije dostupno“, ` +
+        `mobilni 390px bez vodoravnog curenja; ` +
+        `komercijalista odbijen (HTTP ${status}), bez metrika i bez nav stavke`
+      );
+    } finally {
+      await w.zatvori();
     }
   });
 } catch (error) {

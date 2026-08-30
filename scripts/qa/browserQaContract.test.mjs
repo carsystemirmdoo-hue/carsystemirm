@@ -55,15 +55,15 @@ function telo(naziv) {
 
 test("svi koraci su prisutni i jedinstveno numerisani", () => {
   /*
-   * 13 koraka Faze 1B + 6 koraka korpe.
+   * 13 koraka Faze 1B + 6 koraka korpe + 1 korak spremnosti podataka.
    *
    * Oznaka sme da nosi slovni sufiks (`14b`): podkorak koji meri isto sto i
    * njegov roditelj, ali nad drugim delom stranice. Prenumerisanje svega iza
    * njega bi razbilo poklapanje sa ranijim QA izvestajima.
    */
-  assert.equal(koraci.length, 19, `ocekivano 19 koraka, nadjeno ${koraci.length}`);
+  assert.equal(koraci.length, 20, `ocekivano 20 koraka, nadjeno ${koraci.length}`);
   const brojevi = koraci.map(broj);
-  assert.equal(new Set(brojevi).size, 19, `duplirani brojevi: ${brojevi.join(", ")}`);
+  assert.equal(new Set(brojevi).size, 20, `duplirani brojevi: ${brojevi.join(", ")}`);
   for (const b of brojevi) {
     assert.match(b, /^\d+[a-z]?$/, `oznaka koraka „${b}" nije u dozvoljenom obliku`);
   }

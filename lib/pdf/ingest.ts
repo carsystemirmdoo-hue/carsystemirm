@@ -12,7 +12,7 @@ import {
   sourceDocuments,
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
-import { parseBiznisoftPdf } from "@/lib/pdf/extract";
+import { parseBiznisoftPdf, type ParsedDocument } from "@/lib/pdf/extract";
 import { normalizePartnerCode } from "@/lib/commercial/externalIdentity.mjs";
 
 export type IngestActor = { id: string; name: string; role: string };
@@ -88,16 +88,66 @@ function isUniqueViolation(error: unknown, constraint: string): boolean {
 /**
  * Uvozi jedan PDF.
  *
- * Ceo posao je JEDNA transakcija: izvorni dokument, njegove stavke, faktura i
- * trag revizije nastaju zajedno ili nikako. Delimičan uvoz je najgori mogući
- * ishod — ostavio bi fakturu bez stavki ili stavke bez fakture, a jedini ledger
- * bi tiho postao netačan.
+ * Tanak omotač: pročita dokument i preda ga `ingestParsedDocument`. Sve što se
+ * tiče baze živi tamo, pa ručni upload i canonical put ne mogu da se raziđu.
+ *
+ * Delimičan uvoz je najgori mogući ishod — ostavio bi fakturu bez stavki ili
+ * stavke bez fakture, a jedini ledger bi tiho postao netačan. Zato je ceo posao
+ * jedna transakcija; granica je u funkciji ispod.
  */
 export async function ingestBiznisoftPdf(
   input: { bytes: Uint8Array; fileName: string; issuerCode: string; runId?: number },
   actor: IngestActor,
 ): Promise<IngestOutcome> {
   const parsed = await parseBiznisoftPdf(input.bytes);
+  return ingestParsedDocument(parsed, {
+    fileName: input.fileName,
+    issuerCode: input.issuerCode,
+    runId: input.runId,
+  }, actor);
+}
+
+/**
+ * Metapodaci koje knjiženje dobija IZVAN pročitanog dokumenta.
+ *
+ * Svako polje ovde mora doći iz pouzdanog serverskog konteksta — sesije,
+ * konfiguracije izvora ili pokrenutog prolaza. Nijedno se ne sme pročitati iz
+ * dostavljenog sadržaja: `issuerCode` je opseg, a opseg koji sam sebe proglasi
+ * nije opseg.
+ */
+export type IngestMeta = {
+  /**
+   * Ime pod kojim se dokument vodi u pregledu.
+   *
+   * Za ručni upload je stvarno ime fajla. Za canonical put je izvedena oznaka
+   * bez ličnih podataka — kolona je `NOT NULL`, a ime fajla sa kancelarijskog
+   * računara nema šta da traži u bazi.
+   */
+  fileName: string;
+  issuerCode: string;
+  runId?: number;
+};
+
+/**
+ * Knjiženje jednog PROČITANOG dokumenta.
+ *
+ * Ovo je jedini transakcioni put za izvorne dokumente. `ingestBiznisoftPdf`
+ * iznad samo parsira PDF i poziva ovu funkciju; canonical (JSON) put radi isto,
+ * pošto svoj sadržaj prevede u isti pročitani oblik. Dva puta knjiženja bi
+ * značila dve istine, i prvo neslaganje bi se videlo tek u poređenju sa
+ * knjigovodstvom.
+ *
+ * Funkcija je INTERNA za server. Nije javni API i ne sme joj se pristupiti bez
+ * postojeće provere dozvola pozivaoca — sama ne proverava nijednu.
+ *
+ * Ceo posao je JEDNA transakcija: izvorni dokument, njegove stavke, faktura i
+ * trag revizije nastaju zajedno ili nikako.
+ */
+export async function ingestParsedDocument(
+  parsed: ParsedDocument,
+  input: IngestMeta,
+  actor: IngestActor,
+): Promise<IngestOutcome> {
   const db = getDb();
 
   /*

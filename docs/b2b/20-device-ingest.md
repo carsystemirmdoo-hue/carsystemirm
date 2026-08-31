@@ -62,7 +62,7 @@ validatora. Pozitivni P1 vektori, njihov canonical sadržaj i hash su
 | Prozor | ±5 min prema serverskom vremenu, strogo u **oba** smera |
 | Nonce | 32 heksadecimalna znaka (128 bita) |
 
-Potpisuje se **tačno ovo**, sedam polja razdvojenih `\n`:
+Potpisuje se **tačno ovo**, **osam** polja razdvojenih `\n`:
 
 ```
 cs-sync-v1
@@ -77,6 +77,10 @@ sha256:<otisak tela>
 
 Zaglavlja: `x-cs-sync-version`, `x-cs-device-id`, `x-cs-key-id`,
 `x-cs-timestamp`, `x-cs-nonce`, `x-cs-body-sha256`, `x-cs-signature`.
+
+> **Ispravka.** Raniji P2 izveštaj i komentari su pisali „sedam polja“, a
+> nabrajali osam. Kod spaja **osam**; test je i tada tvrdio svih osam. Omaška je
+> bila samo u brojanju — wire format nije menjan.
 
 **Nijedno zaglavlje ne nosi algoritam.** Da ga nosi, napadač bi ponudio slabiji
 profil i server bi ga poslušao — klasičan `alg`-confusion.

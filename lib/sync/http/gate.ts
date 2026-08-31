@@ -36,7 +36,7 @@ export function isDeviceIngestEnabled(env: NodeJS.ProcessEnv = process.env): boo
  * Gornja granica tela.
  *
  * Izvedena iz ugovora, ne pogođena: 500 stavki × ~220 bajta po stavci u
- * najgorem slučaju (šifra 64, naziv 512, jedinica 32, sedam decimalnih polja i
+ * najgorem slučaju (šifra 64, naziv 512, jedinica 32, šest decimalnih polja i
  * imena ključeva) ≈ 400 KB, plus zaglavlje dokumenta. `512 KB` ostavlja rezervu
  * a ostaje daleko ispod bilo čega što bi opteretilo proces.
  *

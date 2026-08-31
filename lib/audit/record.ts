@@ -12,6 +12,14 @@ export interface AuditActor {
   id?: string | null;
   name: string;
   role: string;
+  /**
+   * Vrsta aktera. Podrazumevano `user`, radi svih postojećih pozivalaca.
+   *
+   * `device` traži `deviceId` i zabranjuje `id` — uređaj ima svoj identitet i
+   * ne pozajmljuje tuđi.
+   */
+  kind?: "user" | "device" | "system";
+  deviceId?: string | null;
 }
 
 export interface AuditInput {

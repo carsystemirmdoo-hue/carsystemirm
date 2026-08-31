@@ -14,6 +14,8 @@ import {
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { parseBiznisoftPdf, type ParsedDocument } from "@/lib/pdf/extract";
 import { normalizePartnerCode } from "@/lib/commercial/externalIdentity.mjs";
+import type { DocumentOrigin, ValueProvenance } from "@/db/schema";
+import { canonicalFromParsedDocument } from "@/lib/sync/contract/fromParsedDocument.mjs";
 
 export type IngestActor = { id: string; name: string; role: string };
 
@@ -46,6 +48,19 @@ export type IngestOutcome =
       result: "already_imported_other_source";
       sourceDocumentId: string | null;
       invoiceId: string;
+    }
+  /**
+   * Isti otisak fajla, drugačiji potvrđen poslovni sadržaj.
+   *
+   * NIJE `duplicate_file`: to bi tvrdilo da je posao isti. Postojeća faktura se
+   * ne dira i ceka ljudski pregled. `comparable: false` znaci da zatecen zapis
+   * nema verifikovan semantic hash, pa se poredjenje uopste nije moglo izvesti
+   * — to je druga tvrdnja od „sadrzaj se razlikuje".
+   */
+  | {
+      result: "source_hash_content_mismatch";
+      sourceDocumentId: string;
+      comparable: boolean;
     }
   /** Prošao i proknjižen. */
   | { result: "ingested"; sourceDocumentId: string; invoiceId: string };
@@ -100,10 +115,51 @@ export async function ingestBiznisoftPdf(
   actor: IngestActor,
 ): Promise<IngestOutcome> {
   const parsed = await parseBiznisoftPdf(input.bytes);
+
+  /*
+   * I ručni upload dobija VERIFIKOVAN semantic hash.
+   *
+   * Server ovde drži same bajtove i sam ih je pročitao, pa je hash njegov
+   * nalaz, ne tvrdnja pošiljaoca — isti status kao na canonical putu.
+   *
+   * Bez ovoga bi svaki ručno uvezen dokument ostao bez otiska sadržaja, i
+   * kasnija dostava sa uređaja ne bi imala sa čim da se uporedi. Tada bi
+   * zaštita od „isti otisak fajla, drugačiji sadržaj" ili ćutala, ili svaki
+   * uredan ponovni uvoz proglašavala nesaglasjem.
+   *
+   * `NULL` posle ovoga znači tačno jedno: red je nastao PRE P2. To je jedini
+   * legitiman „nema dokaza za poređenje".
+   */
+  let verifiedSemanticHash: string | undefined;
+  let canonicalizationVersion: number | undefined;
+  let schemaVersion: number | undefined;
+  if (parsed.validationStatus === "valid") {
+    try {
+      const canonical = canonicalFromParsedDocument(parsed, input.bytes, {
+        issuerCode: input.issuerCode,
+      });
+      verifiedSemanticHash = canonical.semantic_hash;
+      canonicalizationVersion = canonical.canonicalization_version;
+      schemaVersion = canonical.schema_version;
+    } catch {
+      /*
+       * Dokument koji čitač prihvata, a canonical oblik ne podnosi, i dalje se
+       * uvozi — samo bez otiska sadržaja. Ručni upload je zatečeni put i ne sme
+       * da počne da odbija dokumente zbog metapodatka koji ranije nije ni
+       * postojao.
+       */
+      verifiedSemanticHash = undefined;
+    }
+  }
+
   return ingestParsedDocument(parsed, {
     fileName: input.fileName,
     issuerCode: input.issuerCode,
     runId: input.runId,
+    origin: "manual_upload",
+    verifiedSemanticHash,
+    canonicalizationVersion,
+    schemaVersion,
   }, actor);
 }
 
@@ -126,6 +182,31 @@ export type IngestMeta = {
   fileName: string;
   issuerCode: string;
   runId?: number;
+
+  /* --- Poreklo (P2) --- */
+
+  /**
+   * Odakle dokument dolazi. Podrazumevano `manual_upload`, jer je to jedini
+   * put koji je postojao pre uređaja.
+   */
+  origin?: DocumentOrigin;
+  /** Uređaj koji je dostavio zapis; samo za `origin: "device"`. */
+  deliveredByDeviceId?: string | null;
+  /**
+   * Semantic hash koji je SERVER izračunao i potvrdio.
+   *
+   * `undefined` za ručni PDF upload — tamo canonical sadržaja nema, pa ni
+   * hash-a. Nikad se ne prima od pošiljaoca: canonical put ga prosleđuje tek
+   * pošto ga sam ponovo izračuna.
+   */
+  verifiedSemanticHash?: string;
+  canonicalizationVersion?: number;
+  schemaVersion?: number;
+  /** Valuta i ODAKLE dolazi — uvek zajedno, kao i u bazi. */
+  currency?: string;
+  currencyProvenance?: ValueProvenance;
+  tradeDate?: string | null;
+  dateBasis?: string;
 };
 
 /**
@@ -158,12 +239,77 @@ export async function ingestParsedDocument(
    * u bazi da dva paralelna uploada ne prođu oba.
    */
   const existing = await db
-    .select({ id: sourceDocuments.id })
+    .select({
+      id: sourceDocuments.id,
+      semanticHash: sourceDocuments.semanticHash,
+    })
     .from(sourceDocuments)
     .where(eq(sourceDocuments.fileHash, parsed.fileHash))
     .limit(1);
 
   if (existing[0]) {
+    /*
+     * Isti otisak fajla NIJE bezuslovno isti posao.
+     *
+     * SHA-256 sudar je nezamisliv, ali otisak nije jedini put do ovog reda:
+     * canonical put ga PRIMA kao tvrdnju izvora (server nema bajtove i ne može
+     * je nezavisno proveriti — vidi granicu poverenja u docs/b2b/19 §3). Uređaj
+     * koji prijavi tuđi `source_hash` uz svoj sadržaj bi tako dobio čist
+     * „duplikat", a razlika bi zauvek ostala neprimećena.
+     *
+     * Zato: kada OBA zapisa imaju verifikovan semantic hash i oni se razlikuju,
+     * ovo je nesaglasje, ne duplikat. Postojeća faktura se NE dira.
+     */
+    const postojeci = existing[0].semanticHash;
+    const dostavljen = input.verifiedSemanticHash ?? null;
+
+    if (postojeci && dostavljen && postojeci !== dostavljen) {
+      await recordAudit({
+        actor,
+        action: AUDIT_ACTIONS.pdfSourceHashMismatch,
+        entityType: "Izvorni dokument",
+        entityId: existing[0].id,
+        entityLabel: redactDocumentRef(parsed),
+        // Bez ijednog hash-a u tragu: otisak tuđeg dokumenta je i sam podatak.
+        reason:
+          "Isti otisak fajla uz drugačiji potvrđen poslovni sadržaj. Postojeći dokument nije menjan.",
+      });
+      return {
+        result: "source_hash_content_mismatch",
+        sourceDocumentId: existing[0].id,
+        /*
+         * `comparable: true` znači da su OBA zapisa imala dokaz i da se
+         * razlikuju. Bez ovog polja bi „nesaglasje" i „ne može se uporediti"
+         * izgledali isto.
+         */
+        comparable: true,
+      };
+    }
+
+    if (dostavljen && !postojeci) {
+      /*
+       * Zatečen zapis nema dokaz za poređenje.
+       *
+       * `semantic_hash` je `NULL` za sve što je uvezeno pre P2, i backfill
+       * nagađanjem se ne radi. Ovo se NE sme prikazati kao potvrđeno poklapanje
+       * sadržaja — jedino što se zna je da je otisak fajla isti.
+       */
+      await recordAudit({
+        actor,
+        action: AUDIT_ACTIONS.pdfSourceHashMismatch,
+        entityType: "Izvorni dokument",
+        entityId: existing[0].id,
+        entityLabel: redactDocumentRef(parsed),
+        reason:
+          "Isti otisak fajla, ali zatečeni zapis nema potvrđen poslovni sadržaj za poređenje.",
+      });
+      return {
+        result: "source_hash_content_mismatch",
+        sourceDocumentId: existing[0].id,
+        comparable: false,
+      };
+    }
+
     await recordAudit({
       actor,
       action: AUDIT_ACTIONS.pdfDuplicateSkipped,
@@ -237,6 +383,26 @@ export async function ingestParsedDocument(
           conflictsWith.length > 0 || parsed.validationStatus !== "valid"
             ? "pending"
             : "not_required",
+
+        /*
+         * Poreklo i verifikovani metapodaci — u ISTOJ transakciji kao dokument.
+         *
+         * Razdvojen upis bi ostavio prozor u kome dokument postoji a njegovo
+         * poreklo ne, i taj prozor bi se video kao `legacy_unknown` na sasvim
+         * novom redu.
+         *
+         * Ovo su podaci koji zavise od VERZIJE dokumenta; zato stoje ovde, a ne
+         * na fakturi. Projekcija ih preuzima od verzije koja važi.
+         */
+        origin: input.origin ?? "manual_upload",
+        deliveredByDeviceId: input.deliveredByDeviceId ?? null,
+        semanticHash: input.verifiedSemanticHash ?? null,
+        canonicalizationVersion: input.canonicalizationVersion ?? null,
+        schemaVersion: input.schemaVersion ?? null,
+        currency: input.currency ?? null,
+        currencyProvenance: input.currencyProvenance ?? null,
+        tradeDate: input.tradeDate ?? null,
+        dateBasis: input.dateBasis ?? null,
       })
       .returning({ id: sourceDocuments.id });
 
@@ -600,6 +766,21 @@ async function postSourceDocument(
       netAmount: String(round2(net)),
       taxAmount: String(round2(tax)),
       totalAmount: String(round2(gross)),
+
+      /*
+       * Projekcija preuzima poreklo, valutu i datume od IZVORNOG DOKUMENTA
+       * koji je knjiži — ne od pozivaoca.
+       *
+       * `doc` je red koji je upravo proglašen važećim. Kada čovek kasnije
+       * izabere drugu verziju, `retargetInvoice` prepisuje i ova polja zajedno
+       * sa stavkama; inače bi faktura nosila valutu jedne, a iznose druge
+       * verzije.
+       */
+      origin: doc.origin,
+      currency: doc.currency,
+      currencyProvenance: doc.currencyProvenance,
+      tradeDate: doc.tradeDate,
+      dateBasis: doc.dateBasis,
     })
     .returning({ id: invoices.id });
 
@@ -1018,6 +1199,18 @@ async function loadDocument(tx: Tx, id: string) {
       externalPartnerCode: sourceDocuments.externalPartnerCode,
       validationStatus: sourceDocuments.validationStatus,
       invoiceId: sourceDocuments.invoiceId,
+      /*
+       * Metapodaci VERZIJE — potrebni pri izboru druge verzije.
+       *
+       * Bez njih bi `retargetInvoice` prepisao iznose a ostavio staru valutu i
+       * poreklo, i nijedan izveštaj to ne bi prijavio kao grešku.
+       */
+      origin: sourceDocuments.origin,
+      currency: sourceDocuments.currency,
+      currencyProvenance: sourceDocuments.currencyProvenance,
+      tradeDate: sourceDocuments.tradeDate,
+      dateBasis: sourceDocuments.dateBasis,
+      documentDate: sourceDocuments.documentDate,
     })
     .from(sourceDocuments)
     .where(eq(sourceDocuments.id, id))
@@ -1076,6 +1269,19 @@ async function retargetInvoice(
       netAmount: String(round2(lines.reduce((sum, l) => sum + netOf(l), 0))),
       taxAmount: String(round2(lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0))),
       totalAmount: String(round2(lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0))),
+
+      /*
+       * Poreklo i valuta prelaze ZAJEDNO sa iznosima.
+       *
+       * Ovo su metapodaci VERZIJE. Da se ovde ne prepišu, faktura bi posle
+       * izbora druge verzije nosila iznose nove a valutu, datum prometa i
+       * poreklo stare — i nijedan izveštaj to ne bi prijavio kao grešku.
+       */
+      origin: doc.origin,
+      currency: doc.currency,
+      currencyProvenance: doc.currencyProvenance,
+      tradeDate: doc.tradeDate,
+      dateBasis: doc.dateBasis,
       updatedAt: sql`now()`,
     })
     .where(eq(invoices.id, invoiceId));

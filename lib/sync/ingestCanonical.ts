@@ -33,10 +33,17 @@ import { ContractRejection, validateCanonicalInvoice } from "./contract/validate
  */
 export async function ingestCanonicalInvoice(
   payload: unknown,
-  trusted: { issuerCode: string; runId?: number },
+  trusted: {
+    issuerCode: string;
+    runId?: number;
+    /** Poreklo; `device` samo kada zahtev zaista dolazi sa uređaja. */
+    origin?: "manual_upload" | "device";
+    /** Uređaj koji je dostavio zapis — iz AUTENTIFIKACIJE, ne iz payloada. */
+    deviceId?: string | null;
+  },
   actor: IngestActor,
 ): Promise<IngestOutcome> {
-  const { payload: proveren } = validateCanonicalInvoice(payload, {
+  const { payload: proveren, semanticHash: verifikovan } = validateCanonicalInvoice(payload, {
     issuerCode: trusted.issuerCode,
   });
 
@@ -48,10 +55,40 @@ export async function ingestCanonicalInvoice(
       /*
        * Ime fajla se NE prenosi kroz ugovor. Izvedena oznaka iz otiska je
        * dovoljna da se dokument pronađe, a ne nosi naziv kupca ni broj računa.
+       *
+       * Ovo je prikazna kompatibilnost sa `NOT NULL` kolonom, NE dokaz
+       * porekla — poreklo ima svoje polje (`origin`) i dolazi ispod.
        */
       fileName: derivedFileName(proveren),
       issuerCode: trusted.issuerCode,
       runId: trusted.runId,
+
+      origin: trusted.origin ?? "device",
+      deliveredByDeviceId: trusted.deviceId ?? null,
+
+      /*
+       * Hash koji je SERVER ponovo izračunao, ne onaj iz payloada.
+       *
+       * `validateCanonicalInvoice` ga vraća upravo zato: dostavljena vrednost
+       * je već upoređena i odbačena kao izvor. Prosleđivanje `proveren.semantic_hash`
+       * bi radilo isto danas, ali bi sledeći čitalac pomislio da se veruje
+       * pošiljaocu.
+       */
+      verifiedSemanticHash: verifikovan,
+      canonicalizationVersion: proveren.canonicalization_version,
+      schemaVersion: proveren.schema_version,
+
+      /*
+       * Valuta i njeno poreklo idu zajedno.
+       *
+       * `source_default`, jer čitač BizniSoft dokumenta valutu NE čita — RSD je
+       * podrazumevana vrednost konfiguracije podržanog izvora. Zapisati
+       * `document` ovde značilo bi tvrditi da je pročitana sa papira.
+       */
+      currency: proveren.document.currency,
+      currencyProvenance: "source_default",
+      tradeDate: proveren.document.trade_date,
+      dateBasis: proveren.document.date_basis,
     },
     actor,
   );

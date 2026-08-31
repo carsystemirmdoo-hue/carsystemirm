@@ -13,7 +13,16 @@ import {
   PARSER_VERSION,
   toRows,
   validateTotals,
-} from "@/lib/pdf/biznisoftLayout.mjs";
+} from "./biznisoftLayout.mjs";
+/*
+ * RELATIVAN uvoz, ne `@/` alias.
+ *
+ * `biznisoftLayout.mjs` je susedni fajl, pa je relativna putanja i tacnija.
+ * Bitnije: TypeScript NE prepisuje alias pri emitovanju, pa bi prevedeni
+ * `parseDocument.js` u spakovanom konektoru nosio `@/lib/...` — uvoz koji van
+ * repozitorijuma nema sta da razresi. Ovo je jedina izmena potrebna da isti
+ * parser radi i lokalno na kancelarijskom racunaru.
+ */
 
 /**
  * Čitanje BizniSoft PDF-a — ZAJEDNIČKI modul, bez serverske granice.

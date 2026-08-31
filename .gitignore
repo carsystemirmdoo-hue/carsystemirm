@@ -83,3 +83,6 @@ assets/manufacturer/
 /_incoming/assets/
 ._*
 __MACOSX/
+
+# Spakovan konektor — artefakt builda, ne izvor.
+connector/dist/

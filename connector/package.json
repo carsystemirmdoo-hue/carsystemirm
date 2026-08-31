@@ -1,0 +1,15 @@
+{
+  "name": "carsystem-connector",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lokalni konektor: cita podrzane BizniSoft PDF fakture i salje potpisan canonical dokument postojecem device API-ju. PDF ostaje na racunaru.",
+  "bin": { "carsystem-connector": "./bin/connector.mjs" },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "unpdf": "1.8.1"
+  }
+}

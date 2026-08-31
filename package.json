@@ -170,7 +170,9 @@
     "test:contract": "node --test lib/sync/contract/*.test.mjs",
     "test:signing": "node --test lib/sync/device/*.test.mjs",
     "test:contract-adapter": "tsx --test lib/sync/contract/*.test.mts",
-    "fixtures:biznisoft": "node scripts/fixtures/build-biznisoft-fixtures.mjs"
+    "fixtures:biznisoft": "node scripts/fixtures/build-biznisoft-fixtures.mjs",
+    "connector:build": "node connector/scripts/build.mjs",
+    "connector:test": "npm run connector:build && node --test connector/test/*.test.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0",

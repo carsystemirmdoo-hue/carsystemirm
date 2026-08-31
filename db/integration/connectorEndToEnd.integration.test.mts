@@ -1,0 +1,719 @@
+import assert from "node:assert/strict";
+import { createServer, type Server } from "node:http";
+import { randomUUID } from "node:crypto";
+import { cp, mkdir, mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { AddressInfo } from "node:net";
+import test, { after, before, beforeEach } from "node:test";
+import {
+  cleanupQa,
+  closeTestDatabase,
+  ensureTestCryptoEnv,
+  initTestDatabase,
+  seedAccounts,
+  skipReason,
+  type TestDatabase,
+} from "./harness.mts";
+
+/**
+ * Konektor → STVARNI HTTP → STVARNI P2 rukovaoci → QA Postgres.
+ *
+ * Ovo je jedini test koji dokazuje da serijalizacija i transport nisu mock:
+ * telo putuje kroz pravu utičnicu, a na drugoj strani je `POST` iz
+ * `app/api/sync/*`, ne pomoćna funkcija.
+ *
+ * Konektor se uvozi iz SPAKOVANOG paketa (`connector/dist`), pa se testira ono
+ * što bi se isporučilo — uključujući prevedeni `parseDocument.js`.
+ *
+ * Svi dokumenti i ključevi su sintetički.
+ */
+
+/**
+ * Konektoru treba `node:sqlite` — dakle Node 22+, u praksi Node 24.
+ *
+ * `npm run test:integration` se pokreće runtime-om web projekta (Node 20), gde
+ * tog modula nema. Umesto lažno zelenog rezultata, ovaj fajl se tada IZRIČITO
+ * preskače i kaže zašto; pun prolaz daje `npm run connector:e2e`, koji ga
+ * pokreće pod Node 24.
+ */
+async function nedostajeSqlite(): Promise<string | null> {
+  try {
+    /*
+     * Proverava se STVARNI `import`, ne `getBuiltinModule`.
+     *
+     * Node 20 zna za ime modula preko `getBuiltinModule`, ali ESM `import` puca
+     * sa `ERR_UNKNOWN_BUILTIN_MODULE` — pa bi provera preko imena dala lažno
+     * zeleno i test bi pao kasnije, sa nerazumljivom porukom.
+     */
+    await import("node:sqlite");
+    return null;
+  } catch {
+    return `Konektor traži node:sqlite (Node 22+); tekući runtime je ${process.version}. ` +
+      "Pun prolaz: `npm run connector:e2e`.";
+  }
+}
+
+const reason = skipReason() ?? (await nedostajeSqlite());
+const guard = (t: { skip: (m?: string) => void }) => {
+  if (reason) {
+    t.skip(reason);
+    return true;
+  }
+  return false;
+};
+
+let db: TestDatabase;
+let owner: { id: string; name: string; role: string };
+let office: { id: string; name: string; role: string };
+let server: Server;
+let origin: string;
+
+const ISSUER = "QA01";
+const KOREN = new URL("../../", import.meta.url);
+const DIST = new URL("../../connector/dist/", import.meta.url);
+
+const D = (p: string) => new URL(`connector/src/${p}`, DIST).href;
+
+/* ========================================================================= */
+
+/** Podiže pravi HTTP server nad stvarnim route handler-ima. */
+async function podigniServer(): Promise<{ server: Server; origin: string }> {
+  const { POST: ingest } = await import("@/app/api/sync/ingest/route");
+  const { POST: heartbeat } = await import("@/app/api/sync/heartbeat/route");
+
+  const s = createServer(async (req, res) => {
+    const delovi: Buffer[] = [];
+    for await (const deo of req) delovi.push(deo as Buffer);
+    const telo = Buffer.concat(delovi);
+
+    /*
+     * `IncomingMessage` → `Request`, bez ijedne izmene tela.
+     *
+     * Bajtovi moraju stići do rukovaoca tačno onakvi kakvi su poslati; svaka
+     * ponovna serijalizacija ovde bi obesmislila proveru otiska.
+     */
+    const zahtev = new Request(`http://127.0.0.1${req.url}`, {
+      method: req.method,
+      headers: Object.entries(req.headers).flatMap(([k, v]) =>
+        typeof v === "string" ? [[k, v] as [string, string]] : [],
+      ),
+      body: req.method === "POST" ? telo : undefined,
+    });
+
+    const putanja = new URL(zahtev.url).pathname;
+    const rukovalac = putanja === "/api/sync/ingest" ? ingest : heartbeat;
+    const odgovor = await rukovalac(zahtev);
+
+    res.statusCode = odgovor.status;
+    odgovor.headers.forEach((v, k) => res.setHeader(k, v));
+    res.end(Buffer.from(await odgovor.arrayBuffer()));
+  });
+
+  await new Promise<void>((r) => s.listen(0, "127.0.0.1", r));
+  const port = (s.address() as AddressInfo).port;
+  return { server: s, origin: `http://127.0.0.1:${port}` };
+}
+
+before(async () => {
+  if (reason) return;
+  ensureTestCryptoEnv();
+  process.env.FEATURE_SYNC_DEVICE_INGEST = "1";
+  db = await initTestDatabase();
+  const a = await seedAccounts(db, [
+    { key: "owner", role: "gazda" },
+    { key: "office", role: "kancelarija" },
+  ]);
+  owner = { id: a.owner.id, name: a.owner.name, role: a.owner.role };
+  office = { id: a.office.id, name: a.office.name, role: a.office.role };
+  ({ server, origin } = await podigniServer());
+});
+
+after(async () => {
+  if (server) await new Promise<void>((r) => server.close(() => r()));
+  if (!reason && db) {
+    await ocisti();
+    await db.sql`DELETE FROM sync_request_nonces`;
+    await db.sql`DELETE FROM sync_device_keys`;
+    await db.sql`DELETE FROM sync_devices`;
+    await cleanupQa(db);
+  }
+  delete process.env.FEATURE_SYNC_DEVICE_INGEST;
+  await closeTestDatabase();
+});
+
+async function ocisti() {
+  await db.sql`DELETE FROM source_document_lines`;
+  await db.sql`DELETE FROM source_documents`;
+  await db.sql`DELETE FROM invoice_lines`;
+  await db.sql`DELETE FROM invoices`;
+  await db.sql`DELETE FROM customer_external_identifiers`;
+  await db.sql`DELETE FROM article_catalog_mappings`;
+  await db.sql`DELETE FROM articles WHERE code LIKE '9%'`;
+  await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%'`;
+  await db.sql`DELETE FROM auth_rate_limits`;
+  await db.sql`DELETE FROM sync_request_nonces`;
+}
+
+beforeEach(async () => {
+  if (!reason) await ocisti();
+});
+
+/* ========================================================================= */
+
+/** Registruje i aktivira uređaj kroz STVARNI servis, kao gazda. */
+async function aktivanUredjaj() {
+  const { registerDevice, activateDevice } = await import("@/lib/sync/device/registry");
+  const { generateKeyPairSync } = await import("node:crypto");
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  const kod = `dev-${randomUUID().slice(0, 8)}`;
+
+  const out = await registerDevice(
+    {
+      deviceCode: kod,
+      label: "QA konektor",
+      sourceSystem: "biznisoft",
+      issuerCode: ISSUER,
+      keyId: "k1",
+      publicKeySpki: publicKey.export({ type: "spki", format: "der" }).toString("base64"),
+    },
+    owner,
+  );
+  await activateDevice(
+    { deviceId: out.deviceId, keyId: "k1", expectedFingerprint: out.fingerprint },
+    owner,
+  );
+  return {
+    ...out,
+    deviceCode: kod,
+    privateKeyPkcs8Der: new Uint8Array(privateKey.export({ type: "pkcs8", format: "der" })),
+  };
+}
+
+async function mapiranKupac(partnerCode = "09002") {
+  const [c] = await db.sql<{ id: string }[]>`
+    INSERT INTO customers (pib, name)
+    VALUES (${`QA${randomUUID().slice(0, 6)}`}, 'QA Kupac') RETURNING id`;
+  await db.sql`
+    INSERT INTO customer_external_identifiers
+      (source_system, issuer_code, external_partner_code, customer_id, status)
+    VALUES ('biznisoft', ${ISSUER}, ${partnerCode}, ${c.id}, 'mapped')`;
+  return c.id;
+}
+
+/** Privremeno okruženje konektora: izvorni folder i lokalni red. */
+async function okruzenje(fajlovi: string[] = ["vise-stavki.pdf"]) {
+  const baza = await mkdtemp(join(tmpdir(), "cs-e2e-"));
+  const izvor = join(baza, "Moj Folder ČĆŽŠĐ", "fakture");
+  await mkdir(izvor, { recursive: true });
+  for (const f of fajlovi) {
+    await cp(new URL(`fixtures/dev/biznisoft/${f}`, KOREN).pathname, join(izvor, `Račun ${f}`));
+  }
+  return { baza, izvor, redPutanja: join(baza, "stanje", "queue.db") };
+}
+
+const konfiguracija = (izvor: string, deviceCode: string) => ({
+  serverOrigin: origin,
+  deviceCode,
+  keyId: "k1",
+  sourceSystem: "biznisoft",
+  issuerCode: ISSUER,
+  izvorniFolder: izvor,
+  dodatnaZatvaranja: [],
+  maxPoCiklusu: 50,
+  timeoutMs: 15_000,
+});
+
+const identitet = (deviceCode: string) => ({
+  origin,
+  deviceCode,
+  sourceSystem: "biznisoft",
+  issuerCode: ISSUER,
+  contractVersion: 1,
+});
+
+const brojFaktura = async () => {
+  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM invoices`;
+  return n;
+};
+
+/* =========================================================================
+ * Pun tok
+ * ====================================================================== */
+
+test("PDF → lokalni red → STVARNI HTTP → jedna faktura sa device poreklom", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+
+    const skeniranje = await skenirajURed({ store, konfiguracija: k });
+    assert.equal(skeniranje.novo, 1, "dokument nije ušao u red");
+
+    const slanje = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+
+    assert.equal(slanje.potvrdjeno, 1, `neočekivano: ${JSON.stringify(slanje)}`);
+    assert.equal(await brojFaktura(), 1);
+
+    const [inv] = await db.sql<{ origin: string; currency: string; currency_provenance: string }[]>`
+      SELECT origin, currency, currency_provenance FROM invoices`;
+    assert.equal(inv.origin, "device", "poreklo nije zabeleženo");
+    assert.equal(inv.currency, "RSD");
+    assert.equal(inv.currency_provenance, "source_default");
+
+    const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM invoice_lines`;
+    assert.equal(n, 7, "stavke se ne poklapaju");
+
+    // Uređaj je akter u tragu, ne čovek koji ga je registrovao.
+    const [trag] = await db.sql<{ actor_kind: string; actor_device_id: string }[]>`
+      SELECT actor_kind, actor_device_id FROM audit_log
+       WHERE action = 'Izvorni dokument proknjizen' LIMIT 1`;
+    assert.equal(trag.actor_kind, "device");
+    assert.equal(trag.actor_device_id, uredjaj.deviceId);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("izgubljen odgovor: NOV proces, ISTI red, nov nonce → jedna faktura", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const { ledgerTotals } = await import("@/lib/ledger/effective-sales");
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+
+  try {
+    /* --- Prolaz 1: server KNJIŽI, ali odgovor se „izgubi“. -------------- */
+    const prvi = otvoriStore({
+      putanja: okr.redPutanja,
+      identitet: identitet(uredjaj.deviceCode),
+    });
+    await skenirajURed({ store: prvi, konfiguracija: k });
+
+    /*
+     * `fetchImpl` propušta zahtev do pravog servera, pa ga server ZAISTA
+     * knjiži — a zatim odbacuje odgovor i javlja prekid veze. Tačno ono što se
+     * dešava kada mreža pukne posle upisa.
+     */
+    const izgubi: typeof fetch = async (...args) => {
+      await fetch(...(args as Parameters<typeof fetch>));
+      throw Object.assign(new Error("veza prekinuta"), { name: "FetchError" });
+    };
+
+    const pokusaj = await posaljiIzReda({
+      store: prvi,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+      fetchImpl: izgubi,
+    });
+    assert.equal(pokusaj.odlozeno, 1, "izgubljen odgovor nije odložen");
+    assert.equal(await brojFaktura(), 1, "preduslov: server je knjižio");
+
+    // Konektor NE zna da je knjiženo — stavka je i dalje u redu.
+    assert.equal(prvi.zbir().potvrdjeno ?? 0, 0);
+    prvi.zatvori(); // „pad“ procesa
+
+    /* --- Prolaz 2: NOV proces otvara ISTI trajni red. ------------------- */
+    const drugi = otvoriStore({
+      putanja: okr.redPutanja,
+      identitet: identitet(uredjaj.deviceCode),
+    });
+    try {
+      const ponovo = await posaljiIzReda({
+        store: drugi,
+        konfiguracija: k,
+        kljuc: uredjaj.privateKeyPkcs8Der,
+        // Odloženo je do sledećeg radnog dana; ponavlja se tada.
+        lokalniDatum: "2026-03-20",
+        dozvoliHttp: true,
+      });
+
+      /*
+       * Isti dokument, NOV nonce i nov timestamp → server prepoznaje otisak i
+       * vraća `duplicate_file`. To je potvrda, ne greška.
+       */
+      assert.equal(ponovo.potvrdjeno, 1, `neočekivano: ${JSON.stringify(ponovo)}`);
+      assert.equal(await brojFaktura(), 1, "nastala je druga faktura");
+
+      const promet = await ledgerTotals({ customerIds: null });
+      assert.equal(promet.gross_sales.lines, 7, "promet je udvostručen");
+    } finally {
+      drugi.zatvori();
+    }
+  } finally {
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("pad usred slanja: nov proces oporavlja `salje_se` i završi posao", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+
+  try {
+    const prvi = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+    await skenirajURed({ store: prvi, konfiguracija: k });
+
+    // Preuzeta za slanje, pa proces „pada“ pre ijednog odgovora.
+    const [stavka] = prvi.zaSlanje({ lokalniDatum: "2026-03-10" });
+    assert.equal(prvi.oznaciSalje(stavka.id), true);
+    prvi.zatvori();
+
+    const drugi = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+    try {
+      const rez = await posaljiIzReda({
+        store: drugi,
+        konfiguracija: k,
+        kljuc: uredjaj.privateKeyPkcs8Der,
+        lokalniDatum: "2026-03-10",
+        dozvoliHttp: true,
+      });
+      assert.equal(rez.oporavljeno, 1, "zaglavljena stavka nije oporavljena");
+      assert.equal(rez.potvrdjeno, 1);
+      assert.equal(await brojFaktura(), 1);
+    } finally {
+      drugi.zatvori();
+    }
+  } finally {
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+/* =========================================================================
+ * Odbijanja preko stvarnog transporta
+ * ====================================================================== */
+
+test("opozvan uređaj: ciklus staje, ništa se ne knjiži", async (t) => {
+  if (guard(t)) return;
+  const { revokeDevice } = await import("@/lib/sync/device/registry");
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    await skenirajURed({ store, konfiguracija: k });
+    await revokeDevice({ deviceId: uredjaj.deviceId, reason: "QA opoziv" }, owner);
+
+    const rez = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+
+    assert.equal(rez.zaustavljeno, "device_not_active", "ciklus nije zaustavljen");
+    assert.equal(rez.potvrdjeno, 0);
+    assert.equal(await brojFaktura(), 0);
+    assert.equal(store.zbir().blokirano, 1);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("isključen feature gate: endpoint nije operativan, red ostaje", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  const prethodno = process.env.FEATURE_SYNC_DEVICE_INGEST;
+  try {
+    await skenirajURed({ store, konfiguracija: k });
+    delete process.env.FEATURE_SYNC_DEVICE_INGEST;
+
+    const rez = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+
+    // 404 `not_found` → blokada, bez menjanja serverske konfiguracije.
+    assert.equal(rez.zaustavljeno, "not_found");
+    assert.equal(await brojFaktura(), 0);
+  } finally {
+    process.env.FEATURE_SYNC_DEVICE_INGEST = prethodno;
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("HTML 200 nije potvrda — stavka ostaje u redu", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    await skenirajURed({ store, konfiguracija: k });
+
+    /*
+     * Posrednik koji vrati captive-portal stranicu sa HTTP 200.
+     *
+     * Bez provere `content-type` i `code`, konektor bi ovo upisao kao potvrdu i
+     * dokument bi nestao iz reda a nikad ne bi bio knjižen.
+     */
+    const portal: typeof fetch = async () =>
+      new Response("<html>Prijavite se na mrežu</html>", {
+        status: 200,
+        headers: { "content-type": "text/html" },
+      });
+
+    const rez = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+      fetchImpl: portal,
+    });
+
+    assert.equal(rez.potvrdjeno, 0, "HTML 200 je prihvaćen kao potvrda");
+    assert.equal(rez.odlozeno, 1);
+    assert.equal(await brojFaktura(), 0);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("ručni i device put, isti PDF u OBA redosleda — bez duplog prometa", async (t) => {
+  if (guard(t)) return;
+  const { ingestBiznisoftPdf } = await import("@/lib/pdf/ingest");
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const { readFile } = await import("node:fs/promises");
+
+  const bajtovi = new Uint8Array(
+    await readFile(new URL("fixtures/dev/biznisoft/vise-stavki.pdf", KOREN).pathname),
+  );
+
+  /* --- Redosled A: ručno pa konektor. --------------------------------- */
+  const a = await aktivanUredjaj();
+  await mapiranKupac();
+  const okrA = await okruzenje();
+  const kA = konfiguracija(okrA.izvor, a.deviceCode);
+  const storeA = otvoriStore({ putanja: okrA.redPutanja, identitet: identitet(a.deviceCode) });
+  try {
+    assert.equal(
+      (await ingestBiznisoftPdf({ bytes: bajtovi, fileName: "rucno.pdf", issuerCode: ISSUER }, office))
+        .result,
+      "ingested",
+    );
+    await skenirajURed({ store: storeA, konfiguracija: kA });
+    const rez = await posaljiIzReda({
+      store: storeA, konfiguracija: kA, kljuc: a.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10", dozvoliHttp: true,
+    });
+    assert.equal(rez.potvrdjeno, 1, "konektor nije dobio potvrđen duplikat");
+    assert.equal(await brojFaktura(), 1);
+  } finally {
+    storeA.zatvori();
+    await rm(okrA.baza, { recursive: true, force: true });
+  }
+
+  /* --- Redosled B: konektor pa ručno. --------------------------------- */
+  await ocisti();
+  const b = await aktivanUredjaj();
+  await mapiranKupac();
+  const okrB = await okruzenje();
+  const kB = konfiguracija(okrB.izvor, b.deviceCode);
+  const storeB = otvoriStore({ putanja: okrB.redPutanja, identitet: identitet(b.deviceCode) });
+  try {
+    await skenirajURed({ store: storeB, konfiguracija: kB });
+    await posaljiIzReda({
+      store: storeB, konfiguracija: kB, kljuc: b.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10", dozvoliHttp: true,
+    });
+    assert.equal(await brojFaktura(), 1);
+
+    const posle = await ingestBiznisoftPdf(
+      { bytes: bajtovi, fileName: "rucno.pdf", issuerCode: ISSUER },
+      office,
+    );
+    assert.equal(posle.result, "duplicate_file");
+    assert.equal(await brojFaktura(), 1, "nastala je druga faktura");
+  } finally {
+    storeB.zatvori();
+    await rm(okrB.baza, { recursive: true, force: true });
+  }
+});
+
+test("nepodržan dokument ne stiže do mreže", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  const okr = await okruzenje(["nastavak-tabele.pdf", "zbir-se-ne-poklapa.pdf"]);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    const rez = await skenirajURed({
+      store,
+      konfiguracija: konfiguracija(okr.izvor, uredjaj.deviceCode),
+    });
+    /*
+     * Granice koje P1 postavlja ostaju: konektor ih ne pomera time što je dodat.
+     * Nepodržan dokument se ne šalje i ne troši ciklus.
+     */
+    assert.equal(rez.nepodrzano, 2);
+    assert.equal(rez.novo, 0);
+    assert.equal(store.zbir().nepodrzano, 2);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+/* =========================================================================
+ * Potpis i klijent, preko stvarnog transporta
+ * ====================================================================== */
+
+test("heartbeat dokazuje SAMO javljanje", async (t) => {
+  if (guard(t)) return;
+  const { posaljiHeartbeat } = await import(D("client.mjs"));
+  const uredjaj = await aktivanUredjaj();
+
+  const odgovor = await posaljiHeartbeat({
+    origin,
+    deviceCode: uredjaj.deviceCode,
+    keyId: "k1",
+    privateKeyPkcs8Der: uredjaj.privateKeyPkcs8Der,
+    dozvoliHttp: true,
+  });
+
+  assert.equal(odgovor.httpStatus, 200);
+  assert.equal(odgovor.code, "acknowledged");
+
+  const [d] = await db.sql<{ last_seen_at: Date | null }[]>`
+    SELECT last_seen_at FROM sync_devices WHERE id = ${uredjaj.deviceId}`;
+  assert.ok(d.last_seen_at, "kontakt nije zabeležen");
+
+  // Heartbeat ne pravi ni dokument ni promet.
+  assert.equal(await brojFaktura(), 0);
+});
+
+test("klijent odbija HTTP i redirekciju bez izričitog test režima", async (t) => {
+  if (guard(t)) return;
+  const { proveriOrigin } = await import(D("client.mjs"));
+
+  assert.throws(() => proveriOrigin("http://kancelarija.local"), (e: { code: string }) =>
+    e.code === "origin_not_https");
+  assert.throws(() => proveriOrigin("https://a.invalid/putanja"), (e: { code: string }) =>
+    e.code === "origin_has_path");
+  assert.throws(() => proveriOrigin("https://a.invalid/?x=1"), (e: { code: string }) =>
+    e.code === "origin_has_query");
+  assert.equal(proveriOrigin("https://a.invalid"), "https://a.invalid");
+  // Test režim je jedini put do HTTP-a.
+  assert.equal(proveriOrigin("http://127.0.0.1:1", { dozvoliHttp: true }), "http://127.0.0.1:1");
+});
+
+test("potpis iz STVARNOG klijenta prihvata stvarni rukovalac", async (t) => {
+  if (guard(t)) return;
+  const { posaljiPotpisano } = await import(D("client.mjs"));
+  const { canonicalFromParsedDocument } = await import("@/lib/sync/contract/fromParsedDocument.mjs");
+  const { parseBiznisoftPdf } = await import("@/lib/pdf/parseDocument");
+  const { readFile } = await import("node:fs/promises");
+
+  const uredjaj = await aktivanUredjaj();
+  // `jedna-stavka.pdf` nosi sifru partnera `09001`, ne `09002`.
+  await mapiranKupac("09001");
+
+  const bajtovi = new Uint8Array(
+    await readFile(new URL("fixtures/dev/biznisoft/jedna-stavka.pdf", KOREN).pathname),
+  );
+  const payload = canonicalFromParsedDocument(await parseBiznisoftPdf(bajtovi), bajtovi, {
+    issuerCode: ISSUER,
+  });
+
+  /*
+   * Telo se serijalizuje JEDNOM i šalje kao isti niz bajtova.
+   *
+   * Da klijent ponovo serijalizuje pred slanje, otisak ne bi odgovarao i
+   * rukovalac bi vratio `body_hash_mismatch`.
+   */
+  const telo = new TextEncoder().encode(JSON.stringify(payload));
+
+  const odgovor = await posaljiPotpisano({
+    origin,
+    path: "/api/sync/ingest",
+    bodyBytes: telo,
+    deviceCode: uredjaj.deviceCode,
+    keyId: "k1",
+    privateKeyPkcs8Der: uredjaj.privateKeyPkcs8Der,
+    dozvoliHttp: true,
+  });
+
+  assert.equal(odgovor.httpStatus, 200, `odgovor: ${JSON.stringify(odgovor)}`);
+  assert.equal(odgovor.code, "ingested");
+  assert.equal(await brojFaktura(), 1);
+});
+
+test("parser iz PAKETA daje isti canonical rezultat kao serverski put", async (t) => {
+  if (guard(t)) return;
+  const { readFile } = await import("node:fs/promises");
+
+  // Iz paketa (prevedeni `.js`), bez Next okruženja.
+  const paket = await import(new URL("lib/pdf/parseDocument.js", DIST).href);
+  // Serverski put (isti izvor, kroz `@/` alias i tsx).
+  const server = await import("@/lib/pdf/parseDocument");
+  const { canonicalFromParsedDocument } = await import("@/lib/sync/contract/fromParsedDocument.mjs");
+
+  for (const ime of ["jedna-stavka.pdf", "vise-stavki.pdf", "vodeca-nula-partner.pdf"]) {
+    const b = new Uint8Array(
+      await readFile(new URL(`fixtures/dev/biznisoft/${ime}`, KOREN).pathname),
+    );
+    const izPaketa = canonicalFromParsedDocument(await paket.parseBiznisoftPdf(b), b, {
+      issuerCode: ISSUER,
+    });
+    const saServera = canonicalFromParsedDocument(await server.parseBiznisoftPdf(b), b, {
+      issuerCode: ISSUER,
+    });
+    assert.deepEqual(izPaketa, saServera, `„${ime}“ se razlikuje između paketa i servera`);
+    assert.equal(izPaketa.semantic_hash, saServera.semantic_hash);
+  }
+});

@@ -428,11 +428,25 @@ test("canonical put ne upisuje ime fajla sa kancelarijskog računara", async (t)
   assert.doesNotMatch(file_name, /\.pdf$/i);
 });
 
-test("canonical put nije javna ruta ni server action", async (t) => {
+test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) => {
   if (guard(t)) return;
   const { readdir } = await import("node:fs/promises");
 
-  // U `app/api` ne sme nastati nijedna nova ruta u P1.
+  /*
+   * P1 je tvrdio da ruta ima tačno tri. Ta tvrdnja je bila svojstvo TE faze:
+   * P2 namerno uvodi mrežni prijem. Zamenjena je spiskom IZRIČITO DOZVOLJENIH
+   * ruta — bezbednosna provera ostaje, samo joj je lista eksplicitna. Nova
+   * ruta koja se pojavi bez upisa ovde i dalje obara test.
+   */
+  const DOZVOLJENE = [
+    "auth/[...nextauth]/route.ts",
+    "portal/izvoz/route.ts",
+    "portal/podesavanja/navigacija/route.ts",
+    // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.
+    "sync/heartbeat/route.ts",
+    "sync/ingest/route.ts",
+  ];
+
   const rute: string[] = [];
   const hodaj = async (dir: URL) => {
     for (const e of await readdir(dir, { withFileTypes: true })) {
@@ -445,11 +459,37 @@ test("canonical put nije javna ruta ni server action", async (t) => {
 
   assert.deepEqual(
     rute.map((p) => p.split("/app/api/")[1]).sort(),
-    ["auth/[...nextauth]/route.ts", "portal/izvoz/route.ts", "portal/podesavanja/navigacija/route.ts"],
-    "P1 je uveo novu API rutu",
+    [...DOZVOLJENE].sort(),
+    "postoji API ruta koja nije na spisku dozvoljenih",
   );
+});
 
-  // I sam modul mora ostati serverski, bez „use server“ izvoza.
+test("svaka `/api/sync` ruta sama sprovodi gate i autentifikaciju", async (t) => {
+  if (guard(t)) return;
+
+  /*
+   * Middleware nije zamena i ne sme postati: konfiguriše se na drugom mestu i
+   * jedna izmena `matcher`-a bi tiho otvorila rutu. Zato svaka ruta mora da
+   * prođe kroz `withAuthenticatedDevice`, koji nosi i gate i potpis.
+   */
+  for (const ruta of ["ingest", "heartbeat"]) {
+    const izvor = await readFile(new URL(`app/api/sync/${ruta}/route.ts`, KORENSKI), "utf8");
+    assert.match(
+      izvor,
+      /withAuthenticatedDevice/,
+      `ruta „${ruta}“ ne prolazi kroz zajedničku autentifikaciju`,
+    );
+    // Ed25519 traži `node:crypto`; Edge runtime ga nema.
+    assert.match(izvor, /export const runtime = "nodejs"/);
+  }
+
+  const handler = await readFile(new URL("lib/sync/http/handler.ts", KORENSKI), "utf8");
+  assert.match(handler, /isDeviceIngestEnabled/, "gate nije u zajedničkom putu");
+  assert.match(handler, /authenticateDeviceRequest/, "potpis nije u zajedničkom putu");
+});
+
+test("canonical servis nije server action i ostaje serverski", async (t) => {
+  if (guard(t)) return;
   const izvor = await readFile(new URL("lib/sync/ingestCanonical.ts", KORENSKI), "utf8");
   assert.match(izvor, /^import "server-only";/m);
   assert.doesNotMatch(izvor, /"use server"/);

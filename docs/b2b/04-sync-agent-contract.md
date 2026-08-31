@@ -8,8 +8,9 @@
 >   (`customer_effective_prices`, `business_date`, „snapshot postaje active“).
 >   Izgrađen je **dokument-orijentisan** model (`source_documents` → `invoices`).
 >   Ovojnica iz §3 se **ne primenjuje doslovno**.
-> - **Potpis.** §5 predlaže **HMAC**. Za P2 je odlučen **asimetrični** potpis —
->   privatni ključ na uređaju, javni na serveru. HMAC **nije** odobrena zamena.
+> - **Potpis.** §5 predlaže **HMAC**. P2 je IMPLEMENTIRAO **asimetrični** profil
+>   (Ed25519, `node:crypto`) — privatni ključ na uređaju, javni na serveru.
+>   HMAC **nije** odobrena zamena. Važeći profil: [20 §2](20-device-ingest.md).
 >
 > **Ostaje na snazi:** sedam nepregovarljivih pravila (§1), provera stabilnosti
 > fajla (§2), prozor ±5 min i `nonce` protiv replay-a (§5).

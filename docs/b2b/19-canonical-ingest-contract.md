@@ -53,17 +53,17 @@ dozvolu** — pozivalac mora već biti autorizovan. U P1 je pozivaju samo testov
 
 **Autoritativni izvor: `contracts/invoice-ingest/v1/schema.json`.**
 
-Validator u `lib/sync/contract/jsonSchema.mjs` tu šemu **čita**. Zod nije
-upotrebljen iako je instaliran: druga definicija se raziđe tačno onda kada niko
-ne gleda.
+Validator tu šemu **čita**; ne prepisuje je u Zod, jer se dve definicije raziđu
+tačno onda kada niko ne gleda.
 
-**Nova zavisnost nije dodata; `package-lock.json` je nedirnut.** `ajv` postoji u
-`node_modules`, ali kao *tranzitivna* zavisnost ESLint-a i u verziji za
-draft-07. Oslanjanje na tuđe stablo znači da uvoz faktura pukne kada ESLint
-promeni svoje.
+> **Izmenjeno u P2.** P1 je koristio ručno pisan interpreter
+> (`lib/sync/contract/jsonSchema.mjs`) i nije dodavao zavisnost. Od mrežnog
+> prijema to više nije prihvatljivo: validator je **Ajv 8.20.0**
+> (`ajv/dist/2020`), direktna runtime zavisnost sa tačnom verzijom u lockfile-u.
+> Interpreter je uklonjen. Detalji i opcije: [20 §1](20-device-ingest.md).
 
-Validator podržava tačno onaj skup keyword-a koji ugovor koristi i **baca na
-svaki koji ne poznaje** — i u šemi i u podšemi. Bez toga bi neko dodao `oneOf`
+Validator sprovodi tačno onaj skup pravila koji ugovor koristi i **obara
+kompilaciju** na svakom keyword-u koji ne poznaje. Bez toga bi neko dodao `oneOf`
 ili `format`, validator bi ga tiho preskočio, i ograničenje bi postojalo samo u
 fajlu. 🟢
 
@@ -281,6 +281,13 @@ Minimalan spisak, izveden iz onoga što je P1 udario u granicu:
 
 Stavke 1–4 traže migraciju. **U P1 nema nijedne migracije, nove tabele ni
 promene dozvola.**
+
+> **Rešeno u P2.** Sve stavke 1–7 su isporučene — vidi
+> [20 — prijem sa uređaja](20-device-ingest.md). Zabrana migracija i pravilo
+> „tačno tri API rute" bili su svojstva P1 kao faze, ne trajna pravila; P2 ih
+> namerno prevazilazi uz izričit spisak dozvoljenih ruta.
+>
+> **Semantička deduplikacija i dalje NIJE implementirana** ([20 §6](20-device-ingest.md)).
 
 ---
 

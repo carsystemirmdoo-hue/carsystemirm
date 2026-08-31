@@ -10,6 +10,7 @@ import {
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
+import { syncDevices } from "./sync-devices";
 import { users } from "./users";
 
 export const importStatus = pgEnum("import_status", [
@@ -53,6 +54,16 @@ export const importRuns = pgTable(
     invoicesUpdated: integer("invoices_updated").notNull().default(0),
     startedBy: uuid("started_by").references(() => users.id, {
       onDelete: "set null",
+    }),
+    /**
+     * Uređaj koji je pokrenuo prolaz (migracija 0024).
+     *
+     * Isključivo jedno od `startedBy` / `startedByDeviceId` sme biti popunjeno
+     * — CHECK u bazi to sprovodi. Bez toga bi red mogao da tvrdi i korisnika i
+     * uređaj, pa bi pitanje „ko je uvezao“ imalo dva tačna odgovora.
+     */
+    startedByDeviceId: uuid("started_by_device_id").references(() => syncDevices.id, {
+      onDelete: "restrict",
     }),
     startedAt: timestamp("started_at", { withTimezone: true })
       .notNull()

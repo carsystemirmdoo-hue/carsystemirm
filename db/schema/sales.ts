@@ -12,6 +12,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { customers } from "./permissions";
+import { documentOrigin, valueProvenance } from "./sync-devices";
 import { users } from "./users";
 
 /**
@@ -105,6 +106,28 @@ export const invoices = pgTable(
      * Podaci o plaćanju NAMERNO ne postoje u ovoj tabeli. Fakture ih ne sadrže,
      * pa bi svaka kolona tipa `placeno` ili `otvoreno` bila izmišljena vrednost.
      */
+    /* --- Poreklo i valuta aktivne verzije (migracija 0023) --- */
+
+    /**
+     * Vrednosti dolaze iz verzije koja VAŽI.
+     *
+     * Pri izboru druge verzije se prepisuju zajedno sa stavkama i zbirovima —
+     * inače bi faktura nosila valutu jedne, a iznose druge verzije.
+     */
+    origin: documentOrigin("origin").notNull().default("legacy_unknown"),
+    /**
+     * `null` za zatečene redove.
+     *
+     * RSD se NE upisuje unazad. Zatečene fakture jesu nastale pod
+     * pretpostavkom da su iznosi dinarski, ali ta pretpostavka nigde nije
+     * zapisana kao dokaz; upisati je sada značilo bi proglasiti nagađanje
+     * podatkom.
+     */
+    currency: text("currency"),
+    currencyProvenance: valueProvenance("currency_provenance"),
+    tradeDate: date("trade_date"),
+    dateBasis: text("date_basis"),
+
     importRunId: bigserial("import_run_id", { mode: "number" }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()

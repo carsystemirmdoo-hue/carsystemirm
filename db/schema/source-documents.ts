@@ -12,6 +12,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { importRuns } from "./imports";
 import { documentKind, invoices } from "./sales";
+import { documentOrigin, syncDevices, valueProvenance } from "./sync-devices";
 import { users } from "./users";
 
 /**
@@ -148,6 +149,40 @@ export const sourceDocuments = pgTable(
      * `null` dok dokument nije prošao proveru — i to je poenta: neispravan
      * dokument je vidljiv kancelariji, a nijedan red prometa nije nastao.
      */
+    /* --- Poreklo i verifikovani metapodaci (migracija 0023) --- */
+
+    /**
+     * Odakle je dokument stigao. `legacy_unknown` za sve zatečeno.
+     *
+     * Ime fajla NIJE dokaz porekla: `canonical:<hash>` je prikazna oznaka koja
+     * je nastala zato što je `file_name` `NOT NULL`, a ne zapis o tome ko je
+     * dokument doneo.
+     */
+    origin: documentOrigin("origin").notNull().default("legacy_unknown"),
+    /**
+     * Semantic hash koji je SERVER izračunao i potvrdio.
+     *
+     * `null` = nije verifikovan, i to je tačno stanje svakog zatečenog reda.
+     * Backfill nagađanjem se ne radi — hash se može izračunati samo iz
+     * canonical sadržaja, a zatečeni redovi ga nemaju.
+     *
+     * Čuvanje ovog hash-a NIJE semantička deduplikacija; indeks je namerno
+     * ne-jedinstven.
+     */
+    semanticHash: text("semantic_hash"),
+    canonicalizationVersion: integer("canonicalization_version"),
+    schemaVersion: integer("schema_version"),
+    /** Valuta i ODAKLE ta vrednost dolazi — uvek zajedno (CHECK u bazi). */
+    currency: text("currency"),
+    currencyProvenance: valueProvenance("currency_provenance"),
+    /** Datum prometa. `null` dok izvor ne dokaže da ga uopšte štampa. */
+    tradeDate: date("trade_date"),
+    dateBasis: text("date_basis"),
+    /** Uređaj koji je dostavio zapis; `null` za ručni upload i zatečeno. */
+    deliveredByDeviceId: uuid("delivered_by_device_id").references(() => syncDevices.id, {
+      onDelete: "restrict",
+    }),
+
     invoiceId: uuid("invoice_id").references(() => invoices.id, {
       onDelete: "restrict",
     }),

@@ -8,6 +8,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
+import { auditActorKind } from "./sync-devices";
 import { users } from "./users";
 
 /**
@@ -33,6 +34,26 @@ export const auditLog = pgTable(
     actorUserId: uuid("actor_user_id").references(() => users.id, {
       onDelete: "restrict",
     }),
+    /**
+     * Vrsta aktera (migracija 0024).
+     *
+     * Uređaj dobija STVARAN identitet, ne izmišljen `users` red. Lažan
+     * korisnik bi se pojavio na svakom ekranu naloga i mogao bi da se
+     * deaktivira ili mu se dodeli dozvola. CHECK u bazi brani nevažeću
+     * kombinaciju: `user` traži `actor_user_id`, `device` traži
+     * `actor_device_id` i zabranjuje korisnika, `system` ne dozvoljava nijedan.
+     */
+    actorKind: auditActorKind("actor_kind").notNull().default("user"),
+    /**
+     * Uređaj koji je izvršio radnju.
+     *
+     * NAMERNO bez stranog ključa. `CASCADE` bi pokušao da obriše trag, a
+     * `SET NULL` je `UPDATE` nad njim — okidači `audit_log_no_delete` i
+     * `audit_log_no_update` odbijaju oboje, pa bi brisanje uređaja pucalo sa
+     * porukom o okidaču umesto o uzroku. Veza se čuva kao vrednost; jedini
+     * upisivač je aplikacija, a red se nikad ne menja.
+     */
+    actorDeviceId: uuid("actor_device_id"),
     /** Ime i uloga u trenutku radnje — ostaje čitljivo i posle deaktivacije naloga. */
     actorLabel: text("actor_label").notNull(),
     action: text("action").notNull(),

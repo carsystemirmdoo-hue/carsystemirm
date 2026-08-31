@@ -3,7 +3,7 @@
  *
  * Ovo NIJE validator i ne sprovodi nijedno pravilo. Jedini ugovor je
  * `contracts/invoice-ingest/v1/schema.json`; u vreme izvršavanja se proverava
- * samo on, kroz `validateAgainstSchema`. TypeScript tip ovde postoji da bi
+ * samo on, kroz Ajv (`schemaValidator.mjs`). TypeScript tip ovde postoji da bi
  * pozivaoci imali dopunu i proveru pri prevođenju — vrednost koja stigne kroz
  * mrežu ili fajl nema tip i mora proći šemu.
  *

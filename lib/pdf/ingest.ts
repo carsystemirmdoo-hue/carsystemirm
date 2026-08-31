@@ -17,7 +17,17 @@ import { normalizePartnerCode } from "@/lib/commercial/externalIdentity.mjs";
 import type { DocumentOrigin, ValueProvenance } from "@/db/schema";
 import { canonicalFromParsedDocument } from "@/lib/sync/contract/fromParsedDocument.mjs";
 
-export type IngestActor = { id: string; name: string; role: string };
+/**
+ * Ko izvršava uvoz.
+ *
+ * Korisnik nosi `id`; uređaj nosi `deviceId` i `kind: "device"`, i NE sme da
+ * nosi `id`. Ta zabrana stoji i u `buildAuditEntry` i kao CHECK u bazi — bez
+ * nje bi u tragu stajao čovek koji je uređaj registrovao, kao da je on uneo
+ * dokument.
+ */
+export type IngestActor =
+  | { id: string; name: string; role: string; kind?: "user"; deviceId?: undefined }
+  | { id?: undefined; deviceId: string; name: string; role: string; kind: "device" };
 
 /** Odbijeno knjiženje. Poruka je za ekran i ne sadrži podatke o kupcu. */
 export class IngestError extends Error {

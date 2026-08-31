@@ -7,6 +7,17 @@ import {
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
+  /*
+   * Ugovor je OBIČAN FAJL i mora otputovati sa buildom.
+   *
+   * `lib/sync/contract/validate.mjs` ga čita sa diska, namerno — da bi ostao
+   * čitljiv i van ovog projekta (konektor, tuđi alat, ručna provera), a ne
+   * artefakt bundlera. Bez ovog traga bi lokalni build prošao, a `/api/sync/*`
+   * u produkciji pao na prvom zahtevu: fajla tamo ne bi bilo.
+   */
+  outputFileTracingIncludes: {
+    "/api/sync/ingest": ["./contracts/invoice-ingest/v1/schema.json"],
+  },
   poweredByHeader: false,
   // `next build` i `next dev` dele isti izlazni folder. Ako se provera builda
   // pokrene dok dev server radi, produkcijski build prepiše dev artefakte i

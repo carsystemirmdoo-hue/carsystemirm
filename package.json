@@ -168,6 +168,7 @@
     "test:pdf": "node --test lib/pdf/*.test.mjs",
     "test:readiness": "node --test lib/readiness/*.test.mjs",
     "test:recommendations": "node --test lib/recommendations/*.test.mjs",
+    "test:recommendations:perf": "tsx --test --test-concurrency=1 --test-timeout=600000 --tsconfig db/integration/tsconfig.test.json db/integration/recommendationPerformance.perf.test.mts",
     "test:contract": "node --test lib/sync/contract/*.test.mjs",
     "test:signing": "node --test lib/sync/device/*.test.mjs",
     "test:sync-actions": "node --test app/portal/importi/sinhronizacija/*.test.mjs",

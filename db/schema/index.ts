@@ -12,3 +12,4 @@ export * from "./consents";
 export * from "./source-documents";
 export * from "./sync-devices";
 export * from "./sync-commands";
+export * from "./recommendations";

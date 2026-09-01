@@ -297,6 +297,14 @@ const RESETTABLE_TABLES = [
    * pa se zaštita ne isključuje ni na trenutak. Bez ovih pet imena bi jedan
    * događaj iz ranijeg prolaza zauvek ostao u bazi i obarao čišćenje.
    */
+  /*
+   * Preporuke (0027). `recommendation_results` ima `restrict` ka `customers`,
+   * pa mora otici pre njih — `TRUNCATE ... CASCADE` to resava, ali ime mora
+   * biti na spisku da bi tabela uopste usla u naredbu.
+   */
+  "recommendation_results",
+  "recommendation_runs",
+
   "sync_command_events",
   "sync_commands",
   "sync_request_nonces",

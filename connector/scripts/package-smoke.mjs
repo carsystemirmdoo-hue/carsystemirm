@@ -110,7 +110,29 @@ const PREGLEDANO = [
     razlog:
       "Izmišljen ULAZ negativnog testa; test dokazuje da `status` tu putanju NE prikaže.",
   },
+  {
+    fajl: "connector/test/windows-smoke.test.mjs",
+    obrazac: /C:\\+Fakture\\+a\.pdf/,
+    razlog: "Izmišljena Windows putanja kao ulaz testa; ne postoji ni na jednoj mašini.",
+  },
+  {
+    fajl: "connector/test/paths.test.mjs",
+    obrazac: /C:(\\\\|\/)(Users\/Vlasnik|\.\.\.)?/,
+    razlog:
+      "Izmišljen Windows file-URL vektor koji test i postoji da bi proverio; nije stvarna putanja.",
+  },
 ];
+
+/**
+ * Sadržaj se skenira SAMO u našim fajlovima.
+ *
+ * `connector/dist/node_modules` je tuđi kod prepisan iz lockfile-a. Njegova
+ * autorska e-pošta u `package.json` i njegovi test fixtures nisu naši podaci i
+ * ne govore ništa o ovoj mašini — a proizvode toliko šuma da bi neko na kraju
+ * ugasio celu proveru. Zabrana po IMENU fajla (`*.pem`, `*.key`, `*.db`, …)
+ * i dalje važi svuda, uključujući i njih.
+ */
+const TUDJ_KOD = /(^|\/)node_modules\//;
 
 const TEKSTUALNI = /\.(mjs|js|json|md|txt|cmd|sh|ps1|ts)$/i;
 
@@ -219,7 +241,7 @@ const nalazi = [];
 for (const f of fajlovi) {
   const r = rel(f);
   if (ZABRANJENO.some((re) => re.test(r))) odbijeni.push(r);
-  if (!TEKSTUALNI.test(r)) continue;
+  if (!TEKSTUALNI.test(r) || TUDJ_KOD.test(r)) continue;
 
   const sadrzaj = readFileSync(f, "utf8");
   for (const s of SUMNJIV_SADRZAJ) {
@@ -260,6 +282,13 @@ writeFileSync(
     "`.git`, `.env`, `.next`, web `node_modules`, `*.db`, `*.sqlite`, `*.log`,",
     "`*.pem`, `*.key`, `*.p12`, `id_rsa`, `postgres://`, `BEGIN PRIVATE KEY`,",
     "`AUTH_SECRET`, `QA_MFA_MASTER_KEY`, e-pošta, apsolutne putanje.",
+    "",
+    "## Opseg provere sadržaja",
+    "",
+    "Sadržaj se čita u NAŠIM fajlovima. `connector/dist/node_modules` je tuđi kod",
+    "prepisan iz lockfile-a (`ajv`, `unpdf` i njihove zavisnosti): autorska e-pošta",
+    "u tuđem `package.json` nije naš podatak i ne govori ništa o ovoj mašini.",
+    "Zabrana po IMENU fajla važi svuda, uključujući i njih.",
     "",
     "## Pregledano i svesno zadržano",
     "",

@@ -231,6 +231,8 @@ const PREDUSLOVI: Record<string, () => string | null> = {
   // Spremnost trazi vlasnikovu STVARNO uspelu prijavu, ne samo postojanje tajne.
   "19": trebaPunuSesiju,
   "20": trebaPunuSesiju,
+  // Preporuke traze vlasnikovu STVARNO uspelu prijavu, kao i spremnost i sync.
+  "21": trebaPunuSesiju,
 };
 
 /** Redni broj koraka iz njegovog imena („5. prijava kodom…" → „5"). */
@@ -2437,6 +2439,166 @@ try {
         `vlasnik: HTTP 200, isključen gate je prijavljen, „zatraženo“ razdvojeno od ` +
         `„pokrenuto“, bez traga privatnog ključa, mobilni 390px bez curenja; ` +
         `komercijalista odbijen (HTTP ${status}), bez redova i bez nav stavke`
+      );
+    } finally {
+      await w.zatvori();
+    }
+  });
+
+  /* ------------------------------------------------------------------ */
+  await tok("21. preporuke: vlasnik ih vidi uz ogradu, komercijalista bez dodela dobija prazno", async () => {
+    const RUTA = "/portal/preporuke";
+
+    /* --- 21a. Vlasnik: ekran radi, ograda stoji, gate je prijavljen. -- */
+    const s = await svezaSesija();
+    try {
+      const kod = await svezTotp(ownerSecret);
+      const url = await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(s.page, "prijava pred preporuke odbijena", nalozi.owner.id));
+      }
+
+      const nav = await otvori(s.page, RUTA, ".portal-panel");
+      if (!nav.stigao || (nav.status ?? 0) !== 200) {
+        throw new Error(
+          await dokazi(s.page, `preporuke nedostupne vlasniku: HTTP=${nav.status}`, nalozi.owner.id),
+        );
+      }
+
+      const v = await s.page.evaluate(() => {
+        const t = document.body.innerText;
+        return {
+          /*
+           * Ograda mora stajati NA EKRANU, ne u dokumentaciji. Bez nje se
+           * tabela sa datumima cita kao spisak za porucivanje.
+           */
+          imaOgradu: /procena, ne porudžbina/i.test(t),
+          kazeDaNijeZaKupca: /Ne šalje se kupcu/i.test(t),
+          // QA server radi bez `FEATURE_RECOMMENDATIONS` — ekran to mora reci.
+          kazeIskljuceno: /isključene na serveru/i.test(t),
+          // Bez ijednog uspesnog prolaza prazno stanje mora biti objasnjeno.
+          imaPraznoStanje: /još nisu izračunate/i.test(t),
+          // Verzija algoritma i osnov datuma stoje uz rezultat, uvek.
+          imaVerziju: /Algoritam:/i.test(t),
+          imaOsnovDatuma: /Osnov datuma:/i.test(t),
+          /*
+           * Broje se SAMO redovi preporuka. Tabela „Poslednji prolazi" ima
+           * svoje prazno stanje (jedan `tr` sa objasnjenjem), pa bi siri
+           * selektor merio objasnjenje kao preporuku.
+           */
+          redova: document.querySelectorAll(".portal-recommendation-table tbody tr").length,
+          dugmad: [...document.querySelectorAll("button")].map((b) => b.textContent ?? ""),
+          onemogucenoRecompute: [...document.querySelectorAll("button")].some(
+            (b) => /Preračunaj/i.test(b.textContent ?? "") && (b as HTMLButtonElement).disabled,
+          ),
+        };
+      });
+
+      for (const [uslov, poruka] of [
+        [v.imaOgradu, "ekran ne nosi ogradu „procena, ne porudžbina“"],
+        [v.kazeDaNijeZaKupca, "ekran ne kaže da se rezultat ne šalje kupcu"],
+        [v.kazeIskljuceno, "ekran prećutkuje da je feature gate isključen"],
+        [v.imaPraznoStanje, "ekran ne objašnjava prazno stanje"],
+        [v.imaVerziju, "ekran ne prikazuje verziju algoritma"],
+        [v.imaOsnovDatuma, "ekran ne prikazuje osnov datuma"],
+      ] as [boolean, string][]) {
+        if (!uslov) throw new Error(await dokazi(s.page, poruka, nalozi.owner.id));
+      }
+
+      /*
+       * Dugme postoji, ali je onemoguceno dok je gate iskljucen.
+       *
+       * `disabled` je SAMO prikaz — akcija ionako proverava i sposobnost i
+       * gate. Ovde se meri da korisnik ne dobije dugme koje tiho ne radi.
+       */
+      if (!v.onemogucenoRecompute) {
+        throw new Error(
+          await dokazi(s.page, "dugme za preračunavanje nije onemogućeno uz isključen gate"),
+        );
+      }
+      if (v.redova > 0) {
+        throw new Error(await dokazi(s.page, `prazan skup je dao ${v.redova} redova`));
+      }
+
+      await s.page.screenshot({ path: `${SHOTS}/08-preporuke-1280.png`, fullPage: true });
+
+      // Mobilni: tabela preporuka je siroka i vodoravno curenje se vidi samo ovde.
+      await s.page.setViewportSize({ width: 390, height: 844 });
+      await s.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+      const mob = await sacekajSmirenuAdresu(s.page);
+      if (!mob.includes(RUTA)) {
+        throw new Error(await dokazi(s.page, "mobilne preporuke nisu otvorene", nalozi.owner.id));
+      }
+      const siri = await s.page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      if (siri > 1) {
+        throw new Error(await dokazi(s.page, `mobilni prikaz curi vodoravno za ${siri}px`));
+      }
+      await s.page.screenshot({ path: `${SHOTS}/17-preporuke-390.png`, fullPage: true });
+    } finally {
+      await s.zatvori();
+    }
+
+    /* --- 21b. Komercijalista: vidi ekran, ali bez dodela nema nista. -- */
+    const w = await svezaSesija();
+    try {
+      const setup = await beginMfaEnrollment({
+        userId: nalozi.worker.id,
+        accountLabel: nalozi.worker.email,
+      });
+      const workerTotp = await svezTotp(setup.base32);
+      const potvrda = await confirmMfaEnrollment({ userId: nalozi.worker.id, token: workerTotp });
+      if (!potvrda.ok) throw new Error("radnicki nalog nije vezao drugi faktor");
+
+      const kod = await svezTotp(setup.base32);
+      const url = await prijava(w.page, nalozi.worker.email, nalozi.worker.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(w.page, "radnik se nije prijavio", nalozi.worker.id));
+      }
+
+      const res = await w.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+      const status = res?.status() ?? 0;
+      const v = await w.page.evaluate(() => {
+        const t = document.body.innerText;
+        return {
+          naslov: /Preporuke/i.test(t),
+          /*
+           * Prazna dodela mora biti OBJASNJENA. Prazna tabela bez recenice se
+           * cita kao kvar podataka, pa se prijavljuje kao greska sistema.
+           */
+          kazeZastoPrazno: /Nemate nijednog dodeljenog kupca/i.test(t),
+          redova: document.querySelectorAll(".portal-recommendation-table tbody tr").length,
+          // Recompute objavljuje skup koji vide i drugi — komercijalista ga nema.
+          imaRecompute: [...document.querySelectorAll("button")].some((b) =>
+            /Preračunaj/i.test(b.textContent ?? ""),
+          ),
+        };
+      });
+
+      if (status !== 200 || !v.naslov) {
+        throw new Error(
+          await dokazi(w.page, `komercijalista nije dobio ekran preporuka: HTTP=${status}`, nalozi.worker.id),
+        );
+      }
+      if (!v.kazeZastoPrazno) {
+        throw new Error(await dokazi(w.page, "prazna dodela nije objašnjena", nalozi.worker.id));
+      }
+      if (v.redova > 0) {
+        throw new Error(
+          await dokazi(w.page, `komercijalista bez dodela vidi ${v.redova} redova`, nalozi.worker.id),
+        );
+      }
+      if (v.imaRecompute) {
+        throw new Error(
+          await dokazi(w.page, "komercijalista je dobio dugme za preračunavanje", nalozi.worker.id),
+        );
+      }
+
+      return (
+        `vlasnik: HTTP 200, ograda „procena, ne porudžbina“, isključen gate je prijavljen, ` +
+        `prazno stanje objašnjeno, verzija i osnov datuma vidljivi, mobilni 390px bez curenja; ` +
+        `komercijalista: HTTP 200, prazna dodela objašnjena, 0 redova, bez dugmeta za recompute`
       );
     } finally {
       await w.zatvori();

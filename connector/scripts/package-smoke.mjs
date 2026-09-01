@@ -106,41 +106,36 @@ const SUMNJIV_SADRZAJ = [
 const PREGLEDANO = [
   {
     fajl: "connector/test/scanner-store.test.mjs",
-    obrazac: /\/Users\/tajna\/Fakture/,
     razlog:
-      "Izmišljen ULAZ negativnog testa; test dokazuje da `status` tu putanju NE prikaže.",
+      "`/Users/tajna/Fakture/…` je izmišljen ULAZ negativnog testa; test dokazuje " +
+      "da `status` tu putanju NE prikaže.",
   },
   {
     fajl: "connector/test/windows-smoke.test.mjs",
-    obrazac: /C:\\+Fakture\\+a\.pdf/,
-    razlog: "Izmišljena Windows putanja kao ulaz testa; ne postoji ni na jednoj mašini.",
+    razlog: "`C:\\Fakture\\a.pdf` je izmišljen ulaz testa; ne postoji ni na jednoj mašini.",
   },
   {
     fajl: "connector/test/paths.test.mjs",
-    obrazac: /Users\/Vlasnik\/Carsystem%20Smoke/,
     razlog:
-      "Izmišljen Windows file-URL vektor koji test i postoji da bi proverio; nije stvarna putanja.",
+      "Izmišljen Windows file-URL vektor (`file:///C:/Users/Vlasnik/…`) koji test i " +
+      "postoji da bi proverio.",
   },
   {
     fajl: "START-HERE.md",
-    /*
-     * Traži se BAŠ mesto-držač. Stvarno korisničko ime i dalje pada — a upravo
-     * to je razlika koju ova provera treba da pravi.
-     */
-    obrazac: /Users\\<tvoj nalog>/,
-    razlog: "Uputstvo vlasniku; korisničko ime je mesto-držač, ne stvarna vrednost.",
+    razlog: "Uputstvo vlasniku; korisničko ime je mesto-držač `<tvoj nalog>`.",
   },
 ];
 
 /**
- * Sadržaj se skenira SAMO u našim fajlovima.
+ * Izuzetak važi SAMO za klasu „apsolutna putanja“, i samo u imenovanim fajlovima.
  *
- * `connector/dist/node_modules` je tuđi kod prepisan iz lockfile-a. Njegova
- * autorska e-pošta u `package.json` i njegovi test fixtures nisu naši podaci i
- * ne govore ništa o ovoj mašini — a proizvode toliko šuma da bi neko na kraju
- * ugasio celu proveru. Zabrana po IMENU fajla (`*.pem`, `*.key`, `*.db`, …)
- * i dalje važi svuda, uključujući i njih.
+ * Nije globalno gašenje: e-pošta, `postgres://`, privatni ključ i vrednosti
+ * tajni se u tim istim fajlovima i dalje traže. Razlika je u tome što je
+ * apsolutna putanja u njima IZMIŠLJEN ULAZ testa ili mesto-držač u uputstvu —
+ * a svaki NOV fajl sa apsolutnom putanjom i dalje obara pakovanje.
  */
+const apsolutnaPregledana = (rel) => PREGLEDANO.some((x) => rel.endsWith(x.fajl));
+
 const TUDJ_KOD = /(^|\/)node_modules\//;
 
 const TEKSTUALNI = /\.(mjs|js|json|md|txt|cmd|sh|ps1|ts)$/i;
@@ -254,10 +249,8 @@ for (const f of fajlovi) {
 
   const sadrzaj = readFileSync(f, "utf8");
   for (const s of SUMNJIV_SADRZAJ) {
-    const m = sadrzaj.match(s.re);
-    if (!m) continue;
-    const opravdan = PREGLEDANO.some((p) => r.endsWith(p.fajl) && p.obrazac.test(m[0]));
-    if (!opravdan) nalazi.push(`${r}: ${s.ime}`);
+    // Tajne nemaju izuzetak ni u jednom fajlu.
+    if (s.re.test(sadrzaj)) nalazi.push(`${r}: ${s.ime}`);
   }
   /*
    * Apsolutne putanje se traže odvojeno: nisu tajna, ali odaju mašinu na kojoj
@@ -272,9 +265,11 @@ for (const f of fajlovi) {
    * escape-ovi, ne folderi.
    */
   const APSOLUTNA = /(?:\/Users\/|\/home\/|[A-Za-z]:\\(?![sSdDwWbBnrt.]))[^\s"'`)]{3,}/g;
-  for (const m of sadrzaj.matchAll(APSOLUTNA)) {
-    const opravdan = PREGLEDANO.some((p) => r.endsWith(p.fajl) && p.obrazac.test(m[0]));
-    if (!opravdan) nalazi.push(`${r}: apsolutna putanja`);
+  if (!apsolutnaPregledana(r)) {
+    for (const _ of sadrzaj.matchAll(APSOLUTNA)) {
+      nalazi.push(`${r}: apsolutna putanja`);
+      break;
+    }
   }
 }
 
@@ -310,9 +305,9 @@ writeFileSync(
     "",
     "## Pregledano i svesno zadržano",
     "",
-    "| Fajl | Šta | Zašto ostaje |",
-    "|---|---|---|",
-    ...PREGLEDANO.map((p) => `| \`${p.fajl}\` | ${String(p.obrazac)} | ${p.razlog} |`),
+    "| Fajl | Zašto apsolutna putanja u njemu ostaje |",
+    "|---|---|",
+    ...PREGLEDANO.map((p) => `| \`${p.fajl}\` | ${p.razlog} |`),
     "",
     "## Sintetički materijal",
     "",

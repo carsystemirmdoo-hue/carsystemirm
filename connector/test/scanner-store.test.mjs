@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { chmod, cp, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 /**
@@ -15,7 +16,17 @@ const skener = await import(D("scanner.mjs"));
 const { otvoriStore, StoreError } = await import(D("store.mjs"));
 const { STANJA } = await import(D("outcomes.mjs"));
 
-const FIXTURES = new URL("../../fixtures/dev/biznisoft/", import.meta.url).pathname;
+/*
+ * `fileURLToPath`, ne `.pathname`.
+ *
+ * `URL.pathname` vraća PROCENAT-KODIRANU putanju: folder „Smoke ČĆŽ“ postane
+ * `Smoke%20%C4%8C…`, i `fs` traži fajl koji tako doslovno ne postoji. Na
+ * Windowsu je gore — `.pathname` nosi i vodeću kosu crtu (`/C:/…`).
+ *
+ * Nije se videlo jer repozitorijum stoji na putanji bez razmaka i bez srpskih
+ * slova; puklo bi tek na kancelarijskom računaru, u paketu.
+ */
+const FIXTURES = fileURLToPath(new URL("../../fixtures/dev/biznisoft/", import.meta.url));
 
 /** Folder sa razmacima i srpskim slovima — kao stvarna kancelarijska putanja. */
 async function privremeni() {

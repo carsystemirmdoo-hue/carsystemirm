@@ -4,6 +4,7 @@ import { generateKeyPairSync } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 /**
@@ -105,7 +106,7 @@ test("[WIN] putanja sa razmacima, srpskim slovima i UNC oblikom", async (t) => {
     const folder = join(baza, "Moj Folder ČĆŽŠĐ", "fakture ulaz");
     await mkdir(folder, { recursive: true });
     await cp(
-      new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url).pathname,
+      fileURLToPath(new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url)),
       join(folder, "Račun 42.PDF"),
     );
 
@@ -209,7 +210,7 @@ test("[WIN] red preživljava restart procesa na Windows fajl sistemu", async (t)
 
 test("[WIN] skripta zadatka je podrazumevano dry-run", async (t) => {
   if (guard(t)) return;
-  const skripta = new URL("../windows/task.ps1", import.meta.url).pathname;
+  const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
 
   /*
    * BEZ `-Apply` — ne sme napraviti nijednu trajnu izmenu na sistemu.
@@ -219,7 +220,7 @@ test("[WIN] skripta zadatka je podrazumevano dry-run", async (t) => {
   const izlaz = execFileSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
-     "-Action", "install", "-PackagePath", new URL("../dist/", import.meta.url).pathname],
+     "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
     { encoding: "utf8" },
   );
   assert.match(izlaz, /\[dry-run\]/);
@@ -247,14 +248,14 @@ test("[WIN] registracija i uklanjanje zadatka", async (t) => {
 
 test("[WIN] spakovan konektor se pokreće preko connector.cmd", async (t) => {
   if (guard(t)) return;
-  const cmd = new URL("../dist/connector.cmd", import.meta.url).pathname;
+  const cmd = fileURLToPath(new URL("../dist/connector.cmd", import.meta.url));
   const izlaz = execFileSync("cmd.exe", ["/c", cmd, "--help"], { encoding: "utf8" });
   assert.match(izlaz, /Carsystem konektor/);
 });
 
 test("[WIN] spakovan konektor odbija test skladište ključa", async (t) => {
   if (guard(t)) return;
-  const cmd = new URL("../dist/connector.cmd", import.meta.url).pathname;
+  const cmd = fileURLToPath(new URL("../dist/connector.cmd", import.meta.url));
   /*
    * Na Windowsu je DPAPI dostupan, pa se test adapter ionako ne bira. Ovo
    * potvrđuje da ni izričita promenljiva ne menja izbor u paketu.

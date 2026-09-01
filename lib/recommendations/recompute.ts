@@ -101,15 +101,25 @@ export async function recomputeRecommendations(
         scopeCustomerCount: scope.customerIds === null ? null : scope.customerIds.length,
       })
       .returning();
-  } catch {
+  } catch (error) {
     /*
-     * Sirova greška baze se NE prosleđuje: naziv indeksa odaje šemu.
-     * Jedini uzrok koji ovaj upis može imati je već otvoren prolaz.
+     * Samo NARUŠENA JEDINSTVENOST znači „već je u toku".
+     *
+     * Ranija verzija je hvatala sve i svaki pad — pala konekcija, puna disk
+     * kvota — prijavljivala kao „prolaz je već u toku". Kancelarija bi tada
+     * čekala prolaz koji ne postoji. `23505` je Postgresov kod za jedinstveni
+     * indeks, i jedini indeks koji ovaj upis može da naruši je
+     * `recommendation_runs_one_running`.
+     *
+     * Naziv indeksa se ipak NE prosleđuje u poruku: odaje šemu.
      */
-    throw new RecomputeError(
-      "already_running",
-      "Preračunavanje je već u toku. Sačekajte da se završi.",
-    );
+    if ((error as { code?: string })?.code === "23505") {
+      throw new RecomputeError(
+        "already_running",
+        "Preračunavanje je već u toku. Sačekajte da se završi.",
+      );
+    }
+    throw error;
   }
 
   try {

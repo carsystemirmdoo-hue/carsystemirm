@@ -28,8 +28,14 @@ import { STANJA, ZAVRSNA } from "./outcomes.mjs";
  * napravi nov prazan.
  */
 
-/** Verzija šeme lokalnog reda; menja se samo uz migraciju ispod. */
-const SEMA_VERZIJA = 1;
+/**
+ * Verzija šeme lokalnog reda.
+ *
+ * `2` od P4: dodate su `komande` i `komanda_dogadjaji`. Postojeći red se NE
+ * dira — nove tabele nastaju uz `CREATE TABLE IF NOT EXISTS`, pa se stariji
+ * lokalni red nadograđuje bez gubitka neslatih stavki.
+ */
+export const SEMA_VERZIJA = 2;
 
 export class StoreError extends Error {
   constructor(code, message) {
@@ -109,13 +115,90 @@ export function otvoriStore(ulaz) {
       uzeto_u TEXT NOT NULL,
       obnovljeno_u TEXT NOT NULL
     );
+
+    /* ---------------------------------------------------------------- šema 2
+     * Ručne komande.
+     *
+     * Komanda se upisuje LOKALNO pre nego što se izvrši. Server je već označio
+     * da ju je uređaj preuzeo, pa restart bez ovog zapisa značio bi da konektor
+     * za nju ne zna, a portal pokazuje „preuzeto“ zauvek.
+     *
+     * Tabela ne čuva nijedan parametar posla: tip je zatvoren, a šta on radi
+     * zna konektor. Server ovde ne može da ostavi putanju ni argument.
+     */
+    CREATE TABLE IF NOT EXISTS komande (
+      /* Serverski UUID — isti ID se koristi u izveštajima napretka. */
+      id TEXT PRIMARY KEY,
+      tip TEXT NOT NULL,
+      verzija INTEGER NOT NULL,
+      preuzeto_u TEXT NOT NULL,
+      istice_u TEXT,
+      /* Popunjeno tek kad je posao gotov; NULL znači „još radi“. */
+      zavrseno_u TEXT,
+      stanje TEXT,
+      failure_code TEXT,
+      /*
+       * Redni broj poslednjeg izveštaja.
+       *
+       * Server odbija sekvencu koja ide unazad, pa brojač mora da preživi
+       * restart — zato stoji u bazi, a ne u memoriji procesa.
+       */
+      sekvenca INTEGER NOT NULL DEFAULT 0
+    );
+
+    CREATE INDEX IF NOT EXISTS komande_otvorene ON komande(zavrseno_u);
+
+    /*
+     * Izveštaji napretka, sa lokalno nastalim event_id.
+     *
+     * Kolona potvrdjen razlikuje „server je primio“ od „poslali smo“. Bez nje bi se
+     * posle izgubljenog odgovora ili slao duplikat pod novim ID-em, ili se ne bi
+     * slalo ništa — a tačan je treći odgovor: isti ID, ponovo.
+     */
+    CREATE TABLE IF NOT EXISTS komanda_dogadjaji (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      komanda_id TEXT NOT NULL REFERENCES komande(id),
+      event_id TEXT NOT NULL,
+      stanje TEXT NOT NULL,
+      failure_code TEXT,
+      sekvenca INTEGER NOT NULL,
+      brojaci TEXT NOT NULL,
+      napravljen_u TEXT NOT NULL,
+      potvrdjen INTEGER NOT NULL DEFAULT 0
+    );
+
+    /* Isti događaj se ne upisuje dvaput ni posle restarta usred slanja. */
+    CREATE UNIQUE INDEX IF NOT EXISTS komanda_dogadjaji_event
+      ON komanda_dogadjaji(komanda_id, event_id);
+    CREATE INDEX IF NOT EXISTS komanda_dogadjaji_nepotvrdjeni
+      ON komanda_dogadjaji(potvrdjen, id);
   `);
 
   const meta = citajMetu(db);
-  if (meta.sema_verzija && Number(meta.sema_verzija) !== SEMA_VERZIJA) {
+  const zatecena = meta.sema_verzija ? Number(meta.sema_verzija) : null;
+  if (zatecena !== null && zatecena > SEMA_VERZIJA) {
+    /*
+     * Noviji red, stariji konektor.
+     *
+     * Ovo se NE prašta: noviji zapis može nositi stanja koja ovaj kod ne
+     * razume, a „snađi se“ bi značilo tiho pogrešno tumačenje reda.
+     */
     throw new StoreError(
-      "schema_mismatch",
-      `Lokalni red je šeme ${meta.sema_verzija}, a ovaj konektor očekuje ${SEMA_VERZIJA}.`,
+      "schema_newer",
+      `Lokalni red je šeme ${zatecena}, a ovaj konektor razume najviše ${SEMA_VERZIJA}.`,
+    );
+  }
+  if (zatecena !== null && zatecena < SEMA_VERZIJA) {
+    /*
+     * Stariji red se NADOGRAĐUJE, ne briše.
+     *
+     * Tabele su već napravljene sa `IF NOT EXISTS` iznad; ovde se samo pomera
+     * oznaka verzije. Neslate stavke ostaju netaknute — brisanje reda zbog
+     * nove verzije programa bi izgubilo posao koji niko nije video.
+     */
+    db.prepare("UPDATE meta SET vrednost = ? WHERE kljuc = ?").run(
+      String(SEMA_VERZIJA),
+      "sema_verzija",
     );
   }
 
@@ -354,6 +437,85 @@ function napraviApi(db, putanja) {
         sada(),
         id,
       );
+    },
+
+    /* ------------------------------------------------------------------ */
+    /* Komande                                                             */
+    /* ------------------------------------------------------------------ */
+
+    /**
+     * Upisuje preuzetu komandu PRE izvrsenja.
+     *
+     * Ako je vec poznata, vraca postojecu — restart ne sme da je duplira ni da
+     * je zaboravi. Server je vec oznacio kao preuzetu, pa lokalni zapis mora
+     * postojati i posle pada.
+     */
+    preuzmiKomandu({ id, tip, verzija, isticeU, now = new Date() }) {
+      return uTransakciji(() => {
+        const postoji = db.prepare("SELECT * FROM komande WHERE id = ?").get(id);
+        if (postoji) return { nova: false, komanda: postoji };
+        db.prepare(
+          `INSERT INTO komande(id, tip, verzija, istice_u, stanje, preuzeto_u)
+           VALUES(?,?,?,?,?,?)`,
+        ).run(id, tip, verzija, isticeU, "preuzeta", now.toISOString());
+        return { nova: true, komanda: db.prepare("SELECT * FROM komande WHERE id = ?").get(id) };
+      });
+    },
+
+    /** Komanda koja jos nije zavrsena — nastavlja se posle restarta. */
+    otvorenaKomanda() {
+      return db
+        .prepare("SELECT * FROM komande WHERE zavrseno_u IS NULL ORDER BY preuzeto_u LIMIT 1")
+        .get() ?? null;
+    },
+
+    /**
+     * Pravi dogadjaj i cuva ga PRE slanja.
+     *
+     * `event_id` nastaje ovde i ostaje isti kroz sve pokusaje slanja. Zato je
+     * ACK idempotentan i kada odgovor servera nestane: server prepoznaje isti
+     * ID i ne upisuje ga dvaput.
+     */
+    dodajDogadjaj({ komandaId, eventId, stanje, brojaci, failureCode = null, now = new Date() }) {
+      return uTransakciji(() => {
+        const postoji = db
+          .prepare("SELECT * FROM komanda_dogadjaji WHERE komanda_id = ? AND event_id = ?")
+          .get(komandaId, eventId);
+        if (postoji) return postoji;
+
+        const sledeca =
+          (db.prepare("SELECT sekvenca FROM komande WHERE id = ?").get(komandaId)?.sekvenca ?? 0) + 1;
+        db.prepare("UPDATE komande SET sekvenca = ?, stanje = ? WHERE id = ?").run(
+          sledeca,
+          stanje,
+          komandaId,
+        );
+        db.prepare(
+          `INSERT INTO komanda_dogadjaji(komanda_id, event_id, sekvenca, stanje, failure_code, brojaci, napravljen_u)
+           VALUES(?,?,?,?,?,?,?)`,
+        ).run(komandaId, eventId, sledeca, stanje, failureCode, JSON.stringify(brojaci), now.toISOString());
+        return db
+          .prepare("SELECT * FROM komanda_dogadjaji WHERE komanda_id = ? AND event_id = ?")
+          .get(komandaId, eventId);
+      });
+    },
+
+    /** Dogadjaji koji jos nisu potvrdjeni od servera — salju se ponovo. */
+    nepotvrdjeniDogadjaji(limit = 20) {
+      return db
+        .prepare("SELECT * FROM komanda_dogadjaji WHERE potvrdjen = 0 ORDER BY id LIMIT ?")
+        .all(limit);
+    },
+
+    potvrdiDogadjaj(id) {
+      db.prepare("UPDATE komanda_dogadjaji SET potvrdjen = 1 WHERE id = ?").run(id);
+    },
+
+    /** Zatvara komandu lokalno; server je vec dobio terminalni dogadjaj. */
+    zavrsiKomandu({ id, stanje, failureCode = null, now = new Date() }) {
+      db.prepare(
+        "UPDATE komande SET stanje = ?, failure_code = ?, zavrseno_u = ? WHERE id = ?",
+      ).run(stanje, failureCode, now.toISOString(), id);
     },
 
     /* ------------------------------------------------------------------ */

@@ -1,7 +1,7 @@
 import { generateKeyPairSync } from "node:crypto";
 import { access, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { keyFingerprint } from "../../lib/sync/device/signing.mjs";
+import { keyFingerprint, SIGNED_PATHS } from "../../lib/sync/device/signing.mjs";
 import { ucitajKonfiguraciju } from "./config.mjs";
 import { izaberiAdapter, KeystoreError } from "./keystore/index.mjs";
 import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
@@ -9,9 +9,18 @@ import { STANJA } from "./outcomes.mjs";
 import { posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 import { opisiPokrivenost } from "./calendar.mjs";
 import { lokalnoVreme, odlukaOCiklusu, sledeciTermin } from "./schedule.mjs";
-import { otvoriStore, podrazumevanaPutanjaStanja, StoreError } from "./store.mjs";
+import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
 import { proveriIzvor } from "./scanner.mjs";
 import { posaljiHeartbeat } from "./client.mjs";
+import {
+  izvrsiKomandu,
+  LOKALNA_ZAVRSNA,
+  posaljiNepotvrdjene,
+  PODRZANA_VERZIJA,
+  PODRZAN_TIP,
+  preuzmiKomandu,
+  sledeciInterval,
+} from "./commands.mjs";
 
 /**
  * Ulazna tačka konektora.
@@ -21,7 +30,7 @@ import { posaljiHeartbeat } from "./client.mjs";
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "status"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -127,6 +136,25 @@ async function doctor(p) {
     { ...pokrivenost, lokalnoVreme: lokalno },
   );
 
+  /*
+   * Kompatibilnost protokola komandi.
+   *
+   * Doctor NAMERNO ne poll-uje: poll bi na serveru preuzeo stvarnu komandu i
+   * označio je kao isporučenu, a doctor je ne izvršava — komanda bi ostala da
+   * visi. Zato se proverava samo ono što se može proveriti bez posledice:
+   * da li lokalna šema, zatvoreni tip komande i lista potpisanih putanja idu
+   * zajedno. Da li server uopšte nudi komande, vidi se pri prvom `poll-once`.
+   */
+  const putanjeKomandi = ["/api/sync/commands/poll", "/api/sync/commands/update"];
+  const nepotpisane = putanjeKomandi.filter((x) => !SIGNED_PATHS.includes(x));
+  dodaj("protokol_komandi", nepotpisane.length === 0 ? "ok" : "greska", {
+    tip: PODRZAN_TIP,
+    verzija: PODRZANA_VERZIJA,
+    semaReda: SEMA_VERZIJA,
+    nepotpisanePutanje: nepotpisane,
+    napomena: "Doctor ne preuzima i ne izvršava komandu.",
+  });
+
   const problema = nalazi.filter((n) => n.status === "greska").length;
   ispisi({ komanda: "doctor", problema, nalazi });
   return problema === 0 ? 0 : 1;
@@ -220,7 +248,7 @@ async function dryRun(p) {
   }
 }
 
-async function ciklus(p, { rucni, now = new Date() }) {
+async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
   const { k, store, log } = await otvori(p);
   const vlasnik = `${process.pid}@${now.toISOString()}`;
 
@@ -252,7 +280,7 @@ async function ciklus(p, { rucni, now = new Date() }) {
         dodatnaZatvaranja: k.dodatnaZatvaranja,
       });
       if (odluka.akcija !== "pokreni") {
-        ispisi({ komanda: "auto", status: odluka.akcija, ...odluka });
+        if (!tiho) ispisi({ komanda: "auto", status: odluka.akcija, ...odluka });
         return odluka.akcija === "blokirano" ? 1 : 0;
       }
     }
@@ -295,6 +323,133 @@ async function ciklus(p, { rucni, now = new Date() }) {
   }
 }
 
+/**
+ * Jedan prolaz kroz komande: nepotvrđeni događaji, pa eventualna nova komanda.
+ *
+ * Odvojeno od `auto` da bi se moglo pozvati i testirati bez čekanja intervala.
+ * Radi POD BRAVOM — komanda ne otvara drugi konkurentni scan; ako neki ciklus
+ * već traje, ovaj prolaz ne radi ništa.
+ */
+async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = false } = {}) {
+  const reci = (o) => {
+    // U `watch` petlji se ispisuje samo ono što se stvarno desilo.
+    if (!tiho || (o.status !== "nema" && o.status !== "zauzeto")) ispisi(o);
+  };
+  const { k, store, log } = await otvori(p);
+  const vlasnik = `${process.pid}@${now.toISOString()}`;
+  const brava = store.uzmiZakljucavanje({ vlasnik, now });
+  if (!brava.uzeto) {
+    reci({ komanda: "poll-once", status: "zauzeto" });
+    store.zatvori();
+    return 0;
+  }
+
+  try {
+    const kljuc = await (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc });
+    const ctx = { store, konfiguracija: k, kljuc, log, fetchImpl, dozvoliHttp };
+
+    /*
+     * Nepotvrđeni događaji IDU PRVI.
+     *
+     * Posle pada ili izgubljenog odgovora server možda ne zna ishod prethodne
+     * komande. Slanje pre uzimanja nove drži portal tačnim.
+     */
+    const zaostali = await posaljiNepotvrdjene(ctx);
+
+    /*
+     * Otvorena lokalna komanda se NASTAVLJA, ne uzima se nova.
+     *
+     * Restart usred izvršenja ne sme da zaboravi komandu ni da uzme drugu
+     * paralelno.
+     */
+    const otvorena = store.otvorenaKomanda();
+    if (otvorena) {
+      if (LOKALNA_ZAVRSNA.includes(otvorena.stanje)) {
+        store.zavrsiKomandu({ id: otvorena.id, stanje: otvorena.stanje });
+        reci({ komanda: "poll-once", status: "zatvorena_zaostala", zaostali });
+        return 0;
+      }
+      const rez = await izvrsiKomandu({
+        ...ctx,
+        komanda: otvorena,
+        lokalniDatum: lokalnoVreme(now).datum,
+      });
+      reci({ komanda: "poll-once", status: "nastavljena", ishod: rez.stanje, zaostali });
+      return 0;
+    }
+
+    const preuzeta = await preuzmiKomandu(ctx);
+    if (preuzeta.ishod !== "komanda") {
+      reci({ komanda: "poll-once", status: preuzeta.ishod, razlog: preuzeta.razlog ?? null, zaostali });
+      return 0;
+    }
+
+    const rez = await izvrsiKomandu({
+      ...ctx,
+      komanda: preuzeta.komanda,
+      lokalniDatum: lokalnoVreme(now).datum,
+    });
+    reci({
+      komanda: "poll-once",
+      status: "izvrseno",
+      ishod: rez.stanje,
+      ackPoslat: rez.ackPoslat,
+      // Bez ijednog podatka o dokumentu — samo zbirni brojevi.
+      skeniranje: rez.skeniranje,
+      slanje: rez.slanje,
+    });
+    return rez.stanje === "blocked" ? 1 : 0;
+  } finally {
+    store.otpustiZakljucavanje(vlasnik);
+    store.zatvori();
+  }
+}
+
+/**
+ * Dugotrajni režim: periodično pita za komande i poštuje termin u 09:00.
+ *
+ * Dve nezavisne stvari u jednoj petlji:
+ *  - komande, sa ograničenim intervalom (45 s ± jitter) i eksponencijalnim
+ *    backoff-om do 30 min kada server ne odgovara ili je uređaj blokiran;
+ *  - poslovni raspored, koji ostaje netaknut — `auto` odluka se proverava u
+ *    svakom prolazu i izvršava najviše jednom dnevno.
+ *
+ * Bez backoff-a bi konektor bez interneta pitao svakih 45 s zauvek. Bez
+ * jitter-a bi se više uređaja poravnalo u isti trenutak.
+ */
+async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () => new Date() } = {}) {
+  let neuspeha = 0;
+  let prolaz = 0;
+
+  while (prolaz < maxProlaza) {
+    prolaz += 1;
+    const trenutak = now();
+
+    // 1. Poslovni termin je nezavisan od komandi.
+    try {
+      await ciklus(p, { rucni: false, now: trenutak, tiho: true });
+    } catch {
+      /* Neuspeh ciklusa se već beleži; petlja se zbog njega ne prekida. */
+    }
+
+    // 2. Komande.
+    let uspelo = false;
+    try {
+      const kod = await pollOnce(p, { now: trenutak, tiho: true });
+      uspelo = kod === 0;
+    } catch {
+      uspelo = false;
+    }
+    neuspeha = uspelo ? 0 : neuspeha + 1;
+
+    if (prolaz >= maxProlaza) break;
+    await sleep(sledeciInterval({ neuspeha }));
+  }
+  return 0;
+}
+
+const cekaj = (ms) => new Promise((r) => setTimeout(r, ms));
+
 async function status(p, now = new Date()) {
   const { k, store } = await otvori(p);
   try {
@@ -312,6 +467,14 @@ async function status(p, now = new Date()) {
       }),
       // Redigovano: bez putanja, imena fajlova i sadržaja.
       poslednjiIshodi: store.poslednjiIshodi(10),
+      // Bezbedno: samo ID, stanje i vreme — bez ijednog podatka o dokumentu.
+      // Naziv NIJE `komanda`: taj ključ već nosi ime same CLI komande, pa bi
+      // drugi isti ključ tiho pregazio oznaku i log bi izgubio identitet reda.
+      otvorenaKomanda: (() => {
+        const o = store.otvorenaKomanda();
+        return o ? { id: o.id, stanje: o.stanje, preuzeto: o.preuzeto_u } : null;
+      })(),
+      nepotvrdjenihDogadjaja: store.nepotvrdjeniDogadjaji(50).length,
       stanja: Object.values(STANJA),
     });
     return 0;
@@ -370,6 +533,10 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await dryRun(p);
       case "run-once":
         return await ciklus(p, { rucni: true });
+      case "poll-once":
+        return await pollOnce(p);
+      case "watch":
+        return await watch(p);
       case "auto":
         return await ciklus(p, { rucni: false });
       case "status":

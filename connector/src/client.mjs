@@ -193,6 +193,14 @@ export async function posaljiPotpisano(ulaz) {
     invoiceId: telo?.invoiceId ?? null,
     comparable: telo?.comparable ?? null,
     requestId: telo?.requestId ?? null,
+    /*
+     * Opis komande — jedini deo tela koji nije skalar.
+     *
+     * Prenosi se kakav jeste, bez tumačenja: `preuzmiKomandu` sam proverava tip
+     * i verziju i odbija sve što ne prepoznaje. Ovde nema podataka o dokumentu;
+     * komanda nosi samo ID, zatvoren tip, verziju i rok.
+     */
+    command: telo && typeof telo.command === "object" ? telo.command : null,
     retryAfter,
     nonce,
   };

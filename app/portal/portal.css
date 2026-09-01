@@ -7196,3 +7196,46 @@ body:has(.portal-login-root) {
   font-weight: 450;
   line-height: 1.5;
 }
+
+/* =========================================================================
+ * Sinhronizacija — operativni ekran
+ *
+ * Dugme komande stoji u redu tabele, uz poruku ishoda ispod njega. Poruka mora
+ * ostati vidljiva i na telefonu, gde je celija uska.
+ * ====================================================================== */
+
+/*
+ * Specificnost je NAMERNA: `.portal-panel form` postavlja `margin-top: 1rem` i
+ * `max-width: 32rem`, sto je tacno pogresno u celiji tabele. Bez kvalifikatora
+ * `.portal-panel` bi opsti panel-form stil pobedio.
+ */
+.portal-panel form.portal-inline-form {
+  display: grid;
+  gap: 6px;
+  margin-top: 0;
+  max-width: none;
+  justify-items: start;
+}
+
+.portal-panel form.portal-inline-form button {
+  margin-top: 0;
+}
+
+.portal-inline-form small {
+  color: var(--p-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.portal-inline-form small[data-tone="danger"] {
+  color: oklch(0.52 0.16 25);
+}
+
+.portal-inline-form small[data-tone="success"] {
+  color: oklch(0.48 0.12 150);
+}
+
+.portal-readiness-note[data-tone="success"] {
+  color: var(--p-ink);
+  background: oklch(0.985 0.01 150);
+}

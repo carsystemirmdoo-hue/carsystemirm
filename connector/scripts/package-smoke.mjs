@@ -117,9 +117,18 @@ const PREGLEDANO = [
   },
   {
     fajl: "connector/test/paths.test.mjs",
-    obrazac: /C:(\\\\|\/)(Users\/Vlasnik|\.\.\.)?/,
+    obrazac: /Users\/Vlasnik\/Carsystem%20Smoke/,
     razlog:
       "Izmišljen Windows file-URL vektor koji test i postoji da bi proverio; nije stvarna putanja.",
+  },
+  {
+    fajl: "START-HERE.md",
+    /*
+     * Traži se BAŠ mesto-držač. Stvarno korisničko ime i dalje pada — a upravo
+     * to je razlika koju ova provera treba da pravi.
+     */
+    obrazac: /Users\\<tvoj nalog>/,
+    razlog: "Uputstvo vlasniku; korisničko ime je mesto-držač, ne stvarna vrednost.",
   },
 ];
 
@@ -254,7 +263,16 @@ for (const f of fajlovi) {
    * Apsolutne putanje se traže odvojeno: nisu tajna, ali odaju mašinu na kojoj
    * je paket nastao i ne smeju da izađu bez razloga.
    */
-  for (const m of sadrzaj.matchAll(/(?:\/Users\/|\/home\/|[A-Za-z]:\\)[^\s"'`)]{3,}/g)) {
+  /*
+   * Windows disk se traži samo ispred STVARNOG segmenta putanje.
+   *
+   * `[A-Za-z]:\\` samo po sebi pogađa i regex escape-ove u kodu — `PDV:\s*` i
+   * `računa:\s*` su tako prijavljeni kao apsolutne putanje. Zato negativni
+   * lookahead na `\s`, `\d`, `\w`, `\b`, `\n`, `\r`, `\t`, `\.`: to su
+   * escape-ovi, ne folderi.
+   */
+  const APSOLUTNA = /(?:\/Users\/|\/home\/|[A-Za-z]:\\(?![sSdDwWbBnrt.]))[^\s"'`)]{3,}/g;
+  for (const m of sadrzaj.matchAll(APSOLUTNA)) {
     const opravdan = PREGLEDANO.some((p) => r.endsWith(p.fajl) && p.obrazac.test(m[0]));
     if (!opravdan) nalazi.push(`${r}: apsolutna putanja`);
   }

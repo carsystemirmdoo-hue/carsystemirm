@@ -81,6 +81,8 @@ const D = (p: string) => new URL(`connector/src/${p}`, DIST).href;
 async function podigniServer(): Promise<{ server: Server; origin: string }> {
   const { POST: ingest } = await import("@/app/api/sync/ingest/route");
   const { POST: heartbeat } = await import("@/app/api/sync/heartbeat/route");
+  const { POST: pollKomandu } = await import("@/app/api/sync/commands/poll/route");
+  const { POST: azurirajKomandu } = await import("@/app/api/sync/commands/update/route");
 
   const s = createServer(async (req, res) => {
     const delovi: Buffer[] = [];
@@ -102,7 +104,13 @@ async function podigniServer(): Promise<{ server: Server; origin: string }> {
     });
 
     const putanja = new URL(zahtev.url).pathname;
-    const rukovalac = putanja === "/api/sync/ingest" ? ingest : heartbeat;
+    const rute: Record<string, (r: Request) => Promise<Response>> = {
+      "/api/sync/ingest": ingest,
+      "/api/sync/heartbeat": heartbeat,
+      "/api/sync/commands/poll": pollKomandu,
+      "/api/sync/commands/update": azurirajKomandu,
+    };
+    const rukovalac = rute[putanja] ?? heartbeat;
     const odgovor = await rukovalac(zahtev);
 
     res.statusCode = odgovor.status;
@@ -119,6 +127,7 @@ before(async () => {
   if (reason) return;
   ensureTestCryptoEnv();
   process.env.FEATURE_SYNC_DEVICE_INGEST = "1";
+  process.env.FEATURE_SYNC_OPERATIONS = "1";
   db = await initTestDatabase();
   const a = await seedAccounts(db, [
     { key: "owner", role: "gazda" },
@@ -139,6 +148,7 @@ after(async () => {
     await cleanupQa(db);
   }
   delete process.env.FEATURE_SYNC_DEVICE_INGEST;
+  delete process.env.FEATURE_SYNC_OPERATIONS;
   await closeTestDatabase();
 });
 
@@ -153,6 +163,14 @@ async function ocisti() {
   await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%'`;
   await db.sql`DELETE FROM auth_rate_limits`;
   await db.sql`DELETE FROM sync_request_nonces`;
+  /*
+   * `TRUNCATE`, jer je `sync_command_events` append-only: okidač odbija `DELETE`
+   * po redu, a `TRUNCATE` ne pokreće okidače, pa se zaštita ne gasi.
+   */
+  await db.sql.unsafe(
+    `TRUNCATE TABLE "sync_command_events", "sync_commands", "audit_log"
+     RESTART IDENTITY CASCADE`,
+  );
 }
 
 beforeEach(async () => {
@@ -715,5 +733,269 @@ test("parser iz PAKETA daje isti canonical rezultat kao serverski put", async (t
     });
     assert.deepEqual(izPaketa, saServera, `„${ime}“ se razlikuje između paketa i servera`);
     assert.equal(izPaketa.semantic_hash, saServera.semantic_hash);
+  }
+});
+
+/* =========================================================================
+ * Ručne komande (P4) — pun tok, kroz stvarni HTTP
+ * ====================================================================== */
+
+/** Kontekst za `commands.mjs`, isti oblik koji CLI sastavlja. */
+function komandniKontekst(
+  store: unknown,
+  izvor: string,
+  uredjaj: Awaited<ReturnType<typeof aktivanUredjaj>>,
+) {
+  return {
+    store,
+    konfiguracija: konfiguracija(izvor, uredjaj.deviceCode),
+    kljuc: uredjaj.privateKeyPkcs8Der,
+    dozvoliHttp: true,
+    lokalniDatum: "2026-03-10",
+  };
+}
+
+test("portal → komanda → konektor → jedna faktura, bez čekanja na 09:00", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { izvrsiKomandu, preuzmiKomandu } = await import(D("commands.mjs"));
+  const { zakaziKomandu } = await import("@/lib/sync/commands/service");
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    // 1. Kancelarija klikne dugme.
+    const { commandId } = await zakaziKomandu({ deviceId: uredjaj.deviceId }, office);
+
+    // 2. Konektor pita i dobija komandu — preko stvarnog potpisanog HTTP-a.
+    const ctx = komandniKontekst(store, okr.izvor, uredjaj);
+    const preuzeta = await preuzmiKomandu(ctx);
+    assert.equal(preuzeta.ishod, "komanda", JSON.stringify(preuzeta));
+    assert.equal(preuzeta.komanda.id, commandId);
+
+    // 3. Izvršenje ide kroz ISTI ciklus koji radi i `run-once`.
+    const rez = await izvrsiKomandu({ ...ctx, komanda: preuzeta.komanda });
+    assert.equal(rez.stanje, "completed", JSON.stringify(rez));
+    assert.equal(await brojFaktura(), 1);
+
+    // 4. Server vidi završenu komandu sa tačnim brojačima.
+    const [red] = await db.sql<
+      { status: string; posted_count: number; review_count: number; finished_at: string | null }[]
+    >`SELECT status, posted_count, review_count, finished_at
+        FROM sync_commands WHERE id = ${commandId}`;
+    assert.equal(red.status, "completed");
+    assert.equal(red.posted_count, 1);
+    assert.equal(red.review_count, 0);
+    assert.ok(red.finished_at, "završetak nije zabeležen");
+
+    /*
+     * Trag razdvaja aktere: kancelarija je ZATRAŽILA, uređaj je IZVRŠIO.
+     * Spajanje bi značilo da izveštaj tvrdi da je čovek uneo dokumente.
+     */
+    const trag = await db.sql<{ action: string; actor_kind: string }[]>`
+      SELECT action, actor_kind FROM audit_log
+       WHERE entity_type = 'Komanda sinhronizacije' ORDER BY created_at`;
+    assert.deepEqual(
+      trag.map((r) => [r.action, r.actor_kind]),
+      [
+        ["Zatražena sinhronizacija", "user"],
+        ["Komanda sinhronizacije završena", "device"],
+      ],
+    );
+
+    // Lokalno je komanda zatvorena i nijedan događaj ne visi nepotvrđen.
+    assert.equal(store.otvorenaKomanda(), null);
+    assert.equal(store.nepotvrdjeniDogadjaji().length, 0);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("izgubljen ACK: NOV proces šalje ISTI event_id, posao se ne ponavlja", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { izvrsiKomandu, posaljiNepotvrdjene, preuzmiKomandu } = await import(D("commands.mjs"));
+  const { zakaziKomandu } = await import("@/lib/sync/commands/service");
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const { commandId } = await zakaziKomandu({ deviceId: uredjaj.deviceId }, office);
+
+  // --- Proces 1: odradi posao, ali mu završni ACK „propadne“. -------------
+  const prvi = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+  try {
+    const ctx = komandniKontekst(prvi, okr.izvor, uredjaj);
+    const preuzeta = await preuzmiKomandu(ctx);
+    assert.equal(preuzeta.ishod, "komanda");
+
+    /*
+     * `fetch` koji radi za `ingest`, a puca na `commands/update`.
+     *
+     * Tako se pogađa tačno onaj prozor u kome je posao OBAVLJEN a server to ne
+     * zna — najopasniji trenutak, jer naivan konektor tu ponovi ceo posao.
+     */
+    const stvarni = globalThis.fetch;
+    const ustaljen = async (url: string | URL | Request, init?: RequestInit) => {
+      if (String(url).includes("/commands/update")) throw new Error("ECONNRESET");
+      return stvarni(url as never, init);
+    };
+
+    const rez = await izvrsiKomandu({
+      ...ctx,
+      komanda: preuzeta.komanda,
+      fetchImpl: ustaljen as unknown as typeof fetch,
+    });
+    assert.equal(rez.stanje, "completed");
+    assert.equal(rez.ackPoslat, false, "test nije pogodio prozor izgubljenog ACK-a");
+    assert.equal(await brojFaktura(), 1, "faktura nije knjižena");
+
+    // Server i dalje misli da komanda radi; događaji čekaju potvrdu.
+    const [pre] = await db.sql<{ status: string }[]>`
+      SELECT status FROM sync_commands WHERE id = ${commandId}`;
+    assert.ok(["delivered", "running"].includes(pre.status), `stanje: ${pre.status}`);
+    assert.ok(prvi.nepotvrdjeniDogadjaji().length >= 1);
+  } finally {
+    prvi.zatvori();
+  }
+
+  // --- Proces 2: nov proces, isti red. -----------------------------------
+  const drugi = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+  try {
+    const ctx = komandniKontekst(drugi, okr.izvor, uredjaj);
+    const poslato = await posaljiNepotvrdjene(ctx);
+    assert.ok(poslato.poslato >= 1, JSON.stringify(poslato));
+
+    const [posle] = await db.sql<{ status: string; posted_count: number }[]>`
+      SELECT status, posted_count FROM sync_commands WHERE id = ${commandId}`;
+    assert.equal(posle.status, "completed");
+    assert.equal(posle.posted_count, 1);
+
+    /*
+     * JEDNA faktura, i posle ponovljenog izveštaja.
+     *
+     * Da je nov proces ponovo skenirao i poslao, ovde bi bile dve — ili bi
+     * `source_hash` idempotentnost tiho sakrila drugi pokušaj.
+     */
+    assert.equal(await brojFaktura(), 1);
+  } finally {
+    drugi.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("opoziv usred posla: komanda ne može da se zatvori tuđim ključem", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { preuzmiKomandu } = await import(D("commands.mjs"));
+  const { zakaziKomandu } = await import("@/lib/sync/commands/service");
+  const { revokeDevice } = await import("@/lib/sync/device/registry");
+
+  const uredjaj = await aktivanUredjaj();
+  const okr = await okruzenje();
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    await zakaziKomandu({ deviceId: uredjaj.deviceId }, office);
+    const ctx = komandniKontekst(store, okr.izvor, uredjaj);
+    assert.equal((await preuzmiKomandu(ctx)).ishod, "komanda");
+
+    // Gazda opoziva uređaj dok komanda stoji otvorena.
+    await revokeDevice({ deviceId: uredjaj.deviceId, reason: "QA opoziv usred posla" }, owner);
+
+    /*
+     * Sledeće javljanje pada na autentifikaciji, ne na komandi. Opoziv mora da
+     * važi ODMAH — a ne tek kad uređaj sam odluči da prestane.
+     */
+    const posle = await preuzmiKomandu(ctx);
+    assert.equal(posle.ishod, "odbijeno", JSON.stringify(posle));
+    assert.equal(await brojFaktura(), 0);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("dokument za pregled daje `completed_with_review`, ne `completed`", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { izvrsiKomandu, preuzmiKomandu } = await import(D("commands.mjs"));
+  const { zakaziKomandu } = await import("@/lib/sync/commands/service");
+
+  const uredjaj = await aktivanUredjaj();
+  /*
+   * Kupac se NAMERNO ne mapira.
+   *
+   * Dokument tada ide na ljudski pregled. Da se to prijavi kao `completed`,
+   * ekran bi tvrdio da je sve knjiženo — a nijedna faktura nije.
+   */
+  const okr = await okruzenje();
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    const { commandId } = await zakaziKomandu({ deviceId: uredjaj.deviceId }, office);
+    const ctx = komandniKontekst(store, okr.izvor, uredjaj);
+    const preuzeta = await preuzmiKomandu(ctx);
+    const rez = await izvrsiKomandu({ ...ctx, komanda: preuzeta.komanda });
+
+    assert.equal(rez.stanje, "completed_with_review", JSON.stringify(rez));
+    assert.equal(await brojFaktura(), 0, "nemapiran kupac je ipak knjižen");
+
+    const [red] = await db.sql<{ status: string; posted_count: number; review_count: number }[]>`
+      SELECT status, posted_count, review_count FROM sync_commands WHERE id = ${commandId}`;
+    assert.equal(red.status, "completed_with_review");
+    assert.equal(red.posted_count, 0);
+    assert.ok(red.review_count >= 1);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("sa isključenim komandama `run-once` i termin u 09:00 rade kao pre", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const { preuzmiKomandu } = await import(D("commands.mjs"));
+  const { odlukaOCiklusu } = await import(D("schedule.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await okruzenje();
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  delete process.env.FEATURE_SYNC_OPERATIONS;
+  try {
+    const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+
+    // 1. Poll je 404 — ali to je „nema komandi“, ne kvar.
+    const ctx = komandniKontekst(store, okr.izvor, uredjaj);
+    assert.equal((await preuzmiKomandu(ctx)).ishod, "iskljuceno");
+
+    // 2. Redovan posao ide dalje, nedirnut.
+    assert.equal((await skenirajURed({ store, konfiguracija: k })).novo, 1);
+    const slanje = await posaljiIzReda({
+      store, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10", dozvoliHttp: true,
+    });
+    assert.equal(slanje.potvrdjeno, 1, JSON.stringify(slanje));
+    assert.equal(await brojFaktura(), 1);
+
+    // 3. Odluka o terminu ne zna ni da komande postoje.
+    const odluka = odlukaOCiklusu({
+      // Posle 09:00 po lokalnom vremenu; 08:05 bi tačno dalo „čekaj“.
+      now: new Date("2026-03-10T09:05:00+01:00"),
+      poslednjiIzvrsenDatum: null,
+      dodatnaZatvaranja: [],
+    });
+    assert.equal(odluka.akcija, "pokreni", JSON.stringify(odluka));
+  } finally {
+    process.env.FEATURE_SYNC_OPERATIONS = "1";
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
   }
 });

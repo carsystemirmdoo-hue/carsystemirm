@@ -82,6 +82,16 @@ const ZA_PREGLED_KODOVI = new Set([
   "business_key_conflict",
   "already_imported_other_source",
   "source_hash_content_mismatch",
+  /*
+   * Nemapiran kupac i karantin su TAKOĐE „kod servera, čeka čoveka“.
+   *
+   * Bez njih su padali u „nepoznat kod“ i odlagali se za sledeći radni dan —
+   * a mapiranje partnera ne nastaje samo od sebe. Posledica je bila dvostruko
+   * pogrešna: jedno beskorisno ponovno slanje, i prikaz „čeka retry“ umesto
+   * „traži pregled“, pa niko ne bi znao da treba nešto da uradi.
+   */
+  "awaiting_customer_mapping",
+  "quarantined",
 ]);
 
 /**

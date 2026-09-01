@@ -1,5 +1,5 @@
 import "server-only";
-import { and, desc, eq, inArray, isNull, lt, or, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, lt, lte, or, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
   OTVORENA_STANJA,
@@ -52,7 +52,26 @@ export class CommandError extends Error {
  */
 const PRELAZI: Record<SyncCommandStatus, readonly SyncCommandStatus[]> = {
   queued: ["delivered", "expired", "blocked"],
-  delivered: ["running", "retry_pending", "failed", "blocked", "expired"],
+  /*
+   * `delivered` sme PRAVO u završno stanje, bez `running`.
+   *
+   * Nije popuštanje: uređaj prvo šalje „počeo sam“, ali taj ACK ume da se
+   * izgubi na mreži. Posao se svejedno obavi i završni izveštaj stigne prvi.
+   * Da se prelaz odbija, gotova komanda bi na ekranu zauvek stajala kao
+   * „preuzeto“ — tačno stanje koje ovaj model postoji da spreči.
+   *
+   * Zakašnjeli `running` posle toga pada kao `command_terminal`, i tako treba:
+   * ishod se ne otvara ponovo.
+   */
+  delivered: [
+    "running",
+    "completed",
+    "completed_with_review",
+    "retry_pending",
+    "failed",
+    "blocked",
+    "expired",
+  ],
   running: [
     "running", // periodičan progress u istom stanju
     "completed",
@@ -243,7 +262,14 @@ export async function preuzmiKomandu(input: {
     .update(syncCommands)
     .set({
       status: sql`CASE WHEN ${syncCommands.status} = 'queued' THEN 'delivered'::sync_command_status ELSE ${syncCommands.status} END`,
-      deliveredAt: sql`COALESCE(${syncCommands.deliveredAt}, ${now})`,
+      /*
+       * `::timestamptz` NIJE ukras.
+       *
+       * Unutar sirovog `sql` fragmenta Date stiže kao neotipovan tekst, pa
+       * `COALESCE(timestamptz, text)` PostgreSQL odbija i ceo `poll` pada.
+       * Prvo preuzimanje ostaje prvo: kasniji poll ne pomera `delivered_at`.
+       */
+      deliveredAt: sql`COALESCE(${syncCommands.deliveredAt}, ${now.toISOString()}::timestamptz)`,
       leaseOwnerDeviceId: input.deviceId,
       leaseExpiresAt: leaseDo,
       updatedAt: now,
@@ -252,7 +278,15 @@ export async function preuzmiKomandu(input: {
       and(
         eq(syncCommands.deviceId, input.deviceId),
         inArray(syncCommands.status, [...OTVORENA_STANJA]),
-        lt(syncCommands.availableAt, sql`${now} + interval '1 second'`),
+        /*
+         * Granica se računa u JS-u, ne u SQL-u.
+         *
+         * `${now} + interval '1 second'` bi poslalo neotipovan parametar, pa
+         * PostgreSQL ne bi umeo da razreši operator — upit pada u celini.
+         * Sekunda tolerancije ostaje: komanda zakazana „sad“ sme odmah da se
+         * preuzme uprkos sitnoj razlici satova.
+         */
+        lte(syncCommands.availableAt, new Date(now.getTime() + 1000)),
         /*
          * Slobodna, ili je lease istekao, ili je već naša.
          *
@@ -398,7 +432,9 @@ export async function primiNapredak(input: {
       .set({
         status: input.status,
         startedAt:
-          input.status === "running" ? sql`COALESCE(${syncCommands.startedAt}, ${now})` : komanda.startedAt,
+          input.status === "running"
+            ? sql`COALESCE(${syncCommands.startedAt}, ${now.toISOString()}::timestamptz)`
+            : komanda.startedAt,
         finishedAt: terminalno ? now : null,
         failureCode,
         ...brojaci,

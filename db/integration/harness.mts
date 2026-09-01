@@ -289,6 +289,20 @@ const RESETTABLE_TABLES = [
   "article_catalog_mappings",
   "customer_external_identifiers",
 
+  /*
+   * Sinhronizacija sa uređaja (0024–0025).
+   *
+   * `sync_command_events` je append-only i `DELETE` nad njim okidač odbija —
+   * upravo zato je `TRUNCATE` jedini ispravan alat: ne pokreće okidače po redu,
+   * pa se zaštita ne isključuje ni na trenutak. Bez ovih pet imena bi jedan
+   * događaj iz ranijeg prolaza zauvek ostao u bazi i obarao čišćenje.
+   */
+  "sync_command_events",
+  "sync_commands",
+  "sync_request_nonces",
+  "sync_device_keys",
+  "sync_devices",
+
   "audit_log",
   "auth_rate_limits",
   "user_mfa",

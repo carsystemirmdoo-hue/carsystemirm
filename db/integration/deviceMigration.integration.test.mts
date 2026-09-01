@@ -12,7 +12,7 @@ import {
 } from "./harness.mts";
 
 /**
- * Migracije 0023/0024 nad PRAVIM PostgreSQL-om.
+ * Migracije 0023/0024/0025 nad PRAVIM PostgreSQL-om.
  *
  * Sam test nad svežom bazom ne bi bio dokaz upgrade puta — pa se ovde tvrdi ono
  * što je nezavisno od redosleda: da zatečeni redovi ostaju netaknuti, da
@@ -71,6 +71,13 @@ async function ocisti() {
   await db.sql`DELETE FROM articles WHERE code LIKE '9%'`;
   await db.sql`DELETE FROM import_runs`;
   await db.sql`DELETE FROM customers WHERE pib LIKE 'QA%'`;
+  /*
+   * `sync_command_events` je append-only; `DELETE` po redu okidač odbija — što
+   * i treba. `TRUNCATE` ne pokreće okidače, pa se zaštita ne gasi ni na trenutak.
+   */
+  await db.sql.unsafe(
+    `TRUNCATE TABLE "sync_command_events", "sync_commands" RESTART IDENTITY CASCADE`,
+  );
 }
 
 /* =========================================================================
@@ -389,4 +396,149 @@ test("izbor druge verzije prenosi poreklo i valutu na projekciju", async (t) => 
     SELECT count(*)::int AS "stavkiA" FROM source_document_lines
      WHERE source_document_id = ${(a as { sourceDocumentId: string }).sourceDocumentId}`;
   assert.equal(stavkiA, 7);
+});
+
+/* =========================================================================
+ * 0025 — komande i njihovi događaji
+ * ====================================================================== */
+
+/** Sintetički uređaj bez ključa; ovde se testira šema, ne potpis. */
+async function uredjajUBazi() {
+  const [d] = await db.sql<{ id: string }[]>`
+    INSERT INTO sync_devices
+      (device_code, label, source_system, issuer_code, status, registered_by,
+       activated_by, activated_at)
+    VALUES (${`dev-${randomUUID().slice(0, 8)}`}, 'QA', 'biznisoft', ${ISSUER}, 'active',
+            ${owner.id}, ${owner.id}, now())
+    RETURNING id`;
+  return d.id;
+}
+
+async function komandaUBazi(deviceId: string, status = "queued") {
+  const [k] = await db.sql<{ id: string }[]>`
+    INSERT INTO sync_commands
+      (device_id, source_system, issuer_code, command_type, command_version,
+       requested_by, status, available_at, expires_at)
+    VALUES (${deviceId}, 'biznisoft', ${ISSUER}, 'scan_and_sync', 1,
+            ${owner.id}, ${status}::sync_command_status, now(), now() + interval '7 days')
+    RETURNING id`;
+  return k.id;
+}
+
+test("jedan uređaj ne može imati dve otvorene komande", async (t) => {
+  if (guard(t)) return;
+  const deviceId = await uredjajUBazi();
+  await komandaUBazi(deviceId);
+
+  /*
+   * Ovo je jedina odbrana od dvostrukog klika koja preživljava dva paralelna
+   * submit-a: aplikativna provera „ima li već otvorene“ ima prozor između
+   * čitanja i upisa, a delimičan jedinstveni indeks nema.
+   */
+  for (const stanje of ["queued", "delivered", "running", "retry_pending"]) {
+    await assert.rejects(
+      () => komandaUBazi(deviceId, stanje),
+      /duplicate key|unique/i,
+      `stanje ${stanje} nije zaštićeno`,
+    );
+  }
+
+  // Završena komanda NE blokira novu: sledeći put se sme tražiti ponovo.
+  /*
+   * `finished_at` ide uz završno stanje — ograničenje `sync_commands_finished_ck`
+   * to traži, i zato „završena“ komanda ne može da postoji bez vremena završetka.
+   */
+  await db.sql`
+    UPDATE sync_commands SET status = 'completed', finished_at = now()
+     WHERE device_id = ${deviceId}`;
+  const nova = await komandaUBazi(deviceId);
+  assert.ok(nova);
+});
+
+test("drugi uređaj sme svoju komandu u isto vreme", async (t) => {
+  if (guard(t)) return;
+  // Ograničenje je po uređaju, ne globalno — dve kancelarije se ne blokiraju.
+  const a = await uredjajUBazi();
+  const b = await uredjajUBazi();
+  assert.ok(await komandaUBazi(a));
+  assert.ok(await komandaUBazi(b));
+});
+
+test("nepoznat tip komande ne može ni da uđe u bazu", async (t) => {
+  if (guard(t)) return;
+  const deviceId = await uredjajUBazi();
+  /*
+   * Tip je enum sa JEDNOM vrednošću. Da je `text`, dovoljna bi bila jedna
+   * greška u kodu da server pošalje uređaju nešto što ovaj ne razume.
+   */
+  await assert.rejects(
+    () => db.sql`
+      INSERT INTO sync_commands
+        (device_id, source_system, issuer_code, command_type, command_version,
+         requested_by, status, available_at, expires_at)
+      VALUES (${deviceId}, 'biznisoft', ${ISSUER}, 'run_shell', 1,
+              ${owner.id}, 'queued', now(), now() + interval '1 day')`,
+    /invalid input value for enum|sync_command_type/i,
+  );
+});
+
+test("događaji komande su append-only i posle 0025", async (t) => {
+  if (guard(t)) return;
+  const deviceId = await uredjajUBazi();
+  const commandId = await komandaUBazi(deviceId, "running");
+  await db.sql`
+    INSERT INTO sync_command_events
+      (command_id, client_event_id, actor_device_id, sequence, status)
+    VALUES (${commandId}, 'evt-migration', ${deviceId}, 1, 'running')`;
+
+  /*
+   * Okidači se proveravaju POSLE migracije, ne pre.
+   *
+   * Migracija koja bi ih privremeno ugasila da bi prošla, a zaboravila da ih
+   * vrati, izgledala bi kao uspešna — a zaštita bi bila isključena.
+   */
+  await assert.rejects(
+    () => db.sql`UPDATE sync_command_events SET status = 'completed'`,
+    /append/i,
+  );
+  await assert.rejects(
+    () => db.sql`DELETE FROM sync_command_events WHERE client_event_id = 'evt-migration'`,
+    /append/i,
+  );
+});
+
+test("isti `client_event_id` ne može dvaput u istoj komandi", async (t) => {
+  if (guard(t)) return;
+  const deviceId = await uredjajUBazi();
+  const prva = await komandaUBazi(deviceId, "running");
+
+  const upisi = (commandId: string) => db.sql`
+    INSERT INTO sync_command_events
+      (command_id, client_event_id, actor_device_id, sequence, status)
+    VALUES (${commandId}, 'evt-ponovljen', ${deviceId}, 1, 'running')`;
+
+  await upisi(prva);
+  // Idempotentnost ACK-a stoji na OVOM indeksu, ne na proveri u kodu.
+  await assert.rejects(() => upisi(prva), /duplicate key|unique/i);
+
+  // Ali isti ID u DRUGOJ komandi je legitiman: brojači kreću od nule.
+  await db.sql`
+    UPDATE sync_commands SET status = 'completed', finished_at = now() WHERE id = ${prva}`;
+  const druga = await komandaUBazi(deviceId, "running");
+  await upisi(druga);
+});
+
+test("brisanje uređaja ne briše istoriju komandi", async (t) => {
+  if (guard(t)) return;
+  const deviceId = await uredjajUBazi();
+  await komandaUBazi(deviceId);
+
+  /*
+   * Isto pravilo koje već važi za trag: uređaj se opoziva, ne briše. Kaskadno
+   * brisanje bi značilo da se istorija uklanja uklanjanjem uređaja.
+   */
+  await assert.rejects(
+    () => db.sql`DELETE FROM sync_devices WHERE id = ${deviceId}`,
+    /foreign key|violates/i,
+  );
 });

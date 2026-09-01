@@ -6,6 +6,14 @@ import { createHash } from "node:crypto";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  HANDOFF_ZAGLAVLJE,
+  proveriHandoff,
+  proveriRunbook,
+  proveriStartHere,
+  runnerProvere,
+} from "./smoke-docs-contract.mjs";
+
 /**
  * Sklapa prenosiv Windows smoke paket.
  *
@@ -169,6 +177,41 @@ if (!existsSync(join(DIST, "package.json"))) {
   console.error("Nema `connector/dist`. Pokreni prvo: npm run connector:build");
   process.exit(1);
 }
+
+/* --- 1b. Papir mora da odgovara runneru — PRE nego što išta nastane. ------ */
+/*
+ * Predat je paket `2ffb15b` uz `START-HERE.md` koji je i dalje tvrdio `90374b1`
+ * i tražio rezultat pod imenom koje runner nikada ne napiše, dok je runbook
+ * tražio „10/10" nad runnerom od šesnaest provera i nalagao brisanje STVARNE
+ * fakture kao dokaz da je folder read-only.
+ *
+ * `MANIFEST.md` to nije mogao da uhvati: on dokazuje da su fajlovi neizmenjeni,
+ * ne da im je sadržaj i dalje tačan. Zato se ovde pakovanje ODBIJA.
+ */
+const RUNBOOK = "docs/b2b/recommendation-office-validation-runbook.md";
+const runnerIdevi = runnerProvere(readFileSync(join(KOREN, "connector/smoke/run-smoke.mjs"), "utf8"));
+
+const papir = [
+  ["connector/smoke/START-HERE.md", proveriStartHere({
+    tekst: readFileSync(join(KOREN, "connector/smoke/START-HERE.md"), "utf8"),
+    runnerIdevi,
+  })],
+  [RUNBOOK, proveriRunbook({
+    tekst: readFileSync(join(KOREN, RUNBOOK), "utf8"),
+    runnerIdevi,
+  })],
+];
+
+const papirniNalazi = papir.filter(([, n]) => n.length > 0);
+if (papirniNalazi.length > 0) {
+  console.error("Pakovanje ODBIJENO — uputstvo se ne poklapa sa runnerom.");
+  for (const [fajl, nalazi] of papirniNalazi) {
+    console.error(`  ${fajl}:`);
+    for (const n of nalazi) console.error(`    - ${n}`);
+  }
+  process.exit(1);
+}
+console.log(`Papir provere: ${runnerIdevi.length} provera runnera, uputstva se poklapaju.`);
 
 const IME = `carsystem-windows-smoke-${KRATKI}`;
 const IZLAZ = process.env.CS_SMOKE_OUT_DIR
@@ -393,12 +436,129 @@ for (const x of uZipu) {
 }
 
 const zipSha = createHash("sha256").update(readFileSync(ZIP)).digest("hex");
+const zipBajtova = statSync(ZIP).size;
+
+/* --- 8. Handoff PORED arhive. ------------------------------------------- */
+/*
+ * Arhiva ne može da sadrži sopstveni konačni otisak: otisak nastaje tek kada je
+ * zatvorena. Zato ime, hash, veličina i broj fajlova idu u odvojen fajl koji
+ * stoji uz nju.
+ *
+ * Sadrži IME arhive, ne njenu putanju — putanja bi odala mašinu na kojoj je
+ * paket nastao, a to je isti razlog zbog kog scan iznad odbija apsolutne
+ * putanje u sadržaju.
+ */
+const HANDOFF_IME = `WINDOWS-HANDOFF-${KRATKI}.md`;
+const HANDOFF = join(IZLAZ, HANDOFF_IME);
+const zipIme = `${IME}.zip`;
+
+const handoffTekst = [
+  `# Windows handoff — ${KRATKI}`,
+  "",
+  `**${HANDOFF_ZAGLAVLJE}**`,
+  "",
+  "Ovaj fajl stoji PORED arhive, ne u njoj: arhiva ne može da sadrži sopstveni",
+  "konačni otisak. Sve što je ovde napisano proverava se pre nego što se paket",
+  "uopšte pokrene.",
+  "",
+  "## Paket",
+  "",
+  "| | |",
+  "|---|---|",
+  `| Arhiva | \`${zipIme}\` |`,
+  `| SHA-256 | \`${zipSha}\` |`,
+  `| Bajtova | ${zipBajtova} |`,
+  `| Fajlova u arhivi | ${redovi.length} |`,
+  `| Izvorni HEAD | \`${HEAD}\` |`,
+  `| Grana | \`${GRANA}\` |`,
+  `| Runtime | ${meta.requiredNode} |`,
+  "",
+  "## Provera na Windowsu, pre pokretanja",
+  "",
+  "```powershell",
+  `Get-FileHash .\${zipIme} -Algorithm SHA256`,
+  "```",
+  "",
+  "Mora dati hash iz tabele iznad. Ako ne da — paket se ne pokreće.",
+  "",
+  "## Koraci",
+  "",
+  "1. Instaliraj zvanični Windows x64 **Node 24 LTS** sa nodejs.org; `node --version`",
+  "   mora dati `v24.14.x`.",
+  "2. Raspakuj u putanju sa **razmakom i srpskim slovima**, npr.",
+  "   `C:\Users\<nalog>\Desktop\Carsystem Smoke ČĆŽŠĐ\`. To je deo provere `W03`.",
+  "3. Pokreni `smoke\RUN-SMOKE.cmd`. **Ne kao Administrator.**",
+  "4. Jedini prolaz je ispis **`SMOKE PASS`** (izlazni kod 0).",
+  "   `SMOKE INCOMPLETE` (4) i `SMOKE FAIL` (1) nisu prolaz. **Ne broj testove** —",
+  "   „9 od 10 [WIN]“ je očekivano, jer je jedan test namerno ručan.",
+  "5. Pošalji `windows-smoke-result-" + KRATKI + ".md` iz `%TEMP%\\Carsystem Smoke ČĆŽŠĐ\\`.",
+  "   `testovi-tap.log` **ne šalji**.",
+  "",
+  "Detaljno uputstvo je `START-HERE.md` u samoj arhivi.",
+  "",
+  "## Šta ovaj prolaz NE radi",
+  "",
+  "- ne dodiruje nijednu pravu fakturu, ni čitanjem ni pisanjem;",
+  "- ne šalje ništa na mrežu (konfiguracija je `https://smoke.invalid`);",
+  "- ne registruje uređaj i ne uključuje nijedan feature gate;",
+  "- ne pravi Scheduled Task, servis ni autostart;",
+  "- ne menja NTFS dozvole i ne traži administratorska prava.",
+  "",
+  "Provera dozvola nad BizniSoft folderom se u ovom prolazu svodi na **čitanje**",
+  "`icacls` ispisa. Aktivna provera dolazi kasnije i izvodi se isključivo nad",
+  "namenskim sentinel fajlom, nikada nad pravom fakturom.",
+  "",
+].join("\n");
+
+writeFileSync(HANDOFF, handoffTekst);
+
+const handoffNalazi = proveriHandoff({
+  tekst: handoffTekst,
+  zipIme,
+  zipSha,
+  runnerIdevi,
+});
+if (handoffNalazi.length > 0) {
+  console.error(`Pakovanje ODBIJENO — ${HANDOFF_IME} nije ispravan.`);
+  for (const n of handoffNalazi) console.error(`  - ${n}`);
+  process.exit(1);
+}
+
+/* --- 9. Raniji paketi postaju NEVAŽEĆI za predaju. ---------------------- */
+/*
+ * Ništa se ne briše — stari paket može trebati za poređenje. Ali pored njega
+ * ostaje pisan trag da se ne predaje, jer je upravo mešanje dva ZIP-a i bilo
+ * uzrok neusklađenog uputstva.
+ */
+const raniji = readdirSync(IZLAZ)
+  .filter((f) => /^carsystem-windows-smoke-[0-9a-f]{7}\.zip$/.test(f) && f !== zipIme);
+for (const stari of raniji) {
+  const kratki = stari.slice("carsystem-windows-smoke-".length, -".zip".length);
+  writeFileSync(
+    join(IZLAZ, `NEVAZECI-${kratki}.md`),
+    [
+      `# NEVAŽEĆI paket — ne predavati`,
+      "",
+      `\`${stari}\``,
+      "",
+      `Zamenjuje ga **\`${zipIme}\`** (HEAD \`${KRATKI}\`), uz \`${HANDOFF_IME}\`.`,
+      "",
+      "Stari se čuva samo radi poređenja. Za predaju i za pokretanje na Windowsu",
+      "važi isključivo paket imenovan iznad.",
+      "",
+    ].join("\n"),
+  );
+}
 
 console.log("");
 console.log(`Paket:   ${ZIP}`);
 console.log(`HEAD:    ${HEAD} (${GRANA})`);
 console.log(`Fajlova: ${redovi.length}`);
-console.log(`Bajtova: ${statSync(ZIP).size}`);
+console.log(`Bajtova: ${zipBajtova}`);
 console.log(`SHA-256: ${zipSha}`);
+console.log(`Handoff: ${HANDOFF}`);
+if (raniji.length > 0) {
+  console.log(`Nevažeći: ${raniji.join(", ")} — označeni NEVAZECI-*.md`);
+}
 console.log("");
 console.log("Windows smoke se NE izvršava odavde — paket se prenosi i pokreće na Windowsu.");

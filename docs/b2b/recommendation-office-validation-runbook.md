@@ -26,15 +26,16 @@ Povezano: [21 — Windows konektor](21-windows-connector.md),
 Ova pravila se ne pregovaraju u toku dana. Ako neko od njih padne, dan se
 prekida i nastavlja se tek posle dogovora.
 
-1. **Windows smoke 0/10 znači da se full scan NE pokreće.** Nijedan izuzetak.
+1. **Bez ispisa `SMOKE PASS` full scan se NE pokreće.** Nijedan izuzetak.
    `SMOKE INCOMPLETE` **nije** prolaz — nepotpuna provera je isto što i
-   neizvršena.
+   neizvršena. Testovi se ne broje ručno; kriterijum je ispis runnera.
 2. **Neuspešan mali probni scan znači da se full scan NE pokreće.** Mali scan
    postoji upravo zato da se greška vidi na pet dokumenata, a ne na deset
    hiljada.
-3. **Folder sa PDF-ovima ostaje read-only.** Servisni nalog ima Read i List, i
-   ništa više. Ako konektor može da izmeni, obriše ili preimenuje ijedan PDF,
-   dan se prekida.
+3. **Folder sa PDF-ovima ostaje read-only, i to se PROVERAVA ČITANJEM.**
+   Servisni nalog ima Read i List, i ništa više. Nijedna provera se **nikada**
+   ne izvodi nad pravom fakturom — ni izmena, ni preimenovanje, ni brisanje.
+   Aktivna provera ide isključivo nad namenskim sentinel fajlom (vidi §7).
 4. **Stvarni PDF-ovi ne ulaze u Git.** Ni jedan, ni kao primer, ni „privremeno".
 5. **PII se ne kopira u izveštaj.** Bez naziva kupaca, PIB-a, adresa, brojeva
    dokumenata, imena fajlova i apsolutnih putanja.
@@ -45,26 +46,24 @@ prekida i nastavlja se tek posle dogovora.
 
 ---
 
-## 1. Potvrda tačnog paketa i hash-a
+## 1. Potvrda isporučenog paketa
 
-Na razvojnoj mašini, pre nego što se išta prenese:
+**Paket se ne pravi u kancelariji.** Nastao je na mašini koja pakuje, iz čistog
+HEAD-a; ovde se samo dokazuje da je stigao neizmenjen. Pravljenje paketa na
+Windowsu značilo bi da se meri nešto što niko pre toga nije video.
 
-```bash
-git rev-parse HEAD
+Uz ZIP je stigao **`WINDOWS-HANDOFF-<shortHead>.md`** — odvojen fajl, pored
+arhive, ne u njoj. U njemu su tačno ime ZIP-a, njegov SHA-256, veličina i broj
+fajlova. Arhiva ne može da sadrži sopstveni otisak, jer otisak nastaje tek kad
+je zatvorena; zato hash nosi handoff, a ne ovaj dokument.
+
+Provera otiska arhive (PowerShell, u folderu u kome je ZIP):
+
+```powershell
+Get-FileHash .\carsystem-windows-smoke-<shortHead>.zip -Algorithm SHA256
 ```
 
-Očekivano: `2ffb15beb2b3c25bb480297d27e7971adda1fc31` (grana
-`fix/windows-smoke-portability`), ili commit koji je iz nje izrastao.
-
-```bash
-npm run connector:smoke:package
-npm run connector:smoke:verify
-```
-
-Paket ide u `dist/` i sadrži `MANIFEST.md` sa SHA-256 otiskom **svakog** fajla i
-sa izvornim HEAD-om.
-
-Na kancelarijskom računaru, iz raspakovanog foldera (PowerShell):
+Zatim raspakovati i proveriti sadržaj naspram `MANIFEST.md` iz paketa:
 
 ```powershell
 Get-ChildItem -Recurse -File | ForEach-Object {
@@ -73,11 +72,18 @@ Get-ChildItem -Recurse -File | ForEach-Object {
 }
 ```
 
-**Uslov za nastavak:** svaki otisak se poklapa sa `MANIFEST.md`, i HEAD u
-manifestu je onaj koji je gore potvrđen.
+Verzija paketa se čita iz njega samog:
+
+```
+type smoke\package-meta.json
+```
+
+**Uslov za nastavak:** otisak ZIP-a je jednak onom iz handoff-a; svaki otisak
+fajla se poklapa sa `MANIFEST.md`; `shortHead` iz `package-meta.json` je isti
+kao u imenu handoff-a i ZIP-a.
 
 **Prekid:** bilo koje neslaganje. Ne „verovatno je zbog prenosa" — paket se
-pravi ponovo.
+prenosi ponovo, ili se pravi nov na mašini koja pakuje.
 
 ---
 
@@ -105,7 +111,7 @@ pada namerno.
 
 ---
 
-## 3. Svih 10 Windows smoke testova
+## 3. Windows smoke — 16 provera, jedan kriterijum
 
 ```
 smoke\RUN-SMOKE.cmd
@@ -114,31 +120,54 @@ smoke\RUN-SMOKE.cmd
 **Ne pokretati kao Administrator.** Nijedna provera ne traži povišena prava. Ako
 Windows sam ponudi — odbiti.
 
-Deset provera koje se izvršavaju (🟡 — napisane i spremne, nijedna još nije
-izvršena na Windows-u):
+Runner izvršava šesnaest provera (🟡 — napisane i spremne, nijedna još nije
+izvršena na Windows-u). Spisak je ovde da bi se ispis mogao pročitati, **ne da
+bi se brojao**:
 
-| # | Šta dokazuje |
+| ID | Šta dokazuje |
 |---|---|
-| W01 | DPAPI Protect/Unprotect vraća isti ključ |
-| W02 | tajna ne prolazi kroz komandnu liniju |
-| W03 | DPAPI drugog naloga ne otključava ključ |
-| W04 | putanja sa razmacima, srpskim slovima i UNC oblikom |
-| W05 | fajl koji drži drugi proces se ODLAŽE, ne gubi |
-| W06 | red preživljava restart procesa na Windows fajl sistemu |
-| W07 | skripta zadatka je podrazumevano dry-run |
-| W08 | registracija i uklanjanje Task Scheduler zadatka |
-| W09 | spakovan konektor se pokreće preko `connector.cmd` |
-| W10 | spakovan konektor odbija test skladište ključa |
+| `W01` | Windows izdanje i arhitektura |
+| `W02` | Node 24.14.x |
+| `W03` | paket raspakovan u putanju sa razmakom i `ČĆŽŠĐ` |
+| `W04` | spakovan `connector.cmd` se pokreće |
+| `W05` | `doctor` u izolovanoj konfiguraciji |
+| `W06` | `init` pravi ključ kroz DPAPI, bez tajne na ekranu |
+| `W07` | ponovljen `init` NE menja ključ |
+| `W08` | privatni ključ ne prolazi kroz stdout ni stderr |
+| `W09` | dry-run čita SAMO sintetički folder i ništa ne šalje |
+| `W10` | red preživljava nov proces (`node:sqlite`, WAL) |
+| `W11` | `poll-once` bez konfiguracije daje jasnu grešku |
+| `W12` | `watch` bez konfiguracije STAJE, bez tight loop-a |
+| `W13` | `task.ps1` ostaje dry-run i NE pravi zadatak |
+| `W14` | spakovan konektor ne bira test skladište ključa |
+| `W15` | postojeći connector testovi (uključujući `[WIN]`) |
+| `W15-win` | `[WIN]` skup je stvarno izvršen na ovoj mašini |
 
-Ispis na kraju je tačno jedan od tri:
+Ključne provere — jedna preskočena među njima obara ceo prolaz: `W05`, `W06`,
+`W07`, `W10`, `W14`, `W15-win`.
 
-| Ispis | Značenje | Nastavak |
+### Jedini kriterijum je ispis
+
+| Ispis | Izlazni kod | Nastavak |
 |---|---|---|
-| `SMOKE PASS` | sve provere prošle | da |
-| `SMOKE INCOMPLETE` | ništa nije palo, ali ključna provera je preskočena | **ne** |
-| `SMOKE FAIL` | bar jedna provera je pala | **ne** |
+| `SMOKE PASS` | 0 | da |
+| `SMOKE INCOMPLETE` | 4 | **ne** |
+| `SMOKE FAIL` | 1 | **ne** |
 
-**Uslov za nastavak:** `SMOKE PASS`, 10/10.
+**Ne broji testove i ne traži „sve zeleno" ručno.** Runner sam zna koliko
+provera ima i koja sme da bude preskočena.
+
+### Jedan `[WIN]` test je NAMERNO ručan
+
+`[WIN]` skup ima deset testova. Devet se izvršava; deseti — **registracija i
+uklanjanje Scheduled Task-a** (`task.ps1 -Action install -Apply`) — sam sebe
+preskače, jer menja sistem. `W15-win` zato prihvata tačno jedan preskočen
+`[WIN]` test i ispisuje „9 od 10 izvršeno".
+
+**„9 od 10" je očekivano stanje, ne nedostatak.** Deset izvršenih bi značilo da
+je neko sistem ipak promenio.
+
+**Uslov za nastavak:** ispis je `SMOKE PASS`.
 
 **Prekid:** `SMOKE FAIL` ili `SMOKE INCOMPLETE` → dan se zaustavlja ovde. Nema
 malog scan-a, nema full scan-a, nema recompute-a.
@@ -149,41 +178,54 @@ malog scan-a, nema full scan-a, nema recompute-a.
 
 Runner upisuje u `%TEMP%\Carsystem Smoke ČĆŽŠĐ\`:
 
-- **`windows-smoke-result-2ffb15b.md`** ← ovo se čuva i šalje;
-- `windows-smoke-result-2ffb15b.json` ← opciono, uz gornji;
+- **`windows-smoke-result-<shortHead>.md`** ← ovo se čuva i šalje;
+- `windows-smoke-result-<shortHead>.json` ← opciono, uz gornji;
 - `testovi-tap.log` ← **NE šalje se.** Ostaje na računaru dok se zajedno ne
   pregleda i redigujem.
 
-Ime fajla nosi kratak HEAD paketa. Ako se ne poklapa sa onim iz koraka 1, merena
-je druga verzija.
+`<shortHead>` je vrednost iz `smoke/package-meta.json`; runner je sam upisuje u
+ime fajla. Ako ime nosi drugi `shortHead` nego što piše u tom fajlu — pokrenut
+je pogrešan paket i rezultat se ne šalje.
 
 Redigovani rezultat ne sadrži korisničko ime, ime računara, apsolutne putanje,
 ključeve, potpise, PIB, nazive kupaca ni stack trace. 🟢
 
 ---
 
-## 5. Potvrda identiteta servisnog naloga i zadatka
+## 5. Task Scheduler — očekuje se da zadatak NE POSTOJI
+
+Smoke **ne instalira** trajni zadatak. `task.ps1` se poziva isključivo u
+dry-run režimu (`W13`), a `[WIN]` test koji bi ga stvarno registrovao sam sebe
+preskače.
 
 ```powershell
 schtasks /Query /TN "Carsystem Sync" /V /FO LIST
 ```
 
-Zapisati (bez korisničkog imena u izveštaju — samo potvrda da je tačan):
+**Očekivan odgovor danas: „ERROR: The system cannot find the file specified."**
+— dakle zadatak ne postoji. To je **ispravno stanje pre instalacije**, ne kvar
+smoke-a i ne razlog za prekid.
+
+Ako zadatak **postoji**, znači da ga je neko ranije instalirao. Tada se
+zapisuje (bez korisničkog imena u izveštaju — samo potvrda da je tačan):
 
 - `Run As User` je **namenski servisni nalog**, ne lični nalog vlasnika i ne
   `SYSTEM`;
-- `Scheduled Task State` je `Enabled`;
-- zadatak **ne** traži „Run with highest privileges".
+- `Scheduled Task State`;
+- da li traži „Run with highest privileges".
 
-**Uslov za nastavak:** zadatak radi pod namenskim nalogom.
+**Uslov za nastavak:** zadatak ne postoji, ili postoji pod namenskim nalogom.
 
-**Prekid:** zadatak pod ličnim nalogom ili pod `SYSTEM`. DPAPI ključ je vezan za
-nalog (`W01`, `W03`) — pogrešan nalog znači da ključ ili ne radi, ili radi pod
-identitetom koji ne treba da ga ima.
+**Prekid MALOG E2E (ne smoke-a):** zadatak pod ličnim nalogom ili pod `SYSTEM`.
+DPAPI ključ je vezan za nalog (`W06`, `W07`) — pogrešan nalog znači da ključ ili
+ne radi, ili radi pod identitetom koji ne treba da ga ima.
+
+Danas se **ne pokreće**: `task.ps1 -Action install -Apply`, autostart, ni
+`watch` režim.
 
 ---
 
-## 6. Dokaz Read/List-only NTFS prava
+## 6. Read/List-only NTFS prava — SAMO ČITANJE ispisa
 
 Nad folderom u kome BizniSoft ostavlja PDF-ove:
 
@@ -194,35 +236,67 @@ icacls "<folder sa PDF-ovima>"
 Servisni nalog sme da ima isključivo `(RX)` ili `(R)`. **Ne sme** da ima `(M)`,
 `(W)`, `(F)` ni `(D)`.
 
-Ako prava nisu takva, postavljaju se pre nastavka — to radi osoba koja
-administrira taj računar, ne konektor.
+Ovo je **čitanje ispisa i ništa više.** Za prvi offline prolaz je dovoljno.
+Nijedan fajl se ne dira, nijedno pravo se ne menja.
+
+Ako prava nisu takva, postavlja ih osoba koja administrira taj računar — ne
+konektor, i ne osoba koja vodi smoke.
+
+**Uslov za nastavak (mali E2E):** ispis pokazuje samo `(R)`/`(RX)` za servisni
+nalog.
+
+**Ne blokira offline smoke.** Smoke ne dodiruje taj folder uopšte.
 
 ---
 
-## 7. Dokaz da konektor ne može da menja PDF
+## 7. Aktivna ACL provera — tek uz namenski sentinel, i tek kasnije
 
-Pod **servisnim nalogom** (ne pod ličnim), u tom folderu:
+> **Ovo se sutra NE izvršava.** Ostaje za kancelarijsku prihvatnu proveru, kada
+> postoji namenski servisni nalog. Zapisano je ovde da bi se, kada za to dođe
+> vreme, izvelo tačno — a ne improvizovalo.
 
-```powershell
-# 1. izmena sadržaja mora da padne
-Add-Content -Path "<folder>\<neki>.pdf" -Value "x"
+### Zabranjeno, bez izuzetka
 
-# 2. preimenovanje mora da padne
-Rename-Item "<folder>\<neki>.pdf" "probni-naziv.pdf"
+Nijedna provera dozvola **nikada** se ne izvodi nad pravom fakturom. Ni izmena
+sadržaja, ni preimenovanje, ni brisanje, ni „samo da probam na jednom".
 
-# 3. brisanje mora da padne
-Remove-Item "<folder>\<neki>.pdf"
+Original PDF je jedini dokaz šta je na dokumentu stvarno pisalo. Provera koja ga
+može oštetiti nije provera nego rizik, i to rizik nad podatkom koji se ne može
+rekonstruisati. Ranija verzija ovog runbooka je tražila upravo to; bila je
+pogrešna.
+
+### Kako se izvodi kada dođe vreme
+
+**Ovlašćeni administrator** — ne servisni nalog, ne osoba koja vodi test —
+napravi jedan potrošan sentinel u tom folderu:
+
+```
+carsystem-permission-probe.txt
 ```
 
-**Uslov za nastavak:** sva tri pokušaja padaju sa `Access to the path … is
-denied`.
+Pre bilo kakvog pokušaja zabeleži se njegov otisak, da bi se posle znalo da li
+je ostao netaknut:
 
-**Prekid:** bilo koji uspe. Tada folder nije read-only, i konektor koji tamo
-radi može da ošteti originale — a original je jedini dokaz šta je stvarno
-pisalo na dokumentu.
+```powershell
+Get-FileHash "<folder>\carsystem-permission-probe.txt" -Algorithm SHA256
+```
 
-> Ako je neki fajl ipak izmenjen, on se **ne popravlja ručno**. Zapisuje se koji
-> je i dan se prekida.
+Zatim se **pod servisnim nalogom** pokušava izmena, preimenovanje i brisanje
+**isključivo nad tim sentinelom**. Sva tri pokušaja moraju pasti sa
+`Access to the path … is denied`.
+
+### Ako bilo šta uspe
+
+1. **Ne dirati nijedan pravi PDF** — ni radi provere, ni radi potvrde.
+2. **Prekinuti test odmah.**
+3. Sentinel vraća ili uklanja **administrator**, ne servisni nalog.
+4. Rezultat se zapisuje kao **ACL FAIL**, i mali E2E se ne izvodi dok se prava
+   ne isprave.
+
+### Posle provere
+
+Administrator uklanja sentinel. Ako je otisak sentinela promenjen, to je već
+`ACL FAIL` — bez obzira na to koji je pokušaj prošao.
 
 ---
 
@@ -423,7 +497,8 @@ Izveštaj je **tehnički** i **redigovan**. Sadrži isključivo:
 
 - HEAD paketa i grana,
 - `node --version`,
-- ishod Windows smoke (10/10 ili tačno koje su pale),
+- ishod Windows smoke (`SMOKE PASS` / `INCOMPLETE` / `FAIL`, i ID-jevi provera
+  koje su pale ili preskočene),
 - da li je servisni nalog namenski (da/ne, **bez imena naloga**),
 - ishod tri pokušaja izmene PDF-a (sva tri odbijena: da/ne),
 - brojače malog scan-a i full scan-a,
@@ -445,14 +520,53 @@ Stvarni PDF-ovi i `testovi-tap.log` ostaju na kancelarijskom računaru.
 
 ### Prekid bez nastavka
 
+### A. Kapije koje zaustavljaju i offline smoke
+
 | Nalaz | Posledica |
 |---|---|
-| hash paketa se ne poklapa | paket se pravi ponovo; ništa se ne pokreće |
-| `node --version` nije 24.14.x | staje se dok se Node ne postavi |
-| Windows smoke `FAIL` ili `INCOMPLETE` | **nema** malog scan-a ni full scan-a |
-| zadatak radi pod ličnim nalogom ili `SYSTEM` | staje se dok se ne ispravi |
-| folder nije read-only | staje se; konektor se ne pokreće nad njim |
-| bilo koji PDF izmenjen, obrisan ili preimenovan | **prekid dana**, zapisati koji |
+| otisak ZIP-a se ne poklapa sa handoff-om | ništa se ne pokreće; paket se prenosi ponovo |
+| otisak fajla se ne poklapa sa `MANIFEST.md` | isto |
+| `shortHead` u imenu ZIP-a ≠ `package-meta.json` | pokrenut bi bio pogrešan paket |
+| `node --version` nije 24.14.x, ili nije x64 | staje se dok se Node ne postavi |
+| ispis nije `SMOKE PASS` | **nema** malog scan-a ni full scan-a |
+
+### B. Kapije koje zabranjuju MALI E2E i FULL SCAN — ali NE offline smoke
+
+Svaka od ovih šest sama za sebe je dovoljna. Offline smoke se izvršava i kada su
+sve neispunjene, jer smoke ne dodiruje ni server, ni bazu, ni uređaj.
+
+| Nalaz | Zašto zaustavlja |
+|---|---|
+| **nema dostupnog HTTPS servera** | konektor odbija sve što nije HTTPS i odbija redirekcije; bez origina nema kome da se pošalje |
+| **nema potvrđenog backup/restore-a** ciljne baze | migracije su aditivne, ali down-migracija nema; bez PROVERENOG restore-a nema povratka |
+| **uređaj nije registrovan i aktiviran** | uređaj koji se javi pre registracije biva odbijen, i to izgleda kao kvar uređaja |
+| **migracije nisu potvrđene na ciljnoj staging bazi** | ingest bi pao na prvoj tabeli koje nema, posle prenosa dokumenata |
+| **nema gazda naloga ili vezanog drugog faktora** | registracija uređaja traži `devices:manage`, a portal u produkciji traži MFA |
+| **feature gate-ovi nisu kontrolisano podešeni** | uključen redosled je deo procedure, ne detalj — vidi §16 |
+
+Kada bilo koja od ovih šest padne: dan se **ne prekida**, nego se svodi na
+offline Windows smoke i na čitanje `icacls` ispisa. Ostalo se odlaže.
+
+#### „Kontrolisano podešeni gate-ovi" znači ovaj redosled
+
+Nijedan se ne uključuje unapred i nijedan se ne uključuje tokom smoke-a.
+`FEATURE_SYNC_OPERATIONS` **zahteva** prijem — kod ga proverava, pa uključivanje
+u pogrešnom redosledu ne radi ništa i izgleda kao kvar.
+
+| # | Promenljiva | Uključiti tek kada |
+|---|---|---|
+| — | *(nijedan)* | tokom offline smoke-a; smoke ne dodiruje mrežu |
+| 1 | `FEATURE_SYNC_DEVICE_INGEST=1` | smoke je `SMOKE PASS` **i** uređaj je registrovan i aktiviran |
+| 2 | `FEATURE_SYNC_OPERATIONS=1` | prijem stvarno radi |
+| 3 | `FEATURE_RECOMMENDATIONS=1` | mali scan je gotov i mapiranja su razrešena |
+
+Gašenje ide obrnuto: 3 → 2 → 1.
+
+### C. Kapije koje zaustavljaju posle početka
+
+| Nalaz | Posledica |
+|---|---|
+| sentinel je izmenjen, preimenovan ili obrisan | **ACL FAIL**; nijedan pravi PDF se ne dira, test se prekida |
 | mali scan `failed`/`blocked` | **nema** full scan-a |
 | odstupanje u zbiru pri pregledu dokumenata | **nema** full scan-a |
 | ekran preporuka tvrdi količinu, cenu ili porudžbinu | prekid, prijava kao greška |
@@ -499,17 +613,22 @@ Ovo se ne rešava sutra i ne treba pokušavati:
 ## Kontrolna lista za štampu
 
 ```
-[ ]  1. hash paketa se poklapa sa MANIFEST.md, HEAD potvrđen
+--- OFFLINE SMOKE (izvodi se uvek) ---
+[ ]  1. otisak ZIP-a = handoff; MANIFEST.md se poklapa; shortHead potvrđen
 [ ]  2. Windows x64, node --version = v24.14.x, putanja sa razmakom i ČĆŽŠĐ
-[ ]  3. RUN-SMOKE.cmd → SMOKE PASS, 10/10
-[ ]  4. windows-smoke-result-<head>.md sačuvan; tap log NIJE poslat
-[ ]  5. Scheduled Task pod namenskim servisnim nalogom, Enabled
-[ ]  6. icacls: servisni nalog ima samo (R)/(RX)
-[ ]  7. izmena / preimenovanje / brisanje PDF-a — sva tri odbijena
+[ ]  3. RUN-SMOKE.cmd → ispis SMOKE PASS (ne brojati testove; „9 od 10 [WIN]" je očekivano)
+[ ]  4. windows-smoke-result-<shortHead>.md sačuvan; tap log NIJE poslat
+[ ]  5. schtasks: zadatak NE postoji — očekivano pre instalacije
+[ ]  6. icacls pročitan: servisni nalog ima samo (R)/(RX)
+
+--- MALI E2E (samo ako svih šest kapija iz §19B stoji) ---
+[ ]  7. aktivna ACL provera SAMO nad sentinelom — ili preskočena, po dogovoru
 [ ]  8. mali scan (≤5 PDF-ova) završen: completed / completed_with_review
 [ ]  9. heartbeat: uređaj active, javljanje od danas
 [ ] 10. brojači: posted > 0, blocked = 0
 [ ] 11. 3–5 dokumenata pregledano, bez odstupanja, bez PII u zapisu
+
+--- FULL SCAN (samo posle uspešnog malog scan-a) ---
 [ ] 12. full scan pokrenut
 [ ] 13. full scan završen; recompute NIJE pokretan u međuvremenu
 [ ] 14. conflict / pending_review / unsupported / nemapirane šifre zapisani

@@ -174,6 +174,8 @@
     "fixtures:biznisoft": "node scripts/fixtures/build-biznisoft-fixtures.mjs",
     "connector:build": "node connector/scripts/build.mjs",
     "connector:test": "npm run connector:build && node --test connector/test/*.test.mjs",
+    "connector:smoke:package": "npm run connector:build && node connector/scripts/package-smoke.mjs",
+    "connector:smoke:verify": "node connector/scripts/verify-smoke-package.mjs",
     "connector:e2e": "npm run connector:build && tsx --test --test-concurrency=1 --tsconfig db/integration/tsconfig.test.json db/integration/connectorEndToEnd.integration.test.mts"
   },
   "dependencies": {

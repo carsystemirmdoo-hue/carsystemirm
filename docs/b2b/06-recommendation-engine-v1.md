@@ -1,6 +1,10 @@
 # 06 — Preporuke, verzija 1
 
-> **Stanje: 🔵 u celini predloženo.** Ne postoji tabela preporuka, worker ni signal. 🟢
+> **Stanje (1. septembar 2026): 🟡 V1 je implementiran kao `cadence_v1`.**
+> Sekcije 1–10 su NACRT iz avgusta, pisan pre nego što je postojao ijedan uvezen
+> dokument. Ono što je stvarno isporučeno je **uže** i opisano je u
+> [§11](#11-šta-je-stvarno-isporučeno-kao-v1-cadence_v1) — ta sekcija je
+> merodavna. Sekcije 1–10 ostaju kao zapis kako se razmišljalo.
 >
 > Postoji samo `docs/PRODUCT_RECOMMENDATION_LOGIC.md` — javni blok „Slični
 > proizvodi", koji koristi **ručno kurirane** `relatedProductSlugs` i izričito
@@ -215,3 +219,118 @@ Nad **postojećom** shemom (`invoices` + `invoice_lines` 🟢), čim stigne uvoz
 Otvoreno pitanje iz tog dokumenta — *„Da li recommendations kasnije dolaze iz BizniSofta, ručne administracije ili našeg kataloškog modela?"* — ostaje otvoreno i za javni blok. Ne rešava se ovde.
 
 🟡 **Odluka vlasnika:** sme li marža uticati na redosled preporuka. Predlog: **ne** u verziji 1 — preporuka koja gura skuplji artikal gubi poverenje kupca, a to je jedina stvar koju ovaj sistem gradi.
+
+---
+
+## 11. Šta je STVARNO isporučeno kao V1 (`cadence_v1`) 🟢
+
+Sve iznad je bio **nacrt iz avgusta 2026**, pisan pre nego što je postojao
+ijedan uvezen dokument. Ono što je implementirano 1. septembra 2026 je **uže** i
+razlikuje se namerno. Ova sekcija je merodavna; sekcije 1–10 ostaju kao zapis
+kako se razmišljalo.
+
+### 11.1 Pitanje na koje V1 odgovara
+
+> Koji kupac će verovatno uskoro ponovo tražiti koji BizniSoft artikal?
+
+Ništa više. Ovo je **interni** ekran za gazdu i komercijaliste
+(`/portal/preporuke`), ne kupčev blok.
+
+### 11.2 Namerna odstupanja od nacrta
+
+| Nacrt (§3–§7) | V1 | Zašto |
+|---|---|---|
+| `suggested_quantity` (S4) | **nema ga, ni kao kolonu** | GO/NO-GO audit: istorijska JM nije sačuvana na `invoice_lines`. Kolona bi bila mesto na koje neko upiše pretpostavku. |
+| efektivna cena uz preporuku | **nema je** | preporuka o terminu i tvrdnja o ceni su dva različita obećanja |
+| `BOUGHT_TOGETHER` (S7) | **nema ga** | cross-sell je drugo pitanje i drugi dokaz |
+| `SEASONAL` (S6) | **nema ga** | traži ≥ 2 godine istorije |
+| `REPLACEMENT` (S10) | **nema ga** | nema izvora zamena |
+| težinski `score` sa `w1…w5` | **nema ga** | jedan broj sastavljen od pet nekalibrisanih težina se ne može objasniti čoveku; zamenjen je **statusom** koji se čita rečenicom |
+| „Dodaj sve u korpu" | **nema ga** | V1 ne dodiruje korpu ni porudžbinu |
+| kupac vidi preporuke | **ne vidi ih** | V1 je isključivo interni |
+
+Zadržano iz nacrta: **medijana, ne prosek** (§3), **stabilnost preko MAD-a**
+(§3), **`reason_code` kao šifra, ne slobodan tekst** (§5), **`algorithm_version`
+uz svaki red** (§1), **unapred izračunato, portal samo čita** (§2), i **„ćuti kad
+ne zna"** (§1.6) — koje je ovde postalo status `insufficient_history`.
+
+### 11.3 Ulaz — uži od ledgera
+
+Algoritam ne čita `invoices`, `invoice_lines` ni ingest. Jedini ulaz je pogled
+`recommendation_input_lines` (migracija 0026), koji nad istim tabelama traži
+**sve** ovo:
+
+`source_document_id IS NOT NULL` · `validation_status = 'valid'` ·
+`revision_status = 'original'` · `manual_review <> 'pending'` ·
+`origin IN ('manual_upload','device')` · `document_kind = 'faktura'` ·
+kupac **trenutno** `mapped` po (izvor, izdavalac, šifra) · `article_code`
+neprazan · `quantity > 0` · `line_amount >= 0`.
+
+`effective_sales_ledger` je i dalje jedini izvor **prometa** i namerno je širi:
+propušta fakture iz ranijeg CSV uvoza (`sd.id IS NULL`) i ne proverava
+`validation_status`. Preporuka tvrdi nešto o budućnosti i ne sme da počiva na
+dokumentu bez revizione zaštite. 🟢
+
+### 11.4 Kupovni ciklus
+
+Događaj je `(customer_id, article_code, issued_on)`, uz `date_basis='issued_on'`
+zapisan uz svaki rezultat. Dva reda istog artikla na istoj fakturi i dve fakture
+istog dana daju **jedan** ciklus. Identitet artikla je **exact šifra**; naziv se
+čuva kao snapshot i nikad se ne koristi za povezivanje. 🟢
+
+### 11.5 Statusi i granice
+
+Deterministički, međusobno isključivi, proveravani ovim redom
+(`d` = dana do očekivanog, `t` = tolerancija):
+
+| Status | Uslov |
+|---|---|
+| `insufficient_history` | < 2 kupovine |
+| `provisional` | tačno 2 kupovine (uvek `low`) |
+| `dormant` | dana od poslednje ≥ 3 × medijana **i** ≥ 180 |
+| `overdue` | `d < −t` |
+| `due` | `−t ≤ d ≤ t` |
+| `due_soon` | `t < d ≤ t + lead` |
+| `not_yet` | `d > t + lead` |
+
+`t = clamp(MAD, 3, round(medijana/2))` · `lead = max(3, round(medijana/4))`.
+Sve granice su u `lib/recommendations/policy.mjs` i pokrivene su boundary
+testovima sa obe strane. `dormant` se proverava **pre** `overdue` jer je
+„kasni 340 dana" tačna i beskorisna rečenica. 🟢
+
+### 11.6 Pouzdanost
+
+`high` traži ≥ 6 ciklusa **i** stabilnost ≥ 0,60 **i** ≥ 4 ciklusa istorije;
+`medium` traži ≥ 4 / 0,40 / 2; sve ostalo je `low`, a `provisional` je uvek
+`low`.
+
+**Nije verovatnoća i ne prikazuje se kao procenat** — nijedan nivo nije
+kalibrisan nad stvarnim ishodima. Komponente se čuvaju odvojeno
+(`confidence_components`), da bi se videlo ZAŠTO je nivo baš takav. 🟢
+
+### 11.7 Recompute
+
+`recommendation_runs` + `recommendation_results` (migracija 0027). Rezultati
+postaju vidljivi tek kroz pogled `active_recommendations`, a `is_active` se
+postavlja u istoj transakciji, posle upisa svega. Zato delimično objavljen
+prolaz ne postoji, a neuspeh čuva prethodni rezultat kao **osobinu pogleda**, ne
+kao pravilo koje neko može zaboraviti. Dva delimična jedinstvena indeksa brane
+od dva aktivna i dva istovremena prolaza. 🟢
+
+Pokreće se **isključivo ručno**, uz sposobnost `recommendations:recompute`
+(danas samo gazda) i uz `FEATURE_RECOMMENDATIONS=1`. Automatskog recompute-a
+posle svakog dokumenta nema: uvoz istorije bi pokrenuo hiljade prolaza, a prvi
+koji bi se poklopio sa polovinom uvoza dao bi preporuke nad nepotpunim podacima.
+
+### 11.8 Performanse 🟢
+
+Sintetički korpus 25.000 dokumenata / 50.000 stavki / 10.000 parova:
+recompute **1.208 ms**, ponovljeni **1.165 ms**, prirast heap-a **148 MB**
+(`npm run test:recommendations:perf`).
+
+### 11.9 Šta i dalje blokira poslovnu validaciju 🔴
+
+Stvarnih ponovljenih parova `(customer_id, article_code)` **još nema**. Dok ih
+ne bude, pragovi iz §11.5 i §11.6 su polazni, a ne izmereni. Prvi obračun nad
+stvarnom istorijom je **početna validacija**, ne dokaz tačnosti — vidi
+[kancelarijski runbook](recommendation-office-validation-runbook.md).

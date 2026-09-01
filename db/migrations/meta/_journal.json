@@ -183,6 +183,13 @@
       "when": 1787588098283,
       "tag": "0025_sync_commands",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1787588098284,
+      "tag": "0026_recommendation_input",
+      "breakpoints": true
     }
   ]
 }

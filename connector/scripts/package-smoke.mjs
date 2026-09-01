@@ -264,12 +264,9 @@ for (const f of fajlovi) {
    * lookahead na `\s`, `\d`, `\w`, `\b`, `\n`, `\r`, `\t`, `\.`: to su
    * escape-ovi, ne folderi.
    */
-  const APSOLUTNA = /(?:\/Users\/|\/home\/|[A-Za-z]:\\(?![sSdDwWbBnrt.]))[^\s"'`)]{3,}/g;
-  if (!apsolutnaPregledana(r)) {
-    for (const _ of sadrzaj.matchAll(APSOLUTNA)) {
-      nalazi.push(`${r}: apsolutna putanja`);
-      break;
-    }
+  const APSOLUTNA = /(?:\/Users\/|\/home\/|[A-Za-z]:\\(?![sSdDwWbBnrt.]))[^\s"'`)]{3,}/;
+  if (!apsolutnaPregledana(r) && APSOLUTNA.test(sadrzaj)) {
+    nalazi.push(`${r}: apsolutna putanja`);
   }
 }
 
@@ -374,7 +371,8 @@ const lista = execFileSync("unzip", ["-Z1", ZIP], { encoding: "utf8" })
   .split("\n")
   .filter(Boolean)
   .map((x) => x.replace(`${IME}/`, ""))
-  .filter((x) => !x.endsWith("/"));
+  // Koren arhive posle skidanja prefiksa postaje prazan niz — nije fajl.
+  .filter((x) => x !== "" && !x.endsWith("/"));
 
 const uZipu = new Set(lista);
 const ocekivani = new Set(redovi.map((r) => r.p).concat("MANIFEST.md"));

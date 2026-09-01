@@ -113,7 +113,7 @@ export async function recomputeRecommendations(
      *
      * Naziv indeksa se ipak NE prosleđuje u poruku: odaje šemu.
      */
-    if ((error as { code?: string })?.code === "23505") {
+    if (jeNarusenaJedinstvenost(error)) {
       throw new RecomputeError(
         "already_running",
         "Preračunavanje je već u toku. Sačekajte da se završi.",
@@ -294,6 +294,24 @@ export async function recomputeRecommendations(
       .where(eq(recommendationRuns.id, run.id));
     throw error;
   }
+}
+
+/**
+ * Da li je greška narušen jedinstveni indeks (`23505`).
+ *
+ * Traži se kroz LANAC uzroka, ne samo na vrhu: drizzle omotava grešku drajvera
+ * u svoju, pa `error.code` na vrhu nije Postgresov kod. Provera samo vrha je
+ * prolazila u razvoju i padala nad pravim drajverom — tačno obrnuto od onoga
+ * što test treba da pokaže.
+ */
+function jeNarusenaJedinstvenost(error: unknown): boolean {
+  let cvor: unknown = error;
+  // Granica dubine: `cause` lanac u principu može biti kružan.
+  for (let i = 0; i < 8 && cvor; i += 1) {
+    if ((cvor as { code?: string }).code === "23505") return true;
+    cvor = (cvor as { cause?: unknown }).cause;
+  }
+  return false;
 }
 
 /**

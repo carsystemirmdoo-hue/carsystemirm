@@ -2167,7 +2167,16 @@ try {
       }
 
       const v = await s.page.evaluate(() => {
-        const t = document.body.innerText;
+        /*
+         * Meri se SADRZAJ ekrana, ne okvir oko njega.
+         *
+         * `document.body.innerText` nosi i bocnu navigaciju, a od kada portal
+         * ima zasebnu stranu „Preporuke", ta stavka je red bez negacije i
+         * obarala bi provere ispod. Navigacija nije tvrdnja ekrana spremnosti;
+         * `.portal-main` jeste.
+         */
+        const glavni = document.querySelector(".portal-main") as HTMLElement | null;
+        const t = (glavni ?? document.body).innerText;
         return {
           tekst: t,
           /*

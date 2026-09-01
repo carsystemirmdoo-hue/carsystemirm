@@ -17,6 +17,13 @@ const nextConfig: NextConfig = {
    */
   outputFileTracingIncludes: {
     "/api/sync/ingest": ["./contracts/invoice-ingest/v1/schema.json"],
+    /*
+     * Rute komandi ne citaju ugovor, ali dele modul koji ga ucitava pri
+     * ucitavanju (`lib/sync/contract/validate.mjs`). Bez traga bi lokalni build
+     * prosao, a produkcija pala na prvom zahtevu.
+     */
+    "/api/sync/commands/poll": ["./contracts/invoice-ingest/v1/schema.json"],
+    "/api/sync/commands/update": ["./contracts/invoice-ingest/v1/schema.json"],
   },
   poweredByHeader: false,
   // `next build` i `next dev` dele isti izlazni folder. Ako se provera builda

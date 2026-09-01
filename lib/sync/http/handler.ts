@@ -9,7 +9,13 @@ import {
   type AuthenticatedDevice,
 } from "@/lib/sync/device/authenticate";
 import { HEADERS } from "@/lib/sync/device/signing.mjs";
-import { BodyError, isDeviceIngestEnabled, readBoundedBody, requireJsonContentType } from "./gate";
+import {
+  BodyError,
+  isDeviceIngestEnabled,
+  isSyncOperationsEnabled,
+  readBoundedBody,
+  requireJsonContentType,
+} from "./gate";
 
 /**
  * Zajednički put svakog zahteva sa uređaja.
@@ -63,11 +69,20 @@ export async function withAuthenticatedDevice(
     bodyBytes: Uint8Array;
     requestId: string;
   }) => Promise<Response>,
+  opcije: { trazi?: "ingest" | "operations" } = {},
 ): Promise<Response> {
   const requestId = crypto.randomUUID();
 
   /* --- 1. Gate. Podrazumevano isključen. ------------------------------- */
-  if (!isDeviceIngestEnabled()) {
+  /*
+   * Rute komandi traže SVOJ gate uz postojeći.
+   *
+   * Uključivanje prijema dokumenata ne sme usput da otvori i daljinsko
+   * pokretanje posla na kancelarijskom računaru — to su različite odluke.
+   */
+  const otvoreno =
+    opcije.trazi === "operations" ? isSyncOperationsEnabled() : isDeviceIngestEnabled();
+  if (!otvoreno) {
     /*
      * 404, ne 403.
      *

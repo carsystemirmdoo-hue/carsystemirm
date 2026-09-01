@@ -28,6 +28,23 @@ export function isDeviceIngestEnabled(env: NodeJS.ProcessEnv = process.env): boo
   return env[FEATURE_FLAG] === "1";
 }
 
+/** Ime promenljive za operativne komande (P4). */
+export const OPERATIONS_FLAG = "FEATURE_SYNC_OPERATIONS";
+
+/**
+ * Ručne komande su PODRAZUMEVANO ISKLJUČENE, i to nezavisno od prijema.
+ *
+ * Dva gate-a, ne jedan: prijem dokumenata i daljinsko pokretanje posla na
+ * kancelarijskom računaru su različite odluke. Uključivanje prijema ne sme
+ * usput da otvori i komande.
+ *
+ * Komande TRAŽE i prijem — komanda koja pokreće ciklus koji ne sme da šalje bi
+ * bila prazan hod koji izgleda kao kvar.
+ */
+export function isSyncOperationsEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  return isDeviceIngestEnabled(env) && env[OPERATIONS_FLAG] === "1";
+}
+
 /* =========================================================================
  * Ograničeno telo
  * ====================================================================== */

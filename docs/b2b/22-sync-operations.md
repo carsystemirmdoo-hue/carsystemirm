@@ -154,6 +154,12 @@ carsystem-connector poll-once   # jedan prolaz: nepotvrđeni događaji → koman
 carsystem-connector watch       # dugotrajno: raspored + komande, sa backoff-om
 ```
 
+Petlja **staje** na grešci podešavanja (`config_missing`, `key_missing`,
+`identity_mismatch`, `schema_newer`, `source_missing`): to čekanje ne popravlja.
+Da se i takva greška odlaže kao mrežna, pogrešno podešen konektor bi tiho
+backoff-ovao u nedogled i izgledao kao da radi — a u portalu bi se video uređaj
+koji se „nikad ne javlja“, bez ijednog traga zašto. 🟢
+
 `doctor` proverava kompatibilnost protokola (tip, verzija, šema lokalnog reda,
 pokrivenost potpisanih putanja) i **namerno ne poll-uje**: poll bi na serveru
 preuzeo stvarnu komandu i označio je isporučenom, a doctor je ne izvršava. 🟢
@@ -220,6 +226,10 @@ na ono što je već u bazi — a upravo bi ubačen tuđi ključ tako i prošao. 
 Uključujući pun tok: portal → komanda → konektor → `ingest` → **jedna faktura**,
 i najopasniji prozor — posao obavljen, završni ACK izgubljen, nov proces šalje
 isti `event_id`, faktura ostaje jedna.
+
+Browser QA (`npm run qa:pg:browser`) servira `.next-verify`, a `npm run build`
+piše u `.next`. Preflight sada **odbija zastareo build**: bez toga zelen prolaz
+može da potvrdi ekran koji više ne postoji — što je gore od pada, jer pad se vidi.
 
 🟡 **Implementirano, nije provereno na Windows-u**
 `watch` režim i `poll-once` iz spakovanog konektora rade na macOS-u; Windows

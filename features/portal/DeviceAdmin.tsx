@@ -68,64 +68,105 @@ export function DeviceAdmin() {
         </div>
       </div>
 
-      <form action={registruj}>
-        <label className="portal-field">
-          <span>Oznaka uređaja</span>
-          <input name="deviceCode" required maxLength={64} placeholder="office-pc-01" />
-        </label>
-        <label className="portal-field">
-          <span>Naziv</span>
-          <input name="label" required maxLength={120} placeholder="Kancelarija — glavni računar" />
-        </label>
-        <label className="portal-field">
-          <span>Izvorni sistem</span>
-          <input name="sourceSystem" required maxLength={64} defaultValue="biznisoft" />
-        </label>
-        <label className="portal-field">
-          <span>Izdavalac</span>
-          <input name="issuerCode" required maxLength={64} placeholder="QA01" />
-        </label>
-        <label className="portal-field">
-          <span>Oznaka ključa</span>
-          <input name="keyId" required maxLength={64} defaultValue="k1" />
-        </label>
-        <label className="portal-field">
-          <span>Javni ključ (SPKI base64)</span>
-          <input name="publicKeySpki" required placeholder="MCowBQYDK2VwAyEA…" />
-        </label>
-        <Posalji tekst="Registruj uređaj" />
-      </form>
-      <Poruka state={reg} />
+      {/*
+        * Tri KORAKA, ne tri forme jedna ispod druge.
+        *
+        * Registracija, aktivacija i opoziv su odvojene odluke i dešavaju se u
+        * različitim trenucima. Bez vidljive granice čovek koji prvi put vezuje
+        * uređaj ne zna gde jedan posao prestaje — a otisak se potvrđuje tek
+        * pošto ga uređaj ispiše, dakle nikad u istom dahu sa registracijom.
+        */}
+      <div className="portal-device-steps">
+        <section className="portal-device-step">
+          <h3>
+            <span className="portal-device-step-num">1</span> Registracija
+          </h3>
+          <p>Uređaj ulazi kao neaktivan. Registracija sama po sebi ništa ne otvara.</p>
+          <form action={registruj} className="portal-device-form">
+            <div className="portal-form-grid">
+              <label className="portal-field">
+                <span>Oznaka uređaja</span>
+                <input name="deviceCode" required maxLength={64} placeholder="office-pc-01" />
+              </label>
+              <label className="portal-field">
+                <span>Naziv</span>
+                <input name="label" required maxLength={120} placeholder="Kancelarija — glavni računar" />
+              </label>
+              <label className="portal-field">
+                <span>Izvorni sistem</span>
+                <input name="sourceSystem" required maxLength={64} defaultValue="biznisoft" />
+              </label>
+              <label className="portal-field">
+                <span>Izdavalac</span>
+                <input name="issuerCode" required maxLength={64} placeholder="QA01" />
+              </label>
+              <label className="portal-field">
+                <span>Oznaka ključa</span>
+                <input name="keyId" required maxLength={64} defaultValue="k1" />
+              </label>
+              <label className="portal-field" data-span="2">
+                <span>Javni ključ (SPKI base64)</span>
+                <input name="publicKeySpki" required placeholder="MCowBQYDK2VwAyEA…" />
+                <small>
+                  Iz <code>connector init</code>. Privatni deo nema polje u koje bi stao.
+                </small>
+              </label>
+            </div>
+            <Posalji tekst="Registruj uređaj" />
+          </form>
+          <Poruka state={reg} />
+        </section>
 
-      <form action={aktiviraj}>
-        <label className="portal-field">
-          <span>ID uređaja</span>
-          <input name="deviceId" required placeholder="uuid" />
-        </label>
-        <label className="portal-field">
-          <span>Oznaka ključa</span>
-          <input name="keyId" required defaultValue="k1" />
-        </label>
-        <label className="portal-field">
-          <span>Potvrđen otisak</span>
-          <input name="expectedFingerprint" required placeholder="sha256:…" />
-        </label>
-        <Posalji tekst="Aktiviraj" />
-      </form>
-      <Poruka state={akt} />
+        <section className="portal-device-step">
+          <h3>
+            <span className="portal-device-step-num">2</span> Aktivacija
+          </h3>
+          <p>
+            Otisak se <strong>upoređuje sa onim koji uređaj ispisuje</strong>. Bez te potvrde
+            aktivacija bi bila klik na ono što je već u bazi — a upravo bi ubačen tuđi ključ tako
+            i prošao.
+          </p>
+          <form action={aktiviraj} className="portal-device-form">
+            <div className="portal-form-grid" data-columns="3">
+              <label className="portal-field">
+                <span>ID uređaja</span>
+                <input name="deviceId" required placeholder="uuid" />
+              </label>
+              <label className="portal-field">
+                <span>Oznaka ključa</span>
+                <input name="keyId" required defaultValue="k1" />
+              </label>
+              <label className="portal-field">
+                <span>Potvrđen otisak</span>
+                <input name="expectedFingerprint" required placeholder="sha256:…" />
+              </label>
+            </div>
+            <Posalji tekst="Aktiviraj" />
+          </form>
+          <Poruka state={akt} />
+        </section>
 
-      <form action={opozovi}>
-        <label className="portal-field">
-          <span>ID uređaja</span>
-          <input name="deviceId" required placeholder="uuid" />
-        </label>
-        <label className="portal-field">
-          <span>Razlog opoziva</span>
-          <input name="reason" required minLength={3} maxLength={500} />
-        </label>
-        <Posalji tekst="Opozovi" />
-      </form>
-      <Poruka state={opo} />
+        <section className="portal-device-step" data-tone="danger">
+          <h3>
+            <span className="portal-device-step-num">3</span> Opoziv
+          </h3>
+          <p>Trajan. Opozvan uređaj se ne aktivira ponovo — registruje se nov.</p>
+          <form action={opozovi} className="portal-device-form">
+            <div className="portal-form-grid">
+              <label className="portal-field">
+                <span>ID uređaja</span>
+                <input name="deviceId" required placeholder="uuid" />
+              </label>
+              <label className="portal-field">
+                <span>Razlog opoziva</span>
+                <input name="reason" required minLength={3} maxLength={500} />
+              </label>
+            </div>
+            <Posalji tekst="Opozovi" />
+          </form>
+          <Poruka state={opo} />
+        </section>
+      </div>
 
       <p className="portal-readiness-note">
         Opoziv je trajan: opozvan uređaj se ne aktivira ponovo, nego se registruje nov. Istorija se

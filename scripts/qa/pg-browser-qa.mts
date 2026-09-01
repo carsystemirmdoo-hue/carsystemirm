@@ -230,6 +230,7 @@ const PREDUSLOVI: Record<string, () => string | null> = {
   "17": trebaTajna,
   // Spremnost trazi vlasnikovu STVARNO uspelu prijavu, ne samo postojanje tajne.
   "19": trebaPunuSesiju,
+  "20": trebaPunuSesiju,
 };
 
 /** Redni broj koraka iz njegovog imena („5. prijava kodom…" → „5"). */
@@ -2307,6 +2308,135 @@ try {
         `vlasnik: HTTP 200 bez rečnika preporuka, nulti imenitelj = „nije dostupno“, ` +
         `mobilni 390px bez vodoravnog curenja; ` +
         `komercijalista odbijen (HTTP ${status}), bez metrika i bez nav stavke`
+      );
+    } finally {
+      await w.zatvori();
+    }
+  });
+  await tok("20. sinhronizacija: vlasnik je vidi, iskljucen gate se ne krije, teren ne dobija", async () => {
+    const RUTA = "/portal/importi/sinhronizacija";
+
+    /* --- 20a. Vlasnik: ekran radi i POŠTENO kaže da je kanal ugašen. -- */
+    const s = await svezaSesija();
+    try {
+      const kod = await svezTotp(ownerSecret);
+      const url = await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(s.page, "prijava pred sinhronizaciju odbijena", nalozi.owner.id));
+      }
+
+      const nav = await otvori(s.page, RUTA, ".portal-panel");
+      if (!nav.stigao || (nav.status ?? 0) !== 200) {
+        throw new Error(
+          await dokazi(s.page, `sinhronizacija nedostupna vlasniku: HTTP=${nav.status}`, nalozi.owner.id),
+        );
+      }
+
+      const v = await s.page.evaluate(() => {
+        const t = document.body.innerText;
+        return {
+          tekst: t,
+          /*
+           * QA server radi bez oba feature flag-a — to je i podrazumevano
+           * stanje instalacije. Ekran to mora REĆI, ne prećutati: prazna
+           * tabela bez objašnjenja izgleda kao pokvaren uređaj.
+           */
+          kazeIskljuceno: /isključen|isključene/i.test(t),
+          // „Zatraženo“ ≠ „pokrenuto“ mora stajati na ekranu, ne samo u dokumentaciji.
+          razdvajaTvrdnje: /nije\s+„?pokrenuto/i.test(t) || /nije „pokrenuto“/i.test(t),
+          dugmad: [...document.querySelectorAll("button")].map((b) => b.textContent ?? ""),
+        };
+      });
+
+      if (!v.kazeIskljuceno) {
+        throw new Error(await dokazi(s.page, "ekran ne kaže da je kanal isključen"));
+      }
+      if (!v.razdvajaTvrdnje) {
+        throw new Error(await dokazi(s.page, "ekran ne razdvaja „zatraženo“ od „pokrenuto“"));
+      }
+
+      /*
+       * Nijedan trag tajne na ekranu.
+       *
+       * Privatni ključ nikad ne dolazi do portala i nema polje u koje bi stao;
+       * ovo je provera te tvrdnje nad STVARNIM DOM-om, ne nad izvorom.
+       */
+      const curi = await s.page.evaluate(() => {
+        const html = document.documentElement.innerHTML;
+        return ["PRIVATE KEY", "privateKey", "pkcs8", "BEGIN OPENSSH"].filter((x) =>
+          html.includes(x),
+        );
+      });
+      if (curi.length > 0) {
+        throw new Error(await dokazi(s.page, `ekran nosi trag privatnog ključa: ${curi.join(", ")}`));
+      }
+
+      await s.page.screenshot({ path: `${SHOTS}/07-sinhronizacija-1280.png`, fullPage: true });
+
+      // Mobilni: tabela uređaja je široka i vodoravno curenje se vidi samo ovde.
+      await s.page.setViewportSize({ width: 390, height: 844 });
+      await s.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+      const mob = await sacekajSmirenuAdresu(s.page);
+      if (!mob.includes(RUTA)) {
+        throw new Error(await dokazi(s.page, "mobilna sinhronizacija nije otvorena", nalozi.owner.id));
+      }
+      const siri = await s.page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      if (siri > 1) {
+        throw new Error(await dokazi(s.page, `mobilni prikaz curi vodoravno za ${siri}px`));
+      }
+      await s.page.screenshot({ path: `${SHOTS}/16-sinhronizacija-390.png`, fullPage: true });
+    } finally {
+      await s.zatvori();
+    }
+
+    /* --- 20b. Komercijalista bez `sync:monitor` ne dobija ekran. ------ */
+    const w = await svezaSesija();
+    try {
+      const setup = await beginMfaEnrollment({
+        userId: nalozi.worker.id,
+        accountLabel: nalozi.worker.email,
+      });
+      const workerTotp = await svezTotp(setup.base32);
+      const potvrda = await confirmMfaEnrollment({ userId: nalozi.worker.id, token: workerTotp });
+      if (!potvrda.ok) throw new Error("radnicki nalog nije vezao drugi faktor");
+
+      const kod = await svezTotp(setup.base32);
+      const url = await prijava(w.page, nalozi.worker.email, nalozi.worker.password, kod);
+      if (url.includes("/prijava")) {
+        throw new Error(await dokazi(w.page, "radnik se nije prijavio", nalozi.worker.id));
+      }
+
+      const res = await w.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+      const status = res?.status() ?? 0;
+      const v = await w.page.evaluate(() => ({
+        naslov: /Sinhronizacija/i.test(document.body.innerText),
+        // Ni jedan uređaj, ni jedna oznaka opsega ne sme da procuri u odbijanje.
+        redova: document.querySelectorAll(".portal-table tbody tr").length,
+        navStavka: [...document.querySelectorAll("a")].filter((a) =>
+          (a.getAttribute("href") ?? "").includes("/importi/sinhronizacija"),
+        ).length,
+      }));
+
+      if (status === 200 && v.naslov) {
+        throw new Error(
+          await dokazi(w.page, "komercijalista bez sync:monitor dobio ekran", nalozi.worker.id),
+        );
+      }
+      if (v.redova > 0) {
+        throw new Error(await dokazi(w.page, "odbijanje je procurilo redove tabele", nalozi.worker.id));
+      }
+      if (v.navStavka > 0) {
+        throw new Error(
+          await dokazi(w.page, "navigacija nudi sinhronizaciju nalogu bez dozvole", nalozi.worker.id),
+        );
+      }
+
+      return (
+        `vlasnik: HTTP 200, isključen gate je prijavljen, „zatraženo“ razdvojeno od ` +
+        `„pokrenuto“, bez traga privatnog ključa, mobilni 390px bez curenja; ` +
+        `komercijalista odbijen (HTTP ${status}), bez redova i bez nav stavke`
       );
     } finally {
       await w.zatvori();

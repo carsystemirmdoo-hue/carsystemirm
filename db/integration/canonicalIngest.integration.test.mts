@@ -445,6 +445,12 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
     // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.
     "sync/heartbeat/route.ts",
     "sync/ingest/route.ts",
+    /*
+     * P4: ručne komande, iza DRUGOG gate-a koji je takođe podrazumevano
+     * isključen. Idu kroz isti `withAuthenticatedDevice` kao prijem.
+     */
+    "sync/commands/poll/route.ts",
+    "sync/commands/update/route.ts",
   ];
 
   const rute: string[] = [];
@@ -472,7 +478,7 @@ test("svaka `/api/sync` ruta sama sprovodi gate i autentifikaciju", async (t) =>
    * jedna izmena `matcher`-a bi tiho otvorila rutu. Zato svaka ruta mora da
    * prođe kroz `withAuthenticatedDevice`, koji nosi i gate i potpis.
    */
-  for (const ruta of ["ingest", "heartbeat"]) {
+  for (const ruta of ["ingest", "heartbeat", "commands/poll", "commands/update"]) {
     const izvor = await readFile(new URL(`app/api/sync/${ruta}/route.ts`, KORENSKI), "utf8");
     assert.match(
       izvor,
@@ -485,6 +491,8 @@ test("svaka `/api/sync` ruta sama sprovodi gate i autentifikaciju", async (t) =>
 
   const handler = await readFile(new URL("lib/sync/http/handler.ts", KORENSKI), "utf8");
   assert.match(handler, /isDeviceIngestEnabled/, "gate nije u zajedničkom putu");
+  // P4 traži i drugi gate; komanda ne sme da prođe kroz prvi sama.
+  assert.match(handler, /isSyncOperationsEnabled/, "operativni gate nije u zajedničkom putu");
   assert.match(handler, /authenticateDeviceRequest/, "potpis nije u zajedničkom putu");
 });
 

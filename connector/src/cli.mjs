@@ -37,7 +37,7 @@ function ispisi(objekat) {
 }
 
 /** Putanje lokalnog stanja; sve pod jednim folderom, u profilu naloga. */
-function putanje(env = process.env) {
+export function putanje(env = process.env) {
   const bazaDb = podrazumevanaPutanjaStanja(env);
   const folder = dirname(bazaDb);
   return {
@@ -330,6 +330,14 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
  * Radi POD BRAVOM — komanda ne otvara drugi konkurentni scan; ako neki ciklus
  * već traje, ovaj prolaz ne radi ništa.
  */
+/**
+ * Jedan prolaz kroz komande.
+ *
+ * Vraća `{ kod, zdravo }`. `zdravo` NIJE isto što i „izlazni kod 0“: server koji
+ * je odgovorio „nema komandi“ je zdrav, a nedostupna mreža, odbijen uređaj i
+ * ugašen gate nisu — iako nijedno od toga nije pad procesa. Bez te razlike bi
+ * `watch` petlja bez interneta zauvek pitala svakih 45 s.
+ */
 async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = false } = {}) {
   const reci = (o) => {
     // U `watch` petlji se ispisuje samo ono što se stvarno desilo.
@@ -339,9 +347,10 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
   const vlasnik = `${process.pid}@${now.toISOString()}`;
   const brava = store.uzmiZakljucavanje({ vlasnik, now });
   if (!brava.uzeto) {
+    // Drugi proces radi; to nije kvar veze i ne ubrzava se ponavljanjem.
     reci({ komanda: "poll-once", status: "zauzeto" });
     store.zatvori();
-    return 0;
+    return { kod: 0, zdravo: true };
   }
 
   try {
@@ -367,7 +376,7 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
       if (LOKALNA_ZAVRSNA.includes(otvorena.stanje)) {
         store.zavrsiKomandu({ id: otvorena.id, stanje: otvorena.stanje });
         reci({ komanda: "poll-once", status: "zatvorena_zaostala", zaostali });
-        return 0;
+        return { kod: 0, zdravo: true };
       }
       const rez = await izvrsiKomandu({
         ...ctx,
@@ -375,13 +384,20 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
         lokalniDatum: lokalnoVreme(now).datum,
       });
       reci({ komanda: "poll-once", status: "nastavljena", ishod: rez.stanje, zaostali });
-      return 0;
+      return { kod: 0, zdravo: true };
     }
 
     const preuzeta = await preuzmiKomandu(ctx);
     if (preuzeta.ishod !== "komanda") {
       reci({ komanda: "poll-once", status: preuzeta.ishod, razlog: preuzeta.razlog ?? null, zaostali });
-      return 0;
+      /*
+       * Samo „nema komandi“ je zdrav odgovor.
+       *
+       * `nedostupno` (mreža), `odbijeno` (opozvan uređaj, loš potpis) i
+       * `iskljuceno` (gate ugašen) traže backoff — inače uređaj bez interneta
+       * ili sa opozvanim ključem pita svakih 45 s zauvek i puni log.
+       */
+      return { kod: 0, zdravo: preuzeta.ishod === "nema" };
     }
 
     const rez = await izvrsiKomandu({
@@ -398,7 +414,8 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
       skeniranje: rez.skeniranje,
       slanje: rez.slanje,
     });
-    return rez.stanje === "blocked" ? 1 : 0;
+    // Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne prašta.
+    return { kod: rez.stanje === "blocked" ? 1 : 0, zdravo: rez.stanje !== "blocked" };
   } finally {
     store.otpustiZakljucavanje(vlasnik);
     store.zatvori();
@@ -417,7 +434,17 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
  * Bez backoff-a bi konektor bez interneta pitao svakih 45 s zauvek. Bez
  * jitter-a bi se više uređaja poravnalo u isti trenutak.
  */
-async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () => new Date() } = {}) {
+/** Stanja koja čekanje ne popravlja: petlja staje i prijavljuje kod. */
+const NEPOPRAVLJIVO = new Set([
+  "config_missing",
+  "config_invalid",
+  "key_missing",
+  "identity_mismatch",
+  "schema_newer",
+  "source_missing",
+]);
+
+export async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () => new Date() } = {}) {
   let neuspeha = 0;
   let prolaz = 0;
 
@@ -433,14 +460,25 @@ async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () => new 
     }
 
     // 2. Komande.
-    let uspelo = false;
+    let zdravo = false;
     try {
-      const kod = await pollOnce(p, { now: trenutak, tiho: true });
-      uspelo = kod === 0;
-    } catch {
-      uspelo = false;
+      ({ zdravo } = await pollOnce(p, { now: trenutak, tiho: true }));
+    } catch (greska) {
+      /*
+       * Greška PODEŠAVANJA se ne odlaže — petlja staje.
+       *
+       * Nedostajuća konfiguracija, ključ ili neusklađen lokalni red ne
+       * popravljaju se čekanjem. Da se i to tretira kao mrežni problem,
+       * pogrešno podešen konektor bi tiho backoff-ovao u nedogled i izgledao
+       * kao da radi, a nikada ne bi ni pitao za komandu.
+       */
+      if (NEPOPRAVLJIVO.has(greska?.code)) {
+        ispisi({ komanda: "watch", status: "zaustavljeno", kod: greska.code });
+        return 1;
+      }
+      zdravo = false;
     }
-    neuspeha = uspelo ? 0 : neuspeha + 1;
+    neuspeha = zdravo ? 0 : neuspeha + 1;
 
     if (prolaz >= maxProlaza) break;
     await sleep(sledeciInterval({ neuspeha }));
@@ -534,7 +572,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       case "run-once":
         return await ciklus(p, { rucni: true });
       case "poll-once":
-        return await pollOnce(p);
+        return (await pollOnce(p)).kod;
       case "watch":
         return await watch(p);
       case "auto":

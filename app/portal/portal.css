@@ -7239,3 +7239,75 @@ body:has(.portal-login-root) {
   color: var(--p-ink);
   background: oklch(0.985 0.01 150);
 }
+
+/* =========================================================================
+ * Administracija uređaja (P4)
+ *
+ * Tri koraka koja se dešavaju u različitim trenucima. Bez vidljive granice se
+ * na ekranu slivaju u jedan dugačak stub polja, pa čovek koji prvi put vezuje
+ * uređaj ne zna gde jedan posao prestaje.
+ * ====================================================================== */
+
+.portal-device-steps {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.portal-device-step {
+  padding: 14px 16px 16px;
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  background: var(--p-bg);
+}
+
+.portal-device-step[data-tone="danger"] {
+  /* Opoziv je nepovratan; boja je upozorenje, ne ukras. */
+  border-color: color-mix(in srgb, var(--p-danger, #c8102e) 35%, var(--p-line));
+}
+
+.portal-device-step h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.portal-device-step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--p-ink, #111);
+  color: var(--p-bg, #fff);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.portal-device-step > p {
+  margin: 6px 0 0;
+  max-width: 62ch;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--p-muted);
+}
+
+/*
+ * Nadjačava `.portal-panel form { max-width: 32rem }`.
+ *
+ * Bez ovoga bi mreža polja bila stisnuta u pola panela i dva stupca bi izgledala
+ * uže od jednog reda teksta iznad njih.
+ */
+.portal-panel form.portal-device-form {
+  max-width: none;
+  margin-top: 12px;
+  gap: 12px;
+  justify-items: start;
+}
+
+.portal-panel form.portal-device-form label {
+  margin-top: 0;
+}

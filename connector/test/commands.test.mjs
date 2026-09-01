@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -401,6 +401,123 @@ test("noviji red i stariji konektor su GREŠKA, ne „snađi se“", async () =>
     }
     assert.ok(uhvacena instanceof StoreError);
     assert.equal(uhvacena.code, "schema_newer");
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
+/* =========================================================================
+ * `watch` petlja
+ * ====================================================================== */
+
+test("mreža koja ne radi NE daje tight loop", async () => {
+  const { main, putanje, watch } = await import(D("cli.mjs"));
+
+  const baza = await mkdtemp(join(tmpdir(), "cs-watch-"));
+  const izvor = join(baza, "ulaz");
+  await mkdir(izvor, { recursive: true });
+
+  const konf = join(baza, "config.json");
+  await writeFile(
+    konf,
+    JSON.stringify({
+      serverOrigin: "https://qa.invalid",
+      deviceCode: "office-pc-01",
+      keyId: "k1",
+      sourceSystem: "biznisoft",
+      issuerCode: "QA01",
+      izvorniFolder: izvor,
+    }),
+  );
+
+  const ranije = { ...process.env };
+  process.env.CS_CONNECTOR_STATE_DIR = join(baza, "stanje");
+  process.env.CS_CONNECTOR_CONFIG = konf;
+  process.env.CS_CONNECTOR_INSECURE_KEYSTORE = "1";
+
+  try {
+    assert.equal(await main(["init"]), 0);
+    /*
+     * Iste putanje koje gradi `main`.
+     *
+     * Prva verzija ovog testa slala je samo putanju stanja; `pollOnce` je zbog
+     * toga padao na `config_missing` u SVAKOM prolazu, pa su pauze rasle iz
+     * pogrešnog razloga i test ne bi primetio da je backoff pokvaren.
+     */
+    const p = putanje(process.env);
+
+    /*
+     * Petlja se vrti STVARNO, ali ne spava: `sleep` je zamenjen i samo beleži
+     * koliko bi se čekalo. Server ne postoji, pa svaki prolaz mora biti nezdrav.
+     */
+    const pauze = [];
+    await watch(p, {
+      maxProlaza: 4,
+      sleep: async (ms) => void pauze.push(ms),
+      now: () => new Date("2026-03-10T10:00:00+01:00"),
+    });
+
+    /*
+     * Suština: pauze RASTU.
+     *
+     * Da `poll-once` prijavljuje nedostupnu mrežu kao uspeh — što je i radio
+     * dok je vraćao samo izlazni kod — brojač bi se resetovao, sve pauze bile
+     * bi ~45 s, i to je tačno tight loop koji P4 zabranjuje.
+     */
+    assert.equal(pauze.length, 3, `očekivane 3 pauze, dobijeno ${pauze.length}`);
+    for (let i = 1; i < pauze.length; i += 1) {
+      assert.ok(
+        pauze[i] > pauze[i - 1],
+        `pauza ${i} nije porasla: ${pauze.map((x) => Math.round(x / 1000)).join("s, ")}s`,
+      );
+    }
+    assert.ok(pauze[0] >= OSNOVNI_INTERVAL_MS, "prva pauza je kraća od osnovnog intervala");
+    /*
+     * Kontrola same provere: prva pauza mora biti VEĆ uvećana.
+     *
+     * Da `poll-once` prijavljuje nedostupnu mrežu kao zdravu, `neuspeha` bi
+     * ostao 0 i prva pauza bila bi ispod 60 s.
+     */
+    assert.ok(
+      pauze[0] > OSNOVNI_INTERVAL_MS + 15_000,
+      `prva pauza (${Math.round(pauze[0] / 1000)}s) nije uvećana — backoff se ne uključuje`,
+    );
+    assert.ok(pauze.at(-1) <= 30 * 60_000 + 15_000, "backoff je probio gornju granicu");
+  } finally {
+    process.env = ranije;
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
+test("pogrešno podešen konektor STAJE, ne backoff-uje u nedogled", async () => {
+  const { watch } = await import(D("cli.mjs"));
+  const baza = await mkdtemp(join(tmpdir(), "cs-watch-loš-"));
+
+  try {
+    /*
+     * Putanje pokazuju na konfiguraciju koje nema.
+     *
+     * To čekanje NE popravlja. Da se i ovo tretira kao mrežni problem, pogrešno
+     * podešen konektor bi tiho backoff-ovao u nedogled i izgledao kao da radi,
+     * a nikada ne bi ni pitao za komandu — a čovek bi u portalu video uređaj
+     * koji se „nikad ne javlja“ bez ijednog traga zašto.
+     */
+    const p = {
+      folder: join(baza, "stanje"),
+      konfiguracija: join(baza, "nema-ovoga.json"),
+      kljuc: join(baza, "stanje", "device.key"),
+      red: join(baza, "stanje", "queue.db"),
+    };
+
+    const pauze = [];
+    const kod = await watch(p, {
+      maxProlaza: 5,
+      sleep: async (ms) => void pauze.push(ms),
+      now: () => new Date("2026-03-10T10:00:00+01:00"),
+    });
+
+    assert.equal(kod, 1, "petlja nije prijavila grešku");
+    assert.equal(pauze.length, 0, "petlja je čekala umesto da stane");
   } finally {
     await rm(baza, { recursive: true, force: true });
   }

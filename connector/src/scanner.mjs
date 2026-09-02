@@ -29,7 +29,7 @@ export const PODRAZUMEVANE_GRANICE = Object.freeze({
    *
    * Postavljena tako da nikad ne dodirne stvarnu arhivu (očekuje se red
    * veličine 10–12 hiljada dokumenata), ali da koren greškom postavljen na
-   * `C:\Users\<nalog>` ne pretvori ciklus u pretragu pola diska.
+   * Korisnički profilni direktorijum na Windowsu ne pretvori ciklus u pretragu pola diska.
    */
   maxPopisa: 200_000,
 

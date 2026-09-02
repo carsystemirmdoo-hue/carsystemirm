@@ -255,9 +255,141 @@ const brojFaktura = async () => {
   return n;
 };
 
+/**
+ * Koren `FAKTURE/` sa godišnjim podfolderima — kancelarijska struktura.
+ *
+ * Isti dokument namerno stoji u DVA godišnja foldera: to se u arhivi dešava
+ * kada neko prekopira fakturu „da bude i ovde".
+ */
+async function godisnjiFolderi(raspored: Record<string, string[]>) {
+  const baza = await mkdtemp(join(tmpdir(), "cs-godine-"));
+  const koren = join(baza, "FAKTURE");
+  for (const [folder, fajlovi] of Object.entries(raspored)) {
+    const put = join(koren, folder);
+    await mkdir(put, { recursive: true });
+    for (const f of fajlovi) {
+      await cp(new URL(`fixtures/dev/biznisoft/${f}`, KOREN).pathname, join(put, `Račun ${f}`));
+    }
+  }
+  return { baza, izvor: koren, redPutanja: join(baza, "stanje", "queue.db") };
+}
+
 /* =========================================================================
  * Pun tok
  * ====================================================================== */
+
+test("isti PDF u DVA godišnja foldera ne duplira ni fakturu ni ledger", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  /*
+   * ISTI dokument u dva godišnja foldera — tačno ono što se u arhivi dešava
+   * kada neko prekopira fakturu „da bude i ovde". Treći fajl bi uveo drugog
+   * partnera i drugi tok mapiranja; ovde se meri samo dvostruko brojanje.
+   */
+  const okr = await godisnjiFolderi({
+    "FAKTURE 2024": ["vise-stavki.pdf"],
+    "FAKTURE 2025": ["vise-stavki.pdf"],
+  });
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+
+    const skeniranje = await skenirajURed({ store, konfiguracija: k });
+    /*
+     * Popis vidi sva tri fajla — koren ima tri neposredna podfoldera, i nijedno
+     * ime nije upisano u kod. Dva su isti sadržaj, pa u red ulaze DVA dokumenta.
+     */
+    assert.equal(skeniranje.pregledano, 2, "godišnji podfolderi nisu popisani");
+    assert.equal(skeniranje.novo, 1, "isti sadržaj je ušao u red dvaput");
+    assert.equal(skeniranje.poznato, 1, "drugi primerak nije prepoznat kao poznat");
+
+    const slanje = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+    assert.equal(slanje.potvrdjeno, 1, `neočekivano: ${JSON.stringify(slanje)}`);
+
+    // Jedna faktura, ne dve: kopija u drugom folderu nije napravila drugu.
+    assert.equal(await brojFaktura(), 1, "kopija je napravila dodatnu fakturu");
+
+    const [{ n: dokumenata }] = await db.sql<{ n: number }[]>`
+      SELECT count(*)::int AS n FROM source_documents`;
+    assert.equal(dokumenata, 1, "kopija je napravila dodatan izvorni dokument");
+
+    /*
+     * Ledger je merodavan: promet se broji tačno jednom.
+     *
+     * `vise-stavki.pdf` nosi 7 stavki. Da je kopija prošla kao zaseban
+     * dokument, ovde bi stajalo 14 — i to bi izgledalo kao dvostruki promet,
+     * ne kao greška skenera.
+     */
+    const [{ n: redova }] = await db.sql<{ n: number }[]>`
+      SELECT count(*)::int AS n FROM effective_sales_ledger WHERE enters_net`;
+    assert.equal(redova, 7, "promet je udvostručen kroz drugi godišnji folder");
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("dva nivoa dublje i junction/symlink ne ulaze u ledger", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const { symlink } = await import("node:fs/promises");
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  const okr = await godisnjiFolderi({ "FAKTURE 2026": ["vise-stavki.pdf"] });
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    // Dva nivoa dublje — ne sme se skenirati.
+    const duboko = join(okr.izvor, "FAKTURE 2026", "arhiva");
+    await mkdir(duboko, { recursive: true });
+    await cp(
+      new URL("fixtures/dev/biznisoft/jedna-stavka.pdf", KOREN).pathname,
+      join(duboko, "duboka.pdf"),
+    );
+
+    // Podfolder-link ka putanji van korena — ne sme se pratiti.
+    const spolja = join(okr.baza, "TUDJE");
+    await mkdir(spolja, { recursive: true });
+    await cp(
+      new URL("fixtures/dev/biznisoft/dve-strane-ponovljeno-zaglavlje.pdf", KOREN).pathname,
+      join(spolja, "tudja.pdf"),
+    );
+    await symlink(spolja, join(okr.izvor, "PRECICA")).catch(() => {});
+
+    const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+    const skeniranje = await skenirajURed({ store, konfiguracija: k });
+    assert.equal(skeniranje.pregledano, 1, "skener je sišao dublje ili pratio link");
+
+    await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+
+    assert.equal(await brojFaktura(), 1, "dokument van dozvoljenog stabla je knjižen");
+    const [{ n }] = await db.sql<{ n: number }[]>`
+      SELECT count(*)::int AS n FROM effective_sales_ledger WHERE enters_net`;
+    assert.equal(n, 7, "u ledger je ušao dokument koji nije smeo da bude skeniran");
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
 
 test("PDF → lokalni red → STVARNI HTTP → jedna faktura sa device poreklom", async (t) => {
   if (guard(t)) return;

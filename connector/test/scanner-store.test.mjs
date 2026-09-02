@@ -83,35 +83,159 @@ test("nedostupan izvor se razlikuje od praznog", async () => {
   }
 });
 
-test("skenira se SAMO zadati folder — bez rekurzije i bez linkova van korena", async () => {
+test("skenira se koren I neposredni podfolderi — ali ne dublje i ne kroz linkove", async () => {
   const { baza, folder } = await privremeni();
   try {
     const spolja = join(baza, "spolja");
     await mkdir(spolja, { recursive: true });
     await cp(join(FIXTURES, "jedna-stavka.pdf"), join(spolja, "tudja.pdf"));
 
-    // Podfolder — ne sme se obići.
-    await mkdir(join(folder, "podfolder"), { recursive: true });
-    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, "podfolder", "duboko.pdf"));
-
-    // Fajl u samom folderu, sa razmacima i srpskim slovima, VELIKA ekstenzija.
+    // Fajl u samom korenu, sa razmacima i srpskim slovima, VELIKA ekstenzija.
     await cp(join(FIXTURES, "vise-stavki.pdf"), join(folder, "Račun broj 42.PDF"));
 
-    // Symlink koji izlazi iz korena.
-    await symlink(join(spolja, "tudja.pdf"), join(folder, "veza.pdf")).catch(() => {});
+    // Neposredni podfolderi — MORAJU se obići. Ime foldera nije poslovni podatak.
+    for (const godina of ["FAKTURE 2024", "FAKTURE 2029", "bilo kakvo ime ČĆŽ"]) {
+      await mkdir(join(folder, godina), { recursive: true });
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, godina, `${godina}.pdf`));
+    }
+
+    // Dva nivoa dublje — NE sme se obići.
+    await mkdir(join(folder, "FAKTURE 2024", "arhiva"), { recursive: true });
+    await cp(
+      join(FIXTURES, "jedna-stavka.pdf"),
+      join(folder, "FAKTURE 2024", "arhiva", "duboko.pdf"),
+    );
+
+    /*
+     * Linkovi se prave uslovno.
+     *
+     * Na Windowsu `symlink` bez povišenih prava ne uspeva; ovaj isti fajl se
+     * izvršava u kancelarijskom smoke-u, pa tvrdnja o linku sme da postoji samo
+     * ako je link stvarno napravljen. Junction varijantu pokriva `[WIN]` test.
+     */
+    const linkFajl = await symlink(join(spolja, "tudja.pdf"), join(folder, "veza.pdf"))
+      .then(() => true)
+      .catch(() => false);
+    const linkFolder = await symlink(spolja, join(folder, "vezani folder"))
+      .then(() => true)
+      .catch(() => false);
 
     const { koren } = await skener.proveriIzvor(folder);
     const { kandidati, preskoceno } = await skener.nadjiKandidate(koren);
+    const imena = kandidati.map((k) => k.putanja.split("/").pop()).sort();
 
     assert.deepEqual(
-      kandidati.map((k) => k.putanja.split("/").pop()),
-      ["Račun broj 42.PDF"],
-      "skener je uzeo nešto van zadatog foldera ili iz podfoldera",
+      imena,
+      ["FAKTURE 2024.pdf", "FAKTURE 2029.pdf", "Račun broj 42.PDF", "bilo kakvo ime ČĆŽ.pdf"],
+      "popis nije tačno koren + jedan nivo",
     );
+    assert.ok(!imena.includes("duboko.pdf"), "skener je sišao dva nivoa dublje");
+    assert.ok(!imena.includes("tudja.pdf"), "skener je izašao iz korena");
+
+    if (linkFajl) {
+      assert.ok(preskoceno.some((x) => x.razlog === "symlink"), "symlink fajl nije preskočen");
+    }
+    if (linkFolder) {
+      assert.ok(
+        preskoceno.some((x) => x.razlog === "podfolder_symlink"),
+        "symlink podfolder nije preskočen PRE otvaranja",
+      );
+    }
     assert.ok(
-      preskoceno.some((p) => p.razlog === "symlink"),
-      "symlink nije preskočen",
+      preskoceno.some((x) => x.razlog === "predubok"),
+      "dublji folder nije prijavljen kao preskočen",
     );
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
+test("nov podfolder se nalazi bez ijedne izmene konfiguracije", async () => {
+  const { baza, folder } = await privremeni();
+  try {
+    /*
+     * Ime foldera se NIGDE ne čita — nema obrasca, nema spiska godina.
+     * Zato 2028, 2029, 2030 i „bilo šta" rade isto, bez izmene podešavanja.
+     */
+    const { koren } = await skener.proveriIzvor(folder);
+    assert.equal((await skener.nadjiKandidate(koren)).kandidati.length, 0);
+
+    for (const ime of ["FAKTURE 2028", "FAKTURE 2029", "FAKTURE 2030", "ARHIVA XYZ"]) {
+      await mkdir(join(folder, ime), { recursive: true });
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, ime, `${ime}.pdf`));
+
+      const { kandidati } = await skener.nadjiKandidate(koren);
+      assert.ok(
+        kandidati.some((k) => k.putanja.includes(ime)),
+        `nov podfolder „${ime}" nije pronađen`,
+      );
+    }
+
+    const { kandidati } = await skener.nadjiKandidate(koren);
+    assert.equal(kandidati.length, 4, "nisu nađeni svi novi podfolderi");
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
+test("popis NIJE ograničen budžetom obrade", async () => {
+  const { baza, folder } = await privremeni();
+  try {
+    /*
+     * Ranije je ista granica prekidala POPIS posle 200 sirovih kandidata, pa je
+     * pun stari folder mogao trajno da sakrije nov dokument u drugom.
+     */
+    const stari = join(folder, "FAKTURE 2024");
+    await mkdir(stari, { recursive: true });
+    for (let i = 0; i < 250; i += 1) {
+      await writeFile(join(stari, `stara-${i}.pdf`), `sadržaj ${i}`);
+    }
+    const novi = join(folder, "FAKTURE 2029");
+    await mkdir(novi, { recursive: true });
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(novi, "nova.pdf"));
+
+    const { koren } = await skener.proveriIzvor(folder);
+    const { kandidati } = await skener.nadjiKandidate(koren);
+
+    assert.equal(kandidati.length, 251, "popis je prekinut pre kraja");
+    assert.ok(
+      kandidati.some((k) => k.putanja.endsWith("nova.pdf")),
+      "nov dokument je ostao sakriven iza 250 starih",
+    );
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
+test("podfolder bez prava čitanja ne ruši popis", async () => {
+  const { baza, folder } = await privremeni();
+  try {
+    const zatvoren = join(folder, "FAKTURE 2025");
+    await mkdir(zatvoren, { recursive: true });
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(zatvoren, "u-zatvorenom.pdf"));
+
+    const otvoren = join(folder, "FAKTURE 2026");
+    await mkdir(otvoren, { recursive: true });
+    await cp(join(FIXTURES, "vise-stavki.pdf"), join(otvoren, "u-otvorenom.pdf"));
+
+    await chmod(zatvoren, 0o000);
+    try {
+      const { koren } = await skener.proveriIzvor(folder);
+      const { kandidati, preskoceno } = await skener.nadjiKandidate(koren);
+
+      // Ostatak arhive se i dalje popisuje.
+      assert.ok(
+        kandidati.some((k) => k.putanja.endsWith("u-otvorenom.pdf")),
+        "jedan nedostupan folder je zaustavio ceo popis",
+      );
+      assert.ok(
+        preskoceno.some((x) => x.razlog === "folder_nedostupan") ||
+          kandidati.some((k) => k.putanja.endsWith("u-zatvorenom.pdf")),
+        "nedostupan folder nije ni pročitan ni prijavljen",
+      );
+    } finally {
+      await chmod(zatvoren, 0o700);
+    }
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -194,7 +318,7 @@ test("nestabilan fajl se ODLAŽE, ne proglašava trajno neispravnim", async () =
       stabilnostMs: 20,
       stabilnostPokusaja: 3,
       maxBajtova: 1024 * 1024,
-      maxFajlovaPoCiklusu: 10,
+      maxNovihPoCiklusu: 10,
     });
     clearInterval(timer);
 

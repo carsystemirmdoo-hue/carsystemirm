@@ -318,7 +318,7 @@ From the build output:
 | Item | Location | Note |
 |---|---|---|
 | No-op ternary in robots logic | `lib/seo/metadata-builders.ts:64,68` | `follow: shouldIndex ? follow : follow` — both branches identical. Either dead code or a lost intent (probably `follow: true` when noindexed). |
-| Stale audit reports | `docs/seo/*.md`, `*.json` | Dated 2026-07-29; predate Carfit + Cosmos brand pages. `SEO_IMAGE_AUDIT.csv` is 17.9 MB in git. |
+| Stale audit reports | `docs/seo/*.md`, `*.json` | Dated 2026-07-29; predate Carfit + Cosmos brand pages. `SEO_IMAGE_AUDIT.csv` is no longer stored in git; regenerate locally with `npm run seo:audit`. |
 | Stale static export dir | `out/` | Left over from June; project is not a static export (middleware is active). Confusing artefact. |
 | Uncommitted brand work | `components/brand/cosmos/`, `lib/cosmos-lac-brand-data.ts` | Wired into `app/brendovi/[slug]/page.tsx:98-99` and building, but untracked in git. |
 | Misleading audit metric | `scripts/seo-audit.mjs` | Reports `imagesEmptyAlt: 54573` as if a finding. Empty `alt=""` on decorative images is *correct*. Sampling built HTML shows 1–5 per page. The metric creates false alarm. |

@@ -85,6 +85,11 @@ const ULAZI = [
    * izričito, `RUN-SMOKE.cmd diagnose`, kada smoke padne a uzrok se ne vidi.
    */
   { izvor: "connector/smoke/diagnose.mjs", cilj: "smoke/diagnose.mjs", tip: "fajl" },
+  /*
+   * Jezgro dijagnostike je odvojeno da bi bilo testabilno bez Windowsa;
+   * pokretač ga uvozi, pa mora u paket.
+   */
+  { izvor: "connector/smoke/diagnose-core.mjs", cilj: "smoke/diagnose-core.mjs", tip: "fajl" },
   { izvor: "connector/smoke/cleanup.mjs", cilj: "smoke/cleanup.mjs", tip: "fajl" },
   { izvor: "connector/smoke/RUN-SMOKE.cmd", cilj: "smoke/RUN-SMOKE.cmd", tip: "fajl" },
   { izvor: "connector/smoke/START-HERE.md", cilj: "START-HERE.md", tip: "fajl" },

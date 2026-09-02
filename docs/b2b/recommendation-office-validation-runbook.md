@@ -36,12 +36,16 @@ prekida i nastavlja se tek posle dogovora.
    Servisni nalog ima Read i List, i ništa više. Nijedna provera se **nikada**
    ne izvodi nad pravom fakturom — ni izmena, ni preimenovanje, ni brisanje.
    Aktivna provera ide isključivo nad namenskim sentinel fajlom (vidi §7).
-4. **Stvarni PDF-ovi ne ulaze u Git.** Ni jedan, ni kao primer, ni „privremeno".
-5. **PII se ne kopira u izveštaj.** Bez naziva kupaca, PIB-a, adresa, brojeva
+4. **Izvorni koren je NAMENSKI folder sa fakturama.** Nikad Desktop, Documents,
+   korisnički profil, `C:\` ni zajednički folder sa mešanim dokumentima. Od
+   podrške za godišnje podfoldere pogrešan koren ne daje prazan rezultat nego
+   pun — tuđim dokumentima. Vidi §8.
+5. **Stvarni PDF-ovi ne ulaze u Git.** Ni jedan, ni kao primer, ni „privremeno".
+6. **PII se ne kopira u izveštaj.** Bez naziva kupaca, PIB-a, adresa, brojeva
    dokumenata, imena fajlova i apsolutnih putanja.
-6. **Rezultat preporuka se ne šalje kupcima.** Ni mejlom, ni porukom, ni kao
+7. **Rezultat preporuka se ne šalje kupcima.** Ni mejlom, ni porukom, ni kao
    izvoz koji neko prosledi. Sistem to ne radi sam i niko to ne radi ručno.
-7. **Rezultat algoritma je danas početna validacija.** Prvi brojevi pokazuju da
+8. **Rezultat algoritma je danas početna validacija.** Prvi brojevi pokazuju da
    motor radi — ne da su preporuke poslovno tačne.
 
 ---
@@ -334,7 +338,93 @@ Administrator uklanja sentinel. Ako je otisak sentinela promenjen, to je već
 
 ---
 
-## 8. Mali probni folder ili kontrolisani mali scan
+## 8. Izvorni koren — šta sme da bude, i šta nikada
+
+> **Ovo je najopasniji korak celog dana.** Od verzije koja podržava godišnje
+> podfoldere, konektor sa korena čita PDF-ove i iz svih **neposrednih**
+> podfoldera. Pogrešno postavljen koren više ne daje prazan rezultat — daje
+> pun, i to tuđim dokumentima.
+
+### 8.1 Koren mora biti NAMENSKI folder
+
+Izvorni koren je folder koji postoji **samo** zato da BizniSoft u njega ostavlja
+fakture. Ništa drugo u njemu nema šta da traži.
+
+Dozvoljen sadržaj korena, i ništa preko toga:
+
+- PDF fakture **direktno** u korenu;
+- **godišnji podfolderi** sa fakturama (`FAKTURE 2024`, `FAKTURE 2025`, …).
+
+Ime podfoldera nije poslovni podatak i ne mora ništa da znači: konektor ga ne
+čita. Godina i datum dolaze isključivo iz sadržaja dokumenta. Zbog toga se nov
+godišnji folder nalazi sam, bez ijedne izmene podešavanja.
+
+### 8.2 Šta se NIKADA ne postavlja kao koren
+
+| Ne sme | Zašto |
+|---|---|
+| `Desktop` | svaki PDF sa radne površine ulazi u promet |
+| `Documents` | isto, plus lična dokumenta |
+| korisnički profil (`C:\Users\<nalog>`) | ceo profil, uključujući Downloads |
+| `C:\` ili koren bilo kog diska | popis bi krenuo kroz sistemske foldere |
+| zajednički/mrežni folder sa **mešanim** dokumentima | računi, kompenzacije, ugovori i ponude nisu fakture i nemaju šta u ledgeru |
+
+Pravilo koje pokriva i ono što nije nabrojano: **ako u folderu ili u njegovim
+neposrednim podfolderima postoji ijedan PDF koji nije faktura — taj folder nije
+koren.**
+
+### 8.3 Provera PRE prvog stvarnog skeniranja
+
+Operater mora, pre ijednog pravog prolaza, da pročita i potvrdi dve stvari:
+
+1. **prikazanu apsolutnu putanju korena** — doslovno, znak po znak;
+2. **zbir pronađenih PDF-ova po podfolderu.**
+
+```
+smoke\..\connector\dist\connector.cmd doctor
+```
+
+`doctor` ispisuje razrešenu putanju izvornog foldera. Broj dokumenata po
+folderu daje `dry-run` iz sledećeg koraka.
+
+**Uslov za nastavak:** putanja je namenski `FAKTURE` folder, i broj po
+podfolderu odgovara onome što kancelarija očekuje za tu godinu.
+
+**Prekid:** putanja pokazuje bilo šta iz §8.2, ili se broj razlikuje od
+očekivanog za više nego što se može objasniti. Nepoznat višak dokumenata znači
+da koren obuhvata nešto što niko nije nameravao.
+
+### 8.4 Prvi stvarni prolaz je UVEK dry-run
+
+```
+connector.cmd dry-run
+```
+
+`dry-run` ide **istim** putem skeniranja i validacije kao pravi ciklus, ali ne
+šalje nijedan bajt i ne označava ništa poslatim. Zato je ono što se u njemu vidi
+zaista ono što bi se poslalo.
+
+Iz ispisa se čita: `pregledano` (koliko je PDF-ova uopšte popisano), `novo`,
+`poznato`, `nepodrzano`, `odlozeno` i spisak `preskoceno`.
+
+**Uslov za nastavak:** `pregledano` odgovara zbiru iz §8.3, a `preskoceno` ne
+sadrži nijedan unos koji operater ne ume da objasni.
+
+### 8.5 Bez izričite potvrde nema pravog skeniranja
+
+Nijedno pravo skeniranje — ni `run-once`, ni komanda „Skeniraj i sinhronizuj",
+ni zakazani termin — **ne počinje** dok operater izričito ne potvrdi, naglas i u
+zapisniku dana:
+
+> „Koren je `<apsolutna putanja>`. Obuhvaćeni su isključivo folderi sa
+> fakturama. Broj dokumenata po folderu je proveren."
+
+Bez te rečenice u zapisniku, dan staje na dry-run-u. Potvrda nije formalnost:
+ona je jedino mesto na kome čovek tvrdi da je pogledao šta će biti pročitano.
+
+---
+
+## 9. Mali probni folder ili kontrolisani mali scan
 
 Napraviti **poseban** folder sa **najviše 5** PDF-ova prekopiranih iz stvarnog
 izlaza, i konektor usmeriti na njega. Original folder se ne dira.
@@ -351,7 +441,7 @@ pokreće.
 
 ---
 
-## 9. Provera heartbeat-a i statusa
+## 10. Provera heartbeat-a i statusa
 
 Portal → `Sistem → Sinhronizacija`.
 
@@ -366,7 +456,7 @@ Pročitati, i **ne mešati dve različite tvrdnje**:
 
 ---
 
-## 10. Brojači ciklusa
+## 11. Brojači ciklusa
 
 Na istom ekranu, uz poslednju komandu:
 
@@ -385,7 +475,7 @@ Na istom ekranu, uz poslednju komandu:
 
 ---
 
-## 11. Pregled nekoliko dokumenata, bez PII u logovima
+## 12. Pregled nekoliko dokumenata, bez PII u logovima
 
 Portal → `Sistem → Izvorni dokumenti`. Otvoriti 3–5 dokumenata i uporediti sa
 papirom/PDF-om: izdavalac, datum, broj stavki, šifre artikala, zbir.
@@ -401,7 +491,7 @@ se pre full scan-a.
 
 ---
 
-## 12. Tek sada — full scan istorije
+## 13. Tek sada — full scan istorije
 
 Konektor se vraća na stvarni folder (i dalje read-only) i pokreće se pun ciklus.
 
@@ -411,7 +501,7 @@ hiljade karantiniranih redova koje neko mora ručno da pregleda.
 
 ---
 
-## 13. Čekanje da se uvoz završi
+## 14. Čekanje da se uvoz završi
 
 Full scan se **ne prekida** i ne pokreće se drugi put dok prvi traje. Portal
 prikazuje stanje komande; komanda je završena kada je u `completed` ili
@@ -423,7 +513,7 @@ ispravan rezultat.
 
 ---
 
-## 14. Pregled revision conflicts i karantina
+## 15. Pregled revision conflicts i karantina
 
 Portal → `Sistem → Izvorni dokumenti`, pa `Sistem → Spremnost podataka`.
 
@@ -444,7 +534,7 @@ je poznato da čeka ljudsku odluku.
 
 ---
 
-## 15. Merenje broja repeat parova `(customer_id, article_code)`
+## 16. Merenje broja repeat parova `(customer_id, article_code)`
 
 Portal → `Sistem → Spremnost podataka`.
 
@@ -466,7 +556,7 @@ sa objašnjenjem, i to je tačan ishod.
 
 ---
 
-## 16. Ručni `cadence_v1` recompute
+## 17. Ručni `cadence_v1` recompute
 
 Preduslov: `FEATURE_RECOMMENDATIONS=1` na serveru. Podrazumevano je
 **isključeno**; uključuje ga osoba koja administrira server, izričito, tog dana.
@@ -492,7 +582,7 @@ u petlji.
 
 ---
 
-## 17. Pregled rezultata u internom portalu
+## 18. Pregled rezultata u internom portalu
 
 Na istoj strani, grupe redom kojim ih komercijalista čita:
 
@@ -525,7 +615,7 @@ je tačan odgovor.
 
 ---
 
-## 18. Izvoz redigovanog validation izveštaja
+## 19. Izvoz redigovanog validation izveštaja
 
 Izveštaj je **tehnički** i **redigovan**. Sadrži isključivo:
 
@@ -550,7 +640,7 @@ Stvarni PDF-ovi i `testovi-tap.log` ostaju na kancelarijskom računaru.
 
 ---
 
-## 19. Kriterijumi za prekid i rollback
+## 20. Kriterijumi za prekid i rollback
 
 ### Prekid bez nastavka
 
@@ -576,7 +666,8 @@ sve neispunjene, jer smoke ne dodiruje ni server, ni bazu, ni uređaj.
 | **uređaj nije registrovan i aktiviran** | uređaj koji se javi pre registracije biva odbijen, i to izgleda kao kvar uređaja |
 | **migracije nisu potvrđene na ciljnoj staging bazi** | ingest bi pao na prvoj tabeli koje nema, posle prenosa dokumenata |
 | **nema gazda naloga ili vezanog drugog faktora** | registracija uređaja traži `devices:manage`, a portal u produkciji traži MFA |
-| **feature gate-ovi nisu kontrolisano podešeni** | uključen redosled je deo procedure, ne detalj — vidi §16 |
+| **feature gate-ovi nisu kontrolisano podešeni** | uključen redosled je deo procedure, ne detalj — vidi §17 |
+| **izvorni koren nije potvrđen po §8** | od podrške za godišnje podfoldere pogrešan koren više ne daje prazan rezultat nego pun, tuđim dokumentima |
 
 Kada bilo koja od ovih šest padne: dan se **ne prekida**, nego se svodi na
 offline Windows smoke i na čitanje `icacls` ispisa. Ostalo se odlaže.
@@ -600,6 +691,10 @@ Gašenje ide obrnuto: 3 → 2 → 1.
 
 | Nalaz | Posledica |
 |---|---|
+| koren pokazuje na Desktop, Documents, profil, `C:\` ili mešani folder | **prekid**; ne pokreće se ni dry-run |
+| `pregledano` iz dry-run-a se ne poklapa sa očekivanim zbirom | **prekid**; koren obuhvata nešto što niko nije nameravao |
+| nema izričite potvrde iz §8.5 u zapisniku | pravo skeniranje **ne počinje** |
+| `preskoceno` sadrži unos koji operater ne ume da objasni | **prekid** dok se ne objasni |
 | sentinel je izmenjen, preimenovan ili obrisan | **ACL FAIL**; nijedan pravi PDF se ne dira, test se prekida |
 | mali scan `failed`/`blocked` | **nema** full scan-a |
 | odstupanje u zbiru pri pregledu dokumenata | **nema** full scan-a |
@@ -627,7 +722,48 @@ promet ostaju; prestaje samo ono što je posle njih.
 
 ---
 
-## 20. Šta ostaje otvoreno posle ovog dana 🔴
+## 21. Obavezne kapije za SLEDEĆI paket 🔴
+
+Dve operativne osobine **ne postoje** u paketu koji se danas nosi. Provereno je
+u izvoru, ne pretpostavljeno, i dok ih nema — obe se pokrivaju ljudskom
+proverom iz §8.
+
+### 21.1 Dostignut `maxPopisa` ne završava kontrolisanim ishodom
+
+`nadjiKandidate` pri granici od 200.000 upisuje `{razlog: "popis_prekinut"}` u
+listu `preskoceno` i staje. Ta lista se vraća i vidi se u `run-once` / `dry-run`
+JSON ispisu, ali:
+
+- **izlazni kod ostaje 0** — `ciklus()` ga izvodi iz `slanje.zaustavljeno`;
+- u dnevnik ide samo `preskoceno: <broj>`, bez razloga;
+- brojači koji idu portalu (`connector/src/commands.mjs`) mapiraju se iz
+  `skeniranje.nepodrzano` i `slanje.*` — **`popis_prekinut` ne stiže ni u jedan
+  od njih**.
+
+Posledica: ciklus koji je obradio samo prvih 200.000 dokumenata izgleda u
+portalu kao potpuno uspešan.
+
+**Kapija za sledeći paket:** dostignut `maxPopisa` mora dati kontrolisani
+`FAIL`/`INCOMPLETE` sa imenovanim razlogom, i mora se videti u statusu komande.
+Uz to test koji dokazuje da tih 200.000 ne prođe tiho.
+
+### 21.2 Nečitljiv godišnji podfolder nije vidljiv u statusu
+
+Isto važi za `{razlog: "folder_nedostupan"}`: folder bez prava čitanja se
+preskače, ostatak arhive se uredno popiše, i ciklus se završi kao uspešan.
+Nijedan brojač ne kaže da jedna cela godina nije ni pročitana.
+
+**Kapija za sledeći paket:** nečitljiv podfolder mora imati sopstveni brojač
+koji stiže do portala, i ciklus u kome ga ima ne sme biti prikazan kao potpuno
+uspešan. Uz to test nad stvarnim nedostupnim folderom.
+
+> **Do tada:** operater posle svakog dry-run-a čita listu `preskoceno` i ne
+> nastavlja dok ne objasni svaki unos (§8.4). To je ljudska zamena za brojač
+> koji još ne postoji, i tako je i zapisana u §20C.
+
+---
+
+## 22. Šta ostaje otvoreno posle ovog dana 🔴
 
 Ovo se ne rešava sutra i ne treba pokušavati:
 
@@ -655,8 +791,13 @@ Ovo se ne rešava sutra i ne treba pokušavati:
 [ ]  5. schtasks: zadatak NE postoji — očekivano pre instalacije
 [ ]  6. icacls pročitan: servisni nalog ima samo (R)/(RX)
 
---- MALI E2E (samo ako svih šest kapija iz §19B stoji) ---
+--- MALI E2E (samo ako sve kapije iz §20B stoje) ---
 [ ]  7. aktivna ACL provera SAMO nad sentinelom — ili preskočena, po dogovoru
+[ ]  7a. koren je NAMENSKI folder FAKTURE; nije Desktop/Documents/profil/C:\/mešani
+[ ]  7b. apsolutna putanja korena pročitana i potvrđena znak po znak
+[ ]  7c. dry-run izvršen; `pregledano` po folderu odgovara očekivanom
+[ ]  7d. svaki unos u `preskoceno` objašnjen
+[ ]  7e. izričita potvrda iz §8.5 upisana u zapisnik
 [ ]  8. mali scan (≤5 PDF-ova) završen: completed / completed_with_review
 [ ]  9. heartbeat: uređaj active, javljanje od danas
 [ ] 10. brojači: posted > 0, blocked = 0

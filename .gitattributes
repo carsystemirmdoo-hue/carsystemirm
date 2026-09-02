@@ -1,0 +1,16 @@
+# Windows batch pokretači MORAJU ostati CRLF.
+#
+# `cmd.exe` u `if (` blokovima i oko `exit /b` ume da se ponaša nepredvidivo
+# kada fajl nema CR, a upravo te dve konstrukcije nose `smoke/RUN-SMOKE.cmd`.
+# Jedno prepisivanje alatom koji normalizuje završetke reda već je proizvelo
+# LF verziju pokretača koji putuje na kancelarijski računar.
+#
+# `-text` — bajtovi se čuvaju kakvi jesu, bez normalizacije u oba smera.
+# `whitespace=cr-at-eol` — CR na kraju reda NIJE greška, pa `git diff --check`
+# ne prijavljuje namerni CRLF kao trailing whitespace i ostaje upotrebljiv kao
+# kapija za stvarne beline.
+*.cmd -text whitespace=cr-at-eol
+*.bat -text whitespace=cr-at-eol
+
+# PowerShell skripte koje se pokreću na Windowsu — isti razlog, blaži rizik.
+*.ps1 -text whitespace=cr-at-eol

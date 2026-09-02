@@ -95,10 +95,17 @@ U novom Command Prompt-u:
 node --version
 ```
 
-**Uslov za nastavak:** `v24.14.x`, 64-bitni Windows.
+**Uslov za nastavak:** 64-bitni Windows i Node major koji paket navodi u
+`smoke/package-meta.json` (`requiredNode`) — danas major **24**. Minor i patch
+(24.14 vs 24.20) **nisu** deo ugovora i ne obaraju prolaz.
 
-**Prekid:** Node 20 ili 22. Konektor koristi `node:sqlite`, koji u njima ne
-postoji; entrypoint odbija da radi i to nije greška koju treba zaobići.
+**Prekid:** Node 20. `node:sqlite` u njemu ne postoji, entrypoint odbija da radi
+(izlaz 3) i to nije greška koju treba zaobići.
+
+**Nepotpuno, ne pad:** Node koji zadovoljava ugovor konektora (major 22+) ali
+nije testirani major — npr. 22 ili 25. `W02` tada daje `SKIP`, prolaz je
+`SMOKE INCOMPLETE`, i to je tačan opis: konektor bi radio, ali taj runtime niko
+nije proverio.
 
 Raspakovati u putanju sa **razmakom i srpskim slovima**, na primer:
 
@@ -127,7 +134,7 @@ bi se brojao**:
 | ID | Šta dokazuje |
 |---|---|
 | `W01` | Windows izdanje i arhitektura |
-| `W02` | Node 24.14.x |
+| `W02` | Node zadovoljava runtime ugovor konektora |
 | `W03` | paket raspakovan u putanju sa razmakom i `ČĆŽŠĐ` |
 | `W04` | spakovan `connector.cmd` se pokreće |
 | `W05` | `doctor` u izolovanoj konfiguraciji |
@@ -159,18 +166,45 @@ provera ima i koja sme da bude preskočena.
 
 ### Jedan `[WIN]` test je NAMERNO ručan
 
-`[WIN]` skup ima deset testova. Devet se izvršava; deseti — **registracija i
-uklanjanje Scheduled Task-a** (`task.ps1 -Action install -Apply`) — sam sebe
-preskače, jer menja sistem. `W15-win` zato prihvata tačno jedan preskočen
-`[WIN]` test i ispisuje „9 od 10 izvršeno".
+Tačno jedan `[WIN]` test — **registracija i uklanjanje Scheduled Task-a**
+(`task.ps1 -Action install -Apply`) — sam sebe preskače, jer menja sistem.
+`W15-win` zato prihvata tačno jedan preskočen `[WIN]` test i sam ispisuje
+koliko ih je izvršeno od koliko.
 
-**„9 od 10" je očekivano stanje, ne nedostatak.** Deset izvršenih bi značilo da
-je neko sistem ipak promenio.
+**Jedan preskok je očekivano stanje, ne nedostatak.** Nula preskoka bi značilo
+da je neko sistem ipak promenio. Broj se ne prepisuje ovde — runner ga računa,
+jer je [WIN] skup dopunjiv.
 
 **Uslov za nastavak:** ispis je `SMOKE PASS`.
 
 **Prekid:** `SMOKE FAIL` ili `SMOKE INCOMPLETE` → dan se zaustavlja ovde. Nema
 malog scan-a, nema full scan-a, nema recompute-a.
+
+### Ako padne — prvo pročitaj „primarno / posledica"
+
+Rezultat ima odeljak koji odvaja **stvarne uzroke** od provera koje su pale zbog
+njih. `W07` bez ključa iz `W06`, `W14` nad istim nalazom doctora kao `W05`,
+`W15-win` bez zbira iz `W15` — to su posledice, ne zasebni problemi. Dijagnoza
+počinje od primarnih.
+
+Ako je među primarnim nalazima nešto oko DPAPI-ja ili PowerShell-a:
+
+```
+smoke\RUN-SMOKE.cmd diagnose
+```
+
+Meri PowerShell okruženje (dostupnost, jezički režim, politiku izvršavanja po
+opsezima, `Add-Type`, DPAPI probu nad konstantom) i piše zaseban redigovan
+izveštaj. **Ništa ne menja na računaru** i bezbedan je za slanje.
+
+### Politika izvršavanja PowerShell skripti
+
+Kada je politiku postavila Group Policy, `-ExecutionPolicy Bypass` se **ignoriše**
+i `.ps1` fajlovi se ne pokreću. `W13` to prepoznaje i vraća kontrolisani
+`SKIP` sa imenovanim razlogom, uz i dalje potvrđeno da zadatak **nije** napravljen.
+
+**Politika se ne menja zbog smoke-a.** To je bezbednosno podešavanje računara;
+prolaz radije ostaje `INCOMPLETE`.
 
 ---
 

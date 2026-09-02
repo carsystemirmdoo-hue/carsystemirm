@@ -37,8 +37,13 @@ Proveri pre pokretanja, u novom Command Prompt-u:
 node --version
 ```
 
-Mora ispisati `v24.14.x`. **Node 20 nije podržan** — konektor koristi
-`node:sqlite`, koji u njemu ne postoji, i entrypoint će odbiti da radi.
+Konektor traži **major 22 ili noviji** i da se `node:sqlite` stvarno uveze;
+paket je testiran na major iz `smoke/package-meta.json` (`requiredNode`).
+
+**Node 20 nije podržan** — `node:sqlite` u njemu ne postoji i entrypoint odbija
+da radi. Node koji zadovoljava ugovor ali nije testirani major (npr. 22 ili 25)
+ne obara prolaz, ali ga označava kao **neproveren**: rezultat je `INCOMPLETE`,
+ne `PASS`. Minor i patch (24.14 vs 24.20) **nisu** deo ugovora.
 
 ## 2. Raspakuj u putanju sa razmakom i srpskim slovima
 
@@ -135,7 +140,7 @@ prepisuje**, da se dva spiska ne raziđu.
 
 | Tražena provera | Kako se dokazuje |
 |---|---|
-| Windows verzija/arhitektura, Node 24.14.x guard | `W01`, `W02` |
+| Windows verzija/arhitektura, runtime ugovor konektora | `W01`, `W02` |
 | pokretanje iz putanje sa razmakom i `ČĆŽŠĐ` | `W03` + `[WIN]` test putanja/UNC |
 | `doctor` u izolovanoj konfiguraciji | `W05` |
 | `node:sqlite`, WAL, zatvaranje i ponovno otvaranje | `W10` + `[WIN]` „red preživljava restart“ |
@@ -148,14 +153,15 @@ prepisuje**, da se dva spiska ne raziđu.
 | produkcijski entrypoint odbija test keystore | `W14` + `[WIN]` „paket odbija test skladište“ |
 | ceo `[WIN]` skup je stvarno izvršen | `W15`, `W15-win` |
 
-### Zašto `W15-win` ne traži svih deset
+### Zašto `W15-win` ne traži baš sve
 
-`[WIN]` skup ima deset testova. Devet se izvršava automatski; deseti
-(**registracija i uklanjanje Scheduled Task-a**, `task.ps1 -Action install
--Apply`) sam sebe preskače, izričito, jer menja sistem. `W15-win` zato prihvata
-tačno jedan preskočen `[WIN]` test — sve preko toga je `SMOKE INCOMPLETE`.
+Tačno jedan `[WIN]` test — **registracija i uklanjanje Scheduled Task-a**
+(`task.ps1 -Action install -Apply`) — sam sebe preskače, izričito, jer menja
+sistem. `W15-win` zato prihvata tačno jedan preskočen `[WIN]` test; sve preko
+toga je `SMOKE INCOMPLETE`.
 
-To znači: **„9 od 10" je očekivano stanje, ne nedostatak.**
+Runner sam broji koliko ih ima i koliko je izvršeno, pa se broj ovde **ne
+prepisuje** — jedan preskok je očekivano stanje, ne nedostatak.
 
 ### Ostaje RUČNO, izvan ovog prolaza
 
@@ -173,7 +179,29 @@ To znači: **„9 od 10" je očekivano stanje, ne nedostatak.**
 
 ## 9. Ako nešto padne
 
-Pošalji `windows-smoke-result-<shortHead>.md`. U njemu je za svaku palu proveru
-kratak kod (npr. `keystore_not_dpapi`, `queue_not_persisted`,
-`watch_tight_loop_or_hang`). Kod je dovoljan da se problem lokalizuje —
+Pošalji `windows-smoke-result-<shortHead>.md`. Svaki pad nosi kratak kod i
+**bezbedan detalj** (šta je izmereno, šta je očekivano), a odeljak
+„Šta je primarno, a šta posledica" odvaja stvarne uzroke od provera koje su
+pale zbog njih.
+
+Ako je među primarnim nalazima nešto oko DPAPI-ja ili PowerShell-a, pokreni i:
+
+```
+smoke\RUN-SMOKE.cmd diagnose
+```
+
+To meri PowerShell okruženje — dostupnost, jezički režim, politiku izvršavanja
+po opsezima, `Add-Type`, i DPAPI probu nad konstantom (nikad nad ključem) — i
+piše zaseban redigovan izveštaj `windows-smoke-diagnose-<shortHead>.md`.
+**Ništa ne menja na računaru** i bezbedan je za slanje.
+
 `testovi-tap.log` ne šalji dok ga ne pregledamo.
+
+### Politika izvršavanja PowerShell skripti
+
+Ako je politika postavljena kroz Group Policy, `-ExecutionPolicy Bypass` se
+ignoriše i `.ps1` fajlovi se ne pokreću. Provera `W13` to prepoznaje i vraća
+**kontrolisani `INCOMPLETE`** sa imenovanim razlogom, umesto neobjašnjivog pada.
+
+**Ne menjaj politiku zbog smoke-a.** To je bezbednosno podešavanje računara i
+ne dira se radi jednog testa.

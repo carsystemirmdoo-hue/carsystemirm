@@ -17,6 +17,12 @@ if /i "%~1"=="cleanup" (
   exit /b %errorlevel%
 )
 
+rem Dijagnostika PowerShell/DPAPI okruzenja. Nista ne menja na racunaru.
+if /i "%~1"=="diagnose" (
+  node --no-warnings "%~dp0diagnose.mjs"
+  exit /b %errorlevel%
+)
+
 node --no-warnings "%~dp0run-smoke.mjs"
 set RC=%errorlevel%
 echo.

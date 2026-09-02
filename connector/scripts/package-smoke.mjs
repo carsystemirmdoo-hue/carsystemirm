@@ -75,6 +75,16 @@ const ULAZI = [
 
   // Runner i uputstvo.
   { izvor: "connector/smoke/run-smoke.mjs", cilj: "smoke/run-smoke.mjs", tip: "fajl" },
+  /*
+   * Runtime ugovor je zaseban modul da bi bio testabilan van Windows-a; runner
+   * ga uvozi, pa mora u paket.
+   */
+  { izvor: "connector/smoke/runtime-contract.mjs", cilj: "smoke/runtime-contract.mjs", tip: "fajl" },
+  /*
+   * Dijagnostika PowerShell/DPAPI okruženja. Ne pokreće se sama — poziva se
+   * izričito, `RUN-SMOKE.cmd diagnose`, kada smoke padne a uzrok se ne vidi.
+   */
+  { izvor: "connector/smoke/diagnose.mjs", cilj: "smoke/diagnose.mjs", tip: "fajl" },
   { izvor: "connector/smoke/cleanup.mjs", cilj: "smoke/cleanup.mjs", tip: "fajl" },
   { izvor: "connector/smoke/RUN-SMOKE.cmd", cilj: "smoke/RUN-SMOKE.cmd", tip: "fajl" },
   { izvor: "connector/smoke/START-HERE.md", cilj: "START-HERE.md", tip: "fajl" },

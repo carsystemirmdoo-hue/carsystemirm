@@ -28,6 +28,9 @@ const WINDOWS = join(PAKET, "connector", "windows");
 const FIXTURES = join(PAKET, "fixtures", "dev", "biznisoft");
 const META = JSON.parse(readFileSync(join(OVDE, "package-meta.json"), "utf8"));
 
+/** Runtime ugovor živi u zasebnom modulu, da bi bio testabilan van Windows-a. */
+const { oceniRuntime, testiraniMajor } = await import("./runtime-contract.mjs");
+
 /* =========================================================================
  * Izveštavanje
  * ====================================================================== */
@@ -54,18 +57,27 @@ function provera(id, naziv, fn) {
     if (r && r.skip) zabelezi(id, naziv, "SKIP", r.detalj ?? "", r.kod ?? "skipped");
     else zabelezi(id, naziv, "PASS", (r && r.detalj) || "");
   } catch (e) {
-    zabelezi(id, naziv, "FAIL", "", (e && e.kod) || "unexpected_error");
+    /*
+     * FAIL nosi detalj kao i PASS.
+     *
+     * Prvi stvarni prolaz je vratio devet padova sa praznim detaljem i samo
+     * šifrom; iz takvog izveštaja se ne vidi ni šta je izmereno ni šta je
+     * očekivano, pa je svaka dijagnoza bila nagađanje. Detalj prolazi kroz
+     * `redigovan` pri upisu, kao i sve ostalo.
+     */
+    zabelezi(id, naziv, "FAIL", (e && e.detalj) || "", (e && e.kod) || "unexpected_error");
   }
 }
 
 class Pad extends Error {
-  constructor(kod) {
+  constructor(kod, detalj = "") {
     super(kod);
     this.kod = kod;
+    this.detalj = detalj;
   }
 }
-const pad = (kod) => {
-  throw new Pad(kod);
+const pad = (kod, detalj = "") => {
+  throw new Pad(kod, detalj);
 };
 
 /* =========================================================================
@@ -146,6 +158,24 @@ const json = (tekst) => {
   }
 };
 
+/**
+ * Efektivna politika izvršavanja, u jednom redu.
+ *
+ * Samo naziv politike i opseg — nijedna putanja, nijedno ime naloga. Bez ovoga
+ * `task_script_failed` ne kaže ništa upotrebljivo, a upravo je taj prazan detalj
+ * u prvom prolazu učinio nalaz nedijagnostikovanim.
+ */
+function politikaOpis() {
+  const r = powershell(["-Command", "Get-ExecutionPolicy -List | Out-String"], 30000);
+  if (r.kod !== 0) return "efektivna politika nije očitana";
+  const redovi = r.stdout
+    .split(/\r?\n/)
+    .map((x) => x.trim())
+    .filter((x) => /^(MachinePolicy|UserPolicy|Process|CurrentUser|LocalMachine)\s+\S+/.test(x))
+    .map((x) => x.replace(/\s+/g, "="));
+  return redovi.length > 0 ? `politika: ${redovi.join(" ")}` : "efektivna politika nije prepoznata";
+}
+
 function powershell(args, timeout = 120000) {
   const r = spawnSync(
     "powershell.exe",
@@ -219,6 +249,20 @@ writeFileSync(
  * Provere
  * ====================================================================== */
 
+/*
+ * Uvoz se pokušava JEDNOM, pre provera.
+ *
+ * Isti test koji radi entrypoint. Rezultat se koristi i u `W02` i u
+ * dijagnostici, pa se ne ponavlja.
+ */
+let sqliteDostupan = false;
+try {
+  await import("node:sqlite");
+  sqliteDostupan = true;
+} catch {
+  sqliteDostupan = false;
+}
+
 const okolina = {
   os: osVersion(),
   build: release(),
@@ -231,11 +275,23 @@ provera("W01", "Windows izdanje i arhitektura", () => {
   return { detalj: `${okolina.os} build ${okolina.build} ${okolina.arch}` };
 });
 
-provera("W02", "Node 24.14.x", () => {
-  const [maj, min] = process.versions.node.split(".").map(Number);
-  if (maj !== 24) pad("node_major_mismatch");
-  if (min !== 14) pad("node_minor_mismatch");
-  return { detalj: `Node ${process.versions.node}` };
+provera("W02", "Node zadovoljava runtime ugovor konektora", () => {
+  /*
+   * Ugovor je `major >= 22` + stvarno dostupan `node:sqlite`, tačno onako kako
+   * ga sprovodi `bin/connector.mjs`. Zaključavanje na `24.14.x` je prvi prolaz
+   * oborilo na Node 24.20.0 — runtime-u koji ugovor podržava.
+   *
+   * `node:sqlite` se PROVERAVA uvozom, ne izvodi iz broja verzije: postoje
+   * build-ovi koji znaju za ime modula a `import` im puca.
+   */
+  const o = oceniRuntime({
+    verzija: process.versions.node,
+    testirani: testiraniMajor(META.requiredNode),
+    sqliteDostupan: sqliteDostupan,
+  });
+  if (o.status === "fail") pad(o.kod, o.detalj);
+  if (o.status === "skip") return { skip: true, kod: o.kod, detalj: o.detalj };
+  return { detalj: o.detalj };
 });
 
 provera("W03", "paket raspakovan u putanju sa razmakom i ČĆŽŠĐ", () => {
@@ -258,22 +314,44 @@ provera("W04", "spakovan connector.cmd se pokreće", () => {
 provera("W05", "doctor u izolovanoj konfiguraciji", () => {
   const r = konektor(["doctor"]);
   const d = json(r.stdout);
-  if (!d) pad("doctor_no_json");
-  if (r.kod !== 0 || d.problema !== 0) pad("doctor_reported_problem");
+  if (!d) pad("doctor_no_json", `izlaz nije JSON (kod ${r.kod})`);
+
+  /*
+   * Dva RAZLIČITA kvara su ranije delila jednu šifru.
+   *
+   * `doctor_reported_problem` je pokrivao i „proces je pao" i „provera je našla
+   * problem", pa se iz izveštaja nije videlo koje od to dvoje se desilo. Sada
+   * su odvojeni, a detalj imenuje KOJE provere su pale — imena provera su naša,
+   * ne podaci sa mašine.
+   */
+  const problematicne = (d.nalazi ?? [])
+    .filter((n) => n.status === "greska")
+    .map((n) => `${n.provera}${n.detalj?.kod ? `(${n.detalj.kod})` : ""}`);
+
+  if (problematicne.length > 0) {
+    pad("doctor_reported_problem", `pale provere: ${problematicne.join(", ")}`);
+  }
+  if (r.kod !== 0) pad("doctor_exit_nonzero", `doctor nije prijavio problem, a izašao je sa ${r.kod}`);
 
   const skladiste = d.nalazi.find((n) => n.provera === "skladiste_kljuca");
-  if (!skladiste) pad("doctor_no_keystore_finding");
+  if (!skladiste) pad("doctor_no_keystore_finding", "doctor ne prijavljuje skladište ključa");
   /*
    * Na Windowsu adapter MORA biti DPAPI.
    *
    * Da je izabran bilo koji drugi, ključ ne bi bio vezan za nalog — i ceo
    * bezbednosni model prvog prolaza bi bio prazan.
    */
-  if (!/dpapi/i.test(JSON.stringify(skladiste))) pad("keystore_not_dpapi");
+  if (!/dpapi/i.test(JSON.stringify(skladiste))) {
+    pad("keystore_not_dpapi", `adapter prijavljen kao: ${skladiste.detalj?.adapter ?? "nepoznat"}`);
+  }
 
   const protokol = d.nalazi.find((n) => n.provera === "protokol_komandi");
-  if (!protokol || protokol.status !== "ok") pad("command_protocol_incompatible");
-  if ((protokol.detalj.nepotpisanePutanje ?? []).length !== 0) pad("unsigned_command_path");
+  if (!protokol || protokol.status !== "ok") {
+    pad("command_protocol_incompatible", `status=${protokol?.status ?? "nema nalaza"}`);
+  }
+  if ((protokol.detalj.nepotpisanePutanje ?? []).length !== 0) {
+    pad("unsigned_command_path", `nepotpisanih putanja: ${protokol.detalj.nepotpisanePutanje.length}`);
+  }
 
   return {
     detalj:
@@ -287,9 +365,20 @@ let otisakPrvi = null;
 provera("W06", "init pravi ključ kroz DPAPI, bez tajne na ekranu", () => {
   const r = konektor(["init"]);
   const d = json(r.stdout);
-  if (!d || r.kod !== 0 || d.status !== "napravljen") pad("init_failed");
-  if (!/dpapi/i.test(String(d.adapter))) pad("init_not_dpapi");
-  if (!d.javniKljucSpkiBase64 || !d.fingerprint) pad("init_no_public_material");
+  /*
+   * Konektor sam prijavljuje šifru greške (`{status:"greska", kod:…}`), i ta
+   * šifra je već redigovana na njegovoj strani. Prenosi se doslovno: bez nje se
+   * `init_failed` ne razlikuje od bilo kog drugog neuspeha.
+   */
+  if (!d) pad("init_failed", `izlaz nije JSON (kod ${r.kod})`);
+  if (d.status !== "napravljen") {
+    pad("init_failed", `status=${d.status ?? "?"} kod=${d.kod ?? "?"} izlaz=${r.kod}`);
+  }
+  if (r.kod !== 0) pad("init_wrong_exit", `ključ prijavljen kao napravljen, a izlaz je ${r.kod}`);
+  if (!/dpapi/i.test(String(d.adapter))) pad("init_not_dpapi", `adapter=${d.adapter ?? "?"}`);
+  if (!d.javniKljucSpkiBase64 || !d.fingerprint) {
+    pad("init_no_public_material", "nedostaje javni ključ ili otisak");
+  }
 
   /*
    * Fajl ključa NE SME biti čitljiv PKCS8.
@@ -306,15 +395,33 @@ provera("W06", "init pravi ključ kroz DPAPI, bez tajne na ekranu", () => {
 });
 
 provera("W07", "ponovljen init NE menja ključ", () => {
-  if (!otisakPrvi) pad("prerequisite_missing");
+  /*
+   * Bez ključa iz `W06` ovo NIJE zaseban kvar nego posledica.
+   *
+   * Prijaviti ga kao FAIL značilo bi da jedan uzrok proizvede dva pada i da
+   * izveštaj tvrdi dva problema tamo gde postoji jedan. `W07` je ključna
+   * provera, pa SKIP i dalje daje INCOMPLETE — nikad tihi PASS.
+   */
+  if (!otisakPrvi) {
+    return {
+      skip: true,
+      kod: "prerequisite_missing",
+      detalj: "W06 nije napravio ključ; ovo je posledica, ne zaseban kvar",
+    };
+  }
   const r = konektor(["init"]);
   const d = json(r.stdout);
-  if (!d || d.status !== "vec_postoji") pad("init_replaced_key");
-  if (r.kod !== 1) pad("init_repeat_wrong_exit");
+  if (!d || d.status !== "vec_postoji") {
+    pad("init_replaced_key", `status=${d?.status ?? "nema JSON-a"}`);
+  }
+  if (r.kod !== 1) pad("init_repeat_wrong_exit", `očekivan izlaz 1, dobijen ${r.kod}`);
 
   const e = json(konektor(["export-key"]).stdout);
-  if (!e || !e.fingerprint) pad("export_key_failed");
-  if (e.fingerprint !== otisakPrvi) pad("fingerprint_changed");
+  if (!e || !e.fingerprint) pad("export_key_failed", `kod=${e?.kod ?? "nema JSON-a"}`);
+  if (e.fingerprint !== otisakPrvi) {
+    // Vrednosti se NE prijavljuju; dovoljna je tvrdnja da su se razišle.
+    pad("fingerprint_changed", "otisak se promenio između dva poziva");
+  }
   /*
    * Otisak se NE upisuje u rezultat.
    *
@@ -392,25 +499,80 @@ provera("W12", "watch bez konfiguracije STAJE, bez tight loop-a", () => {
     env: okruzenje({ CS_CONNECTOR_CONFIG: join(PRAZAN, "nema.json") }),
     timeout: 90000,
   });
-  if (r.istekao) pad("watch_tight_loop_or_hang");
-  if (r.kod !== 1) pad("watch_wrong_exit");
+  if (r.istekao) pad("watch_tight_loop_or_hang", "petlja nije stala u 90 s");
+
+  /*
+   * Ugovor, ne slučajna vrednost.
+   *
+   * `src/cli.mjs` vraća 1 kada `pollOnce` baci grešku iz skupa `NEPOPRAVLJIVO`
+   * (`config_missing` je u njemu), i tada ispisuje `status: "zaustavljeno"`.
+   * Traži se OBOJE: sam izlazni kod ne razlikuje uredno zaustavljanje od
+   * neuhvaćene greške, koju `main()` takođe prijavljuje kodom 1.
+   *
+   * Do popravke pokretača ovde je stizala nula: `connector.cmd` je završavao
+   * sa `endlocal` i gutao kod. Zato se sada meri i prijavljuje DOBIJENA
+   * vrednost, da sledeći pad ne bude ponovo bez traga.
+   */
   const d = json(r.stdout);
-  if (!d || d.status !== "zaustavljeno") pad("watch_did_not_report_stop");
-  return { detalj: `staje sa kodom ${d.kod ?? "?"}` };
+  if (!d) pad("watch_no_json", `izlaz nije JSON (kod ${r.kod})`);
+  if (d.status !== "zaustavljeno") {
+    pad("watch_did_not_report_stop", `status=${d.status ?? "?"} kod=${d.kod ?? "?"}`);
+  }
+  if (r.kod !== 1) {
+    pad(
+      "watch_wrong_exit",
+      `petlja je prijavila zaustavljanje (${d.kod ?? "?"}), ` +
+        `ali je pokretač vratio ${r.kod} umesto 1`,
+    );
+  }
+  return { detalj: `staje sa izlazom 1, kod=${d.kod ?? "?"}` };
 });
+
+/** Potpisi poruka kojima Windows odbija izvršavanje .ps1 fajla. */
+const POLITIKA_BLOKIRA = /UnauthorizedAccess|cannot be loaded because running scripts is disabled|execution of scripts is disabled|PSSecurityException|not digitally signed/i;
 
 provera("W13", "task.ps1 ostaje dry-run i NE pravi zadatak", () => {
   const skripta = join(WINDOWS, "task.ps1");
   const r = powershell(["-File", skripta, "-Action", "install", "-PackagePath", DIST]);
-  if (r.kod !== 0) pad("task_script_failed");
-  if (!/\[dry-run\]/.test(r.stdout)) pad("task_script_not_dry_run");
+
+  /*
+   * Execution policy je STANJE MAŠINE, ne kvar paketa.
+   *
+   * Kada je politiku postavila Group Policy, `-ExecutionPolicy Bypass` se
+   * IGNORIŠE i `-File` nad nepotpisanom skriptom biva odbijen. To nije razlog
+   * da smoke padne, i nije razlog da iko globalno menja bezbednosno
+   * podešavanje računara — nego kontrolisan INCOMPLETE sa imenovanim uzrokom.
+   *
+   * Zadatak se i tada proverava: `Get-ScheduledTask` ide kroz `-Command`, na
+   * koji se politika izvršavanja skripti ne primenjuje.
+   */
+  const blokirano = r.kod !== 0 && POLITIKA_BLOKIRA.test(`${r.stdout}${r.stderr}`);
 
   const postoji = powershell([
     "-Command",
     "if (Get-ScheduledTask -TaskName CarsystemConnector -TaskPath '\\Carsystem\\' " +
       "-ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }",
   ]);
-  if (postoji.stdout.trim() !== "NE") pad("scheduled_task_created");
+  const zadatakPostoji = postoji.stdout.trim() === "DA";
+  if (zadatakPostoji) {
+    pad("scheduled_task_created", "zadatak CarsystemConnector postoji posle dry-run-a");
+  }
+
+  if (blokirano) {
+    return {
+      skip: true,
+      kod: "task_script_blocked_by_policy",
+      detalj:
+        `politika izvršavanja blokira .ps1 (izlaz ${r.kod}); ${politikaOpis()}. ` +
+        "Zadatak NIJE registrovan. Ne menjati politiku zbog smoke-a.",
+    };
+  }
+  if (r.kod !== 0) {
+    pad("task_script_failed", `powershell -File je izašao sa ${r.kod}; ${politikaOpis()}`);
+  }
+  if (!/\[dry-run\]/.test(r.stdout)) {
+    pad("task_script_not_dry_run", "izlaz ne sadrži oznaku [dry-run]");
+  }
   return { detalj: "plan ispisan, zadatak NIJE registrovan" };
 });
 
@@ -421,9 +583,37 @@ provera("W14", "spakovan konektor ne bira test skladište ključa", () => {
    * ono što bi napadač ili greška u skripti pokušali.
    */
   const r = konektor(["doctor"], { env: okruzenje({ CS_CONNECTOR_INSECURE_KEYSTORE: "1" }) });
-  if (r.kod !== 0) pad("doctor_failed_under_insecure_flag");
-  if (/test-insecure/.test(r.stdout)) pad("insecure_keystore_selected");
-  if (!/dpapi/i.test(r.stdout)) pad("keystore_not_dpapi_under_flag");
+  const d = json(r.stdout);
+
+  /*
+   * Ono što se OVDE meri je IZBOR adaptera, ne njegova ispravnost.
+   *
+   * Ranije je ista šifra (`keystore_not_dpapi_under_flag`) pokrivala i „izabran
+   * je pogrešan adapter" i „DPAPI je izabran ali je pukao": kada `proveri()`
+   * baci, doctor u nalaz upiše samo šifru greške i ime adaptera nestane, pa
+   * traženje reči „dpapi" u izlazu ne uspe. Prvi prolaz je tako prijavio izbor
+   * nebezbednog skladišta tamo gde ga nije bilo.
+   *
+   * Jedina tvrdnja koja ovde sme da padne je da je izabrano test skladište.
+   */
+  if (/test-insecure/.test(r.stdout)) {
+    pad("insecure_keystore_selected", "izričita promenljiva je izabrala test skladište");
+  }
+
+  const skladiste = d?.nalazi?.find((n) => n.provera === "skladiste_kljuca");
+  if (skladiste?.status === "greska") {
+    return {
+      skip: true,
+      kod: "keystore_error_under_flag",
+      detalj:
+        `DPAPI nije izabrao test skladište, ali je i sam prijavio grešku ` +
+        `(${skladiste.detalj?.kod ?? "?"}); vidi W05/W06 i \`RUN-SMOKE.cmd diagnose\``,
+    };
+  }
+  if (!/dpapi/i.test(r.stdout)) {
+    pad("keystore_not_dpapi_under_flag", `adapter=${skladiste?.detalj?.adapter ?? "nepoznat"}`);
+  }
+  if (r.kod !== 0) pad("doctor_failed_under_insecure_flag", `doctor je izašao sa ${r.kod}`);
   return { detalj: "izričit CS_CONNECTOR_INSECURE_KEYSTORE=1 ne menja adapter" };
 });
 
@@ -448,8 +638,35 @@ provera("W15", "postojeći connector testovi (uključujući [WIN])", () => {
   const pass = broj("pass");
   const fail = broj("fail");
   const skip = broj("skipped");
-  if (pass < 0) pad("test_output_unparseable");
-  if (fail > 0) pad("existing_tests_failed");
+  if (pass < 0) pad("test_output_unparseable", `izlaz nema TAP zbir (izlazni kod ${r.status})`);
+
+  const preskoceniWin = (izlaz.match(/^ok \d+ - \[WIN\][^\n]*# SKIP/gm) ?? []).length;
+  const ukupnoWin = (izlaz.match(/^(?:not )?ok \d+ - \[WIN\]/gm) ?? []).length;
+  const paliTestovi = [...izlaz.matchAll(/^not ok \d+ - (.+)$/gm)].map((m) => m[1].trim());
+  const paliWin = paliTestovi.filter((x) => x.startsWith("[WIN]"));
+
+  /*
+   * Zbir se upisuje PRE nego što provera može da padne.
+   *
+   * Ranije je `winRezime` dodeljivan tek posle `pad("existing_tests_failed")`,
+   * pa je svaki pad u `W15` ostavljao `W15-win` bez ijednog podatka — i ta
+   * provera je onda prijavljivala `win_summary_missing`, kao da [WIN] skup nije
+   * ni pokrenut. Jedan uzrok je proizvodio dva pada, od kojih je drugi
+   * pogrešno opisivao stanje.
+   */
+  winRezime = { pass, fail, skip, preskoceniWin, ukupnoWin, paliWin, paliTestovi };
+
+  if (fail > 0) {
+    /*
+     * Imena testova su NAŠA, ne podaci sa mašine — smeju u izveštaj i jedina su
+     * stvar iz koje se pad može dijagnostikovati bez lokalnog TAP loga.
+     */
+    const prvi = paliTestovi.slice(0, 3).join(" · ");
+    pad(
+      paliWin.length > 0 ? "win_tests_failed" : "existing_tests_failed",
+      `palo ${fail} (od toga [WIN] ${paliWin.length}): ${prvi}${paliTestovi.length > 3 ? " …" : ""}`,
+    );
+  }
 
   /*
    * Na Windowsu [WIN] testovi MORAJU biti izvršeni.
@@ -458,18 +675,52 @@ provera("W15", "postojeći connector testovi (uključujući [WIN])", () => {
    * sebe preskače jer menja Task Scheduler. Bilo koji drugi preskok znači da
    * DPAPI ili paket nisu stvarno provereni — i to je INCOMPLETE, ne PASS.
    */
-  const preskoceniWin = (izlaz.match(/^ok \d+ - \[WIN\][^\n]*# SKIP/gm) ?? []).length;
-  winRezime = { pass, fail, skip, preskoceniWin };
-  if (preskoceniWin > 1) pad("win_tests_skipped");
-  return { detalj: `pass=${pass} fail=${fail} skipped=${skip} ([WIN] preskočeno ${preskoceniWin})` };
+  if (preskoceniWin > 1) {
+    pad("win_tests_skipped", `[WIN] preskočeno ${preskoceniWin} od ${ukupnoWin}; dozvoljen je najviše jedan`);
+  }
+  return {
+    detalj: `pass=${pass} fail=${fail} skipped=${skip} ` +
+      `([WIN] ${ukupnoWin - preskoceniWin}/${ukupnoWin} izvršeno)`,
+  };
 });
 
 provera("W15-win", "[WIN] suite je stvarno izvršen na ovoj mašini", () => {
-  if (!winRezime) pad("win_summary_missing");
-  if (winRezime.preskoceniWin > 1) {
-    return { skip: true, detalj: "više od jednog [WIN] testa preskočeno", kod: "win_suite_not_run" };
+  /*
+   * Bez zbira se NE tvrdi ni da jeste ni da nije izvršen.
+   *
+   * `W15` sada upisuje zbir pre nego što može da padne, pa je ovo stanje
+   * moguće samo ako je `W15` pukao pre parsiranja TAP izlaza — dakle testovi se
+   * uopšte nisu pokrenuli. Razlog mora to i reći.
+   */
+  if (!winRezime) {
+    pad("win_summary_missing", "W15 nije stigao da pročita TAP zbir; skup verovatno nije ni pokrenut");
   }
-  return { detalj: "9 od 10 [WIN] testova izvršeno; 1 namerno ručni (Task Scheduler -Apply)" };
+  const { ukupnoWin, preskoceniWin, paliWin } = winRezime;
+  if (ukupnoWin === 0) {
+    pad("win_suite_absent", "TAP izlaz ne sadrži nijedan [WIN] test");
+  }
+  const izvrseno = ukupnoWin - preskoceniWin;
+  if (preskoceniWin > 1) {
+    return {
+      skip: true,
+      kod: "win_suite_not_run",
+      detalj: `izvršeno ${izvrseno}/${ukupnoWin}; dozvoljen je najviše jedan preskok`,
+    };
+  }
+  if (paliWin.length > 0) {
+    pad("win_tests_failed", `palo ${paliWin.length} [WIN] testova: ${paliWin.slice(0, 3).join(" · ")}`);
+  }
+  /*
+   * Broj se RAČUNA, ne kuca.
+   *
+   * Prethodna verzija je pisala „9 od 10" i ta rečenica je postala netačna čim
+   * je [WIN] skup dobio jedanaesti test.
+   */
+  return {
+    detalj:
+      `${izvrseno} od ${ukupnoWin} [WIN] testova izvršeno; ` +
+      `${preskoceniWin} namerno ručnih (Task Scheduler -Apply)`,
+  };
 });
 
 /* =========================================================================
@@ -494,6 +745,40 @@ const unicodePutanja = nalazi.find((n) => n.id === "W03")?.status === "PASS";
 
 const red = (n) =>
   `| ${n.id} | ${n.naziv} | ${n.status} | ${redigovan(n.detalj) || "—"} | ${n.kod ?? "—"} |`;
+
+/*
+ * PRIMARNO nasuprot POSLEDICI.
+ *
+ * Prvi prolaz je vratio devet padova, a stvarnih uzroka je bilo dva. Spisak od
+ * devet ravnopravnih redova navodi na devet nezavisnih popravki — i tako se
+ * troši dan na posledice.
+ *
+ * Veze su ZNANE, ne pogađane: `W07` traži ključ iz `W06`, `W14` čita isti
+ * nalaz doctora kao `W05`, a `W15-win` čita zbir iz `W15`.
+ */
+const ZAVISI_OD = { W06: ["W05"], W07: ["W06"], W14: ["W05", "W06"], "W15-win": ["W15"] };
+const stanje = (id) => nalazi.find((n) => n.id === id)?.status;
+const problem = (id) => stanje(id) === "FAIL" || stanje(id) === "SKIP";
+
+const neuredni = nalazi.filter((n) => n.status === "FAIL" || n.status === "SKIP");
+const primarni = neuredni.filter((n) => !(ZAVISI_OD[n.id] ?? []).some(problem));
+const posledice = neuredni.filter((n) => (ZAVISI_OD[n.id] ?? []).some(problem));
+
+const klasifikacija = neuredni.length === 0
+  ? ["Nijedna provera nije pala ni preskočena."]
+  : [
+      "Provere se ne broje ravnopravno: neke padaju zato što je pala druga.",
+      "",
+      "**Primarni nalazi — ovde počinje dijagnoza:**",
+      "",
+      ...primarni.map((n) => `- \`${n.id}\` (${n.status}) \`${n.kod ?? "—"}\` — ${redigovan(n.detalj) || "bez detalja"}`),
+      "",
+      posledice.length > 0 ? "**Posledice — očekuje se da nestanu kad primarni budu rešeni:**" : "",
+      posledice.length > 0 ? "" : "",
+      ...posledice.map(
+        (n) => `- \`${n.id}\` (${n.status}) — zavisi od ${(ZAVISI_OD[n.id] ?? []).map((x) => `\`${x}\``).join(", ")}`,
+      ),
+    ].filter((x) => x !== "" || true);
 
 writeFileSync(
   REZULTAT,
@@ -533,6 +818,25 @@ writeFileSync(
     "",
     `Zbir: PASS ${brojStatusa("PASS")} · FAIL ${brojStatusa("FAIL")} · SKIP ${brojStatusa("SKIP")}`,
     "",
+    "## Šta je primarno, a šta posledica",
+    "",
+    ...klasifikacija,
+    "",
+    ...(neuredni.length > 0
+      ? [
+          "Ako je među primarnim nalazima nešto oko DPAPI-ja ili PowerShell-a,",
+          "pokreni i:",
+          "",
+          "```",
+          "smoke\\RUN-SMOKE.cmd diagnose",
+          "```",
+          "",
+          "Taj alat proizvodi zaseban redigovan izveštaj o PowerShell okruženju",
+          "(dostupnost, jezički režim, politika izvršavanja, DPAPI proba) i ne",
+          "menja ništa na računaru.",
+          "",
+        ]
+      : []),
     "## Napomena o redakciji",
     "",
     "Ovaj fajl je namenjen slanju. Ne sadrži korisničko ime, ime računara,",

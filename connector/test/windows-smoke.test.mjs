@@ -125,6 +125,60 @@ test("[WIN] putanja sa razmacima, srpskim slovima i UNC oblikom", async (t) => {
   }
 });
 
+test("[WIN] junction ka putanji van korena NIJE praćen", async (t) => {
+  if (guard(t)) return;
+  const skener = await import(D("scanner.mjs"));
+  const { mkdir, cp } = await import("node:fs/promises");
+  const { execFileSync: exec } = await import("node:child_process");
+
+  const baza = await mkdtemp(join(tmpdir(), "cs-win-junction-"));
+  try {
+    const koren = join(baza, "FAKTURE");
+    const spolja = join(baza, "TUDJE");
+    await mkdir(join(koren, "FAKTURE 2026"), { recursive: true });
+    await mkdir(spolja, { recursive: true });
+
+    const uzorak = fileURLToPath(
+      new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url),
+    );
+    await cp(uzorak, join(koren, "FAKTURE 2026", "nasa.pdf"));
+    await cp(uzorak, join(spolja, "tudja.pdf"));
+
+    /*
+     * `mklink /J` pravi junction — Windows reparse tačku koja ne traži
+     * administratorska prava, za razliku od `/D` symlinka.
+     *
+     * Ovo je stvarni oblik koji bi na kancelarijskom računaru mogao da uvuče
+     * tuđi folder u arhivu: neko napravi „prečicu" ka mrežnom disku unutar
+     * `FAKTURE`, i skener bez provere počne da čita nešto što niko nije odobrio.
+     */
+    let junctionNapravljen = true;
+    try {
+      exec("cmd.exe", ["/c", "mklink", "/J", join(koren, "PRECICA"), spolja], {
+        encoding: "utf8",
+      });
+    } catch {
+      junctionNapravljen = false;
+    }
+    if (!junctionNapravljen) {
+      t.skip("mklink /J nije uspeo na ovoj mašini; junction nije napravljen.");
+      return;
+    }
+
+    const { koren: razresen } = await skener.proveriIzvor(koren);
+    const { kandidati, preskoceno } = await skener.nadjiKandidate(razresen);
+    const imena = kandidati.map((k) => k.putanja.split("\\").pop());
+
+    assert.deepEqual(imena, ["nasa.pdf"], "junction je uvukao dokument van korena");
+    assert.ok(
+      preskoceno.some((x) => x.razlog === "podfolder_symlink" || x.razlog === "podfolder_van_korena"),
+      "junction nije prijavljen kao preskočen",
+    );
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
 test("[WIN] fajl koji drži drugi proces se ODLAŽE, ne gubi", async (t) => {
   if (guard(t)) return;
   const skener = await import(D("scanner.mjs"));
@@ -148,7 +202,7 @@ test("[WIN] fajl koji drži drugi proces se ODLAŽE, ne gubi", async (t) => {
         stabilnostMs: 1,
         stabilnostPokusaja: 2,
         maxBajtova: 1024,
-        maxFajlovaPoCiklusu: 5,
+        maxNovihPoCiklusu: 5,
       });
       // Na nekim konfiguracijama čitanje ipak uspe; oba ishoda su prihvatljiva,
       // ali trajna greška nije.

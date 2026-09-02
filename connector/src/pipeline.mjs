@@ -3,7 +3,9 @@ import { validateCanonicalInvoice } from "../../lib/sync/contract/validate.mjs";
 import { parseBiznisoftPdf } from "../../lib/pdf/parseDocument.js";
 import { posaljiPotpisano } from "./client.mjs";
 import { odlukaZaOdgovor, STANJA, ZAUSTAVLJA_CIKLUS } from "./outcomes.mjs";
-import { nadjiKandidate, PODRAZUMEVANE_GRANICE, procitajStabilno, proveriIzvor } from "./scanner.mjs";
+import {
+  nadjiKandidate, PODRAZUMEVANE_GRANICE, procitajStabilno, procitajZaOtisak, proveriIzvor,
+} from "./scanner.mjs";
 import { sledeciPokusajPosleNeuspeha } from "./schedule.mjs";
 
 /**
@@ -27,12 +29,29 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
   const { koren } = await proveriIzvor(konfiguracija.izvorniFolder);
   const { kandidati, preskoceno } = await nadjiKandidate(koren, granice);
 
-  const zbir = { pregledano: kandidati.length, novo: 0, poznato: 0, odlozeno: 0, nepodrzano: 0 };
+  const zbir = {
+    /** Koliko je PDF-ova uopšte popisano — koren i svi neposredni podfolderi. */
+    pregledano: kandidati.length,
+    novo: 0,
+    poznato: 0,
+    odlozeno: 0,
+    nepodrzano: 0,
+    /** Novih je bilo više nego što budžet dozvoljava; ostatak ide sledeći ciklus. */
+    cekaBudzet: 0,
+  };
   const detalji = [];
+  let uObradi = 0;
 
   for (const k of kandidati) {
-    const citanje = await procitajStabilno(k.putanja, granice);
-    if (!citanje.ok) {
+    /*
+     * KORAK 1 — jeftino otkrivanje: jedno čitanje, otisak, bez čekanja.
+     *
+     * Protokol stabilnosti košta dve sekunde po fajlu; nad arhivom od ~12.000
+     * dokumenata to je oko 6,7 sati (mereno). Zato ga ovde nema — plaćaju ga
+     * samo dokumenti koji se pokažu kao novi ili promenjeni.
+     */
+    const otkrivanje = await procitajZaOtisak(k.putanja, granice);
+    if (!otkrivanje.ok) {
       /*
        * Nestabilan, zaključan ili nestao fajl se ODLAŽE.
        *
@@ -40,17 +59,52 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
        * sledećeg ciklusa gotov, a trajna oznaka bi ga zauvek izbacila.
        */
       zbir.odlozeno += 1;
-      detalji.push({ razlog: citanje.razlog });
+      detalji.push({ razlog: otkrivanje.razlog });
       continue;
     }
 
     /*
      * Identitet je otisak SADRŽAJA.
      *
-     * Isti sadržaj pod drugim imenom ne pravi novu stavku; promenjeni bajtovi na
-     * istoj putanji daju drugi otisak i zato prolaze ponovo.
+     * Isti sadržaj pod drugim imenom ILI U DRUGOM FOLDERU ne pravi novu stavku;
+     * promenjeni bajtovi na istoj putanji daju drugi otisak i zato prolaze
+     * ponovo, kao nova izvorna verzija.
+     *
+     * Poznat dokument NE troši budžet obrade. Da ga troši, 200 poznatih fajlova
+     * u `FAKTURE 2024` moglo bi trajno da sakrije nov dokument u `FAKTURE 2029`.
      */
-    if (store.imaOtisak(citanje.sourceHash)) {
+    if (store.imaOtisak(otkrivanje.sourceHash)) {
+      zbir.poznato += 1;
+      continue;
+    }
+
+    /*
+     * KORAK 2 — tek sada budžet, i tek sada protokol stabilnosti.
+     *
+     * Popis je već gotov i pun; ovo ograničava samo koliko se novih dokumenata
+     * parsira i šalje u jednom ciklusu. Ostatak čeka sledeći, i biće viđen jer
+     * popis ne pamti dokle je stigao.
+     */
+    if (uObradi >= granice.maxNovihPoCiklusu) {
+      zbir.cekaBudzet += 1;
+      continue;
+    }
+    uObradi += 1;
+
+    const citanje = await procitajStabilno(k.putanja, granice);
+    if (!citanje.ok) {
+      zbir.odlozeno += 1;
+      detalji.push({ razlog: citanje.razlog });
+      continue;
+    }
+
+    /*
+     * Otisak se proverava PONOVO nad stabilnim čitanjem.
+     *
+     * Između otkrivanja i ovog čitanja fajl je mogao da se dovrši ili vrati na
+     * raniju verziju; merodavan je otisak bajtova koje parser stvarno dobija.
+     */
+    if (citanje.sourceHash !== otkrivanje.sourceHash && store.imaOtisak(citanje.sourceHash)) {
       zbir.poznato += 1;
       continue;
     }

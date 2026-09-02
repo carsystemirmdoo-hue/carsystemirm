@@ -173,6 +173,7 @@
     "test:smoke-runtime": "node --test connector/test/runtime-contract.test.mjs",
     "test:connector-launcher": "node --test connector/test/launcher.test.mjs",
     "test:diagnose": "node --test connector/test/diagnose.test.mjs",
+    "test:daily-scan": "node --test connector/test/daily-scan.test.mjs connector/test/scanner-store.test.mjs",
     "test:contract": "node --test lib/sync/contract/*.test.mjs",
     "test:signing": "node --test lib/sync/device/*.test.mjs",
     "test:sync-actions": "node --test app/portal/importi/sinhronizacija/*.test.mjs",

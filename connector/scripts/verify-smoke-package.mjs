@@ -139,9 +139,24 @@ korak("connector suite IZ Unicode putanje", () => {
   /*
    * Van Windowsa [WIN] testovi MORAJU biti preskočeni, i to izričito.
    * Da ih ovde nema, prolaz bi tvrdio nešto što nije proveravao.
+   *
+   * Očekivani broj se BROJI iz spakovanog test fajla, ne kuca.
+   *
+   * Ranije je stajala konstanta `10`; čim je [WIN] skup dobio jedanaesti test,
+   * verifikacija je pala nad ispravnim paketom — isti oblik greške koji je
+   * `W15-win` imao sa rečenicom „9 od 10". Broj koji se menja ne sme biti
+   * zapisan na dva mesta.
    */
-  if (winSkip !== 10) throw new Error(`očekivano 10 [WIN] skipova, nađeno ${winSkip}`);
-  return `pass=${pass} fail=${fail} skipped=${skip} ([WIN] ${winSkip})`;
+  const izvorWin = readFileSync(
+    join(PAKET, "connector", "test", "windows-smoke.test.mjs"),
+    "utf8",
+  );
+  const ocekivanoWin = (izvorWin.match(/^test\("\[WIN\]/gm) ?? []).length;
+  if (ocekivanoWin === 0) throw new Error("spakovan [WIN] skup nema nijedan test");
+  if (winSkip !== ocekivanoWin) {
+    throw new Error(`očekivano ${ocekivanoWin} [WIN] skipova, nađeno ${winSkip}`);
+  }
+  return `pass=${pass} fail=${fail} skipped=${skip} ([WIN] ${winSkip}/${ocekivanoWin})`;
 });
 
 /* --- 5. Isti suite iz obične putanje — kontrola. ------------------------ */

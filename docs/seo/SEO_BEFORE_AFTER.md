@@ -4,7 +4,7 @@ Audit je pokrenut nad lokalnim Next.js production buildom. Baseline je sačuvan 
 
 | Metrika | Pre | Posle | Promena |
 | --- | ---: | ---: | ---: |
-| Indeksabilne stranice | 860 | 872 | +12 |
+| Indeksabilne stranice | 860 | 913 | +53 |
 | Indeksabilne stranice bez title-a | 0 | 0 | 0 |
 | Stranice sa dupliranim title-om | 5 | 0 | -5 |
 | Indeksabilne stranice bez description-a | 0 | 0 | 0 |
@@ -28,7 +28,7 @@ Audit je pokrenut nad lokalnim Next.js production buildom. Baseline je sačuvan 
 
 Napomene:
 
-- Posle izmene sitemap ima 872 canonical, indeksabilnih URL-ova sa HTTP 200.
+- Posle izmene sitemap ima 198 canonical, indeksabilnih URL-ova sa HTTP 200.
 - Finalni validator je proverio svih 832 PDP URL-a, svih 59 R-M PDP URL-a i svih 117 PDF fajlova.
 - Prazan alt je dozvoljen za dekorativne slike; finalni audit nema nijedan img bez alt atributa.
 - Jedanaest slika bez eksplicitnih dimenzija pripada samo noindex demo/social rutama, ne javnim indeksabilnim stranicama.

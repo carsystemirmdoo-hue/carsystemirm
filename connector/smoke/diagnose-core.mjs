@@ -35,7 +35,12 @@ export const KODOVI = Object.freeze({
  * promakao. Upravo taj oblik je i procureo na ekran.
  */
 const SUMNJIVO = [
-  /file:\/\/\/[^\s"')]+/gi,
+  /*
+   * `[/]{3}` umesto `\/\/\/` — inače `e:\` iz „file:\/" ispada kao apsolutna
+   * Windows putanja i provera sadržaja paketa odbije pakovanje. Isti lažni
+   * pogodak koji je već zabeležen za `PDV:\s*` u parseru.
+   */
+  /file:[/]{3}[^\s"')]+/gi,
   /[A-Za-z]:[\\/][^\s"')]+/g,
   /\\\\[^\s"')]+/g,
   /\/(?:Users|home)\/[^\s"')]+/g,

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { generateKeyPairSync } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -251,6 +251,21 @@ test("[WIN] spakovan konektor se pokreće preko connector.cmd", async (t) => {
   const cmd = fileURLToPath(new URL("../dist/connector.cmd", import.meta.url));
   const izlaz = execFileSync("cmd.exe", ["/c", cmd, "--help"], { encoding: "utf8" });
   assert.match(izlaz, /Carsystem konektor/);
+});
+
+test("[WIN] connector.cmd vraća izlazni kod konektora, ne nulu", async (t) => {
+  if (guard(t)) return;
+  const cmd = fileURLToPath(new URL("../dist/connector.cmd", import.meta.url));
+  /*
+   * `endlocal` uspeva uvek, pa je batch fajl bez `exit /b` vraćao 0 i kad je
+   * konektor pao. Task Scheduler čita upravo taj kod. Nepoznata komanda daje 2
+   * — najjeftiniji nenulti kod koji ne dodiruje ni ključ ni red.
+   */
+  const r = spawnSync("cmd.exe", ["/c", cmd, "ova-komanda-ne-postoji"], { encoding: "utf8" });
+  assert.equal(r.status, 2, `pokretač je progutao izlazni kod: dobijeno ${r.status}`);
+
+  const ok = spawnSync("cmd.exe", ["/c", cmd, "--help"], { encoding: "utf8" });
+  assert.equal(ok.status, 0, "uspešna komanda više ne vraća nulu");
 });
 
 test("[WIN] spakovan konektor odbija test skladište ključa", async (t) => {

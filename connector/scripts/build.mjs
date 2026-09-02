@@ -141,6 +141,21 @@ writeFileSync(join(DIST, "package.json"), `${JSON.stringify(manifest, null, 2)}\
  * `--no-warnings` skriva `ExperimentalWarning` za `node:sqlite`; status se i
  * dalje prijavljuje kroz `doctor`, pa se ne gubi.
  */
+/*
+ * Izlazni kod MORA da preživi `endlocal`.
+ *
+ * Batch fajl vraća ERRORLEVEL poslednje naredbe, a to je bio `endlocal` — koji
+ * uspeva uvek. Zbog toga je `cmd.exe /c connector.cmd` vraćao 0 i kad je
+ * konektor pao: Task Scheduler bi neuspeo ciklus prijavio kao uspešan, a
+ * `watch` koji staje zbog neispravne konfiguracije izgledao bi kao uredan
+ * završetak. Prvi Windows smoke je to i izmerio (`W12: watch_wrong_exit`).
+ *
+ * `endlocal & exit /b %CS_RC%` je jedini ispravan oblik: cela linija se parsira
+ * pre izvršavanja, pa se `%CS_RC%` proširi DOK promenljiva još postoji, a
+ * `exit /b` postavi kod tek pošto je `endlocal` vratio okruženje.
+ *
+ * `connector.sh` istu stvar rešava sa `exec` i nikad nije imao ovaj problem.
+ */
 writeFileSync(
   join(DIST, "connector.cmd"),
   [
@@ -148,7 +163,8 @@ writeFileSync(
     "setlocal",
     "set CS_CONNECTOR_PACKAGED=1",
     'node --no-warnings "%~dp0connector\\bin\\connector.mjs" %*',
-    "endlocal",
+    "set CS_RC=%ERRORLEVEL%",
+    "endlocal & exit /b %CS_RC%",
     "",
   ].join("\r\n"),
 );

@@ -149,19 +149,20 @@ učestvuje u odluci da li test prolazi.
 
 ---
 
-## 6. F-11 — `next-env.d.ts`
+## 6. F-11 — `next-env.d.ts` 🟢
 
 Fajl je Next.js generisan i naveden u `.gitignore` (`next-env.d.ts`, linija 43),
-ali je **praćen u Gitu** — dodat pre nego što je pravilo uvedeno. Zato ga svaki
-`next build` ponovo prlja (`.next-dev` → `.next`), a `.gitignore` na praćen fajl
-ne deluje.
+ali je bio **praćen u Gitu** — dodat pre nego što je pravilo uvedeno. Zato ga je
+svaki `next build` ponovo prljao (`.next-dev` → `.next`), jer `.gitignore` na
+praćen fajl ne deluje.
 
 Sadržaj je vraćen na projektni oblik (`./.next-dev/types/routes.d.ts`), isti
 koji proizvodi `npm run dev` — dokumentovana razvojna komanda.
 
-🟡 **Odluka vlasnika:** trajno rešenje je `git rm --cached next-env.d.ts`, čime
-bi `.gitignore` pravilo počelo da važi i drift bi prestao. To menja praćenje
-fajla, pa nije urađeno bez potvrde.
+🟢 **Sprovedeno:** `git rm --cached next-env.d.ts` izvršen je commit-om
+`8ec1cec`; `.gitignore` pravilo sada važi i drift je prestao. Fajl **nije
+praćen u Gitu** — to ne znači da ne postoji na disku: Next.js ga i dalje
+lokalno generiše pri `next dev`/`next build`, kao ignorisan fajl.
 
 ---
 
@@ -173,6 +174,5 @@ fajla, pa nije urađeno bez potvrde.
 | Slanje e-pošte | 🔵 provider-neutralan outbox postoji; nema provajdera |
 | Tekst saglasnosti | 🟡 traži pravnu potvrdu |
 | „Pogled kupca" | 🟡 samo ugovor, §2 |
-| `next-env.d.ts` untrack | 🟡 §6 |
 | Automatski prelaz u `expired` | 🔵 danas ručna radnja |
 | Reconciliation servis | 🔵 jedini koji sme da postavi `confirmed`; van dometa ove faze |

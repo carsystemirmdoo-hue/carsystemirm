@@ -127,7 +127,7 @@ Danas se ovo **ne postavlja eksplicitno** — oslanja se na NextAuth default (`a
 | `lib/authz/**`, `lib/audit/**`, `lib/sales/**`, `lib/import/**`, `lib/export/**` | `apps/portal/lib/**` | nizak |
 | `lib/commerce/`, `lib/cart/`, `components/cart/` | `apps/portal/**` | **srednji** — nekomitovano, vidi rizik 1 |
 | `middleware.ts` | **deli se na dva** | **visok** — vidi rizik 2 |
-| `lib/carsystem-data.ts`, `lib/products.ts`, `lib/product-families.ts`, `types/product*.ts` | `packages/shared/` | **visok** — vidi rizik 3 |
+| `lib/carsystem-data.ts`, `lib/product-families.ts`, `types/product*.ts` | `packages/shared/` | **visok** — vidi rizik 3 |
 | `app/globals.css`, dizajn tokeni, `components/product/**` | `packages/shared/` + `apps/public` | **visok** — vidi rizik 4 |
 
 ### Rizici razdvajanja 🔵

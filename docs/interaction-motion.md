@@ -41,7 +41,7 @@ Transition variants:
 
 ## Catalog Foundation
 
-Catalog result rendering starts with the first 48 filtered products and expands in 48-item steps. `CatalogSkeletonGrid` provides a stable Suspense fallback for catalog loading states.
+Catalog result rendering starts with the first 48 filtered products and expands in 48-item steps. The Suspense fallback for catalog loading states is `CatalogStaticProductGrid` paired with `CatalogPaginationNav`.
 
 Product cards use `cs-product-motion-card` with `--product-accent` and `--product-hover-bg`. Hover direction is stored as local `data-*` attributes on the card and cycles top, bottom, side without React grid re-renders.
 

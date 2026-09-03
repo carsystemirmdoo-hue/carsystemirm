@@ -28,7 +28,7 @@ Produkcioni canonical origin je https://carsystemirm.com. Preview/development ok
 ## Centralna implementacija
 
 - lib/seo/site-config.ts: origin, jezik, locale, default metadata i environment indexation.
-- lib/seo/route-policy.ts: tipovi ruta i deklarativna politika.
+- lib/seo/metadata-builders.ts i pozivna mesta: index/follow/canonical politika po ruti; self-canonical je podrazumevan, a cross-canonical je namerna odluka na mestu poziva.
 - lib/seo/metadata-builders.ts: page/product/brand/program/category/store/contact metadata.
 - lib/seo.ts: JSON-LD helperi sa bezbednim serijalizovanjem.
 - middleware.ts: canonical host i HTTP robots direktive za query/internal rute.

@@ -2,6 +2,9 @@
   "name": "carsystem-rm",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "NEXT_DIST_DIR=.next-dev next dev",
     "dev:search": "NEXT_DIST_DIR=.next-search-dev next dev --port 3210",

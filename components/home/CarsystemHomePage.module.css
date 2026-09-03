@@ -2635,20 +2635,6 @@
   }
 }
 
-@keyframes mistDrift {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scale(0.6);
-  }
-  18% {
-    opacity: 0.85;
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--dx), var(--dy), 0) scale(1.6);
-  }
-}
-
 @media (max-width: 860px) {
   .home {
     padding-bottom: 78px;

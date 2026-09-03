@@ -20,8 +20,8 @@ samo kao navigacioni tekst i ikonice.
 
 Ono što je postojalo ranije, a **nije** izvor istine za ovih 12:
 
-- `data/categories.ts` — pripada mrtvom legacy sloju (`lib/products.ts`), nijedna
-  javna stranica ga ne koristi;
+- legacy demo sloj (`data/categories.ts`, `lib/products.ts`) — uklonjen u
+  cleanup-u 2026-09; nikada nije bio izvor istine za ovih 12;
 - `lib/seo/category-landings.ts` — druga osa: 4 SEO landinga samo za R-M, po
   `rmMetadata.category`;
 - `docs/CARSYSTEM_CATEGORY_MAPPING_PROPOSAL.md` — sekcijski predlog samo za

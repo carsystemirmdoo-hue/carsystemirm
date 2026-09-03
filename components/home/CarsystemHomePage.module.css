@@ -137,20 +137,6 @@
   scroll-margin-top: clamp(76px, 8vw, 96px);
 }
 
-.sprayCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: 120;
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-}
-
-.sprayCanvasActive {
-  display: block;
-}
-
 .primaryCta,
 .secondaryCta,
 .secondaryOnDark,
@@ -2668,10 +2654,6 @@
     padding-bottom: 78px;
   }
 
-  .sprayCanvas {
-    display: none !important;
-  }
-
   .locatorCard {
     display: none;
   }
@@ -2984,10 +2966,6 @@
     max-height: 36px;
   }
 
-  .sprayCanvas {
-    display: none !important;
-  }
-
   .home *,
   .home *::before,
   .home *::after {
@@ -2995,12 +2973,6 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
-  }
-}
-
-@media (hover: none), (pointer: coarse) {
-  .sprayCanvas {
-    display: none !important;
   }
 }
 

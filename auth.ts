@@ -75,7 +75,18 @@ const customerCredentialsSchema = z.object({
  */
 let mfaModeAnnounced = false;
 
-function resolveMfaRuntime() {
+/**
+ * SAMO za testove: vraća zastavicu „ime režima već ispisano" na početno
+ * stanje. Produkcijski kod ovo nikad ne poziva — svaki novi proces (cold
+ * start) prirodno počinje sa `false`. Isti obrazac kao
+ * `__resetRateLimitLogStateForTests` u `lib/auth/rate-limit-service.ts`
+ * (AUTH-02) — resetuje samo lokalnu promenljivu, nikad konfiguraciju.
+ */
+export function __resetMfaAnnouncementForTests(): void {
+  mfaModeAnnounced = false;
+}
+
+export function resolveMfaRuntime() {
   const resolved = resolveMfaMode(process.env);
 
   if (!mfaModeAnnounced) {
@@ -88,6 +99,7 @@ function resolveMfaRuntime() {
   const configuration = validateMfaConfiguration({
     mode: resolved.mode,
     mfaConfigured: isMfaConfigured(process.env),
+    offRejectedOnRemoteDeployment: resolved.offRejectedOnRemoteDeployment,
   });
 
   return { ...resolved, configuration };

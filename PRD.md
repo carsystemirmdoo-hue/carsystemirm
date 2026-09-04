@@ -139,7 +139,7 @@ Required:
 ### 7.2 Catalog
 
 - Product catalog must support around 3000 products.
-- Product list must support filters by brand, category, subcategory, workflow phase, product line, technical category and finish, plus free-text search that also matches product code (SKU) and color/shade names.
+- Product discovery must support category and subcategory navigation, faceted filters by brand, program, workflow phase, product line, technical category, finish, availability status and intended use/type, plus free-text search that also matches product code (SKU) and color/shade names.
 - Product page must support images, description, SKU, brand, technical sheets, safety sheets, package options and variants.
 - Logged-out users see inquiry CTA.
 - Logged-in users see their own prices.

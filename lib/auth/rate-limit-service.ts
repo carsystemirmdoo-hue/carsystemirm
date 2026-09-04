@@ -11,6 +11,7 @@ import {
 import {
   isRateLimitConfigured,
   rateLimitSubjectKey,
+  validateRateLimitConfiguration,
 } from "@/lib/auth/rate-limit-key.mjs";
 
 /**
@@ -38,10 +39,64 @@ const ALLOWED: RateLimitDecision = {
   blockedBy: null,
 };
 
+/*
+ * `AUTH-02`: greška u podešavanju NIKAD ne sme da liči na `ALLOWED`.
+ *
+ * Nema stvarnog brojača iza ove odluke — vraća se fiksan, konzervativan
+ * `retryAfterSeconds` (najkraći postojeći prozor blokade u politici) da
+ * korisnik dobije istu vrstu poruke kao za svaku drugu privremenu blokadu,
+ * bez otkrivanja da je uzrok konfiguracija, ne pravi limit.
+ */
+const CONFIG_ERROR_RETRY_SECONDS = 60;
+const FAIL_CLOSED: RateLimitDecision = {
+  allowed: false,
+  retryAfterSeconds: CONFIG_ERROR_RETRY_SECONDS,
+  blockedBy: null,
+};
+
 function env() {
   return {
     AUTH_RATE_LIMIT_HMAC_KEY: process.env.AUTH_RATE_LIMIT_HMAC_KEY,
+    NODE_ENV: process.env.NODE_ENV,
+    VERCEL_ENV: process.env.VERCEL_ENV,
   };
+}
+
+/*
+ * Log-flood zaštita: napadač koji pošalje hiljadu zahteva dok je ključ
+ * neispravan ne sme da ostavi hiljadu identičnih redova. Modulska promenljiva
+ * traje dok traje proces (serverless "cold start") — jedan bezbedan signal po
+ * pokretanju procesa je dovoljan da neko primeti problem; hiljadu ih ne bi
+ * bilo čitljivije, samo skuplje.
+ *
+ * Odluka (FAIL_CLOSED/`true`) se vraća na SVAKOM pozivu, bez obzira na ovu
+ * zastavicu — ograničava se samo LOG, nikad bezbednosni ishod.
+ */
+let configurationErrorLogged = false;
+
+/**
+ * Prijavljuje grešku podešavanja NAJVIŠE JEDNOM po procesu — NIKAD vrednost
+ * ključa, adresu ni identifikator naloga, samo strukturni razlog (isti tekst
+ * koji `validateRateLimitConfiguration` već vraća bez tajne). Isti obrazac kao
+ * `console.error(configuration.reason)` za MFA u `auth.ts` — server-side
+ * dijagnostika, nikad odgovor korisniku.
+ */
+function logConfigurationError(reason: string): void {
+  if (configurationErrorLogged) return;
+  configurationErrorLogged = true;
+  console.error(`[rate-limit] ${reason}`);
+}
+
+/**
+ * SAMO za testove: vraća log-dedup zastavicu na početno stanje.
+ *
+ * Produkcijski kod ovo nikad ne poziva — svaki novi proces (cold start)
+ * prirodno počinje sa `false`. Postoji da bi test mogao da dokaže „loguje se
+ * najviše jednom" bez zavisnosti od redosleda drugih testova u istom procesu,
+ * i bez ijedne produkcijske tajne — resetuje samo lokalnu promenljivu.
+ */
+export function __resetRateLimitLogStateForTests(): void {
+  configurationErrorLogged = false;
 }
 
 /**
@@ -64,11 +119,25 @@ export async function registerAttempt(input: {
   const configuration = env();
 
   /*
-   * Bez ključa se ne ograničava.
+   * `AUTH-02`: u produkciji, greška podešavanja odbija radnju.
    *
-   * Namerno se NE pada zatvoreno: to bi značilo da nedostajuća promenljiva
-   * obara prijavu za sve. Umesto toga se propušta, a odsustvo ključa je greška
-   * podešavanja koju hvata provera pri pokretanju.
+   * Van produkcije ostaje kako je oduvek bilo: bez ključa se ne ograničava —
+   * lokalni rad i testovi ne treba da nose ceo aparat. Provera je namerno
+   * odvojena od `isRateLimitConfigured` ispod, koja i dalje važi VAN
+   * produkcije.
+   */
+  const validity = validateRateLimitConfiguration(configuration);
+  if (!validity.ok) {
+    logConfigurationError(validity.reason ?? "nepoznata greška podešavanja");
+    return FAIL_CLOSED;
+  }
+
+  /*
+   * Bez ključa se ne ograničava — VAN produkcije.
+   *
+   * Namerno se NE pada zatvoreno ovde: to bi značilo da nedostajuća
+   * promenljiva obara lokalni rad i testove. Provera iznad već garantuje da se
+   * do ove linije stiže SAMO van produkcije ili sa ispravnim ključem.
    */
   if (!isRateLimitConfigured(configuration)) return ALLOWED;
 
@@ -200,6 +269,20 @@ export async function isBucketBlocked(input: {
   now?: Date;
 }): Promise<boolean> {
   const configuration = env();
+
+  /*
+   * `AUTH-02`: u produkciji, greška podešavanja se tretira kao BLOKIRANO.
+   *
+   * Ovo je jedini ispravan smer: pozivalac ovu funkciju koristi da preskoči
+   * skup posao (scrypt/TOTP) kada je odluka VEĆ pala. Vraćanje `false` bi
+   * značilo „nastavi", tačno suprotno od namere fail-closed ponašanja.
+   */
+  const validity = validateRateLimitConfiguration(configuration);
+  if (!validity.ok) {
+    logConfigurationError(validity.reason ?? "nepoznata greška podešavanja");
+    return true;
+  }
+
   if (!isRateLimitConfigured(configuration)) return false;
 
   const now = input.now ?? new Date();

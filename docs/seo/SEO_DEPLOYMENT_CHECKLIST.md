@@ -14,7 +14,7 @@ Kod i lokalni production build su provereni. Sledeće stavke zahtevaju produkcio
 ## Odmah posle deploy-a
 
 - [ ] Otvoriti https://carsystemirm.com/robots.txt i potvrditi Allow: / i sitemap URL.
-- [ ] Otvoriti https://carsystemirm.com/sitemap.xml i potvrditi 872 URL-a.
+- [ ] Otvoriti https://carsystemirm.com/sitemap.xml i potvrditi da skup jedinstvenih `<loc>` URL-ova odgovara lokalno generisanom sitemap-u iz istog commita; ukupan broj je dinamičan i raste sa katalogom.
 - [ ] Proveriti da non-canonical Vercel/www/http host pravi 308 na HTTPS apex i čuva path/query.
 - [ ] Proveriti HTTP 200 i self canonical za početnu, katalog, /brendovi/rm, jedan PDP, jednu kategoriju, prodavnice i kontakt.
 - [ ] Proveriti X-Robots-Tag na /katalog?q=lak, jednoj demo ruti i dva PDF-a.

@@ -3,6 +3,21 @@
 Datum: 2026-08-08
 Grana: `recovery/pre-claude-2026-08-07`
 
+> **Status: istorijski snapshot (2026-08-08, rani acquisition checkpoint).**
+> Tabele i zbirne vrednosti ispod čuvaju stanje ranog prolaza i nisu važeći
+> konsolidovani pregled trenutnog stanja. Za potpunije kasnije stanje
+> koristite brand-specific acquisition, knowledge-completion i
+> document-source-map izveštaje u ovom repozitorijumu:
+>
+> - [`CARSYSTEM_ACQUISITION_REPORT.md`](CARSYSTEM_ACQUISITION_REPORT.md)
+> - [`CARFIT_ACQUISITION_REPORT.md`](CARFIT_ACQUISITION_REPORT.md)
+> - [`CARSYSTEM_TDS_KNOWLEDGE_COMPLETION_REPORT.md`](CARSYSTEM_TDS_KNOWLEDGE_COMPLETION_REPORT.md)
+> - [`NORBIN_DOCUMENT_SOURCE_MAP.md`](../NORBIN_DOCUMENT_SOURCE_MAP.md)
+> - [`BEFAR_DOCUMENT_SOURCE_MAP.md`](../BEFAR_DOCUMENT_SOURCE_MAP.md)
+>
+> Njihove metrike koriste različite taksonomije poklapanja i ne treba ih
+> sabirati bez nove normalizacije.
+
 Stanje prikupljanja podataka o proizvodima po brendovima.
 
 ---

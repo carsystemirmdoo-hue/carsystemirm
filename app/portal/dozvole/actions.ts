@@ -10,10 +10,12 @@ import { userRole } from "@/db/schema/users";
 import { hashPassword } from "@/lib/auth/password.mjs";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { PACKAGE_KEYS, ROLE_LABELS } from "@/lib/authz/permissions.mjs";
+import { canGrantOwnerRole, OWNER_ROLE } from "@/lib/authz/owner-guard-policy.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import {
   removesActiveOwner,
   requireSecurityAdmin,
+  SECURITY_GENERIC_ERROR,
   SecurityActionError,
   withOwnerGuard,
 } from "@/lib/authz/security-admin";
@@ -121,12 +123,29 @@ export async function togglePermissionAction(
   };
 }
 
-const createSchema = z.object({
-  email: z.string().trim().toLowerCase().email().max(254),
-  name: z.string().trim().min(2).max(120),
-  role: z.enum(userRole.enumValues),
-  password: z.string().min(10).max(200),
-});
+const createSchema = z
+  .object({
+    email: z.string().trim().toLowerCase().email().max(254),
+    name: z.string().trim().min(2).max(120),
+    role: z.enum(userRole.enumValues),
+    password: z.string().min(10).max(200),
+    /*
+     * Traži se samo kada je `role` „gazda“ — vidi proveru ispod. Isti oblik kao
+     * `roleSchema.token` (changeRoleAction), da dva unosa istog koda ne bi
+     * imala različita pravila.
+     */
+    token: z.string().trim().max(8).optional().default(""),
+  })
+  .superRefine((data, ctx) => {
+    if (data.role === OWNER_ROLE && data.token.length < 6) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          "Otvaranje naloga sa ulogom „gazda“ traži svež kod iz aplikacije.",
+        path: ["token"],
+      });
+    }
+  });
 
 function initialsFrom(name: string) {
   return name
@@ -153,16 +172,57 @@ export async function createUserAction(
     name: formData.get("name"),
     role: formData.get("role"),
     password: formData.get("password"),
+    token: formData.get("token") ?? "",
   });
   if (!parsed.success) {
+    // Poruka o kodu je specifičnija — samo ona kaže ZAŠTO je unos odbijen kada
+    // je oblik inače ispravan i jedino polje koje „gazda“ nalog traži nedostaje.
+    const tokenIssue = parsed.error.issues.find((issue) =>
+      issue.path.includes("token"),
+    );
     return {
       error:
+        tokenIssue?.message ??
         "Proverite unos: ispravna e-pošta, ime od najmanje 2 znaka i lozinka od najmanje 10 znakova.",
       ok: null,
     };
   }
 
-  const { email, name, role, password } = parsed.data;
+  const { email, name, role, password, token } = parsed.data;
+
+  if (role === OWNER_ROLE) {
+    /*
+     * Ko sme da POSTAVI vlasnika mora sam već biti vlasnik.
+     *
+     * `users:manage_security` je namerno delegabilna van uloge „gazda" (paket
+     * „Bezbednost naloga"), pa sama po sebi NIJE dokaz vlasništva — samo
+     * dokaz da je pozivaocu poverena bezbednosna administracija tuđih naloga.
+     * Bez ove provere, bilo ko sa tim delegiranim paketom i svežim TOTP-om bi
+     * mogao da UMNOŽI broj vlasnika, iako sam nije jedan od njih. Provera ide
+     * PRE `requireSecurityAdmin`: odbijen pokušaj se ne sme ni približiti
+     * proveri TOTP-a, ispravnog ili ne.
+     */
+    if (!canGrantOwnerRole(actor, role)) {
+      return { error: SECURITY_GENERIC_ERROR, ok: null };
+    }
+
+    /*
+     * Otvaranje naloga sa ulogom „gazda" dodatno ide kroz ISTU kapiju kao i
+     * prebacivanje postojećeg naloga u tu ulogu (`changeRoleAction`): puna
+     * sesija, sposobnost `users:manage_security` i svež TOTP unet baš za ovu
+     * radnju. Provera ide PRE bilo kog upita u bazu: odbijen pokušaj ne sme
+     * ostaviti ni delimičan trag.
+     */
+    try {
+      await requireSecurityAdmin(token);
+    } catch (error) {
+      if (error instanceof SecurityActionError) {
+        return { error: error.message, ok: null };
+      }
+      throw error;
+    }
+  }
+
   const db = getDb();
 
   const existing = await db

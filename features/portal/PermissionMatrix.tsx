@@ -59,6 +59,15 @@ export function PermissionMatrix({
     createUserAction,
     INITIAL,
   );
+  /*
+   * Otvaranje naloga sa ulogom „gazda“ traži isti svež kod kao promena uloge —
+   * vidi `createUserAction`. Sopstveno stanje, ne deljeno sa `roleToken`: dva
+   * obrasca na istoj strani ne smeju da dele jedan uneti kod.
+   */
+  const [createRole, setCreateRole] = useState("komercijalista");
+  const [createToken, setCreateToken] = useState("");
+  const createNeedsToken = createRole === "gazda";
+  const createTokenMissing = createNeedsToken && createToken.trim().length < 6;
 
   const state =
     toggleState.error || toggleState.ok
@@ -93,7 +102,12 @@ export function PermissionMatrix({
           </label>
           <label>
             <span>Uloga</span>
-            <select name="role" defaultValue="komercijalista" disabled={pending}>
+            <select
+              name="role"
+              value={createRole}
+              onChange={(event) => setCreateRole(event.target.value)}
+              disabled={pending}
+            >
               {ROLES.map((role) => (
                 <option value={role.key} key={role.key}>
                   {role.label}
@@ -114,11 +128,35 @@ export function PermissionMatrix({
             />
             <small>Najmanje 10 znakova. Prenesite je zaposlenom lično.</small>
           </label>
+          {createNeedsToken ? (
+            <label>
+              <span>Kod iz aplikacije (obavezno za ulogu „Gazda“)</span>
+              <input
+                name="token"
+                value={createToken}
+                onChange={(event) => setCreateToken(event.target.value)}
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                maxLength={8}
+                placeholder="šestocifreni kod"
+                disabled={pending}
+              />
+              <small>
+                Otvaranje naloga sa punim vlasničkim pristupom traži svež kod
+                iz vaše aplikacije za jednokratne kodove.
+              </small>
+            </label>
+          ) : null}
           <button
             type="submit"
             className="portal-button"
             data-variant="primary"
-            disabled={pending}
+            disabled={pending || createTokenMissing}
+            title={
+              createTokenMissing
+                ? "Unesite kod iz aplikacije za ulogu „Gazda“"
+                : "Otvori nalog"
+            }
           >
             {createPending ? "Otvaranje…" : "Otvori nalog"}
           </button>

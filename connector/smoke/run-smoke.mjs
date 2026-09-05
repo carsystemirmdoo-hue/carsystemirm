@@ -531,9 +531,21 @@ provera("W12", "watch bez konfiguracije STAJE, bez tight loop-a", () => {
 /** Potpisi poruka kojima Windows odbija izvršavanje .ps1 fajla. */
 const POLITIKA_BLOKIRA = /UnauthorizedAccess|cannot be loaded because running scripts is disabled|execution of scripts is disabled|PSSecurityException|not digitally signed/i;
 
+/**
+ * Jedini poziv `task.ps1` u smoke toku — namerno u imenovanoj, uskoj
+ * konstanti, ne inline, da bi regresioni test mogao da pregleda TAČNO ovaj
+ * niz argumenata, a ne ceo tekst fajla.
+ *
+ * `-Mode Smoke` je OBAVEZAN otkad `task.ps1` to zahteva za `-Action install`
+ * (WIN-INSTALL-01 korekcija) — bez njega skripta baca grešku PRE ijedne
+ * provere, umesto `[dry-run]` izlaza koji W13 očekuje. NIKAD `-Apply`, NIKAD
+ * `-Mode Production`, NIKAD realan BizniSoft folder — samo `DIST`, spakovan
+ * sintetički izlaz `connector:build`-a iz ovog istog paketa.
+ */
+const W13_TASK_ARGS = ["-File", join(WINDOWS, "task.ps1"), "-Action", "install", "-Mode", "Smoke", "-PackagePath", DIST];
+
 provera("W13", "task.ps1 ostaje dry-run i NE pravi zadatak", () => {
-  const skripta = join(WINDOWS, "task.ps1");
-  const r = powershell(["-File", skripta, "-Action", "install", "-PackagePath", DIST]);
+  const r = powershell(W13_TASK_ARGS);
 
   /*
    * Execution policy je STANJE MAŠINE, ne kvar paketa.

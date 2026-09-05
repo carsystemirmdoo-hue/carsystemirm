@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import { generateKeyPairSync } from "node:crypto";
-import { mkdtemp, rm } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,12 +11,16 @@ import test from "node:test";
 /**
  * Windows smoke test nad SPAKOVANIM konektorom.
  *
- * Ovo je jedini test koji dokazuje ono što macOS/Linux prolaz ne može:
- * stvarni DPAPI `Protect`/`Unprotect` pod predviđenim nalogom, Windows putanje,
- * zaključavanje fajla drugim procesom i registraciju zadatka.
+ * Skoro svi testovi ovde dokazuju ono što macOS/Linux prolaz ne može: stvarni
+ * DPAPI `Protect`/`Unprotect` pod predviđenim nalogom, Windows putanje,
+ * zaključavanje fajla drugim procesom i registraciju zadatka. VAN WINDOWS-a se
+ * ti testovi preskaču sa izričitim razlogom. Prolaz na drugoj platformi NIJE
+ * zamena i ne sme se tako prikazati u izveštaju.
  *
- * VAN WINDOWS-a se SVI testovi ovde preskaču sa izričitim razlogom. Prolaz na
- * drugoj platformi NIJE zamena i ne sme se tako prikazati u izveštaju.
+ * JEDINI izuzetak je grupa „W13 poziv" ispod — čista statička provera
+ * IZVORNOG teksta `run-smoke.mjs`-a, bez pokretanja ičega. Izvršava se SVUDA
+ * (uključujući dirty macOS stablo, bez build-a), jer `connector:build` nije
+ * potreban da bi se pročitao tekst fajla.
  */
 
 const naWindowsu = process.platform === "win32";
@@ -30,6 +35,57 @@ const guard = (t) => {
 };
 
 const D = (p) => new URL(`../dist/connector/src/${p}`, import.meta.url).href;
+
+/* =========================================================================
+ * W13 poziv — statička provera IZVORNOG run-smoke.mjs, cross-platform.
+ *
+ * WIN-INSTALL-01 korekcija je učinila `-Mode` obaveznim za
+ * `task.ps1 -Action install`. W13 je jedini poziv `task.ps1` u smoke toku;
+ * ako mu nedostaje `-Mode`, `task.ps1` baca grešku PRE [dry-run] izlaza koji
+ * W13 očekuje, i pravi Windows smoke nikad ne bi mogao da dostigne
+ * `SMOKE PASS`. Ovaj test pregleda TAČNO `W13_TASK_ARGS` — imenovanu,
+ * usku konstantu u `run-smoke.mjs` — ne ceo tekst fajla, jer komentari i
+ * sažeci legitimno pominju "-Apply"/"Production" bez da ih pozivaju.
+ *
+ * `run-smoke.mjs` živi na DVA različita mesta u zavisnosti od konteksta:
+ * `connector/smoke/run-smoke.mjs` u izvornom stablu, ali `smoke/run-smoke.mjs`
+ * (koren paketa, van `connector/`) u spakovanom paketu — `package-smoke.mjs`
+ * ga namerno premešta tamo (`cilj: "smoke/run-smoke.mjs"`). Test mora naći
+ * pravi fajl u OBA konteksta, jer se paketovana kopija ovog istog test fajla
+ * pokreće iz raspakovanog paketa.
+ * ====================================================================== */
+
+function pronadjiRunSmoke() {
+  const kandidati = [
+    new URL("../smoke/run-smoke.mjs", import.meta.url), // izvorno stablo
+    new URL("../../smoke/run-smoke.mjs", import.meta.url), // spakovan paket (koren)
+  ];
+  for (const url of kandidati) {
+    const p = fileURLToPath(url);
+    if (existsSync(p)) return p;
+  }
+  throw new Error("run-smoke.mjs nije nađen ni u izvornom stablu ni u spakovanom rasporedu paketa.");
+}
+
+test("W13 poziva task.ps1 sa -Action install i -Mode Smoke, nikad -Apply ili Production", async () => {
+  const tekst = await readFile(pronadjiRunSmoke(), "utf8");
+
+  const m = tekst.match(/const W13_TASK_ARGS = (\[[^\]]*\]);/);
+  assert.ok(m, "W13_TASK_ARGS niz argumenata nije nađen — da li je W13 preimenovan ili restrukturiran?");
+  const argsNiz = m[1];
+
+  assert.match(argsNiz, /["'`]-Action["'`]/, "W13 poziv ne sadrži -Action");
+  assert.match(argsNiz, /["'`]install["'`]/, "W13 poziv ne sadrži 'install'");
+  assert.match(
+    argsNiz,
+    /["'`]-Mode["'`]/,
+    "W13 poziv NE sadrži -Mode — task.ps1 sada zahteva -Mode za -Action install i baciće grešku pre [dry-run] izlaza",
+  );
+  assert.match(argsNiz, /["'`]Smoke["'`]/, "W13 poziv ne sadrži 'Smoke' kao vrednost moda");
+  assert.doesNotMatch(argsNiz, /["'`]Production["'`]/, "W13 poziv koristi Production mod — mora ostati Smoke");
+  assert.doesNotMatch(argsNiz, /["'`]-Apply["'`]/, "W13 poziv sadrži -Apply — dry-run test ne sme praviti stvarnu izmenu");
+  assert.match(argsNiz, /["'`]-PackagePath["'`],\s*DIST\b/, "W13 poziv ne cilja spakovan DIST folder");
+});
 
 /* =========================================================================
  * DPAPI
@@ -262,7 +318,7 @@ test("[WIN] red preživljava restart procesa na Windows fajl sistemu", async (t)
  * Autostart
  * ====================================================================== */
 
-test("[WIN] skripta zadatka je podrazumevano dry-run", async (t) => {
+test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
   if (guard(t)) return;
   const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
 
@@ -270,11 +326,13 @@ test("[WIN] skripta zadatka je podrazumevano dry-run", async (t) => {
    * BEZ `-Apply` — ne sme napraviti nijednu trajnu izmenu na sistemu.
    *
    * Izlaz mora nositi `[dry-run]`, i posle poziva zadatak ne sme postojati.
+   * `-Mode Smoke` je obavezan od WIN-INSTALL-01 korekcije — bez njega skripta
+   * baca grešku pre bilo koje provere.
    */
   const izlaz = execFileSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
-     "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
+     "-Action", "install", "-Mode", "Smoke", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
     { encoding: "utf8" },
   );
   assert.match(izlaz, /\[dry-run\]/);
@@ -282,17 +340,33 @@ test("[WIN] skripta zadatka je podrazumevano dry-run", async (t) => {
   const postoji = execFileSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-Command",
-     "if (Get-ScheduledTask -TaskName CarsystemConnector -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
+     "if (Get-ScheduledTask -TaskName CarsystemConnectorSMOKE -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
     { encoding: "utf8" },
   ).trim();
   assert.equal(postoji, "NE", "dry-run je registrovao zadatak");
 });
 
-test("[WIN] registracija i uklanjanje zadatka", async (t) => {
+test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {
+  if (guard(t)) return;
+  const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
+  assert.throws(() =>
+    execFileSync(
+      "powershell.exe",
+      ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
+       "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
+      { encoding: "utf8" },
+    ),
+  );
+});
+
+test("[WIN] registracija i uklanjanje zadatka (Smoke i Production)", async (t) => {
   if (guard(t)) return;
   t.skip(
     "Menja Task Scheduler na mašini; pokreće se ručno na izolovanom Windows " +
-      "okruženju: `task.ps1 -Action install -Apply`, pa `-Action uninstall -Apply`.",
+      "okruženju: `task.ps1 -Action install -Mode Smoke -Apply` / `-Mode Production -Apply`, " +
+      "pa odgovarajući `-Action uninstall -Mode ... -Apply`. Potvrditi da su registrovana " +
+      "DVA različita imena zadatka (CarsystemConnectorSMOKE, CarsystemConnector) i da " +
+      "uklanjanje jednog ne dira drugi.",
   );
 });
 

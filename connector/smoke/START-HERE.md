@@ -156,21 +156,25 @@ prepisuje**, da se dva spiska ne raziđu.
 ### Zašto `W15-win` ne traži baš sve
 
 Tačno jedan `[WIN]` test — **registracija i uklanjanje Scheduled Task-a**
-(`task.ps1 -Action install -Apply`) — sam sebe preskače, izričito, jer menja
-sistem. `W15-win` zato prihvata tačno jedan preskočen `[WIN]` test; sve preko
-toga je `SMOKE INCOMPLETE`.
+(`task.ps1 -Action install -Mode Smoke -Apply`) — sam sebe preskače, izričito,
+jer menja sistem. `W15-win` zato prihvata tačno jedan preskočen `[WIN]` test;
+sve preko toga je `SMOKE INCOMPLETE`.
 
 Runner sam broji koliko ih ima i koliko je izvršeno, pa se broj ovde **ne
 prepisuje** — jedan preskok je očekivano stanje, ne nedostatak.
 
 ### Ostaje RUČNO, izvan ovog prolaza
 
-- **Trajni Scheduled Task** (`task.ps1 -Action install -Apply`, pa
-  `-Action uninstall -Apply`). Ne radi se u prvom prolazu.
+- **Trajni Scheduled Task** (`task.ps1 -Action install -Mode Smoke -Apply`, pa
+  `-Action uninstall -Mode Smoke -Apply`). Ne radi se u prvom prolazu. Prava
+  kancelarijska instalacija koristi `-Mode Production` i poseban ugovor —
+  vidi [`windows/OFFICE-INSTALL.md`](../windows/OFFICE-INSTALL.md).
 - **Zaključavanje foldera stanja** (`harden-state-dir.ps1 -Apply`) — menja ACL.
-- **Aktivna provera NTFS dozvola** nad BizniSoft folderom. U prvom prolazu se
-  `icacls` samo **čita**; pokušaj upisa dolazi kasnije, i to isključivo nad
-  namenskim sentinel fajlom, nikad nad pravom fakturom.
+- **Aktivna provera NTFS dozvola** nad BizniSoft folderom
+  (`verify-invoice-folder.ps1`) — isključivo `icacls`/`Get-Acl` **čitanje**,
+  nikad upis. Probni upis nad DISPOSABLE test folderom postoji samo kao
+  Windows test u `connector/test/windows-install-hardening.test.mjs`; ni
+  jedna produkciona skripta ne piše u pravi folder sa fakturama.
 - **DPAPI drugog naloga**: automatski test pokriva da tuđi kontekst ne otključava
   ključ; provera „drugi Windows nalog ne može da pročita ključ“ traži drugi
   nalog i radi se ručno kad za to bude potrebe.

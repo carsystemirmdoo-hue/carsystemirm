@@ -58,10 +58,47 @@ const ULAZI = [
   { izvor: "connector/test/scanner-store.test.mjs", cilj: "connector/test/scanner-store.test.mjs", tip: "fajl" },
   { izvor: "connector/test/commands.test.mjs", cilj: "connector/test/commands.test.mjs", tip: "fajl" },
   { izvor: "connector/test/windows-smoke.test.mjs", cilj: "connector/test/windows-smoke.test.mjs", tip: "fajl" },
+  /*
+   * WIN-INSTALL-01 korekcija: proverava iste skripte ispod, statički
+   * (parsiranje, dry-run, forbidden-path, disposable-folder ACL) bez
+   * administratorskih prava. Čita i `../bin/connector.mjs` i `../README.md`
+   * (izvorni tekst, ne `dist/`) — zato oba moraju biti u paketu, ispod.
+   */
+  { izvor: "connector/test/windows-install-hardening.test.mjs", cilj: "connector/test/windows-install-hardening.test.mjs", tip: "fajl" },
 
-  // Windows skripte; obe su podrazumevano dry-run.
+  // Windows skripte; sve su podrazumevano dry-run.
   { izvor: "connector/windows/task.ps1", cilj: "connector/windows/task.ps1", tip: "fajl" },
   { izvor: "connector/windows/harden-state-dir.ps1", cilj: "connector/windows/harden-state-dir.ps1", tip: "fajl" },
+  /*
+   * `task.ps1`, `harden-install-dir.ps1` i `verify-invoice-folder.ps1` sve
+   * troje bezuslovno dot-source-uju `PathGuards.ps1` (`. (Join-Path
+   * $PSScriptRoot 'PathGuards.ps1')`) — bez njega ijedan poziv, čak i
+   * `-Action status`, puca odmah na učitavanju. Ranija allowlista je nosila
+   * `task.ps1` bez ovog fajla, pa spakovan `task.ps1` NIJE mogao da se
+   * pokrene — otkriveno pri pripremi P0-WIN-02A paketa.
+   */
+  { izvor: "connector/windows/PathGuards.ps1", cilj: "connector/windows/PathGuards.ps1", tip: "fajl" },
+  /*
+   * Kancelarijska (Production) strogost — nose se radi PowerShell parser
+   * provere i radi kompletnosti korigovanog WIN-01 paketa. `-Apply` se u ovoj
+   * fazi (kućni, non-admin smoke) NIKAD ne poziva — vidi START-HERE.md.
+   */
+  { izvor: "connector/windows/harden-install-dir.ps1", cilj: "connector/windows/harden-install-dir.ps1", tip: "fajl" },
+  { izvor: "connector/windows/verify-invoice-folder.ps1", cilj: "connector/windows/verify-invoice-folder.ps1", tip: "fajl" },
+  /*
+   * Referentni runbook za KASNIJU kancelarijsku instalaciju — ne za ovaj
+   * kućni smoke. Nosi se radi pregleda, ne radi izvršavanja u ovoj fazi.
+   */
+  { izvor: "connector/windows/OFFICE-INSTALL.md", cilj: "connector/windows/OFFICE-INSTALL.md", tip: "fajl" },
+
+  /*
+   * Izvorni tekst (ne `dist/`) — `windows-install-hardening.test.mjs` čita
+   * baš ove fajlove da bi potvrdio da `--packaged`/`--config` zastavice
+   * postoje u kodu i da je Autostart odeljak dokumentovan. Bez njih ovde,
+   * ta dva testa bi pukla na ENOENT čim se paket raspakuje.
+   */
+  { izvor: "connector/bin/connector.mjs", cilj: "connector/bin/connector.mjs", tip: "fajl" },
+  { izvor: "connector/README.md", cilj: "connector/README.md", tip: "fajl" },
 
   /*
    * SAMO dva fixture-a koja testovi stvarno čitaju, plus njihov README.
@@ -146,6 +183,30 @@ const PREGLEDANO = [
   {
     fajl: "START-HERE.md",
     razlog: "Uputstvo vlasniku; korisničko ime je mesto-držač `<tvoj nalog>`.",
+  },
+  {
+    fajl: "connector/windows/PathGuards.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` je primer putanje u komentaru koji objašnjava allow-listu; nije stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/harden-install-dir.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u `.EXAMPLE` blokovima je ilustrativan poziv iz dokumentacije skripte, ne stvarna putanja.",
+  },
+  {
+    fajl: "connector/windows/verify-invoice-folder.ps1",
+    razlog: "`C:\\BizniSoft\\Izvoz\\Fakture` u `.EXAMPLE` bloku je izmišljen primer BizniSoft foldera, ne stvarna putanja.",
+  },
+  {
+    fajl: "connector/windows/OFFICE-INSTALL.md",
+    razlog:
+      "Runbook za KASNIJU kancelarijsku instalaciju — pun je primera putanja " +
+      "(`C:\\Program Files\\CarsystemConnector`, `C:\\BizniSoft\\Izvoz\\Fakture`, " +
+      "`C:\\ProgramData\\CarsystemConnector\\...`) koje operater kuca ručno na " +
+      "SVOJOJ mašini; nijedna ne identifikuje mašinu na kojoj je paket sastavljen.",
+  },
+  {
+    fajl: "connector/README.md",
+    razlog: "`C:\\\\BizniSoft\\\\Izvoz\\\\Fakture` je primer vrednosti u `config.json` šabloj, ne stvarna putanja.",
   },
 ];
 

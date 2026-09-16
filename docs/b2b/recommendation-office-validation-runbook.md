@@ -795,7 +795,7 @@ Ovo se ne rešava sutra i ne treba pokušavati:
 --- OFFLINE SMOKE (izvodi se uvek) ---
 [ ]  1. otisak ZIP-a = handoff; MANIFEST.md se poklapa; shortHead potvrđen
 [ ]  2. Windows x64, node --version = v24.14.x, putanja sa razmakom i ČĆŽŠĐ
-[ ]  3. RUN-SMOKE.cmd → ispis SMOKE PASS (ne brojati testove; „9 od 10 [WIN]" je očekivano)
+[ ]  3. RUN-SMOKE.cmd → ispis SMOKE PASS (ne brojati testove; jedan preskočen [WIN] je očekivan)
 [ ]  4. windows-smoke-result-<shortHead>.md sačuvan; tap log NIJE poslat
 [ ]  5. schtasks: zadatak NE postoji — očekivano pre instalacije
 [ ]  6. icacls pročitan: servisni nalog ima samo (R)/(RX)

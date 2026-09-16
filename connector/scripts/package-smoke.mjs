@@ -566,7 +566,7 @@ const handoffTekst = [
   "3. Pokreni `smoke\RUN-SMOKE.cmd`. **Ne kao Administrator.**",
   "4. Jedini prolaz je ispis **`SMOKE PASS`** (izlazni kod 0).",
   "   `SMOKE INCOMPLETE` (4) i `SMOKE FAIL` (1) nisu prolaz. **Ne broj testove** —",
-  "   „9 od 10 [WIN]“ je očekivano, jer je jedan test namerno ručan.",
+  "   tačno jedan preskočen [WIN] test je očekivan, jer je namerno ručan.",
   "5. Pošalji `windows-smoke-result-" + KRATKI + ".md` iz `%TEMP%\\Carsystem Smoke ČĆŽŠĐ\\`.",
   "   `testovi-tap.log` **ne šalji**.",
   "",
@@ -600,31 +600,12 @@ if (handoffNalazi.length > 0) {
   process.exit(1);
 }
 
-/* --- 9. Raniji paketi postaju NEVAŽEĆI za predaju. ---------------------- */
+/* --- 9. Raniji paketi se NE označavaju ovde. ---------------------------- */
 /*
- * Ništa se ne briše — stari paket može trebati za poređenje. Ali pored njega
- * ostaje pisan trag da se ne predaje, jer je upravo mešanje dva ZIP-a i bilo
- * uzrok neusklađenog uputstva.
+ * Tek `verify-smoke-package.mjs`, posle provere bez ijednog pada, označava
+ * ranije pakete kao NEVAZECI. Novi ZIP koji provera odbije ne sme da ostavi
+ * stari već proglašen nevažećim.
  */
-const raniji = readdirSync(IZLAZ)
-  .filter((f) => /^carsystem-windows-smoke-[0-9a-f]{7}\.zip$/.test(f) && f !== zipIme);
-for (const stari of raniji) {
-  const kratki = stari.slice("carsystem-windows-smoke-".length, -".zip".length);
-  writeFileSync(
-    join(IZLAZ, `NEVAZECI-${kratki}.md`),
-    [
-      `# NEVAŽEĆI paket — ne predavati`,
-      "",
-      `\`${stari}\``,
-      "",
-      `Zamenjuje ga **\`${zipIme}\`** (HEAD \`${KRATKI}\`), uz \`${HANDOFF_IME}\`.`,
-      "",
-      "Stari se čuva samo radi poređenja. Za predaju i za pokretanje na Windowsu",
-      "važi isključivo paket imenovan iznad.",
-      "",
-    ].join("\n"),
-  );
-}
 
 console.log("");
 console.log(`Paket:   ${ZIP}`);
@@ -633,8 +614,6 @@ console.log(`Fajlova: ${redovi.length}`);
 console.log(`Bajtova: ${zipBajtova}`);
 console.log(`SHA-256: ${zipSha}`);
 console.log(`Handoff: ${HANDOFF}`);
-if (raniji.length > 0) {
-  console.log(`Nevažeći: ${raniji.join(", ")} — označeni NEVAZECI-*.md`);
-}
+console.log("Raniji paketi NISU označeni — to radi `npm run connector:smoke:verify` tek kad prođe.");
 console.log("");
 console.log("Windows smoke se NE izvršava odavde — paket se prenosi i pokreće na Windowsu.");

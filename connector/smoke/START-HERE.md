@@ -155,15 +155,34 @@ prepisuje**, da se dva spiska ne raziđu.
 | produkcijski entrypoint odbija test keystore | `W14` + `[WIN]` „paket odbija test skladište“ |
 | ceo `[WIN]` skup je stvarno izvršen | `W15`, `W15-win` |
 
-### Zašto `W15-win` ne traži baš sve
+### `W15-win` traži SVE automatske `[WIN]` testove
 
-Tačno jedan `[WIN]` test — **registracija i uklanjanje Scheduled Task-a**
-(`task.ps1 -Action install -Mode Smoke -Apply`) — sam sebe preskače, izričito,
-jer menja sistem. `W15-win` zato prihvata tačno jedan preskočen `[WIN]` test;
-sve preko toga je `SMOKE INCOMPLETE`.
+Svaki `[WIN]` test u paketu se izvršava automatski. **Nijedan preskok nije
+očekivan**: preskočen `[WIN]` test daje `SMOKE INCOMPLETE`. Runner sam broji
+koliko ih ima, pa se broj ovde ne prepisuje.
 
-Runner sam broji koliko ih ima i koliko je izvršeno, pa se broj ovde **ne
-prepisuje** — jedan preskok je očekivano stanje, ne nedostatak.
+### Ručne provere — prijavljuju se, ne izvršavaju
+
+Dve provere menjaju sistem ili traže drugi nalog, pa **nisu deo automatskog
+prolaza** i ne utiču na `SMOKE PASS`. Rezultat ih uvek navodi u odeljku
+„Ručne provere — NISU izvršene", sa statusom `MANUAL_NOT_EXECUTED`:
+
+| ID | Provera |
+|---|---|
+| `RUCNO-DPAPI-NALOG` | ključ zaštićen DPAPI-jem pod jednim Windows nalogom ne otključava se pod drugim |
+| `RUCNO-TASK-APPLY` | registracija i uklanjanje Scheduled Task-a (`-Apply`), oba imena zadatka |
+
+`SMOKE PASS` **ne znači** da su urađene. Rade se posebno, po dogovoru, i ne na
+kancelarijskom računaru u okviru ovog prolaza:
+
+- `RUCNO-DPAPI-NALOG`: pod nalogom A `connector.cmd init` u zasebnom folderu
+  stanja; pod nalogom B, nad kopijom istog `device-key.bin`, `connector.cmd
+  export-key` mora pasti sa kodom greške, bez ključa u izlazu.
+- `RUCNO-TASK-APPLY`: samo na izolovanom Windows okruženju —
+  `task.ps1 -Action install -Mode Smoke -Apply` i `-Mode Production -Apply`,
+  pa `-Action uninstall` za oba; registrovana su DVA različita imena
+  (`CarsystemConnectorSMOKE`, `CarsystemConnector`), i uklanjanje jednog ne dira
+  drugi.
 
 ### Ostaje RUČNO, izvan ovog prolaza
 
@@ -177,9 +196,8 @@ prepisuje** — jedan preskok je očekivano stanje, ne nedostatak.
   nikad upis. Probni upis nad DISPOSABLE test folderom postoji samo kao
   Windows test u `connector/test/windows-install-hardening.test.mjs`; ni
   jedna produkciona skripta ne piše u pravi folder sa fakturama.
-- **DPAPI drugog naloga**: automatski test pokriva da tuđi kontekst ne otključava
-  ključ; provera „drugi Windows nalog ne može da pročita ključ“ traži drugi
-  nalog i radi se ručno kad za to bude potrebe.
+- **DPAPI drugog naloga** (`RUCNO-DPAPI-NALOG`): nijedan automatski test to ne
+  dokazuje; traži drugi Windows nalog i radi se ručno kad za to bude potrebe.
 - **Sve što traži server**: registracija uređaja, `heartbeat`, `run-once` slanje,
   stvarni `poll-once`/`watch` protiv portala. Gate-ovi ostaju isključeni.
 

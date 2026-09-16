@@ -168,16 +168,18 @@ Ključne provere — jedna preskočena među njima obara ceo prolaz: `W05`, `W06
 **Ne broji testove i ne traži „sve zeleno" ručno.** Runner sam zna koliko
 provera ima i koja sme da bude preskočena.
 
-### Jedan `[WIN]` test je NAMERNO ručan
+### Ručne provere su ODVOJENE od automatskog smoke-a
 
-Tačno jedan `[WIN]` test — **registracija i uklanjanje Scheduled Task-a**
-(`task.ps1 -Action install -Apply`) — sam sebe preskače, jer menja sistem.
-`W15-win` zato prihvata tačno jedan preskočen `[WIN]` test i sam ispisuje
-koliko ih je izvršeno od koliko.
+Svi `[WIN]` testovi u paketu su automatski i **svi** moraju biti izvršeni;
+preskočen `[WIN]` test daje `SMOKE INCOMPLETE`.
 
-**Jedan preskok je očekivano stanje, ne nedostatak.** Nula preskoka bi značilo
-da je neko sistem ipak promenio. Broj se ne prepisuje ovde — runner ga računa,
-jer je [WIN] skup dopunjiv.
+Dve provere menjaju sistem ili traže drugi Windows nalog, pa se **ne
+izvršavaju** u ovom prolazu: `RUCNO-DPAPI-NALOG` (DPAPI između dva naloga) i
+`RUCNO-TASK-APPLY` (Scheduled Task `-Apply`). Rezultat ih uvek navodi u odeljku
+„Ručne provere — NISU izvršene" sa statusom `MANUAL_NOT_EXECUTED`.
+
+**`SMOKE PASS` ne znači da su ručne provere urađene.** Postupak je u
+`smoke/START-HERE.md` §8.
 
 **Uslov za nastavak:** ispis je `SMOKE PASS`.
 
@@ -908,7 +910,7 @@ Ovo se ne rešava sutra i ne treba pokušavati:
 --- OFFLINE SMOKE (izvodi se uvek) ---
 [ ]  1. otisak ZIP-a = handoff; MANIFEST.md se poklapa; shortHead potvrđen
 [ ]  2. Windows x64, node --version = v24.14.x, putanja sa razmakom i ČĆŽŠĐ
-[ ]  3. RUN-SMOKE.cmd → ispis SMOKE PASS (ne brojati testove; jedan preskočen [WIN] je očekivan)
+[ ]  3. RUN-SMOKE.cmd → ispis SMOKE PASS (ne brojati testove; ručne provere ostaju MANUAL_NOT_EXECUTED)
 [ ]  4. windows-smoke-result-<shortHead>.md sačuvan; tap log NIJE poslat
 [ ]  5. schtasks: zadatak NE postoji — očekivano pre instalacije
 [ ]  6. icacls pročitan: servisni nalog ima samo (R)/(RX)

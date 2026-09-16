@@ -39,6 +39,36 @@ const nalazi = [];
 /** Ključne provere: SKIP na bilo kojoj od njih daje INCOMPLETE, ne PASS. */
 const KLJUCNE = new Set(["W05", "W06", "W07", "W10", "W14", "W15-win"]);
 
+/*
+ * RUČNE provere — odvojene od automatskog smoke-a.
+ *
+ * Ranije su bile `[WIN]` testovi koji sami sebe preskaču, a `W15-win` je
+ * dozvoljavao najviše jedan preskok. Sa dva takva testa automatski smoke
+ * NIJE MOGAO da vrati `SMOKE PASS` ni na ispravnoj mašini (kancelarija
+ * 45a3460: „izvršeno 13/15").
+ *
+ * Sada se ne izvršavaju, ne broje kao [WIN] testovi i ne utiču na ishod
+ * automatskog prolaza — ali se u rezultatu uvek prijavljuju kao
+ * `MANUAL_NOT_EXECUTED`, da niko ne pročita `SMOKE PASS` kao da su urađene.
+ * Runner ih NIKAD ne pokreće: obe menjaju sistem ili traže drugi nalog.
+ */
+const RUCNO_NIJE_IZVRSENO = "MANUAL_NOT_EXECUTED";
+const RUCNE_PROVERE = [
+  {
+    id: "RUCNO-DPAPI-NALOG",
+    naziv: "DPAPI ključ jednog Windows naloga ne otključava se pod drugim nalogom",
+    postupak: "traži drugi Windows nalog i pokretanje pod njim; vidi smoke/START-HERE.md §8, Ručne provere",
+  },
+  {
+    id: "RUCNO-TASK-APPLY",
+    naziv: "registracija i uklanjanje Scheduled Task-a (-Apply, Smoke i Production)",
+    postupak:
+      "menja Task Scheduler; samo na izolovanom Windows okruženju: task.ps1 -Action install -Mode Smoke -Apply / " +
+      "-Mode Production -Apply, pa -Action uninstall za oba; potvrditi dva različita imena zadatka " +
+      "(CarsystemConnectorSMOKE, CarsystemConnector) i da uklanjanje jednog ne dira drugi",
+  },
+];
+
 function zabelezi(id, naziv, status, detalj = "", kod = null) {
   nalazi.push({ id, naziv, status, detalj, kod });
   const oznaka = { PASS: "PASS ", FAIL: "FAIL ", SKIP: "SKIP " }[status] ?? status;
@@ -713,16 +743,7 @@ provera("W15", "postojeći connector testovi (uključujući [WIN])", () => {
     );
   }
 
-  /*
-   * Na Windowsu [WIN] testovi MORAJU biti izvršeni.
-   *
-   * Jedini dozvoljen preskok je „registracija i uklanjanje zadatka“, koji sam
-   * sebe preskače jer menja Task Scheduler. Bilo koji drugi preskok znači da
-   * DPAPI ili paket nisu stvarno provereni — i to je INCOMPLETE, ne PASS.
-   */
-  if (preskoceniWin > 1) {
-    pad("win_tests_skipped", `[WIN] preskočeno ${preskoceniWin} od ${ukupnoWin}; dozvoljen je najviše jedan`);
-  }
+  // Preskoke procenjuje `W15-win`: preskok nije pad, ali nije ni prolaz.
   return {
     detalj: `pass=${pass} fail=${fail} skipped=${skip} ` +
       `([WIN] ${ukupnoWin - preskoceniWin}/${ukupnoWin} izvršeno)`,
@@ -745,27 +766,25 @@ provera("W15-win", "[WIN] suite je stvarno izvršen na ovoj mašini", () => {
     pad("win_suite_absent", "TAP izlaz ne sadrži nijedan [WIN] test");
   }
   const izvrseno = ukupnoWin - preskoceniWin;
-  if (preskoceniWin > 1) {
-    return {
-      skip: true,
-      kod: "win_suite_not_run",
-      detalj: `izvršeno ${izvrseno}/${ukupnoWin}; dozvoljen je najviše jedan preskok`,
-    };
-  }
   if (paliWin.length > 0) {
     pad("win_tests_failed", `palo ${paliWin.length} [WIN] testova: ${paliWin.slice(0, 3).join(" · ")}`);
   }
   /*
-   * Broj se RAČUNA, ne kuca.
+   * NIJEDAN [WIN] test ne sme biti preskočen.
    *
-   * Prethodna verzija je pisala „9 od 10" i ta rečenica je postala netačna čim
-   * je [WIN] skup dobio jedanaesti test.
+   * Svaki [WIN] test u paketu je automatski izvršiv; ručne provere su izvan
+   * skupa (`RUCNE_PROVERE`). Preskok ovde znači da nešto što je trebalo da se
+   * izmeri na ovoj mašini nije izmereno — INCOMPLETE, ne PASS.
    */
-  return {
-    detalj:
-      `${izvrseno} od ${ukupnoWin} [WIN] testova izvršeno; ` +
-      `${preskoceniWin} namerno ručnih (Task Scheduler -Apply)`,
-  };
+  if (preskoceniWin > 0) {
+    return {
+      skip: true,
+      kod: "win_tests_skipped",
+      detalj: `izvršeno ${izvrseno}/${ukupnoWin}; preskočen ${preskoceniWin} automatski [WIN] test`,
+    };
+  }
+  // Broj se RAČUNA, ne kuca: [WIN] skup je dopunjiv.
+  return { detalj: `svih ${ukupnoWin} automatskih [WIN] testova izvršeno` };
 });
 
 /* =========================================================================
@@ -863,6 +882,15 @@ writeFileSync(
     "",
     `Zbir: PASS ${brojStatusa("PASS")} · FAIL ${brojStatusa("FAIL")} · SKIP ${brojStatusa("SKIP")}`,
     "",
+    "## Ručne provere — NISU izvršene",
+    "",
+    "Nisu deo automatskog prolaza i ne ulaze u ishod iznad. `SMOKE PASS` **ne**",
+    "znači da su urađene; svaka se radi posebno, po dogovoru.",
+    "",
+    "| ID | Provera | Status | Postupak |",
+    "|---|---|---|---|",
+    ...RUCNE_PROVERE.map((m) => `| ${m.id} | ${m.naziv} | ${RUCNO_NIJE_IZVRSENO} | ${m.postupak} |`),
+    "",
     "## Šta je primarno, a šta posledica",
     "",
     ...klasifikacija,
@@ -913,6 +941,7 @@ writeFileSync(
       praviPdfovi: false,
       featureGateUkljucen: false,
       provere: nalazi.map((n) => ({ id: n.id, status: n.status, kod: n.kod })),
+      rucneProvere: RUCNE_PROVERE.map((m) => ({ id: m.id, status: RUCNO_NIJE_IZVRSENO })),
     },
     null,
     2,
@@ -926,6 +955,8 @@ console.log(`Detaljan lokalni log: %TEMP%\\Carsystem Smoke ČĆŽŠĐ\\testovi-t
 console.log("");
 console.log("Ključ i lokalni red NISU obrisani — ostaju za proveru.");
 console.log("Brisanje je zasebna odluka:  RUN-SMOKE.cmd cleanup");
+console.log("");
+for (const m of RUCNE_PROVERE) console.log(`${RUCNO_NIJE_IZVRSENO}  ${m.id}  ${m.naziv}`);
 console.log("");
 console.log(ishod);
 

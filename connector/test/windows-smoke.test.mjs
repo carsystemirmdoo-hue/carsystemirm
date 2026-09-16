@@ -110,6 +110,38 @@ test("W13 poziva task.ps1 sa -Action install i -Mode Smoke, nikad -Apply ili Pro
  * ====================================================================== */
 
 /* =========================================================================
+ * Ručne provere su IZVAN [WIN] skupa — statička provera, cross-platform.
+ *
+ * Kancelarijski smoke 45a3460 je imao dva `[WIN]` testa koji sami sebe
+ * bezuslovno preskaču, a `W15-win` je dozvoljavao najviše jedan preskok.
+ * Automatski prolaz tako nije mogao da bude `SMOKE PASS` ni na ispravnoj
+ * mašini. Ručne provere sada žive u runneru i prijavljuju se odvojeno.
+ * ====================================================================== */
+
+test("nijedan [WIN] test ne preskače sam sebe bezuslovno", async () => {
+  const tekst = await readFile(fileURLToPath(import.meta.url), "utf8");
+  const obrazac = new RegExp("if \\(guard\\(t\\)\\) return;\\s*t\\." + "skip\\(");
+  assert.doesNotMatch(tekst, obrazac, "ručna provera je ponovo maskirana kao [WIN] test");
+});
+
+test("runner prijavljuje ručne provere kao MANUAL_NOT_EXECUTED i ne dozvoljava [WIN] preskok", async () => {
+  const tekst = await readFile(pronadjiRunSmoke(), "utf8");
+  assert.match(tekst, /const RUCNO_NIJE_IZVRSENO = "MANUAL_NOT_EXECUTED";/);
+  for (const id of ["RUCNO-DPAPI-NALOG", "RUCNO-TASK-APPLY"]) {
+    assert.match(tekst, new RegExp(`id: "${id}"`), `nedostaje ručna provera ${id}`);
+  }
+  // Ručne provere se nikad ne izvršavaju kroz `provera(...)`.
+  assert.doesNotMatch(tekst, /^provera\("RUCNO-/m);
+
+  const w15win = tekst.slice(tekst.indexOf('provera("W15-win"'), tekst.indexOf("Rezultat\n"));
+  assert.match(w15win, /preskoceniWin > 0/, "W15-win ponovo toleriše preskočen [WIN] test");
+  assert.doesNotMatch(w15win, /preskoceniWin > 1/);
+  // Ručne provere su u oba izveštaja.
+  assert.match(tekst, /## Ručne provere — NISU izvršene/);
+  assert.match(tekst, /rucneProvere: RUCNE_PROVERE\.map/);
+});
+
+/* =========================================================================
  * Kodiranje PowerShell skripti — statička provera, cross-platform.
  *
  * Kancelarijski smoke 45a3460: `task.ps1` je u PODRAZUMEVANOM dry-run režimu
@@ -294,14 +326,6 @@ test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
-});
-
-test("[WIN] DPAPI drugog naloga ne otključava ključ", async (t) => {
-  if (guard(t)) return;
-  t.skip(
-    "Traži drugi Windows nalog i ručno pokretanje pod njim. " +
-      "Postupak je opisan u docs/b2b/21; automatski se ne izvršava.",
-  );
 });
 
 /* =========================================================================
@@ -529,17 +553,6 @@ test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {
    * nenulti izlaz — i prolazio je dok je skripta padala na parsiranju.
    */
   assert.match(`${r.stdout}${r.stderr}`, /-Mode je obavezan/, `drugi razlog: ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
-});
-
-test("[WIN] registracija i uklanjanje zadatka (Smoke i Production)", async (t) => {
-  if (guard(t)) return;
-  t.skip(
-    "Menja Task Scheduler na mašini; pokreće se ručno na izolovanom Windows " +
-      "okruženju: `task.ps1 -Action install -Mode Smoke -Apply` / `-Mode Production -Apply`, " +
-      "pa odgovarajući `-Action uninstall -Mode ... -Apply`. Potvrditi da su registrovana " +
-      "DVA različita imena zadatka (CarsystemConnectorSMOKE, CarsystemConnector) i da " +
-      "uklanjanje jednog ne dira drugi.",
-  );
 });
 
 /* =========================================================================

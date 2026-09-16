@@ -131,13 +131,92 @@ test("[WIN] tajna ne prolazi kroz komandnu liniju", async (t) => {
     new URL("../dist/connector/src/keystore/windows-dpapi.mjs", import.meta.url),
     "utf8",
   );
+  const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "");
   /*
-   * Materijal ide kao red na `stdin`. Interpolacija u argumente bi ga ostavila
-   * u `Win32_Process` i u alatima za nadzor procesa.
+   * Program ide kroz `-EncodedCommand`; podatak ISKLJUČIVO kroz stdin.
+   *
+   * Stari `-Command -` je slao oba kroz stdin, i PowerShell je red sa ključem
+   * parsirao kao naredbu (kancelarijski D06: izlaz 1).
    */
-  assert.match(izvor, /stdin\.write/);
-  assert.match(izvor, /"-Command", "-"/);
-  assert.doesNotMatch(izvor, /-Command["']?\s*\+/, "komanda se sastavlja spajanjem stringova");
+  assert.match(kod, /"-EncodedCommand"/);
+  assert.doesNotMatch(kod, /"-Command",\s*"-"/, "stari kanal program+podatak kroz stdin");
+  assert.match(kod, /stdin\.write\(`\$\{ulaz\}\\n`\)/, "podatak ne ide kroz stdin");
+});
+
+test("[WIN] produkcijski kanal: program kroz -EncodedCommand, podatak kroz stdin", async (t) => {
+  if (guard(t)) return;
+  const dpapi = await import(D("keystore/windows-dpapi.mjs"));
+  /*
+   * Isto što D06 meri na kancelarijskom računaru, ali kroz stvarni
+   * `pokreniPowerShell`. Podatak je sintetička konstanta, ne ključ.
+   */
+  const podatak = Buffer.from("cs-kanal-proba-sinteticki").toString("base64");
+  const izlaz = await dpapi.pokreniPowerShell(
+    "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; [Console]::In.ReadLine()",
+    podatak,
+  );
+  assert.equal(izlaz, podatak, "red sa stdin-a nije vraćen neizmenjen");
+
+  // proveri() — Protect i Unprotect kroz isti kanal, nad konstantom.
+  const rez = await dpapi.proveri();
+  assert.equal(rez.ok, true);
+});
+
+test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
+  if (guard(t)) return;
+  const cmd = fileURLToPath(new URL("../dist/connector.cmd", import.meta.url));
+  const baza = await mkdtemp(join(tmpdir(), "cs-win-init-"));
+  const env = {
+    ...process.env,
+    CS_CONNECTOR_STATE_DIR: join(baza, "stanje"),
+    CS_CONNECTOR_CONFIG: join(baza, "nema-konfiguracije.json"),
+  };
+  const pokreni = (...args) => {
+    const r = spawnSync("cmd.exe", ["/c", cmd, ...args], { encoding: "utf8", env, timeout: 120_000 });
+    let json = {};
+    try {
+      json = JSON.parse(r.stdout ?? "");
+    } catch {
+      /* izlaz se ne prepisuje u poruku testa — mogao bi da nosi putanju */
+    }
+    return { kod: r.status, izlaz: `${r.stdout ?? ""}${r.stderr ?? ""}`, json };
+  };
+
+  try {
+    const prvi = pokreni("init");
+    const d1 = prvi.json;
+    assert.equal(prvi.kod, 0, `init nije uspeo: kod=${d1.kod ?? "?"}`);
+    assert.equal(d1.status, "napravljen");
+    assert.match(d1.adapter, /dpapi/);
+
+    const drugi = pokreni("init");
+    assert.equal(drugi.json.status, "vec_postoji", "ponovljen init je zamenio ključ");
+    assert.equal(drugi.kod, 1);
+
+    // export-key čita ključ nazad kroz Unprotect — dakle kroz stdin kanal.
+    const izvoz = pokreni("export-key");
+    const d3 = izvoz.json;
+    assert.equal(izvoz.kod, 0, `export-key nije uspeo: kod=${d3.kod ?? "?"}`);
+    assert.equal(d3.fingerprint, d1.fingerprint, "otisak se promenio između poziva");
+
+    /*
+     * Nijedan izlaz ne nosi privatni materijal. Javni ključ (SPKI) sme da se
+     * pojavi — on se predaje za registraciju — i zato se izuzima po vrednosti.
+     */
+    for (const [ime, r] of [["init", prvi], ["init ponovo", drugi], ["export-key", izvoz]]) {
+      const bezJavnog = r.izlaz.split(d1.javniKljucSpkiBase64).join("").split(d1.fingerprint).join("");
+      assert.doesNotMatch(bezJavnog, /-----BEGIN/, `${ime}: PEM u izlazu`);
+      assert.doesNotMatch(bezJavnog, /[A-Za-z0-9+/]{40,}={0,2}/, `${ime}: dugačak base64 u izlazu`);
+      assert.doesNotMatch(bezJavnog, /[A-Za-z]:\\|file:[/]{3}/, `${ime}: putanja u izlazu`);
+      assert.doesNotMatch(bezJavnog, /\n\s+at\s/, `${ime}: stack trace u izlazu`);
+    }
+
+    const fajl = await readFile(join(baza, "stanje", "device-key.bin"), "utf8");
+    assert.match(fajl, /^cs-dpapi-v1\n/, "fajl ključa nije u DPAPI obliku");
+    assert.doesNotMatch(fajl, /BEGIN [A-Z ]*PRIVATE KEY/);
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
 });
 
 test("[WIN] DPAPI drugog naloga ne otključava ključ", async (t) => {

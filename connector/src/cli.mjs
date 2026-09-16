@@ -67,6 +67,18 @@ async function postoji(p) {
   }
 }
 
+/**
+ * Kod greške skladišta ključa — samo iz poznatog, zatvorenog oblika.
+ *
+ * Poruka se nikad ne koristi: ume da nosi putanju. Kod DPAPI kanala se prihvata
+ * samo ako odgovara obrascu, da slučajna vrednost iz izuzetka ne uđe u ispis.
+ */
+function bezbedanKodSkladista(greska) {
+  if (greska instanceof KeystoreError) return greska.code;
+  const kod = String(greska?.code ?? "");
+  return /^dpapi_[a-z0-9_]{1,40}$/.test(kod) ? kod : "keystore_error";
+}
+
 /* ========================================================================= */
 
 async function doctor(p) {
@@ -120,7 +132,12 @@ async function doctor(p) {
     dodaj("skladiste_kljuca", rez.upozorenje ? "upozorenje" : "ok", { adapter: ime, ...rez });
   } catch (greska) {
     dodaj("skladiste_kljuca", "greska", {
-      kod: greska instanceof KeystoreError ? greska.code : "keystore_error",
+      /*
+       * Stabilan kod DPAPI kanala (`dpapi_process_failed`, `dpapi_timeout`, …)
+       * prolazi doslovno. Bez njega bi „PowerShell se nije pokrenuo" i
+       * „PowerShell je odbio podatak" u izveštaju izgledali isto.
+       */
+      kod: bezbedanKodSkladista(greska),
     });
   }
 

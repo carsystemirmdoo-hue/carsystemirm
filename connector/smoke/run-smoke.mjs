@@ -220,8 +220,13 @@ mkdirSync(PRAZAN, { recursive: true });
  * ni BizniSoft izlaz. To je jedina garancija da prvi prolaz ne dodirne pravu
  * poslovnu prepisku.
  */
-copyFileSync(join(FIXTURES, "vise-stavki.pdf"), join(ULAZ, "Račun ČĆŽ 001.pdf"));
-copyFileSync(join(FIXTURES, "jedna-stavka.pdf"), join(ULAZ, "Račun ČĆŽ 002.pdf"));
+copyFileSync(join(FIXTURES, "vise-stavki.pdf"), join(ULAZ, "Faktura ČĆŽ 001.pdf"));
+copyFileSync(join(FIXTURES, "jedna-stavka.pdf"), join(ULAZ, "FAK-ČĆŽ-002.pdf"));
+/*
+ * Treći PDF namerno NEMA oznaku fakture. Sadržaj je ispravan, pa bi bez
+ * filtera po imenu ušao u red; `W09` dokazuje da na Windowsu ostaje po strani.
+ */
+copyFileSync(join(FIXTURES, "vise-stavki.pdf"), join(ULAZ, "Račun ČĆŽ 003.pdf"));
 
 /*
  * `smoke.invalid` je rezervisan TLD koji se ne razrešava.
@@ -457,7 +462,13 @@ provera("W09", "dry-run čita SAMO sintetički folder i ništa ne šalje", () =>
   if (!d || r.kod !== 0) pad("dry_run_failed");
   if (d.poslato !== 0) pad("dry_run_sent_data");
   if ((d.novo ?? 0) < 2) pad("dry_run_missed_documents");
-  return { detalj: `pregledano=${d.pregledano ?? "?"} novo=${d.novo} poslato=0` };
+  if (d.nijeFakturaPoNazivu !== 1) {
+    pad("dry_run_name_filter", `nijeFakturaPoNazivu=${d.nijeFakturaPoNazivu ?? "?"}, očekivano 1`);
+  }
+  if (d.kandidata !== 2) pad("dry_run_name_filter", `kandidata=${d.kandidata ?? "?"}, očekivano 2`);
+  return {
+    detalj: `ukupnoPdf=${d.ukupnoPdf ?? "?"} kandidata=${d.kandidata} nijeFakturaPoNazivu=${d.nijeFakturaPoNazivu} novo=${d.novo} poslato=0`,
+  };
 });
 
 provera("W10", "red preživljava nov proces (node:sqlite, WAL)", () => {

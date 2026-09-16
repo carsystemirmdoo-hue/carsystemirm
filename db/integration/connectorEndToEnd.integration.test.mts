@@ -225,7 +225,7 @@ async function okruzenje(fajlovi: string[] = ["vise-stavki.pdf"]) {
   const izvor = join(baza, "Moj Folder ČĆŽŠĐ", "fakture");
   await mkdir(izvor, { recursive: true });
   for (const f of fajlovi) {
-    await cp(new URL(`fixtures/dev/biznisoft/${f}`, KOREN).pathname, join(izvor, `Račun ${f}`));
+    await cp(new URL(`fixtures/dev/biznisoft/${f}`, KOREN).pathname, join(izvor, `Faktura ${f}`));
   }
   return { baza, izvor, redPutanja: join(baza, "stanje", "queue.db") };
 }
@@ -268,7 +268,7 @@ async function godisnjiFolderi(raspored: Record<string, string[]>) {
     const put = join(koren, folder);
     await mkdir(put, { recursive: true });
     for (const f of fajlovi) {
-      await cp(new URL(`fixtures/dev/biznisoft/${f}`, KOREN).pathname, join(put, `Račun ${f}`));
+      await cp(new URL(`fixtures/dev/biznisoft/${f}`, KOREN).pathname, join(put, `Faktura ${f}`));
     }
   }
   return { baza, izvor: koren, redPutanja: join(baza, "stanje", "queue.db") };
@@ -340,6 +340,60 @@ test("isti PDF u DVA godišnja foldera ne duplira ni fakturu ni ledger", async (
   }
 });
 
+test("PDF bez oznake `faktura`/`fak` u imenu ne stiže do reda, payload-a ni servera", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+
+  const uredjaj = await aktivanUredjaj();
+  await mapiranKupac();
+  // Kancelarijski oblik: `Fakture\2026\`. Jedan PDF nosi oznaku fakture.
+  const okr = await godisnjiFolderi({ "2026": ["vise-stavki.pdf"] });
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+
+  try {
+    /*
+     * Dva PDF-a sa ISPRAVNIM, parsabilnim sadržajem, ali bez oznake u imenu.
+     * Da filter ne postoji, oba bi ušla u red i otišla serveru.
+     */
+    for (const [izvor, ime] of [
+      ["jedna-stavka.pdf", "racun 123.pdf"],
+      ["vodeca-nula-partner.pdf", "profaktura 7.pdf"],
+    ]) {
+      await cp(new URL(`fixtures/dev/biznisoft/${izvor}`, KOREN).pathname, join(okr.izvor, "2026", ime));
+    }
+
+    const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+    const skeniranje = await skenirajURed({ store, konfiguracija: k });
+    assert.equal(skeniranje.ukupnoPdf, 3);
+    assert.equal(skeniranje.nijeFakturaPoNazivu, 2);
+    assert.equal(skeniranje.kandidata, 1);
+    assert.equal(skeniranje.novo, 1);
+    assert.deepEqual(
+      Object.values(store.zbir()).reduce((a: number, b) => a + Number(b), 0),
+      1,
+      "PDF bez oznake je ušao u lokalni red",
+    );
+
+    const slanje = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+    assert.equal(slanje.potvrdjeno, 1, `neočekivano: ${JSON.stringify(slanje)}`);
+
+    const [{ n: dokumenata }] = await db.sql<{ n: number }[]>`
+      SELECT count(*)::int AS n FROM source_documents`;
+    assert.equal(dokumenata, 1, "server je primio dokument bez oznake fakture");
+    assert.equal(await brojFaktura(), 1);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
 test("dva nivoa dublje i junction/symlink ne ulaze u ledger", async (t) => {
   if (guard(t)) return;
   const { otvoriStore } = await import(D("store.mjs"));
@@ -357,7 +411,7 @@ test("dva nivoa dublje i junction/symlink ne ulaze u ledger", async (t) => {
     await mkdir(duboko, { recursive: true });
     await cp(
       new URL("fixtures/dev/biznisoft/jedna-stavka.pdf", KOREN).pathname,
-      join(duboko, "duboka.pdf"),
+      join(duboko, "FAK duboka.pdf"),
     );
 
     // Podfolder-link ka putanji van korena — ne sme se pratiti.
@@ -365,7 +419,7 @@ test("dva nivoa dublje i junction/symlink ne ulaze u ledger", async (t) => {
     await mkdir(spolja, { recursive: true });
     await cp(
       new URL("fixtures/dev/biznisoft/dve-strane-ponovljeno-zaglavlje.pdf", KOREN).pathname,
-      join(spolja, "tudja.pdf"),
+      join(spolja, "FAK tudja.pdf"),
     );
     await symlink(spolja, join(okr.izvor, "PRECICA")).catch(() => {});
 

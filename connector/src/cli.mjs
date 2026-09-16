@@ -328,6 +328,10 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       datum: lokalno.datum,
       popis: skeniranje.popis,
       kodPopisa: skeniranje.kodPopisa,
+      // Istorijski backfill: koliko novih dokumenata čeka i koliko je to serija.
+      preostalo: skeniranje.preostalo,
+      preostaloSerija: skeniranje.preostaloSerija,
+      ostaloURedu: slanje.ostaloURedu,
       skeniranje,
       slanje,
       sledeciTermin: sledeciTermin({

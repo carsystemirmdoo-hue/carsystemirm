@@ -115,7 +115,7 @@ test("FAKTURE 2028 i 2029 se nalaze bez izmene konfiguracije", async (t) => {
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2024", "stara.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-stara.pdf");
     const prvi = await o.ciklus(BRZE);
     assert.equal(prvi.novo, 1);
 
@@ -123,8 +123,8 @@ test("FAKTURE 2028 i 2029 se nalaze bez izmene konfiguracije", async (t) => {
      * Nijedna godina nije upisana u kod ni u konfiguraciju. Folder se nalazi
      * zato što je NEPOSREDAN podfolder korena — ime se nigde ne čita.
      */
-    await stavi(o, "FAKTURE 2028", "nova-2028.pdf", "jedna-stavka.pdf");
-    await stavi(o, "FAKTURE 2029", "nova-2029.pdf", "nastavak-tabele.pdf");
+    await stavi(o, "FAKTURE 2028", "FAK-nova-2028.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2029", "FAK-nova-2029.pdf", "nastavak-tabele.pdf");
 
     const drugi = await o.ciklus(BRZE);
     assert.equal(drugi.pregledano, 3, "popis nije video nove godišnje foldere");
@@ -139,11 +139,11 @@ test("nov PDF u STAROM folderu se nalazi", async (t) => {
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2024", "prva.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-prva.pdf");
     await o.ciklus(BRZE);
 
     // Dokument dodat unazad, u već obrađen folder.
-    await stavi(o, "FAKTURE 2024", "naknadna.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-naknadna.pdf", "jedna-stavka.pdf");
     const drugi = await o.ciklus(BRZE);
 
     assert.equal(drugi.pregledano, 2);
@@ -170,18 +170,18 @@ test("250 poznatih PDF-ova ne sprečava nov dokument u drugom folderu", async (t
     const stari = godina(o, "FAKTURE 2024");
     await mkdir(stari, { recursive: true });
     for (let i = 0; i < 250; i += 1) {
-      await writeFile(join(stari, `stara-${i}.pdf`), `sadržaj ${i}`);
+      await writeFile(join(stari, `FAK-stara-${i}.pdf`), `sadržaj ${i}`);
     }
     // Prvi ciklus ih sve upozna (nisu validni PDF-ovi → `nepodrzano`, ali su poznati).
     const prvi = await o.ciklus(BRZE);
     assert.equal(prvi.pregledano, 250);
 
-    await stavi(o, "FAKTURE 2029", "nova.pdf");
+    await stavi(o, "FAKTURE 2029", "FAK-nova.pdf");
     const drugi = await o.ciklus(BRZE);
 
     assert.equal(drugi.pregledano, 251, "popis je prekinut pre novog dokumenta");
     assert.equal(drugi.novo, 1, "nov dokument nije obrađen");
-    assert.equal(drugi.cekaBudzet, 0, "poznati dokumenti su potrošili budžet");
+    assert.equal(drugi.preostalo, 0, "poznati dokumenti su potrošili budžet");
   } finally {
     await o.zatvori();
   }
@@ -194,18 +194,18 @@ test("poznati dokumenti ne troše budžet novih", async (t) => {
     const stari = godina(o, "FAKTURE 2024");
     await mkdir(stari, { recursive: true });
     for (let i = 0; i < 30; i += 1) {
-      await writeFile(join(stari, `stara-${i}.pdf`), `sadržaj ${i}`);
+      await writeFile(join(stari, `FAK-stara-${i}.pdf`), `sadržaj ${i}`);
     }
     await o.ciklus(BRZE);
 
     // Budžet je 2; poznatih je 30. Da ga oni troše, nijedan nov ne bi prošao.
-    await stavi(o, "FAKTURE 2029", "n1.pdf", "vise-stavki.pdf");
-    await stavi(o, "FAKTURE 2029", "n2.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2029", "FAK-n1.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 2029", "FAK-n2.pdf", "jedna-stavka.pdf");
     const drugi = await o.ciklus({ ...BRZE, maxNovihPoCiklusu: 2 });
 
     assert.equal(drugi.poznato, 30);
     assert.equal(drugi.novo + drugi.nepodrzano, 2, "budžet su potrošili poznati dokumenti");
-    assert.equal(drugi.cekaBudzet, 0);
+    assert.equal(drugi.preostalo, 0);
   } finally {
     await o.zatvori();
   }
@@ -215,21 +215,21 @@ test("kad novih ima više od budžeta, ostatak čeka — i dočeka", async (t) =
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2026", "a.pdf", "vise-stavki.pdf");
-    await stavi(o, "FAKTURE 2026", "b.pdf", "jedna-stavka.pdf");
-    await stavi(o, "FAKTURE 2026", "c.pdf", "nastavak-tabele.pdf");
+    await stavi(o, "FAKTURE 2026", "FAK-a.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 2026", "FAK-b.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2026", "FAK-c.pdf", "nastavak-tabele.pdf");
 
     const prvi = await o.ciklus({ ...BRZE, maxNovihPoCiklusu: 1 });
     assert.equal(prvi.pregledano, 3, "popis se ne ograničava budžetom");
-    assert.equal(prvi.cekaBudzet, 2, "ostatak nije prijavljen kao odložen zbog budžeta");
+    assert.equal(prvi.preostalo, 2, "ostatak nije prijavljen kao odložen zbog budžeta");
 
     const drugi = await o.ciklus({ ...BRZE, maxNovihPoCiklusu: 1 });
     assert.equal(drugi.poznato, 1, "prvi obrađen dokument nije zapamćen");
-    assert.equal(drugi.cekaBudzet, 1);
+    assert.equal(drugi.preostalo, 1);
 
     const treci = await o.ciklus({ ...BRZE, maxNovihPoCiklusu: 5 });
     assert.equal(treci.poznato, 2);
-    assert.equal(treci.cekaBudzet, 0, "ostatak nikad nije dočekao obradu");
+    assert.equal(treci.preostalo, 0, "ostatak nikad nije dočekao obradu");
   } finally {
     await o.zatvori();
   }
@@ -243,8 +243,8 @@ test("isti sadržaj u dva godišnja foldera ostaje JEDNA stavka", async (t) => {
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2024", "kopija-a.pdf");
-    await stavi(o, "FAKTURE 2025", "kopija-b.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-kopija-a.pdf");
+    await stavi(o, "FAKTURE 2025", "FAK-kopija-b.pdf");
 
     const prvi = await o.ciklus(BRZE);
     assert.equal(prvi.pregledano, 2, "oba fajla moraju biti popisana");
@@ -305,7 +305,7 @@ test("nepotpuno sačuvan fajl se odlaže, pa se nađe kad se čuvanje završi", 
   try {
     const folder = godina(o, "FAKTURE 2026");
     await mkdir(folder, { recursive: true });
-    const put = join(folder, "u-toku.pdf");
+    const put = join(folder, "FAK-u-toku.pdf");
     await writeFile(put, "a");
 
     // Fajl raste dok traje ciklus — kao dokument koji BizniSoft još upisuje.
@@ -337,8 +337,8 @@ test("dva nivoa dubine ostaju nevidljiva i kroz ceo ciklus", async (t) => {
   try {
     const duboko = join(o.koren, "FAKTURE 2024", "arhiva", "jos-dublje");
     await mkdir(duboko, { recursive: true });
-    await cp(join(FIXTURES, "vise-stavki.pdf"), join(duboko, "duboko.pdf"));
-    await stavi(o, "FAKTURE 2024", "plitko.pdf", "jedna-stavka.pdf");
+    await cp(join(FIXTURES, "vise-stavki.pdf"), join(duboko, "FAK-duboko.pdf"));
+    await stavi(o, "FAKTURE 2024", "FAK-plitko.pdf", "jedna-stavka.pdf");
 
     const rez = await o.ciklus(BRZE);
     assert.equal(rez.pregledano, 1, "ciklus je sišao dublje od jednog nivoa");
@@ -358,7 +358,7 @@ test("poslovni datum ne zavisi od imena foldera", async (t) => {
      * istog dokumenta u „ispravnom" folderu — a daje isti, jer se ime nigde
      * ne čita.
      */
-    await stavi(o, "FAKTURE 1999", "ista.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 1999", "FAK-ista.pdf", "vise-stavki.pdf");
     const rez = await o.ciklus(BRZE);
     assert.equal(rez.novo, 1);
 
@@ -421,9 +421,9 @@ test("dostignut maxPopisa daje `failed` sa kodom, ne tihi uspeh", async (t) => {
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2024", "a.pdf", "vise-stavki.pdf");
-    await stavi(o, "FAKTURE 2025", "b.pdf", "jedna-stavka.pdf");
-    await stavi(o, "FAKTURE 2026", "c.pdf", "nastavak-tabele.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-a.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 2025", "FAK-b.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2026", "FAK-c.pdf", "nastavak-tabele.pdf");
 
     // Granica ispod broja dokumenata — isti put kao 200.000 u kancelariji.
     const granice = { ...BRZE, maxPopisa: 2 };
@@ -456,7 +456,7 @@ test("prekinut popis stiže portalu kao `failed` + failureCode kroz komandu", as
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2024", "a.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-a.pdf");
     const { rez, kraj } = await komandaNad(o, { ...BRZE, maxPopisa: 0 });
 
     assert.equal(rez.stanje, "failed");
@@ -479,8 +479,8 @@ test("nečitljiv godišnji folder: ostatak se popiše, ciklus NIJE `completed`",
   const o = await okruzenje();
   const zatvoren = godina(o, "FAKTURE 2025");
   try {
-    await stavi(o, "FAKTURE 2024", "otvoren.pdf", "vise-stavki.pdf");
-    await stavi(o, "FAKTURE 2025", "zatvoren.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-otvoren.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 2025", "FAK-zatvoren.pdf", "jedna-stavka.pdf");
     await chmod(zatvoren, 0o000);
 
     // Root čita i folder bez prava — tada test ne bi dokazao ništa.
@@ -516,9 +516,15 @@ test("nečitljiv godišnji folder: ostatak se popiše, ciklus NIJE `completed`",
       moduli.pipeline.IZLAZ_NEPOTPUN_POPIS,
     );
 
-    // Kod i zbir ne nose ime foldera ni putanju.
+    /*
+     * Kod i zbir ne nose putanju ni ime fajla. Ime neposrednog podfoldera
+     * (godina) sme — zbir po godini je ono što operater potvrđuje.
+     */
     const javno = JSON.stringify({ ...sken, preskoceno: undefined, ...ishod });
-    assert.ok(!javno.includes("FAKTURE") && !javno.includes(o.baza), "putanja u javnom ishodu");
+    assert.ok(!javno.includes(o.baza), "putanja u javnom ishodu");
+    assert.ok(!javno.includes("FAK-otvoren") && !javno.includes("FAK-zatvoren"), "ime fajla u javnom ishodu");
+    const zatvorenZbir = sken.poFolderu.find((f) => f.folder === "FAKTURE 2025");
+    assert.equal(zatvorenZbir.nedostupan, true, "nedostupan folder nije označen u zbiru po folderu");
   } finally {
     await chmod(zatvoren, 0o700).catch(() => {});
     await o.zatvori();
@@ -535,7 +541,7 @@ test("nečitljiv folder stiže portalu kroz komandu", async (t) => {
   const zatvoren = godina(o, "FAKTURE 2025");
   try {
     await mkdir(zatvoren, { recursive: true });
-    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(zatvoren, "z.pdf"));
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(zatvoren, "FAK-z.pdf"));
     await chmod(zatvoren, 0o000);
     try {
       await readdir(zatvoren);
@@ -559,7 +565,7 @@ test("pun popis ostaje `completed` sa izlaznim kodom 0", async (t) => {
   if (guard(t)) return;
   const o = await okruzenje();
   try {
-    await stavi(o, "FAKTURE 2024", "a.pdf");
+    await stavi(o, "FAKTURE 2024", "FAK-a.pdf");
     const sken = await o.ciklus(BRZE);
     assert.equal(sken.popis, "pun");
     assert.equal(sken.kodPopisa, null);
@@ -568,6 +574,289 @@ test("pun popis ostaje `completed` sa izlaznim kodom 0", async (t) => {
       { stanje: "completed", failureCode: null },
     );
     assert.equal(moduli.pipeline.izlazniKodCiklusa({ skeniranje: sken, slanje: BEZ_SLANJA }), 0);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+/* =========================================================================
+ * Filter po nazivu i istorijski backfill
+ *
+ * Kancelarijska arhiva je `Fakture\2021…2026\`, preko 2 GB, i u njoj su i
+ * računi, otpremnice i kompenzacije. Ovi testovi drže tri stvari: PDF bez
+ * oznake fakture se nikad ne otvara, istorija se prelazi u serijama od
+ * `maxNovihPoCiklusu` bez gladi, i `preostalo` je tačan broj.
+ * ====================================================================== */
+
+/** Čitači koji beleže svaku putanju koju pipeline otvori, pa čitaju stvarno. */
+function spijun(zamena = {}) {
+  const otvoreno = [];
+  const { procitajZaOtisak, procitajStabilno } = moduli.scanner;
+  return {
+    otvoreno,
+    citac: {
+      zaOtisak: async (p, g) => {
+        otvoreno.push({ faza: "otisak", p });
+        return (zamena.zaOtisak ?? procitajZaOtisak)(p, g);
+      },
+      stabilno: async (p, g) => {
+        otvoreno.push({ faza: "stabilno", p });
+        return (zamena.stabilno ?? procitajStabilno)(p, g);
+      },
+    },
+  };
+}
+
+const imeFajla = (p) => p.split(/[\\/]/).pop();
+
+/** Sabira brojače ishoda — svaki pregledan kandidat mora biti u tačno jednom. */
+const zbirIshoda = (z) =>
+  z.poznato + z.ponovljenSadrzaj + z.novo + z.nepodrzano + z.odlozeno + z.necitljivo + z.preostalo;
+
+/** Sintetički, međusobno različiti „PDF-ovi" — parser ih odbija, pa su jeftini. */
+async function sintetickih(o, folder, n, ime = (i) => `FAK-${String(i).padStart(4, "0")}.pdf`) {
+  const put = godina(o, folder);
+  await mkdir(put, { recursive: true });
+  for (let i = 0; i < n; i += 1) {
+    await writeFile(join(put, ime(i)), `%PDF-1.4 sinteticki ${folder} ${i}`);
+  }
+}
+
+test("PDF bez oznake fakture se NE otvara, NE hešira i NE ulazi u red", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await stavi(o, "2026", "FAKTURA 1.pdf", "vise-stavki.pdf");
+    // Ispravan sadržaj, pogrešno ime — da filter ne radi, ušli bi u red.
+    for (const ime of ["racun 1.pdf", "otpremnica 1.pdf", "profaktura.pdf", "faks.pdf", "faktor.pdf"]) {
+      await stavi(o, "2026", ime, "jedna-stavka.pdf");
+    }
+
+    const { otvoreno, citac } = spijun();
+    const z = await moduli.pipeline.skenirajURed({
+      store: o.store, konfiguracija: o.konfiguracija, granice: BRZE, citac,
+    });
+
+    // Spy: nula poziva čitača za bilo koji fajl bez oznake.
+    const imena = [...new Set(otvoreno.map((x) => imeFajla(x.p)))];
+    assert.deepEqual(imena, ["FAKTURA 1.pdf"], `otvoreni su i fajlovi bez oznake: ${imena}`);
+
+    assert.equal(z.ukupnoPdf, 6);
+    assert.equal(z.nijeFakturaPoNazivu, 5);
+    assert.equal(z.kandidata, 1);
+    assert.equal(z.novo, 1);
+    // Preskočen naziv nije tehnička greška: popis je pun, ciklus uspešan.
+    assert.equal(z.popis, "pun");
+    assert.equal(moduli.pipeline.izlazniKodCiklusa({ skeniranje: z }), 0);
+
+    // U red je ušla TAČNO jedna stavka; nijedno telo ne potiče od odbijenog imena.
+    const zbirReda = Object.values(o.store.zbir()).reduce((a, b) => a + b, 0);
+    assert.equal(zbirReda, 1, "PDF bez oznake je ušao u lokalni red");
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("250 PDF-ova bez oznake ne troše budžet i ne otvaraju se", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await sintetickih(o, "2024", 250, (i) => `racun ${i}.pdf`);
+    await stavi(o, "2026", "FAK-1.pdf", "vise-stavki.pdf");
+
+    const { otvoreno, citac } = spijun();
+    // Budžet 1: da odbijeni PDF-ovi troše budžet, faktura ne bi došla na red.
+    const z = await moduli.pipeline.skenirajURed({
+      store: o.store, konfiguracija: o.konfiguracija, granice: { ...BRZE, maxNovihPoCiklusu: 1 }, citac,
+    });
+
+    assert.equal(z.nijeFakturaPoNazivu, 250);
+    assert.equal(z.novo, 1, "faktura nije obrađena — budžet je potrošen na odbijene nazive");
+    assert.equal(z.preostalo, 0);
+    assert.ok(otvoreno.every((x) => imeFajla(x.p) === "FAK-1.pdf"), "otvoren je PDF bez oznake");
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("250 poznatih u starim godinama + nova faktura u POSLEDNJOJ godini se nalazi", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await sintetickih(o, "2021", 125);
+    await sintetickih(o, "2022", 125);
+    const prvi = await o.ciklus({ ...BRZE, maxNovihPoCiklusu: 250 });
+    assert.equal(prvi.novo + prvi.nepodrzano, 250);
+
+    await stavi(o, "2029", "FAKTURA 2029-1.pdf", "vise-stavki.pdf");
+    const drugi = await o.ciklus(BRZE);
+    assert.equal(drugi.poznato, 250);
+    assert.equal(drugi.novo, 1, "nova faktura iza 250 poznatih nije nađena");
+    assert.equal(drugi.preostalo, 0);
+    const f2029 = drugi.poFolderu.find((f) => f.folder === "2029");
+    assert.equal(f2029.novo, 1);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("backfill: 450 novih → tačno `preostalo` i broj serija, pa napredak do kraja", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await sintetickih(o, "2021", 150);
+    await sintetickih(o, "2022", 150);
+    await sintetickih(o, "2023", 150);
+    const granice = { ...BRZE, maxNovihPoCiklusu: 200 };
+
+    const obradjeno = (z) => z.novo + z.nepodrzano;
+
+    const c1 = await o.ciklus(granice);
+    assert.equal(c1.pregledano, 450);
+    assert.equal(obradjeno(c1), 200);
+    assert.equal(c1.preostalo, 250);
+    assert.equal(c1.preostaloSerija, 2, "ceil(250 / 200)");
+    assert.equal(zbirIshoda(c1), c1.pregledano, "kandidat nije u tačno jednom brojaču");
+    // Po folderu: prvih 200 u redosledu je 150 iz 2021 i 50 iz 2022.
+    const po1 = Object.fromEntries(c1.poFolderu.map((f) => [f.folder, f]));
+    assert.deepEqual([po1["2021"].preostalo, po1["2022"].preostalo, po1["2023"].preostalo], [0, 100, 150]);
+
+    const c2 = await o.ciklus(granice);
+    assert.equal(c2.poznato, 200, "obrađeni dokumenti nisu postali poznati");
+    assert.equal(obradjeno(c2), 200, "drugi ciklus nije uzeo narednu seriju");
+    assert.equal(c2.preostalo, 50);
+    assert.equal(c2.preostaloSerija, 1);
+
+    const c3 = await o.ciklus(granice);
+    assert.equal(obradjeno(c3), 50);
+    assert.equal(c3.preostalo, 0);
+    assert.equal(c3.preostaloSerija, 0);
+
+    // Posle backfill-a: ništa se ne obrađuje ponovo, samo novo.
+    await stavi(o, "2026", "FAK-novi.pdf", "vise-stavki.pdf");
+    const c4 = await o.ciklus(granice);
+    assert.equal(c4.poznato, 450);
+    assert.equal(c4.novo, 1);
+    assert.equal(c4.preostalo, 0);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("`preostalo` broji dokumente, ne kopije u dve godine", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    // Isti sadržaj u 2024 i 2025, oba primerka iznad budžeta.
+    await sintetickih(o, "2023", 1);
+    for (const g of ["2024", "2025"]) {
+      await mkdir(godina(o, g), { recursive: true });
+      await writeFile(join(godina(o, g), "FAK-isti.pdf"), "%PDF-1.4 isti sadrzaj");
+    }
+    const z = await o.ciklus({ ...BRZE, maxNovihPoCiklusu: 1 });
+    assert.equal(z.preostalo, 1, "kopija je izbrojana kao drugi preostali dokument");
+    assert.equal(z.ponovljenSadrzaj, 1);
+    assert.equal(zbirIshoda(z), z.pregledano);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("trajno neispravan dokument ne izaziva glad: sledeći ciklus ide dalje", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    // Prvi po redosledu je pokvaren; iza njega ispravna faktura.
+    await mkdir(godina(o, "2021"), { recursive: true });
+    await writeFile(join(godina(o, "2021"), "FAK-0000-pokvaren.pdf"), "nije pdf uopste");
+    await stavi(o, "2021", "FAK-0001.pdf", "vise-stavki.pdf");
+    const granice = { ...BRZE, maxNovihPoCiklusu: 1 };
+
+    const c1 = await o.ciklus(granice);
+    assert.equal(c1.nepodrzano, 1);
+    assert.equal(c1.preostalo, 1);
+
+    // Pokvaren je upisan kao nepodržan — poznat je, i ne zauzima budžet ponovo.
+    const c2 = await o.ciklus(granice);
+    assert.equal(c2.poznato, 1);
+    assert.equal(c2.novo, 1, "ispravna faktura iza pokvarene nije došla na red");
+    assert.equal(c2.preostalo, 0);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("trajno nestabilan dokument ne troši budžet: ostali napreduju i uz budžet 1", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await mkdir(godina(o, "2021"), { recursive: true });
+    await writeFile(join(godina(o, "2021"), "FAK-0000-zauvek-se-pise.pdf"), "%PDF-1.4 x");
+    await stavi(o, "2021", "FAK-0001.pdf", "vise-stavki.pdf");
+    await stavi(o, "2021", "FAK-0002.pdf", "jedna-stavka.pdf");
+
+    // Prvi fajl nikad ne postane stabilan — kao fajl koji neki proces stalno drži.
+    const zamena = {
+      stabilno: async (p, g) =>
+        imeFajla(p).includes("zauvek")
+          ? { ok: false, razlog: "nestabilan" }
+          : moduli.scanner.procitajStabilno(p, g),
+    };
+    const granice = { ...BRZE, maxNovihPoCiklusu: 1 };
+    const ciklus = () =>
+      moduli.pipeline.skenirajURed({
+        store: o.store, konfiguracija: o.konfiguracija, granice, citac: spijun(zamena).citac,
+      });
+
+    const c1 = await ciklus();
+    assert.equal(c1.odlozeno, 1);
+    assert.equal(c1.novo, 1, "nestabilan dokument je pojeo jedino mesto u budžetu");
+    assert.equal(c1.preostalo, 1);
+
+    const c2 = await ciklus();
+    assert.equal(c2.odlozeno, 1);
+    assert.equal(c2.novo, 1, "drugi ciklus nije napredovao");
+    assert.equal(c2.preostalo, 0);
+    assert.equal(zbirIshoda(c2), c2.pregledano);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("nečitljiv fajl se broji zasebno od odloženog i ne troši budžet", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await stavi(o, "2025", "FAK-zakljucan.pdf", "jedna-stavka.pdf");
+    await stavi(o, "2025", "FAK-dobar.pdf", "vise-stavki.pdf");
+    const zamena = {
+      zaOtisak: async (p, g) =>
+        imeFajla(p).includes("zakljucan")
+          ? { ok: false, razlog: "zakljucan" }
+          : moduli.scanner.procitajZaOtisak(p, g),
+    };
+    const z = await moduli.pipeline.skenirajURed({
+      store: o.store, konfiguracija: o.konfiguracija, granice: { ...BRZE, maxNovihPoCiklusu: 1 },
+      citac: spijun(zamena).citac,
+    });
+    assert.equal(z.necitljivo, 1);
+    assert.equal(z.odlozeno, 0);
+    assert.equal(z.novo, 1);
+    assert.equal(z.poFolderu.find((f) => f.folder === "2025").necitljivo, 1);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("komanda tokom backfill-a nije `completed`: preostalo ide u pendingCount", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await sintetickih(o, "2021", 3);
+    const { rez, kraj } = await komandaNad(o, { ...BRZE, maxNovihPoCiklusu: 1 });
+    assert.equal(rez.skeniranje.preostalo, 2);
+    assert.equal(rez.stanje, "retry_pending", "backfill u toku prikazan kao završen");
+    assert.equal(JSON.parse(kraj.brojaci).pendingCount, 2);
   } finally {
     await o.zatvori();
   }

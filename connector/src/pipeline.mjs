@@ -76,22 +76,74 @@ export function ocenaPopisa(preskoceno = []) {
  * Ne šalje ništa. `dry-run` koristi tačno ovo, pa je ono što operater vidi u
  * probi zaista ono što će se poslati.
  */
-export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVANE_GRANICE, log }) {
+export async function skenirajURed({
+  store,
+  konfiguracija,
+  granice = PODRAZUMEVANE_GRANICE,
+  log,
+  /*
+   * Čitači sadržaja. Zamenjuju se SAMO u testu, da bi se dokazalo koji fajlovi
+   * su uopšte otvoreni; proizvodni poziv ih nikad ne prosleđuje.
+   */
+  citac = { zaOtisak: procitajZaOtisak, stabilno: procitajStabilno },
+}) {
   const { koren } = await proveriIzvor(konfiguracija.izvorniFolder);
-  const { kandidati, preskoceno } = await nadjiKandidate(koren, granice);
+  const { kandidati, preskoceno, folderi } = await nadjiKandidate(koren, granice);
+
+  /*
+   * Zbir ciklusa. Svaki kandidat koji uđe u petlju završava u TAČNO jednom od
+   * brojača ishoda, pa važi:
+   *
+   *   pregledano = poznato + ponovljenSadrzaj + novo + nepodrzano
+   *              + odlozeno + necitljivo + preostalo
+   *
+   * a iznad toga:
+   *
+   *   ukupnoPdf = nijeFakturaPoNazivu + kandidata
+   *   kandidata = preskocenoTehnicki + pregledano   (osim kad je popis prekinut)
+   */
+  const BROJACI_ISHODA = ["poznato", "ponovljenSadrzaj", "novo", "nepodrzano", "odlozeno", "necitljivo", "preostalo"];
+  const nula = () => Object.fromEntries(BROJACI_ISHODA.map((b) => [b, 0]));
+  const poFolderu = new Map(folderi.map((f) => [f.folder, { ...f, ...nula() }]));
+  const saberi = (polje) => folderi.reduce((n, f) => n + f[polje], 0);
 
   const zbir = {
-    /** Koliko je PDF-ova uopšte popisano — koren i svi neposredni podfolderi. */
+    /** Svi PDF-ovi u korenu i neposrednim podfolderima, pre filtera po imenu. */
+    ukupnoPdf: saberi("ukupnoPdf"),
+    /** PDF-ovi bez oznake `faktura`/`fak` — nisu otvoreni, nisu heširani. */
+    nijeFakturaPoNazivu: saberi("nijeFakturaPoNazivu"),
+    /** PDF-ovi sa oznakom fakture u imenu. */
+    kandidata: saberi("kandidata"),
+    /** Kandidati odbijeni pre čitanja: veza, prazan, prevelik, nestao. */
+    preskocenoTehnicki: saberi("preskocenoTehnicki"),
+    /** Kandidati koji su ušli u otkrivanje (čitanje + otisak). */
     pregledano: kandidati.length,
-    novo: 0,
-    poznato: 0,
-    odlozeno: 0,
-    nepodrzano: 0,
-    /** Novih je bilo više nego što budžet dozvoljava; ostatak ide sledeći ciklus. */
-    cekaBudzet: 0,
+    ...nula(),
   };
-  const detalji = [];
+  const ubroji = (k, polje) => {
+    zbir[polje] += 1;
+    const f = poFolderu.get(k.folder);
+    if (f) f[polje] += 1;
+  };
+  // Nije otvoren (zaključan, bez prava) — nečitljiv; sve ostalo je odlaganje.
+  const neuspehCitanja = (razlog) => (razlog === "zakljucan" ? "necitljivo" : "odlozeno");
+
+  /*
+   * Otisci novih dokumenata viđeni U OVOM ciklusu, a još neupisani u red.
+   *
+   * Bez ovoga bi ista faktura u `2024` i `2025`, obe iznad budžeta, bila
+   * izbrojana kao DVA preostala dokumenta — a sledeći ciklus ih obrađuje kao
+   * jedan. `preostalo` mora da broji dokumente, ne kopije.
+   */
+  const noviOtisci = new Set();
   let uObradi = 0;
+  /*
+   * Protokol stabilnosti košta ~2 s po fajlu. Neuspeli pokušaji ne troše
+   * budžet obrade, pa ih ograničava zasebna, dvostruko veća granica — inače
+   * bi arhiva puna fajlova koji se upravo pišu produžila ciklus bez kraja.
+   */
+  const maxPokusajaStabilnosti = 2 * granice.maxNovihPoCiklusu;
+  let pokusajaStabilnosti = 0;
 
   for (const k of kandidati) {
     /*
@@ -101,7 +153,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
      * dokumenata to je oko 6,7 sati (mereno). Zato ga ovde nema — plaćaju ga
      * samo dokumenti koji se pokažu kao novi ili promenjeni.
      */
-    const otkrivanje = await procitajZaOtisak(k.putanja, granice);
+    const otkrivanje = await citac.zaOtisak(k.putanja, granice);
     if (!otkrivanje.ok) {
       /*
        * Nestabilan, zaključan ili nestao fajl se ODLAŽE.
@@ -109,8 +161,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
        * Ne upisuje se u red kao neispravan: delimično zapisan dokument je
        * sledećeg ciklusa gotov, a trajna oznaka bi ga zauvek izbacila.
        */
-      zbir.odlozeno += 1;
-      detalji.push({ razlog: otkrivanje.razlog });
+      ubroji(k, neuspehCitanja(otkrivanje.razlog));
       continue;
     }
 
@@ -125,9 +176,14 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
      * u `FAKTURE 2024` moglo bi trajno da sakrije nov dokument u `FAKTURE 2029`.
      */
     if (store.imaOtisak(otkrivanje.sourceHash)) {
-      zbir.poznato += 1;
+      ubroji(k, "poznato");
       continue;
     }
+    if (noviOtisci.has(otkrivanje.sourceHash)) {
+      ubroji(k, "ponovljenSadrzaj");
+      continue;
+    }
+    noviOtisci.add(otkrivanje.sourceHash);
 
     /*
      * KORAK 2 — tek sada budžet, i tek sada protokol stabilnosti.
@@ -136,18 +192,27 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
      * parsira i šalje u jednom ciklusu. Ostatak čeka sledeći, i biće viđen jer
      * popis ne pamti dokle je stigao.
      */
-    if (uObradi >= granice.maxNovihPoCiklusu) {
-      zbir.cekaBudzet += 1;
+    if (uObradi >= granice.maxNovihPoCiklusu || pokusajaStabilnosti >= maxPokusajaStabilnosti) {
+      ubroji(k, "preostalo");
+      continue;
+    }
+    pokusajaStabilnosti += 1;
+
+    const citanje = await citac.stabilno(k.putanja, granice);
+    if (!citanje.ok) {
+      /*
+       * Neuspelo stabilno čitanje NE troši budžet obrade.
+       *
+       * Ne upisuje se u red, pa se sledeći ciklus vraća na njega — i dolazi na
+       * red PRE dokumenata iza sebe. Da troši mesto u budžetu, jedan trajno
+       * nestabilan dokument bi uz mali budžet svakog dana pojeo seriju i
+       * dokumenti iza njega nikad ne bi došli na red. Vreme ciklusa ipak
+       * ograničava `maxPokusajaStabilnosti`.
+       */
+      ubroji(k, neuspehCitanja(citanje.razlog));
       continue;
     }
     uObradi += 1;
-
-    const citanje = await procitajStabilno(k.putanja, granice);
-    if (!citanje.ok) {
-      zbir.odlozeno += 1;
-      detalji.push({ razlog: citanje.razlog });
-      continue;
-    }
 
     /*
      * Otisak se proverava PONOVO nad stabilnim čitanjem.
@@ -156,7 +221,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
      * raniju verziju; merodavan je otisak bajtova koje parser stvarno dobija.
      */
     if (citanje.sourceHash !== otkrivanje.sourceHash && store.imaOtisak(citanje.sourceHash)) {
-      zbir.poznato += 1;
+      ubroji(k, "poznato");
       continue;
     }
 
@@ -171,7 +236,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
         velicina: citanje.velicina,
         razlog: "parser_greska",
       });
-      zbir.nepodrzano += 1;
+      ubroji(k, "nepodrzano");
       continue;
     }
 
@@ -188,7 +253,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
         velicina: citanje.velicina,
         razlog: `parser:${parsed.validationStatus}`,
       });
-      zbir.nepodrzano += 1;
+      ubroji(k, "nepodrzano");
       continue;
     }
 
@@ -212,7 +277,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
         velicina: citanje.velicina,
         razlog: `canonical:${greska?.code ?? "greska"}`,
       });
-      zbir.nepodrzano += 1;
+      ubroji(k, "nepodrzano");
       continue;
     }
 
@@ -230,7 +295,7 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
       telo,
       semanticHash: payload.semantic_hash,
     });
-    zbir.novo += 1;
+    ubroji(k, "novo");
   }
 
   /*
@@ -241,6 +306,19 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
    * uspešan. Sada ocena ide u zbir, u dnevnik kao `warn`, i dalje u ishod.
    */
   Object.assign(zbir, ocenaPopisa(preskoceno));
+
+  /*
+   * `preostalo` je TAČAN broj različitih novih ili promenjenih dokumenata koje
+   * je ovaj ciklus video, heširao i ostavio za sledeći zbog budžeta. Nije
+   * procena: svaki od njih je pročitan i nije u redu. Broj serija važi uz
+   * pretpostavku da se u međuvremenu ne pojave novi dokumenti i da se nijedan
+   * ne odloži.
+   */
+  zbir.preostaloSerija = Math.ceil(zbir.preostalo / granice.maxNovihPoCiklusu);
+  zbir.maxNovihPoCiklusu = granice.maxNovihPoCiklusu;
+  // Upisano u red a još neposlato — slanje ide u sopstvenim serijama.
+  zbir.cekaSlanje = store.zbir()[STANJA.SPREMNO] ?? 0;
+  zbir.poFolderu = [...poFolderu.values()];
   await log?.zapisi(zbir.kodPopisa ? "warn" : "info", "scan", { ...zbir, preskoceno: preskoceno.length });
   return { ...zbir, preskoceno };
 }
@@ -372,5 +450,11 @@ export async function posaljiIzReda(ulaz) {
     }
   }
 
+  /*
+   * Koliko spremnih stavki ostaje u redu posle ove serije slanja — uključujući
+   * one odložene za sledeći radni dan. Tokom istorijskog backfill-a red raste
+   * brže nego što se prazni, i to mora da se vidi.
+   */
+  zbir.ostaloURedu = store.zbir()[STANJA.SPREMNO] ?? 0;
   return zbir;
 }

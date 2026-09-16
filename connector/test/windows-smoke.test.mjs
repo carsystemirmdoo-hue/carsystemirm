@@ -242,12 +242,19 @@ test("[WIN] putanja sa razmacima, srpskim slovima i UNC oblikom", async (t) => {
     await mkdir(folder, { recursive: true });
     await cp(
       fileURLToPath(new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url)),
-      join(folder, "Račun 42.PDF"),
+      join(folder, "Faktura 42.PDF"),
+    );
+    // PDF bez oznake fakture u istom folderu — na Windowsu se takođe ne uzima.
+    await cp(
+      fileURLToPath(new URL("../../fixtures/dev/biznisoft/jedna-stavka.pdf", import.meta.url)),
+      join(folder, "Račun 43.PDF"),
     );
 
     const { koren } = await skener.proveriIzvor(folder);
-    const { kandidati } = await skener.nadjiKandidate(koren);
+    const { kandidati, folderi } = await skener.nadjiKandidate(koren);
     assert.equal(kandidati.length, 1);
+    assert.ok(kandidati[0].putanja.endsWith("Faktura 42.PDF"));
+    assert.equal(folderi[0].nijeFakturaPoNazivu, 1);
 
     /*
      * UNC / mrežni disk NIJE proglašen podržanim.
@@ -276,8 +283,8 @@ test("[WIN] junction ka putanji van korena NIJE praćen", async (t) => {
     const uzorak = fileURLToPath(
       new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url),
     );
-    await cp(uzorak, join(koren, "FAKTURE 2026", "nasa.pdf"));
-    await cp(uzorak, join(spolja, "tudja.pdf"));
+    await cp(uzorak, join(koren, "FAKTURE 2026", "FAK nasa.pdf"));
+    await cp(uzorak, join(spolja, "FAK tudja.pdf"));
 
     /*
      * `mklink /J` pravi junction — Windows reparse tačku koja ne traži
@@ -304,7 +311,7 @@ test("[WIN] junction ka putanji van korena NIJE praćen", async (t) => {
     const { kandidati, preskoceno } = await skener.nadjiKandidate(razresen);
     const imena = kandidati.map((k) => k.putanja.split("\\").pop());
 
-    assert.deepEqual(imena, ["nasa.pdf"], "junction je uvukao dokument van korena");
+    assert.deepEqual(imena, ["FAK nasa.pdf"], "junction je uvukao dokument van korena");
     assert.ok(
       preskoceno.some((x) => x.razlog === "podfolder_symlink" || x.razlog === "podfolder_van_korena"),
       "junction nije prijavljen kao preskočen",

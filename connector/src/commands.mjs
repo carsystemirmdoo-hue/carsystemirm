@@ -219,8 +219,12 @@ export function stanjeZaIshod({ skeniranje, slanje }) {
   if (kodPopisa === KOD_POPIS_PREKINUT) {
     return { stanje: "failed", failureCode: kodPopisa };
   }
-  if (slanje.odlozeno > 0) {
-    // Ostalo je neslatih stavki — ponavljaju se sledećeg radnog dana.
+  if (slanje.odlozeno > 0 || skeniranje.preostalo > 0 || slanje.ostaloURedu > 0) {
+    /*
+     * Ostalo je posla za sledeći ciklus: neslate stavke, dokumenti iznad
+     * budžeta ili red koji serija slanja nije ispraznila. Tokom backfill-a
+     * `completed` bi tvrdilo da je istorija gotova, a nije.
+     */
     return { stanje: "retry_pending", failureCode: kodPopisa };
   }
   if (kodPopisa) {
@@ -246,7 +250,11 @@ export function brojaciZa({ skeniranje, slanje }) {
     duplicateCount: 0,
     reviewCount: slanje.zaPregled ?? 0,
     unsupportedCount: skeniranje.nepodrzano ?? 0,
-    pendingCount: slanje.odlozeno ?? 0,
+    /*
+     * Sve što čeka sledeći ciklus: red posle slanja (on već sadrži odložene
+     * stavke) i novi dokumenti iznad budžeta, koji još nisu u redu.
+     */
+    pendingCount: (slanje.ostaloURedu ?? slanje.odlozeno ?? 0) + (skeniranje.preostalo ?? 0),
     blockedCount: slanje.zaustavljeno ? 1 : 0,
   };
 }

@@ -83,27 +83,167 @@ test("nedostupan izvor se razlikuje od praznog", async () => {
   }
 });
 
+/* =========================================================================
+ * Oznaka fakture u imenu
+ *
+ * Poslovno pravilo kancelarije: PDF je kandidat za fakturu samo ako ime nosi
+ * `faktura` ili `fak` kao samostalan segment. Tabela je doslovno spisak iz
+ * zahteva; donji blok „posledice pravila" su slučajevi koje pravilo ne
+ * navodi, a ishod sledi iz spiska dozvoljenih razdvajača.
+ * ====================================================================== */
+
+const PRIHVACENO = [
+  "FAKTURA 123.pdf",
+  "faktura-123.PDF",
+  "Faktura_2026_123.pdf",
+  "FAK 123.pdf",
+  "FAK-123.pdf",
+  "FAK_123.pdf",
+  "FAK123.pdf",
+  "2026-FAK-123.pdf",
+  "storno faktura 123.pdf",
+  // velika/mala slova i ekstenzija
+  "fAkTuRa 9.Pdf",
+  "fak.pdf",
+  "FAKTURA.PDF",
+  "123.faktura.pdf",
+  "FAKTURA123.pdf",
+];
+
+const ODBIJENO = [
+  "racun 123.pdf",
+  "otpremnica 123.pdf",
+  "kompenzacija.pdf",
+  "profaktura.pdf",
+  "nefaktura.pdf",
+  "faks.pdf",
+  "faktor.pdf",
+  // nije PDF
+  "FAKTURA 123.docx",
+  "FAK 123.pdf.txt",
+  "faktura",
+  "FAK-123.xml",
+];
+
+const POSLEDICE_PRAVILA = [
+  // cifra je dozvoljena samo POSLE oznake
+  ["123FAK.pdf", false],
+  // zagrada i zarez nisu na spisku razdvajača
+  ["faktura(1).pdf", false],
+  ["FAK,123.pdf", false],
+  // `fakture` nije `faktura`, a `fak` iza sebe ima slovo
+  ["fakture 2026.pdf", false],
+  // Windows kopija zadržava razmak iza oznake
+  ["FAKTURA 123 - Copy.pdf", true],
+  ["FAKTURA 123 (2).pdf", true],
+];
+
+test("naziv: svi prihvaćeni primeri iz poslovnog pravila", () => {
+  for (const ime of PRIHVACENO) {
+    assert.equal(skener.jeFakturaPoNazivu(ime), true, `odbijeno, a mora biti prihvaćeno: ${ime}`);
+  }
+});
+
+test("naziv: svi odbijeni primeri iz poslovnog pravila", () => {
+  for (const ime of ODBIJENO) {
+    assert.equal(skener.jeFakturaPoNazivu(ime), false, `prihvaćeno, a mora biti odbijeno: ${ime}`);
+  }
+});
+
+test("naziv: posledice spiska razdvajača", () => {
+  for (const [ime, ocekivano] of POSLEDICE_PRAVILA) {
+    assert.equal(skener.jeFakturaPoNazivu(ime), ocekivano, ime);
+  }
+});
+
+test("naziv: matcher nije `includes(\"fak\")`", () => {
+  // Svako od ovih imena SADRŽI `fak`; nijedno nije faktura.
+  for (const ime of ["profaktura.pdf", "nefaktura.pdf", "faks.pdf", "faktor.pdf", "defakto.pdf"]) {
+    assert.ok(ime.toLowerCase().includes("fak"));
+    assert.equal(skener.jeFakturaPoNazivu(ime), false, ime);
+  }
+});
+
+test("popis uzima samo PDF-ove sa oznakom i broji ostale po folderu", async () => {
+  const { baza, folder } = await privremeni();
+  try {
+    for (const godina of ["2021", "2026"]) {
+      await mkdir(join(folder, godina), { recursive: true });
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, godina, `FAK ${godina}-1.pdf`));
+      await cp(join(FIXTURES, "vise-stavki.pdf"), join(folder, godina, `racun ${godina}-1.pdf`));
+      await cp(join(FIXTURES, "vise-stavki.pdf"), join(folder, godina, `profaktura ${godina}.pdf`));
+      await writeFile(join(folder, godina, "FAKTURA beleška.txt"), "nije pdf");
+    }
+
+    const { koren } = await skener.proveriIzvor(folder);
+    const { kandidati, folderi } = await skener.nadjiKandidate(koren);
+
+    assert.deepEqual(
+      kandidati.map((k) => k.putanja.split(/[\\/]/).pop()).sort(),
+      ["FAK 2021-1.pdf", "FAK 2026-1.pdf"],
+    );
+    const po = Object.fromEntries(folderi.map((f) => [f.folder, f]));
+    for (const godina of ["2021", "2026"]) {
+      assert.equal(po[godina].ukupnoPdf, 2 + 1, `${godina}: ukupno PDF`);
+      assert.equal(po[godina].kandidata, 1, `${godina}: kandidata`);
+      assert.equal(po[godina].nijeFakturaPoNazivu, 2, `${godina}: odbijeno po nazivu`);
+    }
+    assert.equal(po[skener.OZNAKA_KORENA].ukupnoPdf, 0);
+    // Zbir po folderu nosi ime foldera — nikad putanju ni ime fajla.
+    const tekst = JSON.stringify(folderi);
+    assert.ok(!tekst.includes(baza) && !tekst.includes(".pdf"), `zbir curi: ${tekst}`);
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
+test("buduće godine 2027, 2028, 2029 se nalaze bez izmene konfiguracije", async () => {
+  const { baza, folder } = await privremeni();
+  try {
+    for (const godina of ["2021", "2022", "2023", "2024", "2025", "2026"]) {
+      await mkdir(join(folder, godina), { recursive: true });
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, godina, `FAKTURA ${godina}.pdf`));
+    }
+    const { koren } = await skener.proveriIzvor(folder);
+    assert.equal((await skener.nadjiKandidate(koren)).kandidati.length, 6);
+
+    for (const godina of ["2027", "2028", "2029"]) {
+      await mkdir(join(folder, godina), { recursive: true });
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, godina, `FAK-${godina}-1.pdf`));
+    }
+    // Isti koren, isti poziv — nijedna godina nije upisana u kod.
+    const { kandidati, folderi } = await skener.nadjiKandidate(koren);
+    assert.equal(kandidati.length, 9);
+    assert.deepEqual(
+      folderi.map((f) => f.folder),
+      [skener.OZNAKA_KORENA, "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029"],
+    );
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
+});
+
 test("skenira se koren I neposredni podfolderi — ali ne dublje i ne kroz linkove", async () => {
   const { baza, folder } = await privremeni();
   try {
     const spolja = join(baza, "spolja");
     await mkdir(spolja, { recursive: true });
-    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(spolja, "tudja.pdf"));
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(spolja, "FAK tudja.pdf"));
 
     // Fajl u samom korenu, sa razmacima i srpskim slovima, VELIKA ekstenzija.
-    await cp(join(FIXTURES, "vise-stavki.pdf"), join(folder, "Račun broj 42.PDF"));
+    await cp(join(FIXTURES, "vise-stavki.pdf"), join(folder, "Faktura broj 42.PDF"));
 
     // Neposredni podfolderi — MORAJU se obići. Ime foldera nije poslovni podatak.
     for (const godina of ["FAKTURE 2024", "FAKTURE 2029", "bilo kakvo ime ČĆŽ"]) {
       await mkdir(join(folder, godina), { recursive: true });
-      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, godina, `${godina}.pdf`));
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, godina, `faktura ${godina}.pdf`));
     }
 
     // Dva nivoa dublje — NE sme se obići.
     await mkdir(join(folder, "FAKTURE 2024", "arhiva"), { recursive: true });
     await cp(
       join(FIXTURES, "jedna-stavka.pdf"),
-      join(folder, "FAKTURE 2024", "arhiva", "duboko.pdf"),
+      join(folder, "FAKTURE 2024", "arhiva", "FAK duboko.pdf"),
     );
 
     /*
@@ -113,7 +253,7 @@ test("skenira se koren I neposredni podfolderi — ali ne dublje i ne kroz linko
      * izvršava u kancelarijskom smoke-u, pa tvrdnja o linku sme da postoji samo
      * ako je link stvarno napravljen. Junction varijantu pokriva `[WIN]` test.
      */
-    const linkFajl = await symlink(join(spolja, "tudja.pdf"), join(folder, "veza.pdf"))
+    const linkFajl = await symlink(join(spolja, "FAK tudja.pdf"), join(folder, "FAK veza.pdf"))
       .then(() => true)
       .catch(() => false);
     const linkFolder = await symlink(spolja, join(folder, "vezani folder"))
@@ -126,11 +266,11 @@ test("skenira se koren I neposredni podfolderi — ali ne dublje i ne kroz linko
 
     assert.deepEqual(
       imena,
-      ["FAKTURE 2024.pdf", "FAKTURE 2029.pdf", "Račun broj 42.PDF", "bilo kakvo ime ČĆŽ.pdf"],
+      ["Faktura broj 42.PDF", "faktura FAKTURE 2024.pdf", "faktura FAKTURE 2029.pdf", "faktura bilo kakvo ime ČĆŽ.pdf"],
       "popis nije tačno koren + jedan nivo",
     );
-    assert.ok(!imena.includes("duboko.pdf"), "skener je sišao dva nivoa dublje");
-    assert.ok(!imena.includes("tudja.pdf"), "skener je izašao iz korena");
+    assert.ok(!imena.includes("FAK duboko.pdf"), "skener je sišao dva nivoa dublje");
+    assert.ok(!imena.includes("FAK tudja.pdf"), "skener je izašao iz korena");
 
     if (linkFajl) {
       assert.ok(preskoceno.some((x) => x.razlog === "symlink"), "symlink fajl nije preskočen");
@@ -162,7 +302,7 @@ test("nov podfolder se nalazi bez ijedne izmene konfiguracije", async () => {
 
     for (const ime of ["FAKTURE 2028", "FAKTURE 2029", "FAKTURE 2030", "ARHIVA XYZ"]) {
       await mkdir(join(folder, ime), { recursive: true });
-      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, ime, `${ime}.pdf`));
+      await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, ime, `faktura ${ime}.pdf`));
 
       const { kandidati } = await skener.nadjiKandidate(koren);
       assert.ok(
@@ -188,18 +328,18 @@ test("popis NIJE ograničen budžetom obrade", async () => {
     const stari = join(folder, "FAKTURE 2024");
     await mkdir(stari, { recursive: true });
     for (let i = 0; i < 250; i += 1) {
-      await writeFile(join(stari, `stara-${i}.pdf`), `sadržaj ${i}`);
+      await writeFile(join(stari, `FAK-stara-${i}.pdf`), `sadržaj ${i}`);
     }
     const novi = join(folder, "FAKTURE 2029");
     await mkdir(novi, { recursive: true });
-    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(novi, "nova.pdf"));
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(novi, "FAK nova.pdf"));
 
     const { koren } = await skener.proveriIzvor(folder);
     const { kandidati } = await skener.nadjiKandidate(koren);
 
     assert.equal(kandidati.length, 251, "popis je prekinut pre kraja");
     assert.ok(
-      kandidati.some((k) => k.putanja.endsWith("nova.pdf")),
+      kandidati.some((k) => k.putanja.endsWith("FAK nova.pdf")),
       "nov dokument je ostao sakriven iza 250 starih",
     );
   } finally {
@@ -212,11 +352,11 @@ test("podfolder bez prava čitanja ne ruši popis", async () => {
   try {
     const zatvoren = join(folder, "FAKTURE 2025");
     await mkdir(zatvoren, { recursive: true });
-    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(zatvoren, "u-zatvorenom.pdf"));
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(zatvoren, "FAK-u-zatvorenom.pdf"));
 
     const otvoren = join(folder, "FAKTURE 2026");
     await mkdir(otvoren, { recursive: true });
-    await cp(join(FIXTURES, "vise-stavki.pdf"), join(otvoren, "u-otvorenom.pdf"));
+    await cp(join(FIXTURES, "vise-stavki.pdf"), join(otvoren, "FAK-u-otvorenom.pdf"));
 
     await chmod(zatvoren, 0o000);
     try {
@@ -225,12 +365,12 @@ test("podfolder bez prava čitanja ne ruši popis", async () => {
 
       // Ostatak arhive se i dalje popisuje.
       assert.ok(
-        kandidati.some((k) => k.putanja.endsWith("u-otvorenom.pdf")),
+        kandidati.some((k) => k.putanja.endsWith("FAK-u-otvorenom.pdf")),
         "jedan nedostupan folder je zaustavio ceo popis",
       );
       assert.ok(
         preskoceno.some((x) => x.razlog === "folder_nedostupan") ||
-          kandidati.some((k) => k.putanja.endsWith("u-zatvorenom.pdf")),
+          kandidati.some((k) => k.putanja.endsWith("FAK-u-zatvorenom.pdf")),
         "nedostupan folder nije ni pročitan ni prijavljen",
       );
     } finally {
@@ -244,9 +384,9 @@ test("podfolder bez prava čitanja ne ruši popis", async () => {
 test("prazan i prevelik fajl se preskaču bez rušenja ciklusa", async () => {
   const { baza, folder } = await privremeni();
   try {
-    await writeFile(join(folder, "prazan.pdf"), "");
-    await writeFile(join(folder, "velik.pdf"), Buffer.alloc(1024));
-    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, "dobar.pdf"));
+    await writeFile(join(folder, "FAK-prazan.pdf"), "");
+    await writeFile(join(folder, "FAK-velik.pdf"), Buffer.alloc(1024));
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(folder, "FAK-dobar.pdf"));
 
     const { koren } = await skener.proveriIzvor(folder);
     const { kandidati, preskoceno } = await skener.nadjiKandidate(koren, {

@@ -176,6 +176,19 @@ function politikaOpis() {
   return redovi.length > 0 ? `politika: ${redovi.join(" ")}` : "efektivna politika nije prepoznata";
 }
 
+/** Identifikator, kategorija i red PowerShell greške — bez poruke i putanje. */
+function powershellSazetak(tekst) {
+  const id = /FullyQualifiedErrorId\s*:\s*([A-Za-z0-9_.,-]+)/.exec(tekst)?.[1];
+  const kategorija = /CategoryInfo\s*:\s*([A-Za-z]+)/.exec(tekst)?.[1];
+  const mesto = /[\\/]([A-Za-z0-9_-]+\.ps1):(\d+)\s+char:(\d+)/.exec(tekst);
+  const delovi = [
+    id && `id=${id}`,
+    kategorija && `kategorija=${kategorija}`,
+    mesto && `mesto=${mesto[1]}:${mesto[2]}:${mesto[3]}`,
+  ].filter(Boolean);
+  return delovi.length > 0 ? delovi.join(" ") : "bez PowerShell identifikatora greške";
+}
+
 function powershell(args, timeout = 120000) {
   const r = spawnSync(
     "powershell.exe",
@@ -591,7 +604,16 @@ provera("W13", "task.ps1 ostaje dry-run i NE pravi zadatak", () => {
     };
   }
   if (r.kod !== 0) {
-    pad("task_script_failed", `powershell -File je izašao sa ${r.kod}; ${politikaOpis()}`);
+    /*
+     * Detalj nosi PowerShell identifikator greške, kategoriju i red skripte —
+     * ne poruku, koja može da sadrži putanju sa imenom naloga. Kancelarijski
+     * prolaz 45a3460 je ovde vratio samo „izašao sa 1", i uzrok (skripta bez
+     * BOM-a, pročitana kao cp1250) morao je da se izvodi iz izvora.
+     */
+    pad(
+      "task_script_failed",
+      `powershell -File je izašao sa ${r.kod}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}; ${politikaOpis()}`,
+    );
   }
   if (!/\[dry-run\]/.test(r.stdout)) {
     pad("task_script_not_dry_run", "izlaz ne sadrži oznaku [dry-run]");

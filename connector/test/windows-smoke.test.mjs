@@ -36,6 +36,24 @@ const guard = (t) => {
 
 const D = (p) => new URL(`../dist/connector/src/${p}`, import.meta.url).href;
 
+/**
+ * Bezbedan sažetak PowerShell greške: identifikator, kategorija, skripta i red.
+ *
+ * Bez poruke i bez putanje — poruka može da nosi korisničko ime iz putanje
+ * paketa. Isti oblik koristi `run-smoke.mjs` u `W13`.
+ */
+function powershellSazetak(tekst) {
+  const id = /FullyQualifiedErrorId\s*:\s*([A-Za-z0-9_.,-]+)/.exec(tekst)?.[1];
+  const kategorija = /CategoryInfo\s*:\s*([A-Za-z]+)/.exec(tekst)?.[1];
+  const mesto = /[\\/]([A-Za-z0-9_-]+\.ps1):(\d+)\s+char:(\d+)/.exec(tekst);
+  const delovi = [
+    id && `id=${id}`,
+    kategorija && `kategorija=${kategorija}`,
+    mesto && `mesto=${mesto[1]}:${mesto[2]}:${mesto[3]}`,
+  ].filter(Boolean);
+  return delovi.length > 0 ? delovi.join(" ") : "bez PowerShell identifikatora greške";
+}
+
 /* =========================================================================
  * W13 poziv — statička provera IZVORNOG run-smoke.mjs, cross-platform.
  *
@@ -90,6 +108,65 @@ test("W13 poziva task.ps1 sa -Action install i -Mode Smoke, nikad -Apply ili Pro
 /* =========================================================================
  * DPAPI
  * ====================================================================== */
+
+/* =========================================================================
+ * Kodiranje PowerShell skripti — statička provera, cross-platform.
+ *
+ * Kancelarijski smoke 45a3460: `task.ps1` je u PODRAZUMEVANOM dry-run režimu
+ * izlazio sa 1 na Windows PowerShell 5.1, uz ispravnu politiku izvršavanja.
+ *
+ * Uzrok: skripta je UTF-8 BEZ BOM-a, a sadrži `—`, `ž`, `č`. Windows PowerShell
+ * 5.1 takav fajl čita u ANSI kodnoj strani (cp1250/cp1252). Poslednji bajt
+ * crte `—` (E2 80 94) tamo postaje `”` (U+201D), koji PowerShell tokenizer
+ * prihvata kao ZAVRŠNI navodnik — pa `throw "Ne postoji $exe — proveri"`
+ * prekida string usred poruke i cela skripta pada na parsiranju, pre ijedne
+ * provere. PowerShell 7 čita UTF-8 podrazumevano, zato se ovo ne vidi van
+ * Windows PowerShell-a.
+ *
+ * Ugovor: svaka `.ps1` skripta počinje UTF-8 BOM-om. Tada i 5.1 i 7 čitaju isti
+ * tekst, bez obzira na jezik sistema.
+ * ====================================================================== */
+
+const SKRIPTE_DIR = fileURLToPath(new URL("../windows/", import.meta.url));
+const BOM = Buffer.from([0xef, 0xbb, 0xbf]);
+
+test("vektor je stvaran: `—` u ANSI kodnoj strani postaje navodnik", () => {
+  for (const kodna of ["windows-1250", "windows-1252"]) {
+    const tekst = new TextDecoder(kodna).decode(Buffer.from('"a — b"', "utf8"));
+    assert.ok(tekst.includes("\u201d"), `${kodna}: vektor nije reprodukovan`);
+  }
+});
+
+test("svaka .ps1 skripta počinje UTF-8 BOM-om", async () => {
+  const { readdir } = await import("node:fs/promises");
+  const skripte = (await readdir(SKRIPTE_DIR)).filter((f) => f.endsWith(".ps1"));
+  assert.ok(skripte.includes("task.ps1") && skripte.includes("PathGuards.ps1"));
+
+  const bezBoma = [];
+  for (const ime of skripte) {
+    const bajtovi = await readFile(join(SKRIPTE_DIR, ime));
+    if (!bajtovi.subarray(0, 3).equals(BOM)) bezBoma.push(ime);
+  }
+  assert.deepEqual(bezBoma, [], `bez BOM-a (5.1 ih čita kao ANSI): ${bezBoma.join(", ")}`);
+});
+
+test("bez BOM-a nijedna .ps1 skripta ne bi čitala isti tekst u ANSI kodnoj strani", async () => {
+  /*
+   * Kontrola ugovora iznad: pokazuje da BOM ovde NIJE kozmetika. Svaka skripta
+   * koja ima ne-ASCII znak menja značenje kada se pročita kao cp1250 — i bar
+   * `task.ps1` i `PathGuards.ps1` time dobijaju „pametne“ navodnike u kodu.
+   */
+  const { readdir } = await import("node:fs/promises");
+  const pogodjene = [];
+  for (const ime of (await readdir(SKRIPTE_DIR)).filter((f) => f.endsWith(".ps1"))) {
+    let bajtovi = await readFile(join(SKRIPTE_DIR, ime));
+    if (bajtovi.subarray(0, 3).equals(BOM)) bajtovi = bajtovi.subarray(3);
+    const ansi = new TextDecoder("windows-1250").decode(bajtovi);
+    if (/[\u201c\u201d\u201e]/.test(ansi)) pogodjene.push(ime);
+  }
+  assert.ok(pogodjene.includes("task.ps1"), "task.ps1 više nema vektor — proveriti da li je test i dalje potreban");
+  assert.ok(pogodjene.includes("PathGuards.ps1"));
+});
 
 test("[WIN] DPAPI Protect/Unprotect vraća isti ključ", async (t) => {
   if (guard(t)) return;
@@ -415,13 +492,18 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
    * `-Mode Smoke` je obavezan od WIN-INSTALL-01 korekcije — bez njega skripta
    * baca grešku pre bilo koje provere.
    */
-  const izlaz = execFileSync(
+  const r = spawnSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
      "-Action", "install", "-Mode", "Smoke", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
-    { encoding: "utf8" },
+    { encoding: "utf8", timeout: 120_000 },
   );
-  assert.match(izlaz, /\[dry-run\]/);
+  /*
+   * Pad nosi PowerShell identifikator greške i broj reda — ne putanju ni
+   * poruku. Pre popravke kodiranja ovde je stajalo samo „izlaz 1".
+   */
+  assert.equal(r.status, 0, `task.ps1 dry-run: izlaz ${r.status}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
+  assert.match(r.stdout, /\[dry-run\]/);
 
   const postoji = execFileSync(
     "powershell.exe",
@@ -435,14 +517,18 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
 test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {
   if (guard(t)) return;
   const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
-  assert.throws(() =>
-    execFileSync(
-      "powershell.exe",
-      ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
-       "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
-      { encoding: "utf8" },
-    ),
+  const r = spawnSync(
+    "powershell.exe",
+    ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
+     "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
+    { encoding: "utf8", timeout: 120_000 },
   );
+  assert.notEqual(r.status, 0);
+  /*
+   * Odbijanje mora biti BAŠ ono zbog `-Mode`. Ranije je test tražio samo
+   * nenulti izlaz — i prolazio je dok je skripta padala na parsiranju.
+   */
+  assert.match(`${r.stdout}${r.stderr}`, /-Mode je obavezan/, `drugi razlog: ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 });
 
 test("[WIN] registracija i uklanjanje zadatka (Smoke i Production)", async (t) => {

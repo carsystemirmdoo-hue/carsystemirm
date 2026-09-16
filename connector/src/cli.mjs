@@ -6,7 +6,7 @@ import { ucitajKonfiguraciju } from "./config.mjs";
 import { izaberiAdapter, KeystoreError } from "./keystore/index.mjs";
 import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
 import { STANJA } from "./outcomes.mjs";
-import { posaljiIzReda, skenirajURed } from "./pipeline.mjs";
+import { IZLAZ_NEPOTPUN_POPIS, izlazniKodCiklusa, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 import { opisiPokrivenost } from "./calendar.mjs";
 import { lokalnoVreme, odlukaOCiklusu, sledeciTermin } from "./schedule.mjs";
 import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
@@ -259,7 +259,8 @@ async function dryRun(p) {
      */
     const rez = await skenirajURed({ store, konfiguracija: k, log });
     ispisi({ komanda: "dry-run", poslato: 0, ...rez, napomena: "Nijedan zahtev nije poslat." });
-    return 0;
+    // Proba koja nije videla celu arhivu ne sme da izgleda kao čista proba.
+    return izlazniKodCiklusa({ skeniranje: rez });
   } finally {
     store.zatvori();
   }
@@ -325,6 +326,8 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       komanda: rucni ? "run-once" : "auto",
       uzrok: rucni ? "rucno_pokretanje" : "raspored",
       datum: lokalno.datum,
+      popis: skeniranje.popis,
+      kodPopisa: skeniranje.kodPopisa,
       skeniranje,
       slanje,
       sledeciTermin: sledeciTermin({
@@ -333,7 +336,12 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
         dodatnaZatvaranja: k.dodatnaZatvaranja,
       }),
     });
-    return slanje.zaustavljeno ? 1 : 0;
+    /*
+     * Blokada ima prednost: ona zaustavlja slanje. Nepotpun popis nije
+     * zaustavio slanje viđenog, ali ciklus nije potpuno uspešan — i Task
+     * Scheduler to mora da vidi kao „Last Run Result“ različit od nule.
+     */
+    return izlazniKodCiklusa({ skeniranje, slanje });
   } finally {
     store.otpustiZakljucavanje(vlasnik);
     store.zatvori();
@@ -400,8 +408,14 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
         komanda: otvorena,
         lokalniDatum: lokalnoVreme(now).datum,
       });
-      reci({ komanda: "poll-once", status: "nastavljena", ishod: rez.stanje, zaostali });
-      return { kod: 0, zdravo: true };
+      reci({
+        komanda: "poll-once",
+        status: "nastavljena",
+        ishod: rez.stanje,
+        failureCode: rez.failureCode,
+        zaostali,
+      });
+      return { kod: rez.skeniranje?.kodPopisa ? IZLAZ_NEPOTPUN_POPIS : 0, zdravo: true };
     }
 
     const preuzeta = await preuzmiKomandu(ctx);
@@ -426,13 +440,18 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
       komanda: "poll-once",
       status: "izvrseno",
       ishod: rez.stanje,
+      failureCode: rez.failureCode,
       ackPoslat: rez.ackPoslat,
       // Bez ijednog podatka o dokumentu — samo zbirni brojevi.
       skeniranje: rez.skeniranje,
       slanje: rez.slanje,
     });
-    // Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne prašta.
-    return { kod: rez.stanje === "blocked" ? 1 : 0, zdravo: rez.stanje !== "blocked" };
+    /*
+     * Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne
+     * prašta. Nepotpun popis nije mrežni problem i ne traži backoff (`zdravo`
+     * ostaje), ali ga izlazni kod ne prećutkuje.
+     */
+    return { kod: izlazniKodCiklusa(rez), zdravo: rez.stanje !== "blocked" };
   } finally {
     store.otpustiZakljucavanje(vlasnik);
     store.zatvori();

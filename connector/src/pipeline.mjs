@@ -20,6 +20,57 @@ import { sledeciPokusajPosleNeuspeha } from "./schedule.mjs";
  */
 
 /**
+ * Kodovi nepotpunog popisa — stabilni, bez putanje i bez imena foldera.
+ *
+ * Idu u `failureCode` komande (portal ih čuva i beleži u audit) i u izlaz
+ * `run-once`/`dry-run`/`auto`. Novi brojač u portalu bi tražio migraciju; ovaj
+ * zadatak je ne sme uvesti, pa vidljivost nosi postojeći kanal ishoda.
+ */
+export const KOD_POPIS_PREKINUT = "scan_inventory_truncated";
+export const KOD_FOLDER_NEDOSTUPAN = "scan_folder_unreadable";
+
+/**
+ * Izlazni kod ciklusa čiji popis nije pun.
+ *
+ * Ne 0: Task Scheduler i operater moraju videti da ciklus nije potpuno
+ * uspešan. Ne 1 (blokada), 2 (nepoznata komanda) ni 3 (nepodržan runtime u
+ * `bin/connector.mjs`) — ti već znače nešto drugo.
+ */
+export const IZLAZ_NEPOTPUN_POPIS = 5;
+
+/**
+ * Izlazni kod jednog ciklusa — isti za `run-once`, `auto`, `dry-run` i
+ * `poll-once`, da ista situacija nigde ne izgleda kao uspeh.
+ */
+export function izlazniKodCiklusa({ skeniranje = {}, slanje = {} }) {
+  if (slanje.zaustavljeno) return 1;
+  return skeniranje.kodPopisa ? IZLAZ_NEPOTPUN_POPIS : 0;
+}
+
+/**
+ * Ocena popisa iz liste preskočenog.
+ *
+ * `popis_prekinut` je teži slučaj — deo arhive uopšte nije viđen, i to posle
+ * granice koja nije vezana za godinu — pa ima prednost nad nedostupnim
+ * folderom kada se dese zajedno.
+ */
+export function ocenaPopisa(preskoceno = []) {
+  const popisPrekinut = preskoceno.some((s) => s.razlog === "popis_prekinut");
+  const folderaNedostupno = preskoceno.filter((s) => s.razlog === "folder_nedostupan").length;
+  const kodPopisa = popisPrekinut
+    ? KOD_POPIS_PREKINUT
+    : folderaNedostupno > 0
+      ? KOD_FOLDER_NEDOSTUPAN
+      : null;
+  return {
+    popis: kodPopisa ? "nepotpun" : "pun",
+    kodPopisa,
+    popisPrekinut,
+    folderaNedostupno,
+  };
+}
+
+/**
  * Skenira izvorni folder i upisuje nove dokumente u red.
  *
  * Ne šalje ništa. `dry-run` koristi tačno ovo, pa je ono što operater vidi u
@@ -182,7 +233,15 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
     zbir.novo += 1;
   }
 
-  await log?.zapisi("info", "scan", { ...zbir, preskoceno: preskoceno.length });
+  /*
+   * Nepotpun popis se ne sme utopiti u zbir.
+   *
+   * Ranije je dnevnik dobijao samo `preskoceno: <broj>`, a izlazni kod i
+   * portal ništa — ciklus koji nije video celu arhivu izgledao je kao potpuno
+   * uspešan. Sada ocena ide u zbir, u dnevnik kao `warn`, i dalje u ishod.
+   */
+  Object.assign(zbir, ocenaPopisa(preskoceno));
+  await log?.zapisi(zbir.kodPopisa ? "warn" : "info", "scan", { ...zbir, preskoceno: preskoceno.length });
   return { ...zbir, preskoceno };
 }
 

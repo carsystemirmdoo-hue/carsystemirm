@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { posaljiPotpisano } from "./client.mjs";
 import { STANJA } from "./outcomes.mjs";
-import { posaljiIzReda, skenirajURed } from "./pipeline.mjs";
+import { KOD_POPIS_PREKINUT, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 
 /**
  * Ručne komande: preuzimanje, izvršenje i izveštaj napretka.
@@ -201,6 +201,10 @@ export async function posaljiNepotvrdjene(ctx) {
  * Razlika koja se lako izgubi: dokument koji je otišao na ručni pregled, ostao
  * nemapiran ili je lokalno nepodržan NIJE običan uspeh. Zato `completed` traži
  * da ničega od toga nema.
+ *
+ * Isto važi za nepotpun popis: poslato je sve što je VIĐENO, ali nije viđeno
+ * sve. Prekinut popis je `failed`; nedostupan folder je bar
+ * `completed_with_review`. Oba nose kod u `failureCode`.
  */
 export function stanjeZaIshod({ skeniranje, slanje }) {
   if (slanje.zaustavljeno) {
@@ -211,9 +215,17 @@ export function stanjeZaIshod({ skeniranje, slanje }) {
      */
     return { stanje: "blocked", failureCode: slanje.zaustavljeno };
   }
+  const kodPopisa = skeniranje.kodPopisa ?? null;
+  if (kodPopisa === KOD_POPIS_PREKINUT) {
+    return { stanje: "failed", failureCode: kodPopisa };
+  }
   if (slanje.odlozeno > 0) {
     // Ostalo je neslatih stavki — ponavljaju se sledećeg radnog dana.
-    return { stanje: "retry_pending", failureCode: null };
+    return { stanje: "retry_pending", failureCode: kodPopisa };
+  }
+  if (kodPopisa) {
+    // Ceo podfolder nije pročitan; „završeno“ bi tvrdilo da jeste.
+    return { stanje: "completed_with_review", failureCode: kodPopisa };
   }
   if (slanje.zaPregled > 0 || slanje.odbijeno > 0 || skeniranje.nepodrzano > 0) {
     /*
@@ -258,7 +270,13 @@ export async function izvrsiKomandu(ctx) {
   await posaljiDogadjaj({ ...ctx, dogadjaj: start });
 
   // 2. Isti P3 ciklus kao `run-once`.
-  const skeniranje = await skenirajURed({ store, konfiguracija, log: ctx.log });
+  const skeniranje = await skenirajURed({
+    store,
+    konfiguracija,
+    // Samo testovi prosleđuju granice; `undefined` znači podrazumevane.
+    granice: ctx.granice,
+    log: ctx.log,
+  });
   const slanje = await posaljiIzReda({
     store,
     konfiguracija,

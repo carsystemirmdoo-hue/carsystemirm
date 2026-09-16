@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { cp, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { chmod, cp, mkdir, mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -33,6 +33,7 @@ try {
     pipeline: await import(D("pipeline.mjs")),
     store: await import(D("store.mjs")),
     scanner: await import(D("scanner.mjs")),
+    commands: await import(D("commands.mjs")),
   };
 } catch {
   moduli = null;
@@ -372,6 +373,201 @@ test("poslovni datum ne zavisi od imena foldera", async (t) => {
       !JSON.stringify(telo).includes("1999") && !JSON.stringify(telo).includes("FAKTURE"),
       "ime foldera je procurilo u canonical payload",
     );
+  } finally {
+    await o.zatvori();
+  }
+});
+
+/* =========================================================================
+ * Nepotpun popis — operater mora da vidi da ciklus NIJE potpuno uspešan
+ *
+ * Runbook §21 je ovo vodio kao kapiju: `popis_prekinut` i `folder_nedostupan`
+ * završavali su u listi `preskoceno`, ali izlazni kod je bio 0, a portal je
+ * dobijao `completed`. Ovi testovi drže oba puta — zbir, stanje komande,
+ * `failureCode` koji stiže portalu i izlazni kod.
+ * ====================================================================== */
+
+const BEZ_SLANJA = { potvrdjeno: 0, zaPregled: 0, odbijeno: 0, odlozeno: 0, zaustavljeno: null };
+
+/** Lažna mreža: ništa ne stiže, pa događaji ostaju lokalno i mogu se pročitati. */
+const offline = async () => {
+  throw new Error("offline");
+};
+
+/**
+ * Izvrši jednu komandu kroz ISTI put kao `poll-once` i vrati terminalni
+ * događaj onakav kakav bi otišao portalu.
+ */
+async function komandaNad(o, granice) {
+  const { PODRZAN_TIP, izvrsiKomandu } = moduli.commands;
+  const { generateKeyPairSync } = await import("node:crypto");
+  const kljuc = generateKeyPairSync("ed25519").privateKey.export({ type: "pkcs8", format: "der" });
+  o.store.preuzmiKomandu({ id: "cmd-popis", tip: PODRZAN_TIP, verzija: 1, isticeU: null });
+  const rez = await izvrsiKomandu({
+    store: o.store,
+    konfiguracija: { ...o.konfiguracija, timeoutMs: 500 },
+    kljuc,
+    komanda: { id: "cmd-popis", tip: PODRZAN_TIP, verzija: 1 },
+    lokalniDatum: "2026-09-02",
+    granice,
+    fetchImpl: offline,
+    dozvoliHttp: true,
+  });
+  const dogadjaji = o.store.nepotvrdjeniDogadjaji();
+  return { rez, kraj: dogadjaji[dogadjaji.length - 1] };
+}
+
+test("dostignut maxPopisa daje `failed` sa kodom, ne tihi uspeh", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await stavi(o, "FAKTURE 2024", "a.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 2025", "b.pdf", "jedna-stavka.pdf");
+    await stavi(o, "FAKTURE 2026", "c.pdf", "nastavak-tabele.pdf");
+
+    // Granica ispod broja dokumenata — isti put kao 200.000 u kancelariji.
+    const granice = { ...BRZE, maxPopisa: 2 };
+    const sken = await o.ciklus(granice);
+
+    assert.equal(sken.pregledano, 2, "popis nije stao na granici");
+    assert.equal(sken.popis, "nepotpun");
+    assert.equal(sken.kodPopisa, "scan_inventory_truncated");
+    assert.equal(sken.popisPrekinut, true);
+    assert.ok(sken.preskoceno.some((x) => x.razlog === "popis_prekinut"));
+
+    const ishod = moduli.commands.stanjeZaIshod({ skeniranje: sken, slanje: BEZ_SLANJA });
+    assert.deepEqual(ishod, { stanje: "failed", failureCode: "scan_inventory_truncated" });
+
+    // Izlazni kod: nenulti, i NIJE kod blokade (1) ni nepodržanog runtime-a (3).
+    const kod = moduli.pipeline.izlazniKodCiklusa({ skeniranje: sken, slanje: BEZ_SLANJA });
+    assert.equal(kod, moduli.pipeline.IZLAZ_NEPOTPUN_POPIS);
+    assert.ok(![0, 1, 2, 3].includes(kod));
+    // Blokada i dalje ima prednost — ona zaustavlja slanje.
+    assert.equal(
+      moduli.pipeline.izlazniKodCiklusa({ skeniranje: sken, slanje: { ...BEZ_SLANJA, zaustavljeno: "revoked" } }),
+      1,
+    );
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("prekinut popis stiže portalu kao `failed` + failureCode kroz komandu", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await stavi(o, "FAKTURE 2024", "a.pdf");
+    const { rez, kraj } = await komandaNad(o, { ...BRZE, maxPopisa: 0 });
+
+    assert.equal(rez.stanje, "failed");
+    assert.equal(rez.failureCode, "scan_inventory_truncated");
+    // Ovaj zapis je tačno ono što `posaljiDogadjaj` šalje na /api/sync/commands/update.
+    assert.equal(kraj.stanje, "failed");
+    assert.equal(kraj.failure_code, "scan_inventory_truncated");
+    assert.equal(JSON.parse(kraj.brojaci).foundCount, 0);
+  } finally {
+    await o.zatvori();
+  }
+});
+
+test("nečitljiv godišnji folder: ostatak se popiše, ciklus NIJE `completed`", async (t) => {
+  if (guard(t)) return;
+  if (process.platform === "win32") {
+    t.skip("POSIX chmod ne uskraćuje čitanje na Windows-u; ACL put pokriva kancelarijska provera.");
+    return;
+  }
+  const o = await okruzenje();
+  const zatvoren = godina(o, "FAKTURE 2025");
+  try {
+    await stavi(o, "FAKTURE 2024", "otvoren.pdf", "vise-stavki.pdf");
+    await stavi(o, "FAKTURE 2025", "zatvoren.pdf", "jedna-stavka.pdf");
+    await chmod(zatvoren, 0o000);
+
+    // Root čita i folder bez prava — tada test ne bi dokazao ništa.
+    let stvarnoZatvoren = false;
+    try {
+      await readdir(zatvoren);
+    } catch {
+      stvarnoZatvoren = true;
+    }
+    if (!stvarnoZatvoren) {
+      t.skip("Proces čita folder i sa 000 (root); nedostupnost se ne može izazvati.");
+      return;
+    }
+
+    const sken = await o.ciklus(BRZE);
+    assert.equal(sken.pregledano, 1, "jedan nedostupan folder je zaustavio ceo popis");
+    assert.equal(sken.novo, 1);
+    assert.equal(sken.popis, "nepotpun");
+    assert.equal(sken.kodPopisa, "scan_folder_unreadable");
+    assert.equal(sken.folderaNedostupno, 1);
+    assert.equal(sken.popisPrekinut, false);
+
+    const ishod = moduli.commands.stanjeZaIshod({ skeniranje: sken, slanje: BEZ_SLANJA });
+    assert.equal(ishod.stanje, "completed_with_review", "nečitljiva godina je prikazana kao potpun uspeh");
+    assert.equal(ishod.failureCode, "scan_folder_unreadable");
+
+    // I kad ima neslatih stavki, kod ostaje vidljiv.
+    const saRetry = moduli.commands.stanjeZaIshod({ skeniranje: sken, slanje: { ...BEZ_SLANJA, odlozeno: 1 } });
+    assert.deepEqual(saRetry, { stanje: "retry_pending", failureCode: "scan_folder_unreadable" });
+
+    assert.equal(
+      moduli.pipeline.izlazniKodCiklusa({ skeniranje: sken, slanje: BEZ_SLANJA }),
+      moduli.pipeline.IZLAZ_NEPOTPUN_POPIS,
+    );
+
+    // Kod i zbir ne nose ime foldera ni putanju.
+    const javno = JSON.stringify({ ...sken, preskoceno: undefined, ...ishod });
+    assert.ok(!javno.includes("FAKTURE") && !javno.includes(o.baza), "putanja u javnom ishodu");
+  } finally {
+    await chmod(zatvoren, 0o700).catch(() => {});
+    await o.zatvori();
+  }
+});
+
+test("nečitljiv folder stiže portalu kroz komandu", async (t) => {
+  if (guard(t)) return;
+  if (process.platform === "win32") {
+    t.skip("POSIX chmod ne uskraćuje čitanje na Windows-u.");
+    return;
+  }
+  const o = await okruzenje();
+  const zatvoren = godina(o, "FAKTURE 2025");
+  try {
+    await mkdir(zatvoren, { recursive: true });
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(zatvoren, "z.pdf"));
+    await chmod(zatvoren, 0o000);
+    try {
+      await readdir(zatvoren);
+      t.skip("Proces čita folder i sa 000 (root).");
+      return;
+    } catch {
+      /* očekivano — folder je zaista nečitljiv */
+    }
+
+    const { rez, kraj } = await komandaNad(o, BRZE);
+    assert.equal(rez.stanje, "completed_with_review");
+    assert.equal(kraj.stanje, "completed_with_review");
+    assert.equal(kraj.failure_code, "scan_folder_unreadable");
+  } finally {
+    await chmod(zatvoren, 0o700).catch(() => {});
+    await o.zatvori();
+  }
+});
+
+test("pun popis ostaje `completed` sa izlaznim kodom 0", async (t) => {
+  if (guard(t)) return;
+  const o = await okruzenje();
+  try {
+    await stavi(o, "FAKTURE 2024", "a.pdf");
+    const sken = await o.ciklus(BRZE);
+    assert.equal(sken.popis, "pun");
+    assert.equal(sken.kodPopisa, null);
+    assert.deepEqual(
+      moduli.commands.stanjeZaIshod({ skeniranje: sken, slanje: { ...BEZ_SLANJA, potvrdjeno: 1 } }),
+      { stanje: "completed", failureCode: null },
+    );
+    assert.equal(moduli.pipeline.izlazniKodCiklusa({ skeniranje: sken, slanje: BEZ_SLANJA }), 0);
   } finally {
     await o.zatvori();
   }

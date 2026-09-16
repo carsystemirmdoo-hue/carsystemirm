@@ -407,8 +407,9 @@ zaista ono što bi se poslalo.
 Iz ispisa se čita: `pregledano` (koliko je PDF-ova uopšte popisano), `novo`,
 `poznato`, `nepodrzano`, `odlozeno` i spisak `preskoceno`.
 
-**Uslov za nastavak:** `pregledano` odgovara zbiru iz §8.3, a `preskoceno` ne
-sadrži nijedan unos koji operater ne ume da objasni.
+**Uslov za nastavak:** `pregledano` odgovara zbiru iz §8.3, `popis` je `pun`
+(izlazni kod 0 — vidi §21), a `preskoceno` ne sadrži nijedan unos koji operater
+ne ume da objasni.
 
 ### 8.5 Bez izričite potvrde nema pravog skeniranja
 
@@ -695,6 +696,7 @@ Gašenje ide obrnuto: 3 → 2 → 1.
 | `pregledano` iz dry-run-a se ne poklapa sa očekivanim zbirom | **prekid**; koren obuhvata nešto što niko nije nameravao |
 | nema izričite potvrde iz §8.5 u zapisniku | pravo skeniranje **ne počinje** |
 | `preskoceno` sadrži unos koji operater ne ume da objasni | **prekid** dok se ne objasni |
+| `kodPopisa` nije `null` ili je izlazni kod 5 (§21) | **prekid**; popis nije video celu arhivu |
 | sentinel je izmenjen, preimenovan ili obrisan | **ACL FAIL**; nijedan pravi PDF se ne dira, test se prekida |
 | mali scan `failed`/`blocked` | **nema** full scan-a |
 | odstupanje u zbiru pri pregledu dokumenata | **nema** full scan-a |
@@ -722,44 +724,51 @@ promet ostaju; prestaje samo ono što je posle njih.
 
 ---
 
-## 21. Obavezne kapije za SLEDEĆI paket 🔴
+## 21. Nepotpun popis — kako se vidi 🔴
 
-Dve operativne osobine **ne postoje** u paketu koji se danas nosi. Provereno je
-u izvoru, ne pretpostavljeno, i dok ih nema — obe se pokrivaju ljudskom
-proverom iz §8.
+Do grane `fix/windows-smoke-final-2026-09` ovo su bile otvorene kapije: prekinut
+popis i nečitljiv godišnji podfolder završavali su samo u listi `preskoceno`,
+izlazni kod je ostajao 0, a portal je dobijao `completed`. Paket napravljen sa
+te grane ih zatvara. **Koji paket držiš u rukama piše u
+`smoke/package-meta.json` (`sourceHead`)** — stariji paket i dalje ima staro
+ponašanje, i za njega važi ljudska provera iz §8.4.
 
-### 21.1 Dostignut `maxPopisa` ne završava kontrolisanim ishodom
+### 21.1 Dostignut `maxPopisa`
 
-`nadjiKandidate` pri granici od 200.000 upisuje `{razlog: "popis_prekinut"}` u
-listu `preskoceno` i staje. Ta lista se vraća i vidi se u `run-once` / `dry-run`
-JSON ispisu, ali:
+`nadjiKandidate` pri granici od 200.000 upisuje `{razlog: "popis_prekinut"}` i
+staje. Od ove grane to daje:
 
-- **izlazni kod ostaje 0** — `ciklus()` ga izvodi iz `slanje.zaustavljeno`;
-- u dnevnik ide samo `preskoceno: <broj>`, bez razloga;
-- brojači koji idu portalu (`connector/src/commands.mjs`) mapiraju se iz
-  `skeniranje.nepodrzano` i `slanje.*` — **`popis_prekinut` ne stiže ni u jedan
-  od njih**.
+| Gde | Šta se vidi |
+|---|---|
+| `dry-run` / `run-once` / `auto` ispis | `"popis": "nepotpun"`, `"kodPopisa": "scan_inventory_truncated"`, `skeniranje.popisPrekinut: true` |
+| izlazni kod | **5** (ne 0; 1 je blokada, 3 nepodržan runtime) — Task Scheduler ga prikazuje kao „Last Run Result" |
+| komanda u portalu | stanje **`failed`** („neuspeh"), `failureCode: scan_inventory_truncated` |
+| dnevnik | zapis `scan` na nivou `warn`, sa istim kodom |
 
-Posledica: ciklus koji je obradio samo prvih 200.000 dokumenata izgleda u
-portalu kao potpuno uspešan.
+Viđeni dokumenti se i dalje šalju — deduplikacija je po otisku sadržaja, pa
+ponovljen ciklus ne duplira ništa. Ali ciklus **nije** uspešan i ne sme se tako
+zapisati.
 
-**Kapija za sledeći paket:** dostignut `maxPopisa` mora dati kontrolisani
-`FAIL`/`INCOMPLETE` sa imenovanim razlogom, i mora se videti u statusu komande.
-Uz to test koji dokazuje da tih 200.000 ne prođe tiho.
+### 21.2 Nečitljiv godišnji podfolder
 
-### 21.2 Nečitljiv godišnji podfolder nije vidljiv u statusu
+Folder bez prava čitanja daje `{razlog: "folder_nedostupan"}`; ostatak arhive se
+i dalje popisuje. Od ove grane:
 
-Isto važi za `{razlog: "folder_nedostupan"}`: folder bez prava čitanja se
-preskače, ostatak arhive se uredno popiše, i ciklus se završi kao uspešan.
-Nijedan brojač ne kaže da jedna cela godina nije ni pročitana.
+| Gde | Šta se vidi |
+|---|---|
+| `dry-run` / `run-once` / `auto` ispis | `"popis": "nepotpun"`, `"kodPopisa": "scan_folder_unreadable"`, `skeniranje.folderaNedostupno: <broj>` |
+| izlazni kod | **5** |
+| komanda u portalu | najviše **`completed_with_review`** („završeno — traži pregled"), `failureCode: scan_folder_unreadable`; nikad `completed` |
 
-**Kapija za sledeći paket:** nečitljiv podfolder mora imati sopstveni brojač
-koji stiže do portala, i ciklus u kome ga ima ne sme biti prikazan kao potpuno
-uspešan. Uz to test nad stvarnim nedostupnim folderom.
+Kod ne nosi ime foldera ni putanju. Koji folder je u pitanju operater nalazi
+lokalno, poređenjem sa spiskom iz §8.3.
 
-> **Do tada:** operater posle svakog dry-run-a čita listu `preskoceno` i ne
-> nastavlja dok ne objasni svaki unos (§8.4). To je ljudska zamena za brojač
-> koji još ne postoji, i tako je i zapisana u §20C.
+Kad se desi oboje, prednost ima `scan_inventory_truncated`.
+
+> **Uslov:** ciklus sa `kodPopisa` različitim od `null` ili izlaznim kodom 5
+> **zaustavlja** dalji tok kao `failed`/`blocked` u §20C, dok se uzrok ne
+> otkloni. Portal za sada prikazuje stanje, ne sam kod; kod je u zapisu
+> komande i u auditu (`Ishod: <kod>`).
 
 ---
 

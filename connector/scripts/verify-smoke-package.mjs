@@ -156,12 +156,16 @@ korak("connector suite IZ Unicode putanje", () => {
    * verifikacija je pala nad ispravnim paketom — isti oblik greške koji je
    * `W15-win` imao sa rečenicom „9 od 10". Broj koji se menja ne sme biti
    * zapisan na dva mesta.
+   *
+   * Broji se nad ISTIM skupom fajlova koji se pokreće, ne samo nad
+   * `windows-smoke.test.mjs`: od WIN-INSTALL paketa i
+   * `windows-install-hardening.test.mjs` nosi `[WIN]` testove, pa je provera
+   * jednog fajla očekivala polovinu stvarnih skipova i odbijala ispravan paket.
    */
-  const izvorWin = readFileSync(
-    join(PAKET, "connector", "test", "windows-smoke.test.mjs"),
-    "utf8",
-  );
-  const ocekivanoWin = (izvorWin.match(/^test\("\[WIN\]/gm) ?? []).length;
+  const ocekivanoWin = readdirSync(join(PAKET, "connector", "test"))
+    .filter((f) => f.endsWith(".test.mjs"))
+    .map((f) => readFileSync(join(PAKET, "connector", "test", f), "utf8"))
+    .reduce((zbir, izvor) => zbir + (izvor.match(/^test\("\[WIN\]/gm) ?? []).length, 0);
   if (ocekivanoWin === 0) throw new Error("spakovan [WIN] skup nema nijedan test");
   if (winSkip !== ocekivanoWin) {
     throw new Error(`očekivano ${ocekivanoWin} [WIN] skipova, nađeno ${winSkip}`);

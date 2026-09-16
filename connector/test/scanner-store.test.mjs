@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { chmod, cp, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
@@ -262,7 +262,8 @@ test("skenira se koren I neposredni podfolderi — ali ne dublje i ne kroz linko
 
     const { koren } = await skener.proveriIzvor(folder);
     const { kandidati, preskoceno } = await skener.nadjiKandidate(koren);
-    const imena = kandidati.map((k) => k.putanja.split("/").pop()).sort();
+    // `basename`, ne deljenje po `/`: na Windowsu je separator `\`.
+    const imena = kandidati.map((k) => basename(k.putanja)).sort();
 
     assert.deepEqual(
       imena,
@@ -443,30 +444,30 @@ test("nestao fajl se prijavljuje, ne ruši ciklus", async () => {
 test("nestabilan fajl se ODLAŽE, ne proglašava trajno neispravnim", async () => {
   const { baza, folder } = await privremeni();
   try {
-    const p = join(folder, "raste.pdf");
-    await writeFile(p, "a");
+    const p = join(folder, "FAK raste.pdf");
+    await writeFile(p, "%PDF-1.4 a");
+    const granice = { stabilnostMs: 20, stabilnostPokusaja: 3, maxBajtova: 1024 * 1024, maxNovihPoCiklusu: 10 };
 
     /*
-     * Fajl raste između očitanja — kao dokument koji BizniSoft još upisuje.
-     * Ishod mora biti „nestabilan“ (odlaganje), ne trajna greška.
+     * Fajl RASTE između svaka dva očitanja — kao dokument koji BizniSoft još
+     * upisuje. Ranije je to radio `setInterval` od 5 ms sa nasumičnom
+     * veličinom: na Windowsu tajmer ima rezoluciju ~15,6 ms, pa je rast
+     * ponekad promašio pauzu i fajl je izgledao stabilan (kancelarijski
+     * prolaz 2 od 2 nije bio isti). Sada se fajl menja TAČNO u pauzi.
      */
-    const timer = setInterval(() => {
-      writeFile(p, "a".repeat(Math.floor(Math.random() * 1000) + 10)).catch(() => {});
-    }, 5);
-
-    const rez = await skener.procitajStabilno(p, {
-      stabilnostMs: 20,
-      stabilnostPokusaja: 3,
-      maxBajtova: 1024 * 1024,
-      maxNovihPoCiklusu: 10,
-    });
-    clearInterval(timer);
+    const pauza = async () => {
+      const { appendFile } = await import("node:fs/promises");
+      await appendFile(p, "x");
+    };
+    const rez = await skener.procitajStabilno(p, granice, { cekaj: pauza });
 
     assert.equal(rez.ok, false);
-    assert.ok(
-      ["nestabilan", "menjan_tokom_citanja"].includes(rez.razlog),
-      `neočekivan razlog: ${rez.razlog}`,
-    );
+    assert.equal(rez.razlog, "nestabilan", `neočekivan razlog: ${rez.razlog}`);
+
+    // Sledeći ciklus: upis je završen, fajl miruje — i dokument se NALAZI.
+    const posle = await skener.procitajStabilno(p, granice, { cekaj: async () => {} });
+    assert.equal(posle.ok, true, `dovršen fajl nije pročitan: ${posle.razlog}`);
+    assert.equal(posle.velicina, "%PDF-1.4 a".length + 2);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -678,6 +679,74 @@ test("obnova brave sprečava preuzimanje", async () => {
   }
 });
 
+/**
+ * Broji `DatabaseSync#close` dok traje `fn`.
+ *
+ * Na Windowsu otvorena SQLite baza ne može da se obriše; na macOS-u može, pa
+ * se curenje ručke odavde vidi samo ovako. Kancelarijski smoke 45a3460 je
+ * pao na tri testa upravo zato što neuspelo otvaranje nije zatvaralo bazu.
+ */
+async function brojZatvaranja(fn) {
+  const { DatabaseSync } = await import("node:sqlite");
+  const izvorno = DatabaseSync.prototype.close;
+  let n = 0;
+  DatabaseSync.prototype.close = function zatvori(...a) {
+    n += 1;
+    return izvorno.apply(this, a);
+  };
+  try {
+    await fn();
+  } finally {
+    DatabaseSync.prototype.close = izvorno;
+  }
+  return n;
+}
+
+test("neuspelo otvaranje reda ZATVARA bazu — noviji red, tuđi identitet, pokvaren fajl", async () => {
+  const { DatabaseSync } = await import("node:sqlite");
+  const { SEMA_VERZIJA } = await import(D("store.mjs"));
+
+  const slucajevi = {
+    schema_newer: async (putanja) => {
+      otvoriStore({ putanja, identitet: IDENTITET }).zatvori();
+      const db = new DatabaseSync(putanja);
+      db.prepare("UPDATE meta SET vrednost = ? WHERE kljuc = 'sema_verzija'").run(String(SEMA_VERZIJA + 1));
+      db.close();
+      return () => otvoriStore({ putanja, identitet: IDENTITET });
+    },
+    identity_mismatch: async (putanja) => {
+      otvoriStore({ putanja, identitet: IDENTITET }).zatvori();
+      return () => otvoriStore({ putanja, identitet: { ...IDENTITET, origin: "https://drugi.invalid" } });
+    },
+    pokvaren_fajl: async (putanja) => {
+      await mkdir(join(putanja, ".."), { recursive: true });
+      await writeFile(putanja, "ovo nije baza");
+      return () => otvoriStore({ putanja, identitet: IDENTITET });
+    },
+  };
+
+  for (const [ime, pripremi] of Object.entries(slucajevi)) {
+    const baza = await mkdtemp(join(tmpdir(), "cs-ruka-"));
+    const putanja = join(baza, "Stanje ČĆŽ", "queue.db");
+    try {
+      const otvori = await pripremi(putanja);
+      let greska = null;
+      const zatvoreno = await brojZatvaranja(async () => {
+        try {
+          otvori();
+        } catch (e) {
+          greska = e;
+        }
+      });
+      assert.ok(greska, `${ime}: otvaranje nije odbijeno`);
+      assert.equal(zatvoreno, 1, `${ime}: baza je ostala otvorena posle odbijanja`);
+    } finally {
+      // Na Windowsu ovo je pucalo sa EBUSY dok je ručka ostajala otvorena.
+      await rm(baza, { recursive: true, force: true });
+    }
+  }
+});
+
 test("nema automatskog resetovanja: pokvaren red je greška, ne nov prazan", async () => {
   const baza = await mkdtemp(join(tmpdir(), "cs-red-"));
   const putanja = join(baza, "queue.db");
@@ -786,11 +855,24 @@ test("red od 12.000 stavki ostaje ograničen po memoriji i vremenu", async () =>
 
 test("spakovan konektor ODBIJA test skladište ključa", async () => {
   const { izaberiAdapter } = await import(D("keystore/index.mjs"));
+  const trazenTest = { CS_CONNECTOR_INSECURE_KEYSTORE: "1", CS_CONNECTOR_PACKAGED: "1" };
+
+  /*
+   * Obe grane, na SVAKOJ platformi.
+   *
+   * Ranije je test pretpostavljao da DPAPI nije dostupan. Na Windowsu jeste,
+   * pa je izbor vratio DPAPI umesto greške i test je pao — iako paket nijednom
+   * nije izabrao test skladište. Dostupnost se sada zadaje izričito.
+   */
   assert.throws(
-    () => izaberiAdapter({ CS_CONNECTOR_INSECURE_KEYSTORE: "1", CS_CONNECTOR_PACKAGED: "1" }),
+    () => izaberiAdapter(trazenTest, { dpapiDostupan: false }),
     (e) => e.code === "insecure_keystore_refused",
     "paket je prihvatio nebezbedno skladište",
   );
+
+  const saDpapi = izaberiAdapter(trazenTest, { dpapiDostupan: true });
+  assert.match(saDpapi.ime, /dpapi/i, "izričita promenljiva je nadjačala DPAPI");
+  assert.doesNotMatch(saDpapi.ime, /insecure/i);
 });
 
 test("bez izričitog test režima nema plaintext fallback-a", async () => {

@@ -488,10 +488,42 @@ test("[WIN] spakovan konektor odbija test skladište ključa", async (t) => {
   /*
    * Na Windowsu je DPAPI dostupan, pa se test adapter ionako ne bira. Ovo
    * potvrđuje da ni izričita promenljiva ne menja izbor u paketu.
+   *
+   * Izolovano okruženje: ranije je `doctor` radio nad PRAVIM
+   * `%LOCALAPPDATA%\CarsystemConnector` naloga (i pravio taj folder), a bez
+   * konfiguracije izlazi sa 1 — `execFileSync` je to prijavio kao pad, iako
+   * adapter nije ni pogledan.
    */
-  const izlaz = execFileSync("cmd.exe", ["/c", cmd, "doctor"], {
-    encoding: "utf8",
-    env: { ...process.env, CS_CONNECTOR_INSECURE_KEYSTORE: "1" },
-  });
-  assert.doesNotMatch(izlaz, /test-insecure/, "paket je izabrao nebezbedno skladište");
+  const baza = await mkdtemp(join(tmpdir(), "cs-win-doctor-"));
+  try {
+    const r = spawnSync("cmd.exe", ["/c", cmd, "doctor"], {
+      encoding: "utf8",
+      timeout: 120_000,
+      env: {
+        ...process.env,
+        CS_CONNECTOR_INSECURE_KEYSTORE: "1",
+        CS_CONNECTOR_STATE_DIR: join(baza, "stanje"),
+        CS_CONNECTOR_CONFIG: join(baza, "nema-konfiguracije.json"),
+      },
+    });
+    let d = null;
+    try {
+      d = JSON.parse(r.stdout ?? "");
+    } catch {
+      /* izlaz se ne prepisuje u poruku — mogao bi da nosi putanju */
+    }
+    assert.ok(d, `doctor nije vratio JSON (izlaz ${r.status})`);
+    assert.doesNotMatch(r.stdout, /test-insecure/, "paket je izabrao nebezbedno skladište");
+
+    const skladiste = d.nalazi.find((n) => n.provera === "skladiste_kljuca");
+    assert.equal(skladiste?.status, "ok", `skladište: ${skladiste?.detalj?.kod ?? skladiste?.status}`);
+    assert.match(String(skladiste.detalj.adapter), /dpapi/i);
+
+    // Jedini očekivani problem je namerno odsutna konfiguracija.
+    const problemi = d.nalazi.filter((n) => n.status === "greska").map((n) => n.provera);
+    assert.deepEqual(problemi, ["konfiguracija"]);
+    assert.equal(r.status, 1);
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
 });

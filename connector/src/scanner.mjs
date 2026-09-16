@@ -424,8 +424,12 @@ async function procitajJednom(putanja, granice) {
  * Posle čitanja se veličina i `mtime` porede ponovo: ako se fajl menjao TOKOM
  * čitanja, bafer se odbacuje. Delimično zapisan fajl se ODLAŽE, ne proglašava
  * trajno neispravnim — sledeći ciklus ga zatiče gotovog.
+ *
+ * `cekaj` postoji samo za test: umesto da se utrkuje sa tajmerom (Windows
+ * tajmer ima rezoluciju ~15,6 ms, a metapodaci direktorijuma kasne za
+ * upisom), test u pauzi između dva očitanja DETERMINISTIČKI menja fajl.
  */
-export async function procitajStabilno(putanja, granice = PODRAZUMEVANE_GRANICE) {
+export async function procitajStabilno(putanja, granice = PODRAZUMEVANE_GRANICE, { cekaj: pauza = cekaj } = {}) {
   let prethodni = null;
 
   for (let pokusaj = 0; pokusaj < granice.stabilnostPokusaja; pokusaj += 1) {
@@ -443,7 +447,7 @@ export async function procitajStabilno(putanja, granice = PODRAZUMEVANE_GRANICE)
     }
 
     prethodni = otisakStanja;
-    if (pokusaj < granice.stabilnostPokusaja - 1) await cekaj(granice.stabilnostMs);
+    if (pokusaj < granice.stabilnostPokusaja - 1) await pauza(granice.stabilnostMs);
   }
 
   return { ok: false, razlog: "nestabilan" };

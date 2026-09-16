@@ -58,6 +58,30 @@ export class StoreError extends Error {
 export function otvoriStore(ulaz) {
   mkdirSync(dirname(ulaz.putanja), { recursive: true });
   const db = new DatabaseSync(ulaz.putanja);
+  try {
+    pripremiRed(db, ulaz);
+  } catch (greska) {
+    /*
+     * Neuspelo otvaranje ZATVARA bazu pre nego što greška ode dalje.
+     *
+     * Noviji red, tuđi identitet i fajl koji nije SQLite su namerne greške —
+     * ali bez `close()` ručka ostaje otvorena do kraja procesa. Na Windowsu
+     * otvorenu bazu niko ne može da obriše ni zameni, pa bi `watch` koji
+     * ponavlja pokušaj držao `queue.db` zaključan, a operater ne bi mogao da
+     * uradi ni kontrolisano ponovno podešavanje koje poruka traži.
+     */
+    try {
+      db.close();
+    } catch {
+      /* baza možda nije ni otvorena do kraja; greška otvaranja je merodavna */
+    }
+    throw greska;
+  }
+  return napraviApi(db, ulaz.putanja);
+}
+
+/** Pragme, šema, verzija i identitet — sve što može odbiti postojeći red. */
+function pripremiRed(db, ulaz) {
 
   /*
    * WAL + `synchronous=FULL`.
@@ -223,8 +247,6 @@ export function otvoriStore(ulaz) {
         "(nova putanja stanja), a postojeći red ostaje netaknut.",
     );
   }
-
-  return napraviApi(db, ulaz.putanja);
 }
 
 function citajMetu(db) {

@@ -347,17 +347,48 @@ Administrator uklanja sentinel. Ako je otisak sentinela promenjen, to je već
 
 ### 8.1 Koren mora biti NAMENSKI folder
 
-Izvorni koren je folder koji postoji **samo** zato da BizniSoft u njega ostavlja
-fakture. Ništa drugo u njemu nema šta da traži.
+Na kancelarijskom računaru stvarni koren je namenski folder **`Desktop\Fakture`**.
+Njegovi neposredni podfolderi su godine:
 
-Dozvoljen sadržaj korena, i ništa preko toga:
+```
+Fakture\
+  2021\  2022\  2023\  2024\  2025\  2026\
+```
 
-- PDF fakture **direktno** u korenu;
-- **godišnji podfolderi** sa fakturama (`FAKTURE 2024`, `FAKTURE 2025`, …).
+- **Buduće godine** (`2027`, `2028`, `2029`, …) se otkrivaju same, pri sledećem
+  ciklusu, bez izmene podešavanja. Ni jedna godina nije upisana u kod; ime
+  podfoldera nije poslovni podatak — godina i datum fakture dolaze isključivo
+  iz sadržaja dokumenta.
+- Obilazi se **koren i tačno jedan nivo** podfoldera. Dublji folderi, prečice,
+  junction i symlink se ne prate, i nijedna putanja ne izlazi iz korena.
+- **Početna arhiva je veća od 2 GB.** Ne šalje se odjednom — vidi §13.
+- **Apsolutna putanja se ne upisuje u kod.** Operater je upisuje u
+  `izvorniFolder` u `config.json` (`OFFICE-INSTALL.md` §3); konektor je razreši
+  i prikaže. Pošto sadrži ime Windows naloga, u zapisnik i izveštaj ide kao
+  `<Desktop>\Fakture`, ne doslovno.
 
-Ime podfoldera nije poslovni podatak i ne mora ništa da znači: konektor ga ne
-čita. Godina i datum dolaze isključivo iz sadržaja dokumenta. Zbog toga se nov
-godišnji folder nalazi sam, bez ijedne izmene podešavanja.
+#### Koji PDF je faktura — pravilo po imenu
+
+U godišnjim folderima postoje i računi, otpremnice i kompenzacije. Kandidat za
+fakturu je **samo** PDF čije ime nosi oznaku `faktura` ili `fak` (velika/mala
+slova svejedno) kao **samostalan segment**:
+
+| Prihvata se | Ne prihvata se |
+|---|---|
+| `FAKTURA 123.pdf`, `faktura-123.PDF`, `Faktura_2026_123.pdf` | `racun 123.pdf`, `otpremnica 123.pdf`, `kompenzacija.pdf` |
+| `FAK 123.pdf`, `FAK-123.pdf`, `FAK_123.pdf`, `FAK123.pdf` | `profaktura.pdf`, `nefaktura.pdf` |
+| `2026-FAK-123.pdf`, `storno faktura 123.pdf` | `faks.pdf`, `faktor.pdf`, svaki fajl koji nije PDF |
+
+Ispred oznake sme da stoji početak imena, razmak, tačka, crtica ili donja crta;
+iza nje isto to ili cifra. Posledica: `123FAK.pdf`, `faktura(1).pdf` i
+`fakture 2026.pdf` **nisu** kandidati.
+
+PDF bez oznake se **ne otvara, ne hešira, ne parsira, ne ulazi u red i ne
+šalje se** — samo se broji kao `nijeFakturaPoNazivu`. To nije greška i ne obara
+ciklus, ali broj mora biti objašnjen (§8.4).
+
+Ime je **prva** kapija, ne jedina. `FAK…pdf` koji po sadržaju nije podržana
+faktura i dalje ide u nepodržano/pregled, nikad automatski u promet.
 
 ### 8.2 Šta se NIKADA ne postavlja kao koren
 
@@ -367,49 +398,86 @@ godišnji folder nalazi sam, bez ijedne izmene podešavanja.
 | `Documents` | isto, plus lična dokumenta |
 | korisnički profil (`C:\Users\<nalog>`) | ceo profil, uključujući Downloads |
 | `C:\` ili koren bilo kog diska | popis bi krenuo kroz sistemske foldere |
-| zajednički/mrežni folder sa **mešanim** dokumentima | računi, kompenzacije, ugovori i ponude nisu fakture i nemaju šta u ledgeru |
+| zajednički/mrežni folder sa **mešanim** dokumentima | ugovori, ponude i lična dokumenta nemaju šta da traže ni pored filtera po imenu |
 
-Pravilo koje pokriva i ono što nije nabrojano: **ako u folderu ili u njegovim
-neposrednim podfolderima postoji ijedan PDF koji nije faktura — taj folder nije
-koren.**
+Pravilo koje pokriva i ono što nije nabrojano: koren je folder sa poslovnom
+arhivom faktura. Računi, otpremnice i kompenzacije koje BizniSoft ostavlja
+**u istim godišnjim folderima** su prihvatljivi, jer ih filter po imenu (§8.1)
+izostavlja i broji. Sve drugo — lični dokumenti, ugovori, ponude, preuzimanja —
+znači da folder **nije** koren, bez obzira na to kako se fajlovi zovu.
+
+`Desktop` sam nikad nije koren; `Desktop\Fakture` jeste, jer je namenski.
 
 ### 8.3 Provera PRE prvog stvarnog skeniranja
 
 Operater mora, pre ijednog pravog prolaza, da pročita i potvrdi dve stvari:
 
 1. **prikazanu apsolutnu putanju korena** — doslovno, znak po znak;
-2. **zbir pronađenih PDF-ova po podfolderu.**
+2. **zbir po godini** iz inventara (§8.4).
 
 ```
-smoke\..\connector\dist\connector.cmd doctor
+connector.cmd --config "<instalacioni folder>\config.json" doctor
 ```
 
-`doctor` ispisuje razrešenu putanju izvornog foldera. Broj dokumenata po
-folderu daje `dry-run` iz sledećeg koraka.
+`doctor` ispisuje razrešenu putanju izvornog foldera. Zbir po godini daje
+inventar iz sledećeg koraka.
 
-**Uslov za nastavak:** putanja je namenski `FAKTURE` folder, i broj po
-podfolderu odgovara onome što kancelarija očekuje za tu godinu.
+**Uslov za nastavak:** putanja je namenski `Desktop\Fakture`, i broj po godini
+odgovara onome što kancelarija očekuje.
 
 **Prekid:** putanja pokazuje bilo šta iz §8.2, ili se broj razlikuje od
-očekivanog za više nego što se može objasniti. Nepoznat višak dokumenata znači
-da koren obuhvata nešto što niko nije nameravao.
+očekivanog za više nego što se može objasniti.
 
-### 8.4 Prvi stvarni prolaz je UVEK dry-run
+**Kancelarijski fajlovi se ne menjaju, ne preimenuju, ne premeštaju i ne
+brišu** — ni da bi „ušli u pravilo" imena. PDF bez oznake koji je stvarno
+faktura prijavljuje se kao nalaz; pravilo se menja u kodu, ne u arhivi.
+
+### 8.4 Prvi korak nad stvarnom arhivom je INVENTAR (dry-run)
+
+> **`dry-run` NE šalje ništa, ali MENJA lokalni red.** Provereno u izvoru:
+> `dry-run` ide istim putem kao pravi ciklus, pa do `maxNovihPoCiklusu` (200)
+> novih dokumenata parsira i **upisuje u lokalni red** (`queue.db`) kao
+> `spremno` ili `nepodrzano`. Prvi sledeći `run-once`, zakazani termin ili
+> komanda iz portala bi ih poslali. Zato se inventar nad stvarnom arhivom radi
+> nad **zasebnim, jednokratnim folderom stanja**, ne nad produkcionim redom.
 
 ```
-connector.cmd dry-run
+set CS_CONNECTOR_STATE_DIR=%TEMP%\Carsystem Inventar
+connector.cmd --config "<instalacioni folder>\config.json" dry-run > "%TEMP%\Carsystem Inventar\inventar.json"
 ```
 
-`dry-run` ide **istim** putem skeniranja i validacije kao pravi ciklus, ali ne
-šalje nijedan bajt i ne označava ništa poslatim. Zato je ono što se u njemu vidi
-zaista ono što bi se poslalo.
+Taj folder posle potvrde zbira može da se obriše; nije deo instalacije i ne
+sadrži ništa iz kancelarijske arhive osim lokalne kopije reda.
 
-Iz ispisa se čita: `pregledano` (koliko je PDF-ova uopšte popisano), `novo`,
-`poznato`, `nepodrzano`, `odlozeno` i spisak `preskoceno`.
+Iz ispisa se čita, **ukupno i u `poFolderu` za svaku godinu**:
 
-**Uslov za nastavak:** `pregledano` odgovara zbiru iz §8.3, `popis` je `pun`
-(izlazni kod 0 — vidi §21), a `preskoceno` ne sadrži nijedan unos koji operater
-ne ume da objasni.
+| Polje | Značenje |
+|---|---|
+| `ukupnoPdf` | svi PDF-ovi u korenu i godišnjim folderima |
+| `nijeFakturaPoNazivu` | PDF-ovi bez oznake `faktura`/`fak` — nisu otvoreni |
+| `kandidata` | PDF-ovi sa oznakom fakture |
+| `preskocenoTehnicki` | kandidati odbijeni pre čitanja: prečica, prazan, prevelik, nestao |
+| `poznato` | već u redu (u jednokratnom inventaru: 0) |
+| `ponovljenSadrzaj` | ista faktura još jednom, npr. u drugoj godini — ne broji se dvaput |
+| `novo` / `nepodrzano` | obrađeno u ovoj seriji: ispravna / nepodržana faktura |
+| `odlozeno` | nestabilan ili menjan tokom čitanja; sledeći ciklus ponovo |
+| `necitljivo` | fajl se nije mogao otvoriti (zaključan ili bez prava) |
+| `preostalo` | nove fakture iznad budžeta ove serije — vidi §13 |
+| `nedostupan` (po folderu) | ceo godišnji folder se nije mogao pročitati |
+
+Uz to `popis` (`pun`/`nepotpun`, §21), `preostaloSerija` i spisak `preskoceno`.
+
+**Uslov za nastavak:**
+
+- `popis` je `pun`, izlazni kod 0;
+- zbir **po svakoj godini** (`kandidata`, `nijeFakturaPoNazivu`) je pročitan i
+  odgovara očekivanom;
+- broj `nijeFakturaPoNazivu` je objašnjen — računi, otpremnice, kompenzacije;
+- `necitljivo`, `preskocenoTehnicki` i svaki unos u `preskoceno` su objašnjeni.
+
+**Nijedan pravi upload ne počinje dok zbir nije objašnjen.** Nepoznat višak ili
+manjak po godini znači da koren ili pravilo imena obuhvata nešto što niko nije
+nameravao.
 
 ### 8.5 Bez izričite potvrde nema pravog skeniranja
 
@@ -417,8 +485,8 @@ Nijedno pravo skeniranje — ni `run-once`, ni komanda „Skeniraj i sinhronizuj
 ni zakazani termin — **ne počinje** dok operater izričito ne potvrdi, naglas i u
 zapisniku dana:
 
-> „Koren je `<apsolutna putanja>`. Obuhvaćeni su isključivo folderi sa
-> fakturama. Broj dokumenata po folderu je proveren."
+> „Koren je `<Desktop>\Fakture`. Obuhvaćeni su isključivo godišnji folderi sa
+> fakturama. Zbir po godini i broj preskočenih naziva su provereni i objašnjeni."
 
 Bez te rečenice u zapisniku, dan staje na dry-run-u. Potvrda nije formalnost:
 ona je jedino mesto na kome čovek tvrdi da je pogledao šta će biti pročitano.
@@ -428,7 +496,9 @@ ona je jedino mesto na kome čovek tvrdi da je pogledao šta će biti pročitano
 ## 9. Mali probni folder ili kontrolisani mali scan
 
 Napraviti **poseban** folder sa **najviše 5** PDF-ova prekopiranih iz stvarnog
-izlaza, i konektor usmeriti na njega. Original folder se ne dira.
+izlaza, i konektor usmeriti na njega. Original folder se ne dira. Kopije
+zadržavaju originalno ime; fajl bez oznake `faktura`/`fak` (§8.1) se ne bira,
+jer bi ostao izostavljen i probni scan ne bi ništa dokazao.
 
 Pokrenuti jedan ciklus. Kroz portal (`Sistem → Sinhronizacija`) to je dugme
 **„Skeniraj i sinhronizuj"**, koje zaobilazi samo čekanje do 09:00 — ne zaobilazi
@@ -469,7 +539,7 @@ Na istom ekranu, uz poslednju komandu:
 | `duplicate` | isti otisak fajla, već uvezen | očekivano pri ponovljenom scan-u |
 | `review` | ide na ručni pregled | pregledati u koraku 14 |
 | `unsupported` | oblik bez stvarnog uzorka | očekivano; nije greška |
-| `pending` | čeka mapiranje šifre partnera | razrešiti pre recompute-a |
+| `pending` | čeka sledeći ciklus: stavke u redu posle serije slanja + nove fakture iznad budžeta (`preostalo`) | tokom backfill-a očekivano; pre recompute-a mora biti 0 |
 | `blocked` | odbijeno kontrolisano | pročitati razlog |
 
 **Uslov za nastavak (mali scan):** `posted > 0`, `blocked = 0`.
@@ -492,23 +562,64 @@ se pre full scan-a.
 
 ---
 
-## 13. Tek sada — full scan istorije
+## 13. Tek sada — istorijski backfill, u serijama
 
-Konektor se vraća na stvarni folder (i dalje read-only) i pokreće se pun ciklus.
+Konektor se vraća na stvarni `Desktop\Fakture` (i dalje read-only) sa
+**produkcionim** folderom stanja — ne onim iz inventara.
 
 Pre pokretanja potvrditi da su koraci 3, 8, 10 i 11 svi prošli. Redosled nije
-formalnost: full scan nad hiljadama dokumenata sa greškom u parseru pravi
+formalnost: backfill nad hiljadama dokumenata sa greškom u parseru pravi
 hiljade karantiniranih redova koje neko mora ručno da pregleda.
+
+### Kako backfill radi — provereno u izvoru
+
+- **Svaki ciklus popisuje CEO koren** i hešira svaku fakturu po imenu. Poznati
+  dokumenti ne troše budžet.
+- U obradu (stabilnost, parser, upis u red) ulazi **najviše
+  `maxNovihPoCiklusu` = 200** novih ili promenjenih. Limit se **ne povećava**
+  da bi istorija prošla brže, i ne pokušava se sve u jednom ciklusu.
+- Obrađeni dokument postaje poznat (u redu kao `spremno` ili `nepodrzano`), pa
+  sledeći ciklus uzima **sledećih 200** po istom redosledu: koren, pa godine po
+  imenu, pa fajlovi po imenu.
+- Slanje ide odvojeno, u serijama od `maxPoCiklusu` (podrazumevano 50) iz reda;
+  ostatak reda se vidi kao `ostaloURedu`.
+
+**`preostalo`** je tačan broj **različitih** novih ili promenjenih faktura koje
+je ciklus pročitao i heširao, a ostavio za sledeći zbog budžeta. Kopija iste
+fakture u drugoj godini se broji jednom (`ponovljenSadrzaj`). **`preostaloSerija`
+= ⌈`preostalo` / 200⌉** — koliko još ciklusa treba ako se u međuvremenu ne pojave
+nove fakture i nijedna se ne odloži. Nije procena brzine ni vremena.
+
+### Ništa ne blokira istoriju
+
+- Pokvaren ili nepodržan PDF se upisuje kao `nepodrzano` i više ne zauzima mesto.
+- Nestabilan ili zaključan fajl se odlaže **bez trošenja** budžeta serije;
+  dokumenti iza njega dolaze na red istog ciklusa.
+- Stavka čije slanje nije uspelo dobija sledeći radni dan; stavke iza nje se
+  šalju.
+
+### Tok
+
+Ponavljati ručni ciklus (portal: „Skeniraj i sinhronizuj", ili `run-once`) i
+posle svakog zapisati `preostalo`, `preostaloSerija`, `ostaloURedu` i
+`nepodrzano`. `preostalo` mora opadati iz ciklusa u ciklus; ako ne opada,
+**stati** i proveriti `odlozeno`/`necitljivo`.
+
+Posle završenog backfill-a svakodnevni ciklus obrađuje samo nove ili promenjene
+dokumente; sve ostalo je `poznato`.
 
 ---
 
-## 14. Čekanje da se uvoz završi
+## 14. Čekanje da se backfill završi
 
-Full scan se **ne prekida** i ne pokreće se drugi put dok prvi traje. Portal
-prikazuje stanje komande; komanda je završena kada je u `completed` ili
-`completed_with_review`.
+Portal prikazuje stanje komande. Dok ima posla za sledeći ciklus — `preostalo`
+ili `ostaloURedu` veći od nule — komanda je **`retry_pending`** („čeka retry"),
+ne `completed`. Backfill je završen tek kada je ciklus `completed` ili
+`completed_with_review` **i** `preostalo = 0` **i** `ostaloURedu = 0`.
 
-Za vreme čekanja se **ne pokreće recompute preporuka**. Preporuke nad
+Ciklus se ne pokreće drugi put dok prethodni traje.
+
+Za vreme backfill-a se **ne pokreće recompute preporuka**. Preporuke nad
 polovičnim uvozom su tačan obračun nad netačnim ulazom, i izgledaju isto kao
 ispravan rezultat.
 
@@ -697,6 +808,8 @@ Gašenje ide obrnuto: 3 → 2 → 1.
 | nema izričite potvrde iz §8.5 u zapisniku | pravo skeniranje **ne počinje** |
 | `preskoceno` sadrži unos koji operater ne ume da objasni | **prekid** dok se ne objasni |
 | `kodPopisa` nije `null` ili je izlazni kod 5 (§21) | **prekid**; popis nije video celu arhivu |
+| `preostalo` ne opada između dva backfill ciklusa (§13) | **prekid**; proveriti `odlozeno`/`necitljivo` pre sledećeg ciklusa |
+| zbir po godini ili `nijeFakturaPoNazivu` nije objašnjen (§8.4) | **nema** pravog upload-a |
 | sentinel je izmenjen, preimenovan ili obrisan | **ACL FAIL**; nijedan pravi PDF se ne dira, test se prekida |
 | mali scan `failed`/`blocked` | **nema** full scan-a |
 | odstupanje u zbiru pri pregledu dokumenata | **nema** full scan-a |
@@ -802,10 +915,12 @@ Ovo se ne rešava sutra i ne treba pokušavati:
 
 --- MALI E2E (samo ako sve kapije iz §20B stoje) ---
 [ ]  7. aktivna ACL provera SAMO nad sentinelom — ili preskočena, po dogovoru
-[ ]  7a. koren je NAMENSKI folder FAKTURE; nije Desktop/Documents/profil/C:\/mešani
+[ ]  7a. koren je NAMENSKI Desktop\Fakture (godine 2021–2026+); nije Desktop/Documents/profil/C:\
 [ ]  7b. apsolutna putanja korena pročitana i potvrđena znak po znak
-[ ]  7c. dry-run izvršen; `pregledano` po folderu odgovara očekivanom
-[ ]  7d. svaki unos u `preskoceno` objašnjen
+[ ]  7c. inventar (dry-run) nad JEDNOKRATNIM folderom stanja; popis = pun
+[ ]  7d. zbir po godini potvrđen: kandidata, nijeFakturaPoNazivu, necitljivo
+[ ]  7d'. broj preskočenih naziva i svaki unos u `preskoceno` objašnjen
+[ ]  7d''. nijedan kancelarijski fajl nije menjan, preimenovan ni brisan
 [ ]  7e. izričita potvrda iz §8.5 upisana u zapisnik
 [ ]  8. mali scan (≤5 PDF-ova) završen: completed / completed_with_review
 [ ]  9. heartbeat: uređaj active, javljanje od danas
@@ -813,8 +928,8 @@ Ovo se ne rešava sutra i ne treba pokušavati:
 [ ] 11. 3–5 dokumenata pregledano, bez odstupanja, bez PII u zapisu
 
 --- FULL SCAN (samo posle uspešnog malog scan-a) ---
-[ ] 12. full scan pokrenut
-[ ] 13. full scan završen; recompute NIJE pokretan u međuvremenu
+[ ] 12. backfill u serijama od 200; posle svakog ciklusa zapisano preostalo / serija / ostaloURedu
+[ ] 13. backfill završen (preostalo = 0, ostaloURedu = 0); recompute NIJE pokretan u međuvremenu
 [ ] 14. conflict / pending_review / unsupported / nemapirane šifre zapisani
 [ ] 15. tri broja parova zapisana (ukupno / ≥2 fakture / ≥2 datuma)
 [ ] 16. FEATURE_RECOMMENDATIONS=1, ručni recompute cadence_v1 uspeo

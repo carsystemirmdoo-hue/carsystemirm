@@ -105,7 +105,9 @@ putanje, ključeve, potpise, PIB, nazive kupaca ni stack trace.
 ## 6. Šta smoke NE menja i NE radi
 
 - **Ne čita** BizniSoft izlaz, Downloads, Documents ni bilo koji tvoj folder.
-  Jedini ulaz su dva sintetička PDF-a iz ovog paketa.
+  Jedini ulaz su tri sintetička PDF-a napravljena iz dva fixture-a ovog
+  paketa: dva nose oznaku fakture u imenu, treći namerno ne — `W09` proverava
+  da se on ne otvara i ne ulazi u red.
 - **Ne dodiruje nijednu pravu fakturu**, ni čitanjem ni pisanjem.
 - **Ne šalje ništa na mrežu.** Konfiguracija pokazuje na `https://smoke.invalid`,
   host koji ne postoji, i nijedna provera ne poziva server.

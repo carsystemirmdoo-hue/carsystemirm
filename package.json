@@ -177,7 +177,7 @@
     "test:smoke-docs": "node --test connector/test/smoke-docs.test.mjs",
     "test:smoke-runtime": "node --test connector/test/runtime-contract.test.mjs",
     "test:connector-launcher": "npm run connector:build && node --test connector/test/launcher.test.mjs",
-    "test:diagnose": "node --test connector/test/diagnose.test.mjs",
+    "test:diagnose": "node --test connector/test/dpapi-channel.test.mjs connector/test/diagnose.test.mjs",
     "test:daily-scan": "npm run connector:build && node --test connector/test/daily-scan.test.mjs connector/test/scanner-store.test.mjs",
     "test:windows-install-hardening": "npm run connector:build && node --test connector/test/windows-install-hardening.test.mjs",
     "test:package-smoke": "npm run connector:build && node --test connector/test/package-smoke.test.mjs",

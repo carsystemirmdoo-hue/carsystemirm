@@ -7,11 +7,13 @@ import {
   bezbedanKod,
   izmeri,
   KODOVI,
+  oceniLockdown,
   PROBA_OCEKIVANO,
   PROBA_SKRIPTA,
   redigovan,
   sastaviIzvestaj,
   STDIN_PROBA,
+  STDIN_PROGRAM,
 } from "../smoke/diagnose-core.mjs";
 
 /**
@@ -177,29 +179,109 @@ test("prvi ISPRAVAN mehanizam se koristi, pali ostaju zapisani", async () => {
   }
 });
 
-test("stdin kanal se meri odvojeno od pokretanja", async () => {
+/** Mehanizam koji uvek pokreće PowerShell, ali NEMA stdin kanal. */
+const bezStdina = {
+  id: "bez-stdina",
+  opis: "bez stdin kanala",
+  pokreni: async (skripta, ulaz) => {
+    if (ulaz !== undefined) throw Object.assign(new Error("x"), { code: "ENOTSUP" });
+    return { kod: 0, stdout: skripta === PROBA_SKRIPTA ? PROBA_OCEKIVANO : "FullLanguage", stderr: "" };
+  },
+};
+
+test("D06 meri PRODUKCIJSKI kanal adaptera, ne mehanizme dijagnostike", async () => {
   /*
-   * Mehanizam koji se pokreće ali nema stdin: `D06` mora pasti, a `D01` proći.
-   * Bez tog razdvajanja bi „PowerShell ne radi" i „stdin ne radi" izgledali isto,
-   * a adapter zavisi baš od stdin-a.
+   * Mehanizmi dijagnostike ovde nemaju stdin. Da D06 i dalje ide kroz njih,
+   * pao bi sa ENOTSUP. Prolazi zato što ide kroz `kanalAdaptera` — isti
+   * `pokreniPowerShell` koji konektor koristi.
    */
+  const pozivi = [];
   const rezultat = await izmeri({
-    mehanizmi: [
-      {
-        id: "bez-stdina",
-        opis: "bez stdin kanala",
-        pokreni: async (skripta, ulaz) => {
-          if (ulaz !== undefined) throw Object.assign(new Error("x"), { code: "ENOTSUP" });
-          return { kod: 0, stdout: skripta === PROBA_SKRIPTA ? PROBA_OCEKIVANO : "x", stderr: "" };
-        },
+    mehanizmi: [bezStdina],
+    kanalAdaptera: {
+      pokreni: async (program, ulaz) => {
+        pozivi.push({ program, ulaz });
+        return ulaz;
       },
-    ],
+      proveri: async () => {},
+    },
   });
 
-  assert.equal(rezultat.nalazi.find((n) => n.id === "D01").ishod, "OK");
+  const d06 = rezultat.nalazi.find((n) => n.id === "D06");
+  assert.equal(d06.ishod, "OK", d06.detalj);
+  assert.equal(pozivi.length, 1, "D06 nije pozvao kanal adaptera tačno jednom");
+  assert.equal(pozivi[0].program, STDIN_PROGRAM);
+  assert.equal(pozivi[0].ulaz, STDIN_PROBA);
+  assert.match(STDIN_PROBA, /^[A-Za-z0-9+/]+={0,2}$/, "proba nije oblika koji adapter prima");
+});
+
+test("D06 pada sa kodom kanala, bez poruke i putanje", async () => {
+  const rezultat = await izmeri({
+    mehanizmi: [bezStdina],
+    kanalAdaptera: {
+      pokreni: async () => {
+        throw Object.assign(new Error("C:\\Users\\Vlasnik\\x.mjs"), { code: "dpapi_process_failed" });
+      },
+      proveri: async () => {},
+    },
+  });
   const d06 = rezultat.nalazi.find((n) => n.id === "D06");
   assert.equal(d06.ishod, "PAD");
-  assert.match(d06.detalj, /ENOTSUP/);
+  assert.match(d06.detalj, /dpapi_process_failed/);
+  proveriRedakciju(d06.detalj, "D06 detalj");
+});
+
+test("bez učitanog kanala adaptera D06 i D08 kažu to izričito", async () => {
+  const rezultat = await izmeri({ mehanizmi: [bezStdina] });
+  for (const id of ["D06", "D08"]) {
+    const n = rezultat.nalazi.find((x) => x.id === id);
+    assert.equal(n.ishod, "PAD");
+    assert.match(n.detalj, /nije učitan/);
+  }
+});
+
+test("D08 izvršava proveri() adaptera i prijavljuje samo kod", async () => {
+  const rezultat = await izmeri({
+    mehanizmi: [bezStdina],
+    kanalAdaptera: {
+      pokreni: async (_p, ulaz) => ulaz,
+      proveri: async () => {
+        throw Object.assign(new Error("tajna AAAA"), { code: "dpapi_timeout" });
+      },
+    },
+  });
+  const d08 = rezultat.nalazi.find((n) => n.id === "D08");
+  assert.equal(d08.ishod, "PAD");
+  assert.match(d08.detalj, /dpapi_timeout/);
+  assert.doesNotMatch(d08.detalj, /tajna/);
+});
+
+/* =========================================================================
+ * D07 — lockdown
+ * ====================================================================== */
+
+test("D07: __PSLockdownPolicy = 0 NIJE aktivan AppLocker/WDAC", () => {
+  // Tačno stanje sa kancelarijskog računara: FullLanguage, promenljiva = 0.
+  const r = oceniLockdown({ rezim: "None", vrednost: "0" });
+  assert.equal(r.ishod, "OK");
+  assert.match(r.detalj, /__PSLockdownPolicy = 0/, "ime promenljive mora ostati čitljivo");
+
+  // I kada se režim ne može očitati, 0 ne sme postati „aktivno".
+  assert.equal(oceniLockdown({ rezim: "nepoznato", vrednost: "0" }).ishod, "OK");
+});
+
+test("D07: presuđuje stvarni režim sprovođenja, ne postojanje promenljive", () => {
+  assert.equal(oceniLockdown({ rezim: "None", vrednost: "nije_postavljeno" }).ishod, "OK");
+  assert.equal(oceniLockdown({ rezim: "None", vrednost: "4" }).ishod, "OK");
+  assert.equal(oceniLockdown({ rezim: "Enforce", vrednost: "nije_postavljeno" }).ishod, "PAŽNJA");
+  assert.equal(oceniLockdown({ rezim: "Audit", vrednost: "0" }).ishod, "PAŽNJA");
+  assert.equal(oceniLockdown({ rezim: "nepoznato", vrednost: "4" }).ishod, "PAŽNJA");
+});
+
+test("redakcija NE briše ime dijagnostičke promenljive", () => {
+  const r = redigovan("sprovođenje: None; __PSLockdownPolicy = 0");
+  assert.match(r, /__PSLockdownPolicy = 0/);
+  assert.doesNotMatch(r, /\[skripta\]/);
 });
 
 test("neuspeh jednog merenja ne prekida ostala", async () => {
@@ -219,7 +301,7 @@ test("neuspeh jednog merenja ne prekida ostala", async () => {
     ],
   });
 
-  assert.equal(rezultat.nalazi.filter((n) => n.id.startsWith("D")).length, 7);
+  assert.equal(rezultat.nalazi.filter((n) => n.id.startsWith("D")).length, 8);
   assert.ok(rezultat.nalazi.some((n) => n.detalj.includes("EACCES")));
 });
 
@@ -252,9 +334,16 @@ test("[WIN] trivijalan PowerShell poziv i stdin kanal", async (t) => {
     `nijedan mehanizam nije pokrenuo PowerShell: ${JSON.stringify(nalazi)}`,
   );
 
-  const preko = MEHANIZMI.find((m) => m.id === "spawn-stdin");
-  const r = await preko.pokreni("[Console]::In.ReadLine()", STDIN_PROBA);
-  assert.equal(String(r.stdout ?? "").trim(), STDIN_PROBA, "stdin kanal ne radi");
+  /*
+   * stdin se meri kroz PRODUKCIJSKI kanal adaptera, ne kroz `-Command -`
+   * mehanizam — taj je na kancelarijskom računaru pao baš zato što program i
+   * podatak dele stdin.
+   */
+  const { ucitajKanalAdaptera } = await import("../smoke/diagnose.mjs");
+  const kanal = await ucitajKanalAdaptera();
+  assert.ok(kanal, "produkcijski kanal adaptera nije nađen");
+  const izlaz = await kanal.pokreni(STDIN_PROGRAM, STDIN_PROBA);
+  assert.equal(String(izlaz).trim(), STDIN_PROBA, "produkcijski stdin kanal ne vraća podatak");
 });
 
 test("[WIN] pokretač dijagnostike ne ispisuje putanju ni stack trace", async (t) => {

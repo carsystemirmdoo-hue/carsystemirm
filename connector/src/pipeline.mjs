@@ -412,12 +412,18 @@ export async function posaljiIzReda(ulaz) {
       else if (odluka.stanje === STANJA.ZA_PREGLED) zbir.zaPregled += 1;
       else zbir.odbijeno += 1;
     } else if (odluka.stanje === STANJA.BLOKIRANO) {
-      store.zavrsi({
-        id: stavka.id,
-        stanje: STANJA.BLOKIRANO,
-        serverKod: odgovor.code,
-        razlog: odluka.razlog,
-      });
+      /*
+       * Blokada je stanje PODEŠAVANJA, ne dokumenta — stavka ostaje u redu.
+       *
+       * Isključen gate (`not_found`), opozvan ili neaktivan uređaj, pomeren sat
+       * i sl. zaustavljaju ciklus, ali dokument nije kriv. Ranije je stavka
+       * trajno prelazila u `blokirano`: ništa je nije vraćalo u `spremno`, a
+       * ponovni popis ju je video kao poznatu. Faktura poslata baš u trenutku
+       * gašenja gate-a ili sa pomerenim satom tako nikad ne bi stigla, bez
+       * ijednog traga u zbiru. Sada se sledeći ciklus, posle ispravke, vraća
+       * na nju; ciklus i dalje staje (`zaustavljeno`), pa nema petlje.
+       */
+      store.vratiUSpremno({ id: stavka.id, razlog: odluka.razlog });
     } else if (odluka.stanje === STANJA.SPREMNO) {
       // `nonce_replayed`: ponovo, ali sa novim nonce-om — bez odlaganja.
       store.vratiUSpremno({ id: stavka.id, razlog: odluka.razlog });

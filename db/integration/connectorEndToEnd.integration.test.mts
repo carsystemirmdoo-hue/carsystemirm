@@ -639,7 +639,9 @@ test("opozvan uređaj: ciklus staje, ništa se ne knjiži", async (t) => {
     assert.equal(rez.zaustavljeno, "device_not_active", "ciklus nije zaustavljen");
     assert.equal(rez.potvrdjeno, 0);
     assert.equal(await brojFaktura(), 0);
-    assert.equal(store.zbir().blokirano, 1);
+    // Dokument nije kriv za opoziv: ostaje u redu, ne u trajnom `blokirano`.
+    assert.equal(store.zbir().blokirano, undefined);
+    assert.equal(store.zbir().spremno, 1);
   } finally {
     store.zatvori();
     await rm(okr.baza, { recursive: true, force: true });
@@ -673,6 +675,24 @@ test("isključen feature gate: endpoint nije operativan, red ostaje", async (t) 
     // 404 `not_found` → blokada, bez menjanja serverske konfiguracije.
     assert.equal(rez.zaustavljeno, "not_found");
     assert.equal(await brojFaktura(), 0);
+    assert.equal(store.zbir().spremno, 1, "stavka je izašla iz reda zbog gašenja gate-a");
+
+    /*
+     * Gate se ponovo uključi — ISTI red, bez novog popisa. Dokument koji je
+     * naišao na isključen gate mora sada da stigne; ranije je ostajao trajno
+     * `blokirano` i nijedan ciklus ga više nije slao.
+     */
+    process.env.FEATURE_SYNC_DEVICE_INGEST = "1";
+    const posle = await posaljiIzReda({
+      store,
+      konfiguracija: k,
+      kljuc: uredjaj.privateKeyPkcs8Der,
+      lokalniDatum: "2026-03-10",
+      dozvoliHttp: true,
+    });
+    assert.equal(posle.zaustavljeno, null);
+    assert.equal(posle.potvrdjeno, 1, `dokument nije poslat posle ponovnog uključenja: ${JSON.stringify(posle)}`);
+    assert.equal(await brojFaktura(), 1);
   } finally {
     process.env.FEATURE_SYNC_DEVICE_INGEST = prethodno;
     store.zatvori();

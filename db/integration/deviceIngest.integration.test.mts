@@ -823,6 +823,51 @@ test("rate limit za nepoznatog pozivaoca zaustavlja poplavu", async (t) => {
   assert.equal(await brojFaktura(), 0);
 });
 
+test("ispravan uređaj NE troši limit nepoznatih pozivalaca — backfill nije ograničen na 20 zahteva", async (t) => {
+  if (guard(t)) return;
+  /*
+   * Ranije je svaki zahtev, pa i uspešno potpisan, trošio `sync_unknown`
+   * (20 u 5 minuta po oznaci uređaja). Konektor na 429 odlaže stavku do
+   * sledećeg radnog dana, pa bi istorijski unos napredovao ~20 dokumenata
+   * dnevno. `sync_device` (600 / 5 min) ostaje merodavan za poznat uređaj.
+   */
+  const uredjaj = await aktivanUredjaj();
+  const post = await heartbeat();
+  for (let i = 0; i < 30; i += 1) {
+    const { request } = await potpisanZahtev(uredjaj, { path: "/api/sync/heartbeat", body: {} });
+    const res = await post(request);
+    assert.equal(res.status, 200, `zahtev ${i + 1} odbijen: ${(await telo(res)).code}`);
+  }
+
+  // Nijedan uspešan zahtev nije ostavio trag u brojaču nepoznatih pozivalaca.
+  const [{ n }] = await db.sql<{ n: number }[]>`
+    SELECT count(*)::int AS n FROM auth_rate_limits WHERE scope = 'sync_unknown'`;
+  assert.equal(n, 0, "uspešni zahtevi su upisani u brojač nepoznatih pozivalaca");
+});
+
+test("neuspeli potpisi i dalje troše limit, pa i uz ispravnu oznaku uređaja", async (t) => {
+  if (guard(t)) return;
+  /*
+   * Kontrola popravke iznad: napadač koji zna oznaku uređaja, ali nema ključ,
+   * mora i dalje da bude zaustavljen posle istog broja neuspeha.
+   */
+  const uredjaj = await aktivanUredjaj();
+  const post = await heartbeat();
+  const tudj = { ...uredjaj, ...noviPar() };
+
+  let ograniceno = false;
+  for (let i = 0; i < 40; i += 1) {
+    const { request } = await potpisanZahtev(tudj as Uredjaj, { path: "/api/sync/heartbeat", body: {} });
+    const res = await post(request);
+    if (res.status === 429) {
+      ograniceno = true;
+      break;
+    }
+    assert.equal(res.status, 401);
+  }
+  assert.ok(ograniceno, "pogrešni potpisi nad pravom oznakom uređaja nisu ograničeni");
+});
+
 /* =========================================================================
  * Heartbeat
  * ====================================================================== */

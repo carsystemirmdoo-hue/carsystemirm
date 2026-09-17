@@ -1,6 +1,6 @@
 import "server-only";
 import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
-import { registerAttempt } from "@/lib/auth/rate-limit-service";
+import { isBucketBlocked, registerAttempt } from "@/lib/auth/rate-limit-service";
 import {
   authenticateDeviceRequest,
   DeviceAuthError,
@@ -118,19 +118,35 @@ export async function withAuthenticatedDevice(
    */
   const tvrdjenaOznaka = (request.headers.get(HEADERS.device) ?? "").slice(0, 64) || null;
 
-  const nepoznat = await registerAttempt({
-    scope: "sync_unknown",
+  /*
+   * Brojač nepoznatih pozivalaca broji NEUSPEHE, ne sve zahteve.
+   *
+   * Ranije se `registerAttempt` zvao za SVAKI zahtev pre autentifikacije, pa je
+   * i ispravno potpisan, aktivan uređaj trošio limit od 20 zahteva u 5 minuta po
+   * oznaci. Konektor na 429 odlaže stavku do sledećeg radnog dana — istorijski
+   * unos od ~12.000 dokumenata bi tako napredovao dvadesetak dokumenata dnevno.
+   *
+   * Isti obrazac kao prijava lozinkom: pre skupog posla samo se PROVERI da li je
+   * blokada već pala (bez uvećavanja), a pokušaj se broji tek kada odbijanje
+   * stvarno nastane. Poplava lažnih zahteva i dalje biva zaustavljena posle
+   * istog broja neuspeha, a uspešan uređaj taj brojač ne dira.
+   */
+  const brojacNepoznatih = {
+    scope: "sync_unknown" as const,
     accountIdentifier: tvrdjenaOznaka,
     clientIp,
-  });
-  if (!nepoznat.allowed) {
-    return syncJson(429, {
-      ok: false,
-      code: "rate_limited",
-      requestId,
-      retryAfterSeconds: nepoznat.retryAfterSeconds,
-    });
-  }
+  };
+  const ogranicenje429 = (retryAfterSeconds?: number) =>
+    syncJson(429, { ok: false, code: "rate_limited", requestId, retryAfterSeconds });
+
+  if (await isBucketBlocked(brojacNepoznatih)) return ogranicenje429();
+
+  /** Odbijanje pre identiteta se broji; posle praga prelazi u 429. */
+  const odbijNepoznatog = async (status: number, code: string) => {
+    const odluka = await registerAttempt(brojacNepoznatih);
+    if (!odluka.allowed) return ogranicenje429(odluka.retryAfterSeconds);
+    return syncJson(status, { ok: false, code, requestId });
+  };
 
   /* --- 3. Telo, uz tvrdu granicu. -------------------------------------- */
   let bodyBytes: Uint8Array;
@@ -139,9 +155,9 @@ export async function withAuthenticatedDevice(
     bodyBytes = await readBoundedBody(request);
   } catch (error) {
     if (error instanceof BodyError) {
-      return syncJson(error.status, { ok: false, code: error.code, requestId });
+      return odbijNepoznatog(error.status, error.code);
     }
-    return syncJson(400, { ok: false, code: "body_unreadable", requestId });
+    return odbijNepoznatog(400, "body_unreadable");
   }
 
   /* --- 4. Autentifikacija. --------------------------------------------- */
@@ -155,7 +171,7 @@ export async function withAuthenticatedDevice(
     });
   } catch (error) {
     if (error instanceof DeviceAuthError) {
-      return syncJson(error.status, { ok: false, code: error.code, requestId });
+      return odbijNepoznatog(error.status, error.code);
     }
     /*
      * Greška baze pri autentifikaciji NE propušta zahtev.

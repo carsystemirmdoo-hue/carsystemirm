@@ -829,13 +829,20 @@ Redosled je namerno ovakav — prvo se gasi ono što ima spoljni efekat:
    sinhronizuj" prestaje da zakazuje posao.
 3. **Prijem sa uređaja:** `FEATURE_SYNC_DEVICE_INGEST=0`. Uređaj koji se javi
    biva odbijen; nijedan nov dokument ne ulazi.
-4. **Zadatak:** `schtasks /Change /TN "Carsystem Sync" /DISABLE`.
+4. **Zadatak:** `schtasks /Change /TN "\Carsystem\CarsystemConnector" /DISABLE`
+   (za smoke zadatak `\Carsystem\CarsystemConnectorSMOKE`). Zadatak sa imenom
+   „Carsystem Sync" ne postoji; ranija verzija ovog koraka ga je pogrešno navodila.
 5. Ako je uređaj kompromitovan — **opoziv uređaja** u portalu
    (`devices:manage`). Istorija ostaje; opozvan uređaj se ne aktivira ponovo,
    nego se registruje nov.
 
 Gašenje gate-a **ne briše** ništa i ne poništava uvoz. Uvezeni dokumenti i
-promet ostaju; prestaje samo ono što je posle njih.
+promet ostaju; prestaje samo ono što je posle njih. Od grane
+`fix/windows-smoke-office-findings` dokument koji konektor pošalje baš dok je
+gate isključen ostaje u lokalnom redu i šalje se posle ponovnog uključenja.
+
+Staging i kontrolisano puštanje jednog kancelarijskog uređaja, faze A–G:
+[`23-staging-jedan-kancelarijski-uredjaj.md`](23-staging-jedan-kancelarijski-uredjaj.md).
 
 ---
 

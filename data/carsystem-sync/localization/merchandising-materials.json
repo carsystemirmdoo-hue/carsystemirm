@@ -1,0 +1,696 @@
+{
+  "merchandising-materials/carsystem-cap-black-onesize": {
+    "sourceHash": "4caa9b77bd7042a6",
+    "productType": "Kačket",
+    "subtype": "Univerzalna veličina",
+    "shortDescription": "Crni Carsystem kačket sa 3D štampom, sendvič obodom i podesivom metalnom kopčom, univerzalna veličina.",
+    "longDescription": "Carsystem kačket u crnoj boji izrađen je od mešavine pamuka i akrila, sa 3D štampom na prednjoj strani i detaljima odštampanim na sendvič obodu. Metalna kopča sa ugraviranim delfinom omogućava individualno podešavanje. Kačket pruža zaklon od sunčeve svetlosti.",
+    "purpose": "Svakodnevno nošenje i zaklon od sunčeve svetlosti",
+    "facts": [
+      {
+        "label": "Prednja strana",
+        "value": "3D štampa"
+      },
+      {
+        "label": "Kopča",
+        "value": "Metalna kopča sa ugraviranim delfinom (logo)"
+      },
+      {
+        "label": "Obod",
+        "value": "Sendvič obod sa logom"
+      },
+      {
+        "label": "Unutrašnjost",
+        "value": "Unutrašnja štampa sa logom"
+      },
+      {
+        "label": "Materijal",
+        "value": "Mešavina pamuka i akrila"
+      },
+      {
+        "label": "Veličina",
+        "value": "Univerzalna (onesize)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.927": "Univerzalna veličina"
+    }
+  },
+  "merchandising-materials/carsystem-cap-camouflage-onesize": {
+    "sourceHash": "066b120b80aeb04d",
+    "productType": "Kačket",
+    "subtype": "Univerzalna veličina",
+    "shortDescription": "Carsystem kačket u camouflage dezenu sa 3D štampom i podesivom metalnom kopčom, univerzalna veličina.",
+    "longDescription": "Carsystem kačket u modernom camouflage dezenu namenjen je svakodnevnom nošenju i slobodnom vremenu. 3D vez i blago zakrivljeni obod daju sportski izgled i pouzdanu zaštitu od sunčeve svetlosti. Podesiva kopča omogućava prilagođavanje veličine, a materijal je mešavina pamuka i akrila.",
+    "purpose": "Svakodnevno nošenje i zaštita od sunčeve svetlosti",
+    "facts": [
+      {
+        "label": "Prednja strana",
+        "value": "3D štampa"
+      },
+      {
+        "label": "Dezen",
+        "value": "Camouflage"
+      },
+      {
+        "label": "Kopča",
+        "value": "Metalna kopča sa ugraviranim delfinom (logo)"
+      },
+      {
+        "label": "Obod",
+        "value": "Sendvič obod"
+      },
+      {
+        "label": "Unutrašnjost",
+        "value": "Unutrašnja štampa sa logom"
+      },
+      {
+        "label": "Materijal",
+        "value": "Mešavina pamuka i akrila"
+      },
+      {
+        "label": "Veličina",
+        "value": "Univerzalna (onesize)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "160.493": "Univerzalna veličina"
+    }
+  },
+  "merchandising-materials/carsystem-car-sticker-plain-four-formats": {
+    "sourceHash": "debedcb1b9d69d74",
+    "productType": "Nalepnica za vozilo",
+    "subtype": "Četiri formata",
+    "shortDescription": "Jednobojna Carsystem nalepnica od folije, dostupna u četiri formata i u crnoj ili beloj boji.",
+    "longDescription": "Carsystem nalepnice od folije su izdržljive i robusne, pa se lako lepe u zatvorenom prostoru i na otvorenom. Jednobojna varijanta dostupna je u četiri formata i u crnoj ili beloj boji. Materijal je vodootporan i otporan na habanje.",
+    "purpose": "Lepljenje logo nalepnice u zatvorenom i na otvorenom",
+    "facts": [
+      {
+        "label": "Formati",
+        "value": "Dostupno u četiri različita formata:"
+      },
+      {
+        "label": "Format",
+        "value": "60 x 7,5 cm"
+      },
+      {
+        "label": "Format",
+        "value": "10 x 8 cm"
+      },
+      {
+        "label": "Format",
+        "value": "40 x 32,1 cm"
+      },
+      {
+        "label": "Format",
+        "value": "30 x 24,1 cm"
+      },
+      {
+        "label": "Boja",
+        "value": "Jednobojna: crna ili bela"
+      },
+      {
+        "label": "Materijal",
+        "value": "Vodootporan i robustan"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.829": "Crna / 60 x 7,5 cm",
+      "158.830": "Bela / 60 x 7,5 cm",
+      "158.831": "Crna / 10 x 8 cm",
+      "158.832": "Bela / 10 x 8 cm",
+      "158.833": "Crna / 40 x 32,1 cm",
+      "158.834": "Bela / 30 x 24,1 cm"
+    }
+  },
+  "merchandising-materials/coffee-cup-black-300-ml": {
+    "sourceHash": "f0054b54445c0b06",
+    "productType": "Šolja",
+    "subtype": "300 ml",
+    "shortDescription": "Crna keramička Carsystem šolja zapremine oko 300 ml, u kartonu sa 6 komada.",
+    "longDescription": "Crna Carsystem šolja sa odštampanim logom izrađena je od keramike, spolja mat, a iznutra sjajna. Zapremina od oko 300 ml odgovara svim toplim napicima. Dimenzije su oko 8.5 cm visine i Ø 9.2 cm, a isporučuje se u kartonu sa 6 komada.",
+    "purpose": "Serviranje toplih napitaka",
+    "facts": [
+      {
+        "label": "Izgled",
+        "value": "Crna šolja sa odštampanim Carsystem logom"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "1 karton sa 6 komada"
+      },
+      {
+        "label": "Površina",
+        "value": "Spolja mat, iznutra sjajna"
+      },
+      {
+        "label": "Zapremina",
+        "value": "Oko 300 ml"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "Oko 8.5 cm visine, Ø 9.2 cm"
+      },
+      {
+        "label": "Materijal",
+        "value": "Keramika"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.219": "Crna"
+    }
+  },
+  "merchandising-materials/cutter-knife-black-140-mm": {
+    "sourceHash": "e6305d4b4a14b320",
+    "productType": "Nož za sečenje",
+    "subtype": "140 mm",
+    "shortDescription": "Crni Carsystem nož za sečenje dužine oko 140 mm, sa lomljivim sečivima i plastičnom štipaljkom.",
+    "longDescription": "Carsystem nož za sečenje izrađen je od plastike i metala (ABS/metal), sa logom odštampanim u beloj boji. Lomljivo sečivo održava stalnu oštrinu, a moguće ga je pomerati i fiksirati radi sigurnosti. Nož je dužine oko 140 mm i pogodan za precizne i fine rezove.",
+    "purpose": "Precizno i fino sečenje",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Carsystem nož sa plastičnom štipaljkom, ABS/metal"
+      },
+      {
+        "label": "Dužina",
+        "value": "Oko 140 mm, sa lomljivim sečivima"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "156.281": "Crna"
+    }
+  },
+  "merchandising-materials/doormat-logo-black-50-x-75-cm-and-90-x-60-cm": {
+    "sourceHash": "bfc0d2d35494a8f2",
+    "productType": "Otirač",
+    "subtype": "50 x 75 cm i 90 x 60 cm",
+    "shortDescription": "Perivi Carsystem otirač od 100% poliamida, u crno-beloj kombinaciji i u dve veličine.",
+    "longDescription": "Carsystem otirač pogodan je za događaje, sajmove i kancelariju. Izrađen je od 100% poliamida sa nitrilnom gumom na donjoj strani, periv je i dobro prianja, pa se koristi u zatvorenom i na otvorenom. Dostupan je u dve veličine.",
+    "purpose": "Zadržavanje prljavštine u prostoru i na ulazu",
+    "facts": [
+      {
+        "label": "Boje",
+        "value": "Crna / bela"
+      },
+      {
+        "label": "Materijal",
+        "value": "100% poliamid"
+      },
+      {
+        "label": "Donji sloj",
+        "value": "Nitrilna guma"
+      },
+      {
+        "label": "Održavanje",
+        "value": "Periv i dobro prianja na podlogu"
+      },
+      {
+        "label": "Poreklo",
+        "value": "Made in Germany"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.622": "CS logo / 50 x 75 cm",
+      "158.623": "CS logo / 90 x 60 cm"
+    }
+  },
+  "merchandising-materials/hoist-flag-120-x-300-cm": {
+    "sourceHash": "077920887954058c",
+    "productType": "Zastava",
+    "subtype": "120 x 300 cm",
+    "shortDescription": "Crvena zastava formata 120 x 300 cm od materijala Polytex®, spremna za kačenje na jarbol.",
+    "longDescription": "Zastava je izrađena od materijala Polytex®, 100% poliesterske pletenine mase oko 110 g/m², i pakovana spremna za upotrebu. Stranice su opšivene, a strana uz jarbol ima manžetnu sa plastičnim karabinima, pa se zastava brzo kači na svaki jarbol. Format je 120 x 300 cm (Š x V), u boji Pantone 485C.",
+    "purpose": "Isticanje zastave na jarbolu",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "Pantone 485C"
+      },
+      {
+        "label": "Format",
+        "value": "120 x 300 cm (Š x V)"
+      },
+      {
+        "label": "Materijal",
+        "value": "Polytex®, 100% poliesterska pletenina, oko 110 g/m² (31705 DDA)"
+      },
+      {
+        "label": "Izrada",
+        "value": "Opšivene stranice, strana uz jarbol sa manžetnom i plastičnim karabinima, spremna za upotrebu"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "137.325": "120 x 300 cm"
+    }
+  },
+  "merchandising-materials/lighter-black-refillable": {
+    "sourceHash": "4b7ad0a77334124c",
+    "productType": "Upaljač",
+    "subtype": "Punjivi",
+    "shortDescription": "Crni elektronski Carsystem upaljač na gas, punjiv i sa podesivom visinom plamena.",
+    "longDescription": "Carsystem upaljač na gas u crnoj boji može se dopunjavati i ima podesivu visinu plamena. Logo je odštampan u beloj boji. Elektronski upaljač jednostavan je za rukovanje.",
+    "purpose": "Svakodnevna upotreba uz podesiv plamen",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Elektronski upaljač na dopunu, u crnoj boji"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "148.281": "Crni"
+    }
+  },
+  "merchandising-materials/padded-jacket-black-2025-size-s-3xl": {
+    "sourceHash": "de05852499e6eb37",
+    "productType": "Jakna",
+    "subtype": "Veličine S – 3XL",
+    "shortDescription": "Crna postavljena stretch jakna sa Carsystem štampom, dostupna u veličinama S – 3XL.",
+    "longDescription": "Carsystem postavljena stretch jakna u crnoj boji izrađena je od 100% poliamida, sa laganim uskim dijagonalnim kanalima i bočnim delovima od rastegljivog materijala za udobnost i sportski izgled. Bočni džepovi imaju rajsferšlus, a jakna je otporna na vodu i vetar. Namenjena je prelaznim sezonama i dostupna u šest veličina. Model na fotografiji visok je 1.85 m i nosi veličinu L.",
+    "purpose": "Nošenje u prelaznim sezonama",
+    "facts": [
+      {
+        "label": "Kroj",
+        "value": "Postavljena stretch jakna sa laganim, uskim dijagonalnim kanalima i bočnim delovima od rastegljivog materijala, za udobnost i sportski izgled"
+      },
+      {
+        "label": "Džepovi",
+        "value": "Bočni džepovi sa rajsferšlusom"
+      },
+      {
+        "label": "Štampa",
+        "value": "Carsystem štampa"
+      },
+      {
+        "label": "Materijal",
+        "value": "100 % poliamid"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      },
+      {
+        "label": "Zaštita",
+        "value": "Otporna na vodu i vetar"
+      },
+      {
+        "label": "Sezona",
+        "value": "Jakna za prelazne sezone"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "160.037": "S",
+      "160.038": "M",
+      "160.039": "L",
+      "160.040": "XL",
+      "160.041": "XXL",
+      "160.042": "3XL"
+    }
+  },
+  "merchandising-materials/padded-vest-black-2025-size-s-3xl": {
+    "sourceHash": "afb6fbf100c251b2",
+    "productType": "Prsluk",
+    "subtype": "Veličine S - 3XL",
+    "shortDescription": "Punjeni Carsystem prsluk u crnoj boji, sa bočnim džepovima na patent zatvarač, u šest veličina.",
+    "longDescription": "Punjeni prsluk sa lakim, uskim dijagonalnim kanalima i rastegljivim bočnim delovima, što daje veću udobnost i sportski izgled. Bočni džepovi se zatvaraju patent zatvaračem. Materijal je 100% poliamid, boja crna. Dostupan je u šest veličina, od S do 3XL.",
+    "purpose": "Nošenje u radionici i van nje",
+    "facts": [
+      {
+        "label": "Kroj",
+        "value": "Punjeni prsluk sa lakim, uskim dijagonalnim kanalima i rastegljivim bočnim delovima, za veću udobnost i sportski izgled."
+      },
+      {
+        "label": "Džepovi",
+        "value": "Bočni džepovi sa patent zatvaračem."
+      },
+      {
+        "label": "Materijal",
+        "value": "100% poliamid"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "160.027": "S",
+      "160.028": "M",
+      "160.029": "L",
+      "160.030": "XL",
+      "160.031": "XXL",
+      "160.032": "3XL"
+    }
+  },
+  "merchandising-materials/padded-vest-black-size-s-3xl": {
+    "sourceHash": "dcb1b3da190470cd",
+    "productType": "Prsluk",
+    "subtype": "Veličine S - 3XL",
+    "shortDescription": "Punjeni Carsystem prsluk u crnoj boji, sa bočnim džepovima na patent zatvarač, u šest veličina.",
+    "longDescription": "Punjeni prsluk sa lakim, uskim dijagonalnim kanalima i rastegljivim bočnim delovima, što daje veću udobnost i sportski izgled. Bočni džepovi se zatvaraju patent zatvaračem. Materijal je 100% poliamid, boja crna. Preporučuje se naručivanje jednog broja većeg.",
+    "purpose": "Nošenje u radionici i van nje",
+    "facts": [
+      {
+        "label": "Kroj",
+        "value": "Punjeni prsluk sa lakim, uskim dijagonalnim kanalima i rastegljivim bočnim delovima, za veću udobnost i sportski izgled."
+      },
+      {
+        "label": "Preporuka",
+        "value": "Preporučuje se naručivanje jednog broja većeg."
+      },
+      {
+        "label": "Džepovi",
+        "value": "Bočni džepovi sa patent zatvaračem."
+      },
+      {
+        "label": "Materijal",
+        "value": "100% poliamid"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.288": "crna / S",
+      "159.289": "crna / M",
+      "159.290": "crna / L",
+      "159.291": "crna / XL",
+      "159.292": "crna / XXL",
+      "159.293": "crna / 3XL"
+    }
+  },
+  "merchandising-materials/pen-trinity-gum-black-blue-ink": {
+    "sourceHash": "4591464999407c55",
+    "productType": "Hemijska olovka",
+    "subtype": "Plavi uložak",
+    "shortDescription": "CARSYSTEM hemijska olovka sa crnim trouglastim soft touch telom i plavim uloškom.",
+    "longDescription": "Hemijska olovka sa trouglastim telom u crnoj boji i soft touch obradom koja omogućava siguran hvat. Klips je providan i sjajan, a na telu je odštampan Carsystem logotip. Uložak je plav.",
+    "purpose": "Svakodnevno pisanje",
+    "facts": [
+      {
+        "label": "Telo",
+        "value": "Crna CARSYSTEM hemijska olovka sa trouglastim soft touch telom i providnim sjajnim klipsom."
+      },
+      {
+        "label": "Štampa i uložak",
+        "value": "Na telu je odštampan Carsystem logotip; olovka ima kvalitetan plavi uložak."
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "156.540": "plavi uložak / crna"
+    }
+  },
+  "merchandising-materials/socks-carsystem-black-white-2-size-ranges": {
+    "sourceHash": "86f45a6359fbc0aa",
+    "productType": "Čarape",
+    "subtype": "Dva raspona veličina",
+    "shortDescription": "Duge Carsystem čarape od pamučne mešavine, sa logotipom i sloganom, u dva raspona veličina.",
+    "longDescription": "Duge teniske čarape izrađene od mešavine pamuka, poliamida i elastana. Dostupne su u rasponima 39-42 i 42-46, pri čemu svaki raspon pokriva tri do pet brojeva obuće. Na čarapama su Carsystem logotip i slogan.",
+    "purpose": "Nošenje na poslu, u slobodno vreme i pri sportu",
+    "facts": [
+      {
+        "label": "Sastav",
+        "value": "85% pamuk"
+      },
+      {
+        "label": "Sastav",
+        "value": "12% poliamid"
+      },
+      {
+        "label": "Sastav",
+        "value": "3% elastan"
+      },
+      {
+        "label": "Veličine",
+        "value": "Dostupne u rasponima 39-42 i 42-46"
+      },
+      {
+        "label": "Oznake",
+        "value": "Carsystem logotip i slogan"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "160.540": "39 - 42",
+      "160.542": "42 - 46"
+    }
+  },
+  "merchandising-materials/socks-carsystem-red-white-2-size-range": {
+    "sourceHash": "a30d7f12840703c2",
+    "productType": "Čarape",
+    "subtype": "Dva raspona veličina",
+    "shortDescription": "Duge Carsystem čarape od pamučne mešavine, sa logotipom i sloganom, u dva raspona veličina.",
+    "longDescription": "Duge teniske čarape izrađene od mešavine pamuka, poliamida i elastana. Dostupne su u rasponima 39-42 i 42-45, pri čemu svaki raspon pokriva tri do četiri broja obuće. Na čarapama su Carsystem logotip i slogan.",
+    "purpose": "Nošenje na poslu, u slobodno vreme i pri sportu",
+    "facts": [
+      {
+        "label": "Sastav",
+        "value": "85% pamuk"
+      },
+      {
+        "label": "Sastav",
+        "value": "12% poliamid"
+      },
+      {
+        "label": "Sastav",
+        "value": "3% elastan"
+      },
+      {
+        "label": "Veličine",
+        "value": "Dostupne u rasponima 39-42 i 42-45"
+      },
+      {
+        "label": "Oznake",
+        "value": "Carsystem logotip i slogan"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.837": "39 - 42",
+      "159.839": "42 - 45"
+    }
+  },
+  "merchandising-materials/sweatshirt-black-teamcarsystem-size-s-3xl": {
+    "sourceHash": "d2897e4885a75041",
+    "productType": "Duks",
+    "subtype": "Veličine S - 3XL",
+    "shortDescription": "Crni Carsystem duks sa raglan rukavima i štampom na prednjoj strani, u šest veličina.",
+    "longDescription": "Duks u crnoj boji sa raglan rukavima i okovratnikom u dezenu riblje kosti. Materijal je 85% češljani prstenasto predeni organski pamuk i 15% reciklirani poliester. Na prednjoj strani je Carsystem štampa. Dostupan je u šest veličina, od S do 3XL.",
+    "purpose": "Nošenje u radionici i van nje",
+    "facts": [
+      {
+        "label": "Rukavi",
+        "value": "Raglan rukavi"
+      },
+      {
+        "label": "Okovratnik",
+        "value": "Okovratnik u dezenu riblje kosti"
+      },
+      {
+        "label": "Materijal",
+        "value": "85% češljani prstenasto predeni organski pamuk, 15% reciklirani poliester"
+      },
+      {
+        "label": "Štampa",
+        "value": "Carsystem štampa na prednjoj strani"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "160.325": "S",
+      "160.326": "M",
+      "160.327": "L",
+      "160.328": "XL",
+      "160.329": "XXL",
+      "160.330": "3XL"
+    }
+  },
+  "merchandising-materials/sweatshirt-grey-teamcarsystem-size-s-3xl": {
+    "sourceHash": "cb0cff11500172fd",
+    "productType": "Duks",
+    "subtype": "Veličine S - 3XL",
+    "shortDescription": "Sivi Carsystem duks sa velikom crnom štampom na leđima i logotipom na prednjoj strani.",
+    "longDescription": "Duks u sivoj boji sa velikom crnom štampom na leđima i Carsystem logotipom na prednjoj strani. Ima raglan rukav i jednoiglični prošiv na okovratniku. Materijal je 85% organski pamuk i 15% reciklirani poliester. Dostupan je u šest veličina, od S do 3XL.",
+    "purpose": "Nošenje u radionici i van nje",
+    "facts": [
+      {
+        "label": "Rukavi",
+        "value": "Raglan rukav"
+      },
+      {
+        "label": "Okovratnik",
+        "value": "Jednoiglični prošiv na okovratniku"
+      },
+      {
+        "label": "Materijal",
+        "value": "85% pamuk – organski, prstenasto predeni i češljani"
+      },
+      {
+        "label": "Materijal",
+        "value": "15% poliester – reciklirani"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.864": "S",
+      "159.865": "M",
+      "159.866": "L",
+      "159.867": "XL",
+      "159.868": "XXL",
+      "159.909": "3XL"
+    }
+  },
+  "merchandising-materials/t-shirt-black-teamcarsystem-size-s-xxl": {
+    "sourceHash": "1f548004dc0542f0",
+    "productType": "Majica",
+    "subtype": "Veličine S - XXL",
+    "shortDescription": "Crna majica kratkih rukava od 100 % pamuka, sa kružnom štampom logotipa na prednjoj strani.",
+    "longDescription": "Majica kratkih rukava izrađena od 100 % pamuka. Na prednjoj strani je kružna štampa sa aplikacijom logotipa. Dostupna je u pet veličina, od S do XXL.",
+    "purpose": "Nošenje u radionici i van nje",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "100 % pamuk"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Štampa",
+        "value": "Štampa sa aplikacijom logotipa na prednjoj strani"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.827": "crna / S",
+      "159.828": "crna / M",
+      "159.829": "crna / L",
+      "159.830": "crna / XL",
+      "159.831": "crna / XXL"
+    }
+  },
+  "merchandising-materials/usb-stick-64-gb": {
+    "sourceHash": "d708bde39894366a",
+    "productType": "USB memorija",
+    "subtype": "64 GB",
+    "shortDescription": "Crna Carsystem USB memorija od 64 GB, sa kućištem koje se okreće i alkicom za ključeve.",
+    "longDescription": "USB memorija kapaciteta 64 GB, sa kućištem koje se okreće za 360°. Kućište je crno i odštampano Carsystem logotipom. Alkica omogućava kačenje na privezak za ključeve ili traku za vrat.",
+    "purpose": "Prenos i čuvanje podataka",
+    "facts": [
+      {
+        "label": "Kapacitet",
+        "value": "64 GB"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Štampa",
+        "value": "Carsystem logotip"
+      },
+      {
+        "label": "Nošenje",
+        "value": "Pogodna kao privezak za ključeve"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.871": "64 GB"
+    }
+  },
+  "merchandising-materials/zip-hoodie-black-size-s-3xl": {
+    "sourceHash": "967c0ad7cb44e6e8",
+    "productType": "Duks sa kapuljačom",
+    "subtype": "Veličine S - 3XL",
+    "shortDescription": "Crni duks sa kapuljačom i metalnim patent zatvaračem po celoj dužini, u šest veličina.",
+    "longDescription": "Duks sa kapuljačom i metalnim patent zatvaračem po celoj dužini. Ima rebraste manžetne i pojas, visoko krojen izrez i meki, iščetkani kengur džep sa unutrašnje strane. Materijal je 60 % pamuk i 40 % poliester, gramaže 300 g/m². Na ramenu je Carsystem natpis.",
+    "purpose": "Nošenje u radionici i van nje",
+    "facts": [
+      {
+        "label": "Manžetne",
+        "value": "Rebraste manžetne i pojas"
+      },
+      {
+        "label": "Izrez",
+        "value": "Visoko krojen izrez"
+      },
+      {
+        "label": "Džep",
+        "value": "Meki, iščetkani kengur džep sa unutrašnje strane"
+      },
+      {
+        "label": "Zatvarač",
+        "value": "Metalni patent zatvarač"
+      },
+      {
+        "label": "Materijal",
+        "value": "60 % pamuk, 40 % poliester (melanž siva: 80 % pamuk, 15 % poliester, 5 % viskoza), gramaža: 300 g/m²"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.084": "S",
+      "158.085": "M",
+      "158.086": "L",
+      "158.087": "XL",
+      "158.088": "XXL",
+      "158.089": "3XL"
+    }
+  }
+}

@@ -1,0 +1,942 @@
+{
+  "cleaning/car-clean-double-blue-paper-cleaning-cloth": {
+    "sourceHash": "7f41f22a6e47536b",
+    "productType": "Papirna krpa za čišćenje",
+    "subtype": "Papirna krpa za čišćenje",
+    "shortDescription": "Dvoslojna papirna krpa za čišćenje, za uobičajene poslove u radionici.",
+    "longDescription": "Car Clean Double Blue je dvoslojna papirna krpa za čišćenje namenjena uobičajenim poslovima u karoserijskoj i lakirerskoj radionici. Isporučuje se u perforiranoj rolni, sa listovima koji se lako otkidaju. Slojevi su međusobno potpuno spojeni.",
+    "purpose": "Uobičajeni poslovi čišćenja u radionici",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Papirna krpa za čišćenje"
+      },
+      {
+        "label": "Slojevi",
+        "value": "2 sloja"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Perforirana rolna"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Slojevi su međusobno potpuno spojeni"
+      }
+    ],
+    "applications": [
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "134.580": "1,000 otkidnih listova / 36 x 36 cm"
+    }
+  },
+  "cleaning/car-clean-double-white-paper-cleaning-cloth": {
+    "sourceHash": "b9c6828f4def3394",
+    "productType": "Papirna krpa za čišćenje",
+    "subtype": "Papirna krpa za čišćenje",
+    "shortDescription": "Dvoslojna papirna krpa za čišćenje u perforiranoj rolni sa 1,500 listova.",
+    "longDescription": "Car Clean Double White je dvoslojna papirna krpa za čišćenje namenjena uobičajenim poslovima u karoserijskoj i lakirerskoj radionici. Isporučuje se u perforiranoj rolni sa 1,500 otkidnih listova.",
+    "purpose": "Uobičajeni poslovi čišćenja u radionici",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Papirna krpa za čišćenje, dvoslojna"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Perforirana rolna"
+      },
+      {
+        "label": "Broj listova",
+        "value": "1,500 otkidnih listova"
+      }
+    ],
+    "applications": [
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "141.253": "1,500 otkidnih listova / 38 x 24 cm"
+    }
+  },
+  "cleaning/car-clean-multi-cleaning-cloth": {
+    "sourceHash": "adf4748d522ee429",
+    "productType": "Krpa za čišćenje",
+    "subtype": "Krpa za čišćenje",
+    "shortDescription": "Upijajuća krpa za čišćenje otporna na cepanje, za rastvarače, ulja i maziva.",
+    "longDescription": "Car Clean Multi je papirna krpa za čišćenje koja dobro upija i otporna je na cepanje, pa prihvata veće količine rastvarača, ulja i maziva. Pogodna je za lakirane, metalne i glatke drvene površine. Čisti i odmašćuje bez ostataka, a isporučuje se u perforiranoj rolni.",
+    "purpose": "Upijanje rastvarača, ulja i maziva",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Veoma upijajuća, robusna i kvalitetna krpa za čišćenje otporna na rastvarače"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Čišćenje i odmašćivanje bez ostataka"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Perforirana rolna"
+      }
+    ],
+    "applications": [
+      "Upija velike količine rastvarača, ulja i maziva",
+      "Pogodna za lakirane, metalne i glatke drvene površine"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka upojnost",
+        "description": "Krpa veoma dobro upija."
+      },
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Dobra otpornost na rastvarače."
+      },
+      {
+        "title": "Bez vlakana i ostataka",
+        "description": "Ne ostavlja vlakna ni ostatke."
+      },
+      {
+        "title": "Otporna na cepanje",
+        "description": "Materijal je otporan na cepanje."
+      },
+      {
+        "title": "Bez hemijskih dodataka",
+        "description": "Ne sadrži silikone, veziva, punila ni druge hemijske dodatke."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "134.577": "500 otkidnih listova / 35 x 32 cm"
+    }
+  },
+  "cleaning/car-clean-multi-extreme-box-cellulose-cleaning-cloth": {
+    "sourceHash": "5191049f67542b53",
+    "productType": "Celulozna krpa za čišćenje",
+    "subtype": "Celulozna krpa za čišćenje",
+    "shortDescription": "Univerzalna celulozna krpa za čišćenje u kutiji dozatoru sa 250 listova.",
+    "longDescription": "Car Clean Multi Extreme je celulozna krpa za čišćenje u praktičnoj kutiji dozatoru sa 250 komada, namenjena svim poslovima čišćenja. Dobro upija, ne ostavlja vlakna i temeljno čisti površine. Veoma je otporna na cepanje i može ponovo da se upotrebi nakon ispiranja.",
+    "purpose": "Univerzalno čišćenje u radionici",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Posebna celulozna krpa za čišćenje"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Čišćenje i odmašćivanje bez ostataka"
+      },
+      {
+        "label": "Kutija dozator",
+        "value": "250 otkidnih listova – 30 x 38 cm"
+      },
+      {
+        "label": "Boja",
+        "value": "Tirkizna"
+      }
+    ],
+    "applications": [
+      "Univerzalna krpa za sve poslove čišćenja",
+      "Pogodna za lakirane, metalne i glatke drvene površine"
+    ],
+    "benefits": [
+      {
+        "title": "Praktična kutija dozator",
+        "description": "Listovi se izvlače iz priručne kutije dozatora."
+      },
+      {
+        "title": "Visoka upojnost",
+        "description": "Krpa veoma dobro upija."
+      },
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Dobra otpornost na rastvarače."
+      },
+      {
+        "title": "Bez vlakana, ne grebe",
+        "description": "Ne ostavlja vlakna i ne grebe površinu."
+      },
+      {
+        "title": "Otporna na cepanje",
+        "description": "Materijal je veoma otporan na cepanje."
+      },
+      {
+        "title": "Bez hemijskih dodataka",
+        "description": "Ne sadrži silikone, veziva, punila ni druge hemijske dodatke."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "142.765": "Kutija po 250 kom. / 30 x 38 cm"
+    }
+  },
+  "cleaning/car-clean-triple-blue-paper-cleaning-cloth": {
+    "sourceHash": "affff28c85a38d1d",
+    "productType": "Papirna krpa za čišćenje",
+    "subtype": "Papirna krpa za čišćenje",
+    "shortDescription": "Troslojna papirna krpa za čišćenje, otporna na cepanje i veoma upijajuća.",
+    "longDescription": "Car Clean Triple Blue je troslojna papirna krpa za čišćenje koja je otporna na cepanje i veoma dobro upija. Slojevi su međusobno potpuno spojeni, a rolna je perforirana radi lakog otkidanja listova. Namenjena je uobičajenim poslovima čišćenja u radionici.",
+    "purpose": "Uobičajeni poslovi čišćenja u radionici",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Papirna krpa za čišćenje"
+      },
+      {
+        "label": "Slojevi",
+        "value": "3 sloja"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Perforirana rolna"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Svi slojevi su međusobno potpuno spojeni"
+      }
+    ],
+    "applications": [
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "134.578": "500 otkidnih listova / 36 x 36 cm",
+      "134.579": "1,000 otkidnih listova / 36 x 36 cm"
+    }
+  },
+  "cleaning/cleaning-wipes-cleaning-wipes": {
+    "sourceHash": "6e7c3badde7de37a",
+    "productType": "Maramice za čišćenje",
+    "subtype": "Maramice za čišćenje",
+    "shortDescription": "Mekane maramice za čišćenje u rolni sa dozatorom, perive i za višekratnu upotrebu.",
+    "longDescription": "Maramice za čišćenje isporučuju se u rolni sa dozatorom i namenjene su svim uobičajenim poslovima čišćenja. Veoma dobro upijaju, otporne su na rastvarače i ne ostavljaju vlakna. Materijal je mekan, otporan na cepanje i kada je mokar, a maramice mogu da se operu i ponovo upotrebe.",
+    "purpose": "Univerzalno čišćenje u radionici",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Posebne maramice za čišćenje"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Rolna sa dozatorom"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Perforirani otkidni listovi"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Fin raspored sitnih rupica"
+      }
+    ],
+    "applications": [
+      "Univerzalna mekana krpa za sve poslove čišćenja"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka upojnost",
+        "description": "Maramice veoma dobro upijaju."
+      },
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Materijal je otporan na rastvarače."
+      },
+      {
+        "title": "Čišćenje bez vlakana",
+        "description": "Pri čišćenju ne ostaju vlakna."
+      },
+      {
+        "title": "Veoma mekane",
+        "description": "Materijal je veoma mekan."
+      },
+      {
+        "title": "Čišćenje u dubini strukture",
+        "description": "Čiste i u dubljim strukturama površine."
+      },
+      {
+        "title": "Otporne na cepanje",
+        "description": "Veoma su otporne na cepanje i kada su mokre."
+      },
+      {
+        "title": "Perive i višekratne",
+        "description": "Mogu da se operu i ponovo upotrebe."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.458": "Rolna maramica za čišćenje / 475 otkidnih listova / 38 x 30 cm"
+    }
+  },
+  "cleaning/cockpit-spray-cleaning-spray": {
+    "sourceHash": "5f1789fd9dcbfd9a",
+    "productType": "Sprej za čišćenje",
+    "subtype": "Sprej za čišćenje",
+    "shortDescription": "Sprej za negu i čišćenje plastičnih i gumenih površina u enterijeru vozila.",
+    "longDescription": "Cockpit-Spray je sprej za negu i čišćenje enterijera vozila. Namenjen je svim vrstama plastičnih i gumenih površina, koje temeljno čisti. Ne sadrži silikone, deluje antistatički, providan je i mirisa citrusa.",
+    "purpose": "Nega i čišćenje enterijera vozila",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Sprej za negu i čišćenje"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Miris",
+        "value": "Citrus"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Sve plastične i gumene površine u enterijeru"
+    ],
+    "benefits": [
+      {
+        "title": "Antistatičko dejstvo",
+        "description": "Obrađena površina deluje antistatički."
+      }
+    ],
+    "advice": "Izbegavati nanošenje na volan, ručicu menjača i nožne pedale.",
+    "variants": {
+      "126.020": "Providan / 400 ml"
+    }
+  },
+  "cleaning/coding-caps-colour-code-rings": {
+    "sourceHash": "eb08d6da1345cfe0",
+    "productType": "Prstenovi za označavanje",
+    "subtype": "Prstenovi za označavanje bojama",
+    "shortDescription": "Plastični prstenovi u boji za označavanje pumpnih boca u radionici.",
+    "longDescription": "Coding Caps su plastični prstenovi u boji koji omogućavaju uvođenje sistema označavanja bojama za pumpne boce u radionici. Postavljaju se na Carsystem pumpne boce, koje tako mogu jasno da se razlikuju.",
+    "purpose": "Označavanje pumpnih boca bojama",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Plastični prstenovi za označavanje bojama"
+      }
+    ],
+    "applications": [
+      "Označavanje bojama za Carsystem pumpne boce"
+    ],
+    "benefits": [
+      {
+        "title": "Jasno razlikovanje boca",
+        "description": "Pumpne boce mogu jasno da se razlikuju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.642": "Set prstenova za označavanje, 5 kom."
+    }
+  },
+  "cleaning/finish-clay-cleaning-clay": {
+    "sourceHash": "77993f1fe8bb877d",
+    "productType": "Glina za čišćenje",
+    "subtype": "Glina za čišćenje",
+    "shortDescription": "Glina za pažljivo čišćenje lakiranih površina bez ostataka i bez ogrebotina.",
+    "longDescription": "Finish Clay je glina namenjena pažljivom čišćenju lakiranih površina. Uklanja preleteni sprej, površinsku rđu, ostatke insekata i smolu sa drveća, bez ostataka i bez ogrebotina. Nisu potrebna agresivna sredstva za čišćenje, a glina ostaje vlažna ako se čuva u kutiji.",
+    "purpose": "Pažljivo čišćenje lakiranih površina",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Glina za čišćenje"
+      }
+    ],
+    "applications": [
+      "Uklanjanje preletenog spreja, površinske rđe, insekata i smole sa drveća sa lakiranih površina, bez ostataka i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Bez agresivnih sredstava",
+        "description": "Nije potrebna upotreba agresivnih sredstava za čišćenje."
+      },
+      {
+        "title": "Ostaje vlažna",
+        "description": "Ostaje vlažna i ne postaje krta ako se čuva u kutiji."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "147.468": "200 g"
+    }
+  },
+  "cleaning/gun-clean-set-gun-cleaning-set": {
+    "sourceHash": "7180b79e77b8fd3c",
+    "productType": "Set za čišćenje pištolja",
+    "subtype": "Set za čišćenje pištolja za lakiranje",
+    "shortDescription": "Set od 17 delova za čišćenje pištolja za lakiranje: igle i četkice.",
+    "longDescription": "Gun Clean Set je set za čišćenje pištolja za lakiranje koji se sastoji od 17 pojedinačnih delova. U setu se nalazi 6 različitih igala i 11 različitih četkica.",
+    "purpose": "Čišćenje pištolja za lakiranje",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Set za čišćenje pištolja za lakiranje"
+      },
+      {
+        "label": "Broj delova",
+        "value": "17 pojedinačnih delova"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "6 različitih igala i 11 različitih četkica"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.520": "Set"
+    }
+  },
+  "cleaning/h2o-cleaner-cleaner": {
+    "sourceHash": "32dd843897ee3325",
+    "productType": "Sredstvo za čišćenje",
+    "subtype": "Sredstvo za čišćenje",
+    "shortDescription": "Intenzivno sredstvo za čišćenje na bazi vode za alat i delove u karoserijskoj i lakirerskoj radionici.",
+    "longDescription": "H₂O Cleaner je intenzivno sredstvo za čišćenje na bazi vode, namenjeno efikasnom čišćenju alata i delova u radionici. Uklanja boje na bazi vode i na bazi rastvarača, 2K prajmere i proizvode na bazi epoksi smole, pa se koristi i za skidanje boje sa stalaka za lakiranje. Razređuje se vodom, a pigmenti se talože na dnu i mogu se procediti, tako da se sredstvo koristi više puta.",
+    "purpose": "Čišćenje alata i delova u radionici",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Intenzivno sredstvo za čišćenje"
+      },
+      {
+        "label": "Osnova",
+        "value": "Voda"
+      }
+    ],
+    "applications": [
+      "Efikasno čišćenje alata i delova u karoserijskoj i lakirerskoj radionici",
+      "Pogodno za skidanje boje sa stalaka za lakiranje"
+    ],
+    "benefits": [
+      {
+        "title": "Uklanja boje i prajmere",
+        "description": "Uklanja boje na bazi vode i na bazi rastvarača, 2K prajmere i proizvode na bazi epoksi smole."
+      },
+      {
+        "title": "Višekratna upotreba",
+        "description": "Pigmenti se talože na dnu i mogu se procediti, pa se sredstvo koristi više puta."
+      },
+      {
+        "title": "Razređivo vodom",
+        "description": "Sredstvo se može razrediti vodom."
+      }
+    ],
+    "advice": "Vazdušni priključci pri dužem izlaganju mogu početi da oksidiraju. Priključci od aluminijuma mogu korodirati.",
+    "variants": {
+      "151.953": "5 l"
+    }
+  },
+  "cleaning/iso-ve-7030-isopropanol-cleaner": {
+    "sourceHash": "6eb84a0754a33c85",
+    "productType": "Sredstvo za čišćenje",
+    "subtype": "Sredstvo za čišćenje na bazi izopropanola",
+    "shortDescription": "Specijalno sredstvo na bazi izopropanola za nežno čišćenje plastike, GRP i CRP površina.",
+    "longDescription": "ISO-VE 7030 je specijalno sredstvo za čišćenje na bazi izopropanola, namenjeno nežnom čišćenju plastike, GRP i CRP površina. Bez ostatka uklanja sredstva za razdvajanje, prljavštinu, mast, ulje, silikone, kao i zaostale minerale i soli sa površine. Koristi se i kao antistatičko sredstvo za čišćenje, a zbog velike isparljivosti čišćenje je vrlo brzo.",
+    "purpose": "Nežno čišćenje plastike, GRP i CRP površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalno sredstvo za čišćenje"
+      },
+      {
+        "label": "Osnova",
+        "value": "Izopropanol"
+      }
+    ],
+    "applications": [
+      "Pogodno za nežno čišćenje plastike, GRP ili CRP površina",
+      "Uklanjanje sredstava za razdvajanje, prljavštine, masti, ulja, silikona, kao i zaostalih minerala i soli sa površine, bez ostatka",
+      "Antistatičko dejstvo"
+    ],
+    "benefits": [
+      {
+        "title": "Antistatičko dejstvo",
+        "description": "Sredstvo deluje antistatički."
+      },
+      {
+        "title": "Velika isparljivost",
+        "description": "Sredstvo je vrlo isparljivo."
+      },
+      {
+        "title": "Brzo čišćenje",
+        "description": "Čišćenje je veoma brzo."
+      }
+    ],
+    "advice": "Može nagristi 1K materijale.",
+    "variants": {
+      "154.034": "5 l",
+      "157.345": "20 l"
+    }
+  },
+  "cleaning/multi-cleaning-wipes-cleaning-wipes": {
+    "sourceHash": "e1eddfb740a3a957",
+    "productType": "Maramice za čišćenje",
+    "subtype": "Maramice za čišćenje",
+    "shortDescription": "Dvostrane maramice za čišćenje u kofi sa dozatorom, bez rastvarača, silikona i otpuštanja vlakana.",
+    "longDescription": "Multi Cleaning wipes su maramice za čišćenje u praktičnoj kofi sa dozatorom. Gruba strana sa abrazivnim telima uklanja jaku i tvrdokornu prljavštinu, dok je meka strana namenjena osetljivim površinama i temeljnom, a nežnom čišćenju ruku. Maramice se kroz perforaciju vade pojedinačno, a pakovanje ih održava vlažnim i higijenskim, spremnim za upotrebu.",
+    "purpose": "Univerzalno čišćenje površina, predmeta i ruku",
+    "facts": [
+      {
+        "label": "Pakovanje",
+        "value": "Maramice za čišćenje u praktičnoj kofi sa dozatorom"
+      },
+      {
+        "label": "Površina",
+        "value": "Dvostrana, maramica se koristi sa obe strane"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Abrazivna tela na jednoj strani uklanjaju jaku prljavštinu, dok meki materijal služi za čišćenje osetljivih površina"
+      }
+    ],
+    "applications": [
+      "Univerzalne maramice za čišćenje svih površina, predmeta i za čišćenje ruku."
+    ],
+    "benefits": [
+      {
+        "title": "Bez rastvarača i silikona",
+        "description": "Bez rastvarača, silikona i otpuštanja vlakana."
+      },
+      {
+        "title": "Bez alergenih sastojaka",
+        "description": "Ne sadrže alergene sastojke."
+      },
+      {
+        "title": "Za uobičajene poslove čišćenja",
+        "description": "Pogodne su za sve uobičajene poslove čišćenja."
+      }
+    ],
+    "advice": "Maramice se vade pojedinačno kroz perforaciju. Gruba strana krpe namenjena je jakoj prljavštini, a meka strana osetljivim površinama i čišćenju ruku.",
+    "variants": {
+      "159.782": "90 maramica / kofa"
+    }
+  },
+  "cleaning/nano-easy-cleaner-cleaning-sponge": {
+    "sourceHash": "0bbc3e15436f102d",
+    "productType": "Sunđer za čišćenje",
+    "subtype": "Sunđer za čišćenje",
+    "shortDescription": "Sunđer za čišćenje sa nano premazom za glatke površine: staklo, plastiku i lakirane delove.",
+    "longDescription": "Nano Easy Cleaner je sunđer za čišćenje sa nano premazom, namenjen glatkim površinama kao što su staklo, plastika, lakirane površine, prozori, svetla i ogledala. Nano premaz olakšava uklanjanje insekata, prenapršenog laka i prljavštine. Koristi se samo sa vodom, jer sredstva za čišćenje mogu nagristi nano premaz.",
+    "purpose": "Čišćenje stakla, laka i plastike",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Sunđer za čišćenje sa nano premazom"
+      }
+    ],
+    "applications": [
+      "Čišćenje stakla, laka i plastike",
+      "Pogodan za prozore, farove, ogledala i lakirane površine",
+      "Ne koristiti zajedno sa sredstvima za čišćenje jer ona mogu nagristi nano premaz"
+    ],
+    "benefits": [
+      {
+        "title": "Nano premaz",
+        "description": "Specijalni nano premaz olakšava uklanjanje insekata, prenapršenog laka i prljavštine."
+      }
+    ],
+    "advice": "Koristiti isključivo sa vodom. Dodata sredstva za čišćenje mogu oštetiti nano premaz.",
+    "variants": {
+      "143.383": "Sunđer za čišćenje"
+    }
+  },
+  "cleaning/pump-sprayer-pump-sprayer": {
+    "sourceHash": "b39dc9de07179846",
+    "productType": "Pumpna prskalica",
+    "subtype": "Pumpna prskalica",
+    "shortDescription": "Pumpna prskalica pod pritiskom za nanošenje i raspršivanje tečnosti, sa podesivom finoćom raspršivanja.",
+    "longDescription": "Pump Sprayer je pumpna prskalica pod pritiskom, namenjena nanošenju i raspršivanju tečnosti iz kanti ili buradi. Finoća raspršivanja je podesiva, a maksimalna zapremina boce iznosi 0,9 l. Pogodna je za Carsystem Silicone Remover Mild, Silicone Remover Water i ISO-VE 7030.",
+    "purpose": "Nanošenje i raspršivanje tečnosti iz kanti ili buradi",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pumpna boca za raspršivanje"
+      },
+      {
+        "label": "Zapremina",
+        "value": "Maks. 0,9 l"
+      }
+    ],
+    "applications": [
+      "Nanošenje i raspršivanje tečnosti iz kanti ili buradi",
+      "Pogodna za Carsystem Silicone Remover Mild, Silicone Remover Water i ISO-VE 7030"
+    ],
+    "benefits": [
+      {
+        "title": "Podesivo raspršivanje",
+        "description": "Finoća raspršivanja se može podesiti."
+      }
+    ],
+    "advice": "Jaki rastvarači mogu oštetiti zaptivke.",
+    "variants": {
+      "157.412": "Bela / 1 l",
+      "142.808": "Providna / 1 l",
+      "139.606": "Rezervni set viton zaptivki",
+      "146.680": "Rezervna dizna",
+      "153.269": "Rezervna glava za raspršivanje sa viton zaptivkom"
+    }
+  },
+  "cleaning/scraper-paint-off-blade": {
+    "sourceHash": "aa3c4b5ea247bfd3",
+    "productType": "Strugač",
+    "subtype": "Sečivo za skidanje laka",
+    "shortDescription": "Strugač sa oštrim sigurnosnim sečivom za uklanjanje prenapršenog laka sa staklenih površina.",
+    "longDescription": "Scraper je strugač sa oštrim sigurnosnim sečivom, namenjen uklanjanju prenapršenog laka sa staklenih površina. Uz strugač je dostupno i dopunsko pakovanje sa 100 sečiva.",
+    "purpose": "Uklanjanje prenapršenog laka sa stakla",
+    "facts": [
+      {
+        "label": "Sečivo",
+        "value": "Sigurnosno sečivo za skidanje laka"
+      }
+    ],
+    "applications": [
+      "Uklanjanje prenapršenog laka sa staklenih površina"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "140.984": "Strugač",
+      "140.985": "Dopuna (100 sečiva)"
+    }
+  },
+  "cleaning/silicone-remover-mild-silicone-remover-solvent-based": {
+    "sourceHash": "d821e37d87a6a9a8",
+    "productType": "Sredstvo za uklanjanje silikona",
+    "subtype": "Sredstvo za uklanjanje silikona · na bazi rastvarača",
+    "shortDescription": "Sredstvo za uklanjanje silikona i masnoća na bazi rastvarača, za svakodnevno čišćenje pre lakiranja.",
+    "longDescription": "Silicone Remover Mild je sredstvo na bazi rastvarača za uklanjanje silikona i masnoća. Koristi se za čišćenje ostataka prljavštine pre lakiranja i namenjeno je svim svakodnevnim poslovima čišćenja u radionici.",
+    "purpose": "Uklanjanje silikona i masnoća pre lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sredstvo za uklanjanje silikona"
+      },
+      {
+        "label": "Osnova",
+        "value": "Rastvarač"
+      }
+    ],
+    "applications": [
+      "Uklanjanje silikona i masnoća",
+      "Čišćenje ostataka prljavštine pre lakiranja",
+      "Za sve svakodnevne poslove čišćenja"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "146.711": "1 l",
+      "146.704": "5 l",
+      "147.023": "30 l",
+      "139.212": "Slavina za bure od 30 l"
+    }
+  },
+  "cleaning/silicone-remover-water-20-silicone-remover-water-based": {
+    "sourceHash": "d7d4afbad314d90a",
+    "productType": "Sredstvo za uklanjanje silikona",
+    "subtype": "Sredstvo za uklanjanje silikona · na bazi vode",
+    "shortDescription": "Blago sredstvo na bazi vode za čišćenje plastike, stakla, starog laka i alata, sa antistatičkim dejstvom.",
+    "longDescription": "Silicone Remover Water 2.0 je blago specijalno sredstvo za čišćenje na bazi vode, pogodno za nežno čišćenje plastike, stakla, postojećeg laka i alata. Antistatičko dejstvo smanjuje nakupljanje prašine i doprinosi pripremi površine pre lakiranja. Lako uklanja ulje, mast, prašinu, so i druge ostatke, a jednim radnim korakom objedinjuje čišćenje i antistatičku pripremu.",
+    "purpose": "Čišćenje alata i površina pre lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalno sredstvo za čišćenje"
+      },
+      {
+        "label": "Osnova",
+        "value": "Voda"
+      },
+      {
+        "label": "Antistatičko dejstvo",
+        "value": "Sprečava upadanje prašine u površinu"
+      },
+      {
+        "label": "Deterdžent",
+        "value": "Neagresivno sredstvo za čišćenje"
+      }
+    ],
+    "applications": [
+      "Pogodno za čišćenje alata ili površina kao što su plastika, staklo i postojeći lak",
+      "Čišćenje pištolja za lakiranje (preporučuje se prethodna proba)",
+      "Čišćenje površine pre procesa lakiranja (preporučuje se prethodna proba)"
+    ],
+    "benefits": [
+      {
+        "title": "Čišćenje svih površina",
+        "description": "Pogodno za čišćenje svih površina."
+      },
+      {
+        "title": "Lako uklanjanje prljavštine",
+        "description": "Lako uklanja prljavštinu kao što su ulje, mast, prašina, so i minerali."
+      },
+      {
+        "title": "Ušteda vremena",
+        "description": "Jedan radni korak objedinjuje čišćenje površine i antistatičko dejstvo."
+      }
+    ],
+    "advice": "Preporučuje se da se u svakom slučaju proveri kompatibilnost površine koja se čisti. 1K prajmeri se mogu rastvoriti. Obezbediti dovoljno vremena za isparavanje.",
+    "variants": {
+      "160.321": "5 L"
+    }
+  },
+  "cleaning/spraygun-cleaner-spraygun-cleaner": {
+    "sourceHash": "781364da62209dc6",
+    "productType": "Sredstvo za čišćenje pištolja",
+    "subtype": "Sredstvo za čišćenje pištolja za lakiranje",
+    "shortDescription": "Sredstvo na bazi rastvarača za temeljno i brzo završno čišćenje pištolja za lakiranje.",
+    "longDescription": "Spraygun cleaner namenjen je temeljnom, brzom i nežnom završnom čišćenju pištolja za lakiranje. Sveža zaprljanja od boja na bazi rastvarača i na bazi vode uklanjaju se bez ostatka. Jednostavna primena znatno štedi vreme i predstavlja mobilnu i isplativu alternativu mašini za pranje pištolja.",
+    "purpose": "Završno čišćenje pištolja za lakiranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sredstvo za čišćenje pištolja za lakiranje, na bazi rastvarača"
+      }
+    ],
+    "applications": [
+      "Čišćenje pištolja za lakiranje",
+      "Uklanjanje zaprljanja od boja na bazi vode i na bazi rastvarača"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavno i temeljno čišćenje",
+        "description": "Čišćenje je jednostavno i temeljno."
+      },
+      {
+        "title": "Ušteda vremena",
+        "description": "Primena znatno štedi vreme."
+      },
+      {
+        "title": "Isplativa alternativa",
+        "description": "Isplativa alternativa mašini za pranje pištolja za lakiranje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.627": "400 ml"
+    }
+  },
+  "cleaning/squeezer-squeezer-sponge": {
+    "sourceHash": "dca9a26037e706c8",
+    "productType": "Sunđer",
+    "subtype": "Sunđer za ceđenje",
+    "shortDescription": "Mek bubreći sunđer izrađen od upijajućih prirodnih vlakana.",
+    "longDescription": "Squeezer je mek bubreći sunđer izrađen od upijajućih prirodnih vlakana. Isporučuje se sa CARSYSTEM oznakom.",
+    "purpose": "Upijanje tečnosti",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mek bubreći sunđer"
+      },
+      {
+        "label": "Materijal",
+        "value": "Upijajuća prirodna vlakna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.987": "Sunđer za ceđenje sa CARSYSTEM oznakom"
+    }
+  },
+  "cleaning/staub-stop-super-wave-tack-cloth": {
+    "sourceHash": "99f5900ae7970f6c",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "Lepljiva krpa za prašinu",
+    "shortDescription": "Lepljiva krpa talasastog oblika za uklanjanje prašine pre lakiranja, sa većim kapacitetom upijanja.",
+    "longDescription": "Staub Stop Super Wave je lepljiva krpa za prašinu namenjena uklanjanju prašine pre lakiranja. Izrađena je od mešavine pamuka i viskoze u talasastom obliku, bez silikona. Talasasta površina povećava količinu upijanja, zadržava veliku količinu prašine i prilagođava se ruci i površini.",
+    "purpose": "Uklanjanje prašine pre lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Lepljiva krpa za prašinu"
+      },
+      {
+        "label": "Materijal",
+        "value": "Mešavina pamuka i viskoze u talasastom obliku"
+      },
+      {
+        "label": "Površina",
+        "value": "Talasasta"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Uklanjanje prašine pre lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Veći kapacitet upijanja",
+        "description": "Talasasti oblik povećava količinu upijanja."
+      },
+      {
+        "title": "Zadržava mnogo prašine",
+        "description": "Krpa zadržava veoma veliku količinu prašine."
+      },
+      {
+        "title": "Prilagođava se ruci",
+        "description": "Talasasti oblik se prilagođava ruci i površini."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "148.124": "1 komad / 80 x 80 cm"
+    }
+  },
+  "cleaning/staub-stop-tack-cloth": {
+    "sourceHash": "afdb1a26e9ca9d5e",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "Lepljiva krpa za prašinu",
+    "shortDescription": "Lepljiva krpa od viskoze sa efikasnom impregnacijom, za uklanjanje prašine pre lakiranja.",
+    "longDescription": "Staub Stop je lepljiva krpa za prašinu namenjena uklanjanju prašine pre lakiranja. Izrađena je od tkanine od viskoze, sa blago lepljivom površinom i vrlo efikasnom impregnacijom, bez silikona. Prašinu upija veoma dobro i pri tome se ne suši.",
+    "purpose": "Uklanjanje prašine pre lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Lepljiva krpa za prašinu"
+      },
+      {
+        "label": "Materijal",
+        "value": "Tkanina od viskoze"
+      },
+      {
+        "label": "Površina",
+        "value": "Blago lepljiva"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Uklanjanje prašine pre lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Vrlo dobro uklanjanje prašine",
+        "description": "Prašina se uklanja veoma dobro."
+      },
+      {
+        "title": "Ne suši se",
+        "description": "Krpa se ne suši."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "132.615": "1 komad",
+      "132.616": "5 komada (pakovanje)"
+    }
+  },
+  "cleaning/staub-stop-water-black-tack-cloth": {
+    "sourceHash": "dd57ffd652b69368",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "Lepljiva krpa za prašinu",
+    "shortDescription": "Crna lepljiva krpa od netkanog materijala za čišćenje bazne boje pre nanošenja bezbojnog laka.",
+    "longDescription": "Staub Stop Water Black namenjen je čišćenju površine pre nanošenja završnih premaza na bazi vode. Krpa od netkanog materijala sa hot-melt impregnacijom zadržava dvostruko više prašine od klasičnih lepljivih krpa i ne ostavlja ostatke lepka. Akrilno vezivo daje bolju trajnost i otpornost na habanje bez gubitka vlakana, a crna boja omogućava dobru vizuelnu kontrolu zaprljanih mesta.",
+    "purpose": "Uklanjanje prašine pre nanošenja bezbojnog laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Lepljiva krpa za prašinu"
+      },
+      {
+        "label": "Materijal",
+        "value": "Netkani materijal sa hot-melt impregnacijom"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona i bez otpuštanja vlakana"
+      }
+    ],
+    "applications": [
+      "Uklanjanje prašine",
+      "Posebno za čišćenje bazne boje pre nanošenja bezbojnog laka",
+      "Uklanjanje sitnih i srednjih čestica prašine u industriji"
+    ],
+    "benefits": [
+      {
+        "title": "Dobra vizuelna kontrola",
+        "description": "Crna krpa od netkanog materijala omogućava vrlo dobru vizuelnu kontrolu zaprljanih mesta na površini."
+      },
+      {
+        "title": "Pakovanje koje se zatvara",
+        "description": "Pakovanje se može ponovo zatvoriti."
+      },
+      {
+        "title": "Bez ostataka lepka",
+        "description": "Na očišćenoj površini ne ostavlja ostatke lepka."
+      },
+      {
+        "title": "Akrilno vezivo",
+        "description": "Akrilno vezivo daje bolju trajnost i otpornost na habanje bez gubitka vlakana."
+      },
+      {
+        "title": "Dvostruko više prašine",
+        "description": "Zadržava dvostruko više prašine od klasičnih lepljivih krpa."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.033": "10 kom. / crna / 32 x 40 cm"
+    }
+  },
+  "cleaning/staub-stop-water-tack-cloth": {
+    "sourceHash": "a3e32424befd8fa0",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "Lepljiva krpa za prašinu",
+    "shortDescription": "Lepljiva mikrofiber krpa sa impregnacijom rastvorljivom u vodi, za premaze na bazi vode.",
+    "longDescription": "Staub Stop Water namenjen je čišćenju površine pre nanošenja završnih premaza na bazi vode, kao i čišćenju osušenih premaza na bazi vode. Krpa je na bazi mikrofibera, sa impregnacijom rastvorljivom u vodi i bez silikona. Ne ostavlja lepljive ostatke ni tragove smole na očišćenoj površini.",
+    "purpose": "Upijanje prašine pre nanošenja bezbojnog laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Lepljiva krpa za prašinu"
+      },
+      {
+        "label": "Materijal",
+        "value": "Mikrofiber tkanina"
+      },
+      {
+        "label": "Impregnacija",
+        "value": "Rastvorljiva u vodi"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Upijanje prašine",
+      "Posebno za čišćenje bazne boje pre nanošenja bezbojnog laka"
+    ],
+    "benefits": [
+      {
+        "title": "Bez lepljivih ostataka",
+        "description": "Ne ostavlja lepljive ostatke."
+      },
+      {
+        "title": "Bez ostataka lepka",
+        "description": "Na očišćenoj površini ne ostavlja ostatke lepka."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "144.538": "10 kom."
+    }
+  }
+}

@@ -29,6 +29,15 @@ Ono što je postojalo ranije, a **nije** izvor istine za ovih 12:
 
 ## Dokazna lestvica
 
+> **Dopuna 2026-09-18 — red 0: `taxonomyCategory`.** Carsystem sync kategoriju
+> određuje pri uvozu, iz zvanične taksonomije proizvođača
+> (`data/carsystem-sync/taxonomy-map.json`: zvanična kategorija + zvanični
+> podnaslov → jedna od 12 kategorija). Klasifikator tu vrednost uzima pre ostalih
+> pravila, ali samo ako je jedna od 12 postojećih — uvoz ne može da uvede novu
+> kategoriju. Posle uvoza `Pribor` više nije prazan (89 Carsystem proizvoda), a
+> `LACKIERBEDARF` / Painting Supplies je prošao kroz mapu stavku po stavku.
+> Brojevi u tabeli ispod su stanje pre uvoza; aktuelne daje `npm run taxonomy:validate`.
+
 Klasifikacija koristi isključivo potvrđena polja proizvoda. Prvo pravilo koje se
 primeni pobeđuje:
 

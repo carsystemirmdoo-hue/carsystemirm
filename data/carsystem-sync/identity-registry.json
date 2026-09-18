@@ -1,0 +1,4223 @@
+{
+  "_comment": "Šifra artikla → naš slug. Sync ovaj fajl samo dopunjuje; red se nikad ne briše, jer je slug javni URL.",
+  "products": {
+    "carsystem-1k-easy-filler": {
+      "sourceKey": "painting/1k-easy-filler-1k-high-build-primer",
+      "articleNumbers": [
+        "151.522",
+        "151.523",
+        "159.584"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-1k-easy-primer": {
+      "sourceKey": "painting/1k-easy-primer-1k-filling-primer",
+      "articleNumbers": [
+        "151.537",
+        "151.538",
+        "151.539"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-1k-epoxy-primer": {
+      "sourceKey": "painting/1k-epoxy-primer-1k-epoxy-primer",
+      "articleNumbers": [
+        "151.958"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-1k-nc-filler": {
+      "sourceKey": "putties/1k-nc-filler-nitrocellulose-filler",
+      "articleNumbers": [
+        "158.139"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-carbo-clear-plus": {
+      "sourceKey": "painting/2k-carbo-clear-plus-2k-carbo-clear-coat",
+      "articleNumbers": [
+        "153.207",
+        "153.208",
+        "153.217",
+        "153.218"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-carbo-filler-transparent-1-0": {
+      "sourceKey": "painting/2k-carbo-filler-transparent-10-2k-polyurethane-filler",
+      "articleNumbers": [
+        "157.988",
+        "157.989"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-420": {
+      "sourceKey": "painting/2k-clear-voc-420-2k-clear-coat",
+      "articleNumbers": [
+        "142.953",
+        "144.107",
+        "144.108",
+        "144.138",
+        "144.139",
+        "144.140"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-cc-19-as": {
+      "sourceKey": "painting/2k-clear-voc-cc19-as-2k-clear-coat",
+      "articleNumbers": [
+        "156.931"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-cc-25-hs-as": {
+      "sourceKey": "painting/2k-clear-voc-cc25-hs-as-2k-clear-coat",
+      "articleNumbers": [
+        "160.417",
+        "160.418",
+        "160.419",
+        "160.420",
+        "160.422"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-cc-26-eco-x-15-60": {
+      "sourceKey": "painting/2k-clear-voc-cc26-eco-x-15-60-2k-clear-coat",
+      "articleNumbers": [
+        "160.613",
+        "160.614",
+        "160.615"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-hs-sr": {
+      "sourceKey": "painting/2k-clear-voc-hs-sr-2k-clear-coat",
+      "articleNumbers": [
+        "151.909",
+        "151.910",
+        "151.911",
+        "153.223",
+        "153.774"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-matt": {
+      "sourceKey": "painting/2k-clear-voc-matt-2k-clear-coat-matt",
+      "articleNumbers": [
+        "148.983",
+        "148.984",
+        "148.985",
+        "148.986"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-premium": {
+      "sourceKey": "painting/2k-clear-voc-premium-2k-clear-coat",
+      "articleNumbers": [
+        "146.714",
+        "147.019",
+        "147.862"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-clear-voc-speed-plus": {
+      "sourceKey": "painting/2k-clear-voc-speed-plus-2k-clear-coat",
+      "articleNumbers": [
+        "151.899",
+        "151.901",
+        "152.563"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-epoxy-fill-primer": {
+      "sourceKey": "painting/2k-epoxy-fill-primer-2k-spot-repair-epoxy-primer",
+      "articleNumbers": [
+        "159.158"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-filler-air-plus": {
+      "sourceKey": "painting/2k-filler-air-plus-2k-acrylic-filler",
+      "articleNumbers": [
+        "152.416",
+        "152.417",
+        "152.418",
+        "152.419",
+        "152.580"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-filler-vario-plus": {
+      "sourceKey": "painting/2k-filler-vario-plus-2k-acrylic-filler",
+      "articleNumbers": [
+        "147.682",
+        "152.057",
+        "152.058"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-filler-wet-on-wet-plus": {
+      "sourceKey": "painting/2k-filler-wet-on-wet-plus-2k-acryl-filler",
+      "articleNumbers": [
+        "153.455",
+        "153.456",
+        "153.457"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-high-speed-klarlack": {
+      "sourceKey": "painting/2k-high-speed-klarlack-2k-spot-repair-clear-coat",
+      "articleNumbers": [
+        "149.421"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-2k-voc-filler-540": {
+      "sourceKey": "painting/2k-voc-filler-540-2k-acrylic-filler",
+      "articleNumbers": [
+        "144.026",
+        "144.027",
+        "144.353",
+        "144.354",
+        "144.539",
+        "144.540",
+        "144.541",
+        "144.977",
+        "147.432",
+        "153.493"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-30-years-ltd-coverall-jacket": {
+      "sourceKey": "personal-safety/30-years-ltd-coverall-jacket-protective-coverall",
+      "articleNumbers": [
+        "159.654",
+        "159.655",
+        "159.656",
+        "159.657",
+        "159.658",
+        "159.659"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-acryl-thinner": {
+      "sourceKey": "painting/acryl-thinner-acrylic-thinner",
+      "articleNumbers": [
+        "141.479",
+        "150.331",
+        "152.456",
+        "153.171"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-activator": {
+      "sourceKey": "painting/activator-reaction-accelerator",
+      "articleNumbers": [
+        "147.695"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-adapter-for-cps-paint-cup-systems": {
+      "sourceKey": "painting/adapter-for-cps-paint-cup-systems-stainless-steel-and-aluminium-spray-gun-adapters",
+      "articleNumbers": [
+        "158.063",
+        "158.064",
+        "158.065",
+        "158.066",
+        "158.717",
+        "158.718",
+        "160.187",
+        "160.188",
+        "160.189",
+        "160.190",
+        "160.191",
+        "160.192",
+        "160.193",
+        "160.194"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-af-21-1k-filler": {
+      "sourceKey": "painting/af21-1k-filler-1k-hybrid-filler",
+      "articleNumbers": [
+        "158.244",
+        "158.245"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-af-21-x-pert": {
+      "sourceKey": "painting/af21-x-pert-2k-acrylic-filler",
+      "articleNumbers": [
+        "158.216",
+        "158.218",
+        "158.219",
+        "158.220",
+        "158.221",
+        "159.237",
+        "160.315"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-af-25-primer-wet-on-wet": {
+      "sourceKey": "painting/af25-primer-wet-on-wet-2k-acryl-filler",
+      "articleNumbers": [
+        "160.261",
+        "160.262",
+        "160.263",
+        "160.265",
+        "160.267",
+        "160.268"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-air-hose-air-hose-coil": {
+      "sourceKey": "painting-supplies/air-hose-air-hose-coil",
+      "articleNumbers": [
+        "143.131"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-air-hose-air-hose-complete": {
+      "sourceKey": "painting-supplies/air-hose-air-hose-complete",
+      "articleNumbers": [
+        "139.039"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-all-in-one-covers": {
+      "sourceKey": "masking/all-in-one-covers-interior-protection-5-in-1",
+      "articleNumbers": [
+        "159.480"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-alu-spezial": {
+      "sourceKey": "putties/alu-spezial-polyester-hard-putty",
+      "articleNumbers": [
+        "148.524"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-aluminium-mesh": {
+      "sourceKey": "putties/aluminium-mesh-aluminium-repair-mesh",
+      "articleNumbers": [
+        "126.041"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-anti-rust-putty": {
+      "sourceKey": "putties/anti-rust-putty-anti-rust-putty",
+      "articleNumbers": [
+        "149.612"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-applicator": {
+      "sourceKey": "bonding-sealing/applicator-applicator",
+      "articleNumbers": [
+        "139.325"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-auto-mask": {
+      "sourceKey": "masking/auto-mask-handy-masking-film-incl-tape",
+      "articleNumbers": [
+        "125.476",
+        "125.517",
+        "133.060"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-black-tape": {
+      "sourceKey": "masking/black-tape-fabric-tape",
+      "articleNumbers": [
+        "147.753"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-blacky": {
+      "sourceKey": "putties/blacky-rubber-spreader",
+      "articleNumbers": [
+        "137.433"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-blow-off-gun": {
+      "sourceKey": "painting-supplies/blow-off-gun-blow-off-gun",
+      "articleNumbers": [
+        "145.270",
+        "145.271",
+        "145.272",
+        "145.273"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-blow-off-stick": {
+      "sourceKey": "painting-supplies/blow-off-stick-blow-off-stick",
+      "articleNumbers": [
+        "154.123",
+        "154.124"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-bodyshirt-black": {
+      "sourceKey": "personal-safety/bodyshirt-black-functional-shirt-short-sleeved",
+      "articleNumbers": [
+        "158.536",
+        "158.537"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-booth-mask": {
+      "sourceKey": "painting-supplies/booth-mask-booth-protection-mask",
+      "articleNumbers": [
+        "149.358",
+        "149.359"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-booth-mask-stick": {
+      "sourceKey": "painting-supplies/booth-mask-stick-booth-protection-mask",
+      "articleNumbers": [
+        "149.338",
+        "149.339",
+        "149.340"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-booth-mask-white": {
+      "sourceKey": "painting-supplies/booth-mask-white-booth-protection-mask",
+      "articleNumbers": [
+        "153.205"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-bpo-hardener": {
+      "sourceKey": "putties/bpo-hardener-hardener",
+      "articleNumbers": [
+        "132.413"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-brush-set": {
+      "sourceKey": "painting/brush-set-set-of-brushes",
+      "articleNumbers": [
+        "140.970"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-bumper-paint": {
+      "sourceKey": "painting/bumper-paint-structurant-paint-for-plastics",
+      "articleNumbers": [
+        "147.447"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-bumper-paint-spray": {
+      "sourceKey": "painting/bumper-paint-spray-bumper-spray",
+      "articleNumbers": [
+        "142.820",
+        "142.821"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-bumper-stand": {
+      "sourceKey": "painting-supplies/bumper-stand-bumper-paint-stand",
+      "articleNumbers": [
+        "159.413",
+        "159.702"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-bumper-structurant-spray": {
+      "sourceKey": "painting/bumper-structurant-spray-bumper-structurant-spray-black",
+      "articleNumbers": [
+        "142.982"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-c-wax-c-80": {
+      "sourceKey": "finish/c-wax-c-80-high-gloss-finish-sealer",
+      "articleNumbers": [
+        "158.243"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-can-scraper": {
+      "sourceKey": "painting/can-scraper-plastic-mixing-stick",
+      "articleNumbers": [
+        "159.672"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cap-black": {
+      "sourceKey": "merchandising-materials/carsystem-cap-black-onesize",
+      "articleNumbers": [
+        "158.927"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cap-camouflage": {
+      "sourceKey": "merchandising-materials/carsystem-cap-camouflage-onesize",
+      "articleNumbers": [
+        "160.493"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-clean-double-blue": {
+      "sourceKey": "cleaning/car-clean-double-blue-paper-cleaning-cloth",
+      "articleNumbers": [
+        "134.580"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-clean-double-white": {
+      "sourceKey": "cleaning/car-clean-double-white-paper-cleaning-cloth",
+      "articleNumbers": [
+        "141.253"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-clean-multi": {
+      "sourceKey": "cleaning/car-clean-multi-cleaning-cloth",
+      "articleNumbers": [
+        "134.577"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-clean-multi-extreme-box": {
+      "sourceKey": "cleaning/car-clean-multi-extreme-box-cellulose-cleaning-cloth",
+      "articleNumbers": [
+        "142.765"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-clean-triple-blue": {
+      "sourceKey": "cleaning/car-clean-triple-blue-paper-cleaning-cloth",
+      "articleNumbers": [
+        "134.578",
+        "134.579"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-clean-trolley": {
+      "sourceKey": "painting-supplies/car-clean-trolley-cleaning-paper-stand",
+      "articleNumbers": [
+        "139.912",
+        "139.913"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-mop-white": {
+      "sourceKey": "finish/car-mop-white-polishing-pad",
+      "articleNumbers": [
+        "133.149"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-polish-roll": {
+      "sourceKey": "finish/car-polish-roll-disposable-polishing-cloth",
+      "articleNumbers": [
+        "134.582"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-car-sticker-plain": {
+      "sourceKey": "merchandising-materials/carsystem-car-sticker-plain-four-formats",
+      "articleNumbers": [
+        "158.829",
+        "158.830",
+        "158.831",
+        "158.832",
+        "158.833",
+        "158.834"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-carbo-putty": {
+      "sourceKey": "putties/carbo-putty-polyester-carbon-putty",
+      "articleNumbers": [
+        "148.018"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-carbo-spray": {
+      "sourceKey": "putties/carbo-spray-polyester-sprayable-putty-for-carbon-parts",
+      "articleNumbers": [
+        "148.019"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-carbo-spray-thinner": {
+      "sourceKey": "putties/carbo-spray-thinner-carbo-spray-thinner",
+      "articleNumbers": [
+        "148.234"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cc-20-x-pert": {
+      "sourceKey": "painting/cc20-x-pert-2k-clear-coat",
+      "articleNumbers": [
+        "157.450",
+        "157.451",
+        "158.423"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cc-21-x-press-five": {
+      "sourceKey": "painting/cc21-x-press-five-2k-clear-coat",
+      "articleNumbers": [
+        "158.249",
+        "158.250",
+        "158.251"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-classic-coverall-jacket-anthracite": {
+      "sourceKey": "personal-safety/classic-coverall-jacket-anthracite-protective-coverall",
+      "articleNumbers": [
+        "159.194",
+        "159.195",
+        "159.196",
+        "159.197",
+        "159.198",
+        "159.199",
+        "159.200"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-classic-coverall-pants": {
+      "sourceKey": "personal-safety/classic-coverall-pants-protective-coverall",
+      "articleNumbers": [
+        "159.180",
+        "159.181",
+        "159.182",
+        "159.183",
+        "159.184",
+        "159.185",
+        "159.186"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-classicline-soft-pad": {
+      "sourceKey": "abrasives/classicline-soft-pad-foam-abrasive-140-x-115-mm",
+      "articleNumbers": [
+        "138.924",
+        "138.925",
+        "138.926",
+        "138.927"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cleaning-wipes": {
+      "sourceKey": "cleaning/cleaning-wipes-cleaning-wipes",
+      "articleNumbers": [
+        "156.458"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-clear-coat-spray": {
+      "sourceKey": "painting/clear-coat-spray-paint-spray-transparent",
+      "articleNumbers": [
+        "126.025"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cockpit-spray": {
+      "sourceKey": "cleaning/cockpit-spray-cleaning-spray",
+      "articleNumbers": [
+        "126.020"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-coding-caps": {
+      "sourceKey": "cleaning/coding-caps-colour-code-rings",
+      "articleNumbers": [
+        "152.642"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-coffee-cup-black": {
+      "sourceKey": "merchandising-materials/coffee-cup-black-300-ml",
+      "articleNumbers": [
+        "157.219"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-color-match-card-paper": {
+      "sourceKey": "painting/color-match-card-paper-colour-match-card",
+      "articleNumbers": [
+        "141.109"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-colour-match-lamp": {
+      "sourceKey": "painting-supplies/colour-match-lamp-day-light-lamp",
+      "articleNumbers": [
+        "155.614"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-compound-x1500-hc": {
+      "sourceKey": "finish/compound-x1500-hc-high-performance-cutting-compound",
+      "articleNumbers": [
+        "160.446"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-control-spray": {
+      "sourceKey": "abrasives/control-spray-sanding-control-spray",
+      "articleNumbers": [
+        "125.779"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cordless-sander-csh-cos01": {
+      "sourceKey": "finish/cordless-sander-csh-cos01-cordless-random-orbital-sander",
+      "articleNumbers": [
+        "160.108",
+        "160.109"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-coverall-2-0": {
+      "sourceKey": "personal-safety/coverall-20-disposable-protective-suit-20",
+      "articleNumbers": [
+        "160.275",
+        "160.276",
+        "160.277",
+        "160.278",
+        "160.279",
+        "160.280"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-coverall-black-suit": {
+      "sourceKey": "personal-safety/coverall-black-suit-protective-coverall",
+      "articleNumbers": [
+        "159.113",
+        "159.114",
+        "159.115",
+        "159.116",
+        "159.117",
+        "159.118"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-crash-film": {
+      "sourceKey": "masking/crash-film-self-adhesive-protective-covering-film",
+      "articleNumbers": [
+        "160.381"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-cutter-knife-black": {
+      "sourceKey": "merchandising-materials/cutter-knife-black-140-mm",
+      "articleNumbers": [
+        "156.281"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dispenser-bottle-incl-cap": {
+      "sourceKey": "finish/dispenser-bottle-incl-cap-dispenser-bottle",
+      "articleNumbers": [
+        "156.575"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dispenser-for-5-kg-polish": {
+      "sourceKey": "finish/dispenser-for-5-kg-polish-dispenser",
+      "articleNumbers": [
+        "156.460"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dispenser-for-paint-strainers": {
+      "sourceKey": "painting/dispenser-for-paint-strainers-dispenser",
+      "articleNumbers": [
+        "146.960"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dispenser-multi-mix": {
+      "sourceKey": "painting/dispenser-multi-mix-wall-bracket-for-multi-mix-cups",
+      "articleNumbers": [
+        "137.664",
+        "137.665",
+        "137.666",
+        "137.667"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-doormat-logo-black": {
+      "sourceKey": "merchandising-materials/doormat-logo-black-50-x-75-cm-and-90-x-60-cm",
+      "articleNumbers": [
+        "158.622",
+        "158.623"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-double-sanding-soft-pad": {
+      "sourceKey": "abrasives/double-sanding-soft-pad-foam-abrasive-120-x-98-x-13-mm",
+      "articleNumbers": [
+        "160.183",
+        "160.185",
+        "160.186"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dry-coat-2-0": {
+      "sourceKey": "abrasives/dry-coat-20-sanding-control-system",
+      "articleNumbers": [
+        "158.487",
+        "158.488",
+        "158.489",
+        "158.490"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dualmatic": {
+      "sourceKey": "putties/dualmatic-putty-dispenser-manual",
+      "articleNumbers": [
+        "123.892",
+        "126.854",
+        "126.861"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-dust-needle": {
+      "sourceKey": "painting/dust-needle-dust-needle",
+      "articleNumbers": [
+        "140.971",
+        "140.972"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-easy-clean-box": {
+      "sourceKey": "putties/easy-clean-box-putty-spreader-cleaning-box",
+      "articleNumbers": [
+        "153.206",
+        "159.363"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-easy-mask": {
+      "sourceKey": "masking/easy-mask-masking-film-roll",
+      "articleNumbers": [
+        "151.181",
+        "151.199"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-easy-mask-ii": {
+      "sourceKey": "masking/easy-mask-ii-masking-film-transparent-roll",
+      "articleNumbers": [
+        "160.434",
+        "160.435"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ef-21-ep-filler": {
+      "sourceKey": "painting/ef21-ep-filler-2k-hybrid-filler",
+      "articleNumbers": [
+        "158.248"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-elastic-beige": {
+      "sourceKey": "putties/elastic-beige-polyester-fine-putty",
+      "articleNumbers": [
+        "127.976"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-elastic-green": {
+      "sourceKey": "putties/elastic-green-polyester-fine-putty",
+      "articleNumbers": [
+        "146.708"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-etch-primer": {
+      "sourceKey": "painting/etch-primer-primer",
+      "articleNumbers": [
+        "143.028"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-excenter-back-pad-multi-m": {
+      "sourceKey": "abrasives/excenter-back-pad-multi-m-back-pad-150-mm",
+      "articleNumbers": [
+        "156.570"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-excenter-back-pad-t-19": {
+      "sourceKey": "abrasives/excenter-back-pad-t19-back-pad-150-mm",
+      "articleNumbers": [
+        "156.227",
+        "156.563",
+        "156.564"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-excenter-classic": {
+      "sourceKey": "abrasives/excenter-classic-random-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "139.653"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-explorer-ltd-2-piece-coverall": {
+      "sourceKey": "personal-safety/explorer-ltd-2-piece-coverall-protective-coverall",
+      "articleNumbers": [
+        "158.682",
+        "158.683",
+        "158.684",
+        "158.685",
+        "158.687",
+        "158.688",
+        "158.689",
+        "158.690",
+        "158.691",
+        "158.692",
+        "158.693",
+        "159.120",
+        "159.121"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-faser": {
+      "sourceKey": "putties/faser-polyester-glass-fibre-reinforced-putty",
+      "articleNumbers": [
+        "138.443"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-fill-putty": {
+      "sourceKey": "putties/fill-putty-polyester-fill-putty",
+      "articleNumbers": [
+        "124.550",
+        "124.552"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-fine-block": {
+      "sourceKey": "abrasives/fine-block-fine-sanding-block",
+      "articleNumbers": [
+        "140.979",
+        "140.980",
+        "140.981",
+        "140.982"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-fine-line-tape-blue": {
+      "sourceKey": "masking/fine-line-tape-blue-fine-line-tape",
+      "articleNumbers": [
+        "140.083",
+        "140.084",
+        "140.085",
+        "140.086",
+        "140.087"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-fine-putty": {
+      "sourceKey": "putties/fine-putty-polyester-fine-putty",
+      "articleNumbers": [
+        "124.124",
+        "124.126"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-back-pad": {
+      "sourceKey": "finish/finish-back-pad-finish-back-pad",
+      "articleNumbers": [
+        "139.206"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-back-pad-m-14": {
+      "sourceKey": "finish/finish-back-pad-m-14-finish-back-pad",
+      "articleNumbers": [
+        "160.443"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-clay": {
+      "sourceKey": "cleaning/finish-clay-cleaning-clay",
+      "articleNumbers": [
+        "147.468"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-control-foam-c-99": {
+      "sourceKey": "finish/finish-control-foam-c-99-control-foam",
+      "articleNumbers": [
+        "156.614"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-foam-black-ah": {
+      "sourceKey": "finish/finish-foam-black-ah-polishing-pad",
+      "articleNumbers": [
+        "157.064",
+        "157.065"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-foam-orange": {
+      "sourceKey": "finish/finish-foam-orange-polishing-pad",
+      "articleNumbers": [
+        "153.076",
+        "153.088"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-foam-white-ah": {
+      "sourceKey": "finish/finish-foam-white-ah-polishing-pad",
+      "articleNumbers": [
+        "157.052",
+        "157.053"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-quadra-pad-c-10": {
+      "sourceKey": "finish/finish-quadra-pad-c-10-polishing-pad",
+      "articleNumbers": [
+        "151.640",
+        "151.905",
+        "151.906"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-sander-back-pad": {
+      "sourceKey": "abrasives/finish-sander-back-pad-back-pad-77-mm",
+      "articleNumbers": [
+        "144.917"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-sander-rc-9332": {
+      "sourceKey": "abrasives/finish-sander-rc-9332-random-orbital-sander-75-mm-pneumatic",
+      "articleNumbers": [
+        "143.388"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-sandwich-pad-c-30": {
+      "sourceKey": "finish/finish-sandwich-pad-c-30-polishing-pad",
+      "articleNumbers": [
+        "151.639",
+        "151.908"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-waffle-foam-black-ah": {
+      "sourceKey": "finish/finish-waffle-foam-black-ah-polishing-pad",
+      "articleNumbers": [
+        "157.066",
+        "157.067"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-finish-waffle-pad-orange": {
+      "sourceKey": "finish/finish-waffle-pad-orange-polishing-pad",
+      "articleNumbers": [
+        "153.114"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-flex": {
+      "sourceKey": "putties/flex-polyester-plastic-putty",
+      "articleNumbers": [
+        "134.796"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-foam-tape": {
+      "sourceKey": "masking/foam-tape-foam-tape",
+      "articleNumbers": [
+        "148.861",
+        "148.862"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-foam-tape-t-soft": {
+      "sourceKey": "masking/foam-tape-t-soft-foam-tape",
+      "articleNumbers": [
+        "157.974"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-glas": {
+      "sourceKey": "putties/glas-polyester-glass-fibre-reinforced-putty",
+      "articleNumbers": [
+        "127.974",
+        "130.854"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-glas-white": {
+      "sourceKey": "putties/glas-white-polyester-glass-fibre-reinforced-putty",
+      "articleNumbers": [
+        "144.808"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-glass-fibre-fleece": {
+      "sourceKey": "putties/glass-fibre-fleece-40-g-per-m2",
+      "articleNumbers": [
+        "125.421",
+        "125.422"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-glass-fibre-mat": {
+      "sourceKey": "putties/glass-fibre-mat-300-g-per-m2",
+      "articleNumbers": [
+        "125.423",
+        "125.424"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-glass-fibre-reinforced-putty": {
+      "sourceKey": "putties/glass-fibre-reinforced-putty-polyester-glass-fibre-reinforced-putty",
+      "articleNumbers": [
+        "124.036"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-grip-to-stick-interface-pad": {
+      "sourceKey": "abrasives/grip-to-stick-interface-pad-interface-pad-oe-30-mm",
+      "articleNumbers": [
+        "159.677"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-gun-clean-set": {
+      "sourceKey": "cleaning/gun-clean-set-gun-cleaning-set",
+      "articleNumbers": [
+        "157.520"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-h2o-cleaner": {
+      "sourceKey": "cleaning/h2o-cleaner-cleaner",
+      "articleNumbers": [
+        "151.953"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-hand-cleaner": {
+      "sourceKey": "personal-safety/hand-cleaner-hand-cleaner",
+      "articleNumbers": [
+        "155.356"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-hand-cleaner-extreme": {
+      "sourceKey": "personal-safety/hand-cleaner-extreme-hand-cleaner",
+      "articleNumbers": [
+        "155.348",
+        "155.357"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-hand-mask": {
+      "sourceKey": "masking/hand-mask-handy-masking-film-incl-tape",
+      "articleNumbers": [
+        "144.547",
+        "144.549",
+        "144.550",
+        "144.551",
+        "144.552",
+        "144.553"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-high-gloss-additive": {
+      "sourceKey": "painting/high-gloss-additive-high-gloss-additive",
+      "articleNumbers": [
+        "152.788"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-hoist-flag": {
+      "sourceKey": "merchandising-materials/hoist-flag-120-x-300-cm",
+      "articleNumbers": [
+        "137.325"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-hpp-primer": {
+      "sourceKey": "painting/hpp-primer-1k-plastic-primer",
+      "articleNumbers": [
+        "154.706",
+        "154.707",
+        "154.708",
+        "154.712"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-hs-acryl-tape": {
+      "sourceKey": "bonding-sealing/hs-acryl-tape-double-sided-adhesive-tape",
+      "articleNumbers": [
+        "137.072",
+        "137.073",
+        "137.074",
+        "147.024"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-interface-pad": {
+      "sourceKey": "abrasives/interface-pad-interface-pad-150-mm",
+      "articleNumbers": [
+        "156.225",
+        "156.226"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-iso-ve-7030": {
+      "sourceKey": "cleaning/iso-ve-7030-isopropanol-cleaner",
+      "articleNumbers": [
+        "154.034",
+        "157.345"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-japanese-putty-knife": {
+      "sourceKey": "putties/japanese-putty-knife-japanese-steel-spreader",
+      "articleNumbers": [
+        "139.356"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-100": {
+      "sourceKey": "bonding-sealing/ks-100-underbody-protection-bitumen",
+      "articleNumbers": [
+        "126.032"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-1000": {
+      "sourceKey": "bonding-sealing/ks-1000-stone-chip-protection",
+      "articleNumbers": [
+        "149.264",
+        "149.265",
+        "149.266"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-1050": {
+      "sourceKey": "bonding-sealing/ks-1050-stone-chip-protection",
+      "articleNumbers": [
+        "126.022",
+        "126.023"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-200": {
+      "sourceKey": "bonding-sealing/ks-200-cavity-protection",
+      "articleNumbers": [
+        "126.062"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-250": {
+      "sourceKey": "bonding-sealing/ks-250-cavity-protection",
+      "articleNumbers": [
+        "126.061",
+        "159.332"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-300-2": {
+      "sourceKey": "bonding-sealing/ks-3002-cavity-wax",
+      "articleNumbers": [
+        "160.064"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-3000-plus": {
+      "sourceKey": "bonding-sealing/ks-3000-plus-hs-stone-chip-protection",
+      "articleNumbers": [
+        "152.622",
+        "152.804"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-400": {
+      "sourceKey": "bonding-sealing/ks-400-rust-protection-wax",
+      "articleNumbers": [
+        "125.468"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-4000-2": {
+      "sourceKey": "bonding-sealing/ks-40002-stone-chip-protection-water-based",
+      "articleNumbers": [
+        "160.067"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-50-2": {
+      "sourceKey": "bonding-sealing/ks-502-brushable-seam-sealer",
+      "articleNumbers": [
+        "160.007"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-500-2": {
+      "sourceKey": "bonding-sealing/ks-5002-underbody-protection-bitumen",
+      "articleNumbers": [
+        "160.065"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-550": {
+      "sourceKey": "bonding-sealing/ks-550-underbody-protection-bitumen",
+      "articleNumbers": [
+        "126.029"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-800": {
+      "sourceKey": "bonding-sealing/ks-800-underbody-protection-wax",
+      "articleNumbers": [
+        "126.095"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-850": {
+      "sourceKey": "bonding-sealing/ks-850-underbody-protection-wax",
+      "articleNumbers": [
+        "126.094"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-brush": {
+      "sourceKey": "bonding-sealing/ks-brush-nylon-brush",
+      "articleNumbers": [
+        "141.453"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-dual-gun": {
+      "sourceKey": "bonding-sealing/ks-dual-gun-underbody-protection-gun",
+      "articleNumbers": [
+        "126.040",
+        "126.048",
+        "126.058"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ks-gun": {
+      "sourceKey": "bonding-sealing/ks-gun-underbody-protection-gun",
+      "articleNumbers": [
+        "142.279",
+        "147.956",
+        "157.032",
+        "158.017"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-lamb-wool-pad-gold-s": {
+      "sourceKey": "finish/lamb-wool-pad-gold-s-lamb-wool-pad",
+      "articleNumbers": [
+        "157.166",
+        "157.290"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-lamb-wool-pad-white-s-edge": {
+      "sourceKey": "finish/lamb-wool-pad-white-s-edge-lamb-wool-pad",
+      "articleNumbers": [
+        "157.163",
+        "157.232"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-latex-gloves": {
+      "sourceKey": "personal-safety/latex-gloves-protective-gloves",
+      "articleNumbers": [
+        "157.981"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-latex-hand-i-premium": {
+      "sourceKey": "personal-safety/latex-hand-i-premium-protection-gloves",
+      "articleNumbers": [
+        "152.011",
+        "152.012"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-led-lamp": {
+      "sourceKey": "painting-supplies/led-lamp-led-lamp",
+      "articleNumbers": [
+        "155.037"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-lighter-black": {
+      "sourceKey": "merchandising-materials/lighter-black-refillable",
+      "articleNumbers": [
+        "148.281"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-liquid-masking": {
+      "sourceKey": "masking/liquid-masking-liquid-masking-film",
+      "articleNumbers": [
+        "138.718"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-liquid-putty": {
+      "sourceKey": "putties/liquid-putty-polyester-liquid-putty",
+      "articleNumbers": [
+        "143.496"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-magnetic-flat-strip": {
+      "sourceKey": "painting-supplies/magnetic-flat-strip-flat-strip",
+      "articleNumbers": [
+        "137.214"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-magnetic-gun-holder-plus": {
+      "sourceKey": "painting-supplies/magnetic-gun-holder-plus-paint-gun-holder",
+      "articleNumbers": [
+        "159.969"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-magnetic-sanding-protection": {
+      "sourceKey": "painting-supplies/magnetic-sanding-protection-edge-protection",
+      "articleNumbers": [
+        "130.992"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-masking-film-blue": {
+      "sourceKey": "masking/masking-film-blue-masking-film-roll",
+      "articleNumbers": [
+        "155.569",
+        "155.570",
+        "155.571"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-masking-film-green": {
+      "sourceKey": "masking/masking-film-green-masking-film-roll",
+      "articleNumbers": [
+        "155.565",
+        "155.567",
+        "155.568"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-masking-film-yellow": {
+      "sourceKey": "masking/masking-film-yellow-masking-film-roll",
+      "articleNumbers": [
+        "155.572",
+        "155.573",
+        "156.948"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-masking-paper-master-ii": {
+      "sourceKey": "masking/masking-paper-master-ii-masking-paper-roll",
+      "articleNumbers": [
+        "159.878",
+        "159.880",
+        "159.882",
+        "159.883",
+        "159.884"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-masking-paper-top-ii": {
+      "sourceKey": "masking/masking-paper-top-ii-masking-paper-roll",
+      "articleNumbers": [
+        "155.528",
+        "155.529",
+        "155.530",
+        "155.531",
+        "155.532"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-master-tape-green": {
+      "sourceKey": "masking/master-tape-green-masking-tape",
+      "articleNumbers": [
+        "149.221",
+        "149.222",
+        "149.223",
+        "149.225",
+        "149.226"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-master-tape-ii": {
+      "sourceKey": "masking/master-tape-ii-masking-tape",
+      "articleNumbers": [
+        "140.201",
+        "140.202",
+        "140.203",
+        "140.204",
+        "140.205",
+        "140.206"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-metallic": {
+      "sourceKey": "putties/metallic-polyester-fill-putty",
+      "articleNumbers": [
+        "127.911",
+        "130.852"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-micro-fiber-cloth-2-in-1": {
+      "sourceKey": "finish/micro-fiber-cloth-2-in-1",
+      "articleNumbers": [
+        "156.589"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-micro-fiber-cloth-fluffy": {
+      "sourceKey": "finish/micro-fiber-cloth-fluffy",
+      "articleNumbers": [
+        "156.590"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-micro-fiber-cloth-polish-extreme": {
+      "sourceKey": "finish/micro-fiber-cloth-polish-extreme",
+      "articleNumbers": [
+        "156.591"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-micro-fiber-cloth-sky-blue": {
+      "sourceKey": "finish/micro-fiber-cloth-sky-blue",
+      "articleNumbers": [
+        "156.587"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-micro-fiber-cloth-wave-cut": {
+      "sourceKey": "finish/micro-fiber-cloth-wave-cut",
+      "articleNumbers": [
+        "156.588"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-micro-tip": {
+      "sourceKey": "painting/micro-tip-repair-tip",
+      "articleNumbers": [
+        "140.976"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-microfiber-x300-duo": {
+      "sourceKey": "finish/microfiber-x300-duo-micro-fiber-cloth",
+      "articleNumbers": [
+        "160.457"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mini-back-pad": {
+      "sourceKey": "abrasives/mini-back-pad-finish-back-pad",
+      "articleNumbers": [
+        "144.768",
+        "144.769"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mini-sanding-machine-rc-9330": {
+      "sourceKey": "finish/mini-sanding-machine-rc-9330-mini-sanding-machine-pneumatic",
+      "articleNumbers": [
+        "143.724"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mixing-stick-black": {
+      "sourceKey": "painting/mixing-stick-black-plastic-mixing-stick",
+      "articleNumbers": [
+        "144.752"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mixing-stick-fast": {
+      "sourceKey": "painting/mixing-stick-fast-plastic-mixing-stick",
+      "articleNumbers": [
+        "159.834"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mmir-knife-premium": {
+      "sourceKey": "masking/mmir-knife-premium-cutter-tool",
+      "articleNumbers": [
+        "151.513"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mmir-mask-aqua-tec": {
+      "sourceKey": "masking/mmir-mask-aqua-tec-masking-film-roll",
+      "articleNumbers": [
+        "151.038",
+        "152.055"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mmir-mask-light-green": {
+      "sourceKey": "masking/mmir-mask-light-green-masking-film-roll",
+      "articleNumbers": [
+        "149.587",
+        "150.453",
+        "150.454",
+        "150.455"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mmir-trolley": {
+      "sourceKey": "painting-supplies/mmir-trolley-masking-film-stand",
+      "articleNumbers": [
+        "125.737"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mmir-trolley-box": {
+      "sourceKey": "painting-supplies/mmir-trolley-box-masking-film-stand",
+      "articleNumbers": [
+        "151.514"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-mount-tape": {
+      "sourceKey": "bonding-sealing/mount-tape-double-sided-adhesive-tape",
+      "articleNumbers": [
+        "125.712",
+        "125.713",
+        "125.720"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ms-air-gun": {
+      "sourceKey": "bonding-sealing/ms-air-gun-ms-spray-gun",
+      "articleNumbers": [
+        "125.681",
+        "131.563",
+        "140.075"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-ms-coupling": {
+      "sourceKey": "painting-supplies/ms-coupling-ms-coupling",
+      "articleNumbers": [
+        "139.036"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi": {
+      "sourceKey": "putties/multi-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "127.977",
+        "128.145",
+        "130.857",
+        "132.214",
+        "134.155"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-black-rapid": {
+      "sourceKey": "putties/multi-black-rapid-multifunctional-polyester-putty",
+      "articleNumbers": [
+        "159.755",
+        "160.343"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-blue-rapid-changer-sf": {
+      "sourceKey": "putties/multi-blue-rapid-changer-sf-multifunctional-polyester-putty-styrene-free",
+      "articleNumbers": [
+        "159.923"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-cleaning-wipes": {
+      "sourceKey": "cleaning/multi-cleaning-wipes-cleaning-wipes",
+      "articleNumbers": [
+        "159.782"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-flow": {
+      "sourceKey": "putties/multi-flow-polyester-multi-light-putty",
+      "articleNumbers": [
+        "160.378"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-green-changer": {
+      "sourceKey": "putties/multi-green-changer-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "157.622"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-green-glas": {
+      "sourceKey": "putties/multi-green-glas-multifunctional-fiberglass-reinforced-polyester-putty",
+      "articleNumbers": [
+        "146.707"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-green-glas-light": {
+      "sourceKey": "putties/multi-green-glas-light-multifunctional-fiberglass-reinforced-lightweight-polyester-putty",
+      "articleNumbers": [
+        "158.116"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-green-plus-1-0-super-light": {
+      "sourceKey": "putties/multi-green-plus-10-super-light-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "152.357",
+        "152.978"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-green-rapid": {
+      "sourceKey": "putties/multi-green-rapid-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "158.233"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-green-sf": {
+      "sourceKey": "putties/multi-green-sf-multifuncional-polyester-putty-styrene-free",
+      "articleNumbers": [
+        "156.543"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-light": {
+      "sourceKey": "putties/multi-light-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "141.503",
+        "142.155"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-mix-bucket": {
+      "sourceKey": "painting/multi-mix-bucket-paint-mixing-bucket",
+      "articleNumbers": [
+        "144.649",
+        "145.315"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-mix-cup": {
+      "sourceKey": "painting/multi-mix-cup-disposable-mixing-cups",
+      "articleNumbers": [
+        "140.545",
+        "140.546",
+        "140.547",
+        "140.548"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-mix-lids": {
+      "sourceKey": "painting/multi-mix-lids-disposable-lids",
+      "articleNumbers": [
+        "140.549",
+        "140.550",
+        "140.551",
+        "140.552"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-plus": {
+      "sourceKey": "putties/multi-plus-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "138.451"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-silver-light": {
+      "sourceKey": "putties/multi-silver-light-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "140.795"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-soft": {
+      "sourceKey": "putties/multi-soft-multifuncional-polyester-putty",
+      "articleNumbers": [
+        "137.206"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-stand": {
+      "sourceKey": "painting-supplies/multi-stand-paint-stand",
+      "articleNumbers": [
+        "159.563"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-strain": {
+      "sourceKey": "painting/multi-strain-paint-strainer",
+      "articleNumbers": [
+        "146.957",
+        "146.958"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-multi-super-flex": {
+      "sourceKey": "putties/multi-super-flex-polyester-putty-highly-elastic",
+      "articleNumbers": [
+        "153.284"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-nano-carnauba-wax": {
+      "sourceKey": "finish/nano-carnauba-wax-high-gloss-wax",
+      "articleNumbers": [
+        "151.945"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-nano-easy-cleaner": {
+      "sourceKey": "cleaning/nano-easy-cleaner-cleaning-sponge",
+      "articleNumbers": [
+        "143.383"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-neopren-hand": {
+      "sourceKey": "personal-safety/neopren-hand-protection-gloves",
+      "articleNumbers": [
+        "140.939",
+        "140.940",
+        "140.941"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-nippel-nipple-for-quick-connector": {
+      "sourceKey": "painting-supplies/nippel-nipple-for-quick-connector",
+      "articleNumbers": [
+        "143.129"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-nippel-nipple-with-inner-thread": {
+      "sourceKey": "painting-supplies/nippel-nipple-with-inner-thread",
+      "articleNumbers": [
+        "139.034"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-nippel-nipple-with-outer-thread": {
+      "sourceKey": "painting-supplies/nippel-nipple-with-outer-thread",
+      "articleNumbers": [
+        "139.033"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-nitril-hand-premium-black": {
+      "sourceKey": "personal-safety/nitril-hand-premium-black-protection-gloves",
+      "articleNumbers": [
+        "154.347",
+        "154.348",
+        "156.623",
+        "156.624"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-orbital-sander-csh-cms01-kit": {
+      "sourceKey": "finish/orbital-sander-csh-cms01-kit-cordless-orbital-sander",
+      "articleNumbers": [
+        "159.067"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-pad-saver": {
+      "sourceKey": "abrasives/pad-saver-interface-pad-150-mm",
+      "articleNumbers": [
+        "154.099"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-padded-jacket-black-2025": {
+      "sourceKey": "merchandising-materials/padded-jacket-black-2025-size-s-3xl",
+      "articleNumbers": [
+        "160.037",
+        "160.038",
+        "160.039",
+        "160.040",
+        "160.041",
+        "160.042"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-padded-vest-black": {
+      "sourceKey": "merchandising-materials/padded-vest-black-size-s-3xl",
+      "articleNumbers": [
+        "159.288",
+        "159.289",
+        "159.290",
+        "159.291",
+        "159.292",
+        "159.293"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-padded-vest-black-2025": {
+      "sourceKey": "merchandising-materials/padded-vest-black-2025-size-s-3xl",
+      "articleNumbers": [
+        "160.027",
+        "160.028",
+        "160.029",
+        "160.030",
+        "160.031",
+        "160.032"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-arrestor-ii": {
+      "sourceKey": "painting-supplies/paint-arrestor-ii-paint-mist-separator",
+      "articleNumbers": [
+        "160.136",
+        "160.137",
+        "160.138",
+        "160.139",
+        "160.140",
+        "160.141",
+        "160.142",
+        "160.143",
+        "160.144",
+        "160.145",
+        "160.146",
+        "160.147",
+        "160.148"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-overall-blue": {
+      "sourceKey": "personal-safety/paint-overall-blue-protective-coverall",
+      "articleNumbers": [
+        "138.472",
+        "138.473",
+        "139.232",
+        "139.233",
+        "139.234",
+        "152.968"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-planer": {
+      "sourceKey": "abrasives/paint-planer-paint-planer-and-holder",
+      "articleNumbers": [
+        "142.995",
+        "142.996"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-strainer": {
+      "sourceKey": "painting/paint-strainer-paint-strainer",
+      "articleNumbers": [
+        "158.430",
+        "158.431"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-system-cps-2-0": {
+      "sourceKey": "painting/paint-system-cps-20-disposable-paint-cup-system-with-ring-lock",
+      "articleNumbers": [
+        "159.311",
+        "159.312",
+        "159.315",
+        "159.318",
+        "159.321",
+        "159.322",
+        "159.324",
+        "159.325",
+        "159.643",
+        "159.644",
+        "159.670",
+        "159.671"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-system-cps-3-0": {
+      "sourceKey": "painting/paint-system-cps-30-disposable-paint-cup-system-with-red-locking-ring",
+      "articleNumbers": [
+        "160.085",
+        "160.086",
+        "160.087",
+        "160.088",
+        "160.090",
+        "160.091",
+        "160.092",
+        "160.093",
+        "160.376",
+        "160.377",
+        "160.379"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-trolley": {
+      "sourceKey": "painting-supplies/paint-trolley-paint-stand",
+      "articleNumbers": [
+        "138.848",
+        "138.849",
+        "154.253"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paint-trolley-flexi-plus": {
+      "sourceKey": "painting-supplies/paint-trolley-flexi-plus-paint-stand",
+      "articleNumbers": [
+        "152.596"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paper-trolley": {
+      "sourceKey": "painting-supplies/paper-trolley-triple-paper-stand",
+      "articleNumbers": [
+        "138.862"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-paper-trolley-1500": {
+      "sourceKey": "painting-supplies/paper-trolley-1500-paper-stand",
+      "articleNumbers": [
+        "139.101"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-pdc-easy-paint": {
+      "sourceKey": "masking/pdc-easy-paint-painting-assistant-for-parking-sensors",
+      "articleNumbers": [
+        "159.500"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-pen-trinity-gum-black": {
+      "sourceKey": "merchandising-materials/pen-trinity-gum-black-blue-ink",
+      "articleNumbers": [
+        "156.540"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-pg-fg-fine-filter": {
+      "sourceKey": "painting/pg-fg-fine-filter-fine-filter",
+      "articleNumbers": [
+        "138.680"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-plastic-can-empty": {
+      "sourceKey": "painting/plastic-can-empty-paint-tins",
+      "articleNumbers": [
+        "144.957",
+        "144.958",
+        "145.784"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-plastic-primer": {
+      "sourceKey": "painting/plastic-primer-plastic-primer",
+      "articleNumbers": [
+        "145.986"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-plastic-pro": {
+      "sourceKey": "putties/plastic-pro-polyester-plastic-putty",
+      "articleNumbers": [
+        "149.613"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-plastic-spreader": {
+      "sourceKey": "putties/plastic-spreader-plastic-spreader",
+      "articleNumbers": [
+        "146.961"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-c-05-cut": {
+      "sourceKey": "finish/polish-c-05-cut-high-performance-cutting-compound",
+      "articleNumbers": [
+        "156.345"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-c-07-cut": {
+      "sourceKey": "finish/polish-c-07-cut-high-performance-cutting-compound",
+      "articleNumbers": [
+        "157.445"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-c-10-strong": {
+      "sourceKey": "finish/polish-c-10-strong-high-performance-cutting-compound",
+      "articleNumbers": [
+        "151.634"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-c-30-finish": {
+      "sourceKey": "finish/polish-c-30-finish-anti-hologram-polish",
+      "articleNumbers": [
+        "151.636"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-coarse-step-1": {
+      "sourceKey": "finish/polish-coarse-step-1-polish",
+      "articleNumbers": [
+        "156.451"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-fine-step-2": {
+      "sourceKey": "finish/polish-fine-step-2-anti-hologram-polish",
+      "articleNumbers": [
+        "156.452"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-foam-green": {
+      "sourceKey": "finish/polish-foam-green-polishing-pad",
+      "articleNumbers": [
+        "157.050",
+        "157.051"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-foam-white-sc": {
+      "sourceKey": "finish/polish-foam-white-sc-polishing-pad",
+      "articleNumbers": [
+        "157.054",
+        "157.055"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-foam-yellow": {
+      "sourceKey": "finish/polish-foam-yellow-polishing-pad",
+      "articleNumbers": [
+        "157.056",
+        "157.057"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-waffle-foam-yellow": {
+      "sourceKey": "finish/polish-waffle-foam-yellow-polishing-pad",
+      "articleNumbers": [
+        "157.058",
+        "157.059"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polish-x8000-ah": {
+      "sourceKey": "finish/polish-x8000-ah-anti-hologram-polish",
+      "articleNumbers": [
+        "160.451"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polishing-back-pad": {
+      "sourceKey": "finish/polishing-back-pad-finish-back-pad",
+      "articleNumbers": [
+        "144.916"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polishing-machine-rc-166": {
+      "sourceKey": "finish/polishing-machine-rc-166-polishing-machine-pneumatic",
+      "articleNumbers": [
+        "143.723"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polishing-pad-x1500": {
+      "sourceKey": "finish/polishing-pad-x1500-polishing-pad",
+      "articleNumbers": [
+        "160.447",
+        "160.448",
+        "160.449",
+        "160.450"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polishing-pad-x8000": {
+      "sourceKey": "finish/polishing-pad-x8000-polishing-pad",
+      "articleNumbers": [
+        "160.452",
+        "160.453"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polyester-repair-resin": {
+      "sourceKey": "putties/polyester-repair-resin-polyester-repair-resin",
+      "articleNumbers": [
+        "126.050"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-polyester-repair-set": {
+      "sourceKey": "putties/polyester-repair-set-polyester-repair-set",
+      "articleNumbers": [
+        "126.054"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-power-pu-bond": {
+      "sourceKey": "bonding-sealing/power-pu-bond-2k-pu-glue",
+      "articleNumbers": [
+        "159.952",
+        "159.954",
+        "159.955"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-power-pu-bond-film": {
+      "sourceKey": "bonding-sealing/power-pu-bond-film-backing-and-supporting-film",
+      "articleNumbers": [
+        "159.958"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-power-pu-bond-gun": {
+      "sourceKey": "bonding-sealing/power-pu-bond-gun-2k-pu-glue-gun",
+      "articleNumbers": [
+        "140.927"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-power-pu-bond-mixer": {
+      "sourceKey": "bonding-sealing/power-pu-bond-mixer-mixing-tube-25-50-ml",
+      "articleNumbers": [
+        "159.956"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-prefill-spray": {
+      "sourceKey": "painting/prefill-spray-aerosol-tin-fillable",
+      "articleNumbers": [
+        "125.686"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-prefill-spray-water": {
+      "sourceKey": "painting/prefill-spray-water-aerosol-tin-fillable",
+      "articleNumbers": [
+        "140.608"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-prep-brush": {
+      "sourceKey": "abrasives/prep-brush-special-brush",
+      "articleNumbers": [
+        "159.696"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-prep-hand-ii": {
+      "sourceKey": "personal-safety/prep-hand-ii-work-gloves",
+      "articleNumbers": [
+        "150.719",
+        "150.720"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-prep-hand-iii": {
+      "sourceKey": "personal-safety/prep-hand-iii-work-gloves",
+      "articleNumbers": [
+        "145.132",
+        "145.133"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-prep-scuff": {
+      "sourceKey": "abrasives/prep-scuff-matting-paste",
+      "articleNumbers": [
+        "137.547",
+        "137.779"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-primer-spray": {
+      "sourceKey": "painting/primer-spray-primer-spray",
+      "articleNumbers": [
+        "125.949",
+        "132.907"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-primer-surfacing-spray": {
+      "sourceKey": "painting/primer-surfacing-spray-primer-spray",
+      "articleNumbers": [
+        "126.024"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-back-pad-psa": {
+      "sourceKey": "abrasives/proflex-back-pad-psa-back-pad-30-mm",
+      "articleNumbers": [
+        "155.153"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-callisto-150-mm": {
+      "sourceKey": "abrasives/proflex-callisto-foam-abrasive-150-mm",
+      "articleNumbers": [
+        "158.797",
+        "159.301"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-callisto-33-mm": {
+      "sourceKey": "abrasives/proflex-callisto-foam-abrasive-33-mm",
+      "articleNumbers": [
+        "158.793",
+        "159.299"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-callisto-77-mm": {
+      "sourceKey": "abrasives/proflex-callisto-foam-abrasive-77-mm",
+      "articleNumbers": [
+        "158.795",
+        "159.300"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-hydra-152-mm": {
+      "sourceKey": "abrasives/proflex-hydra-foam-abrasive-oe-152-mm",
+      "articleNumbers": [
+        "159.463"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-hydra-75-mm": {
+      "sourceKey": "abrasives/proflex-hydra-foam-abrasive-oe-75-mm",
+      "articleNumbers": [
+        "159.461"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-interface-pad-150-mm-15-holes": {
+      "sourceKey": "abrasives/proflex-interface-pad-interface-pad-150-mm-15-holes",
+      "articleNumbers": [
+        "154.193",
+        "154.295",
+        "155.100"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-interface-pad-30-mm": {
+      "sourceKey": "abrasives/proflex-interface-pad-interface-pad-30-mm",
+      "articleNumbers": [
+        "157.137"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-interface-pad-75-mm": {
+      "sourceKey": "abrasives/proflex-interface-pad-interface-pad-75-mm",
+      "articleNumbers": [
+        "154.194",
+        "154.296",
+        "155.098"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-interface-pad-finish-150-mm-15-holes": {
+      "sourceKey": "abrasives/proflex-interface-pad-finish-interface-pad-150-mm-15-holes",
+      "articleNumbers": [
+        "159.078"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-interface-pad-finish-75-mm": {
+      "sourceKey": "abrasives/proflex-interface-pad-finish-interface-pad-75-mm",
+      "articleNumbers": [
+        "159.079"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-152-mm": {
+      "sourceKey": "abrasives/proflex-jupiter-film-abrasive-152-mm",
+      "articleNumbers": [
+        "154.660",
+        "154.661",
+        "154.662",
+        "154.663"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-152-mm-15-holes": {
+      "sourceKey": "abrasives/proflex-jupiter-film-abrasive-152-mm-15-holes",
+      "articleNumbers": [
+        "153.469",
+        "153.470",
+        "153.471",
+        "154.449",
+        "154.450",
+        "154.451",
+        "154.452",
+        "154.453",
+        "156.939"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-75-mm": {
+      "sourceKey": "abrasives/proflex-jupiter-film-abrasive-75-mm",
+      "articleNumbers": [
+        "153.466",
+        "153.467",
+        "153.468",
+        "154.444",
+        "154.445",
+        "154.446",
+        "154.447",
+        "154.448",
+        "156.946"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-soft-152-mm": {
+      "sourceKey": "abrasives/proflex-jupiter-soft-film-abrasive-152-mm-multi-hole",
+      "articleNumbers": [
+        "156.509",
+        "156.510",
+        "156.511",
+        "156.512",
+        "156.513",
+        "156.514"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-soft-75-mm": {
+      "sourceKey": "abrasives/proflex-jupiter-soft-film-abrasive-75-mm-multihole",
+      "articleNumbers": [
+        "156.522",
+        "156.523"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-soft-h2o-152-mm": {
+      "sourceKey": "abrasives/proflex-jupiter-soft-h2o-film-abrasive-152-mm-multi-hole",
+      "articleNumbers": [
+        "156.515",
+        "156.516",
+        "156.517"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-jupiter-soft-h2o-77-mm": {
+      "sourceKey": "abrasives/proflex-jupiter-soft-h2o-film-abrasive-77-mm-multihole",
+      "articleNumbers": [
+        "156.524",
+        "156.525",
+        "156.526"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-mercury": {
+      "sourceKey": "abrasives/proflex-mercury-film-abrasive-29-x-35-mm",
+      "articleNumbers": [
+        "153.460",
+        "153.461",
+        "153.462",
+        "154.437"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-mercury-sanding-block": {
+      "sourceKey": "abrasives/proflex-mercury-sanding-block-sanding-block-27-x-33-x-15-mm",
+      "articleNumbers": [
+        "154.173",
+        "156.555"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-neptune": {
+      "sourceKey": "abrasives/proflex-neptune-film-abrasive-130-x-170-mm",
+      "articleNumbers": [
+        "153.472",
+        "153.473",
+        "153.474",
+        "154.454",
+        "154.455"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-neptune-pad-maxgrip": {
+      "sourceKey": "abrasives/proflex-neptune-pad-maxgrip-hand-pad-120-x-75-x-6-mm-multihole",
+      "articleNumbers": [
+        "158.097"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-neptune-soft": {
+      "sourceKey": "abrasives/proflex-neptune-soft-film-abrasive-130-x-85-mm-multihole",
+      "articleNumbers": [
+        "157.791",
+        "157.792",
+        "157.794"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-pluto": {
+      "sourceKey": "abrasives/proflex-pluto-film-abrasive-34-mm",
+      "articleNumbers": [
+        "154.428",
+        "154.429",
+        "154.430",
+        "154.431",
+        "154.432",
+        "154.433"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-pluto-sanding-block": {
+      "sourceKey": "abrasives/proflex-pluto-sanding-block-sanding-block",
+      "articleNumbers": [
+        "156.556",
+        "156.557"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-proflex-styx": {
+      "sourceKey": "abrasives/proflex-styx-film-abrasive-oe-32-mm",
+      "articleNumbers": [
+        "159.738",
+        "159.739"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-protective-film-spf": {
+      "sourceKey": "masking/protective-film-spf-surface-protection-film-60-cm-x-20-m",
+      "articleNumbers": [
+        "158.145"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-pump-for-hand-cleaner-3-l": {
+      "sourceKey": "personal-safety/pump-for-hand-cleaner-3-l-pump-for-hand-cleaner-classic",
+      "articleNumbers": [
+        "155.359"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-pump-sprayer": {
+      "sourceKey": "cleaning/pump-sprayer-pump-sprayer",
+      "articleNumbers": [
+        "139.606",
+        "142.808",
+        "146.680",
+        "153.269",
+        "157.412"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-putty-dispenser": {
+      "sourceKey": "putties/putty-dispenser-putty-dispenser-pneumatic",
+      "articleNumbers": [
+        "123.840",
+        "123.859",
+        "160.576"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-putty-knife": {
+      "sourceKey": "putties/putty-knife-steel-spreader",
+      "articleNumbers": [
+        "137.435",
+        "137.436",
+        "137.437"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-putty-mix-board": {
+      "sourceKey": "putties/putty-mix-board-putty-mix-board",
+      "articleNumbers": [
+        "142.206"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rallye-spray-gloss": {
+      "sourceKey": "painting/rallye-spray-gloss-paint-spray-gloss",
+      "articleNumbers": [
+        "126.026",
+        "126.053"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rallye-spray-matt": {
+      "sourceKey": "painting/rallye-spray-matt-paint-spray-matt",
+      "articleNumbers": [
+        "126.027"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rallye-spray-premium-black-glossy": {
+      "sourceKey": "painting/rallye-spray-premium-paint-spray-black-glossy",
+      "articleNumbers": [
+        "149.219"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rallye-spray-premium-black-matt": {
+      "sourceKey": "painting/rallye-spray-premium-paint-spray-black-matt",
+      "articleNumbers": [
+        "149.218"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rapid-charger-for-csh-battery-powered": {
+      "sourceKey": "finish/rapid-charger-for-csh-battery-powered-replacement-charger",
+      "articleNumbers": [
+        "159.064"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-red-tape": {
+      "sourceKey": "masking/red-tape-masking-tape",
+      "articleNumbers": [
+        "160.210",
+        "160.211",
+        "160.213"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-refinish-1": {
+      "sourceKey": "finish/refinish-1-cutting-compound",
+      "articleNumbers": [
+        "132.437"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-refinish-restorer": {
+      "sourceKey": "finish/refinish-restorer-plastic-conditioner",
+      "articleNumbers": [
+        "159.706",
+        "159.707"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-replacement-spray-head-adjustable": {
+      "sourceKey": "painting/replacement-spray-head-replacement-spray-head-adjustable",
+      "articleNumbers": [
+        "153.793"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-replacement-spray-head-red": {
+      "sourceKey": "painting/replacement-spray-head-replacement-spray-head-red",
+      "articleNumbers": [
+        "145.840"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rotary-polisher-csh-crp01-kit": {
+      "sourceKey": "finish/rotary-polisher-csh-crp01-kit-rotary-polisher-cordless",
+      "articleNumbers": [
+        "159.822",
+        "160.111"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rubber-spreader-set": {
+      "sourceKey": "putties/rubber-spreader-set-rubber-spreader",
+      "articleNumbers": [
+        "159.448"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-47-105-replacement-carbon-brush": {
+      "sourceKey": "finish/rupes-47105-replacement-carbon-brush-replacement-carbon-brush",
+      "articleNumbers": [
+        "158.290"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-9-holder-bigfoot": {
+      "sourceKey": "finish/rupes-9-holder-bigfoot-wall-racket",
+      "articleNumbers": [
+        "158.134"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-angle-polishing-machine-lh76p": {
+      "sourceKey": "finish/rupes-angle-polishing-machine-lh76p-angle-polishing-machine-pneumatic",
+      "articleNumbers": [
+        "157.331"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-back-pad": {
+      "sourceKey": "abrasives/rupes-back-pad-back-pad-150-mm",
+      "articleNumbers": [
+        "158.291",
+        "158.292"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-carrier": {
+      "sourceKey": "painting-supplies/rupes-carrier-carrier-for-polishes-and-abrasives",
+      "articleNumbers": [
+        "157.342"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-cleaning-and-maintenance-oil": {
+      "sourceKey": "painting-supplies/rupes-cleaning-and-maintenance-oil-maintenance-oil",
+      "articleNumbers": [
+        "150.190"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-ibrid-nano": {
+      "sourceKey": "abrasives/rupes-ibrid-nano-battery-operated-mini-sanding-and-polishing-machine",
+      "articleNumbers": [
+        "157.318",
+        "157.319",
+        "157.717",
+        "157.718",
+        "157.784",
+        "157.785",
+        "157.786",
+        "157.787",
+        "157.788",
+        "158.370"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-ibrid-nano-q-maq": {
+      "sourceKey": "abrasives/rupes-ibrid-nano-q-maq-battery-operated-mini-sanding-and-polishing-machine",
+      "articleNumbers": [
+        "157.320",
+        "157.644"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-mini-polishing-machine-hlr75stb": {
+      "sourceKey": "finish/rupes-mini-polishing-machine-hlr75stb-polishing-machine-battery-powered",
+      "articleNumbers": [
+        "158.647"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-mini-random-orbital-sander-ld30": {
+      "sourceKey": "abrasives/rupes-mini-random-orbital-sander-ld30-mini-random-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "157.330"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-orbital-sander-re21aln": {
+      "sourceKey": "abrasives/rupes-orbital-sander-re21aln-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "157.454",
+        "157.558"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-orbital-sander-sl42aes": {
+      "sourceKey": "abrasives/rupes-orbital-sander-sl42aes-orbital-sander-electric",
+      "articleNumbers": [
+        "157.329"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-orbital-sander-slp41a": {
+      "sourceKey": "abrasives/rupes-orbital-sander-slp41a-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "157.337",
+        "157.559"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-polish-pad": {
+      "sourceKey": "finish/rupes-polish-pad-polishing-pad",
+      "articleNumbers": [
+        "158.853",
+        "158.854",
+        "158.855",
+        "158.856"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-polishing-machine-lh19e": {
+      "sourceKey": "finish/rupes-polishing-machine-lh19e-polishing-machine-bigfoot",
+      "articleNumbers": [
+        "157.322",
+        "157.640"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-polishing-machine-lhr15": {
+      "sourceKey": "finish/rupes-polishing-machine-lhr15-polishing-machine-electric-bigfoot",
+      "articleNumbers": [
+        "157.323",
+        "157.641"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-polishing-machine-lhr75": {
+      "sourceKey": "finish/rupes-polishing-machine-lhr75-polishing-machine-pneumatic",
+      "articleNumbers": [
+        "157.332",
+        "157.642"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-polishing-machine-lhr75e": {
+      "sourceKey": "finish/rupes-polishing-machine-lhr75e-polishing-machine-bigfoot-electric",
+      "articleNumbers": [
+        "157.340"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-random-orbital-sander-er": {
+      "sourceKey": "abrasives/rupes-random-orbital-sander-er-random-orbital-sander-electric",
+      "articleNumbers": [
+        "158.283",
+        "158.284"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-random-orbital-sander-ta50": {
+      "sourceKey": "abrasives/rupes-random-orbital-sander-ta50-random-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "157.338",
+        "159.007"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-random-orbital-single-hand-sander-ra75": {
+      "sourceKey": "abrasives/rupes-random-orbital-single-hand-sander-ra75-random-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "147.663",
+        "157.333"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-skorpio-e-rx": {
+      "sourceKey": "abrasives/rupes-skorpio-e-rx-random-orbital-sander-electric",
+      "articleNumbers": [
+        "157.326",
+        "157.328"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-skorpio-iii-rh": {
+      "sourceKey": "abrasives/rupes-skorpio-iii-rh-random-orbital-sander-pneumatic",
+      "articleNumbers": [
+        "157.334",
+        "157.335"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-vacuum-cleaner-s145": {
+      "sourceKey": "painting-supplies/rupes-vacuum-cleaner-s145-vacuum-cleaner",
+      "articleNumbers": [
+        "157.343",
+        "157.344",
+        "157.471",
+        "157.472",
+        "157.560"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-rupes-workshop-carrier-kc28": {
+      "sourceKey": "painting-supplies/rupes-workshop-carrier-kc28-workshop-carrier",
+      "articleNumbers": [
+        "157.341",
+        "157.469"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-safety-coupling": {
+      "sourceKey": "painting-supplies/safety-coupling-safety-coupling-with-quick-connector",
+      "articleNumbers": [
+        "143.127"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-safety-lens": {
+      "sourceKey": "personal-safety/safety-lens-protective-glasses",
+      "articleNumbers": [
+        "140.955"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-100-2-0": {
+      "sourceKey": "abrasives/sanding-block-100-20-hand-sanding-velcror",
+      "articleNumbers": [
+        "160.224"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-198-2-0": {
+      "sourceKey": "abrasives/sanding-block-198-20-hand-sanding-velcror",
+      "articleNumbers": [
+        "159.535"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-198-kit": {
+      "sourceKey": "abrasives/sanding-block-198-kit-hand-sanding-block-set-velcror",
+      "articleNumbers": [
+        "148.702"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-300-100": {
+      "sourceKey": "abrasives/sanding-block-300-100-hand-sanding-block-velcror",
+      "articleNumbers": [
+        "159.571",
+        "160.172"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-400-2-0": {
+      "sourceKey": "abrasives/sanding-block-400-20-hand-sanding-block-400-20",
+      "articleNumbers": [
+        "159.534"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-400-grip-flex": {
+      "sourceKey": "abrasives/sanding-block-400-grip-flex-hand-sanding-block-velcror",
+      "articleNumbers": [
+        "150.088"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-disc-kit-150": {
+      "sourceKey": "abrasives/sanding-block-disc-kit-150-hand-sanding-block-set-velcror",
+      "articleNumbers": [
+        "151.904"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-grip": {
+      "sourceKey": "abrasives/sanding-block-grip-hand-sanding-block-velcror",
+      "articleNumbers": [
+        "137.439"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-grip-box": {
+      "sourceKey": "abrasives/sanding-block-grip-box-hand-sanding-blocks-velcror",
+      "articleNumbers": [
+        "142.009"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-block-hard": {
+      "sourceKey": "abrasives/sanding-block-hard-hand-sanding-block-hard",
+      "articleNumbers": [
+        "137.431"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-disc-f-19-77-mm": {
+      "sourceKey": "abrasives/sanding-disc-f19-film-abrasive-77-mm",
+      "articleNumbers": [
+        "156.647",
+        "156.648",
+        "156.649",
+        "156.650",
+        "156.651",
+        "156.652",
+        "156.653",
+        "156.654",
+        "156.655",
+        "156.903"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-disc-f-19-finish-77-mm": {
+      "sourceKey": "abrasives/sanding-disc-f19-finish-film-abrasive-77-mm",
+      "articleNumbers": [
+        "156.904",
+        "156.905"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-disc-f-19-soft": {
+      "sourceKey": "abrasives/sanding-disc-f19-soft-film-abrasive-152-mm-multi-hole",
+      "articleNumbers": [
+        "156.933",
+        "156.934",
+        "156.935",
+        "156.936",
+        "156.937"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-disc-p-25-ceramic": {
+      "sourceKey": "abrasives/sanding-disc-p25-ceramic-paper-abrasive-150-mm-25-holes",
+      "articleNumbers": [
+        "159.995",
+        "159.996",
+        "159.997",
+        "159.998",
+        "159.999",
+        "160.000",
+        "160.002",
+        "160.003",
+        "160.273",
+        "160.274"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-fleece-v-19-disc": {
+      "sourceKey": "abrasives/sanding-fleece-v19-sanding-fleece-disc",
+      "articleNumbers": [
+        "156.044",
+        "156.045",
+        "156.690",
+        "156.691"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-fleece-v-19-pad-115-x-230-mm": {
+      "sourceKey": "abrasives/sanding-fleece-v19-sanding-fleece-pad-115-x-230-mm",
+      "articleNumbers": [
+        "156.041",
+        "156.042"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-fleece-v-19-roll-115-mm-x-10-m": {
+      "sourceKey": "abrasives/sanding-fleece-v19-sanding-fleece-roll-115-mm-x-10-m",
+      "articleNumbers": [
+        "156.039",
+        "156.040"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-strips-f-23-ceramic": {
+      "sourceKey": "abrasives/sanding-strips-f23-ceramic-film-abrasive-roll-70-mm-x-12-m",
+      "articleNumbers": [
+        "159.227",
+        "159.228",
+        "159.229",
+        "159.230",
+        "159.231",
+        "159.232",
+        "159.234",
+        "159.235"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-strips-p-25-ceramic": {
+      "sourceKey": "abrasives/sanding-strips-p25-ceramic-paper-abrasive-roll-70-mm-x-12-m",
+      "articleNumbers": [
+        "160.408",
+        "160.409",
+        "160.410",
+        "160.411",
+        "160.412",
+        "160.413"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sanding-water-sw20": {
+      "sourceKey": "abrasives/sanding-water-sw20-sanding-water",
+      "articleNumbers": [
+        "157.446",
+        "157.447"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-scraper": {
+      "sourceKey": "cleaning/scraper-paint-off-blade",
+      "articleNumbers": [
+        "140.984",
+        "140.985"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-shop-seat-pro": {
+      "sourceKey": "painting-supplies/shop-seat-pro-workshop-seat",
+      "articleNumbers": [
+        "160.161"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-silicone-remover-mild": {
+      "sourceKey": "cleaning/silicone-remover-mild-silicone-remover-solvent-based",
+      "articleNumbers": [
+        "139.212",
+        "146.704",
+        "146.711",
+        "147.023"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-silicone-remover-water-2-0": {
+      "sourceKey": "cleaning/silicone-remover-water-20-silicone-remover-water-based",
+      "articleNumbers": [
+        "160.321"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-silver-tape": {
+      "sourceKey": "masking/silver-tape-fabric-tape",
+      "articleNumbers": [
+        "135.715"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-silver-wheel": {
+      "sourceKey": "painting/silver-wheel-silver-wheel-spray",
+      "articleNumbers": [
+        "126.021"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-slim-tape": {
+      "sourceKey": "masking/slim-tape-special-masking-tape",
+      "articleNumbers": [
+        "133.827"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-slim-tape-green": {
+      "sourceKey": "masking/slim-tape-green-special-masking-tape",
+      "articleNumbers": [
+        "150.081"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-socks-carsystem-black-white": {
+      "sourceKey": "merchandising-materials/socks-carsystem-black-white-2-size-ranges",
+      "articleNumbers": [
+        "160.540",
+        "160.542"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-socks-carsystem-red-white": {
+      "sourceKey": "merchandising-materials/socks-carsystem-red-white-2-size-range",
+      "articleNumbers": [
+        "159.837",
+        "159.839"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-soft": {
+      "sourceKey": "putties/soft-polyester-fill-putty",
+      "articleNumbers": [
+        "127.972",
+        "132.116"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-soft-interface-pad": {
+      "sourceKey": "abrasives/soft-interface-pad-interface-pad-150-mm",
+      "articleNumbers": [
+        "140.584",
+        "140.585"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-soft-roll": {
+      "sourceKey": "abrasives/soft-roll-paper-abrasive-roll-115-x-125-mm",
+      "articleNumbers": [
+        "159.422",
+        "159.423",
+        "159.424",
+        "159.425",
+        "159.426",
+        "159.427",
+        "159.428",
+        "159.429",
+        "159.430"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sound-deadening-panels": {
+      "sourceKey": "bonding-sealing/sound-deadening-panels-sound-deadening-panels",
+      "articleNumbers": [
+        "126.055",
+        "134.139",
+        "134.140"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spare-battery-5-0ah": {
+      "sourceKey": "finish/spare-battery-50ah-spare-battery-for-csh-cos01-and-csh-crp01",
+      "articleNumbers": [
+        "160.110"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-speedmixer-10-kg": {
+      "sourceKey": "putties/speedmixer-10-kg-putty-dispenser-electro-pneumatic",
+      "articleNumbers": [
+        "143.205",
+        "143.347",
+        "143.810",
+        "144.131",
+        "145.419",
+        "146.808",
+        "146.955",
+        "147.451",
+        "149.614"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-speedmixer-3-kg": {
+      "sourceKey": "putties/speedmixer-3-kg-putty-dispenser-electrical",
+      "articleNumbers": [
+        "146.427",
+        "151.017",
+        "152.088"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spotblender": {
+      "sourceKey": "painting/spotblender-blending-thinner",
+      "articleNumbers": [
+        "148.989"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spotblender-spray": {
+      "sourceKey": "painting/spotblender-spray-blending-thinner-spray",
+      "articleNumbers": [
+        "145.987"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spray": {
+      "sourceKey": "putties/spray-polyester-sprayable-putty",
+      "articleNumbers": [
+        "127.978"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spray-filler-spray": {
+      "sourceKey": "painting/spray-filler-spray-spray-filler",
+      "articleNumbers": [
+        "125.580"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spray-out-cards-metal": {
+      "sourceKey": "painting/spray-out-cards-metal-colour-match-card",
+      "articleNumbers": [
+        "153.758",
+        "153.759"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spray-plus": {
+      "sourceKey": "putties/spray-plus-polyester-sprayable-putty",
+      "articleNumbers": [
+        "135.597"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spray-thinner": {
+      "sourceKey": "putties/spray-thinner-thinner",
+      "articleNumbers": [
+        "124.315"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-spraygun-cleaner": {
+      "sourceKey": "cleaning/spraygun-cleaner-spraygun-cleaner",
+      "articleNumbers": [
+        "158.627"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-squeezer": {
+      "sourceKey": "cleaning/squeezer-squeezer-sponge",
+      "articleNumbers": [
+        "157.987"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-star-dust-2-0-ffp2": {
+      "sourceKey": "personal-safety/star-dust-20-ffp2-dust-mask",
+      "articleNumbers": [
+        "159.949"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-star-dust-2-0-ffp3-with-valve": {
+      "sourceKey": "personal-safety/star-dust-20-ffp3-with-valve-dust-mask",
+      "articleNumbers": [
+        "159.950"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-star-mask": {
+      "sourceKey": "personal-safety/star-mask-respirator",
+      "articleNumbers": [
+        "141.143",
+        "141.145"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-star-mask-disc": {
+      "sourceKey": "personal-safety/star-mask-disc-filter-frame",
+      "articleNumbers": [
+        "144.310"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-star-mask-pre-p2-r": {
+      "sourceKey": "personal-safety/star-mask-pre-p2-r-pre-filters",
+      "articleNumbers": [
+        "141.154"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-star-mask-refill": {
+      "sourceKey": "personal-safety/star-mask-refill-charcoal-filter",
+      "articleNumbers": [
+        "141.224"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-staub-stop": {
+      "sourceKey": "cleaning/staub-stop-tack-cloth",
+      "articleNumbers": [
+        "132.615",
+        "132.616"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-staub-stop-super-wave": {
+      "sourceKey": "cleaning/staub-stop-super-wave-tack-cloth",
+      "articleNumbers": [
+        "148.124"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-staub-stop-water": {
+      "sourceKey": "cleaning/staub-stop-water-tack-cloth",
+      "articleNumbers": [
+        "144.538"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-staub-stop-water-black": {
+      "sourceKey": "cleaning/staub-stop-water-black-tack-cloth",
+      "articleNumbers": [
+        "158.033"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-steel": {
+      "sourceKey": "putties/steel-polyester-hard-putty",
+      "articleNumbers": [
+        "138.587"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-stripping-disc": {
+      "sourceKey": "abrasives/stripping-disc-raw-cleaning-disc",
+      "articleNumbers": [
+        "127.999",
+        "128.000"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-super-nitril-hand-i": {
+      "sourceKey": "personal-safety/super-nitril-hand-i-protection-gloves",
+      "articleNumbers": [
+        "145.130",
+        "145.131"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sweatshirt-black-teamcarsystem": {
+      "sourceKey": "merchandising-materials/sweatshirt-black-teamcarsystem-size-s-3xl",
+      "articleNumbers": [
+        "160.325",
+        "160.326",
+        "160.327",
+        "160.328",
+        "160.329",
+        "160.330"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-sweatshirt-grey-teamcarsystem": {
+      "sourceKey": "merchandising-materials/sweatshirt-grey-teamcarsystem-size-s-3xl",
+      "articleNumbers": [
+        "159.864",
+        "159.865",
+        "159.866",
+        "159.867",
+        "159.868",
+        "159.909"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-t-shirt-black-teamcarsystem": {
+      "sourceKey": "merchandising-materials/t-shirt-black-teamcarsystem-size-s-xxl",
+      "articleNumbers": [
+        "159.827",
+        "159.828",
+        "159.829",
+        "159.830",
+        "159.831"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tape-off-disc-premium": {
+      "sourceKey": "abrasives/tape-off-disc-premium-sticker-removal-disc",
+      "articleNumbers": [
+        "152.013"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tape-off-tool": {
+      "sourceKey": "abrasives/tape-off-tool-axial-sander",
+      "articleNumbers": [
+        "133.172"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-matt-matting-mousse": {
+      "sourceKey": "abrasives/tec-line-matt-matting-mousse-matting-paste",
+      "articleNumbers": [
+        "151.947"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-mattflex-pad": {
+      "sourceKey": "abrasives/tec-line-mattflex-pad-sanding-fleece-pad-115-x-230-mm",
+      "articleNumbers": [
+        "152.686",
+        "152.687",
+        "152.688",
+        "157.444"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-mattflex-premium": {
+      "sourceKey": "abrasives/tec-line-mattflex-premium-sanding-fleece-roll-115-mm-x-10-m",
+      "articleNumbers": [
+        "151.616",
+        "151.617"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-n20": {
+      "sourceKey": "abrasives/tec-line-n20-net-sanding-strips-70-x-400-mm",
+      "articleNumbers": [
+        "157.438",
+        "157.439",
+        "157.440",
+        "157.441",
+        "157.442",
+        "157.443"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-pro-finish": {
+      "sourceKey": "abrasives/tec-line-pro-finish-net-abrasive-150-mm",
+      "articleNumbers": [
+        "152.983",
+        "152.984",
+        "153.256"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-softflex": {
+      "sourceKey": "abrasives/tec-line-softflex-paper-abrasive-roll-115-x-125-mm",
+      "articleNumbers": [
+        "152.689",
+        "152.690",
+        "152.691",
+        "152.692",
+        "152.693",
+        "152.694",
+        "152.695",
+        "152.696"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tec-line-stick": {
+      "sourceKey": "masking/tec-line-stick-sensor-pad",
+      "articleNumbers": [
+        "152.554"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-thermo-spray": {
+      "sourceKey": "painting/thermo-spray-paint-spray-heat-resistant",
+      "articleNumbers": [
+        "126.086",
+        "126.087"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-tinting-paste-filler": {
+      "sourceKey": "painting/tinting-paste-filler-tinting-paste",
+      "articleNumbers": [
+        "148.504",
+        "148.505"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-top-tape": {
+      "sourceKey": "masking/top-tape-masking-tape",
+      "articleNumbers": [
+        "139.262",
+        "139.263",
+        "139.264",
+        "139.265",
+        "139.266",
+        "139.267"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-topline-soft-pad": {
+      "sourceKey": "abrasives/topline-soft-pad-foam-abrasive-140-x-115-mm",
+      "articleNumbers": [
+        "126.251",
+        "126.252",
+        "126.253",
+        "126.254"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-topline-wp-s": {
+      "sourceKey": "abrasives/topline-wp-s-paper-abrasive-230-x-280-mm",
+      "articleNumbers": [
+        "136.676",
+        "136.677",
+        "136.678",
+        "136.679",
+        "136.680",
+        "136.682",
+        "136.683",
+        "136.684",
+        "136.685",
+        "136.686",
+        "136.687",
+        "136.688",
+        "136.689",
+        "136.690",
+        "136.691"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-touch-up-fillable-20ml": {
+      "sourceKey": "painting/touch-up-paint-bottle-fillable-20ml",
+      "articleNumbers": [
+        "150.764"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-touch-up-fillable-50ml": {
+      "sourceKey": "painting/touch-up-paint-bottle-fillable-50ml",
+      "articleNumbers": [
+        "150.769"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-adapter-nozzle-v-nozzle": {
+      "sourceKey": "bonding-sealing/uniflex-adapter-nozzle-v-nozzle",
+      "articleNumbers": [
+        "149.010"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-adapter-nozzle-wing-tip": {
+      "sourceKey": "bonding-sealing/uniflex-adapter-nozzle-wing-tip",
+      "articleNumbers": [
+        "149.009"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-air-gun": {
+      "sourceKey": "bonding-sealing/uniflex-air-gun-air-gun",
+      "articleNumbers": [
+        "153.224"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-glas": {
+      "sourceKey": "bonding-sealing/uniflex-glas-glass-bonding-glue",
+      "articleNumbers": [
+        "148.927"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-glas-fast-primer": {
+      "sourceKey": "bonding-sealing/uniflex-glas-fast-primer-moisture-curing-glass-primer",
+      "articleNumbers": [
+        "144.036"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-glas-hm": {
+      "sourceKey": "bonding-sealing/uniflex-glas-hm-glass-bonding-glue-high-modulus-non-conductive",
+      "articleNumbers": [
+        "148.928"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-gun": {
+      "sourceKey": "bonding-sealing/uniflex-gun-manual-gun",
+      "articleNumbers": [
+        "135.108",
+        "139.286"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-ms": {
+      "sourceKey": "bonding-sealing/uniflex-ms-sprayable-seam-sealer",
+      "articleNumbers": [
+        "159.108",
+        "160.132",
+        "160.133"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-nozzle": {
+      "sourceKey": "bonding-sealing/uniflex-nozzle-spare-nozzles",
+      "articleNumbers": [
+        "150.292",
+        "155.241"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uniflex-pu": {
+      "sourceKey": "bonding-sealing/uniflex-pu-bonding-and-sealing-compound",
+      "articleNumbers": [
+        "159.160",
+        "159.161",
+        "159.162"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-usb-stick": {
+      "sourceKey": "merchandising-materials/usb-stick-64-gb",
+      "articleNumbers": [
+        "158.871"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uv-clear": {
+      "sourceKey": "painting/uv-clear-transparent-uv-clear-coat",
+      "articleNumbers": [
+        "154.528"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uv-filler-spray": {
+      "sourceKey": "painting/uv-filler-spray-uv-filler-spray",
+      "articleNumbers": [
+        "159.169"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uv-glasses": {
+      "sourceKey": "personal-safety/uv-glasses-uv-protective-glasses",
+      "articleNumbers": [
+        "154.263"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uv-led-lamp": {
+      "sourceKey": "painting-supplies/uv-led-lamp-uv-led-lamp",
+      "articleNumbers": [
+        "154.645"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uv-smart-lamp": {
+      "sourceKey": "painting-supplies/uv-smart-lamp-uv-hand-lamp",
+      "articleNumbers": [
+        "153.777"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-uv-timer": {
+      "sourceKey": "painting-supplies/uv-timer-timer-for-uv-lamps",
+      "articleNumbers": [
+        "154.772"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wall-bracket-for-5-kg-polish": {
+      "sourceKey": "finish/wall-bracket-for-5-kg-polish-wall-bracket",
+      "articleNumbers": [
+        "156.461"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wall-dispenser-for-soft-bottle-2-l": {
+      "sourceKey": "personal-safety/wall-dispenser-for-soft-bottle-2-l-wall-dispenser",
+      "articleNumbers": [
+        "155.350"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wax-puck": {
+      "sourceKey": "finish/wax-puck-application-foam",
+      "articleNumbers": [
+        "152.565"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wheel-cover": {
+      "sourceKey": "masking/wheel-cover-cover-hood",
+      "articleNumbers": [
+        "142.483",
+        "158.211"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wm-tape": {
+      "sourceKey": "masking/wm-tape-adhesive-tape",
+      "articleNumbers": [
+        "140.794"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-workshop-bucket": {
+      "sourceKey": "painting-supplies/workshop-bucket-10-l",
+      "articleNumbers": [
+        "139.442"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-workshop-seat": {
+      "sourceKey": "painting-supplies/workshop-seat-workshop-seat",
+      "articleNumbers": [
+        "149.427"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wr-lifting-tape": {
+      "sourceKey": "masking/wr-lifting-tape-masking-tape-with-plastic-edge",
+      "articleNumbers": [
+        "155.720"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-wr-lifting-tape-premium": {
+      "sourceKey": "masking/wr-lifting-tape-premium-masking-tape-with-plastic-edge-perforated",
+      "articleNumbers": [
+        "155.734"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-x-stand-classic": {
+      "sourceKey": "painting-supplies/x-stand-classic-paint-stand",
+      "articleNumbers": [
+        "137.349"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-x-stand-top": {
+      "sourceKey": "painting-supplies/x-stand-top-paint-stand",
+      "articleNumbers": [
+        "138.851",
+        "138.852"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-zinc-spray": {
+      "sourceKey": "painting/zinc-spray-rust-protection",
+      "articleNumbers": [
+        "126.030"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    },
+    "carsystem-zip-hoodie-black": {
+      "sourceKey": "merchandising-materials/zip-hoodie-black-size-s-3xl",
+      "articleNumbers": [
+        "158.084",
+        "158.085",
+        "158.086",
+        "158.087",
+        "158.088",
+        "158.089"
+      ],
+      "firstSeenEdition": "2026/27",
+      "lastSeenEdition": "2026/27"
+    }
+  }
+}

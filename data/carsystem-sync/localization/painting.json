@@ -1,0 +1,2865 @@
+{
+  "painting/1k-easy-filler-1k-high-build-primer": {
+    "sourceHash": "c2b0c924a1f7f13e",
+    "productType": "1K punilac",
+    "subtype": "1K punilac visoke ispune",
+    "shortDescription": "1K akrilni punilac u spreju visoke moći ispune za tačkasta i delimična lakiranja.",
+    "longDescription": "1K Easy Filler je jednokomponentni akrilni punilac u spreju sa veoma visokom moći ispune. Namenjen je tačkastim i delimičnim lakiranjima i popunjavanju manjih mesta pre lakiranja. Može se prelakirati vodorazredivim i rastvaračkim bojama, pogodan je za mokro i suvo brušenje i ne sadrži hromate.",
+    "purpose": "Popunjavanje manjih mesta pre lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "1K akrilni punilac u spreju"
+      },
+      {
+        "label": "Namena",
+        "value": "Punilac visoke ispune"
+      }
+    ],
+    "applications": [
+      "Tačkasta i delimična lakiranja",
+      "Popunjavanje manjih mesta pre lakiranja",
+      "Prelakira se vodorazredivim i rastvaračkim bojama"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka ispuna i pokrivnost",
+        "description": "Visoka moć ispune i pokrivnosti."
+      },
+      {
+        "title": "Ušteda vremena",
+        "description": "Ušteda vremena u odnosu na rad pištoljem za lakiranje."
+      },
+      {
+        "title": "Mokro i suvo brušenje",
+        "description": "Pogodan za mokro i suvo brušenje."
+      },
+      {
+        "title": "Bez hromata",
+        "description": "Ne sadrži hromate."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.584": "Bela / 400 ml",
+      "151.522": "Svetlosiva / 400 ml",
+      "151.523": "Crna / 400 ml"
+    }
+  },
+  "painting/1k-easy-primer-1k-filling-primer": {
+    "sourceHash": "2cf2865172290748",
+    "productType": "1K prajmer za popunjavanje",
+    "subtype": "1K prajmer za popunjavanje",
+    "shortDescription": "1K prajmer za popunjavanje u spreju, sa zaštitom od korozije, za spot popravke i delimično lakiranje.",
+    "longDescription": "Carsystem 1K Easy Primer je 1K prajmer za popunjavanje sa zaštitom od korozije, namenjen spot popravkama i delimičnom lakiranju. Zavarljiv je i ne sadrži hromate. Može se prelakirati bojama na bazi vode i na bazi rastvarača, uključujući primenu mokro na mokro.",
+    "purpose": "Spot popravke i delimično lakiranje",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "1K prajmer u spreju"
+      }
+    ],
+    "applications": [
+      "Spot popravke i delimično lakiranje",
+      "Izolacija probrušenih mesta",
+      "Prelakiranje bojama na bazi vode i na bazi rastvarača",
+      "Prelakiranje mokro na mokro"
+    ],
+    "benefits": [
+      {
+        "title": "Prajmer i punilac u jednom koraku",
+        "description": "Zaštita od korozije i popunjavanje postižu se u jednom radnom koraku."
+      },
+      {
+        "title": "Zavarljiv",
+        "description": "Nanos se može zavarivati."
+      },
+      {
+        "title": "Bez hromata",
+        "description": "Formulacija ne sadrži hromate."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "151.537": "Bela / 400 ml",
+      "151.538": "Siva / 400 ml",
+      "151.539": "Crna / 400 ml"
+    }
+  },
+  "painting/1k-epoxy-primer-1k-epoxy-primer": {
+    "sourceHash": "b1c29f717320f4b8",
+    "productType": "1K epoksi prajmer",
+    "subtype": "1K epoksi prajmer",
+    "shortDescription": "1K epoksi prajmer u spreju za izolaciju probrušenih mesta i prajmerisanje manjih delova.",
+    "longDescription": "Carsystem 1K Epoxy Primer je 1K epoksi prajmer u spreju sa optimalnom zaštitom od korozije. Koristi se za izolaciju probrušenih mesta i za prajmerisanje manjih delova. Ima veoma visoku otpornost na UV zračenje i može se prelakirati bojama na bazi vode i na bazi rastvarača.",
+    "purpose": "Izolacija probrušenih mesta i prajmerisanje manjih delova",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "1K epoksi prajmer u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Spot popravke i delimično lakiranje",
+      "Izolacija probrušenih mesta",
+      "Prelakiranje bojama na bazi vode i na bazi rastvarača"
+    ],
+    "benefits": [
+      {
+        "title": "Najviši nivo zaštite od korozije",
+        "description": "Pruža najvišu moguću zaštitu od korozije."
+      },
+      {
+        "title": "Izolacija od vlage",
+        "description": "Ostvaruje potpunu izolaciju podloge od vlage."
+      },
+      {
+        "title": "Otporan na UV zračenje",
+        "description": "Zadržava svojstva pri izlaganju UV zračenju."
+      }
+    ],
+    "advice": "Oštećena mesta na metalnim podlogama temeljno očistiti sredstvom za uklanjanje silikona. Kada se koristi kao prajmer, preporučuje se nanošenje 2K punioca preko njega.",
+    "variants": {
+      "151.958": "400 ml"
+    }
+  },
+  "painting/2k-carbo-clear-plus-2k-carbo-clear-coat": {
+    "sourceHash": "75a708f123a704e9",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K Carbo bezbojni lak",
+    "shortDescription": "2K akrilni bezbojni lak razvijen za površine od karbona, sa brzim sušenjem i visokim sjajem.",
+    "longDescription": "Carbo Clear Plus je specijalni 2K akrilni bezbojni lak namenjen površinama od karbona. Usklađen je sa VOC propisima i jednostavan za primenu. Odlikuju ga brzo sušenje, briljantan sjaj, visoka otpornost na habanje i visoka UV zaštita.",
+    "purpose": "Lakiranje delova od karbona",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Namena",
+        "value": "Bezbojni lak premium klase za površine od karbona"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Specijalni bezbojni lak za delove od karbona"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Vreme sušenja je veoma kratko."
+      },
+      {
+        "title": "Briljantan sjaj",
+        "description": "Daje briljantan sjaj lakirane površine."
+      },
+      {
+        "title": "Kvalitet površine",
+        "description": "Postiže veoma dobar kvalitet površine."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Veoma je prijatan za rad i lak za nanošenje."
+      },
+      {
+        "title": "Otpornost na habanje",
+        "description": "Ima izraženu otpornost na habanje."
+      },
+      {
+        "title": "Visoka UV zaštita",
+        "description": "Pruža visoku zaštitu od UV zračenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "153.217": "A komponenta / 1 L",
+      "153.218": "Učvršćivač / 0.5 L",
+      "153.207": "A komponenta / 5 L",
+      "153.208": "Učvršćivač / 2.5 L"
+    }
+  },
+  "painting/2k-carbo-filler-transparent-10-2k-polyurethane-filler": {
+    "sourceHash": "1298d9699aa2ce7e",
+    "productType": "2K poliuretanski punilac",
+    "subtype": "2K poliuretanski punilac",
+    "shortDescription": "Visoko providan 2K poliuretanski punilac za uobičajene radove punjenja na površinama od karbona.",
+    "longDescription": "Carsystem Carbo Filler je visoko providan 2K poliuretanski punilac namenjen svim uobičajenim radovima punjenja na delovima od karbona. Usklađen je sa VOC propisima. Odlikuju ga visoka moć popunjavanja, veoma dobra obradivost brušenjem i otpornost na UV zračenje, uz minimalno isticanje strukture matrice.",
+    "purpose": "Radovi punjenja na delovima od karbona",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K poliuretanski punilac"
+      },
+      {
+        "label": "Providnost",
+        "value": "Visoko providan punilac za karbon"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi punjenja na delovima od karbona"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć popunjavanja",
+        "description": "Ostvaruje visok stepen popunjavanja."
+      },
+      {
+        "title": "Dobra obradivost brušenjem",
+        "description": "Veoma dobro se brusi."
+      },
+      {
+        "title": "Minimalno isticanje matrice",
+        "description": "Struktura matrice se slabo ocrtava kroz nanos."
+      },
+      {
+        "title": "Otporan na UV zračenje",
+        "description": "Zadržava svojstva pri izlaganju UV zračenju."
+      }
+    ],
+    "advice": "Napomena: ukupna debljina filma ne bi trebalo da pređe 180 μm, što odgovara najviše trima slojevima od približno 60 μm uz dizne veličine 1.6 mm. Ako se pređe 180 μm, punilac tokom nanošenja ili sušenja može dobiti mlečan ili zamućen izgled; taj optički efekat je privremen i nestaje nakon potpunog sušenja i naknadnog brušenja. Preporučuje se dosledno pridržavanje uputstva za nanošenje i propisanih debljina sloja.",
+    "variants": {
+      "157.988": "A komponenta / providna / 1,0 L",
+      "157.989": "B komponenta / 0,7 L"
+    }
+  },
+  "painting/2k-clear-voc-420-2k-clear-coat": {
+    "sourceHash": "679318860882f695",
+    "productType": "Bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Univerzalni 2K akrilni bezbojni lak usklađen sa VOC propisima, za sve uobičajene lakirerske radove.",
+    "longDescription": "Univerzalni 2K akrilni bezbojni lak za sve uobičajene lakirerske radove, od spot popravke do lakiranja celog vozila. Usklađen je sa VOC propisima. Odlikuje ga visoka konačna tvrdoća površine.",
+    "purpose": "Lakirerski radovi od spot popravke do celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni bezbojni lak"
+      },
+      {
+        "label": "VOC",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni lakirerski radovi, od spot popravke do celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka konačna tvrdoća",
+        "description": "Visoka konačna tvrdoća površine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "144.138": "A komponenta / 1.0 L",
+      "144.140": "Učvršćivač 420 standard / 0.5 L",
+      "144.139": "Učvršćivač 421 brzi / 0.5 L",
+      "142.953": "A komponenta / 5.0 L",
+      "144.107": "Učvršćivač 420 standard / 2.5 L",
+      "144.108": "Učvršćivač 421 brzi / 2.5 L"
+    }
+  },
+  "painting/2k-clear-voc-cc19-as-2k-clear-coat": {
+    "sourceHash": "77352d5c4f393b67",
+    "productType": "Bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Industrijski 2K akrilni bezbojni lak CC.19 AS za spot popravke i lakiranje sitnih delova.",
+    "longDescription": "Industrijski 2K akrilni bezbojni lak za spot popravke i lakiranje sitnih delova. Usklađen je sa VOC propisima. Odlikuje ga posebno visoka početna tvrdoća, kao i visoka otpornost na UV zračenje, hemikalije i mehanička opterećenja.",
+    "purpose": "Sitni delovi i spot popravka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Namena",
+        "value": "Industrijski bezbojni lak"
+      },
+      {
+        "label": "VOC",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Sitni delovi i spot popravka"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka početna tvrdoća",
+        "description": "Posebno visoka početna tvrdoća."
+      },
+      {
+        "title": "Otpornost",
+        "description": "Visoka otpornost na UV zračenje, hemikalije i mehanička opterećenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.931": "A+B komponenta / 1.5 L"
+    }
+  },
+  "painting/2k-clear-voc-cc25-hs-as-2k-clear-coat": {
+    "sourceHash": "e852a9b16fac6af8",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "2K industrijski bezbojni lak za pojedinačne delove i cele partije vozila, sa visokim sjajem.",
+    "longDescription": "Carsystem 2K CLEAR VOC CC.25 HS/AS je kvalitetan 2K industrijski bezbojni lak za profesionalno lakiranje. Pogodan je za lakiranje pojedinačnih delova i celih partija vozila i primenjiv je na svim vrstama popravki. Jednostavan je za rad, daje veoma visok sjaj i dobro se razliva i na vertikalnim površinama. HS/AS tehnologija obezbeđuje ujednačen i trajno sjajan izgled.",
+    "purpose": "Lakiranje pojedinačnih delova i celih partija vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K HS akrilni lak"
+      },
+      {
+        "label": "Podloge",
+        "value": "Razvijen za bazne boje na bazi rastvarača i na bazi vode"
+      }
+    ],
+    "applications": [
+      "Pogodan za lakiranje pojedinačnih delova, kao i celih partija vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavna primena",
+        "description": "Posebno je prijatan i jednostavan za rad."
+      },
+      {
+        "title": "Veoma visok sjaj",
+        "description": "Postiže veoma visok nivo sjaja."
+      },
+      {
+        "title": "Dobro razlivanje",
+        "description": "Odlično se razliva i na vertikalnim površinama."
+      },
+      {
+        "title": "Sve vrste popravki",
+        "description": "Pogodan je za sve vrste popravki."
+      }
+    ],
+    "advice": "Preporučuje se rad isključivo unutar sistema. Pri upotrebi razređivača ili učvršćivača van sistema ne mogu se isključiti problemi sa sušenjem i prianjanjem.",
+    "variants": {
+      "160.417": "A+B komponenta / 1.5 L / standardni",
+      "160.418": "A+B komponenta / 1,5 L / brzi",
+      "160.419": "A komponenta / 5.0 L",
+      "160.420": "Učvršćivač / 2,5L / standardni",
+      "160.422": "Učvršćivač / 2,5L / brzi"
+    }
+  },
+  "painting/2k-clear-voc-cc26-eco-x-15-60-2k-clear-coat": {
+    "sourceHash": "9dfb0d960135217c",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "2K akrilni bezbojni lak usklađen sa VOC propisima, sa brzim sušenjem i visokom otpornošću na ogrebotine.",
+    "longDescription": "CC.26 ECO-X 15/60 je 2K akrilni bezbojni lak usklađen sa VOC propisima. Karakterišu ga brzo sušenje, veoma visok sjaj i izražena otpornost na ogrebotine. Dobro se razliva, otporan je na curenje i pogodan za profesionalno lakiranje, od pojedinačnih delova do kompletnih partija vozila.",
+    "purpose": "Lakiranje pojedinačnih delova i kompletnih partija vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni lak"
+      }
+    ],
+    "applications": [
+      "Bezbojni lak usklađen sa VOC propisima, pogodan za lakiranje pojedinačnih delova, kao i kompletnih partija vozila, na primer prednjeg kraja"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši."
+      },
+      {
+        "title": "Dobro razlivanje",
+        "description": "Ima odlična svojstva razlivanja."
+      },
+      {
+        "title": "Visoka tvrdoća i otpornost",
+        "description": "Postiže visoku krajnju tvrdoću i izraženu otpornost na ogrebotine."
+      },
+      {
+        "title": "Veoma visok sjaj",
+        "description": "Daje veoma visok nivo sjaja."
+      },
+      {
+        "title": "Otporan na curenje",
+        "description": "Otporan je na stvaranje curenja."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Prijatan je i jednostavan za rad."
+      }
+    ],
+    "advice": "Preporučuje se upotreba proizvoda unutar propisanog sistema. Pri korišćenju razređivača i učvršćivača drugih proizvođača ili proizvoda van sistema ne mogu se isključiti problemi sa sušenjem i prianjanjem.",
+    "variants": {
+      "160.613": "A+B komponenta / 1,5 L",
+      "160.614": "A komponenta / 5 L",
+      "160.615": "Učvršćivač / 2,5 L"
+    }
+  },
+  "painting/2k-clear-voc-hs-sr-2k-clear-coat": {
+    "sourceHash": "8b423c351fe3f321",
+    "productType": "Bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Univerzalni industrijski 2K akrilni bezbojni lak za sve uobičajene lakirerske radove.",
+    "longDescription": "Univerzalni industrijski 2K akrilni bezbojni lak za sve uobičajene lakirerske radove, od spot popravke do lakiranja celog vozila. Usklađen je sa VOC propisima. Odlikuje ga visoka otpornost na ogrebotine i visoka početna tvrdoća neposredno posle sušenja.",
+    "purpose": "Lakirerski radovi od spot popravke do celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni industrijski bezbojni lak"
+      },
+      {
+        "label": "VOC",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni lakirerski radovi, od spot popravke do celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na ogrebotine",
+        "description": "Visoka otpornost na ogrebotine."
+      },
+      {
+        "title": "Visoka početna tvrdoća",
+        "description": "Visoka početna tvrdoća neposredno posle sušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "153.223": "A+B komponenta / spori učvršćivač / 1.5 L",
+      "153.774": "A+B komponenta / standardni učvršćivač / 1.5 L",
+      "151.909": "A komponenta / 5.0 L",
+      "151.910": "Standardni učvršćivač / 2.5 L",
+      "151.911": "Brzi učvršćivač / 2.5 L"
+    }
+  },
+  "painting/2k-clear-voc-matt-2k-clear-coat-matt": {
+    "sourceHash": "a6b9250cd76cfb42",
+    "productType": "2K bezbojni lak mat",
+    "subtype": "2K bezbojni lak mat",
+    "shortDescription": "2K akrilni mat bezbojni lak usklađen sa VOC propisima, dostupan u dva stepena mata.",
+    "longDescription": "Carsystem Clear Coat Matt je 2K akrilni mat bezbojni lak usklađen sa VOC propisima, namenjen mat lakiranju. Dostupan je u dva stepena mata: mat (148.983) i svilenkasto mat (148.986).",
+    "purpose": "Mat lakiranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak, mat"
+      },
+      {
+        "label": "Stepen mata",
+        "value": "Mat - 148.983"
+      },
+      {
+        "label": "Stepen mata",
+        "value": "Svilenkasto mat - 148.986"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "148.983": "A komponenta / mat / 1.0 L",
+      "148.986": "A komponenta / svilenkasto mat / 1.0 L",
+      "148.985": "Učvršćivač standardni / 0.5 L",
+      "148.984": "Učvršćivač brzi / 0.5 L"
+    }
+  },
+  "painting/2k-clear-voc-premium-2k-clear-coat": {
+    "sourceHash": "91ce5eeb01dff151",
+    "productType": "Bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Univerzalni 2K akrilni bezbojni lak sa dugim vremenom obrade, usklađen sa VOC propisima.",
+    "longDescription": "Univerzalni 2K akrilni bezbojni lak za sve uobičajene lakirerske radove, od spot popravke do lakiranja celog vozila. Usklađen je sa VOC propisima. Odlikuju ga dobar kvalitet površine i dugo vreme obrade.",
+    "purpose": "Lakirerski radovi od spot popravke do celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni bezbojni lak"
+      },
+      {
+        "label": "VOC",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni lakirerski radovi, od spot popravke do celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Dobar kvalitet površine",
+        "description": "Dobar kvalitet lakirane površine."
+      },
+      {
+        "title": "Dugo vreme obrade",
+        "description": "Dugo vreme upotrebljivosti pripremljene smeše."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "146.714": "A komponenta / 5 L",
+      "147.019": "Standardni učvršćivač / 2.5 L",
+      "147.862": "Brzi učvršćivač / 2.5 L"
+    }
+  },
+  "painting/2k-clear-voc-speed-plus-2k-clear-coat": {
+    "sourceHash": "bea8a5671af53646",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Brzosušivi 2K akrilni bezbojni lak za sve uobičajene radove lakiranja, od manjih delova do celog vozila.",
+    "longDescription": "Clear Coat Speed Plus je brzosušivi 2K akrilni bezbojni lak premium kvaliteta, namenjen svim uobičajenim radovima u lakirerskoj radionici. Usklađen je sa VOC propisima i jednostavan za rad. Daje briljantan sjaj i veoma dobar kvalitet površine, uz izraženu otpornost na habanje.",
+    "purpose": "Od spot popravke do lakiranja celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Klasa",
+        "value": "Premium kvalitet"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi lakiranja, od spot popravke do celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Veoma brzo se suši."
+      },
+      {
+        "title": "Briljantan sjaj",
+        "description": "Daje briljantan sjaj lakirane površine."
+      },
+      {
+        "title": "Kvalitet površine",
+        "description": "Postiže veoma dobar kvalitet površine."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Veoma je prijatan i jednostavan za rad."
+      },
+      {
+        "title": "Otpornost na habanje",
+        "description": "Ima izraženu otpornost na habanje."
+      }
+    ],
+    "advice": "Za kompletna lakiranja preporučuje se brz i efikasan način rada.",
+    "variants": {
+      "152.563": "A+B komponenta / 1.5 L",
+      "151.899": "A komponenta / 5.0 L",
+      "151.901": "Učvršćivač / 2.5 L"
+    }
+  },
+  "painting/2k-epoxy-fill-primer-2k-spot-repair-epoxy-primer": {
+    "sourceHash": "6a99f0e656784de5",
+    "productType": "2K epoksi prajmer",
+    "subtype": "2K epoksi prajmer za spot popravke",
+    "shortDescription": "2K epoksi prajmer u spreju za prajmerisanje manjih delova i posebno za spot popravke.",
+    "longDescription": "Carsystem 2K epoksi prajmer u spreju namenjen je prajmerisanju manjih delova i posebno je pogodan za spot popravke. Isporučuje se sa promenljivom mlaznicom za raspršivanje. Pruža vrlo dobro prianjanje i zaštitu od korozije, a formulacija ne sadrži izocijanate.",
+    "purpose": "Prajmerisanje manjih delova i spot popravke",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "2K epoksi punilac u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Bež"
+      }
+    ],
+    "applications": [
+      "Za prajmerisanje manjih delova",
+      "Posebno pogodan za spot popravke"
+    ],
+    "benefits": [
+      {
+        "title": "Promenljiva mlaznica",
+        "description": "Opremljen je promenljivom mlaznicom za raspršivanje."
+      },
+      {
+        "title": "Prianjanje i zaštita od korozije",
+        "description": "Pruža vrlo dobro prianjanje i zaštitu od korozije."
+      },
+      {
+        "title": "Bez izocijanata",
+        "description": "Formulacija ne sadrži izocijanate."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.158": "Bež / 400 ml"
+    }
+  },
+  "painting/2k-filler-air-plus-2k-acrylic-filler": {
+    "sourceHash": "d4206f62288587f2",
+    "productType": "2K akrilni punilac",
+    "subtype": "2K akrilni punilac",
+    "shortDescription": "2K akrilni ekspres punilac za manje delove, spot popravke i sušenje na vazduhu.",
+    "longDescription": "Carsystem 2K Filler Air Plus je 2K akrilni ekspres punilac usklađen sa VOC propisima. Pogodan je za manje delove, spot popravke i radove kod kojih se suši na vazduhu. Brzo se suši na vazduhu i veoma dobro se brusi.",
+    "purpose": "Manji delovi, spot popravke i sušenje na vazduhu",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni punilac"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Pogodan za manje delove, spot popravke i sušenje na vazduhu",
+      "Svi uobičajeni radovi lakiranja, od spot popravke do celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje na vazduhu",
+        "description": "Brzo se suši na vazduhu."
+      },
+      {
+        "title": "Dobra obradivost brušenjem",
+        "description": "Veoma dobro se brusi."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.580": "A + B komponenta / siva / 1.25 L",
+      "152.416": "A komponenta / bela / 3.6 L",
+      "152.417": "A komponenta / siva / 3.6 L",
+      "152.418": "A komponenta / crna / 3.6 L",
+      "152.419": "Učvršćivač / 0.9 L"
+    }
+  },
+  "painting/2k-filler-vario-plus-2k-acrylic-filler": {
+    "sourceHash": "65af2aed7114134e",
+    "productType": "2K akrilni punilac",
+    "subtype": "2K akrilni punilac",
+    "shortDescription": "2K akrilni punilac visoke debljine sloja koji se dodatkom razređivača podešava kao standardni punilac.",
+    "longDescription": "2K Filler Vario Plus je 2K akrilni punilac visoke debljine sloja, svetlosive boje, usklađen sa VOC propisima. Dodatkom razređivača može se podesiti kao standardni punilac. Pogodan je za sve uobičajene radove lakiranja, od spot popravke do celog vozila.",
+    "purpose": "Od spot popravke do lakiranja celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni punilac"
+      },
+      {
+        "label": "Debljina sloja",
+        "value": "Punilac visoke debljine sloja"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlosiva"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi lakiranja, od spot popravke do celog vozila",
+      "Upotrebljiv i kao punilac visoke debljine sloja",
+      "Punilac: 60 do 180 µ",
+      "Punilac visoke debljine sloja: 85 do 255 µ"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć popunjavanja",
+        "description": "Ostvaruje veoma visok stepen popunjavanja."
+      },
+      {
+        "title": "Podesiv razređivačem",
+        "description": "Punilac se može promenljivo podesiti dodavanjem do 30 % razređivača."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.058": "A+B komponenta / svetlosiva / 1.2 L",
+      "152.057": "A komponenta / svetlosiva / 3.5 L",
+      "147.682": "Učvršćivač / 0.7 L"
+    }
+  },
+  "painting/2k-filler-wet-on-wet-plus-2k-acryl-filler": {
+    "sourceHash": "1073d65975dfaef0",
+    "productType": "Punilac",
+    "subtype": "2K akrilni punilac",
+    "shortDescription": "2K akrilni punilac mokro na mokro za lakiranje novih delova sa e-coat prajmerom.",
+    "longDescription": "2K akrilni punilac namenjen lakiranju novih delova sa e-coat prajmerom. Na e-coat delovima se preko njega lakira mokro na mokro, bez brušenja. Na golom metalu pruža zaštitu od korozije. Usklađen je sa VOC propisima.",
+    "purpose": "Lakiranje novih delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni punilac"
+      },
+      {
+        "label": "Način nanošenja",
+        "value": "Punilac mokro na mokro"
+      },
+      {
+        "label": "VOC",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Lakiranje novih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Bez brušenja e-coat podloge",
+        "description": "Nanosi se na e-coat prajmere bez brušenja."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Pruža zaštitu od korozije na golim metalnim delovima."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "153.455": "A+B komponenta / siva / 1.05 L",
+      "153.456": "A komponenta / siva / 3.6 L",
+      "153.457": "Učvršćivač / 0.6 L"
+    }
+  },
+  "painting/2k-high-speed-klarlack-2k-spot-repair-clear-coat": {
+    "sourceHash": "f3f03590b9c5771e",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K bezbojni lak za spot popravke",
+    "shortDescription": "2K akrilni bezbojni lak u spreju za lakiranje manjih delova i spot popravke.",
+    "longDescription": "Carsystem 2K High-Speed Klarlack je 2K akrilni bezbojni lak u spreju, providne boje. Namenjen je lakiranju manjih delova i posebno je pogodan za spot popravke. Nije potrebna primena pištolja za lakiranje, a raspršivanje je veoma fino.",
+    "purpose": "Lakiranje manjih delova i spot popravke",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "2K akrilni bezbojni lak u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Za lakiranje manjih delova",
+      "Posebno pogodan za spot popravke"
+    ],
+    "benefits": [
+      {
+        "title": "Bez pištolja za lakiranje",
+        "description": "Nije potrebna primena pištolja za lakiranje."
+      },
+      {
+        "title": "Fino raspršivanje",
+        "description": "Postiže veoma fino raspršivanje."
+      },
+      {
+        "title": "Dugo vreme upotrebe",
+        "description": "Dugo vreme upotrebe nakon aktiviranja (oko 24 h)."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "149.421": "400 ml"
+    }
+  },
+  "painting/2k-voc-filler-540-2k-acrylic-filler": {
+    "sourceHash": "1a6d259ef2af8e4d",
+    "productType": "2K akrilni punilac",
+    "subtype": "2K akrilni punilac",
+    "shortDescription": "Univerzalni 2K akrilni punilac za sve uobičajene radove lakiranja, sa izborom tri učvršćivača.",
+    "longDescription": "Carsystem 2K Filler 540 je univerzalni 2K akrilni punilac usklađen sa VOC propisima. Namenjen je svim uobičajenim radovima lakiranja, od spot popravke do celog vozila. Promenljivo se podešava sa tri različita učvršćivača, a za rad na niskim temperaturama dostupan je zimski učvršćivač CT.",
+    "purpose": "Od spot popravke do lakiranja celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni punilac"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni punilac"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi lakiranja, od spot popravke do celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć popunjavanja",
+        "description": "Ostvaruje visok stepen popunjavanja."
+      },
+      {
+        "title": "Tri učvršćivača",
+        "description": "Promenljiv je zahvaljujući trima različitim učvršćivačima."
+      },
+      {
+        "title": "Zimski učvršćivač CT",
+        "description": "Za niske temperature dostupan je zimski učvršćivač CT (cold temperature)."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "144.541": "A+B komponenta / učvršćivač veoma brzi / bela / 1.25 L",
+      "147.432": "A+B komponenta / učvršćivač standardni / siva / 1.25 L",
+      "144.539": "A+B komponenta / učvršćivač veoma brzi / siva / 1.25 L",
+      "144.540": "A+B komponenta / učvršćivač veoma brzi / crna / 1.25 L",
+      "144.354": "A komponenta / bela / 3.6 L",
+      "144.026": "A komponenta / siva / 3.6 L",
+      "144.353": "A komponenta / crna / 3.6 L",
+      "144.977": "Učvršćivač VOC 541 / standardni / 0.9 L",
+      "144.027": "Učvršćivač veoma brzi / 0.9 L",
+      "153.493": "Učvršćivač VOC 541 CT / 0.9 L"
+    }
+  },
+  "painting/acryl-thinner-acrylic-thinner": {
+    "sourceHash": "86a17690b05ffa27",
+    "productType": "Akrilni razređivač",
+    "subtype": "Akrilni razređivač",
+    "shortDescription": "Akrilni razređivač za sve Carsystem punioce i bezbojne lakove.",
+    "longDescription": "Carsystem Acryl Thinner je akrilni razređivač providne boje. Namenjen je svim Carsystem puniocima i bezbojnim lakovima. Dostupan je u sporoj, standardnoj i brzoj varijanti.",
+    "purpose": "Razređivanje Carsystem punilaca i bezbojnih lakova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilni razređivač"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Za sve Carsystem punioce i bezbojne lakove"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "153.171": "Spori / 5 L",
+      "150.331": "Standardni / 1 L",
+      "141.479": "Standardni / 5 L",
+      "152.456": "Brzi / 5 L"
+    }
+  },
+  "painting/activator-reaction-accelerator": {
+    "sourceHash": "39c17dbfb53ccbcf",
+    "productType": "Ubrzivač reakcije",
+    "subtype": "Ubrzivač reakcije",
+    "shortDescription": "Aditiv za ubrzavanje sušenja Carsystem punilaca i bezbojnih lakova.",
+    "longDescription": "Carsystem Activator je ubrzivač reakcije koji se koristi kao aditiv za ubrzavanje procesa sušenja Carsystem punilaca i bezbojnih lakova. Maksimalan dodatak iznosi 10 % u punioce i 2 % u bezbojne lakove. Vreme sušenja skraćuje se za oko 15 %.",
+    "purpose": "Ubrzavanje sušenja punilaca i bezbojnih lakova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Aditiv, ubrzivač reakcije"
+      }
+    ],
+    "applications": [
+      "Aditiv za ubrzavanje procesa sušenja Carsystem punilaca i bezbojnih lakova",
+      "Maks. dodatak u punioce: 10 %",
+      "Maks. dodatak u bezbojne lakove: 2 %"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće vreme sušenja",
+        "description": "Ubrzava vreme sušenja za oko 15 %."
+      }
+    ],
+    "advice": "Koristiti samo sa standardnim ili sporim učvršćivačima kako bi se izbegli problemi sa prianjanjem ili matiranje.",
+    "variants": {
+      "147.695": "1 L"
+    }
+  },
+  "painting/adapter-for-cps-paint-cup-systems-stainless-steel-and-aluminium-spray-gun-adapters": {
+    "sourceHash": "d06f7f0d1e3598ad",
+    "productType": "Adapter za pištolj za lakiranje",
+    "subtype": "Adapteri za pištolj za lakiranje · nerđajući čelik i aluminijum",
+    "shortDescription": "Adapteri za CPS sisteme posuda, u izvedbi od nerđajućeg čelika ili aluminijuma.",
+    "longDescription": "Program adaptera za Carsystem CPS sisteme posuda za boju omogućava povezivanje CPS 3.0 i CPS 2.0 sa svim uobičajenim pištoljima za lakiranje. Adapteri se navojem spajaju na CPS sisteme posuda. Dostupni su u izvedbi od nerđajućeg čelika ili aluminijuma.",
+    "purpose": "Povezivanje CPS posuda sa pištoljem za lakiranje",
+    "facts": [
+      {
+        "label": "Kompatibilnost",
+        "value": "Kvalitetni adapteri za sve uobičajene pištolje za lakiranje"
+      }
+    ],
+    "applications": [
+      "Navojno povezivanje adaptera sa Carsystem CPS sistemima posuda"
+    ],
+    "benefits": [
+      {
+        "title": "Za CPS 2.0 i CPS 3.0",
+        "description": "Pogodni su za sisteme CPS 2.0 i CPS 3.0."
+      },
+      {
+        "title": "Čelik ili aluminijum",
+        "description": "Izrađeni su od nerđajućeg čelika ili aluminijuma."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.063": "Adapter A7 - Devilbiss / nerđajući čelik",
+      "158.064": "Adapter A5 - Anest Iwata W400 / nerđajući čelik",
+      "158.065": "Adapter A87 - Anest Iwata WS400 + LS400 / nerđajući čelik",
+      "158.066": "Adapter A82 - SATA QCC / nerđajući čelik",
+      "158.717": "Adapter A19 - Walcom GEO/HTE / nerđajući čelik",
+      "158.718": "Adapter A17 - Walcom EGO/SLIM / nerđajući čelik",
+      "160.187": "Adapter A31 - Iwata LPH-80 / nerđajući čelik",
+      "160.188": "Adapter A7 - Devilbiss / aluminijum",
+      "160.189": "Adapter A5 - Iwata W400 / aluminijum",
+      "160.190": "Adapter A87 - Iwata WS400 / aluminijum",
+      "160.191": "Adapter A82 - SATA QCC / aluminijum",
+      "160.192": "Adapter A19 - Walcom GEO/HTE / aluminijum",
+      "160.193": "Adapter A17 - Walcom EGO/SLIM / aluminijum",
+      "160.194": "Adapter A31 - Iwata LPH-80 / aluminijum"
+    }
+  },
+  "painting/af21-1k-filler-1k-hybrid-filler": {
+    "sourceHash": "2528fef6000f98b2",
+    "productType": "1K hibridni punilac",
+    "subtype": "1K hibridni punilac",
+    "shortDescription": "1K hibridni punilac (akril/epoksi) za izolaciju gitovanih mesta i lakiranje novih delova.",
+    "longDescription": "Carsystem AF.21 1K Filler je 1K hibridni punilac na bazi akrila i epoksida, sive boje, usklađen sa VOC propisima. Koristi se za izolaciju gitovanih mesta i lakiranje novih delova. Pruža 100 % zaštitu od korozije i može se nanositi na plastične delove sa direktnim prianjanjem, osim na PE, PP i mešavine tih materijala.",
+    "purpose": "Izolacija gitovanih mesta i lakiranje novih delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "1K hibridni punilac - akril/epoksi"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Za izolaciju gitovanih mesta",
+      "Lakiranje novih delova",
+      "Punjenje plastičnih delova sa direktnim prianjanjem, bez prethodnog nanošenja prajmera (osim PE i PP)"
+    ],
+    "benefits": [
+      {
+        "title": "100 % zaštita od korozije",
+        "description": "Pruža 100 % zaštitu od korozije."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Veoma je prijatan i jednostavan za rad."
+      },
+      {
+        "title": "Dobra obradivost brušenjem",
+        "description": "Veoma dobro se brusi."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.244": "Siva / 1 L",
+      "158.245": "Razređivač / 1 L"
+    }
+  },
+  "painting/af21-x-pert-2k-acrylic-filler": {
+    "sourceHash": "d69fb7f1905d6acc",
+    "productType": "2K akrilni punilac",
+    "subtype": "2K akrilni punilac",
+    "shortDescription": "Univerzalni 2K akrilni punilac, podesiv kao punilac visoke debljine sloja ili mokro na mokro.",
+    "longDescription": "Carsystem AF.21 X-pert je univerzalni 2K akrilni punilac usklađen sa VOC propisima, namenjen svim uobičajenim radovima u karoserijskoj i lakirerskoj radionici, od spot popravke do celog vozila. Uz odgovarajući razređivač podešava se kao punilac visoke debljine sloja ili za primenu mokro na mokro. Ima veoma dobro prianjanje na čelik, aluminijum, KTL prajmere, plastiku i poliesterske punioce.",
+    "purpose": "Od spot popravke do lakiranja celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni punilac"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni punilac"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi punjenja, od spot popravke do celog vozila",
+      "Veoma dobro prianjanje na čelik, aluminijum, KTL (e-coat) prajmere, plastiku (primena mokro na mokro) i poliesterske punioce",
+      "Lakiranje novih delova sa KTL (e-coat) prajmerom",
+      "Zaštita od korozije"
+    ],
+    "benefits": [
+      {
+        "title": "Podesiv mokro na mokro",
+        "description": "Može se podesiti za primenu mokro na mokro."
+      },
+      {
+        "title": "Dobra obradivost brušenjem",
+        "description": "Odlično se brusi."
+      },
+      {
+        "title": "Promenljiva debljina sloja",
+        "description": "Debljina sloja se fleksibilno podešava, od niske do veoma visoke."
+      },
+      {
+        "title": "Nanošenje bez brušenja",
+        "description": "Nanosi se na KTL (e-coat) prajmere bez prethodnog brušenja."
+      },
+      {
+        "title": "Prianjanje na plastiku",
+        "description": "U podešavanju mokro na mokro prianja i na plastiku."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.216": "A komponenta / bela / 3.6 L",
+      "158.218": "A komponenta / siva / 3.6 L",
+      "158.219": "A komponenta / crna / 3.6 L",
+      "158.220": "Učvršćivač / 0.9 L",
+      "158.221": "Razređivač standardni / 1 L",
+      "159.237": "Razređivač Multi Wet-On-Wet / 1 L",
+      "160.315": "Razređivač Air Dry Additive / 1 L"
+    }
+  },
+  "painting/af25-primer-wet-on-wet-2k-acryl-filler": {
+    "sourceHash": "24012285d8892553",
+    "productType": "2K akrilni punilac",
+    "subtype": "2K akrilni punilac",
+    "shortDescription": "2K akrilni prajmer mokro na mokro za čelik, aluminijum, pocinkovane površine, KTL delove i plastiku.",
+    "longDescription": "Carsystem AF.25 Primer je svestran 2K akrilni prajmer za primenu mokro na mokro. Koristi se na čeliku, aluminijumu, pocinkovanim površinama, KTL (e-coat) delovima i različitim plastikama (ABS, PA6, PP/EPDM, PC, PVC). Jednostavan je za nanošenje, ima nisku potrošnju materijala i daje glatku, svilenkasto mat površinu uz zaštitu od korozije.",
+    "purpose": "Prajmerisanje mokro na mokro na metalu i plastici",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni prajmer mokro na mokro"
+      }
+    ],
+    "applications": [
+      "Prajmer se može koristiti na čeliku, aluminijumu, pocinkovanim površinama, KTL (e-coat) delovima i različitim plastikama (ABS, PA6, PP/EPDM, PC, PVC)"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavno nanošenje",
+        "description": "Veoma se lako nanosi."
+      },
+      {
+        "title": "Niska potrošnja materijala",
+        "description": "Potrošnja materijala je niska zahvaljujući odličnom razlivanju."
+      },
+      {
+        "title": "Glatka svilenkasto mat površina",
+        "description": "Daje glatku i svilenkasto mat površinu."
+      },
+      {
+        "title": "Bez uticaja na izgled laka",
+        "description": "Ne utiče na konačan izgled bezbojnog laka: bez tragova brušenja, skupljanja i narandžine kore."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Pruža zaštitu od korozije."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.263": "A+B komponenta / bela / 1,0 L",
+      "160.262": "A+B komponenta / siva / 1,0 L",
+      "160.261": "A+B komponenta / crna / 1,0 L",
+      "160.267": "A komponenta / siva / 3,0 L",
+      "160.265": "A komponenta / crna / 3,0 L",
+      "160.268": "B komponenta / 1,0 L"
+    }
+  },
+  "painting/brush-set-set-of-brushes": {
+    "sourceHash": "c320d8093b62b73e",
+    "productType": "Set četkica",
+    "subtype": "Set četkica",
+    "shortDescription": "Set malih četkica u tri veličine za popravke sitnih oštećenja i udara kamena.",
+    "longDescription": "Carsystem Brush Set je set malih četkica u tri veličine, sa po 12 komada od svake. Sadrži veličine br. 4, br. 6 i br. 8. Namenjen je popravkama sitnih nepravilnosti, oštećenja od udara kamena i sličnih mesta.",
+    "purpose": "Popravke sitnih oštećenja i udara kamena",
+    "facts": [
+      {
+        "label": "Sadržaj",
+        "value": "Set malih četkica"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "3 veličine / 12 kom. po veličini"
+      },
+      {
+        "label": "Veličine",
+        "value": "Br. 4 / br. 6 / br. 8"
+      }
+    ],
+    "applications": [
+      "Za popravke sitnih nepravilnosti, oštećenja od udara kamena i slično"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "140.970": "Set"
+    }
+  },
+  "painting/bumper-paint-spray-bumper-spray": {
+    "sourceHash": "3496f6bb584b3c6c",
+    "productType": "Sprej za branike",
+    "subtype": "Sprej za branike",
+    "shortDescription": "Akrilna boja u spreju za obnovu i popravku starih, izbledelih ili oštećenih plastičnih delova.",
+    "longDescription": "Carsystem Bumper Paint Spray je akrilna boja u spreju namenjena popravkama i obnovi starih, izbledelih ili oštećenih plastičnih delova. Nanosi se direktno na plastiku, bez prajmera za plastiku, i ne zahteva primenu pištolja za lakiranje.",
+    "purpose": "Obnova starih i oštećenih plastičnih delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilna boja u spreju"
+      }
+    ],
+    "applications": [
+      "Popravke i obnova starih, izbledelih ili oštećenih plastičnih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Bez prajmera za plastiku",
+        "description": "Nije potreban prajmer za plastiku."
+      },
+      {
+        "title": "Bez pištolja za lakiranje",
+        "description": "Nije potrebna primena pištolja za lakiranje."
+      }
+    ],
+    "advice": "Primenjiv na PP, PP/EPDM i ABS.",
+    "variants": {
+      "142.820": "Siva / 400 ml",
+      "142.821": "Crna / 400 ml"
+    }
+  },
+  "painting/bumper-paint-structurant-paint-for-plastics": {
+    "sourceHash": "c1c41f6a47ae0bbb",
+    "productType": "Strukturna boja za plastiku",
+    "subtype": "Strukturna boja za plastiku",
+    "shortDescription": "Akrilna strukturna boja za popravku i obnovu starih, izbledelih ili oštećenih plastičnih delova.",
+    "longDescription": "Carsystem Bumper Paint je akrilna strukturna boja crne boje, namenjena popravkama i obnovi starih, izbledelih ili oštećenih plastičnih delova. Ponovo formira strukturu blisku originalnoj i nanosi se direktno na plastiku, bez prethodnog prajmerisanja.",
+    "purpose": "Obnova strukture na plastičnim delovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilna strukturna boja"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Popravke i obnova starih, izbledelih ili oštećenih plastičnih delova",
+      "Ponovo formira strukturu blisku originalnoj"
+    ],
+    "benefits": [
+      {
+        "title": "Bez prajmera za plastiku",
+        "description": "Nije potreban prajmer za plastiku."
+      },
+      {
+        "title": "Direktno na plastiku",
+        "description": "Nanosi se direktno na plastiku, bez prethodnog prajmerisanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "147.447": "1.0 L"
+    }
+  },
+  "painting/bumper-structurant-spray-bumper-structurant-spray-black": {
+    "sourceHash": "dfd35ca795ba26e1",
+    "productType": "Strukturni sprej za branike",
+    "subtype": "Strukturni sprej za branike · crni",
+    "shortDescription": "Akrilna strukturna boja u spreju za obnovu starih, izbledelih ili oštećenih plastičnih delova.",
+    "longDescription": "Carsystem Bumper Structurant Spray je akrilna strukturna boja u spreju, crne boje. Namenjena je popravkama i obnovi starih, izbledelih ili oštećenih plastičnih delova i ponovo formira strukturu blisku originalnoj. Nanosi se direktno na plastiku, bez prajmera za plastiku i bez pištolja za lakiranje.",
+    "purpose": "Obnova strukture na plastičnim delovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilna strukturna boja u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Popravke i obnova starih, izbledelih ili oštećenih plastičnih delova",
+      "Ponovo formira strukturu blisku originalnoj"
+    ],
+    "benefits": [
+      {
+        "title": "Bez prajmera za plastiku",
+        "description": "Nije potreban prajmer za plastiku."
+      },
+      {
+        "title": "Bez pištolja za lakiranje",
+        "description": "Nije potrebna primena pištolja za lakiranje."
+      }
+    ],
+    "advice": "Za lepezasto ili široko raspršivanje preporučuje se Carsystem Replacement Spray Head Red (145.840).",
+    "variants": {
+      "142.982": "400 ml"
+    }
+  },
+  "painting/can-scraper-plastic-mixing-stick": {
+    "sourceHash": "fdf1c57b06865af4",
+    "productType": "Štapić za mešanje",
+    "subtype": "Plastični štapić za mešanje",
+    "shortDescription": "Plastični štapić za mešanje otporan na rastvarače, dužine 31 cm, za boje i punioce.",
+    "longDescription": "Can Scraper je plastični štapić za brzo mešanje boja, punilaca i drugih viskoznih materijala. Otporan je na rastvarače, pa je pogodan za rad sa agresivnim komponentama, a dužina je 31 cm. Zahvaljujući obliku, ambalaža se može gotovo potpuno isprazniti, čime se smanjuje gubitak materijala.",
+    "purpose": "Mešanje materijala i pražnjenje ambalaže",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Plastični štapić za mešanje"
+      },
+      {
+        "label": "Otpornost",
+        "value": "Otporan na rastvarače"
+      },
+      {
+        "label": "Dužina",
+        "value": "31 cm"
+      }
+    ],
+    "applications": [
+      "Za jednostavno mešanje materijala za lakiranje",
+      "Pražnjenje ostatka iz ambalaže od 1 litra i 3.6 litara"
+    ],
+    "benefits": [
+      {
+        "title": "Manje otpada boje",
+        "description": "Smanjuje količinu neiskorišćenog materijala."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.672": "Set od 5 štapića"
+    }
+  },
+  "painting/cc20-x-pert-2k-clear-coat": {
+    "sourceHash": "447d2047ee62dde5",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Brzosušivi 2K akrilni bezbojni lak za sve uobičajene radove, od manjih delova do kompletnog lakiranja.",
+    "longDescription": "Clear Coat CC.20 X-pert je brzosušivi 2K akrilni bezbojni lak opšte namene, usklađen sa VOC propisima. Namenjen je svim uobičajenim radovima u lakirerskoj radionici, od manjih delova do kompletnog lakiranja vozila. Jednostavan je za rad, postiže veoma visoku krajnju tvrdoću i briljantan sjaj.",
+    "purpose": "Od pojedinačnih delova do lakiranja celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Namena",
+        "value": "Bezbojni lak opšte namene"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi u lakirerskoj radionici, od pojedinačnih delova do lakiranja celog vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Ima kratko vreme sušenja."
+      },
+      {
+        "title": "Visoka krajnja tvrdoća",
+        "description": "Postiže veoma visoku krajnju tvrdoću."
+      },
+      {
+        "title": "Briljantan sjaj",
+        "description": "Daje briljantan sjaj lakirane površine."
+      }
+    ],
+    "advice": "Za kompletna lakiranja preporučuje se brz i efikasan način rada.",
+    "variants": {
+      "158.423": "A + B komponenta / 1.5 L",
+      "157.450": "A komponenta / 5 L",
+      "157.451": "Učvršćivač / 2.5 L"
+    }
+  },
+  "painting/cc21-x-press-five-2k-clear-coat": {
+    "sourceHash": "faf65f037b49d0ea",
+    "productType": "2K bezbojni lak",
+    "subtype": "2K bezbojni lak",
+    "shortDescription": "Veoma brzosušivi 2K akrilni bezbojni lak premium kvaliteta za manje i srednje radove lakiranja.",
+    "longDescription": "Carsystem CC.21 X-press FIVE je veoma brzosušivi 2K akrilni bezbojni lak premium kvaliteta, usklađen sa VOC propisima. Namenjen je manjim i srednjim radovima lakiranja. Jednostavan je za rad i ima odlična svojstva sjaja i razlivanja, uz veoma dobar kvalitet površine.",
+    "purpose": "Manji i srednji radovi lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K akrilni bezbojni lak"
+      },
+      {
+        "label": "Klasa",
+        "value": "Premium kvalitet"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Za manje i srednje radove lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma brzo sušenje",
+        "description": "Ima izuzetno kratko vreme sušenja."
+      },
+      {
+        "title": "Sjaj i razlivanje",
+        "description": "Ima odlična svojstva sjaja i razlivanja."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Veoma je prijatan i jednostavan za rad."
+      },
+      {
+        "title": "Kvalitet površine",
+        "description": "Postiže veoma dobar kvalitet površine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.251": "A+B komponenta / 1.5 L",
+      "158.249": "A komponenta / 5 L",
+      "158.250": "Učvršćivač / 2.5 L"
+    }
+  },
+  "painting/clear-coat-spray-paint-spray-transparent": {
+    "sourceHash": "f6a27bb41b34dae5",
+    "productType": "Sprej za lakiranje",
+    "subtype": "Sprej za lakiranje · providni",
+    "shortDescription": "1K bezbojni lak u spreju za spot repair popravke; brzo se suši i može se polirati.",
+    "longDescription": "Clear Coat Spray je jednokomponentni bezbojni lak u spreju namenjen spot repair popravkama. Nanosi se direktno iz limenke, brzo se suši i nakon sušenja može da se polira. Nijansa je providna, sa sjajnim završetkom.",
+    "purpose": "Spot repair popravke laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "1K bezbojni lak u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna — sjajna"
+      }
+    ],
+    "applications": [
+      "Spot repair"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši i može se polirati."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.025": "400 ml"
+    }
+  },
+  "painting/color-match-card-paper-colour-match-card": {
+    "sourceHash": "4019c3852b42a421",
+    "productType": "Kartica za nijansiranje",
+    "subtype": "Kartica za nijansiranje",
+    "shortDescription": "Papirne kartice za jednokratnu upotrebu za proveru nijanse i kontrolu pokrivnosti.",
+    "longDescription": "Color Match Card Paper je komplet papirnih kartica za nijansiranje koje se koriste jednokratno. Kartice služe za upoređivanje nijanse i za kontrolu pokrivnosti nanosa. U kompletu se isporučuje 250 komada zajedno sa držačem.",
+    "purpose": "Nijansiranje i kontrola pokrivnosti",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Kartica za nijansiranje"
+      },
+      {
+        "label": "Komplet",
+        "value": "Papirna izrada, 250 kom."
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Držač uključen"
+      }
+    ],
+    "applications": [
+      "Nijansiranje",
+      "Kartice za jednokratnu upotrebu"
+    ],
+    "benefits": [],
+    "advice": "Nije pogodno za boje na vodenoj bazi. Koristi se i za kontrolu pokrivnosti.",
+    "variants": {
+      "141.109": "250 kom. po kutiji / 70 x 179 mm"
+    }
+  },
+  "painting/dispenser-for-paint-strainers-dispenser": {
+    "sourceHash": "df74958ba14b04c3",
+    "productType": "Dispenzer",
+    "subtype": "Dispenzer",
+    "shortDescription": "Dispenzer za cediljke za boju, sa prostorom za 150 komada.",
+    "longDescription": "Dispenser for paint strainers je držač za Carsystem cediljke za boju. U njega staje 150 cediljki, pa se čuvaju uredno i zauzimaju malo prostora. Zatvoren prostor ih štiti od prašine i overspray čestica.",
+    "purpose": "Odlaganje cediljki za boju",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Dispenzer za cediljke za boju"
+      },
+      {
+        "label": "Kapacitet",
+        "value": "Prostor za 150 cediljki"
+      }
+    ],
+    "applications": [
+      "Za cediljke za boju"
+    ],
+    "benefits": [
+      {
+        "title": "Ušteda prostora",
+        "description": "Rešenje koje štedi prostor u radionici."
+      },
+      {
+        "title": "Zaštita od nečistoća",
+        "description": "Štiti sadržaj od prašine i overspray čestica."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "146.960": "Dispenzer"
+    }
+  },
+  "painting/dispenser-multi-mix-wall-bracket-for-multi-mix-cups": {
+    "sourceHash": "1518cb3df2830027",
+    "productType": "Zidni držač",
+    "subtype": "Zidni držač za Multi-Mix Cups",
+    "shortDescription": "Zidni dispenzer za odlaganje Multi-Mix Cups 2.0 posuda za mešanje.",
+    "longDescription": "Dispenser Multi-Mix je zidni držač za Carsystem Multi Mix Cup posude za mešanje. Montira se na zid, pa se posude čuvaju uredno i bez zauzimanja radne površine. Istovremeno su zaštićene od nečistoća iz okoline.",
+    "purpose": "Odlaganje Multi-Mix Cups 2.0 posuda",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Dispenzer za Multi-Mix Cups 2.0"
+      }
+    ],
+    "applications": [
+      "Odlaganje Multi-Mix Cups 2.0"
+    ],
+    "benefits": [
+      {
+        "title": "Ušteda prostora i zaštita",
+        "description": "Odlaganje koje štedi prostor i štiti od nečistoća iz okoline."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "137.664": "0.385 L",
+      "137.665": "0.75 L",
+      "137.666": "1.4 L",
+      "137.667": "2.3 L"
+    }
+  },
+  "painting/dust-needle-dust-needle": {
+    "sourceHash": "2c890c031a6fa559",
+    "productType": "Igla za prašinu",
+    "subtype": "Igla za prašinu",
+    "shortDescription": "Igla za uklanjanje čestica i vlakana sa sveže lakirane površine, u kompletu od 10 komada.",
+    "longDescription": "Dust Needle je igla kojom se sa sveže lakirane površine uklanjaju čestice i vlakna pre nego što lak očvrsne. Komplet sadrži 10 igala i odgovarajući držač.",
+    "purpose": "Uklanjanje čestica sa sveže lakirane površine",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Igla za uklanjanje prašine"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "10 kom."
+      },
+      {
+        "label": "Držač",
+        "value": "Uključen"
+      }
+    ],
+    "applications": [
+      "Za uklanjanje čestica i vlakana sa sveže lakiranih površina"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "140.971": "Set",
+      "140.972": "Igle u blisteru / 10 kom."
+    }
+  },
+  "painting/ef21-ep-filler-2k-hybrid-filler": {
+    "sourceHash": "5bb388bc3945fcf7",
+    "productType": "2K hibridni punilac",
+    "subtype": "2K hibridni punilac",
+    "shortDescription": "Univerzalni 2K hibridni punilac (akril/epoksi) za radove od spot repair popravke do celog vozila.",
+    "longDescription": "EF.21 EP-Filler je univerzalni dvokomponentni hibridni punilac na akrilno-epoksidnoj osnovi. Koristi se za sve uobičajene lakirerske radove, od spot repair popravki do lakiranja celog vozila, i može se naneti standardno ili mokro na mokro. Prijanja na čelik, aluminijum, KTL, stare i nove premaze, kao i na poliesterske gitove i ispod njih. Nijansa je žućkasta (približno RAL 7032), a proizvod je usklađen sa VOC propisima.",
+    "purpose": "Punjenje od spot repair popravke do celog vozila",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "2K hibridni punilac – akril/epoksi"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Univerzalni punilac"
+      },
+      {
+        "label": "Boja",
+        "value": "Žućkasta (približno RAL 7032)"
+      },
+      {
+        "label": "Propisi",
+        "value": "Usklađen sa VOC propisima"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni radovi punjenja, od spot repair popravke do celog vozila",
+      "Prijanjanje na čelik, aluminijum, KTL, stare i nove premaze, na poliesterskim gitovima i ispod njih"
+    ],
+    "benefits": [
+      {
+        "title": "Nanošenje mokro na mokro",
+        "description": "Može se podesiti za nanošenje mokro na mokro."
+      },
+      {
+        "title": "Otpornost na koroziju",
+        "description": "Visoka otpornost na koroziju."
+      },
+      {
+        "title": "Dobro se brusi",
+        "description": "Veoma dobra obradivost brušenjem."
+      },
+      {
+        "title": "Bez hromata",
+        "description": "Formulacija ne sadrži hromate."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.248": "A+B komponenta / 1.5 L"
+    }
+  },
+  "painting/etch-primer-primer": {
+    "sourceHash": "3a42fbd9b39836e1",
+    "productType": "Prajmer",
+    "subtype": "Prajmer",
+    "shortDescription": "Sivi sprej za zaštitu od rđe i poboljšanje prianjanja na čeliku, cinku i aluminijumu.",
+    "longDescription": "Etch Primer je sprej za zaštitu od rđe namenjen popravci originalnih prajmera na aluminijumskim karoserijama. Koristi se i za izolovanje probrušenih mesta, kao i za poboljšanje prianjanja na čeličnim, pocinkovanim i aluminijumskim podlogama kod spot i parcijalnih lakiranja. Nijansa je siva.",
+    "purpose": "Zaštita od rđe i prianjanje kod parcijalnih lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sprej za zaštitu od rđe"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Namenski za popravku originalnih prajmera na aluminijumskim karoserijama",
+      "Izolovanje probrušenih mesta",
+      "Poboljšanje prianjanja na svim čeličnim, pocinkovanim i aluminijumskim podlogama kod spot i parcijalnih lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavna primena",
+        "description": "Lako se koristi."
+      },
+      {
+        "title": "Brzo isparavanje i sušenje",
+        "description": "Kratko vreme isparavanja i sušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "143.028": "400 ml"
+    }
+  },
+  "painting/high-gloss-additive-high-gloss-additive": {
+    "sourceHash": "10e832674fd787ad",
+    "productType": "Aditiv za visoki sjaj",
+    "subtype": "Aditiv za visoki sjaj",
+    "shortDescription": "Providni aditiv za Carsystem 2K bezbojne lakove koji poboljšava sjaj i kvalitet površine.",
+    "longDescription": "High Gloss Additive je providni aditiv koji se dodaje Carsystem 2K bezbojnim lakovima. Njegovom upotrebom poboljšavaju se sjaj i kvalitet završne površine laka.",
+    "purpose": "Aditiv za Carsystem bezbojne lakove",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Aditiv za visoki sjaj"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Aditiv za sve Carsystem bezbojne lakove"
+    ],
+    "benefits": [
+      {
+        "title": "Bolji sjaj",
+        "description": "Poboljšava sjaj i kvalitet površine."
+      }
+    ],
+    "advice": "High Gloss Additive prvo pomešati sa A-komponentom, pa tek onda dodati učvršćivač, kako bi se izbegli problemi sa prianjanjem.",
+    "variants": {
+      "152.788": "1 L"
+    }
+  },
+  "painting/hpp-primer-1k-plastic-primer": {
+    "sourceHash": "c6721aa4edf4f642",
+    "productType": "1K prajmer za plastiku",
+    "subtype": "1K prajmer za plastiku",
+    "shortDescription": "Specijalni 1K prajmer za plastiku koji se mokro na mokro prelakira baznom bojom.",
+    "longDescription": "HpP Primer je specijalni jednokomponentni prajmer za plastiku koji znatno skraćuje vreme rada. Prelakira se mokro na mokro baznom bojom i ne zahteva prethodnu pripremu plastike pre lakiranja. Koristi se na neobojenim plastičnim delovima otpornim na rastvarače, kao što su PP, PVC, EPP i PP-EPDM. Čišćenje sredstvom za plastiku na bazi alkohola je obavezno.",
+    "purpose": "Priprema neobojenih plastičnih delova pre lakiranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "1K prajmer za plastiku"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Specijalni prajmer"
+      },
+      {
+        "label": "Nanošenje",
+        "value": "Prajmer mokro na mokro za plastične delove"
+      }
+    ],
+    "applications": [
+      "Pre lakiranja neobojenih plastičnih delova otpornih na rastvarače (npr. PP, PVC, EPP, PP-EPDM)"
+    ],
+    "benefits": [
+      {
+        "title": "Znatna ušteda vremena",
+        "description": "Izrazito skraćuje vreme rada."
+      },
+      {
+        "title": "Bez pripreme podloge",
+        "description": "Nije potrebna prethodna priprema plastičnih površina."
+      },
+      {
+        "title": "Obavezno čišćenje",
+        "description": "Čišćenje sredstvom za plastiku na bazi alkohola je obavezno."
+      }
+    ],
+    "advice": "Za čišćenje plastičnih delova preporučuje se Carsystem ISO-VE 7030 sredstvo za čišćenje. Nije pogodno za PE/PC.",
+    "variants": {
+      "154.706": "Bela / 1 kg",
+      "154.707": "Siva / 1 kg",
+      "154.708": "Crna / 1 kg",
+      "154.712": "Razređivač / 1 L"
+    }
+  },
+  "painting/micro-tip-repair-tip": {
+    "sourceHash": "eea9efd3f99ae045",
+    "productType": "Štapić za popravke",
+    "subtype": "Štapić za popravke",
+    "shortDescription": "Mikro štapići sa mikrofiber glavom za popunjavanje udara kamena i ogrebotina u laku.",
+    "longDescription": "Micro Tip su mikro štapići za popravke sa mikrofiber glavom. Koriste se za popunjavanje oštećenja od udara kamena, silikonskih kratera i ogrebotina u laku. Kutija ima dodatnu dispenzer funkciju za vađenje pojedinačnih štapića.",
+    "purpose": "Popunjavanje sitnih oštećenja u laku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikro štapići za popravke sa mikrofiber glavom"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje udara kamena, silikonskih kratera i ogrebotina u laku"
+    ],
+    "benefits": [
+      {
+        "title": "Dispenzer funkcija",
+        "description": "Dodatna dispenzer funkcija za vađenje pojedinačnih štapića."
+      }
+    ],
+    "advice": "Vrlo dobro se uklapa sa UV Clear (154.528).",
+    "variants": {
+      "140.976": "Kutija sa 100 kom."
+    }
+  },
+  "painting/mixing-stick-black-plastic-mixing-stick": {
+    "sourceHash": "5cfc5411711b7e12",
+    "productType": "Plastični štapić za mešanje",
+    "subtype": "Plastični štapić za mešanje",
+    "shortDescription": "Plastični štapić za mešanje otporan na rastvarače, za mešanje materijala za lakiranje.",
+    "longDescription": "Mixing Stick Black je plastični štapić za mešanje otporan na rastvarače. Koristi se za jednostavno mešanje i razmućivanje materijala za lakiranje. Dovoljno je fleksibilan za udoban rad u posudi.",
+    "purpose": "Mešanje materijala za lakiranje",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Plastični štapić za mešanje"
+      },
+      {
+        "label": "Otpornost",
+        "value": "Otporan na rastvarače"
+      }
+    ],
+    "applications": [
+      "Za jednostavno mešanje i razmućivanje materijala za lakiranje",
+      "Prijatno fleksibilan"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "144.752": "23 x 1.8 cm"
+    }
+  },
+  "painting/mixing-stick-fast-plastic-mixing-stick": {
+    "sourceHash": "3020bac4ef9bd78f",
+    "productType": "Plastični štapić za mešanje",
+    "subtype": "Plastični štapić za mešanje",
+    "shortDescription": "Štapić za mešanje u obliku slova S, otporan na rastvarače, za ravnomerno mešanje materijala.",
+    "longDescription": "Mixing Stick Fast je štapić za mešanje od plastike otporne na rastvarače, namenjen mešanju boja, punilaca i sličnih materijala. Oblik slova S stvara ravnomerno kretanje u različitim smerovima, čime se postiže bolje i brže mešanje. Materijal se meša bez zaostajanja ostataka.",
+    "purpose": "Mešanje boja, punilaca i sličnih materijala",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Plastični štapić za mešanje"
+      },
+      {
+        "label": "Otpornost",
+        "value": "Otporan na rastvarače"
+      },
+      {
+        "label": "Oblik",
+        "value": "U obliku slova S"
+      }
+    ],
+    "applications": [
+      "Mixing Stick Fast je pogodan za mešanje i razmućivanje proizvoda (npr. boje, punioca i sl.) bez zaostajanja ostataka"
+    ],
+    "benefits": [
+      {
+        "title": "S-oblik za bolje mešanje",
+        "description": "Oblik slova S stvara ravnomerno kretanje u različitim smerovima, što obezbeđuje bolje mešanje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.834": "Kutija à 500 kom. / Crna / 20 x 1,8 cm"
+    }
+  },
+  "painting/multi-mix-bucket-paint-mixing-bucket": {
+    "sourceHash": "00d0bc0b451ed398",
+    "productType": "Kofa za mešanje boje",
+    "subtype": "Kofa za mešanje boje",
+    "shortDescription": "Jednokratna kofa sa ručkom za mešanje većih količina materijala za lakiranje.",
+    "longDescription": "Multi-Mix Bucket je kofa za mešanje boje za jednokratnu upotrebu, sa ručkom za lakše rukovanje. Koristi se kada treba pripremiti veće količine materijala za lakiranje. Izrada je stabilna i antistatična.",
+    "purpose": "Mešanje većih količina materijala za lakiranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Jednokratna kofa za mešanje boje sa ručkom"
+      }
+    ],
+    "applications": [
+      "Za mešanje većih količina materijala za lakiranje"
+    ],
+    "benefits": [
+      {
+        "title": "Stabilna",
+        "description": "Veoma stabilna u radu."
+      },
+      {
+        "title": "Antistatična",
+        "description": "Antistatična izrada."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "144.649": "36 kom. po kartonu / 5.5 L",
+      "145.315": "Poklopac / 5.5 L"
+    }
+  },
+  "painting/multi-mix-cup-disposable-mixing-cups": {
+    "sourceHash": "829e1800d6f07fb7",
+    "productType": "Posuda za mešanje",
+    "subtype": "Posude za mešanje za jednokratnu upotrebu",
+    "shortDescription": "Jednokratne posude za mešanje sa odštampanom skalom za tačno mešanje punilaca i lakova.",
+    "longDescription": "Multi-Mix Cup su posude za mešanje za jednokratnu upotrebu sa odštampanom skalom za mešanje. Omogućavaju čisto i tačno mešanje svih punilaca, baznih boja, bezbojnih lakova i sličnih materijala. Poklopci se nabavljaju zasebno.",
+    "purpose": "Čisto i tačno mešanje materijala za lakiranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Posude za mešanje za jednokratnu upotrebu"
+      }
+    ],
+    "applications": [
+      "Za čisto i tačno mešanje svih punilaca, baznih boja, bezbojnih lakova i sl."
+    ],
+    "benefits": [],
+    "advice": "Koristiti isključivo skalu na posudi za mešanje, a ne skalu sa mernog štapića. Posude su konusnog oblika, pa može doći do razlika.",
+    "variants": {
+      "140.545": "Posuda / 385 ml",
+      "140.546": "Posuda / 750 ml",
+      "140.547": "Posuda / 1400 ml",
+      "140.548": "Posuda / 2300 ml"
+    }
+  },
+  "painting/multi-mix-lids-disposable-lids": {
+    "sourceHash": "a11f0bd487bc4e18",
+    "productType": "Poklopac",
+    "subtype": "Poklopci za jednokratnu upotrebu",
+    "shortDescription": "Poklopci za Multi-Mix Cup posude za mešanje za jednokratnu upotrebu.",
+    "longDescription": "Multi-Mix Lids su poklopci za Carsystem Multi-Mix Cups 2.0 posude za mešanje. Koriste se za zatvaranje posude i za čuvanje preostalog materijala.",
+    "purpose": "Zatvaranje Multi-Mix posuda za mešanje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poklopci za jednokratne Multi-Mix Cups posude"
+      }
+    ],
+    "applications": [
+      "Za zatvaranje Carsystem Multi-Mix Cups 2.0",
+      "Za čuvanje preostalog materijala"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "140.549": "Poklopac / 385 ml",
+      "140.550": "Poklopac / 750 ml",
+      "140.551": "Poklopac / 1400 ml",
+      "140.552": "Poklopac / 2300 ml"
+    }
+  },
+  "painting/multi-strain-paint-strainer": {
+    "sourceHash": "d378805114ed8137",
+    "productType": "Cediljka za boju",
+    "subtype": "Cediljka za boju",
+    "shortDescription": "Jednokratna cediljka za boju sa preciznom najlonskom mrežicom za filtriranje materijala.",
+    "longDescription": "Multi Strain su cediljke za boju za jednokratnu upotrebu. Papirni levak nosi precizan filter od najlona za filtriranje svih uobičajenih materijala za lakiranje. Izrada je bez prašine.",
+    "purpose": "Filtriranje materijala za lakiranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Jednokratna cediljka za boju"
+      },
+      {
+        "label": "Izrada",
+        "value": "Papirni levak sa preciznim najlonskim filterom"
+      },
+      {
+        "label": "Čistoća",
+        "value": "Bez prašine"
+      }
+    ],
+    "applications": [
+      "Filtriranje svih uobičajenih materijala za lakiranje"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "146.957": "Plava / 125 µ",
+      "146.958": "Žuta / 190 µ"
+    }
+  },
+  "painting/paint-strainer-paint-strainer": {
+    "sourceHash": "4dbe9857d3403e78",
+    "productType": "Cediljka za boju",
+    "subtype": "Cediljka za boju",
+    "shortDescription": "Jednokratna cediljka sa finom najlonskom mrežicom koja iz boje izdvaja prašinu i nečistoće.",
+    "longDescription": "Paint Strainer je cediljka za boju za jednokratnu upotrebu, izrađena kao papirni levak sa preciznim najlonskim filterom. Fine mrežice zadržavaju sitne čestice prašine i nečistoće, pa se materijal nanosi ravnomerno i bez neželjenih nepravilnosti. Koristi se za filtriranje svih uobičajenih materijala za lakiranje, u varijantama od 125 µm i 190 µm.",
+    "purpose": "Filtriranje materijala za lakiranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Jednokratna cediljka za boju"
+      },
+      {
+        "label": "Izrada",
+        "value": "Papirni levak sa preciznim najlonskim filterom"
+      }
+    ],
+    "applications": [
+      "Filtriranje svih uobičajenih materijala za lakiranje"
+    ],
+    "benefits": [
+      {
+        "title": "Dispenzer kutija",
+        "description": "Isporučuje se u dispenzer kutiji."
+      },
+      {
+        "title": "Manji rizik od prljanja",
+        "description": "Smanjuje rizik od zaprljanja spoljnim uticajima."
+      },
+      {
+        "title": "Čisto odlaganje",
+        "description": "Bezbedan i čist sistem čuvanja direktno na radnom mestu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.430": "Plava / 125 µ",
+      "158.431": "Žuta / 190 µ"
+    }
+  },
+  "painting/paint-system-cps-20-disposable-paint-cup-system-with-ring-lock": {
+    "sourceHash": "bf257b7a66bed5b6",
+    "productType": "Sistem posuda za boju",
+    "subtype": "Sistem posuda za jednokratnu upotrebu sa prstenastim zatvaranjem",
+    "shortDescription": "Sistem posuda za jednokratnu upotrebu sa prstenastim zatvaranjem, za vodene i lakove na bazi rastvarača.",
+    "longDescription": "Sistem posuda za jednokratnu upotrebu u kojem se posuda za poklopac pričvršćuje plastičnim prstenom. Namenjen je radu sa sistemima na vodenoj bazi i na bazi rastvarača, uz mogućnost lakiranja iznad glave. Materijal se meša u samoj posudi, a ostatak može da se sačuva. Postojeći Carsystem CPS adapteri i dalje mogu da se koriste.",
+    "purpose": "Rad sa lakovima na vodenoj bazi i na bazi rastvarača",
+    "facts": [
+      {
+        "label": "Sistem",
+        "value": "Sistem posuda za jednokratnu upotrebu sa prstenastim zatvaranjem"
+      }
+    ],
+    "applications": [
+      "Za rad sa sistemima na vodenoj bazi i sistemima na bazi rastvarača"
+    ],
+    "benefits": [
+      {
+        "title": "Lakiranje iznad glave",
+        "description": "Moguće je lakiranje sa pištoljem okrenutim naopako."
+      },
+      {
+        "title": "Čist rad",
+        "description": "Materijal se meša u samoj posudi, pa je rad čistiji."
+      },
+      {
+        "title": "Čuvanje ostatka",
+        "description": "Ostatak materijala može da se sačuva."
+      },
+      {
+        "title": "CPS adapteri",
+        "description": "Postojeći CPS adapteri mogu da se koriste."
+      }
+    ],
+    "advice": "Preporučuje se da se kanal za boju isprazni pre skidanja posude: okrenite pištolj naopako, zatvorite dizni i kratko povucite okidač. Kanal za boju je tada potpuno prazan i posuda može da se skine bez kapanja.",
+    "variants": {
+      "159.311": "Set / 400 ml / 125 µm / 50 kom.",
+      "159.312": "Set / 600 ml / 125 ml / 50 kom.",
+      "159.670": "Set / 800 ml / 125 µm / 50 kom",
+      "159.643": "Set / 400 ml / 190µm / 50 kom",
+      "159.644": "Set / 600 ml / 190µm / 50 kom",
+      "159.671": "Set / 800 ml / 190µm / 50 kom",
+      "159.315": "Poklopci / 400 ml / 125 µm / 25 kom.",
+      "159.318": "Poklopci / 600 - 800 ml / 125 µm / 25 kom.",
+      "159.321": "Poklopci / 600 - 800 ml / 190 µm / 25 kom.",
+      "159.322": "Tvrda posuda sa prstenom / 400 ml",
+      "159.324": "Tvrda posuda sa prstenom / 600 ml",
+      "159.325": "Tvrda posuda sa prstenom / 800 ml"
+    }
+  },
+  "painting/paint-system-cps-30-disposable-paint-cup-system-with-red-locking-ring": {
+    "sourceHash": "0f335dc275cb1091",
+    "productType": "Sistem posuda za lakiranje",
+    "subtype": "Jednokratni sistem posuda za lakiranje · crveni prsten za zaključavanje",
+    "shortDescription": "Jednokratni sistem posuda sa crvenim prstenom, za boje na vodenoj bazi i bazi rastvarača.",
+    "longDescription": "Paint System CPS 3.0 je jednokratni sistem posuda za pištolj za lakiranje sa crvenim prstenom koji se zaključava četvrtinom okreta. Namenjen je obradi sistema boja na vodenoj bazi i na bazi rastvarača. Udubljenje u tvrdoj posudi drži uložak na mestu i olakšava kontrolisano skidanje poklopca. Mešanje i nanošenje idu direktno, bez pretakanja, uz lakiranje u 360° i čisto zatvaranje preostalog materijala.",
+    "purpose": "Obrada boja na vodenoj bazi i na bazi rastvarača",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Jednokratni sistem posuda sa crvenim prstenom za zaključavanje"
+      }
+    ],
+    "applications": [
+      "Za obradu sistema boja na vodenoj bazi i na bazi rastvarača"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo zaključavanje",
+        "description": "Zahvaljujući brzom spoju, dovoljna je četvrtina okreta da se sistem posude bezbedno zaključa."
+      },
+      {
+        "title": "Sigurno fiksiran uložak",
+        "description": "Udubljenje u tvrdoj posudi omogućava bezbedno fiksiranje uloška i kontrolisano skidanje poklopca."
+      },
+      {
+        "title": "Lakiranje u 360°",
+        "description": "Moguće je lakiranje u 360°."
+      },
+      {
+        "title": "Bez pretakanja",
+        "description": "Mešanje i nanošenje direktno, bez pretakanja materijala."
+      },
+      {
+        "title": "Čuvanje ostatka",
+        "description": "Jednostavno čuvanje preostalog materijala, čisto zatvorenog."
+      }
+    ],
+    "advice": "Pre skidanja posude preporučuje se pražnjenje kanala za boju. Pištolj za lakiranje okrenuti naopako, držati dizni zatvorenom i kratko povući okidač. Kanal za boju je tada ispražnjen i posuda se može čisto skinuti.",
+    "variants": {
+      "160.085": "Set / 180 ml / 125 µm / 50 kom.",
+      "160.086": "Set / 400 ml / 125 µm / 50 kom.",
+      "160.087": "Set / 650 ml / 125 µm / 50 kom.",
+      "160.088": "Set / 850 ml / 125 µm / 50 kom.",
+      "160.090": "Set / 180 ml / 190 µm / 50 kom.",
+      "160.091": "Set / 400 ml / 190 µm / 50 kom.",
+      "160.092": "Set / 650 ml / 190 µm / 50 kom.",
+      "160.093": "Set / 850 ml / 190 µm / 50 kom.",
+      "160.376": "Poklopci / 180 ml / 125 µm / 25 kom.",
+      "160.377": "Poklopci / 400 ml / 125 µm / 25 kom.",
+      "160.379": "Poklopci / 650 & 850 ml / 125 µm / 25 kom."
+    }
+  },
+  "painting/pg-fg-fine-filter-fine-filter": {
+    "sourceHash": "2adfde21171815c4",
+    "productType": "Fini filter",
+    "subtype": "Fini filter",
+    "shortDescription": "Fini filter za boju za upotrebu u SATA posudi sa gravitacionim dotokom.",
+    "longDescription": "PG - FG Fine Filter je fini filter za boju. Namenjen je upotrebi u SATA posudama sa gravitacionim dotokom. Isporučuje se u kesi sa 10 komada.",
+    "purpose": "Filtriranje boje u SATA gravitacionoj posudi",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Fini filter"
+      }
+    ],
+    "applications": [
+      "Filteri za boju za upotrebu u SATA posudi sa gravitacionim dotokom"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "138.680": "Kesa sa 10 kom."
+    }
+  },
+  "painting/plastic-can-empty-paint-tins": {
+    "sourceHash": "9cc778d6ef1fad75",
+    "productType": "Limenka za boju",
+    "subtype": "Limenke za boju",
+    "shortDescription": "Prazne plastične limenke otporne na rastvarače za čuvanje boja na bazi rastvarača i vode.",
+    "longDescription": "Plastic Can Empty su prazne plastične limenke za boju, otporne na rastvarače. Služe za čuvanje boja na bazi rastvarača i na vodenoj bazi, a hermetički poklopac produžava rok čuvanja i sprečava sušenje sadržaja. Izrada je tvrda i stabilna, a samolepljive nalepnice za obeležavanje su uključene.",
+    "purpose": "Čuvanje boja na bazi rastvarača i na vodenoj bazi",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Plastična limenka za boju"
+      },
+      {
+        "label": "Otpornost",
+        "value": "Otporna na rastvarače"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Samolepljive nalepnice uključene"
+      }
+    ],
+    "applications": [
+      "Čuvanje boja na bazi rastvarača i na vodenoj bazi",
+      "Dug rok čuvanja zahvaljujući hermetičkom poklopcu"
+    ],
+    "benefits": [
+      {
+        "title": "Tvrda i stabilna",
+        "description": "Tvrda i veoma stabilna plastična limenka."
+      },
+      {
+        "title": "Hermetički poklopac",
+        "description": "Hermetički poklopac sprečava sušenje sadržaja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "144.957": "100 kom. po kartonu / 0.5 L",
+      "144.958": "100 kom. po kartonu / 1.0 L",
+      "145.784": "100 kom. po kartonu / 1.8 L"
+    }
+  },
+  "painting/plastic-primer-plastic-primer": {
+    "sourceHash": "96e4f4c0103bdfdd",
+    "productType": "Prajmer za plastiku",
+    "subtype": "Prajmer za plastiku",
+    "shortDescription": "Providni prajmer za plastiku u spreju za spot repair na plastičnim delovima vozila.",
+    "longDescription": "Plastic Primer je providni prajmer za plastiku u spreju. Namenjen je spot repair popravkama na svim plastičnim delovima automobila i kamiona, u unutrašnjosti i spolja.",
+    "purpose": "Priprema plastičnih delova kod spot repair popravki",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Prajmer za plastiku u spreju"
+      }
+    ],
+    "applications": [
+      "Za sve plastične delove automobila i kamiona, unutra i spolja",
+      "Pogodan za spot repair popravke"
+    ],
+    "benefits": [],
+    "advice": "Može se koristiti na sledećim plastikama: PP, PP/EPDM, ABS, SAN, PUR-RIM, R-TRU, PPO, PBT, PUR fleksibilna pena, UP-GF plastike. Nije pogodan za PE i PC.",
+    "variants": {
+      "145.986": "Providni / 400 ml"
+    }
+  },
+  "painting/prefill-spray-aerosol-tin-fillable": {
+    "sourceHash": "46f93e9003a9b65c",
+    "productType": "Sprej limenka",
+    "subtype": "Sprej limenka · punjiva",
+    "shortDescription": "Punjiva sprej limenka koja se dopunjava sa do 100 ml boje na bazi rastvarača.",
+    "longDescription": "Prefill-Spray je unapred punjena sprej limenka koja sadrži 275 ml potisnog gasa, rastvarača i aditiva. Dopunjava se sa 100 ml boje na bazi rastvarača i kod spot repair popravki zamenjuje pištolj za lakiranje. Za punjenje je potrebna mašina za punjenje.",
+    "purpose": "Punjenje bojom na bazi rastvarača",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Unapred punjen sprej za boju"
+      },
+      {
+        "label": "Punjenje",
+        "value": "275 ml potisnog gasa, rastvarača i aditiva"
+      },
+      {
+        "label": "Dopuna",
+        "value": "Puni se sa 100 ml boje"
+      }
+    ],
+    "applications": [
+      "Puni se bojom na bazi rastvarača"
+    ],
+    "benefits": [
+      {
+        "title": "Zamena za pištolj",
+        "description": "Zamenjuje pištolj za lakiranje kod spot repair popravki."
+      }
+    ],
+    "advice": "Potrebna je mašina za punjenje.",
+    "variants": {
+      "125.686": "Bez pina / 275 ml"
+    }
+  },
+  "painting/prefill-spray-water-aerosol-tin-fillable": {
+    "sourceHash": "18a9c7aaf321eb64",
+    "productType": "Sprej limenka",
+    "subtype": "Sprej limenka · punjiva",
+    "shortDescription": "Punjiva sprej limenka koja se dopunjava sa do 100 ml boje na vodenoj bazi.",
+    "longDescription": "Prefill-Spray Water je unapred punjena sprej limenka koja sadrži 300 ml potisnog gasa, rastvarača i aditiva. Dopunjava se sa 100 ml boje na vodenoj bazi i kod spot repair popravki zamenjuje pištolj za lakiranje. Za punjenje je potrebna mašina za punjenje.",
+    "purpose": "Punjenje bojom na vodenoj bazi",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Unapred punjen sprej za boju"
+      },
+      {
+        "label": "Punjenje",
+        "value": "300 ml potisnog gasa, rastvarača i aditiva"
+      },
+      {
+        "label": "Dopuna",
+        "value": "Puni se sa 100 ml boje"
+      }
+    ],
+    "applications": [
+      "Puni se bojom na vodenoj bazi"
+    ],
+    "benefits": [
+      {
+        "title": "Zamena za pištolj",
+        "description": "Zamenjuje pištolj za lakiranje kod spot repair popravki."
+      }
+    ],
+    "advice": "Potrebna je mašina za punjenje.",
+    "variants": {
+      "140.608": "Bez pina / 300 ml"
+    }
+  },
+  "painting/primer-spray-primer-spray": {
+    "sourceHash": "71c24073c248d602",
+    "productType": "Prajmer u spreju",
+    "subtype": "Prajmer u spreju",
+    "shortDescription": "Prajmer u spreju na bazi alkidne smole za sve lakirerske radove, sa zaštitom od rđe.",
+    "longDescription": "Primer Spray je prajmer u spreju na bazi alkidne smole. Koristi se kao osnovni premaz kod svih lakirerskih radova i ima veoma dobra svojstva zaštite od rđe.",
+    "purpose": "Osnovni premaz za sve lakirerske radove",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Prajmer u spreju"
+      },
+      {
+        "label": "Osnova",
+        "value": "Alkidna smola"
+      }
+    ],
+    "applications": [
+      "Prajmer za sve lakirerske radove"
+    ],
+    "benefits": [
+      {
+        "title": "Zaštita od rđe",
+        "description": "Veoma dobra svojstva zaštite od rđe."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "125.949": "Crveno-braon / 400 ml",
+      "132.907": "Siva / 400 ml"
+    }
+  },
+  "painting/primer-surfacing-spray-primer-spray": {
+    "sourceHash": "b037661f6b8e437d",
+    "productType": "Prajmer u spreju",
+    "subtype": "Prajmer u spreju",
+    "shortDescription": "Sivi prajmer u spreju na nitro-kombi bazi za osnovni premaz kod svih lakirerskih radova.",
+    "longDescription": "Primer Surfacing Spray je prajmer u spreju na nitro-kombi bazi, sive nijanse. Koristi se za osnovni premaz kod svih lakirerskih radova. Ima dobra svojstva zaštite od rđe i otporan je na vremenske uticaje.",
+    "purpose": "Osnovni premaz za sve lakirerske radove",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Prajmer u spreju"
+      },
+      {
+        "label": "Osnova",
+        "value": "Nitro-kombi"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Prajmer za sve lakirerske radove"
+    ],
+    "benefits": [
+      {
+        "title": "Zaštita od rđe",
+        "description": "Dobra svojstva zaštite od rđe."
+      },
+      {
+        "title": "Otpornost na vremenske uticaje",
+        "description": "Otporan na vremenske uticaje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.024": "400 ml"
+    }
+  },
+  "painting/rallye-spray-gloss-paint-spray-gloss": {
+    "sourceHash": "3f8e74028284935d",
+    "productType": "Boja u spreju",
+    "subtype": "Boja u spreju · sjajna",
+    "shortDescription": "Akrilna boja u spreju za popravku nepravilnosti u laku; brzo se suši i može se polirati.",
+    "longDescription": "Rallye-Spray je akrilna boja u spreju namenjena popravci nepravilnosti u laku. Brzo se suši, a nakon sušenja površina se može polirati.",
+    "purpose": "Popravka nepravilnosti u laku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilna boja u spreju"
+      }
+    ],
+    "applications": [
+      "Popravka nepravilnosti u laku"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši."
+      },
+      {
+        "title": "Može se polirati",
+        "description": "Površina se može polirati."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.053": "Bela sjajna / 400 ml",
+      "126.026": "Crna sjajna / 400 ml"
+    }
+  },
+  "painting/rallye-spray-matt-paint-spray-matt": {
+    "sourceHash": "722cab37ce8023ee",
+    "productType": "Sprej boje",
+    "subtype": "Sprej boje · mat",
+    "shortDescription": "Crni mat akrilni sprej boje za popravku nesavršenosti na laku.",
+    "longDescription": "Rallye-Spray je akrilni sprej boje u crnom mat tonu. Namenjen je popravci nesavršenosti na lakiranoj površini. Brzo se suši, pa se rad nastavlja bez dugog čekanja.",
+    "purpose": "Popravka nesavršenosti na laku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilni sprej boje"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna mat"
+      }
+    ],
+    "applications": [
+      "Popravka nesavršenosti na laku"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Nanet sloj se brzo suši."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.027": "400 ml"
+    }
+  },
+  "painting/rallye-spray-premium-paint-spray-black-glossy": {
+    "sourceHash": "e992c1efe074144b",
+    "productType": "Sprej boje",
+    "subtype": "Sprej boje · crna sjajna",
+    "shortDescription": "Akrilni sprej boje u crnoj sjajnoj nijansi, za popravke laka i lakiranje novih delova.",
+    "longDescription": "Rallye-Spray Premium je akrilni sprej boje crne sjajne nijanse. Koristi se za popravku nesavršenosti na laku i za lakiranje novih delova. Ima visoku moć pokrivanja, brzo se suši i može se polirati.",
+    "purpose": "Popravke laka i lakiranje novih delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilni sprej boje"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna sjajna"
+      }
+    ],
+    "applications": [
+      "Popravka nesavršenosti na laku",
+      "Nanošenje boje na nove delove"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć pokrivanja",
+        "description": "Dobro prekriva podlogu."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Nanet sloj se brzo suši."
+      },
+      {
+        "title": "Može se polirati",
+        "description": "Osušen sloj dozvoljava poliranje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "149.219": "500 ml"
+    }
+  },
+  "painting/rallye-spray-premium-paint-spray-black-matt": {
+    "sourceHash": "ed7f210f7bf368ca",
+    "productType": "Sprej boje",
+    "subtype": "Sprej boje · crna mat",
+    "shortDescription": "Crni mat akrilni sprej boje za popravke laka i lakiranje novih delova.",
+    "longDescription": "Rallye-Spray Premium je akrilni sprej boje u crnoj mat nijansi. Koristi se za popravku nesavršenosti na laku i za nanošenje boje na nove delove. Ima visoku moć pokrivanja i brzo se suši.",
+    "purpose": "Popravke laka i lakiranje novih delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilni sprej boje"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna mat"
+      }
+    ],
+    "applications": [
+      "Popravka nesavršenosti na laku",
+      "Nanošenje boje na nove delove"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć pokrivanja",
+        "description": "Dobro prekriva podlogu."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Nanet sloj se brzo suši."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "149.218": "500 ml"
+    }
+  },
+  "painting/replacement-spray-head-replacement-spray-head-adjustable": {
+    "sourceHash": "968b3a1921ed4c5c",
+    "productType": "Rezervna glava spreja",
+    "subtype": "Rezervna glava spreja · podesiva",
+    "shortDescription": "Podesiva rezervna glava spreja za 1K Epoxy Primer, 1K Easy Primer i 1K Easy Filler.",
+    "longDescription": "Replacement Spray Head je podesiva rezervna glava spreja. Pogodna je za proizvode 1K Epoxy Primer, 1K Easy Primer i 1K Easy Filler. Postavlja se umesto postojeće glave na navedenim sprejevima.",
+    "purpose": "Zamena glave spreja na kompatibilnim proizvodima",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Podesiva rezervna glava spreja"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Pogodna za:"
+      },
+      {
+        "label": "Kompatibilnost",
+        "value": "1K Epoxy Primer"
+      },
+      {
+        "label": "Kompatibilnost",
+        "value": "1K Easy Primer"
+      },
+      {
+        "label": "Kompatibilnost",
+        "value": "1K Easy Filler"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "153.793": "Podesiva rezervna glava spreja"
+    }
+  },
+  "painting/replacement-spray-head-replacement-spray-head-red": {
+    "sourceHash": "9f466cbe4609f3b2",
+    "productType": "Rezervna glava spreja",
+    "subtype": "Rezervna glava spreja · crvena",
+    "shortDescription": "Crvena rezervna glava spreja za nanošenje u obliku lepeze ili širokog mlaza.",
+    "longDescription": "Ova rezervna glava spreja je crvene boje i omogućava nanošenje u obliku lepeze ili širokog mlaza. Pogodna je za proizvode Bumper Structurant Spray, Prefill Spray i Prefill Spray Water. Postavlja se umesto postojeće glave na navedenim sprejevima.",
+    "purpose": "Nanošenje u obliku lepeze ili širokog mlaza",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Rezervna glava spreja"
+      },
+      {
+        "label": "Boja",
+        "value": "Crvena"
+      },
+      {
+        "label": "Nanošenje",
+        "value": "U obliku lepeze ili širokog mlaza"
+      }
+    ],
+    "applications": [
+      "Za nanošenje u obliku lepeze ili širokog mlaza",
+      "Pogodna za: Bumper Structurant Spray, Prefill Spray i Prefill Spray Water"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "145.840": "Rezervna mlaznica spreja / crvena"
+    }
+  },
+  "painting/silver-wheel-silver-wheel-spray": {
+    "sourceHash": "53655968e866357d",
+    "productType": "Sprej za felne",
+    "subtype": "Sprej za felne · srebrni",
+    "shortDescription": "Srebrni akrilni sprej boje za lakiranje čeličnih felni.",
+    "longDescription": "Silver Wheel je akrilni sprej boje u srebrnoj nijansi. Namenjen je lakiranju čeličnih felni. Osušen sloj je otporan na habanje i na vremenske uticaje.",
+    "purpose": "Lakiranje čeličnih felni",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akrilni sprej boje"
+      },
+      {
+        "label": "Boja",
+        "value": "Srebrna"
+      }
+    ],
+    "applications": [
+      "Za lakiranje čeličnih felni"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na habanje",
+        "description": "Sloj je otporan na habanje."
+      },
+      {
+        "title": "Otpornost na vremenske uticaje",
+        "description": "Sloj je otporan na vremenske uticaje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.021": "400 ml"
+    }
+  },
+  "painting/spotblender-blending-thinner": {
+    "sourceHash": "f57b13b7127efedc",
+    "productType": "Razređivač za prelaz",
+    "subtype": "Razređivač za prelaz (blending)",
+    "shortDescription": "Razređivač za prelaz koji izjednačava zonu spoja starog i novog laka.",
+    "longDescription": "Spotblender je razređivač za prelaz (blending). Koristi se za homogene prelazne zone između starog i novog laka, kod 1K i 2K bezbojnih lakova i 2K završnih boja.",
+    "purpose": "Homogen prelaz između starog i novog laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Razređivač za prelaz (blending)"
+      }
+    ],
+    "applications": [
+      "Za homogene prelazne zone između starog i novog laka, kod 1K i 2K bezbojnih lakova i 2K završnih boja"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "148.989": "1 L"
+    }
+  },
+  "painting/spotblender-spray-blending-thinner-spray": {
+    "sourceHash": "3f9cd503e41bb8df",
+    "productType": "Sprej za prelaz",
+    "subtype": "Razređivač za prelaz (blending) · sprej",
+    "shortDescription": "Providan sprej za prelaz, za izjednačavanje zone spoja starog i novog laka.",
+    "longDescription": "Spotblender Spray je razređivač za prelaz (blending) u obliku spreja, providne boje. Koristi se za homogene prelazne zone u zoni prelaza kod 1K i 2K bezbojnih lakova i završnih boja. Za nanošenje nije potreban pištolj za lakiranje.",
+    "purpose": "Homogen prelaz u zoni spoja laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Razređivač za prelaz (blending) u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Za homogene prelazne zone u zoni prelaza kod 1K i 2K bezbojnih lakova i završnih boja"
+    ],
+    "benefits": [
+      {
+        "title": "Bez pištolja za lakiranje",
+        "description": "Nanošenje ne zahteva pištolj za lakiranje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "145.987": "400 ml"
+    }
+  },
+  "painting/spray-filler-spray-spray-filler": {
+    "sourceHash": "1ccf82259793c859",
+    "productType": "Git u spreju",
+    "subtype": "Git u spreju",
+    "shortDescription": "Sivi git u spreju na akrilnoj bazi, za izravnavanje sitnih nesavršenosti.",
+    "longDescription": "Spray Filler Spray je git u aerosolu na akrilnoj bazi, sive boje. Koristi se za izravnavanje sitnih nesavršenosti i za izolaciju slojeva poliesterskog gita. Dobro popunjava, kratko se suši i brzo je spreman za brušenje.",
+    "purpose": "Izravnavanje sitnih nesavršenosti i izolacija slojeva gita",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Git u aerosolu"
+      },
+      {
+        "label": "Baza",
+        "value": "Akrilna"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Izravnavanje sitnih nesavršenosti i izolacija slojeva poliesterskog gita"
+    ],
+    "benefits": [
+      {
+        "title": "Dobra moć popunjavanja",
+        "description": "Dobro popunjava sitne nepravilnosti."
+      },
+      {
+        "title": "Kratko vreme sušenja",
+        "description": "Sloj se suši u kratkom vremenu."
+      },
+      {
+        "title": "Brzo brušenje",
+        "description": "Brzo je spreman za brušenje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "125.580": "400 ml"
+    }
+  },
+  "painting/spray-out-cards-metal-colour-match-card": {
+    "sourceHash": "f3e19e66cc87ac5f",
+    "productType": "Kartica za proveru nijanse",
+    "subtype": "Kartica za usklađivanje nijanse",
+    "shortDescription": "Metalne kartice za proveru i usklađivanje nijanse pri lakiranju metalnih delova.",
+    "longDescription": "Spray Out Cards Metal su kartice za proveru nijanse izrađene od metala. Koriste se za usklađivanje boje pri lakiranju metalnih delova. Isporučuju se u kutiji sa 200 komada, u beloj i tamnosivoj varijanti.",
+    "purpose": "Usklađivanje nijanse",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Metalne kartice za usklađivanje nijanse"
+      }
+    ],
+    "applications": [
+      "Usklađivanje nijanse"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "153.758": "200 kom. u kutiji / bela",
+      "153.759": "200 kom. u kutiji / tamnosiva"
+    }
+  },
+  "painting/thermo-spray-paint-spray-heat-resistant": {
+    "sourceHash": "03e9e41151f5b9cd",
+    "productType": "Sprej boje",
+    "subtype": "Sprej boje · otporan na toplotu",
+    "shortDescription": "Sprej boje na bazi silikonske smole, temperaturno otporan do 650 °C.",
+    "longDescription": "Thermo-Spray je sprej boje na bazi silikonske smole. Podnosi temperature do 650 °C, pa je namenjen delovima izloženim toploti. Štiti delove u motornom prostoru i izduvne cevi. Dostupan je u crnoj i srebrnoj nijansi.",
+    "purpose": "Zaštita delova izloženih visokim temperaturama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sprej boje na bazi silikonske smole"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "Do 650 °C"
+      }
+    ],
+    "applications": [
+      "Štiti delove u motornom prostoru i izduvne cevi"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka temperaturna otpornost",
+        "description": "Podnosi temperature do 650 °C."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.086": "Crna / 400 ml",
+      "126.087": "Srebrna / 400 ml"
+    }
+  },
+  "painting/tinting-paste-filler-tinting-paste": {
+    "sourceHash": "d49dcd089cb42d92",
+    "productType": "Pasta za nijansiranje",
+    "subtype": "Pasta za nijansiranje",
+    "shortDescription": "Pasta za nijansiranje Carsystem akrilnih punilaca, uz dodatak od najviše 1 - 5 %.",
+    "longDescription": "Tinting paste filler je pasta za nijansiranje akrilnih punilaca. Dodaje se u udelu od najviše 1 - 5 %, kako bi se punilac približio nijansi bazne boje. Dostupna je u crvenoj i crnoj varijanti od 0.5 L.",
+    "purpose": "Nijansiranje akrilnih punilaca",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pasta za nijansiranje"
+      }
+    ],
+    "applications": [
+      "Pasta za nijansiranje Carsystem akrilnih punilaca",
+      "Maks. dodatak: 1 - 5 %"
+    ],
+    "benefits": [
+      {
+        "title": "Usklađivanje sa baznom bojom",
+        "description": "Omogućava usklađivanje punioca sa nijansom bazne boje."
+      }
+    ],
+    "advice": "Pastu za nijansiranje prvo pomešajte sa A-komponentom, pa tek zatim dodajte učvršćivač, kako biste izbegli probleme sa prianjanjem.",
+    "variants": {
+      "148.505": "Crvena / 0.5 L",
+      "148.504": "Crna / 0.5 L"
+    }
+  },
+  "painting/touch-up-paint-bottle-fillable-20ml": {
+    "sourceHash": "7c2e4d9fbc8cd5db",
+    "productType": "Bočica za boju",
+    "subtype": "Bočica za boju · punjiva 20 ml",
+    "shortDescription": "Punjiva plastična bočica sa četkicom, za popravku oštećenja od kamena i ogrebotina.",
+    "longDescription": "Touch Up su plastične bočice sa četkicom koje se pune bojom. U svakoj se nalazi kuglica za mešanje od nerđajućeg čelika. Koriste se za popravku oštećenja od udara kamena i ogrebotina na površini. Pakovanje sadrži 100 komada zapremine 20 ml.",
+    "purpose": "Popravka oštećenja od kamena i ogrebotina",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Plastične bočice sa četkicom"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Kuglica za mešanje od nerđajućeg čelika i četkica"
+      }
+    ],
+    "applications": [
+      "Mogu se puniti bojom",
+      "Popravka oštećenja od udara kamena i ogrebotina na površini"
+    ],
+    "benefits": [
+      {
+        "title": "Otporna na lom",
+        "description": "Bočica se ne lomi."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "150.764": "Providna / 20 ml x 100 kom."
+    }
+  },
+  "painting/touch-up-paint-bottle-fillable-50ml": {
+    "sourceHash": "bd7166fb01bcc661",
+    "productType": "Bočica za boju",
+    "subtype": "Bočica za boju · punjiva 50 ml",
+    "shortDescription": "Punjiva plastična bočica sa četkicom, za popravku oštećenja od kamena i ogrebotina.",
+    "longDescription": "Touch Up su plastične bočice sa četkicom koje se pune bojom. U svakoj se nalazi staklena kuglica za mešanje. Koriste se za popravku oštećenja od udara kamena i ogrebotina na površini. Pakovanje sadrži 25 komada zapremine 50 ml.",
+    "purpose": "Popravka oštećenja od kamena i ogrebotina",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Plastične bočice sa četkicom"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Staklena kuglica za mešanje"
+      }
+    ],
+    "applications": [
+      "Mogu se puniti bojom",
+      "Popravka oštećenja od udara kamena i ogrebotina na površini"
+    ],
+    "benefits": [
+      {
+        "title": "Otporna na lom",
+        "description": "Bočica se ne lomi."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "150.769": "Providna / 50 ml x 25 kom."
+    }
+  },
+  "painting/uv-clear-transparent-uv-clear-coat": {
+    "sourceHash": "a53f43b1e3ee58c0",
+    "productType": "UV bezbojni lak",
+    "subtype": "Providni UV bezbojni lak",
+    "shortDescription": "Providni UV bezbojni lak za popunjavanje sitnih pora, ogrebotina i oštećenja od kamena.",
+    "longDescription": "UV Clear je providni UV bezbojni lak koji se nanosi umakanjem i usklađen je sa VOC propisima. Koristi se za popunjavanje sitnih pora (pinholes), sitnih ogrebotina i oštećenja od udara kamena u bezbojnom laku. Time se skraćuje vreme rada, naročito kod spot popravki.",
+    "purpose": "Popunjavanje sitnih pora, ogrebotina i oštećenja u bezbojnom laku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "UV bezbojni lak"
+      },
+      {
+        "label": "Nanošenje",
+        "value": "Umakanjem"
+      },
+      {
+        "label": "VOC",
+        "value": "Usklađen sa VOC propisima"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Popunjavanje sitnih pora (pinholes), sitnih ogrebotina i oštećenja od kamena u bezbojnom laku"
+    ],
+    "benefits": [
+      {
+        "title": "Ušteda vremena",
+        "description": "Rad se obavlja uz veliku uštedu vremena."
+      },
+      {
+        "title": "Za spot popravke",
+        "description": "Predviđen je za spot popravke."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "154.528": "100 ml"
+    }
+  },
+  "painting/uv-filler-spray-uv-filler-spray": {
+    "sourceHash": "4a6e4c96b2f9b985",
+    "productType": "Punilac u spreju",
+    "subtype": "UV punilac u spreju",
+    "shortDescription": "UV punilac u spreju sivo-bež boje, za punjenje sitnih delova i spot popravke.",
+    "longDescription": "UV punilac u spreju za punjenje kod spot popravki i na sitnim delovima. Boja je sivo-bež, a može da se koristi i kao izolacioni punilac. Ima visoku moć punjenja, pruža 100 % zaštitu od korozije i znatno skraćuje vreme rada.",
+    "purpose": "Spot popravka i sitni delovi",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "UV punilac u spreju"
+      },
+      {
+        "label": "Boja",
+        "value": "Sivo-bež"
+      },
+      {
+        "label": "Primena",
+        "value": "Može da se koristi kao izolacioni punilac"
+      }
+    ],
+    "applications": [
+      "Spot popravka",
+      "Sitni delovi"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć punjenja",
+        "description": "Visoka moć punjenja."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "100 % zaštita od korozije."
+      },
+      {
+        "title": "Ušteda vremena",
+        "description": "Znatno skraćuje vreme rada."
+      }
+    ],
+    "advice": "Na plastičnim podlogama prvo se nanosi Carsystem prajmer za plastiku. Na čeliku, aluminijumu i pocinkovanom čeliku prvo se nanosi Carsystem Etch Primer ili 1K Epoxy Primer.",
+    "variants": {
+      "159.169": "400 ml"
+    }
+  },
+  "painting/zinc-spray-rust-protection": {
+    "sourceHash": "5bb23b0211d7e001",
+    "productType": "Sprej za zaštitu od korozije",
+    "subtype": "Zaštita od korozije",
+    "shortDescription": "Sivi sprej za zaštitu od korozije, temperaturno otporan do 490 °C.",
+    "longDescription": "Zinc Spray je sprej za zaštitu od korozije sive boje. Podnosi temperature do 490 °C (prema DIN50976, 53167, 50021, 53151). Koristi se kao zaštita od korozije u unutrašnjosti karoserije kod tačkastog zavarivanja i za hladno cinkovanje metalnih površina.",
+    "purpose": "Zaštita od korozije i hladno cinkovanje metalnih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sprej za zaštitu od korozije"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "Do 490 °C (prema DIN50976, 53167, 50021, 53151)"
+      }
+    ],
+    "applications": [
+      "Zaštita od korozije u unutrašnjosti karoserije kod tačkastog zavarivanja",
+      "Hladno cinkovanje metalnih površina"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "126.030": "400 ml"
+    }
+  }
+}

@@ -1,0 +1,994 @@
+{
+  "total": 54,
+  "counts": {
+    "NEEDS_MANUAL_REVIEW": 22,
+    "KEEP_BRAND": 29,
+    "USE_EXISTING_FAMILY_COLOR": 3
+  },
+  "rows": [
+    {
+      "slug": "carsystem-all-in-one-covers",
+      "product": "Carsystem All In One Covers",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/6/5/csm_159.480-cs-allinone-covers-dispenserbox_cf4ef3331b.png",
+      "localImage": "/products/carsystem/catalog/carsystem-all-in-one-covers.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#9E5457",
+        "dominantShare": 0.1155,
+        "dominantHue": 345,
+        "saturatedShare": 0.1588,
+        "medianHex": "#AFA4AD"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #9E5457 pokriva 12 % (< 30 %), zasićeno 16 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-car-polish-roll",
+      "product": "Carsystem Car Polish Roll",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/c/c/csm_134582-cs-car-polish-roll-36x40cm-370-abrisse_64dfc3fbf5.png",
+      "localImage": "/products/carsystem/catalog/carsystem-car-polish-roll.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#950502",
+        "dominantShare": 0.7902,
+        "dominantHue": 0,
+        "saturatedShare": 0.7903,
+        "medianHex": "#A60602"
+      },
+      "reason": "dominira crvena (79 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-coverall-2-0",
+      "product": "Carsystem Coverall 2.0",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/e/csm_160275-280-coverall_2.0-back_front_2c25f37d00.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-coverall-2-0.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#3A428A",
+        "dominantShare": 0.177,
+        "dominantHue": 225,
+        "saturatedShare": 0.2364,
+        "medianHex": "#E1DDDF"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #3A428A pokriva 18 % (< 30 %), zasićeno 24 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-crash-film",
+      "product": "Carsystem Crash Film",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/f/b/csm_160381-crash-film-75cmx60m_81d06ca429.png",
+      "localImage": "/products/carsystem/catalog/carsystem-crash-film.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#E18A15",
+        "dominantShare": 0.4389,
+        "dominantHue": 15,
+        "saturatedShare": 0.4622,
+        "medianHex": "#D8A86C"
+      },
+      "reason": "dominira crvena (44 % površine, hue 15°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-easy-mask-ii",
+      "product": "Carsystem Easy Mask II",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/4/4/csm_160.434-435-easy-mask-ll-rolle-verpackung_1e024b7d1d.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-easy-mask-ii.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#ED3C38",
+        "dominantShare": 0.5039,
+        "dominantHue": 0,
+        "saturatedShare": 0.5039,
+        "medianHex": "#EE8686"
+      },
+      "reason": "dominira crvena (50 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-finish-foam-orange",
+      "product": "Carsystem Finish Foam Orange",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/2/csm_153076-153088-finish-foam-orange-liegend_18c63a2731.png",
+      "localImage": "/products/carsystem/catalog/carsystem-finish-foam-orange.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#CA2211",
+        "dominantShare": 0.9714,
+        "dominantHue": 0,
+        "saturatedShare": 0.9714,
+        "medianHex": "#C92211"
+      },
+      "reason": "dominira crvena (97 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-finish-quadra-pad-c-10",
+      "product": "Carsystem Finish Quadra Pad C-10",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/e/csm_151640-151905-906-finish-quadra-pad-c10_408941f66c.png",
+      "localImage": "/products/carsystem/catalog/carsystem-finish-quadra-pad-c-10.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#9B0204",
+        "dominantShare": 0.2032,
+        "dominantHue": 0,
+        "saturatedShare": 0.2083,
+        "medianHex": "#94060C"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #9B0204 pokriva 20 % (< 30 %), zasićeno 21 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-finish-sander-back-pad",
+      "product": "Carsystem Finish Sander Back Pad",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/a/1/csm_144917-cs-finish-sander-back-pad-77mm_1fb8a6c27e.png",
+      "localImage": "/products/carsystem/catalog/carsystem-finish-sander-back-pad.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#680E0D",
+        "dominantShare": 0.3809,
+        "dominantHue": 0,
+        "saturatedShare": 0.5139,
+        "medianHex": "#6C1C17"
+      },
+      "reason": "dominira crvena (38 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-finish-waffle-pad-orange",
+      "product": "Carsystem Finish Waffle Pad Orange",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/1/2/csm_153114-finish-waffle-pad-orange-135x25mm_7fb5dbc181.png",
+      "localImage": "/products/carsystem/catalog/carsystem-finish-waffle-pad-orange.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#DC2907",
+        "dominantShare": 0.9193,
+        "dominantHue": 0,
+        "saturatedShare": 0.9193,
+        "medianHex": "#DA2707"
+      },
+      "reason": "dominira crvena (92 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-foam-tape",
+      "product": "Carsystem Foam Tape",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/b/csm_148861-62-cs-foam-tape-13x50m-19mmx35m_dd32bb9fa8.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-foam-tape.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#C22C2F",
+        "dominantShare": 0.7807,
+        "dominantHue": 0,
+        "saturatedShare": 0.7808,
+        "medianHex": "#C93033"
+      },
+      "reason": "dominira crvena (78 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-foam-tape-t-soft",
+      "product": "Carsystem Foam Tape T-Soft",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/e/b/csm_157974-cs-foam-tape-t-soft-schaumdichtband_15e5ab6d91.png",
+      "localImage": "/products/carsystem/catalog/carsystem-foam-tape-t-soft.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#D30A04",
+        "dominantShare": 0.6866,
+        "dominantHue": 0,
+        "saturatedShare": 0.6876,
+        "medianHex": "#D00B06"
+      },
+      "reason": "dominira crvena (69 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-interface-pad",
+      "product": "Carsystem Interface Pad",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/6/d/csm_156225-226-interface-pad-ifp-5-10-150mm-25-loch_9a96a09e1a.png",
+      "localImage": "/products/carsystem/catalog/carsystem-interface-pad.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#D0252A",
+        "dominantShare": 0.7744,
+        "dominantHue": 345,
+        "saturatedShare": 0.7861,
+        "medianHex": "#C82225"
+      },
+      "reason": "dominira crvena (77 % površine, hue 345°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-latex-gloves",
+      "product": "Carsystem Latex gloves",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/8/csm_157981-latex-handschuhe-weiss-large_66abaac2cb.png",
+      "localImage": "/products/carsystem/catalog/carsystem-latex-gloves.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#7F3D27",
+        "dominantShare": 0.2283,
+        "dominantHue": 15,
+        "saturatedShare": 0.2286,
+        "medianHex": "#8D6965"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #7F3D27 pokriva 23 % (< 30 %), zasićeno 23 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-latex-hand-i-premium",
+      "product": "Carsystem Latex Hand I Premium",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/d/5/csm_152011-012-152011-012-latex-gloves-high-risk-long_0896e9dc02.png",
+      "localImage": "/products/carsystem/catalog/carsystem-latex-hand-i-premium.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#D07C49",
+        "dominantShare": 0.2094,
+        "dominantHue": 15,
+        "saturatedShare": 0.2832,
+        "medianHex": "#030929"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #D07C49 pokriva 21 % (< 30 %), zasićeno 28 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-masking-paper-master-ii",
+      "product": "Carsystem Masking Paper Master II",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/a/b/csm_159878-880-882-883-884-cs-masking-paper-masterII_8df76a3bcc.png",
+      "localImage": "/products/carsystem/catalog/carsystem-masking-paper-master-ii.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#763617",
+        "dominantShare": 0.9268,
+        "dominantHue": 0,
+        "saturatedShare": 0.9268,
+        "medianHex": "#743517"
+      },
+      "reason": "dominira crvena (93 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-masking-paper-top-ii",
+      "product": "Carsystem Masking Paper Top II",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/1/9/csm_155528-masking-paper-top-II-20cmx450m_2f3f5fa296.png",
+      "localImage": "/products/carsystem/catalog/carsystem-masking-paper-top-ii.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#703718",
+        "dominantShare": 0.9433,
+        "dominantHue": 0,
+        "saturatedShare": 0.9433,
+        "medianHex": "#6F3718"
+      },
+      "reason": "dominira crvena (94 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-master-tape-ii",
+      "product": "Carsystem Master Tape II",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/1/3/csm_140201-02-03-04-05-06-cs-master-tape-II_b0434435ba.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-master-tape-ii.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#B98560",
+        "dominantShare": 0.8462,
+        "dominantHue": 15,
+        "saturatedShare": 0.9514,
+        "medianHex": "#B97A5D"
+      },
+      "reason": "dominira crvena (85 % površine, hue 15°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-microfiber-x300-duo",
+      "product": "Carsystem Microfiber X300 Duo",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/2/c/csm_160457-microfiber-x300-duo_3fc99c994c.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-microfiber-x300-duo.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#DA2C41",
+        "dominantShare": 0.1821,
+        "dominantHue": 345,
+        "saturatedShare": 0.1821,
+        "medianHex": "#2F272B"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #DA2C41 pokriva 18 % (< 30 %), zasićeno 18 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-multi-cleaning-wipes",
+      "product": "Carsystem Multi Cleaning wipes",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/a/csm_159782-cs-multi-reinigungstuch_ee628c66fa.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-multi-cleaning-wipes.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#E21F24",
+        "dominantShare": 0.3253,
+        "dominantHue": 0,
+        "saturatedShare": 0.5011,
+        "medianHex": "#E1BCD6"
+      },
+      "reason": "dominira crvena (33 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-neopren-hand",
+      "product": "Carsystem Neopren Hand",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/d/csm_140939-941-neopren-hand_a8ec9fd57f.png",
+      "localImage": "/products/carsystem/catalog/carsystem-neopren-hand.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#C37448",
+        "dominantShare": 0.1639,
+        "dominantHue": 15,
+        "saturatedShare": 0.164,
+        "medianHex": "#030205"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #C37448 pokriva 16 % (< 30 %), zasićeno 16 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-nitril-hand-premium-black",
+      "product": "Carsystem Nitril Hand Premium black",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/3/0/csm_154347-348-156623-624-nitril-hand-premium-schwarz_fe08d0a973.png",
+      "localImage": "/products/carsystem/catalog/carsystem-nitril-hand-premium-black.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#C16A3F",
+        "dominantShare": 0.1915,
+        "dominantHue": 0,
+        "saturatedShare": 0.1915,
+        "medianHex": "#070609"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #C16A3F pokriva 19 % (< 30 %), zasićeno 19 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-polish-foam-green",
+      "product": "Carsystem Polish Foam Green",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/1/8/csm_157050-051-polish-foam-green-liegend_2ccd0602b5.png",
+      "localImage": "/products/carsystem/catalog/carsystem-polish-foam-green.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#4A7A7E",
+        "dominantShare": 0.2709,
+        "dominantHue": 165,
+        "saturatedShare": 0.3791,
+        "medianHex": "#004B28"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #4A7A7E pokriva 27 % (< 30 %), zasićeno 38 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-prep-brush",
+      "product": "Carsystem Prep-Brush",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/4/c/csm_159.696-cs-prep-brush-5-cm.png_8e03823813.png",
+      "localImage": "/products/carsystem/catalog/carsystem-prep-brush.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#A50001",
+        "dominantShare": 0.6745,
+        "dominantHue": 0,
+        "saturatedShare": 0.6745,
+        "medianHex": "#960001"
+      },
+      "reason": "dominira crvena (67 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-prep-hand-ii",
+      "product": "Carsystem Prep Hand II",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/b/csm_150719-720-721-prep-hand-II-1_b22ab07e5a.png",
+      "localImage": "/products/carsystem/catalog/carsystem-prep-hand-ii.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#823A19",
+        "dominantShare": 0.2971,
+        "dominantHue": 15,
+        "saturatedShare": 0.3813,
+        "medianHex": "#A69377"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #823A19 pokriva 30 % (< 30 %), zasićeno 38 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-prep-hand-iii",
+      "product": "Carsystem Prep Hand III",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/9/c/csm_145132-133-prep-hand-III_9d970d6288.png",
+      "localImage": "/products/carsystem/catalog/carsystem-prep-hand-iii.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#E0965A",
+        "dominantShare": 0.234,
+        "dominantHue": 30,
+        "saturatedShare": 0.2414,
+        "medianHex": "#040405"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #E0965A pokriva 23 % (< 30 %), zasićeno 24 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-proflex-mercury-sanding-block",
+      "product": "Carsystem ProFlex Mercury Sanding Block",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/e/e/csm_154173-156555-cs-proflex-mercury-sanding-block-gruppe_940e1846e3.png",
+      "localImage": "/products/carsystem/catalog/carsystem-proflex-mercury-sanding-block.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#68100F",
+        "dominantShare": 0.6226,
+        "dominantHue": 0,
+        "saturatedShare": 0.6226,
+        "medianHex": "#501110"
+      },
+      "reason": "dominira crvena (62 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-proflex-neptune-pad-maxgrip",
+      "product": "Carsystem ProFlex Neptune Pad MaxGrip",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/e/csm_158097-proflex-neptune-pad-maxgrip_9a1e9b55f8.png",
+      "localImage": "/products/carsystem/catalog/carsystem-proflex-neptune-pad-maxgrip.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#FA3304",
+        "dominantShare": 0.6482,
+        "dominantHue": 0,
+        "saturatedShare": 0.6482,
+        "medianHex": "#DB2405"
+      },
+      "reason": "dominira crvena (65 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-proflex-neptune-soft",
+      "product": "Carsystem ProFlex Neptune Soft",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/b/5/csm_157791-792-794-proflex-neptune-soft_3630a21572.png",
+      "localImage": "/products/carsystem/catalog/carsystem-proflex-neptune-soft.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#996062",
+        "dominantShare": 0.547,
+        "dominantHue": 0,
+        "saturatedShare": 0.5743,
+        "medianHex": "#986A6A"
+      },
+      "reason": "dominira crvena (55 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-proflex-pluto-sanding-block",
+      "product": "Carsystem ProFlex Pluto Sanding Block",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/c/csm_cs-proflex-pluto-sanding-block-gruppe_14513efc24.png",
+      "localImage": "/products/carsystem/catalog/carsystem-proflex-pluto-sanding-block.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#7F0201",
+        "dominantShare": 0.3035,
+        "dominantHue": 0,
+        "saturatedShare": 0.3035,
+        "medianHex": "#280201"
+      },
+      "reason": "dominira crvena (30 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-red-tape",
+      "product": "Carsystem Red Tape",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/b/csm_160211-cs-red-tape-l_479067aef0.png",
+      "localImage": "/products/carsystem/catalog/carsystem-red-tape.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#B3070A",
+        "dominantShare": 0.3726,
+        "dominantHue": 0,
+        "saturatedShare": 0.3726,
+        "medianHex": "#3E0405"
+      },
+      "reason": "dominira crvena (37 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-100-2-0",
+      "product": "Carsystem Sanding Block 100 2.0",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/e/8/csm_160224-cs-sanding-block-100-2_ea27c2e897.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-100-2-0.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#F22F3D",
+        "dominantShare": 0.1934,
+        "dominantHue": 345,
+        "saturatedShare": 0.1934,
+        "medianHex": "#38303A"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #F22F3D pokriva 19 % (< 30 %), zasićeno 19 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-198-2-0",
+      "product": "Carsystem Sanding Block 198 2.0",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/c/csm_159.535-cs-sanding-block-198-2.0-handschleifklotz_0c710482ee.png",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-198-2-0.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#FF0604",
+        "dominantShare": 0.2291,
+        "dominantHue": 0,
+        "saturatedShare": 0.2291,
+        "medianHex": "#080405"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #FF0604 pokriva 23 % (< 30 %), zasićeno 23 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-300-100",
+      "product": "Carsystem Sanding Block 300 + 100",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/9/7/csm_159.571_160.172-sanding-block-100-300_67c3985ed9.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-300-100.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#E6233C",
+        "dominantShare": 0.2946,
+        "dominantHue": 330,
+        "saturatedShare": 0.2946,
+        "medianHex": "#13121B"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #E6233C pokriva 29 % (< 30 %), zasićeno 29 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-400-2-0",
+      "product": "Carsystem Sanding Block 400 2.0",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/9/d/csm_159.534-sanding-block-400-2.0-handschleifklotz_44479251be.png",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-400-2-0.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#F50301",
+        "dominantShare": 0.286,
+        "dominantHue": 0,
+        "saturatedShare": 0.286,
+        "medianHex": "#060303"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #F50301 pokriva 29 % (< 30 %), zasićeno 29 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-400-grip-flex",
+      "product": "Carsystem Sanding Block 400 Grip Flex",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/d/2/csm_150088-cs-sanding-block-400-grip-flex_62b7221c10.png",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-400-grip-flex.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#8C0908",
+        "dominantShare": 0.6135,
+        "dominantHue": 0,
+        "saturatedShare": 0.6135,
+        "medianHex": "#660707"
+      },
+      "reason": "dominira crvena (61 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-grip",
+      "product": "Carsystem Sanding Block Grip",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/c/csm_137439-cs-sanding-block-grip-150mm_ff23c2e9b2.png",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-grip.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#D50E09",
+        "dominantShare": 0.7355,
+        "dominantHue": 0,
+        "saturatedShare": 0.7361,
+        "medianHex": "#D40A08"
+      },
+      "reason": "dominira crvena (74 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-block-grip-box",
+      "product": "Carsystem Sanding Block Grip Box",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/4/0/csm_142009-cs-sanding-block-box-grip-set_22085fce03.png",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-block-grip-box.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#3B4E6E",
+        "dominantShare": 0.2028,
+        "dominantHue": 210,
+        "saturatedShare": 0.335,
+        "medianHex": "#5E5470"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #3B4E6E pokriva 20 % (< 30 %), zasićeno 34 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-sanding-fleece-v-19-pad-115-x-230-mm",
+      "product": "Carsystem Sanding Fleece V.19 – Pad - 115 x 230 mm",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/1/e/csm_156041-042-cs-schleifvlies-v19-pad-rot-grau-115x230mm-gruppe_0496c332b5.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-fleece-v-19-pad-115-x-230-mm.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#D52625",
+        "dominantShare": 0.8312,
+        "dominantHue": 0,
+        "saturatedShare": 0.8328,
+        "medianHex": "#D42B2D"
+      },
+      "reason": "dominira crvena (83 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "USE_EXISTING_FAMILY_COLOR",
+      "familyCandidate": {
+        "slug": "carsystem-sanding-fleece-v-19-disc",
+        "name": "Sanding Fleece V.19",
+        "color": "#2A1E1F"
+      }
+    },
+    {
+      "slug": "carsystem-sanding-fleece-v-19-roll-115-mm-x-10-m",
+      "product": "Carsystem Sanding Fleece V.19 – Roll - 115 mm x 10 m",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/3/c/csm_156039-040-schleifvlies-v19-rolle-gruppe_e76519e8ac.png",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-fleece-v-19-roll-115-mm-x-10-m.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#570C15",
+        "dominantShare": 0.3575,
+        "dominantHue": 345,
+        "saturatedShare": 0.3578,
+        "medianHex": "#3B0A11"
+      },
+      "reason": "dominira crvena (36 % površine, hue 345°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "USE_EXISTING_FAMILY_COLOR",
+      "familyCandidate": {
+        "slug": "carsystem-sanding-fleece-v-19-disc",
+        "name": "Sanding Fleece V.19",
+        "color": "#2A1E1F"
+      }
+    },
+    {
+      "slug": "carsystem-sanding-strips-p-25-ceramic",
+      "product": "Carsystem Sanding Strips P.25 Ceramic",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/9/0/csm_160.408-413-p.25c-strips_f1a4a7f239.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-sanding-strips-p-25-ceramic.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#D32D33",
+        "dominantShare": 0.7861,
+        "dominantHue": 0,
+        "saturatedShare": 0.7866,
+        "medianHex": "#D0353C"
+      },
+      "reason": "dominira crvena (79 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "USE_EXISTING_FAMILY_COLOR",
+      "familyCandidate": {
+        "slug": "carsystem-sanding-disc-p-25-ceramic",
+        "name": "Sanding Disc P.25 Ceramic",
+        "color": "#800402"
+      }
+    },
+    {
+      "slug": "carsystem-soft-interface-pad",
+      "product": "Carsystem Soft Interface Pad",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/1/8/csm_140584-585-cs-soft-interface-pad-grip-gruppe-150mm_6ea2d9d349.png",
+      "localImage": "/products/carsystem/catalog/carsystem-soft-interface-pad.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#5E0A0D",
+        "dominantShare": 0.8001,
+        "dominantHue": 0,
+        "saturatedShare": 0.8002,
+        "medianHex": "#59090C"
+      },
+      "reason": "dominira crvena (80 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-soft-roll",
+      "product": "Carsystem Soft-Roll",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/a/5/csm_159422-430-cs-soft-roll-papierschleifmittel_f66ddb9014.png",
+      "localImage": "/products/carsystem/catalog/carsystem-soft-roll.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#CA0C0D",
+        "dominantShare": 0.8717,
+        "dominantHue": 0,
+        "saturatedShare": 0.8717,
+        "medianHex": "#CA0D0D"
+      },
+      "reason": "dominira crvena (87 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-star-mask",
+      "product": "Carsystem Star Mask",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/6/e/csm_141143-141145-cs-star-mask-ffa2-p2-r_eacea50421.png",
+      "localImage": "/products/carsystem/catalog/carsystem-star-mask.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#7B0F08",
+        "dominantShare": 0.1963,
+        "dominantHue": 15,
+        "saturatedShare": 0.2013,
+        "medianHex": "#745743"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #7B0F08 pokriva 20 % (< 30 %), zasićeno 20 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-star-mask-refill",
+      "product": "Carsystem Star Mask Refill",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/0/0/csm_141224-cs-star-mask-refill-a2_b0c7fde064.png",
+      "localImage": "/products/carsystem/catalog/carsystem-star-mask-refill.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#A3723C",
+        "dominantShare": 0.1646,
+        "dominantHue": 30,
+        "saturatedShare": 0.1751,
+        "medianHex": "#C7BFA7"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #A3723C pokriva 16 % (< 30 %), zasićeno 18 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-staub-stop",
+      "product": "Carsystem Staub Stop",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/5/f/csm_132616-cs-staub-stop-standard-5er_ebb4ad3c91.png",
+      "localImage": "/products/carsystem/catalog/carsystem-staub-stop.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#9B0102",
+        "dominantShare": 0.3149,
+        "dominantHue": 0,
+        "saturatedShare": 0.3181,
+        "medianHex": "#BBB2B5"
+      },
+      "reason": "dominira crvena (31 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-staub-stop-super-wave",
+      "product": "Carsystem Staub Stop Super Wave",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/7/6/csm_148124-cs-staub-stop-super-wave-1-stueck_d924a75ca8.png",
+      "localImage": "/products/carsystem/catalog/carsystem-staub-stop-super-wave.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#8E472C",
+        "dominantShare": 0.5196,
+        "dominantHue": 15,
+        "saturatedShare": 0.5447,
+        "medianHex": "#88593E"
+      },
+      "reason": "dominira crvena (52 % površine, hue 15°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-staub-stop-water",
+      "product": "Carsystem Staub Stop Water",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/b/csm_144538-staub-stop-water-10-stueck_50add42b84.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-staub-stop-water.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#AB4F3F",
+        "dominantShare": 0.2851,
+        "dominantHue": 0,
+        "saturatedShare": 0.5625,
+        "medianHex": "#BBD0E2"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #AB4F3F pokriva 29 % (< 30 %), zasićeno 56 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-tape-off-disc-premium",
+      "product": "Carsystem Tape Off Disc Premium",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/c/2/csm_152013-cs-tape-off-disc-premium_e722fb2c44.png",
+      "localImage": "/products/carsystem/catalog/carsystem-tape-off-disc-premium.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#F25F00",
+        "dominantShare": 0.967,
+        "dominantHue": 15,
+        "saturatedShare": 0.967,
+        "medianHex": "#F05D00"
+      },
+      "reason": "dominira crvena (97 % površine, hue 15°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-tec-line-mattflex-pad",
+      "product": "Carsystem Tec Line Mattflex Pad",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/4/9/csm_152686-87-88-157444-cs-tec-line-mattflex-pad-gruppe_75c69978cc.png",
+      "localImage": "/products/carsystem/catalog/carsystem-tec-line-mattflex-pad.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#9B0609",
+        "dominantShare": 0.2438,
+        "dominantHue": 345,
+        "saturatedShare": 0.2439,
+        "medianHex": "#2E060B"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #9B0609 pokriva 24 % (< 30 %), zasićeno 24 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-tec-line-n20",
+      "product": "Carsystem Tec Line N20",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/6/1/csm_157438-439-440-441-442-443-cs-tec-line-n20-70x400-mm-gruppe_2d603493f4.png",
+      "localImage": "/products/carsystem/catalog/carsystem-tec-line-n20.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#700706",
+        "dominantShare": 0.4345,
+        "dominantHue": 0,
+        "saturatedShare": 0.4345,
+        "medianHex": "#5B0E0D"
+      },
+      "reason": "dominira crvena (43 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-tec-line-softflex",
+      "product": "Carsystem Tec Line Softflex",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/2/5/csm_152689-696-cs-tec-line-softlex-rolle-115x125mm_8280ff5c19.png",
+      "localImage": "/products/carsystem/catalog/carsystem-tec-line-softflex.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#AA0807",
+        "dominantShare": 0.8055,
+        "dominantHue": 0,
+        "saturatedShare": 0.8056,
+        "medianHex": "#A60807"
+      },
+      "reason": "dominira crvena (81 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-tec-line-stick",
+      "product": "Carsystem Tec Line Stick",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/b/2/csm_152554-cs-sensor-pad-18mm-rot-150-pads_verpackung_f1f6c6a193.png",
+      "localImage": "/products/carsystem/catalog/carsystem-tec-line-stick.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#AB0000",
+        "dominantShare": 0.4955,
+        "dominantHue": 0,
+        "saturatedShare": 0.7383,
+        "medianHex": "#A53010"
+      },
+      "reason": "dominira crvena (50 % površine, hue 0°), a zvanični opis ne navodi crvenu → tretirano kao ambalaža",
+      "recommendation": "KEEP_BRAND",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-top-tape",
+      "product": "Carsystem Top Tape",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/e/c/csm_139263-64-65-67-cs-top-tape_90840f3bc7.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-top-tape.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#A84D4D",
+        "dominantShare": 0.1894,
+        "dominantHue": 0,
+        "saturatedShare": 0.2139,
+        "medianHex": "#C9B5AC"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #A84D4D pokriva 19 % (< 30 %), zasićeno 21 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    },
+    {
+      "slug": "carsystem-wr-lifting-tape-premium",
+      "product": "Carsystem WR-Lifting Tape Premium",
+      "officialImage": "https://www.carsystem.org/fileadmin/_processed_/8/9/csm_155734-cs-wr-lifting-tape-premium_721359163f.webp",
+      "localImage": "/products/carsystem/catalog/carsystem-wr-lifting-tape-premium.webp",
+      "currentBackgroundSource": "boja brenda (lib/brand-card-colors.ts) — proizvod nema `manufacturerColor`",
+      "currentColor": "#E30613",
+      "sample": {
+        "dominantHex": "#CDBF8D",
+        "dominantShare": 0.2897,
+        "dominantHue": 30,
+        "saturatedShare": 0.5601,
+        "medianHex": "#D0C199"
+      },
+      "reason": "neodlučan uzorak: dominantna boja #CDBF8D pokriva 29 % (< 30 %), zasićeno 56 % (≥ 15 %, pa nije ni neutralan)",
+      "recommendation": "NEEDS_MANUAL_REVIEW",
+      "familyCandidate": null
+    }
+  ]
+}

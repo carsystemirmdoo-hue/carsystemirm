@@ -60,6 +60,9 @@ const summary = summarizeCatalogRuntime();
  * imenuje granu, da bi tabela dokaza pokazala na osnovu čega je odluka pala.
  */
 function evidenceFor(product, resolved) {
+  if (product.taxonomyCategory) {
+    return `taxonomyCategory=${product.taxonomyCategory} (Carsystem sync mapping)`;
+  }
   if (product.rmMetadata?.category) {
     return `rmMetadata.category=${product.rmMetadata.category}`;
   }

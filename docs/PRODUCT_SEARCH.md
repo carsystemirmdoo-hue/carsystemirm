@@ -245,3 +245,25 @@ Back ga ne gase, jer bi svako sledeće otvaranje ponovo gradilo indeks. Gasi ga
 `dispose()` iz `disposeSearchIndexForTeardown()` (testovi i QA) i sam browser
 pri napuštanju dokumenta. Puna navigacija je nov dokument i legitimno pravi nov
 keš i nov worker — mereno je da ih po dokumentu ima tačno jedan.
+
+## Carsystem sync (2026-09-18)
+
+Ponašanje pretrage nije menjano; promenili su se podaci.
+
+- **Šifre artikala varijanti su termini.** `productTerms` sada dodaje `id` svakog
+  reda `detail.variants` (Carsystem: jedna proizvođačka šifra po granulaciji ili
+  pakovanju). Upit `160.273` (P40 diska P.25 Ceramic) nalazi proizvod iako je
+  `sku` samo vodeća šifra. Zaključano u `validate-search-deltas.mjs`
+  (`MUST_INCLUDE`). `detail` i dalje nije polje indeksa — u indeks ulaze samo
+  tokeni šifara.
+- **`ral`: 126 → 130.** Četiri zvanična proizvoda „Rallye-Spray” — prefiks reči,
+  isto pravilo po kome se nalazi i „RAL”.
+- **`1l`: 4 → 61, `3,5 l`: 1 → 10.** Stare vrednosti su zastarele još od Baslac
+  kataloga (commit `b8d4b44`): čist HEAD vraća 50, odnosno 10, i validator je bio
+  crven pre Carsystem uvoza i pre bilo kog necommitovanog rada. Carsystem sync na
+  `1l` dodaje 11 proizvoda sa jednom varijantom čija je zvanična specifikacija
+  tačno „1 L”; na `3,5 l` ne dodaje ništa. Svih 61/10 zapisa je provereno prema
+  polju volumena — 0 lažnih pogodaka. Poznato ograničenje (nije regresija):
+  proizvod sa VIŠE pakovanja ne nosi zapreminu kao termin („pakovanje je osa
+  varijacije”), pa 17 uvezenih proizvoda koji imaju i varijantu od 1 L upit `1l`
+  ne vraća.

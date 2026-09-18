@@ -1,0 +1,2158 @@
+{
+  "putties/1k-nc-filler-nitrocellulose-filler": {
+    "sourceHash": "19a802ab04aa9cad",
+    "productType": "Nitro punilac",
+    "subtype": "Nitroceluloza · punilac",
+    "shortDescription": "1K nitrocelulozni punilac za nanošenje špahtlom, za sitne nepravilnosti, pore i oštećenja od kamena.",
+    "longDescription": "1K NC Filler je jednokomponentni punilac na bazi nitroceluloze koji se nanosi špahtlom. Svetlo sive je boje i namenjen popunjavanju najsitnijih nepravilnosti, pora i oštećenja od udara kamena. Brzo se suši i prianja na više vrsta podloga.",
+    "purpose": "Popunjavanje sitnih nepravilnosti, pora i oštećenja od kamena",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Nitrocelulozni punilac"
+      },
+      {
+        "label": "Tip",
+        "value": "1K punilac za nanošenje špahtlom"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlo siva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje najsitnijih nepravilnosti, pora i oštećenja od udara kamena"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Punilac se brzo suši."
+      },
+      {
+        "title": "Prianjanje na više podloga",
+        "description": "Prianja na više vrsta podloga."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.139": "Tuba / 200 g"
+    }
+  },
+  "putties/alu-spezial-polyester-hard-putty": {
+    "sourceHash": "6c642d77cb9cff50",
+    "productType": "Tvrdi git",
+    "subtype": "Poliester · tvrdi git",
+    "shortDescription": "Tvrdi poliesterski git visoke tvrdoće za duboke nepravilnosti, ivice i lepljene aluminijumske delove.",
+    "longDescription": "Alu Spezial je specijalni poliesterski git izražene tvrdoće, svetlo sive boje. Koristi se za popunjavanje veoma dubokih nepravilnosti, obnavljanje ivica i rad na lepljenim aluminijumskim delovima. Može da zameni nanošenje kalaja na aluminijumu, bez ulegnuća prelaznih zona na lepljenim zamenskim delovima.",
+    "purpose": "Popunjavanje dubokih nepravilnosti i obnavljanje ivica",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalni poliesterski git"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Tvrdi git"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Veoma visoka tvrdoća"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlo siva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih nepravilnosti",
+      "Obnavljanje ivica i lepljenih aluminijumskih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Zamena za kalaj",
+        "description": "Zamenjuje nanošenje kalaja na aluminijumu."
+      },
+      {
+        "title": "Bez ulegnuća prelaza",
+        "description": "Nema ulegnuća prelaznih zona na lepljenim zamenskim delovima."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "148.524": "Limenka 1.8 kg sa učvršćivačem"
+    }
+  },
+  "putties/aluminium-mesh-aluminium-repair-mesh": {
+    "sourceHash": "94e4119635437f65",
+    "productType": "Reparaturna mrežica",
+    "subtype": "Aluminijumska reparaturna mrežica",
+    "shortDescription": "Aluminijumska mrežica za oblikovanje forme pre nanošenja mata ili tkanine od staklenih vlakana.",
+    "longDescription": "Aluminium mesh je reparaturna mrežica od aluminijuma. Koristi se za oblikovanje formi pre nanošenja mata ili tkanine od staklenih vlakana, a savijanjem se prilagođava obliku radnog komada. Olakšava rad na komadima sa izraženim ivicama.",
+    "purpose": "Oblikovanje forme pre nanošenja staklenih vlakana",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Aluminijumska reparaturna mrežica"
+      }
+    ],
+    "applications": [
+      "Oblikovanje formi pre upotrebe mata ili tkanine od staklenih vlakana"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavno rukovanje",
+        "description": "Jednostavno rukovanje kod radnih komada sa ivicama."
+      }
+    ],
+    "advice": "Savijanjem se prilagođava obliku radnog komada. Može se koristiti sa gitovima na bazi staklenih vlakana.",
+    "variants": {
+      "126.041": "25 x 20 cm"
+    }
+  },
+  "putties/anti-rust-putty-anti-rust-putty": {
+    "sourceHash": "669d712458f26f7e",
+    "productType": "Git protiv korozije",
+    "subtype": "Git protiv korozije",
+    "shortDescription": "Poliesterski git protiv korozije za sitne nepravilnosti, udubljenja i ogrebotine.",
+    "longDescription": "Anti Rust Putty je specijalni poliesterski git crveno-braon boje sa dejstvom protiv korozije. Koristi se za popunjavanje sitnih nepravilnosti, udubljenja i ogrebotina. U sistemu lakiranja formira dodatni sloj zaštite od korozije.",
+    "purpose": "Popunjavanje sitnih oštećenja uz dodatnu zaštitu od korozije",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalni poliesterski git"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Git protiv korozije"
+      },
+      {
+        "label": "Boja",
+        "value": "Crveno-braon"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje sitnih nepravilnosti, udubljenja i ogrebotina",
+      "Za dodatnu zaštitu od korozije"
+    ],
+    "benefits": [
+      {
+        "title": "Dodatni antikorozivni sloj",
+        "description": "Formira dodatni sloj zaštite od korozije."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "149.612": "Limenka 1.8 kg sa učvršćivačem"
+    }
+  },
+  "putties/blacky-rubber-spreader": {
+    "sourceHash": "dc6497a77d848330",
+    "productType": "Gumena špahtla",
+    "subtype": "Gumena špahtla",
+    "shortDescription": "Gumeno-plastična špahtla, savitljiva i otporna na rastvarače, za ručno mešanje i nanošenje gita.",
+    "longDescription": "Blacky je špahtla od gumenog polimera, otporna na rastvarače i veoma savitljiva. Koristi se za ručno mešanje i nanošenje Carsystem gitova.",
+    "purpose": "Ručno mešanje i nanošenje gita",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Gumeno-plastična špahtla"
+      }
+    ],
+    "applications": [
+      "Za ručno mešanje i nanošenje gita"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Špahtla je otporna na rastvarače."
+      },
+      {
+        "title": "Velika savitljivost",
+        "description": "Špahtla je veoma savitljiva."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "137.433": "100 x 60 mm"
+    }
+  },
+  "putties/bpo-hardener-hardener": {
+    "sourceHash": "a8745cbe22b834e6",
+    "productType": "Učvršćivač",
+    "subtype": "Učvršćivač",
+    "shortDescription": "BPO pasta učvršćivača, druga komponenta za Carsystem poliesterske gitove.",
+    "longDescription": "BPO Hardener je pasta učvršćivača crvene boje, u ulozi standardnog učvršćivača. Služi kao druga komponenta koja se meša sa Carsystem poliesterskim gitom.",
+    "purpose": "Učvršćivač za poliesterske gitove",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "BPO pasta učvršćivača"
+      },
+      {
+        "label": "Boja",
+        "value": "Crvena (standardni učvršćivač)"
+      }
+    ],
+    "applications": [
+      "Učvršćivač za poliesterski git"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "132.413": "Crvena / 40 g"
+    }
+  },
+  "putties/carbo-putty-polyester-carbon-putty": {
+    "sourceHash": "398a7c9627e67d2c",
+    "productType": "Git za karbon",
+    "subtype": "Poliester · git za karbon",
+    "shortDescription": "Providni poliesterski git za popunjavanje i fini rad na CRP, drvetu i vidljivim karbonskim delovima.",
+    "longDescription": "Carbo Putty je providni poliesterski git koji služi i za popunjavanje i kao fini git. Nanosi se kao osnovni sloj na horizontalne CRP i drvene površine radi popunjavanja pora i nepravilnosti, a na vidljivim karbonskim delovima daje providnu osnovu. Samorazlivajući je, daje površinu gotovo bez pora i skraćuje vreme brušenja.",
+    "purpose": "Providna osnova i popunjavanje pora na CRP i karbonu",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalni poliesterski git"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Git za popunjavanje i fini git"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Osnovni sloj na horizontalnim CRP i drvenim površinama za popunjavanje pora i nepravilnosti",
+      "Providna osnova na karbonskim delovima",
+      "Može se nanositi direktno na CRP"
+    ],
+    "benefits": [
+      {
+        "title": "Površina bez pora",
+        "description": "Daje površinu gotovo bez pora."
+      },
+      {
+        "title": "Samorazlivanje",
+        "description": "Git je samorazlivajući."
+      },
+      {
+        "title": "Kraće brušenje",
+        "description": "Skraćuje vreme brušenja."
+      },
+      {
+        "title": "Bez curenja na karbonu",
+        "description": "Ne curi na karbonskim delovima."
+      },
+      {
+        "title": "Bolji završni sloj",
+        "description": "Poboljšava kvalitet završnog sloja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "148.018": "Limenka 0.5 kg sa učvršćivačem"
+    }
+  },
+  "putties/carbo-spray-polyester-sprayable-putty-for-carbon-parts": {
+    "sourceHash": "71097fb1ea7dfb84",
+    "productType": "Git za prskanje",
+    "subtype": "Poliester · git za prskanje za karbonske delove",
+    "shortDescription": "Providni poliesterski git za nanošenje prskanjem, za oštećenja i providnu osnovu na karbonu.",
+    "longDescription": "Carbo Spray je providni specijalni poliesterski git koji se nanosi prskanjem. Namenjen je popunjavanju sitnih do dubokih nepravilnosti, udubljenja i ogrebotina na većim karbonskim površinama, a služi i kao providna osnova na vidljivom karbonu. Pištoljem za lakiranje se nanosi veoma ravnomerno, uz mogućnost velike debljine sloja.",
+    "purpose": "Popunjavanje nepravilnosti i providna osnova na karbonu",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalni poliesterski git"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Git za nanošenje prskanjem"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje sitnih do dubokih nepravilnosti, udubljenja i ogrebotina",
+      "Providna osnova na karbonskim delovima",
+      "Može se nanositi direktno na CRP"
+    ],
+    "benefits": [
+      {
+        "title": "Velika debljina sloja",
+        "description": "Moguća je veoma velika debljina sloja."
+      },
+      {
+        "title": "Ravnomerno nanošenje",
+        "description": "Veoma ravnomerno nanošenje pištoljem za lakiranje."
+      },
+      {
+        "title": "Bez curenja na karbonu",
+        "description": "Ne curi na karbonskim delovima."
+      },
+      {
+        "title": "Bolji završni sloj",
+        "description": "Poboljšava kvalitet završnog sloja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "148.019": "Limenka 0.820 kg sa učvršćivačem"
+    }
+  },
+  "putties/carbo-spray-thinner-carbo-spray-thinner": {
+    "sourceHash": "72b44c15f796303b",
+    "productType": "Razređivač",
+    "subtype": "Razređivač za Carbo Spray",
+    "shortDescription": "Razređivač namenjen proizvodu Carsystem Carbo Spray.",
+    "longDescription": "Carbo Spray Thinner je razređivač iz Carsystem programa. Namenjen je razređivanju proizvoda Carbo Spray.",
+    "purpose": "Razređivanje proizvoda Carbo Spray",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Razređivač"
+      }
+    ],
+    "applications": [
+      "Razređivač za Carbo Spray"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "148.234": "Limenka 1.0 l"
+    }
+  },
+  "putties/dualmatic-putty-dispenser-manual": {
+    "sourceHash": "286eb8ad6b377b7a",
+    "productType": "Dozator za git",
+    "subtype": "Dozator za git · ručni",
+    "shortDescription": "Ručni dozator za kartuše gita od 3 kg, sa tačnim odnosom gita i učvršćivača.",
+    "longDescription": "Dualmatic je ručni dozator za kartuše gita od 3 kg. Obezbeđuje tačan odnos gita i učvršćivača i time sprečava pogrešno doziranje. Može se koristiti mobilno ili postaviti na sto ili zid, pri čemu se preporučuje montaža na zid.",
+    "purpose": "Dozirano istiskivanje gita iz kartuša od 3 kg",
+    "facts": [
+      {
+        "label": "Kapacitet",
+        "value": "Dozator za kartuše gita od 3 kg"
+      },
+      {
+        "label": "Rukovanje",
+        "value": "Ručno istiskivanje"
+      },
+      {
+        "label": "Montaža",
+        "value": "Preporučuje se montaža na zid"
+      }
+    ],
+    "applications": [
+      "Mobilni dozator gita, pogodan i za montažu na sto ili zid"
+    ],
+    "benefits": [
+      {
+        "title": "Tačan odnos mešanja",
+        "description": "Obezbeđuje tačan odnos gita i učvršćivača."
+      },
+      {
+        "title": "Bez greške u doziranju",
+        "description": "Sprečava pogrešno doziranje."
+      }
+    ],
+    "advice": "Količina učvršćivača je podesiva (leto / zima).",
+    "variants": {
+      "123.892": "Za kartuše od 3 kg",
+      "126.854": "Ručica za Dualmatic",
+      "126.861": "Odsecač sa ručicom"
+    }
+  },
+  "putties/easy-clean-box-putty-spreader-cleaning-box": {
+    "sourceHash": "2d24c2887e1f04a3",
+    "productType": "Kutija za čišćenje",
+    "subtype": "Kutija za čišćenje špahtli za git",
+    "shortDescription": "Zatvorena kutija otporna na rastvarače za čišćenje čeličnih, plastičnih i gumenih špahtli.",
+    "longDescription": "Easy Clean Box je mobilno rešenje za čišćenje alata za git. Zatvorena posuda otporna na rastvarače sprečava isparavanje sredstva za čišćenje i smanjuje širenje mirisa. Namenjena je čeličnim, plastičnim i gumenim špahtlama za višekratnu upotrebu i doprinosi čistijem radnom mestu.",
+    "purpose": "Čišćenje špahtli za git za višekratnu upotrebu",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Kutija za čišćenje špahtli za višekratnu upotrebu"
+      },
+      {
+        "label": "Otpornost",
+        "value": "Otporna na rastvarače"
+      }
+    ],
+    "applications": [
+      "Za brzo i jednostavno čišćenje čeličnih, plastičnih ili gumenih špahtli"
+    ],
+    "benefits": [
+      {
+        "title": "Zatvorena posuda",
+        "description": "Zatvorena posuda smanjuje širenje mirisa."
+      },
+      {
+        "title": "Čistije radno mesto",
+        "description": "Radno mesto je osetno čistije."
+      }
+    ],
+    "advice": "Preporučuje se Carsystem H2O Cleaner zbog sporijeg isparavanja i manjeg mirisa.",
+    "variants": {
+      "153.206": "Uređaj za čišćenje špahtli",
+      "159.363": "Zamensko runo – 3 kom."
+    }
+  },
+  "putties/elastic-beige-polyester-fine-putty": {
+    "sourceHash": "f139be23e257bfdd",
+    "productType": "Fini git",
+    "subtype": "Poliester · fini git",
+    "shortDescription": "Bež poliesterski fini git za popunjavanje sitnih do srednje velikih oštećenja.",
+    "longDescription": "Elastic beige je poliesterski fini git bež boje. Koristi se za popunjavanje sitnih do srednje velikih nepravilnosti, udubljenja i ogrebotina. Formira veoma finu površinu gotovo bez pora, čime smanjuje potreban rad na brušenju.",
+    "purpose": "Popunjavanje sitnih do srednje velikih oštećenja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Fini git"
+      },
+      {
+        "label": "Boja",
+        "value": "Bež"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje sitnih do srednje velikih nepravilnosti, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Fina površina",
+        "description": "Daje veoma finu površinu gotovo bez pora."
+      },
+      {
+        "title": "Manje brušenja",
+        "description": "Smanjuje potreban rad na brušenju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "127.976": "Limenka 2.0 kg sa učvršćivačem"
+    }
+  },
+  "putties/elastic-green-polyester-fine-putty": {
+    "sourceHash": "27669ad08d4f5957",
+    "productType": "Fini git",
+    "subtype": "Poliesterski · fini git",
+    "shortDescription": "Poliesterski fini git za popunjavanje sitnih do srednjih neravnina, udubljenja i ogrebotina.",
+    "longDescription": "Poliesterski fini git zelene boje. Koristi se za popunjavanje sitnih do srednjih neravnina, udubljenja i ogrebotina. Daje ravnomernu površinu gotovo bez pora i skraćuje vreme brušenja.",
+    "purpose": "Popunjavanje sitnih do srednjih neravnina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Vrsta",
+        "value": "Fini git"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje sitnih do srednjih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Površina bez pora",
+        "description": "Daje ravnomernu površinu gotovo bez pora."
+      },
+      {
+        "title": "Kraće brušenje",
+        "description": "Skraćuje vreme brušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "146.708": "limenka 2.0 kg sa učvršćivačem"
+    }
+  },
+  "putties/faser-polyester-glass-fibre-reinforced-putty": {
+    "sourceHash": "4a0a2ef9a043ace0",
+    "productType": "Git sa staklenim vlaknima",
+    "subtype": "Poliester · git ojačan staklenim vlaknima",
+    "shortDescription": "Poliesterski git ojačan dugim staklenim vlaknima, za duboka oštećenja i popravku GRP delova.",
+    "longDescription": "Faser je specijalni poliesterski git ojačan staklenim vlaknima, braon providne boje. Sadrži posebno duga vlakna, a u odnosu na uobičajene gitove sa staklenim vlaknima ima manje vlakana i više smole. Namenjen je popunjavanju veoma dubokih nepravilnosti, sanaciji obrađenih mesta korozije i popravci GRP delova.",
+    "purpose": "Popunjavanje dubokih oštećenja i popravka GRP delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Specijalni git ojačan staklenim vlaknima"
+      },
+      {
+        "label": "Sastav",
+        "value": "Manje vlakana i više smole nego kod uobičajenih gitova sa staklenim vlaknima"
+      },
+      {
+        "label": "Boja",
+        "value": "Braon providna"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih nepravilnosti, sanaciju obrađenih mesta korozije i GRP delova",
+      "Pogodan za popravku GRP delova"
+    ],
+    "benefits": [
+      {
+        "title": "Duga staklena vlakna",
+        "description": "Sadrži posebno duga staklena vlakna."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "138.443": "Limenka 1.4 kg sa učvršćivačem"
+    }
+  },
+  "putties/fill-putty-polyester-fill-putty": {
+    "sourceHash": "cb846a062eb999cc",
+    "productType": "Git za popunjavanje",
+    "subtype": "Poliester · git za popunjavanje",
+    "shortDescription": "Poliesterski git za popunjavanje sa veoma visokom moći punjenja, za duboka do veoma duboka oštećenja.",
+    "longDescription": "Fill putty je poliesterski git za popunjavanje sive boje. Veoma visoka moć punjenja omogućava popunjavanje dubokih do veoma dubokih neravnina, udubljenja i ogrebotina. Isporučuje se sa učvršćivačem.",
+    "purpose": "Popunjavanje dubokih do veoma dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git za popunjavanje"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje dubokih do veoma dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć punjenja",
+        "description": "Veoma visoka moć punjenja pri popunjavanju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "124.550": "Limenka 250 g sa učvršćivačem",
+      "124.552": "Limenka 1,000 g sa učvršćivačem"
+    }
+  },
+  "putties/fine-putty-polyester-fine-putty": {
+    "sourceHash": "6c76184a8bb6c2ed",
+    "productType": "Fini git",
+    "subtype": "Poliester · fini git",
+    "shortDescription": "Poliesterski fini git za male i srednje neravnine, sa veoma finom površinom gotovo bez pora.",
+    "longDescription": "Fine putty je poliesterski fini git bele boje. Namenjen je popunjavanju malih do srednje velikih neravnina, udubljenja i ogrebotina. Formira veoma finu površinu gotovo bez pora, čime se smanjuje vreme brušenja.",
+    "purpose": "Popunjavanje malih do srednje velikih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Fini git"
+      },
+      {
+        "label": "Boja",
+        "value": "Bela"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do srednje velikih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma fina površina",
+        "description": "Daje veoma finu površinu gotovo bez pora."
+      },
+      {
+        "title": "Kraće brušenje",
+        "description": "Smanjuje vreme potrebno za brušenje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "124.124": "Limenka 250 g sa učvršćivačem",
+      "124.126": "Limenka 1,000 g sa učvršćivačem"
+    }
+  },
+  "putties/flex-polyester-plastic-putty": {
+    "sourceHash": "bdb1427c414f81eb",
+    "productType": "Git za plastiku",
+    "subtype": "Poliester · git za plastiku",
+    "shortDescription": "Poliesterski konturni git za plastiku, za male ogrebotine i neravnine, bez prajmera za plastiku.",
+    "longDescription": "Flex je poliesterski konturni git za plastiku, tamnosive boje. Koristi se za popunjavanje malih ogrebotina i neravnina na plastičnim površinama. Nanosi se bez prajmera za plastiku i ima veoma dobru prionljivost na plastici.",
+    "purpose": "Popunjavanje malih ogrebotina i neravnina na plastici",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Konturni git za plastiku"
+      },
+      {
+        "label": "Boja",
+        "value": "Tamnosiva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih ogrebotina i neravnina na plastičnim površinama"
+    ],
+    "benefits": [
+      {
+        "title": "Prionljivost na plastici",
+        "description": "Veoma dobra prionljivost na plastičnim površinama."
+      },
+      {
+        "title": "Prelaz bez odvajanja",
+        "description": "Nema gubitka prionljivosti u zoni prelaza."
+      },
+      {
+        "title": "Bez prajmera za plastiku",
+        "description": "Prajmer za plastiku nije potreban."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "134.796": "Limenka 1.0 kg sa učvršćivačem"
+    }
+  },
+  "putties/glas-polyester-glass-fibre-reinforced-putty": {
+    "sourceHash": "eb8cc4ff482a68ec",
+    "productType": "Git ojačan staklenim vlaknima",
+    "subtype": "Poliester · git ojačan staklenim vlaknima",
+    "shortDescription": "Poliesterski git sa izuzetno dugim staklenim vlaknima, za veoma duboka oštećenja i GRP popravke.",
+    "longDescription": "Glas je poliesterski git ojačan staklenim vlaknima, zelene boje. Sadrži izuzetno duga vlakna, pa je pogodan za popravku GRP delova. Koristi se i za popunjavanje veoma dubokih neravnina i sanaciju obrađenih mesta korozije.",
+    "purpose": "Popunjavanje veoma dubokih neravnina i GRP popravke",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git ojačan staklenim vlaknima"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih neravnina, sanaciju obrađenih mesta korozije i GRP delova",
+      "Posebno pogodan za popravku GRP delova"
+    ],
+    "benefits": [
+      {
+        "title": "Duga staklena vlakna",
+        "description": "Sadrži izuzetno duga staklena vlakna."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "130.854": "Limenka 1.0 kg sa učvršćivačem",
+      "127.974": "Limenka 1.8 kg sa učvršćivačem"
+    }
+  },
+  "putties/glas-white-polyester-glass-fibre-reinforced-putty": {
+    "sourceHash": "a47f95350f99229c",
+    "productType": "Git ojačan staklenim vlaknima",
+    "subtype": "Poliester · git ojačan staklenim vlaknima",
+    "shortDescription": "Beli poliesterski git sa dugim staklenim vlaknima, za GRP popravke i unutrašnje ili nevidljive zone.",
+    "longDescription": "Glas White je poliesterski git ojačan staklenim vlaknima, bele boje. Izuzetno duga vlakna čine ga pogodnim za popravku GRP delova. Zbog bele boje koristi se i u unutrašnjim ili nevidljivim zonama, koje ne moraju obavezno da se prelakiraju.",
+    "purpose": "Popunjavanje veoma dubokih neravnina i GRP popravke",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git ojačan staklenim vlaknima"
+      },
+      {
+        "label": "Boja",
+        "value": "Bela"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih neravnina, sanaciju obrađenih mesta korozije i GRP delova",
+      "Posebno pogodan za popravku GRP delova"
+    ],
+    "benefits": [
+      {
+        "title": "Duga staklena vlakna",
+        "description": "Sadrži izuzetno duga staklena vlakna."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "144.808": "Limenka 1.8 kg sa učvršćivačem"
+    }
+  },
+  "putties/glass-fibre-fleece-40-g-per-m2": {
+    "sourceHash": "76c46b44a96759d7",
+    "productType": "Runo od staklenih vlakana",
+    "subtype": "40 g po m²",
+    "shortDescription": "Runo od staklenih vlakana gramaže 40 g/m² za ojačavanje i izravnavanje GRP delova.",
+    "longDescription": "Runo od staklenih vlakana gramaže 40 g/m². Koristi se uz Carsystem poliestersku reparaturnu smolu za ojačavanje i izravnavanje GRP delova. Jednostavno se prilagođava zaobljenim i konusnim delovima.",
+    "purpose": "Ojačavanje i izravnavanje GRP delova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Runo od staklenih vlakana"
+      },
+      {
+        "label": "Gramaža",
+        "value": "40 g/m²"
+      }
+    ],
+    "applications": [
+      "Za ojačavanje i izravnavanje GRP delova"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavan rad",
+        "description": "Jednostavno se koristi na zaobljenim i konusnim delovima."
+      }
+    ],
+    "advice": "Koristi se sa poliesterskom reparaturnom smolom.",
+    "variants": {
+      "125.421": "0.5 m²",
+      "125.422": "1.0 m²"
+    }
+  },
+  "putties/glass-fibre-mat-300-g-per-m2": {
+    "sourceHash": "1e49c8b1623d2a2e",
+    "productType": "Mat od staklenih vlakana",
+    "subtype": "300 g/m²",
+    "shortDescription": "Mat od staklenih vlakana gramature 300 g/m², za prekrivanje manjih otvora na nenosećim delovima.",
+    "longDescription": "Glass fibre mat je mat od staklenih vlakana gramature 300 g/m². Koristi se zajedno sa poliesterskom smolom za popravke, za prekrivanje manjih otvora na nenosećim delovima. Dodatno stabilizuje delove u odnosu na zateznu čvrstoću.",
+    "purpose": "Prekrivanje manjih otvora na nenosećim delovima",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Mat od staklenih vlakana"
+      },
+      {
+        "label": "Gramatura",
+        "value": "300 g/m²"
+      }
+    ],
+    "applications": [
+      "Za prekrivanje manjih otvora na nenosećim delovima"
+    ],
+    "benefits": [
+      {
+        "title": "Stabilizacija delova",
+        "description": "Stabilizuje delove u odnosu na zateznu čvrstoću."
+      }
+    ],
+    "advice": "Koristi se sa poliesterskom smolom za popravke.",
+    "variants": {
+      "125.423": "0.5 m²",
+      "125.424": "1.0 m²"
+    }
+  },
+  "putties/glass-fibre-reinforced-putty-polyester-glass-fibre-reinforced-putty": {
+    "sourceHash": "acd6a75c4882d155",
+    "productType": "Git ojačan staklenim vlaknima",
+    "subtype": "Poliester · git ojačan staklenim vlaknima",
+    "shortDescription": "Poliesterski git sa izuzetno dugim staklenim vlaknima, za veoma duboka oštećenja i popravke GRP delova.",
+    "longDescription": "Glass fibre reinforced putty je poliesterski git ojačan staklenim vlaknima, zelene boje. Izuzetno duga vlakna čine ga pogodnim za popravku GRP delova. Koristi se za popunjavanje veoma dubokih neravnina i sanaciju obrađenih mesta korozije.",
+    "purpose": "Popunjavanje veoma dubokih neravnina i GRP popravke",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git ojačan staklenim vlaknima"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih neravnina",
+      "Sanacija obrađenih mesta korozije i GRP delova",
+      "Posebno pogodan za popravku GRP delova"
+    ],
+    "benefits": [
+      {
+        "title": "Duga staklena vlakna",
+        "description": "Sadrži izuzetno duga staklena vlakna."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "124.036": "Limenka 250 g sa učvršćivačem"
+    }
+  },
+  "putties/japanese-putty-knife-japanese-steel-spreader": {
+    "sourceHash": "6ae7cf5c9e457538",
+    "productType": "Čelične špahtle",
+    "subtype": "Japanska čelična špahtla",
+    "shortDescription": "Set od 4 čelične špahtle širine 5, 8, 10 i 12 cm, za ručno mešanje i nanošenje gita.",
+    "longDescription": "Japanese Putty Knife je set od četiri čelične špahtle širina 5, 8, 10 i 12 cm. Namenjene su ručnom mešanju i nanošenju gita. Otporne su na rastvarače i imaju odgovarajući stepen krutosti.",
+    "purpose": "Ručno mešanje i nanošenje gita",
+    "facts": [
+      {
+        "label": "Sadržaj",
+        "value": "Set čeličnih špahtli"
+      },
+      {
+        "label": "Širine",
+        "value": "4 čelične špahtle (5, 8, 10 i 12 cm)"
+      }
+    ],
+    "applications": [
+      "Za ručno mešanje i nanošenje gita"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Otporne su na rastvarače."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "139.356": "1 set"
+    }
+  },
+  "putties/liquid-putty-polyester-liquid-putty": {
+    "sourceHash": "39530488a7786118",
+    "productType": "Tečni git",
+    "subtype": "Poliester · tečni git",
+    "shortDescription": "Tečni poliesterski git bež boje za izravnavanje malih neravnina, udubljenja i ogrebotina.",
+    "longDescription": "Liquid Putty je tečni poliesterski git bež boje. Zahvaljujući svojim svojstvima pogodan je za izravnavanje malih neravnina, udubljenja i ogrebotina. Samorazlivajuća konzistencija daje površinu gotovo bez pora.",
+    "purpose": "Izravnavanje malih neravnina, udubljenja i ogrebotina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Tečni git"
+      },
+      {
+        "label": "Boja",
+        "value": "Bež"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Površina bez pora",
+        "description": "Daje površinu gotovo bez pora."
+      },
+      {
+        "title": "Samorazlivanje",
+        "description": "Git se sam razliva po podlozi."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "143.496": "Boca 1.04 kg sa učvršćivačem"
+    }
+  },
+  "putties/metallic-polyester-fill-putty": {
+    "sourceHash": "afba9ec317e95d21",
+    "productType": "Git za popunjavanje",
+    "subtype": "Poliester · git za popunjavanje",
+    "shortDescription": "Poliesterski git za popunjavanje srebrne boje, povećane gustine zahvaljujući sadržaju aluminijuma.",
+    "longDescription": "Metallic je poliesterski git za popunjavanje srebrne boje. Sadržaj aluminijuma daje mu visoku gustinu, a srebrna nijansa vizuelno uredan prelaz. Koristi se za popunjavanje srednje dubokih do dubokih neravnina, udubljenja i ogrebotina.",
+    "purpose": "Popunjavanje srednje dubokih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git za popunjavanje"
+      },
+      {
+        "label": "Gustina",
+        "value": "Visoka, zahvaljujući sadržaju aluminijuma"
+      },
+      {
+        "label": "Boja",
+        "value": "Srebrna"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje srednje dubokih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Uredna zona prelaza",
+        "description": "Srebrna boja daje vizuelno uredan prelaz."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "130.852": "Limenka 1.0 kg sa učvršćivačem",
+      "127.911": "Limenka 2.0 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-black-rapid-multifunctional-polyester-putty": {
+    "sourceHash": "f4414229e6eb4f48",
+    "productType": "Multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Crni multifunkcionalni poliesterski git sa vremenom sušenja od 10 min / 20 °C temperature predmeta.",
+    "longDescription": "Multi Black Rapid je multifunkcionalni poliesterski git crne boje. Vreme sušenja iznosi 10 min pri temperaturi predmeta od 20 °C, a posle očvršćavanja na površini nema vlage. Nova punila poboljšavaju brusivost.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni git"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      },
+      {
+        "title": "Bez vlage na površini",
+        "description": "Posle očvršćavanja na površini nema vlage."
+      },
+      {
+        "title": "Bez kontrolnog praha",
+        "description": "Tamna nijansa čini kontrolni prah nepotrebnim."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.755": "Limenka 1.3 kg sa učvršćivačem",
+      "160.343": "2,2 kg sa učvršćivačem (kartuša 3 kg)"
+    }
+  },
+  "putties/multi-blue-rapid-changer-sf-multifunctional-polyester-putty-styrene-free": {
+    "sourceHash": "dc7ec18f638b2407",
+    "productType": "Multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git · bez stirena",
+    "shortDescription": "Multifunkcionalni poliesterski git bez stirena, sa promenom boje iz plave u sivu tokom očvršćavanja.",
+    "longDescription": "Multi Blue Rapid Changer SF je multifunkcionalni poliesterski git bez stirena, sa veoma dobrom prionljivošću na širokom spektru podloga. Promena boje iz plave u sivu jasno pokazuje tok očvršćavanja i olakšava precizan rad. Kremasta tekstura omogućava lako nanošenje bez pora, uz kratko vreme sušenja.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez stirena"
+      },
+      {
+        "label": "Prionljivost",
+        "value": "Multi prionljivost"
+      },
+      {
+        "label": "Indikacija",
+        "value": "Promena boje tokom očvršćavanja, iz plave u sivu"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Bez stirena",
+        "description": "Formulisan je bez stirena."
+      },
+      {
+        "title": "Nanošenje bez pora",
+        "description": "Kremasta tekstura omogućava lako nanošenje bez pora."
+      },
+      {
+        "title": "Brže sušenje",
+        "description": "Kraće vreme sušenja."
+      },
+      {
+        "title": "Promena boje",
+        "description": "Tokom očvršćavanja menja boju iz plave u sivu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.923": "Limenka 1.3 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-flow-polyester-multi-light-putty": {
+    "sourceHash": "24f33f0fc7f99c31",
+    "productType": "Laki multifunkcionalni git",
+    "subtype": "Poliesterski laki multifunkcionalni git",
+    "shortDescription": "Veoma lak multifunkcionalni poliesterski git samorazlivajuće površine bez pora, lak za brušenje.",
+    "longDescription": "Multi Flow je veoma lak multifunkcionalni poliesterski git svetloplave boje. Samorazlivajuća formulacija daje glatku površinu bez pora i smanjuje potrebu za brušenjem. Prianja na uobičajenim metalnim podlogama, drvetu, GRP-u i 2-komponentnom poliesterskom gitu, a koristi se za popunjavanje malih i srednjih neravnina i ogrebotina.",
+    "purpose": "Popunjavanje malih i srednjih neravnina i ogrebotina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Veoma lak multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Površina",
+        "value": "Samorazlivajuća, bez pora"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetloplava"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih i srednjih neravnina i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na uobičajenim metalnim podlogama, drvetu, GRP-u i 2-komponentnom poliesterskom gitu."
+      },
+      {
+        "title": "Glatka površina",
+        "description": "Daje veoma glatku površinu bez pora."
+      },
+      {
+        "title": "Samorazlivanje",
+        "description": "Ima samorazlivajuća svojstva."
+      },
+      {
+        "title": "Lako brušenje",
+        "description": "Veoma lako se brusi."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.378": "Limenka 1 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-green-changer-multifuncional-polyester-putty": {
+    "sourceHash": "6d4f34ea2f98a056",
+    "productType": "Multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Multifunkcionalni poliesterski git koji tokom očvršćavanja menja boju iz zelene u žutu.",
+    "longDescription": "Multi Green Changer je multifunkcionalni poliesterski git zelene boje. Tokom očvršćavanja menja boju iz zelene u žutu, pa je tok sušenja vidljiv. Namenjen je popunjavanju malih do dubokih neravnina, udubljenja i ogrebotina.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni git"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Promena boje",
+        "description": "Tokom očvršćavanja menja boju iz zelene u žutu."
+      },
+      {
+        "title": "Manje vlage na površini",
+        "description": "Smanjena vlaga na površini posle očvršćavanja."
+      },
+      {
+        "title": "Uravnotežena konzistencija",
+        "description": "Dobar odnos između polučvrste i kremaste konzistencije."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.622": "Limenka 1.6 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-green-glas-light-multifunctional-fiberglass-reinforced-lightweight-polyester-putty": {
+    "sourceHash": "5adfd260a86cbf62",
+    "productType": "Laki git sa staklenim vlaknima",
+    "subtype": "Multifunkcionalni laki poliesterski git ojačan staklenim vlaknima",
+    "shortDescription": "Ultralaki multifunkcionalni poliesterski git sa kratkim staklenim vlaknima, za veoma duboka oštećenja.",
+    "longDescription": "Multi Green Glas Light je multifunkcionalni poliesterski git ojačan kratkim staklenim vlaknima, zelene boje. Koristi se za popunjavanje veoma dubokih neravnina, sanaciju obrađenih mesta korozije i GRP-a. Odlikuje ga precizno nanošenje i optimizovana brusivost.",
+    "purpose": "Popunjavanje veoma dubokih neravnina i GRP popravke",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Ojačanje",
+        "value": "Ultralaki git ojačan staklenim vlaknima"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih neravnina, sanaciju obrađenih mesta korozije i GRP-a"
+    ],
+    "benefits": [
+      {
+        "title": "Kratka staklena vlakna",
+        "description": "Sadrži kratka staklena vlakna."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      },
+      {
+        "title": "Precizno nanošenje",
+        "description": "Omogućava veoma precizno nanošenje."
+      },
+      {
+        "title": "Optimizovana brusivost",
+        "description": "Brusivost je optimizovana."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.116": "Limenka 1.3 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-green-glas-multifunctional-fiberglass-reinforced-polyester-putty": {
+    "sourceHash": "1b4a076b971e147a",
+    "productType": "Git sa staklenim vlaknima",
+    "subtype": "Multifunkcionalni poliesterski git ojačan staklenim vlaknima",
+    "shortDescription": "Multifunkcionalni poliesterski git sa kratkim staklenim vlaknima, za veoma duboka oštećenja i GRP delove.",
+    "longDescription": "Multi Green Glas je multifunkcionalni poliesterski git ojačan staklenim vlaknima, zelene boje. Namenjen je popunjavanju veoma dubokih neravnina, sanaciji obrađenih mesta korozije i popravci GRP delova. Sadrži kratka staklena vlakna i prianja na gotovo svim podlogama.",
+    "purpose": "Popunjavanje veoma dubokih neravnina i GRP popravke",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git ojačan staklenim vlaknima"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje veoma dubokih neravnina, sanaciju obrađenih mesta korozije i GRP delova",
+      "Posebno pogodan za popravku GRP delova"
+    ],
+    "benefits": [
+      {
+        "title": "Kratka staklena vlakna",
+        "description": "Sadrži kratka staklena vlakna."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      },
+      {
+        "title": "Precizno nanošenje",
+        "description": "Omogućava veoma precizno nanošenje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "146.707": "Limenka 1.65 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-green-plus-10-super-light-multifuncional-polyester-putty": {
+    "sourceHash": "7b1b99abffedd9fe",
+    "productType": "Ultralaki multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Ultralaki multifunkcionalni poliesterski git za mala do duboka oštećenja, sa 20% kraćim sušenjem.",
+    "longDescription": "Multi Green Plus 1.0 Super Light je ultralaki multifunkcionalni poliesterski git zelene boje. Koristi se za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina. Vreme sušenja je 20% kraće, a nova punila poboljšavaju brusivost.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Ultralaki git"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Potpuno suva površina",
+        "description": "Posle očvršćavanja površina je potpuno suva."
+      },
+      {
+        "title": "Bolja brusivost",
+        "description": "Poboljšana brusivost zahvaljujući novim punilima."
+      },
+      {
+        "title": "Vreme očvršćavanja",
+        "description": "Vreme očvršćavanja je 12 min / 20 °C temperature predmeta."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.357": "Limenka 1.0 kg sa učvršćivačem",
+      "152.978": "Kartuša 1.6 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-green-rapid-multifuncional-polyester-putty": {
+    "sourceHash": "cb2aa5f0df3d77f0",
+    "productType": "Multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Zeleni multifunkcionalni poliesterski git sa vremenom sušenja od 10 min / 20 °C temperature predmeta.",
+    "longDescription": "Multi Green Rapid je multifunkcionalni poliesterski git zelene boje. Vreme sušenja iznosi 10 min pri temperaturi predmeta od 20 °C. Posle očvršćavanja na površini gotovo da nema vlage, a nova punila poboljšavaju brusivost.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni git"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Gotovo bez vlage",
+        "description": "Posle očvršćavanja na površini gotovo da nema vlage."
+      },
+      {
+        "title": "Bolja brusivost",
+        "description": "Poboljšana brusivost zahvaljujući novim punilima."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.233": "Limenka 1.3 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-green-sf-multifuncional-polyester-putty-styrene-free": {
+    "sourceHash": "0145fe16553fe94a",
+    "productType": "Multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git · bez stirena",
+    "shortDescription": "Multifunkcionalni poliesterski git bez stirena, kremaste konzistencije, za mala do duboka oštećenja.",
+    "longDescription": "Multi Green SF je multifunkcionalni poliesterski git bez stirena, zelene boje. Koristi se za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina. Prianja na gotovo svim podlogama, a kremasta konzistencija olakšava nanošenje.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez stirena"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Bez stirena",
+        "description": "Formulisan je bez stirena."
+      },
+      {
+        "title": "Lako nanošenje",
+        "description": "Kremasta konzistencija omogućava veoma lako nanošenje."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": "Git bez stirena razlikuje se od uobičajenih gitova po mirisu.",
+    "variants": {
+      "156.543": "Limenka 1.75 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-light-multifuncional-polyester-putty": {
+    "sourceHash": "163450ec171e60cb",
+    "productType": "Ultralaki multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Ultralaki multifunkcionalni poliesterski git svetlobež boje, za male do srednje velike neravnine.",
+    "longDescription": "Multi Light je ultralaki multifunkcionalni poliesterski git svetlobež boje. Prianja na različitim podlogama i koristi se za popunjavanje malih do srednje velikih neravnina, udubljenja i ogrebotina. Laka punila doprinose boljoj brusivosti.",
+    "purpose": "Popunjavanje malih do srednje velikih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Ultralaki git"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlobež"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do srednje velikih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "141.503": "Limenka 1.3 kg sa učvršćivačem",
+      "142.155": "Kartuša 2.2 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-multifuncional-polyester-putty": {
+    "sourceHash": "e0fc6af58e8408e9",
+    "productType": "Univerzalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Univerzalni multifunkcionalni poliesterski git kremaste konzistencije, za mala do duboka oštećenja.",
+    "longDescription": "Multi je univerzalni multifunkcionalni poliesterski git bež boje. Prianja na različitim podlogama i koristi se za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina. Veoma kremasta konzistencija olakšava nanošenje.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni git"
+      },
+      {
+        "label": "Boja",
+        "value": "Bež"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Lako nanošenje",
+        "description": "Kremasta konzistencija omogućava veoma lako nanošenje."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "130.857": "Limenka 1.0 kg sa učvršćivačem",
+      "127.977": "Limenka 2.0 kg sa učvršćivačem",
+      "134.155": "Kartuša 1.5 kg sa učvršćivačem",
+      "132.214": "Kartuša 2.9 kg sa učvršćivačem",
+      "128.145": "Kartuša 9.7 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-plus-multifuncional-polyester-putty": {
+    "sourceHash": "daf2af456b80009f",
+    "productType": "Univerzalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Univerzalni multifunkcionalni poliesterski git svetlosive boje, uravnotežene konzistencije.",
+    "longDescription": "Multi Plus je univerzalni multifunkcionalni poliesterski git svetlosive boje. Prianja na različitim podlogama i koristi se za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina. Dobar odnos između polučvrste i kremaste konzistencije olakšava rad.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Univerzalni git"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlosiva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Uravnotežena konzistencija",
+        "description": "Dobar odnos između polučvrste i kremaste konzistencije."
+      },
+      {
+        "title": "Lako nanošenje",
+        "description": "Veoma se lako nanosi."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "138.451": "Limenka 1.6 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-silver-light-multifuncional-polyester-putty": {
+    "sourceHash": "ffbcf7378b2371c8",
+    "productType": "Laki multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Laki multifunkcionalni poliesterski git srebrne boje, za male do srednje velike neravnine.",
+    "longDescription": "Multi Silver Light je laki multifunkcionalni poliesterski git srebrne boje. Srebrna nijansa daje vizuelno uredan prelaz zone popravke. Prianja na različitim podlogama i koristi se za popunjavanje malih do srednje velikih neravnina, udubljenja i ogrebotina.",
+    "purpose": "Popunjavanje malih do srednje velikih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Laki git"
+      },
+      {
+        "label": "Boja",
+        "value": "Srebrna"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do srednje velikih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Uredna zona prelaza",
+        "description": "Srebrna boja daje vizuelno uredan prelaz."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "140.795": "Limenka 1.5 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-soft-multifuncional-polyester-putty": {
+    "sourceHash": "ef43b2e6ae8b4033",
+    "productType": "Multifunkcionalni git",
+    "subtype": "Multifunkcionalni poliesterski git",
+    "shortDescription": "Multifunkcionalni poliesterski git za popunjavanje i finu obradu, veoma kremaste konzistencije.",
+    "longDescription": "Multi Soft je multifunkcionalni poliesterski git svetlosive boje koji objedinjuje git za popunjavanje i fini git. Prianja na različitim podlogama i koristi se za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina. Veoma kremasta konzistencija olakšava nanošenje.",
+    "purpose": "Popunjavanje malih do dubokih neravnina",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git za popunjavanje i fini git"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlosiva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih do dubokih neravnina, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Lako nanošenje",
+        "description": "Kremasta konzistencija omogućava veoma lako nanošenje."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "137.206": "Limenka 2.0 kg sa učvršćivačem"
+    }
+  },
+  "putties/multi-super-flex-polyester-putty-highly-elastic": {
+    "sourceHash": "25c2ac7c1071d081",
+    "productType": "Visokoelastični git",
+    "subtype": "Poliesterski git · visokoelastičan",
+    "shortDescription": "Visokoelastični multifunkcionalni poliesterski git tamnosive boje, za fleksibilne plastične delove.",
+    "longDescription": "Multi Super Flex je visokoelastični multifunkcionalni poliesterski git tamnosive boje. Namenjen je popunjavanju malih neravnina, udubljenja i ogrebotina na veoma fleksibilnim plastičnim delovima. Tamna boja olakšava kontrolu brušenja, a prajmer za prionljivost nije potreban.",
+    "purpose": "Popunjavanje malih neravnina na fleksibilnim plastičnim delovima",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Multifunkcionalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Visokoelastični git"
+      },
+      {
+        "label": "Boja",
+        "value": "Tamnosiva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih neravnina, udubljenja i ogrebotina na veoma fleksibilnim plastičnim delovima"
+    ],
+    "benefits": [
+      {
+        "title": "Prelaz bez odvajanja",
+        "description": "Nema gubitka prionljivosti u zoni prelaza."
+      },
+      {
+        "title": "Bez prajmera za prionljivost",
+        "description": "Prajmer za prionljivost nije potreban."
+      },
+      {
+        "title": "Multi prionljivost",
+        "description": "Prianja na različitim podlogama."
+      },
+      {
+        "title": "Kontrola brušenja",
+        "description": "Tamna boja omogućava kontrolu brušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "153.284": "Limenka 1.8 kg sa učvršćivačem"
+    }
+  },
+  "putties/plastic-pro-polyester-plastic-putty": {
+    "sourceHash": "22769f5d60d1bcfa",
+    "productType": "Git za plastiku",
+    "subtype": "Poliester · git za plastiku",
+    "shortDescription": "Crni poliesterski konturni git za plastiku, za male neravnine, udubljenja i ogrebotine.",
+    "longDescription": "Plastic Pro je poliesterski konturni git za plastiku, crne boje. Koristi se za popunjavanje malih neravnina, udubljenja i ogrebotina na plastičnim površinama. Ima veoma dobru prionljivost na plastici, bez gubitka prionljivosti u zoni prelaza.",
+    "purpose": "Popunjavanje malih neravnina na plastičnim površinama",
+    "facts": [
+      {
+        "label": "Vrsta",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Konturni git za plastiku"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje malih neravnina, udubljenja i ogrebotina na plastičnim površinama"
+    ],
+    "benefits": [
+      {
+        "title": "Prionljivost na plastici",
+        "description": "Veoma dobra prionljivost na plastičnim površinama."
+      },
+      {
+        "title": "Prelaz bez odvajanja",
+        "description": "Nema gubitka prionljivosti u zoni prelaza."
+      },
+      {
+        "title": "Bez prajmera za prionljivost",
+        "description": "Prajmer za prionljivost nije potreban."
+      },
+      {
+        "title": "Kontrola brušenja",
+        "description": "Crna boja omogućava kontrolu brušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "149.613": "Limenka 1.0 kg sa učvršćivačem"
+    }
+  },
+  "putties/plastic-spreader-plastic-spreader": {
+    "sourceHash": "841168b5d67677c4",
+    "productType": "Plastična lopatica",
+    "subtype": "Plastična lopatica",
+    "shortDescription": "Fleksibilna plastična lopatica otporna na rastvarače, za ručno mešanje i nanošenje Carsystem gitova.",
+    "longDescription": "Plastična lopatica namenjena je ručnom mešanju i nanošenju svih Carsystem gitova. Materijal je otporan na rastvarače i veoma fleksibilan, pa lopatica lako prati oblik površine. Dimenzije su 115 x 77 mm.",
+    "purpose": "Ručno mešanje i nanošenje gita",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Plastična lopatica"
+      }
+    ],
+    "applications": [
+      "Za ručno mešanje i nanošenje gita"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Otporna je na rastvarače."
+      },
+      {
+        "title": "Fleksibilnost",
+        "description": "Fleksibilna je u radu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "146.961": "115 x 77 mm"
+    }
+  },
+  "putties/polyester-repair-resin-polyester-repair-resin": {
+    "sourceHash": "0a70f115adb45d7e",
+    "productType": "Poliesterska smola",
+    "subtype": "Poliesterska smola za popravke",
+    "shortDescription": "Poliesterska smola za popravke, za rad sa staklenom tkaninom i matom pri sanaciji manjih rupa.",
+    "longDescription": "Poliesterska smola koristi se u kombinaciji sa Carsystem tkaninom i matom od staklenih vlakana. Namenjena je popravci manjih rupa na površini i sanaciji GRP delova. Isporučuje se u pakovanju od 1,000 g sa učvršćivačem.",
+    "purpose": "Popravka manjih rupa na površini i GRP delova",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Poliesterska smola za popravke"
+      }
+    ],
+    "applications": [
+      "Za obradu tkanine i mata od staklenih vlakana, za popravku manjih rupa na površini",
+      "Za popravku GRP delova"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "126.050": "1,000 g sa učvršćivačem"
+    }
+  },
+  "putties/polyester-repair-set-polyester-repair-set": {
+    "sourceHash": "e5d514e8081396bb",
+    "productType": "Set za popravke",
+    "subtype": "Poliesterski set za popravke",
+    "shortDescription": "Set sa poliesterskom smolom, BPO učvršćivačem i matom od staklenih vlakana za popravku manjih rupa.",
+    "longDescription": "Set za popravke sadrži poliestersku smolu, BPO učvršćivač i mat od staklenih vlakana. Namenjen je popravci manjih rupa na površini i sanaciji GRP delova. U setu od 800 g staklena tkanina ima dimenzije 125 x 40 cm.",
+    "purpose": "Popravka manjih rupa na površini i GRP delova",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Poliesterski set za popravke"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Poliesterska smola, učvršćivač i mat od staklenih vlakana"
+      },
+      {
+        "label": "Staklena tkanina",
+        "value": "Dimenzija staklene tkanine:"
+      },
+      {
+        "label": "126.054",
+        "value": "Set 800 g: 125 x 40 cm"
+      }
+    ],
+    "applications": [
+      "Za popravku manjih rupa na površini",
+      "Za popravku GRP delova"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "126.054": "Set / 800 g"
+    }
+  },
+  "putties/putty-dispenser-putty-dispenser-pneumatic": {
+    "sourceHash": "4c96a8ec2fbc0f52",
+    "productType": "Dozator gita",
+    "subtype": "Dozator gita · pneumatski",
+    "shortDescription": "Pneumatski dozator koji izbacuje git i učvršćivač u tačnom odnosu, za kartuše od 3 kg i 10 kg.",
+    "longDescription": "Pneumatski dozator izbacuje git i učvršćivač u tačnom odnosu i time sprečava pogrešno doziranje. Predviđen je za kartuše gita od 3 kg i 10 kg. Uređaj se postavlja na zid.",
+    "purpose": "Pneumatsko doziranje gita i učvršćivača",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatski dozator gita"
+      },
+      {
+        "label": "Kartuše",
+        "value": "Za kartuše od 3 kg i 10 kg"
+      },
+      {
+        "label": "Montaža",
+        "value": "Zidna montaža"
+      }
+    ],
+    "applications": [
+      "Pneumatsko doziranje gita i učvršćivača"
+    ],
+    "benefits": [
+      {
+        "title": "Tačan odnos komponenti",
+        "description": "Obezbeđuje tačan odnos gita i učvršćivača."
+      },
+      {
+        "title": "Bez pogrešnog doziranja",
+        "description": "Sprečava pogrešno doziranje."
+      }
+    ],
+    "advice": "Predviđen je isključivo za zidnu montažu.",
+    "variants": {
+      "123.859": "A 3C",
+      "123.840": "A 10C",
+      "160.576": "Repair Kit: zaptivni prsten / beli plastični zaptivni čep"
+    }
+  },
+  "putties/putty-knife-steel-spreader": {
+    "sourceHash": "5848254f19277139",
+    "productType": "Čelična lopatica",
+    "subtype": "Čelična lopatica",
+    "shortDescription": "Čelična lopatica sa plastičnom drškom, za vađenje i ručno mešanje gita.",
+    "longDescription": "Čelična lopatica sa plastičnom drškom služi kao osnova za ručno mešanje gita. Koristi se za vađenje gita iz pakovanja i njegovo mešanje sa učvršćivačem. Plastična drška otporna je na rastvarače. Dostupna je u širinama 60, 80 i 100 mm.",
+    "purpose": "Vađenje i mešanje gitova",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Čelična lopatica sa plastičnom drškom"
+      }
+    ],
+    "applications": [
+      "Za vađenje i mešanje gitova"
+    ],
+    "benefits": [
+      {
+        "title": "Drška otporna na rastvarače",
+        "description": "Plastična drška otporna je na rastvarače."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "137.435": "60 mm",
+      "137.436": "80 mm",
+      "137.437": "100 mm"
+    }
+  },
+  "putties/putty-mix-board-putty-mix-board": {
+    "sourceHash": "7466e3baadc94675",
+    "productType": "Ploča za mešanje",
+    "subtype": "Ploča za mešanje gita",
+    "shortDescription": "Ploča sa 100 otkidajućih listova od otpornog papira, kao podloga za mešanje gita i učvršćivača.",
+    "longDescription": "Ploča za mešanje ima veliku radnu površinu od posebnog, otpornog papira. Sadrži 100 listova koji se posle svakog mešanja jednostavno otkidaju i odlažu. Čišćenje i brušenje podloge nisu potrebni. Dimenzije lista su 26 x 22 cm.",
+    "purpose": "Podloga za mešanje gita i učvršćivača",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Ploča za mešanje gita"
+      },
+      {
+        "label": "Listovi",
+        "value": "100 listova koji se otkidaju"
+      }
+    ],
+    "applications": [
+      "Podloga za mešanje gita i učvršćivača"
+    ],
+    "benefits": [
+      {
+        "title": "Velika radna površina",
+        "description": "Velika površina za mešanje gita."
+      },
+      {
+        "title": "Jednostavno odlaganje",
+        "description": "Iskorišćeni list se lako otkida i odlaže."
+      },
+      {
+        "title": "Bez čišćenja i brušenja",
+        "description": "Čišćenje i brušenje nisu potrebni."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "142.206": "100 listova / 26 x 22 cm"
+    }
+  },
+  "putties/rubber-spreader-set-rubber-spreader": {
+    "sourceHash": "d74685c88cfe33cd",
+    "productType": "Gumena lopatica",
+    "subtype": "Gumena lopatica",
+    "shortDescription": "Set od tri meke gumene lopatice širina 90, 105 i 115 mm, za mešanje i nanošenje gita.",
+    "longDescription": "Gumena lopatica namenjena je preciznom i čistom radu: neravnine se izravnavaju, a površine zaglađuju. Ergonomski oblikovana zona hvata olakšava rukovanje. Set sadrži tri širine, 90, 105 i 115 mm, pa se lopatica bira prema zadatku. Pogodna je za zakrivljene površine, rupe i pukotine.",
+    "purpose": "Mešanje i nanošenje gita na zakrivljenim površinama",
+    "facts": [
+      {
+        "label": "Set",
+        "value": "Set lopatica u tri širine: 90, 105 i 115 mm"
+      },
+      {
+        "label": "Materijal",
+        "value": "Meka gumena lopatica"
+      }
+    ],
+    "applications": [
+      "Za nanošenje gita na izražene oblike",
+      "Posebno pogodne za zakrivljene površine, rupe i pukotine",
+      "Za mešanje i nanošenje gita"
+    ],
+    "benefits": [
+      {
+        "title": "Tri veličine u setu",
+        "description": "Tri veličine u setu daju odgovarajuću lopaticu za svaki zadatak."
+      },
+      {
+        "title": "Čiste, ravne ivice",
+        "description": "Čiste i ravne ivice omogućavaju precizan rad."
+      },
+      {
+        "title": "Kruta, a fleksibilna",
+        "description": "Lopatica je kruta, a istovremeno fleksibilna."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.448": "Set od 3 lopatice (90, 105 i 115 mm)"
+    }
+  },
+  "putties/soft-polyester-fill-putty": {
+    "sourceHash": "e10923f0409266d7",
+    "productType": "Poliesterski git",
+    "subtype": "Poliester · git za popunjavanje",
+    "shortDescription": "Bež poliesterski git za popunjavanje srednje dubokih do dubokih udubljenja i ogrebotina.",
+    "longDescription": "Carsystem Soft je poliesterski git za popunjavanje srednje dubokih do dubokih nepravilnosti, udubljenja i ogrebotina. Kremasta konzistencija omogućava lako nanošenje. Boja gita je bež.",
+    "purpose": "Popunjavanje srednje dubokih do dubokih oštećenja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Git za popunjavanje"
+      },
+      {
+        "label": "Boja",
+        "value": "Bež"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje srednje dubokih do dubokih nepravilnosti, udubljenja i ogrebotina"
+    ],
+    "benefits": [
+      {
+        "title": "Lako nanošenje",
+        "description": "Kremasta konzistencija omogućava lako nanošenje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "127.972": "Limenka 1.8 kg sa učvršćivačem",
+      "132.116": "Kartuša 2.6 kg sa učvršćivačem"
+    }
+  },
+  "putties/speedmixer-10-kg-putty-dispenser-electro-pneumatic": {
+    "sourceHash": "ace55bd07c491392",
+    "productType": "Dozator gita",
+    "subtype": "Dozator gita · elektro-pneumatski",
+    "shortDescription": "Elektro-pneumatski dozator za kartuše gita od 10 kg, sa automatskim doziranjem i mešanjem.",
+    "longDescription": "Speedmixer 10 kg je pneumatski dozator gita namenjen izuzimanju većih količina. Održava tačan odnos gita i učvršćivača i sprečava pogrešno doziranje. Patentirana mlaznica za mešanje sprečava ulazak vazduha u git, pa ručno mešanje nije potrebno.",
+    "purpose": "Automatsko doziranje i mešanje gita i učvršćivača",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Elektro-pneumatski dozator gita"
+      },
+      {
+        "label": "Kartuše",
+        "value": "Za kartuše gita od 10 kg"
+      }
+    ],
+    "applications": [
+      "Automatsko doziranje i mešanje gita i učvršćivača"
+    ],
+    "benefits": [
+      {
+        "title": "Tačan odnos komponenti",
+        "description": "Obezbeđuje tačan odnos gita i učvršćivača."
+      },
+      {
+        "title": "Bez pogrešnog doziranja",
+        "description": "Sprečava pogrešno doziranje."
+      },
+      {
+        "title": "Git bez mehurića",
+        "description": "Git izlazi bez vazdušnih mehurića."
+      },
+      {
+        "title": "Bez ručnog mešanja",
+        "description": "Ručno mešanje nije potrebno."
+      }
+    ],
+    "advice": "Doziranje gita je potpuno automatsko.",
+    "variants": {
+      "143.347": "Speedmixer 10 kg",
+      "146.955": "Mlaznice za mešanje / žute / XL (pakovanje od 100 kom.)",
+      "143.810": "Elastic weiss / veoma spor / kartuša 10 kg sa učvršćivačem",
+      "144.131": "Multi / bež / kartuša 9,63 kg sa učvršćivačem",
+      "143.205": "Multi / spor / bež / kartuša 9,61 kg sa učvršćivačem",
+      "145.419": "Multi / veoma spor / bež / kartuša 9,61 kg sa učvršćivačem",
+      "146.808": "Multi Light / spor / bež / kartuša 6,94 kg sa učvršćivačem",
+      "147.451": "Multi Light / super spor / bež / kartuša 6,94 kg sa učvršćivačem",
+      "149.614": "Multi Green / spor / zeleni / kartuša 8,18 kg sa učvršćivačem"
+    }
+  },
+  "putties/speedmixer-3-kg-putty-dispenser-electrical": {
+    "sourceHash": "f78aef5c0571ee7c",
+    "productType": "Dozator gita",
+    "subtype": "Dozator gita · električni",
+    "shortDescription": "Električni dozator za kartuše gita od 3 kg, sa automatskim doziranjem i mešanjem 2K gita.",
+    "longDescription": "Speedmixer 3 kg je električni dozator za izuzimanje 2K gita spremnog za upotrebu. Održava tačan odnos gita i učvršćivača i sprečava pogrešno doziranje. Patentirana mlaznica za mešanje sprečava ulazak vazduha i automatski meša git sa učvršćivačem.",
+    "purpose": "Automatsko doziranje i mešanje punioca i učvršćivača",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Električni dozator gita"
+      },
+      {
+        "label": "Kartuše",
+        "value": "Za kartuše gita od 3 kg"
+      }
+    ],
+    "applications": [
+      "Automatsko doziranje i mešanje punioca i učvršćivača"
+    ],
+    "benefits": [
+      {
+        "title": "Tačan odnos komponenti",
+        "description": "Obezbeđuje tačan odnos gita i učvršćivača."
+      },
+      {
+        "title": "Bez pogrešnog doziranja",
+        "description": "Sprečava pogrešno doziranje."
+      },
+      {
+        "title": "Git bez mehurića",
+        "description": "Git izlazi bez vazdušnih mehurića."
+      },
+      {
+        "title": "Bez ručnog mešanja",
+        "description": "Ručno mešanje nije potrebno."
+      }
+    ],
+    "advice": "Učvršćivač se pre rada ubrizgava ručno.",
+    "variants": {
+      "151.017": "Speedmixer 3 kg",
+      "146.427": "Mlaznice za mešanje, zelene (pakovanje od 100 kom.)",
+      "152.088": "Multi Green slow – Speedmixer / zeleni / kartuša 2,523 kg sa učvršćivačem"
+    }
+  },
+  "putties/spray-plus-polyester-sprayable-putty": {
+    "sourceHash": "fc1791defc123af1",
+    "productType": "Poliesterski git",
+    "subtype": "Poliester · git za nanošenje pištoljem",
+    "shortDescription": "Svetlosivi poliesterski git za nanošenje pištoljem, za popunjavanje dubokih udubljenja i ogrebotina.",
+    "longDescription": "Spray Plus je poliesterski git koji se nanosi pištoljem za lakiranje, namenjen popunjavanju dubokih nepravilnosti, udubljenja i ogrebotina. Koristi se na putničkim vozilima, kamionima i u izgradnji sajamskih štandova, a primenljiv je i na CRP panelima. Omogućava veoma velike debljine sloja uz ravnomerno nanošenje.",
+    "purpose": "Popunjavanje dubokih oštećenja nanošenjem pištoljem",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Nanošenje",
+        "value": "Punilac koji se nanosi pištoljem"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlosiva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje dubokih nepravilnosti, udubljenja i ogrebotina",
+      "Putnička vozila, kamioni i izgradnja sajamskih štandova",
+      "Dodatno primenljiv na CRP panelima"
+    ],
+    "benefits": [
+      {
+        "title": "Velika debljina sloja",
+        "description": "Moguća je veoma velika debljina sloja."
+      },
+      {
+        "title": "Ravnomerno nanošenje",
+        "description": "Pištoljem za lakiranje nanosi se veoma ravnomerno."
+      },
+      {
+        "title": "Sušenje i struktura površine",
+        "description": "Vreme sušenja i struktura površine su optimizovani."
+      }
+    ],
+    "advice": "Preporučuje se da se prethodno nanese izolacioni sloj (npr. akrilni punilac 35µ). Taj izolacioni sloj ne sme da se probrusi. Izolacioni sloj sprečava pojavu mehurića pri nepovoljnim uslovima okoline.",
+    "variants": {
+      "135.597": "Limenka 1.5 kg sa učvršćivačem"
+    }
+  },
+  "putties/spray-polyester-sprayable-putty": {
+    "sourceHash": "debc1a6116ce182c",
+    "productType": "Poliesterski git",
+    "subtype": "Poliester · git za nanošenje pištoljem",
+    "shortDescription": "Sivi poliesterski git za nanošenje pištoljem, za popunjavanje dubokih udubljenja i ogrebotina.",
+    "longDescription": "Spray je poliesterski git koji se nanosi pištoljem za lakiranje, namenjen popunjavanju dubokih nepravilnosti, udubljenja i ogrebotina. Koristi se u popravkama putničkih vozila i kamiona, kao i u izgradnji sajamskih štandova. Omogućava veoma velike debljine sloja uz ravnomerno nanošenje.",
+    "purpose": "Popunjavanje dubokih oštećenja nanošenjem pištoljem",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Poliesterski git"
+      },
+      {
+        "label": "Nanošenje",
+        "value": "Git koji se nanosi pištoljem"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Za popunjavanje dubokih nepravilnosti, udubljenja i ogrebotina",
+      "Putnička vozila, kamioni i izgradnja sajamskih štandova"
+    ],
+    "benefits": [
+      {
+        "title": "Velika debljina sloja",
+        "description": "Moguća je veoma velika debljina sloja."
+      },
+      {
+        "title": "Ravnomerno nanošenje",
+        "description": "Pištoljem za lakiranje nanosi se veoma ravnomerno."
+      }
+    ],
+    "advice": "Preporučuje se da se prethodno nanese izolacioni sloj (npr. akrilni punilac 35µ). Taj izolacioni sloj ne sme da se probrusi. Izolacioni sloj sprečava pojavu mehurića pri nepovoljnim uslovima okoline.",
+    "variants": {
+      "127.978": "Limenka 1.5 kg sa učvršćivačem"
+    }
+  },
+  "putties/spray-thinner-thinner": {
+    "sourceHash": "3df1986dfbaa7800",
+    "productType": "Razređivač",
+    "subtype": "Razređivač",
+    "shortDescription": "Razređivač za Carsystem Spray i Carsystem Spray Plus poliesterske gitove koji se nanose pištoljem.",
+    "longDescription": "Spray Thinner je razređivač namenjen poliesterskim gitovima za nanošenje pištoljem Carsystem Spray i Carsystem Spray Plus. Isporučuje se u limenci od 1.0 l.",
+    "purpose": "Razređivanje poliesterskog gita za nanošenje pištoljem",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Razređivač za CS Spray Filler i CS Spray Plus"
+      }
+    ],
+    "applications": [
+      "Razređivač za poliesterski git koji se nanosi pištoljem"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "124.315": "Limenka 1.0 l"
+    }
+  },
+  "putties/steel-polyester-hard-putty": {
+    "sourceHash": "c47c13ab8ab76c84",
+    "productType": "Poliesterski git",
+    "subtype": "Poliester · tvrdi git",
+    "shortDescription": "Srebrni poliesterski tvrdi git veoma visoke tvrdoće, za veoma duboka oštećenja i deformisane ivice.",
+    "longDescription": "Carsystem Steel je specijalni poliesterski git sa brzim sušenjem i veoma visokom tvrdoćom. Namenjen je popunjavanju veoma dubokih nepravilnosti i ponovnom formiranju deformisanih ivica. Zamenjuje nanošenje kalaja na zavarenim čeličnim limovima.",
+    "purpose": "Popunjavanje veoma dubokih oštećenja i formiranje ivica",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Specijalni poliesterski git"
+      },
+      {
+        "label": "Namena",
+        "value": "Tvrdi git"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Veoma visoka tvrdoća"
+      },
+      {
+        "label": "Boja",
+        "value": "Srebrna"
+      }
+    ],
+    "applications": [
+      "Zamenjuje nanošenje kalaja na zavarenim čeličnim limovima",
+      "Za popunjavanje veoma dubokih nepravilnosti",
+      "Za ponovno formiranje deformisanih ivica"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na lom",
+        "description": "Veoma je otporan na lom."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "138.587": "Limenka 0.9 kg sa učvršćivačem"
+    }
+  }
+}

@@ -2,6 +2,10 @@ import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
 import { baslacCatalogProducts } from "@/lib/baslac-catalog-products";
 import {
+  applyCarsystemCatalogEnrichment,
+  getCarsystemCatalogProducts,
+} from "@/lib/carsystem-catalog-products";
+import {
   applyBaslacEnrichment,
   assertBaslacEnrichmentKeys,
 } from "@/lib/baslac-enrichment";
@@ -275,6 +279,12 @@ export type CarsystemProduct = {
    * Nikada se ne izvodi iz naziva, sluga ni iz `internalCode`.
    */
   manufacturerCode?: string | null;
+  /**
+   * Ranije šifre proizvođača istog artikla (proizvođač ga je prenumerisao).
+   * Nisu aktuelne šifre za poručivanje; služe da proizvod nađe i kupac koji
+   * šifru čita iz starijeg štampanog kataloga.
+   */
+  legacyManufacturerCodes?: string[];
   stockManaged?: boolean;
   productImage: ProductImageAsset | null;
   visualIdentity?: ProductVisualIdentity;
@@ -287,6 +297,18 @@ export type CarsystemProduct = {
   catalogMetadata?: ProductCatalogMetadata;
   /** Optional R-M-only taxonomy used by the brand landing and catalog deep links. */
   rmMetadata?: RmProductMetadata;
+  /**
+   * Platformska kategorija određena pri uvozu iz zvanične taksonomije
+   * proizvođača (Carsystem sync, `data/carsystem-sync/taxonomy-map.json`).
+   * Vrednost van 12 kategorija iz `lib/productTaxonomy.mjs` se ignoriše.
+   */
+  taxonomyCategory?: string;
+  /**
+   * Boja serije koju je sync potvrdio iz zvaničnog izvora (navedena boja ili
+   * uzorak sa zvaničnog packshot-a), uvek sa `source`. Isti oblik kao unos u
+   * `lib/productNamedColors.mjs`; ručna tabela ima prednost.
+   */
+  manufacturerColor?: { color: string; token?: string; series?: string; source: string };
   visual?: ProductVisualTokens;
   /** Commercial family shared by one or more selectable variants. */
   family?: ProductFamilyIdentity;
@@ -2374,6 +2396,10 @@ const productRecords: CarsystemProduct[] = [
     ],
     relatedProductSlugs: ["carfit-maskirna-folija-4x5m", "carsystem-zastitno-odelo", "carsystem-p19-brusni-diskovi"],
   }),
+  // Carsystem asortiman iz zvaničnog kataloga i sa carsystem.org
+  // (`npm run carsystem:sync`). Zvanični proizvodi koje već vodimo ručno
+  // (F.19, F.23, Elastic white…) se NE uvoze ponovo — dobijaju dopunu niže.
+  ...getCarsystemCatalogProducts(),
   ...befarPadProducts,
   ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),
@@ -2421,7 +2447,9 @@ assertBaslacEnrichmentKeys(
 export const products: CarsystemProduct[] = architecturedProducts.map((product) =>
   product.brandSlug === "baslac"
     ? applyBaslacEnrichment(product, (slug) => knownProductSlugs.has(slug))
-    : product,
+    : product.brandSlug === "carsystem"
+      ? applyCarsystemCatalogEnrichment(product)
+      : product,
 );
 
 export function getAllCarsystemProducts() {
@@ -2456,6 +2484,8 @@ export function toProductListingProduct(product: CarsystemProduct): CarsystemPro
     relatedProductSlugs: [],
     catalogMetadata: product.catalogMetadata,
     rmMetadata: product.rmMetadata,
+    taxonomyCategory: product.taxonomyCategory,
+    manufacturerColor: product.manufacturerColor,
     visual: product.visual,
     family: product.family,
     catalogStrategy: product.catalogStrategy,

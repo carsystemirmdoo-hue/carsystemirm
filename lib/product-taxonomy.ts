@@ -38,7 +38,7 @@ export type ProductCategory = {
 /** Fields a record must expose to be classifiable. */
 export type ClassifiableProduct = Pick<
   CarsystemProduct,
-  "badges" | "catalogMetadata" | "phaseSlug" | "programSlug" | "rmMetadata"
+  "badges" | "catalogMetadata" | "phaseSlug" | "programSlug" | "rmMetadata" | "taxonomyCategory"
 >;
 
 export const productCategorySlugs = productCategorySlugsImpl as readonly ProductCategorySlug[];

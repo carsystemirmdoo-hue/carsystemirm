@@ -171,6 +171,13 @@ function productTerms(product: CarsystemProduct, derived: Set<string>) {
        * dostupnost već postoji u katalogu.
        */
       product.badges.filter((badge) => badge !== "Na upit").join(" "),
+      /*
+       * Šifre artikala varijanti (Carsystem: jedna šifra po granulaciji ili
+       * pakovanju). Kupac koji ima šifru sa kutije mora da nađe proizvod, a
+       * `sku` nosi samo vodeću šifru.
+       */
+      product.detail?.variants?.content.rows.map((row) => row.id).join(" "),
+      product.legacyManufacturerCodes?.join(" "),
     ],
     derived,
   );

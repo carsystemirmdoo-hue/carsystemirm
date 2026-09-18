@@ -1,0 +1,305 @@
+{
+  "_comment": [
+    "Deterministički mapping: zvanična Carsystem taksonomija → 12 platformskih kategorija (lib/productTaxonomy.mjs).",
+    "Ključ je zvanični `categoryKey` sa carsystem.org. Unutar kategorije pravila se čitaju REDOM i prvo koje se poklopi pobeđuje;",
+    "`productType` je regex nad zvaničnim PODNASLOVOM stranice (proizvođačev tip proizvoda), ne nad nazivom proizvoda.",
+    "`default` važi kada nijedno pravilo ne odgovara. `excluded: true` = kategorija se identifikuje, ali ne uvozi u prodajni katalog.",
+    "visualType mora biti jedan od ProductVisualType (lib/carsystem-data.ts).",
+    "`packshotShade: true` = na zvaničnoj slici je SAM proizvod (abraziv, sunđer, traka, rukavica), pa boja serije sme da se uzorkuje sa packshota. Za hemiju u ambalaži (limenka, kartuša, doza) slika prikazuje etiketu, ne proizvod — tu boja dolazi samo iz zvanično navedene boje („Colour: …”).",
+    "Merchandising (od 2026-09-18): svaka stavka na carsystem.org je naručiv artikal sa šifrom i KP, pa se uvozi. Platforma nema kategoriju za promotivne artikle: radna/brendirana odeća ide u „Zaštita” (proizvođač i sam vodi funkcionalnu majicu pod Personal Safety), alat u „Pribor”, a opremanje i brendiranje radionice (zastava, otirač, nalepnice, šolja, olovka…) u „Radionica” kao najbližu postojeću. Nova top-level kategorija nije uvedena."
+  ],
+  "categories": {
+    "abrasives": {
+      "officialName": "Abrasives",
+      "default": {
+        "category": "abrazivi",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "abrasive",
+        "packshotShade": true
+      },
+      "rules": [
+        {
+          "productType": "sander|sanding (and polishing )?machine|Tape Off Tool|planer",
+          "category": "oprema",
+          "programSlug": "oprema",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "mašine za brušenje (RUPES, RC, Excenter)"
+        },
+        {
+          "productType": "back pad|interface pad|sanding block|hand sanding|brush|pad saver",
+          "category": "pribor",
+          "programSlug": "abrazivi",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "podloške, međupodloške i ručni blokovi — nosači abraziva, ne abraziv",
+          "packshotShade": true
+        },
+        {
+          "productType": "matting paste|sanding water|control spray|control system",
+          "category": "abrazivi",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "pomoćna hemija za brušenje"
+        }
+      ]
+    },
+    "putties": {
+      "officialName": "Putties",
+      "default": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler"
+      },
+      "rules": [
+        {
+          "productType": "spreader|putty knife|mix board|cleaning box|dispenser",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "špahtle, dozatori i pribor za git"
+        },
+        {
+          "productType": "mesh|per m²|hardener|thinner|repair set|repair resin",
+          "category": "kitovi",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "prateći materijal sistema gita (učvršćivač, razređivač, mrežice, smola) — nije git, pa nema vizuelni tretman punila"
+        }
+      ]
+    },
+    "masking": {
+      "officialName": "Masking",
+      "default": {
+        "category": "maskiranje",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "packshotShade": true
+      },
+      "rules": []
+    },
+    "painting": {
+      "officialName": "Painting",
+      "default": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer"
+      },
+      "rules": [
+        {
+          "productType": "clear ?coat|klarlack",
+          "category": "boje",
+          "programSlug": "boje-i-lakovi",
+          "phaseSlug": "lak",
+          "visualType": "clearcoat"
+        },
+        {
+          "productType": "cup|lids|strainer|mixing stick|bucket|paint tins|adapter|dispenser|wall bracket|card|needle|filter|paint bottle|spray head|brushes|repair tip",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "boja",
+          "visualType": "neutral",
+          "note": "pribor za mešanje i nanošenje"
+        },
+        {
+          "productType": "paint spray|bumper spray|structurant|wheel spray|bumper paint",
+          "category": "boje",
+          "programSlug": "aerosoli",
+          "phaseSlug": "boja",
+          "visualType": "spray",
+          "note": "funkcija pre formata: Carsystem sprejevi ostaju u „Boje” (pravilo iz docs/CATALOG_TAXONOMY.md)"
+        },
+        {
+          "productType": "spray$|spray |aerosol|rust protection",
+          "category": "boje",
+          "programSlug": "aerosoli",
+          "phaseSlug": "podloga",
+          "visualType": "spray"
+        },
+        {
+          "productType": "thinner|additive|accelerator|tinting",
+          "category": "boje",
+          "programSlug": "boje-i-lakovi",
+          "phaseSlug": "lak",
+          "visualType": "neutral",
+          "note": "aditivi i razređivači ostaju uz sistem boje, kao R-M hardener/thinner"
+        }
+      ]
+    },
+    "finish": {
+      "officialName": "Finish",
+      "default": {
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral"
+      },
+      "rules": [
+        {
+          "productType": "machine|sander|polisher|battery|charger|carbon brush",
+          "category": "oprema",
+          "programSlug": "oprema",
+          "phaseSlug": "poliranje",
+          "visualType": "neutral"
+        },
+        {
+          "productType": "polishing pad|lamb wool|application foam|control foam",
+          "category": "poliranje",
+          "programSlug": "poliranje",
+          "phaseSlug": "poliranje",
+          "visualType": "foam",
+          "packshotShade": true
+        },
+        {
+          "productType": "cloth|fiber|fluffy|wave cut|sky blue|polish extreme|2 in 1|polishing cloth",
+          "category": "poliranje",
+          "programSlug": "poliranje",
+          "phaseSlug": "poliranje",
+          "visualType": "neutral",
+          "packshotShade": true,
+          "note": "mikrofiber i krpe za poliranje"
+        },
+        {
+          "productType": "back pad|dispenser|bracket|racket",
+          "category": "pribor",
+          "programSlug": "poliranje",
+          "phaseSlug": "poliranje",
+          "visualType": "neutral"
+        }
+      ]
+    },
+    "bonding-sealing": {
+      "officialName": "Bonding & Sealing",
+      "default": {
+        "category": "lepkovi",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral"
+      },
+      "rules": [
+        {
+          "productType": "gun|nozzle|applicator|nylon brush|mixing tube|wing tip|supporting film",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral"
+        },
+        {
+          "productType": "stone chip|underbody|cavity|rust protection|sound deadening",
+          "category": "zastita",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "zaštita podvozja, šupljina i od udara kamena"
+        }
+      ]
+    },
+    "cleaning": {
+      "officialName": "Cleaning",
+      "default": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral"
+      },
+      "rules": [
+        {
+          "productType": "cloth|wipes|sponge|clay",
+          "category": "ciscenje",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "packshotShade": true,
+          "note": "krpe, maramice i sunđeri"
+        },
+        {
+          "productType": "pump sprayer|code rings|blade",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral"
+        }
+      ]
+    },
+    "personal-safety": {
+      "officialName": "Personal Safety",
+      "default": {
+        "category": "zastita",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "packshotShade": true
+      },
+      "rules": [
+        {
+          "productType": "hand cleaner|wall dispenser",
+          "category": "ciscenje",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "sredstvo za pranje ruku je čišćenje, ne zaštitna oprema"
+        }
+      ]
+    },
+    "painting-supplies": {
+      "officialName": "Painting Supplies",
+      "default": {
+        "category": "radionica",
+        "programSlug": "oprema",
+        "phaseSlug": "boja",
+        "visualType": "neutral"
+      },
+      "rules": [
+        {
+          "productType": "lamp|timer|vacuum|blow off|air hose|coupling|nipple|gun holder",
+          "category": "oprema",
+          "programSlug": "oprema",
+          "phaseSlug": "boja",
+          "visualType": "neutral"
+        },
+        {
+          "productType": "booth|mist separator|edge protection|flat strip|maintenance oil",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "boja",
+          "visualType": "neutral"
+        }
+      ]
+    },
+    "merchandising-materials": {
+      "officialName": "Merchandising Materials",
+      "default": {
+        "category": "radionica",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "note": "brendirani artikli za radionicu i promociju — najbliža postojeća kategorija"
+      },
+      "rules": [
+        {
+          "productType": "^size |size range|onesize|one size",
+          "category": "zastita",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "brendirana radna odeća (kape, jakne, prsluci, duksevi, majice, čarape)"
+        },
+        {
+          "productType": "^140 mm$",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "skalpel/cutter — alat"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1294 @@
+{
+  "personal-safety/30-years-ltd-coverall-jacket-protective-coverall": {
+    "sourceHash": "8606d81fa9fa6001",
+    "productType": "Zaštitni kombinezon",
+    "subtype": "Zaštitni kombinezon · jakna",
+    "shortDescription": "Jakna zaštitnog kombinezona PPE Cat. I u limitiranom dizajnu, antistatička i bez silikona.",
+    "longDescription": "30 Years Ltd. Coverall Jacket je jakna zaštitnog kombinezona u limitiranom dizajnu „Carsystem 30 Years Anniversary”, koja se kombinuje sa modelom Classic Coverall Pants uz odvojenu porudžbinu jakne i pantalona. Zahvaljujući karbonskim vlaknima materijal je antistatički, uz veoma dobar kroj i više praktičnih džepova. Odelo je bez silikona, bez prašine i vlakana i može se prati.",
+    "purpose": "Zaštita od niskih rizika i od raspršenog laka",
+    "facts": [
+      {
+        "label": "Klasa zaštite",
+        "value": "PPE Cat. I, u limitiranom dizajnu „Carsystem 30 Years Anniversary”"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "Jakna i pantalone se naručuju odvojeno"
+      },
+      {
+        "label": "Udobnost",
+        "value": "Udobna za nošenje"
+      },
+      {
+        "label": "Kroj",
+        "value": "Veoma dobar kroj"
+      },
+      {
+        "label": "Antistatik",
+        "value": "Antistatička zahvaljujući karbonskim vlaknima"
+      },
+      {
+        "label": "Silikon",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Čistoća",
+        "value": "Bez prašine i vlakana"
+      }
+    ],
+    "applications": [
+      "Štiti od niskih rizika, npr. od vodorazredivih boja ili blagih sredstava za čišćenje",
+      "Zaštita od raspršenog laka (overspray)"
+    ],
+    "benefits": [
+      {
+        "title": "Limitirani dizajn",
+        "description": "Limitirani dizajn se izdvaja u svakoj lakirnici."
+      },
+      {
+        "title": "Odvojen izbor veličina",
+        "description": "Veličina jakne i pantalona bira se pojedinačno."
+      },
+      {
+        "title": "Više džepova",
+        "description": "Jakna ima više mogućnosti za odlaganje alata i sitnica."
+      },
+      {
+        "title": "Pokrivka rajsferšlusa",
+        "description": "Pokrivka rajsferšlusa pruža dodatnu zaštitu od raspršenog laka."
+      },
+      {
+        "title": "Antistatički sloj",
+        "description": "Antistatički sloj prema EN 1149-1:2006."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.654": "Jakna kombinezona / S",
+      "159.655": "Jakna kombinezona / M",
+      "159.656": "Jakna kombinezona / L",
+      "159.657": "Jakna kombinezona / XL",
+      "159.658": "Jakna kombinezona / XXL",
+      "159.659": "Jakna kombinezona / 3XL"
+    }
+  },
+  "personal-safety/bodyshirt-black-functional-shirt-short-sleeved": {
+    "sourceHash": "ef95d9c633ba78be",
+    "productType": "Funkcionalna majica",
+    "subtype": "Funkcionalna majica · kratki rukavi",
+    "shortDescription": "Laka funkcionalna majica kratkih rukava od prozračnog poliestera, za nošenje ispod lakirerskog odela.",
+    "longDescription": "Funkcionalna majica kratkih rukava sa okruglim izrezom, izrađena od veoma lake i prozračne poliesterske tkanine. Elastična vlakna i moderan kroj daju sportski kroj i slobodu pokreta. Vlaga se brzo odvodi od tela, pa se majica odmah suši. Bez silikona i vlakanaca, periva na do 30 °C.",
+    "purpose": "Topli radni dani i nošenje ispod lakirerskog odela",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Laka funkcionalna majica, pogodna i kao donji sloj"
+      },
+      {
+        "label": "Materijal",
+        "value": "Bez silikona i bez vlakanaca"
+      },
+      {
+        "label": "Kroj",
+        "value": "Kratki rukav sa okruglim izrezom"
+      },
+      {
+        "label": "Održavanje",
+        "value": "Periva na do 30 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      }
+    ],
+    "applications": [
+      "Funkcionalna majica za tople radne dane",
+      "Prozračna majica ispod lakirerskog odela"
+    ],
+    "benefits": [
+      {
+        "title": "Prozračnost",
+        "description": "Majica je prozračna i brzo se suši."
+      },
+      {
+        "title": "Dobar kroj",
+        "description": "Odgovarajući kroj obezbeđuje udobno nošenje."
+      },
+      {
+        "title": "Mek i lak materijal",
+        "description": "Materijal je veoma mek i lak na dodir."
+      },
+      {
+        "title": "Odvođenje vlage",
+        "description": "Brzo odvodi vlagu i višak toplote od tela."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.536": "L",
+      "158.537": "XL"
+    }
+  },
+  "personal-safety/classic-coverall-jacket-anthracite-protective-coverall": {
+    "sourceHash": "2ca6ef2eeead8fcd",
+    "productType": "Zaštitna jakna",
+    "subtype": "Zaštitno odelo",
+    "shortDescription": "Jakna zaštitnog odela u antracit boji, antistatička i bez silikona, kategorije PPE Cat. I.",
+    "longDescription": "Jakna zaštitnog odela u antracit boji, predviđena za kombinovanje sa Carsystem Classic lakirerskim pantalonama. Reč je o zaštitnoj odeći kategorije PPE Cat. I, antistatičkoj zahvaljujući ugljeničnim vlaknima, bez silikona, prašine i vlakanaca. Jakna i pantalone naručuju se odvojeno, pa veličine mogu da se kombinuju.",
+    "purpose": "Zaštita od niskih rizika i od overspreja",
+    "facts": [
+      {
+        "label": "Kategorija",
+        "value": "Zaštitno odelo kategorije PPE Cat. I"
+      },
+      {
+        "label": "Poručivanje",
+        "value": "Jakna i pantalone mogu da se naruče odvojeno"
+      },
+      {
+        "label": "Nošenje",
+        "value": "Udobno"
+      },
+      {
+        "label": "Kroj",
+        "value": "Veoma dobar kroj"
+      },
+      {
+        "label": "Antistatika",
+        "value": "Antistatičko zahvaljujući ugljeničnim vlaknima"
+      },
+      {
+        "label": "Materijal",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Materijal",
+        "value": "Bez prašine i vlakanaca"
+      }
+    ],
+    "applications": [
+      "Štiti od niskih rizika, npr. od vodorazredivih boja ili blagih sredstava za čišćenje",
+      "Zaštita od overspreja"
+    ],
+    "benefits": [
+      {
+        "title": "Pojedinačan izbor veličina",
+        "description": "Veličina jakne i pantalona bira se pojedinačno."
+      },
+      {
+        "title": "Više džepova",
+        "description": "Jakna ima više mogućnosti za odlaganje."
+      },
+      {
+        "title": "Pokrivka zatvarača",
+        "description": "Pokrivka patent zatvarača pruža dodatnu zaštitu od overspreja."
+      },
+      {
+        "title": "Antistatički premaz",
+        "description": "Antistatički premaz prema EN 1149-1:2006."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.194": "antracit / XS",
+      "159.195": "antracit / S",
+      "159.196": "antracit / M",
+      "159.197": "antracit / L",
+      "159.198": "antracit / XL",
+      "159.199": "antracit / XXL",
+      "159.200": "antracit / 3XL"
+    }
+  },
+  "personal-safety/classic-coverall-pants-protective-coverall": {
+    "sourceHash": "c6fd1dc76a9516e5",
+    "productType": "Zaštitni kombinezon",
+    "subtype": "Zaštitni kombinezon · pantalone",
+    "shortDescription": "Antracit pantalone zaštitnog kombinezona PPE Cat. I, antistatičke i bez silikona.",
+    "longDescription": "Classic Coverall Pants su pantalone zaštitnog kombinezona u antracit nijansi, predviđene za kombinovanje sa jaknama iz limitiranih serija. Zahvaljujući udelu karbonskih vlakana materijal je antistatički i dobro naleže, uz više praktičnih džepova. Odelo je bez silikona, bez prašine i vlakana, a pere se na temperaturi do 30 °C.",
+    "purpose": "Zaštita od niskih rizika i od raspršenog laka",
+    "facts": [
+      {
+        "label": "Klasa zaštite",
+        "value": "PPE Cat. I"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "Jakna i pantalone se naručuju odvojeno"
+      },
+      {
+        "label": "Udobnost",
+        "value": "Udobne za nošenje"
+      },
+      {
+        "label": "Kroj",
+        "value": "Veoma dobar kroj"
+      },
+      {
+        "label": "Antistatik",
+        "value": "Antistatičke zahvaljujući karbonskim vlaknima"
+      },
+      {
+        "label": "Silikon",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Čistoća",
+        "value": "Bez prašine i vlakana"
+      },
+      {
+        "label": "Pranje",
+        "value": "Pranje do 30 °C"
+      }
+    ],
+    "applications": [
+      "Štite od niskih rizika, npr. od vodorazredivih boja ili blagih sredstava za čišćenje",
+      "Zaštita od raspršenog laka (overspray)"
+    ],
+    "benefits": [
+      {
+        "title": "Odvojen izbor veličina",
+        "description": "Veličina jakne i pantalona bira se pojedinačno."
+      },
+      {
+        "title": "Više džepova",
+        "description": "Jakna i pantalone imaju više mogućnosti za odlaganje."
+      },
+      {
+        "title": "Pokrivka rajsferšlusa",
+        "description": "Pokrivka rajsferšlusa pruža dodatnu zaštitu od raspršenog laka."
+      },
+      {
+        "title": "Antistatički sloj",
+        "description": "Antistatički sloj prema EN 1149-1:2006."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.180": "Antracit / XS",
+      "159.181": "Antracit / S",
+      "159.182": "Antracit / M",
+      "159.183": "Antracit / L",
+      "159.184": "Antracit / XL",
+      "159.185": "Antracit / XXL",
+      "159.186": "Antracit / 3XL"
+    }
+  },
+  "personal-safety/coverall-20-disposable-protective-suit-20": {
+    "sourceHash": "35d428af3ccd2a8e",
+    "productType": "Zaštitni kombinezon",
+    "subtype": "Jednokratni zaštitni kombinezon 2.0",
+    "shortDescription": "Jednokratni zaštitni kombinezon PPE Cat. III, tip 5 + 6, bez silikona i lateksa.",
+    "longDescription": "Coverall 2.0 je jednokratni zaštitni kombinezon predviđen za rad u lakirnici. Bez silikona je i lateksa, ne pušta prašinu i vlakna i ima klasu zaštite PPE Cat. III, tip 5 + 6. Antistatički sloj je izveden prema EN 1149-5:2008.",
+    "purpose": "Rad u lakirnici i zaštita od raspršenog laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Jednokratni zaštitni kombinezon"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona i lateksa"
+      },
+      {
+        "label": "Čistoća",
+        "value": "Bez prašine i vlakana"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "PPE Cat. III, tip 5 + 6"
+      }
+    ],
+    "applications": [
+      "Pogodan za rad u lakirnici",
+      "Štiti od raspršenog laka, rastvarača, vode i štetne prašine"
+    ],
+    "benefits": [
+      {
+        "title": "Prodisan materijal",
+        "description": "Materijal propušta vazduh."
+      },
+      {
+        "title": "Pleteni manžetni",
+        "description": "Pleteni manžetni zatvaraju otvorene krajeve i doprinose udobnosti."
+      },
+      {
+        "title": "Bez silikona i lateksa",
+        "description": "Ne sadrži silikon ni lateks."
+      },
+      {
+        "title": "Bez prašine i vlakana",
+        "description": "Ne pušta prašinu ni vlakna."
+      },
+      {
+        "title": "Antistatički sloj",
+        "description": "Antistatički sloj prema EN 1149-5:2008."
+      }
+    ],
+    "advice": "Preporučuje se redovna zamena zaštitnog odela kako bi se sprečilo nakupljanje vlakana, naročito na prodisnom delu leđa.",
+    "variants": {
+      "160.275": "S",
+      "160.276": "M",
+      "160.277": "L",
+      "160.278": "XL",
+      "160.279": "2XL",
+      "160.280": "3XL"
+    }
+  },
+  "personal-safety/coverall-black-suit-protective-coverall": {
+    "sourceHash": "014c4bbc7c08ac58",
+    "productType": "Zaštitni kombinezon",
+    "subtype": "Zaštitni kombinezon",
+    "shortDescription": "Zaštitni kombinezon PPE Cat. I od 99 % najlona i 1 % karbona, antistatički i periv.",
+    "longDescription": "Coverall Black Suit je zaštitni kombinezon izrađen od 99 % najlona i 1 % karbona. Ima klasu zaštite PPE Cat. I, bez silikona je, ne pušta prašinu i vlakna, a pere se na temperaturi do 30 °C. Antistatički sloj je izveden prema EN 1149-3:2004.",
+    "purpose": "Zaštita od bezopasnih hemikalija i od raspršenog laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštitni kombinezon"
+      },
+      {
+        "label": "Sastav",
+        "value": "99 % najlon, 1 % karbon"
+      },
+      {
+        "label": "Pranje",
+        "value": "Pranje do 30 °C"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "PPE Cat. I"
+      },
+      {
+        "label": "Silikon",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Čistoća",
+        "value": "Bez prašine i vlakana"
+      }
+    ],
+    "applications": [
+      "Štiti od bezopasnih hemikalija, npr. od vodorazredivih boja ili blagih sredstava za čišćenje",
+      "Zaštita od raspršenog laka (overspray)"
+    ],
+    "benefits": [
+      {
+        "title": "Dobra prodisnost",
+        "description": "Posebna elastična birds eye tkanina dobro propušta vazduh."
+      },
+      {
+        "title": "Pleteni manžetni",
+        "description": "Pleteni manžetni čvrsto zatvaraju zglobove ruku i nogu i doprinose udobnosti."
+      },
+      {
+        "title": "Prilagodljiv kroj",
+        "description": "Elastični delovi na leđima i moderan kroj prilagođavaju odelo obliku tela."
+      },
+      {
+        "title": "Antistatički sloj",
+        "description": "Antistatički sloj prema EN 1149-3:2004."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.113": "S",
+      "159.114": "M",
+      "159.115": "L",
+      "159.116": "XL",
+      "159.117": "XXL",
+      "159.118": "3XL"
+    }
+  },
+  "personal-safety/explorer-ltd-2-piece-coverall-protective-coverall": {
+    "sourceHash": "60d3c7fb9f2243ac",
+    "productType": "Zaštitno odelo",
+    "subtype": "Zaštitno odelo",
+    "shortDescription": "Dvodelno lakirersko odelo Explorer Ltd., antistatičko i perivo, kategorije PPE Cat. I.",
+    "longDescription": "Dvodelno zaštitno odelo kategorije PPE Cat. I, sa više mogućnosti odlaganja na jakni i pantalonama. Udeo ugljeničnih vlakana u materijalu čini odelo antistatičkim. Odelo je bez silikona, prašine i vlakanaca i pere se na do 30 °C. Jakna i pantalone naručuju se odvojeno, pa veličine mogu da se kombinuju.",
+    "purpose": "Zaštita od niskih rizika i od overspreja",
+    "facts": [
+      {
+        "label": "Kategorija",
+        "value": "Dvodelno zaštitno odelo kategorije PPE Cat. I"
+      },
+      {
+        "label": "Poručivanje",
+        "value": "Jakna i pantalone mogu da se naruče odvojeno"
+      },
+      {
+        "label": "Nošenje",
+        "value": "Udobno"
+      },
+      {
+        "label": "Kroj",
+        "value": "Veoma dobar kroj"
+      },
+      {
+        "label": "Antistatika",
+        "value": "Antistatičko zahvaljujući ugljeničnim vlaknima"
+      },
+      {
+        "label": "Materijal",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Materijal",
+        "value": "Bez prašine i vlakanaca"
+      },
+      {
+        "label": "Održavanje",
+        "value": "Perivo na do 30 °C"
+      }
+    ],
+    "applications": [
+      "Štiti od niskih rizika, npr. od vodorazredivih boja ili blagih sredstava za čišćenje",
+      "Zaštita od overspreja"
+    ],
+    "benefits": [
+      {
+        "title": "Pojedinačan izbor veličina",
+        "description": "Veličina jakne i pantalona bira se pojedinačno."
+      },
+      {
+        "title": "Više džepova",
+        "description": "Jakna i pantalone imaju više mogućnosti za odlaganje."
+      },
+      {
+        "title": "Pokrivka zatvarača",
+        "description": "Pokrivka patent zatvarača pruža dodatnu zaštitu od overspreja."
+      },
+      {
+        "title": "Antistatički premaz",
+        "description": "Antistatički premaz prema EN 1149-1:2006."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.120": "Jakna odela / XS",
+      "159.121": "Pantalone odela / XS",
+      "158.682": "Jakna odela / S",
+      "158.683": "Pantalone odela / S",
+      "158.684": "Jakna odela / M",
+      "158.685": "Pantalone odela / M",
+      "158.687": "Pantalone odela / L",
+      "158.688": "Jakna odela / XL",
+      "158.689": "Pantalone odela / XL",
+      "158.690": "Jakna odela / XXL",
+      "158.691": "Pantalone odela / XXL",
+      "158.692": "Jakna odela / 3XL",
+      "158.693": "Pantalone odela / 3XL"
+    }
+  },
+  "personal-safety/hand-cleaner-extreme-hand-cleaner": {
+    "sourceHash": "4b1aa59fe221203c",
+    "productType": "Sredstvo za pranje ruku",
+    "subtype": "Sredstvo za pranje ruku",
+    "shortDescription": "Intenzivno sredstvo za pranje ruku, bez silikona i rastvarača, biorazgradivo.",
+    "longDescription": "Hand Cleaner extreme je intenzivno sredstvo za pranje ruku, za upotrebu tokom rada i posle njega. Ne sadrži silikone ni rastvarače, a sredstva za struganje su biljnog porekla. Uklanja i tvrdokornu prljavštinu od uljanih boja i smola, uz prijatan miris jabuke i biorazgradiv sastav.",
+    "purpose": "Uklanjanje tvrdokorne prljavštine sa ruku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Intenzivno sredstvo za pranje ruku"
+      },
+      {
+        "label": "Upotreba",
+        "value": "Tokom rada ili posle njega"
+      },
+      {
+        "label": "Silikon",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Sredstva za struganje",
+        "value": "Biljnog porekla"
+      }
+    ],
+    "applications": [
+      "Uklanja i tvrdokornu prljavštinu od uljanih boja i smola"
+    ],
+    "benefits": [
+      {
+        "title": "Miris jabuke",
+        "description": "Ima prijatan miris jabuke."
+      },
+      {
+        "title": "Bez rastvarača",
+        "description": "Ne sadrži rastvarače."
+      },
+      {
+        "title": "Biorazgradivo",
+        "description": "Sastav je biorazgradiv."
+      },
+      {
+        "title": "Prijatan osećaj na koži",
+        "description": "Prirodno ulje prijatno za kožu ostavlja mek osećaj."
+      },
+      {
+        "title": "Zidni držač",
+        "description": "Zidni držač sa mekom bocom od 2 l."
+      },
+      {
+        "title": "Veliko pakovanje",
+        "description": "Veliko pakovanje od 3 l."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "155.348": "Meka boca bez zidnog držača / 2 L",
+      "155.357": "Veliko pakovanje bez pumpe / 3 L"
+    }
+  },
+  "personal-safety/hand-cleaner-hand-cleaner": {
+    "sourceHash": "19aaaf34c78aa777",
+    "productType": "Sredstvo za pranje ruku",
+    "subtype": "Sredstvo za pranje ruku",
+    "shortDescription": "Blago sredstvo za pranje ruku, bez silikona i rastvarača, biorazgradivo.",
+    "longDescription": "Hand Cleaner je blago sredstvo za pranje ruku, za upotrebu tokom rada i posle njega. Ne sadrži silikone ni rastvarače, a sredstva za struganje su biljnog porekla. Uklanja i tvrdokornu prljavštinu od masti i bitumena, uz prijatan miris i biorazgradiv sastav.",
+    "purpose": "Uklanjanje prljavštine od masti i bitumena",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Blago sredstvo za pranje ruku"
+      },
+      {
+        "label": "Upotreba",
+        "value": "Tokom rada ili posle njega"
+      },
+      {
+        "label": "Silikon",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Sredstva za struganje",
+        "value": "Biljnog porekla"
+      }
+    ],
+    "applications": [
+      "Uklanja i tvrdokornu prljavštinu od masti i bitumena"
+    ],
+    "benefits": [
+      {
+        "title": "Prijatan miris",
+        "description": "Ima prijatan miris."
+      },
+      {
+        "title": "Bez rastvarača",
+        "description": "Ne sadrži rastvarače."
+      },
+      {
+        "title": "Biorazgradivo",
+        "description": "Sastav je biorazgradiv."
+      },
+      {
+        "title": "Prijatan osećaj na koži",
+        "description": "Prirodno ulje prijatno za kožu ostavlja mek osećaj."
+      },
+      {
+        "title": "Veliko pakovanje",
+        "description": "Veliko pakovanje od 3 l."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "155.356": "Veliko pakovanje bez pumpe / 3 L"
+    }
+  },
+  "personal-safety/latex-gloves-protective-gloves": {
+    "sourceHash": "45bcbc0b41d7d274",
+    "productType": "Zaštitne rukavice",
+    "subtype": "Zaštitne rukavice",
+    "shortDescription": "Lateks rukavice, lako napudrane, za zaštitu od prljavštine, boje i hemikalija.",
+    "longDescription": "Zaštitne rukavice od lateksa koje štite od prljavštine, boje i hemikalija. Lako su napudrane, pa se jednostavno navlače i skidaju. Isporučuju se u kutiji sa dozatorom, 100 komada.",
+    "purpose": "Zaštita od prljavštine, boje i hemikalija",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Lateks rukavice"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "100 komada u kutiji sa dozatorom"
+      },
+      {
+        "label": "Obrada",
+        "value": "Lako napudrane"
+      }
+    ],
+    "applications": [
+      "Štite od prljavštine, boje i hemikalija"
+    ],
+    "benefits": [
+      {
+        "title": "Lako navlačenje",
+        "description": "Lagan sloj pudera olakšava navlačenje i skidanje rukavica."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.981": "L"
+    }
+  },
+  "personal-safety/latex-hand-i-premium-protection-gloves": {
+    "sourceHash": "39dd0fb048f1a3e3",
+    "productType": "Zaštitne rukavice",
+    "subtype": "Zaštitne rukavice",
+    "shortDescription": "Lateks rukavice bez pudera, sa produženom manžetnom, za rad sa bojama i rastvaračima.",
+    "longDescription": "Latex Hand I Premium su lateks zaštitne rukavice bez pudera, sa izrazito dugom manžetnom. Štite pri radu sa blagim rastvaračima i bojama, a pogodne su i za brzo čišćenje pištolja za lakiranje. Isporučuju se u kutiji sa dozatorom od 50 komada.",
+    "purpose": "Zaštita pri radu sa blagim rastvaračima i bojama",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Lateks"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "50 komada u kutiji sa dozatorom"
+      },
+      {
+        "label": "Puder",
+        "value": "Bez pudera"
+      },
+      {
+        "label": "Manžetna",
+        "value": "Izrazito duga"
+      }
+    ],
+    "applications": [
+      "Pogodne za brzo čišćenje pištolja za lakiranje",
+      "Štite od blagih rastvarača i boja"
+    ],
+    "benefits": [
+      {
+        "title": "Povećana debljina",
+        "description": "Rukavice su dodatno debele."
+      },
+      {
+        "title": "Dobar osećaj u radu",
+        "description": "Dobar osećaj pri radu sa rastvaračima i u vlažnom ili uljnom okruženju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.011": "L",
+      "152.012": "XL"
+    }
+  },
+  "personal-safety/neopren-hand-protection-gloves": {
+    "sourceHash": "bbe5505512f806e2",
+    "productType": "Zaštitne rukavice",
+    "subtype": "Zaštitne rukavice",
+    "shortDescription": "Hemijski otporne rukavice od neoprena i lateksa, dužine 30 cm.",
+    "longDescription": "Neopren Hand su zaštitne rukavice od neoprena i lateksa, dužine 30 cm. Štite pri radu sa hemikalijama, kiselinama, rastvorima soli, mineralnim uljima, mastima i rastvaračima. Pogodne su i za rukovanje klizavim delovima u vlažnom, uljnom i masnom okruženju.",
+    "purpose": "Zaštita od hemikalija i rukovanje klizavim delovima",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Neopren / lateks, hemijski otporne rukavice"
+      },
+      {
+        "label": "Dužina",
+        "value": "30 cm"
+      }
+    ],
+    "applications": [
+      "Pogodne za rukovanje klizavim delovima u vlažnom, uljnom i masnom okruženju",
+      "Štite od hemikalija, kiselina, rastvora soli, mineralnih ulja, masti i rastvarača"
+    ],
+    "benefits": [
+      {
+        "title": "Kombinacija materijala",
+        "description": "Neopren obezbeđuje hemijsku zaštitu, a lateks fleksibilnost i trajnost."
+      },
+      {
+        "title": "Saćasta struktura",
+        "description": "Dlan i vrhovi prstiju sa saćastom strukturom za bolji prihvat."
+      },
+      {
+        "title": "Izolacija",
+        "description": "Dobra izolacija od toplote i hladnoće."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "140.939": "L / par",
+      "140.940": "XL / par",
+      "140.941": "XXL / par"
+    }
+  },
+  "personal-safety/nitril-hand-premium-black-protection-gloves": {
+    "sourceHash": "8b901d2d8fc32068",
+    "productType": "Zaštitne rukavice",
+    "subtype": "Zaštitne rukavice",
+    "shortDescription": "Crne nitril rukavice bez pudera i silikona, otporne na cepanje.",
+    "longDescription": "Nitril Hand Premium black su nitril zaštitne rukavice bez pudera i silikona. Štite od prljavštine, boje i hemikalija, a zbog povećane debljine dobro podnose cepanje. Isporučuju se u kutiji sa dozatorom od 100 komada.",
+    "purpose": "Zaštita od prljavštine, boje i hemikalija",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Nitril"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "100 komada u kutiji sa dozatorom"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona i pudera"
+      }
+    ],
+    "applications": [
+      "Štite od prljavštine, boje i hemikalija"
+    ],
+    "benefits": [
+      {
+        "title": "Povećana debljina",
+        "description": "Rukavice su dodatno debele."
+      },
+      {
+        "title": "Elastične i otporne",
+        "description": "Veoma su elastične i otporne na cepanje."
+      },
+      {
+        "title": "Dobro naleganje",
+        "description": "Dobro nalegaju i pružaju dobar osećaj u radu."
+      }
+    ],
+    "advice": "Kratkotrajno su otporne na rastvarače. Rad sa ekranom osetljivim na dodir je moguć.",
+    "variants": {
+      "156.623": "S",
+      "156.624": "M",
+      "154.347": "L",
+      "154.348": "XL"
+    }
+  },
+  "personal-safety/paint-overall-blue-protective-coverall": {
+    "sourceHash": "30633b44f55d4f1e",
+    "productType": "Zaštitni kombinezon",
+    "subtype": "Zaštitni kombinezon",
+    "shortDescription": "Plavi zaštitni kombinezon PPE Cat. I od mekane poliesterske tkanine.",
+    "longDescription": "Paint Overall Blue je zaštitni kombinezon klase PPE Cat. I, izrađen od mekane poliesterske tkanine. Štiti od bezopasnih hemikalija, kao što su vodorazredive boje ili blaga sredstva za čišćenje, i od raspršenog laka. Bez silikona je, ne pušta prašinu i vlakna, a antistatički sloj je izveden prema EN 1149-1:2006.",
+    "purpose": "Zaštita od bezopasnih hemikalija i od raspršenog laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštitni kombinezon"
+      },
+      {
+        "label": "Materijal",
+        "value": "Mekana poliesterska tkanina"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "PPE Cat. I"
+      }
+    ],
+    "applications": [
+      "Štiti od bezopasnih hemikalija, npr. od vodorazredivih boja ili blagih sredstava za čišćenje",
+      "Zaštita od raspršenog laka (overspray)"
+    ],
+    "benefits": [
+      {
+        "title": "Antistatički sloj",
+        "description": "Antistatički sloj prema EN 1149-1:2006."
+      },
+      {
+        "title": "Bez silikona",
+        "description": "Ne sadrži silikon."
+      },
+      {
+        "title": "Bez prašine i vlakana",
+        "description": "Ne pušta prašinu ni vlakna."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "139.232": "S",
+      "139.233": "M",
+      "138.472": "L",
+      "138.473": "XL",
+      "139.234": "XXL",
+      "152.968": "3XL"
+    }
+  },
+  "personal-safety/prep-hand-ii-work-gloves": {
+    "sourceHash": "e30d77e86dc913b0",
+    "productType": "Radne rukavice",
+    "subtype": "Radne rukavice",
+    "shortDescription": "Radne rukavice sa PU premazom na dlanu i vrhovima prstiju, za montažne radove bez rizika od posekotina.",
+    "longDescription": "Prep Hand II su radne rukavice sa PU premazom na dlanu i vrhovima prstiju. Osnovni sloj je poliamid (najlon), pa su prozračne i udobne za nošenje. Namenjene su montažnim radovima bez rizika od posekotina i bez izlaganja hemikalijama ili rastvaračima.",
+    "purpose": "Montažni radovi bez rizika od posekotina i hemikalija",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Radne rukavice sa PU premazom"
+      },
+      {
+        "label": "Premaz",
+        "value": "Dlan i vrhovi prstiju sa PU premazom"
+      },
+      {
+        "label": "Osnovni sloj",
+        "value": "Poliamid (najlon)"
+      }
+    ],
+    "applications": [
+      "Pogodne za montažne radove bez rizika od posekotina i izlaganja hemikalijama / rastvaračima"
+    ],
+    "benefits": [
+      {
+        "title": "Prozračnost",
+        "description": "Materijal je prozračan."
+      },
+      {
+        "title": "Siguran hvat",
+        "description": "Sigurniji hvat uz dobar osećaj u vrhovima prstiju."
+      },
+      {
+        "title": "Otpornost na habanje",
+        "description": "Rukavice su otporne na habanje."
+      },
+      {
+        "title": "Udoban kroj",
+        "description": "Kroj je udoban pri nošenju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "150.719": "L",
+      "150.720": "XL"
+    }
+  },
+  "personal-safety/prep-hand-iii-work-gloves": {
+    "sourceHash": "36ee13f9a470de93",
+    "productType": "Radne rukavice",
+    "subtype": "Radne rukavice",
+    "shortDescription": "Mekane radne rukavice sa PU premazom na dlanu i vrhovima prstiju, za montažu i brusne radove.",
+    "longDescription": "Prep Hand III su radne rukavice sa mekim PU premazom na dlanu i vrhovima prstiju, na osnovi od poliamida. Namenjene su montažnim i brusnim radovima bez rizika od posekotina i bez izlaganja hemikalijama ili rastvaračima. Mekane su i savitljive, prozračne i omogućavaju rukovanje ekranom osetljivim na dodir.",
+    "purpose": "Montažni i brusni radovi bez rizika od posekotina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Radne rukavice sa PU premazom"
+      },
+      {
+        "label": "Premaz",
+        "value": "Dlan i vrhovi prstiju sa mekim PU premazom"
+      },
+      {
+        "label": "Osnovni sloj",
+        "value": "Poliamid"
+      }
+    ],
+    "applications": [
+      "Pogodne za montažne i brusne radove bez rizika od posekotina i izlaganja hemikalijama / rastvaračima"
+    ],
+    "benefits": [
+      {
+        "title": "Mekoća i savitljivost",
+        "description": "Rukavice su veoma mekane i savitljive."
+      },
+      {
+        "title": "Prozračnost",
+        "description": "Materijal je prozračan."
+      },
+      {
+        "title": "Siguran hvat",
+        "description": "Sigurniji hvat uz dobar osećaj u vrhovima prstiju."
+      },
+      {
+        "title": "Rad sa ekranom na dodir",
+        "description": "Moguće je rukovanje ekranom osetljivim na dodir."
+      },
+      {
+        "title": "Otpornost na habanje",
+        "description": "Rukavice su otporne na habanje."
+      },
+      {
+        "title": "Dobro naleganje",
+        "description": "Kroj dobro naleže na ruku."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "145.132": "Veličina 9 / par",
+      "145.133": "Veličina 10 / par"
+    }
+  },
+  "personal-safety/pump-for-hand-cleaner-3-l-pump-for-hand-cleaner-classic": {
+    "sourceHash": "55f6f70b041603a7",
+    "productType": "Pumpa",
+    "subtype": "Pumpa za Hand Cleaner classic",
+    "shortDescription": "Pumpa predviđena za pakovanja Hand Cleaner i Hand Cleaner Extreme od 3 l.",
+    "longDescription": "Carsystem pumpa je predviđena za pakovanja Hand Cleaner i Hand Cleaner Extreme zapremine 3 l. Postavlja se na pakovanje kao pripadajući pribor.",
+    "purpose": "Pumpa za pakovanja Hand Cleaner od 3 l",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Za Hand Cleaner i Hand Cleaner Extreme 3 l"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "155.359": "Pumpa za Hand Cleaner 3 l"
+    }
+  },
+  "personal-safety/safety-lens-protective-glasses": {
+    "sourceHash": "d5a288bdce0fb4c4",
+    "productType": "Zaštitne naočare",
+    "subtype": "Zaštitne naočare",
+    "shortDescription": "Zaštitne naočare sa polikarbonatnim staklima, koje se peru toplom vodom i sapunom.",
+    "longDescription": "Safety Lens su zaštitne naočare sa staklima od polikarbonata. Održavaju se pranjem toplom vodom i sapunom.",
+    "purpose": "Zaštita očiju pri radu",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštitne naočare"
+      },
+      {
+        "label": "Materijal",
+        "value": "Polikarbonatna stakla"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Naočare se mogu prati toplom vodom i sapunom.",
+    "variants": {
+      "140.955": "Safety Lens"
+    }
+  },
+  "personal-safety/star-dust-20-ffp2-dust-mask": {
+    "sourceHash": "e01387fb3ca7a8de",
+    "productType": "Maska za prašinu",
+    "subtype": "Maska za prašinu",
+    "shortDescription": "FFP maska klase zaštite FFP2 NR sa podesivom aluminijumskom trakom za nos.",
+    "longDescription": "Star Dust 2.0 FFP2 je maska za prašinu klase zaštite FFP2 NR, sertifikovana prema EN 149:2001+A1:2009 CE 0194. Štiti od štetnih čestica na bazi ulja i vode, a podesiva aluminijumska traka za nos omogućava bolje naleganje. Meka unutrašnja strana i elastične trake za glavu doprinose udobnosti, a maska se može kombinovati sa zaštitnim naočarima.",
+    "purpose": "Zaštita od štetnih čestica na bazi ulja ili vode",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Maska za prašinu / FFP maska"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "FFP2 NR"
+      },
+      {
+        "label": "Sertifikat",
+        "value": "EN 149:2001+A1:2009 CE 0194"
+      },
+      {
+        "label": "Traka za nos",
+        "value": "Podesiva aluminijumska traka za bolje naleganje"
+      }
+    ],
+    "applications": [
+      "Štiti od štetnih čestica na bazi ulja ili vode"
+    ],
+    "benefits": [
+      {
+        "title": "Meka unutrašnjost",
+        "description": "Unutrašnji deo maske je mek i prijatan na koži."
+      },
+      {
+        "title": "Uz zaštitne naočare",
+        "description": "Pogodna je za kombinovanje sa zaštitnim naočarima."
+      }
+    ],
+    "advice": "Preporučuje se zamena maske posle svake radne smene.",
+    "variants": {
+      "159.949": "FFP2 – bez ventila"
+    }
+  },
+  "personal-safety/star-dust-20-ffp3-with-valve-dust-mask": {
+    "sourceHash": "1c6ad35446b93852",
+    "productType": "Maska za prašinu",
+    "subtype": "Maska za prašinu",
+    "shortDescription": "FFP maska klase zaštite FFP3 NR sa izduvnim ventilom i podesivom aluminijumskom trakom za nos.",
+    "longDescription": "Star Dust 2.0 FFP3 je maska za prašinu klase zaštite FFP3 NR sa izduvnim ventilom, sertifikovana prema EN 149:2001+A1:2009 CE 0194. Štiti od fine prašine, aerosola i čestica, uključujući kancerogene i radioaktivne čestice. Podesiva aluminijumska traka za nos, pena u predelu nosa i elastične trake za glavu obezbeđuju sigurno naleganje. Ventil smanjuje nakupljanje toplote u maski i olakšava disanje.",
+    "purpose": "Zaštita od štetnih, kancerogenih i radioaktivnih čestica",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Maska za prašinu / FFP maska"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "FFP3 NR"
+      },
+      {
+        "label": "Sertifikat",
+        "value": "EN 149:2001+A1:2009 CE 0194"
+      },
+      {
+        "label": "Traka za nos",
+        "value": "Podesiva aluminijumska traka za bolje naleganje"
+      },
+      {
+        "label": "Ventil",
+        "value": "Izduvni ventil"
+      }
+    ],
+    "applications": [
+      "Štiti od štetnih i kancerogenih čestica na bazi ulja ili vode, kao i od radioaktivnih čestica, biološki aktivnih materija iz grupa rizika 2 + 3 i enzima"
+    ],
+    "benefits": [
+      {
+        "title": "Meka unutrašnjost",
+        "description": "Unutrašnji deo maske je mek i prijatan na koži."
+      },
+      {
+        "title": "Podesive trake za glavu",
+        "description": "Podesive, kvalitetne trake za glavu obezbeđuju udobno naleganje."
+      },
+      {
+        "title": "Pena oko nosa",
+        "description": "Trake od pene u predelu nosa poboljšavaju naleganje."
+      },
+      {
+        "title": "Uz zaštitne naočare",
+        "description": "Pogodna je za kombinovanje sa zaštitnim naočarima."
+      },
+      {
+        "title": "Ventil smanjuje toplotu",
+        "description": "Izduvni ventil smanjuje nakupljanje toplote u maski."
+      }
+    ],
+    "advice": "Preporučuje se zamena maske posle svake radne smene.",
+    "variants": {
+      "159.950": "FFP3 – sa ventilom"
+    }
+  },
+  "personal-safety/star-mask-disc-filter-frame": {
+    "sourceHash": "dbd30e2c50101386",
+    "productType": "Okvir za filter",
+    "subtype": "Okvir za filter",
+    "shortDescription": "Okvir koji Star Mask Pre P2 R predfilter drži pričvršćen na filteru sa aktivnim ugljem.",
+    "longDescription": "Star Mask Disc je okvir predviđen za Carsystem Star Mask Pre P2 R predfiltere. Njegova uloga je da predfilter fiksira na filter sa aktivnim ugljem.",
+    "purpose": "Fiksiranje predfiltera na filter sa aktivnim ugljem",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Okvir za Carsystem Star Mask Pre P2 R predfiltere"
+      }
+    ],
+    "applications": [
+      "Okvir fiksira predfilter na filter sa aktivnim ugljem"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "144.310": "Držač filtera"
+    }
+  },
+  "personal-safety/star-mask-pre-p2-r-pre-filters": {
+    "sourceHash": "003908d9be143d70",
+    "productType": "Predfilteri",
+    "subtype": "Predfilteri",
+    "shortDescription": "Predfilteri klase zaštite P2 za filterske uloške maske Star Mask Refill.",
+    "longDescription": "Star Mask Pre P2 R su predfilteri za filterske uloške maske Star Mask Refill sa aktivnim ugljem. Klasa zaštite je P2, a štite od čestica kao što su prašina, dim i aerosoli.",
+    "purpose": "Zaštita od čestica prašine, dima i aerosola",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Predfilteri za Star Mask Refill"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "P2"
+      }
+    ],
+    "applications": [
+      "Štiti od čestica, npr. prašine, dima i aerosola"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "141.154": "Klasa zaštite P2"
+    }
+  },
+  "personal-safety/star-mask-refill-charcoal-filter": {
+    "sourceHash": "05b2cad7f51d875b",
+    "productType": "Filter sa aktivnim ugljem",
+    "subtype": "Filter sa aktivnim ugljem",
+    "shortDescription": "Zamenski filterski ulošci sa aktivnim ugljem klase A2 za masku Star Mask.",
+    "longDescription": "Star Mask Refill su zamenski filterski ulošci sa aktivnim ugljem za zaštitnu masku Star Mask. Klasa zaštite je A2, a štite od organskih para i rastvarača, kao i od prašine i prljavštine.",
+    "purpose": "Zaštita od prašine, prljavštine i organskih para",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zamenski filteri za Star Mask"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "Filteri sa aktivnim ugljem – klasa A2"
+      }
+    ],
+    "applications": [
+      "Štiti od prašine, prljavštine i organskih para"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "141.224": "Klasa zaštite A2"
+    }
+  },
+  "personal-safety/star-mask-respirator": {
+    "sourceHash": "fdefea8ef20ababe",
+    "productType": "Zaštitna maska",
+    "subtype": "Zaštitna maska",
+    "shortDescription": "Polumaska sa zamenjivim filterima i predfilterima za sve uobičajene lakirerske radove.",
+    "longDescription": "Star Mask je polumaska sa filterima namenjena svim uobičajenim lakirerskim radovima. Filterski ulošci i predfilteri su zamenjivi i pričvršćuju se bajonet spojem. Klasa zaštite je FFA2 P2 R, uz zaštitu od prašine, prljavštine i organskih para rastvarača.",
+    "purpose": "Svi uobičajeni lakirerski radovi",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Polumaska sa filterima"
+      },
+      {
+        "label": "Filteri",
+        "value": "Zamenjivi filteri i predfilteri"
+      },
+      {
+        "label": "Pričvršćivanje",
+        "value": "Bajonet spoj na filterima"
+      },
+      {
+        "label": "Klasa zaštite",
+        "value": "FFA2 P2 R"
+      }
+    ],
+    "applications": [
+      "Svi uobičajeni lakirerski radovi"
+    ],
+    "benefits": [
+      {
+        "title": "Zaštita od prašine i para",
+        "description": "Štiti od prašine, prljavštine i organskih para rastvarača."
+      },
+      {
+        "title": "Duži vek filtera",
+        "description": "Predfilter produžava radni vek filtera."
+      }
+    ],
+    "advice": "Obratiti pažnju na različite propise koji važe po regionima.",
+    "variants": {
+      "141.143": "M",
+      "141.145": "L"
+    }
+  },
+  "personal-safety/super-nitril-hand-i-protection-gloves": {
+    "sourceHash": "c5e57ff61e2de2c1",
+    "productType": "Zaštitne rukavice",
+    "subtype": "Zaštitne rukavice",
+    "shortDescription": "Nitrilne zaštitne rukavice dužine 30 cm sa velur postavom, za rad sa hemikalijama i klizavim delovima.",
+    "longDescription": "Super Nitril Hand I su zaštitne rukavice od nitrila dužine 30 cm, sa mekom velur postavom. Namenjene su rukovanju klizavim delovima u vlažnoj, uljanoj i masnoj sredini i štite od hemikalija. Saćasta šara na dlanu i vrhovima prstiju poboljšava hvat, uz dobru izolaciju od toplote i hladnoće.",
+    "purpose": "Rukovanje klizavim delovima i zaštita od hemikalija",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Rukavice za zaštitu od hemikalija"
+      },
+      {
+        "label": "Dužina",
+        "value": "30 cm"
+      },
+      {
+        "label": "Unutrašnjost",
+        "value": "Meka velur postava"
+      },
+      {
+        "label": "Osnovni materijal",
+        "value": "Nitril"
+      }
+    ],
+    "applications": [
+      "Pogodne za rukovanje klizavim delovima u vlažnoj, uljanoj i masnoj sredini",
+      "Štite od hemikalija"
+    ],
+    "benefits": [
+      {
+        "title": "Osećaj pri radu",
+        "description": "Dobar osećaj i kontrola pri radu sa rastvaračima i u vlažnoj ili uljanoj sredini."
+      },
+      {
+        "title": "Saćasta šara",
+        "description": "Dlan i vrhovi prstiju sa saćastom šarom za bolji hvat."
+      },
+      {
+        "title": "Izolacija",
+        "description": "Dobra izolacija od toplote i hladnoće."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "145.130": "Veličina 9 / par",
+      "145.131": "Veličina 10 / par"
+    }
+  },
+  "personal-safety/uv-glasses-uv-protective-glasses": {
+    "sourceHash": "37248bca5caa74bd",
+    "productType": "Zaštitne naočare",
+    "subtype": "Zaštitne naočare sa UV zaštitom",
+    "shortDescription": "Zaštitne naočare sa polikarbonatnim staklima koje štite od UVA, UVB i UVC zračenja.",
+    "longDescription": "UV Glasses su zaštitne naočare sa staklima od polikarbonata koje štite oči od UVA, UVB i UVC zračenja. PVC deo za nos i neklizajući jastučići obezbeđuju dobro naleganje i sprečavaju pomeranje naočara. Stakla su otporna na ogrebotine i ne magle se, a naočare se peru toplom vodom i sapunom.",
+    "purpose": "Zaštita očiju od UVA, UVB i UVC zračenja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštitne naočare sa UV zaštitom"
+      },
+      {
+        "label": "Materijal",
+        "value": "Polikarbonatna stakla"
+      }
+    ],
+    "applications": [
+      "Štite od UVA, UVB i UVC zračenja"
+    ],
+    "benefits": [
+      {
+        "title": "PVC deo za nos",
+        "description": "PVC deo za nos obezbeđuje dobro naleganje."
+      },
+      {
+        "title": "Neklizajući jastučići",
+        "description": "Neklizajući jastučići sprečavaju pomeranje naočara."
+      },
+      {
+        "title": "Otporna stakla",
+        "description": "Stakla su otporna na ogrebotine i ne magle se."
+      },
+      {
+        "title": "Uz zaštitu sluha",
+        "description": "Pogodne su za kombinovanje sa zaštitom za sluh."
+      }
+    ],
+    "advice": "Naočare se mogu prati toplom vodom i sapunom.",
+    "variants": {
+      "154.263": "UV naočare"
+    }
+  },
+  "personal-safety/wall-dispenser-for-soft-bottle-2-l-wall-dispenser": {
+    "sourceHash": "96ab4b27b312918a",
+    "productType": "Zidni držač",
+    "subtype": "Zidni držač",
+    "shortDescription": "Zidni držač za Hand Cleaner Extreme Soft Bottle pakovanja od 2 l.",
+    "longDescription": "Carsystem zidni držač predviđen je za Hand Cleaner Extreme Soft Bottle pakovanja od 2 l. Montira se na zid i na njemu drži pakovanje sredstva za pranje ruku.",
+    "purpose": "Zidno postavljanje Soft Bottle pakovanja od 2 l",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zidni držač za Hand Cleaner extreme Soft Bottle"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "155.350": "Zidni držač za Soft Bottle"
+    }
+  }
+}

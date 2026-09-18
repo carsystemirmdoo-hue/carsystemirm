@@ -1,0 +1,3589 @@
+{
+  "abrasives/classicline-soft-pad-foam-abrasive-140-x-115-mm": {
+    "sourceHash": "22b17c804bd4224f",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · 140 x 115 mm",
+    "shortDescription": "Sunđerasti abraziv za matiranje i dodatno brušenje teško dostupnih mesta pre nanošenja punioca ili boje.",
+    "longDescription": "Classicline Soft Pad je sunđerasti abraziv sa mekom pločicom na sunđerastoj podlozi i zrnom aluminijum-oksida. Veoma je fleksibilan i prilagođava se svakoj zaobljenoj površini, pa se koristi na najsitnijim uglovima, pregibima i udubljenjima. Radi mokro i suvo: srednje i fino pre nanošenja punioca, super fino i ultra fino pre nanošenja boje.",
+    "purpose": "Matiranje i brušenje teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Meka pločica sa sunđerastom podlogom"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Matiranje i brušenje teško dostupnih mesta, najsitnijih uglova, pregiba i udubljenja pre nanošenja punioca ili boje",
+      "Srednje i fino: pre nanošenja punioca",
+      "Super fino i ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma fleksibilan",
+        "description": "Pločica je veoma fleksibilna."
+      },
+      {
+        "title": "Prati konture",
+        "description": "Prilagođava se svakoj zaobljenoj površini."
+      },
+      {
+        "title": "Mokra i suva upotreba",
+        "description": "Može se koristiti mokro ili suvo."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "138.924": "Srednje / P220 - P280",
+      "138.925": "Fino / P320 - P400",
+      "138.926": "Super fino / P400 - P500",
+      "138.927": "Ultra fino / P800 - P1200"
+    }
+  },
+  "abrasives/control-spray-sanding-control-spray": {
+    "sourceHash": "33f4a53d138ef50e",
+    "productType": "Kontrolni sprej",
+    "subtype": "Kontrolni sprej za brušenje",
+    "shortDescription": "Crni kontrolni sprej koji se nanosi na površinu da bi nepravilnosti i strukture postale vidljive.",
+    "longDescription": "Control-Spray je crni kontrolni sprej za brušenje. Na površinu nanosi sloj kontrolne boje, pa greške u brušenju postaju vidljive. Koristi se za kontrolu brušenja gitovanih površina i površina obrađenih puniocem. Brzo se suši i ne sadrži masti ni silikone.",
+    "purpose": "Kontrola brušenja gitovanih i puniocem obrađenih površina",
+    "facts": [
+      {
+        "label": "Dejstvo",
+        "value": "Crni kontrolni sprej nanosi sloj kontrolne boje na površinu i čini greške u brušenju vidljivim"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Kontrola brušenja gitovanih površina ili površina obrađenih puniocem"
+    ],
+    "benefits": [
+      {
+        "title": "Vidljive najsitnije greške",
+        "description": "Čini i najsitnije nepravilnosti na površini vidljivim."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši, bez masti i silikona."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "125.779": "400 ml"
+    }
+  },
+  "abrasives/double-sanding-soft-pad-foam-abrasive-120-x-98-x-13-mm": {
+    "sourceHash": "7a3b9f0d8d2328bf",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · 120 x 98 x 13 mm",
+    "shortDescription": "Dvostrani sunđerasti abraziv za matiranje i brušenje teško dostupnih mesta pre punioca ili boje.",
+    "longDescription": "Double Sanding Soft Pad je dvostrana meka pločica sa sunđerastom podlogom i obojenim zrnom aluminijum-oksida. Veoma je fleksibilna i prilagođava se svakoj zaobljenoj površini, pa se koristi na najsitnijim uglovima, pregibima i udubljenjima. Radi mokro i suvo: fino pre nanošenja punioca, super fino i ultra fino pre nanošenja boje.",
+    "purpose": "Matiranje i brušenje teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Dvostrana meka pločica sa sunđerastom podlogom"
+      },
+      {
+        "label": "Zrno",
+        "value": "Obojeno zrno aluminijum-oksida"
+      }
+    ],
+    "applications": [
+      "Matiranje i brušenje teško dostupnih mesta, najsitnijih uglova, pregiba i udubljenja pre nanošenja punioca ili boje",
+      "Fino: pre nanošenja punioca",
+      "Super fino i ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma fleksibilan",
+        "description": "Pločica je veoma fleksibilna."
+      },
+      {
+        "title": "Prati konture",
+        "description": "Prilagođava se svakoj zaobljenoj površini."
+      },
+      {
+        "title": "Mokra i suva upotreba",
+        "description": "Može se koristiti mokro ili suvo."
+      },
+      {
+        "title": "Označavanje bojom",
+        "description": "Boja olakšava prepoznavanje odgovarajuće pločice."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.183": "Fino / braon / P240",
+      "160.185": "Super fino / zelena / P500",
+      "160.186": "Mikro fino / ljubičasta / P1500"
+    }
+  },
+  "abrasives/dry-coat-20-sanding-control-system": {
+    "sourceHash": "7cf1d2ec27532b52",
+    "productType": "Sistem za kontrolu brušenja",
+    "subtype": "Sistem za kontrolu brušenja",
+    "shortDescription": "Sistem za kontrolu brušenja sa aplikatorom i kontrolnim praškom, bez aerosola i rastvarača.",
+    "longDescription": "DRY COAT 2.0 je sistem za kontrolu brušenja razvijen za karoserijske i lakirerske radionice. Čine ga aplikator, sunđerasti prsten sa čičkom (Velcro®), kartuša sa kontrolnim praškom i postolje za odlaganje. Služi za pouzdano otkrivanje pora, neravnina i najsitnijih tragova brušenja posle gitovanja ili nanošenja punioca.",
+    "purpose": "Kontrola brušenja gitovanih i puniocem obrađenih površina",
+    "facts": [
+      {
+        "label": "Aplikator",
+        "value": "Ergonomski oblikovan aplikator (ručni blok) za jednostavno nanošenje sa Carsystem kartušama kontrolnog praška"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Ručni aplikator + sunđerasti prsten sa čičkom (Velcro®) + postolje za odlaganje"
+      },
+      {
+        "label": "Zasebna nabavka",
+        "value": "Sunđerasti prsten (Velcro®) u setu od 2 komada i kartuše kontrolnog praška naručuju se zasebno"
+      }
+    ],
+    "applications": [
+      "Kontrola brušenja gitovanih površina i površina obrađenih puniocem",
+      "Kontrolni prašak crni – za svetle površine",
+      "Kontrolni prašak narandžasti – za tamne površine",
+      "Sunđerasti prsten (Velcro®): set od 2 komada"
+    ],
+    "benefits": [
+      {
+        "title": "Vidljive najsitnije greške",
+        "description": "Čini najsitnije nepravilnosti i strukture na površini vidljivim."
+      },
+      {
+        "title": "Bez aerosola i rastvarača",
+        "description": "Kontrolni prašak je bez aerosola i rastvarača i ne zapušava abraziv."
+      },
+      {
+        "title": "Rad jednom rukom",
+        "description": "Nanošenje je jednostavno, jednom rukom."
+      },
+      {
+        "title": "Brza zamena kartuše",
+        "description": "Sunđerasti prsten sa čičkom omogućava jednostavnu zamenu kartuše."
+      },
+      {
+        "title": "Postolje u kompletu",
+        "description": "U kompletu je i postolje za odlaganje aplikatora."
+      },
+      {
+        "title": "Pojedinačni delovi",
+        "description": "Sunđerasti prstenovi i kartuše sa praškom mogu se naručiti pojedinačno."
+      }
+    ],
+    "advice": "Kontrolni prašak ulazi duboko u sve nepravilnosti površine, pa postaju vidljive ogrebotine i sitne pore. Dry Coat 2.0 ne zahteva vreme sušenja ni maskiranje. Kontrolni prašak se može brusiti odmah posle nanošenja.",
+    "variants": {
+      "158.487": "Set: 1 aplikator / 1 sunđerasti prsten / postolje za odlaganje",
+      "158.488": "Dry Coat 2.0 sunđerasti prsten, set od 2",
+      "158.489": "Dopuna, 2 kom. / crna / 30 g",
+      "158.490": "Dopuna, 2 kom. / narandžasta / 15 g"
+    }
+  },
+  "abrasives/excenter-back-pad-multi-m-back-pad-150-mm": {
+    "sourceHash": "ab90911e97c91f71",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Podloška (tanjir) · 150 mm",
+    "shortDescription": "Podloška sa multihole rasporedom rupa, srednje tvrdoće, kao univerzalna podloška za suvo brušenje.",
+    "longDescription": "Excenter Back Pad Multi M je podloška (tanjir) sa multihole rasporedom rupa i srednjim stepenom tvrdoće. Koristi se kao univerzalna podloška za suvo brušenje i odgovara svim uobičajenim ekscentričnim brusilicama. Isporučuje se sa vijcima M8 i 5/16\" i specijalnim Festool adapterom.",
+    "purpose": "Univerzalna podloška za suvo brušenje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Podloška za ekscentričnu brusilicu sa multihole rasporedom rupa"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Srednja"
+      },
+      {
+        "label": "Kompatibilnost",
+        "value": "Odgovara svim uobičajenim ekscentričnim brusilicama"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Vijci M8 i 5/16\" i specijalni Festool adapter"
+      }
+    ],
+    "applications": [
+      "Univerzalna podloška za suvo brušenje"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "156.570": "Čičak (grip)"
+    }
+  },
+  "abrasives/excenter-back-pad-t19-back-pad-150-mm": {
+    "sourceHash": "2335877b168e3802",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Podloška (tanjir) · 150 mm",
+    "shortDescription": "Podloška sa Carsystem rasporedom rupa (25 rupa i ovalna centralna rupa), u tri stepena tvrdoće.",
+    "longDescription": "Excenter Back Pad T.19 ima Carsystem raspored rupa sa 25 rupa i ovalnom centralnom rupom. Dostupna je u tri stepena tvrdoće, pa se za svaki posao brušenja može izabrati odgovarajuća izvedba. Meka daje najmanju reznu moć i najveću fleksibilnost, srednja uravnotežuje reznu moć i fleksibilnost, a tvrda daje najveću reznu moć.",
+    "purpose": "Brušenje uz izbor tvrdoće podloške",
+    "facts": [
+      {
+        "label": "Raspored rupa",
+        "value": "Carsystem raspored rupa"
+      },
+      {
+        "label": "Rupe",
+        "value": "25 rupa i ovalna centralna rupa"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tri stepena: meka, srednja, tvrda"
+      }
+    ],
+    "applications": [
+      "Meka = najmanja rezna moć, najveća fleksibilnost",
+      "Srednja = odnos između rezne moći i fleksibilnosti",
+      "Tvrda = najveća rezna moć, najmanja fleksibilnost"
+    ],
+    "benefits": [
+      {
+        "title": "Tri stepena tvrdoće",
+        "description": "Izbor između tri stepena tvrdoće omogućava prilagođavanje poslu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.564": "Meka / čičak (grip) / M8 i 5/16\"",
+      "156.227": "Srednja / čičak (grip) / M8 i 5/16\"",
+      "156.563": "Tvrda / čičak (grip) / M8 i 5/16\""
+    }
+  },
+  "abrasives/excenter-classic-random-orbital-sander-pneumatic": {
+    "sourceHash": "131396f79093e388",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica, pneumatska",
+    "shortDescription": "Pneumatska ekscentrična brusilica bez podloške, sa prečnikom hoda 5 mm, za grubo brušenje.",
+    "longDescription": "Excenter Classic je pneumatska ekscentrična brusilica koja se isporučuje bez podloške. Prečnik hoda iznosi 5 mm, a priključak za podlošku je unutrašnji navoj 5/16\" - 24. Namenjena je grubom brušenju.",
+    "purpose": "Grubo brušenje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska ekscentrična brusilica bez podloške"
+      },
+      {
+        "label": "Hod",
+        "value": "Prečnik hoda 5 mm"
+      },
+      {
+        "label": "Navoj",
+        "value": "Unutrašnji navoj 5/16\" - 24"
+      }
+    ],
+    "applications": [
+      "Za grubo brušenje"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.653": "Bez podloške / prečnik hoda 5 mm"
+    }
+  },
+  "abrasives/fine-block-fine-sanding-block": {
+    "sourceHash": "c2b2bb5a07d6e49f",
+    "productType": "Brusni blok",
+    "subtype": "Fini brusni blok",
+    "shortDescription": "Fini brusni blok od karbona za uklanjanje većih nepravilnosti u laku, poput kapi ili uključaka prašine.",
+    "longDescription": "Fine Block je fini brusni blok od karbona. Koristi se za uklanjanje većih nepravilnosti u laku, na primer kapi laka ili krupnijih uključaka prašine. Blok je samooštreći.",
+    "purpose": "Uklanjanje većih nepravilnosti u laku",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Fini brusni blok od karbona"
+      }
+    ],
+    "applications": [
+      "Uklanjanje većih nepravilnosti u laku, na primer kapi laka ili krupnijih uključaka prašine"
+    ],
+    "benefits": [
+      {
+        "title": "Samooštreći",
+        "description": "Blok se tokom rada samooštri."
+      }
+    ],
+    "advice": "Preporučuje se isključivo mokra upotreba. Pre prve upotrebe blok treba natopiti najmanje 15 min. Posle prvog natapanja blok ne treba ponovo da se osuši.",
+    "variants": {
+      "140.979": "800",
+      "140.980": "1500",
+      "140.981": "2000",
+      "140.982": "3000"
+    }
+  },
+  "abrasives/finish-sander-back-pad-back-pad-77-mm": {
+    "sourceHash": "51a21feb2bf820c7",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Podloška (tanjir) · 77 mm",
+    "shortDescription": "Zamenska podloška prečnika 77 mm za brusilicu Finish Sander RC 9332.",
+    "longDescription": "Finish Sander Back Pad je zamenska podloška (tanjir) za brusilicu Finish Sander RC 9332. Priključak je navoj 5/16\" sa fiksnim vijkom.",
+    "purpose": "Zamenska podloška za Finish Sander RC 9332",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zamenska podloška za Finish Sander RC 9332"
+      },
+      {
+        "label": "Navoj",
+        "value": "5/16\" (fiksni vijak)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "144.917": "Priključak 5/16\" UNF"
+    }
+  },
+  "abrasives/finish-sander-rc-9332-random-orbital-sander-75-mm-pneumatic": {
+    "sourceHash": "1aea131a567dcb27",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica 75 mm, pneumatska",
+    "shortDescription": "Pneumatska ekscentrična brusilica 75 mm za rad jednom rukom, sa prečnikom hoda 2.5 mm.",
+    "longDescription": "Finish Sander RC 9332 je pneumatska ekscentrična brusilica za rad jednom rukom. Prečnik hoda iznosi 2.5 mm, a broj obrtaja se podešava do 10.000 o/min. Priključak za podlošku je unutrašnji navoj 5/16\", dok je priključak za vazdušno crevo unutrašnji navoj 1/4\".",
+    "purpose": "Pneumatsko ekscentrično brušenje jednom rukom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska ekscentrična brusilica za rad jednom rukom"
+      },
+      {
+        "label": "Hod",
+        "value": "Prečnik hoda 2.5 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 10.000 o/min"
+      },
+      {
+        "label": "Priključak podloške",
+        "value": "Unutrašnji navoj 5/16\""
+      },
+      {
+        "label": "Priključak vazduha",
+        "value": "Unutrašnji navoj 1/4\""
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "143.388": "Sa podloškom / prečnik hoda 2.5 mm"
+    }
+  },
+  "abrasives/grip-to-stick-interface-pad-interface-pad-oe-30-mm": {
+    "sourceHash": "6d8f062d31dedb77",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · Ø 30 mm",
+    "shortDescription": "Međupodloška sa čičkom (Velcro®) za precizno završno brušenje i kraće vreme završnog poliranja.",
+    "longDescription": "Grip To Stick Interface Pad je međupodloška sa samolepljivom stranom i čičkom (Velcro®), namenjena preciznom završnom brušenju. Pričvršćivanje čičkom uklanja potrebu za promenom podloške na mašini, čime se štedi vreme i postiže ujednačen rad. Pruža uravnotežen odnos prigušenja i skidanja materijala i dobro prati konture obrađivane površine. Time se vreme završnog poliranja osetno skraćuje.",
+    "purpose": "Završno brušenje i uklanjanje nepravilnosti na površini",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Međupodloška sa samolepljivom stranom"
+      }
+    ],
+    "applications": [
+      "Finiš",
+      "Uklanjanje nepravilnosti na površini"
+    ],
+    "benefits": [
+      {
+        "title": "Bez zamene podloške",
+        "description": "Nije potrebno menjati podlošku na mašini za poliranje."
+      },
+      {
+        "title": "Uravnotežen rad",
+        "description": "Pruža uravnotežen odnos prigušenja i skidanja materijala."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Skraćuje vreme završnog poliranja."
+      }
+    ],
+    "advice": "Preporučuje se upotreba sa Carsystem akumulatorskom polirkom CSH-CMS01 i brusnim listovima ProFlex Styx i ProFlex Pluto.",
+    "variants": {
+      "159.677": "5 kom. / pakovanje / Ø 30 mm"
+    }
+  },
+  "abrasives/interface-pad-interface-pad-150-mm": {
+    "sourceHash": "4fd38f0a64fa758c",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 150 mm",
+    "shortDescription": "Međupodloška sa Carsystem rasporedom rupa za brušenje zaobljenja, kriva i ivica.",
+    "longDescription": "Interface Pad ima Carsystem raspored rupa sa 25 rupa i ovalnom centralnom rupom. Koristi se uz brusne diskove Carsystem F.19, F.23 i P.25 i omogućava dobro prilagođavanje obliku površine. Dostupna je u debljinama 5 mm i 10 mm, a ovalna srednja rupa pomaže pri poravnanju brusnog diska.",
+    "purpose": "Brušenje zaobljenih površina, kriva i ivica",
+    "facts": [
+      {
+        "label": "Raspored rupa",
+        "value": "Carsystem raspored rupa"
+      },
+      {
+        "label": "Rupe",
+        "value": "25 rupa i ovalna centralna rupa"
+      },
+      {
+        "label": "Osnova rasporeda",
+        "value": "Raspored se zasniva na 15 rupa uz 10 dodatnih rupa"
+      },
+      {
+        "label": "Debljina",
+        "value": "5 mm + 10 mm"
+      }
+    ],
+    "applications": [
+      "Brušenje svih površina sa krivama, zaobljenjima i ivicama",
+      "Upotreba sa Carsystem brusnim diskovima F.19, F.23 i P.25"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Dobro se prilagođava obliku površine."
+      },
+      {
+        "title": "Manji rizik od probrušavanja",
+        "description": "Smanjuje rizik od probrušavanja podloge."
+      },
+      {
+        "title": "Lakše poravnanje diska",
+        "description": "Ovalna srednja rupa pomaže pri poravnanju brusnog diska."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.225": "10 mm",
+      "156.226": "5 mm"
+    }
+  },
+  "abrasives/mini-back-pad-finish-back-pad": {
+    "sourceHash": "7f222e893482d292",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Podloška za finiš",
+    "shortDescription": "Zamenska podloška za mini brusilicu RC 9330 i Carsystem Orbital Sander CSH-CMS01.",
+    "longDescription": "Mini Back Pad je zamenska podloška (tanjir) za mini brusilicu RC 9330 i Carsystem Orbital Sander CSH-CMS01. Namenjena je samolepljivim diskovima i diskovima sa čičkom (Velcro®). Priključak je unutrašnji navoj 1/4\".",
+    "purpose": "Zamenska podloška za mini brusilice",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zamenska podloška za mini brusilicu RC 9330 i Carsystem Orbital Sander CSH-CMS01"
+      },
+      {
+        "label": "Diskovi",
+        "value": "Za samolepljive diskove i diskove sa čičkom (Velcro®)"
+      },
+      {
+        "label": "Navoj",
+        "value": "Unutrašnji navoj 1/4\""
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "144.768": "Srednja / samolepljiva (stick) / 28 mm",
+      "144.769": "Srednja / čičak (grip) / 28 mm"
+    }
+  },
+  "abrasives/pad-saver-interface-pad-150-mm": {
+    "sourceHash": "b2308242be0752e8",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 150 mm",
+    "shortDescription": "Međupodloška debljine 3 mm koja štiti originalni sloj čička (Velcro®) na podlošci brusilice.",
+    "longDescription": "Pad Saver je međupodloška debljine 3 mm sa multihole rasporedom rupa, pa odgovara uobičajenim sistemima rupa. Koristi se kao drugi sloj čička (Velcro®) i tako štiti originalni sloj čička na podlošci ekscentrične brusilice.",
+    "purpose": "Zaštita originalnog sloja čička na podlošci",
+    "facts": [
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole raspored rupa za sve uobičajene sisteme rupa"
+      },
+      {
+        "label": "Debljina",
+        "value": "3 mm"
+      }
+    ],
+    "applications": [
+      "Pad Saver se koristi kao drugi sloj čička (Velcro®)"
+    ],
+    "benefits": [
+      {
+        "title": "Štiti podlošku",
+        "description": "Čuva originalni sloj čička (Velcro®) na podlošci ekscentrične brusilice."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "154.099": "Pad Saver / 5 kom. / kesa"
+    }
+  },
+  "abrasives/paint-planer-paint-planer-and-holder": {
+    "sourceHash": "cbd5b0b39bad8246",
+    "productType": "Rende za lak",
+    "subtype": "Rende za lak i držač",
+    "shortDescription": "Rende za lak sa držačem, za uklanjanje nepravilnosti u laku.",
+    "longDescription": "Paint Planer je rende za uklanjanje nepravilnosti u laku, uz koje se isporučuje i odgovarajući držač. Prednja strana držača služi za odlaganje rendeta. Na zadnje strane mogu se postaviti samolepljivi daisy diskovi sa čičkom (Velcro®).",
+    "purpose": "Uklanjanje nepravilnosti u laku",
+    "facts": [
+      {
+        "label": "Komplet",
+        "value": "Rende za lak i držač"
+      },
+      {
+        "label": "Prednja strana",
+        "value": "Služi za odlaganje rendeta"
+      },
+      {
+        "label": "Zadnje strane",
+        "value": "Prihvataju samolepljive daisy diskove sa čičkom (Velcro®)"
+      }
+    ],
+    "applications": [
+      "Uklanjanje nepravilnosti u laku"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "142.995": "Paint Planer",
+      "142.996": "Držač"
+    }
+  },
+  "abrasives/prep-brush-special-brush": {
+    "sourceHash": "b2798d7c55a99fce",
+    "productType": "Specijalna četka",
+    "subtype": "Specijalna četka",
+    "shortDescription": "Specijalna četka za nanošenje pasta za matiranje na teško dostupna mesta.",
+    "longDescription": "Prep-Brush je specijalna četka namenjena pastama za matiranje. Koristi se za nanošenje paste na teško dostupna mesta.",
+    "purpose": "Nanošenje pasta za matiranje na teško dostupna mesta",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Specijalna četka za paste za matiranje"
+      }
+    ],
+    "applications": [
+      "Za nanošenje pasta za matiranje na teško dostupna mesta"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.696": "5 cm"
+    }
+  },
+  "abrasives/prep-scuff-matting-paste": {
+    "sourceHash": "b60c6147b023d18b",
+    "productType": "Pasta za matiranje",
+    "subtype": "Pasta za matiranje",
+    "shortDescription": "Pasta za matiranje na vodenoj bazi koja u jednom koraku brusi, čisti i odmašćuje površinu.",
+    "longDescription": "Prep & Scuff je pasta za matiranje na vodenoj bazi, svetlosive boje. U jednom radnom koraku brusi, čisti i odmašćuje površinu i poboljšava prianjanje sloja boje. Koristi se za prelaze (blending), matiranje zona prelaza i za odmašćivanje i čišćenje delova karoserije. Matiranje je ujednačeno, a sa površine se uklanjaju silikoni i voskovi.",
+    "purpose": "Matiranje, čišćenje i odmašćivanje površine",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Pasta za matiranje na vodenoj bazi"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlosiva"
+      }
+    ],
+    "applications": [
+      "Prelaz (blending)",
+      "Matiranje zona prelaza",
+      "Odmašćivanje i čišćenje delova karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Tri koraka u jednom",
+        "description": "Brušenje, čišćenje i odmašćivanje u jednom radnom koraku."
+      },
+      {
+        "title": "Bolje prianjanje",
+        "description": "Poboljšava prianjanje sloja boje."
+      },
+      {
+        "title": "Ujednačeno matiranje",
+        "description": "Matiranje površine je ujednačeno."
+      },
+      {
+        "title": "Uklanja silikone i voskove",
+        "description": "Sa površine uklanja silikone i voskove."
+      }
+    ],
+    "advice": "Teško dostupna mesta mogu se obraditi četkom Prep-Brush (art. br. 138.301).",
+    "variants": {
+      "137.547": "1.3 kg",
+      "137.779": "Dispenzer za 5,0 kg"
+    }
+  },
+  "abrasives/proflex-back-pad-psa-back-pad-30-mm": {
+    "sourceHash": "43eb17c0c410743f",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Podloška (tanjir) · 30 mm",
+    "shortDescription": "Podloška od ćelijske gume za samolepljive ProFlex Pluto daisy diskove.",
+    "longDescription": "ProFlex Back Pad PSA je podloška (tanjir) od ćelijske gume za samolepljive daisy diskove ProFlex Pluto. Koristi se uz CS Mini brusilicu i Carsystem Orbital Sander CSH-CMS01. Odlikuje je uravnotežen odnos rezne moći i ujednačene slike brušenja u završnoj fazi brušenja.",
+    "purpose": "Završno brušenje samolepljivim daisy diskovima",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "PSA podloška od ćelijske gume za ProFlex Pluto daisy diskove"
+      }
+    ],
+    "applications": [
+      "Upotreba sa CS Mini brusilicom i Carsystem Orbital Sander CSH-CMS01",
+      "Upotreba sa ProFlex Pluto daisy diskovima"
+    ],
+    "benefits": [
+      {
+        "title": "Uravnotežen rad",
+        "description": "Uravnotežen odnos rezne moći i ujednačene slike brušenja u završnom brušenju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "155.153": "Samolepljiva (stick) / unutrašnji navoj 1/4\""
+    }
+  },
+  "abrasives/proflex-callisto-foam-abrasive-150-mm": {
+    "sourceHash": "ea5cc3b5dfb8bb64",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · 150 mm",
+    "shortDescription": "Fleksibilan fini brusni disk na sunđerastoj podlozi, pogodan za mokro brušenje pre poliranja.",
+    "longDescription": "ProFlex Callisto je fleksibilan fini brusni disk sa mineralnim brusnim zrnom i sunđerastom podlogom. Podloga blago brusi površinu i daje veoma finu i ujednačenu sliku brušenja, pa je disk pogodan za mokro brušenje u pripremi površina na karoseriji. U pripremi za lakiranje njime se uklanjaju nastale ogrebotine pre poliranja, čime se skraćuje vreme poliranja. Dostupne su granulacije 3000 i 6000+.",
+    "purpose": "Fino mokro brušenje neposredno pre poliranja",
+    "facts": [
+      {
+        "label": "Zrno",
+        "value": "Mineralno brusno zrno"
+      },
+      {
+        "label": "Nosač",
+        "value": "Fleksibilna sunđerasta podloga"
+      },
+      {
+        "label": "Granulacija",
+        "value": "Dostupne granulacije: 3000 i 6000+"
+      }
+    ],
+    "applications": [
+      "Glatko brušenje neposredno pre poliranja",
+      "Uklanjanje tragova brušenja",
+      "Fino dodatno brušenje nepravilnosti",
+      "Pogodan za mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće poliranje",
+        "description": "Štedi vreme u narednom procesu poliranja."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Abraziv ima dug radni vek."
+      },
+      {
+        "title": "Blago matiranje",
+        "description": "Matiranje je blago i ujednačeno."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.797": "Granulacija 3000",
+      "159.301": "Granulacija 6000 +"
+    }
+  },
+  "abrasives/proflex-callisto-foam-abrasive-33-mm": {
+    "sourceHash": "1eceaea529c64767",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · 33 mm",
+    "shortDescription": "Fleksibilan fini brusni disk na sunđerastoj podlozi, pogodan za mokro brušenje pre poliranja.",
+    "longDescription": "ProFlex Callisto je fleksibilan fini brusni disk sa mineralnim brusnim zrnom i fleksibilnom sunđerastom podlogom. Podloga blago brusi površinu i daje veoma finu i ujednačenu sliku brušenja, pa je disk pogodan za mokro brušenje u pripremi površina na karoseriji. U pripremi za lakiranje njime se uklanjaju nastale ogrebotine pre poliranja, čime se skraćuje vreme poliranja.",
+    "purpose": "Fino mokro brušenje neposredno pre poliranja",
+    "facts": [
+      {
+        "label": "Zrno",
+        "value": "Mineralno brusno zrno"
+      },
+      {
+        "label": "Nosač",
+        "value": "Fleksibilna sunđerasta podloga"
+      }
+    ],
+    "applications": [
+      "Glatko brušenje neposredno pre poliranja",
+      "Uklanjanje tragova brušenja",
+      "Fino dodatno brušenje nepravilnosti",
+      "Pogodan za mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće poliranje",
+        "description": "Štedi vreme u narednom procesu poliranja."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Abraziv ima dug radni vek."
+      },
+      {
+        "title": "Blago matiranje",
+        "description": "Matiranje je blago i ujednačeno."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.793": "Granulacija 3000",
+      "159.299": "Granulacija 6000 +"
+    }
+  },
+  "abrasives/proflex-callisto-foam-abrasive-77-mm": {
+    "sourceHash": "6fa276293b4e74df",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · 77 mm",
+    "shortDescription": "Fleksibilan fini brusni disk na sunđerastoj podlozi, pogodan za mokro brušenje pre poliranja.",
+    "longDescription": "ProFlex Callisto je fleksibilan fini brusni disk sa mineralnim brusnim zrnom i fleksibilnom sunđerastom podlogom. Podloga blago brusi površinu i daje veoma finu i ujednačenu sliku brušenja, pa je disk pogodan za mokro brušenje u pripremi površina na karoseriji. U pripremi za lakiranje njime se uklanjaju nastale ogrebotine pre poliranja, čime se skraćuje vreme poliranja.",
+    "purpose": "Fino mokro brušenje neposredno pre poliranja",
+    "facts": [
+      {
+        "label": "Zrno",
+        "value": "Mineralno brusno zrno"
+      },
+      {
+        "label": "Nosač",
+        "value": "Fleksibilna sunđerasta podloga"
+      }
+    ],
+    "applications": [
+      "Glatko brušenje neposredno pre poliranja",
+      "Uklanjanje tragova brušenja",
+      "Fino dodatno brušenje nepravilnosti",
+      "Pogodan za mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće poliranje",
+        "description": "Štedi vreme u narednom procesu poliranja."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Abraziv ima dug radni vek."
+      },
+      {
+        "title": "Blago matiranje",
+        "description": "Matiranje je blago i ujednačeno."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.795": "Granulacija 3000",
+      "159.300": "Granulacija 6000 +"
+    }
+  },
+  "abrasives/proflex-hydra-foam-abrasive-oe-152-mm": {
+    "sourceHash": "bc4607ed4b7a546a",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · Ø 152 mm",
+    "shortDescription": "Sunđerasti abraziv sa mineralnim brusnim zrnom i fleksibilnim nosačem, za mokro brušenje pre poliranja.",
+    "longDescription": "ProFlex Hydra je sunđerasti abraziv sa mineralnim brusnim zrnom i fleksibilnim sunđerastim nosačem. Koristi se za glatko brušenje neposredno pre poliranja, za fino dodatno brušenje grublje brušenih mesta i za uklanjanje tragova brušenja. Pogodan je za mokro brušenje, ima dug radni vek i daje blago i ujednačeno matiranje.",
+    "purpose": "Fino mokro brušenje neposredno pre poliranja",
+    "facts": [
+      {
+        "label": "Zrno",
+        "value": "Mineralno brusno zrno"
+      },
+      {
+        "label": "Nosač",
+        "value": "Fleksibilan sunđerasti nosač"
+      }
+    ],
+    "applications": [
+      "Glatko brušenje neposredno pre poliranja",
+      "Fino dodatno brušenje grublje brušenih mesta",
+      "Uklanjanje tragova brušenja",
+      "Pogodan za mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće poliranje",
+        "description": "Štedi vreme u narednom procesu poliranja."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Abraziv ima dug radni vek."
+      },
+      {
+        "title": "Blago matiranje",
+        "description": "Matiranje je blago i ujednačeno."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.463": "Granulacija 3000"
+    }
+  },
+  "abrasives/proflex-hydra-foam-abrasive-oe-75-mm": {
+    "sourceHash": "a3cf990e4fb8e096",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · Ø 75 mm",
+    "shortDescription": "Sunđerasti abraziv sa mineralnim brusnim zrnom i fleksibilnim nosačem, za mokro brušenje pre poliranja.",
+    "longDescription": "ProFlex Hydra je sunđerasti abraziv sa mineralnim brusnim zrnom i fleksibilnim sunđerastim nosačem. Koristi se za glatko brušenje neposredno pre poliranja, za fino dodatno brušenje grublje brušenih mesta i za uklanjanje tragova brušenja. Pogodan je za mokro brušenje, ima dug radni vek i daje blago i ujednačeno matiranje.",
+    "purpose": "Fino mokro brušenje neposredno pre poliranja",
+    "facts": [
+      {
+        "label": "Zrno",
+        "value": "Mineralno brusno zrno"
+      },
+      {
+        "label": "Nosač",
+        "value": "Fleksibilan sunđerasti nosač"
+      }
+    ],
+    "applications": [
+      "Glatko brušenje neposredno pre poliranja",
+      "Fino dodatno brušenje grublje brušenih mesta",
+      "Uklanjanje tragova brušenja",
+      "Pogodan za mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće poliranje",
+        "description": "Štedi vreme u narednom procesu poliranja."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Abraziv ima dug radni vek."
+      },
+      {
+        "title": "Blago matiranje",
+        "description": "Matiranje je blago i ujednačeno."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.461": "Granulacija 3000"
+    }
+  },
+  "abrasives/proflex-interface-pad-finish-interface-pad-150-mm-15-holes": {
+    "sourceHash": "f6dd4a0dc2f274ca",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 150 mm · 15 rupa",
+    "shortDescription": "Međupodloška sa mekom (loop) stranom čička (Velcro®) sa obe strane, za veoma finu sliku brušenja.",
+    "longDescription": "ProFlex Interface Pad Finish ima meku (loop) stranu čička (Velcro®) sa obe strane, što daje veoma finu sliku brušenja. Vreme poliranja se osetno skraćuje, pa je podloška pogodna za popravke laka, posebno pri suvom brušenju ekscentričnim brusilicama. Posle upotrebe vide se veoma fini tragovi brušenja i ujednačena slika brušenja. Abraziv se koristi u autolakirerstvu, ali i u obradi drveta i u segmentu visokog sjaja.",
+    "purpose": "Fino završno brušenje sa ProFlex Jupiter diskovima",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Međupodloška sa mekom (loop) stranom čička (Velcro®) sa obe strane"
+      }
+    ],
+    "applications": [
+      "Pogodna za rad sa ProFlex Jupiter diskovima"
+    ],
+    "benefits": [
+      {
+        "title": "Finija slika brušenja",
+        "description": "Daje finiju sliku brušenja u poređenju sa drugim međupodloškama."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Skraćuje vreme poliranja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.078": "Čičak (Velcro®), mekana (loop) strana"
+    }
+  },
+  "abrasives/proflex-interface-pad-finish-interface-pad-75-mm": {
+    "sourceHash": "43b964dbf2b661bc",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 75 mm",
+    "shortDescription": "Međupodloška sa mekom (loop) stranom čička (Velcro®) sa obe strane, za veoma finu sliku brušenja.",
+    "longDescription": "ProFlex Interface Pad Finish ima meku (loop) stranu čička (Velcro®) sa obe strane, što daje veoma finu sliku brušenja. Vreme poliranja se osetno skraćuje, pa je podloška pogodna za popravke laka, posebno pri suvom brušenju ekscentričnim brusilicama. Posle upotrebe vide se veoma fini tragovi brušenja i ujednačena slika brušenja. Abraziv se koristi u autolakirerstvu, ali i u obradi drveta i u segmentu visokog sjaja.",
+    "purpose": "Fino završno brušenje sa ProFlex Jupiter diskovima",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Međupodloška sa mekom (loop) stranom čička (Velcro®) sa obe strane"
+      }
+    ],
+    "applications": [
+      "Pogodna za rad sa ProFlex Jupiter diskovima"
+    ],
+    "benefits": [
+      {
+        "title": "Finija slika brušenja",
+        "description": "Daje finiju sliku brušenja u poređenju sa drugim međupodloškama."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Skraćuje vreme poliranja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.079": "Čičak (Velcro®), mekana (loop) strana"
+    }
+  },
+  "abrasives/proflex-interface-pad-interface-pad-150-mm-15-holes": {
+    "sourceHash": "f7f12ca436b9dfc7",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 150 mm · 15 rupa",
+    "shortDescription": "Međupodloška sa mikro čičkom (Velcro®) za ProFlex Jupiter diskove, u tri stepena tvrdoće.",
+    "longDescription": "ProFlex Interface Pad dostupna je u tri stepena tvrdoće i namenjena je brusnim diskovima ProFlex Jupiter. Mikro čičak (Velcro®) omogućava rad sa mekim filmskim diskovima i ne izaziva ogrebotine kroz film. Meka izvedba daje najfiniju sliku brušenja, srednja uravnotežuje reznu moć i ujednačenost, a tvrda daje najveću reznu moć. Meka i srednja izvedba su debljine 10 mm, a tvrda 5 mm.",
+    "purpose": "Brušenje mekim filmskim diskovima ProFlex Jupiter",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Međupodloška sa mikro čičkom (Velcro®) za ProFlex Jupiter brusne diskove"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tri stepena: meka, srednja, tvrda"
+      },
+      {
+        "label": "Meka / srednja",
+        "value": "Debljina 10 mm"
+      },
+      {
+        "label": "Tvrda",
+        "value": "Debljina 5 mm"
+      }
+    ],
+    "applications": [
+      "Mikro čičak (Velcro®) omogućava upotrebu mekih filmskih diskova (ProFlex Jupiter)",
+      "Meka = najfinija slika brušenja za završno brušenje",
+      "Srednja = odnos između rezne moći i ujednačenosti",
+      "Tvrda = najveća rezna moć"
+    ],
+    "benefits": [
+      {
+        "title": "Tri stepena tvrdoće",
+        "description": "Izbor između tri različita stepena tvrdoće."
+      },
+      {
+        "title": "Bez ogrebotina",
+        "description": "Mikro čičak (Velcro®) ne izaziva ogrebotine kroz meki filmski abraziv."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "154.295": "Meka / 10 mm",
+      "154.193": "Srednja / 10 mm",
+      "155.100": "Tvrda / 5 mm"
+    }
+  },
+  "abrasives/proflex-interface-pad-interface-pad-30-mm": {
+    "sourceHash": "cf78625b3bf91d70",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 30 mm",
+    "shortDescription": "Međupodloška od tvrde ćelijaste gume, debljine 5 mm, za ProFlex Jupiter rozetne diskove.",
+    "longDescription": "Međupodloška sa mikro čičkom (Velcro®) namenjena ProFlex Jupiter rozetnim diskovima. Tvrda ćelijasta guma daje veću stabilnost i veću reznu moć tokom brušenja. Mikro čičak ne izaziva ogrebotine kroz mekani film.",
+    "purpose": "Rad sa ProFlex Jupiter rozetnim diskovima",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Međupodloška sa mikro čičkom (Velcro®) za ProFlex Jupiter rozetne diskove"
+      },
+      {
+        "label": "Materijal",
+        "value": "Ćelijasta guma"
+      },
+      {
+        "label": "Debljina",
+        "value": "5 mm"
+      }
+    ],
+    "applications": [
+      "Za upotrebu sa ProFlex Jupiter rozetnim diskovima"
+    ],
+    "benefits": [
+      {
+        "title": "Veća stabilnost",
+        "description": "Tvrda ćelijasta guma daje veću stabilnost i veću reznu moć."
+      },
+      {
+        "title": "Bez ogrebotina",
+        "description": "Mikro čičak (Velcro®) ne izaziva ogrebotine kroz mekani film."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.137": "Tvrda / 5 mm"
+    }
+  },
+  "abrasives/proflex-interface-pad-interface-pad-75-mm": {
+    "sourceHash": "6b268371666fee2d",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 75 mm",
+    "shortDescription": "Međupodloška za ProFlex Jupiter brusne diskove, dostupna u tri stepena tvrdoće.",
+    "longDescription": "Međupodloška sa mikro čičkom (Velcro®) razvijena za rad sa ProFlex Jupiter brusnim diskovima. Bira se između tri stepena tvrdoće, pa se rezna moć i ravnomernost brušenja prilagođavaju fazi rada. Mikro čičak ne izaziva ogrebotine kroz mekani film.",
+    "purpose": "Upotreba mekih filmskih diskova ProFlex Jupiter",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Međupodloška sa mikro čičkom (Velcro®) za ProFlex Jupiter brusne diskove"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tri stepena: tvrda, srednja, meka"
+      },
+      {
+        "label": "Meka / srednja",
+        "value": "Debljina 10 mm"
+      },
+      {
+        "label": "Tvrda",
+        "value": "Debljina 5 mm"
+      }
+    ],
+    "applications": [
+      "Mikro čičak (Velcro®) omogućava upotrebu mekih filmskih diskova (ProFlex Jupiter)",
+      "Meka = najfiniji trag brušenja za završno finiš brušenje",
+      "Srednja = ravnoteža između rezne moći i ravnomernosti",
+      "Tvrda = najveća rezna moć"
+    ],
+    "benefits": [
+      {
+        "title": "Tri stepena tvrdoće",
+        "description": "Bira se između tri različita stepena tvrdoće."
+      },
+      {
+        "title": "Bez ogrebotina",
+        "description": "Mikro čičak (Velcro®) ne izaziva ogrebotine kroz mekani film."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "154.296": "Meka / 10 mm",
+      "154.194": "Srednja / 10 mm",
+      "155.098": "Tvrda / 5 mm"
+    }
+  },
+  "abrasives/proflex-jupiter-film-abrasive-152-mm": {
+    "sourceHash": "586470734ffb80ce",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 152 mm",
+    "shortDescription": "Ultrafleksibilni meki filmski disk za suvo brušenje u fazi finiša.",
+    "longDescription": "Ultrafleksibilni meki filmski disk sa zrnom aluminijum-oksida, namenjen suvom brušenju u fazi finiša. Ultrafleksibilna osnova se u potpunosti prilagođava površini i veoma nežno obrađuje njenu strukturu. Rezultat je veoma fin trag brušenja i kraće vreme poliranja.",
+    "purpose": "Suvo brušenje i finiš",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski disk"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Suvo brušenje",
+      "Finiš"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Ultrafleksibilna osnova se u potpunosti prilagođava površini."
+      },
+      {
+        "title": "Nežna obrada",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Skraćuje vreme poliranja."
+      }
+    ],
+    "advice": "Preporučuje se upotreba međupodloški ProFlex Interface Pad. Preporučuje se međučišćenje brusne površine mikrofiber krpom.",
+    "variants": {
+      "154.660": "P1500",
+      "154.661": "P2000",
+      "154.662": "P2500",
+      "154.663": "P3000"
+    }
+  },
+  "abrasives/proflex-jupiter-film-abrasive-152-mm-15-holes": {
+    "sourceHash": "e03e638aa7cc6b02",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 152 mm · 15 rupa",
+    "shortDescription": "Ultrafleksibilni meki filmski disk sa 15 rupa, od brušenja punioca do finiša.",
+    "longDescription": "Ultrafleksibilni meki filmski disk sa zrnom aluminijum-oksida i rasporedom od 15 rupa. Zavisno od granulacije koristi se od završnog brušenja punioca do faze finiša, uz suvo brušenje. Ultrafleksibilna osnova veoma nežno obrađuje strukturu površine i skraćuje vreme poliranja.",
+    "purpose": "Suvo brušenje od punioca do finiša",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski disk"
+      },
+      {
+        "label": "Rupe",
+        "value": "15 rupa"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Suvo brušenje",
+      "Završno brušenje punioca",
+      "Prelaz (blending)",
+      "Matiranje površina",
+      "Finiš"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Ultrafleksibilna osnova se u potpunosti prilagođava površini."
+      },
+      {
+        "title": "Nežna obrada",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Skraćuje vreme poliranja."
+      }
+    ],
+    "advice": "Preporučuje se upotreba međupodloški ProFlex Interface Pad. Preporučuje se međučišćenje brusne površine mikrofiber krpom.",
+    "variants": {
+      "154.449": "P600",
+      "154.450": "P800",
+      "154.451": "P1000",
+      "154.452": "P1200",
+      "154.453": "P1500",
+      "153.469": "P2000",
+      "153.470": "P2500",
+      "153.471": "P3000",
+      "156.939": "P4000"
+    }
+  },
+  "abrasives/proflex-jupiter-film-abrasive-75-mm": {
+    "sourceHash": "6db71cd889d1b2e8",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 75 mm",
+    "shortDescription": "Ultrafleksibilni meki filmski disk od 75 mm, od brušenja punioca do finiša.",
+    "longDescription": "Ultrafleksibilni meki filmski disk sa zrnom aluminijum-oksida, predviđen za suvo brušenje. Zavisno od granulacije koristi se od završnog brušenja punioca, preko prelaza i matiranja, do faze finiša. Ultrafleksibilna osnova veoma nežno obrađuje strukturu površine i skraćuje vreme poliranja.",
+    "purpose": "Suvo brušenje od punioca do finiša",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski disk"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Suvo brušenje",
+      "Završno brušenje punioca",
+      "Prelaz (blending)",
+      "Matiranje površina",
+      "Finiš"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Ultrafleksibilna osnova se u potpunosti prilagođava površini."
+      },
+      {
+        "title": "Nežna obrada",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Skraćuje vreme poliranja."
+      }
+    ],
+    "advice": "Preporučuje se upotreba međupodloški ProFlex Interface Pad. Preporučuje se međučišćenje brusne površine mikrofiber krpom.",
+    "variants": {
+      "154.444": "P600",
+      "154.445": "P800",
+      "154.446": "P1000",
+      "154.447": "P1200",
+      "154.448": "P1500",
+      "153.466": "P2000",
+      "153.467": "P2500",
+      "153.468": "P3000",
+      "156.946": "P4000"
+    }
+  },
+  "abrasives/proflex-jupiter-soft-film-abrasive-152-mm-multi-hole": {
+    "sourceHash": "5933631e74d6527f",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 152 mm · Multihole raspored rupa",
+    "shortDescription": "Meki filmski disk sa sunđerastom podlogom, za suvo i mokro brušenje.",
+    "longDescription": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom i zrnom aluminijum-oksida. Zavisno od granulacije koristi se od završnog brušenja punioca do matiranja površina, suvo i mokro, ručno ili mašinski. Sunđerasta podloga veoma nežno obrađuje strukturu površine i daje vrlo fin trag brušenja.",
+    "purpose": "Brušenje punioca, prelaz i matiranje površina",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Završno brušenje punioca",
+      "Prelaz (blending)",
+      "Matiranje površina",
+      "Pogodan za suvo i mokro brušenje",
+      "Ručna ili mašinska upotreba"
+    ],
+    "benefits": [
+      {
+        "title": "Nežna obrada",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Udobno brušenje",
+        "description": "Sunđerasta podloga čini brušenje udobnim."
+      }
+    ],
+    "advice": "Preporučuje se međučišćenje brusne površine mikrofiber krpom. Za mokro brušenje preporučuje se CS Sanding Water SW20.",
+    "variants": {
+      "156.509": "P600",
+      "156.510": "P800",
+      "156.511": "P1000",
+      "156.512": "P1200",
+      "156.513": "P1500",
+      "156.514": "P2000"
+    }
+  },
+  "abrasives/proflex-jupiter-soft-film-abrasive-75-mm-multihole": {
+    "sourceHash": "1fc4d9751a64b4e9",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 75 mm · multihole raspored rupa",
+    "shortDescription": "Ultrafleksibilni meki filmski disk sa sunđerastom podlogom za matiranje površina, suvo i mokro brušenje.",
+    "longDescription": "ProFlex Jupiter Soft je ultrafleksibilni filmski brusni disk sa fleksibilnom sunđerastom podlogom i zrnom od aluminijum-oksida. Sunđerasta podloga veoma nežno obrađuje strukturu površine i ostavlja finu sliku brušenja. Koristi se za matiranje površina, suvim i mokrim brušenjem, ručno ili mašinski.",
+    "purpose": "Matiranje površina suvim i mokrim brušenjem",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Matiranje površina",
+      "Pogodan za suvo i mokro brušenje",
+      "Ručna ili mašinska upotreba"
+    ],
+    "benefits": [
+      {
+        "title": "Nežna obrada površine",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Veoma fina slika brušenja",
+        "description": "Ostavlja veoma finu sliku brušenja."
+      },
+      {
+        "title": "Udobno brušenje",
+        "description": "Sunđerasta podloga omogućava udobno brušenje."
+      }
+    ],
+    "advice": "Preporučuje se međufazno čišćenje brušene površine mikrofiber krpom. Za mokro brušenje preporučuje se CS Sanding Water SW20.",
+    "variants": {
+      "156.522": "P1500",
+      "156.523": "P2000"
+    }
+  },
+  "abrasives/proflex-jupiter-soft-h2o-film-abrasive-152-mm-multi-hole": {
+    "sourceHash": "416b6dfcd17b0ecd",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 152 mm · Multihole raspored rupa",
+    "shortDescription": "Meki filmski disk sa sunđerastom podlogom za mokro brušenje u fazi finiša.",
+    "longDescription": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom i zrnom aluminijum-oksida, namenjen mokrom brušenju u fazi finiša. Sunđerasta podloga veoma nežno obrađuje strukturu površine i daje vrlo fin trag brušenja. Time se skraćuje i vreme poliranja.",
+    "purpose": "Mokro brušenje u fazi finiša",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Finiš",
+      "Izravnavanje uklonjenih nepravilnosti",
+      "Mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Nežna obrada",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Veoma fin trag brušenja skraćuje vreme poliranja."
+      },
+      {
+        "title": "Udobno brušenje",
+        "description": "Sunđerasta podloga čini brušenje udobnim."
+      }
+    ],
+    "advice": "Preporučuje se upotreba ProFlex Jupiter Soft H2O u kombinaciji sa CS Sanding Water SW20.",
+    "variants": {
+      "156.515": "P2500",
+      "156.516": "P3000",
+      "156.517": "P4000"
+    }
+  },
+  "abrasives/proflex-jupiter-soft-h2o-film-abrasive-77-mm-multihole": {
+    "sourceHash": "506bc913ba821b79",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 77 mm · Multihole raspored rupa",
+    "shortDescription": "Meki filmski disk od 77 mm sa sunđerastom podlogom za mokro brušenje u finišu.",
+    "longDescription": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom i zrnom aluminijum-oksida, namenjen mokrom brušenju u fazi finiša. Sunđerasta podloga veoma nežno obrađuje strukturu površine i daje vrlo fin trag brušenja. Time se skraćuje i vreme poliranja.",
+    "purpose": "Mokro brušenje u fazi finiša",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski disk sa fleksibilnom sunđerastom podlogom"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Finiš",
+      "Izravnavanje uklonjenih nepravilnosti",
+      "Mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Nežna obrada",
+        "description": "Struktura površine se obrađuje veoma nežno."
+      },
+      {
+        "title": "Kraće poliranje",
+        "description": "Veoma fin trag brušenja skraćuje vreme poliranja."
+      },
+      {
+        "title": "Udobno brušenje",
+        "description": "Sunđerasta podloga čini brušenje udobnim."
+      }
+    ],
+    "advice": "Preporučuje se upotreba ProFlex Jupiter Soft H2O u kombinaciji sa CS Sanding Water SW20.",
+    "variants": {
+      "156.524": "P2500",
+      "156.525": "P3000",
+      "156.526": "P4000"
+    }
+  },
+  "abrasives/proflex-mercury-film-abrasive-29-x-35-mm": {
+    "sourceHash": "e3e7e8de2842abe7",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 29 x 35 mm",
+    "shortDescription": "Samolepljivi brusni listići na filmskoj osnovi za uklanjanje nepravilnosti u laku.",
+    "longDescription": "Samolepljivi brusni listići na filmskoj osnovi, sa zrnom aluminijum-oksida, namenjeni uklanjanju nepravilnosti u površini. Odlikuje ih vrlo brzo uklanjanje nepravilnosti i njihovo naknadno izravnavanje u fazi finiša. Suva primena čini napredak brušenja odmah vidljivim.",
+    "purpose": "Uklanjanje i izravnavanje nepravilnosti u površini",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Brusni listići na filmskoj osnovi"
+      },
+      {
+        "label": "Pričvršćivanje",
+        "value": "Samolepljivi"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Uklanjanje nepravilnosti u površini",
+      "Finiš",
+      "Izravnavanje uklonjenih nepravilnosti"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo uklanjanje nepravilnosti",
+        "description": "Vrlo brzo uklanja nepravilnosti u površini."
+      },
+      {
+        "title": "Vidljiv napredak",
+        "description": "Suva primena čini napredak brušenja odmah vidljivim."
+      },
+      {
+        "title": "I veće površine",
+        "description": "Pogodan je i za nešto veće površine."
+      }
+    ],
+    "advice": "Preporučuje se upotreba blokova ProFlex Mercury, mekog ili tvrdog. Preporučuje se međučišćenje brusne površine mikrofiber krpom.",
+    "variants": {
+      "154.437": "P1500",
+      "153.460": "P2000",
+      "153.461": "P2500",
+      "153.462": "P3000"
+    }
+  },
+  "abrasives/proflex-mercury-sanding-block-sanding-block-27-x-33-x-15-mm": {
+    "sourceHash": "58ccde9e74727d8a",
+    "productType": "Brusni blok",
+    "subtype": "Brusni blok · 27 x 33 x 15 mm",
+    "shortDescription": "Gumeni brusni blok za ProFlex Mercury listiće, u dva stepena tvrdoće.",
+    "longDescription": "Gumeni blok namenjen radu sa ProFlex Mercury brusnim listićima kroz ceo proces finiša. Bira se između dva stepena tvrdoće, pa se meka izvedba koristi za izravnavanje nepravilnosti, a tvrda za izravnavanje uključaka prašine. Blok se koristi sa obe strane.",
+    "purpose": "Izravnavanje nepravilnosti i uključaka prašine",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Gumeni blok za rad sa ProFlex Mercury listićima"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Dva stepena: meki i tvrdi"
+      }
+    ],
+    "applications": [
+      "Meki: izravnavanje nepravilnosti (fleksibilniji)",
+      "Tvrdi: izravnavanje uključaka prašine"
+    ],
+    "benefits": [
+      {
+        "title": "Obostrana upotreba",
+        "description": "Blok se koristi sa obe strane."
+      },
+      {
+        "title": "Dva stepena tvrdoće",
+        "description": "Dva stepena tvrdoće pokrivaju ceo proces finiša."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.555": "Meki / crveni",
+      "154.173": "Tvrdi / crni"
+    }
+  },
+  "abrasives/proflex-neptune-film-abrasive-130-x-170-mm": {
+    "sourceHash": "7d29df54d6c5e5ae",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 130 x 170 mm",
+    "shortDescription": "Ultrafleksibilni meki filmski listić za brušenje teško dostupnih mesta i pregiba.",
+    "longDescription": "Ultrafleksibilni meki filmski brusni listić sa zrnom aluminijum-oksida, perforiran po sredini. Koristi se od završnog brušenja punioca i prelaza do matiranja i izravnavanja teško dostupnih mesta, najmanjih uglova, pregiba i udubljenja. Ultrafleksibilna osnova se u potpunosti prilagođava površini i daje veoma fin trag brušenja.",
+    "purpose": "Brušenje punioca, prelaz i obrada teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski brusni listić"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      },
+      {
+        "label": "Perforacija",
+        "value": "Perforiran po sredini"
+      }
+    ],
+    "applications": [
+      "Završno brušenje punioca",
+      "Prelaz (blending)",
+      "Matiranje i izravnavanje teško dostupnih mesta, najmanjih uglova, pregiba i udubljenja"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Ultrafleksibilna osnova se u potpunosti prilagođava površini."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      }
+    ],
+    "advice": "Preporučuje se upotreba podloški ProFlex Neptune Pads Max Grip.",
+    "variants": {
+      "153.472": "P600",
+      "153.473": "P800",
+      "154.454": "P1000",
+      "154.455": "P1200",
+      "153.474": "P1500"
+    }
+  },
+  "abrasives/proflex-neptune-pad-maxgrip-hand-pad-120-x-75-x-6-mm-multihole": {
+    "sourceHash": "58efef7a10e43132",
+    "productType": "Ručna podloška",
+    "subtype": "Ručna podloška · 120 x 75 x 6 mm · Multihole raspored rupa",
+    "shortDescription": "Sunđerasta ručna podloška sa mikro čičkom za sve Neptune brusne listiće.",
+    "longDescription": "Sunđerasta ručna podloška sa mikro čičkom (Velcro®), namenjena svim Neptune brusnim listićima. Stepen tvrdoće je meka – srednja, pa se podloška u potpunosti prilagođava površini i prijatno leži u ruci. Ne klizi i pogodna je za suvo i mokro brušenje, uz vrlo dobro odvođenje vode sa Neptune Soft listićima.",
+    "purpose": "Ručno brušenje Neptune brusnim listićima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđerasta ručna podloška"
+      },
+      {
+        "label": "Čičak",
+        "value": "Mikro čičak (Velcro®)"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Meka – srednja"
+      }
+    ],
+    "applications": [
+      "Ručna podloška za sve Neptune brusne listiće"
+    ],
+    "benefits": [
+      {
+        "title": "Ne klizi",
+        "description": "Podloška ne klizi tokom rada."
+      },
+      {
+        "title": "Suvo i mokro brušenje",
+        "description": "Pogodna je za suvo i mokro brušenje, uz vrlo dobro odvođenje vode (Neptune Soft)."
+      },
+      {
+        "title": "Prijatna u ruci",
+        "description": "Vrlo prijatan osećaj pri radu."
+      },
+      {
+        "title": "Prilagođavanje površini",
+        "description": "U potpunosti se prilagođava površini."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.097": "Meka – srednja"
+    }
+  },
+  "abrasives/proflex-neptune-soft-film-abrasive-130-x-85-mm-multihole": {
+    "sourceHash": "28c34e5f28e97063",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 130 x 85 mm · Multihole raspored rupa",
+    "shortDescription": "Meki filmski listić sa sunđerastom podlogom za suvo i mokro brušenje.",
+    "longDescription": "Ultrafleksibilni meki filmski listić sa fleksibilnom sunđerastom podlogom i zrnom aluminijum-oksida. Koristi se za završno brušenje punioca, prelaz i obradu teško dostupnih mesta, uglova, pregiba i udubljenja, suvo i mokro. Osnova se u potpunosti prilagođava površini, daje veoma fin trag brušenja i udoban rad.",
+    "purpose": "Brušenje punioca, prelaz i obrada teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Ultrafleksibilni meki filmski listić sa fleksibilnom sunđerastom podlogom"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Završno brušenje punioca",
+      "Prelaz (blending)",
+      "Matiranje i izravnavanje teško dostupnih mesta, najmanjih uglova, pregiba i udubljenja",
+      "Pogodan za suvo i mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Ultrafleksibilna osnova se u potpunosti prilagođava površini."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Udobno brušenje",
+        "description": "Sunđerasta podloga čini brušenje udobnim."
+      }
+    ],
+    "advice": "Preporučuje se međučišćenje brusne površine mikrofiber krpom. ProFlex Neptune Soft se preporučuje uz Carsystem ProFlex Neptune Pad MaxGrip. Kod mokre primene preporučuje se Carsystem Sanding Water SW20.",
+    "variants": {
+      "157.791": "P600",
+      "157.792": "P800",
+      "157.794": "P1000"
+    }
+  },
+  "abrasives/proflex-pluto-film-abrasive-34-mm": {
+    "sourceHash": "0cceed48e3d5cdd8",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 34 mm",
+    "shortDescription": "Samolepljivi rozetni disk na filmskoj osnovi za uklanjanje nepravilnosti u laku.",
+    "longDescription": "Samolepljivi rozetni disk na filmskoj osnovi, sa zrnom aluminijum-oksida, namenjen uklanjanju nepravilnosti u površini. Odlikuje ga vrlo brzo uklanjanje nepravilnosti i njihovo izravnavanje u fazi finiša. Suva primena čini napredak brušenja odmah vidljivim.",
+    "purpose": "Uklanjanje i izravnavanje nepravilnosti u površini",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "Rozetni disk na filmskoj osnovi"
+      },
+      {
+        "label": "Pričvršćivanje",
+        "value": "Samolepljivi"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Uklanjanje nepravilnosti u površini",
+      "Finiš",
+      "Izravnavanje uklonjenih nepravilnosti"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo uklanjanje nepravilnosti",
+        "description": "Vrlo brzo uklanja nepravilnosti u površini."
+      },
+      {
+        "title": "Vidljiv napredak",
+        "description": "Suva primena čini napredak brušenja odmah vidljivim."
+      }
+    ],
+    "advice": "Za mašinsko brušenje preporučuje se ProFlex Back Pad 30 mm PSA, a za ručni rad Pluto Sanding Blocks. Preporučuje se međučišćenje brusne površine mikrofiber krpom.",
+    "variants": {
+      "154.428": "P1500",
+      "154.429": "P2000",
+      "154.430": "P2500",
+      "154.431": "P3000",
+      "154.432": "P4000",
+      "154.433": "P5000"
+    }
+  },
+  "abrasives/proflex-pluto-sanding-block-sanding-block": {
+    "sourceHash": "dead17404a752313",
+    "productType": "Brusni blok",
+    "subtype": "Brusni blok",
+    "shortDescription": "Gumeni brusni blok za Pluto rozetne diskove, u dva stepena tvrdoće.",
+    "longDescription": "Gumeni blok namenjen radu sa Pluto rozetnim diskovima kroz ceo proces finiša. Bira se između dva stepena tvrdoće: meki za izravnavanje nepravilnosti, tvrdi za izravnavanje uključaka prašine. Blok se koristi sa obe strane, a zaobljene ivice pogoduju radu na zaobljenjima.",
+    "purpose": "Izravnavanje nepravilnosti i uključaka prašine",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Gumeni blok za rad sa Pluto rozetnim diskovima"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Dva stepena: meki i tvrdi"
+      }
+    ],
+    "applications": [
+      "Meki: izravnavanje nepravilnosti (fleksibilniji)",
+      "Tvrdi: izravnavanje uključaka prašine"
+    ],
+    "benefits": [
+      {
+        "title": "Obostrana upotreba",
+        "description": "Blok se koristi sa obe strane."
+      },
+      {
+        "title": "Dva stepena tvrdoće",
+        "description": "Dva stepena tvrdoće pokrivaju ceo proces finiša."
+      },
+      {
+        "title": "Zaobljene ivice",
+        "description": "Zaobljene ivice pogoduju radu na blagim zaobljenjima."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.557": "Meki / crveni",
+      "156.556": "Tvrdi / crni"
+    }
+  },
+  "abrasives/proflex-styx-film-abrasive-oe-32-mm": {
+    "sourceHash": "a0d21c14bb2c94a3",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · Ø 32 mm",
+    "shortDescription": "Samolepljivi filmski rozetni disk Ø 32 mm za ciljano brušenje tačkastih defekata.",
+    "longDescription": "Filmski brusni disk namenjen ciljanom brušenju tačkastih defekata kao što su uključci u laku, ogrebotine i druge nepravilnosti površine. Samolepljiva osnova i rezna moć omogućavaju brzu i preciznu obradu do završnog finiša. Posebno je pogodan za mokro brušenje, a granulacija P3000 može da se koristi kao One-Step rešenje.",
+    "purpose": "Ciljano uklanjanje tačkastih nepravilnosti i finiš",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "Rozetni disk na filmskoj osnovi"
+      },
+      {
+        "label": "Pričvršćivanje",
+        "value": "Samolepljivi"
+      }
+    ],
+    "applications": [
+      "Uklanjanje nepravilnosti u površini",
+      "Finiš",
+      "Izravnavanje uklonjenih nepravilnosti",
+      "Posebno pogodan za mokro brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo uklanjanje nepravilnosti",
+        "description": "Vrlo brzo uklanja nepravilnosti u površini."
+      },
+      {
+        "title": "P3000 kao One-Step",
+        "description": "Granulacija P3000 može da se koristi kao One-Step rešenje."
+      }
+    ],
+    "advice": "Za mašinsko brušenje preporučuje se ProFlex Back Pad 30 mm PSA ili IFP Grip To Stick 30 mm. Preporučuje se i redovno međučišćenje ili vlaženje abraziva.",
+    "variants": {
+      "159.738": "petrol plava / P1500",
+      "159.739": "sivo-zelena / P3000"
+    }
+  },
+  "abrasives/rupes-back-pad-back-pad-150-mm": {
+    "sourceHash": "307b4ed804a06620",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Podloška · 150 mm",
+    "shortDescription": "Tvrda podloška od 150 mm sa multihole rasporedom rupa, u dve izvedbe navoja.",
+    "longDescription": "Podloška sa posebnim multihole rasporedom rupa: standardni raspored od 15 rupa dopunjen je sa 10 dodatnih rupa radi boljeg odvođenja prašine. Izvedba je tvrda, a bira se između dva navoja, M8 i 5/16\". Navoj M8 odgovara RUPES TA-ER-BR-RH mašinama, a 5/16\" modelu RUPES Skorpio E RX.",
+    "purpose": "Podloška za RUPES brusilice",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Podloška sa multihole rasporedom rupa"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tvrda"
+      },
+      {
+        "label": "Navoj M8",
+        "value": "RUPES TA-ER-BR-RH mašine"
+      },
+      {
+        "label": "Navoj 5/16\"",
+        "value": "RUPES Skorpio E RX"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.291": "Rupes 981.500 – M8 / 150 mm",
+      "158.292": "Rupes 981.600 / 5/16\" / 150 mm"
+    }
+  },
+  "abrasives/rupes-ibrid-nano-battery-operated-mini-sanding-and-polishing-machine": {
+    "sourceHash": "4bcd5941be3809a3",
+    "productType": "Akumulatorska mini brusilica",
+    "subtype": "Akumulatorska mini mašina za brušenje i poliranje",
+    "shortDescription": "Akumulatorska mini brusilica sa autonomijom rada od oko 30 min.",
+    "longDescription": "Akumulatorska mini mašina za brušenje i poliranje, isporučuje se sa jedinicom orbite od 12 mm i čičak podloškom od 50 mm. Broj obrtaja je podesiv do 5.000 o/min, a autonomija rada iznosi oko 30 min. Punjenje traje oko 20 min.",
+    "purpose": "Mašinsko brušenje i poliranje manjih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akumulatorska mini brusilica"
+      },
+      {
+        "label": "Isporuka",
+        "value": "Jedinica sa orbitom od 12 mm i čičak (Velcro®) podloška 50 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 5.000 o/min"
+      },
+      {
+        "label": "Autonomija",
+        "value": "Oko 30 min"
+      },
+      {
+        "label": "Punjenje",
+        "value": "Oko 20 min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.318": "HR81M / STB Ibrid Nano kratak vrat",
+      "157.319": "HR81ML / STB Ibrid Nano dugačak vrat",
+      "158.370": "Polir sunđer 9.DA 40S / ekstra fini / beli",
+      "157.718": "Polir sunđer 9.DA 40M / fini / žuti",
+      "157.717": "Polir sunđer 9.DA 40H / tvrdi / plavi",
+      "157.784": "Podloška 995.001C / čičak (Velcro®) rozetni diskovi / 30 mm",
+      "157.785": "Podloška 996.001C / čičak (Velcro®) rozetni diskovi / 50 mm",
+      "157.786": "Podloška 997.001C / samolepljivi rozetni diskovi / 30 mm",
+      "157.787": "Rotaciona jedinica 562.390",
+      "157.788": "Jedinica sa orbitom / 3 mm"
+    }
+  },
+  "abrasives/rupes-ibrid-nano-q-maq-battery-operated-mini-sanding-and-polishing-machine": {
+    "sourceHash": "aca1e98b7d08bfea",
+    "productType": "Akumulatorska ekscentrična brusilica",
+    "subtype": "Akumulatorska mini mašina za brušenje i poliranje",
+    "shortDescription": "Akumulatorska ekscentrična brusilica sa orbitom 2 mm i autonomijom od oko 30 min.",
+    "longDescription": "Akumulatorska ekscentrična brusilica sa orbitom od 2 mm i čičak podloškom prečnika 75 mm. Broj obrtaja je podesiv do 5.000 o/min, a autonomija rada iznosi oko 30 min. Punjenje traje oko 20 min.",
+    "purpose": "Mašinsko brušenje i poliranje manjih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akumulatorska ekscentrična brusilica"
+      },
+      {
+        "label": "Orbita",
+        "value": "2 mm"
+      },
+      {
+        "label": "Čičak podloška",
+        "value": "Ø 75 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 5.000 o/min"
+      },
+      {
+        "label": "Autonomija",
+        "value": "Oko 30 min"
+      },
+      {
+        "label": "Punjenje",
+        "value": "Oko 20 min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.320": "MAQ HQM83 / STB / Ibrid Nano Q-MAG",
+      "157.644": "Podloška / 75 mm"
+    }
+  },
+  "abrasives/rupes-mini-random-orbital-sander-ld30-mini-random-orbital-sander-pneumatic": {
+    "sourceHash": "fc94355ad394fd77",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Mini ekscentrična brusilica · pneumatska",
+    "shortDescription": "Pneumatska mini ekscentrična brusilica sa prečnikom orbite 1.5 mm i podloškom od 30 mm.",
+    "longDescription": "RUPES LD30 je pneumatska mini ekscentrična brusilica sa prečnikom orbite 1.5 mm. Opremljena je čičak (Velcro®) podloškom prečnika 30 mm. Broj obrtaja je podesiv do 7,500 o/min.",
+    "purpose": "Brušenje manjih površina pneumatskom mini brusilicom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska mini ekscentrična brusilica"
+      },
+      {
+        "label": "Prečnik orbite",
+        "value": "1.5 mm"
+      },
+      {
+        "label": "Podloška",
+        "value": "Čičak (Velcro®) podloška: 30 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 7,500 o/min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.330": "LD30 / prečnik orbite 1.5 mm"
+    }
+  },
+  "abrasives/rupes-orbital-sander-re21aln-orbital-sander-pneumatic": {
+    "sourceHash": "e54f955437b56e9c",
+    "productType": "Vibraciona brusilica",
+    "subtype": "Vibraciona brusilica · pneumatska",
+    "shortDescription": "Pneumatska vibraciona brusilica za rad jednom rukom, za trake 70 x 198 mm.",
+    "longDescription": "Pneumatska vibraciona brusilica predviđena za rad jednom rukom i brusne trake dimenzija 70 x 198 mm. Orbita iznosi 3 mm, a broj obrtaja je podesiv do 11.000 o/min.",
+    "purpose": "Brušenje brusnim trakama 70 x 198 mm",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska vibraciona brusilica za rad jednom rukom"
+      },
+      {
+        "label": "Orbita",
+        "value": "3 mm"
+      },
+      {
+        "label": "Dimenzija",
+        "value": "70 x 198 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 11.000 o/min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.454": "RE21ALN / orbita 3 mm",
+      "157.558": "Brusna ploča 988.001MH / 70 x 198 mm"
+    }
+  },
+  "abrasives/rupes-orbital-sander-sl42aes-orbital-sander-electric": {
+    "sourceHash": "ea8e30c0850e1be0",
+    "productType": "Vibraciona brusilica",
+    "subtype": "Vibraciona brusilica · električna",
+    "shortDescription": "Električna vibraciona brusilica za brusne trake dimenzija 70 x 400 mm.",
+    "longDescription": "Električna vibraciona brusilica za brusne trake dimenzija 70 x 400 mm. Orbita iznosi 4.8 mm, a broj obrtaja je podesiv do 7.000 o/min. Snaga motora je 550 W.",
+    "purpose": "Brušenje brusnim trakama 70 x 400 mm",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Električna vibraciona brusilica"
+      },
+      {
+        "label": "Orbita",
+        "value": "4.8 mm"
+      },
+      {
+        "label": "Dimenzija",
+        "value": "70 x 400 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 7.000 o/min"
+      },
+      {
+        "label": "Snaga",
+        "value": "550 W"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.329": "SL42AES / orbita 4.8 mm"
+    }
+  },
+  "abrasives/rupes-orbital-sander-slp41a-orbital-sander-pneumatic": {
+    "sourceHash": "a45a4e95c69f4f0c",
+    "productType": "Vibraciona brusilica",
+    "subtype": "Vibraciona brusilica · pneumatska",
+    "shortDescription": "Pneumatska vibraciona brusilica za brusne trake dimenzija 70 x 400 mm.",
+    "longDescription": "Pneumatska vibraciona brusilica za brusne trake dimenzija 70 x 400 mm. Orbita iznosi 4.8 mm, a broj obrtaja je podesiv do 10.000 o/min.",
+    "purpose": "Brušenje brusnim trakama 70 x 400 mm",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska vibraciona brusilica"
+      },
+      {
+        "label": "Orbita",
+        "value": "4.8 mm"
+      },
+      {
+        "label": "Dimenzija",
+        "value": "70 x 400 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 10.000 o/min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.337": "SLP41A / orbita 4.8 mm",
+      "157.559": "Gumena ploča 619.153MH / 70 x 400 mm"
+    }
+  },
+  "abrasives/rupes-random-orbital-sander-er-random-orbital-sander-electric": {
+    "sourceHash": "e531447dd0f6c7e3",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica · električna",
+    "shortDescription": "Električna ekscentrična brusilica ER303TE i ER305TE sa podloškom od 150 mm i multihole rasporedom rupa.",
+    "longDescription": "Ekscentrične brusilice ER303TE i ER305TE odlikuju se tihim radom i ergonomskim oblikom. Presvlaka kućišta obezbeđuje siguran zahvat i dobro vođenje mašine. Dostupne su sa hodom od 3 mm i 5 mm, čičak (Velcro®) podloškom od 150 mm i multihole rasporedom rupa, uz broj obrtaja podesiv do 10,000 o/min.",
+    "purpose": "Mašinsko brušenje električnom ekscentričnom brusilicom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Ekscentrična brusilica — električna"
+      },
+      {
+        "label": "Hod",
+        "value": "3 mm / 5 mm"
+      },
+      {
+        "label": "Podloška",
+        "value": "Čičak (Velcro®) podloška: 150 mm"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 10,000 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M-8F"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.283": "ER303TE / prečnik orbite 3 mm",
+      "158.284": "ER305TE / prečnik orbite 5 mm"
+    }
+  },
+  "abrasives/rupes-random-orbital-sander-ta50-random-orbital-sander-pneumatic": {
+    "sourceHash": "6989ff911cff4f2c",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica · pneumatska",
+    "shortDescription": "Pneumatska mini ekscentrična brusilica sa prečnikom orbite 3 mm i podloškom od 50 mm.",
+    "longDescription": "RUPES TA50 je pneumatska mini ekscentrična brusilica sa prečnikom orbite 3 mm. Isporučuje se sa RUPES čičak (Velcro®) podloškom prečnika 50 mm i navojem M6. Broj obrtaja je podesiv do 15,000 o/min.",
+    "purpose": "Brušenje pneumatskom mini ekscentričnom brusilicom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska mini ekscentrična brusilica"
+      },
+      {
+        "label": "Prečnik orbite",
+        "value": "3 mm"
+      },
+      {
+        "label": "Podloška",
+        "value": "U kompletu RUPES čičak (Velcro®) podloška: 50 mm"
+      },
+      {
+        "label": "Opciona podloška",
+        "value": "Dostupna RUPES čičak (Velcro®) podloška 9P01.055: 75 mm, art. br. 159.007"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 15,000 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M6"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Može se koristiti i RUPES čičak (Velcro®) podloška 9P01.055 prečnika Ø 75 mm sa navojem M6 (CS art. br. 159.007).",
+    "variants": {
+      "157.338": "TA50 / prečnik orbite 3 mm",
+      "159.007": "9P01.055 / M6 / 75 mm"
+    }
+  },
+  "abrasives/rupes-random-orbital-single-hand-sander-ra75-random-orbital-sander-pneumatic": {
+    "sourceHash": "15003fa5769520aa",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica · pneumatska",
+    "shortDescription": "Pneumatska ekscentrična brusilica za rad jednom rukom, sa podloškom Ø 75 mm.",
+    "longDescription": "Pneumatska ekscentrična brusilica predviđena za rad jednom rukom. Orbita iznosi 3 mm, a čičak podloška ima prečnik 75 mm. Broj obrtaja je podesiv do 11.000 o/min, uz navoj 5/16\".",
+    "purpose": "Ekscentrično brušenje jednom rukom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska ekscentrična brusilica za rad jednom rukom"
+      },
+      {
+        "label": "Orbita",
+        "value": "3 mm"
+      },
+      {
+        "label": "Čičak podloška",
+        "value": "Ø 75 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 11.000 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "5/16\""
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.333": "RA75 / orbita 3 mm",
+      "147.663": "Rupes čičak podloška 5/16'' – RA75 meka"
+    }
+  },
+  "abrasives/rupes-skorpio-e-rx-random-orbital-sander-electric": {
+    "sourceHash": "31dc604b7414452f",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica · električna",
+    "shortDescription": "Električna ekscentrična brusilica za rad jednom rukom, sa podloškom Ø 150 mm.",
+    "longDescription": "Električna ekscentrična brusilica predviđena za rad jednom rukom, sa čičak podloškom prečnika 150 mm. Dostupna je sa orbitom od 3 mm ili 6 mm, uz unutrašnji navoj 5/16\". Broj obrtaja je podesiv do 10.000 o/min, a snaga motora iznosi 250 W.",
+    "purpose": "Ekscentrično brušenje jednom rukom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Električna ekscentrična brusilica za rad jednom rukom"
+      },
+      {
+        "label": "Orbita",
+        "value": "3 mm / 6 mm"
+      },
+      {
+        "label": "Čičak podloška",
+        "value": "Ø 150 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 10.000 o/min"
+      },
+      {
+        "label": "Unutrašnji navoj",
+        "value": "5/16\""
+      },
+      {
+        "label": "Snaga",
+        "value": "250 W"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.326": "RX253A / orbita 3 mm",
+      "157.328": "RX256A / orbita 6 mm"
+    }
+  },
+  "abrasives/rupes-skorpio-iii-rh-random-orbital-sander-pneumatic": {
+    "sourceHash": "80d1026f8cd3a1be",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Ekscentrična brusilica · pneumatska",
+    "shortDescription": "Pneumatska ekscentrična brusilica za rad jednom rukom, sa podloškom Ø 150 mm.",
+    "longDescription": "Pneumatska ekscentrična brusilica predviđena za rad jednom rukom, sa čičak podloškom prečnika 150 mm. Dostupna je sa orbitom od 3 mm, 6 mm ili 9 mm i navojem M8. Broj obrtaja je podesiv do 11.000 o/min.",
+    "purpose": "Ekscentrično brušenje jednom rukom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska ekscentrična brusilica za rad jednom rukom"
+      },
+      {
+        "label": "Orbita",
+        "value": "3 mm / 6 mm / 9 mm"
+      },
+      {
+        "label": "Čičak podloška",
+        "value": "Ø 150 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 11.000 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M8"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.334": "RH353A / orbita 3 mm",
+      "157.335": "RH356A / orbita 6 mm"
+    }
+  },
+  "abrasives/sanding-block-100-20-hand-sanding-velcror": {
+    "sourceHash": "90171de11b857320",
+    "productType": "Brusni blok",
+    "subtype": "Ručno brušenje · čičak (Velcro®)",
+    "shortDescription": "Ručni brusni blok sa čičkom i integrisanim odvođenjem prašine, 70 x 100 mm.",
+    "longDescription": "Ručni brusni blok sa čičkom (Velcro®) i integrisanim odvođenjem prašine. Namenjen je radu sa trakama Sanding Strips F.23 Ceramic i Sanding Strips P.25 Ceramic (svaka sa 1 otkidanjem) i daje ravnomeran, kontrolisan rezultat brušenja. Gumirana ručka obezbeđuje udobnost i kontrolu, dok odvođenje prašine znatno smanjuje njeno stvaranje. Namenjen je preciznom brušenju u radionicama i lakirnicama.",
+    "purpose": "Ručno brušenje trakama Sanding Strips F.23 Ceramic",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Ručni brusni blok sa odvođenjem prašine"
+      }
+    ],
+    "applications": [
+      "Za rad sa trakama Sanding Strips F.23 Ceramic (1 otkidanje)"
+    ],
+    "benefits": [
+      {
+        "title": "Gumirane ručke",
+        "description": "Gumirane ručke daju veću kontrolu tokom brušenja."
+      },
+      {
+        "title": "Optimizovano usisavanje",
+        "description": "Optimizovano usisavanje sprečava zapušavanje abraziva."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.224": "70 x 100 mm – sa usisavanjem"
+    }
+  },
+  "abrasives/sanding-block-198-20-hand-sanding-velcror": {
+    "sourceHash": "f981d6bd64bb798d",
+    "productType": "Ručni brusni blok",
+    "subtype": "Ručno brušenje · čičak (Velcro®)",
+    "shortDescription": "Ručni brusni blok sa odsisom prašine za rad sa brusnim trakama F.23 Ceramic, P.25 Ceramic i N20.",
+    "longDescription": "Sanding Block 198 2.0 je ručni brusni blok sa odsisom prašine. Koristi se sa brusnim trakama Carsystem F.23 Ceramic i P.25 Ceramic, kao i sa mrežastim trakama N20. Gumirane drške daju bolju kontrolu tokom brušenja, a optimizovan odsis sprečava zapušavanje abraziva.",
+    "purpose": "Ručno brušenje sa odsisom prašine",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Ručni brusni blok sa odsisom prašine"
+      }
+    ],
+    "applications": [
+      "Za rad sa brusnim trakama Carsystem F.23 Ceramic, P.25 Ceramic i mrežastim trakama N20"
+    ],
+    "benefits": [
+      {
+        "title": "Gumirane drške",
+        "description": "Gumirane drške daju veću kontrolu tokom brušenja."
+      },
+      {
+        "title": "Optimizovan odsis",
+        "description": "Optimizovan odsis sprečava zapušavanje abraziva."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.535": "Multihole raspored rupa / 70 x 198 mm"
+    }
+  },
+  "abrasives/sanding-block-198-kit-hand-sanding-block-set-velcror": {
+    "sourceHash": "8824b3711dcd11db",
+    "productType": "Set ručnih brusnih blokova",
+    "subtype": "Set ručnih brusnih blokova · čičak (Velcro®)",
+    "shortDescription": "Set plastičnog ručnog brusnog bloka sa 4 zamenjive osnovne ploče za ravne, konkavne i konveksne površine.",
+    "longDescription": "Sanding Block 198 Kit je set plastičnog ručnog brusnog bloka sa četiri zamenjive osnovne ploče za ravne, konkavne i konveksne površine. Odsis prašine je podesiv, a multihole raspored rupa odgovara uobičajenim brusnim trakama. Blok se koristi sa brusnim trakama P.19 dimenzije 70 x 198 mm.",
+    "purpose": "Ručno brušenje ravnih, konkavnih i konveksnih površina",
+    "facts": [
+      {
+        "label": "Sadržaj",
+        "value": "Set ručnih brusnih blokova sa podesivim odsisom prašine"
+      },
+      {
+        "label": "Osnovne ploče",
+        "value": "Četiri zamenjive, za ravne, konkavne i konveksne površine"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole raspored rupa za sve uobičajene brusne trake"
+      }
+    ],
+    "applications": [
+      "Za rad sa keramičkim brusnim trakama Carsystem F.23 i P.25 dimenzije 70 x 198 mm i mrežastim trakama N20"
+    ],
+    "benefits": [
+      {
+        "title": "Četiri zamenjive ploče",
+        "description": "Četiri zamenjive osnovne ploče pokrivaju ravne, konkavne i konveksne površine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "148.702": "22 rupe / 70 x 198 mm"
+    }
+  },
+  "abrasives/sanding-block-300-100-hand-sanding-block-velcror": {
+    "sourceHash": "319dc2b7f82d3b78",
+    "productType": "Ručni brusni blok",
+    "subtype": "Ručni brusni blok · čičak (Velcro®)",
+    "shortDescription": "Ručni brusni blok od sunđera srednje čvrstine sa čičkom, za mokro i suvo brušenje raznih podloga.",
+    "longDescription": "Sanding Block 300 je ručni brusni blok za brušenje drveta, metala i drugih materijala. Ergonomski oblik omogućava laku kontrolu nad procesom brušenja, a fleksibilan sunđerasti blok prilagođava se različitim delovima i konturama vozila. Koristi se za pripremu površina pred lakiranje, uklanjanje starih premaza i izravnavanje neravnina. Dužina od 300 milimetara odgovara trima odsečcima traka F.23 Ceramic.",
+    "purpose": "Ručno brušenje sa brusnim trakama F.23 i P.25 Ceramic",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Sunđer srednje čvrstine sa čičkom (Velcro®)"
+      },
+      {
+        "label": "Drška",
+        "value": "Drška po celom obimu bloka"
+      }
+    ],
+    "applications": [
+      "Za rad sa brusnim trakama F.23 i P.25 Ceramic",
+      "1-3 odsečka"
+    ],
+    "benefits": [
+      {
+        "title": "Mokro i suvo brušenje",
+        "description": "Pogodan je za mokro i suvo brušenje."
+      },
+      {
+        "title": "Siguran hvat",
+        "description": "Drška po celom obimu obezbeđuje siguran hvat."
+      },
+      {
+        "title": "Prati konturu vozila",
+        "description": "Prilagođava se svakoj konturi vozila."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.172": "70 x 100 mm",
+      "159.571": "70 x 300 mm"
+    }
+  },
+  "abrasives/sanding-block-400-20-hand-sanding-block-400-20": {
+    "sourceHash": "00b39c38dd0c5681",
+    "productType": "Ručni brusni blok",
+    "subtype": "Ručni brusni blok 400 2.0",
+    "shortDescription": "Plastični ručni brusni blok sa odsisom i gumiranim drškama, usklađen sa trakama F.23 i P.25 Ceramic.",
+    "longDescription": "Sanding Block 400 2.0 je naslednik modela Sanding Block 400 Grip. Plastični ručni brusni blok sa odsisom ima ergonomske, gumirane drške za sigurno vođenje pri brušenju drveta, metala i drugih materijala. Optimizovan raspored rupa usklađen je sa četiri odsečka brusnih traka F.23 CERAMIC.",
+    "purpose": "Ručno brušenje sa odsisom prašine",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Plastika"
+      },
+      {
+        "label": "Odsis",
+        "value": "Optimizovan i usklađen sa rasporedom rupa traka F.23 i P.25 Ceramic"
+      },
+      {
+        "label": "Drške",
+        "value": "Gumirane"
+      }
+    ],
+    "applications": [
+      "Za rad sa brusnim trakama Carsystem F.23 Ceramic, P.25 Ceramic i mrežastim trakama Carsystem N20"
+    ],
+    "benefits": [
+      {
+        "title": "Gumirane drške",
+        "description": "Gumirane drške daju veću kontrolu tokom brušenja."
+      },
+      {
+        "title": "Optimizovan odsis",
+        "description": "Optimizovan odsis sprečava zapušavanje abraziva."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.534": "Multihole raspored rupa / 70 x 400 mm"
+    }
+  },
+  "abrasives/sanding-block-400-grip-flex-hand-sanding-block-velcror": {
+    "sourceHash": "bc553abdd451a3d7",
+    "productType": "Ručni brusni blok",
+    "subtype": "Ručni brusni blok · čičak (Velcro®)",
+    "shortDescription": "Fleksibilni plastični ručni brusni blok sa odsisom, podesiv u konkavni i konveksni oblik.",
+    "longDescription": "Sanding Block 400 Grip Flex je fleksibilna plastična brusna letva sa odsisom prašine koja se može podesiti i konkavno i konveksno. Time pokriva ravne i zakrivljene površine na vozilu. Koristi se sa brusnim trakama P.19 dimenzije 70 x 400 mm i mrežastim trakama N20.",
+    "purpose": "Ručno brušenje ravnih, konkavnih i konveksnih površina",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Fleksibilna ručna brusna letva sa odsisom prašine"
+      },
+      {
+        "label": "Podešavanje",
+        "value": "Slobodno podesiva za konkavne i konveksne površine"
+      }
+    ],
+    "applications": [
+      "Za rad sa keramičkim brusnim trakama Carsystem F.23 i P.25 i mrežastim trakama Carsystem N20"
+    ],
+    "benefits": [
+      {
+        "title": "Ravne i zakrivljene površine",
+        "description": "Pogodna je za ravne, konkavne i konveksne površine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "150.088": "14 rupa / 70 x 400 mm"
+    }
+  },
+  "abrasives/sanding-block-disc-kit-150-hand-sanding-block-set-velcror": {
+    "sourceHash": "82af0a713e35afc9",
+    "productType": "Set ručnih brusnih blokova",
+    "subtype": "Set ručnih brusnih blokova · čičak (Velcro®)",
+    "shortDescription": "Set plastičnog ručnog brusnog bloka sa 4 zamenjive ploče, za brusne diskove od 150 mm sa čičkom.",
+    "longDescription": "Sanding Block Disc Kit 150 je set plastičnog ručnog brusnog bloka sa četiri zamenjive osnovne ploče za ravne, konkavne i konveksne površine. Odsis prašine je podesiv preko ventila, a multihole raspored rupa odgovara uobičajenim brusnim diskovima. Blok se koristi sa brusnim diskovima prečnika 150 mm sa čičkom (Velcro®).",
+    "purpose": "Ručno brušenje brusnim diskovima od 150 mm",
+    "facts": [
+      {
+        "label": "Sadržaj",
+        "value": "Set ručnih brusnih blokova sa podesivim odsisom prašine"
+      },
+      {
+        "label": "Osnovne ploče",
+        "value": "Četiri zamenjive, za ravne, konkavne i konveksne površine"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole raspored rupa za sve uobičajene brusne diskove"
+      }
+    ],
+    "applications": [
+      "Za rad sa brusnim diskovima od 150 mm sa čičkom (Velcro®)"
+    ],
+    "benefits": [
+      {
+        "title": "Četiri zamenjive ploče",
+        "description": "Četiri zamenjive osnovne ploče pokrivaju ravne, konkavne i konveksne površine."
+      },
+      {
+        "title": "Podesiv odsis",
+        "description": "Ventil za odsis prašine je podesiv."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "151.904": "150 mm / 15 rupa"
+    }
+  },
+  "abrasives/sanding-block-grip-box-hand-sanding-blocks-velcror": {
+    "sourceHash": "e2ce7f83f8af8474",
+    "productType": "Set ručnih brusnih blokova",
+    "subtype": "Ručni brusni blokovi · čičak (Velcro®)",
+    "shortDescription": "Set od četiri poliuretanska ručna brusna bloka za ravne, konkavne i konveksne površine.",
+    "longDescription": "Sanding Block Box Grip je set ručnih brusnih blokova od poliuretana sa četiri različita bloka za ravne, konkavne i konveksne površine. Blokovi se koriste sa brusnim diskovima prečnika 150 mm sa čičkom (Velcro®).",
+    "purpose": "Ručno brušenje brusnim diskovima od 150 mm",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Poliuretan"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "Četiri različita bloka, za ravne, konkavne i konveksne površine"
+      }
+    ],
+    "applications": [
+      "Za rad sa brusnim diskovima od 150 mm sa čičkom (Velcro®)"
+    ],
+    "benefits": [
+      {
+        "title": "Blokovi za svaku površinu",
+        "description": "Blokovi pokrivaju ravne, konkavne i konveksne površine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "142.009": "Čičak (Velcro®) 150 mm"
+    }
+  },
+  "abrasives/sanding-block-grip-hand-sanding-block-velcror": {
+    "sourceHash": "8fb6f594df2e8ab9",
+    "productType": "Ručni brusni blok",
+    "subtype": "Ručni brusni blok · čičak (Velcro®)",
+    "shortDescription": "Poliuretanski ručni brusni blok za brusne diskove od 150 mm sa čičkom (Velcro®).",
+    "longDescription": "Sanding Block Grip je ručni brusni blok od poliuretana. Koristi se sa diskovima prečnika 150 mm sa čičkom (Velcro®).",
+    "purpose": "Ručno brušenje diskovima od 150 mm",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Poliuretan"
+      }
+    ],
+    "applications": [
+      "Za rad sa diskovima od 150 mm sa čičkom (Velcro®)"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "137.439": "150 mm"
+    }
+  },
+  "abrasives/sanding-block-hard-hand-sanding-block-hard": {
+    "sourceHash": "91b0bac6c7609939",
+    "productType": "Ručni brusni blok",
+    "subtype": "Ručni brusni blok · tvrdi",
+    "shortDescription": "Tvrdi gumeni brusni blok za izravnavanje površina, za mokro i suvo brušenje.",
+    "longDescription": "Sanding Block Hard je brusni blok od tvrde gume namenjen izravnavanju površina. Može se koristiti i mokro i suvo.",
+    "purpose": "Izravnavanje površina mokrim i suvim brušenjem",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Tvrda guma"
+      }
+    ],
+    "applications": [
+      "Izravnavanje površina",
+      "Mokro i suvo brušenje"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "137.431": "125 mm x 70 mm"
+    }
+  },
+  "abrasives/sanding-disc-f19-film-abrasive-77-mm": {
+    "sourceHash": "353842461e0a64cf",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 77 mm",
+    "shortDescription": "Brusni disk na filmskoj podlozi sa zrnom aluminijum-oksida, za grubo do fino brušenje.",
+    "longDescription": "Sanding Disc F.19 je brusni disk visokog učinka na filmskoj podlozi, sa veoma visokom i dugotrajnom reznom moći. Dostupan je u više granulacija, pa pokriva radove od grubog do finog brušenja. Zrno je od aluminijum-oksida.",
+    "purpose": "Brušenje od grube do fine obrade",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Brusni disk visokog učinka na filmskoj podlozi"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Pogodan za grubo do fino brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka rezna moć",
+        "description": "Veoma visoka i dugotrajna rezna moć."
+      },
+      {
+        "title": "Univerzalna primena",
+        "description": "Univerzalni brusni disk visokog učinka."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.647": "P80",
+      "156.648": "P120",
+      "156.649": "P150",
+      "156.650": "P180",
+      "156.651": "P220",
+      "156.652": "P240",
+      "156.653": "P320",
+      "156.654": "P400",
+      "156.655": "P500",
+      "156.903": "P800"
+    }
+  },
+  "abrasives/sanding-disc-f19-finish-film-abrasive-77-mm": {
+    "sourceHash": "19162d90c7e9c1ea",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 77 mm",
+    "shortDescription": "Brusni disk na filmskoj podlozi sa specijalnim premazom, za prelaz, matiranje i finiš.",
+    "longDescription": "Sanding Disc F.19 Finish je brusni disk visokog učinka na filmskoj podlozi sa specijalnim premazom. Premaz daje ekstra fin i ravnomeran trag brušenja i omogućava brzo uklanjanje strukture površine i nesavršenosti. Koristi se za prelaz (blending), matiranje površina i završnu obradu. Zrno je od aluminijum-oksida.",
+    "purpose": "Prelaz, matiranje i uklanjanje nesavršenosti",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Brusni disk visokog učinka na filmskoj podlozi"
+      },
+      {
+        "label": "Premaz",
+        "value": "Specijalni premaz"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Prelaz (blending)",
+      "Matiranje površina",
+      "Finiš (uklanjanje nesavršenosti)"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo uklanjanje nesavršenosti",
+        "description": "Veoma brzo uklanja strukturu površine i nesavršenosti."
+      },
+      {
+        "title": "Ravnomeran trag brušenja",
+        "description": "Specijalni premaz daje ekstra fin i ravnomeran trag brušenja."
+      },
+      {
+        "title": "Izravnavanje prelazne zone",
+        "description": "Precizno izravnava prelaznu zonu između novog i starog sloja boje."
+      },
+      {
+        "title": "Kraća dorada",
+        "description": "Smanjuje vreme dorade u završnom procesu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.904": "P1500",
+      "156.905": "P2000"
+    }
+  },
+  "abrasives/sanding-disc-f19-soft-film-abrasive-152-mm-multi-hole": {
+    "sourceHash": "f1c80bd8fa05ae8c",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · 152 mm · multihole raspored rupa",
+    "shortDescription": "Brusni disk na filmskoj podlozi sa sunđerastim naličjem, za završno brušenje punioca i matiranje.",
+    "longDescription": "Sanding Disc F.19 Soft je brusni disk visokog učinka na filmskoj podlozi sa sunđerastim naličjem i veoma visokom, dugotrajnom reznom moći. Namenjen je završnom brušenju punioca, prelazu i matiranju površina. Sunđerasto naliče čini brušenje udobnijim, a zrno je od aluminijum-oksida.",
+    "purpose": "Završno brušenje punioca, prelaz i matiranje",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Brusni disk visokog učinka na filmskoj podlozi sa sunđerastim naličjem"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole raspored rupa"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Završno brušenje punioca",
+      "Prelaz (blending)",
+      "Matiranje površina"
+    ],
+    "benefits": [
+      {
+        "title": "Ravnomerno brušenje",
+        "description": "Struktura površine se brusi ravnomerno."
+      },
+      {
+        "title": "Visoka rezna moć",
+        "description": "Veoma visoka i dugotrajna rezna moć."
+      },
+      {
+        "title": "Udobno brušenje",
+        "description": "Sunđerasto naliče čini brušenje udobnijim."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.933": "P320",
+      "156.934": "P400",
+      "156.935": "P500",
+      "156.936": "P600",
+      "156.937": "P800"
+    }
+  },
+  "abrasives/sanding-disc-p25-ceramic-paper-abrasive-150-mm-25-holes": {
+    "sourceHash": "5313502cf00c6913",
+    "productType": "Papirni abraziv",
+    "subtype": "Papirni abraziv · 150 mm · 25 rupa",
+    "shortDescription": "Keramički brusni disk sa Carsystem rasporedom od 25 rupa, za radove od grubog do finog brušenja.",
+    "longDescription": "Sanding Disc P.25 Ceramic je brusni disk visokog učinka sa Carsystem rasporedom od 25 rupa i ovalnim centralnim otvorom. Keramičko zrno obezbeđuje vrlo efikasno skidanje materijala i dug radni vek. Raspored rupa i stearatni premaz sprečavaju zapušavanje diska, pa je pogodan za sve radove od grubog do finog brušenja. Čvrsta papirna podloga sa čičkom omogućava sigurno prianjanje na podlošku.",
+    "purpose": "Svi radovi brušenja, od grubog do finog",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Keramički brusni disk visokog učinka"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Carsystem raspored sa 25 rupa i ovalnim centralnim otvorom"
+      },
+      {
+        "label": "Zrno",
+        "value": "Mešavina mineralnih zrna sa keramičkim udelom"
+      },
+      {
+        "label": "Podloga",
+        "value": "Čvrsta papirna podloga sa čičkom (Velcro®)"
+      },
+      {
+        "label": "Boja",
+        "value": "Crvena"
+      }
+    ],
+    "applications": [
+      "Pogodan za sve radove brušenja, od grubog do finog"
+    ],
+    "benefits": [
+      {
+        "title": "Efikasno skidanje materijala",
+        "description": "Keramičko brusno zrno omogućava vrlo efikasno skidanje materijala."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Disk ima dug radni vek."
+      },
+      {
+        "title": "Visoka izdržljivost",
+        "description": "Odlikuje se visokom izdržljivošću."
+      },
+      {
+        "title": "Bez brzog zapušavanja",
+        "description": "CS perforacija sprečava brzo zapušavanje abraziva."
+      },
+      {
+        "title": "Stearatni premaz",
+        "description": "Stearatni premaz sprečava zapušavanje diska."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.273": "P40",
+      "160.274": "P60",
+      "159.995": "P80",
+      "159.996": "P120",
+      "159.997": "P180",
+      "159.998": "P240",
+      "159.999": "P320",
+      "160.000": "P400",
+      "160.002": "P500",
+      "160.003": "P600"
+    }
+  },
+  "abrasives/sanding-fleece-v19-sanding-fleece-disc": {
+    "sourceHash": "a37137f40c239b13",
+    "productType": "Brusno runo",
+    "subtype": "Brusno runo · disk",
+    "shortDescription": "Disk od brusnog runa za mašinsko matiranje i uklanjanje prašine sa velikih površina.",
+    "longDescription": "Sanding Fleece V.19 u obliku diska namenjen je mašinskom matiranju i uklanjanju prašine sa velikih površina, pre nanošenja punioca ili boje. Runo ima trodimenzionalnu strukturu u kojoj sintetička smola ravnomerno raspoređuje brusno zrno. Disk se koristi i suvo i mokro.",
+    "purpose": "Mašinsko matiranje i uklanjanje prašine",
+    "facts": [
+      {
+        "label": "Struktura",
+        "value": "Brusno runo trodimenzionalne strukture"
+      },
+      {
+        "label": "Vezivo",
+        "value": "Sintetička smola prožima runo i ravnomerno raspoređuje brusno zrno"
+      }
+    ],
+    "applications": [
+      "Mašinsko matiranje i uklanjanje prašine na velikim površinama",
+      "Crveno - veoma fino: pre nanošenja punioca",
+      "Sivo - ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Priprema površine",
+        "description": "Uklanja prašinu i priprema površinu za nanošenje punioca ili boje."
+      },
+      {
+        "title": "Mokro i suvo brušenje",
+        "description": "Pogodno je za mokro i suvo brušenje."
+      }
+    ],
+    "advice": "Vrlo dobro se kombinuje sa Carsystem pastama za matiranje.",
+    "variants": {
+      "156.691": "Veoma fino / crveno / 80 mm",
+      "156.690": "Ultra fino / sivo / 80 mm",
+      "156.044": "Veoma fino / crveno / 150 mm",
+      "156.045": "Ultra fino / sivo / 150 mm"
+    }
+  },
+  "abrasives/sanding-fleece-v19-sanding-fleece-pad-115-x-230-mm": {
+    "sourceHash": "89c6bfd391f17b03",
+    "productType": "Brusno runo",
+    "subtype": "Brusno runo · jastuče · 115 x 230 mm",
+    "shortDescription": "Jastuče od brusnog runa za matiranje uglova, zaobljenja i oštrih ivica pre punioca ili boje.",
+    "longDescription": "Sanding Fleece V.19 namenjen je matiranju uglova, zaobljenja i oštrih ivica pre nanošenja punioca ili boje. Runo ima trodimenzionalnu strukturu u kojoj sintetička smola ravnomerno raspoređuje brusno zrno. Odlikuje se visokom reznom moći i može se koristiti i suvo i mokro.",
+    "purpose": "Matiranje uglova, zaobljenja i oštrih ivica",
+    "facts": [
+      {
+        "label": "Struktura",
+        "value": "Brusno runo trodimenzionalne strukture"
+      },
+      {
+        "label": "Vezivo",
+        "value": "Sintetička smola prožima runo i ravnomerno raspoređuje brusno zrno"
+      }
+    ],
+    "applications": [
+      "Matiranje uglova, zaobljenja i oštrih ivica pre nanošenja punioca ili boje",
+      "Crveno - veoma fino: pre nanošenja punioca",
+      "Sivo - ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka rezna moć",
+        "description": "Runo ima visoku reznu moć."
+      },
+      {
+        "title": "Mokro i suvo brušenje",
+        "description": "Pogodno je za mokro i suvo brušenje."
+      }
+    ],
+    "advice": "Vrlo dobro se kombinuje sa Carsystem pastama za matiranje.",
+    "variants": {
+      "156.041": "Veoma fino / crveno",
+      "156.042": "Ultra fino / sivo"
+    }
+  },
+  "abrasives/sanding-fleece-v19-sanding-fleece-roll-115-mm-x-10-m": {
+    "sourceHash": "c0e4597000285ceb",
+    "productType": "Brusno runo",
+    "subtype": "Brusno runo · rolna · 115 mm x 10 m",
+    "shortDescription": "Rolna brusnog runa za matiranje uglova, zaobljenja i oštrih ivica pre punioca ili boje.",
+    "longDescription": "Sanding Fleece V.19 u rolni namenjen je matiranju uglova, zaobljenja i oštrih ivica pre nanošenja punioca ili boje. Runo ima trodimenzionalnu strukturu u kojoj sintetička smola ravnomerno raspoređuje brusno zrno. Odlikuje se visokom reznom moći, radi i mokro i suvo, a sa rolne se lako odseca potrebna dužina.",
+    "purpose": "Matiranje uglova, zaobljenja i oštrih ivica",
+    "facts": [
+      {
+        "label": "Struktura",
+        "value": "Brusno runo trodimenzionalne strukture"
+      },
+      {
+        "label": "Vezivo",
+        "value": "Sintetička smola prožima runo i ravnomerno raspoređuje brusno zrno"
+      }
+    ],
+    "applications": [
+      "Matiranje uglova, zaobljenja i oštrih ivica pre nanošenja punioca ili boje",
+      "Crveno - veoma fino: pre nanošenja punioca",
+      "Sivo - ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka rezna moć",
+        "description": "Runo ima visoku reznu moć."
+      },
+      {
+        "title": "Mokro i suvo brušenje",
+        "description": "Pogodno je za mokro i suvo brušenje."
+      },
+      {
+        "title": "Odsecanje po meri",
+        "description": "Isporučuje se u rolni, pa se lako odseca potrebna dužina."
+      }
+    ],
+    "advice": "Vrlo dobro se kombinuje sa Carsystem pastama za matiranje.",
+    "variants": {
+      "156.039": "Veoma fino / crveno",
+      "156.040": "Ultra fino / sivo"
+    }
+  },
+  "abrasives/sanding-strips-f23-ceramic-film-abrasive-roll-70-mm-x-12-m": {
+    "sourceHash": "6083a2eab9e7d2ac",
+    "productType": "Filmski abraziv",
+    "subtype": "Filmski abraziv · rolna · 70 mm x 12 m",
+    "shortDescription": "Keramičke brusne trake na filmskom nosaču, perforirane, za radove od grubog do finog brušenja.",
+    "longDescription": "Keramičke brusne trake F.23 C se tokom brušenja samooštre i zadržavaju učinak nezavisno od pritiska pri brušenju. Stearatni premaz smanjuje stvaranje prašine i sprečava zapušavanje abraziva. Trake su perforirane, pa se dužina prilagođava konkretnom postupku brušenja. Dimenzija jednog odsečka je 70 x 100 mm.",
+    "purpose": "Svi radovi brušenja, od grubog do finog",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Keramičke brusne trake visokog učinka"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Optimizovan raspored rupa sa perforacijom"
+      },
+      {
+        "label": "Dimenzija odsečka",
+        "value": "70 x 100 mm"
+      },
+      {
+        "label": "Zrno",
+        "value": "Mešavina mineralnih zrna sa keramičkim udelom"
+      },
+      {
+        "label": "Nosač",
+        "value": "Čvrsta folija otporna na cepanje"
+      }
+    ],
+    "applications": [
+      "Pogodne za sve radove brušenja, od grubog do finog"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma visoka rezna moć",
+        "description": "Keramičko brusno zrno daje veoma visoku reznu moć."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Keramičko brusno zrno obezbeđuje dug radni vek i visoku izdržljivost."
+      },
+      {
+        "title": "Stearatni premaz",
+        "description": "Stearatni premaz smanjuje zapušavanje abraziva."
+      },
+      {
+        "title": "Ujednačen rezultat",
+        "description": "Filmski nosač obezbeđuje homogen rezultat brušenja."
+      },
+      {
+        "title": "Za uobičajene blokove",
+        "description": "Pogodne su za sve uobičajene brusne blokove (70 × 100 mm, 70 x 198 mm, 70 x 300 mm, 70 x 400 mm)."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.227": "P80",
+      "159.228": "P120",
+      "159.229": "P180",
+      "159.230": "P240",
+      "159.231": "P320",
+      "159.232": "P400",
+      "159.234": "P600",
+      "159.235": "P800"
+    }
+  },
+  "abrasives/sanding-strips-p25-ceramic-paper-abrasive-roll-70-mm-x-12-m": {
+    "sourceHash": "f34129cc29e04d94",
+    "productType": "Papirni abraziv",
+    "subtype": "Papirni abraziv · rolna · 70 mm x 12 m",
+    "shortDescription": "Keramičke brusne trake za sve korake brušenja u procesu reparaturnog lakiranja.",
+    "longDescription": "Brusne trake P.25 Ceramic su keramički abrazivi visokog učinka namenjeni svim koracima brušenja u procesu reparaturnog lakiranja. Keramičko brusno zrno daje visoku reznu moć i dug radni vek, dok stearatni premaz smanjuje zapušavanje abraziva i omogućava čisto brušenje od grubih do finih granulacija. Optimizovan raspored rupa poboljšava odsis prašine, a odsečci dimenzije 70 × 100 mm odgovaraju svim uobičajenim brusnim blokovima.",
+    "purpose": "Svi radovi brušenja, od grubog do finog",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Keramičke brusne trake visokog učinka"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Optimizovan raspored rupa sa perforacijom"
+      },
+      {
+        "label": "Dimenzija odsečka",
+        "value": "70 x 100 mm"
+      },
+      {
+        "label": "Zrno",
+        "value": "Mešavina mineralnih zrna sa keramičkim udelom"
+      }
+    ],
+    "applications": [
+      "Pogodne za sve radove brušenja, od grubog do finog"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma visoka rezna moć",
+        "description": "Trake imaju veoma visoku reznu moć."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Keramičko brusno zrno obezbeđuje dug radni vek i visoku izdržljivost."
+      },
+      {
+        "title": "Stearatni premaz",
+        "description": "Stearatni premaz smanjuje zapušavanje abraziva."
+      },
+      {
+        "title": "Za uobičajene blokove",
+        "description": "Pogodne su za sve standardne brusne blokove (70 × 100 mm, 70 x 198 mm, 70 x 300 mm, 70 x 400 mm)."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.408": "P80",
+      "160.409": "P120",
+      "160.410": "P180",
+      "160.411": "P240",
+      "160.412": "P320",
+      "160.413": "P400"
+    }
+  },
+  "abrasives/sanding-water-sw20-sanding-water": {
+    "sourceHash": "473d1d05b3b4366d",
+    "productType": "Voda za brušenje",
+    "subtype": "Voda za brušenje",
+    "shortDescription": "Voda za brušenje bez silikona, za mokro brušenje bezbojnog laka.",
+    "longDescription": "Sanding Water SW20 je voda za brušenje namenjena mokrom brušenju bezbojnog laka, posebno u kombinaciji sa ProFlex Jupiter Soft H2O. Produžava radni vek abraziva i poboljšava njegovo kvašenje. Penjenje sprečava vezivanje brusne prašine sa vodom. Proizvod ne sadrži silikone.",
+    "purpose": "Mokro brušenje bezbojnog laka",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Voda za brušenje"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Mokro brušenje bezbojnog laka"
+    ],
+    "benefits": [
+      {
+        "title": "Duži vek abraziva",
+        "description": "Produžava radni vek abraziva."
+      },
+      {
+        "title": "Bolje kvašenje",
+        "description": "Poboljšava kvašenje abraziva."
+      },
+      {
+        "title": "Sprečava vezivanje prašine",
+        "description": "Penjenje sprečava vezivanje brusne prašine sa vodom."
+      }
+    ],
+    "advice": "Preporučuje se upotreba Carsystem Sanding Water SW20 u kombinaciji sa ProFlex Jupiter Soft H2O i svim drugim brusnim sredstvima.",
+    "variants": {
+      "157.446": "Sa raspršivačem / 1 l",
+      "157.447": "5 l"
+    }
+  },
+  "abrasives/soft-interface-pad-interface-pad-150-mm": {
+    "sourceHash": "a9959148f62a7500",
+    "productType": "Međupodloška",
+    "subtype": "Međupodloška · 150 mm",
+    "shortDescription": "Univerzalna međupodloška debljine 10 mm sa multihole rasporedom rupa, za zakrivljene površine.",
+    "longDescription": "Soft Interface Pad je univerzalna međupodloška sa multihole rasporedom rupa koja odgovara svim uobičajenim sistemima rupa. Debljine je 10 mm i dobro se prilagođava obliku površine. Koristi se pri brušenju zakrivljenja, zaobljenja i ivica, gde smanjuje rizik od probrušavanja.",
+    "purpose": "Brušenje zakrivljenja, zaobljenja i ivica",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Univerzalna međupodloška"
+      },
+      {
+        "label": "Raspored rupa",
+        "value": "Multihole raspored rupa za sve uobičajene sisteme"
+      },
+      {
+        "label": "Debljina",
+        "value": "10 mm"
+      }
+    ],
+    "applications": [
+      "Brušenje svih površina sa zakrivljenjima, zaobljenjima i ivicama"
+    ],
+    "benefits": [
+      {
+        "title": "Prilagođavanje površini",
+        "description": "Precizno se prilagođava obliku površine."
+      },
+      {
+        "title": "Manji rizik od probrušavanja",
+        "description": "Smanjuje rizik od probrušavanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "140.585": "Čičak / 10 mm / bez rupa",
+      "140.584": "Čičak / univerzalna"
+    }
+  },
+  "abrasives/soft-roll-paper-abrasive-roll-115-x-125-mm": {
+    "sourceHash": "a6a3957cf58b8ba7",
+    "productType": "Papirni abraziv",
+    "subtype": "Papirni abraziv · rolna · 115 x 125 mm",
+    "shortDescription": "Papirni abraziv sa sunđerastim naličjem u rolni, za brušenje zakrivljenja i teško dostupnih mesta.",
+    "longDescription": "Soft-Roll je papirni abraziv za brušenje zakrivljenja i teško dostupnih mesta na vozilu. Sunđerasto naliče daje fleksibilnost i lako praćenje oblika, a rolna ima perforaciju za otkidanje odsečaka. Svaka kutija sadrži 200 odsečaka. Dostupan je u granulacijama od grubog do finog brušenja.",
+    "purpose": "Ručno brušenje zakrivljenja i teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Papirni abraziv sa sunđerastim naličjem"
+      },
+      {
+        "label": "Oblik",
+        "value": "Rolna sa perforacijom za otkidanje"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "200 odsečaka po kutiji"
+      }
+    ],
+    "applications": [
+      "Ručno brušenje zakrivljenja i teško dostupnih mesta",
+      "Pogodan za grubo do fino brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Fleksibilnost",
+        "description": "Sunđerasto naliče daje fleksibilnost pri radu."
+      },
+      {
+        "title": "Dostupan i u P1000",
+        "description": "Dostupan je i u granulaciji P1000."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.422": "P120",
+      "159.423": "P180",
+      "159.424": "P240",
+      "159.425": "P320",
+      "159.426": "P400",
+      "159.427": "P500",
+      "159.428": "P600",
+      "159.429": "P800",
+      "159.430": "P1000"
+    }
+  },
+  "abrasives/stripping-disc-raw-cleaning-disc": {
+    "sourceHash": "ac3ab229b755bf44",
+    "productType": "Disk za čišćenje",
+    "subtype": "Disk za grubo čišćenje",
+    "shortDescription": "Disk za mašinsko uklanjanje polumekih materijala i boje sa podloge.",
+    "longDescription": "Stripping Disc je disk za čišćenje namenjen mašinskom uklanjanju polumekih materijala i boje. Koristi se za skidanje zaštite podvozja, zaštite od udara kamena, zaptivnih masa, boje i rđe. Podloga pritom ostaje neoštećena.",
+    "purpose": "Mašinsko uklanjanje polumekih materijala i boje",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Disk za čišćenje za mašinsko uklanjanje polumekih materijala i boje"
+      }
+    ],
+    "applications": [
+      "Mašinsko uklanjanje polumekih materijala kao što su zaštita podvozja, zaštita od udara kamena, zaptivne mase, boja i rđa"
+    ],
+    "benefits": [
+      {
+        "title": "Podloga ostaje neoštećena",
+        "description": "Podloga pri radu ostaje neoštećena."
+      }
+    ],
+    "advice": "100 mm = maks. 6.000 o/min. 150 mm = maks. 4.000 o/min.",
+    "variants": {
+      "127.999": "100 mm",
+      "128.000": "150 mm"
+    }
+  },
+  "abrasives/tape-off-disc-premium-sticker-removal-disc": {
+    "sourceHash": "8c37a538a137bde5",
+    "productType": "Disk za uklanjanje nalepnica",
+    "subtype": "Disk za uklanjanje nalepnica",
+    "shortDescription": "Disk za brzo uklanjanje nalepnica, ukrasnih traka i dekora bez ostataka.",
+    "longDescription": "Tape Off Disc Premium je disk za brzo uklanjanje nalepnica, ukrasnih traka, dekora i sličnih elemenata, bez ostataka na površini. Pri radu ne dolazi do promene boje laka. Disk ima miris karamele.",
+    "purpose": "Uklanjanje nalepnica i ukrasnih traka bez ostataka",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Disk za uklanjanje nalepnica"
+      },
+      {
+        "label": "Miris",
+        "value": "Karamela"
+      }
+    ],
+    "applications": [
+      "Uklanjanje nalepnica, ukrasnih traka, dekora i sličnih elemenata bez ostataka"
+    ],
+    "benefits": [
+      {
+        "title": "Bez promene boje laka",
+        "description": "Ne dolazi do promene boje laka."
+      }
+    ],
+    "advice": "Maks. 4.000 o/min.",
+    "variants": {
+      "152.013": "90 mm / set od 2 diska + 1 adapter"
+    }
+  },
+  "abrasives/tape-off-tool-axial-sander": {
+    "sourceHash": "fd4520681e416a4e",
+    "productType": "Aksijalna brusilica",
+    "subtype": "Aksijalna brusilica",
+    "shortDescription": "Pneumatska aksijalna brusilica za rad sa Carsystem Tape Off diskovima.",
+    "longDescription": "Tape Off Tool je pneumatska aksijalna brusilica namenjena radu sa Tape Off diskovima. Ima usporen hod, odnosno smanjen broj obrtaja, čime se izbegava oštećenje laka.",
+    "purpose": "Rad sa Carsystem Tape Off diskovima",
+    "facts": [
+      {
+        "label": "Pogon",
+        "value": "Pneumatska aksijalna brusilica"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Usporen hod"
+      }
+    ],
+    "applications": [
+      "Za rad sa Carsystem Tape Off diskovima"
+    ],
+    "benefits": [
+      {
+        "title": "Smanjen broj obrtaja",
+        "description": "Smanjen broj obrtaja sprečava oštećenje laka."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "133.172": "1 aksijalna brusilica"
+    }
+  },
+  "abrasives/tec-line-matt-matting-mousse-matting-paste": {
+    "sourceHash": "ce9058a5b7fa1653",
+    "productType": "Pasta za matiranje",
+    "subtype": "Pasta za matiranje",
+    "shortDescription": "Pasta za matiranje na bazi vode: brušenje, čišćenje i odmašćivanje u jednom koraku.",
+    "longDescription": "Tec Line Matt Matting Mousse je pasta za matiranje na bazi vode, pogodna za metalne i plastične delove. Brušenje, čišćenje i odmašćivanje obavljaju se u jednom radnom koraku. Koristi se za prelaz i matiranje prelaznih zona, uz uklanjanje silikona i voskova sa površine. Boja paste je svetlosiva.",
+    "purpose": "Prelaz, matiranje prelaznih zona i odmašćivanje",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Pasta za matiranje na bazi vode"
+      },
+      {
+        "label": "Boja",
+        "value": "Svetlosiva"
+      }
+    ],
+    "applications": [
+      "Prelaz (blending)",
+      "Matiranje prelaznih zona",
+      "Odmašćivanje i čišćenje delova karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Za lak i plastiku",
+        "description": "Pogodna je za lakirane i plastične delove."
+      },
+      {
+        "title": "Tri koraka u jednom",
+        "description": "Brušenje, čišćenje i odmašćivanje u jednom radnom koraku."
+      },
+      {
+        "title": "Bolja prionljivost",
+        "description": "Poboljšava prionljivost sloja boje."
+      },
+      {
+        "title": "Ujednačeno matiranje",
+        "description": "Daje ujednačen rezultat matiranja."
+      },
+      {
+        "title": "Uklanja silikone i voskove",
+        "description": "Uklanja silikone i voskove sa površine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "151.947": "1.0 kg"
+    }
+  },
+  "abrasives/tec-line-mattflex-pad-sanding-fleece-pad-115-x-230-mm": {
+    "sourceHash": "a2ef441ee8be1186",
+    "productType": "Brusno runo",
+    "subtype": "Brusno runo · jastuče · 115 x 230 mm",
+    "shortDescription": "Vrlo fleksibilno brusno runo za matiranje teško dostupnih mesta, uglova, pregiba i udubljenja.",
+    "longDescription": "Tec Line Mattflex Pad je brusno runo visoke fleksibilnosti, namenjeno matiranju teško dostupnih mesta, najsitnijih uglova, pregiba i udubljenja pre nanošenja punioca ili boje. Runo ima trodimenzionalnu strukturu u kojoj sintetička smola ravnomerno raspoređuje brusno zrno. Veoma je tanko i pogodno za mokro i suvo brušenje.",
+    "purpose": "Matiranje teško dostupnih mesta, uglova i pregiba",
+    "facts": [
+      {
+        "label": "Struktura",
+        "value": "Brusno runo trodimenzionalne strukture"
+      },
+      {
+        "label": "Vezivo",
+        "value": "Sintetička smola prožima runo i ravnomerno raspoređuje brusno zrno"
+      }
+    ],
+    "applications": [
+      "Matiranje i brušenje teško dostupnih mesta, najsitnijih uglova, pregiba i udubljenja pre nanošenja punioca ili boje",
+      "Crveno - veoma fino: pre nanošenja punioca",
+      "Crno - ekstra fino: pre nanošenja boje",
+      "Sivo - ultra fino: pre nanošenja boje - posebno za zone prelaza",
+      "Zlatno - mikro fino: pre nanošenja boje - posebno za zone prelaza"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Tanko i fleksibilno",
+        "description": "Veoma je tanko i izrazito fleksibilno."
+      },
+      {
+        "title": "Mokro i suvo brušenje",
+        "description": "Pogodno je za mokro i suvo brušenje."
+      }
+    ],
+    "advice": "Vrlo dobro se kombinuje sa Carsystem pastama za matiranje.",
+    "variants": {
+      "152.686": "Veoma fino / crveno",
+      "157.444": "Ekstra fino / crno",
+      "152.687": "Ultra fino / sivo",
+      "152.688": "Mikro fino / zlatno"
+    }
+  },
+  "abrasives/tec-line-mattflex-premium-sanding-fleece-roll-115-mm-x-10-m": {
+    "sourceHash": "1d0aab0dbc40411d",
+    "productType": "Brusno runo",
+    "subtype": "Brusno runo · Rolna · 115 mm x 10 m",
+    "shortDescription": "Fleksibilno brusno runo u rolni za matiranje teško dostupnih mesta pre nanošenja gita ili boje.",
+    "longDescription": "Tec Line Mattflex Premium je brusno runo visoke fleksibilnosti sa trodimenzionalnom strukturom. Sintetička smola prožima runo i ravnomerno raspoređuje brusno zrno po celoj površini. Namenjeno je matiranju i brušenju najsitnijih uglova, pregiba i udubljenja pre nanošenja gita ili boje. Isporučuje se u rolni, pa se odseca u potrebnoj dužini.",
+    "purpose": "Matiranje teško dostupnih mesta pre nanošenja gita ili boje",
+    "facts": [
+      {
+        "label": "Struktura",
+        "value": "Brusno runo sa trodimenzionalnom strukturom"
+      },
+      {
+        "label": "Vezivo",
+        "value": "Sintetička smola prožima runo i raspoređuje brusno zrno po celoj površini"
+      }
+    ],
+    "applications": [
+      "Matiranje i brušenje teško dostupnih mesta, najsitnijih uglova, pregiba i udubljenja pre nanošenja gita ili boje",
+      "Crveno – veoma fino: pre nanošenja gita",
+      "Sivo – ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka fleksibilnost",
+        "description": "Runo je visoko fleksibilno."
+      },
+      {
+        "title": "Isporuka u rolni",
+        "description": "Nalazi se na rolni, pa se lako odseca u potrebnoj dužini."
+      }
+    ],
+    "advice": "Pogodno za upotrebu sa Carsystem pastama za matiranje.",
+    "variants": {
+      "151.616": "Veoma fino / crveno",
+      "151.617": "Ultra fino / sivo"
+    }
+  },
+  "abrasives/tec-line-n20-net-sanding-strips-70-x-400-mm": {
+    "sourceHash": "310ae21aef3f8e33",
+    "productType": "Mrežaste brusne trake",
+    "subtype": "Mrežaste brusne trake · 70 x 400 mm",
+    "shortDescription": "Mrežaste brusne trake za brušenje gitova i punilaca, od grube do fine obrade, uz izrazito manje prašine.",
+    "longDescription": "Tec Line N20 je mrežasti abraziv sa specijalnim premazom i zrnom od aluminijum-oksida. Pogodan je za sve primene brušenja na gitovima i punilcima, od grube do fine obrade. Struktura mreže obezbeđuje veoma dug radni vek i izrazito smanjeno stvaranje prašine. Zahvaljujući perforaciji, trake se koriste i na alatima 70 x 400 mm i na alatima 70 x 200 mm.",
+    "purpose": "Brušenje gitova i punilaca od grube do fine obrade",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "Mrežaste brusne trake"
+      },
+      {
+        "label": "Premaz",
+        "value": "Specijalni premaz"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Pogodne za sve primene brušenja na gitovima i punilcima, od grube do fine obrade"
+    ],
+    "benefits": [
+      {
+        "title": "Dva formata alata",
+        "description": "Zahvaljujući perforaciji pojedinačnih traka, Tec Line N20 se koristi na alatima 70 x 400 mm i 70 x 200 mm."
+      },
+      {
+        "title": "Manje prašine",
+        "description": "Brušenje uz izrazito smanjeno stvaranje prašine."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Struktura mreže obezbeđuje veoma dug radni vek."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.438": "P80",
+      "157.439": "P120",
+      "157.440": "P180",
+      "157.441": "P240",
+      "157.442": "P320",
+      "157.443": "P400"
+    }
+  },
+  "abrasives/tec-line-pro-finish-net-abrasive-150-mm": {
+    "sourceHash": "79f6d3f3c991b008",
+    "productType": "Mrežasti abraziv",
+    "subtype": "Mrežasti abraziv · 150 mm",
+    "shortDescription": "Mrežasti brusni disk sa fleksibilnom sunđerastom podlogom za matiranje površina i finiš obradu.",
+    "longDescription": "Tec Line Pro Finish je mrežasti abraziv sa veoma fleksibilnom sunđerastom podlogom i pričvršćivanjem na čičak (Velcro®). Koristi se za prelaze (blending), matiranje površina i finiš obradu, pri čemu se preporučuje mokra upotreba. Ostavlja izuzetno fin i ravnomeran trag brušenja, a u suvom radu obezbeđuje veoma dobro odvođenje prašine.",
+    "purpose": "Matiranje površina, prelazi (blending) i finiš obrada",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "Mrežasti brusni disk sa sunđerastom podlogom i čičkom (Velcro®)"
+      }
+    ],
+    "applications": [
+      "Pogodan za prelaze (blending)",
+      "Matiranje površina",
+      "Finiš obrada",
+      "Mokra upotreba (preporučeno)"
+    ],
+    "benefits": [
+      {
+        "title": "Odvođenje prašine",
+        "description": "Veoma dobro odvođenje prašine pri suvom radu."
+      },
+      {
+        "title": "Gotovo bez prašine",
+        "description": "Brušenje se odvija gotovo bez prašine."
+      },
+      {
+        "title": "Odvod vode",
+        "description": "Vrlo dobro odvođenje vode pri mokroj upotrebi."
+      },
+      {
+        "title": "Fin trag brušenja",
+        "description": "Izuzetno fin i ravnomeran trag brušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.983": "P1000",
+      "152.984": "P2000",
+      "153.256": "P3000"
+    }
+  },
+  "abrasives/tec-line-softflex-paper-abrasive-roll-115-x-125-mm": {
+    "sourceHash": "2bdfd54c7d9682ec",
+    "productType": "Papirni abraziv",
+    "subtype": "Papirni abraziv · Rolna · 115 x 125 mm",
+    "shortDescription": "Papirni abraziv sa sunđerastom podlogom, u rolni sa perforacijom, za ručno brušenje zaobljenja.",
+    "longDescription": "Tec Line Softflex je abraziv na papirnoj osnovi sa sunđerastom podlogom, namenjen ručnom brušenju zaobljenja i teško dostupnih mesta. Pokriva raspon od grube do fine obrade. Rolna ima perforaciju za otkidanje, sa 200 otkidnih listova po kutiji, a sunđerasta podloga daje potrebnu fleksibilnost.",
+    "purpose": "Ručno brušenje zaobljenja i teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Osnova",
+        "value": "Abraziv na papirnoj osnovi sa sunđerastom podlogom"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "Rolna sa perforacijom za otkidanje"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "200 otkidnih listova po kutiji"
+      }
+    ],
+    "applications": [
+      "Ručno brušenje zaobljenja i teško dostupnih mesta",
+      "Pogodan od grube do fine obrade"
+    ],
+    "benefits": [
+      {
+        "title": "Fleksibilnost",
+        "description": "Sunđerasta podloga daje fleksibilnost pri radu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.689": "P150",
+      "152.690": "P180",
+      "152.691": "P240",
+      "152.692": "P320",
+      "152.693": "P400",
+      "152.694": "P500",
+      "152.695": "P600",
+      "152.696": "P800"
+    }
+  },
+  "abrasives/topline-soft-pad-foam-abrasive-140-x-115-mm": {
+    "sourceHash": "16e4abf6f2aca4ca",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Sunđerasti abraziv · 140 x 115 mm",
+    "shortDescription": "Sunđerasti abraziv za matiranje i dodatno brušenje teško dostupnih mesta, za mokri i suvi rad.",
+    "longDescription": "Topline Soft Pad je sunđerasti abraziv sa zrnom od aluminijum-oksida, namenjen matiranju i dodatnom brušenju teško dostupnih mesta pre nanošenja gita ili boje. Veoma je fleksibilan i dobro prati svaku zaobljenu površinu. Ostavlja veoma fin trag brušenja i može se koristiti mokro ili suvo.",
+    "purpose": "Matiranje teško dostupnih mesta pre nanošenja gita ili boje",
+    "facts": [
+      {
+        "label": "Oblik",
+        "value": "Meka pločica sa sunđerastom podlogom"
+      },
+      {
+        "label": "Zrno",
+        "value": "Aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Matiranje i brušenje teško dostupnih mesta, najsitnijih uglova, pregiba i udubljenja pre nanošenja gita ili boje",
+      "Srednje: pre nanošenja gita",
+      "Fino i ultra fino: pre nanošenja boje"
+    ],
+    "benefits": [
+      {
+        "title": "Fin trag brušenja",
+        "description": "Ostavlja veoma fin trag brušenja."
+      },
+      {
+        "title": "Velika fleksibilnost",
+        "description": "Materijal je veoma fleksibilan."
+      },
+      {
+        "title": "Prati zaobljenja",
+        "description": "Dobro se prilagođava svakoj zaobljenoj površini."
+      },
+      {
+        "title": "Mokri i suvi rad",
+        "description": "Može se koristiti mokro ili suvo."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.251": "Srednje / P280 - P360",
+      "126.252": "Fino / P400 - P500",
+      "126.253": "Super fino / P600 - P800",
+      "126.254": "Ultra fino / P1000 - P1200"
+    }
+  },
+  "abrasives/topline-wp-s-paper-abrasive-230-x-280-mm": {
+    "sourceHash": "ba697cd2495d4c5b",
+    "productType": "Vodobrusni papirni abraziv",
+    "subtype": "Papirni abraziv · 230 x 280 mm",
+    "shortDescription": "Vodobrusni papir sa zrnom silicijum-karbida za mokro brušenje punilaca i lakiranih površina.",
+    "longDescription": "Topline WP S je abraziv na papirnoj osnovi namenjen mokrom brušenju površina obrađenih punilcem ili lakiranih površina. Zrno silicijum-karbida daje veoma visoku reznu moć. U granulacijama P80 - P180 koristi se fleksibilan A-papir ojačan lateksom, a u granulacijama P220 - P2000 gladak C-papir ojačan lateksom, koji posle kratkog natapanja postaje veoma savitljiv.",
+    "purpose": "Mokro brušenje površina obrađenih punilcem ili lakiranih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Papir za mokro brušenje"
+      },
+      {
+        "label": "Zrno",
+        "value": "Silicijum-karbid"
+      },
+      {
+        "label": "Osnova P80 - P180",
+        "value": "Fleksibilan A-papir ojačan lateksom"
+      },
+      {
+        "label": "Osnova P220 - P2000",
+        "value": "Gladak C-papir ojačan lateksom"
+      }
+    ],
+    "applications": [
+      "Mokro brušenje površina obrađenih punilcem ili lakiranih površina"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka rezna moć",
+        "description": "Zrno silicijum-karbida daje veoma visoku reznu moć."
+      },
+      {
+        "title": "Savitljivost posle natapanja",
+        "description": "Kvalitetan papir ojačan lateksom postaje veoma savitljiv već posle kratkog natapanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "136.676": "P80",
+      "136.677": "P120",
+      "136.678": "P180",
+      "136.679": "P220",
+      "136.680": "P240",
+      "136.682": "P320",
+      "136.684": "P400",
+      "136.685": "P500",
+      "136.686": "P600",
+      "136.687": "P800",
+      "136.688": "P1000",
+      "136.689": "P1200",
+      "136.690": "P1500",
+      "136.691": "P2000",
+      "136.683": "P360"
+    }
+  }
+}

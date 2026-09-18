@@ -46,7 +46,10 @@ export const BASLAC_SWATCH_VERIFICATION = VERIFICATION_IMPL as Readonly<
   Record<string, BaslacSwatchVerification>
 >;
 
-export function getProductNamedColor(product: { slug: string }): NamedColor | null {
+export function getProductNamedColor(product: {
+  slug: string;
+  manufacturerColor?: { color: string; token?: string; series?: string; source: string };
+}): NamedColor | null {
   return getProductNamedColorImpl(product) as NamedColor | null;
 }
 

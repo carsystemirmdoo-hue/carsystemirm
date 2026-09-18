@@ -1,0 +1,1522 @@
+{
+  "painting-supplies/air-hose-air-hose-coil": {
+    "sourceHash": "3e72e385f31b3f3d",
+    "productType": "Vazdušno crevo",
+    "subtype": "Vazdušno crevo · rolna",
+    "shortDescription": "Antistatičko gumeno vazdušno crevo za napajanje pištolja za lakiranje i pneumatskih alata.",
+    "longDescription": "Air hose je antistatičko gumeno crevo za dovod vazduha do pištolja za lakiranje i alata na komprimovani vazduh. Dimenzija creva je 9 x 16 mm, dužina 50 m, a maksimalni radni pritisak 12 bar. Unutrašnja cev je glatka EPDM u crnoj, a spoljašnja glatka EPDM u plavoj boji.",
+    "purpose": "Dovod vazduha za pištolje za lakiranje i pneumatske alate",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Antistatičko gumeno vazdušno crevo"
+      },
+      {
+        "label": "Dimenzija",
+        "value": "9 x 16 mm"
+      },
+      {
+        "label": "Dužina",
+        "value": "50 m"
+      },
+      {
+        "label": "Maksimalni pritisak vazduha",
+        "value": "12 bar"
+      },
+      {
+        "label": "Unutrašnja cev",
+        "value": "Glatka EPDM, crna"
+      },
+      {
+        "label": "Spoljašnja cev",
+        "value": "Glatka EPDM, plava"
+      }
+    ],
+    "applications": [
+      "Dovod vazduha za pištolje za lakiranje i alate na komprimovani vazduh"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "143.131": "9 x 16 mm / dužina 50 m"
+    }
+  },
+  "painting-supplies/air-hose-air-hose-complete": {
+    "sourceHash": "d8fd54a7ce8e1d3b",
+    "productType": "Vazdušno crevo",
+    "subtype": "Vazdušno crevo · komplet",
+    "shortDescription": "Antistatičko gumeno vazdušno crevo sa niplom i sigurnosnom spojnicom, dužine 12.5 m.",
+    "longDescription": "Air hose je antistatičko gumeno crevo sa niplom i sigurnosnom spojnicom, za dovod vazduha do pištolja za lakiranje i alata na komprimovani vazduh. Dimenzija creva je 9 x 16 mm, dužina 12.5 m, a maksimalni radni pritisak 12 bar. Unutrašnja cev je glatka EPDM u crnoj, a spoljašnja glatka EPDM u plavoj boji.",
+    "purpose": "Dovod vazduha za pištolje za lakiranje i pneumatske alate",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Antistatičko gumeno vazdušno crevo sa niplom i sigurnosnom spojnicom"
+      },
+      {
+        "label": "Dimenzija",
+        "value": "9 x 16 mm"
+      },
+      {
+        "label": "Dužina",
+        "value": "12.5 m"
+      },
+      {
+        "label": "Maksimalni pritisak vazduha",
+        "value": "12 bar"
+      },
+      {
+        "label": "Unutrašnja cev",
+        "value": "Glatka EPDM, crna"
+      },
+      {
+        "label": "Spoljašnja cev",
+        "value": "Glatka EPDM, plava"
+      }
+    ],
+    "applications": [
+      "Dovod vazduha za pištolje za lakiranje i alate na komprimovani vazduh"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.039": "9 x 16 mm / dužina 12.5 m"
+    }
+  },
+  "painting-supplies/blow-off-gun-blow-off-gun": {
+    "sourceHash": "ba9c1c1e651803bc",
+    "productType": "Pištolj za izduvavanje",
+    "subtype": "Pištolj za izduvavanje",
+    "shortDescription": "Pištolj za izduvavanje sa metalnim vrhom za precizno čišćenje površina i šupljina.",
+    "longDescription": "Blow Off Gun sa metalnim vrhom koristi se za precizno čišćenje površina i šupljina. Verzija sa prigušenjem buke smanjuje nivo buke u radionici na približno 77 db. Ima ergonomsku dršku, maksimalni ulazni pritisak od 10 bar i temperaturnu otpornost od -15 °C do +70 °C.",
+    "purpose": "Izduvavanje preostale prašine sa svih površina",
+    "facts": [
+      {
+        "label": "Drška",
+        "value": "Ergonomska"
+      },
+      {
+        "label": "Maksimalni ulazni pritisak",
+        "value": "10 bar"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "-15 °C do +70 °C"
+      }
+    ],
+    "applications": [
+      "Za izduvavanje preostale prašine sa svih površina"
+    ],
+    "benefits": [
+      {
+        "title": "Metalni vrh za precizan rad",
+        "description": "Pištolj sa metalnim vrhom omogućava precizno čišćenje površina i šupljina."
+      },
+      {
+        "title": "Prigušenje buke",
+        "description": "Verzija sa prigušenjem buke na ~ 77 db ima plastičnu mlaznicu koja sprečava ogrebotine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "145.270": "Blow Off Gun sa prigušenjem buke i niplom (EU)",
+      "145.271": "Blow Off Gun sa prigušenjem buke i niplom (CH, NL)",
+      "145.272": "Blow Off Gun sa metalnom mlaznicom i niplom (EU)",
+      "145.273": "Blow Off Gun sa metalnom mlaznicom i niplom (CH, NL)"
+    }
+  },
+  "painting-supplies/blow-off-stick-blow-off-stick": {
+    "sourceHash": "c9e281d726688131",
+    "productType": "Štap za izduvavanje",
+    "subtype": "Štap za izduvavanje",
+    "shortDescription": "Štap za izduvavanje preostale prašine sa svih površina, sa gumenim vrhom protiv ogrebotina.",
+    "longDescription": "Blow Off Stick je pogodan za izduvavanje preostale prašine sa svih površina. Potrošnja vazduha iznosi 450 l / min. pri 10 bar, a gumeni vrh štiti površinu predmeta od ogrebotina. Konstrukcija smanjuje buku, otporna je na hemikalije i podnosi temperature od -40 °C do +150 °C.",
+    "purpose": "Izduvavanje preostale prašine sa svih površina",
+    "facts": [
+      {
+        "label": "Buka",
+        "value": "Smanjen nivo buke"
+      },
+      {
+        "label": "Otpornost",
+        "value": "Otporan na hemikalije"
+      },
+      {
+        "label": "Potrošnja vazduha",
+        "value": "450 l / min. pri 10 bar"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "-40 °C do +150 °C"
+      }
+    ],
+    "applications": [
+      "Za izduvavanje preostale prašine sa svih površina"
+    ],
+    "benefits": [
+      {
+        "title": "Gumeni vrh",
+        "description": "Gumeni vrh sprečava ogrebotine na površini."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "154.123": "Blow Off Pen Orion (EU)",
+      "154.124": "Blow Off Pen ARO (CH, NL)"
+    }
+  },
+  "painting-supplies/booth-mask-booth-protection-mask": {
+    "sourceHash": "a421c088112b0a2f",
+    "productType": "Zaštita komore za lakiranje",
+    "subtype": "Zaštita komore za lakiranje",
+    "shortDescription": "Providna zaštita komore za lakiranje na bazi vode, formira nelepljiv zaštitni film.",
+    "longDescription": "Booth Mask je providna zaštita komore na bazi vode koja se nanosi prskanjem i formira bistar, nelepljiv zaštitni film. Pogodna je za rasvetu i komore za lakiranje koje se ne mogu čistiti vodom. Štiti tokom 3 meseca ili 150 ciklusa lakiranja, bez uticaja na uslove osvetljenja.",
+    "purpose": "Zaštita zidova komore i rasvete od preleta boje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštita komore za lakiranje"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Film",
+        "value": "Formira providno bistar, nelepljiv zaštitni film"
+      }
+    ],
+    "applications": [
+      "Štiti zidove komore i rasvetu od preleta boje",
+      "Pogodna za rasvetu i komore za lakiranje koje se ne mogu čistiti vodom"
+    ],
+    "benefits": [
+      {
+        "title": "Bistra i providna",
+        "description": "Film je bistar i providan."
+      },
+      {
+        "title": "Bez uticaja na osvetljenje",
+        "description": "Ne utiče na uslove osvetljenja."
+      },
+      {
+        "title": "Zaštita 3 meseca",
+        "description": "Štiti tokom 3 meseca ili 150 ciklusa lakiranja."
+      },
+      {
+        "title": "Nelepljiv film",
+        "description": "Formira nelepljiv film."
+      },
+      {
+        "title": "Pranje vodom",
+        "description": "Sa glatkih površina može da se spere vodom."
+      },
+      {
+        "title": "Uklanjanje sa hrapavih površina",
+        "description": "Sa hrapavih površina uklanja se peračem pod visokim pritiskom."
+      }
+    ],
+    "advice": "Preporučuje se mlaznica veličine 1.8 - 2.2 mm.",
+    "variants": {
+      "149.358": "5 L",
+      "149.359": "20 L"
+    }
+  },
+  "painting-supplies/booth-mask-stick-booth-protection-mask": {
+    "sourceHash": "f7cd6a03b85ab6dd",
+    "productType": "Zaštita komore za lakiranje",
+    "subtype": "Zaštita komore za lakiranje",
+    "shortDescription": "Providna zaštita komore na bazi vode koja formira lepljiv film i vezuje prašinu.",
+    "longDescription": "Booth Mask Stick je providna zaštita komore na bazi vode koja se nanosi prskanjem i formira bistar, lepljiv zaštitni film. Lepljiva površina vezuje prašinu, a film se ispira vodom. Posebno je pogodan za zidove komore jer upija prelet boje.",
+    "purpose": "Zaštita zidova komore i rasvete od preleta boje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštita komore za lakiranje"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Film",
+        "value": "Formira bistar, lepljiv zaštitni film"
+      }
+    ],
+    "applications": [
+      "Štiti zidove komore i rasvetu od preleta boje",
+      "Posebno pogodan za zidove komore",
+      "Upija prelet boje"
+    ],
+    "benefits": [
+      {
+        "title": "Vezuje prašinu",
+        "description": "Prašina i vlakna se lepe na lepljiv film."
+      },
+      {
+        "title": "Rastvorljiv u vodi",
+        "description": "Film je rastvorljiv u vodi."
+      }
+    ],
+    "advice": "Preporučuje se mlaznica veličine 1.8 - 2.2 mm.",
+    "variants": {
+      "149.338": "5 L",
+      "149.339": "20 L",
+      "149.340": "25 L"
+    }
+  },
+  "painting-supplies/booth-mask-white-booth-protection-mask": {
+    "sourceHash": "0a8f0361cbe2575d",
+    "productType": "Zaštita komore za lakiranje",
+    "subtype": "Zaštita komore za lakiranje",
+    "shortDescription": "Bela zaštita komore na bazi vode koja formira visoko pokrivan, sjajan film.",
+    "longDescription": "Booth Mask White je bela zaštita komore na bazi vode koja se nanosi prskanjem i formira visoko pokrivan, sjajan film. Pogodna je za komore za lakiranje koje se ne mogu čistiti vodom i lako se uklanja. Prekriva postojeće ostatke boje i doprinosi dobrim uslovima osvetljenja.",
+    "purpose": "Zaštita zidova komore za lakiranje od preleta boje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Zaštita komore za lakiranje"
+      },
+      {
+        "label": "Boja",
+        "value": "Bela"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Film",
+        "value": "Formira visoko pokrivan, sjajan film"
+      }
+    ],
+    "applications": [
+      "Štiti zidove komore za lakiranje od preleta boje",
+      "Pogodna za komore za lakiranje koje se ne mogu čistiti vodom"
+    ],
+    "benefits": [
+      {
+        "title": "Prekriva ostatke boje",
+        "description": "Prekriva sve postojeće ostatke boje."
+      },
+      {
+        "title": "Dobri uslovi osvetljenja",
+        "description": "Obezbeđuje dobre uslove osvetljenja."
+      },
+      {
+        "title": "Velika debljina sloja",
+        "description": "Formira sloj velike debljine."
+      },
+      {
+        "title": "Lako uklanjanje",
+        "description": "Lako se uklanja."
+      }
+    ],
+    "advice": "Preporučuje se mlaznica veličine 2.2 - 2.5 mm.",
+    "variants": {
+      "153.205": "19 L"
+    }
+  },
+  "painting-supplies/bumper-stand-bumper-paint-stand": {
+    "sourceHash": "e14feaf5458f16b3",
+    "productType": "Stalak za lakiranje",
+    "subtype": "Stalak za lakiranje branika",
+    "shortDescription": "Stalak koji drži branik u istom položaju kao na vozilu, za brušenje, lakiranje i poliranje.",
+    "longDescription": "Bumper Stand omogućava da se branik stegne u istom položaju u kom je montiran na vozilu, pa se dobro mogu lakirati i unutrašnje ivice branika u zoni blatobrana. Visina i ugao nagiba brzo se i jednostavno podešavaju, a uvlačivo postolje obezbeđuje siguran i čvrst oslonac. Stalak je pokretan na točkovima, a maksimalno opterećenje je 35 kg.",
+    "purpose": "Montaža, brušenje, lakiranje i poliranje branika",
+    "facts": [
+      {
+        "label": "Primena",
+        "value": "Za veliki broj različitih branika"
+      },
+      {
+        "label": "Pokretljivost",
+        "value": "Pokretan na točkovima"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "35 kg"
+      }
+    ],
+    "applications": [
+      "Za montažu, brušenje, lakiranje ili poliranje različitih branika"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo podešavanje",
+        "description": "Postavljanje i podešavanje traje 30 sekundi."
+      },
+      {
+        "title": "Sklapanje u ravan",
+        "description": "Može se sklopiti potpuno ravno."
+      },
+      {
+        "title": "Brza rotacija",
+        "description": "Brza rotacija uz mogućnost zaključavanja u bilo kom položaju."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.413": "Stalak za lakiranje branika",
+      "159.702": "Šipka za fiksiranje sa steznim kleštima 190-193"
+    }
+  },
+  "painting-supplies/car-clean-trolley-cleaning-paper-stand": {
+    "sourceHash": "616e0c84441d4bea",
+    "productType": "Stalak za papir",
+    "subtype": "Stalak za papir za čišćenje",
+    "shortDescription": "Držač 2u1 za rolne papira za čišćenje, upotrebljiv kao podni stalak ili zidni držač.",
+    "longDescription": "Car Clean Trolley je držač 2u1 za rolne papira za čišćenje koji se koristi kao podni stalak ili kao zidni držač. Pokretan je, pa se lako premešta kroz karoserijsku i lakirersku radionicu. Prima rolne širine do 40 cm i ima držač za kesu za otpad.",
+    "purpose": "Fleksibilni poslovi čišćenja u lakirerskoj radionici",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Podni stalak ili zidni držač za rolne papira za čišćenje širine do 40 cm, sa držačem za kesu za otpad"
+      }
+    ],
+    "applications": [
+      "Za fleksibilne poslove čišćenja u lakirerskoj radionici"
+    ],
+    "benefits": [
+      {
+        "title": "Pokretni stalak",
+        "description": "Pokretni stalak sa dozatorom za prenosnu upotrebu."
+      },
+      {
+        "title": "Zidni držač",
+        "description": "Zidni dozator za fiksnu montažu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "139.912": "Car Clean Trolley / plava / 564 x 385 x 870 x 725 mm",
+      "139.913": "Car Clean Wall Holder / 500 x 264 x 375 mm"
+    }
+  },
+  "painting-supplies/colour-match-lamp-day-light-lamp": {
+    "sourceHash": "dcbda6e32de262cc",
+    "productType": "Lampa dnevnog svetla",
+    "subtype": "Lampa dnevnog svetla",
+    "shortDescription": "Akumulatorska ručna LED lampa za usklađivanje nijanse, sa podesivim magnetnim stalkom.",
+    "longDescription": "Colour Match Lamp je akumulatorska ručna radna lampa namenjena usklađivanju nijanse boje. Zahvaljujući podesivom magnetnom stalku može se pričvrstiti i na vertikalne površine. Nudi izbor između tri temperature svetla, uz vreme rada od 2.5 sata i vreme punjenja od 4 sata.",
+    "purpose": "LED lampa za usklađivanje nijanse boje",
+    "facts": [
+      {
+        "label": "Snaga",
+        "value": "5 Watt"
+      },
+      {
+        "label": "Baterija",
+        "value": "3.7V 2.6 Ah Li-Ion"
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "4 sata"
+      },
+      {
+        "label": "Vreme rada",
+        "value": "2.5 sata"
+      },
+      {
+        "label": "Jačina svetla",
+        "value": "Prema režimima navedenim u nastavku"
+      },
+      {
+        "label": "Režim 1",
+        "value": "2,700K - 500 lumena CRI >96+"
+      },
+      {
+        "label": "Režim 2",
+        "value": "4,500K - 500 lumena CRI >96+"
+      },
+      {
+        "label": "Režim 3",
+        "value": "6,500K - 500 lumena CRI >96+"
+      },
+      {
+        "label": "Radna temperatura",
+        "value": "-10 °C do +40 °C"
+      },
+      {
+        "label": "Težina",
+        "value": "310 g"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "190 x 56 x 29 mm"
+      },
+      {
+        "label": "Sertifikacija",
+        "value": "IP65 | IK07"
+      }
+    ],
+    "applications": [
+      "LED lampa za usklađivanje nijanse boje"
+    ],
+    "benefits": [
+      {
+        "title": "Akumulatorska LED lampa",
+        "description": "Akumulatorska LED lampa za fleksibilnu upotrebu."
+      },
+      {
+        "title": "Podesiv magnetni stalak",
+        "description": "Podesiv magnetni stalak omogućava rad na vertikalnim površinama."
+      },
+      {
+        "title": "Tri temperature svetla",
+        "description": "Izbor između tri različite temperature svetla."
+      },
+      {
+        "title": "Robusna izrada",
+        "description": "Veoma robusna i otporna lampa."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "155.614": "Colour Match Lamp"
+    }
+  },
+  "painting-supplies/led-lamp-led-lamp": {
+    "sourceHash": "d25dcfc9c25415e7",
+    "productType": "LED lampa",
+    "subtype": "LED lampa",
+    "shortDescription": "Akumulatorska COB-LED lampa sa postoljem koje se okreće za 180° i tri nivoa osvetljenja.",
+    "longDescription": "Akumulatorska LED lampa sa postoljem koje se okreće za 180°, čime se podešava potreban ugao osvetljenja. COB-LED tehnologija obezbeđuje ravnomerno osvetljenje, a snaga se bira u tri režima. Rad je moguć i tokom punjenja.",
+    "purpose": "Univerzalno osvetljenje radnog prostora",
+    "facts": [
+      {
+        "label": "Snaga",
+        "value": "20 W"
+      },
+      {
+        "label": "Baterija",
+        "value": "11.1V 4.4 Ah Li-Ion"
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "4 h"
+      },
+      {
+        "label": "Vreme rada",
+        "value": "Zavisno od režima: 10 h / 5 h / 2.5 h"
+      },
+      {
+        "label": "Jačina svetla",
+        "value": "U tri režima"
+      },
+      {
+        "label": "Režim 1",
+        "value": "500 lumena"
+      },
+      {
+        "label": "Režim 2",
+        "value": "1.000 lumena"
+      },
+      {
+        "label": "Režim 3",
+        "value": "2.000 lumena"
+      },
+      {
+        "label": "Radna temperatura",
+        "value": "-10 °C do +40 °C"
+      },
+      {
+        "label": "Težina",
+        "value": "1.15 kg"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "225 x 220 x 70 mm"
+      },
+      {
+        "label": "Sertifikacija",
+        "value": "IP65 | IK07"
+      }
+    ],
+    "applications": [
+      "LED lampa za univerzalnu upotrebu u svakom radnom okruženju"
+    ],
+    "benefits": [
+      {
+        "title": "Akumulatorsko napajanje",
+        "description": "Akumulatorska LED lampa za fleksibilnu upotrebu."
+      },
+      {
+        "title": "Postolje sa okretom 180°",
+        "description": "Postolje se okreće za 180°, pa se podešava potreban ugao osvetljenja."
+      },
+      {
+        "title": "Izbor snage",
+        "description": "Snaga osvetljenja se bira."
+      },
+      {
+        "title": "Ravnomerno svetlo",
+        "description": "COB-LED tehnologija daje veoma ujednačen nivo svetla."
+      },
+      {
+        "title": "Robusna izrada",
+        "description": "Lampa je veoma robusna i otporna."
+      },
+      {
+        "title": "Rad tokom punjenja",
+        "description": "Rad je moguć i dok traje punjenje."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "155.037": "LED lampa"
+    }
+  },
+  "painting-supplies/magnetic-flat-strip-flat-strip": {
+    "sourceHash": "c0609d2cd3b708eb",
+    "productType": "Pljosnata traka",
+    "subtype": "Pljosnata traka",
+    "shortDescription": "Savitljiva magnetna plastična traka za pričvršćivanje maskirne folije na vozilo.",
+    "longDescription": "Magnetic Flat Strip je savitljiva, pljosnata magnetna plastična zaštitna traka. Služi za pričvršćivanje maskirne folije na vozilu tokom pripreme za lakiranje.",
+    "purpose": "Pričvršćivanje maskirne folije na vozilo",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Savitljiva plastična traka"
+      }
+    ],
+    "applications": [
+      "Pljosnata i magnetna plastična traka za pričvršćivanje maskirne folije na vozilo"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "137.214": "4 x 55 cm"
+    }
+  },
+  "painting-supplies/magnetic-gun-holder-plus-paint-gun-holder": {
+    "sourceHash": "0908f77e26fbe508",
+    "productType": "Držač pištolja",
+    "subtype": "Držač pištolja za lakiranje",
+    "shortDescription": "Magnetni držač za pištolje za lakiranje, postavlja se na sve feromagnetne površine.",
+    "longDescription": "Magnetic Gun Holder Plus je modifikovan magnetni držač za pištolje za lakiranje. Fiksira se na sve feromagnetne površine u radionici.",
+    "purpose": "Držanje pištolja za lakiranje na feromagnetnim površinama",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Magnetni držač za pištolje za lakiranje"
+      }
+    ],
+    "applications": [
+      "Držač za pištolje za lakiranje",
+      "Postavlja se na feromagnetne površine"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.969": "Crni gumirani držač"
+    }
+  },
+  "painting-supplies/magnetic-sanding-protection-edge-protection": {
+    "sourceHash": "86d349826ff1df4b",
+    "productType": "Zaštita ivica",
+    "subtype": "Zaštita ivica",
+    "shortDescription": "Fleksibilna magnetna zaštita ivica koja okolne delove čuva od neželjenog brušenja.",
+    "longDescription": "Magnetic Sanding Protection je fleksibilna magnetna zaštita ivica izrađena od plastike. Postavlja se magnetno na površinu i sprečava neželjeno brušenje okolnih delova.",
+    "purpose": "Zaštita okolnih delova od neželjenog brušenja",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Fleksibilna plastična zaštita ivica"
+      }
+    ],
+    "applications": [
+      "Magnetna zaštita ivica sprečava neželjeno brušenje okolnih delova"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "130.992": "4 x 55 cm"
+    }
+  },
+  "painting-supplies/mmir-trolley-box-masking-film-stand": {
+    "sourceHash": "c3ff91dd4edcc0d8",
+    "productType": "Stalak za maskirnu foliju",
+    "subtype": "Stalak za maskirnu foliju",
+    "shortDescription": "Pokretni stalak za maskirne folije u dozator kutiji, sa odmotavanjem direktno iz kutije.",
+    "longDescription": "MMIR Trolley \"Box\" je pokretni stalak za maskirne folije isporučene u dozator kutiji. Folija se odmotava direktno iz kutije, čime se omogućava efikasan rad u svim delovima radionice.",
+    "purpose": "Brzo maskiranje u lakirnici",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni stalak za maskirnu foliju, za rolne u kutiji"
+      },
+      {
+        "label": "Odmotavanje",
+        "value": "Folija se odmotava direktno iz kutije"
+      }
+    ],
+    "applications": [
+      "Za brze poslove maskiranja u lakirnici"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "151.514": "MMIR Trolley Box"
+    }
+  },
+  "painting-supplies/mmir-trolley-masking-film-stand": {
+    "sourceHash": "10dcf20504993cae",
+    "productType": "Stalak za maskirnu foliju",
+    "subtype": "Stalak za maskirnu foliju",
+    "shortDescription": "Pokretni stalak za kačenje maskirnih folija bez dozator kutije.",
+    "longDescription": "MMIR Trolley je pokretni stalak za maskirne folije koje se kače bez dozator kutije. Konstrukcija dimenzija 106 x 44 x 92 cm omogućava efikasan rad u svim delovima radionice.",
+    "purpose": "Brzo maskiranje u lakirnici",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni stalak za maskirnu foliju, za rolne bez kutije"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "106 x 44 x 92 cm (d/š/v)"
+      }
+    ],
+    "applications": [
+      "Za brze poslove maskiranja u lakirnici"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "125.737": "MMIR Trolley"
+    }
+  },
+  "painting-supplies/ms-coupling-ms-coupling": {
+    "sourceHash": "c364a5c197f7c026",
+    "productType": "Spojnica",
+    "subtype": "MS spojnica",
+    "shortDescription": "MS spojnica za Carsystem crevo za vazduh.",
+    "longDescription": "MS Coupling je spojnica namenjena Carsystem crevu za vazduh. Isporučuje se u izvedbi Ø 9 mm.",
+    "purpose": "Povezivanje creva za vazduh",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "MS spojnica"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.036": "Ø 9 mm"
+    }
+  },
+  "painting-supplies/multi-stand-paint-stand": {
+    "sourceHash": "771653b968a1fa08",
+    "productType": "Stalak za lakiranje",
+    "subtype": "Stalak za lakiranje",
+    "shortDescription": "Okretni stalak za lakiranje delova karoserije, pokretan na točkovima, nosivosti 35 kg.",
+    "longDescription": "Multi Stand je okretni stalak za lakiranje sa preciznim mogućnostima podešavanja i stabilnom osnovom na koju se delovi karoserije sigurno pričvršćuju. Bezstepeno podešavanje omogućava brzo prilagođavanje procesu lakiranja, a robusna konstrukcija na točkovima pokretna je po radionici. Maksimalno opterećenje iznosi 35 kg.",
+    "purpose": "Lakiranje, poliranje, uklanjanje udubljenja, gitovanje i brušenje delova karoserije",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Fleksibilan i univerzalno primenljiv okretni stalak za lakiranje"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Za delove karoserije kao što su blatobrani, vrata, haube i poklopci prtljažnika; pokretan na točkovima; maksimalno opterećenje: 35 kg"
+      }
+    ],
+    "applications": [
+      "Za lakiranje i poliranje, uklanjanje udubljenja ili montažu, kao i za gitovanje i brušenje različitih delova karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo postavljanje",
+        "description": "Postavljanje za 30 sekundi, brzo okretanje delova i bezstepeno zaključavanje, uz uštedu prostora i sigurno držanje delova karoserije."
+      },
+      {
+        "title": "Sklopiva konstrukcija",
+        "description": "Stalak se može sklopiti."
+      },
+      {
+        "title": "Odlaganje",
+        "description": "Sklapa se veoma ravno radi odlaganja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.563": "Kolica za lakiranje – multifunkcionalna"
+    }
+  },
+  "painting-supplies/nippel-nipple-for-quick-connector": {
+    "sourceHash": "85c829ab29d72c64",
+    "productType": "Nipl",
+    "subtype": "Nipl za brzu spojnicu",
+    "shortDescription": "Nipl za priključak vazduha, namenjen brzim spojnicama.",
+    "longDescription": "Nippel je nipl za priključak vazduha koji se koristi sa brzim spojnicama. Isporučuje se u izvedbi Ø 9 mm.",
+    "purpose": "Priključak vazduha preko brze spojnice",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Nipl za priključak vazduha za brze spojnice"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "143.129": "Ø 9 mm"
+    }
+  },
+  "painting-supplies/nippel-nipple-with-inner-thread": {
+    "sourceHash": "abbb9b73413ae1c0",
+    "productType": "Nipl",
+    "subtype": "Nipl sa unutrašnjim navojem",
+    "shortDescription": "Nipl za dovod vazduha sa unutrašnjim navojem.",
+    "longDescription": "Nippel je nipl za dovod vazduha izveden sa unutrašnjim navojem. Dostupan je u dimenziji 1/4\".",
+    "purpose": "Dovod vazduha preko unutrašnjeg navoja",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Nipl za dovod vazduha sa unutrašnjim navojem"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.034": "1/4\""
+    }
+  },
+  "painting-supplies/nippel-nipple-with-outer-thread": {
+    "sourceHash": "13d5e900b9f48544",
+    "productType": "Nipl",
+    "subtype": "Nipl sa spoljašnjim navojem",
+    "shortDescription": "Nipl za dovod vazduha sa koničnim spoljašnjim navojem, presvučen teflonom.",
+    "longDescription": "Nippel je nipl za dovod vazduha sa koničnim spoljašnjim navojem. Navoj je presvučen teflonom, a nipl je dostupan u dimenziji 1/4\".",
+    "purpose": "Dovod vazduha preko spoljašnjeg navoja",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Nipl za dovod vazduha sa koničnim spoljašnjim navojem"
+      },
+      {
+        "label": "Obrada",
+        "value": "Presvučen teflonom"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.033": "1/4\""
+    }
+  },
+  "painting-supplies/paint-arrestor-ii-paint-mist-separator": {
+    "sourceHash": "d47dc7be236d7403",
+    "productType": "Separator prskane boje",
+    "subtype": "Separator prskane boje",
+    "shortDescription": "Podni filter od staklenih vlakana za lakirne komore, izdvaja čestice boje iz izduvnog vazduha.",
+    "longDescription": "PAINT ARRESTOR II je podni filter za lakirne komore izrađen od staklenih vlakana sa elastičnom strukturom. Izdvaja čestice boje iz izduvnog vazduha lakirnice. Otporan je na temperature do 120°C, a debljina materijala iznosi 3 inča (+/- 75 mm).",
+    "purpose": "Filtriranje i izdvajanje prskane boje u lakirnim komorama",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Separator prskane boje i filter boje za lakirne komore"
+      },
+      {
+        "label": "Materijal",
+        "value": "Osnova od staklenih vlakana sa elastičnom strukturom vlakana"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "Do 120°C"
+      },
+      {
+        "label": "Debljina",
+        "value": "3 inča (+/- 75 mm)"
+      }
+    ],
+    "applications": [
+      "Filter boje za lakirne komore",
+      "Izdvajanje prskane boje"
+    ],
+    "benefits": [
+      {
+        "title": "Visok učinak filtriranja",
+        "description": "Filtriranje sa visokim učinkom."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.136": "500 mm x 20 m, 3\"",
+      "160.137": "500 mm x 91 m, 3\"",
+      "160.138": "660 mm x 20 m, 3\"",
+      "160.139": "760 mm x 20 m, 3\"",
+      "160.140": "760 mm x 25 m, 3\"",
+      "160.141": "760 mm x 91 m, 3\"",
+      "160.142": "860 mm x 91 m, 3\"",
+      "160.143": "1000 mm x 20 m, 3\"",
+      "160.144": "1000 mm x 25 m, 3\"",
+      "160.145": "1000 mm x 50 m, 3\"",
+      "160.146": "1000 mm x 91 m, 3\"",
+      "160.147": "1250 mm x 91 m, 3\"",
+      "160.148": "1530 mm x 25 m, 3\""
+    }
+  },
+  "painting-supplies/paint-trolley-flexi-plus-paint-stand": {
+    "sourceHash": "1159e21bbcef0f18",
+    "productType": "Stalak za lakiranje",
+    "subtype": "Stalak za lakiranje",
+    "shortDescription": "Pokretni stalak za lakiranje za vrata, haube, branike i blatobrane, nosivosti 50 kg.",
+    "longDescription": "Paint Trolley Flexi Plus je pokretni stalak za lakiranje namenjen držanju vrata, hauba, branika, blatobrana, spojlera i sličnih delova. Osovina se podešava u 28 položaja, a stalak ima šest ručica za fiksiranje i dve dodatne ručice za branike. Maksimalno opterećenje iznosi 50 kg, a proizvod je izrađen u Nemačkoj.",
+    "purpose": "Držanje delova karoserije tokom lakiranja",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni stalak za lakiranje sa osovinom podesivom u 28 položaja"
+      },
+      {
+        "label": "Izrada",
+        "value": "Veoma robusna"
+      },
+      {
+        "label": "Ručice",
+        "value": "Šest ručica za fiksiranje"
+      },
+      {
+        "label": "Dodatne ručice",
+        "value": "Dve dodatne ručice za fiksiranje branika"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "225 x 74 x 101 cm (d/š/v)"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "50 kg"
+      }
+    ],
+    "applications": [
+      "Držanje različitih delova automobila, na primer hauba, vrata, branika i blatobrana"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma dobar kvalitet",
+        "description": "Veoma dobar kvalitet izrade."
+      },
+      {
+        "title": "Visoka stabilnost",
+        "description": "Veoma visoka stabilnost tokom rada."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.596": "Kolica za lakiranje sa produžetkom"
+    }
+  },
+  "painting-supplies/paint-trolley-paint-stand": {
+    "sourceHash": "912c4edffe1d77fb",
+    "productType": "Stalak za lakiranje",
+    "subtype": "Stalak za lakiranje",
+    "shortDescription": "Pokretni okretni stalak za lakiranje sa osovinom podesivom za 360°, nosivosti 50 kg.",
+    "longDescription": "Paint Trolley je pokretni okretni stalak za lakiranje sa osom rotacije podesivom za 360°. Namenjen je držanju vrata, hauba, branika, blatobrana, spojlera i sličnih delova, a opremljen je sa četiri ručice za fiksiranje, dve dodatne ručice za branike i držačem pištolja za lakiranje. Maksimalno opterećenje iznosi 50 kg.",
+    "purpose": "Držanje delova karoserije tokom lakiranja",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni stalak za lakiranje sa osovinom podesivom za 360°"
+      },
+      {
+        "label": "Ručice",
+        "value": "Četiri ručice za fiksiranje"
+      },
+      {
+        "label": "Dodatne ručice",
+        "value": "Dve dodatne ručice za fiksiranje branika"
+      },
+      {
+        "label": "Kuke",
+        "value": "Dve kuke za odlaganje nekorišćenih ručica"
+      },
+      {
+        "label": "Držač",
+        "value": "Držač pištolja za lakiranje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "225 x 88 x 95 cm (d/š/v)"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "50 kg"
+      }
+    ],
+    "applications": [
+      "Držanje različitih delova automobila, na primer hauba i vrata"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "154.253": "Kolica za lakiranje sa produžetkom",
+      "138.848": "Rezervne hvataljke za kolica za lakiranje",
+      "138.849": "Ručica za fiksiranje"
+    }
+  },
+  "painting-supplies/paper-trolley-1500-paper-stand": {
+    "sourceHash": "6bc530c2467f143a",
+    "productType": "Stalak za papir",
+    "subtype": "Stalak za papir",
+    "shortDescription": "Pokretni dozator maskirnog papira za rolne širine do 150 cm.",
+    "longDescription": "Paper Trolley 1500 je pokretni dozator papira za rolne širine do 150 cm. Omogućava efikasan rad u svim delovima radionice.",
+    "purpose": "Brzo maskiranje u lakirnici",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni stalak za papir za rolne do 150 cm"
+      }
+    ],
+    "applications": [
+      "Za brze poslove maskiranja u lakirnici"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.101": "150 cm"
+    }
+  },
+  "painting-supplies/paper-trolley-triple-paper-stand": {
+    "sourceHash": "ad200cd4a0092046",
+    "productType": "Stalak za papir",
+    "subtype": "Trostruki stalak za papir",
+    "shortDescription": "Pokretni dozator maskirnog papira za tri širine rolni: 22, 60 i 90 cm.",
+    "longDescription": "Paper Trolley je pokretni dozator papira za tri različite širine rolni (22, 60 i 90 cm). Opremljen je podesivim držačima za rolne maskirne trake koji traku postavljaju tačno na ivicu papira. Dimenzije stalka su 135 x 59 x 110 cm.",
+    "purpose": "Brzo maskiranje u lakirnici",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni stalak za papir za tri širine rolni (22, 60, 90 cm)"
+      },
+      {
+        "label": "Držači trake",
+        "value": "Podesivi držači za rolne maskirne trake koji traku fiksiraju tačno na ivicu papira"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "135 x 59 x 110 cm (d/š/v)"
+      }
+    ],
+    "applications": [
+      "Za brze poslove maskiranja u lakirnici"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "138.862": "Paper Trolley"
+    }
+  },
+  "painting-supplies/rupes-carrier-carrier-for-polishes-and-abrasives": {
+    "sourceHash": "83422ad27d51ffb4",
+    "productType": "Radionička kolica",
+    "subtype": "Kolica za polir paste i abrazive",
+    "shortDescription": "Radionička kolica za polir paste i abrazive sa priključkom struje za električni alat.",
+    "longDescription": "RUPES Carrier su radionička kolica za odlaganje polir pasta i abraziva. Sadrže tri Systainer modula sa fiokama, odeljak za odlaganje sa dodatnim vešanjem mašina za poliranje i priključak struje za električni alat. Izrađena su od plastike otporne na udare.",
+    "purpose": "Odlaganje i transport polir pasta i abraziva u radionici",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Radionička kolica za polir paste i abrazive"
+      },
+      {
+        "label": "Moduli",
+        "value": "3 Systainer modula sa fiokama"
+      },
+      {
+        "label": "Odeljak",
+        "value": "Odeljak za odlaganje sa dodatnim vešanjem mašina za poliranje"
+      },
+      {
+        "label": "Napajanje",
+        "value": "Priključak struje za električni alat"
+      },
+      {
+        "label": "Materijal",
+        "value": "Plastika otporna na udare"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.342": "Kolica"
+    }
+  },
+  "painting-supplies/rupes-cleaning-and-maintenance-oil-maintenance-oil": {
+    "sourceHash": "0aac46009a8678dc",
+    "productType": "Ulje za održavanje",
+    "subtype": "Ulje za održavanje",
+    "shortDescription": "Providno ulje bez silikona za negu i podmazivanje pneumatskog alata.",
+    "longDescription": "RUPES Cleaning and maintenance oil je providno ulje bez silikona namenjeno nezi i podmazivanju pneumatskog alata. Održava i podmazuje pneumatske brusilice i mašine za poliranje, primenljivo je i na niskim temperaturama i štiti od korozije i habanja.",
+    "purpose": "Nega i podmazivanje pneumatskog alata",
+    "facts": [
+      {
+        "label": "Izgled",
+        "value": "Providno ulje za održavanje"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Održava i podmazuje pneumatske brusilice i mašine za poliranje"
+    ],
+    "benefits": [
+      {
+        "title": "Rad na niskim temperaturama",
+        "description": "Primenljivo i na niskim temperaturama."
+      },
+      {
+        "title": "Zaštita alata",
+        "description": "Štiti od korozije i habanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "150.190": "50 ml"
+    }
+  },
+  "painting-supplies/rupes-vacuum-cleaner-s145-vacuum-cleaner": {
+    "sourceHash": "69f18cf22d6656e3",
+    "productType": "Usisivač",
+    "subtype": "Usisivač",
+    "shortDescription": "Pokretni usisivač sa crevom od 5 m i rezervoarom zapremine 45 L.",
+    "longDescription": "RUPES S145 je pokretni usisivač sa crevom dužine 5 m i rezervoarom zapremine 45 L. Protok vazduha iznosi 3,400 L/min, a nivo buke 67 dB (A). Snaga je 1,200 W, uz maksimalnu snagu od 2,400 W.",
+    "purpose": "Usisavanje prašine u radionici",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Pokretni usisivač sa crevom od 5 m"
+      },
+      {
+        "label": "Zapremina rezervoara",
+        "value": "45 L"
+      },
+      {
+        "label": "Protok vazduha",
+        "value": "3,400 L/min."
+      },
+      {
+        "label": "Nivo buke",
+        "value": "67 dB (A)"
+      },
+      {
+        "label": "Snaga",
+        "value": "1,200 W"
+      },
+      {
+        "label": "Maks. snaga",
+        "value": "2,400 W"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.343": "Usisivač S145L Profi",
+      "157.344": "Usisivač S145PL Profi",
+      "157.471": "Usisivač S145EM",
+      "157.472": "Usisivač S145EPM",
+      "157.560": "Vreća za prašinu, S serija, pakovanje od 5 komada"
+    }
+  },
+  "painting-supplies/rupes-workshop-carrier-kc28-workshop-carrier": {
+    "sourceHash": "bce79e3593a3714a",
+    "productType": "Radionička kolica",
+    "subtype": "Radionička kolica",
+    "shortDescription": "Radionička kolica za usisivače, sa držačima alata, creva i odeljkom koji se zaključava.",
+    "longDescription": "RUPES KC28 su radionička kolica namenjena usisivačima. Opremljena su sa dva držača alata, dva držača usisnih creva i dva okretna prednja točkića sa kočnicama. Sadrže odeljak za odlaganje koji se zaključava ključem, radnu površinu sa velikom višenamenskom kutijom i ergonomsku ručku.",
+    "purpose": "Transport i odlaganje usisivača i alata u radionici",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Radionička kolica za usisivače"
+      },
+      {
+        "label": "Držači alata",
+        "value": "2 držača alata"
+      },
+      {
+        "label": "Držači creva",
+        "value": "2 držača za usisna creva"
+      },
+      {
+        "label": "Točkovi",
+        "value": "2 okretna prednja točkića sa kočnicama"
+      },
+      {
+        "label": "Odeljak",
+        "value": "Odeljak za odlaganje koji se zaključava ključem"
+      },
+      {
+        "label": "Radna površina",
+        "value": "Radna površina sa velikom višenamenskom kutijom"
+      },
+      {
+        "label": "Ručka",
+        "value": "Ergonomska ručka"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.341": "KC28",
+      "157.469": "Perforirana tabla 016.1110/c za KC28"
+    }
+  },
+  "painting-supplies/safety-coupling-safety-coupling-with-quick-connector": {
+    "sourceHash": "2d6f14f560c02680",
+    "productType": "Sigurnosna spojnica",
+    "subtype": "Sigurnosna spojnica sa brzim priključkom",
+    "shortDescription": "Sigurnosna spojnica za vazduh namenjena brzim priključcima.",
+    "longDescription": "Safety Coupling je sigurnosna spojnica za vazduh koja se koristi sa brzim priključcima. Dostupna je u izvedbi Ø 9 mm.",
+    "purpose": "Sigurno povezivanje vazdušne instalacije",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Sigurnosna spojnica za vazduh za brze priključke"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "143.127": "Ø 9 mm"
+    }
+  },
+  "painting-supplies/shop-seat-pro-workshop-seat": {
+    "sourceHash": "67c070a1c0b68cbc",
+    "productType": "Radionička stolica",
+    "subtype": "Radionička stolica",
+    "shortDescription": "Robusna radionička stolica sa pneumatskim podešavanjem visine i nosivošću do 158 kg.",
+    "longDescription": "Shop Seat Pro je robusna radionička stolica za udoban rad u karoserijskoj i lakirerskoj radionici. Ima pneumatsko podešavanje visine, udobno sedište otporno na prljavštinu i blage hemikalije i pet tihih točkića na kugličnim ležajevima. Magnetna površina za odlaganje i petodelne plastične posude služe za držanje alata, a stolica se brzo sklapa i odmah je spremna za upotrebu.",
+    "purpose": "Udoban rad pri poliranju, brušenju i montaži",
+    "facts": [
+      {
+        "label": "Konstrukcija",
+        "value": "Čvrsta i robusna radionička stolica za teške uslove rada"
+      },
+      {
+        "label": "Podešavanje visine",
+        "value": "Pneumatsko"
+      },
+      {
+        "label": "Sedište",
+        "value": "Udobno sedište otporno na prljavštinu i blage hemikalije"
+      },
+      {
+        "label": "Posude",
+        "value": "Petodelne plastične posude koje se skidaju"
+      },
+      {
+        "label": "Točkovi",
+        "value": "5 tihih točkića na kugličnim ležajevima"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "158 kg"
+      }
+    ],
+    "applications": [
+      "Udobna radionička stolica u modernom Carsystem dizajnu za jednostavno izvođenje poslova poliranja i brušenja"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavna montaža",
+        "description": "Stolica se lako sklapa."
+      },
+      {
+        "title": "Petodelna polica za odlaganje",
+        "description": "Petodelna polica za odlaganje alata i radnog pribora."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.161": "Shop Seat Pro"
+    }
+  },
+  "painting-supplies/uv-led-lamp-uv-led-lamp": {
+    "sourceHash": "e02305cd48ae2906",
+    "productType": "UV LED lampa",
+    "subtype": "UV LED lampa",
+    "shortDescription": "Akumulatorska UV LED lampa za očvršćavanje UV proizvoda na površini prečnika do 50 cm.",
+    "longDescription": "Akumulatorska UV LED lampa za očvršćavanje UV proizvoda. Pokriva površinu prečnika najviše 50 cm sa udaljenosti od 30 cm. Postolje se okreće za 180°, čime se podešava potreban ugao osvetljenja.",
+    "purpose": "Očvršćavanje UV proizvoda",
+    "facts": [
+      {
+        "label": "Snaga",
+        "value": "12 W"
+      },
+      {
+        "label": "Baterija",
+        "value": "3.7V 5,2 Ah Li-Ion"
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "7 sati"
+      },
+      {
+        "label": "Vreme rada",
+        "value": "4,5 sata"
+      },
+      {
+        "label": "Radna temperatura",
+        "value": "-10 °C do +40 °C"
+      },
+      {
+        "label": "Težina",
+        "value": "672 g"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "184,4 x 164 x 47,3 mm"
+      },
+      {
+        "label": "Sertifikacija",
+        "value": "IP65 | IK07"
+      }
+    ],
+    "applications": [
+      "UV LED lampa za očvršćavanje UV proizvoda na površini prečnika najviše 50 cm, sa udaljenosti od 30 cm"
+    ],
+    "benefits": [
+      {
+        "title": "Akumulatorsko napajanje",
+        "description": "Akumulatorska UV LED lampa za fleksibilnu upotrebu."
+      },
+      {
+        "title": "Postolje sa okretom 180°",
+        "description": "Postolje se okreće za 180°, pa se podešava potreban ugao osvetljenja."
+      },
+      {
+        "title": "Robusna izrada",
+        "description": "Lampa je veoma robusna i otporna."
+      }
+    ],
+    "advice": "Pri radu sa UV lampama uvek zaštitite oči. Nosite Carsystem UV zaštitne naočare.",
+    "variants": {
+      "154.645": "UV LED lampa"
+    }
+  },
+  "painting-supplies/uv-smart-lamp-uv-hand-lamp": {
+    "sourceHash": "d233422b7f47d8f2",
+    "productType": "UV lampa",
+    "subtype": "UV ručna lampa",
+    "shortDescription": "Ručna UV lampa na bateriju za sušenje UV proizvoda kod spot popravki.",
+    "longDescription": "UV Smart Lamp je ručna UV lampa na bateriju namenjena sušenju UV proizvoda kod spot popravki. Podesivo magnetno postolje omogućava rad i na vertikalnim površinama. Snaga lampe je 5 W, radno vreme 4.5 sata, a baterija se puni 4 sata.",
+    "purpose": "Sušenje UV proizvoda kod spot popravki",
+    "facts": [
+      {
+        "label": "Snaga",
+        "value": "5 W"
+      },
+      {
+        "label": "Baterija",
+        "value": "3.7V 2.6 Ah Li-Ion"
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "4 sata"
+      },
+      {
+        "label": "Radno vreme",
+        "value": "4.5 sata"
+      },
+      {
+        "label": "Radna temperatura",
+        "value": "-10 °C do +40 °C"
+      },
+      {
+        "label": "Masa",
+        "value": "310 g"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "190 x 56 x 29 mm"
+      },
+      {
+        "label": "Sertifikacija",
+        "value": "IP65 | IK07"
+      }
+    ],
+    "applications": [
+      "Ručna UV lampa za sušenje UV proizvoda kod spot popravki na površini najvećeg prečnika 10 cm"
+    ],
+    "benefits": [
+      {
+        "title": "Rad na bateriju",
+        "description": "Ručna UV lampa na bateriju za fleksibilnu upotrebu."
+      },
+      {
+        "title": "Magnetno postolje",
+        "description": "Podesivo magnetno postolje omogućava rad na vertikalnim površinama."
+      },
+      {
+        "title": "Kuka za odlaganje",
+        "description": "Kuka omogućava odlaganje uz uštedu prostora."
+      }
+    ],
+    "advice": "Prilikom rada sa UV lampama uvek zaštitite oči. Nosite Carsystem UV zaštitne naočare.",
+    "variants": {
+      "153.777": "190 x 56 x 29 mm"
+    }
+  },
+  "painting-supplies/uv-timer-timer-for-uv-lamps": {
+    "sourceHash": "5dba9bdf7f6fcb67",
+    "productType": "UV tajmer",
+    "subtype": "Tajmer za UV lampe",
+    "shortDescription": "Carsystem UV tajmer za kontrolu vremena sušenja pri radu sa UV lampama.",
+    "longDescription": "Tajmer namenjen radu sa UV lampama. Koristi se za kontrolu vremena sušenja.",
+    "purpose": "Kontrola vremena sušenja",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "UV tajmer za kontrolu vremena sušenja"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "154.772": "UV tajmer"
+    }
+  },
+  "painting-supplies/workshop-bucket-10-l": {
+    "sourceHash": "626107abe396f405",
+    "productType": "Radionička kofa",
+    "subtype": "10 l",
+    "shortDescription": "Radionička kofa zapremine 10 l za univerzalnu upotrebu.",
+    "longDescription": "Radionička kofa zapremine 10 l namenjena je univerzalnoj upotrebi u radionici.",
+    "purpose": "Univerzalna upotreba u radionici",
+    "facts": [
+      {
+        "label": "Zapremina",
+        "value": "10 l"
+      }
+    ],
+    "applications": [
+      "Univerzalna radionička kofa"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.442": "Radionička kofa / 10 l"
+    }
+  },
+  "painting-supplies/workshop-seat-workshop-seat": {
+    "sourceHash": "e2a7b60086c5088c",
+    "productType": "Radionička stolica",
+    "subtype": "Radionička stolica",
+    "shortDescription": "Radionička stolica sa hidrauličnim podešavanjem visine i magnetnom pločom za odlaganje.",
+    "longDescription": "Work Shop Seat je radionička stolica za udoban rad pri poliranju i brušenju u karoserijskoj i lakirerskoj radionici. Visina se podešava hidraulično, sedište je otporno na hemikalije i rastvarače, a glatka navlaka se lako čisti. Stolica se kreće na pet gumiranih točkova na kugličnim ležajevima i nosi do 150 kg.",
+    "purpose": "Udoban rad pri brušenju i poliranju",
+    "facts": [
+      {
+        "label": "Podešavanje visine",
+        "value": "Hidraulično"
+      },
+      {
+        "label": "Sedište",
+        "value": "Otporno na hemikalije i rastvarače"
+      },
+      {
+        "label": "Navlaka",
+        "value": "Glatko sedište koje se lako čisti"
+      },
+      {
+        "label": "Točkovi",
+        "value": "Pet gumiranih točkova na kugličnim ležajevima"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "150 kg"
+      }
+    ],
+    "applications": [
+      "Udobna radionička stolica u Carsystem dizajnu za sve poslove brušenja i poliranja"
+    ],
+    "benefits": [
+      {
+        "title": "Magnetna ploča za odlaganje",
+        "description": "Magnetna ploča za odlaganje alata i radnog materijala."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "149.427": "Profesionalna radionička stolica"
+    }
+  },
+  "painting-supplies/x-stand-classic-paint-stand": {
+    "sourceHash": "496193ebd507189e",
+    "productType": "Stalak za lakiranje",
+    "subtype": "Stalak za lakiranje",
+    "shortDescription": "Stalak za lakiranje delova karoserije, radne visine 50 - 100 cm i nosivosti 50 kg.",
+    "longDescription": "X-Stand Classic je stalak za lakiranje namenjen držanju različitih delova automobila, na primer vrata i hauba. Koristi se na visini od 50 do 100 cm, uz maksimalno opterećenje od 50 kg.",
+    "purpose": "Držanje delova karoserije tokom lakiranja",
+    "facts": [
+      {
+        "label": "Visina",
+        "value": "50 - 100 cm"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "50 kg"
+      }
+    ],
+    "applications": [
+      "Držanje različitih delova automobila, na primer hauba i vrata"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "137.349": "50 - 100 cm"
+    }
+  },
+  "painting-supplies/x-stand-top-paint-stand": {
+    "sourceHash": "94aa74c3ac9f258a",
+    "productType": "Stalak za lakiranje",
+    "subtype": "Stalak za lakiranje",
+    "shortDescription": "Stalak za lakiranje radne visine 50 - 125 cm i nosivosti 120 kg.",
+    "longDescription": "X-Stand Top je stalak za lakiranje namenjen držanju različitih delova automobila, na primer vrata, hauba i branika. Koristi se na visini od 50 do 125 cm, uz maksimalno opterećenje od 120 kg. Za njega su dostupne produžne šipke dužine 55 cm.",
+    "purpose": "Držanje delova karoserije tokom lakiranja",
+    "facts": [
+      {
+        "label": "Visina",
+        "value": "50 - 125 cm"
+      },
+      {
+        "label": "Maksimalno opterećenje",
+        "value": "120 kg"
+      },
+      {
+        "label": "Produžne šipke",
+        "value": "Dostupne u dužini 55 cm"
+      }
+    ],
+    "applications": [
+      "Držanje različitih delova automobila, na primer hauba i vrata"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "138.851": "50 - 125 cm",
+      "138.852": "50 - 125 cm sa produžetkom"
+    }
+  }
+}

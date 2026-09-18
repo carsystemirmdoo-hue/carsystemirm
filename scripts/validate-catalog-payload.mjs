@@ -20,6 +20,8 @@
 
 import { readFileSync } from "node:fs";
 
+import { loadCatalogRuntime } from "./lib/catalog-runtime.mjs";
+
 const args = Object.fromEntries(
   process.argv.slice(2).map((arg) => arg.replace(/^--/, "").split("=")),
 );
@@ -111,10 +113,19 @@ if (response?.ok) {
     );
   }
 
+  /*
+   * Granica se MERI, ne pamti: fiksnih „< 400” je važilo dok je katalog imao
+   * ~220 canonical entiteta i palo bi na svaki legitiman rast asortimana
+   * (Carsystem sync je doneo 404 samostalna proizvoda). Ono što se čuva je
+   * odnos — payload nosi canonical entitete (uz malu rezervu za ponovljen
+   * ključ u RSC toku), a nikad canonical + varijante.
+   */
+  const { listing } = loadCatalogRuntime();
+  const canonical = listing.canonical.length;
   const entityCount = flight.split('"kind"').length - 1;
   expect(
-    entityCount > 0 && entityCount < 400,
-    `Neočekivan broj serijalizovanih listing entiteta: ${entityCount}. ` +
+    entityCount > 0 && entityCount <= Math.ceil(canonical * 1.15) && entityCount < canonical + listing.variants.length,
+    `Neočekivan broj serijalizovanih listing entiteta: ${entityCount} (canonical: ${canonical}, varijanti: ${listing.variants.length}). ` +
       "Browse payload treba da nosi canonical entitete, ne sve varijante.",
   );
 

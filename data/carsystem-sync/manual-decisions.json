@@ -1,0 +1,10 @@
+{
+  "_comment": "Ručne odluke vlasnika. local.<naš slug>: {decision: \"match\", sourceKey} | {decision: \"keep-separate\"} | {useOfficialImage: true} (zameni sliku ručnog zapisa zvaničnim packshotom prepoznatog proizvoda). source.<sourceKey>: {decision: \"skip\"}. Sync ih čita pri svakom pokretanju.",
+  "local": {
+    "carsystem-git-multi-green": {
+      "useOfficialImage": true,
+      "note": "2026-09-18: slika ručnog zapisa (i HEAD .jpg i kasniji .webp) prikazuje limenku „MULTI GREEN GLAS”, Art.-Nr. 146.707, 1610 g — to je zvanični proizvod Multi Green Glas, uvezen zasebno. Zapis je po nazivu i bajt-identičnom TDS-u „Multi Green” (146.706), čiji zvanični packshot nosi natpis „MULTI GREEN”, 1.560 g. Odobrio vlasnik."
+    }
+  },
+  "source": {}
+}

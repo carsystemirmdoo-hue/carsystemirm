@@ -1,0 +1,1346 @@
+{
+  "bonding-sealing/applicator-applicator": {
+    "sourceHash": "5447ac1741c379ec",
+    "productType": "Aplikator",
+    "subtype": "Aplikator",
+    "shortDescription": "Specijalni aplikator za nanošenje tečnih prajmera, namenjen proizvodu Uniflex Glas Fast-Primer.",
+    "longDescription": "Applicator je specijalni alat za nanošenje tečnih prajmera. Namenjen je nanošenju Carsystem Uniflex Glas Fast-Primer pri pripremi površine.",
+    "purpose": "Nanošenje Carsystem Uniflex Glas Fast-Primer",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Specijalni alat za nanošenje tečnih prajmera"
+      }
+    ],
+    "applications": [
+      "Za nanošenje Carsystem Uniflex Glas Fast-Primer"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.325": "Aplikator"
+    }
+  },
+  "bonding-sealing/hs-acryl-tape-double-sided-adhesive-tape": {
+    "sourceHash": "a53acba228a5d4c8",
+    "productType": "Dvostrano lepljiva traka",
+    "subtype": "Dvostrano lepljiva traka",
+    "shortDescription": "Dvostrano lepljiva akrilna traka postojana od -40 °C do +150 °C, za trajno pričvršćivanje delova.",
+    "longDescription": "HS-Acryl Tape je dvostrano lepljiva traka na bazi akrila sa akrilatnim lepkom. Temperaturna postojanost od -40 °C do +150 °C i visoka moć lepljenja omogućavaju trajno pričvršćivanje uz izraženo smicanje i izloženost UV zračenju. Koristi se i za industrijsku montažu u enterijeru i eksterijeru, na metalu, drvetu, staklu i većini uobičajenih plastika.",
+    "purpose": "Trajno pričvršćivanje delova i industrijska montaža",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Dvostrano lepljiva traka"
+      },
+      {
+        "label": "Temperaturna postojanost",
+        "value": "-40 °C do +150 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva lepljiva traka"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi akrila"
+      },
+      {
+        "label": "Lepak",
+        "value": "Akrilatni lepak"
+      }
+    ],
+    "applications": [
+      "Traka za zahtevne primene i trajno pričvršćivanje pri ekstremnim temperaturama i vlažnosti (npr. lajsne i ambleme, bočne branike, ogledala ili tegove za balansiranje)",
+      "Industrijska montaža znakova ili nalepnica u enterijeru i eksterijeru",
+      "Pogodna za metal, drvo, staklo i većinu uobičajenih plastika"
+    ],
+    "benefits": [
+      {
+        "title": "Visoko početno prianjanje",
+        "description": "Veoma visoko početno prianjanje i čvrstoća spoja."
+      },
+      {
+        "title": "Postojanost na uslove",
+        "description": "Visoka postojanost na temperaturu i vlagu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "147.024": "6 mm x 10 m",
+      "137.072": "9 mm x 10 m",
+      "137.073": "12 mm x 10 m",
+      "137.074": "19 mm x 10 m"
+    }
+  },
+  "bonding-sealing/ks-100-underbody-protection-bitumen": {
+    "sourceHash": "acea547b76594eb5",
+    "productType": "Zaštita podvozja",
+    "subtype": "Zaštita podvozja na bazi bitumena",
+    "shortDescription": "Zaštita podvozja na bazi bitumena koja se nanosi četkom, u crnoj boji.",
+    "longDescription": "KS-100 je zaštita podvozja na bazi bitumena koja se nanosi četkom. Reč je o tiksotropnom kompozitu bitumena i smole, crne boje. Namenjen je zaštiti podvozja karoserije.",
+    "purpose": "Zaštita podvozja karoserije",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita podvozja koja se nanosi četkom"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi bitumena"
+      },
+      {
+        "label": "Sastav",
+        "value": "Tiksotropni kompozit bitumena i smole"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Zaštita podvozja karoserije"
+    ],
+    "benefits": [],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "126.032": "1 l"
+    }
+  },
+  "bonding-sealing/ks-1000-stone-chip-protection": {
+    "sourceHash": "f7781f4800ad03f8",
+    "productType": "Zaštita od udara kamena",
+    "subtype": "Zaštita od udara kamena",
+    "shortDescription": "Zaštita od udara kamena i zaštita podvozja na bazi plastificirane gume, za nanošenje pištoljem.",
+    "longDescription": "KS-1000 je zaštita od udara kamena i zaštita podvozja na bazi plastificirane gume, koja se nanosi pištoljem. Koristi se za obradu podvozja karoserije, kao i za zaštitu spojlera, pragova i donjih delova vrata. Prigušuje vibracije, smanjuje buku i pogodan je i za PVC podloge. Ne sadrži azbest.",
+    "purpose": "Obrada podvozja i zaštita od udara kamena na karoseriji",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita od udara kamena i zaštita podvozja za nanošenje pištoljem"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi plastificirane gume"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez azbesta"
+      }
+    ],
+    "applications": [
+      "Obrada podvozja karoserije",
+      "Zaštita od udara kamena za spojlere, pragove i donje delove vrata"
+    ],
+    "benefits": [
+      {
+        "title": "Prigušenje vibracija",
+        "description": "Prigušuje vibracije na obrađenoj površini."
+      },
+      {
+        "title": "Smanjenje buke",
+        "description": "Deluje kao masa za smanjenje buke."
+      },
+      {
+        "title": "Pogodan za PVC",
+        "description": "Pogodan je i za PVC podloge."
+      }
+    ],
+    "advice": "Prefarbavanje je moguće nakon nanošenja prajmera za prianjanje.",
+    "variants": {
+      "149.266": "Bela / 1 l",
+      "149.264": "Siva / 1 l",
+      "149.265": "Crna / 1 l"
+    }
+  },
+  "bonding-sealing/ks-1050-stone-chip-protection": {
+    "sourceHash": "2932d9098d97aa7c",
+    "productType": "Zaštita od udara kamena",
+    "subtype": "Zaštita od udara kamena",
+    "shortDescription": "Sprej za zaštitu podvozja na bazi sintetičke gume, za obnovu i popravku postojeće zaštite.",
+    "longDescription": "KS-1050 je zaštita podvozja u spreju, na bazi sintetičke gume i bez azbesta. Namenjen je obnovi ili popravci postojeće zaštite od udara kamena. Pošto se nanosi iz spreja, nije potreban pištolj, a pogodan je i za PVC podloge.",
+    "purpose": "Obnova ili popravka postojeće zaštite od udara kamena",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita podvozja koja se nanosi iz spreja"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi sintetičke gume"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez azbesta"
+      }
+    ],
+    "applications": [
+      "Za obnovu ili popravku postojeće zaštite od udara kamena"
+    ],
+    "benefits": [
+      {
+        "title": "Bez pištolja",
+        "description": "Nije potrebno nanošenje pištoljem."
+      },
+      {
+        "title": "Pogodan za PVC",
+        "description": "Pogodan je i za PVC podloge."
+      }
+    ],
+    "advice": "Prefarbavanje je moguće nakon nanošenja prajmera za prianjanje.",
+    "variants": {
+      "126.022": "Siva / 500 ml",
+      "126.023": "Crna / 500 ml"
+    }
+  },
+  "bonding-sealing/ks-200-cavity-protection": {
+    "sourceHash": "bc44d96494b941b3",
+    "productType": "Zaštita šupljina",
+    "subtype": "Zaštita šupljina",
+    "shortDescription": "Zaštita šupljina na bazi voska, za nanošenje pištoljem i konzerviranje svih šupljina karoserije.",
+    "longDescription": "KS-200 je zaštita šupljina za nanošenje pištoljem, sa voštanom strukturom i providno smeđom bojom. Koristi se za konzerviranje svih šupljina karoserije. Dobro se razliva i do teško dostupnih mesta, štiti od korozije i dobro prianja na metal.",
+    "purpose": "Konzerviranje svih šupljina karoserije",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita šupljina koja se nanosi pištoljem"
+      },
+      {
+        "label": "Struktura",
+        "value": "Zaštita šupljina na bazi voska"
+      },
+      {
+        "label": "Tačka topljenja",
+        "value": "95 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Providno smeđa"
+      }
+    ],
+    "applications": [
+      "Za konzerviranje svih šupljina karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Dobro razlivanje",
+        "description": "Dobro se razliva i do teško dostupnih mesta."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Štiti obrađene površine od korozije."
+      },
+      {
+        "title": "Prianjanje na metal",
+        "description": "Dobro prianja na metalnu podlogu."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "126.062": "1 l"
+    }
+  },
+  "bonding-sealing/ks-250-cavity-protection": {
+    "sourceHash": "34e71fad0804c5cd",
+    "productType": "Zaštita šupljina",
+    "subtype": "Zaštita šupljina",
+    "shortDescription": "Sprej za zaštitu šupljina sa tačkom topljenja 160 °C, za obnovu i popravku postojećih premaza.",
+    "longDescription": "KS-250 je zaštita šupljina u spreju, voštane strukture i providno smeđe boje, sa tačkom topljenja od 160 °C. Namenjen je obnovi ili popravci postojećih premaza. Ne kaplje pri nanošenju, štiti od korozije i dobro prianja na metal.",
+    "purpose": "Obnova ili popravka postojećih premaza u šupljinama",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita šupljina koja se nanosi iz spreja"
+      },
+      {
+        "label": "Struktura",
+        "value": "Zaštita šupljina na bazi voska"
+      },
+      {
+        "label": "Tačka topljenja",
+        "value": "160 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Providno smeđa"
+      }
+    ],
+    "applications": [
+      "Za obnovu ili popravku postojećih premaza"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka tačka topljenja",
+        "description": "Veoma visoka tačka topljenja."
+      },
+      {
+        "title": "Ne kaplje",
+        "description": "Pri nanošenju ne kaplje."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Štiti obrađene površine od korozije."
+      },
+      {
+        "title": "Prianjanje na metal",
+        "description": "Dobro prianja na metalnu podlogu."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "126.061": "500 ml / sa crevom",
+      "159.332": "Rezervno crevo / 60 cm"
+    }
+  },
+  "bonding-sealing/ks-3000-plus-hs-stone-chip-protection": {
+    "sourceHash": "5de0e15a899667bf",
+    "productType": "HS zaštita od udara kamena",
+    "subtype": "HS zaštita od udara kamena",
+    "shortDescription": "HS zaštita od udara kamena i podvozja na bazi gume i smole, za nanošenje pištoljem.",
+    "longDescription": "KS-3000 Plus je zaštita od udara kamena i zaštita podvozja koja se nanosi pištoljem, na bazi kombinacije gume i smole. Namenjen je karoseriji, gde prigušuje vibracije i smanjuje buku. Veoma je otporan na vremenske uticaje i na habanje.",
+    "purpose": "Zaštita od udara kamena i zaštita podvozja karoserije",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita od udara kamena i zaštita podvozja za nanošenje pištoljem"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi gume i smole"
+      }
+    ],
+    "applications": [
+      "Zaštita od udara kamena i zaštita podvozja karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Prigušenje vibracija",
+        "description": "Prigušuje vibracije na obrađenoj površini."
+      },
+      {
+        "title": "Smanjenje buke",
+        "description": "Deluje kao masa za smanjenje buke."
+      },
+      {
+        "title": "Otpornost na vremenske uticaje",
+        "description": "Veoma je otporan na vremenske uticaje."
+      },
+      {
+        "title": "Otpornost na habanje",
+        "description": "Veoma je otporan na habanje."
+      }
+    ],
+    "advice": "Prefarbava se vodorazredivim bojama bez prajmera, a 2K ili akrilnim bojama nakon nanošenja prajmera za prianjanje. Pogodan je za sušenje u komori i veoma dobro se brusi nakon potpunog očvršćavanja. Moguća je promenljiva struktura, fina ili gruba.",
+    "variants": {
+      "152.804": "Siva / 1 l",
+      "152.622": "Crna / 1 l"
+    }
+  },
+  "bonding-sealing/ks-3002-cavity-wax": {
+    "sourceHash": "494ccd2ea043c3c0",
+    "productType": "Vosak za šupljine",
+    "subtype": "Vosak za šupljine",
+    "shortDescription": "Vosak za šupljine koji se nanosi iz spreja, providno bele boje, za konzerviranje šupljina karoserije.",
+    "longDescription": "KS-300.2 je vosak za zaštitu šupljina koji se nanosi iz spreja i stvara providno beli zaštitni film. Koristi se za konzerviranje svih šupljina karoserije. Ima veoma visoku tačku topljenja, ne kaplje pri nanošenju, štiti od korozije i dobro prianja na metal.",
+    "purpose": "Konzerviranje svih šupljina karoserije",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita šupljina koja se nanosi iz spreja"
+      },
+      {
+        "label": "Struktura",
+        "value": "Zaštita šupljina na bazi voska"
+      },
+      {
+        "label": "Boja",
+        "value": "Providno bela"
+      },
+      {
+        "label": "Tačka topljenja",
+        "value": "> 100 °C"
+      }
+    ],
+    "applications": [
+      "Za konzerviranje svih šupljina karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka tačka topljenja",
+        "description": "Veoma visoka tačka topljenja."
+      },
+      {
+        "title": "Ne kaplje",
+        "description": "Pri nanošenju ne kaplje."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Štiti obrađene površine od korozije."
+      },
+      {
+        "title": "Prianjanje na metal",
+        "description": "Dobro prianja na metalnu podlogu."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "160.064": "1 l"
+    }
+  },
+  "bonding-sealing/ks-400-rust-protection-wax": {
+    "sourceHash": "8cafcfe607f21799",
+    "productType": "Vosak protiv korozije",
+    "subtype": "Vosak protiv korozije",
+    "shortDescription": "Providni vosak protiv korozije u spreju, temperaturno postojan od -25 °C do +160 °C.",
+    "longDescription": "KS-400 je tečna zaštita od korozije u spreju, providne boje. Koristi se za providno konzerviranje delova karoserije izloženih koroziji, a zahvaljujući temperaturnoj postojanosti do 160 °C i za zaštitu pojedinih delova motornog prostora. Štiti i šarke, a dobro potiskuje vodu.",
+    "purpose": "Providno konzerviranje delova karoserije izloženih koroziji",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Vosak za zaštitu od korozije"
+      },
+      {
+        "label": "Konzistencija",
+        "value": "Tečna zaštita od korozije"
+      },
+      {
+        "label": "Temperaturna postojanost",
+        "value": "-25 °C do +160 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Providna"
+      }
+    ],
+    "applications": [
+      "Providno konzerviranje delova karoserije izloženih koroziji",
+      "Pogodan za zaštitu pojedinih delova motornog prostora",
+      "Štiti i šarke"
+    ],
+    "benefits": [
+      {
+        "title": "Potiskivanje vode",
+        "description": "Dobro potiskuje vodu sa površine."
+      },
+      {
+        "title": "Temperaturna postojanost",
+        "description": "Veoma je postojan na temperaturu."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "125.468": "500 ml"
+    }
+  },
+  "bonding-sealing/ks-40002-stone-chip-protection-water-based": {
+    "sourceHash": "bda504f273dafd9f",
+    "productType": "Zaštita od udara kamena",
+    "subtype": "Zaštita od udara kamena · na vodenoj bazi",
+    "shortDescription": "Zaštita podvozja na vodenoj bazi, bez rastvarača, koja se brzo suši i može se prefarbavati.",
+    "longDescription": "KS-4000.2 je zaštita podvozja na vodenoj bazi, bez rastvarača, koja se nanosi pištoljem. Namenjena je zaštiti od udara kamena i nanosi se pomoću CS KS-Gun ili CS KS-Dual Gun. Suši se za manje od 1 sat, može se prefarbavati i štiti podlogu od korozije.",
+    "purpose": "Zaštita podvozja i zaštita od udara kamena na vodenoj bazi",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita podvozja koja se nanosi pištoljem"
+      },
+      {
+        "label": "Baza",
+        "value": "Na vodenoj bazi"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez rastvarača"
+      }
+    ],
+    "applications": [
+      "Zaštita od udara kamena na vodenoj bazi koja se može prefarbavati, za nanošenje pomoću CS KS-Gun ili CS KS-Dual Gun"
+    ],
+    "benefits": [
+      {
+        "title": "Vodena baza",
+        "description": "Proizvod je na vodenoj bazi."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Suši se za manje od 1 sat."
+      },
+      {
+        "title": "Prefarbavanje",
+        "description": "Može se prefarbavati."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Štiti podlogu od korozije."
+      }
+    ],
+    "advice": "Prefarbava se standardnim bojama na vodenoj bazi nakon površinskog sušenja (boja prelazi u crnu), a standardnim sistemima na bazi rastvarača nakon potpunog sušenja. Dok je još mokar, lako se uklanja toplom vodom. Posudu posle upotrebe zatvoriti jer se proizvod veoma brzo suši.",
+    "variants": {
+      "160.067": "Crna / 1 l"
+    }
+  },
+  "bonding-sealing/ks-5002-underbody-protection-bitumen": {
+    "sourceHash": "844e017bb00478bb",
+    "productType": "Zaštita podvozja",
+    "subtype": "Zaštita podvozja na bazi bitumena",
+    "shortDescription": "Zaštita podvozja na bazi bitumena za nanošenje pištoljem, crne boje, za trajnu zaštitu karoserije.",
+    "longDescription": "KS-500.2 je zaštita podvozja na bazi bitumena koja se nanosi pištoljem, u crnoj boji. Namenjena je trajnoj zaštiti podvozja karoserije. Prigušuje vibracije i deluje kao masa za smanjenje buke.",
+    "purpose": "Trajna zaštita podvozja karoserije",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita podvozja koja se nanosi pištoljem"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi bitumena"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Trajna zaštita podvozja karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Prigušenje vibracija",
+        "description": "Prigušuje vibracije na obrađenoj površini."
+      },
+      {
+        "title": "Smanjenje buke",
+        "description": "Deluje kao masa za smanjenje buke."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "160.065": "1 l"
+    }
+  },
+  "bonding-sealing/ks-502-brushable-seam-sealer": {
+    "sourceHash": "1ed55f6edb92ace6",
+    "productType": "Zaptivna masa za šavove",
+    "subtype": "Zaptivna masa za šavove · nanošenje četkom",
+    "shortDescription": "Fleksibilna 1K zaptivna masa za šavove, na bazi polimera, koja se nanosi četkom i može se prefarbavati.",
+    "longDescription": "KS-50.2 je fleksibilna 1K zaptivna masa za karoseriju na bazi polimera, bez aromata, koja se nanosi četkom. Namenjena je zaptivanju spojeva i šavova na pokretnim delovima, kao i ivica i spojeva na haubama, vratima i drugim delovima karoserije. Siva je, trajno prianja, prigušuje zvuk i može se prefarbavati. Temperaturno je postojana od -25 °C do 80 °C.",
+    "purpose": "Zaptivanje spojeva i šavova na karoseriji",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Fleksibilna 1K zaptivna masa za karoseriju, za nanošenje četkom"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez aromata"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi polimera"
+      },
+      {
+        "label": "Obrada",
+        "value": "Nanosi se četkom i može se prefarbavati"
+      },
+      {
+        "label": "Temperaturna postojanost",
+        "value": "-25 °C do 80 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Zaptivanje spojeva i šavova (zavrtanjskih, zakovanih ili tačkasto zavarenih) na pokretnim delovima",
+      "Zaptivanje ivica, spojeva i šavova na haubama, vratima i drugim delovima karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalno zaptivanje",
+        "description": "Univerzalno zaptivanje spojeva i šavova."
+      },
+      {
+        "title": "Nanošenje četkom",
+        "description": "Nanosi se četkom, pri čemu struktura poteza ostaje vidljiva."
+      },
+      {
+        "title": "Prefarbavanje",
+        "description": "Može se prefarbavati."
+      },
+      {
+        "title": "Prigušenje zvuka",
+        "description": "Prigušuje zvuk na obrađenom spoju."
+      },
+      {
+        "title": "Trajno prianjanje",
+        "description": "Trajno prianja na podlogu."
+      }
+    ],
+    "advice": "Prva opna se stvara posle 30 minuta (20 °C), a potpuno očvršćavanje nastupa nakon 1-2 dana. Ne koristiti na motoru, izduvnom sistemu, osovinama, oprugama i amortizerima.",
+    "variants": {
+      "160.007": "Siva / 1,0 kg"
+    }
+  },
+  "bonding-sealing/ks-550-underbody-protection-bitumen": {
+    "sourceHash": "87ae4496e289d2c2",
+    "productType": "Zaštita podvozja",
+    "subtype": "Zaštita podvozja na bazi bitumena",
+    "shortDescription": "Sprej za zaštitu podvozja na bazi bitumena, za obnovu i popravku postojećih premaza.",
+    "longDescription": "KS-550 je zaštita podvozja u spreju, na bazi bitumena i u crnoj boji. Namenjen je obnovi ili popravci postojećih premaza podvozja. Pošto se nanosi iz spreja, nije potreban pištolj.",
+    "purpose": "Obnova ili popravka postojećih premaza podvozja",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Zaštita podvozja koja se nanosi iz spreja"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi bitumena"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Za obnovu ili popravku postojećih premaza podvozja"
+    ],
+    "benefits": [
+      {
+        "title": "Bez pištolja",
+        "description": "Nije potrebno nanošenje pištoljem."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "126.029": "500 ml"
+    }
+  },
+  "bonding-sealing/ks-800-underbody-protection-wax": {
+    "sourceHash": "1bc59abe64ab9fa3",
+    "productType": "Vosak za zaštitu podvozja",
+    "subtype": "Vosak za zaštitu podvozja",
+    "shortDescription": "Vosak za zaštitu podvozja koji se nanosi pištoljem, za trajnu zaštitu karoserije.",
+    "longDescription": "KS-800 je vosak za zaštitu podvozja koji se nanosi pištoljem, u crnoj boji. Obezbeđuje trajnu zaštitu podvozja karoserije od korozije. Odlikuje ga izraženo potiskivanje vode.",
+    "purpose": "Trajna zaštita podvozja karoserije",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Vosak za zaštitu podvozja koji se nanosi pištoljem"
+      },
+      {
+        "label": "Zaštita",
+        "value": "Trajna zaštita od korozije na bazi voska"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna"
+      }
+    ],
+    "applications": [
+      "Trajna zaštita podvozja karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Potiskivanje vode",
+        "description": "Izraženo potiskivanje vode sa površine."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "126.095": "1 l"
+    }
+  },
+  "bonding-sealing/ks-850-underbody-protection-wax": {
+    "sourceHash": "aee2a840aa77a7f3",
+    "productType": "Vosak za zaštitu podvozja",
+    "subtype": "Vosak za zaštitu podvozja",
+    "shortDescription": "Vosak za zaštitu podvozja u spreju, za obnovu i popravku postojećih premaza podvozja.",
+    "longDescription": "KS-850 je vosak za zaštitu podvozja u spreju, smeđe boje. Namenjen je obnovi ili popravci postojećih premaza podvozja i pruža trajnu zaštitu od korozije na bazi voska. Temperaturno je postojan od -25 °C do +80 °C i dobro potiskuje vodu.",
+    "purpose": "Obnova ili popravka postojećih premaza podvozja",
+    "facts": [
+      {
+        "label": "Nanošenje",
+        "value": "Vosak za zaštitu podvozja u spreju"
+      },
+      {
+        "label": "Zaštita",
+        "value": "Trajna zaštita od korozije na bazi voska"
+      },
+      {
+        "label": "Temperaturna postojanost",
+        "value": "-25 °C do +80 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Smeđa"
+      }
+    ],
+    "applications": [
+      "Za obnovu ili popravku postojećih premaza podvozja"
+    ],
+    "benefits": [
+      {
+        "title": "Potiskivanje vode",
+        "description": "Dobro potiskuje vodu sa površine."
+      }
+    ],
+    "advice": "Ne može se prefarbavati.",
+    "variants": {
+      "126.094": "500 ml"
+    }
+  },
+  "bonding-sealing/ks-brush-nylon-brush": {
+    "sourceHash": "5d4fdef663160614",
+    "productType": "Najlonska četka",
+    "subtype": "Najlonska četka",
+    "shortDescription": "Specijalna četka sa najlonskim vlaknima za obradu zaptivnih masa.",
+    "longDescription": "KS-Brush je specijalna četka sa najlonskim vlaknima. Namenjena je obradi zaptivnih masa pri radu na karoseriji.",
+    "purpose": "Obrada zaptivnih masa",
+    "facts": [
+      {
+        "label": "Izrada",
+        "value": "Specijalna četka sa najlonskim vlaknima"
+      }
+    ],
+    "applications": [
+      "Za obradu zaptivnih masa"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "141.453": "30 mm"
+    }
+  },
+  "bonding-sealing/ks-dual-gun-underbody-protection-gun": {
+    "sourceHash": "1f423d762374819d",
+    "productType": "Pištolj za zaštitu podvozja",
+    "subtype": "Pištolj za zaštitu podvozja",
+    "shortDescription": "Pneumatski pištolj za zaštitu podvozja i šupljina, za obradu materijala iz kartuša.",
+    "longDescription": "KS-Dual Gun je pneumatski pištolj za zaštitu podvozja i šupljina, namenjen obradi kartuša sa sredstvima za zaštitu od korozije, zaštitu podvozja i zaštitu šupljina. Isporučuje se sa dve usisne cevi i brzom spojnicom. Materijal se brzo menja, a održavanje je jednostavno.",
+    "purpose": "Nanošenje sredstava za zaštitu od korozije, podvozja i šupljina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatski pištolj za zaštitu podvozja i šupljina"
+      },
+      {
+        "label": "Oprema",
+        "value": "Sa dve usisne cevi"
+      },
+      {
+        "label": "Priključak",
+        "value": "Brza spojnica"
+      }
+    ],
+    "applications": [
+      "Zaštita od korozije, zaštita podvozja i zaštita šupljina"
+    ],
+    "benefits": [
+      {
+        "title": "Brza promena materijala",
+        "description": "Materijal se može brzo menjati."
+      },
+      {
+        "title": "Malo održavanja",
+        "description": "Zahteva malo održavanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "126.040": "Sa 2 dodatne usisne cevi / bez creva za zaštitu šupljina",
+      "126.058": "Crevo za zaštitu šupljina / 0.9 m",
+      "126.048": "Rezervne usisne cevi"
+    }
+  },
+  "bonding-sealing/ks-gun-underbody-protection-gun": {
+    "sourceHash": "df6dcabe0273f813",
+    "productType": "Pištolj za zaštitu podvozja",
+    "subtype": "Pištolj za zaštitu podvozja",
+    "shortDescription": "Pneumatski pištolj sa posudom pod pritiskom za proizvode na bazi rastvarača i na vodenoj bazi.",
+    "longDescription": "KS-Gun je pneumatski pištolj sa posudom pod pritiskom, zapremine 1 l, za nanošenje strukturnih premaza. Koristi se za zaštitu od korozije, zaštitu podvozja i zaštitu šupljina, sa proizvodima na bazi rastvarača i na vodenoj bazi. Količina vazduha i izlaz materijala se podešavaju, pa su moguće različite strukture.",
+    "purpose": "Nanošenje sredstava za zaštitu od korozije, podvozja i šupljina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatski pištolj sa posudom pod pritiskom"
+      },
+      {
+        "label": "Namena",
+        "value": "Pištolj za strukturne premaze"
+      },
+      {
+        "label": "Zapremina posude",
+        "value": "1 l"
+      }
+    ],
+    "applications": [
+      "Zaštita od korozije, zaštita podvozja i zaštita šupljina",
+      "Nanošenje proizvoda na bazi rastvarača i na vodenoj bazi"
+    ],
+    "benefits": [
+      {
+        "title": "Podesiv izlaz",
+        "description": "Količina vazduha i izlaz materijala se podešavaju."
+      },
+      {
+        "title": "Različite strukture",
+        "description": "Moguće je postići različite strukture premaza."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.032": "Pištolj za zaštitu podvozja",
+      "142.279": "Set creva / 0.95 m",
+      "147.956": "KS-Gun rezervna dizna",
+      "158.017": "KS-Gun dizna"
+    }
+  },
+  "bonding-sealing/mount-tape-double-sided-adhesive-tape": {
+    "sourceHash": "a7bbd314829b74ce",
+    "productType": "Dvostrano lepljiva traka",
+    "subtype": "Dvostrano lepljiva traka",
+    "shortDescription": "Dvostrano lepljiva traka na bazi polietilena, postojana od -40 °C do +120 °C, visoke UV otpornosti.",
+    "longDescription": "Mount Tape je dvostrano lepljiva traka na bazi polietilena sa modifikovanim akrilatnim lepkom, crne boje. Visoka moć lepljenja i vrlo visoka UV otpornost omogućavaju trajno pričvršćivanje uz izraženo smicanje i izloženost UV zračenju. Koristi se i za industrijsku montažu u enterijeru i eksterijeru, a dobro se pričvršćuje i na zaobljene površine.",
+    "purpose": "Trajno pričvršćivanje delova i industrijska montaža",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Dvostrano lepljiva traka"
+      },
+      {
+        "label": "Temperaturna postojanost",
+        "value": "-40 °C do +120 °C"
+      },
+      {
+        "label": "Boja",
+        "value": "Crna lepljiva traka"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi polietilena"
+      },
+      {
+        "label": "Lepak",
+        "value": "Modifikovani akrilatni lepak"
+      }
+    ],
+    "applications": [
+      "Za trajno pričvršćivanje uz izraženo smicanje i izloženost UV zračenju, omekšivačima i širokom temperaturnom opsegu (npr. lajsne i ambleme, bočne branike, ogledala ili tegove za balansiranje)",
+      "Industrijska montaža znakova ili nalepnica u enterijeru i eksterijeru"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć lepljenja",
+        "description": "Traka ima visoku moć lepljenja."
+      },
+      {
+        "title": "UV otpornost",
+        "description": "Vrlo visoka otpornost na UV zračenje."
+      },
+      {
+        "title": "Otpornost na rastvarače",
+        "description": "Dobra otpornost na rastvarače."
+      },
+      {
+        "title": "Rad na zaobljenjima",
+        "description": "Fleksibilno pričvršćivanje i na zaobljenim površinama."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "125.712": "9 mm x 10 m",
+      "125.713": "12 mm x 10 m",
+      "125.720": "19 mm x 10 m"
+    }
+  },
+  "bonding-sealing/ms-air-gun-ms-spray-gun": {
+    "sourceHash": "f9395d0d1995fbfc",
+    "productType": "Pneumatski pištolj za kartuše",
+    "subtype": "MS pištolj za raspršivanje",
+    "shortDescription": "Pneumatski pištolj za kartuše, za istiskivanje i raspršivanje 1K zaptivnih masa.",
+    "longDescription": "MS Air Gun je pneumatski pištolj namenjen istiskivanju i raspršivanju jednokomponentnih zaptivnih masa. Radi sa kartušama od 290 ml i 310 ml, kao i sa aluminijumskim kesama do 400 ml. Predviđen je za obradu Carsystem Uniflex kartuša (PU, MS, Glas, Glas HM).",
+    "purpose": "Raspršivanje i istiskivanje 1K zaptivnih masa",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Pneumatski pištolj za kartuše, za istiskivanje i raspršivanje 1K zaptivnih masa"
+      }
+    ],
+    "applications": [
+      "Raspršivanje i istiskivanje 1K zaptivnih materijala",
+      "Za kartuše od 290 ml / 310 ml i aluminijumske kese do 400 ml",
+      "Za obradu Carsystem Uniflex kartuša (PU, MS, Glas, Glas HM)"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "125.681": "MS Air Gun",
+      "131.563": "Set rezervnih dizni",
+      "140.075": "Dizna za MS Air Gun"
+    }
+  },
+  "bonding-sealing/power-pu-bond-2k-pu-glue": {
+    "sourceHash": "71ebe3789daca4e3",
+    "productType": "2K PU lepak",
+    "subtype": "2K PU lepak",
+    "shortDescription": "Dvokomponentni poliuretanski lepak za popravku plastičnih delova i popunjavanje šupljina.",
+    "longDescription": "Power PU Bond je dvokomponentni poliuretanski lepak za popravku plastičnih delova, lepljenje većih površina i popunjavanje šupljina. Koristi se za strukturne i dekorativne popravke, a nanošenje je moguće i na metal, drvo ili staklo. Spoj se lako naknadno obrađuje brušenjem i bušenjem, brzo se suši i može da se prelakira.",
+    "purpose": "Popravka plastičnih delova i zaptivanje spojeva",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Dvokomponentni poliuretanski lepak"
+      }
+    ],
+    "applications": [
+      "Strukturna i dekorativna popravka različitih plastičnih delova (branici, blatobrani i slično)",
+      "Nanošenje je moguće i na metal, drvo ili staklo",
+      "Jednostavna naknadna obrada, poput brušenja i bušenja",
+      "Zaptivanje procepa, spojeva i šavova",
+      "Veoma dugotrajan",
+      "Otporan na vremenske uticaje"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Lepak se brzo suši."
+      },
+      {
+        "title": "Može da se prelakira",
+        "description": "Obrađena površina može da se prelakira."
+      }
+    ],
+    "advice": "Kartuše od 25 ml istiskuju se ručno, a dve komponente se mešaju statičkom mešalicom CS Power PU Bond Mixer kada se aktivira spojena dupla kartuša. Kartuše od 50 ml nanose se pomoću pištolja CS Power PU Bond Gun. Mešalice su za jednokratnu upotrebu, a prajmer za lepljenje nije potreban.",
+    "variants": {
+      "159.952": "Providan / 50 ml",
+      "159.954": "Crn / 25 ml",
+      "159.955": "Crn / 50 ml"
+    }
+  },
+  "bonding-sealing/power-pu-bond-film-backing-and-supporting-film": {
+    "sourceHash": "898dabe82aca5434",
+    "productType": "Potporna folija",
+    "subtype": "Potporna i noseća folija",
+    "shortDescription": "Potporna folija koja pridržava masu tokom nanošenja 2K Power PU Bond mase.",
+    "longDescription": "Power PU Bond Film je potporna i noseća folija koja pridržava masu za popravku plastike tokom nanošenja. Prednja strana ima potpornu mrežicu, dok se zadnja, glatka strana uklanja nakon očvršćavanja. Koristi se uz Carsystem 2K Power PU Bond mase, u dimenziji 12,5 x 150 cm.",
+    "purpose": "Pridržavanje mase pri popravci plastike",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Potporna i noseća folija"
+      },
+      {
+        "label": "Prednja strana",
+        "value": "Sa potpornom mrežicom"
+      },
+      {
+        "label": "Zadnja strana",
+        "value": "Glatka folija, uklanja se nakon očvršćavanja"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "12,5 x 150 cm"
+      }
+    ],
+    "applications": [
+      "Popravka plastike",
+      "Pridržavanje mase za popravku plastike",
+      "Za upotrebu sa Carsystem 2K Power PU Bond masama"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "159.958": "Potporna / noseća folija"
+    }
+  },
+  "bonding-sealing/power-pu-bond-gun-2k-pu-glue-gun": {
+    "sourceHash": "7a25c36d3f2445b1",
+    "productType": "Pištolj za kartuše",
+    "subtype": "Pištolj za 2K PU lepak",
+    "shortDescription": "Pištolj za nanošenje Power PU Bond kartuša od 50 ml pri popravkama plastike.",
+    "longDescription": "Power PU Bond Gun je pištolj za nanošenje koji se koristi pri popravkama plastike. Predviđen je za obradu Carsystem Power PU Bond kartuša od 50 ml.",
+    "purpose": "Nanošenje Power PU Bond kartuša od 50 ml",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Pištolj za nanošenje kod popravki plastike"
+      }
+    ],
+    "applications": [
+      "Pištolj za nanošenje Carsystem Power PU Bond kartuša od 50 ml"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "140.927": "Pištolj za kartuše"
+    }
+  },
+  "bonding-sealing/power-pu-bond-mixer-mixing-tube-25-50-ml": {
+    "sourceHash": "0cba2886e271ddd7",
+    "productType": "Mešna cev",
+    "subtype": "Mešna cev · 25+50 ml",
+    "shortDescription": "Plastična mešna cev za obradu Power PU Bond kartuša od 25 ml i 50 ml.",
+    "longDescription": "Power PU Bond Mixer je plastična mešna cev za obradu Carsystem Power PU Bond kartuša od 25 ml i 50 ml. Kroz nju se dve komponente pouzdano mešaju u homogen proizvod. Isporučuje se u pakovanju od 12 komada, u crvenoj boji.",
+    "purpose": "Mešanje komponenti Power PU Bond kartuša",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Plastična mešna cev"
+      },
+      {
+        "label": "Boja",
+        "value": "Crvena"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "12 mešnih cevi"
+      }
+    ],
+    "applications": [
+      "Mešna cev za Carsystem Power PU Bond kartuše od 25/50 ml"
+    ],
+    "benefits": [
+      {
+        "title": "Pouzdano mešanje komponenti",
+        "description": "Dve komponente se pouzdano mešaju u homogen proizvod."
+      }
+    ],
+    "advice": "Power PU Bond mešne cevi predviđene su za jednokratnu upotrebu.",
+    "variants": {
+      "159.956": "Mešna cev / 12 kom. u pakovanju / crvena"
+    }
+  },
+  "bonding-sealing/sound-deadening-panels-sound-deadening-panels": {
+    "sourceHash": "ce29ea4763b883cd",
+    "productType": "Ploče za zvučnu izolaciju",
+    "subtype": "Ploče za zvučnu izolaciju",
+    "shortDescription": "Samolepljive ploče koje upijaju zvuk i služe za izolaciju buke i vibracija.",
+    "longDescription": "Sound Deadening Panels su ploče za izolaciju zvuka i vibracija u vozilu. Materijal upija zvuk, a ploče su samolepljive, pa se postavljaju bez dodatnih sredstava. Dostupne su u više izvedbi i dimenzija.",
+    "purpose": "Izolacija zvuka i vibracija",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Upija zvuk"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Samolepljive"
+      }
+    ],
+    "applications": [
+      "Za izolaciju zvuka i vibracija"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "126.055": "Bitumenska crna / 1 karton po 5 kom. / 25 x 50 cm",
+      "134.139": "Crna sa šarom / 1 karton po 10 kom. / 50 x 50 cm",
+      "134.140": "Glatka crna / 1 karton po 10 kom. / 50 x 50 cm"
+    }
+  },
+  "bonding-sealing/uniflex-adapter-nozzle-v-nozzle": {
+    "sourceHash": "5583a9456a586d8f",
+    "productType": "Dizna za zaptivanje šavova",
+    "subtype": "V-dizna",
+    "shortDescription": "Dizna u „V” obliku za ravnomerno zaptivanje presavijenih ivica.",
+    "longDescription": "UNIFLEX Adapter Nozzle V-Nozzle je dizna za zaptivanje šavova, oblikovana u „V” formi. Omogućava ravnomerno zaptivanje presavijenih ivica. Pogodna je isključivo za kartuše.",
+    "purpose": "Ravnomerno zaptivanje presavijenih ivica",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Dizna za zaptivanje šavova"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Dizna u „V” obliku"
+      }
+    ],
+    "applications": [
+      "Za ravnomerno zaptivanje presavijenih ivica",
+      "Pogodna samo za kartuše"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "149.010": "V-dizna / kesa od 10 kom."
+    }
+  },
+  "bonding-sealing/uniflex-adapter-nozzle-wing-tip": {
+    "sourceHash": "6d1e7050ef002cf3",
+    "productType": "Dizna za zaptivanje šavova",
+    "subtype": "Krilna dizna (wing tip)",
+    "shortDescription": "Krilna dizna (wing tip) za zaptivanje šavova na presavijenim ivicama.",
+    "longDescription": "UNIFLEX Adapter Nozzle wing tip je dizna namenjena zaptivanju šavova. Krilni oblik vrha olakšava rad na presavijenim ivicama. Pogodna je isključivo za kartuše.",
+    "purpose": "Zaptivanje šavova na presavijenim ivicama",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Dizna za zaptivanje šavova"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Krilni vrh (wing tip)"
+      }
+    ],
+    "applications": [
+      "Zaptivanje šavova na presavijenim ivicama",
+      "Pogodna samo za kartuše"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "149.009": "Krilna dizna sa sečivom / kesa od 10 kom."
+    }
+  },
+  "bonding-sealing/uniflex-air-gun-air-gun": {
+    "sourceHash": "9f7b541c11be790b",
+    "productType": "Pneumatski pištolj za kartuše",
+    "subtype": "Pneumatski pištolj",
+    "shortDescription": "Pneumatski pištolj za kartuše, za istiskivanje 1K zaptivnih masa.",
+    "longDescription": "UNIFLEX Air Gun je pneumatski pištolj za kartuše namenjen istiskivanju jednokomponentnih zaptivnih masa. Radi sa kartušama od 290 ml i 310 ml, kao i sa aluminijumskim kesama do 400 ml. Predviđen je za obradu Carsystem Uniflex kartuša (PU, MS, Glas, Glas HM).",
+    "purpose": "Istiskivanje zaptivne mase za šavove",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Pneumatski pištolj za kartuše, za istiskivanje 1K zaptivnih masa"
+      }
+    ],
+    "applications": [
+      "Za istiskivanje zaptivne mase za šavove",
+      "Za kartuše od 290 ml / 310 ml i aluminijumske kese do 400 ml",
+      "Za obradu Carsystem Uniflex kartuša (PU, MS, Glas, Glas HM)"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "153.224": "Uniflex Air Gun"
+    }
+  },
+  "bonding-sealing/uniflex-glas-fast-primer-moisture-curing-glass-primer": {
+    "sourceHash": "1d38782a18b12f7c",
+    "productType": "Prajmer za stakla",
+    "subtype": "Prajmer za stakla koji očvršćava vlagom",
+    "shortDescription": "Prajmer za stakla koji očvršćava vlagom, za primenu pre Uniflex Glas i Glas HM.",
+    "longDescription": "UNIFLEX Glas Fast-Primer je prajmer za stakla koji očvršćava pod uticajem vlage i nanosi se pre upotrebe lepkova Uniflex Glas i Uniflex Glas HM. Obezbeđuje prionljivost između stakla i lepka za stakla. Posebno je pogodan za nanošenje na keramičku zonu stakla.",
+    "purpose": "Priprema stakla pre lepljenja",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Prajmer za stakla koji očvršćava pod uticajem vlage"
+      }
+    ],
+    "applications": [
+      "Prajmer za Uniflex Glas i Uniflex Glas HM",
+      "Obezbeđuje prionljivost između stakla i lepka za stakla",
+      "Nanošenje na keramičku zonu stakla"
+    ],
+    "benefits": [],
+    "advice": "Koristiti isključivo u kombinaciji sa sredstvom Carsystem Uniflex Glas Fast-Cleaner. Površina mora da bude čista, suva, bez prašine i masnoće, a Glas Fast-Primer se nanosi tek nakon obrade Uniflex Glas Fast-Cleaner sredstvom. Bočicu dobro promućkati pre upotrebe.",
+    "variants": {
+      "144.036": "Crn / 30 ml"
+    }
+  },
+  "bonding-sealing/uniflex-glas-glass-bonding-glue": {
+    "sourceHash": "a51aca9fc1b4c775",
+    "productType": "Lepak za stakla",
+    "subtype": "Lepak za stakla",
+    "shortDescription": "Jednokomponentni poliuretanski lepak za lepljenje vetrobranskih, bočnih i zadnjih stakala.",
+    "longDescription": "UNIFLEX Glas je lepak za stakla na bazi poliuretana, u jednokomponentnoj izvedbi. Koristi se za lepljenje vetrobranskih, bočnih i zadnjih stakala. Ispitan je prema FMVSS 212.",
+    "purpose": "Lepljenje vetrobranskih, bočnih i zadnjih stakala",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Lepak za stakla"
+      },
+      {
+        "label": "Osnova",
+        "value": "1K poliuretan"
+      },
+      {
+        "label": "Ispitivanje",
+        "value": "Ispitan prema FMVSS 212"
+      }
+    ],
+    "applications": [
+      "Za lepljenje vetrobranskih, bočnih i zadnjih stakala"
+    ],
+    "benefits": [],
+    "advice": "Vreme držanja: 2 sata (23 °C i 50% rel. vlažnosti vazduha) za vozila sa vazdušnim jastukom vozača i suvozača. Temperatura obrade: 5 °C do 40 °C.",
+    "variants": {
+      "148.927": "Crn / 310 ml"
+    }
+  },
+  "bonding-sealing/uniflex-glas-hm-glass-bonding-glue-high-modulus-non-conductive": {
+    "sourceHash": "cec8f13c2dc66ecf",
+    "productType": "Lepak za stakla",
+    "subtype": "Lepak za stakla · visok modul · neprovodljiv",
+    "shortDescription": "1K poliuretanski lepak za stakla visokog modula, neprovodljiv i brzosušeći.",
+    "longDescription": "UNIFLEX Glas HM je jednokomponentni poliuretanski lepak za stakla visokog modula i niske električne provodljivosti. Namenjen je lepljenju vetrobranskih, bočnih i zadnjih stakala, a odlikuje ga brzo sušenje, otpornost na vibracije i velika krutost. Ispitan je prema FMVSS 208/212.",
+    "purpose": "Lepljenje vetrobranskih, bočnih i zadnjih stakala",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Lepak za stakla"
+      },
+      {
+        "label": "Osnova",
+        "value": "1K poliuretan"
+      },
+      {
+        "label": "Karakteristika",
+        "value": "Visok modul i niska električna provodljivost"
+      },
+      {
+        "label": "Ispitivanje",
+        "value": "Ispitan prema FMVSS 208/212"
+      }
+    ],
+    "applications": [
+      "Za lepljenje vetrobranskih, bočnih i zadnjih stakala"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Lepak se brzo suši."
+      },
+      {
+        "title": "Visok modul",
+        "description": "Lepak visokog modula, sa velikom krutošću."
+      },
+      {
+        "title": "Za vozila sa integrisanom antenom",
+        "description": "Primenljiv je na vozilima sa integrisanom antenom."
+      }
+    ],
+    "advice": "Vreme držanja: 30 min (23 °C i 50% rel. vlažnosti vazduha) za vozila sa vazdušnim jastukom vozača i suvozača. Temperatura obrade: 5 °C do 40 °C.",
+    "variants": {
+      "148.928": "Crn / 310 ml"
+    }
+  },
+  "bonding-sealing/uniflex-gun-manual-gun": {
+    "sourceHash": "25759486e66428fb",
+    "productType": "Ručni pištolj za kartuše",
+    "subtype": "Ručni pištolj",
+    "shortDescription": "Ručni pištolj za kartuše, za istiskivanje 1K zaptivnih masa.",
+    "longDescription": "UNIFLEX Gun je ručni pištolj za istiskivanje jednokomponentnih zaptivnih masa iz Carsystem Uniflex kartuša (PU, MS, Glas, Glas HM). Izvedba Classic predviđena je za kartuše od 290 ml i 310 ml. Izvedba Top, pored kartuša od 290 ml i 310 ml, prihvata i aluminijumske kese do 400 ml.",
+    "purpose": "Istiskivanje 1K zaptivnih masa iz kartuša",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Ručni pištolj za istiskivanje 1K zaptivnih masa"
+      }
+    ],
+    "applications": [
+      "Za obradu Carsystem Uniflex kartuša (PU, MS, Glas, Glas HM)",
+      "Classic: za kartuše od 290 ml / 310 ml",
+      "Top: za kartuše od 290 ml / 310 ml i aluminijumske kese do 400 ml"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "135.108": "Classic za 310 ml",
+      "139.286": "Top za 290 - 400 ml"
+    }
+  },
+  "bonding-sealing/uniflex-ms-sprayable-seam-sealer": {
+    "sourceHash": "e93ca1ea58a86025",
+    "productType": "Zaptivna masa za šavove",
+    "subtype": "Zaptivna masa za šavove koja se raspršuje",
+    "shortDescription": "Zaptivna masa za šavove na bazi POP kopolimera, za nanošenje raspršivanjem ili četkom.",
+    "longDescription": "UNIFLEX MS je zaptivna masa za šavove na bazi poli-oksi-propilen (POP) kopolimera, koja može da se raspršuje ili nanosi četkom. Koristi se za zaptivanje preklopljenih limova i zavarenih šavova u originalnoj strukturi. Brzo se suši i pruža zaštitu od udara kamena.",
+    "purpose": "Zaptivanje preklopljenih limova i zavarenih šavova",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Zaptivna masa za šavove za nanošenje raspršivanjem ili četkom"
+      },
+      {
+        "label": "Osnova",
+        "value": "Poli-oksi-propilen (POP) kopolimer"
+      }
+    ],
+    "applications": [
+      "Zaptivanje preklopljenih limova i zavarenih šavova u originalnoj strukturi, na primer kod popravke vozila i karoserije, izrade kontejnera, metalnih konstrukcija, ventilacione tehnike i klimatizacije"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Masa se brzo suši."
+      },
+      {
+        "title": "Zaštita od udara kamena",
+        "description": "Nanet sloj pruža zaštitu od udara kamena."
+      }
+    ],
+    "advice": "UNIFLEX-MS držati odvojeno od svežeg, još neočvrslog PU materijala.",
+    "variants": {
+      "160.133": "Bež / 290 ml",
+      "159.108": "Siva / 290 ml",
+      "160.132": "Crna / 290 ml"
+    }
+  },
+  "bonding-sealing/uniflex-nozzle-spare-nozzles": {
+    "sourceHash": "ff679130c245e5d8",
+    "productType": "Rezervne dizne",
+    "subtype": "Rezervne dizne",
+    "shortDescription": "Rezervne dizne za Carsystem Uniflex PU i Uniflex MS kartuše.",
+    "longDescription": "UNIFLEX Nozzle su rezervne dizne za Carsystem Uniflex kartuše. Dostupne su u izvedbi za Uniflex PU i za Uniflex MS. Pogodne su isključivo za kartuše.",
+    "purpose": "Zamena dizni na Uniflex kartušama",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Rezervne dizne za Carsystem Uniflex kartuše"
+      }
+    ],
+    "applications": [
+      "Rezervne dizne za Carsystem Uniflex PU i Uniflex MS kartuše",
+      "Pogodne samo za kartuše"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "150.292": "Dizne za Uniflex PU",
+      "155.241": "Dizne za Uniflex MS"
+    }
+  },
+  "bonding-sealing/uniflex-pu-bonding-and-sealing-compound": {
+    "sourceHash": "da09b7c8ff13d105",
+    "productType": "Masa za lepljenje i zaptivanje",
+    "subtype": "Masa za lepljenje i zaptivanje",
+    "shortDescription": "Poliuretanska masa za elastično lepljenje GRP-a i metala i zaptivanje šavova i spojeva.",
+    "longDescription": "UNIFLEX PU je masa za lepljenje i zaptivanje na bazi poliuretana. Koristi se za elastično lepljenje GRP-a i metala, kao i za zaptivanje šavova, spojeva i priključnih mesta. Brzo se suši i može da se prelakira.",
+    "purpose": "Elastično lepljenje i zaptivanje šavova i spojeva",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Masa za lepljenje i zaptivanje"
+      },
+      {
+        "label": "Osnova",
+        "value": "Poliuretan"
+      }
+    ],
+    "applications": [
+      "Elastično lepljenje GRP-a i metala",
+      "Zaptivanje šavova, spojeva i priključnih mesta"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Masa se brzo suši."
+      },
+      {
+        "title": "Može da se prelakira",
+        "description": "Nanet sloj može da se prelakira."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.160": "Bela / 310 ml",
+      "159.161": "Siva / 310 ml",
+      "159.162": "Crna / 310 ml"
+    }
+  }
+}

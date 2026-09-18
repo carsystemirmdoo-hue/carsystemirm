@@ -1,0 +1,2439 @@
+{
+  "finish/c-wax-c-80-high-gloss-finish-sealer": {
+    "sourceHash": "d370b04acc945d1c",
+    "productType": "Završni zaštitni premaz",
+    "subtype": "Završni zaštitni premaz visokog sjaja",
+    "shortDescription": "Završni zaštitni premaz visokog sjaja na bazi vode, za zaštitu lakiranih površina.",
+    "longDescription": "C-Wax C-80 je završni zaštitni premaz visokog sjaja na bazi vode koji zatvara lakirane površine i štiti lak od vremenskih uticaja. Pogodan je kao zaštita tokom montaže u industriji i kod prodavaca automobila, a nanosi se ručno ili mašinski. Daje dugotrajnu zaštitu, izrazito glatku površinu i dubok sjaj.",
+    "purpose": "Zatvaranje i zaštita lakiranih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Završni zaštitni premaz visokog sjaja na bazi vode"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Zatvaranje lakiranih površina",
+      "Štiti lak od vremenskih uticaja, otisaka prstiju i lakših mehaničkih oštećenja",
+      "Pogodan kao zaštita tokom montaže u industriji ili kod prodavaca automobila",
+      "Može se naneti ručno ili mašinski"
+    ],
+    "benefits": [
+      {
+        "title": "Otpornost na alkalna sredstva",
+        "description": "Vrlo dobra otpornost na alkalna sredstva za čišćenje i uticaje okoline."
+      },
+      {
+        "title": "Glatka površina",
+        "description": "Površina je izrazito glatka."
+      },
+      {
+        "title": "Dugotrajna zaštita",
+        "description": "Zaštita je dugotrajna."
+      },
+      {
+        "title": "Dubok sjaj",
+        "description": "Daje dubok sjaj."
+      },
+      {
+        "title": "Brza i jednostavna primena",
+        "description": "Primena je vrlo brza i jednostavna."
+      }
+    ],
+    "advice": "Preporučuje se upotreba uz Carsystem Wax Puck.",
+    "variants": {
+      "158.243": "500 g"
+    }
+  },
+  "finish/car-mop-white-polishing-pad": {
+    "sourceHash": "007d7b148f1eee70",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Tvrdi sunđer za poliranje, namenjen radu sa abrazivnim polir pastama.",
+    "longDescription": "Car Mop White je tvrdi sunđer za poliranje od pene. Namenjen je radu sa abrazivnim polir pastama, a preporučuje se u kombinaciji sa Refinish 1.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tvrd"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": "Preporučuje se upotreba Car Mop White zajedno sa Refinish 1.",
+    "variants": {
+      "133.149": "150 x 50 mm"
+    }
+  },
+  "finish/car-polish-roll-disposable-polishing-cloth": {
+    "sourceHash": "1f288ab39cb89d58",
+    "productType": "Krpa za poliranje",
+    "subtype": "Jednokratna krpa za poliranje",
+    "shortDescription": "Jednokratne krpe za poliranje za čišćenje i odmašćivanje površina, u dozatoru sa 370 listova.",
+    "longDescription": "Car Polish Roll su jednokratne krpe za poliranje namenjene čišćenju i odmašćivanju površina. Isporučuju se u dozatoru sa 370 perforiranih listova dimenzija 36x40 cm. Krpe su izrazito meke, otporne na cepanje, veoma upijajuće i ne ostavljaju vlakna.",
+    "purpose": "Čišćenje i odmašćivanje površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Jednokratna krpa za poliranje"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "Dozator sa 370 listova"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Perforirane"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "36x40 cm"
+      }
+    ],
+    "applications": [
+      "Čišćenje i odmašćivanje površina"
+    ],
+    "benefits": [
+      {
+        "title": "Izrazito meke",
+        "description": "Krpe su izrazito meke."
+      },
+      {
+        "title": "Bez otpuštanja vlakana",
+        "description": "Ne ostavljaju vlakna na površini."
+      },
+      {
+        "title": "Otporne na cepanje",
+        "description": "Krpe su otporne na cepanje."
+      },
+      {
+        "title": "Visoka upijajnost",
+        "description": "Imaju visoku moć upijanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "134.582": "370 listova / 36 x 40 cm"
+    }
+  },
+  "finish/compound-x1500-hc-high-performance-cutting-compound": {
+    "sourceHash": "3177c7b2931959ca",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Abrazivna polir pasta visokog učinka",
+    "shortDescription": "Abrazivna polir pasta na bazi vode sa visokom reznom moći i finim finišom u jednom koraku.",
+    "longDescription": "Compound X1500 HC spaja visoku reznu moć sa finim finišom u jednom radnom koraku. Zbog izražene abrazivnosti pasta je pogodna za brzo uklanjanje tragova brušenja sa svežeg reparaturnog laka i potpuno otvrdlih fabričkih lakova. Posle 15 sekundi poliranja abrazivno zrno se razlaže na finije čestice, što daje ravnomernu sliku poliranja i visok sjaj.",
+    "purpose": "Brzo uklanjanje nepravilnosti sa laka",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Abrazivna polir pasta visokog učinka"
+      },
+      {
+        "label": "Osnova",
+        "value": "Voda"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Za veoma brzo uklanjanje nepravilnosti sa svežeg reparaturnog laka i potpuno otvrdlih fabričkih lakova"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka rezna moć na početku",
+        "description": "Veoma visoka rezna moć u prvih 10 sekundi."
+      },
+      {
+        "title": "Brz i vidljiv rezultat",
+        "description": "Rezultati poliranja su brzi i vidljivi."
+      },
+      {
+        "title": "Brzo postaje finija",
+        "description": "Posle kratkog vremena pasta postaje znatno finija."
+      },
+      {
+        "title": "Nizak opseg obrtaja",
+        "description": "Radi u niskom opsegu obrtaja (600–1.500 o/min), što je sigurno u primeni."
+      },
+      {
+        "title": "Ne suši se",
+        "description": "Pasta se ne suši, pa tokom poliranja nema stvaranja prašine."
+      },
+      {
+        "title": "Visoka efikasnost",
+        "description": "Efikasnost u radu je visoka."
+      },
+      {
+        "title": "Bez prskanja",
+        "description": "Tokom poliranja nema prskanja."
+      },
+      {
+        "title": "Rotaciona i ekscentrična primena",
+        "description": "Može se koristiti rotaciono i ekscentrično."
+      },
+      {
+        "title": "Visok nivo sjaja",
+        "description": "Visok nivo sjaja i na tamnim lakovima."
+      },
+      {
+        "title": "Poliranje u jednom koraku",
+        "description": "Na svetlim lakovima moguće je poliranje u jednom koraku."
+      },
+      {
+        "title": "Lako uklanjanje paste",
+        "description": "Posle poliranja se vrlo lako uklanja, bez pritiska."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.446": "500 g"
+    }
+  },
+  "finish/cordless-sander-csh-cos01-cordless-random-orbital-sander": {
+    "sourceHash": "1e1450ba6c80c961",
+    "productType": "Ekscentrična brusilica",
+    "subtype": "Akumulatorska ekscentrična brusilica",
+    "shortDescription": "Akumulatorska ekscentrična brusilica za fino brušenje, smart repair i završne radove.",
+    "longDescription": "CORDLESS SANDER CSH-COS01 je akumulatorska ekscentrična brusilica za fino brušenje, smart repair i završnu obradu. Bezstepeno podesiv broj obrtaja (4.000–10.000 o/min), hod brušenja od 3 mm i ergonomski oblik omogućavaju precizan rad bez zamora, bez kablova i creva za vazduh. Neprekidan rad traje do 30 minuta, a punjenje 60 minuta. Isporučuje se u koferu za bezbedno čuvanje bez prašine.",
+    "purpose": "Fino brušenje, korekcije i smart repair",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Laka i kompaktna akumulatorska ekscentrična brusilica"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv: 4.000 - 10.000 o/min"
+      },
+      {
+        "label": "Trajanje baterije",
+        "value": "30 minuta u neprekidnom radu"
+      },
+      {
+        "label": "Rad sa prekidima",
+        "value": "Do 2 dana"
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "60 minuta"
+      },
+      {
+        "label": "Navoj",
+        "value": "Unutrašnji navoj 1/4\"-20"
+      },
+      {
+        "label": "Navoj na podlošci",
+        "value": "Spoljni navoj 1/4\"-20"
+      },
+      {
+        "label": "Podloška",
+        "value": "74 mm Ø – čičak (Velcro®)"
+      }
+    ],
+    "applications": [
+      "Pogodna za fino brušenje i korekcije, uklanjanje upale prašine, precizne detalje i smart repair primene."
+    ],
+    "benefits": [
+      {
+        "title": "Fleksibilan rad",
+        "description": "Radi bez kablova i creva za komprimovani vazduh."
+      },
+      {
+        "title": "Rad bez zamora",
+        "description": "Uravnotežen, ergonomski oblik."
+      },
+      {
+        "title": "Prijatna u radu",
+        "description": "Nizak nivo buke i male vibracije."
+      },
+      {
+        "title": "Fino podesiv broj obrtaja",
+        "description": "Precizna kontrola za osetljive lakove i zahtevne površine."
+      },
+      {
+        "title": "Praktično čuvanje",
+        "description": "Bezbedno čuvanje bez prašine u koferu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.108": "CSH-COS01",
+      "160.109": "74mm - 5/16\""
+    }
+  },
+  "finish/dispenser-bottle-incl-cap-dispenser-bottle": {
+    "sourceHash": "94e0bb7c59af7a34",
+    "productType": "Boca sa dozatorom",
+    "subtype": "Boca sa dozatorom",
+    "shortDescription": "Boca sa dozatorom i poklopcem, zapremine 250 ml, za precizno doziranje polir paste.",
+    "longDescription": "Dispenser bottle incl. Cap je boca sa dozatorom i poklopcem, namenjena doziranju polir pasta. Zapremina punjenja od 250 ml i mala težina omogućavaju jednostavno rukovanje.",
+    "purpose": "Doziranje polir paste",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Boca sa dozatorom i poklopcem za polir paste"
+      },
+      {
+        "label": "Zapremina",
+        "value": "250 ml"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Precizno doziranje",
+        "description": "Omogućava precizno doziranje količine polir paste."
+      },
+      {
+        "title": "Mala težina",
+        "description": "Boca je male težine."
+      },
+      {
+        "title": "Jednostavno rukovanje",
+        "description": "Rukovanje bocom je jednostavno."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "156.575": "Boca sa dozatorom i poklopcem"
+    }
+  },
+  "finish/dispenser-for-5-kg-polish-dispenser": {
+    "sourceHash": "a2675987c0094947",
+    "productType": "Dispenzer",
+    "subtype": "Dispenzer",
+    "shortDescription": "Dispenzer za brzo i jednostavno uzimanje polir pasta Carsystem Polish Step 1 i Step 2 iz pakovanja od 5 kg.",
+    "longDescription": "Carsystem dispenzer služi za brzo i jednostavno uzimanje polir pasta Carsystem Polish Step 1 i Step 2. Predviđen je za pakovanja od 5 kg.",
+    "purpose": "Doziranje polir pasta iz pakovanja od 5 kg",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Dispenzer za doziranje polir pasta u pakovanju od 5 kg"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "156.460": "Dispenzer za polir pastu od 5 kg"
+    }
+  },
+  "finish/finish-back-pad-finish-back-pad": {
+    "sourceHash": "637164581c712311",
+    "productType": "Podloška za poliranje",
+    "subtype": "Podloška (tanjir) za sunđere za poliranje",
+    "shortDescription": "Podloška sa navojem M14 za mašinski rad sa uobičajenim sunđerima za poliranje.",
+    "longDescription": "Finish Back Pad je podloška (tanjir) sa navojem M14, namenjena mašinskom radu. Kompatibilna je sa svim uobičajenim sunđerima za poliranje.",
+    "purpose": "Mašinsko poliranje sa sunđerima za poliranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Podloška za sunđere za poliranje"
+      },
+      {
+        "label": "Navoj",
+        "value": "M14"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "139.206": "128 mm"
+    }
+  },
+  "finish/finish-back-pad-m-14-finish-back-pad": {
+    "sourceHash": "40c3a4db110d7f37",
+    "productType": "Podloška za poliranje",
+    "subtype": "Finish podloška za poliranje",
+    "shortDescription": "Podloška M-14 sa ekstra debelim mekim sunđerom, za sunđere za poliranje sa čičkom (Velcro®).",
+    "longDescription": "Carsystem Finish Back Pad M-14 koristi se sa svim uobičajenim sunđerima za poliranje sa čičkom (Velcro®). Modifikovan, ekstra debeo i izdržljiv sunđer meke tvrdoće odlično naleže na neravne površine. Pritisak se pri tome ravnomernije raspoređuje po površini.",
+    "purpose": "Poliranje sunđerima sa čičkom (Velcro®)",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Finish podloška za sunđere za poliranje sa čičkom (Velcro®)"
+      },
+      {
+        "label": "Sunđer",
+        "value": "Modifikovan, ekstra debeo i izdržljiv"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Meka"
+      },
+      {
+        "label": "Navoj",
+        "value": "M-14"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Prilagođavanje neravninama",
+        "description": "Odlično naleže na neravne površine."
+      },
+      {
+        "title": "Ravnomeran pritisak",
+        "description": "Ravnomernije raspoređuje pritisak na površinu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.443": "123 mm"
+    }
+  },
+  "finish/finish-control-foam-c-99-control-foam": {
+    "sourceHash": "ac49db39b5fb1402",
+    "productType": "Kontrolna pena",
+    "subtype": "Kontrolna pena",
+    "shortDescription": "Mikro pena u spreju na bazi vode za kontrolu i čišćenje površine između koraka poliranja.",
+    "longDescription": "Finish Control Foam C-99 je mikro pena u spreju na bazi vode, bez silikona, namenjena proveri i čišćenju između koraka poliranja. Uklanja uljne i voštane ostatke i čini vidljivim eventualne zaostale tragove brušenja.",
+    "purpose": "Kontrola i čišćenje između koraka poliranja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikro pena u spreju"
+      },
+      {
+        "label": "Osnova",
+        "value": "Voda"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Bela"
+      }
+    ],
+    "applications": [
+      "Za proveru i čišćenje između koraka poliranja"
+    ],
+    "benefits": [
+      {
+        "title": "Uklanja uljne ostatke",
+        "description": "Uklanja uljne i voštane ostatke."
+      },
+      {
+        "title": "Otkriva tragove brušenja",
+        "description": "Čini vidljivim eventualne zaostale tragove brušenja."
+      }
+    ],
+    "advice": "Finish Control Foam C-99 treba ukloniti mikrofiber krpom posle kratkog vremena delovanja.",
+    "variants": {
+      "156.614": "400 ml"
+    }
+  },
+  "finish/finish-foam-black-ah-polishing-pad": {
+    "sourceHash": "5540e9034952cf63",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Meki finiš sunđer za rad sa finim i antihologram polir pastama i voskovima.",
+    "longDescription": "Finish Foam Black AH je meki finiš sunđer od pene. Namenjen je radu sa finim i antihologram polir pastama i voskovima.",
+    "purpose": "Rad sa finim i antihologram polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Finiš sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Mek"
+      }
+    ],
+    "applications": [
+      "Za rad sa finim i antihologram polir pastama i voskovima"
+    ],
+    "benefits": [],
+    "advice": "Preporučuje se upotreba Finish Foam Black AH u kombinaciji sa svim uobičajenim finim i antihologram polir pastama i voskovima.",
+    "variants": {
+      "157.064": "90 mm",
+      "157.065": "145 mm"
+    }
+  },
+  "finish/finish-foam-orange-polishing-pad": {
+    "sourceHash": "7368b391d4e9d923",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Srednje tvrdi sunđer za poliranje, namenjen radu sa abrazivnim polir pastama.",
+    "longDescription": "Finish Foam Orange je srednje tvrdi sunđer za poliranje od pene. Namenjen je radu sa abrazivnim polir pastama.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Srednja"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "153.088": "85 x 25 mm",
+      "153.076": "145 x 25 mm"
+    }
+  },
+  "finish/finish-foam-white-ah-polishing-pad": {
+    "sourceHash": "2f6f9440e9900323",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Meki finiš sunđer za rad sa finim i antihologram polir pastama i voskovima.",
+    "longDescription": "Finish Foam White AH je meki finiš sunđer od pene. Namenjen je radu sa finim i antihologram polir pastama i voskovima.",
+    "purpose": "Rad sa finim i antihologram polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Finiš sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Mek"
+      }
+    ],
+    "applications": [
+      "Za rad sa finim i antihologram polir pastama i voskovima"
+    ],
+    "benefits": [],
+    "advice": "Preporučuje se upotreba Polish Foam White AH uz Polish C-30 finish.",
+    "variants": {
+      "157.052": "90 mm",
+      "157.053": "145 mm"
+    }
+  },
+  "finish/finish-quadra-pad-c-10-polishing-pad": {
+    "sourceHash": "c7faeda3f1872889",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Tvrdi finiš sunđer sa spider rezom i dvoslojnom konstrukcijom, za abrazivne polir paste.",
+    "longDescription": "Finish Quadra Pad C-10 je tvrdi finiš sunđer od pene, namenjen radu sa abrazivnim polir pastama. Spider rez održava razvoj toplote niskim i daje veću agresivnost, dok dvoslojna konstrukcija podupire penu i obezbeđuje ujednačen učinak.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Finiš sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tvrd"
+      },
+      {
+        "label": "Rez",
+        "value": "Spider rez"
+      },
+      {
+        "label": "Konstrukcija",
+        "value": "Dvoslojna"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [
+      {
+        "title": "Ujednačen učinak",
+        "description": "Dvoslojna konstrukcija podupire penu i obezbeđuje ujednačen učinak."
+      },
+      {
+        "title": "Veća agresivnost",
+        "description": "Spider rez daje veću agresivnost."
+      }
+    ],
+    "advice": "Preporučuje se upotreba uz Carsystem Polish C-10 strong.",
+    "variants": {
+      "151.906": "85 mm",
+      "151.640": "145 mm",
+      "151.905": "160 mm"
+    }
+  },
+  "finish/finish-sandwich-pad-c-30-polishing-pad": {
+    "sourceHash": "511989dd2ae0e9f5",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Finish sunđer srednje tvrdoće, dvoslojne konstrukcije, za rad sa finim i antihologram polir pastama.",
+    "longDescription": "Finish Sandwich Pad C-30 je finish sunđer srednje tvrdoće namenjen finim i antihologram polir pastama. Dvoslojna konstrukcija podupire sunđer i obezbeđuje ujednačen učinak tokom rada. Dostupan je u prečnicima 85 mm i 145 mm.",
+    "purpose": "Rad sa finim i antihologram polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Finish sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Srednja"
+      },
+      {
+        "label": "Konstrukcija",
+        "value": "Dvoslojna"
+      }
+    ],
+    "applications": [
+      "Za rad sa finim i antihologram polir pastama"
+    ],
+    "benefits": [
+      {
+        "title": "Ujednačen učinak",
+        "description": "Dvoslojna konstrukcija podupire sunđer i obezbeđuje ujednačen učinak."
+      }
+    ],
+    "advice": "Preporučuje se upotreba sa Carsystem Polish C-30 Finish.",
+    "variants": {
+      "151.908": "85 mm",
+      "151.639": "145 mm"
+    }
+  },
+  "finish/finish-waffle-foam-black-ah-polishing-pad": {
+    "sourceHash": "3cd8453bcf3add05",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Mek finish sunđer za rad sa finim i antihologram polir pastama i voskovima.",
+    "longDescription": "Finish Waffle Foam Black AH je finish sunđer meke tvrdoće sa waffle strukturom. Koristi se za rad sa finim i antihologram polir pastama i voskovima. Dostupan je u prečnicima 85 mm i 145 mm.",
+    "purpose": "Rad sa finim i antihologram polir pastama i voskovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Finish Waffle Foam sunđer"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Meka"
+      }
+    ],
+    "applications": [
+      "Za rad sa finim i antihologram polir pastama i voskovima"
+    ],
+    "benefits": [],
+    "advice": "Finish Foam Black AH se preporučuje uz sve uobičajene fine i antihologram polir paste i voskove.",
+    "variants": {
+      "157.066": "85 mm",
+      "157.067": "145 mm"
+    }
+  },
+  "finish/finish-waffle-pad-orange-polishing-pad": {
+    "sourceHash": "3da7d1c4f5d12508",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Waffle sunđer srednje tvrdoće za rad sa abrazivnim polir pastama.",
+    "longDescription": "Finish Waffle Pad Orange je sunđer za poliranje srednje tvrdoće sa waffle strukturom. Namenjen je radu sa abrazivnim polir pastama. Isporučuje se u dimenziji 135 x 25 mm.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Waffle sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Srednja"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "153.114": "135 x 25 mm"
+    }
+  },
+  "finish/lamb-wool-pad-gold-s-lamb-wool-pad": {
+    "sourceHash": "abaecc1ce95886b5",
+    "productType": "Krzno za poliranje",
+    "subtype": "Krzno za poliranje",
+    "shortDescription": "Krzno za poliranje od 100% jagnjećeg krzna sa mekom podloškom, za abrazivne polir paste.",
+    "longDescription": "Lamb Wool Pad Gold S izrađen je od 100% jagnjećeg krzna i ima meku podlošku. Namenjen je radu sa abrazivnim polir pastama, a kvalitet materijala obezbeđuje veoma dug radni vek. Poliranje se odvija na niskom temperaturnom nivou, uz veoma visoku reznu moć za efikasno uklanjanje tragova brušenja. Dostupan je u dimenzijama 80 x 17 mm i 150 x 17 mm.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "100% jagnjeće krzno"
+      },
+      {
+        "label": "Podloška",
+        "value": "Meka"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [
+      {
+        "title": "Dug radni vek",
+        "description": "Kvalitet materijala obezbeđuje veoma dug radni vek."
+      },
+      {
+        "title": "Nizak nivo zagrevanja",
+        "description": "Poliranje se odvija na niskom temperaturnom nivou."
+      },
+      {
+        "title": "Veoma visoka rezna moć",
+        "description": "Veoma visoka rezna moć omogućava efikasno uklanjanje tragova brušenja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.166": "80 x 17 mm",
+      "157.290": "150 x 17 mm"
+    }
+  },
+  "finish/lamb-wool-pad-white-s-edge-lamb-wool-pad": {
+    "sourceHash": "1d774e4f57cdf09f",
+    "productType": "Krzno za poliranje",
+    "subtype": "Krzno za poliranje",
+    "shortDescription": "Krzno za poliranje sa uvučenom ivicom, za zaobljenja, uske ivice i teško dostupna mesta.",
+    "longDescription": "Lamb Wool Pad White S Edge izrađen je od 100 % jagnjećeg krzna, a uvučena ivica formira obrub na poleđini koji dobro fiksira podlošku i štiti okolne delove od oštećenja. Namenjen je poliranju izraženih zaobljenja, uskih ivica i teško dostupnih mesta, kao što su ulazne zone, okviri stakala i krovni stubovi. Dostupan je u dimenzijama 80 x 17 mm i 130 x 25 mm.",
+    "purpose": "Poliranje zaobljenja, uskih ivica i teško dostupnih mesta",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "100 % jagnjeće krzno"
+      },
+      {
+        "label": "Zaštita",
+        "value": "Uvučena ivica štiti okolne delove"
+      },
+      {
+        "label": "Uvučena ivica",
+        "value": "Na poleđini formira obrub koji dobro fiksira podlošku"
+      }
+    ],
+    "applications": [
+      "Namenjeno poliranju izraženih zaobljenja, uskih ivica i teško dostupnih mesta, npr. ulaznih zona, okvira stakala i krovnih stubova"
+    ],
+    "benefits": [
+      {
+        "title": "Zaštita okolnih delova",
+        "description": "Štiti okolne delove od oštećenja."
+      },
+      {
+        "title": "Teško dostupna mesta",
+        "description": "Olakšava poliranje i na teško dostupnim mestima."
+      },
+      {
+        "title": "Brzo uklanjanje ogrebotina",
+        "description": "Veoma brzo uklanja ogrebotine."
+      },
+      {
+        "title": "Dug radni vek",
+        "description": "Kvalitet materijala obezbeđuje veoma dug radni vek."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "157.163": "80 x 17 mm",
+      "157.232": "130 x 25 mm"
+    }
+  },
+  "finish/micro-fiber-cloth-2-in-1": {
+    "sourceHash": "13fa7e0b08ee89fc",
+    "productType": "Mikrofiber krpa",
+    "subtype": "2 IN 1",
+    "shortDescription": "Mikrofiber krpa 40 x 40 cm, 380 g/m², sa dve strane vlakana za uobičajene poslove čišćenja.",
+    "longDescription": "Micro Fiber Cloth 2 IN 1 dimenzija 40 x 40 cm izrađena je od 80% poliestra i 20% poliamida, gramaže 380 g/m². Dve strane, sa kratkim i sa dugim vlaknima, omogućavaju prilagođavanje različitim poslovima čišćenja u karoserijskoj i lakirerskoj radionici. Ultrazvučno sečene ivice ne grebu površinu.",
+    "purpose": "Uobičajeni poslovi čišćenja u radionici",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikrofiber krpa"
+      },
+      {
+        "label": "Obrada ivica",
+        "value": "Ultrazvučno sečenje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 x 40 cm"
+      },
+      {
+        "label": "Gramaža",
+        "value": "380 g/m²"
+      },
+      {
+        "label": "Sastav",
+        "value": "80% poliestar / 20% poliamid"
+      }
+    ],
+    "applications": [
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [
+      {
+        "title": "Dve različite strane",
+        "description": "Krpa ima dve strane, sa kratkim i sa dugim vlaknima."
+      },
+      {
+        "title": "Fleksibilna primena",
+        "description": "Može se koristiti u različitim primenama."
+      },
+      {
+        "title": "Ivice ne grebu",
+        "description": "Ivice krpe ne grebu površinu."
+      }
+    ],
+    "advice": "Pere se na temperaturi do 30 °C, bez deterdženta.",
+    "variants": {
+      "156.589": "380 g/m² / tamnoplava"
+    }
+  },
+  "finish/micro-fiber-cloth-fluffy": {
+    "sourceHash": "218e3d1859cd3bfe",
+    "productType": "Mikrofiber krpa",
+    "subtype": "Fluffy",
+    "shortDescription": "Mikrofiber krpa 40 x 40 cm, 500 g/m², dugih mekih vlakana za upijanje polir pasta i voskova.",
+    "longDescription": "Micro Fiber Cloth Fluffy dimenzija 40 x 40 cm izrađena je od 80 % poliestra i 20 % poliamida, gramaže 500 g/m². Veoma duga i meka vlakna obezbeđuju visoku upojnost polir pasta, voskova i prašine. Kao završna krpa veoma je blaga prema površini, a ultrazvučno sečene ivice ne grebu.",
+    "purpose": "Upijanje polir pasta, voskova i prašine",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikrofiber krpa"
+      },
+      {
+        "label": "Obrada ivica",
+        "value": "Ultrazvučno sečenje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 x 40 cm"
+      },
+      {
+        "label": "Gramaža",
+        "value": "500 g/m²"
+      },
+      {
+        "label": "Sastav",
+        "value": "80% poliestar / 20% poliamid"
+      }
+    ],
+    "applications": [
+      "Visoka upojnost polir pasta, voskova i prašine",
+      "„Final cloth”: veoma blaga prema površini"
+    ],
+    "benefits": [
+      {
+        "title": "Duga i meka vlakna",
+        "description": "Vlakna su veoma duga i meka."
+      },
+      {
+        "title": "Visoka upojnost",
+        "description": "Obezbeđuje veoma dobro upijanje."
+      },
+      {
+        "title": "Ivice ne grebu",
+        "description": "Ivice krpe ne grebu površinu."
+      }
+    ],
+    "advice": "Pere se na temperaturi do 30 °C, bez deterdženta.",
+    "variants": {
+      "156.590": "500 g/m² / siva"
+    }
+  },
+  "finish/micro-fiber-cloth-polish-extreme": {
+    "sourceHash": "be9f276cfbfc6b13",
+    "productType": "Mikrofiber krpa",
+    "subtype": "Polish Extreme",
+    "shortDescription": "Mikrofiber krpa 40 x 40 cm, 800 g/m², za poliranje i upijanje polir pasta i voskova.",
+    "longDescription": "Micro Fiber Cloth Polish Extreme dimenzija 40 x 40 cm izrađena je od 80% poliestra i 20% poliamida, gramaže 800 g/m². Koristi se kao krpa za poliranje i odlikuje se veoma visokom upojnošću polir pasta i voskova. Veoma je blaga prema osetljivim lakiranim površinama, a opšivene ivice ne grebu.",
+    "purpose": "Poliranje i upijanje polir pasta i voskova",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikrofiber krpa"
+      },
+      {
+        "label": "Ivice",
+        "value": "Opšivene"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 x 40 cm"
+      },
+      {
+        "label": "Gramaža",
+        "value": "800 g/m²"
+      },
+      {
+        "label": "Sastav",
+        "value": "80% poliestar / 20% poliamid"
+      }
+    ],
+    "applications": [
+      "Krpa za poliranje",
+      "Visoka upojnost polir pasta i voskova"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma visoka upojnost",
+        "description": "Upija veoma velike količine materijala."
+      },
+      {
+        "title": "Blaga prema površini",
+        "description": "Veoma je blaga prema lakiranoj površini."
+      },
+      {
+        "title": "Ivice ne grebu",
+        "description": "Ivice krpe ne grebu površinu."
+      }
+    ],
+    "advice": "Pere se na temperaturi do 30 °C, bez deterdženta.",
+    "variants": {
+      "156.591": "800 g/m² / crna/ žuta"
+    }
+  },
+  "finish/micro-fiber-cloth-sky-blue": {
+    "sourceHash": "bb9e2349ebd6506b",
+    "productType": "Mikrofiber krpa",
+    "subtype": "Sky Blue",
+    "shortDescription": "Mikrofiber krpa 40 x 40 cm, 260 g/m², za sve uobičajene poslove čišćenja u radionici.",
+    "longDescription": "Micro Fiber Cloth Sky Blue dimenzija 40 x 40 cm izrađena je od 80% poliestra i 20% poliamida, gramaže 260 g/m². Namenjena je svim uobičajenim poslovima čišćenja u karoserijskoj i lakirerskoj radionici. Ultrazvučno sečene ivice ne grebu površinu.",
+    "purpose": "Uobičajeni poslovi čišćenja u radionici",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikrofiber krpa"
+      },
+      {
+        "label": "Obrada ivica",
+        "value": "Ultrazvučno sečenje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 x 40 cm"
+      },
+      {
+        "label": "Gramaža",
+        "value": "260 g/m²"
+      },
+      {
+        "label": "Sastav",
+        "value": "80% poliestar / 20% poliamid"
+      }
+    ],
+    "applications": [
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [
+      {
+        "title": "Ivice ne grebu",
+        "description": "Ivice krpe ne grebu površinu."
+      }
+    ],
+    "advice": "Pere se na temperaturi do 30 °C, bez deterdženta.",
+    "variants": {
+      "156.587": "260 g/m² / svetloplava"
+    }
+  },
+  "finish/micro-fiber-cloth-wave-cut": {
+    "sourceHash": "6ed2c6988ae565d1",
+    "productType": "Mikrofiber krpa",
+    "subtype": "Wave Cut",
+    "shortDescription": "Mikrofiber krpa 40 x 40 cm, 300 g/m², za čišćenje, posebno pogodna za oštre ivice limarije.",
+    "longDescription": "Micro Fiber Cloth Wave Cut dimenzija 40 x 40 cm izrađena je od 80 % poliestra i 20 % poliamida, gramaže 300 g/m². Univerzalna je krpa za sve uobičajene poslove čišćenja u radionici, a posebno je pogodna za delove sa oštrim ivicama. Ultrazvučno sečene ivice ne grebu površinu.",
+    "purpose": "Čišćenje, posebno delova sa oštrim ivicama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikrofiber krpa"
+      },
+      {
+        "label": "Obrada ivica",
+        "value": "Ultrazvučno sečenje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 x 40 cm"
+      },
+      {
+        "label": "Gramaža",
+        "value": "300 g/m²"
+      },
+      {
+        "label": "Sastav",
+        "value": "80% poliestar / 20% poliamid"
+      }
+    ],
+    "applications": [
+      "Pogodna za delove sa oštrim ivicama",
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalna krpa",
+        "description": "Univerzalna mikrofiber krpa za radionicu."
+      },
+      {
+        "title": "Ivice ne grebu",
+        "description": "Ivice krpe ne grebu površinu."
+      }
+    ],
+    "advice": "Pere se na temperaturi do 30 °C, bez deterdženta.",
+    "variants": {
+      "156.588": "300 g/m² / bela"
+    }
+  },
+  "finish/microfiber-x300-duo-micro-fiber-cloth": {
+    "sourceHash": "cf34ee153bfae662",
+    "productType": "Mikrofiber krpa",
+    "subtype": "Mikrofiber krpa",
+    "shortDescription": "Mikrofiber krpe 40 x 40 cm, 300 g/m², u dispenzer kutiji sa po 12 crvenih i belih krpa.",
+    "longDescription": "Microfiber X300 Duo su mikrofiber krpe za svakodnevni rad u lakirnici, gramaže 300 g/m² i dimenzija 40 x 40 cm. Odgovarajuća gustina vlakana obezbeđuje dobro upijanje prljavštine i ostataka polir paste, uz blag rad na laku, staklu i plastici. Isporučuju se u dispenzer kutiji sa dva otvora, po 12 krpa u crvenoj i beloj boji.",
+    "purpose": "Uobičajeni poslovi čišćenja u lakirnici",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Mikrofiber krpe"
+      },
+      {
+        "label": "Obrada ivica",
+        "value": "Ultrazvučno sečenje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 x 40 cm"
+      },
+      {
+        "label": "Gramaža",
+        "value": "300 g/m²"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "Dispenzer kutija sa 12 krpa po boji"
+      },
+      {
+        "label": "Boje",
+        "value": "Crvena i bela"
+      }
+    ],
+    "applications": [
+      "Za sve uobičajene poslove čišćenja"
+    ],
+    "benefits": [
+      {
+        "title": "Ultrazvučno sečenje",
+        "description": "Ultrazvučno sečenje znači da nema šava, pa nema ni grebanja."
+      },
+      {
+        "title": "Dve boje",
+        "description": "Dve boje omogućavaju jasno razdvajanje poslova odnosno zona primene."
+      },
+      {
+        "title": "Dobro upijanje",
+        "description": "Vrlo dobro upija prljavštinu i ostatke polir paste."
+      },
+      {
+        "title": "Blago prema površinama",
+        "description": "Blago prema laku, staklu i plastici."
+      },
+      {
+        "title": "Praktična kutija",
+        "description": "Praktična kutija sa 2 otvora za izvlačenje."
+      }
+    ],
+    "advice": "Pere se na temperaturi do 30 °C, bez deterdženta.",
+    "variants": {
+      "160.457": "crvena i bela / 40 x 40 cm"
+    }
+  },
+  "finish/mini-sanding-machine-rc-9330-mini-sanding-machine-pneumatic": {
+    "sourceHash": "aa381d2036e39a41",
+    "productType": "Mini brusilica",
+    "subtype": "Mini brusilica · pneumatska",
+    "shortDescription": "Pneumatska ekscentrična mini brusilica za daisy diskove, sa dve podloške i podesivim obrtajima.",
+    "longDescription": "Mini Sanding Machine RC 9330 je pneumatska ekscentrična brusilica za daisy diskove. Isporučuje se sa 2 podloške, za čičak (Velcro®) i za PSA diskove, a broj obrtaja je podesiv do 7.500 o/min. Navoj je 5/16\". Namenjena je finom brušenju daisy diskovima.",
+    "purpose": "Fino brušenje daisy diskovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska ekscentrična brusilica za daisy diskove, sa 2 podloške (za čičak (Velcro®) i PSA diskove)"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 7.500 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "5/16\""
+      }
+    ],
+    "applications": [
+      "Fino brušenje daisy diskovima",
+      "Za čičak (Velcro®) i PSA diskove"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "143.724": "Mini brusilica / sa podloškama stick i grip"
+    }
+  },
+  "finish/nano-carnauba-wax-high-gloss-wax": {
+    "sourceHash": "70dc7a3ffb19e23a",
+    "productType": "Vosak visokog sjaja",
+    "subtype": "Vosak visokog sjaja",
+    "shortDescription": "Vosak visokog sjaja na bazi vode, sa nano tehnologijom, za zaštitu lakiranih površina.",
+    "longDescription": "Nano Carnauba Wax je vosak visokog sjaja na bazi vode, sa nano tehnologijom i bez silikona. Zapečaćuje lakirane površine i štiti lak od atmosferskih uticaja. Odbija prljavštinu i daje dubok sjaj sa efektom ogledala.",
+    "purpose": "Zapečaćivanje i zaštita lakiranih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Vosak visokog sjaja sa nano tehnologijom"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Silikoni",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Žuta"
+      }
+    ],
+    "applications": [
+      "Zapečaćivanje lakiranih površina",
+      "Štiti lak od atmosferskih uticaja"
+    ],
+    "benefits": [
+      {
+        "title": "Odbija prljavštinu",
+        "description": "Površina obrađena voskom odbija prljavštinu."
+      },
+      {
+        "title": "Dubok sjaj",
+        "description": "Daje dubok sjaj sa efektom ogledala."
+      }
+    ],
+    "advice": "Preporučuje se nanošenje uz Carsystem Wax Puck.",
+    "variants": {
+      "151.945": "1.0 l"
+    }
+  },
+  "finish/orbital-sander-csh-cms01-kit-cordless-orbital-sander": {
+    "sourceHash": "08d11093456f3d2a",
+    "productType": "Vibraciona brusilica",
+    "subtype": "Akumulatorska vibraciona brusilica",
+    "shortDescription": "Akumulatorska vibraciona brusilica sa hodom 3 mm, u kompletu sa dve baterije, punjačem i koferom.",
+    "longDescription": "CSH-CMS01 je kompaktna akumulatorska vibraciona brusilica sa 10.8 V 2.5 Ah Li-ion baterijom, koja radi do 40 minuta neprekidno, odnosno do 2 dana uz pauze, a puni se za 60 minuta. Motor bez četkica reguliše se u 6 stepeni, uz hod od 3 mm i brzinu 4.000 - 10.000 o/min. Komplet sadrži četiri podloške (2x PSA, 2x čičak), punjač i dodatnu bateriju, sve u koferu.",
+    "purpose": "Tačkasto brušenje i uklanjanje grešaka u laku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Laka i praktična akumulatorska vibraciona brusilica"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv, 4.000 - 10.000 o/min"
+      },
+      {
+        "label": "Neprekidan rad",
+        "value": "40 minuta"
+      },
+      {
+        "label": "Rad sa pauzama",
+        "value": "Do 2 dana"
+      },
+      {
+        "label": "Punjenje",
+        "value": "60 minuta"
+      },
+      {
+        "label": "Hod",
+        "value": "3 mm"
+      }
+    ],
+    "applications": [
+      "Tačkasto brušenje",
+      "Uklanjanje grešaka u laku kao što su prašina, čestice i slično"
+    ],
+    "benefits": [
+      {
+        "title": "Fleksibilan rad",
+        "description": "Rad bez kablova i creva za vazduh."
+      },
+      {
+        "title": "Ergonomska konstrukcija",
+        "description": "Dobro izbalansiran i ergonomski oblik smanjuje zamor."
+      },
+      {
+        "title": "Tih rad",
+        "description": "Nizak nivo buke i male vibracije olakšavaju rad."
+      },
+      {
+        "title": "Odlaganje u koferu",
+        "description": "Priloženi kofer omogućava sigurno odlaganje bez prašine."
+      }
+    ],
+    "advice": "Za najbolje rezultate preporučuju se CS Mini Back Pad 28 mm GRIP (čičak verzija 144.769), CS Mini Back Pad 28 mm STICK (lepljiva verzija 144.768) ili Universal Set CS Grip-To-Stick (adapter čičak-lepljivo 159.677).",
+    "variants": {
+      "159.067": "CSH-CMS01 / 3 mm"
+    }
+  },
+  "finish/polish-c-05-cut-high-performance-cutting-compound": {
+    "sourceHash": "16c99a7175ab5996",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Abrazivna polir pasta visokog učinka",
+    "shortDescription": "Ekstra gruba abrazivna polir pasta na bazi vode, bez silikona, za uklanjanje dubokih ogrebotina.",
+    "longDescription": "Polish C-05 cut je ekstra gruba abrazivna polir pasta visokog učinka na bazi vode, bez silikona. Namenjena je veoma brzom uklanjanju dubokih ogrebotina i grešaka na svežim i potpuno očvrslim završnim lakovima. Razvijena je za sveže i korišćene lakirane površine, a uz veoma visoku reznu moć daje i dobar dubok sjaj.",
+    "purpose": "Brzo uklanjanje grešaka na svežim i očvrslim završnim lakovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Abrazivna polir pasta visokog učinka"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Silikoni",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Zelena"
+      }
+    ],
+    "applications": [
+      "Veoma brzo uklanjanje grešaka na svežim i potpuno očvrslim završnim lakovima",
+      "Posebno razvijena za sveže i korišćene lakirane površine"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma visoka rezna moć",
+        "description": "Ostvaruje veoma visok učinak skidanja materijala."
+      },
+      {
+        "title": "Dobar dubok sjaj",
+        "description": "Daje dobar dubok sjaj."
+      }
+    ],
+    "advice": "Preporučuje se upotreba Carsystem Polish C-05 Cut uz CS Polish Foam Green, a na tamnim lakovima zatim i Carsystem Polish C-30 Finish.",
+    "variants": {
+      "156.345": "1 kg"
+    }
+  },
+  "finish/polish-c-07-cut-high-performance-cutting-compound": {
+    "sourceHash": "53dfa6c0d82e0544",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Abrazivna polir pasta visokog učinka",
+    "shortDescription": "Abrazivna polir pasta na bazi vode, bez silikona, za brzo uklanjanje nepravilnosti u laku.",
+    "longDescription": "Polish C-07 cut je abrazivna polir pasta visokog učinka na bazi vode, bez silikona. Omogućava veoma brzo uklanjanje nepravilnosti na svežim i potpuno očvrslim završnim lakovima. Razvijena je za sveže i korišćene lakirane površine i daje veoma dobar dubok sjaj.",
+    "purpose": "Brzo uklanjanje grešaka na svežim i očvrslim završnim lakovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Abrazivna polir pasta visokog učinka"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Silikoni",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Žuta"
+      }
+    ],
+    "applications": [
+      "Veoma brzo uklanjanje grešaka na svežim i potpuno očvrslim završnim lakovima",
+      "Posebno razvijena za sveže i korišćene lakirane površine"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma visoka rezna moć",
+        "description": "Ostvaruje veoma visok učinak skidanja materijala."
+      },
+      {
+        "title": "Veoma dobar dubok sjaj",
+        "description": "Daje veoma dobar dubok sjaj."
+      }
+    ],
+    "advice": "Preporučuje se upotreba Carsystem Polish C-07 Cut uz CS Polish Foam Yellow, a na tamnim bojama zatim i Carsystem Polish C-30 Finish.",
+    "variants": {
+      "157.445": "1 kg"
+    }
+  },
+  "finish/polish-c-10-strong-high-performance-cutting-compound": {
+    "sourceHash": "19d4e91f461466a8",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Abrazivna polir pasta visokog učinka",
+    "shortDescription": "Abrazivna polir pasta na bazi vode, bez silikona, za brzo uklanjanje nepravilnosti uz dubok sjaj.",
+    "longDescription": "Polish C-10 strong je abrazivna polir pasta visokog učinka na bazi vode, bez silikona. Brzo uklanja nepravilnosti na svežim i potpuno očvrslim završnim lakovima, a razvijena je za sveže i korišćene lakirane površine. Uz visoku reznu moć daje veoma dobar dubok sjaj, a poliranje se odvija na niskom temperaturnom nivou.",
+    "purpose": "Brzo uklanjanje nepravilnosti na svežim i očvrslim završnim lakovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Abrazivna polir pasta visokog učinka"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Silikoni",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Bela"
+      }
+    ],
+    "applications": [
+      "Brzo uklanjanje nepravilnosti na svežim i potpuno očvrslim završnim lakovima",
+      "Posebno razvijena za sveže i korišćene lakirane površine"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka rezna moć",
+        "description": "Ostvaruje visok učinak skidanja materijala."
+      },
+      {
+        "title": "Veoma dobar dubok sjaj",
+        "description": "Daje veoma dobar dubok sjaj."
+      },
+      {
+        "title": "Nizak nivo zagrevanja",
+        "description": "Poliranje se odvija na niskom temperaturnom nivou."
+      }
+    ],
+    "advice": "Preporučuje se upotreba Carsystem Finish Quadra Pad C10, a na tamnim bojama zatim i Carsystem Polish C-30.",
+    "variants": {
+      "151.634": "1 kg"
+    }
+  },
+  "finish/polish-c-30-finish-anti-hologram-polish": {
+    "sourceHash": "cacc0664f9c26817",
+    "productType": "Antihologram polir pasta",
+    "subtype": "Antihologram polir pasta",
+    "shortDescription": "Antihologram polir pasta na bazi vode, bez silikona, za završno poliranje tamnih lakova.",
+    "longDescription": "Polish C-30 finish je antihologram polir pasta na bazi vode, bez silikona. Brzo uklanja najsitnije ogrebotine, tragove kružnog poliranja i holograme na tamnim lakovima, pa je pogodna kao poslednji korak obrade. Daje dubok sjaj uz malo prašenja i dobru raspodelu materijala.",
+    "purpose": "Uklanjanje najsitnijih ogrebotina i holograma na tamnim lakovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Antihologram polir pasta"
+      },
+      {
+        "label": "Osnova",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Silikoni",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Siva"
+      }
+    ],
+    "applications": [
+      "Uklanjanje najsitnijih ogrebotina, tragova kružnog poliranja i holograma na tamnim lakovima",
+      "Pogodna kao poslednji korak završne obrade"
+    ],
+    "benefits": [
+      {
+        "title": "Uklanjanje holograma",
+        "description": "Veoma efikasno uklanja holograme bez tragova."
+      },
+      {
+        "title": "Dubok sjaj",
+        "description": "Daje dubok sjaj."
+      },
+      {
+        "title": "Malo prašenja",
+        "description": "Tokom rada malo praši."
+      },
+      {
+        "title": "Dobra raspodela materijala",
+        "description": "Materijal se dobro raspoređuje po površini."
+      }
+    ],
+    "advice": "Preporučuje se upotreba uz Carsystem Finish Foam White AH, Finish Sandwich Pad C-30 ili Finish Foam Black AH.",
+    "variants": {
+      "151.636": "1 kg"
+    }
+  },
+  "finish/polish-coarse-step-1-polish": {
+    "sourceHash": "c051c482b892e7bb",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Polir pasta",
+    "shortDescription": "Abrazivna polir pasta na bazi vode, bez silikona, za brzo uklanjanje nepravilnosti na svežem laku.",
+    "longDescription": "Carsystem Polish Step 1 coarse je abrazivna polir pasta na bazi vode, bez silikona, sa visokim reznim učinkom i veoma dobrim dubokim sjajem. Namenjena je brzom uklanjanju nepravilnosti na svežim završnim lakovima, u jednostepenom postupku. Praktičan dispenzer sistem za zidnu montažu razvijen je za industriju i detailing sektor.",
+    "purpose": "Uklanjanje nepravilnosti na svežim završnim lakovima",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Abrazivna polir pasta visokog učinka"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Brzo uklanjanje nepravilnosti na svežim završnim lakovima",
+      "Za industriju i detailing sektor",
+      "Usmerena na jednostepeni postupak"
+    ],
+    "benefits": [
+      {
+        "title": "Visok rezni učinak",
+        "description": "Visok učinak pri poliranju."
+      },
+      {
+        "title": "Dubok sjaj",
+        "description": "Veoma dobar dubok sjaj."
+      },
+      {
+        "title": "Rad na nižoj temperaturi",
+        "description": "Poliranje se odvija na niskom nivou temperature."
+      },
+      {
+        "title": "Zidni dispenzer",
+        "description": "Dostupan je zidni dispenzer."
+      }
+    ],
+    "advice": "Preporučuje se upotreba proizvoda Carsystem Lambwool Pad white S Edge ili Polish Foam Yellow.",
+    "variants": {
+      "156.451": "5.0 kg"
+    }
+  },
+  "finish/polish-fine-step-2-anti-hologram-polish": {
+    "sourceHash": "eae0cf367c7a1736",
+    "productType": "Antihologram polir pasta",
+    "subtype": "Antihologram polir pasta",
+    "shortDescription": "Antihologram polir pasta na bazi vode, bez silikona, za završno uklanjanje najfinijih ogrebotina i holograma.",
+    "longDescription": "Carsystem Polish Step 2 fine je antihologram polir pasta na bazi vode, bez silikona, sa dubokim sjajem i malim stvaranjem prašine. Uklanja najfinije ogrebotine, tragove u krug i holograme na tamnim lakovima, pa se koristi kao poslednji korak obrade posle Polish Step 1. Praktičan dispenzer sistem za zidnu montažu razvijen je za industriju i detailing sektor.",
+    "purpose": "Završno uklanjanje holograma i najfinijih ogrebotina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Antihologram polir pasta"
+      },
+      {
+        "label": "Baza",
+        "value": "Na bazi vode"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Uklanjanje najfinijih ogrebotina, tragova u krug i holograma na tamnim lakovima",
+      "Poslednji korak obrade posle Polish Step 1"
+    ],
+    "benefits": [
+      {
+        "title": "Uklanjanje holograma",
+        "description": "Veoma efikasno uklanja holograme bez tragova."
+      },
+      {
+        "title": "Dubok sjaj",
+        "description": "Postiže se dubok sjaj."
+      },
+      {
+        "title": "Malo prašine",
+        "description": "Nisko stvaranje prašine pri radu."
+      },
+      {
+        "title": "Dobro razvlačenje",
+        "description": "Dobro razvlačenje materijala po površini."
+      },
+      {
+        "title": "Zidni dispenzer",
+        "description": "Dostupan je zidni dispenzer."
+      }
+    ],
+    "advice": "Preporučuje se upotreba proizvoda Carsystem Finish Waffle Foam Black.",
+    "variants": {
+      "156.452": "5.0 kg"
+    }
+  },
+  "finish/polish-foam-green-polishing-pad": {
+    "sourceHash": "45fb997ce0828fcf",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Tvrd sunđer za poliranje, za rad sa abrazivnim polir pastama.",
+    "longDescription": "Polish Foam Green je sunđer za poliranje tvrde izrade. Namenjen je radu sa abrazivnim polir pastama. Dostupan je u prečnicima 90 mm i 145 mm.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tvrda"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": "Polish Foam Green se preporučuje uz Polish C-05 Cut.",
+    "variants": {
+      "157.050": "90 mm",
+      "157.051": "145 mm"
+    }
+  },
+  "finish/polish-foam-white-sc-polishing-pad": {
+    "sourceHash": "f6d7713353742468",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Veoma tvrd sunđer za poliranje, za rad sa abrazivnim polir pastama.",
+    "longDescription": "Polish Foam White SC je veoma tvrd sunđer za poliranje. Namenjen je radu sa abrazivnim polir pastama. Dostupan je u prečnicima 90 mm i 145 mm.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Tvrda"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": "Polish Foam White SC se preporučuje uz sve uobičajene abrazivne polir paste.",
+    "variants": {
+      "157.054": "90 mm",
+      "157.055": "145 mm"
+    }
+  },
+  "finish/polish-foam-yellow-polishing-pad": {
+    "sourceHash": "ec6174b94d08b316",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Sunđer za poliranje srednje tvrdoće, za rad sa abrazivnim polir pastama.",
+    "longDescription": "Polish Foam Yellow je sunđer za poliranje srednje tvrdoće. Namenjen je radu sa abrazivnim polir pastama. Dostupan je u prečnicima 90 mm i 145 mm.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Srednja"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": "Polish Foam Yellow se preporučuje uz Polish C-07 Cut.",
+    "variants": {
+      "157.056": "90 mm",
+      "157.057": "145 mm"
+    }
+  },
+  "finish/polish-waffle-foam-yellow-polishing-pad": {
+    "sourceHash": "18f25f4126910ec1",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Waffle sunđer za poliranje srednje tvrdoće, za rad sa abrazivnim polir pastama.",
+    "longDescription": "Polish Waffle Foam Yellow je sunđer za poliranje srednje tvrdoće sa waffle strukturom. Namenjen je radu sa abrazivnim polir pastama. Dostupan je u prečnicima 85 mm i 145 mm.",
+    "purpose": "Rad sa abrazivnim polir pastama",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Waffle sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Srednja"
+      }
+    ],
+    "applications": [
+      "Za rad sa abrazivnim polir pastama"
+    ],
+    "benefits": [],
+    "advice": "Polish Foam Yellow se preporučuje uz Polish C-07 Cut.",
+    "variants": {
+      "157.058": "85 mm",
+      "157.059": "145 mm"
+    }
+  },
+  "finish/polish-x8000-ah-anti-hologram-polish": {
+    "sourceHash": "2c8531650b8d0f01",
+    "productType": "Antihologram polir pasta",
+    "subtype": "Antihologram polir pasta",
+    "shortDescription": "Antihologram polir pasta sa mikroskopskim abrazivom, za završno poliranje modernih lakova.",
+    "longDescription": "Polish X8000 AH razvijena je za fino i sigurno završno poliranje modernih automobilskih lakova. Mikroskopska abrazivna zrna omogućavaju ciljano i kontrolisano uklanjanje najsitnijih ogrebotina i holograma na tamnim lakovima. Uravnotežena formulacija čini primenu jednostavnom i sigurnom, uz ujednačen rezultat i dugotrajan visok sjaj.",
+    "purpose": "Uklanjanje najsitnijih ogrebotina i holograma na tamnim lakovima",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Fino i sigurno završno poliranje"
+      },
+      {
+        "label": "Abraziv",
+        "value": "Mikroskopska abrazivna zrna za ciljano i kontrolisano uklanjanje najsitnijih ogrebotina i holograma"
+      }
+    ],
+    "applications": [
+      "Uklanjanje najsitnijih ogrebotina, tragova kružnog poliranja i holograma na tamnim lakovima",
+      "Pogodna kao poslednji korak završne obrade"
+    ],
+    "benefits": [
+      {
+        "title": "Uklanja najsitnije ogrebotine",
+        "description": "Uklanja i najsitnije ogrebotine."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Jednostavna je i sigurna za upotrebu."
+      },
+      {
+        "title": "Bez silikona i ulja",
+        "description": "Dugotrajan rezultat bez holograma; ne sadrži silikone ni ulja."
+      },
+      {
+        "title": "Veoma visok sjaj",
+        "description": "Postiže veoma visok nivo sjaja."
+      },
+      {
+        "title": "Ekonomična potrošnja",
+        "description": "Veoma je ekonomična u radu."
+      },
+      {
+        "title": "Bez prskanja",
+        "description": "Ne prska tokom poliranja."
+      },
+      {
+        "title": "Rotacione i ekscentrične mašine",
+        "description": "Može se koristiti rotacionim i ekscentričnim polirkama."
+      },
+      {
+        "title": "Lako uklanjanje ostataka",
+        "description": "Ostaci se posle poliranja uklanjaju veoma lako, bez pritiska."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.451": "500 g"
+    }
+  },
+  "finish/polishing-back-pad-finish-back-pad": {
+    "sourceHash": "4b2d753c804ea664",
+    "productType": "Podloška (tanjir)",
+    "subtype": "Finish podloška",
+    "shortDescription": "Zamenska podloška M6 / 77 mm za polirku RC 166.",
+    "longDescription": "Polishing Back Pad je zamenska podloška za polirku RC166. Ima navoj M6 sa fiksnim vijkom, a prečnik podloške je 77 mm.",
+    "purpose": "Zamena podloške na polirki RC 166",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zamenska podloška za polirku RC166"
+      },
+      {
+        "label": "Navoj",
+        "value": "M6 (fiksni vijak)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Podloška se koristi na polirki RC 166, a može se koristiti i čičak (Velcro®) podloška 159.007 RUPES 9P01.055 M6 / 75 mm.",
+    "variants": {
+      "144.916": "M6 / 77 mm"
+    }
+  },
+  "finish/polishing-machine-rc-166-polishing-machine-pneumatic": {
+    "sourceHash": "38dd9c7a167bc6a8",
+    "productType": "Polirka",
+    "subtype": "Polirka · pneumatska",
+    "shortDescription": "Pneumatska jednoručna polirka sa podloškom 77 mm i brojem obrtaja podesivim do 2.500 o/min.",
+    "longDescription": "Polishing Machine RC 166 je pneumatska polirka za jednoručni rad. Isporučuje se sa podloškom prečnika 77 mm, a broj obrtaja je podesiv do 2.500 o/min. Navoj je M6.",
+    "purpose": "Poliranje pneumatskom jednoručnom mašinom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska polirka"
+      },
+      {
+        "label": "Podloška",
+        "value": "Isporučuje se podloška 77 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 2.500 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M6"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Može se koristiti i čičak podloška 159.007 RUPES 9P01.055 M6 / 75 mm.",
+    "variants": {
+      "143.723": "Mini polirka RC 166 sa podloškom za poliranje"
+    }
+  },
+  "finish/polishing-pad-x1500-polishing-pad": {
+    "sourceHash": "37d7bb12104c9309",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Sunđer za poliranje otporan na toplotu, za rad sa Compound X1500, u verzijama HC i MC.",
+    "longDescription": "Polishing Pad X1500 je sunđer za poliranje od pene otporne na toplotu, visokog stepena tvrdoće. Verzija HC (crvena) razvijena je za veliku brzinu rada i uklanjanje tragova brušenja u kratkom vremenu, dok verzija MC (bela), nešto niže tvrdoće, nudi ravnotežu između skidanja materijala, brzine i sigurnosti i pogodna je za sve površine i korisnike. Sendvič konstrukcija obezbeđuje fleksibilnost i ravnomernu raspodelu pritiska, a konusni oblik precizno poliranje.",
+    "purpose": "Rad sa Compound X1500 na završnom i OEM laku",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje od pene otporne na toplotu"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Visok stepen tvrdoće"
+      },
+      {
+        "label": "Boje",
+        "value": "Crvena HC X1500 – bela MC X1500"
+      }
+    ],
+    "applications": [
+      "Za upotrebu sa Compound X1500 radi brzog uklanjanja tragova brušenja u završnom laku i uklanjanja ogrebotina sa OEM lakova"
+    ],
+    "benefits": [
+      {
+        "title": "Sendvič konstrukcija",
+        "description": "Sendvič konstrukcija obezbeđuje fleksibilnost, sigurnost i ravnomernu raspodelu pritiska."
+      },
+      {
+        "title": "Postojana pena",
+        "description": "Pena postojanog oblika i otporna na toplotu obezbeđuje visok učinak."
+      },
+      {
+        "title": "Rotacione i ekscentrične mašine",
+        "description": "Pogodan za rotacione i ekscentrične polirke."
+      },
+      {
+        "title": "Konusni oblik",
+        "description": "Konusni oblik omogućava precizno poliranje."
+      },
+      {
+        "title": "Čišćenje komprimovanim vazduhom",
+        "description": "Za čišćenje nisu potrebni voda, sapun ni sredstvo za čišćenje — sunđer se brzo očisti komprimovanim vazduhom."
+      }
+    ],
+    "advice": "Najveći učinak se postiže u kombinaciji sa CS Compound X1500.",
+    "variants": {
+      "160.447": "HC X1500 / crvena / 125 mm / 140 mm",
+      "160.448": "HC X1500 / crvena / 85 mm / 95 mm",
+      "160.449": "MC X1500 / bela / 125 mm / 140 mm",
+      "160.450": "MC X1500 / bela / 85 mm / 95 mm"
+    }
+  },
+  "finish/polishing-pad-x8000-polishing-pad": {
+    "sourceHash": "6f2e5240044bdaed",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Meki sunđer za poliranje razvijen za rad sa Polish X8000, namenjen završnoj fazi poliranja.",
+    "longDescription": "Meki sunđer za poliranje razvijen je za rad sa Polish X8000 i namenjen završnoj fazi obrade. Fino porozna struktura pojačava dejstvo mikroskopskih abrazivnih čestica, pa se i najsitnije ogrebotine uklanjaju bezbedno. Rezultat je površina bez holograma.",
+    "purpose": "Završno poliranje i uklanjanje holograma",
+    "facts": [
+      {
+        "label": "Tvrdoća",
+        "value": "Niska"
+      }
+    ],
+    "applications": [
+      "Koristi se u kombinaciji sa Polish X8000 za jednostavno i brzo uklanjanje finih ogrebotina i holograma u bezbojnom laku"
+    ],
+    "benefits": [
+      {
+        "title": "Niska tvrdoća",
+        "description": "Niska tvrdoća sunđera pogodna je za uklanjanje holograma."
+      },
+      {
+        "title": "Gusta struktura pene",
+        "description": "Gusta struktura pene pruža izraženu zaštitu laka."
+      },
+      {
+        "title": "Postojana pena",
+        "description": "Pena je otporna na deformaciju i toplotu, pa zadržava radni učinak."
+      },
+      {
+        "title": "Za završni korak poliranja",
+        "description": "Namenjen je završnom koraku poliranja."
+      },
+      {
+        "title": "Rotacione i dual-action mašine",
+        "description": "Pogodan je za rotacione i dual-action mašine za poliranje."
+      },
+      {
+        "title": "Konusni oblik",
+        "description": "Konusni oblik omogućava precizno poliranje."
+      },
+      {
+        "title": "Čišćenje komprimovanim vazduhom",
+        "description": "Za čišćenje nisu potrebni voda, sapun ni sredstvo za čišćenje — sunđer se brzo i lako čisti komprimovanim vazduhom."
+      }
+    ],
+    "advice": "Pun učinak postiže se u kombinaciji sa CS Polish X8000.",
+    "variants": {
+      "160.452": "AH X8000 / bela / 125 mm / 140 mm",
+      "160.453": "AH X8000 / bela / 85 mm / 95 mm"
+    }
+  },
+  "finish/rapid-charger-for-csh-battery-powered-replacement-charger": {
+    "sourceHash": "e687e020bff532d9",
+    "productType": "Brzi punjač",
+    "subtype": "Zamenski punjač",
+    "shortDescription": "Zamenski brzi punjač za CSH akumulatorske mašine CSH-CMS01, CSH-CRP01 i CSH-COS01.",
+    "longDescription": "Brzi punjač za CSH akumulatorske alate namenjen je kao zamenski punjač za mašine CSH-CMS01, CSH-CRP01 i CSH-COS01. Baterije puni brzo i pouzdano, uz inteligentni sistem punjenja. Zaštita od prepunjavanja i pregrevanja doprinosi bezbednosti i produžava vek trajanja baterija.",
+    "purpose": "Punjenje baterija CSH akumulatorskih mašina",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zamenski punjač za sledeće mašine"
+      },
+      {
+        "label": "Mašina",
+        "value": "Orbital Sander CSH-CMS01"
+      },
+      {
+        "label": "Mašina",
+        "value": "Rotary Polisher CSH-CRP01"
+      },
+      {
+        "label": "Mašina",
+        "value": "Cordless Sander CSH-COS01"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Inteligentno punjenje",
+        "description": "Punjač ima inteligentni sistem punjenja."
+      },
+      {
+        "title": "Zaštita od prepunjavanja",
+        "description": "Sprečava prepunjavanje baterije."
+      },
+      {
+        "title": "Zaštita od pregrevanja",
+        "description": "Štiti bateriju od pregrevanja."
+      }
+    ],
+    "advice": "Okvirna vremena punjenja: baterije 2.5 Ah – 50–60 minuta / baterije 5.0 Ah – 100–120 minuta.",
+    "variants": {
+      "159.064": "10,8 V / 55 W"
+    }
+  },
+  "finish/refinish-1-cutting-compound": {
+    "sourceHash": "ded372653b9f24b7",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Abrazivna polir pasta",
+    "shortDescription": "Abrazivna polir pasta bez silikona za uklanjanje ogrebotina, uključaka prašine i pomorandžine kore.",
+    "longDescription": "Carsystem Refinish 1 je abrazivna polir pasta bez silikona. Uklanja ogrebotine, uključke prašine i efekat pomorandžine kore sa svežih i starih lakova. Razvijena je posebno za izbledele i stare lakirane površine.",
+    "purpose": "Uklanjanje ogrebotina, uključaka prašine i pomorandžine kore",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Abrazivna polir pasta"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      }
+    ],
+    "applications": [
+      "Uklanjanje ogrebotina, uključaka prašine i pomorandžine kore sa svežih i starih lakova",
+      "Posebno pogodna za izbledele i stare lakirane površine"
+    ],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "132.437": "880 ml"
+    }
+  },
+  "finish/refinish-restorer-plastic-conditioner": {
+    "sourceHash": "893d145755551104",
+    "productType": "Sredstvo za negu plastike",
+    "subtype": "Sredstvo za negu plastike",
+    "shortDescription": "Sredstvo za negu plastike bez silikona za uklanjanje tragova poliranja i obnavljanje izbledelih površina.",
+    "longDescription": "Carsystem Refinish Restorer je sredstvo za negu plastike bez silikona, na bazi prirodnog ulja koje se suši na vazduhu. Uklanja tragove prskanja pri poliranju sa plastike i obnavlja izbledele plastične i metalne površine. Boja proizvoda je žućkasto providna.",
+    "purpose": "Obnavljanje izbledelih plastičnih i metalnih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sredstvo za negu plastike"
+      },
+      {
+        "label": "Osnova",
+        "value": "Prirodno ulje koje se suši na vazduhu"
+      },
+      {
+        "label": "Sastav",
+        "value": "Bez silikona"
+      },
+      {
+        "label": "Boja",
+        "value": "Žućkasto providna"
+      }
+    ],
+    "applications": [
+      "Za obnavljanje izbledelih plastičnih i metalnih površina (npr. aluminijum, hrom, nerđajući čelik, obojeni metali)",
+      "Za uklanjanje tragova prskanja pri poliranju sa plastike"
+    ],
+    "benefits": [
+      {
+        "title": "Prodire u površinu",
+        "description": "Duboko prodire u površinu."
+      }
+    ],
+    "advice": "Samo za spoljašnju primenu. Pre nanošenja na bele površine proizvod prethodno isprobati.",
+    "variants": {
+      "159.706": "250 ml",
+      "159.707": "1 l"
+    }
+  },
+  "finish/rotary-polisher-csh-crp01-kit-rotary-polisher-cordless": {
+    "sourceHash": "ea4296e5d7e88329",
+    "productType": "Rotaciona polirka",
+    "subtype": "Rotaciona polirka · akumulatorska",
+    "shortDescription": "Laka akumulatorska rotaciona polirka sa podesivim brojem obrtaja 700 - 2.500 o/min, u koferu.",
+    "longDescription": "Carsystem CSH-CRP01 je laka i praktična akumulatorska mašina za poliranje, bez kabla i pneumatskog creva. Broj obrtaja podesiv je u opsegu 700 - 2.500 o/min, autonomija u neprekidnom radu iznosi 30 minuta, a punjenje traje 60 minuta. Ergonomski oblik, nizak nivo buke i male vibracije olakšavaju rad na lakiranim površinama, enterijeru i hrom detaljima. Isporučuje se u praktičnom koferu.",
+    "purpose": "Poliranje lakiranih površina, enterijera i hrom detalja",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Laka i praktična akumulatorska mašina za poliranje"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv, 700 - 2.500 o/min"
+      },
+      {
+        "label": "Autonomija",
+        "value": "30 minuta u neprekidnom radu"
+      },
+      {
+        "label": "Autonomija sa pauzama",
+        "value": "Do 2 dana"
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "60 minuta"
+      },
+      {
+        "label": "Navoj podloške",
+        "value": "Spoljni navoj 1/4\"-20"
+      },
+      {
+        "label": "Podloška (tanjir)",
+        "value": "74 mm Ø – čičak (Velcro®)"
+      }
+    ],
+    "applications": [
+      "Uklanjanje ogrebotina, poliranje lakiranih površina i nanošenje voskova i polir pasta do sjaja. Pogodna je i za enterijer, unutrašnje obloge i hrom detalje."
+    ],
+    "benefits": [
+      {
+        "title": "Rad bez kablova",
+        "description": "Nisu potrebni kablovi ni pneumatska creva."
+      },
+      {
+        "title": "Rad bez zamaranja",
+        "description": "Dobro izbalansiran, ergonomski oblik smanjuje zamor pri radu."
+      },
+      {
+        "title": "Prijatna za rad",
+        "description": "Nizak nivo buke i male vibracije."
+      },
+      {
+        "title": "Podesiv broj obrtaja",
+        "description": "Precizno podešavanje za osetljive lakove ili zahtevne površine."
+      },
+      {
+        "title": "Kofer u isporuci",
+        "description": "Odlaganje bez prašine i bezbedno čuvanje u priloženom koferu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "159.822": "CSH-CRP01",
+      "160.111": "Podloška (tanjir) 74 mm 1/4\" – 20"
+    }
+  },
+  "finish/rupes-47105-replacement-carbon-brush-replacement-carbon-brush": {
+    "sourceHash": "d0a2a2f3d6119237",
+    "productType": "Grafitne četkice",
+    "subtype": "Rezervne grafitne četkice",
+    "shortDescription": "Originalne RUPES rezervne grafitne četkice za navedene RUPES mašine za poliranje, pakovanje od 10 komada.",
+    "longDescription": "RUPES 47.105 su originalne rezervne grafitne četkice za RUPES mašine za poliranje. Odgovaraju navedenim modelima mašina i tačno naležu na njih. Isporučuju se u pakovanju od 10 komada.",
+    "purpose": "Zamena grafitnih četkica na RUPES mašinama za poliranje",
+    "facts": [
+      {
+        "label": "Karakteristika",
+        "value": "Originalne RUPES rezervne grafitne četkice za sledeće RUPES mašine za poliranje:"
+      },
+      {
+        "label": "Model",
+        "value": "RUPES LHR21ES"
+      },
+      {
+        "label": "Model",
+        "value": "RUPES LH16ES"
+      },
+      {
+        "label": "Model",
+        "value": "RUPES LH19E/STD"
+      },
+      {
+        "label": "Model",
+        "value": "RUPES LHR15III/STD"
+      },
+      {
+        "label": "Model",
+        "value": "RUPES LHR75E/STD"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "Pakovanje od 10 komada"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.290": "Pakovanje od 10 kom."
+    }
+  },
+  "finish/rupes-9-holder-bigfoot-wall-racket": {
+    "sourceHash": "065b7a5a6f40c5d0",
+    "productType": "Zidni nosač",
+    "subtype": "Zidni nosač",
+    "shortDescription": "Zidni nosač za RUPES BigFoot mašine za poliranje, dimenzija 32 cm x 20,5 cm.",
+    "longDescription": "RUPES nosač za BigFoot mašine za poliranje namenjen je uređenju radnog mesta. Posebne kuke primaju do 9 m priključnog kabla, a zaobljeni uglovi i ivice štite korisnika i mašinu. Dimenzije nosača su 32 cm x 20,5 cm.",
+    "purpose": "Zidno odlaganje BigFoot mašina za poliranje",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zidni nosač za BigFoot mašine za poliranje"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "32 cm x 20,5 cm"
+      }
+    ],
+    "applications": [
+      "Funkcionalan zidni nosač za BigFoot mašine za poliranje"
+    ],
+    "benefits": [
+      {
+        "title": "Kuke za kabl",
+        "description": "Posebne kuke primaju do 9 m priključnog kabla."
+      },
+      {
+        "title": "Zaobljeni uglovi i ivice",
+        "description": "Zaobljeni uglovi i ivice štite korisnika i mašinu."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.134": "Crna / 32 x 20.5 cm"
+    }
+  },
+  "finish/rupes-angle-polishing-machine-lh76p-angle-polishing-machine-pneumatic": {
+    "sourceHash": "68f32b8803bade55",
+    "productType": "Ugaona polirka",
+    "subtype": "Ugaona mašina za poliranje · pneumatska",
+    "shortDescription": "RUPES LH76P je pneumatska ugaona mašina za poliranje sa podloškom Ø 75 mm.",
+    "longDescription": "RUPES LH76P je pneumatska ugaona mašina za poliranje. Podloška sa čičkom (Velcro®) prečnika je 75 mm, a broj obrtaja podesiv je do 5.000 o/min. Navoj je 3/8\".",
+    "purpose": "Pneumatsko poliranje sa podloškom Ø 75 mm",
+    "facts": [
+      {
+        "label": "Pogon",
+        "value": "Pneumatski"
+      },
+      {
+        "label": "Podloška (tanjir)",
+        "value": "Ø 75 mm, čičak (Velcro®)"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 5.000 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "3/8\""
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.331": "LH76P"
+    }
+  },
+  "finish/rupes-mini-polishing-machine-hlr75stb-polishing-machine-battery-powered": {
+    "sourceHash": "f7138c3524b7a71e",
+    "productType": "Mini polirka",
+    "subtype": "Mašina za poliranje · akumulatorska",
+    "shortDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini orbitalna mašina za poliranje sa orbitom od 12 mm.",
+    "longDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini mašina za poliranje sa orbitalnim kretanjem i prečnikom orbite od 12 mm. Baterija 18 V - 2.5 Ah ima LED prikaz, autonomiju od 35 - 45 min. i vreme punjenja od 35 min. Podloška je prečnika 75 mm, a broj obrtaja podesiv je do 5.500 o/min. U isporuci su mašina, dve punjive baterije i punjač.",
+    "purpose": "Orbitalno poliranje manjih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Akumulatorska mini mašina za poliranje"
+      },
+      {
+        "label": "Baterija",
+        "value": "18 V - 2.5 Ah, sa LED prikazom"
+      },
+      {
+        "label": "Autonomija",
+        "value": "35 - 45 min."
+      },
+      {
+        "label": "Vreme punjenja",
+        "value": "35 min."
+      },
+      {
+        "label": "Kretanje",
+        "value": "Orbitalno"
+      },
+      {
+        "label": "Prečnik orbite",
+        "value": "12 mm"
+      },
+      {
+        "label": "Podloška (tanjir)",
+        "value": "75 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 5.500 o/min"
+      },
+      {
+        "label": "Sadržaj isporuke",
+        "value": "U isporuku je uključeno"
+      },
+      {
+        "label": "Sadržaj isporuke",
+        "value": "Mašina za poliranje HLR75STB"
+      },
+      {
+        "label": "Sadržaj isporuke",
+        "value": "2 x punjiva baterija 18 V - 2.5 Ah"
+      },
+      {
+        "label": "Sadržaj isporuke",
+        "value": "1 x punjač baterije"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "158.647": "HLR 75 STB, akumulatorska"
+    }
+  },
+  "finish/rupes-polish-pad-polishing-pad": {
+    "sourceHash": "020ab133228c5a87",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje",
+    "shortDescription": "Sunđeri za poliranje iz RUPES BigFoot programa, u tvrdoćama ultra fino i fino.",
+    "longDescription": "RUPES sunđeri za poliranje su univerzalni sunđeri iz BigFoot programa, namenjeni profesionalnoj pripremi laka. Dostupni su u tvrdoćama ultra fino i fino i pogodni za obradu svih uobičajenih sistema lakova. Odlikuju ih trajnost i dimenziona stabilnost.",
+    "purpose": "Profesionalna priprema laka i poliranje",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Sunđer za poliranje"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Ultra fino, fino"
+      }
+    ],
+    "applications": [
+      "Sunđer 9.DA FINE pogodan je za rad sa abrazivnim polir pastama",
+      "Sunđer 9.DA ULTRA FINE pogodan je za rad sa antihologram polir pastama"
+    ],
+    "benefits": [
+      {
+        "title": "I za ekscentrične mašine",
+        "description": "Pogodan je i za ekscentrične mašine."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "158.854": "Ultra fino / bela / 130 / 150 mm",
+      "158.853": "Fino / žuta / 130 / 150 mm",
+      "158.856": "Ultra fino / bela / 150 / 180 mm",
+      "158.855": "Fino / žuta / 150 / 180 mm"
+    }
+  },
+  "finish/rupes-polishing-machine-lh19e-polishing-machine-bigfoot": {
+    "sourceHash": "feb632a2bf2a47f2",
+    "productType": "Rotaciona polirka",
+    "subtype": "Mašina za poliranje · Bigfoot",
+    "shortDescription": "RUPES Bigfoot LH19E je električna rotaciona mašina za poliranje sa navojem M14.",
+    "longDescription": "RUPES Bigfoot LH19E je električna mašina za poliranje sa rotacionim kretanjem. Prihvata podloške sa čičkom (Velcro®) prečnika 125 - 165 mm, a broj obrtaja podesiv je do 1.700 o/min. Navoj je M14.",
+    "purpose": "Rotaciono poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Pogon",
+        "value": "Električni"
+      },
+      {
+        "label": "Kretanje",
+        "value": "Rotaciono"
+      },
+      {
+        "label": "Podloška (tanjir)",
+        "value": "Ø 125 - 165 mm, čičak (Velcro®)"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 1.700 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M14"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.322": "LH19E",
+      "157.640": "Podloška (tanjir) za poliranje M14"
+    }
+  },
+  "finish/rupes-polishing-machine-lhr15-polishing-machine-electric-bigfoot": {
+    "sourceHash": "eb90b66500ef9a6c",
+    "productType": "Ekscentrična polirka",
+    "subtype": "Mašina za poliranje · električna · Bigfoot",
+    "shortDescription": "RUPES Bigfoot LHR15 je električna ekscentrična mašina za poliranje sa orbitom od 15 mm.",
+    "longDescription": "RUPES Bigfoot LHR15 je električna ekscentrična mašina za poliranje sa prečnikom orbite od 15 mm. Podloška sa čičkom (Velcro®) prečnika je 125 mm, a broj obrtaja podesiv je do 5.200 o/min. Navoj je M8-F.",
+    "purpose": "Ekscentrično poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Električna ekscentrična mašina za poliranje"
+      },
+      {
+        "label": "Prečnik orbite",
+        "value": "15 mm"
+      },
+      {
+        "label": "Podloška (tanjir)",
+        "value": "Ø 125 mm, čičak (Velcro®)"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 5.200 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M8-F"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.323": "LHR15 III",
+      "157.641": "Podloška (tanjir) za poliranje 125 mm"
+    }
+  },
+  "finish/rupes-polishing-machine-lhr75-polishing-machine-pneumatic": {
+    "sourceHash": "a76d25fd599a7067",
+    "productType": "Mašina za poliranje",
+    "subtype": "Mašina za poliranje · pneumatska",
+    "shortDescription": "Pneumatska mini ekscentrična mašina za poliranje sa prečnikom orbite 15 mm i podloškom od 75 mm.",
+    "longDescription": "RUPES LHR75 je pneumatska mini ekscentrična mašina za poliranje sa prečnikom orbite 15 mm. Koristi čičak (Velcro®) podlošku prečnika Ø 75 mm. Broj obrtaja je podesiv do 11,000 o/min.",
+    "purpose": "Poliranje pneumatskom mini ekscentričnom mašinom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Pneumatska mini ekscentrična mašina za poliranje"
+      },
+      {
+        "label": "Prečnik orbite",
+        "value": "15 mm"
+      },
+      {
+        "label": "Podloška",
+        "value": "Ø čičak (Velcro®) podloška: 75 mm"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 11,000 o/min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.332": "LHR75",
+      "157.642": "Podloška za poliranje M6 / 75 mm"
+    }
+  },
+  "finish/rupes-polishing-machine-lhr75e-polishing-machine-bigfoot-electric": {
+    "sourceHash": "45e283b1606b7966",
+    "productType": "Mašina za poliranje",
+    "subtype": "Mašina za poliranje Bigfoot · električna",
+    "shortDescription": "Električna mini ekscentrična mašina za poliranje sa prečnikom orbite 12 mm i podloškom od 75 mm.",
+    "longDescription": "RUPES Bigfoot LHR75E je električna mini ekscentrična mašina za poliranje sa orbitalnim kretanjem i prečnikom orbite 12 mm. Podloška je prečnika 75 mm, sa priključkom i navojem M6. Broj obrtaja je podesiv do 5,500 o/min.",
+    "purpose": "Poliranje električnom mini ekscentričnom mašinom",
+    "facts": [
+      {
+        "label": "Tip",
+        "value": "Električna mini ekscentrična mašina za poliranje"
+      },
+      {
+        "label": "Kretanje",
+        "value": "Orbitalno"
+      },
+      {
+        "label": "Prečnik orbite",
+        "value": "12 mm"
+      },
+      {
+        "label": "Podloška",
+        "value": "75 mm"
+      },
+      {
+        "label": "Priključak",
+        "value": "M6"
+      },
+      {
+        "label": "Broj obrtaja",
+        "value": "Podesiv do 5,500 o/min"
+      },
+      {
+        "label": "Navoj",
+        "value": "M6"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "157.340": "LHR75E / 75 mm"
+    }
+  },
+  "finish/spare-battery-50ah-spare-battery-for-csh-cos01-and-csh-crp01": {
+    "sourceHash": "27b7bc9c151c431e",
+    "productType": "Rezervna baterija",
+    "subtype": "Rezervna baterija za CSH-COS01 i CSH-CRP01",
+    "shortDescription": "Rezervna baterija visokog kapaciteta za CS akumulatorsku brusilicu CSH-COS01 i polirku CSH-CRP01.",
+    "longDescription": "Baterija visokog kapaciteta namenjena je dužim periodima rada bez čestog dopunjavanja. Održava stalnu snagu, pa su rezultati brušenja i poliranja ujednačeni. Zaštitni mehanizmi sprečavaju prepunjavanje, pregrevanje i duboko pražnjenje, a samopražnjenje je nisko i posle dužeg stajanja.",
+    "purpose": "Dodatna baterija za CS akumulatorske mašine",
+    "facts": [
+      {
+        "label": "Kapacitet",
+        "value": "Visok kapacitet, pogodan za duže periode rada"
+      },
+      {
+        "label": "Snaga",
+        "value": "Stalna snaga za ujednačene rezultate brušenja ili poliranja"
+      },
+      {
+        "label": "Zaštita",
+        "value": "Zaštita od prepunjavanja, pregrevanja i dubokog pražnjenja"
+      }
+    ],
+    "applications": [
+      "Dopuna za postojeću CS akumulatorsku brusilicu CSH-COS01 i CS akumulatorsku polirku CSH-CRP01"
+    ],
+    "benefits": [
+      {
+        "title": "Duži rad",
+        "description": "Omogućava duži rad bez čestog dopunjavanja."
+      },
+      {
+        "title": "Nisko samopražnjenje",
+        "description": "Samopražnjenje je nisko i posle dužeg stajanja."
+      },
+      {
+        "title": "Dug vek trajanja",
+        "description": "Veliki broj ciklusa punjenja daje dug vek trajanja."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "160.110": "5,0Ah"
+    }
+  },
+  "finish/wall-bracket-for-5-kg-polish-wall-bracket": {
+    "sourceHash": "cba59809fcc73ac0",
+    "productType": "Zidni nosač",
+    "subtype": "Zidni nosač",
+    "shortDescription": "Zidni nosač za montažu polir pasta Carsystem Polish Step 1 i Step 2 u pakovanju od 5 kg.",
+    "longDescription": "Carsystem zidni nosač služi za zidnu montažu polir pasta Carsystem Polish Step 1 i Step 2. Predviđen je za pakovanja od 5 kg.",
+    "purpose": "Zidna montaža polir pasta od 5 kg",
+    "facts": [
+      {
+        "label": "Namena",
+        "value": "Zidni nosač za polir paste u pakovanju od 5 kg"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "variants": {
+      "156.461": "Zidni nosač za polir pastu od 5 kg"
+    }
+  },
+  "finish/wax-puck-application-foam": {
+    "sourceHash": "97e0b398d1902539",
+    "productType": "Sunđer za nanošenje",
+    "subtype": "Sunđer za nanošenje",
+    "shortDescription": "Sunđer od poliuretana kao pomoćno sredstvo za nanošenje polir pasta i voskova.",
+    "longDescription": "Carsystem Wax Puck je sunđer od poliuretanske pene koji služi kao pomoćno sredstvo pri nanošenju polir pasta i voskova. Ergonomski oblik olakšava držanje tokom rada.",
+    "purpose": "Nanošenje polir pasta i voskova",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "Poliuretanska pena"
+      }
+    ],
+    "applications": [
+      "Efikasno nanošenje polir pasta i voskova"
+    ],
+    "benefits": [
+      {
+        "title": "Ergonomski rukohvat",
+        "description": "Ima ergonomski oblikovan rukohvat."
+      }
+    ],
+    "advice": null,
+    "variants": {
+      "152.565": "128 - 130 mm"
+    }
+  }
+}

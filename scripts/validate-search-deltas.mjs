@@ -70,14 +70,33 @@ const EXPECTED = [
    * razlikuje od reči. Dve porodice koje JESU RAL linije (Fast Acrylic, Easy
    * Max) su zadržane kroz tokene zajedničke većini varijanti.
    */
-  { query: "ral", count: 126 },
+  /*
+   * 126 → 130 (Carsystem sync, katalog 2026/27): četiri zvanična proizvoda
+   * „Rallye-Spray” (gloss, matt, Premium black glossy/matt). To je prefiks
+   * reči („ral” → „rallye”), isto pravilo po kome upit nalazi i „RAL”, a ne
+   * substring slučajnost kakve su uklonjene gore.
+   */
+  { query: "ral", count: 130 },
   { query: "600 ml", count: 4 },
   { query: "antichip", count: 8 },
   { query: "cosmos antichip", count: 8 },
-  { query: "1l", count: 4 },
-  { query: "1 l", count: 4 },
-  { query: "3,5 l", count: 1 },
-  { query: "3.5l", count: 1 },
+  /*
+   * `1l`: 4 → 50 → 61. Vrednost 4 (R-M 3 + Norbin 1) je zastarela još od
+   * Baslac kataloga (b8d4b44): HEAD je vraćao 50, od čega 46 Baslac pakovanja
+   * od 1 L. Carsystem sync dodaje 11 proizvoda sa JEDNOM varijantom čija je
+   * zvanična specifikacija tačno „1 L” (KS-100/200/300.2/500.2/800/4000.2,
+   * Activator, High Gloss Additive, Spotblender, Bumper Paint, Nano Carnauba
+   * Wax). Pregledano 2026-09-18: svih 61 zapisa nosi pakovanje od 1 L u polju
+   * volumena/varijante — 0 lažnih pogodaka.
+   */
+  { query: "1l", count: 61 },
+  { query: "1 l", count: 61 },
+  /*
+   * `3,5 l`: 1 → 10. Isto zastarevanje od Baslac kataloga (HEAD = 10, svih 10
+   * su Baslac pakovanja od 3,5 L). Carsystem sync ovde ne dodaje ništa.
+   */
+  { query: "3,5 l", count: 10 },
+  { query: "3.5l", count: 10 },
   { query: "carmine", count: 2 },
   { query: "C 2E50", count: 1 },
   { query: "satajet", count: 1 },
@@ -102,6 +121,9 @@ const MUST_INCLUDE = [
   // u `packages`, ne u prednormalizovanom stringu).
   { query: "1 l", id: "rm-diamont-bazna-boja" },
   { query: "1l", id: "rm-diamont-bazna-boja" },
+  // Šifra artikla VARIJANTE (P40 diska P.25) nalazi proizvod, ne samo vodeća šifra.
+  { query: "160.273", id: "carsystem-sanding-disc-p-25-ceramic" },
+  { query: "159.226", id: "carsystem-f23-brusni-diskovi" },
   // Alias: Antigravel je antichip, pa ga upit „antichip" mora naći.
   { query: "antichip", id: "family:cosmos-lac-master-mechanic-antigravel-paintable" },
 ];

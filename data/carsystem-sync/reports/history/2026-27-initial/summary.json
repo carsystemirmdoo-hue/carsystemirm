@@ -1,0 +1,403 @@
+{
+  "summary": {
+    "catalogue": "CARSYSTEM Product Catalogue 2026/27 (EN)",
+    "catalogueSha256": "ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961",
+    "SOURCE PRODUCTS": 465,
+    "SOURCE VARIANTS": 1089,
+    "EXISTING PRODUCTS": 9,
+    "EXISTING VARIANTS": 9,
+    "EXACT MATCHES": 1,
+    "HIGH CONFIDENCE MATCHES": 4,
+    "PROBABLE MATCHES": 2,
+    "MISSING PRODUCTS": 404,
+    "MISSING VARIANTS": 906,
+    "AMBIGUOUS": 0,
+    "LEGACY PRODUCTS": 3,
+    "SOURCE CONFLICTS": 11,
+    "MISSING IMAGES": 3,
+    "MISSING IMPORTANT DATA": 0,
+    "alreadyImported": 0,
+    "existingToEnrich": 5,
+    "heldPendingDecision": 2,
+    "heldWebsiteOnly": 32,
+    "heldNoProductPage": 3,
+    "excludedMerchandising": 19,
+    "markedNewBySource": 42,
+    "planErrors": {
+      "duplicateSlugs": [],
+      "nameCollisions": []
+    }
+  },
+  "localMatches": [
+    {
+      "localSlug": "carsystem-git-multi-green",
+      "flags": [
+        "PROBABLE_MATCH"
+      ],
+      "sourceKeys": [
+        "putties/multi-green-multifuncional-polyester-putty"
+      ],
+      "evidence": [
+        {
+          "level": "exact-normalized-name",
+          "officialName": "Multi Green",
+          "localPackages": [
+            "1.8kg",
+            "2kg"
+          ],
+          "officialPackages": [
+            "1.6kg",
+            "2.52kg",
+            "8.11kg"
+          ],
+          "packageConflict": true
+        }
+      ],
+      "enrichment": null,
+      "note": "Naziv je isti, ali se naša pakovanja ne poklapaju sa zvaničnim."
+    },
+    {
+      "localSlug": "carsystem-git-elastic-weiss",
+      "flags": [
+        "HIGH_CONFIDENCE_MATCH",
+        "VARIANT_MISSING",
+        "EXISTING_DATA_INCOMPLETE"
+      ],
+      "sourceKeys": [
+        "putties/elastic-white-polyester-fine-putty"
+      ],
+      "evidence": [
+        {
+          "level": "identical-official-packshot",
+          "sourceKey": "putties/elastic-white-polyester-fine-putty",
+          "corroboratedByNameOrCode": true
+        }
+      ],
+      "enrichment": {
+        "sourceKey": "putties/elastic-white-polyester-fine-putty",
+        "missingVariants": [
+          "130.856",
+          "127.975",
+          "132.723"
+        ],
+        "incomplete": [
+          "nema tabelu varijanti sa šiframa artikala",
+          "sku je interni placeholder (CS-GIT-ELASTIC-WEISS)",
+          "manufacturerCode nije upisan"
+        ]
+      },
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-soft-plus-git",
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "sourceKeys": [],
+      "evidence": [
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "enrichment": null,
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-p19-brusni-diskovi",
+      "flags": [
+        "HIGH_CONFIDENCE_MATCH",
+        "LEGACY_NOT_IN_2026_27",
+        "VARIANT_MISSING",
+        "EXISTING_DATA_INCOMPLETE"
+      ],
+      "sourceKeys": [
+        "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes"
+      ],
+      "evidence": [
+        {
+          "level": "series-article-range",
+          "articleNumbers": [
+            "156.357",
+            "156.371"
+          ],
+          "owners": [
+            "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes"
+          ]
+        }
+      ],
+      "enrichment": {
+        "sourceKey": "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes",
+        "missingVariants": [
+          "156.357",
+          "156.358",
+          "156.359",
+          "156.361",
+          "156.362",
+          "156.363",
+          "156.364",
+          "156.365",
+          "156.367",
+          "156.368",
+          "156.369",
+          "156.370",
+          "156.371"
+        ],
+        "incomplete": [
+          "nema tabelu varijanti sa šiframa artikala",
+          "sku je interni placeholder (CS-P19-DISC)",
+          "manufacturerCode nije upisan"
+        ]
+      },
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-f19-brusni-diskovi",
+      "flags": [
+        "HIGH_CONFIDENCE_MATCH",
+        "VARIANT_MISSING",
+        "EXISTING_DATA_INCOMPLETE"
+      ],
+      "sourceKeys": [
+        "abrasives/sanding-disc-f19-film-abrasive-150-mm-25-holes"
+      ],
+      "evidence": [
+        {
+          "level": "series-article-range",
+          "articleNumbers": [
+            "156.046",
+            "156.059"
+          ],
+          "owners": [
+            "abrasives/sanding-disc-f19-film-abrasive-150-mm-25-holes"
+          ]
+        }
+      ],
+      "enrichment": {
+        "sourceKey": "abrasives/sanding-disc-f19-film-abrasive-150-mm-25-holes",
+        "missingVariants": [
+          "156.046",
+          "156.048",
+          "156.049",
+          "156.050",
+          "156.051",
+          "156.052",
+          "156.054",
+          "156.055",
+          "156.056",
+          "156.057",
+          "156.058",
+          "156.059"
+        ],
+        "incomplete": [
+          "nema tabelu varijanti sa šiframa artikala",
+          "sku je interni placeholder (CS-F19-DISC)",
+          "manufacturerCode nije upisan"
+        ]
+      },
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-f23-brusni-diskovi",
+      "flags": [
+        "EXACT_MATCH",
+        "EXISTING_DATA_INCOMPLETE"
+      ],
+      "sourceKeys": [
+        "abrasives/sanding-disc-f23-ceramic-film-abrasive-150-mm-25-holes"
+      ],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "159.218",
+            "159.226",
+            "159.219",
+            "159.220",
+            "159.221",
+            "159.222",
+            "159.223",
+            "159.224",
+            "159.225"
+          ],
+          "owners": [
+            "abrasives/sanding-disc-f23-ceramic-film-abrasive-150-mm-25-holes"
+          ]
+        }
+      ],
+      "enrichment": {
+        "sourceKey": "abrasives/sanding-disc-f23-ceramic-film-abrasive-150-mm-25-holes",
+        "missingVariants": [],
+        "incomplete": [
+          "manufacturerCode nije upisan"
+        ]
+      },
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-p23-brusni-diskovi",
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "sourceKeys": [],
+      "evidence": [
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "enrichment": null,
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-finish-serija",
+      "flags": [
+        "HIGH_CONFIDENCE_MATCH",
+        "VARIANT_MISSING",
+        "EXISTING_DATA_INCOMPLETE"
+      ],
+      "sourceKeys": [
+        "abrasives/sanding-disc-f19-finish-film-abrasive-152-mm-15-holes"
+      ],
+      "evidence": [
+        {
+          "level": "series-article-range",
+          "articleNumbers": [
+            "156.899",
+            "156.902"
+          ],
+          "owners": [
+            "abrasives/sanding-disc-f19-finish-film-abrasive-152-mm-15-holes"
+          ]
+        }
+      ],
+      "enrichment": {
+        "sourceKey": "abrasives/sanding-disc-f19-finish-film-abrasive-152-mm-15-holes",
+        "missingVariants": [
+          "156.899",
+          "156.900",
+          "156.901",
+          "156.902"
+        ],
+        "incomplete": [
+          "nema tabelu varijanti sa šiframa artikala",
+          "sku je interni placeholder (CS-FINISH-SERIES)",
+          "manufacturerCode nije upisan"
+        ]
+      },
+      "note": null
+    },
+    {
+      "localSlug": "carsystem-zastitno-odelo",
+      "flags": [
+        "PROBABLE_MATCH"
+      ],
+      "sourceKeys": [
+        "personal-safety/classic-coverall-jacket-anthracite-protective-coverall"
+      ],
+      "evidence": [
+        {
+          "level": "identical-official-packshot",
+          "sourceKey": "personal-safety/classic-coverall-jacket-anthracite-protective-coverall",
+          "corroboratedByNameOrCode": false
+        }
+      ],
+      "enrichment": null,
+      "note": "Jedini dokaz je identična zvanična slika; naziv zapisa je generički."
+    }
+  ],
+  "reviewConflicts": [
+    {
+      "sourceKey": "catalogue/160.515",
+      "officialName": "CAR CLEAN MULTI II",
+      "type": "NO_PRODUCT_PAGE",
+      "note": "Proizvod je u katalogu, ali nema stranicu na carsystem.org."
+    },
+    {
+      "sourceKey": "catalogue/160.596",
+      "officialName": "CLASSIC COVERALL PANTS KNEEPADFIT",
+      "type": "NO_PRODUCT_PAGE",
+      "note": "Proizvod je u katalogu, ali nema stranicu na carsystem.org."
+    },
+    {
+      "sourceKey": "catalogue/160.663",
+      "officialName": "ERLKING LTD. 2-PIECE COVERALL",
+      "type": "NO_PRODUCT_PAGE",
+      "note": "Proizvod je u katalogu, ali nema stranicu na carsystem.org."
+    },
+    {
+      "sourceKey": "finish/finish-back-pad-m-14-finish-back-pad",
+      "officialName": "Finish Back Pad M-14",
+      "type": "ARTICLE_NUMBER_DIFFERS",
+      "website": [
+        "160.443"
+      ],
+      "catalogue": [
+        {
+          "articleNumber": "157.721",
+          "row": "123 mm 1 1"
+        }
+      ],
+      "pdfPage": 72,
+      "note": "Isti zvanični naziv, različita šifra artikla u katalogu i na sajtu."
+    },
+    {
+      "sourceKey": "finish/polishing-pad-x1500-polishing-pad",
+      "officialName": "Polishing Pad X1500",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "160.447",
+      "website": "HC X1500 / Red / 125 mm / 140 mm",
+      "catalogue": "HC X1500 / 145 mm"
+    },
+    {
+      "sourceKey": "finish/polishing-pad-x1500-polishing-pad",
+      "officialName": "Polishing Pad X1500",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "160.448",
+      "website": "HC X1500 / Red / 85 mm / 95 mm",
+      "catalogue": "HC X1500 / 85 mm"
+    },
+    {
+      "sourceKey": "finish/polishing-pad-x1500-polishing-pad",
+      "officialName": "Polishing Pad X1500",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "160.449",
+      "website": "MC X1500 / White / 125 mm / 140 mm",
+      "catalogue": "MC X1500 / 145 mm"
+    },
+    {
+      "sourceKey": "finish/polishing-pad-x1500-polishing-pad",
+      "officialName": "Polishing Pad X1500",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "160.450",
+      "website": "MC X1500 / White / 85 mm / 95 mm",
+      "catalogue": "MC X1500 / 85 mm 2 500 Art.-No. Specification SP MOQ"
+    },
+    {
+      "sourceKey": "finish/polishing-pad-x8000-polishing-pad",
+      "officialName": "Polishing Pad X8000",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "160.452",
+      "website": "AH X8000 / White / 125 mm / 140 mm",
+      "catalogue": "145 mm"
+    },
+    {
+      "sourceKey": "finish/polishing-pad-x8000-polishing-pad",
+      "officialName": "Polishing Pad X8000",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "160.453",
+      "website": "AH X8000 / White / 85 mm / 95 mm",
+      "catalogue": "85 mm"
+    },
+    {
+      "sourceKey": "putties/speedmixer-3-kg-putty-dispenser-electrical",
+      "officialName": "Speedmixer 3 kg",
+      "type": "SPECIFICATION_DIFFERS",
+      "articleNumber": "152.088",
+      "website": "Multi Green slow - Speedmixer / green / 2,523 kg cartridge inkl. hardener",
+      "catalogue": null
+    }
+  ]
+}

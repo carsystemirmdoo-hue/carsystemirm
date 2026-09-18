@@ -10,7 +10,8 @@ import {
   type CatalogListingEntity,
 } from "@/lib/catalog-listing";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
-import type { Ref } from "react";
+import { getBrandCardColor } from "@/lib/brand-card-colors";
+import type { CSSProperties, Ref } from "react";
 import styles from "./CatalogPage.module.css";
 
 export function CatalogProductCard({
@@ -65,6 +66,44 @@ export function CatalogProductCard({
     ? [brand.name, listing.line]
     : [brand.name, program.shortName, phase.name];
 
+  /*
+   * Roletna kartice na /katalog (`catalogSystem`) — dva pravila, jedno mesto:
+   *
+   *   1. Roletna POSTOJI na svakoj kartici, i za proizvode koji nisu boje.
+   *      Obojeni sloj (`colorReveal`) se u `ProductVisualSurface` crta samo u
+   *      `visualMode: "color-on-hover"`; za `neutral` je `display: none`, pa je
+   *      klarlak, abraziv ili kit dobijao samo bledi wash i tanku ivicu, dok je
+   *      susedna farba dobijala punu roletnu. Katalog zato uvek traži reveal.
+   *   2. Boja roletne: nijansa proizvoda/varijante (`presentation.shade`:
+   *      merena, izvedena ili orijentacioni prikaz potvrđene imenovane boje —
+   *      vidi `getProductShadeSource`), inače boja brenda
+   *      (`lib/brand-card-colors.ts`), inače postojeći akcenat preseta.
+   *
+   * Nijansa se ovde upisuje u CSS promenljive kartice zato što `style` iz
+   * prezentacije nosi PDP akcente (brend/faza), a PDP je zaključan — kartica
+   * je jedino mesto koje sme da primeni orijentacionu nijansu.
+   * PDP grafit je drugo pravilo (`lib/productPaintRule.mjs`) i ne zavisi od ovoga.
+   * Ostali potrošači kartice (PDP related red, Cosmos/SATA brend stranice)
+   * zadržavaju netaknutu prezentaciju.
+   */
+  const cardColor = catalogSystem
+    ? (listing.presentation.shade ?? getBrandCardColor(brand))
+    : null;
+  const presentation = catalogSystem
+    ? {
+        ...listing.presentation,
+        visualMode: "color-on-hover",
+        style: cardColor
+          ? ({
+              ...listing.presentation.style,
+              "--product-visual-accent": cardColor,
+              "--product-visual-background-color": cardColor,
+              "--product-active-color": cardColor,
+            } as CSSProperties)
+          : listing.presentation.style,
+      }
+    : listing.presentation;
+
   return (
     <Link
       ref={preloadRef}
@@ -87,7 +126,7 @@ export function CatalogProductCard({
       <ProductVisualSurface
         brandName={brand.name}
         className={styles.catalogProductVisual}
-        presentation={listing.presentation}
+        presentation={presentation}
         product={product}
         sizes="(min-width: 1180px) 27vw, (min-width: 768px) 42vw, 92vw"
       />

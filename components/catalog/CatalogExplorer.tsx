@@ -238,6 +238,7 @@ function toVariantEntity(record: ProductSearchRecord): CatalogVariantEntity | nu
      */
     search: "",
     accent: record.card.accent,
+    shade: record.card.shade ?? null,
     imageSrc: record.imageSrc ?? null,
     imageAlt: record.card.imageAlt,
     sizeClass: record.card.sizeClass,

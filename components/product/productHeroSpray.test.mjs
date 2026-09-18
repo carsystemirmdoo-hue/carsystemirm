@@ -284,9 +284,15 @@ test("spray is category-gated behind color products and stays out of catalog sur
     /export type ProductVisualType =[\s\S]*"spray"[\s\S]*"color"[\s\S]*"abrasive"[\s\S]*"foam"[\s\S]*"filler"[\s\S]*"primer"[\s\S]*"clearcoat"[\s\S]*"neutral"/,
   );
   assert.match(motion, /export function shouldRenderProductHeroSpray/);
-  assert.match(
+  /*
+   * Grafit prati centralno pravilo „proizvod je boja" (lib/productPaintRule.mjs),
+   * ne vizuelni preset: fallback preseta je davao „color" i aktivatorima,
+   * razređivačima i čistačima u spreju samo zbog faze ili reči „sprej".
+   */
+  assert.match(motion, /return isPaintProduct\(product\)/);
+  assert.doesNotMatch(
     motion,
-    /return productType === "spray" \|\| productType === "color"/,
+    /shouldRenderProductHeroSpray[\s\S]{0,200}productType === "spray" \|\| productType === "color"/,
   );
   assert.match(variantView, /hasSprayBackdrop: shouldRenderProductHeroSpray\(product\)/);
   assert.match(

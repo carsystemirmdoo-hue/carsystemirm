@@ -49,6 +49,8 @@ export type ProductSearchRecordKind = "family" | "standalone" | "variant";
  */
 export type ProductSearchCard = {
   accent: string;
+  /** Stvarna nijansa varijante; izostavljena kada je nema (boja brenda na kartici). */
+  shade?: string;
   sizeClass: ProductSizeClass;
   volumeStatus: ProductVolumeStatus;
   imageAlt: string;
@@ -328,6 +330,7 @@ function variantRecord(
         style["--product-visual-background-color"] ??
         style["--product-visual-accent"] ??
         "",
+      shade: entity.presentation.shade ?? undefined,
       sizeClass: entity.presentation.sizeClass,
       volumeStatus: entity.presentation.volumeStatus,
       imageAlt: entity.presentation.image?.alt ?? entity.name,

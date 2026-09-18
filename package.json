@@ -19,7 +19,7 @@
     "test:authz": "node --test lib/authz/*.test.mjs app/portal/dozvole/actions.test.mjs",
     "test:sidebar": "node --test components/portal/*.test.mjs",
     "test:audit": "node --test lib/audit/*.test.mjs",
-    "test:catalog": "node --test components/catalog/catalogInfiniteScroll.test.mjs lib/productTaxonomy.test.mjs",
+    "test:catalog": "node --test components/catalog/catalogInfiniteScroll.test.mjs lib/productTaxonomy.test.mjs lib/productPaintRule.test.mjs lib/productNamedColors.test.mjs",
     "taxonomy:validate": "node scripts/validate-catalog-taxonomy.mjs",
     "catalog:validate": "node scripts/validate-catalog-listing.mjs && node scripts/validate-product-identity.mjs && node scripts/validate-catalog-payload.mjs && node scripts/validate-catalog-search-index.mjs && node scripts/validate-search-deltas.mjs",
     "test:search": "node --test lib/search/*.test.mjs",

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import {
+  getProductShade,
   getProductVisualPreset,
   getProductVisualStyle,
 } from "@/components/product/productMotion";
@@ -36,6 +37,12 @@ export type ProductVisualPresentation = {
   volumeStatus: ProductVolumeStatus;
   style: CSSProperties;
   image: ProductImageAsset | null;
+  /**
+   * Stvarna nijansa proizvoda (`getProductShade`) ili `null`. Katalog po njoj
+   * odlučuje da li kartica nosi nijansu ili boju brenda; `style` je i dalje
+   * ono što površina crta.
+   */
+  shade: string | null;
 };
 
 export function toProductVisualPresentation(
@@ -58,5 +65,6 @@ export function toProductVisualPresentation(
     volumeStatus: size.volumeStatus,
     style: getProductVisualStyle(product),
     image: selectedImage,
+    shade: getProductShade(product),
   };
 }

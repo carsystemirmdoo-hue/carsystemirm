@@ -5,6 +5,12 @@ import type {
   ProductVisualMode,
   RefinishPhaseSlug,
 } from "@/lib/carsystem-data";
+import { getProductDataShade, isPaintProduct } from "@/lib/product-paint-rule";
+import {
+  BASLAC_SWATCH_VERIFICATION,
+  getProductNamedColor,
+  getProductShadeBlockReason,
+} from "@/lib/product-named-colors";
 
 export type ProductVisualTreatment =
   | "paint"
@@ -368,9 +374,93 @@ export function getProductVisualPreset(product: CarsystemProduct): Required<Prod
   };
 }
 
+/**
+ * Grafit iza proizvoda na PDP-u prikazuje se SAMO za boje: farbe, mešne tonove
+ * i sprejeve za farbanje. Odluka dolazi iz centralnog pravila
+ * `lib/productPaintRule.mjs`, ne iz vizuelnog preseta — preset i dalje sme da
+ * kaže „color" za reveal na kartici, ali fallback po fazi/nazivu („sprej",
+ * `phaseSlug === "boja"`) je davao grafit aktivatorima, razređivačima i
+ * čistačima u spreju.
+ */
 export function shouldRenderProductHeroSpray(product: CarsystemProduct) {
-  const { productType } = getProductVisualPreset(product);
-  return productType === "spray" || productType === "color";
+  return isPaintProduct(product);
+}
+
+export type ProductShadeSource = {
+  color: string;
+  /**
+   * `measured` — zvanična karta / RAL / uzorak poklopca;
+   * `derived`  — pregledani token izveden iz naziva nijanse ili urednička procena;
+   * `orientation` — orijentacioni prikaz potvrđene boje proizvoda ili serije
+   *   (imenovana boja iz zvaničnog naziva/TDS-a, uzorak sa zvaničnog
+   *   packshot-a, swatch varijante, kurirani preset) — nije merena.
+   */
+  precision: "measured" | "derived" | "orientation";
+  source: string;
+};
+
+/**
+ * Nijansa proizvoda za prikaz kartice, ili `null` (boja brenda). Redosled:
+ *
+ *   0. `PRODUCT_SHADE_BLOCKLIST` — potvrđeno da stara vrednost NIJE boja
+ *      proizvoda (npr. bezbojni regulator sa crvenim presetom) → brand;
+ *   1. potvrđena boja konkretnog proizvoda ili serije od proizvođača
+ *      (`lib/productNamedColors.mjs`: zvanični naziv, TDS, zvanični packshot,
+ *      distributerske liste tonera) — ima prednost nad starim podacima;
+ *   2. pregledani `visual` tokeni (Cosmos Lac) — merena ili izvedena nijansa;
+ *   3. `visualIdentity.swatch` varijante (Baslac tonovi) — samo završnice
+ *      tona; Line 45 proveren prema zvaničnom tinting chart-u 45 (2019);
+ *   4. kurirani preset po slugu, samo kada preset izričito kaže da je boja deo
+ *      identiteta (`productType` color/spray/filler/foam) i daje sopstveni akcenat.
+ *
+ * Generički fallback akcenat nikada nije nijansa. Ovo NE uključuje PDP grafit —
+ * to je `isPaintProduct`; šmirgla može imati boju u katalogu bez grafita.
+ */
+export function getProductShadeSource(product: CarsystemProduct): ProductShadeSource | null {
+  if (getProductShadeBlockReason(product)) return null;
+
+  const named = getProductNamedColor(product);
+  if (named) return { color: named.color, precision: "orientation", source: named.source };
+
+  const dataShade = getProductDataShade(product);
+  if (dataShade) {
+    const src = product.visual?.colorSource ?? "";
+    const measured = src === "official-chart" || src === "ral" || src === "cap-sample";
+    return { color: dataShade, precision: measured ? "measured" : "derived", source: `visual.colorSource=${src}` };
+  }
+  if (product.visual) return null;
+
+  // Swatch je nijansa samo za završnice TONA (solid/metallic/pearl/xirallic/mat).
+  // Konverteri, aditivi i razređivači nemaju finishType — njihov swatch je samo
+  // navigacioni; providne završnice ostaju bez nijanse (poseban tretman).
+  const identity = product.visualIdentity;
+  if (identity?.swatch && identity.finishType) {
+    const verification = BASLAC_SWATCH_VERIFICATION[product.sku] ?? "name-derived";
+    /*
+     * Providna završnica je bez nijanse samo kada je bezbojna (Mixing Clear,
+     * nije u chart-u). Tonirani providni toneri (Orange/Red/Blue transparent)
+     * imaju piktogram boje u zvaničnom chart-u — chart je izvor, pa se prikazuju.
+     */
+    const colourlessTransparent =
+      identity.finishType === "transparent" && !verification.startsWith("chart-");
+    if (!colourlessTransparent) {
+      return {
+        color: identity.swatch,
+        precision: "orientation",
+        source: `visualIdentity.swatch (Baslac; ${verification})`,
+      };
+    }
+  }
+
+  const preset = productVisualPresets[product.slug];
+  if (preset?.accent && preset.productType && isColorBearingType(preset.productType)) {
+    return { color: preset.accent, precision: "orientation", source: "productVisualPresets (kurirani preset)" };
+  }
+  return null;
+}
+
+export function getProductShade(product: CarsystemProduct): string | null {
+  return getProductShadeSource(product)?.color ?? null;
 }
 
 export function getProductVisualStyle(product: CarsystemProduct): CSSProperties {

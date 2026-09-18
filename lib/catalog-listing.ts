@@ -67,6 +67,8 @@ export type CatalogVariantEntity = {
   search: string;
   /** Visual bits that genuinely differ per variant. */
   accent: string;
+  /** The variant's own shade, or `null` — see `ProductVisualPresentation.shade`. */
+  shade: string | null;
   imageSrc: string | null;
   imageAlt: string;
   sizeClass: ProductVisualPresentation["sizeClass"];
@@ -258,6 +260,7 @@ function variantEntity(
     finish: full.finish,
     search: full.search,
     accent: style["--product-visual-background-color"] ?? style["--product-visual-accent"] ?? "",
+    shade: full.presentation.shade,
     imageSrc: full.presentation.image?.src ?? null,
     imageAlt: full.presentation.image?.alt ?? full.name,
     sizeClass: full.presentation.sizeClass,
@@ -356,6 +359,7 @@ export function expandVariant(
         "--product-visual-background-color": variant.accent,
         "--product-active-color": variant.accent,
       } as CatalogListingEntity["presentation"]["style"],
+      shade: variant.shade,
       image: variant.imageSrc
         ? { src: variant.imageSrc, alt: variant.imageAlt }
         : null,

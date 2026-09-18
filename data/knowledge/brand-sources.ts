@@ -34,23 +34,22 @@ export const brandSources: Record<string, BrandSourceProfile> = {
       "Zvanični indeks ima 9 stranica i 101 dokument (TDS + information charts).",
       "PDF-ovi su čitljivi programski. WebFetch sumarizator ih pogrešno prijavljuje kao slike — provereno direktno kroz pypdf.",
       "Za razliku od R-M, HVLP i Compliant gravity kolone su odvojeno označene, pa podatak o dizni nije dvosmislen.",
-      "baslac je BASF brend, kao i R-M i Norbin.",
+      "baslac je brend iz refinish portfolija kompanije Surventis (ranije BASF Coatings, samostalna od 1. jula 2026), kao i R-M i Norbin. Zvanični logo na baslac.com nosi lockup „by Surventis“.",
     ],
-    verifiedAt: "2026-08-08",
+    verifiedAt: "2026-09-18",
   },
 
   norbin: {
     officialWebsite: "https://www.norbin-paint.com/",
     technicalPortal: "https://refinish.basf.us/brands/norbin/",
-    cataloguePdf:
-      "https://cxportal.basf.com/dam/jcr:0dce9c47-e2ad-34ed-a1f8-9265120371cc/basf/cxportal/mea/en/product-document/Norbin-Product-Portfolio_2021.pdf",
     acquisitionFeasibility: "catalogue-pdf-only",
     notes: [
-      "BASF brend. Nema javni TDS portal ekvivalentan baslac/R-M portalu.",
-      "Postoji zvanični product-portfolio PDF (2021) na BASF cxportal domenu.",
+      "Brend iz refinish portfolija kompanije Surventis (ranije BASF Coatings). Zvanični norbin-paint.com, logo i ambalaža i dalje nose oznake „BASF Coatings GmbH“ i „A brand of BASF“ (provereno 2026-09-18), pa se Norbin logo i citati ne menjaju dok proizvođač ne objavi novi identitet.",
+      "Nema javni TDS portal ekvivalentan baslac/R-M portalu. technicalPortal je BASF Refinish portal za Ameriku: radi (2026-09-18), ali je i dalje pod BASF brendingom i ne pominje Surventis.",
+      "Product-portfolio PDF (2021) sa hosta cxportal.basf.com uklonjen je iz aktivnih izvora 2026-09-18: host se ne razrešava u DNS-u još od 2026-08-09, a zamenski zvanični URL nije pronađen. Istorijska referenca ostaje u docs/NORBIN_BRAND_RESEARCH.md (S18).",
       "Lokalno imamo 2 proizvoda (N15-020), oba bez dokumentacije.",
     ],
-    verifiedAt: "2026-08-08",
+    verifiedAt: "2026-09-18",
   },
 
   "cosmos-lac": {

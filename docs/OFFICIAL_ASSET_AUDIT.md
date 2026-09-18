@@ -5,6 +5,8 @@
 **Izvor:** `~/Desktop/царсзстем слике` — 23 fajla (22 PDF + 1 PNG). Napomena: folder se zove `царсзстем`, ne `царсистем`.
 **Obim:** samo Carsystem, R-M, baslac. Befar, Norbin, SATA, Rupes, C.A.R.FIT nisu dirani.
 
+> **Napomena (2026-09-18):** BASF Coatings od 1. jula 2026. posluje kao samostalna kompanija **Surventis** (BASF SE zadržava 40 %). R-M i baslac su zadržali nazive. Gde ovaj audit kaže „tražiti od BASF”, danas se misli na Surventis / baslac. Tekst audita ispod je ostavljen kakav je bio na dan izrade.
+
 **Metod:** forenzička analiza svakog PDF-a (broj strana, embedded raster XObjects, native rezolucija, DPI na mestu postavljanja, vektorski sadržaj, tekstualni sloj), zatim vizuelni pregled svake strane, pa mapiranje na stvarne media slotove deklarisane u `baslacBrandData.ts`, `carsystemBrandData.ts`, `rmBrandData.ts`.
 
 **Nije menjan nijedan original.** Ništa nije kopirano u projekat. Sve probne izrezane slike su u scratchpad folderu radi odobrenja.

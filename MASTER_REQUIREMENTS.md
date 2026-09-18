@@ -11,7 +11,7 @@ Ovo nije samo klijentski projekat. Ovo je i showcase projekat za Studio One. Diz
 ## 2. Primarni ciljevi
 
 1. Prikazati firmu kao ozbiljnu veleprodaju/distributera/zastupnika u Srbiji.
-2. Vizuelno povezati firmu sa ozbiljnošću velikih brendova poput R-M, BASF ekosistema, Carsystem i ostalih partnera.
+2. Vizuelno povezati firmu sa ozbiljnošću velikih brendova poput R-M, Surventis ekosistema (ranije BASF Coatings), Carsystem i ostalih partnera.
 3. Omogućiti krajnjem kupcu da lako pronađe najbližu partnersku prodavnicu.
 4. Ojačati prodaju partnerskih prodavnica, jer jačanje partnera indirektno jača firmu.
 5. Pripremiti osnovu za B2B katalog sa login cenama, rabatima i komercijalistima.

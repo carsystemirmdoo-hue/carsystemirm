@@ -1616,7 +1616,7 @@ const productRecords: CarsystemProduct[] = [
   ...baslacCatalogProducts,
   withProductAssets(archivedProduct("rm-diamont-bazna-boja"), {
     productImage: productAsset(
-      "/products/rm/rm-diamont-bazna-boja.jpg",
+      "/products/rm/rm-diamont-bazna-boja.webp",
       "R-M DIAMONT bazna boja u limenci",
     ),
   }),
@@ -1642,7 +1642,7 @@ const productRecords: CarsystemProduct[] = [
       finish: null,
     },
     productImage: productAsset(
-      "/products/rm/rm-body-filler-white-b-2e11.jpg",
+      "/products/rm/rm-body-filler-white-b-2e11.webp",
       "R-M Body Filler White B 2E11 sa učvršćivačem",
     ),
     specifications: [
@@ -1678,7 +1678,7 @@ const productRecords: CarsystemProduct[] = [
       finish: null,
     },
     productImage: productAsset(
-      "/products/rm/rm-pasta-190-1l.jpg",
+      "/products/rm/rm-pasta-190-1l.webp",
       "R-M DIAMONT BC 190 proizvod u limenci",
     ),
     specifications: [
@@ -1710,7 +1710,7 @@ const productRecords: CarsystemProduct[] = [
       finish: null,
     },
     productImage: productAsset(
-      "/products/rm/rm-pasta-190-5l.jpg",
+      "/products/rm/rm-pasta-190-5l.webp",
       "R-M DIAMONT BC 605 proizvod u limenci",
     ),
     specifications: [
@@ -1738,7 +1738,7 @@ const productRecords: CarsystemProduct[] = [
     purpose: "Ravnanje površine i popunjavanje neravnina pre brušenja",
     badges: ["Git", "Priprema", "Na upit"],
     productImage: productAsset(
-      "/products/carsystem/carsystem-git-multi-green.jpg",
+      "/products/carsystem/carsystem-git-multi-green.webp",
       "Carsystem Git Multi Green u limenci",
     ),
     documents: documentsWithTds(
@@ -2350,7 +2350,7 @@ const productRecords: CarsystemProduct[] = [
     purpose: "Dopuna refinish programa u manjem pakovanju",
     badges: ["1 L", "Boje i lakovi", "Na upit"],
     productImage: productAsset(
-      "/products/norbin/norbin-n15-020-1l.jpg",
+      "/products/norbin/norbin-n15-020-1l.webp",
       "Norbin N15-020 proizvod u pakovanju 1 L",
     ),
     specifications: [
@@ -2375,7 +2375,7 @@ const productRecords: CarsystemProduct[] = [
     purpose: "Maskiranje i zaštita površina u pripremnoj fazi",
     badges: ["Maskiranje", "Folija", "Na upit"],
     productImage: productAsset(
-      "/products/carfit/carfit-maskirna-folija-4x5m.jpg",
+      "/products/carfit/carfit-maskirna-folija-4x5m.webp",
       "Car Fit maskirna folija u pakovanju",
     ),
     specifications: [

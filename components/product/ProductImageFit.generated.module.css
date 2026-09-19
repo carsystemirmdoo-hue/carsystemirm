@@ -1877,6 +1877,15 @@
   --product-content-offset-y: 0.078;
 }
 
+.fit[data-product-fit="/products/carfit/carfit-maskirna-folija-4x5m.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0394;
+  --product-content-fill-x: 0.924;
+  --product-content-fill-y: 0.889;
+  --product-content-offset-x: 0.028;
+  --product-content-offset-y: 0.071;
+}
+
 .fit[data-product-fit="/products/carfit/catalog/carfit-1k-etch-primer-spray.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.3414;
@@ -3062,6 +3071,15 @@
   --product-content-fill-x: 0.9633;
   --product-content-fill-y: 0.66;
   --product-content-offset-x: 0.0183;
+  --product-content-offset-y: 0.1783;
+}
+
+.fit[data-product-fit="/products/carsystem/carsystem-git-multi-green.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.452;
+  --product-content-fill-x: 0.9583;
+  --product-content-fill-y: 0.66;
+  --product-content-offset-x: 0.0217;
   --product-content-offset-y: 0.1783;
 }
 
@@ -16511,6 +16529,15 @@
   --product-content-offset-y: 0.1198;
 }
 
+.fit[data-product-fit="/products/norbin/norbin-n15-020-1l.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6151;
+  --product-content-fill-x: 0.4677;
+  --product-content-fill-y: 0.7604;
+  --product-content-offset-x: 0.2661;
+  --product-content-offset-y: 0.1198;
+}
+
 .fit[data-product-fit="/products/rm/catalog/rm-a-1510-diamont-blender.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.5934;
@@ -17564,6 +17591,15 @@
   --product-content-offset-y: 0.2733;
 }
 
+.fit[data-product-fit="/products/rm/rm-body-filler-white-b-2e11.webp"] {
+  --product-canvas-aspect: 1.713;
+  --product-content-aspect: 1.919;
+  --product-content-fill-x: 0.8709;
+  --product-content-fill-y: 0.7775;
+  --product-content-offset-x: 0.0667;
+  --product-content-offset-y: 0.1245;
+}
+
 .fit[data-product-fit="/products/rm/rm-diamont-bazna-boja.jpg"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.7603;
@@ -17571,6 +17607,15 @@
   --product-content-fill-y: 0.6685;
   --product-content-offset-x: 0.2348;
   --product-content-offset-y: 0.174;
+}
+
+.fit[data-product-fit="/products/rm/rm-diamont-bazna-boja.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.749;
+  --product-content-fill-x: 0.5028;
+  --product-content-fill-y: 0.6713;
+  --product-content-offset-x: 0.2417;
+  --product-content-offset-y: 0.1727;
 }
 
 .fit[data-product-fit="/products/rm/rm-pasta-190-1l.jpg"] {
@@ -17582,6 +17627,15 @@
   --product-content-offset-y: 0.0533;
 }
 
+.fit[data-product-fit="/products/rm/rm-pasta-190-1l.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7167;
+  --product-content-fill-x: 0.645;
+  --product-content-fill-y: 0.9;
+  --product-content-offset-x: 0.1783;
+  --product-content-offset-y: 0.0533;
+}
+
 .fit[data-product-fit="/products/rm/rm-pasta-190-5l.jpg"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.7135;
@@ -17589,4 +17643,13 @@
   --product-content-fill-y: 0.9133;
   --product-content-offset-x: 0.1733;
   --product-content-offset-y: 0.0467;
+}
+
+.fit[data-product-fit="/products/rm/rm-pasta-190-5l.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7109;
+  --product-content-fill-x: 0.6517;
+  --product-content-fill-y: 0.9167;
+  --product-content-offset-x: 0.1733;
+  --product-content-offset-y: 0.0433;
 }

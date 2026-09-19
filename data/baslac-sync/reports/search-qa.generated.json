@@ -1,0 +1,97 @@
+{
+  "codeQueries": 104,
+  "codeFirstResult": 104,
+  "namedQueries": [
+    {
+      "kind": "sistem",
+      "query": "Topcoat 30",
+      "sourceKey": "line-30",
+      "want": [
+        "baslac-topcoat-30",
+        "baslac-line-30",
+        "family:baslac-line-30"
+      ],
+      "top": "baslac-topcoat-30",
+      "ok": true
+    },
+    {
+      "kind": "sistem",
+      "query": "Topcoat 30 CV",
+      "sourceKey": "line-30-cv",
+      "want": [
+        "baslac-topcoat-30-cv",
+        "baslac-line-30-cv",
+        "family:baslac-line-30-cv"
+      ],
+      "top": "baslac-topcoat-30-cv",
+      "ok": true
+    },
+    {
+      "kind": "sistem",
+      "query": "Basecoat 35",
+      "sourceKey": "line-35",
+      "want": [
+        "baslac-basecoat-35",
+        "baslac-line-35",
+        "family:baslac-line-35"
+      ],
+      "top": "baslac-basecoat-35",
+      "ok": true
+    },
+    {
+      "kind": "sistem",
+      "query": "Basecoat 45",
+      "sourceKey": "line-45",
+      "want": [
+        "baslac-basecoat-45",
+        "baslac-line-45",
+        "family:baslac-line-45"
+      ],
+      "top": "baslac-basecoat-45",
+      "ok": true
+    },
+    {
+      "kind": "bezbojni lak",
+      "query": "Universal Clear",
+      "code": "40-40",
+      "want": [
+        "baslac-40-40-2k-universal-clear"
+      ],
+      "top": "baslac-40-40-2k-universal-clear",
+      "ok": true
+    },
+    {
+      "kind": "kit",
+      "query": "Bodyfiller Universal",
+      "code": "12-20",
+      "want": [
+        "baslac-12-20-bodyfiller-universal"
+      ],
+      "top": "baslac-12-20-bodyfiller-universal",
+      "ok": true
+    },
+    {
+      "kind": "washprimer",
+      "query": "Washprimer",
+      "code": "27-10",
+      "want": [
+        "baslac-27-10-2k-washprimer-1l",
+        "27-10-2k-washprimer",
+        "family:27-10-2k-washprimer"
+      ],
+      "top": "family:27-10-2k-washprimer",
+      "ok": true
+    },
+    {
+      "kind": "aditiv",
+      "query": "Additive Flex",
+      "code": "80-10",
+      "want": [
+        "baslac-80-10-additive-flex"
+      ],
+      "top": "baslac-80-10-additive-flex",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,19 @@
+{
+  "_comment": [
+    "Ručne odluke vlasnika. Sync ih čita, nikad ih ne piše.",
+    "source.<šifra> = { \"decision\": \"skip\", \"note\": \"…\" }  → zvanična šifra se ne uvozi.",
+    "local.<naš slug> = { \"code\": \"<šifra>\", \"note\": \"…\" }   → postojeći zapis JESTE ta šifra (dopuna, slug ostaje)."
+  ],
+  "source": {
+    "50-10": {
+      "decision": "keep",
+      "reason": "Tehnički list nosi napomenu da je proizvod dostupan na tržištu Azije i Pacifika, ali ga aktuelna EMEA stranica kategorije (baslac.com/en-emea/baslac-additives) navodi u spisku učvršćivača. Pravilo synca je da je aktuelna stranica kategorije dokaz ponude, pa zapis ostaje — napomena je zabeležena u SR sadržaju.",
+      "evidence": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-10.pdf"
+      ],
+      "decidedOn": "2026-09-19"
+    }
+  },
+  "local": {}
+}

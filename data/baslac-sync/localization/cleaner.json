@@ -1,0 +1,75 @@
+{
+  "70-10": {
+    "sourceHash": "283f58dad76a2f66",
+    "productType": "Sredstvo za čišćenje i odmašćivanje",
+    "subtype": "Silicone Remover · priprema površine",
+    "shortDescription": "Silicone Remover za uklanjanje ulja, silikona i masnoće sa golog čelika, aluminijuma, starog laka i novih delova.",
+    "longDescription": "70-10 Silicone Remover je sredstvo za čišćenje kojim se sa površine uklanjaju ulje, silikon i masnoća. Koristi se na golom čeliku, aluminijumu, starom laku i novim delovima sa fabričkim prajmerom. Priprema površinu pre nastavka rada.",
+    "purpose": "Uklanjanje ulja, silikona i masnoće sa površine",
+    "facts": [],
+    "applications": [
+      "Čišćenje golog čelika i aluminijuma",
+      "Čišćenje starog laka i novih delova sa fabričkim prajmerom",
+      "Odmašćivanje površine u fazi pripreme"
+    ],
+    "benefits": [
+      {
+        "title": "Za više podloga",
+        "description": "Namenjeno je golom čeliku, aluminijumu, starom laku i novim delovima sa fabričkim prajmerom."
+      }
+    ],
+    "advice": "Limenke sa ostatkom materijala pažljivo zatvoriti."
+  },
+  "70-20": {
+    "sourceHash": "75cfbc31fb3a9d29",
+    "productType": "Sredstvo za čišćenje plastike",
+    "subtype": "Cleaner Plastic · plastika, GRP i SMC",
+    "shortDescription": "Cleaner Plastic je sredstvo za čišćenje plastike, kao i GRP i SMC materijala.",
+    "longDescription": "70-20 Cleaner Plastic je sredstvo za čišćenje namenjeno plastici, kao i GRP i SMC materijalima. Priprema površinu plastičnog dela pre nastavka rada u fazi pripreme.",
+    "purpose": "Čišćenje i priprema plastičnih delova",
+    "facts": [],
+    "applications": [
+      "Čišćenje plastičnih delova pre nastavka rada",
+      "Čišćenje GRP i SMC površina",
+      "Priprema površine u fazi pripreme"
+    ],
+    "benefits": [
+      {
+        "title": "Plastika, GRP i SMC",
+        "description": "Namenjeno je plastici, kao i GRP i SMC materijalima."
+      }
+    ],
+    "advice": "Limenke sa ostatkom materijala pažljivo zatvoriti."
+  },
+  "70-45": {
+    "sourceHash": "6bd0465ec4c82acb",
+    "productType": "Sredstvo za čišćenje",
+    "subtype": "Cleaner Basecoat 45 · antistatično dejstvo",
+    "shortDescription": "Sredstvo za čišćenje površina i zona uleta pre nanošenja materijala, sa antistatičnim dejstvom.",
+    "longDescription": "70-45 Cleaner je sredstvo za čišćenje površina i zona uleta, pre nanošenja prajmera i punila i bazne boje iz linije Basecoat 45, u metalik ili punoj nijansi. Deluje antistatički i smanjuje taloženje prašine tokom nanošenja završnog sloja na plastičnim delovima. Može se koristiti i za čišćenje pištolja za vodorazredive materijale. Sadržaj isparljivih organskih jedinjenja iznosi 198 g/l.",
+    "purpose": "Čišćenje površina i zona uleta pre nanošenja materijala",
+    "facts": [
+      { "label": "VOC", "value": "198 g/l (granica 200 g/l), kategorija IIB.aII" }
+    ],
+    "applications": [
+      "Čišćenje površine i zona uleta pre nanošenja materijala",
+      "Priprema pre bazne boje iz linije Basecoat 45",
+      "Čišćenje pištolja za vodorazredive materijale"
+    ],
+    "benefits": [
+      {
+        "title": "Antistatično dejstvo",
+        "description": "Deluje antistatički i smanjuje taloženje prašine tokom nanošenja završnog sloja na plastičnim delovima."
+      },
+      {
+        "title": "Dobro čišćenje",
+        "description": "Izvor navodi dobra svojstva čišćenja površine."
+      },
+      {
+        "title": "Čišćenje pištolja",
+        "description": "Može se koristiti i za čišćenje pištolja za vodorazredive materijale."
+      }
+    ],
+    "advice": "Naneti raspršivačem ili natopiti krpu bez vlakana. Površinu očistiti jednom krpom, a zatim prevući drugom, suvom krpom."
+  }
+}

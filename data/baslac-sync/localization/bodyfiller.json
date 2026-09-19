@@ -1,0 +1,29 @@
+{
+  "12-20": {
+    "sourceHash": "2e184d8939cef42f",
+    "productType": "2K univerzalni kit",
+    "subtype": "Bodyfiller Universal · svetlosiv",
+    "shortDescription": "Univerzalni dvokomponentni kit za grubo i fino kitovanje na čeliku, pocinkovanom čeliku i aluminijumu.",
+    "longDescription": "12-20 Bodyfiller Universal je univerzalni kit za pripremu površine, obojen u svetlosivo. Pokriva postupak grubog i finog kitovanja na čeliku, pocinkovanom čeliku i aluminijumu. Ima visok sadržaj suve materije, brzo se suši, lako se brusi i dobro prianja. Meša se sa crvenom pastom do ujednačene boje.",
+    "purpose": "Grubo i fino kitovanje metalnih površina",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100 : 2-3 % po masi" },
+      { "label": "Vreme upotrebe smeše", "value": "5 min" },
+      { "label": "Brušenje", "value": "P80 / P150 / P240" },
+      { "label": "Sušenje", "value": "20°C: 20-30 min · infracrveno (kratkotalasno): 4 min · infracrveno (srednjetalasno): 5-10 min" },
+      { "label": "VOC", "value": "180 g/l (granica 250 g/l), kategorija IIB.b" }
+    ],
+    "applications": [
+      "Grubo i fino kitovanje",
+      "Popravke na čeliku i pocinkovanom čeliku",
+      "Popravke na aluminijumu"
+    ],
+    "benefits": [
+      { "title": "Svetlosiva nijansa", "description": "Kit je obojen u svetlosivo." },
+      { "title": "Lako nanošenje i brušenje", "description": "Nanosi se i brusi bez posebnih zahteva." },
+      { "title": "Visok sadržaj suve materije", "description": "Visok sadržaj suve materije uz brzo sušenje." },
+      { "title": "Dobra prionljivost", "description": "Prianja na čelik, pocinkovani čelik i aluminijum." }
+    ],
+    "advice": "Kit i crvenu pastu mešati do ujednačene boje; ne prelaziti 3 % učvršćivača."
+  }
+}

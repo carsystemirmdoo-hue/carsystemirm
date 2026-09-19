@@ -193,7 +193,15 @@ function buildFamilies(): ProductFamily[] {
   for (const [baseProductSlug, variants] of groups) {
     if (variants.length < FAMILY_MIN_VARIANTS) continue;
 
-    const representative = variants[0];
+    /*
+     * Nosilac javnog identiteta ima prednost nad redosledom: zapis sistema za nijansiranje
+     * je taj koji zna zvanično ime porodice i njenu postojeću adresu. Bez njega ostaje
+     * staro pravilo — prvi zapis u katalogu je predstavnik.
+     */
+    const identity = variants.find((product) => product.catalogMetadata?.familyIdentity)
+      ?.catalogMetadata?.familyIdentity;
+    const representative =
+      variants.find((product) => product.catalogMetadata?.familyIdentity) ?? variants[0];
     const brandName =
       getCarsystemBrandBySlug(representative.brandSlug)?.name ??
       representative.brandSlug;
@@ -202,6 +210,7 @@ function buildFamilies(): ProductFamily[] {
     // Prefer the variants' shared official-name prefix; fall back to
     // "<brand> <line>" so a family is never named by the brand alone.
     const name =
+      identity?.name ||
       commonNamePrefix(
         variants.map(
           (product) => product.catalogMetadata?.officialName ?? product.name,
@@ -210,10 +219,12 @@ function buildFamilies(): ProductFamily[] {
       (line ? `${brandName} ${line}` : representative.name);
 
     // Prefer a slug derived from the readable name; fall back to the stable
-    // source key if that would collide or degenerate.
+    // source key if that would collide or degenerate. A pinned identity wins
+    // over both: it is the address the family already has in the wild.
     const preferred = slugify(name);
     const slug =
-      preferred && !usedSlugs.has(preferred) ? preferred : baseProductSlug;
+      identity?.slug ??
+      (preferred && !usedSlugs.has(preferred) ? preferred : baseProductSlug);
     usedSlugs.add(slug);
 
     const variesBy = detectVariesBy(variants);

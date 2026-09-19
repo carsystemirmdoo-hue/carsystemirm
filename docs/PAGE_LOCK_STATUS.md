@@ -192,6 +192,14 @@ proizvod bez dokumenta prikazuje „U pripremi" umesto praznog ili lažnog stanj
 
 Blokeri: nema.
 
+Otvoreno za zaseban, odobren zahvat (uočeno u baslac syncu 2026-09-19, podaci postoje, lock
+nije otvaran — detalji u `docs/BASLAC_CATALOG_SYNC.md`):
+
+- baslac sistem kartice (`BaslacSystemPdp`) nemaju dokumentacionu sekciju, pa zvanični
+  `*_Line.pdf` nije vidljiv;
+- zapisi bez `detail` bloka ne prikazuju „Bezbednosni list — na upit", jer `getDocuments`
+  izostavlja dokumente sa `status: "placeholder"`.
+
 ### Cosmos LAC — 🔒 DESIGN + UX LOCKED
 
 | | |

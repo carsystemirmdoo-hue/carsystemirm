@@ -1,0 +1,423 @@
+{
+  "40-10": {
+    "sourceHash": "480141663472828c",
+    "productType": "2K bezbojni lak",
+    "subtype": "MS bezbojni lak · brzo sušenje",
+    "shortDescription": "MS bezbojni lak za manje popravke, sa brzim sušenjem i jednostavnim prskanjem.",
+    "longDescription": "2K Panel Clear je MS bezbojni lak koji se nanosi preko bazne boje. Predviđen je za rad na jednom ili dva vertikalna panela, kao i za višebojne radove, natpise i plastične delove. Nanosi se u 2 sloja do debljine filma 50-60 μm, a osušen sloj se lako polira.",
+    "purpose": "Završno lakiranje manjih popravki i pojedinačnih panela",
+    "facts": [
+      {
+        "label": "Odnos mešanja",
+        "value": "2:1+10 %"
+      },
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 16 s"
+      },
+      {
+        "label": "Vreme upotrebe smeše",
+        "value": "4 h"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,3 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "2"
+      },
+      {
+        "label": "Debljina filma",
+        "value": "50-60 μm"
+      },
+      {
+        "label": "Sušenje",
+        "value": "20°C: 4 h, bez prašine: 2 h · 60°C: 20 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+      }
+    ],
+    "applications": [
+      "Završno lakiranje preko bazne boje",
+      "Popravke na jednom ili dva vertikalna panela",
+      "Višebojni radovi i natpisi",
+      "Lakiranje plastičnih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzosušeći bezbojni lak namenjen manjim popravkama."
+      },
+      {
+        "title": "Jednostavno prskanje",
+        "description": "Jednostavno i sigurno se prska, a osušen sloj se lako polira."
+      }
+    ],
+    "advice": "Predviđen za rad na jednom ili dva vertikalna panela."
+  },
+  "40-100": {
+    "sourceHash": "f591c4a62979cc73",
+    "productType": "2K bezbojni lak VOC",
+    "subtype": "VOC bezbojni lak · brzo umrežavanje",
+    "shortDescription": "2K bezbojni lak VOC sa brzim umrežavanjem i zadržanim učinkom na nižim temperaturama.",
+    "longDescription": "High Speed 2K Clear VOC je 2K bezbojni lak sa brzim umrežavanjem. Zadržava učinak i na nižim temperaturama, a radi sa postojećim baslac učvršćivačima. Pripada VOC kategoriji IIB.d.",
+    "purpose": "Brzo završno lakiranje u VOC programu",
+    "facts": [
+      {
+        "label": "VOC",
+        "value": "kategorija IIB.d, sadržaj 419, granica 420"
+      }
+    ],
+    "applications": [
+      "Završno lakiranje",
+      "Rad pri nižim temperaturama"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo umrežavanje",
+        "description": "Formulacija je usmerena na brzo umrežavanje laka."
+      },
+      {
+        "title": "Rad na nižim temperaturama",
+        "description": "Zadržava učinak i kada je temperatura niža."
+      },
+      {
+        "title": "Postojeći učvršćivači",
+        "description": "Radi sa postojećim baslac učvršćivačima."
+      }
+    ],
+    "advice": null
+  },
+  "40-40": {
+    "sourceHash": "240d661b3a2913fc",
+    "productType": "2K bezbojni lak",
+    "subtype": "HS bezbojni lak · visok sjaj",
+    "shortDescription": "HS bezbojni lak visokog sjaja za sve vrste popravki, sa visokim sadržajem suve materije.",
+    "longDescription": "2K Universal Clear je HS bezbojni lak koji se nanosi preko bazne boje i pokriva sve vrste popravki. Visok sadržaj suve materije i dobra otpornost na atmosferske uticaje daju postojan završni sloj visokog sjaja i kvalitetnog izgleda. Nanosi se u 2 sloja do debljine filma 50-70 μm, uz razmak od 2-3 min posle svakog sloja, a dobro se ponaša i pri poliranju.",
+    "purpose": "Završno lakiranje svih vrsta popravki preko bazne boje",
+    "facts": [
+      {
+        "label": "Odnos mešanja",
+        "value": "2:1+10 %"
+      },
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 18-20 s"
+      },
+      {
+        "label": "Vreme upotrebe smeše",
+        "value": "4 h"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,3 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "2"
+      },
+      {
+        "label": "Debljina filma",
+        "value": "50-70 μm"
+      },
+      {
+        "label": "Razmak između slojeva",
+        "value": "2-3 min posle svakog sloja"
+      },
+      {
+        "label": "Sušenje",
+        "value": "20°C: 8 h · 60°C: 30 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+      }
+    ],
+    "applications": [
+      "Završno lakiranje preko bazne boje",
+      "Sve vrste popravki",
+      "Poliranje završnog sloja"
+    ],
+    "benefits": [
+      {
+        "title": "Visok sjaj",
+        "description": "Daje završni sloj visokog sjaja i kvalitetnog izgleda."
+      },
+      {
+        "title": "Otpornost na vremenske uticaje",
+        "description": "Zadržava izgled pri izloženosti atmosferskim uticajima."
+      },
+      {
+        "title": "Dobro poliranje",
+        "description": "Osušen sloj se dobro ponaša pri poliranju."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Jednostavan je za rad i sigurno se prska."
+      }
+    ],
+    "advice": null
+  },
+  "40-440": {
+    "sourceHash": "77ae1adc6ff7f09a",
+    "productType": "2K bezbojni lak VOC",
+    "subtype": "HS VOC bezbojni lak · brzo sušenje",
+    "shortDescription": "HS bezbojni lak VOC za sve vrste popravki, sa brzim sušenjem i dobrim poliranjem.",
+    "longDescription": "2K VOC Clear je HS bezbojni lak sa visokim sadržajem suve materije, namenjen lakiranju preko bazne boje. Sigurno se prska, dobro razliva i izravnava, brzo se suši i daje tvrdu površinu otpornu na lepljivu traku. Nanosi se u 2 sloja do debljine filma 40-60 μm, uz razmak od 3 min između slojeva.",
+    "purpose": "Završno VOC lakiranje svih vrsta popravki",
+    "facts": [
+      {
+        "label": "Odnos mešanja",
+        "value": "2:1"
+      },
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 20-22 s"
+      },
+      {
+        "label": "Vreme upotrebe smeše",
+        "value": "2 h"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,3 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "2"
+      },
+      {
+        "label": "Debljina filma",
+        "value": "40-60 μm"
+      },
+      {
+        "label": "Razmak između slojeva",
+        "value": "3 min"
+      },
+      {
+        "label": "Sušenje",
+        "value": "20°C: 10 h · 60°C: 30 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+      },
+      {
+        "label": "VOC",
+        "value": "kategorija IIB.d, sadržaj 419, granica 420"
+      }
+    ],
+    "applications": [
+      "Završno lakiranje preko bazne boje",
+      "Sve vrste popravki",
+      "Poliranje završnog sloja"
+    ],
+    "benefits": [
+      {
+        "title": "Visok sadržaj suve materije",
+        "description": "Formulacija sa visokim sadržajem suve materije."
+      },
+      {
+        "title": "Razlivanje i izravnavanje",
+        "description": "Sloj se dobro razliva i izravnava po površini."
+      },
+      {
+        "title": "Tvrda površina",
+        "description": "Osušen sloj je tvrd i otporan na lepljivu traku."
+      },
+      {
+        "title": "Sigurno prskanje",
+        "description": "Sigurno se prska i brzo se suši."
+      }
+    ],
+    "advice": "Učvršćivač birati prema temperaturi okoline i veličini predmeta koji se lakira, prema temperaturnoj tabeli."
+  },
+  "40-450": {
+    "sourceHash": "ce313c777016ca61",
+    "productType": "HS bezbojni lak VOC",
+    "subtype": "VOC bezbojni lak · visok sadržaj suve materije",
+    "shortDescription": "Bezbojni lak VOC sa visokim sadržajem suve materije, dobrim razlivanjem i tvrdom površinom.",
+    "longDescription": "Universal Clear VOC je bezbojni lak sa visokim sadržajem suve materije, namenjen lakiranju preko bazne boje. Sigurno se prska i dobro razliva, a osušen sloj ima tvrdu površinu koja se dobro polira. Nanosi se u 2 sloja do debljine filma 40-60 μm, uz razmak od 3 min između slojeva.",
+    "purpose": "Završno VOC lakiranje preko bazne boje",
+    "facts": [
+      {
+        "label": "Odnos mešanja",
+        "value": "2:1+10 %"
+      },
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 20-22 s"
+      },
+      {
+        "label": "Vreme upotrebe smeše",
+        "value": "2 h"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,3 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "2"
+      },
+      {
+        "label": "Debljina filma",
+        "value": "40-60 μm"
+      },
+      {
+        "label": "Razmak između slojeva",
+        "value": "3 min"
+      },
+      {
+        "label": "Sušenje",
+        "value": "20°C: 6 h · 60°C: 20 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+      },
+      {
+        "label": "VOC",
+        "value": "kategorija IIB.d, sadržaj 419, granica 420"
+      }
+    ],
+    "applications": [
+      "Završno lakiranje preko bazne boje",
+      "Poliranje završnog sloja"
+    ],
+    "benefits": [
+      {
+        "title": "Visok sadržaj suve materije",
+        "description": "Formulacija sa visokim sadržajem suve materije."
+      },
+      {
+        "title": "Sigurno prskanje",
+        "description": "Sigurno se prska i dobro razliva po površini."
+      },
+      {
+        "title": "Tvrda površina",
+        "description": "Osušen sloj ima tvrdu površinu i dobro se polira."
+      }
+    ],
+    "advice": "Učvršćivač i razređivač birati prema temperaturi okoline i veličini predmeta koji se lakira; kombinacija učvršćivača i razređivača data je u temperaturnoj tabeli."
+  },
+  "40-510": {
+    "sourceHash": "04828ec4e53f5b82",
+    "productType": "Bezbojni lak VOC",
+    "subtype": "Bezbojni lak · sušenje na vazduhu",
+    "shortDescription": "Bezbojni lak za sušenje na vazduhu i na temperaturi okoline, sa jednostavnim odnosom mešanja.",
+    "longDescription": "Ambient clear je bezbojni lak koji se nanosi preko bazne boje i suši na vazduhu ili na temperaturi okoline. Jednostavno se meša i sigurno prska, a nanosi se u jednom sloju do debljine filma 40 μm. Pri temperaturi predmeta od 20°C sloj se može polirati posle 1 sata i 30 minuta. Daje površinu visokog sjaja.",
+    "purpose": "Završno lakiranje uz sušenje na vazduhu",
+    "facts": [
+      {
+        "label": "Odnos mešanja",
+        "value": "4:1"
+      },
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 20-22 s"
+      },
+      {
+        "label": "Vreme upotrebe smeše",
+        "value": "20 min"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,3 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "1"
+      },
+      {
+        "label": "Debljina filma",
+        "value": "40 μm"
+      },
+      {
+        "label": "Sušenje",
+        "value": "IC kratkotalasno: 5 min · IC srednjetalasno: 5-10 min"
+      },
+      {
+        "label": "VOC",
+        "value": "kategorija IIB.d, sadržaj 419, granica 420"
+      }
+    ],
+    "applications": [
+      "Završno lakiranje preko bazne boje",
+      "Sušenje na vazduhu ili na temperaturi okoline",
+      "Poliranje završnog sloja"
+    ],
+    "benefits": [
+      {
+        "title": "Sušenje na vazduhu",
+        "description": "Predviđen za sušenje na vazduhu ili na temperaturi okoline."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Pri temperaturi predmeta od 20°C polira se posle 1 sata i 30 minuta."
+      },
+      {
+        "title": "Jednostavno mešanje",
+        "description": "Odnos mešanja je jednostavan, a prskanje sigurno."
+      },
+      {
+        "title": "Visok sjaj",
+        "description": "Daje površinu visokog nivoa sjaja."
+      }
+    ],
+    "advice": "Učvršćivač birati prema temperaturi okoline i veličini predmeta koji se lakira; odgovarajućim učvršćivačem vreme upotrebe smeše može se produžiti do 30 min."
+  },
+  "40-620": {
+    "sourceHash": "b15bb8ee682a69cb",
+    "productType": "2K mat bezbojni lak VOC",
+    "subtype": "Mat bezbojni lak · podesiv nivo sjaja",
+    "shortDescription": "2K mat bezbojni lak VOC za popravku mat površina, sa nivoom sjaja između mat i saten mat.",
+    "longDescription": "2K Clear mat VOC služi za popravku mat završnih slojeva. Mešanjem sa baslac bezbojnim lakovima u različitim odnosima postižu se nivoi sjaja između mat i saten mat, 12-65 jedinica pri uglu od 60°. Nanosi se u 2 sloja do debljine filma 40-50 μm, a ujednačena debljina postiže se sa dva podjednako puna sloja i pomerenim preklopima. Nivo sjaja može biti viši kod svetlih i čistih srebrnih nijansi, a na karoseriji su moguće razlike između vertikalno i horizontalno lakiranih delova.",
+    "purpose": "Popravka mat i saten mat završnih slojeva",
+    "facts": [
+      {
+        "label": "Odnos mešanja",
+        "value": "100:33:17"
+      },
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 16-18 s"
+      },
+      {
+        "label": "Vreme upotrebe smeše",
+        "value": "4 h"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,3"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "2"
+      },
+      {
+        "label": "Debljina filma",
+        "value": "40-50 μm"
+      },
+      {
+        "label": "Razmak između slojeva",
+        "value": "Posle prvog sloja i pre sušenja sačekati do potpune matiranosti, najviše 25 min"
+      },
+      {
+        "label": "Sušenje",
+        "value": "20°C: 7 h · 60°C: 30 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+      },
+      {
+        "label": "VOC",
+        "value": "kategorija IIB.d, sadržaj 419, granica 420"
+      }
+    ],
+    "applications": [
+      "Popravka mat završnih slojeva",
+      "Podešavanje nivoa sjaja mešanjem sa baslac bezbojnim lakovima",
+      "Probno prskanje i upoređivanje sa površinom za popravku"
+    ],
+    "benefits": [
+      {
+        "title": "Popravka mat površina",
+        "description": "Namenjen je popravci mat završnih slojeva."
+      },
+      {
+        "title": "Podesiv nivo sjaja",
+        "description": "Različiti odnosi mešanja daju nivo sjaja od mat do saten mat."
+      },
+      {
+        "title": "Rad u postojećem programu",
+        "description": "Radi sa baslac bezbojnim lakovima, učvršćivačem i razređivačem."
+      }
+    ],
+    "advice": "Pre lakiranja uraditi probno prskanje i uporediti ga sa površinom koja se popravlja; odstupanja od +/- 5 jedinica sjaja su moguća. Proizvod pre upotrebe dobro promešati ručno."
+  }
+}

@@ -1,0 +1,1183 @@
+{
+  "meta": {
+    "directory": "https://techinfo.baslac.com/en/",
+    "websiteIndex": "https://www.baslac.com/en-emea/technical-data-sheets",
+    "files": 115,
+    "byKind": {
+      "product": 57,
+      "variant": 38,
+      "line": 4,
+      "process": 16
+    },
+    "linkedFromWebsiteIndex": 102,
+    "directoryOnly": [
+      "11-40.pdf",
+      "30-S00.pdf",
+      "30-S01.pdf",
+      "30-S01_variant_81-30_DTM.pdf",
+      "30-S01_variant_81-30_Tinted_PF.pdf",
+      "35-M00.pdf",
+      "35-M00_variant_49.pdf",
+      "45-W00.pdf",
+      "45-W00_variant_49.pdf",
+      "45-W00_variant_50-45.pdf",
+      "50-10.pdf",
+      "50-30.pdf",
+      "70-10.pdf"
+    ],
+    "localCopies": 102,
+    "note": "zbir po vrstama = ukupno; `_Line…_variant…` se broji kao variant, ne dvaput"
+  },
+  "documents": [
+    {
+      "file": "11-40.pdf",
+      "url": "https://techinfo.baslac.com/en/11-40.pdf",
+      "kind": "product",
+      "code": "11-40",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "12-20.pdf",
+      "url": "https://techinfo.baslac.com/en/12-20.pdf",
+      "kind": "product",
+      "code": "12-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/12-20.pdf",
+      "bytes": 276171,
+      "title": "12-20 Bodyfiller Universal"
+    },
+    {
+      "file": "20-22.pdf",
+      "url": "https://techinfo.baslac.com/en/20-22.pdf",
+      "kind": "product",
+      "code": "20-22",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-22.pdf",
+      "bytes": 286948,
+      "title": "20-22 2K Primerfiller"
+    },
+    {
+      "file": "20-24.pdf",
+      "url": "https://techinfo.baslac.com/en/20-24.pdf",
+      "kind": "product",
+      "code": "20-24",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-24.pdf",
+      "bytes": 289271,
+      "title": "20-24 2K Primerfiller, grey"
+    },
+    {
+      "file": "20-24_variant_50-05.pdf",
+      "url": "https://techinfo.baslac.com/en/20-24_variant_50-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-24_variant_50-05.pdf",
+      "bytes": 287295,
+      "title": "20-24 variant 50-05/60-05"
+    },
+    {
+      "file": "20-24_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/20-24_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-24_variant_80-10.pdf",
+      "bytes": 289712,
+      "title": "20-24 variant 80-10"
+    },
+    {
+      "file": "20-24_variant_high-build.pdf",
+      "url": "https://techinfo.baslac.com/en/20-24_variant_high-build.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-24_variant_high-build.pdf",
+      "bytes": 288339,
+      "title": "20-24 high build application"
+    },
+    {
+      "file": "20-34.pdf",
+      "url": "https://techinfo.baslac.com/en/20-34.pdf",
+      "kind": "product",
+      "code": "20-34",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-34.pdf",
+      "bytes": 289276,
+      "title": "20-34 2K Primerfiller White"
+    },
+    {
+      "file": "20-34_variant_50-05.pdf",
+      "url": "https://techinfo.baslac.com/en/20-34_variant_50-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-34_variant_50-05.pdf",
+      "bytes": 287579,
+      "title": "20-34 variant 50-05/60-05"
+    },
+    {
+      "file": "20-34_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/20-34_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-34_variant_80-10.pdf",
+      "bytes": 290374,
+      "title": "20-34 variant 80-10"
+    },
+    {
+      "file": "20-34_variant_high-build.pdf",
+      "url": "https://techinfo.baslac.com/en/20-34_variant_high-build.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-34_variant_high-build.pdf",
+      "bytes": 288636,
+      "title": "20-34 high build application"
+    },
+    {
+      "file": "20-35 - 20-35 variant 60-05.pdf",
+      "url": "https://techinfo.baslac.com/en/20-35%20-%2020-35%20variant%2060-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-35-20-35-variant-60-05.pdf",
+      "bytes": 142906,
+      "title": "20-35 variant 60-05"
+    },
+    {
+      "file": "20-35.pdf",
+      "url": "https://techinfo.baslac.com/en/20-35.pdf",
+      "kind": "product",
+      "code": "20-35",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-35.pdf",
+      "bytes": 279246,
+      "title": "20-35 2K Primerfiller white"
+    },
+    {
+      "file": "20-35_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/20-35_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-35_variant_80-10.pdf",
+      "bytes": 276983,
+      "title": "20-35 variant 80-10"
+    },
+    {
+      "file": "20-35_variant_80-30.pdf",
+      "url": "https://techinfo.baslac.com/en/20-35_variant_80-30.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-35_variant_80-30.pdf",
+      "bytes": 276803,
+      "title": "20-35 variant 80-30"
+    },
+    {
+      "file": "20-94.pdf",
+      "url": "https://techinfo.baslac.com/en/20-94.pdf",
+      "kind": "product",
+      "code": "20-94",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-94.pdf",
+      "bytes": 289532,
+      "title": "20-94 2K Primerfiller Black"
+    },
+    {
+      "file": "20-94_variant_50-05.pdf",
+      "url": "https://techinfo.baslac.com/en/20-94_variant_50-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-94_variant_50-05.pdf",
+      "bytes": 287548,
+      "title": "20-94 variant 50-05/60-05"
+    },
+    {
+      "file": "20-94_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/20-94_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-94_variant_80-10.pdf",
+      "bytes": 290318,
+      "title": "20-94 variant 80-10"
+    },
+    {
+      "file": "20-94_variant_high-build.pdf",
+      "url": "https://techinfo.baslac.com/en/20-94_variant_high-build.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-94_variant_high-build.pdf",
+      "bytes": 288579,
+      "title": "20-94 high build application"
+    },
+    {
+      "file": "20-95 - 20-95 variant 60-05.pdf",
+      "url": "https://techinfo.baslac.com/en/20-95%20-%2020-95%20variant%2060-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-95-20-95-variant-60-05.pdf",
+      "bytes": 143046,
+      "title": "20-95 variant 60-05"
+    },
+    {
+      "file": "20-95.pdf",
+      "url": "https://techinfo.baslac.com/en/20-95.pdf",
+      "kind": "product",
+      "code": "20-95",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-95.pdf",
+      "bytes": 279500,
+      "title": "20-95 2K Primerfiller black"
+    },
+    {
+      "file": "20-95_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/20-95_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-95_variant_80-10.pdf",
+      "bytes": 277245,
+      "title": "20-95 variant 80-10"
+    },
+    {
+      "file": "20-95_variant_80-30.pdf",
+      "url": "https://techinfo.baslac.com/en/20-95_variant_80-30.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/20-95_variant_80-30.pdf",
+      "bytes": 277053,
+      "title": "20-95 variant 80-30"
+    },
+    {
+      "file": "21-10.pdf",
+      "url": "https://techinfo.baslac.com/en/21-10.pdf",
+      "kind": "product",
+      "code": "21-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/21-10.pdf",
+      "bytes": 273614,
+      "title": "21-10 1K Plastic Primer"
+    },
+    {
+      "file": "21-11.pdf",
+      "url": "https://techinfo.baslac.com/en/21-11.pdf",
+      "kind": "product",
+      "code": "21-11",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/21-11.pdf",
+      "bytes": 279624,
+      "title": "21-11 Plastic Primer VOC"
+    },
+    {
+      "file": "21-11_variant_sanding_filler.pdf",
+      "url": "https://techinfo.baslac.com/en/21-11_variant_sanding_filler.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/21-11_variant_sanding_filler.pdf",
+      "bytes": 281370,
+      "title": "21-11 variant sanding filler"
+    },
+    {
+      "file": "21-20.pdf",
+      "url": "https://techinfo.baslac.com/en/21-20.pdf",
+      "kind": "product",
+      "code": "21-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/21-20.pdf",
+      "bytes": 266838,
+      "title": "21-20 Plastic Primer"
+    },
+    {
+      "file": "25-30.pdf",
+      "url": "https://techinfo.baslac.com/en/25-30.pdf",
+      "kind": "product",
+      "code": "25-30",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/25-30.pdf",
+      "bytes": 284874,
+      "title": "25-30 2K Primerfiller EP"
+    },
+    {
+      "file": "25-30_variant_wet-on-wet.pdf",
+      "url": "https://techinfo.baslac.com/en/25-30_variant_wet-on-wet.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/25-30_variant_wet-on-wet.pdf",
+      "bytes": 278012,
+      "title": "25-30 variant Wet-on-wet"
+    },
+    {
+      "file": "27-10.pdf",
+      "url": "https://techinfo.baslac.com/en/27-10.pdf",
+      "kind": "product",
+      "code": "27-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/27-10.pdf",
+      "bytes": 278735,
+      "title": "27-10 2K Washprimer"
+    },
+    {
+      "file": "30-S00.pdf",
+      "url": "https://techinfo.baslac.com/en/30-S00.pdf",
+      "kind": "product",
+      "code": "30-S00",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "30-S01.pdf",
+      "url": "https://techinfo.baslac.com/en/30-S01.pdf",
+      "kind": "product",
+      "code": "30-S01",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "30-S01_variant_81-30_DTM.pdf",
+      "url": "https://techinfo.baslac.com/en/30-S01_variant_81-30_DTM.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "30-S01_variant_81-30_Tinted_PF.pdf",
+      "url": "https://techinfo.baslac.com/en/30-S01_variant_81-30_Tinted_PF.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "30_CV_Gloss_levels.pdf",
+      "url": "https://techinfo.baslac.com/en/30_CV_Gloss_levels.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/30_CV_Gloss_levels.pdf",
+      "bytes": 139134,
+      "title": "Gloss levels – baslac 30 Line CV"
+    },
+    {
+      "file": "30_Line.pdf",
+      "url": "https://techinfo.baslac.com/en/30_Line.pdf",
+      "kind": "line",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/30_Line.pdf",
+      "bytes": 284410,
+      "title": "30 Line Topcoat, direct gloss"
+    },
+    {
+      "file": "30_Line_CV.pdf",
+      "url": "https://techinfo.baslac.com/en/30_Line_CV.pdf",
+      "kind": "line",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/30_Line_CV.pdf",
+      "bytes": 282104,
+      "title": "30 Line CV Topcoat"
+    },
+    {
+      "file": "30_Line_CV_variant_81-30_DTM.pdf",
+      "url": "https://techinfo.baslac.com/en/30_Line_CV_variant_81-30_DTM.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/30_Line_CV_variant_81-30_DTM.pdf",
+      "bytes": 281424,
+      "title": "30 Line CV Topcoat, variant 81-30 DTM"
+    },
+    {
+      "file": "30_Line_CV_variant_81-30_Tinted_PF.pdf",
+      "url": "https://techinfo.baslac.com/en/30_Line_CV_variant_81-30_Tinted_PF.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/30_Line_CV_variant_81-30_Tinted_PF.pdf",
+      "bytes": 281537,
+      "title": "30 Line CV variant 81-30 Tinted Primerfiller"
+    },
+    {
+      "file": "35-M00.pdf",
+      "url": "https://techinfo.baslac.com/en/35-M00.pdf",
+      "kind": "product",
+      "code": "35-M00",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "35-M00_variant_49.pdf",
+      "url": "https://techinfo.baslac.com/en/35-M00_variant_49.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "35_Line.pdf",
+      "url": "https://techinfo.baslac.com/en/35_Line.pdf",
+      "kind": "line",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/35_Line.pdf",
+      "bytes": 274530,
+      "title": "35 Line Basecoat"
+    },
+    {
+      "file": "35_Line_variant_49.pdf",
+      "url": "https://techinfo.baslac.com/en/35_Line_variant_49.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/35_Line_variant_49.pdf",
+      "bytes": 279517,
+      "title": "35 Line variant 49-"
+    },
+    {
+      "file": "40-10.pdf",
+      "url": "https://techinfo.baslac.com/en/40-10.pdf",
+      "kind": "product",
+      "code": "40-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-10.pdf",
+      "bytes": 281811,
+      "title": "40-10 2K Panel Clear"
+    },
+    {
+      "file": "40-100.pdf",
+      "url": "https://techinfo.baslac.com/en/40-100.pdf",
+      "kind": "product",
+      "code": "40-100",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-100.pdf",
+      "bytes": 130790,
+      "title": "40-100 High Speed 2K Clear VOC"
+    },
+    {
+      "file": "40-10_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/40-10_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-10_variant_80-10.pdf",
+      "bytes": 281284,
+      "title": "40-10 2K Panel Clear Variant 80-10"
+    },
+    {
+      "file": "40-10_variant_80-20.pdf",
+      "url": "https://techinfo.baslac.com/en/40-10_variant_80-20.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-10_variant_80-20.pdf",
+      "bytes": 278551,
+      "title": "40-10 2K Panel Clear Variant 80-20"
+    },
+    {
+      "file": "40-40.pdf",
+      "url": "https://techinfo.baslac.com/en/40-40.pdf",
+      "kind": "product",
+      "code": "40-40",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-40.pdf",
+      "bytes": 284340,
+      "title": "40-40 2K Universal Clear"
+    },
+    {
+      "file": "40-40_variant_60-05.pdf",
+      "url": "https://techinfo.baslac.com/en/40-40_variant_60-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-40_variant_60-05.pdf",
+      "bytes": 284808,
+      "title": "40-40 Variant 60-05"
+    },
+    {
+      "file": "40-40_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/40-40_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-40_variant_80-10.pdf",
+      "bytes": 283859,
+      "title": "40-40 Variant 80-10"
+    },
+    {
+      "file": "40-40_variant_80-20.pdf",
+      "url": "https://techinfo.baslac.com/en/40-40_variant_80-20.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-40_variant_80-20.pdf",
+      "bytes": 284148,
+      "title": "40-40 Variant 80-20"
+    },
+    {
+      "file": "40-40_variant_MS_Clear.pdf",
+      "url": "https://techinfo.baslac.com/en/40-40_variant_MS_Clear.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-40_variant_MS_Clear.pdf",
+      "bytes": 284014,
+      "title": "40-40 Variant MS Clear"
+    },
+    {
+      "file": "40-440.pdf",
+      "url": "https://techinfo.baslac.com/en/40-440.pdf",
+      "kind": "product",
+      "code": "40-440",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-440.pdf",
+      "bytes": 286300,
+      "title": "40-440 2K VOC Clear"
+    },
+    {
+      "file": "40-440_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/40-440_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-440_variant_80-10.pdf",
+      "bytes": 284101,
+      "title": "40-440 Variant 80-10"
+    },
+    {
+      "file": "40-440_variant_80-20.pdf",
+      "url": "https://techinfo.baslac.com/en/40-440_variant_80-20.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-440_variant_80-20.pdf",
+      "bytes": 284816,
+      "title": "40-440 Variant 80-20"
+    },
+    {
+      "file": "40-450.pdf",
+      "url": "https://techinfo.baslac.com/en/40-450.pdf",
+      "kind": "product",
+      "code": "40-450",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-450.pdf",
+      "bytes": 286679,
+      "title": "40-450 Universal Clear VOC"
+    },
+    {
+      "file": "40-450_variant_60-05.pdf",
+      "url": "https://techinfo.baslac.com/en/40-450_variant_60-05.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-450_variant_60-05.pdf",
+      "bytes": 285708,
+      "title": "40-450 Variant 60-05"
+    },
+    {
+      "file": "40-450_variant_80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/40-450_variant_80-10.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-450_variant_80-10.pdf",
+      "bytes": 284863,
+      "title": "40-450 variant 80-10"
+    },
+    {
+      "file": "40-450_variant_80-20.pdf",
+      "url": "https://techinfo.baslac.com/en/40-450_variant_80-20.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-450_variant_80-20.pdf",
+      "bytes": 285189,
+      "title": "40-450 Variant 80-20"
+    },
+    {
+      "file": "40-510.pdf",
+      "url": "https://techinfo.baslac.com/en/40-510.pdf",
+      "kind": "product",
+      "code": "40-510",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-510.pdf",
+      "bytes": 282939,
+      "title": "40-510 Ambient clear"
+    },
+    {
+      "file": "40-620.pdf",
+      "url": "https://techinfo.baslac.com/en/40-620.pdf",
+      "kind": "product",
+      "code": "40-620",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/40-620.pdf",
+      "bytes": 287563,
+      "title": "40-620 2K Clear mat VOC"
+    },
+    {
+      "file": "45-R45.pdf",
+      "url": "https://techinfo.baslac.com/en/45-R45.pdf",
+      "kind": "product",
+      "code": "45-R45",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/45-R45.pdf",
+      "bytes": 247353,
+      "title": "45-R45 Dilutant"
+    },
+    {
+      "file": "45-W00.pdf",
+      "url": "https://techinfo.baslac.com/en/45-W00.pdf",
+      "kind": "product",
+      "code": "45-W00",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "45-W00_variant_49.pdf",
+      "url": "https://techinfo.baslac.com/en/45-W00_variant_49.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "45-W00_variant_50-45.pdf",
+      "url": "https://techinfo.baslac.com/en/45-W00_variant_50-45.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "45-W10.pdf",
+      "url": "https://techinfo.baslac.com/en/45-W10.pdf",
+      "kind": "product",
+      "code": "45-W10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/45-W10.pdf",
+      "bytes": 276132,
+      "title": "45-W10 3-Stage Additive and Blending Clear"
+    },
+    {
+      "file": "45_Line.pdf",
+      "url": "https://techinfo.baslac.com/en/45_Line.pdf",
+      "kind": "line",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/45_Line.pdf",
+      "bytes": 124467,
+      "title": "45 Line Basecoat"
+    },
+    {
+      "file": "45_Line_variant_49.pdf",
+      "url": "https://techinfo.baslac.com/en/45_Line_variant_49.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/45_Line_variant_49.pdf",
+      "bytes": 127760,
+      "title": "45 Line variant 49-"
+    },
+    {
+      "file": "45_Line_variant_50-45.pdf",
+      "url": "https://techinfo.baslac.com/en/45_Line_variant_50-45.pdf",
+      "kind": "variant",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/45_Line_variant_50-45.pdf",
+      "bytes": 281908,
+      "title": "45 Line variant 50-45"
+    },
+    {
+      "file": "50-05.pdf",
+      "url": "https://techinfo.baslac.com/en/50-05.pdf",
+      "kind": "product",
+      "code": "50-05",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-05.pdf",
+      "bytes": 248395,
+      "title": "50-05 2K Hardener Ambient UC"
+    },
+    {
+      "file": "50-10.pdf",
+      "url": "https://techinfo.baslac.com/en/50-10.pdf",
+      "kind": "product",
+      "code": "50-10",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "50-15.pdf",
+      "url": "https://techinfo.baslac.com/en/50-15.pdf",
+      "kind": "product",
+      "code": "50-15",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-15.pdf",
+      "bytes": 247176,
+      "title": "50-15 2K Hardener Fast"
+    },
+    {
+      "file": "50-20.pdf",
+      "url": "https://techinfo.baslac.com/en/50-20.pdf",
+      "kind": "product",
+      "code": "50-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-20.pdf",
+      "bytes": 247403,
+      "title": "50-20 Hardener Normal"
+    },
+    {
+      "file": "50-30.pdf",
+      "url": "https://techinfo.baslac.com/en/50-30.pdf",
+      "kind": "product",
+      "code": "50-30",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "50-415.pdf",
+      "url": "https://techinfo.baslac.com/en/50-415.pdf",
+      "kind": "product",
+      "code": "50-415",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-415.pdf",
+      "bytes": 247806,
+      "title": "50-415 2K Clear Hardener Fast VOC"
+    },
+    {
+      "file": "50-420.pdf",
+      "url": "https://techinfo.baslac.com/en/50-420.pdf",
+      "kind": "product",
+      "code": "50-420",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-420.pdf",
+      "bytes": 248045,
+      "title": "50-420 2K Clear Hardener Normal VOC"
+    },
+    {
+      "file": "50-430.pdf",
+      "url": "https://techinfo.baslac.com/en/50-430.pdf",
+      "kind": "product",
+      "code": "50-430",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-430.pdf",
+      "bytes": 247973,
+      "title": "50-430 2K Clear Hardener Slow VOC"
+    },
+    {
+      "file": "50-45.pdf",
+      "url": "https://techinfo.baslac.com/en/50-45.pdf",
+      "kind": "product",
+      "code": "50-45",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-45.pdf",
+      "bytes": 248040,
+      "title": "50-45 2K Activator"
+    },
+    {
+      "file": "50-510.pdf",
+      "url": "https://techinfo.baslac.com/en/50-510.pdf",
+      "kind": "product",
+      "code": "50-510",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-510.pdf",
+      "bytes": 247145,
+      "title": "50-510 Ambient Clear Hardener"
+    },
+    {
+      "file": "50-530.pdf",
+      "url": "https://techinfo.baslac.com/en/50-530.pdf",
+      "kind": "product",
+      "code": "50-530",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/50-530.pdf",
+      "bytes": 247706,
+      "title": "50-530 Ambient Clear Hardener slow"
+    },
+    {
+      "file": "51-515.pdf",
+      "url": "https://techinfo.baslac.com/en/51-515.pdf",
+      "kind": "product",
+      "code": "51-515",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/51-515.pdf",
+      "bytes": 247481,
+      "title": "51-515 2K Hardener CV fast"
+    },
+    {
+      "file": "51-520.pdf",
+      "url": "https://techinfo.baslac.com/en/51-520.pdf",
+      "kind": "product",
+      "code": "51-520",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/51-520.pdf",
+      "bytes": 247913,
+      "title": "51-520 2K Hardener CV Normal"
+    },
+    {
+      "file": "51-530.pdf",
+      "url": "https://techinfo.baslac.com/en/51-530.pdf",
+      "kind": "product",
+      "code": "51-530",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/51-530.pdf",
+      "bytes": 247570,
+      "title": "51-530 2K Hardener CV slow"
+    },
+    {
+      "file": "55-10.pdf",
+      "url": "https://techinfo.baslac.com/en/55-10.pdf",
+      "kind": "product",
+      "code": "55-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/55-10.pdf",
+      "bytes": 247753,
+      "title": "55-10 EP Hardener"
+    },
+    {
+      "file": "56-20.pdf",
+      "url": "https://techinfo.baslac.com/en/56-20.pdf",
+      "kind": "product",
+      "code": "56-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/56-20.pdf",
+      "bytes": 247982,
+      "title": "56-20 Bodyfiller Hardener"
+    },
+    {
+      "file": "57-10.pdf",
+      "url": "https://techinfo.baslac.com/en/57-10.pdf",
+      "kind": "product",
+      "code": "57-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/57-10.pdf",
+      "bytes": 247983,
+      "title": "57-10 Additive Washprimer"
+    },
+    {
+      "file": "57-30.pdf",
+      "url": "https://techinfo.baslac.com/en/57-30.pdf",
+      "kind": "product",
+      "code": "57-30",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/57-30.pdf",
+      "bytes": 248591,
+      "title": "57-30 Additive Washprimer slow"
+    },
+    {
+      "file": "60-05.pdf",
+      "url": "https://techinfo.baslac.com/en/60-05.pdf",
+      "kind": "product",
+      "code": "60-05",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/60-05.pdf",
+      "bytes": 251997,
+      "title": "60-05 Speeding Reducer"
+    },
+    {
+      "file": "60-10.pdf",
+      "url": "https://techinfo.baslac.com/en/60-10.pdf",
+      "kind": "product",
+      "code": "60-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/60-10.pdf",
+      "bytes": 251461,
+      "title": "60-10 Reducer Universal Fast"
+    },
+    {
+      "file": "60-20.pdf",
+      "url": "https://techinfo.baslac.com/en/60-20.pdf",
+      "kind": "product",
+      "code": "60-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/60-20.pdf",
+      "bytes": 251261,
+      "title": "60-20"
+    },
+    {
+      "file": "60-30.pdf",
+      "url": "https://techinfo.baslac.com/en/60-30.pdf",
+      "kind": "product",
+      "code": "60-30",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/60-30.pdf",
+      "bytes": 251207,
+      "title": "60-30 Reducer Universal Slow"
+    },
+    {
+      "file": "60-40.pdf",
+      "url": "https://techinfo.baslac.com/en/60-40.pdf",
+      "kind": "product",
+      "code": "60-40",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/60-40.pdf",
+      "bytes": 251160,
+      "title": "60-40 Reducer Universal Extra Slow"
+    },
+    {
+      "file": "65-10.pdf",
+      "url": "https://techinfo.baslac.com/en/65-10.pdf",
+      "kind": "product",
+      "code": "65-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/65-10.pdf",
+      "bytes": 268636,
+      "title": "65-10 Blending Reducer"
+    },
+    {
+      "file": "70-10.pdf",
+      "url": "https://techinfo.baslac.com/en/70-10.pdf",
+      "kind": "product",
+      "code": "70-10",
+      "linkedFromWebsiteIndex": false,
+      "localPath": null,
+      "bytes": null,
+      "title": null
+    },
+    {
+      "file": "70-20.pdf",
+      "url": "https://techinfo.baslac.com/en/70-20.pdf",
+      "kind": "product",
+      "code": "70-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/70-20.pdf",
+      "bytes": 247538,
+      "title": "70-20 Cleaner Plastic"
+    },
+    {
+      "file": "70-45.pdf",
+      "url": "https://techinfo.baslac.com/en/70-45.pdf",
+      "kind": "product",
+      "code": "70-45",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/70-45.pdf",
+      "bytes": 252878,
+      "title": "70-45 Cleaner"
+    },
+    {
+      "file": "80-10.pdf",
+      "url": "https://techinfo.baslac.com/en/80-10.pdf",
+      "kind": "product",
+      "code": "80-10",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/80-10.pdf",
+      "bytes": 252358,
+      "title": "80-10 Additive Flex"
+    },
+    {
+      "file": "80-20.pdf",
+      "url": "https://techinfo.baslac.com/en/80-20.pdf",
+      "kind": "product",
+      "code": "80-20",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/80-20.pdf",
+      "bytes": 251132,
+      "title": "80-20 Additive Mat"
+    },
+    {
+      "file": "80-30.pdf",
+      "url": "https://techinfo.baslac.com/en/80-30.pdf",
+      "kind": "product",
+      "code": "80-30",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/80-30.pdf",
+      "bytes": 251594,
+      "title": "80-30 Additive Plast"
+    },
+    {
+      "file": "81-30.pdf",
+      "url": "https://techinfo.baslac.com/en/81-30.pdf",
+      "kind": "product",
+      "code": "81-30",
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/81-30.pdf",
+      "bytes": 252380,
+      "title": "81-30 Additive Chassis"
+    },
+    {
+      "file": "Carbon_fibre_repair.pdf",
+      "url": "https://techinfo.baslac.com/en/Carbon_fibre_repair.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Carbon_fibre_repair.pdf",
+      "bytes": 254096,
+      "title": "System Carbon Fibre"
+    },
+    {
+      "file": "Chrome_silver_system.pdf",
+      "url": "https://techinfo.baslac.com/en/Chrome_silver_system.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Chrome_silver_system.pdf",
+      "bytes": 440790,
+      "title": "System Chrome silver"
+    },
+    {
+      "file": "Cleaners.pdf",
+      "url": "https://techinfo.baslac.com/en/Cleaners.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Cleaners.pdf",
+      "bytes": 414246,
+      "title": "Pre-treatment of substrates and old paintwork"
+    },
+    {
+      "file": "Gloss_levels.pdf",
+      "url": "https://techinfo.baslac.com/en/Gloss_levels.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Gloss_levels.pdf",
+      "bytes": 452492,
+      "title": "Gloss levels - Mat finish"
+    },
+    {
+      "file": "Grey-Shades_20-24_-34_-94.pdf",
+      "url": "https://techinfo.baslac.com/en/Grey-Shades_20-24_-34_-94.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Grey-Shades_20-24_-34_-94.pdf",
+      "bytes": 939958,
+      "title": "20-24, -34, -94 2K Primer Filler Grey Shade Poster"
+    },
+    {
+      "file": "Grey-Shades_20-35_-95.pdf",
+      "url": "https://techinfo.baslac.com/en/Grey-Shades_20-35_-95.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Grey-Shades_20-35_-95.pdf",
+      "bytes": 1586971,
+      "title": "Primer filler Grey shade poster 20-35, -95"
+    },
+    {
+      "file": "Mazda51K_chart_blend_in_process_1.pdf",
+      "url": "https://techinfo.baslac.com/en/Mazda51K_chart_blend_in_process_1.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Mazda51K_chart_blend_in_process_1.pdf",
+      "bytes": 543905,
+      "title": "Mazda Rhodium White Met, Color 51K for Basecoat, Blend in repair process on the adjacent panel"
+    },
+    {
+      "file": "Mazda51K_chart_blend_in_process_2.pdf",
+      "url": "https://techinfo.baslac.com/en/Mazda51K_chart_blend_in_process_2.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Mazda51K_chart_blend_in_process_2.pdf",
+      "bytes": 507374,
+      "title": "Mazda Rhodium White Met, Color 51K for Basecoat, Blend in repair process on the panel being repaired"
+    },
+    {
+      "file": "Mazda51K_chart_standard_process.pdf",
+      "url": "https://techinfo.baslac.com/en/Mazda51K_chart_standard_process.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Mazda51K_chart_standard_process.pdf",
+      "bytes": 465055,
+      "title": "Mazda Rhodium White Met, Color 51K for Basecoat, Application Process"
+    },
+    {
+      "file": "Plastic_Repair_System_NON_VOC.pdf",
+      "url": "https://techinfo.baslac.com/en/Plastic_Repair_System_NON_VOC.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Plastic_Repair_System_NON_VOC.pdf",
+      "bytes": 499970,
+      "title": "Plastic Repair System Non VOC"
+    },
+    {
+      "file": "Plastic_Repair_System_VOC.pdf",
+      "url": "https://techinfo.baslac.com/en/Plastic_Repair_System_VOC.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Plastic_Repair_System_VOC.pdf",
+      "bytes": 496972,
+      "title": "Plastic Repair System VOC"
+    },
+    {
+      "file": "Plastic_metallic_repair.pdf",
+      "url": "https://techinfo.baslac.com/en/Plastic_metallic_repair.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Plastic_metallic_repair.pdf",
+      "bytes": 449936,
+      "title": "Undercoats on metallic and plastic substrates"
+    },
+    {
+      "file": "Spray_guns.pdf",
+      "url": "https://techinfo.baslac.com/en/Spray_guns.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/Spray_guns.pdf",
+      "bytes": 454973,
+      "title": "Recommended spray guns"
+    },
+    {
+      "file": "TempChart_VOC.pdf",
+      "url": "https://techinfo.baslac.com/en/TempChart_VOC.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/TempChart_VOC.pdf",
+      "bytes": 1085887,
+      "title": "Temperature Chart VOC"
+    },
+    {
+      "file": "TempChart_non-VOC.pdf",
+      "url": "https://techinfo.baslac.com/en/TempChart_non-VOC.pdf",
+      "kind": "process",
+      "code": null,
+      "linkedFromWebsiteIndex": true,
+      "localPath": "/documents/products/baslac/TempChart_non-VOC.pdf",
+      "bytes": 1589386,
+      "title": "Temperature Chart non VOC"
+    }
+  ]
+}

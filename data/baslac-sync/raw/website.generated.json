@@ -1,0 +1,773 @@
+{
+  "meta": {
+    "source": "https://www.baslac.com/en-emea",
+    "architecture": "Drupal kartice; kartica = šifra(e) + naziv + osobine + packshot; grupna kartica nabraja proizvode u `<li>`",
+    "crawledAt": "2026-09-19T20:40:56.777Z",
+    "pages": 6,
+    "codes": 37,
+    "withName": 37,
+    "withImage": 20,
+    "byPage": {
+      "baslac-clearcoats": 7,
+      "baslac-primers": 10,
+      "baslac-putty": 1,
+      "baslac-additives": 20,
+      "baslac-base-and-topcoats": 0,
+      "products-systems": 0
+    },
+    "imageRule": "slika se vezuje samo uz dokaz; brojevi artikala iz imena fajla se ne objavljuju"
+  },
+  "pages": [
+    {
+      "key": "baslac-clearcoats",
+      "url": "https://www.baslac.com/en-emea/baslac-clearcoats",
+      "cards": 12,
+      "productCards": 7,
+      "tdsLinks": [],
+      "fetchedAt": "2026-09-19T20:40:56.777Z"
+    },
+    {
+      "key": "baslac-primers",
+      "url": "https://www.baslac.com/en-emea/baslac-primers",
+      "cards": 9,
+      "productCards": 7,
+      "tdsLinks": [
+        "https://techinfo.baslac.com/en/25-30_en.pdf",
+        "https://techinfo.baslac.com/en/21-10.pdf",
+        "https://techinfo.baslac.com/en/12-20.pdf",
+        "https://techinfo.baslac.com/en/12-20_en.pdf",
+        "https://techinfo.baslac.com/en/27-10.pdf",
+        "https://techinfo.baslac.com/en/27-10_en.pdf",
+        "https://techinfo.baslac.com/en/20-95_en.pdf",
+        "https://techinfo.baslac.com/en/21-20.pdf",
+        "https://techinfo.baslac.com/en/20-24_en.pdf"
+      ],
+      "fetchedAt": "2026-09-19T20:40:56.917Z"
+    },
+    {
+      "key": "baslac-putty",
+      "url": "https://www.baslac.com/en-emea/baslac-putty",
+      "cards": 6,
+      "productCards": 1,
+      "tdsLinks": [
+        "https://techinfo.baslac.com/en/12-20.pdf"
+      ],
+      "fetchedAt": "2026-09-19T20:40:57.037Z"
+    },
+    {
+      "key": "baslac-additives",
+      "url": "https://www.baslac.com/en-emea/baslac-additives",
+      "cards": 10,
+      "productCards": 2,
+      "tdsLinks": [],
+      "fetchedAt": "2026-09-19T20:40:57.161Z"
+    },
+    {
+      "key": "baslac-base-and-topcoats",
+      "url": "https://www.baslac.com/en-emea/baslac-base-and-topcoats",
+      "cards": 2,
+      "productCards": 0,
+      "tdsLinks": [],
+      "fetchedAt": "2026-09-19T20:40:57.290Z"
+    },
+    {
+      "key": "products-systems",
+      "url": "https://www.baslac.com/en-emea/products-systems",
+      "cards": 10,
+      "productCards": 0,
+      "tdsLinks": [],
+      "fetchedAt": "2026-09-19T20:40:57.440Z"
+    }
+  ],
+  "imageAssignments": [
+    {
+      "code": "40-10",
+      "page": "baslac-clearcoats",
+      "file": "baslac 5L 40-10 Clearcoat 57016010.jpg",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "40-440",
+      "page": "baslac-clearcoats",
+      "file": "Baslac 5L 40-440 Clearcoat 50400541.jpg",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "40-40",
+      "page": "baslac-clearcoats",
+      "file": "baslac 5L 40-40 Clearcoat 56520725.jpg",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "40-450",
+      "page": "baslac-clearcoats",
+      "file": "baslac 5L 40-450 Clearcoat 50508529.jpg",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "40-510",
+      "page": "baslac-clearcoats",
+      "file": "baslac 2L 40-510 Ambient Clear 50669602.jpg",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "40-620",
+      "page": "baslac-clearcoats",
+      "file": "40-620_2.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "40-100",
+      "page": "baslac-clearcoats",
+      "file": "baslac_40-100_fast_Clear.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "20-24",
+      "page": "baslac-primers",
+      "file": "Baslac_1L_20-24_50206943 Kopie.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "25-30",
+      "page": "baslac-primers",
+      "file": "baslac 4L 25-30 Primerfiller 52886357.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "21-10",
+      "page": "baslac-primers",
+      "file": "baslac_1L_21-10_56520407.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "12-20",
+      "page": "baslac-primers",
+      "file": "Baslac_1_5KG_2-20_50465904 Kopie.png",
+      "evidence": "kartica sa jednom šifrom"
+    },
+    {
+      "code": "27-10",
+      "page": "baslac-primers",
+      "file": "baslac 4L 27-10 Washprimer 56012032.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "20-35",
+      "page": "baslac-primers",
+      "file": "Baslac_3L_20-35_50533266 Kopie.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "21-20",
+      "page": "baslac-primers",
+      "file": "21-20.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "12-20",
+      "page": "baslac-putty",
+      "file": "12-20.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "50-15",
+      "page": "baslac-additives",
+      "file": "50-15 & 50-20.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "50-20",
+      "page": "baslac-additives",
+      "file": "50-15 & 50-20.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "60-20",
+      "page": "baslac-additives",
+      "file": "Baslac_1L_60-20_52881693.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "70-20",
+      "page": "baslac-additives",
+      "file": "Baslac_1L_70-20_54764782.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "80-10",
+      "page": "baslac-additives",
+      "file": "Baslac_1L_80-10_53228789.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "80-20",
+      "page": "baslac-additives",
+      "file": "Baslac_1L_80-20_53228895 Kopie.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    },
+    {
+      "code": "12-20",
+      "page": "products-systems",
+      "file": "12-20_new.png",
+      "evidence": "šifra u imenu zvaničnog fajla"
+    }
+  ],
+  "products": [
+    {
+      "code": "12-20",
+      "page": "baslac-primers",
+      "name": "2K Universal Bodyfiller",
+      "subtitle": "12-20 Universal Bodyfiller",
+      "features": [
+        "Coloured in light grey",
+        "Easy application and sanding",
+        "For all types of metal, aluminum or galvanized repairs",
+        "For use with hardening putty, mixing ratio 3%"
+      ],
+      "listedOn": [
+        "baslac-primers",
+        "baslac-putty"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1_5KG_2-20_50465904%20Kopie.png",
+        "https://www.baslac.com/data/sites/baslac/files/2024-02/12-20.png",
+        "https://www.baslac.com/data/sites/baslac/files/2024-02/12-20_new.png"
+      ]
+    },
+    {
+      "code": "20-24",
+      "page": "baslac-primers",
+      "name": "2K Primerfiller",
+      "subtitle": "baslac 2K PUR Primerfiller System",
+      "features": [
+        "Very effective 2K PUR baslac® rigging system",
+        "Medium grey, black and white",
+        "Very good environmental resistance",
+        "Fast drying and short drying times, in addition to wet on wet application"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_20-24_50206943%20Kopie.png"
+      ]
+    },
+    {
+      "code": "20-34",
+      "page": "baslac-primers",
+      "name": "2K Primerfiller",
+      "subtitle": "baslac 2K PUR Primerfiller System",
+      "features": [
+        "Very effective 2K PUR baslac® rigging system",
+        "Medium grey, black and white",
+        "Very good environmental resistance",
+        "Fast drying and short drying times, in addition to wet on wet application"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": []
+    },
+    {
+      "code": "20-35",
+      "page": "baslac-primers",
+      "name": "Wet-on-Wet",
+      "subtitle": "2K Primerfiller",
+      "features": [
+        "Non sanding Surfacer",
+        "Good and fast drying time (20 min before basecoat application)",
+        "No sanding needed before topcoat and basecoat",
+        "Good adhesion, can be applied directly on e-coat without sanding",
+        "Can be overcoated up to 5 days without intermediate sanding",
+        "Grey shade mixing with 20-95 black",
+        "Mixing ratio 3:1:1"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_3L_20-35_50533266%20Kopie.png"
+      ]
+    },
+    {
+      "code": "20-94",
+      "page": "baslac-primers",
+      "name": "2K Primerfiller",
+      "subtitle": "baslac 2K PUR Primerfiller System",
+      "features": [
+        "Very effective 2K PUR baslac® rigging system",
+        "Medium grey, black and white",
+        "Very good environmental resistance",
+        "Fast drying and short drying times, in addition to wet on wet application"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": []
+    },
+    {
+      "code": "20-95",
+      "page": "baslac-primers",
+      "name": "Wet-on-Wet",
+      "subtitle": "2K Primerfiller",
+      "features": [
+        "Non sanding Surfacer",
+        "Good and fast drying time (20 min before basecoat application)",
+        "No sanding needed before topcoat and basecoat",
+        "Good adhesion, can be applied directly on e-coat without sanding",
+        "Can be overcoated up to 5 days without intermediate sanding",
+        "Grey shade mixing with 20-95 black",
+        "Mixing ratio 3:1:1"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": []
+    },
+    {
+      "code": "21-10",
+      "page": "baslac-primers",
+      "name": "1K Plastic Primer",
+      "subtitle": "Multi-Purpose Plastic Adhesion Promoter",
+      "features": [
+        "Easy, safe and fast baslac® Multi-Purpose Plastic Adhesion Promoter",
+        "For all paintable plastics on used cars"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/baslac_1L_21-10_56520407.png"
+      ]
+    },
+    {
+      "code": "21-20",
+      "page": "baslac-primers",
+      "name": "Plastic Primer",
+      "subtitle": "Plastic Primer",
+      "features": [
+        "Adhesion promoter in aerosol can",
+        "Suitable on all plastics",
+        "Needs to be covered with baslac undercoat 20-",
+        "Needs to be well shaked before usage (approx. 2 min)",
+        "Flash of 15 min before undercoat application"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/21-20.png"
+      ]
+    },
+    {
+      "code": "25-30",
+      "page": "baslac-primers",
+      "name": "2K Primerfiller EP",
+      "subtitle": "baslac 2K Primerfiller EP",
+      "features": [
+        "High finish baslac® 2K Epoxy Primerfiller",
+        "One product for all repairs",
+        "Excellent anticorrosive properties",
+        "Can size: 4L",
+        "Hardener 55-10 EP",
+        "60-20/-30 Normal/Slow"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/baslac%204L%2025-30%20Primerfiller%2052886357.png"
+      ]
+    },
+    {
+      "code": "27-10",
+      "page": "baslac-primers",
+      "name": "2K Washprimer",
+      "subtitle": "baslac 2K Primer / Primerfiller",
+      "features": [
+        "Easy and quick to use 2K baslac® rigging / for aluminum and galvanized layer",
+        "Very good sanding properties"
+      ],
+      "listedOn": [
+        "baslac-primers"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/baslac%204L%2027-10%20Washprimer%2056012032.png"
+      ]
+    },
+    {
+      "code": "40-10",
+      "page": "baslac-clearcoats",
+      "name": "2K Panel Clear",
+      "subtitle": "2K Panel Clear",
+      "features": [
+        "Fast drying baslac® Clear for small repairs",
+        "Easy and safe to spray plus easy to polish"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%205L%2040-10%20Clearcoat%2057016010.jpg"
+      ]
+    },
+    {
+      "code": "40-100",
+      "page": "baslac-clearcoats",
+      "name": "High Speed 2K Clear VOC",
+      "subtitle": "High Speed 2K Clear VOC",
+      "features": [
+        "Lightning-fast curing",
+        "Compatible with existing hardeners",
+        "High performance at lower temperatures"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2025-04/baslac_40-100_fast_Clear.png"
+      ]
+    },
+    {
+      "code": "40-40",
+      "page": "baslac-clearcoats",
+      "name": "Universal Clear",
+      "subtitle": "Universal Clear",
+      "features": [
+        "High gloss baslac® Clear for all types of repairs",
+        "Excellent weathering resistance",
+        "Very good polishing behavior",
+        "Easy to use and safe to spray"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%205L%2040-40%20Clearcoat%2056520725.jpg"
+      ]
+    },
+    {
+      "code": "40-440",
+      "page": "baslac-clearcoats",
+      "name": "2K Clear VOC",
+      "subtitle": "2K Clear VOC",
+      "features": [
+        "Safe and easy baslac® VOC Clear for all types of repairs",
+        "Fast drying with very food polishing behaviour"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/Baslac%205L%2040-440%20Clearcoat%2050400541.jpg"
+      ]
+    },
+    {
+      "code": "40-450",
+      "page": "baslac-clearcoats",
+      "name": "HS Universal Clear VOC",
+      "subtitle": "HS Universal Clear VOC",
+      "features": [
+        "High solids content",
+        "Safe to spray and excellent levelling flow",
+        "Excellent surface hardness and polishing behaviour"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%205L%2040-450%20Clearcoat%2050508529.jpg"
+      ]
+    },
+    {
+      "code": "40-510",
+      "page": "baslac-clearcoats",
+      "name": "Ambient Clear VOC",
+      "subtitle": "Ambient Clear VOC",
+      "features": [
+        "Easy and safe to spray, available in 2L can",
+        "Fast drying: airdrying polishable after 1 hour 30 min at 20°C object temperature",
+        "Amazing spray security",
+        "High gloss level"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%202L%2040-510%20Ambient%20Clear%2050669602.jpg"
+      ]
+    },
+    {
+      "code": "40-620",
+      "page": "baslac-clearcoats",
+      "name": "2K Clear Mat VOC",
+      "subtitle": "2K Clear Mat VOC",
+      "features": [
+        "repair any kind of matt finish",
+        "right gloss levels for every car, every time",
+        "works with baslac clears, hardener and thinner"
+      ],
+      "listedOn": [
+        "baslac-clearcoats"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2025-04/40-620_2.png"
+      ]
+    },
+    {
+      "code": "50-05",
+      "page": "baslac-additives",
+      "name": "2K Hardener Ambient",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "50-10",
+      "page": "baslac-additives",
+      "name": "2K Primerfiller Hardener Extra Fast",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "50-15",
+      "page": "baslac-additives",
+      "name": "2K Hardener Fast",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/50-15%20%26%2050-20.png"
+      ],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "50-20",
+      "page": "baslac-additives",
+      "name": "2K Hardener Normal",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/50-15%20%26%2050-20.png"
+      ],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "50-30",
+      "page": "baslac-additives",
+      "name": "2K Hardener Slow",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "50-415",
+      "page": "baslac-additives",
+      "name": "2K VOC Hardener Fast",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "50-420",
+      "page": "baslac-additives",
+      "name": "2K VOC Hardener Normal",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "55-10",
+      "page": "baslac-additives",
+      "name": "Hardener EP",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "57-10",
+      "page": "baslac-additives",
+      "name": "Additive Washprimer",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "50- /55- /57- Hardeners (Slow to Extra Fast)"
+    },
+    {
+      "code": "60-05",
+      "page": "baslac-additives",
+      "name": "Speeding Reducer",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "60- /65- Reducers (Extra Slow to Fast)"
+    },
+    {
+      "code": "60-10",
+      "page": "baslac-additives",
+      "name": "Reducer Fast",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "60- /65- Reducers (Extra Slow to Fast)"
+    },
+    {
+      "code": "60-20",
+      "page": "baslac-additives",
+      "name": "Reducer Normal",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_60-20_52881693.png"
+      ],
+      "groupCard": "60- /65- Reducers (Extra Slow to Fast)"
+    },
+    {
+      "code": "60-30",
+      "page": "baslac-additives",
+      "name": "Reducer Slow",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "60- /65- Reducers (Extra Slow to Fast)"
+    },
+    {
+      "code": "60-40",
+      "page": "baslac-additives",
+      "name": "Reducer Extra Slow",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "60- /65- Reducers (Extra Slow to Fast)"
+    },
+    {
+      "code": "65-10",
+      "page": "baslac-additives",
+      "name": "Blending Reducer",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "60- /65- Reducers (Extra Slow to Fast)"
+    },
+    {
+      "code": "70-10",
+      "page": "baslac-additives",
+      "name": "Silicone Remover for oil, silicone and grease",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "70- Cleaning Solvents"
+    },
+    {
+      "code": "70-20",
+      "page": "baslac-additives",
+      "name": "Plastic Cleaner for ideal preparation of plastic parts",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_70-20_54764782.png"
+      ],
+      "groupCard": "70- Cleaning Solvents"
+    },
+    {
+      "code": "70-45",
+      "page": "baslac-additives",
+      "name": "Cleaner Basecoat 45",
+      "subtitle": null,
+      "features": [],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [],
+      "groupCard": "70- Cleaning Solvents"
+    },
+    {
+      "code": "80-10",
+      "page": "baslac-additives",
+      "name": "Additive Flex",
+      "subtitle": "baslac Plasticizing Additive",
+      "features": [
+        "baslac Plasticizer for PUR products (30- Topcoat, 40- Clears, 20-24 PUR Primer)"
+      ],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_80-10_53228789.png"
+      ]
+    },
+    {
+      "code": "80-20",
+      "page": "baslac-additives",
+      "name": "Additive Mat",
+      "subtitle": "HS Matting Agent",
+      "features": [
+        "baslac HS Matting Agent for 30- Topcoat and 40- Clears"
+      ],
+      "listedOn": [
+        "baslac-additives"
+      ],
+      "images": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_80-20_53228895%20Kopie.png"
+      ]
+    }
+  ]
+}

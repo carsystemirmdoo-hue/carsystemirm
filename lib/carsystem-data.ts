@@ -1,6 +1,9 @@
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
-import { baslacCatalogProducts } from "@/lib/baslac-catalog-products";
+import {
+  applyBaslacSyncEnrichment,
+  baslacCatalogProducts,
+} from "@/lib/baslac-catalog-products";
 import { getBefarCatalogProducts } from "@/lib/befar-catalog-products";
 import {
   applyRmCatalogEnrichment,
@@ -160,6 +163,16 @@ export type ProductCatalogMetadata = {
   sourceReference: string | null;
   colorSource: ProductColorSource;
   colorConfidence: ProductColorConfidence;
+  /**
+   * Zapis koji nosi JAVNI identitet svoje porodice.
+   *
+   * Ime porodice se inače izvodi iz zajedničkog prefiksa naziva varijanti. To radi dok su
+   * varijante isti proizvod u više nijansi ili pakovanja, ali ne radi za sistem za
+   * nijansiranje: tamo su varijante mixing baze, pa porodica ostaje bez zvaničnog imena.
+   * Kada jedan zapis nosi identitet sistema, on ga ovde i navodi — a `slug` zaključava
+   * postojeću adresu porodice, da preimenovanje ne pomeri URL.
+   */
+  familyIdentity?: { name: string; slug: string };
 };
 
 export const rmSystemSlugs = [
@@ -2484,7 +2497,10 @@ assertBaslacEnrichmentKeys(
 
 export const products: CarsystemProduct[] = architecturedProducts.map((product) =>
   product.brandSlug === "baslac"
-    ? applyBaslacEnrichment(product, (slug) => knownProductSlugs.has(slug))
+    ? // Dopuna sa zvaničnog izvora ide POSLE dosijea: sync zna aktuelni tehnički list.
+      applyBaslacSyncEnrichment(
+        applyBaslacEnrichment(product, (slug) => knownProductSlugs.has(slug)),
+      )
     : product.brandSlug === "carsystem"
       ? applyCarsystemCatalogEnrichment(product)
       : product.brandSlug === "carfit"

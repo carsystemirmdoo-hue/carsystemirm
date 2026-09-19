@@ -1,0 +1,55 @@
+{
+  "20-22": {
+    "sourceHash": "21a79e9e5aa7ddc6",
+    "productType": "2K prajmer-punilo",
+    "subtype": "Universal Sanding Filler · podloga koja se brusi",
+    "shortDescription": "Univerzalno dvokomponentno punilo za brušenje, dobrih svojstava punjenja i lakog brušenja.",
+    "longDescription": "20-22 2K Primerfiller je univerzalno punilo za brušenje sa dobrim svojstvima punjenja. Radna smeša se priprema u odnosu 5:1:1 i nanosi u dva sloja, do debljine filma 50-70 μm. Posle sušenja brusi se granulacijom P400 / P500.",
+    "purpose": "Punjenje i izravnavanje podloge pre lakiranja",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "5:1:1" },
+      { "label": "Viskozitet prskanja", "value": "DIN 4: 25-29 s" },
+      { "label": "Vreme upotrebe smeše", "value": "60 min" },
+      { "label": "Mlaznica", "value": "1,6-1,8 mm" },
+      { "label": "Broj slojeva", "value": "2" },
+      { "label": "Debljina filma", "value": "50-70 μm" },
+      { "label": "Brušenje", "value": "P400 / P500" },
+      { "label": "Sušenje", "value": "20°C: 3 h · 60°C: 30 min · infracrveno (kratkotalasno): 8 min · infracrveno (srednjetalasno): 10-15 min" }
+    ],
+    "applications": [
+      "Univerzalna podloga koja se brusi",
+      "Izravnavanje površine pre nanošenja boje"
+    ],
+    "benefits": [
+      { "title": "Dobro punjenje", "description": "Punilo ima dobra svojstva punjenja podloge." },
+      { "title": "Lako brušenje", "description": "Osušen sloj se lako brusi." }
+    ],
+    "advice": null
+  },
+  "21-10": {
+    "sourceHash": "cdd3a993f3bbf603",
+    "productType": "1K prajmer za plastiku",
+    "subtype": "Multi-Purpose Plastic Adhesion Promoter",
+    "shortDescription": "Jednokomponentni promoter prionljivosti, spreman za upotrebu, za sve plastike na vozilima koje se mogu lakirati.",
+    "longDescription": "21-10 1K Plastic Primer je višenamenski promoter prionljivosti, namenjen svim plastikama na korišćenim vozilima koje se mogu lakirati. Isporučuje se spreman za upotrebu i nanosi HVLP pištoljem u jednom sloju, do debljine filma 10 μm. Vreme upotrebe je neograničeno, a odzračivanje kratko — 15 min pre nanošenja punila.",
+    "purpose": "Prionljivost na plastičnim delovima pre punila",
+    "facts": [
+      { "label": "Mlaznica", "value": "1,3-1,4 mm" },
+      { "label": "Broj slojeva", "value": "1" },
+      { "label": "Debljina filma", "value": "10 μm" },
+      { "label": "Razmak između slojeva", "value": "15 min pre nanošenja punila" }
+    ],
+    "applications": [
+      "Priprema plastičnih delova pre nanošenja punila",
+      "Nanošenje HVLP pištoljem, bez mešanja",
+      "Lakiranje plastike na korišćenim vozilima"
+    ],
+    "benefits": [
+      { "title": "Spreman za upotrebu", "description": "Isporučuje se spreman za nanošenje, bez pripreme smeše." },
+      { "title": "Neograničeno vreme upotrebe", "description": "Proizvod nema ograničeno vreme upotrebe." },
+      { "title": "Jednostavno i sigurno nanošenje", "description": "Nanosi se jednostavno, sigurno i brzo." },
+      { "title": "Kratko odzračivanje", "description": "Vreme odzračivanja pre nanošenja punila je kratko." }
+    ],
+    "advice": "Pre upotrebe snažno promućkati 2 min. Nanosi se HVLP pištoljem."
+  }
+}

@@ -1,0 +1,2150 @@
+{
+  "meta": {
+    "rule": "CURRENT = stranica kategorije ILI indeks tehničkih listova; otvoreni direktorijum sam nije dokaz",
+    "websiteCrawledAt": "2026-09-19T20:40:56.777Z"
+  },
+  "summary": {
+    "CURRENT_PRODUCT_FAMILIES": 56,
+    "CURRENT_OFFICIAL_CODES": 52,
+    "CURRENT_SYSTEMS": 4,
+    "CURRENT_PUBLIC_TONERS": 0,
+    "NESTED_MIXING_COMPONENTS": 4,
+    "UNCERTAIN_NOT_CUSTOMER_FACING": 1,
+    "NEW_PRODUCTS_TO_IMPORT": 44,
+    "EXISTING_PRODUCTS_TO_ENRICH": 12,
+    "WITH_OFFICIAL_IMAGE": 20,
+    "MISSING_OFFICIAL_ASSETS": 32,
+    "MISSING_LOCALIZATION": 0,
+    "PROMOTED_FROM_LINE": [
+      "45-R45",
+      "45-W10"
+    ],
+    "actions": {
+      "ENRICH_EXISTING": 12,
+      "IMPORT": 44,
+      "NEST_IN_SYSTEM": 4,
+      "SKIPPED_UNCERTAIN": 1
+    },
+    "byCategory": {
+      "boje": 46,
+      "ciscenje": 3,
+      "kitovi": 2,
+      "sprejevi": 1
+    },
+    "planErrors": {
+      "duplicateSlugs": [],
+      "duplicateCodes": []
+    }
+  },
+  "items": [
+    {
+      "kind": "system",
+      "sourceKey": "line-30",
+      "code": null,
+      "officialName": "baslac Topcoat 30",
+      "familySlug": "baslac-line-30",
+      "existingFamily": true,
+      "action": "IMPORT",
+      "slug": "baslac-topcoat-30",
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "components": [
+        "30-S00"
+      ],
+      "sourceHash": "b8af880e78ec94c1",
+      "images": 0,
+      "missingOfficialAsset": true
+    },
+    {
+      "kind": "system",
+      "sourceKey": "line-30-cv",
+      "code": null,
+      "officialName": "baslac Topcoat 30 CV",
+      "familySlug": "baslac-line-30-cv",
+      "existingFamily": true,
+      "action": "IMPORT",
+      "slug": "baslac-topcoat-30-cv",
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "components": [
+        "30-S01"
+      ],
+      "sourceHash": "beb5b33a89d59c2d",
+      "images": 0,
+      "missingOfficialAsset": true
+    },
+    {
+      "kind": "system",
+      "sourceKey": "line-35",
+      "code": null,
+      "officialName": "baslac Basecoat 35",
+      "familySlug": "baslac-line-35",
+      "existingFamily": true,
+      "action": "IMPORT",
+      "slug": "baslac-basecoat-35",
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "components": [
+        "35-M00"
+      ],
+      "sourceHash": "ad6a6cdf4733b62b",
+      "images": 0,
+      "missingOfficialAsset": true
+    },
+    {
+      "kind": "system",
+      "sourceKey": "line-45",
+      "code": null,
+      "officialName": "baslac Basecoat 45",
+      "familySlug": "baslac-line-45",
+      "existingFamily": true,
+      "action": "IMPORT",
+      "slug": "baslac-basecoat-45",
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "components": [
+        "45-W00"
+      ],
+      "sourceHash": "a84ba3ca011a8030",
+      "images": 0,
+      "missingOfficialAsset": true
+    },
+    {
+      "kind": "product",
+      "sourceKey": "11-40",
+      "code": "11-40",
+      "officialName": null,
+      "action": "SKIPPED_UNCERTAIN",
+      "reason": "zvanični TDS postoji, ali aktuelni sajt ne potvrđuje",
+      "slug": null,
+      "taxonomy": null,
+      "images": 0
+    },
+    {
+      "kind": "product",
+      "sourceKey": "12-20",
+      "code": "12-20",
+      "officialName": "12-20 Bodyfiller Universal",
+      "displayName": "Bodyfiller Universal",
+      "role": "bodyfiller",
+      "action": "IMPORT",
+      "slug": "baslac-12-20-bodyfiller-universal",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "rule": "bodyfiller"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1_5KG_2-20_50465904%20Kopie.png",
+        "https://www.baslac.com/data/sites/baslac/files/2024-02/12-20.png",
+        "https://www.baslac.com/data/sites/baslac/files/2024-02/12-20_new.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "56-20"
+        ],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/12-20.pdf",
+      "sourceHash": "2e184d8939cef42f"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "20-22",
+      "code": "20-22",
+      "officialName": "20-22 2K Primerfiller",
+      "displayName": "2K Primerfiller",
+      "role": "undercoat",
+      "action": "IMPORT",
+      "slug": "baslac-20-22-2k-primerfiller",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [
+          "50-15"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30"
+        ],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/20-22.pdf",
+      "sourceHash": "21a79e9e5aa7ddc6"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "20-24",
+      "code": "20-24",
+      "officialName": "20-24 2K Primerfiller, grey",
+      "displayName": "2K Primerfiller, grey",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-20-24-2k-primerfiller-grey-1l",
+      "existingFamily": "20-24-2k-primerfiller-grey",
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_20-24_50206943%20Kopie.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-05",
+          "50-15",
+          "50-20"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30",
+          "60-40"
+        ],
+        "additives": [
+          "80-10"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/20-24.pdf",
+      "sourceHash": "dd3cb43621b18804"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "20-34",
+      "code": "20-34",
+      "officialName": "20-34 2K Primerfiller White",
+      "displayName": "2K Primerfiller White",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-20-34-2k-primerfiller-white-1l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-20-34-2k-primerfiller-white-1l",
+      "existingFamily": "20-34-2k-primerfiller-white",
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [
+          "50-05",
+          "50-15",
+          "50-20"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30",
+          "60-40"
+        ],
+        "additives": [
+          "80-10"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/20-34.pdf",
+      "sourceHash": "9a1ffcd5d8ea1518"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "20-35",
+      "code": "20-35",
+      "officialName": "20-35 2K Primerfiller white",
+      "displayName": "2K Primerfiller white",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_3L_20-35_50533266%20Kopie.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-15",
+          "50-20"
+        ],
+        "reducers": [
+          "60-20",
+          "60-30"
+        ],
+        "additives": [
+          "80-10",
+          "80-30"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/20-35.pdf",
+      "sourceHash": "4bee99ada2786e89"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "20-94",
+      "code": "20-94",
+      "officialName": "20-94 2K Primerfiller Black",
+      "displayName": "2K Primerfiller Black",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-20-94-2k-primerfiller-black-1l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-20-94-2k-primerfiller-black-1l",
+      "existingFamily": "20-94-2k-primerfiller-black",
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [
+          "50-05",
+          "50-15",
+          "50-20"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30"
+        ],
+        "additives": [
+          "80-10"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/20-94.pdf",
+      "sourceHash": "be0928888f7f61de"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "20-95",
+      "code": "20-95",
+      "officialName": "20-95 2K Primerfiller black",
+      "displayName": "2K Primerfiller black",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [
+          "50-15",
+          "50-20"
+        ],
+        "reducers": [
+          "60-20",
+          "60-30"
+        ],
+        "additives": [
+          "80-10",
+          "80-30"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/20-95.pdf",
+      "sourceHash": "4b4634f95d5e1adc"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "21-10",
+      "code": "21-10",
+      "officialName": "21-10 1K Plastic Primer",
+      "displayName": "1K Plastic Primer",
+      "role": "undercoat",
+      "action": "IMPORT",
+      "slug": "baslac-21-10-1k-plastic-primer",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/baslac_1L_21-10_56520407.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/21-10.pdf",
+      "sourceHash": "cdd3a993f3bbf603"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "21-11",
+      "code": "21-11",
+      "officialName": "21-11 Plastic Primer VOC",
+      "displayName": "Plastic Primer VOC",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-21-11-2k-plastic-primer-voc-1l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-21-11-2k-plastic-primer-voc-1l",
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [
+          "50-15"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20"
+        ],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/21-11.pdf",
+      "sourceHash": "d1247cc3c6ad96fa"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "21-20",
+      "code": "21-20",
+      "officialName": "21-20 Plastic Primer",
+      "displayName": "Plastic Primer",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-21-20-plastic-primer-400ml",
+      "change": "ENRICH",
+      "existingSlug": "baslac-21-20-plastic-primer-400ml",
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "sprejevi",
+        "programSlug": "aerosoli",
+        "phaseSlug": "podloga",
+        "visualType": "spray",
+        "rule": "aerosol-undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/21-20.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/21-20.pdf",
+      "sourceHash": "879d2d55e36432b7"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "25-30",
+      "code": "25-30",
+      "officialName": "25-30 2K Primerfiller EP",
+      "displayName": "2K Primerfiller EP",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-25-30-2k-primerfiller-ep-4l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-25-30-2k-primerfiller-ep-4l",
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/baslac%204L%2025-30%20Primerfiller%2052886357.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "55-10"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30"
+        ],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/25-30.pdf",
+      "sourceHash": "db601444f8022b81"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "27-10",
+      "code": "27-10",
+      "officialName": "27-10 2K Washprimer",
+      "displayName": "2K Washprimer",
+      "role": "undercoat",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-27-10-2k-washprimer-1l",
+      "change": "ENRICH",
+      "existingSlug": "baslac-27-10-2k-washprimer-1l",
+      "existingFamily": "27-10-2k-washprimer",
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/baslac%204L%2027-10%20Washprimer%2056012032.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30"
+        ],
+        "additives": [
+          "57-10",
+          "57-30"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/27-10.pdf",
+      "sourceHash": "58d3c67b03d0fd89"
+    },
+    {
+      "kind": "component",
+      "sourceKey": "30-s00",
+      "code": "30-S00",
+      "officialName": "30-S00 30- Topcoat, direct gloss",
+      "action": "NEST_IN_SYSTEM",
+      "system": "line-30",
+      "slug": "baslac-30-s00",
+      "taxonomy": null,
+      "images": 0
+    },
+    {
+      "kind": "component",
+      "sourceKey": "30-s01",
+      "code": "30-S01",
+      "officialName": "30-S01 30 CV Topcoat",
+      "action": "NEST_IN_SYSTEM",
+      "system": "line-30-cv",
+      "slug": "baslac-30-s01",
+      "taxonomy": null,
+      "images": 0
+    },
+    {
+      "kind": "component",
+      "sourceKey": "35-m00",
+      "code": "35-M00",
+      "officialName": "35-M00 35- Basecoat",
+      "action": "NEST_IN_SYSTEM",
+      "system": "line-35",
+      "slug": null,
+      "taxonomy": null,
+      "images": 0
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-10",
+      "code": "40-10",
+      "officialName": "40-10 2K Panel Clear",
+      "displayName": "2K Panel Clear",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-10-2k-panel-clear",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%205L%2040-10%20Clearcoat%2057016010.jpg"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-15",
+          "50-20",
+          "50-30"
+        ],
+        "reducers": [
+          "60-10",
+          "60-20",
+          "60-30",
+          "60-40"
+        ],
+        "additives": [
+          "80-10",
+          "80-20"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-10.pdf",
+      "sourceHash": "480141663472828c"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-100",
+      "code": "40-100",
+      "officialName": "40-100 High Speed 2K Clear VOC",
+      "displayName": "High Speed 2K Clear VOC",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-100-high-speed-2k-clear-voc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2025-04/baslac_40-100_fast_Clear.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-100.pdf",
+      "sourceHash": "f591c4a62979cc73"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-40",
+      "code": "40-40",
+      "officialName": "40-40 2K Universal Clear",
+      "displayName": "2K Universal Clear",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-40-2k-universal-clear",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%205L%2040-40%20Clearcoat%2056520725.jpg"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-20",
+          "50-30"
+        ],
+        "reducers": [
+          "60-05",
+          "60-10",
+          "60-20",
+          "60-30",
+          "60-40"
+        ],
+        "additives": [
+          "80-10",
+          "80-20"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-40.pdf",
+      "sourceHash": "240d661b3a2913fc"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-440",
+      "code": "40-440",
+      "officialName": "40-440 2K VOC Clear",
+      "displayName": "2K VOC Clear",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-440-2k-voc-clear",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/Baslac%205L%2040-440%20Clearcoat%2050400541.jpg"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-415",
+          "50-420",
+          "50-430"
+        ],
+        "reducers": [],
+        "additives": [
+          "80-10",
+          "80-20"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-440.pdf",
+      "sourceHash": "77ae1adc6ff7f09a"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-450",
+      "code": "40-450",
+      "officialName": "40-450 Universal Clear VOC",
+      "displayName": "Universal Clear VOC",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-450-universal-clear-voc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%205L%2040-450%20Clearcoat%2050508529.jpg"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-415",
+          "50-420",
+          "50-430"
+        ],
+        "reducers": [
+          "60-05",
+          "60-10",
+          "60-20",
+          "60-30"
+        ],
+        "additives": [
+          "80-10",
+          "80-20"
+        ]
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-450.pdf",
+      "sourceHash": "ce313c777016ca61"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-510",
+      "code": "40-510",
+      "officialName": "40-510 Ambient clear",
+      "displayName": "Ambient clear",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-510-ambient-clear",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2024-11/baslac%202L%2040-510%20Ambient%20Clear%2050669602.jpg"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-510",
+          "50-530"
+        ],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-510.pdf",
+      "sourceHash": "04828ec4e53f5b82"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "40-620",
+      "code": "40-620",
+      "officialName": "40-620 2K Clear mat VOC",
+      "displayName": "2K Clear mat VOC",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "slug": "baslac-40-620-2k-clear-mat-voc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2025-04/40-620_2.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [
+          "50-420"
+        ],
+        "reducers": [
+          "60-20"
+        ],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/40-620.pdf",
+      "sourceHash": "b15bb8ee682a69cb"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "45-r45",
+      "code": "45-R45",
+      "officialName": "45-R45 Dilutant",
+      "displayName": "Dilutant",
+      "role": "reducer",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-45-r45",
+      "change": "ENRICH",
+      "existingSlug": "baslac-45-r45",
+      "existingFamily": null,
+      "promotedFromLine": true,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat-by-code"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "45-W00"
+      ],
+      "tds": "https://techinfo.baslac.com/en/45-R45.pdf",
+      "sourceHash": "e26efd2a5eaf19e8"
+    },
+    {
+      "kind": "component",
+      "sourceKey": "45-w00",
+      "code": "45-W00",
+      "officialName": "45-W00 45- Basecoat",
+      "action": "NEST_IN_SYSTEM",
+      "system": "line-45",
+      "slug": "baslac-45-w00",
+      "taxonomy": null,
+      "images": 0
+    },
+    {
+      "kind": "product",
+      "sourceKey": "45-w10",
+      "code": "45-W10",
+      "officialName": "45-W10 3-Stage Additive and Blending Clear",
+      "displayName": "3-Stage Additive and Blending Clear",
+      "role": "additive",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-45-w10",
+      "change": "ENRICH",
+      "existingSlug": "baslac-45-w10",
+      "existingFamily": null,
+      "promotedFromLine": true,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat-by-code"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/45-W10.pdf",
+      "sourceHash": "261205137407a5e2"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-05",
+      "code": "50-05",
+      "officialName": "50-05 2K Hardener Ambient UC",
+      "displayName": "2K Hardener Ambient UC",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-05-2k-hardener-ambient-uc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-24",
+        "20-34",
+        "20-94"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-05.pdf",
+      "sourceHash": "378033d8ebc3e3fa"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-10",
+      "code": "50-10",
+      "officialName": "50-10 2K Primerfiller Hardener Extra Fast",
+      "displayName": "2K Primerfiller Hardener Extra Fast",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-10-2k-primerfiller-hardener-extra-fast",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/50-10.pdf",
+      "sourceHash": "97d00349dff21913"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-15",
+      "code": "50-15",
+      "officialName": "50-15 2K Hardener Fast",
+      "displayName": "2K Hardener Fast",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-15-2k-hardener-fast",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/50-15%20%26%2050-20.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-22",
+        "20-24",
+        "20-34",
+        "20-35",
+        "20-94",
+        "20-95",
+        "21-11",
+        "30-S00",
+        "40-10"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-15.pdf",
+      "sourceHash": "13aaed54d437684e"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-20",
+      "code": "50-20",
+      "officialName": "50-20 Hardener Normal",
+      "displayName": "Hardener Normal",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-20-hardener-normal",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/50-15%20%26%2050-20.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-24",
+        "20-34",
+        "20-35",
+        "20-94",
+        "20-95",
+        "30-S00",
+        "40-10",
+        "40-40"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-20.pdf",
+      "sourceHash": "970ac9633ccdc002"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-30",
+      "code": "50-30",
+      "officialName": "50-30 2K Hardener Slow",
+      "displayName": "2K Hardener Slow",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-30-2k-hardener-slow",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "30-S00",
+        "40-10",
+        "40-40"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-30.pdf",
+      "sourceHash": "6eba49f5e18e790b"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-415",
+      "code": "50-415",
+      "officialName": "50-415 2K Clear Hardener Fast VOC",
+      "displayName": "2K Clear Hardener Fast VOC",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-415-2k-clear-hardener-fast-voc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-440",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-415.pdf",
+      "sourceHash": "2d31c05c3267bbaa"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-420",
+      "code": "50-420",
+      "officialName": "50-420 2K Clear Hardener Normal VOC",
+      "displayName": "2K Clear Hardener Normal VOC",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-420-2k-clear-hardener-normal-voc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-440",
+        "40-450",
+        "40-620"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-420.pdf",
+      "sourceHash": "89d9a957cd40fdd7"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-430",
+      "code": "50-430",
+      "officialName": "50-430 2K Clear Hardener Slow VOC",
+      "displayName": "2K Clear Hardener Slow VOC",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-430-2k-clear-hardener-slow-voc",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-440",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-430.pdf",
+      "sourceHash": "4d3fb9e189108994"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-45",
+      "code": "50-45",
+      "officialName": "50-45 2K Activator",
+      "displayName": "2K Activator",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-45-2k-activator",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "45-W00"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-45.pdf",
+      "sourceHash": "f8ea6198ccbe98d3"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-510",
+      "code": "50-510",
+      "officialName": "50-510 Ambient Clear Hardener",
+      "displayName": "Ambient Clear Hardener",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-510-ambient-clear-hardener",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-510"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-510.pdf",
+      "sourceHash": "0eb0e63601a42313"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "50-530",
+      "code": "50-530",
+      "officialName": "50-530 Ambient Clear Hardener slow",
+      "displayName": "Ambient Clear Hardener slow",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-50-530-ambient-clear-hardener-slow",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-510"
+      ],
+      "tds": "https://techinfo.baslac.com/en/50-530.pdf",
+      "sourceHash": "4d648bd224c4ec3e"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "51-515",
+      "code": "51-515",
+      "officialName": "51-515 2K Hardener CV fast",
+      "displayName": "2K Hardener CV fast",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-51-515-2k-hardener-cv-fast",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "30-S01"
+      ],
+      "tds": "https://techinfo.baslac.com/en/51-515.pdf",
+      "sourceHash": "0063d89b5d196ff3"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "51-520",
+      "code": "51-520",
+      "officialName": "51-520 2K Hardener CV Normal",
+      "displayName": "2K Hardener CV Normal",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-51-520-2k-hardener-cv-normal",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "30-S01"
+      ],
+      "tds": "https://techinfo.baslac.com/en/51-520.pdf",
+      "sourceHash": "dd6f39f9af95d93c"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "51-530",
+      "code": "51-530",
+      "officialName": "51-530 2K Hardener CV slow",
+      "displayName": "2K Hardener CV slow",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-51-530-2k-hardener-cv-slow",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/51-530.pdf",
+      "sourceHash": "a491cf900fb0dc51"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "55-10",
+      "code": "55-10",
+      "officialName": "55-10 EP Hardener",
+      "displayName": "EP Hardener",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-55-10-ep-hardener",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "25-30"
+      ],
+      "tds": "https://techinfo.baslac.com/en/55-10.pdf",
+      "sourceHash": "d97f30695eb9b1a8"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "56-20",
+      "code": "56-20",
+      "officialName": "56-20 Bodyfiller Hardener",
+      "displayName": "Bodyfiller Hardener",
+      "role": "hardener",
+      "action": "IMPORT",
+      "slug": "baslac-56-20-bodyfiller-hardener",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "rule": "bodyfiller-hardener"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "12-20"
+      ],
+      "tds": "https://techinfo.baslac.com/en/56-20.pdf",
+      "sourceHash": "af7ba5df78dbceeb"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "57-10",
+      "code": "57-10",
+      "officialName": "57-10 Additive Washprimer",
+      "displayName": "Additive Washprimer",
+      "role": "additive",
+      "action": "IMPORT",
+      "slug": "baslac-57-10-additive-washprimer",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "27-10"
+      ],
+      "tds": "https://techinfo.baslac.com/en/57-10.pdf",
+      "sourceHash": "dbf5a186dafaa486"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "57-30",
+      "code": "57-30",
+      "officialName": "57-30 Additive Washprimer slow",
+      "displayName": "Additive Washprimer slow",
+      "role": "additive",
+      "action": "IMPORT",
+      "slug": "baslac-57-30-additive-washprimer-slow",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "27-10"
+      ],
+      "tds": "https://techinfo.baslac.com/en/57-30.pdf",
+      "sourceHash": "3c387eddd315eb57"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "60-05",
+      "code": "60-05",
+      "officialName": "60-05 Speeding Reducer",
+      "displayName": "Speeding Reducer",
+      "role": "reducer",
+      "action": "IMPORT",
+      "slug": "baslac-60-05-speeding-reducer",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-40",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/60-05.pdf",
+      "sourceHash": "10bbb511db961de8"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "60-10",
+      "code": "60-10",
+      "officialName": "60-10 Reducer Universal Fast",
+      "displayName": "Reducer Universal Fast",
+      "role": "reducer",
+      "action": "IMPORT",
+      "slug": "baslac-60-10-reducer-universal-fast",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-22",
+        "20-24",
+        "20-34",
+        "20-94",
+        "21-11",
+        "25-30",
+        "27-10",
+        "30-S00",
+        "35-M00",
+        "40-10",
+        "40-40",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/60-10.pdf",
+      "sourceHash": "7c44df2e4dbd0921"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "60-20",
+      "code": "60-20",
+      "officialName": "60-20",
+      "displayName": "Reducer Normal",
+      "role": "reducer",
+      "action": "ENRICH_EXISTING",
+      "slug": "baslac-60-20-razredjivac",
+      "change": "ENRICH",
+      "existingSlug": "baslac-60-20-razredjivac",
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_60-20_52881693.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-22",
+        "20-24",
+        "20-34",
+        "20-35",
+        "20-94",
+        "20-95",
+        "21-11",
+        "25-30",
+        "27-10",
+        "30-S00",
+        "35-M00",
+        "40-10",
+        "40-40",
+        "40-450",
+        "40-620"
+      ],
+      "tds": "https://techinfo.baslac.com/en/60-20.pdf",
+      "sourceHash": "d3cf4c83f983f07c"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "60-30",
+      "code": "60-30",
+      "officialName": "60-30 Reducer Universal Slow",
+      "displayName": "Reducer Universal Slow",
+      "role": "reducer",
+      "action": "IMPORT",
+      "slug": "baslac-60-30-reducer-universal-slow",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-22",
+        "20-24",
+        "20-34",
+        "20-35",
+        "20-94",
+        "20-95",
+        "25-30",
+        "27-10",
+        "30-S00",
+        "35-M00",
+        "40-10",
+        "40-40",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/60-30.pdf",
+      "sourceHash": "167d91cc2b584e3a"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "60-40",
+      "code": "60-40",
+      "officialName": "60-40 Reducer Universal Extra Slow",
+      "displayName": "Reducer Universal Extra Slow",
+      "role": "reducer",
+      "action": "IMPORT",
+      "slug": "baslac-60-40-reducer-universal-extra-slow",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-24",
+        "20-34",
+        "30-S00",
+        "35-M00",
+        "40-10",
+        "40-40"
+      ],
+      "tds": "https://techinfo.baslac.com/en/60-40.pdf",
+      "sourceHash": "4ac8a83b9180926e"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "65-10",
+      "code": "65-10",
+      "officialName": "65-10 Blending Reducer",
+      "displayName": "Blending Reducer",
+      "role": "reducer",
+      "action": "IMPORT",
+      "slug": "baslac-65-10-blending-reducer",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "reducer"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/65-10.pdf",
+      "sourceHash": "af8d4c3bd73aeb8f"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "70-10",
+      "code": "70-10",
+      "officialName": "70-10 Silicone Remover for oil, silicone and grease",
+      "displayName": "Silicone Remover for oil, silicone and grease",
+      "role": "cleaner",
+      "action": "IMPORT",
+      "slug": "baslac-70-10-silicone-remover-for-oil-silicone-and-grease",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/70-10.pdf",
+      "sourceHash": "283f58dad76a2f66"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "70-20",
+      "code": "70-20",
+      "officialName": "70-20 Cleaner Plastic",
+      "displayName": "Cleaner Plastic",
+      "role": "cleaner",
+      "action": "IMPORT",
+      "slug": "baslac-70-20-cleaner-plastic",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_70-20_54764782.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/70-20.pdf",
+      "sourceHash": "75cfbc31fb3a9d29"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "70-45",
+      "code": "70-45",
+      "officialName": "70-45 Cleaner",
+      "displayName": "Cleaner",
+      "role": "cleaner",
+      "action": "IMPORT",
+      "slug": "baslac-70-45-cleaner",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [],
+      "tds": "https://techinfo.baslac.com/en/70-45.pdf",
+      "sourceHash": "6bd0465ec4c82acb"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "80-10",
+      "code": "80-10",
+      "officialName": "80-10 Additive Flex",
+      "displayName": "Additive Flex",
+      "role": "additive",
+      "action": "IMPORT",
+      "slug": "baslac-80-10-additive-flex",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_80-10_53228789.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-24",
+        "20-34",
+        "20-35",
+        "20-94",
+        "20-95",
+        "40-10",
+        "40-40",
+        "40-440",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/80-10.pdf",
+      "sourceHash": "0fba84b791fd4585"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "80-20",
+      "code": "80-20",
+      "officialName": "80-20 Additive Mat",
+      "displayName": "Additive Mat",
+      "role": "additive",
+      "action": "IMPORT",
+      "slug": "baslac-80-20-additive-mat",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "officialImages": [
+        "https://www.baslac.com/data/sites/baslac/files/2023-11/Baslac_1L_80-20_53228895%20Kopie.png"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "40-10",
+        "40-40",
+        "40-440",
+        "40-450"
+      ],
+      "tds": "https://techinfo.baslac.com/en/80-20.pdf",
+      "sourceHash": "c41fbb9db8930aa4"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "80-30",
+      "code": "80-30",
+      "officialName": "80-30 Additive Plast",
+      "displayName": "Additive Plast",
+      "role": "additive",
+      "action": "IMPORT",
+      "slug": "baslac-80-30-additive-plast",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "20-35",
+        "20-95"
+      ],
+      "tds": "https://techinfo.baslac.com/en/80-30.pdf",
+      "sourceHash": "c36de513d5ba9a16"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "81-30",
+      "code": "81-30",
+      "officialName": "81-30 Additive Chassis",
+      "displayName": "Additive Chassis",
+      "role": "additive",
+      "action": "IMPORT",
+      "slug": "baslac-81-30-additive-chassis",
+      "change": "EXISTING",
+      "existingSlug": null,
+      "existingFamily": null,
+      "promotedFromLine": false,
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "additive"
+      },
+      "officialImages": [],
+      "images": 0,
+      "missingOfficialAsset": true,
+      "relations": {
+        "hardeners": [],
+        "reducers": [],
+        "additives": []
+      },
+      "usedBy": [
+        "30-S01"
+      ],
+      "tds": "https://techinfo.baslac.com/en/81-30.pdf",
+      "sourceHash": "9ca58b83573a9109"
+    }
+  ]
+}

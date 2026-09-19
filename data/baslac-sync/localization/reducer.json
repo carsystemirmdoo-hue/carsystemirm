@@ -1,0 +1,169 @@
+{
+  "45-r45": {
+    "sourceHash": "e26efd2a5eaf19e8",
+    "productType": "Razređivač",
+    "subtype": "baslac 45- linija · Dilutant",
+    "shortDescription": "Dilutant je razređivač koji se, prema zvaničnom opisu, koristi u baslac 45- i 49- programima.",
+    "longDescription": "Dilutant je razređivač baslac programa, označen šifrom u grupi 45-. Zvanični tehnički list ga navodi za upotrebu u baslac 45- i 49- programima, a u sistemu je svrstan u fazu boje. Odnos razređivanja i parametre nanošenja treba proveriti u tehničkom listu materijala koji se razređuje.",
+    "purpose": "Razređivanje u baslac 45- i 49- programima",
+    "facts": [],
+    "applications": [
+      "Razređivanje materijala iz baslac 45- programa",
+      "Razređivanje materijala iz baslac 49- programa",
+      "Doziranje prema tehničkom listu materijala koji se razređuje"
+    ],
+    "benefits": [
+      {
+        "title": "Namenska primena",
+        "description": "Zvanični opis ga navodi za upotrebu u baslac 45- i 49- programima."
+      }
+    ],
+    "advice": null
+  },
+  "60-05": {
+    "sourceHash": "10bbb511db961de8",
+    "productType": "Razređivač za ubrzano sušenje",
+    "subtype": "baslac 60- linija · ubrzivač sušenja",
+    "shortDescription": "Speeding Reducer je razređivač koji skraćuje vreme sušenja baslac bezbojnih lakova i 2K prajmer-punila.",
+    "longDescription": "Speeding Reducer je razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi kao ubrzivač sušenja za baslac bezbojne lakove usklađene sa VOC propisima i za 2K prajmer-punilo. Prema istom opisu skraćuje vreme sušenja i poboljšava sušenje i očvršćavanje površine. Odnos razređivanja preuzima se iz tehničkog lista materijala koji se razređuje.",
+    "purpose": "Ubrzavanje sušenja bezbojnih lakova",
+    "facts": [],
+    "applications": [
+      "Dodavanje u baslac bezbojne lakove radi bržeg sušenja",
+      "Dodavanje u 2K prajmer-punilo, uz poštovanje ograničenja temperature",
+      "Doziranje prema tehničkom listu materijala koji se razređuje"
+    ],
+    "benefits": [
+      {
+        "title": "Kraće vreme sušenja",
+        "description": "Zvanični opis navodi smanjenje vremena sušenja premaza."
+      },
+      {
+        "title": "Sušenje površine",
+        "description": "Prema zvaničnom opisu poboljšava sušenje površine i očvršćavanje premaza."
+      }
+    ],
+    "advice": "Zvanični tehnički list ne dozvoljava dodavanje u 2K prajmer-punilo na temperaturama iznad 25°C, zbog prekratkog vremena upotrebe smeše."
+  },
+  "60-10": {
+    "sourceHash": "7c44df2e4dbd0921",
+    "productType": "Univerzalni razređivač",
+    "subtype": "baslac 60- linija · gradacija Fast",
+    "shortDescription": "Reducer Universal Fast je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+    "longDescription": "Reducer Universal Fast je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Fast razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+    "purpose": "Univerzalno razređivanje, gradacija Fast",
+    "facts": [],
+    "applications": [
+      "Razređivanje baslac materijala podloge",
+      "Razređivanje baznih i završnih boja i bezbojnih lakova",
+      "Doziranje prema tehničkom listu materijala koji se razređuje"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalna primena",
+        "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+      }
+    ],
+    "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+  },
+  "60-20": {
+    "sourceHash": "d3cf4c83f983f07c",
+    "productType": "Univerzalni razređivač",
+    "subtype": "baslac 60- linija · gradacija Normal",
+    "shortDescription": "Reducer Normal je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+    "longDescription": "Reducer Normal je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Normal razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+    "purpose": "Univerzalno razređivanje, gradacija Normal",
+    "facts": [],
+    "applications": [
+      "Razređivanje baslac materijala podloge",
+      "Razređivanje baznih i završnih boja i bezbojnih lakova",
+      "Doziranje prema tehničkom listu materijala koji se razređuje"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalna primena",
+        "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+      }
+    ],
+    "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+  },
+  "60-30": {
+    "sourceHash": "167d91cc2b584e3a",
+    "productType": "Univerzalni razređivač",
+    "subtype": "baslac 60- linija · gradacija Slow",
+    "shortDescription": "Reducer Universal Slow je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+    "longDescription": "Reducer Universal Slow je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Slow razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+    "purpose": "Univerzalno razređivanje, gradacija Slow",
+    "facts": [],
+    "applications": [
+      "Razređivanje baslac materijala podloge",
+      "Razređivanje baznih i završnih boja i bezbojnih lakova",
+      "Doziranje prema tehničkom listu materijala koji se razređuje"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalna primena",
+        "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+      }
+    ],
+    "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+  },
+  "60-40": {
+    "sourceHash": "4ac8a83b9180926e",
+    "productType": "Univerzalni razređivač",
+    "subtype": "baslac 60- linija · gradacija Extra Slow",
+    "shortDescription": "Reducer Universal Extra Slow je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+    "longDescription": "Reducer Universal Extra Slow je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Extra Slow razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+    "purpose": "Univerzalno razređivanje, gradacija Extra Slow",
+    "facts": [],
+    "applications": [
+      "Razređivanje baslac materijala podloge",
+      "Razređivanje baznih i završnih boja i bezbojnih lakova",
+      "Doziranje prema tehničkom listu materijala koji se razređuje"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalna primena",
+        "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+      }
+    ],
+    "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+  },
+  "65-10": {
+    "sourceHash": "af8d4c3bd73aeb8f",
+    "productType": "Razređivač za blendovanje",
+    "subtype": "baslac 65- linija · blend-in",
+    "shortDescription": "Blending Reducer je blend-in razređivač za baslac bezbojne lakove grupe 40-, za stapanje prelaza.",
+    "longDescription": "Blending Reducer je blend-in razređivač namenjen baslac bezbojnim lakovima grupe 40-. Prema zvaničnom opisu koristi se za stapanje zona preprskavanja i preklopa, odnosno za utapanje bezbojnog laka u postojeći sloj. Tehnički list navodi mlaznicu 1,3 mm i dva sloja nanošenja.",
+    "purpose": "Stapanje prelaza bezbojnog laka",
+    "facts": [
+      {
+        "label": "Mlaznica",
+        "value": "1,3 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "2"
+      },
+      {
+        "label": "VOC",
+        "value": "760 g/l (granica 780 g/l), kategorija IIB.cIII"
+      }
+    ],
+    "applications": [
+      "Stapanje zona preprskavanja i preklopa",
+      "Utapanje bezbojnog laka u postojeći sloj"
+    ],
+    "benefits": [
+      {
+        "title": "Blend-in primena",
+        "description": "Zvanični opis ga navodi kao blend-in razređivač za baslac bezbojne lakove grupe 40-."
+      },
+      {
+        "title": "Stapanje prelaza",
+        "description": "Namenjen je stapanju zona preprskavanja i preklopa, kao i utapanju bezbojnog laka."
+      }
+    ],
+    "advice": null
+  }
+}

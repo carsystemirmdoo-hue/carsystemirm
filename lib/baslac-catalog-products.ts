@@ -14,6 +14,7 @@
  * `inventoryKey`.
  */
 
+import syncData from "@/data/baslac-catalog-products.generated.json";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import {
   baslacAllBases,
@@ -21,6 +22,12 @@ import {
   type BaslacBase,
   type BaslacSystemId,
 } from "@/lib/baslac-systems";
+import type {
+  ProductDetailContent,
+  ProductDetailDocument,
+  ProductRelationship,
+  ProductTechnicalFact,
+} from "@/types/product-detail";
 
 const PLACEHOLDER = "/images/products/placeholder-product.svg";
 
@@ -331,11 +338,6 @@ function toPrimerProduct(variant: PrimerVariant): CarsystemProduct {
 export const baslacPrimerVariants: CarsystemProduct[] =
   PRIMER_VARIANTS.map(toPrimerProduct);
 
-/** Sve što Baslac dodaje u glavni katalog. */
-export const baslacCatalogProducts: CarsystemProduct[] = [
-  ...baslacSystemVariants,
-  ...baslacPrimerVariants,
-];
 
 /**
  * Stari slug → canonical slug, izveden iz `BaslacBase.catalogSlug`.
@@ -378,3 +380,456 @@ export function baslacVariantRedirect(slug: string): string | null {
   if (!familySlug || !code) return null;
   return `/proizvodi/grupa/${familySlug}?varijanta=${encodeURIComponent(code)}`;
 }
+
+/* -------------------------------------------------------------------------
+ * Zvanični baslac asortiman iz `npm run baslac:sync`.
+ *
+ * Isti obrazac kao `lib/{carsystem,carfit,befar,rm}-catalog-products.ts`: skripta piše
+ * `data/baslac-catalog-products.generated.json`, a ovaj deo ga prevodi u `CarsystemProduct`.
+ * Ovde nema poslovnih odluka.
+ *
+ * Tri stvari su specifične za baslac:
+ *   1. SISTEM ZA NIJANSIRANJE je jedan zapis koji nosi javni identitet svoje porodice
+ *      (`catalogMetadata.familyIdentity`). Toneri ostaju varijante te porodice i nemaju
+ *      svoje kartice; mixing komponenta (30-S00, 30-S01, 35-M00, 45-W00) je ugnježdena
+ *      činjenica sistema, ne kartica.
+ *   2. Javna zvanična šifra je oznaka proizvoda („40-40”, „50-415”). Brojevi artikala
+ *      postoje samo u imenima zvaničnih slika i ne objavljuju se.
+ *   3. `45-R45` i `45-W10` imaju sopstveni zvanični identitet, pa napuštaju porodicu 45
+ *      i postaju samostalne kartice — pod svojom postojećom adresom.
+ * ---------------------------------------------------------------------- */
+
+type SyncTechnical = {
+  revision: string | null;
+  mixingRatio: string | null;
+  sprayViscosity: string | null;
+  potLife: string | null;
+  nozzle: string | null;
+  sprayCoats: string | null;
+  filmThickness: string | null;
+  flashOff: string | null;
+  sanding: string | null;
+  drying: string[];
+  voc: { content: number; limit: number | null; category: string | null } | null;
+};
+
+type SyncRelation = { code: string; relation: string; slug: string | null; name: string };
+type SyncDocument = { kind: string; title: string; href: string; language: string | null; version: string | null; note: string };
+
+type SyncEntry = {
+  slug: string;
+  name: string;
+  sourceKey: string;
+  code: string | null;
+  officialName: string;
+  displayName: string | null;
+  kind: "product" | "system";
+  role: string;
+  line: string | null;
+  status: string;
+  promotedFromLine: boolean;
+  family: { baseProductSlug: string; identity: { name: string; slug: string } } | null;
+  sourceUrls: string[];
+  taxonomy: { category: string; programSlug: string; phaseSlug: string; visualType: string; rule: string };
+  systemComponents: { code: string; officialName: string | null; tds: string | null; technical: SyncTechnical }[];
+  relations: SyncRelation[];
+  usedBy: SyncRelation[];
+  technical: SyncTechnical;
+  documents: SyncDocument[];
+  image: { src: string; width: number | null; height: number | null; hasAlpha: boolean; processing: string | null } | null;
+  missingOfficialAsset: boolean;
+  content: {
+    productType: string;
+    subtype: string;
+    shortDescription: string;
+    longDescription: string;
+    purpose: string;
+    facts: { label: string; value: string }[];
+    applications: string[];
+    benefits: { title: string; description: string }[];
+    advice: string | null;
+  };
+};
+
+type SyncEnrichment = {
+  code: string;
+  officialName: string;
+  /** Zvanično ime za zapis koji je postao samostalna kartica; `null` kada ime ostaje. */
+  displayName: string | null;
+  role: string;
+  status: string;
+  promotedFromLine: boolean;
+  detachFromFamily: boolean;
+  sourceUrls: string[];
+  taxonomy: SyncEntry["taxonomy"];
+  relations: SyncRelation[];
+  usedBy: SyncRelation[];
+  technical: SyncTechnical;
+  documents: SyncDocument[];
+};
+
+const syncEntries = syncData.products as SyncEntry[];
+const syncEnrichments = syncData.enrichments as Record<string, SyncEnrichment>;
+
+export const baslacSyncMeta = syncData.meta;
+
+/**
+ * Postojeći family packshot ostaje slika sistema.
+ *
+ * Zvanični sajt nema packshot sistema (na stranici sistema su ilustracije programa), a
+ * ove slike su već na sajtu kao slika te porodice — zapis sistema ih preuzima da kartica
+ * porodice ne bi nazadovala na placeholder.
+ */
+const SYSTEM_PACKSHOTS: Record<string, string | null> = {
+  "line-30": FAMILY_PACKSHOTS["line-30:3.5"],
+  "line-30-cv": FAMILY_PACKSHOTS["line-30-cv:3.5"],
+  "line-35": FAMILY_PACKSHOTS["line-35:3.5"],
+  "line-45": FAMILY_PACKSHOTS["line-45:5"],
+};
+
+const CATEGORY_BADGE: Record<string, string> = {
+  boje: "Boje i lakovi",
+  kitovi: "Kit",
+  sprejevi: "Sprej",
+  ciscenje: "Čišćenje",
+};
+
+const RELATION_LABEL: Record<string, string> = {
+  USES_HARDENER: "Učvršćivač po tehničkom listu",
+  USES_REDUCER: "Razređivač po tehničkom listu",
+  USES_ADDITIVE: "Aditiv naveden u tehničkom listu",
+  USED_BY: "Koristi se uz ovaj proizvod",
+};
+
+const DRYING_LABELS: [RegExp, string][] = [
+  [/^Drying at /i, ""],
+  [/^Infrared \(short wave\)/i, "IC kratkotalasno"],
+  [/^Infrared \(medium wave\)/i, "IC srednjetalasno"],
+];
+
+function dryingText(drying: string[]): string {
+  return drying
+    .map((line) => {
+      const [label, value] = line.split(": ");
+      const translated = DRYING_LABELS.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), label).trim();
+      return `${translated || label}: ${value}`;
+    })
+    .join(" · ");
+}
+
+/** Tehničke činjenice iz zvaničnog lista — vrednosti se prenose doslovno. */
+function syncTechnicalFacts(technical: SyncTechnical, code: string | null): ProductTechnicalFact[] {
+  const fact = (label: string, value: string | null | undefined) =>
+    value ? [{ label, value, reviewStatus: "confirmed" as const }] : [];
+  return [
+    ...(code ? [{ label: "baslac oznaka", value: code, reviewStatus: "confirmed" as const }] : []),
+    ...fact("Odnos mešanja", technical.mixingRatio),
+    ...fact("Viskozitet prskanja", technical.sprayViscosity),
+    ...fact("Vreme upotrebe smeše", technical.potLife),
+    ...fact("Mlaznica", technical.nozzle),
+    ...fact("Broj slojeva", technical.sprayCoats),
+    ...fact("Debljina filma", technical.filmThickness),
+    ...fact("Razmak između slojeva", technical.flashOff),
+    ...fact("Brušenje", technical.sanding),
+    ...(technical.drying.length ? [{ label: "Sušenje", value: dryingText(technical.drying), reviewStatus: "confirmed" as const }] : []),
+    ...(technical.voc
+      ? [{
+          label: "VOC",
+          value: `${technical.voc.content} g/l`,
+          ...(technical.voc.limit ? { detail: `EU granica za ovaj proizvod: ${technical.voc.limit} g/l` } : {}),
+          reviewStatus: "confirmed" as const,
+        }]
+      : []),
+    ...fact("Revizija tehničkog lista", technical.revision?.replace(/^(\d{2})\/(\d{4})$/, "$1/$2")),
+  ];
+}
+
+function syncDocuments(slug: string, documents: SyncDocument[]): ProductDetailDocument[] {
+  return [
+    ...documents.map((document, index) => ({
+      id: `${slug}-tds-${index}`,
+      title: document.title,
+      kind: "tds" as const,
+      availability: "available" as const,
+      href: document.href,
+      language: document.language ?? undefined,
+      version: document.version ?? undefined,
+      note: document.note,
+      reviewStatus: "confirmed" as const,
+    })),
+    {
+      id: `${slug}-sds`,
+      title: "Bezbednosni list",
+      kind: "sds" as const,
+      availability: "preparing" as const,
+      note: "baslac bezbednosne listove izdaje lokalni predstavnik — dostupno na upit.",
+      reviewStatus: "confirmed" as const,
+    },
+  ];
+}
+
+function syncRelationships(relations: SyncRelation[]): ProductRelationship[] {
+  return relations
+    .filter((relation) => relation.slug)
+    .map((relation) => ({
+      productSlug: relation.slug as string,
+      note: `${RELATION_LABEL[relation.relation] ?? relation.relation} · ${relation.code}`,
+      reviewStatus: "confirmed" as const,
+    }));
+}
+
+/** Pojmovi pretrage: oznaka je ono što kupac zaista kuca („40-40”, „4040”). */
+function syncSearchTerms(entry: { code: string | null; officialName: string; displayName?: string | null; content?: { productType: string } }) {
+  return [
+    ...new Set(
+      [entry.code, entry.code?.replace(/[^0-9A-Za-z]/g, ""), entry.officialName, entry.displayName ?? null, entry.content?.productType].filter(
+        (value): value is string => Boolean(value),
+      ),
+    ),
+  ];
+}
+
+function toSyncCatalogProduct(entry: SyncEntry): CarsystemProduct {
+  const { content } = entry;
+  const image = entry.image?.src ?? (entry.kind === "system" ? SYSTEM_PACKSHOTS[entry.sourceKey] ?? null : null);
+  const badges = [content.productType, ...(entry.code ? [entry.code] : []), "Na upit"];
+  const components = entry.systemComponents;
+
+  const detail: ProductDetailContent = {
+    reviewStatus: "confirmed",
+    hero: {
+      kicker: `baslac · ${CATEGORY_BADGE[entry.taxonomy.category] ?? "Program"}`,
+      subtype: content.subtype,
+      lead: content.shortDescription,
+    },
+    quickFacts: {
+      reviewStatus: "confirmed",
+      content: [
+        ...(entry.code ? [{ label: "baslac oznaka", value: entry.code, reviewStatus: "confirmed" as const }] : []),
+        { label: "Tip proizvoda", value: content.productType, reviewStatus: "confirmed" as const },
+        { label: "Dostupnost", value: "Na upit", reviewStatus: "confirmed" as const },
+      ],
+    },
+    ...(content.benefits.length
+      ? {
+          benefits: {
+            reviewStatus: "confirmed" as const,
+            content: {
+              title: `Karakteristike — ${entry.officialName}`,
+              items: content.benefits.map((benefit) => ({ ...benefit, reviewStatus: "confirmed" as const })),
+            },
+          },
+        }
+      : {}),
+    ...(content.applications.length
+      ? {
+          process: {
+            reviewStatus: "confirmed" as const,
+            content: {
+              title: "Oblast primene",
+              description: content.advice ?? content.purpose,
+              mode: "supporting-process" as const,
+              stages: content.applications.map((label) => ({ label, reviewStatus: "confirmed" as const })),
+            },
+          },
+        }
+      : {}),
+    technicalFacts: {
+      reviewStatus: "confirmed",
+      content: [
+        { label: "Tip proizvoda", value: content.productType, reviewStatus: "confirmed" },
+        ...syncTechnicalFacts(entry.technical, entry.code),
+        ...content.facts
+          .filter((fact) => !syncTechnicalFacts(entry.technical, entry.code).some((existing) => existing.label === fact.label))
+          .map((fact) => ({ ...fact, reviewStatus: "confirmed" as const })),
+        ...(components.length
+          ? [{
+              label: "Komponenta za mešanje",
+              value: components.map((component) => component.officialName ?? component.code).join(" · "),
+              detail: "Mixing baza sistema; ne koristi se samostalno i nema zasebnu karticu.",
+              reviewStatus: "confirmed" as const,
+            }]
+          : []),
+        ...(content.advice && !content.applications.length ? [{ label: "Napomena proizvođača", value: content.advice, reviewStatus: "confirmed" as const }] : []),
+      ],
+    },
+    ...(entry.relations.length || entry.usedBy.length
+      ? {
+          compatibleProducts: {
+            reviewStatus: "confirmed" as const,
+            content: {
+              title: ["hardener", "reducer", "additive"].includes(entry.role) ? "Proizvodi uz koje se koristi" : "Komponente po tehničkom listu",
+              description: ["hardener", "reducer", "additive"].includes(entry.role)
+                ? "Zvanični tehnički listovi baslac proizvoda navode ovu komponentu; dostupnost se proverava kroz upit."
+                : "Učvršćivači, razređivači i aditivi koje tehnički list navodi uz ovaj proizvod.",
+              items: syncRelationships([...entry.relations, ...entry.usedBy]),
+            },
+          },
+        }
+      : {}),
+    documents: {
+      reviewStatus: "confirmed",
+      content: syncDocuments(entry.slug, entry.documents),
+    },
+  };
+
+  return {
+    slug: entry.slug,
+    name: entry.name,
+    brandSlug: "baslac",
+    programSlug: entry.taxonomy.programSlug,
+    phaseSlug: entry.taxonomy.phaseSlug as CarsystemProduct["phaseSlug"],
+    shortDescription: content.shortDescription,
+    longDescription: content.longDescription,
+    sku: entry.code ?? entry.slug,
+    externalSku: entry.code ?? undefined,
+    manufacturerCode: entry.code,
+    packages: [{ label: "Na upit", detail: "Pakovanja baslac ne objavljuje javno; potvrđuju se kroz upit." }],
+    purpose: content.purpose,
+    badges,
+    publicStatus: "Na upit",
+    stockStatus: "unknown",
+    stockManaged: false,
+    productImage: image
+      ? { src: image, alt: `${entry.name}, ${content.productType.toLocaleLowerCase("sr-Latn")}` }
+      : { src: PLACEHOLDER, alt: `${entry.name}, ilustrativni prikaz proizvoda` },
+    galleryImages: [],
+    specifications: [
+      { label: "Tip proizvoda", value: content.productType },
+      ...(entry.code ? [{ label: "baslac oznaka", value: entry.code }] : []),
+      ...content.facts,
+    ],
+    documents: [
+      ...entry.documents.map((document) => ({ title: "Tehnički list", kind: "PDF", href: document.href, status: "available" as const, note: document.note })),
+      { title: "Bezbednosni list", kind: "PDF", status: "placeholder" as const, note: "Izdaje lokalni predstavnik — dostupno na upit." },
+    ],
+    relatedProductSlugs: [...entry.relations, ...entry.usedBy].map((relation) => relation.slug).filter((slug): slug is string => Boolean(slug)).slice(0, 6),
+    seoTitle: `${entry.name} | Carsystem i R-M`,
+    seoDescription: content.shortDescription,
+    taxonomyCategory: entry.taxonomy.category as CarsystemProduct["taxonomyCategory"],
+    searchTerms: syncSearchTerms(entry),
+    detail,
+    ...(entry.family
+      ? {
+          catalogMetadata: {
+            id: `baslac-${entry.sourceKey}`,
+            baseProductSlug: entry.family.baseProductSlug,
+            variantId: entry.sourceKey,
+            line: entry.line ?? entry.officialName,
+            officialName: entry.officialName,
+            displayNameSr: entry.name,
+            cosmosCode: null,
+            ralCode: null,
+            colorName: null,
+            finish: null,
+            volume: "Na upit",
+            technicalCategory: entry.officialName,
+            verificationStatus: "ACTIVE_CONFIRMED",
+            sourceReference: entry.sourceUrls[0] ?? null,
+            colorSource: "name-derived" as const,
+            colorConfidence: "provisional" as const,
+            familyIdentity: entry.family.identity,
+          },
+        }
+      : {}),
+  } as CarsystemProduct;
+}
+
+export function getBaslacSyncProducts(): CarsystemProduct[] {
+  return syncEntries.map(toSyncCatalogProduct);
+}
+
+/**
+ * Dopuna zapisa koje već vodimo (pripremni proizvodi i dosije baza).
+ *
+ * Slug, ime, slika i pakovanja OSTAJU njihovi — menja se samo ono što zvanični izvor sada
+ * potvrđuje: taksonomija, tehničke činjenice iz aktuelnog lista, odnosi i pojmovi pretrage.
+ * Za `45-R45` i `45-W10` dodatno otpada pripadnost porodici 45: oni imaju sopstveni
+ * zvanični identitet, pa njihova postojeća adresa od sada renderuje svoj PDP.
+ */
+export function applyBaslacSyncEnrichment(record: CarsystemProduct): CarsystemProduct {
+  const enrichment = syncEnrichments[record.slug];
+  if (!enrichment) return record;
+
+  const detail = record.detail;
+  const facts = syncTechnicalFacts(enrichment.technical, enrichment.code);
+  /*
+   * Ime se menja samo kada zvanični izvor to traži (promovisan zapis). Slug, adresa,
+   * šifra proizvođača, odnosi i dokumenti ostaju isti, a staro ime ostaje u pojmovima
+   * pretrage — kupac koji ga zna i dalje nalazi proizvod.
+   */
+  const renamed = enrichment.displayName && enrichment.displayName !== record.name;
+  return {
+    ...record,
+    ...(renamed
+      ? {
+          name: enrichment.displayName as string,
+          seoTitle: `${enrichment.displayName} | Carsystem i R-M`,
+          catalogMetadata: record.catalogMetadata
+            ? { ...record.catalogMetadata, officialName: enrichment.officialName, displayNameSr: enrichment.displayName as string }
+            : record.catalogMetadata,
+        }
+      : {}),
+    manufacturerCode: enrichment.code,
+    taxonomyCategory: enrichment.taxonomy.category as CarsystemProduct["taxonomyCategory"],
+    programSlug: enrichment.taxonomy.programSlug,
+    phaseSlug: enrichment.taxonomy.phaseSlug as CarsystemProduct["phaseSlug"],
+    searchTerms: [...new Set([...(record.searchTerms ?? []), ...syncSearchTerms(enrichment), ...(renamed ? [record.name] : [])])],
+    documents: [
+      ...(record.documents ?? []),
+      ...enrichment.documents.map((document) => ({ title: "Tehnički list", kind: "PDF", href: document.href, status: "available" as const, note: document.note })),
+    ],
+    specifications: [
+      ...(record.specifications ?? []),
+      ...facts.filter((fact) => !(record.specifications ?? []).some((existing) => existing.label === fact.label)).map((fact) => ({ label: fact.label, value: fact.value })),
+    ],
+    ...(enrichment.detachFromFamily && record.catalogMetadata
+      ? {
+          catalogMetadata: {
+            ...record.catalogMetadata,
+            ...(renamed ? { officialName: enrichment.officialName, displayNameSr: enrichment.displayName as string } : {}),
+            // Promovisan zapis napušta porodicu: sam sebi je osnova, pa nema varijanti.
+            baseProductSlug: record.slug,
+          },
+        }
+      : {}),
+    ...(detail
+      ? {
+          detail: {
+            ...detail,
+            technicalFacts: {
+              reviewStatus: "confirmed" as const,
+              content: [
+                ...(detail.technicalFacts?.content ?? []),
+                ...facts.filter((fact) => !(detail.technicalFacts?.content ?? []).some((existing) => existing.label === fact.label)),
+              ],
+            },
+            ...(enrichment.relations.length || enrichment.usedBy.length
+              ? {
+                  compatibleProducts: {
+                    reviewStatus: "confirmed" as const,
+                    content: {
+                      title: ["hardener", "reducer", "additive"].includes(enrichment.role) ? "Proizvodi uz koje se koristi" : "Komponente po tehničkom listu",
+                      description: "Odnosi su preuzeti iz aktuelnog zvaničnog tehničkog lista.",
+                      items: syncRelationships([...enrichment.relations, ...enrichment.usedBy]),
+                    },
+                  },
+                }
+              : {}),
+          },
+        }
+      : {}),
+  };
+}
+
+/**
+ * Sve što Baslac dodaje u glavni katalog.
+ *
+ * Zapisi sinhronizacije idu PRVI: sistem nosi javni identitet svoje porodice, pa je
+ * prirodno da stoji ispred svojih mixing baza.
+ */
+export const baslacCatalogProducts: CarsystemProduct[] = [
+  ...getBaslacSyncProducts(),
+  ...baslacSystemVariants,
+  ...baslacPrimerVariants,
+];

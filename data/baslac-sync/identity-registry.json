@@ -1,0 +1,286 @@
+{
+  "products": {
+    "baslac-12-20-bodyfiller-universal": {
+      "sourceKey": "12-20",
+      "code": "12-20",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-20-22-2k-primerfiller": {
+      "sourceKey": "20-22",
+      "code": "20-22",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-21-10-1k-plastic-primer": {
+      "sourceKey": "21-10",
+      "code": "21-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-10-2k-panel-clear": {
+      "sourceKey": "40-10",
+      "code": "40-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-100-high-speed-2k-clear-voc": {
+      "sourceKey": "40-100",
+      "code": "40-100",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-40-2k-universal-clear": {
+      "sourceKey": "40-40",
+      "code": "40-40",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-440-2k-voc-clear": {
+      "sourceKey": "40-440",
+      "code": "40-440",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-450-universal-clear-voc": {
+      "sourceKey": "40-450",
+      "code": "40-450",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-510-ambient-clear": {
+      "sourceKey": "40-510",
+      "code": "40-510",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-40-620-2k-clear-mat-voc": {
+      "sourceKey": "40-620",
+      "code": "40-620",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-05-2k-hardener-ambient-uc": {
+      "sourceKey": "50-05",
+      "code": "50-05",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-10-2k-primerfiller-hardener-extra-fast": {
+      "sourceKey": "50-10",
+      "code": "50-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-15-2k-hardener-fast": {
+      "sourceKey": "50-15",
+      "code": "50-15",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-20-hardener-normal": {
+      "sourceKey": "50-20",
+      "code": "50-20",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-30-2k-hardener-slow": {
+      "sourceKey": "50-30",
+      "code": "50-30",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-415-2k-clear-hardener-fast-voc": {
+      "sourceKey": "50-415",
+      "code": "50-415",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-420-2k-clear-hardener-normal-voc": {
+      "sourceKey": "50-420",
+      "code": "50-420",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-430-2k-clear-hardener-slow-voc": {
+      "sourceKey": "50-430",
+      "code": "50-430",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-45-2k-activator": {
+      "sourceKey": "50-45",
+      "code": "50-45",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-510-ambient-clear-hardener": {
+      "sourceKey": "50-510",
+      "code": "50-510",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-50-530-ambient-clear-hardener-slow": {
+      "sourceKey": "50-530",
+      "code": "50-530",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-51-515-2k-hardener-cv-fast": {
+      "sourceKey": "51-515",
+      "code": "51-515",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-51-520-2k-hardener-cv-normal": {
+      "sourceKey": "51-520",
+      "code": "51-520",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-51-530-2k-hardener-cv-slow": {
+      "sourceKey": "51-530",
+      "code": "51-530",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-55-10-ep-hardener": {
+      "sourceKey": "55-10",
+      "code": "55-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-56-20-bodyfiller-hardener": {
+      "sourceKey": "56-20",
+      "code": "56-20",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-57-10-additive-washprimer": {
+      "sourceKey": "57-10",
+      "code": "57-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-57-30-additive-washprimer-slow": {
+      "sourceKey": "57-30",
+      "code": "57-30",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-60-05-speeding-reducer": {
+      "sourceKey": "60-05",
+      "code": "60-05",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-60-10-reducer-universal-fast": {
+      "sourceKey": "60-10",
+      "code": "60-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-60-30-reducer-universal-slow": {
+      "sourceKey": "60-30",
+      "code": "60-30",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-60-40-reducer-universal-extra-slow": {
+      "sourceKey": "60-40",
+      "code": "60-40",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-65-10-blending-reducer": {
+      "sourceKey": "65-10",
+      "code": "65-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-70-10-silicone-remover-for-oil-silicone-and-grease": {
+      "sourceKey": "70-10",
+      "code": "70-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-70-20-cleaner-plastic": {
+      "sourceKey": "70-20",
+      "code": "70-20",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-70-45-cleaner": {
+      "sourceKey": "70-45",
+      "code": "70-45",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-80-10-additive-flex": {
+      "sourceKey": "80-10",
+      "code": "80-10",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-80-20-additive-mat": {
+      "sourceKey": "80-20",
+      "code": "80-20",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-80-30-additive-plast": {
+      "sourceKey": "80-30",
+      "code": "80-30",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-81-30-additive-chassis": {
+      "sourceKey": "81-30",
+      "code": "81-30",
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-basecoat-35": {
+      "sourceKey": "line-35",
+      "code": null,
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-basecoat-45": {
+      "sourceKey": "line-45",
+      "code": null,
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-topcoat-30": {
+      "sourceKey": "line-30",
+      "code": null,
+      "firstSeen": "2026-09-19"
+    },
+    "baslac-topcoat-30-cv": {
+      "sourceKey": "line-30-cv",
+      "code": null,
+      "firstSeen": "2026-09-19"
+    }
+  },
+  "enriched": {
+    "baslac-20-24-2k-primerfiller-grey-1l": {
+      "sourceKey": "20-24",
+      "code": "20-24",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-20-34-2k-primerfiller-white-1l": {
+      "sourceKey": "20-34",
+      "code": "20-34",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l": {
+      "sourceKey": "20-35",
+      "code": "20-35",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-20-94-2k-primerfiller-black-1l": {
+      "sourceKey": "20-94",
+      "code": "20-94",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l": {
+      "sourceKey": "20-95",
+      "code": "20-95",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-21-11-2k-plastic-primer-voc-1l": {
+      "sourceKey": "21-11",
+      "code": "21-11",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-21-20-plastic-primer-400ml": {
+      "sourceKey": "21-20",
+      "code": "21-20",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-25-30-2k-primerfiller-ep-4l": {
+      "sourceKey": "25-30",
+      "code": "25-30",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-27-10-2k-washprimer-1l": {
+      "sourceKey": "27-10",
+      "code": "27-10",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-45-r45": {
+      "sourceKey": "45-r45",
+      "code": "45-R45",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-45-w10": {
+      "sourceKey": "45-w10",
+      "code": "45-W10",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    },
+    "baslac-60-20-razredjivac": {
+      "sourceKey": "60-20",
+      "code": "60-20",
+      "owner": "lib/baslac-catalog-products.ts (ručni zapisi i dosije)"
+    }
+  }
+}

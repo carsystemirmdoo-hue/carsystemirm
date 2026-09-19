@@ -1,0 +1,368 @@
+{
+  "coverage": {
+    "A_currentOfficialRecords": 56,
+    "B_representedLocally": 56,
+    "C_currentOfficialCodes": 52,
+    "D_representedLocally": 52,
+    "productCoveragePercent": 100,
+    "codeCoveragePercent": 100,
+    "codesWithPackagingVariants": [
+      "20-24",
+      "20-34",
+      "20-94",
+      "27-10"
+    ]
+  },
+  "cards": {
+    "VISIBLE_CUSTOMER_FACING_CARDS": 57,
+    "families": 8,
+    "standaloneCards": 49,
+    "systemCards": 4,
+    "currentProductCards": 52,
+    "legacyStandaloneCards": [
+      "baslac-30-s510-s-serija"
+    ]
+  },
+  "breakdown": {
+    "UNDERLYING_PRODUCT_RECORDS": 205,
+    "importedThisSync": 44,
+    "enrichedExisting": 12,
+    "VARIANT_FAMILY_MEMBERS": 156,
+    "REDIRECT_ONLY_RECORDS": 156,
+    "LEGACY_NESTED_RECORDS": 148,
+    "NESTED_MIXING_COMPONENTS": [
+      "30-S00",
+      "30-S01",
+      "35-M00",
+      "45-W00"
+    ],
+    "PROMOTED_FROM_LINE": [
+      "45-R45",
+      "45-W10"
+    ],
+    "UNCERTAIN_NOT_CUSTOMER_FACING": [
+      "11-40"
+    ],
+    "CURRENT_PUBLIC_TONERS": 0,
+    "MISSING_OFFICIAL_ASSETS": 32
+  },
+  "ACTIVE_PRODUCT_MISSING": [],
+  "ACTIVE_CODE_MISSING": [],
+  "duplicateActiveCodes": [],
+  "attachedToWrongProduct": [],
+  "duplicateProductSlugs": [],
+  "families": [
+    {
+      "slug": "20-24-2k-primerfiller-grey",
+      "name": "20-24 2K Primerfiller Grey",
+      "variants": 2,
+      "presentation": "variant-pdp",
+      "system": false
+    },
+    {
+      "slug": "20-34-2k-primerfiller-white",
+      "name": "20-34 2K Primerfiller White",
+      "variants": 2,
+      "presentation": "variant-pdp",
+      "system": false
+    },
+    {
+      "slug": "20-94-2k-primerfiller-black",
+      "name": "20-94 2K Primerfiller Black",
+      "variants": 2,
+      "presentation": "variant-pdp",
+      "system": false
+    },
+    {
+      "slug": "27-10-2k-washprimer",
+      "name": "27-10 2K Washprimer",
+      "variants": 2,
+      "presentation": "variant-pdp",
+      "system": false
+    },
+    {
+      "slug": "baslac-line-30",
+      "name": "baslac Topcoat 30",
+      "variants": 21,
+      "presentation": "variant-pdp",
+      "system": true
+    },
+    {
+      "slug": "baslac-line-30-cv",
+      "name": "baslac Topcoat 30 CV",
+      "variants": 2,
+      "presentation": "variant-pdp",
+      "system": true
+    },
+    {
+      "slug": "baslac-line-35",
+      "name": "baslac Basecoat 35",
+      "variants": 56,
+      "presentation": "variant-pdp",
+      "system": true
+    },
+    {
+      "slug": "baslac-line-45",
+      "name": "baslac Basecoat 45",
+      "variants": 69,
+      "presentation": "variant-pdp",
+      "system": true
+    }
+  ],
+  "standaloneCards": [
+    {
+      "slug": "baslac-12-20-bodyfiller-universal",
+      "sku": "12-20",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-20-22-2k-primerfiller",
+      "sku": "20-22",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-21-10-1k-plastic-primer",
+      "sku": "21-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-10-2k-panel-clear",
+      "sku": "40-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-100-high-speed-2k-clear-voc",
+      "sku": "40-100",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-40-2k-universal-clear",
+      "sku": "40-40",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-440-2k-voc-clear",
+      "sku": "40-440",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-450-universal-clear-voc",
+      "sku": "40-450",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-510-ambient-clear",
+      "sku": "40-510",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-40-620-2k-clear-mat-voc",
+      "sku": "40-620",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-05-2k-hardener-ambient-uc",
+      "sku": "50-05",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-10-2k-primerfiller-hardener-extra-fast",
+      "sku": "50-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-15-2k-hardener-fast",
+      "sku": "50-15",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-20-hardener-normal",
+      "sku": "50-20",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-30-2k-hardener-slow",
+      "sku": "50-30",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-415-2k-clear-hardener-fast-voc",
+      "sku": "50-415",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-420-2k-clear-hardener-normal-voc",
+      "sku": "50-420",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-430-2k-clear-hardener-slow-voc",
+      "sku": "50-430",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-45-2k-activator",
+      "sku": "50-45",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-510-ambient-clear-hardener",
+      "sku": "50-510",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-50-530-ambient-clear-hardener-slow",
+      "sku": "50-530",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-51-515-2k-hardener-cv-fast",
+      "sku": "51-515",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-51-520-2k-hardener-cv-normal",
+      "sku": "51-520",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-51-530-2k-hardener-cv-slow",
+      "sku": "51-530",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-55-10-ep-hardener",
+      "sku": "55-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-56-20-bodyfiller-hardener",
+      "sku": "56-20",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-57-10-additive-washprimer",
+      "sku": "57-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-57-30-additive-washprimer-slow",
+      "sku": "57-30",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-60-05-speeding-reducer",
+      "sku": "60-05",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-60-10-reducer-universal-fast",
+      "sku": "60-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-60-30-reducer-universal-slow",
+      "sku": "60-30",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-60-40-reducer-universal-extra-slow",
+      "sku": "60-40",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-65-10-blending-reducer",
+      "sku": "65-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-70-10-silicone-remover-for-oil-silicone-and-grease",
+      "sku": "70-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-70-20-cleaner-plastic",
+      "sku": "70-20",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-70-45-cleaner",
+      "sku": "70-45",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-80-10-additive-flex",
+      "sku": "80-10",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-80-20-additive-mat",
+      "sku": "80-20",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-80-30-additive-plast",
+      "sku": "80-30",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-81-30-additive-chassis",
+      "sku": "81-30",
+      "source": "sync"
+    },
+    {
+      "slug": "baslac-45-r45",
+      "sku": "45-R45",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-45-w10",
+      "sku": "45-W10",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+      "sku": "20-35-3L",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+      "sku": "20-95-3L",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-21-20-plastic-primer-400ml",
+      "sku": "21-20-400ML",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-21-11-2k-plastic-primer-voc-1l",
+      "sku": "21-11-1L",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-25-30-2k-primerfiller-ep-4l",
+      "sku": "25-30-4L",
+      "source": "dopunjen"
+    },
+    {
+      "slug": "baslac-30-s510-s-serija",
+      "sku": "BASLAC-30-S510",
+      "source": "legacy"
+    },
+    {
+      "slug": "baslac-60-20-razredjivac",
+      "sku": "BASLAC-60-20-5L",
+      "source": "dopunjen"
+    }
+  ],
+  "images": {
+    "published": 13,
+    "referenced": 13,
+    "orphanImages": [],
+    "duplicateImages": [],
+    "brokenImageReferences": [],
+    "hotlinked": []
+  },
+  "failures": []
+}

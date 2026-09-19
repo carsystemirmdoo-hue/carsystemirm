@@ -1,0 +1,157 @@
+{
+  "_comment": [
+    "Uloga baslac proizvoda → postojeća taksonomija sajta. Bez novih top-level kategorija.",
+    "Komponente (učvršćivač/razređivač/aditiv) nasleđuju fazu proizvoda koji ih po TDS-u koristi;",
+    "kada takvog dokaza nema, koriste podrazumevanu fazu svoje uloge.",
+    "Kada odnos iz TDS-a ne postoji, fazu nosi ZVANIČNI NAZIV komponente (Bodyfiller/Primerfiller/Washprimer/EP/UC); tek onda podrazumevana faza uloge."
+  ],
+  "rules": [
+    {
+      "id": "bodyfiller",
+      "role": "bodyfiller",
+      "category": "kitovi",
+      "programSlug": "priprema-povrsine",
+      "phaseSlug": "priprema",
+      "visualType": "filler"
+    },
+    {
+      "id": "bodyfiller-hardener",
+      "role": "hardener",
+      "when": {
+        "usedByRole": "bodyfiller"
+      },
+      "category": "kitovi",
+      "programSlug": "priprema-povrsine",
+      "phaseSlug": "priprema",
+      "visualType": "filler"
+    },
+    {
+      "id": "hardener-bodyfiller-by-name",
+      "role": "hardener",
+      "when": {
+        "nameMatches": "bodyfiller|putty|kit"
+      },
+      "category": "kitovi",
+      "programSlug": "priprema-povrsine",
+      "phaseSlug": "priprema",
+      "visualType": "filler"
+    },
+    {
+      "id": "component-undercoat-by-name",
+      "when": {
+        "roleIn": [
+          "hardener",
+          "additive",
+          "reducer"
+        ],
+        "nameMatches": "primerfiller|washprimer|primer|\\bEP\\b|\\bUC\\b"
+      },
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "podloga",
+      "visualType": "primer"
+    },
+    {
+      "id": "component-basecoat-by-code",
+      "when": {
+        "roleIn": [
+          "hardener",
+          "additive",
+          "reducer"
+        ],
+        "codeMatches": "^45-"
+      },
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "boja",
+      "visualType": "color"
+    },
+    {
+      "id": "cleaner",
+      "role": "cleaner",
+      "category": "ciscenje",
+      "programSlug": "priprema-povrsine",
+      "phaseSlug": "priprema",
+      "visualType": "neutral"
+    },
+    {
+      "id": "aerosol-undercoat",
+      "role": "undercoat",
+      "when": {
+        "aerosol": true
+      },
+      "category": "sprejevi",
+      "programSlug": "aerosoli",
+      "phaseSlug": "podloga",
+      "visualType": "spray"
+    },
+    {
+      "id": "undercoat",
+      "role": "undercoat",
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "podloga",
+      "visualType": "primer"
+    },
+    {
+      "id": "clearcoat",
+      "role": "clearcoat",
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "lak",
+      "visualType": "clearcoat"
+    },
+    {
+      "id": "component-undercoat",
+      "when": {
+        "usedByRole": "undercoat"
+      },
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "podloga",
+      "visualType": "primer"
+    },
+    {
+      "id": "component-clearcoat",
+      "when": {
+        "usedByRole": "clearcoat"
+      },
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "lak",
+      "visualType": "clearcoat"
+    },
+    {
+      "id": "hardener",
+      "role": "hardener",
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "lak",
+      "visualType": "clearcoat"
+    },
+    {
+      "id": "reducer",
+      "role": "reducer",
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "lak",
+      "visualType": "clearcoat"
+    },
+    {
+      "id": "additive",
+      "role": "additive",
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "lak",
+      "visualType": "clearcoat"
+    },
+    {
+      "id": "system",
+      "role": "system",
+      "category": "boje",
+      "programSlug": "boje-i-lakovi",
+      "phaseSlug": "boja",
+      "visualType": "color"
+    }
+  ]
+}

@@ -1,0 +1,1947 @@
+{
+  "meta": {
+    "documents": 57,
+    "fromRepository": 49,
+    "withOfficialName": 55,
+    "withMixingRatio": 17,
+    "withDrying": 15,
+    "withVoc": 22,
+    "withRelations": 21,
+    "failures": [],
+    "note": "Činjenice se čitaju doslovno iz lista; nijedna vrednost se ne izvodi računom."
+  },
+  "facts": {
+    "11-40": {
+      "code": "11-40",
+      "officialName": null,
+      "revision": null,
+      "intro": [
+        "Process for coarse and fine bodyfiller",
+        "High solids content; fast drying, easy to sand, good adhesion.",
+        "Universal bodyfiller suitable for use on:",
+        "Steel",
+        "Galvanized steel",
+        "Aluminium",
+        "Mix bodyfiller and red hardener paste until homogenous color",
+        "Do not exceed 3% of hardener"
+      ],
+      "mixing": [
+        {
+          "share": "2-3% by weight",
+          "codes": [],
+          "label": "Dibenzoyl Peroxide Paste - Red"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 15-20 min",
+        "Infrared (short wave): 3 min",
+        "Infrared (medium wave): 7-8 min"
+      ],
+      "facts": {
+        "potLife": "5 min",
+        "sanding": "P80 / P150 / P240"
+      },
+      "voc": {
+        "content": 180,
+        "limit": 250,
+        "category": "IIB.b"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [],
+      "origin": "techinfo.baslac.com",
+      "pages": 2
+    },
+    "12-20": {
+      "code": "12-20",
+      "officialName": "Bodyfiller Universal",
+      "revision": "06/2023",
+      "intro": [
+        "Process for coarse and fine bodyfiller",
+        "High solids content; fast drying, easy to sand, good adhesion",
+        "Universal body filler suitable for use on:",
+        "Steel",
+        "Galvanized steel",
+        "Aluminum",
+        "Mix body filler and red hardener paste until homogeneous color",
+        "Do not exceed 3% of hardener"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by weight",
+          "codes": [
+            "12-20"
+          ],
+          "label": "12-20"
+        },
+        {
+          "share": "2-3 % by weight",
+          "codes": [
+            "56-20"
+          ],
+          "label": "56-20"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 20-30 min",
+        "Infrared (short wave): 4 min",
+        "Infrared (medium wave): 5-10 min"
+      ],
+      "facts": {
+        "potLife": "5 min",
+        "sanding": "P80 / P150 / P240"
+      },
+      "voc": {
+        "content": 180,
+        "limit": 250,
+        "category": "IIB.b"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "56-20"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "20-22": {
+      "code": "20-22",
+      "officialName": "20-22 2K Primerfiller",
+      "revision": "06/2023",
+      "intro": [
+        "Universal sanding filler with good filling properties, easy to sand"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "20-22"
+          ],
+          "label": "20-22"
+        },
+        {
+          "share": "20 % by volume",
+          "codes": [
+            "50-15"
+          ],
+          "label": "50-15"
+        },
+        {
+          "share": "20 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-10, -20, -30"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 3 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "5:1:1",
+        "sprayViscosity": "DIN 4: 25-29 s",
+        "potLife": "60 min",
+        "nozzle": "1.6-1.8",
+        "sprayCoats": "2",
+        "filmThickness": "50-70",
+        "sanding": "P400 / P500"
+      },
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [
+        "50-15",
+        "60-10",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "20-24": {
+      "code": "20-24",
+      "officialName": "2K Primerfiller, grey",
+      "revision": "09/2025",
+      "intro": [
+        "Process for primerfiller",
+        "High solids containing primer filler, fast drying and easy sandability",
+        "Repairs with larger bare metal areas should prior be treated with 27-10 2K Wash primer",
+        "Can be mixed with 20-34 and 20-94 to get different grey shades, according to the grey shade poster"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "20-24"
+          ],
+          "label": "20-24"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "50-15",
+            "50-20"
+          ],
+          "label": "50-15, -20"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30",
+            "60-40"
+          ],
+          "label": "60-10, -20, -30, -40"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 3 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "1 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "sanding": "P400 / P500"
+      },
+      "voc": {
+        "content": 530,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-15",
+        "50-20",
+        "60-10",
+        "60-20",
+        "60-30",
+        "60-40"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "20-34": {
+      "code": "20-34",
+      "officialName": "2K Primerfiller White",
+      "revision": "09/2025",
+      "intro": [
+        "Process for primerfiller",
+        "High solids containing primer filler, fast drying and easy sandability",
+        "Repairs with larger bare metal areas should prior be treated with 27-10 2K Wash primer",
+        "Can be mixed with 20-24 and 20-94 to get different grey shades, according to the grey shade poster"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "20-34"
+          ],
+          "label": "20-34"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "50-15",
+            "50-20"
+          ],
+          "label": "50-15, -20"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30",
+            "60-40"
+          ],
+          "label": "60-10, -20, -30, -40"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 3 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "1 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "sanding": "P400 / P500"
+      },
+      "voc": {
+        "content": 530,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-15",
+        "50-20",
+        "60-10",
+        "60-20",
+        "60-30",
+        "60-40"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "20-35": {
+      "code": "20-35",
+      "officialName": "2K Primerfiller white",
+      "revision": "06/2023",
+      "intro": [
+        "Process for non-sanding filler",
+        "High solids containing primer filler for wet on wet solution:",
+        "Can be overcoated without intermediate sanding for up to 5 days.",
+        "Easy spray ability",
+        "No need to sand new e-coated parts",
+        "Repairs with larger bare metal areas should prior be treated with 27-10 2K Wash primer",
+        "Can be mixed with 20-95 to get different grey shades, according to the grey shade poster"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "20-35"
+          ],
+          "label": "20-35"
+        },
+        {
+          "share": "33 % by volume",
+          "codes": [
+            "50-15",
+            "50-20"
+          ],
+          "label": "50-15, -20"
+        },
+        {
+          "share": "33 % by volume",
+          "codes": [
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-20, -30"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "mixingRatio": "3:1:1",
+        "sprayViscosity": "DIN 4: 16-19 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "20-35 μm",
+        "flashOff": "15-20 min"
+      },
+      "voc": {
+        "content": 530,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-15",
+        "50-20",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "20-94": {
+      "code": "20-94",
+      "officialName": "2K Primerfiller Black",
+      "revision": "06/2023",
+      "intro": [
+        "Process for primerfiller",
+        "High solids containing primer filler, fast drying and easy sandability",
+        "Repairs with larger bare metal areas should prior be treated with 27-10 2K Wash primer",
+        "Can be mixed with 20-24 and 20-34 to get different grey shades, according to the grey shade poster"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "20-94"
+          ],
+          "label": "20-94"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "50-15",
+            "50-20"
+          ],
+          "label": "50-15, -20"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-10, -20, -30"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 3 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "1 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "sanding": "P400 / P500"
+      },
+      "voc": {
+        "content": 530,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-15",
+        "50-20",
+        "60-10",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "20-95": {
+      "code": "20-95",
+      "officialName": "2K Primerfiller black",
+      "revision": "06/2023",
+      "intro": [
+        "Process for non-sanding filler",
+        "High solids containing primer filler for wet on wet solution:",
+        "Can be overcoated without intermediate sanding for up to 5 days.",
+        "Easy spray ability",
+        "No need to sand new e-coated parts",
+        "Repairs with larger bare metal areas should prior be treated with 27-10 2K Wash primer",
+        "Can be mixed with 20-35 to get different grey shades, according to the grey shade poster"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "20-95"
+          ],
+          "label": "20-95"
+        },
+        {
+          "share": "33 % by volume",
+          "codes": [
+            "50-15",
+            "50-20"
+          ],
+          "label": "50-15, -20"
+        },
+        {
+          "share": "33 % by volume",
+          "codes": [
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-20, -30"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "mixingRatio": "3:1:1",
+        "sprayViscosity": "DIN 4: 16-19 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "20-35 μm",
+        "flashOff": "15-20 min"
+      },
+      "voc": {
+        "content": 535,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-15",
+        "50-20",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "21-10": {
+      "code": "21-10",
+      "officialName": "1K Plastic Primer",
+      "revision": null,
+      "intro": [
+        "Multi-purpose adhesion promoter suitable for all paintable plastics on used cars.",
+        "Unlimited pot life",
+        "Easy and safe to spray",
+        "Short flash off time",
+        "Handling",
+        "Shake vigorously for 2 min. before use.",
+        "Application ready for use",
+        "HVLP spray gun"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {
+        "nozzle": "1.3-1.4 mm",
+        "sprayCoats": "1",
+        "filmThickness": "10 μm",
+        "flashOff": "15 min before filler application"
+      },
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "21-11": {
+      "code": "21-11",
+      "officialName": null,
+      "revision": null,
+      "intro": [
+        "Primer and primer filler for the economical repair of all paintable plastics on cars.",
+        "Good adhesion on all paintable plastics used in car production.",
+        "Suitable for use as an adhesion promoter in three stage systems and as a primer filler under baslac topcoat systems",
+        "Non-modified polypropylene (PP) and polyethylene (PE) are unpaintable.",
+        "Note:",
+        "Automotive add-on parts are often just labelled PP or PE although they are, in fact, modified and thus paintable substrates."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [],
+          "label": "21-1"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "50-15"
+          ],
+          "label": "50-15"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "60-10",
+            "60-20"
+          ],
+          "label": "60-10, -20"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 17-19 s",
+        "potLife": "3.5 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "1",
+        "filmThickness": "20 μm",
+        "flashOff": "20 min"
+      },
+      "voc": {
+        "content": 539,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-15",
+        "60-10",
+        "60-20"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "21-20": {
+      "code": "21-20",
+      "officialName": "Plastic Primer",
+      "revision": "06/2023",
+      "intro": [
+        "Adhesion primer for plastics ensures good adhesion of the following coats (filler, topcoat).",
+        "Non-modified polypropylene (PP) and polyethylene (PE) are unpaintable.",
+        "Note:",
+        "Automotive add-on parts are often just labelled PP or PE although they are, in fact, modified and thus paintable substrates.",
+        "Handling",
+        "Shake vigorously for 2 min. before use.",
+        "Application ready for use",
+        "Number of spray coats"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {
+        "sprayCoats": "1",
+        "filmThickness": "5 μm",
+        "flashOff": "15 min,before applying baslac 20-24/34/94 filler"
+      },
+      "voc": {
+        "content": 688,
+        "limit": 840,
+        "category": "IIB.e"
+      },
+      "vocBlocks": 1,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "25-30": {
+      "code": "25-30",
+      "officialName": "2K Primerfiller EP",
+      "revision": "06/2023",
+      "intro": [
+        "Primerfiller",
+        "Adhesion promoter with high corrosion protection",
+        "High finish / appearance especially if forced dried"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "25-30"
+          ],
+          "label": "25-30"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "55-10"
+          ],
+          "label": "55-10"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-10, -20, -30"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 8 h",
+        "Drying at 60°C: 30 min"
+      ],
+      "facts": {
+        "mixingRatio": "4:1:2",
+        "sprayViscosity": "DIN 4: 18-20 s",
+        "potLife": "8 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "40-50 μm",
+        "sanding": "P400"
+      },
+      "voc": {
+        "content": 520,
+        "limit": 540,
+        "category": "IIB.cI"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "55-10",
+        "60-10",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "27-10": {
+      "code": "27-10",
+      "officialName": "2K Washprimer",
+      "revision": "06/2023",
+      "intro": [
+        "Two-pack primer/ primer application",
+        "Good anti-corrosive properties on bare metal",
+        "Adhesion primer for use on aluminium and galvanised steel sheet",
+        "Cannot be used directly under waterborne products, such as baslac 45 basecoat.",
+        "For ‘rub-throughs'",
+        "and ‘minor spotting operations', 20-24, 20-34 or 20-94 2K Primer Filler must be used when applying baslac 45 basecoat."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "27-10"
+          ],
+          "label": "27-10"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "57-10"
+          ],
+          "label": "57-10"
+        },
+        {
+          "share": "30 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-10, -20, -30"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "mixingRatio": "2:1+30 %",
+        "sprayViscosity": "DIN 4: 16 s",
+        "potLife": "48 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "1",
+        "filmThickness": "10-15 μm",
+        "flashOff": "10 min"
+      },
+      "voc": {
+        "content": 760,
+        "limit": 780,
+        "category": "IIB.cIII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "57-10",
+        "60-10",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "30-S00": {
+      "code": "30-S00",
+      "officialName": "30- Topcoat, direct gloss",
+      "revision": "04/2024",
+      "intro": [
+        "Topcoat, direct gloss",
+        "High solid and pigment content",
+        "Topcoat with high hiding power and low material consumption",
+        "Use hardeners and reducers depending on temperature and object size",
+        "Do not use mixing bases on their own, but always with 30-",
+        "Topcoat Converter"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [],
+          "label": "50 % by volume"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "50-15",
+            "50-20",
+            "50-30"
+          ],
+          "label": "50-15, -20, -30"
+        },
+        {
+          "share": "10 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30",
+            "60-40"
+          ],
+          "label": "60-10, -20, -30, -40"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 8 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm"
+      },
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [
+        "50-15",
+        "50-20",
+        "50-30",
+        "60-10",
+        "60-20",
+        "60-30",
+        "60-40"
+      ],
+      "origin": "techinfo.baslac.com",
+      "pages": 2
+    },
+    "30-S01": {
+      "code": "30-S01",
+      "officialName": "30 CV Topcoat",
+      "revision": "04/2024",
+      "intro": [
+        "HS - VOC - compliant 1 stage solid topcoat",
+        "Easy application combined with good hiding power",
+        "Suitable for large areas / surfaces with very good appearance and flow",
+        "Excellent UV resistance and fast drying"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [],
+          "label": "50 % by volume"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "51-515",
+            "51-520"
+          ],
+          "label": "51-515, -520"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 8 h",
+        "Drying at 60°C: 30 min"
+      ],
+      "facts": {
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "2 h",
+        "nozzle": "1.5 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": "Application Remark"
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "51-515",
+        "51-520"
+      ],
+      "origin": "techinfo.baslac.com",
+      "pages": 2
+    },
+    "35-M00": {
+      "code": "35-M00",
+      "officialName": "35- Basecoat",
+      "revision": "06/2023",
+      "intro": [
+        "Basecoat for solid color, metallic and pearl coatings",
+        "High solid and pigment content - good hiding power",
+        "Low material consumption",
+        "Short flash-off time"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [],
+          "label": "50 % by volume"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30",
+            "60-40"
+          ],
+          "label": "60-10, -20, -30, -40"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "mixingRatio": "2:1",
+        "sprayViscosity": "DIN 4: 18-22 s",
+        "potLife": "48 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "15-20 μm",
+        "flashOff": "10 min until mat"
+      },
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [
+        "60-10",
+        "60-20",
+        "60-30",
+        "60-40"
+      ],
+      "origin": "techinfo.baslac.com",
+      "pages": 1
+    },
+    "40-10": {
+      "code": "40-10",
+      "officialName": "2K Panel Clear",
+      "revision": "06/2023",
+      "intro": [
+        "MS clear for baslac basecoat 35-",
+        "Easy and safe to spray, fast drying, easy to polish",
+        "To be used on 1 or 2 vertical panels",
+        "Multi colored paint jobs, signwriting and plastic parts"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "40-10"
+          ],
+          "label": "40-10"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "50-20",
+            "50-15",
+            "50-30"
+          ],
+          "label": "50-20, -15, -30"
+        },
+        {
+          "share": "10-30 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30",
+            "60-40"
+          ],
+          "label": "60-10, -20, -30, -40"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 4 h dust-free: 2 h",
+        "Drying at 60°C: 20 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 16 s",
+        "potLife": "4 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-60 μm"
+      },
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [
+        "50-20",
+        "50-15",
+        "50-30",
+        "60-10",
+        "60-20",
+        "60-30",
+        "60-40"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "40-100": {
+      "code": "40-100",
+      "officialName": "40-100 High Speed 2K Clear VOC Page 1 of 2 06/2026 Application HS VOC clear for basecoat. Key Features Time savings during drying and great performance at lower temperatures. Designed for user-friendyliness: premixed clear coat and easy to use. Good finishing. Select hardener according to ambient temperature and size of object to be painted. Choose right hardener from temperature chart. Mixing Ratio 2:1 Mixing Ratio 100 % by volume 40-100 - High Speed 2K Clear VOC Hardener 50 % by volume 50-415 - 2K Clear Hardener VOC fast50-420 - 2K Clear Hardener VOC normal50-430 - 2K Clear Hardener VOC slow50-430 only in very hot conditions Spray Viscosity at 20°C DIN 4: 17-19 s Potlife at 20°C 30 min Application Compliant Gravity Spray Gun Application Pressure 2 bar Nozzle Size 1.2 -1.3 Number of Coats 2 Flash Off at20°C At least 3 min between spray coats Film thickness 40 -50 μm Remarks Alternative application: ½ + 1, half coat followed by full coat without intermediate flash off. Technical Information40-10040-100 High Speed 2K Clear VOC Page 2 of 2 06/2026 Drying Drying at 20°C 50-415: 3 h50-420: 3 h50-430: 3 h Drying at 40°C 50-415: 20 min50-420: 25 min50-430: 30 min Drying at 60°C 50-415: 10 min50-420: 15 min50-430: 20 min Please note: For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensor technology, must always be observed in addition to the processing instructions given within this document. Safety Advice It cannot be ruled out that this product contains particles < 0.1 μm. The products are suitable for professional use only. For the use of this product please adhere to the actual safety recommendations and the personal protective equipment.2004/42/IIB(d)(420)419: The EU limit value for this product (product category: IIB.d) in ready-for-use form is max 420 g/l. The VOC content of this product is 419 g/l. The data contained in this publication are based on our current knowledge and experience. In view of the many factors that may affect processing and application of our products, these data do not relieve processors from carrying out their own investigations and tests; neither do these data imply anyguarantee of certain properties, nor the suitability of the products for a specific purpose. Any descriptions, drawings, photographs, data, proportions, weights etc. given herein are for general information purpose only; they may change without prior information and do not constitute the agreed contractual quality of the products (product specification). The latest version supersedes all previous versions. You can obtain the latest version from our website or directly from your sales partner. It is the responsibility of the recipient of our products to ensure that any proprietary rights and existing laws and legislation are observed.BASF Coatings GmbH - Automotive Refinish Coatings Solutions Europe - Glasuritstrasse 1 - 48165 Münster - Germany",
+      "revision": null,
+      "intro": [],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 1,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "40-40": {
+      "code": "40-40",
+      "officialName": "2K Universal Clear",
+      "revision": "06/2023",
+      "intro": [
+        "HS clearcoat for high quality",
+        "Clear for baslac basecoat 35-",
+        "High solids content, excellent weathering resistance",
+        "Good polishing behaviour",
+        "High gloss, high finish quality"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "40-40"
+          ],
+          "label": "40-40"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "50-20",
+            "50-30"
+          ],
+          "label": "50-20, -30"
+        },
+        {
+          "share": "10 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30",
+            "60-40"
+          ],
+          "label": "60-10, -20, -30, -40"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 8 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 18-20 s",
+        "potLife": "4 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": "2-3 min after each spray coat"
+      },
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [
+        "50-20",
+        "50-30",
+        "60-10",
+        "60-20",
+        "60-30",
+        "60-40"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "40-440": {
+      "code": "40-440",
+      "officialName": "2K VOC Clear",
+      "revision": "12/2025",
+      "intro": [
+        "HS VOC clear for basecoat",
+        "High solids content, safe to spray, excellent flow and levelling, fast drying, excellent surface hardness, polishing behaviour and tape resistance.",
+        "Select hardener according to ambient temperature and size of object to be painted. Choose right hardener from temperature chart."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "40-440"
+          ],
+          "label": "40-440"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "50-415",
+            "50-420",
+            "50-430"
+          ],
+          "label": "50-415, -420, -430"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 50-415: 10 h",
+        "Drying at 60°C: 50-415: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "2:1",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "40-60 μm",
+        "flashOff": "3 min between spray coats"
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-415",
+        "50-420",
+        "50-430"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "40-450": {
+      "code": "40-450",
+      "officialName": "HS Universal Clear VOC",
+      "revision": "12/2025",
+      "intro": [
+        "HS VOC clear for basecoat",
+        "High solids content, safe to spray, excellent levelling flow, excellent surface hardness and polishing behaviour",
+        "Select hardener and reducer according to ambient temperature and size of object to be painted. Hardeners and thinner combination available on temperature chart."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "40-450"
+          ],
+          "label": "40-450"
+        },
+        {
+          "share": "50 % by volume",
+          "codes": [
+            "50-415",
+            "50-420",
+            "50-430"
+          ],
+          "label": "50-415, -420, -430"
+        },
+        {
+          "share": "10 % by volume",
+          "codes": [
+            "60-10",
+            "60-20",
+            "60-30"
+          ],
+          "label": "60-10, -20, -30"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 50-415: 6 h",
+        "Drying at 60°C: 50-415: 20 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "40-60 μm",
+        "flashOff": "3 min between spray coats"
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-415",
+        "50-420",
+        "50-430",
+        "60-10",
+        "60-20",
+        "60-30"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "40-510": {
+      "code": "40-510",
+      "officialName": "Ambient clear",
+      "revision": "01/2024",
+      "intro": [
+        "Ambient clear for baslac basecoat",
+        "Easy and safe to spray, fast drying, easy to polish",
+        "To be used for ambient or air drying",
+        "Simple mixing ratio",
+        "Select hardener according to ambient temperature and size of object to be painted.",
+        "Potlife can be extended up to 30 min by using hardener 50-530."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [
+            "40-510"
+          ],
+          "label": "40-510"
+        },
+        {
+          "share": "25 % by volume",
+          "codes": [
+            "50-510",
+            "50-530"
+          ],
+          "label": "50-510, -530"
+        }
+      ],
+      "drying": [
+        "Infrared (short wave): 5 min",
+        "Infrared (medium wave): 5-10 min"
+      ],
+      "facts": {
+        "mixingRatio": "4:1",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "20 min",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "1",
+        "filmThickness": "40 μm"
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-510",
+        "50-530"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "40-620": {
+      "code": "40-620",
+      "officialName": "2K Clear mat VOC",
+      "revision": null,
+      "intro": [
+        "Gloss levels between matt and satin matt (12-65 units at an angle of 60°) can be achieved by different mixing ratios with baslac clears.",
+        "The gloss level may be higher with light and pure silver colors. Moreover, car bodies may show gloss level differences between vertically and horizontally coated panels.",
+        "Therefore, we recommend making a spray sample before refinishing and comparing it to the area to be repaired. Deviations of +/- 5 gloss units are possible.",
+        "In order to achieve different gloss levels, the product can be mixed with 40-440 2K VOC Clear or 40-450 HS",
+        "Universal Clear VOC.",
+        "In order to avoid any gloss deviation when refinishing matt clear, the following instructions have to be observed:",
+        "Stir 40-620 manually very well.",
+        "Consistent clear coat film thicknesses can be achieved by applying two equally full layers and staggered overlaps."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by weight",
+          "codes": [
+            "40-620"
+          ],
+          "label": "40-620"
+        },
+        {
+          "share": "33 % by weight",
+          "codes": [
+            "50-420"
+          ],
+          "label": "50-420"
+        },
+        {
+          "share": "17 % by weight",
+          "codes": [
+            "60-20"
+          ],
+          "label": "60-20"
+        }
+      ],
+      "drying": [
+        "Drying at 20°C: 7 h",
+        "Drying at 60°C: 30 min",
+        "Infrared (short wave): 8 min",
+        "Infrared (medium wave): 10-15 min"
+      ],
+      "facts": {
+        "mixingRatio": "100:33:17",
+        "sprayViscosity": "DIN 4: 16-18 s",
+        "potLife": "4 h",
+        "nozzle": "1.3",
+        "sprayCoats": "2",
+        "filmThickness": "40-50 μm",
+        "flashOff": "Flash off until completely mat after the first spray coat and before drying. Do not flash off for more than 25 min."
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [
+        "50-420",
+        "60-20"
+      ],
+      "origin": "repozitorijum",
+      "pages": 2
+    },
+    "45-R45": {
+      "code": "45-R45",
+      "officialName": "Reducer",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 45-, 49-."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "45-W00": {
+      "code": "45-W00",
+      "officialName": "45- Basecoat",
+      "revision": "06/2023",
+      "intro": [
+        "Waterborne metallic and solid color basecoat / clearcoat finishing",
+        "Easy application combined with good hiding power",
+        "Flash-off times can be reduced significantly by using appropriate air blow equipment",
+        "Mixtures will keep for up to 6 months when stored in plastic containers or cans coated inside"
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [],
+          "label": "70 % by volume"
+        },
+        {
+          "share": "70 % by volume",
+          "codes": [
+            "45-R45"
+          ],
+          "label": "45-R45"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "sprayViscosity": "DIN 4: 16-22 s",
+        "nozzle": "1.4 mm",
+        "sprayCoats": "2",
+        "filmThickness": "10-15 μm",
+        "flashOff": "5 min after each spraycoat until mat"
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 1,
+      "relatedCodes": [
+        "45-R45"
+      ],
+      "origin": "techinfo.baslac.com",
+      "pages": 1
+    },
+    "45-W10": {
+      "code": "45-W10",
+      "officialName": "3 Stage Additive and Blending Clear",
+      "revision": "06/2023",
+      "intro": [
+        "The blend in clear is used to blend in metallic colors."
+      ],
+      "mixing": [
+        {
+          "share": "100 % by volume",
+          "codes": [],
+          "label": "70 % by volume"
+        },
+        {
+          "share": "70 % by volume",
+          "codes": [
+            "45-R45"
+          ],
+          "label": "45-R45"
+        }
+      ],
+      "drying": [],
+      "facts": {
+        "sprayViscosity": "DIN 4: 18-24 s",
+        "nozzle": "1.4 mm",
+        "sprayCoats": "1",
+        "flashOff": "No flash off before applying 45 Line."
+      },
+      "voc": {
+        "content": 419,
+        "limit": 420,
+        "category": "IIB.d"
+      },
+      "vocBlocks": 1,
+      "relatedCodes": [
+        "45-R45"
+      ],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-05": {
+      "code": "50-05",
+      "officialName": "2K Hardener Ambient UC",
+      "revision": "03/2024",
+      "intro": [
+        "This product is used in the baslac 2K Primerfillers 20-24, 20-34 and 20-94."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-10": {
+      "code": "50-10",
+      "officialName": "2K Hardener Extra Fast (Asia / Pacific)",
+      "revision": "06/2023",
+      "intro": [
+        "This product is available in",
+        "Asia / Pacific only",
+        "It is used in baslac 2K Primerfillers."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "techinfo.baslac.com",
+      "pages": 1
+    },
+    "50-15": {
+      "code": "50-15",
+      "officialName": "2K Hardener Fast",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K Primerfiller, 2K Plastic Primer,",
+        "Topcoat direct gloss 30 and Clears 40-10, -40."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-20": {
+      "code": "50-20",
+      "officialName": "2K Hardener normal",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K Primerfiller, 2K Plastic Primer,",
+        "Topcoat direct gloss 30 and Clears 40-10, -40."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-30": {
+      "code": "50-30",
+      "officialName": "2K Hardener slow",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac",
+        "Topcoat direct gloss 30- and Clears 40-10, -40."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "techinfo.baslac.com",
+      "pages": 1
+    },
+    "50-415": {
+      "code": "50-415",
+      "officialName": "2K Clear Hardener VOC fast",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K VOC Clear 40-440 and 40-450."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-420": {
+      "code": "50-420",
+      "officialName": "2K Clear Hardener VOC normal",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K VOC Clear 40-440 and 40-450."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-430": {
+      "code": "50-430",
+      "officialName": "2K Clear Hardener VOC slow",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K VOC Clear 40-440 and 40-450."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-45": {
+      "code": "50-45",
+      "officialName": "2K Activator",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac waterborne basecoat 45-.",
+        "The drying time depends on climatic conditions and equipment used."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-510": {
+      "code": "50-510",
+      "officialName": "Hardener Ambient Clear",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac",
+        "Ambient Clear 40-510."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "50-530": {
+      "code": "50-530",
+      "officialName": "Ambient Clear Hardener slow",
+      "revision": "01/2024",
+      "intro": [
+        "This product is used in baslac",
+        "Ambient Clear 40-510.",
+        "Longer potlife for bigger surfaces."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "51-515": {
+      "code": "51-515",
+      "officialName": "2K Hardener CV fast",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 30 CV"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "51-520": {
+      "code": "51-520",
+      "officialName": "2K Hardener CV normal",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac",
+        "Topcoat 30 CV"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "51-530": {
+      "code": "51-530",
+      "officialName": "2K Hardener CV slow",
+      "revision": "05/2020",
+      "intro": [
+        "This product is used in baslac 30 CV"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "55-10": {
+      "code": "55-10",
+      "officialName": "EP Hardener",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K Primerfiller EP"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "56-20": {
+      "code": "56-20",
+      "officialName": "Bodyfiller Hardener",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac Bodyfiller Universal 12-20."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "57-10": {
+      "code": "57-10",
+      "officialName": "Additive Washprimer",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in baslac 2K Washprimer 27-10."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "57-30": {
+      "code": "57-30",
+      "officialName": "Additive Washprimer slow",
+      "revision": "05/2020",
+      "intro": [
+        "This product is used in baslac 2K Washprimer 27-10."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "60-05": {
+      "code": "60-05",
+      "officialName": "Speeding Reducer",
+      "revision": "06/2023",
+      "intro": [
+        "Drying accelerator for baslac clear coats (VOC-compliant), and 2K Primer filler",
+        "Reduction of drying times",
+        "Improves surface drying and curing performance.",
+        "No add of 60-05 Speeding Reducer in 2K Primerfiller / Filler at temperatures > 25°C possible, due to too short potlife."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "60-10": {
+      "code": "60-10",
+      "officialName": "Reducer Universal Fast",
+      "revision": "06/2023",
+      "intro": [
+        "baslac reducer to be mixed with baslac undercoat materials, 35- Basecoat, 30-",
+        "Topcoat and Clears.",
+        "Seal cans with left-over material carefully",
+        "See technical data sheet for undercoat materials and clears"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "60-20": {
+      "code": "60-20",
+      "officialName": "Reducer Universal Normal",
+      "revision": "06/2023",
+      "intro": [
+        "baslac reducer to be mixed with baslac undercoat materials, 35- Basecoat, 30-",
+        "Topcoat and Clears.",
+        "Seal cans with left-over material carefully",
+        "See technical data sheet for undercoat materials and clears"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "60-30": {
+      "code": "60-30",
+      "officialName": "Reducer Universal Slow",
+      "revision": "06/2023",
+      "intro": [
+        "baslac reducer to be mixed with baslac undercoat materials, 35- Basecoat, 30-",
+        "Topcoat and Clears.",
+        "Seal cans with left-over material carefully",
+        "See technical data sheet for undercoat materials and clears"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "60-40": {
+      "code": "60-40",
+      "officialName": "Reducer Universal Extra Slow",
+      "revision": "06/2023",
+      "intro": [
+        "baslac reducer to be mixed with baslac undercoat materials, 35- Basecoat, 30-",
+        "Topcoat and Clears.",
+        "Seal cans with left-over material carefully",
+        "See technical data sheet for undercoat materials and clears"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "65-10": {
+      "code": "65-10",
+      "officialName": "Blending Reducer",
+      "revision": "06/2023",
+      "intro": [
+        "Blend-in reducer for baslac clears 40-",
+        "Blend-in reducer to melt in overspray / overlap areas or to melt in clear coat"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2"
+      },
+      "voc": {
+        "content": 760,
+        "limit": 780,
+        "category": "IIB.cIII"
+      },
+      "vocBlocks": 1,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "70-10": {
+      "code": "70-10",
+      "officialName": "Silicon Remover",
+      "revision": "06/2023",
+      "intro": [
+        "Cleaner for bare steel, aluminium, old paintwork and new panels (factory primed)",
+        "Seal cans with left-over material carefully"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "techinfo.baslac.com",
+      "pages": 1
+    },
+    "70-20": {
+      "code": "70-20",
+      "officialName": "Cleaner Plastic",
+      "revision": "06/2023",
+      "intro": [
+        "Cleaner for plastics and GRP",
+        "/ SMC.",
+        "Seal cans with left-over material carefully"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "70-45": {
+      "code": "70-45",
+      "officialName": "Cleaner",
+      "revision": "06/2023",
+      "intro": [
+        "baslac 70-45 Cleaner",
+        "To clean surfaces and blend-in areas prior to the application of baslac Primer / Fillers and baslac 45- Line metallic or solid color basecoat.",
+        "The cleaner acts as an anti-static agent, and reduces dust settling during topcoat application on plastic parts",
+        "Can be used to clean sprayguns for waterborne",
+        "Good cleaning properties",
+        "Apply 70-45 with vaporizer or soak a lint-free cloth. Clean the surface to be refinished with one cloth, and dry-clean with a separate cloth (wipe on wipe off system)."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": {
+        "content": 198,
+        "limit": 200,
+        "category": "IIB.aII"
+      },
+      "vocBlocks": 1,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "80-10": {
+      "code": "80-10",
+      "officialName": "Additive FLEX",
+      "revision": "06/2023",
+      "intro": [
+        "Plasticizing additive 80-10, use in plastics refinish procedures in combination with baslac 2K primerfiller, clears and topcoats.",
+        "good elasticity",
+        "good miscibility behaviour"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "80-20": {
+      "code": "80-20",
+      "officialName": "Additive MAT",
+      "revision": "06/2023",
+      "intro": [
+        "HS matting agent for baslac clears and topcoats.",
+        "Easy to mix",
+        "Prepare only the quantity of paint that will be used the same day because the gloss level may change when the mixture is stored"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "80-30": {
+      "code": "80-30",
+      "officialName": "Additive Plast",
+      "revision": "06/2023",
+      "intro": [
+        "Additive Plast",
+        "Plastic additive for all paintable plastics used in combination with baslac wet-on-wet primerfillers.",
+        "Provides good adhesion on plastics.",
+        "If needed, the product can be applied to bordering e-coated parts.",
+        "The use of 80-30 on polypropylene (PP) and polyethylene (PE) does not provide sufficient adhesion and is therefore not recommended."
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": null,
+      "vocBlocks": 0,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    },
+    "81-30": {
+      "code": "81-30",
+      "officialName": "Additive Chassis CV",
+      "revision": "06/2023",
+      "intro": [
+        "This product is used in combination with baslac 30CV",
+        "For correct application, please see:"
+      ],
+      "mixing": [],
+      "drying": [],
+      "facts": {},
+      "voc": {
+        "content": 530,
+        "limit": 540,
+        "category": "IIB.cII"
+      },
+      "vocBlocks": 2,
+      "relatedCodes": [],
+      "origin": "repozitorijum",
+      "pages": 1
+    }
+  }
+}

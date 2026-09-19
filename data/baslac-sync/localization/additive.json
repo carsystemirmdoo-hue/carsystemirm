@@ -1,0 +1,177 @@
+{
+  "45-w10": {
+    "sourceHash": "261205137407a5e2",
+    "productType": "Aditiv za trostepene nijanse i blendovanje",
+    "subtype": "3-Stage Additive and Blending Clear",
+    "shortDescription": "3-Stage Additive and Blending Clear je aditiv i blend-in bezbojni lak za stapanje metalik nijansi.",
+    "longDescription": "3-Stage Additive and Blending Clear je aditiv baslac programa iz grupe 45-. Zvanični opis navodi blend-in bezbojni lak koji se koristi za stapanje metalik nijansi. Tehnički list navodi viskozitet prskanja DIN 4: 18-24 s, mlaznicu 1,4 mm i jedan sloj nanošenja, bez isparavanja pre nanošenja 45 Line.",
+    "purpose": "Stapanje metalik nijansi",
+    "facts": [
+      {
+        "label": "Viskozitet prskanja",
+        "value": "DIN 4: 18-24 s"
+      },
+      {
+        "label": "Mlaznica",
+        "value": "1,4 mm"
+      },
+      {
+        "label": "Broj slojeva",
+        "value": "1"
+      },
+      {
+        "label": "Razmak između slojeva",
+        "value": "Bez isparavanja pre nanošenja 45 Line"
+      },
+      {
+        "label": "VOC",
+        "value": "419 g/l (granica 420 g/l), kategorija IIB.d"
+      }
+    ],
+    "applications": [
+      "Stapanje metalik nijansi",
+      "Nanošenje u jednom sloju, bez isparavanja pre 45 Line"
+    ],
+    "benefits": [
+      {
+        "title": "Stapanje metalik nijansi",
+        "description": "Zvanični opis navodi da se blend-in bezbojni lak koristi za stapanje metalik nijansi."
+      }
+    ],
+    "advice": null
+  },
+  "57-10": {
+    "sourceHash": "dbf5a186dafaa486",
+    "productType": "Aditiv za washprimer",
+    "subtype": "baslac 57- linija · 2K Washprimer",
+    "shortDescription": "Additive Washprimer je aditiv koji se, prema zvaničnom opisu, koristi u baslac 2K Washprimer materijalu.",
+    "longDescription": "Additive Washprimer je aditiv baslac programa, označen grupom 57-. Zvanični tehnički list ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu, u fazi podloge. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu washprimer materijala u koji se dodaje.",
+    "purpose": "Dodatak za baslac 2K Washprimer",
+    "facts": [],
+    "applications": [
+      "Priprema 2K Washprimer smeše",
+      "Doziranje prema tehničkom listu washprimer materijala"
+    ],
+    "benefits": [
+      {
+        "title": "Deo 2K Washprimer smeše",
+        "description": "Zvanični opis ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu."
+      }
+    ],
+    "advice": null
+  },
+  "57-30": {
+    "sourceHash": "3c387eddd315eb57",
+    "productType": "Aditiv za washprimer",
+    "subtype": "baslac 57- linija · gradacija slow",
+    "shortDescription": "Additive Washprimer slow je aditiv za baslac 2K Washprimer materijal, u gradaciji slow.",
+    "longDescription": "Additive Washprimer slow je aditiv baslac programa, označen grupom 57-. Zvanični tehnički list ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu. Oznaka slow razlikuje ovu gradaciju od standardne varijante u istoj grupi. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu washprimer materijala u koji se dodaje.",
+    "purpose": "Dodatak za baslac 2K Washprimer, gradacija slow",
+    "facts": [],
+    "applications": [
+      "Priprema 2K Washprimer smeše",
+      "Doziranje prema tehničkom listu washprimer materijala"
+    ],
+    "benefits": [
+      {
+        "title": "Deo 2K Washprimer smeše",
+        "description": "Zvanični opis ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu."
+      }
+    ],
+    "advice": null
+  },
+  "80-10": {
+    "sourceHash": "0fba84b791fd4585",
+    "productType": "Plastifikujući aditiv",
+    "subtype": "baslac Plasticizing Additive · plastika",
+    "shortDescription": "Additive Flex je plastifikujući aditiv za popravke plastike, u kombinaciji sa baslac 2K punilom, lakovima i završnim bojama.",
+    "longDescription": "Additive Flex je plastifikujući aditiv namenjen postupcima popravke plastike. Zvanični opis ga navodi u kombinaciji sa baslac 2K prajmer-punilom, bezbojnim lakovima i završnim bojama, uz dobru elastičnost i dobro ponašanje pri mešanju. Zvanične osobine ga navode i kao baslac plastifikator za PUR proizvode. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+    "purpose": "Plastifikacija premaza na plastici",
+    "facts": [],
+    "applications": [
+      "Popravka delova od plastike",
+      "Dodavanje u 2K prajmer-punilo, bezbojni lak ili završnu boju",
+      "Doziranje prema tehničkom listu materijala u koji se dodaje"
+    ],
+    "benefits": [
+      {
+        "title": "Dobra elastičnost",
+        "description": "Zvanične osobine navode dobru elastičnost premaza sa ovim aditivom."
+      },
+      {
+        "title": "Dobra mešljivost",
+        "description": "Zvanične osobine navode dobro ponašanje pri mešanju sa materijalom."
+      },
+      {
+        "title": "Plastifikator za PUR",
+        "description": "Zvanični opis ga navodi kao baslac plastifikator za PUR proizvode."
+      }
+    ],
+    "advice": null
+  },
+  "80-20": {
+    "sourceHash": "c41fbb9db8930aa4",
+    "productType": "Aditiv za matiranje",
+    "subtype": "HS Matting Agent",
+    "shortDescription": "Additive Mat je baslac HS sredstvo za matiranje bezbojnih lakova i završnih boja.",
+    "longDescription": "Additive Mat je HS sredstvo za matiranje, namenjeno baslac bezbojnim lakovima i završnim bojama. Dodaje se u materijal pri pripremi smeše, a zvanične osobine ističu jednostavno mešanje. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+    "purpose": "Matiranje bezbojnih lakova i završnih boja",
+    "facts": [],
+    "applications": [
+      "Dodavanje u bezbojni lak ili završnu boju",
+      "Doziranje prema tehničkom listu materijala u koji se dodaje"
+    ],
+    "benefits": [
+      {
+        "title": "HS sredstvo za matiranje",
+        "description": "Zvanični opis ga navodi kao HS sredstvo za matiranje baslac bezbojnih lakova i završnih boja."
+      },
+      {
+        "title": "Jednostavno mešanje",
+        "description": "Zvanične osobine navode da se lako meša sa materijalom."
+      }
+    ],
+    "advice": "Pripremiti samo količinu materijala koja će se potrošiti istog dana, jer se pri čuvanju smeše nivo sjaja može promeniti."
+  },
+  "80-30": {
+    "sourceHash": "c36de513d5ba9a16",
+    "productType": "Aditiv za plastiku",
+    "subtype": "baslac 80- linija · wet-on-wet punila",
+    "shortDescription": "Additive Plast je aditiv za sve lakirljive plastike, u kombinaciji sa baslac wet-on-wet prajmer-punilima.",
+    "longDescription": "Additive Plast je aditiv baslac programa, označen grupom 80-. Zvanični opis ga navodi za sve plastike koje se mogu lakirati, u kombinaciji sa baslac wet-on-wet prajmer-punilima, i navodi dobro prianjanje na plastiku. Po potrebi se može naneti i na susedne delove sa e-coat premazom. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+    "purpose": "Prianjanje na lakirljive plastike",
+    "facts": [],
+    "applications": [
+      "Dodavanje u baslac wet-on-wet prajmer-punilo",
+      "Priprema delova od plastike koji se lakiraju",
+      "Po potrebi nanošenje na susedne delove sa e-coat premazom"
+    ],
+    "benefits": [
+      {
+        "title": "Dobro prianjanje",
+        "description": "Zvanični opis navodi dobro prianjanje na plastiku."
+      }
+    ],
+    "advice": "Proizvođač ne preporučuje primenu na polipropilenu (PP) i polietilenu (PE), jer prianjanje nije dovoljno."
+  },
+  "81-30": {
+    "sourceHash": "9ca58b83573a9109",
+    "productType": "Aditiv",
+    "subtype": "baslac 81- linija · 30CV program",
+    "shortDescription": "Additive Chassis je aditiv koji se, prema zvaničnom opisu, koristi u kombinaciji sa baslac 30CV programom.",
+    "longDescription": "Additive Chassis je aditiv baslac programa, označen grupom 81-. Zvanični tehnički list ga navodi u kombinaciji sa baslac 30CV programom, a sadržaj isparljivih organskih jedinjenja iznosi 530 g/l. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+    "purpose": "Dodatak za baslac 30CV program",
+    "facts": [
+      {
+        "label": "VOC",
+        "value": "530 g/l (granica 540 g/l), kategorija IIB.cII"
+      }
+    ],
+    "applications": [
+      "Dodavanje u materijal iz baslac 30CV programa",
+      "Doziranje prema tehničkom listu materijala u koji se dodaje"
+    ],
+    "benefits": [],
+    "advice": "Za ispravnu primenu pogledati zvanični tehnički list proizvoda."
+  }
+}

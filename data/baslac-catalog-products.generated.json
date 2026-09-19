@@ -1,0 +1,5698 @@
+{
+  "meta": {
+    "generator": "scripts/baslac-sync/apply.mjs",
+    "brand": "baslac",
+    "manufacturer": "baslac (Surventis)",
+    "website": "https://www.baslac.com/en-emea",
+    "techinfo": "https://techinfo.baslac.com",
+    "websiteCrawledAt": "2026-09-19T20:40:56.777Z",
+    "products": 40,
+    "systems": 4,
+    "enrichedExisting": 12,
+    "codes": 52,
+    "nestedMixingComponents": [
+      "30-S00",
+      "30-S01",
+      "35-M00",
+      "45-W00"
+    ],
+    "promotedFromLine": [
+      "45-R45",
+      "45-W10"
+    ],
+    "note": "Toneri se zvanično ne objavljuju pojedinačno; brojevi artikala nisu javni podatak i ne upisuju se."
+  },
+  "products": [
+    {
+      "slug": "baslac-12-20-bodyfiller-universal",
+      "name": "baslac 12-20 Bodyfiller Universal",
+      "sourceKey": "12-20",
+      "code": "12-20",
+      "officialName": "12-20 Bodyfiller Universal",
+      "displayName": "Bodyfiller Universal",
+      "kind": "product",
+      "role": "bodyfiller",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/12-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "rule": "bodyfiller"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "56-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-56-20-bodyfiller-hardener",
+          "name": "56-20 Bodyfiller Hardener"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": "5 min",
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": "P80 / P150 / P240",
+        "drying": [
+          "Drying at 20°C: 20-30 min",
+          "Infrared (short wave): 4 min",
+          "Infrared (medium wave): 5-10 min"
+        ],
+        "voc": {
+          "content": 180,
+          "limit": 250,
+          "category": "IIB.b"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 12-20 Bodyfiller Universal",
+          "href": "/documents/products/baslac/12-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-12-20-bodyfiller-universal.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K univerzalni kit",
+        "subtype": "Bodyfiller Universal · svetlosiv",
+        "shortDescription": "Univerzalni dvokomponentni kit za grubo i fino kitovanje na čeliku, pocinkovanom čeliku i aluminijumu.",
+        "longDescription": "12-20 Bodyfiller Universal je univerzalni kit za pripremu površine, obojen u svetlosivo. Pokriva postupak grubog i finog kitovanja na čeliku, pocinkovanom čeliku i aluminijumu. Ima visok sadržaj suve materije, brzo se suši, lako se brusi i dobro prianja. Meša se sa crvenom pastom do ujednačene boje.",
+        "purpose": "Grubo i fino kitovanje metalnih površina",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "100 : 2-3 % po masi"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "5 min"
+          },
+          {
+            "label": "Brušenje",
+            "value": "P80 / P150 / P240"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 20-30 min · infracrveno (kratkotalasno): 4 min · infracrveno (srednjetalasno): 5-10 min"
+          },
+          {
+            "label": "VOC",
+            "value": "180 g/l (granica 250 g/l), kategorija IIB.b"
+          }
+        ],
+        "applications": [
+          "Grubo i fino kitovanje",
+          "Popravke na čeliku i pocinkovanom čeliku",
+          "Popravke na aluminijumu"
+        ],
+        "benefits": [
+          {
+            "title": "Svetlosiva nijansa",
+            "description": "Kit je obojen u svetlosivo."
+          },
+          {
+            "title": "Lako nanošenje i brušenje",
+            "description": "Nanosi se i brusi bez posebnih zahteva."
+          },
+          {
+            "title": "Visok sadržaj suve materije",
+            "description": "Visok sadržaj suve materije uz brzo sušenje."
+          },
+          {
+            "title": "Dobra prionljivost",
+            "description": "Prianja na čelik, pocinkovani čelik i aluminijum."
+          }
+        ],
+        "advice": "Kit i crvenu pastu mešati do ujednačene boje; ne prelaziti 3 % učvršćivača."
+      }
+    },
+    {
+      "slug": "baslac-20-22-2k-primerfiller",
+      "name": "baslac 20-22 2K Primerfiller",
+      "sourceKey": "20-22",
+      "code": "20-22",
+      "officialName": "20-22 2K Primerfiller",
+      "displayName": "2K Primerfiller",
+      "kind": "product",
+      "role": "undercoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/20-22.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "5:1:1",
+        "sprayViscosity": "DIN 4: 25-29 s",
+        "potLife": "60 min",
+        "nozzle": "1.6-1.8",
+        "sprayCoats": "2",
+        "filmThickness": "50-70",
+        "flashOff": null,
+        "sanding": "P400 / P500",
+        "drying": [
+          "Drying at 20°C: 3 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 20-22 2K Primerfiller",
+          "href": "/documents/products/baslac/20-22.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K prajmer-punilo",
+        "subtype": "Universal Sanding Filler · podloga koja se brusi",
+        "shortDescription": "Univerzalno dvokomponentno punilo za brušenje, dobrih svojstava punjenja i lakog brušenja.",
+        "longDescription": "20-22 2K Primerfiller je univerzalno punilo za brušenje sa dobrim svojstvima punjenja. Radna smeša se priprema u odnosu 5:1:1 i nanosi u dva sloja, do debljine filma 50-70 μm. Posle sušenja brusi se granulacijom P400 / P500.",
+        "purpose": "Punjenje i izravnavanje podloge pre lakiranja",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "5:1:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 25-29 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "60 min"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,6-1,8 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-70 μm"
+          },
+          {
+            "label": "Brušenje",
+            "value": "P400 / P500"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 3 h · 60°C: 30 min · infracrveno (kratkotalasno): 8 min · infracrveno (srednjetalasno): 10-15 min"
+          }
+        ],
+        "applications": [
+          "Univerzalna podloga koja se brusi",
+          "Izravnavanje površine pre nanošenja boje"
+        ],
+        "benefits": [
+          {
+            "title": "Dobro punjenje",
+            "description": "Punilo ima dobra svojstva punjenja podloge."
+          },
+          {
+            "title": "Lako brušenje",
+            "description": "Osušen sloj se lako brusi."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-21-10-1k-plastic-primer",
+      "name": "baslac 21-10 1K Plastic Primer",
+      "sourceKey": "21-10",
+      "code": "21-10",
+      "officialName": "21-10 1K Plastic Primer",
+      "displayName": "1K Plastic Primer",
+      "kind": "product",
+      "role": "undercoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/21-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": null,
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": "1.3-1.4 mm",
+        "sprayCoats": "1",
+        "filmThickness": "10 μm",
+        "flashOff": "15 min before filler application",
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 21-10 1K Plastic Primer",
+          "href": "/documents/products/baslac/21-10.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-21-10-1k-plastic-primer.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "1K prajmer za plastiku",
+        "subtype": "Multi-Purpose Plastic Adhesion Promoter",
+        "shortDescription": "Jednokomponentni promoter prionljivosti, spreman za upotrebu, za sve plastike na vozilima koje se mogu lakirati.",
+        "longDescription": "21-10 1K Plastic Primer je višenamenski promoter prionljivosti, namenjen svim plastikama na korišćenim vozilima koje se mogu lakirati. Isporučuje se spreman za upotrebu i nanosi HVLP pištoljem u jednom sloju, do debljine filma 10 μm. Vreme upotrebe je neograničeno, a odzračivanje kratko — 15 min pre nanošenja punila.",
+        "purpose": "Prionljivost na plastičnim delovima pre punila",
+        "facts": [
+          {
+            "label": "Mlaznica",
+            "value": "1,3-1,4 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "1"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "10 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "15 min pre nanošenja punila"
+          }
+        ],
+        "applications": [
+          "Priprema plastičnih delova pre nanošenja punila",
+          "Nanošenje HVLP pištoljem, bez mešanja",
+          "Lakiranje plastike na korišćenim vozilima"
+        ],
+        "benefits": [
+          {
+            "title": "Spreman za upotrebu",
+            "description": "Isporučuje se spreman za nanošenje, bez pripreme smeše."
+          },
+          {
+            "title": "Neograničeno vreme upotrebe",
+            "description": "Proizvod nema ograničeno vreme upotrebe."
+          },
+          {
+            "title": "Jednostavno i sigurno nanošenje",
+            "description": "Nanosi se jednostavno, sigurno i brzo."
+          },
+          {
+            "title": "Kratko odzračivanje",
+            "description": "Vreme odzračivanja pre nanošenja punila je kratko."
+          }
+        ],
+        "advice": "Pre upotrebe snažno promućkati 2 min. Nanosi se HVLP pištoljem."
+      }
+    },
+    {
+      "slug": "baslac-40-10-2k-panel-clear",
+      "name": "baslac 40-10 2K Panel Clear",
+      "sourceKey": "40-10",
+      "code": "40-10",
+      "officialName": "40-10 2K Panel Clear",
+      "displayName": "2K Panel Clear",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "50-30",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-30-2k-hardener-slow",
+          "name": "50-30 2K Hardener Slow"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "60-40",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-40-reducer-universal-extra-slow",
+          "name": "60-40 Reducer Universal Extra Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        },
+        {
+          "code": "80-20",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-20-additive-mat",
+          "name": "80-20 Additive Mat"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 16 s",
+        "potLife": "4 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-60 μm",
+        "flashOff": null,
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 4 h dust-free: 2 h",
+          "Drying at 60°C: 20 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-10 2K Panel Clear",
+          "href": "/documents/products/baslac/40-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-10-2k-panel-clear.webp",
+        "width": 1200,
+        "height": 1000,
+        "hasAlpha": false,
+        "processing": "kept-background"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K bezbojni lak",
+        "subtype": "MS bezbojni lak · brzo sušenje",
+        "shortDescription": "MS bezbojni lak za manje popravke, sa brzim sušenjem i jednostavnim prskanjem.",
+        "longDescription": "2K Panel Clear je MS bezbojni lak koji se nanosi preko bazne boje. Predviđen je za rad na jednom ili dva vertikalna panela, kao i za višebojne radove, natpise i plastične delove. Nanosi se u 2 sloja do debljine filma 50-60 μm, a osušen sloj se lako polira.",
+        "purpose": "Završno lakiranje manjih popravki i pojedinačnih panela",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "2:1+10 %"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 16 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "4 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-60 μm"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 4 h, bez prašine: 2 h · 60°C: 20 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje preko bazne boje",
+          "Popravke na jednom ili dva vertikalna panela",
+          "Višebojni radovi i natpisi",
+          "Lakiranje plastičnih delova"
+        ],
+        "benefits": [
+          {
+            "title": "Brzo sušenje",
+            "description": "Brzosušeći bezbojni lak namenjen manjim popravkama."
+          },
+          {
+            "title": "Jednostavno prskanje",
+            "description": "Jednostavno i sigurno se prska, a osušen sloj se lako polira."
+          }
+        ],
+        "advice": "Predviđen za rad na jednom ili dva vertikalna panela."
+      }
+    },
+    {
+      "slug": "baslac-40-100-high-speed-2k-clear-voc",
+      "name": "baslac 40-100 High Speed 2K Clear VOC",
+      "sourceKey": "40-100",
+      "code": "40-100",
+      "officialName": "40-100 High Speed 2K Clear VOC",
+      "displayName": "High Speed 2K Clear VOC",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-100.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": null,
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-100 High Speed 2K Clear VOC",
+          "href": "/documents/products/baslac/40-100.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-100-high-speed-2k-clear-voc.webp",
+        "width": 1200,
+        "height": 1000,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K bezbojni lak VOC",
+        "subtype": "VOC bezbojni lak · brzo umrežavanje",
+        "shortDescription": "2K bezbojni lak VOC sa brzim umrežavanjem i zadržanim učinkom na nižim temperaturama.",
+        "longDescription": "High Speed 2K Clear VOC je 2K bezbojni lak sa brzim umrežavanjem. Zadržava učinak i na nižim temperaturama, a radi sa postojećim baslac učvršćivačima. Pripada VOC kategoriji IIB.d.",
+        "purpose": "Brzo završno lakiranje u VOC programu",
+        "facts": [
+          {
+            "label": "VOC",
+            "value": "kategorija IIB.d, sadržaj 419, granica 420"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje",
+          "Rad pri nižim temperaturama"
+        ],
+        "benefits": [
+          {
+            "title": "Brzo umrežavanje",
+            "description": "Formulacija je usmerena na brzo umrežavanje laka."
+          },
+          {
+            "title": "Rad na nižim temperaturama",
+            "description": "Zadržava učinak i kada je temperatura niža."
+          },
+          {
+            "title": "Postojeći učvršćivači",
+            "description": "Radi sa postojećim baslac učvršćivačima."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-40-40-2k-universal-clear",
+      "name": "baslac 40-40 2K Universal Clear",
+      "sourceKey": "40-40",
+      "code": "40-40",
+      "officialName": "40-40 2K Universal Clear",
+      "displayName": "2K Universal Clear",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-40.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "50-30",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-30-2k-hardener-slow",
+          "name": "50-30 2K Hardener Slow"
+        },
+        {
+          "code": "60-05",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-05-speeding-reducer",
+          "name": "60-05 Speeding Reducer"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "60-40",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-40-reducer-universal-extra-slow",
+          "name": "60-40 Reducer Universal Extra Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        },
+        {
+          "code": "80-20",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-20-additive-mat",
+          "name": "80-20 Additive Mat"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 18-20 s",
+        "potLife": "4 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": "2-3 min after each spray coat",
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 8 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-40 2K Universal Clear",
+          "href": "/documents/products/baslac/40-40.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-40-2k-universal-clear.webp",
+        "width": 1200,
+        "height": 1000,
+        "hasAlpha": false,
+        "processing": "kept-background"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K bezbojni lak",
+        "subtype": "HS bezbojni lak · visok sjaj",
+        "shortDescription": "HS bezbojni lak visokog sjaja za sve vrste popravki, sa visokim sadržajem suve materije.",
+        "longDescription": "2K Universal Clear je HS bezbojni lak koji se nanosi preko bazne boje i pokriva sve vrste popravki. Visok sadržaj suve materije i dobra otpornost na atmosferske uticaje daju postojan završni sloj visokog sjaja i kvalitetnog izgleda. Nanosi se u 2 sloja do debljine filma 50-70 μm, uz razmak od 2-3 min posle svakog sloja, a dobro se ponaša i pri poliranju.",
+        "purpose": "Završno lakiranje svih vrsta popravki preko bazne boje",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "2:1+10 %"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 18-20 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "4 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-70 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "2-3 min posle svakog sloja"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 8 h · 60°C: 30 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje preko bazne boje",
+          "Sve vrste popravki",
+          "Poliranje završnog sloja"
+        ],
+        "benefits": [
+          {
+            "title": "Visok sjaj",
+            "description": "Daje završni sloj visokog sjaja i kvalitetnog izgleda."
+          },
+          {
+            "title": "Otpornost na vremenske uticaje",
+            "description": "Zadržava izgled pri izloženosti atmosferskim uticajima."
+          },
+          {
+            "title": "Dobro poliranje",
+            "description": "Osušen sloj se dobro ponaša pri poliranju."
+          },
+          {
+            "title": "Jednostavna primena",
+            "description": "Jednostavan je za rad i sigurno se prska."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-40-440-2k-voc-clear",
+      "name": "baslac 40-440 2K VOC Clear",
+      "sourceKey": "40-440",
+      "code": "40-440",
+      "officialName": "40-440 2K VOC Clear",
+      "displayName": "2K VOC Clear",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-440.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-415",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-415-2k-clear-hardener-fast-voc",
+          "name": "50-415 2K Clear Hardener Fast VOC"
+        },
+        {
+          "code": "50-420",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-420-2k-clear-hardener-normal-voc",
+          "name": "50-420 2K Clear Hardener Normal VOC"
+        },
+        {
+          "code": "50-430",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-430-2k-clear-hardener-slow-voc",
+          "name": "50-430 2K Clear Hardener Slow VOC"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        },
+        {
+          "code": "80-20",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-20-additive-mat",
+          "name": "80-20 Additive Mat"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "12/2025",
+        "mixingRatio": "2:1",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "40-60 μm",
+        "flashOff": "3 min between spray coats",
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 50-415: 10 h",
+          "Drying at 60°C: 50-415: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-440 2K VOC Clear",
+          "href": "/documents/products/baslac/40-440.pdf",
+          "language": "en",
+          "version": "12/2025",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-440-2k-voc-clear.webp",
+        "width": 1200,
+        "height": 1000,
+        "hasAlpha": false,
+        "processing": "kept-background"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K bezbojni lak VOC",
+        "subtype": "HS VOC bezbojni lak · brzo sušenje",
+        "shortDescription": "HS bezbojni lak VOC za sve vrste popravki, sa brzim sušenjem i dobrim poliranjem.",
+        "longDescription": "2K VOC Clear je HS bezbojni lak sa visokim sadržajem suve materije, namenjen lakiranju preko bazne boje. Sigurno se prska, dobro razliva i izravnava, brzo se suši i daje tvrdu površinu otpornu na lepljivu traku. Nanosi se u 2 sloja do debljine filma 40-60 μm, uz razmak od 3 min između slojeva.",
+        "purpose": "Završno VOC lakiranje svih vrsta popravki",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "2:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 20-22 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "2 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "40-60 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "3 min"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 10 h · 60°C: 30 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+          },
+          {
+            "label": "VOC",
+            "value": "kategorija IIB.d, sadržaj 419, granica 420"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje preko bazne boje",
+          "Sve vrste popravki",
+          "Poliranje završnog sloja"
+        ],
+        "benefits": [
+          {
+            "title": "Visok sadržaj suve materije",
+            "description": "Formulacija sa visokim sadržajem suve materije."
+          },
+          {
+            "title": "Razlivanje i izravnavanje",
+            "description": "Sloj se dobro razliva i izravnava po površini."
+          },
+          {
+            "title": "Tvrda površina",
+            "description": "Osušen sloj je tvrd i otporan na lepljivu traku."
+          },
+          {
+            "title": "Sigurno prskanje",
+            "description": "Sigurno se prska i brzo se suši."
+          }
+        ],
+        "advice": "Učvršćivač birati prema temperaturi okoline i veličini predmeta koji se lakira, prema temperaturnoj tabeli."
+      }
+    },
+    {
+      "slug": "baslac-40-450-universal-clear-voc",
+      "name": "baslac 40-450 Universal Clear VOC",
+      "sourceKey": "40-450",
+      "code": "40-450",
+      "officialName": "40-450 Universal Clear VOC",
+      "displayName": "Universal Clear VOC",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-450.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-415",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-415-2k-clear-hardener-fast-voc",
+          "name": "50-415 2K Clear Hardener Fast VOC"
+        },
+        {
+          "code": "50-420",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-420-2k-clear-hardener-normal-voc",
+          "name": "50-420 2K Clear Hardener Normal VOC"
+        },
+        {
+          "code": "50-430",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-430-2k-clear-hardener-slow-voc",
+          "name": "50-430 2K Clear Hardener Slow VOC"
+        },
+        {
+          "code": "60-05",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-05-speeding-reducer",
+          "name": "60-05 Speeding Reducer"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        },
+        {
+          "code": "80-20",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-20-additive-mat",
+          "name": "80-20 Additive Mat"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "12/2025",
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "40-60 μm",
+        "flashOff": "3 min between spray coats",
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 50-415: 6 h",
+          "Drying at 60°C: 50-415: 20 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-450 Universal Clear VOC",
+          "href": "/documents/products/baslac/40-450.pdf",
+          "language": "en",
+          "version": "12/2025",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-450-universal-clear-voc.webp",
+        "width": 1200,
+        "height": 1000,
+        "hasAlpha": false,
+        "processing": "kept-background"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "HS bezbojni lak VOC",
+        "subtype": "VOC bezbojni lak · visok sadržaj suve materije",
+        "shortDescription": "Bezbojni lak VOC sa visokim sadržajem suve materije, dobrim razlivanjem i tvrdom površinom.",
+        "longDescription": "Universal Clear VOC je bezbojni lak sa visokim sadržajem suve materije, namenjen lakiranju preko bazne boje. Sigurno se prska i dobro razliva, a osušen sloj ima tvrdu površinu koja se dobro polira. Nanosi se u 2 sloja do debljine filma 40-60 μm, uz razmak od 3 min između slojeva.",
+        "purpose": "Završno VOC lakiranje preko bazne boje",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "2:1+10 %"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 20-22 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "2 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "40-60 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "3 min"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 6 h · 60°C: 20 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+          },
+          {
+            "label": "VOC",
+            "value": "kategorija IIB.d, sadržaj 419, granica 420"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje preko bazne boje",
+          "Poliranje završnog sloja"
+        ],
+        "benefits": [
+          {
+            "title": "Visok sadržaj suve materije",
+            "description": "Formulacija sa visokim sadržajem suve materije."
+          },
+          {
+            "title": "Sigurno prskanje",
+            "description": "Sigurno se prska i dobro razliva po površini."
+          },
+          {
+            "title": "Tvrda površina",
+            "description": "Osušen sloj ima tvrdu površinu i dobro se polira."
+          }
+        ],
+        "advice": "Učvršćivač i razređivač birati prema temperaturi okoline i veličini predmeta koji se lakira; kombinacija učvršćivača i razređivača data je u temperaturnoj tabeli."
+      }
+    },
+    {
+      "slug": "baslac-40-510-ambient-clear",
+      "name": "baslac 40-510 Ambient clear",
+      "sourceKey": "40-510",
+      "code": "40-510",
+      "officialName": "40-510 Ambient clear",
+      "displayName": "Ambient clear",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-510.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-510",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-510-ambient-clear-hardener",
+          "name": "50-510 Ambient Clear Hardener"
+        },
+        {
+          "code": "50-530",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-530-ambient-clear-hardener-slow",
+          "name": "50-530 Ambient Clear Hardener slow"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "01/2024",
+        "mixingRatio": "4:1",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "20 min",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "1",
+        "filmThickness": "40 μm",
+        "flashOff": null,
+        "sanding": null,
+        "drying": [
+          "Infrared (short wave): 5 min",
+          "Infrared (medium wave): 5-10 min"
+        ],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-510 Ambient clear",
+          "href": "/documents/products/baslac/40-510.pdf",
+          "language": "en",
+          "version": "01/2024",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-510-ambient-clear.webp",
+        "width": 1200,
+        "height": 1000,
+        "hasAlpha": false,
+        "processing": "kept-background"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "Bezbojni lak VOC",
+        "subtype": "Bezbojni lak · sušenje na vazduhu",
+        "shortDescription": "Bezbojni lak za sušenje na vazduhu i na temperaturi okoline, sa jednostavnim odnosom mešanja.",
+        "longDescription": "Ambient clear je bezbojni lak koji se nanosi preko bazne boje i suši na vazduhu ili na temperaturi okoline. Jednostavno se meša i sigurno prska, a nanosi se u jednom sloju do debljine filma 40 μm. Pri temperaturi predmeta od 20°C sloj se može polirati posle 1 sata i 30 minuta. Daje površinu visokog sjaja.",
+        "purpose": "Završno lakiranje uz sušenje na vazduhu",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "4:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 20-22 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "20 min"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "1"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "40 μm"
+          },
+          {
+            "label": "Sušenje",
+            "value": "IC kratkotalasno: 5 min · IC srednjetalasno: 5-10 min"
+          },
+          {
+            "label": "VOC",
+            "value": "kategorija IIB.d, sadržaj 419, granica 420"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje preko bazne boje",
+          "Sušenje na vazduhu ili na temperaturi okoline",
+          "Poliranje završnog sloja"
+        ],
+        "benefits": [
+          {
+            "title": "Sušenje na vazduhu",
+            "description": "Predviđen za sušenje na vazduhu ili na temperaturi okoline."
+          },
+          {
+            "title": "Brzo sušenje",
+            "description": "Pri temperaturi predmeta od 20°C polira se posle 1 sata i 30 minuta."
+          },
+          {
+            "title": "Jednostavno mešanje",
+            "description": "Odnos mešanja je jednostavan, a prskanje sigurno."
+          },
+          {
+            "title": "Visok sjaj",
+            "description": "Daje površinu visokog nivoa sjaja."
+          }
+        ],
+        "advice": "Učvršćivač birati prema temperaturi okoline i veličini predmeta koji se lakira; odgovarajućim učvršćivačem vreme upotrebe smeše može se produžiti do 30 min."
+      }
+    },
+    {
+      "slug": "baslac-40-620-2k-clear-mat-voc",
+      "name": "baslac 40-620 2K Clear mat VOC",
+      "sourceKey": "40-620",
+      "code": "40-620",
+      "officialName": "40-620 2K Clear mat VOC",
+      "displayName": "2K Clear mat VOC",
+      "kind": "product",
+      "role": "clearcoat",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-clearcoats",
+        "https://techinfo.baslac.com/en/40-620.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [
+        {
+          "code": "50-420",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-420-2k-clear-hardener-normal-voc",
+          "name": "50-420 2K Clear Hardener Normal VOC"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": null,
+        "mixingRatio": "100:33:17",
+        "sprayViscosity": "DIN 4: 16-18 s",
+        "potLife": "4 h",
+        "nozzle": "1.3",
+        "sprayCoats": "2",
+        "filmThickness": "40-50 μm",
+        "flashOff": "Flash off until completely mat after the first spray coat and before drying. Do not flash off for more than 25 min.",
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 7 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 40-620 2K Clear mat VOC",
+          "href": "/documents/products/baslac/40-620.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-40-620-2k-clear-mat-voc.webp",
+        "width": 1000,
+        "height": 1200,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K mat bezbojni lak VOC",
+        "subtype": "Mat bezbojni lak · podesiv nivo sjaja",
+        "shortDescription": "2K mat bezbojni lak VOC za popravku mat površina, sa nivoom sjaja između mat i saten mat.",
+        "longDescription": "2K Clear mat VOC služi za popravku mat završnih slojeva. Mešanjem sa baslac bezbojnim lakovima u različitim odnosima postižu se nivoi sjaja između mat i saten mat, 12-65 jedinica pri uglu od 60°. Nanosi se u 2 sloja do debljine filma 40-50 μm, a ujednačena debljina postiže se sa dva podjednako puna sloja i pomerenim preklopima. Nivo sjaja može biti viši kod svetlih i čistih srebrnih nijansi, a na karoseriji su moguće razlike između vertikalno i horizontalno lakiranih delova.",
+        "purpose": "Popravka mat i saten mat završnih slojeva",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "100:33:17"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 16-18 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "4 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "40-50 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "Posle prvog sloja i pre sušenja sačekati do potpune matiranosti, najviše 25 min"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 7 h · 60°C: 30 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min"
+          },
+          {
+            "label": "VOC",
+            "value": "kategorija IIB.d, sadržaj 419, granica 420"
+          }
+        ],
+        "applications": [
+          "Popravka mat završnih slojeva",
+          "Podešavanje nivoa sjaja mešanjem sa baslac bezbojnim lakovima",
+          "Probno prskanje i upoređivanje sa površinom za popravku"
+        ],
+        "benefits": [
+          {
+            "title": "Popravka mat površina",
+            "description": "Namenjen je popravci mat završnih slojeva."
+          },
+          {
+            "title": "Podesiv nivo sjaja",
+            "description": "Različiti odnosi mešanja daju nivo sjaja od mat do saten mat."
+          },
+          {
+            "title": "Rad u postojećem programu",
+            "description": "Radi sa baslac bezbojnim lakovima, učvršćivačem i razređivačem."
+          }
+        ],
+        "advice": "Pre lakiranja uraditi probno prskanje i uporediti ga sa površinom koja se popravlja; odstupanja od +/- 5 jedinica sjaja su moguća. Proizvod pre upotrebe dobro promešati ručno."
+      }
+    },
+    {
+      "slug": "baslac-50-05-2k-hardener-ambient-uc",
+      "name": "baslac 50-05 2K Hardener Ambient UC",
+      "sourceKey": "50-05",
+      "code": "50-05",
+      "officialName": "50-05 2K Hardener Ambient UC",
+      "displayName": "2K Hardener Ambient UC",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-05.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        }
+      ],
+      "technical": {
+        "revision": "03/2024",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-05 2K Hardener Ambient UC",
+          "href": "/documents/products/baslac/50-05.pdf",
+          "language": "en",
+          "version": "03/2024",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K učvršćivač za prajmer-punila",
+        "subtype": "Prajmer-punila · faza podloge",
+        "shortDescription": "baslac 50-05 2K Hardener Ambient UC je dvokomponentni učvršćivač koji se, prema tehničkom listu, koristi u baslac 2K prajmer-punilima.",
+        "longDescription": "Učvršćivač se meša sa prajmer-punilom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 2K prajmer-punilima, pa u programu pripada fazi podloge. Zvanični naziv proizvoda je 50-05 2K Hardener Ambient UC, a na sajtu proizvođača naveden je i kao 2K Hardener Ambient.",
+        "purpose": "Učvršćivanje 2K prajmer-punila u fazi podloge",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K prajmer-punilo neposredno pre nanošenja",
+          "Priprema smeše za nanošenje podloge"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-10-2k-primerfiller-hardener-extra-fast",
+      "name": "baslac 50-10 2K Primerfiller Hardener Extra Fast",
+      "sourceKey": "50-10",
+      "code": "50-10",
+      "officialName": "50-10 2K Primerfiller Hardener Extra Fast",
+      "displayName": "2K Primerfiller Hardener Extra Fast",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-10 2K Primerfiller Hardener Extra Fast",
+          "href": "https://techinfo.baslac.com/en/50-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument na techinfo.baslac.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K učvršćivač za prajmer-punila",
+        "subtype": "Prajmer-punila · brzina Extra Fast",
+        "shortDescription": "baslac 50-10 2K Primerfiller Hardener Extra Fast je dvokomponentni učvršćivač za baslac 2K prajmer-punila, u izvedbi Extra Fast.",
+        "longDescription": "Učvršćivač se meša sa prajmer-punilom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da se koristi u baslac 2K prajmer-punilima. Oznaka Extra Fast u zvaničnom nazivu označava brzinu izvedbe, a proizvod u programu pripada fazi podloge.",
+        "purpose": "Učvršćivanje 2K prajmer-punila u fazi podloge",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K prajmer-punilo neposredno pre nanošenja",
+          "Priprema smeše za nanošenje podloge"
+        ],
+        "benefits": [],
+        "advice": "Tehnički list navodi da je proizvod dostupan samo na tržištu Azije i Pacifika."
+      }
+    },
+    {
+      "slug": "baslac-50-15-2k-hardener-fast",
+      "name": "baslac 50-15 2K Hardener Fast",
+      "sourceKey": "50-15",
+      "code": "50-15",
+      "officialName": "50-15 2K Hardener Fast",
+      "displayName": "2K Hardener Fast",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-15.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-22",
+          "relation": "USED_BY",
+          "slug": "baslac-20-22-2k-primerfiller",
+          "name": "20-22 2K Primerfiller"
+        },
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-35",
+          "relation": "USED_BY",
+          "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+          "name": "20-35 2K Primerfiller white"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        },
+        {
+          "code": "20-95",
+          "relation": "USED_BY",
+          "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+          "name": "20-95 2K Primerfiller black"
+        },
+        {
+          "code": "21-11",
+          "relation": "USED_BY",
+          "slug": "baslac-21-11-2k-plastic-primer-voc-1l",
+          "name": "21-11 Plastic Primer VOC"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-15 2K Hardener Fast",
+          "href": "/documents/products/baslac/50-15.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-50-15-2k-hardener-fast.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K učvršćivač",
+        "subtype": "Prajmeri, završna boja i bezbojni lakovi · Fast",
+        "shortDescription": "baslac 50-15 2K Hardener Fast je dvokomponentni učvršćivač u izvedbi Fast, namenjen prajmerima, završnoj boji sa direktnim sjajem i bezbojnim lakovima.",
+        "longDescription": "Učvršćivač se meša sa osnovnim materijalom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Prema tehničkom listu koristi se u baslac 2K prajmer-punilu, 2K plastik prajmeru, završnoj boji sa direktnim sjajem Topcoat direct gloss 30 i u bezbojnim lakovima. Oznaka Fast u zvaničnom nazivu označava brzinu izvedbe i razlikuje ovaj učvršćivač od izvedbi Normal i Slow.",
+        "purpose": "Učvršćivanje prajmera, završne boje i bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K prajmer-punilo ili plastik prajmer",
+          "Umešavanje u završnu boju sa direktnim sjajem",
+          "Umešavanje u bezbojni lak neposredno pre nanošenja"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-20-hardener-normal",
+      "name": "baslac 50-20 Hardener Normal",
+      "sourceKey": "50-20",
+      "code": "50-20",
+      "officialName": "50-20 Hardener Normal",
+      "displayName": "Hardener Normal",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-35",
+          "relation": "USED_BY",
+          "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+          "name": "20-35 2K Primerfiller white"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        },
+        {
+          "code": "20-95",
+          "relation": "USED_BY",
+          "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+          "name": "20-95 2K Primerfiller black"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-20 Hardener Normal",
+          "href": "/documents/products/baslac/50-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-50-15-2k-hardener-fast.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "2K učvršćivač",
+        "subtype": "Prajmeri, završna boja i bezbojni lakovi · Normal",
+        "shortDescription": "baslac 50-20 Hardener Normal je dvokomponentni učvršćivač u izvedbi Normal, namenjen prajmerima, završnoj boji sa direktnim sjajem i bezbojnim lakovima.",
+        "longDescription": "Učvršćivač se meša sa osnovnim materijalom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Prema tehničkom listu koristi se u baslac 2K prajmer-punilu, 2K plastik prajmeru, završnoj boji sa direktnim sjajem Topcoat direct gloss 30 i u bezbojnim lakovima. Na sajtu proizvođača naveden je kao 2K Hardener Normal, a oznaka Normal označava brzinu izvedbe.",
+        "purpose": "Učvršćivanje prajmera, završne boje i bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K prajmer-punilo ili plastik prajmer",
+          "Umešavanje u završnu boju sa direktnim sjajem",
+          "Umešavanje u bezbojni lak neposredno pre nanošenja"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-30-2k-hardener-slow",
+      "name": "baslac 50-30 2K Hardener Slow",
+      "sourceKey": "50-30",
+      "code": "50-30",
+      "officialName": "50-30 2K Hardener Slow",
+      "displayName": "2K Hardener Slow",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-30.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-30 2K Hardener Slow",
+          "href": "https://techinfo.baslac.com/en/50-30.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument na techinfo.baslac.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K učvršćivač",
+        "subtype": "Završna boja i bezbojni lakovi · Slow",
+        "shortDescription": "baslac 50-30 2K Hardener Slow je dvokomponentni učvršćivač u izvedbi Slow, namenjen završnoj boji sa direktnim sjajem i bezbojnim lakovima.",
+        "longDescription": "Učvršćivač se meša sa osnovnim materijalom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Prema tehničkom listu koristi se u baslac završnoj boji sa direktnim sjajem Topcoat direct gloss 30 i u bezbojnim lakovima. Oznaka Slow u zvaničnom nazivu označava brzinu izvedbe i razlikuje ovaj učvršćivač od izvedbi Fast i Normal.",
+        "purpose": "Učvršćivanje završne boje i bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Umešavanje u završnu boju sa direktnim sjajem",
+          "Umešavanje u bezbojni lak neposredno pre nanošenja"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-415-2k-clear-hardener-fast-voc",
+      "name": "baslac 50-415 2K Clear Hardener Fast VOC",
+      "sourceKey": "50-415",
+      "code": "50-415",
+      "officialName": "50-415 2K Clear Hardener Fast VOC",
+      "displayName": "2K Clear Hardener Fast VOC",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-415.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-440",
+          "relation": "USED_BY",
+          "slug": "baslac-40-440-2k-voc-clear",
+          "name": "40-440 2K VOC Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-415 2K Clear Hardener Fast VOC",
+          "href": "/documents/products/baslac/50-415.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K VOC učvršćivač",
+        "subtype": "VOC bezbojni lakovi · brzina Fast",
+        "shortDescription": "baslac 50-415 2K Clear Hardener Fast VOC je dvokomponentni učvršćivač za baslac 2K VOC bezbojne lakove, u izvedbi Fast.",
+        "longDescription": "Učvršćivač se meša sa bezbojnim lakom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 2K VOC bezbojnim lakovima. Na sajtu proizvođača naveden je kao 2K VOC Hardener Fast, a oznaka Fast označava brzinu izvedbe.",
+        "purpose": "Učvršćivanje 2K VOC bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K VOC bezbojni lak neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-420-2k-clear-hardener-normal-voc",
+      "name": "baslac 50-420 2K Clear Hardener Normal VOC",
+      "sourceKey": "50-420",
+      "code": "50-420",
+      "officialName": "50-420 2K Clear Hardener Normal VOC",
+      "displayName": "2K Clear Hardener Normal VOC",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/50-420.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-440",
+          "relation": "USED_BY",
+          "slug": "baslac-40-440-2k-voc-clear",
+          "name": "40-440 2K VOC Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        },
+        {
+          "code": "40-620",
+          "relation": "USED_BY",
+          "slug": "baslac-40-620-2k-clear-mat-voc",
+          "name": "40-620 2K Clear mat VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-420 2K Clear Hardener Normal VOC",
+          "href": "/documents/products/baslac/50-420.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K VOC učvršćivač",
+        "subtype": "VOC bezbojni lakovi · brzina Normal",
+        "shortDescription": "baslac 50-420 2K Clear Hardener Normal VOC je dvokomponentni učvršćivač za baslac 2K VOC bezbojne lakove, u izvedbi Normal.",
+        "longDescription": "Učvršćivač se meša sa bezbojnim lakom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 2K VOC bezbojnim lakovima. Na sajtu proizvođača naveden je kao 2K VOC Hardener Normal, a oznaka Normal označava brzinu izvedbe.",
+        "purpose": "Učvršćivanje 2K VOC bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K VOC bezbojni lak neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-430-2k-clear-hardener-slow-voc",
+      "name": "baslac 50-430 2K Clear Hardener Slow VOC",
+      "sourceKey": "50-430",
+      "code": "50-430",
+      "officialName": "50-430 2K Clear Hardener Slow VOC",
+      "displayName": "2K Clear Hardener Slow VOC",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/50-430.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-440",
+          "relation": "USED_BY",
+          "slug": "baslac-40-440-2k-voc-clear",
+          "name": "40-440 2K VOC Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-430 2K Clear Hardener Slow VOC",
+          "href": "/documents/products/baslac/50-430.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K VOC učvršćivač",
+        "subtype": "VOC bezbojni lakovi · brzina Slow",
+        "shortDescription": "baslac 50-430 2K Clear Hardener Slow VOC je dvokomponentni učvršćivač za baslac 2K VOC bezbojne lakove, u izvedbi Slow.",
+        "longDescription": "Učvršćivač se meša sa bezbojnim lakom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 2K VOC bezbojnim lakovima. Oznaka Slow u zvaničnom nazivu označava brzinu izvedbe, a proizvod u programu pripada fazi laka.",
+        "purpose": "Učvršćivanje 2K VOC bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Umešavanje u 2K VOC bezbojni lak neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-45-2k-activator",
+      "name": "baslac 50-45 2K Activator",
+      "sourceKey": "50-45",
+      "code": "50-45",
+      "officialName": "50-45 2K Activator",
+      "displayName": "2K Activator",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/50-45.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-45 2K Activator",
+          "href": "/documents/products/baslac/50-45.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K aktivator",
+        "subtype": "Bazna boja na bazi vode",
+        "shortDescription": "baslac 50-45 2K Activator je dvokomponentni aktivator koji se, prema tehničkom listu, koristi u baslac baznoj boji na bazi vode.",
+        "longDescription": "Aktivator ima ulogu učvršćivača u dvokomponentnoj smeši: meša se sa baznom bojom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac baznoj boji na bazi vode. Zvanični naziv proizvoda je 50-45 2K Activator.",
+        "purpose": "Aktiviranje bazne boje na bazi vode",
+        "facts": [],
+        "applications": [
+          "Umešavanje u baznu boju na bazi vode neposredno pre nanošenja",
+          "Priprema smeše za nanošenje baznog sloja"
+        ],
+        "benefits": [],
+        "advice": "Tehnički list navodi da vreme sušenja zavisi od klimatskih uslova i korišćene opreme."
+      }
+    },
+    {
+      "slug": "baslac-50-510-ambient-clear-hardener",
+      "name": "baslac 50-510 Ambient Clear Hardener",
+      "sourceKey": "50-510",
+      "code": "50-510",
+      "officialName": "50-510 Ambient Clear Hardener",
+      "displayName": "Ambient Clear Hardener",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/50-510.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-510",
+          "relation": "USED_BY",
+          "slug": "baslac-40-510-ambient-clear",
+          "name": "40-510 Ambient clear"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-510 Ambient Clear Hardener",
+          "href": "/documents/products/baslac/50-510.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Učvršćivač za bezbojne lakove",
+        "subtype": "Ambient Clear · faza laka",
+        "shortDescription": "baslac 50-510 Ambient Clear Hardener je učvršćivač koji se, prema tehničkom listu, koristi u baslac bezbojnom laku Ambient Clear.",
+        "longDescription": "Učvršćivač se meša sa bezbojnim lakom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac bezbojnom laku Ambient Clear. Zvanični naziv proizvoda je 50-510 Ambient Clear Hardener.",
+        "purpose": "Učvršćivanje bezbojnog laka Ambient Clear",
+        "facts": [],
+        "applications": [
+          "Umešavanje u bezbojni lak Ambient Clear neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-50-530-ambient-clear-hardener-slow",
+      "name": "baslac 50-530 Ambient Clear Hardener slow",
+      "sourceKey": "50-530",
+      "code": "50-530",
+      "officialName": "50-530 Ambient Clear Hardener slow",
+      "displayName": "Ambient Clear Hardener slow",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/50-530.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-510",
+          "relation": "USED_BY",
+          "slug": "baslac-40-510-ambient-clear",
+          "name": "40-510 Ambient clear"
+        }
+      ],
+      "technical": {
+        "revision": "01/2024",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 50-530 Ambient Clear Hardener slow",
+          "href": "/documents/products/baslac/50-530.pdf",
+          "language": "en",
+          "version": "01/2024",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Učvršćivač za bezbojne lakove",
+        "subtype": "Ambient Clear · brzina slow",
+        "shortDescription": "baslac 50-530 Ambient Clear Hardener slow je učvršćivač za baslac bezbojni lak Ambient Clear, u izvedbi slow.",
+        "longDescription": "Učvršćivač se meša sa bezbojnim lakom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac bezbojnom laku Ambient Clear i da izvedba slow ima duže vreme upotrebe smeše, predviđeno za veće površine.",
+        "purpose": "Učvršćivanje bezbojnog laka Ambient Clear na većim površinama",
+        "facts": [],
+        "applications": [
+          "Umešavanje u bezbojni lak Ambient Clear neposredno pre nanošenja",
+          "Lakiranje većih površina u jednom prolazu"
+        ],
+        "benefits": [
+          {
+            "title": "Duže vreme upotrebe smeše",
+            "description": "Tehnički list navodi duže vreme upotrebe smeše u odnosu na osnovnu izvedbu, predviđeno za rad na većim površinama."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-51-515-2k-hardener-cv-fast",
+      "name": "baslac 51-515 2K Hardener CV fast",
+      "sourceKey": "51-515",
+      "code": "51-515",
+      "officialName": "51-515 2K Hardener CV fast",
+      "displayName": "2K Hardener CV fast",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/51-515.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 51-515 2K Hardener CV fast",
+          "href": "/documents/products/baslac/51-515.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K učvršćivač za CV program",
+        "subtype": "CV program · brzina fast",
+        "shortDescription": "baslac 51-515 2K Hardener CV fast je dvokomponentni učvršćivač koji se, prema tehničkom listu, koristi u baslac 30 CV programu.",
+        "longDescription": "Učvršćivač se meša sa materijalom CV programa u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 30 CV programu. Oznaka fast u zvaničnom nazivu označava brzinu izvedbe.",
+        "purpose": "Učvršćivanje materijala baslac 30 CV programa",
+        "facts": [],
+        "applications": [
+          "Umešavanje u materijal CV programa neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-51-520-2k-hardener-cv-normal",
+      "name": "baslac 51-520 2K Hardener CV Normal",
+      "sourceKey": "51-520",
+      "code": "51-520",
+      "officialName": "51-520 2K Hardener CV Normal",
+      "displayName": "2K Hardener CV Normal",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/51-520.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 51-520 2K Hardener CV Normal",
+          "href": "/documents/products/baslac/51-520.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K učvršćivač za CV program",
+        "subtype": "Topcoat 30 CV · brzina Normal",
+        "shortDescription": "baslac 51-520 2K Hardener CV Normal je dvokomponentni učvršćivač koji se, prema tehničkom listu, koristi u baslac završnoj boji Topcoat 30 CV.",
+        "longDescription": "Učvršćivač se meša sa završnom bojom CV programa u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac završnoj boji Topcoat 30 CV. Oznaka Normal u zvaničnom nazivu označava brzinu izvedbe.",
+        "purpose": "Učvršćivanje završne boje Topcoat 30 CV",
+        "facts": [],
+        "applications": [
+          "Umešavanje u završnu boju CV programa neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-51-530-2k-hardener-cv-slow",
+      "name": "baslac 51-530 2K Hardener CV slow",
+      "sourceKey": "51-530",
+      "code": "51-530",
+      "officialName": "51-530 2K Hardener CV slow",
+      "displayName": "2K Hardener CV slow",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/51-530.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "hardener"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "05/2020",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 51-530 2K Hardener CV slow",
+          "href": "/documents/products/baslac/51-530.pdf",
+          "language": "en",
+          "version": "05/2020",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "2K učvršćivač za CV program",
+        "subtype": "CV program · brzina slow",
+        "shortDescription": "baslac 51-530 2K Hardener CV slow je dvokomponentni učvršćivač koji se, prema tehničkom listu, koristi u baslac 30 CV programu.",
+        "longDescription": "Učvršćivač se meša sa materijalom CV programa u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 30 CV programu. Oznaka slow u zvaničnom nazivu označava brzinu izvedbe.",
+        "purpose": "Učvršćivanje materijala baslac 30 CV programa",
+        "facts": [],
+        "applications": [
+          "Umešavanje u materijal CV programa neposredno pre nanošenja",
+          "Priprema smeše za rad u fazi laka"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-55-10-ep-hardener",
+      "name": "baslac 55-10 EP Hardener",
+      "sourceKey": "55-10",
+      "code": "55-10",
+      "officialName": "55-10 EP Hardener",
+      "displayName": "EP Hardener",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/55-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "25-30",
+          "relation": "USED_BY",
+          "slug": "baslac-25-30-2k-primerfiller-ep-4l",
+          "name": "25-30 2K Primerfiller EP"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 55-10 EP Hardener",
+          "href": "/documents/products/baslac/55-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Učvršćivač za 2K EP prajmer-punilo",
+        "subtype": "EP prajmer-punilo · faza podloge",
+        "shortDescription": "baslac 55-10 EP Hardener je učvršćivač koji se, prema tehničkom listu, koristi u baslac 2K EP prajmer-punilu.",
+        "longDescription": "Učvršćivač se meša sa EP prajmer-punilom u propisanom odnosu neposredno pre nanošenja i pokreće hemijsko umrežavanje sloja. Tehnički list navodi da je namenjen baslac 2K prajmer-punilu EP, koje u programu pripada fazi podloge. Na sajtu proizvođača naveden je kao Hardener EP.",
+        "purpose": "Učvršćivanje 2K EP prajmer-punila u fazi podloge",
+        "facts": [],
+        "applications": [
+          "Umešavanje u EP prajmer-punilo neposredno pre nanošenja",
+          "Priprema smeše za nanošenje podloge"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-56-20-bodyfiller-hardener",
+      "name": "baslac 56-20 Bodyfiller Hardener",
+      "sourceKey": "56-20",
+      "code": "56-20",
+      "officialName": "56-20 Bodyfiller Hardener",
+      "displayName": "Bodyfiller Hardener",
+      "kind": "product",
+      "role": "hardener",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/56-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "rule": "bodyfiller-hardener"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "12-20",
+          "relation": "USED_BY",
+          "slug": "baslac-12-20-bodyfiller-universal",
+          "name": "12-20 Bodyfiller Universal"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 56-20 Bodyfiller Hardener",
+          "href": "/documents/products/baslac/56-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Učvršćivač za Bodyfiller",
+        "subtype": "Kitovi · Bodyfiller Universal",
+        "shortDescription": "baslac 56-20 Bodyfiller Hardener je učvršćivač koji se, prema tehničkom listu, koristi u baslac kitu Bodyfiller Universal.",
+        "longDescription": "Učvršćivač se meša sa kitom u propisanom odnosu neposredno pre nanošenja i pokreće njegovo stvrdnjavanje. Tehnički list navodi da je namenjen baslac kitu Bodyfiller Universal, koji u programu pripada fazi pripreme. Zvanični naziv proizvoda je 56-20 Bodyfiller Hardener.",
+        "purpose": "Učvršćivanje kita Bodyfiller Universal u fazi pripreme",
+        "facts": [],
+        "applications": [
+          "Umešavanje u kit neposredno pre nanošenja",
+          "Priprema mase u fazi pripreme"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-57-10-additive-washprimer",
+      "name": "baslac 57-10 Additive Washprimer",
+      "sourceKey": "57-10",
+      "code": "57-10",
+      "officialName": "57-10 Additive Washprimer",
+      "displayName": "Additive Washprimer",
+      "kind": "product",
+      "role": "additive",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/57-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "27-10",
+          "relation": "USED_BY",
+          "slug": "baslac-27-10-2k-washprimer-1l",
+          "name": "27-10 2K Washprimer"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 57-10 Additive Washprimer",
+          "href": "/documents/products/baslac/57-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Aditiv za washprimer",
+        "subtype": "baslac 57- linija · 2K Washprimer",
+        "shortDescription": "Additive Washprimer je aditiv koji se, prema zvaničnom opisu, koristi u baslac 2K Washprimer materijalu.",
+        "longDescription": "Additive Washprimer je aditiv baslac programa, označen grupom 57-. Zvanični tehnički list ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu, u fazi podloge. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu washprimer materijala u koji se dodaje.",
+        "purpose": "Dodatak za baslac 2K Washprimer",
+        "facts": [],
+        "applications": [
+          "Priprema 2K Washprimer smeše",
+          "Doziranje prema tehničkom listu washprimer materijala"
+        ],
+        "benefits": [
+          {
+            "title": "Deo 2K Washprimer smeše",
+            "description": "Zvanični opis ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-57-30-additive-washprimer-slow",
+      "name": "baslac 57-30 Additive Washprimer slow",
+      "sourceKey": "57-30",
+      "code": "57-30",
+      "officialName": "57-30 Additive Washprimer slow",
+      "displayName": "Additive Washprimer slow",
+      "kind": "product",
+      "role": "additive",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/57-30.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat-by-name"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "27-10",
+          "relation": "USED_BY",
+          "slug": "baslac-27-10-2k-washprimer-1l",
+          "name": "27-10 2K Washprimer"
+        }
+      ],
+      "technical": {
+        "revision": "05/2020",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 57-30 Additive Washprimer slow",
+          "href": "/documents/products/baslac/57-30.pdf",
+          "language": "en",
+          "version": "05/2020",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Aditiv za washprimer",
+        "subtype": "baslac 57- linija · gradacija slow",
+        "shortDescription": "Additive Washprimer slow je aditiv za baslac 2K Washprimer materijal, u gradaciji slow.",
+        "longDescription": "Additive Washprimer slow je aditiv baslac programa, označen grupom 57-. Zvanični tehnički list ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu. Oznaka slow razlikuje ovu gradaciju od standardne varijante u istoj grupi. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu washprimer materijala u koji se dodaje.",
+        "purpose": "Dodatak za baslac 2K Washprimer, gradacija slow",
+        "facts": [],
+        "applications": [
+          "Priprema 2K Washprimer smeše",
+          "Doziranje prema tehničkom listu washprimer materijala"
+        ],
+        "benefits": [
+          {
+            "title": "Deo 2K Washprimer smeše",
+            "description": "Zvanični opis ga navodi kao proizvod koji se koristi u baslac 2K Washprimer materijalu."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-60-05-speeding-reducer",
+      "name": "baslac 60-05 Speeding Reducer",
+      "sourceKey": "60-05",
+      "code": "60-05",
+      "officialName": "60-05 Speeding Reducer",
+      "displayName": "Speeding Reducer",
+      "kind": "product",
+      "role": "reducer",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/60-05.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 60-05 Speeding Reducer",
+          "href": "/documents/products/baslac/60-05.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Razređivač za ubrzano sušenje",
+        "subtype": "baslac 60- linija · ubrzivač sušenja",
+        "shortDescription": "Speeding Reducer je razređivač koji skraćuje vreme sušenja baslac bezbojnih lakova i 2K prajmer-punila.",
+        "longDescription": "Speeding Reducer je razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi kao ubrzivač sušenja za baslac bezbojne lakove usklađene sa VOC propisima i za 2K prajmer-punilo. Prema istom opisu skraćuje vreme sušenja i poboljšava sušenje i očvršćavanje površine. Odnos razređivanja preuzima se iz tehničkog lista materijala koji se razređuje.",
+        "purpose": "Ubrzavanje sušenja bezbojnih lakova",
+        "facts": [],
+        "applications": [
+          "Dodavanje u baslac bezbojne lakove radi bržeg sušenja",
+          "Dodavanje u 2K prajmer-punilo, uz poštovanje ograničenja temperature",
+          "Doziranje prema tehničkom listu materijala koji se razređuje"
+        ],
+        "benefits": [
+          {
+            "title": "Kraće vreme sušenja",
+            "description": "Zvanični opis navodi smanjenje vremena sušenja premaza."
+          },
+          {
+            "title": "Sušenje površine",
+            "description": "Prema zvaničnom opisu poboljšava sušenje površine i očvršćavanje premaza."
+          }
+        ],
+        "advice": "Zvanični tehnički list ne dozvoljava dodavanje u 2K prajmer-punilo na temperaturama iznad 25°C, zbog prekratkog vremena upotrebe smeše."
+      }
+    },
+    {
+      "slug": "baslac-60-10-reducer-universal-fast",
+      "name": "baslac 60-10 Reducer Universal Fast",
+      "sourceKey": "60-10",
+      "code": "60-10",
+      "officialName": "60-10 Reducer Universal Fast",
+      "displayName": "Reducer Universal Fast",
+      "kind": "product",
+      "role": "reducer",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/60-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-22",
+          "relation": "USED_BY",
+          "slug": "baslac-20-22-2k-primerfiller",
+          "name": "20-22 2K Primerfiller"
+        },
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        },
+        {
+          "code": "21-11",
+          "relation": "USED_BY",
+          "slug": "baslac-21-11-2k-plastic-primer-voc-1l",
+          "name": "21-11 Plastic Primer VOC"
+        },
+        {
+          "code": "25-30",
+          "relation": "USED_BY",
+          "slug": "baslac-25-30-2k-primerfiller-ep-4l",
+          "name": "25-30 2K Primerfiller EP"
+        },
+        {
+          "code": "27-10",
+          "relation": "USED_BY",
+          "slug": "baslac-27-10-2k-washprimer-1l",
+          "name": "27-10 2K Washprimer"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 60-10 Reducer Universal Fast",
+          "href": "/documents/products/baslac/60-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Univerzalni razređivač",
+        "subtype": "baslac 60- linija · gradacija Fast",
+        "shortDescription": "Reducer Universal Fast je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+        "longDescription": "Reducer Universal Fast je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Fast razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+        "purpose": "Univerzalno razređivanje, gradacija Fast",
+        "facts": [],
+        "applications": [
+          "Razređivanje baslac materijala podloge",
+          "Razređivanje baznih i završnih boja i bezbojnih lakova",
+          "Doziranje prema tehničkom listu materijala koji se razređuje"
+        ],
+        "benefits": [
+          {
+            "title": "Univerzalna primena",
+            "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+          }
+        ],
+        "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+      }
+    },
+    {
+      "slug": "baslac-60-30-reducer-universal-slow",
+      "name": "baslac 60-30 Reducer Universal Slow",
+      "sourceKey": "60-30",
+      "code": "60-30",
+      "officialName": "60-30 Reducer Universal Slow",
+      "displayName": "Reducer Universal Slow",
+      "kind": "product",
+      "role": "reducer",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/60-30.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-22",
+          "relation": "USED_BY",
+          "slug": "baslac-20-22-2k-primerfiller",
+          "name": "20-22 2K Primerfiller"
+        },
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-35",
+          "relation": "USED_BY",
+          "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+          "name": "20-35 2K Primerfiller white"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        },
+        {
+          "code": "20-95",
+          "relation": "USED_BY",
+          "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+          "name": "20-95 2K Primerfiller black"
+        },
+        {
+          "code": "25-30",
+          "relation": "USED_BY",
+          "slug": "baslac-25-30-2k-primerfiller-ep-4l",
+          "name": "25-30 2K Primerfiller EP"
+        },
+        {
+          "code": "27-10",
+          "relation": "USED_BY",
+          "slug": "baslac-27-10-2k-washprimer-1l",
+          "name": "27-10 2K Washprimer"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 60-30 Reducer Universal Slow",
+          "href": "/documents/products/baslac/60-30.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Univerzalni razređivač",
+        "subtype": "baslac 60- linija · gradacija Slow",
+        "shortDescription": "Reducer Universal Slow je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+        "longDescription": "Reducer Universal Slow je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Slow razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+        "purpose": "Univerzalno razređivanje, gradacija Slow",
+        "facts": [],
+        "applications": [
+          "Razređivanje baslac materijala podloge",
+          "Razređivanje baznih i završnih boja i bezbojnih lakova",
+          "Doziranje prema tehničkom listu materijala koji se razređuje"
+        ],
+        "benefits": [
+          {
+            "title": "Univerzalna primena",
+            "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+          }
+        ],
+        "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+      }
+    },
+    {
+      "slug": "baslac-60-40-reducer-universal-extra-slow",
+      "name": "baslac 60-40 Reducer Universal Extra Slow",
+      "sourceKey": "60-40",
+      "code": "60-40",
+      "officialName": "60-40 Reducer Universal Extra Slow",
+      "displayName": "Reducer Universal Extra Slow",
+      "kind": "product",
+      "role": "reducer",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/60-40.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 60-40 Reducer Universal Extra Slow",
+          "href": "/documents/products/baslac/60-40.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Univerzalni razređivač",
+        "subtype": "baslac 60- linija · gradacija Extra Slow",
+        "shortDescription": "Reducer Universal Extra Slow je baslac razređivač za materijale podloge, bazne i završne boje i bezbojne lakove.",
+        "longDescription": "Reducer Universal Extra Slow je univerzalni razređivač baslac programa, označen grupom 60-. Zvanični opis ga navodi za mešanje sa baslac materijalima podloge, kao i sa Basecoat, Topcoat i Clears programima. Oznaka Extra Slow razlikuje ovu gradaciju od ostalih razređivača u istoj grupi. Odnos razređivanja preuzima se iz tehničkog lista materijala podloge, odnosno bezbojnog laka koji se razređuje.",
+        "purpose": "Univerzalno razređivanje, gradacija Extra Slow",
+        "facts": [],
+        "applications": [
+          "Razređivanje baslac materijala podloge",
+          "Razređivanje baznih i završnih boja i bezbojnih lakova",
+          "Doziranje prema tehničkom listu materijala koji se razređuje"
+        ],
+        "benefits": [
+          {
+            "title": "Univerzalna primena",
+            "description": "Zvanični opis ga navodi za baslac materijale podloge, kao i za Basecoat, Topcoat i Clears programe."
+          }
+        ],
+        "advice": "Posude sa ostatkom materijala pažljivo zatvoriti."
+      }
+    },
+    {
+      "slug": "baslac-65-10-blending-reducer",
+      "name": "baslac 65-10 Blending Reducer",
+      "sourceKey": "65-10",
+      "code": "65-10",
+      "officialName": "65-10 Blending Reducer",
+      "displayName": "Blending Reducer",
+      "kind": "product",
+      "role": "reducer",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/65-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "reducer"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 760,
+          "limit": 780,
+          "category": "IIB.cIII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 65-10 Blending Reducer",
+          "href": "/documents/products/baslac/65-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Razređivač za blendovanje",
+        "subtype": "baslac 65- linija · blend-in",
+        "shortDescription": "Blending Reducer je blend-in razređivač za baslac bezbojne lakove grupe 40-, za stapanje prelaza.",
+        "longDescription": "Blending Reducer je blend-in razređivač namenjen baslac bezbojnim lakovima grupe 40-. Prema zvaničnom opisu koristi se za stapanje zona preprskavanja i preklopa, odnosno za utapanje bezbojnog laka u postojeći sloj. Tehnički list navodi mlaznicu 1,3 mm i dva sloja nanošenja.",
+        "purpose": "Stapanje prelaza bezbojnog laka",
+        "facts": [
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "VOC",
+            "value": "760 g/l (granica 780 g/l), kategorija IIB.cIII"
+          }
+        ],
+        "applications": [
+          "Stapanje zona preprskavanja i preklopa",
+          "Utapanje bezbojnog laka u postojeći sloj"
+        ],
+        "benefits": [
+          {
+            "title": "Blend-in primena",
+            "description": "Zvanični opis ga navodi kao blend-in razređivač za baslac bezbojne lakove grupe 40-."
+          },
+          {
+            "title": "Stapanje prelaza",
+            "description": "Namenjen je stapanju zona preprskavanja i preklopa, kao i utapanju bezbojnog laka."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-70-10-silicone-remover-for-oil-silicone-and-grease",
+      "name": "baslac 70-10 Silicone Remover for oil, silicone and grease",
+      "sourceKey": "70-10",
+      "code": "70-10",
+      "officialName": "70-10 Silicone Remover for oil, silicone and grease",
+      "displayName": "Silicone Remover for oil, silicone and grease",
+      "kind": "product",
+      "role": "cleaner",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/70-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 70-10 Silicone Remover for oil, silicone and grease",
+          "href": "https://techinfo.baslac.com/en/70-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument na techinfo.baslac.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Sredstvo za čišćenje i odmašćivanje",
+        "subtype": "Silicone Remover · priprema površine",
+        "shortDescription": "Silicone Remover za uklanjanje ulja, silikona i masnoće sa golog čelika, aluminijuma, starog laka i novih delova.",
+        "longDescription": "70-10 Silicone Remover je sredstvo za čišćenje kojim se sa površine uklanjaju ulje, silikon i masnoća. Koristi se na golom čeliku, aluminijumu, starom laku i novim delovima sa fabričkim prajmerom. Priprema površinu pre nastavka rada.",
+        "purpose": "Uklanjanje ulja, silikona i masnoće sa površine",
+        "facts": [],
+        "applications": [
+          "Čišćenje golog čelika i aluminijuma",
+          "Čišćenje starog laka i novih delova sa fabričkim prajmerom",
+          "Odmašćivanje površine u fazi pripreme"
+        ],
+        "benefits": [
+          {
+            "title": "Za više podloga",
+            "description": "Namenjeno je golom čeliku, aluminijumu, starom laku i novim delovima sa fabričkim prajmerom."
+          }
+        ],
+        "advice": "Limenke sa ostatkom materijala pažljivo zatvoriti."
+      }
+    },
+    {
+      "slug": "baslac-70-20-cleaner-plastic",
+      "name": "baslac 70-20 Cleaner Plastic",
+      "sourceKey": "70-20",
+      "code": "70-20",
+      "officialName": "70-20 Cleaner Plastic",
+      "displayName": "Cleaner Plastic",
+      "kind": "product",
+      "role": "cleaner",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/70-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 70-20 Cleaner Plastic",
+          "href": "/documents/products/baslac/70-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-70-20-cleaner-plastic.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "Sredstvo za čišćenje plastike",
+        "subtype": "Cleaner Plastic · plastika, GRP i SMC",
+        "shortDescription": "Cleaner Plastic je sredstvo za čišćenje plastike, kao i GRP i SMC materijala.",
+        "longDescription": "70-20 Cleaner Plastic je sredstvo za čišćenje namenjeno plastici, kao i GRP i SMC materijalima. Priprema površinu plastičnog dela pre nastavka rada u fazi pripreme.",
+        "purpose": "Čišćenje i priprema plastičnih delova",
+        "facts": [],
+        "applications": [
+          "Čišćenje plastičnih delova pre nastavka rada",
+          "Čišćenje GRP i SMC površina",
+          "Priprema površine u fazi pripreme"
+        ],
+        "benefits": [
+          {
+            "title": "Plastika, GRP i SMC",
+            "description": "Namenjeno je plastici, kao i GRP i SMC materijalima."
+          }
+        ],
+        "advice": "Limenke sa ostatkom materijala pažljivo zatvoriti."
+      }
+    },
+    {
+      "slug": "baslac-70-45-cleaner",
+      "name": "baslac 70-45 Cleaner",
+      "sourceKey": "70-45",
+      "code": "70-45",
+      "officialName": "70-45 Cleaner",
+      "displayName": "Cleaner",
+      "kind": "product",
+      "role": "cleaner",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/70-45.pdf"
+      ],
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 198,
+          "limit": 200,
+          "category": "IIB.aII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 70-45 Cleaner",
+          "href": "/documents/products/baslac/70-45.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Sredstvo za čišćenje",
+        "subtype": "Cleaner Basecoat 45 · antistatično dejstvo",
+        "shortDescription": "Sredstvo za čišćenje površina i zona uleta pre nanošenja materijala, sa antistatičnim dejstvom.",
+        "longDescription": "70-45 Cleaner je sredstvo za čišćenje površina i zona uleta, pre nanošenja prajmera i punila i bazne boje iz linije Basecoat 45, u metalik ili punoj nijansi. Deluje antistatički i smanjuje taloženje prašine tokom nanošenja završnog sloja na plastičnim delovima. Može se koristiti i za čišćenje pištolja za vodorazredive materijale. Sadržaj isparljivih organskih jedinjenja iznosi 198 g/l.",
+        "purpose": "Čišćenje površina i zona uleta pre nanošenja materijala",
+        "facts": [
+          {
+            "label": "VOC",
+            "value": "198 g/l (granica 200 g/l), kategorija IIB.aII"
+          }
+        ],
+        "applications": [
+          "Čišćenje površine i zona uleta pre nanošenja materijala",
+          "Priprema pre bazne boje iz linije Basecoat 45",
+          "Čišćenje pištolja za vodorazredive materijale"
+        ],
+        "benefits": [
+          {
+            "title": "Antistatično dejstvo",
+            "description": "Deluje antistatički i smanjuje taloženje prašine tokom nanošenja završnog sloja na plastičnim delovima."
+          },
+          {
+            "title": "Dobro čišćenje",
+            "description": "Izvor navodi dobra svojstva čišćenja površine."
+          },
+          {
+            "title": "Čišćenje pištolja",
+            "description": "Može se koristiti i za čišćenje pištolja za vodorazredive materijale."
+          }
+        ],
+        "advice": "Naneti raspršivačem ili natopiti krpu bez vlakana. Površinu očistiti jednom krpom, a zatim prevući drugom, suvom krpom."
+      }
+    },
+    {
+      "slug": "baslac-80-10-additive-flex",
+      "name": "baslac 80-10 Additive Flex",
+      "sourceKey": "80-10",
+      "code": "80-10",
+      "officialName": "80-10 Additive Flex",
+      "displayName": "Additive Flex",
+      "kind": "product",
+      "role": "additive",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/80-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-35",
+          "relation": "USED_BY",
+          "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+          "name": "20-35 2K Primerfiller white"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        },
+        {
+          "code": "20-95",
+          "relation": "USED_BY",
+          "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+          "name": "20-95 2K Primerfiller black"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        },
+        {
+          "code": "40-440",
+          "relation": "USED_BY",
+          "slug": "baslac-40-440-2k-voc-clear",
+          "name": "40-440 2K VOC Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 80-10 Additive Flex",
+          "href": "/documents/products/baslac/80-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-80-10-additive-flex.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "Plastifikujući aditiv",
+        "subtype": "baslac Plasticizing Additive · plastika",
+        "shortDescription": "Additive Flex je plastifikujući aditiv za popravke plastike, u kombinaciji sa baslac 2K punilom, lakovima i završnim bojama.",
+        "longDescription": "Additive Flex je plastifikujući aditiv namenjen postupcima popravke plastike. Zvanični opis ga navodi u kombinaciji sa baslac 2K prajmer-punilom, bezbojnim lakovima i završnim bojama, uz dobru elastičnost i dobro ponašanje pri mešanju. Zvanične osobine ga navode i kao baslac plastifikator za PUR proizvode. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+        "purpose": "Plastifikacija premaza na plastici",
+        "facts": [],
+        "applications": [
+          "Popravka delova od plastike",
+          "Dodavanje u 2K prajmer-punilo, bezbojni lak ili završnu boju",
+          "Doziranje prema tehničkom listu materijala u koji se dodaje"
+        ],
+        "benefits": [
+          {
+            "title": "Dobra elastičnost",
+            "description": "Zvanične osobine navode dobru elastičnost premaza sa ovim aditivom."
+          },
+          {
+            "title": "Dobra mešljivost",
+            "description": "Zvanične osobine navode dobro ponašanje pri mešanju sa materijalom."
+          },
+          {
+            "title": "Plastifikator za PUR",
+            "description": "Zvanični opis ga navodi kao baslac plastifikator za PUR proizvode."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-80-20-additive-mat",
+      "name": "baslac 80-20 Additive Mat",
+      "sourceKey": "80-20",
+      "code": "80-20",
+      "officialName": "80-20 Additive Mat",
+      "displayName": "Additive Mat",
+      "kind": "product",
+      "role": "additive",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/80-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        },
+        {
+          "code": "40-440",
+          "relation": "USED_BY",
+          "slug": "baslac-40-440-2k-voc-clear",
+          "name": "40-440 2K VOC Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 80-20 Additive Mat",
+          "href": "/documents/products/baslac/80-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": {
+        "src": "/products/baslac/catalog/baslac-80-20-additive-mat.webp",
+        "width": 1058,
+        "height": 704,
+        "hasAlpha": true,
+        "processing": "source-alpha"
+      },
+      "missingOfficialAsset": false,
+      "content": {
+        "productType": "Aditiv za matiranje",
+        "subtype": "HS Matting Agent",
+        "shortDescription": "Additive Mat je baslac HS sredstvo za matiranje bezbojnih lakova i završnih boja.",
+        "longDescription": "Additive Mat je HS sredstvo za matiranje, namenjeno baslac bezbojnim lakovima i završnim bojama. Dodaje se u materijal pri pripremi smeše, a zvanične osobine ističu jednostavno mešanje. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+        "purpose": "Matiranje bezbojnih lakova i završnih boja",
+        "facts": [],
+        "applications": [
+          "Dodavanje u bezbojni lak ili završnu boju",
+          "Doziranje prema tehničkom listu materijala u koji se dodaje"
+        ],
+        "benefits": [
+          {
+            "title": "HS sredstvo za matiranje",
+            "description": "Zvanični opis ga navodi kao HS sredstvo za matiranje baslac bezbojnih lakova i završnih boja."
+          },
+          {
+            "title": "Jednostavno mešanje",
+            "description": "Zvanične osobine navode da se lako meša sa materijalom."
+          }
+        ],
+        "advice": "Pripremiti samo količinu materijala koja će se potrošiti istog dana, jer se pri čuvanju smeše nivo sjaja može promeniti."
+      }
+    },
+    {
+      "slug": "baslac-80-30-additive-plast",
+      "name": "baslac 80-30 Additive Plast",
+      "sourceKey": "80-30",
+      "code": "80-30",
+      "officialName": "80-30 Additive Plast",
+      "displayName": "Additive Plast",
+      "kind": "product",
+      "role": "additive",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/80-30.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-35",
+          "relation": "USED_BY",
+          "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+          "name": "20-35 2K Primerfiller white"
+        },
+        {
+          "code": "20-95",
+          "relation": "USED_BY",
+          "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+          "name": "20-95 2K Primerfiller black"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 80-30 Additive Plast",
+          "href": "/documents/products/baslac/80-30.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Aditiv za plastiku",
+        "subtype": "baslac 80- linija · wet-on-wet punila",
+        "shortDescription": "Additive Plast je aditiv za sve lakirljive plastike, u kombinaciji sa baslac wet-on-wet prajmer-punilima.",
+        "longDescription": "Additive Plast je aditiv baslac programa, označen grupom 80-. Zvanični opis ga navodi za sve plastike koje se mogu lakirati, u kombinaciji sa baslac wet-on-wet prajmer-punilima, i navodi dobro prianjanje na plastiku. Po potrebi se može naneti i na susedne delove sa e-coat premazom. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+        "purpose": "Prianjanje na lakirljive plastike",
+        "facts": [],
+        "applications": [
+          "Dodavanje u baslac wet-on-wet prajmer-punilo",
+          "Priprema delova od plastike koji se lakiraju",
+          "Po potrebi nanošenje na susedne delove sa e-coat premazom"
+        ],
+        "benefits": [
+          {
+            "title": "Dobro prianjanje",
+            "description": "Zvanični opis navodi dobro prianjanje na plastiku."
+          }
+        ],
+        "advice": "Proizvođač ne preporučuje primenu na polipropilenu (PP) i polietilenu (PE), jer prianjanje nije dovoljno."
+      }
+    },
+    {
+      "slug": "baslac-81-30-additive-chassis",
+      "name": "baslac 81-30 Additive Chassis",
+      "sourceKey": "81-30",
+      "code": "81-30",
+      "officialName": "81-30 Additive Chassis",
+      "displayName": "Additive Chassis",
+      "kind": "product",
+      "role": "additive",
+      "line": null,
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "family": null,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/81-30.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "additive"
+      },
+      "systemComponents": [],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 530,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 81-30 Additive Chassis",
+          "href": "/documents/products/baslac/81-30.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Aditiv",
+        "subtype": "baslac 81- linija · 30CV program",
+        "shortDescription": "Additive Chassis je aditiv koji se, prema zvaničnom opisu, koristi u kombinaciji sa baslac 30CV programom.",
+        "longDescription": "Additive Chassis je aditiv baslac programa, označen grupom 81-. Zvanični tehnički list ga navodi u kombinaciji sa baslac 30CV programom, a sadržaj isparljivih organskih jedinjenja iznosi 530 g/l. Udeo aditiva i parametre nanošenja treba proveriti u tehničkom listu materijala u koji se dodaje.",
+        "purpose": "Dodatak za baslac 30CV program",
+        "facts": [
+          {
+            "label": "VOC",
+            "value": "530 g/l (granica 540 g/l), kategorija IIB.cII"
+          }
+        ],
+        "applications": [
+          "Dodavanje u materijal iz baslac 30CV programa",
+          "Doziranje prema tehničkom listu materijala u koji se dodaje"
+        ],
+        "benefits": [],
+        "advice": "Za ispravnu primenu pogledati zvanični tehnički list proizvoda."
+      }
+    },
+    {
+      "slug": "baslac-basecoat-35",
+      "name": "baslac Basecoat 35",
+      "sourceKey": "line-35",
+      "code": null,
+      "officialName": "baslac Basecoat 35",
+      "displayName": "baslac Basecoat 35",
+      "kind": "system",
+      "role": "system",
+      "line": "baslac Basecoat 35",
+      "status": "CURRENT_SYSTEM",
+      "promotedFromLine": false,
+      "family": {
+        "baseProductSlug": "baslac-line-35",
+        "identity": {
+          "name": "baslac Basecoat 35",
+          "slug": "baslac-line-35"
+        }
+      },
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/products-systems",
+        "https://techinfo.baslac.com/en/35_Line.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "systemComponents": [
+        {
+          "code": "35-M00",
+          "officialName": "35-M00 35- Basecoat",
+          "tds": "https://techinfo.baslac.com/en/35-M00.pdf",
+          "technical": {
+            "revision": "06/2023",
+            "mixingRatio": "2:1",
+            "sprayViscosity": "DIN 4: 18-22 s",
+            "potLife": "48 h",
+            "nozzle": "1.3 mm",
+            "sprayCoats": "2",
+            "filmThickness": "15-20 μm",
+            "flashOff": "10 min until mat",
+            "sanding": null,
+            "drying": [],
+            "voc": null
+          }
+        }
+      ],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "2:1",
+        "sprayViscosity": "DIN 4: 18-22 s",
+        "potLife": "48 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "15-20 μm",
+        "flashOff": "10 min until mat",
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — baslac Basecoat 35",
+          "href": "/documents/products/baslac/35_Line.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Sistem baznih boja",
+        "subtype": "Konvencionalni solventni bazni sistem · M komponente",
+        "shortDescription": "Konvencionalni solventni bazni sistem u kome se M komponente mešaju po formuli u solid, transparent, metallic, pearl i Xirallic nijanse.",
+        "longDescription": "baslac Basecoat 35 je konvencionalni solventni bazni sistem: M komponente se mešaju po formuli u solid, transparent, metallic, pearl i Xirallic nijanse. Bazna boja ima visok udeo suve materije i pigmenta, pa daje dobru pokrivnu moć uz malu potrošnju materijala i kratko vreme isparavanja između slojeva. Komponenta 35-M00 nanosi se u 2 sloja, mlaznicom 1,3 mm, do debljine filma 15-20 μm.",
+        "purpose": "Bazni sloj u solventnom sistemu, nijansa po formuli",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "2:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 18-22 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "48 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "15-20 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "10 min, do matiranja"
+          }
+        ],
+        "applications": [
+          "Bazni sloj u solid, metallic i pearl nijansama",
+          "Nijansiranje po formuli iz M komponenti",
+          "Nanošenje u 2 sloja, 15-20 μm"
+        ],
+        "benefits": [
+          {
+            "title": "Široka paleta nijansi",
+            "description": "M komponente pokrivaju solid, transparent, metallic, pearl i Xirallic nijanse."
+          },
+          {
+            "title": "Dobra pokrivnost",
+            "description": "Visok udeo suve materije i pigmenta daje dobru pokrivnu moć."
+          },
+          {
+            "title": "Mala potrošnja",
+            "description": "Sistem je predviđen za malu potrošnju materijala."
+          },
+          {
+            "title": "Kratko isparavanje",
+            "description": "Kratko vreme isparavanja između slojeva skraćuje tok rada u kabini."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "baslac-basecoat-45",
+      "name": "baslac Basecoat 45",
+      "sourceKey": "line-45",
+      "code": null,
+      "officialName": "baslac Basecoat 45",
+      "displayName": "baslac Basecoat 45",
+      "kind": "system",
+      "role": "system",
+      "line": "baslac Basecoat 45",
+      "status": "CURRENT_SYSTEM",
+      "promotedFromLine": false,
+      "family": {
+        "baseProductSlug": "baslac-line-45",
+        "identity": {
+          "name": "baslac Basecoat 45",
+          "slug": "baslac-line-45"
+        }
+      },
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/products-systems",
+        "https://techinfo.baslac.com/en/45_Line.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "systemComponents": [
+        {
+          "code": "45-W00",
+          "officialName": "45-W00 45- Basecoat",
+          "tds": "https://techinfo.baslac.com/en/45-W00.pdf",
+          "technical": {
+            "revision": "06/2023",
+            "mixingRatio": null,
+            "sprayViscosity": "DIN 4: 16-22 s",
+            "potLife": null,
+            "nozzle": "1.4 mm",
+            "sprayCoats": "2",
+            "filmThickness": "10-15 μm",
+            "flashOff": "5 min after each spraycoat until mat",
+            "sanding": null,
+            "drying": [],
+            "voc": {
+              "content": 419,
+              "limit": 420,
+              "category": "IIB.d"
+            }
+          }
+        }
+      ],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": "DIN 4: 16-22 s",
+        "potLife": null,
+        "nozzle": "1.4 mm",
+        "sprayCoats": "2",
+        "filmThickness": "10-15 μm",
+        "flashOff": "5 min after each spraycoat until mat",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — baslac Basecoat 45",
+          "href": "/documents/products/baslac/45_Line.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Sistem baznih boja",
+        "subtype": "Vodeni bazni sistem · W komponente",
+        "shortDescription": "Vodeni bazni sistem u kome W komponente pokrivaju solid, transparent, metallic i pearl nijanse, uz završni bezbojni lak.",
+        "longDescription": "baslac Basecoat 45 je vodeni bazni sistem za metalik i solid nijanse, koje se završavaju bezbojnim lakom. W komponente pokrivaju solid, transparent, metallic i pearl nijanse, uz 49-W koncentrate efekta. Nanošenje je jednostavno, uz dobru pokrivnu moć, a vreme isparavanja se osetno skraćuje odgovarajućom opremom za produvavanje vazduhom. Komponenta 45-W00 nanosi se u 2 sloja, mlaznicom 1,4 mm, do debljine filma 10-15 μm.",
+        "purpose": "Bazni sloj u vodenom sistemu, nijansa po formuli",
+        "facts": [
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 16-22 s"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,4 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "10-15 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "5 min posle svakog sloja, do matiranja"
+          },
+          {
+            "label": "VOC",
+            "value": "419 g/l (granica 420 g/l) · kategorija IIB(d)"
+          }
+        ],
+        "applications": [
+          "Bazni sloj u vodenom sistemu, sa završnim bezbojnim lakom",
+          "Nijansiranje po formuli iz W komponenti",
+          "Nanošenje u 2 sloja, 10-15 μm"
+        ],
+        "benefits": [
+          {
+            "title": "Vodena tehnologija",
+            "description": "Vodeni bazni sistem za metalik i solid nijanse, sa završnim bezbojnim lakom."
+          },
+          {
+            "title": "Jednostavno nanošenje",
+            "description": "Lako nanošenje uz dobru pokrivnu moć."
+          },
+          {
+            "title": "Kraće isparavanje",
+            "description": "Vreme isparavanja se osetno skraćuje odgovarajućom opremom za produvavanje vazduhom."
+          }
+        ],
+        "advice": "Pripremljena mešavina zadržava upotrebljivost do 6 meseci kada se čuva u plastičnoj posudi ili u limenci sa zaštitnim slojem sa unutrašnje strane."
+      }
+    },
+    {
+      "slug": "baslac-topcoat-30",
+      "name": "baslac Topcoat 30",
+      "sourceKey": "line-30",
+      "code": null,
+      "officialName": "baslac Topcoat 30",
+      "displayName": "baslac Topcoat 30",
+      "kind": "system",
+      "role": "system",
+      "line": "baslac Topcoat 30",
+      "status": "CURRENT_SYSTEM",
+      "promotedFromLine": false,
+      "family": {
+        "baseProductSlug": "baslac-line-30",
+        "identity": {
+          "name": "baslac Topcoat 30",
+          "slug": "baslac-line-30"
+        }
+      },
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/products-systems",
+        "https://techinfo.baslac.com/en/30_Line.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "systemComponents": [
+        {
+          "code": "30-S00",
+          "officialName": "30-S00 30- Topcoat, direct gloss",
+          "tds": "https://techinfo.baslac.com/en/30-S00.pdf",
+          "technical": {
+            "revision": "04/2024",
+            "mixingRatio": "2:1+10 %",
+            "sprayViscosity": "DIN 4: 20-22 s",
+            "potLife": "2 h",
+            "nozzle": "1.3 mm",
+            "sprayCoats": "2",
+            "filmThickness": "50-70 μm",
+            "flashOff": null,
+            "sanding": null,
+            "drying": [
+              "Drying at 20°C: 8 h",
+              "Drying at 60°C: 30 min",
+              "Infrared (short wave): 8 min",
+              "Infrared (medium wave): 10-15 min"
+            ],
+            "voc": null
+          }
+        }
+      ],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "04/2024",
+        "mixingRatio": "2:1+10 %",
+        "sprayViscosity": "DIN 4: 20-22 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": null,
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 8 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — baslac Topcoat 30",
+          "href": "/documents/products/baslac/30_Line.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Sistem završnih boja",
+        "subtype": "2K sistem sa direktnim sjajem · mešanje po formuli",
+        "shortDescription": "Pigmentirani 2K sistem završnih boja sa direktnim sjajem, u kome se nijansa meša po formuli iz S baza.",
+        "longDescription": "baslac Topcoat 30 je pigmentirani 2K sistem sa direktnim sjajem: nijansa se meša po formuli iz S baza, bez obaveznog posebnog bezbojnog laka. Komponenta 30-S00 ima visok udeo suve materije i pigmenta, pa sistem daje dobru pokrivnu moć uz malu potrošnju materijala. Nanosi se u 2 sloja, mlaznicom 1,3 mm, do debljine filma 50-70 μm.",
+        "purpose": "Završno lakiranje sa direktnim sjajem, bez posebnog bezbojnog laka",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "2:1+10 %"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 20-22 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "2 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-70 μm"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 8 h · 60°C: 30 min · infracrveno kratkotalasno: 8 min · infracrveno srednjetalasno: 10-15 min"
+          }
+        ],
+        "applications": [
+          "Završno lakiranje u sistemu sa direktnim sjajem",
+          "Nijansiranje po formuli iz S baza",
+          "Nanošenje u 2 sloja, 50-70 μm"
+        ],
+        "benefits": [
+          {
+            "title": "Direktan sjaj",
+            "description": "Sistem daje završni sjaj bez obaveznog posebnog bezbojnog laka."
+          },
+          {
+            "title": "Dobra pokrivnost",
+            "description": "Visok udeo suve materije i pigmenta daje dobru pokrivnu moć."
+          },
+          {
+            "title": "Mala potrošnja",
+            "description": "Sistem je predviđen za malu potrošnju materijala po nanetom sloju."
+          },
+          {
+            "title": "Nijansa po formuli",
+            "description": "Nijansa se meša po formuli iz S baza, pa se sistem prilagođava traženoj boji."
+          }
+        ],
+        "advice": "Bazne komponente se ne nanose samostalno, već uvek sa 30-Topcoat Converter komponentom. Izbor učvršćivača i razređivača prilagođava se temperaturi i veličini objekta."
+      }
+    },
+    {
+      "slug": "baslac-topcoat-30-cv",
+      "name": "baslac Topcoat 30 CV",
+      "sourceKey": "line-30-cv",
+      "code": null,
+      "officialName": "baslac Topcoat 30 CV",
+      "displayName": "baslac Topcoat 30 CV",
+      "kind": "system",
+      "role": "system",
+      "line": "baslac Topcoat 30 CV",
+      "status": "CURRENT_SYSTEM",
+      "promotedFromLine": false,
+      "family": {
+        "baseProductSlug": "baslac-line-30-cv",
+        "identity": {
+          "name": "baslac Topcoat 30 CV",
+          "slug": "baslac-line-30-cv"
+        }
+      },
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/products-systems",
+        "https://techinfo.baslac.com/en/30_Line_CV.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "system"
+      },
+      "systemComponents": [
+        {
+          "code": "30-S01",
+          "officialName": "30-S01 30 CV Topcoat",
+          "tds": "https://techinfo.baslac.com/en/30-S01.pdf",
+          "technical": {
+            "revision": "04/2024",
+            "mixingRatio": null,
+            "sprayViscosity": "DIN 4: 20-24 s",
+            "potLife": "2 h",
+            "nozzle": "1.5 mm",
+            "sprayCoats": "2",
+            "filmThickness": "50-70 μm",
+            "flashOff": "Application Remark",
+            "sanding": null,
+            "drying": [
+              "Drying at 20°C: 8 h",
+              "Drying at 60°C: 30 min"
+            ],
+            "voc": {
+              "content": 419,
+              "limit": 420,
+              "category": "IIB.d"
+            }
+          }
+        }
+      ],
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "04/2024",
+        "mixingRatio": null,
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "2 h",
+        "nozzle": "1.5 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": "Application Remark",
+        "sanding": null,
+        "drying": [
+          "Drying at 20°C: 8 h",
+          "Drying at 60°C: 30 min"
+        ],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — baslac Topcoat 30 CV",
+          "href": "/documents/products/baslac/30_Line_CV.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "content": {
+        "productType": "Sistem završnih boja za komercijalna vozila",
+        "subtype": "Direct-gloss program · kamioni, autobusi i prikolice",
+        "shortDescription": "Jednoslojni sistem završnih boja sa direktnim sjajem, namenjen velikim transportnim površinama — kamionima, autobusima i prikolicama.",
+        "longDescription": "baslac Topcoat 30 CV je direct-gloss program za velike transportne površine: kamione, autobuse i prikolice. Reč je o jednoslojnom HS sistemu usklađenom sa VOC zahtevima, koji se lako nanosi i ima dobru pokrivnu moć. Na velikim površinama daje ujednačen izgled i razliv, uz otpornost na UV zračenje i brzo sušenje. Tehničke vrednosti odnose se na komponentu 30-S01, koja se nanosi u 2 sloja, mlaznicom 1,5 mm, do debljine filma 50-70 μm.",
+        "purpose": "Završno lakiranje komercijalnih vozila sa direktnim sjajem",
+        "facts": [
+          {
+            "label": "Viskozitet prskanja",
+            "value": "DIN 4: 20-24 s"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "2 h"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,5 mm"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "2"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-70 μm"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 8 h · 60°C: 30 min"
+          },
+          {
+            "label": "VOC",
+            "value": "419 g/l (granica 420 g/l) · kategorija IIB(d)"
+          }
+        ],
+        "applications": [
+          "Lakiranje kamiona, autobusa i prikolica",
+          "Jednoslojno završno lakiranje velikih površina",
+          "Nijansiranje po formuli"
+        ],
+        "benefits": [
+          {
+            "title": "Direktan sjaj",
+            "description": "Jednoslojni HS sistem usklađen sa VOC zahtevima daje završni sjaj u jednom koraku."
+          },
+          {
+            "title": "Velike površine",
+            "description": "Pogodan za velike površine, sa ujednačenim izgledom i dobrim razlivom."
+          },
+          {
+            "title": "Jednostavno nanošenje",
+            "description": "Lako nanošenje uz dobru pokrivnu moć."
+          },
+          {
+            "title": "UV otpornost",
+            "description": "Otporan na UV zračenje, uz brzo sušenje."
+          }
+        ],
+        "advice": null
+      }
+    }
+  ],
+  "enrichments": {
+    "baslac-20-24-2k-primerfiller-grey-1l": {
+      "code": "20-24",
+      "officialName": "20-24 2K Primerfiller, grey",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/20-24.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "50-05",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-05-2k-hardener-ambient-uc",
+          "name": "50-05 2K Hardener Ambient UC"
+        },
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "60-40",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-40-reducer-universal-extra-slow",
+          "name": "60-40 Reducer Universal Extra Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "09/2025",
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "1 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": null,
+        "sanding": "P400 / P500",
+        "drying": [
+          "Drying at 20°C: 3 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": {
+          "content": 530,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 20-24 2K Primerfiller, grey",
+          "href": "/documents/products/baslac/20-24.pdf",
+          "language": "en",
+          "version": "09/2025",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-20-34-2k-primerfiller-white-1l": {
+      "code": "20-34",
+      "officialName": "20-34 2K Primerfiller White",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/20-34.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "50-05",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-05-2k-hardener-ambient-uc",
+          "name": "50-05 2K Hardener Ambient UC"
+        },
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "60-40",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-40-reducer-universal-extra-slow",
+          "name": "60-40 Reducer Universal Extra Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "09/2025",
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "1 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": null,
+        "sanding": "P400 / P500",
+        "drying": [
+          "Drying at 20°C: 3 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": {
+          "content": 530,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 20-34 2K Primerfiller White",
+          "href": "/documents/products/baslac/20-34.pdf",
+          "language": "en",
+          "version": "09/2025",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l": {
+      "code": "20-35",
+      "officialName": "20-35 2K Primerfiller white",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/20-35.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        },
+        {
+          "code": "80-30",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-30-additive-plast",
+          "name": "80-30 Additive Plast"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "3:1:1",
+        "sprayViscosity": "DIN 4: 16-19 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "20-35 μm",
+        "flashOff": "15-20 min",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 530,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 20-35 2K Primerfiller white",
+          "href": "/documents/products/baslac/20-35.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-20-94-2k-primerfiller-black-1l": {
+      "code": "20-94",
+      "officialName": "20-94 2K Primerfiller Black",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/20-94.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "50-05",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-05-2k-hardener-ambient-uc",
+          "name": "50-05 2K Hardener Ambient UC"
+        },
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 20-24 s",
+        "potLife": "1 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "50-70 μm",
+        "flashOff": null,
+        "sanding": "P400 / P500",
+        "drying": [
+          "Drying at 20°C: 3 h",
+          "Drying at 60°C: 30 min",
+          "Infrared (short wave): 8 min",
+          "Infrared (medium wave): 10-15 min"
+        ],
+        "voc": {
+          "content": 530,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 20-94 2K Primerfiller Black",
+          "href": "/documents/products/baslac/20-94.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l": {
+      "code": "20-95",
+      "officialName": "20-95 2K Primerfiller black",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/20-95.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "50-20",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-20-hardener-normal",
+          "name": "50-20 Hardener Normal"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "80-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-10-additive-flex",
+          "name": "80-10 Additive Flex"
+        },
+        {
+          "code": "80-30",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-80-30-additive-plast",
+          "name": "80-30 Additive Plast"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "3:1:1",
+        "sprayViscosity": "DIN 4: 16-19 s",
+        "potLife": "2 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "2",
+        "filmThickness": "20-35 μm",
+        "flashOff": "15-20 min",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 535,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 20-95 2K Primerfiller black",
+          "href": "/documents/products/baslac/20-95.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-21-11-2k-plastic-primer-voc-1l": {
+      "code": "21-11",
+      "officialName": "21-11 Plastic Primer VOC",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/21-11.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "50-15",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-50-15-2k-hardener-fast",
+          "name": "50-15 2K Hardener Fast"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": null,
+        "mixingRatio": "4:1:1",
+        "sprayViscosity": "DIN 4: 17-19 s",
+        "potLife": "3.5 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "1",
+        "filmThickness": "20 μm",
+        "flashOff": "20 min",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 539,
+          "limit": 540,
+          "category": "IIB.cII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 21-11 Plastic Primer VOC",
+          "href": "/documents/products/baslac/21-11.pdf",
+          "language": "en",
+          "version": null,
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-21-20-plastic-primer-400ml": {
+      "code": "21-20",
+      "officialName": "21-20 Plastic Primer",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/21-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "sprejevi",
+        "programSlug": "aerosoli",
+        "phaseSlug": "podloga",
+        "visualType": "spray",
+        "rule": "aerosol-undercoat"
+      },
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": "1",
+        "filmThickness": "5 μm",
+        "flashOff": "15 min,before applying baslac 20-24/34/94 filler",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 688,
+          "limit": 840,
+          "category": "IIB.e"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 21-20 Plastic Primer",
+          "href": "/documents/products/baslac/21-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-25-30-2k-primerfiller-ep-4l": {
+      "code": "25-30",
+      "officialName": "25-30 2K Primerfiller EP",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/25-30.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "55-10",
+          "relation": "USES_HARDENER",
+          "slug": "baslac-55-10-ep-hardener",
+          "name": "55-10 EP Hardener"
+        },
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "4:1:2",
+        "sprayViscosity": "DIN 4: 18-20 s",
+        "potLife": "8 h",
+        "nozzle": "1.6-1.8 mm",
+        "sprayCoats": "2",
+        "filmThickness": "40-50 μm",
+        "flashOff": null,
+        "sanding": "P400",
+        "drying": [
+          "Drying at 20°C: 8 h",
+          "Drying at 60°C: 30 min"
+        ],
+        "voc": {
+          "content": 520,
+          "limit": 540,
+          "category": "IIB.cI"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 25-30 2K Primerfiller EP",
+          "href": "/documents/products/baslac/25-30.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-27-10-2k-washprimer-1l": {
+      "code": "27-10",
+      "officialName": "27-10 2K Washprimer",
+      "displayName": null,
+      "kind": "product",
+      "role": "undercoat",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-primers",
+        "https://techinfo.baslac.com/en/27-10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "60-10",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-10-reducer-universal-fast",
+          "name": "60-10 Reducer Universal Fast"
+        },
+        {
+          "code": "60-20",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-20-razredjivac",
+          "name": "60-20"
+        },
+        {
+          "code": "60-30",
+          "relation": "USES_REDUCER",
+          "slug": "baslac-60-30-reducer-universal-slow",
+          "name": "60-30 Reducer Universal Slow"
+        },
+        {
+          "code": "57-10",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-57-10-additive-washprimer",
+          "name": "57-10 Additive Washprimer"
+        },
+        {
+          "code": "57-30",
+          "relation": "USES_ADDITIVE",
+          "slug": "baslac-57-30-additive-washprimer-slow",
+          "name": "57-30 Additive Washprimer slow"
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": "2:1+30 %",
+        "sprayViscosity": "DIN 4: 16 s",
+        "potLife": "48 h",
+        "nozzle": "1.3 mm",
+        "sprayCoats": "1",
+        "filmThickness": "10-15 μm",
+        "flashOff": "10 min",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 760,
+          "limit": 780,
+          "category": "IIB.cIII"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 27-10 2K Washprimer",
+          "href": "/documents/products/baslac/27-10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-45-r45": {
+      "code": "45-R45",
+      "officialName": "45-R45 Dilutant",
+      "displayName": "baslac 45-R45 Dilutant",
+      "kind": "product",
+      "role": "reducer",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": true,
+      "detachFromFamily": true,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/45-R45.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat-by-code"
+      },
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 45-R45 Dilutant",
+          "href": "/documents/products/baslac/45-R45.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-45-w10": {
+      "code": "45-W10",
+      "officialName": "45-W10 3-Stage Additive and Blending Clear",
+      "displayName": "baslac 45-W10 3-Stage Additive and Blending Clear",
+      "kind": "product",
+      "role": "additive",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": true,
+      "detachFromFamily": true,
+      "sourceUrls": [
+        "https://techinfo.baslac.com/en/45-W10.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat-by-code"
+      },
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": "DIN 4: 18-24 s",
+        "potLife": null,
+        "nozzle": "1.4 mm",
+        "sprayCoats": "1",
+        "filmThickness": null,
+        "flashOff": "No flash off before applying 45 Line.",
+        "sanding": null,
+        "drying": [],
+        "voc": {
+          "content": 419,
+          "limit": 420,
+          "category": "IIB.d"
+        }
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 45-W10 3-Stage Additive and Blending Clear",
+          "href": "/documents/products/baslac/45-W10.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    },
+    "baslac-60-20-razredjivac": {
+      "code": "60-20",
+      "officialName": "60-20",
+      "displayName": null,
+      "kind": "product",
+      "role": "reducer",
+      "status": "CURRENT_ACTIVE",
+      "promotedFromLine": false,
+      "detachFromFamily": false,
+      "sourceUrls": [
+        "https://www.baslac.com/en-emea/baslac-additives",
+        "https://techinfo.baslac.com/en/60-20.pdf"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "20-22",
+          "relation": "USED_BY",
+          "slug": "baslac-20-22-2k-primerfiller",
+          "name": "20-22 2K Primerfiller"
+        },
+        {
+          "code": "20-24",
+          "relation": "USED_BY",
+          "slug": "baslac-20-24-2k-primerfiller-grey-1l",
+          "name": "20-24 2K Primerfiller, grey"
+        },
+        {
+          "code": "20-34",
+          "relation": "USED_BY",
+          "slug": "baslac-20-34-2k-primerfiller-white-1l",
+          "name": "20-34 2K Primerfiller White"
+        },
+        {
+          "code": "20-35",
+          "relation": "USED_BY",
+          "slug": "baslac-20-35-2k-primerfiller-wet-on-wet-white-3l",
+          "name": "20-35 2K Primerfiller white"
+        },
+        {
+          "code": "20-94",
+          "relation": "USED_BY",
+          "slug": "baslac-20-94-2k-primerfiller-black-1l",
+          "name": "20-94 2K Primerfiller Black"
+        },
+        {
+          "code": "20-95",
+          "relation": "USED_BY",
+          "slug": "baslac-20-95-2k-primerfiller-wet-on-wet-black-3l",
+          "name": "20-95 2K Primerfiller black"
+        },
+        {
+          "code": "21-11",
+          "relation": "USED_BY",
+          "slug": "baslac-21-11-2k-plastic-primer-voc-1l",
+          "name": "21-11 Plastic Primer VOC"
+        },
+        {
+          "code": "25-30",
+          "relation": "USED_BY",
+          "slug": "baslac-25-30-2k-primerfiller-ep-4l",
+          "name": "25-30 2K Primerfiller EP"
+        },
+        {
+          "code": "27-10",
+          "relation": "USED_BY",
+          "slug": "baslac-27-10-2k-washprimer-1l",
+          "name": "27-10 2K Washprimer"
+        },
+        {
+          "code": "40-10",
+          "relation": "USED_BY",
+          "slug": "baslac-40-10-2k-panel-clear",
+          "name": "40-10 2K Panel Clear"
+        },
+        {
+          "code": "40-40",
+          "relation": "USED_BY",
+          "slug": "baslac-40-40-2k-universal-clear",
+          "name": "40-40 2K Universal Clear"
+        },
+        {
+          "code": "40-450",
+          "relation": "USED_BY",
+          "slug": "baslac-40-450-universal-clear-voc",
+          "name": "40-450 Universal Clear VOC"
+        },
+        {
+          "code": "40-620",
+          "relation": "USED_BY",
+          "slug": "baslac-40-620-2k-clear-mat-voc",
+          "name": "40-620 2K Clear mat VOC"
+        }
+      ],
+      "technical": {
+        "revision": "06/2023",
+        "mixingRatio": null,
+        "sprayViscosity": null,
+        "potLife": null,
+        "nozzle": null,
+        "sprayCoats": null,
+        "filmThickness": null,
+        "flashOff": null,
+        "sanding": null,
+        "drying": [],
+        "voc": null
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — 60-20",
+          "href": "/documents/products/baslac/60-20.pdf",
+          "language": "en",
+          "version": "06/2023",
+          "note": "Zvanični dokument sa techinfo.baslac.com, lokalna kopija"
+        }
+      ]
+    }
+  }
+}

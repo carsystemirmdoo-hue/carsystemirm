@@ -671,6 +671,123 @@
   --product-content-offset-y: 0.3315;
 }
 
+.fit[data-product-fit="/products/baslac/catalog/baslac-12-20-bodyfiller-universal.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 1.7143;
+  --product-content-fill-x: 0.397;
+  --product-content-fill-y: 0.348;
+  --product-content-offset-x: 0.3015;
+  --product-content-offset-y: 0.3267;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-21-10-1k-plastic-primer.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.8333;
+  --product-content-fill-x: 0.397;
+  --product-content-fill-y: 0.7159;
+  --product-content-offset-x: 0.3015;
+  --product-content-offset-y: 0.142;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-10-2k-panel-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5103;
+  --product-content-fill-x: 0.3917;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-100-high-speed-2k-clear-voc.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5087;
+  --product-content-fill-x: 0.39;
+  --product-content-fill-y: 0.92;
+  --product-content-offset-x: 0.305;
+  --product-content-offset-y: 0.04;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-40-2k-universal-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5103;
+  --product-content-fill-x: 0.3917;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-440-2k-voc-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5092;
+  --product-content-fill-x: 0.3908;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-450-universal-clear-voc.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5092;
+  --product-content-fill-x: 0.3908;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-510-ambient-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.9634;
+  --product-content-fill-x: 0.505;
+  --product-content-fill-y: 0.629;
+  --product-content-offset-x: 0.2267;
+  --product-content-offset-y: 0.171;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-40-620-2k-clear-mat-voc.webp"] {
+  --product-canvas-aspect: 0.8333;
+  --product-content-aspect: 0.7706;
+  --product-content-fill-x: 0.524;
+  --product-content-fill-y: 0.5667;
+  --product-content-offset-x: 0.238;
+  --product-content-offset-y: 0.2167;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-50-15-2k-hardener-fast.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 1.0388;
+  --product-content-fill-x: 0.6068;
+  --product-content-fill-y: 0.8778;
+  --product-content-offset-x: 0.2155;
+  --product-content-offset-y: 0.0582;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-70-20-cleaner-plastic.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.8333;
+  --product-content-fill-x: 0.397;
+  --product-content-fill-y: 0.7159;
+  --product-content-offset-x: 0.3015;
+  --product-content-offset-y: 0.142;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-80-10-additive-flex.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.8333;
+  --product-content-fill-x: 0.397;
+  --product-content-fill-y: 0.7159;
+  --product-content-offset-x: 0.3015;
+  --product-content-offset-y: 0.142;
+}
+
+.fit[data-product-fit="/products/baslac/catalog/baslac-80-20-additive-mat.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.8333;
+  --product-content-fill-x: 0.397;
+  --product-content-fill-y: 0.7159;
+  --product-content-offset-x: 0.3015;
+  --product-content-offset-y: 0.142;
+}
+
 .fit[data-product-fit="/products/befar/catalog/befar-anti-hologram-2.webp"] {
   --product-canvas-aspect: 1.5;
   --product-content-aspect: 1.5;

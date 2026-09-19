@@ -1,0 +1,318 @@
+{
+  "bc-020": {
+    "sourceHash": "e9d0d3f395400665",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · brzi",
+    "shortDescription": "Brzi razređivač iz R-M programa, predviđen za upotrebu u okviru sistema.",
+    "longDescription": "BC 020 THINNER je razređivač iz R-M programa, označen kao brzi. Koristi se kao komponenta sistema, uz materijale za koje je u tehničkoj dokumentaciji predviđen.",
+    "purpose": "Razređivanje R-M materijala, brza varijanta",
+    "facts": [{ "label": "Brzina", "value": "brza" }],
+    "applications": ["Razređivanje materijala pre nanošenja"],
+    "benefits": [],
+    "advice": null
+  },
+  "bc-030": {
+    "sourceHash": "454e23f72224d543",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · srednji",
+    "shortDescription": "Razređivač srednje brzine iz R-M programa, predviđen za upotrebu u okviru sistema.",
+    "longDescription": "BC 030 THINNER je razređivač iz R-M programa, označen kao srednji. Koristi se kao komponenta sistema, uz materijale za koje je u tehničkoj dokumentaciji predviđen.",
+    "purpose": "Razređivanje R-M materijala, srednja varijanta",
+    "facts": [{ "label": "Brzina", "value": "srednja" }],
+    "applications": ["Razređivanje materijala pre nanošenja"],
+    "benefits": [],
+    "advice": null
+  },
+  "bc-040": {
+    "sourceHash": "edfdc89f0cbc5481",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · spori",
+    "shortDescription": "Spori razređivač iz R-M programa, predviđen za upotrebu u okviru sistema.",
+    "longDescription": "BC 040 THINNER je razređivač iz R-M programa, označen kao spori. Koristi se kao komponenta sistema, uz materijale za koje je u tehničkoj dokumentaciji predviđen.",
+    "purpose": "Razređivanje R-M materijala, spora varijanta",
+    "facts": [{ "label": "Brzina", "value": "spora" }],
+    "applications": ["Razređivanje materijala pre nanošenja"],
+    "benefits": [],
+    "advice": null
+  },
+  "gv-100": {
+    "sourceHash": "69f48688e61e2c9f",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · GRAPHITE HD · brzi",
+    "shortDescription": "Brzi razređivač iz GRAPHITE HD programa za komercijalna vozila.",
+    "longDescription": "GV 100 GHD THINNER je brzi razređivač iz GRAPHITE HD programa. Koristi se u GRAPHITE HD podlogama, bezbojnim lakovima i pokrivnim bojama namenjenim komercijalnim vozilima.",
+    "purpose": "Razređivanje GRAPHITE HD materijala, brza varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "brza" },
+      { "label": "Linija", "value": "GRAPHITE HD" }
+    ],
+    "applications": [
+      "Razređivanje GRAPHITE HD podloga",
+      "Razređivanje GRAPHITE HD bezbojnih lakova",
+      "Razređivanje GRAPHITE HD pokrivnih boja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "gv-200": {
+    "sourceHash": "2d8bf6982f6bb514",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · GRAPHITE HD · srednji",
+    "shortDescription": "Razređivač srednje brzine iz GRAPHITE HD programa za komercijalna vozila.",
+    "longDescription": "GV 200 GHD THINNER je razređivač srednje brzine iz GRAPHITE HD programa. Koristi se u GRAPHITE HD podlogama, bezbojnim lakovima i pokrivnim bojama namenjenim komercijalnim vozilima.",
+    "purpose": "Razređivanje GRAPHITE HD materijala, srednja varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "srednja" },
+      { "label": "Linija", "value": "GRAPHITE HD" }
+    ],
+    "applications": [
+      "Razređivanje GRAPHITE HD podloga",
+      "Razređivanje GRAPHITE HD bezbojnih lakova",
+      "Razređivanje GRAPHITE HD pokrivnih boja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "gv-300": {
+    "sourceHash": "641396f270fb3fe7",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · GRAPHITE HD · spori",
+    "shortDescription": "Spori razređivač iz GRAPHITE HD programa za komercijalna vozila.",
+    "longDescription": "GV 300 GHD THINNER je spori razređivač iz GRAPHITE HD programa. Koristi se u GRAPHITE HD podlogama, bezbojnim lakovima i pokrivnim bojama namenjenim komercijalnim vozilima.",
+    "purpose": "Razređivanje GRAPHITE HD materijala, spora varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "spora" },
+      { "label": "Linija", "value": "GRAPHITE HD" }
+    ],
+    "applications": [
+      "Razređivanje GRAPHITE HD podloga",
+      "Razređivanje GRAPHITE HD bezbojnih lakova",
+      "Razređivanje GRAPHITE HD pokrivnih boja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "gv-400": {
+    "sourceHash": "8df562f6c3c608fb",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · GRAPHITE HD · veoma spori",
+    "shortDescription": "Veoma spori razređivač iz GRAPHITE HD programa za komercijalna vozila.",
+    "longDescription": "GV 400 GHD THINNER je veoma spori razređivač iz GRAPHITE HD programa. Koristi se u GRAPHITE HD podlogama, bezbojnim lakovima i pokrivnim bojama namenjenim komercijalnim vozilima.",
+    "purpose": "Razređivanje GRAPHITE HD materijala, veoma spora varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "veoma spora" },
+      { "label": "Linija", "value": "GRAPHITE HD" }
+    ],
+    "applications": [
+      "Razređivanje GRAPHITE HD podloga",
+      "Razređivanje GRAPHITE HD bezbojnih lakova",
+      "Razređivanje GRAPHITE HD pokrivnih boja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "hb-034": {
+    "sourceHash": "21b9f1771d6a6049",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · ONYX HD · spori",
+    "shortDescription": "Spori razređivač za podešavanje u sistemu ONYX HD.",
+    "longDescription": "HB 034 HYDROMIX SLOW je spori razređivač koji se koristi u sistemu ONYX HD. U programu ima ulogu komponente za podešavanje i koristi se uz materijale za koje je predviđen.",
+    "purpose": "Podešavanje u sistemu ONYX HD, spora varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "spora" },
+      { "label": "Sistem", "value": "ONYX HD" }
+    ],
+    "applications": ["Podešavanje materijala u sistemu ONYX HD"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2a20": {
+    "sourceHash": "7abfd1772f18f5f3",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Advance Series",
+    "shortDescription": "Razređivač iz Advance Series, namenjen bezbojnom laku iz istog programa.",
+    "longDescription": "R 2A20 AirtopTHINN je razređivač iz Advance Series. Koristi se u bezbojnom laku iz iste serije, kao njegova sistemska komponenta.",
+    "purpose": "Razređivanje bezbojnog laka iz Advance Series",
+    "facts": [{ "label": "Serija", "value": "Advance Series" }],
+    "applications": ["Razređivanje bezbojnog laka iz Advance Series"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2a24": {
+    "sourceHash": "e9e226d6f0d3e7bf",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Advance Series · srednji",
+    "shortDescription": "MultiTHINN, razređivač srednje brzine za materijale iz Advance Series.",
+    "longDescription": "R 2A24 MultiTHINN je razređivač srednje brzine iz Advance Series. Koristi se u materijalima te serije, prema uputstvu za obradu pojedinačnog proizvoda.",
+    "purpose": "Razređivanje materijala iz Advance Series, srednja varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "srednja" },
+      { "label": "Serija", "value": "Advance Series" }
+    ],
+    "applications": ["Razređivanje materijala iz Advance Series"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2a34": {
+    "sourceHash": "5a58f0f96aaf91ed",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Advance Series · spori",
+    "shortDescription": "MultiTHINN, spori razređivač za materijale iz Advance Series.",
+    "longDescription": "R 2A34 MultiTHINN je spori razređivač iz Advance Series. Koristi se u materijalima te serije, prema uputstvu za obradu pojedinačnog proizvoda.",
+    "purpose": "Razređivanje materijala iz Advance Series, spora varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "spora" },
+      { "label": "Serija", "value": "Advance Series" }
+    ],
+    "applications": ["Razređivanje materijala iz Advance Series"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2e20": {
+    "sourceHash": "7f44832183080dd7",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · srednji",
+    "shortDescription": "Razređivač srednje brzine za R-M prajmer-punilo i bezbojni lak.",
+    "longDescription": "R 2E20 je razređivač srednje brzine iz R-M programa. Koristi se u prajmer-punilu i u bezbojnom laku, prema uputstvu za obradu svakog od tih materijala.",
+    "purpose": "Razređivanje prajmer-punila i bezbojnog laka",
+    "facts": [{ "label": "Brzina", "value": "srednja" }],
+    "applications": ["Razređivanje prajmer-punila", "Razređivanje bezbojnog laka"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2e30": {
+    "sourceHash": "ae42d0495b4c95db",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · spori",
+    "shortDescription": "Spori razređivač za R-M prajmer-punilo i bezbojni lak.",
+    "longDescription": "R 2E30 je spori razređivač iz R-M programa. Koristi se u prajmer-punilu i u bezbojnom laku, prema uputstvu za obradu svakog od tih materijala.",
+    "purpose": "Razređivanje prajmer-punila i bezbojnog laka, spora varijanta",
+    "facts": [{ "label": "Brzina", "value": "spora" }],
+    "applications": ["Razređivanje prajmer-punila", "Razređivanje bezbojnog laka"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2p25": {
+    "sourceHash": "d71c6a574fe8c24e",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Pioneer Series · eSense · srednji",
+    "shortDescription": "CLEAR Thinn-R, eSense razređivač srednje brzine za materijale iz Pioneer Series.",
+    "longDescription": "R 2P25 CLEAR Thinn-R je eSense razređivač srednje brzine. Koristi se u materijalima iz Pioneer Series, prema uputstvu za obradu pojedinačnog proizvoda.",
+    "purpose": "Razređivanje materijala iz Pioneer Series, srednja varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "srednja" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "Oznaka", "value": "eSense" }
+    ],
+    "applications": ["Razređivanje materijala iz Pioneer Series"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2p30": {
+    "sourceHash": "ecea4cd9778c324a",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Pioneer Series · UV",
+    "shortDescription": "UV Thinn-R, razređivač predviđen isključivo za UV bezbojni lak iz Pioneer Series.",
+    "longDescription": "R 2P30 UV Thinn-R je razređivač iz Pioneer Series. Namenjen je isključivo UV bezbojnom laku iz iste serije i ne koristi se u drugim materijalima.",
+    "purpose": "Razređivanje UV bezbojnog laka iz Pioneer Series",
+    "facts": [{ "label": "Serija", "value": "Pioneer Series" }],
+    "applications": ["Razređivanje UV bezbojnog laka iz Pioneer Series"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2p35": {
+    "sourceHash": "71baf66d6e1c9902",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Pioneer Series · eSense · spori",
+    "shortDescription": "CLEAR Thinn-R, spori eSense razređivač za materijale iz Pioneer Series.",
+    "longDescription": "R 2P35 CLEAR Thinn-R je spori eSense razređivač. Koristi se u materijalima iz Pioneer Series, prema uputstvu za obradu pojedinačnog proizvoda.",
+    "purpose": "Razređivanje materijala iz Pioneer Series, spora varijanta",
+    "facts": [
+      { "label": "Brzina", "value": "spora" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "Oznaka", "value": "eSense" }
+    ],
+    "applications": ["Razređivanje materijala iz Pioneer Series"],
+    "benefits": [],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "r-2p45": {
+    "sourceHash": "4ba9004e84a4fdf1",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Pioneer Series · eSense · izuzetno spori",
+    "shortDescription": "CLEAR Thinn-R, izuzetno spori eSense razređivač za bezbojne lakove iz Pioneer Series.",
+    "longDescription": "R 2P45 CLEAR Thinn-R je izuzetno spori eSense razređivač. Koristi se u bezbojnim lakovima iz Pioneer Series, i to samo u radnim uslovima koje proizvođač navodi u napomeni.",
+    "purpose": "Razređivanje bezbojnih lakova iz Pioneer Series",
+    "facts": [
+      { "label": "Brzina", "value": "izuzetno spora" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "Oznaka", "value": "eSense" }
+    ],
+    "applications": ["Razređivanje bezbojnih lakova iz Pioneer Series"],
+    "benefits": [],
+    "advice": "Koristiti samo uz eSense učvršćivač za pokrivne premaze, i to pri veoma visokim temperaturama okoline i uz infracrvene sisteme sušenja."
+  },
+  "ra-040": {
+    "sourceHash": "869a2e097397aa80",
+    "productType": "Razređivač za bazne boje",
+    "subtype": "Razređivač · AGILIS MIX · AGILIS X-TREME",
+    "shortDescription": "AGILIS MIX, razređivač za bazne boje AGILIS X-TREME, i za efekt i za pune nijanse.",
+    "longDescription": "RA 040 AGILIS MIX je razređivač namenjen baznim bojama AGILIS X-TREME. Koristi se i za efekt i za pune nijanse, kao sistemska komponenta uz odgovarajuću baznu osnovu.",
+    "purpose": "Razređivanje baznih boja AGILIS X-TREME",
+    "facts": [
+      { "label": "Uloga", "value": "razređivač za bazne boje" },
+      { "label": "Linija", "value": "AGILIS X-TREME" }
+    ],
+    "applications": [
+      "Razređivanje efekt nijansi AGILIS X-TREME",
+      "Razređivanje punih nijansi AGILIS X-TREME"
+    ],
+    "benefits": [
+      {
+        "title": "Efekt i pune nijanse",
+        "description": "Ista varijanta razređivača koristi se i za efekt i za pune nijanse."
+      }
+    ],
+    "advice": null
+  },
+  "ra-050": {
+    "sourceHash": "2c131f5ff887dfd1",
+    "productType": "Razređivač za bazne boje",
+    "subtype": "Razređivač · AGILIS MIX · AGILIS",
+    "shortDescription": "AGILIS MIX, razređivač za bazne boje AGILIS, i za efekt i za pune nijanse.",
+    "longDescription": "RA 050 AGILIS MIX je razređivač namenjen baznim bojama AGILIS. Koristi se i za efekt i za pune nijanse, kao sistemska komponenta uz odgovarajuću baznu osnovu.",
+    "purpose": "Razređivanje baznih boja AGILIS",
+    "facts": [
+      { "label": "Uloga", "value": "razređivač za bazne boje" },
+      { "label": "Linija", "value": "AGILIS" }
+    ],
+    "applications": ["Razređivanje efekt nijansi AGILIS", "Razređivanje punih nijansi AGILIS"],
+    "benefits": [
+      {
+        "title": "Efekt i pune nijanse",
+        "description": "Ista varijanta razređivača koristi se i za efekt i za pune nijanse."
+      }
+    ],
+    "advice": null
+  },
+  "ra-220": {
+    "sourceHash": "9906486d858b8faf",
+    "productType": "Razređivač za unutrašnje površine",
+    "subtype": "Razređivač · AGILIS INTERIOR MIX · unutrašnje površine",
+    "shortDescription": "AGILIS INTERIOR MIX, razređivač za lakiranje unutrašnjih delova vozila, bez bezbojnog laka.",
+    "longDescription": "RA 220 AGILIS INTERIOR MIX je razređivač za unutrašnje površine u sistemu AGILIS. Uz odgovarajući aktivator omogućava lakiranje unutrašnjih delova, kao što su motorni prostor i prtljažnik, bez nanošenja bezbojnog laka i bez izmene standardnog AGILIS postupka nanošenja.",
+    "purpose": "Lakiranje unutrašnjih delova vozila u sistemu AGILIS",
+    "facts": [
+      { "label": "Uloga", "value": "razređivač za unutrašnje površine" },
+      { "label": "Linija", "value": "AGILIS" }
+    ],
+    "applications": ["Lakiranje motornog prostora", "Lakiranje prtljažnika"],
+    "benefits": [
+      {
+        "title": "Unutrašnje površine bez laka",
+        "description": "Unutrašnji delovi se lakiraju bez nanošenja bezbojnog laka i bez izmene standardnog AGILIS postupka nanošenja."
+      }
+    ],
+    "advice": "Kod popravke vozila, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  }
+}

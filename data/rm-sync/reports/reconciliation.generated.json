@@ -1,0 +1,68 @@
+{
+  "coverage": {
+    "A_currentOfficialRecords": 220,
+    "B_representedLocally": 220,
+    "C_currentOfficialCodes": 219,
+    "D_representedLocally": 219,
+    "productCoveragePercent": 100,
+    "codeCoveragePercent": 100
+  },
+  "breakdown": {
+    "importedThisSync": 159,
+    "enrichedExisting": 61,
+    "systems": 9,
+    "standaloneComponents": 89,
+    "websiteOnlySystems": [
+      "UNO HD"
+    ],
+    "systemComponentsWithoutCards": [
+      "HB 002",
+      "HB 004",
+      "HB 006",
+      "HB 010",
+      "HB 010E",
+      "HB 010X",
+      "HB 010XE",
+      "HB 020",
+      "HB 030",
+      "HB 030E",
+      "HB 030X",
+      "HB 030XE",
+      "HB 040",
+      "HB 040E"
+    ],
+    "legacyLocalOnly": [
+      "rm-diamont-bezbojni-lak",
+      "rm-pasta-190-1l",
+      "rm-pasta-190-5l"
+    ],
+    "documentationGaps": [
+      "HB 015",
+      "HB 032"
+    ],
+    "websiteOrphans": [
+      "822-promotor-de-adherencia"
+    ],
+    "missingOfficialAssets": 42,
+    "runtimeRmProducts": 223
+  },
+  "ACTIVE_PRODUCT_MISSING": [],
+  "ACTIVE_CODE_MISSING": [],
+  "duplicateActiveCodes": [],
+  "attachedToWrongProduct": [],
+  "duplicateProductSlugs": [],
+  "images": {
+    "published": 116,
+    "referenced": 116,
+    "orphanImages": [],
+    "duplicateImages": [
+      [
+        "rm-hb-002-onyx-hd.webp",
+        "rm-onyx-hd.webp"
+      ]
+    ],
+    "brokenImageReferences": [],
+    "hotlinked": []
+  },
+  "failures": []
+}

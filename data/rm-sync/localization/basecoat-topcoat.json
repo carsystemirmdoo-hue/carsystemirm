@@ -1,0 +1,580 @@
+{
+  "a-2525": {
+    "sourceHash": "34e91d3519ec8096",
+    "productType": "blender za bazne boje",
+    "subtype": "Blender · ONYX HD · vodorazredive bazne boje",
+    "shortDescription": "Blender za stapanje metalik i uni nijansi sa ONYX HD vodorazredivim baznim bojama.",
+    "longDescription": "A 2525 ONYX BLENDER PLUS koristi se za stapanje metalik i uni nijansi sa ONYX HD vodorazredivim baznim bojama. U zoni stapanja pomaže da prelet bazne boje ostane gladak i ravnomeran, pa se izbegavaju tamni obodi oko popravljene površine. Posle razduvavanja površina je dovoljno čvrsta za lepljenje trake i brušenje.",
+    "purpose": "Stapanje popravke sa ONYX HD baznim bojama",
+    "facts": [
+      { "label": "Razduvavanje", "value": "na 20°C, pre nanošenja efekt-slojeva" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Priprema zone stapanja pre nanošenja efekt-slojeva",
+      "Stapanje metalik i uni nijansi u ONYX HD procesu"
+    ],
+    "benefits": [
+      { "title": "Ravnomerna zona stapanja", "description": "Pomaže da prelet u zoni stapanja bude gladak i homogen, bez tamnih senki oko popravke." },
+      { "title": "Lepljenje trake i brušenje", "description": "Posle razduvavanja površina je dovoljno čvrsta za lepljenje trake i brušenje." }
+    ],
+    "advice": "Uz uputstvo za obradu uvek se poštuju i uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "a-2530x": {
+    "sourceHash": "8e0a414145f205c5",
+    "productType": "blender za bazne boje",
+    "subtype": "Blender · AGILIS · visoke temperature i niska vlažnost",
+    "shortDescription": "Blender za zonu stapanja u AGILIS procesu, za rad pri visokim temperaturama i niskoj vlažnosti vazduha.",
+    "longDescription": "AGILIS BLENDER A 2530X priprema zonu stapanja tako da se efekt-čestice pravilno orijentišu. Kada se bazna boja nanosi u zoni stapanja, čestice iz preleta mogu da se poravnaju samo delimično; ako se blender prethodno nanese, on upija prelet bazne boje, pa se efekt-čestice orijentišu kao u mokro nanetom, povezanom sloju bazne boje. Time se sprečavaju senke koje nastaju od nepravilno orijentisanih efekt-čestica, uključujući i tragove brušenja. Namenjen je radu pri visokim temperaturama i niskoj vlažnosti vazduha.",
+    "purpose": "Priprema zone stapanja u AGILIS procesu",
+    "facts": [
+      { "label": "Razduvavanje", "value": "na 20°C se ne razduvava do mat pre nego što se stapanje sa AGILIS završi" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4 mm" },
+      { "label": "Sadržaj VOC", "value": "249 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Nanošenje u zonu stapanja pre bazne boje",
+      "Popravke pri visokoj temperaturi ili niskoj vlažnosti vazduha"
+    ],
+    "benefits": [
+      { "title": "Orijentacija efekt-čestica", "description": "Upija prelet bazne boje, pa se efekt-čestice u zoni stapanja poravnavaju kao u mokro nanetom sloju." },
+      { "title": "Spreman za upotrebu", "description": "Ne podešava se posebnim razređivačem." }
+    ],
+    "advice": null
+  },
+  "a-2540": {
+    "sourceHash": "f037e41578860a4e",
+    "productType": "blender za bazne boje",
+    "subtype": "Blender · AGILIS X-TREME program",
+    "shortDescription": "Blender koji u zoni stapanja usmerava efekt-čestice pri popravkama baznom bojom.",
+    "longDescription": "A 2540 AGILIS BLENDER X-TREME priprema zonu stapanja tako da se efekt-čestice pravilno orijentišu. Kada se u zoni stapanja radi bez njega, čestice iz preleta mogu da se poravnaju samo delimično; ako se blender prethodno nanese, on upija prelet bazne boje, pa se efekt-čestice orijentišu kao u mokro nanetom, povezanom sloju bazne boje. Time se sprečavaju senke koje nastaju od nepravilno orijentisanih efekt-čestica, uključujući i tragove brušenja.",
+    "purpose": "Priprema zone stapanja u AGILIS X-TREME procesu",
+    "facts": [
+      { "label": "Sadržaj VOC", "value": "249 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Nanošenje u zonu stapanja pre bazne boje"
+    ],
+    "benefits": [
+      { "title": "Spreman za upotrebu", "description": "Ne podešava se posebnim razređivačem." }
+    ],
+    "advice": null
+  },
+  "a-2610": {
+    "sourceHash": "f666c74b7fe2d161",
+    "productType": "aditiv za direktne mat premaze",
+    "subtype": "Aditiv · ONYX HD · mat i svilenkasto mat direktni premazi",
+    "shortDescription": "Aditiv za ONYX HD nijanse iz sistema za nijansiranje, za mat i svilenkasto mat premaze bez bezbojnog laka.",
+    "longDescription": "A 2610 ONYX INTERIOR služi za reprodukciju mat i svilenkasto mat premaza direktnog sjaja iz ONYX HD sistema za nijansiranje, dakle onih na koje se ne nanosi bezbojni lak. Namenjen je ONYX HD nijansama za unutrašnjost vozila. Nanosi se u više slojeva, uz razduvavanje do mat površine posle svakog sloja.",
+    "purpose": "Mat i svilenkasto mat direktni premazi iz ONYX HD sistema",
+    "facts": [
+      { "label": "Vreme upotrebe smeše", "value": "4 h na 20°C" },
+      { "label": "Razduvavanje", "value": "na 20°C do mat površine posle svakog sloja" },
+      { "label": "Sušenje", "value": "15 min na 20°C" },
+      { "label": "Mlaznica", "value": "1,4–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "800 g/l (granična vrednost 840 g/l, kategorija IIB.e)" }
+    ],
+    "applications": [
+      "Mat i svilenkasto mat premazi direktnog sjaja iz ONYX HD sistema",
+      "ONYX HD nijanse za unutrašnjost vozila"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "agilis": {
+    "sourceHash": "9fcba0f778230a67",
+    "productType": "sistem vodorazredivih baznih boja",
+    "subtype": "Sistem za nijansiranje · AGILIS · vodorazredive bazne boje",
+    "shortDescription": "Sistem za nijansiranje vodorazredivih baznih boja: nijansa se meša po recepturi, a ne isporučuje kao gotova boja.",
+    "longDescription": "AGILIS je sistem za nijansiranje vodorazredivih baznih boja u popravci automobilskih lakova. Nijansa se ne uzima kao jedna gotova boja, već se meša po recepturi iz sistema, a recepture pokrivaju ceo opseg uni, metalik i sedefastih nijansi koje popravka zahteva. Sistem je vodorazrediv i u stanju spremnom za nanošenje sadrži manje od 6% organskih rastvarača.",
+    "purpose": "Nijansiranje vodorazredivih baznih boja po recepturi",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1" },
+      { "label": "Razređivanje", "value": "50 % zapreminski, prema recepturi" },
+      { "label": "Razduvavanje", "value": "na 20°C do potpuno mat površine posle završnog sloja" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4 mm" },
+      { "label": "Sadržaj VOC", "value": "249 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje uni, metalik i sedefastih nijansi po recepturi",
+      "Popravka automobilskih lakova baznom bojom"
+    ],
+    "benefits": [
+      { "title": "Vodorazredivi sistem", "description": "Boja se razređuje vodom i u stanju spremnom za nanošenje sadrži manje od 6% organskih rastvarača." }
+    ],
+    "advice": "Posle dodavanja razređivača smešu odmah promešati."
+  },
+  "agilis-esense": {
+    "sourceHash": "ae213f11cb380994",
+    "productType": "sistem vodorazredivih baznih boja",
+    "subtype": "Sistem za nijansiranje · AGILIS eSense · vodorazredive bazne boje",
+    "shortDescription": "AGILIS eSense je sistem za nijansiranje vodorazredivih baznih boja; nijansa se meša po recepturi iz sistema.",
+    "longDescription": "AGILIS eSense je eSense varijanta sistema za nijansiranje vodorazredivih baznih boja u popravci automobilskih lakova. Nijansa se ne uzima kao jedna gotova boja, već se meša po recepturi iz sistema, a recepture pokrivaju ceo opseg uni, metalik i sedefastih nijansi koje popravka zahteva. Sistem je vodorazrediv i u stanju spremnom za nanošenje sadrži manje od 6% organskih rastvarača.",
+    "purpose": "Nijansiranje vodorazredivih baznih boja po recepturi",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1" },
+      { "label": "Razređivanje", "value": "50 % zapreminski, prema recepturi" },
+      { "label": "Razduvavanje", "value": "na 20°C do potpuno mat površine posle završnog sloja" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4 mm" },
+      { "label": "Sadržaj VOC", "value": "249 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje uni, metalik i sedefastih nijansi po recepturi",
+      "Popravka automobilskih lakova baznom bojom"
+    ],
+    "benefits": [
+      { "title": "Vodorazredivi sistem", "description": "Boja se razređuje vodom i u stanju spremnom za nanošenje sadrži manje od 6% organskih rastvarača." }
+    ],
+    "advice": "Posle dodavanja razređivača smešu odmah promešati."
+  },
+  "agilis-esense-x-treme": {
+    "sourceHash": "73bdcab5f4bbebad",
+    "productType": "sistem vodorazredivih baznih boja",
+    "subtype": "Sistem za nijansiranje · AGILIS eSense X-TREME · vodorazredive bazne boje",
+    "shortDescription": "AGILIS eSense X-TREME je sistem za nijansiranje vodorazredivih baznih boja po recepturi.",
+    "longDescription": "AGILIS eSense X-TREME je sistem za nijansiranje vodorazredivih baznih boja u popravci automobilskih lakova. Nijansa se ne uzima kao jedna gotova boja, već se meša po recepturi iz sistema. Recepture pokrivaju ceo opseg uni, metalik i sedefastih nijansi koje popravka automobilskih lakova zahteva.",
+    "purpose": "Nijansiranje vodorazredivih baznih boja po recepturi",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1" },
+      { "label": "Razređivanje", "value": "50 % zapreminski, prema recepturi" },
+      { "label": "Sadržaj VOC", "value": "249 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje uni, metalik i sedefastih nijansi po recepturi",
+      "Popravka automobilskih lakova baznom bojom"
+    ],
+    "benefits": [],
+    "advice": "Posle dodavanja razređivača smešu odmah promešati."
+  },
+  "agilis-x-treme": {
+    "sourceHash": "1436e38b4f1a84a9",
+    "productType": "sistem vodorazredivih baznih boja",
+    "subtype": "Sistem za nijansiranje · AGILIS X-TREME · vodorazredive bazne boje",
+    "shortDescription": "AGILIS X-TREME je sistem za nijansiranje vodorazredivih baznih boja po recepturi.",
+    "longDescription": "AGILIS X-TREME je sistem za nijansiranje vodorazredivih baznih boja u popravci automobilskih lakova. Nijansa se ne uzima kao jedna gotova boja, već se meša po recepturi iz sistema. Recepture pokrivaju ceo opseg uni, metalik i sedefastih nijansi koje popravka automobilskih lakova zahteva.",
+    "purpose": "Nijansiranje vodorazredivih baznih boja po recepturi",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1" },
+      { "label": "Razređivanje", "value": "50 % zapreminski, prema recepturi" },
+      { "label": "Sadržaj VOC", "value": "249 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje uni, metalik i sedefastih nijansi po recepturi",
+      "Popravka automobilskih lakova baznom bojom"
+    ],
+    "benefits": [],
+    "advice": "Posle dodavanja razređivača smešu odmah promešati."
+  },
+  "d-121": {
+    "sourceHash": "c776cc5c0cf620f3",
+    "productType": "bazna boja sa efektom nalik hromu",
+    "subtype": "Bazna boja · efekat nalik hromu",
+    "shortDescription": "Specijalna bazna boja koja daje efekat nalik hromu, razvijena za popravku delova sa takvim izgledom.",
+    "longDescription": "D 121 ULTRA FLASH FLAKE DIAMOND je specijalna bazna boja koja daje efekat nalik hromu. Takav izgled se sreće na različitim dodatnim delovima vozila i upravo je za njihovu popravku ova bazna boja i razvijena. Nanosi se u više slojeva, uz razduvavanje između slojeva.",
+    "purpose": "Popravka delova sa izgledom nalik hromu",
+    "facts": [
+      { "label": "Vreme upotrebe smeše", "value": "8 h na 20°C" },
+      { "label": "Razduvavanje", "value": "5 min posle svakog sloja, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "5–10 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" }
+    ],
+    "applications": [
+      "Popravka dodatnih delova vozila sa izgledom nalik hromu"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "d-403": {
+    "sourceHash": "31280fae49a3024d",
+    "productType": "bazna boja",
+    "subtype": "Bazna boja · DIAMONT · crna",
+    "shortDescription": "Crna bazna boja iz DIAMONT programa za popravku automobilskih lakova.",
+    "longDescription": "D 403 DIAMONT JET BLACK je crna bazna boja namenjena popravci automobilskih lakova. Pripada DIAMONT programu baznih boja i koristi se kao gotova crna nijansa, bez mešanja po recepturi. Nanosi se u više slojeva, uz razduvavanje između slojeva.",
+    "purpose": "Crna bazna boja za popravku automobilskih lakova",
+    "facts": [
+      { "label": "Vreme upotrebe smeše", "value": "24 h na 20°C" },
+      { "label": "Razduvavanje", "value": "15 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" }
+    ],
+    "applications": [
+      "Popravka automobilskih lakova u crnoj nijansi"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "db-403": {
+    "sourceHash": "250dbc3e99a5f5a4",
+    "productType": "vodorazrediva bazna boja",
+    "subtype": "Bazna boja · ONYX HD · Deep Black",
+    "shortDescription": "Vodorazrediva bazna boja u nijansi Deep Black iz ONYX HD programa.",
+    "longDescription": "DB 403 ONYX HD Deep Black je vodorazrediva bazna boja u nijansi duboke crne. Pripada ONYX HD programu vodorazredivih baznih boja i koristi se kao gotova nijansa. Prvi sloj se razduvava na sobnoj temperaturi do mat površine, a drugi na temperaturi površine od 40–50°C (najviše 60°C), takođe do mat izgleda, uz naknadno hlađenje.",
+    "purpose": "Bazna boja u nijansi Deep Black",
+    "facts": [
+      { "label": "Razduvavanje", "value": "prvi sloj: na sobnoj temperaturi do mat; drugi sloj: 40–50°C (najviše 60°C) temperature površine do mat, uz hlađenje" },
+      { "label": "Sušenje", "value": "15 min na 20°C; 10 min na 60°C" },
+      { "label": "Debljina suvog filma", "value": "20 μm" },
+      { "label": "Mlaznica", "value": "1,4–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Popravka automobilskih lakova u nijansi Deep Black"
+    ],
+    "benefits": [],
+    "advice": "Posle dodavanja podešavajuće baze smešu odmah promešati."
+  },
+  "diamont-var-cv": {
+    "sourceHash": "a45b98c128956336",
+    "productType": "bazna boja za komercijalna vozila",
+    "subtype": "Bazna boja · DIAMONT · metalik i uni varijanta za komercijalna vozila",
+    "shortDescription": "DIAMONT bazna boja u metalik i uni varijanti za komercijalna vozila i velike površine.",
+    "longDescription": "DIAMONT u varijanti za komercijalna vozila pokriva metalik i uni nijanse. Koristi se za natpise i grafiku na vozilima, autobuse, kabine pri obnovi i pri promeni nijanse, nadgradnje i popravke autobusa. Pogodan je za velike površine, dobro se razliva, ima dobru moć pokrivanja, brzo se suši i izraženo je otporan na UV zračenje.",
+    "purpose": "Nijansiranje komercijalnih vozila i velikih površina",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100 + 50%" },
+      { "label": "Razređivanje", "value": "50 % zapreminski" },
+      { "label": "Razduvavanje", "value": "na 20°C do mat površine" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Mlaznica", "value": "1,4 / 1,5 / 1,7 / 1,0–1,1 mm" }
+    ],
+    "applications": [
+      "Natpisi i grafika na vozilima",
+      "Autobusi i kabine, obnova i promena nijanse",
+      "Nadgradnje i popravke autobusa"
+    ],
+    "benefits": [
+      { "title": "Velike površine", "description": "Pogodan za rad na velikim površinama." },
+      { "title": "Dobro razlivanje", "description": "Sloj se dobro razliva." },
+      { "title": "Otpornost na UV", "description": "Izražena otpornost na UV zračenje." },
+      { "title": "Moć pokrivanja", "description": "Dobra moć pokrivanja." },
+      { "title": "Brzo sušenje", "description": "Brzo se suši." }
+    ],
+    "advice": null
+  },
+  "ghd-cv-12": {
+    "sourceHash": "d489859ce95f9bde",
+    "productType": "topcoat direktnog sjaja",
+    "subtype": "Topcoat · GRAPHITE HD · srebrna, RAL 9006",
+    "shortDescription": "Srebrni premaz direktnog sjaja u nijansi RAL 9006 iz GRAPHITE HD programa za komercijalna vozila.",
+    "longDescription": "GHD CV 12 je premaz direktnog sjaja u srebrnoj nijansi RAL 9006. Koristi se u svim primenama na komercijalnim vozilima, na kiperima od aluminijuma, nadgradnjama i vozilima za rasuti teret. Nanosi se preko R-M CV prajmer-punila i punila, pogodan je za velike površine, dobro se razliva, izraženo je otporan na UV zračenje i daje izraženu tvrdoću površine.",
+    "purpose": "Direktni sjaj na komercijalnim vozilima",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:25:25" },
+      { "label": "Vreme upotrebe smeše", "value": "1,5 h na 20°C" },
+      { "label": "Razduvavanje", "value": "na 20°C bez razduvavanja" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Mlaznica", "value": "1,4 / 1,7 / 0,23–0,28 / 1–1,1 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Sve primene na komercijalnim vozilima",
+      "Kiperi od aluminijuma i nadgradnje",
+      "Vozila za rasuti teret"
+    ],
+    "benefits": [
+      { "title": "Na R-M CV podlogama", "description": "Pogodan na svim R-M CV prajmer-punilima i punilima." },
+      { "title": "Velike površine", "description": "Pogodan za rad na velikim površinama." },
+      { "title": "Dobro razlivanje", "description": "Sloj se dobro razliva." },
+      { "title": "Otpornost na UV", "description": "Izražena otpornost na UV zračenje." },
+      { "title": "Tvrdoća površine", "description": "Izražena tvrdoća površine." }
+    ],
+    "advice": null
+  },
+  "ghd-cv-40m": {
+    "sourceHash": "167baca085591c87",
+    "productType": "matirajući topcoat za nijansiranje",
+    "subtype": "Matirajuća komponenta · GRAPHITE HD · sistem za komercijalna vozila",
+    "shortDescription": "Matirajuća komponenta GRAPHITE HD sistema za primene u kojima je potreban smanjen sjaj.",
+    "longDescription": "GHD CV 40M je matirajuća komponenta za nijansiranje u GRAPHITE HD programu za komercijalna vozila. Koristi se svuda gde je potreban smanjen sjaj, a stepen sjaja se podešava kroz COLOR EXPLORER ili SHOP MASTER, pa se istom komponentom postižu različiti nivoi sjaja. Nanosi se preko R-M CV prajmer-punila i punila, dobro se razliva i izraženo je otporan na UV zračenje.",
+    "purpose": "Podešavanje smanjenog sjaja na komercijalnim vozilima",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:20:20" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "10–15 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Mlaznica", "value": "1,4 / 1,7 / 0,23–0,28 / 1–1,1 mm" }
+    ],
+    "applications": [
+      "Primene na komercijalnim vozilima gde je potreban smanjen sjaj"
+    ],
+    "benefits": [
+      { "title": "Na R-M CV podlogama", "description": "Pogodan na svim R-M CV prajmer-punilima i punilima." },
+      { "title": "Matiranje", "description": "Daje dobar efekat matiranja." },
+      { "title": "Različiti nivoi sjaja", "description": "Stepen sjaja se podešava kroz COLOR EXPLORER ili SHOP MASTER, pa se postižu različiti nivoi sjaja." },
+      { "title": "Dobro razlivanje", "description": "Sloj se dobro razliva." },
+      { "title": "Otpornost na UV", "description": "Izražena otpornost na UV zračenje." }
+    ],
+    "advice": null
+  },
+  "hb-002-var-cv": {
+    "sourceHash": "f995c279659bbecd",
+    "productType": "bazna boja za komercijalna vozila",
+    "subtype": "Bazna boja · ONYX HD · metalik i uni varijanta za komercijalna vozila",
+    "shortDescription": "ONYX HD bazna boja u metalik i uni varijanti za komercijalna vozila i velike površine.",
+    "longDescription": "HB 002 ONYX HD je bazna boja iz ONYX HD programa, u metalik i uni varijanti za komercijalna vozila. Namenjena je autobusima, kabinama pri promeni nijanse, nadgradnjama, vozilima za rasuti teret i popravkama autobusa. Dobro se razliva, pogodna je za velike površine, ima dobru moć pokrivanja, izraženu otpornost na UV zračenje i izražene osobine pri nanošenju.",
+    "purpose": "Bazna boja za komercijalna vozila i velike površine",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:60" },
+      { "label": "Razređivanje", "value": "60 % zapreminski" },
+      { "label": "Vreme upotrebe smeše", "value": "8 h na 20°C" },
+      { "label": "Razduvavanje", "value": "na 20°C do mat površine" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Mlaznica", "value": "1,5 / 1,0–1,1 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Autobusi i popravke autobusa",
+      "Kabine pri promeni nijanse",
+      "Nadgradnje i vozila za rasuti teret"
+    ],
+    "benefits": [
+      { "title": "Dobro razlivanje", "description": "Sloj se dobro razliva." },
+      { "title": "Velike površine", "description": "Pogodna za rad na velikim površinama." },
+      { "title": "Otpornost na UV", "description": "Izražena otpornost na UV zračenje." },
+      { "title": "Moć pokrivanja", "description": "Dobra moć pokrivanja." },
+      { "title": "Rad pri nanošenju", "description": "Izražene osobine pri nanošenju." }
+    ],
+    "advice": null
+  },
+  "hb-015": {
+    "sourceHash": "2c27ffa5cabed31b",
+    "productType": "komponenta AGILIS sistema za nijansiranje",
+    "subtype": "Komponenta za nijansiranje · AGILIS · sitne popravke",
+    "shortDescription": "Komponenta AGILIS sistema za nijansiranje, namenjena sitnim popravkama.",
+    "longDescription": "HB 015 AGILIS Minor Repair je komponenta AGILIS sistema za nijansiranje, namenjena sitnim popravkama. Nanosi se u laganim, pokrivnim slojevima, uz razduvavanje između pojedinačnih slojeva.",
+    "purpose": "Sitne popravke u AGILIS procesu",
+    "facts": [
+      { "label": "Ulazni pritisak", "value": "1,0–1,5 bar" }
+    ],
+    "applications": [
+      "Sitne popravke u AGILIS procesu"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "hb-10s": {
+    "sourceHash": "a1745108ad332bc2",
+    "productType": "bazna boja",
+    "subtype": "Bazna boja · ONYX HD · Gleam Silver",
+    "shortDescription": "ONYX HD bazna boja u nijansi Gleam Silver.",
+    "longDescription": "HB 10S Gleam Silver je bazna boja iz ONYX HD programa u nijansi Gleam Silver. Koristi se kao gotova nijansa i nanosi se u više slojeva, uz razduvavanje do mat površine posle svakog pojedinačnog sloja.",
+    "purpose": "Bazna boja u nijansi Gleam Silver",
+    "facts": [
+      { "label": "Razduvavanje", "value": "na 20°C do mat površine posle svakog sloja" },
+      { "label": "Mlaznica", "value": "1,4–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Popravka automobilskih lakova u nijansi Gleam Silver"
+    ],
+    "benefits": [],
+    "advice": "Uz uputstvo za obradu uvek se poštuju i uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "onyx-hd": {
+    "sourceHash": "ee9a83231f26d936",
+    "productType": "sistem vodorazredivih baznih boja",
+    "subtype": "Sistem za nijansiranje · ONYX HD · vodorazredive bazne boje",
+    "shortDescription": "Sistem za nijansiranje vodorazredivih baznih boja: nijansa se meša po recepturi, a ne uzima kao gotova boja.",
+    "longDescription": "ONYX HD je sistem za nijansiranje vodorazredivih baznih boja u popravci automobilskih lakova. Nijansa se dobija mešanjem po recepturi iz sistema, a ne kupovinom jedne gotove boje. Recepture pokrivaju ceo opseg uni, metalik i sedefastih nijansi koje popravka automobilskih lakova zahteva.",
+    "purpose": "Nijansiranje vodorazredivih baznih boja po recepturi",
+    "facts": [
+      { "label": "Razređivanje", "value": "60 % zapreminski, prema recepturi" },
+      { "label": "Razduvavanje", "value": "na 20°C do mat površine posle svakog sloja" },
+      { "label": "Sušenje", "value": "15 min na 20°C; 10 min na 40°C" },
+      { "label": "Mlaznica", "value": "1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje uni, metalik i sedefastih nijansi po recepturi",
+      "Popravka automobilskih lakova baznom bojom"
+    ],
+    "benefits": [
+      { "title": "Pun opseg nijansi", "description": "Dostupne su recepture za uni, metalik i sedefaste nijanse potrebne u popravci automobilskih lakova." }
+    ],
+    "advice": "Posle dodavanja podešavajuće baze smešu odmah promešati."
+  },
+  "onyx-hd-tropical": {
+    "sourceHash": "1f408f8c68228a11",
+    "productType": "sistem vodorazredivih baznih boja",
+    "subtype": "Sistem za nijansiranje · ONYX HD TROPICAL · vodorazredive bazne boje",
+    "shortDescription": "TROPICAL varijanta ONYX HD sistema za nijansiranje vodorazredivih baznih boja.",
+    "longDescription": "ONYX HD TROPICAL je TROPICAL varijanta sistema za nijansiranje vodorazredivih baznih boja u popravci automobilskih lakova. Nijansa se dobija mešanjem po recepturi iz sistema, a ne kupovinom jedne gotove boje. Recepture pokrivaju ceo opseg uni, metalik i sedefastih nijansi koje popravka automobilskih lakova zahteva.",
+    "purpose": "Nijansiranje vodorazredivih baznih boja po recepturi",
+    "facts": [
+      { "label": "Razređivanje", "value": "60 % zapreminski, prema recepturi" },
+      { "label": "Razduvavanje", "value": "na 20°C do mat površine posle svakog sloja" },
+      { "label": "Sušenje", "value": "15 min na 20°C; 10 min na 40°C" },
+      { "label": "Mlaznica", "value": "1,4–1,5 mm" }
+    ],
+    "applications": [
+      "Mešanje uni, metalik i sedefastih nijansi po recepturi",
+      "Popravka automobilskih lakova baznom bojom"
+    ],
+    "benefits": [
+      { "title": "Pun opseg nijansi", "description": "Dostupne su recepture za uni, metalik i sedefaste nijanse potrebne u popravci automobilskih lakova." }
+    ],
+    "advice": "Posle dodavanja podešavajuće baze smešu odmah promešati."
+  },
+  "sc-t2a203": {
+    "sourceHash": "88d0b1eef81c4f8a",
+    "productType": "gotova topcoat boja",
+    "subtype": "Topcoat · UNO HD · Advance Series · gotova nijansa, čisto crna",
+    "shortDescription": "Gotova čisto crna topcoat nijansa iz UNO HD programa, Advance Series.",
+    "longDescription": "SC T2A203 Pure black je gotova nijansa iz UNO HD programa, Advance Series. Reč je o unapred pripremljenoj čisto crnoj nijansi koja se ne meša po recepturi, već se samo priprema za nanošenje. Nanosi se kao topcoat, u više slojeva, uz razduvavanje između slojeva.",
+    "purpose": "Gotova topcoat nijansa, čisto crna",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1 + 10%" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "oko 5 min posle svakog sloja, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje", "value": "8 h na 20°C; 30 min na 60°C" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Nanošenje gotove čisto crne nijanse kao topcoat premaza"
+    ],
+    "benefits": [
+      { "title": "Čisto crna nijansa", "description": "Topcoat u čisto crnoj nijansi." }
+    ],
+    "advice": null
+  },
+  "sc-t2a204": {
+    "sourceHash": "721e59c20d6865de",
+    "productType": "gotova topcoat boja",
+    "subtype": "Topcoat · UNO HD · Advance Series · gotova nijansa, mat crna",
+    "shortDescription": "Gotova mat crna topcoat nijansa iz UNO HD programa, Advance Series.",
+    "longDescription": "SC T2A204 Mat black je gotova nijansa iz UNO HD programa, Advance Series. Reč je o unapred pripremljenoj mat crnoj nijansi koja se ne meša po recepturi, već se samo priprema za nanošenje. Nanosi se kao topcoat, uz razduvavanje do mat površine između slojeva i pre sušenja u komori.",
+    "purpose": "Gotova topcoat nijansa, mat crna",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1 + 10%" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "do mat površine između slojeva i pre sušenja u komori: posle prvog sloja 10–15 min, posle drugog 15–20 min, a nikako duže od 25 minuta po sloju" },
+      { "label": "Debljina suvog filma", "value": "40–50 μm" },
+      { "label": "Sušenje", "value": "8 h na 20°C; 30 min na 60°C" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "700 g/l (granična vrednost 840 g/l, kategorija IIB.e)" }
+    ],
+    "applications": [
+      "Nanošenje gotove mat crne nijanse kao topcoat premaza"
+    ],
+    "benefits": [
+      { "title": "Mat crna nijansa", "description": "Topcoat u mat crnoj nijansi." }
+    ],
+    "advice": null
+  },
+  "sc-t2p203": {
+    "sourceHash": "495be6bb970e2b81",
+    "productType": "gotova topcoat boja",
+    "subtype": "Topcoat · UNO HD · Pioneer Series · eSense, gotova nijansa, čisto crna",
+    "shortDescription": "Gotova čisto crna topcoat nijansa iz eSense UNO HD programa, Pioneer Series.",
+    "longDescription": "SC T2P203 Pure black je gotova nijansa iz eSense UNO HD programa, Pioneer Series. Reč je o unapred pripremljenoj čisto crnoj nijansi koja se ne meša po recepturi, već se samo priprema za nanošenje. Nanosi se kao topcoat, u više slojeva, uz razduvavanje između slojeva.",
+    "purpose": "Gotova topcoat nijansa, čisto crna",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "oko 5 min posle svakog sloja, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje", "value": "8 h na 20°C; 30 min na 60°C" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Nanošenje gotove čisto crne nijanse kao topcoat premaza"
+    ],
+    "benefits": [
+      { "title": "Čisto crna nijansa", "description": "Topcoat u čisto crnoj nijansi iz eSense programa." }
+    ],
+    "advice": null
+  },
+  "sc-t2p204": {
+    "sourceHash": "de3d8864bb207cd1",
+    "productType": "gotova topcoat boja",
+    "subtype": "Topcoat · UNO HD · Pioneer Series · eSense, gotova nijansa, mat crna",
+    "shortDescription": "Gotova mat crna topcoat nijansa iz eSense UNO HD programa, Pioneer Series.",
+    "longDescription": "SC T2P204 Mat black je gotova nijansa iz eSense UNO HD programa, Pioneer Series. Reč je o fabrički pripremljenoj mat crnoj nijansi koja se ne meša po recepturi, već se samo priprema za nanošenje. Nanosi se kao topcoat, uz razduvavanje do mat površine između slojeva i pre sušenja u komori.",
+    "purpose": "Gotova topcoat nijansa, mat crna",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "do mat površine između slojeva i pre sušenja u komori: posle prvog sloja 10–15 min, posle drugog 15–20 min, a nikako duže od 25 minuta po sloju" },
+      { "label": "Debljina suvog filma", "value": "40–50 μm" },
+      { "label": "Sušenje", "value": "8 h na 20°C; 30 min na 60°C" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "700 g/l (granična vrednost 840 g/l, kategorija IIB.e)" }
+    ],
+    "applications": [
+      "Nanošenje fabrički pripremljene mat crne nijanse kao topcoat premaza"
+    ],
+    "benefits": [
+      { "title": "Mat crna nijansa", "description": "Fabrički pripremljen topcoat u mat crnoj nijansi." }
+    ],
+    "advice": null
+  },
+  "t-2a55": {
+    "sourceHash": "423bc20451dacb06",
+    "productType": "topcoat za nijansiranje",
+    "subtype": "Osnova za nijansiranje · UNO HD · Advance Series",
+    "shortDescription": "Osnova za nijansiranje UNO HD topcoat premaza, Advance Series.",
+    "longDescription": "T 2A55 TopcoatMIX je osnova za nijansiranje u UNO HD programu, Advance Series. Sa pigmentnim komponentama sistema meša se po recepturi u traženu nijansu, pa se nanosi kao topcoat. Namenjen je izraženom sjaju i kvalitetnom završnom izgledu.",
+    "purpose": "Nijansiranje UNO HD topcoat premaza",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1 + 10%" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "oko 5 min posle svakog sloja, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje", "value": "8 h na 20°C; 30 min na 60°C" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje UNO HD topcoat nijansi po recepturi"
+    ],
+    "benefits": [
+      { "title": "Sjaj i završni izgled", "description": "Topcoat namenjen izraženom sjaju i kvalitetnom završnom izgledu." }
+    ],
+    "advice": null
+  },
+  "t-2p55": {
+    "sourceHash": "e9ed108f34a68953",
+    "productType": "topcoat za nijansiranje",
+    "subtype": "Osnova za nijansiranje · UNO HD · Pioneer Series · eSense",
+    "shortDescription": "Univerzalna osnova za nijansiranje eSense UNO HD topcoat premaza, Pioneer Series.",
+    "longDescription": "T 2P55 TOPCOAT Mix-R je osnova za nijansiranje u eSense UNO HD programu, Pioneer Series. Sa pigmentnim komponentama sistema meša se po recepturi u traženu nijansu, pa se nanosi kao topcoat. Univerzalno je primenljiv i usmeren na sjaj i razlivanje sloja.",
+    "purpose": "Nijansiranje UNO HD topcoat premaza",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Vreme upotrebe smeše", "value": "2 h na 20°C" },
+      { "label": "Razduvavanje", "value": "oko 5 min posle svakog sloja, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje", "value": "8 h na 20°C; 30 min na 60°C" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "Sadržaj VOC", "value": "419 g/l (granična vrednost 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Mešanje eSense UNO HD topcoat nijansi po recepturi"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "Topcoat za univerzalnu primenu, usmeren na sjaj i razlivanje sloja." }
+    ],
+    "advice": null
+  },
+  "uno-hd": {
+    "sourceHash": "c71367d485788edd",
+    "productType": "sistem za nijansiranje topcoat premaza",
+    "subtype": "Sistem za nijansiranje · UNO HD · topcoat program",
+    "shortDescription": "UNO HD je sistem za nijansiranje topcoat premaza, sa HS osnovom za mešanje po recepturi.",
+    "longDescription": "UNO HD je sistem za nijansiranje topcoat premaza. Nijansa se ne uzima kao jedna gotova boja, već se dobija mešanjem po recepturi, pri čemu je osnova sistema HS topcoat baza za nijansiranje. Program obuhvata i fabrički pripremljene nijanse, u Advance Series i Pioneer Series izvedbi.",
+    "purpose": "Nijansiranje topcoat premaza po recepturi",
+    "facts": [],
+    "applications": [
+      "Mešanje topcoat nijansi po recepturi"
+    ],
+    "benefits": [],
+    "advice": null
+  }
+}

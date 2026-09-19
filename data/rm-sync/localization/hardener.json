@@ -1,0 +1,652 @@
+{
+  "h-2a20": {
+    "sourceHash": "a9165f69a0928263",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · Advance Series · sušenje na vazduhu",
+    "shortDescription": "Učvršćivač iz Advance Series programa, namenjen bezbojnom laku te serije koji se suši na vazduhu.",
+    "longDescription": "H 2A20 AirtopCure je učvršćivač iz Advance Series programa. Prema tehničkoj dokumentaciji koristi se u bezbojnom laku te serije koji se suši na vazduhu. Meša se sa lakom neposredno pre nanošenja, u odnosu koji propisuje tehnički list tog laka.",
+    "purpose": "Učvršćivanje bezbojnog laka sa sušenjem na vazduhu",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa bezbojnim lakom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a23": {
+    "sourceHash": "cb034ce4f4803c3f",
+    "productType": "Učvršćivač za epoksidni prajmer",
+    "subtype": "Učvršćivač · Advance Series · epoksidni prajmer",
+    "shortDescription": "Epoksidni učvršćivač iz Advance Series programa, namenjen epoksidnom prajmeru iste serije.",
+    "longDescription": "H 2A23 ProtectCURE Epoxy je epoksidni učvršćivač iz Advance Series programa. Prema tehničkoj dokumentaciji koristi se u epoksidnom prajmeru te serije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje epoksidnog prajmera Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa epoksidnim prajmerom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a24": {
+    "sourceHash": "c79262ddbafba051",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · Advance Series · srednja brzina",
+    "shortDescription": "Učvršćivač srednje brzine za bezbojne lakove i završne premaze iz Advance Series programa.",
+    "longDescription": "H 2A24 TopCURE je učvršćivač srednje brzine iz Advance Series programa. Prema tehničkoj dokumentaciji koristi se u bezbojnim lakovima i završnim premazima te serije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Učvršćivanje bezbojnih lakova i završnih premaza",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "srednja"
+      }
+    ],
+    "applications": [
+      "Mešanje sa bezbojnim lakom Advance Series pre nanošenja",
+      "Mešanje sa završnim premazom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a26": {
+    "sourceHash": "893e8f14713e9bde",
+    "productType": "Učvršćivač za wash prajmer",
+    "subtype": "Učvršćivač · Advance Series · wash prajmer",
+    "shortDescription": "Učvršćivač iz Advance Series programa, namenjen wash prajmeru iste serije.",
+    "longDescription": "H 2A26 ProtectCURE Wash je učvršćivač iz Advance Series programa. Prema tehničkoj dokumentaciji koristi se u wash prajmeru te serije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje wash prajmera Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa wash prajmerom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a30": {
+    "sourceHash": "12531c020b9c2a79",
+    "productType": "Učvršćivač za prajmer-punila",
+    "subtype": "Učvršćivač · Advance Series · prajmer-punila",
+    "shortDescription": "Učvršćivač iz Advance Series programa za prajmer-punila i ostale temeljne materijale iste serije.",
+    "longDescription": "H 2A30 FillCURE je učvršćivač namenjen temeljnim materijalima Advance Series programa. Prema tehničkoj dokumentaciji koristi se u prajmer-punilima te serije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Učvršćivanje prajmer-punila Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa prajmer-punilom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a31": {
+    "sourceHash": "32d10ffa59285629",
+    "productType": "Učvršćivač za prajmer-punila",
+    "subtype": "Učvršćivač · Advance Series · spora varijanta",
+    "shortDescription": "Spora varijanta učvršćivača za prajmer-punila i temeljne materijale Advance Series programa.",
+    "longDescription": "H 2A31 FillCURE Slow je spori učvršćivač za temeljne materijale Advance Series programa. Prema tehničkoj dokumentaciji koristi se u prajmer-punilima te serije. Bira se umesto standardnog učvršćivača, u zavisnosti od temperature i veličine površine koja se obrađuje.",
+    "purpose": "Sporo učvršćivanje prajmer-punila Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa prajmer-punilom Advance Series pre nanošenja",
+      "Izbor prema temperaturi i veličini površine"
+    ],
+    "benefits": [],
+    "advice": "Koristi se umesto standardnog učvršćivača za punila, u zavisnosti od temperature i veličine površine koja se obrađuje."
+  },
+  "h-2a34": {
+    "sourceHash": "db02ac8f81315180",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · Advance Series · spora varijanta",
+    "shortDescription": "Spori učvršćivač za bezbojne lakove i završne premaze iz Advance Series programa.",
+    "longDescription": "H 2A34 TopCURE je spori učvršćivač iz Advance Series programa. Prema tehničkoj dokumentaciji koristi se u bezbojnim lakovima i završnim premazima te serije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Sporo učvršćivanje bezbojnih lakova i završnih premaza",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa bezbojnim lakom Advance Series pre nanošenja",
+      "Mešanje sa završnim premazom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a60": {
+    "sourceHash": "6e7b7146516c6711",
+    "productType": "Učvršćivač za višenamenske prajmere",
+    "subtype": "Učvršćivač · Advance Series · višenamenski prajmeri",
+    "shortDescription": "Učvršćivač iz Advance Series programa za višenamenske prajmere i temeljne materijale iste serije.",
+    "longDescription": "H 2A60 ProtectCURE Multi je učvršćivač za temeljne materijale Advance Series programa. Prema tehničkoj dokumentaciji koristi se u višenamenskim prajmerima te serije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje višenamenskih prajmera Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa višenamenskim prajmerom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a80": {
+    "sourceHash": "e47a2c46d64c35c3",
+    "productType": "Učvršćivač za punila",
+    "subtype": "Učvršćivač · Advance Series · punila",
+    "shortDescription": "Učvršćivač iz Advance Series programa, namenjen punilima iste serije.",
+    "longDescription": "H 2A80 FillCURE Plus je učvršćivač za temeljne materijale Advance Series programa. Prema tehničkoj dokumentaciji koristi se u punilima te serije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Učvršćivanje punila Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa punilom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a81": {
+    "sourceHash": "4287705c683dd9a4",
+    "productType": "Učvršćivač za punila",
+    "subtype": "Učvršćivač · Advance Series · punila, spora varijanta",
+    "shortDescription": "Spora varijanta učvršćivača za punila iz Advance Series programa.",
+    "longDescription": "H 2A81 FillCURE Plus slow je spori učvršćivač za temeljne materijale Advance Series programa. Prema tehničkoj dokumentaciji koristi se u punilima te serije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Sporo učvršćivanje punila Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa punilom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2a94": {
+    "sourceHash": "e6243bed530f1f96",
+    "productType": "Učvršćivač za mat završne premaze",
+    "subtype": "Učvršćivač · Advance Series · mat",
+    "shortDescription": "Učvršćivač iz Advance Series programa, namenjen mat bezbojnim lakovima iste serije.",
+    "longDescription": "H 2A94 MatCURE je učvršćivač za mat program Advance Series. Prema tehničkoj dokumentaciji koristi se u mat bezbojnim lakovima te serije. Meša se sa lakom pre nanošenja, u odnosu koji propisuje tehnički list tog laka.",
+    "purpose": "Učvršćivanje mat bezbojnih lakova Advance Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Advance Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa mat bezbojnim lakom Advance Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2e23": {
+    "sourceHash": "393c60ebd8b85711",
+    "productType": "Učvršćivač za prajmer-punilo",
+    "subtype": "Učvršćivač · prajmer-punilo",
+    "shortDescription": "Učvršćivač namenjen R-M sivom prajmer-punilu.",
+    "longDescription": "H 2E23 je učvršćivač iz temeljnog programa R-M. Prema tehničkoj dokumentaciji koristi se u sivom prajmer-punilu. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Učvršćivanje sivog prajmer-punila",
+    "facts": [],
+    "applications": [
+      "Mešanje sa sivim prajmer-punilom pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p16": {
+    "sourceHash": "5d6006116eb0a3f6",
+    "productType": "Učvršćivač za prajmer za metal",
+    "subtype": "Učvršćivač · Pioneer Series · prajmer za metal",
+    "shortDescription": "Učvršćivač iz Pioneer Series programa, namenjen eSense prajmeru za metal iste serije.",
+    "longDescription": "H 2P16 METAL Harden-R je učvršćivač iz Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u eSense prajmeru za metal iz iste serije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje prajmera za metal Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa prajmerom za metal Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p20": {
+    "sourceHash": "5379c6314121bd0f",
+    "productType": "Učvršćivač za prajmer-punila",
+    "subtype": "Učvršćivač · Pioneer Series · temeljni materijali",
+    "shortDescription": "Učvršćivač iz Pioneer Series programa za eSense temeljne materijale iste serije.",
+    "longDescription": "H 2P20 AIR Harden-R je učvršćivač iz Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u temeljnim materijalima te serije. Dodaje se prajmeru pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje temeljnih materijala Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa temeljnim materijalom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p25": {
+    "sourceHash": "d2e3af558282ef31",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · Pioneer Series · srednja brzina",
+    "shortDescription": "eSense učvršćivač srednje brzine za bezbojne lakove i završne premaze Pioneer Series programa.",
+    "longDescription": "H 2P25 CLEAR Harden-R je eSense učvršćivač srednje brzine iz Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u bezbojnim lakovima i završnim premazima te serije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Učvršćivanje bezbojnih lakova i završnih premaza",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "srednja"
+      }
+    ],
+    "applications": [
+      "Mešanje sa bezbojnim lakom Pioneer Series pre nanošenja",
+      "Mešanje sa završnim premazom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p35": {
+    "sourceHash": "3f2bed9515867858",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · Pioneer Series · spora varijanta",
+    "shortDescription": "Spori eSense učvršćivač za bezbojne lakove i završne premaze Pioneer Series programa.",
+    "longDescription": "H 2P35 CLEAR Harden-R je spori eSense učvršćivač iz Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u bezbojnim lakovima i završnim premazima te serije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Sporo učvršćivanje bezbojnih lakova i završnih premaza",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa bezbojnim lakom Pioneer Series pre nanošenja",
+      "Mešanje sa završnim premazom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p60": {
+    "sourceHash": "abf62733c945a550",
+    "productType": "Učvršćivač za višenamenske prajmere",
+    "subtype": "Učvršćivač · Pioneer Series · višenamenski prajmeri",
+    "shortDescription": "Učvršćivač iz Pioneer Series programa za eSense višenamenske prajmere iste serije.",
+    "longDescription": "H 2P60 MULTI Harden-R je učvršćivač za temeljne materijale Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u višenamenskim prajmerima te serije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje višenamenskih prajmera Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa višenamenskim prajmerom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p80": {
+    "sourceHash": "109e0aade3bb01cf",
+    "productType": "Učvršćivač za punila",
+    "subtype": "Učvršćivač · Pioneer Series · punila",
+    "shortDescription": "eSense učvršćivač iz Pioneer Series programa, namenjen punilima iste serije.",
+    "longDescription": "H 2P80 FILLER Harden-R Plus je eSense učvršćivač za temeljne materijale Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u punilima te serije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Učvršćivanje punila Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa punilom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p81": {
+    "sourceHash": "259629420e9e7a8b",
+    "productType": "Učvršćivač za punila",
+    "subtype": "Učvršćivač · Pioneer Series · punila, spora varijanta",
+    "shortDescription": "Spora varijanta eSense učvršćivača za punila iz Pioneer Series programa.",
+    "longDescription": "H 2P81 FILLER Harden-R Plus slow je spori eSense učvršćivač za temeljne materijale Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u punilima te serije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Sporo učvršćivanje punila Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa punilom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p84": {
+    "sourceHash": "6b46838e1f93336f",
+    "productType": "Učvršćivač za prajmer-punila",
+    "subtype": "Učvršćivač · Pioneer Series · prajmer-punila",
+    "shortDescription": "eSense učvršćivač iz Pioneer Series programa za prajmer-punila i temeljne materijale iste serije.",
+    "longDescription": "H 2P84 FILLER Harden-R je eSense učvršćivač za temeljne materijale Pioneer Series programa. Prema tehničkoj dokumentaciji koristi se u prajmer-punilima te serije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Učvršćivanje prajmer-punila Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa prajmer-punilom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p95": {
+    "sourceHash": "2b25fe3d90b59589",
+    "productType": "Učvršćivač za mat završne premaze",
+    "subtype": "Učvršćivač · Pioneer Series · mat",
+    "shortDescription": "eSense učvršćivač iz Pioneer Series programa, namenjen mat bezbojnim lakovima iste serije.",
+    "longDescription": "H 2P95 MATSHADE Harden-R je eSense učvršćivač za mat program Pioneer Series. Prema tehničkoj dokumentaciji koristi se u mat bezbojnim lakovima te serije. Meša se sa lakom pre nanošenja, u odnosu koji propisuje tehnički list tog laka.",
+    "purpose": "Učvršćivanje mat bezbojnih lakova Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      }
+    ],
+    "applications": [
+      "Mešanje sa mat bezbojnim lakom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2p96": {
+    "sourceHash": "9a053362005c81ec",
+    "productType": "Učvršćivač za mat završne premaze",
+    "subtype": "Učvršćivač · Pioneer Series · mat, spora varijanta",
+    "shortDescription": "Spora varijanta eSense učvršćivača za mat bezbojne lakove Pioneer Series programa.",
+    "longDescription": "H 2P96 MATSHADE Harden-R je spori eSense učvršćivač za mat program Pioneer Series. Prema tehničkoj dokumentaciji koristi se u mat bezbojnim lakovima te serije. Meša se sa lakom pre nanošenja, u odnosu koji propisuje tehnički list tog laka.",
+    "purpose": "Sporo učvršćivanje mat bezbojnih lakova Pioneer Series",
+    "facts": [
+      {
+        "label": "Serija",
+        "value": "Pioneer Series"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa mat bezbojnim lakom Pioneer Series pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "h-2rm1": {
+    "sourceHash": "0f89e7a98b11a835",
+    "productType": "Učvršćivač za karoserijske mase",
+    "subtype": "Učvršćivač · kit za karoseriju",
+    "shortDescription": "Učvršćivač namenjen R-M kitu za karoseriju.",
+    "longDescription": "H 2RM1 BODY Harden-R je učvršćivač koji pripada programu kitova za karoseriju. Prema tehničkoj dokumentaciji koristi se u R-M kitu za karoseriju. Meša se sa kitom neposredno pre nanošenja, prema uputstvu za obradu iz tehničkog lista tog kita.",
+    "purpose": "Učvršćivanje kita za karoseriju",
+    "facts": [],
+    "applications": [
+      "Mešanje sa kitom za karoseriju pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-2rm1c": {
+    "sourceHash": "e33b2cb93d3e4acd",
+    "productType": "Učvršćivač za karoserijske mase",
+    "subtype": "Učvršćivač · kit za karoseriju · kartuša",
+    "shortDescription": "Učvršćivač za R-M kit za karoseriju, u izvedbi za kartušu.",
+    "longDescription": "H 2RM1C BODY Harden-R je učvršćivač za kit za karoseriju, u izvedbi za kartušu. Prema tehničkoj dokumentaciji koristi se u R-M kitu za karoseriju. Meša se sa kitom neposredno pre nanošenja, prema uputstvu za obradu iz tehničkog lista tog kita.",
+    "purpose": "Učvršćivanje kita za karoseriju iz kartuše",
+    "facts": [],
+    "applications": [
+      "Mešanje sa kitom za karoseriju pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-2rm1cl": {
+    "sourceHash": "4a96103af434c26c",
+    "productType": "Učvršćivač za karoserijske mase",
+    "subtype": "Učvršćivač · kit za karoseriju · kartuša",
+    "shortDescription": "Učvršćivač za R-M kit za karoseriju, u izvedbi za kartušu.",
+    "longDescription": "H 2RM1CL BODY Harden-R je učvršćivač za kit za karoseriju, u izvedbi za kartušu. Prema tehničkoj dokumentaciji koristi se u R-M kitu za karoseriju. Meša se sa kitom neposredno pre nanošenja, prema uputstvu za obradu iz tehničkog lista tog kita.",
+    "purpose": "Učvršćivanje kita za karoseriju iz kartuše",
+    "facts": [],
+    "applications": [
+      "Mešanje sa kitom za karoseriju pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-2rm2": {
+    "sourceHash": "baa539af83d5ff08",
+    "productType": "Učvršćivač za lak za točkove",
+    "subtype": "Učvršćivač · lak za točkove",
+    "shortDescription": "Učvršćivač namenjen R-M bezbojnom laku za točkove.",
+    "longDescription": "H 2RM2 je učvršćivač iz R-M programa za lakiranje točkova. Prema tehničkoj dokumentaciji koristi se u bezbojnom laku za točkove. Meša se sa lakom pre nanošenja, u odnosu koji propisuje tehnički list tog laka.",
+    "purpose": "Učvršćivanje bezbojnog laka za točkove",
+    "facts": [],
+    "applications": [
+      "Mešanje sa bezbojnim lakom za točkove pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-2rm3": {
+    "sourceHash": "837c99c809c795af",
+    "productType": "Učvršćivač za karoserijske mase",
+    "subtype": "Učvršćivač · kit za karoseriju · nanošenje prskanjem",
+    "shortDescription": "Učvršćivač za R-M kit za karoseriju koji se nanosi prskanjem.",
+    "longDescription": "H 2RM3 SPRAY BODY Harden-R je učvršćivač za kit za karoseriju koji se nanosi prskanjem. Prema tehničkoj dokumentaciji koristi se u R-M kitu te namene. Meša se sa kitom neposredno pre nanošenja, prema uputstvu za obradu iz tehničkog lista tog kita.",
+    "purpose": "Učvršćivanje kita za karoseriju za nanošenje prskanjem",
+    "facts": [],
+    "applications": [
+      "Mešanje sa kitom za karoseriju pre nanošenja prskanjem"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-340": {
+    "sourceHash": "18e96592fd2768fe",
+    "productType": "Učvršćivač za prajmer-punilo",
+    "subtype": "Učvršćivač · GRAPHITE HD · prajmer-punilo",
+    "shortDescription": "Učvršćivač iz GRAPHITE HD programa, namenjen zaštitnom prajmer-punilu iste linije.",
+    "longDescription": "H 340 GHD PROTECT FILLER HARDENER je učvršćivač iz GRAPHITE HD programa. Prema tehničkoj dokumentaciji koristi se u zaštitnom prajmer-punilu te linije. Dodaje se punilu pre nanošenja, u odnosu koji propisuje tehnički list tog punila.",
+    "purpose": "Učvršćivanje prajmer-punila GRAPHITE HD",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "GRAPHITE HD"
+      }
+    ],
+    "applications": [
+      "Mešanje sa prajmer-punilom GRAPHITE HD pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-5430": {
+    "sourceHash": "20e648a897cc5a70",
+    "productType": "Aktivator za wash prajmer",
+    "subtype": "Aktivator · GRAPHITE HD · spora varijanta",
+    "shortDescription": "Spori aktivator iz GRAPHITE HD programa, namenjen univerzalnom wash prajmeru iste linije.",
+    "longDescription": "H 5430 GHD SLOW ACTIVATOR je spori aktivator iz GRAPHITE HD programa. Prema tehničkoj dokumentaciji koristi se u univerzalnom wash prajmeru te linije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Aktiviranje wash prajmera GRAPHITE HD",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "GRAPHITE HD"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa wash prajmerom GRAPHITE HD pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-5480": {
+    "sourceHash": "e2bc7ff1098783e9",
+    "productType": "Učvršćivač za epoksidni prajmer",
+    "subtype": "Učvršćivač · GRAPHITE HD · epoksidni prajmer",
+    "shortDescription": "Učvršćivač iz GRAPHITE HD programa, namenjen univerzalnom epoksidnom prajmeru iste linije.",
+    "longDescription": "H 5480 GHD UNIVERSAL EP HARDENER je učvršćivač iz GRAPHITE HD programa. Prema tehničkoj dokumentaciji koristi se u univerzalnom epoksidnom prajmeru te linije. Meša se sa prajmerom pre nanošenja, u odnosu koji propisuje tehnički list tog prajmera.",
+    "purpose": "Učvršćivanje epoksidnog prajmera GRAPHITE HD",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "GRAPHITE HD"
+      }
+    ],
+    "applications": [
+      "Mešanje sa epoksidnim prajmerom GRAPHITE HD pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-700": {
+    "sourceHash": "bd821d57187f0feb",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · GRAPHITE HD · brza varijanta",
+    "shortDescription": "Brzi učvršćivač iz GRAPHITE HD programa za završne premaze iste linije.",
+    "longDescription": "H 700 GHD HARDENER je brzi učvršćivač iz GRAPHITE HD programa. Prema tehničkoj dokumentaciji koristi se u završnim premazima te linije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Brzo učvršćivanje završnih premaza GRAPHITE HD",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "GRAPHITE HD"
+      },
+      {
+        "label": "Brzina",
+        "value": "brza"
+      }
+    ],
+    "applications": [
+      "Mešanje sa završnim premazom GRAPHITE HD pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-750": {
+    "sourceHash": "8ef276ee265d9d52",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · GRAPHITE HD · normalna varijanta",
+    "shortDescription": "Učvršćivač normalne brzine iz GRAPHITE HD programa za završne premaze iste linije.",
+    "longDescription": "H 750 GHD HARDENER je učvršćivač normalne brzine iz GRAPHITE HD programa. Prema tehničkoj dokumentaciji koristi se u završnim premazima te linije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Učvršćivanje završnih premaza GRAPHITE HD",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "GRAPHITE HD"
+      },
+      {
+        "label": "Brzina",
+        "value": "normalna"
+      }
+    ],
+    "applications": [
+      "Mešanje sa završnim premazom GRAPHITE HD pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  },
+  "h-770": {
+    "sourceHash": "e1067ecf786bf348",
+    "productType": "Učvršćivač za završne premaze",
+    "subtype": "Učvršćivač · GRAPHITE HD · spora varijanta",
+    "shortDescription": "Spori učvršćivač iz GRAPHITE HD programa za završne premaze iste linije.",
+    "longDescription": "H 770 GHD HARDENER je spori učvršćivač iz GRAPHITE HD programa. Prema tehničkoj dokumentaciji koristi se u završnim premazima te linije. Dodaje se premazu pre nanošenja, u odnosu koji propisuje tehnički list tog premaza.",
+    "purpose": "Sporo učvršćivanje završnih premaza GRAPHITE HD",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "GRAPHITE HD"
+      },
+      {
+        "label": "Brzina",
+        "value": "spora"
+      }
+    ],
+    "applications": [
+      "Mešanje sa završnim premazom GRAPHITE HD pre nanošenja"
+    ],
+    "benefits": [],
+    "advice": "Kod popravke vozila uvek se poštuju uputstva proizvođača vozila, posebno u pogledu ugrađene senzorske tehnologije, uz uputstvo za obradu iz tehničkog lista."
+  }
+}

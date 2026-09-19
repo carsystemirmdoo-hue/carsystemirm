@@ -1,0 +1,1543 @@
+{
+  "meta": {
+    "source": "https://www.rmpaint.com/en-int",
+    "architecture": "Drupal; sitemap.xml po lokalima; stranica proizvoda = tip + naziv + serija + opis + slika, bez oznake proizvoda",
+    "crawledAt": "2026-09-19T06:14:43.663Z",
+    "localesInSitemap": [
+      "at",
+      "be-fr",
+      "be-nl",
+      "cn",
+      "de-ch",
+      "en-int",
+      "es",
+      "es-mx",
+      "fr",
+      "fr-ch",
+      "gb",
+      "it",
+      "it-ch",
+      "jp",
+      "ma",
+      "nl",
+      "pl",
+      "pt",
+      "za"
+    ],
+    "productPages": 66,
+    "productPagesNotOk": [],
+    "withSeries": 40,
+    "withImage": 55,
+    "withCodeInName": 9,
+    "rangePages": 11,
+    "officialOutboundLinks": [
+      "http://www.facebook.com/rmpaint",
+      "http://www.youtube.com/rmpaint",
+      "https://colorexplorer.rmpaint.com/index.php?language=8",
+      "https://info.rmpaint.com/",
+      "https://info.rmpaint.com/products",
+      "https://www.basf.com/en/bmb",
+      "https://www.basf.com/global/en/who-we-are/sustainability/we-drive-sustainable-solutions/quantifying-sustainability/product-carbon-footprint.html",
+      "https://www.instagram.com/rmpaintofficial/",
+      "https://www.refinity-solutions.com/",
+      "https://www.surventiscoatings.com/"
+    ],
+    "pdfLinks": []
+  },
+  "products": [
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/822-promotor-de-adherencia",
+      "slug": "822-promotor-de-adherencia",
+      "lastmod": "2026-03-24T19:27:01+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "822 Promotor de adherencia",
+      "series": null,
+      "description": [
+        "Promotor de adherencia especialmente formulado para mejorar la unión entre el sustrato y los recubrimientos posteriores en aplicaciones de repintado automotriz."
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:45.524Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/agilis",
+      "slug": "agilis",
+      "lastmod": "2024-09-02T13:05:55+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat/Topcoat",
+      "name": "AGILIS",
+      "series": null,
+      "description": [
+        "Mixing system for waterborne basecoats used in automotive refinishing. Mixing formulas for the whole range of (solid, metallic and pearl-effect) colors needed in automotive refinishing are available."
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/bde5ff8e24fc422b4e9f37ce02ca5dfe047c0200.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/bde5ff8e24fc422b4e9f37ce02ca5dfe047c0200.png.webp?itok=neyJeUa9"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:43.663Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/agilis-hb010e-esense-mixing-clears",
+      "slug": "agilis-hb010e-esense-mixing-clears",
+      "lastmod": "2025-04-16T10:11:49+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat",
+      "name": "AGILIS HB010E eSense mixing clears",
+      "series": null,
+      "description": [
+        "New eSense mixing clears.50% less CO2 and advanced quality mixed in.",
+        "Meet the future. AGILIS ® is a pioneering waterborne basecoat system that empowers your body shop to lead the environmental change. Now it’s joined by eSense mixing clears reducing CO2 by up to 50%1 and use up to 100% renewables as raw materials in their creation. All whilst guaranteeing outstanding application performance, faster drying, and superb levelling. Proven to be the best – AGILIS ® eSense push the boundaries even further."
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/d1d38d55fe2eda38c0bcd929b564f0b1cc36dc7f.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/d1d38d55fe2eda38c0bcd929b564f0b1cc36dc7f.png.webp?itok=zdTF3ePj"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:45.552Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/agilis-hb010xe-esense-mixing-clears",
+      "slug": "agilis-hb010xe-esense-mixing-clears",
+      "lastmod": "2025-04-16T10:13:52+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat",
+      "name": "AGILIS HB010XE eSense mixing clears",
+      "series": null,
+      "description": [],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/c566a94c1ac55d4e2eecb3833b5213116226cc11.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/c566a94c1ac55d4e2eecb3833b5213116226cc11.png.webp?itok=UvF9kXnC"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:45.940Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/agilis-hb030e-esense-mixing-clears",
+      "slug": "agilis-hb030e-esense-mixing-clears",
+      "lastmod": "2025-04-16T10:16:09+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat",
+      "name": "AGILIS HB030E eSense mixing clears",
+      "series": null,
+      "description": [],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/6b4813aa137b8065539e6b21de75c9a5b4c12dbf.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/6b4813aa137b8065539e6b21de75c9a5b4c12dbf.png.webp?itok=OC6tvo61"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:46.223Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/agilis-hb030xe-esense-mixing-clears",
+      "slug": "agilis-hb030xe-esense-mixing-clears",
+      "lastmod": "2025-04-16T10:17:03+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat",
+      "name": "AGILIS HB030XE eSense mixing clears",
+      "series": null,
+      "description": [],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/348e0ea18fdb3a8169ca44cada69cbc91a26ebbc.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/348e0ea18fdb3a8169ca44cada69cbc91a26ebbc.png.webp?itok=BmymPaM8"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:47.389Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/air-purpos-r-black",
+      "slug": "air-purpos-r-black",
+      "lastmod": "2024-09-02T11:53:54+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "AIR Purpos-R Black",
+      "series": "Pioneer Series, Air-Drying, DTM",
+      "description": [
+        "Pioneer Series - eSense air-drying DTM, black"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/fe6f0f65750067e1f96602a19e60323e4d4e81ca_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/fe6f0f65750067e1f96602a19e60323e4d4e81ca_2.png.webp?itok=yuMBKxGN"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:47.381Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/air-purpos-r-grey",
+      "slug": "air-purpos-r-grey",
+      "lastmod": "2024-09-02T11:54:00+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "AIR Purpos-R Grey",
+      "series": "Pioneer Series, Air-Drying, DTM",
+      "description": [
+        "Pioneer Series - eSense air-drying DTM, grey"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/7dfb62266b74f4363271faa63501602cd3cacc3a_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/7dfb62266b74f4363271faa63501602cd3cacc3a_0.png.webp?itok=QKeDBAQf"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:47.780Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/air-purpos-r-white",
+      "slug": "air-purpos-r-white",
+      "lastmod": "2024-09-02T11:53:58+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "AIR Purpos-R White",
+      "series": "Pioneer Series, Air-Drying, DTM",
+      "description": [
+        "Pioneer Series - eSense air-drying DTM, white"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/4024b0bb9e16892511879aee429f27354421a69e.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/4024b0bb9e16892511879aee429f27354421a69e.png.webp?itok=W69wOE2X"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:48.342Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/air-tune-r",
+      "slug": "air-tune-r",
+      "lastmod": "2024-09-02T11:53:28+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "AIR Tune-R",
+      "series": "Pioneer Series, Air-Drying",
+      "description": [
+        "Pioneer Series - eSense air drying additive"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/531f2418f24f040fd90656100192a649e19159c8_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/531f2418f24f040fd90656100192a649e19159c8_6.png.webp?itok=POTqOZ1h"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:49.425Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/airtop",
+      "slug": "airtop",
+      "lastmod": "2024-09-02T11:54:38+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "AirTOP",
+      "series": "Air-Drying",
+      "description": [
+        "Advance Series Clear coat especially for ONYX HD basecoat."
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:49.410Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/blending-thinn-r",
+      "slug": "blending-thinn-r",
+      "lastmod": "2024-09-02T11:53:30+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "BLENDING Thinn-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense blending additive"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/2fa4650f18d3d16f2ece320b37f24574a4b042cb_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/2fa4650f18d3d16f2ece320b37f24574a4b042cb_6.png.webp?itok=SzH_ixNF"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:47.919Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/blending-thinn-r-0",
+      "slug": "blending-thinn-r-0",
+      "lastmod": "2024-09-02T11:54:38+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "BLENDING Thinn-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense blending additive, aerosol"
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:49.531Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/blendingadd",
+      "slug": "blendingadd",
+      "lastmod": "2024-09-02T11:54:31+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "BlendingADD",
+      "series": null,
+      "description": [
+        "Advance Series -Blending additive, aerosol"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/28dcbc5f651c4e57e0abd40cc2a6ffebf7cb38c5_4.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/28dcbc5f651c4e57e0abd40cc2a6ffebf7cb38c5_4.png.webp?itok=8MHwNhfF"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:49.983Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/blendingadd-0",
+      "slug": "blendingadd-0",
+      "lastmod": "2024-09-02T13:05:29+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "BlendingADD",
+      "series": null,
+      "description": [
+        "Advance Series -Blending additive"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/d9839e5879fc96424fa4c4a0f99df53aecfe316e_1.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/d9839e5879fc96424fa4c4a0f99df53aecfe316e_1.png.webp?itok=YMECtEd8"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:51.184Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/bright-finish-r",
+      "slug": "bright-finish-r",
+      "lastmod": "2024-09-02T11:53:47+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "BRIGHT Finish-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense clear coat, superior gloss"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/5062a7fe92caf539486ff556ae352b9033af7ee0_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/5062a7fe92caf539486ff556ae352b9033af7ee0_2.png.webp?itok=LdNNQhL-"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:51.153Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-harden-r",
+      "slug": "clear-harden-r",
+      "lastmod": "2024-09-02T11:53:38+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "CLEAR Harden-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense topcoat hardener, fast"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/ae8e4824d55ec3282dea71e64b42b5dfdf859f1a_5.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/ae8e4824d55ec3282dea71e64b42b5dfdf859f1a_5.png.webp?itok=2iugmKAU"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:49.649Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-harden-r-0",
+      "slug": "clear-harden-r-0",
+      "lastmod": "2024-09-02T11:53:42+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "CLEAR Harden-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense topcoat hardener, medium"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/5ef1cc42bb6856c49515d9325a6bde12a67fe4c4_1.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/5ef1cc42bb6856c49515d9325a6bde12a67fe4c4_1.png.webp?itok=vaXbh472"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:51.214Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-harden-r-1",
+      "slug": "clear-harden-r-1",
+      "lastmod": "2024-09-02T11:53:44+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "CLEAR Harden-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense topcoat hardener, slow"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/60b38afaa29183ff2f9d5769077efd4630d7c448_3.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/60b38afaa29183ff2f9d5769077efd4630d7c448_3.png.webp?itok=Gq54qy7J"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:51.875Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-harden-r-2",
+      "slug": "clear-harden-r-2",
+      "lastmod": "2024-09-02T11:53:46+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "CLEAR Harden-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense topcoat hardener, plus"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/fb4517e056b10c63bcf9fb0b37b2c92afb9da9d5_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/fb4517e056b10c63bcf9fb0b37b2c92afb9da9d5_2.png.webp?itok=ZDwA0_f0"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:53.290Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-thinn-r",
+      "slug": "clear-thinn-r",
+      "lastmod": "2024-09-02T11:53:40+01:00",
+      "httpStatus": 200,
+      "productType": "Thinner",
+      "name": "CLEAR Thinn-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense thinner, medium"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/e53994eca9ebe10635dd17f7905654fc4223d91e_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/e53994eca9ebe10635dd17f7905654fc4223d91e_2.png.webp?itok=cDJEnpNz"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:53.287Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-thinn-r-0",
+      "slug": "clear-thinn-r-0",
+      "lastmod": "2024-09-02T11:54:40+01:00",
+      "httpStatus": 200,
+      "productType": "Thinner",
+      "name": "CLEAR Thinn-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense thinner, fast"
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:53.289Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/clear-thinn-r-1",
+      "slug": "clear-thinn-r-1",
+      "lastmod": "2024-09-02T13:05:53+01:00",
+      "httpStatus": 200,
+      "productType": "Thinner",
+      "name": "CLEAR Thinn-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense thinner, slow"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/06e487f7e0f29f34a939234dc9f8ae5e73dd916a_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/06e487f7e0f29f34a939234dc9f8ae5e73dd916a_2.png.webp?itok=03EMGkFH"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:53.457Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/diamont",
+      "slug": "diamont",
+      "lastmod": "2024-09-02T11:54:40+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat/Topcoat",
+      "name": "DIAMONT",
+      "series": null,
+      "description": [
+        "Basecoat for basecoat / clearcoat systems"
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:55.316Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/easy-air-finish-r",
+      "slug": "easy-air-finish-r",
+      "lastmod": "2024-09-02T13:05:40+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "EASY AIR Finish-R",
+      "series": "Pioneer Series, Air-Drying",
+      "description": [
+        "Pioneer Series - eSense clear coat, ambient drying"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/394575ba8504856c89753de4978da09467cf16f7_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/394575ba8504856c89753de4978da09467cf16f7_6.png.webp?itok=qpb1rJfD"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:55.303Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/fast-tune-r",
+      "slug": "fast-tune-r",
+      "lastmod": "2024-09-02T11:54:33+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "FAST Tune-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense speed additive"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/ee13cd7e50bb5b0e6eb6baf21e23d4ddb1ddd3d7_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/ee13cd7e50bb5b0e6eb6baf21e23d4ddb1ddd3d7_6.png.webp?itok=bFZfu_qv"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:53.414Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/fasttop",
+      "slug": "fasttop",
+      "lastmod": "2024-09-02T11:54:17+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "FastTOP",
+      "series": null,
+      "description": [
+        "Advance Series - Clear coat, fast drying"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/91ae43df0dc29603cedf099c631c0c4cef1e7ce2_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/91ae43df0dc29603cedf099c631c0c4cef1e7ce2_2.png.webp?itok=42cpG64I"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:55.307Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/glosstop",
+      "slug": "glosstop",
+      "lastmod": "2024-09-02T13:05:34+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "GlossTOP+",
+      "series": null,
+      "description": [
+        "Advance Series - Clear coat, superior gloss"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/5579e0a9308ab6ed776c38cb7c96e8e968f1108e.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/5579e0a9308ab6ed776c38cb7c96e8e968f1108e.png.webp?itok=rU1N26JZ"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:53.596Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/h-2p80-esense-fill-r-hardener",
+      "slug": "h-2p80-esense-fill-r-hardener",
+      "lastmod": "2025-12-01T11:52:33+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "H 2P80 eSense Fill-R hardener",
+      "series": "Pioneer Series",
+      "description": [
+        "The Pioneer Series H 2P80 eSense Fill-R hardener is here - a hardener for eSense primers. This product is used with PIONEER Series wet-on-wet fillers: P 2P81 and P 2P85."
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:55.319Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/hb040e-esense-mixing-clears",
+      "slug": "hb040e-esense-mixing-clears",
+      "lastmod": "2024-09-05T11:27:13+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat",
+      "name": "HB040E eSense mixing clears",
+      "series": null,
+      "description": [],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/f6077bb409e464dfff072404863b0f1a4e0f7bd0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/f6077bb409e464dfff072404863b0f1a4e0f7bd0.png.webp?itok=vqC2dTZo"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:56.998Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/mat-finish-r",
+      "slug": "mat-finish-r",
+      "lastmod": "2024-09-02T11:53:32+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "MAT Finish-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense clear coat, mat"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/55af5008145a041a89cbb3674b75d8e7c187de1b_7.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/55af5008145a041a89cbb3674b75d8e7c187de1b_7.png.webp?itok=CTMpv9N8"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:57.001Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/mattop",
+      "slug": "mattop",
+      "lastmod": "2024-09-02T13:05:36+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "MatTOP+",
+      "series": null,
+      "description": [
+        "Advance Series - Clear coat, mat"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/a51223cbd00e2e3f565f0d63f723d4da3196a56d_5.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/a51223cbd00e2e3f565f0d63f723d4da3196a56d_5.png.webp?itok=Td3fdSqK"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:56.996Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/mixtop",
+      "slug": "mixtop",
+      "lastmod": "2024-09-02T11:54:20+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "MixTOP",
+      "series": null,
+      "description": [
+        "Advance Series - Clear coat, premixed"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/cf1d6a98b310d32b365dcf132079a1659cd6fb66_1.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/cf1d6a98b310d32b365dcf132079a1659cd6fb66_1.png.webp?itok=uQRiHYfg"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:58.198Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multi-finish-r",
+      "slug": "multi-finish-r",
+      "lastmod": "2024-09-02T11:54:29+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "MULTI Finish-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense clear coat, universal"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/43d8da9df32a9d6d95e60c744cfbfd63246ee4af_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/43d8da9df32a9d6d95e60c744cfbfd63246ee4af_6.png.webp?itok=opF0g865"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:59.258Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multi-purpos-r-black",
+      "slug": "multi-purpos-r-black",
+      "lastmod": "2024-09-02T11:54:08+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "MULTI Purpos-R Black",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense DTM, black"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/4a9955715ac7900b48174e9139bba19ffee6443f.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/4a9955715ac7900b48174e9139bba19ffee6443f.png.webp?itok=h7zZjVCk"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:57.138Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multi-purpos-r-grey",
+      "slug": "multi-purpos-r-grey",
+      "lastmod": "2024-09-02T11:53:56+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "MULTI Purpos-R Grey",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense DTM, grey"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/80858e521e62f95da60da4499edc8aa152026b0e_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/80858e521e62f95da60da4499edc8aa152026b0e_0.png.webp?itok=_C-EQG2k"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:59.257Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multi-purpos-r-white",
+      "slug": "multi-purpos-r-white",
+      "lastmod": "2024-09-02T13:05:48+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "MULTI Purpos-R White",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense DTM, white"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/cd1f89e64c75925098bbbe9e46c603eaf94e3af9_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/cd1f89e64c75925098bbbe9e46c603eaf94e3af9_0.png.webp?itok=fgyEJILo"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:58.912Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multiprotect-black",
+      "slug": "multiprotect-black",
+      "lastmod": "2024-09-02T11:54:40+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "MultiPROTECT Black",
+      "series": "Advance Series",
+      "description": [
+        "Advance Series - DTM primer filler, black"
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:00.349Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multiprotect-grey",
+      "slug": "multiprotect-grey",
+      "lastmod": "2024-09-02T11:54:42+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "MultiPROTECT Grey",
+      "series": "Advance Series",
+      "description": [
+        "Advance Series - DTM primer filler, grey"
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:14:59.318Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multiprotect-white",
+      "slug": "multiprotect-white",
+      "lastmod": "2024-09-02T11:54:12+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "MultiPROTECT White",
+      "series": "Advance Series",
+      "description": [
+        "Advance Series - DTM primer filler, white"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/9bd22f0ee5da86ff541ecb18eac90602471a6946.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/9bd22f0ee5da86ff541ecb18eac90602471a6946.png.webp?itok=yytDl7Zn"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:01.523Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multithinn",
+      "slug": "multithinn",
+      "lastmod": "2024-09-02T11:53:51+01:00",
+      "httpStatus": 200,
+      "productType": "Thinner",
+      "name": "MultiTHINN",
+      "series": null,
+      "description": [
+        "Advance Series - Thinner, slow"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/8ce53ab6990d5f67775dffab8205d938775e2e3f.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/8ce53ab6990d5f67775dffab8205d938775e2e3f.png.webp?itok=O13KTCfO"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:01.502Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multithinn-0",
+      "slug": "multithinn-0",
+      "lastmod": "2024-09-02T11:54:22+01:00",
+      "httpStatus": 200,
+      "productType": "Thinner",
+      "name": "MultiTHINN",
+      "series": null,
+      "description": [
+        "Advance Series - Thinner, medium"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/b85b0146388782f9be8e35fb01eb20cf31498326_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/b85b0146388782f9be8e35fb01eb20cf31498326_0.png.webp?itok=oqqJqyJe"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:02.238Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/multithinn-1",
+      "slug": "multithinn-1",
+      "lastmod": "2024-09-02T13:05:50+01:00",
+      "httpStatus": 200,
+      "productType": "Thinner",
+      "name": "MultiTHINN",
+      "series": null,
+      "description": [
+        "Advance Series - Thinner, fast"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/d87b8ce5c1fbf5b76852310863148ac1725507fc_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/d87b8ce5c1fbf5b76852310863148ac1725507fc_0.png.webp?itok=8FbKA64e"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:02.234Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/onyx-hd",
+      "slug": "onyx-hd",
+      "lastmod": "2024-09-02T13:05:45+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat/Topcoat",
+      "name": "ONYX HD",
+      "series": null,
+      "description": [
+        "Waterborne basecoat line"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/d1c22e2d794bf1f971d98e2c8e67837a3eb3bdf9_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/d1c22e2d794bf1f971d98e2c8e67837a3eb3bdf9_6.png.webp?itok=IM9hARH3"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:01.656Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/p-2p81-esense-wet-wet-filler-white",
+      "slug": "p-2p81-esense-wet-wet-filler-white",
+      "lastmod": "2025-12-01T11:51:02+01:00",
+      "httpStatus": 200,
+      "productType": "Bodyfiller",
+      "name": "P 2P81 eSense wet-on-wet filler, white",
+      "series": "Pioneer Series",
+      "description": [
+        "The Pioneer Series RACE WET FILL-R P 2P81 is here – a super-fast, Wet-On-Wet filler with Ccycled® certification and seamless compatibility across the R-M system, including eSense, AGILIS ®, and race clear coats. No additive needed, just top performance from the pot to the finish line."
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:03.881Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/p-2p85-esense-wet-wet-filler-black",
+      "slug": "p-2p85-esense-wet-wet-filler-black",
+      "lastmod": "2025-12-01T14:10:25+01:00",
+      "httpStatus": 200,
+      "productType": "Bodyfiller",
+      "name": "P 2P85 eSense wet-on-wet filler, black",
+      "series": "Pioneer Series",
+      "description": [
+        "The Pioneer Series RACE WET FILL-R P 2P85 is here – a super-fast, Wet-On-Wet filler with Ccycled® certification and seamless compatibility across the R-M system, including eSense, AGILIS ®, and race clear coats. No additive needed, just top performance from the pot to the finish line."
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:03.875Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/performfiller-black",
+      "slug": "performfiller-black",
+      "lastmod": "2024-09-02T11:54:14+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "PerformFILLER Black",
+      "series": "Advance Series",
+      "description": [
+        "Advance Series - Sanding primer filler, black"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/7fdc6776a6f663d0d2fe9383439bde95135a90b2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/7fdc6776a6f663d0d2fe9383439bde95135a90b2.png.webp?itok=ehUlbrGK"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:03.943Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/performfiller-white",
+      "slug": "performfiller-white",
+      "lastmod": "2024-09-02T11:54:15+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "PerformFILLER White",
+      "series": "Advance Series",
+      "description": [
+        "Advance Series - Sanding primer filler, white"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/83a12067dffe080a65deba37cb09c885c36a10ab_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/83a12067dffe080a65deba37cb09c885c36a10ab_0.png.webp?itok=yzZSA8io"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:05.799Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/performtop",
+      "slug": "performtop",
+      "lastmod": "2024-09-02T11:54:24+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "PerformTOP",
+      "series": null,
+      "description": [
+        "Advance Series - Clear coat, universal"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/fb6ea8a88ae34ba4ab2eca7b2a37685c8199505c_4.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/fb6ea8a88ae34ba4ab2eca7b2a37685c8199505c_4.png.webp?itok=Vl6Ifu5w"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:05.799Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/power-finish-r",
+      "slug": "power-finish-r",
+      "lastmod": "2024-09-02T11:53:34+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "POWER Finish-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense clear coat, scratch resistant"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/35447472cc83d20e976d392676930402f44a5214_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/35447472cc83d20e976d392676930402f44a5214_6.png.webp?itok=hsYErVut"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:04.048Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/protecttop",
+      "slug": "protecttop",
+      "lastmod": "2024-09-02T11:54:25+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "ProtectTOP",
+      "series": null,
+      "description": [
+        "Advance Series - Clear coat, scratch resistant"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/f29bee85c1b4f284048b759df01c99f18bb82f7d_5.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/f29bee85c1b4f284048b759df01c99f18bb82f7d_5.png.webp?itok=SXqxx-Z9"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:05.799Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/race-finish-r-c2p42-esense-clear-coat-ultimate-drying",
+      "slug": "race-finish-r-c2p42-esense-clear-coat-ultimate-drying",
+      "lastmod": "2025-12-01T10:11:44+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "RACE FINISH R C2P42 eSense clear coat, ultimate drying",
+      "series": null,
+      "description": [
+        "The fastest and most sustainable 40°C process in the industry.",
+        "Achieve exceptional results with our industry-leading, blazing-fast 40°C process –",
+        "dry in just 20 minutes and cut CO2 emissions by up to 40%.",
+        "Our latest fast-drying clear coat not only cuts energy consumption, it also boasts features such as the",
+        "shortest time to polish at 40°, supercharging throughput and driving profi tability. Perfect for EV repairs,",
+        "this innovative eSense product is made with Ccyled® technology, using raw materials from end-of-life tires",
+        "to replace fossil fuels – contributing to a circular economy with up to 40% less CO2 per KG of product.",
+        "Reduce your environmental impact and boost your business profi ts with Pioneer Series."
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/c356dabcbf98be4648014861c31504212fab296f.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/c356dabcbf98be4648014861c31504212fab296f.png.webp?itok=xCcP50id"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:05.800Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/sanding-fill-r-black",
+      "slug": "sanding-fill-r-black",
+      "lastmod": "2024-09-02T11:54:10+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "SANDING Fill-R+ Black",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense primer filler, black"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/9ab0026ac08d9b4cd2b8544db56a41e3db6c7ba7.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/9ab0026ac08d9b4cd2b8544db56a41e3db6c7ba7.png.webp?itok=prqzjf3f"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:07.628Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/sanding-fill-r-grey",
+      "slug": "sanding-fill-r-grey",
+      "lastmod": "2024-09-02T11:54:02+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "SANDING Fill-R+ Grey",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense primer filler, grey"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/b021bd07b64044e00753570f2d77aea85720aeb4_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/b021bd07b64044e00753570f2d77aea85720aeb4_2.png.webp?itok=jriTHP_Y"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:07.628Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/speed-finish-r",
+      "slug": "speed-finish-r",
+      "lastmod": "2024-09-02T11:53:36+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "SPEED Finish-R",
+      "series": "Pioneer Series",
+      "description": [
+        "Pioneer Series - eSense clear coat, fast drying"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/ca42e45d9a8f627289266d57467f48153d6ee236_6.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/ca42e45d9a8f627289266d57467f48153d6ee236_6.png.webp?itok=C-nikcLP"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:07.626Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/speedadd",
+      "slug": "speedadd",
+      "lastmod": "2024-09-02T11:54:34+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "SpeedADD",
+      "series": null,
+      "description": [
+        "Advance Series - Speed additive"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/76d7b0f51ac6dac4619e94483b9c9976ead4a282_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/76d7b0f51ac6dac4619e94483b9c9976ead4a282_0.png.webp?itok=5fuv9aer"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:07.627Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/topcure",
+      "slug": "topcure",
+      "lastmod": "2024-09-02T11:53:49+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "TopCURE",
+      "series": null,
+      "description": [
+        "Advance Series - Topcoat hardener, slow"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/b81bb7d33d244997e5791015f23b81a7bfb8ec92_3.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/b81bb7d33d244997e5791015f23b81a7bfb8ec92_3.png.webp?itok=XPtFjPfS"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:07.759Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/topcure-0",
+      "slug": "topcure-0",
+      "lastmod": "2024-09-02T11:54:27+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "TopCURE",
+      "series": null,
+      "description": [
+        "Advance Series - Topcoat hardener, fast"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/052d72f371d2e62a5dce84b1f37d29f4946a57f7_3.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/052d72f371d2e62a5dce84b1f37d29f4946a57f7_3.png.webp?itok=7BFZhFIH"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:09.613Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/topcure-1",
+      "slug": "topcure-1",
+      "lastmod": "2024-09-02T13:05:42+01:00",
+      "httpStatus": 200,
+      "productType": "Hardener",
+      "name": "TopCURE",
+      "series": null,
+      "description": [
+        "Advance Series - Topcoat hardener, medium"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/7d2b5dcf204d1e4b35f7973340861b350757599c_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/7d2b5dcf204d1e4b35f7973340861b350757599c_2.png.webp?itok=KmkvVphT"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:09.624Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uno-hd",
+      "slug": "uno-hd",
+      "lastmod": "2024-09-02T11:54:42+01:00",
+      "httpStatus": 200,
+      "productType": "Basecoat/Topcoat",
+      "name": "UNO HD",
+      "series": null,
+      "description": [
+        "HS Topcoat mixing clear for UNO HD"
+      ],
+      "image": null,
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:09.627Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uv-blemding-thinn-r",
+      "slug": "uv-blemding-thinn-r",
+      "lastmod": "2024-09-02T13:05:32+01:00",
+      "httpStatus": 200,
+      "productType": "Additives/Others",
+      "name": "UV BLEMDING Thinn-R",
+      "series": "Pioneer Series, UV-A",
+      "description": [],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/da8a659c026077dd05a6c08c7710c4cee02b7ef1_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/da8a659c026077dd05a6c08c7710c4cee02b7ef1_2.png.webp?itok=FYBtshyX"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:09.625Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uv-bodyfill-r",
+      "slug": "uv-bodyfill-r",
+      "lastmod": "2024-09-02T11:54:36+01:00",
+      "httpStatus": 200,
+      "productType": "Bodyfiller",
+      "name": "UV Bodyfill-R",
+      "series": "Pioneer Series, UV-A",
+      "description": [
+        "Pioneer Series - eSense UV body filler"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/6c525c5fbfe532e8ea8ec719e551dbc3112e1814.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/6c525c5fbfe532e8ea8ec719e551dbc3112e1814.png.webp?itok=kX5GPNxa"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:11.719Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uv-fill-r-dark-grey",
+      "slug": "uv-fill-r-dark-grey",
+      "lastmod": "2024-09-02T11:53:53+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "UV Fill-R Dark Grey",
+      "series": "Pioneer Series, UV-A",
+      "description": [
+        "Pioneer Series - eSense UV primer filler,dark grey"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/10d47430755deadd3287982fdd15e4d0641a6056_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/10d47430755deadd3287982fdd15e4d0641a6056_0.png.webp?itok=tLsTvdKJ"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:09.751Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uv-fill-r-grey",
+      "slug": "uv-fill-r-grey",
+      "lastmod": "2024-09-02T11:54:06+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "UV Fill-R Grey",
+      "series": "Pioneer Series, UV-A",
+      "description": [
+        "Pioneer Series - eSense UV primer filler, grey"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/4846d6858c982f2086a1ef355722dd0ef10783f4_2.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/4846d6858c982f2086a1ef355722dd0ef10783f4_2.png.webp?itok=05KpGVZN"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:11.712Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uv-fill-r-light-grey",
+      "slug": "uv-fill-r-light-grey",
+      "lastmod": "2024-09-02T11:54:04+01:00",
+      "httpStatus": 200,
+      "productType": "Undercoat",
+      "name": "UV Fill-R Light Grey",
+      "series": "Pioneer Series, UV-A",
+      "description": [
+        "Pioneer Series - eSense UV primer filler,light grey"
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/152be16d8dd237b361404c623641e39a5f0105aa_0.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/152be16d8dd237b361404c623641e39a5f0105aa_0.png.webp?itok=jCvDQbbi"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:11.718Z"
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products/uv-finish-r",
+      "slug": "uv-finish-r",
+      "lastmod": "2024-09-02T13:05:38+01:00",
+      "httpStatus": 200,
+      "productType": "Clearcoat",
+      "name": "UV Finish-R",
+      "series": "Pioneer Series, UV-A",
+      "description": [
+        "Pioneer Series - eSense clear coat for R-M waterborne basecoats."
+      ],
+      "image": {
+        "url": "https://www.rmpaint.com/data/sites/rm/files/product/f3210a1fde09d7faff654390467055ce159b69e3_3.png",
+        "styledUrl": "https://www.rmpaint.com/data/sites/rm/files/styles/ars__ratio_34__500x667/public/product/f3210a1fde09d7faff654390467055ce159b69e3_3.png.webp?itok=o_hEZYFH"
+      },
+      "pdfLinks": [],
+      "infoLinks": [],
+      "fetchedAt": "2026-09-19T06:15:09.895Z"
+    }
+  ],
+  "rangePages": [
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/product-lines",
+      "httpStatus": 200,
+      "title": "R-M product lines",
+      "headings": [
+        "R-M AGILIS",
+        "Amplify your vision with AGILIS",
+        "High performance features",
+        "R-M ONYX HD",
+        "R-M UNO HD",
+        "R-M Crystal bases",
+        "Practical storage chest",
+        "Perfectly compatible with DIAMONT and ONYX HD",
+        "R-M DIAMONT",
+        "R-M Graphite HD",
+        "The best solution for all commercial vehicles"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/product-ranges",
+      "httpStatus": 200,
+      "title": "The best solutions on the market",
+      "headings": [
+        "Pioneer Series",
+        "Pioneering performance and eco-effectiveness.",
+        "Advance Series",
+        "Productivity on another level",
+        "Element Series",
+        "Economical and versatile"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/product-techs",
+      "httpStatus": 200,
+      "title": "Product Techs",
+      "headings": [
+        "UV-A repairs from R-M at the speed of light",
+        "eSense: good for cars and for the environment",
+        "The new type of repair – with R-M’s eSense products",
+        "Thanks to e’Sense, we saved 3,337t of CO₂"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.basf.com/global/en/who-we-are/sustainability/we-drive-sustainable-solutions/quantifying-sustainability/product-carbon-footprint.html",
+        "https://www.basf.com/en/bmb",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/technical-support",
+      "httpStatus": 200,
+      "title": "Technical Support",
+      "headings": [],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/featured-products",
+      "httpStatus": 200,
+      "title": "Featured Products",
+      "headings": [],
+      "productLinks": [
+        "air-tune-r",
+        "blending-thinn-r",
+        "mat-finish-r",
+        "power-finish-r",
+        "speed-finish-r",
+        "clear-harden-r",
+        "clear-thinn-r",
+        "clear-harden-r-0",
+        "clear-harden-r-1",
+        "clear-harden-r-2",
+        "bright-finish-r",
+        "topcure"
+      ],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/sds",
+      "httpStatus": 200,
+      "title": "SDS",
+      "headings": [],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/r-m-onyx-hd",
+      "httpStatus": 200,
+      "title": "R-M ONYX HD",
+      "headings": [
+        "Better for the environment. Better for your bottom line. Since 1995.",
+        "Sustainable Performance"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/r-m-graphite-hd",
+      "httpStatus": 200,
+      "title": "R-M Graphite HD",
+      "headings": [
+        "The best solution for all commercial vehicles",
+        "Complete Portfolio",
+        "Easy Chassis Paints",
+        "Innovative Products",
+        "Perfect Color Match"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/products-systems",
+      "httpStatus": 200,
+      "title": "High performance is everything",
+      "headings": [
+        "Innovative with the best paint solutions",
+        "Unprecedented quality, process speed and eco-effectiveness",
+        "Pioneering performance and eco-effectiveness.",
+        "Welcome to advanced productivity.",
+        "Dynamic products for passenger cars, commercial vehicles and classic cars",
+        "Digital power for your business - All in ONE place"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/basecoat-lines",
+      "httpStatus": 200,
+      "title": "Basecoat Lines",
+      "headings": [
+        "R-M UNO HD",
+        "R-M Crystal bases",
+        "Practical storage chest",
+        "R-M DIAMONT"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    },
+    {
+      "sourceUrl": "https://www.rmpaint.com/en-int/agilis",
+      "httpStatus": 200,
+      "title": "AGILIS ®",
+      "headings": [
+        "Take your painting process to another level",
+        "Proven to be the fastest in the industry.",
+        "Proven to be the lowest VOC in the industry.",
+        "Proven to have the best color in the industry.",
+        "100% accurate digital color matching.",
+        "Take your painting process to another level",
+        "Give your experience a new dimension",
+        "Lead the environmental change",
+        "AGILIS ® sets the standard with the highest eco-effectiveness ratio in the industry.",
+        "Next level support services",
+        "AMM for AGILIS ® in EMEA",
+        "Arrange",
+        "Approve",
+        "AGILIS ® Xtreme"
+      ],
+      "productLinks": [],
+      "outboundOfficialLinks": [
+        "https://info.rmpaint.com/products",
+        "https://info.rmpaint.com/",
+        "https://colorexplorer.rmpaint.com/index.php?language=8",
+        "https://www.refinity-solutions.com/",
+        "https://www.surventiscoatings.com/",
+        "http://www.facebook.com/rmpaint",
+        "https://www.instagram.com/rmpaintofficial/",
+        "http://www.youtube.com/rmpaint"
+      ],
+      "pdfLinks": []
+    }
+  ]
+}

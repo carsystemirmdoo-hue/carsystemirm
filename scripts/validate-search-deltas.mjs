@@ -78,6 +78,8 @@ const EXPECTED = [
    */
   { query: "ral", count: 130 },
   { query: "600 ml", count: 4 },
+  // `antichip`: ostaje 8. Alias grupa je razdvojena (antikorozivno ≠ zaštita od kamenčića),
+  // pa R-M antikorozivni prajmeri više ne dobijaju lažan pogodak — vidi `lib/search/aliases.mjs`.
   { query: "antichip", count: 8 },
   { query: "cosmos antichip", count: 8 },
   /*

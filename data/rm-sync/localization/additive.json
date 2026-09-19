@@ -1,0 +1,341 @@
+{
+  "a-1510": {
+    "sourceHash": "eba1f88e4696bbc9",
+    "productType": "Aditiv za stapanje prelaza",
+    "subtype": "Aditiv · DIAMONT · stapanje prelaza",
+    "shortDescription": "Aditiv za DIAMONT bazne boje, namenjen stapanju prelaza pri popravkama manjih i kozmetičkih oštećenja.",
+    "longDescription": "Specijalni aditiv za DIAMONT bazne boje. Koristi se kada se popravka izvodi tehnikom stapanja, pa novi sloj treba da pređe u postojeći premaz bez vidljive granice. Postupak se sprovodi prema uputstvima za stapanje opisanim u BLEND'ART procesima, uključujući i popravke kozmetičkih oštećenja.",
+    "purpose": "Stapanje prelaza kod popravki sa DIAMONT baznim bojama",
+    "facts": [
+      { "label": "Mlaznica (mm)", "value": "1–1,2 · 1,3–1,5" }
+    ],
+    "applications": [
+      "Popravke manjih i kozmetičkih oštećenja",
+      "Stapanje prelaza prema BLEND'ART postupku"
+    ],
+    "benefits": [],
+    "advice": "Materijal se pre nanošenja procedi."
+  },
+  "a-2010": {
+    "sourceHash": "63995352f054c2ff",
+    "productType": "Sredstvo za fino poliranje",
+    "subtype": "Sredstvo za poliranje · fina pasta bez silikona",
+    "shortDescription": "Fina pasta za poliranje automobilskih lakiranih površina, formulisana bez silikona.",
+    "longDescription": "Fino sredstvo za poliranje namenjeno obradi automobilskih lakiranih površina. Koristi se u završnoj fazi obrade laka. Formulisano je bez silikona.",
+    "purpose": "Fino poliranje automobilskih lakiranih površina",
+    "facts": [
+      { "label": "Sastav", "value": "bez silikona" }
+    ],
+    "applications": [
+      "Poliranje automobilskih lakiranih površina"
+    ],
+    "benefits": [
+      { "title": "Bez silikona", "description": "Fina pasta za poliranje formulisana bez silikona." }
+    ],
+    "advice": null
+  },
+  "a-2810": {
+    "sourceHash": "47c5ff89f4597eb1",
+    "productType": "Sredstvo za koagulaciju vode",
+    "subtype": "Sredstvo za obradu vode · prašak za koagulaciju",
+    "shortDescription": "Prašak koji izdvaja čvrste materije iz vode korišćene za pranje alata posle vodorazredivih proizvoda.",
+    "longDescription": "Sredstvo prati rad sa vodorazredivim proizvodima: voda kojom se peru radni alati sakuplja se u odgovarajuće posude, koje ne smeju da dođu u kontakt sa rastvaračima. Prašak iz te vode izdvaja čvrste materije. Kada se koagulisana materija odvoji, bistra vodena faza može ponovo da posluži za prethodno pranje pištolja, koji se na kraju ispiraju svežom vodom iz vodovoda.",
+    "purpose": "Izdvajanje čvrstih materija iz vode za pranje alata",
+    "facts": [],
+    "applications": [
+      "Pranje alata posle vodorazredivih proizvoda",
+      "Priprema vode za ponovno prethodno pranje pištolja"
+    ],
+    "benefits": [
+      { "title": "Ponovna upotreba vode", "description": "Posle odvajanja koagulisane materije bistra vodena faza može ponovo da posluži za prethodno pranje pištolja." }
+    ],
+    "advice": "Posude sa sakupljenom vodom ne smeju da dođu u kontakt sa rastvaračima."
+  },
+  "a-2a14": {
+    "sourceHash": "58f6f0c451beb48d",
+    "productType": "Aditiv za ubrzanje sušenja",
+    "subtype": "Aditiv · Advance Series · ubrzanje sušenja",
+    "shortDescription": "Aditiv koji skraćuje vreme sušenja podloga i bezbojnih lakova iz programa Advance Series.",
+    "longDescription": "Aditiv za ubrzanje sušenja, namenjen podlogama i bezbojnim lakovima Advance Series. Povećava hemijsku reaktivnost proizvoda u koje se dodaje, pa se brušenje, poliranje ili ponovna montaža mogu započeti posle kraćeg čekanja.",
+    "purpose": "Skraćivanje vremena sušenja u Advance Series sistemu",
+    "facts": [],
+    "applications": [
+      "Dodavanje u podloge Advance Series",
+      "Dodavanje u bezbojne lakove Advance Series"
+    ],
+    "benefits": [
+      { "title": "Kraće sušenje", "description": "Skraćuje vreme sušenja proizvoda u koje se dodaje." },
+      { "title": "Brža obrada", "description": "Povećana hemijska reaktivnost skraćuje čekanje pre brušenja, poliranja ili ponovne montaže." }
+    ],
+    "advice": null
+  },
+  "a-2a44": {
+    "sourceHash": "e9eafe9a983f391e",
+    "productType": "Aditiv za elastičnost premaza",
+    "subtype": "Aditiv · Advance Series · elastičnost premaza",
+    "shortDescription": "Aditiv za elastičnost koji se dodaje u bezbojne lakove i završne premaze Advance Series.",
+    "longDescription": "Aditiv kojim se povećava elastičnost premaza u koje se dodaje. Koristi se u bezbojnim lakovima i završnim premazima iz programa Advance Series. Dodaje se u udelu od 25 % zapreminski.",
+    "purpose": "Povećanje elastičnosti premaza Advance Series",
+    "facts": [
+      { "label": "Dodatak", "value": "25 % zapreminski" }
+    ],
+    "applications": [
+      "Dodavanje u bezbojne lakove Advance Series",
+      "Dodavanje u završne premaze Advance Series"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "a-2a45": {
+    "sourceHash": "54fa4a4a30b02253",
+    "productType": "Aditiv za prianjanje na plastiku",
+    "subtype": "Aditiv · Advance Series · prianjanje na plastiku",
+    "shortDescription": "Aditiv koji punila Advance Series čini pogodnim za direktnu primenu na plastičnim podlogama.",
+    "longDescription": "Aditiv za prianjanje na plastiku, namenjen podlogama iz programa Advance Series. Dodavanjem u punilo materijal postaje pogodan za direktno nanošenje na sve plastične podloge koje se u automobilskoj industriji uobičajeno lakiraju.",
+    "purpose": "Priprema podloga Advance Series za plastične površine",
+    "facts": [],
+    "applications": [
+      "Dodavanje u punila Advance Series pre nanošenja na plastiku"
+    ],
+    "benefits": [
+      { "title": "Direktno na plastiku", "description": "Čini punila pogodnim za direktno nanošenje na sve plastične podloge koje se u automobilskoj industriji uobičajeno lakiraju." }
+    ],
+    "advice": null
+  },
+  "a-2a54": {
+    "sourceHash": "b862982be4000781",
+    "productType": "Aditiv za stapanje prelaza",
+    "subtype": "Aditiv · Advance Series · stapanje prelaza",
+    "shortDescription": "Aditiv Advance Series za stapanje prelaza, koji izglađuje zonu između popravke i okolne površine.",
+    "longDescription": "Aditiv za stapanje prelaza iz programa Advance Series. U postupcima stapanja izglađuje zone prelaza između popravljene i okolne površine. Sadržaj isparljivih organskih jedinjenja iznosi 839 g/l, uz graničnu vrednost od 840 g/l za kategoriju IIB.e.",
+    "purpose": "Izglađivanje zone prelaza pri stapanju",
+    "facts": [
+      { "label": "Mlaznica (mm)", "value": "1–1,2" },
+      { "label": "VOC (IIB.e)", "value": "839 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Stapanje prelaza na popravkama Advance Series"
+    ],
+    "benefits": [
+      { "title": "Meki prelaz", "description": "Izglađuje zone prelaza u postupcima stapanja." }
+    ],
+    "advice": null
+  },
+  "a-2a84": {
+    "sourceHash": "015f54e11628dd79",
+    "productType": "Aditiv za strukturu premaza",
+    "subtype": "Aditiv · Advance Series · struktura površine",
+    "shortDescription": "Aditiv kojim se bezbojnim lakovima i završnim premazima Advance Series daje željena struktura površine.",
+    "longDescription": "Aditiv za strukturu, namenjen bezbojnim lakovima i završnim premazima iz programa Advance Series. Dodaje se u udelu od 25 do 50 %, prema željenoj strukturi ili prema objavljenoj recepturi mešanja. Sušenje na 60 °C traje 30 min.",
+    "purpose": "Postizanje željene strukture površine",
+    "facts": [
+      { "label": "Dodatak", "value": "25 do 50 %" },
+      { "label": "Sušenje", "value": "60 °C / 30 min" }
+    ],
+    "applications": [
+      "Dodavanje u bezbojne lakove Advance Series",
+      "Dodavanje u završne premaze Advance Series"
+    ],
+    "benefits": [],
+    "advice": "Udeo aditiva bira se prema željenoj strukturi ili prema objavljenoj recepturi mešanja."
+  },
+  "a-2p05": {
+    "sourceHash": "a0b300efead7616b",
+    "productType": "Aditiv za elastičnost premaza",
+    "subtype": "Aditiv · Pioneer Series · elastičnost premaza",
+    "shortDescription": "eSense aditiv za elastičnost, namenjen bezbojnim lakovima iz programa Pioneer Series.",
+    "longDescription": "Aditiv kojim se povećava elastičnost bezbojnih lakova Pioneer Series. Dodaje se u udelu od 25 % zapreminski. Sušenje traje 16 h na 20 °C, odnosno 45 min na 60 °C.",
+    "purpose": "Povećanje elastičnosti bezbojnih lakova Pioneer Series",
+    "facts": [
+      { "label": "Dodatak", "value": "25 % zapreminski" },
+      { "label": "Sušenje", "value": "20 °C / 16 h · 60 °C / 45 min" }
+    ],
+    "applications": [
+      "Dodavanje u bezbojne lakove Pioneer Series"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "a-2p17": {
+    "sourceHash": "e0d6f039161b1b80",
+    "productType": "Aditiv za ubrzanje sušenja",
+    "subtype": "Aditiv · Pioneer Series · ubrzanje sušenja",
+    "shortDescription": "eSense aditiv koji skraćuje vreme sušenja podloga i bezbojnih lakova iz programa Pioneer Series.",
+    "longDescription": "Aditiv za ubrzanje sušenja, namenjen podlogama i bezbojnim lakovima Pioneer Series. Povećava hemijsku reaktivnost proizvoda u koje se dodaje, pa se brušenje, poliranje ili ponovna montaža mogu započeti posle kraćeg čekanja.",
+    "purpose": "Skraćivanje vremena sušenja u Pioneer Series sistemu",
+    "facts": [],
+    "applications": [
+      "Dodavanje u podloge Pioneer Series",
+      "Dodavanje u bezbojne lakove Pioneer Series"
+    ],
+    "benefits": [
+      { "title": "Kraće sušenje", "description": "Skraćuje vreme sušenja proizvoda u koje se dodaje." },
+      { "title": "Brža obrada", "description": "Povećana hemijska reaktivnost skraćuje čekanje pre brušenja, poliranja ili ponovne montaže." }
+    ],
+    "advice": null
+  },
+  "a-2p30": {
+    "sourceHash": "2e1a548cc0675fb3",
+    "productType": "Aditiv za stapanje prelaza",
+    "subtype": "Aditiv · Pioneer Series · stapanje prelaza u UV postupku",
+    "shortDescription": "eSense aditiv za stapanje prelaza na UV Finish-R premazima iz programa Pioneer Series.",
+    "longDescription": "Aditiv za stapanje prelaza iz UV programa Pioneer Series. U postupcima stapanja izglađuje zone prelaza na UV Finish-R premazima, tako da popravka prelazi u okolnu površinu bez vidljive granice. Proizvod pripada UV-A tehnologiji.",
+    "purpose": "Izglađivanje zone prelaza u UV postupku",
+    "facts": [
+      { "label": "Mlaznica (mm)", "value": "1" },
+      { "label": "Tehnologija", "value": "UV-A" }
+    ],
+    "applications": [
+      "Stapanje prelaza na UV Finish-R premazima"
+    ],
+    "benefits": [
+      { "title": "Meki prelaz", "description": "Izglađuje zone prelaza na UV Finish-R premazima u postupcima stapanja." }
+    ],
+    "advice": null
+  },
+  "a-2p35": {
+    "sourceHash": "e28acca3ac387af1",
+    "productType": "Aditiv za stapanje prelaza",
+    "subtype": "Aditiv · Pioneer Series · stapanje prelaza",
+    "shortDescription": "eSense aditiv Pioneer Series za stapanje prelaza, koji izglađuje zonu između popravke i okolne površine.",
+    "longDescription": "Aditiv za stapanje prelaza iz programa Pioneer Series. U postupcima stapanja izglađuje zone prelaza između popravljene i okolne površine. Sadržaj isparljivih organskih jedinjenja iznosi 839 g/l, uz graničnu vrednost od 840 g/l za kategoriju IIB.e.",
+    "purpose": "Izglađivanje zone prelaza pri stapanju",
+    "facts": [
+      { "label": "Mlaznica (mm)", "value": "1–1,2" },
+      { "label": "VOC (IIB.e)", "value": "839 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Stapanje prelaza na popravkama Pioneer Series"
+    ],
+    "benefits": [
+      { "title": "Meki prelaz", "description": "Izglađuje zone prelaza u postupcima stapanja." }
+    ],
+    "advice": null
+  },
+  "a-2p40": {
+    "sourceHash": "1ecc3c09fe533e9b",
+    "productType": "Aditiv za prianjanje na plastiku",
+    "subtype": "Aditiv · Pioneer Series · prianjanje na plastiku",
+    "shortDescription": "eSense aditiv koji punila Pioneer Series čini pogodnim za direktnu primenu na plastičnim podlogama.",
+    "longDescription": "Aditiv za prianjanje na plastiku, namenjen podlogama iz programa Pioneer Series. Dodavanjem u punilo materijal postaje pogodan za direktno nanošenje na sve plastične podloge koje se u automobilskoj industriji uobičajeno lakiraju.",
+    "purpose": "Priprema podloga Pioneer Series za plastične površine",
+    "facts": [],
+    "applications": [
+      "Dodavanje u punila Pioneer Series pre nanošenja na plastiku"
+    ],
+    "benefits": [
+      { "title": "Direktno na plastiku", "description": "Čini punila pogodnim za direktno nanošenje na sve plastične podloge koje se u automobilskoj industriji uobičajeno lakiraju." }
+    ],
+    "advice": null
+  },
+  "a-2rm9": {
+    "sourceHash": "5e462f1784377bf8",
+    "productType": "Aditiv za mat efekat",
+    "subtype": "Aditiv · sniženje nivoa sjaja",
+    "shortDescription": "Aditiv kojim se snižava nivo sjaja R-M završnih premaza pune boje i bezbojnih lakova.",
+    "longDescription": "Aditiv za mat efekat koji omogućava sniženje nivoa sjaja R-M završnih premaza pune boje i bezbojnih lakova. Lako se meša sa premazom. Može se koristiti i na plastici, bez dodavanja R-M aditiva za elastičnost.",
+    "purpose": "Sniženje nivoa sjaja završnog premaza",
+    "facts": [],
+    "applications": [
+      "Sniženje sjaja završnih premaza pune boje",
+      "Sniženje sjaja bezbojnih lakova",
+      "Primena na plastici"
+    ],
+    "benefits": [
+      { "title": "Podesiv nivo sjaja", "description": "Omogućava sniženje nivoa sjaja R-M završnih premaza pune boje i bezbojnih lakova." },
+      { "title": "Lako mešanje", "description": "Jednostavno se meša sa premazom." },
+      { "title": "I na plastici", "description": "Može se koristiti i na plastici, bez dodavanja R-M aditiva za elastičnost." }
+    ],
+    "advice": null
+  },
+  "a-5200": {
+    "sourceHash": "9153d98ad3b37ee0",
+    "productType": "Aditiv za višebojno lakiranje",
+    "subtype": "Aditiv · GRAPHITE HD · višebojno lakiranje",
+    "shortDescription": "Aditiv iz GRAPHITE HD programa namenjen višebojnom lakiranju nadgradnji i komercijalnih vozila.",
+    "longDescription": "Aditiv za višebojno lakiranje iz GRAPHITE HD programa. Koristi se pri obnovi kabina, na nadgradnjama i pri popravkama autobusa, kao i za ispisivanje natpisa. Dobro se razliva i brzo suši, pa se obrađeni delovi ranije mogu sklapati.",
+    "purpose": "Višebojno lakiranje u GRAPHITE HD programu",
+    "facts": [],
+    "applications": [
+      "Obnova kabina",
+      "Nadgradnje i popravke autobusa",
+      "Ispisivanje natpisa"
+    ],
+    "benefits": [
+      { "title": "Dobro razlivanje", "description": "Premaz se dobro razliva po površini." },
+      { "title": "Brzo sušenje", "description": "Brzo sušenje skraćuje čekanje do sklapanja delova." }
+    ],
+    "advice": null
+  },
+  "a-5480": {
+    "sourceHash": "62ee99243822add1",
+    "productType": "Aditiv za epoksidni prajmer",
+    "subtype": "Aditiv · GRAPHITE HD · univerzalni epoksidni prajmer",
+    "shortDescription": "Aditiv iz GRAPHITE HD programa koji se koristi u univerzalnom epoksidnom prajmeru iste linije.",
+    "longDescription": "Aditiv namenjen univerzalnom epoksidnom prajmeru iz GRAPHITE HD programa. Dodaje se u taj proizvod prema uputstvu za obradu.",
+    "purpose": "Dopuna univerzalnog epoksidnog prajmera GRAPHITE HD",
+    "facts": [],
+    "applications": [
+      "Dodavanje u univerzalni epoksidni prajmer GRAPHITE HD"
+    ],
+    "benefits": [],
+    "advice": "Kod popravki na vozilima, pored uputstva za obradu, uvek se poštuju i uputstva proizvođača vozila, posebno u vezi sa ugrađenom senzorskom tehnikom."
+  },
+  "a-5700": {
+    "sourceHash": "5ef637c70b802e5c",
+    "productType": "Aditiv za nijansiranje prajmera i punila",
+    "subtype": "Aditiv · GRAPHITE HD · nijansiranje podloga",
+    "shortDescription": "Pasta za nijansiranje kojom se prajmeri i punila podešavaju na različite nijanse sive.",
+    "longDescription": "Aditiv za nijansiranje podloga iz GRAPHITE HD programa. Može se koristiti u svim PUR i EP prajmerima i punilima, gde daje različite nijanse sive. Ima izraženu moć bojenja, a dodavanje ne menja podatke o obradi prajmera i punila.",
+    "purpose": "Nijansiranje prajmera i punila u sive tonove",
+    "facts": [
+      { "label": "Primena", "value": "PUR i EP prajmeri i punila" }
+    ],
+    "applications": [
+      "Nijansiranje podloga u različite nijanse sive"
+    ],
+    "benefits": [
+      { "title": "Izražena moć bojenja", "description": "Mala količina paste dovoljna je za promenu tona podloge." },
+      { "title": "Široka primena", "description": "Može se koristiti u svim PUR i EP prajmerima i punilima." }
+    ],
+    "advice": "Dodavanje paste ne menja podatke o obradi prajmera i punila."
+  },
+  "am-2a54": {
+    "sourceHash": "0659134814a41447",
+    "productType": "Aditiv za stapanje prelaza u spreju",
+    "subtype": "Aditiv u aerosolu · Advance Series · stapanje prelaza",
+    "shortDescription": "Aditiv Advance Series za stapanje prelaza, u aerosolnom obliku.",
+    "longDescription": "Aditiv za stapanje prelaza iz programa Advance Series, u aerosolnom obliku. U postupcima stapanja izglađuje zone prelaza između popravljene i okolne površine. Sadržaj isparljivih organskih jedinjenja iznosi 839 g/l, uz graničnu vrednost od 840 g/l za kategoriju IIB.e.",
+    "purpose": "Stapanje prelaza aerosolnom primenom",
+    "facts": [
+      { "label": "Oblik", "value": "aerosol" },
+      { "label": "VOC (IIB.e)", "value": "839 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Stapanje prelaza na popravkama Advance Series"
+    ],
+    "benefits": [
+      { "title": "Meki prelaz", "description": "Izglađuje zone prelaza u postupcima stapanja." }
+    ],
+    "advice": null
+  },
+  "am-2p35": {
+    "sourceHash": "06fb6a7b7a970aad",
+    "productType": "Aditiv za stapanje prelaza u spreju",
+    "subtype": "Aditiv u aerosolu · Pioneer Series · stapanje prelaza",
+    "shortDescription": "Aditiv Pioneer Series za stapanje prelaza, u aerosolnom obliku.",
+    "longDescription": "Aditiv za stapanje prelaza iz programa Pioneer Series, u aerosolnom obliku. U postupcima stapanja izglađuje zone prelaza između popravljene i okolne površine. Sadržaj isparljivih organskih jedinjenja iznosi 839 g/l, uz graničnu vrednost od 840 g/l za kategoriju IIB.e.",
+    "purpose": "Stapanje prelaza aerosolnom primenom",
+    "facts": [
+      { "label": "Oblik", "value": "aerosol" },
+      { "label": "VOC (IIB.e)", "value": "839 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Stapanje prelaza na popravkama Pioneer Series"
+    ],
+    "benefits": [
+      { "title": "Meki prelaz", "description": "Izglađuje zone prelaza u postupcima stapanja." }
+    ],
+    "advice": null
+  }
+}

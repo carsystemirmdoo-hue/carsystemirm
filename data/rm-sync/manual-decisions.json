@@ -1,0 +1,15 @@
+{
+  "_comment": [
+    "Ručne odluke vlasnika. Sync ih čita, nikad ih ne piše. Posle izmene: `npm run rm:sync:apply`.",
+    "source.<oznaka>  = { \"decision\": \"skip\", \"note\": \"…\" }   → zvanični proizvod se ne uvozi (svesno ruši paritet).",
+    "local.<naš slug> = { \"code\": \"<oznaka>\", \"note\": \"…\" }     → ručni zapis JESTE taj zvanični proizvod/sistem (dopuna umesto uvoza; slug ostaje).",
+    "HIGH_CONFIDENCE poklapanje se primenjuje samo uz odluku ovde — sistem ga sam ne spaja."
+  ],
+  "source": {},
+  "local": {
+    "rm-diamont-bazna-boja": {
+      "code": "DIAMONT",
+      "note": "Odobrio vlasnik 2026-09-19 (B10): zapis predstavlja DIAMONT sistem; postojeći slug ostaje kanonski i dobija zvanične podatke sistema, druga DIAMONT kartica se ne pravi."
+    }
+  }
+}

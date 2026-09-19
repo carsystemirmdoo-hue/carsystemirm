@@ -1,0 +1,125 @@
+{
+  "codeQueries": 438,
+  "codeFirstResult": 438,
+  "namedQueries": [
+    {
+      "kind": "naziv",
+      "query": "GlossTOP plus",
+      "code": "C 2A64",
+      "want": [
+        "c-2a64-glosstop"
+      ],
+      "top": "c-2a64-glosstop",
+      "ok": true
+    },
+    {
+      "kind": "naziv",
+      "query": "MultiPROTECT Grey",
+      "code": "P 2A63",
+      "want": [
+        "p-2a63-multiprotect-grey"
+      ],
+      "top": "p-2a63-multiprotect-grey",
+      "ok": true
+    },
+    {
+      "kind": "sistem",
+      "query": "AGILIS eSense",
+      "code": "AGILIS eSense",
+      "want": [
+        "rm-agilis-esense"
+      ],
+      "top": "rm-agilis-esense",
+      "ok": true
+    },
+    {
+      "kind": "sistem",
+      "query": "ONYX HD",
+      "code": "ONYX HD",
+      "want": [
+        "rm-onyx-hd"
+      ],
+      "top": "rm-onyx-hd",
+      "ok": true
+    },
+    {
+      "kind": "učvršćivač",
+      "query": "CLEAR Harden-R",
+      "anyOfCodes": [
+        "H 2P05",
+        "H 2P15",
+        "H 2P25",
+        "H 2P35"
+      ],
+      "want": [
+        "h-2p05-clear-harden-r",
+        "h-2p15-clear-harden-r",
+        "rm-h-2p25-clear-harden-r",
+        "rm-h-2p35-clear-harden-r"
+      ],
+      "top": "h-2p05-clear-harden-r",
+      "ok": true
+    },
+    {
+      "kind": "razređivač",
+      "query": "MultiTHINN",
+      "anyOfCodes": [
+        "R 2A14",
+        "R 2A24",
+        "R 2A34"
+      ],
+      "want": [
+        "r-2a14-multithinn",
+        "rm-r-2a24-multithinn",
+        "rm-r-2a34-multithinn"
+      ],
+      "top": "r-2a14-multithinn",
+      "ok": true
+    },
+    {
+      "kind": "kit",
+      "query": "PerformBODY",
+      "anyOfCodes": [
+        "B 2A16",
+        "B 2A16C",
+        "B 2A16CL"
+      ],
+      "want": [
+        "rm-b-2a16-performbody",
+        "rm-b-2a16c-performbody",
+        "rm-b-2a16cl-performbody"
+      ],
+      "top": "rm-b-2a16-performbody",
+      "ok": true
+    },
+    {
+      "kind": "čistač",
+      "query": "SILICONE Remov-R",
+      "code": "PK 1P10",
+      "want": [
+        "rm-pk-1p10-silicone-remov-r"
+      ],
+      "top": "rm-pk-1p10-silicone-remov-r",
+      "ok": true
+    },
+    {
+      "kind": "komponenta sistema",
+      "query": "AGILIS MIX",
+      "anyOfCodes": [
+        "RA 040",
+        "RA 050",
+        "RA 050X",
+        "RA 220"
+      ],
+      "want": [
+        "rm-ra-040-agilis-mix",
+        "rm-ra-050-agilis-mix",
+        "ra-050x-agilis-mix",
+        "rm-ra-220-agilis-interior-mix"
+      ],
+      "top": "rm-ra-220-agilis-interior-mix",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

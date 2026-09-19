@@ -1,0 +1,146 @@
+{
+  "c-2a44": {
+    "sourceHash": "9eca2a2807e484ff",
+    "productType": "brzosušivi bezbojni lak",
+    "subtype": "bezbojni lak · Advance Series · brzo sušenje",
+    "shortDescription": "Brzosušivi bezbojni lak iz programa Advance Series, predviđen za završni sloj preko ONYX HD bazne boje.",
+    "longDescription": "FastTOP je bezbojni lak iz programa Advance Series, predviđen za završni sloj preko ONYX HD bazne boje. Meša se u odnosu 2:1 + 10% i nanosi u debljini suvog filma 40–60 μm. Sušenje traje 8 h na 20°C, odnosno 20–25 min na 60°C, dok je vreme obrade posle mešanja 45 min na 20°C. Opseg primene ide od popravke manjeg oštećenja do kompletne bočne strane vozila.",
+    "purpose": "Brzo završno lakiranje preko ONYX HD bazne boje",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1 + 10%" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje na 20°C", "value": "8 h" },
+      { "label": "Sušenje na 60°C", "value": "20–25 min" },
+      { "label": "Vreme obrade na 20°C", "value": "45 min" },
+      { "label": "Isparavanje", "value": "Nije potrebno pre sušenja u komori" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "VOC", "value": "419 g/l (granica 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Završno lakiranje posle ONYX HD bazne boje",
+      "Popravka manjeg oštećenja",
+      "Lakiranje do kompletne bočne strane vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Kraće vreme sušenja podiže protok posla u radionici."
+      },
+      {
+        "title": "Širok opseg popravke",
+        "description": "Pokriva raspon od manjeg oštećenja do kompletne bočne strane vozila."
+      }
+    ],
+    "advice": null
+  },
+  "c-2a95": {
+    "sourceHash": "1c51d65b8bd4716d",
+    "productType": "svilenkasto mat bezbojni lak",
+    "subtype": "bezbojni lak · Advance Series · svilenkasto mat",
+    "shortDescription": "Svilenkasto mat bezbojni lak iz programa Advance Series, za završne obrade sa mat izgledom preko ONYX HD bazne boje.",
+    "longDescription": "MatTOP je svilenkasto mat bezbojni lak iz programa Advance Series, predviđen za završni sloj preko ONYX HD bazne boje. Meša se u odnosu 2:1 i nanosi u debljini suvog filma 40–50 μm. Između slojeva ostavlja se isparavanje do mat izgleda: 10–15 min posle prvog i 15–20 min posle drugog sloja, a najviše 25 min posle svakog sloja. Sušenje traje 8 h na 20°C, odnosno 30 min na 60°C, uz vreme obrade posle mešanja od 2 h na 20°C.",
+    "purpose": "Svilenkasto mat završni sloj preko ONYX HD bazne boje",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2:1" },
+      { "label": "Debljina suvog filma", "value": "40–50 μm" },
+      { "label": "Sušenje na 20°C", "value": "8 h" },
+      { "label": "Sušenje na 60°C", "value": "30 min" },
+      { "label": "Vreme obrade na 20°C", "value": "2 h" },
+      {
+        "label": "Isparavanje između slojeva na 20°C",
+        "value": "10–15 min posle prvog i 15–20 min posle drugog sloja, najviše 25 min"
+      },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "VOC", "value": "629 g/l (granica 840 g/l, kategorija IIB.e)" }
+    ],
+    "applications": [
+      "Završno lakiranje posle ONYX HD bazne boje",
+      "Popravka fabričkih mat i svilenkasto mat obrada"
+    ],
+    "benefits": [
+      {
+        "title": "Svilenkasto mat izgled",
+        "description": "Namenjen posebnim fabričkim (OEM) završnim obradama sa mat izgledom."
+      }
+    ],
+    "advice": "Isparavanje između slojeva vodi se do postizanja mat izgleda i ne produžava se preko 25 min posle svakog sloja."
+  },
+  "c-2p52": {
+    "sourceHash": "3c2ecd8dd9e83640",
+    "productType": "bezbojni lak sa sušenjem na vazduhu",
+    "subtype": "bezbojni lak · Pioneer Series · eSense · sušenje na sobnoj temperaturi",
+    "shortDescription": "eSense bezbojni lak iz programa Pioneer Series koji se suši na sobnoj temperaturi, za R-M vodorazredive bazne boje.",
+    "longDescription": "EASY AIR Finish-R je eSense bezbojni lak iz programa Pioneer Series, namenjen R-M vodorazredivim baznim bojama i sušenju na sobnoj temperaturi. Meša se u odnosu 4:1 i nanosi u debljini suvog filma 40–60 μm. Na 20°C površina postaje suva od prašine posle 35 min, a vreme obrade posle mešanja iznosi 30 min. Predviđen je za rad na više vertikalnih i horizontalnih panela odjednom.",
+    "purpose": "Završni sloj preko R-M vodorazredivih baznih boja bez sušenja u komori",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Suvo od prašine na 20°C", "value": "35 min" },
+      { "label": "Vreme obrade na 20°C", "value": "30 min" },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "VOC", "value": "419 g/l (granica 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Završno lakiranje preko R-M vodorazredivih baznih boja",
+      "Rad na više vertikalnih i horizontalnih panela",
+      "Sušenje na sobnoj temperaturi"
+    ],
+    "benefits": [
+      {
+        "title": "Sušenje na vazduhu",
+        "description": "Suši se na sobnoj temperaturi, bez sušenja u komori."
+      },
+      {
+        "title": "Više panela odjednom",
+        "description": "Predviđen za rad na više vertikalnih i horizontalnih panela."
+      }
+    ],
+    "advice": null
+  },
+  "c-2p65": {
+    "sourceHash": "77bb90ce6e66597a",
+    "productType": "bezbojni lak visokog sjaja",
+    "subtype": "bezbojni lak · Pioneer Series · eSense · visok sjaj",
+    "shortDescription": "eSense bezbojni lak iz programa Pioneer Series sa visokim nivoom sjaja, za završni sloj preko R-M vodorazredivih baznih boja.",
+    "longDescription": "INTENSE Finish-R je eSense bezbojni lak iz programa Pioneer Series, namenjen završnom sloju preko R-M vodorazredivih baznih boja uz izražen nivo sjaja. Meša se u odnosu 3:1:1 i nanosi u debljini suvog filma 40–60 μm. Između slojeva ostavlja se 3–5 min isparavanja, dok pre sušenja isparavanje nije potrebno. Sušenje traje 8 h na 20°C, odnosno 30 min na 60°C, uz vreme obrade posle mešanja od 2 h na 20°C.",
+    "purpose": "Završni sloj visokog sjaja preko R-M vodorazredivih baznih boja",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje na 20°C", "value": "8 h" },
+      { "label": "Sušenje na 60°C", "value": "30 min" },
+      { "label": "Vreme obrade na 20°C", "value": "2 h" },
+      {
+        "label": "Isparavanje između slojeva na 20°C",
+        "value": "3–5 min; pre sušenja nije potrebno"
+      },
+      { "label": "Mlaznica", "value": "1,3–1,4 / 1,3–1,5 mm" },
+      { "label": "VOC", "value": "419 g/l (granica 420 g/l, kategorija IIB.d)" }
+    ],
+    "applications": [
+      "Završno lakiranje preko R-M vodorazredivih baznih boja",
+      "Popravke kod kojih se traži izražen sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Izražen sjaj",
+        "description": "Daje visok nivo sjaja i ujednačen izgled lakirane površine."
+      }
+    ],
+    "advice": "Između slojeva ostaviti 3–5 min isparavanja; pre sušenja isparavanje nije potrebno."
+  },
+  "c-2rm2": {
+    "sourceHash": "88bf2e340c042268",
+    "productType": "bezbojni lak za felne",
+    "subtype": "bezbojni lak · felne",
+    "shortDescription": "Bezbojni lak za lakiranje felni; konkretna uputstva za primenu data su u TDS-u odgovarajuće varijante.",
+    "longDescription": "WHEEL CLEAR COAT je bezbojni lak namenjen lakiranju felni. Zvanična dokumentacija za konkretna uputstva o primeni upućuje na TDS odgovarajuće varijante proizvoda. Sadržaj isparljivih organskih jedinjenja iznosi 629 g/l, uz graničnu vrednost 840 g/l za kategoriju IIB.e.",
+    "purpose": "Lakiranje felni",
+    "facts": [
+      { "label": "VOC", "value": "629 g/l (granica 840 g/l, kategorija IIB.e)" }
+    ],
+    "applications": ["Lakiranje felni"],
+    "benefits": [],
+    "advice": "Uz uputstva za obradu primenjuju se i uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  }
+}

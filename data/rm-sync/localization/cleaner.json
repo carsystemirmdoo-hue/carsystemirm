@@ -1,0 +1,237 @@
+{
+  "pk-1a05": {
+    "sourceHash": "a2093852c6b595dc",
+    "productType": "Sredstvo za čišćenje na bazi rastvarača",
+    "subtype": "Sredstvo za čišćenje · Advance Series · goli metal",
+    "shortDescription": "MetalPREP je sredstvo za čišćenje na bazi rastvarača iz Advance Series, namenjeno pripremi golih metalnih površina.",
+    "longDescription": "MetalPREP pripada Advance Series programu za pripremu podloge i formulisan je na bazi rastvarača. Namenjen je čišćenju golih metalnih površina pre nanošenja pripremnih premaza iz istog programa. Sadržaj isparljivih organskih jedinjenja iznosi 840 g/l, uz graničnu vrednost 850 g/l za kategoriju IIB.ai.",
+    "purpose": "Čišćenje golih metalnih površina pre pripremnih premaza",
+    "facts": [
+      { "label": "Osnova", "value": "Na bazi rastvarača" },
+      { "label": "Serija", "value": "Advance Series" },
+      { "label": "VOC kategorija", "value": "IIB.ai" },
+      { "label": "Sadržaj VOC", "value": "840 g/l (granica 850 g/l)" }
+    ],
+    "applications": [
+      "Čišćenje golih metalnih površina",
+      "Priprema podloge u Advance Series programu"
+    ],
+    "benefits": [
+      { "title": "Za goli metal", "description": "Formulisan za čišćenje golih metalnih površina." }
+    ],
+    "advice": null
+  },
+  "pk-1a15": {
+    "sourceHash": "575b4df7a38377e1",
+    "productType": "Sredstvo za čišćenje na bazi rastvarača",
+    "subtype": "Odmašćivač · Advance Series · prvi korak čišćenja",
+    "shortDescription": "UndercoatPREP je višenamensko sredstvo za čišćenje na bazi rastvarača za prvi korak uklanjanja katrana, masnoća i silikona.",
+    "longDescription": "UndercoatPREP je sredstvo za čišćenje na bazi rastvarača iz Advance Series programa za pripremu podloge. Koristi se u prvom koraku čišćenja, radi uklanjanja katrana, masnoća i silikona sa površine. Sadržaj isparljivih organskih jedinjenja iznosi 840 g/l, uz graničnu vrednost 850 g/l za kategoriju IIB.ai.",
+    "purpose": "Prvi korak čišćenja podloge u Advance Series programu",
+    "facts": [
+      { "label": "Osnova", "value": "Na bazi rastvarača" },
+      { "label": "Serija", "value": "Advance Series" },
+      { "label": "VOC kategorija", "value": "IIB.ai" },
+      { "label": "Sadržaj VOC", "value": "840 g/l (granica 850 g/l)" }
+    ],
+    "applications": [
+      "Prvi korak čišćenja površine",
+      "Uklanjanje katrana, masnoća i silikona",
+      "Priprema podloge u Advance Series programu"
+    ],
+    "benefits": [
+      { "title": "Višenamensko čišćenje", "description": "U izvoru označeno kao multi sredstvo za čišćenje unutar programa." },
+      { "title": "Prvi korak pripreme", "description": "Namenjeno prvom koraku čišćenja, za uklanjanje katrana, masnoća i silikona." }
+    ],
+    "advice": null
+  },
+  "pk-1p10": {
+    "sourceHash": "5fec264949463c18",
+    "productType": "Sredstvo za čišćenje na bazi rastvarača",
+    "subtype": "Odmašćivač · Pioneer Series · eSense",
+    "shortDescription": "SILICONE Remov-R je eSense sredstvo za čišćenje na bazi rastvarača za prvi korak uklanjanja katrana, masnoća i silikona.",
+    "longDescription": "SILICONE Remov-R pripada eSense programu za pripremu podloge unutar Pioneer Series i formulisan je na bazi rastvarača. Koristi se u prvom koraku čišćenja površine, radi uklanjanja katrana, masnoća i silikona. Sadržaj isparljivih organskih jedinjenja iznosi 840 g/l, uz graničnu vrednost 850 g/l za kategoriju IIB.ai.",
+    "purpose": "Prvi korak čišćenja podloge u eSense programu Pioneer Series",
+    "facts": [
+      { "label": "Osnova", "value": "Na bazi rastvarača" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "VOC kategorija", "value": "IIB.ai" },
+      { "label": "Sadržaj VOC", "value": "840 g/l (granica 850 g/l)" }
+    ],
+    "applications": [
+      "Prvi korak čišćenja površine",
+      "Uklanjanje katrana, masnoća i silikona",
+      "Priprema podloge u eSense programu Pioneer Series"
+    ],
+    "benefits": [
+      { "title": "Višenamensko čišćenje", "description": "U izvoru označeno kao multi sredstvo za čišćenje unutar eSense programa." },
+      { "title": "eSense formulacija", "description": "Deo eSense programa Pioneer Series za pripremu podloge." }
+    ],
+    "advice": null
+  },
+  "pk-2a15": {
+    "sourceHash": "b39a1abc9b90e82c",
+    "productType": "Vodeno sredstvo za čišćenje",
+    "subtype": "Odmašćivač na vodenoj bazi · Advance Series",
+    "shortDescription": "Undercoat HydroPREP je univerzalno sredstvo za čišćenje na vodenoj bazi za prvi korak uklanjanja ulja, masnoća i silikona.",
+    "longDescription": "Undercoat HydroPREP je univerzalno sredstvo za čišćenje na vodenoj bazi iz Advance Series programa za pripremu podloge. Koristi se u prvom koraku čišćenja, radi uklanjanja ulja, masnoća i silikona sa površine. Sadržaj isparljivih organskih jedinjenja iznosi 186 g/l, uz graničnu vrednost 200 g/l za kategoriju IIB.aii.",
+    "purpose": "Prvi korak čišćenja podloge u Advance Series programu",
+    "facts": [
+      { "label": "Osnova", "value": "Na vodenoj bazi" },
+      { "label": "Serija", "value": "Advance Series" },
+      { "label": "VOC kategorija", "value": "IIB.aii" },
+      { "label": "Sadržaj VOC", "value": "186 g/l (granica 200 g/l)" }
+    ],
+    "applications": [
+      "Prvi korak čišćenja površine",
+      "Uklanjanje ulja, masnoća i silikona",
+      "Priprema podloge u Advance Series programu"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "U izvoru označeno kao multi sredstvo za čišćenje na vodenoj bazi." },
+      { "title": "Prvi korak pripreme", "description": "Namenjeno prvom koraku čišćenja, za uklanjanje ulja, masnoća i silikona." }
+    ],
+    "advice": null
+  },
+  "pk-2a25": {
+    "sourceHash": "413859d5db9b6395",
+    "productType": "Vodeno sredstvo za čišćenje",
+    "subtype": "Sredstvo za čišćenje na vodenoj bazi · Advance Series · pre bazne i završne boje",
+    "shortDescription": "Topcoat HydroPREP je sredstvo za čišćenje na vodenoj bazi koje se koristi pre nanošenja bazne i završne boje.",
+    "longDescription": "Topcoat HydroPREP je sredstvo za čišćenje na vodenoj bazi iz Advance Series programa. Primenjuje se pre nanošenja bazne i završne boje, kao poslednji korak pripreme površine. Sadržaj isparljivih organskih jedinjenja iznosi 198 g/l, uz graničnu vrednost 200 g/l za kategoriju IIB.aii.",
+    "purpose": "Čišćenje površine pre nanošenja bazne i završne boje",
+    "facts": [
+      { "label": "Osnova", "value": "Na vodenoj bazi" },
+      { "label": "Serija", "value": "Advance Series" },
+      { "label": "VOC kategorija", "value": "IIB.aii" },
+      { "label": "Sadržaj VOC", "value": "198 g/l (granica 200 g/l)" }
+    ],
+    "applications": [
+      "Čišćenje površine pre nanošenja bazne boje",
+      "Čišćenje površine pre nanošenja završne boje"
+    ],
+    "benefits": [
+      { "title": "Visok nivo učinka", "description": "U izvoru označeno kao sredstvo za čišćenje visokog nivoa učinka." },
+      { "title": "Pre bazne i završne boje", "description": "Primenjuje se neposredno pre nanošenja bazne i završne boje." }
+    ],
+    "advice": null
+  },
+  "pk-2a35": {
+    "sourceHash": "3f6a1c69b12db2c1",
+    "productType": "Sredstvo za čišćenje plastičnih delova",
+    "subtype": "Sredstvo za čišćenje · Advance Series · plastika",
+    "shortDescription": "PlasticPREP je sredstvo za čišćenje namenjeno isključivo plastičnim delovima i uklanjanju sredstava za odvajanje iz kalupa.",
+    "longDescription": "PlasticPREP je sredstvo za čišćenje iz Advance Series programa, namenjeno isključivo plastičnim delovima. Uklanja sredstva za odvajanje iz kalupa koja zaostaju na plastici posle proizvodnje. Sadržaj isparljivih organskih jedinjenja iznosi 793 g/l, uz graničnu vrednost 850 g/l za kategoriju IIB.ai.",
+    "purpose": "Čišćenje plastičnih delova pre pripreme podloge",
+    "facts": [
+      { "label": "Namena", "value": "Samo plastični delovi" },
+      { "label": "Serija", "value": "Advance Series" },
+      { "label": "VOC kategorija", "value": "IIB.ai" },
+      { "label": "Sadržaj VOC", "value": "793 g/l (granica 850 g/l)" }
+    ],
+    "applications": [
+      "Čišćenje plastičnih delova",
+      "Uklanjanje sredstava za odvajanje iz kalupa"
+    ],
+    "benefits": [
+      { "title": "Samo za plastiku", "description": "Namenjeno isključivo čišćenju plastičnih delova." },
+      { "title": "Uklanja ostatke iz kalupa", "description": "Uklanja sredstva za odvajanje koja se koriste u proizvodnji plastičnih delova." }
+    ],
+    "advice": null
+  },
+  "pk-2p10": {
+    "sourceHash": "534788ebe2d23e87",
+    "productType": "Vodeno sredstvo za čišćenje",
+    "subtype": "Odmašćivač na vodenoj bazi · Pioneer Series · eSense",
+    "shortDescription": "MULTI Clean-R je eSense sredstvo za čišćenje na vodenoj bazi za prvi korak uklanjanja ulja, masnoća i silikona.",
+    "longDescription": "MULTI Clean-R je višenamensko sredstvo za čišćenje na vodenoj bazi iz eSense programa Pioneer Series. Koristi se u prvom koraku čišćenja površine, radi uklanjanja ulja, masnoća i silikona, pre nanošenja eSense pripremnih premaza. Sadržaj isparljivih organskih jedinjenja iznosi 186 g/l, uz graničnu vrednost 200 g/l za kategoriju IIB.aii.",
+    "purpose": "Prvi korak čišćenja podloge u eSense programu Pioneer Series",
+    "facts": [
+      { "label": "Osnova", "value": "Na vodenoj bazi" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "VOC kategorija", "value": "IIB.aii" },
+      { "label": "Sadržaj VOC", "value": "186 g/l (granica 200 g/l)" }
+    ],
+    "applications": [
+      "Prvi korak čišćenja površine",
+      "Uklanjanje ulja, masnoća i silikona",
+      "Priprema podloge u eSense programu Pioneer Series"
+    ],
+    "benefits": [
+      { "title": "Višenamensko čišćenje", "description": "U izvoru označeno kao multi sredstvo za čišćenje na vodenoj bazi." },
+      { "title": "eSense formulacija", "description": "Deo eSense programa Pioneer Series za pripremu podloge." }
+    ],
+    "advice": null
+  },
+  "pk-2p20": {
+    "sourceHash": "d175375a9795ad3e",
+    "productType": "Vodeno sredstvo za čišćenje",
+    "subtype": "Sredstvo za čišćenje na vodenoj bazi · Pioneer Series · eSense",
+    "shortDescription": "PRE Clean-R je eSense sredstvo za čišćenje na vodenoj bazi koje se koristi pre nanošenja bazne i završne boje.",
+    "longDescription": "PRE Clean-R je sredstvo za čišćenje na vodenoj bazi iz eSense programa Pioneer Series. Primenjuje se pre nanošenja bazne i završne boje, kao poslednji korak pripreme površine. Sadržaj isparljivih organskih jedinjenja iznosi 198 g/l, uz graničnu vrednost 200 g/l za kategoriju IIB.aii.",
+    "purpose": "Čišćenje površine pre nanošenja bazne i završne boje",
+    "facts": [
+      { "label": "Osnova", "value": "Na vodenoj bazi" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "VOC kategorija", "value": "IIB.aii" },
+      { "label": "Sadržaj VOC", "value": "198 g/l (granica 200 g/l)" }
+    ],
+    "applications": [
+      "Čišćenje površine pre nanošenja bazne boje",
+      "Čišćenje površine pre nanošenja završne boje"
+    ],
+    "benefits": [
+      { "title": "Visok nivo učinka", "description": "U izvoru označeno kao sredstvo za čišćenje najvišeg nivoa učinka." },
+      { "title": "Pre bazne i završne boje", "description": "Primenjuje se neposredno pre nanošenja bazne i završne boje." }
+    ],
+    "advice": null
+  },
+  "pk-2p40": {
+    "sourceHash": "ab6456d58a10e301",
+    "productType": "Sredstvo za čišćenje plastičnih delova",
+    "subtype": "Sredstvo za čišćenje · Pioneer Series · eSense · plastika",
+    "shortDescription": "PLASTIC Clean-R je eSense sredstvo za čišćenje na bazi rastvarača, namenjeno isključivo plastičnim delovima.",
+    "longDescription": "PLASTIC Clean-R je sredstvo za čišćenje na bazi rastvarača iz eSense programa Pioneer Series, namenjeno isključivo plastičnim delovima. Uklanja sredstva za odvajanje iz kalupa koja zaostaju na plastici posle proizvodnje. Sadržaj isparljivih organskih jedinjenja iznosi 793 g/l, uz graničnu vrednost 850 g/l za kategoriju IIB.ai.",
+    "purpose": "Čišćenje plastičnih delova u eSense programu Pioneer Series",
+    "facts": [
+      { "label": "Osnova", "value": "Na bazi rastvarača" },
+      { "label": "Namena", "value": "Samo plastični delovi" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "VOC kategorija", "value": "IIB.ai" },
+      { "label": "Sadržaj VOC", "value": "793 g/l (granica 850 g/l)" }
+    ],
+    "applications": [
+      "Čišćenje plastičnih delova",
+      "Uklanjanje sredstava za odvajanje iz kalupa"
+    ],
+    "benefits": [
+      { "title": "Samo za plastiku", "description": "Namenjeno isključivo čišćenju plastičnih delova." },
+      { "title": "Uklanja ostatke iz kalupa", "description": "Uklanja sredstva za odvajanje koja se koriste u proizvodnji plastičnih delova." }
+    ],
+    "advice": null
+  },
+  "pk-2p50": {
+    "sourceHash": "31661eb00e0f1956",
+    "productType": "Maramice za pripremu metalnih površina",
+    "subtype": "Maramice za čišćenje · Pioneer Series · eSense",
+    "shortDescription": "PRO Prep-R su maramice za pripremu metalnih površina, za bolju prionljivost sistema boje i otpornost na koroziju.",
+    "longDescription": "PRO Prep-R su maramice iz eSense programa Pioneer Series, namenjene pripremi podloge. Hemijskom reakcijom sa metalnim površinama doprinose boljoj prionljivosti sistema boje i otpornosti na koroziju. Sadržaj isparljivih organskih jedinjenja iznosi 8 g/l, uz graničnu vrednost 780 g/l za kategoriju IIB.ciii.",
+    "purpose": "Priprema metalnih površina pre nanošenja sistema boje",
+    "facts": [
+      { "label": "Oblik", "value": "Maramice" },
+      { "label": "Serija", "value": "Pioneer Series" },
+      { "label": "VOC kategorija", "value": "IIB.ciii" },
+      { "label": "Sadržaj VOC", "value": "8 g/l (granica 780 g/l)" }
+    ],
+    "applications": [
+      "Priprema metalnih površina",
+      "Čišćenje pre nanošenja sistema boje"
+    ],
+    "benefits": [
+      { "title": "Bolja prionljivost", "description": "Hemijskom reakcijom sa metalnim površinama poboljšava prionljivost sistema boje." },
+      { "title": "Otpornost na koroziju", "description": "Doprinosi otpornosti pripremljene metalne površine na koroziju." },
+      { "title": "Kvalitet površine", "description": "U izvoru označeno kao rešenje za kvalitet pripremljene površine." }
+    ],
+    "advice": null
+  }
+}

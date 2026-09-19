@@ -1,0 +1,1455 @@
+{
+  "summary": {
+    "KEEP_BRAND": 124,
+    "STATED_PRODUCT_COLOUR": 35
+  },
+  "decisions": [
+    {
+      "slug": "rm-a-1510-diamont-blender",
+      "code": "A 1510",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2010-bril-852",
+      "code": "A 2010",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2530x-agilis-blender",
+      "code": "A 2530X",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2540-agilis-blender-x-treme",
+      "code": "A 2540",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2610-onyx-interior",
+      "code": "A 2610",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2810-hydropure",
+      "code": "A 2810",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2a14-speedadd",
+      "code": "A 2A14",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2a44-flexadd",
+      "code": "A 2A44",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2a45-plasticadd",
+      "code": "A 2A45",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2a54-blendingadd",
+      "code": "A 2A54",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2a84-textureadd",
+      "code": "A 2A84",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2p05-flex-tune-r",
+      "code": "A 2P05",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2p17-fast-tune-r",
+      "code": "A 2P17",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2p30-uv-blending-thinn-r",
+      "code": "A 2P30",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2p35-blending-thinn-r",
+      "code": "A 2P35",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2p40-plastic-tune-r",
+      "code": "A 2P40",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-2rm9-matting-agent",
+      "code": "A 2RM9",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-5200-ghd-deco-a",
+      "code": "A 5200",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-5480-ghd-additive-for-universal-ep",
+      "code": "A 5480",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-a-5700-ghd-tinting-paste",
+      "code": "A 5700",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-agilis",
+      "code": "AGILIS",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-agilis-esense",
+      "code": "AGILIS eSense",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-agilis-esense-x-treme",
+      "code": "AGILIS eSense X-TREME",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-agilis-x-treme",
+      "code": "AGILIS X-TREME",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-am-2a54-blendingadd",
+      "code": "AM 2A54",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-am-2p35-blending-thinn-r",
+      "code": "AM 2P35",
+      "role": "additive",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a13-brushbody",
+      "code": "B 2A13",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a16-performbody",
+      "code": "B 2A16",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a16c-performbody",
+      "code": "B 2A16C",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a16cl-performbody",
+      "code": "B 2A16CL",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a26-fastbody",
+      "code": "B 2A26",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a36-flexbody",
+      "code": "B 2A36",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a42-plasticbody",
+      "code": "B 2A42",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a56-lightbody",
+      "code": "B 2A56",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2a63-spraybody",
+      "code": "B 2A63",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2p13-spray-bodyfill-r",
+      "code": "B 2P13",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2p21-metal-bodyfill-r",
+      "code": "B 2P21",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2p21c-metal-bodyfill-r",
+      "code": "B 2P21C",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2p42-plastic-bodyfill-r",
+      "code": "B 2P42",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-b-2p57-sf-bodyfill-r",
+      "code": "B 2P57",
+      "role": "bodyfiller",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-bc-020-thinner",
+      "code": "BC 020",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-bc-030-thinner",
+      "code": "BC 030",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-bc-040-thinner",
+      "code": "BC 040",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-c-2a44-fasttop",
+      "code": "C 2A44",
+      "role": "clearcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-c-2a95-mattop",
+      "code": "C 2A95",
+      "role": "clearcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-c-2p52-easy-air-finish-r",
+      "code": "C 2P52",
+      "role": "clearcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-c-2p65-intense-finish-r",
+      "code": "C 2P65",
+      "role": "clearcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-c-2rm2-wheel-clear-coat",
+      "code": "C 2RM2",
+      "role": "clearcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-d-121-ultra-flash-flake-diamond",
+      "code": "D 121",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-d-403-diamont-jet-black",
+      "code": "D 403",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "D 403 DIAMONT JET BLACK, oznaka D 403",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-db-403-onyx-hd-deep-black",
+      "code": "DB 403",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "DB 403 ONYX HD Deep Black, oznaka DB 403",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-diamont",
+      "code": "DIAMONT var CV",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-ghd-cv-12",
+      "code": "GHD CV 12",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#BFC4C8",
+        "token": "srebrna",
+        "series": "GHD CV 12, oznaka GHD CV 12",
+        "source": "zvanični naziv/opis navodi boju materijala „silver” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „silver” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-ghd-cv-40m",
+      "code": "GHD CV 40M",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-gv-100-ghd-thinner",
+      "code": "GV 100",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-gv-200-ghd-thinner",
+      "code": "GV 200",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-gv-300-ghd-thinner",
+      "code": "GV 300",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-gv-400-ghd-thinner",
+      "code": "GV 400",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a20-airtopcure",
+      "code": "H 2A20",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a23-protectcure-epoxy",
+      "code": "H 2A23",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a24-topcure",
+      "code": "H 2A24",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a26-protectcure-wash",
+      "code": "H 2A26",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a30-fillcure",
+      "code": "H 2A30",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a31-fillcure-slow",
+      "code": "H 2A31",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a34-topcure",
+      "code": "H 2A34",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a60-protectcure-multi",
+      "code": "H 2A60",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a80-fillcure-plus",
+      "code": "H 2A80",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a81-fillcure-plus-slow",
+      "code": "H 2A81",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2a94-matcure",
+      "code": "H 2A94",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2e23-filler-hardener",
+      "code": "H 2E23",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p16-metal-harden-r",
+      "code": "H 2P16",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p20-air-harden-r",
+      "code": "H 2P20",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p25-clear-harden-r",
+      "code": "H 2P25",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p35-clear-harden-r",
+      "code": "H 2P35",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p60-multi-harden-r",
+      "code": "H 2P60",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p80-filler-harden-r-plus",
+      "code": "H 2P80",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p81-filler-harden-r-plus-slow",
+      "code": "H 2P81",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p84-filler-harden-r",
+      "code": "H 2P84",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p95-matshade-harden-r",
+      "code": "H 2P95",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2p96-matshade-harden-r",
+      "code": "H 2P96",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2rm1-body-harden-r",
+      "code": "H 2RM1",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2rm1c-body-harden-r",
+      "code": "H 2RM1C",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2rm1cl-body-harden-r",
+      "code": "H 2RM1CL",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2rm2-wheel-clear-coat-hardener",
+      "code": "H 2RM2",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-2rm3-spray-body-harden-r",
+      "code": "H 2RM3",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-340-ghd-protect-filler-hardener",
+      "code": "H 340",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-5430-ghd-slow-activator",
+      "code": "H 5430",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-5480-ghd-universal-ep-hardener",
+      "code": "H 5480",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-700-ghd-hardener",
+      "code": "H 700",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-750-ghd-hardener",
+      "code": "H 750",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-h-770-ghd-hardener",
+      "code": "H 770",
+      "role": "hardener",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-hb-002-onyx-hd",
+      "code": "HB 002 var CV",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-hb-015-agilis-minor-repair",
+      "code": "HB 015",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-hb-034-hydromix-slow",
+      "code": "HB 034",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-hb-10s-gleam-silver-onyx-hd",
+      "code": "HB 10S",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#BFC4C8",
+        "token": "srebrna",
+        "series": "HB 10S Gleam Silver ONYX HD, oznaka HB 10S",
+        "source": "zvanični naziv/opis navodi boju materijala „silver” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „silver” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-onyx-blender-plus",
+      "code": "A 2525",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-onyx-hd",
+      "code": "ONYX HD",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-onyx-hd-tropical",
+      "code": "ONYX HD TROPICAL",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-p-2a23-epoxyprotect-grey",
+      "code": "P 2A23",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "P 2A23 EpoxyPROTECT Grey, oznaka P 2A23",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a26-corrosionprotect",
+      "code": "P 2A26",
+      "role": "undercoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-p-2a31-easyfiller-white",
+      "code": "P 2A31",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 2A31 EasyFILLER White, oznaka P 2A31",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a35-easyfiller-black",
+      "code": "P 2A35",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2A35 EasyFILLER Black, oznaka P 2A35",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a45-performfiller-black",
+      "code": "P 2A45",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2A45 PerformFILLER Black, oznaka P 2A45",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a70-adhesionpromoter",
+      "code": "P 2A70",
+      "role": "undercoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-p-2a71-quickfiller-white",
+      "code": "P 2A71",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 2A71 QuickFILLER White, oznaka P 2A71",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a75-quickfiller-black",
+      "code": "P 2A75",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2A75 QuickFILLER Black, oznaka P 2A75",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a81-speedfiller-white",
+      "code": "P 2A81",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 2A81 SpeedFILLER White, oznaka P 2A81",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2a85-speedfiller-black",
+      "code": "P 2A85",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2A85 SpeedFILLER Black, oznaka P 2A85",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p16-metal-prim-r-beige",
+      "code": "P 2P16",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#D8C7A6",
+        "token": "bež",
+        "series": "P 2P16 METAL Prim-R Beige, oznaka P 2P16",
+        "source": "zvanični naziv/opis navodi boju materijala „beige” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „beige” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p21-air-purpos-r-white",
+      "code": "P 2P21",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 2P21 AIR Purpos-R White, oznaka P 2P21",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p25-air-purpos-r-black",
+      "code": "P 2P25",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2P25 AIR Purpos-R Black, oznaka P 2P25",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p33-water-fill-r-grey",
+      "code": "P 2P33",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "P 2P33 WATER Fill-R Grey, oznaka P 2P33",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p43-plastic-fill-r-grey",
+      "code": "P 2P43",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "P 2P43 PLASTIC Fill-R Grey, oznaka P 2P43",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p53-sanding-fill-r-plus-grey",
+      "code": "P 2P53",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "P 2P53 SANDING Fill-R+ Grey, oznaka P 2P53",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p61-multi-purpos-r-white",
+      "code": "P 2P61",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 2P61 MULTI Purpos-R White, oznaka P 2P61",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p65-multi-purpos-r-black",
+      "code": "P 2P65",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2P65 MULTI Purpos-R Black, oznaka P 2P65",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p71-wet-fill-r-white",
+      "code": "P 2P71",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 2P71 WET Fill-R White, oznaka P 2P71",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p75-wet-fill-r-black",
+      "code": "P 2P75",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "P 2P75 WET Fill-R Black, oznaka P 2P75",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-2p93-uv-fill-r-grey",
+      "code": "P 2P93",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "P 2P93 UV Fill-R Grey, oznaka P 2P93",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-5430w-ghd-surfacer-white",
+      "code": "P 5430W",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 5430W GHD SURFACER WHITE, oznaka P 5430W",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-5433-ghd-chassismix",
+      "code": "P 5433",
+      "role": "undercoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-p-5520-ghd-multi-primer-filler-cf",
+      "code": "P 5520",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#E8E8E4",
+        "token": "bela",
+        "series": "P 5520 GHD MULTI PRIMER FILLER CF, oznaka P 5520",
+        "source": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-p-5540-ghd-protect-primer-filler",
+      "code": "P 5540",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "P 5540 GHD PROTECT PRIMER FILLER, oznaka P 5540",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-pk-1a05-metalprep",
+      "code": "PK 1A05",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-1a15-undercoatprep",
+      "code": "PK 1A15",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-1p10-silicone-remov-r",
+      "code": "PK 1P10",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2a15-undercoat-hydroprep",
+      "code": "PK 2A15",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2a25-topcoat-hydroprep",
+      "code": "PK 2A25",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2a35-plasticprep",
+      "code": "PK 2A35",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2p10-multi-clean-r",
+      "code": "PK 2P10",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2p20-pre-clean-r",
+      "code": "PK 2P20",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2p40-plastic-clean-r",
+      "code": "PK 2P40",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pk-2p50-pro-prep-r",
+      "code": "PK 2P50",
+      "role": "cleaner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pm-2a20-plasticadhesion",
+      "code": "PM 2A20",
+      "role": "undercoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pm-2a32-1k-protect-light-grey",
+      "code": "PM 2A32",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#C9CBC8",
+        "token": "svetlosiva",
+        "series": "PM 2A32 1K PROTECT Light Grey, oznaka PM 2A32",
+        "source": "zvanični naziv/opis navodi boju materijala „light grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „light grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-pm-2a34-1k-protect-dark-grey",
+      "code": "PM 2A34",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#6B7071",
+        "token": "tamnosiva",
+        "series": "PM 2A34 1K PROTECT Dark Grey, oznaka PM 2A34",
+        "source": "zvanični naziv/opis navodi boju materijala „dark grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „dark grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-pm-2p10-plastic-prim-r",
+      "code": "PM 2P10",
+      "role": "undercoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-pm-2p12-fill-r-light-grey",
+      "code": "PM 2P12",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#C9CBC8",
+        "token": "svetlosiva",
+        "series": "PM 2P12 Fill-R Light Grey, oznaka PM 2P12",
+        "source": "zvanični naziv/opis navodi boju materijala „light grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „light grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-pm-2p14-fill-r-dark-grey",
+      "code": "PM 2P14",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#6B7071",
+        "token": "tamnosiva",
+        "series": "PM 2P14 Fill-R Dark Grey, oznaka PM 2P14",
+        "source": "zvanični naziv/opis navodi boju materijala „dark grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „dark grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-pm-2p93-uv-fill-r-grey",
+      "code": "PM 2P93",
+      "role": "undercoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#9AA0A0",
+        "token": "siva",
+        "series": "PM 2P93 UV Fill-R Grey, oznaka PM 2P93",
+        "source": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-r-2a20-airtopthinn",
+      "code": "R 2A20",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2a24-multithinn",
+      "code": "R 2A24",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2a34-multithinn",
+      "code": "R 2A34",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2e20-thinner-medium",
+      "code": "R 2E20",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2e30-thinner-slow",
+      "code": "R 2E30",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2p25-clear-thinn-r",
+      "code": "R 2P25",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2p30-uv-thinn-r",
+      "code": "R 2P30",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2p35-clear-thinn-r",
+      "code": "R 2P35",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-r-2p45-clear-thinn-r",
+      "code": "R 2P45",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-ra-040-agilis-mix",
+      "code": "RA 040",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-ra-050-agilis-mix",
+      "code": "RA 050",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-ra-220-agilis-interior-mix",
+      "code": "RA 220",
+      "role": "thinner",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-sc-t2a203-pure-black",
+      "code": "SC T2A203",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "SC T2A203 Pure black, oznaka SC T2A203",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-sc-t2a204-mat-black",
+      "code": "SC T2A204",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "SC T2A204 Mat black, oznaka SC T2A204",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-sc-t2p203-pure-black",
+      "code": "SC T2P203",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "SC T2P203 Pure black, oznaka SC T2P203",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-sc-t2p204-mat-black",
+      "code": "SC T2P204",
+      "role": "basecoat-topcoat",
+      "decision": "STATED_PRODUCT_COLOUR",
+      "shade": {
+        "color": "#23262A",
+        "token": "crna",
+        "series": "SC T2P204 Mat black, oznaka SC T2P204",
+        "source": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+      },
+      "reason": "zvanični naziv/opis navodi boju materijala „black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "rm-t-2a55-topcoatmix",
+      "code": "T 2A55",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-t-2p55-topcoat-mix-r",
+      "code": "T 2P55",
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    },
+    {
+      "slug": "rm-uno-hd",
+      "code": null,
+      "role": "basecoat-topcoat",
+      "decision": "KEEP_BRAND",
+      "shade": null,
+      "reason": "izvor ne navodi boju materijala"
+    }
+  ]
+}

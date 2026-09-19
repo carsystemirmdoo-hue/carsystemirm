@@ -3,6 +3,10 @@ import { rmImportedProducts } from "@/lib/rm-imported-products";
 import { baslacCatalogProducts } from "@/lib/baslac-catalog-products";
 import { getBefarCatalogProducts } from "@/lib/befar-catalog-products";
 import {
+  applyRmCatalogEnrichment,
+  getRmCatalogProducts,
+} from "@/lib/rm-catalog-products";
+import {
   applyCarfitCatalogEnrichment,
   getCarfitCatalogProducts,
 } from "@/lib/carfit-catalog-products";
@@ -2419,6 +2423,9 @@ const productRecords: CarsystemProduct[] = [
   // (`npm run befar:sync`). Leo, Befar Plus i Turkuaz su linije brenda Befar.
   // Ručni zapisi niže (`befarPadProducts`) ostaju netaknuti.
   ...getBefarCatalogProducts(),
+  // R-M asortiman sa info.rmpaint.com i rmpaint.com/en-int (`npm run rm:sync`). Postojećih 59
+  // uvezenih zapisa (`rmImportedProducts`) se NE duplira — njih dopunjuje `applyRmCatalogEnrichment`.
+  ...getRmCatalogProducts(),
   ...befarPadProducts,
   ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),
@@ -2470,7 +2477,9 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
       ? applyCarsystemCatalogEnrichment(product)
       : product.brandSlug === "carfit"
         ? applyCarfitCatalogEnrichment(product)
-        : product,
+        : product.brandSlug === "rm"
+          ? applyRmCatalogEnrichment(product)
+          : product,
 );
 
 export function getAllCarsystemProducts() {

@@ -1,0 +1,349 @@
+{
+  "b-2a13": {
+    "sourceHash": "6ef9cc2e907f6b38",
+    "productType": "kit za nanošenje četkom",
+    "subtype": "kit za nanošenje četkom · Advance Series · grubo i fino ispunjavanje",
+    "shortDescription": "Kit iz Advance Series koji se nanosi četkom, za grubo i fino ispunjavanje i za oblikovanje profila i kontura.",
+    "longDescription": "BrushBODY je kit iz Advance Series predviđen za nanošenje četkom. Pokriva i grubo i fino ispunjavanje, pa se istim proizvodom radi ispuna i modelovanje profila i kontura na mestu popravke. Radno vreme je 5 min na 20 °C, a sušenje 30 min na 20 °C.",
+    "purpose": "Ispunjavanje i oblikovanje profila i kontura četkom",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Razređivanje", "value": "0–4 %" },
+      { "label": "Radno vreme", "value": "5 min na 20 °C" },
+      { "label": "Sušenje", "value": "30 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Grubo i fino ispunjavanje nanošenjem četkom",
+      "Modelovanje profila i kontura"
+    ],
+    "benefits": [
+      { "title": "Grubo i fino", "description": "Isti kit pokriva grubo ispunjavanje i finu dopunu mesta popravke." },
+      { "title": "Nanošenje četkom", "description": "Proizvod je predviđen za nanošenje četkom." },
+      { "title": "Oblikovanje profila", "description": "Koristi se za modelovanje profila i kontura na oštećenom delu." }
+    ],
+    "advice": null
+  },
+  "b-2a16": {
+    "sourceHash": "2518cc618fd16132",
+    "productType": "univerzalni kit",
+    "subtype": "univerzalni kit · Advance Series · grubo i fino ispunjavanje",
+    "shortDescription": "Univerzalni kit iz Advance Series za grubo i fino ispunjavanje, brzog sušenja i lak za brušenje.",
+    "longDescription": "PerformBODY je univerzalni kit iz Advance Series koji pokriva i grubo i fino ispunjavanje, pa u radionici pokriva većinu uobičajenih popravki karoserije. Brzo se suši i lako brusi, uz ujednačen kvalitet završne obrade. Radno vreme je 5 min na 20 °C, a sušenje 15 min na 20 °C.",
+    "purpose": "Univerzalno ispunjavanje oštećenja karoserije",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "5 min na 20 °C" },
+      { "label": "Sušenje", "value": "15 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke",
+      "Brušenje posle sušenja"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "Jedan kit pokriva i grubo i fino ispunjavanje." },
+      { "title": "Brzo sušenje", "description": "Sušenje traje 15 min na 20 °C." },
+      { "title": "Lako brušenje", "description": "Lako se brusi, uz ujednačen kvalitet završne obrade." }
+    ],
+    "advice": null
+  },
+  "b-2a16c": {
+    "sourceHash": "7301ba90149ea165",
+    "productType": "univerzalni kit u kartuši",
+    "subtype": "univerzalni kit u kartuši · Advance Series · grubo i fino ispunjavanje",
+    "shortDescription": "Univerzalni kit iz Advance Series u izvedbi sa kartušom, za grubo i fino ispunjavanje oštećenja karoserije.",
+    "longDescription": "PerformBODY u kartuši je univerzalni kit iz Advance Series. Pokriva i grubo i fino ispunjavanje, brzo se suši i lako brusi, uz ujednačen kvalitet završne obrade. Izvedba sa kartušom je namenjena radu sa pištoljem za kartuše i doziranju bez ručnog odmeravanja. Radno vreme je 5 min na 20 °C, a sušenje 15 min na 20 °C.",
+    "purpose": "Univerzalno ispunjavanje karoserije radom iz kartuše",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "5 min na 20 °C" },
+      { "label": "Sušenje", "value": "15 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke",
+      "Brušenje posle sušenja"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "Jedan kit pokriva i grubo i fino ispunjavanje." },
+      { "title": "Izvedba sa kartušom", "description": "Materijal se uzima iz kartuše, bez ručnog odmeravanja." },
+      { "title": "Brzo sušenje", "description": "Sušenje traje 15 min na 20 °C." }
+    ],
+    "advice": null
+  },
+  "b-2a16cl": {
+    "sourceHash": "70446c33643fda2c",
+    "productType": "univerzalni kit u kartuši",
+    "subtype": "univerzalni kit u kartuši · Advance Series · grubo i fino ispunjavanje",
+    "shortDescription": "Univerzalni kit iz Advance Series u izvedbi sa kartušom, za grubo i fino ispunjavanje oštećenja karoserije.",
+    "longDescription": "PerformBODY u kartuši je univerzalni kit iz Advance Series. Pokriva i grubo i fino ispunjavanje, brzo se suši i lako brusi, uz ujednačen kvalitet završne obrade. Izvedba sa kartušom je namenjena radu sa pištoljem za kartuše i doziranju bez ručnog odmeravanja. Radno vreme je 5 min na 20 °C, a sušenje 15 min na 20 °C.",
+    "purpose": "Univerzalno ispunjavanje karoserije radom iz kartuše",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "5 min na 20 °C" },
+      { "label": "Sušenje", "value": "15 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke",
+      "Brušenje posle sušenja"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "Jedan kit pokriva i grubo i fino ispunjavanje." },
+      { "title": "Izvedba sa kartušom", "description": "Materijal se uzima iz kartuše, bez ručnog odmeravanja." },
+      { "title": "Brzo sušenje", "description": "Sušenje traje 15 min na 20 °C." }
+    ],
+    "advice": null
+  },
+  "b-2a26": {
+    "sourceHash": "f86ce5d9d71c6806",
+    "productType": "fini kit",
+    "subtype": "fini kit · Advance Series · izravnavanje pre punila",
+    "shortDescription": "Fini kit iz Advance Series za izravnavanje neravnina pre nanošenja punila i za manja oštećenja u jednom radnom koraku.",
+    "longDescription": "FastBODY je fini kit iz Advance Series. Koristi se za izravnavanje neravnina pre nanošenja punila, a kod manjih oštećenja pokriva popravku u jednom radnom koraku. Radno vreme je 5 min na 20 °C, a sušenje 20–30 min na 20 °C.",
+    "purpose": "Fino izravnavanje neravnina pre nanošenja punila",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "5 min na 20 °C" },
+      { "label": "Sušenje", "value": "20–30 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Izravnavanje neravnina pre nanošenja punila",
+      "Popravka manjih oštećenja u jednom radnom koraku"
+    ],
+    "benefits": [
+      { "title": "Fina dopuna", "description": "Namenjen je izravnavanju neravnina pre nanošenja punila." },
+      { "title": "Jedan radni korak", "description": "Manja oštećenja se rešavaju u jednom radnom koraku." }
+    ],
+    "advice": null
+  },
+  "b-2a36": {
+    "sourceHash": "f7e81b29e610bbfc",
+    "productType": "kit sa staklenim vlaknima",
+    "subtype": "kit sa staklenim vlaknima · Advance Series · fleksibilan",
+    "shortDescription": "Fleksibilan kit iz Advance Series ojačan staklenim vlaknima, namenjen popravci oštećenih GRP delova.",
+    "longDescription": "FlexBODY je kit iz Advance Series ojačan staklenim vlaknima. Ostaje fleksibilan i namenjen je popravci oštećenih delova od plastike ojačane staklenim vlaknima. Radno vreme je 5 min na 20 °C, a sušenje 20–30 min na 20 °C.",
+    "purpose": "Popravka oštećenih delova od plastike sa staklenim vlaknima",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "5 min na 20 °C" },
+      { "label": "Sušenje", "value": "20–30 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Popravka oštećenih GRP delova",
+      "Ispunjavanje mesta koja traže fleksibilan sloj"
+    ],
+    "benefits": [
+      { "title": "Ojačanje staklenim vlaknima", "description": "Kit je ojačan staklenim vlaknima." },
+      { "title": "Fleksibilan sloj", "description": "Osušeni sloj ostaje fleksibilan." }
+    ],
+    "advice": null
+  },
+  "b-2a42": {
+    "sourceHash": "072bff4fc5e0ec56",
+    "productType": "kit za plastiku",
+    "subtype": "kit za plastiku · Advance Series · fleksibilan",
+    "shortDescription": "Fleksibilan kit iz Advance Series namenjen popravci plastičnih delova na vozilu.",
+    "longDescription": "PlasticBODY je fleksibilan kit iz Advance Series namenjen radu na plastičnim delovima. Sloj prati kretanje podloge, pa se koristi tamo gde kruti kit nije pogodan. Radno vreme je 4 min na 20 °C, a sušenje 25–35 min na 20 °C, odnosno 15 min na 60 °C.",
+    "purpose": "Popravka oštećenja na plastičnim delovima",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "4 min na 20 °C" },
+      { "label": "Sušenje", "value": "25–35 min na 20 °C · 15 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Ispunjavanje oštećenja na plastičnim delovima",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Fleksibilan sloj", "description": "Osušeni sloj ostaje fleksibilan." },
+      { "title": "Za plastične delove", "description": "Namenjen je primeni na plastičnim delovima." }
+    ],
+    "advice": null
+  },
+  "b-2a56": {
+    "sourceHash": "0ee793b833cb8dbf",
+    "productType": "kit male gustine",
+    "subtype": "kit male gustine · Advance Series · grubo i fino ispunjavanje",
+    "shortDescription": "Kit male gustine iz Advance Series za grubo i fino ispunjavanje, lak za nanošenje.",
+    "longDescription": "LightBODY je kit male gustine iz Advance Series. Pokriva i grubo i fino ispunjavanje, lako se nanosi i ostavlja ujednačen kvalitet završne obrade, pa je pogodan i za veće ispune gde masa sloja igra ulogu. Radno vreme je 4 min na 20 °C, a sušenje 20–30 min na 20 °C.",
+    "purpose": "Univerzalno ispunjavanje kitom male gustine",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2,5 % mase" },
+      { "label": "Radno vreme", "value": "4 min na 20 °C" },
+      { "label": "Sušenje", "value": "20–30 min na 20 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 220 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke"
+    ],
+    "benefits": [
+      { "title": "Mala gustina", "description": "Formulacija male gustine olakšava rad sa debljim ispunama." },
+      { "title": "Lako nanošenje", "description": "Lako se nanosi, uz ujednačen kvalitet završne obrade." },
+      { "title": "Grubo i fino", "description": "Jedan kit pokriva i grubo i fino ispunjavanje." }
+    ],
+    "advice": null
+  },
+  "b-2a63": {
+    "sourceHash": "e03548778ade86d5",
+    "productType": "sprej kit",
+    "subtype": "sprej kit · Advance Series · fini, za veće površine",
+    "shortDescription": "Fini sprej kit iz Advance Series koji se nanosi pištoljem, za brz rad na većim površinama.",
+    "longDescription": "SprayBODY je fini kit iz Advance Series koji se nanosi pištoljem. Predviđen je za brzo prekrivanje većih površina u sloju od 150–300 μm, tamo gde nanošenje lopaticom traje predugo. Radno vreme je 25 min na 20 °C, a sušenje 3–4 h na 20 °C, odnosno 30 min na 60 °C.",
+    "purpose": "Brzo nanošenje finog kita na veće površine",
+    "facts": [
+      { "label": "Doziranje učvršćivača", "value": "50 ml" },
+      { "label": "Razređivanje", "value": "0–4 %" },
+      { "label": "Radno vreme", "value": "25 min na 20 °C" },
+      { "label": "Debljina sloja", "value": "150–300 μm" },
+      { "label": "Mlaznica", "value": "2,5–3" },
+      { "label": "Sušenje", "value": "3–4 h na 20 °C · 30 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 249 g/l" }
+    ],
+    "applications": [
+      "Nanošenje pištoljem na veće površine",
+      "Fino ispunjavanje u sloju 150–300 μm",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Nanošenje pištoljem", "description": "Nanosi se pištoljem, mlaznicom 2,5–3." },
+      { "title": "Veće površine", "description": "Predviđen je za brzo prekrivanje većih površina." },
+      { "title": "Kontrolisana debljina", "description": "Radni sloj je 150–300 μm." }
+    ],
+    "advice": null
+  },
+  "b-2p13": {
+    "sourceHash": "3861c5a6e1ab97bd",
+    "productType": "sprej kit",
+    "subtype": "sprej kit · Pioneer Series · fini, za veće površine",
+    "shortDescription": "Fini sprej kit iz Pioneer Series, namenjen nanošenju pištoljem i popravci većih površina.",
+    "longDescription": "SPRAY Bodyfill-R je fini kit iz Pioneer Series koji se nanosi pištoljem. Dobro se raspršuje i pogodan je za popravku većih površina, u sloju od 150–300 μm. Radno vreme je 25 min na 20 °C, a sušenje 3–4 h na 20 °C, odnosno 30 min na 60 °C.",
+    "purpose": "Nanošenje finog kita pištoljem na veće površine",
+    "facts": [
+      { "label": "Doziranje učvršćivača", "value": "50 ml" },
+      { "label": "Razređivanje", "value": "0–4 %" },
+      { "label": "Radno vreme", "value": "25 min na 20 °C" },
+      { "label": "Debljina sloja", "value": "150–300 μm" },
+      { "label": "Mlaznica", "value": "2,5–3" },
+      { "label": "Sušenje", "value": "3–4 h na 20 °C · 30 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 249 g/l" }
+    ],
+    "applications": [
+      "Nanošenje pištoljem na veće površine",
+      "Fino ispunjavanje u sloju 150–300 μm",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Dobro raspršivanje", "description": "Formulacija je prilagođena nanošenju pištoljem." },
+      { "title": "Veće površine", "description": "Pogodan je za popravku većih površina." },
+      { "title": "Kontrolisana debljina", "description": "Radni sloj je 150–300 μm." }
+    ],
+    "advice": null
+  },
+  "b-2p21": {
+    "sourceHash": "61a8302884f29897",
+    "productType": "univerzalni kit",
+    "subtype": "univerzalni kit · Pioneer Series · grubo i fino ispunjavanje",
+    "shortDescription": "Univerzalni kit iz Pioneer Series za grubo i fino ispunjavanje, brzog sušenja i lak za brušenje.",
+    "longDescription": "METAL Bodyfill-R je univerzalni kit iz Pioneer Series koji pokriva i grubo i fino ispunjavanje, pa u radionici stoji kao osnovni kit za svakodnevne popravke. Brzo se suši i lako brusi, uz visok kvalitet završne obrade. Radno vreme je 4 min na 20 °C, a sušenje 20–30 min na 20 °C, odnosno 10 min na 60 °C.",
+    "purpose": "Univerzalno ispunjavanje oštećenja karoserije",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "4 min na 20 °C" },
+      { "label": "Sušenje", "value": "20–30 min na 20 °C · 10 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "Jedan kit pokriva i grubo i fino ispunjavanje." },
+      { "title": "Brzo sušenje", "description": "Sušenje traje 20–30 min na 20 °C, odnosno 10 min na 60 °C." },
+      { "title": "Lako brušenje", "description": "Lako se brusi, uz visok kvalitet završne obrade." }
+    ],
+    "advice": null
+  },
+  "b-2p21c": {
+    "sourceHash": "a2e8dd75447e90f3",
+    "productType": "univerzalni kit u kartuši",
+    "subtype": "univerzalni kit u kartuši · Pioneer Series · grubo i fino ispunjavanje",
+    "shortDescription": "Univerzalni kit iz Pioneer Series u izvedbi sa kartušom, za grubo i fino ispunjavanje karoserije.",
+    "longDescription": "METAL Bodyfill-R u kartuši je univerzalni kit iz Pioneer Series. Pokriva i grubo i fino ispunjavanje, brzo se suši i lako brusi, uz visok kvalitet završne obrade. Izvedba sa kartušom je namenjena radu sa pištoljem za kartuše i doziranju bez ručnog odmeravanja. Radno vreme je 4 min na 20 °C, a sušenje 20–30 min na 20 °C, odnosno 10 min na 60 °C.",
+    "purpose": "Univerzalno ispunjavanje karoserije radom iz kartuše",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "4 min na 20 °C" },
+      { "label": "Sušenje", "value": "20–30 min na 20 °C · 10 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Univerzalna primena", "description": "Jedan kit pokriva i grubo i fino ispunjavanje." },
+      { "title": "Izvedba sa kartušom", "description": "Materijal se uzima iz kartuše, bez ručnog odmeravanja." },
+      { "title": "Lako brušenje", "description": "Lako se brusi, uz visok kvalitet završne obrade." }
+    ],
+    "advice": null
+  },
+  "b-2p42": {
+    "sourceHash": "1af2a666def8df41",
+    "productType": "kit za plastiku",
+    "subtype": "kit za plastiku · Pioneer Series · fleksibilan",
+    "shortDescription": "Fleksibilan kit iz Pioneer Series namenjen popravci plastičnih delova na vozilu.",
+    "longDescription": "PLASTIC Bodyfill-R je fleksibilan kit iz Pioneer Series predviđen za rad na plastičnim delovima. Sloj prati kretanje podloge, pa se koristi tamo gde kruti kit nije pogodan. Radno vreme je 4 min na 20 °C, a sušenje 25–35 min na 20 °C, odnosno 15 min na 60 °C.",
+    "purpose": "Popravka oštećenja na plastičnim delovima",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2–3 % mase" },
+      { "label": "Radno vreme", "value": "4 min na 20 °C" },
+      { "label": "Sušenje", "value": "25–35 min na 20 °C · 15 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 180 g/l" }
+    ],
+    "applications": [
+      "Ispunjavanje oštećenja na plastičnim delovima",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Fleksibilan sloj", "description": "Osušeni sloj ostaje fleksibilan." },
+      { "title": "Za plastične delove", "description": "Namenjen je primeni na plastičnim delovima." }
+    ],
+    "advice": null
+  },
+  "b-2p57": {
+    "sourceHash": "b20130c5c5a811f2",
+    "productType": "kit bez stirena",
+    "subtype": "kit bez stirena · Pioneer Series · grubo i fino ispunjavanje",
+    "shortDescription": "Kit bez stirena iz Pioneer Series za grubo i fino ispunjavanje, brzog sušenja i lak za brušenje.",
+    "longDescription": "SF Bodyfill-R je kit bez stirena iz Pioneer Series. Pokriva i grubo i fino ispunjavanje, a formulacija bez stirena je namenjena radionicama koje smanjuju opterećenje radnog prostora. Brzo se suši i lako brusi, uz visok kvalitet završne obrade. Radno vreme je 4 min na 20 °C, a sušenje 20 min na 20 °C, odnosno 5 min na 60 °C.",
+    "purpose": "Univerzalno ispunjavanje kitom bez stirena",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "2 % mase" },
+      { "label": "Radno vreme", "value": "4 min na 20 °C" },
+      { "label": "Sušenje", "value": "20 min na 20 °C · 5 min na 60 °C" },
+      { "label": "VOC", "value": "kategorija IIB.b · granica 250 g/l · sadržaj 249 g/l" }
+    ],
+    "applications": [
+      "Grubo ispunjavanje oštećenja karoserije",
+      "Fina dopuna istog mesta popravke",
+      "Sušenje u komori na 60 °C kada je potrebno skratiti ciklus"
+    ],
+    "benefits": [
+      { "title": "Bez stirena", "description": "Formulacija ne sadrži stiren." },
+      { "title": "Brzo sušenje", "description": "Sušenje traje 20 min na 20 °C, odnosno 5 min na 60 °C." },
+      { "title": "Lako brušenje", "description": "Lako se brusi, uz visok kvalitet završne obrade." }
+    ],
+    "advice": null
+  }
+}

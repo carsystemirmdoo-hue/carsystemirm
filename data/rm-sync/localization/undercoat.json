@@ -1,0 +1,783 @@
+{
+  "p-2a23": {
+    "sourceHash": "5212a6aed2ad038b",
+    "productType": "Epoksidni prajmer-punilo",
+    "subtype": "Epoksidni prajmer-punilo · Advance Series · siva",
+    "shortDescription": "Epoksidna siva podloga iz Advance Series, za brušenje ili za postupak mokro-na-mokro, sa zaštitom od korozije.",
+    "longDescription": "EpoxyPROTECT Grey je epoksidna podloga iz Advance Series namenjena pripremi površine pre nanošenja sloja boje. Prema tehničkom listu koristi se dvojako: kao prajmer-punilo koje se brusi i kao punilo za postupak mokro-na-mokro. Daje dobru zaštitu od korozije i uredan izgled sloja koji sledi.",
+    "purpose": "Epoksidna podloga sa zaštitom od korozije",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "8 h na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–50 μm" },
+      { "label": "Sušenje", "value": "20°C 8 h · 60°C 30 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "459 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Priprema površine pre sloja boje",
+      "Brušeno prajmer-punilo",
+      "Punilo za postupak mokro-na-mokro"
+    ],
+    "benefits": [
+      { "title": "Dvojna primena", "description": "Isti proizvod se koristi kao prajmer-punilo i kao punilo za mokro-na-mokro." },
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje dobru zaštitu od korozije i dobar izgled sloja." }
+    ],
+    "advice": null
+  },
+  "p-2a26": {
+    "sourceHash": "a3421e4cda6f4b4a",
+    "productType": "Reaktivni prajmer za goli metal",
+    "subtype": "Reaktivni prajmer (wash primer) · Advance Series · antikorozivni",
+    "shortDescription": "Reaktivni prajmer iz Advance Series za antikorozivnu zaštitu golih metalnih površina, u tankom sloju i sa brzim sušenjem.",
+    "longDescription": "CorrosionPROTECT je reaktivni prajmer iz Advance Series. Prema tehničkom listu nanosi se na gole metalne površine kao antikorozivna podloga. Radi u vrlo tankom sloju od 10–15 μm i suši se na 20°C za 10 min, pa se priprema podloge nastavlja bez dugog čekanja.",
+    "purpose": "Antikorozivna podloga na golom metalu",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "1:1 + 30%" },
+      { "label": "Obradivost (pot-life)", "value": "48 h na 20°C" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Sušenje", "value": "20°C 10 min" },
+      { "label": "Mlaznica", "value": "1,3–1,6 · 1,3–1,7" },
+      { "label": "VOC (IIB.ciii)", "value": "760 g/l · granica 780 g/l" }
+    ],
+    "applications": [
+      "Antikorozivni sloj na golom metalu",
+      "Priprema pre punila i sloja boje"
+    ],
+    "benefits": [
+      { "title": "Antikorozivna zaštita", "description": "Namenjen upravo zaštiti golih metalnih površina od korozije." }
+    ],
+    "advice": null
+  },
+  "p-2a31": {
+    "sourceHash": "4d09e4539773ceed",
+    "productType": "Brusivo prajmer-punilo, belo",
+    "subtype": "Brusivo prajmer-punilo · Advance Series · bela",
+    "shortDescription": "Belo prajmer-punilo iz Advance Series, lako za rad, sa dobrim raspršivanjem i lakim brušenjem.",
+    "longDescription": "EasyFILLER White je belo prajmer-punilo iz Advance Series namenjeno svakodnevnoj pripremi površine. Prema tehničkom listu izdvaja se lakoćom rada: dobro se raspršuje i lako brusi, što skraćuje vreme pripreme. Nanosi se u sloju 50–70 μm i suši na 20°C za 3 h ili na 60°C za 30 min.",
+    "purpose": "Belo prajmer-punilo za brzu pripremu površine",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 3 h · 60°C 30 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Punjenje i izravnavanje pre sloja boje",
+      "Bela podloga ispod svetlijih nijansi"
+    ],
+    "benefits": [
+      { "title": "Jednostavan rad", "description": "Punilo je predviđeno za lako rukovanje u svakodnevnom radu." },
+      { "title": "Raspršivanje i brušenje", "description": "Dobro raspršivanje i lako brušenje podižu produktivnost pripreme." }
+    ],
+    "advice": null
+  },
+  "p-2a35": {
+    "sourceHash": "ae64ecfdd595268f",
+    "productType": "Brusivo prajmer-punilo, crno",
+    "subtype": "Brusivo prajmer-punilo · Advance Series · crna",
+    "shortDescription": "Crno prajmer-punilo iz Advance Series, lako za rad, sa dobrim raspršivanjem i lakim brušenjem.",
+    "longDescription": "EasyFILLER Black je crno prajmer-punilo iz Advance Series namenjeno pripremi površine ispod tamnijih nijansi. Prema tehničkom listu izdvaja se lakoćom rada: dobro se raspršuje i lako brusi. Nanosi se u sloju 50–70 μm i suši na 20°C za 3 h ili na 60°C za 30 min.",
+    "purpose": "Crno prajmer-punilo za brzu pripremu površine",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 3 h · 60°C 30 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Punjenje i izravnavanje pre sloja boje",
+      "Crna podloga ispod tamnijih nijansi"
+    ],
+    "benefits": [
+      { "title": "Jednostavan rad", "description": "Punilo je predviđeno za lako rukovanje u svakodnevnom radu." },
+      { "title": "Raspršivanje i brušenje", "description": "Dobro raspršivanje i lako brušenje podižu produktivnost pripreme." }
+    ],
+    "advice": null
+  },
+  "p-2a45": {
+    "sourceHash": "aebebeeef0a21e42",
+    "productType": "Brusivo prajmer-punilo, crno",
+    "subtype": "Brusivo prajmer-punilo · Advance Series · crna",
+    "shortDescription": "Crno prajmer-punilo iz Advance Series sa zaštitom od korozije, otpornošću na atmosferske uticaje i dobrim brušenjem.",
+    "longDescription": "PerformFILLER Black je crno prajmer-punilo iz Advance Series za zahtevniju pripremu površine. Prema tehničkom listu radi i kao prajmer-punilo i kao punilo, uz dobru zaštitu od korozije, otpornost na atmosferske uticaje i dobra svojstva brušenja. Nanosi se u sloju 50–70 μm, a sušenje na 60°C traje 20 min.",
+    "purpose": "Crno prajmer-punilo za zahtevniju pripremu",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 3 h · 60°C 20 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Punjenje i izravnavanje pre sloja boje",
+      "Podloga sa zaštitom od korozije"
+    ],
+    "benefits": [
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje dobru zaštitu od korozije." },
+      { "title": "Otpornost na uticaje", "description": "Otporno na atmosferske uticaje, uz dobra svojstva brušenja." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2a70": {
+    "sourceHash": "ebb59eb4086d2c65",
+    "productType": "Prozirno punilo za prijanjanje",
+    "subtype": "Prozirno punilo · Advance Series · promoter prijanjanja",
+    "shortDescription": "Prozirno punilo iz Advance Series koje radi kao promoter prijanjanja, bez brušenja pre sloja boje.",
+    "longDescription": "AdhesionPROMOTER je prozirno punilo iz Advance Series koje se koristi kao promoter prijanjanja. Prema tehničkom listu ne zahteva brušenje pre nanošenja bazne boje ili završnog sloja, a nanošenje je sigurno jer se prekomerni sprej ne vidi u otvorima vrata, budući da je punilo prozirno. Nanosi se u sloju 20–30 μm.",
+    "purpose": "Prozirna podloga koja pojačava prijanjanje",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "3 h na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–30 μm" },
+      { "label": "Sušenje", "value": "20°C 20–30 min" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "525 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Sloj za prijanjanje pre bazne boje",
+      "Sloj za prijanjanje pre završnog sloja"
+    ],
+    "benefits": [
+      { "title": "Bez brušenja", "description": "Pre bazne boje ili završnog sloja nije potrebno brušenje." },
+      { "title": "Prozirno u prelazima", "description": "Pošto je prozirno, prekomerni sprej se ne vidi u otvorima vrata." }
+    ],
+    "advice": null
+  },
+  "p-2a71": {
+    "sourceHash": "5d460c81e444e713",
+    "productType": "Mokro-na-mokro punilo, belo",
+    "subtype": "Mokro-na-mokro punilo · Advance Series · bela",
+    "shortDescription": "Belo punilo iz Advance Series za postupak mokro-na-mokro, bez brušenja i bez čekanja na sušenje.",
+    "longDescription": "QuickFILLER White je belo punilo iz Advance Series za nanošenje mokro-na-mokro sa baznom bojom ili završnim slojem. Prema tehničkom listu ubrzava rad na novim delovima jer nema brušenja ni vremena sušenja, a novi katodno lakirani delovi ne moraju da se bruse. Razlet traje 15–20 min na 20°C, a sloj je 20–35 μm.",
+    "purpose": "Belo punilo za brzu obradu novih delova",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "2 h na 20°C" },
+      { "label": "Razlet", "value": "15–20 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–35 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Postupak mokro-na-mokro sa baznom bojom",
+      "Priprema novih delova bez brušenja"
+    ],
+    "benefits": [
+      { "title": "Bez brušenja", "description": "Novi katodno lakirani delovi ne moraju da se bruse pre nanošenja." },
+      { "title": "Brz proces", "description": "Nema vremena sušenja, pa se rad na novim delovima skraćuje." }
+    ],
+    "advice": null
+  },
+  "p-2a75": {
+    "sourceHash": "9cee63fe4bb589e7",
+    "productType": "Mokro-na-mokro punilo, crno",
+    "subtype": "Mokro-na-mokro punilo · Advance Series · crna",
+    "shortDescription": "Crno punilo iz Advance Series za postupak mokro-na-mokro, bez brušenja i bez čekanja na sušenje.",
+    "longDescription": "QuickFILLER Black je crno punilo iz Advance Series za nanošenje mokro-na-mokro sa baznom bojom ili završnim slojem. Prema tehničkom listu ubrzava rad na novim delovima jer nema brušenja ni vremena sušenja, a novi katodno lakirani delovi ne moraju da se bruse. Razlet traje 15–20 min na 20°C, a sloj je 20–35 μm.",
+    "purpose": "Crno punilo za brzu obradu novih delova",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "2 h na 20°C" },
+      { "label": "Razlet", "value": "15–20 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–35 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Postupak mokro-na-mokro sa baznom bojom",
+      "Priprema novih delova bez brušenja"
+    ],
+    "benefits": [
+      { "title": "Bez brušenja", "description": "Novi katodno lakirani delovi ne moraju da se bruse pre nanošenja." },
+      { "title": "Brz proces", "description": "Nema vremena sušenja, pa se rad na novim delovima skraćuje." }
+    ],
+    "advice": null
+  },
+  "p-2a81": {
+    "sourceHash": "c0d24fb5b62f85cc",
+    "productType": "Mokro-na-mokro punilo, belo",
+    "subtype": "Mokro-na-mokro punilo · Advance Series · bela · kratak razlet",
+    "shortDescription": "Belo punilo iz Advance Series za mokro-na-mokro, sa razletom od samo 5 min na 20°C.",
+    "longDescription": "SpeedFILLER White je belo punilo iz Advance Series za nanošenje mokro-na-mokro sa baznom bojom ili završnim slojem. Prema tehničkom listu namenjeno je vrlo brzoj popravci novih delova: nema brušenja ni vremena sušenja, a razlet traje samo 5 min. Novi katodno lakirani delovi ne moraju da se bruse.",
+    "purpose": "Belo punilo za vrlo brzu popravku novih delova",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Razlet", "value": "5 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–35 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Postupak mokro-na-mokro sa baznom bojom",
+      "Vrlo brza popravka novih delova"
+    ],
+    "benefits": [
+      { "title": "Kratak razlet", "description": "Razlet traje samo 5 min, pa se rad nastavlja bez zastoja." },
+      { "title": "Bez brušenja", "description": "Novi katodno lakirani delovi ne moraju da se bruse pre nanošenja." }
+    ],
+    "advice": null
+  },
+  "p-2a85": {
+    "sourceHash": "22bf0bbd37d4c904",
+    "productType": "Mokro-na-mokro punilo, crno",
+    "subtype": "Mokro-na-mokro punilo · Advance Series · crna · kratak razlet",
+    "shortDescription": "Crno punilo iz Advance Series za mokro-na-mokro, sa razletom od samo 5 min na 20°C.",
+    "longDescription": "SpeedFILLER Black je crno punilo iz Advance Series za nanošenje mokro-na-mokro sa baznom bojom ili završnim slojem. Prema tehničkom listu namenjeno je vrlo brzoj popravci novih delova: nema brušenja ni vremena sušenja, a razlet traje samo 5 min. Novi katodno lakirani delovi ne moraju da se bruse.",
+    "purpose": "Crno punilo za vrlo brzu popravku novih delova",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Razlet", "value": "5 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–35 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Postupak mokro-na-mokro sa baznom bojom",
+      "Vrlo brza popravka novih delova"
+    ],
+    "benefits": [
+      { "title": "Kratak razlet", "description": "Razlet traje samo 5 min, pa se rad nastavlja bez zastoja." },
+      { "title": "Bez brušenja", "description": "Novi katodno lakirani delovi ne moraju da se bruse pre nanošenja." }
+    ],
+    "advice": null
+  },
+  "p-2p16": {
+    "sourceHash": "78db36963e8ef401",
+    "productType": "Antikorozivni prajmer za goli metal",
+    "subtype": "Antikorozivni prajmer · Pioneer Series · eSense · bež",
+    "shortDescription": "Bež prajmer iz Pioneer Series (eSense) za zaštitu golog metala od korozije, u tankom sloju.",
+    "longDescription": "METAL Prim-R Beige je prajmer iz Pioneer Series, iz eSense programa podloga. Prema tehničkom listu daje vrlo dobru zaštitu golog metala od korozije. Radi u tankom sloju 10–15 μm i suši se na 20°C za 10 min, a pripremljena mešavina ostaje obradiva 7 dana na 20°C.",
+    "purpose": "Antikorozivni bež prajmer za goli metal",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "1:1" },
+      { "label": "Obradivost (pot-life)", "value": "7 dana na 20°C" },
+      { "label": "Debljina suvog filma", "value": "10–15 μm" },
+      { "label": "Sušenje", "value": "20°C 10 min" },
+      { "label": "Mlaznica", "value": "1,3–1,6 · 1,3–1,7" },
+      { "label": "VOC (IIB.ciii)", "value": "760 g/l · granica 780 g/l" }
+    ],
+    "applications": [
+      "Antikorozivni sloj na golom metalu",
+      "Priprema pre punila i sloja boje"
+    ],
+    "benefits": [
+      { "title": "Zaštita golog metala", "description": "Namenjen vrlo dobroj zaštiti golog metala od korozije." },
+      { "title": "Duga obradivost", "description": "Pripremljena mešavina ostaje obradiva 7 dana na 20°C." }
+    ],
+    "advice": null
+  },
+  "p-2p21": {
+    "sourceHash": "b88c1e2334b0c360",
+    "productType": "DTM prajmer-punilo, belo",
+    "subtype": "DTM prajmer-punilo · Pioneer Series · eSense · sušenje na vazduhu · bela",
+    "shortDescription": "Belo DTM prajmer-punilo iz Pioneer Series (eSense) koje se suši na vazduhu, sa zaštitom od korozije.",
+    "longDescription": "AIR Purpos-R White je belo prajmer-punilo iz Pioneer Series koje se nanosi direktno na metal (DTM) i suši na vazduhu. Prema tehničkom listu daje zaštitu od korozije i vrlo dobro se brusi. Nanosi se u sloju 50–70 μm, a sušenje je moguće na 20°C za 60 min, na 40°C za 20 min ili na 60°C za 10 min.",
+    "purpose": "Bela DTM podloga sa sušenjem na vazduhu",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 60 min · 40°C 20 min · 60°C 10 min" },
+      { "label": "Mlaznica", "value": "1,4–1,6" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Nanošenje direktno na metal",
+      "Punjenje i izravnavanje pre sloja boje"
+    ],
+    "benefits": [
+      { "title": "Sušenje na vazduhu", "description": "Sloj se suši na vazduhu, pa komora nije nužna za svaki korak." },
+      { "title": "Zaštita i brušenje", "description": "Daje zaštitu od korozije uz vrlo dobra svojstva brušenja." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2p25": {
+    "sourceHash": "7beff9f830ed64d7",
+    "productType": "DTM prajmer-punilo, crno",
+    "subtype": "DTM prajmer-punilo · Pioneer Series · eSense · sušenje na vazduhu · crna",
+    "shortDescription": "Crno DTM prajmer-punilo iz Pioneer Series (eSense) koje se suši na vazduhu, sa zaštitom od korozije.",
+    "longDescription": "AIR Purpos-R Black je crno prajmer-punilo iz Pioneer Series koje se nanosi direktno na metal (DTM) i suši na vazduhu. Prema tehničkom listu daje zaštitu od korozije i vrlo dobro se brusi. Nanosi se u sloju 50–70 μm, a sušenje je moguće na 20°C za 60 min, na 40°C za 20 min ili na 60°C za 10 min.",
+    "purpose": "Crna DTM podloga sa sušenjem na vazduhu",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 60 min · 40°C 20 min · 60°C 10 min" },
+      { "label": "Mlaznica", "value": "1,4–1,6" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Nanošenje direktno na metal",
+      "Punjenje i izravnavanje pre sloja boje"
+    ],
+    "benefits": [
+      { "title": "Sušenje na vazduhu", "description": "Sloj se suši na vazduhu, pa komora nije nužna za svaki korak." },
+      { "title": "Zaštita i brušenje", "description": "Daje zaštitu od korozije uz vrlo dobra svojstva brušenja." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2p33": {
+    "sourceHash": "c9de71273c08a5c9",
+    "productType": "Vodorazredivo punilo, sivo",
+    "subtype": "Jednokomponentno vodorazredivo punilo · Pioneer Series · eSense · siva",
+    "shortDescription": "Sivo jednokomponentno vodorazredivo punilo iz Pioneer Series (eSense) za kozmetičke popravke i kao izolacioni sloj.",
+    "longDescription": "WATER Fill-R Grey je jednokomponentno vodorazredivo punilo iz Pioneer Series. Prema tehničkom listu koristi se za kozmetičke popravke, kao i kao izolacioni sloj (sealer) na TPA podlozi i na osušenom starom sloju boje. Sadržaj isparljivih organskih jedinjenja je 180 g/l, znatno ispod granice od 540 g/l.",
+    "purpose": "Vodorazredivo punilo za kozmetičke popravke",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:10" },
+      { "label": "Obradivost (pot-life)", "value": "7 dana na 20°C" },
+      { "label": "Debljina suvog filma", "value": "40–60 μm" },
+      { "label": "Sušenje", "value": "20°C 2 h · 60°C 30 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "180 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Kozmetičke popravke",
+      "Izolacioni sloj na TPA podlozi",
+      "Izolacioni sloj na osušenom starom sloju boje"
+    ],
+    "benefits": [
+      { "title": "Vodorazredivo punilo", "description": "Jednokomponentno vodorazredivo punilo sa sadržajem VOC od 180 g/l." },
+      { "title": "Duga obradivost", "description": "Pripremljeni materijal ostaje obradiv 7 dana na 20°C." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2p43": {
+    "sourceHash": "59c68a5dd3dcbc2f",
+    "productType": "Prajmer-punilo za plastiku, sivo",
+    "subtype": "Prajmer-punilo za plastiku · Pioneer Series · eSense · siva",
+    "shortDescription": "Sivo prajmer-punilo iz Pioneer Series (eSense) namenjeno plastičnim delovima koji se lakiraju.",
+    "longDescription": "PLASTIC Fill-R Grey je sivo prajmer-punilo iz Pioneer Series predviđeno za plastične delove koji se lakiraju. Prema tehničkom listu nanosi se u sloju 30–40 μm, uz razlet od 20 min na 20°C, a pripremljena mešavina ostaje obradiva 3,5 h.",
+    "purpose": "Siva podloga za plastične delove",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "3,5 h na 20°C" },
+      { "label": "Razlet", "value": "20 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "30–40 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4 · 1,3" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Podloga na plastičnim delovima",
+      "Priprema pre sloja boje na plastici"
+    ],
+    "benefits": [
+      { "title": "Za plastične delove", "description": "Namenjeno plastičnim delovima koji se lakiraju." }
+    ],
+    "advice": null
+  },
+  "p-2p53": {
+    "sourceHash": "8c22c1eddcad6460",
+    "productType": "Brusivo prajmer-punilo, sivo",
+    "subtype": "Brusivo prajmer-punilo · Pioneer Series · eSense · siva · SANDING Fill-R+",
+    "shortDescription": "Sivo prajmer-punilo iz Pioneer Series (eSense) sa vrlo dobrim brušenjem, izgledom sloja i zaštitom od korozije.",
+    "longDescription": "SANDING Fill-R+ Grey je sivo prajmer-punilo iz Pioneer Series koje radi i kao prajmer-punilo i kao punilo. Prema tehničkom listu daje visoku produktivnost zahvaljujući vrlo dobrim svojstvima brušenja i izgledu sloja, uz dobru zaštitu od korozije i otpornost na atmosferske uticaje. Nanosi se u sloju 50–70 μm, a sušenje na 60°C traje 20 min.",
+    "purpose": "Siva podloga za produktivnu pripremu površine",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "4:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "60 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 3 h · 60°C 20 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Punjenje i izravnavanje pre sloja boje",
+      "Podloga sa zaštitom od korozije"
+    ],
+    "benefits": [
+      { "title": "Brušenje i izgled", "description": "Vrlo dobra svojstva brušenja i izgled sloja podižu produktivnost." },
+      { "title": "Zaštita i otpornost", "description": "Dobra zaštita od korozije i otpornost na atmosferske uticaje." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2p61": {
+    "sourceHash": "2d3ea5a9e2bc9439",
+    "productType": "DTM prajmer-punilo, belo",
+    "subtype": "DTM prajmer-punilo · Pioneer Series · eSense · bela",
+    "shortDescription": "Belo prajmer-punilo iz Pioneer Series (eSense) za nanošenje direktno na metal, sa antikorozivnim svojstvima.",
+    "longDescription": "MULTI Purpos-R White je belo prajmer-punilo iz Pioneer Series koje pokriva tri uloge: prajmer, prajmer-punilo i punilo. Prema tehničkom listu nanosi se direktno na metal (DTM) i ima posebna antikorozivna svojstva, uz vrlo dobar kvalitet površine. Sloj je 50–70 μm, a sušenje traje 16 h na 20°C ili 35 min na 60°C.",
+    "purpose": "Bela višenamenska podloga za nanošenje na metal",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "5:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "90 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 16 h · 60°C 35 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Nanošenje direktno na metal",
+      "Prajmer, prajmer-punilo i punilo u jednom proizvodu"
+    ],
+    "benefits": [
+      { "title": "Tri uloge", "description": "Koristi se kao prajmer, kao prajmer-punilo i kao punilo." },
+      { "title": "Antikorozivna svojstva", "description": "Posebna antikorozivna svojstva uz nanošenje direktno na metal." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2p65": {
+    "sourceHash": "71c1adf265f13dac",
+    "productType": "DTM prajmer-punilo, crno",
+    "subtype": "DTM prajmer-punilo · Pioneer Series · eSense · crna",
+    "shortDescription": "Crno prajmer-punilo iz Pioneer Series (eSense) za nanošenje direktno na metal, sa antikorozivnim svojstvima.",
+    "longDescription": "MULTI Purpos-R Black je crno prajmer-punilo iz Pioneer Series koje radi i kao prajmer-punilo i kao punilo. Prema tehničkom listu nanosi se direktno na metal (DTM) i ima posebna antikorozivna svojstva, uz vrlo dobar kvalitet površine. Sloj je 50–70 μm, a sušenje traje 16 h na 20°C ili 35 min na 60°C.",
+    "purpose": "Crna višenamenska podloga za nanošenje na metal",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "5:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "90 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Sušenje", "value": "20°C 16 h · 60°C 35 min" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Nanošenje direktno na metal",
+      "Prajmer-punilo i punilo u jednom proizvodu"
+    ],
+    "benefits": [
+      { "title": "Dvojna primena", "description": "Koristi se kao prajmer-punilo i kao punilo." },
+      { "title": "Antikorozivna svojstva", "description": "Posebna antikorozivna svojstva uz nanošenje direktno na metal." }
+    ],
+    "advice": "Razlet između slojeva do matiranja; pre sušenja se ne ostavlja razlet."
+  },
+  "p-2p71": {
+    "sourceHash": "628b7e6494198628",
+    "productType": "Mokro-na-mokro punilo, belo",
+    "subtype": "Mokro-na-mokro punilo · Pioneer Series · eSense · bela",
+    "shortDescription": "Belo punilo iz Pioneer Series (eSense) za postupak mokro-na-mokro, bez brušenja i bez vremena sušenja.",
+    "longDescription": "WET Fill-R White je belo punilo iz Pioneer Series za nanošenje mokro-na-mokro. Prema tehničkom listu ubrzava popravku novih delova jer nema brušenja ni vremena sušenja, a novi katodno lakirani delovi ne moraju da se bruse. Razlet traje 15–20 min na 20°C, a sloj je 20–35 μm.",
+    "purpose": "Belo punilo za brzu popravku novih delova",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "2 h na 20°C" },
+      { "label": "Razlet", "value": "15–20 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–35 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Postupak mokro-na-mokro",
+      "Priprema novih delova bez brušenja"
+    ],
+    "benefits": [
+      { "title": "Bez brušenja", "description": "Novi katodno lakirani delovi ne moraju da se bruse pre nanošenja." },
+      { "title": "Brza popravka", "description": "Nema vremena sušenja, pa se popravka novih delova skraćuje." }
+    ],
+    "advice": null
+  },
+  "p-2p75": {
+    "sourceHash": "fa9a51feeaebc517",
+    "productType": "Mokro-na-mokro punilo, crno",
+    "subtype": "Mokro-na-mokro punilo · Pioneer Series · eSense · crna",
+    "shortDescription": "Crno punilo iz Pioneer Series (eSense) za postupak mokro-na-mokro, bez brušenja i bez vremena sušenja.",
+    "longDescription": "WET Fill-R Black je crno punilo iz Pioneer Series za nanošenje mokro-na-mokro. Prema tehničkom listu ubrzava popravku novih delova jer nema brušenja ni vremena sušenja, a novi katodno lakirani delovi ne moraju da se bruse. Razlet traje 15–20 min na 20°C, a sloj je 20–35 μm.",
+    "purpose": "Crno punilo za brzu popravku novih delova",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "3:1:1" },
+      { "label": "Obradivost (pot-life)", "value": "2 h na 20°C" },
+      { "label": "Razlet", "value": "15–20 min na 20°C" },
+      { "label": "Debljina suvog filma", "value": "20–35 μm" },
+      { "label": "Mlaznica", "value": "1,3–1,4" },
+      { "label": "VOC (IIB.ci)", "value": "539 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Postupak mokro-na-mokro",
+      "Priprema novih delova bez brušenja"
+    ],
+    "benefits": [
+      { "title": "Bez brušenja", "description": "Novi katodno lakirani delovi ne moraju da se bruse pre nanošenja." },
+      { "title": "Brza popravka", "description": "Nema vremena sušenja, pa se popravka novih delova skraćuje." }
+    ],
+    "advice": null
+  },
+  "p-2p93": {
+    "sourceHash": "6875b1831d519c33",
+    "productType": "UV prajmer-punilo, sivo",
+    "subtype": "UV prajmer-punilo · Pioneer Series · eSense · siva · UV-A sušenje",
+    "shortDescription": "Sivo prajmer-punilo iz Pioneer Series (eSense) koje se suši UV-A svetlom, sa dobrom otpornošću na koroziju.",
+    "longDescription": "UV Fill-R Grey je sivo prajmer-punilo iz Pioneer Series koje se suši UV-A svetlom. Prema tehničkom listu daje dobru otpornost na koroziju i vrlo dobru zatvorenost površine ispod završnog sloja. Nanosi se najviše 80 μm, uz razlet od 20 s između prvog i drugog sloja.",
+    "purpose": "Sivo prajmer-punilo sa UV sušenjem",
+    "facts": [
+      { "label": "Debljina suvog filma", "value": "najviše 80 μm" },
+      { "label": "Razlet", "value": "20 s između prvog i drugog sloja, na 20°C" },
+      { "label": "Mlaznica", "value": "1,1–1,2" },
+      { "label": "VOC (IIB.ci)", "value": "540 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Brza priprema manjih površina uz UV sušenje",
+      "Podloga ispod završnog sloja"
+    ],
+    "benefits": [
+      { "title": "UV sušenje", "description": "Sloj se suši UV-A svetlom, bez čekanja na klasično sušenje." },
+      { "title": "Otpornost na koroziju", "description": "Daje dobru otpornost na koroziju i zatvorenu površinu ispod završnog sloja." }
+    ],
+    "advice": null
+  },
+  "p-5430w": {
+    "sourceHash": "a74cab92174b2885",
+    "productType": "Punilo, belo",
+    "subtype": "Punilo · GRAPHITE HD · bela · može se nijansirati",
+    "shortDescription": "Belo punilo iz programa GRAPHITE HD za autobuse, kabine, sanduke i lakiranje plastike, sa dobrim razlivanjem.",
+    "longDescription": "GHD SURFACER WHITE je belo punilo iz programa GRAPHITE HD, namenjeno autobusima, kabinama pri promeni boje, sanducima i lakiranju plastike. Prema tehničkom listu nanosi se preko R-M CV prajmera i prajmer-punila, dobro prijanja na različite vrste plastike i lepo se razliva, a služi i kao punilo za dvoslojne sisteme boje. Može se nijansirati, a osnovna nijansa odgovara oznaci ~ RAL 9010 / Shade Art GC 90.",
+    "purpose": "Belo punilo za nadgradnje i komercijalna vozila",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:50 + 10–30%" },
+      { "label": "Obradivost (pot-life)", "value": "1,5 h na 20°C" },
+      { "label": "Razlet", "value": "10–15 min između slojeva, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Nijansa", "value": "~ RAL 9010 / Shade Art GC 90" },
+      { "label": "Mlaznica", "value": "1,4–1,6 · 1,7 · 0,28–0,33 · 1–1,1" },
+      { "label": "VOC (IIB.ci)", "value": "456 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Autobusi i kabine pri promeni boje",
+      "Sanduci i nadgradnje",
+      "Lakiranje plastike"
+    ],
+    "benefits": [
+      { "title": "Prijanjanje na plastiku", "description": "Dobro prijanja na različite vrste plastike." },
+      { "title": "Razlivanje i izgled", "description": "Dobro se razliva i daje izražen izgled završnog sloja." },
+      { "title": "Može se nijansirati", "description": "Punilo se nijansira, a osnovna nijansa odgovara oznaci ~ RAL 9010 / Shade Art GC 90." }
+    ],
+    "advice": null
+  },
+  "p-5433": {
+    "sourceHash": "66ef4146d9dd0467",
+    "productType": "Podloga za šasije",
+    "subtype": "Podloga za šasije · GRAPHITE HD · može se nijansirati",
+    "shortDescription": "Podloga iz programa GRAPHITE HD za šasije, građevinsku mehanizaciju i čelične delove, za nanošenje direktno na čelik.",
+    "longDescription": "GHD CHASSISMIX je podloga iz programa GRAPHITE HD namenjena lakiranju šasija, građevinske mehanizacije od čelika, kontejnera i rezervnih delova od čelika i pocinkovanog čelika. Prema tehničkom listu nanosi se direktno na čelik i pogodna je za velike površine. Dobro prekriva profil nastao peskarenjem i poboljšava moć pokrivanja, a preko nje ide završni sloj iz programa GRAPHITE HD.",
+    "purpose": "Podloga za šasije i čelične konstrukcije",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:15 + 15–25%" },
+      { "label": "Obradivost (pot-life)", "value": "1,5 h na 20°C" },
+      { "label": "Razlet", "value": "10–15 min između slojeva, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "60–70 μm" },
+      { "label": "Mlaznica", "value": "1,6–1,8 · 1,7–1,9 · 0,28–0,33 · 1–1,1" },
+      { "label": "VOC (IIB.cii)", "value": "530 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Lakiranje šasija i promena boje šasije",
+      "Građevinska mehanizacija od čelika",
+      "Kontejneri i delovi od pocinkovanog čelika"
+    ],
+    "benefits": [
+      { "title": "Direktno na čelik", "description": "Nanosi se direktno na čelik i pogodna je za velike površine." },
+      { "title": "Prekrivanje profila", "description": "Dobro prekriva profil nastao peskarenjem i poboljšava moć pokrivanja." },
+      { "title": "Može se nijansirati", "description": "Podloga se nijansira i prelakirava završnim slojem iz programa GRAPHITE HD." }
+    ],
+    "advice": null
+  },
+  "p-5520": {
+    "sourceHash": "b272b6190f9511ec",
+    "productType": "Višenamensko prajmer-punilo, belo",
+    "subtype": "Prajmer-punilo · GRAPHITE HD · poliuretansko · bela",
+    "shortDescription": "Belo poliuretansko prajmer-punilo iz programa GRAPHITE HD za sanduke, autobuse, kabine i vatrogasna vozila.",
+    "longDescription": "GHD MULTI PRIMER FILLER CF je belo poliuretansko prajmer-punilo iz programa GRAPHITE HD. Prema tehničkom listu pogodno je za veliki broj podloga, daje izražen izgled i razlivanje završnog sloja i dobru zaštitu od korozije. Može se nijansirati, osnovna nijansa odgovara oznaci ~ RAL 9010 / Shade Art GC 90, a prelakirava se mokro-na-mokro.",
+    "purpose": "Belo višenamensko prajmer-punilo za nadgradnje",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:33 + 10–30%" },
+      { "label": "Obradivost (pot-life)", "value": "1,5 h na 20°C" },
+      { "label": "Razlet", "value": "10–15 min između slojeva, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Nijansa", "value": "~ RAL 9010 / Shade Art GC 90" },
+      { "label": "Mlaznica", "value": "1,4–1,6 · 1,7 · 0,28–0,33 · 1–1,1" },
+      { "label": "VOC (IIB.ci)", "value": "425 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Sanduci i nadgradnje",
+      "Autobusi i kabine",
+      "Vatrogasna vozila"
+    ],
+    "benefits": [
+      { "title": "Široka primena", "description": "Pogodno za veliki broj podloga, kao višenamenska podloga." },
+      { "title": "Izgled i razlivanje", "description": "Daje izražen izgled i dobro razlivanje završnog sloja." },
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje dobru zaštitu od korozije." }
+    ],
+    "advice": "Prelakirava se mokro-na-mokro završnim slojem iz programa GRAPHITE HD."
+  },
+  "p-5540": {
+    "sourceHash": "a16eb00785784398",
+    "productType": "Prajmer-punilo, sivo",
+    "subtype": "Prajmer-punilo · GRAPHITE HD · poliuretansko · siva",
+    "shortDescription": "Sivo poliuretansko prajmer-punilo iz programa GRAPHITE HD sa vrlo dobrom zaštitom od korozije, za velike površine.",
+    "longDescription": "GHD PROTECT PRIMER FILLER je sivo poliuretansko prajmer-punilo iz programa GRAPHITE HD. Prema tehničkom listu pogodno je za veliki broj podloga, daje gladak izgled i razlivanje završnog sloja i vrlo dobru zaštitu od korozije. Može se nanositi mokro-na-mokro ili brusiti, a koristi se i na velikim površinama.",
+    "purpose": "Siva podloga sa vrlo dobrom zaštitom od korozije",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "100:25:25" },
+      { "label": "Obradivost (pot-life)", "value": "1,5 h na 20°C" },
+      { "label": "Razlet", "value": "10–15 min između slojeva, na 20°C" },
+      { "label": "Debljina suvog filma", "value": "50–70 μm" },
+      { "label": "Mlaznica", "value": "1,4–1,6 · 1,7 · 0,28–0,33 · 1–1,1" },
+      { "label": "VOC (IIB.ci)", "value": "488 g/l · granica 540 g/l" }
+    ],
+    "applications": [
+      "Sanduci i nadgradnje",
+      "Građevinska vozila",
+      "Cisterne, silo-vozila i autobusi"
+    ],
+    "benefits": [
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje vrlo dobru zaštitu od korozije." },
+      { "title": "Mokro-na-mokro ili brušenje", "description": "Nanosi se mokro-na-mokro ili se brusi, zavisno od postupka." },
+      { "title": "Velike površine", "description": "Pogodno za veliki broj podloga i za rad na velikim površinama." }
+    ],
+    "advice": "Prelakirava se mokro-na-mokro završnim slojem iz programa GRAPHITE HD."
+  },
+  "pm-2a20": {
+    "sourceHash": "48100b55f8ba6d35",
+    "productType": "Prajmer za plastiku u spreju",
+    "subtype": "Prajmer za plastiku · Advance Series · sprej",
+    "shortDescription": "Prajmer za plastiku iz Advance Series u spreju, za sve plastične delove na automobilu koji se lakiraju.",
+    "longDescription": "PlasticADHESION je prajmer za plastiku iz Advance Series, u obliku spreja. Prema tehničkom listu pogodan je za sve plastične delove na automobilu koji se lakiraju. Razlet traje oko 15 min na 20°C.",
+    "purpose": "Prajmer u spreju za plastične delove",
+    "facts": [
+      { "label": "Razlet", "value": "oko 15 min na 20°C" },
+      { "label": "VOC (IIB.e)", "value": "688 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Priprema plastičnih delova pre sloja boje",
+      "Manje površine i pojedinačni delovi"
+    ],
+    "benefits": [
+      { "title": "Za sve plastike", "description": "Pogodan za sve plastične delove na automobilu koji se lakiraju." }
+    ],
+    "advice": null
+  },
+  "pm-2a32": {
+    "sourceHash": "7cdac33f9ec89826",
+    "productType": "Prajmer u spreju, svetlosivi",
+    "subtype": "Prajmer · Advance Series · sprej · svetlosiva",
+    "shortDescription": "Svetlosivi prajmer iz Advance Series u spreju, za manja probrušena mesta i brzu zaštitu od korozije.",
+    "longDescription": "1K PROTECT Light Grey je svetlosivi prajmer iz Advance Series u obliku spreja. Prema tehničkom listu namenjen je manjim probrušenim mestima, gde omogućava brz postupak i zaštitu od korozije. Sušenje traje 1,5–2 h na 20°C ili 30 min na 60°C.",
+    "purpose": "Svetlosivi prajmer u spreju za manja probrušena mesta",
+    "facts": [
+      { "label": "Razlet", "value": "oko 5 min između slojeva, na 20°C" },
+      { "label": "Sušenje", "value": "20°C 1,5–2 h · 60°C 30 min" },
+      { "label": "VOC (IIB.e)", "value": "743 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Manja probrušena mesta",
+      "Brza zaštita od korozije na pojedinačnim mestima"
+    ],
+    "benefits": [
+      { "title": "Brz postupak", "description": "Sprej omogućava brzu obradu manjih probrušenih mesta." },
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje zaštitu od korozije na obrađenom mestu." }
+    ],
+    "advice": null
+  },
+  "pm-2a34": {
+    "sourceHash": "eaf3b0dc1b659901",
+    "productType": "Prajmer u spreju, tamnosivi",
+    "subtype": "Prajmer · Advance Series · sprej · tamnosiva",
+    "shortDescription": "Tamnosivi prajmer iz Advance Series u spreju, za manja probrušena mesta i brzu zaštitu od korozije.",
+    "longDescription": "1K PROTECT Dark Grey je tamnosivi prajmer iz Advance Series u obliku spreja. Prema tehničkom listu namenjen je manjim probrušenim mestima, gde omogućava brz postupak i zaštitu od korozije. Sušenje traje 1,5–2 h na 20°C ili 30 min na 60°C.",
+    "purpose": "Tamnosivi prajmer u spreju za manja probrušena mesta",
+    "facts": [
+      { "label": "Razlet", "value": "oko 5 min između slojeva, na 20°C" },
+      { "label": "Sušenje", "value": "20°C 1,5–2 h · 60°C 30 min" },
+      { "label": "VOC (IIB.e)", "value": "695 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Manja probrušena mesta",
+      "Brza zaštita od korozije na pojedinačnim mestima"
+    ],
+    "benefits": [
+      { "title": "Brz postupak", "description": "Sprej omogućava brzu obradu manjih probrušenih mesta." },
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje zaštitu od korozije na obrađenom mestu." }
+    ],
+    "advice": null
+  },
+  "pm-2p10": {
+    "sourceHash": "e079a06010b81d57",
+    "productType": "Prajmer za plastiku u spreju",
+    "subtype": "Prajmer za plastiku · Pioneer Series · eSense · sprej",
+    "shortDescription": "Prajmer za plastiku iz Pioneer Series (eSense) u spreju, namenjen plastičnim delovima.",
+    "longDescription": "PLASTIC Prim-R je prajmer iz Pioneer Series u obliku spreja. Prema tehničkom listu namenjen je plastičnim delovima, gde daje vrlo dobar rezultat u pripremi površine pre sloja boje.",
+    "purpose": "Prajmer u spreju za plastične delove",
+    "facts": [
+      { "label": "VOC (IIB.e)", "value": "688 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Priprema plastičnih delova pre sloja boje",
+      "Manje površine i pojedinačni delovi"
+    ],
+    "benefits": [
+      { "title": "Za plastične delove", "description": "Namenjen plastičnim delovima, u praktičnom obliku spreja." }
+    ],
+    "advice": null
+  },
+  "pm-2p12": {
+    "sourceHash": "a5d0948ec32cf968",
+    "productType": "Prajmer-punilo u spreju, svetlosivo",
+    "subtype": "Prajmer-punilo · Pioneer Series · eSense · sprej · svetlosiva",
+    "shortDescription": "Svetlosivo prajmer-punilo iz Pioneer Series (eSense) u spreju, za manja probrušena mesta.",
+    "longDescription": "Fill-R Light Grey je svetlosivo prajmer-punilo iz Pioneer Series u obliku spreja. Prema tehničkom listu namenjeno je manjim probrušenim mestima i brzom nanošenju uz zaštitu od korozije. Sušenje traje 1,5–2 h na 20°C ili 30 min na 60°C.",
+    "purpose": "Svetlosivo prajmer-punilo u spreju za manja mesta",
+    "facts": [
+      { "label": "Razlet", "value": "oko 5 min između slojeva, na 20°C" },
+      { "label": "Sušenje", "value": "20°C 1,5–2 h · 60°C 30 min" },
+      { "label": "VOC (IIB.e)", "value": "743 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Manja probrušena mesta",
+      "Brza zaštita od korozije na pojedinačnim mestima"
+    ],
+    "benefits": [
+      { "title": "Brzo nanošenje", "description": "Sprej omogućava brzu obradu manjih probrušenih mesta." },
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje zaštitu od korozije na obrađenom mestu." }
+    ],
+    "advice": null
+  },
+  "pm-2p14": {
+    "sourceHash": "9a511354494c0428",
+    "productType": "Prajmer-punilo u spreju, tamnosivo",
+    "subtype": "Prajmer-punilo · Pioneer Series · eSense · sprej · tamnosiva",
+    "shortDescription": "Tamnosivo prajmer-punilo iz Pioneer Series (eSense) u spreju, za manja probrušena mesta.",
+    "longDescription": "Fill-R Dark Grey je tamnosivo prajmer-punilo iz Pioneer Series u obliku spreja. Prema tehničkom listu namenjeno je manjim probrušenim mestima i brzom nanošenju uz zaštitu od korozije. Sušenje traje 1,5–2 h na 20°C ili 30 min na 60°C.",
+    "purpose": "Tamnosivo prajmer-punilo u spreju za manja mesta",
+    "facts": [
+      { "label": "Razlet", "value": "oko 5 min između slojeva, na 20°C" },
+      { "label": "Sušenje", "value": "20°C 1,5–2 h · 60°C 30 min" },
+      { "label": "VOC (IIB.e)", "value": "695 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Manja probrušena mesta",
+      "Brza zaštita od korozije na pojedinačnim mestima"
+    ],
+    "benefits": [
+      { "title": "Brzo nanošenje", "description": "Sprej omogućava brzu obradu manjih probrušenih mesta." },
+      { "title": "Zaštita od korozije", "description": "Prema tehničkom listu daje zaštitu od korozije na obrađenom mestu." }
+    ],
+    "advice": null
+  },
+  "pm-2p93": {
+    "sourceHash": "df270b8cb8c59e87",
+    "productType": "UV prajmer-punilo u spreju, sivo",
+    "subtype": "UV prajmer-punilo · Pioneer Series · eSense · sprej · siva",
+    "shortDescription": "Sivo UV prajmer-punilo iz Pioneer Series (eSense) u spreju, sa dobrom otpornošću na koroziju.",
+    "longDescription": "UV Fill-R Grey je sivo UV prajmer-punilo iz Pioneer Series u obliku spreja. Prema tehničkom listu daje dobru otpornost na koroziju i vrlo dobru zatvorenost površine ispod završnog sloja. Između prvog i drugog sloja ostavlja se 20 s razleta na 20°C.",
+    "purpose": "Sivo UV prajmer-punilo u spreju za manje popravke",
+    "facts": [
+      { "label": "Razlet", "value": "20 s između prvog i drugog sloja, na 20°C" },
+      { "label": "VOC (IIB.e)", "value": "655 g/l · granica 840 g/l" }
+    ],
+    "applications": [
+      "Manje popravke uz UV sušenje",
+      "Podloga ispod završnog sloja"
+    ],
+    "benefits": [
+      { "title": "UV sušenje", "description": "Sloj se suši UV svetlom, bez čekanja na klasično sušenje." },
+      { "title": "Otpornost na koroziju", "description": "Daje dobru otpornost na koroziju i zatvorenu površinu ispod završnog sloja." }
+    ],
+    "advice": "Alternativno se nanosi najviše 120 μm, uz 60 s između prvog i drugog sloja i 90 s razleta pre UV sušenja."
+  }
+}

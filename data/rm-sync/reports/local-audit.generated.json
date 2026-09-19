@@ -1,0 +1,2527 @@
+{
+  "summary": {
+    "LOCAL_RM_PRODUCTS": 64,
+    "GENERATED_PRODUCTS": 59,
+    "MANUAL_PRODUCTS": 5,
+    "PLACEHOLDER_SKUS": 5,
+    "EXACT_MATCH": 60,
+    "HIGH_CONFIDENCE_MATCH": 1,
+    "PROBABLE_MATCH": 0,
+    "LEGACY_LOCAL_ONLY": 3,
+    "officialProducts": 219,
+    "officialAlreadyLocal": 60,
+    "officialMissingLocally": 159,
+    "duplicateLocalForOneCode": []
+  },
+  "matches": [
+    {
+      "slug": "2210-onyx-activator",
+      "name": "A 2210 ONYX ACTIVATOR",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2210",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-2210-onyx-activator.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2210"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2210” doslovno u lokalnom izvoru; portal: A 2210 ONYX ACTIVATOR"
+    },
+    {
+      "slug": "2220-agilis-activator",
+      "name": "A 2220 AGILIS ACTIVATOR",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2220",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-2220-agilis-activator.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2220"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2220” doslovno u lokalnom izvoru; portal: A 2220 AGILIS ACTIVATOR"
+    },
+    {
+      "slug": "2520-onyx-easy-blender",
+      "name": "A 2520 ONYX EASY BLENDER",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2520",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-2520-onyx-easy-blender.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2520"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2520” doslovno u lokalnom izvoru; portal: A 2520 ONYX EASY BLENDER"
+    },
+    {
+      "slug": "2530-agilis-blender",
+      "name": "A 2530 AGILIS BLENDER",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2530",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-2530-agilis-blender.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2530"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2530” doslovno u lokalnom izvoru; portal: A 2530 AGILIS BLENDER"
+    },
+    {
+      "slug": "2560-agilis-amplifier",
+      "name": "A 2560 AGILIS AMPLIFIER",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2560",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-2560-agilis-amplifier.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2560"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2560” doslovno u lokalnom izvoru; portal: A 2560 AGILIS AMPLIFIER"
+    },
+    {
+      "slug": "2p15-air-tune-r",
+      "name": "A 2P15 AIR Tune-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2P15",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-2p15-air-tune-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2P15"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2P15” doslovno u lokalnom izvoru; portal: A 2P15 AIR Tune-R"
+    },
+    {
+      "slug": "2p80-texture-tune-r",
+      "name": "A 2P80 TEXTURE Tune-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "A 2P80",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-2p80-texture-tune-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "A 2P80"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „A 2P80” doslovno u lokalnom izvoru; portal: A 2P80 TEXTURE Tune-R"
+    },
+    {
+      "slug": "b-2p93-uv-bodyfill-r",
+      "name": "B 2P93 UV Bodyfill-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "B 2P93",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-b-2p93-uv-bodyfill-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "B 2P93"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „B 2P93” doslovno u lokalnom izvoru; portal: B 2P93 UV Bodyfill-R"
+    },
+    {
+      "slug": "c-2a40-airtop",
+      "name": "C 2A40 AirTOP",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A40",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-c-2a40-airtop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A40"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A40” doslovno u lokalnom izvoru; portal: C 2A40 AirTOP"
+    },
+    {
+      "slug": "c-2a46-ultratop",
+      "name": "C 2A46 UltraTOP",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A46",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a46-ultratop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A46"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A46” doslovno u lokalnom izvoru; portal: C 2A46 UltraTOP"
+    },
+    {
+      "slug": "c-2a54-performtop",
+      "name": "C 2A54 PerformTOP",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A54",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a54-performtop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A54"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A54” doslovno u lokalnom izvoru; portal: C 2A54 PerformTOP"
+    },
+    {
+      "slug": "c-2a57-mixtop",
+      "name": "C 2A57 MixTOP",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A57",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a57-mixtop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A57"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A57” doslovno u lokalnom izvoru; portal: C 2A57 MixTOP"
+    },
+    {
+      "slug": "c-2a63-glosstop",
+      "name": "C 2A63 GlossTOP",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A63",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a63-glosstop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A63"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A63” doslovno u lokalnom izvoru; portal: C 2A63 GlossTOP"
+    },
+    {
+      "slug": "c-2a64-glosstop",
+      "name": "C 2A64 GlossTOP+",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A64",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a64-glosstop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A64"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A64” doslovno u lokalnom izvoru; portal: C 2A64 GlossTOP+"
+    },
+    {
+      "slug": "c-2a93-mattop",
+      "name": "C 2A93 MatTOP+",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A93",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a93-mattop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A93"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A93” doslovno u lokalnom izvoru; portal: C 2A93 MatTOP+"
+    },
+    {
+      "slug": "c-2e10-clear-coat-premixed",
+      "name": "C 2E10 Clear coat, premixed",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2E10",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-c-2e10-clear-coat-premixed.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2E10"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2E10” doslovno u lokalnom izvoru; portal: C 2E10 Clear coat, premixed"
+    },
+    {
+      "slug": "c-2e50-clear-coat",
+      "name": "C 2E50 Clear coat",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2E50",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-c-2e50-clear-coat.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2E50"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2E50” doslovno u lokalnom izvoru; portal: C 2E50 Clear coat"
+    },
+    {
+      "slug": "c-2p30-uv-finish-r",
+      "name": "C 2P30 UV Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P30",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p30-uv-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P30"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P30” doslovno u lokalnom izvoru; portal: C 2P30 UV Finish-R"
+    },
+    {
+      "slug": "c-2p42-race-finish-r",
+      "name": "C 2P42 RACE Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P42",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-c-2p42-race-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P42"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P42” doslovno u lokalnom izvoru; portal: C 2P42 RACE Finish-R"
+    },
+    {
+      "slug": "c-2p45-speed-finish-r",
+      "name": "C 2P45 SPEED Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P45",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p45-speed-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P45"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P45” doslovno u lokalnom izvoru; portal: C 2P45 SPEED Finish-R"
+    },
+    {
+      "slug": "c-2p55-multi-finish-r",
+      "name": "C 2P55 MULTI Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P55",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p55-multi-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P55"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P55” doslovno u lokalnom izvoru; portal: C 2P55 MULTI Finish-R"
+    },
+    {
+      "slug": "c-2p62-bright-finish-r",
+      "name": "C 2P62 BRIGHT Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P62",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p62-bright-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P62"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P62” doslovno u lokalnom izvoru; portal: C 2P62 BRIGHT Finish-R"
+    },
+    {
+      "slug": "c-2p85-power-finish-r",
+      "name": "C 2P85 POWER Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P85",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p85-power-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P85"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P85” doslovno u lokalnom izvoru; portal: C 2P85 POWER Finish-R"
+    },
+    {
+      "slug": "c-2p91-mat-finish-r",
+      "name": "C 2P91 MAT Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P91",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p91-mat-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P91"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P91” doslovno u lokalnom izvoru; portal: C 2P91 MAT Finish-R"
+    },
+    {
+      "slug": "c-2p96-satin-finish-r",
+      "name": "C 2P96 SATIN Finish-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P96",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p96-satin-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P96"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P96” doslovno u lokalnom izvoru; portal: C 2P96 SATIN Finish-R"
+    },
+    {
+      "slug": "c-5450-ghd-clear",
+      "name": "C 5450 GHD CLEAR",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 5450",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/graphite/rm-c-5450-ghd-clear.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 5450"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 5450” doslovno u lokalnom izvoru; portal: C 5450 GHD CLEAR"
+    },
+    {
+      "slug": "c-2p15-easy-finish-r",
+      "name": "EASY C 2P15",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2P15",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-c-2p15-easy-finish-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2P15"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2P15” doslovno u lokalnom izvoru; portal: C 2P15 EASY Finish-R"
+    },
+    {
+      "slug": "ghd-topcoat",
+      "name": "GHD TOPCOAT",
+      "origin": "generated:rm-imported-products",
+      "sku": "GHD TOPCOAT",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/graphite/rm-ghd-topcoat.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "GHD TOPCOAT"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE_SYSTEM"
+      ],
+      "evidence": "zvanična oznaka „GHD TOPCOAT” doslovno u lokalnom izvoru; portal: GHD TOPCOAT"
+    },
+    {
+      "slug": "h-2a14-topcure",
+      "name": "H 2A14 TopCURE",
+      "origin": "generated:rm-imported-products",
+      "sku": "H 2A14",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-h-2a14-topcure.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "H 2A14"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „H 2A14” doslovno u lokalnom izvoru; portal: H 2A14 TopCURE"
+    },
+    {
+      "slug": "h-2e20-hardener",
+      "name": "H 2E20 Hardener",
+      "origin": "generated:rm-imported-products",
+      "sku": "H 2E20",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-h-2e20-hardener.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "H 2E20"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „H 2E20” doslovno u lokalnom izvoru; portal: H 2E20 Hardener"
+    },
+    {
+      "slug": "h-2p05-clear-harden-r",
+      "name": "H 2P05 CLEAR Harden-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "H 2P05",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-h-2p05-clear-harden-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "H 2P05"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „H 2P05” doslovno u lokalnom izvoru; portal: H 2P05 CLEAR Harden-R"
+    },
+    {
+      "slug": "h-2p15-clear-harden-r",
+      "name": "H 2P15 CLEAR Harden-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "H 2P15",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-h-2p15-clear-harden-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "H 2P15"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „H 2P15” doslovno u lokalnom izvoru; portal: H 2P15 CLEAR Harden-R"
+    },
+    {
+      "slug": "h-380-ghd-hardener",
+      "name": "H 380 GHD HARDENER",
+      "origin": "generated:rm-imported-products",
+      "sku": "H 380",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/graphite/rm-h-380-ghd-hardener.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "H 380"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „H 380” doslovno u lokalnom izvoru; portal: H 380 GHD HARDENER"
+    },
+    {
+      "slug": "hb-032-hydromix",
+      "name": "HB 032 HYDROMIX",
+      "origin": "generated:rm-imported-products",
+      "sku": "HB 032",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-hb-032-hydromix.webp",
+      "localDocuments": 1,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "HB 032"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „HB 032” doslovno u lokalnom izvoru; portal: HB 032 HYDROMIX"
+    },
+    {
+      "slug": "hb-036-hydromix-tropical",
+      "name": "HB 036 HYDROMIX TROPICAL",
+      "origin": "generated:rm-imported-products",
+      "sku": "HB 036",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-hb-036-hydromix-tropical.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "HB 036"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „HB 036” doslovno u lokalnom izvoru; portal: HB 036 HYDROMIX TROPICAL"
+    },
+    {
+      "slug": "p-2a41-performfiller-white",
+      "name": "P 2A41 PerformFILLER White",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2A41",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-p-2a41-performfiller-white.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2A41"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2A41” doslovno u lokalnom izvoru; portal: P 2A41 PerformFILLER White"
+    },
+    {
+      "slug": "p-2a61-multiprotect-white",
+      "name": "P 2A61 MultiPROTECT White",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2A61",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-p-2a61-multiprotect-white.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2A61"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2A61” doslovno u lokalnom izvoru; portal: P 2A61 MultiPROTECT White"
+    },
+    {
+      "slug": "p-2a63-multiprotect-grey",
+      "name": "P 2A63 MultiPROTECT Grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2A63",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-p-2a63-multiprotect-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2A63"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2A63” doslovno u lokalnom izvoru; portal: P 2A63 MultiPROTECT Grey"
+    },
+    {
+      "slug": "p-2a65-multiprotect-black",
+      "name": "P 2A65 MultiPROTECT Black",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2A65",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-p-2a65-multiprotect-black.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2A65"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2A65” doslovno u lokalnom izvoru; portal: P 2A65 MultiPROTECT Black"
+    },
+    {
+      "slug": "p-2e23-primer-filler-grey",
+      "name": "P 2E23 Primer filler, grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2E23",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-p-2e23-primer-filler-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2E23"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2E23” doslovno u lokalnom izvoru; portal: P 2E23 Primer filler, grey"
+    },
+    {
+      "slug": "p-2p23-air-purpos-r-grey",
+      "name": "P 2P23 AIR Purpos-R Grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P23",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p23-air-purpos-r-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P23"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P23” doslovno u lokalnom izvoru; portal: P 2P23 AIR Purpos-R Grey"
+    },
+    {
+      "slug": "p-2p51-sanding-fill-r-white",
+      "name": "P 2P51 SANDING Fill-R+ White",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P51",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p51-sanding-fill-r-white.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P51"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P51” doslovno u lokalnom izvoru; portal: P 2P51 SANDING Fill-R+ White"
+    },
+    {
+      "slug": "p-2p55-sanding-fill-r-black",
+      "name": "P 2P55 SANDING Fill-R+ Black",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P55",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p55-sanding-fill-r-black.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P55"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P55” doslovno u lokalnom izvoru; portal: P 2P55 SANDING Fill-R+ Black"
+    },
+    {
+      "slug": "p-2p63-multi-purpos-r-grey",
+      "name": "P 2P63 MULTI Purpos-R Grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P63",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p63-multi-purpos-r-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P63"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P63” doslovno u lokalnom izvoru; portal: P 2P63 MULTI Purpos-R Grey"
+    },
+    {
+      "slug": "p-2p81-race-wet-fill-r-white",
+      "name": "P 2P81 Race WET Fill-R White",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P81",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-p-2p81-race-wet-fill-r-white.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P81"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P81” doslovno u lokalnom izvoru; portal: P 2P81 Race WET Fill-R White"
+    },
+    {
+      "slug": "p-2p85-race-wet-fill-r-black",
+      "name": "P 2P85 Race WET Fill-R Black",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P85",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p85-race-wet-fill-r-black.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P85"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P85” doslovno u lokalnom izvoru; portal: P 2P85 Race WET Fill-R Black"
+    },
+    {
+      "slug": "p-2p92-uv-fill-r-light-grey",
+      "name": "P 2P92 UV Fill-R Light Grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P92",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p92-uv-fill-r-light-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P92"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P92” doslovno u lokalnom izvoru; portal: P 2P92 UV Fill-R Light Grey"
+    },
+    {
+      "slug": "p-2p94-uv-fill-r-dark-grey",
+      "name": "P 2P94 UV Fill-R Dark Grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 2P94",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-p-2p94-uv-fill-r-dark-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 2P94"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 2P94” doslovno u lokalnom izvoru; portal: P 2P94 UV Fill-R Dark Grey"
+    },
+    {
+      "slug": "p-5480-ghd-universal-epoxy",
+      "name": "P 5480 GHD UNIVERSAL EPOXY",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 5480",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/graphite/rm-p-5480-ghd-universal-epoxy.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 5480"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 5480” doslovno u lokalnom izvoru; portal: P 5480 GHD UNIVERSAL EPOXY"
+    },
+    {
+      "slug": "p-5530-ghd-uni-wash",
+      "name": "P 5530 GHD UNI WASH",
+      "origin": "generated:rm-imported-products",
+      "sku": "P 5530",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/graphite/rm-p-5530-ghd-uni-wash.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "P 5530"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „P 5530” doslovno u lokalnom izvoru; portal: P 5530 GHD UNI WASH"
+    },
+    {
+      "slug": "pm-2e32-filler-light-grey",
+      "name": "PM 2E32 Filler, light grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "PM 2E32",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-pm-2e32-filler-light-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "PM 2E32"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „PM 2E32” doslovno u lokalnom izvoru; portal: PM 2E32 Filler, light grey"
+    },
+    {
+      "slug": "pm-2e34-filler-dark-grey",
+      "name": "PM 2E34 Filler, dark grey",
+      "origin": "generated:rm-imported-products",
+      "sku": "PM 2E34",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-pm-2e34-filler-dark-grey.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "PM 2E34"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „PM 2E34” doslovno u lokalnom izvoru; portal: PM 2E34 Filler, dark grey"
+    },
+    {
+      "slug": "c-2a84-protecttop",
+      "name": "ProtectTOP C 2A84",
+      "origin": "generated:rm-imported-products",
+      "sku": "C 2A84",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-c-2a84-protecttop.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "C 2A84"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „C 2A84” doslovno u lokalnom izvoru; portal: C 2A84 ProtectTOP"
+    },
+    {
+      "slug": "r-2a10-airtopthinn",
+      "name": "R 2A10 AirtopTHINN",
+      "origin": "generated:rm-imported-products",
+      "sku": "R 2A10",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/onyx/rm-r-2a10-airtopthinn.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "R 2A10"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „R 2A10” doslovno u lokalnom izvoru; portal: R 2A10 AirtopTHINN"
+    },
+    {
+      "slug": "r-2a14-multithinn",
+      "name": "R 2A14 MultiTHINN",
+      "origin": "generated:rm-imported-products",
+      "sku": "R 2A14",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/advance/rm-r-2a14-multithinn.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "R 2A14"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „R 2A14” doslovno u lokalnom izvoru; portal: R 2A14 MultiTHINN"
+    },
+    {
+      "slug": "r-2e10-thinner-fast",
+      "name": "R 2E10 Thinner, fast",
+      "origin": "generated:rm-imported-products",
+      "sku": "R 2E10",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/element/rm-r-2e10-thinner-fast.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "R 2E10"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „R 2E10” doslovno u lokalnom izvoru; portal: R 2E10 Thinner, fast"
+    },
+    {
+      "slug": "r-2p15-clear-thinn-r",
+      "name": "R 2P15 CLEAR Thinn-R",
+      "origin": "generated:rm-imported-products",
+      "sku": "R 2P15",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-r-2p15-clear-thinn-r.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "R 2P15"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „R 2P15” doslovno u lokalnom izvoru; portal: R 2P15 CLEAR Thinn-R"
+    },
+    {
+      "slug": "r-2p20-under-thinn-r-medium",
+      "name": "R 2P20 UNDER Thinn-R Medium",
+      "origin": "generated:rm-imported-products",
+      "sku": "R 2P20",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/pioneer/rm-r-2p20-under-thinn-r-medium.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "R 2P20"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „R 2P20” doslovno u lokalnom izvoru; portal: R 2P20 UNDER Thinn-R Medium"
+    },
+    {
+      "slug": "ra-050x-agilis-mix",
+      "name": "RA 050X AGILIS MIX",
+      "origin": "generated:rm-imported-products",
+      "sku": "RA 050X",
+      "placeholderSku": false,
+      "image": "/images/brands/rm/products/agilis/rm-ra-050x-agilis-mix.webp",
+      "localDocuments": 2,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "RA 050X"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „RA 050X” doslovno u lokalnom izvoru; portal: RA 050X AGILIS MIX"
+    },
+    {
+      "slug": "rm-diamont-bazna-boja",
+      "name": "R-M DIAMONT bazna boja",
+      "origin": "manual:lib/carsystem-data.ts",
+      "sku": "RM-DIA-BASE",
+      "placeholderSku": true,
+      "image": "/products/rm/rm-diamont-bazna-boja.jpg",
+      "localDocuments": 0,
+      "classification": "HIGH_CONFIDENCE_MATCH",
+      "officialCodes": [
+        "DIAMONT"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE_SYSTEM"
+      ],
+      "evidence": "linija DIAMONT + uloga basecoat-topcoat imaju jedan jedini zvanični SISTEM („DIAMONT”); lokalni zapis nema oznaku"
+    },
+    {
+      "slug": "rm-diamont-bezbojni-lak",
+      "name": "R-M DIAMONT bezbojni lak",
+      "origin": "manual:lib/carsystem-data.ts",
+      "sku": "RM-DIA-CLEAR",
+      "placeholderSku": true,
+      "image": "/images/products/placeholder-product.svg",
+      "localDocuments": 0,
+      "classification": "LEGACY_LOCAL_ONLY",
+      "officialCodes": [],
+      "officialStatus": [],
+      "evidence": "linija DIAMONT postoji, ali nijedan zvanični proizvod te uloge (clearcoat)"
+    },
+    {
+      "slug": "rm-body-filler-white-b-2e11",
+      "name": "R-M Body Filler White B 2E11",
+      "origin": "manual:lib/carsystem-data.ts",
+      "sku": "RM-BF-WHITE-B-2E11",
+      "placeholderSku": true,
+      "image": "/products/rm/rm-body-filler-white-b-2e11.jpg",
+      "localDocuments": 0,
+      "classification": "EXACT_MATCH",
+      "officialCodes": [
+        "B 2E11"
+      ],
+      "officialStatus": [
+        "CURRENT_ACTIVE"
+      ],
+      "evidence": "zvanična oznaka „B 2E11” doslovno u lokalnom izvoru; portal: B 2E11 Body filler, white"
+    },
+    {
+      "slug": "rm-pasta-190-1l",
+      "name": "R-M Pasta 190 1 L",
+      "origin": "manual:lib/carsystem-data.ts",
+      "sku": "RM-PASTA-190-1L",
+      "placeholderSku": true,
+      "image": "/products/rm/rm-pasta-190-1l.jpg",
+      "localDocuments": 0,
+      "classification": "LEGACY_LOCAL_ONLY",
+      "officialCodes": [],
+      "officialStatus": [],
+      "evidence": "bez oznake i bez linije; nema zvaničnog proizvoda tog naziva"
+    },
+    {
+      "slug": "rm-pasta-190-5l",
+      "name": "R-M Pasta 190 5 L",
+      "origin": "manual:lib/carsystem-data.ts",
+      "sku": "RM-PASTA-190-5L",
+      "placeholderSku": true,
+      "image": "/products/rm/rm-pasta-190-5l.jpg",
+      "localDocuments": 0,
+      "classification": "LEGACY_LOCAL_ONLY",
+      "officialCodes": [],
+      "officialStatus": [],
+      "evidence": "bez oznake i bez linije; nema zvaničnog proizvoda tog naziva"
+    }
+  ],
+  "officialMissingLocally": [
+    {
+      "code": "A 1510",
+      "name": "A 1510 DIAMONT BLENDER",
+      "kind": "component",
+      "role": "additive",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2010",
+      "name": "A 2010 BRIL 852",
+      "kind": "component",
+      "role": "additive",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2530X",
+      "name": "A 2530X AGILIS BLENDER",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2540",
+      "name": "A 2540 AGILIS BLENDER X-TREME",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "A 2610",
+      "name": "A 2610 ONYX INTERIOR",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2810",
+      "name": "A 2810 HYDROPURE",
+      "kind": "component",
+      "role": "additive",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2A14",
+      "name": "A 2A14 SpeedADD",
+      "kind": "component",
+      "role": "additive",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2A44",
+      "name": "A 2A44 FlexADD",
+      "kind": "component",
+      "role": "additive",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2A45",
+      "name": "A 2A45 PlasticADD",
+      "kind": "component",
+      "role": "additive",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2A54",
+      "name": "A 2A54 BlendingADD",
+      "kind": "component",
+      "role": "additive",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2A84",
+      "name": "A 2A84 TextureADD",
+      "kind": "component",
+      "role": "additive",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2P05",
+      "name": "A 2P05 FLEX Tune-R",
+      "kind": "component",
+      "role": "additive",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2P17",
+      "name": "A 2P17 FAST Tune-R",
+      "kind": "component",
+      "role": "additive",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2P30",
+      "name": "A 2P30 UV BLENDING Thinn-R",
+      "kind": "component",
+      "role": "additive",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2P35",
+      "name": "A 2P35 BLENDING Thinn-R",
+      "kind": "component",
+      "role": "additive",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2P40",
+      "name": "A 2P40 PLASTIC Tune-R",
+      "kind": "component",
+      "role": "additive",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2RM9",
+      "name": "A 2RM9 MATTING AGENT",
+      "kind": "component",
+      "role": "additive",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 5200",
+      "name": "A 5200 GHD DECO A",
+      "kind": "component",
+      "role": "additive",
+      "series": "GRAPHITE HD",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 5480",
+      "name": "A 5480 GHD ADDITIVE for UNIVERSAL EP",
+      "kind": "component",
+      "role": "additive",
+      "series": "GRAPHITE HD",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 5700",
+      "name": "A 5700 GHD TINTING PASTE",
+      "kind": "component",
+      "role": "additive",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "AGILIS",
+      "name": "AGILIS",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "AGILIS eSense",
+      "name": "AGILIS eSense",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "AGILIS eSense X-TREME",
+      "name": "AGILIS eSense X-TREME",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "AGILIS X-TREME",
+      "name": "AGILIS X-TREME",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "AM 2A54",
+      "name": "AM 2A54 BlendingADD",
+      "kind": "component",
+      "role": "additive",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "AM 2P35",
+      "name": "AM 2P35 BLENDING Thinn-R",
+      "kind": "component",
+      "role": "additive",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A13",
+      "name": "B 2A13 BrushBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A16",
+      "name": "B 2A16 PerformBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A16C",
+      "name": "B 2A16C PerformBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A16CL",
+      "name": "B 2A16CL PerformBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A26",
+      "name": "B 2A26 FastBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A36",
+      "name": "B 2A36 FlexBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A42",
+      "name": "B 2A42 PlasticBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A56",
+      "name": "B 2A56 LightBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2A63",
+      "name": "B 2A63 SprayBODY",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2P13",
+      "name": "B 2P13 SPRAY Bodyfill-R",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2P21",
+      "name": "B 2P21 METAL Bodyfill-R",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2P21C",
+      "name": "B 2P21C METAL Bodyfill-R",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2P42",
+      "name": "B 2P42 PLASTIC Bodyfill-R",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "B 2P57",
+      "name": "B 2P57 SF Bodyfill-R",
+      "kind": "product",
+      "role": "bodyfiller",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "BC 020",
+      "name": "BC 020 THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "BC 030",
+      "name": "BC 030 THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "BC 040",
+      "name": "BC 040 THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "C 2A44",
+      "name": "C 2A44 FastTOP",
+      "kind": "product",
+      "role": "clearcoat",
+      "series": "Advance Series",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "C 2A95",
+      "name": "C 2A95 MatTOP",
+      "kind": "product",
+      "role": "clearcoat",
+      "series": "Advance Series",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "C 2P52",
+      "name": "C 2P52 EASY AIR Finish-R",
+      "kind": "product",
+      "role": "clearcoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "C 2P65",
+      "name": "C 2P65 INTENSE Finish-R",
+      "kind": "product",
+      "role": "clearcoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "C 2RM2",
+      "name": "C 2RM2 WHEEL CLEAR COAT",
+      "kind": "product",
+      "role": "clearcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "D 121",
+      "name": "D 121 ULTRA FLASH FLAKE DIAMOND",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "D 403",
+      "name": "D 403 DIAMONT JET BLACK",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "DB 403",
+      "name": "DB 403 ONYX HD Deep Black",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "DIAMONT",
+      "name": "DIAMONT",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "DIAMONT var CV",
+      "name": "DIAMONT",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "GHD CV 12",
+      "name": "GHD CV 12",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "GHD CV 40M",
+      "name": "GHD CV 40M",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "GV 100",
+      "name": "GV 100 GHD THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "GV 200",
+      "name": "GV 200 GHD THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "GV 300",
+      "name": "GV 300 GHD THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "GV 400",
+      "name": "GV 400 GHD THINNER",
+      "kind": "component",
+      "role": "thinner",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A20",
+      "name": "H 2A20 AirtopCure",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A23",
+      "name": "H 2A23 ProtectCURE Epoxy",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A24",
+      "name": "H 2A24 TopCURE",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A26",
+      "name": "H 2A26 ProtectCURE Wash",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A30",
+      "name": "H 2A30 FillCURE",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A31",
+      "name": "H 2A31 FillCURE Slow",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A34",
+      "name": "H 2A34 TopCURE",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A60",
+      "name": "H 2A60 ProtectCURE Multi",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A80",
+      "name": "H 2A80 FillCURE Plus",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A81",
+      "name": "H 2A81 FillCURE Plus slow",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2A94",
+      "name": "H 2A94 MatCURE",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2E23",
+      "name": "H 2E23 Filler hardener",
+      "kind": "component",
+      "role": "hardener",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P16",
+      "name": "H 2P16 METAL Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P20",
+      "name": "H 2P20 AIR Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P25",
+      "name": "H 2P25 CLEAR Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P35",
+      "name": "H 2P35 CLEAR Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P60",
+      "name": "H 2P60 MULTI Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P80",
+      "name": "H 2P80 FILLER Harden-R Plus",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P81",
+      "name": "H 2P81 FILLER Harden-R Plus slow",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P84",
+      "name": "H 2P84 FILLER Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P95",
+      "name": "H 2P95 MATSHADE Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2P96",
+      "name": "H 2P96 MATSHADE Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": "Pioneer Series",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 2RM1",
+      "name": "H 2RM1 BODY Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2RM1C",
+      "name": "H 2RM1C BODY Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2RM1CL",
+      "name": "H 2RM1CL BODY Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2RM2",
+      "name": "H 2RM2 WHEEL CLEAR COAT, HARDENER",
+      "kind": "component",
+      "role": "hardener",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 2RM3",
+      "name": "H 2RM3 SPRAY BODY Harden-R",
+      "kind": "component",
+      "role": "hardener",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 340",
+      "name": "H 340 GHD PROTECT FILLER HARDENER",
+      "kind": "component",
+      "role": "hardener",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 5430",
+      "name": "H 5430 GHD SLOW ACTIVATOR",
+      "kind": "component",
+      "role": "hardener",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 5480",
+      "name": "H 5480 GHD UNIVERSAL EP HARDENER",
+      "kind": "component",
+      "role": "hardener",
+      "series": "GRAPHITE HD",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "H 700",
+      "name": "H 700 GHD HARDENER",
+      "kind": "component",
+      "role": "hardener",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 750",
+      "name": "H 750 GHD HARDENER",
+      "kind": "component",
+      "role": "hardener",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "H 770",
+      "name": "H 770 GHD HARDENER",
+      "kind": "component",
+      "role": "hardener",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "HB 002 var CV",
+      "name": "HB 002 ONYX HD",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "HB 015",
+      "name": "HB 015 AGILIS Minor Repair",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "HB 034",
+      "name": "HB 034 HYDROMIX SLOW",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "HB 10S",
+      "name": "HB 10S Gleam Silver ONYX HD",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "A 2525",
+      "name": "ONYX BLENDER PLUS",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "ONYX HD",
+      "name": "ONYX HD",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "ONYX HD TROPICAL",
+      "name": "ONYX HD TROPICAL",
+      "kind": "system",
+      "role": "basecoat-topcoat",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A23",
+      "name": "P 2A23 EpoxyPROTECT Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A26",
+      "name": "P 2A26 CorrosionPROTECT",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A31",
+      "name": "P 2A31 EasyFILLER White",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A35",
+      "name": "P 2A35 EasyFILLER Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A45",
+      "name": "P 2A45 PerformFILLER Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A70",
+      "name": "P 2A70 AdhesionPROMOTER",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A71",
+      "name": "P 2A71 QuickFILLER White",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A75",
+      "name": "P 2A75 QuickFILLER Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A81",
+      "name": "P 2A81 SpeedFILLER White",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "P 2A85",
+      "name": "P 2A85 SpeedFILLER Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P16",
+      "name": "P 2P16 METAL Prim-R Beige",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P21",
+      "name": "P 2P21 AIR Purpos-R White",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P25",
+      "name": "P 2P25 AIR Purpos-R Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P33",
+      "name": "P 2P33 WATER Fill-R Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P43",
+      "name": "P 2P43 PLASTIC Fill-R Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P53",
+      "name": "P 2P53 SANDING Fill-R+ Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P61",
+      "name": "P 2P61 MULTI Purpos-R White",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P65",
+      "name": "P 2P65 MULTI Purpos-R Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P71",
+      "name": "P 2P71 WET Fill-R White",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P75",
+      "name": "P 2P75 WET Fill-R Black",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 2P93",
+      "name": "P 2P93 UV Fill-R Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 5430W",
+      "name": "P 5430W GHD SURFACER WHITE",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "GRAPHITE HD",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "P 5433",
+      "name": "P 5433 GHD CHASSISMIX",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "P 5520",
+      "name": "P 5520 GHD MULTI PRIMER FILLER CF",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "GRAPHITE HD",
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "P 5540",
+      "name": "P 5540 GHD PROTECT PRIMER FILLER",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "GRAPHITE HD",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 1A05",
+      "name": "PK 1A05 MetalPREP",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 1A15",
+      "name": "PK 1A15 UndercoatPREP",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 1P10",
+      "name": "PK 1P10 SILICONE Remov-R",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2A15",
+      "name": "PK 2A15 Undercoat HydroPREP",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2A25",
+      "name": "PK 2A25 Topcoat HydroPREP",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2A35",
+      "name": "PK 2A35 PlasticPREP",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2P10",
+      "name": "PK 2P10 MULTI Clean-R",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2P20",
+      "name": "PK 2P20 PRE Clean-R",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2P40",
+      "name": "PK 2P40 PLASTIC Clean-R",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PK 2P50",
+      "name": "PK 2P50 PRO Prep-R",
+      "kind": "product",
+      "role": "cleaner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2A20",
+      "name": "PM 2A20 PlasticADHESION",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2A32",
+      "name": "PM 2A32 1K PROTECT Light Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2A34",
+      "name": "PM 2A34 1K PROTECT Dark Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2P10",
+      "name": "PM 2P10 PLASTIC Prim-R",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2P12",
+      "name": "PM 2P12 Fill-R Light Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2P14",
+      "name": "PM 2P14 Fill-R Dark Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "PM 2P93",
+      "name": "PM 2P93 UV Fill-R Grey",
+      "kind": "product",
+      "role": "undercoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2A20",
+      "name": "R 2A20 AirtopTHINN",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2A24",
+      "name": "R 2A24 MultiTHINN",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2A34",
+      "name": "R 2A34 MultiTHINN",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2E20",
+      "name": "R 2E20 Thinner, medium",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2E30",
+      "name": "R 2E30 Thinner, slow",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2P25",
+      "name": "R 2P25 CLEAR Thinn-R",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2P30",
+      "name": "R 2P30 UV Thinn-R",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2P35",
+      "name": "R 2P35 CLEAR Thinn-R",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "R 2P45",
+      "name": "R 2P45 CLEAR Thinn-R",
+      "kind": "component",
+      "role": "thinner",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "RA 040",
+      "name": "RA 040 AGILIS MIX",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": false,
+      "hasTds": true
+    },
+    {
+      "code": "RA 050",
+      "name": "RA 050 AGILIS MIX",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "RA 220",
+      "name": "RA 220 AGILIS INTERIOR MIX",
+      "kind": "component",
+      "role": "thinner",
+      "series": null,
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "SC T2A203",
+      "name": "SC T2A203 Pure black",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "SC T2A204",
+      "name": "SC T2A204 Mat black",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "SC T2P203",
+      "name": "SC T2P203 Pure black",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "SC T2P204",
+      "name": "SC T2P204 Mat black",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "T 2A55",
+      "name": "T 2A55 TopcoatMIX",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "Advance Series",
+      "hasImage": true,
+      "hasTds": true
+    },
+    {
+      "code": "T 2P55",
+      "name": "T 2P55 TOPCOAT Mix-R",
+      "kind": "product",
+      "role": "basecoat-topcoat",
+      "series": "Pioneer Series",
+      "hasImage": true,
+      "hasTds": true
+    }
+  ]
+}

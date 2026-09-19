@@ -150,7 +150,14 @@ function productCodes(product: CarsystemProduct) {
   const codes = [
     ...(product.detail?.variants?.content.rows.map((row) => row.id) ?? []),
     ...(product.legacyManufacturerCodes ?? []),
-  ].filter((code) => code && code !== product.sku);
+    /*
+     * Šifra proizvođača kada se razlikuje od `sku`. Zapisi uvezeni pre nego što je
+     * zvanična šifra bila poznata nose interni `sku` („RM-DIA-BASE”), a pravu oznaku
+     * („DIAMONT”) tek u `manufacturerCode` — bez ovoga upit po zvaničnoj šifri ne bi
+     * pogađao tačan zapis nego bilo koji koji je pominje u nazivu.
+     */
+    product.manufacturerCode,
+  ].filter((code): code is string => Boolean(code) && code !== product.sku);
   return [...new Set(codes)];
 }
 

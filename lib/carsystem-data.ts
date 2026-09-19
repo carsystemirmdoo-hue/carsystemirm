@@ -373,9 +373,12 @@ export const brands: CarsystemBrand[] = [
     programSlugs: ["boje-i-lakovi", "priprema-povrsine", "poliranje"],
     catalogOrder: 1,
     presentation: {
-      accentColor: "#E31822",
+      // R-M crvena po zvaničnom sajtu: rmpaint.com CSS `rgba(227,0,15)` /
+      // `#e3000f` (2026-09-10). Logotip (rm.svg) je srebrni gradijent bez
+      // crvene; ranija vrednost #E31822 nije imala izvor.
+      accentColor: "#E3000F",
       accentContrastColor: "#FAFAFA",
-      accentOnDarkColor: "#E31822",
+      accentOnDarkColor: "#E3000F",
       accentOnDarkContrastColor: "#FAFAFA",
       heroKicker: "R-M refinish program",
       productsCtaLabel: "Pogledajte R-M proizvode",
@@ -1661,8 +1664,8 @@ const productRecords: CarsystemProduct[] = [
     slug: "rm-pasta-190-1l",
     name: "R-M Pasta 190 1 L",
     brandSlug: "rm",
-    programSlug: "poliranje",
-    phaseSlug: "poliranje",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
     shortDescription: "Pasta za poliranje u pakovanju 1 L za završnu obradu laka.",
     longDescription:
       "R-M Pasta 190 u pakovanju 1 L je prikazana kao profesionalna pasta za korekciju i završnu obradu nakon lakiranja, sa upitom za dostupnost i prateću dokumentaciju.",
@@ -1673,7 +1676,11 @@ const productRecords: CarsystemProduct[] = [
     rmMetadata: {
       system: null,
       series: null,
-      category: "polishing-compound",
+      // Identitet po šifri (2026-09-11): 190 = DIAMONT BC 190 „Dense white"
+      // toner/mešna baza (carross.eu, ds-color.com), fotografija nosi BC 190.
+      // Kategorija „pasta za poliranje" je bila pogrešna; naziv artikla je
+      // ostavljen dok vlasnik ne potvrdi javni naziv.
+      category: "basecoat",
       technology: null,
       finish: null,
     },
@@ -1693,8 +1700,8 @@ const productRecords: CarsystemProduct[] = [
     slug: "rm-pasta-190-5l",
     name: "R-M Pasta 190 5 L",
     brandSlug: "rm",
-    programSlug: "poliranje",
-    phaseSlug: "poliranje",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
     shortDescription: "Radioničko pakovanje paste za poliranje i završnu obradu laka.",
     longDescription:
       "R-M Pasta 190 u pakovanju 5 L namenjena je radionicama koje traže veće pakovanje za kontinuiran rad na korekciji i finalnom sjaju.",
@@ -1705,7 +1712,12 @@ const productRecords: CarsystemProduct[] = [
     rmMetadata: {
       system: null,
       series: null,
-      category: "polishing-compound",
+      // Identitet po šifri (2026-09-15): naziv i šifra nose 190 (DIAMONT BC 190
+      // „Dense white"), ali FOTOGRAFIJA nosi BC 605 (BASF „Yellow Oxide" / EU
+      // „Opaque yellow"). Oba su DIAMONT mešne baze (ne paste za poliranje),
+      // pa je taksonomija basecoat; nijansa ostaje blokirana dok vlasnik ne
+      // potvrdi koji artikal je 5 L zaista.
+      category: "basecoat",
       technology: null,
       finish: null,
     },

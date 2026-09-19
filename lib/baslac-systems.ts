@@ -15,6 +15,21 @@
  * „Dostupnost se potvrđuje".
  */
 
+/**
+ * Swatch provera (2026-09-11): Line 45 upoređena sa zvaničnim
+ * „baslac Tinting Chart basecoat 45" (BASF Coatings, 09/2019, PDF sa
+ * virtualtry.tech/baslac_emea). Za 43 tona hue-familija piktograma grupe boje
+ * odgovara našem swatch-u; 10 tonova je zamenjeno bojom grupe iz chart-a
+ * (efekat/biserni tonovi čiji je naziv sugerisao drugu boju); 13 tonova nije u
+ * chart-u iz 2019. Line 35 upoređena sa „baslac Tinting Chart basecoat 35"
+ * (2024, mirror carus.lt): 42 verifikovana, 11 zamenjeno bojom grupe piktograma
+ * (gornja polovina), 1 nije u chart-u.
+ * Line 30 upoređena sa „baslac Tinting Chart topcoat 30" (mirror
+ * rsbautoandindustrial.co.za, 2022): 16 verifikovanih, 3 zamenjena grupom boje.
+ * Spisak po kodu:
+ * `BASLAC_SWATCH_VERIFICATION` u `lib/productNamedColors.mjs`.
+ */
+
 /** Status kod proizvođača. */
 export type BaslacProductionStatus =
   | "ACTIVE_CONFIRMED"
@@ -111,7 +126,7 @@ export const baslacLine35Bases: BaslacBase[] = [
   base("line-35", "35-M1170", "Yellow shine", 0.5, "pearl", "#eccf5c", { supplierArticle: "50445585" }),
   base("line-35", "35-M1220", "Orange light", 0.5, "solid", "#e4894a", { supplierArticle: "53387790" }),
   base("line-35", "35-M1230", "Orange Transparent", 0.5, "transparent", "#d2762a", { supplierArticle: "50744127" }),
-  base("line-35", "35-M1310", "Red transparent", 0.5, "transparent", "#b32330", { supplierArticle: "53389698" }),
+  base("line-35", "35-M1310", "Red transparent", 0.5, "transparent", "#D37E41", { supplierArticle: "53389698" }),
   base("line-35", "35-M1320", "Red", 0.5, "solid", "#b81f28", { supplierArticle: "53389910" }),
   base("line-35", "35-M1330", "Red Orange", 0.5, "solid", "#c8452a", { supplierArticle: "53389592" }),
   base("line-35", "35-M1340", "Red bright", 0.5, "solid", "#cf2b32", { supplierArticle: "53390069" }),
@@ -119,7 +134,7 @@ export const baslacLine35Bases: BaslacBase[] = [
   base("line-35", "35-M1360", "Red light", 0.5, "solid", "#d4555c", { supplierArticle: "53390175" }),
   base("line-35", "35-M1370", "Red Blue", 0.5, "solid", "#a02744", { supplierArticle: "53402895" }),
   base("line-35", "35-M1390", "Pure Red", 0.5, "solid", "#c11a22", { supplierArticle: "50654257" }),
-  base("line-35", "35-M1411", "Bluish violett", 1, "solid", "#5b3f8f", { supplierArticle: "50352431" }),
+  base("line-35", "35-M1411", "Bluish violett", 1, "solid", "#772D6A", { supplierArticle: "50352431" }),
   base("line-35", "35-M1420", "Purple Red", 1, "solid", "#7d2b56", { supplierArticle: "53222800" }),
   base("line-35", "35-M1430", "Red Purple", 1, "solid", "#94285f", { supplierArticle: "53222588" }),
   base("line-35", "35-M1511", "Blue", 1, "solid", "#1f4f9c", { supplierArticle: "52335846" }),
@@ -137,8 +152,8 @@ export const baslacLine35Bases: BaslacBase[] = [
     productionStatus: "PHASE_OUT",
     statusSource: "baslac.de: Auslaufartikel",
   }),
-  base("line-35", "35-M1910", "Black Yellow", 3.5, "solid", "#4a4326", { supplierArticle: "53223648" }),
-  base("line-35", "35-M1920", "Black Blue", 1, "solid", "#26303f", { supplierArticle: "53223754" }),
+  base("line-35", "35-M1910", "Black Yellow", 3.5, "solid", "#0A0B09", { supplierArticle: "53223648" }),
+  base("line-35", "35-M1920", "Black Blue", 1, "solid", "#121211", { supplierArticle: "53223754" }),
   base("line-35", "35-M1990", "Black Graphite", 0.5, "solid", "#2b2d30", { supplierArticle: "53404485" }),
   base("line-35", "35-M211", "Silver Alu fine extra", 0.5, "metallic", "#c3c7cb", { supplierArticle: "53404697" }),
   base("line-35", "35-M212", "Silver Alu fine", 3.5, "metallic", "#bcc0c5", { supplierArticle: "53224125" }),
@@ -155,8 +170,8 @@ export const baslacLine35Bases: BaslacBase[] = [
   base("line-35", "35-M218", "Silver Dollar fine", 1, "metallic", "#c1c6cc", { supplierArticle: "50445765" }),
   base("line-35", "35-M300", "Fine Pearl White", 0.5, "pearl", "#eceef0", { supplierArticle: "50345493" }),
   base("line-35", "35-M302", "Pearl White coarse", 1, "pearl", "#e5e8eb", { supplierArticle: "53224867" }),
-  base("line-35", "35-M311", "Pearl Yellow", 1, "pearl", "#ded09a", { supplierArticle: "50487095" }),
-  base("line-35", "35-M312", "Pearl Green Red", 0.5, "pearl", "#9fb59a", { supplierArticle: "53434960" }),
+  base("line-35", "35-M311", "Pearl Yellow", 1, "pearl", "#FCF9C7", { supplierArticle: "50487095" }),
+  base("line-35", "35-M312", "Pearl Green Red", 0.5, "pearl", "#A7D4B6", { supplierArticle: "53434960" }),
   base("line-35", "35-M313", "Pearl Gold", 0.5, "pearl", "#cbab6a", {}),
   base("line-35", "35-M314", "Pearl Gold Brown", 0.5, "pearl", "#a98a5c", {
     productionStatus: "PHASE_OUT",
@@ -167,18 +182,18 @@ export const baslacLine35Bases: BaslacBase[] = [
     catalogSlug: "baslac-35-m331-pasta",
     statusSource: "interni katalog + baslac.de listing",
   }),
-  base("line-35", "35-M332", "Pearl Red", 0.5, "pearl", "#b23a4a", {}),
-  base("line-35", "35-M341", "Pearl Purple", 0.5, "pearl", "#8a5a97", {}),
+  base("line-35", "35-M332", "Pearl Red", 0.5, "pearl", "#F19EA7", {}),
+  base("line-35", "35-M341", "Pearl Purple", 0.5, "pearl", "#CB7FAF", {}),
   base("line-35", "35-M343", "Pearl Red Brown", 0.5, "pearl", "#8f5348", {}),
-  base("line-35", "35-M352", "Pearl Blue Fine", 0.5, "pearl", "#5f7fae", {}),
-  base("line-35", "35-M353", "Pearl Green Blue", 0.5, "pearl", "#4e8b91", {}),
-  base("line-35", "35-M381", "Pearl Copper", 0.5, "pearl", "#a9682f", {}),
+  base("line-35", "35-M352", "Pearl Blue Fine", 0.5, "pearl", "#B1E0F6", {}),
+  base("line-35", "35-M353", "Pearl Green Blue", 0.5, "pearl", "#3E854A", {}),
+  base("line-35", "35-M381", "Pearl Copper", 0.5, "pearl", "#BE3633", {}),
   base("line-35", "35-M382", "Pearl Red fine", 0.5, "pearl", "#ad4450", {}),
   base("line-35", "35-M383", "Pearl Brown", 0.5, "pearl", "#7c5a45", {
     productionStatus: "PHASE_OUT",
     statusSource: "baslac.de: Auslaufartikel",
   }),
-  base("line-35", "35-M391", "Pearl Silver Xirallic", 0.5, "xirallic", "#d3d7db", {}),
+  base("line-35", "35-M391", "Pearl Silver Xirallic", 0.5, "xirallic", "#B1E0F6", {}),
   base("line-35", "35-M590", "Pure Black", 1, "solid", "#17181a", {}),
   base("line-35", "35-M599", "Chrome", 0.5, "metallic", "#d8dcdf", {}),
 ];
@@ -195,15 +210,15 @@ export const baslacLine30Bases: BaslacBase[] = [
   base("line-30", "30-S150", "Orange light", 1, "solid", "#e4894a"),
   base("line-30", "30-S160", "Yellow dark", 1, "solid", "#c69a1e"),
   base("line-30", "30-S220", "Orange", 1, "solid", "#d96a1c"),
-  base("line-30", "30-S230", "Red light", 1, "solid", "#d4555c"),
+  base("line-30", "30-S230", "Red light", 1, "solid", "#DC8441"),
   base("line-30", "30-S310", "Red Brown", 1, "solid", "#8f4a3a"),
   base("line-30", "30-S320", "Red bright", 1, "solid", "#cf2b32"),
-  base("line-30", "30-S330", "Red Purple", 1, "solid", "#94285f"),
+  base("line-30", "30-S330", "Red Purple", 1, "solid", "#C63A3B"),
   base("line-30", "30-S340", "Red dark", 1, "solid", "#8c1c25", {
     productionStatus: "PHASE_OUT",
     statusSource: "baslac.de: Auslaufartikel",
   }),
-  base("line-30", "30-S411", "Purple", 1, "solid", "#6b3f8f"),
+  base("line-30", "30-S411", "Purple", 1, "solid", "#3D3575"),
   base("line-30", "30-S420", "Red", 1, "solid", "#b81f28"),
   base("line-30", "30-S510", "Nepotvrđena oznaka", 1, "solid", "#4a5b7a", {
     rangeStatus: "IN_OUR_RANGE",
@@ -237,7 +252,7 @@ export const baslacLine45Bases: BaslacBase[] = [
   base("line-45", "45-W1011", "Basecoat AU White Frost", 1, "pearl", "#eceff2"),
   base("line-45", "45-W1012", "Basecoat", 0.5, "solid", "#eef0f2"),
   base("line-45", "45-W1019", "Basecoat AU White Light", 0.5, "solid", "#f4f5f6"),
-  base("line-45", "45-W1020", "Basecoat AU White blue flip", 0.5, "pearl", "#dfe6ef"),
+  base("line-45", "45-W1020", "Basecoat AU White blue flip", 0.5, "pearl", "#C1E4F8"),
   base("line-45", "45-W1110", "Basecoat AU Yellow Gold", 0.5, "solid", "#d1a12a"),
   base("line-45", "45-W1120", "Basecoat Yellow Ocre", 0.5, "solid", "#c08a2e"),
   base("line-45", "45-W1130", "Basecoat AU Yellow Green", 0.5, "solid", "#a8b02c"),
@@ -246,7 +261,7 @@ export const baslacLine45Bases: BaslacBase[] = [
   base("line-45", "45-W1150", "Basecoat AU Yellow", 0.5, "solid", "#e3bd1f"),
   base("line-45", "45-W1160", "Basecoat AU Orange", 0.5, "solid", "#d96a1c"),
   base("line-45", "45-W1220", "Basecoat AU Orange light", 0.5, "solid", "#e4894a"),
-  base("line-45", "45-W1310", "Basecoat AU Red transparent", 0.5, "transparent", "#b32330"),
+  base("line-45", "45-W1310", "Basecoat AU Red transparent", 0.5, "transparent", "#D37E41"),
   base("line-45", "45-W1320", "Basecoat Red", 0.5, "solid", "#b81f28"),
   base("line-45", "45-W1340", "Basecoat AU Red bright", 0.5, "solid", "#cf2b32"),
   base("line-45", "45-W1350", "Basecoat AU Red dark", 0.5, "solid", "#8c1c25"),
@@ -261,7 +276,7 @@ export const baslacLine45Bases: BaslacBase[] = [
   base("line-45", "45-W1530", "Basecoat AU Blue transparent", 0.5, "transparent", "#2a5fa8"),
   base("line-45", "45-W1610", "Basecoat Green Blue", 1, "solid", "#17715f"),
   base("line-45", "45-W1621", "Basecoat AU Green Yellow", 0.5, "solid", "#5c8f26"),
-  base("line-45", "45-W1910", "Basecoat Black Yellow", 0.5, "solid", "#4a4326"),
+  base("line-45", "45-W1910", "Basecoat Black Yellow", 0.5, "solid", "#1B1E22"),
   base("line-45", "45-W1920", "Basecoat AU Black", 1, "solid", "#1b1c1e"),
   base("line-45", "45-W1921", "Basecoat AU Black Light", 0.5, "solid", "#2e3134"),
   base("line-45", "45-W1930", "Basecoat Black Blue", 0.5, "solid", "#26303f"),
@@ -283,7 +298,7 @@ export const baslacLine45Bases: BaslacBase[] = [
     productionStatus: "PHASE_OUT",
     statusSource: "baslac.de: Auslaufartikel",
   }),
-  base("line-45", "45-W311", "Basecoat AU Pearl Yellow", 0.5, "pearl", "#ded09a", {
+  base("line-45", "45-W311", "Basecoat AU Pearl Yellow", 0.5, "pearl", "#FEF9CE", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22",
   }),
   base("line-45", "45-W331", "Basecoat Pearl Red Xirallic", 0.5, "xirallic", "#a8203a", {
@@ -316,7 +331,7 @@ export const baslacLine45Bases: BaslacBase[] = [
   base("line-45", "45-W485", "Basecoat AU Pearl Copper", 0.5, "pearl", "#a9682f", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22",
   }),
-  base("line-45", "45-W490", "Basecoat AU Pearl Gold", 0.5, "pearl", "#cbab6a", {
+  base("line-45", "45-W490", "Basecoat AU Pearl Gold", 0.5, "pearl", "#F9EB56", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22",
   }),
   base("line-45", "45-W590", "Basecoat", 1, "solid", "#2b2d30", {
@@ -334,28 +349,28 @@ export const baslacLine45Bases: BaslacBase[] = [
   base("line-45", "49-W408", "Basecoat Transparent Sparkle", 0.1, "transparent", "#dfe3e8", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W410", "Basecoat AU Pearl Gold", 0.1, "pearl", "#cbab6a", {
+  base("line-45", "49-W410", "Basecoat AU Pearl Gold", 0.1, "pearl", "#FEF9CE", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
   base("line-45", "49-W420", "Basecoat AU Pearl Bronze", 0.1, "pearl", "#a97a45", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W425", "Basecoat AU Pearl Mandarin", 0.1, "pearl", "#d2803f", {
+  base("line-45", "49-W425", "Basecoat AU Pearl Mandarin", 0.1, "pearl", "#FEF9CE", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W436", "Basecoat AU Pearl Green Red", 0.1, "pearl", "#7f9a6d", {
+  base("line-45", "49-W436", "Basecoat AU Pearl Green Red", 0.1, "pearl", "#7D2A29", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W441", "Basecoat AU Pearl Violet White", 0.1, "pearl", "#c8bcd6", {
+  base("line-45", "49-W441", "Basecoat AU Pearl Violet White", 0.1, "pearl", "#E3B0B5", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W443", "Basecoat AU Pearl Violet", 0.1, "pearl", "#8a6aa8", {
+  base("line-45", "49-W443", "Basecoat AU Pearl Violet", 0.1, "pearl", "#DC9B9E", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W448", "Basecoat AU Pearl Purple Red", 0.1, "pearl", "#9c4a6e", {
+  base("line-45", "49-W448", "Basecoat AU Pearl Purple Red", 0.1, "pearl", "#A32E44", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
-  base("line-45", "49-W469", "Basecoat AU Pearl Green Blue", 0.1, "pearl", "#4e8b91", {
+  base("line-45", "49-W469", "Basecoat AU Pearl Green Blue", 0.1, "pearl", "#3F8570", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
   base("line-45", "49-W488", "Basecoat AU Pearl Copper Coarse", 0.1, "pearl", "#a06a38", {

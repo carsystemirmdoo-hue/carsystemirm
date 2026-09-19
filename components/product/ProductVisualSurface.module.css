@@ -872,6 +872,13 @@
   filter: none;
 }
 
+/*
+ * Roletna se otkriva ISPOD sloja proizvoda i sme da menja samo pozadinu oko
+ * njega. Nijedan blend/filter na slici ili njenim roditeljima ne sme da
+ * prebojava neprovidne delove proizvoda (etiketa, poklopac, beli delovi
+ * ambalaže). Fotografije bez alfa kanala se zato ne „provlače" kroz blend,
+ * nego se zamenjuju cut-out assetom (vidi docs/PAGE_LOCK_STATUS.md, PASS 02).
+ */
 .placeholderVisual {
   display: grid;
   width: min(100%, 270px);

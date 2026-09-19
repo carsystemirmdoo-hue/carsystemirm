@@ -473,7 +473,11 @@ export function ProductVisualSurface({
             priority={priority}
           />
         ) : (
-          <span className={styles.placeholderVisual} aria-hidden="true">
+          <span
+            className={styles.placeholderVisual}
+            data-product-visual-placeholder
+            aria-hidden="true"
+          >
             <span className={styles.placeholderMark} />
             <small>Vizuel u pripremi</small>
             <strong>{brandName}</strong>

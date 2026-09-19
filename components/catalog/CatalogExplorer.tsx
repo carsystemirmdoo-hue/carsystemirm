@@ -4,7 +4,6 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
-import { CatalogPaginationNav } from "@/components/catalog/CatalogSeoContent";
 import {
   CATALOG_BATCH_SIZE,
   getCatalogGridColumnCount,
@@ -455,6 +454,11 @@ export function CatalogExplorer({
   const [productGridElement, setProductGridElement] = useState<HTMLDivElement | null>(
     null,
   );
+  const productGridElementRef = useRef<HTMLDivElement | null>(null);
+  productGridElementRef.current = productGridElement;
+  /** Skrol koji Back-restauracija još nije mogla da primeni (lista se lenjo puni). */
+  const pendingRestoreScrollYRef = useRef<number | null>(null);
+  const [loadSentinelElement, setLoadSentinelElement] = useState<HTMLDivElement | null>(null);
   const [preloadTriggerElement, setPreloadTriggerElement] =
     useState<HTMLAnchorElement | null>(null);
   const [gridColumnCount, setGridColumnCount] = useState(1);
@@ -775,6 +779,19 @@ export function CatalogExplorer({
     observerRef.current = null;
     loadingNextBatchRef.current = false;
     setPagination({ key: paginationKey, count: CATALOG_BATCH_SIZE });
+    /*
+     * Novi upit/filter = nova lista od početka. Ako je korisnik bio duboko u
+     * prethodnoj (dužoj) listi, ostavljanje skrola ispod kraja nove liste bi
+     * (a) prikazalo prazan prostor/footer umesto rezultata i (b) sentinel
+     * ispod kraja mreže bi bio iznad viewporta, pa bi se lančano učitao ceo
+     * skup. Vraćamo pogled na vrh rezultata; lista se dalje dopunjava
+     * skrolovanjem kao i uvek. Ne dira se kad je korisnik već iznad rezultata.
+     */
+    const results = productGridElementRef.current;
+    if (results) {
+      const top = results.getBoundingClientRect().top + window.scrollY - 140;
+      if (window.scrollY > top) window.scrollTo({ top: Math.max(0, top), left: 0, behavior: "instant" });
+    }
   }, [paginationKey]);
 
   useLayoutEffect(() => {
@@ -792,6 +809,14 @@ export function CatalogExplorer({
        * mount/cleanup bi uhvatio scrollY usred te animacije i presnimio ga.
        */
       window.scrollTo({ top: stored.scrollY, left: 0, behavior: "instant" });
+      /*
+       * Sa upitom (`?q=`) lista dolazi iz lenjo učitanog indeksa: na mount-u je
+       * mreža još prazna i scrollTo se klampuje na kratak dokument. Pozicija
+       * se pamti i primenjuje ponovo kad kartice stignu (efekat ispod).
+       */
+      if (Math.abs(window.scrollY - stored.scrollY) > 4) {
+        pendingRestoreScrollYRef.current = stored.scrollY;
+      }
     }
 
     function trackScroll() {
@@ -871,17 +896,36 @@ export function CatalogExplorer({
     ? getCatalogPreloadTriggerIndex(visibleProducts.length, gridColumnCount)
     : -1;
 
+  /*
+   * Dva posmatrana elementa: okidač-kartica (tri reda pre kraja, za mirno
+   * skrolovanje) i sentinel ispod poslednje kartice (za skok na dno). Efekat
+   * zavisi i od broja prikazanih kartica: posle svakog dodavanja observer se
+   * ponovo pravi, pa IntersectionObserver odmah javi ako je sentinel i dalje u
+   * viewportu — sledeća grupa se dodaje bez novog skrola, sve dok se dno ne
+   * popuni ili dok se rezultati ne potroše.
+   */
+  const visibleProductCount = visibleProducts.length;
+
+  useLayoutEffect(() => {
+    const target = pendingRestoreScrollYRef.current;
+    if (target === null || visibleProductCount === 0) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll + 4 < target) return; // dokument još nije dovoljno visok — čekaj sledeću grupu
+    pendingRestoreScrollYRef.current = null;
+    window.scrollTo({ top: target, left: 0, behavior: "instant" });
+  }, [visibleProductCount]);
+
   useEffect(() => {
     observerRef.current?.disconnect();
     observerRef.current = null;
 
-    if (!hasMoreProducts || !preloadTriggerElement) return undefined;
+    if (!hasMoreProducts || (!preloadTriggerElement && !loadSentinelElement)) return undefined;
 
     const observedPaginationKey = paginationKey;
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
         if (
-          !entry?.isIntersecting ||
+          !entries.some((entry) => entry.isIntersecting) ||
           loadingNextBatchRef.current ||
           paginationKeyRef.current !== observedPaginationKey
         ) {
@@ -907,17 +951,32 @@ export function CatalogExplorer({
 
         loadingNextBatchRef.current = false;
       },
-      { threshold: 0.01 },
+      /*
+       * Gornja margina pokriva i element koji je IZNAD viewporta (korisnik je
+       * skočio ispod kraja mreže — End, skrol-traka, brz wheel — pa gleda SEO
+       * blok ili footer): bez toga skok preko okidača i sentinela ostavlja
+       * katalog na 48 kartica zauvek. Ograničena je (2400 px ≈ SEO blok +
+       * footer) da posle dodavanja grupe lančano učitavanje stane čim sentinel
+       * ode ispod viewporta.
+       */
+      { threshold: 0, rootMargin: "2400px 0px 400px 0px" },
     );
 
     observerRef.current = observer;
-    observer.observe(preloadTriggerElement);
+    if (preloadTriggerElement) observer.observe(preloadTriggerElement);
+    if (loadSentinelElement) observer.observe(loadSentinelElement);
 
     return () => {
       observer.disconnect();
       if (observerRef.current === observer) observerRef.current = null;
     };
-  }, [hasMoreProducts, paginationKey, preloadTriggerElement]);
+  }, [
+    hasMoreProducts,
+    loadSentinelElement,
+    paginationKey,
+    preloadTriggerElement,
+    visibleProductCount,
+  ]);
 
   function clearFilters() {
     setQuery("");
@@ -1151,6 +1210,7 @@ export function CatalogExplorer({
           phaseBySlug={phaseBySlug}
           preloadTriggerIndex={preloadTriggerIndex}
           preloadTriggerRef={setPreloadTriggerElement}
+          loadSentinelRef={setLoadSentinelElement}
           entities={visibleProducts}
           programBySlug={programBySlug}
           resultCount={sortedProducts.length}
@@ -1160,10 +1220,13 @@ export function CatalogExplorer({
         />
       </section>
 
-      <CatalogPaginationNav
-        currentPage={1}
-        totalPages={Math.ceil(canonical.length / CATALOG_BATCH_SIZE)}
-      />
+      {/*
+        * Bez numerisanih strana u interaktivnom katalogu: lista je jedna i
+        * dopunjava se skrolovanjem (IntersectionObserver iznad). Navigacija
+        * „Strana 1 od N / Sledeća →" ostaje samo u Suspense fallback-u
+        * (`CatalogPage.tsx`) i na `/katalog/strana/N`, gde služi crawl-u bez JS-a;
+        * ovde je korisnika vodila na stranicu koja ZAMENJUJE celu listu.
+        */}
       <CatalogSupportCta />
     </>
   );

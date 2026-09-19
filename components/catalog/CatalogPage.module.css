@@ -884,6 +884,14 @@
   aspect-ratio: 1.1 / 1;
 }
 
+/* Okidač učitavanja na dnu mreže: zauzima ceo red, bez visine i bez razmaka. */
+.loadSentinel {
+  grid-column: 1 / -1;
+  height: 1px;
+  margin-top: -1px;
+  pointer-events: none;
+}
+
 .productCard {
   display: grid;
   height: 100%;

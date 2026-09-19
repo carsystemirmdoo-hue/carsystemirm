@@ -34,3 +34,23 @@ test("the final batch is clamped without an empty follow-up group", () => {
   assert.equal(getCatalogNextVisibleCount(773, 773), 773);
   assert.equal(getCatalogNextVisibleCount(0, 0), 0);
 });
+
+import { readFileSync } from "node:fs";
+
+test("beskonačni skrol: sentinel ispod mreže, ograničena gornja margina, re-arm posle svake grupe", () => {
+  const explorer = readFileSync(new URL("./CatalogExplorer.tsx", import.meta.url), "utf8");
+  const grid = readFileSync(new URL("./CatalogProductGrid.tsx", import.meta.url), "utf8");
+  // sentinel je poslednji element mreže, observer ga posmatra uz okidač-karticu
+  assert.match(grid, /data-catalog-load-sentinel/);
+  assert.match(explorer, /if \(loadSentinelElement\) observer\.observe\(loadSentinelElement\)/);
+  // skok preko okidača (End, skrol-traka): element iznad viewporta važi kao presečen, ali ograničeno
+  assert.match(explorer, /rootMargin: "2400px 0px 400px 0px"/);
+  // posle svakog dodavanja observer se ponovo pravi (lančano dok se dno ne popuni)
+  assert.match(explorer, /visibleProductCount,\s*\]\);/);
+  // nema numerisane navigacije koja ZAMENJUJE listu u interaktivnom katalogu
+  assert.doesNotMatch(explorer, /<CatalogPaginationNav/);
+  // nov upit/filter vraća pogled na vrh rezultata i resetuje skup
+  assert.match(explorer, /setPagination\(\{ key: paginationKey, count: CATALOG_BATCH_SIZE \}\);[\s\S]{0,900}window\.scrollTo\(\{ top: Math\.max\(0, top\)/);
+  // Back sa upitom: restauracija skrola se ponavlja kad lenjo učitane kartice stignu
+  assert.match(explorer, /pendingRestoreScrollYRef/);
+});

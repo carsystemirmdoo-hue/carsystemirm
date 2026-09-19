@@ -19,6 +19,7 @@ export function CatalogProductGrid({
   onSearchIndexRetry,
   preloadTriggerIndex,
   preloadTriggerRef,
+  loadSentinelRef,
   entities,
   searchIndexState = "idle",
   programBySlug,
@@ -41,6 +42,13 @@ export function CatalogProductGrid({
   onSearchIndexRetry?: () => void;
   preloadTriggerIndex: number;
   preloadTriggerRef: Ref<HTMLAnchorElement>;
+  /**
+   * Nevidljivi element ODMAH ISPOD poslednje kartice. Okidač na kartici (tri
+   * reda pre kraja) pokriva mirno skrolovanje; sentinel pokriva skok na dno
+   * (End, prevlačenje skrol-trake, brz wheel), gde okidač prođe kroz viewport
+   * između dva frejma i IntersectionObserver ga nikad ne vidi.
+   */
+  loadSentinelRef?: Ref<HTMLDivElement>;
   entities: CatalogListingEntity[];
   /**
    * Stanje lenjo učitanog variant search indexa. Bez ovoga bi katalog, dok se
@@ -105,6 +113,14 @@ export function CatalogProductGrid({
               />
             );
           })}
+          {loadSentinelRef ? (
+            <div
+              aria-hidden="true"
+              className={styles.loadSentinel}
+              data-catalog-load-sentinel
+              ref={loadSentinelRef}
+            />
+          ) : null}
         </div>
       ) : searchIndexState === "too-short" ? (
         /*

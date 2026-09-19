@@ -1,0 +1,1240 @@
+{
+  "_comment": "sourceKey / šifra artikla → naš slug. Sync ovaj fajl samo dopunjuje; red se nikad ne briše, jer je slug javni URL.",
+  "products": {
+    "carfit-1k-etch-primer-spray": {
+      "sourceKey": "1k-etch-primer-spray",
+      "articleNumbers": [
+        "4-430-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-1k-hi-build-primer-filler-spray": {
+      "sourceKey": "1k-hi-build-grundierfueller-spray",
+      "articleNumbers": [
+        "4-500-0400",
+        "4-501-0400",
+        "4-502-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-1k-plastic-primer-spray": {
+      "sourceKey": "1k-kunststoff-primer-spray",
+      "articleNumbers": [
+        "4-435-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-clearcoat-spray": {
+      "sourceKey": "2k-klarlack-spray",
+      "articleNumbers": [
+        "7-204-0200"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-epoxy-primer-1-1": {
+      "sourceKey": "2k-epoxid-grundierfueller-11",
+      "articleNumbers": [
+        "4-390-0500",
+        "4-415-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-fast-air-primer-filler-3-1": {
+      "sourceKey": "2k-fast-air-grundierfueller-31",
+      "articleNumbers": [
+        "4-420-1000",
+        "4-420-3000",
+        "4-421-0330",
+        "4-421-1000",
+        "4-425-1000",
+        "4-425-3000",
+        "4-426-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-hs-acryl-primer-filler-4-1": {
+      "sourceKey": "2k-hs-acryl-grundierfueller-41",
+      "articleNumbers": [
+        "4-103-0800",
+        "4-104-0800",
+        "4-105-0800",
+        "4-203-3600",
+        "4-204-3600",
+        "4-205-3600",
+        "4-211-0200",
+        "4-211-0900",
+        "4-304-3600"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-hs-perfect-clear": {
+      "sourceKey": "2k-hs-perfekt-klarlack",
+      "articleNumbers": [
+        "7-122-1500",
+        "7-122-5000",
+        "7-123-1500",
+        "7-124-1500",
+        "7-370-2500",
+        "7-371-2500",
+        "7-372-2500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-hs-scratch-resistent-clearcoat-2-1": {
+      "sourceKey": "2k-hs-kratzfester-klarlack-21",
+      "articleNumbers": [
+        "7-221-1000",
+        "7-221-5000",
+        "7-320-0501",
+        "7-320-2501",
+        "7-321-0501",
+        "7-321-2501",
+        "7-322-0501",
+        "7-322-2501"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-ms-clearcoat-industrial-use": {
+      "sourceKey": "2k-ms-industrie-klarlack",
+      "articleNumbers": [
+        "7-153-1500",
+        "7-153-5000",
+        "7-154-1500",
+        "7-363-2500",
+        "7-365-2500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-uhs-low-voc-clearcoat": {
+      "sourceKey": "2k-uhs-low-voc-klarlack",
+      "articleNumbers": [
+        "7-357-0500",
+        "7-357-2500",
+        "7-358-0500",
+        "7-358-2500",
+        "7-359-0500",
+        "7-359-2500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-ultra-hs-clearcoat": {
+      "sourceKey": "2k-ultra-hs-klarlack",
+      "articleNumbers": [
+        "7-401-1000",
+        "7-401-5000",
+        "7-435-0501",
+        "7-435-2501",
+        "7-436-0501",
+        "7-436-2501",
+        "7-437-0501",
+        "7-437-2501"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-us-filler-4-1": {
+      "sourceKey": "2k-us-fueller-41",
+      "articleNumbers": [
+        "4-240-1000",
+        "4-240-4000",
+        "4-241-0250",
+        "4-241-1000",
+        "4-242-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-2k-washprimer-2-1": {
+      "sourceKey": "2k-washprimer-21",
+      "articleNumbers": [
+        "4-398-0800",
+        "4-420-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-alu-and-soft-putty": {
+      "sourceKey": "alu-soft-spachtel",
+      "articleNumbers": [
+        "2-181-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-bitumen-underbody-protection": {
+      "sourceKey": "unterbodenschutz-bitumen",
+      "articleNumbers": [
+        "5-700-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-black-paint-spray": {
+      "sourceKey": "schwarz-spray",
+      "articleNumbers": [
+        "4-141-0400",
+        "4-142-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-blending-tape": {
+      "sourceKey": "schaumstoffklebeband",
+      "articleNumbers": [
+        "9-112-2005"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-car-clean-multi": {
+      "sourceKey": "putztuch-multi",
+      "articleNumbers": [
+        "8-801-0035",
+        "8-801-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-carbon-putty": {
+      "sourceKey": "carbon-spachtel",
+      "articleNumbers": [
+        "2-125-1800"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-cavity-preservation-spray": {
+      "sourceKey": "hohlraumkonservierung-spray",
+      "articleNumbers": [
+        "5-500-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-clearcoar-matt": {
+      "sourceKey": "matt-klarlack",
+      "articleNumbers": [
+        "7-440-0500",
+        "7-440-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-color-net-disc": {
+      "sourceKey": "color-net-disc-netzschleifscheibe",
+      "articleNumbers": [
+        "6-700-0080",
+        "6-700-0120",
+        "6-700-0150",
+        "6-700-0180",
+        "6-700-0220",
+        "6-700-0240",
+        "6-700-0280",
+        "6-700-0320",
+        "6-700-0400",
+        "6-700-0500",
+        "6-701-0080",
+        "6-701-0120",
+        "6-701-0180",
+        "6-701-0220",
+        "6-701-0240",
+        "6-701-0280",
+        "6-701-0320",
+        "6-701-0400",
+        "6-701-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-cover-tape-orange-up-to-100c": {
+      "sourceKey": "abdeckklebeband-orange-100c",
+      "articleNumbers": [
+        "9-130-1850"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-cover-tape-up-to-100c": {
+      "sourceKey": "abdeckklebeband-100c",
+      "articleNumbers": [
+        "9-100-1019",
+        "9-100-1025",
+        "9-100-1038",
+        "9-100-1050"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-cover-tape-up-to-80c": {
+      "sourceKey": "abdeckklebeband-80c",
+      "articleNumbers": [
+        "9-100-0019",
+        "9-100-0025",
+        "9-100-0038",
+        "9-100-0050"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-cover-tape-water-resistant-up-to-120c": {
+      "sourceKey": "abdeckklebeband-wasserfest-120c",
+      "articleNumbers": [
+        "9-120-0025",
+        "9-120-0030",
+        "9-120-0038",
+        "9-120-0050",
+        "9-120-1019"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-coverall-black-label-edition": {
+      "sourceKey": "schutzanzug-fuer-maler-und-lackierarbeiten",
+      "articleNumbers": [
+        "3-267-0009",
+        "3-267-0016",
+        "3-267-0017",
+        "3-267-0018",
+        "3-267-0019"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-coverpaper-waterproof": {
+      "sourceKey": "abdeck-papier-wasserabweisend",
+      "articleNumbers": [
+        "1-230-6045",
+        "1-232-1320",
+        "1-232-2030",
+        "1-232-2045",
+        "1-232-9030",
+        "1-232-9045"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-cutting-compound": {
+      "sourceKey": "schleifpaste",
+      "articleNumbers": [
+        "5-100-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-disposable-floor-mats": {
+      "sourceKey": "einwegfussmatte",
+      "articleNumbers": [
+        "3-100-0501"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-disposable-paint-strainers": {
+      "sourceKey": "farbsiebe",
+      "articleNumbers": [
+        "7-850-0125",
+        "7-850-0190"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-disposable-seat-covers": {
+      "sourceKey": "sitzbezuege",
+      "articleNumbers": [
+        "3-120-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-double-layer-cleaning-cloths": {
+      "sourceKey": "2-lagiges-putztuch",
+      "articleNumbers": [
+        "8-802-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-epoxy-metal-filler": {
+      "sourceKey": "schwemmzinnersatz",
+      "articleNumbers": [
+        "2-184-0200"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-express-clearcoat": {
+      "sourceKey": "expressklarlack",
+      "articleNumbers": [
+        "7-156-1500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-fabric-tape": {
+      "sourceKey": "gewebeband",
+      "articleNumbers": [
+        "9-150-5050"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-fade-out-thinner": {
+      "sourceKey": "beispritzverduennung",
+      "articleNumbers": [
+        "7-557-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-fade-out-thinner-spray": {
+      "sourceKey": "beispritzverduennung-spray",
+      "articleNumbers": [
+        "7-551-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-fast-paint-system": {
+      "sourceKey": "fast-paint-system",
+      "articleNumbers": [
+        "3-225-0002",
+        "3-225-0125",
+        "3-225-0190",
+        "3-225-0200",
+        "3-225-0400",
+        "3-225-0850",
+        "3-225-2125",
+        "3-225-2190",
+        "3-225-4125",
+        "3-225-4190",
+        "3-225-8125",
+        "3-225-8190",
+        "3-226-0001",
+        "3-226-0002",
+        "3-226-0003",
+        "3-226-0004",
+        "3-226-0005",
+        "3-226-0006",
+        "3-227-2125",
+        "3-227-4125",
+        "3-227-6125",
+        "3-227-8125",
+        "3-228-0000",
+        "3-228-0001",
+        "3-228-0002",
+        "3-228-0003",
+        "3-228-0004",
+        "3-228-0005",
+        "3-228-0006",
+        "3-228-0007",
+        "3-228-0008",
+        "3-228-0009",
+        "3-228-0011",
+        "3-228-0012",
+        "3-228-0013",
+        "3-228-0014"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-fillable-spray-can": {
+      "sourceKey": "befuellbare-spraydose",
+      "articleNumbers": [
+        "7-501-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-fine-line-tape": {
+      "sourceKey": "zierlinienband",
+      "articleNumbers": [
+        "9-141-0333",
+        "9-141-0633",
+        "9-141-1233"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-finishing-compound": {
+      "sourceKey": "hochglanzpolitur",
+      "articleNumbers": [
+        "5-100-1001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-flat-sanding-block": {
+      "sourceKey": "flacher-schleifblock",
+      "articleNumbers": [
+        "5-170-0005"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-folding-paint-stand-premium": {
+      "sourceKey": "faltbarer-premium-x-lackierstaender",
+      "articleNumbers": [
+        "6-915-1001",
+        "6-915-1002"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-glas-plus-putty": {
+      "sourceKey": "glas-plus-spachtel",
+      "articleNumbers": [
+        "2-144-0500",
+        "2-144-1000",
+        "2-144-1800"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-gold-paper-disc": {
+      "sourceKey": "gold-paper-disc",
+      "articleNumbers": [
+        "6-300-0040",
+        "6-300-0060",
+        "6-300-0080",
+        "6-300-0100",
+        "6-300-0120",
+        "6-300-0150",
+        "6-300-0180",
+        "6-300-0220",
+        "6-300-0240",
+        "6-300-0280",
+        "6-300-0320",
+        "6-300-0400",
+        "6-300-0500",
+        "6-301-0080",
+        "6-301-0120",
+        "6-301-0180",
+        "6-301-0240",
+        "6-301-0320",
+        "6-302-0080",
+        "6-302-0120",
+        "6-302-0180",
+        "6-302-0240"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-gun-cleaner": {
+      "sourceKey": "spritzpistolen-reiniger",
+      "articleNumbers": [
+        "8-102-5000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-hand-sanding-block": {
+      "sourceKey": "handschleifblock",
+      "articleNumbers": [
+        "5-170-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-high-gloss-clearcoat-spray": {
+      "sourceKey": "klarlack-spray",
+      "articleNumbers": [
+        "7-201-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-interface-pads": {
+      "sourceKey": "interface-pads",
+      "articleNumbers": [
+        "5-170-0014",
+        "5-170-0015"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-lifting-tape": {
+      "sourceKey": "lifting-tape-gruen",
+      "articleNumbers": [
+        "9-160-5010"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-logo-tape": {
+      "sourceKey": "logo-klebestreifen",
+      "articleNumbers": [
+        "9-180-2110"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-manual-polishing-and-sanding-pad": {
+      "sourceKey": "manuelles-polier-und-schleifpad",
+      "articleNumbers": [
+        "5-170-0004"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-masking-film-with-electrostatic-effect": {
+      "sourceKey": "abdeckfolie-mit-elektrostatischen-eigenschaften",
+      "articleNumbers": [
+        "1-202-4020",
+        "1-202-4030",
+        "1-202-5020"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-metal-test-cards": {
+      "sourceKey": "metalltestkarten",
+      "articleNumbers": [
+        "7-700-0020",
+        "7-700-0050",
+        "7-700-0100"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-microfiber-cleaning-cloth": {
+      "sourceKey": "microfaser-reinigungstuch",
+      "articleNumbers": [
+        "8-803-0002"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-mixing-cups-and-mixing-lids": {
+      "sourceKey": "mischbecher-deckel",
+      "articleNumbers": [
+        "3-200-0290",
+        "3-200-0385",
+        "3-200-0750",
+        "3-200-1400",
+        "3-200-2300",
+        "3-223-0385",
+        "3-223-0750",
+        "3-223-1400",
+        "3-223-2300",
+        "3-223-2301"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-mixing-s-sticks": {
+      "sourceKey": "ruehrstaebe-mix-s-stick",
+      "articleNumbers": [
+        "7-761-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-mobile-masking-paper-dispenser": {
+      "sourceKey": "rollbarer-spender-abdeck-papier",
+      "articleNumbers": [
+        "1-225-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-multi-putty": {
+      "sourceKey": "multi-spachtel",
+      "articleNumbers": [
+        "2-210-2000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-multi-soft-putty": {
+      "sourceKey": "multi-soft-spachtel",
+      "articleNumbers": [
+        "2-250-0900",
+        "2-250-1400",
+        "2-250-1800",
+        "2-250-3000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-nitrile-gloves-palm-textured": {
+      "sourceKey": "nitrilhandschuhe-mit-strukturierten-fingern",
+      "articleNumbers": [
+        "3-260-0460",
+        "3-260-0560"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-nonwoven-polishing-cloth": {
+      "sourceKey": "vlies-poliertuch",
+      "articleNumbers": [
+        "8-800-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-ozone-generators": {
+      "sourceKey": "ozongenerator",
+      "articleNumbers": [
+        "6-980-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-pads-for-polishing-discs-velcro": {
+      "sourceKey": "auflage-fuer-polierscheiben",
+      "articleNumbers": [
+        "5-100-0001",
+        "5-100-0002"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-paint-remover-spray": {
+      "sourceKey": "abbeizspray",
+      "articleNumbers": [
+        "7-553-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-parking-sensor-masking-disc": {
+      "sourceKey": "parksensor-abdeckung",
+      "articleNumbers": [
+        "9-185-0060"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-pe-mounting-tape": {
+      "sourceKey": "montageklebeband-pe",
+      "articleNumbers": [
+        "9-171-0905",
+        "9-171-1205",
+        "9-171-1905"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-perfect-filler-4-1-grey": {
+      "sourceKey": "perfekt-fueller-41-grau",
+      "articleNumbers": [
+        "4-403-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-perfect-multi-green-putty": {
+      "sourceKey": "perfect-multi-green-spachtel",
+      "articleNumbers": [
+        "2-251-1800"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-plastic-primer": {
+      "sourceKey": "kunststoffgrundierung",
+      "articleNumbers": [
+        "4-355-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-plastic-putty": {
+      "sourceKey": "kunststoffspachtel",
+      "articleNumbers": [
+        "2-160-0500",
+        "3-310-0120"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-plastic-repair-kit": {
+      "sourceKey": "kunststoff-reparaturset",
+      "articleNumbers": [
+        "2-221-0250"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-plastic-stapler-kit": {
+      "sourceKey": "kunststoff-reparatur-set",
+      "articleNumbers": [
+        "8-100-0000",
+        "8-100-0300"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-polishing-discs-velcro": {
+      "sourceKey": "schaumstoff-polierscheiben-mit-klettsystem",
+      "articleNumbers": [
+        "5-100-0165",
+        "5-100-0168",
+        "5-100-0169"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-polishing-sponge-conical": {
+      "sourceKey": "polierschwamm-konisch",
+      "articleNumbers": [
+        "5-100-1500",
+        "5-100-1501",
+        "5-100-1502"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-polyethylene-car-cover": {
+      "sourceKey": "polyethylen-fahrzeugabdeckung",
+      "articleNumbers": [
+        "3-150-0020"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-pretaped-masking-film": {
+      "sourceKey": "abdeckfolie-mit-klebeband",
+      "articleNumbers": [
+        "1-200-0550",
+        "1-200-1800",
+        "1-200-2700"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-professional-nitrile-gloves": {
+      "sourceKey": "professionelle-nitrilhandschuhe",
+      "articleNumbers": [
+        "3-261-0150",
+        "3-261-0250",
+        "3-261-0350",
+        "3-261-0450"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-pu-adhesive-and-sealant": {
+      "sourceKey": "pu-kleb-und-dichtmasse",
+      "articleNumbers": [
+        "5-113-0310",
+        "5-115-0310",
+        "5-140-0310"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-pump-spray": {
+      "sourceKey": "spruehpumpe",
+      "articleNumbers": [
+        "3-255-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-purple-ceramic-film": {
+      "sourceKey": "gold-paper-disc-2",
+      "articleNumbers": [
+        "6-510-0040",
+        "6-510-0060",
+        "6-510-0080",
+        "6-510-0100",
+        "6-510-0120",
+        "6-510-0150",
+        "6-510-0180",
+        "6-510-0220",
+        "6-510-0240",
+        "6-510-0280",
+        "6-510-0320",
+        "6-510-0400",
+        "6-510-0500",
+        "6-510-0600",
+        "6-510-0800",
+        "6-510-1000",
+        "6-510-1500",
+        "6-510-2000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-rapid-air-clear-coat-voc": {
+      "sourceKey": "rapid-air-klarlack-voc",
+      "articleNumbers": [
+        "7-325-1000",
+        "7-326-5000",
+        "7-336-1000",
+        "7-337-2500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-red-film-abrasive-discs": {
+      "sourceKey": "red-film-schleifscheibe",
+      "articleNumbers": [
+        "6-500-0040",
+        "6-500-0060",
+        "6-500-0080",
+        "6-500-0100",
+        "6-500-0120",
+        "6-500-0150",
+        "6-500-0180",
+        "6-500-0220",
+        "6-500-0240",
+        "6-500-0280",
+        "6-500-0320",
+        "6-500-0400",
+        "6-500-0500",
+        "6-500-0600",
+        "6-500-0800",
+        "6-500-1000",
+        "6-500-1500",
+        "6-500-2000",
+        "6-501-0080",
+        "6-501-0120",
+        "6-501-0180",
+        "6-501-0240",
+        "6-501-0320",
+        "6-502-0080",
+        "6-502-0120",
+        "6-502-0180",
+        "6-502-0240",
+        "6-502-0320"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-rotating-paint-stand": {
+      "sourceKey": "lackierstaender",
+      "articleNumbers": [
+        "6-910-1001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-rubber-sanding-block": {
+      "sourceKey": "gummi-schleifblock",
+      "articleNumbers": [
+        "5-170-0002"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-rubbing-compound": {
+      "sourceKey": "schleifpolitur",
+      "articleNumbers": [
+        "5-100-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-sanding-control-kit-and-sanding-powder": {
+      "sourceKey": "schleifkontroll-und-pulver-set",
+      "articleNumbers": [
+        "5-200-0150",
+        "5-201-0150",
+        "5-202-0150"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-scr-mixing-lids": {
+      "sourceKey": "scr-system-deckel",
+      "articleNumbers": [
+        "3-230-0002"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-scr-strainers": {
+      "sourceKey": "scr-siebe",
+      "articleNumbers": [
+        "3-230-0130",
+        "3-230-0200"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-semi-round-sanding-block": {
+      "sourceKey": "halbrunder-schleifblock",
+      "articleNumbers": [
+        "5-170-0006"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-silicone-remover": {
+      "sourceKey": "silikonentferner",
+      "articleNumbers": [
+        "7-501-1000",
+        "7-501-5000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-silicone-remover-strawberry": {
+      "sourceKey": "silikonentferner-erdbeere",
+      "articleNumbers": [
+        "7-551-1000",
+        "7-551-5000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-silikone-remover-strawberry-spray": {
+      "sourceKey": "silikonentferner-spray-erdbeere",
+      "articleNumbers": [
+        "7-500-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-silver-wheel-spray": {
+      "sourceKey": "felgensilber-spray",
+      "articleNumbers": [
+        "4-143-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-soft-interface-pads-micro": {
+      "sourceKey": "soft-interface-pads-micro",
+      "articleNumbers": [
+        "5-102-0005",
+        "5-102-0010"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-soft-masking-foam-tape": {
+      "sourceKey": "schaumdichtband",
+      "articleNumbers": [
+        "9-109-1350"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-soft-plus-putty": {
+      "sourceKey": "soft-plus-spachtel",
+      "articleNumbers": [
+        "2-124-0500",
+        "2-124-1000",
+        "2-124-1800"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-sontara-degreasing-and-cleaning-cloth": {
+      "sourceKey": "entfettugstuch-sontara",
+      "articleNumbers": [
+        "8-804-0125",
+        "8-804-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-sponge-cut": {
+      "sourceKey": "sehr-feines-und-ultra-feines-schleifvlies-2",
+      "articleNumbers": [
+        "6-200-0001",
+        "6-200-0002",
+        "6-200-0003",
+        "6-200-0004",
+        "6-200-0005",
+        "6-200-0006"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-spray-putty": {
+      "sourceKey": "spritzspachtel",
+      "articleNumbers": [
+        "2-251-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-stirring-sticks": {
+      "sourceKey": "ruehrstab",
+      "articleNumbers": [
+        "7-760-1020",
+        "7-760-1027",
+        "7-760-1120",
+        "7-760-1127"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-stone-chip-protection": {
+      "sourceKey": "steinschlagschutz",
+      "articleNumbers": [
+        "5-600-1000",
+        "5-601-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-stone-chip-protection-spray": {
+      "sourceKey": "steinschlagschutz-spray",
+      "articleNumbers": [
+        "5-601-0500",
+        "5-602-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-tack-cloth": {
+      "sourceKey": "staubbindetuch",
+      "articleNumbers": [
+        "6-100-0005",
+        "6-101-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-tack-cloth-super-wave": {
+      "sourceKey": "staubbindetuch-super-wave",
+      "articleNumbers": [
+        "6-110-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-tack-coating-for-spray-booth": {
+      "sourceKey": "staubschutzlack-fuer-lackierkabinen",
+      "articleNumbers": [
+        "3-402-0005",
+        "3-402-0010"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-tape-off-disk-premium": {
+      "sourceKey": "folienradierer-und-adapter",
+      "articleNumbers": [
+        "3-804-1001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-texture-paint-spray": {
+      "sourceKey": "strukturlack-spray",
+      "articleNumbers": [
+        "4-171-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-thermo-paint-spray-650c": {
+      "sourceKey": "thermo-spray-650c",
+      "articleNumbers": [
+        "4-151-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-touch-up-bottles": {
+      "sourceKey": "pinselflaeschchen",
+      "articleNumbers": [
+        "3-115-0001"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-touch-up-micro-applicator": {
+      "sourceKey": "touch-up-micro-applicator",
+      "articleNumbers": [
+        "3-116-0101",
+        "3-117-0101",
+        "3-118-0101"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-underbody-protection-bitumen-spray": {
+      "sourceKey": "unterbodenschutz-bitumen-spray",
+      "articleNumbers": [
+        "5-400-0500"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-universal-polishing-compound": {
+      "sourceKey": "universelle-polierpaste",
+      "articleNumbers": [
+        "5-101-0250",
+        "5-101-1000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-universal-thinner": {
+      "sourceKey": "universalverduenner",
+      "articleNumbers": [
+        "7-602-1000",
+        "7-602-5000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-very-fine-and-ultra-fine-abrasive-fleece": {
+      "sourceKey": "sehr-feines-und-ultra-feines-schleifvlies",
+      "articleNumbers": [
+        "6-901-0001",
+        "6-901-0002",
+        "6-902-0001",
+        "6-902-0002"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-wet-sanding-paper": {
+      "sourceKey": "nass-schleifpapier",
+      "articleNumbers": [
+        "6-305-0600",
+        "6-305-0800",
+        "6-305-1000",
+        "6-305-1200",
+        "6-305-2000"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-windglass-glue-black": {
+      "sourceKey": "scheibenkleber-schwarz",
+      "articleNumbers": [
+        "5-132-0310"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-woolen-polishing-disc-velcro": {
+      "sourceKey": "lammfellpolierscheiben-klett",
+      "articleNumbers": [
+        "5-100-0150",
+        "5-100-0180"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    },
+    "carfit-zinc-spray": {
+      "sourceKey": "zink-spray",
+      "articleNumbers": [
+        "4-399-0400"
+      ],
+      "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18"
+    }
+  }
+}

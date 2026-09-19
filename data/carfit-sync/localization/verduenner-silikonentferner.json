@@ -1,0 +1,225 @@
+{
+  "beispritzverduennung": {
+    "sourceHash": "92493731ed5a36c2",
+    "productType": "razređivač za prelaze",
+    "subtype": "razređivač za prelaze (blending) · spot reparatura · bezbojan",
+    "shortDescription": "Posebna mešavina rastvarača za „topljenje” ivica spot reparatura i zona prelaza (blending).",
+    "longDescription": "Posebna mešavina rastvarača za „topljenje” ivica spot reparatura i zona prelaza. Može se koristiti i za rastvaranje starog laka radi boljeg prianjanja narednog premaza; u tom slučaju nanosi se ravnomerno na stari lak i prelakirava u roku od nekoliko minuta. Pre takve primene treba proveriti podesnost, kako bi se izbeglo neželjeno nabiranje ili podizanje starog laka.",
+    "purpose": "Topljenje ivica overspreja kod spot reparatura i zona prelaza",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "bezbojan"
+      },
+      {
+        "label": "Uslovi obrade",
+        "value": "od +10 °C i do 80 % relativne vlažnosti vazduha"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "1 l"
+      }
+    ],
+    "applications": [
+      "Odmah naprskati preko graničnih zona (zona overspreja)",
+      "Ivice overspreja istopiti veoma ravnomernim slojem, dok hrapavi overspre ne postane vidljivo gladak",
+      "Ne nanositi previše, jer se u suprotnom mogu očekivati neravnomerno rastvaranje ili curenje"
+    ],
+    "benefits": [],
+    "substrates": [],
+    "advice": "Ne nanositi na termoplastične podloge. Kod rastvaranja starog laka prethodno proveriti podesnost, kako bi se izbeglo nabiranje ili podizanje starog premaza.",
+    "variants": {
+      "7-557-1000": "1 l"
+    }
+  },
+  "silikonentferner": {
+    "sourceHash": "bd27f668c1cdba27",
+    "productType": "sredstvo za uklanjanje silikona",
+    "subtype": "sredstvo za čišćenje · na bazi organskih rastvarača · brzo sušenje",
+    "shortDescription": "Sredstvo za čišćenje na bazi organskih rastvarača za početno čišćenje površina od smola, silikona, ulja, masti i brusne prašine.",
+    "longDescription": "Sredstvo za čišćenje na bazi organskih rastvarača za početno čišćenje starih i OEM premaza, površina sa prajmerom i puniocem, kao i plastike, od smola, silikona, ulja, masti, brusne prašine i drugih nečistoća. Koristi se pre nanošenja pripremnih i reparaturnih materijala i posle brušenja, pri reparaturi putničkih i privrednih vozila. Brzo se suši i ne ostavlja ostatke.",
+    "purpose": "Čišćenje površina pre nanošenja materijala i posle brušenja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "711 – 781 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(a)(850)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "10°C"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 781 g/l"
+      }
+    ],
+    "applications": [
+      "Čišćenje površina pre nanošenja pripremnih i reparaturnih materijala i posle brušenja, pri reparaturi putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Sredstvo se brzo suši."
+      },
+      {
+        "title": "Bez ostataka",
+        "description": "Ne ostavlja nikakve ostatke na površini."
+      }
+    ],
+    "substrates": [
+      "metalni i plastični delovi",
+      "poliesterski gitovi",
+      "prajmeri",
+      "punioci",
+      "potpuno očvrsli stari ili sveži premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-501-1000": "1 l",
+      "7-501-5000": "5 l"
+    }
+  },
+  "silikonentferner-erdbeere": {
+    "sourceHash": "09cdcf24fb4951db",
+    "productType": "sredstvo za uklanjanje silikona",
+    "subtype": "sredstvo za čišćenje · na bazi organskih rastvarača · miris jagode",
+    "shortDescription": "Sredstvo za čišćenje sa mirisom jagode, na bazi organskih rastvarača, za početno čišćenje površina od katrana, silikona, ulja i masti.",
+    "longDescription": "Sredstvo za čišćenje sa mirisom jagode, na bazi organskih rastvarača, za početno čišćenje starih i OEM premaza, površina sa prajmerom i puniocem, kao i plastike, od katrana, silikona, ulja, masti, brusne prašine i drugih nečistoća. Koristi se pre nanošenja pripremnih i reparaturnih materijala i posle brušenja, pri reparaturi putničkih i privrednih vozila. Prema podacima proizvođača nije toksično i ne sadrži hlorovane ugljovodonike.",
+    "purpose": "Čišćenje površina pre nanošenja materijala i posle brušenja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "711 – 781 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(a)(850)"
+      },
+      {
+        "label": "VOC",
+        "value": "781 g/l"
+      }
+    ],
+    "applications": [
+      "Čišćenje površina pre nanošenja pripremnih i reparaturnih materijala i posle brušenja, pri reparaturi putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Uklanja širok spektar nečistoća",
+        "description": "Uklanja katran, silikon, ulje, mast, brusnu prašinu i druge nečistoće."
+      },
+      {
+        "title": "Bez hlorovanih ugljovodonika",
+        "description": "Prema podacima proizvođača nije toksično i ne sadrži hlorovane ugljovodonike."
+      },
+      {
+        "title": "Miris jagode",
+        "description": "Sredstvo ima miris jagode."
+      },
+      {
+        "title": "Ne šteti ozonskom omotaču",
+        "description": "Prema podacima proizvođača, proizvod ne šteti ozonskom omotaču."
+      }
+    ],
+    "substrates": [
+      "metalni i plastični delovi",
+      "poliesterski gitovi",
+      "prajmeri",
+      "punioci",
+      "potpuno očvrsli stari ili sveži premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-551-1000": "1 l",
+      "7-551-5000": "5 l"
+    }
+  },
+  "spritzpistolen-reiniger": {
+    "sourceHash": "146a5e22df90f866",
+    "productType": "sredstvo za pranje pištolja",
+    "subtype": "sredstvo za čišćenje · na bazi rastvarača · za pištolje i alat",
+    "shortDescription": "Efikasno sredstvo za čišćenje na bazi rastvarača, visoke moći rastvaranja, za pranje pištolja za lakiranje i drugog alata.",
+    "longDescription": "Efikasno sredstvo za čišćenje na bazi rastvarača, visoke moći rastvaranja. Koristi se za čišćenje pištolja za lakiranje i drugog alata od ostataka lakirnih materijala. Preporučuje se upotreba zajedno sa automatskim mašinama za pranje pištolja, čime se povećava učinak sredstva. Brzo se suši.",
+    "purpose": "Čišćenje pištolja za lakiranje i alata od ostataka lakirnih materijala",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "830 – 880 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(a)(850)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "23°C"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 880 g/l"
+      }
+    ],
+    "applications": [
+      "Čišćenje pištolja za lakiranje i drugog alata od ostataka lakirnih materijala"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka moć rastvaranja",
+        "description": "Sredstvo ima visoku moć rastvaranja."
+      },
+      {
+        "title": "Efikasno uklanjanje nečistoća",
+        "description": "Efikasno uklanja lakirne materijale, prljavštinu, mast, ulje, silikon, voskove i slično."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Sredstvo se brzo suši."
+      }
+    ],
+    "substrates": [
+      "metalni delovi i površine"
+    ],
+    "advice": "Preporučuje se upotreba zajedno sa automatskim mašinama za pranje pištolja za lakiranje, radi većeg učinka.",
+    "variants": {
+      "8-102-5000": "5 l"
+    }
+  },
+  "universalverduenner": {
+    "sourceHash": "f2527b82fea8971c",
+    "productType": "univerzalni razređivač",
+    "subtype": "razređivač · za prajmere, punioce i bezbojne lakove",
+    "shortDescription": "Razređivač za razređivanje svih vrsta C.A.R.FIT reparaturnih materijala.",
+    "longDescription": "Proizvod za razređivanje svih vrsta C.A.R.FIT reparaturnih materijala. Koristi se za razređivanje prajmera, punilaca i bezbojnih lakova pri reparaturi putničkih i privrednih vozila.",
+    "purpose": "Razređivanje prajmera, punilaca i bezbojnih lakova pri reparaturi vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "900 g/l"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "45°C"
+      }
+    ],
+    "applications": [
+      "Razređivanje prajmera, punilaca i bezbojnih lakova pri reparaturi putničkih i privrednih vozila"
+    ],
+    "benefits": [],
+    "substrates": [
+      "metalni i plastični delovi",
+      "poliesterski gitovi",
+      "prajmeri",
+      "punioci",
+      "potpuno očvrsli stari ili sveži premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-602-1000": "1 l",
+      "7-602-5000": "5 l"
+    }
+  }
+}

@@ -88,9 +88,24 @@ const EXPECTED = [
    * Activator, High Gloss Additive, Spotblender, Bumper Paint, Nano Carnauba
    * Wax). Pregledano 2026-09-18: svih 61 zapisa nosi pakovanje od 1 L u polju
    * volumena/varijante — 0 lažnih pogodaka.
+   *
+   * 61 → 68 (2026-09-19): C.A.R.FIT sync dodaje 7 proizvoda sa JEDNOM šifrom
+   * čije je zvanično pakovanje „1 l” (Bitumen underbody protection 5-700-1000,
+   * Cutting compound 5-100-1000, Finishing compound 5-100-1001, Fade Out Thinner
+   * 7-557-1000, Plastic Primer 4-355-1000, Pump Spray 3-255-0001 i Express
+   * Clearcoat 7-156-1500, set „lak 1 l + učvršćivač 0,5 l”). Svih 7 pregledano —
+   * 0 lažnih pogodaka.
+   *
+   * 68 → 79: oznake varijanti C.A.R.FIT proizvoda su pojmovi pretrage
+   * (`searchTerms`), pa „1 l” nalazi i 11 porodica koje pakovanje od 1 l imaju
+   * kao JEDNU od varijanti (2K Fast Air Primer Filler, 2K HS Perfect clear, 2K HS
+   * Scratch resistent, 2K MS Clearcoat, 2K Ultra HS Clearcoat, 2K US Filler,
+   * Clearcoar matt, Rapid air clear coat VOC, Silicone Remover, Silicone Remover
+   * „Strawberry”, Universal Thinner). Svaka je proverena u datasetu: nosi red
+   * varijante sa merom tačno „1 l”.
    */
-  { query: "1l", count: 61 },
-  { query: "1 l", count: 61 },
+  { query: "1l", count: 79 },
+  { query: "1 l", count: 79 },
   /*
    * `3,5 l`: 1 → 10. Isto zastarevanje od Baslac kataloga (HEAD = 10, svih 10
    * su Baslac pakovanja od 3,5 L). Carsystem sync ovde ne dodaje ništa.
@@ -124,6 +139,11 @@ const MUST_INCLUDE = [
   // Šifra artikla VARIJANTE (P40 diska P.25) nalazi proizvod, ne samo vodeća šifra.
   { query: "160.273", id: "carsystem-sanding-disc-p-25-ceramic" },
   { query: "159.226", id: "carsystem-f23-brusni-diskovi" },
+  // C.A.R.FIT: šifra granulacije, šifra učvršćivača sa stranice laka i šifra
+  // dodata ručnom zapisu kroz dopunu nalaze SVOJ proizvod.
+  { query: "6-300-0080", id: "carfit-gold-paper-disc" },
+  { query: "7-336-1000", id: "carfit-rapid-air-clear-coat-voc" },
+  { query: "1-201-0450", id: "carfit-maskirna-folija-4x5m" },
   // Alias: Antigravel je antichip, pa ga upit „antichip" mora naći.
   { query: "antichip", id: "family:cosmos-lac-master-mechanic-antigravel-paintable" },
 ];
@@ -163,8 +183,11 @@ for (const query of ["600 ml", "1 l", "3,5 l"]) {
     const packaging = `${record.technicalLine ?? ""} ${record.quantityLabel ?? ""}`;
     const compact = packaging.toLowerCase().replace(/[\s,]/g, (match) => (match === "," ? "." : ""));
     const wanted = query.toLowerCase().replace(/[\s,]/g, (match) => (match === "," ? "." : ""));
+    // Porodica sa više pakovanja prikazuje „N varijanti”; mera je tada u oznakama
+    // varijanti, koje su u indeksu kao pojmovi (`600ml`, `1l`, `3.5l`).
+    const inVariantTerms = (record.terms ?? []).includes(wanted);
     expect(
-      compact.includes(wanted),
+      compact.includes(wanted) || inVariantTerms,
       `Upit „${query}" vraća \`${record.id}\` čije pakovanje je „${packaging.trim()}".`,
     );
   }

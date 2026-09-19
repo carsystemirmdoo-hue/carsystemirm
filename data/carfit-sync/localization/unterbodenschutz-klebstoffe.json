@@ -1,0 +1,262 @@
+{
+  "pu-kleb-und-dichtmasse": {
+    "sourceHash": "f5f4a0ab7e56cea4",
+    "productType": "masa za lepljenje i zaptivanje",
+    "subtype": "1K poliuretanska zaptivna masa · 310 ml · siva i crna",
+    "shortDescription": "Jednokomponentna poliuretanska masa za lepljenje i zaptivanje, koja uz vlagu iz vazduha očvršćava u čvrstu, a elastičnu gumu.",
+    "longDescription": "Jednokomponentna poliuretanska zaptivna masa koja reakcijom sa vlagom iz vazduha očvršćava u čvrstu, a elastičnu gumu, sa veoma dobrim prianjanjem na mnoge podloge. Ne sliva se ni kada se nanosi u debelim slojevima. Otporna je na starenje i vremenske uticaje i ne propušta vodu. Koristi se za zaptivanje svih vrsta spojeva na karoseriji.",
+    "purpose": "Zaptivanje spojeva, preklopa, prirubnica i zavara na karoseriji",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1260 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva, crna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "200°C"
+      },
+      {
+        "label": "VOC",
+        "value": "125,5 g/l"
+      }
+    ],
+    "applications": [
+      "Zaptivanje svih vrsta spojeva: preklopa, prirubnica, linijskih zavara, tačkastih zavara i slično",
+      "Zaptivanje odvoda, kućišta svetala, pokretnih krovova i drugih delova karoserije"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma dobro prianjanje na lim",
+        "description": "Veoma dobro prianja na većinu neobrađenih i obrađenih limova."
+      },
+      {
+        "title": "Može se prelakirati",
+        "description": "Posle potpunog očvršćavanja masa se može prelakirati svim dvokomponentnim lakirnim materijalima; pre nanošenja boja na bazi smola preporučuju se prethodne probe."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine, npr. aluminijum",
+      "drvo",
+      "podloge sa prajmerom",
+      "termoreaktivna plastika",
+      "stari i OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "5-113-0310": "310 ml, siva",
+      "5-115-0310": "310 ml, crna",
+      "5-140-0310": "Leptir mlaznice · 5 kom."
+    }
+  },
+  "scheibenkleber-schwarz": {
+    "sourceHash": "26c0c1db77e11db1",
+    "productType": "lepak za stakla",
+    "subtype": "1K poliuretanski lepak · direktno ustakljivanje · crna",
+    "shortDescription": "Jednokomponentni tiksotropni poliuretanski lepak koji očvršćava uz vlagu, prvenstveno za direktno ustakljivanje vozila sa i bez vazdušnih jastuka.",
+    "longDescription": "Jednokomponentni, tiksotropni poliuretanski lepak koji očvršćava uz vlagu, namenjen prvenstveno direktnom ustakljivanju vozila sa i bez vazdušnih jastuka. Očvršćava tokom dužeg vremena, što omogućava primenu na velikim vetrobranskim staklima, na primer kod autobusa i kamiona. Nije provodljiv, pa je pogodan za stakla sa integrisanim antenama, i sprečava kontaktnu koroziju kod vozila sa aluminijumskom karoserijom.",
+    "purpose": "Direktno ustakljivanje vetrobranskih stakala",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1360 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "100°C"
+      },
+      {
+        "label": "VOC",
+        "value": "0%"
+      }
+    ],
+    "applications": [
+      "Direktno ustakljivanje vetrobranskih stakala"
+    ],
+    "benefits": [
+      {
+        "title": "Vreme do bezbedne vožnje",
+        "description": "Vreme do bezbedne vožnje (Drive Away Time) iznosi 2 sata, za vozila sa vazdušnim jastucima vozača i suvozača."
+      },
+      {
+        "title": "Brzo nanošenje i očvršćavanje",
+        "description": "Lepak se brzo nanosi i brzo očvršćava."
+      },
+      {
+        "title": "Pogodan za hladno nanošenje",
+        "description": "Lepak je pogodan za hladno nanošenje."
+      },
+      {
+        "title": "Stabilan, ne sliva se",
+        "description": "Ima dobru stabilnost i obradivost i ne sliva se."
+      },
+      {
+        "title": "Kratak konac pri prekidu",
+        "description": "Pri prekidu nanošenja ostavlja kratak konac."
+      },
+      {
+        "title": "Visok modul smicanja",
+        "description": "Lepak ima visok modul smicanja."
+      },
+      {
+        "title": "Visoka električna otpornost",
+        "description": "Ima visoku zapreminsku električnu otpornost od 1 GΩ×cm."
+      },
+      {
+        "title": "Nije provodljiv",
+        "description": "Nije provodljiv, pa je pogodan za upotrebu sa integrisanim antenama."
+      },
+      {
+        "title": "Sprečava kontaktnu koroziju",
+        "description": "Sprečava kontaktnu koroziju kod vozila sa aluminijumskom karoserijom."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine",
+      "staklo",
+      "aluminijum",
+      "keramički premazi",
+      "stari i OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "5-132-0310": "310 ml"
+    }
+  },
+  "staubschutzlack-fuer-lackierkabinen": {
+    "sourceHash": "041d593f48f6ac88",
+    "productType": "lepljivi zaštitni premaz za kabinu",
+    "subtype": "zaštitni premaz za kabine · providan · rastvorljiv u vodi",
+    "shortDescription": "Lepljivi zaštitni premaz koji na zidovima i plafonu kabine za lakiranje vezuje čestice boje, prašine i overspreja.",
+    "longDescription": "Premaz pouzdano vezuje čestice boje, prašine i overspreja koje se talože na zidovima i plafonskim panelima kabine za lakiranje i tako sprečava zagađenje površine koja se lakira. Ostaje providan i rastvorljiv u vodi. Tanak, lepljiv zaštitni film se na zidu ne suši, pa trajno vezuje prašinu i overspre. Kada film izgubi sposobnost vezivanja čestica, lako se spira vodom i sunđerom, a zatim se nanosi ponovo.",
+    "purpose": "Zaštita zidova kabine za lakiranje od overspreja i prašine",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1065 g/l"
+      },
+      {
+        "label": "Boja",
+        "value": "bezbojan"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "nema dostupnih podataka"
+      }
+    ],
+    "applications": [
+      "Zaštita zidova kabine za lakiranje od overspreja i prašine"
+    ],
+    "benefits": [
+      {
+        "title": "Štiti predmet lakiranja od prašine",
+        "description": "Obezbeđuje zaštitu od prašine za predmet koji se lakira."
+      },
+      {
+        "title": "Štiti površine kabine",
+        "description": "Štiti površine kabine za lakiranje od boje, prašine i overspreja."
+      },
+      {
+        "title": "Pogodan za stakla i svetla",
+        "description": "Posebno je razvijen za zaštitu stakala i svetala, bez uticaja na propusnost svetlosti i sposobnost refleksije."
+      },
+      {
+        "title": "Lako nanošenje i uklanjanje",
+        "description": "Premaz se lako nanosi i lako uklanja."
+      },
+      {
+        "title": "Ekonomičan u upotrebi",
+        "description": "Veoma je ekonomičan: zavisno od stepena zaprljanosti, premaz se obnavlja jednom u nekoliko nedelja."
+      },
+      {
+        "title": "Ekološki prihvatljiv",
+        "description": "Prema podacima proizvođača, proizvod je 100% ekološki prihvatljiv."
+      }
+    ],
+    "substrates": [
+      "aluminijumski, čelični i pocinkovani zidovi kabina za lakiranje",
+      "potpuno očvrsli i čisti lakirani slojevi"
+    ],
+    "advice": "Kada film izgubi sposobnost vezivanja čestica, ispira se vodom i sunđerom i nanosi ponovo.",
+    "variants": {
+      "3-402-0005": "5 l",
+      "3-402-0010": "10 l"
+    }
+  },
+  "steinschlagschutz": {
+    "sourceHash": "4aa87dd9be3f4601",
+    "productType": "zaštita od udara kamena",
+    "subtype": "na bazi sintetičke smole · zaštita podvozja · crna i siva",
+    "shortDescription": "Zaštita od udara kamena na bazi sintetičke smole, za podvozja i delove vozila izložene udarima kamena.",
+    "longDescription": "Zaštita od udara kamena na bazi sintetičke smole, za zaštitu podvozja i delova vozila izloženih udarima kamena. Premaz se može prekriti prajmerom ili prelakirati u bilo kojoj boji u roku od 30–40 minuta nakon sušenja. Dugotrajan je i veoma otporan na abraziju, a ima i svojstva apsorpcije zvuka i vibracija.",
+    "purpose": "Zaštita podvozja putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1460 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Boja",
+        "value": "crna, siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "5°C"
+      },
+      {
+        "label": "VOC",
+        "value": "410 g/l"
+      }
+    ],
+    "applications": [
+      "Zaštita podvozja putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Isporučuje se u boci",
+        "description": "Isporučuje se u boci i uvek je spreman za upotrebu."
+      },
+      {
+        "title": "Može se prelakirati",
+        "description": "Premaz se može prelakirati."
+      },
+      {
+        "title": "Trajan i otporan premaz",
+        "description": "Daje trajan premaz otporan na abrazivno habanje i agresivne hemikalije."
+      },
+      {
+        "title": "Apsorbuje zvuk i vibracije",
+        "description": "Ima svojstva apsorpcije zvuka i vibracija."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine",
+      "metalni delovi sa prajmerom",
+      "stari i OEM lak"
+    ],
+    "advice": null,
+    "variants": {
+      "5-600-1000": "1 kg, crna",
+      "5-601-1000": "1 kg, siva"
+    }
+  }
+}

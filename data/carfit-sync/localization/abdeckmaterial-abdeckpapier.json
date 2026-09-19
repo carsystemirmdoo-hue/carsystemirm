@@ -1,0 +1,36 @@
+{
+  "abdeck-papier-wasserabweisend": {
+    "sourceHash": "3d48039208125b23",
+    "productType": "Vodootporni maskirni papir",
+    "subtype": "maskirni papir · vodootporan · otporan na rastvarače · 42 g / m²",
+    "shortDescription": "Vodootporan maskirni papir otporan na rastvarače, za zaštitu delova i zona koje se ne lakiraju od magle boje i raspršene boje.",
+    "longDescription": "Vodootporan maskirni papir otporan na rastvarače, sa veoma dobrim svojstvima pri mehaničkoj obradi. Pouzdano štiti od magle boje i raspršene boje delove i zone koje ne treba lakirati. Zahvaljujući posebnom postupku proizvodnje obe strane imaju glatku, neporoznu površinu koja ne ostavlja vlakna, što doprinosi kvalitetnoj reparaturi.",
+    "purpose": "Zaštita delova i zona koje se ne lakiraju od magle boje i raspršene boje",
+    "facts": [
+      {
+        "label": "Gramatura",
+        "value": "42 g / m²"
+      },
+      {
+        "label": "Boja",
+        "value": "braon"
+      },
+      {
+        "label": "Materijal",
+        "value": "primarna (sveža) vlakna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "1-232-1320": "Rolna · 1200 mm × 300 m",
+      "1-232-9030": "Rolna · 900 mm × 300 m",
+      "1-232-9045": "Rolna · 900 mm × 450 m",
+      "1-230-6045": "Rolna · 600 mm × 450 m",
+      "1-232-2030": "Rolna · 200 mm × 300 m",
+      "1-232-2045": "Rolna · 200 mm × 450 m"
+    }
+  }
+}

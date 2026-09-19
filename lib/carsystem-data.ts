@@ -2,6 +2,10 @@ import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
 import { baslacCatalogProducts } from "@/lib/baslac-catalog-products";
 import {
+  applyCarfitCatalogEnrichment,
+  getCarfitCatalogProducts,
+} from "@/lib/carfit-catalog-products";
+import {
   applyCarsystemCatalogEnrichment,
   getCarsystemCatalogProducts,
 } from "@/lib/carsystem-catalog-products";
@@ -285,6 +289,12 @@ export type CarsystemProduct = {
    * šifru čita iz starijeg štampanog kataloga.
    */
   legacyManufacturerCodes?: string[];
+  /**
+   * Dodatni pojmovi za pretragu koje uvoz izvodi iz zvaničnih podataka, a koji
+   * nisu u nazivu ni u znački: oznake varijanti („P80”, „2,5 l”, „Učvršćivač
+   * brzi”). Ne prikazuju se; čita ih samo `lib/search/buildSearchIndex.ts`.
+   */
+  searchTerms?: string[];
   stockManaged?: boolean;
   productImage: ProductImageAsset | null;
   visualIdentity?: ProductVisualIdentity;
@@ -2400,6 +2410,10 @@ const productRecords: CarsystemProduct[] = [
   // (`npm run carsystem:sync`). Zvanični proizvodi koje već vodimo ručno
   // (F.19, F.23, Elastic white…) se NE uvoze ponovo — dobijaju dopunu niže.
   ...getCarsystemCatalogProducts(),
+  // C.A.R.FIT asortiman sa carfitrepair.com i iz zvaničnog kataloga
+  // (`npm run carfit:sync`). Ručni zapis koji je sync pouzdano prepoznao se NE
+  // uvozi ponovo — dobija dopunu niže.
+  ...getCarfitCatalogProducts(),
   ...befarPadProducts,
   ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),
@@ -2449,7 +2463,9 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
     ? applyBaslacEnrichment(product, (slug) => knownProductSlugs.has(slug))
     : product.brandSlug === "carsystem"
       ? applyCarsystemCatalogEnrichment(product)
-      : product,
+      : product.brandSlug === "carfit"
+        ? applyCarfitCatalogEnrichment(product)
+        : product,
 );
 
 export function getAllCarsystemProducts() {

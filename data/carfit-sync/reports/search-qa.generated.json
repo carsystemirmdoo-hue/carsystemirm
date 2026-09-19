@@ -1,0 +1,78 @@
+{
+  "baseUrl": "http://localhost:3220",
+  "articleQueries": 391,
+  "articleFirstResult": 391,
+  "namedQueries": [
+    {
+      "query": "gold paper disc",
+      "slug": "carfit-gold-paper-disc",
+      "kind": "naziv",
+      "top": "carfit-gold-paper-disc",
+      "ok": true
+    },
+    {
+      "query": "rapid air clear coat",
+      "slug": "carfit-rapid-air-clear-coat-voc",
+      "kind": "naziv",
+      "top": "carfit-rapid-air-clear-coat-voc",
+      "ok": true
+    },
+    {
+      "query": "perfect multi green putty",
+      "slug": "carfit-perfect-multi-green-putty",
+      "kind": "naziv",
+      "top": "carfit-perfect-multi-green-putty",
+      "ok": true
+    },
+    {
+      "query": "car fit red film",
+      "slug": "carfit-red-film-abrasive-discs",
+      "kind": "naziv",
+      "top": "carfit-red-film-abrasive-discs",
+      "ok": true
+    },
+    {
+      "query": "purple ceramic film",
+      "slug": "carfit-purple-ceramic-film",
+      "kind": "naziv",
+      "top": "carfit-purple-ceramic-film",
+      "ok": true
+    },
+    {
+      "query": "fast paint system",
+      "slug": "carfit-fast-paint-system",
+      "kind": "naziv",
+      "top": "carfit-fast-paint-system",
+      "ok": true
+    },
+    {
+      "query": "ozone generator",
+      "slug": "carfit-ozone-generators",
+      "kind": "naziv",
+      "top": "carfit-ozone-generators",
+      "ok": true
+    },
+    {
+      "query": "car fit bezbojni lak",
+      "slugPrefix": "carfit-",
+      "kind": "tip proizvoda (SR)",
+      "top": "carfit-rapid-air-clear-coat-voc",
+      "ok": true
+    },
+    {
+      "query": "car fit git",
+      "slugPrefix": "carfit-",
+      "kind": "tip proizvoda (SR)",
+      "top": "carfit-carbon-putty",
+      "ok": true
+    },
+    {
+      "query": "car fit maskirna traka",
+      "slugPrefix": "carfit-",
+      "kind": "tip proizvoda (SR)",
+      "top": "carfit-maskirna-folija-4x150m",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

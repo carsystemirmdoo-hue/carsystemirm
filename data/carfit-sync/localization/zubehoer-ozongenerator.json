@@ -1,0 +1,56 @@
+{
+  "ozongenerator": {
+    "sourceHash": "b13c5c06135a5bcb",
+    "productType": "Generator ozona",
+    "subtype": "generator ozona · potpuno automatski · 3 programa · prostori do 50 m³",
+    "shortDescription": "Generator ozona za tretman vazduha i površina u vozilima i prostorijama zapremine do 50 m³.",
+    "longDescription": "CARFIT Ozone Generator je namenjen tretmanu vazduha, površina i delova automobila, kombija i prikolica ozonom, kao i prostorija zapremine do 50 m³. Proizvođač ga namenjuje uklanjanju neprijatnih mirisa i dezinfekciji. Uređaj je potpuno automatski: bira se jedan od tri ponuđena programa i pritiska taster za start, a preostali ozon se posle tretmana pretvara u kiseonik.",
+    "purpose": "Tretman vazduha i površina ozonom u vozilima i prostorijama do 50 m³",
+    "facts": [
+      {
+        "label": "Kapacitet ozona",
+        "value": "najmanje 3,5 g / sat"
+      },
+      {
+        "label": "Zapremina prostorije",
+        "value": "do 50 m³"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Potpuno automatski rad",
+        "description": "Za rad je dovoljno izabrati jedan od tri ponuđena programa i pritisnuti taster za start."
+      },
+      {
+        "title": "Ozon iz korona pražnjenja",
+        "description": "Korona pražnjenjem generiše količinu ozona potrebnu za tretman prostorije."
+      },
+      {
+        "title": "Kapacitet najmanje 3,5 g / sat",
+        "description": "Kapacitet proizvodnje ozona je najmanje 3,5 g / sat."
+      },
+      {
+        "title": "Pretvaranje preostalog ozona u kiseonik",
+        "description": "Posle tretmana automatski pretvara preostali ozon u kiseonik."
+      },
+      {
+        "title": "Ugrađeni ventilatori",
+        "description": "Opremljen je ugrađenim ventilatorima za intenzivnije mešanje ozona sa vazduhom."
+      },
+      {
+        "title": "Mala potrošnja struje",
+        "description": "Troši malu količinu električne energije."
+      },
+      {
+        "title": "Brza razgradnja preostalog ozona",
+        "description": "Preostali ozon se brzo pretvara u kiseonik."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-980-0001": "Generator ozona"
+    }
+  }
+}

@@ -1,0 +1,910 @@
+{
+  "2-lagiges-putztuch": {
+    "sourceHash": "42f17b87aa3dbeb5",
+    "productType": "Dvoslojna krpa za čišćenje",
+    "subtype": "papirna krpa · dvoslojna · ne ostavlja vlakna",
+    "shortDescription": "Izdržljive dvoslojne krpe za čišćenje od reljefnog krep papira koje ne ostavljaju vlakna.",
+    "longDescription": "Dvoslojne krpe za čišćenje izrađene od kvalitetnog reljefnog krep papira. Veoma su izdržljive i ne ostavljaju vlakna na površini. Gramatura papira je 2 × 18 g/m².",
+    "purpose": "Čišćenje i brisanje površina bez ostavljanja vlakana",
+    "facts": [
+      {
+        "label": "Gramatura papira",
+        "value": "2 × 18 g/m²"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "1000 kom."
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "8-802-1000": "380 × 370 mm"
+    }
+  },
+  "einwegfussmatte": {
+    "sourceHash": "b6491ad8490f5e48",
+    "productType": "Jednokratna zaštitna podna prostirka",
+    "subtype": "zaštitna podna prostirka · jednokratna · 38 cm × 50 cm",
+    "shortDescription": "Jednokratna podna prostirka koja štiti pod vozila od prljavštine tokom popravke i održavanja.",
+    "longDescription": "Jednokratna zaštitna podna prostirka za automobile. Štiti pod vozila od prljavštine tokom popravke i održavanja. Dimenzije prostirke su 38 cm × 50 cm, a pakovanje sadrži 500 komada.",
+    "purpose": "Zaštita poda vozila od prljavštine tokom popravke i održavanja",
+    "facts": [
+      {
+        "label": "Dimenzije",
+        "value": "38 cm × 50 cm"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "500 kom. u pakovanju"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-100-0501": "500 kom."
+    }
+  },
+  "entfettugstuch-sontara": {
+    "sourceHash": "b89ccd952fa20637",
+    "productType": "Krpa za odmašćivanje i čišćenje",
+    "subtype": "krpa za odmašćivanje · 50% celuloze · ne ostavlja vlakna",
+    "shortDescription": "Izdržljiva krpa za odmašćivanje i čišćenje koja upija ulja, masti, boje, rastvarače i vodu.",
+    "longDescription": "Izdržljiva i dugotrajna krpa za odmašćivanje i čišćenje koja, zahvaljujući 50% celuloze u strukturi, upija veliku količinu ulja, masti, boja na bazi rastvarača, vodorazredivih boja, rastvarača i vode. Namenjena je popravci i servisu automobila, a koristi se i u proizvodnji automobila, mašinogradnji, teškoj industriji, avijaciji, proizvodnji elektronske opreme i komponenti, elektroenergetici i štamparskoj industriji.",
+    "purpose": "Odmašćivanje i čišćenje površina pri popravci i servisu vozila",
+    "facts": [],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Meka i izdržljiva",
+        "description": "Krpa je istovremeno meka i izdržljiva."
+      },
+      {
+        "title": "Veoma dobro upijanje",
+        "description": "Veoma dobro upija boje, vodu, ulje i rastvarače."
+      },
+      {
+        "title": "Visoka mehanička čvrstoća",
+        "description": "Krpa ima visoku mehaničku čvrstoću."
+      },
+      {
+        "title": "Otporna na vodu i rastvarače",
+        "description": "Otporna je na vodu i rastvarače."
+      },
+      {
+        "title": "Upotreba sa sredstvima za silikon",
+        "description": "Može se koristiti zajedno sa sredstvima za uklanjanje silikona pri čišćenju površina."
+      },
+      {
+        "title": "Ne ostavlja vlakna",
+        "description": "Krpa ne ostavlja vlakna na površini."
+      },
+      {
+        "title": "Ekonomična",
+        "description": "Upotreba krpe je ekonomična."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "8-804-0125": "30 cm × 35 cm · 125 kom.",
+      "8-804-0500": "30 cm × 35 cm · 500 kom."
+    }
+  },
+  "faltbarer-premium-x-lackierstaender": {
+    "sourceHash": "0ce71289b52c0a42",
+    "productType": "Sklopivi stalak za lakiranje",
+    "subtype": "stalak za lakiranje · sklopiv · 2 dodatna elementa za pričvršćivanje",
+    "shortDescription": "Sklopivi stalak za pričvršćivanje radnog komada u položaju koji odgovara lakireru.",
+    "longDescription": "Sklopivi stalak za pričvršćivanje radnog komada u položaju koji je pogodan za lakirera. Stalak je veoma stabilan i prihvata kabaste i teške delove. Opremljen je sa 2 dodatna elementa za pričvršćivanje.",
+    "purpose": "Pričvršćivanje delova u pogodnom položaju za lakiranje",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-915-1002": "Standardno pakovanje",
+      "6-915-1001": "Stalak za lakiranje u X obliku"
+    }
+  },
+  "farbsiebe": {
+    "sourceHash": "a0d31469d551374e",
+    "productType": "Jednokratna cediljka za boju",
+    "subtype": "cediljka za boju · papirna · 125 μm i 190 μm",
+    "shortDescription": "Papirni filter sa uloškom od veštačkog materijala za ceđenje boje i sličnih materijala na bazi organskih rastvarača.",
+    "longDescription": "Jednokratna papirna cediljka sa uloškom od veštačkog materijala, namenjena ceđenju boje i sličnih materijala na bazi organskih rastvarača. Efikasno uklanja strane čestice koje mogu dospeti u reparaturne materijale i izazvati začepljenje pištolja za lakiranje.",
+    "purpose": "Ceđenje boje i sličnih materijala na bazi organskih rastvarača",
+    "facts": [
+      {
+        "label": "Pakovanje",
+        "value": "1000 kom."
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "7-850-0125": "125 μm",
+      "7-850-0190": "190 μm"
+    }
+  },
+  "folienradierer-und-adapter": {
+    "sourceHash": "28c9d2f10d7496fb",
+    "productType": "Gumeni disk za uklanjanje traka",
+    "subtype": "gumeni disk · 88 mm · sa adapterom",
+    "shortDescription": "Gumeni disk za uklanjanje lepljivih traka, ostataka lepka i sličnih naslaga, isporučuje se sa adapterom.",
+    "longDescription": "Gumeni disk za uklanjanje lepljivih traka, ostataka lepka i sličnih naslaga. Isporučuje se sa zavrtnjem za adapter za steznu čauru.",
+    "purpose": "Uklanjanje lepljivih traka i ostataka lepka",
+    "facts": [
+      {
+        "label": "Prečnik diska",
+        "value": "88 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": "Obim isporuke: Tape-Off Disk Premium 88 mm (1 kom.) i adapter (1 kom.).",
+    "variants": {
+      "3-804-1001": "Disk 88 mm i adapter"
+    }
+  },
+  "kunststoff-reparatur-set": {
+    "sourceHash": "4756a59f7d0b4236",
+    "productType": "Set za popravku plastike",
+    "subtype": "grejni uređaj (stapler) · čelične spajalice · nož za topljenje",
+    "shortDescription": "Set za brzu popravku oštećenih plastičnih delova utapanjem čeličnih spajalica u plastiku.",
+    "longDescription": "Set za brzu i jednostavnu popravku oštećenih plastičnih delova, uključujući elemente izložene značajnim mehaničkim opterećenjima, kao što su branici i kućišta svetala. Popravka se izvodi utapanjem čeličnih spajalica u delove plastičnog elementa. Spajalice su različitih oblika, za ravne i ugaone delove, a čvrst spoj nastaje za nekoliko sekundi.",
+    "purpose": "Popravka, obnova i ojačavanje plastičnih delova",
+    "facts": [
+      {
+        "label": "Izlazna struja",
+        "value": "2 A"
+      },
+      {
+        "label": "Masa",
+        "value": "0,76 kg"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "239 mm × 49 mm × 61 mm"
+      },
+      {
+        "label": "Napajanje",
+        "value": "230 V / 50 Hz"
+      }
+    ],
+    "applications": [
+      "Popravka, obnova i ojačavanje plastičnih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Ojačavanje pukotina i okrzotina",
+        "description": "Pukotine i okrzotine ojačavaju se čeličnim spajalicama."
+      },
+      {
+        "title": "Zaglađivanje površine",
+        "description": "Površina se zaglađuje posle popravke."
+      },
+      {
+        "title": "Sečenje nožem za topljenje",
+        "description": "Nož za topljenje seče plastične trake i penaste plastike."
+      },
+      {
+        "title": "Krpljenje rupa",
+        "description": "Set omogućava krpljenje rupa na plastičnim delovima."
+      },
+      {
+        "title": "Lemljenje olova i kalaja",
+        "description": "Uređaj se može koristiti i za lemljenje olova i kalaja."
+      }
+    ],
+    "substrates": [],
+    "advice": "Obim isporuke: grejni uređaj (stapler), 4 tipa spajalica od nerđajućeg čelika (po 20 komada) i nož za topljenje.",
+    "variants": {
+      "8-100-0000": "Set za popravku plastike",
+      "8-100-0300": "Spajalice za set · 300 kom."
+    }
+  },
+  "lackierstaender": {
+    "sourceHash": "e8c2fe910f91e27a",
+    "productType": "Stalak za lakiranje",
+    "subtype": "stalak za lakiranje · sklopiv · 6 elemenata za pričvršćivanje",
+    "shortDescription": "Sklopivi stalak za pričvršćivanje radnog komada u položaju koji odgovara lakireru.",
+    "longDescription": "Sklopivi stalak za pričvršćivanje radnog komada u položaju koji je pogodan za lakirera. Stalak je veoma stabilan i prihvata kabaste i teške delove. Ima 6 elemenata za pričvršćivanje.",
+    "purpose": "Pričvršćivanje delova u pogodnom položaju za lakiranje",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-910-1001": "Standardno pakovanje"
+    }
+  },
+  "logo-klebestreifen": {
+    "sourceHash": "9fe316c1a8fdadcd",
+    "productType": "Lepljiva traka za ambleme",
+    "subtype": "akrilni lepak na bazi rastvarača · silikonski zaštitni sloj · samorezna",
+    "shortDescription": "Traka od akrilnog lepka visoke početne lepljivosti, sa obe strane pokrivena silikonskim zaštitnim slojem.",
+    "longDescription": "Logo Tape je izrađen od akrilnog lepka na bazi rastvarača sa visokom početnom lepljivošću, koji je sa obe strane pokriven silikonskim zaštitnim slojem. Namenjen je vraćanju logotipa i amblema na svim tipovima vozila, pozicioniranju delova pre konačnog pričvršćivanja i pričvršćivanju dekorativnih i promotivnih elemenata.",
+    "purpose": "Vraćanje logotipa i amblema i pozicioniranje delova pre konačnog pričvršćivanja",
+    "facts": [
+      {
+        "label": "Debljina",
+        "value": "40 µm / 167 µm (ukupno)"
+      },
+      {
+        "label": "Adhezija",
+        "value": "8,75 N / 10 cm (ASTM D)"
+      },
+      {
+        "label": "Radna temperatura",
+        "value": "-40°C – +170°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "10 kom."
+      }
+    ],
+    "applications": [
+      "Vraćanje logotipa i amblema na svim tipovima vozila",
+      "Pozicioniranje delova pre konačnog pričvršćivanja",
+      "Pričvršćivanje dekorativnih i promotivnih elemenata"
+    ],
+    "benefits": [
+      {
+        "title": "Ušteda vremena i novca",
+        "description": "Štedi vreme i novac pri ponovnom postavljanju oznaka i amblema."
+      },
+      {
+        "title": "Samorezna",
+        "description": "Traka je samorezna."
+      },
+      {
+        "title": "Jednostavna upotreba",
+        "description": "Traka se jednostavno koristi."
+      },
+      {
+        "title": "Lepak premium kvaliteta",
+        "description": "Traka koristi lepak premium kvaliteta."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-180-2110": "200 mm × 100 mm"
+    }
+  },
+  "metalltestkarten": {
+    "sourceHash": "7d5a8fca79daa269",
+    "productType": "Metalna test kartica",
+    "subtype": "metalna test kartica · 105 mm × 150 mm · bela, siva i tamnosiva",
+    "shortDescription": "Metalna test kartica za probu auto-boja pre nanošenja, za boje na bazi rastvarača i vodorazredive boje.",
+    "longDescription": "Metalna test kartica za probu auto-boja pre nanošenja na vozilo. Pogodna je za nanošenje boja na bazi rastvarača i vodorazredivih boja. Dostupna je u beloj, sivoj i tamnosivoj boji, u dimenziji 105 mm × 150 mm.",
+    "purpose": "Proba auto-boja pre nanošenja",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "bela, siva i tamnosiva"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "105 mm × 150 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "7-700-0020": "Tamnosiva · 20 kom.",
+      "7-700-0050": "Siva · 50 kom.",
+      "7-700-0100": "Bela · 100 kom."
+    }
+  },
+  "microfaser-reinigungstuch": {
+    "sourceHash": "7f223535d973e991",
+    "productType": "Mikrofiber krpa za čišćenje",
+    "subtype": "mikrofiber krpa · tkana · 300 g/m²",
+    "shortDescription": "Tkana mikrofiber krpa za brzo i efikasno čišćenje površine bez upotrebe sredstava za čišćenje.",
+    "longDescription": "Tkana mikrofiber krpa za brzo i efikasno čišćenje površine bez upotrebe sredstava za čišćenje. Brzo i efikasno hvata i vezuje nečistoće i vraća sjaj i boju laka. Može se ponovo koristiti posle pranja.",
+    "purpose": "Brzo čišćenje površina bez sredstava za čišćenje",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "crvena"
+      },
+      {
+        "label": "Gramatura",
+        "value": "300 g/m²"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Hvata i vezuje nečistoće",
+        "description": "Brzo i efikasno hvata i vezuje nečistoće."
+      },
+      {
+        "title": "Vraća sjaj i boju",
+        "description": "Vraća sjaj i boju lakirane površine."
+      },
+      {
+        "title": "Bez sredstava za čišćenje",
+        "description": "Ne zahteva sredstva za čišćenje, što donosi uštedu."
+      },
+      {
+        "title": "Višekratna upotreba",
+        "description": "Posle pranja može se ponovo koristiti."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "8-803-0002": "400 mm × 400 mm"
+    }
+  },
+  "nitrilhandschuhe-mit-strukturierten-fingern": {
+    "sourceHash": "3ad84a8501260d9d",
+    "productType": "Nitrilne zaštitne rukavice",
+    "subtype": "zaštitne rukavice · nitril · bez pudera · crne",
+    "shortDescription": "Rukavice od 100% sintetičke nitrilne gume, otporne na širok spektar hemikalija, sa teksturiranim prstima.",
+    "longDescription": "Rukavice od 100% sintetičke nitrilne gume, sa visokom otpornošću na širok spektar hemikalija u poređenju sa prirodnim lateksom iste debljine. Efikasno sprečavaju da neorganske i masne nečistoće dospeju na lakiranu površinu. Proizvod je usklađen sa standardom EN 455-1/2/3.",
+    "purpose": "Zaštita kože pri pripremnim radovima, posebno pri mešanju i pripremi boja",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Materijal",
+        "value": "sintetička nitrilna guma"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "100 kom."
+      }
+    ],
+    "applications": [
+      "Zaštita kože tokom pripremnih radova, posebno pri mešanju i pripremi boja, radi izbegavanja iritacije kože"
+    ],
+    "benefits": [
+      {
+        "title": "Teksturirani prsti",
+        "description": "Rukavice imaju teksturiranu površinu na prstima."
+      },
+      {
+        "title": "Bez pudera",
+        "description": "Rukavicama nije dodat puder kao lubrikant."
+      },
+      {
+        "title": "Zaštita od opasnih supstanci",
+        "description": "Štite od neželjenih i opasnih supstanci."
+      },
+      {
+        "title": "Rolovani rub",
+        "description": "Rolovani rub omogućava lako navlačenje i skidanje."
+      },
+      {
+        "title": "Biokompatibilnost",
+        "description": "Rukavice su testirane na biokompatibilnost."
+      },
+      {
+        "title": "Čvrstoća i otpornost na probijanje",
+        "description": "Imaju veliku čvrstoću i bolju otpornost na probijanje."
+      },
+      {
+        "title": "Udobnost i prianjanje",
+        "description": "Oblik rukavice povećava udobnost i prianjanje."
+      },
+      {
+        "title": "Alternativa za alergične na lateks",
+        "description": "Predstavljaju alternativno rešenje za osobe alergične na prirodni lateks."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-260-0460": "Veličina L",
+      "3-260-0560": "Veličina XL"
+    }
+  },
+  "parksensor-abdeckung": {
+    "sourceHash": "305bb6be2b87cc56",
+    "productType": "Maskirni disk za parking senzore",
+    "subtype": "poliesterski film · silikonski lepak · do 200°C",
+    "shortDescription": "Samolepljivi maskirni disk koji štiti parking senzor tokom brušenja, lakiranja i poliranja, bez demontaže senzora.",
+    "longDescription": "Parking Sensor Masking Disc je kombinacija poliesterskog filma i silikonskog lepka otpornog na visoke temperature. Samolepljivi pokrivač štiti senzor tokom celog procesa popravke i sprečava oštećenja od brušenja, lakiranja i poliranja. Time se štedi vreme i smanjuje rizik od kasnijih problema ili kvarova senzora. Lepak je zaštićen zaštitnim slojem.",
+    "purpose": "Maskiranje parking senzora bez potrebe za demontažom",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "zelena"
+      },
+      {
+        "label": "Adhezija",
+        "value": "11 g/cm"
+      },
+      {
+        "label": "Otpornost na temperaturu",
+        "value": "do 200°C"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "8,8 kg/cm"
+      }
+    ],
+    "applications": [
+      "Maskiranje parking senzora bez potrebe za demontažom"
+    ],
+    "benefits": [
+      {
+        "title": "Sprečava zaprljanje senzora",
+        "description": "Disk sprečava da nečistoće dospeju na senzore."
+      },
+      {
+        "title": "Jednostavna upotreba",
+        "description": "Jezičak za podizanje olakšava postavljanje i skidanje diska."
+      },
+      {
+        "title": "Jedna veličina za sve primene",
+        "description": "Jedna veličina diska pokriva sve primene."
+      },
+      {
+        "title": "Skidanje bez ostataka",
+        "description": "Disk se skida bez ostataka lepka."
+      }
+    ],
+    "substrates": [
+      "parking senzori"
+    ],
+    "advice": null,
+    "variants": {
+      "9-185-0060": "18 mm · debljina 88 µ"
+    }
+  },
+  "pinselflaeschchen": {
+    "sourceHash": "a207fea202aaae76",
+    "productType": "Bočica za korekcije",
+    "subtype": "bočica sa četkicom · providna · otporna na rastvarače",
+    "shortDescription": "Nelomljiva providna bočica sa četkicom za tačkaste popravke, poput oštećenja od udara kamena.",
+    "longDescription": "Nelomljiva i providna bočica sa četkicom, namenjena predaji kupcu za tačkaste popravke kao što su oštećenja od udara kamena. Otporna je na rastvarače i sadrži kuglicu za mešanje.",
+    "purpose": "Tačkaste popravke laka, poput oštećenja od udara kamena",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-115-0001": "Standardno pakovanje"
+    }
+  },
+  "polyethylen-fahrzeugabdeckung": {
+    "sourceHash": "6daf2968885b22d6",
+    "productType": "Zaštitna cerada za vozilo",
+    "subtype": "polietilen · elastična traka na rubu · višekratna upotreba",
+    "shortDescription": "Polietilenska cerada za zaštitu sveže lakiranih i oštećenih vozila, sklopova i delova tokom pregleda i primopredaje.",
+    "longDescription": "Polietilenska cerada namenjena zaštiti sveže lakiranih i oštećenih automobila, kao i sklopova, agregata i delova tokom pregleda i primopredaje. Rub cerade ima elastičnu traku za sigurno maskiranje. Pogodna je za upotrebu u zatvorenom i na otvorenom prostoru i može se koristiti više puta.",
+    "purpose": "Zaštita sveže lakiranih i oštećenih vozila tokom pregleda i primopredaje",
+    "facts": [
+      {
+        "label": "Debljina",
+        "value": "22 μm"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "7,5 m × 4,8 m"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-150-0020": "7,5 m × 4,8 m"
+    }
+  },
+  "professionelle-nitrilhandschuhe": {
+    "sourceHash": "4bd127430638b135",
+    "productType": "Nitrilne zaštitne rukavice",
+    "subtype": "zaštitne rukavice · nitril · bez pudera i silikona · narandžaste",
+    "shortDescription": "Hipoalergene rukavice od nitrilne gume, otporne na ulje, mast, lužine i mnoge druge hemijske supstance.",
+    "longDescription": "Hipoalergene zaštitne rukavice od nitrilne gume koje omogućavaju fin osećaj u prstima. Otporne su na ulje, mast, lužine i mnoge druge hemijske supstance. Ne sadrže puder ni silikon, a pakovanje sadrži 50 komada.",
+    "purpose": "Zaštita ruku od ulja, masti, lužina i drugih hemijskih supstanci",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "narandžasta"
+      },
+      {
+        "label": "Tip",
+        "value": "bez pudera, bez silikona"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "50 kom."
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-261-0150": "Veličina M",
+      "3-261-0250": "Veličina L",
+      "3-261-0350": "Veličina XL",
+      "3-261-0450": "Veličina XXL"
+    }
+  },
+  "putztuch-multi": {
+    "sourceHash": "60afb6abd4229fe5",
+    "productType": "Krpa za čišćenje",
+    "subtype": "krpa za čišćenje · ne ostavlja vlakna · otporna na ulja i rastvarače",
+    "shortDescription": "Krpe koje ne ostavljaju vlakna, otporne na ulja i rastvarače, za uklanjanje prosutog ulja, boje, mastila i slično.",
+    "longDescription": "Krpe koje ne ostavljaju vlakna (bez dispenzera), sa visokom otpornošću na ulja i rastvarače, namenjene uklanjanju prosutog ulja, boje, mastila i sličnih materija. Posebna impregnacija povećava kapacitet upijanja. Pogodne su za čišćenje i brisanje opreme, podova, radnih komada i slično.",
+    "purpose": "Uklanjanje prosutog ulja, boje i mastila; čišćenje opreme, podova i radnih komada",
+    "facts": [
+      {
+        "label": "Gramatura",
+        "value": "75 g/m²"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Veći kapacitet upijanja",
+        "description": "Posebna impregnacija obezbeđuje veći kapacitet upijanja."
+      },
+      {
+        "title": "Široka primena u radionici",
+        "description": "Pogodna je za čišćenje i brisanje opreme, podova, radnih komada i slično."
+      },
+      {
+        "title": "Izdržljiva i meka",
+        "description": "Krpa je istovremeno izdržljiva i meka."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "8-801-0035": "35 kom.",
+      "8-801-0500": "500 kom."
+    }
+  },
+  "rollbarer-spender-abdeck-papier": {
+    "sourceHash": "bf2a4638c55625e4",
+    "productType": "Pokretni dispenzer za maskirni papir",
+    "subtype": "dispenzer za maskirni papir · 3 rolne · rolne širine do 90 cm",
+    "shortDescription": "Pokretni dispenzer koji istovremeno prima 3 odvojene rolne maskirnog papira, sa valjcima za maskirnu traku.",
+    "longDescription": "Pokretni dispenzer koji istovremeno prima 3 odvojene rolne maskirnog papira i opremljen je valjcima za odmotavanje maskirne trake. Omogućava brzo i ekonomično maskiranje radi zaštite vozila od raspršene boje (overspray). Maksimalna širina rolne je 90 cm.",
+    "purpose": "Brzo maskiranje vozila radi zaštite od raspršene boje",
+    "facts": [
+      {
+        "label": "Broj rolni",
+        "value": "3"
+      },
+      {
+        "label": "Maks. širina rolne",
+        "value": "90 cm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "1-225-0001": "Standardno pakovanje"
+    }
+  },
+  "ruehrstab": {
+    "sourceHash": "26150a2e13c2ca83",
+    "productType": "Štapić za mešanje",
+    "subtype": "štapić za mešanje · polipropilen · 20 cm i 27 cm",
+    "shortDescription": "Plastični štapić za mešanje boja i bezbojnih lakova, od čvrstog polipropilena otpornog na organske rastvarače.",
+    "longDescription": "Plastični štapić za mešanje boja i bezbojnih lakova. Izrađen je od mehanički čvrstog polipropilena na koji organski rastvarači ne utiču. Zarez na štapiću obezbeđuje efikasno mešanje materijala i uz zidove limenke, a glatka površina se lako čisti od ostataka materijala. Dostupan je sa CARfit logom ili u neutralnoj izvedbi.",
+    "purpose": "Mešanje boja i bezbojnih lakova u auto-reparaturnom lakiranju",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "crna, bela"
+      },
+      {
+        "label": "Dužina",
+        "value": "20 cm, 27 cm"
+      },
+      {
+        "label": "Tip",
+        "value": "sa CARfit logom, neutralni"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "30 kom."
+      }
+    ],
+    "applications": [
+      "Auto-reparaturno lakiranje"
+    ],
+    "benefits": [
+      {
+        "title": "Zarez za efikasno mešanje",
+        "description": "Zarez na štapiću obezbeđuje efikasno mešanje materijala čak i uz zidove limenke."
+      },
+      {
+        "title": "Odgovara različitim limenkama",
+        "description": "Oblik i položaj zareza omogućavaju upotrebu štapića sa različitim limenkama koje se koriste u lakirerskoj industriji."
+      },
+      {
+        "title": "Oštra ivica za zidove limenke",
+        "description": "Jedna strana štapića je oštra, pa se materijal lako skida sa zidova limenke."
+      },
+      {
+        "title": "Manje grešaka u nijansi",
+        "description": "Štapić pomaže da se izbegne greška u nijansi koja nastaje zbog nepotpunog mešanja komponenti boje."
+      },
+      {
+        "title": "Glatka površina",
+        "description": "Glatka površina se lako čisti od ostataka materijala."
+      },
+      {
+        "title": "Pranje u mašini za pištolje",
+        "description": "Može se čistiti u mašini za pranje pištolja za lakiranje."
+      },
+      {
+        "title": "Lako čišćenje bez rupa",
+        "description": "Lako se čisti jer nema rupa u kojima bi se materijal zadržavao."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "7-760-1020": "Crna · 20 cm",
+      "7-760-1027": "Crna · 27 cm",
+      "7-760-1120": "Bela · 20 cm",
+      "7-760-1127": "Bela · 27 cm"
+    }
+  },
+  "ruehrstaebe-mix-s-stick": {
+    "sourceHash": "ab415411366d6618",
+    "productType": "Jednokratni štapić za mešanje",
+    "subtype": "štapić za mešanje · jednokratni · polipropilen sa rupama",
+    "shortDescription": "Jednokratni štapić za intenzivno mešanje komponenti boje, od čvrstog polipropilena otpornog na rastvarače.",
+    "longDescription": "Jednokratni štapić za intenzivno mešanje komponenti boje. Izrađen je od mehanički čvrstog polipropilena otpornog na rastvarače. Posebne rupe na štapiću povećavaju intenzitet mešanja, a štapići se isporučuju u kartonskom dispenzeru.",
+    "purpose": "Intenzivno mešanje komponenti boje",
+    "facts": [],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Kartonski dispenzer",
+        "description": "Štapići se isporučuju u kartonskom dispenzeru."
+      },
+      {
+        "title": "Rupe za intenzivnije mešanje",
+        "description": "Štapić ima posebne rupe koje povećavaju intenzitet mešanja."
+      },
+      {
+        "title": "Čvrsta plastika otporna na rastvarače",
+        "description": "Izrađen je od čvrste plastike otporne na rastvarače."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "7-761-0500": "500 kom."
+    }
+  },
+  "schleifkontroll-und-pulver-set": {
+    "sourceHash": "1a27e2011e095391",
+    "productType": "Kontrolni prah za brušenje",
+    "subtype": "kontrolni prah za brušenje · suvi prah · bez rastvarača",
+    "shortDescription": "Sistem za kontrolu brušenja koji ističe nepravilnosti poput pora i ogrebotina u puniocima i prajmerima.",
+    "longDescription": "Sistem za kontrolu brušenja koji ističe nepravilnosti kao što su pore i ogrebotine u puniocima i prajmerima. Pomaže da se postigne ravna površina i da konture karoserije tačno odgovaraju originalnim. Primena je brza i jednostavna, bez rastvarača.",
+    "purpose": "Kontrola brušenja pre nanošenja lakirerskih materijala pri popravci karoserije",
+    "facts": [],
+    "applications": [
+      "Suvi crni prah za kontrolu brušenja pre nanošenja lakirerskih materijala pri popravci karoserije"
+    ],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-201-0150": "150 g · sa aplikatorom",
+      "5-200-0150": "150 g · bez aplikatora",
+      "5-202-0150": "Kontrolni prah · narandžasti · set"
+    }
+  },
+  "schutzanzug-fuer-maler-und-lackierarbeiten": {
+    "sourceHash": "f570dd5943d63ba9",
+    "productType": "Zaštitni kombinezon",
+    "subtype": "zaštitni kombinezon · sa kapuljačom · celuloza sa polietilenskom impregnacijom",
+    "shortDescription": "Lagan i udoban lakirerski kombinezon sa kapuljačom, od obrađene celuloze sa polietilenskom impregnacijom.",
+    "longDescription": "Lagan i udoban lakirerski kombinezon sa kapuljačom, izrađen od obrađene celuloze sa polietilenskom impregnacijom, što ga čini izdržljivijim. Štiti od tečnosti i aerosola. Ima patent-zatvarač i elastične manžetne na rukavima, nogavicama i kapuljači radi zaštite od raspršene boje.",
+    "purpose": "Zaštita lakirera od tečnosti, aerosola i raspršene boje",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-267-0009": "Veličina S",
+      "3-267-0016": "Veličina M",
+      "3-267-0017": "Veličina L",
+      "3-267-0018": "Veličina XL",
+      "3-267-0019": "Veličina XXL"
+    }
+  },
+  "sitzbezuege": {
+    "sourceHash": "ddf492e60cc0a195",
+    "productType": "Jednokratna navlaka za sedište",
+    "subtype": "navlaka za sedište · polietilen · 82 cm × 130 cm",
+    "shortDescription": "Polietilenska unapred krojena navlaka za sedište 82 × 130 cm za maskiranje sedišta vozila tokom popravke.",
+    "longDescription": "Polietilenska unapred krojena navlaka za sedište dimenzija 82 × 130 cm, namenjena maskiranju sedišta vozila tokom popravke. Isporučuje se 500 komada u rolnama sa poprečnom perforacijom radi lakog otkidanja. Debljina folije je 10 μm.",
+    "purpose": "Maskiranje sedišta vozila tokom popravke",
+    "facts": [
+      {
+        "label": "Dimenzije",
+        "value": "82 cm × 130 cm × 10 μm"
+      },
+      {
+        "label": "Materijal",
+        "value": "polietilen"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "500 kom."
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-120-0500": "500 kom."
+    }
+  },
+  "spruehpumpe": {
+    "sourceHash": "f16d4dc198450ba3",
+    "productType": "Prskalica sa vazdušnom pumpom",
+    "subtype": "prskalica · vazdušna pumpa · 1 l",
+    "shortDescription": "Prskalica sa vazdušnom pumpom za nanošenje sredstava za uklanjanje silikona i neutralnih sredstava za čišćenje.",
+    "longDescription": "Prskalica sa vazdušnom pumpom namenjena je raspršivanju sredstava za uklanjanje silikona i neutralnih sredstava za čišćenje. Izrađena je od plastike otporne na te materijale.",
+    "purpose": "Raspršivanje sredstava za uklanjanje silikona i neutralnih sredstava za čišćenje",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-255-0001": "1 l"
+    }
+  },
+  "staubbindetuch": {
+    "sourceHash": "a887188663a00938",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "lepljiva krpa za prašinu · pamučna · bez voska i silikona",
+    "shortDescription": "Pamučna lepljiva krpa za uklanjanje prašine sa svih vrsta površina, uključujući premaze na vodenoj bazi.",
+    "longDescription": "Pamučna lepljiva krpa za uklanjanje prašine sa svih vrsta površina, uključujući premaze na vodenoj bazi. Ne gužva se, pa tkaninu nije potrebno ravnati. Ne sadrži vosak ni silikon.",
+    "purpose": "Uklanjanje prašine sa površina pre lakiranja",
+    "facts": [
+      {
+        "label": "Pakovanje",
+        "value": "5 kom."
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-100-0005": "80 cm × 50 cm · 5 kom.",
+      "6-101-0001": "80 cm × 50 cm · 100 kom."
+    }
+  },
+  "staubbindetuch-super-wave": {
+    "sourceHash": "4ceb066b4b58180b",
+    "displayName": "Tack cloth \"Super Wave\"",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "lepljiva krpa za prašinu · talasasta površina · pamuk i viskoza",
+    "shortDescription": "Lepljiva krpa za prašinu sa talasastom površinom koja se lako prilagođava obliku dlana i površini koja se briše.",
+    "longDescription": "Lepljiva krpa „Super Wave” lako poprima oblik dlana, pa pri brisanju dobro naleže na površinu i nisu potrebna pomoćna sredstva. Veća površina krpe uz manju zonu kontakta omogućava sigurno vezivanje prašine unutar krpe, bez obzira na veličinu čestica. Noseći materijal propušta prašinu u unutrašnje slojeve i daje veliki kapacitet upijanja prašine. Impregnacija se ne suši i kompatibilna je sa svim vrstama reparaturnih materijala.",
+    "purpose": "Vezivanje prašine pri brušenju i reparaturnom lakiranju",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "prirodno bela"
+      },
+      {
+        "label": "Impregnacija",
+        "value": "nesušiva alkidna smola (najmanje 48% ukupne mase)"
+      },
+      {
+        "label": "Skladištenje",
+        "value": "neograničeno, preporučuje se čuvanje u originalnom pakovanju"
+      },
+      {
+        "label": "Gustina tkanja",
+        "value": "10 / 6 (60 / 70 Nm)"
+      },
+      {
+        "label": "Noseći materijal",
+        "value": "pamučna i viskozna gaza sa talasastom površinom"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "1 kom."
+      }
+    ],
+    "applications": [
+      "Vezivanje prašine radi brušenja i reparaturnog lakiranja bez prašine"
+    ],
+    "benefits": [
+      {
+        "title": "Talasasta površina",
+        "description": "Talasasta površina je veoma važna za uklanjanje prašine sa velikih i ravnih delova."
+      },
+      {
+        "title": "Prilagođava se površini",
+        "description": "Krpa se lako prilagođava površini koja se obrađuje."
+      },
+      {
+        "title": "Veoma dobro upija prašinu",
+        "description": "Krpa veoma dobro upija prašinu."
+      },
+      {
+        "title": "Lako klizi po površini",
+        "description": "Krpa lako klizi po površini."
+      },
+      {
+        "title": "Jednostavna za upotrebu",
+        "description": "Krpa je jednostavna za upotrebu."
+      },
+      {
+        "title": "Bez pomoćnih sredstava",
+        "description": "Za rad nisu potrebna dodatna pomoćna sredstva."
+      }
+    ],
+    "substrates": [
+      "metalni delovi",
+      "guma",
+      "staklo",
+      "hromirane površine",
+      "gitovi",
+      "prajmeri/punioci",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": "Rok skladištenja je neograničen; preporučuje se čuvanje u originalnom pakovanju.",
+    "variants": {
+      "6-110-0001": "80 cm × 90 cm"
+    }
+  },
+  "touch-up-micro-applicator": {
+    "sourceHash": "7963030bc30dd899",
+    "productType": "Mikro aplikator za korekcije",
+    "subtype": "mikro aplikator · standardni, fini i super fini",
+    "shortDescription": "Mikro aplikator za male i precizne korekcije pri popravci lakiranih površina.",
+    "longDescription": "Touch-Up Micro Applicator je mikro aplikator za male i precizne korekcije pri popravci lakiranih površina. Dostupan je u standardnoj, finoj i super finoj izvedbi.",
+    "purpose": "Male i precizne korekcije pri popravci laka",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "3-116-0101": "Standardni",
+      "3-117-0101": "Fini",
+      "3-118-0101": "Super fini"
+    }
+  }
+}

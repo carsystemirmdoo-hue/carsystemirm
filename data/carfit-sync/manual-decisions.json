@@ -1,0 +1,18 @@
+{
+  "_comment": [
+    "Ručne odluke vlasnika. Sync ih čita, nikad ih ne piše. Posle izmene: `npm run carfit:sync:apply`.",
+    "source.<sourceKey> = { \"decision\": \"skip\", \"note\": \"…\" }        → zvanični proizvod se ne uvozi (svesno ruši paritet za taj proizvod).",
+    "articles.<šifra>   = { \"owner\": \"<sourceKey>\", \"note\": \"…\" }        → vlasnik šifre koja je na više stranica sajta.",
+    "local.<naš slug>   = { \"sourceKey\": \"…\", \"note\": \"…\" }              → ručni zapis JESTE taj zvanični proizvod (dopuna umesto uvoza).",
+    "local.<naš slug>   = { \"decision\": \"keep-separate\", \"note\": \"…\" }   → ručni zapis se NE spaja, i kada dokazi ukazuju na spajanje.",
+    "local.<naš slug>   = { \"useOfficialPresentation\": true, \"note\": \"…\" } → pouzdano prepoznat ručni zapis dobija zvanični NAZIV i opis porodice (slug ostaje). Koristi se kada ručni naziv opisuje samo jednu varijantu."
+  ],
+  "source": {},
+  "articles": {},
+  "local": {
+    "carfit-maskirna-folija-4x5m": {
+      "useOfficialPresentation": true,
+      "note": "Odobrio vlasnik 2026-09-19: zapis je HIGH_CONFIDENCE_MATCH sa porodicom „Masking film 7mm with electrostatic effect” (3 dimenzije), pa naziv više ne sme da sugeriše samo 4 x 5 m. Slug ostaje radi URL-a."
+    }
+  }
+}

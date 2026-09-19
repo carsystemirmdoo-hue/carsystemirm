@@ -1,0 +1,109 @@
+{
+  "abdeckfolie-mit-elektrostatischen-eigenschaften": {
+    "sourceHash": "c177f47df6cd8830",
+    "productType": "Maskirna folija sa elektrostatičkim efektom",
+    "subtype": "maskirna folija · HDPE polietilen · elektrostatička · poluprovidna",
+    "shortDescription": "Poluprovidna polietilenska maskirna folija koja zahvaljujući elektrostatičkom naboju prianja na sve lakirane površine.",
+    "longDescription": "Poluprovidna zaštitna folija od polietilena koja zahvaljujući elektrostatičkom naboju prianja na sve lakirane površine. Pošto se postavlja bez lepka, može se koristiti više puta i predviđena je za dugotrajnu upotrebu. Izrađena je od polietilena visoke gustine (HDPE) i otporna je na toplotu u opsegu 10°C – 140°C.",
+    "purpose": "Brzo pokrivanje velikih površina i delova vozila pre lakiranja",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "polietilen visoke gustine (HDPE)"
+      }
+    ],
+    "applications": [
+      "Brzo pokrivanje velikih površina i delova vozila pre lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Polietilen visoke gustine (HDPE)",
+        "description": "Folija je izrađena od polietilena visoke gustine (HDPE)."
+      },
+      {
+        "title": "Otporna na toplotu",
+        "description": "Otporna je na toplotu u opsegu 10°C – 140°C."
+      }
+    ],
+    "substrates": [
+      "metalni i plastični delovi",
+      "guma",
+      "staklo",
+      "hromirane površine",
+      "OEM lak"
+    ],
+    "advice": null,
+    "variants": {
+      "1-202-4020": "4 m × 200 m",
+      "1-202-4030": "4 m × 300 m",
+      "1-202-5020": "5 m × 200 m"
+    }
+  },
+  "abdeckfolie-mit-klebeband": {
+    "sourceHash": "339d6435ba84e68e",
+    "productType": "Maskirna folija sa lepljivom trakom",
+    "subtype": "maskirna folija · integrisana lepljiva traka · boja prianja na foliju",
+    "shortDescription": "Maskirna folija na koju boja prianja, sa integrisanom lepljivom trakom, za brzo pokrivanje npr. stakala, branika i pragova.",
+    "longDescription": "Maskirna folija sa integrisanom lepljivom trakom, na čiju površinu boja prianja. Služi za brzo pokrivanje delova vozila kao što su stakla, branici i pragovi.",
+    "purpose": "Brzo pokrivanje stakala, branika, pragova i sličnih delova vozila",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "1-200-1800": "1800 mm × 33 m",
+      "1-200-2700": "2700 mm × 20 m",
+      "1-200-0550": "550 mm × 33 m"
+    }
+  },
+  "abdeckmaterial-mit-elektrostatischen-eigenschaften": {
+    "sourceHash": "8877f9e2957220d8",
+    "displayName": "Masking film 7 μm with electrostatic effect",
+    "productType": "Maskirna folija sa elektrostatičkim efektom",
+    "subtype": "maskirna folija · HDPE polietilen · 7 μm · elektrostatička",
+    "shortDescription": "Poluprovidna polietilenska maskirna folija debljine 7 μm koja zahvaljujući elektrostatičkom naboju prianja na sve lakirane površine.",
+    "longDescription": "Poluprovidna zaštitna folija od polietilena koja zahvaljujući elektrostatičkom naboju prianja na sve lakirane površine. Pošto se postavlja bez lepka, može se koristiti više puta i predviđena je za dugotrajnu upotrebu. Izrađena je od polietilena visoke gustine (HDPE), debljine je 7 μm i otporna je na toplotu u opsegu 10°C – 140°C.",
+    "purpose": "Brzo pokrivanje velikih površina i delova vozila pre lakiranja",
+    "facts": [
+      {
+        "label": "Debljina",
+        "value": "7 μm"
+      },
+      {
+        "label": "Materijal",
+        "value": "polietilen visoke gustine (HDPE)"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "10°C – 140°C"
+      }
+    ],
+    "applications": [
+      "Brzo pokrivanje velikih površina i delova vozila pre lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Polietilen visoke gustine (HDPE)",
+        "description": "Folija je izrađena od polietilena visoke gustine (HDPE)."
+      },
+      {
+        "title": "Otporna na toplotu",
+        "description": "Otporna je na toplotu u opsegu 10°C – 140°C."
+      }
+    ],
+    "substrates": [
+      "metalni i plastični delovi",
+      "guma",
+      "staklo",
+      "hromirane površine",
+      "OEM lak"
+    ],
+    "advice": null,
+    "variants": {
+      "1-201-0450": "4 m × 5 m",
+      "1-201-0470": "4 m × 7 m",
+      "1-201-0570": "5 m × 7 m"
+    }
+  }
+}

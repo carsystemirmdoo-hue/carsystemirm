@@ -1,0 +1,978 @@
+{
+  "summary": {
+    "KEEP_BRAND": 65,
+    "PACKSHOT_NEUTRAL": 5,
+    "PACKSHOT_SAMPLE": 10,
+    "STATED_COLOUR": 41
+  },
+  "decisions": [
+    {
+      "slug": "carfit-1k-etch-primer-spray",
+      "officialName": "1K Etch Primer Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-1k-hi-build-primer-filler-spray",
+      "officialName": "1K Hi-Build primer filler Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "grey, black, white",
+      "reason": "više boja u porodici („grey, black, white”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-1k-plastic-primer-spray",
+      "officialName": "1K Plastic primer Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#B8BCC1",
+      "stated": "silver",
+      "reason": "carfitrepair.com „Color: silver” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-2k-clearcoat-spray",
+      "officialName": "2K Clearcoat Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "colorless",
+      "reason": "„Color: colorless” — bezbojan materijal nema boju kartice"
+    },
+    {
+      "slug": "carfit-2k-epoxy-primer-1-1",
+      "officialName": "2K Epoxy Primer 1:1",
+      "decision": "STATED_COLOUR",
+      "color": "#C8CBCF",
+      "stated": "light grey",
+      "reason": "carfitrepair.com „Color: light grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-2k-fast-air-primer-filler-3-1",
+      "officialName": "2K Fast Air Primer Filler 3:1",
+      "decision": "STATED_COLOUR",
+      "color": "#C8CBCF",
+      "stated": "light grey",
+      "reason": "carfitrepair.com „Color: light grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-2k-hs-acryl-primer-filler-4-1",
+      "officialName": "2K HS Acryl Primer Filler 4:1",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "grey, black and white",
+      "reason": "više boja u porodici („grey, black and white”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-2k-hs-perfect-clear",
+      "officialName": "2K HS Perfect clear",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-2k-hs-scratch-resistent-clearcoat-2-1",
+      "officialName": "2K HS Scratch resistent clearcoat 2:1",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-2k-ms-clearcoat-industrial-use",
+      "officialName": "2K MS Clearcoat industrial use",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-2k-uhs-low-voc-clearcoat",
+      "officialName": "2K UHS low VOC Clearcoat",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-2k-ultra-hs-clearcoat",
+      "officialName": "2K Ultra HS Clearcoat",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-2k-us-filler-4-1",
+      "officialName": "2K US Filler 4:1",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-2k-washprimer-2-1",
+      "officialName": "2K Washprimer 2:1",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "colorless",
+      "reason": "„Color: colorless” — bezbojan materijal nema boju kartice"
+    },
+    {
+      "slug": "carfit-alu-and-soft-putty",
+      "officialName": "Alu & Soft Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey metallic",
+      "reason": "carfitrepair.com „Color: grey metallic” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-bitumen-underbody-protection",
+      "officialName": "Bitumen underbody protection",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-black-paint-spray",
+      "officialName": "Black paint Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black, mat and glossy",
+      "reason": "carfitrepair.com „Color: black, mat and glossy” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-blending-tape",
+      "officialName": "Blending tape",
+      "decision": "STATED_COLOUR",
+      "color": "#E6E3DD",
+      "stated": "white",
+      "reason": "carfitrepair.com „Color: white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-car-clean-multi",
+      "officialName": "Car Clean Multi",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-carbon-putty",
+      "officialName": "Carbon Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-cavity-preservation-spray",
+      "officialName": "Cavity preservation Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#E6E3DD",
+      "stated": "white, transparent",
+      "reason": "carfitrepair.com „Color: white, transparent” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-clearcoar-matt",
+      "officialName": "Clearcoar matt",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-color-net-disc",
+      "officialName": "Color Net Disc",
+      "decision": "PACKSHOT_NEUTRAL",
+      "color": "#7E7875",
+      "stated": "different",
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-netzschleifscheiben.jpg): medijana neutralne površine proizvoda"
+    },
+    {
+      "slug": "carfit-cover-tape-orange-up-to-100c",
+      "officialName": "Cover tape orange up to 100°C",
+      "decision": "STATED_COLOUR",
+      "color": "#DF7A27",
+      "stated": "orange",
+      "reason": "carfitrepair.com „Color: orange” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-cover-tape-up-to-100c",
+      "officialName": "Cover tape up to 100°C",
+      "decision": "STATED_COLOUR",
+      "color": "#6A4932",
+      "stated": "brown",
+      "reason": "carfitrepair.com „Color: brown” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-cover-tape-up-to-80c",
+      "officialName": "Cover tape up to 80°C",
+      "decision": "STATED_COLOUR",
+      "color": "#E6E3DD",
+      "stated": "white",
+      "reason": "carfitrepair.com „Color: white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-cover-tape-water-resistant-up-to-120c",
+      "officialName": "Cover tape water resistant up to 120°C",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#EFE804",
+      "stated": "yellow",
+      "reason": "carfitrepair.com zvanična slika (2023__04__9-120-00__-CF-Masking-waterproof-tape-all.jpg): uzorak dominantne boje, 88% površine proizvoda; zvanično „Color: yellow”"
+    },
+    {
+      "slug": "carfit-coverall-black-label-edition",
+      "officialName": "Coverall Black Label Edition",
+      "decision": "PACKSHOT_NEUTRAL",
+      "color": "#47484D",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-schutzanzug-fuer-maler-und-lackierarbeiten.jpg): medijana neutralne površine proizvoda"
+    },
+    {
+      "slug": "carfit-coverpaper-waterproof",
+      "officialName": "Coverpaper waterproof",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "brown",
+      "reason": "„Color: brown” postoji, ali kategorija nije označena kao materialColour (boja ambalaže/spreja se ne proglašava bojom materijala)"
+    },
+    {
+      "slug": "carfit-cutting-compound",
+      "officialName": "Cutting compound",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "white",
+      "reason": "„Color: white” postoji, ali kategorija nije označena kao materialColour (boja ambalaže/spreja se ne proglašava bojom materijala)"
+    },
+    {
+      "slug": "carfit-disposable-floor-mats",
+      "officialName": "Disposable Floor Mats",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-disposable-paint-strainers",
+      "officialName": "Disposable Paint Strainers",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-disposable-seat-covers",
+      "officialName": "Disposable Seat Covers",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-double-layer-cleaning-cloths",
+      "officialName": "Double Layer Cleaning Cloths",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#9EB6F5",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-2-lagiges-putztuch.jpg): uzorak dominantne boje, 99% površine proizvoda"
+    },
+    {
+      "slug": "carfit-epoxy-metal-filler",
+      "officialName": "Epoxy Metal Filler",
+      "decision": "STATED_COLOUR",
+      "color": "#C8CBCF",
+      "stated": "light grey",
+      "reason": "carfitrepair.com „Color: light grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-express-clearcoat",
+      "officialName": "Express Clearcoat",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-fabric-tape",
+      "officialName": "Fabric tape",
+      "decision": "STATED_COLOUR",
+      "color": "#B8BCC1",
+      "stated": "silver",
+      "reason": "carfitrepair.com „Color: silver” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-fade-out-thinner",
+      "officialName": "Fade Out Thinner",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "colorless",
+      "reason": "„Color: colorless” — bezbojan materijal nema boju kartice"
+    },
+    {
+      "slug": "carfit-fade-out-thinner-spray",
+      "officialName": "Fade out thinner Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "colorless",
+      "reason": "„Color: colorless” — bezbojan materijal nema boju kartice"
+    },
+    {
+      "slug": "carfit-fast-paint-system",
+      "officialName": "Fast Paint System",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-fillable-spray-can",
+      "officialName": "Fillable spray can",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-fine-line-tape",
+      "officialName": "Fine Line Tape",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#003377",
+      "stated": "dark blue glossy",
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-zierlinienband.jpg): uzorak dominantne boje, 84% površine proizvoda; zvanično „Color: dark blue glossy”"
+    },
+    {
+      "slug": "carfit-finishing-compound",
+      "officialName": "Finishing compound",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "grey",
+      "reason": "„Color: grey” postoji, ali kategorija nije označena kao materialColour (boja ambalaže/spreja se ne proglašava bojom materijala)"
+    },
+    {
+      "slug": "carfit-flat-sanding-block",
+      "officialName": "Flat Sanding Block",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#D6E301",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-flacher-schleifbock.jpg): uzorak dominantne boje, 59% površine proizvoda"
+    },
+    {
+      "slug": "carfit-folding-paint-stand-premium",
+      "officialName": "Folding paint stand premium",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-glas-plus-putty",
+      "officialName": "Glas Plus Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#3E8E4B",
+      "stated": "green",
+      "reason": "carfitrepair.com „Color: green” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-gold-paper-disc",
+      "officialName": "Gold Paper Disc",
+      "decision": "STATED_COLOUR",
+      "color": "#E3BD1F",
+      "stated": "yellow",
+      "reason": "carfitrepair.com „Color: yellow” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-gun-cleaner",
+      "officialName": "Gun Cleaner",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-hand-sanding-block",
+      "officialName": "Hand Sanding Block",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#E4D001",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-handschleifblock.jpg): uzorak dominantne boje, 78% površine proizvoda"
+    },
+    {
+      "slug": "carfit-high-gloss-clearcoat-spray",
+      "officialName": "High gloss clearcoat Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "colorless",
+      "reason": "„Color: colorless” — bezbojan materijal nema boju kartice"
+    },
+    {
+      "slug": "carfit-interface-pads",
+      "officialName": "Interface Pads",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-lifting-tape",
+      "officialName": "Lifting Tape",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#C2B46C",
+      "stated": "Ivory",
+      "reason": "carfitrepair.com zvanična slika (2023__04__9-160-5010-1-scaled.jpeg): uzorak dominantne boje, 72% površine proizvoda; zvanično „Color: Ivory”"
+    },
+    {
+      "slug": "carfit-logo-tape",
+      "officialName": "Logo Tape",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-manual-polishing-and-sanding-pad",
+      "officialName": "Manual Polishing and Sanding Pad",
+      "decision": "PACKSHOT_NEUTRAL",
+      "color": "#171B20",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-manuelles-polier-und-schleifpad.jpg): medijana neutralne površine proizvoda"
+    },
+    {
+      "slug": "carfit-masking-film-with-electrostatic-effect",
+      "officialName": "Masking film with electrostatic effect",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-metal-test-cards",
+      "officialName": "Metal Test Cards",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "white, grey and dark grey",
+      "reason": "više boja u porodici („white, grey and dark grey”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-microfiber-cleaning-cloth",
+      "officialName": "Microfiber Cleaning Cloth",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#F73443",
+      "stated": "red",
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-mikrofaser-tuch-rot.jpg): uzorak dominantne boje, 88% površine proizvoda; zvanično „Color: red”"
+    },
+    {
+      "slug": "carfit-mixing-cups-and-mixing-lids",
+      "officialName": "Mixing Cups & Mixing Lids",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-mixing-s-sticks",
+      "officialName": "Mixing-S-Sticks",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-mobile-masking-paper-dispenser",
+      "officialName": "Mobile Masking Paper Dispenser",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-multi-putty",
+      "officialName": "Multi Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#E3BD1F",
+      "stated": "yellow",
+      "reason": "carfitrepair.com „Color: yellow” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-multi-soft-putty",
+      "officialName": "Multi Soft Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-nitrile-gloves-palm-textured",
+      "officialName": "Nitrile Gloves Palm Textured",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-nonwoven-polishing-cloth",
+      "officialName": "Nonwoven polishing cloth",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-ozone-generators",
+      "officialName": "Ozone Generators",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-pads-for-polishing-discs-velcro",
+      "officialName": "Pads for polishing discs Velcro",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-paint-remover-spray",
+      "officialName": "Paint remover Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "white",
+      "reason": "„Color: white” postoji, ali kategorija nije označena kao materialColour (boja ambalaže/spreja se ne proglašava bojom materijala)"
+    },
+    {
+      "slug": "carfit-parking-sensor-masking-disc",
+      "officialName": "Parking Sensor Masking Disc",
+      "decision": "STATED_COLOUR",
+      "color": "#3E8E4B",
+      "stated": "green",
+      "reason": "carfitrepair.com „Color: green” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-pe-mounting-tape",
+      "officialName": "PE mounting tape",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-perfect-filler-4-1-grey",
+      "officialName": "Perfect Filler 4:1 Grey",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-perfect-multi-green-putty",
+      "officialName": "Perfect Multi Green Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#3E8E4B",
+      "stated": "green",
+      "reason": "carfitrepair.com „Color: green” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-plastic-primer",
+      "officialName": "Plastic Primer",
+      "decision": "STATED_COLOUR",
+      "color": "#B8BCC1",
+      "stated": "silver",
+      "reason": "carfitrepair.com „Color: silver” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-plastic-putty",
+      "officialName": "Plastic Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-plastic-repair-kit",
+      "officialName": "Plastic Repair Kit",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "amber/yellow",
+      "reason": "„Color: amber/yellow” postoji, ali kategorija nije označena kao materialColour (boja ambalaže/spreja se ne proglašava bojom materijala)"
+    },
+    {
+      "slug": "carfit-plastic-stapler-kit",
+      "officialName": "Plastic Stapler Kit",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-polishing-discs-velcro",
+      "officialName": "Polishing discs Velcro",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "black, orange, white",
+      "reason": "više boja u porodici („black, orange, white”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-polishing-sponge-conical",
+      "officialName": "Polishing sponge conical",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-polyethylene-car-cover",
+      "officialName": "Polyethylene Car Cover",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-pretaped-masking-film",
+      "officialName": "Pretaped masking film",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-professional-nitrile-gloves",
+      "officialName": "Professional Nitrile Gloves",
+      "decision": "STATED_COLOUR",
+      "color": "#DF7A27",
+      "stated": "orange",
+      "reason": "carfitrepair.com „Color: orange” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-pu-adhesive-and-sealant",
+      "officialName": "PU Adhesive and Sealant",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "grey, black",
+      "reason": "više boja u porodici („grey, black”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-pump-spray",
+      "officialName": "Pump Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-purple-ceramic-film",
+      "officialName": "Purple Ceramic Film",
+      "decision": "STATED_COLOUR",
+      "color": "#6B4FA0",
+      "stated": "Purple",
+      "reason": "carfitrepair.com „Color: Purple” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-rapid-air-clear-coat-voc",
+      "officialName": "Rapid air clear coat VOC",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-red-film-abrasive-discs",
+      "officialName": "Red Film Abrasive Discs",
+      "decision": "STATED_COLOUR",
+      "color": "#C4352D",
+      "stated": "red",
+      "reason": "carfitrepair.com „Color: red” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-rotating-paint-stand",
+      "officialName": "Rotating Paint Stand",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-rubber-sanding-block",
+      "officialName": "Rubber Sanding Block",
+      "decision": "PACKSHOT_NEUTRAL",
+      "color": "#18262A",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-gummi-schleifblock.jpg): medijana neutralne površine proizvoda"
+    },
+    {
+      "slug": "carfit-rubbing-compound",
+      "officialName": "Rubbing compound",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-sanding-control-kit-and-sanding-powder",
+      "officialName": "Sanding Control Kit and Sanding Powder",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-scr-mixing-lids",
+      "officialName": "SCR mixing lids",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-scr-strainers",
+      "officialName": "SCR strainers",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-semi-round-sanding-block",
+      "officialName": "Semi-Round Sanding Block",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#E8FA06",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-halbrunder-schleifblock.jpg): uzorak dominantne boje, 62% površine proizvoda"
+    },
+    {
+      "slug": "carfit-silicone-remover",
+      "officialName": "Silicone Remover",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-silicone-remover-strawberry",
+      "officialName": "Silicone Remover \"Strawberry\"",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-silikone-remover-strawberry-spray",
+      "officialName": "Silikone Remover \"Strawberry\" Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-silver-wheel-spray",
+      "officialName": "Silver wheel Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#B8BCC1",
+      "stated": "silver, mat",
+      "reason": "carfitrepair.com „Color: silver, mat” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-soft-interface-pads-micro",
+      "officialName": "Soft Interface Pads Micro",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-soft-masking-foam-tape",
+      "officialName": "Soft Masking Foam Tape",
+      "decision": "STATED_COLOUR",
+      "color": "#E6E3DD",
+      "stated": "white",
+      "reason": "carfitrepair.com „Color: white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-soft-plus-putty",
+      "officialName": "Soft Plus Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#D7C6A2",
+      "stated": "beige",
+      "reason": "carfitrepair.com „Color: beige” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-sontara-degreasing-and-cleaning-cloth",
+      "officialName": "SONTARA® Degreasing & Cleaning Cloth",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#9FFDE5",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-entfettungstuch-sontara.jpg): uzorak dominantne boje, 98% površine proizvoda"
+    },
+    {
+      "slug": "carfit-sponge-cut",
+      "officialName": "Sponge Cut",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "brown, green, purple",
+      "reason": "više boja u porodici („brown, green, purple”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-spray-putty",
+      "officialName": "Spray Putty",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-stirring-sticks",
+      "officialName": "Stirring Sticks",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "black, white",
+      "reason": "više boja u porodici („black, white”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-stone-chip-protection",
+      "officialName": "Stone Chip Protection",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "black, grey",
+      "reason": "više boja u porodici („black, grey”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-stone-chip-protection-spray",
+      "officialName": "Stone chip protection Spray",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "black, grey",
+      "reason": "više boja u porodici („black, grey”) — boja je osobina varijante, ne porodice"
+    },
+    {
+      "slug": "carfit-tack-cloth",
+      "officialName": "Tack cloth",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-tack-cloth-super-wave",
+      "officialName": "Tack cloth \"super wave\"",
+      "decision": "STATED_COLOUR",
+      "color": "#E6E3DD",
+      "stated": "natural white",
+      "reason": "carfitrepair.com „Color: natural white” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-tack-coating-for-spray-booth",
+      "officialName": "Tack Coating for Spray Booth",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": "colorless",
+      "reason": "„Color: colorless” — bezbojan materijal nema boju kartice"
+    },
+    {
+      "slug": "carfit-tape-off-disk-premium",
+      "officialName": "Tape-off Disk Premium",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-texture-paint-spray",
+      "officialName": "Texture paint Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-thermo-paint-spray-650c",
+      "officialName": "Thermo paint Spray 650°C",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-touch-up-bottles",
+      "officialName": "Touch Up Bottles",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-touch-up-micro-applicator",
+      "officialName": "Touch-Up Micro Applicator",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-underbody-protection-bitumen-spray",
+      "officialName": "Underbody protection bitumen spray",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-universal-polishing-compound",
+      "officialName": "Universal polishing compound",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-universal-thinner",
+      "officialName": "Universal Thinner",
+      "decision": "KEEP_BRAND",
+      "color": null,
+      "stated": null,
+      "reason": "proizvođač ne navodi boju; hemija u ambalaži ne dobija boju sa slike"
+    },
+    {
+      "slug": "carfit-very-fine-and-ultra-fine-abrasive-fleece",
+      "officialName": "Very Fine and Ultra Fine Abrasive Fleece",
+      "decision": "PACKSHOT_SAMPLE",
+      "color": "#C83701",
+      "stated": "red",
+      "reason": "carfitrepair.com zvanična slika (2023__04__6-901-0001-02-scaled.jpeg): uzorak dominantne boje, 33% površine proizvoda; zvanično „Color: red”"
+    },
+    {
+      "slug": "carfit-wet-sanding-paper",
+      "officialName": "Wet Sanding Paper",
+      "decision": "STATED_COLOUR",
+      "color": "#6A4932",
+      "stated": "brown",
+      "reason": "carfitrepair.com „Color: brown” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-windglass-glue-black",
+      "officialName": "Windglass Glue Black",
+      "decision": "STATED_COLOUR",
+      "color": "#1B1E22",
+      "stated": "black",
+      "reason": "carfitrepair.com „Color: black” (orijentacioni token, nije merena nijansa)"
+    },
+    {
+      "slug": "carfit-woolen-polishing-disc-velcro",
+      "officialName": "Woolen polishing disc Velcro",
+      "decision": "PACKSHOT_NEUTRAL",
+      "color": "#D4D9D3",
+      "stated": null,
+      "reason": "carfitrepair.com zvanična slika (2023__04__carfitrepair-lammfell-polierscheiben-velcro.jpg): medijana neutralne površine proizvoda"
+    },
+    {
+      "slug": "carfit-zinc-spray",
+      "officialName": "Zinc Spray",
+      "decision": "STATED_COLOUR",
+      "color": "#9DA1A6",
+      "stated": "grey",
+      "reason": "carfitrepair.com „Color: grey” (orijentacioni token, nije merena nijansa)"
+    }
+  ]
+}

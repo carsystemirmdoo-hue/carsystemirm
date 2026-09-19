@@ -74,6 +74,12 @@ export type ProductSearchRecord = {
   imageSrc?: string;
   /** Tokeni koji se ne mogu izvesti iz prikazanih polja (šifra boje, RAL, linija). */
   terms?: string[];
+  /**
+   * CELE šifre artikala varijanti (i prethodne šifre). Token „0450” iz
+   * `1-201-0450” nalazi proizvod, ali ga ne rangira: upit po celoj šifri mora
+   * da pogodi kao `productCode`, a to se iz razloženih tokena ne može izvesti.
+   */
+  codes?: string[];
   card?: ProductSearchCard;
 };
 
@@ -139,6 +145,15 @@ function extraTerms(sources: (string | null | undefined)[], derived: Set<string>
   return terms;
 }
 
+/** Šifre varijanti i prethodne šifre proizvoda, bez vodeće (ona je `productCode`). */
+function productCodes(product: CarsystemProduct) {
+  const codes = [
+    ...(product.detail?.variants?.content.rows.map((row) => row.id) ?? []),
+    ...(product.legacyManufacturerCodes ?? []),
+  ].filter((code) => code && code !== product.sku);
+  return [...new Set(codes)];
+}
+
 function derivedTokens(parts: (string | null | undefined)[]) {
   const tokens = new Set<string>();
   for (const part of parts) {
@@ -178,6 +193,8 @@ function productTerms(product: CarsystemProduct, derived: Set<string>) {
        */
       product.detail?.variants?.content.rows.map((row) => row.id).join(" "),
       product.legacyManufacturerCodes?.join(" "),
+      // Oznake varijanti koje je uvoz izdvojio (granulacija, pakovanje, komponenta).
+      product.searchTerms?.join(" "),
     ],
     derived,
   );
@@ -298,6 +315,7 @@ function standaloneRecord(
     quantityLabel: entity.presentation.quantityLabel ?? undefined,
     imageSrc: entity.presentation.image?.src,
     terms: product ? nonEmpty(productTerms(product, derived)) : undefined,
+    codes: product ? nonEmpty(productCodes(product)) : undefined,
   };
 }
 
@@ -332,6 +350,7 @@ function variantRecord(
     variantName: variantNameOf(entity.name, family.name),
     imageSrc: entity.presentation.image?.src,
     terms: nonEmpty(productTerms(product, derived)),
+    codes: nonEmpty(productCodes(product)),
     card: {
       accent:
         style["--product-visual-background-color"] ??

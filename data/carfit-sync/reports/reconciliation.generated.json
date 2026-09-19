@@ -1,0 +1,1293 @@
+{
+  "generatedFrom": {
+    "websiteCrawledAt": "2026-09-18T19:30:53.804Z",
+    "catalogueSha256": "629d36da1a57bf6cdd05580aecf3d145d81dc7f0ae4209792ce58bf71f11d6d9"
+  },
+  "coverage": {
+    "A_currentOrderableProductFamilies": 123,
+    "B_representedLocally": 123,
+    "C_currentOfficialArticleNumbers": 357,
+    "D_representedLocally": 357,
+    "productCoveragePercent": 100,
+    "articleCoveragePercent": 100
+  },
+  "ACTIVE_PRODUCT_MISSING": [],
+  "ACTIVE_ARTICLE_NUMBER_MISSING": [],
+  "duplicateActiveArticleNumbers": [],
+  "duplicateProductSlugs": [],
+  "attachedToWrongProduct": [],
+  "images": {
+    "published": 124,
+    "referenced": 124,
+    "orphanImages": [],
+    "duplicateImages": [],
+    "brokenImageReferences": [],
+    "hotlinked": []
+  },
+  "ourCatalogue": {
+    "carfitProducts": 123,
+    "importedBySync": 121,
+    "legacyLocal": [
+      {
+        "slug": "carfit-maskirna-folija-4x5m",
+        "name": "Car Fit Masking film 7 μm with electrostatic effect",
+        "classification": "HIGH_CONFIDENCE_MATCH",
+        "officialName": "Masking film 7mm with electrostatic effect",
+        "articleNumbers": [
+          "1-201-0450",
+          "1-201-0470",
+          "1-201-0570"
+        ]
+      },
+      {
+        "slug": "carfit-maskirna-folija-4x150m",
+        "name": "Car Fit maskirna folija 4 x 150 m",
+        "classification": "LOCAL_ONLY_UNKNOWN",
+        "officialName": null,
+        "articleNumbers": []
+      }
+    ],
+    "articleNumbersIncludingCatalogueOnly": 390
+  },
+  "sources": {
+    "WEBSITE_AND_CATALOGUE": 88,
+    "WEBSITE_ONLY": 35,
+    "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE": 20,
+    "catalogueOnlyArticlesHeld": 56,
+    "catalogueOnlyArticlesShownAsVariants": 33,
+    "SOURCE_CONFLICT": 16
+  },
+  "families": [
+    {
+      "sourceKey": "alu-soft-spachtel",
+      "officialName": "Alu & Soft Putty",
+      "url": "https://carfitrepair.com/en/alu-soft-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-alu-and-soft-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckklebeband-100c",
+      "officialName": "Cover tape up to 100°C",
+      "url": "https://carfitrepair.com/en/abdeckklebeband-100c/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-cover-tape-up-to-100c",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckklebeband-80c",
+      "officialName": "Cover tape up to 80°C",
+      "url": "https://carfitrepair.com/en/abdeckklebeband-80c/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-cover-tape-up-to-80c",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "doppelseitiges-klebeband",
+      "officialName": "Double-sided adhesive tape",
+      "url": "https://carfitrepair.com/en/doppelseitiges-klebeband/",
+      "classification": "WEBSITE_ONLY",
+      "action": "REPRESENTED_BY_OWNER",
+      "ourSlug": "carfit-pe-mounting-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckklebeband-wasserfest-120c",
+      "officialName": "Cover tape water resistant up to 120°C",
+      "url": "https://carfitrepair.com/en/abdeckklebeband-wasserfest-120c/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-cover-tape-water-resistant-up-to-120c",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "montageklebeband-pe",
+      "officialName": "PE mounting tape",
+      "url": "https://carfitrepair.com/en/montageklebeband-pe/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-pe-mounting-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "lifting-tape-gruen",
+      "officialName": "Lifting Tape",
+      "url": "https://carfitrepair.com/en/lifting-tape-gruen/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-lifting-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "gewebeband",
+      "officialName": "Fabric tape",
+      "url": "https://carfitrepair.com/en/gewebeband/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-fabric-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "zierlinienband",
+      "officialName": "Fine Line Tape",
+      "url": "https://carfitrepair.com/en/zierlinienband/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-fine-line-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckklebeband-orange-100c",
+      "officialName": "Cover tape orange up to 100°C",
+      "url": "https://carfitrepair.com/en/abdeckklebeband-orange-100c/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-cover-tape-orange-up-to-100c",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schaumstoffklebeband",
+      "officialName": "Blending tape",
+      "url": "https://carfitrepair.com/en/schaumstoffklebeband/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-blending-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schaumdichtband",
+      "officialName": "Soft Masking Foam Tape",
+      "url": "https://carfitrepair.com/en/schaumdichtband/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-soft-masking-foam-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abbeizspray",
+      "officialName": "Paint remover Spray",
+      "url": "https://carfitrepair.com/en/abbeizspray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-paint-remover-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "befuellbare-spraydose",
+      "officialName": "Fillable spray can",
+      "url": "https://carfitrepair.com/en/befuellbare-spraydose/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-fillable-spray-can",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "steinschlagschutz-spray",
+      "officialName": "Stone chip protection Spray",
+      "url": "https://carfitrepair.com/en/steinschlagschutz-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-stone-chip-protection-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "1k-etch-primer-spray",
+      "officialName": "1K Etch Primer Spray",
+      "url": "https://carfitrepair.com/en/1k-etch-primer-spray/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-1k-etch-primer-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "beispritzverduennung-spray",
+      "officialName": "Fade out thinner Spray",
+      "url": "https://carfitrepair.com/en/beispritzverduennung-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-fade-out-thinner-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "hohlraumkonservierung-spray",
+      "officialName": "Cavity preservation Spray",
+      "url": "https://carfitrepair.com/en/hohlraumkonservierung-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-cavity-preservation-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "unterbodenschutz-bitumen",
+      "officialName": "Bitumen underbody protection",
+      "url": "https://carfitrepair.com/en/unterbodenschutz-bitumen/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-bitumen-underbody-protection",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "1k-hi-build-grundierfueller-spray",
+      "officialName": "1K Hi-Build primer filler Spray",
+      "url": "https://carfitrepair.com/en/1k-hi-build-grundierfueller-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-1k-hi-build-primer-filler-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "1k-kunststoff-primer-spray",
+      "officialName": "1K Plastic primer Spray",
+      "url": "https://carfitrepair.com/en/1k-kunststoff-primer-spray/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-1k-plastic-primer-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "zink-spray",
+      "officialName": "Zinc Spray",
+      "url": "https://carfitrepair.com/en/zink-spray/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-zinc-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "strukturlack-spray",
+      "officialName": "Texture paint Spray",
+      "url": "https://carfitrepair.com/en/strukturlack-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-texture-paint-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "thermo-spray-650c",
+      "officialName": "Thermo paint Spray 650°C",
+      "url": "https://carfitrepair.com/en/thermo-spray-650c/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-thermo-paint-spray-650c",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "felgensilber-spray",
+      "officialName": "Silver wheel Spray",
+      "url": "https://carfitrepair.com/en/felgensilber-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-silver-wheel-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schwarz-spray",
+      "officialName": "Black paint Spray",
+      "url": "https://carfitrepair.com/en/schwarz-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-black-paint-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "perfekt-fueller-41-grau",
+      "officialName": "Perfect Filler 4:1 Grey",
+      "url": "https://carfitrepair.com/en/perfekt-fueller-41-grau/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-perfect-filler-4-1-grey",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-fast-air-grundierfueller-31",
+      "officialName": "2K Fast Air Primer Filler 3:1",
+      "url": "https://carfitrepair.com/en/2k-fast-air-grundierfueller-31/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-fast-air-primer-filler-3-1",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-hs-acryl-grundierfueller-41",
+      "officialName": "2K HS Acryl Primer Filler 4:1",
+      "url": "https://carfitrepair.com/en/2k-hs-acryl-grundierfueller-41/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-hs-acryl-primer-filler-4-1",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-washprimer-21",
+      "officialName": "2K Washprimer 2:1",
+      "url": "https://carfitrepair.com/en/2k-washprimer-21/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-washprimer-2-1",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-epoxid-grundierfueller-11",
+      "officialName": "2K Epoxy Primer 1:1",
+      "url": "https://carfitrepair.com/en/2k-epoxid-grundierfueller-11/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-epoxy-primer-1-1",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "kunststoffgrundierung",
+      "officialName": "Plastic Primer",
+      "url": "https://carfitrepair.com/en/kunststoffgrundierung/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-plastic-primer",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-us-fueller-41",
+      "officialName": "2K US Filler 4:1",
+      "url": "https://carfitrepair.com/en/2k-us-fueller-41/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-us-filler-4-1",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "expressklarlack",
+      "officialName": "Express Clearcoat",
+      "url": "https://carfitrepair.com/en/expressklarlack/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-express-clearcoat",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-hs-perfekt-klarlack",
+      "officialName": "2K HS Perfect clear",
+      "url": "https://carfitrepair.com/en/2k-hs-perfekt-klarlack/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-hs-perfect-clear",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-ultra-hs-klarlack",
+      "officialName": "2K Ultra HS Clearcoat",
+      "url": "https://carfitrepair.com/en/2k-ultra-hs-klarlack/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-ultra-hs-clearcoat",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-uhs-low-voc-klarlack",
+      "officialName": "2K UHS low VOC Clearcoat",
+      "url": "https://carfitrepair.com/en/2k-uhs-low-voc-klarlack/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-uhs-low-voc-clearcoat",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-hs-kratzfester-klarlack-21",
+      "officialName": "2K HS Scratch resistent clearcoat 2:1",
+      "url": "https://carfitrepair.com/en/2k-hs-kratzfester-klarlack-21/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-hs-scratch-resistent-clearcoat-2-1",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "matt-klarlack",
+      "officialName": "Clearcoar matt",
+      "url": "https://carfitrepair.com/en/matt-klarlack/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-clearcoar-matt",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "rapid-air-klarlack-voc",
+      "officialName": "Rapid air clear coat VOC",
+      "url": "https://carfitrepair.com/en/rapid-air-klarlack-voc/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-rapid-air-clear-coat-voc",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "klarlack-spray",
+      "officialName": "High gloss clearcoat Spray",
+      "url": "https://carfitrepair.com/en/klarlack-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-high-gloss-clearcoat-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-ms-industrie-klarlack",
+      "officialName": "2K MS Clearcoat industrial use",
+      "url": "https://carfitrepair.com/en/2k-ms-industrie-klarlack/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-ms-clearcoat-industrial-use",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schleifpaste",
+      "officialName": "Cutting compound",
+      "url": "https://carfitrepair.com/en/schleifpaste/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-cutting-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schaumstoff-polierscheiben-mit-klettsystem",
+      "officialName": "Polishing discs Velcro",
+      "url": "https://carfitrepair.com/en/schaumstoff-polierscheiben-mit-klettsystem/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-polishing-discs-velcro",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "hochglanzpolitur",
+      "officialName": "Finishing compound",
+      "url": "https://carfitrepair.com/en/hochglanzpolitur/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-finishing-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "polierschwamm-konisch",
+      "officialName": "Polishing sponge conical",
+      "url": "https://carfitrepair.com/en/polierschwamm-konisch/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-polishing-sponge-conical",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "soft-interface-pads-micro",
+      "officialName": "Soft Interface Pads Micro",
+      "url": "https://carfitrepair.com/en/soft-interface-pads-micro/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-soft-interface-pads-micro",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "interface-pads",
+      "officialName": "Interface Pads",
+      "url": "https://carfitrepair.com/en/interface-pads/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-interface-pads",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schleifpolitur",
+      "officialName": "Rubbing compound",
+      "url": "https://carfitrepair.com/en/schleifpolitur/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-rubbing-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "universelle-polierpaste",
+      "officialName": "Universal polishing compound",
+      "url": "https://carfitrepair.com/en/universelle-polierpaste/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-universal-polishing-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "vlies-poliertuch",
+      "officialName": "Nonwoven polishing cloth",
+      "url": "https://carfitrepair.com/en/vlies-poliertuch/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-nonwoven-polishing-cloth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "lammfellpolierscheiben-klett",
+      "officialName": "Woolen polishing disc Velcro",
+      "url": "https://carfitrepair.com/en/lammfellpolierscheiben-klett/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-woolen-polishing-disc-velcro",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "auflage-fuer-polierscheiben",
+      "officialName": "Pads for polishing discs Velcro",
+      "url": "https://carfitrepair.com/en/auflage-fuer-polierscheiben/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-pads-for-polishing-discs-velcro",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "red-film-schleifscheibe",
+      "officialName": "Red Film Abrasive Discs",
+      "url": "https://carfitrepair.com/en/red-film-schleifscheibe/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-red-film-abrasive-discs",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "color-net-disc-netzschleifscheibe",
+      "officialName": "Color Net Disc",
+      "url": "https://carfitrepair.com/en/color-net-disc-netzschleifscheibe/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-color-net-disc",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "gold-paper-disc",
+      "officialName": "Gold Paper Disc",
+      "url": "https://carfitrepair.com/en/gold-paper-disc/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-gold-paper-disc",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "manuelles-polier-und-schleifpad",
+      "officialName": "Manual Polishing and Sanding Pad",
+      "url": "https://carfitrepair.com/en/manuelles-polier-und-schleifpad/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-manual-polishing-and-sanding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "gummi-schleifblock",
+      "officialName": "Rubber Sanding Block",
+      "url": "https://carfitrepair.com/en/gummi-schleifblock/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-rubber-sanding-block",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sehr-feines-und-ultra-feines-schleifvlies",
+      "officialName": "Very Fine and Ultra Fine Abrasive Fleece",
+      "url": "https://carfitrepair.com/en/sehr-feines-und-ultra-feines-schleifvlies/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-very-fine-and-ultra-fine-abrasive-fleece",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "nass-schleifpapier",
+      "officialName": "Wet Sanding Paper",
+      "url": "https://carfitrepair.com/en/nass-schleifpapier/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-wet-sanding-paper",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "halbrunder-schleifblock",
+      "officialName": "Semi-Round Sanding Block",
+      "url": "https://carfitrepair.com/en/halbrunder-schleifblock/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-semi-round-sanding-block",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "flacher-schleifblock",
+      "officialName": "Flat Sanding Block",
+      "url": "https://carfitrepair.com/en/flacher-schleifblock/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-flat-sanding-block",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "handschleifblock",
+      "officialName": "Hand Sanding Block",
+      "url": "https://carfitrepair.com/en/handschleifblock/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-hand-sanding-block",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "perfect-multi-green-spachtel",
+      "officialName": "Perfect Multi Green Putty",
+      "url": "https://carfitrepair.com/en/perfect-multi-green-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-perfect-multi-green-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "multi-soft-spachtel",
+      "officialName": "Multi Soft Putty",
+      "url": "https://carfitrepair.com/en/multi-soft-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-multi-soft-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "spritzspachtel",
+      "officialName": "Spray Putty",
+      "url": "https://carfitrepair.com/en/spritzspachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-spray-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "kunststoff-reparaturset",
+      "officialName": "Plastic Repair Kit",
+      "url": "https://carfitrepair.com/en/kunststoff-reparaturset/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-plastic-repair-kit",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "multi-spachtel",
+      "officialName": "Multi Putty",
+      "url": "https://carfitrepair.com/en/multi-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-multi-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "kunststoffspachtel",
+      "officialName": "Plastic Putty",
+      "url": "https://carfitrepair.com/en/kunststoffspachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-plastic-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "glas-plus-spachtel",
+      "officialName": "Glas Plus Putty",
+      "url": "https://carfitrepair.com/en/glas-plus-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-glas-plus-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "carbon-spachtel",
+      "officialName": "Carbon Putty",
+      "url": "https://carfitrepair.com/en/carbon-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-carbon-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "soft-plus-spachtel",
+      "officialName": "Soft Plus Putty",
+      "url": "https://carfitrepair.com/en/soft-plus-spachtel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-soft-plus-putty",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "steinschlagschutz",
+      "officialName": "Stone Chip Protection",
+      "url": "https://carfitrepair.com/en/steinschlagschutz/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-stone-chip-protection",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "scheibenkleber-schwarz",
+      "officialName": "Windglass Glue Black",
+      "url": "https://carfitrepair.com/en/scheibenkleber-schwarz/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-windglass-glue-black",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "pu-kleb-und-dichtmasse",
+      "officialName": "PU Adhesive and Sealant",
+      "url": "https://carfitrepair.com/en/pu-kleb-und-dichtmasse/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-pu-adhesive-and-sealant",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "staubschutzlack-fuer-lackierkabinen",
+      "officialName": "Tack Coating for Spray Booth",
+      "url": "https://carfitrepair.com/en/staubschutzlack-fuer-lackierkabinen/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-tack-coating-for-spray-booth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "silikonentferner-erdbeere",
+      "officialName": "Silicone Remover \"Strawberry\"",
+      "url": "https://carfitrepair.com/en/silikonentferner-erdbeere/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-silicone-remover-strawberry",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "silikonentferner",
+      "officialName": "Silicone Remover",
+      "url": "https://carfitrepair.com/en/silikonentferner/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-silicone-remover",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "universalverduenner",
+      "officialName": "Universal Thinner",
+      "url": "https://carfitrepair.com/en/universalverduenner/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-universal-thinner",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "beispritzverduennung",
+      "officialName": "Fade Out Thinner",
+      "url": "https://carfitrepair.com/en/beispritzverduennung/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-fade-out-thinner",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "spritzpistolen-reiniger",
+      "officialName": "Gun Cleaner",
+      "url": "https://carfitrepair.com/en/spritzpistolen-reiniger/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-gun-cleaner",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "professionelle-nitrilhandschuhe",
+      "officialName": "Professional Nitrile Gloves",
+      "url": "https://carfitrepair.com/en/professionelle-nitrilhandschuhe/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-professional-nitrile-gloves",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schleifkontroll-und-pulver-set",
+      "officialName": "Sanding Control Kit and Sanding Powder",
+      "url": "https://carfitrepair.com/en/schleifkontroll-und-pulver-set/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-sanding-control-kit-and-sanding-powder",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "spruehpumpe",
+      "officialName": "Pump Spray",
+      "url": "https://carfitrepair.com/en/spruehpumpe/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-pump-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "nitrilhandschuhe-mit-strukturierten-fingern",
+      "officialName": "Nitrile Gloves Palm Textured",
+      "url": "https://carfitrepair.com/en/nitrilhandschuhe-mit-strukturierten-fingern/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-nitrile-gloves-palm-textured",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "pinselflaeschchen",
+      "officialName": "Touch Up Bottles",
+      "url": "https://carfitrepair.com/en/pinselflaeschchen/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-touch-up-bottles",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "folienradierer-und-adapter",
+      "officialName": "Tape-off Disk Premium",
+      "url": "https://carfitrepair.com/en/folienradierer-und-adapter/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-tape-off-disk-premium",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "logo-klebestreifen",
+      "officialName": "Logo Tape",
+      "url": "https://carfitrepair.com/en/logo-klebestreifen/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-logo-tape",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "parksensor-abdeckung",
+      "officialName": "Parking Sensor Masking Disc",
+      "url": "https://carfitrepair.com/en/parksensor-abdeckung/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-parking-sensor-masking-disc",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "putztuch-multi",
+      "officialName": "Car Clean Multi",
+      "url": "https://carfitrepair.com/en/putztuch-multi/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-car-clean-multi",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "polyethylen-fahrzeugabdeckung",
+      "officialName": "Polyethylene Car Cover",
+      "url": "https://carfitrepair.com/en/polyethylen-fahrzeugabdeckung/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-polyethylene-car-cover",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "einwegfussmatte",
+      "officialName": "Disposable Floor Mats",
+      "url": "https://carfitrepair.com/en/einwegfussmatte/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-disposable-floor-mats",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "lackierstaender",
+      "officialName": "Rotating Paint Stand",
+      "url": "https://carfitrepair.com/en/lackierstaender/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-rotating-paint-stand",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "ruehrstab",
+      "officialName": "Stirring Sticks",
+      "url": "https://carfitrepair.com/en/ruehrstab/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-stirring-sticks",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schutzanzug-fuer-maler-und-lackierarbeiten",
+      "officialName": "Coverall Black Label Edition",
+      "url": "https://carfitrepair.com/en/schutzanzug-fuer-maler-und-lackierarbeiten/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-coverall-black-label-edition",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sitzbezuege",
+      "officialName": "Disposable Seat Covers",
+      "url": "https://carfitrepair.com/en/sitzbezuege/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-disposable-seat-covers",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "rollbarer-spender-abdeck-papier",
+      "officialName": "Mobile Masking Paper Dispenser",
+      "url": "https://carfitrepair.com/en/rollbarer-spender-abdeck-papier/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-mobile-masking-paper-dispenser",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "entfettugstuch-sontara",
+      "officialName": "SONTARA® Degreasing & Cleaning Cloth",
+      "url": "https://carfitrepair.com/en/entfettugstuch-sontara/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-sontara-degreasing-and-cleaning-cloth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "microfaser-reinigungstuch",
+      "officialName": "Microfiber Cleaning Cloth",
+      "url": "https://carfitrepair.com/en/microfaser-reinigungstuch/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-microfiber-cleaning-cloth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2-lagiges-putztuch",
+      "officialName": "Double Layer Cleaning Cloths",
+      "url": "https://carfitrepair.com/en/2-lagiges-putztuch/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-double-layer-cleaning-cloths",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "kunststoff-reparatur-set",
+      "officialName": "Plastic Stapler Kit",
+      "url": "https://carfitrepair.com/en/kunststoff-reparatur-set/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-plastic-stapler-kit",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "fast-paint-system",
+      "officialName": "Fast Paint System",
+      "url": "https://carfitrepair.com/en/fast-paint-system/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-fast-paint-system",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "mischbecher-deckel",
+      "officialName": "Mixing Cups & Mixing Lids",
+      "url": "https://carfitrepair.com/en/mischbecher-deckel/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-mixing-cups-and-mixing-lids",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "scr-system-deckel",
+      "officialName": "SCR mixing lids",
+      "url": "https://carfitrepair.com/en/scr-system-deckel/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-scr-mixing-lids",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "scr-siebe",
+      "officialName": "SCR strainers",
+      "url": "https://carfitrepair.com/en/scr-siebe/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-scr-strainers",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "farbsiebe",
+      "officialName": "Disposable Paint Strainers",
+      "url": "https://carfitrepair.com/en/farbsiebe/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-disposable-paint-strainers",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "ruehrstaebe-mix-s-stick",
+      "officialName": "Mixing-S-Sticks",
+      "url": "https://carfitrepair.com/en/ruehrstaebe-mix-s-stick/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-mixing-s-sticks",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "metalltestkarten",
+      "officialName": "Metal Test Cards",
+      "url": "https://carfitrepair.com/en/metalltestkarten/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-metal-test-cards",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "staubbindetuch-super-wave",
+      "officialName": "Tack cloth \"super wave\"",
+      "url": "https://carfitrepair.com/en/staubbindetuch-super-wave/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-tack-cloth-super-wave",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "staubbindetuch",
+      "officialName": "Tack cloth",
+      "url": "https://carfitrepair.com/en/staubbindetuch/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-tack-cloth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "touch-up-micro-applicator",
+      "officialName": "Touch-Up Micro Applicator",
+      "url": "https://carfitrepair.com/en/touch-up-micro-applicator/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-touch-up-micro-applicator",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "faltbarer-premium-x-lackierstaender",
+      "officialName": "Folding paint stand premium",
+      "url": "https://carfitrepair.com/en/faltbarer-premium-x-lackierstaender/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-folding-paint-stand-premium",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckfolie-mit-elektrostatischen-eigenschaften",
+      "officialName": "Masking film with electrostatic effect",
+      "url": "https://carfitrepair.com/en/abdeckfolie-mit-elektrostatischen-eigenschaften/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-masking-film-with-electrostatic-effect",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckfolie-mit-klebeband",
+      "officialName": "Pretaped masking film",
+      "url": "https://carfitrepair.com/en/abdeckfolie-mit-klebeband/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-pretaped-masking-film",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeckmaterial-mit-elektrostatischen-eigenschaften",
+      "officialName": "Masking film 7mm with electrostatic effect",
+      "url": "https://carfitrepair.com/en/abdeckmaterial-mit-elektrostatischen-eigenschaften/",
+      "classification": "WEBSITE_ONLY",
+      "action": "MATCHED_EXISTING",
+      "ourSlug": "carfit-maskirna-folija-4x5m",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "abdeck-papier-wasserabweisend",
+      "officialName": "Coverpaper waterproof",
+      "url": "https://carfitrepair.com/en/abdeck-papier-wasserabweisend/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-coverpaper-waterproof",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "unterbodenschutz-bitumen-spray",
+      "officialName": "Underbody protection bitumen spray",
+      "url": "https://carfitrepair.com/en/unterbodenschutz-bitumen-spray/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-underbody-protection-bitumen-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "ozongenerator",
+      "officialName": "Ozone Generators",
+      "url": "https://carfitrepair.com/en/ozongenerator/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-ozone-generators",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "schwemmzinnersatz",
+      "officialName": "Epoxy Metal Filler",
+      "url": "https://carfitrepair.com/en/schwemmzinnersatz/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-epoxy-metal-filler",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "gold-paper-disc-2",
+      "officialName": "Purple Ceramic Film",
+      "url": "https://carfitrepair.com/en/gold-paper-disc-2/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-purple-ceramic-film",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "2k-klarlack-spray",
+      "officialName": "2K Clearcoat Spray",
+      "url": "https://carfitrepair.com/en/2k-klarlack-spray/",
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "carfit-2k-clearcoat-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "silikonentferner-spray-erdbeere",
+      "officialName": "Silikone Remover \"Strawberry\" Spray",
+      "url": "https://carfitrepair.com/en/silikonentferner-spray-erdbeere/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-silikone-remover-strawberry-spray",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sehr-feines-und-ultra-feines-schleifvlies-2",
+      "officialName": "Sponge Cut",
+      "url": "https://carfitrepair.com/en/sehr-feines-und-ultra-feines-schleifvlies-2/",
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "carfit-sponge-cut",
+      "represented": true,
+      "reasonIfMissing": null
+    }
+  ],
+  "failures": []
+}

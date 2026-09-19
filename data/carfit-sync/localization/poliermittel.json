@@ -1,0 +1,396 @@
+{
+  "auflage-fuer-polierscheiben": {
+    "sourceHash": "48dd737264df0c7a",
+    "productType": "Podloška za diskove za poliranje",
+    "subtype": "Podloška sa čičkom · 150 mm i 180 mm",
+    "shortDescription": "Podloška sa čičkom za diskove za poliranje, u veličinama 150 mm i 180 mm.",
+    "longDescription": "Pads for polishing discs Velcro je podloška sa čičkom za diskove za poliranje, u veličinama 150 mm i 180 mm. Prema podacima proizvođača koristi se pri završnom poliranju i može se kombinovati sa pastom Universal polishing compound.",
+    "purpose": "Završno poliranje",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-100-0001": "180 mm",
+      "5-100-0002": "150 mm"
+    }
+  },
+  "hochglanzpolitur": {
+    "sourceHash": "f306c8d4e3ab2de0",
+    "productType": "Završna polir pasta",
+    "subtype": "Završna polir pasta · BLACK LABEL · tamni lakovi · uklanja holograme",
+    "shortDescription": "BLACK LABEL završna polir pasta za završnu obradu tamnih lakova; uklanja lake tragove upotrebe, ogrebotine, holograme i maglu od poliranja.",
+    "longDescription": "Finishing compound iz linije BLACK LABEL je završna polir pasta za završnu obradu tamnih auto-lakova. Mikrofini prah aluminijum-oksida u jednom koraku uklanja lake tragove upotrebe i ogrebotine u završnom sloju, kao i holograme i maglu nastale u prethodnim koracima poliranja. Formulacija je prilagođena obradi svih konvencionalnih lakova i lakova otpornih na ogrebotine.",
+    "purpose": "Završno poliranje tamnih lakova i uklanjanje holograma",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "61°C"
+      },
+      {
+        "label": "Viskoznost",
+        "value": "8000 – 13000 mPa s"
+      },
+      {
+        "label": "VOC",
+        "value": "13,536% (136,718 g/l)"
+      },
+      {
+        "label": "Temperatura samopaljenja",
+        "value": "> 200°C"
+      },
+      {
+        "label": "Stepen skidanja",
+        "value": "2,5 – fino"
+      },
+      {
+        "label": "Stepen sjaja",
+        "value": "6 – ekstremno visok"
+      },
+      {
+        "label": "Stepen zaštite (sealing)",
+        "value": "nema"
+      },
+      {
+        "label": "Brusni papir",
+        "value": "P3000"
+      },
+      {
+        "label": "Konvencionalni lak",
+        "value": "da"
+      },
+      {
+        "label": "Lak otporan na ogrebotine",
+        "value": "da"
+      },
+      {
+        "label": "Stari (korišćeni) lak",
+        "value": "da"
+      },
+      {
+        "label": "Svež lak",
+        "value": "ne"
+      },
+      {
+        "label": "Ručna obrada",
+        "value": "da"
+      },
+      {
+        "label": "Mašinska obrada",
+        "value": "da"
+      },
+      {
+        "label": "Rotaciona mašina",
+        "value": "1500 – 2000 o/min"
+      },
+      {
+        "label": "Ekscentrična mašina",
+        "value": "2000 – 10000 o/min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-100-1001": "1 l"
+    }
+  },
+  "interface-pads": {
+    "sourceHash": "44af3b30d22a870f",
+    "productType": "Meka međupodloška",
+    "subtype": "Međupodloška · meki sunđer · Ø 150 mm · 15 rupa",
+    "shortDescription": "Izdržljiva međupodloška od mekog sunđera, sa čičkom, za rad sa C.A.R.FIT abrazivima na teško dostupnim mestima.",
+    "longDescription": "Interface Pads su međupodloške od izdržljivog, mekog sunđera za rad sa C.A.R.FIT abrazivima. Povećavaju prilagodljivost obliku površine i olakšavaju rad na teško dostupnim mestima. Pričvršćuju se čičkom, a izrađuju se u prečniku 150 mm sa 15 rupa, u varijantama 5 mm i 10 mm.",
+    "purpose": "Rad sa abrazivima na oblikovanim i teško dostupnim površinama",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-170-0014": "Ø 150 mm · 15 rupa · 5 mm",
+      "5-170-0015": "Ø 150 mm · 15 rupa · 10 mm"
+    }
+  },
+  "lammfellpolierscheiben-klett": {
+    "sourceHash": "1c524f128c26d597",
+    "productType": "Krzno za poliranje",
+    "subtype": "Krzno za poliranje · vuna · čičak · 150 mm i 180 mm",
+    "shortDescription": "Vuneni disk za poliranje sa čičkom, za završno poliranje, u prečnicima 150 mm i 180 mm.",
+    "longDescription": "Woolen polishing disc Velcro je disk za poliranje od vune sa pričvršćivanjem na čičak, namenjen završnom poliranju. Može se koristiti sa pastom Universal polishing compound. Izrađuje se u prečnicima 150 mm i 180 mm.",
+    "purpose": "Završno poliranje",
+    "facts": [
+      {
+        "label": "Prečnik",
+        "value": "150 mm i 180 mm"
+      },
+      {
+        "label": "Materijal",
+        "value": "vuna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-100-0150": "150 mm",
+      "5-100-0180": "180 mm"
+    }
+  },
+  "polierschwamm-konisch": {
+    "sourceHash": "b2d1b6e941fbf5cb",
+    "productType": "Konusni sunđer za poliranje",
+    "subtype": "Konusni sunđer · Ø 125–150 mm · tri tvrdoće",
+    "shortDescription": "Konusni sunđer za poliranje prečnika 125–150 mm, u tri tvrdoće: tvrd (plavi), srednje tvrd (žuti) i mek (crni).",
+    "longDescription": "Polishing sponge conical je konusni sunđer za poliranje prečnika 125–150 mm. Izrađuje se u tri tvrdoće označene bojom: plavi je tvrd, žuti srednje tvrd, a crni mek.",
+    "purpose": "Poliranje",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-100-1500": "Plavi, tvrd · Ø 125–150 mm",
+      "5-100-1501": "Žuti, srednje tvrd · Ø 125–150 mm",
+      "5-100-1502": "Crni, mek · Ø 125–150 mm"
+    }
+  },
+  "schaumstoff-polierscheiben-mit-klettsystem": {
+    "sourceHash": "f7760d89c709a2d7",
+    "productType": "Sunđer za poliranje",
+    "subtype": "Sunđer za poliranje · čičak · Ø 150 mm · tri tvrdoće",
+    "shortDescription": "Sunđerasti diskovi za poliranje sa sistemom pričvršćivanja na čičak, prečnika 150 mm, u tri tvrdoće.",
+    "longDescription": "Polishing discs Velcro su sunđerasti diskovi za poliranje sa sistemom pričvršćivanja na čičak. Prečnik diska je 150 mm, a tvrdoća je označena bojom: crni je mek, narandžasti srednje tvrd, a beli veoma tvrd.",
+    "purpose": "Poliranje",
+    "facts": [
+      {
+        "label": "Prečnik",
+        "value": "150 mm"
+      },
+      {
+        "label": "Boja",
+        "value": "crna, narandžasta, bela"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "meka, srednja, veoma tvrda"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-100-0165": "Narandžasti, srednje tvrd · 150 mm",
+      "5-100-0168": "Beli, veoma tvrd · 150 mm",
+      "5-100-0169": "Crni, mek · 150 mm"
+    }
+  },
+  "schleifpaste": {
+    "sourceHash": "45cee6a2e2b3baea",
+    "productType": "Abrazivna polir pasta",
+    "subtype": "Abrazivna polir pasta · BLACK LABEL · tragovi brušenja od P1500 · visok sjaj",
+    "shortDescription": "BLACK LABEL abrazivna polir pasta za korišćene i atmosferski opterećene lakove; uklanja ogrebotine i tragove brušenja granulacije P1500 i finije.",
+    "longDescription": "Cutting compound iz linije BLACK LABEL je abrazivna polir pasta za primenu na korišćenim lakovima i lakovima izloženim atmosferskim uticajima. Tehnologija praha daje veliko skidanje materijala i visok sjaj uz minimalno stvaranje prašine. Uklanja ogrebotine i tragove brušenja granulacije P1500 i finije, a formulacija je prilagođena obradi svih konvencionalnih lakova i lakova otpornih na ogrebotine.",
+    "purpose": "Uklanjanje ogrebotina i tragova brušenja na korišćenim lakovima",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "bela"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "61°C"
+      },
+      {
+        "label": "Opseg ključanja",
+        "value": "100°C"
+      },
+      {
+        "label": "VOC",
+        "value": "168,408 g/l"
+      },
+      {
+        "label": "Stepen skidanja",
+        "value": "5,5 – ekstra jako"
+      },
+      {
+        "label": "Stepen sjaja",
+        "value": "4,5 – visok"
+      },
+      {
+        "label": "Stepen zaštite (sealing)",
+        "value": "nema"
+      },
+      {
+        "label": "Brusni papir",
+        "value": "P1500"
+      },
+      {
+        "label": "Konvencionalni lak",
+        "value": "da"
+      },
+      {
+        "label": "Lak otporan na ogrebotine",
+        "value": "da"
+      },
+      {
+        "label": "Stari (korišćeni) lak",
+        "value": "da"
+      },
+      {
+        "label": "Svež lak",
+        "value": "ne"
+      },
+      {
+        "label": "Ručna obrada",
+        "value": "da"
+      },
+      {
+        "label": "Mašinska obrada",
+        "value": "da"
+      },
+      {
+        "label": "Rotaciona mašina",
+        "value": "1500 – 2000 o/min"
+      },
+      {
+        "label": "Ekscentrična mašina",
+        "value": "2000 – 10000 o/min"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-100-1000": "1 l"
+    }
+  },
+  "schleifpolitur": {
+    "sourceHash": "53e5254e485ca675",
+    "productType": "Gruba polir pasta",
+    "subtype": "Gruba polir pasta · bez silikona · aluminijum-oksid · tragovi P1500–2000",
+    "shortDescription": "Polir pasta bez silikona za uklanjanje tragova ručnog ili mašinskog brušenja abrazivom P1500–2000 na svežim i starim površinama.",
+    "longDescription": "Rubbing compound je polir pasta bez silikona za uklanjanje tragova brušenja na svežim i starim površinama, nastalih ručnim ili mašinskim brušenjem abrazivom granulacije P1500–2000. Sadrži visokoefikasne abrazivne čestice na bazi aluminijum-oksida. Namenjena je poliranju lakiranih površina putničkih i privrednih vozila.",
+    "purpose": "Poliranje lakiranih površina putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1300 g/l"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "60°C"
+      },
+      {
+        "label": "Abraziv",
+        "value": "aluminijum-oksid"
+      }
+    ],
+    "applications": [
+      "Poliranje lakiranih površina putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Abrazivne čestice na bazi aluminijum-oksida",
+        "description": "Sadrži visokoefikasne abrazivne čestice na bazi aluminijum-oksida."
+      }
+    ],
+    "substrates": [
+      "stare lakirane površine / OEM",
+      "sveže lakirane površine"
+    ],
+    "advice": null,
+    "variants": {
+      "5-100-0500": "500 g"
+    }
+  },
+  "soft-interface-pads-micro": {
+    "sourceHash": "ec83e4aef72603fc",
+    "productType": "Meka međupodloška",
+    "subtype": "Međupodloška Micro · meki sunđer · Ø 150 mm · 15 rupa",
+    "shortDescription": "Izdržljiva međupodloška Micro od mekog sunđera, sa čičkom, za rad sa C.A.R.FIT abrazivima na teško dostupnim mestima.",
+    "longDescription": "Soft Interface Pads Micro su međupodloške od izdržljivog, mekog sunđera za rad sa C.A.R.FIT abrazivima. Povećavaju prilagodljivost obliku površine i olakšavaju rad na teško dostupnim mestima. Pričvršćuju se čičkom, a izrađuju se u prečniku 150 mm sa 15 rupa, u varijantama 5 mm i 10 mm.",
+    "purpose": "Rad sa abrazivima na oblikovanim i teško dostupnim površinama",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-102-0005": "Ø 150 mm · 15 rupa · 5 mm",
+      "5-102-0010": "Ø 150 mm · 15 rupa · 10 mm"
+    }
+  },
+  "universelle-polierpaste": {
+    "sourceHash": "7904b14d998faab3",
+    "productType": "Univerzalna polir pasta",
+    "subtype": "Polir pasta u jednom koraku · ručno i mašinski · visok sjaj",
+    "shortDescription": "Efikasna polir pasta za poliranje u jednom koraku na svim uobičajenim sistemima lakova, sa dobrom abrazivnom moći i visokim sjajem.",
+    "longDescription": "Universal polishing compound je veoma efikasna polir pasta za poliranje u jednom koraku, sa širokim spektrom primene na svim uobičajenim sistemima lakova. Uz veoma dobru abrazivnu moć daje visok, ogledalski sjaj. Bez teškoća uklanja i holograme i kružne tragove na tamnim lakiranim površinama.",
+    "purpose": "Poliranje lakiranih površina putničkih i privrednih vozila",
+    "facts": [],
+    "applications": [
+      "Poliranje lakiranih površina putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Tri efekta u jednom koraku",
+        "description": "U jednom koraku uklanja duboke ogrebotine, osvežava površine izložene atmosferskim uticajima i daje visok sjaj."
+      },
+      {
+        "title": "Konvencionalni i otporni lakovi",
+        "description": "Veoma je efikasna na konvencionalnim premazima i premazima otpornim na ogrebotine."
+      },
+      {
+        "title": "Ručno i mašinsko poliranje",
+        "description": "Pogodna je za ručno i mašinsko poliranje."
+      },
+      {
+        "title": "Visok stepen sjaja",
+        "description": "Daje visok stepen sjaja."
+      },
+      {
+        "title": "Jednostavna upotreba",
+        "description": "Pasta je jednostavna za upotrebu."
+      }
+    ],
+    "substrates": [
+      "potpuno očvrsli stari ili novi bezbojni lakovi"
+    ],
+    "advice": null,
+    "variants": {
+      "5-101-0250": "250 g",
+      "5-101-1000": "1 kg"
+    }
+  },
+  "vlies-poliertuch": {
+    "sourceHash": "e11cc10344b4c102",
+    "productType": "Netkana krpa za poliranje",
+    "subtype": "Krpa za poliranje · sintetičko runo · 320 mm × 360 mm · rolna 400 kom.",
+    "shortDescription": "Meka krpa za poliranje od sintetičkog runa koja ne ostavlja vlakna, za ručno poliranje novog i starog laka i brisanje ostataka polir paste.",
+    "longDescription": "Nonwoven polishing cloth je meka krpa za poliranje od sintetičkog runa koja ne ostavlja vlakna. Namenjena je ručnom poliranju novih i starih lakiranih površina i brisanju ostataka polir paste. Rolna sadrži 400 komada dimenzija 320 mm × 360 mm.",
+    "purpose": "Ručno poliranje laka i brisanje ostataka polir paste",
+    "facts": [
+      {
+        "label": "Pakovanje",
+        "value": "400 kom. u rolni"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "8-800-0400": "320 mm × 360 mm"
+    }
+  }
+}

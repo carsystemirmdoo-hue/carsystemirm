@@ -1,0 +1,596 @@
+{
+  "color-net-disc-netzschleifscheibe": {
+    "sourceHash": "28e46e7806b51341",
+    "productType": "Mrežasti brusni disk",
+    "subtype": "Mrežasti abraziv · Ø 150 mm · čičak · suvo brušenje",
+    "shortDescription": "Mrežasti brusni disk prečnika 150 mm za suvo brušenje gitova, punilaca, završnih premaza i sintetičkih materijala.",
+    "longDescription": "Color Net Disc je mrežasti brusni disk prečnika 150 mm, namenjen suvom brušenju gitova, punilaca, završnih premaza i sintetičkih materijala. Zahvaljujući mrežastoj strukturi brusna prašina se ne zadržava između obrađivane površine i abraziva i lako se uklanja strujom vazduha. Poliesterska osnova otporna na habanje produžava vek trajanja diska, a pričvršćivanje je na čičak. Program obuhvata diskove i brusne trake.",
+    "purpose": "Brušenje površina u reparaturi vozila i obradi kompozita i plastike",
+    "facts": [
+      {
+        "label": "Noseći materijal",
+        "value": "poliester"
+      },
+      {
+        "label": "Prečnik",
+        "value": "150 mm"
+      },
+      {
+        "label": "Boja",
+        "value": "različite"
+      },
+      {
+        "label": "Tip",
+        "value": "mrežasta struktura"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "diskovi 50 kom.; trake P80 50 kom., ostale granulacije traka 100 kom."
+      }
+    ],
+    "applications": [
+      "Brušenje površina pri reparaturi vozila",
+      "Brušenje površina u avio-industriji i brodogradnji",
+      "Proizvodnja i obrada kompozitnih materijala i plastike"
+    ],
+    "benefits": [
+      {
+        "title": "Velika površina za odsisavanje prašine",
+        "description": "Mrežasti abraziv ima veoma veliku površinu za odsisavanje prašine, što je prednost u odnosu na klasične abrazive sa rupama."
+      },
+      {
+        "title": "Prašina se ne zadržava",
+        "description": "Zbog mrežaste strukture brusna prašina se ne nakuplja između obrađivane površine i abraziva i lako se uklanja strujom vazduha."
+      },
+      {
+        "title": "Poliesterska osnova otporna na habanje",
+        "description": "Poliesterska osnova otporna na habanje znatno produžava vek trajanja brusnog diska."
+      },
+      {
+        "title": "Pričvršćivanje na čičak",
+        "description": "Disk se na podlošku pričvršćuje čičkom."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-700-0080": "Disk · P80",
+      "6-700-0120": "Disk · P120",
+      "6-700-0150": "Disk · P150",
+      "6-700-0180": "Disk · P180",
+      "6-700-0220": "Disk · P220",
+      "6-700-0240": "Disk · P240",
+      "6-700-0280": "Disk · P280",
+      "6-700-0320": "Disk · P320",
+      "6-700-0400": "Disk · P400",
+      "6-700-0500": "Disk · P500",
+      "6-701-0080": "Traka · P80",
+      "6-701-0120": "Traka · P120",
+      "6-701-0180": "Traka · P180",
+      "6-701-0220": "Traka · P220",
+      "6-701-0240": "Traka · P240",
+      "6-701-0280": "Traka · P280",
+      "6-701-0320": "Traka · P320",
+      "6-701-0400": "Traka · P400",
+      "6-701-0500": "Traka · P500"
+    }
+  },
+  "flacher-schleifblock": {
+    "sourceHash": "29b004efc133479f",
+    "productType": "Ravni brusni blok",
+    "subtype": "Brusni blok · ravna radna površina · ručno brušenje",
+    "shortDescription": "Brusni blok sa ravnom radnom površinom za ručno brušenje malih i teško dostupnih površina.",
+    "longDescription": "Flat Sanding Block je brusni blok sa ravnom radnom površinom, namenjen ručnom brušenju malih i teško dostupnih površina. Dimenzije bloka su 70 mm × 198 mm.",
+    "purpose": "Ručno brušenje malih i teško dostupnih površina",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-170-0005": "70 mm × 198 mm"
+    }
+  },
+  "gold-paper-disc": {
+    "sourceHash": "8b0a43b8cc8ca5fb",
+    "productType": "Papirni brusni disk",
+    "subtype": "Papirni abraziv · Ø 150 mm · 15 rupa · čičak",
+    "shortDescription": "Papirni brusni disk prečnika 150 mm sa 15 rupa, za uklanjanje rđe i suvo brušenje gitova, prajmera i punilaca.",
+    "longDescription": "Gold Paper Disc je brusni disk na papirnoj osnovi, prečnika 150 mm, sa 15 rupa za efikasno odsisavanje brusne prašine. Koristi se za obradu površina pri reparaturi vozila, u avio-industriji i brodogradnji, kao i u proizvodnji i obradi kompozitnih materijala i plastike. Posebna impregnacija smanjuje trenje, a disk podnosi obradu delova sa oštrim i isturenim ivicama bez sopstvenog oštećenja. Pričvršćivanje je na čičak, a program obuhvata diskove i brusne trake.",
+    "purpose": "Uklanjanje rđe i suvo brušenje gitova, prajmera i punilaca",
+    "facts": [
+      {
+        "label": "Noseći materijal",
+        "value": "papir"
+      },
+      {
+        "label": "Prečnik",
+        "value": "150 mm"
+      },
+      {
+        "label": "Boja",
+        "value": "žuta"
+      },
+      {
+        "label": "Tip",
+        "value": "sa 15 rupa"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "50 kom. (P40–P80), 100 kom. (ostale granulacije)"
+      }
+    ],
+    "applications": [
+      "Uklanjanje rđe",
+      "Suvo brušenje gitova, prajmera i punilaca"
+    ],
+    "benefits": [
+      {
+        "title": "Ujednačeno visoka brusna moć",
+        "description": "Disk zadržava visoku brusnu moć tokom rada."
+      },
+      {
+        "title": "15 rupa za odsisavanje prašine",
+        "description": "Raspored od 15 rupa omogućava efikasno odsisavanje brusne prašine."
+      },
+      {
+        "title": "Pričvršćivanje na čičak",
+        "description": "Disk se na podlošku pričvršćuje čičkom."
+      },
+      {
+        "title": "Dug vek trajanja",
+        "description": "Abraziv ima dug vek trajanja."
+      },
+      {
+        "title": "Impregnacija za manje trenje",
+        "description": "Posebna impregnacija smanjuje trenje pri brušenju."
+      },
+      {
+        "title": "Obrada oštrih ivica bez oštećenja",
+        "description": "Omogućava obradu delova sa oštrim i isturenim ivicama bez oštećenja samog diska."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-300-0040": "Disk · P40",
+      "6-300-0060": "Disk · P60",
+      "6-300-0080": "Disk · P80",
+      "6-300-0100": "Disk · P100",
+      "6-300-0120": "Disk · P120",
+      "6-300-0150": "Disk · P150",
+      "6-300-0180": "Disk · P180",
+      "6-300-0220": "Disk · P220",
+      "6-300-0240": "Disk · P240",
+      "6-300-0280": "Disk · P280",
+      "6-300-0320": "Disk · P320",
+      "6-300-0400": "Disk · P400",
+      "6-300-0500": "Disk · P500",
+      "6-301-0080": "Traka · P80 · 14 rupa",
+      "6-301-0120": "Traka · P120 · 14 rupa",
+      "6-301-0180": "Traka · P180 · 14 rupa",
+      "6-301-0240": "Traka · P240 · 14 rupa",
+      "6-301-0320": "Traka · P320 · 14 rupa",
+      "6-302-0080": "Traka · P80",
+      "6-302-0120": "Traka · P120",
+      "6-302-0180": "Traka · P180",
+      "6-302-0240": "Traka · P240"
+    }
+  },
+  "gold-paper-disc-2": {
+    "sourceHash": "ed009922ccea1ca9",
+    "productType": "Keramički filmski brusni disk",
+    "subtype": "Filmski abraziv · keramičko zrno · Ø 150 mm · 21 rupa",
+    "shortDescription": "Filmski brusni disk sa samooštrećim keramičkim zrnom, za mašinsko suvo i mokro brušenje tvrdih površina.",
+    "longDescription": "Purple Ceramic Film su filmski brusni diskovi prečnika 150 mm sa 21 rupom, za mašinsko suvo i mokro brušenje. Samooštreće keramičko zrno održava stalno agresivno brušenje i pogodno je za sve tvrde površine, uključujući lakove otporne na ogrebotine, prajmere i površine sa elektroforetskim premazom, pa drugi specijalni proizvodi nisu potrebni. Fleksibilna, vodootporna plastična osnova i stearatna impregnacija smanjuju trenje i zapunjavanje abraziva. Pričvršćivanje je na čičak.",
+    "purpose": "Brušenje gitova, punilaca, lakova, sintetičkih i kompozitnih materijala i drveta",
+    "facts": [
+      {
+        "label": "Noseći materijal",
+        "value": "film"
+      },
+      {
+        "label": "Prečnik",
+        "value": "150 mm"
+      },
+      {
+        "label": "Boja",
+        "value": "ljubičasta"
+      },
+      {
+        "label": "Tip",
+        "value": "sa 21 rupom"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "50 kom. (P40–P80), 100 kom. (P100–P800)"
+      }
+    ],
+    "applications": [
+      "Brušenje gitova, punilaca i lakiranih površina",
+      "Brušenje sintetičkih i kompozitnih materijala i proizvoda od drveta",
+      "Reparatura vozila, obrada drveta, mašinogradnja i brodogradnja"
+    ],
+    "benefits": [
+      {
+        "title": "Fleksibilna i vodootporna osnova",
+        "description": "Plastična osnova je fleksibilna i otporna na vodu."
+      },
+      {
+        "title": "Korund sa keramičkim zrnom",
+        "description": "Abraziv je termički obrađen korund uz dodatak keramičkog zrna visokih performansi."
+      },
+      {
+        "title": "Pričvršćivanje na čičak",
+        "description": "Disk se na podlošku pričvršćuje čičkom."
+      },
+      {
+        "title": "Stearatna impregnacija",
+        "description": "Stearatna impregnacija smanjuje trenje i zapunjavanje abraziva produktima brušenja."
+      },
+      {
+        "title": "Dug vek trajanja",
+        "description": "Otporan abraziv sa dugim vekom trajanja."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-510-0040": "P40",
+      "6-510-0060": "P60",
+      "6-510-0080": "P80",
+      "6-510-0100": "P100",
+      "6-510-0120": "P120",
+      "6-510-0150": "P150",
+      "6-510-0180": "P180",
+      "6-510-0220": "P220",
+      "6-510-0240": "P240",
+      "6-510-0280": "P280",
+      "6-510-0320": "P320",
+      "6-510-0400": "P400",
+      "6-510-0500": "P500",
+      "6-510-0600": "P600",
+      "6-510-0800": "P800",
+      "6-510-1000": "P1000",
+      "6-510-1500": "P1500",
+      "6-510-2000": "P2000"
+    }
+  },
+  "gummi-schleifblock": {
+    "sourceHash": "7ba437e61d0c800a",
+    "productType": "Gumeni brusni blok",
+    "subtype": "Brusni blok · guma · 67 × 125 mm",
+    "shortDescription": "Gumeni blok za brusne radove, dimenzija 67 × 125 mm.",
+    "longDescription": "Rubber Sanding Block je blok od gume namenjen brusnim radovima. Dimenzije bloka su 67 × 125 mm.",
+    "purpose": "Brusni radovi",
+    "facts": [
+      {
+        "label": "Materijal",
+        "value": "guma"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-170-0002": "67 × 125 mm"
+    }
+  },
+  "halbrunder-schleifblock": {
+    "sourceHash": "1bb78a44cc589295",
+    "productType": "Poluokrugli brusni blok",
+    "subtype": "Brusni blok · poluokrugla radna površina · ručno brušenje",
+    "shortDescription": "Brusni blok sa poluokruglom radnom površinom za ručno brušenje malih, složeno oblikovanih i teško dostupnih površina.",
+    "longDescription": "Semi-Round Sanding Block je brusni blok sa poluokruglom radnom površinom, namenjen ručnom brušenju malih, složeno oblikovanih i teško dostupnih površina. Dimenzije bloka su 70 mm × 198 mm.",
+    "purpose": "Ručno brušenje malih, složeno oblikovanih i teško dostupnih površina",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-170-0006": "70 mm × 198 mm"
+    }
+  },
+  "handschleifblock": {
+    "sourceHash": "40aa5b9035f500af",
+    "productType": "Ručni brusni blok",
+    "subtype": "Brusni blok · poliuretan · čičak · za diskove 150 mm",
+    "shortDescription": "Poliuretanski ručni brusni blok sa čičkom, za brusne diskove prečnika 150 mm.",
+    "longDescription": "Hand Sanding Block je ručni brusni blok od poliuretana, predviđen za brusne diskove prečnika 150 mm. Disk se na blok pričvršćuje čičkom.",
+    "purpose": "Ručno brušenje brusnim diskovima prečnika 150 mm",
+    "facts": [
+      {
+        "label": "Prečnik",
+        "value": "150 mm"
+      },
+      {
+        "label": "Pričvršćivanje na čičak",
+        "value": "da"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-170-0001": "Standardno pakovanje"
+    }
+  },
+  "manuelles-polier-und-schleifpad": {
+    "sourceHash": "52ddd0b730f59864",
+    "productType": "Pad za poliranje i brušenje",
+    "subtype": "Ručni pad · poliuretan · za diskove Ø 150 mm",
+    "shortDescription": "Poliuretanski ručni pad za poliranje i brušenje, za diskove prečnika 150 mm.",
+    "longDescription": "Manual Polishing and Sanding Pad je ručni pad od poliuretana namenjen poliranju i brušenju. Predviđen je za diskove prečnika 150 mm.",
+    "purpose": "Ručno poliranje i brušenje diskovima prečnika 150 mm",
+    "facts": [],
+    "applications": [],
+    "benefits": [],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "5-170-0004": "Standardno pakovanje"
+    }
+  },
+  "nass-schleifpapier": {
+    "sourceHash": "74725c257bfe2b1a",
+    "productType": "Vodobrusni papir",
+    "subtype": "Vodootporni brusni papir · 230 × 280 mm · mokro brušenje",
+    "shortDescription": "Izdržljiv brusni papir otporan na vlagu, za mokro brušenje svih lakirnih materijala.",
+    "longDescription": "Wet Sanding Paper je izdržljiv brusni papir otporan na vlagu, formata 230 × 280 mm, za mokro brušenje svih lakirnih materijala. Koristi se za ručno uklanjanje defekata na originalnim ili starim lakiranim površinama pre poliranja. Nova formula smole sprečava zapunjavanje abraziva, a ravnomeran raspored zrna daje glatko i ujednačeno brušenje.",
+    "purpose": "Ručno uklanjanje defekata na laku pre poliranja",
+    "facts": [
+      {
+        "label": "Noseći materijal",
+        "value": "vodootporni papir"
+      },
+      {
+        "label": "Boja",
+        "value": "braon"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "230 × 280 mm"
+      },
+      {
+        "label": "Tip",
+        "value": "bez rupa"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "100 kom."
+      }
+    ],
+    "applications": [
+      "Ručno brušenje radi uklanjanja defekata na originalnim ili starim lakiranim površinama pre poliranja"
+    ],
+    "benefits": [
+      {
+        "title": "Posebno obrađena papirna osnova",
+        "description": "Posebno obrađena papirna osnova ne oštećuje ruke i omogućava dugotrajan rad."
+      },
+      {
+        "title": "Formula smole protiv zapunjavanja",
+        "description": "Nova formula smole sprečava zapunjavanje abraziva, što obezbeđuje visok učinak i otpornost brusnog papira."
+      },
+      {
+        "title": "Ravnomeran raspored zrna",
+        "description": "Ravnomeran raspored zrna na brusnom papiru daje glatko i ujednačeno brušenje."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-305-0600": "P600",
+      "6-305-0800": "P800",
+      "6-305-1000": "P1000",
+      "6-305-1200": "P1200",
+      "6-305-2000": "P2000"
+    }
+  },
+  "red-film-schleifscheibe": {
+    "sourceHash": "41c321c3bb436c49",
+    "productType": "Filmski brusni disk",
+    "subtype": "Filmski abraziv · Ø 150 mm · multihole · čičak",
+    "shortDescription": "Filmski brusni disk na plastičnoj osnovi za mašinsko suvo i mokro brušenje gitova, punilaca, lakova, kompozita i drveta.",
+    "longDescription": "Red Film Abrasive Discs su brusni diskovi na plastičnoj filmskoj osnovi, prečnika 150 mm, za mašinsko suvo i mokro brušenje. Posebno korundno zrno daje veći učinak: brže brušenje, kvalitetno obrađenu površinu i trajnost. Fleksibilna, vodootporna osnova i stearatna impregnacija smanjuju trenje i zapunjavanje, a multihole raspored rupa odvodi prašinu pri suvom brušenju. Pričvršćivanje je na čičak, a program obuhvata diskove i brusne trake.",
+    "purpose": "Brušenje gitova, punilaca, lakova, sintetičkih i kompozitnih materijala i drveta",
+    "facts": [
+      {
+        "label": "Noseći materijal",
+        "value": "plastični film"
+      },
+      {
+        "label": "Prečnik",
+        "value": "150 mm"
+      },
+      {
+        "label": "Boja",
+        "value": "crvena"
+      },
+      {
+        "label": "Tip",
+        "value": "multihole raspored rupa"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "50 kom. (P40–P80), 100 kom. (ostale granulacije)"
+      }
+    ],
+    "applications": [
+      "Brušenje gitova, punilaca i lakiranih površina",
+      "Brušenje sintetičkih i kompozitnih materijala i drveta",
+      "Reparatura vozila, obrada drveta, mašinska industrija i brodogradnja"
+    ],
+    "benefits": [
+      {
+        "title": "Fleksibilna i vodootporna osnova",
+        "description": "Osnova diska je fleksibilna i otporna na vodu."
+      },
+      {
+        "title": "Korundno zrno visokog učinka",
+        "description": "Abraziv je termički obrađeno korundno zrno visokog učinka."
+      },
+      {
+        "title": "Stearatna impregnacija",
+        "description": "Stearatna impregnacija smanjuje trenje i zapunjavanje abraziva."
+      },
+      {
+        "title": "Dobro odvođenje prašine",
+        "description": "Multihole raspored rupa veoma dobro odvodi prašinu pri suvom brušenju."
+      },
+      {
+        "title": "Dug vek trajanja",
+        "description": "Abraziv ima dug vek trajanja."
+      },
+      {
+        "title": "Pričvršćivanje na čičak",
+        "description": "Disk se na podlošku pričvršćuje čičkom."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-500-0040": "Disk · P40",
+      "6-500-0060": "Disk · P60",
+      "6-500-0080": "Disk · P80",
+      "6-500-0100": "Disk · P100",
+      "6-500-0120": "Disk · P120",
+      "6-500-0150": "Disk · P150",
+      "6-500-0180": "Disk · P180",
+      "6-500-0220": "Disk · P220",
+      "6-500-0240": "Disk · P240",
+      "6-500-0280": "Disk · P280",
+      "6-500-0320": "Disk · P320",
+      "6-500-0400": "Disk · P400",
+      "6-500-0500": "Disk · P500",
+      "6-500-0600": "Disk · P600",
+      "6-500-0800": "Disk · P800",
+      "6-500-1000": "Disk · P1000",
+      "6-500-1500": "Disk · P1500",
+      "6-500-2000": "Disk · P2000",
+      "6-501-0080": "Traka · P80 · 14 rupa",
+      "6-501-0120": "Traka · P120 · 14 rupa",
+      "6-501-0180": "Traka · P180 · 14 rupa",
+      "6-501-0240": "Traka · P240 · 14 rupa",
+      "6-501-0320": "Traka · P320 · 14 rupa",
+      "6-502-0080": "Traka · P80",
+      "6-502-0120": "Traka · P120",
+      "6-502-0180": "Traka · P180",
+      "6-502-0240": "Traka · P240",
+      "6-502-0320": "Traka · P320"
+    }
+  },
+  "sehr-feines-und-ultra-feines-schleifvlies": {
+    "sourceHash": "f36539b65f0c35b6",
+    "productType": "Brusno runo",
+    "subtype": "Brusno runo · veoma fino i ultra fino · listovi i rolne",
+    "shortDescription": "Netkani abrazivni materijal u listovima ili rolnama, za matiranje prajmera i punilaca pre dalje obrade.",
+    "longDescription": "Very Fine and Ultra Fine Abrasive Fleece je netkani abrazivni materijal u listovima ili rolnama, na bazi najlonskih vlakana impregniranih sintetičkim kaučukom. Koristi se za matiranje prajmera i punilaca pre dalje obrade, kao i za matiranje površina složenog oblika, oblikovanje delova i brušenje ivica. Ravnomerno raspoređeno abrazivno zrno daje ujednačen trag brušenja, a runo je primenljivo za suvo i mokro brušenje.",
+    "purpose": "Matiranje površina složenog oblika, oblikovanje delova i brušenje ivica",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "najlonska vlakna i sintetički kaučuk"
+      },
+      {
+        "label": "Boja",
+        "value": "crvena (veoma fino), siva (ultra fino)"
+      },
+      {
+        "label": "Granulacija",
+        "value": "veoma fino, ultra fino"
+      },
+      {
+        "label": "Tip",
+        "value": "netkani materijal"
+      }
+    ],
+    "applications": [
+      "Matiranje površina složenog oblika",
+      "Oblikovanje delova",
+      "Brušenje ivica"
+    ],
+    "benefits": [
+      {
+        "title": "Povećana elastičnost",
+        "description": "Zahvaljujući povećanoj elastičnosti materijal je veoma pogodan za rad na teško dostupnim mestima."
+      },
+      {
+        "title": "Ujednačen trag brušenja",
+        "description": "Ravnomeran raspored abrazivnog zrna po površini runa daje ujednačen trag brušenja."
+      },
+      {
+        "title": "Produžen vek trajanja",
+        "description": "Ravnomeran raspored zrna unutar runa produžava vek trajanja materijala."
+      },
+      {
+        "title": "Suvo i mokro brušenje",
+        "description": "Primenljivo je i za suvo i za mokro brušenje."
+      },
+      {
+        "title": "Bez zapunjavanja",
+        "description": "Materijal se ne zapunjava tokom rada."
+      },
+      {
+        "title": "Visoka čvrstoća",
+        "description": "Runo ima visoku čvrstoću."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-901-0001": "Listovi 115 mm × 230 mm · 20 kom. · veoma fino, crvena",
+      "6-901-0002": "Listovi 115 mm × 230 mm · 20 kom. · ultra fino, siva",
+      "6-902-0001": "Rolna 115 mm × 10 m · veoma fino, crvena",
+      "6-902-0002": "Rolna 115 mm × 10 m · ultra fino, siva"
+    }
+  },
+  "sehr-feines-und-ultra-feines-schleifvlies-2": {
+    "sourceHash": "a70aeb6f754cf061",
+    "productType": "Sunđerasti abraziv",
+    "subtype": "Dvostrani abraziv na sunđeru · suvo i mokro brušenje · više finoća",
+    "shortDescription": "Izdržljiv dvostrani abraziv na sunđerastoj podlozi za teško dostupna mesta, za brušenje prajmer-punioca i međubrušenje boja.",
+    "longDescription": "Sponge Cut je izdržljiv dvostrani abraziv na sunđerastoj podlozi, namenjen radu na teško dostupnim mestima. Može se koristiti za brušenje prajmer-punioca i za međubrušenje boja, kao i za matiranje površina složenog oblika i ivica. Primenljiv je za suvo i mokro brušenje, ne zapunjava se i ima visoku čvrstoću.",
+    "purpose": "Matiranje površina složenog oblika i ivica",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "braon, zelena, ljubičasta"
+      },
+      {
+        "label": "Granulacija",
+        "value": "fino, veoma fino, ultra fino"
+      }
+    ],
+    "applications": [
+      "Matiranje površina složenog oblika i ivica"
+    ],
+    "benefits": [
+      {
+        "title": "Suvo i mokro brušenje",
+        "description": "Primenljiv je i za suvo i za mokro brušenje."
+      },
+      {
+        "title": "Bez zapunjavanja",
+        "description": "Abraziv se ne zapunjava tokom rada."
+      },
+      {
+        "title": "Visoka čvrstoća",
+        "description": "Materijal ima visoku čvrstoću."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "6-200-0006": "Fino, braon · 97 mm × 120 mm · 15 kom.",
+      "6-200-0005": "Veoma fino, zelena · 97 mm × 120 mm · 15 kom.",
+      "6-200-0004": "Ultra fino, ljubičasta · 97 mm × 120 mm · 15 kom.",
+      "6-200-0001": "Mikro fino, ljubičasta · 100 kom.",
+      "6-200-0002": "Super fino, zelena · 100 kom.",
+      "6-200-0003": "Fino, braon · 100 kom."
+    }
+  }
+}

@@ -1,0 +1,1175 @@
+{
+  "1k-etch-primer-spray": {
+    "sourceHash": "26c9953700ab4c13",
+    "productType": "1K reaktivni prajmer u spreju",
+    "subtype": "1K reaktivni (etch) prajmer · sprej · siva · 400 ml",
+    "shortDescription": "1K reaktivni (etch) prajmer u spreju sa veoma dobrim prianjanjem na metale i posebnim pigmentima za zaštitu od korozije.",
+    "longDescription": "1K Etch Primer Spray je jednokomponentni reaktivni prajmer u spreju koji veoma dobro prianja na metale. Sadrži posebne pigmente koji obezbeđuju zaštitu od korozije. Namenjen je malim i spot popravkama delova karoserijskog lima, a koristi se i kao prajmer za kontaktno zavarivanje. Brzo se suši na sobnoj temperaturi i lako se nanosi.",
+    "purpose": "Male i spot popravke karoserijskog lima i prajmer za kontaktno zavarivanje",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Male popravke i spot popravke delova karoserijskog lima",
+      "Prajmer za kontaktno zavarivanje"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Pogodan za spot popravke",
+        "description": "Pogodan je za lokalne (spot) popravke."
+      },
+      {
+        "title": "Lako nanošenje",
+        "description": "Lako se nanosi."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Pruža veoma dobru zaštitu od korozije."
+      },
+      {
+        "title": "Prianjanje na brušene metale",
+        "description": "Dobro prianja na brušene metalne površine."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "pocinkovani čelik",
+      "aluminijum",
+      "poliesterski git",
+      "potpuno očvrsli 2K akrilni punioci/prajmeri",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-430-0400": "400 ml"
+    }
+  },
+  "1k-hi-build-grundierfueller-spray": {
+    "sourceHash": "a130339e27285d76",
+    "productType": "1K debeloslojni prajmer-punilac u spreju",
+    "subtype": "1K prajmer-punilac · debeloslojni · sprej · 400 ml",
+    "shortDescription": "1K debeloslojni prajmer-punilac u spreju koji, zavisno od broja slojeva, služi kao sredstvo za poboljšanje prianjanja ili kao punilac.",
+    "longDescription": "1K Hi-Build primer filler Spray je jednokomponentni debeloslojni prajmer-punilac koji se, zavisno od broja nanetih slojeva, koristi kao sredstvo za poboljšanje prianjanja ili kao punilac. Namenjen je malim i spot popravkama delova karoserijskog lima i delova obrađenih poliesterskim gitom. Brzo se suši na sobnoj temperaturi, izoluje nezaštićena mesta na metalu i može se prelakirati konvencionalnim i vodorazredivim bojama. Dostupan je u sivoj, beloj i crnoj boji.",
+    "purpose": "Male i spot popravke karoserijskog lima i delova obrađenih poliesterskim gitom",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "polivinil-butiral"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,834 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "siva, crna, bela"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 250°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Male popravke i spot popravke delova karoserijskog lima",
+      "Popravke delova obrađenih poliesterskim gitom"
+    ],
+    "benefits": [
+      {
+        "title": "Pouzdana zaštita od korozije",
+        "description": "Pruža pouzdanu zaštitu od korozije."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Izoluje nezaštićeni metal",
+        "description": "Izoluje nezaštićena mesta na metalnoj površini."
+      },
+      {
+        "title": "Prelakiv svim uobičajenim bojama",
+        "description": "Može se prelakirati svim konvencionalnim (na bazi rastvarača) i vodorazredivim bojama."
+      },
+      {
+        "title": "Prajmer za kontaktno zavarivanje",
+        "description": "Može se koristiti kao prajmer za zavarivanje kod kontaktnog zavarivanja."
+      }
+    ],
+    "substrates": [
+      "metal",
+      "razne grundirane metalne površine",
+      "plastika ojačana staklenim vlaknima",
+      "poliesterski git",
+      "2K akrilni punilac/prajmer",
+      "serijski (OEM) i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-500-0400": "Siva · 400 ml",
+      "4-501-0400": "Bela · 400 ml",
+      "4-502-0400": "Crna · 400 ml"
+    }
+  },
+  "1k-kunststoff-primer-spray": {
+    "sourceHash": "706b35acb2d68e8e",
+    "productType": "Prajmer za plastiku u spreju",
+    "subtype": "1K prajmer za plastiku · sprej · srebrni pigment · 400 ml",
+    "shortDescription": "1K prajmer za plastiku u spreju, sredstvo za poboljšanje prianjanja na gotovo svim vrstama plastike osim polietilena.",
+    "longDescription": "1K Plastic primer Spray je jednokomponentni prajmer u spreju za obradu plastičnih delova. Koristi se kao sredstvo za poboljšanje prianjanja na gotovo svim vrstama plastike, sa izuzetkom polietilena. Sadrži srebrni pigment koji olakšava kontrolu nanošenja, brzo se suši na sobnoj temperaturi i može se prelakirati konvencionalnim i vodorazredivim bojama.",
+    "purpose": "Poboljšanje prianjanja na gotovo svim vrstama plastike, osim polietilena",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "poliolefinska smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,707 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "srebrna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Sredstvo za poboljšanje prianjanja na gotovo svim vrstama plastike, sa izuzetkom polietilena"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Prianjanje na plastiku",
+        "description": "Veoma dobro prianja na plastične podloge."
+      },
+      {
+        "title": "Srebrni pigment za kontrolu nanošenja",
+        "description": "Sadrži srebrni pigment pomoću kog se kontroliše naneti sloj."
+      },
+      {
+        "title": "Prelakiv svim uobičajenim bojama",
+        "description": "Može se prelakirati svim konvencionalnim (na bazi rastvarača) i vodorazredivim bojama."
+      }
+    ],
+    "substrates": [
+      "većina vrsta plastike",
+      "poliesterski git",
+      "brušena plastika ojačana staklenim vlaknima (GRP)",
+      "stari i OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-435-0400": "400 ml"
+    }
+  },
+  "2k-klarlack-spray": {
+    "sourceHash": "bc87f27d6456f89a",
+    "productType": "2K bezbojni lak u spreju",
+    "subtype": "2K bezbojni lak · visoki sjaj · otporan na ogrebotine · sprej",
+    "shortDescription": "Dvokomponentni bezbojni lak visokog sjaja u spreju, veoma otporan na ogrebotine, benzin, UV zračenje i atmosferske uticaje.",
+    "longDescription": "2K Clearcoat Spray je dvokomponentni bezbojni lak visokog sjaja, veoma otporan na ogrebotine, sa veoma visokom otpornošću na benzin, UV zračenje i atmosferske uticaje. Namenjen je lokalnim (spot) popravkama na karoseriji i dekorativnoj završnoj obradi različitih površina. Brzo se suši na sobnoj temperaturi, veoma dobro se razliva i lako se polira. Pruža dugotrajnu zaštitu od korozije i oksidacije.",
+    "purpose": "Spot popravke na karoseriji i dekorativna završna obrada različitih površina",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "akrilna smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,8 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "bezbojna"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 120°C"
+      },
+      {
+        "label": "VOC",
+        "value": "660,2 g/l"
+      }
+    ],
+    "applications": [
+      "Lokalne (spot) popravke na karoseriji",
+      "Dekorativna završna obrada različitih površina"
+    ],
+    "benefits": [
+      {
+        "title": "Visoki sjaj",
+        "description": "Daje površinu visokog sjaja."
+      },
+      {
+        "title": "Otpornost na ogrebotine",
+        "description": "Osušeni lak je veoma otporan na ogrebotine."
+      },
+      {
+        "title": "Otpornost na benzin i UV",
+        "description": "Ima visoku otpornost na benzin, UV zračenje i atmosferske uticaje."
+      },
+      {
+        "title": "Dugotrajna zaštita",
+        "description": "Pruža dugotrajnu zaštitu od korozije i oksidacije."
+      },
+      {
+        "title": "Dobra izdašnost",
+        "description": "Ima dobru izdašnost."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Veoma dobro razlivanje",
+        "description": "Ima veoma dobra svojstva razlivanja."
+      },
+      {
+        "title": "Lako poliranje",
+        "description": "Osušeni lak se lako polira."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "cink",
+      "aluminijum",
+      "bakar",
+      "mesing",
+      "brušeni i četkani nerđajući čelik"
+    ],
+    "advice": null,
+    "variants": {
+      "7-204-0200": "200 ml (oko 0,3–0,4 m²)"
+    }
+  },
+  "abbeizspray": {
+    "sourceHash": "df0ca9c75ffb3bc2",
+    "productType": "Skidač boje u spreju",
+    "subtype": "Skidač boje · sprej · bez CHC, NMP i aromata · 400 ml",
+    "shortDescription": "Skidač boje u spreju bez CHC, NMP i aromata, za uklanjanje starih slojeva boje i laka sa kamena, drveta, metala i pojedinih plastika.",
+    "longDescription": "Paint remover Spray je skidač boje u spreju bez CHC, NMP i aromata. Uklanja stare slojeve boje i laka na bazi ulja, nitroceluloze, disperzije ili sintetičkih smola sa uobičajenih podloga kao što su kamen, drvo i metal. Može se naneti i na plastične podloge POM, PVC, PC i PP-EPDM, a da ih ne nagriza. Stabilan je i na vertikalnim površinama i ima veoma dugo otvoreno vreme.",
+    "purpose": "Uklanjanje starih slojeva boje i laka sa uobičajenih podloga",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "bela"
+      },
+      {
+        "label": "Skladištenje",
+        "value": "u originalnom pakovanju najmanje 2 godine, na hladnom i suvom mestu"
+      },
+      {
+        "label": "Uslovi obrade",
+        "value": "+15°C, do 80% relativne vlažnosti vazduha"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 750 g/l"
+      }
+    ],
+    "applications": [
+      "Nanosi se ravnomerno i u obilnom sloju",
+      "Kod višeslojnih premaza preporučuje se drugi obilan sloj proizvoda",
+      "Posle oko 20 minuta napredak rastvaranja proverava se špahtlom",
+      "Ako proizvod ne prodre kroz slojeve do podloge, gornji rastvoreni slojevi uklanjaju se mehanički, špahtlom",
+      "Postupak se ponavlja dok se stara boja potpuno ne ukloni"
+    ],
+    "benefits": [
+      {
+        "title": "Bez CHC, NMP i aromata",
+        "description": "Ne sadrži CHC, NMP ni aromate."
+      },
+      {
+        "title": "Stabilan na vertikalnim površinama",
+        "description": "Ostaje stabilan i na vertikalnim površinama."
+      },
+      {
+        "title": "Veoma dobro nagrizanje premaza",
+        "description": "Ima veoma dobra svojstva nagrizanja starih premaza."
+      },
+      {
+        "title": "Bez nanošenja četkom",
+        "description": "Nije potrebno mukotrpno nanošenje četkom."
+      }
+    ],
+    "substrates": [],
+    "advice": "Proizvod ima veoma dugo otvoreno vreme. Ako se ipak osuši pre nego što se donji sloj rastvori, dovoljno je naneti još jedan sloj skidača boje.",
+    "variants": {
+      "7-553-0400": "400 ml"
+    }
+  },
+  "befuellbare-spraydose": {
+    "sourceHash": "d92b5e7c5661b1fd",
+    "productType": "Punjiva sprej doza",
+    "subtype": "Punjiva sprej doza · za 1K materijale · 400 ml",
+    "shortDescription": "Punjiva sprej doza kao alternativa pištolju za lakiranje kod malih i lokalnih (spot) popravki vozila, za nanošenje 1K materijala.",
+    "longDescription": "Fillable spray can je punjiva sprej doza koja služi kao alternativa klasičnom pištolju za lakiranje kod malih i lokalnih (spot) popravki vozila. Dozom se jednostavno nanosi bilo koji 1K materijal. Koristi se za prskanje boja i drugih tečnih hemijskih proizvoda koji se prethodno pune pomoću uređaja za punjenje. Doza sadrži potisni gas i rastvarač.",
+    "purpose": "Prskanje boja i drugih tečnih proizvoda napunjenih uređajem za punjenje",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "0,717 g/cm³"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Prskanje boja i drugih tečnih hemijskih proizvoda koji su prethodno napunjeni pomoću uređaja za punjenje"
+    ],
+    "benefits": [
+      {
+        "title": "Rešenje za spot popravke",
+        "description": "Pogodna je za lokalne (spot) popravke."
+      },
+      {
+        "title": "Sadrži potisni gas i rastvarač",
+        "description": "Doza već sadrži potisni gas i rastvarač."
+      },
+      {
+        "title": "Jednostavna upotreba",
+        "description": "Jednostavna je za upotrebu."
+      },
+      {
+        "title": "Ušteda vremena i novca",
+        "description": "Upotreba doze štedi vreme i novac."
+      },
+      {
+        "title": "Veoma dobro raspršivanje",
+        "description": "Materijal se veoma dobro raspršuje."
+      }
+    ],
+    "substrates": [
+      "u skladu sa tehničkim karakteristikama napunjenog materijala"
+    ],
+    "advice": null,
+    "variants": {
+      "7-501-0400": "400 ml"
+    }
+  },
+  "beispritzverduennung-spray": {
+    "sourceHash": "a1fc8d08ba6ba305",
+    "productType": "Razređivač za prelaze u spreju",
+    "subtype": "Razređivač za prelaze (blending) · sprej · bezbojan · 400 ml",
+    "shortDescription": "Razređivač za prelaze u spreju za spot popravke, za upotrebu na bezbojnim lakovima i 2K bojama, koji znatno smanjuje obim poliranja.",
+    "longDescription": "Fade out thinner Spray je razređivač za prelaze (blending) namenjen spot popravkama, za upotrebu na bezbojnim lakovima i 2K bojama. Posebno je razvijen za izradu prelaza, pa je obim poliranja znatno manji. Koristi se kod malih i spot popravki na karoseriji, lako se nanosi, a zona prelaza se lako polira.",
+    "purpose": "Izrada prelaza kod malih i spot popravki na karoseriji",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "specijalna smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,735 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "bezbojna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Male popravke i spot popravke na karoseriji"
+    ],
+    "benefits": [
+      {
+        "title": "Namenjen spot popravkama",
+        "description": "Pogodan je za upotrebu kod spot popravki."
+      },
+      {
+        "title": "Lako nanošenje",
+        "description": "Lako se nanosi."
+      },
+      {
+        "title": "Dobra moć rastvaranja",
+        "description": "Ima dobru moć rastvaranja."
+      },
+      {
+        "title": "Zona prelaza se lako polira",
+        "description": "Zona prelaza se posle nanošenja lako polira."
+      },
+      {
+        "title": "Manje poliranja",
+        "description": "Znatno smanjuje obim poliranja."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "7-551-0400": "400 ml"
+    }
+  },
+  "felgensilber-spray": {
+    "sourceHash": "3cda9ba38c1e6dbc",
+    "productType": "Sprej boja za felne",
+    "subtype": "Boja za felne · srebrna mat · akrilna · 400 ml",
+    "shortDescription": "Brzosušeća srebrna sprej boja za lakiranje felni i poklopaca točkova.",
+    "longDescription": "Silver wheel Spray je brzosušeća sprej boja na bazi akrilne smole, u srebrnoj mat nijansi, namenjena lakiranju felni i poklopaca točkova. Ima dobru pokrivnost i dobru otpornost na vremenske uticaje, benzin i hemikalije. Postojana je na svetlost i otporna na UV zračenje.",
+    "purpose": "Lakiranje felni i poklopaca točkova",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "akrilna smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,735 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "srebrna, mat"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 110°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Lakiranje felni i poklopaca točkova"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Dobra pokrivnost",
+        "description": "Ima dobru pokrivnost."
+      },
+      {
+        "title": "Otpornost na spoljne uticaje",
+        "description": "Dobro je otporna na vremenske uticaje, benzin i hemikalije."
+      },
+      {
+        "title": "Postojan izgled",
+        "description": "Zadržava veoma dobar i postojan izgled površine."
+      },
+      {
+        "title": "Postojana na svetlost i UV",
+        "description": "Postojana je na svetlost i otporna na UV zračenje."
+      }
+    ],
+    "substrates": [
+      "grundirani metalni delovi",
+      "potpuno očvrsli stari i OEM premazi",
+      "drvo",
+      "metal",
+      "aluminijum",
+      "staklo",
+      "razne vrste plastike"
+    ],
+    "advice": null,
+    "variants": {
+      "4-143-0400": "400 ml"
+    }
+  },
+  "hohlraumkonservierung-spray": {
+    "sourceHash": "e65f8899c8d2f577",
+    "productType": "Vosak za šupljine u spreju",
+    "subtype": "Zaštita šupljina · na bazi voska · sprej · 500 ml",
+    "shortDescription": "Vosak za šupljine u spreju za zaštitu od korozije u šupljinama karoserije, posebno na delovima sklonim rđi kao što su vrata i poklopci.",
+    "longDescription": "Cavity preservation Spray služi za zaštitu od korozije u šupljinama karoserije, posebno na delovima sklonim rđi kao što su vrata, bočne stranice, poklopci prtljažnika i poklopci motora. Redovnim nanošenjem tankog sloja jednostavno se sprečava pojava rđe. Proizvod stvara lepljiv, samoprianjajući sloj bez mirisa voska, i kada je vozilo na suncu ili je motorni prostor zagrejan. Lako prodire u šupljine i odbija vodu.",
+    "purpose": "Tretman karoserija vozila i nadgradnji privrednih vozila",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "vosak"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,702 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "bela, providna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Test slane magle (DIN50021)",
+        "value": "Ri 0 / 240 h / 50 µ"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "500 ml"
+      }
+    ],
+    "applications": [
+      "Tretman karoserija vozila i nadgradnji privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Lako prodire u šupljine",
+        "description": "Lako prodire u šupljine karoserije."
+      },
+      {
+        "title": "Odbija vodu",
+        "description": "Efikasno odbija vodu."
+      },
+      {
+        "title": "Lako nanošenje",
+        "description": "Lako se nanosi."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Pruža veoma dobru zaštitu od korozije."
+      },
+      {
+        "title": "Otpornost na spoljne uticaje",
+        "description": "Dobro je otporan na vremenske uticaje, slabe kiseline i baze."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine",
+      "grundirani metalni delovi",
+      "potpuno očvrsli stari i OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "5-500-0500": "500 ml"
+    }
+  },
+  "klarlack-spray": {
+    "sourceHash": "290e6da64b5c799d",
+    "productType": "Bezbojni lak u spreju",
+    "subtype": "Bezbojni lak · visoki sjaj · akrilni · 400 ml",
+    "shortDescription": "Sjajni bezbojni lak u spreju za spot popravke premaza na karoseriji.",
+    "longDescription": "High gloss clearcoat Spray je sjajni bezbojni lak na bazi akrilne smole, namenjen spot popravkama premaza na karoseriji i dekorativnoj završnoj obradi različitih površina. Brzo se suši na sobnoj temperaturi i ima dobru izdašnost. Sjaj je dugotrajan, a lak je otporan na UV zračenje i vremenske uticaje i ne žuti.",
+    "purpose": "Spot popravke na karoseriji i dekorativna završna obrada različitih površina",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "akrilna smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,773 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "bezbojna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 110°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Lokalne (spot) popravke na karoseriji",
+      "Dekorativna završna obrada različitih površina"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Dobra izdašnost",
+        "description": "Ima dobru izdašnost."
+      },
+      {
+        "title": "Dugotrajan sjaj",
+        "description": "Daje veoma dobar i dugotrajan sjaj."
+      },
+      {
+        "title": "Otporan na UV i vremenske uticaje",
+        "description": "Otporan je na UV zračenje i vremenske uticaje."
+      },
+      {
+        "title": "Ne žuti",
+        "description": "Lak ne žuti."
+      }
+    ],
+    "substrates": [
+      "vodorazredive bazne boje i bazne boje na bazi rastvarača",
+      "OEM premazi",
+      "drvo",
+      "metal",
+      "aluminijum",
+      "staklo",
+      "kamen",
+      "razne vrste plastike"
+    ],
+    "advice": null,
+    "variants": {
+      "7-201-0400": "400 ml"
+    }
+  },
+  "schwarz-spray": {
+    "sourceHash": "f9237663b825ca90",
+    "productType": "Crna boja u spreju",
+    "subtype": "Akrilna boja · crna mat ili sjajna · sprej · 400 ml",
+    "shortDescription": "Brzosušeća crna boja u spreju za prethodno obrađene ili neobrađene površine, u mat i sjajnoj varijanti.",
+    "longDescription": "Black paint Spray je brzosušeća boja na bazi akrilne smole za upotrebu na prethodno obrađenim ili neobrađenim površinama. Namenjena je malim i spot popravkama na karoseriji. Ima dobru pokrivnost i dobru otpornost na vremenske uticaje, benzin i hemikalije, postojana je na svetlost i otporna na UV zračenje. Dostupna je u crnoj mat i crnoj sjajnoj varijanti.",
+    "purpose": "Male popravke i spot popravke na karoseriji",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "akrilna smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,775 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "crna, mat i sjajna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 110°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Male popravke i spot popravke na karoseriji"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Dobra pokrivnost",
+        "description": "Ima dobru pokrivnost."
+      },
+      {
+        "title": "Dugotrajan izgled",
+        "description": "Zadržava veoma dobar i dugotrajan izgled površine."
+      },
+      {
+        "title": "Postojana na svetlost i UV",
+        "description": "Postojana je na svetlost i otporna na UV zračenje."
+      },
+      {
+        "title": "Otpornost na spoljne uticaje",
+        "description": "Dobro je otporna na vremenske uticaje, benzin i hemikalije."
+      }
+    ],
+    "substrates": [
+      "grundirani metalni delovi",
+      "potpuno očvrsli stari i OEM premazi",
+      "drvo",
+      "metal",
+      "aluminijum",
+      "staklo",
+      "kamen",
+      "razne vrste plastike"
+    ],
+    "advice": null,
+    "variants": {
+      "4-141-0400": "Crna mat · 400 ml",
+      "4-142-0400": "Crna sjajna · 400 ml"
+    }
+  },
+  "silikonentferner-spray-erdbeere": {
+    "sourceHash": "1c162118fdacf494",
+    "displayName": "Silicone Remover \"Strawberry\" Spray",
+    "productType": "Sredstvo za uklanjanje silikona",
+    "subtype": "Sredstvo za uklanjanje silikona · organski rastvarači · sprej · 400 ml",
+    "shortDescription": "Sredstvo za čišćenje u spreju na bazi organskih rastvarača, za uklanjanje silikona, ulja, masti i brusne prašine sa površina.",
+    "longDescription": "Silicone Remover \"Strawberry\" Spray je sredstvo za čišćenje na bazi organskih rastvarača za početno čišćenje starih i OEM premaza, grundiranih površina i površina sa puniocem, kao i plastike. Uklanja smole, silikon, ulje, mast, brusnu prašinu i druge nečistoće. Koristi se pre nanošenja pripremnih i reparaturnih materijala i posle brušenja, pri reparaturi putničkih i privrednih vozila. Brzo se suši i ne ostavlja tragove.",
+    "purpose": "Čišćenje površina pre nanošenja materijala i posle brušenja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "0,7 g/cm³"
+      },
+      {
+        "label": "VOC",
+        "value": "698,6 g/l"
+      }
+    ],
+    "applications": [
+      "Čišćenje površina pre nanošenja pripremnih i reparaturnih materijala",
+      "Čišćenje posle brušenja pri reparaturi putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši."
+      },
+      {
+        "title": "Bez ostataka",
+        "description": "Ne ostavlja nikakve ostatke na površini."
+      },
+      {
+        "title": "Jednostavna primena",
+        "description": "Primena je jednostavna i štedi vreme."
+      }
+    ],
+    "substrates": [
+      "metalni i plastični delovi",
+      "poliesterski gitovi",
+      "prajmeri",
+      "punioci",
+      "potpuno očvrsli stari ili sveži premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-500-0400": "400 ml"
+    }
+  },
+  "steinschlagschutz-spray": {
+    "sourceHash": "e8c9e6204f8d4d6e",
+    "productType": "Zaštita od udara kamena",
+    "subtype": "Zaštita od udara kamena · prelakiva · sprej · 500 ml",
+    "shortDescription": "Zaštita od udara kamena u spreju za podvozje i delove vozila izložene udarima kamena, prelakiva posle sušenja.",
+    "longDescription": "Stone chip protection Spray je zaštita od udara kamena na bazi sintetičke smole, za zaštitu podvozja i delova vozila izloženih udarima kamena. Premaz se u roku od 30–40 minuta posle sušenja može grundirati ili prelakirati u bilo kojoj boji. Dugotrajan je i veoma otporan na abraziju, a ima i svojstva prigušenja zvuka i vibracija. Dostupan je u crnoj i sivoj boji.",
+    "purpose": "Zaštita podvozja putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "guma"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,837 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "crna, siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Test slane magle (DIN50021)",
+        "value": "Ri 0 / 240 h / 250 µ"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "500 ml"
+      }
+    ],
+    "applications": [
+      "Zaštita podvozja putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Uvek spremno za upotrebu",
+        "description": "Isporučuje se u pakovanju koje je uvek spremno za upotrebu."
+      },
+      {
+        "title": "Prelakiv premaz",
+        "description": "Premaz se može prelakirati."
+      },
+      {
+        "title": "Veoma trajan premaz",
+        "description": "Daje veoma trajan premaz koji pouzdano štiti od habanja i agresivnih hemikalija."
+      },
+      {
+        "title": "Prigušenje zvuka i vibracija",
+        "description": "Ima svojstva prigušenja zvuka i vibracija."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine",
+      "grundirani metalni delovi",
+      "stari i OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "5-601-0500": "Crna · 500 ml",
+      "5-602-0500": "Siva · 500 ml"
+    }
+  },
+  "strukturlack-spray": {
+    "sourceHash": "43686a6597a74adf",
+    "productType": "Strukturna boja u spreju",
+    "subtype": "Strukturna boja za plastiku · crna · sprej · 400 ml",
+    "shortDescription": "Brzosušeća strukturna boja u spreju za vraćanje originalne strukture oštećenih plastičnih delova, npr. branika i retrovizora.",
+    "longDescription": "Texture paint Spray je brzosušeća strukturna boja za vraćanje originalne strukture oštećenih plastičnih delova, kao što su branici, instrument table, okviri vrata, retrovizori i slično. Namenjena je spot popravkama i obnavljanju strukture plastike. Ima dobru pokrivnost, lako se nanosi i može se prelakirati.",
+    "purpose": "Spot popravke i obnavljanje strukture plastičnih delova",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "vinil kopolimer"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,792 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Stepen sjaja (DIN67530, 60°)",
+        "value": "> 15 jedinica sjaja"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 80°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Spot popravke i obnavljanje strukture plastike"
+    ],
+    "benefits": [
+      {
+        "title": "Vraća originalnu strukturu",
+        "description": "Vraća originalnu strukturu oštećenih plastičnih delova."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Dobra pokrivnost",
+        "description": "Ima dobru pokrivnost."
+      },
+      {
+        "title": "Lako nanošenje",
+        "description": "Lako se nanosi."
+      },
+      {
+        "title": "Prelakiva",
+        "description": "Može se prelakirati."
+      }
+    ],
+    "substrates": [
+      "svi plastični delovi u unutrašnjosti i na spoljašnjosti vozila"
+    ],
+    "advice": null,
+    "variants": {
+      "4-171-0400": "400 ml"
+    }
+  },
+  "thermo-spray-650c": {
+    "sourceHash": "e84971423251e9ff",
+    "productType": "Termootporna boja u spreju",
+    "subtype": "Termootporna boja · do 650°C · crna · 400 ml",
+    "shortDescription": "Crna termootporna boja u spreju za delove izložene visokim temperaturama, otporna do 650°C.",
+    "longDescription": "Thermo paint Spray 650°C je crna boja u spreju na bazi silikonske smole, otporna na temperature do 650°C, za obradu delova izloženih visokim temperaturama. Koristi se za premazivanje izduvnih cevi, motora automobila i motocikala, izduvnih sistema i sličnih delova. Brzo se suši na sobnoj temperaturi, ima veoma dobru pokrivnost i visoku mehaničku otpornost.",
+    "purpose": "Premazivanje izduvnih cevi, motora i izduvnih sistema automobila i motocikala",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "silikonska smola"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,705 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 650°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Premazivanje izduvnih cevi, motora automobila i motocikala, izduvnih sistema i sličnih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Otpornost do 650°C",
+        "description": "Otporna je na temperature do 650°C."
+      },
+      {
+        "title": "Veoma dobra pokrivnost",
+        "description": "Ima veoma dobru pokrivnost."
+      },
+      {
+        "title": "Dobro razlivanje boje",
+        "description": "Boja se dobro razliva po površini."
+      },
+      {
+        "title": "Visoka mehanička otpornost",
+        "description": "Ima visoku mehaničku otpornost."
+      },
+      {
+        "title": "Otpornost na vremenske uticaje",
+        "description": "Dobro je otporna na vremenske uticaje."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine"
+    ],
+    "advice": null,
+    "variants": {
+      "4-151-0400": "400 ml"
+    }
+  },
+  "unterbodenschutz-bitumen": {
+    "sourceHash": "d2c1be20c2eb7331",
+    "productType": "Bitumenska zaštita podvozja",
+    "subtype": "Zaštita podvozja · na bazi voska i bitumena · crna · 1 l",
+    "shortDescription": "Trajna zaštita od rđe na bazi voska i bitumena za podove vozila, pragove, kućišta točkova i slične delove.",
+    "longDescription": "Bitumen underbody protection je trajna zaštita od rđe na bazi voska i bitumena, namenjena podovima vozila, pragovima, kućištima točkova i sličnim delovima. Premaz je elastičan, veoma dobro prianja, nije lepljiv i ima visoku otpornost na abraziju. Dobro prigušuje bubnjanje limova i dobro je otporan na so za puteve.",
+    "purpose": "Trajna zaštita od rđe za podove vozila, pragove i kućišta točkova",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "kategorija B/e 840 g/l"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "1 l"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 840 g/l"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Prigušuje bubnjanje limova",
+        "description": "Ima dobar efekat prigušenja bubnjanja limova (antidrumming)."
+      },
+      {
+        "title": "Veoma dobro prianjanje",
+        "description": "Veoma dobro prianja na podlogu."
+      },
+      {
+        "title": "Elastičan premaz",
+        "description": "Premaz ostaje elastičan."
+      },
+      {
+        "title": "Nije lepljiv",
+        "description": "Površina premaza nije lepljiva."
+      },
+      {
+        "title": "Otpornost na abraziju",
+        "description": "Ima visoku otpornost na abraziju."
+      },
+      {
+        "title": "Otpornost na so za puteve",
+        "description": "Dobro je otporan na so za puteve."
+      }
+    ],
+    "substrates": [],
+    "advice": "Podvozje mora biti temeljno očišćeno i suvo, bez prašine, masnoće, ulja i rđe, a stara zaštita koja više ne prianja mora se ukloniti. Posle kratkog mućkanja proizvod se ravnomerno, unakrsno prska na površinu; promenom pritiska vazduha i rastojanja prskanja utiče se na strukturu površine. Ne prskati po motoru, menjaču, karteru, kardanskom vratilu, izduvu, osovinama, oprugama, amortizerima, sajlama kočnica, mazalicama i sl. — te delove prethodno pokriti.",
+    "variants": {
+      "5-700-1000": "1 l"
+    }
+  },
+  "unterbodenschutz-bitumen-spray": {
+    "sourceHash": "c64e3113fd4f43d4",
+    "productType": "Bitumenska zaštita podvozja u spreju",
+    "subtype": "Zaštita podvozja · bitumen · sprej · 500 ml",
+    "shortDescription": "Bitumenski sprej za zaštitu podvozja vozila, koji posle sušenja ostaje fleksibilan i štiti od korozije.",
+    "longDescription": "Underbody protection bitumen spray je bitumenski sprej za zaštitu podvozja vozila. Posle sušenja ostaje fleksibilan i veoma dobro prianja na metale. Pruža pouzdanu zaštitu od korozije, dobro je otporan na vremenske uticaje, slabe kiseline i baze i doprinosi zvučnoj izolaciji.",
+    "purpose": "Zaštita podvozja vozila",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "bitumen"
+      },
+      {
+        "label": "Gustina",
+        "value": "0,764 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "500 ml"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Ostaje fleksibilan",
+        "description": "Posle sušenja ostaje fleksibilan."
+      },
+      {
+        "title": "Prianjanje na metale",
+        "description": "Veoma dobro prianja na metale."
+      },
+      {
+        "title": "Otpornost na spoljne uticaje",
+        "description": "Dobro je otporan na vremenske uticaje, slabe kiseline i baze."
+      },
+      {
+        "title": "Pouzdana zaštita od korozije",
+        "description": "Pruža pouzdanu zaštitu od korozije."
+      },
+      {
+        "title": "Zvučna izolacija",
+        "description": "Doprinosi zvučnoj izolaciji."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine",
+      "grundirani metalni delovi",
+      "potpuno očvrsli stari i OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "5-400-0500": "500 ml"
+    }
+  },
+  "zink-spray": {
+    "sourceHash": "af29070f8d62ebdc",
+    "productType": "Cink sprej",
+    "subtype": "Cink premaz · hladno cinkovanje · sprej · 400 ml",
+    "shortDescription": "Cink premaz u spreju za hladno cinkovanje metalnih površina i kao prajmer za kontaktno zavarivanje.",
+    "longDescription": "Zinc Spray je cink premaz u spreju na bazi epoksi smole i cinka. Koristi se za hladno cinkovanje metalnih površina i kao prajmer za kontaktno zavarivanje. Brzo se suši na sobnoj temperaturi, ima dobru pokrivnost i pruža pouzdanu katodnu zaštitu od korozije. Dobro je otporan na vremenske uticaje, benzin i hemikalije.",
+    "purpose": "Hladno cinkovanje metalnih površina i prajmer za kontaktno zavarivanje",
+    "facts": [
+      {
+        "label": "Baza",
+        "value": "epoksi smola, cink"
+      },
+      {
+        "label": "Gustina",
+        "value": "1,095 g/cm³"
+      },
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "0°C"
+      },
+      {
+        "label": "Temperaturna otpornost",
+        "value": "do 350°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "400 ml"
+      }
+    ],
+    "applications": [
+      "Hladno cinkovanje metalnih površina",
+      "Prajmer za kontaktno zavarivanje"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Brzo se suši na sobnoj temperaturi."
+      },
+      {
+        "title": "Dobra pokrivnost",
+        "description": "Ima dobru pokrivnost."
+      },
+      {
+        "title": "Katodna zaštita od korozije",
+        "description": "Pruža pouzdanu katodnu zaštitu od korozije."
+      },
+      {
+        "title": "Otpornost na spoljne uticaje",
+        "description": "Dobro je otporan na vremenske uticaje, benzin i hemikalije."
+      },
+      {
+        "title": "Prajmer za kontaktno zavarivanje",
+        "description": "Može se koristiti kao prajmer za zavarivanje kod kontaktnog zavarivanja."
+      }
+    ],
+    "substrates": [
+      "razne metalne površine"
+    ],
+    "advice": null,
+    "variants": {
+      "4-399-0400": "400 ml"
+    }
+  }
+}

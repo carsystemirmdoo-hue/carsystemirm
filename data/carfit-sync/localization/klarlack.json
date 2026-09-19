@@ -1,0 +1,503 @@
+{
+  "2k-hs-kratzfester-klarlack-21": {
+    "sourceHash": "9a404e439e1452a7",
+    "displayName": "2K HS Scratch resistant clearcoat 2:1",
+    "productType": "2K HS bezbojni lak",
+    "subtype": "2K akrilni bezbojni lak · HS 2:1 · otporan na ogrebotine",
+    "shortDescription": "2K akrilni HS bezbojni lak visokog sjaja, sa veoma dobrim kvalitetom površine i visokom otpornošću na ogrebotine.",
+    "longDescription": "2K akrilni bezbojni lak visokog sjaja – specijalni završni lak sa veoma dobrim kvalitetom površine i visokom otpornošću na ogrebotine. Štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj. Tri tipa učvršćivača (spori, standardni i brzi) obezbeđuju ujednačen rad laka u svim temperaturnim opsezima. Proizvod je usklađen sa zakonskim graničnim vrednostima za VOC.",
+    "purpose": "Zaštita i sjaj konvencionalnih i vodorazredivih baznih boja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "994 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "24°C"
+      },
+      {
+        "label": "VOC",
+        "value": "505,5 g/l"
+      }
+    ],
+    "applications": [
+      "Završni bezbojni lak koji štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka otpornost na vremenske uticaje",
+        "description": "Lak ima visoku otpornost na vremenske uticaje."
+      },
+      {
+        "title": "Visok stepen sjaja",
+        "description": "Daje površinu visokog stepena sjaja."
+      },
+      {
+        "title": "Tri tipa učvršćivača",
+        "description": "Spori, brzi i standardni učvršćivač obezbeđuju da lak pruža iste performanse u svim temperaturnim opsezima."
+      },
+      {
+        "title": "Hemijska i mehanička otpornost",
+        "description": "Lak ima visoku hemijsku i mehaničku otpornost."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-221-1000": "Lak · 1 l",
+      "7-221-5000": "Lak · 5 l",
+      "7-320-0501": "Učvršćivač standardni · 0,5 l",
+      "7-320-2501": "Učvršćivač standardni · 2,5 l",
+      "7-321-0501": "Učvršćivač spori · 0,5 l",
+      "7-321-2501": "Učvršćivač spori · 2,5 l",
+      "7-322-0501": "Učvršćivač brzi · 0,5 l",
+      "7-322-2501": "Učvršćivač brzi · 2,5 l"
+    }
+  },
+  "2k-hs-perfekt-klarlack": {
+    "sourceHash": "1ccb5fed91f29324",
+    "productType": "2K HS bezbojni lak",
+    "subtype": "2K akrilni bezbojni lak · HS · VOC < 420 g/l",
+    "shortDescription": "2K akrilni HS bezbojni lak visokog sjaja – završni lak sa veoma dobrim kvalitetom površine, usklađen sa VOC graničnim vrednostima.",
+    "longDescription": "2K akrilni bezbojni lak visokog sjaja – završni lak sa veoma dobrim kvalitetom površine. Štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj. Pogodan je za sušenje na vazduhu i za ubrzano sušenje, a zahvaljujući savremenoj tehnologiji veziva poliranje može da počne odmah posle sušenja u komori i kratkog hlađenja. Proizvod je usklađen sa zakonskim graničnim vrednostima za VOC.",
+    "purpose": "Zaštita i sjaj konvencionalnih i vodorazredivih baznih boja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1003 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(d)(420)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "27°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 420 g/l"
+      }
+    ],
+    "applications": [
+      "Završni bezbojni lak koji štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Briljantna završna površina",
+        "description": "Lak daje završnu površinu briljantnog izgleda."
+      },
+      {
+        "title": "Sušenje na vazduhu i ubrzano",
+        "description": "Pogodan je i za sušenje na vazduhu i za ubrzano sušenje."
+      },
+      {
+        "title": "Veoma dobro razlivanje",
+        "description": "Lak se veoma dobro razliva po površini."
+      },
+      {
+        "title": "Poliranje ubrzo posle sušenja",
+        "description": "Zahvaljujući savremenoj tehnologiji veziva, poliranje može da počne odmah posle sušenja u komori i kratke faze hlađenja."
+      },
+      {
+        "title": "Hemijska, mehanička i vremenska otpornost",
+        "description": "Lak ima visoku hemijsku i mehaničku otpornost, kao i visoku otpornost na vremenske uticaje."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-122-1500": "Set · lak 1 l + učvršćivač standardni 0,5 l",
+      "7-123-1500": "Set · lak 1 l + učvršćivač brzi 0,5 l",
+      "7-124-1500": "Set · lak 1 l + učvršćivač spori 0,5 l",
+      "7-122-5000": "Lak · 5 l",
+      "7-370-2500": "Učvršćivač standardni · 2,5 l",
+      "7-371-2500": "Učvršćivač brzi · 2,5 l",
+      "7-372-2500": "Učvršćivač spori · 2,5 l"
+    }
+  },
+  "2k-ms-industrie-klarlack": {
+    "sourceHash": "9438d6b1e278fa9c",
+    "productType": "2K MS bezbojni lak",
+    "subtype": "2K akrilni bezbojni lak · MS · industrijska primena",
+    "shortDescription": "2K akrilni MS bezbojni lak visokog stepena sjaja za industrijsku primenu i kompletna lakiranja.",
+    "longDescription": "2K akrilni bezbojni lak visokog stepena sjaja, namenjen industrijskoj primeni i kompletnim lakiranjima. Štiti konvencionalne i vodorazredive boje od uticaja okoline i daje im sjaj. Različiti učvršćivači pokrivaju različite primene i temperature, a lak ima kratko vreme sušenja na prašinu i dobru UV zaštitu.",
+    "purpose": "Zaštita i sjaj konvencionalnih i vodorazredivih boja u industrijskoj primeni",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "0,975 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "23°C"
+      },
+      {
+        "label": "VOC",
+        "value": "516 g/l"
+      }
+    ],
+    "applications": [
+      "Bezbojni lak koji štiti konvencionalne i vodorazredive boje od uticaja okoline i daje im sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Pogodan za industrijsku primenu",
+        "description": "Lak je pogodan za upotrebu u industriji."
+      },
+      {
+        "title": "Visok stepen sjaja",
+        "description": "Daje površinu visokog stepena sjaja."
+      },
+      {
+        "title": "Tri različita učvršćivača",
+        "description": "Standardni, brzi i spori učvršćivač namenjeni su različitim primenama i temperaturama."
+      },
+      {
+        "title": "Kratko sušenje na prašinu",
+        "description": "Lak ima kratko vreme sušenja na prašinu."
+      },
+      {
+        "title": "Dobra UV zaštita",
+        "description": "Lak pruža dobru UV zaštitu."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-153-1500": "Set · lak 1 l + učvršćivač standardni 0,5 l",
+      "7-154-1500": "Set · lak 1 l + učvršćivač brzi 0,5 l",
+      "7-153-5000": "Lak · 5 l",
+      "7-363-2500": "Učvršćivač standardni · 2,5 l",
+      "7-365-2500": "Učvršćivač brzi · 2,5 l"
+    }
+  },
+  "2k-uhs-low-voc-klarlack": {
+    "sourceHash": "361f038a4a6fe9f8",
+    "productType": "2K UHS bezbojni lak",
+    "subtype": "2K akrilni bezbojni lak · UHS · low VOC · otporan na ogrebotine",
+    "shortDescription": "Ekstra tvrd 2K akrilni UHS bezbojni lak visokog stepena sjaja, sa visokom otpornošću na ogrebotine i VOC vrednošću < 420 g/l.",
+    "longDescription": "Ekstra tvrd 2K akrilni bezbojni lak visokog stepena sjaja – specijalni završni lak sa veoma dobrim kvalitetom površine i visokom otpornošću na ogrebotine. Štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj. Tri tipa učvršćivača (spori, standardni i brzi) obezbeđuju ujednačen rad laka u svim temperaturnim opsezima, a lak ne žuti. Proizvod je usklađen sa zakonskim graničnim vrednostima za VOC.",
+    "purpose": "Zaštita i sjaj konvencionalnih i vodorazredivih baznih boja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "990 – 1050 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(d)(420)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "24°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 420 g/l"
+      }
+    ],
+    "applications": [
+      "Završni bezbojni lak koji štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka otpornost na vremenske uticaje",
+        "description": "Lak ima visoku otpornost na vremenske uticaje."
+      },
+      {
+        "title": "Visok stepen sjaja",
+        "description": "Daje površinu visokog stepena sjaja."
+      },
+      {
+        "title": "Tri tipa učvršćivača",
+        "description": "Spori, brzi i standardni učvršćivač obezbeđuju da lak pruža iste performanse u svim temperaturnim opsezima."
+      },
+      {
+        "title": "Hemijska i mehanička otpornost",
+        "description": "Lak ima visoku hemijsku i mehaničku otpornost."
+      },
+      {
+        "title": "Ne žuti",
+        "description": "Lak ne žuti."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-357-0500": "Učvršćivač standardni · 0,5 l",
+      "7-357-2500": "Učvršćivač standardni · 2,5 l",
+      "7-358-0500": "Učvršćivač brzi · 0,5 l",
+      "7-358-2500": "Učvršćivač brzi · 2,5 l",
+      "7-359-0500": "Učvršćivač spori · 0,5 l",
+      "7-359-2500": "Učvršćivač spori · 2,5 l"
+    }
+  },
+  "2k-ultra-hs-klarlack": {
+    "sourceHash": "84791b6641e3d62e",
+    "productType": "2K Ultra HS bezbojni lak",
+    "subtype": "2K akrilni bezbojni lak · Ultra HS · otporan na ogrebotine",
+    "shortDescription": "Ekstra tvrd 2K akrilni Ultra HS bezbojni lak visokog stepena sjaja, sa veoma dobrim kvalitetom površine i visokom otpornošću na ogrebotine.",
+    "longDescription": "Ekstra tvrd 2K akrilni bezbojni lak visokog stepena sjaja – specijalni završni lak sa veoma dobrim kvalitetom površine i visokom otpornošću na ogrebotine. Štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj. Tri tipa učvršćivača (spori, standardni i brzi) obezbeđuju ujednačen rad laka u svim temperaturnim opsezima, a lak ne žuti. Proizvod je usklađen sa zakonskim graničnim vrednostima za VOC.",
+    "purpose": "Zaštita i sjaj konvencionalnih i vodorazredivih baznih boja",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "994 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "24°C"
+      },
+      {
+        "label": "VOC",
+        "value": "505,5 g/l"
+      }
+    ],
+    "applications": [
+      "Završni bezbojni lak koji štiti konvencionalne i vodorazredive bazne boje od uticaja okoline i daje im sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka otpornost na vremenske uticaje",
+        "description": "Lak ima visoku otpornost na vremenske uticaje."
+      },
+      {
+        "title": "Visok stepen sjaja",
+        "description": "Daje površinu visokog stepena sjaja."
+      },
+      {
+        "title": "Tri tipa učvršćivača",
+        "description": "Spori, brzi i standardni učvršćivač obezbeđuju da lak pruža iste performanse u svim temperaturnim opsezima."
+      },
+      {
+        "title": "Hemijska i mehanička otpornost",
+        "description": "Lak ima visoku hemijsku i mehaničku otpornost."
+      },
+      {
+        "title": "Ne žuti",
+        "description": "Lak ne žuti."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-401-1000": "Lak · 1 l",
+      "7-401-5000": "Lak · 5 l",
+      "7-435-0501": "Učvršćivač standardni · 0,5 l",
+      "7-435-2501": "Učvršćivač standardni · 2,5 l",
+      "7-436-0501": "Učvršćivač spori · 0,5 l",
+      "7-436-2501": "Učvršćivač spori · 2,5 l",
+      "7-437-0501": "Učvršćivač brzi · 0,5 l",
+      "7-437-2501": "Učvršćivač brzi · 2,5 l"
+    }
+  },
+  "expressklarlack": {
+    "sourceHash": "2175ff784b9a8e27",
+    "productType": "ekspres bezbojni lak",
+    "subtype": "niskoviskozni bezbojni lak · sušenje na sobnoj temperaturi · spot repair",
+    "shortDescription": "Niskoviskozni bezbojni lak za brzu i efikasnu reparaturu (ekspres tehnologija), koji po pravilu ne zahteva sušenje u komori.",
+    "longDescription": "Niskoviskozni bezbojni lak za brzu i efikasnu reparaturu, koji po pravilu ne zahteva sušenje u komori. Zahvaljujući posebnoj formulaciji veoma brzo očvršćava već na sobnoj temperaturi (20°C): ručno se polira posle oko 50 minuta sušenja, a intenzivnije mašinsko poliranje moguće je posle oko 90 minuta. Izostanak grejanja donosi uštedu troškova i kratke cikluse rada, jer se lakiranje ne prekida intervalima zagrevanja. Posebno je pogodan za delimično lakiranje vozila i spot repair.",
+    "purpose": "Brza reparatura, delimično lakiranje vozila i spot repair bez sušenja u komori",
+    "facts": [
+      {
+        "label": "EU granična vrednost",
+        "value": "kategorija B/e 840 g/l"
+      },
+      {
+        "label": "Potrošnja",
+        "value": "6,8 – 8,6 m²/l"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 620 g/l"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Visok stepen sjaja",
+        "description": "Daje površinu visokog stepena sjaja."
+      },
+      {
+        "title": "Kratko sušenje na prašinu",
+        "description": "Lak ima kratko vreme sušenja na prašinu."
+      },
+      {
+        "title": "Dobra UV zaštita",
+        "description": "Lak pruža dobru UV zaštitu."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-156-1500": "Set · lak 1 l + učvršćivač standardni 0,5 l"
+    }
+  },
+  "matt-klarlack": {
+    "sourceHash": "fbcefdf75a0fa7b9",
+    "displayName": "Clearcoat matt",
+    "productType": "2K mat bezbojni lak",
+    "subtype": "2K akrilni lak · mat · sjaj 15–20 jedinica pod uglom od 60°",
+    "shortDescription": "2K akrilni mat bezbojni lak sa stepenom sjaja od 15–20 jedinica pod uglom od 60°.",
+    "longDescription": "2K akrilni mat lak sa stepenom sjaja od 15–20 jedinica pod uglom od 60°. Štiti konvencionalne i vodorazredive boje od uticaja okoline i daje im mat izgled. Daje ujednačenu mat površinu dobre mehaničke i hemijske otpornosti, a mešanjem sa C.A.R.FIT bezbojnim lakovima postižu se različiti stepeni sjaja, od mat do svilenkastog.",
+    "purpose": "Zaštita konvencionalnih i vodorazredivih boja uz mat završni izgled",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1022 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "23°C"
+      },
+      {
+        "label": "VOC",
+        "value": "563 g/l"
+      }
+    ],
+    "applications": [
+      "Bezbojni lak koji štiti konvencionalne i vodorazredive boje od uticaja okoline i daje im mat sjaj"
+    ],
+    "benefits": [
+      {
+        "title": "Specijalni mat lak",
+        "description": "Reč je o specijalnom laku za mat završnu površinu."
+      },
+      {
+        "title": "Ujednačena mat površina",
+        "description": "Lak daje ujednačenu mat površinu."
+      },
+      {
+        "title": "Mehanička i hemijska otpornost",
+        "description": "Lak ima dobru mehaničku i hemijsku otpornost."
+      },
+      {
+        "title": "Podesiv stepen sjaja",
+        "description": "Mešanjem sa C.A.R.FIT bezbojnim lakovima postižu se različiti stepeni sjaja, od mat do svilenkastog sjaja."
+      }
+    ],
+    "substrates": [
+      "vodorazrediva bazna boja",
+      "bazna boja na bazi rastvarača",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-440-1000": "Lak · 1 l",
+      "7-440-0500": "Učvršćivač standardni · 0,5 l"
+    }
+  },
+  "rapid-air-klarlack-voc": {
+    "sourceHash": "c25eab55c3754a79",
+    "productType": "2K bezbojni lak",
+    "subtype": "bezbojni lak · sušenje na vazduhu · VOC < 420 g/l",
+    "shortDescription": "Bezbojni lak veoma brzog sušenja, veoma dobrog sjaja i dobre pokrivnosti; na vazduhu se suši 50–60 minuta na 20°C.",
+    "longDescription": "Bezbojni lak veoma brzog sušenja, veoma dobrog sjaja i dobre pokrivnosti, koji se nanosi jednostavno i brzo. Namenjen je dvoslojnom lakiranju pri reparaturi vozila. Na vazduhu se suši 50–60 minuta na 20°C, čime se štede gorivo i energija, a moguće je i ubrzano sušenje: 3–5 minuta na 60°C. Pruža visoku UV zaštitu i ispunjava VOC zahteve.",
+    "purpose": "Dvoslojno lakiranje pri reparaturi vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "oko 1000 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(d)(420)"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "60°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 420 g/l"
+      }
+    ],
+    "applications": [
+      "Dvoslojno lakiranje pri reparaturi vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Sušenje na vazduhu štedi energiju",
+        "description": "Sušenje na vazduhu 50–60 minuta na 20°C omogućava uštedu goriva i energije."
+      },
+      {
+        "title": "Manja potrošnja materijala",
+        "description": "Za rad je potrebno manje materijala."
+      },
+      {
+        "title": "Moguće ubrzano sušenje",
+        "description": "Ubrzano sušenje je moguće: 3–5 minuta na 60°C."
+      },
+      {
+        "title": "Poliranje posle hlađenja",
+        "description": "Po potrebi se polira nakon hlađenja."
+      },
+      {
+        "title": "Veoma dobar dubinski sjaj",
+        "description": "Lak daje veoma dobar dubinski sjaj."
+      },
+      {
+        "title": "Visoka UV zaštita",
+        "description": "Lak pruža visoku UV zaštitu."
+      },
+      {
+        "title": "Ispunjava VOC zahteve",
+        "description": "Proizvod ispunjava VOC zahteve."
+      }
+    ],
+    "substrates": [
+      "konvencionalna bazna boja",
+      "vodorazrediva bazna boja",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "7-325-1000": "Lak · 1 l",
+      "7-326-5000": "Lak · 5 l",
+      "7-336-1000": "Učvršćivač · 1 l",
+      "7-337-2500": "Učvršćivač · 2,5 l"
+    }
+  }
+}

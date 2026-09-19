@@ -1,0 +1,699 @@
+{
+  "abdeckklebeband-100c": {
+    "sourceHash": "e6fb4c362c36c30d",
+    "productType": "Maskirna traka do 100°C",
+    "subtype": "maskirna traka · impregnirani krep · do 100°C · braon",
+    "shortDescription": "Impregnirana krep maskirna traka sa lepkom na bazi prirodnog kaučuka, za zaštitu karoserije pri reparaturnom lakiranju.",
+    "longDescription": "Kvalitetna lepljiva traka za reparaturno lakiranje vozila. Izrađena je od impregniranog krepa sa posebno razvijenim lepkom na bazi prirodnog kaučuka. Podnosi pečenje na 100°C tokom 20 minuta, pogodna je za vodorazredive boje i boje na bazi rastvarača, a uklanja se bez ostataka i bez kidanja.",
+    "purpose": "Zaštita karoserije od raspršene boje tokom reparaturnog lakiranja",
+    "facts": [
+      {
+        "label": "Izduženje pri kidanju",
+        "value": "9 ± 2 %"
+      },
+      {
+        "label": "Boja",
+        "value": "braon"
+      },
+      {
+        "label": "Sila prianjanja",
+        "value": "5 ± 1 N / 25 mm"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "do 100°C (20 minuta), do 80°C (60 minuta)"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "95 ± 20 N / mm²"
+      }
+    ],
+    "applications": [
+      "Zaštita karoserije vozila od raspršene boje (overspray) tokom reparaturnog lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Pečenje na 100°C",
+        "description": "Podnosi pečenje na 100°C u trajanju od 20 minuta."
+      },
+      {
+        "title": "Veoma dobro prianjanje trake na traku",
+        "description": "Slojevi trake veoma dobro prianjaju jedan na drugi (tape-to-tape)."
+      },
+      {
+        "title": "Za vodorazredive i rastvaračke boje",
+        "description": "Pogodna je za vodorazredive boje i boje na bazi rastvarača."
+      },
+      {
+        "title": "Otporna na rastvarače i razređivače",
+        "description": "Traka je otporna na rastvarače i razređivače."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka i bez kidanja trake."
+      },
+      {
+        "title": "Dobro prati krivine",
+        "description": "Veoma dobro se lepi oko krivina."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-100-1019": "19 mm × 50 m · debljina 120 ± 20 μm",
+      "9-100-1025": "25 mm × 50 m · debljina 120 ± 20 μm",
+      "9-100-1038": "38 mm × 50 m · debljina 120 ± 20 μm",
+      "9-100-1050": "50 mm × 50 m · debljina 120 ± 20 μm"
+    }
+  },
+  "abdeckklebeband-80c": {
+    "sourceHash": "78a4ac7cecbb4347",
+    "productType": "Maskirna traka do 80°C",
+    "subtype": "maskirna traka · blago krepovana · do 80°C · bela",
+    "shortDescription": "Blago krepovana maskirna traka sa veoma dobrim izduženjem i visokom početnom lepljivošću, za maskiranje pri brušenju i lakiranju.",
+    "longDescription": "Blago krepovana maskirna traka sa veoma dobrim karakteristikama izduženja i visokom početnom snagom prianjanja. Pogodna je za maskiranje pri brušenju, kao i pri nanošenju vodorazredivih i rastvaračkih reparaturnih materijala sa naknadnim sušenjem u kabini za lakiranje. Kada se reparaturni premaz osuši, traka se skida čisto i ne ostavlja ostatke.",
+    "purpose": "Zaštita karoserije od raspršene boje uz sušenje u kabini do 80°C",
+    "facts": [
+      {
+        "label": "Izduženje pri kidanju",
+        "value": "9 ± 2 %"
+      },
+      {
+        "label": "Boja",
+        "value": "bela"
+      },
+      {
+        "label": "Debljina",
+        "value": "90 ± 15 μm"
+      },
+      {
+        "label": "Sila prianjanja",
+        "value": "4,5 ± 1 N / 25 mm"
+      },
+      {
+        "label": "Lepak",
+        "value": "prirodni kaučuk"
+      },
+      {
+        "label": "Lepljivost (Rolling Ball Tack)",
+        "value": "9 < 3 cm"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "do 80°C"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "50 ± 15 N / mm"
+      }
+    ],
+    "applications": [
+      "Profesionalna maskirna traka za sigurnu zaštitu karoserije od raspršene boje (overspray) tokom reparaturnog lakiranja, sa naknadnim sušenjem u kabini za lakiranje na temperaturi do 80°C"
+    ],
+    "benefits": [],
+    "substrates": [
+      "metalni delovi",
+      "guma",
+      "staklo",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-100-0019": "19 mm × 45 m",
+      "9-100-0025": "25 mm × 45 m",
+      "9-100-0038": "38 mm × 45 m",
+      "9-100-0050": "50 mm × 45 m"
+    }
+  },
+  "abdeckklebeband-orange-100c": {
+    "sourceHash": "71bfd580a05db241",
+    "productType": "Maskirna traka do 100°C",
+    "subtype": "maskirna traka · polukrep papir · do 100°C · narandžasta",
+    "shortDescription": "Narandžasta maskirna traka od impregniranog polukrep papira sa lepkom od prirodnog kaučuka, za zahtevne auto-reparaturne radionice.",
+    "longDescription": "Kvalitetna automobilska maskirna traka, preporučena za zahtevne auto-reparaturne radionice. Izrađena je od impregniranog polukrep papira, sa posebno razvijenim umreženim lepkom od prirodnog kaučuka na bazi rastvarača. Podnosi pečenje na 100°C tokom 20 minuta, može se koristiti i kao traka za konture, a uklanja se bez ostataka i bez kidanja.",
+    "purpose": "Zaštita karoserije od raspršene boje tokom reparaturnog lakiranja",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "narandžasta"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "18 mm × 50 m"
+      },
+      {
+        "label": "Sila odlepljivanja",
+        "value": "56 – 90 g / cm (PSTC-1)"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "do 100°C (20 minuta), do 80°C (60 minuta)"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "182 kg / cm² (ASTM D882)"
+      }
+    ],
+    "applications": [
+      "Zaštita karoserije vozila od raspršene boje (overspray) tokom reparaturnog lakiranja"
+    ],
+    "benefits": [
+      {
+        "title": "Pečenje na 100°C",
+        "description": "Podnosi pečenje na 100°C u trajanju od 20 minuta."
+      },
+      {
+        "title": "Upotrebljiva kao traka za konture",
+        "description": "Može se koristiti i kao traka za konture."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka i bez kidanja trake."
+      },
+      {
+        "title": "Za plastiku, gumu i slično",
+        "description": "Može se koristiti na plastici, gumi i sličnim materijalima."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-130-1850": "18 mm × 50 m · debljina 265 μm"
+    }
+  },
+  "abdeckklebeband-wasserfest-120c": {
+    "sourceHash": "9af4ebe7e3d9e284",
+    "productType": "Vodootporna maskirna traka do 120°C",
+    "subtype": "maskirna traka · vodootporna · do 120°C · žuta",
+    "shortDescription": "Vodootporna impregnirana krep maskirna traka sa lepkom na bazi prirodnog kaučuka, postojana 30 minuta na 120°C.",
+    "longDescription": "Kvalitetna lepljiva traka za reparaturno lakiranje vozila. Izrađena je od impregniranog krepa sa posebno razvijenim lepkom na bazi prirodnog kaučuka. Vodootporna je, postojana 30 minuta na 120°C i pogodna za vodorazredive boje i boje na bazi rastvarača. Uklanja se bez ostataka i bez kidanja.",
+    "purpose": "Zaštita starog laka, gumenih zaptivki i ukrasnih lajsni od boje i magle boje",
+    "facts": [
+      {
+        "label": "Izduženje pri kidanju",
+        "value": "10 ± 3 %"
+      },
+      {
+        "label": "Boja",
+        "value": "žuta"
+      },
+      {
+        "label": "Sila prianjanja",
+        "value": "5 ± 1 N / 25 mm"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "do 120°C (30 minuta)"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "95 ± 20 N / mm²"
+      }
+    ],
+    "applications": [
+      "Zaštita starog laka, gumenih zaptivki, ukrasnih lajsni i sličnog od boje i magle boje"
+    ],
+    "benefits": [
+      {
+        "title": "Vodootporna",
+        "description": "Traka je otporna na vodu."
+      },
+      {
+        "title": "Postojana 30 minuta na 120°C",
+        "description": "Postojana je 30 minuta na temperaturi od 120°C."
+      },
+      {
+        "title": "Veoma dobro prianjanje trake na traku",
+        "description": "Slojevi trake veoma dobro prianjaju jedan na drugi (tape-to-tape)."
+      },
+      {
+        "title": "Za vodorazredive i rastvaračke boje",
+        "description": "Pogodna je za vodorazredive boje i boje na bazi rastvarača."
+      },
+      {
+        "title": "Otporna na rastvarače i razređivače",
+        "description": "Traka je otporna na rastvarače i razređivače."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka i bez kidanja trake."
+      },
+      {
+        "title": "Dobro prati krivine",
+        "description": "Veoma dobro se lepi oko krivina."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-120-1019": "19 mm × 50 m · debljina 110 ± 15 μm",
+      "9-120-0025": "25 mm × 50 m · debljina 110 ± 15 μm",
+      "9-120-0030": "30 mm × 50 m · debljina 110 ± 15 μm",
+      "9-120-0038": "38 mm × 50 m · debljina 110 ± 15 μm",
+      "9-120-0050": "50 mm × 50 m · debljina 110 ± 15 μm"
+    }
+  },
+  "doppelseitiges-klebeband": {
+    "sourceHash": "27b6087c5017b909",
+    "productType": "Dvostrano lepljiva traka",
+    "subtype": "dvostrano lepljiva montažna traka · polietilenska pena · akrilni lepak · crna",
+    "shortDescription": "Dvostrano lepljiva montažna traka od polietilenske pene sa ekstra jakim akrilnim lepljivim slojem, za pričvršćivanje oznaka na vozilu.",
+    "longDescription": "Dvostrano lepljiva montažna traka od polietilenske pene sa ekstra jakim akrilnim lepljivim slojem. Ima visoku otpornost na starenje i vremenske uticaje. Lepljivi sloj je pokriven zelenom zaštitnom folijom.",
+    "purpose": "Pričvršćivanje amblema i natpisnih pločica na vozilu",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Poprečna čvrstoća",
+        "value": "> 24 h / 2 kg / 25 × 25 mm (PSTS-7)"
+      },
+      {
+        "label": "Sila odlepljivanja",
+        "value": "> 1,8 kg / 25 mm (PSTS-3)"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "> 45 kg / 25 × 25 mm"
+      }
+    ],
+    "applications": [
+      "Pričvršćivanje amblema i natpisnih pločica na vozilu",
+      "Prigušivanje vibracija i zaštita od habanja (npr. na branicima ili ukrasnim delovima)"
+    ],
+    "benefits": [
+      {
+        "title": "Za trajno pričvršćivanje",
+        "description": "Pogodna je za trajno pričvršćivanje."
+      },
+      {
+        "title": "Veoma fleksibilna",
+        "description": "Traka je veoma fleksibilna."
+      },
+      {
+        "title": "Otporna na hemikalije, UV i toplotu",
+        "description": "Ima visoku otpornost na rastvarače, hemijska sredstva, UV zračenje i toplotu."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {}
+  },
+  "gewebeband": {
+    "sourceHash": "e5cb17bc7af5681a",
+    "productType": "Platnena lepljiva traka",
+    "subtype": "platnena traka · polietilenska tkanina · vodootporna · srebrna",
+    "shortDescription": "Vodootporna platnena traka od posebno premazane polietilenske tkanine, koja se uklanja bez ostataka.",
+    "longDescription": "Platnena traka izrađena od posebno premazane polietilenske tkanine. Zahvaljujući poboljšanom sastavu vodootporna je i uklanja se bez ostataka. Postavlja se na delove karoserije ili lakirane površine radi zaštite pri brušenju, a koristi se i za fiksiranje u različitim oblastima primene.",
+    "purpose": "Zaštita delova karoserije i lakiranih površina od oštećenja pri brušenju",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "srebrna"
+      },
+      {
+        "label": "Izduženje",
+        "value": "15 %"
+      },
+      {
+        "label": "Sila odlepljivanja",
+        "value": "1,1 kg / 25 mm"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "-35°C – +80°C (min. 60 minuta)"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "14 kg / 25 mm"
+      }
+    ],
+    "applications": [
+      "Postavljanje na delove karoserije ili lakirane površine radi sprečavanja njihovog oštećenja pri brušenju",
+      "Fiksiranje u najrazličitijim oblastima primene"
+    ],
+    "benefits": [
+      {
+        "title": "Otporna na peskarenje",
+        "description": "Traka je postojana pri peskarenju."
+      },
+      {
+        "title": "Veoma jako lepi",
+        "description": "Traka ima ekstra jaku lepljivost."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-150-5050": "50 mm × 50 m · debljina 0,3 mm"
+    }
+  },
+  "lifting-tape-gruen": {
+    "sourceHash": "9b1c1a615d560deb",
+    "productType": "Traka za podizanje gumica",
+    "subtype": "traka za podizanje gumica · perforirana · sa plastičnim umetkom",
+    "shortDescription": "Perforirana maskirna traka sa plastičnim umetkom koja štiti gumene zaptivke i istovremeno ih podiže.",
+    "longDescription": "Perforirana maskirna traka sa plastičnim umetkom. Perforacija omogućava lako kidanje umesto uobičajenog, zahtevnog sečenja. Povećana fleksibilnost omogućava precizno praćenje svih kontura i pregiba. Traka štiti gumene zaptivke i istovremeno ih podiže, čime se sprečava nastanak ivica laka na zaptivkama.",
+    "purpose": "Zaštita i podizanje gumenih zaptivki radi sprečavanja ivica laka",
+    "facts": [
+      {
+        "label": "Izduženje pri kidanju",
+        "value": "30 %"
+      },
+      {
+        "label": "Debljina",
+        "value": "0,22 mm"
+      },
+      {
+        "label": "Boja",
+        "value": "boja slonovače"
+      },
+      {
+        "label": "Sila prianjanja",
+        "value": "1,6 N / cm"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "100°C (60 minuta)"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "28 N / cm"
+      }
+    ],
+    "applications": [
+      "Zaštita gumenih zaptivki uz njihovo istovremeno podizanje, kako se na zaptivkama ne bi formirale ivice laka"
+    ],
+    "benefits": [
+      {
+        "title": "Perforirana za lakše kidanje",
+        "description": "Perforacija omogućava lakše kidanje trake."
+      },
+      {
+        "title": "Fleksibilna, prati konture",
+        "description": "Fleksibilnost trake omogućava praćenje kontura."
+      },
+      {
+        "title": "Štiti i podiže gumene zaptivke",
+        "description": "Štiti gumene zaptivke i pouzdano ih podiže."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-160-5010": "50 mm × 10 m · debljina 0,265 mm"
+    }
+  },
+  "montageklebeband-pe": {
+    "sourceHash": "b2e929f3d9d7e482",
+    "productType": "Montažna traka",
+    "subtype": "montažna traka · ekspandirani polietilen · dvostrana zaštitna folija · crna",
+    "shortDescription": "Montažna lepljiva traka na bazi ekspandiranog polietilena, za lepljenje i pričvršćivanje oznaka, ukrasnih delova i ogledala.",
+    "longDescription": "Lepljiva traka na bazi ekspandiranog polietilena ima lepljivi sloj visokih performansi sa zaštitnom folijom na obe strane. Zaštita sprečava slepljivanje namotaja trake u rolni. Koristi se za lepljenje i pričvršćivanje logotipa, natpisnih pločica, elemenata unutrašnjih obloga, spoljnih ukrasnih delova, ogledala i sličnog.",
+    "purpose": "Lepljenje i pričvršćivanje logotipa, natpisnih pločica, ukrasnih delova i ogledala",
+    "facts": [
+      {
+        "label": "Opseg radne temperature",
+        "value": "-40°C – +50°C"
+      },
+      {
+        "label": "Dinamičko smicanje",
+        "value": "65 N / cm² (AFERA 4024)"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Sila lepljenja (180°)",
+        "value": "8 N / cm (AFERA 5001)"
+      },
+      {
+        "label": "Udarna otpornost na hladnoći",
+        "value": "-10°C"
+      },
+      {
+        "label": "Zaštitna folija",
+        "value": "plava"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "1600 kPa (AFERA 5004)"
+      }
+    ],
+    "applications": [],
+    "benefits": [
+      {
+        "title": "Povećano dinamičko smicanje i prianjanje",
+        "description": "Traka ima povećanu otpornost na dinamičko smicanje i povećano prianjanje."
+      },
+      {
+        "title": "Dugotrajan lepljivi sloj",
+        "description": "Lepljivi sloj je dugotrajan."
+      },
+      {
+        "title": "Za različite vremenske uslove",
+        "description": "Može se koristiti u velikom broju vremenskih uslova."
+      },
+      {
+        "title": "Lako nanošenje na hladne površine",
+        "description": "Lako se nanosi na hladne površine, što je veoma korisno pri niskim temperaturama i zimi."
+      },
+      {
+        "title": "Penasta osnova prati oblik površine",
+        "description": "Penasta osnova lako prianja na površine bilo kog oblika i povećava prianjanje."
+      },
+      {
+        "title": "Plava zaštitna folija",
+        "description": "Lepljivi sloj je zaštićen plavom zaštitnom folijom."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-171-0905": "9 mm × 5 m",
+      "9-171-1205": "12 mm × 5 m",
+      "9-171-1905": "19 mm × 5 m"
+    }
+  },
+  "schaumdichtband": {
+    "sourceHash": "38d37bc63a47dcb3",
+    "productType": "Sunđerasta maskirna traka",
+    "subtype": "sunđerasta traka · poliuretanska pena · za otvore vrata · bela",
+    "shortDescription": "Meka sunđerasta maskirna traka od poliuretanske pene sa gumenim lepkom osetljivim na pritisak, za maskiranje otvora vrata.",
+    "longDescription": "Meka sunđerasta maskirna traka izrađena od poliuretanske pene sa gumenim lepkom osetljivim na pritisak. Namenjena je maskiranju otvora vrata kako bi se sprečio prodor boje tokom reparaturnog lakiranja vozila. Isporučuje se u kutiji sa dozatorom, u više traka dužine 5 m, i uklanja se bez ostataka.",
+    "purpose": "Maskiranje otvora vrata radi sprečavanja prodora boje pri lakiranju",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "30 ± 4 kg / m³"
+      },
+      {
+        "label": "Boja",
+        "value": "bela"
+      },
+      {
+        "label": "Sila odlepljivanja",
+        "value": "6 N / 25 mm"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "95°C / 60 minuta"
+      }
+    ],
+    "applications": [
+      "Maskiranje otvora vrata radi sprečavanja prodora boje tokom reparaturnog lakiranja vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Jednostavno maskiranje i zaštita enterijera",
+        "description": "Jednostavan način da se vozilo maskira i zaštiti unutrašnjost."
+      },
+      {
+        "title": "Kutija sa dozatorom",
+        "description": "Isporučuje se u kutiji sa dozatorom, u više traka dužine 5 m."
+      },
+      {
+        "title": "Za otvore B i C",
+        "description": "Namenjena je za upotrebu na otvorima B i C."
+      },
+      {
+        "title": "Manje oštrih ivica laka",
+        "description": "Smanjuje nastanak oštrih ivica laka."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-109-1350": "13 mm × 50 m · debljina 11 mm"
+    }
+  },
+  "schaumstoffklebeband": {
+    "sourceHash": "0d91601c6ca03a1a",
+    "productType": "Traka za prelaze",
+    "subtype": "sunđerasta lepljiva traka · meke ivice laka · pogodna za infracrveno sušenje",
+    "shortDescription": "Sunđerasta lepljiva traka za meke ivice laka, koja se obrađuje kao uobičajena krep traka i pogodna je za infracrveno sušenje.",
+    "longDescription": "Sunđerasta lepljiva traka koja spaja prednosti dve trake: meku ivicu laka kakvu daje sunđerasta traka i uobičajenu obradivost standardne krep lepljive trake. Lepljiva strana je zaštićena nelepljivom folijom. Traka je pogodna za infracrveno sušenje.",
+    "purpose": "Lepljenje mekih ivica na prelazu između starog i novog laka",
+    "facts": [
+      {
+        "label": "Izduženje pri kidanju",
+        "value": "9 %"
+      },
+      {
+        "label": "Boja",
+        "value": "bela"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "163°C / 30 – 80 minuta"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "87,5 N / cm (AFERA 5004)"
+      }
+    ],
+    "applications": [
+      "Prvenstveno je namenjena lepljenju „mekih ivica”"
+    ],
+    "benefits": [
+      {
+        "title": "Ublažava prelaz starog i novog laka",
+        "description": "Retušira prelaz između starog i novog laka."
+      },
+      {
+        "title": "Meke ivice i na zaobljenjima",
+        "description": "Veoma pogodna za lepljenje mekih ivica, i na zaobljenim površinama."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-112-2005": "20 mm × 5 m · debljina 3 mm"
+    }
+  },
+  "zierlinienband": {
+    "sourceHash": "8ba107bd6e553e82",
+    "productType": "Traka za konture (fine line)",
+    "subtype": "traka za konture · termostabilizovana PVC osnova · tamnoplava",
+    "shortDescription": "Plava traka za konture sa termostabilizovanom PVC osnovom, za jasne linije razdvajanja bez ostataka pri uklanjanju.",
+    "longDescription": "Plava traka za konture (fine line) kombinuje termostabilizovanu PVC osnovu i samolepljivi gumeni sloj. Pogodna je za širok spektar površina. Daje jasne linije razdvajanja i pri uklanjanju ne ostavlja ostatke.",
+    "purpose": "Lepljenje kontura i oštrih ivica, npr. pri dvobojnom lakiranju",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "tamnoplava, sjajna"
+      },
+      {
+        "label": "Sila prianjanja",
+        "value": "33,6 g / mm (ASTM D-3330)"
+      },
+      {
+        "label": "Otpornost na toplotu",
+        "value": "38°C / 45 min"
+      },
+      {
+        "label": "Zatezna čvrstoća",
+        "value": "0,215 kg / mm (ASTM D-3759)"
+      }
+    ],
+    "applications": [
+      "Lepljenje kontura i oštrih ivica, npr. pri dvobojnom lakiranju (crnjenju)"
+    ],
+    "benefits": [
+      {
+        "title": "Otporna na toplotu do 138°C",
+        "description": "Traka je otporna na toplotu do 138°C."
+      },
+      {
+        "title": "Srednja fleksibilnost",
+        "description": "Traka ima srednju fleksibilnost."
+      },
+      {
+        "title": "Uklanjanje bez ostataka",
+        "description": "Uklanja se bez ostataka lepka."
+      }
+    ],
+    "substrates": [
+      "guma",
+      "staklo",
+      "metalni delovi",
+      "hromirane površine",
+      "OEM i reparaturni premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "9-141-0333": "3 mm × 33 mm · debljina 163 μm",
+      "9-141-0633": "6 mm × 33 mm · debljina 163 μm",
+      "9-141-1233": "12 mm × 33 mm · debljina 163 μm"
+    }
+  }
+}

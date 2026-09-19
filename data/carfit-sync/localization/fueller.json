@@ -1,0 +1,497 @@
+{
+  "2k-epoxid-grundierfueller-11": {
+    "sourceHash": "d8759a3f9735ff14",
+    "productType": "2K epoksi prajmer-punilac",
+    "subtype": "2K epoksi prajmer-punilac · odnos 1:1 · mokro na mokro",
+    "shortDescription": "Dvokomponentni epoksi prajmer-punilac sa veoma dobrim izolacionim dejstvom, posebno pogodan za postupak mokro na mokro.",
+    "longDescription": "2K Epoxy Primer 1:1 je kvalitetan dvokomponentni epoksi prajmer-punilac sa veoma dobrim izolacionim dejstvom, posebno pogodan za postupak mokro na mokro. Može se koristiti u dvoslojnom sistemu. Posebni aditivi štite čelične površine od korozije, a svetlosiva boja olakšava prelakiravanje. Lako se meša i nanosi i veoma dobro prianja na različite podloge.",
+    "purpose": "Epoksi prajmer-punilac za dvoslojni sistem i postupak mokro na mokro",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1560 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(c)(540)"
+      },
+      {
+        "label": "Boja",
+        "value": "svetlosiva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "23°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 540 g/l (RFU)"
+      }
+    ],
+    "applications": [
+      "Može se koristiti u dvoslojnom sistemu"
+    ],
+    "benefits": [
+      {
+        "title": "Zaštita čelika od korozije",
+        "description": "Posebni aditivi štite čelične površine od korozije."
+      },
+      {
+        "title": "Lako mešanje i upotreba",
+        "description": "Veoma se lako meša i koristi."
+      },
+      {
+        "title": "Lako prelakiravanje",
+        "description": "Zahvaljujući svetlosivoj boji veoma se lako prelakirava."
+      },
+      {
+        "title": "Veoma dobro razlivanje",
+        "description": "Ima veoma dobra svojstva razlivanja."
+      },
+      {
+        "title": "Prianjanje na različite podloge",
+        "description": "Veoma dobro prianja na čelik, aluminijum, pocinkovani čelik, fiberglas, poliesterski i epoksi git, wash prajmer i brušeni fabrički lak."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "aluminijum",
+      "pocinkovani čelik",
+      "poliesterski laminati (GRP)",
+      "poliesterski i epoksi git",
+      "2K prajmer",
+      "stari, dobro očuvani OEM ili reparaturni lak"
+    ],
+    "advice": null,
+    "variants": {
+      "4-390-0500": "Prajmer-punilac · 0,5 l",
+      "4-415-0500": "Učvršćivač · 0,5 l"
+    }
+  },
+  "2k-fast-air-grundierfueller-31": {
+    "sourceHash": "154d9150c223c23f",
+    "productType": "2K akrilni prajmer-punilac",
+    "subtype": "2K akrilni prajmer-punilac · odnos 3:1 · sušenje na vazduhu",
+    "shortDescription": "Akrilni prajmer-punilac sa veoma brzim sušenjem na vazduhu i veoma dobrim prianjanjem na goli metal.",
+    "longDescription": "2K Fast Air Primer Filler 3:1 je kvalitetan akrilni prajmer-punilac sa veoma brzim sušenjem i veoma dobrim prianjanjem na gole metalne površine. Suši se na vazduhu 60 minuta na 20°C i može se brusiti 1 sat nakon nanošenja. Pogodan je za reparaturu manjih ili većih oštećenja na metalnim delovima ili delovima obrađenim poliesterskim gitom.",
+    "purpose": "Reparatura oštećenja na metalnim delovima i delovima obrađenim poliesterskim gitom",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1500 – 1530 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(c)(540)"
+      },
+      {
+        "label": "Boja",
+        "value": "svetlosiva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "24°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 540 g/l"
+      }
+    ],
+    "applications": [
+      "Reparatura manjih ili većih oštećenja na metalnim delovima ili delovima obrađenim poliesterskim gitom"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Suši se 60 minuta na 20°C."
+      },
+      {
+        "title": "Direktno prianjanje na metal",
+        "description": "Direktno prianja na svaku metalnu površinu."
+      },
+      {
+        "title": "Standardno i debeloslojno nanošenje",
+        "description": "Može se koristiti standardno i kao debeloslojni (hi-build) punilac."
+      },
+      {
+        "title": "Glatka podloga za završni lak",
+        "description": "Obezbeđuje glatku površinu kao osnovu za dobar izgled završnog laka."
+      },
+      {
+        "title": "Veoma lako brušenje",
+        "description": "Veoma se lako brusi, što štedi vreme, energiju i troškove abraziva."
+      },
+      {
+        "title": "Ne zapunjava abraziv",
+        "description": "Pri brušenju ne zapunjava abraziv."
+      },
+      {
+        "title": "VOC usklađenost",
+        "description": "Proizvod je usklađen sa VOC zahtevima."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "sve vrste prajmerisanih metalnih površina",
+      "plastika ojačana staklenim vlaknima",
+      "poliesterski gitovi",
+      "2K akrilni punioci/prajmeri",
+      "OEM premazi",
+      "reparaturni lakovi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-420-1000": "Punilac · 1 l, siva",
+      "4-425-1000": "Punilac · 1 l, bela",
+      "4-426-1000": "Punilac · 1 l, crna",
+      "4-420-3000": "Punilac · 3 l, siva / crna",
+      "4-425-3000": "Punilac · 3 l, bela",
+      "4-421-0330": "Učvršćivač · 0,33 l",
+      "4-421-1000": "Učvršćivač · 1 l"
+    }
+  },
+  "2k-hs-acryl-grundierfueller-41": {
+    "sourceHash": "8c36a3c18f528a19",
+    "productType": "2K akrilni prajmer-punilac",
+    "subtype": "2K HS akrilni prajmer-punilac · odnos 4:1 · 3 boje",
+    "shortDescription": "2K HS akrilni prajmer-punilac za sve uobičajene (prethodno prajmerisane) materijale u automobilskoj industriji.",
+    "longDescription": "2K HS Acryl Primer Filler 4:1 je kvalitetan 2K akrilni prajmer-punilac za sve uobičajene (prethodno prajmerisane) materijale u automobilskoj industriji. Pogodan je za brušene lakirane površine i delove karoserije reparirane poliesterskim gitom, kao i za uklanjanje sitnih ogrebotina i tragova brušenja. Dostupan je u 3 boje, brzo se suši i pri maksimalnoj debljini sloja i veoma se lako brusi.",
+    "purpose": "Punilac za brušene lakirane površine i delove reparirane poliesterskim gitom",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1500 – 1540 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(c)(540)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva, crna i bela"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "23°C – 25°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 540 g/l"
+      }
+    ],
+    "applications": [
+      "Nanošenje na brušene lakirane površine ili delove karoserije reparirane poliesterskim gitom",
+      "Uklanjanje sitnih ogrebotina i tragova brušenja"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma dobro razlivanje",
+        "description": "Ima veoma dobra svojstva razlivanja."
+      },
+      {
+        "title": "Dostupan u 3 boje",
+        "description": "Izbor odgovarajuće boje punioca olakšava pokrivanje baznom bojom i tako pomaže uštedi materijala."
+      },
+      {
+        "title": "Veoma dobra moć popunjavanja",
+        "description": "Ima veoma dobra svojstva popunjavanja."
+      },
+      {
+        "title": "Brzo sušenje u debelom sloju",
+        "description": "Brzo se suši čak i pri maksimalnoj debljini sloja."
+      },
+      {
+        "title": "Veoma lako brušenje",
+        "description": "Veoma se lako brusi."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "aluminijum",
+      "sve prajmerisane metalne površine",
+      "fiberglas",
+      "poliesterski git",
+      "2K akrilni punioci/prajmeri",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-103-0800": "Punilac · 0,8 l, siva",
+      "4-104-0800": "Punilac · 0,8 l, crna",
+      "4-105-0800": "Punilac · 0,8 l, bela",
+      "4-203-3600": "Punilac · 3,6 l, siva",
+      "4-304-3600": "Punilac · 3,6 l, crna",
+      "4-205-3600": "Punilac · 3,6 l, bela",
+      "4-211-0200": "Učvršćivač standardni · 0,2 l",
+      "4-211-0900": "Učvršćivač standardni · 0,9 l"
+    }
+  },
+  "2k-us-fueller-41": {
+    "sourceHash": "2df97f016cb04152",
+    "productType": "2K punilac",
+    "subtype": "2K punilac · odnos 4:1 · brzo sušenje · do 250 µm",
+    "shortDescription": "Dvokomponentni punilac koji se lako brusi, sa veoma brzim sušenjem, za reparaturno lakiranje vozila.",
+    "longDescription": "2K US Filler 4:1 je dvokomponentni punilac koji se lako brusi i veoma brzo suši, namenjen reparaturnom lakiranju vozila. Materijal ima visoku moć popunjavanja i veoma dobro prianjanje, uz visok nivo zaštite od korozije. Pogodan je za reparaturu manjih ili većih oštećenja na prajmerisanim metalnim delovima ili delovima obrađenim poliesterskim gitom.",
+    "purpose": "Reparatura oštećenja na prajmerisanim metalnim delovima i delovima sa gitom",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1648 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(c)(540)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "29°C"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 529 g/l"
+      }
+    ],
+    "applications": [
+      "Reparatura manjih ili većih oštećenja na prajmerisanim metalnim delovima ili delovima obrađenim poliesterskim gitom"
+    ],
+    "benefits": [
+      {
+        "title": "Bez skupljanja",
+        "description": "Materijal se ne skuplja."
+      },
+      {
+        "title": "Otpornost na mrlje",
+        "description": "Otporan je na pojavu mrlja."
+      },
+      {
+        "title": "Debljina suvog filma do 250 µm",
+        "description": "Omogućava debljinu suvog filma do 250 µm."
+      },
+      {
+        "title": "Veoma lako brušenje",
+        "description": "Veoma se lako brusi, što štedi vreme, energiju i troškove abraziva."
+      },
+      {
+        "title": "Ne zapunjava abraziv",
+        "description": "Pri brušenju ne zapunjava abraziv."
+      },
+      {
+        "title": "VOC usklađenost",
+        "description": "Proizvod je usklađen sa VOC zahtevima."
+      }
+    ],
+    "substrates": [
+      "sve vrste prajmerisanih metalnih površina",
+      "poliesterski gitovi",
+      "2K akrilni punioci/prajmeri",
+      "OEM premazi",
+      "reparaturni lakovi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-240-1000": "Punilac · 1 l",
+      "4-240-4000": "Punilac · 4 l",
+      "4-241-0250": "Učvršćivač · 0,25 l",
+      "4-241-1000": "Učvršćivač · 1 l",
+      "4-242-1000": "Punilac · 1 l, bela"
+    }
+  },
+  "2k-washprimer-21": {
+    "sourceHash": "939e5dbdfec8e6c8",
+    "productType": "2K wash prajmer",
+    "subtype": "2K wash prajmer · odnos 2:1 · antikorozivna zaštita",
+    "shortDescription": "2K wash prajmer sa veoma dobrim antikorozivnim svojstvima za reparaturno lakiranje vozila.",
+    "longDescription": "2K Washprimer 2:1 je dvokomponentni wash prajmer sa veoma dobrim antikorozivnim svojstvima, namenjen reparaturnom lakiranju vozila. Koristi se u dvoslojnom sistemu lakiranja pri reparaturi. Štiti čelične površine od korozije, lako se meša i nanosi, dobro se razliva i veoma dobro prianja na različite podloge.",
+    "purpose": "Dvoslojno lakiranje pri reparaturi vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "950 g/l"
+      },
+      {
+        "label": "Boja",
+        "value": "bezbojna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "12°C"
+      }
+    ],
+    "applications": [
+      "Dvoslojno lakiranje pri reparaturi vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Zaštita čelika od korozije",
+        "description": "Štiti čelične površine od korozije."
+      },
+      {
+        "title": "Lako mešanje i upotreba",
+        "description": "Veoma se lako meša i koristi."
+      },
+      {
+        "title": "Veoma dobro razlivanje",
+        "description": "Ima veoma dobra svojstva razlivanja."
+      },
+      {
+        "title": "Prianjanje na različite podloge",
+        "description": "Veoma dobro prianja na čelik, aluminijum, pocinkovani čelik, poliesterski git i brušeni originalni fabrički lak."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "aluminijum",
+      "pocinkovani čelik",
+      "poliesterski git",
+      "stari, dobro očuvani serijski ili reparaturni lak"
+    ],
+    "advice": null,
+    "variants": {
+      "4-398-0800": "Wash prajmer · 0,8 l",
+      "4-420-0400": "Aktivator · 0,4 l"
+    }
+  },
+  "kunststoffgrundierung": {
+    "sourceHash": "b8f50c6e69d543c3",
+    "productType": "1K prajmer za plastiku",
+    "subtype": "1K prajmer za plastiku · srebrno pigmentisan · brzo sušenje",
+    "shortDescription": "Jednokomponentni prajmer za plastiku, za sve uobičajene plastične delove vozila.",
+    "longDescription": "Plastic Primer je jednokomponentni prajmer za sve uobičajene plastične delove. Formulisan je za reparaturno lakiranje putničkih i privrednih vozila i koristi se kao prajmer na plastičnim delovima pre nanošenja narednih materijala. Pogodan je za većinu plastika koje se koriste u automobilskoj industriji, na primer za branike i unutrašnje obloge. Srebrno je pigmentisan, pa se naneti sloj lakše uočava.",
+    "purpose": "Prajmer za plastične delove pre nanošenja narednih materijala",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "850 – 890 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(e)(840)"
+      },
+      {
+        "label": "Boja",
+        "value": "srebrna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "30°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 840 g/l"
+      }
+    ],
+    "applications": [
+      "Prajmer za plastične delove putničkih i privrednih vozila pre nanošenja narednih materijala",
+      "Nanošenje na većinu plastika u automobilskoj industriji (plastike za branike, unutrašnje obloge i slično)"
+    ],
+    "benefits": [
+      {
+        "title": "Unapređena formulacija",
+        "description": "Proizvod ima unapređenu formulaciju."
+      },
+      {
+        "title": "Veoma dobro prianjanje",
+        "description": "Veoma dobro prianja na podlogu."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Prajmer se brzo suši."
+      },
+      {
+        "title": "Srebrna pigmentacija",
+        "description": "Srebrno je pigmentisan radi lakšeg uočavanja nanetog sloja."
+      }
+    ],
+    "substrates": [
+      "ABS (akrilonitril-butadien-stiren kopolimer)",
+      "EP (epoksidi/laminati)",
+      "PA (poliamidi)",
+      "PBTP",
+      "PC (polikarbonati)",
+      "POM (polioksimetilen)",
+      "PP/EPDM (polipropilen / etilen-propilen-dien monomer kopolimer)",
+      "PPO (polipropilen-oksid)",
+      "PUR (poliuretan), meki i tvrdi",
+      "PVC (polivinil-hlorid)",
+      "OEM premazi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-355-1000": "1 l"
+    }
+  },
+  "perfekt-fueller-41-grau": {
+    "sourceHash": "9982d979a82685f1",
+    "productType": "2K prajmer-punilac",
+    "subtype": "2K prajmer-punilac · odnos 4:1 · siva · komplet sa učvršćivačem",
+    "shortDescription": "Dvokomponentni prajmer-punilac visoke moći popunjavanja koji se brzo brusi, iz linije C.A.R.FIT Black Label.",
+    "longDescription": "C.A.R.FIT Black Label Perfect Filler 4:1 je dvokomponentni prajmer-punilac visoke moći popunjavanja koji se brzo brusi. Koristi se za reparaturu lakše i teže oštećenih delova. Daje glatku površinu bez upadanja, pruža zaštitu od korozije, dobro prianja i lako se brusi.",
+    "purpose": "Reparatura lakše i teže oštećenih delova",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1483 g/l (punilac)"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(c)(540)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "28°C"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "0,8 l punilac + 0,2 l učvršćivač"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 540 g/l"
+      }
+    ],
+    "applications": [
+      "Reparatura lakše i teže oštećenih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Glatka površina bez upadanja",
+        "description": "Obezbeđuje glatku površinu bez upadanja."
+      },
+      {
+        "title": "Visoka moć popunjavanja",
+        "description": "Ima visoku moć popunjavanja."
+      },
+      {
+        "title": "Zaštita od korozije",
+        "description": "Pruža zaštitu od korozije."
+      },
+      {
+        "title": "Dobro prianjanje",
+        "description": "Ima dobra svojstva prianjanja."
+      },
+      {
+        "title": "Lako brušenje",
+        "description": "Lako se brusi."
+      }
+    ],
+    "substrates": [
+      "sve vrste prajmerisanih metalnih površina",
+      "poliesterski gitovi",
+      "2K akrilni punioci/prajmeri",
+      "OEM premazi",
+      "reparaturni lakovi"
+    ],
+    "advice": null,
+    "variants": {
+      "4-403-1000": "Komplet · 0,8 l punilac + 0,2 l učvršćivač"
+    }
+  }
+}

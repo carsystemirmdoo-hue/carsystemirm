@@ -1,0 +1,362 @@
+{
+  "_comment": [
+    "Deterministički mapping: zvanična C.A.R.FIT taksonomija (carfitrepair.com) → 12 platformskih kategorija (lib/productTaxonomy.mjs).",
+    "Ključ je zvanični slug NAJDUBLJE kategorije stranice (npr. `abdeckmaterial-abdeckklebeband`). Unutar kategorije pravila se čitaju REDOM i prvo koje se poklopi pobeđuje.",
+    "`name` je regex nad ZVANIČNIM NAZIVOM stranice (C.A.R.FIT nema podnaslov sa tipom proizvoda kao Carsystem). `default` važi kada nijedno pravilo ne odgovara.",
+    "Mapiranje prati isto načelo kao data/carsystem-sync/taxonomy-map.json, da isti tip proizvoda dva brenda završi u istoj kategoriji.",
+    "visualType mora biti jedan od ProductVisualType (lib/carsystem-data.ts).",
+    "`packshotShade: true` = na zvaničnoj slici je SAM proizvod (abraziv, traka, sunđer, rukavica), pa boja sme da se uzorkuje sa packshota. Za hemiju u ambalaži slika prikazuje etiketu (C.A.R.FIT crvena = ambalaža), pa boja dolazi samo iz zvanično navedenog „Color”.",
+    "`materialColour: true` = zvanično polje „Color” opisuje SAM MATERIJAL (git, filer, traka, abraziv), pa sme da postane boja kartice. Bez ove oznake „Color” se čuva kao činjenica, ali ne boji karticu (npr. „colorless”, boja etikete, boja spreja koji nije farba).",
+    "Nijedna nova top-level kategorija nije uvedena.",
+    "Aerosoli prate postojeće pravilo platforme (COSMOS_TECHNICAL_CATEGORY_MAP): funkcionalni premaz ostaje u svojoj kategoriji i kada je u dozi — prajmer/cink/filer/lak u spreju → „Boje”, zaštita podvozja → „Zaštita”, odmašćivač → „Čišćenje”. U „Sprejevi” idu samo boje u spreju."
+  ],
+  "categories": {
+    "spachtel": {
+      "officialName": "Putties",
+      "default": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "materialColour": true
+      },
+      "rules": [
+        {
+          "name": "repair kit|stapler",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "set za popravku plastike — alat/pribor, ne git"
+        }
+      ]
+    },
+    "fueller": {
+      "officialName": "Filler",
+      "default": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "materialColour": true
+      },
+      "rules": []
+    },
+    "klarlack": {
+      "officialName": "Clearcoat",
+      "default": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat"
+      },
+      "rules": []
+    },
+    "aerosole": {
+      "officialName": "Aerosols",
+      "default": {
+        "category": "sprejevi",
+        "programSlug": "aerosoli",
+        "phaseSlug": "boja",
+        "visualType": "spray"
+      },
+      "rules": [
+        {
+          "name": "stone chip|underbody|bitumen|cavity",
+          "category": "zastita",
+          "programSlug": "aerosoli",
+          "phaseSlug": "priprema",
+          "visualType": "spray",
+          "note": "zaštita podvozja i šupljina — ista kategorija kao Cosmos antichip i Carsystem",
+          "materialColour": true
+        },
+        {
+          "name": "silicon?e remover|paint remover",
+          "category": "ciscenje",
+          "programSlug": "aerosoli",
+          "phaseSlug": "priprema",
+          "visualType": "spray",
+          "note": "sredstva za pripremu/čišćenje u spreju"
+        },
+        {
+          "name": "fillable spray can",
+          "category": "pribor",
+          "programSlug": "aerosoli",
+          "phaseSlug": "boja",
+          "visualType": "spray",
+          "note": "prazna doza za punjenje — pribor"
+        },
+        {
+          "name": "fade out thinner|clear ?coat",
+          "category": "boje",
+          "programSlug": "aerosoli",
+          "phaseSlug": "lak",
+          "visualType": "spray",
+          "note": "lak i razređivač za prelaze u spreju — premaz, ne boja u spreju"
+        },
+        {
+          "name": "primer|zinc|filler",
+          "category": "boje",
+          "programSlug": "aerosoli",
+          "phaseSlug": "podloga",
+          "visualType": "spray",
+          "materialColour": true,
+          "note": "podloga u spreju — premaz ostaje u „Boje” (isto kao Cosmos primer/zinc)"
+        },
+        {
+          "name": "paint spray|wheel spray|thermo|texture",
+          "category": "sprejevi",
+          "programSlug": "aerosoli",
+          "phaseSlug": "boja",
+          "visualType": "spray",
+          "materialColour": true,
+          "note": "boja u spreju — „Color” je boja premaza"
+        }
+      ]
+    },
+    "poliermittel": {
+      "officialName": "Polishing Materials",
+      "default": {
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral"
+      },
+      "rules": [
+        {
+          "name": "polishing discs?|polishing sponge|woolen",
+          "category": "poliranje",
+          "programSlug": "poliranje",
+          "phaseSlug": "poliranje",
+          "visualType": "foam",
+          "packshotShade": true
+        },
+        {
+          "name": "interface pad|pads for polishing",
+          "category": "pribor",
+          "programSlug": "poliranje",
+          "phaseSlug": "poliranje",
+          "visualType": "neutral",
+          "note": "podloške i međupodloške — nosači, ne materijal za poliranje"
+        }
+      ]
+    },
+    "schleifmittel": {
+      "officialName": "Abrasives and sanding",
+      "default": {
+        "category": "abrazivi",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "abrasive",
+        "packshotShade": true,
+        "materialColour": true
+      },
+      "rules": [
+        {
+          "name": "sanding block|polishing and sanding pad",
+          "category": "pribor",
+          "programSlug": "abrazivi",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "packshotShade": true,
+          "note": "ručni blokovi — nosači abraziva"
+        }
+      ]
+    },
+    "unterbodenschutz-klebstoffe": {
+      "officialName": "Protective Coatings",
+      "default": {
+        "category": "zastita",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": true
+      },
+      "rules": [
+        {
+          "name": "glue|adhesive|sealant",
+          "category": "lepkovi",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "materialColour": true
+        },
+        {
+          "name": "spray booth|tack coating",
+          "category": "radionica",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "boja",
+          "visualType": "neutral",
+          "note": "zaštitni premaz za kabinu — radionička hemija"
+        }
+      ]
+    },
+    "verduenner-silikonentferner": {
+      "officialName": "Thinner & Silicone Remover",
+      "default": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "neutral",
+        "note": "razređivači su sistemske komponente (kao kod Carsystem-a)"
+      },
+      "rules": [
+        {
+          "name": "silicon?e remover",
+          "category": "ciscenje",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral"
+        },
+        {
+          "name": "gun cleaner",
+          "category": "radionica",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "boja",
+          "visualType": "neutral",
+          "note": "sredstvo za pranje pištolja — radionička hemija"
+        }
+      ]
+    },
+    "abdeckmaterial-abdeckklebeband": {
+      "officialName": "Masking Tapes",
+      "default": {
+        "category": "maskiranje",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "packshotShade": true,
+        "materialColour": true
+      },
+      "rules": [
+        {
+          "name": "double-sided|mounting tape",
+          "category": "lepkovi",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "packshotShade": true,
+          "note": "montažne/dvostrano lepljive trake lepe delove, ne maskiraju"
+        }
+      ]
+    },
+    "abdeckmaterial-abdeckfolien": {
+      "officialName": "Masking Film",
+      "default": {
+        "category": "maskiranje",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral"
+      },
+      "rules": []
+    },
+    "abdeckmaterial-abdeckpapier": {
+      "officialName": "Masking Paper",
+      "default": {
+        "category": "maskiranje",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral"
+      },
+      "rules": []
+    },
+    "zubehoer-lackierzubehoer": {
+      "officialName": "Paint Related Accessories",
+      "default": {
+        "category": "pribor",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "boja",
+        "visualType": "neutral"
+      },
+      "rules": [
+        {
+          "name": "gloves|coverall",
+          "category": "zastita",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "packshotShade": true,
+          "note": "lična zaštitna oprema"
+        },
+        {
+          "name": "car cover|floor mats|seat covers",
+          "category": "maskiranje",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "zaštita vozila tokom rada"
+        },
+        {
+          "name": "logo tape|masking disc|masking paper dispenser|tape-off",
+          "category": "maskiranje",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "materialColour": true
+        },
+        {
+          "name": "cleaning cloth|tack cloth",
+          "category": "ciscenje",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "packshotShade": true,
+          "materialColour": true,
+          "note": "krpe — na slici je sam proizvod"
+        },
+        {
+          "name": "car clean",
+          "category": "ciscenje",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "sredstvo za čišćenje u ambalaži"
+        },
+        {
+          "name": "sanding control|sanding powder",
+          "category": "abrazivi",
+          "programSlug": "priprema-povrsine",
+          "phaseSlug": "priprema",
+          "visualType": "neutral",
+          "note": "kontrolni prah za brušenje — pomoćni materijal za brušenje (kao Carsystem control spray)"
+        },
+        {
+          "name": "paint stand",
+          "category": "radionica",
+          "programSlug": "oprema",
+          "phaseSlug": "boja",
+          "visualType": "neutral",
+          "note": "stalci za lakiranje — opremanje radionice"
+        },
+        {
+          "name": "stapler",
+          "category": "pribor",
+          "programSlug": "potrosni-materijal",
+          "phaseSlug": "priprema",
+          "visualType": "neutral"
+        }
+      ]
+    },
+    "zubehoer-mischbecher": {
+      "officialName": "Mixing Cups and Lids",
+      "default": {
+        "category": "pribor",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "boja",
+        "visualType": "neutral"
+      },
+      "rules": []
+    },
+    "zubehoer-ozongenerator": {
+      "officialName": "Ozone Generators",
+      "default": {
+        "category": "oprema",
+        "programSlug": "oprema",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "note": "uređaj; platforma nema kategoriju za uređaje van lakiranja, „Oprema” je najbliža postojeća"
+      },
+      "rules": []
+    }
+  }
+}

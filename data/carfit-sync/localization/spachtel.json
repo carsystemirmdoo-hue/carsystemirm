@@ -1,0 +1,694 @@
+{
+  "alu-soft-spachtel": {
+    "sourceHash": "975c46a597a5e569",
+    "productType": "Poliesterski git sa aluminijumom",
+    "subtype": "2K poliesterski git · punjen aluminijumom · za metal i fiberglas",
+    "shortDescription": "Dvokomponentni poliesterski git punjen aluminijumom, za popunjavanje pri reparaturi metalnih i fiberglas delova karoserije.",
+    "longDescription": "Alu & Soft Putty je dvokomponentni poliesterski git punjen aluminijumom, namenjen popunjavanju pri reparaturi metalnih i fiberglas delova karoserije putničkih i privrednih vozila. Visok sadržaj aluminijumskog praha poboljšava svojstva proizvoda, naročito pri reparaturi metalnih delova. Lako se nanosi i brusi, daje površinu fine strukture i predviđen je za ručno ili mašinsko suvo brušenje.",
+    "purpose": "Reparatura delova karoserije putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1750 – 1850 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva metalik"
+      },
+      {
+        "label": "VOC",
+        "value": "65 g/l"
+      }
+    ],
+    "applications": [
+      "Poliesterski git za reparaturu delova karoserije putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Visok sadržaj aluminijumskog praha",
+        "description": "Visok sadržaj aluminijumskog praha poboljšava svojstva proizvoda, naročito pri reparaturi metalnih delova."
+      },
+      {
+        "title": "Veoma dobro prianjanje na metale",
+        "description": "Veoma dobro prianja na čelik, pocinkovani čelik, lake metale i druge podloge."
+      },
+      {
+        "title": "Lako nanošenje i brušenje",
+        "description": "Git se lako nanosi i lako brusi."
+      },
+      {
+        "title": "Površina fine strukture",
+        "description": "Nakon obrade daje površinu fine strukture."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Predviđen je za ručno ili mašinsko suvo brušenje."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "pocinkovani čelik",
+      "aluminijum",
+      "plastika ojačana staklenim vlaknima",
+      "poliesterski materijali",
+      "OEM podloge"
+    ],
+    "advice": "Ne nanositi na jednokomponentne (reaktivne i antikorozivne) prajmere i na termoplaste. Nanošenje na lakirane površine se ne preporučuje.",
+    "variants": {
+      "2-181-1000": "Doza · 1 kg, sa učvršćivačem"
+    }
+  },
+  "carbon-spachtel": {
+    "sourceHash": "ffa288725b2813a4",
+    "productType": "Poliesterski git sa karbonskim vlaknima",
+    "subtype": "2K poliesterski git · ojačan karbonskim vlaknima · srednja viskoznost",
+    "shortDescription": "Dvokomponentni poliesterski git srednje viskoznosti ojačan karbonskim vlaknima, za male rupe, mesta oštećena korozijom i duboka udubljenja.",
+    "longDescription": "Carbon Putty je dvokomponentni poliesterski git srednje viskoznosti, ojačan karbonskim vlaknima. Koristi se za popunjavanje malih rupa i površina oštećenih korozijom, a pogodan je i za popunjavanje dubokih udubljenja. Nakon sušenja površina materijala postaje veoma čvrsta i po potrebi se može brusiti.",
+    "purpose": "Reparatura delova karoserije putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1820 – 1840 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "crna"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "31°C"
+      },
+      {
+        "label": "VOC",
+        "value": "12 g/l"
+      }
+    ],
+    "applications": [
+      "Poliesterski git za reparaturu delova karoserije putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Dobro prianjanje na različite materijale",
+        "description": "Dobro prianja na širok spektar materijala koji se koriste za izradu karoserija u automobilskoj industriji."
+      },
+      {
+        "title": "Visoka mehanička čvrstoća",
+        "description": "Ojačanje karbonskim vlaknima daje visoku mehaničku čvrstoću."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Predviđen je za ručno ili mašinsko suvo brušenje."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "pocinkovani čelik",
+      "aluminijum",
+      "plastika ojačana staklenim vlaknima",
+      "poliesterski materijali",
+      "OEM podloge"
+    ],
+    "advice": "Ne nanositi na jednokomponentne (reaktivne i antikorozivne) prajmere i na termoplaste. Nanošenje na lakirane površine se ne preporučuje.",
+    "variants": {
+      "2-125-1800": "Doza · 1,8 kg, sa učvršćivačem"
+    }
+  },
+  "glas-plus-spachtel": {
+    "sourceHash": "6a999c3fa4b56bf1",
+    "productType": "Git ojačan staklenim vlaknima",
+    "subtype": "2K poliesterski git · staklena vlakna · srednja gustina",
+    "shortDescription": "Dvokomponentni poliesterski git srednje gustine sa staklenim vlaknima, za pukotine, male rupe, korozijom oštećena mesta i duboka udubljenja.",
+    "longDescription": "Glas Plus Putty je dvokomponentni poliesterski git srednje gustine sa staklenim vlaknima. Namenjen je popunjavanju pukotina, malih rupa i površina oštećenih korozijom, kao i reparaturi površina sa izraženim neravninama i dubokim udubljenjima. Koristi se pri reparaturi putničkih i privrednih vozila, metalnih konstrukcija i plovila.",
+    "purpose": "Osnovni git za popunjavanje nepravilnosti na karoseriji vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1655 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "zelena"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "31°C"
+      },
+      {
+        "label": "VOC",
+        "value": "4 g/l"
+      }
+    ],
+    "applications": [
+      "Osnovni git za popunjavanje pri otklanjanju nepravilnosti na karoseriji putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Visoka mehanička čvrstoća",
+        "description": "Ojačanje staklenim vlaknima daje visoku mehaničku čvrstoću."
+      },
+      {
+        "title": "Veoma dobro prianjanje",
+        "description": "Veoma dobro prianja na čelik, aluminijum, plastiku ojačanu staklenim vlaknima i drvo."
+      },
+      {
+        "title": "Stabilnost na vertikalnim površinama",
+        "description": "Ima visoku stabilnost na vertikalnim površinama."
+      },
+      {
+        "title": "Ručno ili mašinsko brušenje",
+        "description": "Može se brusiti ručno ili mašinski."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "aluminijum",
+      "plastika ojačana staklenim vlaknima",
+      "drvo"
+    ],
+    "advice": null,
+    "variants": {
+      "2-144-0500": "Doza · 0,5 kg, sa učvršćivačem",
+      "2-144-1000": "Doza · 1 kg, sa učvršćivačem",
+      "2-144-1800": "Doza · 1,8 kg, sa učvršćivačem"
+    }
+  },
+  "kunststoff-reparaturset": {
+    "sourceHash": "9ec2fa55e989b18c",
+    "productType": "Set za reparaturu plastike",
+    "subtype": "Poliesterska smola · katalizator · stakleni mat 0,5 × 0,5 m",
+    "shortDescription": "Reparaturni set sa poliesterskom smolom i staklenim matom za obnovu oštećenih čeličnih delova i delova od plastike ojačane staklenim vlaknima.",
+    "longDescription": "Plastic Repair Kit je set za obnovu oštećenih čeličnih delova i delova od plastike ojačane staklenim vlaknima, na primer za reparaturu mesta probijenih rđom, pukotina i malih rupa na metalnim delovima. Staklena vlakna natopljena poliesterskom smolom stvaraju čvrst sloj, koji se u daljem toku reparature prekriva gitom za popunjavanje. Set sadrži poliestersku smolu, katalizator i stakleni mat 0,5 × 0,5 m.",
+    "purpose": "Reparatura strukturnih delova vozila, rezervoara i arhitektonskih elemenata",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1120 – 1150 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "ćilibar/žuta"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "33°C"
+      },
+      {
+        "label": "VOC",
+        "value": "62 g/l"
+      }
+    ],
+    "applications": [
+      "Reparatura strukturnih delova vozila, rezervoara, arhitektonskih elemenata i sličnih delova"
+    ],
+    "benefits": [
+      {
+        "title": "Veoma dobro prianjanje",
+        "description": "Veoma dobro prianja na plastiku ojačanu staklenim vlaknima i na čelične površine."
+      },
+      {
+        "title": "Tiksotropna smola, lako nanošenje",
+        "description": "Poliesterska smola je tiksotropan proizvod koji se lako nanosi."
+      },
+      {
+        "title": "Površina nije lepljiva",
+        "description": "Nakon očvršćavanja površina proizvoda nije lepljiva."
+      }
+    ],
+    "substrates": [
+      "plastika ojačana staklenim vlaknima",
+      "čelik",
+      "laminirana plastika"
+    ],
+    "advice": "Set sadrži poliestersku smolu, katalizator i stakleni mat 0,5 × 0,5 m. Dobijeni sloj se u daljem toku reparature prekriva gitom za popunjavanje.",
+    "variants": {
+      "2-221-0250": "Doza · 0,25 kg, sa učvršćivačem"
+    }
+  },
+  "kunststoffspachtel": {
+    "sourceHash": "4f4b0d58463728ff",
+    "productType": "Poliesterski git za plastiku",
+    "subtype": "2K poliesterski git · visoka plastičnost · za plastične delove",
+    "shortDescription": "Dvokomponentni poliesterski git visoke plastičnosti za reparaturu plastičnih delova putničkih i privrednih vozila.",
+    "longDescription": "Plastic Putty je dvokomponentni poliesterski git visoke plastičnosti, namenjen reparaturi plastičnih delova putničkih i privrednih vozila. Veoma dobro prianja na plastiku, brzo se suši i lako se brusi.",
+    "purpose": "Reparatura plastičnih delova putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1854 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "34°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 250 g/l"
+      }
+    ],
+    "applications": [
+      "Reparatura plastičnih delova putničkih i privrednih vozila"
+    ],
+    "benefits": [],
+    "substrates": [
+      "ABS (akrilonitril-butadien-stiren kopolimer)",
+      "EP (epoksidi/laminati)",
+      "PA (poliamid)",
+      "PBTP (polibutilen-tereftalat)",
+      "PC (polikarbonat)",
+      "POM (polioksimetilen)",
+      "PP/EPDM (polipropilen / etilen-propilen-dien monomer kopolimer)",
+      "PPO (polipropilen-oksid)",
+      "PUR (poliuretan), meki i tvrdi",
+      "PVC (polivinil-hlorid)"
+    ],
+    "advice": null,
+    "variants": {
+      "2-160-0500": "Doza · 0,5 kg, sa učvršćivačem",
+      "3-310-0120": "Plastične špahtle za nanošenje · crvene"
+    }
+  },
+  "multi-soft-spachtel": {
+    "sourceHash": "ee219bca18768ec5",
+    "productType": "Univerzalni poliesterski git",
+    "subtype": "2K poliesterski git · fina struktura · univerzalan",
+    "shortDescription": "Dvokomponentni poliesterski git finog zrna za izravnavanje neravnina pri reparaturi vozila i u mašinstvu.",
+    "longDescription": "Multi Soft Putty je kvalitetan dvokomponentni poliesterski git finog zrna, namenjen izravnavanju neravnina u autoreparaturi, na vozilima i u mašinstvu. Univerzalan je poliesterski materijal za otklanjanje nepravilnosti na karoseriji putničkih i privrednih vozila. Stabilan je na vertikalnim površinama, ne puca na ivicama pri finom brušenju i ne zapunjava abraziv.",
+    "purpose": "Otklanjanje nepravilnosti na karoseriji putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1608 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "32°C"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 4 g/l"
+      }
+    ],
+    "applications": [
+      "Univerzalni poliesterski materijal za otklanjanje nepravilnosti na karoseriji putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Stabilnost na vertikalnim površinama",
+        "description": "Ima maksimalnu stabilnost na vertikalnim površinama."
+      },
+      {
+        "title": "Bez pucanja na ivicama",
+        "description": "Pri finom brušenju ne dolazi do pucanja na ivicama."
+      },
+      {
+        "title": "Kompaktna i glatka površina",
+        "description": "Formira kompaktnu, glatku i kvalitetnu površinu."
+      },
+      {
+        "title": "Ne zapunjava abraziv",
+        "description": "Pri brušenju ne zapunjava abraziv."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Predviđen je za ručno ili mašinsko suvo brušenje."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "pocinkovane površine",
+      "aluminijum",
+      "karbonska plastika i plastika ojačana staklenim vlaknima",
+      "poliesterski materijali",
+      "OEM podloge"
+    ],
+    "advice": "Ne nanositi na jednokomponentne (reaktivne i antikorozivne) prajmere i na termoplaste. Nanošenje na lakirane površine se ne preporučuje.",
+    "variants": {
+      "2-250-0900": "Doza · 0,9 kg, sa učvršćivačem",
+      "2-250-1400": "Kartuša · 1,4 kg, sa učvršćivačem",
+      "2-250-1800": "Doza · 1,8 kg, sa učvršćivačem",
+      "2-250-3000": "Kartuša · 3 kg, sa učvršćivačem"
+    }
+  },
+  "multi-spachtel": {
+    "sourceHash": "130b106b67f5c138",
+    "productType": "Multifunkcionalni fini git",
+    "subtype": "2K poliesterski git · fino zrno · za aluminijum i pocinkovane površine",
+    "shortDescription": "Dvokomponentni multifunkcionalni poliesterski git finog zrna za popunjavanje neravnina, posebno na aluminijumu i pocinkovanim površinama.",
+    "longDescription": "Multi Putty je dvokomponentni multifunkcionalni poliesterski git finog zrna, namenjen popunjavanju neravnina, posebno na aluminijumu i pocinkovanim površinama. Koristi se kao završni git pri otklanjanju nepravilnosti na karoseriji putničkih i privrednih vozila. Lako se obrađuje u debelim i tankim slojevima, brzo se suši i veoma lako brusi.",
+    "purpose": "Završni git za nepravilnosti na karoseriji putničkih i privrednih vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1830 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "žuta"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "32°C"
+      },
+      {
+        "label": "VOC",
+        "value": "< 250 g/l"
+      }
+    ],
+    "applications": [
+      "Multifunkcionalni završni git za otklanjanje nepravilnosti na karoseriji putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Rad u debelim i tankim slojevima",
+        "description": "Lako se obrađuje i u debelim i u tankim slojevima."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Git se brzo suši."
+      },
+      {
+        "title": "Puna čvrstoća za oko 1 sat",
+        "description": "Na pocinkovanim površinama puna čvrstoća prianjanja postiže se oko 1 sat nakon nanošenja."
+      },
+      {
+        "title": "Veoma lako brušenje",
+        "description": "Git se veoma lako brusi."
+      },
+      {
+        "title": "Ne zapunjava abraziv",
+        "description": "Pri brušenju ne zapunjava abraziv."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Predviđen je za ručno ili mašinsko suvo brušenje."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "pocinkovane površine",
+      "aluminijum",
+      "plastika ojačana staklenim vlaknima",
+      "poliesterski materijali",
+      "OEM podloge"
+    ],
+    "advice": "Ne nanositi na jednokomponentne (reaktivne i antikorozivne) prajmere i na termoplaste. Nanošenje na lakirane površine se ne preporučuje.",
+    "variants": {
+      "2-210-2000": "Doza · 2 kg, sa učvršćivačem"
+    }
+  },
+  "perfect-multi-green-spachtel": {
+    "sourceHash": "0382a1fd76051e71",
+    "productType": "Finozrni poliesterski git",
+    "subtype": "2K poliesterski git · fino zrno · zelena boja",
+    "shortDescription": "Dvokomponentni poliesterski git finog zrna za izravnavanje neravnina pri reparaturi vozila i u mašinstvu.",
+    "longDescription": "Perfect Multi Green Putty je kvalitetan dvokomponentni poliesterski git finog zrna, namenjen izravnavanju neravnina u autoreparaturi, na vozilima i u mašinstvu. Koristi se kao git za popunjavanje i završni git, sa prianjanjem na čelični lim, pocinkovani lim, aluminijum, kalajisane površine, GRP i drvo. Odlikuju ga kratko vreme sušenja, lako brušenje i nanošenje u debelom sloju bez pora.",
+    "purpose": "Popunjavanje i izravnavanje neravnina na limu, aluminijumu, GRP i drvetu",
+    "facts": [
+      {
+        "label": "Boja",
+        "value": "zelena"
+      },
+      {
+        "label": "Vreme obrade na 20°C",
+        "value": "3–4 minuta"
+      },
+      {
+        "label": "VOC",
+        "value": "maks. 6 g/l"
+      }
+    ],
+    "applications": [
+      "Git za popunjavanje i završni git sa prianjanjem na čelični lim, pocinkovani lim, aluminijum, kalajisane površine, GRP i drvo",
+      "Nanošenje u debelom sloju bez pora, uz kratko vreme sušenja i lako brušenje"
+    ],
+    "benefits": [
+      {
+        "title": "Stabilnost na vertikalnim površinama",
+        "description": "Ima maksimalnu stabilnost na vertikalnim površinama."
+      },
+      {
+        "title": "Bez pucanja na ivicama",
+        "description": "Pri finom brušenju ne dolazi do pucanja na ivicama."
+      },
+      {
+        "title": "Kompaktna i glatka površina",
+        "description": "Formira kompaktnu, glatku i kvalitetnu površinu."
+      },
+      {
+        "title": "Ne zapunjava abraziv",
+        "description": "Pri brušenju ne zapunjava abraziv."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Predviđen je za ručno ili mašinsko suvo brušenje."
+      }
+    ],
+    "substrates": [],
+    "advice": null,
+    "variants": {
+      "2-251-1800": "Doza · 1,6 kg, sa učvršćivačem"
+    }
+  },
+  "schwemmzinnersatz": {
+    "sourceHash": "6f0230f6b780c301",
+    "productType": "2K epoksi masa za popunjavanje",
+    "subtype": "2K epoksi lepak i masa za popunjavanje · zamena za kalaj · za spojeve i šavove",
+    "shortDescription": "Dvokomponentna epoksi masa za lepljenje i popunjavanje srednje viskoznosti, brzog očvršćavanja, za spojeve i šavove i kao zamena za kalaj.",
+    "longDescription": "Epoxy Metal Filler je dvokomponentni epoksi lepak i masa za popunjavanje srednje viskoznosti i brzog očvršćavanja, za širok spektar zadataka popunjavanja i lepljenja različitih materijala. Ovaj reakcioni sistem sa mineralnim punilom razvijen je posebno za popunjavanje spojeva i šavova (bez kontaktne korozije). U automobilskoj industriji koristi se kao nosivi sistem za lak i kao zamena za kalaj. Isporučuje se u 2K kartuši sa statičkim mešačem, što obezbeđuje fiksan odnos mešanja.",
+    "purpose": "Popunjavanje spojeva i šavova na karoseriji, podloga za lak i zamena za kalaj",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1,55 (g/m³)"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "svetlosiva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "31°C"
+      },
+      {
+        "label": "VOC",
+        "value": "3 g/l"
+      }
+    ],
+    "applications": [
+      "Popunjavanje spojeva u širokom spektru primena",
+      "Masa za popunjavanje u izradi karoserija",
+      "Nosivi sistem za lakove",
+      "Zamena za kalaj"
+    ],
+    "benefits": [
+      {
+        "title": "Dobro prianjanje na više materijala",
+        "description": "Dobro prianja na čelik, aluminijum, cink, plastiku i mineralne materijale."
+      },
+      {
+        "title": "Laka mašinska obrada",
+        "description": "Lako se mašinski obrađuje: bušenjem, brušenjem i rendisanjem."
+      },
+      {
+        "title": "Visoka stabilnost bez curenja",
+        "description": "Ima visoku stabilnost, ne sleže se i ne curi."
+      },
+      {
+        "title": "Lako modelovanje",
+        "description": "Masa se lako modeluje."
+      },
+      {
+        "title": "Brzo očvršćavanje",
+        "description": "Brzo očvršćava, a očvršćavanje se može ubrzati povišenom temperaturom."
+      },
+      {
+        "title": "Otpornost na visoke temperature",
+        "description": "Otporan je na visoke temperature, do +110 °C."
+      },
+      {
+        "title": "Svetlosiva nijansa nakon očvršćavanja",
+        "description": "Nakon očvršćavanja ima svetlosivu nijansu."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "aluminijum",
+      "cink",
+      "plastika",
+      "mineralni materijali"
+    ],
+    "advice": "Isporučuje se u 2K kartuši sa jednim klipom i statičkim mešačem. Fiksan odnos mešanja i pravilno mešanje u statičkom mešaču obezbeđuju svojstva proizvoda i ujednačen kvalitet pri obradi materijala.",
+    "variants": {
+      "2-184-0200": "200 ml · sa učvršćivačem"
+    }
+  },
+  "soft-plus-spachtel": {
+    "sourceHash": "ff8613913f04ed4c",
+    "productType": "Poliesterski git za popunjavanje",
+    "subtype": "2K poliesterski git · za popunjavanje · male i srednje neravnine",
+    "shortDescription": "Dvokomponentni poliesterski git za popunjavanje malih i srednjih neravnina na delovima karoserije.",
+    "longDescription": "Soft Plus Putty je kvalitetan dvokomponentni poliesterski git za popunjavanje malih i srednjih neravnina na delovima karoserije. Veoma dobro prianja na čelik, plastiku ojačanu staklenim vlaknima i drvo. Brzo se suši, nanosi se u debelom sloju bez pora i lako se brusi čak i 24 sata nakon nanošenja.",
+    "purpose": "Osnovni git za popunjavanje nepravilnosti na karoseriji vozila",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1863 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "bež"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "31°C"
+      },
+      {
+        "label": "VOC",
+        "value": "3 g/l"
+      }
+    ],
+    "applications": [
+      "Osnovni git za popunjavanje pri otklanjanju nepravilnosti na karoseriji putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Brzo sušenje",
+        "description": "Git se brzo suši."
+      },
+      {
+        "title": "Debeo sloj bez pora",
+        "description": "Može se naneti u debelom sloju bez pora."
+      },
+      {
+        "title": "Dobro zadržava modelovani oblik",
+        "description": "Nakon nanošenja dobro zadržava modelovani oblik."
+      },
+      {
+        "title": "Lako brušenje i nakon 24 sata",
+        "description": "Lako se brusi čak i 24 sata nakon nanošenja."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Može se brusiti ručno ili mašinski, suvim postupkom."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "plastika ojačana staklenim vlaknima",
+      "drvo",
+      "OEM podloge"
+    ],
+    "advice": "Ne nanositi na jednokomponentne prajmere (reaktivne i antikorozivne) i na termoplaste. Nanošenje na lakirane površine se ne preporučuje.",
+    "variants": {
+      "2-124-0500": "Doza · 0,5 kg, sa učvršćivačem",
+      "2-124-1000": "Doza · 1 kg, sa učvršćivačem",
+      "2-124-1800": "Doza · 1,8 kg, sa učvršćivačem"
+    }
+  },
+  "spritzspachtel": {
+    "sourceHash": "2340ca00f92ac6c7",
+    "productType": "Poliesterski git za prskanje",
+    "subtype": "2K poliesterski git · nanošenje prskanjem · za velike površine",
+    "shortDescription": "Dvokomponentni poliesterski git za prskanje, za popunjavanje neravnina, tragova brušenja i sitnih pora na delovima karoserije.",
+    "longDescription": "Spray Putty je dvokomponentni poliesterski git koji se nanosi prskanjem, za popunjavanje površinskih neravnina, tragova brušenja i sitnih pora na delovima karoserije putničkih i privrednih vozila, kao i na strukturnim delovima vozila. Pogodan je za stvaranje ravnomernih slojeva na velikim površinama pre nanošenja punilaca i narednih materijala za lakiranje. Nakon sušenja daje glatku površinu bez pora koja se lako brusi.",
+    "purpose": "Otklanjanje nepravilnosti na karoseriji putničkih i privrednih vozila prskanjem",
+    "facts": [
+      {
+        "label": "Gustina",
+        "value": "1600 – 1700 g/l"
+      },
+      {
+        "label": "EU granična vrednost",
+        "value": "2004/42/IIB(b)(250)"
+      },
+      {
+        "label": "Boja",
+        "value": "siva"
+      },
+      {
+        "label": "Tačka paljenja",
+        "value": "< 32°C"
+      },
+      {
+        "label": "VOC",
+        "value": "220 g/l"
+      }
+    ],
+    "applications": [
+      "Poliesterski materijal za nanošenje prskanjem pri otklanjanju nepravilnosti na karoseriji putničkih i privrednih vozila"
+    ],
+    "benefits": [
+      {
+        "title": "Glatka površina bez pora",
+        "description": "Nakon sušenja materijal daje glatku površinu bez pora koja se lako brusi."
+      },
+      {
+        "title": "Brzo sušenje",
+        "description": "Git se brzo suši."
+      },
+      {
+        "title": "Visoka tvrdoća i otpornost",
+        "description": "Odlikuju ga visoka tvrdoća, krutost na savijanje i otpornost na udarce i vibracije."
+      },
+      {
+        "title": "Ručno ili mašinsko suvo brušenje",
+        "description": "Predviđen je za ručno ili mašinsko suvo brušenje."
+      }
+    ],
+    "substrates": [
+      "čelik",
+      "plastika ojačana staklenim vlaknima",
+      "drvo",
+      "poliesterski materijali",
+      "OEM podloge"
+    ],
+    "advice": "Ne nanositi na jednokomponentne (reaktivne i antikorozivne) prajmere i na termoplaste. Nanošenje na lakirane površine se ne preporučuje.",
+    "variants": {
+      "2-251-1000": "Doza · 1 kg, sa učvršćivačem"
+    }
+  }
+}

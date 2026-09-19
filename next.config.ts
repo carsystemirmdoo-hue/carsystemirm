@@ -25,6 +25,22 @@ const nextConfig: NextConfig = {
     "/api/sync/commands/poll": ["./contracts/invoice-ingest/v1/schema.json"],
     "/api/sync/commands/update": ["./contracts/invoice-ingest/v1/schema.json"],
   },
+  /*
+   * `public/` se NE pakuje u serverless funkciju.
+   *
+   * Brend stranice (`components/*-brand/*Media.server.ts`) proveravaju da li je
+   * opcioni medij isporučen: `existsSync(join(process.cwd(), "public", src))`.
+   * Putanja je dinamička, pa file tracing ne zna koji fajl se čita i u funkciju
+   * `brendovi/[slug]` povuče CEO `public/` (~250 MB). Vercel je zato odbio
+   * deployment čim je katalog slika prešao granicu od 250 MB po funkciji.
+   *
+   * Provera se izvršava pri prerenderu (build), gde `public/` postoji; u
+   * produkciji te fajlove služi CDN, ne funkcija. `npm run build:trace-check`
+   * čuva ovo pravilo za sve rute.
+   */
+  outputFileTracingExcludes: {
+    "/brendovi/*": ["./public/**/*"],
+  },
   poweredByHeader: false,
   // `next build` i `next dev` dele isti izlazni folder. Ako se provera builda
   // pokrene dok dev server radi, produkcijski build prepiše dev artefakte i

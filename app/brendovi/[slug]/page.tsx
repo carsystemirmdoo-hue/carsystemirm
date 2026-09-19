@@ -32,6 +32,17 @@ type BrandRouteProps = {
   params: Promise<{ slug: string }>;
 };
 
+/*
+ * Ruta služi ISKLJUČIVO brendove koji su prerenderovani na buildu.
+ *
+ * Brendovi su statički podatak, pa nepoznat slug i ovako završava na `notFound()`. Sa
+ * `dynamicParams = false` stranica se nikada ne renderuje u serverless funkciji, pa provera
+ * isporučenog medija (`*Media.server.ts`, `existsSync` nad `public/`) ostaje isključivo
+ * build-time korak. To je uslov pod kojim `outputFileTracingExcludes` za ovu rutu ne može da
+ * promeni prikaz — vidi `next.config.ts`.
+ */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getAllCarsystemBrands().map((brand) => ({ slug: brand.slug }));
 }

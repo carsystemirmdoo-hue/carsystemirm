@@ -784,6 +784,8 @@ export function Header() {
               decoding="async"
             />
           </span>
+          {/* Identitet firme uz logotip; ranije kicker u hero zaglavlju. */}
+          <span className={styles.brandLabel}>Carsystem i R-M</span>
         </Link>
 
         <nav aria-label="Glavna navigacija" className={styles.desktopNav}>

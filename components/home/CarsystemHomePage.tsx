@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -122,7 +123,7 @@ export function CarsystemHomePage() {
   const [networkMapFailed, setNetworkMapFailed] = useState(false);
   const [locatorStatus, setLocatorStatus] = useState(
     cityEntries.length > 0
-      ? "Izaberite grad ili koristite lokaciju za najbližu dostupnu tačku u mreži."
+      ? "Izaberite grad ili koristite lokaciju."
       : "Potvrđene javne lokacije još nisu unete u lokator.",
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
@@ -265,7 +266,18 @@ export function CarsystemHomePage() {
   return (
     <main className={styles.home}>
       <HomeSectionRail />
-      <HomeCampaignCarousel />
+      <HomeCampaignCarousel
+        headingPresentation="sr-only"
+        aside={
+          <LocatorCard
+            selectedStore={selectedStore}
+            selectedCity={selectedCity}
+            locatorStatus={locatorStatus}
+            onCityChange={handleCityChange}
+            onLocationRequest={handleLocationRequest}
+          />
+        }
+      />
 
       <section className={styles.trustStrip} aria-labelledby="brand-strip-title">
         <div className={styles.trustInner}>
@@ -275,17 +287,17 @@ export function CarsystemHomePage() {
           <div className={styles.brandRail} aria-label="Brendovi">
             {trustBrandKeys.map((brandKey) => {
               const href = trustBrandLinks[brandKey];
-              const logo = <BrandLogoPlate brandKey={brandKey} variant="rail" />;
+              const logo = (
+                <BrandLogoPlate brandKey={brandKey} tone="mono" variant="rail" />
+              );
               const brandName = brandLogos[brandKey].name;
 
               return href ? (
                 <Link
                   aria-label={`Otvori stranicu brenda ${brandName}`}
-                  className={`${styles.brandRailLink} cs-image-surface`}
+                  className={styles.brandRailMonoLink}
                   href={href}
                   key={brandKey}
-                  data-cursor="image"
-                  data-motion-surface
                 >
                   {logo}
                 </Link>
@@ -296,44 +308,6 @@ export function CarsystemHomePage() {
               );
             })}
           </div>
-
-          {/*
-            Sadržaj sačuvan iz prethodnog homepage hero bloka: proof linija,
-            mogućnosti i brzi pristup lokatoru. Više ne pripada glavnom hero
-            mestu, ali ostaje iznad prve velike sekcije.
-          */}
-        </div>
-
-        <div className={styles.trustSecondRow}>
-          <div className={styles.trustHandoff}>
-            <p className={styles.trustProofLine}>
-              <span aria-hidden="true" />
-              Nijansiranje po formuli proizvođača i podrška pri izboru sistema.
-            </p>
-            <div className={styles.trustCapabilities} aria-label="Glavne mogućnosti">
-              <span>Boje i lakovi</span>
-              <span>Partnerska mreža</span>
-              <span>Tehnička podrška</span>
-            </div>
-            <div className={styles.trustQuickLinks}>
-              <Link className={styles.trustQuickLink} href="/katalog">
-                Pregledajte katalog
-                <span aria-hidden="true">↗</span>
-              </Link>
-              <Link className={styles.trustQuickLink} href="/kontakt?tema=b2b">
-                Upit za saradnju
-                <span aria-hidden="true">↗</span>
-              </Link>
-            </div>
-          </div>
-
-          <LocatorCard
-            selectedStore={selectedStore}
-            selectedCity={selectedCity}
-            locatorStatus={locatorStatus}
-            onCityChange={handleCityChange}
-            onLocationRequest={handleLocationRequest}
-          />
         </div>
       </section>
 
@@ -706,6 +680,8 @@ export function CarsystemHomePage() {
   );
 }
 
+const LOCATOR_COMPACT_QUERY = "(max-width: 53.75rem)";
+
 function LocatorCard({
   selectedStore,
   selectedCity,
@@ -719,16 +695,55 @@ function LocatorCard({
   onCityChange: (city: string) => void;
   onLocationRequest: () => void;
 }) {
+  /*
+   * Kompaktan prikaz na uskim ekranima: zaglavlje postaje dugme koje otvara
+   * detalje. Do hidratacije CSS sam sakriva telo na mobilnom, pa nema bljeska
+   * pune kartice preko banera. Na desktopu je kartica uvek otvorena.
+   */
+  const bodyId = useId();
+  const [compact, setCompact] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(LOCATOR_COMPACT_QUERY);
+    const sync = () => setCompact(mediaQuery.matches);
+    sync();
+    mediaQuery.addEventListener("change", sync);
+    return () => mediaQuery.removeEventListener("change", sync);
+  }, []);
+
+  const heading = (
+    <>
+      <span className={styles.buttonIcon}>
+        <IconLocation />
+      </span>
+      <span className={styles.locatorTitle}>Pronađite prodavnicu u mreži</span>
+      <small>{selectedStore ? getPartnerCityLabel(selectedStore) : "Mreža"}</small>
+    </>
+  );
+
   return (
-    <aside className={styles.locatorCard} aria-label="Lokator prodavnica">
-      <header>
-        <span className={styles.buttonIcon}>
-          <IconLocation />
-        </span>
-        Pronađite prodavnicu u mreži
-        <small>Mreža</small>
-      </header>
-      <div className={styles.locatorBody}>
+    <aside
+      className={styles.locatorCard}
+      aria-label="Lokator prodavnica"
+      data-compact={compact || undefined}
+      data-open={(compact && open) || undefined}
+    >
+      {compact ? (
+        <button
+          type="button"
+          className={styles.locatorToggle}
+          aria-controls={bodyId}
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {heading}
+          <span className={styles.locatorChevron} aria-hidden="true" />
+        </button>
+      ) : (
+        <header className={styles.locatorHeader}>{heading}</header>
+      )}
+      <div className={styles.locatorBody} id={bodyId}>
         <button
           type="button"
           className={`${styles.locationButton} cs-magnetic-cta cs-theme-wipe-card`}
@@ -791,9 +806,7 @@ function StorePreview({ store }: { store?: PartnerStore }) {
             <small>{getPartnerLocationTypeLabel(store)}</small>
         </header>
         <p>{store.address}</p>
-        <span>
-          {getPartnerCityLabel(store)} · {getPartnerLocationTypeLabel(store)}
-        </span>
+        <span>{getPartnerCityLabel(store)}</span>
       </div>
     </article>
   );

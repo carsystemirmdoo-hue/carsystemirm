@@ -175,8 +175,11 @@ test("[source-contract] stabilni h1 stoji izvan viewporta i sekcija ga imenuje",
     "sekcija i dalje koristi staticki aria-label umesto naslova",
   );
 
-  // Naslov nije sakriven.
-  assert.doesNotMatch(source, /className=\{styles\.srOnly\}[\s\S]{0,40}homepage-title/);
+  // Naslov ostaje dostupan citacima: prezentaciju (vidljiv omotac ili
+  // `sr-only`) bira potrosac kroz `headingPresentation`, ali h1 nikad ne sme
+  // da nosi `aria-hidden` ni `hidden`.
+  const h1Tag = source.slice(h1At, source.indexOf(">", h1At));
+  assert.doesNotMatch(h1Tag, /aria-hidden|\bhidden\b/, "h1 je sakriven za citace");
 });
 
 test("[source-contract] homepage ne renderuje sopstveni drugi h1", async () => {
@@ -187,5 +190,6 @@ test("[source-contract] homepage ne renderuje sopstveni drugi h1", async () => {
   );
   assert.doesNotMatch(page, /<h1/, "CarsystemHomePage ima sopstveni h1");
   assert.doesNotMatch(page, /id="homepage-title"/, "dupliran homepage-title");
-  assert.match(page, /<HomeCampaignCarousel \/>/);
+  // Carousel prima karticu lokatora kao `aside` prop, pa tag nosi atribute.
+  assert.match(page, /<HomeCampaignCarousel(\s[^>]*)?\/>/);
 });

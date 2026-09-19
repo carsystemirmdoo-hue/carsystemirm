@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, type CSSProperties } from "react";
+import {
+  useCallback,
+  useRef,
+  type CSSProperties,
+  type ReactNode,
+  type SyntheticEvent,
+} from "react";
 import { useBrandCampaignCarousel } from "@/components/motion/useBrandCampaignCarousel";
 import {
   homeCampaignSlides,
@@ -11,7 +17,29 @@ import styles from "./HomeCampaignCarousel.module.css";
 
 const MOBILE_MEDIA_QUERY = "(max-width: 53.75rem)";
 
-export function HomeCampaignCarousel() {
+/*
+ * Kartica lokatora je zajednički element hero sekcije: jedna instanca, izvan
+ * slajdova, kao apsolutni overlay dole desno preko fotografije. Ne zauzima
+ * prostor u rasporedu, pa ne menja širinu slajda ni položaj artworka.
+ * Tastatura i pokazivač unutar kartice ne smeju da stignu do stage handlera
+ * (strelice i swipe bi menjali slajd dok korisnik bira grad).
+ */
+function stopStagePropagation(event: SyntheticEvent) {
+  event.stopPropagation();
+}
+
+export function HomeCampaignCarousel({
+  aside,
+  headingPresentation = "visible",
+}: {
+  aside?: ReactNode;
+  /**
+   * `sr-only` zadržava stabilan H1 za čitače i `aria-labelledby`, ali bez
+   * vizuelnog pojasa iznad slajdova. Eksplicitna opcija, podrazumevano
+   * vidljiv naslov.
+   */
+  headingPresentation?: "visible" | "sr-only";
+}) {
   const stageRef = useRef<HTMLElement>(null);
 
   const resolveSlideAssets = useCallback((index: number) => {
@@ -53,6 +81,18 @@ export function HomeCampaignCarousel() {
   const incoming = homeCampaignSlides[pendingIndex ?? activeIndex];
   const outgoing =
     transitionPhase === "covering" ? homeCampaignSlides[activeIndex] : incoming;
+
+  /* Jedan h1 element; samo prezentacija (vidljiv omotač ili sr-only) varira. */
+  const pageHeading = (
+    <h1
+      id="homepage-title"
+      className={
+        headingPresentation === "sr-only" ? "sr-only" : styles.campaignPageTitle
+      }
+    >
+      Profesionalni refinish program za siguran rezultat.
+    </h1>
+  );
 
   return (
     <section
@@ -97,13 +137,16 @@ export function HomeCampaignCarousel() {
         `aria-hidden`. Renderuje se jednom, na serveru, i ne zavisi od aktivnog
         indeksa — autoplay, rucni izbor, tastatura, swipe i Back ga ne diraju.
         Naslovi kampanja su `h2` unutar slajdova.
+
+        Pocetna strana ga trazi kao `sr-only` (identitet je u Header-u uz
+        logotip, a vizuelni naslov nose slajdovi), pa iznad slajdova nema
+        rezervisanog pojasa.
       */}
-      <div className={styles.campaignPageHeading}>
-        <p className={styles.campaignPageKicker}>Carsystem i R-M Inđija, Srbija</p>
-        <h1 id="homepage-title" className={styles.campaignPageTitle}>
-          Profesionalni refinish program za siguran rezultat.
-        </h1>
-      </div>
+      {headingPresentation === "sr-only" ? (
+        pageHeading
+      ) : (
+        <div className={styles.campaignPageHeading}>{pageHeading}</div>
+      )}
 
       <div className={styles.campaignViewport}>
         <div className={styles.campaignSlides} aria-live="off">
@@ -181,6 +224,19 @@ export function HomeCampaignCarousel() {
             ))}
           </div>
         </div>
+
+        {aside ? (
+          <div
+            className={styles.campaignAside}
+            onKeyDown={stopStagePropagation}
+            onPointerCancel={stopStagePropagation}
+            onPointerDown={stopStagePropagation}
+            onPointerMove={stopStagePropagation}
+            onPointerUp={stopStagePropagation}
+          >
+            {aside}
+          </div>
+        ) : null}
       </div>
     </section>
   );

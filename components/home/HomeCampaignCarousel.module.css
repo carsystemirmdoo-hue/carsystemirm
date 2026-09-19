@@ -405,11 +405,30 @@
   will-change: transform;
 }
 
+/* --- Zajednička kartica hero sekcije (overlay) ---------------------------- */
+
+/*
+ * Apsolutno u viewportu slajdova, dole desno, poravnato sa kontrolama.
+ * Namerno preklapa donji desni deo fotografije; ne ulazi u tok rasporeda.
+ */
+.campaignAside {
+  position: absolute;
+  right: var(--home-campaign-inline);
+  bottom: 2.2rem;
+  z-index: 8;
+  width: min(300px, calc(100% - 2 * var(--home-campaign-gutter)));
+}
+
 /* --- Responsive --------------------------------------------------------- */
 
 @media (max-width: 70rem) {
   .campaignStage {
     --home-campaign-height: min(42rem, calc(100svh - 4.5rem));
+  }
+
+  /* Paginacija ovde zauzima gotovo celu širinu, pa kartica ide iznad kontrola. */
+  .campaignAside {
+    bottom: calc(2.2rem + 3rem + 0.75rem);
   }
 
   .campaignCopy {
@@ -434,6 +453,18 @@
 @media (max-width: 53.75rem) {
   .campaignStage {
     --home-campaign-height: 46rem;
+  }
+
+  /*
+   * Na uskom ekranu puna kartica bi zaklonila većinu banera: ostaje kompaktan
+   * prikaz gore desno preko fotografije, detalji se otvaraju na dodir.
+   */
+  .campaignAside {
+    top: calc(2.2rem + 0.75rem);
+    right: calc(var(--home-campaign-gutter) + 0.5rem);
+    bottom: auto;
+    width: auto;
+    max-width: calc(100% - 2 * var(--home-campaign-gutter) - 1rem);
   }
 
   .campaignSlide {
@@ -626,8 +657,9 @@
 /* --------------------------------------------------------------------------
  * Stabilan naslov početne strane
  *
- * Stoji iznad carousel viewporta i ne menja se sa slajdom. Namerno je vidljiv,
- * ne `sr-only`: naslov strane mora da postoji i za oko, ne samo za čitač.
+ * Stoji iznad carousel viewporta i ne menja se sa slajdom. Ovo je vidljiva
+ * varijanta (`headingPresentation="visible"`); početna strana koristi
+ * `sr-only` varijantu bez ovog omotača.
  * -------------------------------------------------------------------------- */
 
 .campaignPageHeading {
@@ -635,17 +667,7 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
   padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 5vw, 4rem) 0;
-}
-
-.campaignPageKicker {
-  margin: 0;
-  font-size: clamp(0.72rem, 1.4vw, 0.82rem);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cs-text-muted, #6b7280);
 }
 
 .campaignPageTitle {

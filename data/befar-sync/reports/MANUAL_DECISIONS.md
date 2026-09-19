@@ -87,16 +87,18 @@ Status `CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE`. Ne objavljuje se dok se šifra n
 - Befar ne objavljuje opise, TDS ni SDS: karakteristike (`benefits`) su prazne, dokumenti su „na upit”.
 - Pozadina slika se ne uklanja (automatski cut-out je zahvatao bele boce).
 
-## 6. Follow-up van ovog synca: klik na red varijante ne menja aktivnu varijantu (shared PDP)
+## 6. REŠENO — klik na red varijante nije menjao aktivnu varijantu (shared PDP)
 
-Nije Befar greška i ne popravlja se u Befar commitu — isto ponašanje imaju već objavljeni Carsystem i C.A.R.FIT proizvodi.
+**Status: rešeno 2026-09-19, task zatvoren.** Nije bila Befar greška niti greška Befar podataka: isto ponašanje imali su i već objavljeni Carsystem i C.A.R.FIT proizvodi. Ispravljeno je zajedničkim variant-selection fixom (`fix(product): enable in-place row variant selection`); Befar dataset i sync nisu menjani.
 
-Reprodukcija (produkcijski build, `npm run build:check` + `npm run start:check`, port 3220):
+Reprodukcija pre ispravke (produkcijski build, `npm run build:check` + `npm run start:check`, port 3220):
 
-| Brend | Stranica | Klik na | Očekivano | Dobijeno |
+| Brend | Stranica | Klik na | Očekivano | Dobijeno pre ispravke |
 | --- | --- | --- | --- | --- |
 | Carsystem | `/proizvodi/carsystem-sanding-disc-p-25-ceramic` | red „P80 · 159.995” | aktivna varijanta P80, šifra 159.995 | ostaje P40 / 160.273 |
 | C.A.R.FIT | `/proizvodi/carfit-gold-paper-disc` | red „6-300-0080” | aktivna varijanta P80 | ostaje P40, `aria-pressed="false"` |
 | Befar | `/proizvodi/befar-carved-velcro-polishing-pad` | „Bordo · 58407” | aktivna varijanta Bordo, slika boje | ostaje Bela / 05801 |
 
-Uzrok: `ProductVariantOptions.chooseVariant()` traži varijantu redom po `candidate.slug`, pa `sku`, pa `id`, a `ProductVariantProvider` drži poglede izgrađene iz PROIZVODA (`toProductVariantView`). Proizvod sa redovima varijanti daje jedan pogled, a svi redovi dele njegov slug, pa `findVariant(candidate.slug)` uvek vraća taj jedini pogled. Ispravka (jedan pogled po redu, ključ = šifra reda) ide kao zaseban commit posle Befara.
+Uzrok: `ProductVariantProvider` je držao poglede izgrađene samo iz PROIZVODA (`toProductVariantView`). Varijante koje su REDOVI jednog proizvoda (tabela šifara: granulacije, pakovanja, boje) nemaju svoj slug, pa je takav proizvod imao jedan jedini pogled, a `chooseVariant()` za svaki red osim prvog nije nalazio ništa i izbor je tiho propadao.
+
+Rešenje: svaki red dobija svoj pogled u istom provideru (`expandRowVariants`, ključ = šifra reda, `?varijanta=<šifra>`), pa klik i tastatura menjaju šifru, izvedbu, status i sliku varijante; red bez svoje slike zadržava slike proizvoda. Porodični model (Cosmos Lac, Baslac) je nepromenjen. Ponašanje zaključava `components/product/productRowVariantSelection.test.mjs`, koji prolazi kroz svaki proizvod kataloga sa redovima varijanti.

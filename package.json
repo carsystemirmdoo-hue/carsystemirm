@@ -166,7 +166,7 @@
     "identity:validate": "node scripts/validate-product-identity.mjs",
     "identity:validate:strict": "node scripts/validate-product-identity.mjs --strict",
     "test:catalog-identity": "node --test lib/catalog/*.test.mjs",
-    "test:product-variant": "node --test components/product/productVariantSurface.test.mjs components/product/productDetailLayout.test.mjs",
+    "test:product-variant": "node --test components/product/productVariantSurface.test.mjs components/product/productDetailLayout.test.mjs components/product/productRowVariantSelection.test.mjs",
     "test:variant-experience": "node --test components/product/variantExperience.test.mjs",
     "test:optical": "node --test components/product/opticalCalibration.test.mjs",
     "test:family-presentation": "node --test lib/productFamilyPresentation.test.mjs",

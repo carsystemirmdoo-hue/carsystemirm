@@ -73,16 +73,18 @@ export function ProductVariantOptions({
   /**
    * Klik na red selektora → izbor u zajedničkom kontekstu.
    *
-   * Red se preslikava na varijantu preko slug-a, pa šifre, pa id-a: dva modela
-   * ne moraju deliti isto polje, a poklapanje mora biti pouzdano. Ako varijanta
-   * nema odgovarajući zapis, izbor se ne menja — bolje nego tiho odvesti
-   * korisnika na pogrešan proizvod.
+   * Red se preslikava na varijantu preko id-a, pa šifre, pa slug-a: dva modela
+   * ne moraju deliti isto polje, a poklapanje mora biti pouzdano. Id je prvi
+   * jer je jedini uvek jedinstven — redovi jednog proizvoda (granulacije,
+   * pakovanja, boje) dele slug proizvoda, pa bi slug uvek pogodio prvi red. Ako
+   * varijanta nema odgovarajući zapis, izbor se ne menja — bolje nego tiho
+   * odvesti korisnika na pogrešan proizvod.
    */
   function chooseVariant(candidate: ProductCommercialVariant) {
     const view =
-      findVariant(candidate.slug) ??
+      findVariant(candidate.id) ??
       findVariant(candidate.sku) ??
-      findVariant(candidate.id);
+      findVariant(candidate.slug);
     if (view) selectVariant(view);
   }
 

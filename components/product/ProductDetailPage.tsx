@@ -101,7 +101,18 @@ export function ProductDetailPage({
     .filter((entry): entry is CarsystemProduct => Boolean(entry));
   const variantProducts =
     selectorProducts.length > 0 ? selectorProducts : [product];
-  const variantViews = toProductVariantViews(variantProducts, family?.slug ?? null);
+  /*
+   * Varijante koje su REDOVI ovog proizvoda (tabela šifara: granulacije,
+   * pakovanja, boje) nemaju svoj slug, pa iz njih ne nastaje nijedan proizvod.
+   * Bez sopstvenog pogleda klik na takav red nije imao šta da izabere.
+   */
+  const rowVariants =
+    selectorProducts.length > 0 ? [] : (variantSelector?.variants ?? []);
+  const variantViews = toProductVariantViews(
+    variantProducts,
+    family?.slug ?? null,
+    rowVariants,
+  );
   const initialVariantKey = productVariantKey(product);
 
   /*

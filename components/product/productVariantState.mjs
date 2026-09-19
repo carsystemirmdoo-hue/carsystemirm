@@ -74,6 +74,57 @@ export function findVariantByKey(variants, requested) {
 }
 
 /**
+ * Pogledi za varijante koje su REDOVI jednog proizvoda.
+ *
+ * Katalog ima dva modela varijanti. Kod porodica (Cosmos Lac, Baslac) svaka
+ * varijanta je zaseban proizvod sa svojim slug-om, pa pogled nastaje iz
+ * proizvoda. Kod proizvoda sa tabelom šifara (Carsystem, C.A.R.FIT, Befar —
+ * granulacije, pakovanja, boje) varijanta je RED istog proizvoda i nema slug.
+ * Takvi redovi ranije nisu dobijali pogled: provider je držao jedan jedini
+ * zapis, `findVariant` za svaki drugi red vraćao `null`, a klik je tiho
+ * propadao. Ovde svaki red postaje pogled izveden iz pogleda proizvoda.
+ *
+ * Porodica se ne dira: naziv, opis, stil scene i slug ostaju od proizvoda.
+ * Red menja samo ono što je zaista njegovo — šifru, oznaku izvedbe, status i,
+ * kada je ima, sliku. Red bez svoje slike zadržava slike proizvoda, pa povratak
+ * na takvu varijantu uvek daje isti prikaz.
+ *
+ * @template {VariantIdentity & { images?: { src: string }[], shadeLabel?: string | null, status?: string }} View
+ * @param {View} base pogled proizvoda
+ * @param {readonly { id: string, label?: string, sku?: string, status?: string, slug?: string, image?: string }[] | null | undefined} rows
+ * @param {(src: string, row: { id: string, label?: string }) => { src: string }} resolveImage
+ *   slika reda u obliku koji scena očekuje (na serveru nosi i izmereni kontrast)
+ * @returns {View[]}
+ */
+export function expandRowVariants(base, rows, resolveImage) {
+  const list = (rows ?? []).filter((row) => row && !row.slug);
+  if (list.length < 2) return [base];
+
+  const usedKeys = new Set();
+  return list.map((row) => {
+    // Ključ je šifra artikla (`?varijanta=159.995`). Ako je dva reda dele,
+    // drugi dobija svoj id — inače bi bio nedostižan.
+    const preferred = row.sku && !usedKeys.has(row.sku.toLowerCase()) ? row.sku : row.id;
+    usedKeys.add(preferred.toLowerCase());
+
+    const baseImages = base.images ?? [];
+    const own = row.image ? resolveImage(row.image, row) : null;
+
+    return {
+      ...base,
+      key: preferred,
+      id: row.id,
+      sku: row.sku ?? base.sku ?? null,
+      shadeLabel: row.label ?? base.shadeLabel ?? null,
+      status: row.status ?? base.status,
+      images: own
+        ? [own, ...baseImages.filter((image) => image.src !== own.src)]
+        : baseImages,
+    };
+  });
+}
+
+/**
  * Aktivna varijanta za dati zahtev, uz bezbedan pad.
  *
  * Nevažeća oznaka NIKADA ne baca i nikada ne ostavlja prazan izbor — vraća

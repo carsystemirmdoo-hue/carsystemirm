@@ -6,6 +6,7 @@ import {
   getProductStageImages,
   type ProductStageImage,
 } from "@/components/product/productStageImages";
+import { expandRowVariants } from "@/components/product/productVariantState.mjs";
 import {
   getProductVisualPreset,
   getProductVisualStyle,
@@ -23,9 +24,14 @@ import {
   type ProductVolumeStatus,
 } from "@/lib/product-scale";
 import {
+  getProductImageMetrics,
+  resolveContrastMode,
+} from "@/lib/product-image-metrics";
+import {
   getPuttyMaterialTrace,
   type PuttyMaterialTraceConfig,
 } from "@/lib/putty-material-trace";
+import type { ProductCommercialVariant } from "@/types/product-detail";
 
 /**
  * Sve što potrošači PDP-a prikazuju za JEDNU varijantu, razrešeno na serveru.
@@ -153,10 +159,23 @@ export function toProductVariantView(
  * Redosled se čuva iz kataloga — selektor i kontekst moraju videti isti niz u
  * istom redosledu, inače „prva varijanta" kao rezerva ne bi značila isto na dva
  * mesta.
+ *
+ * `rowVariants` su varijante selektora koje NEMAJU svoj proizvod (redovi tabele
+ * šifara jednog proizvoda). Kada ih ima, jedini proizvod se razlaže na po jedan
+ * pogled po redu — vidi `expandRowVariants`.
  */
 export function toProductVariantViews(
   products: readonly CarsystemProduct[],
   familySlug: string | null = null,
+  rowVariants: readonly ProductCommercialVariant[] = [],
 ): ProductVariantView[] {
-  return products.map((product) => toProductVariantView(product, familySlug));
+  const views = products.map((product) => toProductVariantView(product, familySlug));
+  if (views.length !== 1) return views;
+
+  const [base] = views;
+  return expandRowVariants(base, rowVariants, (src, row) => ({
+    src,
+    alt: row.label ? `${base.name} · ${row.label}` : base.name,
+    contrastMode: resolveContrastMode(getProductImageMetrics(src)),
+  })) as ProductVariantView[];
 }

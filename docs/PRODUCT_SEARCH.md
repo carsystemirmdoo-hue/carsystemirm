@@ -246,6 +246,19 @@ Back ga ne gase, jer bi svako sledeće otvaranje ponovo gradilo indeks. Gasi ga
 pri napuštanju dokumenta. Puna navigacija je nov dokument i legitimno pravi nov
 keš i nov worker — mereno je da ih po dokumentu ima tačno jedan.
 
+
+## Validator indeksa (2026-09-10)
+
+`scripts/validate-catalog-search-index.mjs` više ne rekonstruiše očekivani model
+iz Cosmos JSON-a (nije poznavao Baslac porodice ni `?varijanta=` rute). Očekivani
+model štampa `scripts/qa/print-search-model.mts` kroz `tsx` pod
+`NODE_OPTIONS=--conditions=react-server` iz iste implementacije koju koristi ruta
+(`getProductSearchIndex`), nad TRENUTNIM izvorima. Validator poredi servirani
+indeks sa modelom: brojeve po vrsti, `href` svakog zapisa, da svaka varijanta
+referiše porodicu koja postoji u indeksu, i staleness u oba smera. Direktni
+`/katalog?q=…` linkovi (i sa brend filterom, posle osvežavanja, na 1440/1024/768/390)
+su pokriveni u `scripts/qa-product-search.mjs`, sekcija 9.
+
 ## Carsystem sync (2026-09-18)
 
 Ponašanje pretrage nije menjano; promenili su se podaci.

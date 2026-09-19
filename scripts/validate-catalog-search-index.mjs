@@ -16,7 +16,7 @@
  * Usage: node scripts/validate-catalog-search-index.mjs [--base-url=…]
  */
 
-import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import { gzipSync } from "node:zlib";
 
 const args = Object.fromEntries(
@@ -52,25 +52,42 @@ const expect = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-/* -- Očekivani model, izveden iz istih generisanih podataka ---------------- */
+/* -- Očekivani model, iz trenutnih izvora kataloga ------------------------- */
 
-const cosmosRaw = JSON.parse(
-  readFileSync("data/cosmos-lac-products.generated.json", "utf8"),
+/*
+ * Model se ne rekonstruiše iz jednog generisanog JSON-a (to je poznavalo samo
+ * Cosmos porodice), nego iz iste TypeScript implementacije koju koristi ruta,
+ * pokrenute nad TRENUTNIM izvorima kroz `tsx`. Servirani indeks dolazi iz
+ * build-a, pa razlika između ta dva i dalje znači „indeks je zastareo".
+ */
+const modelRun = spawnSync(
+  process.execPath,
+  [
+    "node_modules/tsx/dist/cli.mjs",
+    "--tsconfig",
+    "tsconfig.json",
+    "scripts/qa/print-search-model.mts",
+  ],
+  {
+    encoding: "utf8",
+    maxBuffer: 64 * 1024 * 1024,
+    // `server-only` baca grešku van Next runtime-a; pod `react-server`
+    // uslovom paket izvozi prazan modul, isto kao u RSC okruženju. Ide kroz
+    // NODE_OPTIONS jer tsx ponovo pokreće node i ne prosleđuje argv zastavice.
+    env: { ...process.env, NODE_OPTIONS: "--conditions=react-server" },
+  },
 );
-const cosmos = Array.isArray(cosmosRaw) ? cosmosRaw : cosmosRaw.products;
-
-const groups = new Map();
-for (const record of cosmos) {
-  const bucket = groups.get(record.baseProductSlug) ?? [];
-  bucket.push(record);
-  groups.set(record.baseProductSlug, bucket);
+if (modelRun.status !== 0) {
+  console.error("Ne mogu da izgradim očekivani model search indeksa:");
+  console.error(modelRun.stderr || modelRun.stdout);
+  process.exit(1);
 }
-const families = [...groups.values()].filter((variants) => variants.length >= 2);
-const expectedVariantSlugs = new Set(
-  families.flatMap((variants) => variants.map((variant) => variant.slug)),
-);
-const expectedVariantCount = expectedVariantSlugs.size;
-const expectedFamilyCount = families.length;
+const model = JSON.parse(modelRun.stdout);
+const expectedById = new Map(model.records.map((record) => [record.id, record]));
+const expectedByKind = { family: 0, standalone: 0, variant: 0 };
+for (const record of model.records) expectedByKind[record.kind] += 1;
+const expectedFamilyCount = expectedByKind.family;
+const expectedVariantCount = expectedByKind.variant;
 
 /* -- Preuzimanje ----------------------------------------------------------- */
 
@@ -106,8 +123,8 @@ expect(
   `Očekivano ${expectedVariantCount} variant zapisa, pronađeno ${byKind.variant.length}.`,
 );
 expect(
-  byKind.standalone.length === 117,
-  `Očekivano 117 samostalnih zapisa, pronađeno ${byKind.standalone.length}.`,
+  byKind.standalone.length === expectedByKind.standalone,
+  `Očekivano ${expectedByKind.standalone} samostalnih zapisa, pronađeno ${byKind.standalone.length}.`,
 );
 expect(
   payload.counts?.total === records.length,
@@ -125,17 +142,28 @@ expect(
 const ids = records.map((record) => record.id);
 expect(new Set(ids).size === ids.length, "ID vrednosti nisu jedinstvene.");
 
+const familyIds = new Set(byKind.family.map((record) => record.familySlug));
 for (const record of records) {
   expect(Boolean(record.href), `Zapis \`${record.id}\` nema href.`);
   expect(Boolean(record.name), `Zapis \`${record.id}\` nema naziv.`);
+  const expected = expectedById.get(record.id);
+  if (!expected) continue; // prijavljuje se dole, kao zastareo zapis
+  expect(
+    record.kind === expected.kind,
+    `Zapis \`${record.id}\` je \`${record.kind}\`, a model kaže \`${expected.kind}\`.`,
+  );
+  expect(
+    record.href === expected.href,
+    `Zapis \`${record.id}\` ima href ${record.href}, a model kaže ${expected.href}.`,
+  );
   if (record.kind === "variant") {
     expect(
-      record.href === `/proizvodi/${record.id}`,
-      `Variant \`${record.id}\` ima neočekivan href: ${record.href}.`,
+      Boolean(record.familySlug) && familyIds.has(record.familySlug),
+      `Variant \`${record.id}\` referiše porodicu koje nema u indeksu: ${record.familySlug}.`,
     );
     expect(
-      Boolean(record.familySlug),
-      `Variant \`${record.id}\` nema roditeljsku porodicu.`,
+      /\/proizvodi\/(grupa\/[a-z0-9-]+\?varijanta=[^&]+|[a-z0-9-]+)$/.test(record.href),
+      `Variant \`${record.id}\` ima neočekivan href: ${record.href}.`,
     );
   }
   if (record.kind === "standalone") {
@@ -160,13 +188,13 @@ expect(
 
 /* -- Staleness u oba smera ------------------------------------------------- */
 
-const variantIds = new Set(byKind.variant.map((record) => record.id));
-const unknown = [...variantIds].filter((slug) => !expectedVariantSlugs.has(slug));
+const servedIds = new Set(ids);
+const unknown = ids.filter((id) => !expectedById.has(id));
 expect(
   unknown.length === 0,
   `Indeks sadrži ${unknown.length} zapisa kojih nema u trenutnom modelu (npr. ${unknown[0]}). Indeks je zastareo — ponovo pokreni build.`,
 );
-const missing = [...expectedVariantSlugs].filter((slug) => !variantIds.has(slug));
+const missing = [...expectedById.keys()].filter((id) => !servedIds.has(id));
 expect(
   missing.length === 0,
   `Modelu nedostaje ${missing.length} zapisa u indeksu (npr. ${missing[0]}). Indeks je zastareo.`,

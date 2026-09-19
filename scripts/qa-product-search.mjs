@@ -591,6 +591,78 @@ for (const viewport of VIEWPORTS) {
   await page.close();
 }
 
+/* -------------------------------------------------------------------------- */
+/* 9. Direktan /katalog?q= link na svim širinama                               */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * Prijavljeno 2026-09-10: direktno otvoren `/katalog?q=…` je ostajao na
+ * „Učitavamo pretragu po varijantama…" sa 0 proizvoda. Uzrok je bio spor dev
+ * server (indeks je stizao posle 7 s), ali ugovor mora da važi i posle
+ * osvežavanja, sa brend filterom i na svakoj širini — a brisanje upita mora da
+ * vrati pregled bez ijednog dodatnog zahteva za indeks.
+ */
+for (const viewport of VIEWPORTS.filter((entry) => entry.name !== "360")) {
+  const page = await browser.newPage({
+    viewport: { width: viewport.width, height: viewport.height },
+  });
+  const requests = trackIndexRequests(page);
+  const errors = trackConsoleErrors(page);
+
+  const resultCount = async () => {
+    const status = page.locator('[role="status"]');
+    await page
+      .waitForFunction(
+        () => {
+          const text = document.querySelector('[role="status"]')?.textContent ?? "";
+          const loading = document.body.textContent?.includes("Učitavamo pretragu");
+          return !loading && !/Prikazano 0 /.test(text);
+        },
+        undefined,
+        { timeout: 20000 },
+      )
+      .catch(() => {});
+    const text = (await status.textContent()) ?? "";
+    return Number(/Prikazano (\d+)/.exec(text)?.[1] ?? 0);
+  };
+
+  await page.goto(`${baseUrl}/katalog?q=M1320`, { waitUntil: "load" });
+  const direct = await resultCount();
+  expect(direct >= 1, `Direktan /katalog?q=M1320 na ${viewport.name} px: ${direct} rezultata.`);
+
+  await page.reload({ waitUntil: "load" });
+  const refreshed = await resultCount();
+  expect(refreshed >= 1, `Osvežen /katalog?q=M1320 na ${viewport.name} px: ${refreshed} rezultata.`);
+
+  await page.goto(`${baseUrl}/katalog?brend=baslac&q=1320`, { waitUntil: "load" });
+  const filtered = await resultCount();
+  expect(
+    filtered >= 1,
+    `Direktan /katalog?brend=baslac&q=1320 na ${viewport.name} px: ${filtered} rezultata.`,
+  );
+
+  /* Brisanje upita vraća pregled (brend filter ostaje) bez novog zahteva. */
+  const requestsBeforeClear = requests.length;
+  const input = page.locator('input[placeholder*="Pretra"]').first();
+  await input.fill("");
+  await page.waitForTimeout(600);
+  const cleared = await resultCount();
+  expect(cleared > 1, `Brisanje upita na ${viewport.name} px nije vratilo pregled (${cleared}).`);
+  expect(
+    !page.url().includes("q="),
+    `Posle brisanja upita URL i dalje nosi q: ${page.url()}`,
+  );
+  expect(
+    requests.length === requestsBeforeClear,
+    `Brisanje upita je povuklo indeks ponovo (${requests.length - requestsBeforeClear}×).`,
+  );
+  expect(
+    errors.length === 0,
+    `Console greške na ${viewport.name} px: ${errors.slice(0, 2).join(" | ")}`,
+  );
+  await page.close();
+}
+
 await browser.close();
 
 const report = {

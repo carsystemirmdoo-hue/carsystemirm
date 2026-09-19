@@ -31,6 +31,121 @@ Reopen se traži eksplicitno, po površini, i upisuje se u ovaj dokument.
 
 ---
 
+## PASS 02 — 2026-09-10
+
+Obim: početna strana u svetloj temi, vizuelni sistem svetle teme, zajednički
+header i footer.
+
+### Početna strana (svetla tema) — 🔒 DESIGN + UX LOCKED
+
+| | |
+| --- | --- |
+| Datum | 2026-09-10 |
+| Status | `DESIGN + UX LOCKED` |
+| Viewport-i | 1440, 768, 390 |
+
+Odobreni izgled početne u svetloj temi je referenca: sadržaj, raspored,
+tipografija, boje, razmaci, dimenzije, pozadine i ponašanje na svim širinama.
+Zaključan je i vizuelni sistem svetle teme (tokeni, paleta, tipografska skala)
+koji početna koristi. Mehanizam izbora teme i postojeće funkcionalnosti ostaju
+aktivni — lock čuva izgled, ne zamrzava kod.
+
+Komponente koje početna deli sa katalogom ili PDP-om smeju da dobiju nove
+izmene samo u kontekstu koji ih traži (opt-in prop, data atribut, CSS scope),
+tako da se početna ne promeni.
+
+### Header i footer — 🔒 DESIGN + UX LOCKED
+
+| | |
+| --- | --- |
+| Datum | 2026-09-10 |
+| Status | `DESIGN + UX LOCKED` |
+| Viewport-i | 1440, 768, 390 |
+
+`components/layout/Header.tsx` i `components/layout/Footer.tsx` su zajednička
+vizuelna referenca za sve javne stranice: logotip i oznaka „Carsystem i R-M",
+dimenzije, poravnanja, razmaci, tipografija, boje, navigacija, pretraga,
+prekidač teme i ponašanje na desktopu i mobilnom. Header se montira jednom,
+kroz `PublicSiteChrome`; stranice montiraju `Footer` jednom, na kraju svog
+sadržaja. Novi layout ne sme da doda drugi header ili footer.
+
+**Buduće vizuelne izmene bilo koje od ovih površina zahtevaju izričit zahtev
+korisnika (reopen), po površini.** Bez njega su dozvoljeni samo content,
+data, asset i dokazani bug fix, kao i za svaku drugu zaključanu površinu.
+
+Vezana pravila uvedena istog dana (nisu redesign, ne otvaraju lock):
+
+- grafit iza proizvoda na PDP-u prikazuje se samo za boje (farbe, mešni
+  tonovi, sprejevi za farbanje) po centralnom pravilu
+  `lib/productPaintRule.mjs`; ostali proizvodi, uključujući aerosole koji nisu
+  farba, nemaju grafit, a položaj i veličina slike ostaju isti;
+- kartica na `/katalog` boji obojenu površinu stvarnom nijansom proizvoda ili
+  prikazane varijante, a bez nijanse bojom brenda po `lib/brand-card-colors.ts`
+  (Carsystem crvena, Baslac plava…); brend bez prepoznatljive boje zadržava
+  neutralan prikaz. Boja brenda je samo vizuelna — nije nijansa proizvoda i ne
+  ulazi u filter;
+- roletna (obojeni sloj + otkrivanje) na `/katalog` postoji na SVAKOJ kartici,
+  i za proizvode koji nisu boje: kartica uvek traži `visualMode:
+  "color-on-hover"` (`CatalogProductCard`, samo uz `catalogSystem`). Van
+  kataloga `neutral` i dalje gasi obojeni sloj. Kartica bez slike propušta
+  roletnu kroz pločicu „Vizuel u pripremi". Roletna ostaje ISPOD proizvoda:
+  nijedan blend/filter ne sme da prebojava neprovidne delove proizvoda
+  (ranije multiply rešenje je uklonjeno). Sedam packshot-ova bez alfa kanala
+  zamenjeno je cut-out assetima (`public/products/**.webp`; originalni JPEG
+  fajlovi su sačuvani): B 2E11 i Multi Green iz zvaničnih transparentnih
+  izvora, ostalih pet preciznom maskom spoljne pozadine (etikete i beli
+  delovi ambalaže sačuvani). Metrike su regenerisane (`npm run images:metrics`).
+  Regresija: `components/catalog/catalogCardReveal.test.mjs`; vizuelni
+  kriterijum meri odvojeno pozadinu i neprovidnu unutrašnjost proizvoda;
+- nijansa kartice bira se redom: merena/izvedena (`visual`), orijentacioni
+  uzorak varijante (`visualIdentity.swatch`, samo završnice tona), kurirani
+  preset, imenovana boja iz zvaničnog naziva/TDS-a (`lib/productNamedColors.mjs`,
+  `precision: "orientation"` — nije kolorimetrijski podatak), pa tek boja brenda.
+  Boje brendova su proverene iz izvora (tabela u `lib/brand-card-colors.ts`);
+  R-M crvena je ispravljena na zvaničnu `#E3000F` (rmpaint.com);
+- (2026-09-11) boja kartice NIJE ograničena na farbe: potvrđena boja proizvoda
+  ili serije od proizvođača ima prednost nad starim `visual`/preset podacima
+  (`getProductShadeSource`: blokada → `lib/productNamedColors.mjs` → visual →
+  swatch → preset → brend). Carsystem abrazivi nose boju serije (P.19 „Color:
+  Yellow” + zvanični packshot; F.19, F.23 Ceramic, F.19 Finish uzorak sa
+  zvaničnog packshot-a); P.23 nema izvor. R-M „Pasta 190 1 L” je po šifri
+  DIAMONT BC 190 „Dense white” toner (kategorija ispravljena u basecoat); 5 L
+  ima sukob naziv/fotografija (BC 605) i ostaje na brendu; BC 100 je bezbojni
+  Adjust Varnish (preset blokiran). Baslac swatch-evi Line 30/35/45 upoređeni
+  sa zvaničnim tinting chart-ovima (topcoat 30, basecoat 35 2024, basecoat 45
+  2019): hue-familija piktograma grupe boje; 24 tona zamenjeno grupom boje;
+  `BASLAC_SWATCH_VERIFICATION` nosi status po kodu;
+- (2026-09-11) `/katalog` je jedna lista koja se dopunjava skrolovanjem
+  (IntersectionObserver, 48 po grupi). Navigacija „Strana N od M” je uklonjena
+  iz interaktivnog kataloga (vodila je na `/katalog/strana/N` koja zamenjuje
+  listu); ostaje u Suspense fallback-u i na crawl stranicama.
+
+---
+
+### Dopuna PASS 02 — 2026-09-15 (katalog: boje serija i beskonačni skrol)
+
+- Kataloška boja nije ograničena na farbe: redosled je potvrđena boja
+  PROIZVODA/varijante → potvrđena boja SERIJE (`series` u
+  `lib/productNamedColors.mjs`, npr. Carsystem Sanding Disc P.19 „Color:
+  Yellow”, F.19 / F.23 Ceramic / F.19 Finish po zvaničnom packshot-u) → boja
+  brenda. Potvrđen podatak proizvođača ima prednost nad starim `visual`
+  tokenom i kuriranim presetom; `PRODUCT_SHADE_BLOCKLIST` gasi pogrešne stare
+  vrednosti uz razlog (BC 100 = Adjust Varnish, „Pasta 190” 5 L = sukob
+  fotografije BC 605, „P23” ne postoji na carsystem.org — postoji P.25 Ceramic).
+- Baslac swatch-evi su ponovo provereni uzorkovanjem piktograma iz zvaničnih
+  tinting chart-ova 45/35/30 (`BASLAC_SWATCH_VERIFICATION`: 126 potvrđenih,
+  11 zamenjenih, 2 nejasna uzorka, 1 nije u chart-u); tonirani providni toneri
+  se prikazuju, bezbojni ne. „R-M Pasta 190” je po šifri DIAMONT mešna baza
+  (BC 190), pa oba pakovanja nose taksonomiju basecoat.
+- Beskonačno skrolovanje: pored okidač-kartice, mreža ima sentinel ispod
+  poslednje kartice; observer tretira i element iznad viewporta kao presečen
+  (skok na dno preko End/skrol-trake) i ponovo se naoružava posle svake grupe.
+  Nov upit/filter vraća pogled na vrh rezultata i resetuje skup; Back sa `?q=`
+  ponavlja restauraciju skrola kada lenjo učitane kartice stignu. Regresija:
+  `components/catalog/catalogInfiniteScroll.test.mjs`.
+
+---
+
 ## PASS 01 — 2026-08-16
 
 Obim: PDP template, Cosmos LAC brand stranica, Befar brand stranica,

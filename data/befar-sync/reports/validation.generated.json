@@ -1,0 +1,36 @@
+{
+  "summary": {
+    "products": 56,
+    "variants": 185,
+    "byLine": {
+      "Befar": 31,
+      "Befar Plus": 5,
+      "Leo": 15,
+      "Turkuaz": 5
+    },
+    "sets": 4,
+    "runtimeBefarProducts": 64,
+    "withImage": 56,
+    "variantsWithOwnImage": 52,
+    "variantsWithColourFact": 121,
+    "variantsWithHardness": 35,
+    "withShade": 10,
+    "localizedEntries": 56,
+    "errors": 0,
+    "warnings": 11
+  },
+  "errors": [],
+  "warnings": [
+    "befar-drill-type-headlight-cleaning-pad: proizvođač nema zasebnu fotografiju ovog proizvoda — prikazana je zvanična grupna fotografija bloka",
+    "befar-drill-type-wheel-cleaning-pad: proizvođač nema zasebnu fotografiju ovog proizvoda — prikazana je zvanična grupna fotografija bloka",
+    "befar-m14-adapter: proizvođač nema zasebnu fotografiju ovog proizvoda — prikazana je zvanična grupna fotografija bloka",
+    "befar-sanding-pad: samo na aktuelnom sajtu (nema ga u digitalnom katalogu)",
+    "befar-sandwich-velcro-backing-pad: samo na aktuelnom sajtu (nema ga u digitalnom katalogu)",
+    "befar-turkuaz-compound: proizvođač nema zasebnu fotografiju ovog proizvoda — prikazana je zvanična grupna fotografija bloka",
+    "befar-turkuaz-compound: samo na aktuelnom sajtu (nema ga u digitalnom katalogu)",
+    "befar-turkuaz-polish: proizvođač nema zasebnu fotografiju ovog proizvoda — prikazana je zvanična grupna fotografija bloka",
+    "befar-turkuaz-polish: samo na aktuelnom sajtu (nema ga u digitalnom katalogu)",
+    "befar-turkuaz-with-applicator-compounding-pad: samo na aktuelnom sajtu (nema ga u digitalnom katalogu)",
+    "befar-with-applicator-compounding-pad: samo na aktuelnom sajtu (nema ga u digitalnom katalogu)"
+  ]
+}

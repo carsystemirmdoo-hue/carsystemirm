@@ -1,0 +1,863 @@
+{
+  "generatedFrom": {
+    "websiteCrawledAt": "2026-09-19T03:25:53.810Z",
+    "catalogueSha256": "c9fb37b15509ca717b4851bf9b44c6361695571b852804e242c5c76fa5f74503"
+  },
+  "coverage": {
+    "A_currentOrderableProductFamilies": 56,
+    "B_representedLocally": 56,
+    "C_currentOfficialProductCodes": 185,
+    "D_representedLocally": 185,
+    "productCoveragePercent": 100,
+    "articleCoveragePercent": 100
+  },
+  "ACTIVE_PRODUCT_MISSING": [],
+  "ACTIVE_CODE_MISSING": [],
+  "duplicateActiveCodes": [],
+  "duplicateProductSlugs": [],
+  "attachedToWrongProduct": [],
+  "images": {
+    "published": 133,
+    "referenced": 133,
+    "orphanImages": [],
+    "duplicateImages": [],
+    "brokenImageReferences": [],
+    "hotlinked": []
+  },
+  "ourCatalogue": {
+    "befarProducts": 64,
+    "importedBySync": 56,
+    "legacyLocal": [
+      {
+        "slug": "befar-sundjer-narandzasti-25x150",
+        "name": "Befar sunđer narandžasti 25x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Befar Plus Velcro Polishing Pad (54402)",
+          "Velcro Polishing Pad (04402)",
+          "Waffle Velcro Polishing Pad (04502)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-narandzasti-50x150",
+        "name": "Befar sunđer narandžasti 50x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Befar Plus With Applicator Compounding Pad (52402)",
+          "Leo Plus Advance Velcro Compounding Pad (55402ADV)",
+          "Leo Plus Advance with Applicator Compounding Pad (52402ADV)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-crni-25x150",
+        "name": "Befar sunđer crni 25x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Velcro Polishing Pad (04403)",
+          "Waffle Velcro Polishing Pad (04503)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-crni-50x150",
+        "name": "Befar sunđer crni 50x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Leo Plus Advance Velcro Compounding Pad (55403ADV)",
+          "Leo Plus Advance with Applicator Compounding Pad (52403ADV)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-beli-25x150",
+        "name": "Befar sunđer beli 25x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Velcro Polishing Pad (04401)",
+          "Waffle Velcro Polishing Pad (04501)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-beli-50x150",
+        "name": "Befar sunđer beli 50x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Leo Plus Advance Velcro Compounding Pad (55401ADV)",
+          "Leo Plus Advance with Applicator Compounding Pad (52401ADV)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-plavi-25x150",
+        "name": "Befar sunđer plavi 25x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Befar Plus Velcro Polishing Pad (54405)",
+          "Waffle Velcro Polishing Pad (04505)"
+        ],
+        "codes": []
+      },
+      {
+        "slug": "befar-sundjer-plavi-50x150",
+        "name": "Befar sunđer plavi 50x150",
+        "classification": "PROBABLE_MATCH",
+        "candidates": [
+          "Befar Plus With Applicator Compounding Pad (52405)",
+          "Leo Plus Advance Velcro Compounding Pad (55405ADV)",
+          "Leo Plus Advance with Applicator Compounding Pad (52405ADV)"
+        ],
+        "codes": []
+      }
+    ],
+    "officialCodesInRuntime": 185
+  },
+  "sources": {
+    "WEBSITE_AND_CATALOGUE": 50,
+    "WEBSITE_ONLY": 6,
+    "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE_codes": 99,
+    "SOURCE_CONFLICT": 7
+  },
+  "families": [
+    {
+      "sourceKey": "anti-hologram",
+      "officialName": "Anti Hologram",
+      "line": "Befar",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-anti-hologram",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "auto-polish",
+      "officialName": "Auto Polish",
+      "line": "Befar",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-auto-polish",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "backing-pad",
+      "officialName": "Backing Pad",
+      "line": "Befar",
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "befar-plus-hand-compounding-pad",
+      "officialName": "Befar Plus Hand Compounding Pad",
+      "line": "Befar Plus",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plus-hand-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "befar-plus-velcro-polishing-pad",
+      "officialName": "Befar Plus Velcro Polishing Pad",
+      "line": "Befar Plus",
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plus-velcro-polishing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "befar-plus-velcro-woolpad",
+      "officialName": "Befar Plus Velcro Woolpad",
+      "line": "Befar Plus",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plus-velcro-woolpad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "befar-plus-wax-pad-conical-pad",
+      "officialName": "Befar Plus Wax Pad Conical Pad",
+      "line": "Befar Plus",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plus-wax-pad-conical-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "befar-plus-with-applicator-compounding-pad",
+      "officialName": "Befar Plus With Applicator Compounding Pad",
+      "line": "Befar Plus",
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plus-with-applicator-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "carved-velcro-polishing-pad",
+      "officialName": "Carved Velcro Polishing Pad",
+      "line": "Befar",
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-carved-velcro-polishing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "cream-compound",
+      "officialName": "Cream Compound",
+      "line": "Befar",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-cream-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "drill-type-headlight-cleaning-pad",
+      "officialName": "Drill Type Headlight Cleaning Pad",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-drill-type-headlight-cleaning-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "drill-type-wheel-cleaning-pad",
+      "officialName": "Drill Type Wheel Cleaning Pad",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-drill-type-wheel-cleaning-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "ellipse-corrugated-polishing-compounding-pad",
+      "officialName": "Ellipse Corrugated Polishing Compounding Pad",
+      "line": "Befar",
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-ellipse-corrugated-polishing-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "extra-cream-compound",
+      "officialName": "Extra Cream Compound",
+      "line": "Befar",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-extra-cream-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "hard-velcro-backing-pad",
+      "officialName": "Hard Velcro Backing Pad",
+      "line": "Befar",
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-hard-velcro-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "headlight-cleaning-set",
+      "officialName": "Headlight Cleaning Set",
+      "line": "Befar",
+      "pages": [
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-headlight-cleaning-set",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-ceramic-aplication-block",
+      "officialName": "Leo Ceramic Aplication Block",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi",
+        "seramik-ürünleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-ceramic-application-block",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-ceramic-cloth",
+      "officialName": "Leo Ceramic Cloth",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi",
+        "seramik-ürünleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-ceramic-cloth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-compound-polish-set",
+      "officialName": "Leo Compound - Polish Set",
+      "line": "Leo",
+      "pages": [
+        "diğer-ürünler",
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-compound-polish-set",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-detailing-backing-pad",
+      "officialName": "Leo Detailing Backing Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi",
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-detailing-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-hamburger-pad",
+      "officialName": "Leo Hamburger Pad",
+      "line": "Leo",
+      "pages": [
+        "amatör-grubu",
+        "diğer-ürünler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-hamburger-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-mini-detailing-cleaning-set",
+      "officialName": "Leo Mini Detailing Cleaning Set",
+      "line": "Leo",
+      "pages": [
+        "diğer-ürünler",
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-mini-detailing-cleaning-set",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-nano-ceramic-paint-protector-set",
+      "officialName": "Leo Nano Ceramic Paint Protector Set",
+      "line": "Leo",
+      "pages": [
+        "seramik-ürünleri",
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-nano-ceramic-paint-protector-set",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+      "officialName": "Leo Plus Advance Velcro Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-plus-advance-velcro-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+      "officialName": "Leo Plus Advance with Applicator Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-plus-advance-with-applicator-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-plus-air-lines-orbital-velcro-compounding-pad",
+      "officialName": "Leo Plus Air Lines Orbital Velcro Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-plus-air-lines-orbital-velcro-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad",
+      "officialName": "Leo Plus Air Lines with 16 Holes Orbital Velcro Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-premium-advance-velcro-compounding-pad",
+      "officialName": "Leo Premium Advance Velcro Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-premium-advance-velcro-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-premium-advance-with-applicator-compounding-pad",
+      "officialName": "Leo Premium Advance With Applicator Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri",
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-premium-advance-with-applicator-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-premium-air-lines-velcro-compounding-pad",
+      "officialName": "Leo Premium Air Lines Velcro Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-premium-air-lines-velcro-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "leo-premium-compounding-pad",
+      "officialName": "Leo Premium Compounding Pad",
+      "line": "Leo",
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri",
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-leo-premium-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "liquid-compound",
+      "officialName": "Liquid Compound",
+      "line": "Befar",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-liquid-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "m14-adapter",
+      "officialName": "M14 Adapter",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-m14-adapter",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "medium-hard-velcro-backing-pad",
+      "officialName": "Medium Hard Velcro Backing Pad",
+      "line": "Befar",
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-medium-hard-velcro-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "mikrofiber-clothes",
+      "officialName": "Mikrofiber Clothes",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-microfiber-cloths",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "non-wowen-abrasive",
+      "officialName": "Non Wowen Abrasive",
+      "line": "Befar",
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-non-woven-abrasive",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "paint-protector",
+      "officialName": "Paint Protector",
+      "line": "Befar",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-paint-protector",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "plastic-putty-aplicatior",
+      "officialName": "Plastic Putty Aplicatior",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plastic-putty-applicator",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "plate-type-felt-backing-pad",
+      "officialName": "Plate Type Felt Backing Pad",
+      "line": "Befar",
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-plate-type-felt-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "polishing-sponge-with-applicator",
+      "officialName": "Polishing Sponge with Applicator",
+      "line": "Befar",
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-polishing-sponge-with-applicator",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sanding-block-hard-red",
+      "officialName": "Sanding Block · Hard Red",
+      "line": "Befar",
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-sanding-block-hard-red",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sanding-block-soft-orange",
+      "officialName": "Sanding Block · Soft Orange",
+      "line": "Befar",
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-sanding-block-soft-orange",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sanding-pad",
+      "officialName": "Sanding Pad",
+      "line": "Befar",
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "befar-sanding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "sandwich-velcro-backing-pad",
+      "officialName": "Sandwich Velcro Backing Pad",
+      "line": "Befar",
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "befar-sandwich-velcro-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "soft-velcro-backing-pad",
+      "officialName": "Soft Velcro Backing Pad",
+      "line": "Befar",
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-soft-velcro-backing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "static-fail",
+      "officialName": "Static Fail",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-static-foil",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "tack-cloth",
+      "officialName": "Tack Cloth",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-tack-cloth",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "turkuaz-compound",
+      "officialName": "Turkuaz Compound",
+      "line": "Turkuaz",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "befar-turkuaz-compound",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "turkuaz-polish",
+      "officialName": "Turkuaz Polish",
+      "line": "Turkuaz",
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "befar-turkuaz-polish",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "turkuaz-sanding-block-blue",
+      "officialName": "Turkuaz Sanding Block · Blue",
+      "line": "Turkuaz",
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-turkuaz-sanding-block-blue",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "turkuaz-static-fail",
+      "officialName": "Turkuaz Static Fail",
+      "line": "Turkuaz",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-turkuaz-static-foil",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "turkuaz-with-applicator-compounding-pad",
+      "officialName": "Turkuaz With Applicator Compounding Pad",
+      "line": "Turkuaz",
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "befar-turkuaz-with-applicator-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "velcro-polishing-pad",
+      "officialName": "Velcro Polishing Pad",
+      "line": "Befar",
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-velcro-polishing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "velcro-woolpad",
+      "officialName": "Velcro Woolpad",
+      "line": "Befar",
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-velcro-woolpad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "waffle-velcro-polishing-pad",
+      "officialName": "Waffle Velcro Polishing Pad",
+      "line": "Befar",
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "action": "IMPORT",
+      "ourSlug": "befar-waffle-velcro-polishing-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    },
+    {
+      "sourceKey": "with-applicator-compounding-pad",
+      "officialName": "With Applicator Compounding Pad",
+      "line": "Befar",
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "action": "IMPORT",
+      "ourSlug": "befar-with-applicator-compounding-pad",
+      "represented": true,
+      "reasonIfMissing": null
+    }
+  ],
+  "failures": []
+}

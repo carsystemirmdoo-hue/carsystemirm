@@ -113,7 +113,9 @@ export function loadLocalProducts(syncSlugs) {
         programSlug: product.programSlug,
       };
     });
-  return { local, allSlugs: new Set(products.map((product) => product.slug)), totalCatalogProducts: products.length };
+  // Veličina CELOG kataloga se namerno ne vraća: to je živa metrika svih brendova, pa bi izveštaj
+  // ovog synca menjala svaki kasnije dodat proizvođač (`<brand>:sync:check` mora ostati prazan).
+  return { local, allSlugs: new Set(products.map((product) => product.slug)) };
 }
 
 /**

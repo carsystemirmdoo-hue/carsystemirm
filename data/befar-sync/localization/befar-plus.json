@@ -1,0 +1,146 @@
+{
+  "befar-plus-hand-compounding-pad": {
+    "sourceHash": "7eed266c8bf14a03",
+    "productType": "Ručni sunđer za poliranje",
+    "subtype": "ručni sunđer za poliranje · 145 × 25 mm · 7 boja",
+    "shortDescription": "Ručni sunđer za poliranje iz linije Befar Plus, dimenzije 145 × 25 mm, u sedam boja.",
+    "longDescription": "Befar Plus Hand Compounding Pad je ručni sunđer za poliranje iz linije Befar Plus brenda Befar. Proizvođač ga navodi u dimenziji 145 × 25 mm i u sedam boja: beloj, narandžastoj, crnoj, žutoj, plavoj, krem i bordo.",
+    "purpose": "Ručno poliranje laka",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar Plus"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "145 × 25 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, žuta, plava, krem, bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "befar-plus-velcro-polishing-pad": {
+    "sourceHash": "81b3c02342cf9d06",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 2 dimenzije · 4 boje",
+    "shortDescription": "Sunđer za poliranje sa čičkom iz linije Befar Plus, u dimenzijama 150 × 25 mm i 180 × 35 mm, u četiri boje.",
+    "longDescription": "Befar Plus Velcro Polishing Pad je sunđer za poliranje sa čičkom iz linije Befar Plus brenda Befar, u dimenzijama 150 × 25 mm i 180 × 35 mm. Boja označava tvrdoću: prema legendi kataloga narandžasti je 5/5, a plavi i bordo 3/5; za krem sunđer tvrdoća nije navedena. Katalog uz legendu navodi rad sa krem ili tečnom polir pastom, odnosno sa polirom ili antihologram polirom.",
+    "purpose": "Mašinsko poliranje laka, uz čičak podlošku na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar Plus"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 25 mm, 180 × 35 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "narandžasta, plava, krem, bordo"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "narandžasta 5/5, plava 3/5, bordo 3/5"
+      }
+    ],
+    "applications": [
+      "Rad sa krem ili tečnom polir pastom (legenda u katalogu proizvođača)",
+      "Rad sa polirom ili antihologram polirom (legenda u katalogu proizvođača)"
+    ],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, sunđer 150 × 25 mm koristi se sa čičak podloškom 125 mm, a sunđer 180 × 35 mm sa čičak podloškom 150 mm (Soft, Medium Hard ili Hard).",
+    "setContents": []
+  },
+  "befar-plus-velcro-woolpad": {
+    "sourceHash": "e7d6da4eaa0493dc",
+    "productType": "Krzno za poliranje sa čičkom",
+    "subtype": "krzno (vuna) za poliranje · čičak · 3 dimenzije · žuta",
+    "shortDescription": "Krzno (vuna) za poliranje sa čičkom iz linije Befar Plus, u dimenzijama 150 mm, 160 mm i 180 mm.",
+    "longDescription": "Befar Plus Velcro Woolpad je krzno (vuna) za poliranje sa čičkom iz linije Befar Plus brenda Befar; turski naziv proizvođača opisuje ga kao jagnjeće krzno. Proizvođač ga navodi u dimenzijama 150 mm, 160 mm i 180 mm, a u katalogu se vodi u žutoj boji.",
+    "purpose": "Mašinsko poliranje laka, uz čičak podlošku na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar Plus"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 mm, 160 mm, 180 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "žuta"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "befar-plus-wax-pad-conical-pad": {
+    "sourceHash": "ce416cbabec2da0d",
+    "productType": "Konusni sunđer za vosak",
+    "subtype": "sunđer za vosak · konusni rez · 115 × 25 mm · 7 boja",
+    "shortDescription": "Sunđer za vosak konusnog reza iz linije Befar Plus, dimenzije 115 × 25 mm, u sedam boja.",
+    "longDescription": "Befar Plus Wax Pad Conical Pad je sunđer za nanošenje voska iz linije Befar Plus brenda Befar; turski naziv proizvođača opisuje ga kao sunđer za vosak konusnog reza. Proizvođač ga navodi u dimenziji 115 × 25 mm i u sedam boja: beloj, narandžastoj, crnoj, žutoj, plavoj, krem i bordo.",
+    "purpose": "Nanošenje voska",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar Plus"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "115 × 25 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, žuta, plava, krem, bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "befar-plus-with-applicator-compounding-pad": {
+    "sourceHash": "1992943b785c0868",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · aplikator · 3 dimenzije · 4 boje",
+    "shortDescription": "Sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Befar Plus, u dimenzijama 150 × 50 mm i 180 × 35 mm.",
+    "longDescription": "Befar Plus With Applicator Compounding Pad je sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Befar Plus brenda Befar, u dimenzijama 150 × 50 mm i 180 × 35 mm; krem sunđer proizvođač navodi kao 150 × 45 mm. Boja označava tvrdoću: prema legendi kataloga narandžasti je 5/5, a plavi i bordo 3/5; za krem tvrdoća nije navedena. Katalog uz legendu navodi rad sa krem ili tečnom polir pastom, odnosno sa polirom ili antihologram polirom.",
+    "purpose": "Mašinsko poliranje laka, sa aplikatorom za montažu na polirku",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar Plus"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 50 mm, 150 × 45 mm (krem), 180 × 35 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "narandžasta, plava, krem, bordo"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "narandžasta 5/5, plava 3/5, bordo 3/5"
+      }
+    ],
+    "applications": [
+      "Rad sa krem ili tečnom polir pastom (legenda u katalogu proizvođača)",
+      "Rad sa polirom ili antihologram polirom (legenda u katalogu proizvođača)"
+    ],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  }
+}

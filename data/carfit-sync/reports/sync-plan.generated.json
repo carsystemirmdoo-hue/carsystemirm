@@ -30,7 +30,6 @@
     },
     "newProducts": 0,
     "existingProducts": 121,
-    "catalogProductsTotalBefore": 1566,
     "planErrors": {
       "duplicateSlugs": [],
       "slugCollidesWithExisting": [],

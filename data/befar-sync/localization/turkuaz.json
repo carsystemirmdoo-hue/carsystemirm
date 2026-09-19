@@ -1,0 +1,125 @@
+{
+  "turkuaz-sanding-block-blue": {
+    "sourceHash": "e1f0dd89a5c731c3",
+    "productType": "Brusni blok",
+    "subtype": "brusni blok · plavi · 3 veličine",
+    "shortDescription": "Plavi brusni blok iz linije Turkuaz, u tri veličine: Standard, Middle i Big.",
+    "longDescription": "Turkuaz Sanding Block · Blue je brusni blok iz linije Turkuaz brenda Befar; brusni blok nosi brusni materijal pri ručnom brušenju. Proizvođač ga navodi u tri veličine – Standard, Middle i Big – a u katalogu se vodi pod oznakom Eco Blue, sa veličinama Standart, Medium i Large 130.",
+    "purpose": "Ručno brušenje uz brusni blok",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Turkuaz"
+      },
+      {
+        "label": "Veličine",
+        "value": "Standard, Middle, Big"
+      },
+      {
+        "label": "Oznaka u katalogu",
+        "value": "Eco Blue · Standart, Medium, Large 130"
+      },
+      {
+        "label": "Boje",
+        "value": "plava"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "turkuaz-static-fail": {
+    "sourceHash": "c5d56ae8417aca15",
+    "displayName": "Turkuaz Static Foil",
+    "productType": "Statička maskirna folija",
+    "subtype": "statička maskirna folija · 4 dimenzije · 4 × 5 m do 4 × 150 m",
+    "shortDescription": "Statička maskirna folija iz linije Turkuaz, u dimenzijama 4 × 5 m, 4 × 120 m, 4 × 130 m i 4 × 150 m.",
+    "longDescription": "Turkuaz Static Foil je statička maskirna folija iz linije Turkuaz brenda Befar; maskirna folija štiti površine tokom lakiranja. Proizvođač je navodi u dimenzijama 4 × 5 m, 4 × 120 m, 4 × 130 m i 4 × 150 m. U katalogu proizvođača dimenzije 4 × 5 m i 4 × 150 m vode se pod oznakom Half Static.",
+    "purpose": "Maskiranje i zaštita površina tokom lakiranja",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Turkuaz"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "4 × 5 m, 4 × 120 m, 4 × 130 m, 4 × 150 m"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "turkuaz-compound": {
+    "sourceHash": "976349513a7c6af4",
+    "productType": "Polir pasta",
+    "subtype": "polir pasta · linija Turkuaz · 250 g",
+    "shortDescription": "Polir pasta iz linije Turkuaz, u pakovanju od 250 g.",
+    "longDescription": "Turkuaz Compound je polir pasta iz linije Turkuaz brenda Befar; turski naziv proizvođača je „Pasta”. Proizvođač je svrstava u grupu Surface Chemicals i navodi u jednom pakovanju, od 250 g.",
+    "purpose": "Poliranje laka polir pastom",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Turkuaz"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "250 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "turkuaz-polish": {
+    "sourceHash": "6ae23ef19eddb512",
+    "productType": "Polir (završni polir)",
+    "subtype": "završni polir · linija Turkuaz · 250 g",
+    "shortDescription": "Polir (završni polir) iz linije Turkuaz, u pakovanju od 250 g.",
+    "longDescription": "Turkuaz Polish je polir (završni polir) iz linije Turkuaz brenda Befar; turski naziv proizvođača je „Cila”. Proizvođač ga svrstava u grupu Surface Chemicals i navodi u jednom pakovanju, od 250 g.",
+    "purpose": "Završno poliranje laka",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Turkuaz"
+      },
+      {
+        "label": "Pakovanje",
+        "value": "250 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "turkuaz-with-applicator-compounding-pad": {
+    "sourceHash": "08c2273b80dac108",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · aplikator · 150 × 45 mm · 2 boje",
+    "shortDescription": "Sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Turkuaz, dimenzije 150 × 45 mm, u dve boje.",
+    "longDescription": "Turkuaz With Applicator Compounding Pad je sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Turkuaz brenda Befar. Proizvođač ga navodi u dimenziji 150 × 45 mm, u narandžastoj i beloj boji.",
+    "purpose": "Mašinsko poliranje laka, sa aplikatorom za montažu na polirku",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Turkuaz"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 45 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "narandžasta, bela"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  }
+}

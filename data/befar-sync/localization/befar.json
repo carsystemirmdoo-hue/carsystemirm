@@ -1,0 +1,833 @@
+{
+  "anti-hologram": {
+    "sourceHash": "d277c8897ab8f737",
+    "productType": "Antihologram polir",
+    "subtype": "antihologram polir · površinska hemija · 2 pakovanja",
+    "shortDescription": "Anti Hologram je antihologram polir iz linije Befar, u pakovanjima od 250 g i 1000 g.",
+    "longDescription": "Anti Hologram je antihologram polir iz Befar programa površinske hemije (Surface Chemicals). Kao što naziv kaže, namenjen je uklanjanju holograma sa polirane površine. Proizvođač ga nudi u pakovanjima od 250 g i 1000 g.",
+    "purpose": "Uklanjanje holograma nakon poliranja",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Pakovanja",
+        "value": "250 g, 1000 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "auto-polish": {
+    "sourceHash": "e9b241d840c8580a",
+    "productType": "Polir",
+    "subtype": "završni polir · površinska hemija · 2 pakovanja",
+    "shortDescription": "Auto Polish je polir (završni polir) iz linije Befar, u pakovanjima od 250 g i 1000 g.",
+    "longDescription": "Auto Polish je polir (završni polir) iz Befar programa površinske hemije (Surface Chemicals). Koristi se u završnom koraku poliranja lakirane površine. Proizvođač ga nudi u pakovanjima od 250 g i 1000 g.",
+    "purpose": "Završno poliranje lakirane površine",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Pakovanja",
+        "value": "250 g, 1000 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "backing-pad": {
+    "sourceHash": "c2e97741dd2ad14c",
+    "productType": "Međupodloška",
+    "subtype": "međupodloška · 150 mm · 7, 15 ili 62 rupe",
+    "shortDescription": "Backing Pad je međupodloška iz linije Befar, prečnika 150 mm, u izvedbama sa 7, 15 i 62 rupe.",
+    "longDescription": "Backing Pad (tur. Ara Taban) je međupodloška iz Befar grupe podloški za brušenje (Sanding Pad Group). Postavlja se između podloške brusilice i brusnog materijala. Dostupna je u prečniku 150 mm, u izvedbama sa 7, 15 ili 62 rupe.",
+    "purpose": "Međusloj između podloške brusilice i brusnog diska",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 mm"
+      },
+      {
+        "label": "Broj rupa",
+        "value": "7, 15, 62"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "carved-velcro-polishing-pad": {
+    "sourceHash": "c48c9f08d56a1c39",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · urezani profil · 220 × 35 mm",
+    "shortDescription": "Carved Velcro Polishing Pad je sunđer za poliranje sa čičkom i urezanim profilom, 220 × 35 mm, u 5 boja.",
+    "longDescription": "Carved Velcro Polishing Pad je sunđer za poliranje sa čičkom i urezanim profilom iz linije Befar. Izrađuje se u dimenziji 220 × 35 mm, u beloj, narandžastoj, plavoj, krem i bordo boji. Legenda tvrdoće u katalogu proizvođača navodi 3/5 za plavi i 3/5 za bordo sunđer; za ostale boje tvrdoća nije navedena.",
+    "purpose": "Mašinsko poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "220 × 35 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, plava, krem, bordo"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "plava 3/5, bordo 3/5"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, koristi se sa čičak podloškom 170 mm (Soft, Medium Hard ili Hard Velcro Backing Pad).",
+    "setContents": []
+  },
+  "cream-compound": {
+    "sourceHash": "587e921024d75c01",
+    "productType": "Krem polir pasta",
+    "subtype": "krem polir pasta · površinska hemija · 3 pakovanja",
+    "shortDescription": "Cream Compound je krem polir pasta iz linije Befar, u pakovanjima od 125 g, 300 g i 1000 g.",
+    "longDescription": "Cream Compound je krem polir pasta iz Befar programa površinske hemije (Surface Chemicals). Koristi se za poliranje lakiranih površina. Proizvođač je nudi u pakovanjima od 125 g, 300 g i 1000 g.",
+    "purpose": "Poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Pakovanja",
+        "value": "125 g, 300 g, 1000 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "drill-type-headlight-cleaning-pad": {
+    "sourceHash": "a2f8796a9d7c6c0b",
+    "productType": "Sunđer za čišćenje farova",
+    "subtype": "sunđer za farove · za bušilicu · 80 mm",
+    "shortDescription": "Drill Type Headlight Cleaning Pad je sunđer za čišćenje farova u izvedbi za bušilicu, prečnika 80 mm.",
+    "longDescription": "Drill Type Headlight Cleaning Pad je sunđer za čišćenje farova iz linije Befar, u izvedbi za rad na bušilici. U katalogu proizvođača vodi se kao Headlight Cleaner Foam Drill Style. Dostupan je u prečniku 80 mm.",
+    "purpose": "Čišćenje farova uz pomoć bušilice",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "80 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "drill-type-wheel-cleaning-pad": {
+    "sourceHash": "1231ecbde1399911",
+    "productType": "Sunđer za čišćenje felni",
+    "subtype": "sunđer za felne · za bušilicu · 80 mm",
+    "shortDescription": "Drill Type Wheel Cleaning Pad je sunđer za čišćenje felni u izvedbi za bušilicu, prečnika 80 mm.",
+    "longDescription": "Drill Type Wheel Cleaning Pad je sunđer za čišćenje felni iz linije Befar, u izvedbi za rad na bušilici. U katalogu proizvođača vodi se kao Rim Cleaner Foam Drill Style. Dostupan je u prečniku 80 mm.",
+    "purpose": "Čišćenje felni uz pomoć bušilice",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "80 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "ellipse-corrugated-polishing-compounding-pad": {
+    "sourceHash": "9aa39632561b6381",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · rebrasti profil, elipsa · 180 × 35 mm",
+    "shortDescription": "Sunđer za poliranje sa čičkom, elipsastog rebrastog profila, 180 × 35 mm, u 4 boje različite tvrdoće.",
+    "longDescription": "Ellipse Corrugated Polishing Compounding Pad je sunđer za poliranje sa čičkom i elipsastim rebrastim profilom iz linije Befar, dimenzije 180 × 35 mm. Boja označava tvrdoću prema legendi proizvođača: narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5. Za sve četiri boje katalog preporučuje rad sa tečnom ili krem polir pastom.",
+    "purpose": "Mašinsko poliranje lakiranih površina polir pastom",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "180 × 35 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, žuta, plava"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5"
+      },
+      {
+        "label": "Preporučeno sredstvo",
+        "value": "tečna ili krem polir pasta"
+      }
+    ],
+    "applications": [
+      "Poliranje tečnom ili krem polir pastom (sve boje)"
+    ],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, koristi se sa čičak podloškom 150 mm (Soft, Medium Hard ili Hard Velcro Backing Pad).",
+    "setContents": []
+  },
+  "extra-cream-compound": {
+    "sourceHash": "5765d38cbb710a39",
+    "productType": "Krem polir pasta",
+    "subtype": "krem polir pasta · Extra · 3 pakovanja",
+    "shortDescription": "Extra Cream Compound je krem polir pasta iz linije Befar, u pakovanjima od 125 g, 300 g i 1000 g.",
+    "longDescription": "Extra Cream Compound je krem polir pasta iz Befar programa površinske hemije (Surface Chemicals), koju proizvođač vodi uz osnovni Cream Compound. Koristi se za poliranje lakiranih površina. Dostupna je u pakovanjima od 125 g, 300 g i 1000 g.",
+    "purpose": "Poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Pakovanja",
+        "value": "125 g, 300 g, 1000 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "hard-velcro-backing-pad": {
+    "sourceHash": "45146737f8ad56fe",
+    "productType": "Čičak podloška za polirku",
+    "subtype": "podloška (tanjir) · čičak · Hard · 4 dimenzije",
+    "shortDescription": "Hard Velcro Backing Pad je tvrda čičak podloška (tanjir) iz linije Befar, u prečnicima 75, 125, 150 i 170 mm.",
+    "longDescription": "Hard Velcro Backing Pad je čičak podloška (tanjir) u tvrdoj izvedbi iz Befar grupe podloški (Backing Pad Group). Podloška nosi sunđer ili krzno za poliranje na polirki. U katalogu proizvođača vodi se kao Velcro Basic Pad Hard, a izrađuje se u prečnicima 75 mm, 125 mm, 150 mm i 170 mm.",
+    "purpose": "Nošenje čičak sunđera i krzna na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "75 mm, 125 mm, 150 mm, 170 mm"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Hard (tvrda)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "headlight-cleaning-set": {
+    "sourceHash": "e69d4b30de47b07c",
+    "productType": "Set za čišćenje farova",
+    "subtype": "set · čišćenje farova · 12 delova",
+    "shortDescription": "Headlight Cleaning Set je Befar set za čišćenje farova od 12 delova, sa brusnim papirima, sunđerom, krznom i sredstvima.",
+    "longDescription": "Headlight Cleaning Set je set za čišćenje farova iz linije Befar, sa 12 delova. Prema katalogu proizvođača sadrži čičak vodobrusne papire 76 mm, čičak podlošku 75 mm Soft sa metalnim adapterom (M14/bušilica), čičak krzno i crni čičak sunđer za poliranje 80 mm, sredstva No:1 Scratch Remover Compound i No:2 Polish, mikrofiber krpu i rukavicu.",
+    "purpose": "Čišćenje farova — komplet pribora i sredstava",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Sadržaj",
+        "value": "12 delova"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": [
+      "2 × čičak vodobrusni papir 76 mm, oznaka 1000PS",
+      "2 × čičak vodobrusni papir 76 mm, oznaka 2000PS",
+      "1 × čičak podloška 75 mm Soft",
+      "1 × metalni adapter (M14/bušilica)",
+      "1 × čičak krzno za poliranje 80 mm",
+      "1 × No:1 Scratch Remover Compound",
+      "1 × crni čičak sunđer za poliranje 80 mm",
+      "1 × No:2 Polish",
+      "1 × mikrofiber krpa",
+      "1 × rukavica"
+    ]
+  },
+  "liquid-compound": {
+    "sourceHash": "4ac43799c9f50569",
+    "productType": "Tečna polir pasta",
+    "subtype": "tečna polir pasta · površinska hemija · 2 pakovanja",
+    "shortDescription": "Liquid Compound je tečna polir pasta iz linije Befar, u pakovanjima od 250 g i 1000 g.",
+    "longDescription": "Liquid Compound je tečna polir pasta iz Befar programa površinske hemije (Surface Chemicals). Koristi se za poliranje lakiranih površina. Proizvođač je nudi u pakovanjima od 250 g i 1000 g.",
+    "purpose": "Poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Pakovanja",
+        "value": "250 g, 1000 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "m14-adapter": {
+    "sourceHash": "db30b7ac92c585a4",
+    "productType": "Adapter M14 za bušilicu",
+    "subtype": "adapter · navoj M14 · za bušilicu",
+    "shortDescription": "M14 Adapter je adapter sa navojem M14 u izvedbi za bušilicu, iz linije Befar.",
+    "longDescription": "M14 Adapter je adapter sa navojem M14 iz linije Befar. U katalogu proizvođača vodi se kao Drill Style M14 Adaptore, odnosno adapter u izvedbi za bušilicu, i nalazi se uz sunđere za čišćenje farova i felni u istoj izvedbi. Dostupan je u jednoj, standardnoj veličini.",
+    "purpose": "Povezivanje pribora sa navojem M14 i bušilice",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Navoj",
+        "value": "M14"
+      },
+      {
+        "label": "Veličina",
+        "value": "standardna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "medium-hard-velcro-backing-pad": {
+    "sourceHash": "cb6888718a21b28b",
+    "productType": "Čičak podloška za polirku",
+    "subtype": "podloška (tanjir) · čičak · Medium Hard · 3 dimenzije",
+    "shortDescription": "Medium Hard Velcro Backing Pad je srednje tvrda čičak podloška (tanjir) iz linije Befar, u prečnicima 125, 150 i 170 mm.",
+    "longDescription": "Medium Hard Velcro Backing Pad je čičak podloška (tanjir) u srednje tvrdoj izvedbi iz Befar grupe podloški (Backing Pad Group). Podloška nosi sunđer ili krzno za poliranje na polirki. U katalogu proizvođača vodi se kao Velcro Basic Pad Middle Hard, a izrađuje se u prečnicima 125 mm, 150 mm i 170 mm.",
+    "purpose": "Nošenje čičak sunđera i krzna na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "125 mm, 150 mm, 170 mm"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Medium Hard (srednje tvrda)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "mikrofiber-clothes": {
+    "sourceHash": "8ba8fa758a2ca951",
+    "displayName": "Microfiber Cloths",
+    "productType": "Mikrofiber krpa",
+    "subtype": "mikrofiber krpa · 2 dimenzije",
+    "shortDescription": "Microfiber Cloths su mikrofiber krpe iz linije Befar, u dimenzijama 40 × 40 cm i 40 × 60 cm.",
+    "longDescription": "Microfiber Cloths su mikrofiber krpe iz linije Befar. Mikrofiber krpa služi za brisanje i čišćenje površina. Proizvođač ih nudi u dimenzijama 40 × 40 cm i 40 × 60 cm.",
+    "purpose": "Brisanje i čišćenje površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "40 × 40 cm, 40 × 60 cm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "non-wowen-abrasive": {
+    "sourceHash": "630ab3e008a4bd4f",
+    "displayName": "Non Woven Abrasive",
+    "productType": "Netkani abraziv (brusno runo)",
+    "subtype": "brusno runo · za matiranje · 2 boje",
+    "shortDescription": "Non Woven Abrasive je netkani abraziv (brusno runo) za matiranje iz linije Befar, u sivoj i crvenoj boji.",
+    "longDescription": "Non Woven Abrasive (tur. Brite Matlaştırıcı Keçe) je netkani abraziv, odnosno brusno runo za matiranje površina, iz Befar grupe Sanding Pad Group. Dostupan je u sivoj boji, u listu 15 × 22 cm, i u crvenoj boji, u listu 15 × 25 cm. Katalog proizvođača crveno runo vodi pod oznakom 280 P, a sivo pod oznakom 400 P.",
+    "purpose": "Matiranje površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Boje",
+        "value": "siva, crvena"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "15 × 22 cm (siva), 15 × 25 cm (crvena)"
+      },
+      {
+        "label": "Oznaka u katalogu",
+        "value": "crvena 280 P, siva 400 P"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "paint-protector": {
+    "sourceHash": "9dafc6a90c0a93c2",
+    "productType": "Zaštita laka",
+    "subtype": "zaštita laka · površinska hemija · 2 pakovanja",
+    "shortDescription": "Paint Protector je sredstvo za zaštitu laka iz linije Befar, u pakovanjima od 250 g i 1000 g.",
+    "longDescription": "Paint Protector (tur. Boya Koruma) je sredstvo za zaštitu laka iz Befar programa površinske hemije (Surface Chemicals). Nanosi se na lakiranu površinu kao zaštitni sloj. Proizvođač ga nudi u pakovanjima od 250 g i 1000 g.",
+    "purpose": "Zaštita lakirane površine",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Pakovanja",
+        "value": "250 g, 1000 g"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "plastic-putty-aplicatior": {
+    "sourceHash": "435f15fd0e6c6793",
+    "displayName": "Plastic Putty Applicator",
+    "productType": "Plastična špahtla za git",
+    "subtype": "špahtla za git · plastična · 117 × 75 mm",
+    "shortDescription": "Plastic Putty Applicator je plastična špahtla za nanošenje gita iz linije Befar, dimenzije 117 × 75 mm.",
+    "longDescription": "Plastic Putty Applicator (tur. Plastik Macun Spatulası) je plastična špahtla za git iz linije Befar. Služi za nanošenje i razvlačenje gita po površini. Na sajtu proizvođača navedena je u dimenziji 117 × 75 mm.",
+    "purpose": "Nanošenje i razvlačenje gita",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "117 × 75 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "plate-type-felt-backing-pad": {
+    "sourceHash": "4ac453978aaab958",
+    "productType": "Podloška za filc, tanjirasti tip",
+    "subtype": "podloška (tanjir) · za filc · 180 mm",
+    "shortDescription": "Plate Type Felt Backing Pad je podloška tanjirastog tipa za filc iz linije Befar, prečnika 180 mm.",
+    "longDescription": "Plate Type Felt Backing Pad (tur. Tabak Tip Keçe Taban) je podloška tanjirastog tipa za filc iz Befar grupe podloški (Backing Pad Group). Katalog proizvođača je vodi na strani čičak podloški za polirne diskove (Velcro Basic Pad for Buffing Pad), sa oznakom Hard. Izrađuje se u prečniku 180 mm.",
+    "purpose": "Podloška za filc na mašini za poliranje",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "180 mm"
+      },
+      {
+        "label": "Oznaka u katalogu",
+        "value": "Hard"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "polishing-sponge-with-applicator": {
+    "sourceHash": "336dc978ea87fcb7",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · sa aplikatorom · 180 × 35 mm · 4 boje",
+    "shortDescription": "Polishing Sponge with Applicator je sunđer za poliranje sa aplikatorom (nosačem sa navojem), 180 × 35 mm, u 4 boje.",
+    "longDescription": "Polishing Sponge with Applicator je sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Befar, dimenzije 180 × 35 mm. Aplikator služi za montažu sunđera na polirku. Boja označava tvrdoću prema legendi proizvođača: narandžasta 5/5, bela 3/5, žuta 3/5, crna 1/5. Za belu, narandžastu i žutu katalog preporučuje tečnu ili krem polir pastu, a za crnu polir ili zaštitu laka.",
+    "purpose": "Mašinsko poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "180 × 35 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, žuta"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "narandžasta 5/5, bela 3/5, žuta 3/5, crna 1/5"
+      },
+      {
+        "label": "Preporučeno sredstvo",
+        "value": "bela, narandžasta i žuta: tečna ili krem polir pasta; crna: polir ili zaštita laka"
+      }
+    ],
+    "applications": [
+      "Poliranje tečnom ili krem polir pastom (bela, narandžasta, žuta)",
+      "Nanošenje polira ili zaštite laka (crna)"
+    ],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "sanding-block-hard-red": {
+    "sourceHash": "ca4aeebd5fde1b51",
+    "productType": "Brusni blok",
+    "subtype": "brusni blok · Hard Red · 3 veličine",
+    "shortDescription": "Sanding Block · Hard Red je brusni blok iz linije Befar u tvrdoj, crvenoj izvedbi, u 3 veličine.",
+    "longDescription": "Sanding Block (tur. Zımpara Takozu) je brusni blok iz Befar grupe Sanding Pad Group, ovde u izvedbi Hard Red — tvrdoj, crvene boje. Blok služi kao oslonac brusnom papiru pri ručnom brušenju. Proizvođač ga nudi u tri veličine: Standard, Middle (srednja) i Big (velika). U istom programu postoji i izvedba Soft Orange.",
+    "purpose": "Oslonac brusnom papiru pri ručnom brušenju",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Hard Red (tvrda, crvena)"
+      },
+      {
+        "label": "Veličine",
+        "value": "Standard, Middle (srednja), Big (velika)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "sanding-block-soft-orange": {
+    "sourceHash": "ecb55a18226ff527",
+    "productType": "Brusni blok",
+    "subtype": "brusni blok · Soft Orange · 3 veličine",
+    "shortDescription": "Sanding Block · Soft Orange je brusni blok iz linije Befar u mekoj, narandžastoj izvedbi, u 3 veličine.",
+    "longDescription": "Sanding Block (tur. Zımpara Takozu) je brusni blok iz Befar grupe Sanding Pad Group, ovde u izvedbi Soft Orange — mekoj, narandžaste boje. Blok služi kao oslonac brusnom papiru pri ručnom brušenju. Proizvođač ga nudi u tri veličine: Standard, Middle (srednja) i Big (velika). U istom programu postoji i izvedba Hard Red.",
+    "purpose": "Oslonac brusnom papiru pri ručnom brušenju",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Soft Orange (meka, narandžasta)"
+      },
+      {
+        "label": "Veličine",
+        "value": "Standard, Middle (srednja), Big (velika)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "sanding-pad": {
+    "sourceHash": "3633fe81d75b712b",
+    "productType": "Podloška za pneumatsku brusilicu",
+    "subtype": "podloška za brušenje · pneumatska brusilica · 150 mm",
+    "shortDescription": "Sanding Pad je podloška za brušenje za pneumatsku brusilicu iz linije Befar, prečnika 150 mm.",
+    "longDescription": "Sanding Pad (tur. Havalı Makina Zımpara Tabanı) je podloška za brušenje namenjena pneumatskoj brusilici, iz Befar grupe Sanding Pad Group. Podloška nosi brusni disk na mašini. Izrađuje se u prečniku 150 mm.",
+    "purpose": "Nošenje brusnog diska na pneumatskoj brusilici",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "sandwich-velcro-backing-pad": {
+    "sourceHash": "26e1fffdf6dc42a0",
+    "productType": "Čičak podloška za polirku",
+    "subtype": "podloška (tanjir) · čičak · Sandwich · 3 dimenzije",
+    "shortDescription": "Sandwich Velcro Backing Pad je čičak podloška (tanjir) u izvedbi Sandwich iz linije Befar, u prečnicima 125, 150 i 170 mm.",
+    "longDescription": "Sandwich Velcro Backing Pad (tur. Sandviç Cırt Taban) je čičak podloška (tanjir) u izvedbi Sandwich iz Befar grupe podloški (Backing Pad Group). Podloška nosi sunđer ili krzno za poliranje na polirki. Izrađuje se u prečnicima 125 mm, 150 mm i 170 mm.",
+    "purpose": "Nošenje čičak sunđera i krzna na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "125 mm, 150 mm, 170 mm"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Sandwich"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "soft-velcro-backing-pad": {
+    "sourceHash": "336122f4d4af7161",
+    "productType": "Čičak podloška za polirku",
+    "subtype": "podloška (tanjir) · čičak · Soft · 4 dimenzije",
+    "shortDescription": "Soft Velcro Backing Pad je meka čičak podloška (tanjir) iz linije Befar, u prečnicima 75, 125, 150 i 170 mm.",
+    "longDescription": "Soft Velcro Backing Pad je čičak podloška (tanjir) u mekoj izvedbi iz Befar grupe podloški (Backing Pad Group). Podloška nosi sunđer ili krzno za poliranje na polirki. U katalogu proizvođača vodi se kao Velcro Basic Pad Soft, a izrađuje se u prečnicima 75 mm, 125 mm, 150 mm i 170 mm.",
+    "purpose": "Nošenje čičak sunđera i krzna na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "75 mm, 125 mm, 150 mm, 170 mm"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Soft (meka)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "static-fail": {
+    "sourceHash": "6feaeea92a27da68",
+    "displayName": "Static Foil",
+    "productType": "Statička maskirna folija",
+    "subtype": "maskirna folija · statička · 2 dimenzije",
+    "shortDescription": "Static Foil je statička maskirna folija iz linije Befar, u dimenzijama 4 × 5 m i 4 × 150 m.",
+    "longDescription": "Static Foil (tur. Maskeleme Folyosu) je statička maskirna folija iz linije Befar. Maskirna folija štiti površine koje se ne lakiraju tokom lakiranja. Proizvođač je nudi u dimenzijama 4 × 5 m i 4 × 150 m.",
+    "purpose": "Zaštita površina koje se ne lakiraju tokom lakiranja",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "4 × 5 m, 4 × 150 m"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "tack-cloth": {
+    "sourceHash": "9bceb98007abfa96",
+    "productType": "Lepljiva krpa za prašinu",
+    "subtype": "lepljiva krpa za prašinu · Standard, Soft, Extra",
+    "shortDescription": "Tack Cloth je lepljiva krpa za prašinu iz linije Befar, u varijantama Standard, Soft i Extra.",
+    "longDescription": "Tack Cloth (tur. Mumlu Bez) je lepljiva krpa za prašinu iz linije Befar, kojom se pre lakiranja skuplja prašina sa površine. Prema katalogu proizvođača, Standard je namenjen sistemima na bazi rastvarača (90 × 36 cm, 23 g), Extra takođe sistemima na bazi rastvarača (75 × 36 cm, 18 g), a Soft je netkana krpa za vodorazredive i sisteme na bazi rastvarača.",
+    "purpose": "Skupljanje prašine sa površine pre lakiranja",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Varijante",
+        "value": "Standard, Soft, Extra"
+      },
+      {
+        "label": "Standard",
+        "value": "za sisteme na bazi rastvarača · 90 × 36 cm · 23 g"
+      },
+      {
+        "label": "Extra",
+        "value": "za sisteme na bazi rastvarača · 75 × 36 cm · 18 g"
+      },
+      {
+        "label": "Soft",
+        "value": "netkana krpa za vodorazredive i sisteme na bazi rastvarača"
+      }
+    ],
+    "applications": [
+      "Standard i Extra: sistemi na bazi rastvarača",
+      "Soft: vodorazredivi i sistemi na bazi rastvarača"
+    ],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "velcro-polishing-pad": {
+    "sourceHash": "d8d8e8265bc668f7",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 3 dimenzije · 7 boja",
+    "shortDescription": "Velcro Polishing Pad je sunđer za poliranje sa čičkom iz linije Befar, u 3 dimenzije i 7 boja.",
+    "longDescription": "Velcro Polishing Pad je sunđer za poliranje sa čičkom iz linije Befar, u dimenzijama 80 × 25 mm, 150 × 25 mm i 180 × 35 mm. Za dimenzije 150 × 25 mm i 180 × 35 mm boja označava tvrdoću prema legendi proizvođača: narandžasta 5/5, bela 3/5, žuta 3/5, crna 1/5. Za belu, narandžastu i žutu katalog preporučuje tečnu ili krem polir pastu, a za crnu polir ili zaštitu laka. Za dimenziju 80 × 25 mm, koja postoji u 7 boja, tvrdoća nije navedena.",
+    "purpose": "Mašinsko poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "80 × 25 mm, 150 × 25 mm, 180 × 35 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, žuta, plava, krem, bordo (plava, krem i bordo samo 80 × 25 mm)"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "narandžasta 5/5, bela 3/5, žuta 3/5, crna 1/5 (150 × 25 mm i 180 × 35 mm)"
+      },
+      {
+        "label": "Preporučeno sredstvo",
+        "value": "bela, narandžasta i žuta: tečna ili krem polir pasta; crna: polir ili zaštita laka"
+      }
+    ],
+    "applications": [
+      "Poliranje tečnom ili krem polir pastom (bela, narandžasta, žuta)",
+      "Nanošenje polira ili zaštite laka (crna)"
+    ],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, sunđer 150 × 25 mm koristi se sa čičak podloškom 125 mm, a sunđer 180 × 35 mm sa čičak podloškom 150 mm (Soft, Medium Hard ili Hard Velcro Backing Pad).",
+    "setContents": []
+  },
+  "velcro-woolpad": {
+    "sourceHash": "6b8b3308ae0e01f4",
+    "productType": "Krzno za poliranje sa čičkom",
+    "subtype": "krzno (vuna) za poliranje · čičak · 4 dimenzije",
+    "shortDescription": "Velcro Woolpad je krzno (vuna) za poliranje sa čičkom iz linije Befar, u prečnicima 80, 150, 160 i 180 mm.",
+    "longDescription": "Velcro Woolpad (tur. Kuzu Postu) je krzno (vuna) za poliranje sa čičkom iz linije Befar. Postavlja se na čičak podlošku polirke i koristi za mašinsko poliranje lakiranih površina. Izrađuje se u prečnicima 80 mm, 150 mm, 160 mm i 180 mm; u katalogu proizvođača vodi se kao beli Velcro Woolpad.",
+    "purpose": "Mašinsko poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "80 mm, 150 mm, 160 mm, 180 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "waffle-velcro-polishing-pad": {
+    "sourceHash": "aa4a0154216393bd",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje sa čičkom · vafl profil · 2 dimenzije · 6 boja",
+    "shortDescription": "Waffle Velcro Polishing Pad je sunđer za poliranje sa čičkom i vafl profilom iz linije Befar, u 2 dimenzije i 6 boja.",
+    "longDescription": "Waffle Velcro Polishing Pad je sunđer za poliranje sa čičkom i vafl profilom iz linije Befar, u dimenzijama 80 × 25 mm i 150 × 25 mm. Za dimenziju 150 × 25 mm boja označava tvrdoću prema legendi proizvođača: narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5, crna 1/5. Za belu, narandžastu, žutu i plavu katalog preporučuje tečnu ili krem polir pastu, a za crnu polir ili zaštitu laka. Za dimenziju 80 × 25 mm tvrdoća nije navedena.",
+    "purpose": "Mašinsko poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "80 × 25 mm, 150 × 25 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, žuta, plava, bordo (bordo samo 80 × 25 mm)"
+      },
+      {
+        "label": "Tvrdoća po boji",
+        "value": "narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5, crna 1/5 (150 × 25 mm)"
+      },
+      {
+        "label": "Preporučeno sredstvo",
+        "value": "bela, narandžasta, žuta i plava: tečna ili krem polir pasta; crna: polir ili zaštita laka"
+      }
+    ],
+    "applications": [
+      "Poliranje tečnom ili krem polir pastom (bela, narandžasta, žuta, plava)",
+      "Nanošenje polira ili zaštite laka (crna)"
+    ],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, sunđer 150 × 25 mm koristi se sa čičak podloškom 125 mm (Soft, Medium Hard ili Hard Velcro Backing Pad).",
+    "setContents": []
+  },
+  "with-applicator-compounding-pad": {
+    "sourceHash": "9cbe958e74b28424",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · sa aplikatorom · 150 × 45 mm · 4 boje",
+    "shortDescription": "With Applicator Compounding Pad je sunđer za poliranje sa aplikatorom (nosačem sa navojem), 150 × 45 mm, u 4 boje.",
+    "longDescription": "With Applicator Compounding Pad je sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Befar, dimenzije 150 × 45 mm. Aplikator služi za montažu sunđera na polirku. Dostupan je u beloj, narandžastoj, crnoj i žutoj boji; za ovu dimenziju proizvođač ne navodi tvrdoću po boji.",
+    "purpose": "Mašinsko poliranje lakiranih površina",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Befar"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 45 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, žuta"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  }
+}

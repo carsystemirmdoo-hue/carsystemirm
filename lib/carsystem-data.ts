@@ -1,6 +1,7 @@
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
 import { baslacCatalogProducts } from "@/lib/baslac-catalog-products";
+import { getBefarCatalogProducts } from "@/lib/befar-catalog-products";
 import {
   applyCarfitCatalogEnrichment,
   getCarfitCatalogProducts,
@@ -2414,6 +2415,10 @@ const productRecords: CarsystemProduct[] = [
   // (`npm run carfit:sync`). Ručni zapis koji je sync pouzdano prepoznao se NE
   // uvozi ponovo — dobija dopunu niže.
   ...getCarfitCatalogProducts(),
+  // BEFAR asortiman sa befar.com.tr i iz zvaničnog digitalnog kataloga
+  // (`npm run befar:sync`). Leo, Befar Plus i Turkuaz su linije brenda Befar.
+  // Ručni zapisi niže (`befarPadProducts`) ostaju netaknuti.
+  ...getBefarCatalogProducts(),
   ...befarPadProducts,
   ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),

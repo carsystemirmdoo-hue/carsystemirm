@@ -1,0 +1,133 @@
+{
+  "_comment": [
+    "Deterministički mapping BEFAR proizvoda → 12 platformskih kategorija (lib/productTaxonomy.mjs).",
+    "Befar stranice kategorija mešaju funkcije (na „Other products” su i sunđeri i folija i krpe), pa se mapira PO PROIZVODU: pravila se čitaju REDOM nad zvaničnim EN nazivom i prvo koje se poklopi pobeđuje.",
+    "Načelo je isto kao u data/carsystem-sync/ i data/carfit-sync/ taxonomy-map.json, da isti tip proizvoda tri brenda završi u istoj kategoriji (brusni blok → Pribor, netkani abraziv → Abrazivi, lepljiva krpa → Čišćenje, maskirna folija → Maskiranje).",
+    "`materialColour: true` = boja koju proizvođač navodi je boja SAMOG materijala (sunđer, blok, abraziv). Kod Befara boja sunđera znači tvrdoću, pa je pre svega činjenica varijante; kartica dobija boju samo kada cela porodica ima JEDNU boju.",
+    "Nijedna nova top-level kategorija nije uvedena; ništa ne ide u „ostalo”."
+  ],
+  "rules": [
+    {
+      "name": "static fail|static foil|masking",
+      "category": "maskiranje",
+      "programSlug": "potrosni-materijal",
+      "phaseSlug": "priprema",
+      "visualType": "neutral",
+      "note": "„Static Fail” je proizvođačev zapis za statičku maskirnu foliju (TR: Maskeleme Folyosu)"
+    },
+    {
+      "name": "tack cloth",
+      "category": "ciscenje",
+      "programSlug": "priprema-povrsine",
+      "phaseSlug": "priprema",
+      "visualType": "neutral"
+    },
+    {
+      "name": "putty aplicat|putty applicat",
+      "category": "pribor",
+      "programSlug": "potrosni-materijal",
+      "phaseSlug": "priprema",
+      "visualType": "neutral",
+      "note": "špahtla za git — pribor (kao Carsystem spreaders)"
+    },
+    {
+      "name": "non wowen abrasive|non woven abrasive",
+      "category": "abrazivi",
+      "programSlug": "abrazivi",
+      "phaseSlug": "priprema",
+      "visualType": "abrasive",
+      "materialColour": true
+    },
+    {
+      "name": "sanding block",
+      "category": "pribor",
+      "programSlug": "abrazivi",
+      "phaseSlug": "priprema",
+      "visualType": "neutral",
+      "materialColour": true,
+      "note": "brusni blok je nosač abraziva — Pribor (kao Carsystem i C.A.R.FIT)"
+    },
+    {
+      "name": "^backing pad$|^sanding pad$",
+      "category": "pribor",
+      "programSlug": "abrazivi",
+      "phaseSlug": "priprema",
+      "visualType": "neutral",
+      "note": "podloška i međupodloška za BRUŠENJE (stranica „Sanding Pad Group”; TR „Ara Taban” / „Zımpara Tabanı”) — nosač abraziva"
+    },
+    {
+      "name": "backing pad|sanding pad|felt backing|m14 adapter",
+      "category": "pribor",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral",
+      "note": "podloške/tanjiri i adapteri — nosači, ne materijal za poliranje"
+    },
+    {
+      "name": "ceramic paint protector|paint protector",
+      "category": "zastita",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral",
+      "note": "zaštita laka (uklj. keramički premaz)"
+    },
+    {
+      "name": "ceramic aplication block|ceramic application block|ceramic cloth",
+      "category": "pribor",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral",
+      "materialColour": true,
+      "note": "aplikatori za keramički premaz"
+    },
+    {
+      "name": "compound|polish|anti hologram|hologram",
+      "kinds": [
+        "product-row"
+      ],
+      "category": "poliranje",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral"
+    },
+    {
+      "name": "^(extra )?cream compound$",
+      "category": "poliranje",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral"
+    },
+    {
+      "name": "set$|set\\b",
+      "category": "poliranje",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral",
+      "note": "setovi za poliranje/detailing i restauraciju farova"
+    },
+    {
+      "name": "mikrofiber|microfiber",
+      "category": "poliranje",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "neutral",
+      "note": "krpe za skidanje paste — kao Carsystem finish cloths"
+    },
+    {
+      "name": "woolpad|wool pad",
+      "category": "poliranje",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "foam",
+      "materialColour": true
+    },
+    {
+      "name": "pad|sponge|foam",
+      "category": "poliranje",
+      "programSlug": "poliranje",
+      "phaseSlug": "poliranje",
+      "visualType": "foam",
+      "materialColour": true
+    }
+  ]
+}

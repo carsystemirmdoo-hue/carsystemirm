@@ -1,0 +1,103 @@
+{
+  "codeQueries": 185,
+  "codeFirstResult": 185,
+  "namedQueries": [
+    {
+      "kind": "naziv",
+      "query": "befar liquid compound",
+      "sourceKey": "liquid-compound",
+      "want": "befar-liquid-compound",
+      "top": "befar-liquid-compound",
+      "ok": true
+    },
+    {
+      "kind": "naziv",
+      "query": "anti hologram",
+      "sourceKey": "anti-hologram",
+      "want": "befar-anti-hologram",
+      "top": "befar-anti-hologram",
+      "ok": true
+    },
+    {
+      "kind": "naziv",
+      "query": "waffle velcro polishing pad",
+      "sourceKey": "waffle-velcro-polishing-pad",
+      "want": "befar-waffle-velcro-polishing-pad",
+      "top": "befar-waffle-velcro-polishing-pad",
+      "ok": true
+    },
+    {
+      "kind": "linija",
+      "query": "leo hamburger",
+      "sourceKey": "leo-hamburger-pad",
+      "want": "befar-leo-hamburger-pad",
+      "top": "befar-leo-hamburger-pad",
+      "ok": true
+    },
+    {
+      "kind": "linija",
+      "query": "turkuaz polish",
+      "sourceKey": "turkuaz-polish",
+      "want": "befar-turkuaz-polish",
+      "top": "befar-turkuaz-polish",
+      "ok": true
+    },
+    {
+      "kind": "linija",
+      "query": "leo",
+      "slugPrefix": "befar-leo",
+      "want": null,
+      "top": "befar-leo-ceramic-application-block",
+      "ok": true
+    },
+    {
+      "kind": "set",
+      "query": "headlight cleaning set",
+      "sourceKey": "headlight-cleaning-set",
+      "want": "befar-headlight-cleaning-set",
+      "top": "befar-headlight-cleaning-set",
+      "ok": true
+    },
+    {
+      "kind": "boja + dimenzija",
+      "query": "befar narandžasta 220 × 35 mm",
+      "sourceKey": "carved-velcro-polishing-pad",
+      "want": "befar-carved-velcro-polishing-pad",
+      "top": "befar-carved-velcro-polishing-pad",
+      "ok": true
+    },
+    {
+      "kind": "prečnik",
+      "query": "soft velcro backing pad 170 mm",
+      "sourceKey": "soft-velcro-backing-pad",
+      "want": "befar-soft-velcro-backing-pad",
+      "top": "befar-soft-velcro-backing-pad",
+      "ok": true
+    },
+    {
+      "kind": "broj rupa",
+      "query": "befar 62 rupa",
+      "sourceKey": "backing-pad",
+      "want": "befar-backing-pad",
+      "top": "befar-backing-pad",
+      "ok": true
+    },
+    {
+      "kind": "veličina",
+      "query": "befar 1000 g",
+      "slugPrefix": "befar-",
+      "want": null,
+      "top": "befar-anti-hologram",
+      "ok": true
+    },
+    {
+      "kind": "turski naziv",
+      "query": "maskeleme folyosu",
+      "slugPrefix": "befar-",
+      "want": null,
+      "top": "befar-static-foil",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

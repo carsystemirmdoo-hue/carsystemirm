@@ -1,0 +1,6138 @@
+{
+  "meta": {
+    "source": "https://en.befar.com.tr",
+    "controlSource": "https://www.befar.com.tr",
+    "architecture": "Wix; 19 stranica u pages-sitemap.xml; proizvodi su blokovi (ClassicSection) na stranicama kategorija, bez stranica pojedinačnih proizvoda",
+    "crawledAt": "2026-09-19T03:25:53.810Z",
+    "sitemapPages": 19,
+    "pagesWithProducts": 10,
+    "productBlocks": 66,
+    "codeRows": 202,
+    "distinctCodes": 185,
+    "pagesNotOk": [],
+    "languageCodeMismatches": [],
+    "strayCodes": [],
+    "blocksWithoutLine": [],
+    "blocksWithoutImages": [],
+    "cataloguePdfLinks": [
+      "_files/ugd/446a5e_9192e551cfa540ae95f10c5247f2587b.pdf"
+    ]
+  },
+  "pages": [
+    {
+      "key": "home",
+      "url": "https://en.befar.com.tr",
+      "urlTr": "https://www.befar.com.tr",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": null,
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:53.810Z"
+    },
+    {
+      "key": "1-litre-pasta-grubu",
+      "url": "https://en.befar.com.tr/1-litre-pasta-grubu",
+      "urlTr": "https://www.befar.com.tr/1-litre-pasta-grubu",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Surface Chemicals",
+      "productBlocks": 5,
+      "codes": 16,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:57.994Z"
+    },
+    {
+      "key": "amatör-grubu",
+      "url": "https://en.befar.com.tr/amatör-grubu",
+      "urlTr": "https://www.befar.com.tr/amatör-grubu",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Other products",
+      "productBlocks": 11,
+      "codes": 37,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:55.741Z"
+    },
+    {
+      "key": "aplikatörlü-polisaj-süngerleri",
+      "url": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "urlTr": "https://www.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Applicator Compounding Pads",
+      "productBlocks": 7,
+      "codes": 20,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:53.934Z"
+    },
+    {
+      "key": "befar-cırtlı-süngerler",
+      "url": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "urlTr": "https://www.befar.com.tr/befar-cırtlı-süngerler",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Velcro Polishing Pads",
+      "productBlocks": 9,
+      "codes": 43,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:26:01.973Z"
+    },
+    {
+      "key": "blank",
+      "url": "https://en.befar.com.tr/blank",
+      "urlTr": "https://www.befar.com.tr/blank",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Yeni Sayfa",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:55.860Z"
+    },
+    {
+      "key": "blog",
+      "url": "https://en.befar.com.tr/blog",
+      "urlTr": "https://www.befar.com.tr/blog",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Blog",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:56.014Z"
+    },
+    {
+      "key": "coming-soon-01",
+      "url": "https://en.befar.com.tr/coming-soon-01",
+      "urlTr": "https://www.befar.com.tr/coming-soon-01",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Açılış Sayfası",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:56.132Z"
+    },
+    {
+      "key": "contact-10",
+      "url": "https://en.befar.com.tr/contact-10",
+      "urlTr": "https://www.befar.com.tr/contact-10",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Contact",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:56.265Z"
+    },
+    {
+      "key": "contact-8",
+      "url": "https://en.befar.com.tr/contact-8",
+      "urlTr": "https://www.befar.com.tr/contact-8",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "İletişim",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:56.407Z"
+    },
+    {
+      "key": "diğer-ürünler",
+      "url": "https://en.befar.com.tr/diğer-ürünler",
+      "urlTr": "https://www.befar.com.tr/diğer-ürünler",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Yeni Sayfa",
+      "productBlocks": 3,
+      "codes": 3,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:56.600Z"
+    },
+    {
+      "key": "general-6",
+      "url": "https://en.befar.com.tr/general-6",
+      "urlTr": "https://www.befar.com.tr/general-6",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Genel",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:57.541Z"
+    },
+    {
+      "key": "hakkımızda",
+      "url": "https://en.befar.com.tr/hakkımızda",
+      "urlTr": "https://www.befar.com.tr/hakkımızda",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "About us",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:58.899Z"
+    },
+    {
+      "key": "leo-ürün-serisi",
+      "url": "https://en.befar.com.tr/leo-ürün-serisi",
+      "urlTr": "https://www.befar.com.tr/leo-ürün-serisi",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Leo Detailing Products",
+      "productBlocks": 11,
+      "codes": 37,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:58.160Z"
+    },
+    {
+      "key": "seramik-ürünleri",
+      "url": "https://en.befar.com.tr/seramik-ürünleri",
+      "urlTr": "https://www.befar.com.tr/seramik-ürünleri",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Ceramic Products",
+      "productBlocks": 3,
+      "codes": 6,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:59.625Z"
+    },
+    {
+      "key": "set-grubu",
+      "url": "https://en.befar.com.tr/set-grubu",
+      "urlTr": "https://www.befar.com.tr/set-grubu",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Sets",
+      "productBlocks": 4,
+      "codes": 4,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:58.980Z"
+    },
+    {
+      "key": "taban-grubu",
+      "url": "https://en.befar.com.tr/taban-grubu",
+      "urlTr": "https://www.befar.com.tr/taban-grubu",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Backing Pad Group",
+      "productBlocks": 6,
+      "codes": 18,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:59.048Z"
+    },
+    {
+      "key": "zımpara-grubu",
+      "url": "https://en.befar.com.tr/zımpara-grubu",
+      "urlTr": "https://www.befar.com.tr/zımpara-grubu",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Sanding Pad Group",
+      "productBlocks": 7,
+      "codes": 15,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:59.127Z"
+    },
+    {
+      "key": "ürünlerimiz",
+      "url": "https://en.befar.com.tr/ürünlerimiz",
+      "urlTr": "https://www.befar.com.tr/ürünlerimiz",
+      "httpStatus": 200,
+      "httpStatusTr": 200,
+      "category": "Products",
+      "productBlocks": 0,
+      "codes": 0,
+      "languageCodeMismatch": {
+        "onlyEn": [],
+        "onlyTr": []
+      },
+      "strayCodes": [],
+      "fetchedAt": "2026-09-19T03:25:59.191Z"
+    }
+  ],
+  "blocks": [
+    {
+      "blockKey": "1-litre-pasta-grubu#1",
+      "pageKey": "1-litre-pasta-grubu",
+      "pageUrl": "https://en.befar.com.tr/1-litre-pasta-grubu",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomdi",
+      "title": "1000gr. Surface Chemicals",
+      "columns": [
+        "product",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "75011",
+          "product": "Liquid Compound",
+          "colour": null,
+          "size": "1000 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Likit Pasta",
+          "colourTr": null
+        },
+        {
+          "code": "80011",
+          "product": "Auto Polish",
+          "colour": null,
+          "size": "1000 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Oto Cilası",
+          "colourTr": null
+        },
+        {
+          "code": "85011",
+          "product": "Anti Hologram",
+          "colour": null,
+          "size": "1000 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Hare Giderici",
+          "colourTr": null
+        },
+        {
+          "code": "90011",
+          "product": "Paint Protector",
+          "colour": null,
+          "size": "1000 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Boya Koruma",
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_446e7e65d7ca47299e8ae57bbd2e306c~mv2.jpg",
+          "crop": null,
+          "title": "Liquid Paste",
+          "fileName": "446a5e_446e7e65d7ca47299e8ae57bbd2e306c~mv2.jpg",
+          "titleTr": "Likit Pasta"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_660fa8fe410543ce8744c244a6f41d16~mv2.jpg",
+          "crop": null,
+          "title": "Varnish",
+          "fileName": "446a5e_660fa8fe410543ce8744c244a6f41d16~mv2.jpg",
+          "titleTr": "Cila"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_be1b37e98f3c474cb0ace7618cf61838~mv2.jpg",
+          "crop": null,
+          "title": "Moire Remover",
+          "fileName": "446a5e_be1b37e98f3c474cb0ace7618cf61838~mv2.jpg",
+          "titleTr": "Hare Giderici"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_7aa5d1c91b504845a92d2969f69aaf41~mv2.jpg",
+          "crop": null,
+          "title": "Paint Protection",
+          "fileName": "446a5e_7aa5d1c91b504845a92d2969f69aaf41~mv2.jpg",
+          "titleTr": "Boya Koruma"
+        }
+      ],
+      "category": "Surface Chemicals",
+      "titleTr": "1000gr. Yüzey Kimyasalları",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "1-litre-pasta-grubu#2",
+      "pageKey": "1-litre-pasta-grubu",
+      "pageUrl": "https://en.befar.com.tr/1-litre-pasta-grubu",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomdj",
+      "title": "250gr. Surface Chemicals",
+      "columns": [
+        "product",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "75250",
+          "product": "Liquid Compound",
+          "colour": null,
+          "size": "250 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Likit Pasta",
+          "colourTr": null
+        },
+        {
+          "code": "80250",
+          "product": "Auto Polish",
+          "colour": null,
+          "size": "250 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Oto Cilası",
+          "colourTr": null
+        },
+        {
+          "code": "85250",
+          "product": "Anti Hologram",
+          "colour": null,
+          "size": "250 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Hare Giderici",
+          "colourTr": null
+        },
+        {
+          "code": "90250",
+          "product": "Paint Protector",
+          "colour": null,
+          "size": "250 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Boya Koruma",
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_8b21b77ac83c41c1bb17fb5ddd0d51e3~mv2.jpg",
+          "crop": null,
+          "title": "250gr Liquid Paste",
+          "fileName": "446a5e_8b21b77ac83c41c1bb17fb5ddd0d51e3~mv2.jpg",
+          "titleTr": "250gr. Likit Pasta"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_899119ecd6254d31b3c8d43b4306f7b1~mv2.jpg",
+          "crop": null,
+          "title": "250gr. Car Polish",
+          "fileName": "446a5e_899119ecd6254d31b3c8d43b4306f7b1~mv2.jpg",
+          "titleTr": "250gr. Oto Cilası"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_bc73ef97db604e149e346aa6c7c6d46a~mv2.jpg",
+          "crop": null,
+          "title": "250gr. Paint Protection",
+          "fileName": "446a5e_bc73ef97db604e149e346aa6c7c6d46a~mv2.jpg",
+          "titleTr": "250gr. Boya Koruma"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_c67de7a45a254cecb02d2f6b9f502c74~mv2.jpg",
+          "crop": null,
+          "title": "250gr. Moire Remover",
+          "fileName": "446a5e_c67de7a45a254cecb02d2f6b9f502c74~mv2.jpg",
+          "titleTr": "250gr. Hare Giderici"
+        }
+      ],
+      "category": "Surface Chemicals",
+      "titleTr": "250gr. Yüzey Kimyasalları",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "1-litre-pasta-grubu#3",
+      "pageKey": "1-litre-pasta-grubu",
+      "pageUrl": "https://en.befar.com.tr/1-litre-pasta-grubu",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomdj1",
+      "title": "Cream Compound",
+      "columns": [
+        "product",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "60125",
+          "product": null,
+          "colour": null,
+          "size": "125 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "60300",
+          "product": null,
+          "colour": null,
+          "size": "300 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "60000",
+          "product": null,
+          "colour": null,
+          "size": "1000 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_c024c2eb64834e839e2cbb07b9944bdd~mv2.jpg",
+          "crop": null,
+          "title": "Cream Cake",
+          "fileName": "446a5e_c024c2eb64834e839e2cbb07b9944bdd~mv2.jpg",
+          "titleTr": "Krem Pasta"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_8b08455e20c24a69a841c8b88f77258b~mv2.jpg",
+          "crop": null,
+          "title": "Cream Cake",
+          "fileName": "446a5e_8b08455e20c24a69a841c8b88f77258b~mv2.jpg",
+          "titleTr": "Krem Pasta"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_a1eb4c5c2a15492bb90e83caae894004~mv2.jpg",
+          "crop": null,
+          "title": "Cream Cake",
+          "fileName": "446a5e_a1eb4c5c2a15492bb90e83caae894004~mv2.jpg",
+          "titleTr": "Krem Pasta"
+        }
+      ],
+      "category": "Surface Chemicals",
+      "titleTr": "Krem Pasta",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "1-litre-pasta-grubu#4",
+      "pageKey": "1-litre-pasta-grubu",
+      "pageUrl": "https://en.befar.com.tr/1-litre-pasta-grubu",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomdj2",
+      "title": "Extra Cream Compound",
+      "columns": [
+        "product",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "EXTRA"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "76125",
+          "product": "Cream Compound",
+          "colour": null,
+          "size": "125 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Krem Pasta",
+          "colourTr": null
+        },
+        {
+          "code": "76300",
+          "product": "Cream Compound",
+          "colour": null,
+          "size": "300 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Krem Pasta",
+          "colourTr": null
+        },
+        {
+          "code": "76000",
+          "product": "Cream Compound",
+          "colour": null,
+          "size": "1000 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Krem Pasta",
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_631ed56267504052a7c5e5c43839722d~mv2.jpg",
+          "crop": null,
+          "title": "Extra Cream Cake",
+          "fileName": "446a5e_631ed56267504052a7c5e5c43839722d~mv2.jpg",
+          "titleTr": "Ekstra Krem Pasta"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5f3de9332c02414b956f288f246264ba~mv2.jpg",
+          "crop": null,
+          "title": "Extra Cream Cake",
+          "fileName": "446a5e_5f3de9332c02414b956f288f246264ba~mv2.jpg",
+          "titleTr": "Ekstra Krem Pasta"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_113fe794ad3946bcaf3167423942edef~mv2.jpg",
+          "crop": null,
+          "title": "Extra Cream Cake",
+          "fileName": "446a5e_113fe794ad3946bcaf3167423942edef~mv2.jpg",
+          "titleTr": "Ekstra Krem Pasta"
+        }
+      ],
+      "category": "Surface Chemicals",
+      "titleTr": "Ekstra Krem Pasta",
+      "qualifiersTr": [
+        "EKSTRA"
+      ]
+    },
+    {
+      "blockKey": "1-litre-pasta-grubu#5",
+      "pageKey": "1-litre-pasta-grubu",
+      "pageUrl": "https://en.befar.com.tr/1-litre-pasta-grubu",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bomdk",
+      "title": "Turkuaz Compound - Turkuaz Polish",
+      "columns": [
+        "product",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Turkuaz",
+      "lines": [
+        "Turkuaz"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "70041",
+          "product": "Compound",
+          "colour": null,
+          "size": "250 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Pasta",
+          "colourTr": null
+        },
+        {
+          "code": "70046",
+          "product": "Polish",
+          "colour": null,
+          "size": "250 gr.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Cila",
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_74c4ce72c2a04d8ea6e19224632b1d03~mv2.jpg",
+          "crop": {
+            "x": 0,
+            "y": 384,
+            "w": 2884,
+            "h": 2959
+          },
+          "title": null,
+          "fileName": "DSC_0220.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Surface Chemicals",
+      "titleTr": "Turkuaz Pasta Cila",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#1",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomdu",
+      "title": "Hand Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "12101",
+          "product": null,
+          "colour": "White",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "12102",
+          "product": null,
+          "colour": "Orange",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "12103",
+          "product": null,
+          "colour": "Black",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "12104",
+          "product": null,
+          "colour": "Yellow",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "12105",
+          "product": null,
+          "colour": "Blue",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "12106",
+          "product": null,
+          "colour": "Cream",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "12107",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "145x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_f91c7aa183434309a7f56fb9080fa230~mv2.jpg",
+          "crop": {
+            "x": 372,
+            "y": 0,
+            "w": 3863,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0349.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "El Tipi Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#2",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomdu1",
+      "title": "Wax Pad Conical Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "131011",
+          "product": null,
+          "colour": "White",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "131021",
+          "product": null,
+          "colour": "Orange",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "131031",
+          "product": null,
+          "colour": "Black",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "131041",
+          "product": null,
+          "colour": "Yellow",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "131051",
+          "product": null,
+          "colour": "Blue",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "131061",
+          "product": null,
+          "colour": "Cream",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "131071",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "115x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_a334c401f8f14bfca1fa4495b343bb75~mv2.jpg",
+          "crop": {
+            "x": 526,
+            "y": 0,
+            "w": 3862,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0110.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Wax Süngeri Konik Kesim",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#3",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomdv",
+      "title": "Leo Hamburger Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "90207",
+          "product": null,
+          "colour": null,
+          "size": "115x33mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_9ec2a059c64546cea38fa9ac82c9a705~mv2.jpg",
+          "crop": null,
+          "title": "Leo Hamburger Sponge",
+          "fileName": "446a5e_9ec2a059c64546cea38fa9ac82c9a705~mv2.jpg",
+          "titleTr": "Leo Hamburger Sünger"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_70b0f4f125c04e808c76552d93f0faf4~mv2.jpg",
+          "crop": null,
+          "title": "Leo Hamburger Sponge",
+          "fileName": "446a5e_70b0f4f125c04e808c76552d93f0faf4~mv2.jpg",
+          "titleTr": "Leo Hamburger Sünger"
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Leo Hamburger Sünger",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#4",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomdv1",
+      "title": "Mikrofiber Clothes",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar",
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "01401",
+          "product": null,
+          "colour": null,
+          "size": "40x40cm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "01405",
+          "product": null,
+          "colour": null,
+          "size": "40x60cm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5a908dfb56cd45219801c6c88bb98d38~mv2.jpg",
+          "crop": null,
+          "title": "Microfiber Cloth",
+          "fileName": "446a5e_5a908dfb56cd45219801c6c88bb98d38~mv2.jpg",
+          "titleTr": "Mikrofiber Bez"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_85335ea35a794a9f956f68e1eb79cda1~mv2.jpg",
+          "crop": null,
+          "title": "Microfiber Cloth",
+          "fileName": "446a5e_85335ea35a794a9f956f68e1eb79cda1~mv2.jpg",
+          "titleTr": "Mikrofiber Bez"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_77c448bf737749eeab493025cdec9924~mv2.jpg",
+          "crop": null,
+          "title": "Microfiber Cloth",
+          "fileName": "446a5e_77c448bf737749eeab493025cdec9924~mv2.jpg",
+          "titleTr": "Mikrofiber Bez"
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Mikrofiber Bez",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#5",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bomdv2",
+      "title": "Headligh, Rim, Drill Style M14 Adaptores",
+      "columns": [
+        "product",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "97200",
+          "product": "Drill Type Wheel Cleaning Pad",
+          "colour": null,
+          "size": "80mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Matkap Tip Jant Temizleme Sün.",
+          "colourTr": null
+        },
+        {
+          "code": "97400",
+          "product": "M14 Adapter",
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "M14 Adaptör",
+          "colourTr": null
+        },
+        {
+          "code": "83424",
+          "product": "Drill Type Headlight Cleaning Pad.",
+          "colour": null,
+          "size": "80mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": "Matkap Tip Far Temizleme Sün.",
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4ef60c88e143423fb5a085edca6ac04e~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_4ef60c88e143423fb5a085edca6ac04e~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_32f913a56a5947efac5b15da173af54e~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_32f913a56a5947efac5b15da173af54e~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_def53463ee5f4f6ea6463f5757cb3be4~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_def53463ee5f4f6ea6463f5757cb3be4~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Far, Jant, Adaptör Aparatları",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#6",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 6,
+      "sectionId": "comp-lr9bomdv3",
+      "title": "Static Fail",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "64005",
+          "product": null,
+          "colour": null,
+          "size": "4x5m²",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "64150",
+          "product": null,
+          "colour": null,
+          "size": "4x150m²",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_14cd6c846ead442aae4b4236ef965bd9~mv2.jpg",
+          "crop": {
+            "x": 513,
+            "y": 353,
+            "w": 3874,
+            "h": 2561
+          },
+          "title": null,
+          "fileName": "DSC_0536.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Maskeleme Folyosu",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#7",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 7,
+      "sectionId": "comp-lr9bomdw",
+      "title": "Static Fail",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Turkuaz",
+      "lines": [
+        "Turkuaz"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "79005",
+          "product": null,
+          "colour": null,
+          "size": "4x5m²",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "79120",
+          "product": null,
+          "colour": null,
+          "size": "4x120m²",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "79130",
+          "product": null,
+          "colour": null,
+          "size": "4x130m²",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "79150",
+          "product": null,
+          "colour": null,
+          "size": "4x150m²",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_c004fa3aa9314451bb14e2e6d9eed316~mv2.jpg",
+          "crop": {
+            "x": 364,
+            "y": 243,
+            "w": 3854,
+            "h": 2574
+          },
+          "title": null,
+          "fileName": "DSC_0532.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Maskeleme Folyosu",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#8",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 8,
+      "sectionId": "comp-lr9bomdw1",
+      "title": "Tack Cloth",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "34520",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "34515",
+          "product": null,
+          "colour": null,
+          "size": "Soft",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "34510",
+          "product": null,
+          "colour": null,
+          "size": "Extra",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_be0c3ffa797b42e6a0a27a373d005414~mv2.jpg",
+          "crop": {
+            "x": 183,
+            "y": 259,
+            "w": 2505,
+            "h": 1676
+          },
+          "title": null,
+          "fileName": "DSC_0409_edited.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Mumlu Bez",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#9",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 9,
+      "sectionId": "comp-lr9bomdw2",
+      "title": "Velcro Woolpad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "07400",
+          "product": null,
+          "colour": null,
+          "size": "80mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "07404",
+          "product": null,
+          "colour": "White",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "07405",
+          "product": null,
+          "colour": null,
+          "size": "160mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "07406",
+          "product": null,
+          "colour": null,
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_fdf9ae2401d84000beeaf0f5b7107ec1~mv2.jpg",
+          "crop": {
+            "x": 2,
+            "y": 0,
+            "w": 2997,
+            "h": 2000
+          },
+          "title": null,
+          "fileName": "DSC_0415_1_edited.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Kuzu Postu",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#10",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 10,
+      "sectionId": "comp-lr9bomdw3",
+      "title": "Plus Velcro Woolpad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "07604",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "07605",
+          "product": null,
+          "colour": "Yellow",
+          "size": "160mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "07606",
+          "product": null,
+          "colour": null,
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_fc00efda5f534606a4eb9e4559c78b5f~mv2.jpg",
+          "crop": {
+            "x": 2,
+            "y": 0,
+            "w": 2997,
+            "h": 2000
+          },
+          "title": null,
+          "fileName": "DSC_0234_edited.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Plus Kuzu Postu",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "amatör-grubu#11",
+      "pageKey": "amatör-grubu",
+      "pageUrl": "https://en.befar.com.tr/amatör-grubu",
+      "language": "en",
+      "order": 11,
+      "sectionId": "comp-lr9bomdw4",
+      "title": "Plastic Putty Aplicatior",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "87101",
+          "product": null,
+          "colour": null,
+          "size": "117x75mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_454a7b78c3a34095bde124721e0c4ba6~mv2.jpg",
+          "crop": {
+            "x": 336,
+            "y": 224,
+            "w": 2329,
+            "h": 1554
+          },
+          "title": null,
+          "fileName": "DSC_0341_edited.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Other products",
+      "titleTr": "Plastik Macun Spatulası",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#1",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomda",
+      "title": "Leo Premium Advance With Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Premium"
+      ],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "59507ADV",
+          "product": null,
+          "colour": "Claret Red",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_0becaab02b63468fbdf9a43cd2719239~mv2.jpg",
+          "crop": {
+            "x": 461,
+            "y": 0,
+            "w": 3348,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0251_1.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Leo Premium Advance Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": [
+        "Premium"
+      ]
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#2",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomda1",
+      "title": "Leo Premium Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Premium"
+      ],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "59507",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e892b214483946478a83fa57bad860a5~mv2.jpg",
+          "crop": null,
+          "title": "Leo Premium Applicator Polishing Sponge",
+          "fileName": "446a5e_e892b214483946478a83fa57bad860a5~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_cd890cf9aba1487ebc9973f0c5adfb9d~mv2.jpg",
+          "crop": null,
+          "title": "Leo Premium Applicator Polishing Sponge",
+          "fileName": "446a5e_cd890cf9aba1487ebc9973f0c5adfb9d~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Leo Premium Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": [
+        "Premium"
+      ]
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#3",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomda2",
+      "title": "With Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "52402",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "52405",
+          "product": null,
+          "colour": "blue",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#368FD9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "52406",
+          "product": null,
+          "colour": "Cream",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "52407",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_f87112f4769a4218a148d1024b706f41~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Blue",
+          "fileName": "446a5e_f87112f4769a4218a148d1024b706f41~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_ec234db8cc5a4826925b5156d3ad3b6b~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge Cream with Applicator",
+          "fileName": "446a5e_ec234db8cc5a4826925b5156d3ad3b6b~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_18a0baec24434983877febf72eec288c~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Orange",
+          "fileName": "446a5e_18a0baec24434983877febf72eec288c~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_9d9cebb9c3c64547a92d60e6d9374a9b~mv2.jpg",
+          "crop": null,
+          "title": "Applicator Polishing Sponge Claret Red",
+          "fileName": "446a5e_9d9cebb9c3c64547a92d60e6d9374a9b~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_3c835daf60bd424b92e932f598bc5093~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator",
+          "fileName": "446a5e_3c835daf60bd424b92e932f598bc5093~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#4",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomdb",
+      "title": "With Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "024012",
+          "product": null,
+          "colour": "White",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "024022",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "024032",
+          "product": null,
+          "colour": "Black",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "024042",
+          "product": null,
+          "colour": "Yellow",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_24ed130b7d7f4e23bc11b28e99bd2888~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Black",
+          "fileName": "446a5e_24ed130b7d7f4e23bc11b28e99bd2888~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_264b63a619d844fc8977bbfbd4dc1bab~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Orange",
+          "fileName": "446a5e_264b63a619d844fc8977bbfbd4dc1bab~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_3c187130d9434ee1ad69282d951953d6~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Yellow",
+          "fileName": "446a5e_3c187130d9434ee1ad69282d951953d6~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_0a456a63fd1e435fa80f0026737e245b~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator White",
+          "fileName": "446a5e_0a456a63fd1e435fa80f0026737e245b~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#5",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bomdb1",
+      "title": "With Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Turkuaz",
+      "lines": [
+        "Turkuaz"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "77102",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "77101",
+          "product": null,
+          "colour": "Beyaz",
+          "size": "150x45mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_3221ae7bb60c4f15809ccf5abe8fd7f9~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "DSC_0189.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#6",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 6,
+      "sectionId": "comp-lr9bomdb2",
+      "title": "With Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "11002",
+          "product": null,
+          "colour": "Orange",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "11005",
+          "product": null,
+          "colour": "Blue",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#368FD9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "11006",
+          "product": null,
+          "colour": "Cream",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "11007",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_2319c65f517249499284a9166baae237~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Orange",
+          "fileName": "446a5e_2319c65f517249499284a9166baae237~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_0439bc391e35493eb49845ba04532165~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Blue",
+          "fileName": "446a5e_0439bc391e35493eb49845ba04532165~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_2f9cc769d3bf4829804734d8fe744587~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge Cream with Applicator",
+          "fileName": "446a5e_2f9cc769d3bf4829804734d8fe744587~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_edc17eca07d14c0992f9d8301a5be986~mv2.jpg",
+          "crop": null,
+          "title": "Applicator Polishing Sponge Claret Red",
+          "fileName": "446a5e_edc17eca07d14c0992f9d8301a5be986~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4d0affdf6d404baaabecb570a7379ced~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator",
+          "fileName": "446a5e_4d0affdf6d404baaabecb570a7379ced~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "aplikatörlü-polisaj-süngerleri#7",
+      "pageKey": "aplikatörlü-polisaj-süngerleri",
+      "pageUrl": "https://en.befar.com.tr/aplikatörlü-polisaj-süngerleri",
+      "language": "en",
+      "order": 7,
+      "sectionId": "comp-lr9bomdb3",
+      "title": "Polishing Sponge with Applicator",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "10101",
+          "product": null,
+          "colour": "White",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "10102",
+          "product": null,
+          "colour": "Orange",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "10103",
+          "product": null,
+          "colour": "Black",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "10104",
+          "product": null,
+          "colour": "Yellow",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_3abdb9b5504f4ab99531f0c673ecfaf5~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Black",
+          "fileName": "446a5e_3abdb9b5504f4ab99531f0c673ecfaf5~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e87913a06b2a45b083174248491ce0eb~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Yellow",
+          "fileName": "446a5e_e87913a06b2a45b083174248491ce0eb~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_161d504b905248c684022f89ecf79ba4~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator Orange",
+          "fileName": "446a5e_161d504b905248c684022f89ecf79ba4~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_589b16f250e346729c1078e19ea00d88~mv2.jpg",
+          "crop": null,
+          "title": "Polishing Sponge with Applicator White",
+          "fileName": "446a5e_589b16f250e346729c1078e19ea00d88~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_61e9231c99554fcd8fc834730aa458e9~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_61e9231c99554fcd8fc834730aa458e9~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Applicator Compounding Pads",
+      "titleTr": "Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#1",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomd5",
+      "title": "Ellipse Corrugated Polishing Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar",
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "20101",
+          "product": null,
+          "colour": "White",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "20102",
+          "product": null,
+          "colour": "Orange",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "20104",
+          "product": null,
+          "colour": "Yellow",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "20105",
+          "product": null,
+          "colour": "blue",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_228551a00820444692afd6d037ec989c~mv2.jpg",
+          "crop": null,
+          "title": "Ellipse Grooved Velcro Polishing Sponge Blue",
+          "fileName": "446a5e_228551a00820444692afd6d037ec989c~mv2.jpg",
+          "titleTr": "Elips Oluklu Cırtlı Polisaj Süngeri Mavi"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4f7643fb0e3f430788b21b143dbd13dc~mv2.jpg",
+          "crop": null,
+          "title": "Ellipse Grooved Velcro Polishing Sponge Orange",
+          "fileName": "446a5e_4f7643fb0e3f430788b21b143dbd13dc~mv2.jpg",
+          "titleTr": "Elips Oluklu Cırtlı Polisaj Süngeri Turuncu"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_91b73e722ee5471fb5d3dacc3c6cdf9b~mv2.jpg",
+          "crop": null,
+          "title": "Ellipse Grooved Velcro Polishing Sponge Yellow",
+          "fileName": "446a5e_91b73e722ee5471fb5d3dacc3c6cdf9b~mv2.jpg",
+          "titleTr": "Elips Oluklu Cırtlı Polisaj Süngeri Sarı"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_b169778b08194a059b1e766c008a4a41~mv2.jpg",
+          "crop": null,
+          "title": "Ellipse Grooved Velcro Polishing Sponge White",
+          "fileName": "446a5e_b169778b08194a059b1e766c008a4a41~mv2.jpg",
+          "titleTr": "Elips Oluklu Cırtlı Polisaj Süngeri Beyaz"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_aceb0de292dc4f53903ac63e89b33250~mv2.jpg",
+          "crop": null,
+          "title": "Ellipse Grooved Velcro Polishing Sponge",
+          "fileName": "446a5e_aceb0de292dc4f53903ac63e89b33250~mv2.jpg",
+          "titleTr": "Elips Oluklu Cırtlı Polisaj Süngeri"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Elips Oluklu Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#2",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomd51",
+      "title": "Carved Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar",
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "05801",
+          "product": null,
+          "colour": "White",
+          "size": "220x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "05802",
+          "product": null,
+          "colour": "Orange",
+          "size": "220x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "58405",
+          "product": null,
+          "colour": "Blue",
+          "size": "220x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "58406",
+          "product": null,
+          "colour": "Cream",
+          "size": "220x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "58407",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "220x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_d70d328ecf0a4b48ab8bd8e2545b7db3~mv2.jpg",
+          "crop": null,
+          "title": "Carved Velcro Polishing Sponge",
+          "fileName": "446a5e_d70d328ecf0a4b48ab8bd8e2545b7db3~mv2.jpg",
+          "titleTr": "Oymalı Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4c7650228a4c45cc99cc96d57cc24e40~mv2.jpg",
+          "crop": null,
+          "title": "Carved Velcro Polishing Sponge Cream",
+          "fileName": "446a5e_4c7650228a4c45cc99cc96d57cc24e40~mv2.jpg",
+          "titleTr": "Oymalı Cırtlı Polisaj Süngeri Krem"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_59fd74dec61a469b984bcc8703850abd~mv2.jpg",
+          "crop": null,
+          "title": "Carved Velcro Polishing Sponge Claret Red",
+          "fileName": "446a5e_59fd74dec61a469b984bcc8703850abd~mv2.jpg",
+          "titleTr": "Oymalı Cırtlı Polisaj Süngeri Bordo"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_3685d3e2ba0d418395bd276dffb8f286~mv2.jpg",
+          "crop": null,
+          "title": "Carved Velcro Polishing Sponge",
+          "fileName": "446a5e_3685d3e2ba0d418395bd276dffb8f286~mv2.jpg",
+          "titleTr": "Oymalı Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_9c700bb6913b4b24b84091e786c0019d~mv2.jpg",
+          "crop": null,
+          "title": "Carved Velcro Polishing Sponge Blue",
+          "fileName": "446a5e_9c700bb6913b4b24b84091e786c0019d~mv2.jpg",
+          "titleTr": "Oymalı Cırtlı Polisaj Süngeri Mavi"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_b766c00099714824a93ccc4b99f9c08f~mv2.jpg",
+          "crop": null,
+          "title": "Carved Velcro Polishing Sponge Orange",
+          "fileName": "446a5e_b766c00099714824a93ccc4b99f9c08f~mv2.jpg",
+          "titleTr": "Oymalı Cırtlı Polisaj Süngeri Turuncu"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Oymalı Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#3",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomd52",
+      "title": "Velcro Polishing Pad",
+      "columns": [
+        "size",
+        "colour",
+        "code"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar",
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "44801",
+          "product": null,
+          "colour": "White",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "44802",
+          "product": null,
+          "colour": "Orange",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "44803",
+          "product": null,
+          "colour": "Black",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "44804",
+          "product": null,
+          "colour": "Yellow",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "44805",
+          "product": null,
+          "colour": "Blue",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "44806",
+          "product": null,
+          "colour": "Cream",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "44807",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_2cbb0eba28174ee98818c3173444c0e5~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_2cbb0eba28174ee98818c3173444c0e5~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_c1faeb900a01416a9df999937a7ba19d~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_c1faeb900a01416a9df999937a7ba19d~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#4",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomd6",
+      "title": "Waffle Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar",
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "448011",
+          "product": null,
+          "colour": "White",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "448021",
+          "product": null,
+          "colour": "Orange",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "448031",
+          "product": null,
+          "colour": "Black",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "448041",
+          "product": null,
+          "colour": "Yellow",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "448051",
+          "product": null,
+          "colour": "Blue",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "448061",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "80x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_f2114abbee49478ea4693d321c4077c1~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "waffle.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Waffle Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#5",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bomd61",
+      "title": "Waffle Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar",
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "04501",
+          "product": null,
+          "colour": "White",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "04502",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "04503",
+          "product": null,
+          "colour": "Black",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "04504",
+          "product": null,
+          "colour": "Yellow",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "04505",
+          "product": null,
+          "colour": "Blue",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5f45d096944b4c0cbcf06e5b0f0b6bbb~mv2.jpg",
+          "crop": null,
+          "title": "Waffle Velcro Polishing Sponge",
+          "fileName": "446a5e_5f45d096944b4c0cbcf06e5b0f0b6bbb~mv2.jpg",
+          "titleTr": "Waffle Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_f6ad8a42685c43678b68752f4ec0c784~mv2.jpg",
+          "crop": null,
+          "title": "Waffle Velcro Polishing Sponge White",
+          "fileName": "446a5e_f6ad8a42685c43678b68752f4ec0c784~mv2.jpg",
+          "titleTr": "Waffle Cırtlı Polisaj Süngeri Beyaz"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_c561e3b3c599402298d8862bbddf6ac8~mv2.jpg",
+          "crop": null,
+          "title": "Waffle Velcro Polishing Sponge Orange",
+          "fileName": "446a5e_c561e3b3c599402298d8862bbddf6ac8~mv2.jpg",
+          "titleTr": "Waffle Cırtlı Polisaj Süngeri Turuncu"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_38d61ba26f6048509c8ccfb0622910b5~mv2.jpg",
+          "crop": null,
+          "title": "Waffle Velcro Polishing Sponge Yellow",
+          "fileName": "446a5e_38d61ba26f6048509c8ccfb0622910b5~mv2.jpg",
+          "titleTr": "Waffle Cırtlı Polisaj Süngeri Sarı"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_8f3e07e8cb6d44f28c621ec78922abde~mv2.jpg",
+          "crop": null,
+          "title": "Waffle Velcro Polishing Sponge Yellow",
+          "fileName": "446a5e_8f3e07e8cb6d44f28c621ec78922abde~mv2.jpg",
+          "titleTr": "Waffle Cırtlı Polisaj Süngeri Sarı"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_2f82425cf2d64e6096b80f4b0c46cd1c~mv2.jpg",
+          "crop": null,
+          "title": "Waffle Velcro Polishing Sponge Blue",
+          "fileName": "446a5e_2f82425cf2d64e6096b80f4b0c46cd1c~mv2.jpg",
+          "titleTr": "Waffle Cırtlı Polisaj Süngeri Mavi"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Waffle Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#6",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 6,
+      "sectionId": "comp-lr9bomd62",
+      "title": "Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "54402",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "54405",
+          "product": null,
+          "colour": "blue",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "54406",
+          "product": null,
+          "colour": "Cream",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "54407",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_34962e674a02407f9c63665879618944~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_34962e674a02407f9c63665879618944~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_357349eb5af14e34a18f02f41b16d7fa~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Cream",
+          "fileName": "446a5e_357349eb5af14e34a18f02f41b16d7fa~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Krem"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_20d11be5e9e34ab0b3a87ec13c2f5717~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Claret Red",
+          "fileName": "446a5e_20d11be5e9e34ab0b3a87ec13c2f5717~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Bordo"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_0d47beeecd6e49348293f4c0c5393001~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Blue",
+          "fileName": "446a5e_0d47beeecd6e49348293f4c0c5393001~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Mavi"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_c8df712f9c0a4cc1bcf0df30664f4edb~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Orange",
+          "fileName": "446a5e_c8df712f9c0a4cc1bcf0df30664f4edb~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Turuncu"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#7",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 7,
+      "sectionId": "comp-lr9bomd7",
+      "title": "Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar Plus",
+      "lines": [
+        "Befar Plus"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "56402",
+          "product": null,
+          "colour": "Orange",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "56405",
+          "product": null,
+          "colour": "Blue",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "56406",
+          "product": null,
+          "colour": "Cream",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FAF9ED",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "56407",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_7a4b7875c169463f8dbca62ccd5251bb~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_7a4b7875c169463f8dbca62ccd5251bb~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_cc59c8f9c54c436eb46a8bb3c5e0f9c8~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_cc59c8f9c54c436eb46a8bb3c5e0f9c8~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_34192af0a396409e88b9b69ccea5b20a~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_34192af0a396409e88b9b69ccea5b20a~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5b005ee1e4d34e12ae2f51bf5b1e7485~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_5b005ee1e4d34e12ae2f51bf5b1e7485~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_f1e9786a61f14d818b7f4d6328a474c4~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_f1e9786a61f14d818b7f4d6328a474c4~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#8",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 8,
+      "sectionId": "comp-lr9bomd71",
+      "title": "Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "04401",
+          "product": null,
+          "colour": "White",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "04402",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "04403",
+          "product": null,
+          "colour": "Black",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "04404",
+          "product": null,
+          "colour": "Yellow",
+          "size": "150x25mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_2476c73dfd5a4834bb55dcfc6f27d8a8~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Orange",
+          "fileName": "446a5e_2476c73dfd5a4834bb55dcfc6f27d8a8~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Turuncu"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e9cfeddfbbe24b3fa13a8b7795fac3db~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_e9cfeddfbbe24b3fa13a8b7795fac3db~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5eb55699b09443e6aaead42333eaf18f~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge White",
+          "fileName": "446a5e_5eb55699b09443e6aaead42333eaf18f~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Beyaz"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_6b2aef8d416047e99494dac8b1039768~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Black",
+          "fileName": "446a5e_6b2aef8d416047e99494dac8b1039768~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Siyah"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_bb8e1af9a7d64c9b872517b21b06444b~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Yellow",
+          "fileName": "446a5e_bb8e1af9a7d64c9b872517b21b06444b~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Sarı"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "befar-cırtlı-süngerler#9",
+      "pageKey": "befar-cırtlı-süngerler",
+      "pageUrl": "https://en.befar.com.tr/befar-cırtlı-süngerler",
+      "language": "en",
+      "order": 9,
+      "sectionId": "comp-lr9bomd72",
+      "title": "Velcro Polishing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "06401",
+          "product": null,
+          "colour": "White",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "06402",
+          "product": null,
+          "colour": "Orange",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "06403",
+          "product": null,
+          "colour": "Black",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "06404",
+          "product": null,
+          "colour": "Yellow",
+          "size": "180x35mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_1297932741ca4b6b917184a2c5bde463~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge",
+          "fileName": "446a5e_1297932741ca4b6b917184a2c5bde463~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_153f2df6758d4b2eb29405ccedfc9e3e~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Black",
+          "fileName": "446a5e_153f2df6758d4b2eb29405ccedfc9e3e~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Siyah"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e751146dce2047f4ae80f3e8e037741a~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Yellow",
+          "fileName": "446a5e_e751146dce2047f4ae80f3e8e037741a~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Sarı"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_60eed730c09846d79115e1d57e9cc842~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge White",
+          "fileName": "446a5e_60eed730c09846d79115e1d57e9cc842~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Beyaz"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_728b61a550f6481ab51fb72d488c32a1~mv2.jpg",
+          "crop": null,
+          "title": "Velcro Polishing Sponge Orange",
+          "fileName": "446a5e_728b61a550f6481ab51fb72d488c32a1~mv2.jpg",
+          "titleTr": "Cırtlı Polisaj Süngeri Turuncu"
+        }
+      ],
+      "category": "Velcro Polishing Pads",
+      "titleTr": "Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "diğer-ürünler#1",
+      "pageKey": "diğer-ürünler",
+      "pageUrl": "https://en.befar.com.tr/diğer-ürünler",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomdp",
+      "title": "Leo Hamburger Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "90207",
+          "product": null,
+          "colour": null,
+          "size": "115x33mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_9ec2a059c64546cea38fa9ac82c9a705~mv2.jpg",
+          "crop": null,
+          "title": "Leo Hamburger Sponge",
+          "fileName": "446a5e_9ec2a059c64546cea38fa9ac82c9a705~mv2.jpg",
+          "titleTr": "Leo Hamburger Sünger"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_70b0f4f125c04e808c76552d93f0faf4~mv2.jpg",
+          "crop": null,
+          "title": "Leo Hamburger Sponge",
+          "fileName": "446a5e_70b0f4f125c04e808c76552d93f0faf4~mv2.jpg",
+          "titleTr": "Leo Hamburger Sünger"
+        }
+      ],
+      "category": "Yeni Sayfa",
+      "titleTr": "Leo Hamburger Sünger",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "diğer-ürünler#2",
+      "pageKey": "diğer-ürünler",
+      "pageUrl": "https://en.befar.com.tr/diğer-ürünler",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomdp1",
+      "title": "Leo Compound - Polish Set.",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "150221",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_03e96f69b6dc4c02ad5ef09efcc793ef~mv2.jpg",
+          "crop": null,
+          "title": "Leo Paste Polish Set",
+          "fileName": "446a5e_03e96f69b6dc4c02ad5ef09efcc793ef~mv2.jpg",
+          "titleTr": "Leo Pasta Cila Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_beb4259a459744839620129c8e78e4eb~mv2.jpg",
+          "crop": null,
+          "title": "Leo Paste Polish Set",
+          "fileName": "446a5e_beb4259a459744839620129c8e78e4eb~mv2.jpg",
+          "titleTr": "Leo Pasta Cila Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_715b3c5ea33f4b9d891d3ec9bf978747~mv2.jpg",
+          "crop": null,
+          "title": "Leo Paste Polish Set",
+          "fileName": "446a5e_715b3c5ea33f4b9d891d3ec9bf978747~mv2.jpg",
+          "titleTr": "Leo Pasta Cila Seti"
+        }
+      ],
+      "category": "Yeni Sayfa",
+      "titleTr": "Leo Pasta Cila Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "diğer-ürünler#3",
+      "pageKey": "diğer-ürünler",
+      "pageUrl": "https://en.befar.com.tr/diğer-ürünler",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomdp2",
+      "title": "Leo Mini Detailing Cleaning Set",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "05712",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_e3262703ea234329bfeab21781aa01fc~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "Mini Temizleme Seti.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Yeni Sayfa",
+      "titleTr": "Leo Mini Temizleme Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#1",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bome6",
+      "title": "Leo Plus Air Lines with 16 Holes Orbital Velcro Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "56401ORB",
+          "product": null,
+          "colour": "White",
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "56402ORB",
+          "product": null,
+          "colour": "Orange",
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "56403ORB",
+          "product": null,
+          "colour": "Black",
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "56405ORB",
+          "product": null,
+          "colour": "Blue",
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "56406ORB",
+          "product": null,
+          "colour": "Cream",
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#DBDBDB",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "56407ORB",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_39bf157671b343a09f8e51066dc1f113~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "DSC_0200 leo.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Plus Orbital Takviyeli 16 Delikli Cırtlı Sünger",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#2",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bome7",
+      "title": "Leo Plus Air Lines Orbital Velcro Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "54401ORB",
+          "product": null,
+          "colour": "White",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "54402ORB",
+          "product": null,
+          "colour": "Orange",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "54403ORB",
+          "product": null,
+          "colour": "Black",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "54405ORB",
+          "product": null,
+          "colour": "Blue",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "54406ORB",
+          "product": null,
+          "colour": "Cream",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#DBDBDB",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "54407ORB",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_e1c9ceedbe1c4ae6b100a83fa33ce043~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "DSC_0205 leo.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Plus Orbital Takviyeli Cırtlı Sünger",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#3",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bome71",
+      "title": "Leo Detailing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": "Yellow Black.png",
+      "rows": [
+        {
+          "code": "09901",
+          "product": null,
+          "colour": "Yellow-Black",
+          "size": "125mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı-Siyah"
+        },
+        {
+          "code": "09902",
+          "product": null,
+          "colour": "Yellow-Black",
+          "size": "145mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı-Siyah"
+        },
+        {
+          "code": "59533",
+          "product": null,
+          "colour": "Yellow-Black",
+          "size": "75/125/145mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı-Siyah"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_6234680f4382477fbbb0f0b942020e96~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_6234680f4382477fbbb0f0b942020e96~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_d4005e3d93d14d27830059752f650111~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_d4005e3d93d14d27830059752f650111~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_51693099f88a4f7d83efcd602ab9663f~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_51693099f88a4f7d83efcd602ab9663f~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_8239a62fec924ac9aeb5a576338347d8~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_8239a62fec924ac9aeb5a576338347d8~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Detailing Taban",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#4",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bome72",
+      "title": "Leo Ceramic Aplication Block",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "80012O",
+          "product": null,
+          "colour": "Orange",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "80012Y",
+          "product": null,
+          "colour": "Yellow",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "80012B",
+          "product": null,
+          "colour": "Black",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "20105R",
+          "product": null,
+          "colour": "Red",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#E30613",
+          "productTr": null,
+          "colourTr": "Kırmızı"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_9fd62db5e1de409da0cdb87a17bad1d8~mv2.jpg",
+          "crop": {
+            "x": 171,
+            "y": 0,
+            "w": 3821,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0515.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Seramik Uygulama Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#5",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bome72",
+      "title": "Leo Ceramic Cloth",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "10175TM",
+          "product": null,
+          "colour": "Turquoise",
+          "size": "10x10cm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3AB5CD",
+          "productTr": null,
+          "colourTr": "Turkuaz"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_9fd62db5e1de409da0cdb87a17bad1d8~mv2.jpg",
+          "crop": {
+            "x": 171,
+            "y": 0,
+            "w": 3821,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0515.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Seramik Uygulama Bezi",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#6",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 6,
+      "sectionId": "comp-lr9bome73",
+      "title": "Leo Premium Advance Velcro Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Premium"
+      ],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "52507ADV",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4128e09ebf4b4b048cb30e7b1f992d78~mv2.jpg",
+          "crop": null,
+          "title": "Leo Premium Advance Velcro Polishing Sponge",
+          "fileName": "446a5e_4128e09ebf4b4b048cb30e7b1f992d78~mv2.jpg",
+          "titleTr": "Leo Premium Advance Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_812eaafd1ea747c7ac9ae6851b7acd2e~mv2.jpg",
+          "crop": null,
+          "title": "Leo Premium Advance Velcro Polishing Sponge",
+          "fileName": "446a5e_812eaafd1ea747c7ac9ae6851b7acd2e~mv2.jpg",
+          "titleTr": "Leo Premium Advance Cırtlı Polisaj Süngeri"
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Premium Advance Cırtlı Polisaj Süngeri",
+      "qualifiersTr": [
+        "Premium"
+      ]
+    },
+    {
+      "blockKey": "leo-ürün-serisi#7",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 7,
+      "sectionId": "comp-lr9bome8",
+      "title": "Leo Premium Advance Velcro Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "55401ADV",
+          "product": null,
+          "colour": "White",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "55402ADV",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "55403ADV",
+          "product": null,
+          "colour": "Black",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "55405ADV",
+          "product": null,
+          "colour": "Blue",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "55406ADV",
+          "product": null,
+          "colour": "Cream",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#DBDBDB",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "55407ADV",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_d4dda3a0df1c4f708735b5ef25467273~mv2.jpg",
+          "crop": null,
+          "title": "Leo Plus Advance Velcro Polishing Sponge",
+          "fileName": "446a5e_d4dda3a0df1c4f708735b5ef25467273~mv2.jpg",
+          "titleTr": "Leo Plus Advance Cırtlı Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_d78948bea45f4dbf9d4ddf9b6527c1f6~mv2.jpg",
+          "crop": null,
+          "title": "Leo Plus Advance Velcro Polishing Sponge",
+          "fileName": "446a5e_d78948bea45f4dbf9d4ddf9b6527c1f6~mv2.jpg",
+          "titleTr": "Leo Plus Advance Cırtlı Polisaj Süngeri"
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Plus Advance Cırtlı Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#8",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 8,
+      "sectionId": "comp-lr9bome81",
+      "title": "Leo Plus Advance with Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "52401ADV",
+          "product": null,
+          "colour": "White",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FFFFFF",
+          "productTr": null,
+          "colourTr": "Beyaz"
+        },
+        {
+          "code": "52402ADV",
+          "product": null,
+          "colour": "Orange",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "52403ADV",
+          "product": null,
+          "colour": "Black",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "52405ADV",
+          "product": null,
+          "colour": "Blue",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3D9BE9",
+          "productTr": null,
+          "colourTr": "Mavi"
+        },
+        {
+          "code": "52406ADV",
+          "product": null,
+          "colour": "Cream",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#DBDBDB",
+          "productTr": null,
+          "colourTr": "Krem"
+        },
+        {
+          "code": "52407ADV",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_b2373e2ad5b845e6961a5221d36aaf1a~mv2.jpg",
+          "crop": null,
+          "title": "Leo Plus Advance Applicator Polishing Sponge",
+          "fileName": "446a5e_b2373e2ad5b845e6961a5221d36aaf1a~mv2.jpg",
+          "titleTr": "Leo Plus Advance Aplikatörlü Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_62ccd702347c482294d1dc42000ba029~mv2.jpg",
+          "crop": null,
+          "title": "Leo Plus Advance Applicator Polishing Sponge",
+          "fileName": "446a5e_62ccd702347c482294d1dc42000ba029~mv2.jpg",
+          "titleTr": "Leo Plus Advance Aplikatörlü Polisaj Süngeri"
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Plus Advance Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "leo-ürün-serisi#9",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 9,
+      "sectionId": "comp-lr9bome82",
+      "title": "Leo Plus Advance with Applicator Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Premium"
+      ],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "59507ADV",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_0becaab02b63468fbdf9a43cd2719239~mv2.jpg",
+          "crop": {
+            "x": 461,
+            "y": 0,
+            "w": 3348,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0251_1.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Premium Advance Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": [
+        "Premium"
+      ]
+    },
+    {
+      "blockKey": "leo-ürün-serisi#10",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 10,
+      "sectionId": "comp-lr9bome83",
+      "title": "Leo Premium Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Premium"
+      ],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "59507",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150x50mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e892b214483946478a83fa57bad860a5~mv2.jpg",
+          "crop": null,
+          "title": "Leo Premium Applicator Polishing Sponge",
+          "fileName": "446a5e_e892b214483946478a83fa57bad860a5~mv2.jpg",
+          "titleTr": "Leo Premium Aplikatörlü Polisaj Süngeri"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_cd890cf9aba1487ebc9973f0c5adfb9d~mv2.jpg",
+          "crop": null,
+          "title": "Leo Premium Applicator Polishing Sponge",
+          "fileName": "446a5e_cd890cf9aba1487ebc9973f0c5adfb9d~mv2.jpg",
+          "titleTr": "Leo Premium Aplikatörlü Polisaj Süngeri"
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Premium Aplikatörlü Polisaj Süngeri",
+      "qualifiersTr": [
+        "Premium"
+      ]
+    },
+    {
+      "blockKey": "leo-ürün-serisi#11",
+      "pageKey": "leo-ürün-serisi",
+      "pageUrl": "https://en.befar.com.tr/leo-ürün-serisi",
+      "language": "en",
+      "order": 11,
+      "sectionId": "comp-lr9bome84",
+      "title": "Leo Premium Air Lines Velcro Compounding Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Premium"
+      ],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "52507ORB",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "150mm/No Hole",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        },
+        {
+          "code": "56507ORB",
+          "product": null,
+          "colour": "Burgundy",
+          "size": "180mm/16Hole",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#7B444E",
+          "productTr": null,
+          "colourTr": "Bordo"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_569cc027eabe4c1f8080423d3d233569~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_569cc027eabe4c1f8080423d3d233569~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_b08c0c7b750343ac96005f2842558e60~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_b08c0c7b750343ac96005f2842558e60~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Leo Detailing Products",
+      "titleTr": "Leo Premium Orbital Takviyeli Cırtlı Süngeri",
+      "qualifiersTr": [
+        "Premium"
+      ]
+    },
+    {
+      "blockKey": "seramik-ürünleri#1",
+      "pageKey": "seramik-ürünleri",
+      "pageUrl": "https://en.befar.com.tr/seramik-ürünleri",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomdm",
+      "title": "Leo Nano Ceramic Paint Protector Set",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "98050",
+          "product": null,
+          "colour": null,
+          "size": "50ml.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e468dfedfd97465cae69ca4e032ecdd5~mv2.jpg",
+          "crop": null,
+          "title": "Leo Ceramic Coating Set",
+          "fileName": "446a5e_e468dfedfd97465cae69ca4e032ecdd5~mv2.jpg",
+          "titleTr": "Leo Seramik Kaplama Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_36e07a370a3648589d14c41684926c0a~mv2.jpg",
+          "crop": null,
+          "title": "Leo Ceramic Coating Set",
+          "fileName": "446a5e_36e07a370a3648589d14c41684926c0a~mv2.jpg",
+          "titleTr": "Leo Seramik Kaplama Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4ceeb34b1a144e11a70bed935cd40e5b~mv2.jpg",
+          "crop": null,
+          "title": "Leo Ceramic Coating Set",
+          "fileName": "446a5e_4ceeb34b1a144e11a70bed935cd40e5b~mv2.jpg",
+          "titleTr": "Leo Seramik Kaplama Seti"
+        }
+      ],
+      "category": "Ceramic Products",
+      "titleTr": "Leo Nano Seramik Kaplama Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "seramik-ürünleri#2",
+      "pageKey": "seramik-ürünleri",
+      "pageUrl": "https://en.befar.com.tr/seramik-ürünleri",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomdm1",
+      "title": "Leo Ceramic Aplication Block",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "80012O",
+          "product": null,
+          "colour": "Orange",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#FF7C7C",
+          "productTr": null,
+          "colourTr": "Turuncu"
+        },
+        {
+          "code": "80012Y",
+          "product": null,
+          "colour": "Yellow",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#F2E70F",
+          "productTr": null,
+          "colourTr": "Sarı"
+        },
+        {
+          "code": "80012B",
+          "product": null,
+          "colour": "Black",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#000000",
+          "productTr": null,
+          "colourTr": "Siyah"
+        },
+        {
+          "code": "20105R",
+          "product": null,
+          "colour": "Red",
+          "size": "90x40mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#E30613",
+          "productTr": null,
+          "colourTr": "Kırmızı"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_9fd62db5e1de409da0cdb87a17bad1d8~mv2.jpg",
+          "crop": {
+            "x": 171,
+            "y": 0,
+            "w": 3821,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0515.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Ceramic Products",
+      "titleTr": "Leo Seramik Uygulama Süngeri",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "seramik-ürünleri#3",
+      "pageKey": "seramik-ürünleri",
+      "pageUrl": "https://en.befar.com.tr/seramik-ürünleri",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomdm1",
+      "title": "Leo Ceramic Cloth",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "10175TM",
+          "product": null,
+          "colour": "Turquoise",
+          "size": "10x10cm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#3AB5CD",
+          "productTr": null,
+          "colourTr": "Turkuaz"
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_9fd62db5e1de409da0cdb87a17bad1d8~mv2.jpg",
+          "crop": {
+            "x": 171,
+            "y": 0,
+            "w": 3821,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0515.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Ceramic Products",
+      "titleTr": "Leo Seramik Uygulama Bezi",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "set-grubu#1",
+      "pageKey": "set-grubu",
+      "pageUrl": "https://en.befar.com.tr/set-grubu",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomea",
+      "title": "Leo Nano Ceramic Paint Protector Set",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "98050",
+          "product": null,
+          "colour": null,
+          "size": "50ml.",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_e468dfedfd97465cae69ca4e032ecdd5~mv2.jpg",
+          "crop": null,
+          "title": "Leo Nano Ceramic Coating Set",
+          "fileName": "446a5e_e468dfedfd97465cae69ca4e032ecdd5~mv2.jpg",
+          "titleTr": "Leo Nano Seramik Kaplama Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_36e07a370a3648589d14c41684926c0a~mv2.jpg",
+          "crop": null,
+          "title": "Leo Nano Ceramic Coating Set",
+          "fileName": "446a5e_36e07a370a3648589d14c41684926c0a~mv2.jpg",
+          "titleTr": "Leo Nano Seramik Kaplama Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_4ceeb34b1a144e11a70bed935cd40e5b~mv2.jpg",
+          "crop": null,
+          "title": "Leo Nano Ceramic Coating Set",
+          "fileName": "446a5e_4ceeb34b1a144e11a70bed935cd40e5b~mv2.jpg",
+          "titleTr": "Leo Nano Seramik Kaplama Seti"
+        }
+      ],
+      "category": "Sets",
+      "titleTr": "Leo Nano Seramik Kaplama Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "set-grubu#2",
+      "pageKey": "set-grubu",
+      "pageUrl": "https://en.befar.com.tr/set-grubu",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomea1",
+      "title": "Leo Compound - Polish Set",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "150221",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_03e96f69b6dc4c02ad5ef09efcc793ef~mv2.jpg",
+          "crop": null,
+          "title": "Leo Paste Polish Set",
+          "fileName": "446a5e_03e96f69b6dc4c02ad5ef09efcc793ef~mv2.jpg",
+          "titleTr": "Leo Pasta Cila Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_beb4259a459744839620129c8e78e4eb~mv2.jpg",
+          "crop": null,
+          "title": "Leo Paste Polish Set",
+          "fileName": "446a5e_beb4259a459744839620129c8e78e4eb~mv2.jpg",
+          "titleTr": "Leo Pasta Cila Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_715b3c5ea33f4b9d891d3ec9bf978747~mv2.jpg",
+          "crop": null,
+          "title": "Leo Paste Polish Set",
+          "fileName": "446a5e_715b3c5ea33f4b9d891d3ec9bf978747~mv2.jpg",
+          "titleTr": "Leo Pasta Cila Seti"
+        }
+      ],
+      "category": "Sets",
+      "titleTr": "Leo Pasta Cila Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "set-grubu#3",
+      "pageKey": "set-grubu",
+      "pageUrl": "https://en.befar.com.tr/set-grubu",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomea2",
+      "title": "Leo Mini Cleaning Set",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "05712",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_e3262703ea234329bfeab21781aa01fc~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "Mini Temizleme Seti.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Sets",
+      "titleTr": "Leo Mini Temizleme Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "set-grubu#4",
+      "pageKey": "set-grubu",
+      "pageUrl": "https://en.befar.com.tr/set-grubu",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomea3",
+      "title": "Headlight Cleaning Set",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "05812",
+          "product": null,
+          "colour": null,
+          "size": "12 Pieces",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_8985c488c27d434bbe6db1bdacf2be35~mv2.jpg",
+          "crop": null,
+          "title": "Headlight Cleaning Kit",
+          "fileName": "446a5e_8985c488c27d434bbe6db1bdacf2be35~mv2.jpg",
+          "titleTr": "Far Temizleme Seti"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_09ed46629fd14fbf8fcfda81c85ab7ba~mv2.jpg",
+          "crop": null,
+          "title": "Headlight Cleaning Kit",
+          "fileName": "446a5e_09ed46629fd14fbf8fcfda81c85ab7ba~mv2.jpg",
+          "titleTr": "Far Temizleme Seti"
+        }
+      ],
+      "category": "Sets",
+      "titleTr": "Far Temizleme Seti",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "taban-grubu#1",
+      "pageKey": "taban-grubu",
+      "pageUrl": "https://en.befar.com.tr/taban-grubu",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomcr",
+      "title": "Leo Detailing Backing Pad",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Leo",
+      "lines": [
+        "Leo"
+      ],
+      "unknownLogo": "Yellow Black.png",
+      "rows": [
+        {
+          "code": "09901",
+          "product": null,
+          "colour": "Yellow-Black",
+          "size": "125mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı-Siyah"
+        },
+        {
+          "code": "09902",
+          "product": null,
+          "colour": "Yellow-Black",
+          "size": "145mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı-Siyah"
+        },
+        {
+          "code": "59533",
+          "product": null,
+          "colour": "Yellow-Black",
+          "size": "75/125/145mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": "Sarı-Siyah"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_6234680f4382477fbbb0f0b942020e96~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_6234680f4382477fbbb0f0b942020e96~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_d4005e3d93d14d27830059752f650111~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_d4005e3d93d14d27830059752f650111~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_51693099f88a4f7d83efcd602ab9663f~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_51693099f88a4f7d83efcd602ab9663f~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_8239a62fec924ac9aeb5a576338347d8~mv2.jpg",
+          "crop": null,
+          "title": "Leo Detailing Base",
+          "fileName": "446a5e_8239a62fec924ac9aeb5a576338347d8~mv2.jpg",
+          "titleTr": "Leo Detailing Taban"
+        }
+      ],
+      "category": "Backing Pad Group",
+      "titleTr": "Leo Detailing Taban",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "taban-grubu#2",
+      "pageKey": "taban-grubu",
+      "pageUrl": "https://en.befar.com.tr/taban-grubu",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomcr1",
+      "title": "Sandwich Velcro Backing Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "SANDWICH"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "08401SND",
+          "product": null,
+          "colour": null,
+          "size": "125mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "08402SND",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "08403SND",
+          "product": null,
+          "colour": null,
+          "size": "170mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_7d226cc4d5544a21935be281aefa3f79~mv2.jpg",
+          "crop": null,
+          "title": "Sandwich Velcro Base",
+          "fileName": "446a5e_7d226cc4d5544a21935be281aefa3f79~mv2.jpg",
+          "titleTr": "Sandviç Cırt Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_61f95a93ab3d4cf2aa17be586c5747e6~mv2.jpg",
+          "crop": null,
+          "title": "Sandwich Velcro Base",
+          "fileName": "446a5e_61f95a93ab3d4cf2aa17be586c5747e6~mv2.jpg",
+          "titleTr": "Sandviç Cırt Taban"
+        }
+      ],
+      "category": "Backing Pad Group",
+      "titleTr": "Sandviç Cırt Taban",
+      "qualifiersTr": [
+        "SANDVİÇ"
+      ]
+    },
+    {
+      "blockKey": "taban-grubu#3",
+      "pageKey": "taban-grubu",
+      "pageUrl": "https://en.befar.com.tr/taban-grubu",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomcr2",
+      "title": "Soft Velcro Backing Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "SOFT"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "08400",
+          "product": null,
+          "colour": null,
+          "size": "75mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "08401",
+          "product": null,
+          "colour": null,
+          "size": "125mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "08402",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "08403",
+          "product": null,
+          "colour": null,
+          "size": "170mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5da2bf2cd81a4d0b915ee1380b3fe79d~mv2.jpg",
+          "crop": null,
+          "title": "Befar Soft Velcro Base",
+          "fileName": "446a5e_5da2bf2cd81a4d0b915ee1380b3fe79d~mv2.jpg",
+          "titleTr": "Befar Soft Cırt Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_141a9488a82f4e8c9f6f700562ee1360~mv2.jpg",
+          "crop": null,
+          "title": "Befar Soft Velcro Base",
+          "fileName": "446a5e_141a9488a82f4e8c9f6f700562ee1360~mv2.jpg",
+          "titleTr": "Befar Soft Cırt Taban"
+        }
+      ],
+      "category": "Backing Pad Group",
+      "titleTr": "Soft Cırt Taban",
+      "qualifiersTr": [
+        "SOFT"
+      ]
+    },
+    {
+      "blockKey": "taban-grubu#4",
+      "pageKey": "taban-grubu",
+      "pageUrl": "https://en.befar.com.tr/taban-grubu",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomcs",
+      "title": "Hard Velcro Backing Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "SERT"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "09400",
+          "product": null,
+          "colour": null,
+          "size": "75mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "09401",
+          "product": null,
+          "colour": null,
+          "size": "125mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "09402",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "09403",
+          "product": null,
+          "colour": null,
+          "size": "170mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_974a8d58fbbf49c3beadf191dd026639~mv2.jpg",
+          "crop": null,
+          "title": "Hard Velcro Base",
+          "fileName": "446a5e_974a8d58fbbf49c3beadf191dd026639~mv2.jpg",
+          "titleTr": "Sert Cırt Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_d41cdc96e52b49008f9e81b66e47b5f9~mv2.jpg",
+          "crop": null,
+          "title": "Hard Velcro Base",
+          "fileName": "446a5e_d41cdc96e52b49008f9e81b66e47b5f9~mv2.jpg",
+          "titleTr": "Sert Cırt Taban"
+        }
+      ],
+      "category": "Backing Pad Group",
+      "titleTr": "Sert Cırt Taban",
+      "qualifiersTr": [
+        "SERT"
+      ]
+    },
+    {
+      "blockKey": "taban-grubu#5",
+      "pageKey": "taban-grubu",
+      "pageUrl": "https://en.befar.com.tr/taban-grubu",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bomcs1",
+      "title": "Medium Hard Velcro Backing Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Medium Hard"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "09501",
+          "product": null,
+          "colour": null,
+          "size": "125mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "09502",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "09503",
+          "product": null,
+          "colour": null,
+          "size": "170mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_2c8793aae66e4e37901ab6274b1f7b4f~mv2.jpg",
+          "crop": null,
+          "title": "Medium Hard Velcro Base",
+          "fileName": "446a5e_2c8793aae66e4e37901ab6274b1f7b4f~mv2.jpg",
+          "titleTr": "Orta Sert Cırt Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_b1e3c5d65fc84c53b65b5294e04d7efc~mv2.jpg",
+          "crop": null,
+          "title": "Medium Hard Velcro Base",
+          "fileName": "446a5e_b1e3c5d65fc84c53b65b5294e04d7efc~mv2.jpg",
+          "titleTr": "Orta Sert Cırt Taban"
+        }
+      ],
+      "category": "Backing Pad Group",
+      "titleTr": "Orta Sert Cırt Taban",
+      "qualifiersTr": [
+        "Orta Sert"
+      ]
+    },
+    {
+      "blockKey": "taban-grubu#6",
+      "pageKey": "taban-grubu",
+      "pageUrl": "https://en.befar.com.tr/taban-grubu",
+      "language": "en",
+      "order": 6,
+      "sectionId": "comp-lr9bomcs2",
+      "title": "Plate Type Felt Backing Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "77776",
+          "product": null,
+          "colour": null,
+          "size": "180mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_5e74d5b9b1bf4e948e272bf71a22c00a~mv2.jpg",
+          "crop": null,
+          "title": "Plate Type Felt Base",
+          "fileName": "446a5e_5e74d5b9b1bf4e948e272bf71a22c00a~mv2.jpg",
+          "titleTr": "Tabak Tip Keçe Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_c4c38dac041c4fb1ab628614f9690250~mv2.jpg",
+          "crop": null,
+          "title": "Plate Type Felt Base",
+          "fileName": "446a5e_c4c38dac041c4fb1ab628614f9690250~mv2.jpg",
+          "titleTr": "Tabak Tip Keçe Taban"
+        }
+      ],
+      "category": "Backing Pad Group",
+      "titleTr": "Tabak Tip Keçe Taban",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "zımpara-grubu#1",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 1,
+      "sectionId": "comp-lr9bomde",
+      "title": "Sanding Pad",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "93000",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_6e48a26fbb53483a913e06a344eff1fd~mv2.jpg",
+          "crop": null,
+          "title": "Air Machine Sanding Pad",
+          "fileName": "446a5e_6e48a26fbb53483a913e06a344eff1fd~mv2.jpg",
+          "titleTr": "Havalı Makina Zımpara Tabanı"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_7cc2b71a06444f4c89d5fb4125d3662d~mv2.jpg",
+          "crop": null,
+          "title": "Air Machine Sanding Pad",
+          "fileName": "446a5e_7cc2b71a06444f4c89d5fb4125d3662d~mv2.jpg",
+          "titleTr": "Havalı Makina Zımpara Tabanı"
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Havalı Makina Zımpara Tabanı",
+      "qualifiersTr": []
+    },
+    {
+      "blockKey": "zımpara-grubu#2",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 2,
+      "sectionId": "comp-lr9bomde1",
+      "title": "Backing Pad",
+      "columns": [
+        "code",
+        "holes",
+        "size"
+      ],
+      "qualifiers": [
+        "SOFT"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "93107",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": "7 Holes",
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "93115",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": "15 Holes",
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "93162",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": "62 Holes",
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_0a0e03afaab74cacb93b760a0af4e759~mv2.jpg",
+          "crop": null,
+          "title": "Midsole",
+          "fileName": "446a5e_0a0e03afaab74cacb93b760a0af4e759~mv2.jpg",
+          "titleTr": "Ara Taban"
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_1afc1c3e56b040579d7a4922a324edff~mv2.jpg",
+          "crop": null,
+          "title": "Midsole",
+          "fileName": "446a5e_1afc1c3e56b040579d7a4922a324edff~mv2.jpg",
+          "titleTr": "Ara Taban"
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Ara Taban",
+      "qualifiersTr": [
+        "SOFT"
+      ]
+    },
+    {
+      "blockKey": "zımpara-grubu#3",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 3,
+      "sectionId": "comp-lr9bomde2",
+      "title": "Backing Pad",
+      "columns": [
+        "code",
+        "holes",
+        "size"
+      ],
+      "qualifiers": [
+        "HARD"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "93107",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": "7 Holes",
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "93115",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": "15 Holes",
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "93162",
+          "product": null,
+          "colour": null,
+          "size": "150mm",
+          "holes": "62 Holes",
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_217cd432920a4fd481ae3efb774620c5~mv2.jpg",
+          "crop": null,
+          "title": "Midsole",
+          "fileName": "446a5e_217cd432920a4fd481ae3efb774620c5~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_f9d5e7703b944b0aadc8d2b7c7e17d19~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_f9d5e7703b944b0aadc8d2b7c7e17d19~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Ara Taban",
+      "qualifiersTr": [
+        "SOFT"
+      ]
+    },
+    {
+      "blockKey": "zımpara-grubu#4",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 4,
+      "sectionId": "comp-lr9bomde3",
+      "title": "Sanding Block",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Hard Red"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "89010",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "89015",
+          "product": null,
+          "colour": null,
+          "size": "Middle",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "89020",
+          "product": null,
+          "colour": null,
+          "size": "Big",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_c294f6c06af949d59982fe8a875f022b~mv2.jpg",
+          "crop": {
+            "x": 372,
+            "y": 0,
+            "w": 3863,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0490.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Zımpara Takozu",
+      "qualifiersTr": [
+        "Sert Kırmızı"
+      ]
+    },
+    {
+      "blockKey": "zımpara-grubu#5",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 5,
+      "sectionId": "comp-lr9bomdf",
+      "title": "Sanding Block",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Soft Orange"
+      ],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "88010",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "88015",
+          "product": null,
+          "colour": null,
+          "size": "Middle",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "88020",
+          "product": null,
+          "colour": null,
+          "size": "Big",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_2f2a9913eb2341b1a485fb0db0181d3b~mv2.jpg",
+          "crop": {
+            "x": 557,
+            "y": 286,
+            "w": 3501,
+            "h": 2786
+          },
+          "title": null,
+          "fileName": "DSC_0489_1.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Zımpara Takozu",
+      "qualifiersTr": [
+        "Soft Turuncu"
+      ]
+    },
+    {
+      "blockKey": "zımpara-grubu#6",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 6,
+      "sectionId": "comp-lr9bomdf1",
+      "title": "Sanding Block",
+      "columns": [
+        "code",
+        "size"
+      ],
+      "qualifiers": [
+        "Blue"
+      ],
+      "line": "Turkuaz",
+      "lines": [
+        "Turkuaz"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "78010",
+          "product": null,
+          "colour": null,
+          "size": "Standard",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "78015",
+          "product": null,
+          "colour": null,
+          "size": "Middle",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        },
+        {
+          "code": "78020",
+          "product": null,
+          "colour": null,
+          "size": "Big",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": null,
+          "productTr": null,
+          "colourTr": null
+        }
+      ],
+      "images": [
+        {
+          "source": "photo",
+          "mediaId": "446a5e_0a7e7e28afb243eca13de45fce26c8cb~mv2.jpg",
+          "crop": {
+            "x": 372,
+            "y": 0,
+            "w": 3863,
+            "h": 3072
+          },
+          "title": null,
+          "fileName": "DSC_0561.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Zımpara Takozu",
+      "qualifiersTr": [
+        "Mavi"
+      ]
+    },
+    {
+      "blockKey": "zımpara-grubu#7",
+      "pageKey": "zımpara-grubu",
+      "pageUrl": "https://en.befar.com.tr/zımpara-grubu",
+      "language": "en",
+      "order": 7,
+      "sectionId": "comp-lr9bomdf2",
+      "title": "Non Wowen Abrasive",
+      "columns": [
+        "colour",
+        "code",
+        "size"
+      ],
+      "qualifiers": [],
+      "line": "Befar",
+      "lines": [
+        "Befar"
+      ],
+      "unknownLogo": null,
+      "rows": [
+        {
+          "code": "91025",
+          "product": null,
+          "colour": "Grey",
+          "size": "15x22cm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#CCCCCC",
+          "productTr": null,
+          "colourTr": "Gri"
+        },
+        {
+          "code": "91030",
+          "product": null,
+          "colour": "Red",
+          "size": "15x25cm",
+          "holes": null,
+          "hardness": null,
+          "quantity": null,
+          "label": null,
+          "swatch": "#E30613",
+          "productTr": null,
+          "colourTr": "Kırmızı"
+        }
+      ],
+      "images": [
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_11c04f79b1bf4b148a01087a5141e4d7~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_11c04f79b1bf4b148a01087a5141e4d7~mv2.jpg",
+          "titleTr": null
+        },
+        {
+          "source": "gallery",
+          "mediaId": "446a5e_dcb6baccaaca4429bbb4b006ef45360e~mv2.jpg",
+          "crop": null,
+          "title": null,
+          "fileName": "446a5e_dcb6baccaaca4429bbb4b006ef45360e~mv2.jpg",
+          "titleTr": null
+        }
+      ],
+      "category": "Sanding Pad Group",
+      "titleTr": "Brite Matlaştırıcı Keçe",
+      "qualifiersTr": []
+    }
+  ]
+}

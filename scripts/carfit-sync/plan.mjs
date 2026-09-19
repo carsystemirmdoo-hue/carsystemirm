@@ -83,7 +83,7 @@ if (!existsSync(PATHS.siteDataset)) {
 }
 
 const syncSlugs = new Set(Object.keys(registry.products));
-const { local, allSlugs, totalCatalogProducts } = loadLocalProducts(syncSlugs);
+const { local, allSlugs } = loadLocalProducts(syncSlugs);
 
 const primaryImageBySha = new Map(imageManifest.images.filter((image) => image.role === "primary").map((image) => [image.sha256, image.sourceKey]));
 const catalogueOnlyArticles = new Set(source.catalogueOnly.flatMap((family) => family.articles.map((article) => article.articleNumber)));
@@ -280,7 +280,6 @@ const summary = {
   actions: Object.fromEntries([...new Set(items.map((item) => item.action))].sort().map((action) => [action, items.filter((item) => item.action === action).length])),
   newProducts: importing.filter((item) => item.change === "NEW").length,
   existingProducts: importing.filter((item) => item.change === "EXISTING").length,
-  catalogProductsTotalBefore: totalCatalogProducts,
   planErrors: {
     duplicateSlugs: [...slugCounts.entries()].filter(([, count]) => count > 1).map(([slug]) => slug),
     slugCollidesWithExisting: importing.filter((item) => item.change === "NEW" && takenSlugs.has(item.slug)).map((item) => item.slug),

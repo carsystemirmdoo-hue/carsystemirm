@@ -1,0 +1,408 @@
+{
+  "leo-ceramic-aplication-block": {
+    "sourceHash": "58ef17be7552ff21",
+    "displayName": "Leo Ceramic Application Block",
+    "productType": "Blok za nanošenje keramičkog premaza",
+    "subtype": "aplikacioni blok · 90 × 40 mm · 4 boje",
+    "shortDescription": "Blok za nanošenje keramičkog premaza iz linije Leo, dimenzije 90 × 40 mm, u četiri boje.",
+    "longDescription": "Leo Ceramic Application Block je blok za nanošenje keramičkog premaza iz linije Leo brenda Befar; turski naziv proizvođača opisuje ga kao sunđer za nanošenje keramike. Proizvođač ga navodi u dimenziji 90 × 40 mm, u narandžastoj, žutoj, crnoj i crvenoj boji.",
+    "purpose": "Nanošenje keramičkog premaza",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "90 × 40 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "narandžasta, žuta, crna, crvena"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-ceramic-cloth": {
+    "sourceHash": "b651a491c0521b3b",
+    "productType": "Krpa za nanošenje keramičkog premaza",
+    "subtype": "krpa za keramiku · 10 × 10 cm · tirkizna",
+    "shortDescription": "Krpa za nanošenje keramičkog premaza iz linije Leo, dimenzije 10 × 10 cm, u tirkiznoj boji.",
+    "longDescription": "Leo Ceramic Cloth je krpa za nanošenje keramičkog premaza iz linije Leo brenda Befar; turski naziv proizvođača znači „krpa za nanošenje keramike”. Proizvođač je navodi u jednoj izvedbi: 10 × 10 cm, tirkizna.",
+    "purpose": "Nanošenje keramičkog premaza",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "10 × 10 cm"
+      },
+      {
+        "label": "Boje",
+        "value": "tirkizna"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-compound-polish-set": {
+    "sourceHash": "838df178ab45b60b",
+    "productType": "Set polir paste i polira",
+    "subtype": "set · tečna polir pasta · polir sa silikonom · pribor",
+    "shortDescription": "Set iz linije Leo sa tečnom polir pastom, polirom, mikrofiber krpom i dvostranim ručnim sunđerom.",
+    "longDescription": "Leo Compound - Polish Set je set polir paste i polira iz linije Leo brenda Befar. Prema katalogu proizvođača sadrži tečnu polir pastu (Liquid Compound) od 200 g, polir Auto Polish sa silikonom od 200 g, jednu mikrofiber krpu i jedan dvostrani ručni sunđer. Set se vodi u jednoj, standardnoj izvedbi.",
+    "purpose": "Poliranje laka tečnom polir pastom i završnim polirom",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Standard"
+      },
+      {
+        "label": "Pasta i polir",
+        "value": "po 200 g (prema katalogu)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, polir iz seta (Auto Polish) sadrži silikon.",
+    "setContents": [
+      "Tečna polir pasta (Liquid Compound), 200 g",
+      "Polir Auto Polish (sa silikonom), 200 g",
+      "Mikrofiber krpa, 1 kom",
+      "Dvostrani ručni sunđer (Doubleface Hand Foam), 1 kom"
+    ]
+  },
+  "leo-detailing-backing-pad": {
+    "sourceHash": "d8efe0c8bc92ce4e",
+    "productType": "Čičak podloška za detailing",
+    "subtype": "podloška (tanjir) · čičak · 125 mm, 145 mm i 3 in1",
+    "shortDescription": "Podloška (tanjir) sa čičkom iz linije Leo, u dimenzijama 125 mm i 145 mm i u izvedbi 3 in1 (75/125/145 mm).",
+    "longDescription": "Leo Detailing Backing Pad je podloška (tanjir) iz linije Leo brenda Befar; podloška nosi sunđer na polirki. U katalogu proizvođača vodi se kao Middle Hard Detailing Velcro Pad, odnosno srednje tvrda podloška sa čičkom. Proizvođač navodi izvedbe 125 mm, 145 mm i „3 in1” sa dimenzijama 75/125/145 mm, sve u žuto-crnoj boji.",
+    "purpose": "Nošenje sunđera za poliranje na polirki pri detailing radovima",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "125 mm, 145 mm, 3 in1 (75/125/145 mm)"
+      },
+      {
+        "label": "Boje",
+        "value": "žuto-crna"
+      },
+      {
+        "label": "Tvrdoća",
+        "value": "Middle Hard (srednje tvrda), prema katalogu"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-hamburger-pad": {
+    "sourceHash": "5f0176ea9bf74b76",
+    "productType": "Sunđer tipa „hamburger”",
+    "subtype": "sunđer · linija Leo · 115 × 33 mm",
+    "shortDescription": "Sunđer iz linije Leo, u zvaničnom nazivu označen kao „hamburger”, dimenzije 115 × 33 mm.",
+    "longDescription": "Leo Hamburger Pad je sunđer iz linije Leo brenda Befar; turski naziv proizvođača je „Leo Hamburger Sünger”. Proizvođač ga navodi u jednoj izvedbi, dimenzije 115 × 33 mm. Bliži opis namene i izvedbe proizvođač ne objavljuje.",
+    "purpose": "Sunđer iz linije Leo, dimenzije 115 × 33 mm",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "115 × 33 mm"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-mini-detailing-cleaning-set": {
+    "sourceHash": "b752edf59c07e33f",
+    "productType": "Mini set za detailing i čišćenje",
+    "subtype": "set · detailing i čišćenje · 16 delova",
+    "shortDescription": "Mini set za detailing i čišćenje iz linije Leo; katalog proizvođača navodi 16 delova.",
+    "longDescription": "Leo Mini Detailing Cleaning Set je mini set za detailing i čišćenje iz linije Leo brenda Befar; turski naziv proizvođača znači „mini set za čišćenje”. Katalog proizvođača navodi da set ima 16 delova, bez pojedinačnog popisa stavki. Vodi se u jednoj, standardnoj izvedbi.",
+    "purpose": "Detailing i čišćenje",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Izvedba",
+        "value": "Standard"
+      },
+      {
+        "label": "Broj delova",
+        "value": "16 (prema katalogu)"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-nano-ceramic-paint-protector-set": {
+    "sourceHash": "9489674dd933b528",
+    "productType": "Set keramičke zaštite laka",
+    "subtype": "set · nano keramički premaz · 50 ml",
+    "shortDescription": "Set za nano keramičku zaštitu laka iz linije Leo, u izvedbi 50 ml, sa priborom za nanošenje.",
+    "longDescription": "Leo Nano Ceramic Paint Protector Set je set za keramičku zaštitu laka iz linije Leo brenda Befar; turski naziv proizvođača opisuje ga kao set nano keramičkog premaza. Prema katalogu proizvođača sadrži keramičku tečnost, mikrofiber krpu, rukavicu, blok za nanošenje keramike i 4 krpe za nanošenje keramike. Vodi se u izvedbi 50 ml.",
+    "purpose": "Nanošenje nano keramičke zaštite na lak",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Izvedba",
+        "value": "50 ml"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": [
+      "Keramička tečnost (Ceramic Liquid), 1 kom",
+      "Mikrofiber krpa, 1 kom",
+      "Rukavica, 1 kom",
+      "Blok za nanošenje keramike (Ceramic Application Block), 1 kom",
+      "Krpa za nanošenje keramike (Ceramic Cloth), 4 kom"
+    ]
+  },
+  "leo-plus-advance-velcro-compounding-pad": {
+    "sourceHash": "53a2107cf33bfa5a",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 150 × 50 mm · 6 boja",
+    "shortDescription": "Leo Plus Advance sunđer za poliranje sa čičkom, dimenzije 150 × 50 mm, u šest boja.",
+    "longDescription": "Leo Plus Advance Velcro Compounding Pad je sunđer za poliranje sa čičkom iz linije Leo brenda Befar. Proizvođač ga navodi u dimenziji 150 × 50 mm i u šest boja: beloj, narandžastoj, crnoj, plavoj, krem i bordo. Prema katalogu proizvođača, koristi se sa čičak podloškom 125 mm.",
+    "purpose": "Mašinsko poliranje laka, uz čičak podlošku na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 50 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, plava, krem, bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": "Prema katalogu proizvođača, koristi se sa čičak podloškom 125 mm (Soft, Medium Hard ili Hard).",
+    "setContents": []
+  },
+  "leo-plus-advance-with-applicator-compounding-pad": {
+    "sourceHash": "621e897c79b76c78",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · aplikator · 150 × 50 mm · 6 boja",
+    "shortDescription": "Leo Plus Advance sunđer za poliranje sa aplikatorom (nosačem sa navojem), dimenzije 150 × 50 mm, u šest boja.",
+    "longDescription": "Leo Plus Advance with Applicator Compounding Pad je sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Leo brenda Befar. Proizvođač ga navodi u dimenziji 150 × 50 mm i u šest boja: beloj, narandžastoj, crnoj, plavoj, krem i bordo.",
+    "purpose": "Mašinsko poliranje laka, sa aplikatorom za montažu na polirku",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 50 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, plava, krem, bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-plus-air-lines-orbital-velcro-compounding-pad": {
+    "sourceHash": "65270bd0bbc10329",
+    "productType": "Orbitalni sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 150 mm · 6 boja",
+    "shortDescription": "Leo Plus Air Lines Orbital sunđer za poliranje sa čičkom, dimenzije 150 mm, u šest boja.",
+    "longDescription": "Leo Plus Air Lines Orbital Velcro Compounding Pad je sunđer za poliranje sa čičkom iz linije Leo brenda Befar, po nazivu namenjen orbitalnom poliranju. Turski naziv proizvođača opisuje ga kao ojačani orbitalni sunđer sa čičkom. Proizvođač ga navodi u dimenziji 150 mm i u šest boja: beloj, narandžastoj, crnoj, plavoj, krem i bordo.",
+    "purpose": "Poliranje laka orbitalnom polirkom",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, plava, krem, bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad": {
+    "sourceHash": "822cff7b18740d18",
+    "productType": "Orbitalni sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 180 mm · 16 rupa",
+    "shortDescription": "Leo Plus Air Lines Orbital sunđer za poliranje sa čičkom i 16 rupa, dimenzije 180 mm, u šest boja.",
+    "longDescription": "Leo Plus Air Lines with 16 Holes Orbital Velcro Compounding Pad je sunđer za poliranje sa čičkom i 16 rupa iz linije Leo brenda Befar, po nazivu namenjen orbitalnom poliranju. Turski naziv proizvođača opisuje ga kao ojačani orbitalni sunđer sa čičkom i 16 rupa. Proizvođač ga navodi u dimenziji 180 mm i u šest boja: beloj, narandžastoj, crnoj, plavoj, krem i bordo.",
+    "purpose": "Poliranje laka orbitalnom polirkom",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "180 mm"
+      },
+      {
+        "label": "Broj rupa",
+        "value": "16"
+      },
+      {
+        "label": "Boje",
+        "value": "bela, narandžasta, crna, plava, krem, bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-premium-advance-velcro-compounding-pad": {
+    "sourceHash": "0d64762de7ab4e27",
+    "productType": "Sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 150 × 50 mm · bordo",
+    "shortDescription": "Leo Premium Advance sunđer za poliranje sa čičkom, dimenzije 150 × 50 mm, u bordo boji.",
+    "longDescription": "Leo Premium Advance Velcro Compounding Pad je sunđer za poliranje sa čičkom iz linije Leo brenda Befar. Proizvođač ga navodi u jednoj izvedbi: 150 × 50 mm, bordo.",
+    "purpose": "Mašinsko poliranje laka, uz čičak podlošku na polirki",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 50 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-premium-advance-with-applicator-compounding-pad": {
+    "sourceHash": "388c7e0a4eea13b3",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · aplikator · 150 × 50 mm · bordo",
+    "shortDescription": "Leo Premium Advance sunđer za poliranje sa aplikatorom (nosačem sa navojem), dimenzije 150 × 50 mm, u bordo boji.",
+    "longDescription": "Leo Premium Advance With Applicator Compounding Pad je sunđer za poliranje sa aplikatorom (nosačem sa navojem) iz linije Leo brenda Befar. Proizvođač ga navodi u jednoj izvedbi: 150 × 50 mm, bordo.",
+    "purpose": "Mašinsko poliranje laka, sa aplikatorom za montažu na polirku",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 50 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-premium-air-lines-velcro-compounding-pad": {
+    "sourceHash": "4b5a036b9a82bab1",
+    "productType": "Orbitalni sunđer za poliranje sa čičkom",
+    "subtype": "sunđer za poliranje · čičak · 150 mm i 180 mm · bordo",
+    "shortDescription": "Leo Premium Air Lines sunđer za poliranje sa čičkom, u bordo boji: 150 mm bez rupa i 180 mm sa 16 rupa.",
+    "longDescription": "Leo Premium Air Lines Velcro Compounding Pad je sunđer za poliranje sa čičkom iz linije Leo brenda Befar; turski naziv proizvođača opisuje ga kao ojačani orbitalni sunđer sa čičkom. Proizvođač ga navodi u bordo boji, u dve izvedbe: 150 mm bez rupa i 180 mm sa 16 rupa.",
+    "purpose": "Poliranje laka orbitalnom polirkom",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 mm, 180 mm"
+      },
+      {
+        "label": "Broj rupa",
+        "value": "150 mm bez rupa, 180 mm sa 16 rupa"
+      },
+      {
+        "label": "Boje",
+        "value": "bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  },
+  "leo-premium-compounding-pad": {
+    "sourceHash": "3dee1a93d23956bd",
+    "productType": "Sunđer za poliranje sa aplikatorom",
+    "subtype": "sunđer za poliranje · aplikator · 150 × 50 mm · bordo",
+    "shortDescription": "Leo Premium sunđer za poliranje sa aplikatorom (nosačem sa navojem), dimenzije 150 × 50 mm, u bordo boji.",
+    "longDescription": "Leo Premium Compounding Pad je sunđer za poliranje iz linije Leo brenda Befar; turski naziv proizvođača određuje ga kao sunđer sa aplikatorom (nosačem sa navojem). Proizvođač ga navodi u jednoj izvedbi: 150 × 50 mm, bordo.",
+    "purpose": "Mašinsko poliranje laka, sa aplikatorom za montažu na polirku",
+    "facts": [
+      {
+        "label": "Linija",
+        "value": "Leo"
+      },
+      {
+        "label": "Dimenzije",
+        "value": "150 × 50 mm"
+      },
+      {
+        "label": "Boje",
+        "value": "bordo"
+      }
+    ],
+    "applications": [],
+    "benefits": [],
+    "advice": null,
+    "setContents": []
+  }
+}

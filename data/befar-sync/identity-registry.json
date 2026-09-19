@@ -1,0 +1,582 @@
+{
+  "_comment": "sourceKey / šifra → naš slug. Sync ovaj fajl samo dopunjuje; red se nikad ne briše, jer je slug javni URL.",
+  "products": {
+    "befar-anti-hologram": {
+      "sourceKey": "anti-hologram",
+      "codes": [
+        "85011",
+        "85250"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-auto-polish": {
+      "sourceKey": "auto-polish",
+      "codes": [
+        "80011",
+        "80250"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-backing-pad": {
+      "sourceKey": "backing-pad",
+      "codes": [
+        "93107",
+        "93115",
+        "93162"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-carved-velcro-polishing-pad": {
+      "sourceKey": "carved-velcro-polishing-pad",
+      "codes": [
+        "05801",
+        "05802",
+        "58405",
+        "58406",
+        "58407"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-cream-compound": {
+      "sourceKey": "cream-compound",
+      "codes": [
+        "60000",
+        "60125",
+        "60300"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-drill-type-headlight-cleaning-pad": {
+      "sourceKey": "drill-type-headlight-cleaning-pad",
+      "codes": [
+        "83424"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-drill-type-wheel-cleaning-pad": {
+      "sourceKey": "drill-type-wheel-cleaning-pad",
+      "codes": [
+        "97200"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-ellipse-corrugated-polishing-compounding-pad": {
+      "sourceKey": "ellipse-corrugated-polishing-compounding-pad",
+      "codes": [
+        "20101",
+        "20102",
+        "20104",
+        "20105"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-extra-cream-compound": {
+      "sourceKey": "extra-cream-compound",
+      "codes": [
+        "76000",
+        "76125",
+        "76300"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-hard-velcro-backing-pad": {
+      "sourceKey": "hard-velcro-backing-pad",
+      "codes": [
+        "09400",
+        "09401",
+        "09402",
+        "09403"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-headlight-cleaning-set": {
+      "sourceKey": "headlight-cleaning-set",
+      "codes": [
+        "05812"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-ceramic-application-block": {
+      "sourceKey": "leo-ceramic-aplication-block",
+      "codes": [
+        "20105R",
+        "80012B",
+        "80012O",
+        "80012Y"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-ceramic-cloth": {
+      "sourceKey": "leo-ceramic-cloth",
+      "codes": [
+        "10175TM"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-compound-polish-set": {
+      "sourceKey": "leo-compound-polish-set",
+      "codes": [
+        "150221"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-detailing-backing-pad": {
+      "sourceKey": "leo-detailing-backing-pad",
+      "codes": [
+        "09901",
+        "09902",
+        "59533"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-hamburger-pad": {
+      "sourceKey": "leo-hamburger-pad",
+      "codes": [
+        "90207"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-mini-detailing-cleaning-set": {
+      "sourceKey": "leo-mini-detailing-cleaning-set",
+      "codes": [
+        "05712"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-nano-ceramic-paint-protector-set": {
+      "sourceKey": "leo-nano-ceramic-paint-protector-set",
+      "codes": [
+        "98050"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-plus-advance-velcro-compounding-pad": {
+      "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+      "codes": [
+        "55401ADV",
+        "55402ADV",
+        "55403ADV",
+        "55405ADV",
+        "55406ADV",
+        "55407ADV"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-plus-advance-with-applicator-compounding-pad": {
+      "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+      "codes": [
+        "52401ADV",
+        "52402ADV",
+        "52403ADV",
+        "52405ADV",
+        "52406ADV",
+        "52407ADV"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-plus-air-lines-orbital-velcro-compounding-pad": {
+      "sourceKey": "leo-plus-air-lines-orbital-velcro-compounding-pad",
+      "codes": [
+        "54401ORB",
+        "54402ORB",
+        "54403ORB",
+        "54405ORB",
+        "54406ORB",
+        "54407ORB"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad": {
+      "sourceKey": "leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad",
+      "codes": [
+        "56401ORB",
+        "56402ORB",
+        "56403ORB",
+        "56405ORB",
+        "56406ORB",
+        "56407ORB"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-premium-advance-velcro-compounding-pad": {
+      "sourceKey": "leo-premium-advance-velcro-compounding-pad",
+      "codes": [
+        "52507ADV"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-premium-advance-with-applicator-compounding-pad": {
+      "sourceKey": "leo-premium-advance-with-applicator-compounding-pad",
+      "codes": [
+        "59507ADV"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-premium-air-lines-velcro-compounding-pad": {
+      "sourceKey": "leo-premium-air-lines-velcro-compounding-pad",
+      "codes": [
+        "52507ORB",
+        "56507ORB"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-leo-premium-compounding-pad": {
+      "sourceKey": "leo-premium-compounding-pad",
+      "codes": [
+        "59507"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-liquid-compound": {
+      "sourceKey": "liquid-compound",
+      "codes": [
+        "75011",
+        "75250"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-m14-adapter": {
+      "sourceKey": "m14-adapter",
+      "codes": [
+        "97400"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-medium-hard-velcro-backing-pad": {
+      "sourceKey": "medium-hard-velcro-backing-pad",
+      "codes": [
+        "09501",
+        "09502",
+        "09503"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-microfiber-cloths": {
+      "sourceKey": "mikrofiber-clothes",
+      "codes": [
+        "01401",
+        "01405"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-non-woven-abrasive": {
+      "sourceKey": "non-wowen-abrasive",
+      "codes": [
+        "91025",
+        "91030"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-paint-protector": {
+      "sourceKey": "paint-protector",
+      "codes": [
+        "90011",
+        "90250"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plastic-putty-applicator": {
+      "sourceKey": "plastic-putty-aplicatior",
+      "codes": [
+        "87101"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plate-type-felt-backing-pad": {
+      "sourceKey": "plate-type-felt-backing-pad",
+      "codes": [
+        "77776"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plus-hand-compounding-pad": {
+      "sourceKey": "befar-plus-hand-compounding-pad",
+      "codes": [
+        "12101",
+        "12102",
+        "12103",
+        "12104",
+        "12105",
+        "12106",
+        "12107"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plus-velcro-polishing-pad": {
+      "sourceKey": "befar-plus-velcro-polishing-pad",
+      "codes": [
+        "54402",
+        "54405",
+        "54406",
+        "54407",
+        "56402",
+        "56405",
+        "56406",
+        "56407"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plus-velcro-woolpad": {
+      "sourceKey": "befar-plus-velcro-woolpad",
+      "codes": [
+        "07604",
+        "07605",
+        "07606"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plus-wax-pad-conical-pad": {
+      "sourceKey": "befar-plus-wax-pad-conical-pad",
+      "codes": [
+        "131011",
+        "131021",
+        "131031",
+        "131041",
+        "131051",
+        "131061",
+        "131071"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-plus-with-applicator-compounding-pad": {
+      "sourceKey": "befar-plus-with-applicator-compounding-pad",
+      "codes": [
+        "11002",
+        "11005",
+        "11006",
+        "11007",
+        "52402",
+        "52405",
+        "52406",
+        "52407"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-polishing-sponge-with-applicator": {
+      "sourceKey": "polishing-sponge-with-applicator",
+      "codes": [
+        "10101",
+        "10102",
+        "10103",
+        "10104"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-sanding-block-hard-red": {
+      "sourceKey": "sanding-block-hard-red",
+      "codes": [
+        "89010",
+        "89015",
+        "89020"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-sanding-block-soft-orange": {
+      "sourceKey": "sanding-block-soft-orange",
+      "codes": [
+        "88010",
+        "88015",
+        "88020"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-sanding-pad": {
+      "sourceKey": "sanding-pad",
+      "codes": [
+        "93000"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-sandwich-velcro-backing-pad": {
+      "sourceKey": "sandwich-velcro-backing-pad",
+      "codes": [
+        "08401SND",
+        "08402SND",
+        "08403SND"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-soft-velcro-backing-pad": {
+      "sourceKey": "soft-velcro-backing-pad",
+      "codes": [
+        "08400",
+        "08401",
+        "08402",
+        "08403"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-static-foil": {
+      "sourceKey": "static-fail",
+      "codes": [
+        "64005",
+        "64150"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-tack-cloth": {
+      "sourceKey": "tack-cloth",
+      "codes": [
+        "34510",
+        "34515",
+        "34520"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-turkuaz-compound": {
+      "sourceKey": "turkuaz-compound",
+      "codes": [
+        "70041"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-turkuaz-polish": {
+      "sourceKey": "turkuaz-polish",
+      "codes": [
+        "70046"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-turkuaz-sanding-block-blue": {
+      "sourceKey": "turkuaz-sanding-block-blue",
+      "codes": [
+        "78010",
+        "78015",
+        "78020"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-turkuaz-static-foil": {
+      "sourceKey": "turkuaz-static-fail",
+      "codes": [
+        "79005",
+        "79120",
+        "79130",
+        "79150"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-turkuaz-with-applicator-compounding-pad": {
+      "sourceKey": "turkuaz-with-applicator-compounding-pad",
+      "codes": [
+        "77101",
+        "77102"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-velcro-polishing-pad": {
+      "sourceKey": "velcro-polishing-pad",
+      "codes": [
+        "04401",
+        "04402",
+        "04403",
+        "04404",
+        "06401",
+        "06402",
+        "06403",
+        "06404",
+        "44801",
+        "44802",
+        "44803",
+        "44804",
+        "44805",
+        "44806",
+        "44807"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-velcro-woolpad": {
+      "sourceKey": "velcro-woolpad",
+      "codes": [
+        "07400",
+        "07404",
+        "07405",
+        "07406"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-waffle-velcro-polishing-pad": {
+      "sourceKey": "waffle-velcro-polishing-pad",
+      "codes": [
+        "04501",
+        "04502",
+        "04503",
+        "04504",
+        "04505",
+        "448011",
+        "448021",
+        "448031",
+        "448041",
+        "448051",
+        "448061"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    },
+    "befar-with-applicator-compounding-pad": {
+      "sourceKey": "with-applicator-compounding-pad",
+      "codes": [
+        "024012",
+        "024022",
+        "024032",
+        "024042"
+      ],
+      "firstSeen": "2026-09-19",
+      "lastSeen": "2026-09-19"
+    }
+  }
+}

@@ -163,8 +163,32 @@ function build() {
  * }}
  */
 export function loadCatalogRuntime() {
-  cached ??= build();
+  cached ??= withForeignProducts(build());
   return cached;
+}
+
+/**
+ * Test-šav za cross-sync determinizam (`scripts/lib/crossSyncDeterminism.test.mjs`).
+ *
+ * `CATALOG_RUNTIME_FOREIGN_PRODUCTS=<n>` dodaje n zapisa izmišljenog brenda —
+ * simulacija proizvođača koji će tek biti uvezen. Izlaz sync-a jednog brenda
+ * ne sme da zavisi od tuđih proizvoda; test to dokazuje ponašanjem, ne čitanjem
+ * koda. Bez promenljive (uvek van tog testa) katalog je netaknut.
+ */
+function withForeignProducts(runtime) {
+  const count = Number(process.env.CATALOG_RUNTIME_FOREIGN_PRODUCTS ?? 0);
+  if (!Number.isInteger(count) || count <= 0) return runtime;
+  const foreign = Array.from({ length: count }, (_, index) => ({
+    slug: `zz-foreign-sync-${index + 1}`,
+    name: `Foreign sync product ${index + 1}`,
+    brandSlug: "zz-foreign-sync",
+    sku: null,
+    packages: [],
+    badges: [],
+    specifications: [],
+    galleryImages: [],
+  }));
+  return { ...runtime, products: [...runtime.products, ...foreign] };
 }
 
 /**

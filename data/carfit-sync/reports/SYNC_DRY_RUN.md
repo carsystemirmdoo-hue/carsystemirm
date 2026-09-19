@@ -32,7 +32,6 @@ Generisano komandom `npm run carfit:sync:plan`. Ovaj korak ne menja katalog.
 | MISSING_IMAGES | 0 |
 | newProducts | 0 |
 | existingProducts | 121 |
-| catalogProductsTotalBefore | 1566 |
 
 ## Akcije
 

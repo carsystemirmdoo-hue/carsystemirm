@@ -1,0 +1,3429 @@
+{
+  "meta": {
+    "catalogue": "BEFAR Product Catalog",
+    "websiteCrawledAt": "2026-09-19T03:25:53.810Z",
+    "rule": "aktuelni sajt befar.com.tr → digitalni katalog (PDF) → lokalni podaci; ključ je zvanična šifra proizvoda"
+  },
+  "summary": {
+    "CURRENT_ACTIVE_BEFAR_PRODUCT_FAMILIES": 56,
+    "CURRENT_ACTIVE_BEFAR_CODES": 185,
+    "CATALOGUE_FAMILIES": 41,
+    "CATALOGUE_CODES": 249,
+    "LOCAL_PRODUCTS_BEFORE": 8,
+    "LOCAL_CODES_BEFORE": 0,
+    "MATCHED": 0,
+    "PROBABLE": 8,
+    "LEGACY_LOCAL_ONLY": 0,
+    "WEBSITE_AND_CATALOGUE": 50,
+    "WEBSITE_ONLY": 6,
+    "CATALOGUE_ONLY": 99,
+    "SOURCE_CONFLICT": 7,
+    "MISSING_PRODUCTS": 0,
+    "MISSING_CODES": 0,
+    "MISSING_IMAGES": 0,
+    "MISSING_DESCRIPTIONS": 0,
+    "actions": {
+      "IMPORT": 56
+    },
+    "newProducts": 0,
+    "existingProducts": 56,
+    "planErrors": {
+      "duplicateSlugs": [],
+      "slugCollidesWithExisting": [],
+      "codeOnMultipleProducts": []
+    }
+  },
+  "localMatches": [
+    {
+      "localSlug": "befar-sundjer-narandzasti-25x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "befar-plus-velcro-polishing-pad",
+          "officialName": "Befar Plus Velcro Polishing Pad",
+          "codes": [
+            "54402"
+          ]
+        },
+        {
+          "sourceKey": "velcro-polishing-pad",
+          "officialName": "Velcro Polishing Pad",
+          "codes": [
+            "04402"
+          ]
+        },
+        {
+          "sourceKey": "waffle-velcro-polishing-pad",
+          "officialName": "Waffle Velcro Polishing Pad",
+          "codes": [
+            "04502"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (orange) + dimenzija (25x150 mm) odgovaraju 3 zvaničnih šifara u 3 porodica (54402, 04402, 04502) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-narandzasti-50x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "befar-plus-with-applicator-compounding-pad",
+          "officialName": "Befar Plus With Applicator Compounding Pad",
+          "codes": [
+            "52402"
+          ]
+        },
+        {
+          "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+          "officialName": "Leo Plus Advance Velcro Compounding Pad",
+          "codes": [
+            "55402ADV"
+          ]
+        },
+        {
+          "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+          "officialName": "Leo Plus Advance with Applicator Compounding Pad",
+          "codes": [
+            "52402ADV"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (orange) + dimenzija (50x150 mm) odgovaraju 3 zvaničnih šifara u 3 porodica (52402, 55402ADV, 52402ADV) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-crni-25x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "velcro-polishing-pad",
+          "officialName": "Velcro Polishing Pad",
+          "codes": [
+            "04403"
+          ]
+        },
+        {
+          "sourceKey": "waffle-velcro-polishing-pad",
+          "officialName": "Waffle Velcro Polishing Pad",
+          "codes": [
+            "04503"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (black) + dimenzija (25x150 mm) odgovaraju 2 zvaničnih šifara u 2 porodica (04403, 04503) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-crni-50x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+          "officialName": "Leo Plus Advance Velcro Compounding Pad",
+          "codes": [
+            "55403ADV"
+          ]
+        },
+        {
+          "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+          "officialName": "Leo Plus Advance with Applicator Compounding Pad",
+          "codes": [
+            "52403ADV"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (black) + dimenzija (50x150 mm) odgovaraju 2 zvaničnih šifara u 2 porodica (55403ADV, 52403ADV) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-beli-25x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "velcro-polishing-pad",
+          "officialName": "Velcro Polishing Pad",
+          "codes": [
+            "04401"
+          ]
+        },
+        {
+          "sourceKey": "waffle-velcro-polishing-pad",
+          "officialName": "Waffle Velcro Polishing Pad",
+          "codes": [
+            "04501"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (white) + dimenzija (25x150 mm) odgovaraju 2 zvaničnih šifara u 2 porodica (04401, 04501) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-beli-50x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+          "officialName": "Leo Plus Advance Velcro Compounding Pad",
+          "codes": [
+            "55401ADV"
+          ]
+        },
+        {
+          "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+          "officialName": "Leo Plus Advance with Applicator Compounding Pad",
+          "codes": [
+            "52401ADV"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (white) + dimenzija (50x150 mm) odgovaraju 2 zvaničnih šifara u 2 porodica (55401ADV, 52401ADV) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-plavi-25x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "befar-plus-velcro-polishing-pad",
+          "officialName": "Befar Plus Velcro Polishing Pad",
+          "codes": [
+            "54405"
+          ]
+        },
+        {
+          "sourceKey": "waffle-velcro-polishing-pad",
+          "officialName": "Waffle Velcro Polishing Pad",
+          "codes": [
+            "04505"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (blue) + dimenzija (25x150 mm) odgovaraju 2 zvaničnih šifara u 2 porodica (54405, 04505) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "befar-sundjer-plavi-50x150",
+      "classification": "PROBABLE_MATCH",
+      "sourceKey": null,
+      "candidates": [
+        {
+          "sourceKey": "befar-plus-with-applicator-compounding-pad",
+          "officialName": "Befar Plus With Applicator Compounding Pad",
+          "codes": [
+            "52405"
+          ]
+        },
+        {
+          "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+          "officialName": "Leo Plus Advance Velcro Compounding Pad",
+          "codes": [
+            "55405ADV"
+          ]
+        },
+        {
+          "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+          "officialName": "Leo Plus Advance with Applicator Compounding Pad",
+          "codes": [
+            "52405ADV"
+          ]
+        }
+      ],
+      "evidence": [
+        "boja (blue) + dimenzija (50x150 mm) odgovaraju 3 zvaničnih šifara u 3 porodica (52405, 55405ADV, 52405ADV) — bez zvanične šifre se ne može znati koja je naša"
+      ],
+      "autoApply": false
+    }
+  ],
+  "items": [
+    {
+      "sourceKey": "anti-hologram",
+      "officialName": "Anti Hologram",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-anti-hologram",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /compound|polish|anti hologram|hologram/"
+      },
+      "leadCode": "85011",
+      "codes": [
+        "85011",
+        "85250"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "d277c8897ab8f737",
+      "localized": true
+    },
+    {
+      "sourceKey": "auto-polish",
+      "officialName": "Auto Polish",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-auto-polish",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /compound|polish|anti hologram|hologram/"
+      },
+      "leadCode": "80011",
+      "codes": [
+        "80011",
+        "80250"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "e9b241d840c8580a",
+      "localized": true
+    },
+    {
+      "sourceKey": "backing-pad",
+      "officialName": "Backing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sanding Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /^backing pad$|^sanding pad$/"
+      },
+      "leadCode": "93107",
+      "codes": [
+        "93107",
+        "93115",
+        "93162"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "c2e97741dd2ad14c",
+      "localized": true
+    },
+    {
+      "sourceKey": "befar-plus-hand-compounding-pad",
+      "officialName": "Befar Plus Hand Compounding Pad",
+      "line": "Befar Plus",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plus-hand-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "12101",
+      "codes": [
+        "12101",
+        "12102",
+        "12103",
+        "12104",
+        "12105",
+        "12106",
+        "12107"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "7eed266c8bf14a03",
+      "localized": true
+    },
+    {
+      "sourceKey": "befar-plus-velcro-polishing-pad",
+      "officialName": "Befar Plus Velcro Polishing Pad",
+      "line": "Befar Plus",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plus-velcro-polishing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [
+        "befar-sundjer-narandzasti-25x150",
+        "befar-sundjer-plavi-25x150"
+      ],
+      "taxonomy": {
+        "officialCategories": [
+          "Velcro Polishing Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "54402",
+      "codes": [
+        "54402",
+        "54405",
+        "54406",
+        "54407",
+        "56402",
+        "56405",
+        "56406",
+        "56407"
+      ],
+      "images": 7,
+      "missingOfficialAsset": false,
+      "contentHash": "81b3c02342cf9d06",
+      "localized": true
+    },
+    {
+      "sourceKey": "befar-plus-velcro-woolpad",
+      "officialName": "Befar Plus Velcro Woolpad",
+      "line": "Befar Plus",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plus-velcro-woolpad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /woolpad|wool pad/"
+      },
+      "leadCode": "07604",
+      "codes": [
+        "07604",
+        "07605",
+        "07606"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "e7d6da4eaa0493dc",
+      "localized": true
+    },
+    {
+      "sourceKey": "befar-plus-wax-pad-conical-pad",
+      "officialName": "Befar Plus Wax Pad Conical Pad",
+      "line": "Befar Plus",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plus-wax-pad-conical-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "131011",
+      "codes": [
+        "131011",
+        "131021",
+        "131031",
+        "131041",
+        "131051",
+        "131061",
+        "131071"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "ce416cbabec2da0d",
+      "localized": true
+    },
+    {
+      "sourceKey": "befar-plus-with-applicator-compounding-pad",
+      "officialName": "Befar Plus With Applicator Compounding Pad",
+      "line": "Befar Plus",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plus-with-applicator-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [
+        "befar-sundjer-narandzasti-50x150",
+        "befar-sundjer-plavi-50x150"
+      ],
+      "taxonomy": {
+        "officialCategories": [
+          "Applicator Compounding Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "52402",
+      "codes": [
+        "52402",
+        "52405",
+        "52406",
+        "52407",
+        "11002",
+        "11005",
+        "11006",
+        "11007"
+      ],
+      "images": 10,
+      "missingOfficialAsset": false,
+      "contentHash": "1992943b785c0868",
+      "localized": true
+    },
+    {
+      "sourceKey": "carved-velcro-polishing-pad",
+      "officialName": "Carved Velcro Polishing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-carved-velcro-polishing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Velcro Polishing Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "05801",
+      "codes": [
+        "05801",
+        "05802",
+        "58405",
+        "58406",
+        "58407"
+      ],
+      "images": 6,
+      "missingOfficialAsset": false,
+      "contentHash": "c48c9f08d56a1c39",
+      "localized": true
+    },
+    {
+      "sourceKey": "cream-compound",
+      "officialName": "Cream Compound",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-cream-compound",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /^(extra )?cream compound$/"
+      },
+      "leadCode": "60125",
+      "codes": [
+        "60125",
+        "60300",
+        "60000"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "587e921024d75c01",
+      "localized": true
+    },
+    {
+      "sourceKey": "drill-type-headlight-cleaning-pad",
+      "officialName": "Drill Type Headlight Cleaning Pad",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-drill-type-headlight-cleaning-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "83424",
+      "codes": [
+        "83424"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "a2f8796a9d7c6c0b",
+      "localized": true
+    },
+    {
+      "sourceKey": "drill-type-wheel-cleaning-pad",
+      "officialName": "Drill Type Wheel Cleaning Pad",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-drill-type-wheel-cleaning-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "97200",
+      "codes": [
+        "97200"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "1231ecbde1399911",
+      "localized": true
+    },
+    {
+      "sourceKey": "ellipse-corrugated-polishing-compounding-pad",
+      "officialName": "Ellipse Corrugated Polishing Compounding Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-ellipse-corrugated-polishing-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Velcro Polishing Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "20101",
+      "codes": [
+        "20101",
+        "20102",
+        "20104",
+        "20105"
+      ],
+      "images": 5,
+      "missingOfficialAsset": false,
+      "contentHash": "9aa39632561b6381",
+      "localized": true
+    },
+    {
+      "sourceKey": "extra-cream-compound",
+      "officialName": "Extra Cream Compound",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-extra-cream-compound",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /^(extra )?cream compound$/"
+      },
+      "leadCode": "76125",
+      "codes": [
+        "76125",
+        "76300",
+        "76000"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "5765d38cbb710a39",
+      "localized": true
+    },
+    {
+      "sourceKey": "hard-velcro-backing-pad",
+      "officialName": "Hard Velcro Backing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-hard-velcro-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Backing Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "09400",
+      "codes": [
+        "09400",
+        "09401",
+        "09402",
+        "09403"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "45146737f8ad56fe",
+      "localized": true
+    },
+    {
+      "sourceKey": "headlight-cleaning-set",
+      "officialName": "Headlight Cleaning Set",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": true,
+      "pages": [
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-headlight-cleaning-set",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sets"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /set$|set\\b/"
+      },
+      "leadCode": "05812",
+      "codes": [
+        "05812"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "e69d4b30de47b07c",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-ceramic-aplication-block",
+      "officialName": "Leo Ceramic Aplication Block",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi",
+        "seramik-ürünleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-ceramic-application-block",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products",
+          "Ceramic Products"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": true,
+        "rule": "name ~ /ceramic aplication block|ceramic application block|ceramic cloth/"
+      },
+      "leadCode": "80012O",
+      "codes": [
+        "80012O",
+        "80012Y",
+        "80012B",
+        "20105R"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "58ef17be7552ff21",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-ceramic-cloth",
+      "officialName": "Leo Ceramic Cloth",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi",
+        "seramik-ürünleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-ceramic-cloth",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products",
+          "Ceramic Products"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": true,
+        "rule": "name ~ /ceramic aplication block|ceramic application block|ceramic cloth/"
+      },
+      "leadCode": "10175TM",
+      "codes": [
+        "10175TM"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "b651a491c0521b3b",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-compound-polish-set",
+      "officialName": "Leo Compound - Polish Set",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": true,
+      "pages": [
+        "diğer-ürünler",
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-compound-polish-set",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Yeni Sayfa",
+          "Sets"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /set$|set\\b/"
+      },
+      "leadCode": "150221",
+      "codes": [
+        "150221"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "838df178ab45b60b",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-detailing-backing-pad",
+      "officialName": "Leo Detailing Backing Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi",
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-detailing-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products",
+          "Backing Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "09901",
+      "codes": [
+        "09901",
+        "09902",
+        "59533"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "d8efe0c8bc92ce4e",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-hamburger-pad",
+      "officialName": "Leo Hamburger Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu",
+        "diğer-ürünler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-hamburger-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products",
+          "Yeni Sayfa"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "90207",
+      "codes": [
+        "90207"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "5f0176ea9bf74b76",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-mini-detailing-cleaning-set",
+      "officialName": "Leo Mini Detailing Cleaning Set",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": true,
+      "pages": [
+        "diğer-ürünler",
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-mini-detailing-cleaning-set",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Yeni Sayfa",
+          "Sets"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /set$|set\\b/"
+      },
+      "leadCode": "05712",
+      "codes": [
+        "05712"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "b752edf59c07e33f",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-nano-ceramic-paint-protector-set",
+      "officialName": "Leo Nano Ceramic Paint Protector Set",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": true,
+      "pages": [
+        "seramik-ürünleri",
+        "set-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-nano-ceramic-paint-protector-set",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Ceramic Products",
+          "Sets"
+        ],
+        "category": "zastita",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /ceramic paint protector|paint protector/"
+      },
+      "leadCode": "98050",
+      "codes": [
+        "98050"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "9489674dd933b528",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-plus-advance-velcro-compounding-pad",
+      "officialName": "Leo Plus Advance Velcro Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-plus-advance-velcro-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [
+        "befar-sundjer-narandzasti-50x150",
+        "befar-sundjer-crni-50x150",
+        "befar-sundjer-beli-50x150",
+        "befar-sundjer-plavi-50x150"
+      ],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "55401ADV",
+      "codes": [
+        "55401ADV",
+        "55402ADV",
+        "55403ADV",
+        "55405ADV",
+        "55406ADV",
+        "55407ADV"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "53a2107cf33bfa5a",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-plus-advance-with-applicator-compounding-pad",
+      "officialName": "Leo Plus Advance with Applicator Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-plus-advance-with-applicator-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [
+        "befar-sundjer-narandzasti-50x150",
+        "befar-sundjer-crni-50x150",
+        "befar-sundjer-beli-50x150",
+        "befar-sundjer-plavi-50x150"
+      ],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "52401ADV",
+      "codes": [
+        "52401ADV",
+        "52402ADV",
+        "52403ADV",
+        "52405ADV",
+        "52406ADV",
+        "52407ADV"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "621e897c79b76c78",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-plus-air-lines-orbital-velcro-compounding-pad",
+      "officialName": "Leo Plus Air Lines Orbital Velcro Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-plus-air-lines-orbital-velcro-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "54401ORB",
+      "codes": [
+        "54401ORB",
+        "54402ORB",
+        "54403ORB",
+        "54405ORB",
+        "54406ORB",
+        "54407ORB"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "65270bd0bbc10329",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad",
+      "officialName": "Leo Plus Air Lines with 16 Holes Orbital Velcro Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "56401ORB",
+      "codes": [
+        "56401ORB",
+        "56402ORB",
+        "56403ORB",
+        "56405ORB",
+        "56406ORB",
+        "56407ORB"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "822cff7b18740d18",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-premium-advance-velcro-compounding-pad",
+      "officialName": "Leo Premium Advance Velcro Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-premium-advance-velcro-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "52507ADV",
+      "codes": [
+        "52507ADV"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "0d64762de7ab4e27",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-premium-advance-with-applicator-compounding-pad",
+      "officialName": "Leo Premium Advance With Applicator Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri",
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-premium-advance-with-applicator-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Applicator Compounding Pads",
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "59507ADV",
+      "codes": [
+        "59507ADV"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "388c7e0a4eea13b3",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-premium-air-lines-velcro-compounding-pad",
+      "officialName": "Leo Premium Air Lines Velcro Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-premium-air-lines-velcro-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "52507ORB",
+      "codes": [
+        "52507ORB",
+        "56507ORB"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "4b5a036b9a82bab1",
+      "localized": true
+    },
+    {
+      "sourceKey": "leo-premium-compounding-pad",
+      "officialName": "Leo Premium Compounding Pad",
+      "line": "Leo",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri",
+        "leo-ürün-serisi"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-leo-premium-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Applicator Compounding Pads",
+          "Leo Detailing Products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "59507",
+      "codes": [
+        "59507"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "3dee1a93d23956bd",
+      "localized": true
+    },
+    {
+      "sourceKey": "liquid-compound",
+      "officialName": "Liquid Compound",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-liquid-compound",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /compound|polish|anti hologram|hologram/"
+      },
+      "leadCode": "75011",
+      "codes": [
+        "75011",
+        "75250"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "4ac43799c9f50569",
+      "localized": true
+    },
+    {
+      "sourceKey": "m14-adapter",
+      "officialName": "M14 Adapter",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-m14-adapter",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "97400",
+      "codes": [
+        "97400"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "db30b7ac92c585a4",
+      "localized": true
+    },
+    {
+      "sourceKey": "medium-hard-velcro-backing-pad",
+      "officialName": "Medium Hard Velcro Backing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-medium-hard-velcro-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Backing Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "09501",
+      "codes": [
+        "09501",
+        "09502",
+        "09503"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "cb6888718a21b28b",
+      "localized": true
+    },
+    {
+      "sourceKey": "mikrofiber-clothes",
+      "officialName": "Mikrofiber Clothes",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-microfiber-cloths",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /mikrofiber|microfiber/"
+      },
+      "leadCode": "01401",
+      "codes": [
+        "01401",
+        "01405"
+      ],
+      "images": 3,
+      "missingOfficialAsset": false,
+      "contentHash": "8ba8fa758a2ca951",
+      "localized": true
+    },
+    {
+      "sourceKey": "non-wowen-abrasive",
+      "officialName": "Non Wowen Abrasive",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-non-woven-abrasive",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sanding Pad Group"
+        ],
+        "category": "abrazivi",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "abrasive",
+        "materialColour": true,
+        "rule": "name ~ /non wowen abrasive|non woven abrasive/"
+      },
+      "leadCode": "91025",
+      "codes": [
+        "91025",
+        "91030"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "630ab3e008a4bd4f",
+      "localized": true
+    },
+    {
+      "sourceKey": "paint-protector",
+      "officialName": "Paint Protector",
+      "line": "Befar",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-paint-protector",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "zastita",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /ceramic paint protector|paint protector/"
+      },
+      "leadCode": "90011",
+      "codes": [
+        "90011",
+        "90250"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "9dafc6a90c0a93c2",
+      "localized": true
+    },
+    {
+      "sourceKey": "plastic-putty-aplicatior",
+      "officialName": "Plastic Putty Aplicatior",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": true,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plastic-putty-applicator",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "pribor",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /putty aplicat|putty applicat/"
+      },
+      "leadCode": "87101",
+      "codes": [
+        "87101"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "435f15fd0e6c6793",
+      "localized": true
+    },
+    {
+      "sourceKey": "plate-type-felt-backing-pad",
+      "officialName": "Plate Type Felt Backing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-plate-type-felt-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Backing Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "77776",
+      "codes": [
+        "77776"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "4ac453978aaab958",
+      "localized": true
+    },
+    {
+      "sourceKey": "polishing-sponge-with-applicator",
+      "officialName": "Polishing Sponge with Applicator",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-polishing-sponge-with-applicator",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Applicator Compounding Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "10101",
+      "codes": [
+        "10101",
+        "10102",
+        "10103",
+        "10104"
+      ],
+      "images": 5,
+      "missingOfficialAsset": false,
+      "contentHash": "336dc978ea87fcb7",
+      "localized": true
+    },
+    {
+      "sourceKey": "sanding-block-hard-red",
+      "officialName": "Sanding Block · Hard Red",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-sanding-block-hard-red",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sanding Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": true,
+        "rule": "name ~ /sanding block/"
+      },
+      "leadCode": "89010",
+      "codes": [
+        "89010",
+        "89015",
+        "89020"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "ca4aeebd5fde1b51",
+      "localized": true
+    },
+    {
+      "sourceKey": "sanding-block-soft-orange",
+      "officialName": "Sanding Block · Soft Orange",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-sanding-block-soft-orange",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sanding Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": true,
+        "rule": "name ~ /sanding block/"
+      },
+      "leadCode": "88010",
+      "codes": [
+        "88010",
+        "88015",
+        "88020"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "ecb55a18226ff527",
+      "localized": true
+    },
+    {
+      "sourceKey": "sanding-pad",
+      "officialName": "Sanding Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-sanding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sanding Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /^backing pad$|^sanding pad$/"
+      },
+      "leadCode": "93000",
+      "codes": [
+        "93000"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "3633fe81d75b712b",
+      "localized": true
+    },
+    {
+      "sourceKey": "sandwich-velcro-backing-pad",
+      "officialName": "Sandwich Velcro Backing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-sandwich-velcro-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Backing Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "08401SND",
+      "codes": [
+        "08401SND",
+        "08402SND",
+        "08403SND"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "26e1fffdf6dc42a0",
+      "localized": true
+    },
+    {
+      "sourceKey": "soft-velcro-backing-pad",
+      "officialName": "Soft Velcro Backing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "taban-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-soft-velcro-backing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Backing Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /backing pad|sanding pad|felt backing|m14 adapter/"
+      },
+      "leadCode": "08400",
+      "codes": [
+        "08400",
+        "08401",
+        "08402",
+        "08403"
+      ],
+      "images": 2,
+      "missingOfficialAsset": false,
+      "contentHash": "336122f4d4af7161",
+      "localized": true
+    },
+    {
+      "sourceKey": "static-fail",
+      "officialName": "Static Fail",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-static-foil",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "maskiranje",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /static fail|static foil|masking/"
+      },
+      "leadCode": "64005",
+      "codes": [
+        "64005",
+        "64150"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "6feaeea92a27da68",
+      "localized": true
+    },
+    {
+      "sourceKey": "tack-cloth",
+      "officialName": "Tack Cloth",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-tack-cloth",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /tack cloth/"
+      },
+      "leadCode": "34520",
+      "codes": [
+        "34520",
+        "34515",
+        "34510"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "9bceb98007abfa96",
+      "localized": true
+    },
+    {
+      "sourceKey": "turkuaz-compound",
+      "officialName": "Turkuaz Compound",
+      "line": "Turkuaz",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-turkuaz-compound",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /compound|polish|anti hologram|hologram/"
+      },
+      "leadCode": "70041",
+      "codes": [
+        "70041"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "976349513a7c6af4",
+      "localized": true
+    },
+    {
+      "sourceKey": "turkuaz-polish",
+      "officialName": "Turkuaz Polish",
+      "line": "Turkuaz",
+      "kind": "product-row",
+      "isSet": false,
+      "pages": [
+        "1-litre-pasta-grubu"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-turkuaz-polish",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Surface Chemicals"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /compound|polish|anti hologram|hologram/"
+      },
+      "leadCode": "70046",
+      "codes": [
+        "70046"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "6ae23ef19eddb512",
+      "localized": true
+    },
+    {
+      "sourceKey": "turkuaz-sanding-block-blue",
+      "officialName": "Turkuaz Sanding Block · Blue",
+      "line": "Turkuaz",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "zımpara-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-turkuaz-sanding-block-blue",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Sanding Pad Group"
+        ],
+        "category": "pribor",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": true,
+        "rule": "name ~ /sanding block/"
+      },
+      "leadCode": "78010",
+      "codes": [
+        "78010",
+        "78015",
+        "78020"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "e1f0dd89a5c731c3",
+      "localized": true
+    },
+    {
+      "sourceKey": "turkuaz-static-fail",
+      "officialName": "Turkuaz Static Fail",
+      "line": "Turkuaz",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-turkuaz-static-foil",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "maskiranje",
+        "programSlug": "potrosni-materijal",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "materialColour": false,
+        "rule": "name ~ /static fail|static foil|masking/"
+      },
+      "leadCode": "79005",
+      "codes": [
+        "79005",
+        "79120",
+        "79130",
+        "79150"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "c5d56ae8417aca15",
+      "localized": true
+    },
+    {
+      "sourceKey": "turkuaz-with-applicator-compounding-pad",
+      "officialName": "Turkuaz With Applicator Compounding Pad",
+      "line": "Turkuaz",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-turkuaz-with-applicator-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Applicator Compounding Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "77102",
+      "codes": [
+        "77102",
+        "77101"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "08c2273b80dac108",
+      "localized": true
+    },
+    {
+      "sourceKey": "velcro-polishing-pad",
+      "officialName": "Velcro Polishing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-velcro-polishing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [
+        "befar-sundjer-narandzasti-25x150",
+        "befar-sundjer-crni-25x150",
+        "befar-sundjer-beli-25x150"
+      ],
+      "taxonomy": {
+        "officialCategories": [
+          "Velcro Polishing Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "44801",
+      "codes": [
+        "44801",
+        "44802",
+        "44803",
+        "44804",
+        "44805",
+        "44806",
+        "44807",
+        "04401",
+        "04402",
+        "04403",
+        "04404",
+        "06401",
+        "06402",
+        "06403",
+        "06404"
+      ],
+      "images": 11,
+      "missingOfficialAsset": false,
+      "contentHash": "d8d8e8265bc668f7",
+      "localized": true
+    },
+    {
+      "sourceKey": "velcro-woolpad",
+      "officialName": "Velcro Woolpad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "amatör-grubu"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-velcro-woolpad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Other products"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /woolpad|wool pad/"
+      },
+      "leadCode": "07400",
+      "codes": [
+        "07400",
+        "07404",
+        "07405",
+        "07406"
+      ],
+      "images": 1,
+      "missingOfficialAsset": false,
+      "contentHash": "6b8b3308ae0e01f4",
+      "localized": true
+    },
+    {
+      "sourceKey": "waffle-velcro-polishing-pad",
+      "officialName": "Waffle Velcro Polishing Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "befar-cırtlı-süngerler"
+      ],
+      "classification": "WEBSITE_AND_CATALOGUE",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-waffle-velcro-polishing-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [
+        "befar-sundjer-narandzasti-25x150",
+        "befar-sundjer-crni-25x150",
+        "befar-sundjer-beli-25x150",
+        "befar-sundjer-plavi-25x150"
+      ],
+      "taxonomy": {
+        "officialCategories": [
+          "Velcro Polishing Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "448011",
+      "codes": [
+        "448011",
+        "448021",
+        "448031",
+        "448041",
+        "448051",
+        "448061",
+        "04501",
+        "04502",
+        "04503",
+        "04504",
+        "04505"
+      ],
+      "images": 7,
+      "missingOfficialAsset": false,
+      "contentHash": "aa4a0154216393bd",
+      "localized": true
+    },
+    {
+      "sourceKey": "with-applicator-compounding-pad",
+      "officialName": "With Applicator Compounding Pad",
+      "line": "Befar",
+      "kind": "family",
+      "isSet": false,
+      "pages": [
+        "aplikatörlü-polisaj-süngerleri"
+      ],
+      "classification": "WEBSITE_ONLY",
+      "sourceConflict": false,
+      "action": "IMPORT",
+      "reason": null,
+      "slug": "befar-with-applicator-compounding-pad",
+      "change": "EXISTING",
+      "localSlug": null,
+      "relatedLegacySlugs": [],
+      "taxonomy": {
+        "officialCategories": [
+          "Applicator Compounding Pads"
+        ],
+        "category": "poliranje",
+        "programSlug": "poliranje",
+        "phaseSlug": "poliranje",
+        "visualType": "foam",
+        "materialColour": true,
+        "rule": "name ~ /pad|sponge|foam/"
+      },
+      "leadCode": "024012",
+      "codes": [
+        "024012",
+        "024022",
+        "024032",
+        "024042"
+      ],
+      "images": 4,
+      "missingOfficialAsset": false,
+      "contentHash": "9cbe958e74b28424",
+      "localized": true
+    }
+  ],
+  "catalogueOnly": [
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 4,
+      "pageHeadings": [
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "02401",
+          "label": "WHITE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 24
+        },
+        {
+          "code": "02402",
+          "label": "ORANGE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 24
+        },
+        {
+          "code": "02403",
+          "label": "BLACK",
+          "dimension": "150 x 45 mm",
+          "boxQuantity": 24
+        },
+        {
+          "code": "02404",
+          "label": "YELLOW",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 24
+        },
+        {
+          "code": "02405",
+          "label": "BLUE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 24
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 5,
+      "pageHeadings": [
+        "VELCRO",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "03401",
+          "label": "WHITE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 36
+        },
+        {
+          "code": "03402",
+          "label": "ORANGE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 36
+        },
+        {
+          "code": "03403",
+          "label": "BLACK",
+          "dimension": "150 x 45 mm",
+          "boxQuantity": 36
+        },
+        {
+          "code": "03404",
+          "label": "YELLOW",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 36
+        },
+        {
+          "code": "03405",
+          "label": "BLUE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 36
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 6,
+      "pageHeadings": [
+        "VELCRO",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "04405",
+          "label": "BLUE",
+          "dimension": "150 x 25 mm",
+          "boxQuantity": 66
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 8,
+      "pageHeadings": [
+        "VELCRO COMPOUNDING FOAM",
+        "VELCRO CONICAL COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "44311",
+          "label": "WHITE",
+          "dimension": "30 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44312",
+          "label": "ORANGE",
+          "dimension": "30 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44313",
+          "label": "BLACK",
+          "dimension": "30 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44314",
+          "label": "YELLOW",
+          "dimension": "30 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44315",
+          "label": "BLUE",
+          "dimension": "30 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44317",
+          "label": "CHERRY",
+          "dimension": "30 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44511",
+          "label": "WHITE",
+          "dimension": "50 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44512",
+          "label": "ORANGE",
+          "dimension": "50 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44513",
+          "label": "BLACK",
+          "dimension": "50 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44514",
+          "label": "YELLOW",
+          "dimension": "50 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44515",
+          "label": "BLUE",
+          "dimension": "50 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44517",
+          "label": "CHERRY",
+          "dimension": "50 x 25 mm",
+          "boxQuantity": 200
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 9,
+      "pageHeadings": [
+        "PLUS VELCRO COMPOUNDING FOAM",
+        "VELCRO CONICAL COMPOUNDING FOAM",
+        "VELCRO WAFFLE COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "44809",
+          "label": "WHITE",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44808",
+          "label": "ORANGE",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44811",
+          "label": "WHITE",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44812",
+          "label": "ORANGE",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44813",
+          "label": "BLACK",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44814",
+          "label": "YELLOW",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44815",
+          "label": "BLUE",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        },
+        {
+          "code": "44817",
+          "label": "CHERRY",
+          "dimension": "80 x 25 mm",
+          "boxQuantity": 200
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 10,
+      "pageHeadings": [
+        "VELCRO",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "06405",
+          "label": "BLUE",
+          "dimension": "180 x 35 mm",
+          "boxQuantity": 32
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 11,
+      "pageHeadings": [
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "10105",
+          "label": "BLUE",
+          "dimension": "180 x 35 mm",
+          "boxQuantity": 20
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 12,
+      "pageHeadings": [
+        "VELCRO COMPOUNDING FOAM FOR HAND APPLICATOR",
+        "WHEEL CLEANING HAND FOAM",
+        "VELCRO HAND APPLICATOR",
+        "PROFESSIONAL HAND APPLICATOR"
+      ],
+      "codes": [
+        {
+          "code": "14101",
+          "label": "WHITE",
+          "dimension": "110 x 10 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "14102",
+          "label": "ORANGE",
+          "dimension": "110 x 10 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "14103",
+          "label": "BLACK",
+          "dimension": "110 x 10 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "14104",
+          "label": "YELLOW",
+          "dimension": "110 x 10 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "14105",
+          "label": "BLUE",
+          "dimension": "110 x 10 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "14107",
+          "label": "CHERRY",
+          "dimension": "110 x 10 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "92201",
+          "label": "WHITE",
+          "dimension": "STANDART",
+          "boxQuantity": null
+        },
+        {
+          "code": "92202",
+          "label": "ORANGE",
+          "dimension": "STANDART",
+          "boxQuantity": null
+        },
+        {
+          "code": "92203",
+          "label": "BLACK",
+          "dimension": "STANDART",
+          "boxQuantity": null
+        },
+        {
+          "code": "92204",
+          "label": "YELLOW",
+          "dimension": "STANDART",
+          "boxQuantity": null
+        },
+        {
+          "code": "92205",
+          "label": "BLUE",
+          "dimension": "STANDART",
+          "boxQuantity": null
+        },
+        {
+          "code": "92206",
+          "label": "CHERRY",
+          "dimension": "STANDART",
+          "boxQuantity": null
+        },
+        {
+          "code": "14250",
+          "label": "BLACK",
+          "dimension": "Standart",
+          "boxQuantity": null
+        },
+        {
+          "code": "14255",
+          "label": "BLACK",
+          "dimension": "Standart",
+          "boxQuantity": null
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 13,
+      "pageHeadings": [
+        "HAND COMPOUNDING FOAM",
+        "WAX PAD CONICAL PAD",
+        "WAX PAD"
+      ],
+      "codes": [
+        {
+          "code": "13101",
+          "label": "WHITE",
+          "dimension": "100 x 25 mm",
+          "boxQuantity": 72
+        },
+        {
+          "code": "13102",
+          "label": "ORANGE",
+          "dimension": "100 x 25 mm",
+          "boxQuantity": 72
+        },
+        {
+          "code": "13103",
+          "label": "BLACK",
+          "dimension": "100 x 25 mm",
+          "boxQuantity": 72
+        },
+        {
+          "code": "13104",
+          "label": "YELLOW",
+          "dimension": "100 x 25 mm",
+          "boxQuantity": 72
+        },
+        {
+          "code": "13105",
+          "label": "BLUE",
+          "dimension": "100 x 25 mm",
+          "boxQuantity": 72
+        },
+        {
+          "code": "13107",
+          "label": "CHERRY",
+          "dimension": "100 x 25 mm",
+          "boxQuantity": 72
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 15,
+      "pageHeadings": [
+        "PLUS",
+        "COMPOUNDING FOAM",
+        "POLISH OR ANTI HOLOGRAM"
+      ],
+      "codes": [
+        {
+          "code": "52401",
+          "label": "WHITE",
+          "dimension": "150 x 50 mm",
+          "boxQuantity": 24
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 17,
+      "pageHeadings": [
+        "POLISH OR ANTI HOLOGRAM",
+        "PLUS VELCRO",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "54401",
+          "label": "WHITE",
+          "dimension": "150 x 25 mm",
+          "boxQuantity": 66
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 18,
+      "pageHeadings": [
+        "POLISH OR ANTI HOLOGRAM",
+        "PLUS VELCRO",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "56401",
+          "label": "WHITE",
+          "dimension": "180 x 35 mm",
+          "boxQuantity": 32
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 19,
+      "pageHeadings": [
+        "POLISH OR ANTI HOLOGRAM",
+        "APPLICATOR",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "11001",
+          "label": "WHITE",
+          "dimension": "180 x 35 mm",
+          "boxQuantity": 20
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 20,
+      "pageHeadings": [
+        "POLISH OR ANTI HOLOGRAM",
+        "PLUS VELCRO",
+        "COMPOUNDING FOAM"
+      ],
+      "codes": [
+        {
+          "code": "58401",
+          "label": "WHITE",
+          "dimension": "220 x 35 mm",
+          "boxQuantity": 20
+        },
+        {
+          "code": "58402",
+          "label": "ORANGE",
+          "dimension": "220 x 35 mm",
+          "boxQuantity": 20
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 23,
+      "pageHeadings": [
+        "VELCRO BASIC PAD POL YURETHANE",
+        "BEFAR VELCRO BASIC PAD FOR BUFFING PAD"
+      ],
+      "codes": [
+        {
+          "code": "96125",
+          "label": "STANDART",
+          "dimension": "125 mm",
+          "boxQuantity": null
+        },
+        {
+          "code": "96150",
+          "label": "STANDART",
+          "dimension": "150 mm",
+          "boxQuantity": null
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 24,
+      "pageHeadings": [
+        "SOFT",
+        "BACKING PAD",
+        "HARD",
+        "PAD",
+        "PROTECTOR",
+        "PAD PROTECTOR"
+      ],
+      "codes": [
+        {
+          "code": "93007",
+          "label": "SOFT",
+          "dimension": "7 HOLES 120",
+          "boxQuantity": null
+        },
+        {
+          "code": "93015",
+          "label": "SOFT",
+          "dimension": "15 HOLES 120",
+          "boxQuantity": null
+        },
+        {
+          "code": "93062",
+          "label": "SOFT",
+          "dimension": "62 HOLES 120",
+          "boxQuantity": null
+        },
+        {
+          "code": "93207",
+          "label": "PAD PROTECTOR",
+          "dimension": "7 HOLES 300",
+          "boxQuantity": null
+        },
+        {
+          "code": "93215",
+          "label": "PAD PROTECTOR",
+          "dimension": "15 HOLES 300",
+          "boxQuantity": null
+        },
+        {
+          "code": "93262",
+          "label": "PAD PROTECTOR",
+          "dimension": "62 HOLES 300",
+          "boxQuantity": null
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 25,
+      "pageHeadings": [
+        "SOFT",
+        "ECO BACKING PAD"
+      ],
+      "codes": [
+        {
+          "code": "77207",
+          "label": "SOFT",
+          "dimension": "7 HOLES 120",
+          "boxQuantity": null
+        },
+        {
+          "code": "77215",
+          "label": "SOFT",
+          "dimension": "15 HOLES 120",
+          "boxQuantity": null
+        },
+        {
+          "code": "93700",
+          "label": null,
+          "dimension": "NO HOLES",
+          "boxQuantity": null
+        },
+        {
+          "code": "93753",
+          "label": null,
+          "dimension": "53 HOLES",
+          "boxQuantity": null
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 27,
+      "pageHeadings": [
+        "STATIC FOIL",
+        "STATIC",
+        "HALF STATIC FOIL",
+        "HALF",
+        "TACK CLOTH",
+        "TACK",
+        "CLOTH"
+      ],
+      "codes": [
+        {
+          "code": "64100",
+          "label": "STATIC",
+          "dimension": "4 x 100 m",
+          "boxQuantity": 1
+        },
+        {
+          "code": "64300",
+          "label": "STATIC",
+          "dimension": "4 x 300 m",
+          "boxQuantity": 1
+        },
+        {
+          "code": "79100",
+          "label": "HALF STATIC",
+          "dimension": "4 x 100 m",
+          "boxQuantity": 1
+        },
+        {
+          "code": "79300",
+          "label": "HALF STATIC",
+          "dimension": "4 x 300 m",
+          "boxQuantity": 1
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 28,
+      "pageHeadings": [
+        "MIKROFIBER CLOTHES",
+        "PLUS MIKROFIBER CLOTHES",
+        "RED NON WOVEN ABRASIVE 280 P",
+        "GREY NON WOVEN ABRASIVE 400 P",
+        "BEFAR NON WOVEN ABRASIVE"
+      ],
+      "codes": [
+        {
+          "code": "01407",
+          "label": null,
+          "dimension": "40 x 60 cm",
+          "boxQuantity": 20
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 29,
+      "pageHeadings": [
+        "SOFT",
+        "0RANGE",
+        "SANDING BLOCK",
+        "HARD",
+        "RED",
+        "ECO",
+        "BLUE",
+        "TURQUAZ SANDING BLOCK",
+        "HAND PAD SOFT / HAND PAD HARD"
+      ],
+      "codes": [
+        {
+          "code": "95001",
+          "label": "SOFT",
+          "dimension": "NO HOLES",
+          "boxQuantity": null
+        },
+        {
+          "code": "95002",
+          "label": "HARD",
+          "dimension": "NO HOLES",
+          "boxQuantity": null
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 30,
+      "pageHeadings": [
+        "LEO SLIM SANDING BLOCK WHITE & BLACK",
+        "BEFAR SANDING BLOCK FOR",
+        "ABRASIVE PAPER RED & BLACK",
+        "LEO SLIM SANDING BLOCK"
+      ],
+      "codes": [
+        {
+          "code": "77010",
+          "label": null,
+          "dimension": "6 x 12,5 cm",
+          "boxQuantity": null
+        },
+        {
+          "code": "90010",
+          "label": null,
+          "dimension": "6,8 x 19,5 cm",
+          "boxQuantity": null
+        },
+        {
+          "code": "90030",
+          "label": null,
+          "dimension": "6,8 x 39,5 cm",
+          "boxQuantity": null
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 32,
+      "pageHeadings": [
+        "HEADLIGHT CLEANING SET",
+        "2PCS 76 MM 1000PS VELCRO WATER SANDING PAPER",
+        "2PCS 76MM 2000PS VELCRO WATER SANDING PAPER",
+        "1PCS 75MM VELCRO BASIC PAD SOFT1PCS METAL ADAPTER",
+        "1PCS 80 MM VELCRO WOOLPAD",
+        "1PCS 80 MM VELCRO BLACK POLISHING FOAM",
+        "1PCS MICROFIBER CLOTH",
+        "1PCS GLOVE",
+        "BEFAR AUTO WASHING SPONGE"
+      ],
+      "codes": [
+        {
+          "code": "92100",
+          "label": "BLUE",
+          "dimension": "195 x 60 mm",
+          "boxQuantity": 42
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 33,
+      "pageHeadings": [
+        "CREAM COMPOUND",
+        "EXTRA CREAM COMPOUND"
+      ],
+      "codes": [
+        {
+          "code": "60150",
+          "label": null,
+          "dimension": "150 gr",
+          "boxQuantity": 36
+        },
+        {
+          "code": "60400",
+          "label": null,
+          "dimension": "400 gr",
+          "boxQuantity": 14
+        },
+        {
+          "code": "76150",
+          "label": null,
+          "dimension": "150 gr",
+          "boxQuantity": 36
+        },
+        {
+          "code": "76400",
+          "label": null,
+          "dimension": "400 gr",
+          "boxQuantity": 14
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 37,
+      "pageHeadings": [
+        "LEO PLUS TRIPPLE MIDDLE",
+        "HARD DETAILING VELCRO PAD",
+        "LEO PLUS MIDDLE"
+      ],
+      "codes": [
+        {
+          "code": "59532",
+          "label": "YELLOW",
+          "dimension": "2 in1",
+          "boxQuantity": 45
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 38,
+      "pageHeadings": [
+        "LEO PLUS MINI DETAILING / CLEANING SET",
+        "LEO PLUS CERAMIC APLICATION BLOCK",
+        "LEO PLUS CERAMIC CLOTH"
+      ],
+      "codes": [
+        {
+          "code": "05717",
+          "label": "CHERRY",
+          "dimension": "16 pcs",
+          "boxQuantity": 60
+        },
+        {
+          "code": "800120",
+          "label": "ORANGE",
+          "dimension": null,
+          "boxQuantity": 250
+        },
+        {
+          "code": "80012R",
+          "label": "RED",
+          "dimension": null,
+          "boxQuantity": 250
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 39,
+      "pageHeadings": [
+        "1PCS MICROFIBER CLOTH",
+        "1PCS DOUBLEFACE HAND FOAM",
+        "LEO COMPOUND POLISH SET",
+        "COMPOUND POLISH SETCOMPOUND POLISH SET",
+        "LEO PLUS MICROFIBER VELCRO PAD",
+        "LEO PLUS MICROFIBER VELCRO HARD PAD"
+      ],
+      "codes": [
+        {
+          "code": "68130L",
+          "label": null,
+          "dimension": "130 mm",
+          "boxQuantity": 68
+        },
+        {
+          "code": "68160L",
+          "label": null,
+          "dimension": "160 mm",
+          "boxQuantity": 68
+        },
+        {
+          "code": "68180L",
+          "label": null,
+          "dimension": "180 mm",
+          "boxQuantity": 24
+        },
+        {
+          "code": "78130L",
+          "label": null,
+          "dimension": "130 mm",
+          "boxQuantity": 68
+        },
+        {
+          "code": "78160L",
+          "label": null,
+          "dimension": "160 mm",
+          "boxQuantity": 68
+        },
+        {
+          "code": "78180L",
+          "label": null,
+          "dimension": "180 mm",
+          "boxQuantity": 24
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 40,
+      "pageHeadings": [
+        "NANO CERAMIC SET",
+        "1PCS CERAMIC LIQUD",
+        "1PCS MICROFIBER CLOTH",
+        "1 PCS GLOVE",
+        "1 PCS CERAMIC APLICATION BLOCK",
+        "4 PCS CERAMIC CLOTH",
+        "LEO NANO PAINT CERAMIC PROTECTOR SET"
+      ],
+      "codes": [
+        {
+          "code": "98030",
+          "label": null,
+          "dimension": "30 ml STANDART",
+          "boxQuantity": 18
+        }
+      ]
+    },
+    {
+      "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+      "pdfPage": 41,
+      "pageHeadings": [
+        "LEO PLUS MAGIC SPONGE",
+        "DOUBLE FACE HAND FOAM",
+        "PROFESSIONAL",
+        "SPRAY GUN PLASTIC CUP"
+      ],
+      "codes": [
+        {
+          "code": "81011L",
+          "label": null,
+          "dimension": "70x100x30 mm",
+          "boxQuantity": 230
+        },
+        {
+          "code": "20241",
+          "label": null,
+          "dimension": "600 ml",
+          "boxQuantity": 24
+        }
+      ]
+    }
+  ]
+}

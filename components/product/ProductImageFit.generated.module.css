@@ -590,6 +590,1203 @@
   --product-content-offset-y: 0.3315;
 }
 
+.fit[data-product-fit="/products/befar/catalog/befar-anti-hologram-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-anti-hologram.webp"] {
+  --product-canvas-aspect: 0.9083;
+  --product-content-aspect: 0.8209;
+  --product-content-fill-x: 0.8073;
+  --product-content-fill-y: 0.8933;
+  --product-content-offset-x: 0.1092;
+  --product-content-offset-y: 0.1067;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-auto-polish-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-auto-polish.webp"] {
+  --product-canvas-aspect: 0.9183;
+  --product-content-aspect: 0.8822;
+  --product-content-fill-x: 0.863;
+  --product-content-fill-y: 0.8983;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0.1017;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.6371;
+  --product-content-aspect: 1.6371;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-backing-pad-3.webp"] {
+  --product-canvas-aspect: 1.5385;
+  --product-content-aspect: 1.5873;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9692;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-backing-pad.webp"] {
+  --product-canvas-aspect: 1.3575;
+  --product-content-aspect: 1.3575;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-carved-velcro-polishing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.425;
+  --product-content-fill-x: 0.95;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.05;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-carved-velcro-polishing-pad-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-carved-velcro-polishing-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-carved-velcro-polishing-pad-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.455;
+  --product-content-fill-x: 0.97;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.03;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-carved-velcro-polishing-pad-6.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-carved-velcro-polishing-pad.webp"] {
+  --product-canvas-aspect: 1.1029;
+  --product-content-aspect: 1.1029;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cream-compound-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.2;
+  --product-content-fill-x: 0.8;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cream-compound-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.35;
+  --product-content-fill-x: 0.585;
+  --product-content-fill-y: 0.65;
+  --product-content-offset-x: 0.185;
+  --product-content-offset-y: 0.35;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cream-compound.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.2965;
+  --product-content-fill-x: 0.86;
+  --product-content-fill-y: 0.995;
+  --product-content-offset-x: 0.14;
+  --product-content-offset-y: 0.005;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.8518;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.7817;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0.2183;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-3.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.7697;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.865;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-drill-type-headlight-cleaning-pad.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.749;
+  --product-content-fill-x: 0.9299;
+  --product-content-fill-y: 0.8267;
+  --product-content-offset-x: 0.0701;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.2337;
+  --product-content-fill-x: 0.8225;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-extra-cream-compound-2.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.7344;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9067;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-extra-cream-compound-3.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.7966;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.8358;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-extra-cream-compound.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.7398;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-hard-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.6426;
+  --product-content-fill-x: 0.965;
+  --product-content-fill-y: 0.8812;
+  --product-content-offset-x: 0.035;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-hard-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-headlight-cleaning-set-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-headlight-cleaning-set.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.191;
+  --product-content-fill-x: 0.7533;
+  --product-content-fill-y: 0.9487;
+  --product-content-offset-x: 0.0817;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-ceramic-application-block.webp"] {
+  --product-canvas-aspect: 1.2435;
+  --product-content-aspect: 1.2435;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-compound-polish-set-2.webp"] {
+  --product-canvas-aspect: 0.8133;
+  --product-content-aspect: 0.8133;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-compound-polish-set-3.webp"] {
+  --product-canvas-aspect: 0.7658;
+  --product-content-aspect: 0.9445;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.8108;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-compound-polish-set.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-detailing-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.4833;
+  --product-content-aspect: 1.5686;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9456;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-detailing-backing-pad-3.webp"] {
+  --product-canvas-aspect: 0.9517;
+  --product-content-aspect: 0.9279;
+  --product-content-fill-x: 0.8564;
+  --product-content-fill-y: 0.8783;
+  --product-content-offset-x: 0.0053;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-detailing-backing-pad.webp"] {
+  --product-canvas-aspect: 0.7808;
+  --product-content-aspect: 0.7808;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-hamburger-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.4272;
+  --product-content-fill-x: 0.8658;
+  --product-content-fill-y: 0.91;
+  --product-content-offset-x: 0.1342;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-hamburger-pad.webp"] {
+  --product-canvas-aspect: 1.4688;
+  --product-content-aspect: 1.459;
+  --product-content-fill-x: 0.9933;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0067;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-mini-detailing-cleaning-set.webp"] {
+  --product-canvas-aspect: 1.0345;
+  --product-content-aspect: 1.0802;
+  --product-content-fill-x: 0.9767;
+  --product-content-fill-y: 0.9353;
+  --product-content-offset-x: 0.0233;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-nano-ceramic-paint-protector-set-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-nano-ceramic-paint-protector-set-3.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.9569;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.6958;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0.1067;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-nano-ceramic-paint-protector-set.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5152;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.99;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-plus-advance-velcro-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-plus-advance-velcro-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-plus-advance-with-applicator-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-plus-advance-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-plus-air-lines-orbital-velcro-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.43;
+  --product-content-fill-x: 0.9533;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0467;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-advance-velcro-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.3175;
+  --product-content-fill-x: 0.83;
+  --product-content-fill-y: 0.945;
+  --product-content-offset-x: 0.0933;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-advance-velcro-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-advance-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.0899;
+  --product-content-aspect: 1.0899;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-air-lines-velcro-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-air-lines-velcro-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-leo-premium-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-liquid-compound-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-liquid-compound.webp"] {
+  --product-canvas-aspect: 0.9083;
+  --product-content-aspect: 0.9083;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-medium-hard-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.8403;
+  --product-content-fill-x: 0.9508;
+  --product-content-fill-y: 0.775;
+  --product-content-offset-x: 0.0492;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-medium-hard-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.42;
+  --product-content-fill-x: 0.9467;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0533;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-microfiber-cloths-2.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.6658;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-microfiber-cloths-3.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.6658;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-microfiber-cloths.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.7833;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.85;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-non-woven-abrasive-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-non-woven-abrasive.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-paint-protector-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-paint-protector.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plastic-putty-applicator.webp"] {
+  --product-canvas-aspect: 1.4981;
+  --product-content-aspect: 2.1018;
+  --product-content-fill-x: 0.8775;
+  --product-content-fill-y: 0.6255;
+  --product-content-offset-x: 0.0892;
+  --product-content-offset-y: 0.3171;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plate-type-felt-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.3325;
+  --product-content-fill-x: 0.8883;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.1117;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plate-type-felt-backing-pad.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.6658;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-hand-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.2579;
+  --product-content-aspect: 1.2579;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5113;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9925;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad-6.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad-7.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-polishing-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-velcro-woolpad.webp"] {
+  --product-canvas-aspect: 1.4981;
+  --product-content-aspect: 1.3446;
+  --product-content-fill-x: 0.8975;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-wax-pad-conical-pad.webp"] {
+  --product-canvas-aspect: 1.2565;
+  --product-content-aspect: 1.5045;
+  --product-content-fill-x: 0.9692;
+  --product-content-fill-y: 0.8094;
+  --product-content-offset-x: 0.0308;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-10.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5266;
+  --product-content-fill-x: 0.7658;
+  --product-content-fill-y: 0.7525;
+  --product-content-offset-x: 0.0875;
+  --product-content-offset-y: 0.2175;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-6.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-7.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.375;
+  --product-content-fill-x: 0.9167;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0833;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-8.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad-9.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-plus-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.4475;
+  --product-content-aspect: 1.4475;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-polishing-sponge-with-applicator-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-polishing-sponge-with-applicator-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-polishing-sponge-with-applicator-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-polishing-sponge-with-applicator-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-polishing-sponge-with-applicator.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-sanding-block-hard-red.webp"] {
+  --product-canvas-aspect: 1.2579;
+  --product-content-aspect: 1.3051;
+  --product-content-fill-x: 0.9875;
+  --product-content-fill-y: 0.9518;
+  --product-content-offset-x: 0.0042;
+  --product-content-offset-y: 0.0482;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-sanding-block-soft-orange.webp"] {
+  --product-canvas-aspect: 1.2565;
+  --product-content-aspect: 1.1439;
+  --product-content-fill-x: 0.7683;
+  --product-content-fill-y: 0.844;
+  --product-content-offset-x: 0.1083;
+  --product-content-offset-y: 0.066;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-sanding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-sanding-pad.webp"] {
+  --product-canvas-aspect: 0.6658;
+  --product-content-aspect: 0.6658;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-sandwich-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.4616;
+  --product-content-aspect: 1.5544;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9403;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-sandwich-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 0.8383;
+  --product-content-aspect: 1.0088;
+  --product-content-fill-x: 0.9165;
+  --product-content-fill-y: 0.7617;
+  --product-content-offset-x: 0.0835;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-soft-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5444;
+  --product-content-aspect: 1.4723;
+  --product-content-fill-x: 0.9533;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0467;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-soft-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-static-foil.webp"] {
+  --product-canvas-aspect: 1.5113;
+  --product-content-aspect: 1.3401;
+  --product-content-fill-x: 0.8867;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.1133;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-tack-cloth.webp"] {
+  --product-canvas-aspect: 1.4944;
+  --product-content-aspect: 1.4944;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-turkuaz-compound.webp"] {
+  --product-canvas-aspect: 0.9742;
+  --product-content-aspect: 1.029;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9467;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-turkuaz-sanding-block-blue.webp"] {
+  --product-canvas-aspect: 1.2579;
+  --product-content-aspect: 1.412;
+  --product-content-fill-x: 0.9225;
+  --product-content-fill-y: 0.8218;
+  --product-content-offset-x: 0.0775;
+  --product-content-offset-y: 0.0765;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-turkuaz-static-foil.webp"] {
+  --product-canvas-aspect: 1.4963;
+  --product-content-aspect: 1.3052;
+  --product-content-fill-x: 0.8517;
+  --product-content-fill-y: 0.9763;
+  --product-content-offset-x: 0.1483;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-turkuaz-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 0.9908;
+  --product-content-aspect: 0.9908;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-10.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-11.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.9305;
+  --product-content-fill-x: 0.9958;
+  --product-content-fill-y: 0.7738;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-3.webp"] {
+  --product-canvas-aspect: 1.3245;
+  --product-content-aspect: 1.3245;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.4232;
+  --product-content-fill-x: 0.9417;
+  --product-content-fill-y: 0.9925;
+  --product-content-offset-x: 0.0583;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-6.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.1862;
+  --product-content-fill-x: 0.775;
+  --product-content-fill-y: 0.98;
+  --product-content-offset-x: 0.225;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-7.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-8.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.3313;
+  --product-content-fill-x: 0.8875;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.1125;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad-9.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-polishing-pad.webp"] {
+  --product-canvas-aspect: 1.3937;
+  --product-content-aspect: 1.3937;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-velcro-woolpad.webp"] {
+  --product-canvas-aspect: 1.4981;
+  --product-content-aspect: 1.4981;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad-5.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad-6.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad-7.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-waffle-velcro-polishing-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5444;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9712;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0.0288;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-with-applicator-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-with-applicator-compounding-pad-3.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-with-applicator-compounding-pad-4.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.285;
+  --product-content-fill-x: 0.8567;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.1433;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.4963;
+  --product-content-fill-x: 0.9975;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0025;
+  --product-content-offset-y: 0;
+}
+
 .fit[data-product-fit="/products/carfit/carfit-maskirna-folija-4x5m.jpg"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 1.0513;

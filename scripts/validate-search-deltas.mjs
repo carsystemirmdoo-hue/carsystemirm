@@ -144,6 +144,11 @@ const MUST_INCLUDE = [
   { query: "6-300-0080", id: "carfit-gold-paper-disc" },
   { query: "7-336-1000", id: "carfit-rapid-air-clear-coat-voc" },
   { query: "1-201-0450", id: "carfit-maskirna-folija-4x5m" },
+  // Befar: šifra pakovanja hemije, šifra sa slovnim sufiksom (linija Leo) i
+  // šifra podloške po broju rupa nalaze SVOJ proizvod.
+  { query: "75250", id: "befar-liquid-compound" },
+  { query: "55401ADV", id: "befar-leo-plus-advance-velcro-compounding-pad" },
+  { query: "93162", id: "befar-backing-pad" },
   // Alias: Antigravel je antichip, pa ga upit „antichip" mora naći.
   { query: "antichip", id: "family:cosmos-lac-master-mechanic-antigravel-paintable" },
 ];

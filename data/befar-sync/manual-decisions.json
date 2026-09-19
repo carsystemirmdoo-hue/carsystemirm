@@ -1,0 +1,10 @@
+{
+  "_comment": [
+    "Ručne odluke vlasnika. Sync ih čita, nikad ih ne piše. Posle izmene: `npm run befar:sync:apply`.",
+    "source.<sourceKey> = { \"decision\": \"skip\", \"note\": \"…\" }      → zvanični proizvod se ne uvozi (svesno ruši paritet za taj proizvod).",
+    "local.<naš slug>   = { \"sourceKey\": \"…\", \"note\": \"…\" }            → ručni zapis JESTE taj zvanični proizvod (dopuna umesto uvoza).",
+    "Osam ručnih Befar zapisa (sunđeri po boji i dimenziji) su PROBABLE_MATCH: svaki odgovara dvema ili trima zvaničnim porodicama, pa nijedan NIJE spojen. Spajanje traži odluku ovde, sa zvaničnom šifrom kao dokazom."
+  ],
+  "source": {},
+  "local": {}
+}

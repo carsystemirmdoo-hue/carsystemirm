@@ -26,9 +26,29 @@ const website = readJson(PATHS.rawWebsite);
 const tdsIndex = readJson(PATHS.rawDocuments);
 if (!info || !website || !tdsIndex) throw new Error("Nedostaje RAW dataset: pokrenuti acquire korake.");
 
+/*
+ * Činjenice iz tehničkih listova.
+ *
+ * Kada postoji mrežni keš (`npm run rm:sync:acquire`), TDS se čita iz njega i raščitane
+ * činjenice se upisuju u `raw/tds-facts.generated.json`. Taj fajl je COMMITOVAN ulaz, pa
+ * čist checkout bez keša daje identičan izlaz. Bez ijednog od ta dva koraka se ne nagađa:
+ * ranije je build tiho ispao bez činjenica i menjao klasifikaciju proizvoda.
+ */
 const TEXT_DIR = path.join(REPO_ROOT, ".cache", "rm-sync", "tds-text");
-const tdsTextByCode = new Map();
-if (existsSync(TEXT_DIR)) for (const file of readdirSync(TEXT_DIR)) { const entry = readJson(path.join(TEXT_DIR, file)); tdsTextByCode.set(entry.code, entry); }
+/** Committovan ulaz: isti raščitani podaci, da čist checkout radi bez mrežnog keša. */
+const TDS_FACTS = path.join(REPO_ROOT, "data", "rm-sync", "raw", "tds-facts.generated.json");
+const factsByCode = new Map();
+if (existsSync(TEXT_DIR)) {
+  for (const file of readdirSync(TEXT_DIR)) {
+    const entry = readJson(path.join(TEXT_DIR, file));
+    if (entry?.pages?.length) factsByCode.set(entry.code, parseTds(entry.pages));
+  }
+  writeJson(TDS_FACTS, { meta: { source: "techinfo.rmpaint.com (raščitano iz keširanih PDF-ova)", codes: factsByCode.size }, facts: Object.fromEntries([...factsByCode].sort()) });
+} else {
+  const stored = readJson(TDS_FACTS);
+  if (!stored) throw new Error("Nema ni keša TDS teksta (.cache/rm-sync/tds-text) ni committovanog `raw/tds-facts.generated.json` — pokrenuti `npm run rm:sync:acquire`.");
+  for (const [code, facts] of Object.entries(stored.facts)) factsByCode.set(code, facts);
+}
 
 const ROLE_BY_CATEGORY = {
   Cleaner: "cleaner", Bodyfiller: "bodyfiller", Undercoat: "undercoat", "Basecoat/Topcoat": "basecoat-topcoat", Clearcoat: "clearcoat",
@@ -63,8 +83,7 @@ function lineOf(product) {
 }
 
 const products = info.products.map((product) => {
-  const raw = tdsTextByCode.get(product.code);
-  const tds = raw?.pages?.length ? parseTds(raw.pages) : null;
+  const tds = factsByCode.get(product.code) ?? null;
   const letters = /^([A-Z]{1,2}) /.exec(product.code)?.[1] ?? null;
   const category = product.categories[0] ?? null;
   const role = category === "CV Products" ? ROLE_BY_LETTER[letters] ?? "basecoat-topcoat" : ROLE_BY_CATEGORY[category] ?? null;

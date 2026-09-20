@@ -1,0 +1,29 @@
+{
+  "n95-060": {
+    "sourceHash": "6f4b6323a6692940",
+    "productType": "Sredstvo za čišćenje i odmašćivanje",
+    "subtype": "Sredstvo za čišćenje · priprema",
+    "shortDescription": "N95-060 Silicone cleaner je sredstvo za čišćenje i odmašćivanje površine, predviđeno za upotrebu uz Norbin proizvode.",
+    "longDescription": "N95-060 Silicone cleaner koristi se za čišćenje i odmašćivanje površine u fazi pripreme. Tehnički list ga vezuje za upotrebu uz Norbin proizvode i ne navodi druge tehničke podatke o primeni. Skladišti se na 5-40 °C, uz deklarisani rok upotrebe od 60 meseci.",
+    "purpose": "Čišćenje i odmašćivanje površine u fazi pripreme",
+    "facts": [
+      { "label": "Temperatura skladištenja", "value": "5-40 °C" },
+      { "label": "Rok upotrebe", "value": "60 meseci" }
+    ],
+    "applications": [
+      "Čišćenje i odmašćivanje površine u fazi pripreme",
+      "Upotreba uz Norbin proizvode"
+    ],
+    "benefits": [
+      {
+        "title": "Upotreba uz Norbin",
+        "description": "Tehnički list navodi upotrebu uz Norbin proizvode."
+      },
+      {
+        "title": "Deklarisan rok upotrebe",
+        "description": "Zvanično deklarisani rok upotrebe je 60 meseci pri skladištenju na 5-40 °C."
+      }
+    ],
+    "advice": "Za autorefinish važe uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehnologiju."
+  }
+}

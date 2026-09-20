@@ -1,0 +1,37 @@
+{
+  "summary": {
+    "products": 12,
+    "enrichedExisting": 2,
+    "runtimeNorbinRecords": 14,
+    "officialProductImages": 0,
+    "withTds": 9,
+    "withSds": 14,
+    "withRelations": 6,
+    "withUsedBy": 5,
+    "localizedEntries": 12,
+    "errors": 0,
+    "warnings": 19
+  },
+  "errors": [],
+  "warnings": [
+    "norbin-n15-v20-clear-voc: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n15-v25-fast-clear-voc: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n55-015-1k-plastic-primer: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n55-v20-2k-primer-filler-grey: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n55-v29-2k-primer-filler-black: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n60-v20-multifunctional-body-filler-hardener: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n75-020-hardener-fast: proizvođač ne objavljuje tehnički list",
+    "norbin-n75-020-hardener-fast: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n75-021-hardener-normal: proizvođač ne objavljuje tehnički list",
+    "norbin-n75-021-hardener-normal: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n75-022-hardener-slow: proizvođač ne objavljuje tehnički list",
+    "norbin-n75-022-hardener-slow: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n75-v21-clear-hardener-voc: proizvođač ne objavljuje tehnički list",
+    "norbin-n75-v21-clear-hardener-voc: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n85-021-thinner: proizvođač ne objavljuje tehnički list",
+    "norbin-n85-021-thinner: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n95-060-silicone-cleaner: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n15-020-1l: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "norbin-n15-020-5l: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)"
+  ]
+}

@@ -1,0 +1,909 @@
+{
+  "meta": {
+    "rule": "CURRENT = link na aktuelnoj stranici opsega; zakomentarisan link nije ponuda",
+    "referenceRegion": "en",
+    "crawledAt": "2026-09-20T07:13:21.349Z",
+    "stockEvidence": {
+      "label": "lager 23.7.26.pdf",
+      "printedOn": "2026-07-23",
+      "kind": "carsystem-stock-report",
+      "note": "Izveštaj nije u repozitorijumu jer sadrži cene i količine.",
+      "evidence": {
+        "file": "docs/NORBIN_PRODUCT_INVENTORY.md",
+        "section": "§11",
+        "sha256": "e2d7ba5def5f500fdb13c9078d5d2d4b505190f5ef0037a3329fcbdaf13180aa"
+      }
+    }
+  },
+  "summary": {
+    "CURRENT_PRODUCT_FAMILIES": 13,
+    "CURRENT_OFFICIAL_CODES": 13,
+    "CURRENT_SYSTEMS": 0,
+    "CURRENT_PUBLIC_TONERS": 0,
+    "CURRENT_OTHER_REGION": 5,
+    "UNLINKED_IN_SOURCE": 12,
+    "OFFICIAL_REFERENCED_COMPONENT_NOT_CUSTOMER_FACING": 1,
+    "officialReferencedComponents": [
+      "N85-025"
+    ],
+    "NEW_PRODUCTS_TO_IMPORT": 12,
+    "EXISTING_PRODUCTS_TO_ENRICH": 1,
+    "MISSING_LOCALIZATION": 0,
+    "OFFICIAL_PRODUCT_IMAGES": 0,
+    "MISSING_OFFICIAL_ASSETS": 13,
+    "VERIFIED_ARTICLE_NUMBERS": 0,
+    "ASSET_FILENAME_ONLY_NUMBERS": 0,
+    "availability": {
+      "SELLABLE_CURRENT": 7,
+      "SELLABLE_CURRENT_ZERO_STOCK": 1,
+      "NOT_IN_OUR_PROGRAMME": 5
+    },
+    "withTds": 8,
+    "withoutTds": 5,
+    "withSds": 13,
+    "relations": 8,
+    "reverseRelations": 7,
+    "families": [
+      "norbin-n15-020"
+    ],
+    "byCategory": {
+      "boje": 11,
+      "ciscenje": 1,
+      "kitovi": 1
+    },
+    "planErrors": {
+      "duplicateSlugs": [],
+      "duplicateCodes": [],
+      "unmapped": []
+    }
+  },
+  "referencedOnly": [
+    {
+      "code": "N85-025",
+      "status": "OFFICIAL_REFERENCED_COMPONENT_NOT_CUSTOMER_FACING",
+      "decided": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "product",
+      "sourceKey": "n15-020",
+      "code": "N15-020",
+      "officialName": "N15-020 Clear",
+      "role": "clearcoat",
+      "action": "ENRICH_EXISTING",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n15-020-5l",
+      "family": {
+        "slug": "norbin-n15-020",
+        "name": "Norbin N15-020 Clear",
+        "members": [
+          {
+            "slug": "norbin-n15-020-1l",
+            "pack": "1 L",
+            "variantId": "1-l",
+            "hasOwnImage": true
+          },
+          {
+            "slug": "norbin-n15-020-5l",
+            "pack": "5 L",
+            "variantId": "5-l",
+            "hasOwnImage": false
+          }
+        ],
+        "identityHolder": "norbin-n15-020-1l"
+      },
+      "existingSlugs": [
+        "norbin-n15-020-5l",
+        "norbin-n15-020-1l"
+      ],
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "506493",
+          "pack": "1 L",
+          "status": "RECENT_ZERO_STOCK"
+        },
+        {
+          "articleId": "506494",
+          "pack": "5 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "file": "NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 6,
+        "brokenTds": false
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-021",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N75-022",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "5a88999e6ceb6b46"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n15-120",
+      "code": "N15-120",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n15-v20",
+      "code": "N15-V20",
+      "officialName": "N15-V20 Clear VOC",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n15-v20-clear-voc",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "4 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "506391",
+          "pack": "4 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "file": "NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-V21",
+          "ratio": "4:1",
+          "evidenceFile": "TDS__NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "34d810840f20b21f"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n15-v25",
+      "code": "N15-V25",
+      "officialName": "N15-V25 Fast Clear VOC",
+      "role": "clearcoat",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n15-v25-fast-clear-voc",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "507911",
+          "pack": "5 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+          "file": "N15-V25_Fast_Clear_VOC_2.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-V21",
+          "ratio": "3:1",
+          "evidenceFile": "TDS__N15-V25_Fast_Clear_VOC_2.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N85-021",
+          "ratio": "3:1",
+          "evidenceFile": "TDS__N15-V25_Fast_Clear_VOC_2.pdf",
+          "partnerRole": "reducer",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "48992b75d9479023"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-015",
+      "code": "N55-015",
+      "officialName": "N55-015 1K Plastic Primer",
+      "role": "undercoat",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n55-015-1k-plastic-primer",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "1 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "availability": "NOT_IN_OUR_PROGRAMME",
+      "availabilityArticles": [],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+          "file": "N55-015_1K_Plastic_Primer.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 1,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "d534e97cd15b6520"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-110",
+      "code": "N55-110",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-115",
+      "code": "N55-115",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-120",
+      "code": "N55-120",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-121",
+      "code": "N55-121",
+      "officialName": "N55-121 Dolgu Astarı",
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "CURRENT_OTHER_REGION",
+      "reason": "aktuelan samo u regionu tr",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-v15",
+      "code": "N55-V15",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-v20",
+      "code": "N55-V20",
+      "officialName": "N55-V20 2K Primer Filler grey",
+      "role": "undercoat",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n55-v20-2k-primer-filler-grey",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "2,5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "availability": "NOT_IN_OUR_PROGRAMME",
+      "availabilityArticles": [],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V20_2K_Primer_Filler_grey.pdf?asdb213ffe",
+          "file": "N55-V20_2K_Primer_Filler_grey.pdf",
+          "region": "en",
+          "tokenizedUrl": true
+        },
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-020",
+          "ratio": "5:1",
+          "evidenceFile": "TDS__TR__N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "86ef79630a306f19"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n55-v29",
+      "code": "N55-V29",
+      "officialName": "N55-V29 2K Primer Filler black",
+      "role": "undercoat",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n55-v29-2k-primer-filler-black",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "2,5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "availability": "NOT_IN_OUR_PROGRAMME",
+      "availabilityArticles": [],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+          "file": "N55-V29_2K_Primer_Filler_black.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-020",
+          "ratio": "5:1",
+          "evidenceFile": "TDS__N55-V29_2K_Primer_Filler_black.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N85-025",
+          "ratio": "5:1",
+          "evidenceFile": "TDS__N55-V29_2K_Primer_Filler_black.pdf",
+          "partnerRole": "reducer",
+          "partnerKnownOnSite": false
+        }
+      ],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "14953983a36ea5a2"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n60-100",
+      "code": "N60-100",
+      "officialName": "N60-100 Universal Macun 2.7kg",
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "CURRENT_OTHER_REGION",
+      "reason": "aktuelan samo u regionu tr",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n60-v20",
+      "code": "N60-V20",
+      "officialName": "N60-V20 Multifunctional Body Filler + Hardener",
+      "role": "bodyfiller",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n60-v20-multifunctional-body-filler-hardener",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "0,05 kg",
+        "1,95 kg"
+      ],
+      "taxonomy": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "rule": "bodyfiller"
+      },
+      "availability": "SELLABLE_CURRENT_ZERO_STOCK",
+      "availabilityArticles": [
+        {
+          "articleId": "507246",
+          "pack": "2 kg kit",
+          "status": "RECENT_ZERO_STOCK"
+        }
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "file": "N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 4,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "4fac0a652e2d657d"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-020",
+      "code": "N75-020",
+      "officialName": "N75-020 Hardener Fast",
+      "role": "hardener",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n75-020-hardener-fast",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "0,5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "507365",
+          "pack": "0,5 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": null,
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N55-V29",
+          "ratio": "5:1",
+          "knownOnSite": true
+        },
+        {
+          "code": "N55-V20",
+          "ratio": "5:1",
+          "knownOnSite": true
+        }
+      ],
+      "missingOfficialAsset": true,
+      "sourceHash": "0da4f91dd48c9b90"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-021",
+      "code": "N75-021",
+      "officialName": "N75-021 Hardener Normal",
+      "role": "hardener",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n75-021-hardener-normal",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "0,5 L",
+        "2,5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "506495",
+          "pack": "0,5 L",
+          "status": "RECENT_ZERO_STOCK"
+        },
+        {
+          "articleId": "506498",
+          "pack": "2,5 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": null,
+        "sds": 6,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-020",
+          "ratio": "2:1",
+          "knownOnSite": true
+        }
+      ],
+      "missingOfficialAsset": true,
+      "sourceHash": "a497b83616d46281"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-022",
+      "code": "N75-022",
+      "officialName": "N75-022 Hardener Slow",
+      "role": "hardener",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n75-022-hardener-slow",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "2,5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "availability": "NOT_IN_OUR_PROGRAMME",
+      "availabilityArticles": [],
+      "documents": {
+        "tds": null,
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-020",
+          "ratio": "2:1",
+          "knownOnSite": true
+        }
+      ],
+      "missingOfficialAsset": true,
+      "sourceHash": "1bc57a5d2d889071"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-120",
+      "code": "N75-120",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-121",
+      "code": "N75-121",
+      "officialName": "N75-121 Sertleştirici Normal",
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "CURRENT_OTHER_REGION",
+      "reason": "aktuelan samo u regionu tr",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-122",
+      "code": "N75-122",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n75-v21",
+      "code": "N75-V21",
+      "officialName": "N75-V21 Clear Hardener VOC",
+      "role": "hardener",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n75-v21-clear-hardener-voc",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "1 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "506392",
+          "pack": "1 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": null,
+        "sds": 1,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-V20",
+          "ratio": "4:1",
+          "knownOnSite": true
+        },
+        {
+          "code": "N15-V25",
+          "ratio": "3:1",
+          "knownOnSite": true
+        }
+      ],
+      "missingOfficialAsset": true,
+      "sourceHash": "6df7279ed0e91bc6"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n85-021",
+      "code": "N85-021",
+      "officialName": "N85-021 Thinner",
+      "role": "reducer",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n85-021-thinner",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "availability": "SELLABLE_CURRENT",
+      "availabilityArticles": [
+        {
+          "articleId": "507041",
+          "pack": "1 L",
+          "status": "RECENT_STOCK_EVIDENCE"
+        }
+      ],
+      "documents": {
+        "tds": null,
+        "sds": 4,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-V25",
+          "ratio": "3:1",
+          "knownOnSite": true
+        }
+      ],
+      "missingOfficialAsset": true,
+      "sourceHash": "64bdff0cefe00bf6"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n85-120",
+      "code": "N85-120",
+      "officialName": "N85-120 Tiner Normal",
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "CURRENT_OTHER_REGION",
+      "reason": "aktuelan samo u regionu tr",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n85-121",
+      "code": "N85-121",
+      "officialName": "N85-121 Tiner Yavaş",
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "CURRENT_OTHER_REGION",
+      "reason": "aktuelan samo u regionu tr",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n85-140",
+      "code": "N85-140",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n95-060",
+      "code": "N95-060",
+      "officialName": "N95-060 Silicone cleaner",
+      "role": "cleaner",
+      "action": "IMPORT",
+      "status": "CURRENT_EMEA",
+      "slug": "norbin-n95-060-silicone-cleaner",
+      "family": null,
+      "existingSlugs": [],
+      "packs": [
+        "5 L"
+      ],
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "availability": "NOT_IN_OUR_PROGRAMME",
+      "availabilityArticles": [],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+          "file": "N95-060_Silicone_Cleaner.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "sds": 2,
+        "brokenTds": false
+      },
+      "relations": [],
+      "usedBy": [],
+      "missingOfficialAsset": true,
+      "sourceHash": "6f4b6323a6692940"
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n95-110",
+      "code": "N95-110",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n95-120",
+      "code": "N95-120",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n95-150",
+      "code": "N95-150",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    },
+    {
+      "kind": "product",
+      "sourceKey": "n95-160",
+      "code": "N95-160",
+      "officialName": null,
+      "action": "SKIPPED_NOT_CUSTOMER_FACING",
+      "status": "UNLINKED_IN_SOURCE",
+      "reason": "nije linkovan na aktuelnoj stranici opsega",
+      "slug": null,
+      "taxonomy": null
+    }
+  ]
+}

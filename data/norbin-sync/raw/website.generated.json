@@ -1,0 +1,3017 @@
+{
+  "meta": {
+    "source": "https://www.norbin-paint.com",
+    "architecture": "statički HTML, jedna norbin-range.html po regionu; nema CMS-a, robots.txt, sitemap.xml ni stranica proizvoda",
+    "crawledAt": "2026-09-20T07:13:21.349Z",
+    "regions": [
+      {
+        "region": "en",
+        "published": true,
+        "placeholder": null,
+        "links": {
+          "live": 27,
+          "unlinked": 2
+        },
+        "codes": 14
+      },
+      {
+        "region": "tr",
+        "published": true,
+        "placeholder": null,
+        "links": {
+          "live": 36,
+          "unlinked": 33
+        },
+        "codes": 30
+      },
+      {
+        "region": "kz",
+        "published": true,
+        "placeholder": null,
+        "links": {
+          "live": 5,
+          "unlinked": 0
+        },
+        "codes": 2
+      },
+      {
+        "region": "me",
+        "published": false,
+        "placeholder": "Inhalte ME",
+        "links": {
+          "live": 0,
+          "unlinked": 0
+        },
+        "codes": 0
+      },
+      {
+        "region": "de",
+        "published": false,
+        "placeholder": "Inhalte DE",
+        "links": {
+          "live": 0,
+          "unlinked": 0
+        },
+        "codes": 0
+      },
+      {
+        "region": "pl",
+        "published": false,
+        "placeholder": "Inhalte PL",
+        "links": {
+          "live": 0,
+          "unlinked": 0
+        },
+        "codes": 0
+      }
+    ],
+    "documents": 103,
+    "live": 68,
+    "unlinkedInSource": 35,
+    "byKind": {
+      "tds": 29,
+      "sds": 72,
+      "download": 2
+    },
+    "codes": 30,
+    "codesLiveSomewhere": 18,
+    "note": "Branding na izvoru je i dalje BASF Coatings GmbH; brend se ne preimenuje u Surventis."
+  },
+  "pages": [
+    {
+      "region": "en",
+      "url": "https://www.norbin-paint.com/en/norbin-range.html",
+      "published": true,
+      "placeholder": null,
+      "fetchedAt": "2026-09-20T07:13:21.349Z",
+      "links": {
+        "live": 27,
+        "unlinked": 2
+      },
+      "codes": 14
+    },
+    {
+      "region": "tr",
+      "url": "https://www.norbin-paint.com/tr/norbin-range.html",
+      "published": true,
+      "placeholder": null,
+      "fetchedAt": "2026-09-20T07:13:21.398Z",
+      "links": {
+        "live": 36,
+        "unlinked": 33
+      },
+      "codes": 30
+    },
+    {
+      "region": "kz",
+      "url": "https://www.norbin-paint.com/kz/norbin-range.html",
+      "published": true,
+      "placeholder": null,
+      "fetchedAt": "2026-09-20T07:13:21.441Z",
+      "links": {
+        "live": 5,
+        "unlinked": 0
+      },
+      "codes": 2
+    },
+    {
+      "region": "me",
+      "url": "https://www.norbin-paint.com/me/norbin-range.html",
+      "published": false,
+      "placeholder": "Inhalte ME",
+      "fetchedAt": "2026-09-20T07:13:21.483Z",
+      "links": {
+        "live": 0,
+        "unlinked": 0
+      },
+      "codes": 0
+    },
+    {
+      "region": "de",
+      "url": "https://www.norbin-paint.com/de/norbin-range.html",
+      "published": false,
+      "placeholder": "Inhalte DE",
+      "fetchedAt": "2026-09-20T07:13:21.522Z",
+      "links": {
+        "live": 0,
+        "unlinked": 0
+      },
+      "codes": 0
+    },
+    {
+      "region": "pl",
+      "url": "https://www.norbin-paint.com/pl/norbin-range.html",
+      "published": false,
+      "placeholder": "Inhalte PL",
+      "fetchedAt": "2026-09-20T07:13:21.568Z",
+      "links": {
+        "live": 0,
+        "unlinked": 0
+      },
+      "codes": 0
+    }
+  ],
+  "products": [
+    {
+      "code": "N15-020",
+      "names": {
+        "en": "N15-020 Clear",
+        "tr": "N15-020 Vernik",
+        "kz": "Лак N15-020"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "file": "NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 Clear"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+          "file": "N15-020_Clear_1L.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 Clear 1L"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+          "file": "N15-020_Clear_5L.PDF",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 Clear 5L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+          "file": "N15-020.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 Vernik"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+          "file": "SDS_N15-020_1L_TR.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 Vernik 1L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+          "file": "SDS_N15-020_5L_TR.PDF",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 Vernik 5L"
+        },
+        {
+          "region": "kz",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf",
+          "file": "NORBIN_TDS_N15-020_Clear_RUS.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® Лак N15-020"
+        },
+        {
+          "region": "kz",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+          "file": "MSDS_N15-020_1L_ru.PDF",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 лак 1 л"
+        },
+        {
+          "region": "kz",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF",
+          "file": "MSDS_N15-020_5L_ru.PDF",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-020 лак 5 л"
+        }
+      ]
+    },
+    {
+      "code": "N15-120",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N15-120.pdf",
+          "file": "N15-120.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N15-120_1L_TR.PDF",
+          "file": "SDS_N15-120_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N15-120_2.5L_TR.PDF",
+          "file": "SDS_N15-120_2.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N15-120_5L_TR.PDF",
+          "file": "SDS_N15-120_5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N15-V20",
+      "names": {
+        "en": "N15-V20 Clear VOC",
+        "tr": "N15-V20 Vernik VOC"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "4 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "file": "NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V20 Clear VOC"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+          "file": "MSDS_N15-V20_4L_en.PDF",
+          "availability": "live",
+          "pack": "4 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V20 Clear VOC 4L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N15-V20.pdf",
+          "file": "N15-V20.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V20 Vernik VOC"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF",
+          "file": "SDS_N15-V20_4L_TR.PDF",
+          "availability": "live",
+          "pack": "4 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V20 Vernik VOC 4L"
+        }
+      ]
+    },
+    {
+      "code": "N15-V25",
+      "names": {
+        "en": "N15-V25 Fast Clear VOC",
+        "tr": "N15-V25 Hızlı Vernik VOC"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+          "file": "N15-V25_Fast_Clear_VOC_2.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V25 Fast Clear VOC"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+          "file": "SDS_N15-V25_5L_en.PDF",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V25 Fast Clear VOC 5L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf",
+          "file": "N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V25 Hızlı Vernik VOC"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF",
+          "file": "SDS_N15-V25_5L_TR.PDF",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N15-V25 Hızlı vernik VOC 5L"
+        }
+      ]
+    },
+    {
+      "code": "N55-015",
+      "names": {
+        "en": "N55-015 1K Plastic Primer",
+        "tr": "N55-015 1K Plastik Astar"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "1 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+          "file": "N55-015_1K_Plastic_Primer.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-015 1K Plastic Primer"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+          "file": "SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-015 1K Plastic Primer 1L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N55-015-NORBIN_1K_Plastic_Primer_TR.pdf",
+          "file": "N55-015-NORBIN_1K_Plastic_Primer_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-015 1K Plastik Astar"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-015_1KPlasticPrimer_1L_TR.PDF",
+          "file": "SDS_N55-015_1KPlasticPrimer_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N55-110",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-110.pdf",
+          "file": "N55-110.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-110_1L_TR.PDF",
+          "file": "SDS_N55-110_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-110_2.5L_TR.PDF",
+          "file": "SDS_N55-110_2.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N55-115",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-115.pdf",
+          "file": "N55-115.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-115_1L_TR.PDF",
+          "file": "SDS_N55-115_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N55-120",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-120.pdf",
+          "file": "N55-120.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-120_1L_TR.PDF",
+          "file": "SDS_N55-120_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-120_2L_TR.PDF",
+          "file": "SDS_N55-120_2L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N55-121",
+      "names": {
+        "tr": "N55-121 Dolgu Astarı"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [
+        "1 L",
+        "2,5 L"
+      ],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N55-121_TR.pdf",
+          "file": "N55-121_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-121 Dolgu Astarı"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121%202KPrimerFiller1L_TR.PDF",
+          "file": "MSDS_N55-121 2KPrimerFiller1L_TR.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-121 Dolgu Astarı 1L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121%202KPrimerFiller2.5L_TR.PDF",
+          "file": "MSDS_N55-121 2KPrimerFiller2.5L_TR.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-121 Dolgu Astarı 2.5L"
+        }
+      ]
+    },
+    {
+      "code": "N55-V15",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/en/--%3E%3C!--files/TDS/NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf",
+          "file": "NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/en/--%3E%3C!--files/MSDS/N55-V15_1K_Primer_Filler_VOC_1L.PDF",
+          "file": "N55-V15_1K_Primer_Filler_VOC_1L.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-V15.pdf",
+          "file": "N55-V15.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-V15_1L_TR.PDF",
+          "file": "SDS_N55-V15_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N55-V20",
+      "names": {
+        "en": "N55-V20 2K Primer Filler grey",
+        "tr": "N55-V20 2K Astar-Gri"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "2,5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V20_2K_Primer_Filler_grey.pdf?asdb213ffe",
+          "file": "N55-V20_2K_Primer_Filler_grey.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": true,
+          "label": "NORBIN ® N55-V20 2K Primer Filler grey"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF",
+          "file": "SDS_N55-V20_2_5L_en.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V20 2K Primer Filler grey 2,5L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+          "file": "N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V20 2K Astar-Gri"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2.5L_TR.PDF",
+          "file": "SDS_N55-V20_2.5L_TR.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V20 2K Astar-Gri 2,5L"
+        }
+      ]
+    },
+    {
+      "code": "N55-V29",
+      "names": {
+        "en": "N55-V29 2K Primer Filler black",
+        "tr": "N55-V29 2K Astar-Siyah"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "2,5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+          "file": "N55-V29_2K_Primer_Filler_black.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V29 2K Primer Filler black"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF",
+          "file": "SDS_N55-V29_2-5L_en.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V29 2K Primer Filler black 2,5L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N55-V29_2K_Primer_Filler_black_tr_new.pdf",
+          "file": "N55-V29_2K_Primer_Filler_black_tr_new.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V29 2K Astar-Siyah"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5l_tr.PDF",
+          "file": "SDS_N55-V29_2-5l_tr.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N55-V29 2K Astar-Siyah 2,5L"
+        }
+      ]
+    },
+    {
+      "code": "N60-100",
+      "names": {
+        "tr": "N60-100 Universal Macun 2.7kg"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [
+        "2,7 kg"
+      ],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N60-100_Universal_TR.pdf",
+          "file": "N60-100_Universal_TR.pdf",
+          "availability": "live",
+          "pack": "2,7 kg",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-100 Universal Macun 2.7kg"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/N60-100_Universal_TR2.pdf",
+          "file": "N60-100_Universal_TR2.pdf",
+          "availability": "live",
+          "pack": "2,7 kg",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-100 Universal Macun 2.7kg"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/N60-100_Sertlestirici_TR.pdf",
+          "file": "N60-100_Sertlestirici_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-100 Sertleştirici Macun"
+        }
+      ]
+    },
+    {
+      "code": "N60-V20",
+      "names": {
+        "en": "N60-V20 Multifunctional Body Filler + Hardener",
+        "tr": "N60-V20 Multifonksiyonel Macun + Sertleştirici"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "0,05 kg",
+        "1,95 kg"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "file": "N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-V20 Multifunctional Body Filler + Hardener"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+          "file": "SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+          "availability": "live",
+          "pack": "1,95 kg",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-V20 Multifunctional Body Filler 1,95 kg"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+          "file": "SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+          "availability": "live",
+          "pack": "0,05 kg",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-V20 Hardener for Body Filler 0,05kg"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf",
+          "file": "N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-V20 Multifonksiyonel Macun + Sertleştirici"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+          "file": "SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+          "availability": "live",
+          "pack": "1,95 kg",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-V20 Multifonksiyonel Macun 1.95kg"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF",
+          "file": "SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF",
+          "availability": "live",
+          "pack": "0,05 kg",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N60-V20 Sertleştirici Macun 0.05kg"
+        }
+      ]
+    },
+    {
+      "code": "N75-020",
+      "names": {},
+      "namesFromSds": {
+        "en": "N75-020 Hardener Fast",
+        "tr": "N75-020 Sertleiştirici-Hızlı"
+      },
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "0,5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF",
+          "file": "SDS_N75-020_0_5L_en.PDF",
+          "availability": "live",
+          "pack": "0,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-020 Hardener Fast 0,5L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0.5L_TR.PDF",
+          "file": "SDS_N75-020_0.5L_TR.PDF",
+          "availability": "live",
+          "pack": "0,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-020 Sertleiştirici-Hızlı 0,5L"
+        }
+      ]
+    },
+    {
+      "code": "N75-021",
+      "names": {},
+      "namesFromSds": {
+        "en": "N75-021 Hardener Normal",
+        "tr": "N75-021 Sertleştici Normal",
+        "kz": "N75-021 отвердитель 2,5 л"
+      },
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "packs": [
+        "0,5 L",
+        "2,5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF",
+          "file": "SDS_N75-021_new_0_5L_en.PDF",
+          "availability": "live",
+          "pack": "0,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-021 Hardener Normal 0,5L"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF",
+          "file": "SDS_N75-021_new_2_5L_en.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-021 Hardener Normal 2,5L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_0.5L_TR.PDF",
+          "file": "SDS_N75-021_0.5L_TR.PDF",
+          "availability": "live",
+          "pack": "0,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-021 Sertleştirici-Normal 0,5L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_2.5L_TR.PDF",
+          "file": "SDS_N75-021_2.5L_TR.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-021 Sertleştici Normal 2,5L"
+        },
+        {
+          "region": "kz",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_0,5L_ru.PDF",
+          "file": "MSDS_N75-021_0,5L_ru.PDF",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-021 отвердитель 0,5 л"
+        },
+        {
+          "region": "kz",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_2,5L_ru.PDF",
+          "file": "MSDS_N75-021_2,5L_ru.PDF",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-021 отвердитель 2,5 л"
+        }
+      ]
+    },
+    {
+      "code": "N75-022",
+      "names": {},
+      "namesFromSds": {
+        "en": "N75-022 Hardener Slow",
+        "tr": "N75-022 Sertleştici-Yavaş"
+      },
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "2,5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF",
+          "file": "SDS_N75-022_0_5L_en.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-022 Hardener Slow 2,5L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_2.5L_TR.PDF",
+          "file": "SDS_N75-022_2.5L_TR.PDF",
+          "availability": "live",
+          "pack": "2,5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-022 Sertleştici-Yavaş 2,5L"
+        }
+      ]
+    },
+    {
+      "code": "N75-120",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-120_0.5L_TR.PDF",
+          "file": "SDS_N75-120_0.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-120_1L_TR.PDF",
+          "file": "SDS_N75-120_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-120_2.5L_TR.PDF",
+          "file": "SDS_N75-120_2.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N75-121",
+      "names": {
+        "tr": "N75-121 Sertleştirici Normal"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [
+        "0,25 L",
+        "1 L"
+      ],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N75-121_TR.pdf",
+          "file": "N75-121_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-121 Sertleştirici Normal"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121%20HardenerNormal0.25L_TR.PDF",
+          "file": "MSDS_N75-121 HardenerNormal0.25L_TR.PDF",
+          "availability": "live",
+          "pack": "0,25 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-121 Sertleştirici Normal 0.25L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121%20HardenerNormal1L_TR.PDF",
+          "file": "MSDS_N75-121 HardenerNormal1L_TR.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-121 Sertleştirici Normal 1L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-121_0.5L_TR.PDF",
+          "file": "SDS_N75-121_0.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-121_1L_TR.PDF",
+          "file": "SDS_N75-121_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-121_2.5L_TR.PDF",
+          "file": "SDS_N75-121_2.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N75-122",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-122_0.5L_TR.PDF",
+          "file": "SDS_N75-122_0.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-122_1L_TR.PDF",
+          "file": "SDS_N75-122_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-122_2.5L_TR.PDF",
+          "file": "SDS_N75-122_2.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N75-V21",
+      "names": {},
+      "namesFromSds": {
+        "en": "N75-V21 Clear Hardener VOC"
+      },
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en"
+      ],
+      "packs": [
+        "1 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF",
+          "file": "MSDS_N75-V21_1L_en.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N75-V21 Clear Hardener VOC 1L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-V21_1L_TR.PDF",
+          "file": "SDS_N75-V21_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N85-021",
+      "names": {},
+      "namesFromSds": {
+        "en": "N85-021 Thinner",
+        "tr": "N85-021 Tiner"
+      },
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF",
+          "file": "SDS_N85-021_1L_en.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-021 Thinner 1L"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf",
+          "file": "MSDS_N85-021_thinner_5L_en.pdf",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-021 Thinner 5L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_TR.PDF",
+          "file": "SDS_N85-021_1L_TR.PDF",
+          "availability": "live",
+          "pack": "1 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-021 Tiner 1L"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_tiner_5L_tr.pdf",
+          "file": "MSDS_N85-021_tiner_5L_tr.pdf",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-021 Tiner 5L"
+        }
+      ]
+    },
+    {
+      "code": "N85-120",
+      "names": {
+        "tr": "N85-120 Tiner Normal"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N85-120_TR.pdf",
+          "file": "N85-120_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-120 Tiner Normal"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-120%20ThinnerNormal1L_TR.PDF",
+          "file": "MSDS_N85-120 ThinnerNormal1L_TR.PDF",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-120 Tiner Normal"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N85-120_1L_TR.PDF",
+          "file": "SDS_N85-120_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N85-120_5L_TR.PDF",
+          "file": "SDS_N85-120_5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N85-121",
+      "names": {
+        "tr": "N85-121 Tiner Yavaş"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N85-121_TR.pdf",
+          "file": "N85-121_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-121 Tiner Yavaş"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-121%20ThinnerSlow1L_TR.PDF",
+          "file": "MSDS_N85-121 ThinnerSlow1L_TR.PDF",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N85-121 Tiner Yavaş"
+        }
+      ]
+    },
+    {
+      "code": "N85-140",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N85-140_1L_TR.PDF",
+          "file": "SDS_N85-140_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N95-060",
+      "names": {
+        "en": "N95-060 Silicone cleaner",
+        "tr": "N95-060 Silikon Temizleme Maddesi"
+      },
+      "namesFromSds": {},
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "5 L"
+      ],
+      "documents": [
+        {
+          "region": "en",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+          "file": "N95-060_Silicone_Cleaner.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N95-060 Silicone cleaner"
+        },
+        {
+          "region": "en",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF",
+          "file": "SDS_N95-060SiliconeCleaner_5L_en.PDF",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N95-060 Silicone Cleaner 5L"
+        },
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N95-060%20-%20NORBIN_Silicone_Cleaner_TR.pdf",
+          "file": "N95-060 - NORBIN_Silicone_Cleaner_TR.pdf",
+          "availability": "live",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N95-060 Silikon Temizleme Maddesi"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_TR.PDF",
+          "file": "SDS_N95-060SiliconeCleaner_5L_TR.PDF",
+          "availability": "live",
+          "pack": "5 L",
+          "tokenizedUrl": false,
+          "label": "NORBIN ® N95-060 Silikon Temizleme Maddesi 5L"
+        }
+      ]
+    },
+    {
+      "code": "N95-110",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-110_0.25L_TR.PDF",
+          "file": "SDS_N95-110_0.25L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N95-120",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-120_0.5L_TR.PDF",
+          "file": "SDS_N95-120_0.5L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N95-150",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "tds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N95-150.pdf",
+          "file": "N95-150.pdf",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        },
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-150_1kg_TR.PDF",
+          "file": "SDS_N95-150_1kg_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    },
+    {
+      "code": "N95-160",
+      "names": {},
+      "namesFromSds": {},
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": [
+        {
+          "region": "tr",
+          "kind": "sds",
+          "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-160_1L_TR.PDF",
+          "file": "SDS_N95-160_1L_TR.PDF",
+          "availability": "unlinked-in-source",
+          "pack": null,
+          "tokenizedUrl": false,
+          "label": "--> <!--"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "region": "en",
+      "kind": "download",
+      "href": "https://www.norbin-paint.com/files/NORBIN_Broch_EN_2024_mai.pdf",
+      "file": "NORBIN_Broch_EN_2024_mai.pdf",
+      "tokenizedUrl": false,
+      "label": "Refinish a winner with NORBIN ® (EN)",
+      "codes": [],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "download",
+      "href": "https://www.norbin-paint.com/files/NORBIN_A3-Sheet_Tech-Info_Grey-Shades_230221b_druck.pdf",
+      "file": "NORBIN_A3-Sheet_Tech-Info_Grey-Shades_230221b_druck.pdf",
+      "tokenizedUrl": false,
+      "label": "Grey shade poster",
+      "codes": [],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+      "file": "NORBIN_TDS_N15-020_Clear_2022.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 Clear",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+      "file": "NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V20 Clear VOC",
+      "codes": [
+        "N15-V20"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+      "file": "N15-V25_Fast_Clear_VOC_2.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V25 Fast Clear VOC",
+      "codes": [
+        "N15-V25"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+      "file": "N55-015_1K_Plastic_Primer.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-015 1K Plastic Primer",
+      "codes": [
+        "N55-015"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/N55-V20_2K_Primer_Filler_grey.pdf?asdb213ffe",
+      "file": "N55-V20_2K_Primer_Filler_grey.pdf",
+      "tokenizedUrl": true,
+      "label": "NORBIN ® N55-V20 2K Primer Filler grey",
+      "codes": [
+        "N55-V20"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+      "file": "N55-V29_2K_Primer_Filler_black.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V29 2K Primer Filler black",
+      "codes": [
+        "N55-V29"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+      "file": "N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-V20 Multifunctional Body Filler + Hardener",
+      "codes": [
+        "N60-V20"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+      "file": "N95-060_Silicone_Cleaner.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N95-060 Silicone cleaner",
+      "codes": [
+        "N95-060"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+      "file": "N15-020_Clear_1L.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 Clear 1L",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+      "file": "N15-020_Clear_5L.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 Clear 5L",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+      "file": "MSDS_N15-V20_4L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V20 Clear VOC 4L",
+      "codes": [
+        "N15-V20"
+      ],
+      "availability": "live",
+      "pack": "4 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+      "file": "SDS_N15-V25_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V25 Fast Clear VOC 5L",
+      "codes": [
+        "N15-V25"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+      "file": "SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-015 1K Plastic Primer 1L",
+      "codes": [
+        "N55-015"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF",
+      "file": "SDS_N55-V20_2_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V20 2K Primer Filler grey 2,5L",
+      "codes": [
+        "N55-V20"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF",
+      "file": "SDS_N55-V29_2-5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V29 2K Primer Filler black 2,5L",
+      "codes": [
+        "N55-V29"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+      "file": "SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-V20 Multifunctional Body Filler 1,95 kg",
+      "codes": [
+        "N60-V20"
+      ],
+      "availability": "live",
+      "pack": "1,95 kg"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+      "file": "SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-V20 Hardener for Body Filler 0,05kg",
+      "codes": [
+        "N60-V20"
+      ],
+      "availability": "live",
+      "pack": "0,05 kg"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF",
+      "file": "SDS_N75-020_0_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-020 Hardener Fast 0,5L",
+      "codes": [
+        "N75-020"
+      ],
+      "availability": "live",
+      "pack": "0,5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF",
+      "file": "SDS_N75-021_new_0_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-021 Hardener Normal 0,5L",
+      "codes": [
+        "N75-021"
+      ],
+      "availability": "live",
+      "pack": "0,5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF",
+      "file": "SDS_N75-021_new_2_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-021 Hardener Normal 2,5L",
+      "codes": [
+        "N75-021"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF",
+      "file": "SDS_N75-022_0_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-022 Hardener Slow 2,5L",
+      "codes": [
+        "N75-022"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF",
+      "file": "MSDS_N75-V21_1L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-V21 Clear Hardener VOC 1L",
+      "codes": [
+        "N75-V21"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF",
+      "file": "SDS_N85-021_1L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-021 Thinner 1L",
+      "codes": [
+        "N85-021"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf",
+      "file": "MSDS_N85-021_thinner_5L_en.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-021 Thinner 5L",
+      "codes": [
+        "N85-021"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF",
+      "file": "SDS_N95-060SiliconeCleaner_5L_en.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N95-060 Silicone Cleaner 5L",
+      "codes": [
+        "N95-060"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "en",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/en/--%3E%3C!--files/TDS/NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf",
+      "file": "NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-V15"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "en",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/en/--%3E%3C!--files/MSDS/N55-V15_1K_Primer_Filler_VOC_1L.PDF",
+      "file": "N55-V15_1K_Primer_Filler_VOC_1L.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-V15"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N15-020.pdf",
+      "file": "N15-020.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 Vernik",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N15-V20.pdf",
+      "file": "N15-V20.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V20 Vernik VOC",
+      "codes": [
+        "N15-V20"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf",
+      "file": "N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V25 Hızlı Vernik VOC",
+      "codes": [
+        "N15-V25"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N55-015-NORBIN_1K_Plastic_Primer_TR.pdf",
+      "file": "N55-015-NORBIN_1K_Plastic_Primer_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-015 1K Plastik Astar",
+      "codes": [
+        "N55-015"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+      "file": "N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V20 2K Astar-Gri",
+      "codes": [
+        "N55-V20"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N55-V29_2K_Primer_Filler_black_tr_new.pdf",
+      "file": "N55-V29_2K_Primer_Filler_black_tr_new.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V29 2K Astar-Siyah",
+      "codes": [
+        "N55-V29"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N55-121_TR.pdf",
+      "file": "N55-121_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-121 Dolgu Astarı",
+      "codes": [
+        "N55-121"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf",
+      "file": "N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-V20 Multifonksiyonel Macun + Sertleştirici",
+      "codes": [
+        "N60-V20"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N60-100_Universal_TR.pdf",
+      "file": "N60-100_Universal_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-100 Universal Macun 2.7kg",
+      "codes": [
+        "N60-100"
+      ],
+      "availability": "live",
+      "pack": "2,7 kg"
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N75-121_TR.pdf",
+      "file": "N75-121_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-121 Sertleştirici Normal",
+      "codes": [
+        "N75-121"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N85-120_TR.pdf",
+      "file": "N85-120_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-120 Tiner Normal",
+      "codes": [
+        "N85-120"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N85-121_TR.pdf",
+      "file": "N85-121_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-121 Tiner Yavaş",
+      "codes": [
+        "N85-121"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/TR/N95-060%20-%20NORBIN_Silicone_Cleaner_TR.pdf",
+      "file": "N95-060 - NORBIN_Silicone_Cleaner_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N95-060 Silikon Temizleme Maddesi",
+      "codes": [
+        "N95-060"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF",
+      "file": "SDS_N15-020_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 Vernik 1L",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF",
+      "file": "SDS_N15-020_5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 Vernik 5L",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF",
+      "file": "SDS_N15-V20_4L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V20 Vernik VOC 4L",
+      "codes": [
+        "N15-V20"
+      ],
+      "availability": "live",
+      "pack": "4 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF",
+      "file": "SDS_N15-V25_5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-V25 Hızlı vernik VOC 5L",
+      "codes": [
+        "N15-V25"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2.5L_TR.PDF",
+      "file": "SDS_N55-V20_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V20 2K Astar-Gri 2,5L",
+      "codes": [
+        "N55-V20"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5l_tr.PDF",
+      "file": "SDS_N55-V29_2-5l_tr.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-V29 2K Astar-Siyah 2,5L",
+      "codes": [
+        "N55-V29"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121%202KPrimerFiller1L_TR.PDF",
+      "file": "MSDS_N55-121 2KPrimerFiller1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-121 Dolgu Astarı 1L",
+      "codes": [
+        "N55-121"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121%202KPrimerFiller2.5L_TR.PDF",
+      "file": "MSDS_N55-121 2KPrimerFiller2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N55-121 Dolgu Astarı 2.5L",
+      "codes": [
+        "N55-121"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+      "file": "SDS_N60-V20_1.95KG_bodyfiller_tr.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-V20 Multifonksiyonel Macun 1.95kg",
+      "codes": [
+        "N60-V20"
+      ],
+      "availability": "live",
+      "pack": "1,95 kg"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF",
+      "file": "SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-V20 Sertleştirici Macun 0.05kg",
+      "codes": [
+        "N60-V20"
+      ],
+      "availability": "live",
+      "pack": "0,05 kg"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/N60-100_Universal_TR2.pdf",
+      "file": "N60-100_Universal_TR2.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-100 Universal Macun 2.7kg",
+      "codes": [
+        "N60-100"
+      ],
+      "availability": "live",
+      "pack": "2,7 kg"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/N60-100_Sertlestirici_TR.pdf",
+      "file": "N60-100_Sertlestirici_TR.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N60-100 Sertleştirici Macun",
+      "codes": [
+        "N60-100"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0.5L_TR.PDF",
+      "file": "SDS_N75-020_0.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-020 Sertleiştirici-Hızlı 0,5L",
+      "codes": [
+        "N75-020"
+      ],
+      "availability": "live",
+      "pack": "0,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_0.5L_TR.PDF",
+      "file": "SDS_N75-021_0.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-021 Sertleştirici-Normal 0,5L",
+      "codes": [
+        "N75-021"
+      ],
+      "availability": "live",
+      "pack": "0,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_2.5L_TR.PDF",
+      "file": "SDS_N75-021_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-021 Sertleştici Normal 2,5L",
+      "codes": [
+        "N75-021"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_2.5L_TR.PDF",
+      "file": "SDS_N75-022_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-022 Sertleştici-Yavaş 2,5L",
+      "codes": [
+        "N75-022"
+      ],
+      "availability": "live",
+      "pack": "2,5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121%20HardenerNormal0.25L_TR.PDF",
+      "file": "MSDS_N75-121 HardenerNormal0.25L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-121 Sertleştirici Normal 0.25L",
+      "codes": [
+        "N75-121"
+      ],
+      "availability": "live",
+      "pack": "0,25 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121%20HardenerNormal1L_TR.PDF",
+      "file": "MSDS_N75-121 HardenerNormal1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-121 Sertleştirici Normal 1L",
+      "codes": [
+        "N75-121"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_TR.PDF",
+      "file": "SDS_N85-021_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-021 Tiner 1L",
+      "codes": [
+        "N85-021"
+      ],
+      "availability": "live",
+      "pack": "1 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_tiner_5L_tr.pdf",
+      "file": "MSDS_N85-021_tiner_5L_tr.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-021 Tiner 5L",
+      "codes": [
+        "N85-021"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-120%20ThinnerNormal1L_TR.PDF",
+      "file": "MSDS_N85-120 ThinnerNormal1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-120 Tiner Normal",
+      "codes": [
+        "N85-120"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-121%20ThinnerSlow1L_TR.PDF",
+      "file": "MSDS_N85-121 ThinnerSlow1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N85-121 Tiner Yavaş",
+      "codes": [
+        "N85-121"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_TR.PDF",
+      "file": "SDS_N95-060SiliconeCleaner_5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N95-060 Silikon Temizleme Maddesi 5L",
+      "codes": [
+        "N95-060"
+      ],
+      "availability": "live",
+      "pack": "5 L"
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N15-120.pdf",
+      "file": "N15-120.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N15-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-110.pdf",
+      "file": "N55-110.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-110"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-115.pdf",
+      "file": "N55-115.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-115"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-120.pdf",
+      "file": "N55-120.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N55-V15.pdf",
+      "file": "N55-V15.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-V15"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/TDS/TR/N95-150.pdf",
+      "file": "N95-150.pdf",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N95-150"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N15-120_1L_TR.PDF",
+      "file": "SDS_N15-120_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N15-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N15-120_2.5L_TR.PDF",
+      "file": "SDS_N15-120_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N15-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N15-120_5L_TR.PDF",
+      "file": "SDS_N15-120_5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N15-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-015_1KPlasticPrimer_1L_TR.PDF",
+      "file": "SDS_N55-015_1KPlasticPrimer_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-015"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-110_1L_TR.PDF",
+      "file": "SDS_N55-110_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-110"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-110_2.5L_TR.PDF",
+      "file": "SDS_N55-110_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-110"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-115_1L_TR.PDF",
+      "file": "SDS_N55-115_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-115"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-120_1L_TR.PDF",
+      "file": "SDS_N55-120_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-120_2L_TR.PDF",
+      "file": "SDS_N55-120_2L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N55-V15_1L_TR.PDF",
+      "file": "SDS_N55-V15_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N55-V15"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-120_0.5L_TR.PDF",
+      "file": "SDS_N75-120_0.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-120_1L_TR.PDF",
+      "file": "SDS_N75-120_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-120_2.5L_TR.PDF",
+      "file": "SDS_N75-120_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-121_0.5L_TR.PDF",
+      "file": "SDS_N75-121_0.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-121"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-121_1L_TR.PDF",
+      "file": "SDS_N75-121_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-121"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-121_2.5L_TR.PDF",
+      "file": "SDS_N75-121_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-121"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-122_0.5L_TR.PDF",
+      "file": "SDS_N75-122_0.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-122"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-122_1L_TR.PDF",
+      "file": "SDS_N75-122_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-122"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-122_2.5L_TR.PDF",
+      "file": "SDS_N75-122_2.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-122"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N75-V21_1L_TR.PDF",
+      "file": "SDS_N75-V21_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N75-V21"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N85-120_1L_TR.PDF",
+      "file": "SDS_N85-120_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N85-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N85-120_5L_TR.PDF",
+      "file": "SDS_N85-120_5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N85-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N85-140_1L_TR.PDF",
+      "file": "SDS_N85-140_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N85-140"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-110_0.25L_TR.PDF",
+      "file": "SDS_N95-110_0.25L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N95-110"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-120_0.5L_TR.PDF",
+      "file": "SDS_N95-120_0.5L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N95-120"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-150_1kg_TR.PDF",
+      "file": "SDS_N95-150_1kg_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N95-150"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "tr",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/tr/--%3E%3C!--files/MSDS/SDS_N95-160_1L_TR.PDF",
+      "file": "SDS_N95-160_1L_TR.PDF",
+      "tokenizedUrl": false,
+      "label": "--> <!--",
+      "codes": [
+        "N95-160"
+      ],
+      "availability": "unlinked-in-source",
+      "pack": null
+    },
+    {
+      "region": "kz",
+      "kind": "tds",
+      "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_RUS.pdf",
+      "file": "NORBIN_TDS_N15-020_Clear_RUS.pdf",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® Лак N15-020",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "kz",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF",
+      "file": "MSDS_N15-020_1L_ru.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 лак 1 л",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "kz",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF",
+      "file": "MSDS_N15-020_5L_ru.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N15-020 лак 5 л",
+      "codes": [
+        "N15-020"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "kz",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_0,5L_ru.PDF",
+      "file": "MSDS_N75-021_0,5L_ru.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-021 отвердитель 0,5 л",
+      "codes": [
+        "N75-021"
+      ],
+      "availability": "live",
+      "pack": null
+    },
+    {
+      "region": "kz",
+      "kind": "sds",
+      "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_2,5L_ru.PDF",
+      "file": "MSDS_N75-021_2,5L_ru.PDF",
+      "tokenizedUrl": false,
+      "label": "NORBIN ® N75-021 отвердитель 2,5 л",
+      "codes": [
+        "N75-021"
+      ],
+      "availability": "live",
+      "pack": null
+    }
+  ]
+}

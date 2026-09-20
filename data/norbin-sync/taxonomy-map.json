@@ -1,0 +1,17 @@
+{
+  "_comment": [
+    "Uloga Norbin proizvoda → postojeća taksonomija sajta. Bez novih top-level kategorija.",
+    "Komponenta (učvršćivač, razređivač) nasleđuje fazu proizvoda koji je po tehničkom listu koristi;",
+    "kada takvog dokaza nema, koristi podrazumevanu fazu svoje uloge."
+  ],
+  "rules": [
+    { "id": "bodyfiller", "role": "bodyfiller", "category": "kitovi", "programSlug": "priprema-povrsine", "phaseSlug": "priprema", "visualType": "filler" },
+    { "id": "cleaner", "role": "cleaner", "category": "ciscenje", "programSlug": "priprema-povrsine", "phaseSlug": "priprema", "visualType": "neutral" },
+    { "id": "undercoat", "role": "undercoat", "category": "boje", "programSlug": "boje-i-lakovi", "phaseSlug": "podloga", "visualType": "primer" },
+    { "id": "clearcoat", "role": "clearcoat", "category": "boje", "programSlug": "boje-i-lakovi", "phaseSlug": "lak", "visualType": "clearcoat" },
+    { "id": "component-undercoat", "when": { "usedByRole": "undercoat" }, "category": "boje", "programSlug": "boje-i-lakovi", "phaseSlug": "podloga", "visualType": "primer" },
+    { "id": "component-clearcoat", "when": { "usedByRole": "clearcoat" }, "category": "boje", "programSlug": "boje-i-lakovi", "phaseSlug": "lak", "visualType": "clearcoat" },
+    { "id": "hardener", "role": "hardener", "category": "boje", "programSlug": "boje-i-lakovi", "phaseSlug": "lak", "visualType": "clearcoat" },
+    { "id": "reducer", "role": "reducer", "category": "boje", "programSlug": "boje-i-lakovi", "phaseSlug": "lak", "visualType": "clearcoat" }
+  ]
+}

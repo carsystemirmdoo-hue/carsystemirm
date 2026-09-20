@@ -4,6 +4,10 @@ import {
   applyBaslacSyncEnrichment,
   baslacCatalogProducts,
 } from "@/lib/baslac-catalog-products";
+import {
+  applyNorbinSyncEnrichment,
+  getNorbinCatalogProducts,
+} from "@/lib/norbin-catalog-products";
 import { getBefarCatalogProducts } from "@/lib/befar-catalog-products";
 import {
   applyRmCatalogEnrichment,
@@ -1627,6 +1631,8 @@ const befarPadProducts = befarPadColors.flatMap((color) =>
 
 const productRecords: CarsystemProduct[] = [
   ...rmImportedProducts,
+  // Norbin: 13 aktuelnih EMEA proizvoda sa norbin-paint.com (`npm run norbin:sync`).
+  ...getNorbinCatalogProducts(),
   // Baslac sistemske baze (samo ACTIVE_CONFIRMED) i pripremni proizvodi.
   // Generišu se iz `lib/baslac-systems.ts`; phase-out i UNVERIFIED ne ulaze.
   ...baslacCatalogProducts,
@@ -2507,7 +2513,9 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
         ? applyCarfitCatalogEnrichment(product)
         : product.brandSlug === "rm"
           ? applyRmCatalogEnrichment(product)
-          : product,
+          : product.brandSlug === "norbin"
+            ? applyNorbinSyncEnrichment(product)
+            : product,
 );
 
 export function getAllCarsystemProducts() {

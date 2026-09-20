@@ -1,0 +1,76 @@
+{
+  "products": {
+    "norbin-n15-v20-clear-voc": {
+      "sourceKey": "n15-v20",
+      "code": "N15-V20",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n15-v25-fast-clear-voc": {
+      "sourceKey": "n15-v25",
+      "code": "N15-V25",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n55-015-1k-plastic-primer": {
+      "sourceKey": "n55-015",
+      "code": "N55-015",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n55-v20-2k-primer-filler-grey": {
+      "sourceKey": "n55-v20",
+      "code": "N55-V20",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n55-v29-2k-primer-filler-black": {
+      "sourceKey": "n55-v29",
+      "code": "N55-V29",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n60-v20-multifunctional-body-filler-hardener": {
+      "sourceKey": "n60-v20",
+      "code": "N60-V20",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n75-020-hardener-fast": {
+      "sourceKey": "n75-020",
+      "code": "N75-020",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n75-021-hardener-normal": {
+      "sourceKey": "n75-021",
+      "code": "N75-021",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n75-022-hardener-slow": {
+      "sourceKey": "n75-022",
+      "code": "N75-022",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n75-v21-clear-hardener-voc": {
+      "sourceKey": "n75-v21",
+      "code": "N75-V21",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n85-021-thinner": {
+      "sourceKey": "n85-021",
+      "code": "N85-021",
+      "firstSeen": "2026-09-20"
+    },
+    "norbin-n95-060-silicone-cleaner": {
+      "sourceKey": "n95-060",
+      "code": "N95-060",
+      "firstSeen": "2026-09-20"
+    }
+  },
+  "enriched": {
+    "norbin-n15-020-1l": {
+      "sourceKey": "n15-020",
+      "code": "N15-020",
+      "owner": "lib/carsystem-data.ts (ručni zapis)"
+    },
+    "norbin-n15-020-5l": {
+      "sourceKey": "n15-020",
+      "code": "N15-020",
+      "owner": "lib/carsystem-data.ts (ručni zapis)"
+    }
+  }
+}

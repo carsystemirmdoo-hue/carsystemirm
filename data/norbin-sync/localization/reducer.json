@@ -1,0 +1,17 @@
+{
+  "n85-021": {
+    "sourceHash": "64bdff0cefe00bf6",
+    "productType": "Razređivač",
+    "subtype": "Razređivač · Norbin program",
+    "shortDescription": "N85-021 Thinner je razređivač Norbin programa koji se dodaje materijalima predviđenim za razređivanje ovom komponentom.",
+    "longDescription": "Razređivač se materijalu dodaje pri pripremi smeše, pre nanošenja. Koristi se samo uz materijale za koje ga proizvođač predviđa, a u materijal za koji je predviđen dodaje se u odnosu 3:1. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se ostali parametri primene preuzimaju iz dokumentacije materijala uz koji se razređivač koristi.",
+    "purpose": "Razređivač za materijale Norbin programa",
+    "facts": [],
+    "applications": [
+      "Razređivanje materijala pri pripremi smeše",
+      "Dodavanje u materijal za koji je predviđen, u odnosu 3:1"
+    ],
+    "benefits": [],
+    "advice": null
+  }
+}

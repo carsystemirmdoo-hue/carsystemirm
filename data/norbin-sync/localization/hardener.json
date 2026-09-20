@@ -1,0 +1,62 @@
+{
+  "n75-020": {
+    "sourceHash": "0da4f91dd48c9b90",
+    "productType": "Brzi učvršćivač",
+    "subtype": "Učvršćivač · brzi",
+    "shortDescription": "N75-020 Hardener Fast je brzi učvršćivač Norbin programa koji se meša sa dvokomponentnim materijalima predviđenim za ovu komponentu.",
+    "longDescription": "Učvršćivač je komponenta koja se materijalu dodaje neposredno pre nanošenja i sa njim čini dvokomponentnu smešu. Oznaka Fast razlikuje ovu varijantu od standardnog i sporog učvršćivača u Norbin programu. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se parametri primene preuzimaju iz dokumentacije materijala uz koji se učvršćivač koristi. U materijale za koje je predviđen dodaje se u odnosu 5:1.",
+    "purpose": "Brzi učvršćivač za dvokomponentne materijale Norbin programa",
+    "facts": [],
+    "applications": [
+      "Mešanje sa dvokomponentnim materijalom neposredno pre nanošenja",
+      "Dodavanje u materijale za koje je predviđen, u odnosu 5:1"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "n75-021": {
+    "sourceHash": "a497b83616d46281",
+    "productType": "Standardni učvršćivač",
+    "subtype": "Učvršćivač · standardni",
+    "shortDescription": "N75-021 Hardener Normal je standardni učvršćivač Norbin programa, namenjen mešanju sa dvokomponentnim materijalima za koje je predviđen.",
+    "longDescription": "Standardna varijanta učvršćivača dodaje se materijalu neposredno pre nanošenja i sa njim gradi dvokomponentnu smešu. Oznaka Normal razlikuje je od brze i spore varijante iz istog programa. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se ostali parametri primene preuzimaju iz dokumentacije materijala uz koji se učvršćivač koristi. U materijal za koji je predviđen dodaje se u odnosu 2:1.",
+    "purpose": "Standardni učvršćivač za dvokomponentne materijale Norbin programa",
+    "facts": [],
+    "applications": [
+      "Mešanje sa dvokomponentnim materijalom neposredno pre nanošenja",
+      "Dodavanje u materijal za koji je predviđen, u odnosu 2:1"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "n75-022": {
+    "sourceHash": "1bc57a5d2d889071",
+    "productType": "Spori učvršćivač",
+    "subtype": "Učvršćivač · spori",
+    "shortDescription": "N75-022 Hardener Slow je spori učvršćivač Norbin programa, namenjen mešanju sa dvokomponentnim materijalima za koje je predviđen.",
+    "longDescription": "Spora varijanta učvršćivača dodaje se materijalu neposredno pre nanošenja i sa njim gradi dvokomponentnu smešu. Oznaka Slow razlikuje je od brze i standardne varijante iz istog programa. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se ostali parametri primene preuzimaju iz dokumentacije materijala uz koji se učvršćivač koristi. U materijal za koji je predviđen dodaje se u odnosu 2:1.",
+    "purpose": "Spori učvršćivač za dvokomponentne materijale Norbin programa",
+    "facts": [],
+    "applications": [
+      "Mešanje sa dvokomponentnim materijalom neposredno pre nanošenja",
+      "Dodavanje u materijal za koji je predviđen, u odnosu 2:1"
+    ],
+    "benefits": [],
+    "advice": null
+  },
+  "n75-v21": {
+    "sourceHash": "6df7279ed0e91bc6",
+    "productType": "VOC učvršćivač",
+    "subtype": "Učvršćivač · VOC",
+    "shortDescription": "N75-V21 Clear Hardener VOC je učvršćivač Norbin programa namenjen bezbojnim lakovima u VOC izvedbi iz istog programa.",
+    "longDescription": "Prema zvaničnom nazivu, ova komponenta je predviđena za bezbojne lakove VOC tipa i dodaje im se neposredno pre nanošenja. Odnos mešanja nije isti za sve lakove uz koje se koristi, pa se preuzima iz dokumentacije konkretnog laka. Proizvođač za ovaj učvršćivač nije objavio tehnički list.",
+    "purpose": "Učvršćivač za bezbojne lakove VOC tipa iz Norbin programa",
+    "facts": [],
+    "applications": [
+      "Mešanje sa bezbojnim lakom VOC tipa neposredno pre nanošenja",
+      "Priprema smeše prema odnosu propisanom za konkretan lak"
+    ],
+    "benefits": [],
+    "advice": null
+  }
+}

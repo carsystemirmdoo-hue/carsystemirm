@@ -1,0 +1,3506 @@
+{
+  "meta": {
+    "rule": "CURRENT = link na aktuelnoj stranici opsega; zakomentarisan link nije ponuda",
+    "referenceRegion": "en",
+    "crawledAt": "2026-09-20T07:13:21.349Z",
+    "branding": "BASF Coatings GmbH (izvor nije prešao na Surventis)",
+    "note": "Brojeva artikala nema na izvoru; pakovanje je varijanta, ne identitet. Slika proizvoda izvor nema."
+  },
+  "summary": {
+    "TOTAL_CODES": 30,
+    "CURRENT_EMEA": 13,
+    "CURRENT_OTHER_REGION": 5,
+    "UNLINKED_IN_SOURCE": 12,
+    "byRole": {
+      "bodyfiller": 1,
+      "cleaner": 1,
+      "clearcoat": 3,
+      "hardener": 4,
+      "reducer": 1,
+      "undercoat": 3
+    },
+    "emeaWithTds": 8,
+    "emeaWithoutTds": 5,
+    "emeaWithClaims": 8,
+    "emeaClaims": 114,
+    "emeaPackVariants": 17,
+    "relations": 13,
+    "relationsToUnlistedCode": [
+      "N55-V15→N85-025",
+      "N55-V29→N85-025"
+    ],
+    "officialImages": 0
+  },
+  "products": [
+    {
+      "code": "N15-020",
+      "sourceKey": "n15-020",
+      "officialName": "N15-020 Clear",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "file": "NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "NORBIN_TDS_N15-020_Clear_2022.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N15-020.pdf"
+          },
+          {
+            "region": "kz",
+            "file": "NORBIN_TDS_N15-020_Clear_RUS.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF"
+          },
+          {
+            "region": "en",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_1L_TR.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-020_5L_TR.PDF"
+          },
+          {
+            "region": "kz",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_1L_ru.PDF"
+          },
+          {
+            "region": "kz",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-020_5L_ru.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+        "documentSha256": "cb60c38ef1bee234696867bcce9444c48ba8f567369b279b0e284c8c39594d4a",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+        "count": 16,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "flashOffTime",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "potLife",
+          "shelfLife",
+          "sprayCoats",
+          "sprayViscosity",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K clear coat for all basecoat finishes.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Medium solid, good hardness, fast drying.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "2:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "16-18 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "2 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50-60",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "5 hours ready for assembly",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-021",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N75-022",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N15-120",
+      "sourceKey": "n15-120",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "clearcoat",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "tds",
+            "file": "N15-120.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N15-120_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N15-120_2.5L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N15-120_5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N15-120.pdf",
+        "documentSha256": "f46e490fcbecdf85199f5cd2a2583fe3fbf17bbbf18b40298ebf4cd75582cfdc",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N15-120.pdf",
+        "count": 12,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "hardness",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "potLife",
+          "shelfLife",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "Tüm bazkat kaplamalar için 2K ekonomik vernik.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "Orta sertlik, yüksek parlaklık, mükemmel dayanıklılık.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "24 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "2:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife 20°C",
+            "value": "3 saat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,3-1,4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "50-60",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 60 °C",
+            "value": "30 dk.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "hardness",
+            "sourceLabel": "Toplam sertlik",
+            "value": "24 saat sonra",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve kap ömrü film kalınlığına, ortam sıcaklığına, neme ve sertleştirici tipinegöre değişebilir",
+            "value": "Yukarıdaki değerler standart sertleştiriciye ve 20°C'deki oda sıcaklığınagöre verilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-120",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__TR__N15-120.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N75-121",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__TR__N15-120.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N75-122",
+          "ratio": "2:1",
+          "evidenceFile": "TDS__TR__N15-120.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N15-V20",
+      "sourceKey": "n15-v20",
+      "officialName": "N15-V20 Clear VOC",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "4 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "file": "NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N15-V20.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "4 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "4 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V20_4L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+        "documentSha256": "dd3a4869b08d1cd648fecea081b2c658787484687f0fe48934501100e21f2bb0",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+        "count": 18,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "flashOffTime",
+          "intendedUse",
+          "mixingRatio",
+          "nozzleSize",
+          "potLife",
+          "shelfLife",
+          "sprayCoats",
+          "sprayViscosity",
+          "storageTemperature",
+          "voc"
+        ],
+        "claims": [
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K VOC clear coat for all basecoat finishes.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "4:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "20-24 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "1.5 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "5 hours ready for assembly",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-V21",
+          "ratio": "4:1",
+          "evidenceFile": "TDS__NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N15-V25",
+      "sourceKey": "n15-v25",
+      "officialName": "N15-V25 Fast Clear VOC",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "5 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+          "file": "N15-V25_Fast_Clear_VOC_2.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "N15-V25_Fast_Clear_VOC_2.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N15-V25-NORBIN_Fast_Clear_VOC_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__N15-V25_Fast_Clear_VOC_2.pdf",
+        "documentSha256": "57924c140ccc0ef711fb0e0ed3ae07c2322fc9d81065e669fd8a8c48a9971246",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+        "count": 21,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "mixingRatio",
+          "note",
+          "nozzlePressure",
+          "nozzleSize",
+          "potLife",
+          "shelfLife",
+          "sprayPressure",
+          "sprayViscosity",
+          "storageTemperature",
+          "voc"
+        ],
+        "claims": [
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC",
+            "value": "N15-V25",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "Fast drying 2K VOC clear suitable for small repairs (blend-in repairs, refinishing of one ortwo vertical panels).",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "36 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "3:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "23-25 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "1.5 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC",
+            "value": "N15-V25",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sprayPressure",
+            "sourceLabel": "Application pressure",
+            "value": "2 bar",
+            "unit": "bar",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzlePressure",
+            "sourceLabel": "Nozzle pressure",
+            "value": "0.7 bar",
+            "unit": "bar",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "40-60 μm",
+            "unit": "μm",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "2 hours dust free",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "20 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-V21",
+          "ratio": "3:1",
+          "evidenceFile": "TDS__N15-V25_Fast_Clear_VOC_2.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N85-021",
+          "ratio": "3:1",
+          "evidenceFile": "TDS__N15-V25_Fast_Clear_VOC_2.pdf",
+          "partnerRole": "reducer",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-015",
+      "sourceKey": "n55-015",
+      "officialName": "N55-015 1K Plastic Primer",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "undercoat",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "1 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+          "file": "N55-015_1K_Plastic_Primer.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "N55-015_1K_Plastic_Primer.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N55-015-NORBIN_1K_Plastic_Primer_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF"
+          }
+        ],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N55-015_1KPlasticPrimer_1L_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__N55-015_1K_Plastic_Primer.pdf",
+        "documentSha256": "a8dd6a3839b5cb12fab49e9366de0663bffaac8896bdc5933ffbbaaba0eca82e",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+        "count": 9,
+        "fields": [
+          "filmThickness",
+          "flashOffTime",
+          "keyFeatures",
+          "note",
+          "nozzleSize",
+          "shelfLife",
+          "sprayCoats",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Primer to provide good adhesion on plastic parts.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-35 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayCoats",
+            "sourceLabel": "Number of spray coats",
+            "value": "1 - 2 thin coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "15 min before filler application",
+            "unit": "min",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "10",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-110",
+      "sourceKey": "n55-110",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "undercoat",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "tds",
+            "file": "N55-110.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N55-110_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N55-110_2.5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N55-110.pdf",
+        "documentSha256": "15f97840cd8c6b1bf104c30f9536c2f14202290999e7c0d993cf05ba75132d51",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-110.pdf",
+        "count": 15,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "otherSpecification",
+          "potLife",
+          "shelfLife",
+          "storageTemperature",
+          "substrate"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "Modifiye alkid ve nitroselüloz reçine esaslı 1K dolgu astarı.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "İyi doldurma, sınırsız kap ömrü, hızlı kuruma ve kısa flash off süresi.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Uygun yüzeyler",
+            "value": "Eski boyalı ve macun uygulanmış yüzeyler",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "18 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "100 % hacmen",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "60-70",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 20 °C",
+            "value": "5 saat sonra montaja hazır",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Toz kuruma",
+            "value": "10 dakika",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Dokunma kuruması",
+            "value": "20 - 30 dakika",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Zımparaya hazır olma süresi",
+            "value": "60 - 90 minutes",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve kap ömrü film kalınlığına, ortam sıcaklığına, neme göre değişebilir",
+            "value": "Yukarıdaki değerler 20°C'deki oda sıcaklığına göre verilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-115",
+      "sourceKey": "n55-115",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "undercoat",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "tds",
+            "file": "N55-115.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N55-115_1L_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N55-115.pdf",
+        "documentSha256": "eb9cbcd054ece15f65981958ab21c09d20443f49604a9b7fcb5bbdec82f3b0df",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-115.pdf",
+        "count": 11,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "keyFeatures",
+          "nozzleSize",
+          "potLife",
+          "shelfLife",
+          "storageTemperature",
+          "substrate"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "Araçlardaki tüm boyanabilir plastik parçalar için uygun, çok amaçlı yapışma arttırıcı astar",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "Sınırsız kap ömrü, püskürtmesi kolay ve güvenli ve kısa bir flash off süresi.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Uygun yüzeyler",
+            "value": "İyi temizlenmiş plastik yüzeyler",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "18 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,3-1,4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,3-1,4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "15-20",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 20 °C",
+            "value": "10-15 dk.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-120",
+      "sourceKey": "n55-120",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "undercoat",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "tds",
+            "file": "N55-120.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N55-120_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N55-120_2L_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N55-120.pdf",
+        "documentSha256": "1fcac793af323511cf6d6e797005f9e7824bd4bad0365e878e1cc91c0bee9bdf",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-120.pdf",
+        "count": 12,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "potLife",
+          "shelfLife",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "Akrilik reçine esaslı, iki bileşenli, iyi zımparalama özelliklerine sahip astar dolgusu.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "Yüksek katı içerik, hızlı kuruma ve kısa flash off süresi.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "18 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "4:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife 20°C",
+            "value": "1,5 saat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "60-80",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 20 °C",
+            "value": "Zımparaya hazır olma: 3 - 4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 60 °C",
+            "value": "Zımparaya hazır olma: 30",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve kap ömrü film kalınlığına, ortam sıcaklığına, neme göre değişebilir",
+            "value": "Yukarıdaki değerler 20°C'deki oda sıcaklığına göre verilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-120",
+          "ratio": "4:1",
+          "evidenceFile": "TDS__TR__N55-120.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-121",
+      "sourceKey": "n55-121",
+      "officialName": "N55-121 Dolgu Astarı",
+      "officialNameRegion": "tr",
+      "officialNameSource": "tds-link",
+      "role": "undercoat",
+      "status": "CURRENT_OTHER_REGION",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [
+        "1 L",
+        "2,5 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N55-121_TR.pdf",
+          "file": "N55-121_TR.pdf",
+          "region": "tr",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "tr",
+            "file": "N55-121_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "tr",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121%202KPrimerFiller1L_TR.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N55-121%202KPrimerFiller2.5L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-V15",
+      "sourceKey": "n55-v15",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "undercoat",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "tds",
+            "file": "NORBIN_TDS_N55-V15_1K_Primer_Filler_VOC_2022.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "N55-V15_1K_Primer_Filler_VOC_1L.PDF"
+          },
+          {
+            "kind": "tds",
+            "file": "N55-V15.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N55-V15_1L_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N55-V15.pdf",
+        "documentSha256": "f79d70cfaf4bed29ba26c1d04855ea876a59037a0de47283b1342f6315d53251",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-V15.pdf",
+        "count": 12,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "shelfLife",
+          "storageTemperature",
+          "substrate"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "1K",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "Evrensel zımpara dolgusu. 20°C'de 75 dakika kuruduktan sonra tekrar kaplanabilir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Uygun kullanım yüzeyleri",
+            "value": "Eski boya işleri, alüminyum, çelik ve galvanizli çelik.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "24 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "100 % hacmen",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,7",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,7",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "60-80",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 60 °C",
+            "value": "Zımparaya hazır olmasüresi: 30 dakika",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve kap ömrü film kalınlığına, oda sıcaklığına ve neme bağlı olarak değişebilir",
+            "value": "Yukarıdaki veriler 20°C oda sıcaklığında verilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N85-025",
+          "ratio": null,
+          "evidenceFile": "TDS__TR__N55-V15.pdf",
+          "partnerRole": "reducer",
+          "partnerKnownOnSite": false
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-V20",
+      "sourceKey": "n55-v20",
+      "officialName": "N55-V20 2K Primer Filler grey",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "undercoat",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "2,5 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V20_2K_Primer_Filler_grey.pdf?asdb213ffe",
+          "file": "N55-V20_2K_Primer_Filler_grey.pdf",
+          "region": "en",
+          "tokenizedUrl": true
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "N55-V20_2K_Primer_Filler_grey.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N55-V20_2K_Primer_Filler_tr_v2_new.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2.5L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+        "documentSha256": "46af5e6383d92c8628a00416086bc9b004301b884daf325bd85b77e2bed25bd5",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+        "count": 18,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "note",
+          "nozzleSize",
+          "otherSpecification",
+          "potLife",
+          "sandability",
+          "shelfLife",
+          "storageTemperature",
+          "substrate"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "2K VOC",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "İyi dolgu ve kuruma özelliklerine sahip, zımparalanması kolay universal VOC astar",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Uygun kullanım yüzeyleri",
+            "value": "Eski boyalı ve macunlu yüzeylere direkt uygulama.Çelik, galvanizli çelik ve alüminyumyüzeylere dolgu astarı öncesi Wash Primer uygulaması tavsiye edilir",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "24 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "5:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife 20°C",
+            "value": "1 saat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "50-70",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "70 - 160 µm",
+            "unit": "µm",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Sprey katları",
+            "value": "Katlar arasında matlaşana kadar 3 - 4 kat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 20 °C",
+            "value": "3 saat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 60 °C",
+            "value": "30 dk.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve pot life film kalınlığına, ortam sıcaklığına, neme ve sertleştirici tipine göredeğişebilir",
+            "value": "Yukarıdaki değerler standart sertleştirici ile 20°C'deki oda sıcaklığına göreverilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sandability",
+            "sourceLabel": "Zımpara",
+            "value": "yaş",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sandability",
+            "sourceLabel": "Zımpara",
+            "value": "daireselzımpara makinesi",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Lütfen göz önünde bulundurunuz",
+            "value": "Otomotiv yenileme boyaları için bu belgede verilen uygulama talimatlarına ek olarak araç",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 3
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-020",
+          "ratio": "5:1",
+          "evidenceFile": "TDS__TR__N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N55-V29",
+      "sourceKey": "n55-v29",
+      "officialName": "N55-V29 2K Primer Filler black",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "undercoat",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "2,5 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+          "file": "N55-V29_2K_Primer_Filler_black.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "N55-V29_2K_Primer_Filler_black.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N55-V29_2K_Primer_Filler_black_tr_new.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5l_tr.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__N55-V29_2K_Primer_Filler_black.pdf",
+        "documentSha256": "e658076be8bacb18f6b581cf6d671cddf5285e665a5fa29dd6a4676314b1aa6c",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+        "count": 18,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "flashOffTime",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "otherSpecification",
+          "potLife",
+          "shelfLife",
+          "sprayCoats",
+          "sprayViscosity",
+          "storageTemperature",
+          "substrate"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K Primer Filler VOC.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Universal VOC sanding filler with good filling and drying properties, easy to sand.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Suitable surfaces",
+            "value": "Direct application to old paint and putty",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "5:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "25-29 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "1 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.6-1.8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.6-1.8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50-70",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Film thickness high build",
+            "value": "70 - 160 µm",
+            "unit": "µm",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Spray coats",
+            "value": "3 - 4 layers with flash off until mat between the coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "3 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [
+        {
+          "partnerCode": "N75-020",
+          "ratio": "5:1",
+          "evidenceFile": "TDS__N55-V29_2K_Primer_Filler_black.pdf",
+          "partnerRole": "hardener",
+          "partnerKnownOnSite": true
+        },
+        {
+          "partnerCode": "N85-025",
+          "ratio": "5:1",
+          "evidenceFile": "TDS__N55-V29_2K_Primer_Filler_black.pdf",
+          "partnerRole": "reducer",
+          "partnerKnownOnSite": false
+        }
+      ],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N60-100",
+      "sourceKey": "n60-100",
+      "officialName": "N60-100 Universal Macun 2.7kg",
+      "officialNameRegion": "tr",
+      "officialNameSource": "tds-link",
+      "role": "bodyfiller",
+      "status": "CURRENT_OTHER_REGION",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [
+        "2,7 kg"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N60-100_Universal_TR.pdf",
+          "file": "N60-100_Universal_TR.pdf",
+          "region": "tr",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "tr",
+            "file": "N60-100_Universal_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "tr",
+            "pack": "2,7 kg",
+            "href": "https://www.norbin-paint.com/files/MSDS/N60-100_Universal_TR2.pdf"
+          },
+          {
+            "region": "tr",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/N60-100_Sertlestirici_TR.pdf"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N60-100_Universal_TR.pdf",
+        "documentSha256": "b328c1455e7804d0a0670df538d25ae97ddd5ec1eaa8f5ca55c1d4c2d27b1407",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N60-100_Universal_TR.pdf",
+        "count": 8,
+        "fields": [
+          "dryingTime",
+          "intendedUse",
+          "keyFeatures",
+          "note",
+          "otherSpecification",
+          "sandability",
+          "shelfLife",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "N60-100 polyester macun, yumuşak kıvamı sayesinde uygulama kolaylığı sağlayan ve delikoluşturmadan pürüzsüz bir yüzey bırakan, doymamış polyester reçine esaslı bir macundur",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "N60-100 polyester macun alüminyum, galvanik, çelik, ahşap, SMC, FRP",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-25 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "12 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Karıştırma sonrası jelleşme süresi",
+            "value": "Oda sıcaklığında 5 - 6 dakika.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 20 °C",
+            "value": "15-20 dk.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sandability",
+            "sourceLabel": "Zımpara",
+            "value": "Başlangıç P80 - P120",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Lütfen göz önünde bulundurunuz",
+            "value": "Otomotiv yenileme boyaları için bu belgede verilen uygulama talimatlarına ek olarak araç",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N60-V20",
+      "sourceKey": "n60-v20",
+      "officialName": "N60-V20 Multifunctional Body Filler + Hardener",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "bodyfiller",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "0,05 kg",
+        "1,95 kg"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "file": "N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "N60-V20_Multifunctional_Body_Filler_Hardener.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N60-V20_NORBIN_Multifunctional_Body_Filler_Hardener_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "1,95 kg",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF"
+          },
+          {
+            "region": "en",
+            "pack": "0,05 kg",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "1,95 kg",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_tr.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "0,05 kg",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_tr.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+        "documentSha256": "40ada2384b10353b57c7041a30be037aae6add424effdf16d67488bc1a32fb5e",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+        "count": 10,
+        "fields": [
+          "dryingTime",
+          "intendedUse",
+          "keyFeatures",
+          "note",
+          "potLife",
+          "shelfLife",
+          "storageTemperature",
+          "substrate",
+          "voc"
+        ],
+        "claims": [
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 249 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "Multifunctional Body Filler VOC",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Good filling and sanding features.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "12 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Suitable surfaces",
+            "value": "Direct application to old paint, steel, galvanized steel and aluminium.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife after mixing",
+            "value": "4 - 6 minutes at room temperature",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying time at 20°C",
+            "value": "20 - 30 minutes",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N75-020",
+      "sourceKey": "n75-020",
+      "officialName": "N75-020 Hardener Fast",
+      "officialNameRegion": "en",
+      "officialNameSource": "sds-link",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "0,5 L"
+      ],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "0,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "0,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0.5L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N55-V29",
+          "ratio": "5:1",
+          "knownOnSite": true
+        },
+        {
+          "code": "N55-V20",
+          "ratio": "5:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N75-021",
+      "sourceKey": "n75-021",
+      "officialName": "N75-021 Hardener Normal",
+      "officialNameRegion": "en",
+      "officialNameSource": "sds-link",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "kz",
+        "tr"
+      ],
+      "packs": [
+        "0,5 L",
+        "2,5 L"
+      ],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "0,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF"
+          },
+          {
+            "region": "en",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "0,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_0.5L_TR.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_2.5L_TR.PDF"
+          },
+          {
+            "region": "kz",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_0,5L_ru.PDF"
+          },
+          {
+            "region": "kz",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-021_2,5L_ru.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-020",
+          "ratio": "2:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N75-022",
+      "sourceKey": "n75-022",
+      "officialName": "N75-022 Hardener Slow",
+      "officialNameRegion": "en",
+      "officialNameSource": "sds-link",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "2,5 L"
+      ],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "2,5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_2.5L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-020",
+          "ratio": "2:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N75-120",
+      "sourceKey": "n75-120",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "hardener",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N75-120_0.5L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N75-120_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N75-120_2.5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-120",
+          "ratio": "2:1",
+          "knownOnSite": true
+        },
+        {
+          "code": "N55-120",
+          "ratio": "4:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N75-121",
+      "sourceKey": "n75-121",
+      "officialName": "N75-121 Sertleştirici Normal",
+      "officialNameRegion": "tr",
+      "officialNameSource": "tds-link",
+      "role": "hardener",
+      "status": "CURRENT_OTHER_REGION",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [
+        "0,25 L",
+        "1 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N75-121_TR.pdf",
+          "file": "N75-121_TR.pdf",
+          "region": "tr",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "tr",
+            "file": "N75-121_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "tr",
+            "pack": "0,25 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121%20HardenerNormal0.25L_TR.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-121%20HardenerNormal1L_TR.PDF"
+          }
+        ],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N75-121_0.5L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N75-121_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N75-121_2.5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-120",
+          "ratio": "2:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N75-122",
+      "sourceKey": "n75-122",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "hardener",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N75-122_0.5L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N75-122_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N75-122_2.5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-120",
+          "ratio": "2:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N75-V21",
+      "sourceKey": "n75-v21",
+      "officialName": "N75-V21 Clear Hardener VOC",
+      "officialNameRegion": "en",
+      "officialNameSource": "sds-link",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en"
+      ],
+      "packs": [
+        "1 L"
+      ],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF"
+          }
+        ],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N75-V21_1L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-V20",
+          "ratio": "4:1",
+          "knownOnSite": true
+        },
+        {
+          "code": "N15-V25",
+          "ratio": "3:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N85-021",
+      "sourceKey": "n85-021",
+      "officialName": "N85-021 Thinner",
+      "officialNameRegion": "en",
+      "officialNameSource": "sds-link",
+      "role": "reducer",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF"
+          },
+          {
+            "region": "en",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf"
+          },
+          {
+            "region": "tr",
+            "pack": "1 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_TR.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_tiner_5L_tr.pdf"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-V25",
+          "ratio": "3:1",
+          "knownOnSite": true
+        }
+      ],
+      "officialImage": null
+    },
+    {
+      "code": "N85-120",
+      "sourceKey": "n85-120",
+      "officialName": "N85-120 Tiner Normal",
+      "officialNameRegion": "tr",
+      "officialNameSource": "tds-link",
+      "role": "reducer",
+      "status": "CURRENT_OTHER_REGION",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N85-120_TR.pdf",
+          "file": "N85-120_TR.pdf",
+          "region": "tr",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "tr",
+            "file": "N85-120_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "tr",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-120%20ThinnerNormal1L_TR.PDF"
+          }
+        ],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N85-120_1L_TR.PDF"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N85-120_5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N85-121",
+      "sourceKey": "n85-121",
+      "officialName": "N85-121 Tiner Yavaş",
+      "officialNameRegion": "tr",
+      "officialNameSource": "tds-link",
+      "role": "reducer",
+      "status": "CURRENT_OTHER_REGION",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [
+        "tr"
+      ],
+      "packs": [],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/TR/N85-121_TR.pdf",
+          "file": "N85-121_TR.pdf",
+          "region": "tr",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "tr",
+            "file": "N85-121_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "tr",
+            "pack": null,
+            "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-121%20ThinnerSlow1L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N85-140",
+      "sourceKey": "n85-140",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "reducer",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N85-140_1L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N95-060",
+      "sourceKey": "n95-060",
+      "officialName": "N95-060 Silicone cleaner",
+      "officialNameRegion": "en",
+      "officialNameSource": "tds-link",
+      "role": "cleaner",
+      "status": "CURRENT_EMEA",
+      "regions": [
+        "en",
+        "tr"
+      ],
+      "liveRegions": [
+        "en",
+        "tr"
+      ],
+      "packs": [
+        "5 L"
+      ],
+      "documents": {
+        "tds": {
+          "href": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+          "file": "N95-060_Silicone_Cleaner.pdf",
+          "region": "en",
+          "tokenizedUrl": false
+        },
+        "tdsAllRegions": [
+          {
+            "region": "en",
+            "file": "N95-060_Silicone_Cleaner.pdf"
+          },
+          {
+            "region": "tr",
+            "file": "N95-060 - NORBIN_Silicone_Cleaner_TR.pdf"
+          }
+        ],
+        "sds": [
+          {
+            "region": "en",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF"
+          },
+          {
+            "region": "tr",
+            "pack": "5 L",
+            "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_TR.PDF"
+          }
+        ],
+        "unlinked": []
+      },
+      "technical": {
+        "documentFileName": "TDS__N95-060_Silicone_Cleaner.pdf",
+        "documentSha256": "122207f556eb5038c6ba794fb739adc058066a463fdbd64fb78eac3baa493f73",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+        "count": 4,
+        "fields": [
+          "keyFeatures",
+          "note",
+          "shelfLife",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Used with NORBIN products.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "60 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N95-110",
+      "sourceKey": "n95-110",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "cleaner",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N95-110_0.25L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N95-120",
+      "sourceKey": "n95-120",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "cleaner",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N95-120_0.5L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N95-150",
+      "sourceKey": "n95-150",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "cleaner",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "tds",
+            "file": "N95-150.pdf"
+          },
+          {
+            "kind": "sds",
+            "file": "SDS_N95-150_1kg_TR.PDF"
+          }
+        ]
+      },
+      "technical": {
+        "documentFileName": "TDS__TR__N95-150.pdf",
+        "documentSha256": "1f50a55941205c54e14af9d4ee45bfb1f48fb91c0fc8d530f0aa00315a22dbba",
+        "documentSourceUrl": "https://www.norbin-paint.com/files/TDS/TR/N95-150.pdf",
+        "count": 14,
+        "fields": [
+          "dryingTime",
+          "filmThickness",
+          "intendedUse",
+          "keyFeatures",
+          "mixingRatio",
+          "nozzleSize",
+          "otherSpecification",
+          "potLife",
+          "shelfLife",
+          "storageTemperature"
+        ],
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "Termoplastik akrilik reçine esaslı, otomotiv plastik yüzeyleri için çok fonksiyonlu boya, esnekkaplamalar",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "Mat siyah boya; iyi doldurma, sınırsız uygulama süresi, hızlı kuruma, hızlı kapanma",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "24 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "4: 20",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "80-90",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Toz tutmama kuruması",
+            "value": "10 dakika",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Dokunma kuruması",
+            "value": "20-30 dakika",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Montaja hazır hale gelme süresi",
+            "value": "60 - 90 dakika",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve kap ömrü film kalınlığına, ortam sıcaklığına, neme göre değişebilir",
+            "value": "Yukarıdaki değerler 20°C'deki oda sıcaklığına göre verilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    },
+    {
+      "code": "N95-160",
+      "sourceKey": "n95-160",
+      "officialName": null,
+      "officialNameRegion": null,
+      "officialNameSource": null,
+      "role": "cleaner",
+      "status": "UNLINKED_IN_SOURCE",
+      "regions": [
+        "tr"
+      ],
+      "liveRegions": [],
+      "packs": [],
+      "documents": {
+        "tds": null,
+        "tdsAllRegions": [],
+        "sds": [],
+        "unlinked": [
+          {
+            "kind": "sds",
+            "file": "SDS_N95-160_1L_TR.PDF"
+          }
+        ]
+      },
+      "technical": null,
+      "relations": [],
+      "usedBy": [],
+      "officialImage": null
+    }
+  ]
+}

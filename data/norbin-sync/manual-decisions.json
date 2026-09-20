@@ -1,0 +1,16 @@
+{
+  "_comment": [
+    "Ručne odluke vlasnika. Sync ih čita, nikad ih ne piše.",
+    "source.<šifra> = { \"decision\": \"skip\" | \"keep\", \"reason\": \"…\" }"
+  ],
+  "source": {
+    "N85-025": {
+      "decision": "skip",
+      "status": "OFFICIAL_REFERENCED_COMPONENT_NOT_CUSTOMER_FACING",
+      "reason": "Tehnički list N55-V29 (i povučeni N55-V15) imenuje ga kao razređivač u odnosu mešanja, ali proizvođač za njega nema ni stranicu, ni tehnički, ni bezbednosni list ni u jednom regionu. Ostaje interna referenca: bez kartice, bez pojma pretrage, van pokrivenosti. Naš ERP artikal 507127 je interni podatak za usaglašavanje.",
+      "evidence": ["https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf", "docs/NORBIN_PRODUCT_INVENTORY.md §14.5"],
+      "decidedOn": "2026-09-20"
+    }
+  },
+  "local": {}
+}

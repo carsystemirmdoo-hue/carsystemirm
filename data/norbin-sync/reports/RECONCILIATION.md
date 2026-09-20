@@ -1,0 +1,40 @@
+# Norbin sync — coverage gate
+
+| mera | vrednost |
+| --- | --- |
+| A_currentOfficialRecords | 13 |
+| B_representedLocally | 13 |
+| C_currentOfficialCodes | 13 |
+| D_representedLocally | 13 |
+| productCoveragePercent | 100 |
+| codeCoveragePercent | 100 |
+| note | Norbin nema sloj brojeva artikala: jedna šifra je i proizvod i oznaka, pa je A ≡ C po konstrukciji. |
+| codesWithPackagingVariants | N15-020 |
+| VISIBLE_CUSTOMER_FACING_CARDS | 13 |
+| families | 1 |
+| standaloneCards | 12 |
+| CURRENT_VISIBLE_CARDS | 13 |
+| LEGACY_VISIBLE_CARDS | 0 |
+| UNDERLYING_NORBIN_RECORDS | 14 |
+| importedThisSync | 12 |
+| enrichedExisting | 2 |
+| VARIANT_FAMILY_MEMBERS | 2 |
+| REDIRECT_ONLY_RECORDS | 2 |
+| CURRENT_SYSTEMS | 0 |
+| CURRENT_PUBLIC_TONERS | 0 |
+| CURRENT_OTHER_REGION | 5 |
+| UNLINKED_IN_SOURCE | 12 |
+| OFFICIAL_REFERENCED_COMPONENT_NOT_CUSTOMER_FACING | 1 |
+| OFFICIAL_PRODUCT_IMAGES | 0 |
+| MISSING_OFFICIAL_ASSETS | 13 |
+| VERIFIED_ARTICLE_NUMBERS | 0 |
+| ASSET_FILENAME_ONLY_NUMBERS | 0 |
+| withTds | 8 |
+| withoutTds | 5 |
+| withSds | 13 |
+| relations | 8 |
+| reverseRelations | 7 |
+| availability.SELLABLE_CURRENT | 7 |
+| availability.SELLABLE_CURRENT_ZERO_STOCK | 1 |
+| availability.NOT_IN_OUR_PROGRAMME | 5 |
+| Neuspesi | 0 |

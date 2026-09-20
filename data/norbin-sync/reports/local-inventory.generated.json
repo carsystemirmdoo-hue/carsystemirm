@@ -1,0 +1,555 @@
+{
+  "summary": {
+    "UNDERLYING_NORBIN_RECORDS": 14,
+    "VARIANT_FAMILY_MEMBERS": 2,
+    "REDIRECT_ONLY_RECORDS": 2,
+    "VISIBLE_CUSTOMER_FACING_CARDS": 13,
+    "CURRENT_VISIBLE_CARDS": 13,
+    "LEGACY_VISIBLE_CARDS": 0,
+    "byClassification": {
+      "EXACT_MATCH": 14,
+      "HIGH_CONFIDENCE_MATCH": 0,
+      "PROBABLE": 0,
+      "LEGACY_LOCAL_ONLY": 0,
+      "DUPLICATE": 0,
+      "UNKNOWN": 0
+    },
+    "distinctCodesLocally": [
+      "N15-V20",
+      "N15-V25",
+      "N55-015",
+      "N55-V20",
+      "N55-V29",
+      "N60-V20",
+      "N75-020",
+      "N75-021",
+      "N75-022",
+      "N75-V21",
+      "N85-021",
+      "N95-060",
+      "N15-020"
+    ],
+    "officialCodesWithoutLocalRecord": []
+  },
+  "layers": {
+    "runtimeRecords": 14,
+    "generatedDatasets": [
+      "data/knowledge/norbin-catalog.generated.json",
+      "data/knowledge/norbin-documents.generated.json",
+      "data/knowledge/norbin-match.generated.json",
+      "data/knowledge/norbin-tds-claims.generated.json"
+    ],
+    "brandManifest": true,
+    "images": [
+      {
+        "file": "public/products/norbin/norbin-n15-020-1l.jpg",
+        "bytes": 135423
+      },
+      {
+        "file": "public/products/norbin/norbin-n15-020-1l.webp",
+        "bytes": 184052
+      }
+    ],
+    "incomingImages": [
+      {
+        "file": "_incoming/fajl-za-sajt/Fjal za ajt /norbin-1l-n15-020.jpg",
+        "bytes": 135423
+      }
+    ],
+    "brandLogos": [
+      "public/brands/norbin.svg",
+      "public/brands/mono/norbin.svg"
+    ],
+    "components": [
+      {
+        "file": "components/norbin-brand/NorbinBrandPage.module.css",
+        "bytes": 17559
+      },
+      {
+        "file": "components/norbin-brand/NorbinBrandPage.tsx",
+        "bytes": 16047
+      },
+      {
+        "file": "components/norbin-brand/NorbinGreyShade.tsx",
+        "bytes": 1707
+      },
+      {
+        "file": "components/norbin-brand/NorbinRatioRow.tsx",
+        "bytes": 1856
+      },
+      {
+        "file": "components/norbin-brand/norbinBrandData.ts",
+        "bytes": 4430
+      }
+    ],
+    "scripts": [
+      {
+        "file": "scripts/acquire-norbin-catalog.mjs",
+        "bytes": 12960
+      },
+      {
+        "file": "scripts/acquire-norbin-documents.mjs",
+        "bytes": 9087
+      },
+      {
+        "file": "scripts/build-norbin-dossier.mjs",
+        "bytes": 17322
+      },
+      {
+        "file": "scripts/extract-norbin-tds.mjs",
+        "bytes": 19389
+      },
+      {
+        "file": "scripts/match-norbin-products.mjs",
+        "bytes": 9646
+      },
+      {
+        "file": "scripts/norbin-sync/acquire-website.mjs",
+        "bytes": 7533
+      },
+      {
+        "file": "scripts/norbin-sync/apply.mjs",
+        "bytes": 9724
+      },
+      {
+        "file": "scripts/norbin-sync/build-source.mjs",
+        "bytes": 9107
+      },
+      {
+        "file": "scripts/norbin-sync/build-stock-evidence.mjs",
+        "bytes": 3216
+      },
+      {
+        "file": "scripts/norbin-sync/check-localization.mjs",
+        "bytes": 6088
+      },
+      {
+        "file": "scripts/norbin-sync/inventory-local.mjs",
+        "bytes": 5822
+      },
+      {
+        "file": "scripts/norbin-sync/norbin-sync.test.mjs",
+        "bytes": 6703
+      },
+      {
+        "file": "scripts/norbin-sync/plan.mjs",
+        "bytes": 12419
+      },
+      {
+        "file": "scripts/norbin-sync/qa-search.mjs",
+        "bytes": 4152
+      },
+      {
+        "file": "scripts/norbin-sync/reconcile.mjs",
+        "bytes": 8775
+      },
+      {
+        "file": "scripts/norbin-sync/validate.mjs",
+        "bytes": 6550
+      },
+      {
+        "file": "scripts/norbin-sync/lib/config.mjs",
+        "bytes": 3882
+      },
+      {
+        "file": "scripts/norbin-sync/lib/local-match.mjs",
+        "bytes": 1204
+      },
+      {
+        "file": "scripts/norbin-sync/lib/website-text.mjs",
+        "bytes": 1248
+      }
+    ],
+    "docs": [
+      {
+        "file": "docs/NORBIN_ASSET_GAP.md",
+        "bytes": 19070
+      },
+      {
+        "file": "docs/NORBIN_BRAND_RESEARCH.md",
+        "bytes": 31117
+      },
+      {
+        "file": "docs/NORBIN_CATALOG_SYNC.md",
+        "bytes": 6290
+      },
+      {
+        "file": "docs/NORBIN_DESIGN_BLUEPRINT.md",
+        "bytes": 51547
+      },
+      {
+        "file": "docs/NORBIN_DOCUMENT_SOURCE_MAP.md",
+        "bytes": 3727
+      },
+      {
+        "file": "docs/NORBIN_PRODUCT_INVENTORY.md",
+        "bytes": 53700
+      },
+      {
+        "file": "docs/seo/EXPERT_REVIEW_NORBIN.md",
+        "bytes": 33162
+      },
+      {
+        "file": "docs/seo/NORBIN_ACQUISITION_REPORT.md",
+        "bytes": 14685
+      }
+    ],
+    "stagedManufacturerFiles": 0,
+    "localOfficialPdfs": 0
+  },
+  "records": [
+    {
+      "slug": "norbin-n15-v20-clear-voc",
+      "displayName": "Norbin N15-V20 Clear VOC",
+      "sku": "N15-V20",
+      "manufacturerCode": "N15-V20",
+      "derivedCode": "N15-V20",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 4 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "4 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n15-v25-fast-clear-voc",
+      "displayName": "Norbin N15-V25 Fast Clear VOC",
+      "sku": "N15-V25",
+      "manufacturerCode": "N15-V25",
+      "derivedCode": "N15-V25",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n55-015-1k-plastic-primer",
+      "displayName": "Norbin N55-015 1K Plastic Primer",
+      "sku": "N55-015",
+      "manufacturerCode": "N55-015",
+      "derivedCode": "N55-015",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 1 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "podloga",
+      "packages": [
+        "1 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n55-v20-2k-primer-filler-grey",
+      "displayName": "Norbin N55-V20 2K Primer Filler grey",
+      "sku": "N55-V20",
+      "manufacturerCode": "N55-V20",
+      "derivedCode": "N55-V20",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 2,5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "podloga",
+      "packages": [
+        "2,5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n55-v29-2k-primer-filler-black",
+      "displayName": "Norbin N55-V29 2K Primer Filler black",
+      "sku": "N55-V29",
+      "manufacturerCode": "N55-V29",
+      "derivedCode": "N55-V29",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 2,5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "podloga",
+      "packages": [
+        "2,5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n60-v20-multifunctional-body-filler-hardener",
+      "displayName": "Norbin N60-V20 Multifunctional Body Filler + Hardener",
+      "sku": "N60-V20",
+      "manufacturerCode": "N60-V20",
+      "derivedCode": "N60-V20",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 1,95 kg:available",
+        "Bezbednosni list — 0,05 kg:available"
+      ],
+      "category": "kitovi",
+      "program": "priprema-povrsine",
+      "phase": "priprema",
+      "packages": [
+        "0,05 kg",
+        "1,95 kg"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n75-020-hardener-fast",
+      "displayName": "Norbin N75-020 Hardener Fast",
+      "sku": "N75-020",
+      "manufacturerCode": "N75-020",
+      "derivedCode": "N75-020",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Bezbednosni list — 0,5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "podloga",
+      "packages": [
+        "0,5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n75-021-hardener-normal",
+      "displayName": "Norbin N75-021 Hardener Normal",
+      "sku": "N75-021",
+      "manufacturerCode": "N75-021",
+      "derivedCode": "N75-021",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Bezbednosni list — 0,5 L:available",
+        "Bezbednosni list — 2,5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "0,5 L",
+        "2,5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n75-022-hardener-slow",
+      "displayName": "Norbin N75-022 Hardener Slow",
+      "sku": "N75-022",
+      "manufacturerCode": "N75-022",
+      "derivedCode": "N75-022",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Bezbednosni list — 2,5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "2,5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n75-v21-clear-hardener-voc",
+      "displayName": "Norbin N75-V21 Clear Hardener VOC",
+      "sku": "N75-V21",
+      "manufacturerCode": "N75-V21",
+      "derivedCode": "N75-V21",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Bezbednosni list — 1 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "1 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n85-021-thinner",
+      "displayName": "Norbin N85-021 Thinner",
+      "sku": "N85-021",
+      "manufacturerCode": "N85-021",
+      "derivedCode": "N85-021",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Bezbednosni list — 1 L:available",
+        "Bezbednosni list — 5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "1 L",
+        "5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n95-060-silicone-cleaner",
+      "displayName": "Norbin N95-060 Silicone cleaner",
+      "sku": "N95-060",
+      "manufacturerCode": "N95-060",
+      "derivedCode": "N95-060",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 5 L:available"
+      ],
+      "category": "ciscenje",
+      "program": "priprema-povrsine",
+      "phase": "priprema",
+      "packages": [
+        "5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": null,
+      "consolidated": false,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n15-020-5l",
+      "displayName": "Norbin N15-020 5 L",
+      "sku": "NORBIN-N15-020-5L",
+      "manufacturerCode": "N15-020",
+      "derivedCode": "N15-020",
+      "image": "/images/products/placeholder-product.svg",
+      "hasOfficialImage": false,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 1 L:available",
+        "Bezbednosni list — 5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "5 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": "norbin-n15-020",
+      "consolidated": true,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    },
+    {
+      "slug": "norbin-n15-020-1l",
+      "displayName": "Norbin N15-020 1 L",
+      "sku": "NORBIN-N15-020-1L",
+      "manufacturerCode": "N15-020",
+      "derivedCode": "N15-020",
+      "image": "/products/norbin/norbin-n15-020-1l.webp",
+      "hasOfficialImage": true,
+      "documents": [
+        "Tehnički list:available",
+        "Bezbednosni list — 1 L:available",
+        "Bezbednosni list — 5 L:available"
+      ],
+      "category": "boje",
+      "program": "boje-i-lakovi",
+      "phase": "lak",
+      "packages": [
+        "1 L"
+      ],
+      "source": "lib/carsystem-data.ts (ručni zapis)",
+      "status": "Na upit",
+      "family": "norbin-n15-020",
+      "consolidated": true,
+      "classification": "EXACT_MATCH",
+      "officialStatus": "CURRENT_EMEA"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "n60-v20": {
+    "sourceHash": "4fac0a652e2d657d",
+    "productType": "Višenamenski kit sa učvršćivačem",
+    "subtype": "Kit sa učvršćivačem · VOC",
+    "shortDescription": "Višenamenski kit koji se pod istom zvaničnom oznakom isporučuje zajedno sa pripadajućim učvršćivačem, za punjenje i izravnavanje podloge.",
+    "longDescription": "N60-V20 Multifunctional Body Filler + Hardener je jedan proizvod sa dve komponente: kit od 1,95 kg i pripadajući učvršćivač od 0,05 kg dele istu zvaničnu oznaku i koriste se zajedno. Tehnički list navodi direktno nanošenje na staru boju, čelik, pocinkovani čelik i aluminijum, uz dobra svojstva punjenja i brušenja. Smeša se obrađuje u roku od 4-6 minuta na sobnoj temperaturi, a sušenje na 20 °C traje 20-30 minuta. Skladišti se na 5-40 °C, uz rok upotrebe od 12 meseci.",
+    "purpose": "Punjenje i izravnavanje podloge u fazi pripreme",
+    "facts": [
+      { "label": "Vreme upotrebe smeše", "value": "4-6 minuta na sobnoj temperaturi" },
+      { "label": "Sušenje", "value": "20-30 minuta na 20 °C" },
+      { "label": "Podloge", "value": "stara boja, čelik, pocinkovani čelik i aluminijum" },
+      { "label": "VOC", "value": "249 g/l" },
+      { "label": "Temperatura skladištenja", "value": "5-40 °C" },
+      { "label": "Rok upotrebe", "value": "12 meseci" }
+    ],
+    "applications": [
+      "Punjenje i izravnavanje oštećenja pre brušenja",
+      "Direktno nanošenje na staru boju, čelik, pocinkovani čelik i aluminijum",
+      "Mešanje kita i pripadajućeg učvršćivača neposredno pre nanošenja"
+    ],
+    "benefits": [
+      {
+        "title": "Punjenje i brušenje",
+        "description": "Tehnički list navodi dobra svojstva punjenja i brušenja."
+      },
+      {
+        "title": "Višenamenska primena",
+        "description": "Proizvod je zvanično označen kao višenamenski kit u VOC izvedbi."
+      },
+      {
+        "title": "Direktno na podlogu",
+        "description": "Nanosi se direktno na staru boju, čelik, pocinkovani čelik i aluminijum."
+      }
+    ],
+    "advice": "Za autorefinish važe uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehnologiju."
+  }
+}

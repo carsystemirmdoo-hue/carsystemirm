@@ -1,0 +1,2578 @@
+{
+  "meta": {
+    "generator": "scripts/norbin-sync/apply.mjs",
+    "brand": "Norbin",
+    "manufacturer": "BASF Coatings GmbH",
+    "brandingStatus": "CURRENT_BUT_LEGACY_BRANDING",
+    "website": "https://www.norbin-paint.com/en/norbin-range.html",
+    "crawledAt": "2026-09-20T07:13:21.349Z",
+    "referenceRegion": "en",
+    "products": 12,
+    "enrichedExisting": 2,
+    "codes": 13,
+    "officialProductImages": 0,
+    "stockEvidence": {
+      "label": "lager 23.7.26.pdf",
+      "printedOn": "2026-07-23",
+      "kind": "carsystem-stock-report",
+      "note": "Izveštaj nije u repozitorijumu jer sadrži cene i količine.",
+      "evidence": {
+        "file": "docs/NORBIN_PRODUCT_INVENTORY.md",
+        "section": "§11",
+        "sha256": "e2d7ba5def5f500fdb13c9078d5d2d4b505190f5ef0037a3329fcbdaf13180aa"
+      }
+    },
+    "officialReferencedComponents": [
+      {
+        "code": "N85-025",
+        "status": "OFFICIAL_REFERENCED_COMPONENT_NOT_CUSTOMER_FACING",
+        "decided": true
+      }
+    ],
+    "note": "Brojeva artikala nema na zvaničnom izvoru; pakovanje je varijanta. Proizvođač ne objavljuje slike proizvoda."
+  },
+  "products": [
+    {
+      "slug": "norbin-n15-v20-clear-voc",
+      "name": "Norbin N15-V20 Clear VOC",
+      "sourceKey": "n15-v20",
+      "code": "N15-V20",
+      "officialName": "N15-V20 Clear VOC",
+      "officialNameSource": "tds-link (en)",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "506391",
+            "pack": "4 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "4 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "relations": [
+        {
+          "code": "N75-V21",
+          "relation": "USES_HARDENER",
+          "ratio": "4:1",
+          "slug": "norbin-n75-v21-clear-hardener-voc",
+          "name": "N75-V21 Clear Hardener VOC",
+          "officialIdentity": true
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+        "documentSha256": "dd3a4869b08d1cd648fecea081b2c658787484687f0fe48934501100e21f2bb0",
+        "claims": [
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K VOC clear coat for all basecoat finishes.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "4:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "20-24 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "1.5 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "5 hours ready for assembly",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N15-V20 Clear VOC",
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N15-V20 Clear VOC, 4 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N15-V20_4L_en.PDF",
+          "language": "en",
+          "pack": "4 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "2K VOC bezbojni lak",
+        "subtype": "2K bezbojni lak · VOC",
+        "shortDescription": "2K VOC bezbojni lak za završni sloj preko svih baznih boja, sa odnosom mešanja 4:1 i vremenom upotrebe smeše 1,5 h.",
+        "longDescription": "N15-V20 Clear VOC je dvokomponentni bezbojni lak predviđen za završno lakiranje preko svih baznih boja. Smeša se priprema u odnosu 4:1, viskozitet prskanja na 20°C iznosi 20-24 s, a vreme upotrebe smeše je 1,5 h. Nanosi se mlaznicom 1,3-1,4, uz razmak od 3 min između slojeva i debljinu filma 50 μm. Na 20°C površina je spremna za montažu posle 5 h, u komori na 60°C posle 30 min, a potpunu tvrdoću dostiže posle 24 h. Sadržaj VOC iznosi 419 g/l.",
+        "purpose": "Završno lakiranje preko baznih boja",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "4:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "20-24 s na 20°C"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "1,5 h na 20°C"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3-1,4"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "3 min"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 5 h do montaže · 60°C: 30 min · potpuna tvrdoća posle 24 h"
+          },
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-40 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "24 meseca"
+          },
+          {
+            "label": "VOC",
+            "value": "419 g/l"
+          }
+        ],
+        "applications": [
+          "Završni sloj preko bazne boje",
+          "Razmak 3 min između slojeva",
+          "Sušenje na 20°C ili u komori na 60°C"
+        ],
+        "benefits": [
+          {
+            "title": "Za sve bazne boje",
+            "description": "Predviđen je kao završni 2K VOC sloj preko svih baznih boja u sistemu."
+          },
+          {
+            "title": "Sušenje u komori",
+            "description": "U komori na 60°C suši 30 min, a potpunu tvrdoću dostiže posle 24 h."
+          },
+          {
+            "title": "Definisan sadržaj VOC",
+            "description": "Prema tehničkom listu sadržaj VOC iznosi 419 g/l."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n15-v25-fast-clear-voc",
+      "name": "Norbin N15-V25 Fast Clear VOC",
+      "sourceKey": "n15-v25",
+      "code": "N15-V25",
+      "officialName": "N15-V25 Fast Clear VOC",
+      "officialNameSource": "tds-link (en)",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "507911",
+            "pack": "5 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "relations": [
+        {
+          "code": "N75-V21",
+          "relation": "USES_HARDENER",
+          "ratio": "3:1",
+          "slug": "norbin-n75-v21-clear-hardener-voc",
+          "name": "N75-V21 Clear Hardener VOC",
+          "officialIdentity": true
+        },
+        {
+          "code": "N85-021",
+          "relation": "USES_REDUCER",
+          "ratio": "3:1",
+          "slug": "norbin-n85-021-thinner",
+          "name": "N85-021 Thinner",
+          "officialIdentity": true
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__N15-V25_Fast_Clear_VOC_2.pdf",
+        "documentSha256": "57924c140ccc0ef711fb0e0ed3ae07c2322fc9d81065e669fd8a8c48a9971246",
+        "claims": [
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC",
+            "value": "N15-V25",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "Fast drying 2K VOC clear suitable for small repairs (blend-in repairs, refinishing of one ortwo vertical panels).",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "36 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "3:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "23-25 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "1.5 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "voc",
+            "sourceLabel": "VOC",
+            "value": "N15-V25",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sprayPressure",
+            "sourceLabel": "Application pressure",
+            "value": "2 bar",
+            "unit": "bar",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzlePressure",
+            "sourceLabel": "Nozzle pressure",
+            "value": "0.7 bar",
+            "unit": "bar",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "40-60 μm",
+            "unit": "μm",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "2 hours dust free",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "20 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N15-V25 Fast Clear VOC",
+          "href": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N15-V25 Fast Clear VOC, 5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N15-V25_5L_en.PDF",
+          "language": "en",
+          "pack": "5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Brzosušivi 2K VOC bezbojni lak",
+        "subtype": "2K bezbojni lak · VOC · brzo sušenje",
+        "shortDescription": "Brzosušivi 2K VOC bezbojni lak za manje popravke, uklapanje i lakiranje jednog ili dva vertikalna elementa.",
+        "longDescription": "N15-V25 Fast Clear VOC je brzosušivi dvokomponentni bezbojni lak namenjen manjim popravkama — uklapanju i lakiranju jednog ili dva vertikalna elementa. Smeša se priprema u odnosu 3:1, viskozitet prskanja na 20°C iznosi 23-25 s, a vreme upotrebe smeše je 1,5 h. Nanosi se mlaznicom 1,3-1,4, pri radnom pritisku 2 bar i pritisku na mlaznici 0,7 bar, u debljini filma 40-60 μm. Bez prašine je posle 2 h na 20°C, u komori na 60°C posle 20 min, a potpunu tvrdoću dostiže posle 24 h. Sadržaj VOC iznosi 419 g/l.",
+        "purpose": "Brzo završno lakiranje manjih popravki i uklapanja",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "3:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "23-25 s na 20°C"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "1,5 h na 20°C"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,3-1,4"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "40-60 μm"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 2 h bez prašine · 60°C: 20 min · potpuna tvrdoća posle 24 h"
+          },
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-40 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "36 meseci"
+          },
+          {
+            "label": "VOC",
+            "value": "419 g/l"
+          }
+        ],
+        "applications": [
+          "Uklapanje i manje popravke",
+          "Lakiranje jednog ili dva vertikalna elementa",
+          "Nanošenje pri radnom pritisku 2 bar",
+          "Sušenje na 20°C ili u komori na 60°C"
+        ],
+        "benefits": [
+          {
+            "title": "Brzo sušenje",
+            "description": "Bez prašine je posle 2 h na 20°C, a u komori na 60°C suši 20 min."
+          },
+          {
+            "title": "Za manje popravke",
+            "description": "Namenjen je uklapanju i lakiranju jednog ili dva vertikalna elementa."
+          },
+          {
+            "title": "Definisan sadržaj VOC",
+            "description": "Prema tehničkom listu sadržaj VOC iznosi 419 g/l."
+          }
+        ],
+        "advice": "Kod popravki na vozilima poštovati i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+      }
+    },
+    {
+      "slug": "norbin-n55-015-1k-plastic-primer",
+      "name": "Norbin N55-015 1K Plastic Primer",
+      "sourceKey": "n55-015",
+      "code": "N55-015",
+      "officialName": "N55-015 1K Plastic Primer",
+      "officialNameSource": "tds-link (en)",
+      "role": "undercoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "NOT_IN_OUR_PROGRAMME",
+        "articles": [],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "1 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__N55-015_1K_Plastic_Primer.pdf",
+        "documentSha256": "a8dd6a3839b5cb12fab49e9366de0663bffaac8896bdc5933ffbbaaba0eca82e",
+        "claims": [
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Primer to provide good adhesion on plastic parts.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-35 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayCoats",
+            "sourceLabel": "Number of spray coats",
+            "value": "1 - 2 thin coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "15 min before filler application",
+            "unit": "min",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "10",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N55-015 1K Plastic Primer",
+          "href": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N55-015 1K Plastic Primer, 1 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-0151KPlasticPrimer_1L_en.PDF",
+          "language": "en",
+          "pack": "1 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "1K prajmer za plastiku",
+        "subtype": "1K prajmer · plastika",
+        "shortDescription": "1K prajmer koji obezbeđuje dobru prionljivost na plastičnim delovima pre nanošenja punila.",
+        "longDescription": "N55-015 1K Plastic Primer je jednokomponentni prajmer za plastične delove, na kojima obezbeđuje dobru prionljivost. Nanosi se mlaznicom 1,3-1,4, u 1-2 tanka sloja, u debljini filma 10 μm. Pre nanošenja punila ostavlja se razmak od 15 min. Skladišti se na 5-35 °C, a rok upotrebe je 24 meseca.",
+        "purpose": "Prionljiva podloga na plastičnim delovima",
+        "facts": [
+          {
+            "label": "Mlaznica",
+            "value": "1,3-1,4"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "1-2 tanka sloja"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "10 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "15 min pre nanošenja punila"
+          },
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-35 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "24 meseca"
+          }
+        ],
+        "applications": [
+          "Priprema plastičnih delova pre punila",
+          "Nanošenje u 1-2 tanka sloja",
+          "Razmak 15 min pre nanošenja punila"
+        ],
+        "benefits": [
+          {
+            "title": "Prionljivost na plastici",
+            "description": "Zadatak prajmera je dobra prionljivost na plastičnim delovima."
+          },
+          {
+            "title": "Tanak nanos",
+            "description": "Nanosi se u 1-2 tanka sloja, u debljini filma 10 μm."
+          },
+          {
+            "title": "Priprema za punilo",
+            "description": "Posle razmaka od 15 min površina je spremna za nanošenje punila."
+          }
+        ],
+        "advice": "Kod popravki na vozilima poštovati i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+      }
+    },
+    {
+      "slug": "norbin-n55-v20-2k-primer-filler-grey",
+      "name": "Norbin N55-V20 2K Primer Filler grey",
+      "sourceKey": "n55-v20",
+      "code": "N55-V20",
+      "officialName": "N55-V20 2K Primer Filler grey",
+      "officialNameSource": "tds-link (en)",
+      "role": "undercoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "NOT_IN_OUR_PROGRAMME",
+        "articles": [],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "2,5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "N75-020",
+          "relation": "USES_HARDENER",
+          "ratio": "5:1",
+          "slug": "norbin-n75-020-hardener-fast",
+          "name": "N75-020 Hardener Fast",
+          "officialIdentity": true
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__TR__N55-V20_2K_Primer_Filler_tr_v2_new.pdf",
+        "documentSha256": "46af5e6383d92c8628a00416086bc9b004301b884daf325bd85b77e2bed25bd5",
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Uygulama",
+            "value": "2K VOC",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Özellikler",
+            "value": "İyi dolgu ve kuruma özelliklerine sahip, zımparalanması kolay universal VOC astar",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Uygun kullanım yüzeyleri",
+            "value": "Eski boyalı ve macunlu yüzeylere direkt uygulama.Çelik, galvanizli çelik ve alüminyumyüzeylere dolgu astarı öncesi Wash Primer uygulaması tavsiye edilir",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Depolama sıcaklığı",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Raf Ömrü",
+            "value": "24 ay",
+            "unit": "ay",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Karışım oranı",
+            "value": "5:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife 20°C",
+            "value": "1 saat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Meme çapı",
+            "value": "1,6-1,8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "50-70",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film kalınlığı",
+            "value": "70 - 160 µm",
+            "unit": "µm",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Sprey katları",
+            "value": "Katlar arasında matlaşana kadar 3 - 4 kat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 20 °C",
+            "value": "3 saat",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma 60 °C",
+            "value": "30 dk.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Kuruma süresi ve pot life film kalınlığına, ortam sıcaklığına, neme ve sertleştirici tipine göredeğişebilir",
+            "value": "Yukarıdaki değerler standart sertleştirici ile 20°C'deki oda sıcaklığına göreverilmiştir",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sandability",
+            "sourceLabel": "Zımpara",
+            "value": "yaş",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "sandability",
+            "sourceLabel": "Zımpara",
+            "value": "daireselzımpara makinesi",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Lütfen göz önünde bulundurunuz",
+            "value": "Otomotiv yenileme boyaları için bu belgede verilen uygulama talimatlarına ek olarak araç",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 3
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N55-V20 2K Primer Filler grey",
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V20_2K_Primer_Filler_grey.pdf?asdb213ffe",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": true
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N55-V20 2K Primer Filler grey, 2,5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V20_2_5L_en.PDF",
+          "language": "en",
+          "pack": "2,5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "2K VOC prajmer punilo, sivo",
+        "subtype": "2K punilo · VOC · sivo",
+        "shortDescription": "Univerzalno 2K VOC punilo sive boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem.",
+        "longDescription": "N55-V20 2K Primer Filler grey je univerzalno VOC punilo sive boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem. Nanosi se direktno na stare lakirane i kitovane površine; na čeliku, galvanizovanom čeliku i aluminijumu preporučuje se Wash Primer pre nanošenja punila. Smeša se priprema u odnosu 5:1, a vreme upotrebe smeše na 20°C je 1 h. Nanosi se mlaznicom 1,6-1,8, u 3-4 sloja, sa razmakom do matiranja između slojeva, u debljini filma 50-70 μm, odnosno 70 - 160 μm kod visokog nanosa. Na 20°C suši 3 sata, u komori na 60°C 30 min. Brusi se mokro, rotacionom brusilicom.",
+        "purpose": "Punjenje i izravnavanje podloge pre bazne boje",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "5:1"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "1 h na 20°C"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,6-1,8"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "3-4 sloja, sa razmakom do matiranja između slojeva"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-70 μm; visoki nanos 70 - 160 μm"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 3 sata · 60°C: 30 min"
+          },
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-40 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "24 meseca"
+          }
+        ],
+        "applications": [
+          "Direktno na stare lakirane i kitovane površine",
+          "Wash Primer pre punila na čeliku, galvanizovanom čeliku i aluminijumu",
+          "Nanošenje u 3-4 sloja do matiranja",
+          "Mokro brušenje rotacionom brusilicom"
+        ],
+        "benefits": [
+          {
+            "title": "Univerzalno VOC punilo",
+            "description": "Univerzalno VOC punilo sa dobrim svojstvima punjenja i sušenja."
+          },
+          {
+            "title": "Lako brušenje",
+            "description": "Lako se brusi, mokrim postupkom i rotacionom brusilicom."
+          },
+          {
+            "title": "Direktno na staru podlogu",
+            "description": "Nanosi se direktno na stare lakirane i kitovane površine."
+          }
+        ],
+        "advice": "Navedene vrednosti date su za standardni učvršćivač i sobnu temperaturu od 20°C; vreme sušenja i vreme upotrebe smeše zavise od debljine filma, temperature okoline, vlažnosti i tipa učvršćivača. Kod popravki na vozilima poštovati i uputstva proizvođača vozila."
+      }
+    },
+    {
+      "slug": "norbin-n55-v29-2k-primer-filler-black",
+      "name": "Norbin N55-V29 2K Primer Filler black",
+      "sourceKey": "n55-v29",
+      "code": "N55-V29",
+      "officialName": "N55-V29 2K Primer Filler black",
+      "officialNameSource": "tds-link (en)",
+      "role": "undercoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "NOT_IN_OUR_PROGRAMME",
+        "articles": [],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "2,5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "undercoat"
+      },
+      "relations": [
+        {
+          "code": "N75-020",
+          "relation": "USES_HARDENER",
+          "ratio": "5:1",
+          "slug": "norbin-n75-020-hardener-fast",
+          "name": "N75-020 Hardener Fast",
+          "officialIdentity": true
+        },
+        {
+          "code": "N85-025",
+          "relation": "USES_REDUCER",
+          "ratio": "5:1",
+          "slug": null,
+          "name": "N85-025",
+          "officialIdentity": false
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__N55-V29_2K_Primer_Filler_black.pdf",
+        "documentSha256": "e658076be8bacb18f6b581cf6d671cddf5285e665a5fa29dd6a4676314b1aa6c",
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K Primer Filler VOC.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Universal VOC sanding filler with good filling and drying properties, easy to sand.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Suitable surfaces",
+            "value": "Direct application to old paint and putty",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "5:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "25-29 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "1 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.6-1.8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.6-1.8",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50-70",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Film thickness high build",
+            "value": "70 - 160 µm",
+            "unit": "µm",
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "otherSpecification",
+            "sourceLabel": "Spray coats",
+            "value": "3 - 4 layers with flash off until mat between the coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "3 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N55-V29 2K Primer Filler black",
+          "href": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N55-V29 2K Primer Filler black, 2,5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N55-V29_2-5L_en.PDF",
+          "language": "en",
+          "pack": "2,5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "2K VOC prajmer punilo, crno",
+        "subtype": "2K punilo · VOC · crno",
+        "shortDescription": "Univerzalno 2K VOC punilo crne boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem.",
+        "longDescription": "N55-V29 2K Primer Filler black je univerzalno VOC punilo crne boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem. Nanosi se direktno na stari lak i kit. Smeša se priprema u odnosu 5:1, viskozitet prskanja na 20°C iznosi 25-29 s, a vreme upotrebe smeše je 1 h. Nanosi se mlaznicom 1,6-1,8, u 3-4 sloja sa razmakom do matiranja i 3 min između slojeva, u debljini filma 50-70 μm, odnosno 70 - 160 μm kod visokog nanosa. Na 20°C suši 3 h, a u komori na 60°C 30 min.",
+        "purpose": "Punjenje i izravnavanje podloge pre bazne boje",
+        "facts": [
+          {
+            "label": "Odnos mešanja",
+            "value": "5:1"
+          },
+          {
+            "label": "Viskozitet prskanja",
+            "value": "25-29 s na 20°C"
+          },
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "1 h na 20°C"
+          },
+          {
+            "label": "Mlaznica",
+            "value": "1,6-1,8"
+          },
+          {
+            "label": "Broj slojeva",
+            "value": "3-4 sloja, sa razmakom do matiranja između slojeva"
+          },
+          {
+            "label": "Debljina filma",
+            "value": "50-70 μm; visoki nanos 70 - 160 μm"
+          },
+          {
+            "label": "Razmak između slojeva",
+            "value": "3 min"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20°C: 3 h · 60°C: 30 min"
+          },
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-40 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "24 meseca"
+          }
+        ],
+        "applications": [
+          "Direktno na stari lak i kit",
+          "Nanošenje u 3-4 sloja do matiranja",
+          "Razmak 3 min između slojeva",
+          "Sušenje na 20°C ili u komori na 60°C"
+        ],
+        "benefits": [
+          {
+            "title": "Univerzalno VOC punilo",
+            "description": "Univerzalno VOC punilo sa dobrim svojstvima punjenja i sušenja."
+          },
+          {
+            "title": "Lako brušenje",
+            "description": "Prema tehničkom listu punilo se lako brusi."
+          },
+          {
+            "title": "Crna podloga",
+            "description": "Punilo crne boje koje se nanosi direktno na stari lak i kit."
+          }
+        ],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n60-v20-multifunctional-body-filler-hardener",
+      "name": "Norbin N60-V20 Multifunctional Body Filler + Hardener",
+      "sourceKey": "n60-v20",
+      "code": "N60-V20",
+      "officialName": "N60-V20 Multifunctional Body Filler + Hardener",
+      "officialNameSource": "tds-link (en)",
+      "role": "bodyfiller",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT_ZERO_STOCK",
+        "articles": [
+          {
+            "articleId": "507246",
+            "pack": "2 kg kit",
+            "status": "RECENT_ZERO_STOCK"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "0,05 kg",
+        "1,95 kg"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "kitovi",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "filler",
+        "rule": "bodyfiller"
+      },
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+        "documentSha256": "40ada2384b10353b57c7041a30be037aae6add424effdf16d67488bc1a32fb5e",
+        "claims": [
+          {
+            "field": "voc",
+            "sourceLabel": "VOC per liter",
+            "value": "The VOC content of this product is 249 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "Multifunctional Body Filler VOC",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Good filling and sanding features.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "12 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "substrate",
+            "sourceLabel": "Suitable surfaces",
+            "value": "Direct application to old paint, steel, galvanized steel and aluminium.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife after mixing",
+            "value": "4 - 6 minutes at room temperature",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying time at 20°C",
+            "value": "20 - 30 minutes",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N60-V20 Multifunctional Body Filler + Hardener",
+          "href": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N60-V20 Multifunctional Body Filler + Hardener, 1,95 kg",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_1.95KG_bodyfiller_en.PDF",
+          "language": "en",
+          "pack": "1,95 kg",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N60-V20 Multifunctional Body Filler + Hardener, 0,05 kg",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N60-V20_0.05KG_bodyfiller_hardener_en.PDF",
+          "language": "en",
+          "pack": "0,05 kg",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Višenamenski kit sa učvršćivačem",
+        "subtype": "Kit sa učvršćivačem · VOC",
+        "shortDescription": "Višenamenski kit koji se pod istom zvaničnom oznakom isporučuje zajedno sa pripadajućim učvršćivačem, za punjenje i izravnavanje podloge.",
+        "longDescription": "N60-V20 Multifunctional Body Filler + Hardener je jedan proizvod sa dve komponente: kit od 1,95 kg i pripadajući učvršćivač od 0,05 kg dele istu zvaničnu oznaku i koriste se zajedno. Tehnički list navodi direktno nanošenje na staru boju, čelik, pocinkovani čelik i aluminijum, uz dobra svojstva punjenja i brušenja. Smeša se obrađuje u roku od 4-6 minuta na sobnoj temperaturi, a sušenje na 20 °C traje 20-30 minuta. Skladišti se na 5-40 °C, uz rok upotrebe od 12 meseci.",
+        "purpose": "Punjenje i izravnavanje podloge u fazi pripreme",
+        "facts": [
+          {
+            "label": "Vreme upotrebe smeše",
+            "value": "4-6 minuta na sobnoj temperaturi"
+          },
+          {
+            "label": "Sušenje",
+            "value": "20-30 minuta na 20 °C"
+          },
+          {
+            "label": "Podloge",
+            "value": "stara boja, čelik, pocinkovani čelik i aluminijum"
+          },
+          {
+            "label": "VOC",
+            "value": "249 g/l"
+          },
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-40 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "12 meseci"
+          }
+        ],
+        "applications": [
+          "Punjenje i izravnavanje oštećenja pre brušenja",
+          "Direktno nanošenje na staru boju, čelik, pocinkovani čelik i aluminijum",
+          "Mešanje kita i pripadajućeg učvršćivača neposredno pre nanošenja"
+        ],
+        "benefits": [
+          {
+            "title": "Punjenje i brušenje",
+            "description": "Tehnički list navodi dobra svojstva punjenja i brušenja."
+          },
+          {
+            "title": "Višenamenska primena",
+            "description": "Proizvod je zvanično označen kao višenamenski kit u VOC izvedbi."
+          },
+          {
+            "title": "Direktno na podlogu",
+            "description": "Nanosi se direktno na staru boju, čelik, pocinkovani čelik i aluminijum."
+          }
+        ],
+        "advice": "Za autorefinish važe uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehnologiju."
+      }
+    },
+    {
+      "slug": "norbin-n75-020-hardener-fast",
+      "name": "Norbin N75-020 Hardener Fast",
+      "sourceKey": "n75-020",
+      "code": "N75-020",
+      "officialName": "N75-020 Hardener Fast",
+      "officialNameSource": "sds-link (en)",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "507365",
+            "pack": "0,5 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "0,5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "podloga",
+        "visualType": "primer",
+        "rule": "component-undercoat"
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N55-V29",
+          "relation": "USED_BY",
+          "ratio": "5:1",
+          "slug": "norbin-n55-v29-2k-primer-filler-black",
+          "name": "N55-V29 2K Primer Filler black",
+          "officialIdentity": true
+        },
+        {
+          "code": "N55-V20",
+          "relation": "USED_BY",
+          "ratio": "5:1",
+          "slug": "norbin-n55-v20-2k-primer-filler-grey",
+          "name": "N55-V20 2K Primer Filler grey",
+          "officialIdentity": true
+        }
+      ],
+      "technical": null,
+      "documents": [
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N75-020 Hardener Fast, 0,5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-020_0_5L_en.PDF",
+          "language": "en",
+          "pack": "0,5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Brzi učvršćivač",
+        "subtype": "Učvršćivač · brzi",
+        "shortDescription": "N75-020 Hardener Fast je brzi učvršćivač Norbin programa koji se meša sa dvokomponentnim materijalima predviđenim za ovu komponentu.",
+        "longDescription": "Učvršćivač je komponenta koja se materijalu dodaje neposredno pre nanošenja i sa njim čini dvokomponentnu smešu. Oznaka Fast razlikuje ovu varijantu od standardnog i sporog učvršćivača u Norbin programu. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se parametri primene preuzimaju iz dokumentacije materijala uz koji se učvršćivač koristi. U materijale za koje je predviđen dodaje se u odnosu 5:1.",
+        "purpose": "Brzi učvršćivač za dvokomponentne materijale Norbin programa",
+        "facts": [],
+        "applications": [
+          "Mešanje sa dvokomponentnim materijalom neposredno pre nanošenja",
+          "Dodavanje u materijale za koje je predviđen, u odnosu 5:1"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n75-021-hardener-normal",
+      "name": "Norbin N75-021 Hardener Normal",
+      "sourceKey": "n75-021",
+      "code": "N75-021",
+      "officialName": "N75-021 Hardener Normal",
+      "officialNameSource": "sds-link (en)",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "506495",
+            "pack": "0,5 L",
+            "status": "RECENT_ZERO_STOCK"
+          },
+          {
+            "articleId": "506498",
+            "pack": "2,5 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "0,5 L",
+        "2,5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-020",
+          "relation": "USED_BY",
+          "ratio": "2:1",
+          "slug": "norbin-n15-020",
+          "name": "N15-020 Clear",
+          "officialIdentity": true
+        }
+      ],
+      "technical": null,
+      "documents": [
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N75-021 Hardener Normal, 0,5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_0_5L_en.PDF",
+          "language": "en",
+          "pack": "0,5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N75-021 Hardener Normal, 2,5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-021_new_2_5L_en.PDF",
+          "language": "en",
+          "pack": "2,5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Standardni učvršćivač",
+        "subtype": "Učvršćivač · standardni",
+        "shortDescription": "N75-021 Hardener Normal je standardni učvršćivač Norbin programa, namenjen mešanju sa dvokomponentnim materijalima za koje je predviđen.",
+        "longDescription": "Standardna varijanta učvršćivača dodaje se materijalu neposredno pre nanošenja i sa njim gradi dvokomponentnu smešu. Oznaka Normal razlikuje je od brze i spore varijante iz istog programa. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se ostali parametri primene preuzimaju iz dokumentacije materijala uz koji se učvršćivač koristi. U materijal za koji je predviđen dodaje se u odnosu 2:1.",
+        "purpose": "Standardni učvršćivač za dvokomponentne materijale Norbin programa",
+        "facts": [],
+        "applications": [
+          "Mešanje sa dvokomponentnim materijalom neposredno pre nanošenja",
+          "Dodavanje u materijal za koji je predviđen, u odnosu 2:1"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n75-022-hardener-slow",
+      "name": "Norbin N75-022 Hardener Slow",
+      "sourceKey": "n75-022",
+      "code": "N75-022",
+      "officialName": "N75-022 Hardener Slow",
+      "officialNameSource": "sds-link (en)",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "NOT_IN_OUR_PROGRAMME",
+        "articles": [],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "2,5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-020",
+          "relation": "USED_BY",
+          "ratio": "2:1",
+          "slug": "norbin-n15-020",
+          "name": "N15-020 Clear",
+          "officialIdentity": true
+        }
+      ],
+      "technical": null,
+      "documents": [
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N75-022 Hardener Slow, 2,5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N75-022_0_5L_en.PDF",
+          "language": "en",
+          "pack": "2,5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Spori učvršćivač",
+        "subtype": "Učvršćivač · spori",
+        "shortDescription": "N75-022 Hardener Slow je spori učvršćivač Norbin programa, namenjen mešanju sa dvokomponentnim materijalima za koje je predviđen.",
+        "longDescription": "Spora varijanta učvršćivača dodaje se materijalu neposredno pre nanošenja i sa njim gradi dvokomponentnu smešu. Oznaka Slow razlikuje je od brze i standardne varijante iz istog programa. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se ostali parametri primene preuzimaju iz dokumentacije materijala uz koji se učvršćivač koristi. U materijal za koji je predviđen dodaje se u odnosu 2:1.",
+        "purpose": "Spori učvršćivač za dvokomponentne materijale Norbin programa",
+        "facts": [],
+        "applications": [
+          "Mešanje sa dvokomponentnim materijalom neposredno pre nanošenja",
+          "Dodavanje u materijal za koji je predviđen, u odnosu 2:1"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n75-v21-clear-hardener-voc",
+      "name": "Norbin N75-V21 Clear Hardener VOC",
+      "sourceKey": "n75-v21",
+      "code": "N75-V21",
+      "officialName": "N75-V21 Clear Hardener VOC",
+      "officialNameSource": "sds-link (en)",
+      "role": "hardener",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "506392",
+            "pack": "1 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "1 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-V20",
+          "relation": "USED_BY",
+          "ratio": "4:1",
+          "slug": "norbin-n15-v20-clear-voc",
+          "name": "N15-V20 Clear VOC",
+          "officialIdentity": true
+        },
+        {
+          "code": "N15-V25",
+          "relation": "USED_BY",
+          "ratio": "3:1",
+          "slug": "norbin-n15-v25-fast-clear-voc",
+          "name": "N15-V25 Fast Clear VOC",
+          "officialIdentity": true
+        }
+      ],
+      "technical": null,
+      "documents": [
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N75-V21 Clear Hardener VOC, 1 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N75-V21_1L_en.PDF",
+          "language": "en",
+          "pack": "1 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "VOC učvršćivač",
+        "subtype": "Učvršćivač · VOC",
+        "shortDescription": "N75-V21 Clear Hardener VOC je učvršćivač Norbin programa namenjen bezbojnim lakovima u VOC izvedbi iz istog programa.",
+        "longDescription": "Prema zvaničnom nazivu, ova komponenta je predviđena za bezbojne lakove VOC tipa i dodaje im se neposredno pre nanošenja. Odnos mešanja nije isti za sve lakove uz koje se koristi, pa se preuzima iz dokumentacije konkretnog laka. Proizvođač za ovaj učvršćivač nije objavio tehnički list.",
+        "purpose": "Učvršćivač za bezbojne lakove VOC tipa iz Norbin programa",
+        "facts": [],
+        "applications": [
+          "Mešanje sa bezbojnim lakom VOC tipa neposredno pre nanošenja",
+          "Priprema smeše prema odnosu propisanom za konkretan lak"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n85-021-thinner",
+      "name": "Norbin N85-021 Thinner",
+      "sourceKey": "n85-021",
+      "code": "N85-021",
+      "officialName": "N85-021 Thinner",
+      "officialNameSource": "sds-link (en)",
+      "role": "reducer",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "507041",
+            "pack": "1 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
+      },
+      "relations": [],
+      "usedBy": [
+        {
+          "code": "N15-V25",
+          "relation": "USED_BY",
+          "ratio": "3:1",
+          "slug": "norbin-n15-v25-fast-clear-voc",
+          "name": "N15-V25 Fast Clear VOC",
+          "officialIdentity": true
+        }
+      ],
+      "technical": null,
+      "documents": [
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N85-021 Thinner, 1 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N85-021_1L_en.PDF",
+          "language": "en",
+          "pack": "1 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N85-021 Thinner, 5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/MSDS_N85-021_thinner_5L_en.pdf",
+          "language": "en",
+          "pack": "5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Razređivač",
+        "subtype": "Razređivač · Norbin program",
+        "shortDescription": "N85-021 Thinner je razređivač Norbin programa koji se dodaje materijalima predviđenim za razređivanje ovom komponentom.",
+        "longDescription": "Razređivač se materijalu dodaje pri pripremi smeše, pre nanošenja. Koristi se samo uz materijale za koje ga proizvođač predviđa, a u materijal za koji je predviđen dodaje se u odnosu 3:1. Proizvođač za ovaj proizvod nije objavio tehnički list, pa se ostali parametri primene preuzimaju iz dokumentacije materijala uz koji se razređivač koristi.",
+        "purpose": "Razređivač za materijale Norbin programa",
+        "facts": [],
+        "applications": [
+          "Razređivanje materijala pri pripremi smeše",
+          "Dodavanje u materijal za koji je predviđen, u odnosu 3:1"
+        ],
+        "benefits": [],
+        "advice": null
+      }
+    },
+    {
+      "slug": "norbin-n95-060-silicone-cleaner",
+      "name": "Norbin N95-060 Silicone cleaner",
+      "sourceKey": "n95-060",
+      "code": "N95-060",
+      "officialName": "N95-060 Silicone cleaner",
+      "officialNameSource": "tds-link (en)",
+      "role": "cleaner",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "NOT_IN_OUR_PROGRAMME",
+        "articles": [],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "ciscenje",
+        "programSlug": "priprema-povrsine",
+        "phaseSlug": "priprema",
+        "visualType": "neutral",
+        "rule": "cleaner"
+      },
+      "relations": [],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__N95-060_Silicone_Cleaner.pdf",
+        "documentSha256": "122207f556eb5038c6ba794fb739adc058066a463fdbd64fb78eac3baa493f73",
+        "claims": [
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Used with NORBIN products.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "60 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "note",
+            "sourceLabel": "Please note",
+            "value": "For automotive refinish, repair instructions of vehicle manufacturers, in particular regarding installed sensortechnology",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N95-060 Silicone cleaner",
+          "href": "https://www.norbin-paint.com/files/TDS/N95-060_Silicone_Cleaner.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N95-060 Silicone cleaner, 5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/SDS_N95-060SiliconeCleaner_5L_en.PDF",
+          "language": "en",
+          "pack": "5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": null,
+      "content": {
+        "productType": "Sredstvo za čišćenje i odmašćivanje",
+        "subtype": "Sredstvo za čišćenje · priprema",
+        "shortDescription": "N95-060 Silicone cleaner je sredstvo za čišćenje i odmašćivanje površine, predviđeno za upotrebu uz Norbin proizvode.",
+        "longDescription": "N95-060 Silicone cleaner koristi se za čišćenje i odmašćivanje površine u fazi pripreme. Tehnički list ga vezuje za upotrebu uz Norbin proizvode i ne navodi druge tehničke podatke o primeni. Skladišti se na 5-40 °C, uz deklarisani rok upotrebe od 60 meseci.",
+        "purpose": "Čišćenje i odmašćivanje površine u fazi pripreme",
+        "facts": [
+          {
+            "label": "Temperatura skladištenja",
+            "value": "5-40 °C"
+          },
+          {
+            "label": "Rok upotrebe",
+            "value": "60 meseci"
+          }
+        ],
+        "applications": [
+          "Čišćenje i odmašćivanje površine u fazi pripreme",
+          "Upotreba uz Norbin proizvode"
+        ],
+        "benefits": [
+          {
+            "title": "Upotreba uz Norbin",
+            "description": "Tehnički list navodi upotrebu uz Norbin proizvode."
+          },
+          {
+            "title": "Deklarisan rok upotrebe",
+            "description": "Zvanično deklarisani rok upotrebe je 60 meseci pri skladištenju na 5-40 °C."
+          }
+        ],
+        "advice": "Za autorefinish važe uputstva proizvođača vozila za popravku, posebno u delu koji se odnosi na ugrađenu senzorsku tehnologiju."
+      }
+    }
+  ],
+  "enrichments": {
+    "norbin-n15-020-1l": {
+      "sourceKey": "n15-020",
+      "code": "N15-020",
+      "officialName": "N15-020 Clear",
+      "officialNameSource": "tds-link (en)",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "506493",
+            "pack": "1 L",
+            "status": "RECENT_ZERO_STOCK"
+          },
+          {
+            "articleId": "506494",
+            "pack": "5 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "relations": [
+        {
+          "code": "N75-021",
+          "relation": "USES_HARDENER",
+          "ratio": "2:1",
+          "slug": "norbin-n75-021-hardener-normal",
+          "name": "N75-021 Hardener Normal",
+          "officialIdentity": true
+        },
+        {
+          "code": "N75-022",
+          "relation": "USES_HARDENER",
+          "ratio": "2:1",
+          "slug": "norbin-n75-022-hardener-slow",
+          "name": "N75-022 Hardener Slow",
+          "officialIdentity": true
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+        "documentSha256": "cb60c38ef1bee234696867bcce9444c48ba8f567369b279b0e284c8c39594d4a",
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K clear coat for all basecoat finishes.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Medium solid, good hardness, fast drying.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "2:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "16-18 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "2 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50-60",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "5 hours ready for assembly",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N15-020 Clear",
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N15-020 Clear, 1 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+          "language": "en",
+          "pack": "1 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N15-020 Clear, 5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+          "language": "en",
+          "pack": "5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": {
+        "baseProductSlug": "norbin-n15-020",
+        "variantId": "1-l",
+        "pack": "1 L",
+        "identity": {
+          "name": "Norbin N15-020 Clear",
+          "slug": "norbin-n15-020"
+        }
+      }
+    },
+    "norbin-n15-020-5l": {
+      "sourceKey": "n15-020",
+      "code": "N15-020",
+      "officialName": "N15-020 Clear",
+      "officialNameSource": "tds-link (en)",
+      "role": "clearcoat",
+      "status": "CURRENT_EMEA",
+      "availability": {
+        "status": "SELLABLE_CURRENT",
+        "articles": [
+          {
+            "articleId": "506493",
+            "pack": "1 L",
+            "status": "RECENT_ZERO_STOCK"
+          },
+          {
+            "articleId": "506494",
+            "pack": "5 L",
+            "status": "RECENT_STOCK_EVIDENCE"
+          }
+        ],
+        "publicStatus": "Na upit"
+      },
+      "packs": [
+        "1 L",
+        "5 L"
+      ],
+      "sourceUrls": [
+        "https://www.norbin-paint.com/en/norbin-range.html"
+      ],
+      "taxonomy": {
+        "category": "boje",
+        "programSlug": "boje-i-lakovi",
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "clearcoat"
+      },
+      "relations": [
+        {
+          "code": "N75-021",
+          "relation": "USES_HARDENER",
+          "ratio": "2:1",
+          "slug": "norbin-n75-021-hardener-normal",
+          "name": "N75-021 Hardener Normal",
+          "officialIdentity": true
+        },
+        {
+          "code": "N75-022",
+          "relation": "USES_HARDENER",
+          "ratio": "2:1",
+          "slug": "norbin-n75-022-hardener-slow",
+          "name": "N75-022 Hardener Slow",
+          "officialIdentity": true
+        }
+      ],
+      "usedBy": [],
+      "technical": {
+        "documentFileName": "TDS__NORBIN_TDS_N15-020_Clear_2022.pdf",
+        "documentSha256": "cb60c38ef1bee234696867bcce9444c48ba8f567369b279b0e284c8c39594d4a",
+        "claims": [
+          {
+            "field": "intendedUse",
+            "sourceLabel": "Application",
+            "value": "2K clear coat for all basecoat finishes.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "keyFeatures",
+            "sourceLabel": "Key Features",
+            "value": "Medium solid, good hardness, fast drying.",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "storageTemperature",
+            "sourceLabel": "Storage temperature",
+            "value": "5-40 °C",
+            "unit": "°C",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "shelfLife",
+            "sourceLabel": "Shelf life",
+            "value": "24 months",
+            "unit": "months",
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "mixingRatio",
+            "sourceLabel": "Mixing Ratio",
+            "value": "2:1",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "sprayViscosity",
+            "sourceLabel": "Spray viscosity at 20°C",
+            "value": "16-18 s",
+            "unit": "s",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "potLife",
+            "sourceLabel": "Potlife at 20°C",
+            "value": "2 h",
+            "unit": "h",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "nozzleSize",
+            "sourceLabel": "Nozzle size",
+            "value": "1.3-1.4",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "flashOffTime",
+            "sourceLabel": "Flash off at 20°Cmin",
+            "value": "3 minutes flash off between coats",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "filmThickness",
+            "sourceLabel": "Film thickness",
+            "value": "50-60",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 1
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 20°C",
+            "value": "5 hours ready for assembly",
+            "unit": "hours",
+            "condition": "at 20°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying at 60°C",
+            "value": "30 min",
+            "unit": "min",
+            "condition": "at 60°C",
+            "equipment": null,
+            "page": 2
+          },
+          {
+            "field": "dryingTime",
+            "sourceLabel": "Drying Remark",
+            "value": "Total hardness: after 24 hours",
+            "unit": null,
+            "condition": null,
+            "equipment": null,
+            "page": 2
+          }
+        ]
+      },
+      "documents": [
+        {
+          "kind": "tds",
+          "title": "Tehnički list — N15-020 Clear",
+          "href": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+          "language": "en",
+          "note": "Zvanični dokument na www.norbin-paint.com",
+          "tokenizedUrl": false
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N15-020 Clear, 1 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
+          "language": "en",
+          "pack": "1 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        },
+        {
+          "kind": "sds",
+          "title": "Bezbednosni list — N15-020 Clear, 5 L",
+          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
+          "language": "en",
+          "pack": "5 L",
+          "note": "Zvanični dokument na www.norbin-paint.com"
+        }
+      ],
+      "image": null,
+      "missingOfficialAsset": true,
+      "family": {
+        "baseProductSlug": "norbin-n15-020",
+        "variantId": "5-l",
+        "pack": "5 L",
+        "identity": null
+      }
+    }
+  }
+}

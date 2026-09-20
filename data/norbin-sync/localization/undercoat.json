@@ -1,0 +1,118 @@
+{
+  "n55-015": {
+    "sourceHash": "d534e97cd15b6520",
+    "productType": "1K prajmer za plastiku",
+    "subtype": "1K prajmer · plastika",
+    "shortDescription": "1K prajmer koji obezbeđuje dobru prionljivost na plastičnim delovima pre nanošenja punila.",
+    "longDescription": "N55-015 1K Plastic Primer je jednokomponentni prajmer za plastične delove, na kojima obezbeđuje dobru prionljivost. Nanosi se mlaznicom 1,3-1,4, u 1-2 tanka sloja, u debljini filma 10 μm. Pre nanošenja punila ostavlja se razmak od 15 min. Skladišti se na 5-35 °C, a rok upotrebe je 24 meseca.",
+    "purpose": "Prionljiva podloga na plastičnim delovima",
+    "facts": [
+      { "label": "Mlaznica", "value": "1,3-1,4" },
+      { "label": "Broj slojeva", "value": "1-2 tanka sloja" },
+      { "label": "Debljina filma", "value": "10 μm" },
+      { "label": "Razmak između slojeva", "value": "15 min pre nanošenja punila" },
+      { "label": "Temperatura skladištenja", "value": "5-35 °C" },
+      { "label": "Rok upotrebe", "value": "24 meseca" }
+    ],
+    "applications": [
+      "Priprema plastičnih delova pre punila",
+      "Nanošenje u 1-2 tanka sloja",
+      "Razmak 15 min pre nanošenja punila"
+    ],
+    "benefits": [
+      {
+        "title": "Prionljivost na plastici",
+        "description": "Zadatak prajmera je dobra prionljivost na plastičnim delovima."
+      },
+      {
+        "title": "Tanak nanos",
+        "description": "Nanosi se u 1-2 tanka sloja, u debljini filma 10 μm."
+      },
+      {
+        "title": "Priprema za punilo",
+        "description": "Posle razmaka od 15 min površina je spremna za nanošenje punila."
+      }
+    ],
+    "advice": "Kod popravki na vozilima poštovati i uputstva proizvođača vozila, posebno u delu koji se odnosi na ugrađenu senzorsku tehniku."
+  },
+  "n55-v20": {
+    "sourceHash": "86ef79630a306f19",
+    "productType": "2K VOC prajmer punilo, sivo",
+    "subtype": "2K punilo · VOC · sivo",
+    "shortDescription": "Univerzalno 2K VOC punilo sive boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem.",
+    "longDescription": "N55-V20 2K Primer Filler grey je univerzalno VOC punilo sive boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem. Nanosi se direktno na stare lakirane i kitovane površine; na čeliku, galvanizovanom čeliku i aluminijumu preporučuje se Wash Primer pre nanošenja punila. Smeša se priprema u odnosu 5:1, a vreme upotrebe smeše na 20°C je 1 h. Nanosi se mlaznicom 1,6-1,8, u 3-4 sloja, sa razmakom do matiranja između slojeva, u debljini filma 50-70 μm, odnosno 70 - 160 μm kod visokog nanosa. Na 20°C suši 3 sata, u komori na 60°C 30 min. Brusi se mokro, rotacionom brusilicom.",
+    "purpose": "Punjenje i izravnavanje podloge pre bazne boje",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "5:1" },
+      { "label": "Vreme upotrebe smeše", "value": "1 h na 20°C" },
+      { "label": "Mlaznica", "value": "1,6-1,8" },
+      { "label": "Broj slojeva", "value": "3-4 sloja, sa razmakom do matiranja između slojeva" },
+      { "label": "Debljina filma", "value": "50-70 μm; visoki nanos 70 - 160 μm" },
+      { "label": "Sušenje", "value": "20°C: 3 sata · 60°C: 30 min" },
+      { "label": "Temperatura skladištenja", "value": "5-40 °C" },
+      { "label": "Rok upotrebe", "value": "24 meseca" }
+    ],
+    "applications": [
+      "Direktno na stare lakirane i kitovane površine",
+      "Wash Primer pre punila na čeliku, galvanizovanom čeliku i aluminijumu",
+      "Nanošenje u 3-4 sloja do matiranja",
+      "Mokro brušenje rotacionom brusilicom"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalno VOC punilo",
+        "description": "Univerzalno VOC punilo sa dobrim svojstvima punjenja i sušenja."
+      },
+      {
+        "title": "Lako brušenje",
+        "description": "Lako se brusi, mokrim postupkom i rotacionom brusilicom."
+      },
+      {
+        "title": "Direktno na staru podlogu",
+        "description": "Nanosi se direktno na stare lakirane i kitovane površine."
+      }
+    ],
+    "advice": "Navedene vrednosti date su za standardni učvršćivač i sobnu temperaturu od 20°C; vreme sušenja i vreme upotrebe smeše zavise od debljine filma, temperature okoline, vlažnosti i tipa učvršćivača. Kod popravki na vozilima poštovati i uputstva proizvođača vozila."
+  },
+  "n55-v29": {
+    "sourceHash": "14953983a36ea5a2",
+    "productType": "2K VOC prajmer punilo, crno",
+    "subtype": "2K punilo · VOC · crno",
+    "shortDescription": "Univerzalno 2K VOC punilo crne boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem.",
+    "longDescription": "N55-V29 2K Primer Filler black je univerzalno VOC punilo crne boje, sa dobrim svojstvima punjenja i sušenja i lakim brušenjem. Nanosi se direktno na stari lak i kit. Smeša se priprema u odnosu 5:1, viskozitet prskanja na 20°C iznosi 25-29 s, a vreme upotrebe smeše je 1 h. Nanosi se mlaznicom 1,6-1,8, u 3-4 sloja sa razmakom do matiranja i 3 min između slojeva, u debljini filma 50-70 μm, odnosno 70 - 160 μm kod visokog nanosa. Na 20°C suši 3 h, a u komori na 60°C 30 min.",
+    "purpose": "Punjenje i izravnavanje podloge pre bazne boje",
+    "facts": [
+      { "label": "Odnos mešanja", "value": "5:1" },
+      { "label": "Viskozitet prskanja", "value": "25-29 s na 20°C" },
+      { "label": "Vreme upotrebe smeše", "value": "1 h na 20°C" },
+      { "label": "Mlaznica", "value": "1,6-1,8" },
+      { "label": "Broj slojeva", "value": "3-4 sloja, sa razmakom do matiranja između slojeva" },
+      { "label": "Debljina filma", "value": "50-70 μm; visoki nanos 70 - 160 μm" },
+      { "label": "Razmak između slojeva", "value": "3 min" },
+      { "label": "Sušenje", "value": "20°C: 3 h · 60°C: 30 min" },
+      { "label": "Temperatura skladištenja", "value": "5-40 °C" },
+      { "label": "Rok upotrebe", "value": "24 meseca" }
+    ],
+    "applications": [
+      "Direktno na stari lak i kit",
+      "Nanošenje u 3-4 sloja do matiranja",
+      "Razmak 3 min između slojeva",
+      "Sušenje na 20°C ili u komori na 60°C"
+    ],
+    "benefits": [
+      {
+        "title": "Univerzalno VOC punilo",
+        "description": "Univerzalno VOC punilo sa dobrim svojstvima punjenja i sušenja."
+      },
+      {
+        "title": "Lako brušenje",
+        "description": "Prema tehničkom listu punilo se lako brusi."
+      },
+      {
+        "title": "Crna podloga",
+        "description": "Punilo crne boje koje se nanosi direktno na stari lak i kit."
+      }
+    ],
+    "advice": null
+  }
+}

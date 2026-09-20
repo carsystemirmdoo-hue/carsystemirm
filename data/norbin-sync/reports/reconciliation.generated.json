@@ -1,0 +1,118 @@
+{
+  "coverage": {
+    "A_currentOfficialRecords": 13,
+    "B_representedLocally": 13,
+    "C_currentOfficialCodes": 13,
+    "D_representedLocally": 13,
+    "productCoveragePercent": 100,
+    "codeCoveragePercent": 100,
+    "note": "Norbin nema sloj brojeva artikala: jedna šifra je i proizvod i oznaka, pa je A ≡ C po konstrukciji.",
+    "codesWithPackagingVariants": [
+      "N15-020"
+    ]
+  },
+  "cards": {
+    "VISIBLE_CUSTOMER_FACING_CARDS": 13,
+    "families": 1,
+    "standaloneCards": 12,
+    "CURRENT_VISIBLE_CARDS": 13,
+    "LEGACY_VISIBLE_CARDS": 0
+  },
+  "breakdown": {
+    "UNDERLYING_NORBIN_RECORDS": 14,
+    "importedThisSync": 12,
+    "enrichedExisting": 2,
+    "VARIANT_FAMILY_MEMBERS": 2,
+    "REDIRECT_ONLY_RECORDS": 2,
+    "CURRENT_SYSTEMS": 0,
+    "CURRENT_PUBLIC_TONERS": 0,
+    "CURRENT_OTHER_REGION": 5,
+    "UNLINKED_IN_SOURCE": 12,
+    "OFFICIAL_REFERENCED_COMPONENT_NOT_CUSTOMER_FACING": 1,
+    "OFFICIAL_PRODUCT_IMAGES": 0,
+    "MISSING_OFFICIAL_ASSETS": 13,
+    "VERIFIED_ARTICLE_NUMBERS": 0,
+    "ASSET_FILENAME_ONLY_NUMBERS": 0,
+    "availability": {
+      "SELLABLE_CURRENT": 7,
+      "SELLABLE_CURRENT_ZERO_STOCK": 1,
+      "NOT_IN_OUR_PROGRAMME": 5
+    },
+    "withTds": 8,
+    "withoutTds": 5,
+    "withSds": 13,
+    "relations": 8,
+    "reverseRelations": 7
+  },
+  "ACTIVE_PRODUCT_MISSING": [],
+  "ACTIVE_CODE_MISSING": [],
+  "duplicateActiveCodes": [],
+  "attachedToWrongProduct": [],
+  "families": [
+    {
+      "slug": "norbin-n15-020",
+      "name": "Norbin N15-020 Clear",
+      "variants": 2,
+      "presentation": "variant-pdp"
+    }
+  ],
+  "standaloneCards": [
+    {
+      "slug": "norbin-n15-v20-clear-voc",
+      "code": "N15-V20"
+    },
+    {
+      "slug": "norbin-n15-v25-fast-clear-voc",
+      "code": "N15-V25"
+    },
+    {
+      "slug": "norbin-n55-015-1k-plastic-primer",
+      "code": "N55-015"
+    },
+    {
+      "slug": "norbin-n55-v20-2k-primer-filler-grey",
+      "code": "N55-V20"
+    },
+    {
+      "slug": "norbin-n55-v29-2k-primer-filler-black",
+      "code": "N55-V29"
+    },
+    {
+      "slug": "norbin-n60-v20-multifunctional-body-filler-hardener",
+      "code": "N60-V20"
+    },
+    {
+      "slug": "norbin-n75-020-hardener-fast",
+      "code": "N75-020"
+    },
+    {
+      "slug": "norbin-n75-021-hardener-normal",
+      "code": "N75-021"
+    },
+    {
+      "slug": "norbin-n75-022-hardener-slow",
+      "code": "N75-022"
+    },
+    {
+      "slug": "norbin-n75-v21-clear-hardener-voc",
+      "code": "N75-V21"
+    },
+    {
+      "slug": "norbin-n85-021-thinner",
+      "code": "N85-021"
+    },
+    {
+      "slug": "norbin-n95-060-silicone-cleaner",
+      "code": "N95-060"
+    }
+  ],
+  "images": {
+    "officialProductImages": 0,
+    "localCustomerOwned": [
+      "/products/norbin/norbin-n15-020-1l.webp"
+    ],
+    "brokenImageReferences": [],
+    "hotlinked": []
+  },
+  "failures": []
+}

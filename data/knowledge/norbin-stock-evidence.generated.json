@@ -1,0 +1,106 @@
+{
+  "$comment": "Generisano skriptom scripts/norbin-sync/build-stock-evidence.mjs iz docs/NORBIN_PRODUCT_INVENTORY.md §11. Sadrži isključivo dokaz o aktivnosti artikla — bez cena, marži, količina, kupaca i prometa. Status NIJE tvrdnja o dostupnosti danas.",
+  "source": {
+    "label": "lager 23.7.26.pdf",
+    "printedOn": "2026-07-23",
+    "kind": "carsystem-stock-report",
+    "note": "Izveštaj nije u repozitorijumu jer sadrži cene i količine.",
+    "evidence": {
+      "file": "docs/NORBIN_PRODUCT_INVENTORY.md",
+      "section": "§11",
+      "sha256": "e2d7ba5def5f500fdb13c9078d5d2d4b505190f5ef0037a3329fcbdaf13180aa"
+    }
+  },
+  "counts": {
+    "articles": 12,
+    "distinctCodes": 10,
+    "recentStockEvidence": 7,
+    "recentZeroStock": 5
+  },
+  "codes": [
+    "N15-020",
+    "N15-V20",
+    "N15-V25",
+    "N55-V15",
+    "N60-V20",
+    "N75-020",
+    "N75-021",
+    "N75-V21",
+    "N85-021",
+    "N85-025"
+  ],
+  "articles": [
+    {
+      "articleId": "506493",
+      "manufacturerCode": "N15-020",
+      "pack": "1 L",
+      "status": "RECENT_ZERO_STOCK"
+    },
+    {
+      "articleId": "506494",
+      "manufacturerCode": "N15-020",
+      "pack": "5 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "506391",
+      "manufacturerCode": "N15-V20",
+      "pack": "4 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "507911",
+      "manufacturerCode": "N15-V25",
+      "pack": "5 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "507273",
+      "manufacturerCode": "N55-V15",
+      "pack": "1 L",
+      "status": "RECENT_ZERO_STOCK"
+    },
+    {
+      "articleId": "507246",
+      "manufacturerCode": "N60-V20",
+      "pack": "2 kg kit",
+      "status": "RECENT_ZERO_STOCK"
+    },
+    {
+      "articleId": "507365",
+      "manufacturerCode": "N75-020",
+      "pack": "0,5 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "506495",
+      "manufacturerCode": "N75-021",
+      "pack": "0,5 L",
+      "status": "RECENT_ZERO_STOCK"
+    },
+    {
+      "articleId": "506498",
+      "manufacturerCode": "N75-021",
+      "pack": "2,5 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "506392",
+      "manufacturerCode": "N75-V21",
+      "pack": "1 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "507041",
+      "manufacturerCode": "N85-021",
+      "pack": "1 L",
+      "status": "RECENT_STOCK_EVIDENCE"
+    },
+    {
+      "articleId": "507127",
+      "manufacturerCode": "N85-025",
+      "pack": "1 L",
+      "status": "RECENT_ZERO_STOCK"
+    }
+  ]
+}

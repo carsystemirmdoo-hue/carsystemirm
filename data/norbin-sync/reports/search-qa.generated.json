@@ -1,0 +1,80 @@
+{
+  "codeQueries": 26,
+  "codeFirstResult": 26,
+  "namedQueries": [
+    {
+      "query": "N15-020 Clear",
+      "top": "family:norbin-n15-020",
+      "ok": true
+    },
+    {
+      "query": "N15-V20 Clear VOC",
+      "top": "norbin-n15-v20-clear-voc",
+      "ok": true
+    },
+    {
+      "query": "N15-V25 Fast Clear VOC",
+      "top": "norbin-n15-v25-fast-clear-voc",
+      "ok": true
+    },
+    {
+      "query": "N55-015 1K Plastic Primer",
+      "top": "norbin-n55-015-1k-plastic-primer",
+      "ok": true
+    },
+    {
+      "query": "N55-V20 2K Primer Filler grey",
+      "top": "norbin-n55-v20-2k-primer-filler-grey",
+      "ok": true
+    },
+    {
+      "query": "N55-V29 2K Primer Filler black",
+      "top": "norbin-n55-v29-2k-primer-filler-black",
+      "ok": true
+    },
+    {
+      "query": "N60-V20 Multifunctional Body Filler + Hardener",
+      "top": "norbin-n60-v20-multifunctional-body-filler-hardener",
+      "ok": true
+    },
+    {
+      "query": "N75-020 Hardener Fast",
+      "top": "norbin-n75-020-hardener-fast",
+      "ok": true
+    },
+    {
+      "query": "N75-021 Hardener Normal",
+      "top": "norbin-n75-021-hardener-normal",
+      "ok": true
+    },
+    {
+      "query": "N75-022 Hardener Slow",
+      "top": "norbin-n75-022-hardener-slow",
+      "ok": true
+    },
+    {
+      "query": "N75-V21 Clear Hardener VOC",
+      "top": "norbin-n75-v21-clear-hardener-voc",
+      "ok": true
+    },
+    {
+      "query": "N85-021 Thinner",
+      "top": "norbin-n85-021-thinner",
+      "ok": true
+    },
+    {
+      "query": "N95-060 Silicone cleaner",
+      "top": "norbin-n95-060-silicone-cleaner",
+      "ok": true
+    }
+  ],
+  "hidden": [
+    {
+      "code": "N85-025",
+      "hasRecord": false,
+      "inSearchTerms": 0,
+      "nearestHit": "norbin-n85-021-thinner"
+    }
+  ],
+  "failures": []
+}

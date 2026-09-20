@@ -1,0 +1,1550 @@
+{
+  "numbers": {
+    "SCOPE": "APPROVED_SATA_EMEA_REFINISH_SCOPE",
+    "CURRENT_OUT_OF_SCOPE_FAMILIES": 31,
+    "CURRENT_PRODUCT_FAMILIES": 97,
+    "CURRENT_PRODUCT_FAMILIES_IN_PROPOSED_SCOPE": 66,
+    "CURRENT_OFFICIAL_ARTICLE_NUMBERS": 2608,
+    "CURRENT_OFFICIAL_ARTICLE_NUMBERS_EUROPE": 2554,
+    "CURRENT_VARIANT_MEMBERS": 873,
+    "CURRENT_VARIANT_MEMBERS_IN_PROPOSED_SCOPE": 655,
+    "CURRENT_ACCESSORIES": 310,
+    "CURRENT_SPARE_PARTS": 1170,
+    "CURRENT_PART_OR_ACCESSORY_UNSPLIT": 138,
+    "CURRENT_CONSUMABLES": 92,
+    "CURRENT_INDUSTRIAL_DEVICE_ARTICLES": 140,
+    "CURRENT_MERCHANDISE_ARTICLES": 57,
+    "CURRENT_REGION_ONLY": 54,
+    "UNCERTAIN_NOT_CUSTOMER_FACING": 42,
+    "EXISTING_LOCAL_RECORDS": 66,
+    "EXACT_MATCH": 47,
+    "HIGH_CONFIDENCE": 0,
+    "PROBABLE": 0,
+    "LEGACY_LOCAL_ONLY": 19,
+    "DUPLICATES": 0,
+    "NEW_PRODUCT_FAMILIES_TO_IMPORT": 20,
+    "EXISTING_PRODUCTS_TO_ENRICH": 46,
+    "OFFICIAL_PRODUCT_IMAGES": 2290,
+    "UNIQUE_USABLE_PACKSHOTS": 2219,
+    "SIBLING_IMAGES_NOT_ATTRIBUTABLE": 71,
+    "CURRENT_PRODUCTS_WITH_IMAGE": 61,
+    "MISSING_OFFICIAL_ASSETS": 5,
+    "UNDERLYING_SATA_RECORDS": 66,
+    "VARIANT_FAMILY_MEMBERS": 0,
+    "REDIRECT_ONLY_RECORDS": 0,
+    "VISIBLE_CUSTOMER_FACING_CARDS_BEFORE": 66,
+    "EXPECTED_VISIBLE_CUSTOMER_FACING_CARDS_AFTER": 66,
+    "EXPECTED_UNDERLYING_RECORDS_AFTER": 66,
+    "EXPECTED_ROW_VARIANTS_AFTER": 655
+  },
+  "locales": {
+    "reference": "en",
+    "europeLocales": [
+      "de-de",
+      "en-gb",
+      "it-it"
+    ],
+    "otherMarketLocales": [
+      "en-us",
+      "en-ca"
+    ],
+    "counts": {
+      "en": 2608,
+      "de-de": 2522,
+      "en-gb": 2520,
+      "it-it": 2552,
+      "en-us": 2376,
+      "en-ca": 2398
+    },
+    "referenceInEurope": 2554,
+    "referenceRegionOnly": 54
+  },
+  "documents": {
+    "byKind": {
+      "MANUAL": 44,
+      "DECLARATION_OF_CONFORMITY": 37,
+      "BROCHURE": 8,
+      "OTHER": 0
+    },
+    "inScopeFamiliesWithManual": 44,
+    "inScopeFamiliesWithoutDocuments": [
+      "SATAjet 3000 B",
+      "SATA spray master RP",
+      "SATAjet 1000 KK",
+      "SATA suit race",
+      "Release agent spray system",
+      "Reusable plastic flow cup",
+      "Reusable aluminium flow cup",
+      "Reusable plastic hanging cups",
+      "Reusable aluminium hanging cups",
+      "SATA suit race ladies",
+      "SATA material pressure tank 10",
+      "SATA material pressure tank 22",
+      "SATA material pressure tank 45",
+      "LCS - the Liner",
+      "SATA suit Standard Men",
+      "SATA suit Basic",
+      "Luftmikrometer",
+      "Manometer",
+      "Lackierpistolenkoffer",
+      "LCS - Hard Cups"
+    ],
+    "nonEnglishFilesOnEnglishPage": [
+      {
+        "family": "SATAjet X 5500",
+        "file": "IT-OPUSCOLO-SATA-JET-X-5500.PDF.PDF"
+      },
+      {
+        "family": "SATA air vision 5000",
+        "file": "IT-OPUSCOLO-SATA-AIR-VISION-5000.PDF.PDF"
+      },
+      {
+        "family": "SATA multi clean 2",
+        "file": "DE_PROSPEKT_SATA_MULTI_CLEAN_2.PDF.PDF"
+      },
+      {
+        "family": "SATAjet K 1800 spray mix",
+        "file": "DE_-_PROSPEKT_-_SATAJET_K_1800_SPRAY_MIX.PDF.PDF"
+      },
+      {
+        "family": "RPS - the Original",
+        "file": "IT-PROSPETTI-SATA-RPS.PDF.PDF"
+      },
+      {
+        "family": "SATA clean RCS",
+        "file": "DE-PROSPEKT-SATA-RCS.PDF.PDF"
+      }
+    ],
+    "variantsWithTechnicalData": 655
+  },
+  "slugPlan": {
+    "planned": [
+      {
+        "id": "CF1931072",
+        "slug": "satajet-x-5500",
+        "preserved": true
+      },
+      {
+        "id": "CF1931074",
+        "slug": "satajet-5000-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931078",
+        "slug": "satajet-3000-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931079",
+        "slug": "satajet-1500-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931080",
+        "slug": "satajet-1000-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931082",
+        "slug": "satajet-100-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931083",
+        "slug": "satajet-20-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931085",
+        "slug": "sataminijet-4400-b",
+        "preserved": true
+      },
+      {
+        "id": "CF1931087",
+        "slug": "sata-spray-master-rp",
+        "preserved": true
+      },
+      {
+        "id": "CF1931090",
+        "slug": "satajet-1000-h",
+        "preserved": true
+      },
+      {
+        "id": "CF1931091",
+        "slug": "satajet-h",
+        "preserved": true
+      },
+      {
+        "id": "CF1931095",
+        "slug": "satajet-3000-k-spray-mix",
+        "preserved": true
+      },
+      {
+        "id": "CF1931096",
+        "slug": "satajet-3000-k",
+        "preserved": true
+      },
+      {
+        "id": "CF1931097",
+        "slug": "satajet-1000-kk",
+        "preserved": true
+      },
+      {
+        "id": "CF1931098",
+        "slug": "satajet-1000-k",
+        "preserved": true
+      },
+      {
+        "id": "CF1931099",
+        "slug": "sataminijet-1000-k",
+        "preserved": true
+      },
+      {
+        "id": "CF1931100",
+        "slug": "satagraph-4",
+        "preserved": true
+      },
+      {
+        "id": "CF1931121",
+        "slug": "sata-air-vision-5000",
+        "preserved": true
+      },
+      {
+        "id": "CF1931122",
+        "slug": "sata-vision-2000",
+        "preserved": true
+      },
+      {
+        "id": "CF1931124",
+        "slug": "sata-air-star-c",
+        "preserved": true
+      },
+      {
+        "id": "CF1931125",
+        "slug": "sata-air-star-f",
+        "preserved": true
+      },
+      {
+        "id": "CF1931127",
+        "slug": "sata-filter-series-100",
+        "preserved": true
+      },
+      {
+        "id": "CF1931128",
+        "slug": "sata-filter-series-200",
+        "preserved": true
+      },
+      {
+        "id": "CF1931129",
+        "slug": "sata-filter-series-400",
+        "preserved": true
+      },
+      {
+        "id": "CF1931204",
+        "slug": "sata-suit-race",
+        "preserved": true
+      },
+      {
+        "id": "CF1931211",
+        "slug": "sata-hku",
+        "preserved": true
+      },
+      {
+        "id": "CF1931215",
+        "slug": "sata-vario-top-spray",
+        "preserved": true
+      },
+      {
+        "id": "CF1931220",
+        "slug": "sata-mini-set-2",
+        "preserved": true
+      },
+      {
+        "id": "CF1931221",
+        "slug": "sata-release-agent-spray-system",
+        "preserved": false
+      },
+      {
+        "id": "CF1931282",
+        "slug": "satajet-x-5500-phaser",
+        "preserved": true
+      },
+      {
+        "id": "CF1931293",
+        "slug": "sata-filter-500-series",
+        "preserved": true
+      },
+      {
+        "id": "CF1931300",
+        "slug": "sata-hrs-e",
+        "preserved": true
+      },
+      {
+        "id": "CF1931301",
+        "slug": "sata-hrs",
+        "preserved": true
+      },
+      {
+        "id": "CF1931303",
+        "slug": "sata-reusable-plastic-flow-cup",
+        "preserved": false
+      },
+      {
+        "id": "CF1931304",
+        "slug": "sata-reusable-aluminium-flow-cup",
+        "preserved": false
+      },
+      {
+        "id": "CF1931305",
+        "slug": "sata-reusable-plastic-hanging-cups",
+        "preserved": false
+      },
+      {
+        "id": "CF1931306",
+        "slug": "sata-reusable-aluminium-hanging-cups",
+        "preserved": false
+      },
+      {
+        "id": "CF1931308",
+        "slug": "sata-dry-jet-stativ",
+        "preserved": true
+      },
+      {
+        "id": "CF1931309",
+        "slug": "sata-truesun",
+        "preserved": true
+      },
+      {
+        "id": "CF1931313",
+        "slug": "sata-multi-clean-2",
+        "preserved": true
+      },
+      {
+        "id": "CF1931315",
+        "slug": "satajet-k-1800-spray-mix",
+        "preserved": true
+      },
+      {
+        "id": "CF1931319",
+        "slug": "satajet-1000-b-lignum-3",
+        "preserved": true
+      },
+      {
+        "id": "CF1931327",
+        "slug": "sata-suit-race-ladies",
+        "preserved": true
+      },
+      {
+        "id": "CF1931331",
+        "slug": "satajet-x-5500-clear-coat-edition",
+        "preserved": true
+      },
+      {
+        "id": "CF1931333",
+        "slug": "sata-material-pressure-tank-10",
+        "preserved": true
+      },
+      {
+        "id": "CF1931334",
+        "slug": "sata-material-pressure-tank-22",
+        "preserved": true
+      },
+      {
+        "id": "CF1931335",
+        "slug": "sata-material-pressure-tank-45",
+        "preserved": true
+      },
+      {
+        "id": "CF1931336",
+        "slug": "sata-jet-x",
+        "preserved": false
+      },
+      {
+        "id": "CF1931338",
+        "slug": "sata-lcs-the-liner",
+        "preserved": false
+      },
+      {
+        "id": "CF1931339",
+        "slug": "sata-air-star-f-2-0",
+        "preserved": false
+      },
+      {
+        "id": "CF1931340",
+        "slug": "sata-adam-x-pro",
+        "preserved": false
+      },
+      {
+        "id": "CF1931341",
+        "slug": "sata-adam-x",
+        "preserved": false
+      },
+      {
+        "id": "CF1931342",
+        "slug": "sata-adam-2",
+        "preserved": true
+      },
+      {
+        "id": "CF1931343",
+        "slug": "sata-suit-standard-men",
+        "preserved": false
+      },
+      {
+        "id": "CF1931345",
+        "slug": "sata-suit-basic",
+        "preserved": true
+      },
+      {
+        "id": "CF1931348",
+        "slug": "sata-rps-the-original",
+        "preserved": false
+      },
+      {
+        "id": "CF1931351",
+        "slug": "sata-luftmikrometer",
+        "preserved": false
+      },
+      {
+        "id": "CF1931352",
+        "slug": "sata-manometer",
+        "preserved": false
+      },
+      {
+        "id": "CF1931355",
+        "slug": "sata-clean-rcs",
+        "preserved": true
+      },
+      {
+        "id": "CF1931356",
+        "slug": "sata-jet-k",
+        "preserved": false
+      },
+      {
+        "id": "CF1931357",
+        "slug": "sata-lackierpistolenkoffer",
+        "preserved": false
+      },
+      {
+        "id": "CF1931359",
+        "slug": "sata-dry-jet-2",
+        "preserved": true
+      },
+      {
+        "id": "CF1931387",
+        "slug": "sata-lcs-hard-cups",
+        "preserved": false
+      },
+      {
+        "id": "CF1931392",
+        "slug": "sata-jet-x-clearcoat-edition",
+        "preserved": false
+      },
+      {
+        "id": "CF1931393",
+        "slug": "sata-jet-x-basecoat-edition",
+        "preserved": false
+      },
+      {
+        "id": "CF1931394",
+        "slug": "sata-jet-x-by-stilbruch-edition",
+        "preserved": false
+      }
+    ],
+    "collisions": []
+  },
+  "inScope": [
+    {
+      "id": "CF1931072",
+      "name": "SATAjet X 5500",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 44,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type",
+        "Spray fan",
+        "Digital unit version"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931074",
+      "name": "SATAjet 5000 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 20,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931078",
+      "name": "SATAjet 3000 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 1,
+      "axes": [],
+      "image": false,
+      "documents": 0
+    },
+    {
+      "id": "CF1931079",
+      "name": "SATAjet 1500 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 4,
+      "axes": [
+        "Air connection thread",
+        "Nozzle Size",
+        "Nozzle Technology"
+      ],
+      "image": false,
+      "documents": 2
+    },
+    {
+      "id": "CF1931080",
+      "name": "SATAjet 1000 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 52,
+      "axes": [
+        "Air connection thread",
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type",
+        "Spraygun Cup System"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931082",
+      "name": "SATAjet 100 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 34,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type",
+        "Spraygun Cup System"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931083",
+      "name": "SATAjet 20 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 12,
+      "axes": [
+        "Nozzle Size",
+        "Spraygun Cup System"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931085",
+      "name": "SATAminijet 4400 B",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 33,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type",
+        "Spraygun Cup System"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931087",
+      "name": "SATA spray master RP",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 3,
+      "axes": [
+        "Nozzle Size"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931090",
+      "name": "SATAjet 1000 H",
+      "sataCategory": "spray-guns/suction-cup-spray-guns",
+      "category": "oprema",
+      "variants": 4,
+      "axes": [
+        "Nozzle Size"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931091",
+      "name": "SATAjet H",
+      "sataCategory": "spray-guns/suction-cup-spray-guns",
+      "category": "oprema",
+      "variants": 3,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle type"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931095",
+      "name": "SATAjet 3000 K spray mix",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 2,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931096",
+      "name": "SATAjet 3000 K",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 16,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931097",
+      "name": "SATAjet 1000 KK",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931098",
+      "name": "SATAjet 1000 K",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 34,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931099",
+      "name": "SATAminijet 1000 K",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 11,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931100",
+      "name": "SATAgraph 4",
+      "sataCategory": "spray-guns/airbrush-guns",
+      "category": "oprema",
+      "variants": 3,
+      "axes": [
+        "Spraygun Cup System"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931121",
+      "name": "SATA air vision 5000",
+      "sataCategory": "respiratory-protection/full-face-respirator",
+      "category": "zastita",
+      "variants": 3,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931122",
+      "name": "SATA vision 2000",
+      "sataCategory": "respiratory-protection/full-face-respirator",
+      "category": "zastita",
+      "variants": 4,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931124",
+      "name": "SATA air star C",
+      "sataCategory": "respiratory-protection/half-mask-respirator",
+      "category": "zastita",
+      "variants": 4,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931125",
+      "name": "SATA air star F",
+      "sataCategory": "respiratory-protection/half-mask-respirator",
+      "category": "zastita",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": false,
+      "documents": 2
+    },
+    {
+      "id": "CF1931127",
+      "name": "SATA filter series 100",
+      "sataCategory": "filter-technology",
+      "category": "oprema",
+      "variants": 3,
+      "axes": [
+        "Direction of flow",
+        "Installation variation",
+        "Number of filter stages",
+        "Suitability for breathing protection",
+        "Suitability for water-based systems"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931128",
+      "name": "SATA filter series 200",
+      "sataCategory": "filter-technology",
+      "category": "oprema",
+      "variants": 5,
+      "axes": [
+        "Direction of flow",
+        "Installation variation",
+        "Number of filter stages",
+        "Suitability for breathing protection",
+        "Suitability for water-based systems"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931129",
+      "name": "SATA filter series 400",
+      "sataCategory": "filter-technology",
+      "category": "oprema",
+      "variants": 12,
+      "axes": [
+        "Direction of flow",
+        "Installation variation",
+        "Number of filter stages",
+        "Suitability for breathing protection",
+        "Suitability for water-based systems"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931204",
+      "name": "SATA suit race",
+      "sataCategory": "all-products/additional-products",
+      "category": "zastita",
+      "variants": 5,
+      "axes": [
+        "Clothing size"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931211",
+      "name": "SATA HKU",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 2,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931215",
+      "name": "SATA vario top spray",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 12,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931220",
+      "name": "SATA mini Set 2",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 5,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931221",
+      "name": "Release agent spray system",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": false,
+      "documents": 0
+    },
+    {
+      "id": "CF1931282",
+      "name": "SATAjet X 5500 PHASER",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 12,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Spray fan"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931293",
+      "name": "SATA filter 500 series",
+      "sataCategory": "filter-technology",
+      "category": "oprema",
+      "variants": 7,
+      "axes": [
+        "Direction of flow",
+        "Installation variation",
+        "Number of filter stages",
+        "Suitability for breathing protection",
+        "Suitability for water-based systems"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931300",
+      "name": "SATA HRS-E",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 4,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931301",
+      "name": "SATA HRS",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 5,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931303",
+      "name": "Reusable plastic flow cup",
+      "sataCategory": "cup-systems/gravity-flow-cups",
+      "category": "pribor",
+      "variants": 13,
+      "axes": [
+        "Cup capacity",
+        "Cup connection type"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931304",
+      "name": "Reusable aluminium flow cup",
+      "sataCategory": "cup-systems/gravity-flow-cups",
+      "category": "pribor",
+      "variants": 8,
+      "axes": [
+        "Cup capacity",
+        "Cup connection type"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931305",
+      "name": "Reusable plastic hanging cups",
+      "sataCategory": "cup-systems/suspended-cups",
+      "category": "pribor",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931306",
+      "name": "Reusable aluminium hanging cups",
+      "sataCategory": "cup-systems/suspended-cups",
+      "category": "pribor",
+      "variants": 2,
+      "axes": [
+        "Cup capacity",
+        "Cup variant"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931308",
+      "name": "SATA dry jet Stativ",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 2,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931309",
+      "name": "SATA trueSun",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 1,
+      "axes": [
+        "Power plug version"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931313",
+      "name": "SATA multi clean 2",
+      "sataCategory": "all-products/additional-products",
+      "category": "radionica",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931315",
+      "name": "SATAjet K 1800 spray mix",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 3,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931319",
+      "name": "SATAjet 1000 B Lignum 3",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 8,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931327",
+      "name": "SATA suit race ladies",
+      "sataCategory": "all-products/additional-products",
+      "category": "zastita",
+      "variants": 5,
+      "axes": [
+        "Clothing size"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931331",
+      "name": "SATAjet X 5500 Clear Coat Edition",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 2,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type",
+        "Spray fan",
+        "Digital unit version"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931333",
+      "name": "SATA material pressure tank 10",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 6,
+      "axes": [
+        "Agitator version",
+        "Cup capacity",
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931334",
+      "name": "SATA material pressure tank 22",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 8,
+      "axes": [
+        "Agitator version",
+        "Cup capacity",
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931335",
+      "name": "SATA material pressure tank 45",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 8,
+      "axes": [
+        "Agitator version",
+        "Cup capacity",
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931336",
+      "name": "jet X",
+      "sataCategory": "spray-guns/gravity-flow-cup-spray-guns",
+      "category": "oprema",
+      "variants": 68,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Spray fan",
+        "Digital unit version"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931338",
+      "name": "LCS - the Liner",
+      "sataCategory": "cup-systems/lcs-cups",
+      "category": "pribor",
+      "variants": 8,
+      "axes": [
+        "Cup capacity",
+        "Sieve mesh size",
+        "Suitable for UV coating"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931339",
+      "name": "air star F 2.0",
+      "sataCategory": "respiratory-protection/half-mask-respirator",
+      "category": "zastita",
+      "variants": 1,
+      "axes": [],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931340",
+      "name": "adam X pro",
+      "sataCategory": "all-products/additional-products",
+      "category": "pribor",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931341",
+      "name": "adam X",
+      "sataCategory": "all-products/additional-products",
+      "category": "pribor",
+      "variants": 1,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931342",
+      "name": "SATA adam 2",
+      "sataCategory": "all-products/additional-products",
+      "category": "pribor",
+      "variants": 15,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931343",
+      "name": "SATA suit Standard Men",
+      "sataCategory": "all-products/additional-products",
+      "category": "zastita",
+      "variants": 10,
+      "axes": [
+        "Clothing size"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931345",
+      "name": "SATA suit Basic",
+      "sataCategory": "all-products/additional-products",
+      "category": "zastita",
+      "variants": 5,
+      "axes": [
+        "Clothing size"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931348",
+      "name": "RPS - the Original",
+      "sataCategory": "cup-systems/rps-cups",
+      "category": "pribor",
+      "variants": 10,
+      "axes": [
+        "Cup capacity",
+        "Packaging unit",
+        "Sieve mesh size",
+        "Sieve type",
+        "Suitable for UV coating"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931351",
+      "name": "Luftmikrometer",
+      "sataCategory": "all-products/additional-products",
+      "category": "pribor",
+      "variants": 3,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931352",
+      "name": "Manometer",
+      "sataCategory": "all-products/additional-products",
+      "category": "pribor",
+      "variants": 13,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931355",
+      "name": "SATA clean RCS",
+      "sataCategory": "all-products/additional-products",
+      "category": "radionica",
+      "variants": 3,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 3
+    },
+    {
+      "id": "CF1931356",
+      "name": "jet K",
+      "sataCategory": "spray-guns/pressure-fed-spray-guns",
+      "category": "oprema",
+      "variants": 35,
+      "axes": [
+        "Air connection thread",
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Nozzle type"
+      ],
+      "image": true,
+      "documents": 1
+    },
+    {
+      "id": "CF1931357",
+      "name": "Lackierpistolenkoffer",
+      "sataCategory": "all-products/accessories",
+      "category": "pribor",
+      "variants": 8,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 0
+    },
+    {
+      "id": "CF1931359",
+      "name": "SATA dry jet 2",
+      "sataCategory": "all-products/additional-products",
+      "category": "oprema",
+      "variants": 2,
+      "axes": [
+        "Description"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931387",
+      "name": "LCS - Hard Cups",
+      "sataCategory": "cup-systems/lcs-cups",
+      "category": "pribor",
+      "variants": 3,
+      "axes": [
+        "Cup capacity"
+      ],
+      "image": false,
+      "documents": 0
+    },
+    {
+      "id": "CF1931392",
+      "name": "jet X clearcoat Edition",
+      "sataCategory": "cup-systems/lcs-cups",
+      "category": "oprema",
+      "variants": 5,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Spray fan",
+        "Digital unit version"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931393",
+      "name": "jet X basecoat Edition",
+      "sataCategory": "cup-systems/lcs-cups",
+      "category": "oprema",
+      "variants": 17,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Spray fan",
+        "Digital unit version"
+      ],
+      "image": true,
+      "documents": 2
+    },
+    {
+      "id": "CF1931394",
+      "name": "jet X by Stilbruch Edition",
+      "sataCategory": "cup-systems/lcs-cups",
+      "category": "oprema",
+      "variants": 17,
+      "axes": [
+        "Nozzle Size",
+        "Nozzle Technology",
+        "Spray fan",
+        "Digital unit version"
+      ],
+      "image": true,
+      "documents": 2
+    }
+  ],
+  "outOfScope": [
+    {
+      "id": "CF1931104",
+      "name": "SATAjet 3000 A",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 31,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931105",
+      "name": "SATAjet 1000 A",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 12,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931107",
+      "name": "SATAjet 3000 ROB",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 44,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931108",
+      "name": "SATAjet 1000 ROB",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 3,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931110",
+      "name": "SATAminijet 1000 ROB",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 17,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931111",
+      "name": "SATAjet 5000 LAB",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 7,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931112",
+      "name": "SATAjet 4000 LAB",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 5,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931115",
+      "name": "SATAminijet 3000 LAB",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 1,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931116",
+      "name": "SATA LP90",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 1,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931117",
+      "name": "SATAminijet 1000 A S",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 4,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931118",
+      "name": "SATA LP-S 2000",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 5,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931131",
+      "name": "SATAminijet 1000 A",
+      "scope": "COMPLETE_DEVICE_INDUSTRIAL",
+      "variants": 10,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931236",
+      "name": "Düsensatz SATAjet 3000 LAB ROB",
+      "scope": "SPARE_PART",
+      "variants": 6,
+      "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura"
+    },
+    {
+      "id": "CF1931337",
+      "name": "Nozzle set jet X",
+      "scope": "SPARE_PART",
+      "variants": 17,
+      "reason": "rezervni delovi — interni katalog delova, ne customer-facing kartica"
+    },
+    {
+      "id": "CF1931360",
+      "name": "Polo shirt in precious SATA design",
+      "scope": "MERCHANDISE",
+      "variants": 5,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931361",
+      "name": "SATA Hoodie, version FUTURE",
+      "scope": "MERCHANDISE",
+      "variants": 4,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931362",
+      "name": "SATA Hoodie, version SATAjet X 5500",
+      "scope": "MERCHANDISE",
+      "variants": 5,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931363",
+      "name": "SATA Hoodie, version Vintage",
+      "scope": "MERCHANDISE",
+      "variants": 5,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931364",
+      "name": "T-Shirt SATA jet X (1)",
+      "scope": "MERCHANDISE",
+      "variants": 4,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931365",
+      "name": "SATA T-Shirt jet X (2)",
+      "scope": "MERCHANDISE",
+      "variants": 4,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931366",
+      "name": "T-Shirt SATA",
+      "scope": "MERCHANDISE",
+      "variants": 5,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931367",
+      "name": "SATA suit Standard Ladies",
+      "scope": "MERCHANDISE",
+      "variants": 4,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931368",
+      "name": "SATA suit Standard Men",
+      "scope": "MERCHANDISE",
+      "variants": 6,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931372",
+      "name": "SATA knit beanie",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931374",
+      "name": "SATA gym bag",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931375",
+      "name": "SATA travel makeup bag",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931376",
+      "name": "SATA luggage compartment bag",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931377",
+      "name": "SATA backpack",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931378",
+      "name": "Key ring miniature spray gun jet X",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931386",
+      "name": "SATA United jersey 2026",
+      "scope": "MERCHANDISE",
+      "variants": 6,
+      "reason": "reklamni artikli — van asortimana sajta"
+    },
+    {
+      "id": "CF1931399",
+      "name": "SATA-Lette",
+      "scope": "MERCHANDISE",
+      "variants": 1,
+      "reason": "reklamni artikli — van asortimana sajta"
+    }
+  ],
+  "missingImage": [
+    "SATAjet 3000 B",
+    "SATAjet 1500 B",
+    "SATA air star F",
+    "Release agent spray system",
+    "LCS - Hard Cups"
+  ]
+}

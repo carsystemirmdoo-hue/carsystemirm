@@ -8,6 +8,10 @@ import {
   applyNorbinSyncEnrichment,
   getNorbinCatalogProducts,
 } from "@/lib/norbin-catalog-products";
+import {
+  applySataSyncEnrichment,
+  getSataCatalogProducts,
+} from "@/lib/sata-catalog-products";
 import { getBefarCatalogProducts } from "@/lib/befar-catalog-products";
 import {
   applyRmCatalogEnrichment,
@@ -305,6 +309,14 @@ export type CarsystemProduct = {
    * Nikada se ne izvodi iz naziva, sluga ni iz `internalCode`.
    */
   manufacturerCode?: string | null;
+  /**
+   * Šifra za JAVNI prikaz (kartica, meta opis) kada se razlikuje od `sku`.
+   *
+   * `sku` je interni ključ — `canonicalVariantKey` iz njega pravi `?varijanta=` adrese — pa se ne
+   * menja kada zapis naknadno dobije zvanični identitet proizvođača. Tada `sku` ostaje interna,
+   * pretraživa oznaka, a kupac vidi zvanični identifikator. Bez ovog polja prikaz je `sku`, kao i do sada.
+   */
+  publicCode?: string;
   /**
    * Ranije šifre proizvođača istog artikla (proizvođač ga je prenumerisao).
    * Nisu aktuelne šifre za poručivanje; služe da proizvod nađe i kupac koji
@@ -2460,6 +2472,10 @@ const productRecords: CarsystemProduct[] = [
   ...befarPadProducts,
   ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),
+  // SATA EMEA REFINISH FAMILY SCOPE sa sata.com (`npm run sata:sync`): jedna zvanična porodica =
+  // jedna kartica, brojevi artikala su redovi. `satajet-x-5500` iznad se NE duplira — dopunjuje ga
+  // `applySataSyncEnrichment`.
+  ...getSataCatalogProducts(),
 ];
 
 function withCatalogArchitecture(product: CarsystemProduct): CarsystemProduct {
@@ -2515,7 +2531,9 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
           ? applyRmCatalogEnrichment(product)
           : product.brandSlug === "norbin"
             ? applyNorbinSyncEnrichment(product)
-            : product,
+            : product.brandSlug === "sata"
+              ? applySataSyncEnrichment(product)
+              : product,
 );
 
 export function getAllCarsystemProducts() {

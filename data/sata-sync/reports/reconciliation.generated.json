@@ -1,0 +1,51 @@
+{
+  "scope": "SATA EMEA REFINISH FAMILY SCOPE",
+  "coverage": {
+    "A": 66,
+    "B": 66,
+    "C": 655,
+    "D": 655
+  },
+  "runtime": {
+    "underlyingRecords": 66,
+    "visibleCards": 66,
+    "redirectOnlyRecords": 0,
+    "imported": 65,
+    "enrichedExisting": 1,
+    "configurationRows": 655
+  },
+  "problems": {
+    "missingFamilies": [],
+    "unexpectedCards": [],
+    "duplicateCards": [],
+    "missingNumbers": [],
+    "duplicateNumbers": [],
+    "leakedOutOfScopeNumbers": [],
+    "cardsWithNonPlaceholderImage": []
+  },
+  "images": {
+    "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME": 61,
+    "OFFICIAL_IMAGE_NOT_PUBLISHED": 5,
+    "APPROVED_RUNTIME_IMAGES": 0,
+    "PLACEHOLDER_RUNTIME_CARDS": 66
+  },
+  "notCountedAsMissing": {
+    "CURRENT_OUT_OF_SCOPE_FAMILIES": 31,
+    "CURRENT_OUT_OF_SCOPE_FAMILY_ARTICLE_NUMBERS": 218,
+    "CURRENT_FAMILIES_TOTAL": 97,
+    "UNLISTED_SPARE_PART_FAMILY_ARTICLE_NUMBERS": 500,
+    "REGION_ONLY_MEMBERS_OF_IN_SCOPE_FAMILIES": 19,
+    "STANDALONE_PARTITION": {
+      "SPARE_PART": 872,
+      "ACCESSORY_TIED_TO_APPROVED_FAMILY": 84,
+      "CONSUMABLE_TIED_TO_APPROVED_FAMILY": 5,
+      "INDUSTRIAL_ROBOTIC_LAB": 83,
+      "MERCHANDISING": 7,
+      "REGION_ONLY": 14,
+      "DUPLICATE_ALIAS": 0,
+      "UNIDENTIFIED_NO_OFFICIAL_NAME": 1,
+      "STANDALONE_CUSTOMER_FACING_PHASE_2": 149
+    },
+    "CURRENT_OUT_OF_SCOPE_PHASE_2": 233
+  }
+}

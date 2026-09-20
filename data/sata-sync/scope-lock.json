@@ -1,0 +1,32 @@
+{
+  "_comment": [
+    "ODOBREN OPSEG faze 1 (korisnik, 2026-09-20): „SATA EMEA REFINISH FAMILY SCOPE” — NIJE ceo SATA katalog.",
+    "Plan poredi izmereni opseg sa ovim fajlom i PADA na svaku razliku. Ako se `sourceFingerprint` nije promenio, razlika je greška u pravilima; ako jeste, opseg traži novo odobrenje.",
+    "Faza 2 (149 samostalnih + 84 vezana pribora) su aktuelni SATA proizvodi sa statusom CURRENT_OUT_OF_SCOPE_PHASE_2 — ne discontinued, ne missing, ne historical.",
+    "Pet samostalnih artikala zaštitne odeće (SATA suit space / grey) nema zvaničnu porodicu i ostaje u fazi 2; ne grupiše se u izmišljenu porodicu."
+  ],
+  "approvedOn": "2026-09-20",
+  "sourceFingerprint": "46e9434abd378df65540b35f7f93de6cd83aab788bad507565fb6bac7faa6b35",
+  "scope": {
+    "name": "SATA EMEA REFINISH FAMILY SCOPE",
+    "families": 66,
+    "articleNumbers": 655,
+    "currentOutOfScopeFamilies": 31,
+    "standaloneTotal": 1215,
+    "standalonePartition": {
+      "SPARE_PART": 872,
+      "ACCESSORY_TIED_TO_APPROVED_FAMILY": 84,
+      "CONSUMABLE_TIED_TO_APPROVED_FAMILY": 5,
+      "INDUSTRIAL_ROBOTIC_LAB": 83,
+      "MERCHANDISING": 7,
+      "REGION_ONLY": 14,
+      "DUPLICATE_ALIAS": 0,
+      "UNIDENTIFIED_NO_OFFICIAL_NAME": 1,
+      "STANDALONE_CUSTOMER_FACING_PHASE_2": 149
+    },
+    "phase2": {
+      "STANDALONE_CUSTOMER_FACING_PHASE_2": 149,
+      "ACCESSORY_TIED_TO_APPROVED_FAMILY": 84
+    }
+  }
+}

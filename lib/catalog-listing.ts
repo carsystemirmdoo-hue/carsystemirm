@@ -153,6 +153,7 @@ function productCodeOf(product: CarsystemProduct) {
   return (
     metadata?.cosmosCode ??
     (metadata?.ralCode ? `RAL ${metadata.ralCode}` : null) ??
+    product.publicCode ??
     product.sku
   );
 }
@@ -162,6 +163,7 @@ function shortCodeOf(product: CarsystemProduct) {
   return (
     metadata?.cosmosCode ??
     (metadata?.ralCode ? `RAL ${metadata.ralCode}` : null) ??
+    product.publicCode ??
     (product.sku.length <= 24 ? product.sku : null) ??
     undefined
   );

@@ -1,0 +1,3208 @@
+{
+  "note": "Samo evidencija izvora. Zvanične SATA slike se NE preuzimaju, ne hostuju i ne hotlinkuju dok pravo korišćenja nije potvrđeno.",
+  "OFFICIAL_SOURCE_IMAGES_AVAILABLE": 618,
+  "familiesWithOfficialImage": 61,
+  "familiesWithoutOfficialImage": [
+    "SATAjet 3000 B",
+    "SATAjet 1500 B",
+    "SATA air star F",
+    "Release agent spray system",
+    "LCS - Hard Cups"
+  ],
+  "APPROVED_RUNTIME_IMAGES": 0,
+  "families": [
+    {
+      "family": "CF1931072",
+      "officialName": "SATAjet X 5500",
+      "slug": "satajet-x-5500",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-x-5500/CF1931072",
+      "articlesWithOwnImage": 44,
+      "articles": 44,
+      "sourceImages": [
+        {
+          "articleNumber": "1061548",
+          "url": "https://www.sata.com/media/8e/1c/d5/1788164830/1061548_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061556",
+          "url": "https://www.sata.com/media/9e/c3/8e/1788164831/1061556_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061564",
+          "url": "https://www.sata.com/media/f8/cc/32/1788164831/1061564_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061572",
+          "url": "https://www.sata.com/media/42/61/50/1788164831/1061572_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061580",
+          "url": "https://www.sata.com/media/15/85/cf/1788164831/1061580_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061598",
+          "url": "https://www.sata.com/media/68/25/75/1788164831/1061598_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061605",
+          "url": "https://www.sata.com/media/b1/a8/72/1788164831/1061605_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061613",
+          "url": "https://www.sata.com/media/64/38/fb/1788164831/1061613_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061621",
+          "url": "https://www.sata.com/media/c1/0e/22/1788164827/1061621_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061647",
+          "url": "https://www.sata.com/media/b1/b8/a6/1788164827/1061647_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061697",
+          "url": "https://www.sata.com/media/f2/d1/c7/1788164799/1061697_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061712",
+          "url": "https://www.sata.com/media/0d/95/10/1788164828/1061712_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061746",
+          "url": "https://www.sata.com/media/3d/d4/c9/1788164828/1061746_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061788",
+          "url": "https://www.sata.com/media/44/f9/94/1788164828/1061788_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061803",
+          "url": "https://www.sata.com/media/c4/4d/8e/1788164828/1061803_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061829",
+          "url": "https://www.sata.com/media/f2/98/47/1788164828/1061829_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061879",
+          "url": "https://www.sata.com/media/59/c9/07/1788164829/1061879_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061887",
+          "url": "https://www.sata.com/media/f5/02/b3/1788164831/1061887_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061895",
+          "url": "https://www.sata.com/media/07/5f/d5/1788164831/1061895_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061902",
+          "url": "https://www.sata.com/media/2c/72/49/1788164831/1061902_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061910",
+          "url": "https://www.sata.com/media/68/6f/aa/1788164832/1061910_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061928",
+          "url": "https://www.sata.com/media/59/e2/67/1788164832/1061928_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061936",
+          "url": "https://www.sata.com/media/da/36/e6/1788164832/1061936_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061944",
+          "url": "https://www.sata.com/media/f6/25/33/1788164832/1061944_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061952",
+          "url": "https://www.sata.com/media/db/16/bf/1788164832/1061952_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061960",
+          "url": "https://www.sata.com/media/91/34/9a/1788164832/1061960_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061978",
+          "url": "https://www.sata.com/media/e9/39/39/1788164832/1061978_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1061994",
+          "url": "https://www.sata.com/media/d1/34/0d/1788164829/1061994_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062025",
+          "url": "https://www.sata.com/media/b7/ab/55/1788164829/1062025_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062033",
+          "url": "https://www.sata.com/media/f9/59/85/1788164829/1062033_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062067",
+          "url": "https://www.sata.com/media/ed/b7/08/1788164829/1062067_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062075",
+          "url": "https://www.sata.com/media/6a/50/e8/1788164829/1062075_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062108",
+          "url": "https://www.sata.com/media/f0/91/f0/1788164829/1062108_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062124",
+          "url": "https://www.sata.com/media/78/f2/2f/1788164829/1062124_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062158",
+          "url": "https://www.sata.com/media/db/5d/8d/1788164829/1062158_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1062166",
+          "url": "https://www.sata.com/media/39/05/54/1788164829/1062166_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1106534",
+          "url": "https://www.sata.com/media/85/95/9e/1788164830/1106534_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1106542",
+          "url": "https://www.sata.com/media/cc/87/d8/1788164830/1106542_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1106550",
+          "url": "https://www.sata.com/media/ac/6d/3c/1788164830/1106550_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1106568",
+          "url": "https://www.sata.com/media/d6/ee/ba/1788164830/1106568_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1126889",
+          "url": "https://www.sata.com/media/5d/a0/3b/1788164830/1126889_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1126897",
+          "url": "https://www.sata.com/media/a2/b2/c3/1788164830/1126897_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202663",
+          "url": "https://www.sata.com/media/96/2e/13/1788164830/1202663_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202803",
+          "url": "https://www.sata.com/media/3e/0b/42/1788164827/1202803_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931074",
+      "officialName": "SATAjet 5000 B",
+      "slug": "satajet-5000-b",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-5000-b/CF1931074",
+      "articlesWithOwnImage": 20,
+      "articles": 20,
+      "sourceImages": [
+        {
+          "articleNumber": "209775",
+          "url": "https://www.sata.com/media/e9/01/cf/1788164832/209775_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "209783",
+          "url": "https://www.sata.com/media/87/0c/bb/1788164832/209783_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "209791",
+          "url": "https://www.sata.com/media/0e/60/9f/1788164832/209791_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "209809",
+          "url": "https://www.sata.com/media/c3/66/1e/1788164833/209809_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "209890",
+          "url": "https://www.sata.com/media/08/a7/a1/1788164832/209890_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "209908",
+          "url": "https://www.sata.com/media/a8/3b/56/1788164832/209908_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "209916",
+          "url": "https://www.sata.com/media/95/64/fd/1788164832/209916_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210559",
+          "url": "https://www.sata.com/media/52/67/e0/1788164833/210559_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210567",
+          "url": "https://www.sata.com/media/0c/e9/74/1788164833/210567_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210575",
+          "url": "https://www.sata.com/media/bf/0c/f3/1788164833/210575_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210591",
+          "url": "https://www.sata.com/media/3d/91/a0/1788164833/210591_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210609",
+          "url": "https://www.sata.com/media/9d/a1/40/1788164833/210609_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210732",
+          "url": "https://www.sata.com/media/72/83/78/1788164833/210732_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210831",
+          "url": "https://www.sata.com/media/0d/6c/a3/1788164833/210831_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210849",
+          "url": "https://www.sata.com/media/82/cd/3e/1788164833/210849_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "210856",
+          "url": "https://www.sata.com/media/53/97/7e/1788164833/210856_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "215640",
+          "url": "https://www.sata.com/media/38/fc/e8/1788164832/215640_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1005075",
+          "url": "https://www.sata.com/media/d1/e4/68/1788164832/1005075_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1117523",
+          "url": "https://www.sata.com/media/ae/56/c9/1788164799/1117523_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1117531",
+          "url": "https://www.sata.com/media/fc/a2/05/1788164832/1117531_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931078",
+      "officialName": "SATAjet 3000 B",
+      "slug": "satajet-3000-b",
+      "status": "OFFICIAL_IMAGE_NOT_PUBLISHED",
+      "sourcePage": "https://www.sata.com/en/satajet-3000-b/CF1931078",
+      "articlesWithOwnImage": 0,
+      "articles": 1,
+      "sourceImages": []
+    },
+    {
+      "family": "CF1931079",
+      "officialName": "SATAjet 1500 B",
+      "slug": "satajet-1500-b",
+      "status": "OFFICIAL_IMAGE_NOT_PUBLISHED",
+      "sourcePage": "https://www.sata.com/en/satajet-1500-b/CF1931079",
+      "articlesWithOwnImage": 0,
+      "articles": 4,
+      "sourceImages": []
+    },
+    {
+      "family": "CF1931080",
+      "officialName": "SATAjet 1000 B",
+      "slug": "satajet-1000-b",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-1000-b/CF1931080",
+      "articlesWithOwnImage": 52,
+      "articles": 52,
+      "sourceImages": [
+        {
+          "articleNumber": "149302",
+          "url": "https://www.sata.com/media/94/44/da/1788164800/149302_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149310",
+          "url": "https://www.sata.com/media/a5/c0/a3/1788164833/149310_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149328",
+          "url": "https://www.sata.com/media/d3/d4/dd/1788164833/149328_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149344",
+          "url": "https://www.sata.com/media/86/2f/55/1788164834/149344_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149351",
+          "url": "https://www.sata.com/media/bf/1e/f3/1788164834/149351_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149377",
+          "url": "https://www.sata.com/media/ca/a1/f2/1788164833/149377_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149385",
+          "url": "https://www.sata.com/media/ed/92/19/1788164833/149385_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149393",
+          "url": "https://www.sata.com/media/31/2b/9b/1788164833/149393_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149401",
+          "url": "https://www.sata.com/media/47/8e/1e/1788164833/149401_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149419",
+          "url": "https://www.sata.com/media/ce/74/eb/1788164834/149419_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149427",
+          "url": "https://www.sata.com/media/56/29/ba/1788164834/149427_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149435",
+          "url": "https://www.sata.com/media/8f/53/7e/1788164834/149435_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "149443",
+          "url": "https://www.sata.com/media/9a/20/ae/1788164834/149443_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "150342",
+          "url": "https://www.sata.com/media/a1/a4/80/1788164834/150342_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "150391",
+          "url": "https://www.sata.com/media/44/63/cf/1788164833/150391_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "150409",
+          "url": "https://www.sata.com/media/90/90/af/1788164834/150409_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151183",
+          "url": "https://www.sata.com/media/c0/d7/3f/1788164833/151183_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151191",
+          "url": "https://www.sata.com/media/fc/67/ee/1788164833/151191_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151209",
+          "url": "https://www.sata.com/media/0c/92/d8/1788164833/151209_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151217",
+          "url": "https://www.sata.com/media/41/2d/d3/1788164833/151217_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151225",
+          "url": "https://www.sata.com/media/82/ff/1f/1788164834/151225_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151233",
+          "url": "https://www.sata.com/media/f3/aa/9f/1788164834/151233_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151241",
+          "url": "https://www.sata.com/media/e4/32/9f/1788164834/151241_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151258",
+          "url": "https://www.sata.com/media/9a/17/41/1788164834/151258_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154161",
+          "url": "https://www.sata.com/media/4b/77/f3/1788164833/154161_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154179",
+          "url": "https://www.sata.com/media/ce/5a/d9/1788164834/154179_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154922",
+          "url": "https://www.sata.com/media/2d/39/6c/1788164833/154922_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157875",
+          "url": "https://www.sata.com/media/3e/d2/22/1788164834/157875_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157883",
+          "url": "https://www.sata.com/media/53/c2/d7/1788164834/157883_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157891",
+          "url": "https://www.sata.com/media/84/db/a7/1788164834/157891_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157909",
+          "url": "https://www.sata.com/media/7d/f7/33/1788164834/157909_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157917",
+          "url": "https://www.sata.com/media/e2/56/5a/1788164834/157917_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157925",
+          "url": "https://www.sata.com/media/a0/3f/ba/1788164834/157925_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157933",
+          "url": "https://www.sata.com/media/01/5f/g0/1788164834/157933_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157941",
+          "url": "https://www.sata.com/media/d5/f0/f0/1788164834/157941_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157958",
+          "url": "https://www.sata.com/media/85/ed/63/1788164834/157958_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157966",
+          "url": "https://www.sata.com/media/71/64/eb/1788164834/157966_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157974",
+          "url": "https://www.sata.com/media/ef/26/f9/1788164834/157974_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157982",
+          "url": "https://www.sata.com/media/97/44/8d/1788164834/157982_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157990",
+          "url": "https://www.sata.com/media/14/94/eb/1788164834/157990_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "158089",
+          "url": "https://www.sata.com/media/30/8a/16/1788164834/158089_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "158097",
+          "url": "https://www.sata.com/media/25/2f/ea/1788164834/158097_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "158139",
+          "url": "https://www.sata.com/media/fd/6c/06/1788164834/158139_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "158147",
+          "url": "https://www.sata.com/media/da/dd/8a/1788164834/158147_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "164962",
+          "url": "https://www.sata.com/media/5e/db/6e/1788164833/164962_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "214320",
+          "url": "https://www.sata.com/media/30/29/60/1788164833/214320_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1003194",
+          "url": "https://www.sata.com/media/33/70/e7/1788164833/1003194_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1003201",
+          "url": "https://www.sata.com/media/0e/44/98/1788164833/1003201_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1003219",
+          "url": "https://www.sata.com/media/59/5e/af/1788164833/1003219_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1003227",
+          "url": "https://www.sata.com/media/2f/1c/1f/1788164833/1003227_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1003235",
+          "url": "https://www.sata.com/media/43/b9/37/1788164833/1003235_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1003243",
+          "url": "https://www.sata.com/media/f7/4a/60/1788164833/1003243_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931082",
+      "officialName": "SATAjet 100 B",
+      "slug": "satajet-100-b",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-100-b/CF1931082",
+      "articlesWithOwnImage": 32,
+      "articles": 34,
+      "sourceImages": [
+        {
+          "articleNumber": "145185",
+          "url": "https://www.sata.com/media/09/13/4f/1788164837/145185_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "145193",
+          "url": "https://www.sata.com/media/0f/66/47/1788164800/145193_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "145201",
+          "url": "https://www.sata.com/media/45/8f/75/1788164836/145201_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "145219",
+          "url": "https://www.sata.com/media/56/ec/82/1788164836/145219_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "145722",
+          "url": "https://www.sata.com/media/66/52/b2/1788164835/145722_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "145730",
+          "url": "https://www.sata.com/media/b6/a5/c8/1788164835/145730_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "145748",
+          "url": "https://www.sata.com/media/3f/8f/77/1788164835/145748_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146134",
+          "url": "https://www.sata.com/media/91/30/51/1788164836/146134_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146142",
+          "url": "https://www.sata.com/media/46/75/95/1788164836/146142_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146175",
+          "url": "https://www.sata.com/media/e7/2f/b9/1788164835/146175_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146183",
+          "url": "https://www.sata.com/media/19/46/33/1788164835/146183_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146217",
+          "url": "https://www.sata.com/media/47/4e/9f/1788164837/146217_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146373",
+          "url": "https://www.sata.com/media/2c/01/d3/1788164835/146373_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "146969",
+          "url": "https://www.sata.com/media/37/28/17/1788164835/146969_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "147421",
+          "url": "https://www.sata.com/media/b1/ff/c8/1788164836/147421_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "147447",
+          "url": "https://www.sata.com/media/39/d0/50/1788164835/147447_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "147454",
+          "url": "https://www.sata.com/media/83/a6/6a/1788164835/147454_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "153023",
+          "url": "https://www.sata.com/media/3f/c6/38/1788164836/153023_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "175174",
+          "url": "https://www.sata.com/media/03/8c/eb/1788164836/175174_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "175182",
+          "url": "https://www.sata.com/media/94/6b/50/1788164836/175182_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "182592",
+          "url": "https://www.sata.com/media/a5/fd/a0/1788164835/182592_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "189613",
+          "url": "https://www.sata.com/media/b1/98/26/1788164836/189613_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "203125",
+          "url": "https://www.sata.com/media/b2/f9/3a/1788164836/203125_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012632",
+          "url": "https://www.sata.com/media/d6/2d/96/1788164836/1012632_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012640",
+          "url": "https://www.sata.com/media/17/d2/e3/1788164836/1012640_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012658",
+          "url": "https://www.sata.com/media/92/25/4d/1788164836/1012658_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012666",
+          "url": "https://www.sata.com/media/57/f6/99/1788164837/1012666_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012674",
+          "url": "https://www.sata.com/media/76/96/e2/1788164837/1012674_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012682",
+          "url": "https://www.sata.com/media/30/94/9a/1788164837/1012682_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012690",
+          "url": "https://www.sata.com/media/80/f2/97/1788164837/1012690_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012707",
+          "url": "https://www.sata.com/media/fb/5f/2d/1788164837/1012707_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1012715",
+          "url": "https://www.sata.com/media/e7/80/53/1788164837/1012715_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931083",
+      "officialName": "SATAjet 20 B",
+      "slug": "satajet-20-b",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-20-b/CF1931083",
+      "articlesWithOwnImage": 12,
+      "articles": 12,
+      "sourceImages": [
+        {
+          "articleNumber": "65078",
+          "url": "https://www.sata.com/media/1c/00/7c/1788164837/65078_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "65581",
+          "url": "https://www.sata.com/media/7f/a2/25/1788164838/65581_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "65649",
+          "url": "https://www.sata.com/media/d5/2f/6b/1788164838/65649_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "66316",
+          "url": "https://www.sata.com/media/dd/01/ab/1788164838/66316_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "69229",
+          "url": "https://www.sata.com/media/36/11/a9/1788164800/69229_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "86181",
+          "url": "https://www.sata.com/media/c3/2e/ac/1788164837/86181_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "86199",
+          "url": "https://www.sata.com/media/3b/7a/ee/1788164837/86199_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "86207",
+          "url": "https://www.sata.com/media/e1/d6/08/1788164837/86207_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "86215",
+          "url": "https://www.sata.com/media/cf/9d/8e/1788164837/86215_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "86223",
+          "url": "https://www.sata.com/media/4b/31/ef/1788164837/86223_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "90381",
+          "url": "https://www.sata.com/media/96/4c/10/1788164837/90381_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "189035",
+          "url": "https://www.sata.com/media/9c/88/9a/1788164838/189035_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931085",
+      "officialName": "SATAminijet 4400 B",
+      "slug": "sataminijet-4400-b",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sataminijet-4400-b/CF1931085",
+      "articlesWithOwnImage": 25,
+      "articles": 33,
+      "sourceImages": [
+        {
+          "articleNumber": "197970",
+          "url": "https://www.sata.com/media/b9/f3/4e/1788164838/197970_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "197988",
+          "url": "https://www.sata.com/media/bd/d5/f8/1788164838/197988_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "197996",
+          "url": "https://www.sata.com/media/37/d8/f1/1788164838/197996_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198002",
+          "url": "https://www.sata.com/media/f3/a7/77/1788164838/198002_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198010",
+          "url": "https://www.sata.com/media/12/69/06/1788164838/198010_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198069",
+          "url": "https://www.sata.com/media/56/da/c4/1788164838/198069_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198077",
+          "url": "https://www.sata.com/media/cb/d2/d1/1788164838/198077_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198085",
+          "url": "https://www.sata.com/media/3d/7d/16/1788164838/198085_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198093",
+          "url": "https://www.sata.com/media/30/36/d3/1788164838/198093_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198168",
+          "url": "https://www.sata.com/media/04/d0/e2/1788164838/198168_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198176",
+          "url": "https://www.sata.com/media/dc/ea/1d/1788164838/198176_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198184",
+          "url": "https://www.sata.com/media/89/13/1e/1788164838/198184_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198192",
+          "url": "https://www.sata.com/media/6d/ea/19/1788164838/198192_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198200",
+          "url": "https://www.sata.com/media/3a/16/81/1788164838/198200_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198218",
+          "url": "https://www.sata.com/media/59/fe/61/1788164838/198218_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198226",
+          "url": "https://www.sata.com/media/2d/c3/e8/1788164800/198226_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198234",
+          "url": "https://www.sata.com/media/8a/d6/f0/1788164838/198234_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198242",
+          "url": "https://www.sata.com/media/95/b6/a2/1788164838/198242_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198358",
+          "url": "https://www.sata.com/media/03/c2/g0/1788164838/198358_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198366",
+          "url": "https://www.sata.com/media/f8/38/f7/1788164838/198366_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198382",
+          "url": "https://www.sata.com/media/4b/fe/cb/1788164839/198382_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "202390",
+          "url": "https://www.sata.com/media/32/39/72/1788164838/202390_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "202416",
+          "url": "https://www.sata.com/media/4b/d4/ce/1788164838/202416_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1065136",
+          "url": "https://www.sata.com/media/38/3b/8d/1788164838/1065136_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1114149",
+          "url": "https://www.sata.com/media/45/aa/5b/1788164838/1114149_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931087",
+      "officialName": "SATA spray master RP",
+      "slug": "sata-spray-master-rp",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-spray-master-rp/CF1931087",
+      "articlesWithOwnImage": 3,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "72900",
+          "url": "https://www.sata.com/media/fa/48/7b/1788164801/72900_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "73734",
+          "url": "https://www.sata.com/media/ef/cd/3e/1788164839/73734_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "74120",
+          "url": "https://www.sata.com/media/89/c0/bd/1788164839/74120_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931090",
+      "officialName": "SATAjet 1000 H",
+      "slug": "satajet-1000-h",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-1000-h/CF1931090",
+      "articlesWithOwnImage": 4,
+      "articles": 4,
+      "sourceImages": [
+        {
+          "articleNumber": "151266",
+          "url": "https://www.sata.com/media/e1/a2/28/1788164841/151266_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "151274",
+          "url": "https://www.sata.com/media/57/c1/a7/1788164841/151274_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "153353",
+          "url": "https://www.sata.com/media/eb/3f/f5/1788164841/153353_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "161034",
+          "url": "https://www.sata.com/media/a0/64/3f/1788164802/161034_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931091",
+      "officialName": "SATAjet H",
+      "slug": "satajet-h",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-h/CF1931091",
+      "articlesWithOwnImage": 2,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "23721",
+          "url": "https://www.sata.com/media/0b/24/4a/1788164802/23721_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "23747",
+          "url": "https://www.sata.com/media/a7/89/c3/1788164841/23747_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931095",
+      "officialName": "SATAjet 3000 K spray mix",
+      "slug": "satajet-3000-k-spray-mix",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-3000-k-spray-mix/CF1931095",
+      "articlesWithOwnImage": 2,
+      "articles": 2,
+      "sourceImages": [
+        {
+          "articleNumber": "120006",
+          "url": "https://www.sata.com/media/96/40/1f/1788164801/120006_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "120014",
+          "url": "https://www.sata.com/media/39/8f/9f/1788164839/120014_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931096",
+      "officialName": "SATAjet 3000 K",
+      "slug": "satajet-3000-k",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-3000-k/CF1931096",
+      "articlesWithOwnImage": 15,
+      "articles": 16,
+      "sourceImages": [
+        {
+          "articleNumber": "92924",
+          "url": "https://www.sata.com/media/d7/f7/a9/1788164839/92924_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92932",
+          "url": "https://www.sata.com/media/f8/bf/a8/1788164839/92932_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93336",
+          "url": "https://www.sata.com/media/d0/aa/da/1788164839/93336_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93344",
+          "url": "https://www.sata.com/media/6c/3b/f6/1788164801/93344_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93351",
+          "url": "https://www.sata.com/media/35/fc/aa/1788164839/93351_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93369",
+          "url": "https://www.sata.com/media/40/a6/e0/1788164839/93369_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93377",
+          "url": "https://www.sata.com/media/1b/f1/5d/1788164839/93377_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93385",
+          "url": "https://www.sata.com/media/e3/b7/d5/1788164839/93385_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "93393",
+          "url": "https://www.sata.com/media/36/e4/78/1788164839/93393_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "96164",
+          "url": "https://www.sata.com/media/3b/45/e0/1788164839/96164_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "96172",
+          "url": "https://www.sata.com/media/bd/c2/ee/1788164839/96172_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "137844",
+          "url": "https://www.sata.com/media/00/17/b0/1788164839/137844_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141994",
+          "url": "https://www.sata.com/media/d6/5e/ef/1788164839/141994_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "142265",
+          "url": "https://www.sata.com/media/7e/c6/12/1788164839/142265_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "193656",
+          "url": "https://www.sata.com/media/19/c4/e8/1788164839/193656_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931097",
+      "officialName": "SATAjet 1000 KK",
+      "slug": "satajet-1000-kk",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-1000-kk/CF1931097",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "153700",
+          "url": "https://www.sata.com/media/93/fb/c6/1788164801/153700_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931098",
+      "officialName": "SATAjet 1000 K",
+      "slug": "satajet-1000-k",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-1000-k/CF1931098",
+      "articlesWithOwnImage": 33,
+      "articles": 34,
+      "sourceImages": [
+        {
+          "articleNumber": "132092",
+          "url": "https://www.sata.com/media/2c/65/d5/1788164840/132092_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "132100",
+          "url": "https://www.sata.com/media/39/8a/0c/1788164840/132100_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "132118",
+          "url": "https://www.sata.com/media/5e/99/0c/1788164801/132118_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "132126",
+          "url": "https://www.sata.com/media/f8/57/eb/1788164840/132126_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "132134",
+          "url": "https://www.sata.com/media/2b/ca/b6/1788164840/132134_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "132142",
+          "url": "https://www.sata.com/media/d2/4f/19/1788164840/132142_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "139196",
+          "url": "https://www.sata.com/media/18/d2/2c/1788164840/139196_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "139204",
+          "url": "https://www.sata.com/media/63/57/59/1788164840/139204_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "139212",
+          "url": "https://www.sata.com/media/9f/19/99/1788164840/139212_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "139220",
+          "url": "https://www.sata.com/media/7f/d5/be/1788164841/139220_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "139238",
+          "url": "https://www.sata.com/media/50/a2/05/1788164841/139238_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141903",
+          "url": "https://www.sata.com/media/95/b3/60/1788164840/141903_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141911",
+          "url": "https://www.sata.com/media/74/ec/16/1788164840/141911_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141929",
+          "url": "https://www.sata.com/media/9b/56/cc/1788164840/141929_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141937",
+          "url": "https://www.sata.com/media/a6/1a/c8/1788164840/141937_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141945",
+          "url": "https://www.sata.com/media/cc/d0/81/1788164840/141945_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141952",
+          "url": "https://www.sata.com/media/fd/53/79/1788164840/141952_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141960",
+          "url": "https://www.sata.com/media/85/0d/35/1788164839/141960_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141978",
+          "url": "https://www.sata.com/media/ed/65/ac/1788164839/141978_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141986",
+          "url": "https://www.sata.com/media/25/99/74/1788164839/141986_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "142000",
+          "url": "https://www.sata.com/media/b1/3a/db/1788164839/142000_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "142018",
+          "url": "https://www.sata.com/media/01/d2/83/1788164839/142018_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "153486",
+          "url": "https://www.sata.com/media/46/99/43/1788164840/153486_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "153494",
+          "url": "https://www.sata.com/media/d3/a0/b9/1788164840/153494_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154336",
+          "url": "https://www.sata.com/media/0f/77/4b/1788164840/154336_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154344",
+          "url": "https://www.sata.com/media/92/67/d6/1788164839/154344_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154351",
+          "url": "https://www.sata.com/media/5f/f0/3d/1788164840/154351_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154369",
+          "url": "https://www.sata.com/media/a4/8c/d8/1788164840/154369_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154930",
+          "url": "https://www.sata.com/media/51/35/d4/1788164840/154930_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "161232",
+          "url": "https://www.sata.com/media/d3/da/f0/1788164840/161232_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "193664",
+          "url": "https://www.sata.com/media/74/ff/c4/1788164841/193664_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "211979",
+          "url": "https://www.sata.com/media/1c/19/d2/1788164840/211979_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1004928",
+          "url": "https://www.sata.com/media/38/17/ae/1788164840/1004928_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931099",
+      "officialName": "SATAminijet 1000 K",
+      "slug": "sataminijet-1000-k",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sataminijet-1000-k/CF1931099",
+      "articlesWithOwnImage": 11,
+      "articles": 11,
+      "sourceImages": [
+        {
+          "articleNumber": "187450",
+          "url": "https://www.sata.com/media/1e/5b/96/1788164841/187450_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "187468",
+          "url": "https://www.sata.com/media/8b/f8/15/1788164841/187468_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "187476",
+          "url": "https://www.sata.com/media/0e/3c/39/1788164841/187476_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "187484",
+          "url": "https://www.sata.com/media/66/85/4a/1788164801/187484_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "187492",
+          "url": "https://www.sata.com/media/19/2a/cc/1788164841/187492_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "190280",
+          "url": "https://www.sata.com/media/11/c0/ec/1788164841/190280_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "190298",
+          "url": "https://www.sata.com/media/83/a4/a0/1788164841/190298_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "190306",
+          "url": "https://www.sata.com/media/f7/08/e4/1788164841/190306_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "190314",
+          "url": "https://www.sata.com/media/c1/f0/96/1788164841/190314_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "190322",
+          "url": "https://www.sata.com/media/10/fd/d8/1788164841/190322_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "197152",
+          "url": "https://www.sata.com/media/a0/ff/88/1788164841/197152_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931100",
+      "officialName": "SATAgraph 4",
+      "slug": "satagraph-4",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satagraph-4/CF1931100",
+      "articlesWithOwnImage": 3,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "227629",
+          "url": "https://www.sata.com/media/16/66/ec/1788164802/227629_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "227637",
+          "url": "https://www.sata.com/media/fa/ed/ab/1788164844/227637_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "227645",
+          "url": "https://www.sata.com/media/2b/ee/dc/1788164844/227645_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931121",
+      "officialName": "SATA air vision 5000",
+      "slug": "sata-air-vision-5000",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-air-vision-5000/CF1931121",
+      "articlesWithOwnImage": 3,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "213819",
+          "url": "https://www.sata.com/media/e2/e8/d1/1788164851/213819_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1000124",
+          "url": "https://www.sata.com/media/4b/df/5e/1788164851/1000124_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1000249",
+          "url": "https://www.sata.com/media/f1/b1/5a/1788164803/1000249_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931122",
+      "officialName": "SATA vision 2000",
+      "slug": "sata-vision-2000",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-vision-2000/CF1931122",
+      "articlesWithOwnImage": 4,
+      "articles": 4,
+      "sourceImages": [
+        {
+          "articleNumber": "52712",
+          "url": "https://www.sata.com/media/f8/37/9f/1788164851/52712_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "69500",
+          "url": "https://www.sata.com/media/61/53/7b/1788164851/69500_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "154591",
+          "url": "https://www.sata.com/media/46/a1/a2/1788164803/154591_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "173880",
+          "url": "https://www.sata.com/media/24/b2/de/1788164851/173880_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931124",
+      "officialName": "SATA air star C",
+      "slug": "sata-air-star-c",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-air-star-c/CF1931124",
+      "articlesWithOwnImage": 3,
+      "articles": 4,
+      "sourceImages": [
+        {
+          "articleNumber": "137554",
+          "url": "https://www.sata.com/media/5c/c3/96/1788164852/137554_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "137570",
+          "url": "https://www.sata.com/media/87/3a/7e/1788164804/137570_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "137588",
+          "url": "https://www.sata.com/media/6a/05/6a/1788164852/137588_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931125",
+      "officialName": "SATA air star F",
+      "slug": "sata-air-star-f",
+      "status": "OFFICIAL_IMAGE_NOT_PUBLISHED",
+      "sourcePage": "https://www.sata.com/en/sata-air-star-f/CF1931125",
+      "articlesWithOwnImage": 0,
+      "articles": 1,
+      "sourceImages": []
+    },
+    {
+      "family": "CF1931127",
+      "officialName": "SATA filter series 100",
+      "slug": "sata-filter-series-100",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-filter-series-100/CF1931127",
+      "articlesWithOwnImage": 3,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "148247",
+          "url": "https://www.sata.com/media/a9/56/c2/1788164852/148247_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157412",
+          "url": "https://www.sata.com/media/ed/c3/23/1788164852/157412_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "157420",
+          "url": "https://www.sata.com/media/25/1c/ed/1788164804/157420_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931128",
+      "officialName": "SATA filter series 200",
+      "slug": "sata-filter-series-200",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-filter-series-200/CF1931128",
+      "articlesWithOwnImage": 3,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "44404",
+          "url": "https://www.sata.com/media/9d/07/69/1788164852/44404_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141218",
+          "url": "https://www.sata.com/media/ea/3e/9d/1788164804/141218_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141226",
+          "url": "https://www.sata.com/media/cf/ca/17/1788164852/141226_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931129",
+      "officialName": "SATA filter series 400",
+      "slug": "sata-filter-series-400",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-filter-series-400/CF1931129",
+      "articlesWithOwnImage": 12,
+      "articles": 12,
+      "sourceImages": [
+        {
+          "articleNumber": "92213",
+          "url": "https://www.sata.com/media/5e/05/44/1788164852/92213_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92221",
+          "url": "https://www.sata.com/media/e2/7c/56/1788164852/92221_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92239",
+          "url": "https://www.sata.com/media/ab/e6/45/1788164852/92239_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92247",
+          "url": "https://www.sata.com/media/53/fd/ac/1788164852/92247_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92254",
+          "url": "https://www.sata.com/media/6e/cf/f5/1788164852/92254_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92262",
+          "url": "https://www.sata.com/media/ae/87/a1/1788164852/92262_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92270",
+          "url": "https://www.sata.com/media/d1/06/6b/1788164852/92270_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92296",
+          "url": "https://www.sata.com/media/84/30/c6/1788164852/92296_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92304",
+          "url": "https://www.sata.com/media/e8/e4/f8/1788164852/92304_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92312",
+          "url": "https://www.sata.com/media/3a/70/10/1788164852/92312_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "92320",
+          "url": "https://www.sata.com/media/35/8d/91/1788164804/92320_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "141473",
+          "url": "https://www.sata.com/media/45/77/23/1788164852/141473_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931204",
+      "officialName": "SATA suit race",
+      "slug": "sata-suit-race",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-suit-race/CF1931204",
+      "articlesWithOwnImage": 5,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "184267",
+          "url": "https://www.sata.com/media/88/3c/e9/1788164855/184267_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "184275",
+          "url": "https://www.sata.com/media/2b/bb/a3/1788164855/184275_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "184283",
+          "url": "https://www.sata.com/media/9f/d0/96/1788164805/184283_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "184291",
+          "url": "https://www.sata.com/media/b1/84/ac/1788164855/184291_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "184309",
+          "url": "https://www.sata.com/media/01/7a/e7/1788164855/184309_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931211",
+      "officialName": "SATA HKU",
+      "slug": "sata-hku",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-hku/CF1931211",
+      "articlesWithOwnImage": 2,
+      "articles": 2,
+      "sourceImages": [
+        {
+          "articleNumber": "14555",
+          "url": "https://www.sata.com/media/3a/a4/8c/1788164805/14555_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "34389",
+          "url": "https://www.sata.com/media/d9/9e/5e/1788164854/34389_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931215",
+      "officialName": "SATA vario top spray",
+      "slug": "sata-vario-top-spray",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-vario-top-spray/CF1931215",
+      "articlesWithOwnImage": 9,
+      "articles": 12,
+      "sourceImages": [
+        {
+          "articleNumber": "61507",
+          "url": "https://www.sata.com/media/8b/2d/43/1788164854/61507_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "61515",
+          "url": "https://www.sata.com/media/f0/74/3b/1788164854/61515_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "62745",
+          "url": "https://www.sata.com/media/a2/b2/06/1788164854/62745_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "72678",
+          "url": "https://www.sata.com/media/1c/bd/39/1788164854/72678_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "72694",
+          "url": "https://www.sata.com/media/46/0e/29/1788164854/72694_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "81406",
+          "url": "https://www.sata.com/media/57/13/f3/1788164854/81406_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "81661",
+          "url": "https://www.sata.com/media/d2/18/8c/1788164854/81661_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "90662",
+          "url": "https://www.sata.com/media/15/31/af/1788164854/90662_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "95109",
+          "url": "https://www.sata.com/media/cf/98/d0/1788164854/95109_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931220",
+      "officialName": "SATA mini Set 2",
+      "slug": "sata-mini-set-2",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-mini-set-2/CF1931220",
+      "articlesWithOwnImage": 4,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "56408",
+          "url": "https://www.sata.com/media/34/d8/3e/1788164857/56408_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "57232",
+          "url": "https://www.sata.com/media/ca/58/c6/1788164857/57232_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "83444",
+          "url": "https://www.sata.com/media/04/78/25/1788164857/83444_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "120840",
+          "url": "https://www.sata.com/media/cd/98/a0/1788164806/120840_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931221",
+      "officialName": "Release agent spray system",
+      "slug": "sata-release-agent-spray-system",
+      "status": "OFFICIAL_IMAGE_NOT_PUBLISHED",
+      "sourcePage": "https://www.sata.com/en/release-agent-spray-system/CF1931221",
+      "articlesWithOwnImage": 0,
+      "articles": 1,
+      "sourceImages": []
+    },
+    {
+      "family": "CF1931282",
+      "officialName": "SATAjet X 5500 PHASER",
+      "slug": "satajet-x-5500-phaser",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-x-5500-phaser/CF1931282",
+      "articlesWithOwnImage": 12,
+      "articles": 12,
+      "sourceImages": [
+        {
+          "articleNumber": "1096066",
+          "url": "https://www.sata.com/media/d3/f2/67/1788164827/1096066_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096074",
+          "url": "https://www.sata.com/media/9e/6a/c5/1788164827/1096074_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096082",
+          "url": "https://www.sata.com/media/91/6e/d0/1788164798/1096082_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096090",
+          "url": "https://www.sata.com/media/14/7e/63/1788164827/1096090_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096107",
+          "url": "https://www.sata.com/media/f1/g0/49/1788164826/1096107_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096115",
+          "url": "https://www.sata.com/media/1a/cc/23/1788164826/1096115_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096123",
+          "url": "https://www.sata.com/media/83/32/5c/1788164826/1096123_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096131",
+          "url": "https://www.sata.com/media/8e/43/0c/1788164827/1096131_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096149",
+          "url": "https://www.sata.com/media/92/4c/5c/1788164827/1096149_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1096157",
+          "url": "https://www.sata.com/media/66/05/4e/1788164827/1096157_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1150002",
+          "url": "https://www.sata.com/media/b7/e3/4e/1788164827/1150002_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1150010",
+          "url": "https://www.sata.com/media/41/60/31/1788164827/1150010_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931293",
+      "officialName": "SATA filter 500 series",
+      "slug": "sata-filter-500-series",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-filter-500-series/CF1931293",
+      "articlesWithOwnImage": 6,
+      "articles": 7,
+      "sourceImages": [
+        {
+          "articleNumber": "1099953",
+          "url": "https://www.sata.com/media/b0/c0/3c/1788164804/1099953_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1100990",
+          "url": "https://www.sata.com/media/26/04/f0/1788164852/1100990_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1101005",
+          "url": "https://www.sata.com/media/dd/86/16/1788164852/1101005_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1101625",
+          "url": "https://www.sata.com/media/c2/c8/e3/1788164852/1101625_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1101641",
+          "url": "https://www.sata.com/media/9d/8a/92/1788164852/1101641_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1101659",
+          "url": "https://www.sata.com/media/16/29/33/1788164852/1101659_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931300",
+      "officialName": "SATA HRS-E",
+      "slug": "sata-hrs-e",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-hrs-e/CF1931300",
+      "articlesWithOwnImage": 4,
+      "articles": 4,
+      "sourceImages": [
+        {
+          "articleNumber": "77347",
+          "url": "https://www.sata.com/media/41/c5/3c/1788164853/77347_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "172882",
+          "url": "https://www.sata.com/media/15/30/a2/1788164853/172882_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "207290",
+          "url": "https://www.sata.com/media/6b/9b/ea/1788164853/207290_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1044825",
+          "url": "https://www.sata.com/media/g0/48/f6/1788164805/1044825_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931301",
+      "officialName": "SATA HRS",
+      "slug": "sata-hrs",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-hrs/CF1931301",
+      "articlesWithOwnImage": 5,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "9795",
+          "url": "https://www.sata.com/media/67/f6/e1/1788164854/9795_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "11072",
+          "url": "https://www.sata.com/media/f3/d9/cb/1788164854/11072_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "11858",
+          "url": "https://www.sata.com/media/dd/51/a1/1788164854/11858_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "12658",
+          "url": "https://www.sata.com/media/44/d1/30/1788164805/12658_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "24018",
+          "url": "https://www.sata.com/media/d2/ae/70/1788164854/24018_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931303",
+      "officialName": "Reusable plastic flow cup",
+      "slug": "sata-reusable-plastic-flow-cup",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/reusable-plastic-flow-cup/CF1931303",
+      "articlesWithOwnImage": 12,
+      "articles": 13,
+      "sourceImages": [
+        {
+          "articleNumber": "7591",
+          "url": "https://www.sata.com/media/cc/a9/58/1788164849/7591_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "7633",
+          "url": "https://www.sata.com/media/a5/7a/f3/1788164849/7633_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "15669",
+          "url": "https://www.sata.com/media/ff/0f/8f/1788164849/15669_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "27243",
+          "url": "https://www.sata.com/media/fd/b1/b5/1788164803/27243_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "48587",
+          "url": "https://www.sata.com/media/53/35/90/1788164849/48587_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "49379",
+          "url": "https://www.sata.com/media/ea/9c/af/1788164849/49379_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "60384",
+          "url": "https://www.sata.com/media/fd/88/62/1788164849/60384_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "120675",
+          "url": "https://www.sata.com/media/f1/23/06/1788164849/120675_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "125443",
+          "url": "https://www.sata.com/media/1e/12/23/1788164849/125443_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "128470",
+          "url": "https://www.sata.com/media/6b/db/8e/1788164849/128470_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "197541",
+          "url": "https://www.sata.com/media/88/5d/f5/1788164849/197541_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1004960",
+          "url": "https://www.sata.com/media/3f/57/ea/1788164849/1004960_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931304",
+      "officialName": "Reusable aluminium flow cup",
+      "slug": "sata-reusable-aluminium-flow-cup",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/reusable-aluminium-flow-cup/CF1931304",
+      "articlesWithOwnImage": 8,
+      "articles": 8,
+      "sourceImages": [
+        {
+          "articleNumber": "6601",
+          "url": "https://www.sata.com/media/68/52/45/1788164849/6601_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "46631",
+          "url": "https://www.sata.com/media/4b/15/1b/1788164849/46631_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "96685",
+          "url": "https://www.sata.com/media/46/5f/28/1788164849/96685_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "125948",
+          "url": "https://www.sata.com/media/29/8e/c8/1788164849/125948_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "137729",
+          "url": "https://www.sata.com/media/12/cd/dc/1788164849/137729_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "198911",
+          "url": "https://www.sata.com/media/e5/a1/70/1788164803/198911_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1013432",
+          "url": "https://www.sata.com/media/b1/6f/eb/1788164849/1013432_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1013440",
+          "url": "https://www.sata.com/media/b2/93/d2/1788164849/1013440_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931305",
+      "officialName": "Reusable plastic hanging cups",
+      "slug": "sata-reusable-plastic-hanging-cups",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/reusable-plastic-hanging-cups/CF1931305",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "21444",
+          "url": "https://www.sata.com/media/41/3e/0d/1788164803/21444_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931306",
+      "officialName": "Reusable aluminium hanging cups",
+      "slug": "sata-reusable-aluminium-hanging-cups",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/reusable-aluminium-hanging-cups/CF1931306",
+      "articlesWithOwnImage": 2,
+      "articles": 2,
+      "sourceImages": [
+        {
+          "articleNumber": "2691",
+          "url": "https://www.sata.com/media/45/ef/7b/1788164803/2691_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "26120",
+          "url": "https://www.sata.com/media/3d/e4/97/1788164849/26120_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931308",
+      "officialName": "SATA dry jet Stativ",
+      "slug": "sata-dry-jet-stativ",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-dry-jet-stativ/CF1931308",
+      "articlesWithOwnImage": 2,
+      "articles": 2,
+      "sourceImages": [
+        {
+          "articleNumber": "82198",
+          "url": "https://www.sata.com/media/b2/c8/de/1788164854/82198_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "223008",
+          "url": "https://www.sata.com/media/76/99/ff/1788164805/223008_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931309",
+      "officialName": "SATA trueSun",
+      "slug": "sata-truesun",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-truesun/CF1931309",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "1006411",
+          "url": "https://www.sata.com/media/cf/53/ec/1788164805/1006411_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931313",
+      "officialName": "SATA multi clean 2",
+      "slug": "sata-multi-clean-2",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-multi-clean-2/CF1931313",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "38257",
+          "url": "https://www.sata.com/media/53/6f/7f/1788164805/38257_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931315",
+      "officialName": "SATAjet K 1800 spray mix",
+      "slug": "satajet-k-1800-spray-mix",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-k-1800-spray-mix/CF1931315",
+      "articlesWithOwnImage": 3,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "1068023",
+          "url": "https://www.sata.com/media/06/06/c3/1788164801/1068023_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1090076",
+          "url": "https://www.sata.com/media/f3/ef/87/1788164839/1090076_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1091454",
+          "url": "https://www.sata.com/media/89/db/f1/1788164839/1091454_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931319",
+      "officialName": "SATAjet 1000 B Lignum 3",
+      "slug": "satajet-1000-b-lignum-3",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-1000-b-lignum-3/CF1931319",
+      "articlesWithOwnImage": 8,
+      "articles": 8,
+      "sourceImages": [
+        {
+          "articleNumber": "1107772",
+          "url": "https://www.sata.com/media/f8/78/d8/1788164835/1107772_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107780",
+          "url": "https://www.sata.com/media/e8/94/84/1788164835/1107780_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107798",
+          "url": "https://www.sata.com/media/3c/7a/5b/1788164835/1107798_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107805",
+          "url": "https://www.sata.com/media/5e/a8/ec/1788164800/1107805_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107813",
+          "url": "https://www.sata.com/media/d4/e9/79/1788164834/1107813_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107821",
+          "url": "https://www.sata.com/media/94/3a/da/1788164834/1107821_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107839",
+          "url": "https://www.sata.com/media/2a/5b/0a/1788164835/1107839_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1107847",
+          "url": "https://www.sata.com/media/29/6a/fd/1788164835/1107847_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931327",
+      "officialName": "SATA suit race ladies",
+      "slug": "sata-suit-race-ladies",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-suit-race-ladies/CF1931327",
+      "articlesWithOwnImage": 5,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "1154020",
+          "url": "https://www.sata.com/media/0e/7a/6e/1788164855/1154020_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1154038",
+          "url": "https://www.sata.com/media/b4/bc/c1/1788164855/1154038_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1154046",
+          "url": "https://www.sata.com/media/0d/c4/fe/1788164805/1154046_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1154054",
+          "url": "https://www.sata.com/media/3c/f7/3d/1788164855/1154054_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1154062",
+          "url": "https://www.sata.com/media/f6/dd/eb/1788164855/1154062_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931331",
+      "officialName": "SATAjet X 5500 Clear Coat Edition",
+      "slug": "satajet-x-5500-clear-coat-edition",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/satajet-x-5500-clear-coat-edition/CF1931331",
+      "articlesWithOwnImage": 2,
+      "articles": 2,
+      "sourceImages": [
+        {
+          "articleNumber": "1174573",
+          "url": "https://www.sata.com/media/aa/87/44/1788164799/1174573_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1185893",
+          "url": "https://www.sata.com/media/c7/67/80/1788164832/1185893_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931333",
+      "officialName": "SATA material pressure tank 10",
+      "slug": "sata-material-pressure-tank-10",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-material-pressure-tank-10/CF1931333",
+      "articlesWithOwnImage": 6,
+      "articles": 6,
+      "sourceImages": [
+        {
+          "articleNumber": "1182740",
+          "url": "https://www.sata.com/media/c6/9f/a5/1788164806/1182740_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182815",
+          "url": "https://www.sata.com/media/26/b8/27/1788164857/1182815_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182823",
+          "url": "https://www.sata.com/media/03/5c/90/1788164857/1182823_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182831",
+          "url": "https://www.sata.com/media/97/6a/9f/1788164857/1182831_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182849",
+          "url": "https://www.sata.com/media/0c/61/0b/1788164857/1182849_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182906",
+          "url": "https://www.sata.com/media/99/94/93/1788164857/1182906_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931334",
+      "officialName": "SATA material pressure tank 22",
+      "slug": "sata-material-pressure-tank-22",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-material-pressure-tank-22/CF1931334",
+      "articlesWithOwnImage": 8,
+      "articles": 8,
+      "sourceImages": [
+        {
+          "articleNumber": "1182914",
+          "url": "https://www.sata.com/media/a1/ae/75/1788164857/1182914_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182922",
+          "url": "https://www.sata.com/media/45/df/25/1788164857/1182922_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182930",
+          "url": "https://www.sata.com/media/51/26/bd/1788164857/1182930_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182948",
+          "url": "https://www.sata.com/media/3f/af/aa/1788164857/1182948_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182956",
+          "url": "https://www.sata.com/media/dc/99/05/1788164806/1182956_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182964",
+          "url": "https://www.sata.com/media/00/e8/97/1788164857/1182964_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182972",
+          "url": "https://www.sata.com/media/40/c9/34/1788164857/1182972_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1182980",
+          "url": "https://www.sata.com/media/12/1c/5e/1788164857/1182980_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931335",
+      "officialName": "SATA material pressure tank 45",
+      "slug": "sata-material-pressure-tank-45",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-material-pressure-tank-45/CF1931335",
+      "articlesWithOwnImage": 8,
+      "articles": 8,
+      "sourceImages": [
+        {
+          "articleNumber": "1182998",
+          "url": "https://www.sata.com/media/6a/3f/37/1788164857/1182998_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183003",
+          "url": "https://www.sata.com/media/b7/57/e8/1788164806/1183003_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183011",
+          "url": "https://www.sata.com/media/7d/0e/de/1788164857/1183011_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183029",
+          "url": "https://www.sata.com/media/32/2f/70/1788164857/1183029_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183037",
+          "url": "https://www.sata.com/media/cf/ba/64/1788164857/1183037_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183045",
+          "url": "https://www.sata.com/media/0c/9e/4b/1788164857/1183045_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183053",
+          "url": "https://www.sata.com/media/ff/96/78/1788164857/1183053_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1183061",
+          "url": "https://www.sata.com/media/33/28/ca/1788164857/1183061_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931336",
+      "officialName": "jet X",
+      "slug": "sata-jet-x",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/jet-x/CF1931336",
+      "articlesWithOwnImage": 68,
+      "articles": 68,
+      "sourceImages": [
+        {
+          "articleNumber": "1200013",
+          "url": "https://www.sata.com/media/c6/99/72/1788164823/1200013_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200021",
+          "url": "https://www.sata.com/media/95/45/04/1788164819/1200021_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200039",
+          "url": "https://www.sata.com/media/ef/57/de/1788164815/1200039_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200047",
+          "url": "https://www.sata.com/media/b5/85/84/1788164821/1200047_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200055",
+          "url": "https://www.sata.com/media/b1/eb/c4/1788164824/1200055_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200063",
+          "url": "https://www.sata.com/media/15/78/91/1788164819/1200063_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200071",
+          "url": "https://www.sata.com/media/80/e4/a4/1788164816/1200071_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200089",
+          "url": "https://www.sata.com/media/e0/92/3c/1788164821/1200089_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200097",
+          "url": "https://www.sata.com/media/b3/8b/cf/1788164824/1200097_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200104",
+          "url": "https://www.sata.com/media/12/cf/12/1788164819/1200104_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200112",
+          "url": "https://www.sata.com/media/1a/c7/12/1788164816/1200112_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200120",
+          "url": "https://www.sata.com/media/36/dc/30/1788164821/1200120_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200138",
+          "url": "https://www.sata.com/media/6b/ca/bc/1788164824/1200138_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200146",
+          "url": "https://www.sata.com/media/e2/ac/a4/1788164819/1200146_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200154",
+          "url": "https://www.sata.com/media/75/08/f5/1788164816/1200154_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200162",
+          "url": "https://www.sata.com/media/82/60/d3/1788164821/1200162_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200170",
+          "url": "https://www.sata.com/media/e5/31/55/1788164824/1200170_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200188",
+          "url": "https://www.sata.com/media/55/7c/59/1788164820/1200188_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200196",
+          "url": "https://www.sata.com/media/54/ac/61/1788164816/1200196_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200203",
+          "url": "https://www.sata.com/media/e5/3c/b4/1788164821/1200203_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200211",
+          "url": "https://www.sata.com/media/40/41/97/1788164824/1200211_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200229",
+          "url": "https://www.sata.com/media/cd/25/a7/1788164820/1200229_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200237",
+          "url": "https://www.sata.com/media/dc/a7/bf/1788164817/1200237_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200245",
+          "url": "https://www.sata.com/media/05/c7/9e/1788164822/1200245_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200253",
+          "url": "https://www.sata.com/media/cc/93/54/1788164825/1200253_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200261",
+          "url": "https://www.sata.com/media/9e/e0/77/1788164820/1200261_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200279",
+          "url": "https://www.sata.com/media/d0/a9/9d/1788164817/1200279_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200287",
+          "url": "https://www.sata.com/media/c8/75/c3/1788164822/1200287_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200295",
+          "url": "https://www.sata.com/media/ca/16/98/1788164822/1200295_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200302",
+          "url": "https://www.sata.com/media/72/c2/4d/1788164817/1200302_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200310",
+          "url": "https://www.sata.com/media/e7/1f/06/1788164813/1200310_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200328",
+          "url": "https://www.sata.com/media/d3/f8/3d/1788164820/1200328_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200336",
+          "url": "https://www.sata.com/media/b9/9d/a9/1788164822/1200336_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200344",
+          "url": "https://www.sata.com/media/b4/1f/07/1788164817/1200344_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200352",
+          "url": "https://www.sata.com/media/4b/f5/2e/1788164813/1200352_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200360",
+          "url": "https://www.sata.com/media/6c/5c/a7/1788164820/1200360_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200378",
+          "url": "https://www.sata.com/media/bc/f2/34/1788164823/1200378_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200386",
+          "url": "https://www.sata.com/media/16/47/f0/1788164818/1200386_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200394",
+          "url": "https://www.sata.com/media/38/74/e6/1788164798/1200394_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200401",
+          "url": "https://www.sata.com/media/cf/94/03/1788164820/1200401_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200419",
+          "url": "https://www.sata.com/media/01/c0/a9/1788164823/1200419_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200427",
+          "url": "https://www.sata.com/media/45/5b/8f/1788164818/1200427_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200435",
+          "url": "https://www.sata.com/media/ce/d3/43/1788164814/1200435_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200443",
+          "url": "https://www.sata.com/media/6f/cc/f8/1788164820/1200443_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200451",
+          "url": "https://www.sata.com/media/17/e6/3d/1788164823/1200451_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200469",
+          "url": "https://www.sata.com/media/54/82/1d/1788164818/1200469_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200477",
+          "url": "https://www.sata.com/media/2d/b6/9d/1788164814/1200477_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200485",
+          "url": "https://www.sata.com/media/e1/3a/77/1788164820/1200485_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200493",
+          "url": "https://www.sata.com/media/85/3b/76/1788164823/1200493_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200500",
+          "url": "https://www.sata.com/media/93/e5/95/1788164818/1200500_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200518",
+          "url": "https://www.sata.com/media/25/29/20/1788164814/1200518_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200526",
+          "url": "https://www.sata.com/media/b1/64/ac/1788164821/1200526_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200534",
+          "url": "https://www.sata.com/media/27/4f/72/1788164824/1200534_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200542",
+          "url": "https://www.sata.com/media/84/0a/1d/1788164822/1200542_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200550",
+          "url": "https://www.sata.com/media/15/b3/d3/1788164823/1200550_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200568",
+          "url": "https://www.sata.com/media/90/78/c2/1788164819/1200568_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200576",
+          "url": "https://www.sata.com/media/43/58/c3/1788164815/1200576_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1200584",
+          "url": "https://www.sata.com/media/19/4f/94/1788164821/1200584_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1201938",
+          "url": "https://www.sata.com/media/9e/a4/20/1788164820/1201938_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1201946",
+          "url": "https://www.sata.com/media/f2/d1/53/1788164817/1201946_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1201954",
+          "url": "https://www.sata.com/media/5d/8c/ac/1788164823/1201954_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1201962",
+          "url": "https://www.sata.com/media/2e/a6/a9/1788164821/1201962_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1201970",
+          "url": "https://www.sata.com/media/1d/a9/6a/1788164819/1201970_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1201988",
+          "url": "https://www.sata.com/media/ac/80/05/1788164814/1201988_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1215583",
+          "url": "https://www.sata.com/media/af/c5/7f/1788164825/1215583_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1215591",
+          "url": "https://www.sata.com/media/29/0c/a3/1788164825/1215591_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1215608",
+          "url": "https://www.sata.com/media/70/f3/aa/1788164825/1215608_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1215616",
+          "url": "https://www.sata.com/media/6c/15/dd/1788164825/1215616_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931338",
+      "officialName": "LCS - the Liner",
+      "slug": "sata-lcs-the-liner",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/lcs-the-liner/CF1931338",
+      "articlesWithOwnImage": 6,
+      "articles": 8,
+      "sourceImages": [
+        {
+          "articleNumber": "1195818",
+          "url": "https://www.sata.com/media/37/0e/2b/1788164848/1195818_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1195826",
+          "url": "https://www.sata.com/media/6c/f7/b2/1788164848/1195826_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1195834",
+          "url": "https://www.sata.com/media/63/cc/dc/1788164803/1195834_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1195850",
+          "url": "https://www.sata.com/media/c7/a4/1d/1788164848/1195850_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1195868",
+          "url": "https://www.sata.com/media/13/23/a2/1788164848/1195868_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1195876",
+          "url": "https://www.sata.com/media/bc/92/a8/1788164849/1195876_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931339",
+      "officialName": "air star F 2.0",
+      "slug": "sata-air-star-f-2-0",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/air-star-f-2.0/CF1931339",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "1173252",
+          "url": "https://www.sata.com/media/48/d1/97/1788164804/1173252_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931340",
+      "officialName": "adam X pro",
+      "slug": "sata-adam-x-pro",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/adam-x-pro/CF1931340",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "1202001",
+          "url": "https://www.sata.com/media/42/6e/f6/1788164805/1202001_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931341",
+      "officialName": "adam X",
+      "slug": "sata-adam-x",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/adam-x/CF1931341",
+      "articlesWithOwnImage": 1,
+      "articles": 1,
+      "sourceImages": [
+        {
+          "articleNumber": "1201996",
+          "url": "https://www.sata.com/media/bb/cf/c5/1788164806/1201996_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931342",
+      "officialName": "SATA adam 2",
+      "slug": "sata-adam-2",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-adam-2/CF1931342",
+      "articlesWithOwnImage": 15,
+      "articles": 15,
+      "sourceImages": [
+        {
+          "articleNumber": "160689",
+          "url": "https://www.sata.com/media/c4/67/99/1788164856/160689_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "160788",
+          "url": "https://www.sata.com/media/81/55/fb/1788164856/160788_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "160796",
+          "url": "https://www.sata.com/media/db/ce/18/1788164856/160796_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "160846",
+          "url": "https://www.sata.com/media/0f/7d/de/1788164856/160846_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "160861",
+          "url": "https://www.sata.com/media/83/90/bf/1788164856/160861_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "160879",
+          "url": "https://www.sata.com/media/a0/30/b7/1788164856/160879_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "162081",
+          "url": "https://www.sata.com/media/df/8f/53/1788164857/162081_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "195214",
+          "url": "https://www.sata.com/media/dc/ab/8c/1788164857/195214_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "195230",
+          "url": "https://www.sata.com/media/79/90/81/1788164857/195230_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "195925",
+          "url": "https://www.sata.com/media/df/0d/dc/1788164856/195925_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "211540",
+          "url": "https://www.sata.com/media/d9/a3/d9/1788164806/211540_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "211565",
+          "url": "https://www.sata.com/media/e2/32/9e/1788164856/211565_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "211573",
+          "url": "https://www.sata.com/media/09/9f/92/1788164856/211573_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1031682",
+          "url": "https://www.sata.com/media/ff/dc/bd/1788164856/1031682_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1031723",
+          "url": "https://www.sata.com/media/ea/d9/b8/1788164856/1031723_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931343",
+      "officialName": "SATA suit Standard Men",
+      "slug": "sata-suit-standard-men",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-suit-standard-men/CF1931343",
+      "articlesWithOwnImage": 10,
+      "articles": 10,
+      "sourceImages": [
+        {
+          "articleNumber": "1202522",
+          "url": "https://www.sata.com/media/13/f8/32/1788164854/1202522_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202530",
+          "url": "https://www.sata.com/media/99/d9/dd/1788164854/1202530_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202548",
+          "url": "https://www.sata.com/media/90/aa/08/1788164854/1202548_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202556",
+          "url": "https://www.sata.com/media/d3/7d/fc/1788164855/1202556_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202564",
+          "url": "https://www.sata.com/media/g0/9b/e6/1788164855/1202564_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202613",
+          "url": "https://www.sata.com/media/30/1b/53/1788164854/1202613_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202621",
+          "url": "https://www.sata.com/media/87/9c/6c/1788164854/1202621_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202639",
+          "url": "https://www.sata.com/media/f5/51/b5/1788164805/1202639_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202647",
+          "url": "https://www.sata.com/media/c3/28/ed/1788164854/1202647_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1204487",
+          "url": "https://www.sata.com/media/2a/1c/9e/1788164805/1204487_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931345",
+      "officialName": "SATA suit Basic",
+      "slug": "sata-suit-basic",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-suit-basic/CF1931345",
+      "articlesWithOwnImage": 5,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "1196163",
+          "url": "https://www.sata.com/media/1b/76/db/1788164855/1196163_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202481",
+          "url": "https://www.sata.com/media/6f/72/62/1788164855/1202481_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202499",
+          "url": "https://www.sata.com/media/2e/e9/c2/1788164805/1202499_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202506",
+          "url": "https://www.sata.com/media/1f/fb/a9/1788164855/1202506_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202514",
+          "url": "https://www.sata.com/media/71/6d/a0/1788164855/1202514_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931348",
+      "officialName": "RPS - the Original",
+      "slug": "sata-rps-the-original",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/rps-the-original/CF1931348",
+      "articlesWithOwnImage": 10,
+      "articles": 10,
+      "sourceImages": [
+        {
+          "articleNumber": "1202043",
+          "url": "https://www.sata.com/media/ae/17/3a/1788164847/1202043_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202077",
+          "url": "https://www.sata.com/media/b4/5d/1c/1788164848/1202077_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202100",
+          "url": "https://www.sata.com/media/30/54/a0/1788164803/1202100_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202134",
+          "url": "https://www.sata.com/media/5e/51/ba/1788164848/1202134_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202142",
+          "url": "https://www.sata.com/media/23/3a/be/1788164848/1202142_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202150",
+          "url": "https://www.sata.com/media/84/3d/b0/1788164848/1202150_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202259",
+          "url": "https://www.sata.com/media/ec/08/03/1788164848/1202259_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1202267",
+          "url": "https://www.sata.com/media/a6/3f/7c/1788164848/1202267_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1214816",
+          "url": "https://www.sata.com/media/83/ab/90/1788164848/1214816_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1214824",
+          "url": "https://www.sata.com/media/78/0e/62/1788164848/1214824_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931351",
+      "officialName": "Luftmikrometer",
+      "slug": "sata-luftmikrometer",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/luftmikrometer/CF1931351",
+      "articlesWithOwnImage": 2,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "27771",
+          "url": "https://www.sata.com/media/3d/0a/c5/1788164805/27771_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "48934",
+          "url": "https://www.sata.com/media/9d/25/e5/1788164852/48934_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931352",
+      "officialName": "Manometer",
+      "slug": "sata-manometer",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/manometer/CF1931352",
+      "articlesWithOwnImage": 13,
+      "articles": 13,
+      "sourceImages": [
+        {
+          "articleNumber": "4002",
+          "url": "https://www.sata.com/media/72/5a/fb/1788164805/4002_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "18937",
+          "url": "https://www.sata.com/media/98/d1/9d/1788164853/18937_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "18960",
+          "url": "https://www.sata.com/media/ff/0e/88/1788164853/18960_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "19158",
+          "url": "https://www.sata.com/media/08/ca/b5/1788164853/19158_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "22046",
+          "url": "https://www.sata.com/media/15/c9/f6/1788164853/22046_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "22319",
+          "url": "https://www.sata.com/media/0a/61/8b/1788164853/22319_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "25015",
+          "url": "https://www.sata.com/media/34/37/ce/1788164853/25015_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "25064",
+          "url": "https://www.sata.com/media/64/ab/c1/1788164853/25064_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "48736",
+          "url": "https://www.sata.com/media/d6/06/48/1788164853/48736_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "62075",
+          "url": "https://www.sata.com/media/46/05/af/1788164853/62075_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "74625",
+          "url": "https://www.sata.com/media/f1/46/ea/1788164852/74625_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "123513",
+          "url": "https://www.sata.com/media/c3/65/85/1788164853/123513_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "156026",
+          "url": "https://www.sata.com/media/6b/e6/ca/1788164853/156026_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931355",
+      "officialName": "SATA clean RCS",
+      "slug": "sata-clean-rcs",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-clean-rcs/CF1931355",
+      "articlesWithOwnImage": 3,
+      "articles": 3,
+      "sourceImages": [
+        {
+          "articleNumber": "145581",
+          "url": "https://www.sata.com/media/22/ac/44/1788164804/145581_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "192518",
+          "url": "https://www.sata.com/media/ac/32/23/1788164852/192518_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "202564",
+          "url": "https://www.sata.com/media/9f/df/f4/1788164852/202564_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931356",
+      "officialName": "jet K",
+      "slug": "sata-jet-k",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/jet-k/CF1931356",
+      "articlesWithOwnImage": 35,
+      "articles": 35,
+      "sourceImages": [
+        {
+          "articleNumber": "1238840",
+          "url": "https://www.sata.com/media/ea/87/17/1788164842/1238840_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238866",
+          "url": "https://www.sata.com/media/e4/6d/88/1788164843/1238866_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238874",
+          "url": "https://www.sata.com/media/c7/83/47/1788164802/1238874_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238882",
+          "url": "https://www.sata.com/media/4d/61/b9/1788164842/1238882_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238890",
+          "url": "https://www.sata.com/media/0b/98/b5/1788164842/1238890_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238907",
+          "url": "https://www.sata.com/media/26/da/80/1788164843/1238907_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238915",
+          "url": "https://www.sata.com/media/47/a1/9c/1788164842/1238915_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238923",
+          "url": "https://www.sata.com/media/7b/04/cc/1788164842/1238923_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238931",
+          "url": "https://www.sata.com/media/74/9b/8e/1788164843/1238931_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238949",
+          "url": "https://www.sata.com/media/89/21/81/1788164842/1238949_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238981",
+          "url": "https://www.sata.com/media/2f/74/41/1788164842/1238981_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1238999",
+          "url": "https://www.sata.com/media/10/5e/1c/1788164843/1238999_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1239004",
+          "url": "https://www.sata.com/media/78/c0/7f/1788164843/1239004_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1239012",
+          "url": "https://www.sata.com/media/de/c8/e7/1788164843/1239012_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1239020",
+          "url": "https://www.sata.com/media/c0/ef/e5/1788164843/1239020_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1239038",
+          "url": "https://www.sata.com/media/8b/93/71/1788164844/1239038_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1239046",
+          "url": "https://www.sata.com/media/f3/11/b3/1788164844/1239046_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255224",
+          "url": "https://www.sata.com/media/7b/02/af/1788164841/1255224_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255258",
+          "url": "https://www.sata.com/media/99/e0/ba/1788164842/1255258_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255266",
+          "url": "https://www.sata.com/media/1b/3a/2f/1788164842/1255266_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255521",
+          "url": "https://www.sata.com/media/eb/0e/fa/1788164842/1255521_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255539",
+          "url": "https://www.sata.com/media/6d/8a/4a/1788164842/1255539_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255547",
+          "url": "https://www.sata.com/media/e3/8c/4d/1788164842/1255547_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255563",
+          "url": "https://www.sata.com/media/e1/ee/f8/1788164842/1255563_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255589",
+          "url": "https://www.sata.com/media/96/28/a7/1788164842/1255589_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255860",
+          "url": "https://www.sata.com/media/a6/af/84/1788164842/1255860_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255919",
+          "url": "https://www.sata.com/media/f9/af/0f/1788164842/1255919_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255927",
+          "url": "https://www.sata.com/media/cd/c1/11/1788164843/1255927_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255935",
+          "url": "https://www.sata.com/media/0d/2b/15/1788164843/1255935_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255943",
+          "url": "https://www.sata.com/media/90/b6/fb/1788164843/1255943_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255951",
+          "url": "https://www.sata.com/media/79/23/22/1788164843/1255951_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255969",
+          "url": "https://www.sata.com/media/b9/ff/f5/1788164843/1255969_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1255977",
+          "url": "https://www.sata.com/media/98/5a/ed/1788164843/1255977_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1257519",
+          "url": "https://www.sata.com/media/95/4c/f8/1788164842/1257519_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1257527",
+          "url": "https://www.sata.com/media/53/40/07/1788164843/1257527_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931357",
+      "officialName": "Lackierpistolenkoffer",
+      "slug": "sata-lackierpistolenkoffer",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/lackierpistolenkoffer/CF1931357",
+      "articlesWithOwnImage": 6,
+      "articles": 8,
+      "sourceImages": [
+        {
+          "articleNumber": "153288",
+          "url": "https://www.sata.com/media/9e/d5/54/1788164907/153288_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1222851",
+          "url": "https://www.sata.com/media/6b/f6/c0/1788164907/1222851_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1230078",
+          "url": "https://www.sata.com/media/a2/67/1f/1788164907/1230078_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1231365",
+          "url": "https://www.sata.com/media/69/ff/65/1788164808/1231365_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1231381",
+          "url": "https://www.sata.com/media/c7/d0/eb/1788164907/1231381_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1231886",
+          "url": "https://www.sata.com/media/98/b0/33/1788164907/1231886_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931359",
+      "officialName": "SATA dry jet 2",
+      "slug": "sata-dry-jet-2",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/sata-dry-jet-2/CF1931359",
+      "articlesWithOwnImage": 2,
+      "articles": 2,
+      "sourceImages": [
+        {
+          "articleNumber": "86165",
+          "url": "https://www.sata.com/media/a7/2c/48/1788164854/86165_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "217489",
+          "url": "https://www.sata.com/media/94/79/3b/1788164805/217489_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931387",
+      "officialName": "LCS - Hard Cups",
+      "slug": "sata-lcs-hard-cups",
+      "status": "OFFICIAL_IMAGE_NOT_PUBLISHED",
+      "sourcePage": "https://www.sata.com/en/lcs-hard-cups/CF1931387",
+      "articlesWithOwnImage": 0,
+      "articles": 3,
+      "sourceImages": []
+    },
+    {
+      "family": "CF1931392",
+      "officialName": "jet X clearcoat Edition",
+      "slug": "sata-jet-x-clearcoat-edition",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/jet-x-clearcoat-edition/CF1931392",
+      "articlesWithOwnImage": 5,
+      "articles": 5,
+      "sourceImages": [
+        {
+          "articleNumber": "1266891",
+          "url": "https://www.sata.com/media/75/da/14/1788164808/1266891_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266924",
+          "url": "https://www.sata.com/media/32/24/1a/1788164798/1266924_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266932",
+          "url": "https://www.sata.com/media/b6/a5/97/1788164808/1266932_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266940",
+          "url": "https://www.sata.com/media/44/73/01/1788164808/1266940_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266958",
+          "url": "https://www.sata.com/media/78/3e/8d/1788164808/1266958_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931393",
+      "officialName": "jet X basecoat Edition",
+      "slug": "sata-jet-x-basecoat-edition",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/jet-x-basecoat-edition/CF1931393",
+      "articlesWithOwnImage": 17,
+      "articles": 17,
+      "sourceImages": [
+        {
+          "articleNumber": "1267021",
+          "url": "https://www.sata.com/media/96/a9/39/1788164809/1267021_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267089",
+          "url": "https://www.sata.com/media/16/13/f5/1788164810/1267089_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267097",
+          "url": "https://www.sata.com/media/d9/61/35/1788164810/1267097_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267146",
+          "url": "https://www.sata.com/media/2e/11/97/1788164810/1267146_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267170",
+          "url": "https://www.sata.com/media/c8/e0/a9/1788164810/1267170_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267295",
+          "url": "https://www.sata.com/media/30/e4/a7/1788164810/1267295_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267344",
+          "url": "https://www.sata.com/media/71/cb/ef/1788164810/1267344_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267352",
+          "url": "https://www.sata.com/media/ed/44/db/1788164810/1267352_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267451",
+          "url": "https://www.sata.com/media/f6/61/5e/1788164808/1267451_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267485",
+          "url": "https://www.sata.com/media/35/74/fe/1788164809/1267485_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267493",
+          "url": "https://www.sata.com/media/ac/52/31/1788164798/1267493_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267500",
+          "url": "https://www.sata.com/media/db/ca/fa/1788164809/1267500_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267518",
+          "url": "https://www.sata.com/media/ff/c1/2e/1788164809/1267518_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267526",
+          "url": "https://www.sata.com/media/b7/c5/6d/1788164809/1267526_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267534",
+          "url": "https://www.sata.com/media/5c/8a/97/1788164809/1267534_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1267542",
+          "url": "https://www.sata.com/media/c8/39/bb/1788164809/1267542_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1268847",
+          "url": "https://www.sata.com/media/6f/b4/2d/1788164810/1268847_MAIN.WEBP.WEBP"
+        }
+      ]
+    },
+    {
+      "family": "CF1931394",
+      "officialName": "jet X by Stilbruch Edition",
+      "slug": "sata-jet-x-by-stilbruch-edition",
+      "status": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
+      "sourcePage": "https://www.sata.com/en/jet-x-by-stilbruch-edition/CF1931394",
+      "articlesWithOwnImage": 17,
+      "articles": 17,
+      "sourceImages": [
+        {
+          "articleNumber": "1266528",
+          "url": "https://www.sata.com/media/f5/49/4d/1788164812/1266528_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266651",
+          "url": "https://www.sata.com/media/69/3d/b2/1788164811/1266651_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266669",
+          "url": "https://www.sata.com/media/43/e3/b1/1788164811/1266669_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266677",
+          "url": "https://www.sata.com/media/9d/45/87/1788164798/1266677_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266734",
+          "url": "https://www.sata.com/media/c7/f5/94/1788164811/1266734_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266742",
+          "url": "https://www.sata.com/media/e0/c3/9e/1788164811/1266742_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266750",
+          "url": "https://www.sata.com/media/7b/3a/c2/1788164811/1266750_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266768",
+          "url": "https://www.sata.com/media/5b/14/5a/1788164811/1266768_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266776",
+          "url": "https://www.sata.com/media/74/3f/56/1788164811/1266776_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266784",
+          "url": "https://www.sata.com/media/c3/f7/0f/1788164812/1266784_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266792",
+          "url": "https://www.sata.com/media/c4/f6/0d/1788164812/1266792_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266809",
+          "url": "https://www.sata.com/media/94/70/a4/1788164812/1266809_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266817",
+          "url": "https://www.sata.com/media/2f/01/67/1788164812/1266817_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266825",
+          "url": "https://www.sata.com/media/2b/7a/89/1788164812/1266825_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266859",
+          "url": "https://www.sata.com/media/4e/7b/86/1788164812/1266859_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266867",
+          "url": "https://www.sata.com/media/43/32/d3/1788164812/1266867_MAIN.WEBP.WEBP"
+        },
+        {
+          "articleNumber": "1266875",
+          "url": "https://www.sata.com/media/63/12/fd/1788164811/1266875_MAIN.WEBP.WEBP"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "_comment": [
+    "Srpski sadržaj za SATA EMEA REFINISH FAMILY SCOPE (66 porodica). Ključ je zvanični CF identifikator porodice.",
+    "Svaki tekst prepričava ISKLJUČIVO zvanični naziv, slogan, opis porodice i zvanične nazive njenih artikala sa sata.com/en.",
+    "`sourceHash` upisuje `check-localization.mjs --stamp`; kada se zvanični ulaz promeni, provera pada dok se tekst ne pregleda ponovo.",
+    "`displayName` postoji samo gde je zvanični naziv na EN sajtu ostao na nemačkom; zvanični naziv ostaje u identitetu i pojmovima pretrage."
+  ],
+  "families": {
+    "CF1931072": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "SATA pištolj za najviše zahteve: X sistem mlaznica pokriva sve sisteme boja i preporuke za nanošenje, a „whispering” mlaznica osetno smanjuje buku.",
+      "purpose": "Nanošenje baznih boja i lakova u auto-reparaturi",
+      "sourceHash": "3b726745112c9da7"
+    },
+    "CF1931074": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "Ulazni pritisak i rastojanje prskanja prilagođavaju se boji, klimatskim uslovima i načinu rada. Ergonomski pištolj razvijen u saradnji sa Porsche Design Studio.",
+      "purpose": "Nanošenje baznih boja i lakova u auto-reparaturi",
+      "sourceHash": "a980f98c0bb53582"
+    },
+    "CF1931078": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "SATAjet 3000 B u RP izvedbi, sa QCC višekratnom plastičnom čašom.",
+      "purpose": "Nanošenje završnih slojeva",
+      "sourceHash": "7df2192d7ee84d16"
+    },
+    "CF1931079": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "Razvijen za ekonomično nanošenje baznih boja, bezbojnih lakova i 2K pokrivnih lakova u auto-reparaturi. Kompaktan spektar mlaznica i robusna konstrukcija.",
+      "purpose": "Bazne boje, bezbojni lakovi i 2K pokrivni lakovi",
+      "sourceHash": "c1918d1462e50186"
+    },
+    "CF1931080": {
+      "productType": "Univerzalni gravitacioni pištolj",
+      "shortDescription": "Gravitacioni pištolj razvijen za zanatsku, industrijsku i primenu na drvetu. Širok izbor setova mlaznica i produžetaka pokriva gotovo sve premaze.",
+      "purpose": "Univerzalno nanošenje premaza u zanatstvu i industriji",
+      "sourceHash": "dfb2f616ff399dde"
+    },
+    "CF1931082": {
+      "productType": "Gravitacioni pištolj za prajmere i punila",
+      "shortDescription": "Fleksibilno podešavanje pritiska raspršivanja, širok mlaz i fina atomizacija: punila i prajmeri se nanose u neprekinutom toku uprkos većoj viskoznosti, uz manje brušenja.",
+      "purpose": "Nanošenje prajmera, punila i špric-kita",
+      "sourceHash": "1a27d6512fe08a56"
+    },
+    "CF1931083": {
+      "productType": "Pištolj za kreativno lakiranje",
+      "shortDescription": "Namenjen svim oblastima kreativnog lakiranja: grafički dizajn, custom painting na vozilima, maketarstvo, umetnički radovi i kaligrafija.",
+      "purpose": "Dizajn, custom painting i fini detalji",
+      "sourceHash": "1a05b6f68713642c"
+    },
+    "CF1931085": {
+      "productType": "Kompaktni gravitacioni pištolj",
+      "shortDescription": "Za male i teško dostupne površine. Posebne SR mlaznice su namenjene malim popravkama (spot repair) na vozilima; nanosi sve savremene sisteme boja.",
+      "purpose": "Spot reparature i teško dostupna mesta",
+      "sourceHash": "e0c3341b6d958df3"
+    },
+    "CF1931087": {
+      "productType": "Pištolj sa čašom pod pritiskom",
+      "shortDescription": "Spaja visokopritisnu tehnologiju sa malo overspreja i prednosti pištolja sa potiskom materijala. Obrađuje gotovo sve sisteme boja različite viskoznosti, do debeloslojnih lazura.",
+      "purpose": "Materijali različite viskoznosti, do debeloslojnih lazura",
+      "sourceHash": "bba52975c32c97c2"
+    },
+    "CF1931090": {
+      "productType": "Pištolj sa usisnom čašom",
+      "shortDescription": "Svestrani pištolj za zanatstvo i industriju, u izvedbi sa usisnom čašom.",
+      "purpose": "Univerzalno nanošenje premaza sa usisnom čašom",
+      "sourceHash": "fd5c44079a97227f"
+    },
+    "CF1931091": {
+      "productType": "Pištolj sa usisnom čašom",
+      "shortDescription": "Robustan pištolj koji se lako čisti, namenjen pokrivnim slojevima u industriji i zanatstvu.",
+      "purpose": "Pokrivni slojevi u industriji i zanatstvu",
+      "sourceHash": "9fe86875b1b6994f"
+    },
+    "CF1931095": {
+      "productType": "Visokopritisni spray mix pištolj",
+      "shortDescription": "Visokopritisni pištolj sa potpomognutom vazdušnom atomizacijom, namenjen nanošenju velikih količina visokoviskoznih materijala.",
+      "purpose": "Velike količine visokoviskoznih materijala",
+      "sourceHash": "d5c97de099f6aa81"
+    },
+    "CF1931096": {
+      "productType": "Pištolj sa dovodom materijala pod pritiskom",
+      "shortDescription": "Pištolj visokih performansi za rad sa rezervoarima pod pritiskom ili pumpama, za kvalitetno lakiranje velikih površina. Izdužen mlaz i fina atomizacija daju ujednačenu površinu.",
+      "purpose": "Lakiranje velikih površina",
+      "sourceHash": "9f1a5ba01828a464"
+    },
+    "CF1931097": {
+      "productType": "Pištolj sa dovodom materijala pod pritiskom",
+      "shortDescription": "SATAjet 1000 KK u RP izvedbi, sa cevi za materijal i spojkom.",
+      "purpose": "Rad sa dovodom materijala pod pritiskom",
+      "sourceHash": "a0d78a0c38c97b43"
+    },
+    "CF1931098": {
+      "productType": "Univerzalni pištolj sa dovodom materijala pod pritiskom",
+      "shortDescription": "Kompaktan i lagan pištolj za dovod materijala iz rezervoara pod pritiskom ili preko dvostruke membranske pumpe. Širok izbor mlaznica pokriva najrazličitije materijale.",
+      "purpose": "Velike površine u zanatstvu i industriji",
+      "sourceHash": "cb6b30e145389474"
+    },
+    "CF1931099": {
+      "productType": "Kompaktni pištolj sa dovodom materijala pod pritiskom",
+      "shortDescription": "SATAminijet 1000 K u RP i HVLP izvedbi, sa priključkom za dovod materijala.",
+      "purpose": "Male površine uz dovod materijala pod pritiskom",
+      "sourceHash": "dde622c422add091"
+    },
+    "CF1931100": {
+      "productType": "Airbrush pištolj",
+      "shortDescription": "SATA airbrush pištolj, posebno pogodan za fine tačke, filigranske linije i konture. Dostupan u više izvedbi, svestran i jednostavan za rad.",
+      "purpose": "Airbrush, fine linije i konture",
+      "sourceHash": "7e06a786c479b6c6"
+    },
+    "CF1931121": {
+      "productType": "Respiratorna kapuljača sa dovodom vazduha",
+      "shortDescription": "Potpuno redizajnirana zaštita disanja sa dovodom vazduha: visok kvalitet vazduha za disanje i nizak nivo buke. Ergonomski oblik se podešava po veličini, visini i položaju.",
+      "purpose": "Zaštita disanja lakirera u kabini",
+      "sourceHash": "2afe764bf6c59c71"
+    },
+    "CF1931122": {
+      "productType": "Respiratorna kapuljača sa dovodom vazduha",
+      "shortDescription": "Puna kapuljača razvijena za lakirere: štiti disajne organe, oči, kožu i kosu, uz visok komfor nošenja i higijenu. Isporučuje se kao komplet sa zamenjivim uloškom kapuljače i zvučnim upozorenjem.",
+      "purpose": "Zaštita disanja lakirera u kabini",
+      "sourceHash": "dc0ff95ce963b118"
+    },
+    "CF1931124": {
+      "productType": "Polumaska sa dovodom vazduha",
+      "shortDescription": "Polumaska sa maksimalnom vidljivošću i boljom zaštitom disanja od polumaski sa filterskim ulošcima. Filter sa aktivnim ugljem, zidni ili na pojasu, obezbeđuje čist vazduh za disanje.",
+      "purpose": "Zaštita disanja lakirera",
+      "sourceHash": "5976e0421ec01d72"
+    },
+    "CF1931125": {
+      "productType": "Filterska polumaska",
+      "shortDescription": "Filterska polumaska koja lakirera čini nezavisnim od mesta rada. Koristi se pre svega za pripremne radove van kabine i za manje obimna lakiranja.",
+      "purpose": "Pripremni radovi i kraća lakiranja",
+      "sourceHash": "2ea442175fa439bd"
+    },
+    "CF1931127": {
+      "productType": "Filter komprimovanog vazduha",
+      "shortDescription": "Filteri razvijeni za zahteve zone pripreme, da se greške u premazu izbegnu od samog početka. Nisu namenjeni upotrebi u kabini za lakiranje.",
+      "purpose": "Priprema komprimovanog vazduha u zoni pripreme",
+      "sourceHash": "b4bfbe2258073dfb"
+    },
+    "CF1931128": {
+      "productType": "Filter komprimovanog vazduha",
+      "shortDescription": "Ekonomična kombinovana jedinica sa finim filterom za najviše zahteve kvaliteta vazduha, pri lakiranju i za sisteme za disanje sa dovodom vazduha. Za kabine, zone pripreme i ostale delove radionice.",
+      "purpose": "Priprema komprimovanog vazduha za lakiranje i disanje",
+      "sourceHash": "88b5492092da90df"
+    },
+    "CF1931129": {
+      "productType": "Filter komprimovanog vazduha",
+      "shortDescription": "Serija za najviše zahteve kvaliteta i učinka. Modularna konstrukcija se tačno prilagođava primeni; kombinovane jedinice su standard u kabinama, i za pripremu vazduha za disanje.",
+      "purpose": "Priprema komprimovanog vazduha u kabini za lakiranje",
+      "sourceHash": "c79e0f3ba41b4474"
+    },
+    "CF1931204": {
+      "productType": "Zaštitno odelo za lakirere",
+      "shortDescription": "SATA suit race, zaštitno odelo za lakirere od poliestera sa karbonskim vlaknima, u više veličina.",
+      "purpose": "Zaštita lakirera tokom rada",
+      "sourceHash": "a9abacbcb9dc4cc7"
+    },
+    "CF1931211": {
+      "productType": "Pumpni agregat za burad",
+      "shortDescription": "Pumpni agregat za burad, prvi izbor za obradu velikih količina materijala.",
+      "purpose": "Obrada velikih količina materijala",
+      "sourceHash": "b3d81ee95d46a140"
+    },
+    "CF1931215": {
+      "productType": "Dvostruka membranska pumpa",
+      "shortDescription": "Snažna dvostruka membranska pumpa za neprekidnu obradu većih količina materijala, u lakiranju vozila i industriji, mašinogradnji i lakiranju drveta i nameštaja.",
+      "purpose": "Neprekidan dovod većih količina materijala",
+      "sourceHash": "4122cff64fcdde62"
+    },
+    "CF1931220": {
+      "productType": "Posuda pod pritiskom",
+      "shortDescription": "Posuda pod pritiskom za materijale do dva litra. Ravnomeran dovod materijala bez pulsacija omogućava neprekidan rad.",
+      "purpose": "Dovod materijala pod pritiskom za manje količine",
+      "sourceHash": "dcab626bfc4267d7"
+    },
+    "CF1931221": {
+      "productType": "Sistem za nanošenje sredstva za odvajanje",
+      "shortDescription": "Komplet za nanošenje sredstva za odvajanje: rezervoar pod pritiskom, dvostruki reduktor pritiska, SATAminijet 1000 K pištolj i par creva.",
+      "purpose": "Nanošenje sredstava za odvajanje",
+      "sourceHash": "ca40818bae9e3fe7"
+    },
+    "CF1931282": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "PHASER je razvijen za posebne projekte, sa dizajnom nastalim u saradnji sa Porsche Design Studio. Tehnički je identičan modelu SATAjet X 5500 i ima isti koncept mlaznica.",
+      "purpose": "Nanošenje baznih boja i lakova u auto-reparaturi",
+      "sourceHash": "6f5bb1b33fd4dd67"
+    },
+    "CF1931293": {
+      "productType": "Filter komprimovanog vazduha",
+      "shortDescription": "Čist komprimovani vazduh za besprekornu površinu. Dostupna kao jednostepeni sinter filter sa odvajačem vode i ulja, dvostepeni kombinovani filter ili trostepena jedinica sa filterom od aktivnog uglja.",
+      "purpose": "Priprema komprimovanog vazduha u kabini za lakiranje",
+      "sourceHash": "3d02051ac90b4940"
+    },
+    "CF1931300": {
+      "productType": "Pištolj sa čašom pod pritiskom",
+      "shortDescription": "Razvijen posebno za nanošenje sredstava za zaštitu šupljina i voštane zaštite podvozja iz jednokratnih doza.",
+      "purpose": "Zaštita šupljina i podvozja",
+      "sourceHash": "31ec3ad51be049f7"
+    },
+    "CF1931301": {
+      "productType": "Pištolj sa čašom pod pritiskom",
+      "shortDescription": "Pištolj sa tri brzoizmenjive sonde za zaštitu šupljina u širokom rasponu primena. Precizno vođenje mlaza i potpuno metalna konstrukcija za dug radni vek.",
+      "purpose": "Zaštita šupljina",
+      "sourceHash": "a3d9795f957b4739"
+    },
+    "CF1931303": {
+      "productType": "Višekratna gravitaciona čaša",
+      "shortDescription": "Plastična gravitaciona čaša sa integrisanom zaštitom od kapanja za SATA pištolje, u tri zapremine. Original se prepoznaje po crvenom prstenu.",
+      "purpose": "Čaša za SATA gravitacione pištolje",
+      "sourceHash": "77f5d866e020d80e"
+    },
+    "CF1931304": {
+      "productType": "Višekratna gravitaciona čaša",
+      "shortDescription": "Aluminijumska gravitaciona čaša sa integrisanom zaštitom od kapanja za SATA pištolje, u tri zapremine.",
+      "purpose": "Čaša za SATA gravitacione pištolje",
+      "sourceHash": "8786e1bcdf1cf1cb"
+    },
+    "CF1931305": {
+      "productType": "Višekratna usisna čaša",
+      "shortDescription": "Fleksibilna višekratna plastična viseća čaša sa otpornom zaštitom od kapanja za SATA pištolje.",
+      "purpose": "Čaša za SATA pištolje sa usisnom čašom",
+      "sourceHash": "28c94fa996f7e1cd"
+    },
+    "CF1931306": {
+      "productType": "Višekratna usisna čaša",
+      "shortDescription": "Višekratna aluminijumska viseća čaša sa integrisanom zaštitom od kapanja za SATA pištolje.",
+      "purpose": "Čaša za SATA pištolje sa usisnom čašom",
+      "sourceHash": "bec6e32b6a9730c4"
+    },
+    "CF1931308": {
+      "productType": "Stalak sa pištoljima za sušenje",
+      "shortDescription": "Stalak za SATA dry jet 2 sa držačem podesivim po visini, sa pištoljima za sušenje ili bez njih. Pištolj za sušenje radi po Venturi principu i osetno skraćuje vreme otparavanja i zauzetosti kabine.",
+      "purpose": "Skraćenje vremena otparavanja u kabini",
+      "sourceHash": "b4abaa4d429668de"
+    },
+    "CF1931309": {
+      "productType": "Lampa dnevnog svetla",
+      "shortDescription": "Lampa dnevnog svetla širokog spektra koja verno prikazuje tonove boja. Ravnomerna raspodela svetla pomaže lakirnici da pronađe pravu nijansu i izbegne dodatni rad.",
+      "purpose": "Određivanje i provera nijanse",
+      "sourceHash": "f6d39c0a369a304a"
+    },
+    "CF1931313": {
+      "productType": "Mašina za pranje pištolja",
+      "shortDescription": "Automatska mašina za pranje pištolja sa mestom za ručno pranje i odsisom: pištolji se čiste temeljno, komforno i ekonomično.",
+      "purpose": "Čišćenje pištolja za lakiranje",
+      "sourceHash": "07585342bd0f13a4"
+    },
+    "CF1931315": {
+      "productType": "Visokopritisni spray mix pištolj",
+      "shortDescription": "Lagan pištolj za premazivanje pod veoma visokim pritiskom: izbalansirano telo, optimizovana ergonomija i fino usklađen izbor mlaznica.",
+      "purpose": "Premazivanje pod veoma visokim pritiskom",
+      "sourceHash": "a7ffb5af4d060983"
+    },
+    "CF1931319": {
+      "productType": "Univerzalni gravitacioni pištolj",
+      "shortDescription": "Izvedba modela SATAjet 1000 B namenjena završnoj obradi drveta.",
+      "purpose": "Završna obrada drveta",
+      "sourceHash": "1357dff651ef8651"
+    },
+    "CF1931327": {
+      "productType": "Zaštitno odelo za lakirere",
+      "shortDescription": "SATA suit race ladies, zaštitno odelo za lakirere od poliestera sa karbonskim vlaknima, u ženskom kroju i više veličina.",
+      "purpose": "Zaštita lakirera tokom rada",
+      "sourceHash": "45e0df1615faf3fe"
+    },
+    "CF1931331": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "Izvedba sa novorazvijenim setom mlaznica za bezbojni lak: optimizovana raspodela materijala i finija atomizacija daju zatvoren film i pri maloj debljini sloja.",
+      "purpose": "Nanošenje 1K i 2K bezbojnih lakova",
+      "sourceHash": "fa376c5ca464ec29"
+    },
+    "CF1931333": {
+      "productType": "Rezervoar za materijal pod pritiskom",
+      "shortDescription": "Rezervoar pod pritiskom za najrazličitije materijale, sa brojnim varijantama opreme.",
+      "purpose": "Dovod materijala pod pritiskom",
+      "sourceHash": "97a51c609db3dd21"
+    },
+    "CF1931334": {
+      "productType": "Rezervoar za materijal pod pritiskom",
+      "shortDescription": "Robustan rezervoar pod pritiskom od nerđajućeg čelika, za obradu različitih materijala bez pulsacija.",
+      "purpose": "Dovod materijala pod pritiskom",
+      "sourceHash": "fad142d369138dec"
+    },
+    "CF1931335": {
+      "productType": "Rezervoar za materijal pod pritiskom",
+      "shortDescription": "Rešenje za velike projekte: rezervoar pod pritiskom za obradu različitih materijala bez pulsacija.",
+      "purpose": "Dovod materijala pod pritiskom za velike količine",
+      "sourceHash": "3f07c5b6f98d0804"
+    },
+    "CF1931336": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "Napredna tehnologija mlaznica, digitalne funkcije i poboljšana ergonomija. Lavirintski sistem vođenja vazduha izvodi vazduh iz mlaznice bez turbulencija i pulsacija.",
+      "purpose": "Nanošenje baznih boja i lakova u auto-reparaturi",
+      "sourceHash": "22abe1f558b596c0"
+    },
+    "CF1931338": {
+      "productType": "Liner sistem čaša",
+      "shortDescription": "Prva SATA liner čaša, optimizovana za SATA pištolje: kao i RPS, staje na sve SATA pištolje bez adaptera. Povoljnije težište, lakše čišćenje i manja težina.",
+      "purpose": "Jednokratni liner sistem čaša za SATA pištolje",
+      "sourceHash": "8b039b7b7bc0eea9"
+    },
+    "CF1931339": {
+      "productType": "Filterska polumaska",
+      "shortDescription": "Najnovija generacija SATA filterske polumaske: mala težina, veće vidno polje i bolji komfor nošenja. Za kratkotrajne lakirerske radove.",
+      "purpose": "Zaštita disanja pri kratkotrajnim radovima",
+      "sourceHash": "d20408a1ef85b6e4"
+    },
+    "CF1931340": {
+      "productType": "Digitalni merač pritiska",
+      "shortDescription": "Digitalna jedinica sa najširim opsegom funkcija, za naknadnu ugradnju na jet X pištolj (osim BASIC). Podržava standardizovane i ponovljive rezultate lakiranja.",
+      "purpose": "Precizno podešavanje pritiska na jet X pištolju",
+      "sourceHash": "eabe56a04ff53b19"
+    },
+    "CF1931341": {
+      "productType": "Digitalni merač pritiska",
+      "shortDescription": "Kompaktna i intuitivna digitalna jedinica za jet X DIGITAL ready, ulaz u digitalni svet SATA lakiranja.",
+      "purpose": "Precizno podešavanje pritiska na jet X pištolju",
+      "sourceHash": "70427ae04e019c4e"
+    },
+    "CF1931342": {
+      "productType": "Digitalni merač pritiska",
+      "shortDescription": "Tačno podešen ulazni pritisak pištolja je jedan od ključnih uslova za pogođenu nijansu. SATA adam 2 meri pritisak na samom pištolju.",
+      "purpose": "Precizno podešavanje ulaznog pritiska pištolja",
+      "sourceHash": "1b638b0cc8934e9b"
+    },
+    "CF1931343": {
+      "productType": "Zaštitno odelo za lakirere",
+      "shortDescription": "Odelo razvijeno za rad u kabini za lakiranje: pouzdana zaštita od magle boje, sa kapuljačom i podesivom kragnom, krojeno za komfor i slobodu pokreta.",
+      "purpose": "Zaštita lakirera od magle boje",
+      "sourceHash": "0a1a9173a07bee4b"
+    },
+    "CF1931345": {
+      "productType": "Zaštitno odelo za lakirere",
+      "shortDescription": "Ulazni model SATA odela za lakirere, kvalitetne izrade, sa širokim elastičnim manžetnama na zglobovima i elastičnim porubom kapuljače.",
+      "purpose": "Zaštita lakirera tokom rada",
+      "sourceHash": "99f7a598810372c5"
+    },
+    "CF1931348": {
+      "productType": "Višenamenski sistem čaša",
+      "shortDescription": "RPS (Rapid Preparation System) ispunjava četiri funkcije: mešanje, lakiranje, dopunjavanje i čuvanje. Sastoji se od samo tri dela (čaša, poklopac, sito) i staje direktno na SATA pištolj sa QCC priključkom.",
+      "purpose": "Mešanje, lakiranje, dopunjavanje i čuvanje materijala",
+      "sourceHash": "10e95bab7c515f87"
+    },
+    "CF1931351": {
+      "displayName": "Mikrometar vazduha",
+      "productType": "Mikrometar vazduha",
+      "shortDescription": "SATA mikrometar vazduha za podešavanje vazduha na pištolju, u izvedbi sa manometrom i bez njega.",
+      "purpose": "Podešavanje pritiska vazduha na pištolju",
+      "sourceHash": "b7699efef330ba26"
+    },
+    "CF1931352": {
+      "displayName": "Manometar",
+      "productType": "Manometar",
+      "shortDescription": "SATA manometri za pištolje, filtere i sisteme za dovod materijala, i jedinica za kontrolu pritiska prskanja.",
+      "purpose": "Kontrola pritiska prskanja",
+      "sourceHash": "a960723d77d8a2bb"
+    },
+    "CF1931355": {
+      "productType": "Sistem za čišćenje pištolja",
+      "shortDescription": "Sistem na komprimovani vazduh za međučišćenje pištolja u kabini: jedna ili više promena boje zaredom uz veoma kratke prekide.",
+      "purpose": "Međučišćenje pištolja pri promeni boje",
+      "sourceHash": "3a23d39910b9150f"
+    },
+    "CF1931356": {
+      "productType": "Pištolj sa dovodom materijala pod pritiskom",
+      "shortDescription": "Novi SATA pištolj sa dovodom materijala pod pritiskom: celovito rešenje za besprekornu površinu u širokom rasponu primena, od funkcionalnih premaza do bezbojnog laka.",
+      "purpose": "Lakiranje velikih površina",
+      "sourceHash": "f26b63a0c2051a02"
+    },
+    "CF1931357": {
+      "displayName": "Kofer za pištolj za lakiranje",
+      "productType": "Kofer za pištolj za lakiranje",
+      "shortDescription": "SATA koferi za pištolje za lakiranje i penasti ulošci za njih, u više veličina.",
+      "purpose": "Čuvanje i transport pištolja",
+      "sourceHash": "f8d2b49659b94705"
+    },
+    "CF1931359": {
+      "productType": "Pištolj za sušenje",
+      "shortDescription": "Pištolj za sušenje koji osetno skraćuje vreme otparavanja i zauzetosti kabine. Radi po Venturi principu: uz dovedeni komprimovani vazduh usisava višestruku količinu okolnog vazduha.",
+      "purpose": "Skraćenje vremena otparavanja u kabini",
+      "sourceHash": "6d084ef55485b456"
+    },
+    "CF1931387": {
+      "productType": "Čaše za liner sistem",
+      "shortDescription": "Hard Cups, čvrste čaše za SATA LCS liner sistem.",
+      "purpose": "LCS liner sistem čaša",
+      "sourceHash": "dd90f28443fc8c39"
+    },
+    "CF1931392": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "jet X u izdanju Clearcoat Edition: napredna tehnologija mlaznica, digitalne funkcije i poboljšana ergonomija.",
+      "purpose": "Nanošenje bezbojnih lakova",
+      "sourceHash": "cfe1f1f672ad371b"
+    },
+    "CF1931393": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "jet X u izdanju Basecoat Edition: napredna tehnologija mlaznica, digitalne funkcije i poboljšana ergonomija.",
+      "purpose": "Nanošenje baznih boja",
+      "sourceHash": "7fe167121e31480b"
+    },
+    "CF1931394": {
+      "productType": "Gravitacioni pištolj za lakiranje",
+      "shortDescription": "jet X u ograničenom izdanju by Stilbruch: napredna tehnologija mlaznica, digitalne funkcije i poboljšana ergonomija.",
+      "purpose": "Nanošenje baznih boja i lakova u auto-reparaturi",
+      "sourceHash": "7795aab404526b39"
+    }
+  }
+}

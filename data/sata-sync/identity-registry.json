@@ -1,0 +1,336 @@
+{
+  "products": {
+    "sata-adam-2": {
+      "familyId": "CF1931342",
+      "parentId": "3ff10b535e07f1e0960f53a1501ede83",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-adam-x": {
+      "familyId": "CF1931341",
+      "parentId": "b8903792d9b17c641fd3da2ebdf8eafd",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-adam-x-pro": {
+      "familyId": "CF1931340",
+      "parentId": "26d0e2039d8c8cf50c772d24db4f29bf",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-air-star-c": {
+      "familyId": "CF1931124",
+      "parentId": "b0af5c1455394a57dd54f402e8448f27",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-air-star-f": {
+      "familyId": "CF1931125",
+      "parentId": "cc30552a90f9cdc2786820c273fe97dd",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-air-star-f-2-0": {
+      "familyId": "CF1931339",
+      "parentId": null,
+      "firstSeen": "2026-09-20"
+    },
+    "sata-air-vision-5000": {
+      "familyId": "CF1931121",
+      "parentId": "74da3a3a103ef1329cb82d9a1df6d4c4",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-clean-rcs": {
+      "familyId": "CF1931355",
+      "parentId": "ee6d44dc24de57b21dd4c42ce7ad4639",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-dry-jet-2": {
+      "familyId": "CF1931359",
+      "parentId": "cacf7ae300ce1677b68f749ef1b2438a",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-dry-jet-stativ": {
+      "familyId": "CF1931308",
+      "parentId": "e32557732bc36f8dc40a23e2638e51d5",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-filter-500-series": {
+      "familyId": "CF1931293",
+      "parentId": "639722a77f330db5bc65aee28a76daf0",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-filter-series-100": {
+      "familyId": "CF1931127",
+      "parentId": "ea9ebcf072973ccc426187d43d7ddf7d",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-filter-series-200": {
+      "familyId": "CF1931128",
+      "parentId": "81ccdea7f81a0b659603c64bb5cdc46a",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-filter-series-400": {
+      "familyId": "CF1931129",
+      "parentId": "98f7646613a974202b94f55082b23326",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-hku": {
+      "familyId": "CF1931211",
+      "parentId": "71eb7dd1dab644c65ab7975f9e783672",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-hrs": {
+      "familyId": "CF1931301",
+      "parentId": "7ec1c1cf66f9ef105e54f5ed19d83421",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-hrs-e": {
+      "familyId": "CF1931300",
+      "parentId": "f4ef582f317a2d464d4a9b27f1a9e5bd",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-jet-k": {
+      "familyId": "CF1931356",
+      "parentId": "927551445f863089bcb2e4e2da60dccc",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-jet-x": {
+      "familyId": "CF1931336",
+      "parentId": "c0bdf392f337ea9147943208e6364025",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-jet-x-basecoat-edition": {
+      "familyId": "CF1931393",
+      "parentId": "2274ee621bbdb749e75c4d61db2ac9db",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-jet-x-by-stilbruch-edition": {
+      "familyId": "CF1931394",
+      "parentId": "844b57b1b8bba1ad894b7c0ca3871306",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-jet-x-clearcoat-edition": {
+      "familyId": "CF1931392",
+      "parentId": "3451b56c532a3a4376aa50bc24264376",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-lackierpistolenkoffer": {
+      "familyId": "CF1931357",
+      "parentId": "89ae8aeb6668dffc29aca0ef5e77a2ee",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-lcs-hard-cups": {
+      "familyId": "CF1931387",
+      "parentId": "1d77b5735e6433302c3422d8b972cdf9",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-lcs-the-liner": {
+      "familyId": "CF1931338",
+      "parentId": "a64df46055a9af6bfcd634490f457e2c",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-luftmikrometer": {
+      "familyId": "CF1931351",
+      "parentId": "dee91e23af70c5a92bc8a35714aa4621",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-manometer": {
+      "familyId": "CF1931352",
+      "parentId": "9e55738efa0150e6699c149c1ac3070d",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-material-pressure-tank-10": {
+      "familyId": "CF1931333",
+      "parentId": "8c007ef56d956e89016feab79ab55bea",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-material-pressure-tank-22": {
+      "familyId": "CF1931334",
+      "parentId": "4a0ea4ce9788803080f7f8a8b214150f",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-material-pressure-tank-45": {
+      "familyId": "CF1931335",
+      "parentId": "48c24ebc76681595fd7f9964d6f0ac3e",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-mini-set-2": {
+      "familyId": "CF1931220",
+      "parentId": "776c5cce10482183bdd19e8c940dd87b",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-multi-clean-2": {
+      "familyId": "CF1931313",
+      "parentId": "470ca9519a84ea887a6c3293bb6ac161",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-release-agent-spray-system": {
+      "familyId": "CF1931221",
+      "parentId": "29dd916c8de02cd38d6ac213377c6e1a",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-reusable-aluminium-flow-cup": {
+      "familyId": "CF1931304",
+      "parentId": "7ff1ba7ede944d07283d03154a425a8a",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-reusable-aluminium-hanging-cups": {
+      "familyId": "CF1931306",
+      "parentId": "d5be673ed958dad62a593427bc42c77b",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-reusable-plastic-flow-cup": {
+      "familyId": "CF1931303",
+      "parentId": "9a059f26c0be2f0642a254c4ec9cd415",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-reusable-plastic-hanging-cups": {
+      "familyId": "CF1931305",
+      "parentId": "f516d8c84db82357ee72946d2a91697b",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-rps-the-original": {
+      "familyId": "CF1931348",
+      "parentId": "f0371b5a061b75fc35f0ccb7a36e9053",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-spray-master-rp": {
+      "familyId": "CF1931087",
+      "parentId": "3064f62bd19c31749895d8a0c0be5f73",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-suit-basic": {
+      "familyId": "CF1931345",
+      "parentId": "24c98bb58410671b31e39b0891c683fd",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-suit-race": {
+      "familyId": "CF1931204",
+      "parentId": "f78fd7fd2446234e78a41631cd7054b9",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-suit-race-ladies": {
+      "familyId": "CF1931327",
+      "parentId": "29a989c4b20f4ab7bb3834ba8fec92c8",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-suit-standard-men": {
+      "familyId": "CF1931343",
+      "parentId": "4fa9d39845e7b9711fa6dce44f75c1fd",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-truesun": {
+      "familyId": "CF1931309",
+      "parentId": "4e4a6e1c8e386a0880abdcd25c155c86",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-vario-top-spray": {
+      "familyId": "CF1931215",
+      "parentId": "ce978ed9af4ea2d5b01c070bc60884ab",
+      "firstSeen": "2026-09-20"
+    },
+    "sata-vision-2000": {
+      "familyId": "CF1931122",
+      "parentId": "e1723a25565a1ba836de1d5698327e3b",
+      "firstSeen": "2026-09-20"
+    },
+    "satagraph-4": {
+      "familyId": "CF1931100",
+      "parentId": "72da04ec63d66a3fe6e28d3f99fc081e",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-100-b": {
+      "familyId": "CF1931082",
+      "parentId": "f9c5296a5dcb3d64d18480d948ab6473",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-1000-b": {
+      "familyId": "CF1931080",
+      "parentId": "f95361bbcb199fbdbab8d614983f2dd2",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-1000-b-lignum-3": {
+      "familyId": "CF1931319",
+      "parentId": "566ce6097a413545e609e4629e0830a3",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-1000-h": {
+      "familyId": "CF1931090",
+      "parentId": "7f5faa6bb09305dbba979d04f6d3d8e9",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-1000-k": {
+      "familyId": "CF1931098",
+      "parentId": "7e28a5db7f70d50a6cb11d9822ae26ce",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-1000-kk": {
+      "familyId": "CF1931097",
+      "parentId": "3b5b62786ea89ecc9df850d81aed38b5",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-1500-b": {
+      "familyId": "CF1931079",
+      "parentId": "cb942e6486e044caa4b0f9a59faf34bd",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-20-b": {
+      "familyId": "CF1931083",
+      "parentId": "a8f575848c6c6083ae9fe2971cc092cb",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-3000-b": {
+      "familyId": "CF1931078",
+      "parentId": null,
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-3000-k": {
+      "familyId": "CF1931096",
+      "parentId": "38381a996cce5dc76cc6132c2fcb4c04",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-3000-k-spray-mix": {
+      "familyId": "CF1931095",
+      "parentId": "334830a89bcb7496d6b4bc452e240631",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-5000-b": {
+      "familyId": "CF1931074",
+      "parentId": "d599db7be4db3586552249ce32e77f8f",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-h": {
+      "familyId": "CF1931091",
+      "parentId": "a7de9e54526e445f5d0c1509b24ac0db",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-k-1800-spray-mix": {
+      "familyId": "CF1931315",
+      "parentId": "14aa2c9e74a12f337a4210c0c06d7b53",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-x-5500-clear-coat-edition": {
+      "familyId": "CF1931331",
+      "parentId": "037294dac32257ff979804fe4d47f233",
+      "firstSeen": "2026-09-20"
+    },
+    "satajet-x-5500-phaser": {
+      "familyId": "CF1931282",
+      "parentId": "6524694e4155db926d94bf8924602b71",
+      "firstSeen": "2026-09-20"
+    },
+    "sataminijet-1000-k": {
+      "familyId": "CF1931099",
+      "parentId": "3de00f26d0fdc09b714c0fca242b1dc9",
+      "firstSeen": "2026-09-20"
+    },
+    "sataminijet-4400-b": {
+      "familyId": "CF1931085",
+      "parentId": "e3d52a002ba8d359828dd1fd9a44e906",
+      "firstSeen": "2026-09-20"
+    }
+  },
+  "enriched": {
+    "satajet-x-5500": {
+      "familyId": "CF1931072",
+      "parentId": "7620f47ab50b2fa1c16e9c4e6959b87b",
+      "owner": "lib/carsystem-data.ts (ručni zapis)"
+    }
+  }
+}

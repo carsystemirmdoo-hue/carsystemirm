@@ -1,0 +1,43 @@
+{
+  "_comment": [
+    "PREDLOG (revizija, nije primenjen): zvanična SATA kategorija → postojeća taksonomija sajta. Bez novih top-level kategorija.",
+    "Ključ je kategorija u kojoj SATA listira porodicu na sata.com/en. `families` su izuzeci po zvaničnom CF identifikatoru porodice,",
+    "tamo gde je SATA kategorija („Additional products”) šira od naše. Ništa se ne mapira po sličnosti naziva.",
+    "`scope: false` = aktuelno kod proizvođača, ali predlog je da NE bude customer-facing kartica (odluka čeka odobrenje)."
+  ],
+  "categories": {
+    "spray-guns/gravity-flow-cup-spray-guns": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "spray-guns/pressure-fed-spray-guns": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "spray-guns/suction-cup-spray-guns": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "spray-guns/airbrush-guns": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "spray-guns/automatic-paint-spray-guns": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": false, "reason": "industrijski/robotski/laboratorijski program, nije auto-reparatura" },
+    "cup-systems/rps-cups": { "category": "pribor", "programSlug": "potrosni-materijal", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "cup-systems/lcs-cups": { "category": "pribor", "programSlug": "potrosni-materijal", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "cup-systems/gravity-flow-cups": { "category": "pribor", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "cup-systems/suspended-cups": { "category": "pribor", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "filter-technology": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "priprema", "visualType": "neutral", "scope": true },
+    "respiratory-protection/full-face-respirator": { "category": "zastita", "programSlug": "oprema", "phaseSlug": "priprema", "visualType": "neutral", "scope": true },
+    "respiratory-protection/half-mask-respirator": { "category": "zastita", "programSlug": "oprema", "phaseSlug": "priprema", "visualType": "neutral", "scope": true },
+    "all-products/additional-products": { "category": "oprema", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "all-products/accessories": { "category": "pribor", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": true },
+    "all-products/spare-parts": { "category": "pribor", "programSlug": "oprema", "phaseSlug": "boja", "visualType": "neutral", "scope": false, "reason": "rezervni delovi — interni katalog delova, ne customer-facing kartica" },
+    "all-products/merchandising-items": { "scope": false, "reason": "reklamni artikli — van asortimana sajta" }
+  },
+  "families": {
+    "CF1931392": { "category": "oprema", "programSlug": "oprema", "note": "jet X clearcoat Edition — pištolj; SATA ga listira samo na stranici LCS čaša jer se isporučuje sa LCS-om" },
+    "CF1931393": { "category": "oprema", "programSlug": "oprema", "note": "jet X basecoat Edition — isto" },
+    "CF1931394": { "category": "oprema", "programSlug": "oprema", "note": "jet X by Stilbruch Edition — isto" },
+    "CF1931204": { "category": "zastita", "note": "SATA suit race — zaštitno odelo" },
+    "CF1931327": { "category": "zastita", "note": "SATA suit race ladies" },
+    "CF1931343": { "category": "zastita", "note": "SATA suit Standard Men (alias CF1931344 Ladies je isti Shopware parent)" },
+    "CF1931345": { "category": "zastita", "note": "SATA suit Basic" },
+    "CF1931313": { "category": "radionica", "note": "SATA multi clean 2 — mašina za pranje pištolja" },
+    "CF1931355": { "category": "radionica", "note": "SATA clean RCS — čišćenje pištolja" },
+    "CF1931340": { "category": "pribor", "note": "adam X pro — digitalno merenje pritiska, dodatak pištolju" },
+    "CF1931341": { "category": "pribor", "note": "adam X" },
+    "CF1931342": { "category": "pribor", "note": "SATA adam 2" },
+    "CF1931351": { "category": "pribor", "note": "Luftmikrometer (naziv je na EN sajtu ostao na nemačkom)" },
+    "CF1931352": { "category": "pribor", "note": "Manometer" },
+    "CF1931357": { "category": "pribor", "note": "Lackierpistolenkoffer — kofer za pištolj (naziv na nemačkom)" }
+  }
+}

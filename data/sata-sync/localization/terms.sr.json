@@ -1,0 +1,183 @@
+{
+  "_comment": [
+    "Rečnik zvaničnih SATA termina (sata.com/en) → srpski. Brojevi i oznake (RP, HVLP, DIGITAL pro, 1,3, I (Control)) se NE prevode: prolaze doslovno.",
+    "Izvor na EN sajtu meša engleski i nemački („nicht vorhanden”, „Fahrwagen”), pa rečnik pokriva oba.",
+    "Etiketa koje nema u `labels` se ne prikazuje kao tehnička činjenica. Vrednost koju ni `values` ni `patterns` ne pokrivaju se kao činjenica izostavlja, a u redu varijante ostaje u zvaničnom obliku (i prijavljuje se u izveštaju).",
+    "`omitValues`: izvor kaže da podatka nema (k.A. = keine Angabe) — takva činjenica se ne prikazuje.",
+    "`sourceTermsUntranslated`: zvanična vrednost koja se NAMERNO ne prevodi (kod konfiguracije ili semantički nejasna). Ostaje u zvaničnom obliku, prijavljuje se kao SOURCE_TERM_UNTRANSLATED i svaka nova takva vrednost obara plan dok se ne odluči."
+  ],
+  "axes": {
+    "Nozzle Size": "Veličina mlaznice",
+    "Nozzle Technology": "Tehnologija",
+    "Nozzle type": "Tip mlaznice",
+    "Spray fan": "Oblik mlaza",
+    "Digital unit version": "Digitalna jedinica",
+    "Spraygun Cup System": "Čaša u kompletu",
+    "Air connection thread": "Priključak vazduha",
+    "Cup capacity": "Zapremina čaše",
+    "Cup connection type": "Priključak čaše",
+    "Cup variant": "Varijanta čaše",
+    "Clothing size": "Veličina",
+    "Agitator version": "Mešalica",
+    "Sieve mesh size": "Finoća sita",
+    "Sieve type": "Tip sita",
+    "Packaging unit": "Pakovanje",
+    "Suitable for UV coating": "Za UV premaze",
+    "Direction of flow": "Smer protoka",
+    "Installation variation": "Način ugradnje",
+    "Number of filter stages": "Stepeni filtracije",
+    "Suitability for breathing protection": "Za zaštitu disanja",
+    "Suitability for water-based systems": "Za vodorazredive sisteme",
+    "Power plug version": "Verzija utikača",
+    "Description": "Zvanični opis (EN)"
+  },
+  "labels": {
+    "Air connection thread": "Priključak vazduha",
+    "Air consumption": "Potrošnja vazduha",
+    "Recommended spraying distance": "Preporučeno rastojanje prskanja",
+    "Air inlet pressure field of application": "Ulazni pritisak vazduha, radni opseg",
+    "Recommended dynamic inlet air pressure (compliant / HVLP)": "Preporučeni dinamički ulazni pritisak (compliant / HVLP)",
+    "Max. recommended material inlet pressure (static)": "Maks. preporučeni ulazni pritisak materijala (statički)",
+    "Material connection thread": "Priključak materijala",
+    "Cup capacity": "Zapremina čaše",
+    "Cup connection type": "Priključak čaše",
+    "Max. air flow": "Maks. protok vazduha",
+    "Max. air outlet pressure": "Maks. izlazni pritisak vazduha",
+    "Max. inlet air pressure": "Maks. ulazni pritisak vazduha",
+    "Number of filter stages": "Broj stepeni filtracije",
+    "Thread connection inlet side": "Navoj na ulazu",
+    "Thread connection outlet side": "Navoj na izlazu",
+    "Suitability for breathing protection": "Pogodno za zaštitu disanja",
+    "Suitability for water-based systems": "Pogodno za vodorazredive sisteme",
+    "Suitable for UV coating": "Pogodno za UV premaze",
+    "Sieve mesh size": "Finoća sita",
+    "Max. volumetric delivery": "Maks. protok materijala",
+    "Pump ratio": "Prenosni odnos pumpe",
+    "Max. operating pressure": "Maks. radni pritisak",
+    "Noise level": "Nivo buke",
+    "Installation type": "Tip montaže",
+    "Place of installation": "Mesto ugradnje",
+    "Color": "Boja"
+  },
+  "omitValues": [
+    "k.A.",
+    "k.A. °C",
+    "variabel cm",
+    "variabel bar",
+    "variabel Nl/min",
+    "nicht vorhanden"
+  ],
+  "values": {
+    "Standard": "Standard",
+    "Yes": "Da",
+    "No": "Ne",
+    "no cup": "bez čaše",
+    "with swivel joint": "sa obrtnim zglobom",
+    "without swivel joint": "bez obrtnog zgloba",
+    "Plastic": "plastika",
+    "Aluminium": "aluminijum",
+    "Integrated": "integrisana",
+    "Expandable": "proširivo",
+    "Reusable cup": "višekratna čaša",
+    "Round beam": "okrugli mlaz",
+    "Nipple": "nipl",
+    "Stainless steel version": "izvedba od nerđajućeg čelika",
+    "standard wall mounting": "standardna zidna montaža",
+    "Pipeline installation": "ugradnja u cevovod",
+    "outside the spray booth": "van kabine za lakiranje",
+    "Manual agitator": "ručna mešalica",
+    "Wandmontage": "zidna montaža",
+    "Fahrwagen": "kolica",
+    "Standfuß": "stopa",
+    "Druckluftrührwerk mit Getriebe": "pneumatska mešalica sa reduktorom",
+    "Motor driven agitator with gear drive": "motorna mešalica sa reduktorom",
+    "ohne Düsensatz": "bez seta mlaznica",
+    "Schwarz / grau / rot": "crna / siva / crvena",
+    "hellgrau / dunkelgrau": "svetlosiva / tamnosiva",
+    "left": "levo",
+    "right": "desno",
+    "left + right": "levo + desno",
+    "Portable stand": "prenosivi stalak",
+    "Trolley": "kolica",
+    "Flat sieve": "ravno sito",
+    "Plug-in sieve": "utično sito"
+  },
+  "patterns": [
+    {
+      "match": "\\(male thread\\)",
+      "replace": "(spoljni navoj)"
+    },
+    {
+      "match": "\\(female thread\\)",
+      "replace": "(unutrašnji navoj)"
+    },
+    {
+      "match": "\\bfemale thread\\b",
+      "replace": "unutrašnji navoj"
+    },
+    {
+      "match": "\\bmale thread\\b",
+      "replace": "spoljni navoj"
+    },
+    {
+      "match": "^Reusable pla(?:s)?tic cup\\b",
+      "replace": "višekratna plastična čaša"
+    },
+    {
+      "match": "^Aluminium reusable cup\\b",
+      "replace": "višekratna aluminijumska čaša"
+    },
+    {
+      "match": "^Aluminium suction cup\\b",
+      "replace": "aluminijumska usisna čaša"
+    },
+    {
+      "match": "^RPS Becher Set\\b",
+      "replace": "RPS set čaša"
+    },
+    {
+      "match": "^RPS UV Set\\b",
+      "replace": "RPS UV set čaša"
+    },
+    {
+      "match": "\\bglass cup\\b",
+      "replace": "staklena čaša"
+    },
+    {
+      "match": "^Plastic\\b",
+      "replace": "plastika"
+    },
+    {
+      "match": "^QCC \\+ Außengewinde\\b",
+      "replace": "QCC + spoljni navoj"
+    },
+    {
+      "match": "\\bPieces\\b",
+      "replace": "kom."
+    },
+    {
+      "match": "^Metal gravity flow cup\\b",
+      "replace": "metalna gravitaciona čaša"
+    },
+    {
+      "match": "^Metal suction cup\\b",
+      "replace": "metalna usisna čaša"
+    },
+    {
+      "match": "^RPS Multi-Purpose Cup\\b",
+      "replace": "RPS višenamenska čaša"
+    },
+    {
+      "match": "^Druckbecher\\b",
+      "replace": "čaša pod pritiskom"
+    }
+  ],
+  "sourceTermsUntranslated": {
+    "- 55 SK": "CONFIGURATION_CODE — oznaka mlaznice (SATAjet 1000 K RP 2.5 / 3.0); kod se ne prevodi.",
+    "- 79 SK": "CONFIGURATION_CODE — oznaka mlaznice (SATAjet 1000 K RP 4.0); kod se ne prevodi.",
+    "DA Druck": "SEMANTICALLY_AMBIGUOUS — „DA” je kod tipa mlaznice, a „Druck” može značiti izvedbu za čašu pod pritiskom ili samu mlaznicu; zvanični EN naziv artikla (214320) kaže samo „DA pressurised cup spray gun”. Ostaje zvanična vrednost."
+  },
+  "knownTokens": [
+    "BVD"
+  ]
+}

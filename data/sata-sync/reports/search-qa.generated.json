@@ -1,0 +1,160 @@
+{
+  "scope": "SATA EMEA REFINISH FAMILY SCOPE",
+  "articleNumberQueries": 655,
+  "articleNumberFirstResult": 655,
+  "namedQueries": [
+    {
+      "kind": "postojeći naziv",
+      "query": "SATAjet X 5500",
+      "familyId": "CF1931072",
+      "want": "satajet-x-5500",
+      "top": "satajet-x-5500",
+      "ok": true
+    },
+    {
+      "kind": "postojeći naziv (malim slovima)",
+      "query": "satajet x 5500",
+      "familyId": "CF1931072",
+      "want": "satajet-x-5500",
+      "top": "satajet-x-5500",
+      "ok": true
+    },
+    {
+      "kind": "stara lokalna oznaka (legacy alias)",
+      "query": "SATA-X5500",
+      "familyId": "CF1931072",
+      "want": "satajet-x-5500",
+      "top": "satajet-x-5500",
+      "ok": true
+    },
+    {
+      "kind": "zvanični identifikator porodice",
+      "query": "CF1931072",
+      "familyId": "CF1931072",
+      "want": "satajet-x-5500",
+      "top": "satajet-x-5500",
+      "ok": true
+    },
+    {
+      "kind": "zvanična neprevedena vrednost ose",
+      "query": "Druckbecher BVD",
+      "familyId": "CF1931080",
+      "want": "satajet-1000-b",
+      "top": "satajet-1000-b",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "jet X",
+      "familyId": "CF1931336",
+      "want": "sata-jet-x",
+      "top": "sata-jet-x",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "SATAjet 5000 B",
+      "familyId": "CF1931074",
+      "want": "satajet-5000-b",
+      "top": "satajet-5000-b",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "SATAminijet 4400 B",
+      "familyId": "CF1931085",
+      "want": "sataminijet-4400-b",
+      "top": "sataminijet-4400-b",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "adam X pro",
+      "familyId": "CF1931340",
+      "want": "sata-adam-x-pro",
+      "top": "sata-adam-x-pro",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "air vision 5000",
+      "familyId": "CF1931121",
+      "want": "sata-air-vision-5000",
+      "top": "sata-air-vision-5000",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "SATA multi clean 2",
+      "familyId": "CF1931313",
+      "want": "sata-multi-clean-2",
+      "top": "sata-multi-clean-2",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "RPS the Original",
+      "familyId": "CF1931348",
+      "want": "sata-rps-the-original",
+      "top": "sata-rps-the-original",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "SATA filter 500 series",
+      "familyId": "CF1931293",
+      "want": "sata-filter-500-series",
+      "top": "sata-filter-500-series",
+      "ok": true
+    },
+    {
+      "kind": "naziv porodice",
+      "query": "SATA suit Basic",
+      "familyId": "CF1931345",
+      "want": "sata-suit-basic",
+      "top": "sata-suit-basic",
+      "ok": true
+    },
+    {
+      "kind": "nemački zvanični naziv",
+      "query": "Luftmikrometer",
+      "familyId": "CF1931351",
+      "want": "sata-luftmikrometer",
+      "top": "sata-luftmikrometer",
+      "ok": true
+    },
+    {
+      "kind": "srpski prikaz",
+      "query": "mikrometar vazduha",
+      "familyId": "CF1931351",
+      "want": "sata-luftmikrometer",
+      "top": "sata-luftmikrometer",
+      "ok": true
+    },
+    {
+      "kind": "nemački zvanični naziv",
+      "query": "Lackierpistolenkoffer",
+      "familyId": "CF1931357",
+      "want": "sata-lackierpistolenkoffer",
+      "top": "sata-lackierpistolenkoffer",
+      "ok": true
+    },
+    {
+      "kind": "zvanični identifikator porodice",
+      "query": "CF1931336",
+      "familyId": "CF1931336",
+      "want": "sata-jet-x",
+      "top": "sata-jet-x",
+      "ok": true
+    },
+    {
+      "kind": "alias porodice",
+      "query": "CF1931344",
+      "familyId": "CF1931343",
+      "want": "sata-suit-standard-men",
+      "top": "sata-suit-standard-men",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

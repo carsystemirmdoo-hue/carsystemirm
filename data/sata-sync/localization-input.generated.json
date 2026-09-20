@@ -1,0 +1,1251 @@
+{
+  "CF1931072": {
+    "sourceHash": "3b726745112c9da7",
+    "officialName": "SATAjet X 5500",
+    "tagline": "Economical. Quiet. Revolutionary X-jet system.",
+    "officialDescription": "The SATAjet X 5500 is the SATA paint spray gun for highest demands. With the X nozzle system, painters are able to cope with all paint systems and application recommendations. In addition, the whispering nozzle significantly reduces noise and gives bodyshops a more pleasant painting experience.",
+    "defaultArticleName": "SATAjet X 5500",
+    "articleNames": [
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.1 I RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.2 I RPS D (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3 I RPS D (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.4 I RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.1 O RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.2 O RPS D (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3 O RPS D (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.4 O RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.1 I RPS D DIGI bar, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.2 I RPS D DIGI bar (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3 I RPS D DIGI bar (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.4 I RPS D DIGI bar, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.1 O RPS D DIGI bar, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.2 O RPS D DIGI bar (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3 O RPS D DIGI bar (internal no.), suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.4 O RPS D DIGI bar, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.2 I RPS D DIGI bar (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.3 I RPS D (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.1 I RPS D, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.2 I RPS D (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.4 I RPS D, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.5 I RPS D, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.1 O RPS D, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.2 O RPS D (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.3 O RPS D (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.4 O RPS D, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.5 O RPS D, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.1 I RPS D DIGI bar, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.3 I RPS D DIGI bar (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.4 I RPS D DIGI bar, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.5 I RPS D DIGI bar, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.1 O RPS D DIGI bar, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.2 O RPS D DIGI bar (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.3 O RPS D DIGI bar (internal no.), suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.4 O RPS D DIGI bar, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP 1.5 O RPS D DIGI bar, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.5 I RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.6 I RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.5 O RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.6 O RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.8 I RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.8 O RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 10/40 RPS D, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 10/40 RPS D DIGI bar, suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931074": {
+    "sourceHash": "a980f98c0bb53582",
+    "officialName": "SATAjet 5000 B",
+    "tagline": null,
+    "officialDescription": "With the SATAjet 5000 B, painters can adjust the inlet pressure and the painting distance according to the paint used, the climatic conditions and their working style – and achieve perfect results in any situation. The ergonomic paint spray gun has been developed in cooperation with the Porsche Design Studio – to ensure perfect ergonomics. Robust and light – with ergonomic adjustment elements, the SATAjet 5000 B ensures comfortable working.",
+    "defaultArticleName": "SATAjet 5000 B RP nozzle 1.0 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+    "articleNames": [
+      "SATAjet 5000 B RP nozzle 1.2 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.2 W RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.3 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.4 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.6 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.8 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 2.0 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x) swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.2 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle WSB RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.3, RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.4, RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.5 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.0 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.7 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 1.9 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B HVLP nozzle 2.2 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.1 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.3 cc RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 1.0 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint",
+      "SATAjet 5000 B RP nozzle 2.5 RPS multi-purpose cup 0.3 l / 0.6 l / 0.9 l (each 1x), swivel joint"
+    ]
+  },
+  "CF1931078": {
+    "sourceHash": "7df2192d7ee84d16",
+    "officialName": "SATAjet 3000 B",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATAjet 3000 B RP blue nozzle 1.4 0.6 l QCC reusable plastic cup",
+    "articleNames": [
+      "SATAjet 3000 B RP blue nozzle 1.4 0.6 l QCC reusable plastic cup"
+    ]
+  },
+  "CF1931079": {
+    "sourceHash": "c1918d1462e50186",
+    "officialName": "SATAjet 1500 B",
+    "tagline": null,
+    "officialDescription": "The SATAjet 1500 B has been developed for the cost effective application of basecoats, clear coats and 2K solid topcoats in car refinishing. The compact nozzle spectrum and robust construction ensures excellent results quickly and easily.",
+    "defaultArticleName": "SATAjet 1500 B RP nozzle 1.3 0.6 l QCC reusable plastic cup",
+    "articleNames": [
+      "SATAjet 1500 B RP nozzle 1.3 0.6 l QCC reusable plastic cup",
+      "SATAjet 1500 B RP nozzle 1.4 0.6 l QCC reusable plastic cup",
+      "SATAjet 1500 B HVLP nozzle 1.3 0.6 l QCC reusable plastic cup",
+      "SATAjet 1500 B HVLP nozzle size 1.4, 0.6 l reusable QCC plastic cup"
+    ]
+  },
+  "CF1931080": {
+    "sourceHash": "dfb2f616ff399dde",
+    "officialName": "SATAjet 1000 B",
+    "tagline": null,
+    "officialDescription": "The SATAjet 1000 B gravity fed spray gun has been specifically developed for the LIC/Industrial/wood coatings markets. Thanks to the very wide range of nozzle set sizes, extensions and the possibility to equip with both a pressurized gravity cup or a gravity cup with a pneumatic stirrer almost all available coatings can be sprayed from low-viscosity wood stains and clearcoats to glues and other thixotropic materials.",
+    "defaultArticleName": "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.3 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.3 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.6 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.0 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.6 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.0 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.4 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.7 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.9 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 2.1 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.4 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.7 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.9 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 2.1 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.3 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.8 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.8 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 0.8 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.0 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.5 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 0.8 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.0 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.5 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 4.0 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 4.0 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "SATAjet 1000 B RP without nozzle set , with 0.6 l QCC reusable plastic cup",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 0.8 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.0 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.3 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.6 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.8 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.0 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.5 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 4.0 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.4 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.7 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.9 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 2.1 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.3 1.0 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 1.6 1.0 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 1.0 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP nozzle 1.4 1.0 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "SATAjet 1000 B RP nozzle 1.6 D twisted round spray 0.6 l QCC reusable plastic cup",
+      "SATAjet 1000 B RP nozzle 1.3 DA pressurised cup spray gun for dispersion glues, incl. SATA BVD add-on kit",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.5 HV 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 HV 0.6 L QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.5 HV 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 HV 0.75 L QCC reusable aluminium cup suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 2.5 HV 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP nozzle 3.0 HV 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931082": {
+    "sourceHash": "1a27d6512fe08a56",
+    "officialName": "SATAjet 100 B",
+    "tagline": null,
+    "officialDescription": "The SATAjet 100 B can be used for a wide range of applications due to its extreme flexibility in setting the atomisation pressure. Due to the wide spray fan and fine atomisation, fillers and primers can be applied in a continuous flow despite the higher material viscosity. This saves valuable working time due to less grinding effort.",
+    "defaultArticleName": "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.6 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+    "articleNames": [
+      "Premium spray putty gun for automotive refinishing SATAjet 100 B P 0.6 L reusable plastic cup suitable for 2K spray putty",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.6 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.8 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 2.0 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.7 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.9 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 2.1 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.6 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.8 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "SATAjet 100 B F RP nozzle 1.6 1.0 l QCC reusable aluminium cup",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.7 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.9 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "Premium spray putty gun for automotive refinishing SATAjet 100 B P 0.75 L reusable aluminium cup suitable for 2K spray putty",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.4 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.4 0.6 L reusable plastic cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 2.0 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.4 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 2.1 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "SATAjet 100 B nozzle P 1.0 l QCC reusable aluminium cup",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.4 0.75 L reusable aluminium cup suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.6 with 2x RPS disposable cups 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.8 with 2x RPS disposable cups 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.1 UV 0.75 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.4 with 2x RPS disposable cups 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.1 UV with 3x RPS 0.6 L UV suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.4 RPS suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.6 RPS suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 1.8 RPS suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F RP 2.0 0.3 L / 0.6 L / 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.4 RPS 0.3 L / 0.6 L / 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.7 RPS 0.3 L / 0.6 L / 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 1.9 RPS 0.3 L / 0.6 L / 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium filler spray gun for automotive refinishing SATAjet 100 B F HVLP 2.1 RPS 0.3 L / 0.6 L / 0.9 L suitable for water- and solvent-based primers and fillers",
+      "Premium polyester spray gun for automotive refinishing SATAjet 100 B P RPS set suitable for 2K polyester spray filler"
+    ]
+  },
+  "CF1931083": {
+    "sourceHash": "1a05b6f68713642c",
+    "officialName": "SATAjet 20 B",
+    "tagline": null,
+    "officialDescription": "The SATAjet 20 B has been designed for use in all areas of creative painting: For all kinds of artbrush applications including graphic design, automotive custom painting, model making, artwork and calligraphy – the results are simply outstanding.",
+    "defaultArticleName": "SATAjet 20 B nozzle 1.0 65 ml plastic cup",
+    "articleNames": [
+      "SATAjet 20 B nozzle 0.2 65 ml plastic cup",
+      "SATAjet 20 B nozzle 0.35 65 ml plastic cup",
+      "SATAjet 20 B nozzle 0.5 65 ml plastic cup",
+      "SATAjet 20 B nozzle 0.8 65 ml plastic cup",
+      "SATAjet 20 B nozzle 1.0 65 ml plastic cup",
+      "SATAjet 20 B nozzle 0.2 65 ml plastic cup, plug-in glass cup und 3 glass cup with closed lid",
+      "SATAjet 20 B nozzle 0.35 65 ml plastic cup, plug-in glass cup und 3 glass cup with closed lid",
+      "SATAjet 20 B nozzle 0.5 65 ml plastic cup, plug-in glass cup und 3 glass cup with closed lid",
+      "SATAjet 20 B nozzle 0.8 65 ml plastic cup, plug-in glass cup und 3 glass cup with closed lid",
+      "SATAjet 20 B nozzle 1.0 65 ml plastic cup, plug-in glass cup und 3 glass cup with closed lid",
+      "SATAjet 20 B design set 0.5 with accessories in case",
+      "SATAjet 20 B nozzle 0.2 fineline, 65 ml reusable plastic cup"
+    ]
+  },
+  "CF1931085": {
+    "sourceHash": "e0c3341b6d958df3",
+    "officialName": "SATAminijet 4400 B",
+    "tagline": null,
+    "officialDescription": "The SATAminijet 4400 B is perfectly suited for areas that are small or difficult to access. The special SR nozzles are suitable for small repairs (spot repair) on vehicles. All modern paint systems can be applied with this spray gun.",
+    "defaultArticleName": "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 1.2 SR 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 0.3 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 0.5 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 0.8 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 1.0 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 1.1 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 0.8 SR 125 cc QCC suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 1.0 SR 125 cc QCC suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 1.2 SR 125 cc QCC suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 1.4 SR 125 cc QCC suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 0.8 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 1.0 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 1.2 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B HVLP 1.4 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 0.8 SR 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 1.0 SR 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 1.2 SR 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B RP 1.4 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B RP 1.6 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 1.0 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 1.2 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B RP 1.4 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "SATA design set with SATAminijet 4400 B HVLP 1.0",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B RP 0.5 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 0.8 SR 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B RP 0.5 125 cc QCC reusable plastic cup suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B RP 1.6 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 0.3 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 0.5 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 0.8 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 1.0 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for small-area applications in automotive finishes SATAminijet 4400 B HVLP 1.1 0.3 L RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 1.3 SR RPS suitable for water- and solvent-based paint systems",
+      "Premium spray gun for spot repairs in automotive finishes SATAminijet 4400 B RP 0.3 SR 0.3 L RPS suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931087": {
+    "sourceHash": "bba52975c32c97c2",
+    "officialName": "SATA spray master RP",
+    "tagline": null,
+    "officialDescription": "The SATA spray master RP combines trend-setting, low overspray high pressure technology with the advantageous properties of a material pressure supported spray gun. With this unique combination, almost all paint systems of different viscosities up to thick-film glazes can be processed with excellent painting results.",
+    "defaultArticleName": "SATA spray master RP SM 0.7 l pressurized cup, reduction valve",
+    "articleNames": [
+      "SATA spray master RP SM 0.7 l pressurized cup, reduction valve",
+      "SATA spray master RP, 1.7 mm, 0.7 l pressurised cup, reduct. valve",
+      "SATA spray master RP, 2.0 mm, 0.7 l pressurised cup, reduct. valve"
+    ]
+  },
+  "CF1931090": {
+    "sourceHash": "fd5c44079a97227f",
+    "officialName": "SATAjet 1000 H",
+    "tagline": null,
+    "officialDescription": "The SATAjet 1000 H RP is the all-round spray gun for craft and industry in the suction cup version.",
+    "defaultArticleName": "SATAjet 1000 H RP nozzle 1.3 1.0 l aluminium suction cup",
+    "articleNames": [
+      "SATAjet 1000 H RP nozzle 1.6 1.0 l aluminium suction cup",
+      "SATAjet 1000 H RP nozzle 1.8 1.0 l aluminium suction cup",
+      "SATAjet 1000 H RP nozzle 2.0 1.0 l aluminium suction cup",
+      "SATAjet 1000 H RP nozzle 1.3 1.0 l aluminium suction cup"
+    ]
+  },
+  "CF1931091": {
+    "sourceHash": "9fe86875b1b6994f",
+    "officialName": "SATAjet H",
+    "tagline": null,
+    "officialDescription": "This robust and easy-to-clean spray gun is ideal for top coats and can be used in both industry and trade.",
+    "defaultArticleName": "Siphon cup spray gun in high‑pressure technology SATAjet H 1.5 E1.0l Alu Suitable for the use of solvent‑based coating systems",
+    "articleNames": [
+      "Siphon cup spray gun in high‑pressure technology SATAjet H 1.5 E1.0l Alu Suitable for the use of solvent‑based coating systems",
+      "SATAjet H 2.0EH 1.0 l aluminium suction cup",
+      "Siphon cup spray gun in high‑pressure technology SATAjet H MSH 1.0l Alu Suitable for the use of solvent‑based coating systems"
+    ]
+  },
+  "CF1931095": {
+    "sourceHash": "d5c97de099f6aa81",
+    "officialName": "SATAjet 3000 K spray mix",
+    "tagline": null,
+    "officialDescription": "The SATAjet 3000 K spray mix is a high-pressure spray gun with supporting air atomisation, ideally suited for the application of large quantities of highly viscous materials.",
+    "defaultArticleName": "SATAjet 3000 K spray mix with paint tube, strainer 100 msh, without paint nozzle",
+    "articleNames": [
+      "SATAjet 3000 K spray mix with paint tube, strainer 100 msh, without paint nozzle",
+      "SATAjet 3000 K spray mix with paint tube, strainer 100 msh, inversion switch, without inversion nozzle"
+    ]
+  },
+  "CF1931096": {
+    "sourceHash": "9f1a5ba01828a464",
+    "officialName": "SATAjet 3000 K",
+    "tagline": null,
+    "officialDescription": "With this high-performance paint spray gun designed for use with remote tanks or pump systems you can achieve high-quality paint jobs on large surfaces. The stretched spray fan with finest material atomization results in a perfect surface quality with homogeneous paint flow. The robustness, the low maintenance requirements and the ergonomic balance of the SATAjet 3000 K are ideal prerequisites for continuous use in industry and trade.",
+    "defaultArticleName": "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 1.3 suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "SATAjet 3000 K HVLP nozzle 1.0 material connection 3/8\" (male thread)",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 0.8 suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 1.1 suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 1.3 suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 1.5 suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 1.7 suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 2.0 suitable for water- and solvent-based paint systems",
+      "SATAjet 3000 K HVLP nozzle 0.8 material connection 3/8\" (male thread)",
+      "SATAjet 3000 K HVLP nozzle 1.2 material connection 3/8\" (male thread)",
+      "SATAjet 3000 K HVLP nozzle 1.6 material connection 3/8\" (male thread)",
+      "SATAjet 3000 K HVLP nozzle 2.0 material connection 3/8\" (male thread)",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 2.0 with lifetime‑prolonging surface suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes SATAjet 3000 K RP 1.1 with lifetime‑prolonging surface suitable for water- and solvent-based paint systems",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 1.3 with lifetime‑prolonging surface suitable for water- and solvent-based paint systems",
+      "SATAjet 3000 K HVLP nozzle 1.4 material connection 3/8\" (male thread)",
+      "Premium spray gun for large-area applications in automotive finishes finishes SATAjet 3000 K RP 0.8 IA material pressure 10 bar / 145 psi suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931097": {
+    "sourceHash": "a0d78a0c38c97b43",
+    "officialName": "SATAjet 1000 KK",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATAjet 1000 KK RP nozzle 1.5 with paint tube, 1/4\" (male thread) with coupling (Art.-No. 8359)",
+    "articleNames": [
+      "SATAjet 1000 KK RP nozzle 1.5 with paint tube, 1/4\" (male thread) with coupling (Art.-No. 8359)"
+    ]
+  },
+  "CF1931098": {
+    "sourceHash": "cb6b30e145389474",
+    "officialName": "SATAjet 1000 K",
+    "tagline": null,
+    "officialDescription": "The compact and lightweight SATAjet 1000 K is the all-rounder among spray guns with material supply from pressure tanks or via double diaphragm pumps. Thanks to the wide range of nozzles, a wide variety of materials such as low-viscosity wood stains, clear coats, textured coats and glazes as well as adhesives and other high-viscosity materials can be excellently processed with this gun.",
+    "defaultArticleName": "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 1.3 suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 0.8 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 1.1 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 1.3 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 1.5 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 1.7 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 2.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 0.8 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.2 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.6 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 2.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 0.8 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 1.1 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 1.3 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 1.5 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 1.7 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 2.0 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 0.8 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.0 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.2 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.6 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 2.0 with lifetime-prolonging surface suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 2.5 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP standard nozzle 3.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 4.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 2.5 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 3.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 4.0 suitable for water- and solvent-based paint systems",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP without nozzle set suitable for water- and solvent-based paint systems",
+      "SATAjet 1000 K RP nozzle 1.6 D twisted round spray, material connection 3/8\" (male thread)",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K HVLP 1.4 suitable for water- and solvent-based paint systems",
+      "SATAjet 1000 K RP IP nozzle 1.3 material connection 3/8\" (male thread)",
+      "Universal spray gun for large-area applications for painters, carpenters or industrial use SATAjet 1000 K RP 1.3 DA for dispersion adhesives suitable for water- and solvent-based paint systems",
+      "SATAjet 1000 K RP nozzle 1.3 DA-R, round fan, for dispersion glues, without control elements"
+    ]
+  },
+  "CF1931099": {
+    "sourceHash": "dde622c422add091",
+    "officialName": "SATAminijet 1000 K",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATAminijet 1000 K RP nozzle 1.0 material connection 1/4\" (male thread)",
+    "articleNames": [
+      "SATAminijet 1000 K RP nozzle 0.3 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K RP nozzle 0.5 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K RP nozzle 0.8 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K RP nozzle 1.0 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K RP nozzle 1.2 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K HVLP nozzle 0.3 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K HVLP nozzle 0.5 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K HVLP nozzle 0.8 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K HVLP nozzle 1.0 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K HVLP nozzle 1.2 material connection 1/4\" (male thread)",
+      "SATAminijet 1000 K RP nozzle 1.4 material connection 1/4\" (male thread)"
+    ]
+  },
+  "CF1931100": {
+    "sourceHash": "7e06a786c479b6c6",
+    "officialName": "SATAgraph 4",
+    "tagline": null,
+    "officialDescription": "The SATA airbrush gun: The SATAgraph 4 is particularly suitable for drawing fine dots as well as filigree lines and contours. It is available in different versions, versatile and easy to use.",
+    "defaultArticleName": "SATAgraph 4 nozzle 0.5 with 7 ml standard cup",
+    "articleNames": [
+      "SATAgraph 4 nozzle 0.5 with 7 ml standard cup",
+      "SATAgraph 4 nozzle 0.5 with 7 ml side cup",
+      "SATAgraph 4 nozzle 0.5 with 6 ml suction cup"
+    ]
+  },
+  "CF1931121": {
+    "sourceHash": "2afe764bf6c59c71",
+    "officialName": "SATA air vision 5000",
+    "tagline": null,
+    "officialDescription": "The SATA air vision 5000 n offers a completely redesigned way of supplied air respiratory protection. The respiratory hood not only ensures high breathing air quality but also a low noise level. The modern, ergonomic design fits with almost any head shape and can be individually adjusted in size, height and position.",
+    "defaultArticleName": "SATA air vision 5000 n hood",
+    "articleNames": [
+      "SATA air vision 5000 n set Version without activated carbon adsorber",
+      "SATA air vision 5000 n carbon set Version with activated carbon adsorber",
+      "SATA air vision 5000 n hood"
+    ]
+  },
+  "CF1931122": {
+    "sourceHash": "dc0ff95ce963b118",
+    "officialName": "SATA vision 2000",
+    "tagline": null,
+    "officialDescription": "This full hood is specifically designed to meet the requirements of painters and protects the respiratory system, eyes, skin and hair. In addition, it offers a high wearing comfort and optimum hygiene. The hood with hygienic hood insert, replaceable sweatband and acoustic warning device is available as a set. This includes a belt unit – optionally with activated carbon adsorber and air flow regulation and display or a T-piece with an air flow regulation.",
+    "defaultArticleName": "SATA breathing protection kit: SATA vision 2000 n and belt unit with T-piece and air control valve, version without activated carbon belt unit",
+    "articleNames": [
+      "Hood for full face respirator vision 2000 n, with head/chest cloth over hood, without belt unit",
+      "SATA respirator kit vision 2000 n, with activated charcoal adsorber",
+      "SATA breathing protection kit: SATA vision 2000 n and belt unit with T-piece and air control valve, version without activated carbon belt unit",
+      "SATA respirator kit in systainer: SATA vision 2000 n and belt unit with activated charcoal adsorber and air regulation valve, SATA air warmer, SATA air hose 1.2 m"
+    ]
+  },
+  "CF1931124": {
+    "sourceHash": "5976e0421ec01d72",
+    "officialName": "SATA air star C",
+    "tagline": null,
+    "officialDescription": "The SATA air star C half mask offers maximum visibility and better breathing protection than half masks with filter cartridges. The activated carbon filter, either as a static unit on the wall or portable on the belt unit, provides clean breathing air. The optimally filtered air is supplied to the user directly into the mask, in a steady stream without any inhalation resistance.",
+    "defaultArticleName": "SATA breathing protection kit: SATA air star C n and belt unit with T-piece and air control valve, version without activated carbon belt unit",
+    "articleNames": [
+      "SATA respirator kit: SATA air star C n and belt unit with activated charcoal filter and air regulation valve",
+      "SATA air star C n half mask with breathing hose and industry belt unit, special version",
+      "SATA breathing protection kit: SATA air star C n and belt unit with T-piece and air control valve, version without activated carbon belt unit",
+      "SATA air star C n half mask with breathing hose, without filter"
+    ]
+  },
+  "CF1931125": {
+    "sourceHash": "2ea442175fa439bd",
+    "officialName": "SATA air star F",
+    "tagline": null,
+    "officialDescription": "With this easy-to-wear filter half mask, painters are completely independent of location. A powerful filter system protects the respiratory tract of the painter as much as possible. It is mainly used for preparatory work outside the paint booth or for less extensive painting jobs. The SATA air star F has an anatomically shaped mask body made of skin-friendly TPE (Thermoelastic Elastomer) which adapts to any face shape.",
+    "defaultArticleName": "SATA air star F, filter A2:P3 R D, 2 pre-filter holders and 10 pre-filters",
+    "articleNames": [
+      "SATA air star F, filter A2:P3 R D, 2 pre-filter holders and 10 pre-filters"
+    ]
+  },
+  "CF1931127": {
+    "sourceHash": "b4bfbe2258073dfb",
+    "officialName": "SATA filter series 100",
+    "tagline": null,
+    "officialDescription": "The SATA filters 100 prep and 103 prep have been specially developed for the requirements at the work preparation area. By using these filters, coating flaws can be avoided from the beginning. Not suitable for use in spray booths.",
+    "defaultArticleName": "SATA filter 103 prep triple-stage sinter filter/fine filter/activated charcoal filter with pressure regulator and 1 outlet tap (1/4\" male thread)",
+    "articleNames": [
+      "SATA filter 100 prep double-stage sinter filter/fine filter with pressure regulator outlet (1 x 1/4\" male thread)",
+      "SATA filter 101 prep single-stage activated charcoal filter to retrofit filter 100 prep to filter 103 prep",
+      "SATA filter 103 prep triple-stage sinter filter/fine filter/activated charcoal filter with pressure regulator and 1 outlet tap (1/4\" male thread)"
+    ]
+  },
+  "CF1931128": {
+    "sourceHash": "88b5492092da90df",
+    "officialName": "SATA filter series 200",
+    "tagline": null,
+    "officialDescription": "Economical combi fine filter unit for highest air quality requirements in paint application as well as for air-supplied breathing systems. For installation in spray booths, prep decks and other workshop areas.",
+    "defaultArticleName": "SATA filter 284 triple-stage sintered filter/fine filter/activated charcoal filter, pressure regulator, outlet module (2x air coupling/nipple 9 mm)",
+    "articleNames": [
+      "SATA filter 242 L double-stage sinter filter/fine filter without pressure regulator, for pipeline installation (G 1/2\" female thread)",
+      "SATA filter 244 double-stage sintered filter/fine filter, pressure regulator, outlet module (2 x air coupling/nipple 9 mm)",
+      "SATA filter 284 triple-stage sintered filter/fine filter/activated charcoal filter, pressure regulator, outlet module (2x air coupling/nipple 9 mm)",
+      "SATA filter 264 single-stage activated charcoal filter to retrofit SATA filter 244 to SATA filter 284",
+      "SATA filter 284 L 3-stage sinter filter/fine filter/activated charcoal filter, for air circuit installation (G 1/2\" female thread)"
+    ]
+  },
+  "CF1931129": {
+    "sourceHash": "c79e0f3ba41b4474",
+    "officialName": "SATA filter series 400",
+    "tagline": null,
+    "officialDescription": "The SATA filter 400 series meets highest demands on quality and performance. The modular design allows an exact adaptation to different applications. The combination units SATA filter 444 and 484 are standard in paint booths - also for breathing air treatment.",
+    "defaultArticleName": "SATA filter 484 triple-stage sinter filter/fine filter/activated charcoal with pressure regulator and outlet module (2 x 1/4\" male thread)",
+    "articleNames": [
+      "SATA filter 414 single-stage sinter filter without pressure regulator, with outlet module (2 x 1/4\" male thread)",
+      "SATA filter 424 single-stage sinter filter, pressure regulator, outlet module (2 x 1/4\" male thread)",
+      "SATA filter 434 single-stage fine filter without pressure regulator, with outlet module (2 x 1/4\" male thread)",
+      "SATA filter 464 single-stage activated charcoal filter without pressure regulator, with outlet module (2 x 1/4\" male thread)",
+      "SATA filter 414 L single-stage sinter filter without pressure regulator, for pipeline installation (G 1/2\" female thread)",
+      "SATA filter 424 L single-stage sinter filter, pressure regulator, for pipeline installation (G 1/2\" female thread)",
+      "SATA filter 434 L single-stage fine filter without pressure regulator for pipeline installation (G 1/2\" female thread)",
+      "SATA filter 444 double-stage sinter filter/fine filter with pressure regulator and outlet module (2 x 1/4\" male thread)",
+      "SATA filter 444 L double-stage sinter filter/fine filter with pressure regulator, for pipeline installation (G 1/2\" female thread)",
+      "SATA filter 474 double-stage fine filter/activated charcoal without pressure regulator with outlet module (2 x 1/4\" male thread)",
+      "SATA filter 484 triple-stage sinter filter/fine filter/activated charcoal with pressure regulator and outlet module (2 x 1/4\" male thread)",
+      "SATA filter 464 add-on kit single-stage activated charcoal filter without pressure regulator to retrofit SATA filter 444 to SATA filter 484"
+    ]
+  },
+  "CF1931204": {
+    "sourceHash": "a9abacbcb9dc4cc7",
+    "officialName": "SATA suit race",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATA suit race, size L (50/52), 98% Polyester, 2% Carbon, MID: DEHBP5658THA",
+    "articleNames": [
+      "SATA suit race, size S (42/44), 98% Polyester, 2% Carbon, MID: DEHBP5658THA",
+      "SATA suit race, size M (46/48), 98% Polyester, 2% Carbon, MID: DEHBP5658THA",
+      "SATA suit race, size L (50/52), 98% Polyester, 2% Carbon, MID: DEHBP5658THA",
+      "SATA suit race, size XL (54/56), 98% Polyester, 2% Carbon, MID: DEHBP5658THA",
+      "SATA suit race, size XXL (58/60), 98% Polyester, 2% Carbon, MID: DEHBP5658THA"
+    ]
+  },
+  "CF1931211": {
+    "sourceHash": "b3d81ee95d46a140",
+    "officialName": "SATA HKU",
+    "tagline": null,
+    "officialDescription": "The SATA HKU barrel pump unit is the first choice for processing large quantities of material.",
+    "defaultArticleName": "SATA HKU 60 l barrel pump unit cpl., consisting of piston pump 1:3, with Spray mix hose pair 10 m, SATAjet 1000 KK spray gun, nylon, door and hook wand",
+    "articleNames": [
+      "SATA HKU 60 l barrel pump unit cpl., consisting of piston pump 1:3, with Spray mix hose pair 10 m, SATAjet 1000 KK spray gun, nylon, door and hook wand",
+      "SATA HKU 200 l barrel pump unit, cpl., piston pump 1:3 with Spray mix hose pair 10 m, SATAjet 1000 KK spray gun, nylon, door and hook wand"
+    ]
+  },
+  "CF1931215": {
+    "sourceHash": "4122cff64fcdde62",
+    "officialName": "SATA vario top spray",
+    "tagline": null,
+    "officialDescription": "The powerful double diaphragm pump SATA vario top spray is the ideal system for continuous processing of larger quantities of material. The SATA vario top spray is a real problem solver in vehicle and industrial painting, in machine construction as well as in wood and furniture painting. All solvent-based paint systems of the most varied viscosities and structures, but also water-based paints, can be processed without problems.",
+    "defaultArticleName": "SATA vario top spray FFB, double diaphragm pump 1:1, on trolley, with gravity flow container, material fine pressure regulator, without suction tube, 1 spray gun connection, without spray gun and hoses",
+    "articleNames": [
+      "Double diaphragm pump 1:1, industrial version, material connection G 3/8\" (female thread), air inlet G 1/4\" (female thread), without grounding cable",
+      "SATA vario top spray W, double diaphragm pump 1:1 wall mounted version, with material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray F, double diaphragm pump 1:1 on trolley, with material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray FFB, double diaphragm pump 1:1, on trolley, with gravity flow container, material fine pressure regulator, suction tube, 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray W, double diaphragm pump 1:1, stainless steel version, for wall mounting, with material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray F double diaphragm pump 1:1, stainless steel version, on trolley, with material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray S, double diaphragm pump 1:1, stainless steel version, stand, material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray S, double diaphragm pump 1:1, with stand, material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "Double diaphragm pump 1:1, stainless steel, industrial version, material connection G 3/8\" (female thread), air inlet G 1/4\" (female thread), without grounding cable",
+      "SATA vario top spray FFB, double diaphragm pump 1:1, stainless steel version, on trolley, with gravity flow container, material fine pressure regulator, suction tube and 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray FFB, double diaphragm pump 1:1, on trolley, with gravity flow container, material fine pressure regulator, without suction tube, 1 spray gun connection, without spray gun and hoses",
+      "SATA vario top spray FFB, double diaphragm pump 1:1, stainless steel version, on trolley, with gravity flow container, fine material pressure regulator, without suction tube and 1 spray gun connection, without spray gun and hoses"
+    ]
+  },
+  "CF1931220": {
+    "sourceHash": "dcab626bfc4267d7",
+    "officialName": "SATA mini Set 2",
+    "tagline": null,
+    "officialDescription": "The SATA mini set 2 pressure pot processes materials up to two litres. Due to the double pressure reducer, an optimum pressure of material and atomising compressed air is achieved. The pulsation-free and even material supply enables perfect painting finishes and saves time due to continuous work without interruptions.",
+    "defaultArticleName": "SATA mini set 2 pressure pot 2 ltr. single pressure reducer",
+    "articleNames": [
+      "SATA mini set 2, 2 l pressure pot version M/S Sommer",
+      "SATA mini Set 2 with SATAjet 3000 K RP 1.1, paint pipe, material filter 60 msh, hose pair 1.5 m",
+      "SATA mini set 2, paint pressure pot 2.0 l; double pressure reducer",
+      "SATA mini Set 2 with SATAjet 3000 K HVLP 1.2, paint pipe, material filter 60 msh, hose pair 1.5 m",
+      "SATA mini set 2 pressure pot 2 ltr. single pressure reducer"
+    ]
+  },
+  "CF1931221": {
+    "sourceHash": "ca40818bae9e3fe7",
+    "officialName": "Release agent spray system",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "Separating agent spray system, consisting of pressure tank 2 l, DPR (double pressure reducer), SATAminijet 1000 K RP 0.3, hose pair 3 m, complete",
+    "articleNames": [
+      "Separating agent spray system, consisting of pressure tank 2 l, DPR (double pressure reducer), SATAminijet 1000 K RP 0.3, hose pair 3 m, complete"
+    ]
+  },
+  "CF1931282": {
+    "sourceHash": "6f5bb1b33fd4dd67",
+    "officialName": "SATAjet X 5500 PHASER",
+    "tagline": null,
+    "officialDescription": "The PHASER spray gun was developed with its outstanding design, materials and a unique concept for your very special projects. The unusually elegant design was developed in cooperation with Porsche Design Studio. Technically the PHASER is identical to the SATAjet X 5500. It has the same nozzle concept and all the other convincing features that make the SATAjet X 5500 an outstanding spray gun.",
+    "defaultArticleName": "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.3 O RPS, suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.2 I RPS, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.3 I RPS, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.3 O RPS, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.2 O RPS, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP PHASER 1.2 O RPS, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP PHASER 1.3 O RPS, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP PHASER 1.4 O RPS, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP PHASER 1.4 I RPS, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP PHASER 1.3 I RPS, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 HVLP PHASER 1.2 I RPS, suitable for water- and solvent-based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.4 I RPS, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP PHASER 1.4 O RPS, suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931293": {
+    "sourceHash": "3d02051ac90b4940",
+    "officialName": "SATA filter 500 series",
+    "tagline": "Clean compressed air for perfect finishes.",
+    "officialDescription": "The SATA filter series 500 is available either as a one-stage sintered filter with water and oil separator, as a two-stage combination filter with sintered and fine filter, or as a three-stage filter unit with additional sintered activated charcoal filter.",
+    "defaultArticleName": "3-stage premium compressed air filter SATA filter 584 for air purification, for use with water- andsolvent-based paint systems and for use with supplied-air respiratory protection systems",
+    "articleNames": [
+      "3-stage premium compressed air filter SATA filter 584 for air purification, for use with water- andsolvent-based paint systems and for use with supplied-air respiratory protection systems",
+      "2-stage premium compressed air filter SATA filter 544 for air purification, for use with solvent-based paintsystems",
+      "1-stage premium activated charcoal filter SATA filter 564 for retrofitting a SATA filter 544",
+      "3-stage premium compressed air filter SATA filter 584, with carrying support, for air purification, for use with water- and solvent-based paint systems and for use with respiratory protection systems",
+      "1-stage premium compressed air filter SATA filter 524 L for separating liquids within the compressed air circuit",
+      "SATA filter 524 single-stage sinter filter, pressure regulator, outlet module (2 x 1/4\" male thread)",
+      "3-stage premium compressed air filter SATA filter 584, with trolley, for air purification, for use with water- and solvent-based paint systems and for use with respiratory protection systems"
+    ]
+  },
+  "CF1931300": {
+    "sourceHash": "31ec3ad51be049f7",
+    "officialName": "SATA HRS-E",
+    "tagline": null,
+    "officialDescription": "The SATA HRS E pressure cup gun has been specially developed for the application of cavity preservation and wax underbody protection from disposable cans.",
+    "defaultArticleName": "SATA HRS E pressure cup spray gun with 1.5 l cup (max. 10 bar), for cavity preservation and underbody protection material supplied from disposable containers, with material flow control, hook wands 16139 and 24372, Nylon wand 16113 and round fan nozzle...",
+    "articleNames": [
+      "SATA HRS-E with 1.5 l pressurized cup (max. 10 bar), with material flow control, without wands",
+      "SATA HRS-E pressurised cup spray gun with 1.5 l cup (max. 10 bar), for cavity preservation and underbody protection from disposable containers, with material flow control, round spray nozzle 25486, hook wand 16139 and nylon wand 11874",
+      "SATA HRS E pressurised cup spray gun with 1.5 l cup (max. 10 bar) for cavity preservation and underbody protection from disposable containers, with material flow control, hook wand 16139 and nylon wand 16113 as well as round spray nozzle",
+      "SATA HRS E pressure cup spray gun with 1.5 l cup (max. 10 bar), for cavity preservation and underbody protection material supplied from disposable containers, with material flow control, hook wands 16139 and 24372, Nylon wand 16113 and round fan nozzle..."
+    ]
+  },
+  "CF1931301": {
+    "sourceHash": "a3d9795f957b4739",
+    "officialName": "SATA HRS",
+    "tagline": null,
+    "officialDescription": "The SATA HRS pressure cup gun with three quick-change wands allows cavity preservation in a wide range of applications. The precise fan guidance ensures accurate work and the all-metal design ensures a long service life.",
+    "defaultArticleName": "SATA HRS pressurised cup gun with 1.0 l cup (max. 10 bar), material flow control, without wands",
+    "articleNames": [
+      "SATA HRS pressurised cup gun with 1.0 l cup (max. 10 bar), without material flow control, flexible nylon and hook wand (16113 and 16139) as well as fix door wand (16071)",
+      "SATA HRS pressurised cup gun with 1.0 l cup (max. 10 bar), without material flow control, without wands",
+      "SATA HRS-HV spray gun, pressurized cup, 2 wands 11866 + 11874",
+      "SATA HRS pressurised cup gun with 1.0 l cup (max. 10 bar), material flow control, without wands",
+      "SATA HRS complete pressurised cup gun with 1.0 l cup (max. 10 bar), without material flow control with nylon wand 16105 and hook wand 24372"
+    ]
+  },
+  "CF1931303": {
+    "sourceHash": "77f5d866e020d80e",
+    "officialName": "Reusable plastic flow cup",
+    "tagline": null,
+    "officialDescription": "Plastic flow cup with integrated drop seal for SATA spray guns. Available in three different volumes. Only genuine with red ring.",
+    "defaultArticleName": "Reusable plastic cup, 0.6 l with QCC without fine thread for SATAjet 5000 series, jet 4000 B, jet 3000 B, jet 2000, jet 1000 B, jet 100 B, jet RP, minijet 4400 B",
+    "articleNames": [
+      "0.3 l reusable plastic cup, cpl.",
+      "0.6 l reusable plastic cup, cpl. for SATA LM 92",
+      "65 ml PVC reusable cup, cpl. for SATAjet 20",
+      "Reusable plastic cup, 0.6 l with QCC without fine thread for SATAjet 5000 series, jet 4000 B, jet 3000 B, jet 2000, jet 1000 B, jet 100 B, jet RP, minijet 4400 B",
+      "0.3 l reusable plastic cup, with fine thread, cpl. for SATAjet B,.jet GR, jet NR 95",
+      "0.6 l reusable plastic cup, with fine thread cpl. for SATAjet B, jet GR, jet NR 95, jet 3000 LAB, jet 4000 LAB, jet 5000 LAB",
+      "0.3 l reusable plastic cup, cpl. with adapter",
+      "0.6 l reusable plastic cup WÜRTH for PRO, AP, Art.-Nr. 818 700 210",
+      "0.3 l QCC reusable plastic cup, cpl. for SATAjet 5000 series, jet 4000, jet 1000, jet 100, jet 3000, minijet 4400",
+      "Reusable plastic cup, 0.125 l with QCC and fine thread for SATAminijet spray guns (except minijet 4400 B) and SATAjet 20 B",
+      "0.3 l QCC reusable plastic cup, compl. for SATAminijet 3000 B, minijet 1-4, jet 20 B",
+      "Reusable plastic cup, 0.125 l with QCC without fine thread",
+      "0.6 l QCC reusable plastic cup with fine thread cpl. for SATA KLC, LM 2000, jet 90-2, jet RP"
+    ]
+  },
+  "CF1931304": {
+    "sourceHash": "8786e1bcdf1cf1cb",
+    "officialName": "Reusable aluminium flow cup",
+    "tagline": null,
+    "officialDescription": "Aluminium flow cup with integrated drop seal for SATA spray guns. Available in three different filling volumes and proven SATA quality.",
+    "defaultArticleName": "Reusable aluminium cup, 0.15 l with QCC without fine thread for SATAjet 5000 series, jet 4000 B, jet 3000 B, jet 2000, jet 1000 B, jet 100 B, jet RP, minijet 4400 B",
+    "articleNames": [
+      "Reusable aluminium cup 0,75 l with fine thread, cpl. for SATAjet B, jet GR, jet NR 95",
+      "1.0 l reusable aluminium cup, with fine thread complete for SATAjet B, jet GR, jet NR 95",
+      "Reusable aluminium cup, 1.0 l with QCC without fine thread for SATAjet 5000 series, jet 4000 B, jet 3000 B, jet 2000, jet 1000 B, jet 100 B",
+      "0.15 l QCC reusable aluminium cup, cpl.for SATAminijet (except minijet 4400) and jet 20 B",
+      "Reusable aluminium cup, 0.75 l with QCC without fine thread for SATAjet 5000 series, jet 4000 B, jet 3000 B, jet 2000, jet 1000 B, jet 100 B",
+      "Reusable aluminium cup, 0.15 l with QCC without fine thread for SATAjet 5000 series, jet 4000 B, jet 3000 B, jet 2000, jet 1000 B, jet 100 B, jet RP, minijet 4400 B",
+      "Reusable aluminium cup, 0.75 l with QCC and fine thread for jet 2000, jet 90, jet RP, LM 2000, KLC",
+      "Reusable aluminium cup, 1.0 l with QCC and fine thread for jet 2000, jet 90, jet RP, LM 2000, KLC"
+    ]
+  },
+  "CF1931305": {
+    "sourceHash": "28c94fa996f7e1cd",
+    "officialName": "Reusable plastic hanging cups",
+    "tagline": null,
+    "officialDescription": "Flexible reusable plastic hanging cup with resistant drip seal for SATA paint spray guns. Available in different filling volumes.",
+    "defaultArticleName": "0.6 l plastic suction cup without lid for SATA grit blasting gun",
+    "articleNames": [
+      "0.6 l plastic suction cup without lid for SATA grit blasting gun"
+    ]
+  },
+  "CF1931306": {
+    "sourceHash": "bec6e32b6a9730c4",
+    "officialName": "Reusable aluminium hanging cups",
+    "tagline": null,
+    "officialDescription": "Reusable aluminium hanging cup with integrated drip seal for SATA paint spray guns.",
+    "defaultArticleName": "1.0 l aluminium suction cup, cpl. for SATAjet 1000 H, SATAjet H",
+    "articleNames": [
+      "1.0 l aluminium suction cup, cpl. for SATAjet 1000 H, SATAjet H",
+      "1.0 l aluminium suction cup, without lid for SATAjet 1000 H, SATAjet H"
+    ]
+  },
+  "CF1931308": {
+    "sourceHash": "b4abaa4d429668de",
+    "officialName": "SATA dry jet Stativ",
+    "tagline": null,
+    "officialDescription": "With the SATA dry jet 2 dry blow gun, you can significantly shorten the flash-off and thus the cabin occupancy times. It uses the so-called Venturi principle. In addition to the supplied compressed air, a multiple of ambient air is sucked in. The uniform, wide air flow generated in the injector zone of the wide spray nozzle also contributes to a reduction in flash-off time. Thus, the SATA dry jet 2 achieves an approx. 15 % higher drying performance compared to commercially available models.",
+    "defaultArticleName": "SATA dry jet 2 stand with height-adjustable bracket, 2 blow guns",
+    "articleNames": [
+      "Stand for SATA dry jet without blow guns",
+      "SATA dry jet 2 stand with height-adjustable bracket, 2 blow guns"
+    ]
+  },
+  "CF1931309": {
+    "sourceHash": "f6d39c0a369a304a",
+    "officialName": "SATA trueSun",
+    "tagline": "Daylight solution. Adjustable brightness. Uniform light distribution.",
+    "officialDescription": "The SATA trueSun daylight solution has a wide colour spectrum and reproduces colour tones true to original: The even light distribution over the illuminated surface reliably helps bodyshops to find the right colour and to avoid wrong decisions and thus extra work. The continuously adjustable light intensity remains constant over the entire battery life.",
+    "defaultArticleName": "Premium daylight lamp SATA trueSun for determining and checking single stage, metallic, and pearlescent colors, etc., in the field of automotive refinishing",
+    "articleNames": [
+      "Premium daylight lamp SATA trueSun for determining and checking single stage, metallic, and pearlescent colors, etc., in the field of automotive refinishing"
+    ]
+  },
+  "CF1931313": {
+    "sourceHash": "07585342bd0f13a4",
+    "officialName": "SATA multi clean 2",
+    "tagline": null,
+    "officialDescription": "Paint spray guns should be thoroughly cleaned at least once a day and rinsed after each painting job. This can be done gently, conveniently and economically with the SATA multi clean 2 – the powerful automatic washing machine with hand washing place and extraction unit.",
+    "defaultArticleName": "SATA multi clean 2 spray gun washing machine with exhaust, 2 fluid containers, trolley, spare filter mat, quick coupling nipple for air connection",
+    "articleNames": [
+      "SATA multi clean 2 spray gun washing machine with exhaust, 2 fluid containers, trolley, spare filter mat, quick coupling nipple for air connection"
+    ]
+  },
+  "CF1931315": {
+    "sourceHash": "a7ffb5af4d060983",
+    "officialName": "SATAjet K 1800 spray mix",
+    "tagline": null,
+    "officialDescription": "In 2022, SATA introduces the new SATAjet K 1800 spray mix, an innovative new product in the field of ultra-high pressure coating. The new lightweight gun in this spray gun class with its well-balanced gun body combines an optimised ergonomic design with a finely-tuned nozzle range and with the innovative clampLock paint needle system.",
+    "defaultArticleName": "SATAjet K 1800 spray mix without material tube and material filter, paint nozzle not included",
+    "articleNames": [
+      "SATAjet K 1800 spray mix without material tube and material filter, paint nozzle not included",
+      "SATAjet K 1800 spray mix with material tube and a short material filter for gap filter, filter (100 msh), paint nozzle not included",
+      "SATAjet K 1800 spray mix with material tube and a long material filter for insert filter, filter (100 msh), paint nozzle not included"
+    ]
+  },
+  "CF1931319": {
+    "sourceHash": "1357dff651ef8651",
+    "officialName": "SATAjet 1000 B Lignum 3",
+    "tagline": null,
+    "officialDescription": "Wood finishing requires a profound understanding of the different types of wood for a perfect surface texture. On top of that, it requires experience as well as the perfect tool. With the SATAjet 1000 B Lignum 3, the carpenter has the best tool to give his workpiece the final touch and to achieve a perfect finish. This robust and easy to clean universal spray gun is tailor-made for the woodfinishing industry. Its comprehensive selection of nozzle sizes ranging from 0.8 to 5.0 and the availability of pressurised as well as agitator cups allows the application of a large spectrum of different paint materials: from low-viscosity wood stains, single stage materials and clearcoats to thick film stains, glues and thixotropic materials.",
+    "defaultArticleName": "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP Lignum 3 nozzle 1.3 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP Lignum 3 nozzle 1.4 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP Lignum 3 nozzle 1.7 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B HVLP Lignum 3 nozzle 1.9 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP Lignum 3 nozzle 1.3 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP Lignum 3 nozzle 1.6 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP Lignum 3 nozzle 1.8 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP Lignum 3 nozzle 2.0 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems",
+      "Universal spray gun for painters, carpenters and industrial applications SATAjet 1000 B RP Lignum 3 nozzle 2.5 0.6 L QCC reusable plastic cup, swivel joint, suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931327": {
+    "sourceHash": "45e0df1615faf3fe",
+    "officialName": "SATA suit race ladies",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATA suit race ladies, size M 98% polyester 2% carbon",
+    "articleNames": [
+      "SATA suit race ladies, size XS 98% polyester 2% carbon",
+      "SATA suit race ladies, size S 98% polyester 2% carbon",
+      "SATA suit race ladies, size M 98% polyester 2% carbon",
+      "SATA suit race ladies, size L 98% polyester 2% carbon",
+      "SATA suit race ladies, size XL 98% polyester 2% carbon"
+    ]
+  },
+  "CF1931331": {
+    "sourceHash": "fa376c5ca464ec29",
+    "officialName": "SATAjet X 5500 Clear Coat Edition",
+    "tagline": null,
+    "officialDescription": "The SATAjet X 5500 Clear Coat Edition impresses with its newly developed, special nozzle set for clear coat application. The optimised material distribution in combination with a finer atomisation allows users to achieve closed wetting even at a low layer thickness. Special clear coat nozzle with additional designation \"cc\" (SATAjet X 5500 RP 1.3cc).",
+    "defaultArticleName": "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3cc RPS D Edition RP 1.3cc, specially suitable for 1K/2K clearcoat systems",
+    "articleNames": [
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3cc RPS D Edition RP 1.3cc, specially suitable for 1K/2K clearcoat systems",
+      "Premium spray gun for automotive refinish SATAjet X5500 RP 1.3cc RPS D DIGI bar Edition RP 1.3cc, specially suitable for 1K/2K clearcoat systems"
+    ]
+  },
+  "CF1931333": {
+    "sourceHash": "97a51c609db3dd21",
+    "officialName": "SATA material pressure tank 10",
+    "tagline": null,
+    "officialDescription": "Available in the European Union, EFTA and the UK. For inquiries from other regions, please contact your SATA representative for clarification. The SATA material pressure container 10 can be used with a wide variety of materials and offers numerous equipment variants. This means that the optimum system can be configured for every task.",
+    "defaultArticleName": "SATA material pressure tank 10, single pressure reducer, with liner",
+    "articleNames": [
+      "SATA material pressure tank 10, single pressure reducer, with liner",
+      "SATA material pressure tank 10, double pressure reducer, with liner",
+      "SATA material pressure tank 10, single pressure reducer, manual agitator, with liner",
+      "SATA material pressure tank 10, double pressure reducer, manual agitator, with liner",
+      "SATA material pressure tank 10, single pressure reducer, pneumatic agitator with gearing, with liner",
+      "SATA material pressure tank 10, double pressure reducer, pneumatic agitator with gearing, with liner"
+    ]
+  },
+  "CF1931334": {
+    "sourceHash": "fad142d369138dec",
+    "officialName": "SATA material pressure tank 22",
+    "tagline": null,
+    "officialDescription": "Available in the European Union, EFTA and the UK. For inquiries from other regions, please contact your SATA representative for clarification. The robust stainless steel material pressure tank is suitable for pulsation-free processing of different materials without vapours or gases escaping into the environment. It is available in numerous versions and with a wide range of accessories – different coating tasks.",
+    "defaultArticleName": "SATA material pressure tank 22, single pressure reducer, pneumatic agitator with gearing",
+    "articleNames": [
+      "SATA material pressure tank 22, single pressure reducer",
+      "SATA material pressure tank 22, double pressure reducer",
+      "SATA material pressure tank 22, single pressure reducer, manual agitator",
+      "SATA material pressure tank 22, double pressure reducer, manual agitator",
+      "SATA material pressure tank 22, single pressure reducer, pneumatic agitator with gearing",
+      "SATA material pressure tank 22, double pressure reducer, pneumatic agitator with gearing",
+      "SATA material pressure tank 22, single pressure reducer, electric agitator with gearing",
+      "SATA material pressure tank 22, double pressure reducer, electric agitator with gearing"
+    ]
+  },
+  "CF1931335": {
+    "sourceHash": "3f07c5b6f98d0804",
+    "officialName": "SATA material pressure tank 45",
+    "tagline": null,
+    "officialDescription": "Available in the European Union, EFTA and the UK. For inquiries from other regions, please contact your SATA representative for clarification. The solution for major projects: The SATA material pressure tank 45 is recommended for the pulsation-free processing of various materials in quantities of up to 45 litres. With the comprehensive range of versions and accessories, the right configuration can be found for every application.",
+    "defaultArticleName": "SATA material pressure tank 45, double pressure reducer",
+    "articleNames": [
+      "SATA material pressure tank 45, single pressure reducer",
+      "SATA material pressure tank 45, double pressure reducer",
+      "SATA material pressure tank 45, single pressure reducer, manual agitator",
+      "SATA material pressure tank 45, double pressure reducer, manual agitator",
+      "SATA material pressure tank 45, single pressure reducer, pneumatic agitator with gearing",
+      "SATA material pressure tank 45, double pressure reducer, pneumatic agitator with gearing",
+      "SATA material pressure tank 45, single pressure reducer, electric agitator with gearing",
+      "SATA material pressure tank 45, double pressure reducer, electric agitator with gearing"
+    ]
+  },
+  "CF1931336": {
+    "sourceHash": "22abe1f558b596c0",
+    "officialName": "jet X",
+    "tagline": "works for you.",
+    "officialDescription": "Superior nozzle technology. Innovative digital functions. Improved ergonomics and unique detailed solutions. The jet X perfects what SATA is all about. The innovative labyrinth airflow system guides the air in the nozzle so that it exits free of turbulence and pulsation - the result is exceptionally fine and homogeneous atomisation. The optimised material distribution and the even spray pattern with clearly defined fade-out zones result in a controlled and immediate painting feel. The jet X is the new reference in the premium class.",
+    "defaultArticleName": "Premium spray gun for automotive refinish jet X RP 1.2 I (Control) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 I (Control) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 I (Control) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 I (Control) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 I (Control) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 O (Speed) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 O (Speed) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 O (Speed) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.1 O (Speed) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 I (Control) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 I (Control) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 I (Control) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 I (Control) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 O (Speed) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 O (Speed) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 O (Speed) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.2 O (Speed) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 I (Control) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 I (Control) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 I (Control) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 I (Control) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 O (Speed) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 O (Speed) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 O (Speed) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.3 O (Speed) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 O (Speed) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 O (Speed) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 O (Speed) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 O (Speed) nozzle DIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 I (Control) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 I (Control) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 I (Control) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 I (Control) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 O (Speed) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 O (Speed) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 O (Speed) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.1 O (Speed) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 I (Control) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 I (Control) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 I (Control) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 I (Control) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 O (Speed) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 O (Speed) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 O (Speed) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.2 O (Speed) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 I (Control) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 I (Control) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 I (Control) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 I (Control) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 O (Speed) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 O (Speed) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 O (Speed) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.3 O (Speed) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 I (Control) nozzle BASIC, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 I (Control) nozzleDIGITAL ready, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 O (Speed) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 O (Speed) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 O (Speed) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 O (Speed) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 I (Control) nozzle DIGITAL, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1.4 I (Control) nozzle DIGITAL pro, suitable for water‑ and solvent‑based basecoats as well as 1K/2K topcoat systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 I (Control) nozzle BASIC, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 I (Control) nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 I (Control) nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 1.4 I (Control) nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 10X40 nozzle DIGITAL pro, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 10X40 nozzle DIGITAL ready, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 10X40 nozzle DIGITAL, suitable for water- and solvent-based paint systems",
+      "Premium spray gun for automotive refinish jet X RP 10X40 nozzle BASIC, suitable for water- and solvent-based paint systems"
+    ]
+  },
+  "CF1931338": {
+    "sourceHash": "8b039b7b7bc0eea9",
+    "officialName": "LCS - the Liner",
+    "tagline": "The Liner - in a new design.",
+    "officialDescription": "The first liner cup by SATA - optimsed for SATA. Like RPS this cup fits all SATA guns without an adaptor . Adaptors for non SATA spray guns are available. There are many additional advantages: a more favourable centre of gravity, easier cleaning, lowerweight, less damage to the spray gun. The lid closes extremely securely: It locks reliably and shows at a glance that it is correctly secured in place. The premium strainers are manufactured and tested separately - this ensures that no particles remain in the sieve. The SATA LCS is the first choice for all professionalsin the painting trade who like liner cups - and appreciate SATA quality.",
+    "defaultArticleName": "LCS 0.65 l - the Liner - 125 µm flat sieve pack of 50 pieces",
+    "articleNames": [
+      "Multi‑purpose cup system LCS 0.40 l 125 µm flat sieve QCC VPE: 50 pieces For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system LCS 0.40 l 200 µm flat sieve QCC VPE: 50 pieces For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "LCS 0.65 l - the Liner - 125 µm flat sieve pack of 50 pieces",
+      "Multi‑purpose cup system LCS 0.65 l 200 µm flat sieve QCC VPE: 50 pieces For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system LCS 0.85 l 125 µm flat sieve QCC VPE: 50 pieces For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system LCS 0.85 l 200 µm flat sieve QCC VPE: 50 pieces For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "LCS UV 0.65 l - the Liner - 200 µm flat sieve pack of 25 pieces",
+      "LCS UV 0.65 l - the Liner - 125 µm flat sieve pack of 25 pieces"
+    ]
+  },
+  "CF1931339": {
+    "sourceHash": "d20408a1ef85b6e4",
+    "officialName": "air star F 2.0",
+    "tagline": "Low weight. Enlarged field of vision. Improved wearing comfort.",
+    "officialDescription": "Available in the European Union, EFTA and the UK. For inquiries from other regions, please contact your SATA representative for clarification. The latest generation of the filter half-mask from SATA weighs approx. 325 grams and is significantly lighter than its predecessor. With its anatomically shaped mask body and further improved wearing comfort, it makes wearing a mask more comfortable: Respiratory protection for minor painting or preparatory work outside the booth. The filters of the air star F 2.0 are slightly flatter, and they also sit lower and further back than on previous models. This results in a larger field of vision. The practical click system makes it easy to change the filter.",
+    "defaultArticleName": "Ergonomic and lightweight SATA air star F 2.0 respiratory protection mask with A2:P3 RD special filter foruse during short-term painting work",
+    "articleNames": [
+      "Ergonomic and lightweight SATA air star F 2.0 respiratory protection mask with A2:P3 RD special filter foruse during short-term painting work"
+    ]
+  },
+  "CF1931340": {
+    "sourceHash": "eabe56a04ff53b19",
+    "officialName": "adam X pro",
+    "tagline": "The digital unit with the widest range of functions.",
+    "officialDescription": "The digital unit with the widest range of functions. Together with the jet X DIGITAL ready, the adam X pro supports the painting professional in standardising and reproducing work results at the highest level. It helps avoid painting defects such as uneven material distribution and cloud formation. Operation is based on an innovative operating concept: the various functions are selected by double-tapping the side of the housing or by tilting the gun. Further information: https://www.youtube.com/watch?v=lYpfWXdFRZg",
+    "defaultArticleName": "adam X pro digital pressure measuring device for retrofitting a jet X paint spray gun (except BASIC) for precise pressure adjustment and reproducible painting results, including online access to detailed painting parameters",
+    "articleNames": [
+      "adam X pro digital pressure measuring device for retrofitting a jet X paint spray gun (except BASIC) for precise pressure adjustment and reproducible painting results, including online access to detailed painting parameters"
+    ]
+  },
+  "CF1931341": {
+    "sourceHash": "70427ae04e019c4e",
+    "officialName": "adam X",
+    "tagline": null,
+    "officialDescription": "The adam X is the compact and intuitive digital unit. It can be used with the jet X DIGITAL ready - and represents the entry into the digital world of painting at SATA. The adam X is particularly compact and clearly laid out and is particularly suitable for those who primarily want to use the basic digital functions. The menu items are selected with a tap on the housing. This is simple and practical, even with gloves. Further information: https://www.youtube.com/watch?v=FSUynasAMEo",
+    "defaultArticleName": "Digital pressure measuring device adam X for retrofitting a jet X paint spray gun (except BASIC) for precise pressure adjustment and reproducible painting results",
+    "articleNames": [
+      "Digital pressure measuring device adam X for retrofitting a jet X paint spray gun (except BASIC) for precise pressure adjustment and reproducible painting results"
+    ]
+  },
+  "CF1931342": {
+    "sourceHash": "1b638b0cc8934e9b",
+    "officialName": "SATA adam 2",
+    "tagline": null,
+    "officialDescription": "The accurate and correct setting of the gun inlet pressure is one of the key requirements to ensure perfect colour matching during the painting process. Whether the pressure is set too low or too high, colour deviations will be the undesired result. The consequences are unnecessary rework disrupting the efficient work flow in bodyshops and substantially higher repair costs. \"Incorrect dynamic inlet pressure\" can be prevented by using SATA digital spray guns or the accessories SATA adam 2 and SATA adam 2 U. The display can be removed from the spray gun in no time at all; for example to use it on another spray gun with premounted \"dock\". This makes the SATA adam 2 highly flexible. The display screen always remains in the horizontal centre position ensuring readability of the pressure at all times.",
+    "defaultArticleName": "SATA adam 2 >bar< for SATAjet 5000 series",
+    "articleNames": [
+      "SATA adam 2 display \"bar\"",
+      "SATA adam 2 dock for SATA spray guns except for SATAminijet and SATAjet 5000 series",
+      "SATA adam 2 dock (packing unit 2 pieces) for SATA spray guns except for SATAminijet and SATAjet 5000 series",
+      "SATA adam 2 >bar< for SATA spray guns except for SATAminijet and SATAjet 5000 series",
+      "SATA adam 2 mini dock for SATAminijet spray guns",
+      "SATA adam 2 mini >bar< for SATAminijet 4400 B, SATAminijet 3000 B and SATAminijet 1000 K/H",
+      "SATA dock protect (packing unit 5 pieces) for SATA adam 2",
+      "SATA adam 2 U (air micrometer with adam 2 display bar)",
+      "SATA adam 2 U dock (air micrometer 1/4\" male thread and G 1/4\" female thread with SATA dock)",
+      "SATA dock with 1/8\" (male thread)",
+      "SATA adam 2 >bar< for SATAjet 5000 series",
+      "SATA adam 2 dock for SATAjet 5000 series",
+      "SATA adam 2 dock (packing unit 2 pieces) for SATAjet 5000 series",
+      "SATA adam 2 black display \"bar\"",
+      "SATA adam 2 black >bar< for SATAjet 5000 series"
+    ]
+  },
+  "CF1931343": {
+    "sourceHash": "0a1a9173a07bee4b",
+    "officialName": "SATA suit Standard Men",
+    "tagline": "Provides reliable protection against paint mist",
+    "officialDescription": "The suit Standard was specially developed for work in the paint booth. It provides reliable protection against paint mist; for smaller jobs without wearing a full-face mask, it is equipped with a hood and adjustable collar. The suit Standard is designed for comfort and freedom of movement: It has an ergonomic cut and offers numerous adjustment options. And it also looks great: the new design and the large SATA logo on the back clearly show that a professional is at work.",
+    "defaultArticleName": "SATA suit Standard Men, size L, polyester",
+    "articleNames": [
+      "SATA suit Standard Men, size S, polyester",
+      "SATA suit Standard Men, size M, polyester",
+      "SATA suit Standard Men, size XL, polyester",
+      "SATA suit Standard Men, size XXL, polyester",
+      "SATA suit Standard Men, size 3XL, polyester",
+      "SATA suit Standard Ladies, size XS, polyester",
+      "SATA suit Standard Ladies, size S, polyester",
+      "SATA suit Standard Ladies, size M, polyester",
+      "SATA suit Standard Ladies, size L, polyester",
+      "SATA suit Standard Men, size L, polyester"
+    ]
+  },
+  "CF1931345": {
+    "sourceHash": "99f7a598810372c5",
+    "officialName": "SATA suit Basic",
+    "tagline": null,
+    "officialDescription": "The suit Basic is the entry-level model among the SATA paint suits. It has a high-quality finish and brings many practical features to the table. Wide elasticated cuffs on the wrist close tightly without constricting, as do the elasticated cuffs on the ankle. The hood also has an elasticated drawstring. The 2-way zip with a protective strip makes it easy to put on and take off, while a back pocket can hold small items. The suit Basic comes in dark grey with SATA logos on the chest and back.",
+    "defaultArticleName": "SATA suit Basic, size L, polyester",
+    "articleNames": [
+      "SATA suit Basic, size S, polyester",
+      "SATA suit Basic, size M, polyester",
+      "SATA suit Basic, size L, polyester",
+      "SATA suit Basic, size XL, polyester",
+      "SATA suit Basic, size XXL, polyester"
+    ]
+  },
+  "CF1931348": {
+    "sourceHash": "10e95bab7c515f87",
+    "officialName": "RPS - the Original",
+    "tagline": null,
+    "officialDescription": "The SATA RPS (Rapid Preparation System) multi-purpose cup system fulfils four functions: mixing, painting, refilling, storing. The SATA RPS is so easy to handle because it consists of only three parts: cup, lid and strainer. SATA RPS fits directly onto your SATA spray gun with a QCC connection (Quick Cup Connector) – without any interfering adapters. The short length of the paint channel and the absence of unnecessary corners and edges prevent material deposits in the paint channel, and with the SATA Loyalty Program coins & more you can collect SATA coins with this product, which can be exchanged for high-quality rewards.",
+    "defaultArticleName": "Multi‑purpose cup system RPS 0.6 l 125 µm flat sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+    "articleNames": [
+      "Multi‑purpose cup system RPS 0.3 l 125 µm flat sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS 0.3 l 200 µm plug-in sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS 0.6 l 125 µm flat sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS 0.6l 200 µm plug-in sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS UV 0.6 l 125 µm flat sieve QCC UV cup (black) VPE 50 For mixing, spraying, reusing and storing UV-based coating systems",
+      "Multi‑purpose cup system RPS UV 0.6 l 200 µm plug-in sieve QCC UV cup (black) VPE 50 For mixing, spraying, reusing and storing UV-based coating systems",
+      "Multi‑purpose cup system RPS 0.9 l 125 µm flat sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS 0.9 l 200 µm plug-in sieve QCC VPE 50 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS 0.3 l 125 µm flat sieve QCC Megapack VPE 100 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems",
+      "Multi‑purpose cup system RPS 0.3 l 200 µm plug-in sieve QCC Megapack VPE 100 For mixing, spraying, reusing and storing water‑ and solvent‑based coating systems"
+    ]
+  },
+  "CF1931351": {
+    "sourceHash": "b7699efef330ba26",
+    "officialName": "Luftmikrometer",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATA air micrometer with gauge, 1/4\" (male thread) and G 1/4\" (female thread)",
+    "articleNames": [
+      "SATA air micrometer 0-845, 1/4\" (male thread) and G 1/4\" (female thread)",
+      "SATA air micrometer with gauge, 1/4\" (male thread) and G 1/4\" (female thread)",
+      "SATA air micrometer, 1/4\" (male thread)"
+    ]
+  },
+  "CF1931352": {
+    "sourceHash": "a960723d77d8a2bb",
+    "officialName": "Manometer",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "Spray pressure control unit",
+    "articleNames": [
+      "Spray pressure control unit",
+      "Pressure gauge 0 – 4 bar, 50 mm, red marking at 3 bar for SATA paint set 10",
+      "Pressure gauge 0 – 6 bar, 50 mm, red marking at 4 bar for SATA FDG 48",
+      "Pressure gauge 0 – 10 bar, 50 mm for SATA filter 100 prep, FDG 24, spray mix, vario top spray",
+      "Pressure gauge 0 – 10 bar, 50 mm for SATA filter series 200, 300 and 400, 2K mix",
+      "Pressure gauge 0-10 bar, 50 mm for SATA filter 0/134 and 0/334",
+      "Pressure gauge 0 – 6 bar, 40 mm, green area 1 – 3 bar for adsorber SATA air star C / n",
+      "Pressure gauge 0 – 6 bar, 40 mm, green area 1.3 – 2.6 bar for adsorber SATA vision 2000 / n",
+      "Pressure gauge 0-6 bar, 40 mm for SATA BVD",
+      "Pressure gauge 0 – 4 bar, 50 mm, red marking at 2.5 bar for SATA mini set 2",
+      "Pressure gauge 0-1.6 bar, 40 mm for HVLP test air caps",
+      "Pressure gauge 0-10 bar, 40 mm for regulation valve coloured stereotype plate",
+      "Pressure gauge 0 – 6 bar, 50 mm, G 1/4 for SATA vario top spray"
+    ]
+  },
+  "CF1931355": {
+    "sourceHash": "3a23d39910b9150f",
+    "officialName": "SATA clean RCS",
+    "tagline": null,
+    "officialDescription": "The SATA clean RCS is a compressed air operated cleaning system for the intermediate cleaning of the spray guns. SATA clean RCS – the turbo cleaner in the spray booth allows one or more colour changes in succession with extremely short cleaning interruptions, saving additional working distances and increasing productivity and efficiency.",
+    "defaultArticleName": "SATA clean RCS - the turbo cleaner",
+    "articleNames": [
+      "SATA clean RCS - the turbo cleaner",
+      "SATA clean RCS compact",
+      "SATA clean RCS micro"
+    ]
+  },
+  "CF1931356": {
+    "sourceHash": "f26b63a0c2051a02",
+    "officialName": "jet K",
+    "tagline": "The comprehensive solution for achieving perfect finishes across a wide range of applications.",
+    "officialDescription": "The jet K is the new pressure-fed spray gun from SATA and much more besides that. It offers a comprehensive solution for achieving perfect finishes across a wide range of applications, from functional coatings to flawless clearcoat finishes.",
+    "defaultArticleName": "The new premium spray gun for large-area applications – jet K RP 1.1, suitable for water- and solvent-based paint systems",
+    "articleNames": [
+      "The new premium spray gun for large-area applications – jet K RP 1.0, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for functional coatings in large-area applications – jet K RP 1.0 MaxLayer, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.1, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.2, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.3, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for functional coatings in large-area applications – jet K RP 1.3 MaxLayer, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.4, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.6, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for functional coatings in large-area applications – jet K RP 1.6 MaxLayer, suitable for water- and solvent-based paint systems",
+      "jet K RP nozzle size 1.8 material connection 3/8\" (male thread)",
+      "The new premium spray gun for large-area applications – jet K RP 0.8, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 0.8, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.0, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.1, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.2, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.3, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.4, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.0 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for functional coatings in large-area applications – jet K RP 1.0 MaxLayer BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.1 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.2 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.3 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for functional coatings in large-area applications – jet K RP 1.3 MaxLayer BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.4 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.6 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 1.8 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K RP 0.8 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 0.8 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.0 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.1 BASIC, suitable for water- and solvent-based paint systems",
+      "jet K HVLP nozzle 1,2 BASIC Mat. connection 3/8\" (male thread)",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.3 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for large-area applications – jet K HVLP 1.4 BASIC, suitable for water- and solvent-based paint systems",
+      "The new premium spray gun for functional coatings in large-area applications – jet K RP 0.8 MaxLayer BASIC, suitable for water- and solvent-based paint systems",
+      "jet K RP, nozzle 0.8 ML, material connection 3/8\" (male thread)"
+    ]
+  },
+  "CF1931357": {
+    "sourceHash": "f8d2b49659b94705",
+    "officialName": "Lackierpistolenkoffer",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "SATA case, black (30 x 23 x 13 cm) incl. egg crate foam insert, material: plastic Foam insert for spray guns not included!",
+    "articleNames": [
+      "Aluminium tool case 450x325x150 mm Foam insert not included!",
+      "SATA case, black (63 x 50 x 30 cm) with trolley function, without print, incl. individual insert; Material: plastic",
+      "Foam insert, black for 2 spray guns for SATA case, black 30 x 23 x 13 cm",
+      "Foam insert, black for 5 spray guns for SATA case, silver 45 x 33 x 15 cm",
+      "Foam insert, black for 5 spray guns for SATA case, black 47 x 37 x 18 cm",
+      "SATA case, black (30 x 23 x 13 cm) incl. egg crate foam insert, material: plastic Foam insert for spray guns not included!",
+      "SATA case, black (47 x 37 x 18 cm), incl. egg crate foam insert, material: plastic Foam insert for spray guns not included!",
+      "Accessory box incl. foam and studded inlay, black for jet X"
+    ]
+  },
+  "CF1931359": {
+    "sourceHash": "6d084ef55485b456",
+    "officialName": "SATA dry jet 2",
+    "tagline": null,
+    "officialDescription": "With the SATA dry jet 2 dry blow gun, you can significantly shorten the flash-off and thus the cabin occupancy times. It uses the so-called Venturi principle. In addition to the supplied compressed air, a multiple of ambient air is sucked in. The uniform, wide air flow generated in the injector zone of the wide spray nozzle also contributes to a reduction in flash-off time. Thus, the SATA dry jet 2 achieves an approx. 15 % higher drying performance compared to commercially available models.",
+    "defaultArticleName": "SATA dry jet 2 blow gun",
+    "articleNames": [
+      "Conversion kit for SATA dry jet, adjustable version",
+      "SATA dry jet 2 blow gun"
+    ]
+  },
+  "CF1931387": {
+    "sourceHash": "dd90f28443fc8c39",
+    "officialName": "LCS - Hard Cups",
+    "tagline": null,
+    "officialDescription": "",
+    "defaultArticleName": "LCS 0.65 l - the Liner - Hard Cups pack of 2 pieces",
+    "articleNames": [
+      "LCS 0.40 l - the Liner - Hard Cups pack of 2 pieces",
+      "LCS 0.65 l - the Liner - Hard Cups pack of 2 pieces",
+      "LCS 0.85 l - the Liner - Hard Cups pack of 2 pieces"
+    ]
+  },
+  "CF1931392": {
+    "sourceHash": "cfe1f1f672ad371b",
+    "officialName": "jet X clearcoat Edition",
+    "tagline": "Clearcoat Edition.",
+    "officialDescription": "Superior nozzle technology. Innovative digital functions. Improved ergonomics and unique detailed solutions. The jet X perfects what SATA is all about. The innovative labyrinth airflow system guides the air in the nozzle so that it exits free of turbulence and pulsation - the result is exceptionally fine and homogeneous atomisation. The optimised material distribution and the even spray pattern with clearly defined fade-out zones result in a controlled and immediate painting feel. The jet X is the new reference in the premium class.",
+    "defaultArticleName": "Premium spray gun for automotive refinish jet X RP 1,2 I (Control) DIGITAL ready Clearcoat Edition, suitable for water‑ and solvent‑based coating systems",
+    "articleNames": [
+      "Premium spray gun for automotive refinish jet X RP 10X40 DIGITAL ready Clearcoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,2 I (Control) DIGITAL ready Clearcoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,3 I (Control) DIGITAL ready Clearcoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,2 O (Speed) DIGITAL ready Clearcoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,3 O (Speed) DIGITAL ready Clearcoat Edition, suitable for water‑ and solvent‑based coating systems"
+    ]
+  },
+  "CF1931393": {
+    "sourceHash": "7fe167121e31480b",
+    "officialName": "jet X basecoat Edition",
+    "tagline": "Basecoat Edition.",
+    "officialDescription": "Superior nozzle technology. Innovative digital functions. Improved ergonomics and unique detailed solutions. The jet X perfects what SATA is all about. The innovative labyrinth airflow system guides the air in the nozzle so that it exits free of turbulence and pulsation - the result is exceptionally fine and homogeneous atomisation. The optimised material distribution and the even spray pattern with clearly defined fade-out zones result in a controlled and immediate painting feel. The jet X is the new reference in the premium class.",
+    "defaultArticleName": "Premium spray gun for automotive refinish jet X RP 1,2 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+    "articleNames": [
+      "Premium spray gun for automotive refinish jet X HVLP 1,1 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,1 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,2 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,2 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,3 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,3 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,4 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,4 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,1 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,1 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,2 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,2 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,3 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,3 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,4 I (Control) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,4 O (Speed) DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 10X40 DIGITAL ready Basecoat Edition, suitable for water‑ and solvent‑based coating systems"
+    ]
+  },
+  "CF1931394": {
+    "sourceHash": "7795aab404526b39",
+    "officialName": "jet X by Stilbruch Edition",
+    "tagline": "Endless creativity in a limited edition.",
+    "officialDescription": "Superior nozzle technology. Innovative digital functions. Improved ergonomics and unique detailed solutions. The jet X perfects what SATA is all about. The innovative labyrinth airflow system guides the air in the nozzle so that it exits free of turbulence and pulsation - the result is exceptionally fine and homogeneous atomisation. The optimised material distribution and the even spray pattern with clearly defined fade-out zones result in a controlled and immediate painting feel. The jet X is the new reference in the premium class.",
+    "defaultArticleName": "Premium spray gun for automotive refinish jet X RP 1,2 I (Control) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+    "articleNames": [
+      "Premium spray gun for automotive refinish jet X RP 10X40 by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,1 I (Control) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,1 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,2 I (Control) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,2 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,3 I (Control) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,3 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,4 I (Control)by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X RP 1,4 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,1 I (Control)by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,1 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,2 I (Control)by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,2 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,3 I (Control)by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,3 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,4 I (Control)by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems",
+      "Premium spray gun for automotive refinish jet X HVLP 1,4 O (Speed) by Stilbruch DIGITAL ready, suitable for water‑ and solvent‑based coating systems"
+    ]
+  }
+}

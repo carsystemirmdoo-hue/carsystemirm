@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "reference": "en",
+    "europeLocales": [
+      "de-de",
+      "en-gb",
+      "it-it"
+    ],
+    "otherMarketLocales": [
+      "en-us",
+      "en-ca"
+    ],
+    "counts": {
+      "en": 2608,
+      "de-de": 2522,
+      "en-gb": 2520,
+      "it-it": 2552,
+      "en-us": 2376,
+      "en-ca": 2398
+    },
+    "referenceInEurope": 2554,
+    "referenceRegionOnly": 54
+  },
+  "regionOnly": [
+    {
+      "articleNumber": "13656",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "17400",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "124461",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "130252",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "146845",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "146936",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "152546",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "152553",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "157461",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "159830",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "160812",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "194464",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "195016",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "198143",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "198150",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "198317",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "198325",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "201343",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "201368",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "201418",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204438",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204446",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204453",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204461",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204503",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204529",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "204537",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "218867",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "219170",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222257",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222265",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222273",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222281",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222299",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222307",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222315",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222539",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222547",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222554",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222562",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "222570",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1005603",
+      "publishedIn": [
+        "en-us",
+        "en-ca"
+      ]
+    },
+    {
+      "articleNumber": "1006445",
+      "publishedIn": [
+        "en-us",
+        "en-ca"
+      ]
+    },
+    {
+      "articleNumber": "1010800",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1024695",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1040782",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1044271",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1044304",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1066572",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1066580",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1066598",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1066605",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1074004",
+      "publishedIn": []
+    },
+    {
+      "articleNumber": "1099573",
+      "publishedIn": [
+        "en-us",
+        "en-ca"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "SATA EMEA REFINISH FAMILY SCOPE",
+  "families": 66,
+  "articleNumbers": 655,
+  "documents": 82,
+  "documentsByKind": {
+    "manual": 44,
+    "declaration": 37,
+    "brochure": 1
+  },
+  "familiesWithDocuments": 46,
+  "taxonomy": {
+    "pribor": 13,
+    "zastita": 9,
+    "radionica": 2,
+    "oprema": 42
+  },
+  "images": {
+    "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME": 61,
+    "OFFICIAL_IMAGE_NOT_PUBLISHED": 5,
+    "APPROVED_RUNTIME_IMAGES": 0
+  },
+  "errors": []
+}

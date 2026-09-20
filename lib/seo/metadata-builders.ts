@@ -143,8 +143,10 @@ export function buildProductMetadata({
   const title = `${product.name} – ${descriptor}`;
   const baseDescription =
     product.seoDescription ?? product.shortDescription ?? product.purpose;
-  const productIdentifier = product.sku
-    ? `Šifra proizvoda ${product.sku}. `
+  // Javna šifra ima prednost: interni `sku` se ne predstavlja kao šifra proizvođača.
+  const publicCode = product.publicCode ?? product.sku;
+  const productIdentifier = publicCode
+    ? `Šifra proizvoda ${publicCode}. `
     : "";
   const description = `${productIdentifier}${normalizeText(baseDescription)} Pogledajte dokumentaciju i pošaljite upit za dostupnost proizvoda ${product.name}.`;
   const hasGeneratedRmOg =

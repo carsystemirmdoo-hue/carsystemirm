@@ -2,6 +2,7 @@ import "server-only";
 
 import type { CSSProperties } from "react";
 import { canonicalVariantKey } from "@/lib/catalog/variant-key";
+import { getProductDocuments } from "@/components/product/productDocumentList";
 import {
   getProductStageImages,
   type ProductStageImage,
@@ -31,7 +32,7 @@ import {
   getPuttyMaterialTrace,
   type PuttyMaterialTraceConfig,
 } from "@/lib/putty-material-trace";
-import type { ProductCommercialVariant } from "@/types/product-detail";
+import type { ProductCommercialVariant, ProductDetailDocument } from "@/types/product-detail";
 
 /**
  * Sve što potrošači PDP-a prikazuju za JEDNU varijantu, razrešeno na serveru.
@@ -67,6 +68,15 @@ export type ProductVariantView = {
 
   /** Slike scene, sa izmerenim kontrastom. Prva je glavna. */
   images: ProductStageImage[];
+  /**
+   * Dokumenti ove varijante.
+   *
+   * Bezbednosni list je vezan za PAKOVANJE, pa pripada varijanti kao i šifra i slika;
+   * tehnički list koji važi za ceo proizvod stoji na svakoj varijanti i time se prirodno
+   * ponaša kao zajednički dokument. Ranije se skup računao jednom, iz zapisa koji je server
+   * izabrao, pa se izborom pakovanja nije menjao.
+   */
+  documents: ProductDetailDocument[];
   /** Boja pozadine/grafita i akcenti — kao CSS custom properties. */
   style: CSSProperties;
   treatment: string;
@@ -142,6 +152,7 @@ export function toProductVariantView(
     inventoryKey: null,
 
     images: getProductStageImages(product),
+    documents: getProductDocuments(product),
     style: getProductVisualStyle(product),
     treatment: preset.treatment,
     productType: preset.productType,

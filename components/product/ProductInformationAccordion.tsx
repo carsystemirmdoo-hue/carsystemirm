@@ -17,6 +17,7 @@ import type {
   ProductTechnicalFact,
   ProductTechnology,
 } from "@/types/product-detail";
+import { useOptionalProductVariant } from "@/components/product/ProductVariantProvider";
 import styles from "./ProductDetailExperience.module.css";
 
 type ProductInformationAccordionProps = {
@@ -34,12 +35,21 @@ export function ProductInformationAccordion({
   benefits,
   benefitsDescription,
   benefitsTitle,
-  documents,
+  documents: serverDocuments,
   process,
   processStages,
   technicalFacts,
   technology,
 }: ProductInformationAccordionProps) {
+  /*
+   * Dokumentacija prati AKTIVNU varijantu.
+   *
+   * Bezbednosni list je vezan za pakovanje, pa se izborom pakovanja mora promeniti isto kao
+   * šifra i slika. Prop sa servera ostaje pad za površine bez izbora varijante (jedan
+   * proizvod bez porodice) i za varijantu čiji skup nije razrešen.
+   */
+  const variant = useOptionalProductVariant();
+  const documents = variant?.activeVariant.documents ?? serverDocuments;
   const accordionId = useId();
   const [openSectionIds, setOpenSectionIds] = useState<string[]>([]);
   const toggleSection = (sectionId: string) => {

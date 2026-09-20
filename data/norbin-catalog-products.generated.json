@@ -2329,14 +2329,6 @@
           "language": "en",
           "pack": "1 L",
           "note": "Zvanični dokument na www.norbin-paint.com"
-        },
-        {
-          "kind": "sds",
-          "title": "Bezbednosni list — N15-020 Clear, 5 L",
-          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_5L.PDF",
-          "language": "en",
-          "pack": "5 L",
-          "note": "Zvanični dokument na www.norbin-paint.com"
         }
       ],
       "image": null,
@@ -2547,14 +2539,6 @@
           "language": "en",
           "note": "Zvanični dokument na www.norbin-paint.com",
           "tokenizedUrl": false
-        },
-        {
-          "kind": "sds",
-          "title": "Bezbednosni list — N15-020 Clear, 1 L",
-          "href": "https://www.norbin-paint.com/files/MSDS/N15-020_Clear_1L.PDF",
-          "language": "en",
-          "pack": "1 L",
-          "note": "Zvanični dokument na www.norbin-paint.com"
         },
         {
           "kind": "sds",

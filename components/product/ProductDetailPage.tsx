@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
 import { Footer } from "@/components/layout/Footer";
 import { ProductIdentity } from "@/components/product/ProductIdentity";
+import { getProductDocuments } from "@/components/product/productDocumentList";
 import { ProductInformationAccordion } from "@/components/product/ProductInformationAccordion";
 import { ProductInquiryLink } from "@/components/product/ProductInquiryLink";
 import { ProductMobileCta } from "@/components/product/ProductMobileCta";
@@ -26,7 +27,6 @@ import {
 } from "@/lib/carsystem-data";
 import { getFamilyForProduct } from "@/lib/product-families";
 import type {
-  ProductDetailDocument,
   ProductRelationshipSection,
   ProductTechnicalFact,
 } from "@/types/product-detail";
@@ -73,7 +73,7 @@ export function ProductDetailPage({
     ? detail?.technology?.content
     : undefined;
   const technicalFacts = getTechnicalFacts(product);
-  const documents = getDocuments(product);
+  const documents = getProductDocuments(product);
   const compatibleContent = isConfirmed(detail?.compatibleProducts?.reviewStatus)
     ? detail?.compatibleProducts?.content
     : undefined;
@@ -414,44 +414,6 @@ function getTechnicalFacts(product: CarsystemProduct): ProductTechnicalFact[] {
     .map((fact) => ({ ...fact, reviewStatus: "confirmed" as const }));
 }
 
-function getDocuments(product: CarsystemProduct): ProductDetailDocument[] {
-  const reviewedDocuments = product.detail?.documents;
-  if (product.detail) {
-    return isConfirmed(reviewedDocuments?.reviewStatus)
-      ? reviewedDocuments?.content.filter(
-          (document) =>
-            isConfirmed(document.reviewStatus) &&
-            (document.availability === "preparing" || Boolean(document.href)),
-        ) ?? []
-      : [];
-  }
-
-  return product.documents.flatMap((document, index) => {
-    if (document.status === "placeholder") return [];
-    if (document.status === "available" && !document.href) return [];
-
-    return [
-      {
-        id: `${product.slug}-${index}`,
-        title: document.title,
-        kind: getLegacyDocumentKind(document.title),
-        availability:
-          document.status === "available" ? ("available" as const) : ("preparing" as const),
-        href: document.status === "available" ? document.href : undefined,
-        note: document.note,
-        reviewStatus: "confirmed" as const,
-      },
-    ];
-  });
-}
-
-function getLegacyDocumentKind(title: string): ProductDetailDocument["kind"] {
-  const normalized = title.toLocaleLowerCase("sr-Latn");
-  if (normalized.includes("tehnički")) return "tds";
-  if (normalized.includes("bezbednosni")) return "sds";
-  if (normalized.includes("uputstvo")) return "instructions";
-  return "other";
-}
 
 function ArrowIcon() {
   return (

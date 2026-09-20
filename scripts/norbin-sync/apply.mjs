@@ -69,8 +69,14 @@ function relationsOf(record) {
   return { relations, usedBy };
 }
 
-/** Dokumenti: isključivo reference na zvanični izvor. URL se prenosi DOSLOVNO, sa tokenom. */
-function documentsOf(record) {
+/**
+ * Dokumenti: isključivo reference na zvanični izvor. URL se prenosi DOSLOVNO, sa tokenom.
+ *
+ * `pack` sužava skup na JEDNO pakovanje: bezbednosni list je vezan za pakovanje, pa zapis
+ * pakovanja od 1 L ne sme da nosi list za 5 L. Tehnički list važi za proizvod nezavisno od
+ * pakovanja i zato ostaje na svakom zapisu — tako se prirodno ponaša kao zajednički dokument.
+ */
+function documentsOf(record, pack = null) {
   const tds = record.documents.tds
     ? [{
         kind: "tds",
@@ -83,6 +89,7 @@ function documentsOf(record) {
     : [];
   const sds = record.documents.sds
     .filter((document) => document.region === "en")
+    .filter((document) => !pack || document.pack === pack)
     .map((document) => ({
       kind: "sds",
       title: document.pack ? `Bezbednosni list — ${record.officialName}, ${document.pack}` : `Bezbednosni list — ${record.officialName}`,
@@ -158,6 +165,7 @@ for (const item of enrichments) {
   for (const member of item.family?.members ?? [{ slug: item.slug, pack: record.packs[0] ?? null, variantId: item.sourceKey }]) {
     enrichmentEntries[member.slug] = {
       ...entry,
+      documents: documentsOf(record, member.pack),
       /*
        * Porodica se zaključava na NOVU adresu, a oba postojeća sluga ostaju živa: `variant-pdp`
        * sloj ih preusmerava na porodicu sa izabranim pakovanjem.

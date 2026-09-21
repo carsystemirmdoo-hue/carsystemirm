@@ -95,6 +95,34 @@ Ručni zapis se nikad ne briše i ne prepisuje. Pouzdano prepoznat zapis dobija
 samo ono što mu fali (tabelu šifara artikala), kroz
 `applyCarsystemCatalogEnrichment`.
 
+## Proizvodi drugih proizvođača u Carsystem katalogu (RUPES)
+
+Carsystem u svom katalogu vodi i proizvode koje ne proizvodi. Od 2026-09-21 oni se kupcu prikazuju pod brendom
+PROIZVOĐAČA, a Carsystem ostaje izvor i sloj distribucije. Opseg: `RUPES_PRODUCTS_FROM_CARSYSTEM_PROGRAM` — samo
+ono što Carsystem vodi, ne RUPES katalog.
+
+| | |
+|---|---|
+| Opseg i dokazi | `data/carsystem-sync/third-party-manufacturers.json` (ručno pregledano, commitovano; sync ne ide na rupes.com) |
+| Prepoznavanje | zvanični Carsystem naziv počinje imenom proizvođača; `apply.mjs` obara sync ako se taj skup i spisak u fajlu razlikuju |
+| Šta se menja | `brandSlug`, šifra proizvođača/javna šifra (potvrđena oznaka modela), pojmovi pretrage, redovi „Proizvođač / Status kod proizvođača / Program” |
+| Šta se NE menja | slug i adresa, `sku` (interni ključ → `?varijanta=`), Carsystem brojevi artikala (redovi tabele), opis, slike |
+
+Pravila:
+
+- **Oznaka modela se ne izmišlja.** Svaka mora doslovno stajati u zvaničnom Carsystem nazivu ili specifikaciji artikla.
+  `evidence` kaže da li je nađena i na rupes.com: `OFFICIAL_CONFIRMED`, `OFFICIAL_BASE_MODEL_CONFIRMED` (rupes.com: RX253,
+  Carsystem: RX253A) ili `CARSYSTEM_STATED_ONLY`. Šifra KARTICE postoji samo uz `OFFICIAL_CONFIRMED`.
+- **Status kod proizvođača** koji nije `CURRENT_ON_OFFICIAL_SITE` kupac vidi u tehničkim podacima
+  (`DISCONTINUED_BY_RUPES_BUT_CARSYSTEM_LISTED`, `CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED`).
+- **Slike i logotip:** postojeći Carsystem packshotovi, oznaka `RUPES_IMAGE_RIGHTS_REVIEW`; ništa se ne preuzima sa
+  rupes.com. Brend nema `logo` i prikazuje se tekstualno (`components/brand/BrandLogoMark.tsx`).
+- **Formulacije:** „RUPES proizvodi iz Carsystem programa”. Bez tvrdnji o statusu distribucije.
+
+Pokrivenost se vodi u dve grupe (`reconcile.mjs`, `dataset.meta.coverageGroups`): `CARSYSTEM_MANUFACTURER_PRODUCTS` i
+`THIRD_PARTY_PRODUCTS_LISTED_IN_CARSYSTEM_CATALOGUE`. Paritet sa izvorom (stranice, brojevi artikala) meri se nad obe,
+jer izvor ne pravi razliku; izveštaj o Carsystem proizvodima tuđe proizvode ne broji kao svoje.
+
 ## Idempotentnost
 
 Slug se ne izvodi svaki put iz naziva: `data/carsystem-sync/identity-registry.json`

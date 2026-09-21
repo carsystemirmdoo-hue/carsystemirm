@@ -18,6 +18,7 @@ import path from "node:path";
 import { CATALOGUE, PATHS } from "./lib/config.mjs";
 import { readJson, writeJson } from "./lib/http.mjs";
 import { loadCatalogRuntime } from "../lib/catalog-runtime.mjs";
+import { OWN_GROUP, THIRD_PARTY_GROUP, articleIdsOf, partitionCarsystemSourced } from "./lib/sourced-products.mjs";
 
 const REPORT_DIR = path.dirname(PATHS.plan);
 const plan = readJson(PATHS.plan);
@@ -88,13 +89,13 @@ expect(productSum === source.products.length, `Zbir statusa proizvoda ${productS
 /* -- 2. Šifre artikala ------------------------------------------------------ */
 
 const runtime = loadCatalogRuntime();
-const carsystem = runtime.products.filter((product) => product.brandSlug === "carsystem");
+// Paritet sa izvorom se meri nad svime što potiče iz Carsystem kataloga; pokrivenost ispod razdvaja grupe.
+const { own: ownProducts, thirdParty: thirdPartyProducts, sourced: carsystem, manufacturerBySlug } = partitionCarsystemSourced(runtime.products, dataset);
 
 /** šifra → [slug…] u STVARNOM katalogu (redovi varijanti ili šifra proizvoda sa jednom varijantom). */
 const runtimeOwners = new Map();
 for (const product of carsystem) {
-  const rows = product.detail?.variants?.content.rows ?? [];
-  const ids = rows.length ? rows.map((row) => row.id) : product.manufacturerCode ? [product.manufacturerCode] : [];
+  const ids = articleIdsOf(product, manufacturerBySlug);
   for (const id of ids) runtimeOwners.set(id, [...(runtimeOwners.get(id) ?? []), product.slug]);
 }
 
@@ -190,12 +191,59 @@ const localSlugsFromCatalogue = new Set(
     .filter((row) => PRESENT.has(row.finalStatus) && (row.cataloguePresence || row.legacyArticleNumbers.length > 0))
     .map((row) => row.localSlug),
 );
-const handWritten = carsystem.filter((product) => !registry.products[product.slug]);
+const handWritten = ownProducts.filter((product) => !registry.products[product.slug]);
 // Familija je „u katalogu” i kada je tamo pod drugom šifrom nego na sajtu
 // (SOURCE_CONFLICT) — spoj po šifri je ne vidi, ali katalog je štampa.
 const catalogueFamilies = products.filter((row) => row.cataloguePresence || row.legacyArticleNumbers.length > 0);
+/*
+ * Pokrivenost u DVE grupe. Porodica kataloga pripada proizvođaču čijim imenom počinje njen zvanični naziv
+ * (isto pravilo kao u `apply.mjs`); tuđi proizvod se ne broji kao Carsystem-ov.
+ */
+const thirdPartyFile = readJson(PATHS.thirdParty, { manufacturers: {} });
+const makerOfRow = (row) => Object.values(thirdPartyFile.manufacturers).find((maker) => new RegExp(`^${maker.detect.officialNamePrefix}\\b`, "i").test(row.officialName)) ?? null;
+const familyGroup = (rows) => ({
+  inCatalogue: rows.length,
+  representedLocally: rows.filter((row) => PRESENT.has(row.finalStatus)).length,
+  notRepresented: rows.filter((row) => !PRESENT.has(row.finalStatus)).map((row) => ({ officialName: row.officialName, status: row.finalStatus, articleNumbers: row.articleNumbers })),
+});
+const tally = (values) => values.reduce((acc, value) => ({ ...acc, [value]: (acc[value] ?? 0) + 1 }), {});
+const groups = {
+  [OWN_GROUP]: {
+    cards: ownProducts.length,
+    importedBySync: ownProducts.length - handWritten.length,
+    handWritten: handWritten.length,
+    catalogueFamilies: familyGroup(catalogueFamilies.filter((row) => !makerOfRow(row))),
+    articleNumbers: dataset.meta.coverageGroups[OWN_GROUP].variants,
+  },
+  [THIRD_PARTY_GROUP]: Object.fromEntries(Object.values(thirdPartyFile.manufacturers).map((maker) => {
+    const cards = thirdPartyProducts.filter((product) => manufacturerBySlug.get(product.slug).brandSlug === maker.brandSlug);
+    const entries = dataset.products.filter((entry) => entry.manufacturer?.brandSlug === maker.brandSlug);
+    return [maker.brandSlug, {
+      scope: maker.scope,
+      cards: cards.length,
+      runtimeBrandSlug: [...new Set(cards.map((product) => product.brandSlug))],
+      catalogueFamilies: familyGroup(catalogueFamilies.filter((row) => makerOfRow(row) === maker)),
+      websiteOnly: entries.filter((entry) => !entry.inCatalogue).length,
+      articleNumbers: entries.reduce((sum, entry) => sum + entry.variants.length, 0),
+      byClassification: tally(entries.map((entry) => entry.manufacturer.classification)),
+      byManufacturerStatus: tally(entries.map((entry) => entry.manufacturer.manufacturerStatus)),
+      notCurrentAtManufacturer: entries.filter((entry) => entry.manufacturer.manufacturerStatus !== "CURRENT_ON_OFFICIAL_SITE").map((entry) => ({ slug: entry.slug, status: entry.manufacturer.manufacturerStatus, note: entry.manufacturer.note })),
+      modelCodeEvidence: tally(entries.flatMap((entry) => Object.values(entry.manufacturer.articleModelCodes).map((model) => model.evidence))),
+      articlesWithoutModelCode: entries.reduce((sum, entry) => sum + entry.variants.filter((variant) => !entry.manufacturer.articleModelCodes[variant.articleNumber]).length, 0),
+      imageRights: { flag: maker.images.flag, status: maker.images.status, cardsFlagged: entries.filter((entry) => entry.manufacturer.imageRights === maker.images.flag).length },
+      logo: maker.logo.status,
+    }];
+  })),
+};
+for (const [slug, group] of Object.entries(groups[THIRD_PARTY_GROUP])) {
+  expect(group.runtimeBrandSlug.length === 1 && group.runtimeBrandSlug[0] === slug, `Tuđi proizvodi (${slug}) nisu svi pod svojim brendom: ${group.runtimeBrandSlug.join(", ")}`);
+  expect(group.cards === Object.keys(thirdPartyFile.manufacturers[slug].products).length, `${slug}: broj kartica ${group.cards} ≠ odobren opseg ${Object.keys(thirdPartyFile.manufacturers[slug].products).length}`);
+}
+expect(!ownProducts.some((product) => makerOfRow({ officialName: product.name })), "Proizvod drugog proizvođača je ostao pod brendom Carsystem.");
+
 const coverage = {
-  A_totalLocalCarsystemRecords: carsystem.length,
+  A_totalRecordsSourcedFromCarsystemCatalogue: carsystem.length,
+  groups,
   A_breakdown: {
     importedBySync: carsystem.length - handWritten.length,
     handWritten: handWritten.length,

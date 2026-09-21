@@ -34,7 +34,11 @@ let ambiguousCodeQueries = 0;
 const run = (query, slug, limit) => searchIndex(index, query, { limit }).map((hit) => hit.record.id).includes(slug);
 const stats = { officialName: [0, 0], officialSlug: [0, 0], lineAndCode: [0, 0], localName: [0, 0], legacyLocalName: [0, 0] };
 const failures = [];
+const REMOVED = "REMOVED_FROM_CUSTOMER_CATALOG";
+const removedEntries = entries.filter((entry) => entry.sync.status === REMOVED);
 for (const entry of entries) {
+  // Uklonjeno iz kataloga za kupce: zapis NE sme da bude u indeksu (proverava se ispod), pa se ovde ne traži.
+  if (entry.sync.status === REMOVED) continue;
   if (!ids.has(entry.slug)) { failures.push({ slug: entry.slug, problem: "NOT_IN_INDEX" }); continue; }
   const check = (kind, query, limit) => { stats[kind][1] += 1; if (run(query, entry.slug, limit)) stats[kind][0] += 1; else failures.push({ kind, query, slug: entry.slug }); };
   if (entry.sync.status === "LEGACY_LOCAL_ONLY") { check("legacyLocalName", entry.record.officialName, 5); continue; }
@@ -54,11 +58,21 @@ const NAMED = [
   ["podeljena kartica", "Silicone Oil 203", [...local.values()].find((record) => /Silicone Oil 203/.test(record.officialName)).slug],
   ["podeljena kartica", "Copper Grease", [...local.values()].find((record) => /Copper Grease/i.test(record.officialName)).slug],
   ["drugi jezici sajta", "Antichip 250", [...local.values()].find((record) => /Antichip 250/.test(record.officialName)).slug],
-  ["legacy", "Molotow Premium MP-001", [...local.values()].find((record) => record.cosmosCode === "MP-001").slug],
 ].map(([kind, query, slug]) => { const top = searchIndex(index, query, { limit: 5 }).map((hit) => hit.record.id); const ok = top.includes(slug); if (!ok) failures.push({ kind, query, slug, top }); return { kind, query, slug, ok, top: top[0] }; });
+
+/* Uklonjena serija: nijedan zapis u indeksu i nijedan pogodak za naziv serije, liniju ni šifru. */
+const removedInIndex = removedEntries.filter((entry) => ids.has(entry.slug)).map((entry) => entry.slug);
+for (const slug of removedInIndex) failures.push({ kind: "removedStillIndexed", slug });
+const REMOVED_QUERIES = ["molotow", "Molotow Premium", "Molotow Burner", "MP-001", "Molotow Premium MP-001", "burner chrome"];
+const removedQueries = REMOVED_QUERIES.map((query) => {
+  const hits = searchIndex(index, query, { limit: 50 }).filter((hit) => /molotow/i.test(`${hit.record.id} ${hit.record.name ?? ""}`)).map((hit) => hit.record.id);
+  if (hits.length) failures.push({ kind: "removedStillFound", query, hits: hits.slice(0, 5) });
+  return { query, removedHits: hits.length };
+});
 
 const summary = Object.fromEntries(Object.entries(stats).map(([kind, [hit, total]]) => [kind, `${hit}/${total}`]));
 summary.lineAndCodeAmbiguousByDesign = ambiguousCodeQueries;
-writeJson(PATHS.searchQa, { summary, named: NAMED, failures });
+summary.removedFromCustomerCatalog = { records: removedEntries.length, inIndex: removedInIndex.length };
+writeJson(PATHS.searchQa, { summary, named: NAMED, removedQueries, failures });
 console.log(JSON.stringify({ indexRecords: payload.records.length, summary, named: NAMED.map((entry) => `${entry.ok ? "✓" : "✖"} [${entry.kind}] ${entry.query} → ${entry.top}`), failureCount: failures.length, failures: failures.slice(0, 12) }, null, 1));
 if (failures.length) process.exitCode = 1;

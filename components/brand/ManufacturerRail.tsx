@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import { useEffect, useRef } from "react";
 import type { CarsystemBrand } from "@/lib/carsystem-data";
 import styles from "./ManufacturerRail.module.css";
@@ -86,9 +86,10 @@ export function ManufacturerRail({
             const content = (
               <>
                 <span className={styles.logoFrame}>
-                  <Image
+                  <BrandLogoMark
+                    brand={brand}
                     className={styles.logo}
-                    src={brand.logo}
+                    tone="onLight"
                     alt=""
                     width={126}
                     height={48}

@@ -16,6 +16,7 @@ import path from "node:path";
 import { PATHS, PUBLIC_IMAGE_URL_PREFIX, REPO_ROOT } from "./lib/config.mjs";
 import { readJson } from "./lib/http.mjs";
 import { loadCatalogRuntime } from "../lib/catalog-runtime.mjs";
+import { articleIdsOf, partitionCarsystemSourced } from "./lib/sourced-products.mjs";
 
 const errors = [];
 const warnings = [];
@@ -31,7 +32,8 @@ const taxonomy = runtime.requireModule("lib/product-taxonomy.ts");
 const motion = runtime.requireModule("components/product/productMotion.ts");
 const data = runtime.requireModule("lib/carsystem-data.ts");
 
-const carsystem = runtime.products.filter((product) => product.brandSlug === "carsystem");
+// Sve što potiče iz Carsystem kataloga: sopstveni proizvodi + proizvodi drugih proizvođača (RUPES).
+const { own: ownProducts, thirdParty: thirdPartyProducts, sourced: carsystem, manufacturerBySlug } = partitionCarsystemSourced(runtime.products, dataset);
 const imported = carsystem.filter((product) => registry.products[product.slug]);
 const officialArticles = new Set(source.products.flatMap((product) => product.articles.map((article) => article.articleNumber)));
 
@@ -47,8 +49,7 @@ for (const [name, total] of count(carsystem.map((product) => product.name))) {
 
 const articleOwners = new Map();
 for (const product of carsystem) {
-  const rows = product.detail?.variants?.content.rows ?? [];
-  const ids = rows.length ? rows.map((row) => row.id) : product.manufacturerCode ? [product.manufacturerCode] : [];
+  const ids = articleIdsOf(product, manufacturerBySlug);
   for (const [id, total] of count(ids)) expect(total === 1, `Dupla varijanta ${id} u ${product.slug}`);
   for (const id of ids) {
     if (!/^\d{3}\.\d{3}$/.test(id)) continue;
@@ -116,6 +117,50 @@ for (const product of imported) {
   expect(registry.products[at].articleNumbers.every((article) => /^\d{3}\.\d{3}$/.test(article)), `${at}: registar nosi neispravnu šifru`);
 }
 
+/* -- proizvodi drugih proizvođača (RUPES) ----------------------------------- */
+
+const thirdPartyFile = readJson(PATHS.thirdParty, { manufacturers: {} });
+const codeKey = (text) => String(text ?? "").toUpperCase().replace(/\s+/g, "");
+const RISKY_DISTRIBUTION_WORDING = /zvani[čc]n\w* (distributer|zastupnik|partner)|ovla[šs][ćc]en|ekskluzivn|official .{0,12}distributor|authori[sz]ed/i;
+expect(!ownProducts.some((product) => manufacturerBySlug.has(product.slug)), "Proizvod drugog proizvođača je i dalje pod brendom Carsystem.");
+for (const product of thirdPartyProducts) {
+  const at = product.slug;
+  const entry = dataset.products.find((candidate) => candidate.slug === at);
+  const maker = thirdPartyFile.manufacturers[entry.manufacturer.brandSlug];
+  expect(Boolean(maker) && product.brandSlug === maker.brandSlug, `${at}: brend ${product.brandSlug} ≠ ${maker?.brandSlug}`);
+  expect(data.brands.some((brand) => brand.slug === product.brandSlug), `${at}: brend ${product.brandSlug} nije aktivan brend sajta`);
+  // Adresa i interni ključ se ne menjaju zbog promene brenda.
+  expect(registry.products[at] && product.sku === entry.leadArticleNumber && product.externalSku === entry.leadArticleNumber, `${at}: promena brenda je dirnula slug ili interni ključ`);
+  // Šifra proizvođača: samo potvrđena oznaka modela, nikad Carsystem broj artikla, nikad izmišljena.
+  const officialSource = source.products.find((candidate) => candidate.sourceKey === entry.sourceKey);
+  for (const [articleNumber, model] of Object.entries(entry.manufacturer.articleModelCodes)) {
+    const article = officialSource.articles.find((candidate) => candidate.articleNumber === articleNumber);
+    expect(Boolean(article) && codeKey(`${officialSource.officialName} ${article?.specification ?? ""}`).includes(codeKey(model.modelCode)), `${at}: oznaka modela ${model.modelCode} nije u zvaničnom Carsystem izvoru`);
+  }
+  expect(!/^\d{3}\.\d{3}$/.test(product.manufacturerCode ?? ""), `${at}: Carsystem broj artikla je prikazan kao šifra proizvođača`);
+  expect((product.manufacturerCode ?? null) === (entry.manufacturer.modelCode ?? null) && (product.publicCode ?? null) === (entry.manufacturer.modelCode ?? null), `${at}: šifra kartice ≠ potvrđena oznaka modela`);
+  if (entry.manufacturer.modelCode) expect(entry.manufacturer.articleModelCodes[entry.leadArticleNumber]?.evidence === "OFFICIAL_CONFIRMED", `${at}: šifra kartice bez potvrde na zvaničnom sajtu proizvođača`);
+  // Pretraga: brend, oznake modela (i osnovni model) i svi Carsystem brojevi artikala.
+  const terms = new Set((product.searchTerms ?? []).map(codeKey));
+  for (const term of [maker.name, ...entry.variants.map((variant) => variant.articleNumber), ...Object.values(entry.manufacturer.articleModelCodes).flatMap((model) => [model.modelCode, ...model.aliases])]) {
+    expect(terms.has(codeKey(term)), `${at}: pojam „${term}” nije pretraživ`);
+  }
+  // Status kod proizvođača koji nije „aktuelan” mora da stoji na stranici proizvoda.
+  const facts = product.detail?.technicalFacts?.content ?? [];
+  expect(facts.some((fact) => fact.label === "Proizvođač" && fact.value === maker.name), `${at}: nema reda „Proizvođač”`);
+  if (entry.manufacturer.manufacturerStatus !== "CURRENT_ON_OFFICIAL_SITE") expect(facts.some((fact) => fact.label === "Status kod proizvođača"), `${at}: status ${entry.manufacturer.manufacturerStatus} nije prikazan kupcu`);
+  expect(!RISKY_DISTRIBUTION_WORDING.test(JSON.stringify([product.detail, product.seoTitle, product.seoDescription, product.badges])), `${at}: rizična formulacija o distribuciji`);
+  // Slike: isključivo postojeći Carsystem packshotovi; ništa sa rupes.com.
+  expect(entry.manufacturer.imageRights === maker.images.flag, `${at}: nedostaje oznaka ${maker.images.flag}`);
+  for (const image of [product.productImage, ...product.galleryImages].filter(Boolean)) expect(image.src.startsWith(PUBLIC_IMAGE_URL_PREFIX), `${at}: slika van Carsystem porekla — ${image.src}`);
+}
+for (const brand of data.brands) expect(!RISKY_DISTRIBUTION_WORDING.test(JSON.stringify(brand)), `Brend ${brand.slug}: rizična formulacija o distribuciji`);
+for (const maker of Object.values(thirdPartyFile.manufacturers)) {
+  expect(!data.futureBrands.some((brand) => brand.slug === maker.brandSlug), `${maker.brandSlug} je i dalje u futureBrands`);
+  const brand = data.brands.find((candidate) => candidate.slug === maker.brandSlug);
+  if (maker.logo.status === "NO_APPROVED_ASSET") expect(brand && !brand.logo, `${maker.brandSlug}: logo nije odobren, a brend ga prikazuje`);
+}
+
 /* -- boja kartice ----------------------------------------------------------- */
 
 const plan = readJson(PATHS.plan);
@@ -157,10 +202,12 @@ for (const slug of Object.keys(dataset.enrichments)) {
 }
 
 const result = {
-  carsystemProducts: carsystem.length,
+  recordsSourcedFromCarsystemCatalogue: carsystem.length,
+  CARSYSTEM_MANUFACTURER_PRODUCTS: ownProducts.length,
+  THIRD_PARTY_PRODUCTS_LISTED_IN_CARSYSTEM_CATALOGUE: thirdPartyProducts.length,
   imported: imported.length,
   handWritten: carsystem.length - imported.length,
-  manufacturerArticleNumbers: articleOwners.size,
+  carsystemArticleNumbers: articleOwners.size,
   importedWithShade: imported.filter((product) => motion.getProductShadeSource(product)).length,
   materialProductsOnBrandColour: withoutShade.length,
   orphanedImages: orphans.length,

@@ -4,8 +4,12 @@
     "officialSlug": "663/663",
     "lineAndCode": "611/611",
     "localName": "674/674",
-    "legacyLocalName": "79/79",
-    "lineAndCodeAmbiguousByDesign": 42
+    "legacyLocalName": "6/6",
+    "lineAndCodeAmbiguousByDesign": 42,
+    "removedFromCustomerCatalog": {
+      "records": 73,
+      "inIndex": 0
+    }
   },
   "named": [
     {
@@ -63,13 +67,32 @@
       "slug": "cosmos-lac-automotive-250-400-ml-antichip-250-white",
       "ok": true,
       "top": "cosmos-lac-automotive-250-400-ml-antichip-250-white"
+    }
+  ],
+  "removedQueries": [
+    {
+      "query": "molotow",
+      "removedHits": 0
     },
     {
-      "kind": "legacy",
+      "query": "Molotow Premium",
+      "removedHits": 0
+    },
+    {
+      "query": "Molotow Burner",
+      "removedHits": 0
+    },
+    {
+      "query": "MP-001",
+      "removedHits": 0
+    },
+    {
       "query": "Molotow Premium MP-001",
-      "slug": "cosmos-lac-molotow-premium-mp-001-400-ml-mp-001-jasmine-yellow",
-      "ok": true,
-      "top": "cosmos-lac-molotow-premium-mp-001-400-ml-mp-001-jasmine-yellow"
+      "removedHits": 0
+    },
+    {
+      "query": "burner chrome",
+      "removedHits": 0
     }
   ],
   "failures": []

@@ -186,7 +186,8 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   className={styles.heroLogo}
                   height={329}
                   priority
-                  src={brand.logo}
+                  // `logo` je opciono na tipu brenda; Car Fit ga uvek ima.
+                  src={brand.logo ?? "/brands/carfit.svg"}
                   width={1989}
                 />
               </p>

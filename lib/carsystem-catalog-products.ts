@@ -87,6 +87,31 @@ type CatalogProductEntry = {
   };
   shade: { color: string; token?: string; series: string; source: string } | null;
   recommendedSlugs: string[];
+  /**
+   * Samo za proizvode DRUGIH proizvođača koje Carsystem vodi u svom katalogu (RUPES). Zapis ostaje
+   * Carsystem-ov po izvoru i šifri artikla; ovo polje menja brend koji vidi kupac i dodaje modelsku šifru.
+   */
+  manufacturer?: CatalogManufacturer;
+};
+
+type CatalogManufacturer = {
+  brandSlug: string;
+  name: string;
+  scope: string;
+  coverageGroup: string;
+  classification: string;
+  manufacturerStatus:
+    | "CURRENT_ON_OFFICIAL_SITE"
+    | "DISCONTINUED_BY_RUPES_BUT_CARSYSTEM_LISTED"
+    | "CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED";
+  officialName: string | null;
+  officialUrls: string[];
+  /** Šifra proizvođača kartice; postoji samo kada je potvrđena na zvaničnom sajtu proizvođača. */
+  modelCode: string | null;
+  articleModelCodes: Record<string, { modelCode: string; evidence: string; aliases: string[] }>;
+  searchTerms: string[];
+  imageRights: string;
+  note: string | null;
 };
 
 type CatalogEnrichment = {
@@ -137,16 +162,19 @@ function variantSection(
   column: CatalogVariantColumn,
   variants: CatalogVariant[],
   legacyPackages: string[] = [],
+  manufacturer?: CatalogManufacturer,
 ): ProductVariantSection {
   return {
     title: "Varijante i šifre artikala",
-    description:
-      "Svaka varijanta ima zasebnu proizvođačku šifru. Dostupnost na domaćem tržištu proverava se kroz upit.",
+    // Kod proizvoda drugog proizvođača broj artikla je Carsystem-ov, a ne proizvođačev.
+    description: manufacturer
+      ? `Svaka varijanta ima zaseban Carsystem broj artikla; ${manufacturer.name} oznaka modela je deo naziva varijante kada je Carsystem navodi. Dostupnost na domaćem tržištu proverava se kroz upit.`
+      : "Svaka varijanta ima zasebnu proizvođačku šifru. Dostupnost na domaćem tržištu proverava se kroz upit.",
     // Kolona sa varijantom je prva: `getPrimaryVariantColumn` za ključ van svoje
     // liste prioriteta bira prvu kolonu, a to mora biti varijanta, ne šifra.
     columns: [
       column,
-      { key: "article", label: "Šifra artikla" },
+      { key: "article", label: manufacturer ? "Carsystem br. artikla" : "Šifra artikla" },
       { key: "pack", label: "Fabričko pakovanje" },
       { key: "status", label: "Javni status" },
     ],
@@ -209,6 +237,53 @@ function legacyDocuments(slug: string, productName: string, tds: CatalogTds): Pr
   ];
 }
 
+/** Status kod proizvođača koji kupac mora da vidi; aktuelan proizvod ne dobija dodatni red. */
+const MANUFACTURER_STATUS_FACT: Partial<Record<CatalogManufacturer["manufacturerStatus"], { value: string; detail: string }>> = {
+  DISCONTINUED_BY_RUPES_BUT_CARSYSTEM_LISTED: {
+    value: "Proizvođač je model povukao iz aktuelnog programa",
+    detail: "Na zvaničnom sajtu proizvođača model je označen kao „discontinued”. Carsystem ga i dalje navodi u svom programu — dostupnost proverite upitom.",
+  },
+  CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED: {
+    value: "Naveden u Carsystem programu",
+    detail: "Proizvod kao RUPES artikal navodi Carsystem; zasebna stranica na zvaničnom sajtu proizvođača nije pronađena.",
+  },
+};
+
+/**
+ * Identitet proizvođača u tehničkim podacima. Carsystem ostaje izvor i sloj distribucije; ne tvrdi se
+ * nikakav status distribucije — samo odakle podatak dolazi.
+ */
+function manufacturerFacts(entry: CatalogProductEntry, manufacturer: CatalogManufacturer) {
+  const status = MANUFACTURER_STATUS_FACT[manufacturer.manufacturerStatus];
+  return [
+    { label: "Proizvođač", value: manufacturer.name, reviewStatus: "confirmed" as const },
+    ...(manufacturer.modelCode
+      ? [{ label: `${manufacturer.name} oznaka modela`, value: manufacturer.modelCode, reviewStatus: "confirmed" as const }]
+      : []),
+    ...(status ? [{ label: "Status kod proizvođača", ...status, reviewStatus: "confirmed" as const }] : []),
+    {
+      label: "Program",
+      value: `${manufacturer.name} proizvodi iz Carsystem programa`,
+      detail: entry.inCatalogue
+        ? `Proizvod vodi ${carsystemCatalogMeta.catalogue}.`
+        : "Proizvod vodi carsystem.org; nije u štampanom katalogu 2026/27.",
+      reviewStatus: "confirmed" as const,
+    },
+  ];
+}
+
+/** Pojmovi po kojima kupac traži alat: modelske oznake (i osnovni model), Carsystem brojevi artikala, porodica. */
+function manufacturerSearchTerms(entry: CatalogProductEntry, manufacturer: CatalogManufacturer) {
+  return [
+    ...new Set([
+      manufacturer.name,
+      ...Object.values(manufacturer.articleModelCodes).flatMap((model) => [model.modelCode, ...model.aliases]),
+      ...entry.variants.map((variant) => variant.articleNumber),
+      ...manufacturer.searchTerms,
+    ]),
+  ];
+}
+
 function summarizeVariants(entry: CatalogProductEntry) {
   const labels = entry.variants.map((variant) => variant.label);
   if (labels.length === 1) return labels[0];
@@ -221,16 +296,19 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
   const related = entry.recommendedSlugs.filter((slug) => knownSlugs.has(slug));
   const variantSummary = summarizeVariants(entry);
   const imageAlt = `${entry.name}, ${content.productType.toLocaleLowerCase("sr-Latn")}`;
+  const { manufacturer } = entry;
+  const brandName = manufacturer?.name ?? "Carsystem";
+  const articleLabel = manufacturer ? "Carsystem br. artikla" : "Šifra artikla";
 
   const detail: ProductDetailContent = {
     reviewStatus: "confirmed",
     hero: {
-      kicker: `Carsystem · ${CATEGORY_BADGE[entry.taxonomy.category]}`,
+      kicker: `${brandName} · ${CATEGORY_BADGE[entry.taxonomy.category]}`,
       subtype: content.subtype,
       lead: content.shortDescription,
     },
     ...(entry.variants.length > 1
-      ? { variants: { reviewStatus: "confirmed", content: variantSection(entry.variantColumn, entry.variants) } }
+      ? { variants: { reviewStatus: "confirmed", content: variantSection(entry.variantColumn, entry.variants, [], manufacturer) } }
       : {}),
     ...(content.benefits.length
       ? {
@@ -260,10 +338,11 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
       reviewStatus: "confirmed",
       content: [
         { label: "Tip proizvoda", value: content.productType, reviewStatus: "confirmed" },
+        ...(manufacturer ? manufacturerFacts(entry, manufacturer) : []),
         ...content.facts.map((fact) => ({ ...fact, reviewStatus: "confirmed" as const })),
         ...(entry.variants.length === 1
           ? [
-              { label: "Šifra artikla", value: entry.leadArticleNumber, reviewStatus: "confirmed" as const },
+              { label: articleLabel, value: entry.leadArticleNumber, reviewStatus: "confirmed" as const },
               { label: "Pakovanje", value: entry.variants[0].label, reviewStatus: "confirmed" as const },
             ]
           : []),
@@ -295,15 +374,30 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
   return {
     slug: entry.slug,
     name: entry.name,
-    brandSlug: "carsystem",
+    brandSlug: manufacturer?.brandSlug ?? "carsystem",
     programSlug: entry.taxonomy.programSlug,
     phaseSlug: entry.taxonomy.phaseSlug,
     shortDescription: content.shortDescription,
     longDescription: content.longDescription,
     // Vodeća šifra artikla — isto što i `itemprop="sku"` na zvaničnoj stranici.
+    // Ostaje interni ključ i kod proizvoda drugog proizvođača: iz nje nastaju `?varijanta=` adrese.
     sku: entry.leadArticleNumber,
     externalSku: entry.leadArticleNumber,
-    manufacturerCode: entry.variants.length === 1 ? entry.leadArticleNumber : null,
+    // Carsystem broj artikla NIJE šifra drugog proizvođača: tamo važi samo potvrđena oznaka modela.
+    manufacturerCode: manufacturer
+      ? manufacturer.modelCode
+      : entry.variants.length === 1
+        ? entry.leadArticleNumber
+        : null,
+    ...(manufacturer?.modelCode ? { publicCode: manufacturer.modelCode } : {}),
+    ...(manufacturer
+      ? {
+          searchTerms: manufacturerSearchTerms(entry, manufacturer),
+          variantManufacturerCodes: [
+            ...new Set(Object.values(manufacturer.articleModelCodes).flatMap((model) => [model.modelCode, ...model.aliases])),
+          ],
+        }
+      : {}),
     legacyManufacturerCodes: (entry.legacyArticleNumbers ?? []).map((legacy) => legacy.articleNumber),
     packages: [{ label: variantSummary, detail: entry.variantColumn.label }],
     purpose: content.purpose,
@@ -330,7 +424,7 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
     ],
     documents: legacyDocuments(entry.slug, entry.name, entry.tds),
     relatedProductSlugs: related,
-    seoTitle: `${entry.name} | Carsystem`,
+    seoTitle: `${entry.name} | ${brandName}`,
     seoDescription: content.shortDescription,
     taxonomyCategory: entry.taxonomy.category,
     manufacturerColor: entry.shade ?? undefined,

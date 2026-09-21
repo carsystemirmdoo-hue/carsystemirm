@@ -1,0 +1,560 @@
+{
+  "_comment": [
+    "Proizvodi DRUGIH proizvođača koje Carsystem vodi u svom katalogu i na carsystem.org (odluka korisnika, 2026-09-21).",
+    "Izvor zapisa ostaje Carsystem sync: naziv, šifra artikla, opis i slika dolaze iz Carsystem kataloga. Ovaj fajl dodaje samo sloj identiteta PROIZVOĐAČA — brend za kupca, modelsku šifru i nivo dokaza.",
+    "Pravilo prepoznavanja nije ručni spisak: proizvod pripada proizvođaču kada mu ZVANIČNI Carsystem naziv počinje imenom tog proizvođača. `apply.mjs` obara sync ako se taj skup i `products` ovde razlikuju.",
+    "Modelska šifra se NE izmišlja: `apply.mjs` proverava da je svaka šifra doslovno u zvaničnom Carsystem nazivu ili specifikaciji artikla. `evidence` kaže da li je ista šifra nađena i na rupes.com (pregled 2026-09-21, 576 stranica proizvoda).",
+    "`cardModelCode` se objavljuje kao šifra proizvođača kartice samo kada je OFFICIAL_CONFIRMED i kada kartica predstavlja jedan alat; pribor u istoj kartici ostaje red tabele.",
+    "Bez tvrdnji o statusu distribucije: bezbedna formulacija je „RUPES proizvodi iz Carsystem programa”."
+  ],
+  "manufacturers": {
+    "rupes": {
+      "brandSlug": "rupes",
+      "name": "RUPES",
+      "legalName": "RUPES S.p.A.",
+      "officialWebsite": "https://www.rupes.com/",
+      "scope": "RUPES_PRODUCTS_FROM_CARSYSTEM_PROGRAM",
+      "scopeNote": "Samo RUPES proizvodi koje vodi Carsystem katalog 2026/27 i carsystem.org. Nije RUPES katalog (rupes.com: 576 stranica proizvoda).",
+      "coverageGroup": "THIRD_PARTY_PRODUCTS_LISTED_IN_CARSYSTEM_CATALOGUE",
+      "detect": {
+        "officialNamePrefix": "RUPES"
+      },
+      "officialSource": {
+        "checkedOn": "2026-09-21",
+        "productPagesSeen": 576
+      },
+      "evidenceLevels": {
+        "OFFICIAL_CONFIRMED": "šifru navodi Carsystem i doslovno stoji na stranici proizvoda na rupes.com",
+        "OFFICIAL_BASE_MODEL_CONFIRMED": "rupes.com navodi osnovni model (RX253), a sufiks (RX253A) navodi Carsystem",
+        "CARSYSTEM_STATED_ONLY": "šifru navodi samo Carsystem; na rupes.com nije nađena"
+      },
+      "images": {
+        "flag": "RUPES_IMAGE_RIGHTS_REVIEW",
+        "status": "PENDING_FINAL_ASSET_AUDIT",
+        "note": "Runtime slike su postojeći packshotovi sa carsystem.org (poreklo: published-images.generated.json). Ništa nije preuzeto sa rupes.com: sajt navodi da su slike vlasništvo RUPES S.p.A. i da je upotreba bez pisane saglasnosti zabranjena. Pravo prikaza pod RUPES brendom nije dokumentovano."
+      },
+      "logo": {
+        "status": "NO_APPROVED_ASSET",
+        "note": "Brend se prikazuje tekstualno dok logotip ne bude odobren."
+      },
+      "products": {
+        "carsystem-rupes-47-105-replacement-carbon-brush": {
+          "classification": "LEGACY_OR_UNCERTAIN",
+          "manufacturerStatus": "CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED",
+          "officialName": null,
+          "officialUrls": [],
+          "cardModelCode": null,
+          "articles": {
+            "158.290": {
+              "modelCode": "47.105",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            }
+          },
+          "searchTerms": [],
+          "note": "Rezervni deo; rupes.com nema stranicu proizvoda za ovu šifru. Identitet RUPES potvrđuje samo Carsystem."
+        },
+        "carsystem-rupes-9-holder-bigfoot": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "BIGFOOT WALL MOUNTED TOOL HOLDER",
+          "officialUrls": [
+            "https://www.rupes.com/product/wall-mounted-tool-holder/"
+          ],
+          "cardModelCode": "9.HOLDER",
+          "articles": {
+            "158.134": {
+              "modelCode": "9.HOLDER",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": [
+            "BigFoot"
+          ]
+        },
+        "carsystem-rupes-angle-polishing-machine-lh76p": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Right angle pneumatic polisher with 75mm pad – LH76P",
+          "officialUrls": [
+            "https://www.rupes.com/product/right-angle-pneumatic-polisher-with-75mm-pad-lh76p/"
+          ],
+          "cardModelCode": "LH76P",
+          "articles": {
+            "157.331": {
+              "modelCode": "LH76P",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-back-pad": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Backing pad 150mm velcro pad multihole",
+          "officialUrls": [
+            "https://www.rupes.com/product/backing-pad-150mm-velcro-pad-multihole-m8-hard-h-12mm-for-er-br-rh-series-tools/",
+            "https://www.rupes.com/product/backing-pad-150mm-velcro-pad-multihole-5-16-12mm-for-br-rx-ra-series-tools/"
+          ],
+          "cardModelCode": null,
+          "articles": {
+            "158.291": {
+              "modelCode": "981.500",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "158.292": {
+              "modelCode": "981.600",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-carrier": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "CARRIER SYSTEM – POLISHING TROLLEY WITH 3 DRAWERS",
+          "officialUrls": [
+            "https://www.rupes.com/product/carrier-system/"
+          ],
+          "cardModelCode": null,
+          "articles": {},
+          "searchTerms": [],
+          "note": "Carsystem ne navodi RUPES šifru. Zvanična stranica nosi „CARRIER/DE”, ali je veza samo po nazivu — šifra se ne objavljuje."
+        },
+        "carsystem-rupes-cleaning-and-maintenance-oil": {
+          "classification": "LEGACY_OR_UNCERTAIN",
+          "manufacturerStatus": "CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED",
+          "officialName": null,
+          "officialUrls": [],
+          "cardModelCode": null,
+          "articles": {},
+          "searchTerms": [],
+          "note": "rupes.com nema stranicu proizvoda za ulje za održavanje od 50 ml. Identitet RUPES potvrđuje samo Carsystem."
+        },
+        "carsystem-rupes-ibrid-nano": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "iBrid Nano Polisher Short Neck / Long Neck",
+          "officialUrls": [
+            "https://www.rupes.com/product/ibrid-nano-polisher-short-neck/",
+            "https://www.rupes.com/product/ibrid-nano-polisher-long-neck/"
+          ],
+          "cardModelCode": null,
+          "articles": {
+            "157.318": {
+              "modelCode": "HR81M",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.319": {
+              "modelCode": "HR81ML",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "158.370": {
+              "modelCode": "9.DA40S",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.718": {
+              "modelCode": "9.DA40M",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.717": {
+              "modelCode": "9.DA40H",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.784": {
+              "modelCode": "995.001C",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            },
+            "157.785": {
+              "modelCode": "996.001C",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            },
+            "157.786": {
+              "modelCode": "997.001C",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            },
+            "157.787": {
+              "modelCode": "562.390",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            }
+          },
+          "searchTerms": [
+            "iBrid",
+            "iBrid Nano",
+            "BigFoot"
+          ],
+          "note": "RUPES u međuvremenu nudi i „iBrid Nano 2” (HR81MLII); Carsystem vodi HR81M/HR81ML."
+        },
+        "carsystem-rupes-ibrid-nano-q-maq": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "iBrid Nano Sander with Q-MAG Magnetic Technology",
+          "officialUrls": [
+            "https://www.rupes.com/product/ibrid-nano-sander-with-q-mag-magnetic-technology-q-mag/"
+          ],
+          "cardModelCode": "HQM83",
+          "articles": {
+            "157.320": {
+              "modelCode": "HQM83",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": [
+            "iBrid",
+            "iBrid Nano",
+            "Q-MAG",
+            "BigFoot"
+          ],
+          "note": "Carsystem piše „Q-MAQ”; zvanični naziv je „Q-MAG”."
+        },
+        "carsystem-rupes-mini-polishing-machine-hlr75stb": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "BIGFOOT HLR75 MINI iBRID POLISHER",
+          "officialUrls": [
+            "https://www.rupes.com/product/bigfoot-mini-ibrid-hlr75-polisher/"
+          ],
+          "cardModelCode": "HLR75",
+          "articles": {
+            "158.647": {
+              "modelCode": "HLR75",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": [
+            "BigFoot",
+            "iBrid",
+            "HLR75 STB"
+          ]
+        },
+        "carsystem-rupes-mini-random-orbital-sander-ld30": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Pneumatic mini sander with Ø 30mm pad",
+          "officialUrls": [
+            "https://www.rupes.com/product/pneumatic-mini-sander-with-o-30mm-pad/"
+          ],
+          "cardModelCode": "LD30",
+          "articles": {
+            "157.330": {
+              "modelCode": "LD30",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-orbital-sander-re21aln": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Pneumati orbital palm sander 70X198mm velcro pad and 3mm orbit – RE21ALN",
+          "officialUrls": [
+            "https://www.rupes.com/product/pneumati-orbital-palm-sander-70x198mm-velcro-pad-and-3mm-orbit-re21aln/"
+          ],
+          "cardModelCode": "RE21ALN",
+          "articles": {
+            "157.454": {
+              "modelCode": "RE21ALN",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.558": {
+              "modelCode": "988.001MH",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-orbital-sander-sl42aes": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Orbital sander 70x400mm velcro pad – orbit 5mm",
+          "officialUrls": [
+            "https://www.rupes.com/product/orbital-sander-70x400mm-velcro-pad-orbit-5mm/"
+          ],
+          "cardModelCode": "SL42AES",
+          "articles": {
+            "157.329": {
+              "modelCode": "SL42AES",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-orbital-sander-slp41a": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Pneumatic orbital sander 70X400mm velcro pad and 5mm orbit – SLP41A",
+          "officialUrls": [
+            "https://www.rupes.com/product/pneumatic-orbital-sander-70x400mm-velcro-pad-and-5mm-orbit-slp41a/"
+          ],
+          "cardModelCode": "SLP41A",
+          "articles": {
+            "157.337": {
+              "modelCode": "SLP41A",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.559": {
+              "modelCode": "619.153MH",
+              "evidence": "CARSYSTEM_STATED_ONLY"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-polish-pad": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "D-A FINE Finishing Foam Pad / D-A ULTRA-FINE Polishing Foam Pad",
+          "officialUrls": [
+            "https://www.rupes.com/product/high-performance-fine-finishing-foam-pad-d-a-fine/",
+            "https://www.rupes.com/product/high-performance-ultra-fine-foam-pad-d-a-ultra-fine/"
+          ],
+          "cardModelCode": null,
+          "articles": {},
+          "searchTerms": [],
+          "note": "Carsystem ne navodi RUPES šifre. Boja i mera se poklapaju sa 9.DA150M/9.DA180M (žuti) i 9.DA150S/9.DA180S (beli), ali je veza izvedena — šifre se ne objavljuju."
+        },
+        "carsystem-rupes-polishing-machine-lh19e": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Rotary polisher – Bigfoot LH19E",
+          "officialUrls": [
+            "https://www.rupes.com/product/angle-polisher-lh19e-bigfoot/"
+          ],
+          "cardModelCode": "LH19E",
+          "articles": {
+            "157.322": {
+              "modelCode": "LH19E",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": [
+            "BigFoot"
+          ]
+        },
+        "carsystem-rupes-polishing-machine-lhr15": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Random orbital polisher – Bigfoot LHR15 Mark III",
+          "officialUrls": [
+            "https://www.rupes.com/product/lhr15iii/"
+          ],
+          "cardModelCode": "LHR15III",
+          "articles": {
+            "157.323": {
+              "modelCode": "LHR15III",
+              "evidence": "OFFICIAL_CONFIRMED",
+              "aliases": [
+                "LHR15 III",
+                "LHR15 Mark III"
+              ]
+            }
+          },
+          "searchTerms": [
+            "BigFoot"
+          ],
+          "note": "RUPES u međuvremenu nudi i LHR15 Mark V; Carsystem vodi Mark III."
+        },
+        "carsystem-rupes-polishing-machine-lhr75": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Pneumatic mini random orbital polisher 15mm orbit – LHR75",
+          "officialUrls": [
+            "https://www.rupes.com/product/pneumatic-mini-random-orbital-polisher-15mm-orbit-lhr75/"
+          ],
+          "cardModelCode": "LHR75",
+          "articles": {
+            "157.332": {
+              "modelCode": "LHR75",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-polishing-machine-lhr75e": {
+          "classification": "LEGACY_OR_UNCERTAIN",
+          "manufacturerStatus": "DISCONTINUED_BY_RUPES_BUT_CARSYSTEM_LISTED",
+          "officialName": "Random orbital polisher – Bigfoot Mini LHR75E",
+          "officialUrls": [
+            "https://www.rupes.com/product/lhr75e/"
+          ],
+          "cardModelCode": "LHR75E",
+          "articles": {
+            "157.340": {
+              "modelCode": "LHR75E",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": [
+            "BigFoot",
+            "BigFoot Mini"
+          ],
+          "note": "rupes.com označava model kao „discontinued”; Carsystem ga i dalje navodi na carsystem.org (nije u katalogu 2026/27)."
+        },
+        "carsystem-rupes-random-orbital-sander-er": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Random orbital sander 3-5mm orbit – Ø 150mm velcro pad",
+          "officialUrls": [
+            "https://www.rupes.com/product/random-orbital-sander-orbit-o-150mm-velcro-pad/"
+          ],
+          "cardModelCode": null,
+          "articles": {
+            "158.283": {
+              "modelCode": "ER303TE",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "158.284": {
+              "modelCode": "ER305TE",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-random-orbital-sander-ta50": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Pneumatic mini random orbital sander with 50mm and 3mm orbit",
+          "officialUrls": [
+            "https://www.rupes.com/product/pneumatic-mini-random-orbital-sander-with-50mm-and-3mm-orbit-ta50/"
+          ],
+          "cardModelCode": "TA50",
+          "articles": {
+            "157.338": {
+              "modelCode": "TA50",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "159.007": {
+              "modelCode": "9P01.055",
+              "evidence": "CARSYSTEM_STATED_ONLY",
+              "note": "rupes.com za podlošku TA50 navodi 9P01.046; Carsystem navodi 9P01.055. Objavljuje se samo ono što Carsystem navodi, uz ovu oznaku."
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-random-orbital-single-hand-sander-ra75": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Pneumatic random orbital palm sander with Ø 75mm velcro pad – orbit 3mm",
+          "officialUrls": [
+            "https://www.rupes.com/product/pneumatic-random-orbital-palm-sander-with-75mm-velcro-pad-orbit-3mm-ra75/"
+          ],
+          "cardModelCode": "RA75",
+          "articles": {
+            "157.333": {
+              "modelCode": "RA75",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-skorpio-e-rx": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Random orbital brushless sander – SkorpioE",
+          "officialUrls": [
+            "https://www.rupes.com/product/random-orbital-brushless-sander-skorpioe/"
+          ],
+          "cardModelCode": null,
+          "articles": {
+            "157.326": {
+              "modelCode": "RX253A",
+              "evidence": "OFFICIAL_BASE_MODEL_CONFIRMED",
+              "aliases": [
+                "RX253"
+              ]
+            },
+            "157.328": {
+              "modelCode": "RX256A",
+              "evidence": "OFFICIAL_BASE_MODEL_CONFIRMED",
+              "aliases": [
+                "RX256"
+              ]
+            }
+          },
+          "searchTerms": [
+            "Skorpio",
+            "SkorpioE"
+          ],
+          "note": "rupes.com vodi porodicu kao „RX253 - RX256”; sufiks „A” navodi Carsystem."
+        },
+        "carsystem-rupes-skorpio-iii-rh": {
+          "classification": "RUPES_EXACT_PRODUCT",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "Random orbital palm pneumatic sander with 150mm pad – SKORPIOIII",
+          "officialUrls": [
+            "https://www.rupes.com/product/random-orbital-palm-pneumatic-sander-with-150mm-pad-and-3mm-orbit-skorpioiii/",
+            "https://www.rupes.com/product/random-orbital-palm-pneumatic-sander-with-150mm-pad-and-6mm-orbit-skorpioiii/"
+          ],
+          "cardModelCode": null,
+          "articles": {
+            "157.334": {
+              "modelCode": "RH353A",
+              "evidence": "OFFICIAL_CONFIRMED",
+              "aliases": [
+                "RH353"
+              ]
+            },
+            "157.335": {
+              "modelCode": "RH356A",
+              "evidence": "OFFICIAL_CONFIRMED",
+              "aliases": [
+                "RH356"
+              ]
+            }
+          },
+          "searchTerms": [
+            "Skorpio",
+            "Skorpio III",
+            "SkorpioIII"
+          ]
+        },
+        "carsystem-rupes-vacuum-cleaner-s145": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "45 liter professional vacuum cleaner",
+          "officialUrls": [
+            "https://www.rupes.com/product/45-liter-professional-vacuum-cleaner/"
+          ],
+          "cardModelCode": null,
+          "articles": {
+            "157.343": {
+              "modelCode": "S145L",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.344": {
+              "modelCode": "S145PL",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.471": {
+              "modelCode": "S145EM",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.472": {
+              "modelCode": "S145EPM",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        },
+        "carsystem-rupes-workshop-carrier-kc28": {
+          "classification": "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED",
+          "manufacturerStatus": "CURRENT_ON_OFFICIAL_SITE",
+          "officialName": "MULTIPURPOSE TROLLEY FOR PROFESSIONAL VACUUM CLEANERS",
+          "officialUrls": [
+            "https://www.rupes.com/product/multipurpose-trolley-for-professional-vacuum-cleaners/"
+          ],
+          "cardModelCode": "KC28",
+          "articles": {
+            "157.341": {
+              "modelCode": "KC28",
+              "evidence": "OFFICIAL_CONFIRMED"
+            },
+            "157.469": {
+              "modelCode": "016.1110/C",
+              "evidence": "OFFICIAL_CONFIRMED"
+            }
+          },
+          "searchTerms": []
+        }
+      }
+    }
+  }
+}

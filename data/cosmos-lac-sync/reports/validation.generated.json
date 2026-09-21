@@ -18,7 +18,8 @@
   "status": {
     "CURRENT": 663,
     "CURRENT_REGION_SPECIFIC": 11,
-    "LEGACY_LOCAL_ONLY": 79
+    "LEGACY_LOCAL_ONLY": 6,
+    "REMOVED_FROM_CUSTOMER_CATALOG": 73
   },
   "packaging": {
     "OFFICIAL_CURRENT": 629,
@@ -36,6 +37,6 @@
     "importedImages": 0,
     "placeholderRecords": 11
   },
-  "redirects": 34,
+  "redirects": 36,
   "errors": []
 }

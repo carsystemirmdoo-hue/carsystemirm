@@ -5,10 +5,19 @@
     "`outOfScopeProducts`: aktuelno kod proizvođača, van našeg kataloga — CURRENT_OUT_OF_SCOPE (ne discontinued, ne missing).",
     "`splitCards`: postojeće kartice koje se dele; njihova stara porodična adresa dobija preusmerenje.",
     "`newProducts`: zvanični proizvodi koje do sada nismo imali, a ulaze u katalog.",
-    "Molotow (73 zapisa, 2 kartice) i šest zapisa bez ijedne zvanične stranice ostaju netaknuti kao LEGACY_LOCAL_ONLY.",
+    "Šest zapisa bez ijedne zvanične stranice ostaje netaknuto kao LEGACY_LOCAL_ONLY.",
+    "`removedFromCustomerCatalog` (korisnik, 2026-09-21): Molotow Premium i Molotow Burner (73 zapisa, 2 kartice) se UKLANJAJU iz kataloga za kupce — status REMOVED_FROM_CUSTOMER_CATALOG. Nije `discontinued`: o statusu kod proizvođača nemamo dokaz. Zapisi, slike i poreklo iz Brand Kit-a ostaju u repou kao istorijski, ne-runtime podaci; stare adrese dobijaju trajno preusmerenje.",
     "`retiredFamilySlug`: porodična adresa kartice kakva je postojala do 2026-09-21 (izmerena u runtime-u pre podele). Posle podele ta adresa dobija preusmerenje — cilj je 0 polomljenih postojećih adresa.",
     "`redirectQuery`: upit kataloga na koji vodi ugašena porodična adresa; izabran je najuži upit za koji su SVI naslednici na vrhu rezultata (izmereno nad stvarnim indeksom pretrage)."
   ],
+  "removedFromCustomerCatalog": {
+    "status": "REMOVED_FROM_CUSTOMER_CATALOG",
+    "decidedOn": "2026-09-21",
+    "lines": ["Molotow Burner", "Molotow Premium"],
+    "reason": "Molotow je zaseban brend koji cosmoslac.com ne vodi kao svoju liniju; serija se više ne nudi na sajtu. Nije proglašena ukinutom — dokaz proizvođača ne postoji.",
+    "slugPrefix": "cosmos-lac-molotow-",
+    "redirectDestination": "/brendovi/cosmos-lac"
+  },
   "outOfScopeProducts": {
     "name:sportpens-standard": "SportPens — nije program za auto-reparaturu/radionicu",
     "name:wood-glue-crystalise": "Wood Glue — lepak za drvo",

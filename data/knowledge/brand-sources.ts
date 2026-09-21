@@ -130,10 +130,12 @@ export const brandSources: Record<string, BrandSourceProfile> = {
     officialWebsite: "https://www.rupes.com/",
     acquisitionFeasibility: "product-pages",
     notes: [
-      "Brend je u projektu označen kao placeholder; nema nijedan proizvod u katalogu.",
-      "Nije istraživan u dubinu jer Carsystem još nije potvrdio da je deo ponude.",
+      "Aktivan brend od 2026-09-21. Opseg je RUPES_PRODUCTS_FROM_CARSYSTEM_PROGRAM: samo RUPES proizvodi koje vodi Carsystem katalog 2026/27 i carsystem.org — nije RUPES katalog (rupes.com ima 576 stranica proizvoda).",
+      "Zapisi potiču iz Carsystem synca; identitet proizvođača (oznaka modela, nivo dokaza, status kod proizvođača) je u data/carsystem-sync/third-party-manufacturers.json.",
+      "rupes.com služi samo za potvrdu identiteta i oznaka modela. Slike i logotip se odatle ne preuzimaju: sajt navodi da su vlasništvo RUPES S.p.A. (oznaka RUPES_IMAGE_RIGHTS_REVIEW).",
+      "Bez tvrdnji o statusu distribucije; bezbedna formulacija je „RUPES proizvodi iz Carsystem programa”.",
     ],
-    verifiedAt: "2026-08-08",
+    verifiedAt: "2026-09-21",
   },
 
   autofit: {

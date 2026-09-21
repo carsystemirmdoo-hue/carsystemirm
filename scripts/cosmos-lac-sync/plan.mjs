@@ -29,7 +29,7 @@ const lock = readJson(PATHS.scopeLock, null);
 if (!source || !sitemap || !documents || !local) throw new Error("Nedostaje izvor — `npm run cosmos-lac:sync:acquire`.");
 
 const sha = (value) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
-const planErrors = { scopeDrift: [], unknownRecords: [], duplicateClaims: [], slugCollisions: [], unknownScopeKeys: [], newProductMissing: [], splitMismatch: [] };
+const planErrors = { scopeDrift: [], unknownRecords: [], duplicateClaims: [], slugCollisions: [], unknownScopeKeys: [], newProductMissing: [], splitMismatch: [], removedScope: [] };
 
 /* ── 1. Zvanični opseg ───────────────────────────────────────────────────────────────────── */
 const productKeys = new Map();
@@ -116,7 +116,11 @@ for (const { record, result } of rows) {
       groupOf.set(official.productKey, { base: baseProductSlug, identity: familyIdentity });
     }
   }
-  const status = result.classification === "LEGACY_LOCAL_ONLY" ? "LEGACY_LOCAL_ONLY" : result.reason === "CURRENT_REGION_SPECIFIC_NOT_ON_ENGLISH_SITE" ? "CURRENT_REGION_SPECIFIC" : "CURRENT";
+  // Odluka o katalogu (scope.json), ne o izvoru: `classification` i dalje kaže šta izvor dokazuje (LEGACY_LOCAL_ONLY).
+  const removed = scope.removedFromCustomerCatalog.lines.includes(record.line);
+  if (removed && !record.slug.startsWith(scope.removedFromCustomerCatalog.slugPrefix)) planErrors.removedScope.push({ slug: record.slug, reason: "uklonjeni zapis nije pod prefiksom koji pokriva preusmerenje" });
+  if (!removed && record.slug.startsWith(scope.removedFromCustomerCatalog.slugPrefix)) planErrors.removedScope.push({ slug: record.slug, reason: "preusmerenje bi progutalo zapis koji ostaje u katalogu" });
+  const status = removed ? scope.removedFromCustomerCatalog.status : result.classification === "LEGACY_LOCAL_ONLY" ? "LEGACY_LOCAL_ONLY" : result.reason === "CURRENT_REGION_SPECIFIC_NOT_ON_ENGLISH_SITE" ? "CURRENT_REGION_SPECIFIC" : "CURRENT";
   enrichments[record.slug] = {
     status,
     classification: result.classification,
@@ -220,7 +224,9 @@ for (const key of scope.newProducts) if (!products.some((product) => product.off
 
 /* ── 5. A i C, zaključavanje ──────────────────────────────────────────────────────────────── */
 const regionSpecific = Object.entries(enrichments).filter(([, entry]) => entry.status === "CURRENT_REGION_SPECIFIC");
-const legacy = Object.entries(enrichments).filter(([, entry]) => entry.status === "LEGACY_LOCAL_ONLY");
+// Merilo izvora (zaključano): šta zvanični sajt NE potvrđuje. Status kataloga (REMOVED_…) ga ne menja.
+const legacy = Object.entries(enrichments).filter(([, entry]) => entry.classification === "LEGACY_LOCAL_ONLY");
+const removedFromCatalog = Object.entries(enrichments).filter(([, entry]) => entry.status === scope.removedFromCustomerCatalog.status);
 const measured = {
   A_APPROVED_CURRENT_OFFICIAL_PRODUCTS: inScopeKeys.length,
   C_APPROVED_CURRENT_OFFICIAL_SHADE_VARIANT_IDENTITIES: inScopePages.length + regionSpecific.length,
@@ -260,6 +266,7 @@ writeJson(PATHS.plan, {
     newRecords: products.length,
     newOfficialProducts: [...new Set(products.filter((product) => product.isNewOfficialProduct).map((product) => product.officialProduct))],
     regionSpecific: regionSpecific.length,
+    removedFromCustomerCatalog: { status: scope.removedFromCustomerCatalog.status, records: removedFromCatalog.length, lines: scope.removedFromCustomerCatalog.lines },
     splitCards: splitResult,
     packaging,
     documents: { available: [...Object.values(enrichments), ...products].filter((entry) => entry.document?.status === "AVAILABLE").length, broken: [...Object.values(enrichments), ...products].filter((entry) => entry.document?.status === "OFFICIAL_SOURCE_BROKEN").length },

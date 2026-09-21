@@ -66,7 +66,7 @@ type CosmosSyncPackaging = {
 };
 
 type CosmosSyncEntry = {
-  status: "CURRENT" | "CURRENT_REGION_SPECIFIC" | "LEGACY_LOCAL_ONLY";
+  status: "CURRENT" | "CURRENT_REGION_SPECIFIC" | "LEGACY_LOCAL_ONLY" | "REMOVED_FROM_CUSTOMER_CATALOG";
   classification: string;
   officialUrl: string | null;
   officialSlug: string | null;
@@ -89,7 +89,13 @@ export const cosmosLacSyncMeta = syncDataset.meta;
 const syncOf = (record: CosmosLacGeneratedRecord): CosmosSyncEntry | undefined =>
   syncEnrichments[record.slug] ?? (record as { sync?: CosmosSyncEntry }).sync;
 
-const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts];
+/*
+ * `REMOVED_FROM_CUSTOMER_CATALOG` (Molotow, 2026-09-21): zapis ostaje u Brand Kit datasetu kao istorijski podatak,
+ * ali ne ulazi u runtime — nema kartice, varijante, pretrage ni sitemap adrese. Stare adrese preusmerava sync dataset.
+ */
+const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts].filter(
+  (record) => syncOf(record)?.status !== "REMOVED_FROM_CUSTOMER_CATALOG",
+);
 
 const technicalCategoryLabels: Record<string, string> = {
   cleaner: "Čistač",

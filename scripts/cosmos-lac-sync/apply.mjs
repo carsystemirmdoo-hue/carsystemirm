@@ -123,6 +123,20 @@ for (const [base, config] of Object.entries(scope.splitCards).sort(([a], [b]) =>
   redirects.push({ source, destination: `/katalog?brend=${BRAND.slug}&q=${encodeURIComponent(config.redirectQuery)}`, permanent: true });
 }
 
+/*
+ * Serija uklonjena iz kataloga za kupce (scope.removedFromCustomerCatalog): adrese proizvoda i obe porodične adrese
+ * trajno vode na stranicu brenda. Dva pravila po prefiksu sluga; plan obara sync ako prefiks zahvati zapis koji ostaje.
+ */
+const removal = scope.removedFromCustomerCatalog;
+const removedSlugs = Object.entries(plan.enrichments).filter(([, entry]) => entry.status === removal.status).map(([slug]) => slug).sort();
+const removedRedirects = removedSlugs.length
+  ? [
+      { source: `/proizvodi/grupa/:slug(${removal.slugPrefix}.*)`, destination: removal.redirectDestination, permanent: true },
+      { source: `/proizvodi/:slug(${removal.slugPrefix}.*)`, destination: removal.redirectDestination, permanent: true },
+    ]
+  : [];
+redirects.push(...removedRedirects);
+
 const all = [...Object.values(enrichments), ...products.map((product) => product.sync)];
 const dataset = {
   meta: {
@@ -144,7 +158,8 @@ const dataset = {
     },
     documents: { recordsWithDocument: all.filter((entry) => entry.document).length, recordsWithBrokenSourceDocument: Object.values(enrichments).filter((entry) => entry.documentSourceBroken).length },
     images: { localBrandKitImagesUntouched: local.length, importedImages: 0, placeholderRecords: products.length },
-    retiredFamilyRedirects: redirects.filter((entry) => !entry.has).length,
+    retiredFamilyRedirects: redirects.filter((entry) => !entry.has && !removedRedirects.includes(entry)).length,
+    removedFromCustomerCatalog: { status: removal.status, decidedOn: removal.decidedOn, records: removedSlugs.length, redirectRules: removedRedirects.length, redirectDestination: removal.redirectDestination, note: "Nije `discontinued`. Zapisi i slike ostaju u repou kao istorijski, ne-runtime podaci." },
     currentOutOfScope: plan.currentOutOfScope,
     note: "Cene se ne uvoze. Postojeći Brand Kit zapisi i njihove slike se ne prepisuju — sync polaže dopunu.",
   },

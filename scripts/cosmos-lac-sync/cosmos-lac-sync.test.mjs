@@ -26,6 +26,10 @@ const runtime = loadCatalogRuntime();
 const records = runtime.products.filter((product) => product.brandSlug === "cosmos-lac");
 const cards = runtime.listing.canonical.filter((card) => card.brandSlug === "cosmos-lac");
 const families = runtime.families.filter((family) => family.brandSlug === "cosmos-lac");
+/** Zapisi koji su i dalje u katalogu za kupce; uklonjena serija ostaje samo u datasetu. */
+const inCatalog = (record) => dataset.enrichments[record.slug]?.status !== "REMOVED_FROM_CUSTOMER_CATALOG";
+/** Isto čitanje izvora kao u Next.js-u: doslovna putanja ili parametar sa regularnim izrazom. */
+const redirectCovers = (pathname) => dataset.redirects.filter((rule) => !rule.has).some((rule) => new RegExp(`^${rule.source.replace(/:[a-z]+\(([^)]*)\)/gi, "($1)")}$`).test(pathname));
 const syncOf = (slug) => dataset.enrichments[slug] ?? dataset.products.find((product) => product.slug === slug)?.sync;
 
 test("A i C se RAČUNAJU iz izvornog modela i jednaki su zaključanom, odobrenom merenju", () => {
@@ -58,10 +62,9 @@ test("B = A i D = C u stvarnom runtime-u; aktuelno van opsega nije uvezeno", () 
   for (const entry of plan.currentOutOfScope) assert.equal(entry.status, "CURRENT_OUT_OF_SCOPE");
 });
 
-test("kartice: aktuelne + legacy Molotow; svaka podeljena kartica daje tačan broj naslednika (+14)", () => {
-  const legacyCards = cards.filter((card) => /molotow/.test(card.id));
-  assert.equal(legacyCards.length, 2);
-  assert.equal(cards.length - baseline.cards, 14 + 4, "neto: +14 od podele i +4 nova zvanična proizvoda");
+test("kartice: svaka podeljena kartica daje tačan broj naslednika (+14); uklonjena serija ne daje nijednu", () => {
+  assert.equal(cards.filter((card) => /molotow/.test(card.id)).length, 0);
+  assert.equal(cards.length - baseline.cards, 14 + 4 - 2, "neto: +14 od podele, +4 nova zvanična proizvoda, −2 kartice uklonjene serije");
   const expected = { "cosmos-lac-lubricants-oil": 6, "cosmos-lac-lubricants-grease": 4, "cosmos-lac-putties-filler": 3, "cosmos-lac-varnishes-varnish": 2, "cosmos-lac-w-wood-care-varnish": 2, "cosmos-lac-wheel-rim-wheel-rim": 2, "cosmos-lac-zinc-zinc": 2 };
   let gain = 0;
   for (const [base, count] of Object.entries(expected)) {
@@ -96,10 +99,10 @@ test("četiri nova zvanična proizvoda su kartice; nove nijanse ulaze u karticu 
 
 test("0 polomljenih adresa: svaka adresa iz stanja pre synca postoji ili ima preusmerenje", () => {
   const liveFamilies = new Set(families.map((family) => family.slug));
-  const redirected = new Set(dataset.redirects.filter((rule) => !rule.has).map((rule) => rule.source.replace("/proizvodi/grupa/", "")));
+  const redirected = new Set(baseline.familySlugs.filter((slug) => redirectCovers(`/proizvodi/grupa/${slug}`)));
   for (const slug of baseline.familySlugs) assert.ok(liveFamilies.has(slug) || redirected.has(slug), `porodična adresa bez odredišta: ${slug}`);
   const liveProducts = new Set(records.map((product) => product.slug));
-  for (const slug of baseline.productSlugs) assert.ok(liveProducts.has(slug), `adresa proizvoda nestala: ${slug}`);
+  for (const slug of baseline.productSlugs) assert.ok(liveProducts.has(slug) || redirectCovers(`/proizvodi/${slug}`), `adresa proizvoda nestala: ${slug}`);
   // „Wheel Rim” je isti proizvod kao stara kartica, pa zadržava adresu bez preusmerenja.
   assert.ok(liveFamilies.has("cosmos-lac-wheel-rim"));
   assert.ok(!redirected.has("cosmos-lac-wheel-rim"));
@@ -108,10 +111,33 @@ test("0 polomljenih adresa: svaka adresa iz stanja pre synca postoji ili ima pre
   for (const rule of dataset.redirects.filter((entry) => entry.has)) assert.ok(liveProducts.has(rule.destination.replace("/proizvodi/", "")));
 });
 
-test("Molotow (73 zapisa, 2 kartice) i šest zapisa bez zvanične stranice ostaju netaknuti LEGACY_LOCAL_ONLY", () => {
+test("Molotow je REMOVED_FROM_CUSTOMER_CATALOG: 0 u runtime-u, zapisi sačuvani, adrese preusmerene, nije discontinued", () => {
+  const removal = scope.removedFromCustomerCatalog;
+  const removed = Object.entries(dataset.enrichments).filter(([, entry]) => entry.status === removal.status);
+  assert.equal(removed.length, 73);
+  assert.deepEqual([...new Set(removed.map(([slug]) => local.find((record) => record.slug === slug).line))].sort(), ["Molotow Burner", "Molotow Premium"]);
+  // Istorijski podatak ostaje: zapis je i dalje u Brand Kit datasetu, izvorna klasifikacija se ne menja.
+  for (const [, entry] of removed) { assert.equal(entry.classification, "LEGACY_LOCAL_ONLY"); assert.doesNotMatch(JSON.stringify(entry), /discontinued/i); }
+  // Runtime: nijedan zapis, varijanta, kartica ni porodica.
+  const removedSlugs = new Set(removed.map(([slug]) => slug));
+  assert.equal(runtime.products.filter((product) => removedSlugs.has(product.slug) || /molotow/i.test(`${product.slug} ${product.name}`)).length, 0);
+  assert.equal(runtime.families.filter((family) => /molotow/i.test(family.slug) || family.variants.some((variant) => removedSlugs.has(variant.slug))).length, 0);
+  assert.equal(runtime.listing.canonical.filter((card) => /molotow/i.test(`${card.id} ${card.name ?? ""}`)).length, 0);
+  // Stare adrese: pravilo po prefiksu pokriva svih 73 + 2, a ne zahvata nijednu živu adresu.
+  const rules = dataset.redirects.filter((entry) => entry.destination === removal.redirectDestination);
+  assert.equal(rules.length, 2);
+  const patterns = rules.map((rule) => new RegExp(`^${rule.source.replace(/:[a-z]+\(([^)]*)\)/gi, "($1)")}$`));
+  const covered = (pathname) => patterns.some((pattern) => pattern.test(pathname));
+  for (const slug of removedSlugs) assert.ok(covered(`/proizvodi/${slug}`), slug);
+  for (const slug of baseline.familySlugs.filter((candidate) => /molotow/.test(candidate))) assert.ok(covered(`/proizvodi/grupa/${slug}`), slug);
+  for (const product of runtime.products) assert.ok(!covered(`/proizvodi/${product.slug}`), product.slug);
+  for (const family of runtime.families) assert.ok(!covered(`/proizvodi/grupa/${family.slug}`), family.slug);
+  assert.ok(runtime.requireModule("lib/carsystem-data.ts").brands.some((brand) => brand.routes.landing === removal.redirectDestination), "cilj preusmerenja je živa stranica brenda");
+});
+
+test("šest zapisa bez zvanične stranice ostaje netaknuto LEGACY_LOCAL_ONLY", () => {
   const legacy = Object.entries(dataset.enrichments).filter(([, entry]) => entry.status === "LEGACY_LOCAL_ONLY");
-  assert.equal(legacy.length, 79);
-  assert.equal(legacy.filter(([slug]) => /molotow/.test(slug)).length, 73);
+  assert.equal(legacy.length, 6);
   for (const [slug, entry] of legacy) {
     assert.equal(entry.officialUrl, null);
     assert.equal(entry.document, null);
@@ -122,7 +148,7 @@ test("Molotow (73 zapisa, 2 kartice) i šest zapisa bez zvanične stranice ostaj
     assert.equal(product.productImage.src, record.image);
     assert.equal(product.name, record.displayNameSr);
   }
-  const names = legacy.filter(([slug]) => !/molotow/.test(slug)).map(([slug]) => local.find((record) => record.slug === slug).officialName).sort();
+  const names = legacy.map(([slug]) => local.find((record) => record.slug === slug).officialName).sort();
   assert.deepEqual(names.map((name) => /(\d{3})/.exec(name)[1]).sort(), ["231", "334", "403", "574", "575", "712"]);
 });
 
@@ -184,7 +210,7 @@ test("pakovanje: kupac vidi zvanično kada ga izvor navodi, postojeće kada ga n
   assert.equal(getProductPackageLabel(productOf(unspecifiedSlug)), "Na upit");
 
   // 4) LOCAL_EXISTING — izvor ćuti, katalog ima podatak: prikazuje se postojeći, neizmenjen
-  for (const [slug, entry] of Object.entries(dataset.enrichments).filter(([, candidate]) => candidate.packaging.status === "LOCAL_EXISTING")) {
+  for (const [slug, entry] of Object.entries(dataset.enrichments).filter(([, candidate]) => candidate.packaging.status === "LOCAL_EXISTING" && candidate.status !== "REMOVED_FROM_CUSTOMER_CATALOG")) {
     const record = local.find((candidate) => candidate.slug === slug);
     assert.equal(entry.packaging.customerFacing, record.volume);
     assert.equal(getProductPackageLabel(productOf(slug)), record.volume);
@@ -234,7 +260,7 @@ test("dokumenti: isti zvanični dokument svim nijansama proizvoda; polomljen PDF
 });
 
 test("slike: 742 Brand Kit fajla netaknuta (isti put, fajl postoji, SHA iz izvornog zapisa), novi zapisi na placeholderu", () => {
-  for (const record of local) {
+  for (const record of local.filter(inCatalog)) {
     const product = runtime.products.find((candidate) => candidate.slug === record.slug);
     assert.equal(product.productImage.src, record.image);
   }

@@ -93,7 +93,7 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     height: 70,
   },
   rupes: {
-    name: "Rupes",
+    name: "RUPES",
     width: 132,
     height: 70,
   },

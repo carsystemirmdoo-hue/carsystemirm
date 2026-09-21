@@ -238,6 +238,52 @@ for (const item of plan.items) {
   if (slug) slugBySourceUrl.set(item.sourceUrl, slug);
 }
 
+/*
+ * Identitet PROIZVOĐAČA za proizvode koje Carsystem samo vodi u svom katalogu (RUPES).
+ *
+ * Zapis ostaje Carsystem-ov (izvor, šifra artikla, opis, slika); ovde dobija brend za kupca, modelsku
+ * šifru i nivo dokaza iz `third-party-manufacturers.json`. Dve provere obaraju sync:
+ *   - skup proizvoda čiji zvanični naziv počinje imenom proizvođača mora biti JEDNAK spisku u fajlu;
+ *   - svaka modelska šifra mora doslovno stajati u zvaničnom Carsystem nazivu ili specifikaciji artikla.
+ */
+const thirdParty = readJson(PATHS.thirdParty, { manufacturers: {} });
+const codeKey = (text) => String(text ?? "").toUpperCase().replace(/\s+/g, "");
+const thirdPartyErrors = [];
+function manufacturerOf(item, product) {
+  for (const maker of Object.values(thirdParty.manufacturers)) {
+    const detected = new RegExp(`^${maker.detect.officialNamePrefix}\\b`, "i").test(product.officialName);
+    const entry = maker.products[item.slug];
+    if (detected !== Boolean(entry)) thirdPartyErrors.push({ slug: item.slug, problem: detected ? "PROIZVOD_PROIZVOĐAČA_BEZ_UNOSA" : "UNOS_ZA_PROIZVOD_KOJI_NIJE_OD_PROIZVOĐAČA" });
+    if (!detected || !entry) continue;
+    const articleNumbers = new Set(product.articles.map((article) => article.articleNumber));
+    for (const [articleNumber, model] of Object.entries(entry.articles)) {
+      const article = product.articles.find((candidate) => candidate.articleNumber === articleNumber);
+      if (!articleNumbers.has(articleNumber)) { thirdPartyErrors.push({ slug: item.slug, articleNumber, problem: "ŠIFRA_ARTIKLA_NIJE_U_IZVORU" }); continue; }
+      const stated = codeKey(`${product.officialName} ${article.specification ?? ""}`);
+      if (!stated.includes(codeKey(model.modelCode))) thirdPartyErrors.push({ slug: item.slug, articleNumber, modelCode: model.modelCode, problem: "MODELSKA_ŠIFRA_NIJE_U_CARSYSTEM_IZVORU" });
+      if (!maker.evidenceLevels[model.evidence]) thirdPartyErrors.push({ slug: item.slug, articleNumber, problem: "NEPOZNAT_NIVO_DOKAZA" });
+    }
+    const cardModel = entry.cardModelCode ? Object.values(entry.articles).find((model) => model.modelCode === entry.cardModelCode) : null;
+    if (entry.cardModelCode && cardModel?.evidence !== "OFFICIAL_CONFIRMED") thirdPartyErrors.push({ slug: item.slug, problem: "ŠIFRA_KARTICE_BEZ_ZVANIČNE_POTVRDE" });
+    return {
+      brandSlug: maker.brandSlug,
+      name: maker.name,
+      scope: maker.scope,
+      coverageGroup: maker.coverageGroup,
+      classification: entry.classification,
+      manufacturerStatus: entry.manufacturerStatus,
+      officialName: entry.officialName,
+      officialUrls: entry.officialUrls,
+      modelCode: entry.cardModelCode,
+      articleModelCodes: Object.fromEntries(Object.entries(entry.articles).sort(([a], [b]) => a.localeCompare(b)).map(([articleNumber, model]) => [articleNumber, { modelCode: model.modelCode, evidence: model.evidence, aliases: model.aliases ?? [] }])),
+      searchTerms: entry.searchTerms,
+      imageRights: maker.images.flag,
+      note: entry.note ?? null,
+    };
+  }
+  return null;
+}
+
 const products = imports.map((item) => {
   const product = bySourceKey.get(item.sourceKey);
   const sr = localization[item.sourceKey];
@@ -286,8 +332,19 @@ const products = imports.map((item) => {
     },
     shade: decideShade(item, product, primary),
     recommendedSlugs: [...new Set(product.recommendedProductUrls.map((url) => slugBySourceUrl.get(url)).filter(Boolean))],
+    // Samo za proizvode drugih proizvođača; Carsystem-ovi sopstveni zapisi nemaju ovo polje.
+    ...(manufacturerOf(item, product) ? { manufacturer: manufacturerOf(item, product) } : {}),
   };
 });
+for (const maker of Object.values(thirdParty.manufacturers)) {
+  for (const slug of Object.keys(maker.products)) if (!imports.some((item) => item.slug === slug)) thirdPartyErrors.push({ slug, problem: "UNOS_ZA_NEPOSTOJEĆI_PROIZVOD" });
+}
+if (thirdPartyErrors.length) {
+  // Isti proizvod se proverava dvaput (polje + vrednost), pa se poruke svode na jedinstvene.
+  const unique = [...new Map(thirdPartyErrors.map((error) => [JSON.stringify(error), error])).values()];
+  console.error(JSON.stringify({ thirdPartyErrors: unique }, null, 2));
+  process.exit(1);
+}
 
 /* -- 5. Dopune postojećih ručnih zapisa ------------------------------------ */
 
@@ -337,6 +394,17 @@ const dataset = {
     variants: products.reduce((sum, product) => sum + product.variants.length, 0),
     enrichedExisting: Object.keys(enrichments).length,
     withShade: products.filter((product) => product.shade).length,
+    /*
+     * Pokrivenost se od 2026-09-21 vodi u dve grupe: Carsystem-ovi SOPSTVENI proizvodi i proizvodi drugih
+     * proizvođača koje Carsystem samo vodi u katalogu. Druga grupa se ne predstavlja kao Carsystem proizvod.
+     */
+    coverageGroups: {
+      CARSYSTEM_MANUFACTURER_PRODUCTS: { products: products.filter((product) => !product.manufacturer).length, variants: products.filter((product) => !product.manufacturer).reduce((sum, product) => sum + product.variants.length, 0) },
+      THIRD_PARTY_PRODUCTS_LISTED_IN_CARSYSTEM_CATALOGUE: Object.fromEntries(Object.values(thirdParty.manufacturers).map((maker) => {
+        const own = products.filter((product) => product.manufacturer?.brandSlug === maker.brandSlug);
+        return [maker.brandSlug, { scope: maker.scope, products: own.length, inCatalogue: own.filter((product) => product.inCatalogue).length, websiteOnly: own.filter((product) => !product.inCatalogue).length, variants: own.reduce((sum, product) => sum + product.variants.length, 0), imageRights: maker.images.flag }];
+      })),
+    },
   },
   products,
   enrichments,

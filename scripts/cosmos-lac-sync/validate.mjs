@@ -29,7 +29,7 @@ const officialUrls = new Map();
 for (const [slug, entry] of Object.entries(dataset.enrichments)) {
   const record = localBySlug.get(slug);
   if (entry.officialUrl) officialUrls.set(entry.officialUrl, [...(officialUrls.get(entry.officialUrl) ?? []), slug]);
-  if (entry.status === "LEGACY_LOCAL_ONLY" && (entry.officialUrl || entry.baseProductSlug || entry.document || entry.familyIdentity)) fail("LEGACY_RECORD_TOUCHED", { slug });
+  if (["LEGACY_LOCAL_ONLY", "REMOVED_FROM_CUSTOMER_CATALOG"].includes(entry.status) && (entry.officialUrl || entry.baseProductSlug || entry.document || entry.familyIdentity)) fail("LEGACY_RECORD_TOUCHED", { slug });
   if (entry.status === "CURRENT_REGION_SPECIFIC" && !(entry.sourceLocales ?? []).length) fail("REGION_SPECIFIC_WITHOUT_PROVENANCE", { slug });
   if (entry.status === "CURRENT" && !entry.officialUrl) fail("CURRENT_WITHOUT_OFFICIAL_PAGE", { slug });
   // Lokalni podatak o pakovanju se nikad ne briše.
@@ -48,9 +48,20 @@ for (const [url, slugs] of officialUrls) {
   if (slugs.length < 2) continue;
   if (new Set(slugs.map((slug) => localBySlug.get(slug).volume)).size !== slugs.length) fail("DUPLICATE_OFFICIAL_IDENTITY", { url, slugs });
 }
-// Molotow: 73 zapisa, potpuno netaknuti.
-const molotow = local.filter((record) => /^Molotow/.test(record.line));
-if (molotow.some((record) => dataset.enrichments[record.slug].status !== "LEGACY_LOCAL_ONLY")) fail("MOLOTOW_NOT_LEGACY");
+// Uklonjeno iz kataloga za kupce (Molotow): zapis ostaje netaknut kao istorijski podatak, nije `discontinued`,
+// izvorna klasifikacija se ne menja, a stare adrese pokriva preusmerenje.
+const removal = scope.removedFromCustomerCatalog;
+const removedRecords = local.filter((record) => removal.lines.includes(record.line));
+for (const record of removedRecords) {
+  const entry = dataset.enrichments[record.slug];
+  if (entry.status !== removal.status) fail("REMOVED_LINE_STILL_IN_CATALOG", { slug: record.slug, status: entry.status });
+  if (entry.classification !== "LEGACY_LOCAL_ONLY") fail("REMOVED_RECORD_SOURCE_CLASSIFICATION_CHANGED", { slug: record.slug });
+}
+for (const [slug, entry] of Object.entries(dataset.enrichments)) if (entry.status === removal.status && !removal.lines.includes(localBySlug.get(slug).line)) fail("REMOVED_OUTSIDE_APPROVED_LINES", { slug });
+if (/discontinued/i.test(JSON.stringify(removedRecords.map((record) => dataset.enrichments[record.slug])))) fail("REMOVED_MARKED_DISCONTINUED_WITHOUT_EVIDENCE");
+if (dataset.meta.removedFromCustomerCatalog.records !== removedRecords.length) fail("REMOVED_COUNT_MISMATCH");
+const removalRules = dataset.redirects.filter((entry) => entry.destination === removal.redirectDestination);
+if (removedRecords.length && removalRules.length !== 2) fail("REMOVED_URLS_WITHOUT_REDIRECT", { rules: removalRules.length });
 
 const newSlugs = new Set();
 for (const product of dataset.products) {

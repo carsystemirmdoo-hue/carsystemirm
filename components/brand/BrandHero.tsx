@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import type { CarsystemBrand, PublicProgramGroup } from "@/lib/carsystem-data";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
 
@@ -67,10 +67,11 @@ export function BrandHero({
         <div className={styles.heroVisual}>
           <div className={styles.logoStage}>
             <div className={styles.logoChip}>
-              <Image
-                src={brand.logo}
+              <BrandLogoMark
+                brand={brand}
                 alt={`Logo brenda ${brand.name}`}
-                data-route-critical="true"
+                routeCritical
+                tone="onLight"
                 width={320}
                 height={190}
                 className={styles.logoImage}

@@ -31,7 +31,8 @@
     "status": {
       "CURRENT": 663,
       "CURRENT_REGION_SPECIFIC": 11,
-      "LEGACY_LOCAL_ONLY": 79
+      "LEGACY_LOCAL_ONLY": 6,
+      "REMOVED_FROM_CUSTOMER_CATALOG": 73
     },
     "packaging": {
       "OFFICIAL_CURRENT": 629,
@@ -50,6 +51,14 @@
       "placeholderRecords": 11
     },
     "retiredFamilyRedirects": 6,
+    "removedFromCustomerCatalog": {
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
+      "decidedOn": "2026-09-21",
+      "records": 73,
+      "redirectRules": 2,
+      "redirectDestination": "/brendovi/cosmos-lac",
+      "note": "Nije `discontinued`. Zapisi i slike ostaju u repou kao istorijski, ne-runtime podaci."
+    },
     "currentOutOfScope": [
       {
         "productKey": "name:sportpens-standard",
@@ -10906,7 +10915,7 @@
       }
     },
     "cosmos-lac-molotow-burner-400-ml-mb-400ml-chrome": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -10923,7 +10932,7 @@
       "document": null
     },
     "cosmos-lac-molotow-burner-500-ml-mb-500ml-30-years-chrome": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -10940,7 +10949,7 @@
       "document": null
     },
     "cosmos-lac-molotow-burner-500-ml-mb-500ml-outline-black": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -10957,7 +10966,7 @@
       "document": null
     },
     "cosmos-lac-molotow-burner-600-ml-mb-600ml-30-years-chrome": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -10974,7 +10983,7 @@
       "document": null
     },
     "cosmos-lac-molotow-burner-600-ml-mb-600ml-black": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -10991,7 +11000,7 @@
       "document": null
     },
     "cosmos-lac-molotow-burner-600-ml-mb-600ml-copper": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11008,7 +11017,7 @@
       "document": null
     },
     "cosmos-lac-molotow-burner-600-ml-mb-600ml-gold": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11025,7 +11034,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-001-400-ml-mp-001-jasmine-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11042,7 +11051,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-002-400-ml-mp-002-zinc-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11059,7 +11068,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-003-400-ml-mp-003-cadmium-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11076,7 +11085,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-004-400-ml-mp-004-signal-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11093,7 +11102,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-005-400-ml-mp-005-nature-white": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11110,7 +11119,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-006-400-ml-mp-006-vanilla": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11127,7 +11136,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-009-400-ml-mp-009-golden-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11144,7 +11153,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-010-400-ml-mp-010-melon-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11161,7 +11170,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-011-400-ml-mp-011-slider-light-orange": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11178,7 +11187,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-012-400-ml-mp-012-pastel-orange": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11195,7 +11204,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-013-400-ml-mp-013-dare-orange-light": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11212,7 +11221,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-014-400-ml-mp-014-dare-orange": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11229,7 +11238,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-016-400-ml-mp-016-traffic-red": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11246,7 +11255,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-017-400-ml-mp-017-tornado-red": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11263,7 +11272,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-018-400-ml-mp-018-ruby-red": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11280,7 +11289,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-019-400-ml-mp-019-burgundy": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11297,7 +11306,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-032-400-ml-mp-032-mad-c-cherry-red": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11314,7 +11323,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-033-400-ml-mp-033-signal-red": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11331,7 +11340,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-052-400-ml-mp-052-piglet-pink": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11348,7 +11357,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-053-400-ml-mp-053-candy": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11365,7 +11374,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-058-400-ml-mp-058-fuchsia-pink": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11382,7 +11391,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-059-400-ml-mp-059-mad-c-psycho-pink": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11399,7 +11408,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-060-400-ml-mp-060-telemagenta": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11416,7 +11425,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-066-400-ml-mp-066-lilac": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11433,7 +11442,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-068-400-ml-mp-068-blackberry": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11450,7 +11459,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-069-400-ml-mp-069-currant": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11467,7 +11476,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-089-400-ml-mp-089-azure-blue-light": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11484,7 +11493,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-090-400-ml-mp-090-azure-blue": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11501,7 +11510,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-091-400-ml-mp-091-shock-blue-pastel": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11518,7 +11527,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-092-400-ml-mp-092-shock-blue-light": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11535,7 +11544,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-093-400-ml-mp-093-shock-blue-middle": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11552,7 +11561,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-094-400-ml-mp-094-shock-blue": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11569,7 +11578,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-096-400-ml-mp-096-tulip-blue-middle": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11586,7 +11595,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-097-400-ml-mp-097-tulip-blue": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11603,7 +11612,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-103-400-ml-mp-103-ultramarine-blue": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11620,7 +11629,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-104-400-ml-mp-104-sapphire-blue": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11637,7 +11646,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-106-400-ml-mp-106-ecb-prussian-blue-dark": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11654,7 +11663,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-124-400-ml-mp-124-taste-riviera-middle": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11671,7 +11680,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-159-400-ml-mp-159-juice-green": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11688,7 +11697,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-160-400-ml-mp-160-mr-green": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11705,7 +11714,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-161-400-ml-mp-161-leaf-green": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11722,7 +11731,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-189-400-ml-mp-189-sahara-beige-light": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11739,7 +11748,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-210-400-ml-mp-210-tar-black": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11756,7 +11765,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-214-400-ml-mp-214-tar-signal-black": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11773,7 +11782,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-217-400-ml-mp-217-caparso-middle-grey-neutral": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11790,7 +11799,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-218-400-ml-mp-218-light-grey-neutral": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11807,7 +11816,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-220-1-400-ml-mp-220-1-gold-dollar": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11824,7 +11833,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-220-400-ml-mp-220-silver-dollar": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11841,7 +11850,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-221-400-ml-mp-221-deep-black": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11858,7 +11867,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-223-400-ml-mp-223-anthracite-grey": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11875,7 +11884,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-224-400-ml-mp-224-grey-blue-dark": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11892,7 +11901,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-225-400-ml-mp-225-granite": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11909,7 +11918,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-226-400-ml-mp-226-grey-blue-middle": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11926,7 +11935,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-228-400-ml-mp-228-grey-blue-light": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11943,7 +11952,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-229-400-ml-mp-229-pebble-grey": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11960,7 +11969,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-230-400-ml-mp-230-marble": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11977,7 +11986,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-231-400-ml-mp-231-signal-white": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -11994,7 +12003,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-232-400-ml-mp-232-neon-yellow": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12011,7 +12020,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-233-400-ml-mp-233-neon-orange": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12028,7 +12037,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-234-400-ml-mp-234-neon-pink": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12045,7 +12054,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-235-400-ml-mp-235-neon-blue": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12062,7 +12071,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-236-1-400-ml-mp-236-1-antistatik-neon-red": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12079,7 +12088,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-236-400-ml-mp-236-neon-green": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12096,7 +12105,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-249-400-ml-mp-249-toast-signal-black-transp": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12113,7 +12122,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-252-sjaj-400-ml-mp-252-clear-coat-gloss": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -12130,7 +12139,7 @@
       "document": null
     },
     "cosmos-lac-molotow-premium-mp-253-mat-400-ml-mp-253-clear-coat-matt": {
-      "status": "LEGACY_LOCAL_ONLY",
+      "status": "REMOVED_FROM_CUSTOMER_CATALOG",
       "classification": "LEGACY_LOCAL_ONLY",
       "officialUrl": null,
       "officialSlug": null,
@@ -18177,6 +18186,16 @@
     {
       "source": "/proizvodi/grupa/cosmos-lac-zinc",
       "destination": "/katalog?brend=cosmos-lac&q=Zinc",
+      "permanent": true
+    },
+    {
+      "source": "/proizvodi/grupa/:slug(cosmos-lac-molotow-.*)",
+      "destination": "/brendovi/cosmos-lac",
+      "permanent": true
+    },
+    {
+      "source": "/proizvodi/:slug(cosmos-lac-molotow-.*)",
+      "destination": "/brendovi/cosmos-lac",
       "permanent": true
     }
   ]

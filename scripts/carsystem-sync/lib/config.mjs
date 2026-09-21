@@ -54,6 +54,8 @@ export const PATHS = {
   identityRegistry: path.join(DATA_DIR, "identity-registry.json"),
   decisions: path.join(DATA_DIR, "manual-decisions.json"),
   taxonomyMap: path.join(DATA_DIR, "taxonomy-map.json"),
+  /** Proizvodi drugih proizvođača u Carsystem katalogu (RUPES): sloj identiteta proizvođača. */
+  thirdParty: path.join(DATA_DIR, "third-party-manufacturers.json"),
   localization: path.join(DATA_DIR, "localization-sr.json"),
   plan: path.join(DATA_DIR, "reports/sync-plan.generated.json"),
   planCsv: path.join(DATA_DIR, "reports/sync-plan.generated.csv"),

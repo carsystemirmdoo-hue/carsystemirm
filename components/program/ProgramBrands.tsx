@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import type { BrandReference, CarsystemBrand, PublicProgramGroup } from "@/lib/carsystem-data";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
 
@@ -48,8 +48,8 @@ function BrandCardContent({ brand }: { brand: CarsystemBrand & { status: "active
   return (
     <>
       <div className={styles.brandLogoFrame}>
-        <Image
-          src={brand.logo}
+        <BrandLogoMark
+          brand={brand}
           alt={`${brand.name} logo`}
           width={220}
           height={120}

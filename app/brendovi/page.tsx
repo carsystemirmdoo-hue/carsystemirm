@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
@@ -90,8 +90,8 @@ export default function BrandsIndexPage() {
                   key={brand.slug}
                 >
                   <span className={styles.brandLogoFrame}>
-                    <Image
-                      src={brand.logo}
+                    <BrandLogoMark
+                      brand={brand}
                       alt={`${brand.name} logo`}
                       width={190}
                       height={88}

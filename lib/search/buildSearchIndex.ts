@@ -150,6 +150,7 @@ function productCodes(product: CarsystemProduct) {
   const codes = [
     ...(product.detail?.variants?.content.rows.map((row) => row.id) ?? []),
     ...(product.legacyManufacturerCodes ?? []),
+    ...(product.variantManufacturerCodes ?? []),
     /*
      * Šifra proizvođača kada se razlikuje od `sku`. Zapisi uvezeni pre nego što je
      * zvanična šifra bila poznata nose interni `sku` („RM-DIA-BASE”), a pravu oznaku

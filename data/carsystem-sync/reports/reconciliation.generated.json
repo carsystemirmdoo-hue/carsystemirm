@@ -510,7 +510,113 @@
     }
   ],
   "coverage": {
-    "A_totalLocalCarsystemRecords": 465,
+    "A_totalRecordsSourcedFromCarsystemCatalogue": 465,
+    "groups": {
+      "CARSYSTEM_MANUFACTURER_PRODUCTS": {
+        "cards": 440,
+        "importedBySync": 431,
+        "handWritten": 9,
+        "catalogueFamilies": {
+          "inCatalogue": 396,
+          "representedLocally": 393,
+          "notRepresented": [
+            {
+              "officialName": "CAR CLEAN MULTI II",
+              "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+              "articleNumbers": [
+                "160.515"
+              ]
+            },
+            {
+              "officialName": "CLASSIC COVERALL PANTS KNEEPADFIT",
+              "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+              "articleNumbers": [
+                "160.596",
+                "160.597",
+                "160.598",
+                "160.599",
+                "160.600",
+                "160.601"
+              ]
+            },
+            {
+              "officialName": "ERLKING LTD. 2-PIECE COVERALL",
+              "status": "CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE",
+              "articleNumbers": [
+                "160.663",
+                "160.669",
+                "160.664",
+                "160.670",
+                "160.665",
+                "160.671",
+                "160.666",
+                "160.672",
+                "160.667",
+                "160.673",
+                "160.668",
+                "160.674"
+              ]
+            }
+          ]
+        },
+        "articleNumbers": 972
+      },
+      "THIRD_PARTY_PRODUCTS_LISTED_IN_CARSYSTEM_CATALOGUE": {
+        "rupes": {
+          "scope": "RUPES_PRODUCTS_FROM_CARSYSTEM_PROGRAM",
+          "cards": 25,
+          "runtimeBrandSlug": [
+            "rupes"
+          ],
+          "catalogueFamilies": {
+            "inCatalogue": 18,
+            "representedLocally": 18,
+            "notRepresented": []
+          },
+          "websiteOnly": 7,
+          "articleNumbers": 54,
+          "byClassification": {
+            "LEGACY_OR_UNCERTAIN": 3,
+            "RUPES_EXACT_PRODUCT": 8,
+            "RUPES_PRODUCT_CARSYSTEM_DISTRIBUTED": 14
+          },
+          "byManufacturerStatus": {
+            "CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED": 2,
+            "CURRENT_ON_OFFICIAL_SITE": 22,
+            "DISCONTINUED_BY_RUPES_BUT_CARSYSTEM_LISTED": 1
+          },
+          "notCurrentAtManufacturer": [
+            {
+              "slug": "carsystem-rupes-47-105-replacement-carbon-brush",
+              "status": "CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED",
+              "note": "Rezervni deo; rupes.com nema stranicu proizvoda za ovu šifru. Identitet RUPES potvrđuje samo Carsystem."
+            },
+            {
+              "slug": "carsystem-rupes-cleaning-and-maintenance-oil",
+              "status": "CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED",
+              "note": "rupes.com nema stranicu proizvoda za ulje za održavanje od 50 ml. Identitet RUPES potvrđuje samo Carsystem."
+            },
+            {
+              "slug": "carsystem-rupes-polishing-machine-lhr75e",
+              "status": "DISCONTINUED_BY_RUPES_BUT_CARSYSTEM_LISTED",
+              "note": "rupes.com označava model kao „discontinued”; Carsystem ga i dalje navodi na carsystem.org (nije u katalogu 2026/27)."
+            }
+          ],
+          "modelCodeEvidence": {
+            "CARSYSTEM_STATED_ONLY": 8,
+            "OFFICIAL_CONFIRMED": 31,
+            "OFFICIAL_BASE_MODEL_CONFIRMED": 2
+          },
+          "articlesWithoutModelCode": 13,
+          "imageRights": {
+            "flag": "RUPES_IMAGE_RIGHTS_REVIEW",
+            "status": "PENDING_FINAL_ASSET_AUDIT",
+            "cardsFlagged": 25
+          },
+          "logo": "NO_APPROVED_ASSET"
+        }
+      }
+    },
     "A_breakdown": {
       "importedBySync": 456,
       "handWritten": 9,

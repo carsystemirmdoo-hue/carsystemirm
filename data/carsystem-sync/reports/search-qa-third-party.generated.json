@@ -1,0 +1,86 @@
+{
+  "summary": {
+    "indexRecords": 1887,
+    "products": 25,
+    "brandQueryHits": 25,
+    "brandUnderCarsystem": 0,
+    "name": "25/25",
+    "articleNumber": "54/54",
+    "modelCode": "41/41",
+    "modelAlias": "6/6",
+    "ownCarsystemArticleNumberStillFound": true
+  },
+  "named": [
+    {
+      "kind": "oznaka modela iz reda",
+      "query": "RX253A",
+      "slug": "carsystem-rupes-skorpio-e-rx",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "osnovni model (rupes.com)",
+      "query": "RX253",
+      "slug": "carsystem-rupes-skorpio-e-rx",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "oznaka modela iz reda",
+      "query": "HR81M",
+      "slug": "carsystem-rupes-ibrid-nano",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "oznaka modela iz reda",
+      "query": "S145EPM",
+      "slug": "carsystem-rupes-vacuum-cleaner-s145",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "oznaka pribora",
+      "query": "981.500",
+      "slug": "carsystem-rupes-back-pad",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "Carsystem broj artikla",
+      "query": "157.331",
+      "slug": "carsystem-rupes-angle-polishing-machine-lh76p",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "porodica",
+      "query": "BigFoot",
+      "slug": "carsystem-rupes-polishing-machine-lh19e",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "porodica",
+      "query": "iBrid",
+      "slug": "carsystem-rupes-ibrid-nano",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "porodica",
+      "query": "Skorpio",
+      "slug": "carsystem-rupes-skorpio-iii-rh",
+      "ok": true,
+      "brandOfHit": "rupes"
+    },
+    {
+      "kind": "postojeći naziv",
+      "query": "RUPES Vacuum Cleaner S145",
+      "slug": "carsystem-rupes-vacuum-cleaner-s145",
+      "ok": true,
+      "brandOfHit": "rupes"
+    }
+  ],
+  "failures": []
+}

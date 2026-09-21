@@ -54,7 +54,14 @@ const regionExpected = Object.entries(plan.enrichments).filter(([, entry]) => en
 const regionMissing = regionExpected.filter((slug) => !regionIdentities.has(slug));
 const regionWithoutProvenance = regionExpected.filter((slug) => !(dataset.enrichments[slug].sourceLocales ?? []).length);
 
-/* Kartice: aktuelne vs legacy (Molotow). */
+/* Kartice: aktuelne vs legacy. Serija uklonjena iz kataloga (Molotow) ne sme da postoji NIGDE u runtime-u. */
+const removal = scope.removedFromCustomerCatalog;
+const removedSlugs = new Set(Object.entries(dataset.enrichments).filter(([, entry]) => entry.status === removal.status).map(([slug]) => slug));
+const removedLeakedIntoRuntime = [
+  ...records.filter((product) => removedSlugs.has(product.slug)).map((product) => `record:${product.slug}`),
+  ...families.flatMap((family) => family.variants.filter((variant) => removedSlugs.has(variant.slug)).map((variant) => `variant:${family.slug}/${variant.slug}`)),
+  ...cards.filter((card) => card.id.includes(removal.slugPrefix.replace(/-$/, ""))).map((card) => `card:${card.id}`),
+];
 const legacyCards = cards.filter((card) => {
   const members = card.id.startsWith("family:") ? families.find((family) => `family:${family.slug}` === card.id).variants : [bySlug.get(card.id)];
   return members.every((member) => syncOf(member.slug)?.status === "LEGACY_LOCAL_ONLY");
@@ -69,11 +76,17 @@ const mixedCards = families.filter((family) => {
 
 /* Adrese: svaka adresa iz stanja pre synca mora i dalje da postoji ili da ima preusmerenje. */
 const familySlugs = new Set(families.map((family) => family.slug));
-const redirected = new Set(dataset.redirects.filter((entry) => !entry.has).map((entry) => entry.source.replace("/proizvodi/grupa/", "")));
+// Isto čitanje izvora kao u Next.js-u: doslovna putanja ili jedan parametar sa regularnim izrazom (`:slug(prefiks.*)`).
+const sourcePattern = (rule) => new RegExp(`^${rule.source.replace(/:[a-z]+\(([^)]*)\)/gi, "($1)")}$`);
+const unconditional = dataset.redirects.filter((entry) => !entry.has).map((entry) => ({ entry, pattern: sourcePattern(entry) }));
+const redirectOf = (pathname) => unconditional.find(({ pattern }) => pattern.test(pathname))?.entry ?? null;
+const redirected = new Set(baseline.familySlugs.filter((slug) => redirectOf(`/proizvodi/grupa/${slug}`)));
 const brokenFamilyUrls = baseline.familySlugs.filter((slug) => !familySlugs.has(slug) && !redirected.has(slug));
-const brokenProductUrls = baseline.productSlugs.filter((slug) => !bySlug.has(slug));
+const brokenProductUrls = baseline.productSlugs.filter((slug) => !bySlug.has(slug) && !redirectOf(`/proizvodi/${slug}`));
+// Preusmerenje ne sme da proguta adresu koja je i dalje živa.
+const redirectShadowsLiveUrl = [...records.map((product) => `/proizvodi/${product.slug}`), ...families.map((family) => `/proizvodi/grupa/${family.slug}`)].filter((pathname) => redirectOf(pathname));
 const redirectTargetsMissing = dataset.redirects.filter((entry) => entry.destination.startsWith("/proizvodi/") && !bySlug.has(entry.destination.replace("/proizvodi/", ""))).map((entry) => entry.destination);
-const unexpectedlyRetired = baseline.familySlugs.filter((slug) => !familySlugs.has(slug)).filter((slug) => !Object.values(scope.splitCards).some((config) => config.retiredFamilySlug === slug && !config.keepBaseFor));
+const unexpectedlyRetired = baseline.familySlugs.filter((slug) => !familySlugs.has(slug)).filter((slug) => !slug.startsWith(removal.slugPrefix)).filter((slug) => !Object.values(scope.splitCards).some((config) => config.retiredFamilySlug === slug && !config.keepBaseFor));
 
 /* Slike: postojeće netaknute, novi zapisi na placeholderu, bez spoljnih adresa. */
 const localImages = new Map(readJson(PATHS.localDataset).map((record) => [record.slug, record.image]));
@@ -84,11 +97,12 @@ const externalImages = records.filter((product) => /^https?:/.test(product.produ
 
 const report = {
   coverage: { A: officialProducts.length, B: officialProducts.length - missingProducts.length, C: officialPages.length + regionExpected.length, D: officialPages.length - missingPages.length + regionExpected.length - regionMissing.length },
-  cards: { VISIBLE_CURRENT_COSMOS_CARDS: cards.length - legacyCards.length, VISIBLE_LEGACY_MOLOTOW_CARDS: legacyCards.length, TOTAL_VISIBLE_COSMOS_BRAND_CARDS: cards.length, baselineCards: baseline.cards, legacyCardIds: legacyCards.map((card) => card.id) },
+  cards: { VISIBLE_CURRENT_COSMOS_CARDS: cards.length - legacyCards.length, VISIBLE_LEGACY_ONLY_CARDS: legacyCards.length, TOTAL_VISIBLE_COSMOS_BRAND_CARDS: cards.length, baselineCards: baseline.cards, legacyCardIds: legacyCards.map((card) => card.id) },
+  removedFromCustomerCatalog: { status: removal.status, records: removedSlugs.size, runtimeRecords: records.filter((product) => removedSlugs.has(product.slug)).length, redirectedProductUrls: baseline.productSlugs.filter((slug) => removedSlugs.has(slug) && redirectOf(`/proizvodi/${slug}`)).length, redirectedFamilyUrls: baseline.familySlugs.filter((slug) => slug.startsWith(removal.slugPrefix) && redirectOf(`/proizvodi/grupa/${slug}`)).length, destination: removal.redirectDestination },
   runtime: { underlyingRecords: records.length, families: families.length, redirectOnlyRecords: records.filter((product) => runtime.variantSlugs.has(product.slug)).length, newRecords: newRecords.length, enrichedExisting: Object.values(dataset.enrichments).filter((entry) => entry.officialUrl || entry.sourceLocales).length },
   status: dataset.meta.status,
-  problems: { missingProducts, missingPages, leakedOutOfScope, regionMissing, regionWithoutProvenance, orphanRecords, mixedCards, brokenFamilyUrls, brokenProductUrls, redirectTargetsMissing, unexpectedlyRetired, changedImages, newNotPlaceholder, externalImages },
-  urls: { baselineFamilyUrls: baseline.familySlugs.length, stillLive: baseline.familySlugs.filter((slug) => familySlugs.has(slug)).length, redirected: baseline.familySlugs.filter((slug) => !familySlugs.has(slug) && redirected.has(slug)).length, baselineProductUrls: baseline.productSlugs.length, productUrlsStillLive: baseline.productSlugs.length - brokenProductUrls.length, redirectRules: dataset.redirects.length },
+  problems: { missingProducts, missingPages, leakedOutOfScope, regionMissing, regionWithoutProvenance, orphanRecords, mixedCards, brokenFamilyUrls, brokenProductUrls, redirectShadowsLiveUrl, removedLeakedIntoRuntime, redirectTargetsMissing, unexpectedlyRetired, changedImages, newNotPlaceholder, externalImages },
+  urls: { baselineFamilyUrls: baseline.familySlugs.length, stillLive: baseline.familySlugs.filter((slug) => familySlugs.has(slug)).length, redirected: baseline.familySlugs.filter((slug) => !familySlugs.has(slug) && redirected.has(slug)).length, baselineProductUrls: baseline.productSlugs.length, productUrlsStillLive: baseline.productSlugs.filter((slug) => bySlug.has(slug)).length, productUrlsRedirected: baseline.productSlugs.filter((slug) => !bySlug.has(slug) && redirectOf(`/proizvodi/${slug}`)).length, redirectRules: dataset.redirects.length },
   notCountedAsMissing: { CURRENT_OUT_OF_SCOPE: plan.currentOutOfScope, LEGACY_LOCAL_ONLY: dataset.meta.status.LEGACY_LOCAL_ONLY },
 };
 writeJson(PATHS.reconciliation, report);

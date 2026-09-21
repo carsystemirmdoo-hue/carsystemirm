@@ -1,0 +1,14 @@
+/* Tekstualni naziv brenda bez odobrenog logo fajla. Boja prati okvir (tema), osim na uvek-svetlim pločicama. */
+.wordmark {
+  color: inherit;
+  font-size: clamp(0.95rem, 0.8rem + 0.6vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.wordmark[data-tone="onLight"] {
+  color: #20242c;
+}

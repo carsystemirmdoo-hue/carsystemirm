@@ -42,7 +42,11 @@ import type {
 export type CarsystemBrand = {
   slug: string;
   name: string;
-  logo: string;
+  /**
+   * Odobren logo fajl u `public/brands/`. Izostavlja se kada takvog fajla nema: brend se tada
+   * prikazuje tekstualno (`BrandLogoMark`). Logo se ne preuzima sa interneta bez provere prava.
+   */
+  logo?: string;
   description: string;
   overview?: string;
   programSlugs?: string[];
@@ -332,6 +336,12 @@ export type CarsystemProduct = {
    */
   legacyManufacturerCodes?: string[];
   /**
+   * Šifre proizvođača pojedinih VARIJANTI, kada ih nosi red tabele a ne kartica (RUPES: kartica
+   * „Skorpio E RX” ima redove RX253A i RX256A). Ne prikazuju se zasebno — stoje u nazivu reda;
+   * pretraga ih tretira kao šifre, pa upit „RX253A” ili „9.DA40H” pogađa tačno tu karticu.
+   */
+  variantManufacturerCodes?: string[];
+  /**
    * Dodatni pojmovi za pretragu koje uvoz izvodi iz zvaničnih podataka, a koji
    * nisu u nazivu ni u znački: oznake varijanti („P80”, „2,5 l”, „Učvršćivač
    * brzi”). Ne prikazuju se; čita ih samo `lib/search/buildSearchIndex.ts`.
@@ -569,15 +579,35 @@ export const brands: CarsystemBrand[] = [
       contactCtaLabel: "Kontaktirajte nas",
     },
   }),
+  defineCarsystemBrand({
+    slug: "rupes",
+    name: "RUPES",
+    /*
+     * Bez `logo`: odobren RUPES logo fajl ne postoji (RUPES_IMAGE_RIGHTS_REVIEW), pa se brend
+     * prikazuje tekstualno. Opseg nije RUPES katalog nego RUPES_PRODUCTS_FROM_CARSYSTEM_PROGRAM —
+     * proizvodi koje Carsystem vodi u svom katalogu (`data/carsystem-sync/third-party-manufacturers.json`).
+     * Bez tvrdnji o statusu distribucije.
+     */
+    description:
+      "RUPES proizvodi iz Carsystem programa — polirke, brusilice, usisivač i pribor za pripremu i završnu obradu.",
+    overview:
+      "RUPES proizvodi koje vodi Carsystem katalog 2026/27: BigFoot polirke, iBrid Nano, Skorpio i orbitalne brusilice, usisivač S145 i prateći pribor. Ovo nije kompletan RUPES katalog.",
+    programSlugs: ["oprema", "poliranje"],
+    catalogOrder: 9,
+    presentation: {
+      // Neutralna paleta sajta: zvanična RUPES boja nije verifikovana, pa se ne pretpostavlja.
+      accentColor: "#20242C",
+      accentContrastColor: "#F7F8FA",
+      accentOnDarkColor: "#F7F8FA",
+      accentOnDarkContrastColor: "#20242C",
+      heroKicker: "RUPES proizvodi iz Carsystem programa",
+      productsCtaLabel: "Pogledajte RUPES proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
 ];
 
 export const futureBrands: FutureBrand[] = [
-  {
-    slug: "rupes",
-    name: "Rupes",
-    description: "Budući program u pripremi za javni katalog.",
-    status: "placeholder",
-  },
   {
     slug: "autofit",
     name: "A.U.T.O. Fit",
@@ -709,7 +739,7 @@ export const publicProgramGroups: PublicProgramGroup[] = [
     badges: ["Pištolji", "Dizne", "Kontrola nanosa"],
     internalProgramSlugs: ["oprema"],
     phaseSlugs: ["boja", "lak"],
-    brandSlugs: ["sata", "carsystem", "autofit"],
+    brandSlugs: ["sata", "carsystem", "rupes", "autofit"],
     guidanceTitle: "Precizna oprema i kontrola aplikacije",
     guidanceText:
       "Pištolji, dizne i prateća oprema pomažu radionici da kontroliše nanos, potrošnju materijala i ponovljivost završnog sloja.",

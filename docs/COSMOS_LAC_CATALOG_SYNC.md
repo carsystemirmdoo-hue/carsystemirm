@@ -46,7 +46,13 @@ Fast Acrylic 8017 pod „8011 – Nut Brown"). Adresa + šifra u adresi + Brand 
 - **U opsegu:** svi zvanični proizvodi osim navedenih ispod; uključeni su i novi Acrylic Varnish, Chrome Effect Container, Effect Container i High Heat Container.
 - **`CURRENT_OUT_OF_SCOPE`** (aktuelno kod proizvođača, nije uvezeno, ne broji se kao „nedostaje"): SportPens, Wood Glue, Acryl Fresh, Plastic Paint Fresh, Wood Varnish.
 - **`CURRENT_REGION_SPECIFIC`:** zapisi koje engleski sajt nema, a `bg/de/da/fi/sv/hu` imaju (Antichip 250/252 i devet Spray.Bike nijansi). Aktuelni su i nose `sourceLocales`.
-- **`LEGACY_LOCAL_ONLY`** (netaknuto): Molotow Premium/Burner (73 zapisa, 2 kartice — linija koje na cosmoslac.com nema) i šest zapisa bez ijedne zvanične stranice (Backlight 712, Forest Marking 574/575, Radiator Lacquer 403, Metallic 334, Spray.Bike 231).
+- **`LEGACY_LOCAL_ONLY`** (netaknuto): šest zapisa bez ijedne zvanične stranice (Backlight 712, Forest Marking 574/575, Radiator Lacquer 403, Metallic 334, Spray.Bike 231).
+- **`REMOVED_FROM_CUSTOMER_CATALOG`** (odluka 2026-09-21): Molotow Premium/Burner — 73 zapisa, 2 kartice. Serija je
+  uklonjena iz kataloga za kupce: nema kartice, varijante, pretrage ni sitemap adrese (`lib/cosmos-lac-data.ts` je
+  izostavlja iz runtime-a). **Nije `discontinued`** — dokaz proizvođača ne postoji. Zapisi, slike i poreklo iz Brand
+  Kit-a ostaju u repou kao istorijski podatak (izvorna `classification` je i dalje `LEGACY_LOCAL_ONLY`, pa se A/B/C/D i
+  `scope-lock.json` ne menjaju). Sve stare adrese (`/proizvodi/cosmos-lac-molotow-*` i obe porodične) trajno vode na
+  `/brendovi/cosmos-lac`: dva pravila po prefiksu u `dataset.redirects`; plan obara sync ako bi prefiks zahvatio živ zapis.
 
 Opseg se zaključava u `data/cosmos-lac-sync/scope-lock.json` (`plan.mjs --write-lock`, posle odobrenja). Plan pada na
 svaku razliku: `SCOPE_DRIFT_WITHOUT_SOURCE_CHANGE` (greška u pravilima) ili `SCOPE_CHANGED_WITH_SOURCE` (traži novo odobrenje).

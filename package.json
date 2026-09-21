@@ -77,6 +77,7 @@
     "carsystem:sync:apply": "npm run carsystem:sync:plan && node scripts/carsystem-sync/apply.mjs",
     "carsystem:sync:check": "npm run carsystem:sync:plan && node scripts/carsystem-sync/apply.mjs --check",
     "carsystem:sync:validate": "node scripts/carsystem-sync/validate.mjs",
+    "carsystem:sync:qa-search-third-party": "node scripts/carsystem-sync/qa-search-third-party.mjs",
     "carsystem:sync:reconcile": "node scripts/carsystem-sync/reconcile.mjs && node scripts/carsystem-sync/colour-report.mjs",
     "test:carsystem-sync": "node --test scripts/carsystem-sync/*.test.mjs",
     "carfit:sync": "npm run carfit:sync:acquire && npm run carfit:sync:apply && npm run carfit:sync:validate && npm run carfit:sync:reconcile",

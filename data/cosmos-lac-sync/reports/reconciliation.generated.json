@@ -7,25 +7,31 @@
   },
   "cards": {
     "VISIBLE_CURRENT_COSMOS_CARDS": 84,
-    "VISIBLE_LEGACY_MOLOTOW_CARDS": 2,
-    "TOTAL_VISIBLE_COSMOS_BRAND_CARDS": 86,
+    "VISIBLE_LEGACY_ONLY_CARDS": 0,
+    "TOTAL_VISIBLE_COSMOS_BRAND_CARDS": 84,
     "baselineCards": 68,
-    "legacyCardIds": [
-      "family:cosmos-lac-molotow-burner",
-      "family:cosmos-lac-molotow-premium"
-    ]
+    "legacyCardIds": []
+  },
+  "removedFromCustomerCatalog": {
+    "status": "REMOVED_FROM_CUSTOMER_CATALOG",
+    "records": 73,
+    "runtimeRecords": 0,
+    "redirectedProductUrls": 73,
+    "redirectedFamilyUrls": 2,
+    "destination": "/brendovi/cosmos-lac"
   },
   "runtime": {
-    "underlyingRecords": 753,
-    "families": 40,
-    "redirectOnlyRecords": 707,
+    "underlyingRecords": 680,
+    "families": 38,
+    "redirectOnlyRecords": 634,
     "newRecords": 11,
     "enrichedExisting": 663
   },
   "status": {
     "CURRENT": 663,
     "CURRENT_REGION_SPECIFIC": 11,
-    "LEGACY_LOCAL_ONLY": 79
+    "LEGACY_LOCAL_ONLY": 6,
+    "REMOVED_FROM_CUSTOMER_CATALOG": 73
   },
   "problems": {
     "missingProducts": [],
@@ -37,6 +43,8 @@
     "mixedCards": [],
     "brokenFamilyUrls": [],
     "brokenProductUrls": [],
+    "redirectShadowsLiveUrl": [],
+    "removedLeakedIntoRuntime": [],
     "redirectTargetsMissing": [],
     "unexpectedlyRetired": [],
     "changedImages": [],
@@ -45,11 +53,12 @@
   },
   "urls": {
     "baselineFamilyUrls": 41,
-    "stillLive": 35,
-    "redirected": 6,
+    "stillLive": 33,
+    "redirected": 8,
     "baselineProductUrls": 742,
-    "productUrlsStillLive": 742,
-    "redirectRules": 34
+    "productUrlsStillLive": 669,
+    "productUrlsRedirected": 73,
+    "redirectRules": 36
   },
   "notCountedAsMissing": {
     "CURRENT_OUT_OF_SCOPE": [
@@ -84,6 +93,6 @@
         "reason": "Wood Varnish 374/375 — van odobrenog opsega"
       }
     ],
-    "LEGACY_LOCAL_ONLY": 79
+    "LEGACY_LOCAL_ONLY": 6
   }
 }

@@ -130,7 +130,8 @@ export function brandJsonLd(brand: CarsystemBrand) {
         name: brand.name,
         description: brand.description,
         url,
-        logo: absoluteUrl(brand.logo),
+        // Brend bez odobrenog logo fajla ne dobija `logo` — tekstualni naziv nije logotip.
+        ...(brand.logo ? { logo: absoluteUrl(brand.logo) } : {}),
       },
       {
         "@type": "CollectionPage",

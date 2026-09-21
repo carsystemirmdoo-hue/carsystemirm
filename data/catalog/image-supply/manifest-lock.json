@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
+  "createdFromMainSha": "7f9f6179d347348b39dec7609e653d2c7971d607",
+  "catalogIdentityFingerprint": "efc64c33f637bc63710eedd5ee64617afacfeeef70d57eb947de2e17e31ef64c",
+  "activeBrands": [
+    "baslac",
+    "befar",
+    "carfit",
+    "carsystem",
+    "cosmos-lac",
+    "norbin",
+    "rm",
+    "rupes",
+    "sata"
+  ],
+  "totalCards": 1210,
+  "cardsByBrand": {
+    "baslac": 57,
+    "befar": 64,
+    "carfit": 123,
+    "carsystem": 440,
+    "cosmos-lac": 84,
+    "norbin": 13,
+    "rm": 223,
+    "rupes": 25,
+    "sata": 181
+  },
+  "totalImageIdentities": 1859,
+  "missingCount": 302,
+  "userSupplyCount": 115,
+  "rightsReviewCount": 198,
+  "userSupplyByBrand": {
+    "baslac": 44,
+    "befar": 7,
+    "carfit": 1,
+    "carsystem": 2,
+    "norbin": 13,
+    "rm": 43,
+    "sata": 5
+  },
+  "missingByAction": {
+    "IMPORT_OFFICIAL_IF_APPROVED": 11,
+    "KEEP_PLACEHOLDER": 14,
+    "RIGHTS_DECISION": 162,
+    "USER_SUPPLY": 115
+  },
+  "manifests": {
+    "MISSING_PRODUCT_IMAGES.csv": {
+      "sha256": "8e67543cb0a59ba15c1d80f54fd7cc556180570c08dadea82de3b53ab7423dc7",
+      "rows": 302
+    },
+    "USER_IMAGE_SUPPLY_QUEUE.csv": {
+      "sha256": "a27133c7c381dcbe3c7b35fc754e07ac7fbe14220e0d8e935266df7fd8fa36f0",
+      "rows": 115
+    },
+    "IMAGE_RIGHTS_REVIEW.csv": {
+      "sha256": "02c0133d9e5129ff469e4d26182606b2656d376df29369136b0284657dd3620f",
+      "rows": 198
+    }
+  },
+  "imageIdentityInventory": {
+    "tracked": false,
+    "sha256": "199477cf817d8418c51b0a9a9d11bd1879c7bb5bc6f8b79746d8c200bf2eb23e",
+    "imageIdentityFingerprint": "c079fb2c1e5660726005c794ec89c1ab90c2974626c0de1addfffda0461c7596",
+    "brokenReferences": 0,
+    "wrongSibling": 0,
+    "rows": 1859
+  },
+  "sourceUpload": {
+    "targetExtension": ".webp",
+    "allowedSourceExtensions": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp"
+    ],
+    "matching": "basename(source) === basename(suggested_filename), znak-po-znak; ekstenzija izvora je bilo koja dozvoljena (bez razlike velika/mala slova); tačno jedan izvorni fajl po basename-u; nepoznat basename se ne uvozi"
+  },
+  "workingFiles": {
+    "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "radni fajl vlasnika (owner_has_product); namerno van SHA lock-a, proverava se strukturno"
+  },
+  "metadata": {
+    "approvedAt": "2026-09-21",
+    "note": "approvedAt je samo metapodatak; nije deo identiteta manifesta"
+  }
+}

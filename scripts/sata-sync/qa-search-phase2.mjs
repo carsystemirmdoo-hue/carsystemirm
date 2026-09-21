@@ -52,6 +52,14 @@ const indexText = JSON.stringify(payload.records.filter((record) => record.brand
 const excludedFound = Object.entries(plan.articles).filter(([, entry]) => entry.status !== "VISIBLE").filter(([number]) => new RegExp(`(^|[^0-9])${number}([^0-9]|$)`).test(indexText) || searchIndex(index, number, { limit: 5 }).some((hit) => hit.record.brandSlug === "sata" && (hit.record.codes ?? []).concat(hit.record.productCode ?? []).includes(number))).map(([number]) => number);
 for (const number of excludedFound) failures.push({ kind: "excludedArticleFound", number });
 
+// Price gate nad STVARNIM indeksom: nijedan SATA zapis ne nosi formulaciju o ceni, valutu ni iznos.
+const phase2Ids = new Set(plan.cards.map((card) => card.slug));
+const pricingInIndex = payload.records.filter((record) => record.brandSlug === "sata" && /\bprice\b|€|\b(?:EUR|RSD|USD|CHF)\b/i.test(JSON.stringify(record))).map((record) => record.id);
+for (const id of pricingInIndex) failures.push({ kind: "pricingWordingInIndex", id, phase2: phase2Ids.has(id) });
+const perMeter = plan.cards.filter((card) => card.variants.some((row) => row.soldByMeter));
+const perMeterFound = perMeter.filter((card) => top("na metar", 20).includes(card.slug)).length;
+if (perMeterFound !== perMeter.length) failures.push({ kind: "naMetar", found: perMeterFound, expected: perMeter.length });
+
 const cardOf = (number) => plan.cards.find((card) => card.variants.some((row) => row.articleNumber === number)).slug;
 const NAMED = [
   ["red grupe po broju", "53090", cardOf("53090")], ["srpski naziv", "SATA crevo za vazduh", "sata-air-hose"], ["zvanični naziv", "SATA air hose", "sata-air-hose"],
@@ -64,7 +72,7 @@ const phase1 = dataset.products.find((entry) => entry.variants.length > 5);
 const phase1Ok = top(phase1.variants[3].articleNumber, 3).includes(phase1.slug);
 if (!phase1Ok) failures.push({ kind: "phase1ArticleNumber", query: phase1.variants[3].articleNumber, slug: phase1.slug });
 
-const summary = { indexRecords: payload.records.length, cards: plan.cards.length, ...Object.fromEntries(Object.entries(stats).map(([kind, [hit, total]]) => [kind, `${hit}/${total}`])), fullRowOfficialNameInTop8: `${fullNameTop8}/${fullNameTotal}`, excludedArticlesFound: excludedFound.length, phase1ArticleNumberStillFound: phase1Ok };
+const summary = { indexRecords: payload.records.length, cards: plan.cards.length, ...Object.fromEntries(Object.entries(stats).map(([kind, [hit, total]]) => [kind, `${hit}/${total}`])), fullRowOfficialNameInTop8: `${fullNameTop8}/${fullNameTotal}`, excludedArticlesFound: excludedFound.length, pricingWordingInIndex: pricingInIndex.length, soldByMeterFoundByNeutralTerm: `${perMeterFound}/${perMeter.length}`, phase1ArticleNumberStillFound: phase1Ok };
 writeJson(PATHS.phase2SearchQa, { summary, named: NAMED, failures });
 console.log(JSON.stringify({ summary, named: NAMED.map((entry) => `${entry.ok ? "✓" : "✖"} [${entry.kind}] ${entry.query} → ${entry.slug}`), failureCount: failures.length, failures: failures.slice(0, 15) }, null, 1));
 if (failures.length) process.exitCode = 1;

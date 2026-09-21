@@ -184,13 +184,20 @@ test("taksonomija koristi samo postojeće kategorije; slugovi su zaključani u a
   assert.equal(new Set(plan.cards.map((card) => card.slug)).size, plan.cards.length);
 });
 
-test("pretraga: broj artikla, zvanični naziv, oznaka reda i kompatibilnost su pojmovi kartice", () => {
+test("pretraga: broj artikla, zvanični naziv, oznaka reda i kompatibilnost su pojmovi kartice; formulacija o ceni nije", () => {
+  const PRICING = /,?\s*(?:net\s+)?price\s+(?:net\s+)?per\s+met(?:er|re)\b/gi;
+  let soldByMeter = 0;
   for (const card of plan.cards) {
-    const terms = new Set(bySlug.get(card.slug).searchTerms);
+    const product = bySlug.get(card.slug);
+    const terms = new Set(product.searchTerms);
+    // Skriveni indeks ne nosi reč „price” ni valutu; sirovi zvanični naziv u datasetu ostaje netaknut.
+    assert.doesNotMatch(JSON.stringify(product.searchTerms), /\bprice\b|\bpreis\b|€|\bEUR\b|\bRSD\b|\bUSD\b/i, card.slug);
     for (const row of card.variants) {
       assert.ok(terms.has(row.articleNumber), `${card.slug}: ${row.articleNumber}`);
-      assert.ok(terms.has(row.officialName), `${card.slug}: zvanični naziv`);
+      if (row.soldByMeter) { soldByMeter += 1; assert.match(row.officialName, /price/i, "sirovi zvanični naziv ostaje kakav jeste"); assert.ok(terms.has("na metar"), `${card.slug}: neutralan pojam „na metar”`); }
+      assert.ok(terms.has(row.officialName.replace(PRICING, "").replace(/\s+/g, " ").trim()), `${card.slug}: zvanični naziv`);
       if (row.compat) assert.ok(terms.has(row.compat), `${card.slug}: ${row.compat}`);
     }
   }
+  assert.ok(soldByMeter >= 3, "kartice „na metar” postoje i provera je stvarno izvršena");
 });

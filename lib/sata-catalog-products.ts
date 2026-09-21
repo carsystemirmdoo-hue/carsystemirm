@@ -223,6 +223,13 @@ const pluralIzvedba = (count: number) => {
   return mod10 === 1 && mod100 !== 11 ? "izvedba" : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? "izvedbe" : "izvedbi";
 };
 
+/**
+ * Zvanični naziv bez fragmenta koji služi samo kao formulacija o ceni („…, net price per meter”). Sirovi naziv u
+ * datasetu se NE menja — ovo važi isključivo za pojmove pretrage, da price gate bude čist i u skrivenom indeksu.
+ */
+const PRICING_WORDING = /,?\s*(?:net\s+)?price\s+(?:net\s+)?per\s+met(?:er|re)\b/gi;
+const withoutPricingWording = (officialName: string) => officialName.replace(PRICING_WORDING, "").replace(/\s+/g, " ").trim();
+
 function phase2Description(entry: Phase2Entry) {
   const count = entry.variants.length;
   const first = entry.variants[0];
@@ -310,9 +317,16 @@ function createPhase2Product(entry: Phase2Entry): CarsystemProduct {
     seoDescription: description.slice(0, 300),
     taxonomyCategory: entry.taxonomy.category,
     // Pretraga: zvanični naziv svakog reda, broj artikla, oznaka reda (atributi) i klauzula kompatibilnosti.
+    // Formulacija o ceni iz zvaničnog naziva („price per meter/metre”) NE ulazi u indeks; koncept nosi neutralno „na metar”.
     searchTerms: [
       ...new Set(
-        entry.variants.flatMap((variant) => [variant.articleNumber, variant.officialName, variant.label, ...(variant.compat ? [variant.compat] : [])]),
+        entry.variants.flatMap((variant) => [
+          variant.articleNumber,
+          withoutPricingWording(variant.officialName),
+          variant.label,
+          ...(variant.compat ? [variant.compat] : []),
+          ...(variant.soldByMeter ? ["na metar"] : []),
+        ]),
       ),
     ],
     detail: {

@@ -33,7 +33,7 @@ export const programCategories: ProgramCategory[] = [
     number: "03",
     title: "Pištolji i oprema",
     description: "Pištolji, pribor i radionička oprema za precizan nanos i pouzdan rad.",
-    logos: ["sata", "carsystem", "autofit"],
+    logos: ["sata", "carsystem"],
     hints: ["Pištolji", "Oprema", "Pribor", "Potrošni delovi"],
   },
   {

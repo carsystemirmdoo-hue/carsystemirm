@@ -63,8 +63,9 @@ Predviđeni brendovi za prikaz:
 - Rupes
 - BigFoot
 - Car Fit
-- A.U.T.O. Fit
 - Ostali brendovi naknadno
+
+> „A.U.T.O. Fit” je uklonjen sa spiska 2026-09-21: nije utvrđen proizvođač ni zvanični izvor, nema proizvoda, a brend se ne pojavljuje ni na prethodnom sajtu firme.
 
 Napomena: svi logotipi, tvrdnje o zastupništvu, ovlašćenju, partnerstvu i odnosima sa brendovima moraju biti provereni pre finalnog objavljivanja. Ne izmišljati pravni status brenda.
 

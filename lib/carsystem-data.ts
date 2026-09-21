@@ -607,14 +607,15 @@ export const brands: CarsystemBrand[] = [
   }),
 ];
 
-export const futureBrands: FutureBrand[] = [
-  {
-    slug: "autofit",
-    name: "A.U.T.O. Fit",
-    description: "Budući program u pripremi za javni katalog.",
-    status: "placeholder",
-  },
-];
+/*
+ * Trenutno nema nijednog najavljenog brenda. Brend ulazi ovde tek kada je proizvođač utvrđen iz
+ * zvaničnog izvora — placeholder bez identiteta se ne drži.
+ *
+ * „A.U.T.O. Fit” je uklonjen 2026-09-21: audit nije našao ni proizvođača, ni zvanični izvor, ni
+ * proizvod, a brend se ne pojavljuje ni na prethodnom sajtu klijenta. „Rupes” je istog dana postao
+ * aktivan brend (`brands`).
+ */
+export const futureBrands: FutureBrand[] = [];
 
 export const programGroups: ProgramGroup[] = [
   {
@@ -739,7 +740,7 @@ export const publicProgramGroups: PublicProgramGroup[] = [
     badges: ["Pištolji", "Dizne", "Kontrola nanosa"],
     internalProgramSlugs: ["oprema"],
     phaseSlugs: ["boja", "lak"],
-    brandSlugs: ["sata", "carsystem", "rupes", "autofit"],
+    brandSlugs: ["sata", "carsystem", "rupes"],
     guidanceTitle: "Precizna oprema i kontrola aplikacije",
     guidanceText:
       "Pištolji, dizne i prateća oprema pomažu radionici da kontroliše nanos, potrošnju materijala i ponovljivost završnog sloja.",

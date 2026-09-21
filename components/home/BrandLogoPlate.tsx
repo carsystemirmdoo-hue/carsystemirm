@@ -13,8 +13,7 @@ export type BrandKey =
   | "carfit"
   | "cosmosLac"
   | "befar"
-  | "rupes"
-  | "autofit";
+  | "rupes";
 
 type BrandMonoLogo = {
   /**
@@ -94,11 +93,6 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
   },
   rupes: {
     name: "RUPES",
-    width: 132,
-    height: 70,
-  },
-  autofit: {
-    name: "A.U.T.O. Fit",
     width: 132,
     height: 70,
   },

@@ -54,7 +54,6 @@ Use placeholders or neutral treatments for these brand names unless official ass
 - Rupes
 - BigFoot
 - Car Fit
-- A.U.T.O. Fit
 
 Do not invent legal claims that are not in the copy. Use safe copy such as “profesionalni refinish program”, “brendovi u ponudi”, “partnerska mreža”, “tehnička podrška”.
 

@@ -137,14 +137,4 @@ export const brandSources: Record<string, BrandSourceProfile> = {
     ],
     verifiedAt: "2026-09-21",
   },
-
-  autofit: {
-    acquisitionFeasibility: "no-official-source-found",
-    notes: [
-      "Brend „A.U.T.O. Fit“ je u projektu placeholder, bez proizvoda.",
-      "Zvanični izvor nije utvrđen; naziv je previše generički za pouzdanu identifikaciju.",
-      "Zahteva podatak od Carsystem-a o kom proizvođaču je reč.",
-    ],
-    verifiedAt: "2026-08-08",
-  },
 };

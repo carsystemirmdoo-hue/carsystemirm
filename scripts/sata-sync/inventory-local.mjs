@@ -28,8 +28,10 @@ for (const article of source.standalone) articleIndex.set(article.articleNumber,
 
 /* ── 1. Runtime zapisi i kartice ── */
 const runtime = loadCatalogRuntime();
-const ours = runtime.products.filter((product) => product.brandSlug === "sata");
-const cards = runtime.listing.canonical.filter((product) => product.brandSlug === "sata");
+// Inventar faze 1: kartice faze 2 su poseban ključ dataseta i ne ulaze u ovo poređenje.
+const phase2Slugs = new Set((JSON.parse(readFileSync(PATHS.siteDataset, "utf8")).phase2?.products ?? []).map((entry) => entry.slug));
+const ours = runtime.products.filter((product) => product.brandSlug === "sata" && !phase2Slugs.has(product.slug));
+const cards = runtime.listing.canonical.filter((product) => product.brandSlug === "sata" && !phase2Slugs.has(product.id));
 
 const records = ours.map((product) => {
   const official = familyByName.get(norm(product.name));

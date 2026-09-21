@@ -1,0 +1,27 @@
+{
+  "_comment": [
+    "Izmereno iz izvornog modela i ODOBRENO (korisnik, 2026-09-21). Brojevi nisu upisani rukom — piše ih `plan-phase2.mjs --write-lock`; svaka kasnija razlika obara plan."
+  ],
+  "approvedOn": "2026-09-21",
+  "sourceFingerprint": "0318978ecc543d5ea90255543e05cbbc735b45cf06f4bf4f4ff291ebc3140213",
+  "measured": {
+    "sourceArticles": 238,
+    "sourceByBucket": {
+      "STANDALONE_CUSTOMER_FACING_PHASE_2": 149,
+      "ACCESSORY_TIED_TO_APPROVED_FAMILY": 84,
+      "CONSUMABLE_TIED_TO_APPROVED_FAMILY": 5
+    },
+    "visibleArticles": 227,
+    "excludedArticles": 11,
+    "excludedByReason": {
+      "MERCHANDISING_DISPLAY": 1,
+      "ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE": 8,
+      "LAB_OUT_OF_APPROVED_SCOPE": 1,
+      "SPARE_PARTS_KIT_OUT_OF_APPROVED_SCOPE": 1
+    },
+    "cards": 115,
+    "localFamilies": 34,
+    "singleArticleCards": 81,
+    "variantRows": 146
+  }
+}

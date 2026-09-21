@@ -24,8 +24,10 @@ const { current, inScope, outOfScope } = splitFamilies(source, taxonomy);
 const standalone = partitionStandalone(source, inScope);
 
 const runtime = loadCatalogRuntime();
-const records = runtime.products.filter((product) => product.brandSlug === "sata");
-const cards = runtime.listing.canonical.filter((product) => product.brandSlug === "sata");
+// Ovaj izveštaj meri FAZU 1. Kartice faze 2 (zaseban ključ dataseta) meri `reconcile-phase2.mjs`.
+const phase2Slugs = new Set((dataset.phase2?.products ?? []).map((entry) => entry.slug));
+const records = runtime.products.filter((product) => product.brandSlug === "sata" && !phase2Slugs.has(product.slug));
+const cards = runtime.listing.canonical.filter((product) => product.brandSlug === "sata" && !phase2Slugs.has(product.id));
 const slugByFamily = new Map([...dataset.products, ...Object.values(dataset.enrichments)].map((entry) => [entry.familyId, entry.slug]));
 
 /* A / B */

@@ -75,7 +75,48 @@ type SyncEntry = {
   sourceHash: string;
 };
 
+/**
+ * FAZA 2 — samostalan i vezan SATA pribor.
+ *
+ * Višečlana kartica je `LOCAL_CATALOG_GROUPING`: kataloška grupa SAJTA, sklopljena iz zvaničnih naziva artikala
+ * (`scripts/sata-sync/lib/phase2-grouping.mjs`). NIJE zvanična SATA porodica i tako se nigde ne predstavlja; svaki
+ * red čuva svoj zvanični naziv i broj artikla. Redovi koriste istu tabelu kao faza 1 (bez novog birača).
+ */
+type Phase2Variant = {
+  articleNumber: string;
+  label: string;
+  officialName: string;
+  values: Record<string, string>;
+  compat: string | null;
+  soldByMeter: boolean;
+  notice: string | null;
+};
+
+type Phase2Entry = {
+  slug: string;
+  name: string;
+  nameSource: "LOCALIZED" | "OFFICIAL_NAME_FALLBACK";
+  officialName: string | null;
+  grouping: "LOCAL_CATALOG_GROUPING" | "SINGLE_OFFICIAL_ARTICLE";
+  groupingTier: number | null;
+  classification: string;
+  duplicateOfficialNames: string | null;
+  functionalClass: string;
+  productType: string;
+  taxonomy: SyncEntry["taxonomy"];
+  axes: { key: string; label: string }[];
+  relatedFamilySlugs: string[];
+  variants: Phase2Variant[];
+  imageStatus: string;
+  sourceHash: string;
+};
+
 const entries = catalogData.products as SyncEntry[];
+// Opciono: plan učitava runtime iz PRETHODNOG dataseta, koji (pre prvog apply-a faze 2) nema ovaj ključ.
+const phase2Data = (catalogData as { phase2?: { products: Phase2Entry[]; links: Record<string, string[]> } }).phase2;
+const phase2Entries = phase2Data?.products ?? [];
+const phase2Links = phase2Data?.links ?? {};
+const phase2BySlug = new Map(phase2Entries.map((entry) => [entry.slug, entry]));
 const enrichments = catalogData.enrichments as Record<string, SyncEntry>;
 
 export const sataCatalogMeta = catalogData.meta;
@@ -133,7 +174,24 @@ function summarizeVariants(entry: SyncEntry) {
   return `${count} ${noun}`;
 }
 
+/** Pribor faze 2 vezan za ovu porodicu — postojeći odeljak PDP-a „Koristi se zajedno sa”. Veće grupe idu prve. */
+function accessoryLinks(familySlug: string): ProductDetailContent["compatibleProducts"] | undefined {
+  const slugs = [...(phase2Links[familySlug] ?? [])].sort(
+    (a, b) => (phase2BySlug.get(b)?.variants.length ?? 0) - (phase2BySlug.get(a)?.variants.length ?? 0) || a.localeCompare(b),
+  );
+  if (!slugs.length) return undefined;
+  return {
+    reviewStatus: "confirmed",
+    content: {
+      title: "Koristi se zajedno sa",
+      description: "Zvaničan SATA pribor koji proizvođač u nazivu artikla navodi za ovu porodicu.",
+      items: slugs.map((productSlug) => ({ productSlug, reviewStatus: "confirmed" as const })),
+    },
+  };
+}
+
 function detailOf(entry: SyncEntry): ProductDetailContent {
+  const accessories = accessoryLinks(entry.slug);
   return {
     reviewStatus: "confirmed",
     hero: {
@@ -153,6 +211,132 @@ function detailOf(entry: SyncEntry): ProductDetailContent {
       ],
     },
     ...(entry.documents.length ? { documents: { reviewStatus: "confirmed", content: detailDocuments(entry) } } : {}),
+    ...(accessories ? { compatibleProducts: accessories } : {}),
+  };
+}
+
+/* ── Faza 2 ─────────────────────────────────────────────────────────────────────────────────── */
+
+const pluralIzvedba = (count: number) => {
+  const mod10 = count % 10;
+  const mod100 = count % 100;
+  return mod10 === 1 && mod100 !== 11 ? "izvedba" : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? "izvedbe" : "izvedbi";
+};
+
+function phase2Description(entry: Phase2Entry) {
+  const count = entry.variants.length;
+  const first = entry.variants[0];
+  if (count === 1) {
+    return [
+      `${entry.name}. Zvanični SATA naziv: „${first.officialName.replace(/,?\s*(?:net\s+)?price\s+(?:net\s+)?per\s+met(?:er|re)/gi, "").replace(/\s*(?:Please observe|Important):.*$/i, "")}”.`,
+      first.soldByMeter ? "Prodaje se na metar." : null,
+      first.notice ? `Napomena proizvođača: ${first.notice}.` : null,
+      `SATA broj artikla ${first.articleNumber}. Dostupnost se potvrđuje kroz upit.`,
+    ].filter(Boolean).join(" ");
+  }
+  return `${entry.name}: ${count} ${pluralIzvedba(count)}, svaka sa svojim zvaničnim SATA nazivom i brojem artikla. Izvedbe su u katalogu sajta prikazane zajedno radi preglednosti. Tačna izvedba i dostupnost potvrđuju se kroz upit.`;
+}
+
+function phase2VariantSection(entry: Phase2Entry): ProductVariantSection {
+  return {
+    title: "Izvedbe i brojevi artikala",
+    description:
+      "Svaka izvedba je zaseban zvanični SATA artikal sa svojim brojem. Izvedbe su grupisane u katalogu sajta radi preglednosti; tačna izvedba i dostupnost potvrđuju se kroz upit.",
+    columns: [
+      { key: "config", label: "Izvedba" },
+      ...entry.axes.map((axis) => ({ key: `axis-${axis.key}`, label: axis.label })),
+      { key: "article", label: "Broj artikla" },
+      { key: "status", label: "Javni status" },
+    ],
+    rows: entry.variants.map((variant) => ({
+      id: variant.articleNumber,
+      values: {
+        ...Object.fromEntries(Object.entries(variant.values).map(([key, value]) => [`axis-${key}`, value])),
+        config: variant.label,
+        article: variant.articleNumber,
+        status: variant.soldByMeter ? "Na upit · prodaje se na metar" : "Na upit",
+      },
+      reviewStatus: "confirmed" as const,
+    })),
+    note: entry.duplicateOfficialNames
+      ? "Proizvođač ovaj proizvod trenutno vodi pod dva broja artikla sa istim nazivom; oba su navedena. Brojevi artikala: sata.com."
+      : "Brojevi artikala i zvanični nazivi: sata.com.",
+  };
+}
+
+function createPhase2Product(entry: Phase2Entry): CarsystemProduct {
+  const count = entry.variants.length;
+  const single = count === 1 ? entry.variants[0] : null;
+  const description = phase2Description(entry);
+  const summary = single ? `Art. ${single.articleNumber}` : `${count} ${pluralIzvedba(count)}`;
+  const related = entry.relatedFamilySlugs;
+  const facts = [
+    { label: "Tip proizvoda", value: entry.productType },
+    ...(single
+      ? [
+          { label: "Broj artikla", value: single.articleNumber },
+          { label: "Zvanični SATA naziv", value: single.officialName.replace(/,?\s*(?:net\s+)?price\s+(?:net\s+)?per\s+met(?:er|re)/gi, "") },
+          ...(single.soldByMeter ? [{ label: "Prodaja", value: "Prodaje se na metar" }] : []),
+          ...(single.notice ? [{ label: "Napomena proizvođača", value: single.notice }] : []),
+        ]
+      : []),
+  ];
+
+  return {
+    slug: entry.slug,
+    name: entry.name,
+    brandSlug: "sata",
+    programSlug: entry.taxonomy.programSlug,
+    phaseSlug: entry.taxonomy.phaseSlug,
+    shortDescription: description,
+    longDescription: description,
+    // Interni ključ kartice; brojevi artikala su u redovima (kao u fazi 1).
+    sku: single ? single.articleNumber : entry.slug.toUpperCase(),
+    externalSku: single ? single.articleNumber : entry.slug,
+    manufacturerCode: single ? single.articleNumber : null,
+    ...(single ? {} : { publicCode: summary }),
+    packages: [{ label: summary, detail: "Izvedba po upitu" }],
+    purpose: entry.productType,
+    badges: [entry.productType, ...(single ? [] : [summary]), "Na upit"],
+    publicStatus: "Na upit",
+    stockStatus: "unknown",
+    stockManaged: false,
+    productImage: { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name} — vizuel u pripremi` },
+    galleryImages: [],
+    specifications: facts,
+    documents: [],
+    relatedProductSlugs: related,
+    seoTitle: `${entry.name} | SATA`,
+    seoDescription: description.slice(0, 300),
+    taxonomyCategory: entry.taxonomy.category,
+    // Pretraga: zvanični naziv svakog reda, broj artikla, oznaka reda (atributi) i klauzula kompatibilnosti.
+    searchTerms: [
+      ...new Set(
+        entry.variants.flatMap((variant) => [variant.articleNumber, variant.officialName, variant.label, ...(variant.compat ? [variant.compat] : [])]),
+      ),
+    ],
+    detail: {
+      reviewStatus: "confirmed",
+      hero: {
+        kicker: `SATA · ${CATEGORY_BADGE[entry.taxonomy.category] ?? "Pribor"}`,
+        subtype: entry.productType,
+        lead: description,
+      },
+      ...(single ? {} : { variants: { reviewStatus: "confirmed", content: phase2VariantSection(entry) } }),
+      technicalFacts: { reviewStatus: "confirmed", content: facts.map((fact) => ({ ...fact, reviewStatus: "confirmed" as const })) },
+      ...(related.length
+        ? {
+            compatibleProducts: {
+              reviewStatus: "confirmed",
+              content: {
+                title: "Koristi se zajedno sa",
+                description: "SATA proizvod koji proizvođač navodi u zvaničnom nazivu ovog pribora.",
+                items: related.map((productSlug) => ({ productSlug, reviewStatus: "confirmed" as const })),
+              },
+            },
+          }
+        : {}),
+    },
   };
 }
 
@@ -217,7 +401,7 @@ function createCatalogProduct(entry: SyncEntry): CarsystemProduct {
 }
 
 export function getSataCatalogProducts(): CarsystemProduct[] {
-  return entries.map(createCatalogProduct);
+  return [...entries.map(createCatalogProduct), ...phase2Entries.map(createPhase2Product)];
 }
 
 /**

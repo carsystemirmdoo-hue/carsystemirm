@@ -1,0 +1,96 @@
+{
+  "_comment": [
+    "SATA faza 2 — ODOBREN MODEL (korisnik, 2026-09-21). Opseg: 149 samostalnih + 84 vezana pribora + 5 vezanog potrošnog = 238 zvaničnih brojeva artikala.",
+    "Grupisanje je isključivo gramatičko (scripts/sata-sync/lib/phase2-grouping.mjs): nivo 1 = isti ostatak naziva + ista klauzula „for …”; nivo 2 = kompatibilnost kao osa. Bez sličnosti i pragova.",
+    "Svaka višečlana kartica je LOCAL_CATALOG_GROUPING — kataloška grupa sajta, NIKAD zvanična SATA porodica. Zvanični naziv svakog artikla se čuva u redu.",
+    "Vezani pribor dobija svoju karticu/red i vezu `compatibleProducts` ka porodici faze 1 (postojeći odeljak „Koristi se zajedno sa”). Ne dodaje se u redove faze 1: 66 porodica / 655 artikala ostaju netaknuti.",
+    "Svaki od 238 brojeva mora biti VISIBLE ili INTENTIONALLY_EXCLUDED:<razlog>. Isključeni artikli ostaju u izvornim podacima i u izveštaju — nisu discontinued.",
+    "Slike: APPROVED_RUNTIME_IMAGES = 0 (rights gate). Dokumenti: SATA ih za ove artikle ne objavljuje. Cene se ne uvoze; „price per meter” iz naziva postaje samo „prodaje se na metar”."
+  ],
+  "approvedOn": "2026-09-21",
+  "scopeName": "SATA PHASE 2 ACCESSORY SCOPE",
+  "sourceBuckets": [
+    "STANDALONE_CUSTOMER_FACING_PHASE_2",
+    "ACCESSORY_TIED_TO_APPROVED_FAMILY",
+    "CONSUMABLE_TIED_TO_APPROVED_FAMILY"
+  ],
+  "excludedArticles": {
+    "1750": {
+      "reason": "MERCHANDISING_DISPLAY",
+      "note": "Spray Gun Display Plinth — izložbeno postolje; reklamni/izlagački artikal."
+    },
+    "177238": {
+      "reason": "LAB_OUT_OF_APPROVED_SCOPE",
+      "note": "Pribor za SATA LAB test pištolje; LAB domen je van odobrenog opsega."
+    },
+    "1183425": {
+      "reason": "SPARE_PARTS_KIT_OUT_OF_APPROVED_SCOPE",
+      "note": "Parts kit za postolje rezervoara MPT 22/45; rezervni delovi su van odobrenog opsega."
+    }
+  },
+  "outsideApprovedRuntimeContext": {
+    "status": "CURRENT_OUTSIDE_APPROVED_RUNTIME_CONTEXT",
+    "reason": "ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+    "rule": "Samostalan artikal čija zvanična klauzula „for …” imenuje jedan od ovih proizvoda. Proizvoda nema u odobrenom SATA runtime katalogu, pa se ne pravi kartica koja bi kupca vodila ka njemu. Artikal ostaje aktuelan zapis izvora.",
+    "targets": [
+      "SATA top-air",
+      "SATA respirator hood CE industry",
+      "adsorber of half mask respirator, version GS",
+      "SATA full face respirator",
+      "SATA air regulator and SATA air carbon regulator",
+      "air supply hose ASS GS-version",
+      "SATA air carbon regulator"
+    ],
+    "reviewNote": "Dva cilja zvanični nazivi faze 1 posredno pokrivaju („full face respirator” = vision 2000; „half mask” = air star C). Isključeni su po izričitoj odluci; mogu se vratiti brisanjem cilja iz ove liste.",
+    "precedence": "Scope/exclusion gate ima PRIORITET nad svim pravilima prikaza. Pravilo „dva broja artikla pod jednim nazivom → jedna kartica” važi samo za proizvod koji je prethodno prošao ovaj gate."
+  },
+  "duplicateOfficialNames": {
+    "rule": "Dva zvanična broja artikla sa identičnim nazivom i atributima: jedna kartica, svaki broj je zaseban red — SAMO ako je proizvod prošao scope gate. Ne bira se „noviji”, ništa se ne briše. Za isključene artikle dokaz o dva broja pod istim nazivom ostaje u planu i datasetu (`sameOfficialNameAs`).",
+    "provenance": "SOURCE_PUBLISHES_TWO_ARTICLE_NUMBERS_UNDER_ONE_NAME"
+  },
+  "standaloneDecisions": {
+    "63974": {
+      "decision": "SEPARATE_PHASE_2_CARD",
+      "relatedFamily": "CF1931215",
+      "taxonomyFromFamily": true,
+      "note": "SATA vario top spray F (pumpa bez pištolja i creva): zasebna kartica faze 2, povezana sa porodicom vario top spray. NIJE 656. red faze 1."
+    }
+  },
+  "literalManufacturerTerms": [
+    "SGE",
+    "QMR",
+    "QCC",
+    "RPS",
+    "BVD",
+    "DIN 8541"
+  ],
+  "taxonomy": {
+    "_comment": "Samo postojeće kategorije sajta. Podrazumevano važi pravilo faze 1 za zvaničnu kategoriju „Accessories”; izuzeci slede presedane faze 1 (odela → zastita, respiratori → zastita, čišćenje pištolja → radionica).",
+    "default": {
+      "category": "pribor",
+      "programSlug": "oprema",
+      "phaseSlug": "boja",
+      "visualType": "neutral"
+    },
+    "byFunctionalClass": {
+      "PROTECTIVE_CLOTHING": {
+        "category": "zastita",
+        "programSlug": "oprema",
+        "phaseSlug": "boja",
+        "visualType": "neutral"
+      },
+      "RESPIRATOR_AIR_SUPPLY": {
+        "category": "zastita",
+        "programSlug": "oprema",
+        "phaseSlug": "priprema",
+        "visualType": "neutral"
+      },
+      "CLEANING_CARE": {
+        "category": "radionica",
+        "programSlug": "oprema",
+        "phaseSlug": "boja",
+        "visualType": "neutral"
+      }
+    }
+  }
+}

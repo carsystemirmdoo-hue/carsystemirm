@@ -332,5 +332,924 @@
       "parentId": "7620f47ab50b2fa1c16e9c4e6959b87b",
       "owner": "lib/carsystem-data.ts (ručni zapis)"
     }
+  },
+  "phase2": {
+    "sata-1-0-l-aluminium-pressure-pot-max-pressure-10-bar-hrs": {
+      "articleNumbers": [
+        "41806"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-cap-protector": {
+      "articleNumbers": [
+        "1054006",
+        "1054014",
+        "1054022",
+        "1054030"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-cap-protector-uv": {
+      "articleNumbers": [
+        "1040807",
+        "1040815",
+        "1044594"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-check-set-compressed-air-quality-control-device": {
+      "articleNumbers": [
+        "7096"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-cooler-2000-n": {
+      "articleNumbers": [
+        "1143916"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-cooler-incl-adapter-plate-and-hip-pad-air-vision-5000": {
+      "articleNumbers": [
+        "1006982"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-hose": {
+      "articleNumbers": [
+        "13870",
+        "189068",
+        "195420",
+        "37655",
+        "4754",
+        "50252",
+        "50591",
+        "50641",
+        "51300",
+        "53090",
+        "9902"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-hose-din-8541-max-20-bar": {
+      "articleNumbers": [
+        "27300",
+        "27318"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-hose-g-1-4": {
+      "articleNumbers": [
+        "16063"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-hose-one-connection-included-clean-rcs": {
+      "articleNumbers": [
+        "146514"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-hose-with-foam-cover": {
+      "articleNumbers": [
+        "60574"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-tester-atomisation-air-quick-tester": {
+      "articleNumbers": [
+        "156299"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-warmer-2000-n": {
+      "articleNumbers": [
+        "61242"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-air-warmer-incl-adapter-plate-and-hip-pad-air-vision-5000": {
+      "articleNumbers": [
+        "1007005"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-airless-paint-hose": {
+      "articleNumbers": [
+        "19943",
+        "19968",
+        "19976"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-ball-tap-teflon": {
+      "articleNumbers": [
+        "7989"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-ball-tap-teflon-with-bilateral-thread-female-hose": {
+      "articleNumbers": [
+        "1171751"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-belt-unit-with-activated-charcoal-adsorber-and-air-vision-2000": {
+      "articleNumbers": [
+        "54015"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-breathing-air-hose-ce-approval-en-139-9-5-x-5-with": {
+      "articleNumbers": [
+        "19463"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-care-set-spray-gun-care-bag-containing-1-large": {
+      "articleNumbers": [
+        "162628"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cert-with-archive-spray-pattern-block-single-sheet": {
+      "articleNumbers": [
+        "161596"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cleaning-brush": {
+      "articleNumbers": [
+        "147017",
+        "18648",
+        "29280",
+        "53496"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cleaning-brush-double-sided-for-spray-guns": {
+      "articleNumbers": [
+        "9209"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cleaning-brush-double-sided-silicone-free": {
+      "articleNumbers": [
+        "64220"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cleaning-brush-for-spray-guns": {
+      "articleNumbers": [
+        "6007"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cleaning-brush-large-for-spray-guns": {
+      "articleNumbers": [
+        "158840"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cleaning-kit-with-2-cleaning-brushes-medium-and-12": {
+      "articleNumbers": [
+        "64030"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-compressed-air-driven-hand-agitator": {
+      "articleNumbers": [
+        "16477"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-conversion-kit-external-cleaning-agent-suction-and-clean-rcs": {
+      "articleNumbers": [
+        "189472"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-coupling-nipple": {
+      "articleNumbers": [
+        "32615"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-coupling-with": {
+      "articleNumbers": [
+        "53793"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-coupling-with-hose-connection": {
+      "articleNumbers": [
+        "54858"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-cup-adapter-qcc-minijet-4-laminated": {
+      "articleNumbers": [
+        "129346"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-distance-marker": {
+      "articleNumbers": [
+        "161661"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-door-wand-steel": {
+      "articleNumbers": [
+        "1158452",
+        "16071"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-door-wand-steel-with-flexible-guideway-hose": {
+      "articleNumbers": [
+        "196832"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-dosenboy-to-cut-out-can-lids-from-cans-up-to-height": {
+      "articleNumbers": [
+        "59675"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-double-pipe-suction-unit-with-quick-coupling": {
+      "articleNumbers": [
+        "45864"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-extension-with-jet-1000-b": {
+      "articleNumbers": [
+        "154211",
+        "154229",
+        "154237",
+        "154252",
+        "154260",
+        "154278",
+        "154294",
+        "154302",
+        "154310",
+        "178533",
+        "185520",
+        "196162",
+        "196170",
+        "196188",
+        "197269"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-extension-with-jet-1000-k": {
+      "articleNumbers": [
+        "154435",
+        "154443",
+        "154450",
+        "154476",
+        "154484",
+        "154492",
+        "154518",
+        "154526",
+        "154534",
+        "154559",
+        "154567",
+        "154575"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-fibre-air-hose-with-mini-quick-coupling": {
+      "articleNumbers": [
+        "134791"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-filter-cover": {
+      "articleNumbers": [
+        "1101500",
+        "215053"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-flexible-quick-coupling-nipple": {
+      "articleNumbers": [
+        "99895"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-foam-inlay-with-pinched-inlay-truesun": {
+      "articleNumbers": [
+        "1013151"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-free-passage-type-quick-coupling-hrs": {
+      "articleNumbers": [
+        "8359"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-gravity-gun-holder": {
+      "articleNumbers": [
+        "9886"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-ground-plate-rps-the-original": {
+      "articleNumbers": [
+        "197723"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-half-mask-cleaner": {
+      "articleNumbers": [
+        "134965",
+        "135020"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-high-flow-coupling-female-filter-500-series": {
+      "articleNumbers": [
+        "1107269"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-high-performance-grease-silicone-and-acid-free-100": {
+      "articleNumbers": [
+        "48173"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-hook-wand-connection-ii": {
+      "articleNumbers": [
+        "54460"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-hose-clean-rcs": {
+      "articleNumbers": [
+        "147025"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-hose-pair-mini-set-2": {
+      "articleNumbers": [
+        "187708",
+        "19869"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-hose-pair-vario-top-spray": {
+      "articleNumbers": [
+        "147504",
+        "147512",
+        "147520",
+        "187716",
+        "187724",
+        "187732",
+        "77834",
+        "77842",
+        "77859"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-insert": {
+      "articleNumbers": [
+        "134932"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-insertion-drawer": {
+      "articleNumbers": [
+        "67942"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-intermediate-piece-and-for-material-connection": {
+      "articleNumbers": [
+        "191551"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-material-coupling-with-plug-in-nipple": {
+      "articleNumbers": [
+        "91140"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-material-coupling-with-plug-in-nipple-and-material": {
+      "articleNumbers": [
+        "91157"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-material-hose": {
+      "articleNumbers": [
+        "49155",
+        "49999",
+        "50161"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-material-hose-solvent-resistant": {
+      "articleNumbers": [
+        "54114"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-mini-filter": {
+      "articleNumbers": [
+        "9878"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nipple": {
+      "articleNumbers": [
+        "13508",
+        "13516",
+        "13524"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nipple-with-swivel-nut": {
+      "articleNumbers": [
+        "91108"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nozzle-cleaning-kit-includes-sealing-insert-and-cap-jet-3000-k-spray-mix": {
+      "articleNumbers": [
+        "30833"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nozzle-cleaning-needles": {
+      "articleNumbers": [
+        "62174",
+        "9894"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nozzle-cleaning-set-jet-k-1800-spray-mix": {
+      "articleNumbers": [
+        "1112854"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nylon-wand-connection-ii": {
+      "articleNumbers": [
+        "77941"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nylon-wand-flexible": {
+      "articleNumbers": [
+        "1058826",
+        "11874",
+        "16105",
+        "16113"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nylon-wand-flexible-1500-long-screwable-6-hole": {
+      "articleNumbers": [
+        "222729"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-nylon-wand-semi-rigid": {
+      "articleNumbers": [
+        "51185"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-paint-hose-solvent-resistant": {
+      "articleNumbers": [
+        "61259"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-protective-sleeve": {
+      "articleNumbers": [
+        "160994",
+        "161000",
+        "161018"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-pump-spray-cleaning-bottle-not-suitable": {
+      "articleNumbers": [
+        "127860"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-pvc-air-hose-with-mini-quick-coupling-nipple-with-minijet-4400-b": {
+      "articleNumbers": [
+        "54353"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-pvc-compressed-air-hose-with-mini-quick-coupling-jet-20-b": {
+      "articleNumbers": [
+        "32987"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-qmr-quick-material-regulator": {
+      "articleNumbers": [
+        "1162817",
+        "1185596",
+        "1185603",
+        "1186213",
+        "1202019"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-quick-coupling": {
+      "articleNumbers": [
+        "13581",
+        "13599",
+        "13607",
+        "13615",
+        "13623",
+        "16170"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-quick-coupling-nipple": {
+      "articleNumbers": [
+        "1188912",
+        "6981"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-quick-coupling-with-hose-olive": {
+      "articleNumbers": [
+        "13631",
+        "13649"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-quick-coupling-with-hose-olive-and-quick-coupling": {
+      "articleNumbers": [
+        "7237"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-rps-adapter-with-qcc-and-connection": {
+      "articleNumbers": [
+        "125211",
+        "125237",
+        "125252",
+        "125278",
+        "125294",
+        "126326",
+        "133595",
+        "133827",
+        "135798",
+        "147272",
+        "150136",
+        "150151",
+        "164608",
+        "188292",
+        "188318",
+        "188664",
+        "193276",
+        "215079"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-rps-depot-to-store-rps-boxes-rps-the-original": {
+      "articleNumbers": [
+        "144840"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-safety-compressed-air-supply-hose": {
+      "articleNumbers": [
+        "176792",
+        "180851",
+        "49080"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-sataclean-wet-holding-tray": {
+      "articleNumbers": [
+        "60095"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-set-of-plug-in-nipples-complete-vision-2000": {
+      "articleNumbers": [
+        "21840"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-sge-air-hose": {
+      "articleNumbers": [
+        "27722"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-sge-paint-hose-with-ascension-pipe": {
+      "articleNumbers": [
+        "27730"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-shaker-ring-rps-the-original": {
+      "articleNumbers": [
+        "117051",
+        "173435"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-bottle-1-0-l": {
+      "articleNumbers": [
+        "127852"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-gun-adapter-with-qcc-and-connection-thread": {
+      "articleNumbers": [
+        "135111"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-gun-holder": {
+      "articleNumbers": [
+        "40188",
+        "69328"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-gun-holder-with-strainer-holder": {
+      "articleNumbers": [
+        "134882"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-mix-double-hose-material-connection-air": {
+      "articleNumbers": [
+        "1006073"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-mix-hose-pair": {
+      "articleNumbers": [
+        "19984",
+        "19992",
+        "20008"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-mix-hose-pair-material-connection-air": {
+      "articleNumbers": [
+        "1006081",
+        "1006099",
+        "1006106"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-spray-pattern-blocks-with-25-sheets": {
+      "articleNumbers": [
+        "161646"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-storage-case-sata-truesun-incl-foam-inlay-truesun": {
+      "articleNumbers": [
+        "1013094"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-strainer-holder": {
+      "articleNumbers": [
+        "77503"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-suction-hose-cpl-vario-top-spray": {
+      "articleNumbers": [
+        "45047",
+        "62232"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-suit-grey": {
+      "articleNumbers": [
+        "143255"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-suit-space": {
+      "articleNumbers": [
+        "212035",
+        "212043",
+        "212050",
+        "212068"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-threaded-nipple-galvanised-vario-top-spray": {
+      "articleNumbers": [
+        "41384"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-triple-spray-gun-holder": {
+      "articleNumbers": [
+        "134916"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-trolley-cpl-vario-top-spray": {
+      "articleNumbers": [
+        "17483"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-turbo-blow-with-quick-coupling-nipple-blow-gun": {
+      "articleNumbers": [
+        "133306"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-universal-spray-gun-and-hose-holder": {
+      "articleNumbers": [
+        "192195"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-universal-spray-gun-holder-foldable": {
+      "articleNumbers": [
+        "1083807",
+        "1110527"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-universal-spray-gun-holder-foldable-magnetic": {
+      "articleNumbers": [
+        "1103522"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-vario-top-spray-f-double-diaphragm-pump-1-1-mobile-vario-top-spray": {
+      "articleNumbers": [
+        "63974"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-venturi-door-wand-steel-rigid-spraying-forward": {
+      "articleNumbers": [
+        "1114991"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-venturi-hook-wand-hook-nozzle-cpl-with-flexible": {
+      "articleNumbers": [
+        "206904"
+      ],
+      "grouping": "SINGLE_OFFICIAL_ARTICLE",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-venturi-hook-wand-with-flexible-guide-hose-venturi": {
+      "articleNumbers": [
+        "11866",
+        "16139"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-viscosity-cup": {
+      "articleNumbers": [
+        "9845",
+        "9852"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    },
+    "sata-wet-dry-cleaner": {
+      "articleNumbers": [
+        "75358",
+        "83881"
+      ],
+      "grouping": "LOCAL_CATALOG_GROUPING",
+      "firstSeen": "2026-09-21"
+    }
   }
 }

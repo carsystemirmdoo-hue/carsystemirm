@@ -1,0 +1,75 @@
+{
+  "summary": {
+    "indexRecords": 2002,
+    "cards": 115,
+    "articleNumber": "227/227",
+    "officialBaseName": "113/113",
+    "serbianName": "115/115",
+    "fullRowOfficialNameInTop8": "214/227",
+    "excludedArticlesFound": 0,
+    "phase1ArticleNumberStillFound": true
+  },
+  "named": [
+    {
+      "kind": "red grupe po broju",
+      "query": "53090",
+      "slug": "sata-air-hose",
+      "ok": true
+    },
+    {
+      "kind": "srpski naziv",
+      "query": "SATA crevo za vazduh",
+      "slug": "sata-air-hose",
+      "ok": true
+    },
+    {
+      "kind": "zvanični naziv",
+      "query": "SATA air hose",
+      "slug": "sata-air-hose",
+      "ok": true
+    },
+    {
+      "kind": "odeća",
+      "query": "SATA suit space",
+      "slug": "sata-suit-space",
+      "ok": true
+    },
+    {
+      "kind": "kompatibilnost",
+      "query": "air cap protector jet X",
+      "slug": "sata-air-cap-protector",
+      "ok": true
+    },
+    {
+      "kind": "broj adaptera",
+      "query": "RPS adapter No. 10",
+      "slug": "sata-rps-adapter-with-qcc-and-connection",
+      "ok": true
+    },
+    {
+      "kind": "vezani pribor",
+      "query": "154211",
+      "slug": "sata-extension-with-jet-1000-b",
+      "ok": true
+    },
+    {
+      "kind": "pumpa",
+      "query": "63974",
+      "slug": "sata-vario-top-spray-f-double-diaphragm-pump-1-1-mobile-vario-top-spray",
+      "ok": true
+    },
+    {
+      "kind": "termin proizvođača",
+      "query": "SGE",
+      "slug": "sata-sge-air-hose",
+      "ok": true
+    },
+    {
+      "kind": "isti naziv, dva broja",
+      "query": "1110527",
+      "slug": "sata-universal-spray-gun-holder-foldable",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

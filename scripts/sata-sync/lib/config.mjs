@@ -70,9 +70,18 @@ export const PATHS = {
   reconciliation: data("reports", "reconciliation.generated.json"),
   searchQa: data("reports", "search-qa.generated.json"),
   siteDataset: path.join(REPO_ROOT, "data", "sata-catalog-products.generated.json"),
+  // Faza 2 — samostalan i vezan pribor (odobren model: data/sata-sync/phase2-scope.json).
+  phase2Scope: data("phase2-scope.json"),
+  phase2Lock: data("phase2-scope-lock.json"),
+  phase2Localization: data("localization", "phase2.sr.json"),
+  phase2Plan: data("phase2-plan.generated.json"),
+  phase2Mapping: data("reports", "phase2-article-mapping.generated.csv"),
+  phase2Reconciliation: data("reports", "phase2-reconciliation.generated.json"),
+  phase2SearchQa: data("reports", "phase2-search-qa.generated.json"),
 };
 
 export const SCOPE_NAME = "SATA EMEA REFINISH FAMILY SCOPE";
+export const PHASE2_SCOPE_NAME = "SATA PHASE 2 ACCESSORY SCOPE";
 
 /** Kategorije sa kojih se čitaju pločice porodica. */
 export const CATEGORY_PAGES = [

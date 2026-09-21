@@ -151,3 +151,63 @@ na novčane ključeve i iznose — `price data stored = 0`. Reč „price" u zva
 5. Naziv porodice je najkraća etiketa pločice kategorije, ne `<h1>` (to je naziv podrazumevanog artikla).
 6. `window.ga4Product` nosi i cenu — čitaju se isključivo `item_category…` ključevi.
 7. Novo polje u datasetu mora biti opciono u adapteru: plan učitava runtime iz PRETHODNOG dataseta.
+
+## Faza 2 — samostalan i vezan pribor (`SATA PHASE 2 ACCESSORY SCOPE`)
+
+Odobren model: `data/sata-sync/phase2-scope.json` (2026-09-21). Opseg je zaključana particija faze 1:
+149 samostalnih + 84 vezana pribora + 5 vezanog potrošnog = **238 zvaničnih brojeva artikala**. Faza 1
+(66 porodica / 655 artikala) se ne dira — faza 2 živi pod zasebnim ključem dataseta (`phase2`).
+
+| Korak | Skripta |
+|---|---|
+| plan | `plan-phase2.mjs` (deo `sata:sync:plan`) → `phase2-plan.generated.json` + `reports/phase2-article-mapping.generated.csv` |
+| apply | `apply.mjs` → `dataset.phase2` + `identity-registry.json › phase2` (slugovi, append-only) |
+| validate + reconcile | `reconcile-phase2.mjs` (deo `sata:sync:reconcile`): A2 = B2 kartice, C2 = D2 artikli |
+| search QA | `npm run sata:sync:qa-search-phase2` |
+
+**Izvor ne daje grupisanje.** Svih 238 artikala ima `parentId: null`, nula opcija konfiguratora, nula dokumenata
+i (osim 10) kategoriju „Accessories”. Jedini dokaz je zvanični naziv, pa je grupisanje gramatičko
+(`lib/phase2-grouping.mjs`), bez sličnosti i pragova:
+
+1. **nivo 1** — posle uklanjanja prepoznatih atributa (dužina, navoj, prečnik, pakovanje, veličina, ugao, tip
+   mlaznice, šema prskanja, boja, tolerancija, broj adaptera, završeci creva, inox) ostatak naziva i klauzula
+   „for …” moraju biti identični;
+2. **nivo 2** — isti ostatak, razlikuje se samo „for …”: kompatibilnost je osa reda. Pojedinačni artikal se
+   pridružuje grupi; dve višečlane grupe se nikad ne spajaju (nastavci za 1000 B i 1000 K su dve kartice).
+
+Svaka višečlana kartica je **`LOCAL_CATALOG_GROUPING`** — kataloška grupa sajta, NIKAD zvanična SATA porodica.
+Zvanični naziv svakog artikla ostaje sačuvan u redu. Više osa ide kroz postojeću tabelu redova (složena oznaka
+reda); novi birač nije uveden.
+
+**Svaki broj je `VISIBLE` ili `INTENTIONALLY_EXCLUDED:<razlog>`** — nijedan ne nestaje. Isključenja su odluke, ne
+izvor: `MERCHANDISING_DISPLAY` (1750), `LAB_OUT_OF_APPROVED_SCOPE` (177238),
+`SPARE_PARTS_KIT_OUT_OF_APPROVED_SCOPE` (1183425) i `ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE`
+(`CURRENT_OUTSIDE_APPROVED_RUNTIME_CONTEXT`: pribor čija klauzula „for …” imenuje proizvod koga nema u katalogu —
+spisak ciljeva je u scope fajlu). Isključeni ostaju aktuelni zapisi izvora; nisu discontinued.
+
+**Ostale odluke.** Vezani pribor dobija svoju karticu/red i vezu `compatibleProducts` ka porodici faze 1 (postojeći
+odeljak „Koristi se zajedno sa”; PDP prikazuje najviše 4 veze). `63974` (vario top spray F) je zasebna kartica,
+ne 656. red faze 1. Dva broja artikla sa istim zvaničnim nazivom = jedna kartica, dva reda, sa oznakom porekla
+(`SOURCE_PUBLISHES_TWO_ARTICLE_NUMBERS_UNDER_ONE_NAME`) — ne bira se „noviji”. **Scope gate ima prioritet:** pravilo
+važi samo za proizvod koji je prošao isključenja. Par „SATA air warmer carbon” (214759, 1000132) je pribor za
+„SATA air carbon regulator”, koga nema u katalogu → oba broja su isključena, bez kartice i sluga; dokaz o dva broja
+pod istim nazivom ostaje u planu i datasetu (`sameOfficialNameAs`). `SGE` ostaje doslovan termin.
+
+**Srpski nazivi** (`localization/phase2.sr.json`): samo standardni tehnički prevodi po ostatku naziva; bez unosa
+kartica dobija zvanični naziv (`OFFICIAL_NAME_FALLBACK`). Atributi reda se prevode pravilima
+(`lib/phase2-terms.mjs`); plan pada ako u oznaci ostane engleska reč ili broj koga nema u zvaničnom nazivu.
+„price per meter” postaje samo „prodaje se na metar” — nikakav podatak o ceni se ne uvozi.
+
+**Taksonomija** koristi postojeće kategorije: podrazumevano `pribor` (pravilo faze 1 za „Accessories”), odela i
+pribor za zaštitu disanja → `zastita`, čišćenje pištolja → `radionica`; `63974` nasleđuje kategoriju svoje porodice.
+
+**Slike i dokumenti.** `APPROVED_RUNTIME_IMAGES = 0`: sve kartice su na placeholderu, a dostupnost zvanične slike
+(206/238) je samo činjenica u planu. SATA za ove artikle ne objavljuje dokumente — nijedan se ne prikazuje.
+
+### Zamke
+
+1. Plan faze 1 čita runtime: kartice faze 2 moraju biti u `ownSlugs` (`registry.phase2`), inače postaju kandidati za matching.
+2. Redosled regexa atributa je deo pravila (`sprayPattern` pre `nozzleType`; `\bG` da navoj ne pojede „g” iz „coupling”; atributi pre klauzule „for”).
+3. Price gate hvata znak dolara ispred cifre i u izvoru skripti — zamene u regexu pisati kao funkcije, ne kao povratne reference.
+4. Izvor piše i „per metre” i „per meter”; „for thinner / wall mounting / optimum spray air” su namena, ne proizvod.
+5. Adapter mora tolerisati dataset bez ključa `phase2` (bootstrap: plan učitava prethodni dataset).

@@ -1,0 +1,72 @@
+{
+  "scope": "SATA PHASE 2 ACCESSORY SCOPE",
+  "coverage": {
+    "A2_approvedCards": 115,
+    "B2_cardsInRuntime": 115,
+    "C2_visibleOfficialArticles": 227,
+    "D2_articlesInRuntime": 227
+  },
+  "sourceArticles": 238,
+  "excluded": {
+    "total": 11,
+    "byReason": {
+      "MERCHANDISING_DISPLAY": 1,
+      "ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE": 8,
+      "LAB_OUT_OF_APPROVED_SCOPE": 1,
+      "SPARE_PARTS_KIT_OUT_OF_APPROVED_SCOPE": 1
+    },
+    "articles": {
+      "1750": "INTENTIONALLY_EXCLUDED:MERCHANDISING_DISPLAY",
+      "24505": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "53934": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "54239": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "56192": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "75176": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "177238": "INTENTIONALLY_EXCLUDED:LAB_OUT_OF_APPROVED_SCOPE",
+      "214759": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "216473": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "1000132": "INTENTIONALLY_EXCLUDED:ACCESSORY_FOR_PRODUCT_OUTSIDE_RUNTIME_CATALOGUE",
+      "1183425": "INTENTIONALLY_EXCLUDED:SPARE_PARTS_KIT_OUT_OF_APPROVED_SCOPE"
+    }
+  },
+  "cards": {
+    "total": 115,
+    "localFamilies": 34,
+    "singleArticle": 81,
+    "variantRows": 146,
+    "byClassification": {
+      "SEPARATE_ACCESSORY_CARD": 20,
+      "LOCAL_FAMILY_WITH_VARIANTS": 34,
+      "STANDALONE_CARD": 61
+    },
+    "byCategory": {
+      "pribor": 84,
+      "zastita": 13,
+      "radionica": 17,
+      "oprema": 1
+    },
+    "nameSource": {
+      "LOCALIZED": 105,
+      "OFFICIAL_NAME_FALLBACK": 10
+    },
+    "duplicateOfficialNameCards": [
+      "sata-universal-spray-gun-holder-foldable"
+    ]
+  },
+  "sataRuntime": {
+    "phase1Cards": 66,
+    "phase2Cards": 115,
+    "totalCards": 181,
+    "phase1Articles": 655,
+    "phase2Articles": 227,
+    "totalArticles": 882
+  },
+  "images": {
+    "articlesWithOfficialImage": 206,
+    "articles": 238,
+    "APPROVED_RUNTIME_IMAGES": 0
+  },
+  "documents": 0,
+  "linkedPhase1Families": 18,
+  "problems": {}
+}

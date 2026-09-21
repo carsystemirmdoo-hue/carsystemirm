@@ -86,7 +86,8 @@ else {
 
 /* ── 2. Postojeći zapisi (samo oni koje sync NIJE sam napravio) ───────────────────────────── */
 const runtime = loadCatalogRuntime();
-const ownSlugs = new Set(Object.keys(registry.products ?? {}));
+// Kartice faze 2 je takođe napravio sync (`registry.phase2`) — nisu „postojeći ručni zapisi” za matching faze 1.
+const ownSlugs = new Set([...Object.keys(registry.products ?? {}), ...Object.keys(registry.phase2 ?? {})]);
 const foreign = runtime.products.filter((product) => product.brandSlug === "sata" && !ownSlugs.has(product.slug));
 const existingByName = new Map(foreign.map((product) => [norm(product.name), product]));
 

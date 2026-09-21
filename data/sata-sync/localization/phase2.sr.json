@@ -1,0 +1,357 @@
+{
+  "_comment": [
+    "SATA faza 2 — srpski NAZIVI kartica po ostatku zvaničnog naziva (`stem` iz phase2-grouping.mjs). Samo standardni tehnički prevodi i termini koji već postoje u katalogu.",
+    "Atributi (dužina, navoj, prečnik, pakovanje, broj adaptera…) se NE upisuju ovde: dodaje ih plan iz zvaničnog naziva, doslovno. Oznake proizvođača (QMR, QCC, RPS, SGE, BVD, DIN 8541, cert, dosenboy) ostaju u zvaničnom obliku.",
+    "Ostatak koga ovde nema dobija ZVANIČNI naziv (`OFFICIAL_NAME_FALLBACK`) — prevod se ne izmišlja. Namena proizvoda se ne dodaje ako je zvanični naziv ne navodi.",
+    "`omitCompat`: klauzula „for …” je već deo prevedenog naziva (namena, ne proizvod), pa se ne dodaje ponovo.",
+    "`compat`: prevod klauzula koje opisuju NAMENU. Klauzule koje imenuju SATA proizvod ostaju doslovne (plan menja samo „and/series/all/except/without”)."
+  ],
+  "stems": {
+    "1.0 l aluminium pressure pot max. pressure 10 bar/150 psi cpl with threaded ring": {
+      "name": "Aluminijumska posuda pod pritiskom 1,0 l (maks. 10 bar / 150 psi), komplet sa navojnim prstenom"
+    },
+    "air cap protector": {
+      "name": "Zaštita vazdušne kape (Air cap protector)"
+    },
+    "air cap protector uv": {
+      "name": "Zaštita vazdušne kape UV (Air cap protector UV)"
+    },
+    "air hose g 1/4": {
+      "name": "Crevo za vazduh G 1/4"
+    },
+    "air hose with foam cover": {
+      "name": "Crevo za vazduh sa penastom oblogom, za respirator, bez prigušivača",
+      "omitCompat": true
+    },
+    "ball tap (teflon)": {
+      "name": "Kuglasta slavina (teflon)"
+    },
+    "ball tap (teflon) with bilateral thread (female) hose spout": {
+      "name": "Kuglasta slavina (teflon) sa obostranim unutrašnjim navojem i priključkom za crevo"
+    },
+    "belt unit with activated charcoal adsorber and air regulation valve": {
+      "name": "Pojasna jedinica sa adsorberom od aktivnog uglja i ventilom za regulaciju vazduha"
+    },
+    "cleaning brush": {
+      "name": "Četka za čišćenje"
+    },
+    "cleaning brush double-sided for spray guns": {
+      "name": "Dvostrana četka za čišćenje pištolja"
+    },
+    "cleaning brush double-sided silicone-free": {
+      "name": "Dvostrana četka za čišćenje, bez silikona"
+    },
+    "cleaning brush for spray guns": {
+      "name": "Četka za čišćenje pištolja"
+    },
+    "cleaning brush large for spray guns": {
+      "name": "Velika četka za čišćenje pištolja"
+    },
+    "conversion kit external cleaning agent - suction and recirculation": {
+      "name": "Komplet za prepravku na spoljno sredstvo za čišćenje — usis i recirkulacija"
+    },
+    "coupling nipple": {
+      "name": "Nipla za spojku"
+    },
+    "coupling with": {
+      "name": "Spojka"
+    },
+    "coupling with hose connection": {
+      "name": "Spojka sa priključkom za crevo"
+    },
+    "cup adapter qcc minijet 4 laminated": {
+      "name": "Adapter za čašu QCC, minijet 4, laminiran"
+    },
+    "distance marker": {
+      "name": "Marker rastojanja"
+    },
+    "door wand steel": {
+      "name": "Čelična sonda za vrata"
+    },
+    "door wand steel with flexible guideway hose": {
+      "name": "Čelična sonda za vrata sa fleksibilnim vodećim crevom"
+    },
+    "double pipe suction unit with quick coupling": {
+      "name": "Usisna jedinica sa dve cevi i brzom spojkom"
+    },
+    "extension with@CF1931080": {
+      "name": "Nastavci sa mlaznicom"
+    },
+    "extension with@CF1931098": {
+      "name": "Nastavci sa mlaznicom"
+    },
+    "flexible quick coupling nipple": {
+      "name": "Fleksibilna nipla za brzu spojku"
+    },
+    "foam inlay with pinched inlay": {
+      "name": "Penasti uložak"
+    },
+    "free passage type quick coupling": {
+      "name": "Brza spojka sa slobodnim prolazom"
+    },
+    "ground plate": {
+      "name": "Podna ploča"
+    },
+    "hook wand connection ii": {
+      "name": "Kukasta sonda, priključak II"
+    },
+    "hose": {
+      "name": "Crevo"
+    },
+    "insert": {
+      "name": "Uložak"
+    },
+    "insertion drawer": {
+      "name": "Uložna fioka"
+    },
+    "intermediate piece and for material connection": {
+      "name": "Međukomad za priključak materijala"
+    },
+    "material hose solvent-resistant": {
+      "name": "Crevo za materijal, otporno na rastvarače"
+    },
+    "nipple": {
+      "name": "Nipla"
+    },
+    "nipple with swivel nut": {
+      "name": "Nipla sa okretnom navrtkom"
+    },
+    "nylon wand connection ii": {
+      "name": "Najlonska sonda, priključak II"
+    },
+    "nylon wand flexible": {
+      "name": "Fleksibilna najlonska sonda"
+    },
+    "nylon wand semi rigid": {
+      "name": "Polukruta najlonska sonda"
+    },
+    "paint hose solvent-resistant": {
+      "name": "Crevo za boju, otporno na rastvarače"
+    },
+    "protective sleeve": {
+      "name": "Zaštitni rukavac za par creva",
+      "omitCompat": true
+    },
+    "pump-spray cleaning bottle not suitable": {
+      "name": "Boca sa pumpicom za čišćenje (nije za razređivač)",
+      "omitCompat": true
+    },
+    "rps adapter with qcc and connection": {
+      "name": "RPS adapter sa QCC priključkom"
+    },
+    "sata air check set compressed air quality control device": {
+      "name": "SATA air check set — uređaj za kontrolu kvaliteta komprimovanog vazduha",
+      "omitCompat": true
+    },
+    "sata air cooler 2000 n": {
+      "name": "SATA air cooler 2000 n — hladnjak vazduha"
+    },
+    "sata air cooler incl. adapter plate and hip pad": {
+      "name": "SATA air cooler — hladnjak vazduha, sa adapterskom pločom i jastučićem za kuk"
+    },
+    "sata air hose": {
+      "name": "SATA crevo za vazduh"
+    },
+    "sata air hose din 8541 max. 20 bar": {
+      "name": "SATA crevo za vazduh na metar, DIN 8541, maks. 20 bar"
+    },
+    "sata air hose one connection included": {
+      "name": "SATA crevo za vazduh, sa jednim priključkom"
+    },
+    "sata air tester atomisation air quick tester": {
+      "name": "SATA air tester — brzi tester vazduha za raspršivanje"
+    },
+    "sata air warmer 2000 n": {
+      "name": "SATA air warmer 2000 n — grejač vazduha"
+    },
+    "sata air warmer carbon": {
+      "name": "SATA air warmer carbon — grejač vazduha"
+    },
+    "sata air warmer incl. adapter plate and hip pad": {
+      "name": "SATA air warmer — grejač vazduha, sa adapterskom pločom i jastučićem za kuk"
+    },
+    "sata airless paint hose": {
+      "name": "SATA airless crevo za boju"
+    },
+    "sata cleaning kit with 2 cleaning brushes medium and 12 nozzle cleaning needles": {
+      "name": "SATA komplet za čišćenje: 2 srednje četke i 12 igala za čišćenje dizni"
+    },
+    "sata compressed air-driven hand agitator": {
+      "name": "SATA ručna mešalica na komprimovani vazduh"
+    },
+    "sata filter cover": {
+      "name": "SATA poklopac filtera"
+    },
+    "sata gravity gun holder": {
+      "name": "SATA držač za pištolje sa gornjom čašom",
+      "omitCompat": true
+    },
+    "sata half mask cleaner": {
+      "name": "SATA half mask cleaner — sredstvo za čišćenje polumaske"
+    },
+    "sata high performance grease silicone- and acid-free 100 ml for spray guns": {
+      "name": "SATA mast visokih performansi za pištolje, bez silikona i kiselina, 100 ml"
+    },
+    "sata high-flow coupling female": {
+      "name": "SATA high-flow spojka, ženska"
+    },
+    "sata hose pair@CF1931215": {
+      "name": "SATA par creva"
+    },
+    "sata hose pair@CF1931220": {
+      "name": "SATA par creva"
+    },
+    "sata material coupling with plug-in nipple": {
+      "name": "SATA spojka za materijal sa utičnom niplom"
+    },
+    "sata material coupling with plug-in nipple and material strainer 60 msh": {
+      "name": "SATA spojka za materijal sa utičnom niplom i sitom za materijal 60 msh"
+    },
+    "sata material hose": {
+      "name": "SATA crevo za materijal"
+    },
+    "sata mini filter": {
+      "name": "SATA mini filter"
+    },
+    "sata nozzle cleaning kit includes sealing insert and cap": {
+      "name": "SATA komplet za čišćenje dizni, sa zaptivnim uloškom i kapicom"
+    },
+    "sata nozzle cleaning needles": {
+      "name": "SATA igle za čišćenje dizni"
+    },
+    "sata nozzle cleaning set": {
+      "name": "SATA set za čišćenje dizni"
+    },
+    "sata pvc air hose with mini quick coupling nipple with quick coupling nipple": {
+      "name": "SATA PVC crevo za vazduh sa mini brzom spojkom i niplama"
+    },
+    "sata pvc compressed air hose with mini quick coupling and nipple": {
+      "name": "SATA PVC crevo za komprimovani vazduh sa mini brzom spojkom i niplom"
+    },
+    "sata qmr quick material regulator": {
+      "name": "SATA QMR (Quick Material Regulator)"
+    },
+    "sata quick coupling": {
+      "name": "SATA brza spojka"
+    },
+    "sata quick coupling nipple": {
+      "name": "SATA nipla za brzu spojku"
+    },
+    "sata quick coupling with hose olive": {
+      "name": "SATA brza spojka sa priključkom za crevo"
+    },
+    "sata quick coupling with hose olive and quick coupling nipple": {
+      "name": "SATA brza spojka sa priključkom za crevo i nipla za brzu spojku"
+    },
+    "sata rps depot to store rps boxes": {
+      "name": "SATA RPS depot — za odlaganje RPS kutija"
+    },
+    "sata safety compressed air supply hose": {
+      "name": "SATA sigurnosno crevo za dovod komprimovanog vazduha"
+    },
+    "sata spray gun holder": {
+      "name": "SATA držač pištolja"
+    },
+    "sata spray mix double hose material connection air connection": {
+      "name": "SATA spray mix dvostruko crevo (priključak materijala + priključak vazduha)"
+    },
+    "sata spray mix hose pair": {
+      "name": "SATA spray mix par creva"
+    },
+    "sata spray mix hose pair material connection air connection": {
+      "name": "SATA spray mix par creva (priključak materijala M16 + priključak vazduha)"
+    },
+    "sata suit grey": {
+      "name": "SATA suit grey — zaštitno odelo"
+    },
+    "sata suit space": {
+      "name": "SATA suit space — zaštitno odelo"
+    },
+    "sata turbo blow with quick coupling nipple (blow gun)": {
+      "name": "SATA turbo blow — pištolj za izduvavanje, sa niplom za brzu spojku"
+    },
+    "sata universal spray gun and hose holder": {
+      "name": "SATA univerzalni držač pištolja i creva"
+    },
+    "sata universal spray gun holder foldable": {
+      "name": "SATA univerzalni držač pištolja, sklopivi"
+    },
+    "sata universal spray gun holder foldable magnetic": {
+      "name": "SATA univerzalni držač pištolja, sklopivi, magnetni"
+    },
+    "sata viscosity cup": {
+      "name": "SATA čaša za merenje viskoziteta"
+    },
+    "sata wet & dry cleaner": {
+      "name": "SATA wet & dry cleaner"
+    },
+    "sataclean wet holding tray": {
+      "name": "SATAclean mokra posuda za odlaganje 3 pištolja",
+      "omitCompat": true
+    },
+    "set of plug-in nipples complete": {
+      "name": "Komplet utičnih nipli"
+    },
+    "sge air hose": {
+      "name": "SGE crevo za vazduh"
+    },
+    "sge paint hose with ascension pipe": {
+      "name": "SGE crevo za boju sa usponskom cevi"
+    },
+    "shaker ring": {
+      "name": "Prsten za mućkanje (Shaker ring)"
+    },
+    "spray bottle 1.0 l": {
+      "name": "Boca sa raspršivačem 1,0 l"
+    },
+    "spray gun holder with strainer holder": {
+      "name": "Držač pištolja sa držačem sita"
+    },
+    "spray pattern blocks with 25 sheets": {
+      "name": "Blokovi za probni otisak mlaza, 25 listova"
+    },
+    "storage case sata truesun incl. foam inlay": {
+      "name": "Kofer za SATA trueSun, sa penastim uloškom",
+      "omitCompat": true
+    },
+    "strainer holder": {
+      "name": "Držač sita"
+    },
+    "suction hose cpl": {
+      "name": "Usisno crevo, komplet"
+    },
+    "threaded nipple galvanised": {
+      "name": "Navojna nipla, pocinkovana"
+    },
+    "triple spray gun holder": {
+      "name": "Trostruki držač pištolja za zidnu montažu",
+      "omitCompat": true
+    },
+    "trolley cpl": {
+      "name": "Kolica, komplet"
+    },
+    "venturi hook wand with flexible guide hose venturi spray tube for cavity and surface application": {
+      "name": "Venturi kukasta sonda sa fleksibilnim vodećim crevom, za šupljine i površine"
+    }
+  },
+  "compat": {
+    "3 spray guns": "3 pištolja",
+    "all SATA spray guns": "sve SATA pištolje",
+    "gravity cup spray guns": "pištolje sa gornjom čašom",
+    "hose pair individual": "par creva",
+    "material coupling": "spojku za materijal",
+    "suction pipe of suction cup spray guns": "usisnu cev pištolja sa donjom čašom",
+    "suction pipe SATA suction cup spray guns, cleaned": "usisnu cev SATA pištolja sa donjom čašom, očišćena",
+    "wands": "sonde",
+    "SATA quick coupling": "SATA brzu spojku",
+    "SATA pressure fed spray guns": "SATA pištolje sa dovodom pod pritiskom",
+    "SATA breathing protection systems": "SATA sisteme za zaštitu disanja",
+    "spray gun washing machine SATA multi-clean": "mašinu za pranje pištolja SATA multi-clean",
+    "wet holding tray SATA clean": "mokru posudu SATA clean",
+    "spray gun holder with strainer holder for SATAminijet": "držač pištolja sa držačem sita za SATAminijet",
+    "sieve 200 msh, for material filter SATAjet/Spray-Mix": "sito 200 msh, za filter materijala SATAjet/Spray-Mix",
+    "interhose from SATAminijet/DECOR to respirator": "međucrevo od SATAminijet/DECOR do respiratora",
+    "storage case SATA trueSun": "kofer SATA trueSun",
+    "SATA RPS rotafloor adapter kit": "SATA RPS rotafloor adapter kit"
+  }
+}

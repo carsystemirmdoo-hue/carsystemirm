@@ -19,7 +19,7 @@
 import path from "node:path";
 
 import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
-import { BRAND, PATHS, REPO_ROOT, SCOPE_NAME } from "./lib/config.mjs";
+import { BRAND, PATHS, PHASE2_SCOPE_NAME, REPO_ROOT, SCOPE_NAME } from "./lib/config.mjs";
 
 const checkOnly = process.argv.includes("--check");
 const plan = readJson(PATHS.plan);
@@ -69,6 +69,23 @@ function entryOf(item) {
   };
 }
 
+/*
+ * ── FAZA 2: samostalan i vezan pribor (`plan-phase2.mjs`) ──
+ * Zaseban ključ dataseta: 66 porodica / 655 artikala faze 1 ostaju bajt-identični. Višečlana kartica je
+ * LOCAL_CATALOG_GROUPING (kataloška grupa sajta), nikad zvanična SATA porodica. Bez slika, dokumenata i cena.
+ */
+const plan2 = readJson(PATHS.phase2Plan);
+if (!plan2) throw new Error("Nedostaje plan faze 2 — `npm run sata:sync:plan`.");
+if (Object.values(plan2.summary.planErrors).some((list) => list.length)) throw new Error(`Plan faze 2 ima greške: ${JSON.stringify(plan2.summary.planErrors).slice(0, 600)}`);
+const phase2Products = plan2.cards.map((card) => ({
+  slug: card.slug, name: card.name, nameSource: card.nameSource, officialName: card.officialName,
+  grouping: card.grouping, groupingTier: card.groupingTier, classification: card.classification, duplicateOfficialNames: card.duplicateOfficialNames,
+  functionalClass: card.functionalClass, productType: card.productType, taxonomy: card.taxonomy, axes: card.axes,
+  relatedFamilySlugs: card.relatedFamilies.map((family) => family.slug),
+  variants: card.variants.map((row) => ({ articleNumber: row.articleNumber, label: row.label, officialName: row.officialName, values: row.values, compat: row.compat, soldByMeter: row.soldByMeter, notice: row.notice })),
+  imageStatus: card.imageStatus, sourceHash: card.sourceHash,
+}));
+
 const imports = plan.items.filter((item) => item.action === "IMPORT").sort((a, b) => a.slug.localeCompare(b.slug));
 const enrich = plan.items.filter((item) => item.action === "ENRICH_EXISTING").sort((a, b) => a.slug.localeCompare(b.slug));
 const products = imports.map(entryOf);
@@ -99,11 +116,30 @@ const dataset = {
   },
   products,
   enrichments,
+  phase2: {
+    meta: {
+      scope: PHASE2_SCOPE_NAME,
+      scopeNote: "Samostalan i vezan SATA pribor. Višečlane kartice su LOCAL_CATALOG_GROUPING — kataloške grupe sajta po zvaničnom nazivu, NE zvanične SATA porodice. Isključeni artikli ostaju aktuelni zapisi izvora.",
+      sourceFingerprint: plan2.meta.sourceFingerprint,
+      measured: plan2.summary.measured,
+      images: { ...plan2.summary.images, note: "Dostupnost zvanične slike je činjenica o izvoru; nijedna adresa slike nije u datasetu." },
+      documents: plan2.summary.documents,
+      excluded: Object.fromEntries(Object.entries(plan2.articles).filter(([, entry]) => entry.status !== "VISIBLE").map(([articleNumber, entry]) => [articleNumber, { status: entry.status, runtimeStatus: entry.runtimeStatus ?? null, officialName: entry.officialName, ...(entry.sameOfficialNameAs ? { sameOfficialNameAs: entry.sameOfficialNameAs, provenance: entry.provenance } : {}) }])),
+    },
+    products: phase2Products,
+    // Porodica faze 1 → kartice pribora (postojeći odeljak PDP-a „Koristi se zajedno sa”).
+    links: plan2.links,
+  },
 };
 
 const nextRegistry = { ...registry, products: { ...registry.products }, enriched: {} };
 for (const item of imports) nextRegistry.products[item.slug] = { familyId: item.familyId, parentId: item.parentId, firstSeen: registry.products?.[item.slug]?.firstSeen ?? plan.meta.registryDate ?? new Date().toISOString().slice(0, 10) };
 for (const item of enrich) nextRegistry.enriched[item.slug] = { familyId: item.familyId, parentId: item.parentId, owner: "lib/carsystem-data.ts (ručni zapis)" };
+
+// Slugovi faze 2 se zaključavaju pri prvom apply-u (append-only): kasnija promena naziva ne menja adresu.
+nextRegistry.phase2 = { ...(registry.phase2 ?? {}) };
+for (const card of plan2.cards) nextRegistry.phase2[card.slug] = { articleNumbers: [...new Set([...(registry.phase2?.[card.slug]?.articleNumbers ?? []), ...card.variants.map((row) => row.articleNumber)])].sort(), grouping: card.grouping, firstSeen: registry.phase2?.[card.slug]?.firstSeen ?? plan.meta.registryDate ?? new Date().toISOString().slice(0, 10) };
+nextRegistry.phase2 = Object.fromEntries(Object.entries(nextRegistry.phase2).sort(([a], [b]) => a.localeCompare(b)));
 
 const targets = [[PATHS.siteDataset, dataset], [PATHS.identityRegistry, nextRegistry]];
 const filesChanged = targets.filter(([file, value]) => JSON.stringify(readJson(file, null)) !== JSON.stringify(value)).map(([file]) => path.relative(REPO_ROOT, file));
@@ -117,5 +153,6 @@ console.log(JSON.stringify({
   articleNumbers: dataset.meta.articleNumbers,
   documents: dataset.meta.documents,
   images: dataset.meta.images,
+  phase2: { ...plan2.summary.measured, linkedPhase1Families: Object.keys(plan2.links).length },
   filesChanged,
 }, null, 1));

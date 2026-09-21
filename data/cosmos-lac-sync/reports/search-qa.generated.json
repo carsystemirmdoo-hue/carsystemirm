@@ -1,0 +1,76 @@
+{
+  "summary": {
+    "officialName": "663/663",
+    "officialSlug": "663/663",
+    "lineAndCode": "611/611",
+    "localName": "674/674",
+    "legacyLocalName": "79/79",
+    "lineAndCodeAmbiguousByDesign": 42
+  },
+  "named": [
+    {
+      "kind": "zvanična šifra",
+      "query": "FO-314",
+      "slug": "cosmos-lac-flame-orange-fo-314-piglet-pink-dark",
+      "ok": true,
+      "top": "cosmos-lac-flame-orange-fo-314-piglet-pink-dark"
+    },
+    {
+      "kind": "RAL + završni sloj",
+      "query": "RAL 9003 matt",
+      "slug": "cosmos-lac-ral-9003-matt-signal-white",
+      "ok": true,
+      "top": "cosmos-lac-ral-9003-matt-signal-white"
+    },
+    {
+      "kind": "novi proizvod",
+      "query": "Acrylic Varnish 376",
+      "slug": "cosmos-lac-acrylic-varnish-376-gloss",
+      "ok": true,
+      "top": "cosmos-lac-acrylic-varnish-376-gloss"
+    },
+    {
+      "kind": "novi proizvod",
+      "query": "High Heat Container",
+      "slug": "cosmos-lac-high-heat-350-silver-container",
+      "ok": true,
+      "top": "family:cosmos-lac-high-heat-container"
+    },
+    {
+      "kind": "novi proizvod",
+      "query": "Chrome Effect 450 Container",
+      "slug": "cosmos-lac-chrome-effect-450-container",
+      "ok": true,
+      "top": "cosmos-lac-chrome-effect-450-container"
+    },
+    {
+      "kind": "podeljena kartica",
+      "query": "Silicone Oil 203",
+      "slug": "cosmos-lac-lubricants-203-400-ml-silicone-oil-203",
+      "ok": true,
+      "top": "cosmos-lac-lubricants-203-400-ml-silicone-oil-203"
+    },
+    {
+      "kind": "podeljena kartica",
+      "query": "Copper Grease",
+      "slug": "cosmos-lac-lubricants-745-400-ml-copper-grease-1100-c-745",
+      "ok": true,
+      "top": "cosmos-lac-lubricants-745-400-ml-copper-grease-1100-c-745"
+    },
+    {
+      "kind": "drugi jezici sajta",
+      "query": "Antichip 250",
+      "slug": "cosmos-lac-automotive-250-400-ml-antichip-250-white",
+      "ok": true,
+      "top": "cosmos-lac-automotive-250-400-ml-antichip-250-white"
+    },
+    {
+      "kind": "legacy",
+      "query": "Molotow Premium MP-001",
+      "slug": "cosmos-lac-molotow-premium-mp-001-400-ml-mp-001-jasmine-yellow",
+      "ok": true,
+      "top": "cosmos-lac-molotow-premium-mp-001-400-ml-mp-001-jasmine-yellow"
+    }
+  ],
+  "failures": []
+}

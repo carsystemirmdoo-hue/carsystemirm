@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
 import { Footer } from "@/components/layout/Footer";
 import { ProductIdentity } from "@/components/product/ProductIdentity";
+import { getProductTechnicalFacts } from "@/components/product/productTechnicalFactList";
 import { getProductDocuments } from "@/components/product/productDocumentList";
 import { ProductInformationAccordion } from "@/components/product/ProductInformationAccordion";
 import { ProductInquiryLink } from "@/components/product/ProductInquiryLink";
@@ -402,16 +403,7 @@ function ProductRelationships({
 }
 
 function getTechnicalFacts(product: CarsystemProduct): ProductTechnicalFact[] {
-  const reviewedFacts = product.detail?.technicalFacts;
-  if (product.detail) {
-    return isConfirmed(reviewedFacts?.reviewStatus)
-      ? reviewedFacts?.content.filter((fact) => isConfirmed(fact.reviewStatus)) ?? []
-      : [];
-  }
-
-  return product.specifications
-    .filter((fact) => fact.label && fact.value)
-    .map((fact) => ({ ...fact, reviewStatus: "confirmed" as const }));
+  return getProductTechnicalFacts(product);
 }
 
 

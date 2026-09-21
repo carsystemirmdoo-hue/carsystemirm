@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import cosmosLacSync from "./data/cosmos-lac-catalog-products.generated.json";
 import {
   noStoreHeaders,
   NO_STORE_PATHS,
@@ -135,6 +136,18 @@ const nextConfig: NextConfig = {
         destination: "/proizvodi/baslac-35-m331",
         permanent: true,
       },
+      /*
+       * Cosmos Lac: porodične adrese kartica koje je sync podelio po zvaničnom proizvodu
+       * (`npm run cosmos-lac:sync`). Izvor istine je `redirects` u generisanom datasetu — pravila sa
+       * `?varijanta=` vode na tu varijantu, a gola adresa na katalog sa naslednicima. Test
+       * `scripts/cosmos-lac-sync/cosmos-lac-sync.test.mjs` čuva da nijedna stara adresa ne ostane bez odredišta.
+       */
+      ...(cosmosLacSync.redirects as {
+        source: string;
+        destination: string;
+        permanent: boolean;
+        has?: { type: "query"; key: string; value: string }[];
+      }[]),
     ];
   },
 };

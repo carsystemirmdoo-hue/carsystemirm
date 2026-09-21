@@ -1,0 +1,68 @@
+{
+  "_comment": [
+    "ODOBREN OPSEG I MODEL (korisnik, 2026-09-21) — hibridni model.",
+    "Zvanični proizvod = zvanični dokument (isti PDF dele sve nijanse jednog proizvoda). Linije boja ostaju JEDNA kartica; kartica koja je mešala RAZLIČITE proizvode se deli po zvaničnom proizvodu.",
+    "`outOfScopeProducts`: aktuelno kod proizvođača, van našeg kataloga — CURRENT_OUT_OF_SCOPE (ne discontinued, ne missing).",
+    "`splitCards`: postojeće kartice koje se dele; njihova stara porodična adresa dobija preusmerenje.",
+    "`newProducts`: zvanični proizvodi koje do sada nismo imali, a ulaze u katalog.",
+    "Molotow (73 zapisa, 2 kartice) i šest zapisa bez ijedne zvanične stranice ostaju netaknuti kao LEGACY_LOCAL_ONLY.",
+    "`retiredFamilySlug`: porodična adresa kartice kakva je postojala do 2026-09-21 (izmerena u runtime-u pre podele). Posle podele ta adresa dobija preusmerenje — cilj je 0 polomljenih postojećih adresa.",
+    "`redirectQuery`: upit kataloga na koji vodi ugašena porodična adresa; izabran je najuži upit za koji su SVI naslednici na vrhu rezultata (izmereno nad stvarnim indeksom pretrage)."
+  ],
+  "outOfScopeProducts": {
+    "name:sportpens-standard": "SportPens — nije program za auto-reparaturu/radionicu",
+    "name:wood-glue-crystalise": "Wood Glue — lepak za drvo",
+    "name:acryl-fresh": "Acryl Fresh — zidna boja",
+    "name:plastic-paint-fresh": "Plastic Paint Fresh — zidna boja",
+    "wood-varnish": "Wood Varnish 374/375 — van odobrenog opsega"
+  },
+  "splitCards": {
+    "cosmos-lac-lubricants-oil": {
+      "redirectQuery": "Lubricants Oil",
+      "retiredFamilySlug": "cosmos-lac-lubricants-oil"
+    },
+    "cosmos-lac-lubricants-grease": {
+      "redirectQuery": "Lubricants Grease",
+      "retiredFamilySlug": "cosmos-lac-lubricants-grease"
+    },
+    "cosmos-lac-putties-filler": {
+      "redirectQuery": "Putties Filler",
+      "retiredFamilySlug": "cosmos-lac-putties-filler"
+    },
+    "cosmos-lac-varnishes-varnish": {
+      "redirectQuery": "Varnishes",
+      "retiredFamilySlug": "cosmos-lac-varnishes"
+    },
+    "cosmos-lac-w-wood-care-varnish": {
+      "redirectQuery": "W Wood Care",
+      "retiredFamilySlug": "cosmos-lac-w-wood-care-varnish"
+    },
+    "cosmos-lac-wheel-rim-wheel-rim": {
+      "keepBaseFor": "wheel-rim",
+      "retiredFamilySlug": "cosmos-lac-wheel-rim",
+      "note": "Naslednik „Wheel Rim” je ISTI proizvod kao stara kartica, pa zadržava grupu i adresu /proizvodi/grupa/cosmos-lac-wheel-rim; „Wheel Rim Deluxe” postaje samostalna kartica. Preusmerenje nije potrebno."
+    },
+    "cosmos-lac-zinc-zinc": {
+      "redirectQuery": "Zinc",
+      "retiredFamilySlug": "cosmos-lac-zinc"
+    }
+  },
+  "newProducts": [
+    "acrylic-varnish",
+    "name:chrome-effect",
+    "effect-container",
+    "high-heat-container"
+  ],
+  "sourceTitleInconsistencies": {
+    "ral-9003-signal-white": {
+      "pageTitle": "Ral 9002 – Grey White",
+      "identity": "RAL 9003 – Signal White",
+      "evidence": "adresa + šifra u adresi + naziv fajla u Brand Kit-u (`ral-9003-signal-white-v2.png`) i na samoj stranici"
+    },
+    "fast-acrylic-ral-8017-chocolate-brown": {
+      "pageTitle": "Fast Acrylic Ral 8011 – Nut Brown",
+      "identity": "Fast Acrylic RAL 8017 – Chocolate Brown",
+      "evidence": "adresa + šifra u adresi + naziv fajla u Brand Kit-u (`fast-acrylic-ral-8017-chocolate-brown-v2.png`)"
+    }
+  }
+}

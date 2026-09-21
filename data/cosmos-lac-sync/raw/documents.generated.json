@@ -1,0 +1,1222 @@
+{
+  "meta": {
+    "documents": 103,
+    "ok": 102,
+    "broken": 1,
+    "tds": 38,
+    "productInfo": 65,
+    "localeTotals": {
+      "en": 679,
+      "el": 679,
+      "bg": 690,
+      "de": 690,
+      "da": 690,
+      "fi": 690,
+      "sv": 690,
+      "hu": 690
+    }
+  },
+  "documents": [
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/acrylic-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 153679,
+      "lastModified": "Thu, 30 Jul 2026 17:19:09 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Acrylic-Putty-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 211773,
+      "lastModified": "Thu, 30 Jul 2026 17:18:41 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/acrylic-varnish.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 143408,
+      "lastModified": "Thu, 30 Jul 2026 17:19:09 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Air-Duster_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 291995,
+      "lastModified": "Thu, 30 Jul 2026 17:19:10 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/alu-zinc.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 146254,
+      "lastModified": "Thu, 30 Jul 2026 17:19:10 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/anti-spatter.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 450143,
+      "lastModified": "Thu, 30 Jul 2026 17:19:12 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/antichip.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 235969,
+      "lastModified": "Thu, 30 Jul 2026 17:19:11 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/backlight.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 222217,
+      "lastModified": "Thu, 30 Jul 2026 17:19:12 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/brake-caliper.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 160632,
+      "lastModified": "Thu, 30 Jul 2026 17:19:13 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Brake-Cleaner_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 314846,
+      "lastModified": "Thu, 30 Jul 2026 17:19:13 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/bumper-paint.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 129492,
+      "lastModified": "Thu, 30 Jul 2026 17:18:43 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 5
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Carburetor-Cleaner-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 266678,
+      "lastModified": "Thu, 30 Jul 2026 17:18:43 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Chain-Grease-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 127030,
+      "lastModified": "Thu, 30 Jul 2026 17:18:44 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/chalk-effect-varnish.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 158370,
+      "lastModified": "Thu, 30 Jul 2026 17:18:32 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/chalk-effect.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 274826,
+      "lastModified": "Thu, 30 Jul 2026 17:18:32 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 33
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Contact-Cleaner-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 247358,
+      "lastModified": "Thu, 30 Jul 2026 17:18:45 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Copper-Grease-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 128489,
+      "lastModified": "Thu, 30 Jul 2026 17:18:45 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Cut-Drill-Oil-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 129068,
+      "lastModified": "Thu, 30 Jul 2026 17:18:45 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Dry-PTFE-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 322357,
+      "lastModified": "Thu, 30 Jul 2026 17:18:46 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/easy-max-glitter.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 528108,
+      "lastModified": "Thu, 30 Jul 2026 17:18:34 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/easy-max-granite-effect.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 622412,
+      "lastModified": "Thu, 30 Jul 2026 17:18:36 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/easy-max-marble-effect.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 599316,
+      "lastModified": "Thu, 30 Jul 2026 17:18:36 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/easy-max-metallics.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 347098,
+      "lastModified": "Thu, 30 Jul 2026 17:18:37 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/easy-max-sand-effect.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 549525,
+      "lastModified": "Thu, 30 Jul 2026 17:18:38 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/easy-max.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 223274,
+      "lastModified": "Thu, 30 Jul 2026 17:18:33 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 36
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Effect-Container-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 187071,
+      "lastModified": "Thu, 30 Jul 2026 17:18:46 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Effect-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 197858,
+      "lastModified": "Thu, 30 Jul 2026 17:18:47 GMT",
+      "kind": "TDS",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/fast-acrylic-metallics.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 137762,
+      "lastModified": "Thu, 30 Jul 2026 17:18:38 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/fast-acrylic.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 201253,
+      "lastModified": "Thu, 30 Jul 2026 17:18:31 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 27
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Fiber-Glass-putty-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 111754,
+      "lastModified": "Thu, 30 Jul 2026 17:18:41 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Fiberglass-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 137639,
+      "lastModified": "Thu, 30 Jul 2026 17:18:41 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/flame-blue-metallics.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 174791,
+      "lastModified": "Thu, 30 Jul 2026 17:18:39 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/flame-blue.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 193465,
+      "lastModified": "Thu, 30 Jul 2026 17:18:38 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 117
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/flame-booster-metallic.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 330070,
+      "lastModified": "Thu, 30 Jul 2026 17:18:40 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/flame-booster.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 327437,
+      "lastModified": "Thu, 30 Jul 2026 17:18:39 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/flame-orange-metallics.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 194946,
+      "lastModified": "Thu, 30 Jul 2026 17:18:25 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/flame-orange.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 399937,
+      "lastModified": "Thu, 30 Jul 2026 17:18:40 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 133
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Fluorescent-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 155035,
+      "lastModified": "Thu, 30 Jul 2026 17:18:47 GMT",
+      "kind": "TDS",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Forest-Marking-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 385012,
+      "lastModified": "Thu, 30 Jul 2026 17:18:48 GMT",
+      "kind": "TDS",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/High-Heat-Container-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 198568,
+      "lastModified": "Thu, 30 Jul 2026 17:18:49 GMT",
+      "kind": "TDS",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/high-heat.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 142755,
+      "lastModified": "Thu, 30 Jul 2026 17:18:48 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 5
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Leak-Detector-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 327934,
+      "lastModified": "Thu, 30 Jul 2026 17:18:49 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Lithium-Grease-PTFE-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 134982,
+      "lastModified": "Thu, 30 Jul 2026 17:18:49 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Lithium-Grease-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 301377,
+      "lastModified": "Thu, 30 Jul 2026 17:18:50 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Marble-Filler-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 135168,
+      "lastModified": "Thu, 30 Jul 2026 17:18:41 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Master-Mechanic-13-Antigravel-Paintable-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 163093,
+      "lastModified": "Thu, 30 Jul 2026 17:18:50 GMT",
+      "kind": "TDS",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Master-Mechanic-14-Wheel-Paint-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 209884,
+      "lastModified": "Thu, 30 Jul 2026 17:18:51 GMT",
+      "kind": "TDS",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Master-Mechanic-15-Brake-Caliper-Paint-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 185443,
+      "lastModified": "Thu, 30 Jul 2026 17:18:51 GMT",
+      "kind": "TDS",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Master-Mechanic-20-Clear-Coat-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 178752,
+      "lastModified": "Thu, 30 Jul 2026 17:18:52 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-bumber-paint-11.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 154103,
+      "lastModified": "Thu, 30 Jul 2026 17:18:52 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-control-guide-06.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 163269,
+      "lastModified": "Thu, 30 Jul 2026 17:18:52 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-epoxy-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 300403,
+      "lastModified": "Thu, 30 Jul 2026 17:18:53 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-filler-02.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 248549,
+      "lastModified": "Thu, 30 Jul 2026 17:18:53 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-heat-resistant-paint-12.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 155822,
+      "lastModified": "Thu, 30 Jul 2026 17:18:54 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-plastic-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 166116,
+      "lastModified": "Thu, 30 Jul 2026 17:18:54 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-primer-01.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 168386,
+      "lastModified": "Thu, 30 Jul 2026 17:18:54 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-ral-paint.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 153914,
+      "lastModified": "Thu, 30 Jul 2026 17:18:55 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 5
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/master-mechanic-wash-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 177009,
+      "lastModified": "Thu, 30 Jul 2026 17:18:55 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Metal-Polyester-putty-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 102619,
+      "lastModified": "Thu, 30 Jul 2026 17:18:42 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/metal-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 159774,
+      "lastModified": "Thu, 30 Jul 2026 17:18:56 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/metal-varnish.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 147646,
+      "lastModified": "Thu, 30 Jul 2026 17:18:57 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Metallic-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 453457,
+      "lastModified": "Thu, 30 Jul 2026 17:18:56 GMT",
+      "kind": "TDS",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Multimax-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 379671,
+      "lastModified": "Thu, 30 Jul 2026 17:18:58 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/paint-aluminums.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 202157,
+      "lastModified": "Thu, 30 Jul 2026 17:18:58 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Paint-Remover_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 276693,
+      "lastModified": "Thu, 30 Jul 2026 17:18:59 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Penetrating-Oil-V01_tds.pdf",
+      "status": 404,
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 0,
+      "lastModified": null,
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Penetrating-PTFE-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 132753,
+      "lastModified": "Thu, 30 Jul 2026 17:19:00 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/plastic-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 131059,
+      "lastModified": "Thu, 30 Jul 2026 17:19:00 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/porcelain-paint.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 121617,
+      "lastModified": "Thu, 30 Jul 2026 17:19:00 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Power-Glue_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 106838,
+      "lastModified": "Thu, 30 Jul 2026 17:19:01 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/prefilled.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 130724,
+      "lastModified": "Thu, 30 Jul 2026 17:19:01 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/quick-start.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 166561,
+      "lastModified": "Thu, 30 Jul 2026 17:19:02 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/radiator-lacquer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 216276,
+      "lastModified": "Thu, 30 Jul 2026 17:19:02 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/ral-metallics.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 189408,
+      "lastModified": "Thu, 30 Jul 2026 17:18:26 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/ral.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 237441,
+      "lastModified": "Thu, 30 Jul 2026 17:18:26 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 57
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Road-Marking-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 376971,
+      "lastModified": "Thu, 30 Jul 2026 17:19:03 GMT",
+      "kind": "TDS",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Rust-Shock-Freeze-Penetrating-Oil-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 139949,
+      "lastModified": "Thu, 30 Jul 2026 17:19:02 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/sealer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 212602,
+      "lastModified": "Thu, 30 Jul 2026 17:19:03 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Silicone-Oil-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 308693,
+      "lastModified": "Thu, 30 Jul 2026 17:19:04 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/special-metal-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 147699,
+      "lastModified": "Thu, 30 Jul 2026 17:19:04 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-400-transparent-finish-gloss.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 135696,
+      "lastModified": "Thu, 30 Jul 2026 17:18:27 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-401-transparent-finish-matte.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 166603,
+      "lastModified": "Thu, 30 Jul 2026 17:18:28 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-410-frame-builder%E2%80%99s-putty.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 200956,
+      "lastModified": "Thu, 30 Jul 2026 17:18:27 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-420-carbon-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 218750,
+      "lastModified": "Thu, 30 Jul 2026 17:18:28 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-430-metal-primer.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 221146,
+      "lastModified": "Thu, 30 Jul 2026 17:18:28 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-440-cold-zinc.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 178224,
+      "lastModified": "Thu, 30 Jul 2026 17:18:29 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-450-top-wax.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 214788,
+      "lastModified": "Thu, 30 Jul 2026 17:18:29 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-frame-builder-s-metal-plating.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 245563,
+      "lastModified": "Thu, 30 Jul 2026 17:18:30 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike-keirin.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 400445,
+      "lastModified": "Thu, 30 Jul 2026 17:18:31 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 6
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/spray-bike.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 186686,
+      "lastModified": "Thu, 30 Jul 2026 17:18:27 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 61
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/sticker-glue-remover.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 141959,
+      "lastModified": "Thu, 30 Jul 2026 17:19:04 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/textile-cleaner.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 213117,
+      "lastModified": "Mon, 25 Nov 2024 20:11:02 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/tinted-wood-varnish.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 180536,
+      "lastModified": "Thu, 30 Jul 2026 17:19:05 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 4
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Vaseline-Spray-V01_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 132575,
+      "lastModified": "Thu, 30 Jul 2026 17:19:05 GMT",
+      "kind": "TDS",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/vinyl-fabric.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 136711,
+      "lastModified": "Thu, 30 Jul 2026 17:19:06 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/W-CONTAINER_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 203338,
+      "lastModified": "Thu, 30 Jul 2026 17:18:42 GMT",
+      "kind": "TDS",
+      "products": 6
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/W-VARNISH-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 263484,
+      "lastModified": "Thu, 30 Jul 2026 17:18:40 GMT",
+      "kind": "TDS",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/wheel-rim-deluxe.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 192578,
+      "lastModified": "Thu, 30 Jul 2026 17:19:07 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/wheel-rim.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 144767,
+      "lastModified": "Thu, 30 Jul 2026 17:19:06 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 3
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/white-smalto.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 119154,
+      "lastModified": "Thu, 30 Jul 2026 17:19:07 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/Wood-Putties-V02_tds.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 436399,
+      "lastModified": "Thu, 30 Jul 2026 17:18:44 GMT",
+      "kind": "TDS",
+      "products": 18
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/wood-varnish.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 208616,
+      "lastModified": "Mon, 25 Nov 2024 20:11:02 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 2
+    },
+    {
+      "url": "https://cosmoslac.com/pdfs/products/en/zinc-maximum.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "bytes": 75429,
+      "lastModified": "Thu, 30 Jul 2026 17:19:07 GMT",
+      "kind": "PRODUCT_INFO",
+      "products": 1
+    }
+  ],
+  "perLocale": {
+    "en": {
+      "total": 679,
+      "byFamilySegment": {
+        "spray-bike": 78,
+        "wheel-rim": 4,
+        "acrylic-paints": 1,
+        "sportpens": 10,
+        "flame": 2,
+        "flame-orange": 135,
+        "chalk-effect": 34,
+        "automotive": 15,
+        "home": 5,
+        "cleaners": 5,
+        "sealer": 4,
+        "master-mechanic": 26,
+        "high-heat": 8,
+        "zinc": 2,
+        "primer": 9,
+        "varnish": 10,
+        "plastic-paints": 1,
+        "wood-glue": 3,
+        "easy-max": 53,
+        "fast-acrylic": 29,
+        "ral": 61,
+        "lubricants": 14,
+        "flame-blue": 120,
+        "effect": 4,
+        "metallic": 4,
+        "fluo-marking": 11,
+        "wood-putties": 18,
+        "wood-varnish-w": 8,
+        "putties": 5
+      }
+    },
+    "el": {
+      "total": 679,
+      "byFamilySegment": {
+        "fast-acrylic": 29,
+        "flame": 2,
+        "wheel-rim": 4,
+        "acrylic-paints": 1,
+        "sportpens": 10,
+        "ral": 61,
+        "flame-orange": 135,
+        "flame-blue": 120,
+        "chalk-effect": 34,
+        "spray-bike": 78,
+        "easy-max": 53,
+        "automotive": 15,
+        "lubricants": 14,
+        "high-heat": 8,
+        "zinc": 2,
+        "primer": 9,
+        "varnish": 10,
+        "metallic": 4,
+        "fluo-marking": 11,
+        "wood-putties": 18,
+        "wood-varnish-w": 8,
+        "sealer": 4,
+        "master-mechanic": 26,
+        "home": 5,
+        "effect": 4,
+        "wood-glue": 3,
+        "cleaners": 5,
+        "putties": 5,
+        "plastic-paints": 1
+      }
+    },
+    "bg": {
+      "total": 690,
+      "byFamilySegment": {
+        "flame-oranzh": 135,
+        "akrilni-boi": 1,
+        "pochistvashti-sredstva": 5,
+        "flame-sin": 120,
+        "fast-acrylic": 29,
+        "ral": 61,
+        "chalk-effect": 34,
+        "easy-max": 53,
+        "sportni-himikalki": 10,
+        "uplatnitel": 4,
+        "shpaklovki": 5,
+        "shpaklovki-za-darvo": 18,
+        "boi-za-plastmasa": 1,
+        "lepilo-za-darvo": 3,
+        "v": 8,
+        "master-mechanic": 26,
+        "metalen": 4,
+        "fluorestsentni-i-markirovachni": 11,
+        "dzhanta": 4,
+        "nachalo": 5,
+        "avtomobilna": 17,
+        "%d0%b5%d1%84%d0%b5%d0%ba%d1%82": 4,
+        "smazki": 14,
+        "lak": 10,
+        "tsink": 2,
+        "visoka-temperatura": 8,
+        "primer": 9,
+        "flame": 2,
+        "spray-bike": 87
+      }
+    },
+    "de": {
+      "total": 690,
+      "byFamilySegment": {
+        "chalk-effect": 34,
+        "sportstifte": 10,
+        "acrylfarben": 1,
+        "master-mechanic": 26,
+        "home": 5,
+        "reinigungsmittel": 5,
+        "ral": 61,
+        "fast-acryl": 29,
+        "easy-max": 53,
+        "versiegelung": 4,
+        "spachtelmassen": 5,
+        "holzspachtel": 18,
+        "kunststofffarben": 1,
+        "holzleim": 3,
+        "in": 8,
+        "metallic": 4,
+        "leuchtstoff-markierung": 11,
+        "felge": 4,
+        "automobil": 17,
+        "wirkung": 4,
+        "schmiermittel": 14,
+        "lack": 10,
+        "zink": 2,
+        "hohe-hitze": 8,
+        "beispiel": 9,
+        "flame": 2,
+        "flame-blau": 120,
+        "flame-orange": 135,
+        "spray-bike-serie": 87
+      }
+    },
+    "da": {
+      "total": 690,
+      "byFamilySegment": {
+        "plastmaling": 1,
+        "akrylmaling": 1,
+        "master-mechanic": 26,
+        "zink": 2,
+        "flame-bla": 120,
+        "flame-orange": 135,
+        "ral": 61,
+        "fast-acrylic": 29,
+        "chalk-effect": 34,
+        "easy-max": 53,
+        "sportskuglepenne": 10,
+        "taetningsmiddel": 4,
+        "spaklemasser": 5,
+        "traespartelmasse": 18,
+        "traelim": 3,
+        "i": 8,
+        "metallisk": 4,
+        "fluorescens-maerkning": 11,
+        "faelge": 4,
+        "hjem": 5,
+        "rengoringsmidler": 5,
+        "bilindustrien": 17,
+        "virkning": 4,
+        "smoremidler": 14,
+        "lak": 10,
+        "hoj-varme": 8,
+        "eksempel": 9,
+        "flame": 2,
+        "spray-bike-serien": 87
+      }
+    },
+    "fi": {
+      "total": 690,
+      "byFamilySegment": {
+        "akryylimaalit": 1,
+        "puuliima": 3,
+        "vaikutus": 4,
+        "flame-sininen": 120,
+        "flame-oranssi": 135,
+        "ral": 61,
+        "fast-acrylic": 29,
+        "chalk-effect": 34,
+        "easy-max": 53,
+        "urheilukynat": 10,
+        "tiivistysaine": 4,
+        "kitat": 5,
+        "puutietteet": 18,
+        "muovimaalit": 1,
+        "w": 8,
+        "master-mechanic": 26,
+        "metallinen": 4,
+        "loiste-ja-merkintavarit": 11,
+        "vanteen": 4,
+        "kotisivu": 5,
+        "puhdistusaineet": 5,
+        "autoteollisuus": 17,
+        "voiteluaineet": 14,
+        "lakka": 10,
+        "sinkki": 2,
+        "korkeat-lampotilat": 8,
+        "esimerkki": 9,
+        "flame": 2,
+        "spray-bike-tuotesarja": 87
+      }
+    },
+    "sv": {
+      "total": 690,
+      "byFamilySegment": {
+        "plastfarger": 1,
+        "akrylfarger": 1,
+        "i": 8,
+        "bilbranschen": 17,
+        "ral": 61,
+        "fast-acryl": 29,
+        "flame-orange": 135,
+        "chalk-effect": 34,
+        "easy-max": 53,
+        "sportpennor": 10,
+        "tatningsmedel": 4,
+        "spackel": 5,
+        "traspackel": 18,
+        "tralim": 3,
+        "master-mechanic": 26,
+        "metallisk": 4,
+        "lysamnelser-markering": 11,
+        "falg": 4,
+        "hem": 5,
+        "rengoringsmedel": 5,
+        "effekt": 4,
+        "smorjmedel": 14,
+        "lack": 10,
+        "zink": 2,
+        "hog-varme": 8,
+        "exempel": 9,
+        "flame": 2,
+        "flame-bla": 120,
+        "spray-bike-serien": 87
+      }
+    },
+    "hu": {
+      "total": 690,
+      "byFamilySegment": {
+        "ral": 61,
+        "akrilfestekek": 1,
+        "flame-narancssarga": 135,
+        "fast-acrylic": 29,
+        "chalk-effect": 34,
+        "easy-max": 53,
+        "sportos-tollak": 10,
+        "tomitoanyag": 4,
+        "kitoltok": 5,
+        "fakit": 18,
+        "muanyag-festekek": 1,
+        "fa-ragaszto": 3,
+        "a": 8,
+        "master-mechanic": 26,
+        "femes": 4,
+        "fluoreszcens-es-jelolo": 11,
+        "kerektalca": 4,
+        "fooldal": 5,
+        "tisztitoszerek": 5,
+        "autoipar": 17,
+        "hatas": 4,
+        "kenoanyagok": 14,
+        "lakkozas": 10,
+        "cink": 2,
+        "magas-homerseklet": 8,
+        "pelda": 9,
+        "flame": 2,
+        "flame-kek": 120,
+        "spray-bike-termekcsalad": 87
+      }
+    }
+  }
+}

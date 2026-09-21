@@ -1,0 +1,59 @@
+{
+  "products": {
+    "cosmos-lac-easy-max-glitter-912-multi": {
+      "officialSlug": "easy-max-glitter-912-multi",
+      "officialProduct": "easy-max-glitter",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-ral-9003-matt-signal-white": {
+      "officialSlug": "ral-9003-matt-signal-white",
+      "officialProduct": "ral",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-flame-orange-fo-314-piglet-pink-dark": {
+      "officialSlug": "flame-orange-fo-314-piglet-pink-dark",
+      "officialProduct": "flame-orange",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-chrome-effect-450-container": {
+      "officialSlug": "chrome-effect-450-container",
+      "officialProduct": "name:chrome-effect",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-gold-effect-451-container": {
+      "officialSlug": "gold-effect-451-container",
+      "officialProduct": "effect-container",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-high-heat-350-silver-container": {
+      "officialSlug": "high-heat-350-silver-container",
+      "officialProduct": "high-heat-container",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-high-heat-351-black-container": {
+      "officialSlug": "high-heat-351-black-container",
+      "officialProduct": "high-heat-container",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-high-heat-353-maroon-container": {
+      "officialSlug": "high-heat-353-maroon-container",
+      "officialProduct": "high-heat-container",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-acrylic-varnish-376-gloss": {
+      "officialSlug": "acrylic-varnish-376-gloss",
+      "officialProduct": "acrylic-varnish",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-acrylic-varnish-377-matt": {
+      "officialSlug": "acrylic-varnish-377-matt",
+      "officialProduct": "acrylic-varnish",
+      "firstSeen": "2026-09-21"
+    },
+    "cosmos-lac-acrylic-varnish-378-satin": {
+      "officialSlug": "acrylic-varnish-378-satin",
+      "officialProduct": "acrylic-varnish",
+      "firstSeen": "2026-09-21"
+    }
+  }
+}

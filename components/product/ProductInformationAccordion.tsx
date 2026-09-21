@@ -38,7 +38,7 @@ export function ProductInformationAccordion({
   documents: serverDocuments,
   process,
   processStages,
-  technicalFacts,
+  technicalFacts: serverTechnicalFacts,
   technology,
 }: ProductInformationAccordionProps) {
   /*
@@ -50,6 +50,8 @@ export function ProductInformationAccordion({
    */
   const variant = useOptionalProductVariant();
   const documents = variant?.activeVariant.documents ?? serverDocuments;
+  // Isto važi za tehničke podatke: „Pakovanje", „Nijansa" i šifra pripadaju aktivnoj varijanti.
+  const technicalFacts = variant?.activeVariant.technicalFacts ?? serverTechnicalFacts;
   const accordionId = useId();
   const [openSectionIds, setOpenSectionIds] = useState<string[]>([]);
   const toggleSection = (sectionId: string) => {

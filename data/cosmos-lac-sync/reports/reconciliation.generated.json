@@ -1,0 +1,89 @@
+{
+  "coverage": {
+    "A": 103,
+    "B": 103,
+    "C": 673,
+    "D": 673
+  },
+  "cards": {
+    "VISIBLE_CURRENT_COSMOS_CARDS": 84,
+    "VISIBLE_LEGACY_MOLOTOW_CARDS": 2,
+    "TOTAL_VISIBLE_COSMOS_BRAND_CARDS": 86,
+    "baselineCards": 68,
+    "legacyCardIds": [
+      "family:cosmos-lac-molotow-burner",
+      "family:cosmos-lac-molotow-premium"
+    ]
+  },
+  "runtime": {
+    "underlyingRecords": 753,
+    "families": 40,
+    "redirectOnlyRecords": 707,
+    "newRecords": 11,
+    "enrichedExisting": 663
+  },
+  "status": {
+    "CURRENT": 663,
+    "CURRENT_REGION_SPECIFIC": 11,
+    "LEGACY_LOCAL_ONLY": 79
+  },
+  "problems": {
+    "missingProducts": [],
+    "missingPages": [],
+    "leakedOutOfScope": [],
+    "regionMissing": [],
+    "regionWithoutProvenance": [],
+    "orphanRecords": [],
+    "mixedCards": [],
+    "brokenFamilyUrls": [],
+    "brokenProductUrls": [],
+    "redirectTargetsMissing": [],
+    "unexpectedlyRetired": [],
+    "changedImages": [],
+    "newNotPlaceholder": [],
+    "externalImages": []
+  },
+  "urls": {
+    "baselineFamilyUrls": 41,
+    "stillLive": 35,
+    "redirected": 6,
+    "baselineProductUrls": 742,
+    "productUrlsStillLive": 742,
+    "redirectRules": 34
+  },
+  "notCountedAsMissing": {
+    "CURRENT_OUT_OF_SCOPE": [
+      {
+        "productKey": "name:sportpens-standard",
+        "status": "CURRENT_OUT_OF_SCOPE",
+        "pages": 10,
+        "reason": "SportPens — nije program za auto-reparaturu/radionicu"
+      },
+      {
+        "productKey": "name:wood-glue-crystalise",
+        "status": "CURRENT_OUT_OF_SCOPE",
+        "pages": 3,
+        "reason": "Wood Glue — lepak za drvo"
+      },
+      {
+        "productKey": "name:acryl-fresh",
+        "status": "CURRENT_OUT_OF_SCOPE",
+        "pages": 1,
+        "reason": "Acryl Fresh — zidna boja"
+      },
+      {
+        "productKey": "name:plastic-paint-fresh",
+        "status": "CURRENT_OUT_OF_SCOPE",
+        "pages": 1,
+        "reason": "Plastic Paint Fresh — zidna boja"
+      },
+      {
+        "productKey": "wood-varnish",
+        "status": "CURRENT_OUT_OF_SCOPE",
+        "pages": 2,
+        "reason": "Wood Varnish 374/375 — van odobrenog opsega"
+      }
+    ],
+    "LEGACY_LOCAL_ONLY": 79
+  }
+}

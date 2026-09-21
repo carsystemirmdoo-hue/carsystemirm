@@ -10,7 +10,21 @@ const projectRoot = path.resolve(import.meta.dirname, "..");
 const dataPath = path.join(projectRoot, "data/cosmos-lac-products.generated.json");
 const blockedPath = path.join(projectRoot, "data/cosmos-lac-blocked.generated.json");
 const summaryPath = path.join(projectRoot, "data/cosmos-lac-summary.generated.json");
-const uncertainRoot = path.join(projectRoot, "tmp/cosmos-lac-assets/uncertain");
+/*
+ * Zvanični Brand Kit (izvorni PNG-ovi) živi u `tmp/cosmos-lac-assets/` — gitignore-ovan je i postoji samo
+ * tamo gde je ZIP raspakovan. Dataset i objavljene slike su commitovani, pa se SVE osim dve provere
+ * (SHA izvornog fajla i broj „uncertain" fajlova) može proveriti iz čistog checkout-a:
+ *
+ *   npm run cosmos:validate                          proverava dataset + objavljene slike; izvorne fajlove
+ *                                                    proverava samo ako su prisutni
+ *   node scripts/validate-cosmos-lac-catalog.mjs --require-source-assets
+ *                                                    strogi režim (deo `cosmos:update`): bez Brand Kit-a pada
+ */
+const brandKitRoot = process.env.COSMOS_BRAND_KIT_DIR
+  ? path.resolve(process.env.COSMOS_BRAND_KIT_DIR)
+  : path.join(projectRoot, "tmp/cosmos-lac-assets");
+const uncertainRoot = path.join(brandKitRoot, "uncertain");
+const requireSourceAssets = process.argv.includes("--require-source-assets");
 
 const requiredStrings = [
   "id",
@@ -268,13 +282,18 @@ async function main() {
     assertKnownConflictsExcluded(record);
   }
 
+  const sourceAssetsPresent = await fs.stat(path.join(brandKitRoot, "selected-products")).then((stats) => stats.isDirectory(), () => false);
+  if (!sourceAssetsPresent && requireSourceAssets) {
+    fail(`Brand Kit nije prisutan (${path.relative(projectRoot, brandKitRoot)}), a tražen je strogi režim (--require-source-assets).`);
+  }
+
   await forEachConcurrent(records, 12, async (record) => {
     const publicPath = path.join(projectRoot, "public", record.image);
-    const sourcePath = path.join(projectRoot, record.sourceAsset);
+    const sourcePath = path.join(brandKitRoot, record.sourceAsset.replace(/^tmp\/cosmos-lac-assets\//, ""));
     const [metadata, publicHash, sourceHash] = await Promise.all([
       sharp(publicPath).metadata(),
       sha256(publicPath),
-      sha256(sourcePath),
+      sourceAssetsPresent ? sha256(sourcePath) : Promise.resolve(null),
     ]);
     if (metadata.width !== 800 || metadata.height !== 800 || !metadata.hasAlpha) {
       fail(`Invalid image dimensions or alpha for ${record.image}`);
@@ -282,12 +301,13 @@ async function main() {
     if (publicHash !== record.productionSha256) {
       fail(`Production hash mismatch for ${record.image}`);
     }
-    if (sourceHash !== record.sourceSha256) {
+    if (sourceAssetsPresent && sourceHash !== record.sourceSha256) {
       fail(`Source hash mismatch for ${record.sourceAsset}`);
     }
   });
 
-  const uncertainCount = await countFiles(uncertainRoot);
+  // Broj „uncertain" fajlova je činjenica o Brand Kit folderu; bez njega važi commitovani sažetak.
+  const uncertainCount = sourceAssetsPresent ? await countFiles(uncertainRoot) : summary.excludedUncertainImages;
   if (uncertainCount !== 34) fail(`Expected 34 uncertain files, found ${uncertainCount}`);
   if (summary.publishedEntries !== records.length || summary.variants !== records.length) {
     fail("Summary counts do not match the published dataset.");
@@ -310,6 +330,11 @@ async function main() {
 
   console.log(
     `Cosmos Lac validation passed: ${records.length} published variants, ${blocked.length} blocked selected assets, ${uncertainCount} uncertain files excluded.`,
+  );
+  console.log(
+    sourceAssetsPresent
+      ? `Brand Kit prisutan: provereno i ${records.length} SHA izvornih fajlova.`
+      : `Brand Kit nije prisutan (čist checkout): preskočene su SAMO provere izvornih fajlova (${records.length} SHA + broj „uncertain" fajlova); dataset i ${records.length} objavljenih slika su provereni u celosti.`,
   );
 }
 

@@ -1,3 +1,4 @@
+import syncDataset from "@/data/cosmos-lac-catalog-products.generated.json";
 import generatedRecords from "@/data/cosmos-lac-products.generated.json";
 import type {
   CarsystemProduct,
@@ -9,6 +10,7 @@ import type {
   ProductVisualType,
   RefinishPhaseSlug,
 } from "@/lib/carsystem-data";
+import type { ProductSize } from "@/lib/product-scale";
 import type { ProductFamilyIdentity } from "@/types/product-detail";
 
 type CosmosLacGeneratedRecord = {
@@ -45,7 +47,49 @@ type CosmosLacGeneratedRecord = {
   seoDescription: string;
 };
 
-const records = generatedRecords as CosmosLacGeneratedRecord[];
+/**
+ * Dopuna sa zvaničnog sajta (`npm run cosmos-lac:sync`).
+ *
+ * 742 zapisa iz zvaničnog Brand Kit-a ostaju kakvi jesu — sa slikama i SHA poreklom. Sync preko njih
+ * polaže ono što potvrđuje cosmoslac.com: zvanični identitet i šifre, dokument proizvoda, status
+ * pakovanja i grupu (karticu). Hibridni model: linija boja je jedna kartica, a kartica koja je mešala
+ * RAZLIČITE proizvode (različit zvanični dokument) podeljena je po zvaničnom proizvodu.
+ * Novi zapisi dolaze iz istog dataseta i koriste placeholder sajta — nijedna slika se ne preuzima.
+ */
+type CosmosSyncPackaging = {
+  status: "OFFICIAL_CURRENT" | "LOCAL_EXISTING" | "SOURCE_UNSPECIFIED";
+  /** Pakovanje koje vidi kupac: zvanično kada ga izvor navodi, postojeće kada ga ne navodi, `null` kada ga nema. */
+  customerFacing: string | null;
+  local: string | null;
+  official: string | null;
+  localDiverges: boolean;
+};
+
+type CosmosSyncEntry = {
+  status: "CURRENT" | "CURRENT_REGION_SPECIFIC" | "LEGACY_LOCAL_ONLY";
+  classification: string;
+  officialUrl: string | null;
+  officialSlug: string | null;
+  officialName: string | null;
+  officialProduct: string | null;
+  officialCodes: string[];
+  sourceLocales?: { locale: string; url: string }[];
+  baseProductSlug?: string;
+  previousBaseProductSlug?: string;
+  familyIdentity?: { name: string; slug: string };
+  packaging: CosmosSyncPackaging;
+  document: { title: string; kind: string; href: string } | null;
+};
+
+const syncEnrichments = syncDataset.enrichments as unknown as Record<string, CosmosSyncEntry>;
+const syncProducts = syncDataset.products as unknown as (CosmosLacGeneratedRecord & { sync: CosmosSyncEntry })[];
+
+export const cosmosLacSyncMeta = syncDataset.meta;
+
+const syncOf = (record: CosmosLacGeneratedRecord): CosmosSyncEntry | undefined =>
+  syncEnrichments[record.slug] ?? (record as { sync?: CosmosSyncEntry }).sync;
+
+const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts];
 
 const technicalCategoryLabels: Record<string, string> = {
   cleaner: "Čistač",
@@ -134,6 +178,31 @@ function getCosmosProductVisualType(
   return "neutral";
 }
 
+/**
+ * Pakovanje za prikaz kupcu. Bez sync dopune (ili bez njenog zaključka) važi postojeći `volume`.
+ * Lokalni podatak koji se razlikuje od zvaničnog se ne prikazuje uporedo — ostaje u datasetu synca.
+ */
+function customerPackageOf(record: CosmosLacGeneratedRecord): string | null {
+  const packaging = syncOf(record)?.packaging;
+  return packaging ? packaging.customerFacing : record.volume;
+}
+
+/**
+ * Oznaka količine na ambalaži čita `volume`. Kada je potvrđeno pakovanje JEDNA mera koja se razlikuje
+ * od `volume` (Sealer: katalog 400 ml, proizvođač 500 ml), oznaka bi protivrečila redu „Pakovanje" —
+ * zato tada dobija potvrđenu meru. Više mera ili isto pakovanje: ništa se ne menja.
+ */
+function verifiedSizeOf(record: CosmosLacGeneratedRecord): ProductSize | undefined {
+  const customerPackage = customerPackageOf(record);
+  const match = customerPackage?.trim().match(/^(\d+(?:[.,]\d+)?)\s*(ml|l|kg|g)$/i);
+  if (!match || customerPackage === record.volume) return undefined;
+  return {
+    volumeValue: Number.parseFloat(match[1].replace(",", ".")),
+    volumeUnit: match[2].toLowerCase() as ProductSize["volumeUnit"],
+    volumeStatus: "verified",
+  };
+}
+
 function packageOptions(volume: string | null): ProductPackage[] {
   if (!volume) return [{ label: "Na upit", detail: "Pakovanje se potvrđuje kroz upit" }];
   return volume.split("/").map((option) => ({ label: option.trim() }));
@@ -157,7 +226,8 @@ function compactSpecifications(record: CosmosLacGeneratedRecord): ProductSpecifi
   }
   if (record.colorName) specifications.push({ label: "Nijansa", value: record.colorName });
   if (record.finish) specifications.push({ label: "Završnica", value: record.finish });
-  if (record.volume) specifications.push({ label: "Pakovanje", value: record.volume });
+  const customerPackage = customerPackageOf(record);
+  if (customerPackage) specifications.push({ label: "Pakovanje", value: customerPackage });
   return specifications;
 }
 
@@ -181,8 +251,11 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
   ]
     .filter(Boolean)
     .join(", ");
+  const sync = syncOf(record);
+  // Kartica kojoj zapis pripada: sync je menja samo tamo gde je stara kartica mešala različite proizvode.
+  const baseProductSlug = sync?.baseProductSlug ?? record.baseProductSlug;
   const family: ProductFamilyIdentity = {
-    id: record.baseProductSlug,
+    id: baseProductSlug,
     label: `Cosmos Lac ${record.line}`,
     catalogStrategy: "hybrid",
   };
@@ -198,7 +271,8 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
       identity ? ` (${identity})` : ""
     }. ${useCase} Dostupnost i izbor proizvoda potvrđuju se kroz upit.`,
     sku: record.id.toUpperCase(),
-    packages: packageOptions(record.volume),
+    packages: packageOptions(customerPackageOf(record)),
+    ...(verifiedSizeOf(record) ? { size: verifiedSizeOf(record) } : {}),
     purpose: useCase,
     badges: badgesFor(record),
     publicStatus: "Na upit",
@@ -210,14 +284,25 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
     },
     galleryImages: [],
     specifications: compactSpecifications(record),
-    documents: [
-      {
-        title: "Zvanični tehnički podaci",
-        kind: "TDS",
-        status: "disabled",
-        note: "Dokumentaciju i odgovarajuću varijantu potvrđuje tehnička podrška.",
-      },
-    ],
+    // Zvanični dokument pripada PROIZVODU, pa ga dele sve njegove nijanse. SDS proizvođač ne objavljuje.
+    documents: sync?.document
+      ? [
+          {
+            title: sync.document.title,
+            kind: "PDF",
+            href: sync.document.href,
+            status: "available",
+            note: "Zvanični dokument proizvođača (cosmoslac.com), na engleskom.",
+          },
+        ]
+      : [
+          {
+            title: "Zvanični tehnički podaci",
+            kind: "TDS",
+            status: "disabled",
+            note: "Dokumentaciju i odgovarajuću varijantu potvrđuje tehnička podrška.",
+          },
+        ],
     relatedProductSlugs: [],
     family,
     catalogStrategy: family.catalogStrategy,
@@ -231,9 +316,22 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
     },
     seoTitle: record.seoTitle,
     seoDescription: record.seoDescription,
+    // Kupac traži zvaničnu šifru („FO-314”, „RAL 9003”), zvanični naziv ili adresu sa sajta proizvođača.
+    searchTerms: sync
+      ? [
+          ...new Set(
+            [sync.officialName, sync.officialSlug, sync.officialSlug?.replace(/-/g, " "), ...sync.officialCodes].filter(
+              (term): term is string => Boolean(term),
+            ),
+          ),
+        ]
+      : undefined,
     catalogMetadata: {
       id: record.id,
-      baseProductSlug: record.baseProductSlug,
+      baseProductSlug,
+      ...(sync?.familyIdentity ? { familyIdentity: sync.familyIdentity } : {}),
+      // `volume` ostaje podatak kataloga (razmera, ose varijanti, pretraga); kupac vidi potvrđeno pakovanje.
+      ...(sync?.packaging ? { customerPackage: sync.packaging.customerFacing } : {}),
       variantId: record.variantId,
       line: record.line,
       officialName: record.officialName,

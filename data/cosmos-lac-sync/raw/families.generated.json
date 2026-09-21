@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "families": 29
+  },
+  "families": [
+    {
+      "key": "color-lines/chalk-effect",
+      "officialCategory": "Color Lines",
+      "officialName": "CHALK EFFECT",
+      "nameVariants": [
+        "CHALK EFFECT"
+      ],
+      "products": 34
+    },
+    {
+      "key": "color-lines/easy-max",
+      "officialCategory": "Color Lines",
+      "officialName": "EASY MAX",
+      "nameVariants": [
+        "EASY MAX"
+      ],
+      "products": 53
+    },
+    {
+      "key": "color-lines/fast-acrylic",
+      "officialCategory": "Color Lines",
+      "officialName": "FAST ACRYLIC",
+      "nameVariants": [
+        "FAST ACRYLIC"
+      ],
+      "products": 29
+    },
+    {
+      "key": "color-lines/flame",
+      "officialCategory": "Color Lines",
+      "officialName": "FLAME™",
+      "nameVariants": [
+        "FLAME™"
+      ],
+      "products": 2
+    },
+    {
+      "key": "color-lines/ral",
+      "officialCategory": "Color Lines",
+      "officialName": "RAL",
+      "nameVariants": [
+        "RAL"
+      ],
+      "products": 61
+    },
+    {
+      "key": "color-lines/spray-bike",
+      "officialCategory": "Color Lines",
+      "officialName": "SPRAY.BIKE LINE",
+      "nameVariants": [
+        "SPRAY.BIKE LINE"
+      ],
+      "products": 78
+    },
+    {
+      "key": "flame/flame-blue",
+      "officialCategory": "Color Lines",
+      "officialName": "FLAME™",
+      "nameVariants": [
+        "FLAME™"
+      ],
+      "products": 120
+    },
+    {
+      "key": "flame/flame-orange",
+      "officialCategory": "Color Lines",
+      "officialName": "FLAME™",
+      "nameVariants": [
+        "FLAME™"
+      ],
+      "products": 135
+    },
+    {
+      "key": "other-products/acrylic-paints",
+      "officialCategory": "Other Products",
+      "officialName": "ACRYLIC PAINTS",
+      "nameVariants": [
+        "ACRYLIC PAINTS"
+      ],
+      "products": 1
+    },
+    {
+      "key": "other-products/plastic-paints",
+      "officialCategory": "Other Products",
+      "officialName": "PLASTIC PAINTS",
+      "nameVariants": [
+        "PLASTIC PAINTS"
+      ],
+      "products": 1
+    },
+    {
+      "key": "other-products/putties",
+      "officialCategory": "Other Products",
+      "officialName": "PUTTIES",
+      "nameVariants": [
+        "PUTTIES"
+      ],
+      "products": 5
+    },
+    {
+      "key": "other-products/sportpens",
+      "officialCategory": "Other Products",
+      "officialName": "SPORTPENS",
+      "nameVariants": [
+        "SPORTPENS"
+      ],
+      "products": 10
+    },
+    {
+      "key": "other-products/wood-glue",
+      "officialCategory": "Other Products",
+      "officialName": "WOOD GLUE",
+      "nameVariants": [
+        "WOOD GLUE"
+      ],
+      "products": 3
+    },
+    {
+      "key": "other-products/wood-putties",
+      "officialCategory": "Other Products",
+      "officialName": "WOOD PUTTIES",
+      "nameVariants": [
+        "WOOD PUTTIES"
+      ],
+      "products": 18
+    },
+    {
+      "key": "other-products/wood-varnish-w",
+      "officialCategory": "Other Products",
+      "officialName": "W",
+      "nameVariants": [
+        "W"
+      ],
+      "products": 8
+    },
+    {
+      "key": "special-use/automotive",
+      "officialCategory": "Special Use",
+      "officialName": "AUTOMOTIVE",
+      "nameVariants": [
+        "AUTOMOTIVE"
+      ],
+      "products": 15
+    },
+    {
+      "key": "special-use/cleaners",
+      "officialCategory": "Special Use",
+      "officialName": "CLEANERS",
+      "nameVariants": [
+        "CLEANERS"
+      ],
+      "products": 5
+    },
+    {
+      "key": "special-use/effect",
+      "officialCategory": "Special Use",
+      "officialName": "EFFECT",
+      "nameVariants": [
+        "EFFECT"
+      ],
+      "products": 4
+    },
+    {
+      "key": "special-use/fluo-marking",
+      "officialCategory": "Special Use",
+      "officialName": "FLUORESCENT & MARKING",
+      "nameVariants": [
+        "FLUORESCENT & MARKING"
+      ],
+      "products": 11
+    },
+    {
+      "key": "special-use/high-heat",
+      "officialCategory": "Special Use",
+      "officialName": "HIGH HEAT",
+      "nameVariants": [
+        "HIGH HEAT"
+      ],
+      "products": 8
+    },
+    {
+      "key": "special-use/home",
+      "officialCategory": "Special Use",
+      "officialName": "HOME",
+      "nameVariants": [
+        "HOME"
+      ],
+      "products": 5
+    },
+    {
+      "key": "special-use/lubricants",
+      "officialCategory": "Special Use",
+      "officialName": "LUBRICANTS",
+      "nameVariants": [
+        "LUBRICANTS"
+      ],
+      "products": 14
+    },
+    {
+      "key": "special-use/master-mechanic",
+      "officialCategory": "Special Use",
+      "officialName": "MASTER MECHANIC",
+      "nameVariants": [
+        "MASTER MECHANIC"
+      ],
+      "products": 26
+    },
+    {
+      "key": "special-use/metallic",
+      "officialCategory": "Special Use",
+      "officialName": "METALLIC",
+      "nameVariants": [
+        "METALLIC"
+      ],
+      "products": 4
+    },
+    {
+      "key": "special-use/primer",
+      "officialCategory": "Special Use",
+      "officialName": "PRIMER",
+      "nameVariants": [
+        "PRIMER"
+      ],
+      "products": 9
+    },
+    {
+      "key": "special-use/sealer",
+      "officialCategory": "Special Use",
+      "officialName": "SEALER",
+      "nameVariants": [
+        "SEALER"
+      ],
+      "products": 4
+    },
+    {
+      "key": "special-use/varnish",
+      "officialCategory": "Special Use",
+      "officialName": "VARNISH",
+      "nameVariants": [
+        "VARNISH"
+      ],
+      "products": 10
+    },
+    {
+      "key": "special-use/wheel-rim",
+      "officialCategory": "Special Use",
+      "officialName": "WHEEL RIM",
+      "nameVariants": [
+        "WHEEL RIM"
+      ],
+      "products": 4
+    },
+    {
+      "key": "special-use/zinc",
+      "officialCategory": "Special Use",
+      "officialName": "ZINC",
+      "nameVariants": [
+        "ZINC"
+      ],
+      "products": 2
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "_comment": [
+    "Izmereno iz izvornog modela i ODOBRENO (korisnik, 2026-09-21): A = zvanični proizvodi u opsegu, C = identiteti nijansi/varijanti u opsegu.",
+    "Brojevi nisu upisani rukom — `plan.mjs --write-lock` ih piše iz merenja. Svaka kasnija razlika obara plan (SCOPE_DRIFT_WITHOUT_SOURCE_CHANGE / SCOPE_CHANGED_WITH_SOURCE)."
+  ],
+  "approvedOn": "2026-09-21",
+  "sourceFingerprint": "17ce9f924e84102492b49f2a0878348cac5111b0026c8a69e65caf6d97782952",
+  "measured": {
+    "A_APPROVED_CURRENT_OFFICIAL_PRODUCTS": 103,
+    "C_APPROVED_CURRENT_OFFICIAL_SHADE_VARIANT_IDENTITIES": 673,
+    "C_breakdown": {
+      "englishPagesInScope": 662,
+      "otherLocaleIdentities": 11
+    },
+    "officialProductsTotal": 108,
+    "officialPagesTotal": 679,
+    "currentOutOfScopeProducts": 5,
+    "currentOutOfScopePages": 17,
+    "legacyLocalOnly": 79,
+    "legacyMolotow": 73
+  }
+}

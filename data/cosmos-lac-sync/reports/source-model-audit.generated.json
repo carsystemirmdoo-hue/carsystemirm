@@ -1,0 +1,806 @@
+{
+  "numbers": {
+    "CURRENT_PRODUCT_FAMILIES": 29,
+    "CURRENT_OFFICIAL_PRODUCTS_BY_DOCUMENT": 108,
+    "CURRENT_OFFICIAL_ARTICLE_NUMBERS": 648,
+    "CURRENT_SHADE_PAGES_WITHOUT_ANY_OFFICIAL_CODE": 31,
+    "OFFICIAL_EAN_OR_ARTICLE_NUMBERS_PUBLISHED": 0,
+    "CURRENT_VARIANTS_SHADES": 679,
+    "CURRENT_VARIANTS_SHADES_OTHER_LOCALES_ONLY": 11,
+    "EXISTING_LOCAL_RECORDS": 742,
+    "EXISTING_VISIBLE_CARDS": 68,
+    "EXACT_MATCH": 650,
+    "HIGH_CONFIDENCE": 12,
+    "PROBABLE": 0,
+    "LEGACY_LOCAL_ONLY": 79,
+    "LEGACY_LOCAL_ONLY_MOLOTOW": 73,
+    "DUPLICATES": 0,
+    "UNKNOWN": 1,
+    "OFFICIAL_SHADE_PAGES_WITHOUT_LOCAL_RECORD": 29,
+    "OFFICIAL_PRODUCTS_WITHOUT_LOCAL_CARD": 9,
+    "EXPECTED_VISIBLE_CARDS_AFTER": 91,
+    "EXPECTED_VISIBLE_CARDS_AFTER_BY_MODEL": {
+      "KEEP_CURRENT_GROUPING": 77,
+      "HYBRID_RECOMMENDED": 91,
+      "OFFICIAL_PRODUCT_EQUALS_CARD": 110
+    },
+    "EXPECTED_VARIANT_ROWS": 691,
+    "EXPECTED_VARIANT_ROWS_IF_LEGACY_KEPT": 771,
+    "OFFICIAL_SOURCE_IMAGES": 678,
+    "LOCAL_LEGITIMATE_IMAGES": 742,
+    "LOCAL_IMAGES_WITH_BRAND_KIT_PROVENANCE": 742,
+    "LOCAL_PIXEL_IDENTICAL_IMAGE_GROUPS": 5,
+    "NEW_SHADES_WITH_BRAND_KIT_ASSET": 15,
+    "MISSING_IMAGES": 14,
+    "OFFICIAL_DOCUMENTS": 103,
+    "OFFICIAL_DOCUMENTS_OK": 102,
+    "OFFICIAL_DOCUMENTS_BROKEN": 1,
+    "DOCUMENT_COVERAGE_MATCHED_RECORDS": "650/651",
+    "DOCUMENT_COVERAGE_CARDS": "66/68",
+    "LOCAL_DOCUMENTS_TODAY": 1,
+    "PACK_CONFLICTS": 65,
+    "PACK_NOT_STATED_ON_OFFICIAL_PAGE": 33
+  },
+  "models": {
+    "KEEP_CURRENT_GROUPING": {
+      "cards": 77,
+      "note": "68 postojećih + zvanični proizvodi koje danas nemamo"
+    },
+    "HYBRID_RECOMMENDED": {
+      "cards": 91,
+      "note": "linije boja ostaju jedna kartica; kartica koja meša RAZLIČITE proizvode (različit zvanični dokument) se deli"
+    },
+    "OFFICIAL_PRODUCT_EQUALS_CARD": {
+      "cards": 110,
+      "note": "svaki zvanični dokument = kartica (i unutar linija boja)"
+    }
+  },
+  "cardsMixingDifferentProducts": [
+    {
+      "card": "cosmos-lac-lubricants-grease",
+      "records": 4,
+      "officialProducts": [
+        "lithium-grease",
+        "chain-grease",
+        "lithium-grease-ptfe",
+        "copper-grease"
+      ]
+    },
+    {
+      "card": "cosmos-lac-lubricants-oil",
+      "records": 6,
+      "officialProducts": [
+        "silicone-oil",
+        "penetrating-oil",
+        "penetrating-ptfe",
+        "dry-ptfe",
+        "cut-drill-oil",
+        "rust-shock-freeze-penetrating-oil"
+      ]
+    },
+    {
+      "card": "cosmos-lac-putties-filler",
+      "records": 3,
+      "officialProducts": [
+        "metal-polyester-putty",
+        "marble-filler",
+        "fiber-glass-putty"
+      ]
+    },
+    {
+      "card": "cosmos-lac-varnishes-varnish",
+      "records": 5,
+      "officialProducts": [
+        "metal-varnish",
+        "tinted-wood-varnish"
+      ]
+    },
+    {
+      "card": "cosmos-lac-w-wood-care-varnish",
+      "records": 8,
+      "officialProducts": [
+        "w-container",
+        "w-varnish"
+      ]
+    },
+    {
+      "card": "cosmos-lac-wheel-rim-wheel-rim",
+      "records": 4,
+      "officialProducts": [
+        "wheel-rim-deluxe",
+        "wheel-rim"
+      ]
+    },
+    {
+      "card": "cosmos-lac-zinc-zinc",
+      "records": 2,
+      "officialProducts": [
+        "zinc-maximum",
+        "alu-zinc"
+      ]
+    }
+  ],
+  "colourLineCardsWithSubRanges": [
+    {
+      "card": "cosmos-lac-chalk-effect-chalk-effect",
+      "records": 34,
+      "officialProducts": [
+        "chalk-effect",
+        "chalk-effect-varnish"
+      ]
+    },
+    {
+      "card": "cosmos-lac-easy-max-easy-max",
+      "records": 52,
+      "officialProducts": [
+        "easy-max",
+        "easy-max-metallics",
+        "easy-max-glitter",
+        "easy-max-marble-effect",
+        "easy-max-granite-effect",
+        "easy-max-sand-effect"
+      ]
+    },
+    {
+      "card": "cosmos-lac-fast-acrylic-fast-acrylic",
+      "records": 29,
+      "officialProducts": [
+        "fast-acrylic",
+        "fast-acrylic-metallics"
+      ]
+    },
+    {
+      "card": "cosmos-lac-flame-blue-flame-blue",
+      "records": 120,
+      "officialProducts": [
+        "flame-blue",
+        "flame-blue-metallics"
+      ]
+    },
+    {
+      "card": "cosmos-lac-flame-booster-flame-booster",
+      "records": 2,
+      "officialProducts": [
+        "flame-booster",
+        "flame-booster-metallic"
+      ]
+    },
+    {
+      "card": "cosmos-lac-flame-orange-flame-orange",
+      "records": 134,
+      "officialProducts": [
+        "flame-orange",
+        "flame-orange-metallics"
+      ]
+    },
+    {
+      "card": "cosmos-lac-ral-ral",
+      "records": 60,
+      "officialProducts": [
+        "ral-metallics",
+        "ral"
+      ]
+    },
+    {
+      "card": "cosmos-lac-spray-bike-spray-bike",
+      "records": 88,
+      "officialProducts": [
+        "spray-bike",
+        "spray-bike-frame-builder-s-400-transparent-finish-gloss",
+        "spray-bike-frame-builder-s-401-transparent-finish-matte",
+        "spray-bike-frame-builder-s-410-frame-builder’s-putty",
+        "spray-bike-frame-builder-s-420-carbon-primer",
+        "spray-bike-frame-builder-s-430-metal-primer",
+        "spray-bike-frame-builder-s-440-cold-zinc",
+        "spray-bike-frame-builder-s-450-top-wax",
+        "spray-bike-frame-builder-s-metal-plating",
+        "spray-bike-keirin"
+      ]
+    }
+  ],
+  "officialProductsWithoutLocalCard": [
+    {
+      "productKey": "name:acryl-fresh",
+      "shades": 1,
+      "family": "acrylic-paints",
+      "names": [
+        "Acryl Fresh"
+      ]
+    },
+    {
+      "productKey": "name:plastic-paint-fresh",
+      "shades": 1,
+      "family": "plastic-paints",
+      "names": [
+        "Plastic Paint Fresh"
+      ]
+    },
+    {
+      "productKey": "name:sportpens-standard",
+      "shades": 10,
+      "family": "sportpens",
+      "names": [
+        "SportPens Standard – Black 2mm",
+        "SportPens Standard – Blue 2mm",
+        "SportPens Standard – Green 2mm"
+      ]
+    },
+    {
+      "productKey": "name:wood-glue-crystalise",
+      "shades": 3,
+      "family": "wood-glue",
+      "names": [
+        "Wood Glue Crystalise – 175Gr",
+        "Wood Glue Crystalise – 1Kg",
+        "Wood Glue Crystalise – 750Gr"
+      ]
+    },
+    {
+      "productKey": "name:chrome-effect",
+      "shades": 1,
+      "family": "effect",
+      "names": [
+        "Chrome Effect – 450 Container"
+      ]
+    },
+    {
+      "productKey": "effect-container",
+      "shades": 1,
+      "family": "effect",
+      "names": [
+        "Gold Effect – 451 Container"
+      ]
+    },
+    {
+      "productKey": "high-heat-container",
+      "shades": 3,
+      "family": "high-heat",
+      "names": [
+        "High Heat 350 – Silver Container",
+        "High Heat 351 – Black Container",
+        "High Heat 353 – Maroon Container"
+      ]
+    },
+    {
+      "productKey": "acrylic-varnish",
+      "shades": 3,
+      "family": "varnish",
+      "names": [
+        "Acrylic Varnish 376 – Gloss",
+        "Acrylic Varnish 377 – Matt",
+        "Acrylic Varnish 378 – Satin"
+      ]
+    },
+    {
+      "productKey": "wood-varnish",
+      "shades": 2,
+      "family": "varnish",
+      "names": [
+        "Wood Varnish 374 – Gloss",
+        "Wood Varnish 375 – Satin"
+      ]
+    }
+  ],
+  "regionSpecific": [
+    {
+      "slug": "cosmos-lac-automotive-250-400-ml-antichip-250-white",
+      "name": "Cosmos Lac Automotive Antichip 250 White",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-automotive-252-400-ml-antichip-252-grey",
+      "name": "Cosmos Lac Automotive Antichip 252 Grey",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-105-400-ml-spray-bike-london-collection-105-sands-end",
+      "name": "Cosmos Lac Spray.Bike 105 Sands End",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-107-400-ml-spray-bike-london-collection-107-royal-oak",
+      "name": "Cosmos Lac Spray.Bike 107 Royal Oak",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-116-400-ml-spray-bike-london-collection-116-salmon-lane",
+      "name": "Cosmos Lac Spray.Bike 116 Salmon Lane",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-117-400-ml-spray-bike-london-collection-117-strawberry-hill",
+      "name": "Cosmos Lac Spray.Bike 117 Strawberry Hill",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-119-400-ml-spray-bike-london-collection-119-brick-lane",
+      "name": "Cosmos Lac Spray.Bike 119 Brick Lane",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-121-400-ml-spray-bike-london-collection-121-clay-hill",
+      "name": "Cosmos Lac Spray.Bike 121 Clay Hill",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-123-400-ml-spray-bike-london-collection-123-gray-s-inn",
+      "name": "Cosmos Lac Spray.Bike 123 Gray’s Inn",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-225-400-ml-spray-bike-vintage-collection-225-eagle",
+      "name": "Cosmos Lac Spray.Bike 225 Eagle",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-252-400-ml-spray-bike-pop-collection-252-calypso",
+      "name": "Cosmos Lac Spray.Bike 252 Calypso",
+      "locales": [
+        "bg",
+        "de",
+        "da",
+        "fi",
+        "sv",
+        "hu"
+      ]
+    }
+  ],
+  "legacyNotMolotow": [
+    {
+      "slug": "cosmos-lac-automotive-712-400-ml-backlight-712-red",
+      "name": "Cosmos Lac Automotive Backlight Paint 712 Red"
+    },
+    {
+      "slug": "cosmos-lac-fluorescent-marking-574-forest-trail-marking-574-blue",
+      "name": "Cosmos Lac Fluorescent & Marking Forest & Trail Marking 574 Blue"
+    },
+    {
+      "slug": "cosmos-lac-fluorescent-marking-575-forest-trail-marking-575-white",
+      "name": "Cosmos Lac Fluorescent & Marking Forest & Trail Marking 575 White"
+    },
+    {
+      "slug": "cosmos-lac-home-403-400-ml-radiator-lacquer-403-silver",
+      "name": "Cosmos Lac Home Radiator Lacquer 403 Silver"
+    },
+    {
+      "slug": "cosmos-lac-metallic-334-400-ml-metallic-effect-334-green",
+      "name": "Cosmos Lac Metallic Metallic Effect 334 Green"
+    },
+    {
+      "slug": "cosmos-lac-spray-bike-231-400-ml-spray-bike-vintage-collection-231-rudge",
+      "name": "Cosmos Lac Spray.Bike 231 Rudge"
+    }
+  ],
+  "unknown": [
+    {
+      "slug": "cosmos-lac-ral-cl-426-ral-9003-sjaj-400-ml-500-ml-ral-9003-signal-white",
+      "name": "Cosmos Lac RAL CL 426 RAL 9003 Signal White — sjaj",
+      "candidates": [
+        "ral-9003-matt-signal-white",
+        "ral-9003-signal-white"
+      ]
+    }
+  ],
+  "packConflicts": [
+    {
+      "name": "Cosmos Lac Cleaners Sticker & Glue Remover 718",
+      "local": "400 ml",
+      "official": "200ml"
+    },
+    {
+      "name": "Cosmos Lac Flame Orange FO-305 Coral Red",
+      "local": "400 ml",
+      "official": "400ml, 600ml"
+    },
+    {
+      "name": "Cosmos Lac Flame Orange FO-901 Thick Black",
+      "local": "400 ml",
+      "official": "400ml, 500ml, 600ml"
+    },
+    {
+      "name": "Cosmos Lac Flame Orange FO-902 Ultra Chrome",
+      "local": "400 ml",
+      "official": "400ml, 600ml"
+    },
+    {
+      "name": "Cosmos Lac Lubricants Oil 208 Penetrating Oil Anti Corrosion 208",
+      "local": "400 ml",
+      "official": "200ml, 400ml"
+    },
+    {
+      "name": "Cosmos Lac Lubricants Leak Detector 748",
+      "local": "400 ml",
+      "official": "500ml"
+    },
+    {
+      "name": "Cosmos Lac Putties Fiberglass Premium Thixotropic Resin 1 kg",
+      "local": "1 kg",
+      "official": "1kg, 5kg"
+    },
+    {
+      "name": "Cosmos Lac Putties Fiberglass Premium Thixotropic Resin 5 kg",
+      "local": "5 kg",
+      "official": "1kg, 5kg"
+    },
+    {
+      "name": "Cosmos Lac RAL Brass R310 400 ml / 500 ml",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL Copper R309 400 ml / 500 ml",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL Gold R308 400 ml / 500 ml",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL Silver R307 400 ml / 500 ml",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 301 RAL 9010 White — mat",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 301 RAL 9010 White — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 302 RAL 1014 Ivory — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 304 RAL 9005 Black — polusjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 305 RAL 7011 Iron Grey — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 306 RAL 7042 Traffic Grey A — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 311 RAL 3003 Ruby Red — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 312 RAL 3020 Traffic Red — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 313 RAL 1018 Zinc Yellow — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 314 RAL 6005 Moss Green — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 315 RAL 8011 Nut Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 316 RAL 5010 Gentian Blue — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 317 RAL 5012 Light Blue — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 318 RAL 8017 Chocolate Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 319 RAL 7035 Light Grey — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 320 RAL 1028 Melon Yellow — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 321 RAL 1007 Daffodil Yellow — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 322 RAL 7016 Anthracite Grey — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 324 RAL 8003 Clay Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 325 RAL 3009 Oxide Red — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 329 RAL 2003 Pastel Orange — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 330 RAL 3000 Flame Red — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 331 RAL 2010 Signal Orange — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 341 RAL 5017 Traffic Blue — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 347 RAL 1015 Light Ivory — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 411 RAL 7001 Silver Grey — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 412 RAL 9002 Grey White — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 413 RAL 5013 Cobalt Blue — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 414 RAL 8004 Copper Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 415 RAL 1013 Oyster White — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 416 RAL 8016 Mahogany Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 417 RAL 5002 Ultramarine Blue — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 418 RAL 5018 Turquoise Blue — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 419 RAL 8019 Grey Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 420 RAL 7021 Black Grey — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 425 RAL 9001 Cream — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 427 RAL 9007 Grey Aluminium — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 428 RAL 6028 Pine Green — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 453 RAL 1023 Traffic Yellow — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 455 RAL 6009 Fir Green — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 460 RAL 6002 Leaf Green — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 462 RAL 6001 Emerald Green — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 463 RAL 6018 Yellow Green — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 464 RAL 3004 Purple Red — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 465 RAL 3015 Light Pink — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 466 RAL 8000 Green Brown — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 468 RAL 4003 Heather Violet — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac RAL CL 469 RAL 4005 Blue Lilac — sjaj",
+      "local": "400 ml / 500 ml",
+      "official": "400ml"
+    },
+    {
+      "name": "Cosmos Lac Sealer 260 Black",
+      "local": "400 ml",
+      "official": "500ml"
+    },
+    {
+      "name": "Cosmos Lac Sealer 261 Grey",
+      "local": "400 ml",
+      "official": "500ml"
+    },
+    {
+      "name": "Cosmos Lac Sealer 262 White",
+      "local": "400 ml",
+      "official": "500ml"
+    },
+    {
+      "name": "Cosmos Lac Sealer 263 Brick Red",
+      "local": "400 ml",
+      "official": "500ml"
+    },
+    {
+      "name": "Cosmos Lac Wheel Rim 229 Deluxe Silver — mat",
+      "local": "400 ml",
+      "official": "500ml"
+    }
+  ],
+  "sourceConflicts": {
+    "nameSlugConflicts": [
+      {
+        "url": "https://cosmoslac.com/products/color-lines/fast-acrylic/fast-acrylic-ral-8017-chocolate-brown/",
+        "officialName": "Fast Acrylic Ral 8011 – Nut Brown"
+      },
+      {
+        "url": "https://cosmoslac.com/products/color-lines/ral/ral-9003-signal-white/",
+        "officialName": "Ral 9002 – Grey White"
+      }
+    ],
+    "brokenDocuments": [
+      "https://cosmoslac.com/pdfs/products/en/Penetrating-Oil-V01_tds.pdf"
+    ]
+  },
+  "localeTotals": {
+    "en": 679,
+    "el": 679,
+    "bg": 690,
+    "de": 690,
+    "da": 690,
+    "fi": 690,
+    "sv": 690,
+    "hu": 690
+  }
+}

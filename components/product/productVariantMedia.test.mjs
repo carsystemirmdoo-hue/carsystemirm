@@ -72,6 +72,35 @@ test("PDP i pogled varijante dele JEDAN izvor dokumenata", async () => {
   assert.match(accordion, /variant\?\.activeVariant\.documents \?\? serverDocuments/);
 });
 
+test("tehnički podaci i pakovanje prate AKTIVNU varijantu, iz jednog izvora", async () => {
+  const { readFileSync: read } = await import("node:fs");
+  const view = read(new URL("./productVariantView.ts", import.meta.url), "utf8");
+  const page = read(new URL("./ProductDetailPage.tsx", import.meta.url), "utf8");
+  const accordion = read(new URL("./ProductInformationAccordion.tsx", import.meta.url), "utf8");
+  const data = read(new URL("../../lib/carsystem-data.ts", import.meta.url), "utf8");
+  // Tabela „Tehnički podaci" se ranije računala jednom, iz predstavnika porodice.
+  assert.match(view, /technicalFacts: getProductTechnicalFacts\(product\)/);
+  assert.match(page, /return getProductTechnicalFacts\(product\)/);
+  assert.match(accordion, /variant\?\.activeVariant\.technicalFacts \?\? serverTechnicalFacts/);
+  // „Pakovanje" aktivne varijante ima JEDNO mesto odluke na oba mesta gde ga PDP ispisuje.
+  assert.match(view, /volume: getProductPackageLabel\(product\) \?\? null/);
+  assert.match(data, /package: getProductPackageLabel\(item\)/);
+});
+
+test("stvarni katalog: bez `customerPackage` pakovanje je ISTO kao pre — nijedan drugi brend se ne menja", async () => {
+  const { loadCatalogRuntime } = await import("../../scripts/lib/catalog-runtime.mjs");
+  const runtime = loadCatalogRuntime();
+  const { getProductPackageLabel } = runtime.requireModule("lib/carsystem-data.ts");
+  const withOverride = new Set();
+  for (const product of runtime.products) {
+    const before = product.catalogMetadata?.volume ?? product.packages[0]?.label;
+    if (product.catalogMetadata?.customerPackage === undefined) assert.equal(getProductPackageLabel(product), before, product.slug);
+    else withOverride.add(product.brandSlug);
+  }
+  // Polje danas postavlja samo Cosmos Lac sync.
+  assert.deepEqual([...withOverride], ["cosmos-lac"]);
+});
+
 test("stvarni katalog: nijedna varijanta ne nosi dokument drugog pakovanja", () => {
   const runtime = loadCatalogRuntime();
   const { toProductVariantViews } = runtime.requireModule("components/product/productVariantView.ts");

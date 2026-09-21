@@ -181,6 +181,14 @@ export type ProductCatalogMetadata = {
    * postojeću adresu porodice, da preimenovanje ne pomeri URL.
    */
   familyIdentity?: { name: string; slug: string };
+  /**
+   * Pakovanje za PRIKAZ KUPCU, kada se razlikuje od `volume`.
+   *
+   * `volume` je podatak kakav je ušao u katalog i na njega se oslanjaju razmera ambalaže, ose
+   * varijanti i pretraga, pa se ne prepisuje. Kada sync potvrdi aktuelno pakovanje proizvođača, ono
+   * ide ovde i samo ono se prikazuje kao „Pakovanje". `undefined` = prikaz ostaje `volume`, kao do sada.
+   */
+  customerPackage?: string | null;
 };
 
 export const rmSystemSlugs = [
@@ -2588,6 +2596,20 @@ export function getAllPublicProgramGroups() {
   return [...publicProgramGroups];
 }
 
+/**
+ * Pakovanje koje se prikazuje kupcu za JEDAN proizvod/varijantu.
+ *
+ * Jedino mesto odluke za oba mesta na kojima PDP ispisuje „Pakovanje" aktivne varijante. Bez
+ * `customerPackage` vraća tačno ono što je vraćalo i ranije, pa se nijedan drugi brend ne menja.
+ */
+export function getProductPackageLabel(product: CarsystemProduct): string | undefined {
+  return (
+    product.catalogMetadata?.customerPackage ??
+    product.catalogMetadata?.volume ??
+    product.packages[0]?.label
+  );
+}
+
 export function getCarsystemProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
 }
@@ -2785,7 +2807,7 @@ function getFamilyVariantSelector(
             item.name),
       optionValueIds: { [groupId]: item.variantId ?? item.slug },
       sku: item.catalogMetadata?.cosmosCode ?? item.sku,
-      package: item.catalogMetadata?.volume ?? item.packages[0]?.label,
+      package: getProductPackageLabel(item),
       status: getProductPublicStatus(item),
       slug: item.slug,
       image: item.productImage?.src,

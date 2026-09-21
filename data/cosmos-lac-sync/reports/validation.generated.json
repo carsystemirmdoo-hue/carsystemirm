@@ -1,0 +1,41 @@
+{
+  "measured": {
+    "A_APPROVED_CURRENT_OFFICIAL_PRODUCTS": 103,
+    "C_APPROVED_CURRENT_OFFICIAL_SHADE_VARIANT_IDENTITIES": 673,
+    "C_breakdown": {
+      "englishPagesInScope": 662,
+      "otherLocaleIdentities": 11
+    },
+    "officialProductsTotal": 108,
+    "officialPagesTotal": 679,
+    "currentOutOfScopeProducts": 5,
+    "currentOutOfScopePages": 17,
+    "legacyLocalOnly": 79,
+    "legacyMolotow": 73
+  },
+  "existingRecords": 742,
+  "newRecords": 11,
+  "status": {
+    "CURRENT": 663,
+    "CURRENT_REGION_SPECIFIC": 11,
+    "LEGACY_LOCAL_ONLY": 79
+  },
+  "packaging": {
+    "OFFICIAL_CURRENT": 629,
+    "LOCAL_EXISTING": 121,
+    "SOURCE_UNSPECIFIED": 3,
+    "customerFacingDiffersFromPreviousLocalDisplay": 105,
+    "localDivergesKeptInProvenance": 64
+  },
+  "documents": {
+    "recordsWithDocument": 661,
+    "recordsWithBrokenSourceDocument": 1
+  },
+  "images": {
+    "localBrandKitImagesUntouched": 742,
+    "importedImages": 0,
+    "placeholderRecords": 11
+  },
+  "redirects": 34,
+  "errors": []
+}

@@ -3,6 +3,7 @@ import "server-only";
 import type { CSSProperties } from "react";
 import { canonicalVariantKey } from "@/lib/catalog/variant-key";
 import { getProductDocuments } from "@/components/product/productDocumentList";
+import { getProductTechnicalFacts } from "@/components/product/productTechnicalFactList";
 import {
   getProductStageImages,
   type ProductStageImage,
@@ -14,6 +15,7 @@ import {
   shouldRenderProductHeroSpray,
 } from "@/components/product/productMotion";
 import {
+  getProductPackageLabel,
   getProductPublicStatus,
   type CarsystemProduct,
 } from "@/lib/carsystem-data";
@@ -32,7 +34,11 @@ import {
   getPuttyMaterialTrace,
   type PuttyMaterialTraceConfig,
 } from "@/lib/putty-material-trace";
-import type { ProductCommercialVariant, ProductDetailDocument } from "@/types/product-detail";
+import type {
+  ProductCommercialVariant,
+  ProductDetailDocument,
+  ProductTechnicalFact,
+} from "@/types/product-detail";
 
 /**
  * Sve što potrošači PDP-a prikazuju za JEDNU varijantu, razrešeno na serveru.
@@ -77,6 +83,11 @@ export type ProductVariantView = {
    * izabrao, pa se izborom pakovanja nije menjao.
    */
   documents: ProductDetailDocument[];
+  /**
+   * Tehnički podaci OVE varijante — isti razlog kao `documents`: tabela se ranije računala jednom,
+   * iz predstavnika porodice, pa „Pakovanje", „Nijansa" i šifra nisu pratili izbor nijanse.
+   */
+  technicalFacts: ProductTechnicalFact[];
   /** Boja pozadine/grafita i akcenti — kao CSS custom properties. */
   style: CSSProperties;
   treatment: string;
@@ -144,7 +155,7 @@ export function toProductVariantView(
     ralLabel: resolveRalLabel(product),
     shortDescription: product.shortDescription,
     status: getProductPublicStatus(product),
-    volume: product.catalogMetadata?.volume ?? product.packages[0]?.label ?? null,
+    volume: getProductPackageLabel(product) ?? null,
     brandSlug: product.brandSlug,
     familySlug,
     // Dostupnost ne postoji u katalogu; `inventoryKey` je mesto na koje se
@@ -153,6 +164,7 @@ export function toProductVariantView(
 
     images: getProductStageImages(product),
     documents: getProductDocuments(product),
+    technicalFacts: getProductTechnicalFacts(product),
     style: getProductVisualStyle(product),
     treatment: preset.treatment,
     productType: preset.productType,

@@ -70,8 +70,8 @@ function runCheck(brand, env = {}) {
 
 const filesChangedOf = (stdout) => JSON.parse(/"filesChanged":\s*(\[[^\]]*\])/.exec(stdout)?.[1] ?? "null");
 
-test("otkriveni su svi brand sync-evi (carsystem, carfit, befar i svaki budući)", () => {
-  for (const brand of ["carsystem", "carfit", "befar"]) assert.ok(brands.includes(brand), `nedostaje ${brand}:sync:check`);
+test("otkriveno je svih osam brand sync-eva (i svaki budući ulazi sam)", () => {
+  for (const brand of ["carsystem", "carfit", "befar", "rm", "baslac", "norbin", "sata", "cosmos-lac"]) assert.ok(brands.includes(brand), `nedostaje ${brand}:sync:check`);
 });
 
 for (const brand of brands) {

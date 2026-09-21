@@ -190,7 +190,16 @@ liniju, tehničku kategoriju i završnicu, uz postojeću paginaciju od 48 kartic
 
 ## Ponovno generisanje i provera
 
-Kompletan tok:
+> **Provera iz čistog checkout-a:** `npm run cosmos:validate` ne traži Brand Kit — proverava dataset, 742 objavljene
+> slike (dimenzije, alpha, SHA) i dopunu synca (`npm run cosmos-lac:sync:validate`). SHA IZVORNIH fajlova se proverava
+> samo kada `tmp/cosmos-lac-assets/` postoji.
+>
+> **Regeneracija** (`cosmos:colors`, `cosmos:build`, `cosmos:update`) po prirodi traži raspakovan zvanični Brand Kit u
+> `tmp/cosmos-lac-assets/`; `cosmos:update` zato pokreće validator u strogom režimu (`--require-source-assets`) i na
+> kraju proverava da je sync i dalje čist (`cosmos-lac:sync:check`). Dopunu sa zvaničnog sajta opisuje
+> `docs/COSMOS_LAC_CATALOG_SYNC.md`.
+
+Kompletan tok (uz Brand Kit):
 
 ```bash
 npm run cosmos:update

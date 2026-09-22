@@ -6,7 +6,7 @@ Poslednji korak lanca `npm run catalog:image-supply:generate`. Kopira bajt-za-ba
 direktorijuma; jedino se izveštaju dopisuje zaglavlje, a handoffu statusni blok. Nijedan broj se
 ne upisuje ručno — svi se mere iz fajlova koji su upravo napravljeni.
 """
-import csv, hashlib, os, shutil, subprocess
+import csv, hashlib, os, shutil
 HERE = os.environ.get("IMAGE_AUDIT_WORK") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", ".cache", "image-audit")
 HERE = os.path.abspath(HERE)
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
@@ -16,11 +16,6 @@ sha = lambda name: hashlib.sha256(open(os.path.join(HERE, name), "rb").read()).h
 # Broj redova inventara se MERI, ne upisuje: izveštaj ne sme da tvrdi zastarelu veličinu.
 with open(os.path.join(HERE, "IMAGE_IDENTITY_INVENTORY.csv"), newline="", encoding="utf-8") as fh:
     inventory_rows = sum(1 for _ in csv.reader(fh)) - 1
-# Osnova nad kojom je mereno: poslednji zajednički commit sa `origin/main`, isti koji upisuje lock.
-try:
-    base_sha = "main` = `" + subprocess.run(["git", "merge-base", "HEAD", "origin/main"], cwd=REPO, capture_output=True, text=True, check=True).stdout.strip()
-except Exception:
-    base_sha = "radno stablo` (bez git konteksta`"
 for source, target in [("MISSING_PRODUCT_IMAGES.csv", "MISSING_PRODUCT_IMAGES.csv"), ("USER_IMAGE_SUPPLY_QUEUE_FINAL.csv", "USER_IMAGE_SUPPLY_QUEUE.csv"), ("IMAGE_RIGHTS_REVIEW.csv", "IMAGE_RIGHTS_REVIEW.csv"), ("OWNER_SUPPLY_BATCH_01_CANDIDATES.csv", "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv")]:
     shutil.copyfile(os.path.join(HERE, source), os.path.join(DATA, target))
 shutil.copyfile(os.path.join(HERE, "USER_IMAGE_SUPPLY_GUIDE.md"), os.path.join(DOCS, "USER_IMAGE_SUPPLY_GUIDE.md"))
@@ -28,7 +23,8 @@ report = open(os.path.join(HERE, "FINAL_IMAGE_AUDIT.md"), encoding="utf-8").read
 start = report.index("## 1. ")
 header = "\n".join([
     "# Final image audit", "",
-    "> Status: **APPROVED_FOR_OWNER_IMAGE_SUPPLY**. Izmereno nad `" + base_sha + "`. Ništa nije preuzeto, nijedna slika ni `productImage` referenca nije menjana.", "",
+    "> Status: **APPROVED_FOR_OWNER_IMAGE_SUPPLY**. Ništa nije preuzeto, nijedna slika ni `productImage` referenca nije menjana.", ">",
+    "> Commit iz kog je manifest nastao zapisuje `manifest-lock.json` (`createdFromMainSha`) — jedini provenance SHA. Ovde se namerno NE duplira: `git merge-base` se pomera pri svakom fast-forwardu, pa bi izveštaj bio izmenjen i kad se katalog nije promenio, a generator ne bi bio idempotentan.", "",
     "**Praćeni (canonical) fajlovi** — `data/catalog/image-supply/`: `MISSING_PRODUCT_IMAGES.csv`, `USER_IMAGE_SUPPLY_QUEUE.csv`, `IMAGE_RIGHTS_REVIEW.csv`, `OWNER_SUPPLY_BATCH_01_CANDIDATES.csv`, `manifest-lock.json`. Provera: `npm run catalog:image-supply:check`. Vodič za vlasnika: `docs/catalog/USER_IMAGE_SUPPLY_GUIDE.md`. Runtime sajta ove fajlove ne čita.", "",
     "**Image-quality workflow ima ODVOJEN canonical evidence** (nije deo supply lock-a, koji po dizajnu pokriva samo MISSING / USER_SUPPLY / RIGHTS): `data/catalog/image-quality/IMAGE_QUALITY_QUEUE.csv` (usklađeni queue; SHA-256 `" + sha("IMAGE_QUALITY_QUEUE.csv") + "`) i `docs/catalog/image-quality/CARSYSTEM_IMAGE_AUDIT_FULL_CONTEXT.md` (handoff, `HISTORICAL_IMPLEMENTATION_EVIDENCE`). Ni ti fajlovi nisu runtime.", "",
     "**Kako se ovi fajlovi prave.** `npm run catalog:image-supply:generate` (`scripts/catalog/image-audit/`) ih gradi iz STVARNOG runtime kataloga i praćenih dokaza u `data/catalog/image-quality/evidence/`. Drugo pokretanje daje bajt-identične izlaze. Provera zatečenog stanja: `npm run catalog:image-supply:check`.", "",

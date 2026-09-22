@@ -1,6 +1,8 @@
 # Final image audit
 
-> Status: **APPROVED_FOR_OWNER_IMAGE_SUPPLY**. Izmereno nad `main` = `621cbad9ae7cd3969dd4d255e888550124cf8a4a`. Ništa nije preuzeto, nijedna slika ni `productImage` referenca nije menjana.
+> Status: **APPROVED_FOR_OWNER_IMAGE_SUPPLY**. Ništa nije preuzeto, nijedna slika ni `productImage` referenca nije menjana.
+>
+> Commit iz kog je manifest nastao zapisuje `manifest-lock.json` (`createdFromMainSha`) — jedini provenance SHA. Ovde se namerno NE duplira: `git merge-base` se pomera pri svakom fast-forwardu, pa bi izveštaj bio izmenjen i kad se katalog nije promenio, a generator ne bi bio idempotentan.
 
 **Praćeni (canonical) fajlovi** — `data/catalog/image-supply/`: `MISSING_PRODUCT_IMAGES.csv`, `USER_IMAGE_SUPPLY_QUEUE.csv`, `IMAGE_RIGHTS_REVIEW.csv`, `OWNER_SUPPLY_BATCH_01_CANDIDATES.csv`, `manifest-lock.json`. Provera: `npm run catalog:image-supply:check`. Vodič za vlasnika: `docs/catalog/USER_IMAGE_SUPPLY_GUIDE.md`. Runtime sajta ove fajlove ne čita.
 

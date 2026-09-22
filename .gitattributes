@@ -14,3 +14,15 @@
 
 # PowerShell skripte koje se pokreću na Windowsu — isti razlog, blaži rizik.
 *.ps1 -text whitespace=cr-at-eol
+
+# Merenja istorijskog Carsystem image audita — dokazni fajlovi, ne izvorni kod.
+#
+# Napisani su CRLF-om na mašini gde je audit rađen. Generator manifesta (`reconcile-quality.py`)
+# ih čita bajt-za-bajt i njihov SHA stoji u izveštaju, pa normalizacija završetaka reda nije
+# bezopasna: promenila bi dokaz. `-text` čuva bajtove, `whitespace=cr-at-eol` sprečava da
+# `git diff --check` namerni CRLF prijavi kao belinu.
+data/catalog/image-quality/evidence/*.csv -text whitespace=cr-at-eol
+# Isti razlog za handoff dokument: njegov SHA je citiran u `docs/catalog/image-quality/`, gde stoji
+# tvrdnja da je jedina razlika u telu jedan uklonjen razmak na kraju reda 91. Da bi ta tvrdnja
+# ostala tačna, razmak ovde mora da preživi.
+data/catalog/image-quality/evidence/*.md whitespace=-trailing-space

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import removedFromCustomerCatalog from "./data/catalog/removed-from-customer-catalog.json";
 import cosmosLacSync from "./data/cosmos-lac-catalog-products.generated.json";
 import {
   noStoreHeaders,
@@ -106,6 +107,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      /*
+       * Zapisi uklonjeni iz customer-facing kataloga (`data/catalog/removed-from-customer-catalog.json`).
+       *
+       * Isti fajl koji filtrira runtime daje i odredišta, pa adresa ne može da ostane bez
+       * preusmerenja niti da pokaže na nešto što nije odobreno. Trajno (308) — proizvod se više
+       * ne nudi, a odredište je brend program osim gde postoji dokazan naslednik.
+       */
+      ...removedFromCustomerCatalog.records.map((record) => ({
+        source: `/proizvodi/${record.slug}`,
+        destination: record.redirect,
+        permanent: true,
+      })),
       // Traženi oblik `/proizvodi/baslac-line-35?varijanta=35-M214` vodi na
       // postojeću canonical family rutu; query se prenosi.
       {

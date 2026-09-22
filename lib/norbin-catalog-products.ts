@@ -167,9 +167,22 @@ function detailDocuments(slug: string, documents: SyncDocument[]): ProductDetail
       ];
 }
 
+/**
+ * Slugovi zapisa koje ovaj adapter stvarno proizvodi (sync zapisi + dopunjeni ručni zapisi).
+ *
+ * `usedBy` iz izvora ume da pokaže na BAZNI slug porodice (npr. `norbin-n15-020`), koji je ključ
+ * grupisanja, a ne zapis — takva veza bi na PDP-u bila mrtva. Dok sync ne počne da upisuje slug
+ * konkretnog pakovanja, nerazrešiva veza se ne prikazuje. Sama činjenica o odnosu ostaje u
+ * datasetu; ovde se samo ne pravi link ka nepostojećoj stranici.
+ */
+const resolvableSlugs = new Set([
+  ...entries.map((entry) => entry.slug),
+  ...Object.keys(catalogData.enrichments ?? {}),
+]);
+
 function relationshipItems(relations: SyncRelation[]): ProductRelationship[] {
   return relations
-    .filter((relation) => relation.slug)
+    .filter((relation) => relation.slug && resolvableSlugs.has(relation.slug))
     .map((relation) => ({
       productSlug: relation.slug as string,
       note: [RELATION_LABEL[relation.relation] ?? relation.relation, relation.code, relation.ratio].filter(Boolean).join(" · "),
@@ -278,7 +291,7 @@ function createCatalogProduct(entry: SyncEntry): CarsystemProduct {
         note: document.note,
       })),
     ],
-    relatedProductSlugs: [...entry.relations, ...entry.usedBy].map((relation) => relation.slug).filter((slug): slug is string => Boolean(slug)).slice(0, 6),
+    relatedProductSlugs: [...entry.relations, ...entry.usedBy].map((relation) => relation.slug).filter((slug): slug is string => Boolean(slug) && resolvableSlugs.has(slug as string)).slice(0, 6),
     seoTitle: `${entry.name} | Carsystem i R-M`,
     seoDescription: content.shortDescription,
     taxonomyCategory: entry.taxonomy.category as ProductCategorySlug,

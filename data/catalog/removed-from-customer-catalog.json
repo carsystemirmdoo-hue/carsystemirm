@@ -1,0 +1,263 @@
+{
+  "_comment": "Zapisi uklonjeni iz customer-facing kataloga odlukom vlasnika 2026-09-22. Ovo NIJE tvrdnja da je proizvod ukinut kod proizvođača: `status` kaže tačno na osnovu čega je uklonjen. Provenance se čuva — sync datasetima se ne dira nijedan zapis, a ručni zapisi bez izvora se brišu iz kataloga (soft-plus-git se vraća u legacy bazen `lib/carsystem-data.ts`). Fajl je jedini izvor istine za: filtriranje runtime kataloga (`lib/carsystem-data.ts`), 308 preusmerenja (`next.config.ts`) i regresioni test (`lib/catalog/removedFromCustomerCatalog.test.mjs`).",
+  "decidedOn": "2026-09-22",
+  "statuses": {
+    "BUSINESS_OUT_OF_PROGRAMME": "Firma proizvod više ne drži u programu. Nije dokaz da ga proizvođač više ne pravi.",
+    "INVALID_MANUAL_RECORD": "Ručni zapis bez potvrđenog identiteta kod proizvođača — nije postojao kao artikal."
+  },
+  "records": [
+    {
+      "slug": "carsystem-p19-brusni-diskovi",
+      "brand": "carsystem",
+      "name": "Carsystem P19 brusni diskovi",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "MANUAL_RECORD_WITH_SYNC_ENRICHMENT",
+      "reason": "Više se ne proizvodi / nije u aktuelnom Carsystem programu.",
+      "evidence": "Carsystem sync: officialName \"Sanding Disc P.19\", inCatalogue: false (13 brojeva artikala ostaje u data/carsystem-catalog-products.generated.json).",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Bez naslednika: F.23 nije potvrđen kao direktna zamena."
+    },
+    {
+      "slug": "carsystem-p23-brusni-diskovi",
+      "brand": "carsystem",
+      "name": "Carsystem P23 brusni diskovi",
+      "status": "INVALID_MANUAL_RECORD",
+      "source": "MANUAL_RECORD",
+      "reason": "Serija nije potvrđena kod proizvođača.",
+      "evidence": "Nema ga ni u products ni u enrichments Carsystem sync dataseta; ručni zapis bez ijednog broja artikla i bez slike.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-soft-plus-git",
+      "brand": "carsystem",
+      "name": "Carsystem Soft Plus git",
+      "status": "INVALID_MANUAL_RECORD",
+      "source": "MANUAL_RECORD",
+      "reason": "Zapis je vodio C.A.R.FIT proizvod pod pogrešnim brendom.",
+      "evidence": "C.A.R.FIT zvanični carfit-soft-plus-putty ima artikle 2-124-0500 / 2-124-1000 / 2-124-1800; 1800 = 1,8 kg, isto pakovanje koje je nosio ovaj zapis.",
+      "redirect": "/proizvodi/carfit-soft-plus-putty",
+      "redirectNote": "Isti fizički proizvod pod ispravnim brendom."
+    },
+    {
+      "slug": "carfit-maskirna-folija-4x150m",
+      "brand": "carfit",
+      "name": "Car Fit maskirna folija 4 x 150 m",
+      "status": "INVALID_MANUAL_RECORD",
+      "source": "MANUAL_RECORD",
+      "reason": "Dimenzija 4 x 150 m ne postoji u zvaničnom C.A.R.FIT programu.",
+      "evidence": "Zvanična C.A.R.FIT maskirna folija ima artikle 1-201-0450 (4 m x 5 m), 1-201-0470 (4 m x 7 m) i 1-201-0570 (5 m x 7 m). Sku ovog zapisa (CARFIT-FILM-4X150M) nije broj artikla. Ni Carsystem nema 4 x 150 m artikal — masking film green vodi 155.565 / 155.567 / 155.568.",
+      "redirect": "/proizvodi/carfit-maskirna-folija-4x5m",
+      "redirectNote": "Najbliži stvarni artikal iste porodice folija."
+    },
+    {
+      "slug": "sata-lcs-hard-cups",
+      "brand": "sata",
+      "name": "SATA LCS - Hard Cups",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma ne drži ovaj deo LCS programa.",
+      "evidence": "Odluka vlasnika 2026-09-22. Zapis ostaje u data/sata-catalog-products.generated.json.",
+      "redirect": "/brendovi/sata",
+      "redirectNote": "LCS the Liner nije potvrđen kao direktna zamena."
+    },
+    {
+      "slug": "sata-air-star-c",
+      "brand": "sata",
+      "name": "SATA air star C",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi respiratorne maske.",
+      "evidence": "Izvor ga klasifikuje kao respiratory-protection/half-mask-respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-air-star-f",
+      "brand": "sata",
+      "name": "SATA air star F",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi respiratorne maske.",
+      "evidence": "Izvor ga klasifikuje kao respiratory-protection/half-mask-respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-air-star-f-2-0",
+      "brand": "sata",
+      "name": "air star F 2.0",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi respiratorne maske.",
+      "evidence": "Izvor ga klasifikuje kao respiratory-protection/half-mask-respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-air-vision-5000",
+      "brand": "sata",
+      "name": "SATA air vision 5000",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi respiratorne maske.",
+      "evidence": "Izvor ga klasifikuje kao respiratory-protection/full-face-respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-vision-2000",
+      "brand": "sata",
+      "name": "SATA vision 2000",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi respiratorne maske.",
+      "evidence": "Izvor ga klasifikuje kao respiratory-protection/full-face-respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-air-cooler-2000-n",
+      "brand": "sata",
+      "name": "SATA air cooler 2000 n",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; hlađenje vazduha za SATA vision 2000.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-vision-2000"
+    },
+    {
+      "slug": "sata-air-cooler-incl-adapter-plate-and-hip-pad-air-vision-5000",
+      "brand": "sata",
+      "name": "SATA air cooler za air vision 5000",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; vezan za sata-air-vision-5000 u links mapi dataseta.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-air-vision-5000"
+    },
+    {
+      "slug": "sata-air-warmer-2000-n",
+      "brand": "sata",
+      "name": "SATA air warmer 2000 n",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; grejanje vazduha za SATA vision 2000.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-vision-2000"
+    },
+    {
+      "slug": "sata-air-warmer-incl-adapter-plate-and-hip-pad-air-vision-5000",
+      "brand": "sata",
+      "name": "SATA air warmer za air vision 5000",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; vezan za sata-air-vision-5000 u links mapi dataseta.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-air-vision-5000"
+    },
+    {
+      "slug": "sata-belt-unit-with-activated-charcoal-adsorber-and-air-vision-2000",
+      "brand": "sata",
+      "name": "Pojasna jedinica sa adsorberom za vision 2000",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; vezan za sata-vision-2000 u links mapi dataseta.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-vision-2000"
+    },
+    {
+      "slug": "sata-set-of-plug-in-nipples-complete-vision-2000",
+      "brand": "sata",
+      "name": "Set nipli za Vision 2000",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; vezan za sata-vision-2000 u links mapi dataseta.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-vision-2000"
+    },
+    {
+      "slug": "sata-breathing-air-hose-ce-approval-en-139-9-5-x-5-with",
+      "brand": "sata",
+      "name": "SATA crevo za vazduh za disanje, EN 139",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; zvanični naziv: breathing air hose, CE approval EN 139.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-safety-compressed-air-supply-hose",
+      "brand": "sata",
+      "name": "SATA sigurnosno crevo za dovod komprimovanog vazduha",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; zvanični naziv ga vezuje za SATA sisteme za zaštitu disanja.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-air-hose-with-foam-cover",
+      "brand": "sata",
+      "name": "Crevo sa penastom oblogom za respirator",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; zvanični naziv: air hose with foam cover, prolonged by 30 cm for respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-coupling-with-hose-connection",
+      "brand": "sata",
+      "name": "Spojnica sa priključkom za crevo ka respiratoru",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; zvanični naziv: coupling with hose connection for interhose from SATAminijet/DECOR to respirator.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-half-mask-cleaner",
+      "brand": "sata",
+      "name": "SATA half mask cleaner",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji postoji isključivo uz uklonjeni respiratorni program.",
+      "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; sredstvo za čišćenje polumaske (air star).",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-air-star-c"
+    }
+  ],
+  "keptExplicitly": {
+    "_comment": "Provereno i namerno NIJE uklonjeno — respiratorne maske nisu masking proizvodi, a procesni filteri nisu respiratorna oprema.",
+    "processFilters": [
+      "sata-filter-series-100",
+      "sata-filter-series-200",
+      "sata-filter-series-400",
+      "sata-filter-500-series",
+      "sata-filter-cover",
+      "sata-high-flow-coupling-female-filter-500-series",
+      "sata-mini-filter",
+      "sata-strainer-holder",
+      "carsystem-pg-fg-fine-filter"
+    ],
+    "protectiveClothing": [
+      "sata-suit-basic",
+      "sata-suit-race",
+      "sata-suit-race-ladies",
+      "sata-suit-standard-men",
+      "sata-suit-grey",
+      "sata-suit-space",
+      "carsystem-zastitno-odelo"
+    ],
+    "maskingProducts": [
+      "carfit-maskirna-folija-4x5m",
+      "carfit-masking-film-with-electrostatic-effect",
+      "carfit-pretaped-masking-film",
+      "carsystem-masking-film-green",
+      "carsystem-masking-film-blue",
+      "carsystem-masking-film-yellow"
+    ],
+    "correctBrandRecord": ["carfit-soft-plus-putty"]
+  }
+}

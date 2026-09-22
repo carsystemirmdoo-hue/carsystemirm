@@ -9,13 +9,13 @@
     "CURRENT_ACTIVE_ARTICLE_NUMBERS": 357,
     "CATALOGUE_PRODUCTS": 82,
     "CATALOGUE_ARTICLE_NUMBERS": 294,
-    "LOCAL_PRODUCTS_BEFORE": 2,
+    "LOCAL_PRODUCTS_BEFORE": 1,
     "LOCAL_ARTICLE_NUMBERS_BEFORE": 0,
     "EXACT_MATCH": 0,
     "HIGH_CONFIDENCE_MATCH": 1,
     "PROBABLE_MATCH": 0,
     "LEGACY_NOT_ON_CURRENT_WEBSITE": 0,
-    "LOCAL_ONLY_UNKNOWN": 1,
+    "LOCAL_ONLY_UNKNOWN": 0,
     "WEBSITE_AND_CATALOGUE": 88,
     "WEBSITE_ONLY": 35,
     "CATALOGUE_ONLY": 20,
@@ -50,16 +50,6 @@
       "matchedArticleNumbers": [
         "1-201-0450"
       ]
-    },
-    {
-      "localSlug": "carfit-maskirna-folija-4x150m",
-      "classification": "LOCAL_ONLY_UNKNOWN",
-      "sourceKey": null,
-      "officialName": null,
-      "evidence": [
-        "nema zvanične šifre, slika nije zvanična, naziv ne odgovara nijednoj zvaničnoj stranici"
-      ],
-      "autoApply": false
     }
   ],
   "items": [

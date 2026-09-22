@@ -1,0 +1,306 @@
+[
+ {
+  "slug": "carsystem-anti-rust-putty",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   1300,
+   800
+  ],
+  "runtimeSize": [
+   660,
+   406
+  ],
+  "corePixelsCompared": 133711,
+  "origMedLum": 167.0,
+  "runtimeMedLum": 101.0,
+  "medianLumChangePct": -39.5,
+  "fittedGamma": 2.14,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-can-scraper",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   5000,
+   5000
+  ],
+  "runtimeSize": [
+   660,
+   660
+  ],
+  "corePixelsCompared": 117622,
+  "origMedLum": 10.3,
+  "runtimeMedLum": 1.0,
+  "medianLumChangePct": -90.3,
+  "fittedGamma": 2.15,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-car-clean-double-white",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   1000,
+   882
+  ],
+  "runtimeSize": [
+   660,
+   582
+  ],
+  "corePixelsCompared": 335248,
+  "origMedLum": 191.7,
+  "runtimeMedLum": 133.0,
+  "medianLumChangePct": -30.6,
+  "fittedGamma": 2.27,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-finish-sander-rc-9332",
+  "originalFormat": "PNG",
+  "originalHasICC": true,
+  "originalSize": [
+   1000,
+   993
+  ],
+  "runtimeSize": [
+   660,
+   655
+  ],
+  "corePixelsCompared": 232520,
+  "origMedLum": 29.7,
+  "runtimeMedLum": 3.0,
+  "medianLumChangePct": -89.9,
+  "fittedGamma": 2.07,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-glass-fibre-fleece",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   1000,
+   1000
+  ],
+  "runtimeSize": [
+   660,
+   660
+  ],
+  "corePixelsCompared": 435600,
+  "origMedLum": 199.0,
+  "runtimeMedLum": 146.0,
+  "medianLumChangePct": -26.6,
+  "fittedGamma": 2.27,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-micro-fiber-cloth-sky-blue",
+  "originalFormat": "PNG",
+  "originalHasICC": true,
+  "originalSize": [
+   709,
+   599
+  ],
+  "runtimeSize": [
+   660,
+   558
+  ],
+  "corePixelsCompared": 211285,
+  "origMedLum": 157.7,
+  "runtimeMedLum": 88.7,
+  "medianLumChangePct": -43.8,
+  "fittedGamma": 2.21,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-mmir-trolley-box",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   1000,
+   526
+  ],
+  "runtimeSize": [
+   660,
+   347
+  ],
+  "corePixelsCompared": 37276,
+  "origMedLum": 179.0,
+  "runtimeMedLum": 117.3,
+  "medianLumChangePct": -34.5,
+  "fittedGamma": 2.1,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-paint-trolley",
+  "originalFormat": "PNG",
+  "originalHasICC": true,
+  "originalSize": [
+   1000,
+   888
+  ],
+  "runtimeSize": [
+   660,
+   586
+  ],
+  "corePixelsCompared": 43268,
+  "origMedLum": 140.0,
+  "runtimeMedLum": 66.0,
+  "medianLumChangePct": -52.9,
+  "fittedGamma": 2.25,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-proflex-jupiter-152-mm",
+  "originalFormat": "PNG",
+  "originalHasICC": true,
+  "originalSize": [
+   1000,
+   1020
+  ],
+  "runtimeSize": [
+   660,
+   673
+  ],
+  "corePixelsCompared": 298361,
+  "origMedLum": 177.3,
+  "runtimeMedLum": 112.7,
+  "medianLumChangePct": -36.5,
+  "fittedGamma": 2.26,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-proflex-mercury",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   1000,
+   611
+  ],
+  "runtimeSize": [
+   660,
+   403
+  ],
+  "corePixelsCompared": 263862,
+  "origMedLum": 129.0,
+  "runtimeMedLum": 60.7,
+  "medianLumChangePct": -53.0,
+  "fittedGamma": 2.11,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-putty-dispenser",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   540,
+   1000
+  ],
+  "runtimeSize": [
+   660,
+   1222
+  ],
+  "corePixelsCompared": 251808,
+  "origMedLum": 186.3,
+  "runtimeMedLum": 127.3,
+  "medianLumChangePct": -31.7,
+  "fittedGamma": 2.23,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-rupes-polishing-machine-lhr75",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   560,
+   560
+  ],
+  "runtimeSize": [
+   660,
+   660
+  ],
+  "corePixelsCompared": 83480,
+  "origMedLum": 90.0,
+  "runtimeMedLum": 26.0,
+  "medianLumChangePct": -71.1,
+  "fittedGamma": 2.24,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-rupes-polishing-machine-lhr75e",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   797,
+   736
+  ],
+  "runtimeSize": [
+   660,
+   609
+  ],
+  "corePixelsCompared": 54172,
+  "origMedLum": 68.3,
+  "runtimeMedLum": 15.0,
+  "medianLumChangePct": -78.0,
+  "fittedGamma": 2.2,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-sanding-block-disc-kit-150",
+  "originalFormat": "PNG",
+  "originalHasICC": true,
+  "originalSize": [
+   1000,
+   589
+  ],
+  "runtimeSize": [
+   660,
+   389
+  ],
+  "corePixelsCompared": 105579,
+  "origMedLum": 82.7,
+  "runtimeMedLum": 22.0,
+  "medianLumChangePct": -73.4,
+  "fittedGamma": 2.21,
+  "pipelineToneStatus": "confirmed"
+ },
+ {
+  "slug": "carsystem-socks-carsystem-black-white",
+  "originalFormat": "WEBP",
+  "originalHasICC": true,
+  "originalSize": [
+   2258,
+   2259
+  ],
+  "runtimeSize": [
+   660,
+   660
+  ],
+  "corePixelsCompared": 147506,
+  "origMedLum": 198.0,
+  "runtimeMedLum": 198.0,
+  "medianLumChangePct": 0.0,
+  "fittedGamma": 1.0,
+  "pipelineToneStatus": "not_detected"
+ },
+ {
+  "slug": "carsystem-x-stand-classic",
+  "originalFormat": "PNG",
+  "originalHasICC": false,
+  "originalSize": [
+   1000,
+   457
+  ],
+  "runtimeSize": [
+   660,
+   302
+  ],
+  "corePixelsCompared": 16573,
+  "origMedLum": 170.7,
+  "runtimeMedLum": 100.7,
+  "medianLumChangePct": -41.0,
+  "fittedGamma": 2.26,
+  "pipelineToneStatus": "confirmed"
+ }
+]

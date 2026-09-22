@@ -49,16 +49,15 @@ Izvor oznake „NEW”: bedž u katalogu 2026/27 (pozicijski uz tabelu artikala)
 | [Multi Blue Rapid Changer SF](https://www.carsystem.org/en/products/detail/putties/multi-blue-rapid-changer-sf-multifunctional-polyester-putty-styrene-free) — Multifunctional polyester putty, styrene-free | Putties | 1 | katalog + sajt | već uvezeno |
 | [Multi Flow](https://www.carsystem.org/en/products/detail/putties/multi-flow-polyester-multi-light-putty) — Polyester multi light putty | Putties | 1 | sajt | već uvezeno |
 
-## Nove varijante proizvoda koje već imamo (5)
+## Nove varijante proizvoda koje već imamo (4)
 
 | Naš zapis | Zvanični proizvod | Varijante koje nam nedostaju |
 | --- | --- | --- |
 | `carsystem-git-multi-green` | Multi Green | 146.706, 147.337, 149.134 |
 | `carsystem-git-elastic-weiss` | Elastic white | 130.856, 127.975, 132.723 |
-| `carsystem-p19-brusni-diskovi` | Sanding Disc P.19 | 156.357, 156.358, 156.359, 156.361, 156.362, 156.363, 156.364, 156.365, 156.367, 156.368, 156.369, 156.370, 156.371 |
 | `carsystem-f19-brusni-diskovi` | Sanding Disc F.19 | 156.046, 156.048, 156.049, 156.050, 156.051, 156.052, 156.054, 156.055, 156.056, 156.057, 156.058, 156.059 |
 | `carsystem-finish-serija` | Sanding Disc F.19 Finish | 156.899, 156.900, 156.901, 156.902 |
 
 ## Prvi put u našem katalogu
 
-Od 465 zvaničnih proizvoda, pre synca smo imali 9 ručnih zapisa. Svi proizvodi sa statusom „uvozi se” u `SYNC_DRY_RUN.md` su novi za naš sajt, bez obzira na oznaku proizvođača.
+Od 465 zvaničnih proizvoda, pre synca smo imali 6 ručnih zapisa. Svi proizvodi sa statusom „uvozi se” u `SYNC_DRY_RUN.md` su novi za naš sajt, bez obzira na oznaku proizvođača.

@@ -1,0 +1,31 @@
+{
+  "_comment": "Grupe zapisa koje dele JEDNU reprezentativnu sliku, iako su u katalogu odvojeni proizvodi. Deli se ISKLJUČIVO image identity: slug, naziv, šifra, SKU, pretraga, quick-add i PDP ostaju odvojeni, i ne nastaje nikakva porodica ni zajednička stranica. Slika je reprezentativna slika grupe — NIJE tvrdnja da etiketa sa slike prikazuje svaki pojedinačni SKU. Fajl čita generator image manifesta; runtime ga ne koristi.",
+  "decidedOn": "2026-09-22",
+  "groups": [
+    {
+      "id": "rm-ghd-thinner",
+      "brand": "rm",
+      "label": "R-M GHD THINNER",
+      "reason": "Četiri zapisa nose identičan naziv proizvoda i razlikuju se samo oznakom brzine (GV 100 / 200 / 300 / 400). Proizvođač za njih ne objavljuje sliku, pa bi manifest tražio četiri fotografije iste ambalaže.",
+      "representativeImageNote": "Reprezentativna slika grupe. Ne tvrdi se da etiketa na slici odgovara svakoj oznaci; oznaka se bira u katalogu, na kartici konkretnog proizvoda.",
+      "members": [
+        "rm-gv-100-ghd-thinner",
+        "rm-gv-200-ghd-thinner",
+        "rm-gv-300-ghd-thinner",
+        "rm-gv-400-ghd-thinner"
+      ]
+    },
+    {
+      "id": "rm-ghd-hardener",
+      "brand": "rm",
+      "label": "R-M GHD HARDENER",
+      "reason": "Tri zapisa nose identičan naziv proizvoda i razlikuju se samo oznakom brzine (H 700 / 750 / 770). Proizvođač za njih ne objavljuje sliku.",
+      "representativeImageNote": "Reprezentativna slika grupe. Ne tvrdi se da etiketa na slici odgovara svakoj oznaci; oznaka se bira u katalogu, na kartici konkretnog proizvoda.",
+      "members": [
+        "rm-h-700-ghd-hardener",
+        "rm-h-750-ghd-hardener",
+        "rm-h-770-ghd-hardener"
+      ]
+    }
+  ]
+}

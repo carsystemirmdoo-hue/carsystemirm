@@ -1,4 +1,82 @@
 {
-  "count": 0,
-  "products": []
+  "count": 1,
+  "products": [
+    {
+      "sourceKey": "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes",
+      "sourceHash": "23150a01cc7618db",
+      "officialCategory": "Abrasives",
+      "ourCategory": "abrazivi",
+      "officialName": "Sanding Disc P.19",
+      "subtitle": "Paper abrasive - 150 mm - 25 holes",
+      "officialDescription": "The Carsystem Sanding Disc P.19 is a Velcro® paper sanding disc which stands out as an extremely efficient abrasive due to its high cutting power and long lifetime. P.19 is available in different grits and is therefore suitable for coarse to fine sanding.",
+      "sections": {
+        "DESCRIPTION": [
+          "Universal paper-sanding disc",
+          "Carsystem 25-hole pattern and oval center hole",
+          "Aluminium oxide grain"
+        ],
+        "AREA OF APPLICATION": [
+          "Suitable for coarse to fine sanding"
+        ],
+        "BENEFIT": [
+          "High cutting power",
+          "High efficiency"
+        ]
+      },
+      "variants": [
+        {
+          "articleNumber": "156.357",
+          "specification": "P 40"
+        },
+        {
+          "articleNumber": "156.358",
+          "specification": "P 60"
+        },
+        {
+          "articleNumber": "156.359",
+          "specification": "P 80"
+        },
+        {
+          "articleNumber": "156.361",
+          "specification": "P 120"
+        },
+        {
+          "articleNumber": "156.362",
+          "specification": "P 150"
+        },
+        {
+          "articleNumber": "156.363",
+          "specification": "P 180"
+        },
+        {
+          "articleNumber": "156.364",
+          "specification": "P 220"
+        },
+        {
+          "articleNumber": "156.365",
+          "specification": "P 240"
+        },
+        {
+          "articleNumber": "156.367",
+          "specification": "P 320"
+        },
+        {
+          "articleNumber": "156.368",
+          "specification": "P 360"
+        },
+        {
+          "articleNumber": "156.369",
+          "specification": "P 400"
+        },
+        {
+          "articleNumber": "156.370",
+          "specification": "P 500"
+        },
+        {
+          "articleNumber": "156.371",
+          "specification": "P 600"
+        }
+      ]
+    }
+  ]
 }

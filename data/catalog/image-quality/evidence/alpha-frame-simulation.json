@@ -1,0 +1,270 @@
+[
+ {
+  "slug": "carsystem-rupes-polishing-machine-lhr75",
+  "canvas": [
+   660,
+   660
+  ],
+  "frameRings": 2,
+  "rings": [
+   {
+    "ring": 0,
+    "median": 54,
+    "p1": 54,
+    "p99": 54,
+    "max": 96,
+    "uniform": true
+   },
+   {
+    "ring": 1,
+    "median": 13,
+    "p1": 13,
+    "p99": 13,
+    "max": 25,
+    "uniform": true
+   }
+  ],
+  "frameUniform": true,
+  "moatRingFullyTransparent": true,
+  "framePixels": 5264,
+  "frameTouchesProtectedCore": false,
+  "bboxAlpha24_before": [
+   0,
+   0,
+   660,
+   660
+  ],
+  "bboxAlpha24_afterSimulated": [
+   59,
+   138,
+   538,
+   342
+  ],
+  "bboxOpaqueCore": [
+   62,
+   141,
+   533,
+   336
+  ],
+  "partialAlphaPixelsOutsideFrame_untouched": 7744,
+  "verdict": "PASS"
+ },
+ {
+  "slug": "carsystem-rupes-polishing-machine-lh19e",
+  "canvas": [
+   660,
+   329
+  ],
+  "frameRings": 1,
+  "rings": [
+   {
+    "ring": 0,
+    "median": 17,
+    "p1": 17,
+    "p99": 17,
+    "max": 33,
+    "uniform": true
+   }
+  ],
+  "frameUniform": true,
+  "moatRingFullyTransparent": true,
+  "framePixels": 1974,
+  "frameTouchesProtectedCore": false,
+  "bboxAlpha24_before": [
+   0,
+   0,
+   660,
+   329
+  ],
+  "bboxAlpha24_afterSimulated": [
+   59,
+   60,
+   574,
+   216
+  ],
+  "bboxOpaqueCore": [
+   61,
+   62,
+   571,
+   213
+  ],
+  "partialAlphaPixelsOutsideFrame_untouched": 3289,
+  "verdict": "PASS"
+ },
+ {
+  "slug": "carsystem-rupes-vacuum-cleaner-s145",
+  "canvas": [
+   660,
+   872
+  ],
+  "frameRings": 2,
+  "rings": [
+   {
+    "ring": 0,
+    "median": 39,
+    "p1": 39,
+    "p99": 39,
+    "max": 71,
+    "uniform": true
+   },
+   {
+    "ring": 1,
+    "median": 1,
+    "p1": 1,
+    "p99": 1,
+    "max": 1,
+    "uniform": true
+   }
+  ],
+  "frameUniform": true,
+  "moatRingFullyTransparent": true,
+  "framePixels": 6112,
+  "frameTouchesProtectedCore": false,
+  "bboxAlpha24_before": [
+   0,
+   0,
+   660,
+   872
+  ],
+  "bboxAlpha24_afterSimulated": [
+   76,
+   54,
+   542,
+   763
+  ],
+  "bboxOpaqueCore": [
+   78,
+   56,
+   538,
+   760
+  ],
+  "partialAlphaPixelsOutsideFrame_untouched": 7049,
+  "verdict": "PASS"
+ },
+ {
+  "slug": "carsystem-rupes-orbital-sander-slp41a",
+  "canvas": [
+   660,
+   301
+  ],
+  "frameRings": 1,
+  "rings": [
+   {
+    "ring": 0,
+    "median": 19,
+    "p1": 19,
+    "p99": 19,
+    "max": 36,
+    "uniform": true
+   }
+  ],
+  "frameUniform": true,
+  "moatRingFullyTransparent": true,
+  "framePixels": 1918,
+  "frameTouchesProtectedCore": true,
+  "bboxAlpha24_before": [
+   0,
+   0,
+   660,
+   301
+  ],
+  "bboxAlpha24_afterSimulated": [
+   4,
+   14,
+   650,
+   267
+  ],
+  "bboxOpaqueCore": [
+   6,
+   15,
+   646,
+   264
+  ],
+  "partialAlphaPixelsOutsideFrame_untouched": 4805,
+  "verdict": "REJECT"
+ },
+ {
+  "slug": "carsystem-rupes-skorpio-e-rx",
+  "canvas": [
+   660,
+   358
+  ],
+  "frameRings": 0,
+  "rings": [
+   {
+    "ring": 0,
+    "median": 13,
+    "p1": 0,
+    "p99": 13,
+    "max": 25,
+    "uniform": false
+   }
+  ],
+  "frameUniform": false,
+  "moatRingFullyTransparent": false,
+  "framePixels": 0,
+  "frameTouchesProtectedCore": false,
+  "bboxAlpha24_before": [
+   0,
+   0,
+   660,
+   358
+  ],
+  "bboxAlpha24_afterSimulated": [
+   0,
+   0,
+   660,
+   358
+  ],
+  "bboxOpaqueCore": [
+   21,
+   5,
+   630,
+   337
+  ],
+  "partialAlphaPixelsOutsideFrame_untouched": 7279,
+  "verdict": "REJECT"
+ },
+ {
+  "slug": "carsystem-paint-trolley-flexi-plus",
+  "canvas": [
+   660,
+   692
+  ],
+  "frameRings": 1,
+  "rings": [
+   {
+    "ring": 0,
+    "median": 13,
+    "p1": 13,
+    "p99": 13,
+    "max": 25,
+    "uniform": true
+   }
+  ],
+  "frameUniform": true,
+  "moatRingFullyTransparent": true,
+  "framePixels": 2700,
+  "frameTouchesProtectedCore": false,
+  "bboxAlpha24_before": [
+   0,
+   0,
+   660,
+   692
+  ],
+  "bboxAlpha24_afterSimulated": [
+   17,
+   23,
+   620,
+   657
+  ],
+  "bboxOpaqueCore": [
+   18,
+   25,
+   617,
+   653
+  ],
+  "partialAlphaPixelsOutsideFrame_untouched": 15143,
+  "verdict": "PASS"
+ }
+]

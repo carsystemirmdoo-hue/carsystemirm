@@ -52,34 +52,22 @@ Importer još NIJE implementiran; ovaj paket ništa ne uvozi.
 
 | Tip | Pravilo |
 |---|---|
-| `PORODIČNI PACKSHOT PAKOVANJA` | 1 fotografija = svi toneri te linije u TOM pakovanju (baslac). Drugo pakovanje = druga fotografija. |
-| `LICE PORODICE` | 1 fotografija = kartica porodice u katalogu. |
+| `SLIKA SERIJE` | 1 fotografija = CELA linija tonera: sve oznake i sve zapremine (baslac). |
+| `REPREZENTATIVNA SLIKA GRUPE` | 1 fotografija = više zapisa istog naziva koji se razlikuju samo oznakom (R-M). Slika ne tvrdi da etiketa odgovara svakoj oznaci. |
 | `PACKSHOT KARTICE` | 1 fotografija = svi brojevi artikala te kartice (SATA). |
 | `PACKSHOT PROIZVODA` | 1 fotografija = 1 proizvod. |
 | `PACKSHOT PAKOVANJA/VARIJANTE` | Potrebna je slika BAŠ tog pakovanja; slika drugog pakovanja iste kartice se ne koristi. |
 | `SLIKA REDA (boja/dimenzija)` | Potrebna je slika BAŠ te boje/dimenzije (BEFAR). |
 
-## baslac — 44 fotografija
+## baslac — 37 fotografija
 
-Većina proizvoda nema zvaničnu sliku na baslac.com. Toneri linija 30 / 35 / 45 dele JEDAN packshot po (linija, pakovanje): limenke iste linije i iste zapremine izgledaju isto, razlikuje ih samo oznaka tonera na nalepnici — zato je dovoljno 7 fotografija pakovanja + 1 lice porodice za 134 tonera.
+Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45, Basecoat 35, Topcoat 30, Topcoat 30 CV) imaju JEDNU sliku serije: limenke te linije izgledaju isto, razlikuje ih samo oznaka tonera na nalepnici, a zapremina se bira u kartici — ne traži se fotografija po toneru ni po pakovanju. Ostali zapisi su zasebni proizvodi sa svojom šifrom.
 
-### PORODIČNI PACKSHOT PAKOVANJA (7)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P3 | baslac Topcoat 30 — 1 L | — | 1 L | 17 | `baslac__baslac-line-30__pkg-1-l.webp` |
-| P3 | baslac Basecoat 35 — 0,5 L | — | 0,5 L | 32 | `baslac__baslac-line-35__pkg-0-5-l.webp` |
-| P3 | baslac Basecoat 35 — 1 L | — | 1 L | 17 | `baslac__baslac-line-35__pkg-1-l.webp` |
-| P3 | baslac Basecoat 45 — 0,1 L | — | 0,1 L | 12 | `baslac__baslac-line-45__pkg-0-1-l.webp` |
-| P3 | baslac Basecoat 45 — 0,5 L | — | 0,5 L | 48 | `baslac__baslac-line-45__pkg-0-5-l.webp` |
-| P3 | baslac Basecoat 45 — 1 L | — | 1 L | 7 | `baslac__baslac-line-45__pkg-1-l.webp` |
-| P3 | baslac Basecoat 45 — 5 L | — | 5 L | 1 | `baslac__baslac-line-45__pkg-5-l.webp` |
-
-### LICE PORODICE (1)
+### SLIKA SERIJE (1)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
-| P2 | baslac Basecoat 45 | — | Na upit | 1 | `baslac__baslac-basecoat-45.webp` |
+| P2 | baslac Basecoat 45 | — | Na upit | 69 | `baslac__baslac-basecoat-45.webp` |
 
 ### PACKSHOT PAKOVANJA/VARIJANTE (4)
 
@@ -127,11 +115,18 @@ Većina proizvoda nema zvaničnu sliku na baslac.com. Toneri linija 30 / 35 / 45
 | P2 | baslac 80-30 Additive Plast | 80-30 | Na upit | 1 | `baslac__baslac-80-30-additive-plast.webp` |
 | P2 | baslac 81-30 Additive Chassis | 81-30 | Na upit | 1 | `baslac__baslac-81-30-additive-chassis.webp` |
 
-## R-M — 43 fotografija
+## R-M — 38 fotografija
 
-R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
+R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Izuzetak su dve grupe istog naziva (GHD THINNER i GHD HARDENER) gde se razlikuje samo oznaka brzine: za njih je dovoljna jedna reprezentativna slika grupe. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
 
-### PACKSHOT PROIZVODA (43)
+### REPREZENTATIVNA SLIKA GRUPE (2)
+
+| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
+|---|---|---|---|---|---|
+| P2 | R-M GHD HARDENER | H 700 H 750 H 770 | — | 3 | `rm__group-rm-ghd-hardener.webp` |
+| P2 | R-M GHD THINNER | GV 100 GV 200 GV 300 GV 400 | — | 4 | `rm__group-rm-ghd-thinner.webp` |
+
+### PACKSHOT PROIZVODA (36)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
@@ -149,10 +144,6 @@ R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je pose
 | P2 | R-M DIAMONT bezbojni lak | — | 1 L | 1 | `rm__rm-diamont-bezbojni-lak.webp` |
 | P2 | R-M GHD CV 12 | GHD CV 12 | Na upit | 1 | `rm__rm-ghd-cv-12.webp` |
 | P2 | R-M GHD CV 40M | GHD CV 40M | Na upit | 1 | `rm__rm-ghd-cv-40m.webp` |
-| P2 | R-M GHD THINNER | GV 100 | Na upit | 1 | `rm__rm-gv-100-ghd-thinner.webp` |
-| P2 | R-M GHD THINNER | GV 200 | Na upit | 1 | `rm__rm-gv-200-ghd-thinner.webp` |
-| P2 | R-M GHD THINNER | GV 300 | Na upit | 1 | `rm__rm-gv-300-ghd-thinner.webp` |
-| P2 | R-M GHD THINNER | GV 400 | Na upit | 1 | `rm__rm-gv-400-ghd-thinner.webp` |
 | P2 | R-M FillCURE Slow | H 2A31 | Na upit | 1 | `rm__rm-h-2a31-fillcure-slow.webp` |
 | P2 | R-M FillCURE Plus | H 2A80 | Na upit | 1 | `rm__rm-h-2a80-fillcure-plus.webp` |
 | P2 | R-M FillCURE Plus slow | H 2A81 | Na upit | 1 | `rm__rm-h-2a81-fillcure-plus-slow.webp` |
@@ -161,9 +152,6 @@ R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je pose
 | P2 | R-M MATSHADE Harden-R | H 2P96 | Na upit | 1 | `rm__rm-h-2p96-matshade-harden-r.webp` |
 | P2 | R-M GHD PROTECT FILLER HARDENER | H 340 | Na upit | 1 | `rm__rm-h-340-ghd-protect-filler-hardener.webp` |
 | P2 | R-M GHD SLOW ACTIVATOR | H 5430 | Na upit | 1 | `rm__rm-h-5430-ghd-slow-activator.webp` |
-| P2 | R-M GHD HARDENER | H 700 | Na upit | 1 | `rm__rm-h-700-ghd-hardener.webp` |
-| P2 | R-M GHD HARDENER | H 750 | Na upit | 1 | `rm__rm-h-750-ghd-hardener.webp` |
-| P2 | R-M GHD HARDENER | H 770 | Na upit | 1 | `rm__rm-h-770-ghd-hardener.webp` |
 | P2 | R-M AGILIS Minor Repair | HB 015 | Na upit | 1 | `rm__rm-hb-015-agilis-minor-repair.webp` |
 | P2 | R-M Gleam Silver ONYX HD | HB 10S | Na upit | 1 | `rm__rm-hb-10s-gleam-silver-onyx-hd.webp` |
 | P2 | R-M ONYX BLENDER PLUS | A 2525 | Na upit | 1 | `rm__rm-onyx-blender-plus.webp` |
@@ -222,45 +210,22 @@ Kartice već imaju packshot; nedostaje samo 7 redova određene boje/dimenzije. O
 | P3 | Befar Waffle Velcro Polishing Pad | 448031 | Crna · 80 × 25 mm | 1 | `befar__befar-waffle-velcro-polishing-pad__448031.webp` |
 | P3 | Befar Waffle Velcro Polishing Pad | 448061 | Bordo · 80 × 25 mm | 1 | `befar__befar-waffle-velcro-polishing-pad__448061.webp` |
 
-## SATA — 5 fotografija
+## SATA — 3 fotografija
 
 Samo porodice za koje SATA sliku uopšte NE objavljuje. SATA proizvodi za koje zvanična slika postoji NISU u ovom spisku — oni čekaju odluku o pravima (rights review) i ne treba ih fotografisati sada.
 
-### PACKSHOT KARTICE (2)
+### PACKSHOT KARTICE (1)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
-| P2 | SATA LCS - Hard Cups | 1225615 1225623 1225631 | — | 3 | `sata__sata-lcs-hard-cups.webp` |
 | P2 | SATAjet 1500 B | 1029562 1029702 1029710 1093575 | — | 4 | `sata__satajet-1500-b.webp` |
-
-### PACKSHOT PROIZVODA (3)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P2 | SATA air star F | 134353 | Art. 134353 | 1 | `sata__sata-air-star-f.webp` |
-| P2 | SATA Release agent spray system | 187740 | Art. 187740 | 1 | `sata__sata-release-agent-spray-system.webp` |
-| P2 | SATAjet 3000 B | 190538 | Art. 190538 | 1 | `sata__satajet-3000-b.webp` |
-
-## Carsystem — 2 fotografija
-
-Dva ručno uneta proizvoda bez slike i bez zvaničnog izvora. (Kvalitet postojećih Carsystem slika je odvojen projekat i NE rešava se fotografisanjem.)
 
 ### PACKSHOT PROIZVODA (2)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
-| P2 | Carsystem P23 brusni diskovi | — | Granulacije na upit | 1 | `carsystem__carsystem-p23-brusni-diskovi.webp` |
-| P2 | Carsystem Soft Plus git | — | 1.8 kg | 1 | `carsystem__carsystem-soft-plus-git.webp` |
-
-## C.A.R.FIT — 1 fotografija
-
-Jedan ručno unet proizvod bez slike.
-
-### PACKSHOT PROIZVODA (1)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P2 | Car Fit maskirna folija 4 x 150 m | — | 4 x 150 m | 1 | `carfit__carfit-maskirna-folija-4x150m.webp` |
+| P2 | SATA Release agent spray system | 187740 | Art. 187740 | 1 | `sata__sata-release-agent-spray-system.webp` |
+| P2 | SATAjet 3000 B | 190538 | Art. 190538 | 1 | `sata__satajet-3000-b.webp` |
 
 ## Predaja
 

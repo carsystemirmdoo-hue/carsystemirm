@@ -22,6 +22,7 @@
     "test:catalog": "node --test components/catalog/catalogInfiniteScroll.test.mjs components/catalog/catalogCardReveal.test.mjs lib/productTaxonomy.test.mjs lib/productPaintRule.test.mjs lib/productNamedColors.test.mjs",
     "taxonomy:validate": "node scripts/validate-catalog-taxonomy.mjs",
     "catalog:validate": "node scripts/validate-catalog-listing.mjs && node scripts/validate-product-identity.mjs && node scripts/validate-catalog-payload.mjs && node scripts/validate-catalog-search-index.mjs && node scripts/validate-search-deltas.mjs",
+    "catalog:image-supply:generate": "node scripts/catalog/image-audit/generate.mjs",
     "catalog:image-supply:check": "node scripts/catalog/image-supply-manifests.mjs",
     "test:search": "node --test lib/search/*.test.mjs",
     "search:benchmark": "node --expose-gc scripts/benchmark-search-asset.mjs",

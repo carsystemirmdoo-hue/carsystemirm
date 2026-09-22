@@ -201,14 +201,22 @@ test("satajet-x-5500: isti slug i interni ključ, javno zvanični CF1931072, sta
   // Faza 1: kartice faze 2 (pribor, zaseban ključ dataseta) imaju sopstvene testove u `sata-phase2.test.mjs`.
   const phase2Slugs = new Set(JSON.parse(readFileSync(PATHS.siteDataset, "utf8")).phase2.products.map((entry) => entry.slug));
   const cards = runtime.listing.canonical.filter((card) => card.brandSlug === "sata" && !phase2Slugs.has(card.id));
-  assert.equal(cards.length, 66);
+  /*
+   * 66 zvaničnih porodica faze 1 ostaje u sync opsegu; revizija kataloga 2026-09-22 je iz
+   * customer-facing programa uklonila 6 (respiratorni program + LCS Hard Cups), pa ih runtime
+   * više ne prikazuje. Broj se izvodi iz registra, da se opseg synca i odluka o programu ne pomešaju.
+   */
+  const removedPhase1 = JSON.parse(readFileSync(new URL("../../data/catalog/removed-from-customer-catalog.json", import.meta.url), "utf8"))
+    .records.filter((record) => record.source === "SATA_SYNC_PHASE_1").length;
+  assert.equal(removedPhase1, 6);
+  assert.equal(cards.length, 66 - removedPhase1);
   assert.equal(cards.find((card) => card.id === "satajet-x-5500").productCode, "CF1931072");
   for (const card of cards) assert.match(card.productCode, /^CF\d+$/, card.id);
   assert.ok(!cards.some((card) => /SATA-X5500/.test(JSON.stringify([card.productCode, card.shortCode]))));
 
   // Jedna porodica = jedan zapis: CF1931072 ne sme postojati i kao uvezen zapis.
   assert.equal(sata.filter((product) => [product.sku, product.publicCode, product.manufacturerCode].includes("CF1931072")).length, 1);
-  assert.equal(sata.filter((product) => !phase2Slugs.has(product.slug)).length, 66);
+  assert.equal(sata.filter((product) => !phase2Slugs.has(product.slug)).length, 66 - removedPhase1);
   // Zvanični brojevi artikala su u redovima; interna oznaka nije među njima.
   const rows = record.detail.variants.content.rows;
   assert.equal(rows.length, 44);

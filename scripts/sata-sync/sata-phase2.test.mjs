@@ -20,6 +20,20 @@ const registry = readJson(PATHS.identityRegistry);
 const runtime = loadCatalogRuntime();
 const sata = runtime.products.filter((product) => product.brandSlug === "sata");
 const bySlug = new Map(sata.map((product) => [product.slug, product]));
+/*
+ * Sloj iznad sync-a: revizija kataloga 2026-09-22 uklonila je iz customer-facing programa
+ * respiratorni program i LCS Hard Cups (`data/catalog/removed-from-customer-catalog.json`).
+ * Sync opseg je NETAKNUT — zapisi i dalje postoje u datasetu i planu, pa se ovde meri sync,
+ * a odsustvo iz runtime-a se proverava kao namerno, a ne kao gubitak.
+ */
+const removedFromCatalogue = new Set(
+  readJson(new URL("../../data/catalog/removed-from-customer-catalog.json", import.meta.url)).records
+    .filter((record) => record.brand === "sata")
+    .map((record) => record.slug),
+);
+const inCatalogue = (slug) => bySlug.has(slug) || removedFromCatalogue.has(slug);
+/** Kartice koje su i dalje customer-facing — jedine za koje ima smisla proveravati runtime prikaz. */
+const visibleCards = plan.cards.filter((card) => !removedFromCatalogue.has(card.slug));
 const cardOf = (slug) => plan.cards.find((card) => card.slug === slug);
 const cardOfArticle = (number) => plan.cards.find((card) => card.variants.some((row) => row.articleNumber === number));
 
@@ -35,7 +49,8 @@ test("svih 238 izvornih brojeva artikala je klasifikovano: VISIBLE ili INTENTION
   const owners = new Map();
   for (const product of sata) for (const id of (product.detail?.variants?.content.rows ?? []).map((row) => row.id).concat(product.detail?.variants ? [] : [product.manufacturerCode].filter(Boolean))) owners.set(id, [...(owners.get(id) ?? []), product.slug]);
   for (const [number, entry] of entries) {
-    if (entry.status === "VISIBLE") assert.deepEqual(owners.get(number), [entry.card], number);
+    if (entry.status === "VISIBLE" && removedFromCatalogue.has(entry.card)) assert.equal(owners.has(number), false, `${number}: kartica ${entry.card} je uklonjena iz kataloga, broj ne sme biti u runtime-u`);
+    else if (entry.status === "VISIBLE") assert.deepEqual(owners.get(number), [entry.card], number);
     else assert.equal(owners.has(number), false, `${number} je isključen, a u runtime-u je`);
   }
 });
@@ -48,11 +63,11 @@ test("faza 1 je netaknuta: 66 porodica / 655 brojeva artikala, isti slugovi, bez
   const phase2Numbers = new Set(Object.keys(plan.articles));
   assert.equal(numbers.filter((number) => phase2Numbers.has(number)).length, 0);
   for (const slug of Object.keys(registry.phase2)) assert.ok(!registry.products[slug] && !registry.enriched?.[slug], slug);
-  for (const entry of phase1) assert.ok(bySlug.has(entry.slug), entry.slug);
+  for (const entry of phase1) assert.ok(inCatalogue(entry.slug), entry.slug);
 });
 
 test("grupisanje je gramatičko: isti ostatak naziva, razlika samo u prepoznatim atributima ili u klauzuli „for …”", () => {
-  for (const card of plan.cards.filter((entry) => entry.variants.length > 1)) {
+  for (const card of visibleCards.filter((entry) => entry.variants.length > 1)) {
     assert.equal(card.grouping, "LOCAL_CATALOG_GROUPING", card.slug);
     const stems = new Set(card.variants.map((row) => parseOfficialName(row.officialName).stem));
     assert.equal(stems.size, 1, `${card.slug}: različit ostatak naziva ${[...stems].join(" | ")}`);
@@ -69,7 +84,7 @@ test("grupisanje je gramatičko: isti ostatak naziva, razlika samo u prepoznatim
 });
 
 test("lokalna grupa se nigde ne predstavlja kao zvanična SATA porodica", () => {
-  for (const card of plan.cards.filter((entry) => entry.variants.length > 1)) {
+  for (const card of visibleCards.filter((entry) => entry.variants.length > 1)) {
     const product = bySlug.get(card.slug);
     assert.doesNotMatch(JSON.stringify([product.name, product.shortDescription, product.detail]), /zvani[čc]n\w* SATA porodic|official SATA famil/i, card.slug);
     assert.match(product.detail.variants.content.description, /grupisane u katalogu sajta/);
@@ -141,6 +156,8 @@ test("vezani pribor: sopstvena kartica + veza iz PDP-a porodice faze 1 kroz post
   for (const [number, entry] of tied) {
     const card = cardOfArticle(number);
     const familySlug = familySlugById.get(entry.tiedFamily);
+    // Respiratorni roditelji i njihov pribor su uklonjeni iz kataloga zajedno — veza se proverava samo za par koji je vidljiv.
+    if (removedFromCatalogue.has(card.slug) || removedFromCatalogue.has(familySlug)) { assert.ok(removedFromCatalogue.has(card.slug) && removedFromCatalogue.has(familySlug), `${familySlug} i ${card.slug} moraju biti uklonjeni zajedno`); continue; }
     assert.ok(card.relatedFamilies.some((family) => family.slug === familySlug), number);
     assert.ok(bySlug.get(familySlug).detail.compatibleProducts.content.items.some((item) => item.productSlug === card.slug), `${familySlug} → ${card.slug}`);
     assert.ok(bySlug.get(card.slug).detail.compatibleProducts.content.items.some((item) => item.productSlug === familySlug), `${card.slug} → ${familySlug}`);
@@ -151,7 +168,7 @@ test("vezani pribor: sopstvena kartica + veza iz PDP-a porodice faze 1 kroz post
 test("rights gate i anti-invention: placeholder, 0 dokumenata, bez cene; brojevi u oznaci reda postoje u zvaničnom nazivu", () => {
   assert.equal(dataset.phase2.meta.images.APPROVED_RUNTIME_IMAGES, 0);
   assert.doesNotMatch(JSON.stringify(dataset.phase2), /sata\.com\/media|\.webp|\.jpe?g|\.png/i, "nijedna adresa slike u datasetu");
-  for (const card of plan.cards) {
+  for (const card of visibleCards) {
     const product = bySlug.get(card.slug);
     assert.equal(product.productImage.src, "/images/products/placeholder-product.svg");
     assert.equal(product.documents.length, 0);
@@ -164,7 +181,7 @@ test("rights gate i anti-invention: placeholder, 0 dokumenata, bez cene; brojevi
     }
   }
   // „price per meter” postaje samo „prodaje se na metar”.
-  const byMeter = plan.cards.flatMap((card) => card.variants).filter((row) => row.soldByMeter);
+  const byMeter = visibleCards.flatMap((card) => card.variants).filter((row) => row.soldByMeter);
   assert.ok(byMeter.length >= 3);
   assert.equal(translateAttribute("net price per meter"), "prodaje se na metar");
   assert.equal(translateAttribute('G 1/4" (female thread)'), 'G 1/4" unutrašnji navoj');
@@ -174,7 +191,7 @@ test("rights gate i anti-invention: placeholder, 0 dokumenata, bez cene; brojevi
 test("taksonomija koristi samo postojeće kategorije; slugovi su zaključani u append-only registru", () => {
   const taxonomy = runtime.requireModule("lib/product-taxonomy.ts");
   const known = new Set(["pribor", "zastita", "radionica", "oprema"]);
-  for (const card of plan.cards) {
+  for (const card of visibleCards) {
     assert.ok(known.has(card.taxonomy.category), card.slug);
     assert.equal(taxonomy.getProductCategorySlug(bySlug.get(card.slug)), card.taxonomy.category, card.slug);
     assert.deepEqual(registry.phase2[card.slug].articleNumbers, card.variants.map((row) => row.articleNumber).sort(), card.slug);
@@ -187,7 +204,7 @@ test("taksonomija koristi samo postojeće kategorije; slugovi su zaključani u a
 test("pretraga: broj artikla, zvanični naziv, oznaka reda i kompatibilnost su pojmovi kartice; formulacija o ceni nije", () => {
   const PRICING = /,?\s*(?:net\s+)?price\s+(?:net\s+)?per\s+met(?:er|re)\b/gi;
   let soldByMeter = 0;
-  for (const card of plan.cards) {
+  for (const card of visibleCards) {
     const product = bySlug.get(card.slug);
     const terms = new Set(product.searchTerms);
     // Skriveni indeks ne nosi reč „price” ni valutu; sirovi zvanični naziv u datasetu ostaje netaknut.

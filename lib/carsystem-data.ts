@@ -1,3 +1,4 @@
+import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
 import {
@@ -871,7 +872,6 @@ const legacyProducts: CarsystemProduct[] = [
       "rm-body-filler-white-b-2e11",
       "baslac-60-20-razredjivac",
       "satajet-x-5500",
-      "carsystem-p19-brusni-diskovi",
     ],
     seoTitle: "R-M DIAMONT bazna boja",
     seoDescription:
@@ -941,9 +941,6 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     relatedProductSlugs: [
       "rm-diamont-bazna-boja",
-      "baslac-900-basecoat",
-      "carsystem-abraziv-p80-p2000",
-      "carsystem-soft-plus-git",
     ],
   },
   {
@@ -1010,7 +1007,6 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     relatedProductSlugs: [
       "carsystem-git-multi-green",
-      "carsystem-p19-brusni-diskovi",
       "rm-diamont-bazna-boja",
       "carsystem-finish-serija",
     ],
@@ -1067,10 +1063,8 @@ const legacyProducts: CarsystemProduct[] = [
       },
     ],
     relatedProductSlugs: [
-      "carsystem-soft-plus-git",
       "car-fit-prajmer",
       "rm-diamont-bazna-boja",
-      "baslac-900-basecoat",
     ],
   },
   {
@@ -1138,7 +1132,6 @@ const legacyProducts: CarsystemProduct[] = [
       "rm-diamont-bazna-boja",
       "baslac-30-s510-s-serija",
       "cosmos-lac-ral-cl-304-ral-9005-sjaj-400-ml-500-ml-ral-9005-gloss-black",
-      "carsystem-p19-brusni-diskovi",
     ],
     seoTitle: "SATAjet X 5500",
     seoDescription:
@@ -1196,10 +1189,7 @@ const legacyProducts: CarsystemProduct[] = [
       },
     ],
     relatedProductSlugs: [
-      "carsystem-soft-plus-git",
-      "carsystem-abraziv-p80-p2000",
       "rm-diamont-bazna-boja",
-      "baslac-900-basecoat",
     ],
   },
   {
@@ -1252,7 +1242,6 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     relatedProductSlugs: [
       "car-fit-prajmer",
-      "carsystem-abraziv-p80-p2000",
       "satajet-x-5500",
       "rm-diamont-bezbojni-lak",
     ],
@@ -1311,7 +1300,6 @@ const legacyProducts: CarsystemProduct[] = [
       "rm-diamont-bazna-boja",
       "rm-diamont-bezbojni-lak",
       "satajet-x-5500",
-      "carsystem-abraziv-p80-p2000",
     ],
   },
   {
@@ -1365,7 +1353,6 @@ const legacyProducts: CarsystemProduct[] = [
       },
     ],
     relatedProductSlugs: [
-      "baslac-900-basecoat",
       "rm-diamont-bezbojni-lak",
       "rm-diamont-bazna-boja",
       "satajet-x-5500",
@@ -1422,9 +1409,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     relatedProductSlugs: [
       "rm-diamont-bezbojni-lak",
-      "carsystem-abraziv-p80-p2000",
       "carsystem-maskirna-traka",
-      "carsystem-soft-plus-git",
     ],
   },
   {
@@ -1470,8 +1455,6 @@ const legacyProducts: CarsystemProduct[] = [
       },
     ],
     relatedProductSlugs: [
-      "carsystem-abraziv-p80-p2000",
-      "carsystem-soft-plus-git",
       "car-fit-prajmer",
       "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
     ],
@@ -1725,8 +1708,6 @@ const productRecords: CarsystemProduct[] = [
       { label: "Sledeća faza", value: "Brušenje i podloga" },
     ],
     relatedProductSlugs: [
-      "carsystem-p19-brusni-diskovi",
-      "carsystem-soft-plus-git",
       "rm-diamont-bazna-boja",
     ],
   }),
@@ -1834,8 +1815,6 @@ const productRecords: CarsystemProduct[] = [
       { label: "Nanošenje", value: "Špahtlom uz prateći učvršćivač" },
     ],
     relatedProductSlugs: [
-      "carsystem-soft-plus-git",
-      "carsystem-p19-brusni-diskovi",
       "rm-body-filler-white-b-2e11",
     ],
   }),
@@ -1872,47 +1851,6 @@ const productRecords: CarsystemProduct[] = [
     relatedProductSlugs: [
       "carsystem-git-multi-green",
       "carsystem-f19-brusni-diskovi",
-      "carsystem-p23-brusni-diskovi",
-    ],
-  }),
-  archivedProduct("carsystem-soft-plus-git"),
-  createProduct({
-    slug: "carsystem-p19-brusni-diskovi",
-    name: "Carsystem P19 brusni diskovi",
-    brandSlug: "carsystem",
-    programSlug: "abrazivi",
-    phaseSlug: "priprema",
-    shortDescription: "Brusni diskovi u rasponu granulacija P40-P800 za pripremu površine.",
-    longDescription:
-      "Carsystem P19 brusni diskovi pokrivaju grubu i međufaznu obradu u pripremi površine, sa granulacijama za ravnanje, matiranje i kontrolisanu obradu.",
-    sku: "CS-P19-DISC",
-    packages: [{ label: "P40-P800", detail: "Granulacije po izboru" }],
-    purpose: "Brušenje gita, podloge i pripremljenih površina",
-    badges: ["Abrazivi", "P40-P800", "Na upit"],
-    productImage: productAsset(
-      "/products/carsystem/carsystem-p19-brusni-diskovi.png",
-      "Carsystem P19 brusni disk",
-    ),
-    galleryImages: [
-      productAsset(
-        "/products/carsystem/carsystem-p19-brusni-diskovi-detail.jpg",
-        "Carsystem P19 brusni diskovi, dodatni prikaz",
-      ),
-    ],
-    documents: documentsWithTds(
-      "Carsystem P19 brusni diskovi",
-      "/documents/products/carsystem/carsystem-p19-brusni-diskovi-tds.pdf",
-    ),
-    specifications: [
-      { label: "Granulacija", value: "P40-P800" },
-      { label: "Forma", value: "Brusni diskovi" },
-      { label: "Primena", value: "Mašinsko brušenje" },
-      { label: "Faza", value: "Priprema površine" },
-    ],
-    relatedProductSlugs: [
-      "carsystem-p23-brusni-diskovi",
-      "carsystem-git-multi-green",
-      "carsystem-soft-plus-git",
     ],
   }),
   createProduct({
@@ -1991,7 +1929,6 @@ const productRecords: CarsystemProduct[] = [
     ],
     relatedProductSlugs: [
       "carsystem-f19-brusni-diskovi",
-      "carsystem-p23-brusni-diskovi",
       "carsystem-git-elastic-weiss",
     ],
     family: {
@@ -2148,7 +2085,7 @@ const productRecords: CarsystemProduct[] = [
               reviewStatus: "needs_confirmation",
             },
             {
-              productSlug: "carsystem-excenter-back-pad-t19",
+              productSlug: "carsystem-excenter-back-pad-t-19",
               note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
               reviewStatus: "needs_confirmation",
             },
@@ -2163,7 +2100,6 @@ const productRecords: CarsystemProduct[] = [
             "Drugi Carsystem abrazivni diskovi za grubu, međufaznu i finu obradu.",
           items: [
             { productSlug: "carsystem-f19-brusni-diskovi", reviewStatus: "confirmed" },
-            { productSlug: "carsystem-p19-brusni-diskovi", reviewStatus: "confirmed" },
           ],
         },
       },
@@ -2175,31 +2111,6 @@ const productRecords: CarsystemProduct[] = [
         storeLabel: "Pronađi prodavnicu",
       },
     },
-  }),
-  createProduct({
-    slug: "carsystem-p23-brusni-diskovi",
-    name: "Carsystem P23 brusni diskovi",
-    brandSlug: "carsystem",
-    programSlug: "abrazivi",
-    phaseSlug: "priprema",
-    shortDescription: "Nova serija P23 brusnih diskova za pripremu i obradu površine.",
-    longDescription:
-      "Carsystem P23 brusni diskovi proširuju abrazivni program novom serijom za pripremne i međufazne radove u karoserijskoj i lakirerskoj radionici.",
-    sku: "CS-P23-DISC",
-    packages: [{ label: "Granulacije na upit", detail: "Nova serija" }],
-    purpose: "Brušenje i kontrolisana priprema površine",
-    badges: ["Abrazivi", "Nova serija", "Na upit"],
-    specifications: [
-      { label: "Serija", value: "P23" },
-      { label: "Forma", value: "Brusni diskovi" },
-      { label: "Granulacija", value: "Potvrđuje se kroz upit" },
-      { label: "Faza", value: "Priprema" },
-    ],
-    relatedProductSlugs: [
-      "carsystem-p19-brusni-diskovi",
-      "carsystem-f23-brusni-diskovi",
-      "carsystem-git-multi-green",
-    ],
   }),
   createProduct({
     slug: "carsystem-finish-serija",
@@ -2279,8 +2190,8 @@ const productRecords: CarsystemProduct[] = [
       { label: "Status", value: "Dostupnost se potvrđuje kroz upit" },
     ],
     relatedProductSlugs: [
-      "carfit-maskirna-folija-4x150m",
-      "carsystem-p19-brusni-diskovi",
+      // Zamena za uklonjenu ručnu foliju 4 x 150 m: stvarni C.A.R.FIT artikal iste namene.
+      "carfit-maskirna-folija-4x5m",
       "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
     ],
   }),
@@ -2467,31 +2378,9 @@ const productRecords: CarsystemProduct[] = [
       { label: "Faza", value: "Priprema" },
     ],
     relatedProductSlugs: [
-      "carfit-maskirna-folija-4x150m",
       "carsystem-zastitno-odelo",
       "cosmos-lac-ral-cl-330-ral-3000-sjaj-400-ml-500-ml-ral-3000-flame-red",
     ],
-  }),
-  createProduct({
-    slug: "carfit-maskirna-folija-4x150m",
-    name: "Car Fit maskirna folija 4 x 150 m",
-    brandSlug: "carfit",
-    programSlug: "potrosni-materijal",
-    phaseSlug: "priprema",
-    shortDescription: "Maskirna folija u rolni 4 x 150 m za radioničku potrošnju.",
-    longDescription:
-      "Car Fit maskirna folija u rolni 4 x 150 m namenjena je radionicama kojima treba kontinuirana zaštita i maskiranje u svakodnevnom procesu.",
-    sku: "CARFIT-FILM-4X150M",
-    packages: [{ label: "4 x 150 m" }],
-    purpose: "Radioničko maskiranje većeg obima",
-    badges: ["Maskiranje", "Rolna", "Na upit"],
-    specifications: [
-      { label: "Dimenzija", value: "4 x 150 m" },
-      { label: "Tip", value: "Maskirna folija u rolni" },
-      { label: "Primena", value: "Zaštita vozila tokom pripreme i lakiranja" },
-      { label: "Faza", value: "Priprema" },
-    ],
-    relatedProductSlugs: ["carfit-maskirna-folija-4x5m", "carsystem-zastitno-odelo", "carsystem-p19-brusni-diskovi"],
   }),
   // Carsystem asortiman iz zvaničnog kataloga i sa carsystem.org
   // (`npm run carsystem:sync`). Zvanični proizvodi koje već vodimo ručno
@@ -2547,7 +2436,17 @@ function withCatalogArchitecture(product: CarsystemProduct): CarsystemProduct {
  * kad je ceo skup poznat. Enrichment ne može da promeni identitet — vidi
  * ograničenja tipa `BaslacEnrichment`.
  */
-const architecturedProducts = productRecords.map(withCatalogArchitecture);
+/**
+ * Uklonjeno iz customer-facing kataloga (odluka vlasnika, `data/catalog/removed-from-customer-catalog.json`).
+ *
+ * Filtrira se OVDE, na jednom mestu kroz koje prolaze i ručni zapisi i svi sync adapteri, pa nijedan
+ * brend ne mora da nosi sopstvenu logiku uklanjanja. Sync dataseti se ne diraju — zapis ostaje kao
+ * istorijski podatak, tačno kao kod Molotow uklanjanja (`REMOVED_FROM_CUSTOMER_CATALOG`).
+ */
+const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => record.slug));
+const architecturedProducts = productRecords
+  .filter((product) => !removedSlugs.has(product.slug))
+  .map(withCatalogArchitecture);
 const knownProductSlugs = new Set(architecturedProducts.map((product) => product.slug));
 
 assertBaslacEnrichmentKeys(

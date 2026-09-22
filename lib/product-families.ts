@@ -64,13 +64,34 @@ export type ProductFamily = {
 };
 
 /**
+ * Porodice koje ostaju `collection` iako im je osa varijante prepoznata.
+ *
+ * `COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP` (odloženo 2026-09-22): kod ove tri porodice više boja
+ * deli ISTI zvanični kod („13", „02", „01"), pa bi im `?varijanta=` adrese bile identične —
+ * varijantni PDP ne bi mogao da razlikuje članove. Dok se ključ varijante ne razreši (zaseban
+ * zadatak, isti razred kao poznate Cosmos kolizije), članovi ostaju na svojim adresama.
+ *
+ * Namerno je spisak, a ne izvedeno pravilo: provera „svi članovi imaju jedinstven ključ" kao
+ * uslov za `variant-pdp` vratila bi u `collection` i pet porodica koje danas ispravno rade kao
+ * varijantni PDP (uključujući `cosmos-lac-ral` sa 61 članom), pa bi napravila nove međustranice
+ * umesto da ih ukloni.
+ */
+export const DEFERRED_VARIANT_PDP_FAMILIES: Record<string, string> = {
+  "cosmos-lac-master-mechanic-antigravel-paintable": "COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP",
+  "cosmos-lac-master-mechanic-filler": "COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP",
+  "cosmos-lac-master-mechanic-primer": "COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP",
+};
+
+/**
  * A family is a variant PDP when its members differ only by colour, pack size
  * or finish. That is the definition of a variant, so this is derived rather
- * than listed per slug — no family gets a special case.
+ * than listed per slug — the only exception is the deferral list above.
  */
 function resolvePresentation(
   variesBy: ProductFamily["variesBy"],
+  slug: string,
 ): ProductFamily["presentation"] {
+  if (DEFERRED_VARIANT_PDP_FAMILIES[slug]) return "collection";
   const variantAxes = new Set(["color", "size", "volume", "finish"]);
   const differsOnlyByVariantAxis =
     variesBy.length > 0 && variesBy.every((axis) => variantAxes.has(axis));
@@ -162,8 +183,29 @@ function detectVariesBy(variants: CarsystemProduct[]): VariationAxis[] {
     cosmosColorCategories.has(product.catalogMetadata?.technicalCategory ?? ""),
   );
 
+  /*
+   * Druga, dokazna putanja do ose boje.
+   *
+   * Kategorijska lista (`cosmosColorCategories`) pokriva sprejeve kojima je boja identitet, ali
+   * izostavlja prajmere, sealere, antichip i lazure — a i njihovi članovi se razlikuju baš po
+   * boji. Zato se boja priznaje i kad je POTVRĐENA u zvaničnom nazivu zapisa: „Sealer 261 Grey"
+   * nosi „Grey" u imenu, pa tvrdnja nije izvedena iz šifre. Upravo je izvođenje iz šifre bila
+   * ranija greška (maziva i sredstva za čišćenje), i ono ovom proverom i dalje pada.
+   */
+  const named = (product: CarsystemProduct) => {
+    const colour = product.catalogMetadata?.colorName;
+    if (!colour) return false;
+    const official = slugify(product.catalogMetadata?.officialName ?? product.name);
+    return slugify(colour)
+      .split("-")
+      .filter(Boolean)
+      .every((word) => official.includes(word));
+  };
+  const withColour = variants.filter((product) => product.catalogMetadata?.colorName);
+  const colourNamedInOfficialName = withColour.length > 0 && withColour.every(named);
+
   if (
-    isColourFamily &&
+    (isColourFamily || colourNamedInOfficialName) &&
     (distinct((product) => product.catalogMetadata?.colorName) ||
       distinct((product) => product.catalogMetadata?.ralCode))
   ) {
@@ -240,7 +282,7 @@ function buildFamilies(): ProductFamily[] {
       variants,
       representative,
       variesBy,
-      presentation: resolvePresentation(variesBy),
+      presentation: resolvePresentation(variesBy, slug),
     });
   }
 

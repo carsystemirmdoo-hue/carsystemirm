@@ -14,21 +14,21 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | catalogueSha256 | ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961 |
 | SOURCE PRODUCTS | 465 |
 | SOURCE VARIANTS | 1089 |
-| EXISTING PRODUCTS | 9 |
+| EXISTING PRODUCTS | 6 |
 | EXISTING VARIANTS | 9 |
 | EXACT MATCHES | 1 |
-| HIGH CONFIDENCE MATCHES | 5 |
+| HIGH CONFIDENCE MATCHES | 4 |
 | PROBABLE MATCHES | 1 |
 | MISSING PRODUCTS | 0 |
 | MISSING VARIANTS | 0 |
-| variantsSuppliedByEnrichment | 35 |
+| variantsSuppliedByEnrichment | 22 |
 | AMBIGUOUS | 0 |
-| LEGACY PRODUCTS | 3 |
+| LEGACY PRODUCTS | 0 |
 | SOURCE CONFLICTS | 10 |
 | MISSING IMAGES | 3 |
-| MISSING IMPORTANT DATA | 0 |
+| MISSING IMPORTANT DATA | 1 |
 | alreadyImported | 456 |
-| existingToEnrich | 6 |
+| existingToEnrich | 5 |
 | heldPendingDecision | 0 |
 | importedWebsiteOnly | 51 |
 | heldInactivePage | 0 |
@@ -42,11 +42,8 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | --- | --- | --- | --- | --- |
 | `carsystem-git-multi-green` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Multi Green — Multifuncional polyester putty | identical-official-tds | +3 varijanti; sku je interni placeholder (CS-GIT-MULTI-GREEN); manufacturerCode nije upisan |
 | `carsystem-git-elastic-weiss` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Elastic white — Polyester - fine putty | identical-official-packshot | +3 varijanti; sku je interni placeholder (CS-GIT-ELASTIC-WEISS); manufacturerCode nije upisan |
-| `carsystem-soft-plus-git` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | none | — |
-| `carsystem-p19-brusni-diskovi` | HIGH_CONFIDENCE_MATCH<br>LEGACY_NOT_IN_2026_27<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Sanding Disc P.19 — Paper abrasive - 150 mm - 25 holes | series-article-range | +13 varijanti; sku je interni placeholder (CS-P19-DISC); manufacturerCode nije upisan |
 | `carsystem-f19-brusni-diskovi` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.19 — Film abrasive - 150 mm - 25 holes | series-article-range | +12 varijanti; sku je interni placeholder (CS-F19-DISC); manufacturerCode nije upisan |
 | `carsystem-f23-brusni-diskovi` | EXACT_MATCH<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.23 Ceramic — Film abrasive - 150 mm - 25 holes | article-number | +0 varijanti; manufacturerCode nije upisan |
-| `carsystem-p23-brusni-diskovi` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | none | — |
 | `carsystem-finish-serija` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.19 Finish — Film abrasive - 152 mm - 15 holes | series-article-range | +4 varijanti; sku je interni placeholder (CS-FINISH-SERIES); manufacturerCode nije upisan |
 | `carsystem-zastitno-odelo` | PROBABLE_MATCH | Classic Coverall Jacket Anthracite — Protective coverall | identical-official-packshot | Jedini dokaz je identična zvanična slika; naziv zapisa je generički. |
 
@@ -122,9 +119,11 @@ Nema.
 | [CLASSIC COVERALL PANTS KNEEPADFIT](https://www.carsystem.org/fileadmin/CS-Kataloge-2026/Carsystem-product-catalogue-HQ-2026-27-EN.pdf#page=94) — Protective coverall pants - Kneepad pocket | MASKINGPAINTINGFINISHCLEANING ABRASIVESPUTTIES | 6 | 160.596, 160.597, 160.598, 160.599 … | U katalogu je, ali nema stranicu na carsystem.org (nema zvanične slike ni opisa). |
 | [ERLKING LTD. 2-PIECE COVERALL](https://www.carsystem.org/fileadmin/CS-Kataloge-2026/Carsystem-product-catalogue-HQ-2026-27-EN.pdf#page=93) — Protective Coverall | MASKINGPAINTINGFINISHCLEANING ABRASIVESPUTTIES | 12 | 160.663, 160.669, 160.664, 160.670 … | U katalogu je, ali nema stranicu na carsystem.org (nema zvanične slike ni opisa). |
 
-## Bez SR sadržaja (0)
+## Bez SR sadržaja (1)
 
-Nema.
+| Zvanični proizvod | Kategorija | Varijante | Šifre | Napomena |
+| --- | --- | ---: | --- | --- |
+| [Sanding Disc P.19](https://www.carsystem.org/en/products/detail/abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes) — Paper abrasive - 150 mm - 25 holes | Abrasives | 13 | 156.357, 156.358, 156.359, 156.361 … | Nema SR sadržaja. |
 
 ## Isključeno taxonomy mapom (0)
 

@@ -4,21 +4,21 @@
     "catalogueSha256": "ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961",
     "SOURCE PRODUCTS": 465,
     "SOURCE VARIANTS": 1089,
-    "EXISTING PRODUCTS": 9,
+    "EXISTING PRODUCTS": 6,
     "EXISTING VARIANTS": 9,
     "EXACT MATCHES": 1,
-    "HIGH CONFIDENCE MATCHES": 5,
+    "HIGH CONFIDENCE MATCHES": 4,
     "PROBABLE MATCHES": 1,
     "MISSING PRODUCTS": 0,
     "MISSING VARIANTS": 0,
-    "variantsSuppliedByEnrichment": 35,
+    "variantsSuppliedByEnrichment": 22,
     "AMBIGUOUS": 0,
-    "LEGACY PRODUCTS": 3,
+    "LEGACY PRODUCTS": 0,
     "SOURCE CONFLICTS": 10,
     "MISSING IMAGES": 3,
-    "MISSING IMPORTANT DATA": 0,
+    "MISSING IMPORTANT DATA": 1,
     "alreadyImported": 456,
-    "existingToEnrich": 6,
+    "existingToEnrich": 5,
     "heldPendingDecision": 0,
     "importedWebsiteOnly": 51,
     "heldInactivePage": 0,
@@ -132,100 +132,6 @@
         ],
         "useOfficialImage": false,
         "currentImageSrc": "/products/carsystem/carsystem-git-elastic-weiss.png"
-      }
-    },
-    {
-      "localSlug": "carsystem-soft-plus-git",
-      "localName": "Carsystem Soft Plus git",
-      "classification": "LEGACY_NOT_IN_CATALOGUE",
-      "autoApply": false,
-      "sourceKeys": [],
-      "candidates": [],
-      "evidence": [
-        {
-          "level": "none",
-          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
-        }
-      ],
-      "flags": [
-        "LEGACY_NOT_IN_CATALOGUE",
-        "LEGACY_NOT_IN_2026_27"
-      ],
-      "enrichment": null
-    },
-    {
-      "localSlug": "carsystem-p19-brusni-diskovi",
-      "localName": "Carsystem P19 brusni diskovi",
-      "classification": "HIGH_CONFIDENCE_MATCH",
-      "autoApply": true,
-      "sourceKeys": [
-        "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes"
-      ],
-      "candidates": [
-        {
-          "sourceKey": "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes",
-          "officialName": "Sanding Disc P.19",
-          "subtitle": "Paper abrasive - 150 mm - 25 holes",
-          "sourceUrl": "https://www.carsystem.org/en/products/detail/abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes",
-          "articleNumbers": [
-            "156.357",
-            "156.358",
-            "156.359",
-            "156.361",
-            "156.362",
-            "156.363",
-            "156.364",
-            "156.365",
-            "156.367",
-            "156.368",
-            "156.369",
-            "156.370",
-            "156.371"
-          ]
-        }
-      ],
-      "evidence": [
-        {
-          "level": "series-article-range",
-          "articleNumbers": [
-            "156.357",
-            "156.371"
-          ],
-          "owners": [
-            "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes"
-          ]
-        }
-      ],
-      "flags": [
-        "HIGH_CONFIDENCE_MATCH",
-        "LEGACY_NOT_IN_2026_27",
-        "VARIANT_MISSING",
-        "EXISTING_DATA_INCOMPLETE"
-      ],
-      "enrichment": {
-        "sourceKey": "abrasives/sanding-disc-p19-paper-abrasive-150-mm-25-holes",
-        "missingVariants": [
-          "156.357",
-          "156.358",
-          "156.359",
-          "156.361",
-          "156.362",
-          "156.363",
-          "156.364",
-          "156.365",
-          "156.367",
-          "156.368",
-          "156.369",
-          "156.370",
-          "156.371"
-        ],
-        "incomplete": [
-          "sku je interni placeholder (CS-P19-DISC)",
-          "manufacturerCode nije upisan"
-        ],
-        "legacyPackages": [],
-        "useOfficialImage": false,
-        "currentImageSrc": "/products/carsystem/carsystem-p19-brusni-diskovi.png"
       }
     },
     {
@@ -360,25 +266,6 @@
         "useOfficialImage": false,
         "currentImageSrc": "/products/carsystem/carsystem-f23-brusni-diskovi.png"
       }
-    },
-    {
-      "localSlug": "carsystem-p23-brusni-diskovi",
-      "localName": "Carsystem P23 brusni diskovi",
-      "classification": "LEGACY_NOT_IN_CATALOGUE",
-      "autoApply": false,
-      "sourceKeys": [],
-      "candidates": [],
-      "evidence": [
-        {
-          "level": "none",
-          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
-        }
-      ],
-      "flags": [
-        "LEGACY_NOT_IN_CATALOGUE",
-        "LEGACY_NOT_IN_2026_27"
-      ],
-      "enrichment": null
     },
     {
       "localSlug": "carsystem-finish-serija",
@@ -2792,9 +2679,18 @@
       "inCatalogue": false,
       "isNew": false,
       "conflicts": [],
-      "action": "MATCHED_EXISTING",
-      "reason": "Već postoji kao ručni zapis „carsystem-p19-brusni-diskovi”.",
-      "localSlug": "carsystem-p19-brusni-diskovi"
+      "action": "HELD_MISSING_LOCALIZATION",
+      "reason": "Nema SR sadržaja.",
+      "contentHash": "23150a01cc7618db",
+      "taxonomy": {
+        "category": "abrazivi",
+        "programSlug": "abrazivi",
+        "phaseSlug": "priprema",
+        "visualType": "abrasive",
+        "packshotShade": true,
+        "rule": "default",
+        "note": null
+      }
     },
     {
       "sourceKey": "abrasives/sanding-disc-p25-ceramic-paper-abrasive-150-mm-25-holes",

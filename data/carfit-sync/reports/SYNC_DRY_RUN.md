@@ -16,13 +16,13 @@ Generisano komandom `npm run carfit:sync:plan`. Ovaj korak ne menja katalog.
 | CURRENT_ACTIVE_ARTICLE_NUMBERS | 357 |
 | CATALOGUE_PRODUCTS | 82 |
 | CATALOGUE_ARTICLE_NUMBERS | 294 |
-| LOCAL_PRODUCTS_BEFORE | 2 |
+| LOCAL_PRODUCTS_BEFORE | 1 |
 | LOCAL_ARTICLE_NUMBERS_BEFORE | 0 |
 | EXACT_MATCH | 0 |
 | HIGH_CONFIDENCE_MATCH | 1 |
 | PROBABLE_MATCH | 0 |
 | LEGACY_NOT_ON_CURRENT_WEBSITE | 0 |
-| LOCAL_ONLY_UNKNOWN | 1 |
+| LOCAL_ONLY_UNKNOWN | 0 |
 | WEBSITE_AND_CATALOGUE | 88 |
 | WEBSITE_ONLY | 35 |
 | CATALOGUE_ONLY | 20 |
@@ -46,7 +46,6 @@ Generisano komandom `npm run carfit:sync:plan`. Ovaj korak ne menja katalog.
 | Naš zapis | Klasifikacija | Zvanični proizvod | Dokaz |
 | --- | --- | --- | --- |
 | `carfit-maskirna-folija-4x5m` | HIGH_CONFIDENCE_MATCH | Masking film 7mm with electrostatic effect | naša slika je bajt-identična zvaničnoj slici proizvoda; ručno pakovanje (4mx5m) = zvanična varijanta 1-201-0450 |
-| `carfit-maskirna-folija-4x150m` | LOCAL_ONLY_UNKNOWN | — | nema zvanične šifre, slika nije zvanična, naziv ne odgovara nijednoj zvaničnoj stranici |
 
 ## Mapiranje kategorija
 

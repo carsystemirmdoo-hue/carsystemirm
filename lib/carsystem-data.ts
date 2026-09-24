@@ -2444,6 +2444,43 @@ function withCatalogArchitecture(product: CarsystemProduct): CarsystemProduct {
  * istorijski podatak, tačno kao kod Molotow uklanjanja (`REMOVED_FROM_CUSTOMER_CATALOG`).
  */
 const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => record.slug));
+
+/**
+ * Veze ka zapisima koje katalog više ne prikazuje.
+ *
+ * Preporuke i „koristi se zajedno sa” dolaze iz sync dataseta, koji uklonjene proizvode LEGITIMNO
+ * i dalje sadrži — provenance se čuva. Zato se veza gasi ovde, na istom mestu gde se zapis i
+ * filtrira: dodavanje sluga u registar automatski uklanja i svaki link ka njemu, pa mrtva veza ne
+ * može da preživi ni u jednom brendu.
+ */
+function withoutRemovedReferences(product: CarsystemProduct): CarsystemProduct {
+  const related = (product.relatedProductSlugs ?? []).filter((slug) => !removedSlugs.has(slug));
+  const sections = Object.entries(product.detail ?? {}).filter(
+    ([, section]) =>
+      Array.isArray((section as { content?: { items?: { productSlug?: string }[] } })?.content?.items) &&
+      (section as { content: { items: { productSlug?: string }[] } }).content.items.some((item) => item.productSlug && removedSlugs.has(item.productSlug)),
+  );
+  if (related.length === (product.relatedProductSlugs ?? []).length && !sections.length) return product;
+
+  return {
+    ...product,
+    relatedProductSlugs: related,
+    ...(sections.length && product.detail
+      ? {
+          detail: {
+            ...product.detail,
+            ...Object.fromEntries(
+              sections.map(([key, section]) => {
+                const typed = section as { content: { items: { productSlug?: string }[] } };
+                return [key, { ...typed, content: { ...typed.content, items: typed.content.items.filter((item) => !item.productSlug || !removedSlugs.has(item.productSlug)) } }];
+              }),
+            ),
+          },
+        }
+      : {}),
+  };
+}
+
 const architecturedProducts = productRecords
   .filter((product) => !removedSlugs.has(product.slug))
   .map(withCatalogArchitecture);
@@ -2472,7 +2509,9 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
             : product.brandSlug === "sata"
               ? applySataSyncEnrichment(product)
               : product,
-);
+
+)
+  .map(withoutRemovedReferences);
 
 export function getAllCarsystemProducts() {
   return [...products];

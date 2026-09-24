@@ -1,6 +1,6 @@
 {
   "_comment": "Zapisi uklonjeni iz customer-facing kataloga odlukom vlasnika 2026-09-22. Ovo NIJE tvrdnja da je proizvod ukinut kod proizvođača: `status` kaže tačno na osnovu čega je uklonjen. Provenance se čuva — sync datasetima se ne dira nijedan zapis, a ručni zapisi bez izvora se brišu iz kataloga (soft-plus-git se vraća u legacy bazen `lib/carsystem-data.ts`). Fajl je jedini izvor istine za: filtriranje runtime kataloga (`lib/carsystem-data.ts`), 308 preusmerenja (`next.config.ts`) i regresioni test (`lib/catalog/removedFromCustomerCatalog.test.mjs`).",
-  "decidedOn": "2026-09-22",
+  "decidedOn": "2026-09-22 (prva odluka), 2026-09-23 (filteri i respiratorni program)",
   "statuses": {
     "BUSINESS_OUT_OF_PROGRAMME": "Firma proizvod više ne drži u programu. Nije dokaz da ga proizvođač više ne pravi.",
     "INVALID_MANUAL_RECORD": "Ručni zapis bez potvrđenog identiteta kod proizvođača — nije postojao kao artikal."
@@ -226,21 +226,234 @@
       "evidence": "functionalClass: RESPIRATOR_AIR_SUPPLY; sredstvo za čišćenje polumaske (air star).",
       "redirect": "/brendovi/sata",
       "removedWithParent": "sata-air-star-c"
+    },
+    {
+      "slug": "carsystem-star-mask",
+      "brand": "carsystem",
+      "name": "Carsystem Star Mask",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+      "evidence": "Zvanični opis: „Polumaska sa zamenjivim filterima i predfilterima”; taksonomija `zastita`, oznaka „Zaštitna maska”.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-star-mask-refill",
+      "brand": "carsystem",
+      "name": "Carsystem Star Mask Refill",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+      "evidence": "Zamenski filterski ulošci sa aktivnim ugljem klase A2 za masku Star Mask.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-star-mask-pre-p2-r",
+      "brand": "carsystem",
+      "name": "Carsystem Star Mask Pre P2 R",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+      "evidence": "Predfilteri klase zaštite P2 za filterske uloške maske Star Mask.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-star-mask-disc",
+      "brand": "carsystem",
+      "name": "Carsystem Star Mask Disc",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+      "evidence": "Okvir koji predfilter drži pričvršćen na filteru sa aktivnim ugljem.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-star-dust-2-0-ffp2",
+      "brand": "carsystem",
+      "name": "Carsystem Star Dust 2.0 FFP2",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+      "evidence": "FFP maska klase zaštite FFP2 NR.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-star-dust-2-0-ffp3-with-valve",
+      "brand": "carsystem",
+      "name": "Carsystem Star Dust 2.0 FFP3 with Valve",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+      "evidence": "FFP maska klase zaštite FFP3 NR sa izduvnim ventilom.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "sata-filter-series-100",
+      "brand": "sata",
+      "name": "SATA filter series 100",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Izvor: `filter-technology`; priprema komprimovanog vazduha u zoni pripreme.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-filter-series-200",
+      "brand": "sata",
+      "name": "SATA filter series 200",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Izvor: `filter-technology`; priprema komprimovanog vazduha za lakiranje i za sisteme za disanje.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-filter-series-400",
+      "brand": "sata",
+      "name": "SATA filter series 400",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Izvor: `filter-technology`; priprema komprimovanog vazduha u kabini i za disanje.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-filter-500-series",
+      "brand": "sata",
+      "name": "SATA filter 500 series",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_1",
+      "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Izvor: `filter-technology`; priprema komprimovanog vazduha u kabini i za respiratorne sisteme.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "sata-mini-filter",
+      "brand": "sata",
+      "name": "SATA mini filter, 1/4\" spoljašnji navoj",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Filter na ulazu pištolja (1/4\" spoljašnji navoj).",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "carsystem-paint-strainer",
+      "brand": "carsystem",
+      "name": "Carsystem Paint Strainer",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Filtriranje materijala za lakiranje.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-multi-strain",
+      "brand": "carsystem",
+      "name": "Carsystem Multi Strain",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Filtriranje materijala za lakiranje.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carsystem-pg-fg-fine-filter",
+      "brand": "carsystem",
+      "name": "Carsystem PG - FG Fine Filter",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Filtriranje boje u gravitacionoj čaši pištolja.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "carfit-disposable-paint-strainers",
+      "brand": "carfit",
+      "name": "Car Fit Disposable Paint Strainers",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARFIT_SYNC",
+      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Ceđenje boje i materijala na bazi organskih rastvarača.",
+      "redirect": "/brendovi/carfit"
+    },
+    {
+      "slug": "carfit-scr-strainers",
+      "brand": "carfit",
+      "name": "Car Fit SCR strainers",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARFIT_SYNC",
+      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Ceđenje boje i materijala na bazi organskih rastvarača.",
+      "redirect": "/brendovi/carfit"
+    },
+    {
+      "slug": "sata-material-coupling-with-plug-in-nipple-and-material",
+      "brand": "sata",
+      "name": "SATA spojka za materijal sa utičnom niplom i sitom za materijal 60 msh, 3/8\" spoljašnji navoj, G 3/8\" unutrašnji navoj za SATA pištolje sa dovodom pod pritiskom",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Spojnica sa integrisanim sitom za materijal 60 msh.",
+      "redirect": "/brendovi/sata"
+    },
+    {
+      "slug": "carsystem-paint-arrestor-ii",
+      "brand": "carsystem",
+      "name": "Carsystem PAINT ARRESTOR II",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
+      "evidence": "Podni filter od staklenih vlakana koji izdvaja čestice boje iz izduvnog vazduha lakirne komore.",
+      "redirect": "/brendovi/carsystem"
+    },
+    {
+      "slug": "sata-filter-cover",
+      "brand": "sata",
+      "name": "SATA poklopac filtera",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji bez filtera/sita koje firma više ne prodaje nema customer-facing funkciju.",
+      "evidence": "Poklopac za SATA filter jedinice; `relatedProductSlugs` pokazuje na `sata-filter-500-series`.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-filter-500-series"
+    },
+    {
+      "slug": "sata-high-flow-coupling-female-filter-500-series",
+      "brand": "sata",
+      "name": "SATA high-flow spojka, ženska, crveno, pakovanje 2 kom.",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji bez filtera/sita koje firma više ne prodaje nema customer-facing funkciju.",
+      "evidence": "Zvanični naziv: „…for SATA filter series 500”; svrha „Pribor za SATA filter 500 series”.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-filter-500-series"
+    },
+    {
+      "slug": "carsystem-dispenser-for-paint-strainers",
+      "brand": "carsystem",
+      "name": "Carsystem Dispenser for paint strainers",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Pribor koji bez filtera/sita koje firma više ne prodaje nema customer-facing funkciju.",
+      "evidence": "Dispenzer sa prostorom za 150 cediljki za boju; svrha „Odlaganje cediljki za boju”.",
+      "redirect": "/brendovi/carsystem",
+      "removedWithParent": "carsystem-paint-strainer"
+    },
+    {
+      "slug": "sata-strainer-holder",
+      "brand": "sata",
+      "name": "Držač sita za sito 200 msh, za filter materijala SATAjet/Spray-Mix",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "SATA_SYNC_PHASE_2",
+      "reason": "Pribor koji bez filtera/sita koje firma više ne prodaje nema customer-facing funkciju.",
+      "evidence": "Zvanični naziv: „Strainer holder for sieve 200 msh, for material filter SATAjet/Spray-Mix”.",
+      "redirect": "/brendovi/sata",
+      "removedWithParent": "sata-material-coupling-with-plug-in-nipple-and-material"
     }
   ],
   "keptExplicitly": {
-    "_comment": "Provereno i namerno NIJE uklonjeno — respiratorne maske nisu masking proizvodi, a procesni filteri nisu respiratorna oprema.",
-    "processFilters": [
-      "sata-filter-series-100",
-      "sata-filter-series-200",
-      "sata-filter-series-400",
-      "sata-filter-500-series",
-      "sata-filter-cover",
-      "sata-high-flow-coupling-female-filter-500-series",
-      "sata-mini-filter",
-      "sata-strainer-holder",
-      "carsystem-pg-fg-fine-filter"
-    ],
+    "_comment": "Provereno i namerno NIJE uklonjeno. Respiratorne maske nisu masking proizvodi, a zadržani pribor iz `filterAdjacentKept` ima primarnu funkciju držanja pištolja — pištolji ostaju u programu, pa pribor ostaje sa njima.",
     "protectiveClothing": [
       "sata-suit-basic",
       "sata-suit-race",
@@ -258,6 +471,12 @@
       "carsystem-masking-film-blue",
       "carsystem-masking-film-yellow"
     ],
-    "correctBrandRecord": ["carfit-soft-plus-putty"]
+    "correctBrandRecord": [
+      "carfit-soft-plus-putty"
+    ],
+    "filterAdjacentKept": [
+      "sata-spray-gun-holder-with-strainer-holder",
+      "sata-insert"
+    ]
   }
 }

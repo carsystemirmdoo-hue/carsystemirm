@@ -206,17 +206,25 @@ test("satajet-x-5500: isti slug i interni ključ, javno zvanični CF1931072, sta
    * customer-facing programa uklonila 6 (respiratorni program + LCS Hard Cups), pa ih runtime
    * više ne prikazuje. Broj se izvodi iz registra, da se opseg synca i odluka o programu ne pomešaju.
    */
-  const removedPhase1 = JSON.parse(readFileSync(new URL("../../data/catalog/removed-from-customer-catalog.json", import.meta.url), "utf8"))
-    .records.filter((record) => record.source === "SATA_SYNC_PHASE_1").length;
-  assert.equal(removedPhase1, 6);
-  assert.equal(cards.length, 66 - removedPhase1);
+  const removed = JSON.parse(readFileSync(new URL("../../data/catalog/removed-from-customer-catalog.json", import.meta.url), "utf8"))
+    .records.filter((record) => record.source === "SATA_SYNC_PHASE_1");
+  // Svaki uklonjeni slug mora biti STVARNA porodica faze 1 — tako typo u registru pada, a ne prolazi.
+  const phase1Slugs = new Set([...dataset.products, ...Object.values(dataset.enrichments)].map((entry) => entry.slug));
+  for (const record of removed) assert.ok(phase1Slugs.has(record.slug), `${record.slug} nije porodica faze 1`);
+  // Tačna jednakost: nestanak porodice koja NIJE u registru obara test (kao i višak u registru).
+  assert.equal(cards.length, 66 - removed.length);
+  assert.deepEqual(
+    [...phase1Slugs].filter((slug) => !cards.some((card) => card.id === slug)).sort(),
+    removed.map((record) => record.slug).sort(),
+    "iz kataloga smeju nedostajati tačno one porodice koje registar navodi",
+  );
   assert.equal(cards.find((card) => card.id === "satajet-x-5500").productCode, "CF1931072");
   for (const card of cards) assert.match(card.productCode, /^CF\d+$/, card.id);
   assert.ok(!cards.some((card) => /SATA-X5500/.test(JSON.stringify([card.productCode, card.shortCode]))));
 
   // Jedna porodica = jedan zapis: CF1931072 ne sme postojati i kao uvezen zapis.
   assert.equal(sata.filter((product) => [product.sku, product.publicCode, product.manufacturerCode].includes("CF1931072")).length, 1);
-  assert.equal(sata.filter((product) => !phase2Slugs.has(product.slug)).length, 66 - removedPhase1);
+  assert.equal(sata.filter((product) => !phase2Slugs.has(product.slug)).length, 66 - removed.length);
   // Zvanični brojevi artikala su u redovima; interna oznaka nije među njima.
   const rows = record.detail.variants.content.rows;
   assert.equal(rows.length, 44);

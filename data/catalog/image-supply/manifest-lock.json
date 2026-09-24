@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
-  "createdFromMainSha": "621cbad9ae7cd3969dd4d255e888550124cf8a4a",
-  "catalogIdentityFingerprint": "f637912063982fff8d5b50c191a63d05bc21cdff192a3908430a8e19ec0f01eb",
+  "createdFromMainSha": "7b61599d591f2d87c15c8a22df0f22edbf18590e",
+  "catalogIdentityFingerprint": "0a18053cf28c25d1e7d11aff6405fd7a77a07a8a34c9fac1010b45b104553bcf",
   "activeBrands": [
     "baslac",
     "befar",
@@ -14,22 +14,22 @@
     "rupes",
     "sata"
   ],
-  "totalCards": 1189,
+  "totalCards": 1167,
   "cardsByBrand": {
     "baslac": 57,
     "befar": 64,
-    "carfit": 122,
-    "carsystem": 437,
+    "carfit": 120,
+    "carsystem": 426,
     "cosmos-lac": 84,
     "norbin": 13,
     "rm": 223,
     "rupes": 25,
-    "sata": 164
+    "sata": 155
   },
-  "totalImageIdentities": 1823,
-  "missingCount": 270,
+  "totalImageIdentities": 1801,
+  "missingCount": 261,
   "userSupplyCount": 98,
-  "rightsReviewCount": 184,
+  "rightsReviewCount": 176,
   "userSupplyByBrand": {
     "baslac": 37,
     "befar": 7,
@@ -39,31 +39,31 @@
   },
   "missingByAction": {
     "IMPORT_OFFICIAL_IF_APPROVED": 11,
-    "KEEP_PLACEHOLDER": 13,
-    "RIGHTS_DECISION": 148,
+    "KEEP_PLACEHOLDER": 12,
+    "RIGHTS_DECISION": 140,
     "USER_SUPPLY": 98
   },
   "manifests": {
     "MISSING_PRODUCT_IMAGES.csv": {
-      "sha256": "ed1ae5c3cd10d485487cd9bc595a2005e7a0f86e430c1cf17e51511d59cb3279",
-      "rows": 270
+      "sha256": "7e191a88535d60a7f28edeee5f51bceeb68be20f9ee4a53b0b0e0673ea2e0279",
+      "rows": 261
     },
     "USER_IMAGE_SUPPLY_QUEUE.csv": {
       "sha256": "65040c4a4a99c936a2311b6efb4493069d0f1a694e302bae0fcded4591c9cade",
       "rows": 98
     },
     "IMAGE_RIGHTS_REVIEW.csv": {
-      "sha256": "b59269792ec1d23e33e1d104c7e94d1c0e17c54922415fdb34e0b2aa196e915e",
-      "rows": 184
+      "sha256": "529e2101a3b624dcc0b865660c0e7f39c5cff726b71c995508c5a3e03b694ab7",
+      "rows": 176
     }
   },
   "imageIdentityInventory": {
     "tracked": false,
-    "sha256": "bba2c8fba1c95ce3662f1a92ef7d9e5ed5e3f69009c1b1617c1e53d199f244cc",
-    "imageIdentityFingerprint": "02e39a4e2dae35554c854f58f64ef8b6b3cd801bc1668aa823b728ac48459941",
+    "sha256": "fb696fb7780125ac11f9fe37df586ca07bd613df16750e5e5c585f90a8a379d9",
+    "imageIdentityFingerprint": "97457124129710822279ae108b43a08b3e3b4747457fd3802fcfd1c93d975dfb",
     "brokenReferences": 0,
     "wrongSibling": 0,
-    "rows": 1823
+    "rows": 1801
   },
   "sourceUpload": {
     "targetExtension": ".webp",
@@ -79,7 +79,7 @@
     "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "radni fajl vlasnika (owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
-    "approvedAt": "2026-09-22",
+    "approvedAt": "2026-09-24",
     "note": "approvedAt je samo metapodatak; nije deo identiteta manifesta"
   }
 }

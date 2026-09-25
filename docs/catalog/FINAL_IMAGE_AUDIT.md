@@ -10,7 +10,7 @@
 
 **Kako se ovi fajlovi prave.** `npm run catalog:image-supply:generate` (`scripts/catalog/image-audit/`) ih gradi iz STVARNOG runtime kataloga i praćenih dokaza u `data/catalog/image-quality/evidence/`. Drugo pokretanje daje bajt-identične izlaze. Provera zatečenog stanja: `npm run catalog:image-supply:check`.
 
-**Nepraćeni radni međuizlaz** (`.cache/image-audit/`, ne čita ga ni runtime ni budući importer): pun inventar `IMAGE_IDENTITY_INVENTORY.csv` (1801 redova; SHA-256 `8f577f3e3a399fc2f638da42239545962ef9b4a7351afa8c0182deb569b94a69`, otisak je u lock-u). Nazivi fajlova bez putanje u nastavku odnose se na taj radni inventar, osim canonical manifesta navedenih gore.
+**Nepraćeni radni međuizlaz** (`.cache/image-audit/`, ne čita ga ni runtime ni budući importer): pun inventar `IMAGE_IDENTITY_INVENTORY.csv` (1801 redova; SHA-256 `f8f1d1afcc670eb37d2f75f06e497dea33a07f283ddb602eadb58de38b2d72e2`, otisak je u lock-u). Nazivi fajlova bez putanje u nastavku odnose se na taj radni inventar, osim canonical manifesta navedenih gore.
 
 Kolone `USER_IMAGE_SUPPLY_QUEUE.csv`: odobreni owner supply pack (isti `image_id` / `suggested_filename` / `target_path` kao u `MISSING_PRODUCT_IMAGES.csv`), dopunjen sa `public_code`, `manufacturer_code`, `image_scope`, `members_sharing_identity`, `what_image_is_needed`, `why_image_is_needed`.
 

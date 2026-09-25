@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
-  "createdFromMainSha": "7e89c060942431c19f9c291f7592c7ab00565189",
+  "createdFromMainSha": "e679765ac5146e768cc94ecf56bbc5b3e5fdbec7",
   "catalogIdentityFingerprint": "0a18053cf28c25d1e7d11aff6405fd7a77a07a8a34c9fac1010b45b104553bcf",
   "activeBrands": [
     "baslac",
@@ -58,7 +58,7 @@
   },
   "imageIdentityInventory": {
     "tracked": false,
-    "sha256": "8f577f3e3a399fc2f638da42239545962ef9b4a7351afa8c0182deb569b94a69",
+    "sha256": "f8f1d1afcc670eb37d2f75f06e497dea33a07f283ddb602eadb58de38b2d72e2",
     "imageIdentityFingerprint": "97457124129710822279ae108b43a08b3e3b4747457fd3802fcfd1c93d975dfb",
     "brokenReferences": 0,
     "wrongSibling": 0,
@@ -78,7 +78,7 @@
     "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
-    "approvedAt": "2026-09-24",
+    "approvedAt": "2026-09-25",
     "note": "approvedAt je samo metapodatak; nije deo identiteta manifesta"
   }
 }

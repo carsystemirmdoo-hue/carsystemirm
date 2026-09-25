@@ -117,14 +117,25 @@ if (!batch) errors.push(`nedostaje ${BATCH}`);
 else {
   const supplyById = new Map(userSupply.rows.map((row) => [row.image_id, row]));
   if (duplicates(batch.rows, "image_id").length) errors.push(`${BATCH}: dupli image_id`);
+  /*
+   * Batch je ZAPIS ishoda, ne samo otvoren spisak. Red sa `status` SUPPLIED (slika je uvezena) ili
+   * DEFERRED (vlasnik je odložio) namerno više NIJE u master queue-u — provere identiteta važe samo
+   * za redove koji su i dalje otvoreni.
+   */
+  const supplied = new Set(JSON.parse(readFileSync(abs(`${DIR}/supplied-images.json`), "utf8")).images.map((entry) => entry.imageId));
   for (const row of batch.rows) {
+    const status = row.status || "OPEN";
+    if (!["OPEN", "SUPPLIED", "DEFERRED"].includes(status)) errors.push(`${BATCH}: ${row.image_id} — nepoznat status ${status}`);
+    if (status === "SUPPLIED" && !supplied.has(row.image_id)) errors.push(`${BATCH}: ${row.image_id} je označen SUPPLIED, a nije u supplied-images.json`);
+    if (!row.pilot_reason) errors.push(`${BATCH}: ${row.image_id} nema pilot_reason`);
+    if (!OWNER_ANSWERS.has(row.owner_has_product)) errors.push(`${BATCH}: ${row.image_id} — owner_has_product mora biti prazno, YES, NO ili NEED_TO_CHECK`);
+    if (status !== "OPEN") continue;
+
     const master = supplyById.get(row.image_id);
-    if (!master) { errors.push(`${BATCH}: ${row.image_id} nije u master USER_SUPPLY`); continue; }
+    if (!master) { errors.push(`${BATCH}: otvoren kandidat ${row.image_id} nije u master USER_SUPPLY`); continue; }
     if (rightsIds.has(row.image_id)) errors.push(`${BATCH}: ${row.image_id} je pod rights review`);
     if (missingById.get(row.image_id)?.action_required !== "USER_SUPPLY") errors.push(`${BATCH}: ${row.image_id} nije USER_SUPPLY u MISSING manifestu`);
     for (const column of Object.keys(master)) if (master[column] !== row[column]) errors.push(`${BATCH}: ${row.image_id} — kolona ${column} odstupa od master queue-a`);
-    if (!row.pilot_reason) errors.push(`${BATCH}: ${row.image_id} nema pilot_reason`);
-    if (!OWNER_ANSWERS.has(row.owner_has_product)) errors.push(`${BATCH}: ${row.image_id} — owner_has_product mora biti prazno, YES, NO ili NEED_TO_CHECK`);
   }
 }
 
@@ -169,7 +180,7 @@ if (writeLock) {
     manifests: measured.manifests,
     imageIdentityInventory: inventory,
     sourceUpload: SOURCE_UPLOAD,
-    workingFiles: { [BATCH]: "radni fajl vlasnika (owner_has_product); namerno van SHA lock-a, proverava se strukturno" },
+    workingFiles: { [BATCH]: "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno" },
   };
   // Vreme je metapodatak: ne ulazi u identitet i ne osvežava se ako se sadržaj nije promenio.
   const unchanged = previous && JSON.stringify({ ...previous, metadata: undefined }) === JSON.stringify({ ...body, metadata: undefined });

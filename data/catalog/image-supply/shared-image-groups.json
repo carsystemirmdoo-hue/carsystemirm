@@ -13,7 +13,12 @@
         "rm-gv-200-ghd-thinner",
         "rm-gv-300-ghd-thinner",
         "rm-gv-400-ghd-thinner"
-      ]
+      ],
+      "imageSupply": {
+        "status": "DEFERRED_OWNER_IMAGE_SUPPLY",
+        "decidedOn": "2026-09-22",
+        "reason": "Vlasnik je odlučio da se slike za ovu grupu ne rade u skorijem periodu. Proizvodi OSTAJU u katalogu i u pretrazi; samo se ne traži fotografija. Do opoziva odluke identitet nosi placeholder i NIJE otvoren zahtev prema vlasniku."
+      }
     },
     {
       "id": "rm-ghd-hardener",
@@ -25,7 +30,12 @@
         "rm-h-700-ghd-hardener",
         "rm-h-750-ghd-hardener",
         "rm-h-770-ghd-hardener"
-      ]
+      ],
+      "imageSupply": {
+        "status": "DEFERRED_OWNER_IMAGE_SUPPLY",
+        "decidedOn": "2026-09-22",
+        "reason": "Vlasnik je odlučio da se slike za ovu grupu ne rade u skorijem periodu. Proizvodi OSTAJU u katalogu i u pretrazi; samo se ne traži fotografija. Do opoziva odluke identitet nosi placeholder i NIJE otvoren zahtev prema vlasniku."
+      }
     }
   ]
 }

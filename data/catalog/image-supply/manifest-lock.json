@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
-  "createdFromMainSha": "7b61599d591f2d87c15c8a22df0f22edbf18590e",
+  "createdFromMainSha": "7e89c060942431c19f9c291f7592c7ab00565189",
   "catalogIdentityFingerprint": "0a18053cf28c25d1e7d11aff6405fd7a77a07a8a34c9fac1010b45b104553bcf",
   "activeBrands": [
     "baslac",
@@ -27,30 +27,29 @@
     "sata": 155
   },
   "totalImageIdentities": 1801,
-  "missingCount": 261,
-  "userSupplyCount": 98,
+  "missingCount": 246,
+  "userSupplyCount": 81,
   "rightsReviewCount": 176,
   "userSupplyByBrand": {
-    "baslac": 37,
-    "befar": 7,
-    "norbin": 13,
-    "rm": 38,
-    "sata": 3
+    "baslac": 34,
+    "norbin": 10,
+    "rm": 36,
+    "sata": 1
   },
   "missingByAction": {
     "IMPORT_OFFICIAL_IF_APPROVED": 11,
-    "KEEP_PLACEHOLDER": 12,
+    "KEEP_PLACEHOLDER": 14,
     "RIGHTS_DECISION": 140,
-    "USER_SUPPLY": 98
+    "USER_SUPPLY": 81
   },
   "manifests": {
     "MISSING_PRODUCT_IMAGES.csv": {
-      "sha256": "7e191a88535d60a7f28edeee5f51bceeb68be20f9ee4a53b0b0e0673ea2e0279",
-      "rows": 261
+      "sha256": "a8d71707d9c7f3d7e11f397f834d7abe0e4c2bc895acc1e5c1a5204514b91b10",
+      "rows": 246
     },
     "USER_IMAGE_SUPPLY_QUEUE.csv": {
-      "sha256": "65040c4a4a99c936a2311b6efb4493069d0f1a694e302bae0fcded4591c9cade",
-      "rows": 98
+      "sha256": "63ff0d5b0f36e007f3576513d322cc61ac32715889423e80c7e4f80c04494fd5",
+      "rows": 81
     },
     "IMAGE_RIGHTS_REVIEW.csv": {
       "sha256": "529e2101a3b624dcc0b865660c0e7f39c5cff726b71c995508c5a3e03b694ab7",
@@ -59,7 +58,7 @@
   },
   "imageIdentityInventory": {
     "tracked": false,
-    "sha256": "fb696fb7780125ac11f9fe37df586ca07bd613df16750e5e5c585f90a8a379d9",
+    "sha256": "8f577f3e3a399fc2f638da42239545962ef9b4a7351afa8c0182deb569b94a69",
     "imageIdentityFingerprint": "97457124129710822279ae108b43a08b3e3b4747457fd3802fcfd1c93d975dfb",
     "brokenReferences": 0,
     "wrongSibling": 0,
@@ -76,7 +75,7 @@
     "matching": "basename(source) === basename(suggested_filename), znak-po-znak; ekstenzija izvora je bilo koja dozvoljena (bez razlike velika/mala slova); tačno jedan izvorni fajl po basename-u; nepoznat basename se ne uvozi"
   },
   "workingFiles": {
-    "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "radni fajl vlasnika (owner_has_product); namerno van SHA lock-a, proverava se strukturno"
+    "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
     "approvedAt": "2026-09-24",

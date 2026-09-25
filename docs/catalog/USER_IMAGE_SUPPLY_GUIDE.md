@@ -59,26 +59,19 @@ Importer još NIJE implementiran; ovaj paket ništa ne uvozi.
 | `PACKSHOT PAKOVANJA/VARIJANTE` | Potrebna je slika BAŠ tog pakovanja; slika drugog pakovanja iste kartice se ne koristi. |
 | `SLIKA REDA (boja/dimenzija)` | Potrebna je slika BAŠ te boje/dimenzije (BEFAR). |
 
-## baslac — 37 fotografija
+## baslac — 34 fotografija
 
 Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45, Basecoat 35, Topcoat 30, Topcoat 30 CV) imaju JEDNU sliku serije: limenke te linije izgledaju isto, razlikuje ih samo oznaka tonera na nalepnici, a zapremina se bira u kartici — ne traži se fotografija po toneru ni po pakovanju. Ostali zapisi su zasebni proizvodi sa svojom šifrom.
 
-### SLIKA SERIJE (1)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P2 | baslac Basecoat 45 | — | Na upit | 69 | `baslac__baslac-basecoat-45.webp` |
-
-### PACKSHOT PAKOVANJA/VARIJANTE (4)
+### PACKSHOT PAKOVANJA/VARIJANTE (3)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
 | P3 | Baslac 20-24 2K Primerfiller Grey 4 L | — | 4 L | 1 | `baslac__baslac-20-24-2k-primerfiller-grey-4l.webp` |
-| P3 | Baslac 20-34 2K Primerfiller White 1 L | 20-34 | 1 L | 1 | `baslac__baslac-20-34-2k-primerfiller-white-1l.webp` |
 | P3 | Baslac 20-94 2K Primerfiller Black 1 L | 20-94 | 1 L | 1 | `baslac__baslac-20-94-2k-primerfiller-black-1l.webp` |
 | P3 | Baslac 27-10 2K Washprimer 1 L | 27-10 | 1 L | 1 | `baslac__baslac-27-10-2k-washprimer-1l.webp` |
 
-### PACKSHOT PROIZVODA (32)
+### PACKSHOT PROIZVODA (31)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
@@ -86,7 +79,6 @@ Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45
 | P2 | Baslac 21-11 2K Plastic Primer VOC 1 L | 21-11 | 1 L | 1 | `baslac__baslac-21-11-2k-plastic-primer-voc-1l.webp` |
 | P2 | Baslac 21-20 Plastic Primer 400 ml | 21-20 | 400 ml | 1 | `baslac__baslac-21-20-plastic-primer-400ml.webp` |
 | P2 | Baslac 30-S510 | — | Na upit | 1 | `baslac__baslac-30-s510-s-serija.webp` |
-| P2 | baslac 45-R45 Dilutant | 45-R45 | 5 L | 1 | `baslac__baslac-45-r45.webp` |
 | P2 | baslac 45-W10 3-Stage Additive and Blending Clear | 45-W10 | 0,5 L | 1 | `baslac__baslac-45-w10.webp` |
 | P2 | baslac 50-05 2K Hardener Ambient UC | 50-05 | Na upit | 1 | `baslac__baslac-50-05-2k-hardener-ambient-uc.webp` |
 | P2 | baslac 50-10 2K Primerfiller Hardener Extra Fast | 50-10 | Na upit | 1 | `baslac__baslac-50-10-2k-primerfiller-hardener-extra-fast.webp` |
@@ -115,16 +107,9 @@ Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45
 | P2 | baslac 80-30 Additive Plast | 80-30 | Na upit | 1 | `baslac__baslac-80-30-additive-plast.webp` |
 | P2 | baslac 81-30 Additive Chassis | 81-30 | Na upit | 1 | `baslac__baslac-81-30-additive-chassis.webp` |
 
-## R-M — 38 fotografija
+## R-M — 36 fotografija
 
 R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Izuzetak su dve grupe istog naziva (GHD THINNER i GHD HARDENER) gde se razlikuje samo oznaka brzine: za njih je dovoljna jedna reprezentativna slika grupe. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
-
-### REPREZENTATIVNA SLIKA GRUPE (2)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P2 | R-M GHD HARDENER | H 700 H 750 H 770 | — | 3 | `rm__group-rm-ghd-hardener.webp` |
-| P2 | R-M GHD THINNER | GV 100 GV 200 GV 300 GV 400 | — | 4 | `rm__group-rm-ghd-thinner.webp` |
 
 ### PACKSHOT PROIZVODA (36)
 
@@ -167,23 +152,16 @@ R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je pose
 | P2 | R-M AGILIS MIX | RA 040 | Na upit | 1 | `rm__rm-ra-040-agilis-mix.webp` |
 | P2 | R-M UNO HD | — | Na upit | 1 | `rm__rm-uno-hd.webp` |
 
-## Norbin — 13 fotografija
+## Norbin — 10 fotografija
 
 Norbin izvor nema slike ni stranice proizvoda. Jedna fotografija po proizvodu; pakovanje je navedeno u tabeli. `N15-020 5 L` je poseban identitet jer 1 L već ima sliku.
 
-### PACKSHOT PAKOVANJA/VARIJANTE (1)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P3 | Norbin N15-020 5 L | N15-020 | 5 L | 1 | `norbin__norbin-n15-020-5l.webp` |
-
-### PACKSHOT PROIZVODA (12)
+### PACKSHOT PROIZVODA (10)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
 | P2 | Norbin N15-V20 Clear VOC | N15-V20 | 4 L | 1 | `norbin__norbin-n15-v20-clear-voc.webp` |
 | P2 | Norbin N15-V25 Fast Clear VOC | N15-V25 | 5 L | 1 | `norbin__norbin-n15-v25-fast-clear-voc.webp` |
-| P2 | Norbin N55-015 1K Plastic Primer | N55-015 | 1 L | 1 | `norbin__norbin-n55-015-1k-plastic-primer.webp` |
 | P2 | Norbin N55-V20 2K Primer Filler grey | N55-V20 | 2,5 L | 1 | `norbin__norbin-n55-v20-2k-primer-filler-grey.webp` |
 | P2 | Norbin N55-V29 2K Primer Filler black | N55-V29 | 2,5 L | 1 | `norbin__norbin-n55-v29-2k-primer-filler-black.webp` |
 | P2 | Norbin N60-V20 Multifunctional Body Filler + Hardener | N60-V20 | 0,05 kg | 1 | `norbin__norbin-n60-v20-multifunctional-body-filler-hardener.webp` |
@@ -191,41 +169,17 @@ Norbin izvor nema slike ni stranice proizvoda. Jedna fotografija po proizvodu; p
 | P2 | Norbin N75-021 Hardener Normal | N75-021 | 0,5 L | 1 | `norbin__norbin-n75-021-hardener-normal.webp` |
 | P2 | Norbin N75-022 Hardener Slow | N75-022 | 2,5 L | 1 | `norbin__norbin-n75-022-hardener-slow.webp` |
 | P2 | Norbin N75-V21 Clear Hardener VOC | N75-V21 | 1 L | 1 | `norbin__norbin-n75-v21-clear-hardener-voc.webp` |
-| P2 | Norbin N85-021 Thinner | N85-021 | 1 L | 1 | `norbin__norbin-n85-021-thinner.webp` |
 | P2 | Norbin N95-060 Silicone cleaner | N95-060 | 5 L | 1 | `norbin__norbin-n95-060-silicone-cleaner.webp` |
 
-## BEFAR — 7 fotografija
-
-Kartice već imaju packshot; nedostaje samo 7 redova određene boje/dimenzije. Ovo je najniži prioritet (P3): PDP do tada prikazuje sliku kartice.
-
-### SLIKA REDA (boja/dimenzija) (7)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P3 | Befar Carved Velcro Polishing Pad | 05801 | Bela | 1 | `befar__befar-carved-velcro-polishing-pad__05801.webp` |
-| P3 | Befar Velcro Polishing Pad | 44805 | Plava · 80 × 25 mm | 1 | `befar__befar-velcro-polishing-pad__44805.webp` |
-| P3 | Befar Velcro Polishing Pad | 44806 | Krem · 80 × 25 mm | 1 | `befar__befar-velcro-polishing-pad__44806.webp` |
-| P3 | Befar Velcro Polishing Pad | 44807 | Bordo · 80 × 25 mm | 1 | `befar__befar-velcro-polishing-pad__44807.webp` |
-| P3 | Befar Waffle Velcro Polishing Pad | 04503 | Crna · 150 × 25 mm | 1 | `befar__befar-waffle-velcro-polishing-pad__04503.webp` |
-| P3 | Befar Waffle Velcro Polishing Pad | 448031 | Crna · 80 × 25 mm | 1 | `befar__befar-waffle-velcro-polishing-pad__448031.webp` |
-| P3 | Befar Waffle Velcro Polishing Pad | 448061 | Bordo · 80 × 25 mm | 1 | `befar__befar-waffle-velcro-polishing-pad__448061.webp` |
-
-## SATA — 3 fotografija
+## SATA — 1 fotografija
 
 Samo porodice za koje SATA sliku uopšte NE objavljuje. SATA proizvodi za koje zvanična slika postoji NISU u ovom spisku — oni čekaju odluku o pravima (rights review) i ne treba ih fotografisati sada.
 
-### PACKSHOT KARTICE (1)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P2 | SATAjet 1500 B | 1029562 1029702 1029710 1093575 | — | 4 | `sata__satajet-1500-b.webp` |
-
-### PACKSHOT PROIZVODA (2)
+### PACKSHOT PROIZVODA (1)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
 | P2 | SATA Release agent spray system | 187740 | Art. 187740 | 1 | `sata__sata-release-agent-spray-system.webp` |
-| P2 | SATAjet 3000 B | 190538 | Art. 190538 | 1 | `sata__satajet-3000-b.webp` |
 
 ## Predaja
 

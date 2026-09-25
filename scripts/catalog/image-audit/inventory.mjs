@@ -55,8 +55,13 @@ const metrics = readJson("data/product-image-metrics.generated.json")?.images ??
  * (`data/catalog/image-supply/shared-image-groups.json`). Deli se samo image identity: slug,
  * naziv, šifra i PDP ostaju odvojeni, porodica se ne pravi.
  */
+/* Slike koje je dostavio vlasnik (`supplied-images.json`) — runtime ih već prikazuje. */
+const suppliedBatch = readJson("data/catalog/image-supply/supplied-images.json")?.batch ?? "OWNER_SUPPLY";
+const suppliedByPath = new Map((readJson("data/catalog/image-supply/supplied-images.json")?.images ?? []).map((entry) => [entry.path, entry]));
 const sharedImageGroups = readJson("data/catalog/image-supply/shared-image-groups.json")?.groups ?? [];
 const sharedGroupOf = new Map(sharedImageGroups.flatMap((group) => group.members.map((slug) => [slug, group])));
+/* Grupe za koje vlasnik ne traži sliku u ovom periodu: placeholder je prihvaćen, bez otvorenog zahteva. */
+const deferredGroupIds = new Set(sharedImageGroups.filter((group) => group.imageSupply?.status === "DEFERRED_OWNER_IMAGE_SUPPLY").map((group) => group.id));
 const groupedCardIds = new Set();
 const edgeFrame = readJson("data/catalog/image-quality/evidence/edge-frame.generated.json", {});
 const HISTORICAL_BORDER_FRAME = /carsystem-rupes-|carsystem-paint-trolley-flexi-plus/; // istorijski nalaz: „RUPES + paint-trolley-flexi-plus”
@@ -117,7 +122,7 @@ for (const card of runtime.listing.canonical) {
     if (record.slug === group.members[0]) {
       const members = group.members.map((slug) => runtime.products.find((product) => product.slug === slug)).filter(Boolean);
       const srcs = [...new Set(members.map((member) => member.productImage?.src ?? null))];
-      push({ id: `${card.brandSlug}__group-${group.id}`, brand: card.brandSlug, cardId: card.id, record, scope: "SHARED_IMAGE_GROUP", src: srcs.length === 1 ? srcs[0] : null, mixedSrcs: srcs.length > 1 ? srcs : null,
+      push({ id: `${card.brandSlug}__group-${group.id}`, groupId: group.id, brand: card.brandSlug, cardId: card.id, record, scope: "SHARED_IMAGE_GROUP", src: srcs.length === 1 ? srcs[0] : null, mixedSrcs: srcs.length > 1 ? srcs : null,
         groupLabel: group.label, members: members.length, articleNumbers: members.map(articleOf).filter(Boolean),
         notes: [`jedna reprezentativna slika grupe pokriva ${members.length} zapisa (${members.map(articleOf).filter(Boolean).join(", ")}); ${group.representativeImageNote}`] });
     }
@@ -145,6 +150,18 @@ function classify(identity) {
 
   if (identity.mixedSrcs) return { ...out, classification: "NEEDS_MANUAL_REVIEW", action: "MANUAL_REVIEW", priority: "P2", provenance: "mixed", notes: [`varijante istog pakovanja koriste različite slike: ${identity.mixedSrcs.join(", ")}`] };
   if (src && !placeholder && !info.exists) return { ...out, classification: "BROKEN_IMAGE_REFERENCE", action: "FIX_REFERENCE", priority: "P1", provenance: "missing-file" };
+
+  /*
+   * Slika vlasnika ima prednost nad svakim brendskim pravilom: identitet je pokriven bez obzira na to
+   * da li proizvođač objavljuje sliku i pod kojim uslovima. Zato se proverava pre SATA/RUPES grana.
+   */
+  if (identity.scope === "SHARED_IMAGE_GROUP" && deferredGroupIds.has(identity.groupId) && placeholder) {
+    return { ...out, provenance: "none", official: "UNKNOWN", rights: "", classification: "PLACEHOLDER_ACCEPTED", action: "KEEP_PLACEHOLDER", priority: "P4",
+      notes: ["DEFERRED_OWNER_IMAGE_SUPPLY: vlasnik ne traži sliku za ovu grupu u ovom periodu; proizvodi ostaju u katalogu"] };
+  }
+
+  const supplied = suppliedByPath.get(src);
+  if (supplied) return { ...out, provenance: `owner-supplied:${suppliedBatch} (obrada: ${supplied.processing ?? "UNDECLARED"})`, official: "N/A (slika vlasnika)", rights: supplied.rightsBasis ?? "OWNER_CONFIRMATION_REQUIRED", classification: "OWNER_SUPPLIED_IMAGE", action: "NONE", priority: "" };
 
   /* SATA — rights gate: nijedna slika ne ulazi u runtime; dostupnost je samo činjenica o izvoru. */
   if (brand === "sata") {
@@ -294,7 +311,7 @@ const summary = {
   placeholders: { recordsOnPlaceholderByBrand: recordsOnPlaceholder, recordsOnPlaceholder: Object.values(recordsOnPlaceholder).reduce((a, b) => a + b, 0), placeholderIdentities: rows.filter((row) => row.current_image_status === "PLACEHOLDER").length, placeholderIdentitiesByBrand: count(rows.filter((row) => row.current_image_status === "PLACEHOLDER"), (row) => row.brand), cardsWhoseFaceIsPlaceholder: runtime.listing.canonical.filter((card) => { const face = card.id.startsWith("family:") ? runtime.families.find((family) => `family:${family.slug}` === card.id).representative : runtime.products.find((product) => product.slug === card.id); return isPlaceholder(face?.productImage?.src); }).length, cardsWhoseFaceIsPlaceholderByBrand: count(runtime.listing.canonical.filter((card) => { const face = card.id.startsWith("family:") ? runtime.families.find((family) => `family:${family.slug}` === card.id).representative : runtime.products.find((product) => product.slug === card.id); return isPlaceholder(face?.productImage?.src); }), (card) => card.brandSlug) },
   outputs: { inventory: rows.length, missing: missing.length, userSupply: supply.length, rightsReview: rights.length, qualityQueue: quality.length },
   missingByBrand: count(missing, (row) => row.brand), userSupplyByBrand: count(supply, (row) => row.brand), rightsByBrand: count(rights, (row) => row.brand), qualityByBrand: count(quality, (row) => row.brand), qualityByNeed: count(quality, (row) => row.evidence_flags),
-  satisfactory: rows.filter((row) => ["APPROVED_RUNTIME_IMAGE", "LOCAL_LEGITIMATE_IMAGE", "IMAGE_QUALITY_REVIEW_ONLY"].includes(row.classification)).length,
+  satisfactory: rows.filter((row) => ["APPROVED_RUNTIME_IMAGE", "OWNER_SUPPLIED_IMAGE", "LOCAL_LEGITIMATE_IMAGE", "IMAGE_QUALITY_REVIEW_ONLY"].includes(row.classification)).length,
   runtimeImagePresentButRightsReview: rows.filter((row) => row.classification === "OFFICIAL_IMAGE_RIGHTS_REVIEW" && row.current_image_status === "RUNTIME_IMAGE").length,
   gate: {
     cardsAccounted: `${accountedCards.size}/${runtime.listing.canonical.length}`, cardsWithoutIdentity: runtime.listing.canonical.filter((card) => !rows.some((row) => row.card_id === card.id) && !groupedCardIds.has(card.id)).length,
@@ -311,7 +328,7 @@ write("summary.generated.json", `${JSON.stringify(summary, null, 1)}\n`);
 /* ── 5. FINAL_IMAGE_AUDIT.md ──────────────────────────────────────────────────────────────── */
 const NAME = { carsystem: "Carsystem", rupes: "RUPES", carfit: "C.A.R.FIT", befar: "BEFAR", rm: "R-M", baslac: "baslac", norbin: "Norbin", sata: "SATA", "cosmos-lac": "Cosmos Lac" };
 const ORDER = ["carsystem", "rupes", "carfit", "befar", "rm", "baslac", "norbin", "sata", "cosmos-lac"];
-const CLASSES = ["APPROVED_RUNTIME_IMAGE", "LOCAL_LEGITIMATE_IMAGE", "IMAGE_QUALITY_REVIEW_ONLY", "OFFICIAL_IMAGE_RIGHTS_REVIEW", "OFFICIAL_IMAGE_AVAILABLE_NOT_IMPORTED", "OFFICIAL_IMAGE_NOT_PUBLISHED", "USER_SUPPLY_REQUIRED", "PACKAGE_OR_VARIANT_IMAGE_MISSING", "PLACEHOLDER_ACCEPTED", "WRONG_SIBLING_IMAGE", "BROKEN_IMAGE_REFERENCE", "NEEDS_MANUAL_REVIEW"];
+const CLASSES = ["APPROVED_RUNTIME_IMAGE", "OWNER_SUPPLIED_IMAGE", "LOCAL_LEGITIMATE_IMAGE", "IMAGE_QUALITY_REVIEW_ONLY", "OFFICIAL_IMAGE_RIGHTS_REVIEW", "OFFICIAL_IMAGE_AVAILABLE_NOT_IMPORTED", "OFFICIAL_IMAGE_NOT_PUBLISHED", "USER_SUPPLY_REQUIRED", "PACKAGE_OR_VARIANT_IMAGE_MISSING", "PLACEHOLDER_ACCEPTED", "WRONG_SIBLING_IMAGE", "BROKEN_IMAGE_REFERENCE", "NEEDS_MANUAL_REVIEW"];
 const byClass = summary.identities.byClassification;
 const md = [];
 md.push("# Final image audit (READ ONLY)\n");

@@ -788,6 +788,33 @@
   --product-content-offset-y: 0.142;
 }
 
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-20-34-2k-primerfiller-white-1l.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7418;
+  --product-content-fill-x: 0.6874;
+  --product-content-fill-y: 0.9266;
+  --product-content-offset-x: 0.1563;
+  --product-content-offset-y: 0.0367;
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-45-r45.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6324;
+  --product-content-fill-x: 0.6037;
+  --product-content-fill-y: 0.9545;
+  --product-content-offset-x: 0.2026;
+  --product-content-offset-y: 0.0239;
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-basecoat-45.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7778;
+  --product-content-fill-x: 0.6643;
+  --product-content-fill-y: 0.8541;
+  --product-content-offset-x: 0.1683;
+  --product-content-offset-y: 0.0781;
+}
+
 .fit[data-product-fit="/products/befar/catalog/befar-anti-hologram-2.webp"] {
   --product-canvas-aspect: 1.5;
   --product-content-aspect: 1.5;
@@ -1983,6 +2010,69 @@
   --product-content-fill-y: 1;
   --product-content-offset-x: 0.0025;
   --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-carved-velcro-polishing-pad__05801.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.3678;
+  --product-content-fill-x: 0.8541;
+  --product-content-fill-y: 0.6244;
+  --product-content-offset-x: 0.0726;
+  --product-content-offset-y: 0.2297;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-velcro-polishing-pad__44805.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.453;
+  --product-content-fill-x: 0.8876;
+  --product-content-fill-y: 0.6108;
+  --product-content-offset-x: 0.0598;
+  --product-content-offset-y: 0.1954;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-velcro-polishing-pad__44806.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.4606;
+  --product-content-fill-x: 0.8421;
+  --product-content-fill-y: 0.5766;
+  --product-content-offset-x: 0.0797;
+  --product-content-offset-y: 0.2185;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-velcro-polishing-pad__44807.webp"] {
+  --product-canvas-aspect: 1.2105;
+  --product-content-aspect: 1.4525;
+  --product-content-fill-x: 0.8862;
+  --product-content-fill-y: 0.7386;
+  --product-content-offset-x: 0.071;
+  --product-content-offset-y: 0.1553;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__04503.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.8521;
+  --product-content-fill-x: 0.9689;
+  --product-content-fill-y: 0.5231;
+  --product-content-offset-x: 0.0167;
+  --product-content-offset-y: 0.2329;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__448031.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.8883;
+  --product-content-fill-x: 0.8764;
+  --product-content-fill-y: 0.4641;
+  --product-content-offset-x: 0.0821;
+  --product-content-offset-y: 0.2982;
+}
+
+.fit[data-product-fit="/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__448061.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.8665;
+  --product-content-fill-x: 0.9809;
+  --product-content-fill-y: 0.5255;
+  --product-content-offset-x: 0.0159;
+  --product-content-offset-y: 0.2305;
 }
 
 .fit[data-product-fit="/products/carfit/carfit-maskirna-folija-4x5m.jpg"] {
@@ -16655,6 +16745,33 @@
   --product-content-offset-y: 0.1198;
 }
 
+.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n15-020-5l.webp"] {
+  --product-canvas-aspect: 0.8003;
+  --product-content-aspect: 0.5008;
+  --product-content-fill-x: 0.574;
+  --product-content-fill-y: 0.9173;
+  --product-content-offset-x: 0.2112;
+  --product-content-offset-y: 0.0414;
+}
+
+.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n55-015-1k-plastic-primer.webp"] {
+  --product-canvas-aspect: 0.951;
+  --product-content-aspect: 0.5784;
+  --product-content-fill-x: 0.5217;
+  --product-content-fill-y: 0.8577;
+  --product-content-offset-x: 0.2396;
+  --product-content-offset-y: 0.0521;
+}
+
+.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n85-021-thinner.webp"] {
+  --product-canvas-aspect: 0.8003;
+  --product-content-aspect: 0.6049;
+  --product-content-fill-x: 0.6756;
+  --product-content-fill-y: 0.8937;
+  --product-content-offset-x: 0.1613;
+  --product-content-offset-y: 0.0371;
+}
+
 .fit[data-product-fit="/products/rm/catalog/rm-a-1510-diamont-blender.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.5934;
@@ -17769,4 +17886,22 @@
   --product-content-fill-y: 0.9167;
   --product-content-offset-x: 0.1733;
   --product-content-offset-y: 0.0433;
+}
+
+.fit[data-product-fit="/products/sata/supplied/sata__satajet-1500-b.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.5481;
+  --product-content-fill-x: 0.5319;
+  --product-content-fill-y: 0.9705;
+  --product-content-offset-x: 0.2903;
+  --product-content-offset-y: 0.0167;
+}
+
+.fit[data-product-fit="/products/sata/supplied/sata__satajet-3000-b.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7436;
+  --product-content-fill-x: 0.7169;
+  --product-content-fill-y: 0.9641;
+  --product-content-offset-x: 0.1419;
+  --product-content-offset-y: 0.0152;
 }

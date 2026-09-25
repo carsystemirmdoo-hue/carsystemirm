@@ -1,4 +1,5 @@
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
+import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
 import {
@@ -2446,6 +2447,28 @@ function withCatalogArchitecture(product: CarsystemProduct): CarsystemProduct {
 const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => record.slug));
 
 /**
+ * Slike koje je dostavio vlasnik (`data/catalog/image-supply/supplied-images.json`).
+ *
+ * Primenjuju se ovde, uz filtriranje uklonjenih zapisa, jer je ovo jedina tačka kroz koju prolaze i
+ * ručni zapisi i svi sync adapteri — pa nijedan brend ne mora da nosi sopstvenu logiku, a generisani
+ * dataseti ostaju netaknuti. Zamenjuje se ISKLJUČIVO adresa slike; naziv, šifra, pakovanje i svaki
+ * drugi podatak o proizvodu ostaju kakvi jesu.
+ *
+ * Opseg iz registra bira gde slika ide:
+ *   CARD / VARIANT — `productImage` tog zapisa;
+ *   ARTICLE        — slika JEDNOG reda u tabeli šifara (ostali redovi se ne diraju);
+ *   FAMILY         — jedna slika serije: lice porodice i zapisi koji nose `packshotKind: family`.
+ *                    Tako 69 tonera deli jedan fajl umesto da se prave 69 kopija iste slike.
+ */
+const suppliedByRecord = new Map(suppliedImages.images.filter((entry) => !("rowId" in entry)).map((entry) => [entry.slug, entry]));
+const suppliedByRow = new Map(suppliedImages.images.filter((entry) => "rowId" in entry).map((entry) => [`${entry.slug} ${(entry as { rowId: string }).rowId}`, entry]));
+const suppliedFamilyPackshot = new Map(
+  suppliedImages.images
+    .filter((entry): entry is typeof entry & { sharedAcrossFamily: string } => "sharedAcrossFamily" in entry)
+    .map((entry) => [entry.sharedAcrossFamily, entry]),
+);
+
+/**
  * Veze ka zapisima koje katalog više ne prikazuje.
  *
  * Preporuke i „koristi se zajedno sa” dolaze iz sync dataseta, koji uklonjene proizvode LEGITIMNO
@@ -2475,6 +2498,36 @@ function withoutRemovedReferences(product: CarsystemProduct): CarsystemProduct {
                 return [key, { ...typed, content: { ...typed.content, items: typed.content.items.filter((item) => !item.productSlug || !removedSlugs.has(item.productSlug)) } }];
               }),
             ),
+          },
+        }
+      : {}),
+  };
+}
+
+function withSuppliedImage(product: CarsystemProduct): CarsystemProduct {
+  const shared = suppliedFamilyPackshot.get(product.catalogMetadata?.baseProductSlug ?? "");
+  const own =
+    suppliedByRecord.get(product.slug) ??
+    // Zapis koji deli porodični packshot dobija sliku serije; zapis sa sopstvenom slikom se ne dira.
+    (shared && product.visualIdentity?.packshotKind === "family" ? shared : undefined);
+  const rows = product.detail?.variants?.content.rows ?? [];
+  const rowEntries = rows.map((row) => suppliedByRow.get(`${product.slug} ${row.id}`));
+  if (!own && !rowEntries.some(Boolean)) return product;
+
+  return {
+    ...product,
+    ...(own ? { productImage: { src: own.path, alt: product.productImage?.alt ?? product.name } } : {}),
+    ...(rowEntries.some(Boolean) && product.detail
+      ? {
+          detail: {
+            ...product.detail,
+            variants: {
+              ...product.detail.variants!,
+              content: {
+                ...product.detail.variants!.content,
+                rows: rows.map((row, index) => (rowEntries[index] ? { ...row, image: rowEntries[index]!.path } : row)),
+              },
+            },
           },
         }
       : {}),
@@ -2511,7 +2564,8 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
               : product,
 
 )
-  .map(withoutRemovedReferences);
+  .map(withoutRemovedReferences)
+  .map(withSuppliedImage);
 
 export function getAllCarsystemProducts() {
   return [...products];

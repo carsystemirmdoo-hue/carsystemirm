@@ -9,7 +9,7 @@ import { requireCapability, requireCustomerAccess } from "@/lib/authz/session";
 import { listCustomerAssignees, listSalesReps } from "@/lib/partners/assignment-service";
 import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { AssignmentPanel } from "./AssignmentPanel";
-import { CustomerSignals } from "./CustomerSignals";
+import { CustomerArticles, CustomerMethod, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
 
@@ -50,13 +50,17 @@ export default async function CustomerDetailPage({
         title={customer.name}
         description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}`}
       />
+      {profile ? (
+        <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} />
+      ) : null}
+      {profile ? <CustomerArticles profile={profile} /> : null}
       <AssignmentPanel
         customerId={customer.id}
         assignees={assignees}
         reps={reps}
         canManage={canManageAssignments}
       />
-      {profile ? <CustomerSignals profile={profile} /> : null}
+      {profile ? <CustomerMethod profile={profile} /> : null}
       {/*
        * Naplata se ne prikazuje: fakture ne nose ni dospeće ni uplatu. Ranija
        * velika poruka „profil čeka uvezene fakture" stajala je i ispod stvarnih

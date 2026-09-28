@@ -7588,3 +7588,230 @@ body:has(.portal-login-root) {
 .portal-panel > .portal-metrics + .portal-panel-body {
   padding-top: 0;
 }
+
+/* =========================================================================
+ * F3 — kartica kupca
+ * ====================================================================== */
+.cs-summary {
+  display: grid;
+  overflow: hidden;
+}
+.cs-summary-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px 24px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--p-line);
+}
+.cs-summary-top .portal-badge {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 0;
+}
+.cs-facts dt,
+.cs-basis-facts dt {
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.cs-facts dd,
+.cs-basis-facts dd {
+  margin: 3px 0 0;
+  color: var(--p-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+.cs-facts dd small,
+.cs-basis-facts dd small {
+  display: block;
+  margin-top: 1px;
+  color: var(--p-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+.cs-summary-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 0;
+}
+.cs-block {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 16px 20px 18px;
+}
+.cs-block + .cs-block {
+  border-left: 1px solid var(--p-line);
+}
+.cs-block h3 {
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.cs-block p {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.cs-next {
+  background: oklch(0.985 0.006 255);
+}
+.cs-next small {
+  color: var(--p-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.cs-mentions {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cs-mentions a {
+  display: grid;
+  gap: 1px;
+  padding: 7px 10px;
+  border: 1px solid var(--p-line);
+  border-left: 3px solid var(--p-line-strong);
+  border-radius: 7px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--p-surface);
+}
+.cs-mentions li[data-tone="danger"] a { border-left-color: var(--p-red); }
+.cs-mentions li[data-tone="warning"] a { border-left-color: var(--p-amber); }
+.cs-mentions li[data-tone="success"] a { border-left-color: var(--p-green); }
+.cs-mentions a:hover { border-color: var(--p-line-strong); }
+.cs-mentions strong { color: var(--p-ink); font-size: 13px; }
+.cs-mentions span { color: var(--p-muted); font-size: 12px; }
+
+.cs-groups {
+  gap: 18px;
+}
+.cs-group > h3 {
+  margin: 0 0 8px;
+}
+.cs-group > h3 span {
+  color: var(--p-muted);
+  font-weight: 500;
+}
+.cs-group-list {
+  display: grid;
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cs-article + .cs-article {
+  border-top: 1px solid var(--p-line);
+}
+.cs-article > summary {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.9fr) 70px 60px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  list-style: none;
+  background: var(--p-surface);
+  font-size: 13px;
+  color: var(--p-ink);
+}
+.cs-article > summary::-webkit-details-marker { display: none; }
+.cs-article > summary:hover { background: oklch(0.976 0.004 255); }
+.cs-article[open] > summary { background: oklch(0.97 0.006 255); }
+.cs-article-name { display: grid; min-width: 0; }
+.cs-article-name strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.cs-article-name small,
+.cs-article-fact small { color: var(--p-muted); font-size: 12px; }
+.cs-article-fact { display: grid; }
+.cs-article-fact small:first-child { font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; }
+.cs-article-open {
+  justify-self: end;
+  color: var(--p-red);
+  font-size: 12px;
+  font-weight: 650;
+}
+.cs-article[open] .cs-article-open::after { content: " ▲"; }
+.cs-article:not([open]) .cs-article-open::after { content: " ▼"; }
+.cs-basis {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px 16px;
+  border-top: 1px dashed var(--p-line);
+  background: oklch(0.985 0.004 255);
+}
+.cs-basis > p { margin: 0; color: var(--p-ink); font-size: 13px; line-height: 1.5; max-width: 90ch; }
+.cs-basis-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin: 0;
+}
+.cs-dates-label { color: var(--p-muted) !important; font-size: 12px !important; }
+.cs-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cs-dates li {
+  padding: 2px 7px;
+  border: 1px solid var(--p-line);
+  border-radius: 999px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.cs-group-thin > summary,
+.cs-method > summary {
+  padding: 4px 0;
+  cursor: pointer;
+  color: var(--p-ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.cs-group-thin > .cs-group-list { margin-top: 8px; }
+.cs-method > summary { padding: 14px 20px; }
+.cs-method[open] > summary { border-bottom: 1px solid var(--p-line); }
+
+@media (max-width: 1100px) {
+  .cs-summary-body { grid-template-columns: 1fr; }
+  .cs-block + .cs-block { border-left: 0; border-top: 1px solid var(--p-line); }
+}
+@media (max-width: 720px) {
+  .cs-summary-top { grid-template-columns: 1fr; padding: 16px 14px; }
+  .cs-facts { grid-template-columns: 1fr 1fr; }
+  .cs-facts > div:last-child { grid-column: 1 / -1; }
+  .cs-block { padding: 14px; }
+  .cs-article > summary {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name badge"
+      "last usual"
+      "count open";
+    gap: 6px 12px;
+  }
+  .cs-article > summary > .portal-badge { grid-area: badge; justify-self: end; }
+  .cs-article-name { grid-area: name; }
+  .cs-article > summary > .cs-article-fact:nth-of-type(3) { grid-area: last; }
+  .cs-article > summary > .cs-article-fact:nth-of-type(4) { grid-area: usual; }
+  .cs-article > summary > .cs-article-fact:nth-of-type(5) { grid-area: count; }
+  .cs-article-open { grid-area: open; align-self: end; }
+  .cs-basis-facts { grid-template-columns: 1fr 1fr; }
+}

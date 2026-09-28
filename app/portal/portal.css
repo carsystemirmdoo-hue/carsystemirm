@@ -7547,3 +7547,44 @@ body:has(.portal-login-root) {
 .portal-customer-signout {
   margin: 0;
 }
+
+/* F2 — početna */
+.portal-metric-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 9px;
+}
+.portal-metric-link:hover .portal-metric {
+  border-color: var(--p-line-strong);
+}
+.portal-metric-link:focus-visible {
+  outline: 2px solid var(--p-red);
+  outline-offset: 2px;
+}
+.portal-section-link {
+  align-self: center;
+  color: var(--p-red);
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.portal-access-details > summary {
+  padding: 14px 20px;
+  cursor: pointer;
+  color: var(--p-ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.portal-access-details[open] > summary {
+  border-bottom: 1px solid var(--p-line);
+}
+.portal-metric > strong {
+  font-size: 22px;
+}
+.portal-panel > .portal-metrics {
+  margin-bottom: 0;
+}
+.portal-panel > .portal-metrics + .portal-panel-body {
+  padding-top: 0;
+}

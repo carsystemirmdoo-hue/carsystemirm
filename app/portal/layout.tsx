@@ -17,7 +17,7 @@ import { getPortalCommerceAccess } from "@/lib/commerce/portal-commerce";
 import { signOutAction } from "./actions";
 import { BreadcrumbProvider } from "@/components/portal/Breadcrumbs";
 import { DataStrip } from "@/components/portal/DataStrip";
-import { loadDatasetInfo } from "@/lib/data-state/dataset";
+import { loadDataHeartbeat } from "@/lib/data-state/data-state";
 import "./portal.css";
 
 export const metadata: Metadata = {
@@ -72,7 +72,13 @@ export default async function PortalLayout({
       ? parseSidebarState(cookieState)
       : savedPreference === true;
 
-  const dataset = await loadDatasetInfo();
+  const { dataset, lastIssuedOn } = await loadDataHeartbeat();
+  const dataSource =
+    dataset.kind === "demo"
+      ? { status: "warn" as const, label: "demo podaci" }
+      : lastIssuedOn
+        ? { status: "ok" as const, label: `do ${lastIssuedOn.split("-").reverse().join(".")}.` }
+        : { status: "warn" as const, label: "nije povezan" };
 
   const shell = (
     <BreadcrumbProvider>
@@ -87,6 +93,7 @@ export default async function PortalLayout({
         onSignOut={signOutAction}
         showCart={commerce.allowed}
         dataNotice={<DataStrip dataset={dataset} />}
+        dataSource={dataSource}
       >
         {children}
       </PortalShell>

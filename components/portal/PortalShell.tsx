@@ -40,6 +40,8 @@ interface PortalShellProps {
   children: React.ReactNode;
   /** Traka iznad sadržaja (npr. oznaka demo podataka); ništa ne prekriva. */
   dataNotice?: React.ReactNode;
+  /** Kratko stanje izvora za dno navigacije (demo, dokumenti do datuma, nepovezan). */
+  dataSource?: { status: "ok" | "warn"; label: string };
 }
 
 const CRUMB_LABELS: Record<string, string> = {
@@ -95,6 +97,7 @@ export function PortalShell({
   children,
   showCart = false,
   dataNotice = null,
+  dataSource = { status: "warn", label: "nije povezan" },
 }: PortalShellProps) {
   const pathname = usePathname();
   const crumbLabels = useCrumbLabels();
@@ -268,10 +271,10 @@ export function PortalShell({
         <div className="portal-sidebar-foot">
           <div className="portal-integration-mini">
             <span>
-              <i data-status="warn" />
+              <i data-status={dataSource.status} />
               Izvor podataka
             </span>
-            <strong>nije povezan</strong>
+            <strong>{dataSource.label}</strong>
           </div>
           <small>Uplate nisu dostupne iz faktura</small>
         </div>
@@ -311,10 +314,10 @@ export function PortalShell({
               className="portal-search-trigger"
               data-disabled="true"
               aria-disabled="true"
-              title="Pretraga se uključuje kada fakture budu uvezene (faza 2)"
+              title="Globalna pretraga još nije uključena"
             >
               <PortalIcon name="search" />
-              <span>Pretraga stiže sa uvozom faktura</span>
+              <span>Pretraga još nije uključena</span>
             </div>
 
             <Link

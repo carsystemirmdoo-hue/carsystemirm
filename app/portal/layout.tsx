@@ -15,6 +15,9 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { getPortalCommerceAccess } from "@/lib/commerce/portal-commerce";
 import { signOutAction } from "./actions";
+import { BreadcrumbProvider } from "@/components/portal/Breadcrumbs";
+import { DataStrip } from "@/components/portal/DataStrip";
+import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import "./portal.css";
 
 export const metadata: Metadata = {
@@ -69,20 +72,25 @@ export default async function PortalLayout({
       ? parseSidebarState(cookieState)
       : savedPreference === true;
 
+  const dataset = await loadDatasetInfo();
+
   const shell = (
-    <PortalShell
-      user={{
-        name: user.name,
-        initials: user.initials,
-        roleLabel: ROLE_LABELS[user.role],
-      }}
-      navGroups={navGroupsFor(user)}
-      initialCollapsed={collapsed}
-      onSignOut={signOutAction}
-      showCart={commerce.allowed}
-    >
-      {children}
-    </PortalShell>
+    <BreadcrumbProvider>
+      <PortalShell
+        user={{
+          name: user.name,
+          initials: user.initials,
+          roleLabel: ROLE_LABELS[user.role],
+        }}
+        navGroups={navGroupsFor(user)}
+        initialCollapsed={collapsed}
+        onSignOut={signOutAction}
+        showCart={commerce.allowed}
+        dataNotice={<DataStrip dataset={dataset} />}
+      >
+        {children}
+      </PortalShell>
+    </BreadcrumbProvider>
   );
 
   // Bez dozvole se cart sloj uopšte ne montira — nema providera, drawera ni

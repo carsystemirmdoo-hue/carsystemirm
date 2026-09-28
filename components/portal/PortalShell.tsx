@@ -1,5 +1,7 @@
 "use client";
 
+import { fallbackRecordLabel, useCrumbLabels } from "@/components/portal/Breadcrumbs";
+
 import { CartButton } from "@/components/cart/CartButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,6 +38,8 @@ interface PortalShellProps {
   /** Korpa se prikazuje samo kada portal commerce kapija to dozvoli. */
   showCart?: boolean;
   children: React.ReactNode;
+  /** Traka iznad sadržaja (npr. oznaka demo podataka); ništa ne prekriva. */
+  dataNotice?: React.ReactNode;
 }
 
 const CRUMB_LABELS: Record<string, string> = {
@@ -58,6 +62,13 @@ const CRUMB_LABELS: Record<string, string> = {
   dozvole: "Korisnici i dozvole",
   admin: "Administracija",
   aktivnosti: "Aktivnosti",
+  bezbednost: "Bezbednost",
+  cene: "Cene i rabati",
+  preporuke: "Preporuke",
+  mapiranja: "Mapiranja",
+  proizvodi: "Proizvodi",
+  sinhronizacija: "Sinhronizacija",
+  spremnost: "Spremnost podataka",
 };
 
 function CompanyMark() {
@@ -83,8 +94,15 @@ export function PortalShell({
   onSignOut,
   children,
   showCart = false,
+  dataNotice = null,
 }: PortalShellProps) {
   const pathname = usePathname();
+  const crumbLabels = useCrumbLabels();
+  // Isti nazivi kao u navigaciji: „Nalozi kupaca", ne „nalozi".
+  const navLabels = useMemo(
+    () => new Map(navGroups.flatMap((group) => group.items.map((item) => [item.href, item.label] as const))),
+    [navGroups],
+  );
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [mobileOpen, setMobileOpen] = useState(false);
   const sidebarRef = useRef<HTMLElement>(null);
@@ -95,9 +113,14 @@ export function PortalShell({
     return segments.map((segment, index) => ({
       href: `/${segments.slice(0, index + 1).join("/")}`,
       // Nepoznat segment je najčešće ID zapisa; prikazuje se onakav kakav jeste.
-      label: CRUMB_LABELS[segment] ?? decodeURIComponent(segment),
+      label:
+        navLabels.get(`/${segments.slice(0, index + 1).join("/")}`) ??
+        CRUMB_LABELS[segment] ??
+        crumbLabels[segment] ??
+        fallbackRecordLabel(segment, segments[index - 1]) ??
+        decodeURIComponent(segment),
     }));
-  }, [pathname]);
+  }, [pathname, crumbLabels, navLabels]);
 
   /**
    * Prebacivanje menja isključivo širinu navigacije. Nema navigacije ni
@@ -324,6 +347,7 @@ export function PortalShell({
           </div>
         </header>
 
+        {dataNotice}
         <main className="portal-main">{children}</main>
       </div>
     </div>

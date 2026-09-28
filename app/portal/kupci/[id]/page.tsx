@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
-import { PhaseNotice } from "@/components/portal/PhaseNotice";
+import { CrumbLabel } from "@/components/portal/Breadcrumbs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { customers } from "@/db/schema";
@@ -44,6 +44,7 @@ export default async function CustomerDetailPage({
 
   return (
     <>
+      <CrumbLabel segment={customer.id} label={customer.name} />
       <PageHeader
         eyebrow="Kupci"
         title={customer.name}
@@ -56,16 +57,14 @@ export default async function CustomerDetailPage({
         canManage={canManageAssignments}
       />
       {profile ? <CustomerSignals profile={profile} /> : null}
-      <PhaseNotice
-        icon="customers"
-        title="Profil kupca čeka uvezene fakture"
-        summary="Kartice prometa, faktura, povrata i aktivnosti se popunjavaju iz uvoza. Pokazatelji naplate ostaju nedostupni dok ne postoji proveren izvor uplata."
-        requires={[
-          "Uvoz faktura iz BiznisSoft izvoza (faza 2).",
-          "Proveren izvor uplata za sve što se tiče dugovanja i kašnjenja.",
-        ]}
-        phase="faza 2"
-      />
+      {/*
+       * Naplata se ne prikazuje: fakture ne nose ni dospeće ni uplatu. Ranija
+       * velika poruka „profil čeka uvezene fakture" stajala je i ispod stvarnih
+       * dokumenata; ovde ostaje samo tačna rečenica o onome što zaista fali.
+       */}
+      <p className="portal-footnote">
+        Naplata i dugovanja se ne prikazuju: izvor uplata i datuma dospeća nije povezan.
+      </p>
     </>
   );
 }

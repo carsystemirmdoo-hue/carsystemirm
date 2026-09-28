@@ -11,6 +11,8 @@ import {
   loadCustomerDocumentSummary,
   loadCustomerDocuments,
 } from "@/lib/customers/customer-queries";
+import { DataStrip } from "@/components/portal/DataStrip";
+import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import "../portal/portal.css";
 
 export const metadata: Metadata = {
@@ -30,13 +32,16 @@ export const dynamic = "force-dynamic";
 export default async function CustomerHomePage() {
   const session = await requireCustomerSession();
 
-  const [summary, documents] = await Promise.all([
+  const [summary, documents, dataset] = await Promise.all([
     loadCustomerDocumentSummary(session.customerId),
     loadCustomerDocuments(session.customerId, 20),
+    loadDatasetInfo(),
   ]);
 
   return (
+    <div className="portal-root portal-customer-area">
     <main className="portal-main">
+      <DataStrip dataset={dataset} />
       <PageHeader
         eyebrow="Pristup za kupce"
         title={session.customerName}
@@ -48,6 +53,7 @@ export default async function CustomerHomePage() {
           title="Dokumenti"
           description="Fakture i povrati vaše firme, iz knjigovodstvenog uvoza."
         />
+        <div className="portal-panel-body">
         {summary.totalDocuments === 0 ? (
           <p>
             Za vašu firmu još nema uvezenih dokumenata. Kada uvoz iz
@@ -61,7 +67,8 @@ export default async function CustomerHomePage() {
                 <> · poslednji izdat {summary.lastIssuedOn}</>
               ) : null}
             </p>
-            <table className="portal-table">
+            <div className="portal-table-wrap">
+            <table className="portal-table" data-compact="true">
               <thead>
                 <tr>
                   <th scope="col">Broj</th>
@@ -81,6 +88,7 @@ export default async function CustomerHomePage() {
                 ))}
               </tbody>
             </table>
+            </div>
           </>
         )}
         {/*
@@ -91,9 +99,10 @@ export default async function CustomerHomePage() {
          * još nema potvrdu iz BizniSofta da je bilo koja buduća cena stvarna.
          * Vidi docs/b2b/01-target-architecture.md, AD-3.
          */}
-        <p className="portal-login-hint">
+        <p className="portal-footnote">
           Cene i uslovi se potvrđuju uz porudžbinu. Ovaj pregled ih ne prikazuje.
         </p>
+        </div>
       </Panel>
 
       <p>
@@ -102,11 +111,12 @@ export default async function CustomerHomePage() {
         </Link>
       </p>
 
-      <form action={customerSignOutAction}>
-        <button className="portal-login-submit" type="submit">
+      <form action={customerSignOutAction} className="portal-customer-signout">
+        <button className="portal-button" data-variant="secondary" type="submit">
           Odjavi se
         </button>
       </form>
     </main>
+    </div>
   );
 }

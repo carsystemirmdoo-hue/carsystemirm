@@ -6901,22 +6901,27 @@ body:has(.portal-login-root) {
  * pritiskom — a rezervne kodove mora moći da prepiše bez greške.
  * ====================================================================== */
 
-/* Polja unutar panela dobijaju isti oblik kao na prijavi. */
-.portal-panel form {
+/*
+ * Polja unutar panela dobijaju isti oblik kao na prijavi — ALI samo obrasci bez
+ * klase (lozinka, drugi faktor, nalozi zaposlenih). Ranije je `.portal-panel form`
+ * pogađao svaki obrazac u panelu i nadjačavao kompaktna `.portal-field` polja,
+ * pa su radni obrasci (cene, nalozi kupaca, dodele) bili glomazni i uski (F1).
+ */
+.portal-panel form:not([class]) {
   display: grid;
   gap: 0.35rem;
   margin-top: 1rem;
   max-width: 32rem;
 }
 
-.portal-panel form label {
+.portal-panel form:not([class]) label {
   font-size: 0.85rem;
   font-weight: 600;
   margin-top: 0.6rem;
 }
 
-.portal-panel form input:not([type="checkbox"]),
-.portal-panel form select {
+.portal-panel form:not([class]) input:not([type="checkbox"]),
+.portal-panel form:not([class]) select {
   width: 100%;
   min-height: 2.75rem;
   padding: 0 0.85rem;
@@ -6927,22 +6932,22 @@ body:has(.portal-login-root) {
   font: inherit;
 }
 
-.portal-panel form input:focus-visible,
-.portal-panel form select:focus-visible {
+.portal-panel form:not([class]) input:focus-visible,
+.portal-panel form:not([class]) select:focus-visible {
   outline: 2px solid var(--portal-accent, #c8102e);
   outline-offset: 1px;
 }
 
-.portal-panel form input[aria-invalid="true"] {
+.portal-panel form:not([class]) input[aria-invalid="true"] {
   border-color: var(--portal-danger, #b42828);
 }
 
-.portal-panel form small {
+.portal-panel form:not([class]) small {
   font-size: 0.8rem;
   opacity: 0.72;
 }
 
-.portal-panel form button {
+.portal-panel form:not([class]) button {
   margin-top: 1rem;
   justify-self: start;
 }
@@ -7326,4 +7331,219 @@ body:has(.portal-login-root) {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
+}
+
+/* =========================================================================
+ * F1 — vizuelna osnova internih ekrana
+ *
+ * Kanonski panel je `.portal-panel > .portal-section-header + .portal-panel-body`.
+ * Deo ekrana (cene, bezbednost, mapiranja, nalozi kupaca) stavlja naslov direktno
+ * u panel; bez ovoga je naslov stajao uz ivicu, bez razmaka i bez hijerarhije.
+ * ====================================================================== */
+
+.portal-main > * + * {
+  margin-top: 16px;
+}
+.portal-main > .portal-page-header + * {
+  margin-top: 0;
+}
+
+.portal-panel:has(> h2:first-child, > h3:first-child) {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px 20px;
+}
+/* Deca mreže smeju da se suze; inače obrazac od dve kolone gura panel preko ekrana. */
+.portal-panel:has(> h2:first-child, > h3:first-child) > *,
+.portal-panel-body > * {
+  min-width: 0;
+}
+.portal-panel > h2 {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.portal-panel > h3,
+.portal-panel-body > h3 {
+  margin: 6px 0 0;
+  color: var(--p-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+.portal-panel > p,
+.portal-panel-body > p {
+  margin: 0;
+  max-width: 78ch;
+  color: var(--p-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.portal-panel:has(> h2:first-child, > h3:first-child) > .portal-table-wrap {
+  width: calc(100% + 40px);
+  max-width: none;
+  margin-inline: -20px;
+  border-top: 1px solid var(--p-line);
+  border-radius: 0;
+}
+.portal-panel:has(> h2:first-child, > h3:first-child) > .portal-table-wrap:last-child {
+  margin-bottom: -20px;
+  border-radius: 0 0 10px 10px;
+}
+.portal-panel-body > .portal-table-wrap {
+  width: calc(100% + 36px);
+  max-width: none;
+  margin-inline: -18px;
+  border-block: 1px solid var(--p-line);
+  border-radius: 0;
+}
+.portal-panel-body > .portal-table-wrap:last-child {
+  margin-bottom: -18px;
+  border-bottom: 0;
+  border-radius: 0 0 10px 10px;
+}
+.portal-panel-body {
+  display: grid;
+  gap: 12px;
+}
+
+/* Tabele: čitljiv tekst. 11/9 px je bio ispod praga za rad ceo dan. */
+.portal-table {
+  font-size: 13px;
+}
+.portal-table th {
+  font-size: 11px;
+}
+.portal-table td {
+  color: var(--p-ink);
+  line-height: 1.45;
+}
+.portal-table td strong {
+  font-size: 13px;
+}
+.portal-table td small {
+  margin-top: 3px;
+  color: var(--p-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.portal-table[data-compact="true"] {
+  min-width: 0;
+}
+
+/* Radni obrasci: kolone do ~760 px, polja kompaktna, dugme levo. */
+.portal-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px 16px;
+  max-width: 760px;
+  margin: 0;
+  align-items: start;
+}
+.portal-form > :is(h3, p, div, ul),
+.portal-form > .portal-field:has(textarea) {
+  grid-column: 1 / -1;
+}
+.portal-form > button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 2px;
+}
+.portal-field > span {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--p-ink);
+}
+.portal-field > small {
+  color: var(--p-muted);
+  font-size: 12px;
+}
+.portal-panel form.portal-inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.portal-inline-form :is(input:not([type="hidden"]), select) {
+  min-height: 34px;
+  width: auto;
+  max-width: 320px;
+  padding: 6px 10px;
+  border: 1px solid var(--p-line);
+  border-radius: 7px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  font: inherit;
+  font-size: 13px;
+}
+.portal-inline-form small {
+  flex-basis: 100%;
+  font-size: 12px;
+}
+
+/* Oznaka izmišljenih podataka: u toku stranice, nikad preko sadržaja. */
+.portal-data-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 7px 28px;
+  border-bottom: 1px solid oklch(0.88 0.06 80);
+  background: oklch(0.975 0.03 85);
+  color: oklch(0.38 0.07 70);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.portal-data-strip strong {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: oklch(0.9 0.09 85);
+  color: oklch(0.32 0.08 65);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+.portal-customer-area .portal-data-strip {
+  border: 1px solid oklch(0.88 0.06 80);
+  border-radius: 8px;
+}
+
+/* Kupčev pregled na javnom sajtu: isti tokeni kao portal. */
+.portal-customer-area {
+  min-height: auto;
+}
+.portal-customer-area .portal-main {
+  min-height: auto;
+  max-width: 1120px;
+}
+
+@media (max-width: 720px) {
+  .portal-panel:has(> h2:first-child, > h3:first-child) {
+    padding: 16px 14px 16px;
+  }
+  .portal-panel:has(> h2:first-child, > h3:first-child) > .portal-table-wrap {
+    width: calc(100% + 28px);
+    margin-inline: -14px;
+  }
+  .portal-panel:has(> h2:first-child, > h3:first-child) > .portal-table-wrap:last-child {
+    margin-bottom: -16px;
+  }
+  .portal-data-strip {
+    padding: 7px 16px;
+  }
+  .portal-inline-form :is(input:not([type="hidden"]), select) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.portal-footnote {
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.portal-customer-signout {
+  margin: 0;
 }

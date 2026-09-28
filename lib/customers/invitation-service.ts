@@ -19,6 +19,23 @@ import {
   looksLikeRecoveryCode,
 } from "@/lib/auth/recovery-codes.mjs";
 import { CustomerAccountError, type AccountActor } from "@/lib/customers/account-service";
+import {
+  checkActivationGate,
+  checkInvitationGate,
+  type GateReason,
+} from "@/lib/customers/verification-service";
+import { GATE_REASONS } from "@/lib/customers/contactVerification.mjs";
+
+/** Poziv odbijen kapijom — nosi SVE razloge, da ih ekran prikaže odjednom. */
+export class InvitationBlockedError extends CustomerAccountError {
+  constructor(readonly reasons: GateReason[]) {
+    super(
+      `Poziv se ne izdaje: ${reasons.map((r) => GATE_REASONS[r]).join(" ")}`,
+      "invitation_blocked",
+    );
+    this.name = "InvitationBlockedError";
+  }
+}
 
 /**
  * Pozivnica i reset lozinke kupčevog naloga.
@@ -179,6 +196,17 @@ export async function issueInvitation(
     );
   }
 
+  /*
+   * Kapija: firma povezana sa BizniSoft partnerom I osoba potvrđena kao
+   * ovlašćena (0028). E-mail sa kartice partnera sam po sebi ne otvara ništa.
+   * Aktivacija istu kapiju proverava ponovo, pa opoziv između izdavanja i
+   * aktivacije zatvara i već poslat poziv.
+   */
+  const gate = await checkInvitationGate(account.id);
+  if (!gate.allowed) {
+    throw new InvitationBlockedError(gate.reasons);
+  }
+
   const issued = await issueToken({
     customerUserId: account.id,
     purpose: "invitation",
@@ -266,8 +294,35 @@ export async function activateWithInvitation(input: {
     .limit(1);
   if (!account) return { ok: false };
 
-  await db.transaction(async (tx) => {
+  /*
+   * Token je važeći, ali to nije dovoljno. Nalog isključen, odbijen ili
+   * opozvan POSLE izdavanja poziva ne sme se aktivirati starim linkom.
+   * Odgovor spolja je isti kao za nevažeći token — razlog ide u trag.
+   */
+  const activated = await db.transaction(async (tx) => {
     await tx
+      .select({ id: customerUsers.id })
+      .from(customerUsers)
+      .where(eq(customerUsers.id, accountId))
+      .for("update");
+    const gate = await checkActivationGate(accountId, tx);
+    if (!gate.allowed) {
+      await recordAudit(
+        {
+          actor: { id: null, name: account.email, role: "kupac" },
+          action: AUDIT_ACTIONS.customerActivationBlocked,
+          entityType: "Kupčev nalog",
+          entityId: accountId,
+          entityLabel: account.email,
+          reason: `Aktivacija pozivom odbijena: ${gate.reasons.join(", ")}`,
+          correlationId: randomUUID(),
+        },
+        tx,
+      );
+      return false;
+    }
+
+    const updated = await tx
       .update(customerUsers)
       .set({
         status: "active",
@@ -277,7 +332,10 @@ export async function activateWithInvitation(input: {
         sessionVersion: sql`${customerUsers.sessionVersion} + 1`,
         updatedAt: sql`now()`,
       })
-      .where(eq(customerUsers.id, accountId));
+      // Stanje je i uslov upisa, ne samo provere iznad.
+      .where(and(eq(customerUsers.id, accountId), eq(customerUsers.status, "approved")))
+      .returning({ id: customerUsers.id });
+    if (updated.length === 0) return false;
 
     await recordAudit(
       {
@@ -293,9 +351,10 @@ export async function activateWithInvitation(input: {
       },
       tx,
     );
+    return true;
   });
 
-  return { ok: true };
+  return { ok: activated };
 }
 
 /* =========================================================================

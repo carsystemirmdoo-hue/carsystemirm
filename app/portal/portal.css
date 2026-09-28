@@ -7311,3 +7311,19 @@ body:has(.portal-login-root) {
 .portal-panel form.portal-device-form label {
   margin-top: 0;
 }
+
+/* Kapija poziva i jednostavne liste (0028). */
+.portal-gate-reasons,
+.portal-plain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+}
+.portal-plain-list > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}

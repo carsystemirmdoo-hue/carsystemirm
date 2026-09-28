@@ -6,9 +6,12 @@ import {
   issueInvitationAction,
   proposeContactAction,
   recordOfflineConsentAction,
+  revokeAccessAction,
   setAccountStatusAction,
+  verifyContactAction,
   type AccountActionState,
 } from "@/app/portal/kupci/nalozi/actions";
+import { GATE_REASONS } from "@/lib/customers/contactVerification.mjs";
 import {
   CUSTOMER_ACCOUNT_LABELS,
   CUSTOMER_ACCOUNT_TONES,
@@ -24,6 +27,24 @@ export type AccountRow = {
   status: string;
   lastLoginAt: Date | null;
   decisionReason: string | null;
+  /** Kapija poziva (0028) — izračunata na serveru, ovde se samo prikazuje. */
+  gate: {
+    allowed: boolean;
+    reasons: string[];
+    verification: {
+      method: string;
+      personRole: string;
+      verifiedAt: Date;
+      verifiedByName: string | null;
+    } | null;
+    mappedIdentifiers: { id: string; code: string; issuerCode: string; sourceName: string | null }[];
+  } | null;
+};
+
+const METHOD_LABELS: Record<string, string> = {
+  callback_known_number: "povratni poziv na broj poznat od ranije",
+  signed_authorization: "potpisano ovlašćenje firme",
+  in_person: "lično, uz potvrdu vlasnika",
 };
 
 export type CustomerOption = { id: string; label: string };
@@ -55,8 +76,13 @@ export function AccountsAdmin({
     recordOfflineConsentAction,
     INITIAL,
   );
+  const [verifyState, verifyAction, verifying] = useActionState(verifyContactAction, INITIAL);
+  const [revokeState, revokeAction, revoking] = useActionState(revokeAccessAction, INITIAL);
   const [openId, setOpenId] = useState<string | null>(null);
   const [consentId, setConsentId] = useState<string | null>(null);
+  const [verifyId, setVerifyId] = useState<string | null>(null);
+  const [revokeId, setRevokeId] = useState<string | null>(null);
+  const verifyTarget = accounts.find((a) => a.id === verifyId) ?? null;
 
   return (
     <>
@@ -151,6 +177,20 @@ export function AccountsAdmin({
             {statusState.ok}
           </p>
         ) : null}
+        {[verifyState, revokeState].map((state, i) =>
+          state.error ? (
+            <div className="portal-login-error" role="alert" key={`e${i}`}>
+              <span>
+                <strong>{i === 0 ? "Potvrda nije sačuvana" : "Opoziv nije izvršen"}</strong>
+                <small>{state.error}</small>
+              </span>
+            </div>
+          ) : state.ok ? (
+            <p className="portal-login-hint" role="status" key={`o${i}`}>
+              {state.ok}
+            </p>
+          ) : null,
+        )}
 
         {accounts.length === 0 ? (
           <p>Nijedan kupac još nema otvoren nalog.</p>
@@ -162,6 +202,7 @@ export function AccountsAdmin({
                   <th scope="col">Kupac</th>
                   <th scope="col">Nalog</th>
                   <th scope="col">Stanje</th>
+                  <th scope="col">Provera za poziv</th>
                   <th scope="col">Poslednja prijava</th>
                   {canManage ? <th scope="col">Radnja</th> : null}
                 </tr>
@@ -185,6 +226,35 @@ export function AccountsAdmin({
                       ) : null}
                     </td>
                     <td>
+                      {account.status === "active" ? (
+                        <small>Aktivan nalog</small>
+                      ) : !account.gate ? (
+                        "—"
+                      ) : account.gate.allowed ? (
+                        <Badge tone="success">Spremno za poziv</Badge>
+                      ) : (
+                        <ul className="portal-gate-reasons">
+                          {account.gate.reasons.map((r) => (
+                            <li key={r}>
+                              <small>{GATE_REASONS[r as keyof typeof GATE_REASONS] ?? r}</small>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {account.gate?.verification ? (
+                        <small>
+                          Potvrđeno: {METHOD_LABELS[account.gate.verification.method] ?? account.gate.verification.method}
+                          {" · "}
+                          {account.gate.verification.personRole}
+                          {" · "}
+                          {new Date(account.gate.verification.verifiedAt).toLocaleDateString("sr-Latn-RS")}
+                          {account.gate.verification.verifiedByName
+                            ? ` · ${account.gate.verification.verifiedByName}`
+                            : ""}
+                        </small>
+                      ) : null}
+                    </td>
+                    <td>
                       {account.lastLoginAt
                         ? new Date(account.lastLoginAt).toLocaleDateString("sr-Latn-RS")
                         : "—"}
@@ -201,13 +271,35 @@ export function AccountsAdmin({
                           <PortalButton
                             type="submit"
                             variant="ghost"
-                            disabled={inviting}
+                            disabled={inviting || !account.gate?.allowed}
+                            title={
+                              account.gate?.allowed
+                                ? undefined
+                                : "Poziv se izdaje tek kada su firma i osoba potvrđene."
+                            }
                           >
                             {account.status === "requested"
                               ? "Odobri i pozovi"
                               : "Izdaj nov poziv"}
                           </PortalButton>
                         </form>
+                        {(account.status === "requested" || account.status === "approved") &&
+                        !account.gate?.verification ? (
+                          <PortalButton
+                            variant="ghost"
+                            onClick={() => setVerifyId(verifyId === account.id ? null : account.id)}
+                          >
+                            {verifyId === account.id ? "Zatvori" : "Potvrdi osobu"}
+                          </PortalButton>
+                        ) : null}
+                        {account.status !== "rejected" ? (
+                          <PortalButton
+                            variant="ghost"
+                            onClick={() => setRevokeId(revokeId === account.id ? null : account.id)}
+                          >
+                            {revokeId === account.id ? "Zatvori" : "Opozovi pristup"}
+                          </PortalButton>
+                        ) : null}
                         <PortalButton
                           variant="ghost"
                           onClick={() =>
@@ -256,6 +348,90 @@ export function AccountsAdmin({
             </Field>
             <PortalButton type="submit" variant="primary" disabled={changing}>
               {changing ? "Čuvanje…" : "Sačuvaj"}
+            </PortalButton>
+          </form>
+        ) : null}
+
+        {canManage && verifyTarget ? (
+          <form action={verifyAction} className="portal-form">
+            <input type="hidden" name="accountId" value={verifyTarget.id} />
+            <h3>Potvrda ovlašćene osobe — {verifyTarget.name}</h3>
+            <p>
+              E-pošta upisana na kartici partnera <strong>nije</strong> potvrda da ta
+              osoba sme da vidi podatke firme. Potvrdite kanalom koji ne zavisi od
+              same osobe: pozovite firmu na broj poznat od ranije, tražite potpisano
+              ovlašćenje ili potvrdite lično uz vlasnika. Potvrda važi samo za
+              adresu <strong>{verifyTarget.email}</strong>.
+            </p>
+            {verifyTarget.gate && verifyTarget.gate.mappedIdentifiers.length === 0 ? (
+              <p className="portal-login-hint">
+                Firma još nije povezana sa BizniSoft šifrom partnera — prvo je povežite
+                u registru partnera.
+              </p>
+            ) : (
+              <>
+                <Field label="Firma identifikovana šifrom partnera" required>
+                  <select name="basisIdentifierId" required>
+                    {verifyTarget.gate?.mappedIdentifiers.map((i) => (
+                      <option key={i.id} value={i.id}>
+                        {i.issuerCode}/{i.code}
+                        {i.sourceName ? ` · ${i.sourceName}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Način potvrde" required>
+                  <select name="method" defaultValue="callback_known_number" required>
+                    {Object.entries(METHOD_LABELS).map(([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Odakle je adresa e-pošte" required hint="Izvor adrese ne govori ništa o ovlašćenju.">
+                  <select name="contactSource" defaultValue="provided_by_company" required>
+                    <option value="provided_by_company">dala firma</option>
+                    <option value="biznisoft_partner_record">kartica partnera u BizniSoftu</option>
+                    <option value="provided_by_sales_rep">dostavio komercijalista</option>
+                    <option value="public_business_listing">javno dostupan poslovni kontakt</option>
+                  </select>
+                </Field>
+                <Field label="URL izvora" hint="Obavezno samo za javno dostupan kontakt.">
+                  <input type="url" name="sourceReference" maxLength={500} />
+                </Field>
+                <Field label="Funkcija osobe u firmi" required>
+                  <input type="text" name="personRole" minLength={2} maxLength={120} required />
+                </Field>
+                <Field
+                  label="Beleška o dokazu"
+                  required
+                  hint="Ko je potvrdio, kojim kanalom i kada. Ne ulazi u trag revizije."
+                >
+                  <textarea name="evidenceNote" minLength={15} maxLength={1000} required rows={3} />
+                </Field>
+                <PortalButton type="submit" variant="primary" disabled={verifying}>
+                  {verifying ? "Čuvanje…" : "Sačuvaj potvrdu"}
+                </PortalButton>
+              </>
+            )}
+          </form>
+        ) : null}
+
+        {canManage && revokeId ? (
+          <form action={revokeAction} className="portal-form">
+            <input type="hidden" name="accountId" value={revokeId} />
+            <h3>Opoziv pristupa</h3>
+            <p>
+              Poništava potvrdu osobe i sve otvorene pozive, isključuje nalog i
+              prekida sve njegove sesije. Za promenu kontakt osobe: opozovite
+              staru osobu, pa predložite, potvrdite i pozovite novu.
+            </p>
+            <Field label="Razlog" required hint="Upisuje se u trag revizije.">
+              <input type="text" name="reason" minLength={3} maxLength={500} required />
+            </Field>
+            <PortalButton type="submit" variant="primary" disabled={revoking}>
+              {revoking ? "Opoziv…" : "Opozovi pristup"}
             </PortalButton>
           </form>
         ) : null}

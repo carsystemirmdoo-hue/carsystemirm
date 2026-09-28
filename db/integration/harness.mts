@@ -279,6 +279,13 @@ const RESETTABLE_TABLES = [
   "source_document_lines",
   "source_documents",
   "customer_contact_consents",
+  /*
+   * Registar partnera i potvrde osoba (0028). Potvrde su samo za dodavanje —
+   * `DELETE` okidač odbija, `TRUNCATE` ne pokreće okidače po redu.
+   */
+  "customer_contact_verifications",
+  "partner_records",
+  "partner_imports",
   "customer_account_tokens",
   "customer_message_outbox",
   "customer_users",

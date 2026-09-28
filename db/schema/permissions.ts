@@ -85,6 +85,12 @@ export const customerAssignments = pgTable(
     assignedAt: timestamp("assigned_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
+    /**
+     * Zašto dodela postoji: `manual` ili `biznisoft_rep_code` (šifra
+     * komercijaliste sa kartice partnera, migracija 0028). Samo poreklo — obe
+     * vrste daju isti opseg.
+     */
+    basis: text("basis").notNull().default("manual"),
   },
   (table) => [
     primaryKey({ columns: [table.userId, table.customerId] }),

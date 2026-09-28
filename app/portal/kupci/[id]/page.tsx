@@ -4,7 +4,12 @@ import { PhaseNotice } from "@/components/portal/PhaseNotice";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { customers } from "@/db/schema";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability, requireCustomerAccess } from "@/lib/authz/session";
+import { listCustomerAssignees, listSalesReps } from "@/lib/partners/assignment-service";
+import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
+import { AssignmentPanel } from "./AssignmentPanel";
+import { CustomerSignals } from "./CustomerSignals";
 
 export const dynamic = "force-dynamic";
 
@@ -28,6 +33,15 @@ export default async function CustomerDetailPage({
   const customer = rows[0];
   if (!customer) notFound();
 
+  const canManageAssignments = can(user, "assignments:manage");
+  // Isto pravilo kao ekran preporuka: prekidač blokira preračun, ne prikaz.
+  const showSignals = can(user, "view:preporuke");
+  const [assignees, reps, profile] = await Promise.all([
+    listCustomerAssignees(customer.id),
+    canManageAssignments ? listSalesReps() : Promise.resolve([]),
+    showSignals ? loadCustomerProfile(customer.id) : Promise.resolve(null),
+  ]);
+
   return (
     <>
       <PageHeader
@@ -35,6 +49,13 @@ export default async function CustomerDetailPage({
         title={customer.name}
         description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}`}
       />
+      <AssignmentPanel
+        customerId={customer.id}
+        assignees={assignees}
+        reps={reps}
+        canManage={canManageAssignments}
+      />
+      {profile ? <CustomerSignals profile={profile} /> : null}
       <PhaseNotice
         icon="customers"
         title="Profil kupca čeka uvezene fakture"

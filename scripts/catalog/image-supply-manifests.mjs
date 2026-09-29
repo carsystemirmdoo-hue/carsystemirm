@@ -12,8 +12,13 @@
  * SHA-256 i otisak identiteta kataloga iz kog su nastali. Runtime sajta ih NE čita.
  *
  * Bez argumenata (ili `--check`): ništa se ne piše; izlaz 1 ako se bilo šta ne slaže sa lock-om ili runtime-om.
- * `--write-lock [--inventory <IMAGE_IDENTITY_INVENTORY.csv>]`: piše lock. Vreme (`approvedAt`) je samo metapodatak:
- * postojeća vrednost se čuva, pa ponovljeno pisanje nad istim stanjem daje bajt-identičan lock.
+ * `--write-lock [--inventory <IMAGE_IDENTITY_INVENTORY.csv>]`: piše lock. `metadata` nije deo identiteta i
+ * razdvaja tri stvari koje generator ne sme da meša:
+ *   generatedOn — kada je generator zapisao ovaj sadržaj (jedino što generator zna);
+ *   approvedAt / approvedBy — stvarno odobrenje OVOG sadržaja; upisuje ih čovek posle pregleda,
+ *                 generator ih nikad ne popunjava (`null` = još nije odobreno);
+ *   previousLockMetadata — metapodaci prethodnog sadržaja, doslovno, radi traga.
+ * Postojeći metapodaci se čuvaju dok se sadržaj ne promeni, pa ponovljeno pisanje daje bajt-identičan lock.
  *
  * Ništa se ne uvozi, ne preuzima i ne menja u katalogu. Importer slika još ne postoji.
  */
@@ -23,8 +28,10 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { lockMetadataErrors, nextLockMetadata, validateSuppliedRegistry } from "./image-supply-registry.mjs";
 
 import { loadCatalogRuntime } from "../lib/catalog-runtime.mjs";
+
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const DIR = "data/catalog/image-supply";
@@ -139,6 +146,9 @@ else {
   }
 }
 
+// ── supplied-images.json: vrednosti porekla moraju biti definisane u `provenanceModel` ──
+errors.push(...validateSuppliedRegistry(JSON.parse(readFileSync(abs(`${DIR}/supplied-images.json`), "utf8"))));
+
 const identity = catalogIdentity();
 const measured = {
   ...identity,
@@ -186,7 +196,8 @@ if (writeLock) {
   const unchanged = previous && JSON.stringify({ ...previous, metadata: undefined }) === JSON.stringify({ ...body, metadata: undefined });
   // Promenjen sadržaj = novo odobrenje: tada se beleži main iz kog je nastalo.
   if (previous && !unchanged) body.createdFromMainSha = execSync("git merge-base HEAD origin/main", { cwd: REPO_ROOT }).toString().trim();
-  const lock = { ...body, metadata: unchanged ? previous.metadata : { approvedAt: new Date().toISOString().slice(0, 10), note: "approvedAt je samo metapodatak; nije deo identiteta manifesta" } };
+  const metadata = nextLockMetadata({ previous, unchanged: Boolean(unchanged), today: new Date().toISOString().slice(0, 10) });
+  const lock = { ...body, metadata };
   const text = `${JSON.stringify(lock, null, 2)}\n`;
   const changed = !previous || readFileSync(abs(LOCK), "utf8") !== text;
   if (changed) writeFileSync(abs(LOCK), text);
@@ -195,6 +206,8 @@ if (writeLock) {
 }
 
 // ── CHECK ──
+// Metapodaci nisu identitet, ali odobrenje u njima mora biti potpuno (stari oblik je dozvoljen).
+errors.push(...lockMetadataErrors(previous?.metadata));
 if (!previous) errors.push(`nedostaje ${LOCK} — pokrenuti sa --write-lock posle odobrenja`);
 else {
   if (previous.status !== "APPROVED_FOR_OWNER_IMAGE_SUPPLY") errors.push(`status lock-a: ${previous.status}`);

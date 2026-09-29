@@ -17888,6 +17888,15 @@
   --product-content-offset-y: 0.0433;
 }
 
+.fit[data-product-fit="/products/rm/supplied/rm__rm-uno-hd.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.77;
+  --product-content-fill-x: 0.6789;
+  --product-content-fill-y: 0.8817;
+  --product-content-offset-x: 0.1639;
+  --product-content-offset-y: 0.045;
+}
+
 .fit[data-product-fit="/products/sata/supplied/sata__satajet-1500-b.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.5481;

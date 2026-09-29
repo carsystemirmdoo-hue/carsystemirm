@@ -2460,11 +2460,28 @@ const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => 
  *   FAMILY         — jedna slika serije: lice porodice i zapisi koji nose `packshotKind: family`.
  *                    Tako 69 tonera deli jedan fajl umesto da se prave 69 kopija iste slike.
  */
-const suppliedByRecord = new Map(suppliedImages.images.filter((entry) => !("rowId" in entry)).map((entry) => [entry.slug, entry]));
-const suppliedByRow = new Map(suppliedImages.images.filter((entry) => "rowId" in entry).map((entry) => [`${entry.slug} ${(entry as { rowId: string }).rowId}`, entry]));
+/** Vrednosti porekla definisane u `provenanceModel` registra (proverava `catalog:image-supply:check`). */
+export type SuppliedImageSourceBasis = "OWNER_SUPPLIED" | "SUPPLIER_BRAND_PORTAL";
+
+type SuppliedImageEntry = {
+  imageId: string;
+  brand: string;
+  scope: "CARD" | "VARIANT" | "ARTICLE" | "FAMILY";
+  slug: string;
+  rowId?: string;
+  sharedAcrossFamily?: string;
+  path: string;
+  sourceBasis: SuppliedImageSourceBasis;
+  /** Opis konkretne slike; bez njega ostaje alt zapisa. */
+  alt?: string;
+};
+
+const suppliedEntries = suppliedImages.images as SuppliedImageEntry[];
+const suppliedByRecord = new Map(suppliedEntries.filter((entry) => !entry.rowId).map((entry) => [entry.slug, entry]));
+const suppliedByRow = new Map(suppliedEntries.filter((entry) => entry.rowId).map((entry) => [`${entry.slug} ${entry.rowId}`, entry]));
 const suppliedFamilyPackshot = new Map(
-  suppliedImages.images
-    .filter((entry): entry is typeof entry & { sharedAcrossFamily: string } => "sharedAcrossFamily" in entry)
+  suppliedEntries
+    .filter((entry): entry is SuppliedImageEntry & { sharedAcrossFamily: string } => Boolean(entry.sharedAcrossFamily))
     .map((entry) => [entry.sharedAcrossFamily, entry]),
 );
 
@@ -2516,7 +2533,7 @@ function withSuppliedImage(product: CarsystemProduct): CarsystemProduct {
 
   return {
     ...product,
-    ...(own ? { productImage: { src: own.path, alt: product.productImage?.alt ?? product.name } } : {}),
+    ...(own ? { productImage: { src: own.path, alt: own.alt ?? product.productImage?.alt ?? product.name } } : {}),
     ...(rowEntries.some(Boolean) && product.detail
       ? {
           detail: {

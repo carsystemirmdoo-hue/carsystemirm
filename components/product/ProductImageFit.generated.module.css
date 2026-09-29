@@ -635,6 +635,15 @@
   --product-content-offset-y: 0.0381;
 }
 
+.fit[data-product-fit="/products/baslac/baslac--line-45-1l-example-packshot.webp"] {
+  --product-canvas-aspect: 0.788;
+  --product-content-aspect: 0.77;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9259;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+}
+
 .fit[data-product-fit="/products/baslac/baslac-30-s510-s-serija.webp"] {
   --product-canvas-aspect: 1.3333;
   --product-content-aspect: 0.7703;

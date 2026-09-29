@@ -1,3 +1,4 @@
+import { publicSkuOf } from "@/lib/catalog/public-code";
 import type { Metadata } from "next";
 import type {
   CarsystemBrand,
@@ -260,7 +261,8 @@ export function productGroupJsonLd(family: ProductFamily) {
       "@id": `${absoluteUrl(`/proizvodi/${variant.slug}`)}#product`,
       name: variant.name,
       url: absoluteUrl(`/proizvodi/${variant.slug}`),
-      sku: variant.catalogMetadata?.cosmosCode ?? variant.sku,
+      // Interni ključ se ne emituje kao SKU (schema.org ga ne zahteva).
+      sku: variant.catalogMetadata?.cosmosCode ?? publicSkuOf(variant) ?? undefined,
       image: variant.productImage
         ? absoluteUrl(variant.productImage.src)
         : undefined,

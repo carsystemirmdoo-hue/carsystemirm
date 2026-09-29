@@ -682,6 +682,8 @@ function toSyncCatalogProduct(entry: SyncEntry): CarsystemProduct {
     shortDescription: content.shortDescription,
     longDescription: content.longDescription,
     sku: entry.code ?? entry.slug,
+    // Bez zvanične oznake `sku` je samo slug: kupcu se ne prikazuje kao šifra.
+    ...(entry.code ? {} : { skuIsInternalOnly: true }),
     externalSku: entry.code ?? undefined,
     manufacturerCode: entry.code,
     packages: [{ label: "Na upit", detail: "Pakovanja baslac ne objavljuje javno; potvrđuju se kroz upit." }],

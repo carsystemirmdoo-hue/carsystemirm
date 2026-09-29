@@ -1,3 +1,4 @@
+import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
 import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
@@ -290,6 +291,14 @@ export type CarsystemProduct = {
   shortDescription: string;
   longDescription: string;
   sku: string;
+  /**
+   * `true` = izvor izričito potvrđuje da zapis nema zvaničnu šifru proizvođača (R-M sistem objavljen
+   * samo na sajtu, Baslac sistemska baza bez oznake), pa je `sku` samo interni ključ. Nijedan javni
+   * prikaz ga ne predstavlja kao šifru (kartica, pretraga, PDP, SEO opis, JSON-LD) — pravilo je
+   * `publicSkuOf` u `lib/catalog/public-code.ts`. Rute, `?varijanta=`, korpa i veze ga i dalje koriste.
+   * Postavlja ga adapter izvora; izostavljeno = `sku` je javna šifra, kao do sada.
+   */
+  skuIsInternalOnly?: boolean;
   packages: ProductPackage[];
   purpose: string;
   badges: string[];
@@ -2846,7 +2855,7 @@ function getFamilyVariantSelector(
             item.catalogMetadata?.volume ??
             item.name),
       optionValueIds: { [groupId]: item.variantId ?? item.slug },
-      sku: item.catalogMetadata?.cosmosCode ?? item.sku,
+      sku: item.catalogMetadata?.cosmosCode ?? publicSkuOf(item) ?? undefined,
       package: getProductPackageLabel(item),
       status: getProductPublicStatus(item),
       slug: item.slug,

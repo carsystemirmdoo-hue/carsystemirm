@@ -27,6 +27,8 @@
  * and lands on the page that actually shows it.
  */
 
+import { publicSkuOf } from "@/lib/catalog/public-code";
+import { canonicalVariantKey } from "@/lib/catalog/variant-key";
 import {
   getAllCarsystemProducts,
   type CarsystemProduct,
@@ -61,7 +63,10 @@ export type CatalogVariantEntity = {
   id: string;
   name: string;
   familySlug: string;
+  /** Javna šifra; prazna kada je zapis nema (`publicSkuOf`). */
   productCode: string;
+  /** `?varijanta=` ključ kada `productCode` ne postoji (interni `sku`); inače izostavljen. */
+  variantKey?: string;
   technicalLine: string;
   finish?: string;
   search: string;
@@ -154,7 +159,9 @@ function productCodeOf(product: CarsystemProduct) {
     metadata?.cosmosCode ??
     (metadata?.ralCode ? `RAL ${metadata.ralCode}` : null) ??
     product.publicCode ??
-    product.sku
+    // Prazno kada zapis nema zvaničnu šifru; `?varijanta=` tada nosi `variantKey`.
+    publicSkuOf(product) ??
+    ""
   );
 }
 
@@ -164,7 +171,7 @@ function shortCodeOf(product: CarsystemProduct) {
     metadata?.cosmosCode ??
     (metadata?.ralCode ? `RAL ${metadata.ralCode}` : null) ??
     product.publicCode ??
-    (product.sku.length <= 24 ? product.sku : null) ??
+    ((publicSkuOf(product)?.length ?? 99) <= 24 ? publicSkuOf(product) : null) ??
     undefined
   );
 }
@@ -258,6 +265,8 @@ function variantEntity(
     name: full.name,
     familySlug: family.slug,
     productCode: full.productCode,
+    // Samo kada zapis nema javnu šifru: adresa varijante ostaje ista kao ranije.
+    ...(full.productCode ? {} : { variantKey: canonicalVariantKey(product) }),
     technicalLine: full.technicalLine,
     finish: full.finish,
     search: full.search,
@@ -338,8 +347,8 @@ export function expandVariant(
     // Varijanta vodi na canonical family PDP sa preselektovanom varijantom, a
     // ne na zasebnu variant stranicu — korisnik nikada ne dolazi na generički
     // group listing. `family.href` je već `familyPath`.
-    href: variant.productCode
-      ? `${family.href}?varijanta=${encodeURIComponent(variant.productCode)}`
+    href: (variant.variantKey ?? variant.productCode)
+      ? `${family.href}?varijanta=${encodeURIComponent(variant.variantKey ?? variant.productCode)}`
       : `/proizvodi/${variant.id}`,
     name: variant.name,
     productCode: variant.productCode,

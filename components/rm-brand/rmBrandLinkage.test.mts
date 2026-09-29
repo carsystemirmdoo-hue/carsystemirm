@@ -14,6 +14,7 @@ import {
   rmProductFamilies,
 } from "@/components/rm-brand/rmBrandData";
 import { hasCatalogImage, selectRmGroupProducts } from "@/components/rm-brand/rmBrandSelection";
+import { toProductVariantView } from "@/components/product/productVariantView";
 import { getCarsystemProductBySlug, getCarsystemProductsByBrandSlug } from "@/lib/carsystem-data";
 import { getRmBrandClassifications } from "@/lib/rm-brand-classification";
 import { toCatalogListingEntity } from "@/lib/catalog-listing";
@@ -185,8 +186,14 @@ test("6. katalog, pretraga, PDP i brend stranica dele identitet i sliku", () => 
   assert.equal(search.get("rm-uno-hd")?.imageSrc, uno.productImage?.src);
 });
 
-test("7. UNO HD: alt iz registra slike", () => {
+test("7. UNO HD: bez lažne šifre, alt iz registra slike", () => {
   const uno = getCarsystemProductBySlug("rm-uno-hd")!;
   assert.equal(uno.sku, "rm-uno-hd"); // identitet ostaje
+  assert.equal(uno.skuIsInternalOnly, true);
+  assert.equal(toProductVariantView(uno).sku, null);
   assert.equal(uno.productImage?.alt, "R-M UNO HD sistem boja – zvanična ambalaža");
+
+  // Zapisi sa zvaničnom oznakom i dalje prikazuju šifru.
+  assert.equal(toProductVariantView(getCarsystemProductBySlug("rm-sc-t2a203-pure-black")!).sku, "SC T2A203");
+  // Kartica, pretraga, JSON-LD i Baslac sistemi: `lib/catalog/public-code.test.mts`.
 });

@@ -8,8 +8,13 @@ import {
   type RmGallerySystemData,
   type RmProductImageSlotData,
 } from "@/components/rm-brand/rmBrandData";
+import { selectRmGroupProducts } from "@/components/rm-brand/rmBrandSelection";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import type { RmBrandClassifications } from "@/lib/rm-brand-classification";
 import styles from "./RmBrandPage.module.css";
+
+/** Centralni proizvod + četiri pomoćna. */
+const GALLERY_VISUAL_COUNT = 5;
 
 const categoryLabels = {
   additive: "Aditiv",
@@ -24,8 +29,10 @@ const categoryLabels = {
 } as const;
 
 export function RmProductSystemGallery({
+  classifications,
   products,
 }: {
+  classifications: RmBrandClassifications;
   products: CarsystemProduct[];
 }) {
   const [activeId, setActiveId] = useState(rmGallerySystems[0].id);
@@ -36,23 +43,23 @@ export function RmProductSystemGallery({
     () =>
       products.filter((product) => {
         if (activeSystem.kind === "system") {
-          return product.rmMetadata?.system === activeSystem.id;
+          return classifications[product.slug]?.system === activeSystem.id;
         }
-        return product.rmMetadata?.series === activeSystem.id;
+        return classifications[product.slug]?.series === activeSystem.id;
       }),
-    [activeSystem, products],
+    [activeSystem, classifications, products],
   );
   const activeProducts = useMemo(
     () =>
-      activeSystem.productSlugs
-        ? activeSystem.productSlugs
-            .map((slug) => catalogProducts.find((product) => product.slug === slug))
-            .filter((product): product is CarsystemProduct => Boolean(product))
-        : catalogProducts,
+      selectRmGroupProducts({
+        limit: GALLERY_VISUAL_COUNT,
+        members: catalogProducts,
+        pinnedSlugs: activeSystem.productSlugs,
+      }),
     [activeSystem.productSlugs, catalogProducts],
   );
 
-  const visualItems = buildVisualItems(activeSystem, activeProducts);
+  const visualItems = buildVisualItems(activeSystem, activeProducts, classifications);
   const centralItem = visualItems[0];
   const supportingItems = visualItems.slice(1, 5);
 
@@ -184,19 +191,25 @@ type GalleryVisualItem = {
   name: string;
   product?: CarsystemProduct;
   slot?: RmProductImageSlotData;
+  technology?: string | null;
 };
 
 function buildVisualItems(
   system: RmGallerySystemData,
   products: CarsystemProduct[],
+  classifications: RmBrandClassifications,
 ): GalleryVisualItem[] {
-  const productItems = products.map((product) => ({
-    group: product.rmMetadata
-      ? categoryLabels[product.rmMetadata.category]
-      : "R-M proizvod",
-    name: product.name,
-    product,
-  }));
+  const productItems = products.map((product) => {
+    const classification = classifications[product.slug];
+    return {
+      group: classification
+        ? (classification.categoryLabel ?? categoryLabels[classification.category])
+        : "R-M proizvod",
+      name: product.name,
+      product,
+      technology: classification?.technology ?? null,
+    };
+  });
   const slotItems = system.slots
     .slice(productItems.length)
     .map((slot) => ({
@@ -205,7 +218,7 @@ function buildVisualItems(
       slot,
     }));
 
-  return [...productItems, ...slotItems].slice(0, 5);
+  return [...productItems, ...slotItems].slice(0, GALLERY_VISUAL_COUNT);
 }
 
 function getItemTechnology(
@@ -213,7 +226,7 @@ function getItemTechnology(
   system: RmGallerySystemData,
 ) {
   return (
-    item.product?.rmMetadata?.technology?.replaceAll("-", " ").toUpperCase() ||
+    item.technology?.replaceAll("-", " ").toUpperCase() ||
     item.slot?.technology ||
     system.technology
   );

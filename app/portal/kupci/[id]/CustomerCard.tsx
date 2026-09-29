@@ -39,7 +39,7 @@ export function CustomerSummary({
   return (
     <section className="portal-panel cs-summary" aria-label="Sažetak kupca">
       <div className="cs-summary-top">
-        <Badge tone={s.status.tone}>{s.status.label}</Badge>
+        <Badge tone={s.status.tone as Tone}>{s.status.label}</Badge>
         <dl className="cs-facts">
           <div>
             <dt>Poslednja kupovina</dt>
@@ -58,6 +58,8 @@ export function CustomerSummary({
           </div>
         </dl>
       </div>
+
+      <FreshnessLine profile={profile} />
 
       <div className="cs-summary-body">
         <div className="cs-block">
@@ -91,11 +93,16 @@ export function CustomerSummary({
   );
 }
 
-function ArticleRow({ a, asOfDate }: { a: CustomerArticle; asOfDate: string }) {
+function ArticleRow({ a, asOfDate }: { a: CustomerArticle; asOfDate: string | null }) {
   return (
     <details className="cs-article" id={`artikal-${encodeURIComponent(a.articleCode)}`}>
       <summary>
-        <Badge tone={STATUS_TONE[a.status] ?? "neutral"}>{statusLabel(a.status)}</Badge>
+        <span className="cs-article-status">
+          <Badge tone={a.statusOutdated ? "neutral" : (STATUS_TONE[a.status] ?? "neutral")}>
+            {statusLabel(a.status)}
+          </Badge>
+          {a.statusOutdated ? <small>kupljeno posle obračuna</small> : null}
+        </span>
         <span className="cs-article-name">
           <strong>{a.articleName ?? a.articleCode}</strong>
           <small>{a.articleCode}</small>
@@ -143,11 +150,15 @@ function ArticleRow({ a, asOfDate }: { a: CustomerArticle; asOfDate: string }) {
           </div>
         </dl>
         <p className="cs-dates-label">
-          Datumi kupovine iz potvrđenih dokumenata (stanje na dan {srDate(asOfDate)}):
+          Datumi kupovine iz potvrđenih dokumenata
+          {asOfDate ? ` · status i termin su iz obračuna na dan ${srDate(asOfDate)}` : ""}:
         </p>
         <ol className="cs-dates">
           {a.purchaseDates.map((d) => (
-            <li key={d}>{srDate(d)}</li>
+            <li key={d} data-new={a.newPurchaseDates.includes(d) ? "true" : undefined}>
+              {srDate(d)}
+              {a.newPurchaseDates.includes(d) ? " · posle obračuna" : ""}
+            </li>
           ))}
         </ol>
       </div>
@@ -202,7 +213,9 @@ export function CustomerMethod({ profile }: { profile: CustomerProfile }) {
       <div className="portal-panel-body">
         <p>
           Osnova su potvrđeni prodajni dokumenti ({profile.documentCount} dokumenata,{" "}
-          {profile.purchaseDayCount} dana sa kupovinom), stanje na dan {srDate(profile.asOfDate)}.
+          {profile.purchaseDayCount} dana sa kupovinom) do {srDate(profile.today)}. Statusi i
+          termini su iz obračuna preporuka
+          {profile.asOfDate ? ` na dan ${srDate(profile.asOfDate)}` : " (još nije pokrenut)"}.
           Kupovina koja nije uvezena ovde se ne vidi.
         </p>
         <p>
@@ -217,5 +230,52 @@ export function CustomerMethod({ profile }: { profile: CustomerProfile }) {
         </p>
       </div>
     </details>
+  );
+}
+
+function fmtTime(at: Date | null) {
+  if (!at) return "—";
+  return new Date(at).toLocaleString("sr-Latn-RS", {
+    timeZone: "Europe/Belgrade",
+    day: "numeric",
+    month: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+/**
+ * Vreme podataka i obračuna, uvek vidljivo. Kada obračun kasni za podacima,
+ * to se kaže izričito — stari status se ne predstavlja kao aktuelan.
+ */
+export function FreshnessLine({ profile }: { profile: CustomerProfile }) {
+  const f = profile.freshness;
+  const tone = f.state === "new_documents" ? "warning" : f.state === "aged" ? "note" : "plain";
+  return (
+    <div className="cs-freshness" data-tone={tone}>
+      <span>
+        Podaci do <strong>{srDate(profile.today)}</strong> · poslednji uvoz {fmtTime(profile.lastIngestedAt)}
+      </span>
+      <span>
+        Obračun preporuka:{" "}
+        {profile.asOfDate ? (
+          <>
+            <strong>{srDate(profile.asOfDate)}</strong> · pokrenut {fmtTime(profile.runStartedAt)}
+          </>
+        ) : (
+          "nije pokrenut"
+        )}
+      </span>
+      {f.state === "new_documents" ? (
+        <span className="cs-freshness-msg">
+          Zastareo za ovog kupca: posle obračuna je stiglo {f.newDocuments.length} nov
+          {f.newDocuments.length === 1 ? " dokument" : "ih dokumenata"}. Savet se ne prikazuje dok se obračun ne ponovi.
+        </span>
+      ) : f.state === "aged" ? (
+        <span className="cs-freshness-msg">
+          Obračun je star {f.runAgeDays} dana; statusi se odnose na dan obračuna.
+        </span>
+      ) : null}
+    </div>
   );
 }

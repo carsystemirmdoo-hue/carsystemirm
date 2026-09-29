@@ -13,7 +13,6 @@ export function DataStrip({ dataset }: { dataset: DatasetInfo }) {
       <strong>DEMO PODACI</strong>
       <span>
         {dataset.label}. Firme, kupovine i nalozi su izmišljeni; brojke nisu poslovni podaci.
-        {dataset.asOf ? ` Stanje na dan ${dataset.asOf}.` : ""}
       </span>
     </div>
   );

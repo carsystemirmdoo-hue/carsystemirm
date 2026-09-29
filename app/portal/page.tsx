@@ -123,7 +123,7 @@ export default async function PortalHomePage() {
           </div>
           {state.recommendations.asOfDate ? (
             <div className="portal-metrics">
-              <Link className="portal-metric-link" href="/portal/preporuke?status=overdue,dormant">
+              <Link className="portal-metric-link" href="/portal/za-razgovor">
                 <Metric
                   label="Kupci za razgovor"
                   value={formatCount(state.recommendations.customersNeedingAttention)}

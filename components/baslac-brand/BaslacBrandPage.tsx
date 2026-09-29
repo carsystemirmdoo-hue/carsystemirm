@@ -171,9 +171,10 @@ function SystemLines({
           <p className={styles.sectionKicker}>Glavni vodeni sistem</p>
           <h3>45 Line povezuje nijansu, blendovanje i završni lak.</h3>
           <p>
-            Ovaj pregled rezerviše mesto za stvarni mixing sistem, aplikaciju
-            vodene baze ili relevantan panel. Tačan proces i izbor pratećih
-            proizvoda potvrđuju se prema važećem tehničkom listu.
+            Sistem se isporučuje u više formata, od kanistera od 5 L do boca
+            od 0,1 L. Na slici su primeri iz programa: converter, dve bazne boje i
+            biserna komponenta. Tačan proces i izbor pratećih proizvoda potvrđuju
+            se prema važećem tehničkom listu.
           </p>
           <div className={styles.line45FeatureFacts}>
             <span>solid</span>
@@ -496,9 +497,10 @@ function CommercialSection({
           Direct gloss sistem za velike transportne površine.
         </h2>
         <p>
-          Ovaj blok rezerviše jasan prostor za stvarnu primenu na kamionu,
-          autobusu ili drugoj velikoj površini, bez generičnog automotive
-          vizuala.
+          Kamioni, dostavna vozila i autobusi traže sistem koji pokriva velike
+          površine i zadržava ujednačen sjaj. Ilustracija je zvanični baslac
+          render dostavnog vozila, a izbor sistema i procesa potvrđuje se sa
+          tehničkim savetnikom.
         </p>
         <ul>
           <li>30 Line CV program</li>
@@ -596,7 +598,10 @@ function BaslacFamilyPackshot({ system }: { system: BaslacSystemId }) {
   }
 
   return (
-    <figure className={styles.familyPackshot}>
+    <figure
+      className={styles.familyPackshot}
+      data-kind={packshot.kind ?? "family"}
+    >
       <Image
         src={packshot.src}
         alt={packshot.alt}
@@ -605,7 +610,11 @@ function BaslacFamilyPackshot({ system }: { system: BaslacSystemId }) {
         sizes="(max-width: 60rem) 40vw, 15rem"
         loading="lazy"
       />
-      <figcaption>Zajednička ambalaža porodice</figcaption>
+      <figcaption>
+        {packshot.kind === "example"
+          ? "Primer ambalaže"
+          : "Zajednička ambalaža porodice"}
+      </figcaption>
     </figure>
   );
 }

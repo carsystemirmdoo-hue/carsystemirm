@@ -461,12 +461,23 @@ export const baslacSystemLabels: Record<BaslacSystemId, string> = {
  */
 export const baslacFamilyPackshots: Record<
   BaslacSystemId,
-  { src: string | null; alt: string; expectedFilename?: string }
+  {
+    src: string | null;
+    alt: string;
+    expectedFilename?: string;
+    /**
+     * `example` = zvanični packshot jednog konkretnog artikla (etiketa nosi
+     * njegovu šifru), a ne generička ambalaža porodice — potpis to i kaže.
+     */
+    kind?: "family" | "example";
+  }
 > = {
+  // Portal nema generičku „45-W“ limenku; primer je 45-W1010 White 1 L
+  // (Surventis Brand Portal, asset 12121 — docs/BASLAC_PORTAL_ASSETS.md).
   "line-45": {
-    src: null,
-    alt: "Baslac Line 45 ambalaža",
-    expectedFilename: "baslac--line-45-family-packshot.png",
+    src: "/products/baslac/baslac--line-45-1l-example-packshot.webp",
+    alt: "Baslac 45-W1010 White Basecoat, limenka od 1 L",
+    kind: "example",
   },
   "line-35": {
     src: "/products/baslac/baslac--line-35-3.5l-family-packshot.webp",

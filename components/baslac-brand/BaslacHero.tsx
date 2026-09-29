@@ -1,27 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, type CSSProperties } from "react";
+import { useCallback, useMemo, useRef, useState, type CSSProperties } from "react";
 import { useBrandCampaignCarousel } from "@/components/motion/useBrandCampaignCarousel";
+import { useSeasonalCampaign } from "@/components/seasonal/useSeasonalCampaign";
 import {
   baslacCampaignSlides,
   type BaslacCampaignSlide,
+  type BaslacHeroSlide,
+  type BaslacSeasonalSlide,
 } from "./baslacBrandData";
+import { withBaslacSeasonalSlide } from "./baslacSeasonal";
 import styles from "./BaslacBrandPage.module.css";
 
 const MOBILE_MEDIA_QUERY = "(max-width: 50rem)";
 
 export function BaslacHero() {
   const stageRef = useRef<HTMLElement>(null);
+  /*
+   * Sezona se određuje tek posle hidratacije (vidi `useSeasonalCampaign`).
+   * Standardni slajdovi i njihov redosled ostaju isti; sezonski se samo umeće
+   * iza prvog, pa aktivni slajd, h1 i LCP slika ne menjaju mesto.
+   */
+  const seasonal = useSeasonalCampaign();
+  const slides = useMemo(
+    () => withBaslacSeasonalSlide(baslacCampaignSlides, seasonal),
+    [seasonal],
+  );
 
-  const resolveSlideAssets = useCallback((index: number) => {
-    const slide = baslacCampaignSlides[index];
-    return [
-      window.matchMedia(MOBILE_MEDIA_QUERY).matches
-        ? slide.mobileImage
-        : slide.desktopImage,
-    ];
-  }, []);
+  const resolveSlideAssets = useCallback(
+    (index: number) => {
+      const slide = slides[index];
+      if (!slide) return [];
+      const mobile = window.matchMedia(MOBILE_MEDIA_QUERY).matches;
+      if (slide.visual === "seasonal") {
+        if (!slide.image) return [];
+        return [mobile ? slide.image.mobileSrc : slide.image.desktopSrc];
+      }
+      return [mobile ? slide.mobileImage : slide.desktopImage];
+    },
+    [slides],
+  );
 
   const {
     activeIndex,
@@ -42,7 +61,7 @@ export function BaslacHero() {
     userPaused,
   } = useBrandCampaignCarousel({
     resolveSlideAssets,
-    slideCount: baslacCampaignSlides.length,
+    slideCount: slides.length,
     stageRef,
   });
 
@@ -50,9 +69,10 @@ export function BaslacHero() {
    * Tranzicija koristi paletu odlazećeg i dolazećeg slajda, ne jednu globalnu
    * brend boju. Palete su statičke iz podataka — bez uzorkovanja slike.
    */
-  const incoming = baslacCampaignSlides[pendingIndex ?? activeIndex];
+  const incoming = slides[pendingIndex ?? activeIndex] ?? slides[0];
   const outgoing =
-    transitionPhase === "covering" ? baslacCampaignSlides[activeIndex] : incoming;
+    transitionPhase === "covering" ? (slides[activeIndex] ?? incoming) : incoming;
+  const activeSlide = slides[activeIndex] ?? slides[0];
 
   return (
     <section
@@ -60,7 +80,7 @@ export function BaslacHero() {
       className={styles.campaignStage}
       aria-label="Baslac kampanjski baneri"
       aria-roledescription="carousel"
-      data-active-slide={baslacCampaignSlides[activeIndex].id}
+      data-active-slide={activeSlide.id}
       data-active-index={activeIndex}
       data-autoplay-state={autoplayState}
       data-direction={direction}
@@ -76,17 +96,16 @@ export function BaslacHero() {
           : undefined
       }
       data-pending-slide={
-        pendingIndex === null
-          ? undefined
-          : baslacCampaignSlides[pendingIndex].id
+        pendingIndex === null ? undefined : slides[pendingIndex]?.id
       }
+      data-seasonal-campaign={seasonal?.campaign.id}
       data-transition-phase={transitionPhase}
       style={
         {
           "--campaign-transition-from": outgoing.transitionFrom,
           "--campaign-transition-to": incoming.transitionTo,
-          "--campaign-progress-color": baslacCampaignSlides[activeIndex].progressColor,
-          "--campaign-control-theme": baslacCampaignSlides[activeIndex].controlTheme,
+          "--campaign-progress-color": activeSlide.progressColor,
+          "--campaign-control-theme": activeSlide.controlTheme,
         } as CSSProperties
       }
       {...stageHandlers}
@@ -104,12 +123,13 @@ export function BaslacHero() {
 
       <div className={styles.campaignViewport}>
         <div className={styles.campaignSlides} aria-live="off">
-          {baslacCampaignSlides.map((slide, index) => (
+          {slides.map((slide, index) => (
             <BaslacCampaignSlide
               active={index === activeIndex}
               index={index}
               key={slide.id}
               slide={slide}
+              total={slides.length}
             />
           ))}
         </div>
@@ -157,7 +177,7 @@ export function BaslacHero() {
             className={styles.campaignPagination}
             aria-label="Izaberite banner"
           >
-            {baslacCampaignSlides.map((slide, index) => (
+            {slides.map((slide, index) => (
               <button
                 type="button"
                 aria-label={`Prikaži banner ${index + 1}: ${slide.controlLabel}`}
@@ -190,20 +210,27 @@ function BaslacCampaignSlide({
   active,
   index,
   slide,
+  total,
 }: {
   active: boolean;
   index: number;
-  slide: BaslacCampaignSlide;
+  slide: BaslacHeroSlide;
+  total: number;
 }) {
   return (
     <article
       className={styles.campaignSlide}
       aria-hidden={!active}
-      aria-label={`${index + 1} od ${baslacCampaignSlides.length}`}
+      aria-label={`${index + 1} od ${total}`}
       data-active={active || undefined}
       data-visual={slide.visual}
+      data-season={slide.visual === "seasonal" ? slide.season : undefined}
     >
-      <BaslacCampaignVisual priority={index === 0} slide={slide} />
+      {slide.visual === "seasonal" ? (
+        <BaslacSeasonalVisual slide={slide} />
+      ) : (
+        <BaslacCampaignVisual priority={index === 0} slide={slide} />
+      )}
 
       <div className={styles.campaignCopy}>
         <p className={styles.campaignEyebrow}>{slide.eyebrow}</p>
@@ -271,6 +298,45 @@ function BaslacCampaignVisual({
           }
         />
       </picture>
+    </div>
+  );
+}
+
+/**
+ * Sezonski vizual. Bez odobrene slike (ili ako slika ne uspe da se učita)
+ * ostaje samo CSS dekoracija iz `data-season`, pa slajd nikad ne prikaže
+ * polomljenu sliku. Slika je uvek lazy — nikad nije LCP kandidat.
+ */
+function BaslacSeasonalVisual({ slide }: { slide: BaslacSeasonalSlide }) {
+  const [failed, setFailed] = useState(false);
+  const image = failed ? null : slide.image;
+
+  return (
+    <div
+      className={styles.campaignVisual}
+      data-visual="seasonal"
+      data-season={slide.season}
+      data-has-image={image ? true : undefined}
+      role="img"
+      aria-label={slide.imageAlt}
+    >
+      {image ? (
+        <picture>
+          {image.mobileSrc === image.desktopSrc ? null : (
+            <source media={MOBILE_MEDIA_QUERY} srcSet={image.mobileSrc} />
+          )}
+          <img
+            src={image.desktopSrc}
+            alt=""
+            width={image.width}
+            height={image.height}
+            decoding="async"
+            loading="lazy"
+            sizes="(max-width: 50rem) 80vw, 30rem"
+            onError={() => setFailed(true)}
+          />
+        </picture>
+      ) : null}
     </div>
   );
 }

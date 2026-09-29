@@ -38,7 +38,7 @@ const SOURCE_LABEL: Record<string, string> = {
  * isključivo iz sesije.
  */
 export default async function CustomerConsentsPage() {
-  const session = await requireCustomerSession();
+  const session = await requireCustomerSession("/kupac/saglasnosti");
 
   const [state, history] = await Promise.all([
     loadConsentState(session.accountId),
@@ -55,8 +55,7 @@ export default async function CustomerConsentsPage() {
   }));
 
   return (
-    <div className="portal-root portal-customer-area">
-    <main className="portal-main">
+    <>
       <PageHeader
         eyebrow="Moj nalog"
         title="Saglasnosti"
@@ -117,7 +116,6 @@ export default async function CustomerConsentsPage() {
       <p>
         <Link href="/kupac">Nazad na nalog</Link>
       </p>
-    </main>
-    </div>
+    </>
   );
 }

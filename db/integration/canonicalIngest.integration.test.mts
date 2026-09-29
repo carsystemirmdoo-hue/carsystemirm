@@ -451,6 +451,11 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "sync/commands/poll/route.ts",
     "sync/commands/update/route.ts",
+    /*
+     * F5: stanje kupčeve prijave za javno zaglavlje. Samo čita SOPSTVENU sesiju
+     * (naziv firme i ime), ne prima parametre, ne piše ništa i nikad se ne kešira.
+     */
+    "kupac/sesija/route.ts",
   ];
 
   const rute: string[] = [];

@@ -6,6 +6,7 @@ import {
   CALLBACK_PARAM,
   CUSTOMER_HOME_ROUTE,
   CUSTOMER_LOGIN_ROUTE,
+  normalizeCustomerReturn,
   LOGIN_ROUTE,
   loginUrlFor,
   normalizeCallback,
@@ -169,9 +170,12 @@ export default withAuth(async function middleware(request) {
   }
 
   if (isCustomerRoute(pathname) && !request.auth?.user?.id) {
-    return NextResponse.redirect(
-      new URL(CUSTOMER_LOGIN_ROUTE, request.nextUrl.origin),
-    );
+    // Povratak na traženu stranu naloga (npr. link na fakturu), proveren istom kapijom.
+    const back = normalizeCustomerReturn(`${pathname}${request.nextUrl.search}`);
+    const target = back
+      ? `${CUSTOMER_LOGIN_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(back)}`
+      : CUSTOMER_LOGIN_ROUTE;
+    return NextResponse.redirect(new URL(target, request.nextUrl.origin));
   }
 
   return handleSiteRouting(request);

@@ -7923,3 +7923,129 @@ body:has(.portal-login-root) {
   .zr-item, .zr-status, .zr-quiet-list li { padding-inline: 14px; }
   .zr-quiet > summary { padding-inline: 14px; }
 }
+
+/* =========================================================================
+ * F5 — kupčev nalog na javnom sajtu
+ * ====================================================================== */
+.ka-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.ka-eyebrow {
+  color: var(--p-red);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ka-head h1 { margin: 4px 0 2px; color: var(--p-ink); font-size: 26px; font-weight: 750; letter-spacing: -0.02em; }
+.ka-head p { margin: 0; color: var(--p-muted); font-size: 13px; }
+.ka-head-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.ka-head-actions form { margin: 0; }
+.ka-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--p-line);
+  scrollbar-width: none;
+}
+.ka-tabs a {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-bottom: 2px solid transparent;
+  color: var(--p-muted);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.ka-tabs a:hover { color: var(--p-ink); }
+.ka-tabs a[aria-current="page"] { border-bottom-color: var(--p-red); color: var(--p-ink); }
+.ka-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; align-items: start; }
+.ka-grid > * + * { margin-top: 0; }
+.ka-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px 20px; margin: 0; }
+.ka-facts-wide { padding: 14px 20px; border-bottom: 1px solid var(--p-line); }
+.ka-facts dt { color: var(--p-muted); font-size: 11px; font-weight: 650; letter-spacing: 0.03em; text-transform: uppercase; }
+.ka-facts dd { margin: 3px 0 0; color: var(--p-ink); font-size: 14px; font-weight: 600; }
+.ka-facts dd small { display: block; margin-top: 2px; color: var(--p-muted); font-size: 12px; font-weight: 400; }
+.ka-recent { display: grid; margin: 0; padding: 0; list-style: none; border: 1px solid var(--p-line); border-radius: 8px; overflow: hidden; }
+.ka-recent li + li { border-top: 1px solid var(--p-line); }
+.ka-recent a { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 4px 12px; padding: 9px 12px; color: inherit; text-decoration: none; font-size: 13px; }
+.ka-recent a:hover { background: oklch(0.976 0.004 255); }
+.ka-recent strong { color: var(--p-ink); }
+.ka-recent span { color: var(--p-muted); }
+.ka-amount { color: var(--p-ink) !important; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.ka-more { color: var(--p-red); font-size: 13px; font-weight: 650; }
+.ka-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--p-line);
+}
+.ka-filters label { display: grid; gap: 4px; }
+.ka-filters span { color: var(--p-ink); font-size: 12px; font-weight: 650; }
+.ka-filters input {
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 1px solid var(--p-line);
+  border-radius: 7px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  font: inherit;
+  font-size: 13px;
+}
+.ka-filter-actions { display: flex; gap: 8px; }
+.ka-count { color: var(--p-muted) !important; font-size: 13px !important; }
+.ka-invoices { display: grid; margin: 0; padding: 0; list-style: none; border: 1px solid var(--p-line); border-radius: 8px; overflow: hidden; }
+.ka-invoices li + li { border-top: 1px solid var(--p-line); }
+.ka-invoices a, .ka-invoices-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  font-size: 13px;
+}
+.ka-invoices a { color: var(--p-ink); text-decoration: none; }
+.ka-invoices a:hover { background: oklch(0.976 0.004 255); }
+.ka-invoices-head { background: var(--p-bg); color: var(--p-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.ka-invoices-head span:last-child { text-align: right; }
+.ka-inv-number { font-weight: 700; }
+.ka-pages { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.ka-pages a { color: var(--p-red); font-weight: 650; }
+.ka-lines { display: grid; margin: 0; padding: 0; list-style: none; border: 1px solid var(--p-line); border-radius: 8px; overflow: hidden; }
+.ka-lines li {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 0.7fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--p-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ka-lines li + li { border-top: 1px solid var(--p-line); }
+.ka-lines-head { background: var(--p-bg); color: var(--p-muted) !important; font-size: 11px !important; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.ka-lines-head span:last-child, .ka-lines li > span:last-child { text-align: right; }
+.ka-line-name { display: grid; }
+.ka-line-name small { color: var(--p-muted); font-size: 12px; }
+.ka-empty p { color: var(--p-ink) !important; }
+.portal-customer-area .portal-page-header { margin-top: 8px; }
+@media (max-width: 720px) {
+  .ka-head h1 { font-size: 22px; }
+  .ka-filters { grid-template-columns: 1fr 1fr; padding: 14px; }
+  .ka-filters label:first-child, .ka-filter-actions { grid-column: 1 / -1; }
+  .ka-invoices-head, .ka-lines-head { display: none !important; }
+  .ka-invoices a { grid-template-columns: 1fr auto; gap: 2px 12px; }
+  .ka-invoices a > span:nth-child(2), .ka-invoices a > span:nth-child(3), .ka-invoices a > span:nth-child(4) { color: var(--p-muted); font-size: 12px; }
+  .ka-invoices a > span:nth-child(5) { grid-row: 1; grid-column: 2; }
+  .ka-lines li { grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+  .ka-line-name { grid-column: 1 / -1; }
+  .ka-lines li > span[data-label]::before { content: attr(data-label) " "; display: block; color: var(--p-muted); font-size: 11px; font-weight: 650; text-transform: uppercase; letter-spacing: 0.03em; }
+  .ka-lines li > span:last-child { text-align: left; }
+  .ka-facts-wide { padding: 14px; }
+}

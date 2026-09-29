@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getCustomerSession } from "@/lib/authz/customer-session";
-import {
-  CUSTOMER_HOME_ROUTE,
-  normalizeCustomerCallback,
-} from "@/lib/authz/redirects.mjs";
+import { normalizeCustomerReturn } from "@/lib/authz/redirects.mjs";
 import { CustomerLoginForm } from "./CustomerLoginForm";
 import "../../portal/portal.css";
 
@@ -24,7 +21,7 @@ export default async function CustomerLoginPage({
   const session = await getCustomerSession();
 
   if (session) {
-    redirect(normalizeCustomerCallback(callbackUrl) ?? CUSTOMER_HOME_ROUTE);
+    redirect(normalizeCustomerReturn(callbackUrl) ?? "/");
   }
 
   return <CustomerLoginForm callbackUrl={callbackUrl ?? ""} />;

@@ -304,3 +304,68 @@ export async function loadCustomerOverview(customerId: string) {
       }
     : null;
 }
+
+export type CustomerPurchasedArticle = {
+  articleCode: string;
+  /** Količina po kupovini (zbir po dokumentu) i jedinice mere sa tog dokumenta. */
+  events: { issuedOn: string; quantity: number; units: (string | null)[] }[];
+  mapping: {
+    status: string;
+    catalogProductSlug: string | null;
+    catalogVariantId: string | null;
+    note: string | null;
+  } | null;
+};
+
+/**
+ * Kupljeni artikli jednog kupca za „Poručite ponovo": količine po kupovini i
+ * živa veza sa katalogom. Isti ulaz kao preporuke (`recommendation_input_lines`
+ * — samo potvrđeni dokumenti). Cena se NE čita.
+ */
+export async function loadCustomerPurchasedArticles(
+  customerId: string,
+  today: string,
+): Promise<CustomerPurchasedArticle[]> {
+  if (!customerId) {
+    throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  }
+  const db = getDb();
+  const [events, mappings] = await Promise.all([
+    db.execute<{ article_code: string; issued_on: string; quantity: string; units: (string | null)[] }>(sql`
+      SELECT ril.article_code, ril.issued_on::text AS issued_on,
+             sum(il.quantity)::text AS quantity,
+             array_agg(DISTINCT coalesce(btrim(a.unit), '')) AS units
+        FROM recommendation_input_lines ril
+        JOIN invoice_lines il ON il.id = ril.invoice_line_id
+        LEFT JOIN articles a ON a.id = il.article_id
+       WHERE ril.customer_id = ${customerId}
+         AND ril.issued_on <= ${today}::date
+       GROUP BY ril.article_code, ril.invoice_id, ril.issued_on
+       ORDER BY ril.issued_on`),
+    db.execute<{ code: string; status: string; slug: string | null; variant: string | null; note: string | null }>(sql`
+      SELECT a.code, m.status::text AS status, m.catalog_product_slug AS slug,
+             m.catalog_variant_id AS variant, m.note
+        FROM article_catalog_mappings m
+        JOIN articles a ON a.id = m.article_id
+       WHERE m.status NOT IN ('rejected', 'revoked')
+         AND a.code IN (
+           SELECT DISTINCT article_code FROM recommendation_input_lines
+            WHERE customer_id = ${customerId})`),
+  ]);
+
+  const byCode = new Map<string, CustomerPurchasedArticle>();
+  for (const e of events) {
+    const item = byCode.get(e.article_code) ?? { articleCode: e.article_code, events: [], mapping: null };
+    item.events.push({ issuedOn: e.issued_on, quantity: Number(e.quantity), units: e.units ?? [] });
+    byCode.set(e.article_code, item);
+  }
+  for (const m of mappings) {
+    const item = byCode.get(m.code);
+    if (!item) continue;
+    // Dva artikla iste šifre sa različitim vezama: nijedna se ne prikazuje.
+    item.mapping = item.mapping
+      ? { status: "conflict", catalogProductSlug: null, catalogVariantId: null, note: null }
+      : { status: m.status, catalogProductSlug: m.slug, catalogVariantId: m.variant, note: m.note };
+  }
+  return [...byCode.values()];
+}

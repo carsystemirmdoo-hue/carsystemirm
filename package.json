@@ -243,7 +243,7 @@
     "assets:validate-incoming": "node scripts/validate-incoming-assets.mjs",
     "test:content-assets": "node --test lib/content-assets/contentAssets.test.mjs",
     "test:commercial": "node --test lib/commercial/*.test.mjs",
-    "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs",
+    "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs lib/customers/reorderRules.test.mjs",
     "test:partners": "node --test lib/partners/*.test.mjs lib/import/xlsx/*.test.mjs lib/customers/contactVerification.test.mjs",
     "partners:report": "node scripts/partners/partner-registry-report.mjs",
     "test:pricing": "node --test lib/pricing/*.test.mjs",

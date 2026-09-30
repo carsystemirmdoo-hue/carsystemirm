@@ -118,7 +118,7 @@ code,officialName,kind,role,series,action,slug,category,images,documentationGap
 "H 2RM1","H 2RM1 BODY Harden-R","component","hardener","","IMPORT","rm-h-2rm1-body-harden-r","kitovi","1",""
 "H 2RM1C","H 2RM1C BODY Harden-R","component","hardener","","IMPORT","rm-h-2rm1c-body-harden-r","kitovi","1",""
 "H 2RM1CL","H 2RM1CL BODY Harden-R","component","hardener","","IMPORT","rm-h-2rm1cl-body-harden-r","kitovi","1",""
-"H 2RM2","H 2RM2 WHEEL CLEAR COAT, HARDENER","component","hardener","","IMPORT","rm-h-2rm2-wheel-clear-coat-hardener","boje","1",""
+"H 2RM2","H 2RM2 WHEEL CLEAR COAT, HARDENER","component","hardener","","IMPORT","rm-h-2rm2-wheel-clear-coat-hardener","boje","0",""
 "H 2RM3","H 2RM3 SPRAY BODY Harden-R","component","hardener","","IMPORT","rm-h-2rm3-spray-body-harden-r","kitovi","1",""
 "H 340","H 340 GHD PROTECT FILLER HARDENER","component","hardener","GRAPHITE HD","IMPORT","rm-h-340-ghd-protect-filler-hardener","boje","0",""
 "H 380","H 380 GHD HARDENER","component","hardener","GRAPHITE HD","ENRICH_EXISTING","h-380-ghd-hardener","boje","0",""

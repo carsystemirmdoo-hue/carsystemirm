@@ -14,6 +14,7 @@ import { execFileSync } from "node:child_process";
 
 import { cachedFetch, mapLimit, readJson, sha256, writeJson } from "../carsystem-sync/lib/http.mjs";
 import { IMAGE_CACHE_DIR, PATHS } from "./lib/config.mjs";
+import { isPortalPlaceholder, portalPlaceholderFileName } from "./lib/placeholders.mjs";
 
 const plan = readJson(PATHS.plan);
 const source = readJson(PATHS.source);
@@ -72,6 +73,11 @@ for (const image of ok) {
   image.placeholder = true;
   image.placeholderReason = `isti sadržaj na ${new Set(bySha.get(image.sha256)).size} zapisa — zamenska sličica portala, ne fotografija proizvoda`;
 }
+for (const image of ok) {
+  if (image.placeholder || !isPortalPlaceholder(image)) continue;
+  image.placeholder = true;
+  image.placeholderReason = `izvorni fajl portala „${portalPlaceholderFileName(image.url)}” — zamenska sličica, ne fotografija proizvoda`;
+}
 writeJson(PATHS.imageManifest, {
   meta: {
     sourceHosts: [...new Set(images.map((image) => new URL(image.url).host))],
@@ -85,7 +91,7 @@ writeJson(PATHS.imageManifest, {
     withTransparency: ok.filter((image) => image.hasTransparency && !image.placeholder).length,
     opaque: ok.filter((image) => !image.hasTransparency && !image.placeholder).length,
     totalBytes: ok.reduce((sum, image) => sum + image.bytes, 0),
-    sharedAcrossRecords: [...bySha.entries()].filter(([, keys]) => new Set(keys).size > 1).map(([hash, keys]) => ({ sha256: hash.slice(0, 16), records: [...new Set(keys)], placeholder: placeholderHashes.has(hash) })),
+    sharedAcrossRecords: [...bySha.entries()].filter(([, keys]) => new Set(keys).size > 1).map(([hash, keys]) => ({ sha256: hash.slice(0, 16), records: [...new Set(keys)], placeholder: placeholderHashes.has(hash) || images.some((image) => image.sha256 === hash && image.placeholder) })),
   },
   images,
 });

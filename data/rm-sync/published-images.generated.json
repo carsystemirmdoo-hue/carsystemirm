@@ -712,18 +712,6 @@
       "hasAlpha": true,
       "bytes": 26196
     },
-    "/products/rm/catalog/rm-h-2rm2-wheel-clear-coat-hardener.webp": {
-      "sourceSha256": "6aa98ae0725656f7298bdb766cfe21dfee894ccbdf0fd62910929e417b940922",
-      "sourceUrl": "https://info.rmpaint.com/system/files/styles/natural_limited/private/images/Image%20missing_1.png?itok=1F9waFua",
-      "origin": "info-portal",
-      "sourceWidth": 200,
-      "sourceHeight": 280,
-      "mode": "source-alpha",
-      "width": 200,
-      "height": 280,
-      "hasAlpha": true,
-      "bytes": 5904
-    },
     "/products/rm/catalog/rm-h-2rm3-spray-body-harden-r.webp": {
       "sourceSha256": "ea0934c96f64707a1449613ba74d1f121c6e9221a36f70903a2fb8b6b39d16d7",
       "sourceUrl": "https://info.rmpaint.com/system/files/styles/natural_limited/private/images/H%202RM3.png?itok=3LrKGMfR",

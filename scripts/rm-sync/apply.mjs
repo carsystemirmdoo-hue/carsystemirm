@@ -21,6 +21,7 @@ import path from "node:path";
 
 import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
 import { BRAND, IMAGE_CACHE_DIR, PATHS, PUBLIC_IMAGE_URL_PREFIX, REPO_ROOT, SOURCES } from "./lib/config.mjs";
+import { isPortalPlaceholder } from "./lib/placeholders.mjs";
 
 const checkOnly = process.argv.includes("--check");
 
@@ -44,7 +45,7 @@ const enrichments = plan.items.filter((item) => item.action === "ENRICH_EXISTING
 /* -- 1. Slike ---------------------------------------------------------------------------- */
 
 const imagesByKey = new Map();
-for (const image of imageManifest.images.filter((entry) => !entry.error && !entry.placeholder)) imagesByKey.set(image.sourceKey, [...(imagesByKey.get(image.sourceKey) ?? []), image]);
+for (const image of imageManifest.images.filter((entry) => !entry.error && !isPortalPlaceholder(entry))) imagesByKey.set(image.sourceKey, [...(imagesByKey.get(image.sourceKey) ?? []), image]);
 
 const pathBySha = new Map(Object.entries(published.images).map(([publicPath, entry]) => [entry.sourceSha256, publicPath]));
 const nextPublished = {};

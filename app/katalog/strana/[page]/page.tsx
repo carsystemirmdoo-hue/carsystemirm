@@ -15,6 +15,7 @@ import {
   refinishPhases,
 } from "@/lib/carsystem-data";
 import { toCatalogListingEntity } from "@/lib/catalog-listing";
+import { withProductFitModel } from "@/lib/product-fit-model";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
@@ -71,9 +72,9 @@ export default async function CatalogPaginationRoute({
   const allProducts = getAllCarsystemProducts();
   const totalPages = getTotalPages();
   const start = (page - 1) * CATALOG_BATCH_SIZE;
-  const products = allProducts
-    .slice(start, start + CATALOG_BATCH_SIZE)
-    .map(toCatalogListingEntity);
+  const products = withProductFitModel(
+    allProducts.slice(start, start + CATALOG_BATCH_SIZE).map(toCatalogListingEntity),
+  );
   const brands = getAllCarsystemBrands();
   const route = `/katalog/strana/${page}`;
   const breadcrumbs = [

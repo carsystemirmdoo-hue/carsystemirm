@@ -9,6 +9,7 @@ import {
   type ProductContrastMode,
   type ProductImageMatte,
 } from "@/lib/product-image-metrics";
+import { getOfficialShadowV6, type OfficialShadow } from "@/lib/product-fit-model";
 
 /**
  * A PDP stage image with everything the client stage needs to draw it.
@@ -28,20 +29,32 @@ export type ProductStageImage = {
   matte: ProductImageMatte;
   /** The photo's own flat backdrop colour, for `matte: "backdrop"` only. */
   backdrop: string | null;
+  /**
+   * V6 fit + shadow model for THIS drawn file; absent = legacy. The stage
+   * format (`resolveStageFormat`) deliberately still reads `metrics.aspect`.
+   */
+  officialShadow?: OfficialShadow;
 };
 
-export function toProductStageImage(identitySrc: string, alt: string): ProductStageImage {
+export function toProductStageImage(
+  identitySrc: string,
+  alt: string,
+  product?: { slug: string; brandSlug: string },
+): ProductStageImage {
   // The stage draws the reviewed display derivative when one exists; its
-  // metrics are measured on that same file, so geometry and pixels agree.
+  // metrics are measured on that same file, so geometry and pixels agree —
+  // including the V6 subject box and official shadow.
   const src = toDisplayImageSrc(identitySrc);
   const metrics = getProductImageMetrics(src);
   const matte = resolveImageMatte(metrics);
+  const officialShadow = product ? getOfficialShadowV6(product, src) : null;
   return {
     src,
     alt,
     contrastMode: resolveContrastMode(metrics),
     matte,
     backdrop: matte === "backdrop" ? (metrics?.backdrop ?? null) : null,
+    ...(officialShadow ? { officialShadow } : {}),
   };
 }
 
@@ -79,7 +92,7 @@ export function getProductStageImages(
       all.findIndex((candidate) => candidate.src === image.src) === index,
   );
 
-  return unique.map((image) => toProductStageImage(image.src, image.alt));
+  return unique.map((image) => toProductStageImage(image.src, image.alt, product));
 }
 
 /**

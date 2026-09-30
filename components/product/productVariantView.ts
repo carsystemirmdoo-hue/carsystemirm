@@ -195,6 +195,6 @@ export function toProductVariantViews(
 
   const [base] = views;
   return expandRowVariants(base, rowVariants, (src, row) =>
-    toProductStageImage(src, row.label ? `${base.name} · ${row.label}` : base.name),
+    toProductStageImage(src, row.label ? `${base.name} · ${row.label}` : base.name, base),
   ) as ProductVariantView[];
 }

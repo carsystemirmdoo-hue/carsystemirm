@@ -908,6 +908,95 @@
 }
 
 /*
+ * V6B — tačno jedna senka. Opt-in: važi SAMO uz `data-product-shadow-model="v6"`,
+ * koji server postavlja za Carsystem slike sa ispravnom V6 metrikom
+ * (`lib/product-fit-model.ts`). Bez atributa ostaje sve iznad — legacy model.
+ *
+ * Šta je bilo pogrešno u legacy modelu (izmereno, ne pretpostavljeno):
+ *   - (rešeno i u tamnoj temi iznad) `.contactShadow` i `drop-shadow` su uzimali
+ *     boju iz `--foreground`, pa su u tamnoj temi bili SVETLI;
+ *   - `.contactShadow` je vezan za dno površine, ne za proizvod: kod širokih i
+ *     niskih proizvoda visi 40–58 px ispod njih;
+ *   - zvanična senka iz asseta + `.contactShadow` + `drop-shadow` = tri sloja.
+ *
+ * Model: `strong` → nijedna CSS senka (asset nosi svoju); `none` → jedna tamna,
+ * usidrena pod izmereno dno subjekta; `thin` / `unknown` → ista, slabija.
+ * Senka se crta ISPOD slike (`.contactShadow`, z-index 2); sama slika ne dobija
+ * nikakav filter, opacity ni blend.
+ */
+.surface[data-product-shadow-model="v6"] .productImage {
+  filter: none;
+}
+
+.surface[data-product-shadow-model="v6"] .contactShadow {
+  /*
+   * Ista lestvica kao `.objectWrap` (84 / S 58·72 / M 66·78 / L 74·84 / XL 82·90).
+   * Mora ostati u koraku sa njom — `productFitModelV6.test.mjs` to proverava.
+   * Sadržaj boxa je u V6 sam subjekt, pa je `--product-fit-w` širina PROIZVODA,
+   * a njegovo dno je na 49% + visina/2, gde god proizvod završio.
+   */
+  --product-envelope-w: 84cqw;
+  --product-envelope-h: 84cqh;
+  --product-fit-w: min(
+    var(--product-envelope-w),
+    calc(var(--product-envelope-h) * var(--product-content-aspect))
+  );
+  --product-v6-shadow-h: max(8px, calc(var(--product-fit-w) * 0.06));
+  top: calc(
+    49% + var(--product-fit-w) / var(--product-content-aspect) / 2 -
+      var(--product-v6-shadow-h) * 0.45
+  );
+  bottom: auto;
+  width: calc(var(--product-fit-w) * 0.78);
+  height: var(--product-v6-shadow-h);
+  /* Fiksno tamna u OBE teme — namerno ne `--foreground`. */
+  background: oklch(0.08 0.01 250 / 0.5);
+  filter: blur(7px);
+  opacity: 0.55;
+}
+
+.surface[data-product-shadow-model="v6"][data-product-size-class="S"] .contactShadow {
+  --product-envelope-w: 58cqw;
+  --product-envelope-h: 72cqh;
+}
+
+.surface[data-product-shadow-model="v6"][data-product-size-class="M"] .contactShadow {
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 78cqh;
+}
+
+.surface[data-product-shadow-model="v6"][data-product-size-class="L"] .contactShadow {
+  --product-envelope-w: 74cqw;
+  --product-envelope-h: 84cqh;
+}
+
+.surface[data-product-shadow-model="v6"][data-product-size-class="XL"] .contactShadow {
+  --product-envelope-w: 82cqw;
+  --product-envelope-h: 90cqh;
+}
+
+.surface[data-product-shadow-model="v6"][data-product-official-shadow="thin"] .contactShadow,
+.surface[data-product-shadow-model="v6"][data-product-official-shadow="unknown"] .contactShadow {
+  opacity: 0.32;
+}
+
+.surface[data-product-shadow-model="v6"][data-product-official-shadow="strong"] .contactShadow {
+  display: none;
+}
+
+/*
+ * Senka je poseban element, pa bi bez ovoga stajala SAMA dok slika putuje — ili
+ * zauvek, ako slika padne. Vidljiva je tek kada `ProductVisualSurface` potvrdi
+ * da je baš ova slika učitana i dekodirana (`loading` i `failed` je ne crtaju;
+ * server uvek šalje `loading`, pa nema bljeska ni pre hidracije).
+ * `visibility`, ne `opacity`: ne dira vrednosti ni tranzicije iznad, pa su hover
+ * i reduced-motion posle učitavanja isti kao do sada.
+ */
+.surface[data-product-shadow-model="v6"]:not([data-product-image-state="loaded"]) .contactShadow {
+  visibility: hidden;
+}
+
+/*
  * Roletna se otkriva ISPOD sloja proizvoda i sme da menja samo pozadinu oko
  * njega. Nijedan blend/filter na slici ili njenim roditeljima ne sme da
  * prebojava neprovidne delove proizvoda (etiketa, poklopac, beli delovi

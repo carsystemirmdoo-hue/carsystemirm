@@ -45,6 +45,18 @@ export type ProductImageMetrics = {
   palette: { hex: string; share: number }[];
   /** Flat studio backdrop of an opaque photo (hex); absent when the backdrop is a gradient. */
   backdrop?: string;
+  /**
+   * V6 polja — dodaje ih generator SAMO za Carsystem putanje sa alfa kanalom.
+   * `box`/`aspect` iznad i dalje opisuju „sve sa alfom" (proizvod + zapečena
+   * senka) i njih čitaju format PDP stage-a i contrast mode; ova polja opisuju
+   * sam SUBJEKT. Da li se koriste odlučuje `lib/product-fit-model.ts`.
+   */
+  fitModelVersion?: number;
+  subjectBox?: [number, number, number, number];
+  subjectAspect?: number;
+  /** Centar subjekta kao udeo platna: [x, y]. */
+  subjectCenter?: [number, number];
+  officialShadow?: "strong" | "thin" | "none" | "unknown";
 };
 
 type ManifestShape = {

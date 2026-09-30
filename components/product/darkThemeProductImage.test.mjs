@@ -40,7 +40,7 @@ test("tamna tema: light box i fotografija su vezani za izmereni režim slike", (
   assert.doesNotMatch(css, /matte="photo"\][^{]*\{[^}]*object-fit: cover/);
   const stage = read("./ProductStickyStage.tsx");
   // Slika koja ne uspe da se učita ne sme da ostavi praznu ploču ni slomljenu ikonu.
-  assert.match(stage, /const shownImage = imageState === "error" \? null : activeImage;/);
+  assert.match(stage, /const shownImage = imageState === "failed" \? null : activeImage;/);
   assert.match(stage, /data-product-image-matte=\{shownImage\?\.matte\}/);
 });
 

@@ -229,6 +229,19 @@ nije otvaran — detalji u `docs/BASLAC_CATALOG_SYNC.md`):
 - zapisi bez `detail` bloka ne prikazuju „Bezbednosni list — na upit", jer `getDocuments`
   izostavlja dokumente sa `status: "placeholder"`.
 
+#### Reopen 2026-09-21 — ograničen, samo hero slika proizvoda (V6A + V6B)
+
+Vlasnik je izričito otključao PDP **isključivo** za:
+
+- korišćenje novog `subjectBox` fita hero slike;
+- primenu shadow modela (`officialShadow`: strong / thin / none / unknown);
+- sprečavanje višestrukih senki (zvanična senka iz asseta + CSS `drop-shadow`).
+
+Ništa drugo nije otključano: layout, stil, dimenzije, razmaci, boje, tipografija,
+ponašanje i format stage-a ostaju zaključani. Izmena važi samo za Carsystem slike
+i samo uz `data-product-shadow-model="v6"`; bez tog atributa PDP se renderuje kao
+u zaključanom stanju. Status površine ostaje `DESIGN + UX LOCKED`.
+
 ### Cosmos LAC — 🔒 DESIGN + UX LOCKED
 
 | | |

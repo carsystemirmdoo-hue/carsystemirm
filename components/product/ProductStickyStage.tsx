@@ -65,7 +65,7 @@ export function ProductStickyStage({
    * („Vizuel u pripremi"). Dok se učitava, kadar zadržava svoj izgled.
    */
   const { ref: imageRef, state: imageState } = useProductImageLoadState(activeImage?.src);
-  const shownImage = imageState === "error" ? null : activeImage;
+  const shownImage = imageState === "failed" ? null : activeImage;
 
   /*
    * Kratak crossfade se pali SAMO na izbor napravljen na strani.
@@ -128,6 +128,9 @@ export function ProductStickyStage({
         data-product-contrast={activeImage?.contrastMode ?? "balanced"}
         data-product-zoom={isZoomed ? "true" : "false"}
         data-product-fit={activeImage?.src}
+        data-product-fit-model={activeImage?.officialShadow ? "v6" : undefined}
+        data-product-shadow-model={activeImage?.officialShadow ? "v6" : undefined}
+        data-product-official-shadow={activeImage?.officialShadow}
         data-product-image-matte={shownImage?.matte}
         data-product-image-state={activeImage ? imageState : undefined}
         style={activeVariant.style}
@@ -250,7 +253,7 @@ export function ProductStickyStage({
 /** Sličica koja ne uspe da se učita ostaje prazna pločica, bez slomljene ikone. */
 function GalleryThumbImage({ src, priority }: { src: string; priority: boolean }) {
   const { ref, state } = useProductImageLoadState(src);
-  if (state === "error") return null;
+  if (state === "failed") return null;
   return (
     <Image
       ref={ref}

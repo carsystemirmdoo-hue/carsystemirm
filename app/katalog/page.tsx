@@ -6,6 +6,7 @@ import {
   refinishPhases,
 } from "@/lib/carsystem-data";
 import { getCatalogListingData } from "@/lib/catalog-listing";
+import { withProductFitModel } from "@/lib/product-fit-model";
 import { collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -32,7 +33,7 @@ export default function KatalogPage() {
         )}
       />
       <CatalogPage
-        canonical={canonical}
+        canonical={withProductFitModel(canonical)}
         brands={getAllCarsystemBrands()}
         programs={programGroups}
         phases={refinishPhases}

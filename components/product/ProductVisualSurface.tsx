@@ -118,7 +118,19 @@ export function ProductVisualSurface({
   const { ref: imageRef, state: imageState } = useProductImageLoadState(
     hasRealImage ? selectedImage?.src : null,
   );
-  const hasProductAsset = hasRealImage && imageState !== "error";
+  const hasProductAsset = hasRealImage && imageState !== "failed";
+  /*
+   * V6 (fit po subjektu + tačno jedna senka) važi samo kada je server upisao
+   * `officialShadow` za BAŠ OVU sliku (izmerenu na fajlu koji se crta — derivat
+   * za prikaz, ako postoji). `image` prop menja sliku posle odluke servera
+   * (galerija), pa tada ostaje legacy — merenje pripada drugoj slici.
+   *
+   * Stanje učitavanja je ISTO ono iznad (jedan izvor istine): V6 ga samo
+   * izlaže kao atribut, da CSS senku crta tek za `loaded`. Slika koja padne
+   * zadržava V6 atribute sa `failed`, pa ni njen „Vizuel u pripremi" nema senku.
+   */
+  const v6Shadow =
+    hasRealImage && !image ? (resolved.officialShadow ?? null) : null;
   const visual = {
     treatment: resolved.treatment,
     productType: resolved.productType,
@@ -441,6 +453,10 @@ export function ProductVisualSurface({
       className={surfaceClassName}
       data-product-image-motion
       data-product-fit={hasProductAsset ? selectedImage?.src : undefined}
+      data-product-fit-model={v6Shadow ? "v6" : undefined}
+      data-product-shadow-model={v6Shadow ? "v6" : undefined}
+      data-product-official-shadow={v6Shadow ?? undefined}
+      data-product-image-state={v6Shadow ? imageState : undefined}
       data-product-visual-real-image={hasProductAsset ? "true" : "false"}
       data-product-visual-pointer-active={isSurfacePointerActive ? "true" : undefined}
       data-product-visual-surface

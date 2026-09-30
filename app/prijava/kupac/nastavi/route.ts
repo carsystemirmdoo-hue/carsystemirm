@@ -17,6 +17,6 @@ export async function GET(request: NextRequest) {
   const resumed = await tryResumeCustomerSession();
   const target = resumed !== null ? back : `${CUSTOMER_LOGIN_ROUTE}?callbackUrl=${encodeURIComponent(back)}`;
   const res = NextResponse.redirect(new URL(target, request.nextUrl.origin));
-  res.headers.set("Cache-Control", "no-store");
+  res.headers.set("Cache-Control", "private, no-store");
   return res;
 }

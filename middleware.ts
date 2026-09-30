@@ -145,7 +145,18 @@ function redirectToPortalLogin(request: NextRequest) {
   const target = loginUrlFor(
     `${request.nextUrl.pathname}${request.nextUrl.search}`,
   );
-  return NextResponse.redirect(new URL(target, request.nextUrl.origin));
+  return privateRedirect(new URL(target, request.nextUrl.origin));
+}
+
+/**
+ * Preusmerenje sa privatne putanje (portal, nalog kupca, prijava) zavisi od
+ * sesije pozivaoca — ne sme ga zapamtiti ni pregledač ni posrednik.
+ */
+function privateRedirect(url: URL) {
+  const res = NextResponse.redirect(url);
+  res.headers.set("Cache-Control", "private, no-store");
+  res.headers.set("Vary", "Cookie");
+  return res;
 }
 
 /** Obnova sesije sa zapamćenog uređaja (route handler, ne strana). */
@@ -165,7 +176,7 @@ export default withAuth(async function middleware(request) {
     const target = callback
       ? `${LOGIN_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(callback)}`
       : LOGIN_ROUTE;
-    return NextResponse.redirect(new URL(target, request.nextUrl.origin));
+    return privateRedirect(new URL(target, request.nextUrl.origin));
   }
 
   if (isPortalRoute(pathname) && !isPortalPublicRoute(pathname)) {
@@ -187,12 +198,12 @@ export default withAuth(async function middleware(request) {
       const resume = back
         ? `${CUSTOMER_RESUME_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(back)}`
         : CUSTOMER_RESUME_ROUTE;
-      return NextResponse.redirect(new URL(resume, request.nextUrl.origin));
+      return privateRedirect(new URL(resume, request.nextUrl.origin));
     }
     const target = back
       ? `${CUSTOMER_LOGIN_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(back)}`
       : CUSTOMER_LOGIN_ROUTE;
-    return NextResponse.redirect(new URL(target, request.nextUrl.origin));
+    return privateRedirect(new URL(target, request.nextUrl.origin));
   }
 
   return handleSiteRouting(request);

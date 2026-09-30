@@ -8,6 +8,7 @@ const TABS = [
   { href: "/kupac/fakture", label: "Fakture" },
   { href: "/kupac/korpa", label: "Korpa" },
   { href: "/kupac/porudzbine", label: "Porudžbine" },
+  { href: "/kupac/upiti", label: "Upiti" },
   { href: "/kupac/saglasnosti", label: "Saglasnosti" },
 ];
 

@@ -22,7 +22,7 @@ import {
   transitionProblem,
 } from "@/lib/ordering/orderRules.mjs";
 import { evaluatePricing } from "@/lib/pricing/precedence.mjs";
-import { variantRedirectTarget } from "@/lib/product-families";
+import { getFamilyForProduct, variantRedirectTarget } from "@/lib/product-families";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 
 /**
@@ -295,6 +295,8 @@ export type CartLine = ArticleOffer & {
 
 export type CartQuote = {
   mode: OrderingMode;
+  /** Korpa nosi stavke vraćene iz zahteva na ispravku. */
+  correcting: { orderId: string; requestNumber: string; reason: string | null; replacedBy: string | null } | null;
   lines: CartLine[];
   totals: { net: number; vat: number; gross: number };
   fingerprint: string;
@@ -316,12 +318,23 @@ export async function loadCartQuote(customerId: string, exec: Exec = getDb()): P
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const mode = await loadOrderingMode(exec);
   const cart = [
-    ...(await exec.execute<{ article_id: string; quantity: string }>(sql`
-      SELECT article_id, quantity::text AS quantity FROM customer_cart_items
+    ...(await exec.execute<{ article_id: string; quantity: string; source_order_id: string | null }>(sql`
+      SELECT article_id, quantity::text AS quantity, source_order_id FROM customer_cart_items
        WHERE customer_id = ${customerId} ORDER BY created_at, article_id`)),
   ];
   if (cart.length === 0) {
-    return { mode, lines: [], totals: { net: 0, vat: 0, gross: 0 }, fingerprint: fingerprintOf([]), canSubmit: false, blockers: ["Korpa je prazna."] };
+    return { mode, correcting: null, lines: [], totals: { net: 0, vat: 0, gross: 0 }, fingerprint: fingerprintOf([]), canSubmit: false, blockers: ["Korpa je prazna."] };
+  }
+  const sources = [...new Set(cart.map((c) => c.source_order_id).filter((x): x is string => Boolean(x)))];
+  let correcting: CartQuote["correcting"] = null;
+  if (sources.length === 1) {
+    const [src] = [
+      ...(await exec.execute<{ id: string; request_number: string; status_reason: string | null; replaced_by: string | null }>(sql`
+        SELECT o.id, o.request_number, o.status_reason,
+               (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by
+          FROM customer_orders o WHERE o.id = ${sources[0]}::uuid AND o.customer_id = ${customerId}`)),
+    ];
+    if (src) correcting = { orderId: src.id, requestNumber: src.request_number, reason: src.status_reason, replacedBy: src.replaced_by };
   }
   const [rows, terms] = await Promise.all([
     loadArticleRows(exec, mode.priceList, sql`a.id IN (${sql.join(cart.map((c) => sql`${c.article_id}::uuid`), sql`, `)})`),
@@ -349,6 +362,7 @@ export async function loadCartQuote(customerId: string, exec: Exec = getDb()): P
   ];
   return {
     mode,
+    correcting,
     lines,
     totals: orderTotals(valid.map((l) => ({ quantity: l.quantity, netPrice: l.price!.netPrice, vatPercent: l.price!.vatPercent }))),
     fingerprint: fingerprintOf(lines),
@@ -492,14 +506,23 @@ export async function submitCartRequest(
       const requestNumber = formatRequestNumber(year, Number(n));
       const list = quote.mode.priceList;
 
+      // Ispravka: korpa nosi stavke vraćene iz TAČNO jednog zahteva koji još nema ispravku.
+      const correcting = quote.correcting && !quote.correcting.replacedBy ? quote.correcting.orderId : null;
       const [order] = [
         ...(await tx.execute<{ id: string }>(sql`
           INSERT INTO customer_orders (customer_id, submitted_by, request_number, status, idempotency_key,
-                                       price_list_id, price_list_kind, currency, net_total, vat_total, gross_total, customer_note)
+                                       price_list_id, price_list_kind, currency, net_total, vat_total, gross_total, customer_note,
+                                       replaces_order_id)
           VALUES (${customerId}, ${session.accountId}, ${requestNumber}, 'submitted', ${key},
-                  ${list.id}, ${list.kind}, ${list.currency}, ${quote.totals.net}, ${quote.totals.vat}, ${quote.totals.gross}, ${note})
+                  ${list.id}, ${list.kind}, ${list.currency}, ${quote.totals.net}, ${quote.totals.vat}, ${quote.totals.gross}, ${note},
+                  ${correcting}::uuid)
           RETURNING id`)),
       ];
+      if (correcting) {
+        await tx.execute(sql`
+          INSERT INTO customer_order_events (order_id, kind, actor_customer_user_id, actor_name, reason)
+          VALUES (${correcting}::uuid, 'replaced', ${session.accountId}, ${session.name}, ${`Ispravka poslata kao ${requestNumber}`})`);
+      }
       let n2 = 0;
       for (const l of quote.lines) {
         n2 += 1;
@@ -545,6 +568,7 @@ export type OrderListRow = {
   priceListKind: "demo" | "biznisoft";
   customerName: string;
   customerId: string;
+  replacesNumber: string | null;
 };
 
 function scopeWhere(scope: LedgerScope): SQL {
@@ -557,9 +581,10 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
   const rows = await getDb().execute<{
     id: string; request_number: string; order_number: string | null; status: string; submitted_at: Date;
     gross_total: string; currency: string; line_count: number; price_list_kind: "demo" | "biznisoft";
-    customer_name: string; customer_id: string;
+    customer_name: string; customer_id: string; replaces_number: string | null;
   }>(sql`
     SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
+           (SELECT p.request_number FROM customer_orders p WHERE p.id = o.replaces_order_id) AS replaces_number,
            o.gross_total::text AS gross_total, o.currency, o.price_list_kind::text AS price_list_kind,
            (SELECT count(*)::int FROM customer_order_lines l WHERE l.order_id = o.id) AS line_count,
            c.name AS customer_name, c.id AS customer_id
@@ -571,10 +596,13 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     id: r.id, requestNumber: r.request_number, orderNumber: r.order_number, status: r.status,
     submittedAt: new Date(r.submitted_at), grossTotal: Number(r.gross_total), currency: r.currency,
     lineCount: r.line_count, priceListKind: r.price_list_kind, customerName: r.customer_name, customerId: r.customer_id,
+    replacesNumber: r.replaces_number,
   }));
 }
 
 export type OrderDetail = OrderListRow & {
+  replaces: { id: string; requestNumber: string } | null;
+  replacedBy: { id: string; requestNumber: string } | null;
   netTotal: number;
   vatTotal: number;
   customerNote: string | null;
@@ -598,12 +626,17 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       gross_total: string; net_total: string; vat_total: string; currency: string; price_list_kind: "demo" | "biznisoft";
       customer_name: string; customer_id: string; customer_note: string | null; status_reason: string | null;
       biznisoft_document_number: string | null; biznisoft_recorded_at: Date | null; submitted_by_name: string;
+      replaces_id: string | null; replaces_number: string | null; replaced_by_id: string | null; replaced_by_number: string | null;
     }>(sql`
       SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
              o.gross_total::text AS gross_total, o.net_total::text AS net_total, o.vat_total::text AS vat_total,
              o.currency, o.price_list_kind::text AS price_list_kind, c.name AS customer_name, c.id AS customer_id,
              o.customer_note, o.status_reason, o.biznisoft_document_number, o.biznisoft_recorded_at,
-             cu.name AS submitted_by_name
+             cu.name AS submitted_by_name,
+             o.replaces_order_id AS replaces_id,
+             (SELECT p.request_number FROM customer_orders p WHERE p.id = o.replaces_order_id) AS replaces_number,
+             (SELECT r.id FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by_id,
+             (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by_number
         FROM customer_orders o
         JOIN customers c ON c.id = o.customer_id
         JOIN customer_users cu ON cu.id = o.submitted_by
@@ -626,11 +659,13 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     id: head.id, requestNumber: head.request_number, orderNumber: head.order_number, status: head.status,
     submittedAt: new Date(head.submitted_at), grossTotal: Number(head.gross_total), netTotal: Number(head.net_total),
     vatTotal: Number(head.vat_total), currency: head.currency, priceListKind: head.price_list_kind,
-    customerName: head.customer_name, customerId: head.customer_id, lineCount: [...lines].length,
+    customerName: head.customer_name, customerId: head.customer_id, lineCount: [...lines].length, replacesNumber: head.replaces_number,
     customerNote: head.customer_note, statusReason: head.status_reason,
     biznisoftDocumentNumber: head.biznisoft_document_number,
     biznisoftRecordedAt: head.biznisoft_recorded_at ? new Date(head.biznisoft_recorded_at) : null,
     submittedByName: head.submitted_by_name,
+    replaces: head.replaces_id ? { id: head.replaces_id, requestNumber: head.replaces_number! } : null,
+    replacedBy: head.replaced_by_id ? { id: head.replaced_by_id, requestNumber: head.replaced_by_number! } : null,
     lines: [...lines].map((l) => ({
       lineNumber: Number(l.line_number), articleId: l.article_id, articleCode: l.article_code, articleName: l.article_name,
       catalogSlug: l.catalog_product_slug, catalogVariantId: l.catalog_variant_id, catalogName: l.catalog_name,
@@ -736,25 +771,44 @@ export async function cancelCustomerOrder(session: CustomerSession, orderId: str
 }
 
 /**
- * Zahtev za koji kancelarija traži izmenu: kupac ga otkazuje i vraća stavke u
- * korpu, pa ispravljen šalje kao NOV zahtev (sa novim cenama iz cenovnika).
+ * Nastavak izmene: kancelarija je tražila izmenu, kupac vraća stavke u korpu.
+ *
+ * - Stari zahtev prelazi u `superseded` („Vraćen na ispravku") i OSTAJE u
+ *   istoriji — nije otkazan i ne briše se.
+ * - Stavke dolaze u korpu sa `source_order_id`, pa sledeće slanje postaje
+ *   ISPRAVKA baš tog zahteva (`replaces_order_id`).
+ * - Ponovljen klik ne dodaje stavke dvaput: prelaz i upis idu u istoj
+ *   transakciji pod zaključanim redom; drugi poziv vidi `superseded` i ne radi ništa.
  */
 export async function returnOrderToCart(session: CustomerSession, orderId: string): Promise<TransitionResult> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  const order = await loadCustomerOrder(customerId, orderId);
-  if (!order) return { ok: false, message: "Zahtev ne postoji." };
-  if (order.status !== "changes_requested") return { ok: false, message: "Stavke se vraćaju u korpu samo kada kancelarija traži izmenu." };
-  const result = await cancelCustomerOrder(session, orderId);
-  if (!result.ok) return result;
+  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
   const db = getDb();
-  for (const l of order.lines) {
-    await db.execute(sql`
-      INSERT INTO customer_cart_items (customer_id, article_id, quantity, added_by)
-      VALUES (${customerId}, ${l.articleId}, ${l.quantity}, ${session.accountId})
-      ON CONFLICT (customer_id, article_id) DO UPDATE SET quantity = EXCLUDED.quantity, updated_at = now()`);
-  }
-  return result;
+  return db.transaction(async (tx) => {
+    const [o] = [
+      ...(await tx.execute<{ id: string; status: string }>(sql`
+        SELECT id, status::text AS status FROM customer_orders
+         WHERE id = ${orderId}::uuid AND customer_id = ${customerId} FOR UPDATE`)),
+    ];
+    if (!o) return { ok: false as const, message: "Zahtev ne postoji." };
+    if (o.status === "superseded") return { ok: true as const, changed: false };
+    const problem = transitionProblem({ from: o.status, to: "superseded", actor: "customer", reason: null });
+    if (problem) return { ok: false as const, message: "Stavke se vraćaju u korpu samo kada kancelarija traži izmenu." };
+
+    await tx.execute(sql`UPDATE customer_orders SET status = 'superseded', updated_at = now() WHERE id = ${o.id}`);
+    await tx.execute(sql`
+      INSERT INTO customer_order_events (order_id, from_status, to_status, kind, actor_customer_user_id, actor_name, reason)
+      VALUES (${o.id}, ${o.status}::customer_order_status, 'superseded', 'status', ${session.accountId}, ${session.name},
+              'Stavke vraćene u korpu radi ispravke')`);
+    await tx.execute(sql`
+      INSERT INTO customer_cart_items (customer_id, article_id, quantity, added_by, source_order_id)
+      SELECT ${customerId}, article_id, quantity, ${session.accountId}, ${o.id}
+        FROM customer_order_lines WHERE order_id = ${o.id}
+      ON CONFLICT (customer_id, article_id)
+      DO UPDATE SET quantity = EXCLUDED.quantity, source_order_id = EXCLUDED.source_order_id, updated_at = now()`);
+    return { ok: true as const, changed: true };
+  });
 }
 
 /* ---------------------------------------------------------------------------
@@ -895,4 +949,96 @@ export async function loadArticleOrderability(articleIds: string[]) {
     });
   }
   return out;
+}
+
+
+/* ---------------------------------------------------------------------------
+ * Ponude za ceo katalog (kartice i stranice proizvoda)
+ * ------------------------------------------------------------------------ */
+
+export type CatalogOffer = {
+  articleCode: string;
+  articleName: string;
+  /** Slug proizvoda na koji veza pokazuje. */
+  slug: string;
+  /** Ključ varijante-reda (npr. granulacija), ili `null`. */
+  variantKey: string | null;
+  variantLabel: string | null;
+  /** Ključevi kartica kataloga koje ovaj artikal pokriva (proizvod i porodica). */
+  cardKeys: string[];
+  catalogName: string;
+  unit: string | null;
+  packLabel: string | null;
+  listPrice: number | null;
+  discountPercent: number;
+  netPrice: number | null;
+  vatPercent: number | null;
+  minQuantity: number;
+  quantityStep: number;
+  /** `orderable` | `no_price` (cena nije određena) | ostali razlozi. */
+  state: "orderable" | "no_price" | "blocked";
+  message: string | null;
+};
+
+export type CustomerContacts = {
+  reps: { name: string; email: string }[];
+};
+
+/**
+ * Sve POTVRĐENE veze artikala sa katalogom, sa cenom ovog kupca.
+ *
+ * Artikli bez potvrđene veze se ne vraćaju: katalog za njih nudi „Zatraži
+ * cenu/uslove", nikad cenu. Lager se ne vraća jer izvor ne postoji.
+ */
+export async function loadCustomerOffers(customerId: string): Promise<{ mode: OrderingMode; offers: CatalogOffer[] }> {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const db = getDb();
+  const mode = await loadOrderingMode(db);
+  const [rows, terms] = await Promise.all([
+    loadArticleRows(db, mode.priceList, sql`m.status = 'mapped'`),
+    loadTerms(db, mode.priceList, customerId),
+  ]);
+  const today = belgradeDate(new Date());
+  const codeCount = new Map<string, number>();
+  for (const r of rows) codeCount.set(r.code, (codeCount.get(r.code) ?? 0) + 1);
+
+  const offers: CatalogOffer[] = [];
+  for (const r of rows) {
+    if (codeCount.get(r.code)! > 1) continue;
+    const offer = offerFor(r, terms, customerId, mode, today);
+    const product = r.slug ? getCarsystemProductBySlug(r.slug) : null;
+    if (!product || !offer.catalog) continue;
+    const family = getFamilyForProduct(product);
+    const priced = mode.priceList ? priceOf(r, terms, customerId, mode.priceList, today) : null;
+    const state: CatalogOffer["state"] = !offer.problem ? "orderable" : offer.problem.code === "no_price" ? "no_price" : "blocked";
+    offers.push({
+      articleCode: r.code,
+      articleName: r.name,
+      slug: product.slug,
+      variantKey: offer.catalog.variantKey,
+      variantLabel: offer.catalog.variantLabel,
+      cardKeys: [product.slug, ...(family ? [`family:${family.slug}`] : [])],
+      catalogName: offer.catalog.name,
+      unit: offer.price?.unit ?? null,
+      packLabel: offer.price?.packLabel ?? null,
+      listPrice: offer.price?.listPrice ?? null,
+      discountPercent: offer.price?.discountPercent ?? 0,
+      netPrice: offer.price?.netPrice ?? null,
+      vatPercent: offer.price?.vatPercent ?? null,
+      minQuantity: priced?.minQuantity ?? 1,
+      quantityStep: priced?.quantityStep ?? 1,
+      state,
+      message: offer.problem?.message ?? null,
+    });
+  }
+  return { mode, offers };
+}
+
+/** Komercijalista(i) dodeljen(i) kupcu — kontakt za cenu i posebne uslove. */
+export async function loadCustomerContacts(customerId: string): Promise<CustomerContacts> {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const rows = await getDb().execute<{ name: string; email: string }>(sql`
+    SELECT u.name, u.email FROM customer_assignments ca JOIN users u ON u.id = ca.user_id
+     WHERE ca.customer_id = ${customerId} AND u.active ORDER BY u.name`);
+  return { reps: [...rows].map((r) => ({ name: r.name, email: r.email })) };
 }

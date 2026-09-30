@@ -17,6 +17,7 @@ export default async function CustomerCartPage() {
   const list = quote.mode.priceList;
 
   const view: CartView = {
+    correcting: quote.correcting && !quote.correcting.replacedBy ? quote.correcting : null,
     idempotencyKey: randomUUID(),
     fingerprint: quote.fingerprint,
     canSubmit: quote.canSubmit,

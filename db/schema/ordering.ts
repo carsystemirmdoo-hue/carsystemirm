@@ -32,7 +32,11 @@ export const customerOrderStatus = pgEnum("customer_order_status", [
   "confirmed",
   "rejected",
   "cancelled",
+  // 0030: vraćen kupcu na ispravku; ostaje u istoriji, zamenjuje ga nov zahtev.
+  "superseded",
 ]);
+export const priceRequestStatus = pgEnum("price_request_status", ["open", "in_progress", "answered", "closed"]);
+export const priceRequestKind = pgEnum("price_request_kind", ["no_price", "special_terms"]);
 
 export const priceLists = pgTable(
   "price_lists",
@@ -109,6 +113,8 @@ export const customerCartItems = pgTable(
     addedBy: uuid("added_by")
       .notNull()
       .references(() => customerUsers.id, { onDelete: "restrict" }),
+    /** 0030: stavka vraćena iz zahteva na ispravku. */
+    sourceOrderId: uuid("source_order_id"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -139,6 +145,8 @@ export const customerOrders = pgTable(
     grossTotal: numeric("gross_total", { precision: 14, scale: 2 }).notNull(),
     customerNote: text("customer_note"),
     statusReason: text("status_reason"),
+    /** 0030: ovaj zahtev je ispravka navedenog. */
+    replacesOrderId: uuid("replaces_order_id"),
     biznisoftDocumentNumber: text("biznisoft_document_number"),
     biznisoftRecordedBy: uuid("biznisoft_recorded_by").references(() => users.id, { onDelete: "restrict" }),
     biznisoftRecordedAt: timestamp("biznisoft_recorded_at", { withTimezone: true }),
@@ -206,4 +214,37 @@ export const customerOrderEvents = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [index("customer_order_events_order_idx").on(table.orderId, table.createdAt)],
+);
+
+export const customerPriceRequests = pgTable(
+  "customer_price_requests",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    customerId: uuid("customer_id").notNull().references(() => customers.id, { onDelete: "restrict" }),
+    requestedBy: uuid("requested_by").notNull().references(() => customerUsers.id, { onDelete: "restrict" }),
+    requestNumber: text("request_number").notNull(),
+    kind: priceRequestKind("kind").notNull(),
+    status: priceRequestStatus("status").notNull().default("open"),
+    idempotencyKey: text("idempotency_key").notNull(),
+    catalogProductSlug: text("catalog_product_slug").notNull(),
+    catalogVariantId: text("catalog_variant_id"),
+    catalogName: text("catalog_name").notNull(),
+    variantLabel: text("variant_label"),
+    articleId: uuid("article_id").references(() => articles.id, { onDelete: "restrict" }),
+    quantity: numeric("quantity", { precision: 14, scale: 3 }).notNull(),
+    customerNote: text("customer_note"),
+    answer: text("answer"),
+    handledBy: uuid("handled_by").references(() => users.id, { onDelete: "restrict" }),
+    takenAt: timestamp("taken_at", { withTimezone: true }),
+    answeredAt: timestamp("answered_at", { withTimezone: true }),
+    closedAt: timestamp("closed_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("customer_price_requests_idempotency_key").on(table.idempotencyKey),
+    uniqueIndex("customer_price_requests_number_key").on(table.requestNumber),
+    index("customer_price_requests_customer_idx").on(table.customerId, table.createdAt),
+    index("customer_price_requests_status_idx").on(table.status),
+  ],
 );

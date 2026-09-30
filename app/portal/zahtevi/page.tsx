@@ -13,7 +13,7 @@ const GROUPS = [
   { key: "review", title: "U obradi", statuses: ["under_review"] },
   { key: "waiting", title: "Čeka se kupac", statuses: ["changes_requested"] },
   { key: "confirmed", title: "Potvrđene porudžbine", statuses: ["confirmed"] },
-  { key: "closed", title: "Odbijeni i otkazani", statuses: ["rejected", "cancelled"] },
+  { key: "closed", title: "Odbijeni, otkazani i vraćeni na ispravku", statuses: ["rejected", "cancelled", "superseded"] },
 ];
 
 export default async function OrderRequestsPage() {
@@ -32,6 +32,10 @@ export default async function OrderRequestsPage() {
             : "Zahtevi vaših kupaca, samo za pregled. Prijem i potvrdu radi kancelarija."
         }
       />
+      <nav className="kk-subnav" aria-label="Zahtevi kupaca">
+        <Link href="/portal/zahtevi" aria-current="page">Porudžbine</Link>
+        <Link href="/portal/zahtevi/uslovi">Cena i uslovi</Link>
+      </nav>
       <section className="portal-panel">
         <div className="kk-pricelist" data-kind={mode.priceList?.kind ?? "off"}>
           <strong>
@@ -75,7 +79,10 @@ export default async function OrderRequestsPage() {
                       <Link href={`/portal/zahtevi/${o.id}`}>
                         <span className="ka-inv-number">
                           {o.orderNumber ?? o.requestNumber}
-                          <small>{o.orderNumber ? `zahtev ${o.requestNumber}` : `${o.lineCount} stavki`}</small>
+                          <small>
+                            {o.orderNumber ? `zahtev ${o.requestNumber}` : `${o.lineCount} stavki`}
+                            {o.replacesNumber ? ` · ispravka ${o.replacesNumber}` : ""}
+                          </small>
                         </span>
                         <span>{o.customerName}</span>
                         <span>{srDateTime(o.submittedAt)}</span>

@@ -8151,3 +8151,28 @@ body:has(.portal-login-root) {
 .mp-target img { width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 6px; }
 .mp-target span { display: grid; gap: 2px; font-size: 13px; }
 .mp-target small { color: var(--p-muted); font-size: 12px; }
+.kk-correcting { margin: 0 0 14px; padding: 10px 12px; border-left: 3px solid oklch(0.72 0.13 80); border-radius: 6px; background: oklch(0.97 0.035 85); font-size: 13px; color: var(--p-ink); }
+.kk-correcting a { color: var(--p-red); font-weight: 650; }
+.kk-state a { color: var(--p-red); font-weight: 650; }
+.kk-subnav { display: flex; gap: 4px; margin: 0 0 12px; border-bottom: 1px solid var(--p-line); }
+.kk-subnav a { padding: 8px 12px; border-bottom: 2px solid transparent; color: var(--p-muted); font-size: 13px; font-weight: 650; text-decoration: none; }
+.kk-subnav a[aria-current="page"] { border-bottom-color: var(--p-red); color: var(--p-ink); }
+.kk-requests { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.kk-requests > li { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--p-line); border-radius: 8px; font-size: 13px; }
+.kk-requests p { margin: 0; color: var(--p-ink); }
+.kk-requests a { color: var(--p-ink); }
+.kk-request-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.kk-request-head small { color: var(--p-muted); }
+.kk-answer { padding: 8px 10px; border-radius: 6px; background: oklch(0.96 0.04 150); }
+.kk-contacts { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 20px; border-bottom: 1px solid var(--p-line); background: var(--p-bg); font-size: 13px; }
+.kk-contacts a { color: var(--p-red); }
+.rb-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.rb-item { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--p-line); border-radius: 8px; font-size: 13px; }
+.rb-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.rb-head a { color: var(--p-ink); text-decoration: none; }
+.rb-head small { color: var(--p-muted); }
+.rb-values { margin: 0; padding-left: 18px; color: var(--p-ink); }
+.rb-note { margin: 0; color: var(--p-muted); }
+.rb-warn { margin: 0; color: oklch(0.45 0.12 60); font-weight: 600; }
+.rb-ok { color: oklch(0.42 0.1 150); font-weight: 650; }
+.rb-propose { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }

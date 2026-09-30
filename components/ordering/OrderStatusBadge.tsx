@@ -7,6 +7,7 @@ const TONE: Record<string, string> = {
   confirmed: "success",
   rejected: "danger",
   cancelled: "neutral",
+  superseded: "neutral",
 };
 
 /** Status zahteva/porudžbine. Isti nazivi za kupca i kancelariju. */

@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import { removeFromCartAction, setCartQuantityAction, submitCartAction } from "./actions";
 
 export type CartView = {
+  correcting: { orderId: string; requestNumber: string; reason: string | null } | null;
   idempotencyKey: string;
   fingerprint: string;
   canSubmit: boolean;
@@ -75,6 +76,14 @@ export function CartForm({ view }: { view: CartView }) {
 
   return (
     <div className="portal-panel-body kk-body">
+      {view.correcting ? (
+        <div className="kk-correcting" role="note">
+          <strong>Ispravljate zahtev {view.correcting.requestNumber}.</strong>{" "}
+          {view.correcting.reason ? <>Kancelarija je tražila: „{view.correcting.reason}”. </> : null}
+          Posle slanja nastaje nov zahtev povezan sa prethodnim; prethodni ostaje u istoriji.{" "}
+          <Link href={`/kupac/porudzbine/${view.correcting.orderId}`}>Prethodni zahtev →</Link>
+        </div>
+      ) : null}
       <ol className="kk-lines">
         <li className="kk-lines-head" aria-hidden="true">
           <span>Artikal</span>

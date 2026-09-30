@@ -9,6 +9,7 @@ const qfmt = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 3 });
 function eventText(e: OrderDetail["events"][number]) {
   if (e.kind === "submitted") return "Zahtev poslat";
   if (e.kind === "biznisoft_recorded") return e.reason ?? "Uneto u BizniSoft";
+  if (e.kind === "replaced") return e.reason ?? "Poslata ispravka";
   const to = ORDER_STATUS_LABELS[e.toStatus as keyof typeof ORDER_STATUS_LABELS] ?? e.toStatus;
   return `Status: ${to}`;
 }
@@ -20,6 +21,7 @@ function eventText(e: OrderDetail["events"][number]) {
  * šta je poslato, po kojoj ceni, i u kom je stanju.
  */
 export function OrderDetailView({ order, audience }: { order: OrderDetail; audience: "customer" | "office" }) {
+  const base = audience === "office" ? "/portal/zahtevi" : "/kupac/porudzbine";
   const money = (n: number) => srMoney(String(n), order.currency);
   const confirmed = order.status === "confirmed";
   return (
@@ -39,6 +41,16 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
 
       <div className="kk-state" data-status={order.status}>
         <p>{ORDER_STATUS_HELP[order.status as keyof typeof ORDER_STATUS_HELP]}</p>
+        {order.replaces ? (
+          <p>
+            Ispravka zahteva <Link href={`${base}/${order.replaces.id}`}>{order.replaces.requestNumber}</Link>.
+          </p>
+        ) : null}
+        {order.replacedBy ? (
+          <p>
+            Ispravljen zahtev poslat je kao <Link href={`${base}/${order.replacedBy.id}`}>{order.replacedBy.requestNumber}</Link>.
+          </p>
+        ) : null}
         {order.statusReason ? (
           <p>
             <strong>Razlog kancelarije:</strong> {order.statusReason}
@@ -119,7 +131,7 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
               <time>{srDateTime(e.at)}</time>
               <span>
                 <strong>{eventText(e)}</strong> · {e.staff ? (audience === "office" ? e.actor : "Kancelarija") : e.actor}
-                {e.reason && e.kind !== "biznisoft_recorded" ? <small>{e.reason}</small> : null}
+                {e.reason && e.kind !== "biznisoft_recorded" && e.kind !== "replaced" ? <small>{e.reason}</small> : null}
               </span>
             </li>
           ))}

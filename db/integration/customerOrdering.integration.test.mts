@@ -128,6 +128,8 @@ before(async () => {
 after(async () => {
   if (!reason && db) {
     const ids = [firm.a.customerId, firm.b.customerId].filter(Boolean);
+    await db.sql`DELETE FROM customer_cart_items WHERE customer_id IN ${db.sql(ids)}`;
+    await db.sql`UPDATE customer_orders SET replaces_order_id = NULL WHERE customer_id IN ${db.sql(ids)}`;
     await db.sql`DELETE FROM customer_order_events WHERE order_id IN (SELECT id FROM customer_orders WHERE customer_id IN ${db.sql(ids)})`;
     await db.sql`DELETE FROM customer_order_lines WHERE order_id IN (SELECT id FROM customer_orders WHERE customer_id IN ${db.sql(ids)})`;
     await db.sql`DELETE FROM customer_orders WHERE customer_id IN ${db.sql(ids)}`;
@@ -320,10 +322,36 @@ test("izmena: kancelarija traži izmenu, kupac vraća stavke u korpu i šalje no
   await svc.officeTransition(office, r.orderId, "under_review", null);
   assert.deepEqual(await svc.officeTransition(office, r.orderId, "changes_requested", "Pakovanje 1 l nije na stanju, uzmite 2×"), { ok: true, changed: true });
   assert.equal((await svc.returnOrderToCart(session("b"), r.orderId)).ok, false, "tuđa firma ne može");
-  assert.equal((await svc.returnOrderToCart(session("a"), r.orderId)).ok, true);
+  assert.deepEqual(await svc.returnOrderToCart(session("a"), r.orderId), { ok: true, changed: true });
+  // Ponovljen klik ne dodaje stavke dvaput.
+  assert.deepEqual(await svc.returnOrderToCart(session("a"), r.orderId), { ok: true, changed: false });
   const order = (await svc.loadCustomerOrder(firm.a.customerId, r.orderId))!;
-  assert.equal(order.status, "cancelled");
-  assert.equal((await svc.loadCartQuote(firm.a.customerId)).lines[0].quantity, 2);
+  assert.equal(order.status, "superseded", "stari zahtev ostaje u istoriji kao „vraćen na ispravku”");
+  const q2 = await svc.loadCartQuote(firm.a.customerId);
+  assert.equal(q2.lines.length, 1);
+  assert.equal(q2.lines[0].quantity, 2);
+  assert.equal(q2.correcting?.orderId, r.orderId, "korpa zna koji zahtev ispravlja");
+
+  // Ispravka: nova količina, novo slanje → nov zahtev povezan sa prethodnim.
+  await svc.setCartQuantity(session("a"), { articleId: q2.lines[0].articleId, quantity: "4" });
+  const q3 = await svc.loadCartQuote(firm.a.customerId);
+  const key = randomUUID();
+  const fixed = (await svc.submitCartRequest(session("a"), { idempotencyKey: key, fingerprint: q3.fingerprint })) as { orderId: string; requestNumber: string };
+  const again = await svc.submitCartRequest(session("a"), { idempotencyKey: key, fingerprint: q3.fingerprint });
+  assert.equal((again as { orderId: string }).orderId, fixed.orderId, "dvostruki klik na ispravku = jedan zahtev");
+  const newOrder = (await svc.loadCustomerOrder(firm.a.customerId, fixed.orderId))!;
+  assert.equal(newOrder.replaces?.id, r.orderId);
+  assert.equal(newOrder.lines[0].quantity, 4);
+  const old = (await svc.loadCustomerOrder(firm.a.customerId, r.orderId))!;
+  assert.equal(old.replacedBy?.id, fixed.orderId);
+  assert.deepEqual(
+    old.events.map((e) => e.toStatus ?? e.kind),
+    ["submitted", "under_review", "changes_requested", "superseded", "replaced"],
+    "istorija starog zahteva je sačuvana",
+  );
+  assert.equal(old.lines[0].quantity, 2, "stavke starog zahteva se ne menjaju");
+  // Stari zahtev se ne može „oživeti” ni vratiti u korpu ponovo.
+  assert.equal((await svc.cancelCustomerOrder(session("a"), r.orderId)).ok, false);
   await clearCart("a");
 });
 

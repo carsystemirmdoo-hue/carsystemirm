@@ -1,4 +1,25 @@
-# 31 — Šta još traži vaš izbor (2026-09-30)
+# 31 — Konačan spisak prepreka za izdanje (2026-09-30)
+
+## Kod — nema otvorenih prepreka
+Grana `release/portal-2026-10` (origin/main + PR #3, #2, F1–F10 + ispravka
+testa `aaed73d`): kompletan `npm test` prolazi (1858 prošlo, 0 palo, 18
+Windows-testova konektora preskočeno na Mac-u), integracije 484/484 na praznoj
+bazi sa migracijama 0000–0032, QA u pregledaču 22/22, build i provera veličine
+funkcija prolaze. Nije poslata na GitHub.
+
+## Preostalo — traži vaš izbor ili podatke firme
+1. **Firmin Vercel:** podaci iz `32-…` §A (tim, plan — Hobby je samo za
+   nekomercijalnu upotrebu, poziv za naš nalog, GitHub pristup, domen, DNS).
+2. **Baza i backup** (§1 ispod).
+3. **E-pošta** (§2 ispod).
+4. **Kontakt podaci firme:** telefon na sajtu je šablon (`+381 22 000 000`).
+5. **Stvarni BizniSoft izvozi** (§3 ispod) — potrebni za proveru cena, rabata,
+   lagera i za stvarno poručivanje; nisu potrebni za prvo (zaključano) postavljanje.
+6. **Odobrenja:** slanje grane kao PR ka `main` i njeno spajanje; lansiranje.
+
+---
+
+# Detalji
 
 Sve ostalo za izdanje je u kodu i provereno na lokalnoj grani
 `release/portal-2026-10` (`28-…`, izveštaj u odgovoru). Ove tri stvari kod ne
@@ -7,15 +28,15 @@ može da reši.
 ## 1. Baza i backup
 
 **Zatečeno stanje** (provereno čitanjem, ništa nije menjano):
-- Vercel projekat `carsystemirm` je na **ličnom** nalogu (`miles-projects`),
-  ne u timu firme. Production ima samo `MAINTENANCE_MODE`,
+- Firma je otvorila svoj Vercel nalog (koraci: `32-…`). Postojeći projekat
+  `carsystemirm` je još na **ličnom** nalogu (`miles-projects`). Production ima samo `MAINTENANCE_MODE`,
   `SITE_ACCESS_PASSWORD`, `PREVIEW_USERNAME`, `PREVIEW_PASSWORD`.
 - **Nema baze** ni na jednom okruženju (`DATABASE_URL`, `AUTH_SECRET`,
   MFA ključevi ne postoje) — portal online nije podešen nigde.
 - Lokalno postoji samo lokalni Postgres (demo i test baze).
 
 **Šta birate:**
-1. Nalog: prenos projekta u **tim firme** na Vercelu (vlasništvo, naplata, pristup).
+1. Nalog: nov projekat u **timu firme** (`32-…`); stari na ličnom nalogu ostaje dok domen ne pređe.
 2. Provajder Postgresa u EU (Frankfurt), npr. Neon preko Vercel Marketplace-a
    ili Supabase. Uslov iz koda: `CREATE ROLE` i `ALTER DEFAULT PRIVILEGES`
    (runtime rola bez brisanja traga revizije), pooled + direktan URL,

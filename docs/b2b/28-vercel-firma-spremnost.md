@@ -76,11 +76,12 @@ Jedini sukob pri spajanju bio je `package.json` (unija `test` koraka).
 Nije pushovana; PR-ovi nisu spojeni. Predlog: ova grana postaje jedan PR ka
 `main` posle vašeg odobrenja (umesto deset zasebnih spajanja).
 
-**Preduslov sa `main`-a:** test `lib/auth/cookieAndHeaders.test.mjs` pada već
-na samom `origin/main` (PR #10 je proširio noindex pravilo u `next.config.ts`,
-test nije praćen). Ispravka postoji na lokalnoj grani
-`fix/test-docs-noindex-rule` (`aaed73d`, druga sesija) — treba da uđe u `main`
-pre izdanja.
+**Preduslov sa `main`-a — rešen na grani za izdanje:** test
+`lib/auth/cookieAndHeaders.test.mjs` je padao već na `origin/main` (PR #10 je
+proširio noindex pravilo). Ispravka `aaed73d` (`fix/test-docs-noindex-rule`)
+je pregledana i unesena u `release/portal-2026-10` (`26f4c35`): proverava
+sadašnje, šire pravilo zajedno sa vrednošću `noindex, follow`, pa je stroža
+od stare provere. Kompletan `npm test` na grani za izdanje prolazi.
 
 ### A6. Provere pre prvog Production deploy-a
 1. `npm run lint && npm run typecheck && npm test && npm run build:check && npm run build:trace-check`

@@ -8207,3 +8207,54 @@ body:has(.portal-login-root) {
 .ar-status[data-state="failed"] { border-left-color: oklch(0.6 0.17 27); background: oklch(0.97 0.025 27); }
 .ar-status[data-state="pending"], .ar-status[data-state="running"] { border-left-color: oklch(0.72 0.13 80); }
 .ar-status small { color: var(--p-muted); }
+
+/* =========================================================================
+ * Tamna tema u kupčevom nalogu (/kupac/*).
+ *
+ * Nalog živi u javnom okviru sajta; kada tema sajta pređe u tamnu (`html.dark`),
+ * tamni se i nalog. Interni portal ima sopstveni okvir i ostaje svetao.
+ * ====================================================================== */
+.dark .portal-customer-area {
+  --p-bg: oklch(0.155 0.012 255);
+  --p-surface: oklch(0.2 0.014 255);
+  --p-surface-raised: oklch(0.23 0.015 255);
+  --p-surface-subtle: oklch(0.25 0.015 255);
+  --p-ink: oklch(0.95 0.006 255);
+  --p-muted: oklch(0.74 0.015 255);
+  --p-faint: oklch(0.6 0.012 255);
+  --p-line: oklch(0.34 0.014 255);
+  --p-line-strong: oklch(0.45 0.015 255);
+  --p-red-soft: oklch(0.3 0.08 26);
+  --p-green-soft: oklch(0.3 0.06 153);
+  --p-amber-soft: oklch(0.32 0.06 80);
+  --p-blue-soft: oklch(0.3 0.05 247);
+  background: var(--p-bg);
+  color: var(--p-ink);
+}
+.dark .portal-customer-area .portal-panel { box-shadow: none; }
+.dark .portal-customer-area .ka-recent a:hover,
+.dark .portal-customer-area .ka-invoices a:hover { background: var(--p-surface-subtle); }
+.dark .portal-customer-area .kk-pricelist { background: var(--p-surface-subtle); }
+.dark .portal-customer-area .kk-pricelist[data-kind="demo"] {
+  background: repeating-linear-gradient(135deg, oklch(0.27 0.045 80), oklch(0.27 0.045 80) 10px, oklch(0.24 0.04 80) 10px, oklch(0.24 0.04 80) 20px);
+}
+.dark .portal-customer-area .kk-lines > li[data-problem] { background: oklch(0.26 0.05 27); }
+.dark .portal-customer-area .kk-status { background: var(--p-surface-subtle); border-color: var(--p-line); color: var(--p-ink); }
+.dark .portal-customer-area .kk-status[data-tone="info"] { background: var(--p-blue-soft); border-color: oklch(0.42 0.06 247); color: oklch(0.88 0.05 247); }
+.dark .portal-customer-area .kk-status[data-tone="warning"] { background: var(--p-amber-soft); border-color: oklch(0.45 0.07 80); color: oklch(0.9 0.08 85); }
+.dark .portal-customer-area .kk-status[data-tone="success"] { background: var(--p-green-soft); border-color: oklch(0.42 0.07 153); color: oklch(0.88 0.08 153); }
+.dark .portal-customer-area .kk-status[data-tone="danger"] { background: var(--p-red-soft); border-color: oklch(0.45 0.1 26); color: oklch(0.88 0.07 26); }
+.dark .portal-customer-area .kk-sent,
+.dark .portal-customer-area .kk-answer { background: var(--p-green-soft); color: oklch(0.9 0.06 153); }
+.dark .portal-customer-area .kk-correcting,
+.dark .portal-customer-area .kk-reauth,
+.dark .portal-customer-area .kk-message[data-tone="warning"] { background: var(--p-amber-soft); color: oklch(0.92 0.06 85); border-color: oklch(0.45 0.07 80); }
+.dark .portal-customer-area .kk-message[data-tone="error"] { background: var(--p-red-soft); color: oklch(0.9 0.06 26); }
+.dark .portal-customer-area .kk-demo-note { color: oklch(0.85 0.09 85) !important; }
+.dark .portal-customer-area .kk-problem,
+.dark .portal-customer-area .kk-blockers { color: oklch(0.78 0.13 27); }
+.dark .portal-customer-area .kk-note textarea,
+.dark .portal-customer-area .kk-qty input,
+.dark .portal-customer-area .kk-reauth input,
+.dark .portal-customer-area .ka-filters input,
+.dark .portal-customer-area .portal-field input { background: var(--p-surface-raised); color: var(--p-ink); border-color: var(--p-line); }

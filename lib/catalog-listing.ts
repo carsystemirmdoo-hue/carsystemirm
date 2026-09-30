@@ -40,6 +40,7 @@ import {
 import {
   familyPath,
   getFamilyForProduct,
+  variantRedirectTarget,
   type ProductFamily,
 } from "@/lib/product-families";
 import { getProductCategorySlug } from "@/lib/product-taxonomy";
@@ -205,10 +206,24 @@ function productEntity(
   const category = getProductCategorySlug(product);
   const metadata = product.catalogMetadata;
 
+  /*
+   * Adresa vodi na kanonsko odredište, ne na adresu koja preusmerava.
+   *
+   * Varijanta `variant-pdp` porodice nema sopstvenu stranicu — njen slug 307-uje
+   * na porodični PDP. Brend, program i srodni proizvodi su je ipak linkovali
+   * slugom, pa je svaki takav link bio jedan skok viška. `variantRedirectTarget`
+   * je ista formula koju koristi i samo preusmerenje, pa link vodi tačno tamo
+   * gde bi puzač ionako završio, sa već izabranom varijantom.
+   *
+   * Varijante `collection` porodica zadržavaju svoj slug: one se serviraju sa
+   * 200 i kanonizuju na grupu, pa tu nema skoka.
+   */
+  const canonicalHref = variantRedirectTarget(product) ?? `/proizvodi/${product.slug}`;
+
   return {
     kind,
     id: product.slug,
-    href: `/proizvodi/${product.slug}`,
+    href: canonicalHref,
     name: product.name,
     brandSlug: product.brandSlug,
     programSlug: product.programSlug,

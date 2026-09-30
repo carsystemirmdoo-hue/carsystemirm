@@ -340,6 +340,22 @@ export function getConsolidatedVariantSlugs() {
  * Stari variant URL vodi na canonical family rutu sa preselektovanom
  * varijantom — za svaku `variant-pdp` porodicu, ne samo za jedan brend.
  */
+/**
+ * Adresa na koju treba linkovati proizvod.
+ *
+ * Za varijantu `variant-pdp` porodice to je porodični PDP sa već izabranom
+ * varijantom — tačno odredište koje bi preusmerenje ionako dalo. Za sve ostalo
+ * je to sopstvena stranica proizvoda.
+ *
+ * Postoji da se ista greška ne bi ponavljala po komponentama: pre ovoga su
+ * katalog, brend stranice i program svaki gradili `/proizvodi/${slug}` ručno,
+ * pa je svaki link na konsolidovanu varijantu bio skok viška, a kanonska
+ * ProductGroup ruta ostajala bez ijednog direktnog linka.
+ */
+export function productCanonicalHref(product: CarsystemProduct): string {
+  return variantRedirectTarget(product) ?? `/proizvodi/${product.slug}`;
+}
+
 export function variantRedirectTarget(product: CarsystemProduct): string | null {
   const family = getFamilyForProduct(product);
   if (!family || family.presentation !== "variant-pdp") return null;

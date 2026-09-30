@@ -4,6 +4,37 @@ import { spawn } from "node:child_process";
 import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { loadCatalogRuntime } from "./lib/catalog-runtime.mjs";
+
+/*
+ * Registar konsolidovanih varijanti — jedini izvor istine o tome šta SME da
+ * preusmerava.
+ *
+ * Ranije je svaki odgovor koji nije 200 na internom linku proizvoda bio
+ * `broken-internal-product-link`. Otkako `variant-pdp` porodice preusmeravaju
+ * varijantu na svoju grupu, to je prijavljivalo 808 namernih preusmerenja kao
+ * kvar i time činilo kapiju neupotrebljivom.
+ *
+ * Provera se zato ne opušta nego POOŠTRAVA: 307 je prihvatljiv samo za slug
+ * koji je ovde registrovan i samo ka tačno onoj adresi koju registar navodi.
+ * Nepoznato ili pogrešno usmereno preusmerenje i dalje pada.
+ */
+const catalogRuntime = loadCatalogRuntime();
+const productFamilies = catalogRuntime.requireModule("lib/product-families.ts");
+const carsystemData = catalogRuntime.requireModule("lib/carsystem-data.ts");
+
+/** slug varijante -> očekivana adresa preusmerenja (samo `variant-pdp`). */
+const expectedRedirect = new Map();
+/** slugovi koji su konsolidovani ali se serviraju sa 200 (`collection`). */
+const consolidatedNoRedirect = new Set();
+
+for (const product of carsystemData.getAllCarsystemProducts()) {
+  const target = productFamilies.variantRedirectTarget(product);
+  if (target) expectedRedirect.set(`/proizvodi/${product.slug}`, target);
+  else if (productFamilies.getConsolidatedVariantSlugs().has(product.slug)) {
+    consolidatedNoRedirect.add(`/proizvodi/${product.slug}`);
+  }
+}
 
 const projectRoot = process.cwd();
 const args = new Map();
@@ -193,6 +224,8 @@ async function validate() {
   if (new Set(sitemapUrls).size !== sitemapUrls.length) {
     fail("duplicate-sitemap-url", "/sitemap.xml", "Sitemap sadrži duplikate.");
   }
+  /** Putanje iz sitemapa, za provere indeksabilnosti odredišta preusmerenja. */
+  const sitemapPathSet = new Set(sitemapPaths);
 
   const pages = await mapConcurrent(sitemapPaths, concurrency, async (route) => {
     const response = await fetchLocal(route);
@@ -306,6 +339,99 @@ async function validate() {
 
   const offSitemapLinks = [...linkedProductPaths].filter(
     (pathname) => !sitemapProductSet.has(pathname),
+  );
+
+  /*
+   * Kvalitet internog linkovanja.
+   *
+   * Link na varijantu koja preusmerava nije kvar, ali jeste nepotreban skok —
+   * i, dok ga je katalog masovno pravio, razlog zašto 31 od 48 ProductGroup
+   * stranica nije imala nijedan direktan link. Kanonski entitet mora biti i
+   * ono na šta se linkuje.
+   */
+  for (const pathname of linkedProductPaths) {
+    const target = expectedRedirect.get(pathname);
+    if (!target) continue;
+    fail(
+      "internal-link-to-redirecting-variant",
+      pathname,
+      `Interni link vodi na varijantu koja preusmerava; linkujte ${target.split("?")[0]}.`,
+    );
+  }
+
+  /*
+   * Politika preusmerenja se proverava nad REGISTROM, ne nad linkovima.
+   *
+   * Pošto katalog više ne linkuje varijante koje preusmeravaju, provera vezana
+   * za linkove nikada se ne bi izvršila — a upravo ta preusmerenja moraju
+   * ostati ispravna. Zato se prolazi kroz svih registrovanih 808 ruta.
+   */
+  const groupDestinationCache = new Map();
+  async function groupDestination(pathname) {
+    if (!groupDestinationCache.has(pathname)) {
+      groupDestinationCache.set(
+        pathname,
+        (async () => {
+          const response = await fetchLocal(pathname, { redirect: "manual" });
+          const html = response.status === 200 ? await response.text() : "";
+          return { status: response.status, canonical: getCanonical(html) ?? "" };
+        })(),
+      );
+    }
+    return groupDestinationCache.get(pathname);
+  }
+
+  await mapConcurrent([...expectedRedirect.keys()], concurrency, async (pathname) => {
+    const expected = expectedRedirect.get(pathname);
+    const hop = await fetchLocal(pathname, { redirect: "manual" });
+    if (hop.status !== 307 && hop.status !== 308) {
+      fail(
+        "consolidated-variant-not-redirecting",
+        pathname,
+        `Registrovana varijanta vraća HTTP ${hop.status} umesto preusmerenja.`,
+      );
+      return;
+    }
+    const location = hop.headers.get("location") ?? "";
+    const actual = new URL(location, canonicalOrigin);
+    if (`${actual.pathname}${actual.search}` !== expected) {
+      fail(
+        "variant-redirect-wrong-destination",
+        pathname,
+        `Preusmerenje vodi na ${actual.pathname}${actual.search}, očekivano ${expected}.`,
+      );
+      return;
+    }
+    const destination = await groupDestination(actual.pathname);
+    if (destination.status !== 200) {
+      fail(
+        "variant-redirect-chain",
+        pathname,
+        `Odredište ${actual.pathname} vraća HTTP ${destination.status} — preusmerenje nije jednohopno.`,
+      );
+      return;
+    }
+    if (destination.canonical !== `${canonicalOrigin}${actual.pathname}`) {
+      fail(
+        "variant-redirect-destination-not-canonical",
+        pathname,
+        `Odredište ${actual.pathname} nije self-canonical (${destination.canonical}).`,
+      );
+      return;
+    }
+    if (!sitemapPathSet.has(actual.pathname)) {
+      fail(
+        "variant-redirect-destination-not-indexable",
+        pathname,
+        `Odredište ${actual.pathname} nije u sitemapu.`,
+      );
+    }
+    if (sitemapProductSet.has(pathname)) {
+      fail("consolidated-variant-in-sitemap", pathname, "Varijanta koja preusmerava je u sitemapu.");
+    }
+  });
+  pass.push(
+    `${expectedRedirect.size} konsolidovanih varijanti preusmerava jednim skokom na svoju ProductGroup rutu, koja je self-canonical i u sitemapu.`,
   );
 
   await mapConcurrent(offSitemapLinks, concurrency, async (pathname) => {

@@ -25,6 +25,7 @@ import { CosmosHero } from "./CosmosHero";
 import { CosmosRange } from "./CosmosRange";
 import styles from "./CosmosBrandPage.module.css";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
+import { productCanonicalHref } from "@/lib/product-families";
 
 type Props = {
   brand: CarsystemBrand;
@@ -57,6 +58,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
           name: product.name,
           image: toDisplayImageSrc(product.productImage.src),
           imageAlt: product.productImage.alt,
+          href: productCanonicalHref(product),
         };
       }
     }

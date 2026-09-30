@@ -26,7 +26,7 @@ import {
   type CarsystemProduct,
   type ProgramGroup,
 } from "@/lib/carsystem-data";
-import { getFamilyForProduct } from "@/lib/product-families";
+import { getFamilyForProduct, productCanonicalHref } from "@/lib/product-families";
 import type {
   ProductRelationshipSection,
   ProductTechnicalFact,
@@ -361,7 +361,7 @@ function ProductRelationships({
           const relationBrand = getCarsystemBrandBySlug(product.brandSlug);
           const relationProgram = getProgramGroupBySlug(product.programSlug);
           const relationPhase = getRefinishPhaseBySlug(product.phaseSlug);
-          const href = `/proizvodi/${product.slug}`;
+          const href = productCanonicalHref(product);
 
           return (
             <article className="cs-product-motion-card" key={product.slug}>

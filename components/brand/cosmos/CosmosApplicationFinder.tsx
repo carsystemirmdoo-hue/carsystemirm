@@ -11,6 +11,8 @@ export type FinderProduct = {
   name: string;
   image: string;
   imageAlt: string;
+  /** Kanonsko odredište; za konsolidovanu varijantu je to porodični PDP. */
+  href: string;
 };
 
 type Props = {
@@ -91,7 +93,7 @@ export function CosmosApplicationFinder({
               <li key={slug}>
                 <Link
                   className={styles.finderProduct}
-                  href={`/proizvodi/${product.slug}`}
+                  href={product.href}
                 >
                   <Image
                     alt={product.imageAlt}

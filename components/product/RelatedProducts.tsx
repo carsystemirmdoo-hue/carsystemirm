@@ -8,6 +8,7 @@ import {
 } from "@/lib/carsystem-data";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import styles from "./ProductDetailPage.module.css";
+import { productCanonicalHref } from "@/lib/product-families";
 
 export function RelatedProducts({
   products,
@@ -34,7 +35,7 @@ export function RelatedProducts({
           const program = getProgramGroupBySlug(product.programSlug);
           const phase = getRefinishPhaseBySlug(product.phaseSlug);
           const image = product.productImage ?? product.galleryImages[0] ?? null;
-          const productHref = `/proizvodi/${product.slug}`;
+          const productHref = productCanonicalHref(product);
           const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
           const packageSummary = product.packages.map((item) => item.label).join(" / ");
           const publicStatus = getProductPublicStatus(product);

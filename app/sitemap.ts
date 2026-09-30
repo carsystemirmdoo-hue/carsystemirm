@@ -13,6 +13,7 @@ import { seoCategoryLandings } from "@/lib/seo/category-landings";
 import { publishedGuides } from "@/lib/knowledge/guides";
 import { guides } from "@/data/knowledge/guides";
 import { CATALOG_BATCH_SIZE } from "@/components/catalog/catalogInfiniteScroll.mjs";
+import { getCatalogListingData } from "@/lib/catalog-listing";
 
 const staticRoutes = [
   "/",
@@ -48,9 +49,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // or unverified guide produces no route, so it must produce no entry.
   const guideRoutes = publishedGuides(guides).map((guide) => `/vodici/${guide.slug}`);
 
-  // Pagination still walks the full catalogue: consolidated variants remain
-  // crawlable and useful, they simply are not the canonical entity.
-  const totalCatalogPages = Math.ceil(products.length / CATALOG_BATCH_SIZE);
+  /*
+   * Paginacija hoda kanonskim entitetima, isto kao ruta koja je renderuje —
+   * porodice i samostalni proizvodi. Brojanje po sirovoj listi proizvoda davalo
+   * bi više strana nego što ih ruta generiše, pa bi sitemap nudio adrese koje
+   * vraćaju 404.
+   *
+   * Konsolidovane varijante ostaju dostupne: `collection` porodice ih linkuju sa
+   * svoje stranice, a `variant-pdp` varijante i inače preusmeravaju na porodicu.
+   */
+  const totalCatalogPages = Math.ceil(
+    getCatalogListingData().canonical.length / CATALOG_BATCH_SIZE,
+  );
   const paginationRoutes = Array.from(
     { length: Math.max(0, totalCatalogPages - 1) },
     (_, index) => `/katalog/strana/${index + 2}`,

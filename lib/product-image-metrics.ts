@@ -43,6 +43,20 @@ export type ProductImageMetrics = {
   tone: "very-dark" | "dark" | "mid" | "light" | "very-light";
   boxSource: "alpha" | "opaque-border" | "canvas";
   palette: { hex: string; share: number }[];
+  /** Flat studio backdrop of an opaque photo (hex); absent when the backdrop is a gradient. */
+  backdrop?: string;
+  /**
+   * V6 polja — dodaje ih generator SAMO za Carsystem putanje sa alfa kanalom.
+   * `box`/`aspect` iznad i dalje opisuju „sve sa alfom" (proizvod + zapečena
+   * senka) i njih čitaju format PDP stage-a i contrast mode; ova polja opisuju
+   * sam SUBJEKT. Da li se koriste odlučuje `lib/product-fit-model.ts`.
+   */
+  fitModelVersion?: number;
+  subjectBox?: [number, number, number, number];
+  subjectAspect?: number;
+  /** Centar subjekta kao udeo platna: [x, y]. */
+  subjectCenter?: [number, number];
+  officialShadow?: "strong" | "thin" | "none" | "unknown";
 };
 
 type ManifestShape = {
@@ -80,6 +94,31 @@ export function resolveContrastMode(
   if (metrics.tone === "very-dark" || metrics.tone === "dark") return "dark-product";
   if (metrics.tone === "very-light" || metrics.tone === "light") return "light-product";
   return "balanced";
+}
+
+/**
+ * What the image file physically is, which decides how a dark surface may
+ * present it.
+ *
+ *   cutout   — transparent render; the product sits directly on the stage.
+ *   backdrop — opaque photo on a flat studio backdrop (white, light grey,
+ *              lavender). Cutting it out automatically is unsafe (white tins on
+ *              white paper), so a dark stage paints its plate in the photo's
+ *              OWN backdrop colour: the product reads as shot in a light box
+ *              instead of as a light rectangle stuck on a dark panel.
+ *   photo    — full-bleed photograph (workshop, lifestyle, gradient studio);
+ *              shown as a framed photo, never with a silhouette shadow.
+ *
+ * The light theme keeps its locked presentation; only dark-theme CSS reads this.
+ */
+export type ProductImageMatte = "cutout" | "backdrop" | "photo";
+
+export function resolveImageMatte(
+  metrics: ProductImageMetrics | null,
+): ProductImageMatte {
+  if (!metrics || metrics.boxSource === "alpha") return "cutout";
+  // Only a FLAT backdrop gets a measured colour; a studio gradient is a photo.
+  return metrics.boxSource === "opaque-border" && metrics.backdrop ? "backdrop" : "photo";
 }
 
 /**

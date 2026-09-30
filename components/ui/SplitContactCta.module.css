@@ -15,6 +15,18 @@
     gap 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/*
+ * Tamna tema: lanac `--split-ink` se završavao TAMNOM konstantom, pa je na
+ * stranici bez sopstvenog ink tokena (katalozi, SATA, početna) „Pozovi" bio
+ * skoro crn tekst na crnoj podlozi (kontrast 1.08:1). Poslednja karika je sada
+ * tema sajta.
+ */
+:global(.dark) .root {
+  --split-ink: var(--product-ink, var(--catalog-ink, var(--entity-ink, var(--text, var(--foreground)))));
+  --split-panel: var(--product-panel, var(--catalog-panel, var(--entity-panel, var(--card, var(--surface)))));
+  --split-border: var(--product-border, var(--catalog-border, var(--entity-border, var(--dk-line))));
+}
+
 .callSlot {
   min-height: 0;
   overflow: hidden;
@@ -58,7 +70,8 @@
 .inquiryAction {
   border: 1px solid color-mix(in oklch, var(--split-accent), transparent 8%);
   border-radius: 13px;
-  background: var(--split-accent);
+  /* Beli tekst: ispuna blago produbljena u obe teme (sa čistim akcentom bilo 4.36:1). */
+  background: color-mix(in oklab, var(--split-accent), black 10%);
   color: #fff !important;
   padding: 14px 18px;
   box-shadow: 0 14px 32px color-mix(in oklch, var(--split-accent), transparent 70%);

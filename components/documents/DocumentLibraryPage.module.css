@@ -206,6 +206,9 @@
   transition: opacity var(--ds-duration-2) var(--ds-ease-out);
 }
 
+/* Kroz `.card`: stranice koje ugošćuju karticu imaju `.pageShell a { color: inherit }`,
+   jače od same klase — „Preuzmi" je tada bio tekst boje ispune (1.0:1). */
+.card .cardActionPrimary,
 .cardActionPrimary {
   background: var(--foreground);
   color: var(--background);
@@ -215,6 +218,7 @@
   opacity: 0.85;
 }
 
+.card .cardActionSecondary,
 .cardActionSecondary {
   border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
   color: var(--foreground);

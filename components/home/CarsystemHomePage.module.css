@@ -44,7 +44,8 @@
   --border-soft: oklch(0.31 0.02 255 / 0.09);
   --text: oklch(0.2 0.016 255);
   --text2: oklch(0.43 0.025 255);
-  --text3: oklch(0.52 0.026 255);
+  /* Pristupačnost: 0.52 je na svetlim karticama lokatora davao 3.9–4.1:1. */
+  --text3: oklch(0.45 0.026 255);
   --steel: oklch(0.48 0.11 250);
   --steel-bright: oklch(0.48 0.13 250);
   --card: oklch(0.99 0.004 255);
@@ -61,6 +62,11 @@
 }
 
 :global(.dark) .home {
+  /* Početna deli tamnu skalu sajta (app/globals.css → --dk-*). */
+  --bg: var(--dk-0);
+  --bg2: var(--dk-1);
+  --hero-base: var(--dk-0);
+  --header: oklch(0.145 0.008 255 / 0.84);
   color-scheme: dark;
 }
 
@@ -1121,6 +1127,13 @@
   --cs-orb-halo: oklch(0.24 0.028 250 / 0.11);
   --cs-orb-ring: oklch(0.24 0.028 250 / 0.34);
   --cs-orb-ring-strong: oklch(0.24 0.028 250 / 0.48);
+}
+
+/* Svetla tema: tip lokacije u pregledu prodavnice je sitan crveni tekst na svetloplavoj
+   kartici — --red-bright (namenjen tamnoj podlozi) je tu davao 2.4:1. */
+:global(html:not(.dark)) .storePreview small,
+:global(html:not(.dark)) .storePreviewHeading small {
+  color: oklch(0.5 0.2 27);
 }
 
 :global(.dark) .locatorPanel {
@@ -3554,7 +3567,8 @@
   --lc-panel: #eae6db;
   --lc-ink: #15161a;
   --lc-muted: #5b5d63;
-  --lc-kicker: #9a9c9f;
+  /* #9a9c9f je davao 2.3:1 (nadnaslovi, trajanje vodiča). */
+  --lc-kicker: #686b70;
   --lc-line: rgb(0 0 0 / 0.1);
   position: relative;
   isolation: isolate;
@@ -3591,7 +3605,7 @@
   --lc-panel: #262a34;
   --lc-ink: #f2f0ea;
   --lc-muted: #a2a6ae;
-  --lc-kicker: #7c8089;
+  --lc-kicker: #9296a0;
   --lc-line: rgb(255 255 255 / 0.1);
 }
 
@@ -3737,7 +3751,7 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  color: #8a8c7e;
+  color: #64665b;
   font-family: var(--font-technical), monospace;
   font-size: 9.5px;
   letter-spacing: 0.1em;
@@ -3746,6 +3760,21 @@
 
 :global(html.dark) .supportVisual figcaption {
   color: var(--lc-kicker);
+}
+
+/*
+ * Tamna tema: disk serije je taman (≈ rgb 39,35,31) na tamnoj ploči, pa se
+ * silueta gubila. Odvaja ga meko svetlo IZA proizvoda — bez obrisa i bez
+ * filtera na samoj slici — i tamna, a ne crna-na-crnoj, senka.
+ */
+:global(html.dark) .supportVisual {
+  background:
+    radial-gradient(closest-side at 50% 52%, oklch(0.56 0.01 255) 0%, oklch(0.46 0.012 255) 62%, oklch(0.33 0.014 255) 100%),
+    oklch(0.3 0.014 255);
+}
+
+:global(html.dark) .supportVisual img {
+  filter: drop-shadow(0 22px 28px oklch(0.06 0.006 255 / 0.55));
 }
 
 @media (max-width: 900px) {

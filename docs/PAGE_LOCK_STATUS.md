@@ -31,6 +31,35 @@ Reopen se traži eksplicitno, po površini, i upisuje se u ovaj dokument.
 
 ---
 
+## REOPEN — tamna tema, 2026-09-27
+
+Vlasnik je izričito zatražio rekonstrukciju TAMNE teme na celom sajtu (PDP,
+katalog, kartice, header/footer, brend stranice, forme, stanja). Reopen važi
+samo za izgled pod `.dark`; svetla tema i UX arhitektura ostaju zaključani.
+Tok rada, nalazi i preostali posao: `docs/DARK_THEME_RECONSTRUCTION.md`.
+
+Van `.dark` promenjeno je samo:
+
+- dokazan bug (obe teme): „Pošalji upit" u završnom CTA bloku PDP-a bio je
+  beo tekst na beloj podlozi (`.pageShell a { color: inherit }` je gazio boju
+  dugmeta);
+- dokazani bugovi pristupačnosti (kontrast teksta ispod 4.5:1, provereno ručno
+  isečcima snimaka): link-dugmad kojima je `a { color: inherit }` gazio boju (PDP
+  hero i završni CTA, Norbin, baslac sistemski PDP, Befar, kontakt „Pozovi",
+  „Preuzmi" u kartici dokumenta), bledi sitni tekst (PDP, katalog, programske
+  strane, početna, Carsystem, C.A.R.FIT, Befar, baslac, brend navigacija),
+  crvene/plave ispune ispod belog teksta (isti ton, za nijansu dublji), R-M sitan
+  crveni tekst (mastilo sekcije + zvanični crveni marker; zvanična boja ostaje za
+  veliki tekst). Raspored, tipografska skala i koncept se ne menjaju;
+- R-M H 2RM2: izvor je sličica „Image missing" portala → „Vizuel u pripremi";
+- asset replacement (samo prikaz): za 65 pregledanih slika PDP scena i kartice
+  crtaju popravljen derivat (`public/remastered/`, `data/catalog/image-remaster/`);
+  originalni fajlovi, podaci kataloga i sync dokazi su netaknuti. Na beloj podlozi
+  su derivati identični ili bez vidljive razlike; content-box nekih je manji jer se
+  senka za beli papir i okvir platna više ne računaju kao proizvod.
+
+---
+
 ## PASS 02 — 2026-09-10
 
 Obim: početna strana u svetloj temi, vizuelni sistem svetle teme, zajednički
@@ -199,6 +228,19 @@ nije otvaran — detalji u `docs/BASLAC_CATALOG_SYNC.md`):
   `*_Line.pdf` nije vidljiv;
 - zapisi bez `detail` bloka ne prikazuju „Bezbednosni list — na upit", jer `getDocuments`
   izostavlja dokumente sa `status: "placeholder"`.
+
+#### Reopen 2026-09-21 — ograničen, samo hero slika proizvoda (V6A + V6B)
+
+Vlasnik je izričito otključao PDP **isključivo** za:
+
+- korišćenje novog `subjectBox` fita hero slike;
+- primenu shadow modela (`officialShadow`: strong / thin / none / unknown);
+- sprečavanje višestrukih senki (zvanična senka iz asseta + CSS `drop-shadow`).
+
+Ništa drugo nije otključano: layout, stil, dimenzije, razmaci, boje, tipografija,
+ponašanje i format stage-a ostaju zaključani. Izmena važi samo za Carsystem slike
+i samo uz `data-product-shadow-model="v6"`; bez tog atributa PDP se renderuje kao
+u zaključanom stanju. Status površine ostaje `DESIGN + UX LOCKED`.
 
 ### Cosmos LAC — 🔒 DESIGN + UX LOCKED
 

@@ -43,6 +43,13 @@ export type ProductVisualPresentation = {
    * ono što površina crta.
    */
   shade: string | null;
+  /**
+   * V6 fit + shadow model. Postavlja ga ISKLJUČIVO server
+   * (`withProductFitModel` u `lib/product-fit-model.ts`), jer odluka traži
+   * izmereni manifest koji ne sme u klijentski bundle. Kada polja nema, površina
+   * radi po zatečenom (legacy) fitu i zatečenom modelu senki.
+   */
+  officialShadow?: "strong" | "thin" | "none" | "unknown";
 };
 
 export function toProductVisualPresentation(

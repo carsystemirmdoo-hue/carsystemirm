@@ -3,9 +3,10 @@
   --baslac-surface: #fafbf9;
   --baslac-surface-strong: #ffffff;
   --baslac-ink: #18232a;
-  --baslac-muted: #5d686c;
+  --baslac-muted: #56626a; /* 4.47:1 na svetlim karticama navigacije → ≥ 4.5:1 */
   --baslac-border: rgb(24 35 42 / 0.13);
-  --baslac-accent: #3f7ea6;
+  /* Ista baslac plava, za nijansu dublja: beli tekst na ispuni je sa #3f7ea6 bio 4.42:1. */
+  --baslac-accent: #3a769d;
   --baslac-accent-ink: #ffffff;
   --baslac-cyan: #cbe9e8;
   --baslac-process-bg: #e9eeed;
@@ -584,7 +585,7 @@
   gap: 0.55rem;
   width: min(100%, var(--ds-container-max, 1208px));
   margin-inline: auto;
-  color: var(--baslac-muted);
+  color: #9aa6a9; /* breadcrumb stoji na tamnom heru u obe teme (bilo 3.4:1 u svetloj) */
   font-family: var(--font-technical), monospace;
   font-size: 0.7rem;
   letter-spacing: 0.06em;
@@ -737,7 +738,7 @@
 
 .sectionKicker {
   margin: 0 0 1rem;
-  color: #657175;
+  color: #56626a; /* 4.3:1 na svetlim sekcijama → ≥ 4.5:1 */
   font-family: var(--font-technical), monospace;
   font-size: 0.66rem;
   font-weight: 600;
@@ -1019,7 +1020,7 @@
 }
 
 .lineCode {
-  color: var(--baslac-accent);
+  color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: clamp(3.5rem, 6vw, 6.5rem);
   font-weight: 750;
@@ -1166,7 +1167,7 @@
 }
 
 .processDetailNumber {
-  color: var(--baslac-accent);
+  color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: clamp(5rem, 10vw, 10rem);
   font-weight: 750;
@@ -1250,7 +1251,7 @@
 
 .clearcoatMatrix h3 {
   margin: 0;
-  color: var(--baslac-accent);
+  color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: 2.25rem;
   letter-spacing: -0.045em;
@@ -1751,7 +1752,7 @@
 }
 
 .finalCtaMark {
-  color: var(--baslac-accent);
+  color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: clamp(5rem, 10vw, 10rem);
   font-weight: 750;
@@ -1794,9 +1795,27 @@
   --baslac-muted: #a8b2b1;
   --baslac-border: rgb(237 242 238 / 0.14);
   --baslac-cyan: #183c3f;
+  /* Plava kao TEKST na tamnoj podlozi; ispune zadržavaju --baslac-accent. */
+  --baslac-accent-text: #72acd2;
   --brand-nav-surface: rgb(17 23 26 / 0.94);
   --brand-nav-border: rgb(237 242 238 / 0.12);
   --brand-nav-ink: #edf2ee;
+}
+
+:global(html[data-theme="dark"]) .sectionKicker {
+  /* #657175 je na tamnoj podlozi davao 3.6:1. */
+  color: #97a5a8;
+}
+
+/* Dve sekcije su svetle i u tamnoj temi — tu nadnaslov ostaje taman. */
+:global(html[data-theme="dark"]) .repairRhythm .sectionKicker,
+:global(html[data-theme="dark"]) .greyShadeSection .sectionKicker {
+  color: #56626a;
+}
+
+:global(html[data-theme="dark"]) .processRail button[data-active] {
+  /* Aktivna faza: taman tekst na tamno-tirkiznoj ploči bio je 1.3:1. */
+  color: var(--baslac-ink);
 }
 
 :global(html[data-theme="dark"]) .mediaSlot,
@@ -2683,7 +2702,7 @@
 }
 
 .familyPackshotMark {
-  color: var(--baslac-accent);
+  color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), system-ui, sans-serif;
   font-size: 1.6rem;
   font-weight: 800;
@@ -2745,7 +2764,7 @@
 }
 .quickAddBar button:disabled { opacity: 0.45; cursor: not-allowed; }
 .quickAddFeedback {
-  margin: 0; color: var(--baslac-accent);
+  margin: 0; color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-technical), monospace; font-size: 0.72rem;
 }
 .baseRow { display: flex; min-width: 0; align-items: center; gap: 0.4rem; }

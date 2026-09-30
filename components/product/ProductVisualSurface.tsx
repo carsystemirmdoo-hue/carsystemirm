@@ -14,6 +14,8 @@ import {
   type ProductVisualPresentation,
 } from "@/components/product/productVisualPresentation";
 import { nextRevealDirection } from "@/components/product/productRevealDirection.mjs";
+import { useProductImageLoadState } from "@/components/product/useProductImageLoadState";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import fit from "./ProductImageFit.generated.module.css";
 import { resetLocalPointerVars } from "@/components/motion/useLocalPointerVars";
 import {
@@ -100,10 +102,35 @@ export function ProductVisualSurface({
       product as CarsystemProduct,
       image ?? undefined,
     );
-  const selectedImage = image ?? resolved.image;
-  const hasProductAsset = Boolean(
+  const identityImage = image ?? resolved.image;
+  // Kartica crta pregledan derivat za prikaz (lib/productImageDisplay.ts), ako postoji.
+  const selectedImage = identityImage
+    ? { ...identityImage, src: toDisplayImageSrc(identityImage.src) }
+    : identityImage;
+  const hasRealImage = Boolean(
     selectedImage && !selectedImage.src.includes("placeholder-product"),
   );
+  /*
+   * Slika koja ne uspe da se učita prelazi u isti pošten prikaz kao proizvod bez
+   * slike („Vizuel u pripremi"), umesto slomljene ikone ili — u tamnoj temi —
+   * prazne ploče u boji studijske pozadine.
+   */
+  const { ref: imageRef, state: imageState } = useProductImageLoadState(
+    hasRealImage ? selectedImage?.src : null,
+  );
+  const hasProductAsset = hasRealImage && imageState !== "failed";
+  /*
+   * V6 (fit po subjektu + tačno jedna senka) važi samo kada je server upisao
+   * `officialShadow` za BAŠ OVU sliku (izmerenu na fajlu koji se crta — derivat
+   * za prikaz, ako postoji). `image` prop menja sliku posle odluke servera
+   * (galerija), pa tada ostaje legacy — merenje pripada drugoj slici.
+   *
+   * Stanje učitavanja je ISTO ono iznad (jedan izvor istine): V6 ga samo
+   * izlaže kao atribut, da CSS senku crta tek za `loaded`. Slika koja padne
+   * zadržava V6 atribute sa `failed`, pa ni njen „Vizuel u pripremi" nema senku.
+   */
+  const v6Shadow =
+    hasRealImage && !image ? (resolved.officialShadow ?? null) : null;
   const visual = {
     treatment: resolved.treatment,
     productType: resolved.productType,
@@ -426,6 +453,10 @@ export function ProductVisualSurface({
       className={surfaceClassName}
       data-product-image-motion
       data-product-fit={hasProductAsset ? selectedImage?.src : undefined}
+      data-product-fit-model={v6Shadow ? "v6" : undefined}
+      data-product-shadow-model={v6Shadow ? "v6" : undefined}
+      data-product-official-shadow={v6Shadow ?? undefined}
+      data-product-image-state={v6Shadow ? imageState : undefined}
       data-product-visual-real-image={hasProductAsset ? "true" : "false"}
       data-product-visual-pointer-active={isSurfacePointerActive ? "true" : undefined}
       data-product-visual-surface
@@ -465,6 +496,7 @@ export function ProductVisualSurface({
       <span className={styles.objectWrap}>
         {hasProductAsset && selectedImage ? (
           <Image
+            ref={imageRef}
             src={selectedImage.src}
             alt={selectedImage.alt}
             fill

@@ -53,6 +53,8 @@ SOURCE_DIRS = (
     "products",
     "images/products",
     "images/brands/rm/products",
+    # Reviewed display derivatives (scripts/catalog/image-remaster/remaster.py).
+    "remastered",
 )
 
 RASTER_SUFFIXES = {".webp", ".png", ".jpg", ".jpeg"}
@@ -61,6 +63,9 @@ RASTER_SUFFIXES = {".webp", ".png", ".jpg", ".jpeg"}
 # renders carry a soft antialiased edge; 24/255 keeps the real silhouette while
 # discarding the halo that would otherwise inflate the content box by a few px.
 ALPHA_FLOOR = 24
+# Max 90th-percentile deviation (0–255) of the border rings for a backdrop to
+# count as flat enough to be continued by a plate of one colour.
+BACKDROP_FLAT_TOLERANCE = 8
 
 # For opaque files (28 of them — mostly older .jpg/.png sources) the background
 # is inferred from the border ring. A channel distance above this counts as
@@ -77,6 +82,47 @@ PALETTE_LEVELS = 1 << PALETTE_BITS
 # as an accent. Keeps a 200 px logo or a line of legal text off the palette.
 MIN_CLUSTER_SHARE = 0.06
 MAX_PALETTE_ENTRIES = 3
+
+# --- V6 subject fit + official-shadow model (Carsystem only) ------------------
+#
+# `box` above is the bounding box of everything with alpha > 24. Official
+# Carsystem renders bake a soft shadow / reflection / 1 px frame into that alpha,
+# so the box describes product + shadow and the scale envelope ends up sizing the
+# shadow. The fields below describe the SUBJECT instead. They are ADDITIVE:
+# `box`, `aspect`, `fx/fy/ox/oy`, `tone` and `palette` keep their meaning, because
+# the PDP stage format, the contrast mode and the visual recipes read them.
+#
+# Scope is an explicit allowlist. Every other brand's manifest entry and CSS rule
+# stays byte-identical; emptying this tuple restores today's output exactly.
+# The second prefix is the reviewed DISPLAY derivative of a Carsystem file
+# (`public/remastered/...`, see lib/productImageDisplay.ts): surfaces draw the
+# derivative, so its subject and baked shadow are measured on its own pixels.
+SUBJECT_FIT_PREFIXES = ("/products/carsystem/", "/remastered/products/carsystem/")
+DISPLAY_DERIVATIVE_ROOT = "/remastered"
+FIT_MODEL_VERSION = 1
+# A V6 CSS rule is only worth shipping when the subject box differs from the
+# legacy box by more than this share of the canvas (0.5 % = ~3 px at 660 px).
+# Below that the two fits are visually identical and the legacy rule is reused.
+SUBJECT_RULE_MIN_DELTA = 0.005
+
+# Geometry only - no RGB, no luminance (a red can and a black can must behave
+# the same). Thicknesses are expressed at the 660 px reference width.
+SUBJECT_CORE_ALPHA = 250      # opaque subject core
+SUBJECT_DETAIL_ALPHA = 128    # a translucent part this visible still belongs to the subject
+SUBJECT_RIM_PX = 2            # antialiased edge around the core
+GROUND_BAND = 0.35            # lowest share of the core height that counts as "at ground level"
+SHADOW_STRONG_LATERAL = 0.10
+SHADOW_STRONG_THICKNESS = 5.0
+SHADOW_STRONG_COVERAGE = 0.2
+SHADOW_THIN_THICKNESS = 1.5
+SHADOW_THIN_COVERAGE = 0.25
+SHADOW_THIN_LATERAL = 0.04
+
+# Reviewed by eye and left undecided on purpose (THIN/STRONG boundary). `unknown`
+# renders like `thin`: exactly one weaker anchored CSS shadow, never two layers.
+OFFICIAL_SHADOW_OVERRIDES = {
+    "/products/carsystem/catalog/carsystem-glass-fibre-reinforced-putty.webp": "unknown",
+}
 
 
 def iter_source_files() -> list[Path]:
@@ -97,11 +143,16 @@ def public_href(path: Path) -> str:
     return "/" + path.relative_to(PUBLIC_ROOT).as_posix()
 
 
-def content_mask(rgba: np.ndarray) -> tuple[np.ndarray, str]:
-    """Boolean mask of product pixels, plus how it was derived."""
+def content_mask(rgba: np.ndarray) -> tuple[np.ndarray, str, str | None]:
+    """Boolean mask of product pixels, how it was derived, and the flat backdrop colour.
+
+    The backdrop (hex) is only reported for "opaque-border" files: it lets a dark
+    stage paint its plate in the photo's own studio colour instead of showing the
+    photo as a light rectangle ("sticker") on a dark surface.
+    """
     alpha = rgba[:, :, 3]
     if int(alpha.min()) < 255:
-        return alpha > ALPHA_FLOOR, "alpha"
+        return alpha > ALPHA_FLOOR, "alpha", None
 
     # Opaque file: infer the flat backdrop from the border ring. Using the ring
     # (not a single corner) means a stray corner artefact cannot decide the crop.
@@ -122,9 +173,27 @@ def content_mask(rgba: np.ndarray) -> tuple[np.ndarray, str]:
     # no backdrop to trim (a full-bleed photo). Keep the whole canvas.
     border_background_share = float((distance[0, :] <= OPAQUE_BG_TOLERANCE).mean())
     if border_background_share < 0.5 or not mask.any():
-        return np.ones(mask.shape, dtype=bool), "canvas"
+        return np.ones(mask.shape, dtype=bool), "canvas", None
 
-    return mask, "opaque-border"
+    # A light box only works when the backdrop is FLAT all the way round: a
+    # studio gradient (lighter centre, darker corners) cannot be matched by one
+    # plate colour and is presented as a photograph instead. Measured on the
+    # outer ring and on a ring 3% inside it; flat exports sit at 0–6/255,
+    # gradient studio shots at 11+.
+    height, width = distance.shape
+    inset = max(2, int(min(height, width) * 0.03))
+    rings = np.concatenate(
+        [
+            distance[0, :], distance[-1, :], distance[:, 0], distance[:, -1],
+            distance[inset, inset:-inset], distance[-inset - 1, inset:-inset],
+            distance[inset:-inset, inset], distance[inset:-inset, -inset - 1],
+        ]
+    )
+    if float(np.percentile(rings, 90)) > BACKDROP_FLAT_TOLERANCE:
+        return mask, "opaque-border", None
+
+    backdrop = "#" + "".join(f"{int(round(channel)):02x}" for channel in background)
+    return mask, "opaque-border", backdrop
 
 
 def relative_luminance(rgb: np.ndarray) -> np.ndarray:
@@ -170,7 +239,130 @@ def sample_palette(rgb: np.ndarray, mask: np.ndarray) -> list[dict[str, object]]
     return palette
 
 
-def measure(path: Path) -> dict[str, object] | None:
+def _dilate(mask: np.ndarray, steps: int) -> np.ndarray:
+    out = mask.copy()
+    for _ in range(steps):
+        out[1:, :] |= out[:-1, :]
+        out[:-1, :] |= out[1:, :]
+        out[:, 1:] |= out[:, :-1]
+        out[:, :-1] |= out[:, 1:]
+    return out
+
+
+def _bbox(mask: np.ndarray) -> list[int] | None:
+    rows = np.flatnonzero(mask.any(axis=1))
+    cols = np.flatnonzero(mask.any(axis=0))
+    if rows.size == 0 or cols.size == 0:
+        return None
+    return [int(cols[0]), int(rows[0]), int(cols[-1] - cols[0] + 1), int(rows[-1] - rows[0] + 1)]
+
+
+def measure_subject(alpha: np.ndarray, legacy_box: list[int]) -> dict[str, object] | None:
+    """Subject box + official-shadow class for one alpha channel, or None.
+
+    None means "keep the legacy fit": an opaque file, a file without a usable
+    opaque core, or a result that fails the sanity checks below.
+
+    A soft pixel (24 < alpha < 250, outside the antialiased rim) is judged by
+    WHERE it sits relative to the core's own bottom profile:
+      - below the core in its column, or beside the core inside the ground band
+        -> shadow zone, never part of the subject;
+      - anywhere else (above the core, beside it higher up, inside a hole)
+        -> subject detail, kept when it is at least half visible.
+    So a translucent lid or a fading trouser leg stays in the box, and a baked
+    shadow does not.
+    """
+    height, width = alpha.shape
+    if int(alpha.min()) == 255:
+        return None
+
+    visible = alpha > ALPHA_FLOOR
+    core = alpha >= SUBJECT_CORE_ALPHA
+    if int(core.sum()) < 0.05 * max(int(visible.sum()), 1):
+        return None
+    core_box = _bbox(core)
+    if core_box is None:
+        return None
+
+    rim = _dilate(core, SUBJECT_RIM_PX) & visible
+    soft = visible & (alpha < SUBJECT_CORE_ALPHA) & ~rim
+
+    has_core = core.any(axis=0)
+    bottom = np.where(has_core, height - 1 - core[::-1, :].argmax(axis=0), -1)
+    yy = np.arange(height)[:, None]
+    below = has_core[None, :] & (yy > bottom[None, :] + 2)
+    ground_top = core_box[1] + core_box[3] - GROUND_BAND * core_box[3]
+    lateral_low = (~has_core)[None, :] & (yy >= ground_top)
+    shadow_zone = soft & (below | lateral_low)
+    detail = soft & ~shadow_zone & (alpha >= SUBJECT_DETAIL_ALPHA)
+
+    subject = core | rim | detail
+    # 1 px opening: a single stray pixel must not be able to move the box.
+    subject = _dilate(~_dilate(~subject, 1), 1) | core
+
+    # A tall translucent mass UNDER the core (a clear bottle below an opaque cap)
+    # is a subject, not a shadow: keep it and refuse to classify the shadow.
+    translucent_below = False
+    below_strong = soft & below & (alpha >= SUBJECT_DETAIL_ALPHA)
+    if int(below_strong.sum()) >= 0.10 * int(core.sum()):
+        strong_box = _bbox(below_strong)
+        if strong_box and strong_box[3] >= 0.25 * core_box[3] and strong_box[2] / max(strong_box[3], 1) < 2.5:
+            translucent_below = True
+            subject = subject | below_strong
+
+    box = _bbox(subject)
+    if box is None:
+        return None
+
+    # --- sanity: anything odd falls back to the legacy fit ----------------------
+    lx, ly, lw, lh = legacy_box
+    x, y, w, h = box
+    inside_legacy = x >= lx and y >= ly and x + w <= lx + lw and y + h <= ly + lh
+    covers_core = (
+        x <= core_box[0]
+        and y <= core_box[1]
+        and x + w >= core_box[0] + core_box[2]
+        and y + h >= core_box[1] + core_box[3]
+    )
+    if not inside_legacy or not covers_core or w < 8 or h < 8:
+        return None
+    if w * h < 0.25 * lw * lh or min(lw / w, lh / h) > 1.4:
+        return None
+
+    # --- official shadow: soft mass UNDER the product's own bottom profile ------
+    scale = width / 660.0
+    under = soft & below
+    thickness = under.sum(axis=0)[has_core] / scale
+    coverage = float((thickness >= 3).mean()) if thickness.size else 0.0
+    mean_thickness = float(thickness.mean()) if thickness.size else 0.0
+    band = soft & lateral_low
+    lateral = float((band.sum(axis=0) >= 3 * scale).sum()) / max(core_box[2], 1)
+
+    if translucent_below:
+        shadow = "unknown"
+    elif lateral >= SHADOW_STRONG_LATERAL or (
+        mean_thickness >= SHADOW_STRONG_THICKNESS and coverage >= SHADOW_STRONG_COVERAGE
+    ):
+        shadow = "strong"
+    elif (
+        mean_thickness >= SHADOW_THIN_THICKNESS
+        or coverage >= SHADOW_THIN_COVERAGE
+        or lateral >= SHADOW_THIN_LATERAL
+    ):
+        shadow = "thin"
+    else:
+        shadow = "none"
+
+    return {
+        "fitModelVersion": FIT_MODEL_VERSION,
+        "subjectBox": box,
+        "subjectAspect": round(w / h, 4),
+        "subjectCenter": [round((x + w / 2) / width, 4), round((y + h / 2) / height, 4)],
+        "officialShadow": shadow,
+    }
+
+
+def measure(path: Path, href: str | None = None) -> dict[str, object] | None:
     with Image.open(path) as source:
         image = source.convert("RGBA")
         rgba = np.asarray(image)
@@ -179,7 +371,7 @@ def measure(path: Path) -> dict[str, object] | None:
     if width == 0 or height == 0:
         return None
 
-    mask, mask_source = content_mask(rgba)
+    mask, mask_source, backdrop = content_mask(rgba)
     if not mask.any():
         return None
 
@@ -207,7 +399,7 @@ def measure(path: Path) -> dict[str, object] | None:
     else:
         tone = "mid"
 
-    return {
+    metrics: dict[str, object] = {
         "w": width,
         "h": height,
         "box": [left, top, box_width, box_height],
@@ -222,7 +414,28 @@ def measure(path: Path) -> dict[str, object] | None:
         "tone": tone,
         "boxSource": mask_source,
         "palette": sample_palette(rgb, mask),
+        **_subject_fields(rgba, href, [left, top, box_width, box_height], mask_source),
     }
+    if backdrop is not None:
+        metrics["backdrop"] = backdrop
+    return metrics
+
+
+def _subject_fields(
+    rgba: np.ndarray, href: str | None, legacy_box: list[int], mask_source: str
+) -> dict[str, object]:
+    """Additive V6 fields - only for allowlisted paths, only for alpha-derived boxes."""
+    if not href or not href.startswith(SUBJECT_FIT_PREFIXES) or mask_source != "alpha":
+        return {}
+    subject = measure_subject(rgba[:, :, 3], legacy_box)
+    if subject is None:
+        return {}
+    # Overrides are reviewed per product image and keyed by its identity path;
+    # a display derivative inherits the decision made for its original.
+    identity = href[len(DISPLAY_DERIVATIVE_ROOT):] if href.startswith(DISPLAY_DERIVATIVE_ROOT + "/") else href
+    if identity in OFFICIAL_SHADOW_OVERRIDES:
+        subject["officialShadow"] = OFFICIAL_SHADOW_OVERRIDES[identity]
+    return subject
 
 
 def build_manifest() -> dict[str, object]:
@@ -230,7 +443,7 @@ def build_manifest() -> dict[str, object]:
     skipped: list[str] = []
     for path in iter_source_files():
         try:
-            metrics = measure(path)
+            metrics = measure(path, public_href(path))
         except Exception as error:  # noqa: BLE001 — one bad file must not stop the pass
             skipped.append(f"{public_href(path)}: {error}")
             continue
@@ -269,6 +482,18 @@ CSS_HEADER = """/*
 """
 
 
+V6_CSS_HEADER = """
+/*
+ * V6 subject fit - Carsystem only (SUBJECT_FIT_PREFIXES in the generator).
+ *
+ * Same five properties as above, measured on the SUBJECT instead of on
+ * "everything with alpha": baked shadows, reflections and 1 px frames no longer
+ * shrink or shift the product. Opt-in per surface via data-product-fit-model="v6";
+ * without that attribute the legacy rule above still applies.
+ */
+"""
+
+
 def build_css(manifest: dict[str, object]) -> str:
     lines = [CSS_HEADER, "\n.fit {\n"]
     # Defaults describe an untrimmed canvas, so an image with no rule below
@@ -295,9 +520,65 @@ def build_css(manifest: dict[str, object]) -> str:
             f"  --product-content-fill-y: {number(metrics['fy'])};\n"  # type: ignore[arg-type]
             f"  --product-content-offset-x: {number(metrics['ox'])};\n"  # type: ignore[arg-type]
             f"  --product-content-offset-y: {number(metrics['oy'])};\n"  # type: ignore[arg-type]
+            f"{dark_matte(metrics)}"
             "}\n"
         )
+
+    # V6 subject fit. Appended AFTER every legacy rule and keyed on an extra
+    # attribute, so (a) the block above is byte-identical to the pre-V6 output and
+    # (b) a surface without `data-product-fit-model="v6"` keeps the legacy fit.
+    # Only emitted where the subject box actually differs from the legacy box.
+    v6_rules: list[str] = []
+    for href, metrics in images.items():
+        subject_box = metrics.get("subjectBox")
+        if not subject_box:
+            continue
+        x, y, w, h = subject_box  # type: ignore[misc]
+        lx, ly, lw, lh = metrics["box"]  # type: ignore[misc]
+        width, height = float(metrics["w"]), float(metrics["h"])  # type: ignore[arg-type]
+        delta = max(abs(x - lx) / width, abs(w - lw) / width, abs(y - ly) / height, abs(h - lh) / height)
+        if delta <= SUBJECT_RULE_MIN_DELTA:
+            continue
+        v6_rules.append(
+            f'\n.fit[data-product-fit="{href}"][data-product-fit-model="v6"] {{\n'
+            f"  --product-content-aspect: {number(w / h)};\n"
+            f"  --product-content-fill-x: {number(w / width)};\n"
+            f"  --product-content-fill-y: {number(h / height)};\n"
+            f"  --product-content-offset-x: {number(x / width)};\n"
+            f"  --product-content-offset-y: {number(y / height)};\n"
+            "}\n"
+        )
+    if v6_rules:
+        lines.append(V6_CSS_HEADER)
+        lines.extend(v6_rules)
     return "".join(lines)
+
+
+# Feathered edge for a photo on a flat studio backdrop: the last few percent of
+# the file fade into a plate painted in the backdrop's own colour, so the photo
+# edge disappears instead of drawing a rectangle. Product pixels are untouched.
+BACKDROP_FEATHER = (
+    "linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), "
+    "linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent)"
+)
+
+
+def dark_matte(metrics: dict[str, object]) -> str:
+    """Dark-theme presentation of an OPAQUE file (read only by `.dark` rules).
+
+    A transparent render emits nothing and keeps the default cut-out treatment.
+    See `resolveImageMatte` in lib/product-image-metrics.ts for the model.
+    """
+    source = metrics["boxSource"]
+    if source == "alpha":
+        return ""
+    lines = "  --product-image-dark-filter: none;\n  --product-image-dark-contact: 0;\n"
+    if source == "opaque-border" and metrics.get("backdrop"):
+        lines += f"  --product-image-dark-plate: {metrics['backdrop']};\n"
+        lines += f"  --product-image-dark-mask: {BACKDROP_FEATHER};\n"
+    else:
+        lines += "  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);\n"
+    return lines
 
 
 def main() -> int:

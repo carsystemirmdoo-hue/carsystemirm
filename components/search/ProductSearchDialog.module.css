@@ -71,7 +71,7 @@
 }
 
 .searchBar:focus-within .searchIcon {
-  color: var(--accent);
+  color: var(--accent-text, var(--accent));
 }
 
 .searchIcon {
@@ -277,7 +277,7 @@
 }
 
 .rowCount {
-  color: var(--accent);
+  color: var(--accent-text, var(--accent));
   font-weight: 650;
 }
 
@@ -306,7 +306,7 @@
 
 .showAll:hover,
 .showAllStatic:hover {
-  color: var(--accent);
+  color: var(--accent-text, var(--accent));
 }
 
 .row:focus-visible,

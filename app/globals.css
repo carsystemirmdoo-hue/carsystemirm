@@ -13,15 +13,55 @@
   --muted-foreground: #5b5e66;
 }
 
+/*
+ * Tamna tema — jedna skala površina (2026-09 rekonstrukcija).
+ *
+ * Svaka tamna površina na sajtu bira NIVO, a ne svoju nijansu crne. Ranije su
+ * stranice nosile četiri različite „crne" (#020407 PDP, #03060b katalog,
+ * #0b0e12 početna, #0a0a0c token) i topli header, pa je prelaz između sekcija
+ * izgledao kao automatski prebojena svetla tema. Svi nivoi dele istu hladnu
+ * grafitnu osu (hue 255, niska hroma); dubina se gradi svetlinom, ne senkom.
+ *
+ *   --dk-0  strana          (pozadina body-ja i punih sekcija)
+ *   --dk-1  podignuta       (kartica, panel, sekcija „alt")
+ *   --dk-2  umetnuta        (scena proizvoda, polje forme, thumbnail)
+ *   --dk-3  plutajuća       (meni, dropdown, dijalog)
+ *
+ * Tekst: --foreground ≥ 15:1, --muted-foreground ≥ 7:1, --dk-text-faint ≥ 4.5:1
+ * na --dk-0 i --dk-1. Linije su providna svetla, pa važe na svakom nivou.
+ */
 .dark {
-  --background: #0a0a0c;
-  --foreground: #f4f4f5;
-  --surface: #131316;
-  --surface-muted: #1b1b1f;
-  --border: #2a2a30;
-  --accent: #e11d3a;
+  --dk-0: oklch(0.145 0.008 255);
+  --dk-1: oklch(0.182 0.01 255);
+  --dk-2: oklch(0.215 0.011 255);
+  --dk-3: oklch(0.235 0.012 255);
+  --dk-line: oklch(0.94 0.008 255 / 0.11);
+  --dk-line-strong: oklch(0.94 0.008 255 / 0.2);
+  --dk-text-faint: oklch(0.66 0.014 255);
+  /* Senka u tamnoj temi je uvek TAMNA; svetao „glow" oko proizvoda čita se kao obrub isečka. */
+  --dk-shadow-color: oklch(0.05 0.006 255 / 0.62);
+  --dk-focus: oklch(0.78 0.13 27);
+
+  --background: var(--dk-0);
+  --foreground: oklch(0.955 0.004 255);
+  --surface: var(--dk-1);
+  --surface-muted: var(--dk-2);
+  --border: oklch(0.32 0.012 255);
+  /* --accent je ISPUNA (beli tekst preko nje ≥ 4.5:1); crveni TEKST na tamnom je --accent-text. */
+  --accent: oklch(0.55 0.21 23);
+  --accent-text: oklch(0.7 0.19 25);
   --accent-foreground: #ffffff;
-  --muted-foreground: #9a9ca3;
+  --muted-foreground: oklch(0.76 0.014 255);
+  color-scheme: dark;
+}
+
+.dark .text-accent {
+  color: var(--accent-text);
+}
+
+/* Fokus mora da se vidi i na crvenim površinama (CTA traka, crveni chip). */
+.dark :focus-visible {
+  outline-color: var(--dk-focus);
 }
 
 @theme inline {

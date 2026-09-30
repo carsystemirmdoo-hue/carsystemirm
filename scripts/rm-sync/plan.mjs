@@ -21,6 +21,7 @@ import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
 import { BRAND, PATHS } from "./lib/config.mjs";
 import { matchLocalProducts } from "./lib/local-match.mjs";
 import { resolveTaxonomy } from "./lib/taxonomy.mjs";
+import { isPortalPlaceholder } from "./lib/placeholders.mjs";
 
 const source = readJson(PATHS.source);
 if (!source) throw new Error("Nedostaje source dataset — pokrenuti acquire + build-source.");
@@ -73,7 +74,7 @@ function slugFor(record) {
 
 const imagesByKey = new Map();
 // Zamenska sličica portala („Image missing”) nije slika proizvoda — zapis ostaje MISSING_OFFICIAL_ASSET.
-for (const image of (imageManifest.images ?? []).filter((image) => !image.error && !image.placeholder)) imagesByKey.set(image.sourceKey, [...(imagesByKey.get(image.sourceKey) ?? []), image]);
+for (const image of (imageManifest.images ?? []).filter((image) => !image.error && !isPortalPlaceholder(image))) imagesByKey.set(image.sourceKey, [...(imagesByKey.get(image.sourceKey) ?? []), image]);
 
 const records = [
   ...source.products,

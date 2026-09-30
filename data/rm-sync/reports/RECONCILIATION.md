@@ -17,7 +17,7 @@
 | legacyLocalOnly | 3 (rm-diamont-bezbojni-lak, rm-pasta-190-1l, rm-pasta-190-5l) |
 | documentationGaps | 2 (HB 015, HB 032) |
 | websiteOrphans | 1 (822-promotor-de-adherencia) |
-| missingOfficialAssets | 42 |
+| missingOfficialAssets | 43 |
 | runtimeRmProducts | 223 |
-| Objavljene slike / siročad / duplikati | 116 / 0 / 1 |
+| Objavljene slike / siročad / duplikati | 115 / 0 / 1 |
 | Neuspesi | 0 |

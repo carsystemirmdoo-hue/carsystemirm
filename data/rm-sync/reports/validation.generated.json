@@ -5,13 +5,13 @@
     "runtimeRmProducts": 223,
     "systems": 7,
     "components": 72,
-    "withImage": 117,
+    "withImage": 116,
     "withRelations": 52,
     "withTds": 158,
     "withShade": 35,
     "localizedEntries": 159,
     "errors": 0,
-    "warnings": 43
+    "warnings": 44
   },
   "errors": [],
   "warnings": [
@@ -38,6 +38,7 @@
     "rm-h-2p80-filler-harden-r-plus: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
     "rm-h-2p81-filler-harden-r-plus-slow: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
     "rm-h-2p96-matshade-harden-r: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
+    "rm-h-2rm2-wheel-clear-coat-hardener: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
     "rm-h-340-ghd-protect-filler-hardener: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
     "rm-h-5430-ghd-slow-activator: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",
     "rm-h-700-ghd-hardener: nema zvaničnu fotografiju (MISSING_OFFICIAL_ASSET)",

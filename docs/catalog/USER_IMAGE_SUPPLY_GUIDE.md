@@ -107,11 +107,11 @@ Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45
 | P2 | baslac 80-30 Additive Plast | 80-30 | Na upit | 1 | `baslac__baslac-80-30-additive-plast.webp` |
 | P2 | baslac 81-30 Additive Chassis | 81-30 | Na upit | 1 | `baslac__baslac-81-30-additive-chassis.webp` |
 
-## R-M — 35 fotografija
+## R-M — 36 fotografija
 
 R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Izuzetak su dve grupe istog naziva (GHD THINNER i GHD HARDENER) gde se razlikuje samo oznaka brzine: za njih je dovoljna jedna reprezentativna slika grupe. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
 
-### PACKSHOT PROIZVODA (35)
+### PACKSHOT PROIZVODA (36)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
@@ -135,6 +135,7 @@ R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je pose
 | P2 | R-M FILLER Harden-R Plus | H 2P80 | Na upit | 1 | `rm__rm-h-2p80-filler-harden-r-plus.webp` |
 | P2 | R-M FILLER Harden-R Plus slow | H 2P81 | Na upit | 1 | `rm__rm-h-2p81-filler-harden-r-plus-slow.webp` |
 | P2 | R-M MATSHADE Harden-R | H 2P96 | Na upit | 1 | `rm__rm-h-2p96-matshade-harden-r.webp` |
+| P2 | R-M WHEEL CLEAR COAT, HARDENER | H 2RM2 | Na upit | 1 | `rm__rm-h-2rm2-wheel-clear-coat-hardener.webp` |
 | P2 | R-M GHD PROTECT FILLER HARDENER | H 340 | Na upit | 1 | `rm__rm-h-340-ghd-protect-filler-hardener.webp` |
 | P2 | R-M GHD SLOW ACTIVATOR | H 5430 | Na upit | 1 | `rm__rm-h-5430-ghd-slow-activator.webp` |
 | P2 | R-M AGILIS Minor Repair | HB 015 | Na upit | 1 | `rm__rm-hb-015-agilis-minor-repair.webp` |

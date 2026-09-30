@@ -53,6 +53,7 @@
       "H 2P80",
       "H 2P81",
       "H 2P96",
+      "H 2RM2",
       "H 340",
       "H 5430",
       "H 700",
@@ -3205,8 +3206,8 @@
         "visualType": "clearcoat",
         "rule": "hardener"
       },
-      "missingOfficialAsset": false,
-      "images": 1,
+      "missingOfficialAsset": true,
+      "images": 0,
       "hasLocalization": true,
       "sourceHash": "baa539af83d5ff08"
     },

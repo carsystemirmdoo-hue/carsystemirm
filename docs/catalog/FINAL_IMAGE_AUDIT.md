@@ -10,7 +10,7 @@
 
 **Kako se ovi fajlovi prave.** `npm run catalog:image-supply:generate` (`scripts/catalog/image-audit/`) ih gradi iz STVARNOG runtime kataloga i praćenih dokaza u `data/catalog/image-quality/evidence/`. Drugo pokretanje daje bajt-identične izlaze. Provera zatečenog stanja: `npm run catalog:image-supply:check`.
 
-**Nepraćeni radni međuizlaz** (`.cache/image-audit/`, ne čita ga ni runtime ni budući importer): pun inventar `IMAGE_IDENTITY_INVENTORY.csv` (1801 redova; SHA-256 `d29a4b7b7a27e91d155b7cfb58521e29ab43170dbb4aa2c0181bb83914489001`, otisak je u lock-u). Nazivi fajlova bez putanje u nastavku odnose se na taj radni inventar, osim canonical manifesta navedenih gore.
+**Nepraćeni radni međuizlaz** (`.cache/image-audit/`, ne čita ga ni runtime ni budući importer): pun inventar `IMAGE_IDENTITY_INVENTORY.csv` (1801 redova; SHA-256 `7cd6b8eb2f0f8772092a04e6647797a7f3015c232abb84cad2aef2bb36cfa84f`, otisak je u lock-u). Nazivi fajlova bez putanje u nastavku odnose se na taj radni inventar, osim canonical manifesta navedenih gore.
 
 Kolone `USER_IMAGE_SUPPLY_QUEUE.csv`: odobreni owner supply pack (isti `image_id` / `suggested_filename` / `target_path` kao u `MISSING_PRODUCT_IMAGES.csv`), dopunjen sa `public_code`, `manufacturer_code`, `image_scope`, `members_sharing_identity`, `what_image_is_needed`, `why_image_is_needed`.
 
@@ -22,12 +22,12 @@ Kolone `USER_IMAGE_SUPPLY_QUEUE.csv`: odobreni owner supply pack (isti `image_id
 | RUPES | 25 | 25 | 0 | 0 | 0 |
 | C.A.R.FIT | 120 | 120 | 0 | 0 | 0 |
 | BEFAR | 64 | 102 | 0 | 0 | 0 |
-| R-M | 223 | 218 | 42 | 37 | 42 |
+| R-M | 223 | 218 | 43 | 38 | 43 |
 | baslac | 57 | 61 | 100 | 34 | 33 |
 | Norbin | 13 | 14 | 10 | 10 | 10 |
 | SATA | 155 | 155 | 153 | 153 | 153 |
 | Cosmos Lac | 84 | 680 | 11 | 11 | 4 |
-| **Ukupno** | **1167** | **1801** | 316 | 245 | 242 |
+| **Ukupno** | **1167** | **1801** | 317 | 246 | 243 |
 
 Aktivnih brendova: 9; najavljenih: 0. Opseg identiteta: CARD 1113 · VARIANT 644 · FAMILY 4 · ARTICLE 38 · SHARED_IMAGE_GROUP 2.
 
@@ -35,13 +35,13 @@ Aktivnih brendova: 9; najavljenih: 0. Opseg identiteta: CARD 1113 · VARIANT 644
 
 | Klasifikacija | Ukupno | Carsystem | RUPES | C.A.R.FIT | BEFAR | R-M | baslac | Norbin | SATA | Cosmos Lac |
 |---|---|---|---|---|---|---|---|---|---|---|
-| `APPROVED_RUNTIME_IMAGE` | **1076** | 70 | 0 | 119 | 87 | 117 | 14 | 0 | 0 | 669 |
+| `APPROVED_RUNTIME_IMAGE` | **1075** | 70 | 0 | 119 | 87 | 116 | 14 | 0 | 0 | 669 |
 | `OWNER_SUPPLIED_IMAGE` | **16** | 0 | 0 | 0 | 7 | 1 | 3 | 3 | 2 | 0 |
 | `LOCAL_LEGITIMATE_IMAGE` | **88** | 5 | 0 | 1 | 8 | 63 | 10 | 1 | 0 | 0 |
 | `IMAGE_QUALITY_REVIEW_ONLY` | **351** | 351 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | `OFFICIAL_IMAGE_RIGHTS_REVIEW` | **165** | 0 | 25 | 0 | 0 | 0 | 0 | 0 | 140 | 0 |
 | `OFFICIAL_IMAGE_AVAILABLE_NOT_IMPORTED` | **11** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11 |
-| `OFFICIAL_IMAGE_NOT_PUBLISHED` | **71** | 0 | 0 | 0 | 0 | 34 | 26 | 10 | 1 | 0 |
+| `OFFICIAL_IMAGE_NOT_PUBLISHED` | **72** | 0 | 0 | 0 | 0 | 35 | 26 | 10 | 1 | 0 |
 | `USER_SUPPLY_REQUIRED` | **6** | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | 0 |
 | `PACKAGE_OR_VARIANT_IMAGE_MISSING` | **3** | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 |
 | `PLACEHOLDER_ACCEPTED` | **14** | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 12 | 0 |
@@ -53,25 +53,25 @@ Aktivnih brendova: 9; najavljenih: 0. Opseg identiteta: CARD 1113 · VARIANT 644
 |---|---|
 | `IMPORT_OFFICIAL_IF_APPROVED` | 11 |
 | `KEEP_PLACEHOLDER` | 14 |
-| `NONE` | 1180 |
+| `NONE` | 1179 |
 | `QUALITY_REVIEW` | 351 |
 | `RIGHTS_DECISION` | 165 |
-| `USER_SUPPLY` | 80 |
+| `USER_SUPPLY` | 81 |
 
 ## 3. Sažetak
 
 - Image identities ukupno: **1801**
-- Zadovoljavajuća runtime slika (APPROVED + LOCAL + samo-kvalitet): **1531**
+- Zadovoljavajuća runtime slika (APPROVED + LOCAL + samo-kvalitet): **1530**
 - Runtime slika postoji, ali je pod rights review (RUPES): **25** — NISU u missing listi
-- Missing identities (`MISSING_PRODUCT_IMAGES.csv`): **245**
-- USER_SUPPLY (`USER_IMAGE_SUPPLY_QUEUE.csv`): **80**
+- Missing identities (`MISSING_PRODUCT_IMAGES.csv`): **246**
+- USER_SUPPLY (`USER_IMAGE_SUPPLY_QUEUE.csv`): **81**
 - RIGHTS_DECISION + IMPORT_OFFICIAL_IF_APPROVED (`IMAGE_RIGHTS_REVIEW.csv`): **176**
 - Quality queue (`IMAGE_QUALITY_QUEUE.csv`): **521** redova nalaza / **407** identiteta — potvrđeno merenjem **15**, neizmereni kandidati **357**, rendering **64**, asset **50**, ručni pregled **31** (vidi §6)
 - BROKEN_IMAGE_REFERENCE: **0** · WRONG_SIBLING_IMAGE: **0** · NEEDS_MANUAL_REVIEW: **0**
 
 ## 4. Zašto „zapisi na placeholderu” NIJE isto što i „missing image identities”
 
-Runtime ima **316** zapisa čiji je `productImage` placeholder, ali samo **245** placeholder identiteta (i **245** redova u missing listi, jer tu ulazi i 0 Befar redova koji imaju sliku kartice, ali ne svoju).
+Runtime ima **317** zapisa čiji je `productImage` placeholder, ali samo **246** placeholder identiteta (i **246** redova u missing listi, jer tu ulazi i 0 Befar redova koji imaju sliku kartice, ali ne svoju).
 - **baslac:** 171 zapis je na placeholderu, ali 147 su toneri sa `packshotKind: family` — limenke iste linije i iste zapremine dele JEDAN porodični packshot. Potreban je jedan packshot po (linija, pakovanje), ne 147 fotografija.
 - **SATA:** 181 kartica = 181 identitet (791 red artikala deli packshot kartice); razlog nije „nema slike” nego rights gate.
 - **Obrnuto (Befar):** 0 zapisa na placeholderu, ali 7 redova nema svoju sliku dok je drugi redovi iste kartice imaju → 7 missing identiteta koje brojanje zapisa ne vidi.

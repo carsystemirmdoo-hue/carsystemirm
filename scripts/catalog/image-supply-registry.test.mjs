@@ -72,9 +72,18 @@ test("nepotpuno odobrenje u novom obliku je greška", () => {
   assert.equal(lockMetadataErrors({ generatedOn: "28.09.2026", approvedAt: null, approvedBy: null }).length, 1);
 });
 
-test("trenutni lock: generisan, neodobren, stari datum samo kao trag generatora", () => {
+test("trenutni lock: generisan, neodobren, prethodni trag nikad nije odobrenje", () => {
   assert.deepEqual(lockMetadataErrors(lock.metadata), []);
   assert.equal(lock.metadata.approvedAt, null);
   assert.equal(lock.metadata.approvedBy, null);
-  assert.equal(lock.metadata.previousLockMetadata.legacyGeneratorDate, "2026-09-25");
+  // Lanac drži samo JEDAN prethodni korak (istorija je u Gitu), pa se posle svake
+  // regeneracije trag menja; proverava se oblik, ne jedna istorijska vrednost.
+  const previous = lock.metadata.previousLockMetadata;
+  if (!previous) return;
+  if ("legacyGeneratorDate" in previous) {
+    assert.match(previous.interpretation, /nije dokaz ljudskog odobrenja/);
+  } else {
+    assert.match(previous.generatedOn, /^\d{4}-\d{2}-\d{2}$/);
+    assert.equal(Boolean(previous.approvedAt), Boolean(previous.approvedBy), "prethodno odobrenje je potpuno ili ga nema");
+  }
 });

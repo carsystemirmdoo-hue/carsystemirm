@@ -18625,15 +18625,6 @@
   --product-content-offset-y: 0.0633;
 }
 
-.fit[data-product-fit="/products/rm/catalog/rm-h-2rm2-wheel-clear-coat-hardener.webp"] {
-  --product-canvas-aspect: 0.7143;
-  --product-content-aspect: 0.7143;
-  --product-content-fill-x: 1;
-  --product-content-fill-y: 1;
-  --product-content-offset-x: 0;
-  --product-content-offset-y: 0;
-}
-
 .fit[data-product-fit="/products/rm/catalog/rm-h-2rm3-spray-body-harden-r.webp"] {
   --product-canvas-aspect: 0.5917;
   --product-content-aspect: 0.2706;

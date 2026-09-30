@@ -113,9 +113,24 @@ u `public/products/rm/catalog/` — bez hotlinka. **Pozadina se ne uklanja**: R-
 bela ili svetla ambalaža sa belom etiketom, pa bi maska pojela sam proizvod. PNG sa alfa
 kanalom ostaje providan.
 
-Portal isporučuje istu sličicu „Image missing” tamo gde fotografije nema; prepoznaje se
-sadržajno (isti bajtovi na tri ili više zapisa) i ne objavljuje se — zapis ostaje
-`MISSING_OFFICIAL_ASSET` sa placeholderom sajta.
+Portal isporučuje sličicu „Image missing” tamo gde fotografije nema. Prepoznaje se po
+bilo kom od dva dokaza (`scripts/rm-sync/lib/placeholders.mjs`) i ne objavljuje se — zapis
+ostaje `MISSING_OFFICIAL_ASSET` sa placeholderom sajta („Vizuel u pripremi”):
+
+- sadržaj: isti bajtovi na tri ili više zapisa (`Image missing_0.png` na H 2A81, H 2P80, H 2P81);
+- izvorni fajl: portal ga imenuje `Image missing[_N].png`, i to hvata i varijantu koja se
+  pojavljuje na jednom jedinom zapisu.
+
+**H 2RM2 WHEEL CLEAR COAT, HARDENER (2026-09-30).** Jedina slika na portalu je bila
+`Image missing_1.png` (SHA-256 `6aa98ae0…0922`, 200 × 280, natpis „Image missing” na
+engleskom). Pošto se varijanta `_1` javlja samo na tom zapisu, pravilo po sadržaju je nije
+uhvatilo i sajt je grafiku objavio kao fotografiju proizvoda
+(`public/products/rm/catalog/rm-h-2rm2-wheel-clear-coat-hardener.webp`). Slika je odbačena
+jer nije fotografija proizvoda; fajl je uklonjen, zapis ima `image: null` i
+`missingOfficialAsset: true`, a proizvod je u redu za dostavu slike vlasnika
+(`rm__rm-h-2rm2-wheel-clear-coat-hardener`). Zvanične zamene nema (ni na rmpaint.com, ni za
+C 2RM2). `approvedAt` / `approvedBy` u image-supply lock-u ostaju `null` dok stvarna slika ne
+bude dostavljena i odobrena.
 
 ### Boja kartice
 

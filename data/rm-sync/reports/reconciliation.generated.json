@@ -43,7 +43,7 @@
     "websiteOrphans": [
       "822-promotor-de-adherencia"
     ],
-    "missingOfficialAssets": 42,
+    "missingOfficialAssets": 43,
     "runtimeRmProducts": 223
   },
   "ACTIVE_PRODUCT_MISSING": [],
@@ -52,8 +52,8 @@
   "attachedToWrongProduct": [],
   "duplicateProductSlugs": [],
   "images": {
-    "published": 116,
-    "referenced": 116,
+    "published": 115,
+    "referenced": 115,
     "orphanImages": [],
     "duplicateImages": [
       [

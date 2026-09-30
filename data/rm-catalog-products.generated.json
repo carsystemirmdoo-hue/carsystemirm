@@ -8387,14 +8387,8 @@
           "note": "Zvanični dokument na techinfo.rmpaint.com"
         }
       ],
-      "image": {
-        "src": "/products/rm/catalog/rm-h-2rm2-wheel-clear-coat-hardener.webp",
-        "width": 200,
-        "height": 280,
-        "hasAlpha": true,
-        "processing": "source-alpha"
-      },
-      "missingOfficialAsset": false,
+      "image": null,
+      "missingOfficialAsset": true,
       "content": {
         "productType": "Učvršćivač za lak za točkove",
         "subtype": "Učvršćivač · lak za točkove",

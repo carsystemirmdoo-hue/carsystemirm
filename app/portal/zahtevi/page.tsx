@@ -16,9 +16,10 @@ const GROUPS = [
   { key: "closed", title: "Odbijeni, otkazani i vraćeni na ispravku", statuses: ["rejected", "cancelled", "superseded"] },
 ];
 
-export default async function OrderRequestsPage() {
+export default async function OrderRequestsPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const user = await requireCapability("view:zahtevi", "/portal/zahtevi");
-  const [rows, mode] = await Promise.all([listOrderRequests(user), loadOrderingMode()]);
+  const q = ((await searchParams).q ?? "").trim().slice(0, 80);
+  const [rows, mode] = await Promise.all([listOrderRequests(user, null, q), loadOrderingMode()]);
   const canReview = can(user, "customer_orders:review");
 
   return (
@@ -36,6 +37,18 @@ export default async function OrderRequestsPage() {
         <Link href="/portal/zahtevi" aria-current="page">Porudžbine</Link>
         <Link href="/portal/zahtevi/uslovi">Cena i uslovi</Link>
       </nav>
+      <form method="get" className="kk-search" role="search">
+        <input
+          type="search"
+          name="q"
+          defaultValue={q}
+          maxLength={80}
+          placeholder="Broj zahteva, kupac, BizniSoft šifra ili naziv artikla, kataloški naziv"
+          aria-label="Pretraga zahteva"
+        />
+        <button type="submit" className="portal-button" data-variant="secondary">Traži</button>
+        {q ? <Link href="/portal/zahtevi">Poništi</Link> : null}
+      </form>
       <section className="portal-panel">
         <div className="kk-pricelist" data-kind={mode.priceList?.kind ?? "off"}>
           <strong>
@@ -50,7 +63,7 @@ export default async function OrderRequestsPage() {
       </section>
       {GROUPS.map((g) => {
         const list = rows.filter((r) => g.statuses.includes(r.status));
-        if (list.length === 0 && g.key !== "new") return null;
+        if (list.length === 0 && (g.key !== "new" || q)) return null;
         return (
           <section key={g.key} className="portal-panel">
             <div className="portal-section-header">

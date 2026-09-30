@@ -75,7 +75,7 @@ export default async function PriceRequestsPage() {
                     <p>
                       <Link href={`/proizvodi/${r.slug}`}>{r.catalogName}</Link>
                       {r.variantLabel ? ` · varijanta ${r.variantLabel}` : ""}
-                      {r.articleCode ? ` · šifra ${r.articleCode}` : " · bez BizniSoft veze"} · količina {qfmt.format(r.quantity)}
+                      {r.articleCode ? ` · BizniSoft ${r.articleCode} — ${r.articleName}` : " · bez BizniSoft veze"} · količina {qfmt.format(r.quantity)}
                     </p>
                     {r.customerNote ? <p className="kk-fine">Napomena kupca: {r.customerNote}</p> : null}
                     {r.answer ? (

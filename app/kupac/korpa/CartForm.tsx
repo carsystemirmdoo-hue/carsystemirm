@@ -132,10 +132,7 @@ export function CartForm({ view }: { view: CartView }) {
               <span>
                 {l.href ? <Link href={l.href}>{l.name}</Link> : <strong>{l.name}</strong>}
                 {l.variantLabel ? <small>Varijanta: {l.variantLabel}</small> : null}
-                <small>
-                  Šifra {l.articleCode}
-                  {l.name !== l.articleName ? ` · ${l.articleName}` : ""}
-                </small>
+                <small>Šifra {l.articleCode}</small>
                 {l.problem ? <em className="kk-problem">{l.problem} Uklonite stavku da biste poslali zahtev.</em> : null}
                 {l.quantityProblem ? <em className="kk-problem">{l.quantityProblem}</em> : null}
               </span>

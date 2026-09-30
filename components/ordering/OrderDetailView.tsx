@@ -92,8 +92,14 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
                   <Link href={`/proizvodi/${l.catalogSlug}${l.catalogVariantId ? `?varijanta=${encodeURIComponent(l.catalogVariantId)}` : ""}`}>
                     {l.catalogName}
                   </Link>
+                  {l.variantLabel ? <small>Varijanta: {l.variantLabel}</small> : null}
+                  {/*
+                    Kupac vidi kataloški naziv, varijantu, pakovanje i šifru sa svojih
+                    faktura; interni BizniSoft naziv vide samo kancelarija i komercijalisti.
+                  */}
                   <small>
-                    Šifra {l.articleCode} · {l.articleName}
+                    Šifra {l.articleCode}
+                    {audience === "office" ? <> · BizniSoft: {l.articleName}</> : null}
                   </small>
                   {audience === "office" ? <small>Osnov cene: {l.priceBasis}</small> : null}
                 </span>

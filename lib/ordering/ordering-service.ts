@@ -620,6 +620,7 @@ export type OrderDetail = OrderListRow & {
   submittedByName: string;
   lines: {
     lineNumber: number; articleId: string; articleCode: string; articleName: string; catalogSlug: string; catalogVariantId: string | null;
+    variantLabel: string | null;
     catalogName: string; unit: string; packLabel: string; quantity: number; listPrice: number; discountPercent: number;
     netPrice: number; vatPercent: number; lineNet: number; lineVat: number; lineGross: number; priceBasis: string;
   }[];
@@ -677,6 +678,7 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     lines: [...lines].map((l) => ({
       lineNumber: Number(l.line_number), articleId: l.article_id, articleCode: l.article_code, articleName: l.article_name,
       catalogSlug: l.catalog_product_slug, catalogVariantId: l.catalog_variant_id, catalogName: l.catalog_name,
+      variantLabel: variantLabelFor(l.catalog_product_slug, l.catalog_variant_id),
       unit: l.unit, packLabel: l.pack_label, quantity: Number(l.quantity), listPrice: Number(l.list_price),
       discountPercent: Number(l.discount_percent), netPrice: Number(l.net_price), vatPercent: Number(l.vat_percent),
       lineNet: Number(l.line_net), lineVat: Number(l.line_vat), lineGross: Number(l.line_gross), priceBasis: l.price_basis,
@@ -824,10 +826,18 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
  * ------------------------------------------------------------------------ */
 
 /** Zahtevi u opsegu korisnika (komercijalista: samo dodeljeni kupci). */
-export async function listOrderRequests(viewer: PortalUser, status?: string | null): Promise<OrderListRow[]> {
+export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null): Promise<OrderListRow[]> {
   const scope = await resolveLedgerScope(viewer);
   const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
-  return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere}`);
+  // Pretraga po broju, kupcu, BizniSoft šifri/nazivu ili kataloškom nazivu stavke.
+  const q = (query ?? "").trim().slice(0, 80);
+  const term = `%${q.replace(/[\\%_]/g, (m) => `\\${m}`)}%`;
+  const queryWhere = q
+    ? sql`(o.request_number ILIKE ${term} OR coalesce(o.order_number, '') ILIKE ${term} OR c.name ILIKE ${term}
+           OR EXISTS (SELECT 1 FROM customer_order_lines l WHERE l.order_id = o.id
+                       AND (l.article_code ILIKE ${term} OR l.article_name ILIKE ${term} OR l.catalog_name ILIKE ${term})))`
+    : sql`true`;
+  return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere} AND ${queryWhere}`);
 }
 
 export async function loadOrderRequest(viewer: PortalUser, orderId: string): Promise<OrderDetail | null> {
@@ -1049,4 +1059,49 @@ export async function loadCustomerContacts(customerId: string): Promise<Customer
     SELECT u.name, u.email FROM customer_assignments ca JOIN users u ON u.id = ca.user_id
      WHERE ca.customer_id = ${customerId} AND u.active ORDER BY u.name`);
   return { reps: [...rows].map((r) => ({ name: r.name, email: r.email })) };
+}
+
+/* ---------------------------------------------------------------------------
+ * Identitet artikla za interne ekrane: BizniSoft ↔ katalog
+ * ------------------------------------------------------------------------ */
+
+export type ArticleIdentity = {
+  code: string;
+  /** Naziv iz BizniSofta (registar artikala) — za kancelariju i komercijaliste. */
+  bizName: string;
+  mappingStatus: string | null;
+  /** Kataloški proizvod samo uz POTVRĐENU vezu. */
+  catalog: { name: string; href: string; variantLabel: string | null } | null;
+  packLabel: string | null;
+  unit: string | null;
+};
+
+/**
+ * Kako isti artikal izgleda na obe strane. Ne menja ni identitet proizvoda ni
+ * veze — samo ih čita. Predlog veze se prikazuje kao stanje, ne kao proizvod.
+ */
+export async function loadArticleIdentities(codes: string[]): Promise<Map<string, ArticleIdentity>> {
+  const out = new Map<string, ArticleIdentity>();
+  const unique = [...new Set(codes.filter(Boolean))];
+  if (unique.length === 0) return out;
+  const db = getDb();
+  const mode = await loadOrderingMode(db);
+  const rows = await loadArticleRows(db, mode.priceList, sql`a.code IN (${sql.join(unique.map((c) => sql`${c}`), sql`, `)})`);
+  for (const r of rows) {
+    const facts = r.mapping_status === "mapped" ? catalogFacts(r.slug, r.variant) : null;
+    out.set(r.code, {
+      code: r.code,
+      bizName: r.name,
+      mappingStatus: r.mapping_status,
+      catalog: facts?.link ? { name: facts.link.name, href: facts.link.href, variantLabel: facts.link.variantLabel } : null,
+      packLabel: r.pack_label,
+      unit: r.unit,
+    });
+  }
+  return out;
+}
+
+/** Oznaka varijante-reda za prikaz (npr. „P400"), ili `null`. */
+export function variantLabelFor(slug: string, variantId: string | null): string | null {
+  return variantId ? (catalogFacts(slug, variantId).link?.variantLabel ?? null) : null;
 }

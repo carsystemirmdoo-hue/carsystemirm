@@ -8185,3 +8185,9 @@ body:has(.portal-login-root) {
 .kk-reauth input { min-height: 40px; padding: 6px 10px; border: 1px solid var(--p-line); border-radius: 6px; font: inherit; }
 .kk-inline-form { display: flex; margin: 0; padding: 0; border: 0; }
 .kk-step h3 { font-weight: 700; }
+.kk-search { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+.kk-search input { flex: 1 1 320px; min-height: 38px; padding: 6px 10px; border: 1px solid var(--p-line); border-radius: 6px; font: inherit; font-size: 13px; }
+.kk-search a { color: var(--p-red); font-size: 13px; font-weight: 650; }
+.cs-identity { display: block; color: var(--p-muted); font-size: 12px; }
+.cs-identity a { color: var(--p-red); font-weight: 600; text-decoration: none; }
+.cs-identity[data-state="none"] { color: oklch(0.55 0.075 245); }

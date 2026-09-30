@@ -132,6 +132,8 @@ export type PriceRequestRow = {
   catalogName: string;
   variantLabel: string | null;
   articleCode: string | null;
+  /** Naziv iz BizniSofta — samo za interni prikaz. */
+  articleName: string | null;
   quantity: number;
   customerNote: string | null;
   answer: string | null;
@@ -150,13 +152,13 @@ function scopeWhere(scope: LedgerScope): SQL {
 async function listRequests(where: SQL): Promise<PriceRequestRow[]> {
   const rows = await getDb().execute<{
     id: string; request_number: string; kind: string; status: string; customer_id: string; customer_name: string;
-    requested_by_name: string; slug: string; catalog_name: string; variant_label: string | null; article_code: string | null;
+    requested_by_name: string; slug: string; catalog_name: string; variant_label: string | null; article_code: string | null; article_name: string | null;
     quantity: string; customer_note: string | null; answer: string | null; handled_by_name: string | null;
     created_at: Date; answered_at: Date | null; reps: string[] | null;
   }>(sql`
     SELECT r.id, r.request_number, r.kind::text AS kind, r.status::text AS status, r.customer_id, c.name AS customer_name,
            cu.name AS requested_by_name, r.catalog_product_slug AS slug, r.catalog_name, r.variant_label,
-           a.code AS article_code, r.quantity::text AS quantity, r.customer_note, r.answer, u.name AS handled_by_name,
+           a.code AS article_code, a.name AS article_name, r.quantity::text AS quantity, r.customer_note, r.answer, u.name AS handled_by_name,
            r.created_at, r.answered_at,
            (SELECT array_agg(ru.name ORDER BY ru.name) FROM customer_assignments ca JOIN users ru ON ru.id = ca.user_id
              WHERE ca.customer_id = r.customer_id) AS reps
@@ -171,7 +173,7 @@ async function listRequests(where: SQL): Promise<PriceRequestRow[]> {
   return [...rows].map((r) => ({
     id: r.id, requestNumber: r.request_number, kind: r.kind, status: r.status, customerId: r.customer_id,
     customerName: r.customer_name, requestedByName: r.requested_by_name, slug: r.slug, catalogName: r.catalog_name,
-    variantLabel: r.variant_label, articleCode: r.article_code, quantity: Number(r.quantity), customerNote: r.customer_note,
+    variantLabel: r.variant_label, articleCode: r.article_code, articleName: r.article_name, quantity: Number(r.quantity), customerNote: r.customer_note,
     answer: r.answer, handledByName: r.handled_by_name, createdAt: new Date(r.created_at),
     answeredAt: r.answered_at ? new Date(r.answered_at) : null, reps: r.reps ?? [],
   }));

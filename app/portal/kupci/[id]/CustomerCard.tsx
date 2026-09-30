@@ -1,4 +1,5 @@
 import { Badge } from "@/components/portal/PortalPrimitives";
+import type { ArticleIdentity } from "@/lib/ordering/ordering-service";
 import type { CustomerArticle, CustomerProfile } from "@/lib/recommendations/customer-profile";
 import { CONFIDENCE_LABELS, STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
 import { srDate } from "@/lib/recommendations/customerSummary.mjs";
@@ -93,7 +94,33 @@ export function CustomerSummary({
   );
 }
 
-function ArticleRow({ a, asOfDate }: { a: CustomerArticle; asOfDate: string | null }) {
+/**
+ * Artikal onako kako ga zaposleni prepoznaju: šifra i naziv iz BizniSofta, uz
+ * kataloški proizvod, varijantu i pakovanje kada je veza potvrđena. Ništa se
+ * ne povezuje ovde — samo se čita postojeća veza.
+ */
+function CatalogIdentity({ id }: { id: ArticleIdentity | undefined }) {
+  if (!id) return <small className="cs-identity">bez zapisa u registru artikala</small>;
+  if (!id.catalog) {
+    return (
+      <small className="cs-identity" data-state="none">
+        Katalog: {id.mappingStatus === "suggested" ? "samo predlog veze — nije potvrđeno" : "nije povezano"}
+      </small>
+    );
+  }
+  return (
+    <small className="cs-identity">
+      Katalog:{" "}
+      <a href={id.catalog.href} target="_blank" rel="noreferrer">
+        {id.catalog.name}
+      </a>
+      {id.catalog.variantLabel ? ` · ${id.catalog.variantLabel}` : ""}
+      {id.packLabel ? ` · ${id.packLabel}` : ""}
+    </small>
+  );
+}
+
+function ArticleRow({ a, asOfDate, identity }: { a: CustomerArticle; asOfDate: string | null; identity?: ArticleIdentity }) {
   return (
     <details className="cs-article" id={`artikal-${encodeURIComponent(a.articleCode)}`}>
       <summary>
@@ -105,7 +132,8 @@ function ArticleRow({ a, asOfDate }: { a: CustomerArticle; asOfDate: string | nu
         </span>
         <span className="cs-article-name">
           <strong>{a.articleName ?? a.articleCode}</strong>
-          <small>{a.articleCode}</small>
+          <small>BizniSoft {a.articleCode}</small>
+          <CatalogIdentity id={identity} />
         </span>
         <span className="cs-article-fact">
           <small>Poslednja</small>
@@ -167,7 +195,13 @@ function ArticleRow({ a, asOfDate }: { a: CustomerArticle; asOfDate: string | nu
 }
 
 /** Glavna lista: svaki artikal tačno jednom, grupe po važnosti. */
-export function CustomerArticles({ profile }: { profile: CustomerProfile }) {
+export function CustomerArticles({
+  profile,
+  identities = {},
+}: {
+  profile: CustomerProfile;
+  identities?: Record<string, ArticleIdentity>;
+}) {
   if (profile.articles.length === 0) return null;
   return (
     <section className="portal-panel">
@@ -183,7 +217,7 @@ export function CustomerArticles({ profile }: { profile: CustomerProfile }) {
       <div className="portal-panel-body cs-groups">
         {profile.groups.map((g) => {
           const rows = g.items.map((a) => (
-            <ArticleRow key={a.articleCode} a={a as CustomerArticle} asOfDate={profile.asOfDate} />
+            <ArticleRow key={a.articleCode} a={a as CustomerArticle} asOfDate={profile.asOfDate} identity={identities[a.articleCode]} />
           ));
           return g.key === "thin" ? (
             <details key={g.key} className="cs-group cs-group-thin">

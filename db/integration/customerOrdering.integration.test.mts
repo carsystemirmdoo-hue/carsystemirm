@@ -373,3 +373,26 @@ test("isključeno poručivanje i stvarni (nepotvrđen) cenovnik ne dozvoljavaju 
   assert.match((real as { message: string }).message, /nije odobren/);
   await db.sql`UPDATE price_lists SET kind = 'demo' WHERE id = ${listId}`;
 });
+
+test("interni nazivi: BizniSoft ↔ katalog, varijanta na stavci, pretraga po šifri i nazivu", async (t) => {
+  if (guard(t)) return;
+  const ids = await svc.loadArticleIdentities([code("BZ"), code("KIT"), code("TRAKA"), code("P800")]);
+  assert.equal(ids.get(code("BZ"))!.bizName, "QA BZ");
+  assert.equal(ids.get(code("BZ"))!.catalog!.name, "baslac Basecoat 35");
+  assert.equal(ids.get(code("P800"))!.catalog!.variantLabel, "P800");
+  assert.equal(ids.get(code("KIT"))!.mappingStatus, "suggested");
+  assert.equal(ids.get(code("KIT"))!.catalog, null, "predlog nije katalog");
+  assert.equal(ids.get(code("TRAKA"))!.catalog, null);
+
+  const office = await portalUser("office");
+  const byName = await svc.listOrderRequests(office, null, "QA P800");
+  assert.ok(byName.length > 0 && byName.every((o) => o.customerId === firm.a.customerId || o.customerId === firm.b.customerId));
+  const withP800 = await svc.loadOrderRequest(office, byName[0].id);
+  const line = withP800!.lines.find((l) => l.articleCode === code("P800"))!;
+  assert.equal(line.variantLabel, "P800", "stavka nosi čitljivu varijantu");
+  assert.ok((await svc.listOrderRequests(office, null, code("RZ"))).length > 0, "pretraga po BizniSoft šifri");
+  assert.deepEqual(await svc.listOrderRequests(office, null, `nema-${RUN}`), []);
+  // Komercijalista i u pretrazi ostaje u svom opsegu.
+  const rep = await portalUser("rep");
+  assert.ok((await svc.listOrderRequests(rep, null, "QA")).every((o) => o.customerId === firm.a.customerId));
+});

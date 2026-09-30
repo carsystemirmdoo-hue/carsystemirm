@@ -1,3 +1,4 @@
+import { publicSkuOf } from "@/lib/catalog/public-code";
 import type { Metadata } from "next";
 import type {
   CarsystemBrand,
@@ -144,7 +145,7 @@ export function buildProductMetadata({
   const baseDescription =
     product.seoDescription ?? product.shortDescription ?? product.purpose;
   // Javna šifra ima prednost: interni `sku` se ne predstavlja kao šifra proizvođača.
-  const publicCode = product.publicCode ?? product.sku;
+  const publicCode = product.publicCode ?? publicSkuOf(product);
   const productIdentifier = publicCode
     ? `Šifra proizvoda ${publicCode}. `
     : "";

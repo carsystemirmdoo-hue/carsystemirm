@@ -6,6 +6,15 @@ import { RmCampaignStage } from "@/components/rm-brand/RmCampaignStage";
 import { RmProductFamilies } from "@/components/rm-brand/RmProductFamilies";
 import { RmProductImageSlot } from "@/components/rm-brand/RmProductImageSlot";
 import { RmProductSystemGallery } from "@/components/rm-brand/RmProductSystemGallery";
+import { RmRefinityStepMedia } from "@/components/rm-brand/RmRefinityStepMedia";
+import {
+  hasCatalogImage,
+  selectRmGroupProducts,
+} from "@/components/rm-brand/rmBrandSelection";
+import {
+  getRmBrandClassifications,
+  type RmBrandClassifications,
+} from "@/lib/rm-brand-classification";
 import {
   rmAgilisBenefits,
   rmAgilisFeatureProductSlugs,
@@ -17,6 +26,7 @@ import {
   rmProcessSteps,
   rmQuickAccessItems,
   rmRefinityAreas,
+  rmRefinityFlow,
   rmSeries,
 } from "@/components/rm-brand/rmBrandData";
 import type {
@@ -36,14 +46,19 @@ export function RmBrandPage({
   products: CarsystemProduct[];
   programs: ProgramGroup[];
 }) {
+  const classifications = getRmBrandClassifications(products);
+
   return (
     <RmAtmosphereShell>
       <main>
         <RmCampaignStage />
         <RmQuickAccess />
         <RmProcessFlow products={products} />
-        <RmProductSystemGallery products={products} />
-        <RmAgilisFeature products={products} />
+        <RmProductSystemGallery
+          classifications={classifications}
+          products={products}
+        />
+        <RmAgilisFeature classifications={classifications} products={products} />
         <div
           className={styles.refinityTransitionZone}
           data-rm-atmosphere-zone="refinity"
@@ -52,9 +67,9 @@ export function RmBrandPage({
           <RmRefinitySection />
         </div>
         <RmProductSeries products={products} />
-        <RmColorSystems products={products} />
+        <RmColorSystems classifications={classifications} products={products} />
         <RmCompatibleBrands />
-        <RmProductFamilies products={products} />
+        <RmProductFamilies classifications={classifications} products={products} />
         <RmEditorialProofs />
         <RmFinalCta />
       </main>
@@ -139,8 +154,10 @@ function RmProcessFlow({ products }: { products: CarsystemProduct[] }) {
 }
 
 function RmAgilisFeature({
+  classifications,
   products,
 }: {
+  classifications: RmBrandClassifications;
   products: CarsystemProduct[];
 }) {
   const agilisProducts = rmAgilisFeatureProductSlugs
@@ -151,10 +168,11 @@ function RmAgilisFeature({
     ...agilisProducts.slice(0, 4).map((product) => ({
       asset: product.productImage,
       feature:
-        product.rmMetadata?.technology?.replaceAll("-", " ").toUpperCase() ||
+        classifications[product.slug]?.technology?.replaceAll("-", " ").toUpperCase() ||
         "WATERBORNE",
-      group: product.rmMetadata
-        ? getRmCategoryLabel(product.rmMetadata.category)
+      group: classifications[product.slug]
+        ? (classifications[product.slug].categoryLabel ??
+          getRmCategoryLabel(classifications[product.slug].category))
         : "R-M proizvod",
       href: `/proizvodi/${product.slug}`,
       name: product.name,
@@ -261,8 +279,6 @@ function RmAgilisFeature({
 }
 
 function RmRefinitySection() {
-  const flow = ["Vozilo", "ScanR", "Refinity formula", "Automatsko mešanje", "Spremna boja"];
-
   return (
     <section
       id="refinity"
@@ -283,10 +299,11 @@ function RmRefinitySection() {
       </div>
 
       <ol className={styles.refinityFlow} aria-label="Refinity tok">
-        {flow.map((step, index) => (
-          <li key={step}>
+        {rmRefinityFlow.map((step, index) => (
+          <li key={step.title}>
+            <RmRefinityStepMedia image={step.image} />
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{step}</strong>
+            <strong>{step.title}</strong>
           </li>
         ))}
       </ol>
@@ -354,6 +371,7 @@ function RmProductSeries({ products }: { products: CarsystemProduct[] }) {
 
       <div className={styles.seriesLayout}>
         {rmSeries.map((series, index) => {
+          // Broj i link vode na katalog filter serije, pa prate `rmMetadata` kataloga.
           const count = products.filter(
             (product) => product.rmMetadata?.series === series.series,
           ).length;
@@ -391,7 +409,13 @@ function RmProductSeries({ products }: { products: CarsystemProduct[] }) {
   );
 }
 
-function RmColorSystems({ products }: { products: CarsystemProduct[] }) {
+function RmColorSystems({
+  classifications,
+  products,
+}: {
+  classifications: RmBrandClassifications;
+  products: CarsystemProduct[];
+}) {
   return (
     <section
       className={`${styles.rmSection} ${styles.colorSystemsSection}`}
@@ -410,25 +434,25 @@ function RmColorSystems({ products }: { products: CarsystemProduct[] }) {
 
       <div className={styles.colorSystemsMosaic}>
         {rmColorSystems.map((system, index) => {
-          const catalogSystemProducts = products.filter(
+          // Link „Otvorite proizvode” vodi na katalog filter, pa prati ono što filter zaista vraća
+          // (`rmMetadata` kataloga); vizuali koriste klasifikaciju brend stranice.
+          const hasProducts = products.some(
             (product) => product.rmMetadata?.system === system.system,
           );
-          const systemProducts = system.productSlugs
-            ? system.productSlugs
-                .map((slug) => products.find((product) => product.slug === slug))
-                .filter((product): product is CarsystemProduct => Boolean(product))
-            : catalogSystemProducts;
-          const count = catalogSystemProducts.length;
-          const hasProducts = count > 0;
           const visualCount = index === 0 ? 4 : 3;
+          const systemProducts = selectRmGroupProducts({
+            limit: visualCount,
+            members: products.filter(
+              (product) => classifications[product.slug]?.system === system.system,
+            ),
+            pinnedSlugs: system.productSlugs,
+            pool: products,
+          });
           const visualItems = Array.from({ length: visualCount }, (_, itemIndex) => {
             const product = systemProducts[itemIndex];
             const stage = system.stages[itemIndex % system.stages.length];
             const asset =
-              product?.productImage?.src &&
-              !product.productImage.src.endsWith("placeholder-product.svg")
-                ? product.productImage
-                : null;
+              product && hasCatalogImage(product) ? product.productImage : null;
 
             return {
               asset,

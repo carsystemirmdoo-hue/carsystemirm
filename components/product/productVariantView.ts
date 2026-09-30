@@ -1,3 +1,4 @@
+import { publicSkuOf } from "@/lib/catalog/public-code";
 import "server-only";
 
 import type { CSSProperties } from "react";
@@ -150,7 +151,7 @@ export function toProductVariantView(
     id: product.variantId ?? product.slug,
     slug: product.slug,
     name: product.name,
-    sku: product.catalogMetadata?.cosmosCode ?? product.sku ?? null,
+    sku: product.catalogMetadata?.cosmosCode ?? publicSkuOf(product),
     shadeLabel: resolveShadeLabel(product),
     ralLabel: resolveRalLabel(product),
     shortDescription: product.shortDescription,

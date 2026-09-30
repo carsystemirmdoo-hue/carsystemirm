@@ -289,6 +289,120 @@
   object-position: center right;
 }
 
+/*
+ * Sezonski slajd (Nova godina / Vaskrs). Dekoracija je čisto CSS i drži se
+ * desne zone vizuala, pa tekst, CTA i kontrole ostaju na mirnoj podlozi.
+ * Kada postoji odobren vizual, `data-has-image` ga prikazuje kao karticu u
+ * istoj desnoj zoni (vidi niže).
+ */
+.campaignSlide[data-visual="seasonal"][data-season="winter"] {
+  background:
+    radial-gradient(circle at 74% 44%, rgb(217 184 114 / 0.2), transparent 44%),
+    linear-gradient(114deg, var(--baslac-campaign-surface-deep), #13202e 74%);
+}
+
+.campaignSlide[data-visual="seasonal"][data-season="spring"] {
+  background:
+    radial-gradient(circle at 74% 44%, rgb(143 211 168 / 0.18), transparent 46%),
+    linear-gradient(114deg, var(--baslac-campaign-surface-deep), #10231f 74%);
+}
+
+.campaignVisual[data-visual="seasonal"] {
+  z-index: 3;
+  inset: clamp(4rem, 8vh, 5.5rem) var(--baslac-campaign-inline)
+    clamp(6.5rem, 12vh, 8rem) auto;
+  width: min(40%, 30rem);
+  pointer-events: none;
+}
+
+.campaignVisual[data-visual="seasonal"]::before,
+.campaignVisual[data-visual="seasonal"]::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+/* Zima: retke iskre i dva tanka prstena, bez figurativnih motiva. */
+.campaignVisual[data-season="winter"]::before {
+  inset: 0;
+  background:
+    radial-gradient(circle, rgb(244 230 196 / 0.9) 0 1.2px, transparent 1.6px) 0 0 / 5.5rem 5.5rem,
+    radial-gradient(circle, rgb(244 230 196 / 0.55) 0 0.9px, transparent 1.3px) 2.7rem 3.1rem / 7rem 7rem,
+    radial-gradient(circle, rgb(217 184 114 / 0.7) 0 1.6px, transparent 2px) 4.1rem 1.3rem / 9.5rem 9.5rem;
+  mask-image: radial-gradient(circle at 55% 50%, #000 0 34%, transparent 70%);
+  opacity: 0.8;
+}
+
+.campaignVisual[data-season="winter"]::after {
+  top: 50%;
+  left: 55%;
+  width: min(22rem, 78%);
+  aspect-ratio: 1;
+  border: 1px solid rgb(217 184 114 / 0.4);
+  border-radius: 50%;
+  outline: 1px solid rgb(217 184 114 / 0.16);
+  outline-offset: 1.4rem;
+  box-shadow: 0 0 6rem rgb(217 184 114 / 0.1) inset;
+  transform: translate(-50%, -50%);
+}
+
+/* Proleće: meka ovalna forma i nekoliko tačaka, u tonovima baslac cijana. */
+.campaignVisual[data-season="spring"]::before {
+  inset: 0;
+  background:
+    radial-gradient(circle, rgb(190 236 205 / 0.75) 0 1.4px, transparent 1.8px) 1rem 2rem / 8rem 8rem,
+    radial-gradient(circle, rgb(41 163 220 / 0.6) 0 1.2px, transparent 1.6px) 3.5rem 0.5rem / 6.5rem 6.5rem;
+  mask-image: radial-gradient(circle at 55% 50%, #000 0 30%, transparent 68%);
+  opacity: 0.7;
+}
+
+.campaignVisual[data-season="spring"]::after {
+  top: 50%;
+  left: 55%;
+  width: min(15rem, 56%);
+  aspect-ratio: 4 / 5.2;
+  border: 1px solid rgb(190 236 205 / 0.45);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background:
+    radial-gradient(circle at 38% 30%, rgb(236 250 241 / 0.2), transparent 55%),
+    linear-gradient(160deg, rgb(143 211 168 / 0.16), rgb(41 163 220 / 0.08));
+  box-shadow: 0 1.8rem 5rem rgb(143 211 168 / 0.12);
+  transform: translate(-50%, -50%) rotate(-8deg);
+}
+
+/*
+ * Sezonski vizual sa portala je kvadratna social ilustracija. Ne razvlači se
+ * preko celog slajda (tekst bi pao preko motiva), nego stoji kao kartica u
+ * istoj desnoj zoni koju inače zauzima CSS dekoracija.
+ */
+.campaignVisual[data-visual="seasonal"][data-has-image]::before,
+.campaignVisual[data-visual="seasonal"][data-has-image]::after {
+  display: none;
+}
+
+.campaignVisual[data-visual="seasonal"] picture {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.campaignVisual[data-visual="seasonal"] img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border: 1px solid rgb(244 248 249 / 0.14);
+  border-radius: 0.5rem;
+  box-shadow: 0 2rem 4.5rem rgb(0 0 0 / 0.42);
+}
+
+.campaignSlide[data-visual="seasonal"] .campaignEyebrow::before {
+  background: var(--campaign-progress-color, var(--baslac-campaign-cyan));
+}
+
 /* --- Wipe tranzicija ---------------------------------------------------- */
 
 .campaignWipe {
@@ -383,11 +497,17 @@
   background: rgb(41 163 220 / 0.34);
 }
 
+/*
+ * Jedan red za bilo koji broj slajdova: sezonski slajd dodaje kolonu umesto
+ * novog reda, pa kontrole ne menjaju visinu kada se kampanja uključi.
+ * Širina kolone je ista kao u ranijem rasporedu (dve kolone u 26rem sa
+ * razmakom 0.75rem), pa standardna paginacija ostaje piksel-identična.
+ */
 .campaignPagination {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-columns: minmax(0, calc((26rem - 0.75rem) / 2));
+  grid-auto-flow: column;
   gap: 0.75rem;
-  max-width: 26rem;
 }
 
 .campaignPagination button {
@@ -1747,7 +1867,8 @@
   }
 
   .repairRhythmGrid {
-    grid-template-columns: 1fr;
+    /* `minmax(0, …)`: kolona ne sme da se raširi na min-content panela. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .repairRhythmPanel {
@@ -2036,7 +2157,9 @@
    * Ista `aspect-ratio` za oba slajda cuva stabilnu visinu heroja.
    */
   .campaignVisual,
-  .campaignVisual[data-visual="artwork"] {
+  .campaignVisual[data-visual="artwork"],
+  .campaignVisual[data-visual="seasonal"],
+  .campaignVisual[data-visual="seasonal"][data-has-image] {
     position: relative;
     inset: auto;
     z-index: 1;
@@ -2052,6 +2175,28 @@
 
   .campaignVisual[data-visual="artwork"] img {
     object-position: right center;
+  }
+
+  .campaignVisual[data-season="winter"]::after {
+    left: 50%;
+    width: min(13rem, 52vw);
+  }
+
+  .campaignVisual[data-season="spring"]::after {
+    left: 50%;
+    width: min(9.5rem, 38vw);
+  }
+
+  .campaignVisual[data-visual="seasonal"]::before {
+    mask-image: radial-gradient(circle at 50% 50%, #000 0 30%, transparent 62%);
+  }
+
+  .campaignVisual[data-visual="seasonal"][data-has-image] {
+    padding-block: 0.75rem;
+  }
+
+  .campaignVisual[data-visual="seasonal"][data-has-image] picture {
+    inset: 0.75rem 0;
   }
 
   .campaignVisual[data-visual="photo"] picture,
@@ -2509,6 +2654,16 @@
   height: auto;
   max-height: 17rem;
   object-fit: contain;
+}
+
+/*
+ * Primer ambalaže je zvanični packshot na originalnoj beloj podlozi (bez
+ * izdvajanja alfe), pa dobija belu pločicu u obe teme umesto „rupe“.
+ */
+.familyPackshot[data-kind="example"] img {
+  padding: 0.6rem;
+  border-radius: 0.35rem;
+  background: #fff;
 }
 
 .familyPackshot figcaption,

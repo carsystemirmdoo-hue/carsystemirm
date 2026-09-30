@@ -5,7 +5,8 @@
   "provenanceModel": {
     "_comment": "Tri polja po slici, sa vrednostima koje već postoje u modelu manifesta (`official_image_rights_status`). Ništa se ne tvrdi bez dokaza: `OFFICIAL_MANUFACTURER_IMAGE` se NE koristi jer dokaz o poreklu od proizvođača ne postoji.",
     "sourceBasis": {
-      "OWNER_SUPPLIED": "Fajl je dostavio vlasnik. Činjenica o predaji, ne tvrdnja o autorstvu ni o pravu objave."
+      "OWNER_SUPPLIED": "Fajl je dostavio vlasnik. Činjenica o predaji, ne tvrdnja o autorstvu ni o pravu objave.",
+      "SUPPLIER_BRAND_PORTAL": "Zvanični original preuzet dugmetom „Download original” sa brend portala dobavljača (Surventis Brand Portal), uz izričitu dozvolu vlasnika da se materijal koristi na sajtu. ID asseta i originalni naziv fajla su zapisani u `sourceDetail`."
     },
     "processing": {
       "UNDECLARED": "Vlasnik nije izjavio šta je rađeno nad konkretnim fajlom.",
@@ -263,6 +264,37 @@
       "processing": "UNDECLARED",
       "rightsBasis": "OWNER_CONFIRMED",
       "brandRightsGate": "SATA: APPROVED_RUNTIME_IMAGES = 0. Izvor za ovu porodicu NE objavljuje sliku (OFFICIAL_IMAGE_NOT_PUBLISHED), pa fajl nije mogao nastati preuzimanjem sa stranice proizvoda. Vlasnik je 2026-09-24 potvrdio poreklo i pravo javne objave; slika i dalje NIJE OFFICIAL_MANUFACTURER_IMAGE jer dokaz o poreklu od proizvođača ne postoji."
+    },
+    {
+      "imageId": "rm__rm-uno-hd",
+      "brand": "rm",
+      "scope": "CARD",
+      "slug": "rm-uno-hd",
+      "path": "/products/rm/supplied/rm__rm-uno-hd.webp",
+      "sha256": "d1f549dbe42ffbbab8acf8ca2d361c1d43b0e0827d04daf90f8843009547812e",
+      "width": 1800,
+      "height": 1800,
+      "alt": "R-M UNO HD sistem boja – zvanična ambalaža",
+      "sourceFile": "R-M_1L_UNO HD.png",
+      "sourceSha256": "6e708382e878cf746844a15bc3f139881c95791b119002106da379160a118d51",
+      "sourceBasis": "SUPPLIER_BRAND_PORTAL",
+      "processing": "NONE",
+      "rightsBasis": "OWNER_CONFIRMED",
+      "batch": "SUPPLIER_PORTAL_RM_2026-09",
+      "sourceDetail": {
+        "portal": "Surventis Brand Portal — R-M hub 51, Media Library (document 392)",
+        "portalUrl": "https://brand.surventiscoatings.com/hub/51",
+        "assetId": 30820,
+        "assetTitle": "R-M_1L_UNO HD",
+        "originalFile": "R-M_1L_UNO HD.png",
+        "collection": "All R-M Packshots",
+        "duplicateAssetId": 34853,
+        "downloadedOn": "2026-09-28",
+        "downloadMethod": "Zvanično dugme portala „Download” → „Download original” (ne CDN pregled)",
+        "ownerPermission": "Vlasnik je 2026-09-28 u razgovoru potvrdio dozvolu dobavljača za upotrebu zvaničnih R-M materijala na sajtu.",
+        "identityEvidence": "Generička sistemska limenka „UNO HD“ bez šifre nijanse (etiketa: samo naziv sistema), za sistemski zapis bez šifre `rm-uno-hd` (CURRENT_WEBSITE_ONLY_SYSTEM). Ne predstavlja nijednu UNO HD stavku (SC T2A203 i dr.) pojedinačno.",
+        "processingMethod": "PNG → WebP (kvalitet 92, alfa očuvana), bez skaliranja i bez izmene sadržaja; lossless WebP je bio >450 KB."
+      }
     }
   ]
 }

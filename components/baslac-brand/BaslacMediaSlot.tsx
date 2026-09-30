@@ -42,7 +42,9 @@ export function BaslacMediaSlot({
       {hasDesktopAsset ? (
         <picture>
           {hasMobileAsset ? (
-            <source media="(max-width: 47.99rem)" srcSet={media.mobileSrc} />
+            // Ista prelomna tačka kao `--baslac-media-mobile-ratio` u CSS-u,
+            // da mobilni kadar nikad ne stoji u desktop proporciji okvira.
+            <source media="(max-width: 36rem)" srcSet={media.mobileSrc} />
           ) : null}
           <img
             src={media.desktopSrc}

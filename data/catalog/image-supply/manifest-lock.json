@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
-  "createdFromMainSha": "e679765ac5146e768cc94ecf56bbc5b3e5fdbec7",
+  "createdFromMainSha": "96bf57f2a234b0758afdd3fb78b99569d416140c",
   "catalogIdentityFingerprint": "0a18053cf28c25d1e7d11aff6405fd7a77a07a8a34c9fac1010b45b104553bcf",
   "activeBrands": [
     "baslac",
@@ -27,29 +27,29 @@
     "sata": 155
   },
   "totalImageIdentities": 1801,
-  "missingCount": 246,
-  "userSupplyCount": 81,
+  "missingCount": 245,
+  "userSupplyCount": 80,
   "rightsReviewCount": 176,
   "userSupplyByBrand": {
     "baslac": 34,
     "norbin": 10,
-    "rm": 36,
+    "rm": 35,
     "sata": 1
   },
   "missingByAction": {
     "IMPORT_OFFICIAL_IF_APPROVED": 11,
     "KEEP_PLACEHOLDER": 14,
     "RIGHTS_DECISION": 140,
-    "USER_SUPPLY": 81
+    "USER_SUPPLY": 80
   },
   "manifests": {
     "MISSING_PRODUCT_IMAGES.csv": {
-      "sha256": "a8d71707d9c7f3d7e11f397f834d7abe0e4c2bc895acc1e5c1a5204514b91b10",
-      "rows": 246
+      "sha256": "ae8bfac8e71e4867e6960b7bcfdd9ba72013108663cfb370711c876df60e23d4",
+      "rows": 245
     },
     "USER_IMAGE_SUPPLY_QUEUE.csv": {
-      "sha256": "63ff0d5b0f36e007f3576513d322cc61ac32715889423e80c7e4f80c04494fd5",
-      "rows": 81
+      "sha256": "174f48fa8625c42ad66b94c6cf6b7223bc962c89d4c67ef8e9af7ffda2fddeae",
+      "rows": 80
     },
     "IMAGE_RIGHTS_REVIEW.csv": {
       "sha256": "529e2101a3b624dcc0b865660c0e7f39c5cff726b71c995508c5a3e03b694ab7",
@@ -58,7 +58,7 @@
   },
   "imageIdentityInventory": {
     "tracked": false,
-    "sha256": "f8f1d1afcc670eb37d2f75f06e497dea33a07f283ddb602eadb58de38b2d72e2",
+    "sha256": "d29a4b7b7a27e91d155b7cfb58521e29ab43170dbb4aa2c0181bb83914489001",
     "imageIdentityFingerprint": "97457124129710822279ae108b43a08b3e3b4747457fd3802fcfd1c93d975dfb",
     "brokenReferences": 0,
     "wrongSibling": 0,
@@ -78,7 +78,15 @@
     "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
-    "approvedAt": "2026-09-25",
-    "note": "approvedAt je samo metapodatak; nije deo identiteta manifesta"
+    "generatedOn": "2026-09-28",
+    "approvedAt": null,
+    "approvedBy": null,
+    "previousLockMetadata": {
+      "legacyGeneratorDate": "2026-09-25",
+      "legacyNote": "approvedAt je samo metapodatak; nije deo identiteta manifesta",
+      "interpretation": "Stari oblik lock-a: datum je upisao generator; nije dokaz ljudskog odobrenja.",
+      "createdFromMainSha": "e679765ac5146e768cc94ecf56bbc5b3e5fdbec7"
+    },
+    "note": "generatedOn = datum kada je generator zapisao ovaj sadržaj. approvedAt i approvedBy upisuje čovek tek posle pregleda; generator ih ne popunjava (null = nije odobreno). Metapodaci nisu deo identiteta manifesta."
   }
 }

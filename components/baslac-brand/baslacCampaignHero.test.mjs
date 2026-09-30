@@ -14,7 +14,7 @@ test("Baslac hero koristi deljeni carousel hook, bez paralelnog sistema", async 
     source,
     /import \{ useBrandCampaignCarousel \} from "@\/components\/motion\/useBrandCampaignCarousel";/,
   );
-  assert.match(source, /slideCount: baslacCampaignSlides\.length/);
+  assert.match(source, /slideCount: slides\.length/);
   assert.doesNotMatch(source, /setInterval|setTimeout\(/);
   assert.doesNotMatch(source, /visibilitychange|addEventListener/);
 });
@@ -91,5 +91,35 @@ test("hero visina je stabilna izmedju slajdova", async () => {
   assert.match(
     css,
     /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.campaignWipe \{\s*display: none;/,
+  );
+});
+
+test("sezonski slajd dolazi iz centralne konfiguracije, iza prvog brend slajda", async () => {
+  const hero = await readFile(heroUrl, "utf8");
+  const seasonal = await readFile(new URL("./baslacSeasonal.ts", import.meta.url), "utf8");
+
+  // Jedan izvor istine: hook nad `lib/seasonal`, bez datuma upisanih u komponentu.
+  assert.match(hero, /useSeasonalCampaign\(\)/);
+  assert.match(hero, /withBaslacSeasonalSlide\(baslacCampaignSlides, seasonal\)/);
+  assert.doesNotMatch(hero, /new Date\(|getMonth|"12-15"|Vaskrs/);
+  assert.match(seasonal, /BASLAC_SEASONAL_SLIDE_INDEX = 1;/);
+
+  // Sezonska slika nije LCP kandidat i ima bezbedan pad na dekoraciju.
+  const visual = hero.slice(hero.indexOf("function BaslacSeasonalVisual"));
+  assert.match(visual, /loading="lazy"/);
+  assert.doesNotMatch(visual, /fetchPriority="high"/);
+  assert.match(visual, /onError=\{\(\) => setFailed\(true\)\}/);
+});
+
+test("sezonski vizual ne zauzima zonu teksta i prati mobilni raspored", async () => {
+  const css = await readFile(cssUrl, "utf8");
+
+  assert.match(
+    css,
+    /\.campaignVisual\[data-visual="seasonal"\] \{[^}]*width: min\(40%, 30rem\);[^}]*pointer-events: none;/,
+  );
+  assert.match(
+    css,
+    /\.campaignVisual\[data-visual="seasonal"\],\s*\.campaignVisual\[data-visual="seasonal"\]\[data-has-image\] \{\s*position: relative;/,
   );
 });

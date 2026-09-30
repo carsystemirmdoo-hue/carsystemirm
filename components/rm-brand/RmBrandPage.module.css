@@ -1652,6 +1652,30 @@
   border-right: 1px solid oklch(0.92 0.02 230 / 0.14);
 }
 
+/*
+ * Fotografija koraka (Surventis Brand Portal, `docs/RM_PORTAL_ASSETS.md`).
+ * Fiksan odnos 4:5 čuva visinu pločice pre učitavanja, pa nema pomeranja.
+ */
+.refinityFlowMedia {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  margin: -1rem -1rem 1rem;
+  background: oklch(0.08 0.018 246);
+}
+
+.refinityFlowMedia img {
+  object-fit: cover;
+}
+
+.refinityFlowMedia::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, oklch(0.12 0.022 240 / 0.55), transparent 42%);
+  content: "";
+  pointer-events: none;
+}
+
 .refinityFlow li span {
   color: var(--rm-spectrum);
   font-family: var(--font-technical), monospace;
@@ -3598,6 +3622,18 @@
 
   .refinityFlow li:last-child {
     border-bottom: 1px solid oklch(0.92 0.02 230 / 0.14);
+  }
+
+  /* Na mobilnom je korak red: broj, naziv, pa mala fotografija desno. */
+  .refinityFlow li {
+    grid-template-columns: 2.5rem 1fr 4.5rem;
+  }
+
+  .refinityFlowMedia {
+    grid-row: 1;
+    grid-column: 3;
+    width: 4.5rem;
+    margin: -0.4rem 0;
   }
 
   .refinityAreas {

@@ -462,6 +462,8 @@ export const rmColorSystems: RmColorSystemData[] = [
     technology: "2K direktni sjaj",
     description:
       "Rešenje za pune nijanse i direktan završni sjaj u profesionalnom procesu.",
+    // Sistemski zapis kataloga; slika dolazi iz kataloga (`supplied-images.json`).
+    productSlugs: ["rm-uno-hd"],
     stages: ["Priprema", "Prajmer", "UNO HD"],
     benefit: "Puna nijansa i direktni završni sjaj",
   },
@@ -670,8 +672,9 @@ export const rmGallerySystems: RmGallerySystemData[] = [
     label: "UNO HD",
     technology: "2K DIRECT GLOSS",
     description:
-      "Direktni sjaj i prateće procesne grupe predstavljeni bez izmišljanja konkretnih artikala.",
+      "Direktni sjaj i prateće procesne grupe; prikazani su samo artikli koje R-M katalog vodi u UNO HD sistemu.",
     catalogHref: rmCatalogHref({ system: "uno-hd" }),
+    productSlugs: ["rm-uno-hd"],
     inquiryHref: "/kontakt?tema=proizvod&brend=rm&sistem=uno-hd",
     slots: [
       {
@@ -1168,6 +1171,52 @@ export const rmAgilisFeatureProductSlugs = [
   "c-2p42-race-finish-r",
   "ra-050x-agilis-mix",
 ] as const;
+
+export type RmRefinityFlowStep = {
+  title: string;
+  /** Zvanična fotografija sa Surventis Brand Portala (hub 51); poreklo u `docs/RM_PORTAL_ASSETS.md`. */
+  image: { src: string; alt: string };
+};
+
+const RM_REFINITY_DIR = "/images/brands/rm/refinity";
+
+export const rmRefinityFlow: RmRefinityFlowStep[] = [
+  {
+    title: "Vozilo",
+    image: {
+      src: `${RM_REFINITY_DIR}/rm-refinity-step-01-vehicle.webp`,
+      alt: "Lakirani prednji blatobran i vrata srebrnog vozila",
+    },
+  },
+  {
+    title: "ScanR",
+    image: {
+      src: `${RM_REFINITY_DIR}/rm-refinity-step-02-scanr.webp`,
+      alt: "Ruke u zaštitnim rukavicama drže R-M ScanR spektrofotometar na tamnoplavom laku haube",
+    },
+  },
+  {
+    title: "Refinity formula",
+    image: {
+      src: `${RM_REFINITY_DIR}/rm-refinity-step-03-formula.webp`,
+      alt: "Tehničar bira formulu na ekranu R-M Refinity mešaone, pored vage i polica sa tonerima",
+    },
+  },
+  {
+    title: "Automatsko mešanje",
+    image: {
+      src: `${RM_REFINITY_DIR}/rm-refinity-step-04-mixing.webp`,
+      alt: "R-M automatska mašina za mešanje boje sa oznakama R-M i Refinity",
+    },
+  },
+  {
+    title: "Spremna boja",
+    image: {
+      src: `${RM_REFINITY_DIR}/rm-refinity-step-05-result.webp`,
+      alt: "Lakiran tamnoplavi panel na stalku, na otvorenom",
+    },
+  },
+];
 
 export const rmRefinityAreas = [
   "Digitalna pretraga nijanse",

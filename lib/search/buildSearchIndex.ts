@@ -306,7 +306,8 @@ function standaloneRecord(
   const derived = derivedTokens([
     entity.name,
     brandName,
-    entity.productCode,
+    // Interni `sku` ostaje pretraživ i kada se ne prikazuje kao šifra (`publicSkuOf`).
+    entity.productCode || product?.sku,
     entity.technicalLine,
   ]);
 
@@ -317,7 +318,7 @@ function standaloneRecord(
     name: entity.name,
     brandSlug: entity.brandSlug,
     brandName,
-    productCode: entity.productCode,
+    productCode: entity.productCode || undefined,
     categorySlugs: entity.categorySlugs.length ? entity.categorySlugs : undefined,
     technicalLine: entity.technicalLine || undefined,
     quantityLabel: entity.presentation.quantityLabel ?? undefined,
@@ -336,7 +337,7 @@ function variantRecord(
   const derived = derivedTokens([
     entity.name,
     brandName,
-    entity.productCode,
+    entity.productCode || product.sku,
     entity.technicalLine,
     family.name,
   ]);
@@ -349,7 +350,7 @@ function variantRecord(
     name: entity.name,
     brandSlug: entity.brandSlug,
     brandName,
-    productCode: entity.productCode,
+    productCode: entity.productCode || undefined,
     categorySlugs: entity.categorySlugs.length ? entity.categorySlugs : undefined,
     technicalLine: entity.technicalLine || undefined,
     quantityLabel: entity.presentation.quantityLabel ?? undefined,

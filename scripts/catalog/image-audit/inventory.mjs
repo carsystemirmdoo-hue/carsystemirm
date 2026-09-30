@@ -161,7 +161,7 @@ function classify(identity) {
   }
 
   const supplied = suppliedByPath.get(src);
-  if (supplied) return { ...out, provenance: `owner-supplied:${suppliedBatch} (obrada: ${supplied.processing ?? "UNDECLARED"})`, official: "N/A (slika vlasnika)", rights: supplied.rightsBasis ?? "OWNER_CONFIRMATION_REQUIRED", classification: "OWNER_SUPPLIED_IMAGE", action: "NONE", priority: "" };
+  if (supplied) return { ...out, provenance: `${supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? "supplier-portal" : "owner-supplied"}:${supplied.batch ?? suppliedBatch} (obrada: ${supplied.processing ?? "UNDECLARED"})`, official: supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? `zvanični portal dobavljača (asset ${supplied.sourceDetail?.assetId ?? "?"})` : "N/A (slika vlasnika)", rights: supplied.rightsBasis ?? "OWNER_CONFIRMATION_REQUIRED", classification: "OWNER_SUPPLIED_IMAGE", action: "NONE", priority: "" };
 
   /* SATA — rights gate: nijedna slika ne ulazi u runtime; dostupnost je samo činjenica o izvoru. */
   if (brand === "sata") {

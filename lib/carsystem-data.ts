@@ -1,3 +1,4 @@
+import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
 import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
@@ -290,6 +291,14 @@ export type CarsystemProduct = {
   shortDescription: string;
   longDescription: string;
   sku: string;
+  /**
+   * `true` = izvor izričito potvrđuje da zapis nema zvaničnu šifru proizvođača (R-M sistem objavljen
+   * samo na sajtu, Baslac sistemska baza bez oznake), pa je `sku` samo interni ključ. Nijedan javni
+   * prikaz ga ne predstavlja kao šifru (kartica, pretraga, PDP, SEO opis, JSON-LD) — pravilo je
+   * `publicSkuOf` u `lib/catalog/public-code.ts`. Rute, `?varijanta=`, korpa i veze ga i dalje koriste.
+   * Postavlja ga adapter izvora; izostavljeno = `sku` je javna šifra, kao do sada.
+   */
+  skuIsInternalOnly?: boolean;
   packages: ProductPackage[];
   purpose: string;
   badges: string[];
@@ -2460,11 +2469,28 @@ const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => 
  *   FAMILY         — jedna slika serije: lice porodice i zapisi koji nose `packshotKind: family`.
  *                    Tako 69 tonera deli jedan fajl umesto da se prave 69 kopija iste slike.
  */
-const suppliedByRecord = new Map(suppliedImages.images.filter((entry) => !("rowId" in entry)).map((entry) => [entry.slug, entry]));
-const suppliedByRow = new Map(suppliedImages.images.filter((entry) => "rowId" in entry).map((entry) => [`${entry.slug} ${(entry as { rowId: string }).rowId}`, entry]));
+/** Vrednosti porekla definisane u `provenanceModel` registra (proverava `catalog:image-supply:check`). */
+export type SuppliedImageSourceBasis = "OWNER_SUPPLIED" | "SUPPLIER_BRAND_PORTAL";
+
+type SuppliedImageEntry = {
+  imageId: string;
+  brand: string;
+  scope: "CARD" | "VARIANT" | "ARTICLE" | "FAMILY";
+  slug: string;
+  rowId?: string;
+  sharedAcrossFamily?: string;
+  path: string;
+  sourceBasis: SuppliedImageSourceBasis;
+  /** Opis konkretne slike; bez njega ostaje alt zapisa. */
+  alt?: string;
+};
+
+const suppliedEntries = suppliedImages.images as SuppliedImageEntry[];
+const suppliedByRecord = new Map(suppliedEntries.filter((entry) => !entry.rowId).map((entry) => [entry.slug, entry]));
+const suppliedByRow = new Map(suppliedEntries.filter((entry) => entry.rowId).map((entry) => [`${entry.slug} ${entry.rowId}`, entry]));
 const suppliedFamilyPackshot = new Map(
-  suppliedImages.images
-    .filter((entry): entry is typeof entry & { sharedAcrossFamily: string } => "sharedAcrossFamily" in entry)
+  suppliedEntries
+    .filter((entry): entry is SuppliedImageEntry & { sharedAcrossFamily: string } => Boolean(entry.sharedAcrossFamily))
     .map((entry) => [entry.sharedAcrossFamily, entry]),
 );
 
@@ -2516,7 +2542,7 @@ function withSuppliedImage(product: CarsystemProduct): CarsystemProduct {
 
   return {
     ...product,
-    ...(own ? { productImage: { src: own.path, alt: product.productImage?.alt ?? product.name } } : {}),
+    ...(own ? { productImage: { src: own.path, alt: own.alt ?? product.productImage?.alt ?? product.name } } : {}),
     ...(rowEntries.some(Boolean) && product.detail
       ? {
           detail: {
@@ -2829,7 +2855,7 @@ function getFamilyVariantSelector(
             item.catalogMetadata?.volume ??
             item.name),
       optionValueIds: { [groupId]: item.variantId ?? item.slug },
-      sku: item.catalogMetadata?.cosmosCode ?? item.sku,
+      sku: item.catalogMetadata?.cosmosCode ?? publicSkuOf(item) ?? undefined,
       package: getProductPackageLabel(item),
       status: getProductPublicStatus(item),
       slug: item.slug,

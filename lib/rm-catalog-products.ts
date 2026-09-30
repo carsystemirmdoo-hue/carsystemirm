@@ -277,6 +277,8 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
     longDescription: content.longDescription,
     // Zvanična R-M oznaka — nije izmišljen placeholder.
     sku: entry.code ?? entry.slug,
+    // Bez zvanične oznake `sku` je samo slug: kupcu se ne prikazuje kao šifra.
+    ...(entry.code ? {} : { skuIsInternalOnly: true }),
     externalSku: entry.code ?? undefined,
     manufacturerCode: entry.code,
     packages: [{ label: "Na upit", detail: "Pakovanja R-M ne objavljuje javno; potvrđuju se kroz upit." }],

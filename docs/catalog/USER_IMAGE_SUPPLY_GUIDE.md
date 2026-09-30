@@ -107,11 +107,11 @@ Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45
 | P2 | baslac 80-30 Additive Plast | 80-30 | Na upit | 1 | `baslac__baslac-80-30-additive-plast.webp` |
 | P2 | baslac 81-30 Additive Chassis | 81-30 | Na upit | 1 | `baslac__baslac-81-30-additive-chassis.webp` |
 
-## R-M — 36 fotografija
+## R-M — 35 fotografija
 
 R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Izuzetak su dve grupe istog naziva (GHD THINNER i GHD HARDENER) gde se razlikuje samo oznaka brzine: za njih je dovoljna jedna reprezentativna slika grupe. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
 
-### PACKSHOT PROIZVODA (36)
+### PACKSHOT PROIZVODA (35)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
@@ -150,7 +150,6 @@ R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je pose
 | P2 | R-M AirtopTHINN | R 2A20 | Na upit | 1 | `rm__rm-r-2a20-airtopthinn.webp` |
 | P2 | R-M CLEAR Thinn-R | R 2P45 | Na upit | 1 | `rm__rm-r-2p45-clear-thinn-r.webp` |
 | P2 | R-M AGILIS MIX | RA 040 | Na upit | 1 | `rm__rm-ra-040-agilis-mix.webp` |
-| P2 | R-M UNO HD | — | Na upit | 1 | `rm__rm-uno-hd.webp` |
 
 ## Norbin — 10 fotografija
 

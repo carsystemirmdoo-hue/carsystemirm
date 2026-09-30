@@ -56,6 +56,37 @@ export type BaslacCampaignSlide = {
   controlTheme: "on-dark" | "on-light";
 };
 
+/**
+ * Sezonski slajd se ne upisuje ovde, nego se izvodi iz centralne konfiguracije
+ * (`lib/seasonal/seasonalCampaigns.config.mjs`) — vidi `baslacSeasonal.ts`.
+ * Bez odobrenog vizuala (`image: null`) slajd nosi samo CSS dekoraciju.
+ */
+export type BaslacSeasonalSlide = {
+  id: `seasonal-${string}`;
+  visual: "seasonal";
+  season: "winter" | "spring";
+  image: {
+    desktopSrc: string;
+    mobileSrc: string;
+    width: number;
+    height: number;
+    mobileWidth: number;
+    mobileHeight: number;
+  } | null;
+  imageAlt: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryCta: { href: string; label: string };
+  controlLabel: string;
+  transitionFrom: string;
+  transitionTo: string;
+  progressColor: string;
+  controlTheme: "on-dark";
+};
+
+export type BaslacHeroSlide = BaslacCampaignSlide | BaslacSeasonalSlide;
+
 export type BaslacSectionNavItem = {
   href: string;
   label: string;
@@ -111,11 +142,11 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
       "/images/brands/baslac/process/baslac-repair-rhythm-desktop.webp",
     mobileSrc:
       "/images/brands/baslac/process/baslac-repair-rhythm-mobile.webp",
-    width: 1600,
-    height: 1000,
-    mobileWidth: 900,
-    mobileHeight: 1125,
-    alt: "Povezane faze profesionalne refinish popravke u radionici",
+    width: 2000,
+    height: 1250,
+    mobileWidth: 1066,
+    mobileHeight: 1333,
+    alt: "Lakirer u zaštitnom odelu nanosi materijal pištoljem na maskiran popravljeni deo vozila u kabini",
     priority: "highest",
   },
   "line-45-system": {
@@ -123,9 +154,9 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
     section: "45 Line sistem",
     desktopSrc:
       "/images/brands/baslac/systems/baslac-45-line-system.webp",
-    width: 1400,
-    height: 1050,
-    alt: "45 Line mixing sistem i aplikacija vodene bazne boje",
+    width: 2800,
+    height: 2100,
+    alt: "Ambalaža baslac 45 Line: 45-W00 Basecoat Converter Water 5 L, 45-W1010 White 1 L, 45-W1020 White blue flip 0,5 L i 45-W1390 Red Shining 0,1 L",
     priority: "high",
   },
   "clearcoat-range": {
@@ -133,9 +164,13 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
     section: "Bezbojni lakovi",
     desktopSrc:
       "/images/brands/baslac/clearcoats/baslac-clearcoat-range.webp",
-    width: 1600,
-    height: 1000,
-    alt: "Grupa Baslac bezbojnih lakova organizovana prema procesu",
+    mobileSrc:
+      "/images/brands/baslac/clearcoats/baslac-clearcoat-range-mobile.webp",
+    width: 3600,
+    height: 1350,
+    mobileWidth: 1600,
+    mobileHeight: 1520,
+    alt: "Baslac bezbojni lakovi 40-10, 40-440, 40-450 i 40-620 u pakovanju od 1 L i 40-510 u pakovanju od 2 L",
     priority: "medium",
   },
   "primer-process": {
@@ -153,9 +188,9 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
     section: "Digitalna koloristika",
     desktopSrc:
       "/images/brands/baslac/color/baslac-color-workflow.webp",
-    width: 1600,
-    height: 900,
-    alt: "e-finder, formula, vaga i mixing radna stanica",
+    width: 2400,
+    height: 1350,
+    alt: "Spektrofotometar e-finder star na crvenoj metalik površini vozila, sa potvrđenim merenjem na ekranu",
     priority: "medium",
   },
   "commercial-vehicles": {
@@ -163,9 +198,9 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
     section: "Komercijalna vozila",
     desktopSrc:
       "/images/brands/baslac/commercial/baslac-commercial-vehicles.webp",
-    width: 1600,
-    height: 1050,
-    alt: "Komercijalno vozilo u profesionalnoj lakirnici",
+    width: 2400,
+    height: 1575,
+    alt: "Zvanični baslac render dostavnog kamiona sa sandukom, obojenog u svetloplavu",
     priority: "medium",
   },
 };

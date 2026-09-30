@@ -5,12 +5,16 @@ import {
   type RmProductFamilyData,
   type RmProductImageSlotData,
 } from "@/components/rm-brand/rmBrandData";
+import { selectRmGroupProducts } from "@/components/rm-brand/rmBrandSelection";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import type { RmBrandClassifications } from "@/lib/rm-brand-classification";
 import styles from "./RmBrandPage.module.css";
 
 export function RmProductFamilies({
+  classifications,
   products,
 }: {
+  classifications: RmBrandClassifications;
   products: CarsystemProduct[];
 }) {
   return (
@@ -34,16 +38,22 @@ export function RmProductFamilies({
 
       <div className={styles.productFamilyList}>
         {rmProductFamilies.map((family) => {
-          const familyProducts = family.productSlugs
-            ? family.productSlugs
-                .map((slug) => products.find((product) => product.slug === slug))
-                .filter((product): product is CarsystemProduct => Boolean(product))
-            : family.category
+          const familyProducts = selectRmGroupProducts({
+            limit: family.visualCount,
+            members: family.category
               ? products.filter(
-                  (product) => product.rmMetadata?.category === family.category,
+                  (product) =>
+                    classifications[product.slug]?.category === family.category,
                 )
-              : [];
-          const visualItems = buildFamilyVisualItems(family, familyProducts);
+              : [],
+            pinnedSlugs: family.productSlugs,
+            pool: products,
+          });
+          const visualItems = buildFamilyVisualItems(
+            family,
+            familyProducts,
+            classifications,
+          );
 
           return (
             <article id={`rm-family-${family.id}`} key={family.id}>
@@ -71,7 +81,9 @@ export function RmProductFamilies({
                     altText={item.product?.productImage?.alt}
                     aspectRatio={itemIndex === 0 ? "5 / 6" : "4 / 5"}
                     feature={
-                      item.product?.rmMetadata?.technology
+                      (item.product
+                        ? classifications[item.product.slug]?.technology
+                        : null)
                         ?.replaceAll("-", " ")
                         .toUpperCase() || item.slot?.technology
                     }
@@ -109,6 +121,7 @@ type FamilyVisualItem = {
 function buildFamilyVisualItems(
   family: RmProductFamilyData,
   products: CarsystemProduct[],
+  classifications: RmBrandClassifications,
 ): FamilyVisualItem[] {
   const productItems: FamilyVisualItem[] = products
     .slice(0, family.visualCount)
@@ -117,13 +130,14 @@ function buildFamilyVisualItems(
     name: product.name,
     product,
     system:
-      product.rmMetadata?.system?.replaceAll("-", " ").toUpperCase() || "R-M",
+      classifications[product.slug]?.system?.replaceAll("-", " ").toUpperCase() ||
+      "R-M",
     }));
   const targetCount = family.visualCount;
   const remaining = Math.max(0, targetCount - productItems.length);
   const confirmedTechnologies = new Set(
     products
-      .map((product) => product.rmMetadata?.technology?.toUpperCase())
+      .map((product) => classifications[product.slug]?.technology?.toUpperCase())
       .filter(Boolean),
   );
   const preferredSlots = family.slots.filter(

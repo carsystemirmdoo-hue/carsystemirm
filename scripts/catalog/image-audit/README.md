@@ -53,8 +53,33 @@ Međuizlazi (pun inventar od ~1800 identiteta, sažeci) idu u `.cache/image-audi
 ## Determinizam
 
 Nijedan korak ne čita mrežu, ne gleda sat i ne zavisi od redosleda fajlova na disku. Drugo
-pokretanje nad istim ulazima daje bajt-identične izlaze; `approvedAt` u lock-u je metapodatak koji
-se čuva dok se sadržaj ne promeni.
+pokretanje nad istim ulazima daje bajt-identične izlaze; `metadata` u lock-u se čuva dok se sadržaj
+ne promeni.
+
+`metadata` razdvaja datum generisanja od odobrenja: `generatedOn` upisuje generator, a `approvedAt` i
+`approvedBy` upisuje čovek tek posle pregleda, uvek zajedno (generator ih ostavlja `null`). Trag
+prethodnog sadržaja je u `previousLockMetadata`. Stari oblik lock-a (`{ approvedAt, note }`, pre ove
+podele) ostaje važeći dok se sadržaj ne promeni; posle promene njegov datum se čuva kao
+`legacyGeneratorDate` jer ga je upisao generator i nije dokaz odobrenja vlasnika. Pravila su u
+`scripts/catalog/image-supply-registry.mjs` (`npm run test:image-supply`).
+
+## Poreklo uvezenih slika (`supplied-images.json`)
+
+Svaka uvezena slika nosi tri polja čije su dozvoljene vrednosti definisane u
+`provenanceModel` istog fajla; `npm run catalog:image-supply:check` odbija vrednost koja tamo nije
+opisana.
+
+| `sourceBasis` | Značenje |
+|---|---|
+| `OWNER_SUPPLIED` | Fajl je predao vlasnik (Batch 01). Činjenica o predaji, ne tvrdnja o autorstvu. |
+| `SUPPLIER_BRAND_PORTAL` | Zvanični original preuzet dugmetom „Download original” sa brend portala dobavljača, uz dozvolu vlasnika. |
+
+Slika sa portala mora imati sopstveni `batch` i `sourceDetail` sa poljima `portal`, `portalUrl`,
+`assetId` (broj), `assetTitle`, `originalFile` (= `sourceFile`), `downloadedOn` (YYYY-MM-DD),
+`downloadMethod`, `identityEvidence`, `processingMethod` i `ownerPermission`. Opciono polje `alt`
+opisuje konkretnu sliku (npr. zvanična ambalaža); bez njega runtime zadržava alt zapisa. U inventaru se
+vodi kao `supplier-portal:<batch>`, a ne kao slika vlasnika. Značenje `OWNER_SUPPLIED`,
+`processing` i `rightsBasis` se ne menja.
 
 Zahteva `python3` (bez dodatnih paketa), isto kao `scripts/extract-product-image-metrics.py`.
 

@@ -220,6 +220,10 @@ function writeStoredCatalogSession(session: StoredCatalogSession) {
  * `CATALOG_SESSION_STORAGE_KEY`), pa indeks vezan za state komponente ne bi
  * preživeo povratak.
  */
+function variantKeyFromHref(href: string): string | undefined {
+  return new URL(href, "https://katalog.local").searchParams.get("varijanta") ?? undefined;
+}
+
 function toVariantEntity(record: ProductSearchRecord): CatalogVariantEntity | null {
   if (record.kind !== "variant" || !record.familySlug || !record.card) return null;
 
@@ -228,6 +232,8 @@ function toVariantEntity(record: ProductSearchRecord): CatalogVariantEntity | nu
     name: record.name,
     familySlug: record.familySlug,
     productCode: record.productCode ?? "",
+    // Zapis bez javne šifre (`publicSkuOf`): ključ varijante je već u adresi zapisa.
+    ...(record.productCode ? {} : { variantKey: variantKeyFromHref(record.href) }),
     technicalLine: record.technicalLine ?? "",
     finish: record.card.finish,
     /*

@@ -1,4 +1,5 @@
 import { getCustomerSession } from "@/lib/authz/customer-session";
+import { loadCartCount } from "@/lib/ordering/ordering-service";
 
 /**
  * Stanje kupčeve prijave za javno zaglavlje.
@@ -15,8 +16,10 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const session = await getCustomerSession().catch(() => null);
+  // Broj stavki u korpi SOPSTVENE firme; bez korpe (ili bez tabele) nula.
+  const cartCount = session ? await loadCartCount(session.customerId).catch(() => 0) : 0;
   const body = session
-    ? { signedIn: true, company: session.customerName, name: session.name }
+    ? { signedIn: true, company: session.customerName, name: session.name, cartCount }
     : { signedIn: false, loginLink: process.env.NEXT_PUBLIC_CUSTOMER_LOGIN_LINK === "1" };
   return Response.json(body, {
     headers: { "Cache-Control": "no-store, private", Vary: "Cookie" },

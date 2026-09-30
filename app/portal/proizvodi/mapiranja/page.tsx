@@ -10,6 +10,7 @@ import {
   PRODUCT_MAPPING_LABELS,
   PRODUCT_MAPPING_TONES,
 } from "@/lib/portal/status-labels";
+import { loadArticleOrderability } from "@/lib/ordering/ordering-service";
 import { MappingReview } from "./MappingReview";
 
 export const dynamic = "force-dynamic";
@@ -45,6 +46,15 @@ export default async function ArticleMappingsPage({
     countArticleMappingsByStatus(),
   ]);
 
+  const orderability = await loadArticleOrderability(rows.map((r) => r.articleId));
+  const reviewRows = rows.map((r) => ({
+    ...r,
+    orderable: orderability.get(r.articleId)?.orderable ?? false,
+    orderReason: orderability.get(r.articleId)?.reason ?? null,
+    catalogName: orderability.get(r.articleId)?.catalogName ?? null,
+    variantLabel: orderability.get(r.articleId)?.variantLabel ?? null,
+  }));
+
   const total = STATUSES.reduce((sum, status) => sum + counts[status], 0);
 
   return (
@@ -52,7 +62,7 @@ export default async function ArticleMappingsPage({
       <PageHeader
         eyebrow="Logistika"
         title="Mapiranja artikala"
-        description="Veza BizniSoft artikla i kataloškog proizvoda pravi se po TAČNOJ internoj šifri, nikad po nazivu. Nemapiran artikal ostaje potpuno vidljiv interno — ono što nema je slika i PDP."
+        description="Veza BizniSoft artikla i kataloškog proizvoda pravi se po TAČNOJ internoj šifri, nikad po nazivu. Samo POTVRĐENA veza na tačan proizvod i varijantu, uz stavku aktivnog cenovnika, čini artikal poručivim. Predlog nikad nije poručiv."
         meta={
           <>
             {STATUSES.map((status) => (
@@ -107,7 +117,7 @@ export default async function ArticleMappingsPage({
             </p>
           </section>
 
-          <MappingReview rows={rows} canManage={canManage} />
+          <MappingReview rows={reviewRows} canManage={canManage} />
         </>
       )}
     </>

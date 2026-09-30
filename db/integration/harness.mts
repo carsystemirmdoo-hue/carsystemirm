@@ -284,6 +284,17 @@ const RESETTABLE_TABLES = [
    * `DELETE` okidač odbija, `TRUNCATE` ne pokreće okidače po redu.
    */
   "customer_contact_verifications",
+  /*
+   * Poručivanje (0029). `customer_orders` ima `restrict` ka kupcima i
+   * artiklima, pa mora u istu `TRUNCATE` naredbu.
+   */
+  "customer_order_events",
+  "customer_order_lines",
+  "customer_orders",
+  "customer_cart_items",
+  "price_list_customer_terms",
+  "price_list_items",
+  "price_lists",
   "partner_records",
   "partner_imports",
   "customer_account_tokens",

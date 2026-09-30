@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
+import { addToCartAction } from "@/app/kupac/korpa/actions";
 import type { ReorderItem, ReorderList } from "@/lib/customers/reorder";
 import styles from "./CatalogReorder.module.css";
 
@@ -51,9 +52,16 @@ export function CatalogReorder() {
             dostupnost potvrđuje vaš komercijalista.
           </p>
         </div>
-        <Link href="/kupac/fakture" className={styles.all}>
-          Sve fakture →
-        </Link>
+        <span className={styles.headLinks}>
+          {state.items.some((i) => i.orderable) ? (
+            <Link href="/kupac/korpa" className={styles.all}>
+              Korpa →
+            </Link>
+          ) : null}
+          <Link href="/kupac/fakture" className={styles.all}>
+            Sve fakture →
+          </Link>
+        </span>
       </header>
 
       {state.items.length === 0 ? (
@@ -123,11 +131,8 @@ function ReorderCard({ item }: { item: ReorderItem }) {
           </p>
         ) : null}
 
-        {/*
-          F7: ovde dolaze brz unos količine i „Dodaj u korpu", kada `item.orderable`
-          postane `true` (korpa, važeća cena kupca i potvrda porudžbine). Do tada
-          nema dugmeta — lažno dugme bi obećalo porudžbinu koja ne postoji.
-        */}
+        {item.orderable && item.order ? <ReorderQuantity item={item} /> : null}
+
         <div className={styles.actions}>
           {p ? (
             <Link href={p.href} className={styles.primary} tabIndex={-1} aria-hidden="true">
@@ -141,5 +146,59 @@ function ReorderCard({ item }: { item: ReorderItem }) {
         </div>
       </div>
     </li>
+  );
+}
+
+const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+/**
+ * Brz unos količine — samo za PORUČIV artikal (potvrđena veza, tačna
+ * varijanta, stavka aktivnog cenovnika). Server ponovo proverava artikal,
+ * količinu i cenu; ovde se ne šalje ni cena ni firma.
+ */
+function ReorderQuantity({ item }: { item: ReorderItem }) {
+  const o = item.order!;
+  const [qty, setQty] = useState(String(o.suggestedQuantity));
+  const [pending, start] = useTransition();
+  const [state, setState] = useState<{ ok: boolean; text: string } | null>(null);
+  const add = () =>
+    start(async () => {
+      const r = await addToCartAction({ articleCode: item.articleCode, quantity: qty });
+      setState(r.ok ? { ok: true, text: `Dodato u korpu (${r.count} ${r.count === 1 ? "stavka" : "stavke"}).` } : { ok: false, text: r.message });
+    });
+  return (
+    <div className={styles.order}>
+      <p className={styles.orderFacts}>
+        {o.packLabel} · JM {o.unit}
+        <br />
+        <strong>
+          {money.format(o.netPrice)} {o.currency}
+        </strong>{" "}
+        bez PDV-a / {o.unit} · PDV {o.vatPercent} %
+        {o.demoPriceList ? <span className={styles.demoPrice}>demo cenovnik</span> : null}
+      </p>
+      <div className={styles.orderRow}>
+        <label className={styles.qtyLabel}>
+          <span>Količina</span>
+          <input
+            type="number"
+            inputMode="decimal"
+            min={o.step}
+            step={o.step}
+            value={qty}
+            onChange={(e) => setQty(e.target.value)}
+            disabled={pending}
+          />
+        </label>
+        <button type="button" className={styles.addButton} onClick={add} disabled={pending} aria-busy={pending}>
+          {pending ? "Dodajem…" : "Dodaj u korpu"}
+        </button>
+      </div>
+      {state ? (
+        <p className={styles.orderMsg} data-ok={state.ok ? "true" : "false"} role="status">
+          {state.text} {state.ok ? <Link href="/kupac/korpa">Otvori korpu →</Link> : null}
+        </p>
+      ) : null}
+    </div>
   );
 }

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const TABS = [
   { href: "/kupac", label: "Pregled", exact: true },
   { href: "/kupac/fakture", label: "Fakture" },
+  { href: "/kupac/korpa", label: "Korpa" },
   { href: "/kupac/porudzbine", label: "Porudžbine" },
   { href: "/kupac/saglasnosti", label: "Saglasnosti" },
 ];

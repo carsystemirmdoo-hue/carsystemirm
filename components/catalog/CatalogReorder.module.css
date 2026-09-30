@@ -233,6 +233,107 @@
   margin-top: 0.9rem;
 }
 
+.headLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.order {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--catalog-border);
+}
+
+.orderFacts {
+  margin: 0;
+  color: var(--catalog-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.orderFacts strong {
+  color: var(--catalog-ink);
+  font-size: 0.9rem;
+}
+
+.demoPrice {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0 0.4rem;
+  border: 1px dashed currentColor;
+  border-radius: 999px;
+  color: var(--catalog-steel);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.orderRow {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: end;
+}
+
+.qtyLabel {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 650;
+  color: var(--catalog-muted);
+}
+
+.qtyLabel input {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--catalog-border);
+  border-radius: 8px;
+  background: var(--catalog-panel);
+  color: var(--catalog-ink);
+  font: inherit;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.addButton {
+  min-height: 2.5rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--catalog-red);
+  color: #fff;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.addButton:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.orderMsg {
+  margin: 0;
+  font-size: 0.78rem;
+  color: oklch(0.5 0.17 27);
+}
+
+.orderMsg[data-ok="true"] {
+  color: oklch(0.42 0.1 150);
+}
+
+.orderMsg a {
+  color: var(--catalog-red);
+  font-weight: 650;
+}
+
 @media (max-width: 1100px) {
   .list {
     grid-template-columns: repeat(3, minmax(0, 1fr));

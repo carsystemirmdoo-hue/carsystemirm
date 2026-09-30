@@ -6,7 +6,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { customerSignOutAction } from "@/app/prijava/kupac/actions";
 import styles from "./CustomerAccountMenu.module.css";
 
-type State = { signedIn: true; company: string; name: string } | { signedIn: false; loginLink: boolean } | null;
+type State = { signedIn: true; company: string; name: string; cartCount?: number } | { signedIn: false; loginLink: boolean } | null;
 
 /**
  * Kupčev nalog u javnom zaglavlju.
@@ -78,6 +78,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
 
   const links = [
     { href: "/kupac", label: "Pregled naloga" },
+    { href: "/kupac/korpa", label: state.cartCount ? `Korpa (${state.cartCount})` : "Korpa" },
     { href: "/kupac/fakture", label: "Fakture" },
     { href: "/kupac/porudzbine", label: "Porudžbine" },
   ];

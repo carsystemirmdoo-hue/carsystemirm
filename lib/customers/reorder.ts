@@ -2,6 +2,7 @@ import "server-only";
 import { getCarsystemProductBySlug, getProductVariantSelector } from "@/lib/carsystem-data";
 import { loadCustomerPurchasedArticles } from "@/lib/customers/customer-queries";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
+import { loadOffersByCode } from "@/lib/ordering/ordering-service";
 import { variantRedirectTarget } from "@/lib/product-families";
 import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
@@ -40,10 +41,21 @@ export type ReorderItem = {
   /** Put kada veza sa katalogom ne postoji: kupčeve fakture sa ovim artiklom. */
   invoicesHref: string;
   /**
-   * Mesto za F7 (brz unos količine i korpa). Do tada `false`: dugme koje ne
-   * radi ne sme da postoji.
+   * Poručivo SADA: potvrđena veza, tačna varijanta, stavka aktivnog cenovnika
+   * i uključeno poručivanje. Samo tada kartica nudi količinu i korpu.
    */
-  orderable: false;
+  orderable: boolean;
+  /** Podaci za unos količine; `null` kada artikal nije poručiv. */
+  order: {
+    unit: string;
+    packLabel: string;
+    netPrice: number;
+    vatPercent: number;
+    currency: string;
+    step: number;
+    suggestedQuantity: number;
+    demoPriceList: boolean;
+  } | null;
 };
 
 export type ReorderList = {
@@ -57,6 +69,31 @@ export type ReorderList = {
 function imageOf(src: string | null | undefined, alt: string) {
   if (!src || /placeholder/i.test(src)) return null;
   return { src, alt };
+}
+
+function orderFields(
+  offer: Awaited<ReturnType<typeof loadOffersByCode>> extends Map<string, infer T> ? T | undefined : never,
+  presented: ReorderItem["product"],
+  events: { quantity: number; units: (string | null)[] }[],
+): Pick<ReorderItem, "orderable" | "order"> {
+  // Poručiva stavka mora biti i PRIKAZANA kao proizvod — ista potvrđena veza.
+  if (!offer || offer.problem || !offer.price || !presented) return { orderable: false, order: null };
+  const usual = usualQuantity(events);
+  const step = offer.price.quantityStep;
+  const suggested = usual && usual.unit === offer.price.unit ? Math.max(offer.price.minQuantity, Math.round(usual.low / step) * step) : offer.price.minQuantity;
+  return {
+    orderable: true,
+    order: {
+      unit: offer.price.unit,
+      packLabel: offer.price.packLabel,
+      netPrice: offer.price.netPrice,
+      vatPercent: offer.price.vatPercent,
+      currency: offer.price.currency,
+      step,
+      suggestedQuantity: suggested,
+      demoPriceList: offer.price.listKind === "demo",
+    },
+  };
 }
 
 /** Samo kupčeva istorija. `customerId` dolazi isključivo iz kupčeve sesije. */
@@ -77,6 +114,8 @@ export async function loadReorderList(customerId: string, now: Date = new Date()
     rhythmCurrent: rhythmCurrent && !a.statusOutdated,
   }));
   const chosen = orderReorderItems(candidates);
+
+  const offers = await loadOffersByCode(customerId, chosen.map((a) => a.articleCode));
 
   const items: ReorderItem[] = chosen.map((a) => {
     const bought = byCode.get(a.articleCode);
@@ -112,7 +151,7 @@ export async function loadReorderList(customerId: string, now: Date = new Date()
       lastPurchaseOn: a.lastPurchaseOn,
       product: presented,
       invoicesHref: `/kupac/fakture?q=${encodeURIComponent(a.articleCode)}`,
-      orderable: false,
+      ...orderFields(offers.get(a.articleCode), presented, bought?.events ?? []),
     };
   });
 

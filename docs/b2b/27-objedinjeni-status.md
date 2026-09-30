@@ -19,13 +19,17 @@ Legenda: ✅ završeno · 🟡 delimično · ⬜ nedostaje (ne zavisi od podatak
 | ✅ F7 korpa, zahtev, prijem u kancelariji (demo) | `feat/portal-f7-cart` | stvarni režim tek posle ⏳ cenovnika |
 | ✅ F8 kupovina iz kataloga, upiti za cenu, rabati iz faktura (demo) | `feat/portal-f8-catalog-buy` | provera sa stvarnim podacima posle uvoza |
 | ✅ Zaštita poslednjeg gazda naloga, MFA, rate limit, audit | `main` + testovi (`ownerGuard`, `mfa*`) | ažurirati `08` (piše da nije) |
+| ✅ „Zapamti me" za kupce + promena lozinke u nalogu | `feat/portal-f9-remaining` (0031) | pilot sa nekoliko kupaca, pa `CUSTOMER_REMEMBER_ME=1` |
+| ✅ Interni nazivi artikala (BizniSoft ↔ katalog po publici) | `feat/portal-f9-remaining` | provera sa stvarnim šifarnikom |
+| ✅ Predlozi dodatnih proizvoda + upiti u „Za razgovor" | `feat/portal-f9-remaining` | pouzdanost raste sa brojem firmi sa uvezenim fakturama |
+| ✅ Spisak za firmin Vercel | `28-vercel-firma-spremnost.md` | odluke P14 i spajanje grana |
 
 ## Delimično
 
 | Stavka | Šta postoji | Šta nedostaje | Sledeći korak |
 |---|---|---|---|
-| 🟡 Preporuke | ritam kupovine `cadence_v1`, „dugo nije poručeno" (kartica, „Za razgovor") | predlozi dodatnih proizvoda; obračun je ručan | **korak 3 ove faze**; automatski obračun posle uvoza traži migraciju i odobrenje |
-| 🟡 Interni nazivi artikala (F9) | mapiranje prikazuje šifru i naziv iz BizniSofta i kataloški proizvod | jedinstven prikaz „BizniSoft ↔ katalog" u svim internim ekranima; kupac mestimično vidi interni naziv | **korak 2 ove faze** |
+| 🟡 Preporuke | ritam kupovine, predlozi dodatnih proizvoda (slične firme, katalog) | obračun ritma je ručan | automatski obračun posle uvoza traži migraciju i odobrenje (`28-…` B4) |
+| 🟡 Interni nazivi po kupcu (prvobitni F9) | BizniSoft ↔ katalog za zaposlene i kupce | kupčevi sopstveni nazivi artikala i pretraga po njima | odluka da li je potrebno; zavisi od toga da li BizniSoft vodi nazive po kupcu |
 | 🟡 Mapiranje šifara | ekran, provera tačnog proizvoda i varijante, kolona „Za poručivanje" | uvoz šifarnika i predlozi po šifri | ⏳ šifarnik (A) |
 | 🟡 Razdvajanje DB privilegija | skripta + runbook `10-…` | nije primenjeno ni na jednoj bazi | pri podizanju firmine baze (`28-…`) |
 | 🟡 `Cache-Control: no-store` za portal | dinamičke strane (`force-dynamic`) | eksplicitno zaglavlje nije nađeno | proveriti odgovore portala u `28-…` provere |
@@ -35,9 +39,6 @@ Legenda: ✅ završeno · 🟡 delimično · ⬜ nedostaje (ne zavisi od podatak
 
 | Stavka | Sledeći korak |
 |---|---|
-| ⬜ „Zapamti me" za kupce | **korak 1 ove faze** (predlog `24-…`) |
-| ⬜ Kupčeva promena lozinke u nalogu | funkcija postoji (`changeCustomerPassword`), ekrana nema → **korak 1** |
-| ⬜ Spisak za firmin Vercel | **korak 4** (`28-…`) |
 | ⬜ Slanje e-pošte (pozivi, reset, obaveštenja) | izbor provajdera = trošak → vaša odluka; do tada izlazna pošta čeka u `customer_message_outbox` |
 | ⬜ Komercijalista poručuje u ime kupca (P17) | poslovna odluka; tehnički: korpa firme već postoji |
 | ⬜ Automatski obračun preporuka posle dnevnog uvoza | migracija + odobrenje |

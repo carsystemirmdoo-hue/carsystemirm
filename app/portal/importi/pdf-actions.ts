@@ -1,5 +1,6 @@
 "use server";
 
+import { requestRecomputeAfterIngest, scheduleRecomputeProcessing } from "@/lib/recommendations/auto-recompute";
 import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
 import { fileHashOf } from "@/lib/pdf/extract";
@@ -117,6 +118,13 @@ export async function importPdfAction(
 
   revalidatePath("/portal/importi");
   revalidatePath("/portal/importi/dokumenti");
+
+  // Uspešno proknjiženi dokumenti → automatski obračun preporuka (ako je uključen).
+  const posted = tally.get("ingested") ?? 0;
+  if (posted > 0) {
+    await requestRecomputeAfterIngest("manual_upload", posted).catch(() => undefined);
+    scheduleRecomputeProcessing();
+  }
 
   const summary = [...tally.entries()].map(([key, count]) => ({
     label: OUTCOME_LABELS[key] ?? key,

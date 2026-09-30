@@ -225,6 +225,13 @@
       "when": 1787588098289,
       "tag": "0031_customer_remember_me",
       "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1787588098290,
+      "tag": "0032_recompute_after_ingest",
+      "breakpoints": true
     }
   ]
 }

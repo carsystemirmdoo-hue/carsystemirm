@@ -322,6 +322,7 @@ const RESETTABLE_TABLES = [
    * pa mora otici pre njih — `TRUNCATE ... CASCADE` to resava, ali ime mora
    * biti na spisku da bi tabela uopste usla u naredbu.
    */
+  "recommendation_recompute_requests",
   "recommendation_results",
   "recommendation_runs",
 

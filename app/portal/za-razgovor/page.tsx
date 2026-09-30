@@ -12,6 +12,8 @@ import { srDate } from "@/lib/recommendations/customerSummary.mjs";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
 import { loadCrossSell, type CrossSell } from "@/lib/recommendations/cross-sell";
 import { listPriceRequests } from "@/lib/ordering/price-request-service";
+import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
+import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
 import { RecomputeButton } from "./RecomputeButton";
 
 export const dynamic = "force-dynamic";
@@ -163,9 +165,10 @@ export default async function TalkListPage({
   ]);
 
   // Opseg je već sužen iznad (`resolveLedgerScope`); predlozi i upiti se računaju samo za te kupce.
-  const [crossSell, priceRequests] = await Promise.all([
+  const [crossSell, priceRequests, autoRecompute] = await Promise.all([
     loadCrossSell([...customerRows].map((c) => c.id)),
     listPriceRequests(user),
+    loadRecomputeStatus(),
   ]);
   const openRequests = priceRequests.filter((r) => r.status === "open" || r.status === "in_progress").length;
   const items: Item[] = [...customerRows]
@@ -221,6 +224,7 @@ export default async function TalkListPage({
                 "nije pokrenut"
               )}
             </span>
+            <AutoRecomputeStatus status={autoRecompute} canRetry={can(user, "recommendations:retry_auto")} />
             {openRequests ? (
               <span>
                 <Link href="/portal/zahtevi/uslovi">Otvoreni upiti za cenu i uslove: {openRequests} →</Link>

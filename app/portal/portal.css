@@ -8203,3 +8203,7 @@ body:has(.portal-login-root) {
 .zr-xs h3 { margin: 0 0 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--p-muted); }
 .zr-xs p { margin: 0; font-size: 13px; }
 .zr-status a { color: var(--p-red); font-weight: 650; }
+.ar-status { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; padding: 8px 12px; border-left: 3px solid oklch(0.6 0.12 150); border-radius: 6px; background: var(--p-bg); font-size: 13px; color: var(--p-ink); }
+.ar-status[data-state="failed"] { border-left-color: oklch(0.6 0.17 27); background: oklch(0.97 0.025 27); }
+.ar-status[data-state="pending"], .ar-status[data-state="running"] { border-left-color: oklch(0.72 0.13 80); }
+.ar-status small { color: var(--p-muted); }

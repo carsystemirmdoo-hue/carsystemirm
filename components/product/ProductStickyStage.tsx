@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, type CSSProperties } from "react";
 import { ProductHeroSprayBackdrop } from "@/components/product/ProductHeroSprayBackdrop";
 import { PuttyMaterialTrace } from "@/components/product/PuttyMaterialTrace";
+import { useProductImageLoadState } from "@/components/product/useProductImageLoadState";
 import { useProductVariant } from "@/components/product/ProductVariantProvider";
 import type { ProductStageFormat } from "@/components/product/productStageImages";
 import {
@@ -58,6 +59,13 @@ export function ProductStickyStage({
     setGallery({ key: activeVariant.key, index });
   const [isZoomed, setIsZoomed] = useState(false);
   const activeImage = images[activeIndex] ?? null;
+  /*
+   * Slika koja ne uspe da se učita ne sme da ostavi prazan kadar ni slomljenu
+   * ikonu: scena prelazi u isti pošten prikaz kao proizvod bez slike
+   * („Vizuel u pripremi"). Dok se učitava, kadar zadržava svoj izgled.
+   */
+  const { ref: imageRef, state: imageState } = useProductImageLoadState(activeImage?.src);
+  const shownImage = imageState === "error" ? null : activeImage;
 
   /*
    * Kratak crossfade se pali SAMO na izbor napravljen na strani.
@@ -91,6 +99,16 @@ export function ProductStickyStage({
       } as CSSProperties)
     : undefined;
 
+  /*
+   * Fotografija na ravnoj studijskoj pozadini (`matte: "backdrop"`) u tamnoj
+   * temi dobija ploču u SVOJOJ boji pozadine — vidi
+   * `lib/product-image-metrics.ts` → `resolveImageMatte`. Promenljiva ide na
+   * samu ploču, pa `.stage` zadržava svoj postojeći `style` izraz.
+   */
+  const plateStyle: CSSProperties | undefined = shownImage?.backdrop
+    ? ({ "--product-image-backdrop": shownImage.backdrop } as CSSProperties)
+    : undefined;
+
   return (
     <div
       className={styles.stickyStage}
@@ -99,7 +117,7 @@ export function ProductStickyStage({
       data-product-stage-spray={activeVariant.hasSprayBackdrop ? "true" : "false"}
       data-product-size-class={activeVariant.sizeClass}
       data-stage-format={stageFormat}
-      data-product-has-image={activeImage ? "true" : "false"}
+      data-product-has-image={shownImage ? "true" : "false"}
       data-putty-trace={showPuttyTrace ? "true" : undefined}
       style={puttyStyle}
     >
@@ -110,9 +128,11 @@ export function ProductStickyStage({
         data-product-contrast={activeImage?.contrastMode ?? "balanced"}
         data-product-zoom={isZoomed ? "true" : "false"}
         data-product-fit={activeImage?.src}
+        data-product-image-matte={shownImage?.matte}
+        data-product-image-state={activeImage ? imageState : undefined}
         style={activeVariant.style}
       >
-        <span className={styles.stagePlate} aria-hidden="true" />
+        <span className={styles.stagePlate} style={plateStyle} aria-hidden="true" />
         {activeVariant.hasSprayBackdrop ? <ProductHeroSprayBackdrop /> : null}
         {showPuttyTrace ? (
           <PuttyMaterialTrace config={puttyTrace} />
@@ -120,8 +140,9 @@ export function ProductStickyStage({
         <span className={styles.stageHalo} aria-hidden="true" />
 
         <span className={styles.heroProductObject}>
-          {activeImage ? (
+          {activeImage && shownImage ? (
             <Image
+              ref={imageRef}
               /*
                * Ključ nosi identitet VARIJANTE, ne samo adresu slike.
                *
@@ -177,7 +198,7 @@ export function ProductStickyStage({
           </span>
         ) : null}
 
-        {activeImage ? (
+        {shownImage ? (
           <button
             className={styles.zoomControl}
             type="button"
@@ -204,26 +225,42 @@ export function ProductStickyStage({
                 className={`${styles.galleryThumb} ${fit.fit}`}
                 data-active={isActive || undefined}
                 data-product-fit={image.src}
+                data-product-image-matte={image.matte}
+                style={
+                  image.backdrop
+                    ? ({ "--product-image-backdrop": image.backdrop } as CSSProperties)
+                    : undefined
+                }
                 type="button"
                 aria-label={`Prikaži sliku ${index + 1}: ${image.alt}`}
                 aria-pressed={isActive}
                 onClick={() => setActiveIndex(index)}
                 key={image.src}
               >
-                <Image
-                  src={image.src}
-                  alt=""
-                  fill
-                  priority={index === 0}
-                  sizes="5rem"
-                  className={styles.galleryThumbImage}
-                />
+                <GalleryThumbImage src={image.src} priority={index === 0} />
               </button>
             );
           })}
         </div>
       ) : null}
     </div>
+  );
+}
+
+/** Sličica koja ne uspe da se učita ostaje prazna pločica, bez slomljene ikone. */
+function GalleryThumbImage({ src, priority }: { src: string; priority: boolean }) {
+  const { ref, state } = useProductImageLoadState(src);
+  if (state === "error") return null;
+  return (
+    <Image
+      ref={ref}
+      src={src}
+      alt=""
+      fill
+      priority={priority}
+      sizes="5rem"
+      className={styles.galleryThumbImage}
+    />
   );
 }
 

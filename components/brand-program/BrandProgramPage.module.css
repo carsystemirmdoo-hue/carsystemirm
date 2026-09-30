@@ -1,6 +1,7 @@
 .pageShell {
-  --entity-red: var(--brand-accent, #e5322a);
-  --entity-red-bright: var(--brand-accent, #e5322a);
+  /* #e5322a je sa belim tekstom davao 4.36:1; #d42c24 je ista crvena, dovoljno duboka za ≥ 4.5:1. */
+  --entity-red: var(--brand-accent, #d42c24);
+  --entity-red-bright: var(--brand-accent, #d42c24);
   --entity-accent-contrast: var(--brand-accent-contrast, #ffffff);
   --entity-hero-accent: var(--brand-accent-on-dark, var(--entity-red));
   --entity-hero-accent-contrast: var(
@@ -20,7 +21,8 @@
   --entity-panel-strong: #f4f5f7;
   --entity-ink: #14171c;
   --entity-muted: #5c6470;
-  --entity-faint: oklch(0.62 0.026 250);
+  /* Sitni natpisi (9–11 px: „Pakovanje", „Status", šifre faza) — 0.62 je davalo 3.3:1 na beloj. */
+  --entity-faint: oklch(0.5 0.026 250);
   --entity-border: #e2e5ea;
   --entity-border-soft: oklch(0.3 0.02 250 / 0.09);
   --entity-shadow: 0 10px 26px oklch(0.22 0.025 250 / 0.08);
@@ -34,20 +36,21 @@
 }
 
 :global(.dark) .pageShell {
-  --entity-hero-bg: oklch(0.13 0.016 250);
-  --entity-hero-bg-strong: oklch(0.085 0.012 250);
-  --entity-hero-border: oklch(0.96 0.006 250 / 0.12);
+  /* Nivoi iz globalne tamne skale (app/globals.css → --dk-*). */
+  --entity-hero-bg: var(--dk-1);
+  --entity-hero-bg-strong: var(--dk-0);
+  --entity-hero-border: var(--dk-line);
   --entity-red-tint: oklch(0.33 0.08 27 / 0.42);
-  --entity-bg: oklch(0.125 0.013 250);
-  --entity-bg-soft: oklch(0.095 0.012 250);
-  --entity-panel: oklch(0.17 0.014 250 / 0.86);
-  --entity-panel-strong: oklch(0.205 0.016 250 / 0.9);
-  --entity-ink: oklch(0.96 0.007 250);
-  --entity-muted: oklch(0.75 0.02 250);
-  --entity-faint: oklch(0.6 0.02 250);
-  --entity-border: oklch(0.93 0.01 250 / 0.14);
-  --entity-border-soft: oklch(0.93 0.01 250 / 0.08);
-  --entity-shadow: 0 28px 78px oklch(0.04 0.01 250 / 0.42);
+  --entity-bg: var(--dk-0);
+  --entity-bg-soft: oklch(0.13 0.008 255);
+  --entity-panel: var(--dk-1);
+  --entity-panel-strong: var(--dk-2);
+  --entity-ink: var(--foreground);
+  --entity-muted: var(--muted-foreground);
+  --entity-faint: var(--dk-text-faint);
+  --entity-border: var(--dk-line);
+  --entity-border-soft: oklch(0.94 0.008 255 / 0.07);
+  --entity-shadow: 0 28px 78px oklch(0.05 0.006 255 / 0.45);
 }
 
 .pageShell a {

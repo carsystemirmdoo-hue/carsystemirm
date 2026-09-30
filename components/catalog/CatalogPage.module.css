@@ -1,6 +1,7 @@
 .catalogShell {
-  --catalog-red: #e5322a;
-  --catalog-red-bright: #e5322a;
+  /* #e5322a sa belim tekstom = 4.36:1; ista crvena, za nijansu dublja, drži ≥ 4.5:1 (ispuna i tekst). */
+  --catalog-red: #d42c24;
+  --catalog-red-bright: #d42c24;
   --catalog-red-tint: #fdecea;
   --catalog-steel: oklch(0.55 0.075 245);
   --catalog-bg: #f4f5f7;
@@ -9,7 +10,7 @@
   --catalog-panel-strong: #f4f5f7;
   --catalog-ink: #14171c;
   --catalog-muted: #5c6470;
-  --catalog-faint: oklch(0.62 0.026 250);
+  --catalog-faint: oklch(0.5 0.026 250);
   --catalog-border: #e2e5ea;
   --catalog-border-soft: oklch(0.3 0.02 250 / 0.09);
   --catalog-shadow: 0 10px 26px oklch(0.22 0.025 250 / 0.08);
@@ -36,17 +37,21 @@
 }
 
 :global(.dark) .catalogShell {
+  /* Nivoi iz globalne tamne skale (app/globals.css → --dk-*). */
+  /* --catalog-red je ISPUNA ispod belog teksta, --catalog-red-bright TEKST na tamnom. */
+  --catalog-red: oklch(0.56 0.215 27);
+  --catalog-red-bright: oklch(0.7 0.19 27);
   --catalog-red-tint: oklch(0.33 0.08 27 / 0.42);
-  --catalog-bg: oklch(0.125 0.013 250);
-  --catalog-bg-soft: oklch(0.095 0.012 250);
-  --catalog-panel: oklch(0.17 0.014 250 / 0.82);
-  --catalog-panel-strong: oklch(0.205 0.016 250 / 0.88);
-  --catalog-ink: oklch(0.96 0.007 250);
-  --catalog-muted: oklch(0.75 0.02 250);
-  --catalog-faint: oklch(0.6 0.02 250);
-  --catalog-border: oklch(0.93 0.01 250 / 0.14);
-  --catalog-border-soft: oklch(0.93 0.01 250 / 0.08);
-  --catalog-shadow: 0 28px 78px oklch(0.04 0.01 250 / 0.42);
+  --catalog-bg: var(--dk-0);
+  --catalog-bg-soft: oklch(0.13 0.008 255);
+  --catalog-panel: var(--dk-1);
+  --catalog-panel-strong: var(--dk-2);
+  --catalog-ink: var(--foreground);
+  --catalog-muted: var(--muted-foreground);
+  --catalog-faint: var(--dk-text-faint);
+  --catalog-border: var(--dk-line);
+  --catalog-border-soft: oklch(0.94 0.008 255 / 0.07);
+  --catalog-shadow: 0 28px 78px oklch(0.05 0.006 255 / 0.45);
 }
 
 .catalogShell a {

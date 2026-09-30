@@ -1,10 +1,13 @@
 import "server-only";
 
 import type { CarsystemProduct, ProductImageAsset } from "@/lib/carsystem-data";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import {
   getProductImageMetrics,
   resolveContrastMode,
+  resolveImageMatte,
   type ProductContrastMode,
+  type ProductImageMatte,
 } from "@/lib/product-image-metrics";
 
 /**
@@ -21,7 +24,26 @@ export type ProductStageImage = {
   src: string;
   alt: string;
   contrastMode: ProductContrastMode;
+  /** What the file is (cut-out / photo on a flat backdrop / full photo). */
+  matte: ProductImageMatte;
+  /** The photo's own flat backdrop colour, for `matte: "backdrop"` only. */
+  backdrop: string | null;
 };
+
+export function toProductStageImage(identitySrc: string, alt: string): ProductStageImage {
+  // The stage draws the reviewed display derivative when one exists; its
+  // metrics are measured on that same file, so geometry and pixels agree.
+  const src = toDisplayImageSrc(identitySrc);
+  const metrics = getProductImageMetrics(src);
+  const matte = resolveImageMatte(metrics);
+  return {
+    src,
+    alt,
+    contrastMode: resolveContrastMode(metrics),
+    matte,
+    backdrop: matte === "backdrop" ? (metrics?.backdrop ?? null) : null,
+  };
+}
 
 /**
  * The stage's proportions, chosen from the product's measured silhouette.
@@ -57,11 +79,7 @@ export function getProductStageImages(
       all.findIndex((candidate) => candidate.src === image.src) === index,
   );
 
-  return unique.map((image) => ({
-    src: image.src,
-    alt: image.alt,
-    contrastMode: resolveContrastMode(getProductImageMetrics(image.src)),
-  }));
+  return unique.map((image) => toProductStageImage(image.src, image.alt));
 }
 
 /**

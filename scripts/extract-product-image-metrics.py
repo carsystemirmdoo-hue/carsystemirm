@@ -53,6 +53,8 @@ SOURCE_DIRS = (
     "products",
     "images/products",
     "images/brands/rm/products",
+    # Reviewed display derivatives (scripts/catalog/image-remaster/remaster.py).
+    "remastered",
 )
 
 RASTER_SUFFIXES = {".webp", ".png", ".jpg", ".jpeg"}
@@ -61,6 +63,9 @@ RASTER_SUFFIXES = {".webp", ".png", ".jpg", ".jpeg"}
 # renders carry a soft antialiased edge; 24/255 keeps the real silhouette while
 # discarding the halo that would otherwise inflate the content box by a few px.
 ALPHA_FLOOR = 24
+# Max 90th-percentile deviation (0–255) of the border rings for a backdrop to
+# count as flat enough to be continued by a plate of one colour.
+BACKDROP_FLAT_TOLERANCE = 8
 
 # For opaque files (28 of them — mostly older .jpg/.png sources) the background
 # is inferred from the border ring. A channel distance above this counts as
@@ -97,11 +102,16 @@ def public_href(path: Path) -> str:
     return "/" + path.relative_to(PUBLIC_ROOT).as_posix()
 
 
-def content_mask(rgba: np.ndarray) -> tuple[np.ndarray, str]:
-    """Boolean mask of product pixels, plus how it was derived."""
+def content_mask(rgba: np.ndarray) -> tuple[np.ndarray, str, str | None]:
+    """Boolean mask of product pixels, how it was derived, and the flat backdrop colour.
+
+    The backdrop (hex) is only reported for "opaque-border" files: it lets a dark
+    stage paint its plate in the photo's own studio colour instead of showing the
+    photo as a light rectangle ("sticker") on a dark surface.
+    """
     alpha = rgba[:, :, 3]
     if int(alpha.min()) < 255:
-        return alpha > ALPHA_FLOOR, "alpha"
+        return alpha > ALPHA_FLOOR, "alpha", None
 
     # Opaque file: infer the flat backdrop from the border ring. Using the ring
     # (not a single corner) means a stray corner artefact cannot decide the crop.
@@ -122,9 +132,27 @@ def content_mask(rgba: np.ndarray) -> tuple[np.ndarray, str]:
     # no backdrop to trim (a full-bleed photo). Keep the whole canvas.
     border_background_share = float((distance[0, :] <= OPAQUE_BG_TOLERANCE).mean())
     if border_background_share < 0.5 or not mask.any():
-        return np.ones(mask.shape, dtype=bool), "canvas"
+        return np.ones(mask.shape, dtype=bool), "canvas", None
 
-    return mask, "opaque-border"
+    # A light box only works when the backdrop is FLAT all the way round: a
+    # studio gradient (lighter centre, darker corners) cannot be matched by one
+    # plate colour and is presented as a photograph instead. Measured on the
+    # outer ring and on a ring 3% inside it; flat exports sit at 0–6/255,
+    # gradient studio shots at 11+.
+    height, width = distance.shape
+    inset = max(2, int(min(height, width) * 0.03))
+    rings = np.concatenate(
+        [
+            distance[0, :], distance[-1, :], distance[:, 0], distance[:, -1],
+            distance[inset, inset:-inset], distance[-inset - 1, inset:-inset],
+            distance[inset:-inset, inset], distance[inset:-inset, -inset - 1],
+        ]
+    )
+    if float(np.percentile(rings, 90)) > BACKDROP_FLAT_TOLERANCE:
+        return mask, "opaque-border", None
+
+    backdrop = "#" + "".join(f"{int(round(channel)):02x}" for channel in background)
+    return mask, "opaque-border", backdrop
 
 
 def relative_luminance(rgb: np.ndarray) -> np.ndarray:
@@ -179,7 +207,7 @@ def measure(path: Path) -> dict[str, object] | None:
     if width == 0 or height == 0:
         return None
 
-    mask, mask_source = content_mask(rgba)
+    mask, mask_source, backdrop = content_mask(rgba)
     if not mask.any():
         return None
 
@@ -207,7 +235,7 @@ def measure(path: Path) -> dict[str, object] | None:
     else:
         tone = "mid"
 
-    return {
+    metrics: dict[str, object] = {
         "w": width,
         "h": height,
         "box": [left, top, box_width, box_height],
@@ -223,6 +251,9 @@ def measure(path: Path) -> dict[str, object] | None:
         "boxSource": mask_source,
         "palette": sample_palette(rgb, mask),
     }
+    if backdrop is not None:
+        metrics["backdrop"] = backdrop
+    return metrics
 
 
 def build_manifest() -> dict[str, object]:
@@ -295,9 +326,37 @@ def build_css(manifest: dict[str, object]) -> str:
             f"  --product-content-fill-y: {number(metrics['fy'])};\n"  # type: ignore[arg-type]
             f"  --product-content-offset-x: {number(metrics['ox'])};\n"  # type: ignore[arg-type]
             f"  --product-content-offset-y: {number(metrics['oy'])};\n"  # type: ignore[arg-type]
+            f"{dark_matte(metrics)}"
             "}\n"
         )
     return "".join(lines)
+
+
+# Feathered edge for a photo on a flat studio backdrop: the last few percent of
+# the file fade into a plate painted in the backdrop's own colour, so the photo
+# edge disappears instead of drawing a rectangle. Product pixels are untouched.
+BACKDROP_FEATHER = (
+    "linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), "
+    "linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent)"
+)
+
+
+def dark_matte(metrics: dict[str, object]) -> str:
+    """Dark-theme presentation of an OPAQUE file (read only by `.dark` rules).
+
+    A transparent render emits nothing and keeps the default cut-out treatment.
+    See `resolveImageMatte` in lib/product-image-metrics.ts for the model.
+    """
+    source = metrics["boxSource"]
+    if source == "alpha":
+        return ""
+    lines = "  --product-image-dark-filter: none;\n  --product-image-dark-contact: 0;\n"
+    if source == "opaque-border" and metrics.get("backdrop"):
+        lines += f"  --product-image-dark-plate: {metrics['backdrop']};\n"
+        lines += f"  --product-image-dark-mask: {BACKDROP_FEATHER};\n"
+    else:
+        lines += "  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);\n"
+    return lines
 
 
 def main() -> int:

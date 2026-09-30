@@ -184,6 +184,16 @@
   padding: 4px 6px;
 }
 
+/*
+ * Tamna tema: logotipi proizvođača ostaju na svetloj pločici (zvanične boje
+ * logotipa su crtane za svetlu podlogu), ali pločica je utišana da ne bleska
+ * kao najsvetlija površina ekrana.
+ */
+:global(.dark) .logoFrame {
+  border-color: transparent;
+  background: oklch(0.93 0.004 255);
+}
+
 .logo {
   width: min(100%, 92px);
   height: 36px;

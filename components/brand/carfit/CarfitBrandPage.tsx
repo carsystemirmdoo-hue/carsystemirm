@@ -35,6 +35,7 @@ import type { CarfitProductView, CarfitTaskView } from "./carfit-view";
 import { DocumentCard } from "@/components/documents/DocumentCard";
 import { getFeaturedDocuments } from "@/lib/documents";
 import styles from "./CarfitBrandPage.module.css";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 /** Stabilna referenca — `BrandSectionNav` je drži u zavisnostima efekta. */
 const carfitSectionNavItems = carfitNav.map((item) => ({
@@ -73,7 +74,7 @@ function toProductView(product: CarsystemProduct): CarfitProductView {
     status: getProductPublicStatus(product),
     sku: product.sku,
     packageLabel: product.packages.map((item) => item.label).join(" / "),
-    image: image ? { src: image.src, alt: image.alt } : null,
+    image: image ? { src: toDisplayImageSrc(image.src), alt: image.alt } : null,
     href: `/proizvodi/${product.slug}`,
   };
 }

@@ -62,6 +62,7 @@ out
 tmp/
 review-screenshots/
 docs/audit-screenshots/
+docs/visual-evidence/
 
 # Local QA screenshots and reports
 artifacts/

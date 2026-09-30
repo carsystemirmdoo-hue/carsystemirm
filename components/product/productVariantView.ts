@@ -7,6 +7,7 @@ import { getProductDocuments } from "@/components/product/productDocumentList";
 import { getProductTechnicalFacts } from "@/components/product/productTechnicalFactList";
 import {
   getProductStageImages,
+  toProductStageImage,
   type ProductStageImage,
 } from "@/components/product/productStageImages";
 import { expandRowVariants } from "@/components/product/productVariantState.mjs";
@@ -27,10 +28,6 @@ import {
   type ProductSizeClass,
   type ProductVolumeStatus,
 } from "@/lib/product-scale";
-import {
-  getProductImageMetrics,
-  resolveContrastMode,
-} from "@/lib/product-image-metrics";
 import {
   getPuttyMaterialTrace,
   type PuttyMaterialTraceConfig,
@@ -197,9 +194,7 @@ export function toProductVariantViews(
   if (views.length !== 1) return views;
 
   const [base] = views;
-  return expandRowVariants(base, rowVariants, (src, row) => ({
-    src,
-    alt: row.label ? `${base.name} · ${row.label}` : base.name,
-    contrastMode: resolveContrastMode(getProductImageMetrics(src)),
-  })) as ProductVariantView[];
+  return expandRowVariants(base, rowVariants, (src, row) =>
+    toProductStageImage(src, row.label ? `${base.name} · ${row.label}` : base.name),
+  ) as ProductVariantView[];
 }

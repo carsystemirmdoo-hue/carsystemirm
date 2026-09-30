@@ -237,6 +237,9 @@
   transition: background-color 180ms var(--nb-ease), border-color 180ms var(--nb-ease);
 }
 
+/* `.norbinPage a { color: inherit }` je jači od same klase — dugme je nosilo tamni
+   tekst na plavoj ispuni (1.6:1). Klasa zato ide kroz `.norbinPage`. */
+.norbinPage .buttonPrimary,
 .buttonPrimary {
   background: var(--nb-blue-text);
   color: var(--nb-white);
@@ -866,7 +869,7 @@
   inset: 0;
   display: grid;
   place-items: center;
-  color: rgb(255 255 255 / 0.4);
+  color: rgb(255 255 255 / 0.72); /* 40 % bele = 3.5:1 */
   font-family: var(--font-technical), monospace;
   font-size: 0.62rem;
   letter-spacing: 0.05em;

@@ -1,0 +1,1041 @@
+{
+  "schemaVersion": 1,
+  "note": "Kontrolisana popravka ivica pojedinačnih slika proizvoda (rekonstrukcija tamne teme, 2026-09-27). Svaki unos je pregledan pre/posle na tamnoj, srednje sivoj i svetloj podlozi. Skripta: scripts/catalog/image-remaster/remaster.py; original se ne menja; derivati za prikaz: public/remastered/, mapa: display-map.json.",
+  "reviewedNoRepair": {
+    "shadowExcluded": {
+      "carsystem-multi-flow": "ogledalski odraz, ne senka — obrada ga delimično kvari",
+      "carsystem-paint-system-cps-3-0": "ogledalski odraz čaša",
+      "carsystem-paint-system-cps-3-0-2": "ogledalski odraz kutije",
+      "carsystem-tec-line-stick": "providna noseća folija je deo proizvoda"
+    },
+    "defringeRejected": "Ostali kandidati automatske metrike „svetao rub\" (Cosmos Spray Bike providni poklopci, hromirani/metalni odsjaji, bele limenke baslac, C.A.R.FIT bele boce) su stvarna svojstva ambalaže ili bi popravka uvela artefakte — ne diraju se."
+  },
+  "images": [
+    {
+      "src": "/products/carfit/catalog/carfit-folding-paint-stand-premium.webp",
+      "brand": "carfit",
+      "products": [
+        "carfit-folding-paint-stand-premium"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "6403a0694fbe62d8018203fae63b35beab58afa37e9304908a9ff2062d313638",
+      "repairedSha256": "e016aca2da5ae1a1e63a28bac33cda21b5b40e6c0d78168fb8399935392b4db8"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-rubber-sanding-block.webp",
+      "brand": "carfit",
+      "products": [
+        "carfit-rubber-sanding-block"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "f5bedc5e4a7cd1270824ce91fbe928a9a9f796730b7f04fedd1322c0c7706335",
+      "repairedSha256": "e7b21d188084769750f9e2f12284eab8c667ff3ece01479e87883746b22c6d4b"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-stirring-sticks.webp",
+      "brand": "carfit",
+      "products": [
+        "carfit-stirring-sticks"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "214ab2b64f92de59605dc66c37a06ca9c986697b06be025a07365e3b2903b815",
+      "repairedSha256": "f2f6a55b84e9237f07208edd9db29b585d2b8f3bc3995e3b31f137864450ddb5"
+    },
+    {
+      "src": "/products/carsystem/carsystem-git-elastic-weiss.png",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-git-elastic-weiss"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "18b23799a622489bcc008a36bc2ace3659b0fee60a86682a25a2d53d50929e33",
+      "repairedSha256": "dcc86ea2e5a4ecb693d47830f0dee7c39219fc88bb78efc84c2b81128f3f847d"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-2k-carbo-filler-transparent-1-0.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-2k-carbo-filler-transparent-1-0"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "99ece45916404b6816bf667d12348c980495b2c94afecab189f335ace0168372",
+      "repairedSha256": "bfccd4c11b8635c32efe6e57a00880ef9d083c3a41e84dfc513f1b78d8cbb389"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-2k-high-speed-klarlack.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-2k-high-speed-klarlack"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "205489fd96376d8a9ab644795447765180ba087e65d3fd0a3aa6558844d49621",
+      "repairedSha256": "c6334e67afd7f450c7dc49e156c55a83d9b60563fd8b032e505191c8b06f77cc"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-adapter-for-cps-paint-cup-systems.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-adapter-for-cps-paint-cup-systems"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "49a0cf74273354f223c7af1089d15235807f11ff3f04f82ac86da0ddfc452e34",
+      "repairedSha256": "e0569e1fde551443a8a11ddd2cfb9d60c705eade6b6f3af64489232c8ca9ebda"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-alu-spezial.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-alu-spezial"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "587f5bb348fa70c51aaa8bd142bc26e9566363d8f3af2fa463215e3ef4302d83",
+      "repairedSha256": "191bc4bd097ac8e44f7123e5580c51073678d162238f50996a0eb75c08921c73"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-anti-rust-putty.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-anti-rust-putty"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "b7621d876874e41eccf44584e93fafe34c2b446bfa56fe64bf35fefe4f45c753",
+      "repairedSha256": "ffe70d83755eab6f8e8e5de3cfd715fc90abe0fd3e8049015e22895be26b5a69"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-applicator.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-applicator"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "ae74a5307da21a2271abd8746129cd43f0a240b24377d2e2e6662317140fef3e",
+      "repairedSha256": "507afd4221b8ae72b0a899d8beff70d65ddb97bba5989c8ed6d81bfbda1a9a71"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-bumper-stand.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-bumper-stand"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "a0ffbdf7a512f149dc173b4aefcfa98a8fd7b47fc46f00462c65497d49d44e71",
+      "repairedSha256": "b126182cb7caa17995114c275fc8bca99b6de7cc99cb8be6404406f9e9597f25"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-c-wax-c-80.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-c-wax-c-80"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "cdb5c1ba2c03fad8b94017ae2e30379a9af1119b2eeb91fed611c1327b142a38",
+      "repairedSha256": "90a76d50db07a3ddbde01b5ca30ed2086a4e3936b89859137054813569bd611a"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-classic-coverall-pants.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-classic-coverall-pants"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "b2f6b8387a8548db7d26d3a6a5555bc01ffb235246c8a163a210425d76cf1209",
+      "repairedSha256": "037bdfe71d57aec09bf5753f337e3bde5c7c0a0f07ba41c197472c02d1644465"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-clear-coat-spray.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-clear-coat-spray"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "d37266553ab213c06e381a95fb542a0f39093ce297e3df798d53d0ef9c557f7b",
+      "repairedSha256": "c56c4d0a6cf19ea668242159b590dbed1f2cf17d03b56bdb9943672e1bb96bd3"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-coding-caps.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-coding-caps"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "dc66462afa3dee34477b220bb3981f31a68993cfd8368019becb3ecf09c6844e",
+      "repairedSha256": "bf45a26463d8d74c441e5de3a960a08da1469ce4d3b12f53aa42aa9ea47db53f"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-control-spray.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-control-spray"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "8c4bc6541782517fff362c5d003e26c378f38aef96bd5a7acf040cb606bbb6ba",
+      "repairedSha256": "062c5422fa70dc8b19a6fbefdb7abe1eb0392a60679d3832af155d1d71422eaf"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-crash-film.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-crash-film"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "793045bc060fe506ced3bafd656b64907e1cc03c70f32b7603552b5246d2adb6",
+      "repairedSha256": "ca1fe16ee0e50348cdd88ad093ea34eed29e6406508e25bee54db9114ba231d2"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-ef-21-ep-filler.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-ef-21-ep-filler"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "d52462f42db1fea2a9e6cd9c612fc2fec06628260075703ee0e57468f254388f",
+      "repairedSha256": "fd6442d1470d65dfd55777d1cdd144f5e450464a8ef73c667025b009a29d92a4"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-elastic-beige.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-elastic-beige"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "3a4017815ad2519d4bd6118e84edf4954a3c46c6e3c5f40265b42d2a77115955",
+      "repairedSha256": "84aa902c848d7904289131a033fc42e30f2286f3209a94139a14fcb77375422c"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-elastic-green.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-elastic-green"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "d2172a3d9eaec9eaa9b6808668d70af06f55991de84f3b36405539a9041fb998",
+      "repairedSha256": "b507778c639f89025b6f044076f1233eeaa8e9e287138c7d3d054d0bd9519e3b"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-faser.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-faser"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "569ecb53fe385914a59d73182578c7cc9f09bd3d7b2b4acd8b27d17e84259e78",
+      "repairedSha256": "c186e9e3346f4b459f6bd35aa3ed8725451b2b6a5d652118cb313aaf8cd33e82"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-fill-putty.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-fill-putty"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "d5c2901a4a941f492a557ef0e4a0650710509ad32f113c87333074348889f0fd",
+      "repairedSha256": "0b0074391dde08e34807f43b6245e817b77286f27defce4dc97f0c6650d9add4"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-git-multi-green.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-git-multi-green"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "efb3efa2dc35dfaa9ff571b36e62bba04c30a6fc95ecc72932ca47d2862bde36",
+      "repairedSha256": "c74fbb0071b61fdada1aea208c542e46347f5da85dd915210f3d1dd399efc3cc"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-glas-white.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-glas-white"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "250833f208c62d2369d01b7bd63500f2773c63d9d6ea0dd9ebc3dfd90492514e",
+      "repairedSha256": "3fb40a17db8ac93f500d03035f382e75489108bf52748285f19704790e2e293f"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-glas.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-glas"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "07282ca6be1ce9ad8b59bc1c822decc0f827ae1d17cc698e7a36784756efd966",
+      "repairedSha256": "425220bea9c39b6b9051babf595107a05b1e51efe4158e2462a0d769769f2727"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-glass-fibre-mat.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-glass-fibre-mat"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "a401881859ae83efa40d3837d59890d563d98d3376962942c75cd01bcda3b968",
+      "repairedSha256": "29e998f71fc09c899ca3b22cd2026108defe39dae0ff4eadc9edc89dfe2b1069"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-gun-clean-set.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-gun-clean-set"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "fb5e85a6a947b2c564ad90658336fcd42c90e873f45bc07f7332a9d3ddabd171",
+      "repairedSha256": "a0bbb1cfe03ea107c9dc398a6d583c519a24b8bc1068bbdbd3a7d00d84bc4f46"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-metallic.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-metallic"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "4b8ca5b9914736014fbe1e1dad14c0443e6c6d26ce00476a8481580cbbe38cb7",
+      "repairedSha256": "29f79da120c435002707efddaf54a7375a513a6ec9d3e68ea6bb2d40e5f53dab"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-green-glas-light.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-green-glas-light"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "a2d9cc0a189d8bddb7e7b0c5135367fd858efca35ab54314a757a43da1a838c4",
+      "repairedSha256": "7e04dad0c30f8efa14324c9ad844632fd98ce040e86c07317b24b72bcf451965"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-green-glas.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-green-glas"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "fbd0cbe94f7494959d6b014515bb0a527981392c452e1a76cebdfa4a8c846137",
+      "repairedSha256": "fab2635d2c9ae08119affc917953c16fcb82b59eedc9033d65ca641ad755ad0a"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-green-plus-1-0-super-light.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-green-plus-1-0-super-light"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "87922bff95c802a39d1266a27819e34f4f986ba4498b81c33a4047cd91081bf3",
+      "repairedSha256": "879d9270323430f84792cabf3bbf94b9a2403a97ded69a5a84405796f1e99e8d"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-green-rapid.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-green-rapid"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "4b230ac9a27d5d2fde813f2bcf4a90160f053c96d1f4c24658ba0c1b9c39cd04",
+      "repairedSha256": "83e7c7b123fa20b465511bcfb20ba5c588ddd0646f3c3b09ea232bd50b6d001e"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-green-sf.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-green-sf"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "816d6f0e6162c3231bc6c992a8d2ab45f14200fe948aba57bd2231bace5be680",
+      "repairedSha256": "fcd691e81cf90c513a75cb513022bde8b3d1ef6d74985b86ed0f546a47f23610"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-light.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-light"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "3b35943df1b9400faafbe733c7051451e1ef15fa74bb4b3156ad2e0d99e57b51",
+      "repairedSha256": "622af170d8b904e8e25540b51e34e19afeb32d3b875dc02fd16db87bab0fb219"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-plus.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-plus"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "bba272ecdc031392aeecd176caf19ba8636b7621f635e73f3fc24116f4533672",
+      "repairedSha256": "ff0b2ec5c826defdd55760393d02c17a9da8941c8c434d0bf9824706a244fbef"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-silver-light.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-silver-light"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "d40f11b403a1fcd6c16d911a1ea3032ddfaccd1021353a054ad813c97db15df4",
+      "repairedSha256": "f1d1e8a39ab71a408e71a6de6c35a23d7698a288e3e7c840ccdf693cdea9de7f"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-soft.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-soft"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "edfcdbdd955aa1df1e9047f2488e1b9e60362f923447c31ac2433dcc88370098",
+      "repairedSha256": "c015d5d4161c3545b1476ee8e74e7e599695811beae0051c73ec2ef3452b0bc7"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-super-flex.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi-super-flex"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "a440cf5e749213f92d1ebf7e1c30a3f97f694af73b31820108dc5ca54bb3d761",
+      "repairedSha256": "2ad7ad168bcf9dc2918eaa1233b5504d45c70f66eb2ff15d8b991dec8590434b"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-multi"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "b4702aa3b8ffacb0eab525882f4530d37ce9b8fafefe0c9e21d29df0e09f6967",
+      "repairedSha256": "e6666ecadd3034330f4adba3ffb3ed808e5a19d37f6ce15a12df142de5883114"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-orbital-sander-csh-cms01-kit.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-orbital-sander-csh-cms01-kit"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "653af93d506c23542982bf920309fddf5888c68ecae6e99cf6dbc4e0081157ea",
+      "repairedSha256": "e9c53c6126ed1d81de42f20bc1a646c136c2d563a4db3db6f482fe12224316d4"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-paint-trolley-flexi-plus.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-paint-trolley-flexi-plus"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        },
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni; svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "850b949ddbc2aac0085bf6469787b6de2a5c676056d194fca2d0165bb651b61a",
+      "repairedSha256": "b7a72146c22fa6ed4adb742ca05678e352ad2b7ba736792b53cf3faef5b53687"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-plastic-pro.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-plastic-pro"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "c532b8bef62f0ee837589d22cbc7d63396a16fb2042e86f01a8176b7e3258a7c",
+      "repairedSha256": "a41fe9396b6b89ca72cdc01e7750ab1a6b47f00bb0d315ccad370b839d657850"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polish-c-30-finish.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-polish-c-30-finish"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "57819cfe76d8e1fecb06a79ffdba740911fef6c40142f27e0af512ecb36e3946",
+      "repairedSha256": "e65e58accad42c9a9f1aadc4f8126aee7ae3faca5957112732029de5c3510213"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-polishing-pad-x1500"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply",
+          "params": {
+            "maxChroma": 40
+          }
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "76a84a4e06613e5fd6f03a131ce69ad32f470ecc994d3e348dc22e4186dbaa9c",
+      "repairedSha256": "839af950f97d563ba1a966113e3262dea9a1f4ca41948514cbeca188049c17f0"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-polishing-pad-x8000"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply",
+          "params": {
+            "maxChroma": 40
+          }
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "97517dc8ebc7079d9bc5d365458d7fee583063e5fc641cc1344ba1516c325319",
+      "repairedSha256": "57e12dc6d3fbb85cdc773fcd426b3d908335b30f4029342329372a3dd8a45b93"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-polishing-pad-x8000"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "22b44455046afa980416aa123b7341185ee38366484d63fd31e24d0a64074270",
+      "repairedSha256": "90c2437a76b7e93c55e7a770ec33b385257c85ecbffba4fe81d7d8a5ce18c8a5"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-mercury.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-proflex-mercury"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "90e758d7119b89a806db5ed0e1d16b765b012099995ae442a1ba20dd4e84533f",
+      "repairedSha256": "518b60287d9aaa9858d646aeb71afe425544dd316b3647a3123e902add79f782"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-neptune.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-proflex-neptune"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "56e266231c0875b60bad44841f87c209aa9d248dbff2740bdb368173865bd93d",
+      "repairedSha256": "6f5c0aaa2860841813a40c37300209b7be000c34cdc86db13a2629a81cadd5c8"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rallye-spray-premium-black-glossy.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-rallye-spray-premium-black-glossy"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "b4638398467b0db4efabf16d187d6e11e92c8e2d932be29e02654e3f70c61c5c",
+      "repairedSha256": "f737a3435f0bc1eb759542fb0bbe87599426419daeeb2f35b5906cb1b2238304"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rallye-spray-premium-black-matt.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-rallye-spray-premium-black-matt"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "d6b953e2ad1eed1852508fbbe5291a8ef5cca0cdae49764c2ef1fa385c101b93",
+      "repairedSha256": "ff4f955595e3b2d395bbf7845a49059d9149205ac005f4b5b8ef4c65e2721562"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-orbital-sander-slp41a.webp",
+      "brand": "rupes",
+      "products": [
+        "carsystem-rupes-orbital-sander-slp41a"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "a70fb91fae401f60756f3eb02c8f11414ace7667ec790a922f29cff41da232f2",
+      "repairedSha256": "fcde985a91eec1f26de4e15f9abc96f617ab94fda7e5601026541dd512f4b4a2"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-polishing-machine-lh19e.webp",
+      "brand": "rupes",
+      "products": [
+        "carsystem-rupes-polishing-machine-lh19e"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        },
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni; svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "b8225ebaed69ca5cf75753efe8bf18fb321840e09d49540e21436c89239efd6f",
+      "repairedSha256": "49bd239f20acce05140ce9b0238c1a0c32b0f6cfe941a5607623b61b27656b55"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-polishing-machine-lhr75.webp",
+      "brand": "rupes",
+      "products": [
+        "carsystem-rupes-polishing-machine-lhr75"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        },
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni; svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "a62481a6fdd037d2438fb86412f7986a0707c93ad989dc02d39d1f0e1e14548b",
+      "repairedSha256": "ade7e63ee0a04aeeb1e23b6c1721207ffd940dcea0433671efab71d2cb2ff390"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-skorpio-e-rx.webp",
+      "brand": "rupes",
+      "products": [
+        "carsystem-rupes-skorpio-e-rx"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "24b56c067011ed371d0ecfb2b3a1f3d96c51de24891ce151102c01df754d0aad",
+      "repairedSha256": "2d382871b7224db8eac670663654818a138d64502021a34222973eebd5e6eebb"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-vacuum-cleaner-s145.webp",
+      "brand": "rupes",
+      "products": [
+        "carsystem-rupes-vacuum-cleaner-s145"
+      ],
+      "operations": [
+        {
+          "op": "clear-edge-frame",
+          "params": {
+            "width": 2
+          }
+        }
+      ],
+      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
+      "originalSha256": "b0ab20185d9541bf7c2be546813fb3d074881c8adedf530027317d95e163370d",
+      "repairedSha256": "36422a03ab4720377db20594f80c0d7ecaaea27510dc8880adac4fa0f5af773b"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-spare-battery-5-0ah.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-spare-battery-5-0ah"
+      ],
+      "operations": [
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
+      "originalSha256": "3db45448ec17066a12ee5ee9177827d425adeda8f69fe57a4dccf67a190fa7df",
+      "repairedSha256": "4dc70a4dfb3c1ecde23fe2005feafd2070a76acec2d674d8b8f5520a37d6efd5"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-tape-off-disc-premium-2.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-tape-off-disc-premium"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "1555351c08c1593e4a80a44dd44b8ff2006ab9bb087acca6993a3116646a970c",
+      "repairedSha256": "6bb3512b420e19271e453e33da17a6bbd1b258ddae8eef8ff5984cb88237f7a6"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-uv-filler-spray.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-uv-filler-spray"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "bb646f42cad34184aa5bbf3e48a28ada24c3185fe46b06f70d85a593318dd981",
+      "repairedSha256": "b748d7af73d3bd3b9d6a99d632e7f6f26e87d31a24e68d097a4dd69383fe31fb"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-x-stand-classic.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-x-stand-classic"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "f00ee1ae7b0588ff6cc5b3f390bab54cabb129fc34c24958b242bf319cc5355a",
+      "repairedSha256": "aebb711d63972ca197f11ba3bb8fbb4936c7ef28bdd493c7ac55ea591c483b83"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-x-stand-top.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-x-stand-top"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "1e8e7fd5e14a3e23983d54737a59bf0a9446c23355b946ed01fa0123b18f3971",
+      "repairedSha256": "14797cf581fb38d6cca55311aaa1c91f557e2e6c5cdd2f45d7b25332e2050c45"
+    },
+    {
+      "src": "/products/cosmos-lac/putties/cosmos-lac-putties-iron-filler.webp",
+      "brand": "cosmos-lac",
+      "products": [
+        "cosmos-lac-putties-iron-filler"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "c92b5512161786cf47a81ab022ba3eca6f6893f23181a084de552ce1c016273a",
+      "repairedSha256": "0ec66024d2351174028d87707ae83de955ba8607bc775406c265b37c1c553358"
+    },
+    {
+      "src": "/products/cosmos-lac/putties/cosmos-lac-putties-marble-adhesive-filler.webp",
+      "brand": "cosmos-lac",
+      "products": [
+        "cosmos-lac-putties-marble-adhesive-filler"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "a5af90a5a142d47823316fd8cf34d748c8d52e1163bc55a3014a909c93f8eff7",
+      "repairedSha256": "59afca8c0fcb0a4afeb3906b36c58af9258bb9cc69c742d505ed2bfebca38195"
+    },
+    {
+      "src": "/products/cosmos-lac/putties/cosmos-lac-putties-polyester-putty-fiber-filler.webp",
+      "brand": "cosmos-lac",
+      "products": [
+        "cosmos-lac-putties-polyester-putty-fiber-filler"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply"
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "5debe2a6756b15e25eda75cc1424fbda03b2cc44a1eb9330a2570683496b4f18",
+      "repairedSha256": "b6bda82a773576596ff87e36e167b58bf0f731ce1f51e0f13a5e1b0f845f844b"
+    },
+    {
+      "src": "/products/rm/rm-pasta-190-1l.webp",
+      "brand": "rm",
+      "products": [
+        "rm-pasta-190-1l"
+      ],
+      "operations": [
+        {
+          "op": "antialias-mask"
+        },
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "binarna (stepenasta) alfa maska sa svetlim ostatkom pozadine duž oboda limenke",
+      "originalSha256": "22aebde8e6f48ca86fbf82f71d0967e1e682a60df5d56897c60b86154d33f5da",
+      "repairedSha256": "09f377d6f3a92ed4e882b30c55ae770cc7655dab30e05be850b227be157c8757"
+    },
+    {
+      "src": "/products/rm/rm-pasta-190-5l.webp",
+      "brand": "rm",
+      "products": [
+        "rm-pasta-190-5l"
+      ],
+      "operations": [
+        {
+          "op": "antialias-mask"
+        },
+        {
+          "op": "defringe"
+        }
+      ],
+      "reason": "binarna (stepenasta) alfa maska sa svetlim ostatkom pozadine duž oboda limenke",
+      "originalSha256": "dc7f794355fa2690d727697d24a053706f35ccb7f412708b34a7f249ad3f92fd",
+      "repairedSha256": "ce6d26c5f14caab19f6964c23e30b24b2eb69c9ad9e9ea72a300aeef3647cad8"
+    }
+  ]
+}

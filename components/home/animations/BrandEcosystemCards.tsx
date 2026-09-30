@@ -9,6 +9,7 @@ import {
 } from "@/components/home/BrandLogoPlate";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import styles from "../CarsystemHomePage.module.css";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 export type ProgramCategory = {
   id: string;
@@ -244,7 +245,7 @@ export function BrandPreviewPanel({
               <span className={styles.programPreviewThumb}>
                 {product.productImage ? (
                   <Image
-                    src={product.productImage.src}
+                    src={toDisplayImageSrc(product.productImage.src)}
                     alt={product.productImage.alt}
                     width={96}
                     height={72}

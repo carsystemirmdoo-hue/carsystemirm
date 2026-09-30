@@ -28,16 +28,17 @@
 }
 
 :global(.dark) .pageShell {
-  --product-bg: oklch(0.105 0.013 250);
-  --product-bg-soft: oklch(0.075 0.012 250);
-  --product-panel: oklch(0.16 0.014 250 / 0.88);
-  --product-panel-strong: oklch(0.2 0.016 250 / 0.92);
-  --product-ink: oklch(0.96 0.007 250);
-  --product-muted: oklch(0.75 0.02 250);
-  --product-faint: oklch(0.6 0.02 250);
-  --product-border: oklch(0.93 0.01 250 / 0.14);
-  --product-border-soft: oklch(0.93 0.01 250 / 0.08);
-  --product-shadow: 0 28px 78px oklch(0.04 0.01 250 / 0.42);
+  /* Nivoi iz globalne tamne skale (app/globals.css → --dk-*). */
+  --product-bg: var(--dk-0);
+  --product-bg-soft: oklch(0.13 0.008 255);
+  --product-panel: var(--dk-1);
+  --product-panel-strong: var(--dk-2);
+  --product-ink: var(--foreground);
+  --product-muted: var(--muted-foreground);
+  --product-faint: var(--dk-text-faint);
+  --product-border: var(--dk-line);
+  --product-border-soft: oklch(0.94 0.008 255 / 0.07);
+  --product-shadow: 0 28px 78px oklch(0.05 0.006 255 / 0.5);
 }
 
 :global(html:not(.dark)) .pageShell {
@@ -47,7 +48,7 @@
   --product-panel-strong: oklch(0.94 0.01 250 / 0.94);
   --product-ink: oklch(0.18 0.018 250);
   --product-muted: oklch(0.44 0.026 250);
-  --product-faint: oklch(0.58 0.026 250);
+  --product-faint: oklch(0.5 0.026 250);
   --product-border: oklch(0.3 0.02 250 / 0.14);
   --product-border-soft: oklch(0.3 0.02 250 / 0.08);
   --product-shadow: 0 22px 64px oklch(0.22 0.025 250 / 0.14);
@@ -295,9 +296,22 @@
 }
 
 :global(.dark) .heroProductImage {
-  filter:
-    drop-shadow(0 0 1px oklch(0.92 0.008 250 / 0.34))
-    drop-shadow(0 18px 24px oklch(0.02 0.01 250 / 0.44));
+  /* Bez svetlog 1 px obrisa (vidi ProductDetailExperience.module.css). */
+  filter: drop-shadow(0 18px 26px var(--dk-shadow-color));
+}
+
+:global(.dark) .heroProductFallback {
+  border-color: var(--dk-line-strong);
+  background-color: var(--dk-2);
+  color: var(--muted-foreground);
+}
+
+:global(.dark) .heroProductFallback strong {
+  color: var(--foreground);
+}
+
+:global(.dark) .heroProductFallback span {
+  color: var(--muted-foreground);
 }
 
 .heroProductFallback {
@@ -774,20 +788,21 @@
 }
 
 :global(.dark) .referenceZone {
-  --product-panel: oklch(0.15 0.014 250 / 0.88);
-  --product-panel-strong: oklch(0.2 0.016 250 / 0.92);
-  --product-reference-grid: oklch(0.76 0.012 250 / 0.1);
-  --product-reference-panel-grid: oklch(0.76 0.012 250 / 0.07);
-  --product-ink: oklch(0.96 0.007 250);
-  --product-muted: oklch(0.74 0.02 250);
-  --product-faint: oklch(0.6 0.02 250);
-  --product-border: oklch(0.93 0.01 250 / 0.14);
-  --product-border-soft: oklch(0.93 0.01 250 / 0.08);
+  --product-panel: var(--dk-1);
+  --product-panel-strong: var(--dk-2);
+  --product-reference-grid: oklch(0.8 0.01 255 / 0.07);
+  --product-reference-panel-grid: oklch(0.8 0.01 255 / 0.05);
+  --product-ink: var(--foreground);
+  --product-muted: var(--muted-foreground);
+  --product-faint: var(--dk-text-faint);
+  --product-border: var(--dk-line);
+  --product-border-soft: oklch(0.94 0.008 255 / 0.07);
+  border-top-color: var(--dk-line);
   background:
     linear-gradient(to right, var(--product-reference-grid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--product-reference-grid) 1px, transparent 1px),
-    radial-gradient(circle at 88% 0%, oklch(0.58 0.22 27 / 0.11), transparent 24rem),
-    linear-gradient(180deg, oklch(0.125 0.014 250), oklch(0.095 0.012 250));
+    radial-gradient(circle at 88% 0%, oklch(0.58 0.22 27 / 0.09), transparent 24rem),
+    linear-gradient(180deg, var(--dk-1), var(--dk-0));
 }
 
 .referenceHeader {

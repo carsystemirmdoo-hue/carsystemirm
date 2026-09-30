@@ -33,7 +33,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--accent);
+  color: var(--accent-text, var(--accent));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 11px;
   font-weight: 600;
@@ -175,7 +175,7 @@
 
 .typeChipActive {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-text, var(--accent));
   font-weight: 700;
 }
 

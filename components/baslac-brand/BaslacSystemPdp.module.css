@@ -12,7 +12,7 @@
   --baslac-border: rgb(24 35 42 / 0.14);
   --baslac-surface: #f6f8f7;
   --baslac-surface-strong: #ffffff;
-  --baslac-accent: #1d7fb0;
+  --baslac-accent: #1a73a0; /* beli tekst na dugmetu: #1d7fb0 = 4.47:1 */
   --baslac-accent-ink: #ffffff;
   --baslac-radius: 10px;
   color: var(--baslac-ink);
@@ -252,6 +252,9 @@
 .stagePlaceholder strong { display: block; font-size: 0.9rem; }
 
 /* Javni CTA je upit, ne kupovina. */
+/* PDP okvir ima `.pageShell a { color: inherit }`, jače od same klase: dugme je
+   nosilo boju teksta strane umesto --baslac-accent-ink (2.4:1 tamna / 3.6:1 svetla). */
+.pdp .inquiryButton,
 .inquiryButton {
   display: inline-flex; min-height: 3rem; align-items: center; gap: 0.7rem;
   padding: 0 1.4rem; border-radius: 8px; background: var(--baslac-accent);

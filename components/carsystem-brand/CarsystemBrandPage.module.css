@@ -5,11 +5,14 @@
   --cs-paper-cool: oklch(0.915 0.016 242);
   --cs-ink: oklch(0.19 0.018 248);
   --cs-ink-soft: oklch(0.42 0.022 248);
-  --cs-ink-faint: oklch(0.6 0.018 248);
+  /* 0.6 je na svetlim panelima davalo 3.7:1 za 11 px tekst. */
+  --cs-ink-faint: oklch(0.5 0.018 248);
   --cs-line: oklch(0.77 0.012 245 / 0.72);
   --cs-line-strong: oklch(0.62 0.018 245 / 0.72);
   --cs-red: oklch(0.56 0.22 28);
   --cs-red-strong: oklch(0.49 0.205 28);
+  /* Crveni TEKST: na svetlim panelima dublji ton (≥ 4.5:1); tamne sekcije ga posvetljavaju. */
+  --cs-red-text: oklch(0.5 0.2 28);
   --cs-red-soft: oklch(0.91 0.052 27);
   --cs-dark: oklch(0.145 0.02 245);
   --cs-dark-raised: oklch(0.19 0.022 245);
@@ -200,7 +203,7 @@
 }
 
 .breadcrumb a:hover {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
 }
 
 .breadcrumb strong {
@@ -247,7 +250,7 @@
       var(--cs-paper-muted) 54%,
       color-mix(in oklch, var(--cs-red-soft) 52%, var(--cs-paper-muted))
     );
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
 }
 
 .mediaFallback::after {
@@ -274,7 +277,7 @@
 
 .schematicProcess,
 .schematicNode {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
 }
 
 .schematicLights {
@@ -439,7 +442,7 @@
 }
 
 .heroActivePhase > span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.78rem;
   font-weight: 600;
@@ -491,7 +494,7 @@
   width: 88%;
   height: auto;
   overflow: visible;
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   pointer-events: none;
 }
 
@@ -601,7 +604,7 @@
 }
 
 .heroTabs button[data-active] span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
 }
 
 .heroTransport {
@@ -718,7 +721,7 @@
 }
 
 .metrics dt strong {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.65rem, 2.5vw, 2.7rem);
   font-weight: 800;
@@ -832,7 +835,7 @@
 }
 
 .processTabs button[data-active] > span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
 }
 
 .processWorkspace {
@@ -1000,7 +1003,7 @@
   overflow: hidden;
   place-items: center;
   background: var(--cs-paper-muted);
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: 0.72rem;
   font-weight: 800;
@@ -1033,7 +1036,7 @@
 }
 
 .processProducts i {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-style: normal;
   transition: transform 220ms var(--cs-ease);
 }
@@ -1059,7 +1062,7 @@
 }
 
 .processCta span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   transition: transform 220ms var(--cs-ease);
 }
 
@@ -1259,7 +1262,7 @@
 }
 
 .familyCopy > span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.68rem;
   font-weight: 600;
@@ -1320,7 +1323,7 @@
 }
 
 .familyCopy a i {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-style: normal;
   transition: transform 220ms var(--cs-ease);
 }
@@ -1485,7 +1488,7 @@
 }
 
 .useCaseTabs button i {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-style: normal;
   opacity: 0;
   transform: translate3d(-0.35rem, 0.35rem, 0);
@@ -1502,7 +1505,7 @@
 }
 
 .useCaseTabs button[data-active] span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
 }
 
 .useCaseTabs button[data-active] i {
@@ -1630,7 +1633,7 @@
 }
 
 .useCaseProductImage > strong {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: 0.75rem;
 }
@@ -1661,7 +1664,7 @@
 }
 
 .useCaseProducts i {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-style: normal;
 }
 
@@ -1806,7 +1809,7 @@
   position: absolute;
   top: 0.85rem;
   left: 0.85rem;
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.6rem;
   font-weight: 600;
@@ -1870,7 +1873,7 @@
 }
 
 .productCardCopy > strong i {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-style: normal;
   transition: transform 220ms var(--cs-ease);
 }
@@ -2243,7 +2246,7 @@
 }
 
 .finalCtaCopy > span {
-  color: var(--cs-red);
+  color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.68rem;
   font-weight: 600;
@@ -2446,13 +2449,36 @@
   --cs-paper-cool: oklch(0.24 0.022 245);
   --cs-ink: oklch(0.94 0.008 245);
   --cs-ink-soft: oklch(0.74 0.016 245);
-  --cs-ink-faint: oklch(0.61 0.018 245);
+  --cs-ink-faint: oklch(0.67 0.016 245);
   --cs-line: oklch(0.56 0.018 245 / 0.34);
   --cs-line-strong: oklch(0.7 0.018 245 / 0.42);
   --cs-red-soft: oklch(0.31 0.09 28);
+  /* --cs-red-strong je na ovoj stranici uglavnom TEKST (kicker, brojevi faza):
+     na tamnoj podlozi mora biti svetliji (bio je 2.9:1). Ispune ostaju --cs-red. */
+  --cs-red-strong: oklch(0.69 0.19 28);
+  /* Crveni TEKST (brojevi faza, aktivne oznake) na tamnoj podlozi: --cs-red je ispuna i davao je 3.5–3.7:1. */
+  --cs-red-text: oklch(0.69 0.19 28);
   --brand-nav-surface: oklch(0.15 0.018 245 / 0.95);
   --brand-nav-border: oklch(0.56 0.018 245 / 0.38);
   --brand-nav-ink: var(--cs-ink);
+}
+
+/* Tamne sekcije (u obe teme): crveni tekst je svetliji. */
+.workflowSection,
+.documentationSection,
+.familyPanel[data-layout="featured"] {
+  --cs-red-text: oklch(0.69 0.19 28);
+}
+
+:global(html.dark) .productFilters button[data-active] {
+  /* Aktivni filter: --cs-paper-strong je u tamnoj temi taman (tamno na crvenom, 3.7:1). */
+  color: oklch(0.985 0.004 245);
+}
+
+:global(html.dark) .primaryButton:hover,
+:global(html.dark) .primaryButton:focus-visible {
+  border-color: oklch(0.5 0.2 28);
+  background: oklch(0.5 0.2 28);
 }
 
 :global(html.dark) .heroLogoPlate,
@@ -2873,13 +2899,13 @@
   }
 
   .processAccordion h3 button > span {
-    color: var(--cs-red);
+    color: var(--cs-red-text, var(--cs-red));
     font-family: var(--font-technical), var(--font-geist-mono), monospace;
     font-size: 0.68rem;
   }
 
   .processAccordion h3 button > i {
-    color: var(--cs-red);
+    color: var(--cs-red-text, var(--cs-red));
     font-family: var(--font-body), sans-serif;
     font-style: normal;
   }

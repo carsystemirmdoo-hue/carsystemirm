@@ -8,6 +8,7 @@ import {
   resolveSizeClass,
 } from "@/lib/product-scale";
 import styles from "./RmBrandPage.module.css";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 const PLACEHOLDER_ASSET = "/images/products/placeholder-product.svg";
 
@@ -60,7 +61,7 @@ export function RmProductImageSlot({
       >
         {hasApprovedAsset && asset ? (
           <Image
-            src={asset.src}
+            src={toDisplayImageSrc(asset.src)}
             alt={altText || asset.alt}
             fill
             priority={priority}

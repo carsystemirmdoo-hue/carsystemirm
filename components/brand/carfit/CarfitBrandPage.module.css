@@ -14,6 +14,8 @@
    */
   --cf-red: #e20613;
   --cf-red-ink: #ffffff;
+  /* Sitne crvene šifre na sivim pločama: #e20613 je davao 4.1:1; tekst nosi dublji ton. */
+  --cf-red-text: #c00511;
   --cf-red-soft: color-mix(in srgb, #e20613 10%, transparent);
   --cf-gray: #a7a6a6;
   --cf-gray-soft: color-mix(in srgb, #a7a6a6 22%, transparent);
@@ -27,7 +29,8 @@
 
   --cf-ink: #17181a;
   --cf-ink-muted: #5c5f63;
-  --cf-ink-faint: #8b8d90;
+  /* #8b8d90 je na beloj davao 3.3:1 (šifre, „Pakovanje", fusnote). */
+  --cf-ink-faint: #676a6e;
   --cf-line: #e0e0de;
   --cf-line-strong: var(--cf-gray);
 
@@ -59,6 +62,7 @@
   /* Brand crvena `#e20613` na skoro crnoj podlozi pada ispod AA, pa se u tamnoj
      temi posvetljuje. Kanonska vrednost ostaje u svetloj temi i na logotipu. */
   --cf-red: #ff3b30;
+  --cf-red-text: #ff3b30;
   --cf-red-soft: color-mix(in srgb, #ff3b30 14%, transparent);
   --cf-gray: #8e8e8d;
   --cf-gray-soft: color-mix(in srgb, #a7a6a6 18%, transparent);
@@ -72,7 +76,7 @@
 
   --cf-ink: #f0f0ef;
   --cf-ink-muted: #9c9c9e;
-  --cf-ink-faint: #78787a;
+  --cf-ink-faint: #8f8f92;
   --cf-line: oklch(0.98 0.002 90 / 0.12);
   --cf-line-strong: oklch(0.98 0.002 90 / 0.24);
 
@@ -229,14 +233,27 @@
     transform 180ms var(--cf-ease);
 }
 
+.pageShell .btnPrimary,
 .btnPrimary {
   background: var(--cf-red);
   color: var(--cf-red-ink);
 }
 
+/*
+ * U tamnoj temi je --cf-red posvetljen za TEKST (#ff3b30), ali kao ispuna ispod
+ * belog teksta davao je 3.2:1. Dugme zato nosi zvaničnu #e20613 (4.9:1).
+ */
+:global(.dark) .btnPrimary {
+  background: #e20613;
+}
+
 .btnPrimary:hover {
   transform: translateY(-1px);
   background: color-mix(in srgb, var(--cf-red) 88%, #000);
+}
+
+:global(.dark) .btnPrimary:hover {
+  background: #c70511;
 }
 
 .btnSecondary {
@@ -1018,7 +1035,7 @@
 
 .gradationCode {
   composes: technical;
-  color: var(--cf-red);
+  color: var(--cf-red-text, var(--cf-red));
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
 }
@@ -1285,7 +1302,7 @@
 .calloutCode {
   composes: technical;
   padding-top: 0.15rem;
-  color: var(--cf-red);
+  color: var(--cf-red-text, var(--cf-red));
   font-size: 0.625rem;
 }
 
@@ -1341,6 +1358,12 @@
   border-color: var(--cf-red);
   background: var(--cf-red);
   color: var(--cf-red-ink);
+}
+
+:global(.dark) .productFilter[aria-pressed="true"] {
+  /* Ispuna ispod belog teksta nosi zvaničnu #e20613 (posvetljena #ff3b30 = 3.5:1). */
+  border-color: #e20613;
+  background: #e20613;
 }
 
 .productFilter:disabled {

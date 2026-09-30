@@ -78,6 +78,33 @@
   will-change: transform;
 }
 
+/*
+ * Tamna tema: ista formula, ali providnost se meša u `oklab`.
+ *
+ * `color-mix(in oklch, <tamna neutralna> 97%, transparent)` gubi nijansu
+ * (transparent nema hue, a hroma tamne neutralne je ~0), pa je rezultat
+ * ispadao topao/crvenkast (oklab a≈+0.006, b≈0) — header je bio braon iznad
+ * hladne grafitne strane. U svetloj temi je površina bela i efekat se ne vidi,
+ * zato se ovo pravilo ne primenjuje van `.dark`.
+ */
+:global(.dark) .header {
+  --paint-header-surface: color-mix(
+    in oklab,
+    color-mix(in oklab, var(--dk-1) 94%, transparent),
+    rgb(9 11 19 / 0.9) var(--chapter-mix)
+  );
+  --header-hover: color-mix(
+    in oklab,
+    color-mix(in oklab, var(--dk-3) 80%, transparent),
+    rgb(244 241 235 / 0.08) var(--chapter-mix)
+  );
+  --header-panel: color-mix(in oklab, var(--dk-1), #0d0f18 var(--chapter-mix));
+  --header-panel-muted: color-mix(in oklab, var(--dk-2), #171a25 var(--chapter-mix));
+  --header-border: color-mix(in oklab, var(--dk-line), rgb(244 241 235 / 0.2) var(--chapter-mix));
+  --header-shadow: 0 1.5rem 4.5rem
+    color-mix(in oklab, oklch(0.05 0.006 255 / 0.5), rgb(0 0 0 / 0.42) var(--chapter-mix));
+}
+
 :global(html[data-rm-atmosphere="refinity"]) .header {
   --header-shell: oklch(0.12 0.024 238 / 0.94);
   --header-panel: oklch(0.14 0.026 238);

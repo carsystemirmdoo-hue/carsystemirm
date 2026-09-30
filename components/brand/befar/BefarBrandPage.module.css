@@ -17,6 +17,9 @@
      brand guidelines, pa je ovo najbolja dostupna digitalna referenca. */
   --bf-red: #ea080b;
   --bf-red-ink: #ffffff;
+  /* Zvanična #ea080b ostaje za znak i crte; ispuna ispod belog teksta i crveni tekst na kremu su dublji. */
+  --bf-red-fill: #cf0709;
+  --bf-red-text-light: #c20609;
 
   --bf-charcoal: #16191e;
   --bf-ink: #0b0a10;
@@ -25,12 +28,14 @@
 
   --bf-text: #16191e;
   --bf-text-muted: #5b5f66;
-  --bf-text-faint: #868b92;
+  /* Pristupačnost (2026-09): #868b92 je na krem površinama davao 2.7–2.9:1; isti ton, dublji. */
+  --bf-text-faint: #62666d;
   --bf-line: #d6d3cd;
 
   --bf-invert-text: #f4f3f0;
   --bf-invert-muted: #9aa0a8;
-  --bf-invert-faint: #6d747d;
+  /* #6d747d je na grafitu davao 3.7:1 (breadcrumb, oznake skale tvrdoće). */
+  --bf-invert-faint: #8e959e;
   --bf-invert-line: rgb(244 243 240 / 0.16);
   --bf-invert-line-strong: rgb(244 243 240 / 0.32);
 
@@ -210,8 +215,9 @@
   transition: background 180ms var(--bf-ease), color 180ms var(--bf-ease);
 }
 
+.pageShell .buttonPrimary,
 .buttonPrimary {
-  background: var(--bf-red);
+  background: var(--bf-red-fill); /* beli tekst ≥ 4.5:1 (sa #ea080b bilo 4.2:1) */
   color: var(--bf-red-ink);
 }
 
@@ -786,7 +792,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--bf-invert-faint);
+  color: var(--bf-text-faint); /* oznaka stoji na krem listi */
 }
 
 .hardnessNote {
@@ -1102,14 +1108,14 @@
 .pairingButtonPlate {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--bf-text-muted);
+  color: var(--bf-text);
 }
 
 .pairingButtonUnit {
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--bf-text-faint);
+  color: var(--bf-text);
 }
 
 .pairingFigure {
@@ -1159,7 +1165,7 @@
 }
 
 .pairingPlateRing .pairingRingLabel {
-  color: var(--bf-red);
+  color: var(--bf-red-text-light);
 }
 
 .pairingCaption {
@@ -1333,7 +1339,10 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--bf-red);
+  /* Sitna oznaka na grafitu: Befar crvena kao marker, tekst svetao (crveno je bilo 3.8:1). */
+  color: var(--bf-invert-muted);
+  border-left: 2px solid var(--bf-red);
+  padding-left: 0.45rem;
 }
 
 .familySpecs dd {
@@ -1436,7 +1445,7 @@
 }
 
 .opencellScaleStars {
-  color: var(--bf-red);
+  color: #ff4f52; /* Befar crvena posvetljena za tekst na tamnom (bilo 4.3:1) */
   font-size: 0.8rem;
   letter-spacing: 0.1em;
 }
@@ -1564,7 +1573,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: var(--bf-red);
+  color: var(--bf-red-text-light); /* crveno na kremu: dublji ton (bilo 4.2:1) */
 }
 
 .useLabel {

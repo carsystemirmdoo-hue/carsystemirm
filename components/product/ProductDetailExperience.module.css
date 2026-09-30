@@ -4,11 +4,13 @@
   --detail-surface-muted: oklch(0.935 0.009 255);
   --detail-ink: oklch(0.19 0.018 255);
   --detail-muted: oklch(0.48 0.024 255);
-  --detail-faint: oklch(0.61 0.018 255);
+  /* Pristupačnost (2026-09): 0.61 je na podlozi strane davao 3.4:1 (breadcrumb, napomene, šifre). */
+  --detail-faint: oklch(0.5 0.018 255);
   --detail-border: oklch(0.29 0.018 255 / 0.15);
   --detail-border-strong: oklch(0.29 0.018 255 / 0.28);
-  --detail-red: oklch(0.58 0.22 27);
-  --detail-red-hover: oklch(0.52 0.21 27);
+  /* 0.58 je kao sitan crveni tekst davao 4.3:1; ista crvena, za nijansu dublja. */
+  --detail-red: oklch(0.545 0.215 27);
+  --detail-red-hover: oklch(0.5 0.205 27);
   --detail-violet: oklch(0.38 0.17 292);
   --detail-dark: oklch(0.17 0.019 255);
   --detail-dark-muted: oklch(0.72 0.02 255);
@@ -21,18 +23,23 @@
 }
 
 :global(.dark) .pageShell {
-  --detail-bg: oklch(0.105 0.011 255);
-  --detail-surface: oklch(0.145 0.013 255);
-  --detail-surface-muted: oklch(0.185 0.015 255);
-  --detail-ink: oklch(0.94 0.008 255);
-  --detail-muted: oklch(0.7 0.022 255);
-  --detail-faint: oklch(0.57 0.02 255);
-  --detail-border: oklch(0.93 0.008 255 / 0.12);
-  --detail-border-strong: oklch(0.93 0.008 255 / 0.22);
-  --detail-red: oklch(0.65 0.22 27);
-  --detail-red-hover: oklch(0.7 0.21 27);
-  --detail-dark: oklch(0.075 0.009 255);
-  --detail-dark-muted: oklch(0.68 0.02 255);
+  /* Nivoi iz globalne tamne skale (app/globals.css → --dk-*). */
+  --detail-bg: var(--dk-0);
+  --detail-surface: var(--dk-1);
+  --detail-surface-muted: var(--dk-2);
+  --detail-ink: var(--foreground);
+  --detail-muted: var(--muted-foreground);
+  --detail-faint: var(--dk-text-faint);
+  --detail-border: var(--dk-line);
+  --detail-border-strong: var(--dk-line-strong);
+  /* Crvena kao TEKST na tamnom (≥ 4.5:1)… */
+  --detail-red: oklch(0.68 0.2 27);
+  --detail-red-hover: oklch(0.72 0.19 27);
+  /* …i crvena kao ISPUNA ispod belog teksta (≥ 4.5:1 za beli tekst). */
+  --detail-red-fill: oklch(0.535 0.21 27);
+  --detail-red-fill-hover: oklch(0.575 0.21 27);
+  --detail-dark: oklch(0.1 0.008 255);
+  --detail-dark-muted: oklch(0.7 0.016 255);
 }
 
 .pageShell a {
@@ -442,10 +449,103 @@
   filter: drop-shadow(0 18px 24px oklch(0.08 0.01 250 / 0.24));
 }
 
+/*
+ * Tamna tema: samo tamna senka ispod proizvoda.
+ *
+ * Ovde je stajao i `drop-shadow(0 0 1px svetlo / 0.34)` — svetao obris po
+ * celoj siluetu. On je od svakog isečka pravio „nalepnicu", a neprovidnu
+ * fotografiju ocrtavao belim pravougaonikom. Odvajanje tamnog proizvoda od
+ * tamne scene radi `.stageHalo` (meko svetlo IZA proizvoda), ne ivica.
+ */
 :global(.dark) .heroProductImage {
-  filter:
-    drop-shadow(0 0 1px oklch(0.92 0.008 250 / 0.34))
-    drop-shadow(0 18px 24px oklch(0.02 0.01 250 / 0.44));
+  filter: drop-shadow(0 18px 26px var(--dk-shadow-color));
+}
+
+/*
+ * Tamna tema — tretman fotografije prema tome ŠTA fajl jeste
+ * (`data-product-image-matte`, iz izmerenih piksela; vidi
+ * `lib/product-image-metrics.ts` → `resolveImageMatte`).
+ *
+ * backdrop — neprovidna fotografija na ravnoj studijskoj pozadini. Automatsko
+ *   isecanje nije bezbedno (bela limenka na belom papiru), a tamni overlay bi
+ *   menjao boju proizvoda. Scena zato postaje „light box" u boji same
+ *   fotografije: ploča = izmerena boja pozadine, ivica fotografije se utapa
+ *   kroz masku od nekoliko procenata, proizvod ostaje netaknut. Nema senke
+ *   siluete, jer bi senka ocrtala pravougaonik fotografije.
+ *
+ * photo — fotografija preko celog kadra (radionica, studijski gradijent koji
+ *   jedna boja ploče ne može da nastavi). Prikazuje se CELA, kao uokvirena
+ *   fotografija na tamnoj ploči, bez senke siluete i bez odsecanja.
+ */
+:global(.dark) .stage[data-product-image-matte="backdrop"] {
+  --detail-faint: oklch(0.42 0.012 255);
+  border-color: var(--dk-line-strong);
+}
+
+:global(.dark) .stage[data-product-image-matte="backdrop"] .stagePlate {
+  background: var(--product-image-backdrop, oklch(0.97 0.003 255));
+  box-shadow: inset 0 0 0 1px oklch(0.2 0.01 255 / 0.08);
+}
+
+:global(.dark) .stage[data-product-image-matte="backdrop"] .stageHalo,
+:global(.dark) .stage[data-product-image-matte="photo"] .stageHalo,
+:global(.dark) .stage[data-product-image-matte="backdrop"] [data-product-hero-spray],
+:global(.dark) .stage[data-product-image-matte="photo"] [data-product-hero-spray] {
+  display: none;
+}
+
+:global(.dark) .stage[data-product-image-matte="backdrop"] .heroProductImage {
+  filter: none;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+  mask-composite: intersect;
+}
+
+:global(.dark) .stage[data-product-image-matte="photo"] .stagePlate {
+  background: var(--dk-2);
+}
+
+:global(.dark) .stage[data-product-image-matte="photo"] .heroProductObject {
+  /*
+   * Cela fotografija, uokvirena — nikad `cover`. Merenje nad svih 375 slika u
+   * ovom režimu: cover je na 248 odsecao kadar (npr. 12,5 % po strani za
+   * kvadratnu fotografiju u 4:3 sceni), često baš proizvod ili etiketu.
+   * Kutija ima proporciju fajla i najveću meru koja staje u 92 % scene.
+   */
+  top: 50%;
+  left: 50%;
+  width: min(92cqw, calc(92cqh * var(--product-canvas-aspect)));
+  aspect-ratio: var(--product-canvas-aspect);
+  overflow: hidden;
+  border-radius: var(--ds-radius, 2px);
+  box-shadow:
+    0 0 0 1px var(--dk-line-strong),
+    0 26px 44px -26px var(--dk-shadow-color);
+  transform: translate(-50%, -50%) scale(var(--product-zoom-scale));
+}
+
+:global(.dark) .stage[data-product-image-matte="photo"] .heroProductImage {
+  object-fit: contain;
+  filter: none;
+}
+
+:global(.dark) .heroProductFallback {
+  border-color: var(--dk-line-strong);
+  background-color: var(--dk-2);
+  color: var(--muted-foreground);
+}
+
+:global(.dark) .heroProductFallback strong {
+  color: var(--foreground);
+}
+
+:global(.dark) .heroProductFallback span {
+  color: var(--muted-foreground);
 }
 
 /*
@@ -640,6 +740,20 @@
   padding: 18px;
 }
 
+:global(.dark) .galleryThumb {
+  background: var(--dk-2);
+}
+
+:global(.dark) .galleryThumb[data-product-image-matte="backdrop"] {
+  background: var(--product-image-backdrop, oklch(0.97 0.003 255));
+}
+
+/* Fotografija preko celog kadra: cela, sa uskim poljem — sličica ne sme da odseče proizvod. */
+:global(.dark) .galleryThumb[data-product-image-matte="photo"] .galleryThumbImage {
+  object-fit: contain;
+  padding: 6px;
+}
+
 /*
  * Top-aligned, not centred. The old `min-height` + `align-items: center` pair
  * meant the first line of the narrative column floated to wherever the copy
@@ -795,7 +909,13 @@
 
 .primaryAction,
 .finalPrimaryAction {
-  background: var(--detail-red);
+  background: var(--detail-red-fill, var(--detail-red));
+  color: oklch(0.985 0.004 255);
+}
+
+/* Link-dugme kroz `.pageShell` — inače `.pageShell a { color: inherit }` daje mastilo
+   strane (u svetloj temi tamno na crvenom, 3.9:1). */
+.pageShell .primaryAction {
   color: oklch(0.985 0.004 255);
 }
 
@@ -2016,7 +2136,7 @@ a.colorOptionContent:active {
   align-items: end;
   margin-top: clamp(5rem, 11vw, 10rem);
   border-radius: var(--detail-radius);
-  background: var(--detail-red);
+  background: var(--detail-red-fill, var(--detail-red));
   color: oklch(0.985 0.004 255);
   padding: clamp(2rem, 5vw, 4.5rem);
 }
@@ -2045,12 +2165,18 @@ a.colorOptionContent:active {
   display: block;
   max-width: 45rem;
   margin-top: 1.1rem;
-  color: oklch(0.96 0.01 30 / 0.84);
+  /* 84 % bele na crvenoj ispuni je davalo 3.3–3.6:1 (obe teme). */
+  color: oklch(0.97 0.008 30 / 0.95);
   font-size: 0.95rem;
   line-height: 1.65;
 }
 
-.finalPrimaryAction {
+/*
+ * `.pageShell a { color: inherit }` ima veću specifičnost od same klase, pa je
+ * link-dugme nasleđivalo belu boju crvenog CTA bloka — „Pošalji upit" je bio
+ * beo tekst na beloj podlozi (u obe teme). Klasa zato ide kroz `.pageShell`.
+ */
+.pageShell .finalPrimaryAction {
   background: oklch(0.98 0.004 255);
   color: oklch(0.2 0.018 255);
 }
@@ -2072,7 +2198,7 @@ a.colorOptionContent:active {
   }
 
   .primaryAction:hover {
-    background: var(--detail-red-hover);
+    background: var(--detail-red-fill-hover, var(--detail-red-hover));
   }
 
   .secondaryAction:hover,

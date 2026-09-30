@@ -802,6 +802,20 @@
   --surface-muted: var(--cl-chalk);
   --muted-foreground: rgba(11, 11, 12, 0.6);
   --accent: var(--cl-ink);
+  /*
+   * `--ds-*` su na :root već IZRAČUNATI iz teme sajta, pa ih samo preimenovanje
+   * baznih tokena ne menja: u tamnoj temi je DocumentCard ostajao taman, a tekst
+   * je dobijao tamno mastilo ove svetle sekcije (1.0:1). Sekcija ih zato
+   * redefiniše sama — izgled je isti u obe teme, kao i ostatak sekcije.
+   */
+  --ds-surface-page: var(--cl-paper);
+  --ds-surface-section: var(--cl-paper);
+  --ds-surface-section-alt: var(--cl-chalk);
+  --ds-surface-card: #ffffff;
+  --ds-surface-stage: var(--cl-chalk);
+  --ds-line-color-structural: rgba(11, 11, 12, 0.14);
+  --ds-line-color-ui: rgba(11, 11, 12, 0.22);
+  --ds-line-color-accent: var(--cl-ink);
 
   background: var(--cl-paper);
   color: var(--cl-ink);

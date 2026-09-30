@@ -103,14 +103,21 @@
   --product-visual-settle-y: 3px;
 }
 
+/*
+ * Tamna tema. `--product-image-dark-*` dolaze iz generisanog
+ * `ProductImageFit.generated.module.css` (ključ = putanja slike) i postoje samo
+ * za NEPROVIDNE fajlove: fotografija na ravnoj studijskoj pozadini dobija ploču
+ * u svojoj boji pozadine i utopljenu ivicu, fotografija preko celog kadra
+ * tanak okvir. Isečak (većina kataloga) ih nema i ostaje na --surface.
+ */
 :global(.dark) .surface {
-  border-bottom-color: color-mix(in oklch, var(--foreground), transparent 86%);
-  background-color: var(--surface);
+  border-bottom-color: var(--dk-line);
+  background-color: var(--product-image-dark-plate, var(--surface));
   background-image: none;
 }
 
 :global(.dark) .surface[data-product-visual-treatment="paint"] {
-  background-color: var(--surface);
+  background-color: var(--product-image-dark-plate, var(--surface));
   background-image: none;
 }
 
@@ -873,6 +880,34 @@
 }
 
 /*
+ * Tamna tema: senka je tamna. Ranije je bojena sa `--foreground`, koji je u
+ * tamnoj temi beo — svaka kartica je dobijala beli oreol oko proizvoda, koji
+ * se čitao kao grubo isečena ivica.
+ */
+:global(.dark) .productImage {
+  filter: var(--product-image-dark-filter, drop-shadow(0 20px 28px var(--dk-shadow-color)));
+  -webkit-mask-image: var(--product-image-dark-mask, none);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--product-image-dark-mask, none);
+  mask-composite: intersect;
+}
+
+:global(.dark) .surface[data-product-visual-treatment="paint"] .productImage {
+  filter: none;
+}
+
+:global(.dark) .objectWrap {
+  border-radius: var(--ds-radius, 2px);
+  box-shadow: var(--product-image-dark-frame, none);
+}
+
+/* Neprovidna fotografija nema siluetu na koju bi kontaktna senka pala. */
+:global(.dark) .contactShadow {
+  background: oklch(0.03 0.006 255 / 0.9);
+  opacity: calc(var(--product-visual-shadow-opacity) * var(--product-image-dark-contact, 1));
+}
+
+/*
  * Roletna se otkriva ISPOD sloja proizvoda i sme da menja samo pozadinu oko
  * njega. Nijedan blend/filter na slici ili njenim roditeljima ne sme da
  * prebojava neprovidne delove proizvoda (etiketa, poklopac, beli delovi
@@ -1068,7 +1103,7 @@
 :global(.dark) .surface[data-product-visual-mode="neutral"],
 :global(.dark) .surface[data-product-visual-mode="color-on-hover"],
 :global(.dark) .surface[data-product-visual-mode="always-color"] {
-  background-color: var(--surface);
+  background-color: var(--product-image-dark-plate, var(--surface));
   background-image: none;
 }
 

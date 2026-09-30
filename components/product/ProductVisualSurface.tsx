@@ -14,6 +14,8 @@ import {
   type ProductVisualPresentation,
 } from "@/components/product/productVisualPresentation";
 import { nextRevealDirection } from "@/components/product/productRevealDirection.mjs";
+import { useProductImageLoadState } from "@/components/product/useProductImageLoadState";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import fit from "./ProductImageFit.generated.module.css";
 import { resetLocalPointerVars } from "@/components/motion/useLocalPointerVars";
 import {
@@ -100,10 +102,23 @@ export function ProductVisualSurface({
       product as CarsystemProduct,
       image ?? undefined,
     );
-  const selectedImage = image ?? resolved.image;
-  const hasProductAsset = Boolean(
+  const identityImage = image ?? resolved.image;
+  // Kartica crta pregledan derivat za prikaz (lib/productImageDisplay.ts), ako postoji.
+  const selectedImage = identityImage
+    ? { ...identityImage, src: toDisplayImageSrc(identityImage.src) }
+    : identityImage;
+  const hasRealImage = Boolean(
     selectedImage && !selectedImage.src.includes("placeholder-product"),
   );
+  /*
+   * Slika koja ne uspe da se učita prelazi u isti pošten prikaz kao proizvod bez
+   * slike („Vizuel u pripremi"), umesto slomljene ikone ili — u tamnoj temi —
+   * prazne ploče u boji studijske pozadine.
+   */
+  const { ref: imageRef, state: imageState } = useProductImageLoadState(
+    hasRealImage ? selectedImage?.src : null,
+  );
+  const hasProductAsset = hasRealImage && imageState !== "error";
   const visual = {
     treatment: resolved.treatment,
     productType: resolved.productType,
@@ -465,6 +480,7 @@ export function ProductVisualSurface({
       <span className={styles.objectWrap}>
         {hasProductAsset && selectedImage ? (
           <Image
+            ref={imageRef}
             src={selectedImage.src}
             alt={selectedImage.alt}
             fill

@@ -27,6 +27,7 @@
     "test:image-supply": "node --test scripts/catalog/image-supply-registry.test.mjs",
     "test:public-code": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/catalog/public-code.test.mts",
     "test:search": "node --test lib/search/*.test.mjs",
+    "test:seo-canonical": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/seo/canonicalFamilyLinks.test.mts",
     "search:benchmark": "node --expose-gc scripts/benchmark-search-asset.mjs",
     "test:product-motion": "node --test components/product/*.test.mjs components/motion/*.test.mjs",
     "test:paint-takeover": "node --test components/paint-takeover/*.test.mjs",

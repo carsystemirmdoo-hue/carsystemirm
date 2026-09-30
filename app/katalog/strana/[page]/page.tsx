@@ -10,11 +10,10 @@ import { CATALOG_BATCH_SIZE } from "@/components/catalog/catalogInfiniteScroll.m
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import {
   getAllCarsystemBrands,
-  getAllCarsystemProducts,
   programGroups,
   refinishPhases,
 } from "@/lib/carsystem-data";
-import { toCatalogListingEntity } from "@/lib/catalog-listing";
+import { getCatalogListingData } from "@/lib/catalog-listing";
 import { withProductFitModel } from "@/lib/product-fit-model";
 import {
   breadcrumbJsonLd,
@@ -28,8 +27,26 @@ type CatalogPaginationRouteProps = {
   params: Promise<{ page: string }>;
 };
 
+/*
+ * Paginacija hoda kanonskim entitetima — porodicama i samostalnim proizvodima —
+ * istim onim skupom koji `/katalog` već koristi za prvu stranu.
+ *
+ * Ranije je hodala sirovim `getAllCarsystemProducts()`, pa je svaka varijanta
+ * `variant-pdp` porodice dobijala sopstvenu pločicu čiji link 307-uje na grupu.
+ * Posledica je bila merljiva: 808 internih linkova na adresu koja preusmerava i
+ * 31 od 48 ProductGroup stranica bez ijednog direktnog linka, iako su upravo one
+ * kanonski entitet u sitemapu i canonical oznakama.
+ *
+ * Kanonski skup je istovremeno tačno univerzum koji sitemap objavljuje
+ * (754 samostalna proizvoda + 48 porodica), pa puzanje i sitemap opisuju isti
+ * entitet.
+ */
+function getCanonicalEntities() {
+  return getCatalogListingData().canonical;
+}
+
 function getTotalPages() {
-  return Math.ceil(getAllCarsystemProducts().length / CATALOG_BATCH_SIZE);
+  return Math.ceil(getCanonicalEntities().length / CATALOG_BATCH_SIZE);
 }
 
 function parsePage(value: string) {
@@ -69,11 +86,11 @@ export default async function CatalogPaginationRoute({
   const page = parsePage(rawPage);
   if (!page) notFound();
 
-  const allProducts = getAllCarsystemProducts();
+  const allEntities = getCanonicalEntities();
   const totalPages = getTotalPages();
   const start = (page - 1) * CATALOG_BATCH_SIZE;
   const products = withProductFitModel(
-    allProducts.slice(start, start + CATALOG_BATCH_SIZE).map(toCatalogListingEntity),
+    allEntities.slice(start, start + CATALOG_BATCH_SIZE),
   );
   const brands = getAllCarsystemBrands();
   const route = `/katalog/strana/${page}`;

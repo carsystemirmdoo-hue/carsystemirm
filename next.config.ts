@@ -94,8 +94,35 @@ const nextConfig: NextConfig = {
         source,
         headers: noStoreHeaders(),
       })),
+      /*
+       * Tehnička dokumentacija proizvoda se ne indeksira.
+       *
+       * Pravilo je ranije pokrivalo samo R-M, jer je R-M bio jedini brend sa
+       * dokumentima. Posle sinhronizacije kataloga pod `/documents/products/`
+       * stoje i baslac i Carsystem tehnički listovi — ista klasa dokumenta, pa
+       * i ista politika. Listovi ponavljaju sadržaj PDP-a i ne treba da se
+       * takmiče s njim u rezultatima; `follow` čuva prenos linkova.
+       */
       {
-        source: "/documents/products/rm/:path*",
+        source: "/documents/products/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, follow",
+          },
+        ],
+      },
+      /*
+       * Brošure su prateći marketinški materijal za proizvode koji već imaju
+       * svoju stranicu (Polish X serija, brusni blokovi, CC.26, Multi Changer).
+       * Kao samostalan rezultat pretrage su tanke i dupliraju PDP.
+       *
+       * Katalozi (`/documents/:brand/catalogs/`) namerno OSTAJU indeksabilni:
+       * to su obimni zvanični dokumenti (42–110 strana) čiji sadržaj ne postoji
+       * na sajtu i koji odgovaraju stvarnoj nameri pretrage „katalog".
+       */
+      {
+        source: "/documents/:brand/brochures/:path*",
         headers: [
           {
             key: "X-Robots-Tag",

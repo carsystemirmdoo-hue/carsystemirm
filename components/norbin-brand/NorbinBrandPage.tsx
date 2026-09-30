@@ -15,6 +15,7 @@ import {
   norbinWhatItIsNot,
 } from "./norbinBrandData";
 import styles from "./NorbinBrandPage.module.css";
+import { productCanonicalHref } from "@/lib/product-families";
 
 export function NorbinBrandPage({
   products,
@@ -316,7 +317,7 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
             {products.map((product) => (
               <Link
                 className={styles.stockedCard}
-                href={`/proizvodi/${product.slug}`}
+                href={productCanonicalHref(product)}
                 key={product.slug}
               >
                 <div className={styles.stockedMedia}>

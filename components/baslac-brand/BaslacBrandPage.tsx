@@ -26,6 +26,7 @@ import {
   type BaslacMediaAvailability,
 } from "./baslacBrandData";
 import styles from "./BaslacBrandPage.module.css";
+import { productCanonicalHref } from "@/lib/product-families";
 
 export function BaslacBrandPage({
   products,
@@ -709,7 +710,7 @@ function BaslacSystemsAndProducts({
           </div>
           <div className={styles.catalogGrid}>
             {products.slice(0, 4).map((product) => (
-              <Link href={`/proizvodi/${product.slug}`} key={product.slug}>
+              <Link href={productCanonicalHref(product)} key={product.slug}>
                 <div className={styles.catalogImage} data-pending={
                   product.productImage?.src.includes("placeholder-product") ||
                   undefined

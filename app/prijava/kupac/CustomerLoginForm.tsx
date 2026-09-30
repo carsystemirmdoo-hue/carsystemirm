@@ -15,7 +15,7 @@ const INITIAL: CustomerLoginState = { error: null };
  * Namerno bez polja za drugi faktor: kupčev nalog u ovoj fazi nema MFA, i
  * prazno polje koje ništa ne radi bi lagalo o zaštiti koju nalog nema.
  */
-export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
+export function CustomerLoginForm({ callbackUrl, rememberAvailable = false, notice = null }: { callbackUrl: string; rememberAvailable?: boolean; notice?: string | null }) {
   const [state, formAction, pending] = useActionState(
     customerSignInAction,
     INITIAL,
@@ -73,6 +73,11 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
           </header>
 
           <input type="hidden" name="callbackUrl" value={callbackUrl} />
+          {notice ? (
+            <p className="portal-login-hint" role="status">
+              {notice}
+            </p>
+          ) : null}
 
           <label className="portal-login-field">
             <span>E-pošta</span>
@@ -103,6 +108,20 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
               />
             </div>
           </label>
+
+          {/*
+            „Zapamti me" samo kada je uključeno (CUSTOMER_REMEMBER_ME=1) i nikad
+            unapred čekirano: kupac svesno bira da uređaj ostane prijavljen.
+          */}
+          {rememberAvailable ? (
+            <label className="portal-login-remember">
+              <input type="checkbox" name="remember" value="on" />
+              <span>
+                <strong>Zapamti me na ovom uređaju 30 dana</strong>
+                <small>Ne uključujte na zajedničkom računaru. Slanje porudžbine i dalje traži lozinku.</small>
+              </span>
+            </label>
+          ) : null}
 
           {state.error ? (
             <div className="portal-login-error" role="alert">

@@ -55,6 +55,9 @@ before(async () => {
 
 after(async () => {
   if (!reason && db) {
+    // Potvrde su samo za dodavanje; TRUNCATE ne pokreće okidače po redu.
+    await db.sql`TRUNCATE customer_contact_verifications`;
+    await db.sql`DELETE FROM customer_external_identifiers WHERE issuer_code = 'QA-LC'`;
     await db.sql`DELETE FROM customer_account_tokens`;
     await db.sql`DELETE FROM customer_message_outbox`;
     await db.sql`DELETE FROM customer_users`;
@@ -74,6 +77,34 @@ async function freshContact(): Promise<string> {
       email,
       name: "QA Kontakt",
       reason: "QA predlog kontakta",
+    },
+    actor(),
+  );
+  return id;
+}
+
+/**
+ * Kontakt koji sme dobiti poziv: firma povezana sa šifrom partnera i osoba
+ * potvrđena (0028). Bez ovoga `issueInvitation` odbija — što je i poenta.
+ */
+async function verifiedContact(): Promise<string> {
+  const { verifyCustomerContact } = await import("@/lib/customers/verification-service");
+  const id = await freshContact();
+  const [identifier] = await db.sql<{ id: string }[]>`
+    INSERT INTO customer_external_identifiers
+      (source_system, issuer_code, external_partner_code, customer_id, status)
+    VALUES ('biznisoft', 'QA-LC', 'LC-1', ${fx.customerId}, 'mapped')
+    ON CONFLICT (source_system, issuer_code, external_partner_code)
+      DO UPDATE SET status = 'mapped'
+    RETURNING id`;
+  await verifyCustomerContact(
+    {
+      accountId: id,
+      basisIdentifierId: identifier.id,
+      method: "callback_known_number",
+      contactSource: "provided_by_company",
+      evidenceNote: "QA: povratni poziv na broj sa kartice partnera.",
+      personRole: "nabavka",
     },
     actor(),
   );
@@ -128,7 +159,7 @@ test("active bez lozinke se ne moze upisati", async (t) => {
 test("poziv se cuva samo kao otisak i pravi outbox red bez tokena", async (t) => {
   if (guard(t)) return;
   const { issueInvitation } = await import("@/lib/customers/invitation-service");
-  const id = await freshContact();
+  const id = await verifiedContact();
 
   const { token, expiresAt } = await issueInvitation(
     { accountId: id, reason: "QA poziv" },
@@ -163,7 +194,7 @@ test("poziv se cuva samo kao otisak i pravi outbox red bez tokena", async (t) =>
 test("token ne ulazi u audit", async (t) => {
   if (guard(t)) return;
   const { issueInvitation } = await import("@/lib/customers/invitation-service");
-  const id = await freshContact();
+  const id = await verifiedContact();
   const { token } = await issueInvitation({ accountId: id, reason: "QA poziv" }, actor());
 
   const rows = await db.sql<{ payload: string }[]>`
@@ -180,7 +211,7 @@ test("aktivacija trosi token, postavlja lozinku i obara sesije", async (t) => {
   const { issueInvitation, activateWithInvitation } = await import(
     "@/lib/customers/invitation-service"
   );
-  const id = await freshContact();
+  const id = await verifiedContact();
   const { token } = await issueInvitation({ accountId: id, reason: "QA poziv" }, actor());
 
   const [before] = await db.sql<{ session_version: number }[]>`
@@ -208,7 +239,7 @@ test("isti token drugi put ne prolazi", async (t) => {
   const { issueInvitation, activateWithInvitation } = await import(
     "@/lib/customers/invitation-service"
   );
-  const id = await freshContact();
+  const id = await verifiedContact();
   const { token } = await issueInvitation({ accountId: id, reason: "QA poziv" }, actor());
 
   assert.equal((await activateWithInvitation({ token, password: "prva-lozinka-123" })).ok, true);
@@ -224,7 +255,7 @@ test("nov poziv ponistava prethodni", async (t) => {
   const { issueInvitation, activateWithInvitation } = await import(
     "@/lib/customers/invitation-service"
   );
-  const id = await freshContact();
+  const id = await verifiedContact();
   const prvi = await issueInvitation({ accountId: id, reason: "QA poziv 1" }, actor());
   await issueInvitation({ accountId: id, reason: "QA poziv 2" }, actor());
 
@@ -240,7 +271,7 @@ test("istekao token ne prolazi", async (t) => {
   const { issueInvitation, activateWithInvitation } = await import(
     "@/lib/customers/invitation-service"
   );
-  const id = await freshContact();
+  const id = await verifiedContact();
   const { token } = await issueInvitation({ accountId: id, reason: "QA poziv" }, actor());
 
   await db.sql`
@@ -261,7 +292,7 @@ async function activeAccount(): Promise<{ id: string; email: string }> {
   const { issueInvitation, activateWithInvitation } = await import(
     "@/lib/customers/invitation-service"
   );
-  const id = await freshContact();
+  const id = await verifiedContact();
   const { token } = await issueInvitation({ accountId: id, reason: "QA poziv" }, actor());
   await activateWithInvitation({ token, password: "pocetna-lozinka-123" });
   const [row] = await db.sql<{ email: string }[]>`

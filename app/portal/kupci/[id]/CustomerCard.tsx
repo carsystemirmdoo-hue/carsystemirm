@@ -1,0 +1,380 @@
+import { Badge } from "@/components/portal/PortalPrimitives";
+import type { ArticleIdentity } from "@/lib/ordering/ordering-service";
+import type { CrossSell } from "@/lib/recommendations/cross-sell";
+import type { CustomerArticle, CustomerProfile } from "@/lib/recommendations/customer-profile";
+import { CONFIDENCE_LABELS, STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
+import { srDate } from "@/lib/recommendations/customerSummary.mjs";
+
+type Tone = "success" | "warning" | "danger" | "neutral";
+
+const STATUS_TONE: Record<string, Tone> = {
+  dormant: "danger",
+  overdue: "warning",
+  due: "success",
+  due_soon: "success",
+  not_yet: "neutral",
+  provisional: "neutral",
+  insufficient_history: "neutral",
+};
+
+function dana(n: number) {
+  const a = Math.abs(n);
+  return a % 10 === 1 && a % 100 !== 11 ? `${a} dan` : `${a} dana`;
+}
+
+function statusLabel(status: string) {
+  return STATUS_LABELS[status as keyof typeof STATUS_LABELS] ?? status;
+}
+
+/**
+ * Vrh kartice: pet odgovora za pet sekundi.
+ * Ko je kupac stoji u zaglavlju strane; ovde su stanje, promena i predlog.
+ */
+export function CustomerSummary({
+  profile,
+  assignees,
+}: {
+  profile: CustomerProfile;
+  assignees: string[];
+}) {
+  const s = profile.summary;
+  return (
+    <section className="portal-panel cs-summary" aria-label="Sažetak kupca">
+      <div className="cs-summary-top">
+        <Badge tone={s.status.tone as Tone}>{s.status.label}</Badge>
+        <dl className="cs-facts">
+          <div>
+            <dt>Poslednja kupovina</dt>
+            <dd>
+              {s.lastPurchaseOn ? srDate(s.lastPurchaseOn) : "—"}
+              {s.daysSinceLastPurchase !== null ? <small>pre {dana(s.daysSinceLastPurchase)}</small> : null}
+            </dd>
+          </div>
+          <div>
+            <dt>Uobičajeno</dt>
+            <dd>{s.usual}</dd>
+          </div>
+          <div>
+            <dt>Komercijalista</dt>
+            <dd>{assignees.length ? assignees.join(", ") : "nije dodeljen"}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <FreshnessLine profile={profile} />
+
+      <div className="cs-summary-body">
+        <div className="cs-block">
+          <h3>Šta se promenilo</h3>
+          <p>{s.change}</p>
+        </div>
+
+        {s.mention.length ? (
+          <div className="cs-block">
+            <h3>Vredi pomenuti</h3>
+            <ul className="cs-mentions">
+              {s.mention.map((m) => (
+                <li key={m.articleCode} data-tone={m.tone}>
+                  <a href={`#artikal-${encodeURIComponent(m.articleCode)}`}>
+                    <strong>{m.name}</strong>
+                    <span>{m.reason}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        <div className="cs-block cs-next">
+          <h3>Predlog za sledeći razgovor</h3>
+          <p>{s.nextStep}</p>
+          <small>Interna pomoć komercijalisti. Ne šalje se kupcu i ne menja cenu ni uslove.</small>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Artikal onako kako ga zaposleni prepoznaju: šifra i naziv iz BizniSofta, uz
+ * kataloški proizvod, varijantu i pakovanje kada je veza potvrđena. Ništa se
+ * ne povezuje ovde — samo se čita postojeća veza.
+ */
+function CatalogIdentity({ id }: { id: ArticleIdentity | undefined }) {
+  if (!id) return <small className="cs-identity">bez zapisa u registru artikala</small>;
+  if (!id.catalog) {
+    return (
+      <small className="cs-identity" data-state="none">
+        Katalog: {id.mappingStatus === "suggested" ? "samo predlog veze — nije potvrđeno" : "nije povezano"}
+      </small>
+    );
+  }
+  return (
+    <small className="cs-identity">
+      Katalog:{" "}
+      <a href={id.catalog.href} target="_blank" rel="noreferrer">
+        {id.catalog.name}
+      </a>
+      {id.catalog.variantLabel ? ` · ${id.catalog.variantLabel}` : ""}
+      {id.packLabel ? ` · ${id.packLabel}` : ""}
+    </small>
+  );
+}
+
+function ArticleRow({ a, asOfDate, identity }: { a: CustomerArticle; asOfDate: string | null; identity?: ArticleIdentity }) {
+  return (
+    <details className="cs-article" id={`artikal-${encodeURIComponent(a.articleCode)}`}>
+      <summary>
+        <span className="cs-article-status">
+          <Badge tone={a.statusOutdated ? "neutral" : (STATUS_TONE[a.status] ?? "neutral")}>
+            {statusLabel(a.status)}
+          </Badge>
+          {a.statusOutdated ? <small>kupljeno posle obračuna</small> : null}
+        </span>
+        <span className="cs-article-name">
+          <strong>{a.articleName ?? a.articleCode}</strong>
+          <small>BizniSoft {a.articleCode}</small>
+          <CatalogIdentity id={identity} />
+        </span>
+        <span className="cs-article-fact">
+          <small>Poslednja</small>
+          {srDate(a.lastPurchaseOn)}
+          <small>pre {dana(a.daysSinceLastPurchase)}</small>
+        </span>
+        <span className="cs-article-fact">
+          <small>Uobičajeno</small>
+          {a.medianIntervalDays !== null ? `na ~${dana(a.medianIntervalDays)}` : "—"}
+        </span>
+        <span className="cs-article-fact">
+          <small>Kupovina</small>
+          {a.eventCount}
+        </span>
+        <span className="cs-article-open" aria-hidden="true">Osnov</span>
+      </summary>
+      <div className="cs-basis">
+        <p>{a.explanation}</p>
+        <dl className="cs-basis-facts">
+          <div>
+            <dt>Prva kupovina</dt>
+            <dd>{srDate(a.firstPurchaseOn)}</dd>
+          </div>
+          <div>
+            <dt>Očekivani termin</dt>
+            <dd>
+              {a.expectedNextOn ? srDate(a.expectedNextOn) : "—"}
+              {a.toleranceDays !== null ? <small> ± {dana(a.toleranceDays)}</small> : null}
+            </dd>
+          </div>
+          <div>
+            <dt>Pouzdanost</dt>
+            <dd>
+              {a.confidence
+                ? CONFIDENCE_LABELS[a.confidence as keyof typeof CONFIDENCE_LABELS] ?? a.confidence
+                : "—"}
+            </dd>
+          </div>
+          <div>
+            <dt>Dokumenata</dt>
+            <dd>{a.documentCount}</dd>
+          </div>
+        </dl>
+        <p className="cs-dates-label">
+          Datumi kupovine iz potvrđenih dokumenata
+          {asOfDate ? ` · status i termin su iz obračuna na dan ${srDate(asOfDate)}` : ""}:
+        </p>
+        <ol className="cs-dates">
+          {a.purchaseDates.map((d) => (
+            <li key={d} data-new={a.newPurchaseDates.includes(d) ? "true" : undefined}>
+              {srDate(d)}
+              {a.newPurchaseDates.includes(d) ? " · posle obračuna" : ""}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </details>
+  );
+}
+
+/** Glavna lista: svaki artikal tačno jednom, grupe po važnosti. */
+export function CustomerArticles({
+  profile,
+  identities = {},
+}: {
+  profile: CustomerProfile;
+  identities?: Record<string, ArticleIdentity>;
+}) {
+  if (profile.articles.length === 0) return null;
+  return (
+    <section className="portal-panel">
+      <div className="portal-section-header">
+        <div>
+          <h2>Artikli ({profile.articles.length})</h2>
+          <p>
+            Svaki artikal je naveden jednom, u grupi koja najviše govori o njemu. Kliknite na red za
+            osnov: sve datume kupovine i kako je termin izračunat.
+          </p>
+        </div>
+      </div>
+      <div className="portal-panel-body cs-groups">
+        {profile.groups.map((g) => {
+          const rows = g.items.map((a) => (
+            <ArticleRow key={a.articleCode} a={a as CustomerArticle} asOfDate={profile.asOfDate} identity={identities[a.articleCode]} />
+          ));
+          return g.key === "thin" ? (
+            <details key={g.key} className="cs-group cs-group-thin">
+              <summary>
+                {g.label} · {g.items.length}
+              </summary>
+              <div className="cs-group-list">{rows}</div>
+            </details>
+          ) : (
+            <div key={g.key} className="cs-group">
+              <h3>
+                {g.label} <span>· {g.items.length}</span>
+              </h3>
+              <div className="cs-group-list">{rows}</div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+export function CustomerMethod({ profile }: { profile: CustomerProfile }) {
+  return (
+    <details className="portal-panel cs-method">
+      <summary>Kako se računa</summary>
+      <div className="portal-panel-body">
+        <p>
+          Osnova su potvrđeni prodajni dokumenti ({profile.documentCount} dokumenata,{" "}
+          {profile.purchaseDayCount} dana sa kupovinom) do {srDate(profile.today)}. Statusi i
+          termini su iz obračuna preporuka
+          {profile.asOfDate ? ` na dan ${srDate(profile.asOfDate)}` : " (još nije pokrenut)"}.
+          Kupovina koja nije uvezena ovde se ne vidi.
+        </p>
+        <p>
+          Za svaki artikal se meri razmak između kupovina tog kupca i uzima medijana — jedna vanredna
+          nabavka ne pomera ritam. „Prošao uobičajeni termin” znači da je prošlo više od uobičajenog
+          razmaka uz dozvoljeno odstupanje. „Ranije redovno, sada ne” znači da je prošlo najmanje tri
+          uobičajena razmaka i više od 180 dana. Sa jednom ili dve kupovine ritam se ne procenjuje.
+        </p>
+        <p>
+          Pouzdanost nije verovatnoća: zavisi od broja kupovina, pravilnosti ritma i dužine istorije.
+          Algoritam: {profile.hasActiveRun ? "cadence_v1" : "obračun preporuka još nije pokrenut"}.
+        </p>
+      </div>
+    </details>
+  );
+}
+
+function fmtTime(at: Date | null) {
+  if (!at) return "—";
+  return new Date(at).toLocaleString("sr-Latn-RS", {
+    timeZone: "Europe/Belgrade",
+    day: "numeric",
+    month: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+/**
+ * Vreme podataka i obračuna, uvek vidljivo. Kada obračun kasni za podacima,
+ * to se kaže izričito — stari status se ne predstavlja kao aktuelan.
+ */
+export function FreshnessLine({ profile }: { profile: CustomerProfile }) {
+  const f = profile.freshness;
+  const tone = f.state === "new_documents" ? "warning" : f.state === "aged" ? "note" : "plain";
+  return (
+    <div className="cs-freshness" data-tone={tone}>
+      <span>
+        Podaci do <strong>{srDate(profile.today)}</strong> · poslednji uvoz {fmtTime(profile.lastIngestedAt)}
+      </span>
+      <span>
+        Obračun preporuka:{" "}
+        {profile.asOfDate ? (
+          <>
+            <strong>{srDate(profile.asOfDate)}</strong> · pokrenut {fmtTime(profile.runStartedAt)}
+          </>
+        ) : (
+          "nije pokrenut"
+        )}
+      </span>
+      {f.state === "new_documents" ? (
+        <span className="cs-freshness-msg">
+          Zastareo za ovog kupca: posle obračuna je stiglo {f.newDocuments.length} nov
+          {f.newDocuments.length === 1 ? " dokument" : "ih dokumenata"}. Savet se ne prikazuje dok se obračun ne ponovi.
+        </span>
+      ) : f.state === "aged" ? (
+        <span className="cs-freshness-msg">
+          Obračun je star {f.runAgeDays} dana; statusi se odnose na dan obračuna.
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+/**
+ * Predlozi dodatnih proizvoda — interno. Svaki predlog nosi razlog koji se može
+ * proveriti; slab signal je označen kao slab, a nedostatak podataka rečima.
+ */
+export function CustomerCrossSell({ crossSell, names }: { crossSell: CrossSell; names: Record<string, string> }) {
+  const label = (code: string) => names[code] ?? code;
+  return (
+    <section className="portal-panel">
+      <div className="portal-section-header">
+        <div>
+          <h2>Predlozi za proširenje ({crossSell.suggestions.length})</h2>
+          <p>
+            Artikli koje kupac ne uzima, a uz ono što uzima ih kupuju slične firme ili ih katalog navodi kao kompatibilne.
+            Interno — kupac ovo ne vidi. Nije cena ni obećanje dostupnosti.
+          </p>
+        </div>
+      </div>
+      <div className="portal-panel-body">
+        {!crossSell.ok ? (
+          <p className="cs-xs-warn">
+            {crossSell.reason} Predlozi iz sličnih kupovina se ne prikazuju{crossSell.suggestions.length ? "; ostaju samo kataloški." : "."}
+          </p>
+        ) : null}
+        {crossSell.suggestions.length === 0 ? (
+          crossSell.ok ? <p>Nema predloga: nijedan artikal ne uzima dovoljno sličnih firmi, a katalog ne navodi kompatibilne povezane proizvode.</p> : null
+        ) : (
+          <ol className="cs-xs">
+            {crossSell.suggestions.map((s) => (
+              <li key={s.articleCode}>
+                <span className="cs-xs-name">
+                  <strong>{s.identity?.catalog?.name ?? s.identity?.bizName ?? s.articleCode}</strong>
+                  {s.identity?.catalog?.variantLabel ? <small> · {s.identity.catalog.variantLabel}</small> : null}
+                  <small>
+                    BizniSoft {s.articleCode}
+                    {s.identity?.bizName ? ` — ${s.identity.bizName}` : ""}
+                  </small>
+                </span>
+                <span className="cs-xs-why">
+                  {s.peer ? (
+                    <span>
+                      {s.peer.strength === "weak" ? <em className="cs-xs-weak">slab signal</em> : null}
+                      {s.peer.support} od {s.peer.peers} firmi sa sličnim kupovinama uzima i ovo (uz{" "}
+                      {s.peer.because.map(label).join(", ")}).
+                    </span>
+                  ) : null}
+                  {s.catalog ? (
+                    <span>
+                      Katalog: kompatibilno sa „{s.catalog.viaName}” koji kupac uzima ({s.catalog.viaCode}).
+                    </span>
+                  ) : null}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+        <p className="portal-footnote">
+          Osnov: potvrđene kupovine iz poslednjih 365 dana ({crossSell.customersWithHistory} firmi, od toga{" "}
+          {crossSell.peers} sa sličnim kupovinama). Imena drugih firmi se ne prikazuju.
+        </p>
+      </div>
+    </section>
+  );
+}

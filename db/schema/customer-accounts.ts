@@ -108,6 +108,8 @@ export const customerUsers = pgTable(
      * dva naloga na osnovu adrese je sistem koji povremeno izabere pogrešan.
      */
     uniqueIndex("customer_users_email_key").on(table.email),
+    /** Cilj složenog ključa potvrde osobe (0028): potvrda pripada nalogu I firmi. */
+    uniqueIndex("customer_users_id_customer_key").on(table.id, table.customerId),
     index("customer_users_customer_idx").on(table.customerId),
     index("customer_users_status_idx").on(table.status),
   ],

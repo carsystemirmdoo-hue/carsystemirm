@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CustomerCardPrice } from "@/components/customer-buy/CustomerCardPrice";
 import {
   type CarsystemBrand,
   type CarsystemProduct,
@@ -153,6 +154,9 @@ export function CatalogProductCard({
         {(contextLabel || technicalLine) && (
           <p className={styles.productTechnicalLine}>{contextLabel ?? technicalLine}</p>
         )}
+
+        {/* Cena prijavljenog kupca; anonimno se ne iscrtava i ne pita server. */}
+        {catalogSystem && <CustomerCardPrice cardKey={listing.id} />}
       </span>
     </Link>
   );

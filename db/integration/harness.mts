@@ -279,6 +279,26 @@ const RESETTABLE_TABLES = [
   "source_document_lines",
   "source_documents",
   "customer_contact_consents",
+  /*
+   * Registar partnera i potvrde osoba (0028). Potvrde su samo za dodavanje —
+   * `DELETE` okidač odbija, `TRUNCATE` ne pokreće okidače po redu.
+   */
+  "customer_contact_verifications",
+  /*
+   * Poručivanje (0029). `customer_orders` ima `restrict` ka kupcima i
+   * artiklima, pa mora u istu `TRUNCATE` naredbu.
+   */
+  "customer_remember_tokens",
+  "customer_price_requests",
+  "customer_order_events",
+  "customer_order_lines",
+  "customer_orders",
+  "customer_cart_items",
+  "price_list_customer_terms",
+  "price_list_items",
+  "price_lists",
+  "partner_records",
+  "partner_imports",
   "customer_account_tokens",
   "customer_message_outbox",
   "customer_users",
@@ -302,6 +322,7 @@ const RESETTABLE_TABLES = [
    * pa mora otici pre njih — `TRUNCATE ... CASCADE` to resava, ali ime mora
    * biti na spisku da bi tabela uopste usla u naredbu.
    */
+  "recommendation_recompute_requests",
   "recommendation_results",
   "recommendation_runs",
 

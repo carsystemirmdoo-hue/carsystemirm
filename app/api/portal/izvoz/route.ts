@@ -34,7 +34,7 @@ export async function GET(request: Request) {
       Object.fromEntries(url.searchParams.entries()),
     );
     if (!parsed.success) {
-      return Response.json({ error: "Neispravni parametri." }, { status: 400 });
+      return Response.json({ error: "Neispravni parametri." }, { status: 400, headers: { "Cache-Control": "private, no-store" } });
     }
 
     const { format, view, ...filter } = parsed.data;

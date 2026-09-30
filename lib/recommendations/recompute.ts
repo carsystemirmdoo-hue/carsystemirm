@@ -43,6 +43,14 @@ export class RecomputeError extends Error {
 
 export type RecomputeActor = { id: string; name: string; role: string };
 
+/**
+ * Ko je pokrenuo prolaz. Ručni prolaz nosi čoveka (`requested_by`); prolaz
+ * posle uvoza nosi sistem — CHECK u bazi (0027) traži akter samo za `manual`.
+ */
+export type RecomputeTrigger =
+  | { source: "manual"; actor: RecomputeActor }
+  | { source: "ingest"; requestId: string };
+
 export type RecomputeSummary = {
   runId: string;
   algorithmVersion: string;
@@ -72,8 +80,14 @@ const ZASTOJ_MINUTA = 60;
 export async function recomputeRecommendations(
   scope: LedgerScope,
   input: { asOfDate: string },
-  actor: RecomputeActor,
+  actorOrTrigger: RecomputeActor | RecomputeTrigger,
 ): Promise<RecomputeSummary> {
+  const trigger: RecomputeTrigger =
+    "source" in actorOrTrigger ? actorOrTrigger : { source: "manual", actor: actorOrTrigger };
+  const auditActor =
+    trigger.source === "manual"
+      ? trigger.actor
+      : { id: null, name: "Automatski obračun posle uvoza", role: "system", kind: "system" as const };
   const asOfDate = assertAsOfDate(input.asOfDate);
   const db = getDb();
 
@@ -96,8 +110,8 @@ export async function recomputeRecommendations(
         asOfDate,
         dateBasis: DATE_BASIS,
         status: "running",
-        triggerSource: "manual",
-        requestedBy: actor.id,
+        triggerSource: trigger.source,
+        requestedBy: trigger.source === "manual" ? trigger.actor.id : null,
         scopeCustomerCount: scope.customerIds === null ? null : scope.customerIds.length,
       })
       .returning();
@@ -248,7 +262,7 @@ export async function recomputeRecommendations(
        */
       await recordAudit(
         {
-          actor,
+          actor: auditActor,
           action: AUDIT_ACTIONS.recommendationRecomputed,
           entityType: "Preporuke — prolaz",
           entityId: run.id,
@@ -261,7 +275,10 @@ export async function recomputeRecommendations(
             iskljucenihRedova: dijagnostika.excludedTotal,
             opsegKupaca: scope.customerIds === null ? "svi" : scope.customerIds.length,
           },
-          reason: "Ručno pokrenuto preračunavanje preporuka.",
+          reason:
+            trigger.source === "manual"
+              ? "Ručno pokrenuto preračunavanje preporuka."
+              : `Automatski obračun posle uvoza (zahtev ${trigger.requestId}).`,
         },
         tx,
       );

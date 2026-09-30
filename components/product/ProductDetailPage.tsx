@@ -5,6 +5,7 @@ import { ProductIdentity } from "@/components/product/ProductIdentity";
 import { getProductTechnicalFacts } from "@/components/product/productTechnicalFactList";
 import { getProductDocuments } from "@/components/product/productDocumentList";
 import { ProductInformationAccordion } from "@/components/product/ProductInformationAccordion";
+import { CustomerBuyPanel } from "@/components/customer-buy/CustomerBuyPanel";
 import { ProductInquiryLink } from "@/components/product/ProductInquiryLink";
 import { ProductMobileCta } from "@/components/product/ProductMobileCta";
 import { ProductStickyStage } from "@/components/product/ProductStickyStage";
@@ -188,6 +189,9 @@ export function ProductDetailPage({
                   Javne B2B cene nisu prikazane. Dostupnost i komercijalni uslovi
                   proveravaju se kroz upit.
                 </p>
+
+                {/* Prijavljeni kupac: pakovanje, njegova cena i korpa. Anonimno: ništa, bez zahteva. */}
+                <CustomerBuyPanel fallbackSlug={product.slug} fallbackName={product.name} />
               </div>
             </section>
 

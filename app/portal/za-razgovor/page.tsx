@@ -10,6 +10,8 @@ import { listSalesReps } from "@/lib/partners/assignment-service";
 import { loadCustomerProfiles, type CustomerProfile } from "@/lib/recommendations/customer-profile";
 import { srDate } from "@/lib/recommendations/customerSummary.mjs";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
+import { loadCrossSell, type CrossSell } from "@/lib/recommendations/cross-sell";
+import { listPriceRequests } from "@/lib/ordering/price-request-service";
 import { RecomputeButton } from "./RecomputeButton";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +26,7 @@ type Item = {
   city: string | null;
   reps: string[];
   profile: CustomerProfile;
+  crossSell: CrossSell | null;
 };
 
 function dana(n: number) {
@@ -92,6 +95,24 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
             </ul>
           ) : null}
         </div>
+        {(() => {
+          // Samo jak ili kataloški predlog; slab signal ostaje na kartici kupca.
+          const top = item.crossSell?.suggestions.find((x) => x.peer?.strength === "strong" || x.catalog);
+          if (!top) return null;
+          const name = top.identity?.catalog?.name ?? top.identity?.bizName ?? top.articleCode;
+          return (
+            <div className="zr-xs">
+              <h3>Za proširenje</h3>
+              <p>
+                <strong>{name}</strong> —{" "}
+                {top.catalog
+                  ? `kompatibilno sa „${top.catalog.viaName}” koji kupac uzima`
+                  : `${top.peer!.support} od ${top.peer!.peers} sličnih firmi to uzima`}
+                .
+              </p>
+            </div>
+          );
+        })()}
         <div className="zr-next">
           <h3>Predlog za razgovor</h3>
           <p>{s.nextStep}</p>
@@ -141,6 +162,12 @@ export default async function TalkListPage({
     loadCustomerProfiles(scope),
   ]);
 
+  // Opseg je već sužen iznad (`resolveLedgerScope`); predlozi i upiti se računaju samo za te kupce.
+  const [crossSell, priceRequests] = await Promise.all([
+    loadCrossSell([...customerRows].map((c) => c.id)),
+    listPriceRequests(user),
+  ]);
+  const openRequests = priceRequests.filter((r) => r.status === "open" || r.status === "in_progress").length;
   const items: Item[] = [...customerRows]
     .map((c) => ({
       id: c.id,
@@ -148,6 +175,7 @@ export default async function TalkListPage({
       city: c.city,
       reps: c.reps ?? [],
       profile: data.profiles.get(c.id) ?? null,
+      crossSell: crossSell.get(c.id) ?? null,
     }))
     .filter((x): x is Item => x.profile !== null);
   // Kupci bez ijednog dokumenta nemaju profil iz podataka; prikazuju se u sklopljenoj grupi.
@@ -193,6 +221,11 @@ export default async function TalkListPage({
                 "nije pokrenut"
               )}
             </span>
+            {openRequests ? (
+              <span>
+                <Link href="/portal/zahtevi/uslovi">Otvoreni upiti za cenu i uslove: {openRequests} →</Link>
+              </span>
+            ) : null}
             {stale.length ? (
               <span className="zr-warn">
                 Za {stale.length} {stale.length === 1 ? "kupca" : "kupaca"} su posle obračuna stigli novi dokumenti — njihov savet se ne prikazuje dok se obračun ne ponovi.

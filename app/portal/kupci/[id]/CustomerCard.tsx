@@ -1,5 +1,6 @@
 import { Badge } from "@/components/portal/PortalPrimitives";
 import type { ArticleIdentity } from "@/lib/ordering/ordering-service";
+import type { CrossSell } from "@/lib/recommendations/cross-sell";
 import type { CustomerArticle, CustomerProfile } from "@/lib/recommendations/customer-profile";
 import { CONFIDENCE_LABELS, STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
 import { srDate } from "@/lib/recommendations/customerSummary.mjs";
@@ -311,5 +312,69 @@ export function FreshnessLine({ profile }: { profile: CustomerProfile }) {
         </span>
       ) : null}
     </div>
+  );
+}
+
+/**
+ * Predlozi dodatnih proizvoda — interno. Svaki predlog nosi razlog koji se može
+ * proveriti; slab signal je označen kao slab, a nedostatak podataka rečima.
+ */
+export function CustomerCrossSell({ crossSell, names }: { crossSell: CrossSell; names: Record<string, string> }) {
+  const label = (code: string) => names[code] ?? code;
+  return (
+    <section className="portal-panel">
+      <div className="portal-section-header">
+        <div>
+          <h2>Predlozi za proširenje ({crossSell.suggestions.length})</h2>
+          <p>
+            Artikli koje kupac ne uzima, a uz ono što uzima ih kupuju slične firme ili ih katalog navodi kao kompatibilne.
+            Interno — kupac ovo ne vidi. Nije cena ni obećanje dostupnosti.
+          </p>
+        </div>
+      </div>
+      <div className="portal-panel-body">
+        {!crossSell.ok ? (
+          <p className="cs-xs-warn">
+            {crossSell.reason} Predlozi iz sličnih kupovina se ne prikazuju{crossSell.suggestions.length ? "; ostaju samo kataloški." : "."}
+          </p>
+        ) : null}
+        {crossSell.suggestions.length === 0 ? (
+          crossSell.ok ? <p>Nema predloga: nijedan artikal ne uzima dovoljno sličnih firmi, a katalog ne navodi kompatibilne povezane proizvode.</p> : null
+        ) : (
+          <ol className="cs-xs">
+            {crossSell.suggestions.map((s) => (
+              <li key={s.articleCode}>
+                <span className="cs-xs-name">
+                  <strong>{s.identity?.catalog?.name ?? s.identity?.bizName ?? s.articleCode}</strong>
+                  {s.identity?.catalog?.variantLabel ? <small> · {s.identity.catalog.variantLabel}</small> : null}
+                  <small>
+                    BizniSoft {s.articleCode}
+                    {s.identity?.bizName ? ` — ${s.identity.bizName}` : ""}
+                  </small>
+                </span>
+                <span className="cs-xs-why">
+                  {s.peer ? (
+                    <span>
+                      {s.peer.strength === "weak" ? <em className="cs-xs-weak">slab signal</em> : null}
+                      {s.peer.support} od {s.peer.peers} firmi sa sličnim kupovinama uzima i ovo (uz{" "}
+                      {s.peer.because.map(label).join(", ")}).
+                    </span>
+                  ) : null}
+                  {s.catalog ? (
+                    <span>
+                      Katalog: kompatibilno sa „{s.catalog.viaName}” koji kupac uzima ({s.catalog.viaCode}).
+                    </span>
+                  ) : null}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+        <p className="portal-footnote">
+          Osnov: potvrđene kupovine iz poslednjih 365 dana ({crossSell.customersWithHistory} firmi, od toga{" "}
+          {crossSell.peers} sa sličnim kupovinama). Imena drugih firmi se ne prikazuju.
+        </p>
+      </div>
+    </section>
   );
 }

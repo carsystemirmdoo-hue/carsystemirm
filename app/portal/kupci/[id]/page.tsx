@@ -10,7 +10,8 @@ import { listCustomerAssignees, listSalesReps } from "@/lib/partners/assignment-
 import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { AssignmentPanel } from "./AssignmentPanel";
 import { loadArticleIdentities } from "@/lib/ordering/ordering-service";
-import { CustomerArticles, CustomerMethod, CustomerSummary } from "./CustomerCard";
+import { loadCrossSell } from "@/lib/recommendations/cross-sell";
+import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
 
@@ -37,10 +38,12 @@ export default async function CustomerDetailPage({
   const canManageAssignments = can(user, "assignments:manage");
   // Isto pravilo kao ekran preporuka: prekidač blokira preračun, ne prikaz.
   const showSignals = can(user, "view:preporuke");
-  const [assignees, reps, profile] = await Promise.all([
+  const [assignees, reps, profile, crossSell] = await Promise.all([
     listCustomerAssignees(customer.id),
     canManageAssignments ? listSalesReps() : Promise.resolve([]),
     showSignals ? loadCustomerProfile(customer.id) : Promise.resolve(null),
+    // Opseg je već proveren iznad (`requireCustomerAccess`); predlog je deo iste kartice.
+    showSignals ? loadCrossSell([customer.id]).then((m) => m.get(customer.id) ?? null) : Promise.resolve(null),
   ]);
 
   return (
@@ -58,6 +61,12 @@ export default async function CustomerDetailPage({
         <CustomerArticles
           profile={profile}
           identities={Object.fromEntries(await loadArticleIdentities(profile.articles.map((a) => a.articleCode)))}
+        />
+      ) : null}
+      {profile && crossSell ? (
+        <CustomerCrossSell
+          crossSell={crossSell}
+          names={Object.fromEntries(profile.articles.map((a) => [a.articleCode, a.articleName ?? a.articleCode]))}
         />
       ) : null}
       <AssignmentPanel

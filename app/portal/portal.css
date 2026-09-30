@@ -8191,3 +8191,15 @@ body:has(.portal-login-root) {
 .cs-identity { display: block; color: var(--p-muted); font-size: 12px; }
 .cs-identity a { color: var(--p-red); font-weight: 600; text-decoration: none; }
 .cs-identity[data-state="none"] { color: oklch(0.55 0.075 245); }
+.cs-xs { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cs-xs > li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 6px 16px; padding: 10px 12px; border: 1px solid var(--p-line); border-radius: 8px; font-size: 13px; }
+.cs-xs-name { display: grid; gap: 2px; }
+.cs-xs-name small { color: var(--p-muted); font-size: 12px; }
+.cs-xs-why { display: grid; gap: 4px; color: var(--p-ink); }
+.cs-xs-weak { margin-right: 6px; padding: 1px 6px; border: 1px dashed oklch(0.6 0.1 70); border-radius: 999px; color: oklch(0.45 0.1 70); font-size: 11px; font-style: normal; font-weight: 700; }
+.cs-xs-warn { margin: 0 0 10px; padding: 8px 10px; border-left: 3px solid oklch(0.72 0.13 80); background: oklch(0.97 0.035 85); font-size: 13px; }
+@media (max-width: 720px) { .cs-xs > li { grid-template-columns: 1fr; } }
+.zr-xs { grid-column: 1 / -1; padding: 8px 10px; border-radius: 6px; background: oklch(0.97 0.02 250); }
+.zr-xs h3 { margin: 0 0 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--p-muted); }
+.zr-xs p { margin: 0; font-size: 13px; }
+.zr-status a { color: var(--p-red); font-weight: 650; }

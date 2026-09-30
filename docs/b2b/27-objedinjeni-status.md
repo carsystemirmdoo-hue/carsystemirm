@@ -23,16 +23,18 @@ Legenda: ✅ završeno · 🟡 delimično · ⬜ nedostaje (ne zavisi od podatak
 | ✅ Interni nazivi artikala (BizniSoft ↔ katalog po publici) | `feat/portal-f9-remaining` | provera sa stvarnim šifarnikom |
 | ✅ Predlozi dodatnih proizvoda + upiti u „Za razgovor" | `feat/portal-f9-remaining` | pouzdanost raste sa brojem firmi sa uvezenim fakturama |
 | ✅ Spisak za firmin Vercel | `28-vercel-firma-spremnost.md` | odluke P14 i spajanje grana |
+| ✅ Automatski obračun preporuka posle uvoza (0032) | `feat/portal-f10-release-prep` | uključiti kada dnevni uvoz radi |
+| ✅ Provera `Cache-Control` + ispravke | `29-cache-control-provera.md` | — |
+| ✅ Lokalna grana za izdanje | `release/portal-2026-10` | vaše odobrenje za PR ka `main` |
 
 ## Delimično
 
 | Stavka | Šta postoji | Šta nedostaje | Sledeći korak |
 |---|---|---|---|
-| 🟡 Preporuke | ritam kupovine, predlozi dodatnih proizvoda (slične firme, katalog) | obračun ritma je ručan | automatski obračun posle uvoza traži migraciju i odobrenje (`28-…` B4) |
-| 🟡 Interni nazivi po kupcu (prvobitni F9) | BizniSoft ↔ katalog za zaposlene i kupce | kupčevi sopstveni nazivi artikala i pretraga po njima | odluka da li je potrebno; zavisi od toga da li BizniSoft vodi nazive po kupcu |
+| 🟡 Preporuke | ritam, predlozi dodatnih proizvoda, automatski obračun posle uvoza (iza prekidača) | provera sa stvarnim uvozom | uključiti `RECOMMENDATIONS_AUTO_RECOMPUTE` kada konektor radi |
+| 🟡 Kupčevi sopstveni nazivi (prvobitni F9) — OTVORENO | BizniSoft ↔ katalog za zaposlene i kupce | sopstveni nazivi i pretraga po njima | `30-kupcevi-nazivi-artikala.md` |
 | 🟡 Mapiranje šifara | ekran, provera tačnog proizvoda i varijante, kolona „Za poručivanje" | uvoz šifarnika i predlozi po šifri | ⏳ šifarnik (A) |
 | 🟡 Razdvajanje DB privilegija | skripta + runbook `10-…` | nije primenjeno ni na jednoj bazi | pri podizanju firmine baze (`28-…`) |
-| 🟡 `Cache-Control: no-store` za portal | dinamičke strane (`force-dynamic`) | eksplicitno zaglavlje nije nađeno | proveriti odgovore portala u `28-…` provere |
 | 🟡 Dokumenti `08`, `09`, `01` | — | ne odražavaju F1–F8 | ovaj dokument ih zamenjuje kao pregled; ažurirati posle spajanja |
 
 ## Nedostaje (ne zavisi od podataka)

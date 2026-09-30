@@ -37,6 +37,7 @@ Plaćeni planovi (Vercel Pro, plaćena baza, e-pošta) traže vaše odobrenje
 | 0029 | `feat/portal-f7-cart` | cenovnik, korpa, zahtevi/porudžbine |
 | 0030 | `feat/portal-f8-catalog-buy` | ispravka zahteva, upiti za cenu/uslove |
 | 0031 | `feat/portal-f9-remaining` | „Zapamti me" tokeni |
+| 0032 | `feat/portal-f10-release-prep` | automatski obračun preporuka posle uvoza |
 
 Postupak: `MIGRATION_DATABASE_URL=… npm run db:migrate` (log mora reći da
 koristi `MIGRATION_DATABASE_URL`) → runtime rola po runbooku `10` → jednokratni
@@ -63,14 +64,23 @@ Pre produkcije: pun `npm run qa:pg` nad kopijom/granom iste baze (`13-…`).
 | `PORTAL_COMMERCE` | `off` | `off` | |
 | `CUSTOMER_ORDERING` | `off` | `off` (`demo` samo nad demo bazom) | stvarni režim ne postoji |
 | `CUSTOMER_REMEMBER_ME` | `0` | `0` | uključiti posle pilota naloga |
+| `RECOMMENDATIONS_AUTO_RECOMPUTE` | `0` | `0` | uključiti kada dnevni uvoz radi (uz `FEATURE_RECOMMENDATIONS=1`) |
 | `NEXT_PUBLIC_CUSTOMER_LOGIN_LINK` | `0` | `0` | build podešavanje |
 | `FEATURE_BEX`, `BEX_*` | `0` / prazno | `0` | čeka BEX ugovor |
 | `INGEST_API_KEY`, `FEATURE_FOLDER_CONNECTOR` | **ne postavljati** | — | napušteno |
 
-### A5. Spajanje grana (vaše odobrenje, jedna po jedna)
-PR #3 (pool) → PR #2 (nalozi) → `feat/portal-review-f1-f3` → `f4` → `f5` → `f6`
-→ `feat/portal-f7-cart` → `feat/portal-f8-catalog-buy` → `feat/portal-f9-remaining`.
-Grane su složene jedna na drugu; posle svakog spajanja CI i `qa:pg` na Preview bazi.
+### A5. Grana za izdanje
+Lokalna grana **`release/portal-2026-10`** (radno stablo `carsystem-release`) =
+`origin/main` (e817797, sa PR #4, #8, #10) + ceo lanac PR #3 → PR #2 → F1 … F10.
+Jedini sukob pri spajanju bio je `package.json` (unija `test` koraka).
+Nije pushovana; PR-ovi nisu spojeni. Predlog: ova grana postaje jedan PR ka
+`main` posle vašeg odobrenja (umesto deset zasebnih spajanja).
+
+**Preduslov sa `main`-a:** test `lib/auth/cookieAndHeaders.test.mjs` pada već
+na samom `origin/main` (PR #10 je proširio noindex pravilo u `next.config.ts`,
+test nije praćen). Ispravka postoji na lokalnoj grani
+`fix/test-docs-noindex-rule` (`aaed73d`, druga sesija) — treba da uđe u `main`
+pre izdanja.
 
 ### A6. Provere pre prvog Production deploy-a
 1. `npm run lint && npm run typecheck && npm test && npm run build:check && npm run build:trace-check`

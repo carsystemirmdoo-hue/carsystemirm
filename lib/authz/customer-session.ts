@@ -29,6 +29,12 @@ export interface CustomerSession {
   email: string;
   name: string;
   status: CustomerAccountStatus;
+  /**
+   * Čime je sesija izdata: `password` (prijava lozinkom) ili `remembered`
+   * (obnova sa zapamćenog uređaja). Porudžbina iz `remembered` sesije traži
+   * ponovni unos lozinke.
+   */
+  assurance?: "password" | "remembered";
 }
 
 /**
@@ -80,6 +86,7 @@ export async function getCustomerSession(): Promise<CustomerSession | null> {
     email: row.email,
     name: row.name,
     status: row.status,
+    assurance: session.user.assurance === "remembered" ? "remembered" : "password",
   };
 }
 

@@ -10,6 +10,7 @@ const TABS = [
   { href: "/kupac/porudzbine", label: "Porudžbine" },
   { href: "/kupac/upiti", label: "Upiti" },
   { href: "/kupac/saglasnosti", label: "Saglasnosti" },
+  { href: "/kupac/bezbednost", label: "Bezbednost" },
 ];
 
 export function AccountTabs() {

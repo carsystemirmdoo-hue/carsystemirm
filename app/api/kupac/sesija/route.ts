@@ -1,4 +1,5 @@
 import { getCustomerSession } from "@/lib/authz/customer-session";
+import { loadResumedCustomerHeader, tryResumeCustomerSession } from "@/lib/auth/remember-session";
 import { loadCartCount } from "@/lib/ordering/ordering-service";
 
 /**
@@ -15,7 +16,12 @@ import { loadCartCount } from "@/lib/ordering/ordering-service";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const session = await getCustomerSession().catch(() => null);
+  let session: { customerId: string; customerName: string; name: string } | null = await getCustomerSession().catch(() => null);
+  // Zapamćen uređaj: sesija je istekla, pa se obnavlja ovde, pre ostalih poziva sa strane.
+  if (!session) {
+    const accountId = await tryResumeCustomerSession().catch(() => null);
+    if (accountId) session = await loadResumedCustomerHeader(accountId);
+  }
   // Broj stavki u korpi SOPSTVENE firme; bez korpe (ili bez tabele) nula.
   const cartCount = session ? await loadCartCount(session.customerId).catch(() => 0) : 0;
   const body = session

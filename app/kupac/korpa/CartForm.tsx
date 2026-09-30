@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { removeFromCartAction, setCartQuantityAction, submitCartAction } from "./actions";
+import { confirmPasswordAction, removeFromCartAction, setCartQuantityAction, submitCartAction } from "./actions";
 
 export type CartView = {
   correcting: { orderId: string; requestNumber: string; reason: string | null } | null;
@@ -43,6 +43,8 @@ export function CartForm({ view }: { view: CartView }) {
   const [pending, start] = useTransition();
   const [message, setMessage] = useState<{ tone: "error" | "warning"; text: string; items?: string[] } | null>(null);
   const [note, setNote] = useState("");
+  const [reauth, setReauth] = useState<string | null>(null);
+  const [password, setPassword] = useState("");
   const money = (n: number | null) => (n === null ? "—" : `${fmt.format(n)} ${view.currency}`);
 
   const update = (articleId: string, quantity: string) =>
@@ -59,11 +61,36 @@ export function CartForm({ view }: { view: CartView }) {
       router.refresh();
     });
 
+  const confirmAndSubmit = () =>
+    start(async () => {
+      const ok = await confirmPasswordAction(password);
+      if (!ok.ok) {
+        setMessage({ tone: "error", text: ok.message ?? "Lozinka nije ispravna." });
+        return;
+      }
+      setReauth(null);
+      setPassword("");
+      const r = await submitCartAction({ idempotencyKey: view.idempotencyKey, fingerprint: view.fingerprint, note });
+      if (r.status === "created" || r.status === "existing") {
+        router.push(`/kupac/porudzbine/${r.orderId}?poslato=1`);
+        return;
+      }
+      if (r.status === "price_changed") setMessage({ tone: "warning", text: r.message });
+      else if (r.status === "blocked") setMessage({ tone: "error", text: r.message, items: r.blockers });
+      else if (r.status === "reauth") setMessage({ tone: "error", text: r.message });
+      router.refresh();
+    });
+
   const submit = () =>
     start(async () => {
       const r = await submitCartAction({ idempotencyKey: view.idempotencyKey, fingerprint: view.fingerprint, note });
       if (r.status === "created" || r.status === "existing") {
         router.push(`/kupac/porudzbine/${r.orderId}?poslato=1`);
+        return;
+      }
+      if (r.status === "reauth") {
+        setReauth(r.message);
+        setMessage(null);
         return;
       }
       if (r.status === "price_changed") {
@@ -198,7 +225,24 @@ export function CartForm({ view }: { view: CartView }) {
               ))}
             </ul>
           ) : null}
+          {reauth ? (
+            <div className="kk-reauth" role="group" aria-label="Potvrda lozinkom">
+              <p>{reauth} Prijavljeni ste sa zapamćenog uređaja.</p>
+              <input
+                type="password"
+                autoComplete="current-password"
+                aria-label="Lozinka"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={pending}
+              />
+              <button type="button" className="portal-button kk-submit" data-variant="primary" onClick={confirmAndSubmit} disabled={pending || !password}>
+                {pending ? "Proveravam…" : "Potvrdi lozinkom i pošalji"}
+              </button>
+            </div>
+          ) : null}
           <button
+            hidden={Boolean(reauth)}
             type="button"
             className="portal-button kk-submit"
             data-variant="primary"

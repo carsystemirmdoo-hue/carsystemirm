@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { CatalogOffer } from "@/lib/ordering/ordering-service";
+import { ensureCustomerSession, hasCustomerMarker } from "./customerSession";
 
 export type OffersPayload = {
   signedIn: true;
@@ -20,9 +21,10 @@ export type OffersPayload = {
 let shared: Promise<OffersPayload | null> | null = null;
 
 function load(): Promise<OffersPayload | null> {
-  if (!/(?:^|;\s*)cs_kupac=1/.test(document.cookie)) return Promise.resolve(null);
-  shared ??= fetch("/api/kupac/ponude", { cache: "no-store", credentials: "same-origin" })
-    .then((r) => (r.ok ? r.json() : null))
+  if (!hasCustomerMarker()) return Promise.resolve(null);
+  shared ??= ensureCustomerSession()
+    .then((s) => (s?.signedIn ? fetch("/api/kupac/ponude", { cache: "no-store", credentials: "same-origin" }) : null))
+    .then((r) => (r && r.ok ? r.json() : null))
     .then((body) => (body?.signedIn ? (body as OffersPayload) : null))
     .catch(() => null);
   return shared;

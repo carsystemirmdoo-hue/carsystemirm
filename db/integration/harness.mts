@@ -288,6 +288,7 @@ const RESETTABLE_TABLES = [
    * Poručivanje (0029). `customer_orders` ima `restrict` ka kupcima i
    * artiklima, pa mora u istu `TRUNCATE` naredbu.
    */
+  "customer_remember_tokens",
   "customer_price_requests",
   "customer_order_events",
   "customer_order_lines",

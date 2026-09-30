@@ -148,6 +148,9 @@ function redirectToPortalLogin(request: NextRequest) {
   return NextResponse.redirect(new URL(target, request.nextUrl.origin));
 }
 
+/** Obnova sesije sa zapamćenog uređaja (route handler, ne strana). */
+const CUSTOMER_RESUME_ROUTE = "/prijava/kupac/nastavi";
+
 export default withAuth(async function middleware(request) {
   const { pathname } = request.nextUrl;
 
@@ -172,6 +175,20 @@ export default withAuth(async function middleware(request) {
   if (isCustomerRoute(pathname) && !request.auth?.user?.id) {
     // Povratak na traženu stranu naloga (npr. link na fakturu), proveren istom kapijom.
     const back = normalizeCustomerReturn(`${pathname}${request.nextUrl.search}`);
+    /*
+     * „Zapamti me": sa zapamćenog uređaja prvo pokušaj obnovu. Middleware ne
+     * proverava token (edge nema bazu) — to radi `/prijava/kupac/nastavi`,
+     * koja pri neuspehu briše kolačić, pa petlje nema.
+     */
+    if (
+      process.env.CUSTOMER_REMEMBER_ME === "1" &&
+      (request.cookies.has("cs_remember") || request.cookies.has("__Host-cs_remember"))
+    ) {
+      const resume = back
+        ? `${CUSTOMER_RESUME_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(back)}`
+        : CUSTOMER_RESUME_ROUTE;
+      return NextResponse.redirect(new URL(resume, request.nextUrl.origin));
+    }
     const target = back
       ? `${CUSTOMER_LOGIN_ROUTE}?${CALLBACK_PARAM}=${encodeURIComponent(back)}`
       : CUSTOMER_LOGIN_ROUTE;

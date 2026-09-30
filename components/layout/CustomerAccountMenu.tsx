@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { customerSignOutAction } from "@/app/prijava/kupac/actions";
+import { ensureCustomerSession } from "@/components/customer-buy/customerSession";
 import styles from "./CustomerAccountMenu.module.css";
 
 type State = { signedIn: true; company: string; name: string; cartCount?: number } | { signedIn: false; loginLink: boolean } | null;
@@ -21,6 +22,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
+  const firstLoad = useRef(true);
 
   useEffect(() => {
     let alive = true;
@@ -37,7 +39,14 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
         .then((r) => (r.ok ? r.json() : null))
         .then((body) => alive && setState(body))
         .catch(() => alive && setState(null));
-    load();
+    // Prvi poziv je zajednički sa ostatkom strane (obnova sa zapamćenog uređaja);
+    // posle promene strane stanje se čita sveže (npr. broj stavki u korpi).
+    if (firstLoad.current) {
+      firstLoad.current = false;
+      ensureCustomerSession().then((body) => alive && setState(body));
+    } else {
+      load();
+    }
     window.addEventListener("focus", load);
     return () => {
       alive = false;

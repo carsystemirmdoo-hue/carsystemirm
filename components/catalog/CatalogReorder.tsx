@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, useTransition } from "react";
 import { addToCartAction } from "@/app/kupac/korpa/actions";
+import { ensureCustomerSession, hasCustomerMarker } from "@/components/customer-buy/customerSession";
 import type { ReorderItem, ReorderList } from "@/lib/customers/reorder";
 import styles from "./CatalogReorder.module.css";
 
@@ -25,10 +26,12 @@ export function CatalogReorder() {
   const [state, setState] = useState<State>(null);
 
   useEffect(() => {
-    if (!/(?:^|;\s*)cs_kupac=1/.test(document.cookie)) return;
+    if (!hasCustomerMarker()) return;
     let alive = true;
-    fetch("/api/kupac/poruci-ponovo", { cache: "no-store", credentials: "same-origin" })
-      .then((r) => (r.ok ? r.json() : null))
+    // Prvo stanje prijave: sa zapamćenog uređaja ono obnavlja isteklu sesiju.
+    ensureCustomerSession()
+      .then((s) => (s?.signedIn ? fetch("/api/kupac/poruci-ponovo", { cache: "no-store", credentials: "same-origin" }) : null))
+      .then((r) => (r && r.ok ? r.json() : null))
       .then((body) => alive && setState(body?.signedIn ? body : null))
       .catch(() => alive && setState(null));
     return () => {

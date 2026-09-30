@@ -437,6 +437,7 @@ export async function loadCartCount(customerId: string): Promise<number> {
 
 export type SubmitResult =
   | { status: "created" | "existing"; orderId: string; requestNumber: string }
+  | { status: "reauth"; message: string }
   | { status: "price_changed"; message: string }
   | { status: "blocked"; message: string; blockers: string[] };
 
@@ -467,6 +468,13 @@ export async function submitCartRequest(
 ): Promise<SubmitResult> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  /*
+   * Sesija obnovljena sa zapamćenog uređaja ne šalje porudžbinu bez lozinke:
+   * ukraden ili zaboravljen uređaj ne sme moći da poruči u ime firme.
+   */
+  if (session.assurance === "remembered") {
+    return { status: "reauth", message: "Radi sigurnosti, pre slanja ponovo unesite lozinku." };
+  }
   const key = String(input.idempotencyKey ?? "");
   if (!/^[0-9a-f-]{36}$/i.test(key)) return { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
   const note = input.note ? String(input.note).trim().slice(0, 1000) || null : null;

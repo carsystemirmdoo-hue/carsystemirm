@@ -12,19 +12,30 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 
 | | Broj |
 |---|---|
-| Ukupno stavki | 14 |
-| Blokiraju produkciju (BLOCKER) | 3 |
-| HIGH / MEDIUM / LOW | 2 / 4 / 5 |
-| Kontakt podaci koji nedostaju ili nisu potvrđeni | 3 (telefon, e-pošta, radno vreme) |
+| Ukupno stavki | 14 (2 rešene direktnom potvrdom firme, 12 otvorenih) |
+| Otvorene koje blokiraju produkciju (BLOCKER) | 1 (GAP-003) |
+| Otvorene HIGH / MEDIUM / LOW | 2 / 4 / 5 |
+| Rešene | 2 (GAP-001 telefon, GAP-002 e-pošta — potvrda firme 2026-10-01) |
+| Kontakt podaci koji nedostaju ili nisu potvrđeni | 1 (radno vreme, GAP-004) |
 | Tekstovi i prikazi za koje je potrebna poslovna odluka | 9 (GAP-003, 005, 006, 007, 008, 010, 012, 013, 014) |
-| Konflikti između izvora | 3 (GAP-001, GAP-002, GAP-005) |
+| Konflikti između izvora | 1 otvoren (GAP-005); GAP-001 i GAP-002 razrešeni potvrdom firme |
 
 ### Šta je već ispravljeno bez Vašeg odgovora
 
 - **Lažni telefon `+381 22 000 000` uklonjen.** Stajao je kao klikabilan
   `tel:` link na 1233 prerenderovane strane (footer, kontakt, početna, svaki
-  PDP, brend strane). Do Vašeg odgovora (GAP-001) red za telefon se ne
-  prikazuje, a dugme „Pozovite" ostaje samo „Pošaljite upit".
+  PDP, brend strane). Posle potvrde firme (GAP-001) na svim tim mestima stoji
+  telefon kancelarije `022 558 501` (`tel:+38122558501`).
+- **Potvrđeni kontakti firme (2026-10-01):** glavna e-pošta
+  `carsystemirmdoo@gmail.com` (footer, `/kontakt`, forma za upit, schema.org);
+  regionalni komercijalisti samo na `/kontakt` (Vojvodina 061 168 8472,
+  Centralna Srbija 069 333 7401, Južna Srbija 063 157 8270), bez imena.
+  `office@carsystemirm.com` je uklonjen iz runtime-a. schema.org
+  `Organization` sada nosi adresu, telefon kancelarije, e-poštu i
+  `contactPoint` za kancelariju i tri regiona.
+- **`tel:` za partnerske lokacije ispravljen:** polje sa dva broja
+  („011 386 33 60 / 063 528 477") davalo je jedan spojen, neispravan link;
+  sada je link prvi broj u međunarodnom obliku.
 - **Neprovereno radno vreme `Pon-Pet 08:00-16:00` uklonjeno** (GAP-004).
 - **Dodata adresa centrale „Ive Andrića 3, 22320 Inđija, Srbija"** — saglasna u
   četiri nezavisna izvora (registar privrednih subjekata, firmin BEX adresar,
@@ -46,18 +57,21 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
   JSON-LD-u (10 porodica).
 - **Automatska zaštita:** `npm run content:check` i `npm run test:content-copy`
   (deo `npm test`) obaraju build ako se vrati šablonski telefon, primer-adresa,
-  neformalno obraćanje ili ovaj žargon.
+  nepotvrđen kontakt (`office@carsystemirm.com`, `info@carsystem-rm.rs`,
+  `eurospektar@blic.net`, 022 367 139, 062 881 0895), `tel:` van međunarodnog
+  oblika, neformalno obraćanje ili ovaj žargon. Posle builda
+  `npm run content:check:html` isto proverava u prerenderovanom HTML-u.
 
 ---
 
 ## GAP-001 — Telefon centrale
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `REŠENO — direktna potvrda firme (2026-10-01)`
 - Prioritet: `BLOCKER`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
 - Putanja: `lib/company-contact.ts`
-- Linija ili identifikator: `companyContact.phone`, `companyContact.phoneHref` (linije 61–62)
+- Linija ili identifikator: `companyContact.phone`, `companyContact.phoneInternational`, `companyContact.phoneHref` (linije 93–95); `companyContact.salesContacts` (linija 103)
 - Ruta/strana: sve javne strane (footer), `/kontakt`, `/`, svaki `/proizvodi/*`, `/brendovi/*`, `/katalog`
 - Komponenta ili polje — potrošači (svi čitaju isti izvor):
   1. `components/layout/Footer.tsx:83` — red telefona u footeru
@@ -70,7 +84,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
   4. `components/contact/ContactForm.tsx:224` — dugme „Pozovite" za teme „Tehnička podrška", „B2B saradnja", „Opšti upit"
   5. `components/product/ProductInquiryCard.tsx:32` — red „Telefon" na PDP
   6. `components/home/CarsystemHomePage.tsx:624` — red „Kontakt" na početnoj (bez telefona prikazuje e-poštu)
-- Trenutni tekst/vrednost: `null` (ne prikazuje se). Ranije: `+381 22 000 000` / `tel:+38122000000`.
+- Trenutni tekst/vrednost: `022 558 501` / `tel:+38122558501` (kancelarija, glavni broj svuda). Ranije: `+381 22 000 000` / `tel:+38122000000`, pa `null` do potvrde.
 - Zašto nije bezbedno automatski ispraviti: javni izvori daju tri različita broja; nijedan nije sa firminog sajta ni potvrđen od firme.
 - Šta je provereno: kod, `docs/seo/SEO_LOCAL_BUSINESS_AUDIT.md` (već beleži broj kao placeholder), firmin BEX adresar (`_incoming/Klijenti.csv`, red firme nema telefon), registar, carsystem.org, keš pretraživača starog sajta `carsystemirm.com/kontakt` (domen danas servira „sajt u pripremi" ovog projekta).
 - Pronađeni izvori i konflikt:
@@ -80,16 +94,22 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Tačno pitanje za vlasnika: Koji broj (ili brojevi) treba da stoje javno kao telefon centrale, i da li je neki od njih mobilni ili poseban broj za tehničku podršku?
 - Očekivani format odgovora: broj u obliku `+381 22 123 456` (može više brojeva sa namenom, npr. „centrala", „tehnička podrška").
 - Predlog (NEPOTVRĐENO): `+381 22 367 139` jer ga navodi zvaničan spisak partnera proizvođača Carsystem.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- ODGOVOR VLASNIKA: Direktna potvrda firme (2026-10-01), ima prednost nad svim javnim izvorima:
+  - telefon kancelarije: `022 558 501` / `+381 22 558 501` / `tel:+38122558501` — glavni broj na footeru, `/kontakt`, početnoj, PDP, brend stranama, katalogu i u glavnim CTA dugmadima;
+  - komercijalista za Vojvodinu: `061 168 8472` / `+381 61 168 8472` / `tel:+381611688472`;
+  - komercijalista za Centralnu Srbiju: `069 333 7401` / `+381 69 333 7401` / `tel:+381693337401`;
+  - komercijalista za Južnu Srbiju: `063 157 8270` / `+381 63 157 8270` / `tel:+381631578270`;
+  - regionalni brojevi samo na `/kontakt` (blok „03 · Komercijalisti po regionima"), bez imena komercijalista; nisu dodeljeni prodavnicama jer nema proverene regionalne klasifikacije lokacija.
+  Kandidati `+381 22 367 139` i `+381 62 8810895` nisu potvrđeni i čuvar ih odbija.
 
 ## GAP-002 — E-pošta centrale (adresa na koju stižu upiti)
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `REŠENO — direktna potvrda firme (2026-10-01)`
 - Prioritet: `BLOCKER`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
 - Putanja: `lib/company-contact.ts`
-- Linija ili identifikator: `companyContact.email`, `companyContact.emailHref` (linije 64–65)
+- Linija ili identifikator: `companyContact.email`, `companyContact.emailHref` (linije 97–98)
 - Ruta/strana: footer svih strana, `/kontakt`, `/`
 - Komponenta ili polje — potrošači:
   1. `components/layout/Footer.tsx:94` — link e-pošte u footeru
@@ -97,7 +117,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
   3. `components/contact/ContactForm.tsx:177` — **forma za upit otvara poruku upravo na ovu adresu**
   4. `components/home/CarsystemHomePage.tsx:627` — red „Kontakt" na početnoj (dok nema telefona)
   5. `scripts/geocode-location-review.mjs:19` — kontakt adresa u zahtevima ka OpenStreetMap geokoderu (nije javni prikaz)
-- Trenutni tekst/vrednost: `office@carsystemirm.com` (ostavljena jer forma bez nje ne radi; na domenu firme je, ali nije potvrđeno da sanduče postoji).
+- Trenutni tekst/vrednost: `carsystemirmdoo@gmail.com` / `mailto:carsystemirmdoo@gmail.com` (footer, `/kontakt`, forma za upit, schema.org, korisnički agent geokodera). Ranije: `office@carsystemirm.com`, sada uklonjen iz runtime-a.
 - Zašto nije bezbedno automatski ispraviti: četiri različite adrese u izvorima; ako sanduče ne postoji, upiti kupaca se gube bez greške.
 - Šta je provereno: kod, `docs/seo/SEO_LOCAL_BUSINESS_AUDIT.md:18` (adresa zabeležena kao placeholder), registar, keš starog sajta.
 - Pronađeni izvori i konflikt:
@@ -108,7 +128,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Tačno pitanje za vlasnika: Na koju adresu treba da stižu upiti sa sajta, i da li sanduče `office@carsystemirm.com` postoji i da li ga neko čita?
 - Očekivani format odgovora: jedna adresa (`ime@domen`), uz „da/ne" da li `office@carsystemirm.com` postoji.
 - Predlog (NEPOTVRĐENO): adresa na domenu `carsystemirm.com`, jer je to domen sajta.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- ODGOVOR VLASNIKA: Direktna potvrda firme (2026-10-01): glavna e-pošta je `carsystemirmdoo@gmail.com` (`mailto:carsystemirmdoo@gmail.com`) za sva glavna `mailto:` mesta i formu za upit. `office@carsystemirm.com` se ne koristi ni kao prikaz, ni kao primalac, ni kao rezerva, ni u schema.org; `info@carsystem-rm.rs` i `eurospektar@blic.net` takođe nisu kontakt.
 
 ## GAP-003 — Objava partnerskih lokacija preuzetih iz BEX adresara
 
@@ -136,7 +156,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Oblast: `kontakt`
 - Vidljivost: `javno`
 - Putanja: `lib/company-contact.ts`
-- Linija ili identifikator: `companyContact.workingHours` (linija 67)
+- Linija ili identifikator: `companyContact.workingHours` (linija 100)
 - Ruta/strana: footer svih strana, `/kontakt`
 - Komponenta ili polje: `components/layout/Footer.tsx:99`, `components/contact/ContactInfoCard.tsx:23` (red „Radno vreme")
 - Trenutni tekst/vrednost: `null` (ne prikazuje se). Ranije: `Pon-Pet 08:00-16:00` bez ikakvog izvora.
@@ -155,13 +175,13 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Oblast: `pravni podatak`
 - Vidljivost: `javno`, `kupac`, `komercijalista`, `vlasnik/admin`
 - Putanja i linija — svi potrošači (tri različita oblika naziva):
-  - „Carsystem i R-M Inđija": `lib/company-contact.ts:50` (`companyContact.name`, footer `components/layout/Footer.tsx:81`), `lib/seo.ts:67` (`organizationJsonLd`, bez adrese, telefona i e-pošte)
+  - „Carsystem i R-M Inđija": `lib/company-contact.ts:84` (`companyContact.name`, footer `components/layout/Footer.tsx:81`), `lib/seo.ts:67` (`organizationJsonLd`; adresa, telefon i e-pošta su dodati posle potvrde, naziv čeka ovu stavku)
   - „Carsystem i R-M Inđija d.o.o.": `components/home/CarsystemHomePage.tsx:612` (naslov bloka „Centrala, Inđija" na `/`), `app/portal/layout.tsx:22` (metadata portala), `lib/customers/consent.mjs:35` (tekst saglasnosti — vidi GAP-006)
   - „Carsystem i R-M DOO": `features/portal/PortalLoginForm.tsx:28, 57` (`/prijava`), `app/prijava/kupac/CustomerLoginForm.tsx:37, 66` (`/prijava/kupac`), `app/prijava/reset/ResetForm.tsx:41, 71, 94` (`/prijava/reset`), `components/portal/PortalShell.tsx:65` (oznaka u portalu), `components/carsystem-brand/carsystemBrandData.ts:245, 816` (`/brendovi/carsystem`)
 - Ruta/strana: footer svih strana, `/`, `/brendovi/carsystem`, `/prijava`, `/prijava/kupac`, `/prijava/reset`, portal, JSON-LD početne
 - Komponenta ili polje: naziv firme u tekstu, oznakama i schema.org `Organization`
 - Trenutni tekst/vrednost: tri oblika navedena gore.
-- Zašto nije bezbedno automatski ispraviti: registar vodi naziv „CAR SYSTEM I R-M d.o.o. Inđija"; koji oblik se prikazuje i koje podatke pravnog lica (PIB, matični broj) treba objaviti je odluka firme. Telefon i e-pošta u schema.org čekaju GAP-001 i GAP-002.
+- Zašto nije bezbedno automatski ispraviti: registar vodi naziv „CAR SYSTEM I R-M d.o.o. Inđija"; koji oblik se prikazuje i koje podatke pravnog lica (PIB, matični broj) treba objaviti je odluka firme. Telefon, e-pošta i adresa su u schema.org dodati posle GAP-001 i GAP-002.
 - Šta je provereno: registar (cubepartner/APR), BEX red firme, `docs/seo/SEO_LOCAL_BUSINESS_AUDIT.md` (već predviđa dopunu Organization schema posle potvrde), svih 13 pojavljivanja u kodu.
 - Pronađeni izvori i konflikt: „Carsystem i R-M Inđija" / „Carsystem i R-M Inđija d.o.o." / „Carsystem i R-M DOO" (sajt) vs. „CAR SYSTEM I R-M d.o.o. Inđija" (registar).
 - Tačno pitanje za vlasnika: Koji tačan naziv firme želite na sajtu i u portalu, i da li u footeru treba prikazati pun pravni naziv sa PIB-om i matičnim brojem?
@@ -280,7 +300,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Oblast: `kontakt`
 - Vidljivost: `javno`
 - Putanja: `lib/company-contact.ts`
-- Linija ili identifikator: `companyLocation.coordinates` (linija 45)
+- Linija ili identifikator: `companyLocation.coordinates` (linija 78)
 - Ruta/strana: mapa centrale na `/` i `/kontakt` (`components/map/CompanyLocationMap.tsx`)
 - Komponenta ili polje: marker „Centrala · Inđija"
 - Trenutni tekst/vrednost: `45.0482, 20.0817` — centar grada, ne adresa.

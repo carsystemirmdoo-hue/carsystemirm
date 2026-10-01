@@ -43,6 +43,7 @@
     "node_modules",
     "tmp",
     "db/integration/**",
-    "scripts/qa/**"
+    "scripts/qa/**",
+    "scripts/ops/**"
   ]
 }

@@ -69,7 +69,8 @@ ne ispisuju.
 |---|---|---|
 | tajne | `bash scripts/ops/preview-secrets.sh init` | generiše `AUTH_SECRET`, `PORTAL_MFA_MASTER_KEY_V1`, `AUTH_RATE_LIMIT_HMAC_KEY`, `CARSYSTEM_APP_PASSWORD`, `SITE_ACCESS_PASSWORD`; ostavlja prazna mesta za `NEON_OWNER_URL`, `PREVIEW_URL`, `VERCEL_BYPASS_TOKEN` |
 | baza | `npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/preview-db.mts all` | proveri metu (Neon Frankfurt, direktna adresa, bez stvarnih kupaca) → 33 migracije → `carsystem_app` SQL-om + `runtime-role.sql` → provera svih prava i članstava → upiše `PREVIEW_DATABASE_URL` (pooled) i `PREVIEW_DATABASE_DIRECT_URL` → proba obe kao `carsystem_app` |
-| Vlasnik | `bash scripts/ops/preview-owner.sh "<e-adresa>" "<ime i prezime>"` | pokreće **sam Vlasnik**: lozinku kuca skriveno; `db:seed` + jednokratna dozvola za drugi faktor |
+| Vlasnik | `bash scripts/ops/preview-owner.sh "<e-adresa>" "<ime i prezime>"` | pokreće **sam Vlasnik**: lozinku kuca skriveno; `db:seed` (jedan nalog sa ulogom Vlasnik) |
+| drugi faktor | `bash scripts/ops/preview-mfa-grant.sh issue "<e-adresa>"` | tek kada je Preview dostupan (važi 30 min): nova jednokratna dozvola, prethodna se poništava; kod ide u `~/.carsystem-secrets/owner-mfa-grant.txt` (600), **ne na ekran**; Vlasnik ga otvara sam i ne kopira nigde osim u obrazac; posle: `… clear` |
 | sintetika | `npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/seed-synthetic-preview.mts` | demo oznaka, kupci A/B, nalozi, fakture, komercijalista (samo A), kancelarija, demo cenovnik, rabat 10 % za A; pristup u `preview-synthetic.env` (600) |
 | provera | `npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/preview-smoke.mts` | 30 provera: noindex, robots, zaštita privatnih strana, `/api/sync` isključen, zaglavlja, izolacija kupaca, cene i korpa (demo), uloge |
 
@@ -79,8 +80,7 @@ ne ispisuju.
    *Connection pooling* i kopirati adresu za `neondb_owner` / `neondb`.
 2. `bash scripts/ops/preview-secrets.sh set NEON_OWNER_URL` — adresa se nalepi skriveno (fajl je već napravljen sa `init`).
 3. `preview-db.mts all` — mora se završiti bez ijednog ✖.
-4. `preview-owner.sh` — Vlasnik (prvi nalog), lozinka skriveno; zapiše
-   jednokratni kod za drugi faktor.
+4. `preview-owner.sh` — Vlasnik (prvi nalog), lozinka skriveno.
 5. `seed-synthetic-preview.mts`.
 6. **Vercel** (čovek): promenljive iz §6, okruženje **Preview**, grana
    `preview/portal-test`.
@@ -89,7 +89,8 @@ ne ispisuju.
 8. **Vercel** (čovek): Deployment Protection → *Protection Bypass for
    Automation* → napraviti ključ i upisati ga u `VERCEL_BYPASS_TOKEN`; adresu
    grane upisati u `PREVIEW_URL`.
-9. `preview-smoke.mts`; Vlasnik se prijavljuje i vezuje drugi faktor.
+9. `preview-smoke.mts`; zatim `preview-mfa-grant.sh issue`, Vlasnik se prijavljuje
+   i vezuje drugi faktor kodom iz fajla, pa `preview-mfa-grant.sh clear`.
 
 ## 6. Vercel → Settings → Environment Variables (samo Preview)
 

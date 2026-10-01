@@ -6,7 +6,7 @@ import {
   setConsentAction,
   type ConsentActionState,
 } from "@/app/kupac/saglasnosti/actions";
-import { CONSENT_LABELS } from "@/lib/customers/consent.mjs";
+import { CONSENT_LABELS, consentLabelFor } from "@/lib/customers/consent.mjs";
 
 const INITIAL: ConsentActionState = { error: null, ok: null };
 
@@ -46,7 +46,10 @@ export function ConsentControls({ rows }: { rows: ConsentRow[] }) {
 
       <ul className="portal-notification-list">
         {rows.map((row) => {
-          const label = CONSENT_LABELS[row.purpose as keyof typeof CONSENT_LABELS];
+          // Data saglasnost prikazuje tekst svoje verzije; nova odluka trenutni tekst.
+          const label =
+            (row.granted ? consentLabelFor(row.purpose, row.textVersion) : null) ??
+            CONSENT_LABELS[row.purpose as keyof typeof CONSENT_LABELS];
           return (
             <li key={row.purpose} data-status={row.granted ? "read" : "unread"}>
               <div>

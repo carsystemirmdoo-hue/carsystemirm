@@ -4,7 +4,7 @@
  * Vrednost `null` znači „nije potvrđeno": potrošači tada izostavljaju red ili
  * poziv, a ne prikazuju izmišljen broj ili radno vreme. Otvorena pitanja i
  * kandidati iz javnih izvora: docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md
- * (GAP-001 telefon, GAP-002 e-pošta, GAP-003 radno vreme).
+ * (GAP-001 telefon, GAP-002 e-pošta, GAP-004 radno vreme).
  */
 export type CompanyContact = {
   name: string;
@@ -63,7 +63,7 @@ export const companyContact: CompanyContact = {
   // Na domenu firme, ali postojanje sandučeta nije potvrđeno (GAP-002).
   email: "office@carsystemirm.com",
   emailHref: "mailto:office@carsystemirm.com",
-  // Nijedan izvor ne potvrđuje radno vreme (GAP-003).
+  // Nijedan izvor ne potvrđuje radno vreme (GAP-004).
   workingHours: null,
   partnerNetworkNote:
     "Upiti stižu u centralu u Inđiji, a po potrebi se prosleđuju partnerskoj mreži u Srbiji.",

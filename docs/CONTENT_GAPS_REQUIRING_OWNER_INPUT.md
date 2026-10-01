@@ -334,6 +334,17 @@ Zvanični nazivi proizvoda i nazivi PDF dokumenata nisu predmet prevoda.
 Napomena: redovi 13, 16 i 17 ispravljaju i pogrešno pročitanu vrednost, ne samo jezik;
 zato su posebno istaknuti za pregled.
 
+#### Data-correctness (odvojeno od prevoda) — otvoreno, čeka odobrenje
+
+Ovo nisu jezički problemi nego pogrešno pročitani podaci iz TDS-a; sajt danas prikazuje
+netačnu ili nepotpunu tehničku vrednost. Provereno direktno u PDF-ovima proizvođača.
+
+| Proizvod | Šta sajt prikazuje | Šta kaže TDS | Uzrok |
+|---|---|---|---|
+| baslac 40-10 (`/proizvodi/baslac-40-10-2k-panel-clear`) | „20°C: 4 h dust-free" | „Drying at 20°C 4 h, dust-free: 2 h" (sušenje 4 h; suvo na prašinu 2 h) | parser je spojio dve vrednosti i izgubio „2 h" |
+| R-M P 5540 (`/proizvodi/rm-p-5540-ghd-protect-primer-filler`) | „100:25:25 100:25:25 by volume wet on wet" | „100:25:25 by volume wet on wet; 100:20:20 by volume for sanding" | duplirana prva vrednost, izostavljen odnos za brušenje |
+| R-M C 2A40 (`/proizvodi/c-2a40-airtop`) | „1:1 + 20% Clear coat Preparation" | „1:1 + 20%", zatim odeljak „Clear coat Preparation" | naslov sledećeg odeljka zalepljen za vrednost |
+
 ## GAP-010 — Kartica „Video materijali" na Carsystem strani
 
 - Status: `RESOLVED_FROM_PUBLIC_SOURCES`

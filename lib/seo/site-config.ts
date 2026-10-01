@@ -21,9 +21,9 @@ const isPreviewDeployment =
   vercelEnvironment === "preview" || vercelEnvironment === "development";
 
 export const seoSiteConfig = {
-  name: "Carsystem i R-M Inđija",
+  name: "Carsystem i R-M",
   shortName: "Carsystem i R-M",
-  legalName: "Carsystem i R-M Inđija",
+  legalName: "CAR SYSTEM I R-M d.o.o. Inđija",
   url: normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   locale: "sr_RS",
   language: "sr-Latn",

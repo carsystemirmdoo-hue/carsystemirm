@@ -36,7 +36,12 @@ export type SalesContact = {
 };
 
 export type CompanyContact = {
+  /** Brend i korisnički naziv: header, marketing, kratke oznake, login i portal. */
   name: string;
+  /** Pun pravni naziv: pravni red u footeru, saglasnosti, pravni tekstovi, schema.org legalName. */
+  legalName: string;
+  pib: string;
+  mb: string;
   streetAddress: string;
   postalCode: string;
   city: string;
@@ -72,16 +77,22 @@ export type CompanyLocation = {
  * never duplicate lat/lng in components.
  */
 export const companyLocation: CompanyLocation = {
-  name: "Carsystem i R-M Inđija",
+  name: "Carsystem i R-M — centrala",
   city: "Inđija",
-  label: "Centrala · Inđija",
-  coordinates: { lat: 45.0482, lng: 20.0817 },
+  label: "Carsystem i R-M — centrala",
+  // Objekat na adresi Ive Andrića 3: OpenStreetMap zgrada (way 799359269) i
+  // BEX geokod daju istu tačku. Tačka označava objekat, ne ulaz ni prijem robe.
+  coordinates: { lat: 45.0496189, lng: 20.0654391 },
   dataNote:
-    "Koordinate su na nivou grada Inđije; tačka adrese Ive Andrića 3 nije geokodirana ni potvrđena.",
+    "Tačka objekta na Ive Andrića 3 (OpenStreetMap way 799359269 = BEX geokod, 2026-10-01); nije potvrđen ulaz ni prijem robe.",
 };
 
 export const companyContact: CompanyContact = {
-  name: "Carsystem i R-M Inđija",
+  name: "Carsystem i R-M",
+  // Pravni podaci: potvrda firme 2026-10-01; naziv se slaže sa registrom (APR).
+  legalName: "CAR SYSTEM I R-M d.o.o. Inđija",
+  pib: "105988852",
+  mb: "20506610",
   // Adresa je saglasna u registru privrednih subjekata, firminom BEX adresaru
   // i spisku partnera na carsystem.org (provereno 2026-10-01).
   streetAddress: "Ive Andrića 3",

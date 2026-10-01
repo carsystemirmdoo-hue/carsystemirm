@@ -609,7 +609,7 @@ export function CarsystemHomePage() {
         <div className={styles.contactGrid}>
           <div className={styles.contactPanel}>
             <p className={styles.sectionKicker}>Centrala, Inđija</p>
-            <h2 id="contact-title" data-cursor="headline">Carsystem i R-M Inđija d.o.o.</h2>
+            <h2 id="contact-title" data-cursor="headline">{companyContact.name}</h2>
             <div className={styles.contactRows}>
               <span>
                 <b>Lokacija</b>

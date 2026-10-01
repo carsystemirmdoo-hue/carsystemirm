@@ -242,7 +242,7 @@ export const carsystemMetrics = [
     id: "support",
     value: "01",
     label: "lokalni kontakt za podršku",
-    detail: "Carsystem i R-M DOO, Inđija",
+    detail: "Carsystem i R-M, Inđija",
   },
 ] as const;
 
@@ -813,7 +813,7 @@ export const carsystemMultiChanger = {
 export const carsystemFinalCta = {
   title: "Napravite bolji proces, ne samo bolji rezultat",
   description:
-    "Povežite pripremu, reparaciju, lakiranje i završnu obradu kroz Carsystem program dostupan kod Carsystem i R-M DOO.",
+    "Povežite pripremu, reparaciju, lakiranje i završnu obradu kroz Carsystem program dostupan kod Carsystem i R-M.",
   primaryCta: {
     href: carsystemCatalogHref(),
     label: "Pogledajte Carsystem katalog",

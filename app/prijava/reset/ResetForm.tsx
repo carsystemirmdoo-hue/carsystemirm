@@ -38,7 +38,7 @@ export function ResetForm() {
             <i />
           </span>
           <span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
             <small>Inđija · Srbija</small>
           </span>
         </div>
@@ -68,7 +68,7 @@ export function ResetForm() {
                 <i />
                 <i />
               </span>
-              <strong>Carsystem i R-M DOO</strong>
+              <strong>Carsystem i R-M</strong>
             </div>
             <header>
               <span>Gotovo</span>
@@ -91,7 +91,7 @@ export function ResetForm() {
                 <i />
                 <i />
               </span>
-              <strong>Carsystem i R-M DOO</strong>
+              <strong>Carsystem i R-M</strong>
             </div>
 
             {/* `h1` nosi bocni panel, kao i na prijavi; ovde ide `h2` da strana

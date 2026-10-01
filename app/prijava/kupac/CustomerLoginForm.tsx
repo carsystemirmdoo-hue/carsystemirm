@@ -34,7 +34,7 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
             <i />
           </span>
           <span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
             <small>Inđija · Srbija</small>
           </span>
         </div>
@@ -63,7 +63,7 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
               <i />
               <i />
             </span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
           </div>
 
           <header>

@@ -43,9 +43,9 @@ export function Footer() {
         <span className="cs-footer-ambient" aria-hidden="true" />
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_1.6fr_0.95fr] lg:gap-12">
-            <section className="max-w-md" aria-label="Carsystem i R-M Inđija">
+            <section className="max-w-md" aria-label="Carsystem i R-M">
               <p className="font-[var(--font-display)] text-xl font-black uppercase leading-none tracking-normal sm:text-2xl">
-                Carsystem <span className="text-accent">i R-M</span> Inđija
+                Carsystem <span className="text-accent">i R-M</span>
               </p>
               <p className="mt-4 text-sm leading-6 text-muted-foreground">
                 Profesionalni program za pripremu, farbanje, opremu i završnu
@@ -108,7 +108,9 @@ export function Footer() {
 
           <div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {new Date().getFullYear()} Carsystem i R-M Inđija. Sva prava zadržana.
+              © {new Date().getFullYear()} {companyContact.legalName} · PIB{" "}
+              {companyContact.pib} · MB {companyContact.mb} ·{" "}
+              {companyContact.locationLabel}
             </p>
             <p>
               Dizajn i razvoj:{" "}

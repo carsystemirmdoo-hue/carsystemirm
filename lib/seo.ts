@@ -72,7 +72,14 @@ export function organizationJsonLd() {
       {
         "@type": "Organization",
         "@id": `${absoluteUrl("/")}#organization`,
-        name: siteConfig.legalName,
+        name: siteConfig.name,
+        legalName: siteConfig.legalName,
+        taxID: companyContact.pib,
+        identifier: {
+          "@type": "PropertyValue",
+          propertyID: "Matični broj (RS)",
+          value: companyContact.mb,
+        },
         url: absoluteUrl("/"),
         logo: {
           "@type": "ImageObject",

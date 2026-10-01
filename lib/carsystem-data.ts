@@ -885,7 +885,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "R-M DIAMONT bazna boja",
     seoDescription:
-      "R-M DIAMONT bazna boja u katalogu Carsystem i R-M Inđija, sa upitom, dokumentacijom i refinish fazom.",
+      "R-M DIAMONT bazna boja u katalogu Carsystem i R-M, sa upitom, dokumentacijom i refinish fazom.",
   },
   {
     slug: "rm-diamont-bezbojni-lak",
@@ -1022,7 +1022,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "Carsystem Soft Plus git",
     seoDescription:
-      "Carsystem Soft Plus git u katalogu Carsystem i R-M Inđija, sa tehničkim specifikacijama i upitom.",
+      "Carsystem Soft Plus git u katalogu Carsystem i R-M, sa tehničkim specifikacijama i upitom.",
   },
   {
     slug: "carsystem-abraziv-p80-p2000",
@@ -1145,7 +1145,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "SATAjet X 5500",
     seoDescription:
-      "SATAjet X 5500 — premium pištolj sa X-nozzle sistemom, RP ili HVLP, mlaz I ili O. Konfiguracija i dostupnost na upit kod Carsystem i R-M Inđija.",
+      "SATAjet X 5500 — premium pištolj sa X-nozzle sistemom, RP ili HVLP, mlaz I ili O. Konfiguracija i dostupnost na upit kod Carsystem i R-M.",
   },
   {
     slug: "car-fit-prajmer",

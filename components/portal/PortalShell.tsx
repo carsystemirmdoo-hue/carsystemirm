@@ -62,7 +62,7 @@ const CRUMB_LABELS: Record<string, string> = {
 
 function CompanyMark() {
   return (
-    <span className="portal-company-mark" aria-label="Carsystem i R-M DOO">
+    <span className="portal-company-mark" aria-label="Carsystem i R-M">
       <span className="portal-company-symbol" aria-hidden="true">
         <i />
         <i />

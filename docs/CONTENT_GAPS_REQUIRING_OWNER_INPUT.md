@@ -1,43 +1,46 @@
-# Sadržaj koji čeka odgovor vlasnika
+# Sadržaj — odluke vlasnika i preostale preporuke
 
-Jedini dokument koji vlasnik treba da pročita i popuni posle provere sadržaja,
-kontakt podataka, placeholder tekstova i obraćanja korisniku (2026-10-01,
-grana `chore/content-qa-2026-10`, polazni `origin/main` = `f1bd389`).
-
-Odgovor upišite u red **ODGOVOR VLASNIKA** ispod svakog pitanja. Ništa iz ovog
-dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
-**nepotvrđen**.
+Dokument nastao posle provere sadržaja, kontakt podataka, placeholder tekstova i
+obraćanja korisniku (2026-10-01, grana `chore/content-qa-2026-10`, polazni
+`origin/main` = `f1bd389`). Sve stavke su rešene odlukom vlasnika, javnim
+izvorom ili bezbednim pravilom projekta; dokazi i istorija pitanja su sačuvani.
 
 ## Rezime
 
-| | Broj |
+**Nema otvorenih pitanja koja blokiraju Production.**
+
+| Status | Stavke |
 |---|---|
-| Ukupno stavki | 14 (2 rešene direktnom potvrdom firme, 12 otvorenih) |
-| Otvorene koje blokiraju produkciju (BLOCKER) | 1 (GAP-003) |
-| Otvorene HIGH / MEDIUM / LOW | 2 / 4 / 5 |
-| Rešene | 2 (GAP-001 telefon, GAP-002 e-pošta — potvrda firme 2026-10-01) |
-| Kontakt podaci koji nedostaju ili nisu potvrđeni | 1 (radno vreme, GAP-004) |
-| Tekstovi i prikazi za koje je potrebna poslovna odluka | 9 (GAP-003, 005, 006, 007, 008, 010, 012, 013, 014) |
-| Konflikti između izvora | 1 otvoren (GAP-005); GAP-001 i GAP-002 razrešeni potvrdom firme |
+| `RESOLVED_BY_OWNER_CONFIRMATION` | GAP-001, 002, 005, 012, 013, 014 |
+| `RESOLVED_FROM_PUBLIC_SOURCES` | GAP-010, 011 |
+| `RESOLVED_BY_SAFE_PROJECT_POLICY` | GAP-003, 004 (`SAFE_DEFAULT_APPLIED`), 007, 008 |
+| `DEFERRED_NON_PUBLIC_DATA` | naknadna provera 82 neproverene lokacije (GAP-003) — `docs/locations/UNVERIFIED_LOCATIONS_FOLLOW_UP.md` |
+| `ADVISORY_REVIEW_RECOMMENDED` | GAP-006 (pravna revizija teksta saglasnosti), GAP-009 (stručni pregled prevoda; primena čeka pregled tabele) |
+
+Statusne oznake: `RESOLVED_BY_OWNER_CONFIRMATION` — direktna odluka ili potvrda
+firme; `RESOLVED_FROM_PUBLIC_SOURCES` — dva saglasna javna izvora ili zvaničan
+izvor; `RESOLVED_BY_SAFE_PROJECT_POLICY` — primenjeno bezbedno pravilo bez
+pretpostavki; `DEFERRED_NON_PUBLIC_DATA` — provera podataka koji nisu javni, ne
+blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni pregled.
 
 ### Matrica dokaza (online provera, 2026-10-01)
 
-| Stavka | Status | Najjači pronađeni dokaz | Da li dokaz rešava stavku |
+| Stavka | Status | Najjači pronađeni dokaz | Dokaz (pre odluke) |
 |---|---|---|---|
-| GAP-001 Telefon | REŠENO | Direktna potvrda firme: 022 558 501 + tri regionalna broja | Da — potvrda firme |
-| GAP-002 E-pošta | REŠENO | Direktna potvrda firme: carsystemirmdoo@gmail.com | Da — potvrda firme |
-| GAP-003 BEX lokacije | otvoreno, BLOCKER | Nema javnog izvora za 82 `pending` lokacije | Ne — pristanak i status zna samo firma |
-| GAP-004 Radno vreme | otvoreno | Nijedan imenik ni registar ne navodi radno vreme | Ne |
-| GAP-005 Naziv firme | otvoreno | Registar: „CAR SYSTEM I R-M d.o.o. Inđija" (pun i skraćen naziv) | Delimično — pravni naziv je jasan; oblik za prikaz i objava PIB/MB su odluka |
-| GAP-006 Saglasnost | otvoreno | ZZPL čl. 15 (opoziv jednako jednostavan kao pristanak) | Ne — nova verzija teksta traži odobrenje |
-| GAP-007 Slanje forme | otvoreno | Nema API rute ni servisa; potvrđeno sanduče je Gmail | Ne — poslovna i troškovna odluka |
-| GAP-008 Demo rute | otvoreno | Produkcija danas: 307 → maintenance | Ne — odluka pre otvaranja sajta |
-| GAP-009 TDS na engleskom | otvoreno | Zvanični TDS samo EN (baslac i DE); srpska verzija ne postoji | Ne — prevod mora odobriti stručno lice |
-| GAP-010 Video kartica | otvoreno | Zvaničan kanal `youtube.com/carsystem_refinish` (link sa carsystem.org) | Delimično — kandidat postoji, izbor je odluka |
-| GAP-011 Tačka na mapi | otvoreno | OSM zgrada (way 799359269) na 45.0496189, 20.0654391 = BEX geokod | Skoro — dva nezavisna izvora; potrebna potvrda ulaza |
-| GAP-012 „faza N" | otvoreno | — (interno) | Ne |
-| GAP-013 „Gazda" | otvoreno | — (interno) | Ne |
-| GAP-014 CTA u CLAUDE.md | otvoreno | — (projektno pravilo) | Ne |
+| GAP-001 Telefon | RESOLVED_BY_OWNER_CONFIRMATION | Direktna potvrda firme: 022 558 501 + tri regionalna broja | Da — potvrda firme |
+| GAP-002 E-pošta | RESOLVED_BY_OWNER_CONFIRMATION | Direktna potvrda firme: carsystemirmdoo@gmail.com | Da — potvrda firme |
+| GAP-003 BEX lokacije | RESOLVED_BY_SAFE_PROJECT_POLICY | Nema javnog izvora za 82 `pending` lokacije | Ne — pristanak i status zna samo firma |
+| GAP-004 Radno vreme | RESOLVED_BY_SAFE_PROJECT_POLICY | Nijedan imenik ni registar ne navodi radno vreme | Ne |
+| GAP-005 Naziv firme | RESOLVED_BY_OWNER_CONFIRMATION | Registar: „CAR SYSTEM I R-M d.o.o. Inđija" (pun i skraćen naziv) | Delimično — pravni naziv je jasan; oblik za prikaz i objava PIB/MB su odluka |
+| GAP-006 Saglasnost | ADVISORY_REVIEW_RECOMMENDED | ZZPL čl. 15 (opoziv jednako jednostavan kao pristanak) | Ne — nova verzija teksta traži odobrenje |
+| GAP-007 Slanje forme | RESOLVED_BY_SAFE_PROJECT_POLICY | Nema API rute ni servisa; potvrđeno sanduče je Gmail | Ne — poslovna i troškovna odluka |
+| GAP-008 Demo rute | RESOLVED_BY_SAFE_PROJECT_POLICY | Produkcija danas: 307 → maintenance | Ne — odluka pre otvaranja sajta |
+| GAP-009 TDS na engleskom | ADVISORY_REVIEW_RECOMMENDED | Zvanični TDS samo EN (baslac i DE); srpska verzija ne postoji | Ne — prevod mora odobriti stručno lice |
+| GAP-010 Video kartica | RESOLVED_FROM_PUBLIC_SOURCES | Zvaničan kanal `youtube.com/carsystem_refinish` (link sa carsystem.org) | Delimično — kandidat postoji, izbor je odluka |
+| GAP-011 Tačka na mapi | RESOLVED_FROM_PUBLIC_SOURCES | OSM zgrada (way 799359269) na 45.0496189, 20.0654391 = BEX geokod | Skoro — dva nezavisna izvora; potrebna potvrda ulaza |
+| GAP-012 „faza N" | RESOLVED_BY_OWNER_CONFIRMATION | — (interno) | Ne |
+| GAP-013 „Gazda" | RESOLVED_BY_OWNER_CONFIRMATION | — (interno) | Ne |
+| GAP-014 CTA u CLAUDE.md | RESOLVED_BY_OWNER_CONFIRMATION | — (projektno pravilo) | Ne |
 
 ### Šta je već ispravljeno bez Vašeg odgovora
 
@@ -85,7 +88,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 
 ## GAP-001 — Telefon centrale
 
-- Status: `REŠENO — direktna potvrda firme (2026-10-01)`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `BLOCKER`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
@@ -110,10 +113,10 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
   - `+381 22 367 139` — spisak partnera na carsystem.org (`docs/CARSYSTEM_ORG_COMPARATIVE_AUDIT.md:211`)
   - `022/558 501` — keš pretraživača starog sajta i poslovni imenik (isti broj naveden i kao faks)
   - `+381 62 8810895` — agregator kolikajeplata.com (nejasno da li je broj firme)
-- Tačno pitanje za vlasnika: Koji broj (ili brojevi) treba da stoje javno kao telefon centrale, i da li je neki od njih mobilni ili poseban broj za tehničku podršku?
+- Prvobitno pitanje (istorija): Koji broj (ili brojevi) treba da stoje javno kao telefon centrale, i da li je neki od njih mobilni ili poseban broj za tehničku podršku?
 - Očekivani format odgovora: broj u obliku `+381 22 123 456` (može više brojeva sa namenom, npr. „centrala", „tehnička podrška").
-- Predlog (NEPOTVRĐENO): `+381 22 367 139` jer ga navodi zvaničan spisak partnera proizvođača Carsystem.
-- ODGOVOR VLASNIKA: Direktna potvrda firme (2026-10-01), ima prednost nad svim javnim izvorima:
+- Prvobitni predlog (istorija): `+381 22 367 139` jer ga navodi zvaničan spisak partnera proizvođača Carsystem.
+- Odluka i primena (2026-10-01): Direktna potvrda firme (2026-10-01), ima prednost nad svim javnim izvorima:
   - telefon kancelarije: `022 558 501` / `+381 22 558 501` / `tel:+38122558501` — glavni broj na footeru, `/kontakt`, početnoj, PDP, brend stranama, katalogu i u glavnim CTA dugmadima;
   - komercijalista za Vojvodinu: `061 168 8472` / `+381 61 168 8472` / `tel:+381611688472`;
   - komercijalista za Centralnu Srbiju: `069 333 7401` / `+381 69 333 7401` / `tel:+381693337401`;
@@ -123,7 +126,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 
 ## GAP-002 — E-pošta centrale (adresa na koju stižu upiti)
 
-- Status: `REŠENO — direktna potvrda firme (2026-10-01)`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `BLOCKER`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
@@ -144,14 +147,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
   - `carsystemirmdoo@gmail.com` — keš pretraživača starog sajta `carsystemirm.com/kontakt`
   - `eurospektar@blic.net` — registar (pretraga.cubepartner.rs)
   - `info@carsystem-rm.rs` — bila u mrtvom fajlu `components/ContactForm.tsx` (uklonjen; nije se prikazivao)
-- Tačno pitanje za vlasnika: Na koju adresu treba da stižu upiti sa sajta, i da li sanduče `office@carsystemirm.com` postoji i da li ga neko čita?
+- Prvobitno pitanje (istorija): Na koju adresu treba da stižu upiti sa sajta, i da li sanduče `office@carsystemirm.com` postoji i da li ga neko čita?
 - Očekivani format odgovora: jedna adresa (`ime@domen`), uz „da/ne" da li `office@carsystemirm.com` postoji.
-- Predlog (NEPOTVRĐENO): adresa na domenu `carsystemirm.com`, jer je to domen sajta.
-- ODGOVOR VLASNIKA: Direktna potvrda firme (2026-10-01): glavna e-pošta je `carsystemirmdoo@gmail.com` (`mailto:carsystemirmdoo@gmail.com`) za sva glavna `mailto:` mesta i formu za upit. `office@carsystemirm.com` se ne koristi ni kao prikaz, ni kao primalac, ni kao rezerva, ni u schema.org; `info@carsystem-rm.rs` i `eurospektar@blic.net` takođe nisu kontakt.
+- Prvobitni predlog (istorija): adresa na domenu `carsystemirm.com`, jer je to domen sajta.
+- Odluka i primena (2026-10-01): Direktna potvrda firme (2026-10-01): glavna e-pošta je `carsystemirmdoo@gmail.com` (`mailto:carsystemirmdoo@gmail.com`) za sva glavna `mailto:` mesta i formu za upit. `office@carsystemirm.com` se ne koristi ni kao prikaz, ni kao primalac, ni kao rezerva, ni u schema.org; `info@carsystem-rm.rs` i `eurospektar@blic.net` takođe nisu kontakt.
 
 ## GAP-003 — Objava partnerskih lokacija preuzetih iz BEX adresara
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_SAFE_PROJECT_POLICY`
 - Prioritet: `BLOCKER`
 - Oblast: `drugo` (javni podaci trećih lica)
 - Vidljivost: `javno`
@@ -164,14 +167,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: izvor podataka, status provere po zapisu, tekst lokatora (uklonjeno „interni preview prikaz").
 - Pronađeni izvori i konflikt: nema konflikta; nedostaje potvrda.
 - Online dokazi (2026-10-01): Zvanični pretraživač partnera na carsystem.org nije dostupan na poznatim adresama (`/en/partner-search`, `/en/partners`: 404); raniji audit (`docs/CARSYSTEM_ORG_COMPARATIVE_AUDIT.md:211`) za Srbiju beleži samo centralu. Nijedan javni izvor ne potvrđuje 82 lokacije sa statusom `pending`.
-- Tačno pitanje za vlasnika: Koje od 91 lokacije smeju biti javno prikazane kao prodajna/partnerska mesta pre otvaranja sajta?
+- Prvobitno pitanje (istorija): Koje od 91 lokacije smeju biti javno prikazane kao prodajna/partnerska mesta pre otvaranja sajta?
 - Očekivani format odgovora: „sve 91" / „samo 9 proverenih" / spisak ID-jeva iz `data/store-locations.json` koje treba sakriti ili potvrditi.
-- Predlog (NEPOTVRĐENO): do provere javno prikazati samo 9 lokacija sa statusom `verified`.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): do provere javno prikazati samo 9 lokacija sa statusom `verified`.
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): javno se prikazuje samo 9 lokacija sa `verificationStatus: "verified"`; 82 zapisa `pending` se ne prikazuju kao prodavnice ni partneri i ostaju u izvoru. Primenjeno: `isPubliclyListedStore()` u `lib/partner-stores.ts` (svi javni potrošači i LocalBusiness JSON-LD). Naknadna provera 82 zapisa: `docs/locations/UNVERIFIED_LOCATIONS_FOLLOW_UP.md` (`DEFERRED_NON_PUBLIC_DATA`, ne blokira otvaranje sajta). Među njima je i sama centrala, koja više nije prikazana kao „partner".
 
 ## GAP-004 — Radno vreme centrale
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_SAFE_PROJECT_POLICY`
 - Prioritet: `HIGH`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
@@ -184,14 +187,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: svi izvori iz GAP-001.
 - Pronađeni izvori i konflikt: nema izvora.
 - Online dokazi (2026-10-01): Nijedan javni izvor ne navodi radno vreme: poslovnivodic.com (unos „CAR SYSTEM I R-M", Ive Andrića 3, +381 22 558 501 — bez radnog vremena), pretraga.cubepartner.rs, kolikajeplata.com, pretraga veba „Car System Inđija radno vreme".
-- Tačno pitanje za vlasnika: Koje je radno vreme centrale (radni dani, subota, praznici)?
+- Prvobitno pitanje (istorija): Koje je radno vreme centrale (radni dani, subota, praznici)?
 - Očekivani format odgovora: npr. `Pon–Pet 08:00–16:00, Sub 08:00–13:00`.
-- Predlog (NEPOTVRĐENO): nema.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): nema.
+- Odluka i primena (2026-10-01): `SAFE_DEFAULT_APPLIED`: nijedan pouzdan javni izvor ne navodi radno vreme, pa `workingHours` ostaje `null` i radno vreme se nigde ne prikazuje; pretpostavljeno „Pon–Pet 08:00–16:00" se ne koristi. Kada firma dostavi radno vreme, upisuje se u `lib/company-contact.ts` i automatski se prikazuje u footeru i na `/kontakt`.
 
 ## GAP-005 — Zvaničan naziv firme i podaci o pravnom licu na sajtu
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `HIGH`
 - Oblast: `pravni podatak`
 - Vidljivost: `javno`, `kupac`, `komercijalista`, `vlasnik/admin`
@@ -206,14 +209,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: registar (cubepartner/APR), BEX red firme, `docs/seo/SEO_LOCAL_BUSINESS_AUDIT.md` (već predviđa dopunu Organization schema posle potvrde), svih 13 pojavljivanja u kodu.
 - Pronađeni izvori i konflikt: „Carsystem i R-M Inđija" / „Carsystem i R-M Inđija d.o.o." / „Carsystem i R-M DOO" (sajt) vs. „CAR SYSTEM I R-M d.o.o. Inđija" (registar).
 - Online dokazi (2026-10-01): Registar (pretraga.pkspartner.rs → cubepartner.rs, podaci iz APR-a): poslovno ime i skraćeno poslovno ime „CAR SYSTEM I R-M d.o.o. Inđija", adresa Ive Andrića 3, Inđija, osnovano 2009-03-05, status aktivno. Nijedan izvor ne koristi oblik „Carsystem i R-M DOO".
-- Tačno pitanje za vlasnika: Koji tačan naziv firme želite na sajtu i u portalu, i da li u footeru treba prikazati pun pravni naziv sa PIB-om i matičnim brojem?
+- Prvobitno pitanje (istorija): Koji tačan naziv firme želite na sajtu i u portalu, i da li u footeru treba prikazati pun pravni naziv sa PIB-om i matičnim brojem?
 - Očekivani format odgovora: naziv za prikaz + pun pravni naziv + „da/ne" za PIB i MB u footeru.
-- Predlog (NEPOTVRĐENO): prikaz „Carsystem i R-M Inđija" svuda, a pun pravni naziv iz registra u footeru i u tekstu saglasnosti.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): prikaz „Carsystem i R-M Inđija" svuda, a pun pravni naziv iz registra u footeru i u tekstu saglasnosti.
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): brend/korisnički naziv „Carsystem i R-M" (header, marketing, kratke oznake, login, portal, schema.org `name`); pun pravni naziv „CAR SYSTEM I R-M d.o.o. Inđija" (pravni red u footeru, saglasnost, schema.org `legalName`); PIB 105988852, MB 20506610, adresa Ive Andrića 3, 22320 Inđija, Srbija. Primenjeno: `companyContact.name/legalName/pib/mb`, `seoSiteConfig.name/legalName`, pravni red u footeru („© godina · pun naziv · PIB · MB · adresa"), schema.org `taxID` i `identifier`. Oblici „Carsystem i R-M DOO" i „Carsystem i R-M Inđija d.o.o." uklonjeni (čuvar ih odbija; izuzetak je samo istorijski tekst saglasnosti v1).
 
 ## GAP-006 — Tekst saglasnosti kupca za obaveštenja e-poštom
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `ADVISORY_REVIEW_RECOMMENDED`
 - Prioritet: `MEDIUM`
 - Oblast: `pravni podatak`
 - Vidljivost: `kupac`
@@ -226,14 +229,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: konstanta verzije, potrošači teksta.
 - Pronađeni izvori i konflikt: naziv u tekstu se razlikuje od registra (GAP-005).
 - Online dokazi (2026-10-01): Zakon o zaštiti podataka o ličnosti („Sl. glasnik RS", br. 87/2018), član 15: opoziv pristanka mora biti jednako jednostavan kao davanje pristanka — postojeći tekst to već kaže; otvoreni su samo naziv pravnog lica i rodno obeležen oblik.
-- Tačno pitanje za vlasnika: Da li odobravate novu verziju teksta saglasnosti sa tačnim nazivom pravnog lica i rodno neutralnim završetkom?
+- Prvobitno pitanje (istorija): Da li odobravate novu verziju teksta saglasnosti sa tačnim nazivom pravnog lica i rodno neutralnim završetkom?
 - Očekivani format odgovora: „da" uz konačan tekst, ili „ne".
-- Predlog (NEPOTVRĐENO): „Pristajem da mi CAR SYSTEM I R-M d.o.o. Inđija šalje obaveštenja o proizvodima, akcijama i tehničkim novostima na moju poslovnu e-poštu. Saglasnost mogu povući u bilo kom trenutku, jednako lako kao što je data." (verzija `2026-10-v2`)
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): „Pristajem da mi CAR SYSTEM I R-M d.o.o. Inđija šalje obaveštenja o proizvodima, akcijama i tehničkim novostima na moju poslovnu e-poštu. Saglasnost mogu povući u bilo kom trenutku, jednako lako kao što je data." (verzija `2026-10-v2`)
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): nova verzija `2026-10-v2`, latinicom kao portal: „Pristajem da mi CAR SYSTEM I R-M d.o.o. Inđija na moju poslovnu e-poštu šalje obaveštenja o proizvodima, akcijama i tehničkim novostima. Saglasnost je dobrovoljna i mogu je povući u bilo kom trenutku, jednako jednostavno kao što je data." Primenjeno: `CONSENT_TEXT_VERSIONS` čuva `2026-08-v1` doslovno; nove odluke se upisuju sa `2026-10-v2`; ekran prikazuje tekst one verzije uz koju je saglasnost data. Testovi prelaza u `lib/customers/consent.test.mjs`. Preporučena je naknadna pravna revizija teksta — nije tehnička prepreka.
 
 ## GAP-007 — Kako forma za upit šalje poruku
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_SAFE_PROJECT_POLICY`
 - Prioritet: `MEDIUM`
 - Oblast: `CTA`
 - Vidljivost: `javno`
@@ -246,14 +249,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: nema API rute ni servisa za e-poštu u projektu.
 - Pronađeni izvori i konflikt: nema.
 - Online dokazi (2026-10-01): Nema javnog dokaza koji bi rešio stavku — to je poslovna odluka. Napomena: potvrđeno sanduče je Gmail adresa; slanje sa servera zahtevalo bi poseban servis ili nalog za slanje (pristupni podaci firme), što ovaj krug ne uvodi.
-- Tačno pitanje za vlasnika: Da li je prihvatljivo da upit ide kroz program za e-poštu kupca, ili želite da sajt sam šalje poruku (uz izbor servisa i eventualni trošak)?
+- Prvobitno pitanje (istorija): Da li je prihvatljivo da upit ide kroz program za e-poštu kupca, ili želite da sajt sam šalje poruku (uz izbor servisa i eventualni trošak)?
 - Očekivani format odgovora: „ostaje kako jeste" ili „sajt šalje sam" + odobren servis.
-- Predlog (NEPOTVRĐENO): zadržati sadašnji način do otvaranja sajta.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): zadržati sadašnji način do otvaranja sajta.
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): ostaje `mailto:` — sajt priprema poruku, korisnik je šalje iz svog programa za e-poštu, primalac `carsystemirmdoo@gmail.com`. Tekst forme sada kaže: „Poruka još nije poslata …" i „Poruka nije poslata dok je ne pošaljete iz tog programa." Bez servisa za e-poštu, API rute, troška i env promenljive.
 
 ## GAP-008 — Interne demo strane dostupne na javnom domenu
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_SAFE_PROJECT_POLICY`
 - Prioritet: `MEDIUM`
 - Oblast: `drugo`
 - Vidljivost: `javno`
@@ -266,14 +269,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: middleware, prerenderovani HTML, da nijedna javna strana ne linkuje na ove rute.
 - Pronađeni izvori i konflikt: nema.
 - Online dokazi (2026-10-01): Produkcioni domen danas: `https://carsystemirm.com/interaction-demo/cursor-states`, `/social-exports/spray-reveal` i `/kontakt` vraćaju 307 → `/site-u-pripremi` (maintenance). Izloženost demo ruta nastaje tek kad se maintenance isključi.
-- Tačno pitanje za vlasnika: Da li `/interaction-demo/*` i `/social-exports/*` treba da budu nedostupni na produkcionom domenu?
+- Prvobitno pitanje (istorija): Da li `/interaction-demo/*` i `/social-exports/*` treba da budu nedostupni na produkcionom domenu?
 - Očekivani format odgovora: „zatvoriti u produkciji" / „ostaviti".
-- Predlog (NEPOTVRĐENO): zatvoriti u produkciji (posebna izmena middleware-a).
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): zatvoriti u produkciji (posebna izmena middleware-a).
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): `/interaction-demo/*` i `/social-exports/*` vraćaju 404 na Vercel Production i Preview (pre održavanja, kanonskog hosta i noindex-a); lokalno i u `vercel dev` ostaju dostupne. Primenjeno: `lib/internal-demo-routes.mjs` + `middleware.ts`, test `lib/internalDemoRoutes.test.mjs` (`npm run test:internal-routes`), bez nove env promenljive (odlučuje `VERCEL_ENV`).
 
 ## GAP-009 — Neprevedena tehnička uputstva iz tehničkih listova (TDS)
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `ADVISORY_REVIEW_RECOMMENDED`
 - Prioritet: `MEDIUM`
 - Oblast: `tekst`
 - Vidljivost: `javno`
@@ -295,14 +298,45 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: renderovani HTML svih 2015 prerenderovanih strana; ostali engleski tekst su zvanični nazivi proizvoda (SATA, baslac), što je postojeća politika kataloga.
 - Pronađeni izvori i konflikt: nema.
 - Online dokazi (2026-10-01): Zvanični tehnički listovi postoje samo na engleskom (i nemačkom za baslac): `https://techinfo.baslac.com/en/40-620.pdf` (200), `/de/40-620.pdf` (200), `/sr/`, `/rs/`, `/hr/`, `/sl/` (404); Norbin `https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC.pdf`, `…/NORBIN_TDS_N15-V25_Fast_Clear_VOC.pdf`, `…/N60-V20_Multifunctional_Body_Filler_Hardener.pdf`; za R-M ONYX HD nije pronađen srpski tehnički list. Zvaničan srpski prevod ne postoji — prevod bi bio naš i mora ga odobriti stručno lice.
-- Tačno pitanje za vlasnika: Da li ove rečenice treba prevesti na srpski (i ko odobrava prevod), ili ostaju na engleskom kao citat iz TDS-a?
+- Prvobitno pitanje (istorija): Da li ove rečenice treba prevesti na srpski (i ko odobrava prevod), ili ostaju na engleskom kao citat iz TDS-a?
 - Očekivani format odgovora: „prevesti — odobrava [ime/uloga]" ili „ostaje original".
-- Predlog (NEPOTVRĐENO): „Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm."
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): „Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm."
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): konzervativan srpski prevod vidljivih tekstualnih polja kroz izvor istine sync-a, original sa izvorom u provenance-u, dva sync prolaza sa drugim 0-diff i oznaka za stručni pregled. **Primena čeka pregled tabele predloženih prevoda** (tražen pre primene) — vidi „Predlog prevoda" ispod. Ne blokira Production.
+
+### Predlog prevoda (GAP-009) — čeka pregled pre primene
+
+Pravila: brojevi, jedinice, temperature, vremena i ograničenja ostaju isti (decimalni
+zarez prema `data/*-sync/LOCALIZATION_GUIDE.md`); zvanične oznake (Line 45, wet-on-wet
+kao ustaljen termin) se ne prevode; original ostaje u provenance-u sa izvorom. Pronađeno
+skeniranjem renderovanog teksta svih PDP strana Norbin, baslac i R-M (2026-10-01).
+Zvanični nazivi proizvoda i nazivi PDF dokumenata nisu predmet prevoda.
+
+| # | Proizvod (ruta) | Polje | Original | Predlog na srpskom | Mora ostati identično | Izvor |
+|---|---|---|---|---|---|---|
+| 1 | Norbin N15-V20, N15-V25 (`/proizvodi/norbin-n15-v20-clear-voc`, `/proizvodi/norbin-n15-v25-fast-clear-voc`) | VOC | The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm. | Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm. | 419 g/l; < 0,1 μm | norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf; …/N15-V25_Fast_Clear_VOC_2.pdf |
+| 2 | Norbin N60-V20 (`/proizvodi/norbin-n60-v20-multifunctional-body-filler-hardener`) | VOC | The VOC content of this product is 249 g/l. It cannot be ruled out that this product contains particles < 0.1 μm. | Sadržaj VOC ovog proizvoda je 249 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm. | 249 g/l; < 0,1 μm | norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf |
+| 3 | Norbin N15-020, N15-V20, N55-V29 (`/proizvodi/grupa/norbin-n15-020`, `/proizvodi/norbin-n15-v20-clear-voc`, `/proizvodi/norbin-n55-v29-2k-primer-filler-black`) | Razmak između slojeva | 3 minutes flash off between coats | 3 minuta otparavanja između slojeva | 3 min | NORBIN_TDS_N15-020_Clear_2022.pdf; …N15-V20…; N55-V29_2K_Primer_Filler_black.pdf |
+| 4 | Norbin N15-020, N15-V20 | Sušenje (spremno za montažu) | 5 hours ready for assembly (at 20°C) | 5 sati do spremnosti za montažu (pri 20 °C) | 5 h; 20 °C | NORBIN_TDS_N15-020_Clear_2022.pdf; …N15-V20… |
+| 5 | Norbin N15-020, N15-V20, N15-V25 | Sušenje (tvrdoća) | Total hardness: after 24 hours | Potpuna tvrdoća: posle 24 sata | 24 h | iste kao 3–4; N15-V25_Fast_Clear_VOC_2.pdf |
+| 6 | Norbin N15-V25 | Sušenje (suvo na prašinu) | 2 hours dust free (at 20°C) | 2 sata do suvoće na prašinu (pri 20 °C) | 2 h; 20 °C | N15-V25_Fast_Clear_VOC_2.pdf |
+| 7 | Norbin N55-015 (`/proizvodi/norbin-n55-015-1k-plastic-primer`) | Broj slojeva | 1 - 2 thin coats | 1–2 tanka sloja | 1–2 | N55-015_1K_Plastic_Primer.pdf |
+| 8 | Norbin N60-V20 | Vreme | 4 - 6 minutes at room temperature | 4–6 minuta na sobnoj temperaturi | 4–6 min | N60-V20_Multifunctional_Body_Filler_Hardener.pdf |
+| 9 | baslac 40-40 (`/proizvodi/baslac-40-40-2k-universal-clear`) | Razmak između slojeva | 2-3 min after each spray coat | 2–3 min posle svakog sloja | 2–3 min | techinfo.baslac.com/en/40-40.pdf |
+| 10 | baslac 40-440, 40-450 (`/proizvodi/baslac-40-440-2k-voc-clear`, `/proizvodi/baslac-40-450-universal-clear-voc`) | Razmak između slojeva | 3 min between spray coats | 3 min između slojeva | 3 min | techinfo.baslac.com/en/40-440.pdf; …/40-450.pdf |
+| 11 | baslac 40-620 (`/proizvodi/baslac-40-620-2k-clear-mat-voc`) | Razmak između slojeva | Flash off until completely mat after the first spray coat and before drying. Do not flash off for more than 25 min. | Posle prvog sloja i pre sušenja otparavati dok površina potpuno ne postane mat. Otparavanje ne sme trajati duže od 25 min. | 25 min | techinfo.baslac.com/en/40-620.pdf |
+| 12 | baslac 45-W10 (`/proizvodi/baslac-45-w10`) | Razmak između slojeva | No flash off before applying 45 Line. | Bez otparavanja pre nanošenja Line 45. | Line 45 (naziv) | techinfo.baslac.com/en/45-W10.pdf |
+| 13 | baslac 40-10 (`/proizvodi/baslac-40-10-2k-panel-clear`) | Sušenje | 20°C: 4 h dust-free (TDS: „Drying at 20°C 4 h dust-free: 2 h") | 20 °C: 4 h; suvo na prašinu: 2 h | 20 °C; 4 h; 2 h | techinfo.baslac.com/en/40-10.pdf — **ispravka parsiranja**: sajt danas tvrdi „4 h dust-free", TDS kaže 4 h sušenje i 2 h do suvoće na prašinu |
+| 14 | R-M ONYX HD, ONYX HD TROPICAL (`/proizvodi/rm-onyx-hd`, `/proizvodi/rm-onyx-hd-tropical`) | Sušenje | 20°C: 15 min Possibility to speed up the process | 20 °C: 15 min (proces se može ubrzati) | 20 °C; 15 min; 40 °C: 10 min | techinfo.rmpaint.com/unicorn/en/ONYX HD-ONYX HD Waterborne basecoat line.pdf; …TROPICAL….pdf |
+| 15 | R-M C 2P52 (`/proizvodi/rm-c-2p52-easy-air-finish-r`) | Sušenje | 20°C: Dust free time: 35 min | 20 °C: suvo na prašinu za 35 min | 20 °C; 35 min | techinfo.rmpaint.com/unicorn/en/C 2P52 -eSense clear coat ambient drying.pdf |
+| 16 | R-M P 5540 (`/proizvodi/rm-p-5540-ghd-protect-primer-filler`) | Odnos mešanja | 100:25:25 100:25:25 by volume wet on wet | 100:25:25 zapreminski, mokro na mokro; 100:20:20 zapreminski, za brušenje | 100:25:25; 100:20:20 | techinfo.rmpaint.com/unicorn/en/P 5540-GHD PROTECT PRIMER FILLER grey PUR.pdf — **ispravka parsiranja**: duplirani prvi odnos, izostavljen odnos za brušenje iz istog TDS-a |
+| 17 | R-M C 2A40 (`/proizvodi/c-2a40-airtop`) | Odnos mešanja | 1:1 + 20% Clear coat Preparation | 1:1 + 20 % | 1:1; 20 % | techinfo.rmpaint.com/unicorn/en/C 2A40-Clear coat air drying.pdf — **ispravka parsiranja**: „Clear coat Preparation" je naslov sledećeg odeljka u TDS-u |
+
+Napomena: redovi 13, 16 i 17 ispravljaju i pogrešno pročitanu vrednost, ne samo jezik;
+zato su posebno istaknuti za pregled.
 
 ## GAP-010 — Kartica „Video materijali" na Carsystem strani
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_FROM_PUBLIC_SOURCES`
 - Prioritet: `LOW`
 - Oblast: `tekst`
 - Vidljivost: `javno`
@@ -315,19 +349,19 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: kartica nema link; `docs/CONTENT_ASSET_GAP_AUDIT.md:714` (C07) beleži isto.
 - Pronađeni izvori i konflikt: nema.
 - Online dokazi (2026-10-01): carsystem.org linkuje zvanični kanal `https://www.youtube.com/carsystem_refinish`; postoji i kanal proizvođača Vosschemie GmbH. Videi su na nemačkom/engleskom; izbor videa i ugrađivanje su odluka vlasnika.
-- Tačno pitanje za vlasnika: Imate li video materijale za Carsystem program koje treba povezati, ili karticu treba ukloniti?
+- Prvobitno pitanje (istorija): Imate li video materijale za Carsystem program koje treba povezati, ili karticu treba ukloniti?
 - Očekivani format odgovora: link(ovi) ka videu ili „ukloniti karticu".
-- Predlog (NEPOTVRĐENO): ukloniti karticu dok video ne postoji.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): ukloniti karticu dok video ne postoji.
+- Odluka i primena (2026-10-01): Kartica „Video materijali" vodi na zvanični kanal `https://www.youtube.com/carsystem_refinish` (link sa carsystem.org, 200 na 2026-10-01), otvara se u novom prozoru sa `rel="noopener noreferrer"`. Tekst: „Pogledajte zvanične Carsystem video materijale, demonstracije proizvoda i postupke primene." Status „U pripremi" uklonjen.
 
 ## GAP-011 — Tačka centrale na mapi
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_FROM_PUBLIC_SOURCES`
 - Prioritet: `LOW`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
 - Putanja: `lib/company-contact.ts`
-- Linija ili identifikator: `companyLocation.coordinates` (linija 78)
+- Linija ili identifikator: `companyLocation.coordinates`
 - Ruta/strana: mapa centrale na `/` i `/kontakt` (`components/map/CompanyLocationMap.tsx`)
 - Komponenta ili polje: marker „Centrala · Inđija"
 - Trenutni tekst/vrednost: `45.0482, 20.0817` — centar grada, ne adresa.
@@ -335,14 +369,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: adresa (potvrđena, vidi rezime), geokod iz BEX uvoza.
 - Pronađeni izvori i konflikt: centar grada vs. geokod adrese.
 - Online dokazi (2026-10-01): OpenStreetMap/Nominatim za „Ive Andrića 3, Inđija": zgrada na kućnom nivou (`class=building`, `type=house`, way 799359269) na `45.0496189, 20.0654391`, „3, Иве Андрића, Инђија, 22320" — ista tačka kao BEX geokod. Ostaje da firma potvrdi da je to ulaz/magacin za posetioce.
-- Tačno pitanje za vlasnika: Da li je ulaz/magacin na Ive Andrića 3 na tački `45.0496189, 20.0654391`?
+- Prvobitno pitanje (istorija): Da li je ulaz/magacin na Ive Andrića 3 na tački `45.0496189, 20.0654391`?
 - Očekivani format odgovora: „da" ili tačne koordinate / link sa mape.
-- Predlog (NEPOTVRĐENO): koristiti geokod adrese posle Vaše potvrde.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): koristiti geokod adrese posle Vaše potvrde.
+- Odluka i primena (2026-10-01): Tačka objekta `45.0496189, 20.0654391` (OpenStreetMap zgrada way 799359269 = BEX geokod) zamenjuje centar Inđije `45.0482, 20.0817`. Marker: „Carsystem i R-M — centrala"; tačka je opisana kao objekat, ne kao ulaz ni prijem robe.
 
 ## GAP-012 — Oznake projektnih faza („faza 2–5") na ekranima portala
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `LOW`
 - Oblast: `portal`
 - Vidljivost: `komercijalista`, `vlasnik/admin`
@@ -355,14 +389,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: sva 23 pojavljivanja; nijedno nije vidljivo kupcu.
 - Pronađeni izvori i konflikt: nema.
 - Online dokazi (2026-10-01): Nije predmet javnog izvora (interni plan projekta).
-- Tačno pitanje za vlasnika: Da li komercijalisti treba da vide oznake „faza N", ili ih zameniti opisom (npr. „posle povezivanja BiznisSoft izvoza")?
+- Prvobitno pitanje (istorija): Da li komercijalisti treba da vide oznake „faza N", ili ih zameniti opisom (npr. „posle povezivanja BiznisSoft izvoza")?
 - Očekivani format odgovora: „zadržati" / „zameniti opisom".
-- Predlog (NEPOTVRĐENO): zameniti opisom preduslova.
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): zameniti opisom preduslova.
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): u UI-ju nema „faza N" ni „Planirano: faza N". `PhaseNotice` prikazuje preduslov („Dostupno nakon povezivanja BiznisSoft izvoza", „… BEX naloga za otpremu", „… uvoza podataka o zalihama", „… statusa plaćanja"); „(faza N)" uklonjeno iz spiskova preduslova i iz opisa polja pretrage. Brojevi faza ostaju u `docs/b2b`. Čuvar odbija povratak.
 
 ## GAP-013 — Naziv uloge „Gazda" u portalu
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `LOW`
 - Oblast: `portal`
 - Vidljivost: `komercijalista`, `vlasnik/admin`
@@ -375,14 +409,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: svi potrošači; kupcu se ne prikazuje.
 - Pronađeni izvori i konflikt: nema.
 - Online dokazi (2026-10-01): Nije predmet javnog izvora (interni naziv uloge).
-- Tačno pitanje za vlasnika: Da li zaposleni treba da vide naziv uloge „Gazda" ili, na primer, „Vlasnik"?
+- Prvobitno pitanje (istorija): Da li zaposleni treba da vide naziv uloge „Gazda" ili, na primer, „Vlasnik"?
 - Očekivani format odgovora: željeni naziv uloge.
-- Predlog (NEPOTVRĐENO): „Vlasnik".
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): „Vlasnik".
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): korisnička oznaka uloge je „Vlasnik" (i oblici „od Vlasnika", „nalog sa ulogom Vlasnik"); interni ključ `gazda` je nepromenjen (bez migracije, promene dozvola i sesija). Čuvar odbija „Gazda" u korisničkom tekstu.
 
 ## GAP-014 — Formulacija glavnog CTA u CLAUDE.md
 
-- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `LOW`
 - Oblast: `CTA`
 - Vidljivost: `javno` (posredno — CLAUDE.md usmerava buduće izmene sajta)
@@ -395,7 +429,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Šta je provereno: sva 24 pojavljivanja CTA „Pronađite (najbližu) prodavnicu" u kodu; čuvar teksta bi oborio build ako se vrati neformalni oblik.
 - Pronađeni izvori i konflikt: CLAUDE.md vs. pravilo persiranja.
 - Online dokazi (2026-10-01): Nije predmet javnog izvora (projektno pravilo).
-- Tačno pitanje za vlasnika: Da li u CLAUDE.md ažurirati glavni CTA na „Pronađite najbližu prodavnicu"?
+- Prvobitno pitanje (istorija): Da li u CLAUDE.md ažurirati glavni CTA na „Pronađite najbližu prodavnicu"?
 - Očekivani format odgovora: „da" / „ne".
-- Predlog (NEPOTVRĐENO): „da".
-- ODGOVOR VLASNIKA: `[upišite ovde]`
+- Prvobitni predlog (istorija): „da".
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): glavni CTA je „Pronađite najbližu prodavnicu" — ažurirano u `CLAUDE.md` i u normativnim dokumentima `MASTER_REQUIREMENTS.md`, `UI_DESIGN_BRIEF.md`, `CLAUDE_DESIGN_PROMPT.md`; istorijski auditi u `docs/` zadržavaju originalne citate.

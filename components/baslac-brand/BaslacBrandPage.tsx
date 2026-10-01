@@ -781,7 +781,7 @@ function DocumentLibrary() {
       </div>
 
       <div className={styles.catalogFooter}>
-        <Link className={styles.outlineButton} href="/katalozi?brand=baslac">
+        <Link className={styles.outlineButton} href="/katalozi?brend=baslac">
           Svi baslac dokumenti
           <span aria-hidden="true">↗</span>
         </Link>

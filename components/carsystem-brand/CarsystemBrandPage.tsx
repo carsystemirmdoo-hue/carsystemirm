@@ -292,7 +292,7 @@ function DocumentLibrary() {
       </div>
 
       <div className={styles.documentLibraryActions}>
-        <Link className={styles.secondaryButton} href="/katalozi?brand=carsystem">
+        <Link className={styles.secondaryButton} href="/katalozi?brend=carsystem">
           Svi Carsystem katalozi i dokumenti
           <span aria-hidden="true">↗</span>
         </Link>

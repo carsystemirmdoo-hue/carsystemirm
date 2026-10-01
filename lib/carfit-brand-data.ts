@@ -105,7 +105,7 @@ function media(
   return { id, src, alt, width, height };
 }
 
-const CATALOG_BRAND = `/katalog?brand=${CARFIT_BRAND_SLUG}`;
+const CATALOG_BRAND = `/katalog?brend=${CARFIT_BRAND_SLUG}`;
 
 function brandTarget(programSlug: string, label: string): CarfitCatalogTarget {
   return { href: `${CATALOG_BRAND}&program=${programSlug}`, label, scope: "brand" };
@@ -587,7 +587,7 @@ export const carfitFinalCta = {
   body:
     "Istražite Car Fit program dostupan kroz Carsystem i R-M i pronađite materijale za sledeći posao u radionici.",
   primaryCta: { href: CATALOG_BRAND, label: "Pogledajte Car Fit proizvode" },
-  secondaryCta: { href: `/kontakt?tema=proizvod&brand=${CARFIT_BRAND_SLUG}`, label: "Kontaktirajte nas" },
+  secondaryCta: { href: `/kontakt?tema=proizvod&brend=${CARFIT_BRAND_SLUG}`, label: "Kontaktirajte nas" },
 };
 
 export const carfitProductFilters = [

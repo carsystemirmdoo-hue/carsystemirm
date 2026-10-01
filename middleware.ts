@@ -21,6 +21,7 @@ import {
   internalDemoRoutesAllowed,
   isInternalDemoRoute,
 } from "./lib/internal-demo-routes.mjs";
+import { brandAliasSearch } from "./lib/legacy-query-aliases.mjs";
 
 const MAINTENANCE_ROUTE = "/site-u-pripremi";
 const SITE_ACCESS_ROUTE = "/site-u-pripremi/access";
@@ -199,6 +200,13 @@ async function handleSiteRouting(request: NextRequest) {
     canonicalUrl.protocol = "https:";
     canonicalUrl.host = canonicalHost;
     return NextResponse.redirect(canonicalUrl, 308);
+  }
+  // Stari `?brand=` je alias kanonskog `?brend=` — trajno preusmerenje, bez duplikata.
+  const aliasSearch = brandAliasSearch(pathname, request.nextUrl.searchParams);
+  if (aliasSearch !== null) {
+    const canonicalQuery = request.nextUrl.clone();
+    canonicalQuery.search = aliasSearch;
+    return NextResponse.redirect(canonicalQuery, 308);
   }
   const maintenanceEnabled = isMaintenanceEnabled();
   const hasAccess = await hasSiteAccess(request);

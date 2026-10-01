@@ -175,7 +175,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
             ))}
           </div>
           <div className={styles.commerceFoot}>
-            <Link className={styles.documentsLink} href="/katalozi?brand=cosmos-lac">
+            <Link className={styles.documentsLink} href="/katalozi?brend=cosmos-lac">
               Svi COSMOS LAC dokumenti →
             </Link>
           </div>

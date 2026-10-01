@@ -115,14 +115,24 @@ const slugify = (value) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-const slugBySourceKey = new Map(Object.entries(registry.products).map(([slug, entry]) => [entry.sourceKey, slug]));
-const slugByArticle = new Map(Object.entries(registry.products).flatMap(([slug, entry]) => entry.articleNumbers.map((article) => [article, slug])));
+/*
+ * Preimenovan slug (`slugRenames` u ručnim odlukama) ostaje u registru sa `renamedTo` — stara
+ * adresa je javni URL i trajno preusmerava na novu — ali više ne nosi identitet zapisa.
+ */
+const slugRenames = decisions.slugRenames ?? {};
+const liveRegistry = Object.entries(registry.products).filter(([, entry]) => !entry.renamedTo);
+const slugBySourceKey = new Map(liveRegistry.map(([slug, entry]) => [entry.sourceKey, slug]));
+const slugByArticle = new Map(liveRegistry.flatMap(([slug, entry]) => entry.articleNumbers.map((article) => [article, slug])));
 const takenSlugs = new Set([...allSlugs].filter((slug) => !syncSlugs.has(slug)));
 const plannedSlugs = new Set();
 
 function slugFor(product, articleNumbers) {
   const known = slugBySourceKey.get(product.sourceKey) ?? articleNumbers.map((article) => slugByArticle.get(article)).find(Boolean);
-  if (known) return { slug: known, change: "EXISTING" };
+  if (known) {
+    const slug = slugRenames[known]?.to ?? known;
+    const renamedFrom = Object.entries(slugRenames).filter(([, rename]) => rename.to === slug).map(([previous]) => previous).sort();
+    return renamedFrom.length ? { slug, change: "RENAMED", renamedFrom } : { slug, change: "EXISTING" };
+  }
   const base = `${BRAND.slug}-${slugify(product.officialName)}`;
   let slug = base;
   if (takenSlugs.has(slug) || plannedSlugs.has(slug) || syncSlugs.has(slug)) slug = `${base}-${slugify(articleNumbers[0] ?? product.sourceKey)}`;
@@ -181,8 +191,9 @@ for (const product of [...source.products].sort((a, b) => a.sourceKey.localeComp
 
   let slug = null;
   let change = null;
+  let renamedFrom = [];
   if (action === "IMPORT" || action === "HELD_MISSING_LOCALIZATION") {
-    ({ slug, change } = slugFor(product, [...articleNumbers, ...variants.flatMap((variant) => variant.alternateArticleNumbers.map((alternate) => alternate.articleNumber))]));
+    ({ slug, change, renamedFrom = [] } = slugFor(product, [...articleNumbers, ...variants.flatMap((variant) => variant.alternateArticleNumbers.map((alternate) => alternate.articleNumber))]));
     plannedSlugs.add(slug);
   }
 
@@ -196,6 +207,7 @@ for (const product of [...source.products].sort((a, b) => a.sourceKey.localeComp
     reason,
     slug,
     change,
+    ...(renamedFrom.length ? { renamedFrom } : {}),
     localSlug: match?.localSlug ?? null,
     representedBySourceKey: action === "REPRESENTED_BY_OWNER" ? product.variants[0].sharedFrom : null,
     relatedLegacySlug: probableBySourceKey.get(product.sourceKey)?.localSlug ?? null,
@@ -280,6 +292,7 @@ const summary = {
   actions: Object.fromEntries([...new Set(items.map((item) => item.action))].sort().map((action) => [action, items.filter((item) => item.action === action).length])),
   newProducts: importing.filter((item) => item.change === "NEW").length,
   existingProducts: importing.filter((item) => item.change === "EXISTING").length,
+  renamedProducts: importing.filter((item) => item.change === "RENAMED").length,
   planErrors: {
     duplicateSlugs: [...slugCounts.entries()].filter(([, count]) => count > 1).map(([slug]) => slug),
     slugCollidesWithExisting: importing.filter((item) => item.change === "NEW" && takenSlugs.has(item.slug)).map((item) => item.slug),

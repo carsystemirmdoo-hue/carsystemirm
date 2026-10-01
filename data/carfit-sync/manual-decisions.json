@@ -5,7 +5,8 @@
     "articles.<šifra>   = { \"owner\": \"<sourceKey>\", \"note\": \"…\" }        → vlasnik šifre koja je na više stranica sajta.",
     "local.<naš slug>   = { \"sourceKey\": \"…\", \"note\": \"…\" }              → ručni zapis JESTE taj zvanični proizvod (dopuna umesto uvoza).",
     "local.<naš slug>   = { \"decision\": \"keep-separate\", \"note\": \"…\" }   → ručni zapis se NE spaja, i kada dokazi ukazuju na spajanje.",
-    "local.<naš slug>   = { \"useOfficialPresentation\": true, \"note\": \"…\" } → pouzdano prepoznat ručni zapis dobija zvanični NAZIV i opis porodice (slug ostaje). Koristi se kada ručni naziv opisuje samo jednu varijantu."
+    "local.<naš slug>   = { \"useOfficialPresentation\": true, \"note\": \"…\" } → pouzdano prepoznat ručni zapis dobija zvanični NAZIV i opis porodice (slug ostaje). Koristi se kada ručni naziv opisuje samo jednu varijantu.",
+    "slugRenames.<stari slug> = { \"to\": \"<novi slug>\", \"note\": \"…\" } → adresa se menja; stari red ostaje u registru sa `renamedTo` i trajno (308) preusmerava na novi."
   ],
   "source": {},
   "articles": {},
@@ -13,6 +14,12 @@
     "carfit-maskirna-folija-4x5m": {
       "useOfficialPresentation": true,
       "note": "Odobrio vlasnik 2026-09-19: zapis je HIGH_CONFIDENCE_MATCH sa porodicom „Masking film 7mm with electrostatic effect” (3 dimenzije), pa naziv više ne sme da sugeriše samo 4 x 5 m. Slug ostaje radi URL-a."
+    }
+  },
+  "slugRenames": {
+    "carfit-clearcoar-matt": {
+      "to": "carfit-clearcoat-matt",
+      "note": "Odobrio vlasnik 2026-10-01: slovna greška u slugu. Zvanična stranica carfitrepair.com/en/matt-klarlack/ piše „Clearcoar matt“ (greška na izvoru), a prikazni naziv kataloga je „Car Fit Clearcoat matt“; adresa prati prikazni naziv. Stara adresa trajno preusmerava na novu."
     }
   }
 }

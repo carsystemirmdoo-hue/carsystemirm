@@ -332,14 +332,22 @@ const nextRegistry = {
 };
 for (const item of imports) {
   const known = nextRegistry.products[item.slug];
+  const previous = (item.renamedFrom ?? []).map((slug) => registry.products[slug]).filter(Boolean);
   nextRegistry.products[item.slug] = {
     sourceKey: item.sourceKey,
     articleNumbers: [...new Set([...(known?.articleNumbers ?? []), ...item.articleNumbers, ...(item.alternateArticleNumbers ?? [])])].sort(),
-    firstSeen: known?.firstSeen ?? crawlDate,
+    firstSeen: known?.firstSeen ?? previous[0]?.firstSeen ?? crawlDate,
     lastSeen: crawlDate,
   };
+  // Stara adresa ostaje u registru (slug je javni URL) i trajno preusmerava na novu.
+  for (const slug of item.renamedFrom ?? []) nextRegistry.products[slug] = { ...registry.products[slug], renamedTo: item.slug };
 }
 nextRegistry.products = Object.fromEntries(Object.entries(nextRegistry.products).sort(([a], [b]) => a.localeCompare(b)));
+
+/* Trajna preusmerenja preimenovanih adresa (ručna odluka `slugRenames`) — čita ih next.config.ts. */
+dataset.redirects = Object.entries(nextRegistry.products)
+  .filter(([, entry]) => entry.renamedTo)
+  .map(([slug, entry]) => ({ source: `/proizvodi/${slug}`, destination: `/proizvodi/${entry.renamedTo}`, permanent: true }));
 
 const publishedOut = {
   _comment: "Javna putanja → zvanični izvor slike. `mode`: cut-out (maska spoljne bele pozadine) | kept-background | source-alpha.",

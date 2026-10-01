@@ -229,6 +229,16 @@
         "7-440-1000"
       ],
       "firstSeen": "2026-09-18",
+      "lastSeen": "2026-09-18",
+      "renamedTo": "carfit-clearcoat-matt"
+    },
+    "carfit-clearcoat-matt": {
+      "sourceKey": "matt-klarlack",
+      "articleNumbers": [
+        "7-440-0500",
+        "7-440-1000"
+      ],
+      "firstSeen": "2026-09-18",
       "lastSeen": "2026-09-18"
     },
     "carfit-color-net-disc": {

@@ -50,7 +50,7 @@ export function ProductMobileCta() {
         data-motion="theme-wipe"
         data-product-inquiry
       >
-        <span>Pošalji upit</span>
+        <span>Pošaljite upit</span>
       </Link>
     </div>
   );

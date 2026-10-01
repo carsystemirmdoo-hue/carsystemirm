@@ -28,13 +28,13 @@ export default function NotFound() {
           className="inline-flex min-h-11 items-center rounded-lg bg-foreground px-5 font-semibold text-background"
           href="/katalog"
         >
-          Otvori katalog
+          Otvorite katalog
         </Link>
         <Link
           className="inline-flex min-h-11 items-center rounded-lg border border-border px-5 font-semibold"
           href="/brendovi"
         >
-          Pregledaj brendove
+          Pregledajte brendove
         </Link>
         <Link
           className="inline-flex min-h-11 items-center rounded-lg border border-border px-5 font-semibold"

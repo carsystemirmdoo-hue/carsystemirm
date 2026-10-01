@@ -46,7 +46,7 @@ export function ProductInquiryCard({ product }: { product: CarsystemProduct }) {
           data-cursor="button"
           data-motion-surface
         >
-          Pronađi prodavnicu
+          Pronađite prodavnicu
         </Link>
       </div>
     </aside>

@@ -47,7 +47,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? "Uključi svetlu temu" : "Uključi tamnu temu"}
+      aria-label={isDark ? "Uključite svetlu temu" : "Uključite tamnu temu"}
       aria-pressed={isDark}
       className="cs-interactive-surface inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-surface-muted"
       data-cursor="button"

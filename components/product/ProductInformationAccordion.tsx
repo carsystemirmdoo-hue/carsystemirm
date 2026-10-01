@@ -201,7 +201,7 @@ export function ProductInformationAccordion({
                   </span>
                   {document.availability === "available" && document.href ? (
                     <a href={document.href} target="_blank" rel="noopener noreferrer">
-                      Otvori PDF
+                      Otvorite PDF
                       <ArrowIcon />
                     </a>
                   ) : (

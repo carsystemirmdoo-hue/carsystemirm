@@ -95,7 +95,7 @@ const browser = await chromium.launch({ channel: "chrome" });
   notes.push(`2.5 s after completing: phase=${settled}, ${stillRunning} animations running`);
 
   /* 2. Changing gallery image must NOT replay it -------------------- */
-  const thumbs = page.locator('[aria-label^="Prikaži sliku"]');
+  const thumbs = page.locator('[aria-label^="Prikažite sliku"]');
   const thumbCount = await thumbs.count();
   if (thumbCount > 1) {
     await thumbs.nth(1).click();

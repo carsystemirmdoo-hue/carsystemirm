@@ -59,7 +59,7 @@ export function CosmosHero({ cans, variantCount, familyCount }: Props) {
 
       {/* Subtle affordance; removed permanently after the first rotation. */}
       <p className={styles.heroHint} aria-hidden="true">
-        Prevuci za rotaciju
+        Prevucite za rotaciju
       </p>
 
       <div className={styles.heroContent}>
@@ -73,11 +73,11 @@ export function CosmosHero({ cans, variantCount, familyCount }: Props) {
         </p>
         <div className={styles.heroCtas}>
           <Link className={styles.ctaPrimary} href="/prodavnice">
-            Pronađi najbližu prodavnicu
+            Pronađite najbližu prodavnicu
             <span aria-hidden="true">→</span>
           </Link>
           <Link className={styles.ctaSecondary} href="/katalog?brend=cosmos-lac">
-            Pogledaj sve COSMOS proizvode
+            Pogledajte sve COSMOS proizvode
           </Link>
         </div>
       </div>

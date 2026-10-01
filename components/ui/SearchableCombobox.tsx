@@ -399,7 +399,7 @@ export function SearchableCombobox({
                 <div className={styles.sheetHeader}>
                   <strong>{sheetTitle}</strong>
                   <button
-                    aria-label="Zatvori izbor"
+                    aria-label="Zatvorite izbor"
                     className={styles.closeButton}
                     onClick={() => closeMenu(true)}
                     type="button"

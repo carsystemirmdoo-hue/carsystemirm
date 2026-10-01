@@ -79,11 +79,11 @@ export function ProductDetailPage({
     ? detail?.compatibleProducts?.content
     : undefined;
   const finalCta = detail?.finalCta ?? {
-    title: "Treba vam savet pri izboru proizvoda?",
+    title: "Treba Vam savet pri izboru proizvoda?",
     description:
-      "Pošaljite nam osnovne podatke o poslu i pomoći ćemo vam da proverite odgovarajući proizvod.",
-    inquiryLabel: "Pošalji upit",
-    storeLabel: "Pronađi prodavnicu",
+      "Pošaljite nam osnovne podatke o poslu i pomoći ćemo Vam da proverite odgovarajući proizvod.",
+    inquiryLabel: "Pošaljite upit",
+    storeLabel: "Pronađite prodavnicu",
   };
   /*
    * Varijante, razrešene na serveru.
@@ -172,7 +172,7 @@ export function ProductDetailPage({
                     className={styles.primaryAction}
                     cursor="button"
                   >
-                    Pošalji upit
+                    Pošaljite upit
                     <ArrowIcon />
                   </ProductInquiryLink>
                   <Link
@@ -180,7 +180,7 @@ export function ProductDetailPage({
                     href="/prodavnice"
                     data-cursor="button"
                   >
-                    Pronađi prodavnicu
+                    Pronađite prodavnicu
                   </Link>
                 </div>
 
@@ -368,7 +368,7 @@ function ProductRelationships({
               <Link
                 className={styles.relationshipVisual}
                 href={href}
-                aria-label={`Pogledaj proizvod ${product.name}`}
+                aria-label={`Pogledajte proizvod ${product.name}`}
                 data-cursor="image"
                 data-motion-surface
                 data-product-card-motion
@@ -390,7 +390,7 @@ function ProductRelationships({
                 </h3>
                 <span>{product.shortDescription}</span>
                 <Link className={styles.relationshipLink} href={href}>
-                  Pogledaj detalje
+                  Pogledajte detalje
                   <ArrowIcon />
                 </Link>
               </div>

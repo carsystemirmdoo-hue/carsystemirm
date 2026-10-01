@@ -2114,11 +2114,11 @@ const productRecords: CarsystemProduct[] = [
         },
       },
       finalCta: {
-        title: "Niste sigurni koja granulacija odgovara vašem procesu?",
+        title: "Niste sigurni koja granulacija odgovara Vašem procesu?",
         description:
-          "Pošaljite nam podatke o podlozi i fazi rada. Pomoći ćemo vam da preciznije definišete izbor pre kupovine.",
-        inquiryLabel: "Zatraži savet za izbor",
-        storeLabel: "Pronađi prodavnicu",
+          "Pošaljite nam podatke o podlozi i fazi rada. Pomoći ćemo Vam da preciznije definišete izbor pre kupovine.",
+        inquiryLabel: "Zatražite savet za izbor",
+        storeLabel: "Pronađite prodavnicu",
       },
     },
   }),

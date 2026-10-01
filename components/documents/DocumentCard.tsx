@@ -63,17 +63,17 @@ export function DocumentCard({ document }: { document: BrandDocument }) {
             href={document.file}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Pregledaj PDF — ${document.title}`}
+            aria-label={`Pregledajte PDF — ${document.title}`}
           >
-            Pregledaj PDF
+            Pregledajte PDF
           </a>
           <a
             className={`${styles.cardAction} ${styles.cardActionPrimary}`}
             href={document.file}
             download
-            aria-label={`Preuzmi PDF — ${document.title}`}
+            aria-label={`Preuzmite PDF — ${document.title}`}
           >
-            Preuzmi
+            Preuzmite
           </a>
         </div>
       </div>

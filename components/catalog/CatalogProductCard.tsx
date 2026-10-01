@@ -112,8 +112,8 @@ export function CatalogProductCard({
       prefetch={false}
       aria-label={
         isFamily
-          ? `Pogledaj grupu proizvoda ${listing.name}, ${listing.variantCount} varijanti`
-          : `Pogledaj proizvod ${listing.name}`
+          ? `Pogledajte grupu proizvoda ${listing.name}, ${listing.variantCount} varijanti`
+          : `Pogledajte proizvod ${listing.name}`
       }
       data-cursor="card"
       data-infinite-scroll-trigger={preloadRef ? "true" : undefined}

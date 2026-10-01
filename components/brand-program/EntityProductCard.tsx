@@ -37,7 +37,7 @@ export function EntityProductCard({
       <Link
         className={styles.productMedia}
         href={productHref}
-        aria-label={`Pogledaj proizvod ${product.name}`}
+        aria-label={`Pogledajte proizvod ${product.name}`}
         data-cursor="image"
       >
         <ProductVisualSurface
@@ -73,12 +73,12 @@ export function EntityProductCard({
           <Link
             className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
             href={inquiryHref}
-            aria-label={`Pošalji upit za proizvod: ${product.name}`}
+            aria-label={`Pošaljite upit za proizvod: ${product.name}`}
             data-cursor="button"
             data-motion-surface
             data-motion="theme-wipe"
           >
-            <span>Pošalji upit</span>
+            <span>Pošaljite upit</span>
           </Link>
           <Link className={`${styles.detailLink} cs-link-reveal`} href={productHref} data-cursor="link">
             Detalji →

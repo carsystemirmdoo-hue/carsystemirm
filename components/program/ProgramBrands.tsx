@@ -34,7 +34,7 @@ export function ProgramBrands({
           >
             <BrandCardContent brand={brand} />
             <div className={styles.brandCardFooter}>
-              <span>Otvori brend</span>
+              <span>Otvorite brend</span>
               <span aria-hidden="true">→</span>
             </div>
           </Link>

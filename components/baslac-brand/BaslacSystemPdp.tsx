@@ -285,7 +285,7 @@ export function BaslacSystemPdp({
                   systemName,
                 )}&sifra=${encodeURIComponent(active.code)}`}
               >
-                Pošalji upit
+                Pošaljite upit
                 <span aria-hidden="true">↗</span>
               </Link>
               <p className={styles.inquiryNote}>

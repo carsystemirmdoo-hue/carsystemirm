@@ -59,7 +59,7 @@ export function BrandHero({
               {brand.presentation.contactCtaLabel}
             </Link>
             <Link className={styles.ghostButton} href="/prodavnice">
-              Pronađi prodavnicu
+              Pronađite prodavnicu
             </Link>
           </div>
         </div>

@@ -101,7 +101,7 @@ export function CarsystemProducts({
 
       <div className={styles.productsFooter}>
         <p>
-          Potreban vam je artikal koji još nema javnu fotografiju? Pošaljite
+          Potreban Vam je artikal koji još nema javnu fotografiju? Pošaljite
           naziv ili šifru i proverićemo odgovarajući zapis.
         </p>
         <Link className={styles.primaryButton} href={carsystemCatalogHref()}>

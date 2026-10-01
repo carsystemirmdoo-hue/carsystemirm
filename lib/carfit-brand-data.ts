@@ -248,9 +248,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Skidanje starog sloja, brušenje po gradaciji i odmašćivanje određuju koliko će ceo zahvat trajati. Ako se ovde preskoči korak, vidi se tek u laku.",
     workflow: [
-      { code: "01", title: "Očisti", note: "Odmašćivanje i uklanjanje nečistoća sa zone rada" },
-      { code: "02", title: "Brusi", note: "Gradacija od grube ka finijoj, bez preskakanja koraka" },
-      { code: "03", title: "Otpraši", note: "Priprema površine pre nanošenja bilo kog materijala" },
+      { code: "01", title: "Očistite", note: "Odmašćivanje i uklanjanje nečistoća sa zone rada" },
+      { code: "02", title: "Brusite", note: "Gradacija od grube ka finijoj, bez preskakanja koraka" },
+      { code: "03", title: "Otprašite", note: "Priprema površine pre nanošenja bilo kog materijala" },
     ],
     categoryIds: ["abrazivi", "priprema-ciscenje"],
     preferredProductSlugs: [],
@@ -272,9 +272,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Udubljenja, ivice i prelazi rešavaju se kitom u tankim slojevima i kontrolisanim brušenjem. Cilj je ravna površina koja ne traži korekciju kasnije.",
     workflow: [
-      { code: "01", title: "Nanesi", note: "Kit u tankim slojevima, prema uputstvu proizvođača" },
-      { code: "02", title: "Oblikuj", note: "Brušenje do prelaza koji se ne oseća pod rukom" },
-      { code: "03", title: "Proveri", note: "Kontrola ravnosti pre prelaska na podlogu" },
+      { code: "01", title: "Nanesite", note: "Kit u tankim slojevima, prema uputstvu proizvođača" },
+      { code: "02", title: "Oblikujte", note: "Brušenje do prelaza koji se ne oseća pod rukom" },
+      { code: "03", title: "Proverite", note: "Kontrola ravnosti pre prelaska na podlogu" },
     ],
     categoryIds: ["kitovi", "abrazivi"],
     preferredProductSlugs: [],
@@ -296,9 +296,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Maskiranje odlučuje koliko će posla biti posle lakiranja. Folija štiti površinu, traka definiše ivicu, a dobro pripremljena zona skraćuje završnu obradu.",
     workflow: [
-      { code: "01", title: "Zaštiti", note: "Maskirna folija preko svega što ne ide u zonu rada" },
-      { code: "02", title: "Definiši ivicu", note: "Traka na prelazu koji mora ostati oštar" },
-      { code: "03", title: "Pripremi zonu", note: "Provera prelaza i pristupa pre lakiranja" },
+      { code: "01", title: "Zaštitite", note: "Maskirna folija preko svega što ne ide u zonu rada" },
+      { code: "02", title: "Definišite ivicu", note: "Traka na prelazu koji mora ostati oštar" },
+      { code: "03", title: "Pripremite zonu", note: "Provera prelaza i pristupa pre lakiranja" },
     ],
     categoryIds: ["maskiranje", "pribor"],
     preferredProductSlugs: ["carfit-maskirna-folija-4x5m", "carfit-maskirna-folija-4x150m"],
@@ -320,9 +320,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Prajmer i filer izjednačavaju upijanje, izoluju podlogu i daju baznom sloju stabilan temelj. Bez toga se razlike u podlozi vide kroz završni sloj.",
     workflow: [
-      { code: "01", title: "Izoluj", note: "Prajmer prema tipu podloge i tehničkom listu" },
-      { code: "02", title: "Izravnaj", note: "Filer za sitne nepravilnosti pre baznog sloja" },
-      { code: "03", title: "Matiraj", note: "Fino brušenje podloge pre nanošenja boje" },
+      { code: "01", title: "Izolujte", note: "Prajmer prema tipu podloge i tehničkom listu" },
+      { code: "02", title: "Izravnajte", note: "Filer za sitne nepravilnosti pre baznog sloja" },
+      { code: "03", title: "Matirajte", note: "Fino brušenje podloge pre nanošenja boje" },
     ],
     categoryIds: ["fileri-prajmeri", "abrazivi"],
     preferredProductSlugs: ["car-fit-prajmer"],
@@ -344,9 +344,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Bezbojni lak zatvara sistem, štiti bazni sloj i nosi sjaj. Izbor laka i razređivača prati temperaturu radionice i veličinu elementa koji se radi.",
     workflow: [
-      { code: "01", title: "Pripremi materijal", note: "Odnos mešanja i viskozitet prema uslovima" },
-      { code: "02", title: "Nanesi", note: "Kontrolisani slojevi prema tehničkom listu" },
-      { code: "03", title: "Suši", note: "Vreme i temperatura prema debljini sloja" },
+      { code: "01", title: "Pripremite materijal", note: "Odnos mešanja i viskozitet prema uslovima" },
+      { code: "02", title: "Nanesite", note: "Kontrolisani slojevi prema tehničkom listu" },
+      { code: "03", title: "Sušite", note: "Vreme i temperatura prema debljini sloja" },
     ],
     categoryIds: ["bezbojni-lakovi", "priprema-ciscenje"],
     preferredProductSlugs: [],
@@ -368,9 +368,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Lokalna reparacija traži isti redosled kao i ceo element, samo u manjoj zoni. Prelaz mora da se izgubi, inače se popravka vidi iz svakog ugla.",
     workflow: [
-      { code: "01", title: "Ograniči zonu", note: "Priprema i maskiranje uže radne površine" },
-      { code: "02", title: "Koriguj", note: "Reparacija oštećenja i priprema podloge" },
-      { code: "03", title: "Stopi prelaz", note: "Aerosol ili pištolj, pa lak i završna obrada" },
+      { code: "01", title: "Ograničite zonu", note: "Priprema i maskiranje uže radne površine" },
+      { code: "02", title: "Korigujte", note: "Reparacija oštećenja i priprema podloge" },
+      { code: "03", title: "Stopite prelaz", note: "Aerosol ili pištolj, pa lak i završna obrada" },
     ],
     categoryIds: ["aerosoli", "maskiranje", "bezbojni-lakovi"],
     preferredProductSlugs: [],
@@ -392,9 +392,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Uklanjanje sitnih tragova, provera prelaza i priprema za poliranje. U ovoj fazi se ispravlja ono što bi inače ostalo trajno vidljivo.",
     workflow: [
-      { code: "01", title: "Pregledaj", note: "Kontrola površine pod odgovarajućim osvetljenjem" },
-      { code: "02", title: "Fino obradi", note: "Najfinija gradacija za tragove u laku" },
-      { code: "03", title: "Očisti", note: "Priprema površine pre poliranja" },
+      { code: "01", title: "Pregledajte", note: "Kontrola površine pod odgovarajućim osvetljenjem" },
+      { code: "02", title: "Fino obradite", note: "Najfinija gradacija za tragove u laku" },
+      { code: "03", title: "Očistite", note: "Priprema površine pre poliranja" },
     ],
     categoryIds: ["abrazivi", "poliranje"],
     preferredProductSlugs: [],
@@ -416,9 +416,9 @@ export const carfitTasks: CarfitTask[] = [
     body:
       "Poliranje je sistem: pasta, pad i krpa rade zajedno. Pogrešna kombinacija ostavlja hologram ili skida više nego što treba.",
     workflow: [
-      { code: "01", title: "Koriguj", note: "Pasta i pad prema stanju površine" },
-      { code: "02", title: "Ujednači", note: "Prelaz na finiju kombinaciju za dubinu sjaja" },
-      { code: "03", title: "Završi", note: "Krpa i finalna kontrola pod svetlom" },
+      { code: "01", title: "Korigujte", note: "Pasta i pad prema stanju površine" },
+      { code: "02", title: "Ujednačite", note: "Prelaz na finiju kombinaciju za dubinu sjaja" },
+      { code: "03", title: "Završite", note: "Krpa i finalna kontrola pod svetlom" },
     ],
     categoryIds: ["poliranje"],
     preferredProductSlugs: [],
@@ -571,7 +571,7 @@ export const carfitStory = {
 
 export const carfitDocumentation = {
   eyebrow: "Dokumentacija",
-  title: "Informacija koja vam treba, bez traženja po kutiji.",
+  title: "Informacija koja Vam treba, bez traženja po kutiji.",
   lead:
     "Tehnički i bezbednosni podaci vezani su za stranicu proizvoda. Ako dokument nije objavljen online, tim Carsystem i R-M ga dostavlja na upit.",
   items: [

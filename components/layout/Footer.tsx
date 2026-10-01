@@ -29,7 +29,7 @@ const brandLinks = [
 const supportLinks = [
   { href: "/prodavnice", label: "Prodavnice" },
   { href: "/kontakt", label: "Kontakt" },
-  { href: "/kontakt", label: "Pošalji upit" },
+  { href: "/kontakt", label: "Pošaljite upit" },
   { href: "/kontakt?tema=b2b", label: "B2B saradnja" },
 ];
 
@@ -59,7 +59,7 @@ export function Footer() {
                   data-cursor="button"
                   data-motion-surface
                 >
-                  Pronađi prodavnicu
+                  Pronađite prodavnicu
                 </Link>
               </div>
             </section>

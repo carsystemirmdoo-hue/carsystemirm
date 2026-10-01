@@ -1056,7 +1056,7 @@ export function Header() {
             ref={mobileToggleRef}
             type="button"
             className={styles.mobileToggle}
-            aria-label={mobileOpen ? "Zatvori meni" : "Otvori meni"}
+            aria-label={mobileOpen ? "Zatvorite meni" : "Otvorite meni"}
             aria-controls={mobilePanelId}
             aria-expanded={mobileOpen}
             onClick={mobileOpen ? closeMobileNav : openMobileNav}
@@ -1072,7 +1072,7 @@ export function Header() {
           <button
             type="button"
             className={styles.mobileScrim}
-            aria-label="Zatvori meni"
+            aria-label="Zatvorite meni"
             tabIndex={-1}
             onClick={closeMobileNav}
           />
@@ -1105,7 +1105,7 @@ export function Header() {
                 ref={mobileCloseRef}
                 type="button"
                 className={styles.mobileClose}
-                aria-label="Zatvori meni"
+                aria-label="Zatvorite meni"
                 onClick={closeMobileNav}
               >
                 <span />
@@ -1341,7 +1341,7 @@ function MegaMenuFrame({
       <button
         type="button"
         className={styles.megaBackdrop}
-        aria-label={`Zatvori ${label.toLowerCase()} meni`}
+        aria-label={`Zatvorite ${label.toLowerCase()} meni`}
         tabIndex={-1}
         onClick={onClose}
       />
@@ -1376,7 +1376,7 @@ function MegaMenuFrame({
           <button
             type="button"
             className={styles.panelClose}
-            aria-label={`Zatvori ${label.toLowerCase()} meni`}
+            aria-label={`Zatvorite ${label.toLowerCase()} meni`}
             onClick={onClose}
           >
             <CloseIcon />
@@ -1423,7 +1423,7 @@ function SupportMenu({
       <button
         type="button"
         className={styles.megaBackdrop}
-        aria-label="Zatvori podrška meni"
+        aria-label="Zatvorite meni podrške"
         tabIndex={-1}
         onClick={onClose}
       />
@@ -1449,7 +1449,7 @@ function SupportMenu({
           <button
             type="button"
             className={styles.panelClose}
-            aria-label="Zatvori podrška meni"
+            aria-label="Zatvorite meni podrške"
             onClick={onClose}
           >
             <CloseIcon />

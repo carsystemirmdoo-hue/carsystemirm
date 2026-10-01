@@ -103,13 +103,13 @@ export function CatalogFilters({
         <div className={styles.filtersHeader}>
           <div className={styles.filtersHeaderCopy}>
             <p className={styles.kicker}>Filteri</p>
-            <h2>Preciziraj katalog</h2>
+            <h2>Precizirajte katalog</h2>
           </div>
           <div className={styles.filtersHeaderActions}>
             <button
               className={`${styles.desktopFilterCollapse} cs-interactive-surface`}
               type="button"
-              aria-label="Sakrij filtere"
+              aria-label="Sakrijte filtere"
               aria-controls="catalog-filters"
               data-cursor="button"
               data-motion-surface
@@ -120,7 +120,7 @@ export function CatalogFilters({
             <button
               className={`${styles.mobileFilterClose} cs-interactive-surface`}
               type="button"
-              aria-label="Zatvori filtere"
+              aria-label="Zatvorite filtere"
               aria-controls="catalog-filters"
               data-cursor="button"
               data-motion-surface
@@ -140,7 +140,7 @@ export function CatalogFilters({
               onClick={clearAndRestoreFocus}
             >
               <span aria-hidden="true">×</span>
-              Resetuj filtere
+              Resetujte filtere
             </button>
           )}
         </div>

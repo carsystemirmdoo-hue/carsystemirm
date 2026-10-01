@@ -272,7 +272,7 @@ export function BefarHardnessScale({ steps }: Props) {
 
               {active.productSlug ? (
                 <Link className={styles.inlineLink} href={`/proizvodi/${active.productSlug}`}>
-                  Pogledaj proizvod
+                  Pogledajte proizvod
                 </Link>
               ) : null}
             </div>

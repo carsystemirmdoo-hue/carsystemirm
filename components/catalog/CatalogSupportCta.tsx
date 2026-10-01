@@ -7,7 +7,7 @@ export function CatalogSupportCta() {
     <section className={styles.supportCta} aria-labelledby="catalog-support-title">
       <div>
         <p className={styles.kicker}>Podrška</p>
-        <h2 id="catalog-support-title">Niste sigurni koji proizvod vam treba?</h2>
+        <h2 id="catalog-support-title">Niste sigurni koji proizvod Vam treba?</h2>
         <p>
           Naš tim i partnerska mreža mogu pomoći oko izbora proizvoda, tehničke
           podrške i najbliže prodavnice.
@@ -21,7 +21,7 @@ export function CatalogSupportCta() {
           data-cursor="button"
           data-motion-surface
         >
-          Pronađi prodavnicu
+          Pronađite prodavnicu
         </Link>
       </div>
     </section>

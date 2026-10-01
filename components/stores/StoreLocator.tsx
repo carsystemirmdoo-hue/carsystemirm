@@ -215,7 +215,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
             className={styles.searchInput}
             id="store-search"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Pretraži grad, naziv ili adresu..."
+            placeholder="Pretražite grad, naziv ili adresu..."
             ref={searchRef}
             type="search"
             value={query}
@@ -253,7 +253,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         ) : null}
 
         <button className={styles.locateButton} onClick={handleLocationRequest} type="button">
-          Koristi moju lokaciju
+          Koristite svoju lokaciju
         </button>
       </section>
 
@@ -395,7 +395,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                         </a>
                       ) : null}
                       <a className={styles.ghostAction} href={`/kontakt?tema=prodavnica&prodavnica=${store.id}`}>
-                        Pošalji upit
+                        Pošaljite upit
                       </a>
                     </div>
                   ) : null}
@@ -423,7 +423,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                 }}
                 type="button"
               >
-                Resetuj pretragu
+                Resetujte pretragu
               </button>
             </div>
           )}

@@ -127,7 +127,7 @@ export function CosmosFamilyRail({
                   width={800}
                 />
               </span>
-              <span className={styles.panelCta}>Vidi liniju</span>
+              <span className={styles.panelCta}>Pogledajte liniju</span>
             </Link>
           ))}
 

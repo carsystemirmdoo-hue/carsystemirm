@@ -38,7 +38,7 @@ export function CarfitProductShowcase({ products }: { products: CarfitProductVie
 
   return (
     <>
-      <div className={styles.productFilters} role="group" aria-label="Filtriraj po fazi rada">
+      <div className={styles.productFilters} role="group" aria-label="Filtrirajte po fazi rada">
         {availableFilters.map((filter) => (
           <button
             className={styles.productFilter}

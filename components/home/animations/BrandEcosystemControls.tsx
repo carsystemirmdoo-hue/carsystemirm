@@ -74,7 +74,7 @@ export function BrandEcosystemMobileControls({
           className={index === activeIndex ? styles.programMobileDotActive : ""}
           onFocus={() => onActivate(index)}
           onClick={() => onActivate(index)}
-          aria-label={`Prikaži ${category.title}`}
+          aria-label={`Prikažite ${category.title}`}
           aria-pressed={index === activeIndex}
         />
       ))}

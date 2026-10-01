@@ -343,7 +343,7 @@ async function waitForSettledSearch(page, timeout = 15000) {
     .catch(() => false));
   expect(noEmptyLie, "Greška je prikazana kao „nema rezultata“.");
 
-  await page.getByRole("button", { name: "Pokušaj ponovo" }).click();
+  await page.getByRole("button", { name: "Pokušajte ponovo" }).click();
   /*
    * Čeka se baš rezultat, ne „slegnuto stanje": poruka o grešci je još na
    * ekranu u trenutku klika, pa bi opšte čekanje odmah prošlo i merilo stanje
@@ -523,7 +523,7 @@ for (const viewport of VIEWPORTS) {
    * Kada je zatvara baš dugme pretrage, taj povratak mora izostati — inače
    * korisnik dobije otvoren panel u koji ne može da kuca.
    */
-  await page.click('button[aria-label="Otvori meni"]');
+  await page.click('button[aria-label="Otvorite meni"]');
   await page.waitForTimeout(350);
 
   const searchButton = page

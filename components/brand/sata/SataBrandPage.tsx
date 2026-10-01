@@ -94,11 +94,11 @@ export function SataBrandPage({ brand, products }: Props) {
 
             <div className={styles.heroActions}>
               <Link className={styles.ctaPrimary} href="#program">
-                Pogledaj program
+                Pogledajte program
                 <span aria-hidden="true">→</span>
               </Link>
               <Link className={styles.ctaSecondary} href={brand.routes.contact}>
-                Pošalji upit za izbor opreme
+                Pošaljite upit za izbor opreme
               </Link>
             </div>
           </div>
@@ -374,7 +374,7 @@ export function SataBrandPage({ brand, products }: Props) {
                 </a>
               ) : (
                 <Link className={styles.serviceLink} href={brand.routes.contact}>
-                  Pošalji upit
+                  Pošaljite upit
                   <span aria-hidden="true"> →</span>
                 </Link>
               )}
@@ -476,11 +476,11 @@ export function SataBrandPage({ brand, products }: Props) {
           </div>
           <div className={styles.localCtaActions}>
             <Link className={styles.ctaPrimary} href={brand.routes.contact}>
-              Pošalji upit
+              Pošaljite upit
               <span aria-hidden="true">→</span>
             </Link>
             <Link className={styles.ctaSecondary} href="/prodavnice">
-              Pronađi najbližu prodavnicu
+              Pronađite najbližu prodavnicu
             </Link>
           </div>
         </div>

@@ -76,7 +76,7 @@ function NorbinHero() {
               Kratak program koji radi u odnosima.
             </h1>
             <p className={styles.heroLead}>
-              Norbin nije sistem boje — to ostaje vaš postojeći izbor. Norbin
+              Norbin nije sistem boje — to ostaje Vaš postojeći izbor. Norbin
               je kratak, zatvoren program lakova, punilaca i učvršćivača koji
               rade isključivo u tačno propisanim parovima.
             </p>
@@ -98,7 +98,7 @@ function NorbinHero() {
 
             <div className={styles.heroActions}>
               <Link className={styles.buttonPrimary} href="/prodavnice">
-                Pronađi najbližu prodavnicu
+                Pronađite najbližu prodavnicu
               </Link>
               <Link className={styles.buttonSecondary} href="/katalog?brend=norbin">
                 Pogledajte Norbin proizvode
@@ -237,14 +237,14 @@ function ProcessSection() {
           Norbin u procesu popravke.
         </h2>
         <p className={styles.sectionLead}>
-          Boja ostaje vaš sistem — Norbin tu namerno nema proizvod.
+          Boja ostaje Vaš sistem — Norbin tu namerno nema proizvod.
         </p>
 
         <div className={styles.processSpine}>
           {norbinProcessSteps.map((step) =>
             "empty" in step && step.empty ? (
               <div className={`${styles.processStep} ${styles.processStepEmpty}`} key={step.id}>
-                <p>vaš sistem boje</p>
+                <p>Vaš sistem boje</p>
               </div>
             ) : (
               <div className={styles.processStep} key={step.id}>
@@ -401,7 +401,7 @@ function TechnicalSection() {
           <p className={styles.techNoData}>
             Za ostale proizvode u programu proizvođač ne objavljuje poseban
             tehnički list — podaci se nalaze u listu proizvoda sa kojim se
-            mešaju (vidi Odnos, iznad).
+            mešaju (pogledajte odeljak Odnos, iznad).
           </p>
         </div>
       </div>
@@ -471,7 +471,7 @@ function OriginSection() {
 
             <div className={styles.heroActions}>
               <Link className={styles.buttonPrimary} href="/prodavnice">
-                Pronađi najbližu prodavnicu
+                Pronađite najbližu prodavnicu
               </Link>
               <Link className={styles.buttonText} href="/kontakt?tema=proizvod&brend=norbin">
                 Pošaljite upit →

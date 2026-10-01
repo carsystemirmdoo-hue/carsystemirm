@@ -294,7 +294,7 @@ export function CarsystemHomePage() {
 
               return href ? (
                 <Link
-                  aria-label={`Otvori stranicu brenda ${brandName}`}
+                  aria-label={`Otvorite stranicu brenda ${brandName}`}
                   className={styles.brandRailMonoLink}
                   href={href}
                   key={brandKey}
@@ -446,7 +446,7 @@ export function CarsystemHomePage() {
               <span className={styles.buttonIcon}>
                 <IconLocation />
               </span>
-              <span>Koristi moju lokaciju</span>
+              <span>Koristite svoju lokaciju</span>
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreviewList
@@ -580,7 +580,7 @@ export function CarsystemHomePage() {
               tehničkom podrškom.
             </p>
             <Link className={styles.textLink} href="/kontakt?tema=tehnicka-podrska">
-              Zatraži tehnički savet
+              Zatražite tehnički savet
             </Link>
           </div>
           <div className={styles.educationIndexRows}>
@@ -759,7 +759,7 @@ function LocatorCard({
           <span className={styles.buttonIcon}>
             <IconLocation />
           </span>
-          <span>Koristi moju lokaciju</span>
+          <span>Koristite svoju lokaciju</span>
         </button>
         <SearchableCombobox
           ariaLabel="Izaberite grad"

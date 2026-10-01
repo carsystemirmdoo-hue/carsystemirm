@@ -670,7 +670,7 @@ export const carsystemProductFilters = [
 ] as const;
 
 export const carsystemDocumentation = {
-  title: "Tehnički podaci kada su vam potrebni",
+  title: "Tehnički podaci kada su Vam potrebni",
   description:
     "Dokumentacija je vezana za konkretan proizvod. Dostupni fajlovi otvaraju se direktno, a ostali se proveravaju kroz tehnički upit.",
   resources: [
@@ -784,7 +784,7 @@ export const carsystemFinishSystem = {
  * does not claim it proves full cure, and neither does this copy.
  */
 export const carsystemMultiChanger = {
-  title: "Git koji vam pokazuje gde je u procesu",
+  title: "Git koji Vam pokazuje gde je u procesu",
   description:
     "Multi Changer serija menja boju tokom sušenja/očvršćavanja — vizuelni signal toka rada, ne zamena za tehnički list.",
   variants: [

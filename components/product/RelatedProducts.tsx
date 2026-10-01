@@ -51,7 +51,7 @@ export function RelatedProducts({
               <Link
                 className={styles.relatedImageFrame}
                 href={productHref}
-                aria-label={`Pogledaj proizvod ${product.name}`}
+                aria-label={`Pogledajte proizvod ${product.name}`}
                 data-cursor="image"
               >
                 <ProductVisualSurface
@@ -87,7 +87,7 @@ export function RelatedProducts({
                     data-motion-surface
                     data-motion="theme-wipe"
                   >
-                    <span>Pošalji upit</span>
+                    <span>Pošaljite upit</span>
                   </Link>
                   <Link className={`${styles.relatedDetailLink} cs-link-reveal`} href={productHref} data-cursor="link">
                     Detalji →

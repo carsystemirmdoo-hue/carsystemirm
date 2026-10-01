@@ -42,7 +42,7 @@ export function SupportBand({
           data-cursor="button"
           data-motion-surface
         >
-          Pronađi prodavnicu
+          Pronađite prodavnicu
         </Link>
       </div>
     </section>

@@ -913,8 +913,8 @@ export const befarManufacturer = {
 export const befarCta = {
   title: "Dalje kroz Carsystem program",
   actions: [
-    { label: "Pronađi najbližu prodavnicu", href: "/prodavnice", tone: "primary" as const },
-    { label: "Pogledaj Befar proizvode", href: "/katalog?brend=befar", tone: "secondary" as const },
+    { label: "Pronađite najbližu prodavnicu", href: "/prodavnice", tone: "primary" as const },
+    { label: "Pogledajte Befar proizvode", href: "/katalog?brend=befar", tone: "secondary" as const },
     { label: "Kontakt i tehnički savet", href: "/kontakt", tone: "tertiary" as const },
   ],
 };

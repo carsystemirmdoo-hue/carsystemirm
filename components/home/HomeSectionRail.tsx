@@ -5,9 +5,9 @@ import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMo
 import styles from "./CarsystemHomePage.module.css";
 
 const homeSectionItems = [
-  { id: "pocetna", label: "Idi na početnu sekciju" },
-  { id: "prodavnice-mreza", label: "Idi na prodavnice" },
-  { id: "zavrsni-poziv", label: "Idi na završni poziv" },
+  { id: "pocetna", label: "Idite na početnu sekciju" },
+  { id: "prodavnice-mreza", label: "Idite na prodavnice" },
+  { id: "zavrsni-poziv", label: "Idite na završni poziv" },
 ] as const;
 
 type HomeSectionId = (typeof homeSectionItems)[number]["id"];

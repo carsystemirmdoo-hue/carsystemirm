@@ -29,7 +29,7 @@ export function CatalogHeroSearch() {
         type="search"
         value={query}
         onChange={(event) => updateQuery(event.target.value)}
-        placeholder="Pretraži proizvode..."
+        placeholder="Pretražite proizvode..."
       />
     </>
   );

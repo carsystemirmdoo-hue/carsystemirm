@@ -159,7 +159,7 @@ export function CartForm({ view }: { view: CartView }) {
                 }}
               />
               <button type="button" className="kk-remove" onClick={() => remove(l.articleId)} disabled={pending}>
-                Ukloni
+                Uklonite
               </button>
             </span>
             <span data-label="Cena bez PDV-a">
@@ -234,7 +234,7 @@ export function CartForm({ view }: { view: CartView }) {
                 disabled={pending}
               />
               <button type="button" className="portal-button kk-submit" data-variant="primary" onClick={confirmAndSubmit} disabled={pending || !password}>
-                {pending ? "Proveravam…" : "Potvrdi lozinkom i pošalji"}
+                {pending ? "Proveravam…" : "Potvrdite lozinkom i pošaljite"}
               </button>
             </div>
           ) : null}
@@ -247,7 +247,7 @@ export function CartForm({ view }: { view: CartView }) {
             disabled={pending || !view.canSubmit}
             aria-busy={pending}
           >
-            {pending ? "Šaljem…" : "Pošalji zahtev kancelariji"}
+            {pending ? "Šaljem…" : "Pošaljite zahtev kancelariji"}
           </button>
           <small className="kk-fine">
             Zahtev nije porudžbina: kancelarija proverava artikle, količine i cene i potvrđuje ga. Status pratite u

@@ -13,7 +13,7 @@ import {
 
 /**
  * F8: kupovina iz celog kataloga (varijanta + pakovanje + kupčeva cena),
- * „Zatraži cenu/uslove" sa radnom listom, i rabati po grupama iz faktura.
+ * „Zatražite cenu/uslove" sa radnom listom, i rabati po grupama iz faktura.
  */
 
 const reason = skipReason();

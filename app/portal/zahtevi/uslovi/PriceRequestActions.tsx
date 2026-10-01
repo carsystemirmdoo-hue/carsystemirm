@@ -20,7 +20,7 @@ export function PriceRequestActions({ id, status }: { id: string; status: string
       {status === "open" ? (
         <span className="kk-step-actions">
           <button type="button" className="portal-button" data-variant="secondary" disabled={pending} onClick={() => run(() => takePriceRequestAction(id))}>
-            Preuzmi
+            Preuzmite
           </button>
         </span>
       ) : null}
@@ -30,14 +30,14 @@ export function PriceRequestActions({ id, status }: { id: string; status: string
           <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} rows={2} maxLength={2000} disabled={pending} />
           <span className="kk-step-actions">
             <button type="button" className="portal-button" data-variant="primary" disabled={pending} onClick={() => run(() => answerPriceRequestAction(id, answer))}>
-              Pošalji odgovor
+              Pošaljite odgovor
             </button>
           </span>
         </label>
       ) : null}
       <span className="kk-step-actions">
         <button type="button" className="portal-button" data-variant="ghost" disabled={pending} onClick={() => run(() => closePriceRequestAction(id))}>
-          Zatvori
+          Zatvorite
         </button>
       </span>
       {error ? <p className="kk-problem" role="alert">{error}</p> : null}

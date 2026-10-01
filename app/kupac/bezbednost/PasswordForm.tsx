@@ -21,7 +21,7 @@ export function PasswordForm() {
       </label>
       {state.error ? <p className="kk-problem" role="alert">{state.error}</p> : null}
       <button type="submit" className="portal-button" data-variant="primary" disabled={pending}>
-        {pending ? "Menjam…" : "Promeni lozinku"}
+        {pending ? "Menjam…" : "Promenite lozinku"}
       </button>
     </form>
   );

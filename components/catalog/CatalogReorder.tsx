@@ -46,13 +46,13 @@ export function CatalogReorder() {
       <header className={styles.head}>
         <div>
           <p className={styles.kicker}>
-            Iz vaših faktura
+            Iz Vaših faktura
             {state.demo ? <span className={styles.demo}>Demo podaci</span> : null}
           </p>
           <h2 id="reorder-title">Poručite ponovo</h2>
           <p className={styles.lead}>
             Artikli koje ste ranije kupovali, iz potvrđenih faktura do {srDay(state.dataUntil)} Cenu i
-            dostupnost potvrđuje vaš komercijalista.
+            dostupnost potvrđuje Vaš komercijalista.
           </p>
         </div>
         <span className={styles.headLinks}>
@@ -139,11 +139,11 @@ function ReorderCard({ item }: { item: ReorderItem }) {
         <div className={styles.actions}>
           {p ? (
             <Link href={p.href} className={styles.primary} tabIndex={-1} aria-hidden="true">
-              Otvori proizvod →
+              Otvorite proizvod →
             </Link>
           ) : (
             <Link href={item.invoicesHref} className={styles.secondary}>
-              Pogledaj u fakturama →
+              Pogledajte u fakturama →
             </Link>
           )}
         </div>
@@ -194,12 +194,12 @@ function ReorderQuantity({ item }: { item: ReorderItem }) {
           />
         </label>
         <button type="button" className={styles.addButton} onClick={add} disabled={pending} aria-busy={pending}>
-          {pending ? "Dodajem…" : "Dodaj u korpu"}
+          {pending ? "Dodajem…" : "Dodajte u korpu"}
         </button>
       </div>
       {state ? (
         <p className={styles.orderMsg} data-ok={state.ok ? "true" : "false"} role="status">
-          {state.text} {state.ok ? <Link href="/kupac/korpa">Otvori korpu →</Link> : null}
+          {state.text} {state.ok ? <Link href="/kupac/korpa">Otvorite korpu →</Link> : null}
         </p>
       ) : null}
     </div>

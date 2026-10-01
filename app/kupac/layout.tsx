@@ -42,7 +42,7 @@ export default async function CustomerAccountLayout({ children }: { children: Re
             </Link>
             <form action={customerSignOutAction}>
               <button type="submit" className="portal-button" data-variant="ghost">
-                Odjavi se
+                Odjavite se
               </button>
             </form>
           </div>

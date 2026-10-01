@@ -34,7 +34,7 @@ export function AutoRecomputeStatus({ status, canRetry }: { status: RecomputeSta
       ) : (
         <>
           <b>nije uspeo</b> {when(l.finishedAt)} ({l.failureCode}) — {l.failureDetail} Prethodni obračun važi dalje.
-          {canRetry ? <AutoRecomputeRetry requestId={l.id} /> : <> Ponoviti može kancelarija ili gazda.</>}
+          {canRetry ? <AutoRecomputeRetry requestId={l.id} /> : <> Ponoviti može kancelarija ili Vlasnik.</>}
         </>
       )}
       {status.pending && l?.status !== "pending" ? <> · novi zahtev čeka obradu</> : null}

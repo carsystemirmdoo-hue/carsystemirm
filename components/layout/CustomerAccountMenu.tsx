@@ -106,7 +106,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
         ))}
         <form action={customerSignOutAction}>
           <input type="hidden" name="returnTo" value={pathname || "/"} />
-          <button type="submit" className={styles.mobileLink}>Odjavi se</button>
+          <button type="submit" className={styles.mobileLink}>Odjavite se</button>
         </form>
       </div>
     );
@@ -138,7 +138,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
           ))}
           <form action={customerSignOutAction}>
             <input type="hidden" name="returnTo" value={pathname || "/"} />
-            <button type="submit" role="menuitem">Odjavi se</button>
+            <button type="submit" role="menuitem">Odjavite se</button>
           </form>
         </div>
       ) : null}

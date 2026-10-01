@@ -54,7 +54,7 @@ export function UploadForm({ enabled }: { enabled: boolean }) {
             <input type="text" name="issuerCode" pattern="[A-Za-z0-9._\-]{1,64}" required />
           </Field>
           <PortalButton type="submit" variant="primary" disabled={pending}>
-            {pending ? "Uvoz…" : "Uvezi snimak"}
+            {pending ? "Uvoz…" : "Uvezite snimak"}
           </PortalButton>
         </form>
       )}
@@ -91,7 +91,7 @@ export function LinkPartnerForm({
         required
       />
       <PortalButton type="submit" variant="ghost" disabled={pending}>
-        {attachTo ? `Pripoji: ${attachTo.name} (isti PIB)` : "Otvori kupca"}
+        {attachTo ? `Pripoji: ${attachTo.name} (isti PIB)` : "Otvorite kupca"}
       </PortalButton>
       {state.error ? <small data-tone="danger">{state.error}</small> : null}
       {state.ok ? <small data-tone="success">{state.ok}</small> : null}
@@ -126,7 +126,7 @@ export function RepCodeForm({
                 ))}
               </select>
               <PortalButton type="submit" variant="ghost" disabled={pending}>
-                {c.linkedName ? "Promeni" : "Poveži"}
+                {c.linkedName ? "Promenite" : "Povežite"}
               </PortalButton>
             </form>
           </li>
@@ -143,7 +143,7 @@ export function PlanApply({ issuerCode, disabled }: { issuerCode: string; disabl
       <Feedback state={state} failTitle="Plan nije primenjen" />
       <input type="hidden" name="issuerCode" value={issuerCode} />
       <PortalButton type="submit" variant="primary" disabled={pending || disabled}>
-        {pending ? "Primena…" : "Primeni predložene dodele"}
+        {pending ? "Primena…" : "Primenite predložene dodele"}
       </PortalButton>
     </form>
   );

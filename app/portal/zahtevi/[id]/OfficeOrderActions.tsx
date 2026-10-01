@@ -57,7 +57,7 @@ export function OfficeOrderActions({
           <h3>1. Prijem</h3>
           <p>Preuzmite zahtev u obradu da kupac vidi da je u radu.</p>
           <button type="button" className="portal-button" disabled={pending} onClick={() => run(() => takeIntoReviewAction(orderId))}>
-            Preuzmi u obradu
+            Preuzmite u obradu
           </button>
         </div>
       ) : null}
@@ -76,7 +76,7 @@ export function OfficeOrderActions({
                   if (confirm("Potvrditi porudžbinu? Kupac će videti broj porudžbine.")) run(() => confirmOrderAction(orderId));
                 }}
               >
-                Potvrdi porudžbinu
+                Potvrdite porudžbinu
               </button>
             ) : null}
           </div>
@@ -89,7 +89,7 @@ export function OfficeOrderActions({
                   Traži izmenu
                 </button>
                 <button type="button" className="portal-button" data-variant="ghost" disabled={pending} onClick={() => run(() => rejectOrderAction(orderId, reason))}>
-                  Odbij zahtev
+                  Odbijte zahtev
                 </button>
               </span>
             </label>

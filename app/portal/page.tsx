@@ -160,7 +160,7 @@ export default async function PortalHomePage() {
               <p>Poziv se izdaje tek kada su firma i ovlašćena osoba potvrđene.</p>
             </div>
             <Link className="portal-section-link" href="/portal/kupci/nalozi">
-              Otvori naloge
+              Otvorite naloge
             </Link>
           </div>
           <div className="portal-metrics">

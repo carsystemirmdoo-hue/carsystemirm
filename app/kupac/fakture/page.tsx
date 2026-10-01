@@ -44,7 +44,7 @@ export default async function CustomerInvoicesPage({
         <div>
           <h2>Fakture</h2>
           <p>
-            Dokumenti koje je Carsystem i R-M izdao vašoj firmi.{" "}
+            Dokumenti koje je Carsystem i R-M izdao Vašoj firmi.{" "}
             {dataset.kind === "demo" ? "U ovom demou su izmišljene." : "Preuzete iz BizniSoft knjigovodstva."}{" "}
             Porudžbine su posebna celina.
           </p>
@@ -64,8 +64,8 @@ export default async function CustomerInvoicesPage({
           <input type="date" name="do" defaultValue={filter.to ?? ""} />
         </label>
         <div className="ka-filter-actions">
-          <button type="submit" className="portal-button" data-variant="primary">Prikaži</button>
-          {filtered ? <Link href="/kupac/fakture" className="portal-button" data-variant="ghost">Poništi</Link> : null}
+          <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
+          {filtered ? <Link href="/kupac/fakture" className="portal-button" data-variant="ghost">Poništite</Link> : null}
         </div>
       </form>
 
@@ -74,7 +74,7 @@ export default async function CustomerInvoicesPage({
           {result.total === 0
             ? filtered
               ? "Nijedna faktura ne odgovara pretrazi."
-              : "Za vašu firmu još nema uvezenih faktura."
+              : "Za Vašu firmu još nema uvezenih faktura."
             : `${result.total} ${result.total === 1 ? "faktura" : "faktura"}${filtered ? " odgovara pretrazi" : ""} · strana ${result.page} od ${pages}`}
         </p>
         {result.rows.length ? (

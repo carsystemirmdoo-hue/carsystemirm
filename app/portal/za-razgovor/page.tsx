@@ -119,7 +119,7 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
           <h3>Predlog za razgovor</h3>
           <p>{s.nextStep}</p>
           <Link href={`/portal/kupci/${item.id}`} className="zr-open">
-            Otvori karticu i osnov →
+            Otvorite karticu i osnov →
           </Link>
         </div>
       </div>
@@ -247,10 +247,10 @@ export default async function TalkListPage({
                     </option>
                   ))}
                 </select>
-                <button type="submit">Prikaži</button>
+                <button type="submit">Prikažite</button>
               </form>
             ) : null}
-            {canRecompute ? <RecomputeButton label={stale.length ? "Preračunaj sada" : "Preračunaj"} /> : null}
+            {canRecompute ? <RecomputeButton label={stale.length ? "Preračunajte sada" : "Preračunajte"} /> : null}
           </div>
         </div>
       </section>

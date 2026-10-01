@@ -29,8 +29,8 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
         title="Zahtevi kupaca"
         description={
           canReview
-            ? "Zahtevi koje kupci šalju iz korpe na sajtu. Zahtev postaje porudžbina tek vašom potvrdom; potvrđenu porudžbinu u pilotu ručno unosite u BizniSoft i upisujete broj dokumenta."
-            : "Zahtevi vaših kupaca, samo za pregled. Prijem i potvrdu radi kancelarija."
+            ? "Zahtevi koje kupci šalju iz korpe na sajtu. Zahtev postaje porudžbina tek Vašom potvrdom; potvrđenu porudžbinu u pilotu ručno unosite u BizniSoft i upisujete broj dokumenta."
+            : "Zahtevi Vaših kupaca, samo za pregled. Prijem i potvrdu radi kancelarija."
         }
       />
       <nav className="kk-subnav" aria-label="Zahtevi kupaca">
@@ -47,7 +47,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
           aria-label="Pretraga zahteva"
         />
         <button type="submit" className="portal-button" data-variant="secondary">Traži</button>
-        {q ? <Link href="/portal/zahtevi">Poništi</Link> : null}
+        {q ? <Link href="/portal/zahtevi">Poništite</Link> : null}
       </form>
       <section className="portal-panel">
         <div className="kk-pricelist" data-kind={mode.priceList?.kind ?? "off"}>

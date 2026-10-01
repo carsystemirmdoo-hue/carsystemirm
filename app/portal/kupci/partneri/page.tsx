@@ -163,7 +163,7 @@ export default async function PartnerRegistryPage({
               <option value="needs_review">Za dodatnu proveru</option>
             </select>
             <input type="search" name="q" defaultValue={params.q ?? ""} placeholder="Šifra, naziv, PIB, mesto" aria-label="Pretraga" />
-            <button type="submit">Filtriraj</button>
+            <button type="submit">Filtrirajte</button>
           </form>
           {filtered.length > MAX_ROWS ? (
             <p className="portal-login-hint">Prikazano prvih {MAX_ROWS}; suzite filter.</p>

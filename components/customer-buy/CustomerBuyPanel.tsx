@@ -45,7 +45,7 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
   return (
     <section className={styles.panel} aria-labelledby="buy-panel-title">
       <header className={styles.panelHead}>
-        <span className={styles.kicker}>Za vašu firmu · {data.company}</span>
+        <span className={styles.kicker}>Za Vašu firmu · {data.company}</span>
         {data.ordering.enabled && data.ordering.priceList.kind === "demo" ? <span className={styles.demo}>DEMO cenovnik</span> : null}
       </header>
       <h2 id="buy-panel-title" className={styles.panelTitle}>
@@ -63,9 +63,9 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
         <>
           <p className={styles.note}>
             {here.length > 0
-              ? "Za ovu varijantu vaša cena još nije određena u cenovniku."
-              : "Za ovaj proizvod vaša cena još nije određena."}{" "}
-            Pošaljite zahtev — javiće vam se komercijalista ili kancelarija.
+              ? "Za ovu varijantu Vaša cena još nije određena u cenovniku."
+              : "Za ovaj proizvod Vaša cena još nije određena."}{" "}
+            Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija.
           </p>
           <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={here[0]?.articleCode ?? null} kind="no_price" />
         </>
@@ -142,12 +142,12 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
           <input type="number" inputMode="decimal" min={offer.minQuantity} step={offer.quantityStep} value={qty} onChange={(e) => setQty(e.target.value)} disabled={pending} />
         </label>
         <button type="button" className={styles.add} onClick={add} disabled={pending} aria-busy={pending}>
-          {pending ? "Dodajem…" : "Dodaj u korpu"}
+          {pending ? "Dodajem…" : "Dodajte u korpu"}
         </button>
       </div>
       {msg ? (
         <p className={styles.msg} data-ok={msg.ok ? "true" : "false"} role="status">
-          {msg.text} {msg.ok ? <Link href="/kupac/korpa">Otvori korpu →</Link> : null}
+          {msg.text} {msg.ok ? <Link href="/kupac/korpa">Otvorite korpu →</Link> : null}
         </p>
       ) : null}
       <p className={styles.fine}>
@@ -205,7 +205,7 @@ function PriceRequest({
   }
   return (
     <div className={styles.request}>
-      <h3>{kind === "special_terms" ? "Zatražite posebne uslove" : "Zatraži cenu/uslove"}</h3>
+      <h3>{kind === "special_terms" ? "Zatražite posebne uslove" : "Zatražite cenu/uslove"}</h3>
       <div className={styles.row}>
         <label className={styles.qty}>
           <span>Količina</span>
@@ -217,7 +217,7 @@ function PriceRequest({
         </label>
       </div>
       <button type="button" className={styles.add} onClick={send} disabled={pending} aria-busy={pending}>
-        {pending ? "Šaljem…" : kind === "special_terms" ? "Pošalji zahtev za uslove" : "Zatraži cenu/uslove"}
+        {pending ? "Šaljem…" : kind === "special_terms" ? "Pošaljite zahtev za uslove" : "Zatražite cenu/uslove"}
       </button>
       {error ? (
         <p className={styles.msg} data-ok="false" role="alert">

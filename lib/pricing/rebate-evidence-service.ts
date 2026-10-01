@@ -95,7 +95,7 @@ export type RebateEvidenceItem = Awaited<ReturnType<typeof loadRebateEvidence>>[
 export async function proposeRebateFromEvidence(viewer: PortalUser, customerId: string, productGroup: string) {
   const { items } = await loadRebateEvidence(viewer);
   const item = items.find((i) => i.customerId === customerId && i.productGroup === productGroup);
-  if (!item) return { ok: false as const, message: "Kupac ili grupa nisu u vašem opsegu." };
+  if (!item) return { ok: false as const, message: "Kupac ili grupa nisu u Vašem opsegu." };
   if (item.status !== "consistent" || item.candidatePercent === null) {
     return { ok: false as const, message: "Samo dosledan rabat može postati predlog; ostalo zahteva ručnu odluku." };
   }

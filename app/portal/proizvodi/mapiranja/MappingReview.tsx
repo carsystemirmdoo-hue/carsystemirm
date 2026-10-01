@@ -230,7 +230,7 @@ function CatalogTargetPicker({ slug, variant }: { slug: string | null; variant: 
             maxLength={200}
           />
           <PortalButton variant="ghost" onClick={check} disabled={pending || !value.trim()}>
-            {pending ? "Proveravam…" : "Proveri"}
+            {pending ? "Proveravam…" : "Proverite"}
           </PortalButton>
         </span>
       </Field>

@@ -28,7 +28,7 @@ export function CustomerOrderActions({ orderId, status }: { orderId: string; sta
           disabled={pending}
           onClick={() => run(() => returnOrderToCartAction(orderId), "/kupac/korpa")}
         >
-          Vrati stavke u korpu i ispravi
+          Vratite stavke u korpu i ispravite
         </button>
       ) : null}
       <button

@@ -289,7 +289,7 @@ export function AccountsAdmin({
                             variant="ghost"
                             onClick={() => setVerifyId(verifyId === account.id ? null : account.id)}
                           >
-                            {verifyId === account.id ? "Zatvori" : "Potvrdi osobu"}
+                            {verifyId === account.id ? "Zatvorite" : "Potvrdite osobu"}
                           </PortalButton>
                         ) : null}
                         {account.status !== "rejected" ? (
@@ -297,7 +297,7 @@ export function AccountsAdmin({
                             variant="ghost"
                             onClick={() => setRevokeId(revokeId === account.id ? null : account.id)}
                           >
-                            {revokeId === account.id ? "Zatvori" : "Opozovi pristup"}
+                            {revokeId === account.id ? "Zatvorite" : "Opozovite pristup"}
                           </PortalButton>
                         ) : null}
                         <PortalButton
@@ -411,7 +411,7 @@ export function AccountsAdmin({
                   <textarea name="evidenceNote" minLength={15} maxLength={1000} required rows={3} />
                 </Field>
                 <PortalButton type="submit" variant="primary" disabled={verifying}>
-                  {verifying ? "Čuvanje…" : "Sačuvaj potvrdu"}
+                  {verifying ? "Čuvanje…" : "Sačuvajte potvrdu"}
                 </PortalButton>
               </>
             )}
@@ -431,7 +431,7 @@ export function AccountsAdmin({
               <input type="text" name="reason" minLength={3} maxLength={500} required />
             </Field>
             <PortalButton type="submit" variant="primary" disabled={revoking}>
-              {revoking ? "Opoziv…" : "Opozovi pristup"}
+              {revoking ? "Opoziv…" : "Opozovite pristup"}
             </PortalButton>
           </form>
         ) : null}

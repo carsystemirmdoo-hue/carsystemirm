@@ -47,7 +47,7 @@ export function AssignmentPanel({
         </p>
       ) : null}
       {assignees.length === 0 ? (
-        <p>Kupac nije dodeljen nijednom komercijalisti — vide ga samo gazda i kancelarija.</p>
+        <p>Kupac nije dodeljen nijednom komercijalisti — vide ga samo Vlasnik i kancelarija.</p>
       ) : (
         <ul className="portal-plain-list">
           {assignees.map((a) => (
@@ -71,7 +71,7 @@ export function AssignmentPanel({
                     required
                   />
                   <PortalButton type="submit" variant="ghost" disabled={removing}>
-                    Oduzmi
+                    Oduzmite
                   </PortalButton>
                 </form>
               ) : null}
@@ -82,7 +82,7 @@ export function AssignmentPanel({
       {canManage ? (
         <form action={addAction} className="portal-form">
           <input type="hidden" name="customerId" value={customerId} />
-          <Field label="Dodeli komercijalisti" required>
+          <Field label="Dodelite komercijalisti" required>
             <select name="userId" required defaultValue="">
               <option value="">— izaberite —</option>
               {reps.map((r) => (
@@ -97,7 +97,7 @@ export function AssignmentPanel({
             <input type="text" name="reason" minLength={3} maxLength={500} required />
           </Field>
           <PortalButton type="submit" variant="primary" disabled={adding}>
-            {adding ? "Čuvanje…" : "Dodeli"}
+            {adding ? "Čuvanje…" : "Dodelite"}
           </PortalButton>
         </form>
       ) : null}

@@ -26,7 +26,7 @@ export default async function CustomerPriceRequestsPage() {
         <div>
           <h2>Upiti za cenu i uslove</h2>
           <p>
-            Za proizvode bez određene cene ili za posebne uslove. Odgovara vaš komercijalista ili kancelarija; odgovor nije
+            Za proizvode bez određene cene ili za posebne uslove. Odgovara Vaš komercijalista ili kancelarija; odgovor nije
             promena cene u korpi dok uslov ne bude unet u cenovnik.
           </p>
         </div>
@@ -52,7 +52,7 @@ export default async function CustomerPriceRequestsPage() {
       {rows.length === 0 ? (
         <div className="portal-panel-body ka-empty">
           <p>
-            <strong>Još nema upita.</strong> Na stranici proizvoda bez cene izaberite „Zatraži cenu/uslove”.
+            <strong>Još nema upita.</strong> Na stranici proizvoda bez cene izaberite „Zatražite cenu/uslove”.
           </p>
         </div>
       ) : (

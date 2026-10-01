@@ -236,7 +236,7 @@ export const carsystemMetrics = [
     id: "programs",
     value: "program-count",
     label: "zastupljene programske celine",
-    detail: "Prema lokalnim product zapisima",
+    detail: "Prema proizvodima u katalogu",
   },
   {
     id: "support",
@@ -448,7 +448,7 @@ export const carsystemFamilies = [
     eyebrow: "Abrazivni program",
     title: "19 serija",
     description:
-      "P19 i F19 povezuju grubu i međufaznu obradu kroz potvrđene lokalne product zapise.",
+      "P19 i F19 povezuju grubu i međufaznu obradu.",
     productSlugs: [
       "carsystem-p19-brusni-diskovi",
       "carsystem-f19-brusni-diskovi",
@@ -705,7 +705,7 @@ export const carsystemDocumentation = {
     {
       id: "video",
       label: "Video materijali",
-      description: "Centralni javni video resurs još nije povezan.",
+      description: "Video materijali za Carsystem program još nisu objavljeni.",
       status: "U pripremi",
     },
     {

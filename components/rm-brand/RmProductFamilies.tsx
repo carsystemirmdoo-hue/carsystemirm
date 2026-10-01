@@ -31,8 +31,8 @@ export function RmProductFamilies({
           </h2>
         </div>
         <p>
-          Potvrđene fotografije prikazujemo iz lokalnog kataloga. Nedostajući
-          asseti ostaju stabilni tehnički slotovi, bez lažne ambalaže.
+          Prikazujemo samo potvrđene fotografije iz kataloga. Gde zvanična
+          fotografija još nije dostupna, ostaje neutralno polje umesto izmišljene ambalaže.
         </p>
       </div>
 

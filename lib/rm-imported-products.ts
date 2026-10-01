@@ -203,7 +203,7 @@ function getProductDetail(
       content: {
         title: "Dokumentovana uloga proizvoda",
         description:
-          "Sažetak je izveden iz zvaničnog product-information materijala i, kada postoji, tehničkog lista iz dostavljenog ZIP-a.",
+          "Sažetak se zasniva na zvaničnim R-M informacijama o proizvodu i, kada postoji, na tehničkom listu.",
         items: [
           {
             title: "Uloga u procesu",
@@ -211,10 +211,10 @@ function getProductDetail(
             reviewStatus: "confirmed",
           },
           {
-            title: "Lokalna dokumentacija",
+            title: "Dokumentacija",
             description: entry.documents.technicalDataSheet
-              ? "Product-information PDF i tehnički list povezani su direktno sa ovim proizvodom."
-              : "Product-information PDF je dostupan; zaseban tehnički list nije pronađen u dostavljenom folderu.",
+              ? "Uz ovaj proizvod su dostupni zvanične informacije o proizvodu i tehnički list."
+              : "Uz ovaj proizvod su dostupne zvanične informacije o proizvodu; zaseban tehnički list trenutno nije dostupan.",
             reviewStatus: "confirmed",
           },
         ],
@@ -363,7 +363,7 @@ function getReviewedDocuments(
       kind: "other",
       availability: "available",
       href: entry.documents.productInformation,
-      note: `Zvanična sačuvana R-M product stranica iz foldera ${entry.source.sourceFolder}.`,
+      note: "Zvanične R-M informacije o proizvodu.",
       reviewStatus: "confirmed",
     },
   ];

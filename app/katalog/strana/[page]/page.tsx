@@ -73,7 +73,7 @@ export async function generateMetadata({
 
   return pageMetadata({
     title: `Katalog proizvoda, strana ${page}`,
-    description: `Crawlable pregled Carsystem i R-M kataloga, strana ${page} od ${getTotalPages()}. Otvorite proizvode i pošaljite upit za dostupnost.`,
+    description: `Pregled Carsystem i R-M kataloga, strana ${page} od ${getTotalPages()}. Otvorite proizvode i pošaljite upit za dostupnost.`,
     path: `/katalog/strana/${page}`,
     imageAlt: `Katalog Carsystem i R-M proizvoda, strana ${page}`,
   });

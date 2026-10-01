@@ -51,8 +51,7 @@ export function CarsystemProducts({
           </h2>
         </div>
         <p>
-          Prikaz koristi postojeće javne product zapise. Cene i stanje nisu
-          javni i proveravaju se kroz upit.
+          Cene i stanje na lageru nisu javni — proveravaju se kroz upit.
         </p>
       </header>
 

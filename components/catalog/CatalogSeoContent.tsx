@@ -55,7 +55,7 @@ export function CatalogHero({
             <CatalogHeroSearch />
           </Suspense>
         ) : (
-          <p className={styles.searchLabel}>Crawlable pregled kataloga</p>
+          <p className={styles.searchLabel}>Pregled kataloga</p>
         )}
         <div className={styles.quickStats} aria-label="Brzi pregled kataloga">
           <span>{brandCount} brendova</span>

@@ -484,7 +484,7 @@ export function CarsystemHomePage() {
                 <span>
                   {publicPartnerStores.length > 0
                     ? "Partnerska lista ostaje dostupna na stranici prodavnica."
-                    : "Demo i nepotpuni zapisi se ne prikazuju javno."}
+                    : "Lokacije se objavljuju kada podaci budu potvrđeni."}
                 </span>
               </div>
             )}
@@ -791,11 +791,10 @@ function StorePreview({ store }: { store?: PartnerStore }) {
         <span className={styles.availableDot} />
         <div>
           <header>
-            <strong>Nema javnih lokacija</strong>
+            <strong>Nema objavljenih lokacija</strong>
             <small>U pripremi</small>
           </header>
           <p>Potvrđene prodajne lokacije biće prikazane tek kada podaci budu uneti.</p>
-          <span>Bez demo adresa u public lokatoru</span>
         </div>
       </article>
     );

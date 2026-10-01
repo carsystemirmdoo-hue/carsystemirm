@@ -60,7 +60,7 @@ function accessMessage(status: string, passwordState: ReturnType<typeof getSiteA
   if (status === "not-configured") {
     return {
       tone: "danger",
-      text: "Pristup trenutno nije konfigurisan. Potrebna je SITE_ACCESS_PASSWORD env varijabla.",
+      text: "Pristup trenutno nije omogućen. Obratite se administratoru sajta.",
     };
   }
 

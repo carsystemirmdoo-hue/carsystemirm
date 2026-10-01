@@ -118,8 +118,7 @@ function Families({
           <h2 id="carsystem-families-title">Sistemi koji nose radionicu</h2>
         </div>
         <p>
-          Četiri celine zasnovane su isključivo na postojećim lokalnim product
-          zapisima i mogu se širiti bez promene kompozicije.
+          Četiri celine obuhvataju Carsystem proizvode iz našeg kataloga.
         </p>
       </header>
 

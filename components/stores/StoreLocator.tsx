@@ -46,11 +46,11 @@ function locationNotice(store: PartnerStore) {
 function formatMarkerCount(count: number) {
   const lastDigit = count % 10;
   const lastTwoDigits = count % 100;
-  if (lastDigit === 1 && lastTwoDigits !== 11) return `${count} javni marker`;
+  if (lastDigit === 1 && lastTwoDigits !== 11) return `${count} lokacija`;
   if (lastDigit >= 2 && lastDigit <= 4 && (lastTwoDigits < 12 || lastTwoDigits > 14)) {
-    return `${count} javna markera`;
+    return `${count} lokacije`;
   }
-  return `${count} javnih markera`;
+  return `${count} lokacija`;
 }
 
 function listOnlyCountLabel(count: number) {
@@ -59,6 +59,15 @@ function listOnlyCountLabel(count: number) {
     return `Još ${count} lokacije su dostupne samo u listi.`;
   }
   return `Još ${count} lokacija je dostupno samo u listi.`;
+}
+
+/** „grad" u broju: 1 grad, 2–4 grada, 5+ gradova (21 grad, 11 gradova). */
+function cityWord(count: number) {
+  const lastTwo = count % 100;
+  const last = count % 10;
+  if (last === 1 && lastTwo !== 11) return "grad";
+  if (last >= 2 && last <= 4 && (lastTwo < 12 || lastTwo > 14)) return "grada";
+  return "gradova";
 }
 
 export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
@@ -181,8 +190,8 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
   const filteredListOnlyCount = filteredStores.length - filteredMarkerCount;
   const markerResultLabel =
     filteredMarkerCount === mappableStores.length
-      ? `Prikazano svih ${formatMarkerCount(mappableStores.length)}.`
-      : `Prikazano ${formatMarkerCount(filteredMarkerCount)} od ${formatMarkerCount(mappableStores.length)}.`;
+      ? `Na mapi je svih ${formatMarkerCount(mappableStores.length)}.`
+      : `Na mapi: ${formatMarkerCount(filteredMarkerCount)} od ${mappableStores.length}.`;
   const resultCountLabel =
     filteredListOnlyCount > 0
       ? `${markerResultLabel} ${listOnlyCountLabel(filteredListOnlyCount)}`
@@ -200,8 +209,8 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
           </h1>
           <p className={`${styles.subtitle} ${styles.subtitleReveal}`}>
             {hasPublicStores
-              ? `${stats.locationCount} javnih markera u ${stats.cityCount} gradova u internom preview prikazu. Poslovni kontakti bez preciznijeg tipa označeni su kao partnerske lokacije.`
-              : "Lokator trenutno nema poslovnih lokacija spremnih za interni preview prikaz."}
+              ? `${stats.locationCount} lokacija na mapi u ${stats.cityCount} ${cityWord(stats.cityCount)}. Poslovni kontakti bez preciznijeg tipa označeni su kao partnerske lokacije.`
+              : "Lokator trenutno nema objavljenih poslovnih lokacija."}
           </p>
         </div>
       </section>
@@ -315,7 +324,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
               <p>
                 {hasPublicStores
                   ? "Lista poslovnih lokacija ostaje dostupna. Lokacije bez pouzdanih koordinata nemaju marker ni navigaciju."
-                  : "Lokacije za interni preview još nisu pripremljene."}
+                  : "Lokacije još nisu objavljene."}
               </p>
             </div>
           )}

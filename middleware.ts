@@ -16,6 +16,11 @@ import {
   SITE_ACCESS_COOKIE_NAME,
 } from "./lib/site-access";
 import { seoSiteConfig } from "./lib/seo/site-config";
+import {
+  INTERNAL_DEMO_NOT_FOUND_PATH,
+  internalDemoRoutesAllowed,
+  isInternalDemoRoute,
+} from "./lib/internal-demo-routes.mjs";
 
 const MAINTENANCE_ROUTE = "/site-u-pripremi";
 const SITE_ACCESS_ROUTE = "/site-u-pripremi/access";
@@ -179,6 +184,11 @@ export default withAuth(async function middleware(request) {
 
 async function handleSiteRouting(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  // Interne demo strane ne postoje na Production/Preview deploymentu (404),
+  // nezavisno od režima održavanja i pristupnog koda.
+  if (isInternalDemoRoute(pathname) && !internalDemoRoutesAllowed(process.env.VERCEL_ENV)) {
+    return NextResponse.rewrite(new URL(INTERNAL_DEMO_NOT_FOUND_PATH, request.url));
+  }
   const isProductionDeployment = process.env.VERCEL_ENV === "production";
   const canonicalHost = new URL(seoSiteConfig.url).host;
   if (

@@ -19,6 +19,7 @@ import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
+import { assertAllRulesUsed, loadTechnicalLocalization, localizeClaims } from "../lib/technical-localization.mjs";
 import { BRAND, PATHS, REPO_ROOT, SOURCES } from "./lib/config.mjs";
 
 const checkOnly = process.argv.includes("--check");
@@ -31,6 +32,9 @@ if (Object.values(plan.summary.planErrors).some((list) => list.length)) throw ne
 
 const localization = {};
 if (existsSync(PATHS.localizationDir)) for (const file of readdirSync(PATHS.localizationDir).filter((name) => name.endsWith(".json")).sort()) Object.assign(localization, readJson(path.join(PATHS.localizationDir, file), {}));
+
+/** Srpski prikaz tvrdnji iz lista; doslovna vrednost ostaje u `technicalLocalization`. */
+const technicalRules = loadTechnicalLocalization(PATHS.technicalLocalization);
 
 const byCode = new Map(source.products.map((product) => [product.code, product]));
 const imports = plan.items.filter((item) => item.action === "IMPORT").sort((a, b) => a.slug.localeCompare(b.slug));
@@ -115,6 +119,15 @@ function contentOf(sr) {
   };
 }
 
+function technicalOf(record) {
+  if (!record.technical) return { technical: null };
+  const { claims, localized } = localizeClaims(record.code, record.technical.claims, technicalRules);
+  return {
+    technical: { documentFileName: record.technical.documentFileName, documentSha256: record.technical.documentSha256, claims },
+    ...(localized.length ? { technicalLocalization: localized } : {}),
+  };
+}
+
 function baseEntry(item) {
   const record = byCode.get(item.code);
   const { relations, usedBy } = relationsOf(record);
@@ -135,9 +148,7 @@ function baseEntry(item) {
     taxonomy: item.taxonomy,
     relations,
     usedBy,
-    technical: record.technical
-      ? { documentFileName: record.technical.documentFileName, documentSha256: record.technical.documentSha256, claims: record.technical.claims }
-      : null,
+    ...technicalOf(record),
     documents: documentsOf(record),
     image: null,
     missingOfficialAsset: true,
@@ -181,6 +192,8 @@ for (const item of enrichments) {
     };
   }
 }
+
+assertAllRulesUsed(technicalRules, "norbin");
 
 /* -- Upis --------------------------------------------------------------------------------- */
 

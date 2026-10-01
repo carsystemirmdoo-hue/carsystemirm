@@ -1,0 +1,32 @@
+{
+  "_comment": [
+    "Srpski prikaz tehničkih vrednosti iz zvaničnih baslac tehničkih listova (GAP-009, odobreno 2026-10-01).",
+    "Ključ je zvanična šifra; `original` je doslovna vrednost koju parser čita iz lista i ostaje u zapisu kao provenance.",
+    "`parser-correction`: parser je pogrešno pročitao list — `value` je ono što list kaže (strana i odeljak u `tds`).",
+    "Pravilo koje više ne pogađa izvor obara `baslac:sync:apply`. Format: scripts/lib/technical-localization.mjs."
+  ],
+  "21-10": [
+    { "field": "flashOff", "original": "15 min before filler application", "value": "15 min pre nanošenja punila", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/21-10.pdf", "page": 1, "section": "Application · Flash off at 20°C" } }
+  ],
+  "21-20": [
+    { "field": "flashOff", "original": "15 min,before applying baslac 20-24/34/94 filler", "value": "15 min pre nanošenja baslac punila 20-24/34/94", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/21-20.pdf", "page": 1, "section": "Application · Flash off at 20°C" } }
+  ],
+  "40-10": [
+    { "field": "drying", "original": "Drying at 20°C: 4 h dust-free: 2 h", "value": "20°C: 4 h · suvo na prašinu posle 2 h", "kind": "parser-correction", "tds": { "url": "https://techinfo.baslac.com/en/40-10.pdf", "page": 2, "section": "Drying · Drying at 20°C (4 h; dust-free: 2 h)" } }
+  ],
+  "40-40": [
+    { "field": "flashOff", "original": "2-3 min after each spray coat", "value": "2-3 min posle svakog sloja", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/40-40.pdf", "page": 1, "section": "Application · Flash off at 20°C" } }
+  ],
+  "40-440": [
+    { "field": "flashOff", "original": "3 min between spray coats", "value": "3 min između slojeva", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/40-440.pdf", "page": 1, "section": "Application · Flash off at 20°C" } }
+  ],
+  "40-450": [
+    { "field": "flashOff", "original": "3 min between spray coats", "value": "3 min između slojeva", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/40-450.pdf", "page": 1, "section": "Application · Flash off at 20°C" } }
+  ],
+  "40-620": [
+    { "field": "flashOff", "original": "Flash off until completely mat after the first spray coat and before drying. Do not flash off for more than 25 min.", "value": "Posle prvog sloja i pre sušenja otparavati dok površina potpuno ne postane mat. Otparavanje ne sme trajati duže od 25 min.", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/40-620.pdf", "page": 2, "section": "Application · Flash off at 20°C" } }
+  ],
+  "45-W10": [
+    { "field": "flashOff", "original": "No flash off before applying 45 Line.", "value": "Bez otparavanja pre nanošenja 45 Line.", "kind": "translation", "tds": { "url": "https://techinfo.baslac.com/en/45-W10.pdf", "page": 1, "section": "Application · Flash off at 20°C" } }
+  ]
+}

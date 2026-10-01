@@ -323,11 +323,24 @@
         "nozzle": "1.3-1.4 mm",
         "sprayCoats": "1",
         "filmThickness": "10 μm",
-        "flashOff": "15 min before filler application",
+        "flashOff": "15 min pre nanošenja punila",
         "sanding": null,
         "drying": [],
         "voc": null
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "15 min before filler application",
+          "value": "15 min pre nanošenja punila",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/21-10.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -489,13 +502,26 @@
         "flashOff": null,
         "sanding": null,
         "drying": [
-          "Drying at 20°C: 4 h dust-free: 2 h",
+          "20°C: 4 h · suvo na prašinu posle 2 h",
           "Drying at 60°C: 20 min",
           "Infrared (short wave): 8 min",
           "Infrared (medium wave): 10-15 min"
         ],
         "voc": null
       },
+      "technicalLocalization": [
+        {
+          "field": "drying",
+          "original": "Drying at 20°C: 4 h dust-free: 2 h",
+          "value": "20°C: 4 h · suvo na prašinu posle 2 h",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-10.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C (4 h; dust-free: 2 h)"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -754,7 +780,7 @@
         "nozzle": "1.3 mm",
         "sprayCoats": "2",
         "filmThickness": "50-70 μm",
-        "flashOff": "2-3 min after each spray coat",
+        "flashOff": "2-3 min posle svakog sloja",
         "sanding": null,
         "drying": [
           "Drying at 20°C: 8 h",
@@ -764,6 +790,19 @@
         ],
         "voc": null
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "2-3 min after each spray coat",
+          "value": "2-3 min posle svakog sloja",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-40.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -914,7 +953,7 @@
         "nozzle": "1.3 mm",
         "sprayCoats": "2",
         "filmThickness": "40-60 μm",
-        "flashOff": "3 min between spray coats",
+        "flashOff": "3 min između slojeva",
         "sanding": null,
         "drying": [
           "Drying at 20°C: 50-415: 10 h",
@@ -928,6 +967,19 @@
           "category": "IIB.d"
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "3 min between spray coats",
+          "value": "3 min između slojeva",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-440.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -1106,7 +1158,7 @@
         "nozzle": "1.3 mm",
         "sprayCoats": "2",
         "filmThickness": "40-60 μm",
-        "flashOff": "3 min between spray coats",
+        "flashOff": "3 min između slojeva",
         "sanding": null,
         "drying": [
           "Drying at 20°C: 50-415: 6 h",
@@ -1120,6 +1172,19 @@
           "category": "IIB.d"
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "3 min between spray coats",
+          "value": "3 min između slojeva",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-450.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -1395,7 +1460,7 @@
         "nozzle": "1.3",
         "sprayCoats": "2",
         "filmThickness": "40-50 μm",
-        "flashOff": "Flash off until completely mat after the first spray coat and before drying. Do not flash off for more than 25 min.",
+        "flashOff": "Posle prvog sloja i pre sušenja otparavati dok površina potpuno ne postane mat. Otparavanje ne sme trajati duže od 25 min.",
         "sanding": null,
         "drying": [
           "Drying at 20°C: 7 h",
@@ -1409,6 +1474,19 @@
           "category": "IIB.d"
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "Flash off until completely mat after the first spray coat and before drying. Do not flash off for more than 25 min.",
+          "value": "Posle prvog sloja i pre sušenja otparavati dok površina potpuno ne postane mat. Otparavanje ne sme trajati duže od 25 min.",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-620.pdf",
+            "page": 2,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -5296,7 +5374,7 @@
         "nozzle": null,
         "sprayCoats": "1",
         "filmThickness": "5 μm",
-        "flashOff": "15 min,before applying baslac 20-24/34/94 filler",
+        "flashOff": "15 min pre nanošenja baslac punila 20-24/34/94",
         "sanding": null,
         "drying": [],
         "voc": {
@@ -5305,6 +5383,19 @@
           "category": "IIB.e"
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "15 min,before applying baslac 20-24/34/94 filler",
+          "value": "15 min pre nanošenja baslac punila 20-24/34/94",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/21-20.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -5549,7 +5640,7 @@
         "nozzle": "1.4 mm",
         "sprayCoats": "1",
         "filmThickness": null,
-        "flashOff": "No flash off before applying 45 Line.",
+        "flashOff": "Bez otparavanja pre nanošenja 45 Line.",
         "sanding": null,
         "drying": [],
         "voc": {
@@ -5558,6 +5649,19 @@
           "category": "IIB.d"
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOff",
+          "original": "No flash off before applying 45 Line.",
+          "value": "Bez otparavanja pre nanošenja 45 Line.",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/45-W10.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",

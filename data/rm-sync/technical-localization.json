@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Srpski prikaz tehničkih vrednosti iz zvaničnih R-M tehničkih listova (GAP-009, odobreno 2026-10-01).",
+    "Ključ je zvanična oznaka; `original` je doslovna vrednost koju parser čita iz lista i ostaje u zapisu kao provenance.",
+    "`parser-correction`: parser je pogrešno pročitao list — `value` je ono što list kaže (strana i odeljak u `tds`).",
+    "Pravilo koje više ne pogađa izvor obara `rm:sync:apply`. Format: scripts/lib/technical-localization.mjs."
+  ],
+  "C 2A40": [
+    { "field": "mixingRatio", "original": "1:1 + 20% Clear coat Preparation", "value": "1:1 + 20% zapreminski (lak : učvršćivač + razređivač)", "kind": "parser-correction", "tds": { "url": "https://techinfo.rmpaint.com/unicorn/en/C%202A40-Clear%20coat%20air%20drying.pdf", "page": 1, "section": "Mixing Ratio (C 2A40 100 %, H 2A20 100 %, R 2A20/R 2A10 20 % by volume); „Clear coat Preparation\" je naslov sledećeg odeljka" } }
+  ],
+  "C 2P52": [
+    { "field": "drying", "original": "Drying at 20°C Dust free time: 35 min", "value": "20°C: suvo na prašinu posle 35 min", "kind": "translation", "tds": { "url": "https://techinfo.rmpaint.com/unicorn/en/C%202P52%20-eSense%20clear%20coat%20ambient%20drying.pdf", "page": 2, "section": "Drying · Drying at 20°C" } }
+  ],
+  "ONYX HD": [
+    { "field": "drying", "original": "Drying at 20°C 15 min Possibility to speed up the process", "value": "20°C: 15 min (proces se može ubrzati dodatnim protokom vazduha)", "kind": "translation", "tds": { "url": "https://techinfo.rmpaint.com/unicorn/en/ONYX%20HD-ONYX%20HD%20Waterborne%20basecoat%20line.pdf", "page": 2, "section": "Drying · Drying at 20°C" } }
+  ],
+  "ONYX HD TROPICAL": [
+    { "field": "drying", "original": "Drying at 20°C 15 min Possibility to speed up the process", "value": "20°C: 15 min (proces se može ubrzati dodatnim protokom vazduha)", "kind": "translation", "tds": { "url": "https://techinfo.rmpaint.com/unicorn/en/ONYX%20HD%20TROPICAL-Waterborne%20basecoat%20line%20TROPICAL.pdf", "page": 2, "section": "Drying · Drying at 20°C" } }
+  ],
+  "P 5540": [
+    { "field": "mixingRatio", "original": "100:25:25 100:25:25 by volume wet on wet", "value": "100:25:25 zapreminski, mokro na mokro · 100:20:20 zapreminski, za brušenje", "kind": "parser-correction", "tds": { "url": "https://techinfo.rmpaint.com/unicorn/en/P%205540-GHD%20PROTECT%20PRIMER%20FILLER%20grey%20PUR.pdf", "page": 2, "section": "Mixing Ratio (100:25:25 by volume wet on wet; 100:20:20 by volume for sanding)" } }
+  ]
+}

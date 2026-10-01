@@ -49,6 +49,7 @@ export const PATHS = {
   decisions: data("manual-decisions.json"),
   taxonomyMap: data("taxonomy-map.json"),
   localizationDir: data("localization"),
+  technicalLocalization: data("technical-localization.json"),
   localizationInputDir: path.join(REPO_ROOT, ".cache", "rm-sync", "localization-input"),
   imageManifest: data("image-manifest.generated.json"),
   publishedImages: data("published-images.generated.json"),

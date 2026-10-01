@@ -120,8 +120,8 @@ async function ritam(k: Kupac, code: string, naziv: string, pocetak: string, kor
 
 /** Dva kupca, po jedan artikal sa ritmom, i jedan preračunat aktivan prolaz. */
 async function korpus() {
-  const a = await kupac("09001", "Auto Lim Vršac");
-  const b = await kupac("09002", "Farbara Beograd");
+  const a = await kupac("09001", "Primer Lim Vršac");
+  const b = await kupac("09002", "Primer Farbara Beograd");
   await ritam(a, "ACC001", "Bazni lak 1L", "2026-01-05", 30, 5);
   await ritam(b, "ACC002", "Lak za zaštitu", "2026-01-10", 21, 6);
   await db.sql`
@@ -220,7 +220,7 @@ test("gazda vidi sve preporuke; svaki komercijalista samo svoje", async (t) => {
 
   const zaA = await redoviZa(repA);
   assert.deepEqual(zaA.map((r) => r.customerId), [a.id]);
-  assert.equal(zaA[0].customerName, "Auto Lim Vršac");
+  assert.equal(zaA[0].customerName, "Primer Lim Vršac");
 
   const zaB = await redoviZa(repB);
   assert.deepEqual(zaB.map((r) => r.customerId), [b.id]);

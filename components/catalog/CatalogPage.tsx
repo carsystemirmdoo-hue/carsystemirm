@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { CatalogExplorer } from "@/components/catalog/CatalogExplorer";
+import { CatalogReorder } from "@/components/catalog/CatalogReorder";
 import {
   CatalogCategoryLinks,
   CatalogHero,
@@ -34,6 +35,8 @@ export function CatalogPage({
     <div className={styles.catalogShell}>
       <main className={styles.main}>
         <CatalogHero brandCount={brands.length} programCount={programs.length} />
+        {/* Prijavljeni kupac: sopstvena istorija. Anonimno: ništa, bez zahteva. */}
+        <CatalogReorder />
         <CatalogCategoryLinks />
         <Suspense
           fallback={

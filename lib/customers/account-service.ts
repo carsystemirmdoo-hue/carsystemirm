@@ -1,12 +1,15 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { customers, customerUsers } from "@/db/schema";
+import { customerAccountTokens, customers, customerUsers } from "@/db/schema";
 import type { CustomerAccountStatus } from "@/db/schema/customer-accounts";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { notify } from "@/lib/notifications/notification-service";
 import { canCustomerSignIn } from "@/lib/authz/customer-scope.mjs";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
+import type { PortalUser } from "@/lib/authz/session";
 
 export type AccountActor = { id: string; name: string; role: string };
 
@@ -256,6 +259,23 @@ export async function setCustomerAccountStatus(
       })
       .where(eq(customerUsers.id, input.accountId));
 
+    /*
+     * Isključen ili odbijen nalog ne sme ostaviti otvoren poziv ni reset.
+     * Ranije je token izdat pre isključenja i dalje mogao da aktivira nalog.
+     */
+    if (input.status === "suspended" || input.status === "rejected") {
+      await tx
+        .update(customerAccountTokens)
+        .set({ supersededAt: sql`now()` })
+        .where(
+          and(
+            eq(customerAccountTokens.customerUserId, input.accountId),
+            isNull(customerAccountTokens.usedAt),
+            isNull(customerAccountTokens.supersededAt),
+          ),
+        );
+    }
+
     await recordAudit(
       {
         actor,
@@ -370,9 +390,25 @@ export async function loadCustomerAccountForLogin(email: string) {
 }
 
 /** Pregled naloga za kancelariju i gazdu. */
-export async function listCustomerAccounts(filter?: {
-  status?: CustomerAccountStatus;
-}): Promise<CustomerAccountView[]> {
+/**
+ * Nalozi kupaca u opsegu korisnika koji gleda.
+ *
+ * `viewer` je obavezan: spisak nosi imena, e-adrese i razloge odluka za
+ * kontakte kupaca, pa ga komercijalista bez `customers:view_all` dobija samo
+ * za dodeljene kupce. Ranije je ekran dobijao sve naloge, bez obzira na opseg.
+ * Prazna dodela daje prazan spisak, nikad sve.
+ */
+export async function listCustomerAccounts(
+  viewer: Pick<PortalUser, "id" | "role" | "permissions">,
+  filter?: { status?: CustomerAccountStatus },
+): Promise<CustomerAccountView[]> {
+  const scope = seesAllCustomers(viewer) ? null : await loadAssignedCustomerIds(viewer.id);
+  if (scope !== null && scope.length === 0) return [];
+
+  const conditions = [];
+  if (scope !== null) conditions.push(inArray(customerUsers.customerId, scope));
+  if (filter?.status) conditions.push(eq(customerUsers.status, filter.status));
+
   const db = getDb();
   return db
     .select({
@@ -389,7 +425,7 @@ export async function listCustomerAccounts(filter?: {
     })
     .from(customerUsers)
     .innerJoin(customers, eq(customers.id, customerUsers.customerId))
-    .where(filter?.status ? eq(customerUsers.status, filter.status) : undefined)
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(asc(customers.name), asc(customerUsers.email))
     .limit(500);
 }

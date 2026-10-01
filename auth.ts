@@ -1,4 +1,5 @@
 import { eq, sql } from "drizzle-orm";
+import { consumeRememberGrant } from "./lib/auth/remember-tokens";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
@@ -454,6 +455,35 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           subject: SUBJECT_CUSTOMER,
           // Kupčeva sesija nikada ne tvrdi drugi faktor koji nije dat.
           assurance: "password",
+          mfaVerifiedAt: null,
+        };
+      },
+    }),
+
+    /*
+     * Obnova kupčeve sesije sa zapamćenog uređaja („Zapamti me", 0031).
+     *
+     * Ne prima lozinku ni token: prima JEDNOKRATNU dozvolu koju je izdao
+     * `redeemRememberToken` posle provere i rotacije tokena (60 s, jedna
+     * upotreba). Izdaje običnu kupčevu sesiju sa `assurance = "remembered"`,
+     * pa slanje porudžbine traži ponovni unos lozinke. Interni nalozi ovim
+     * putem ne postoje — `consumeRememberGrant` čita samo `customer_users`.
+     */
+    Credentials({
+      id: "customer-remember",
+      name: "Kupac (zapamćen uređaj)",
+      credentials: { grant: { label: "Dozvola", type: "text" } },
+      async authorize(rawCredentials) {
+        const grant = typeof rawCredentials?.grant === "string" ? rawCredentials.grant : null;
+        const account = await consumeRememberGrant(grant);
+        if (!account) return null;
+        return {
+          id: account.id,
+          name: account.name,
+          email: account.email,
+          sessionVersion: account.sessionVersion,
+          subject: SUBJECT_CUSTOMER,
+          assurance: "remembered",
           mfaVerifiedAt: null,
         };
       },

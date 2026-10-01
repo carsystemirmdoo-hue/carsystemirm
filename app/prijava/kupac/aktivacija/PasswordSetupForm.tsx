@@ -4,32 +4,26 @@ import { useActionState } from "react";
 import { Field, PortalButton } from "@/components/portal/PortalPrimitives";
 import {
   activateAccountAction,
-  completeResetAction,
   type ActivationState,
 } from "@/app/prijava/kupac/aktivacija/actions";
 
 const INITIAL: ActivationState = { error: null, ok: null };
 
 /**
- * Postavljanje lozinke — i za aktivaciju i za reset.
+ * Postavljanje lozinke pri aktivaciji naloga.
  *
- * Jedan obrazac za oba toka: pravila lozinke, poruke o grešci i ponašanje pri
- * neispravnom tokenu moraju biti identična, a dva obrasca bi se s vremenom
- * razišla.
+ * Samostalni reset zaboravljene lozinke je isključen dok ne postoji slanje
+ * e-pošte (vidi `aktivacija/actions.ts`); oporavak ide novom pozivnicom, koja
+ * vodi na ovaj isti obrazac.
  */
 export function PasswordSetupForm({
   token,
-  mode,
   minLength,
 }: {
   token: string;
-  mode: "activation" | "reset";
   minLength: number;
 }) {
-  const [state, formAction, pending] = useActionState(
-    mode === "activation" ? activateAccountAction : completeResetAction,
-    INITIAL,
-  );
+  const [state, formAction, pending] = useActionState(activateAccountAction, INITIAL);
 
   return (
     <main className="portal-login-root">
@@ -37,9 +31,7 @@ export function PasswordSetupForm({
         <form className="portal-login-form" action={formAction}>
           <header>
             <span>Pristup za kupce</span>
-            <h2>
-              {mode === "activation" ? "Aktivacija naloga" : "Nova lozinka"}
-            </h2>
+            <h2>Aktivacija naloga</h2>
             <p>
               Postavite lozinku koju znate samo Vi. Niko iz firme je ne vidi i ne
               može je pročitati.

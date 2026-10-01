@@ -1,0 +1,30 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const TABS = [
+  { href: "/kupac", label: "Pregled", exact: true },
+  { href: "/kupac/fakture", label: "Fakture" },
+  { href: "/kupac/korpa", label: "Korpa" },
+  { href: "/kupac/porudzbine", label: "Porudžbine" },
+  { href: "/kupac/upiti", label: "Upiti" },
+  { href: "/kupac/saglasnosti", label: "Saglasnosti" },
+  { href: "/kupac/bezbednost", label: "Bezbednost" },
+];
+
+export function AccountTabs() {
+  const pathname = usePathname();
+  return (
+    <nav className="ka-tabs" aria-label="Moj nalog">
+      {TABS.map((t) => {
+        const active = t.exact ? pathname === t.href : pathname === t.href || pathname.startsWith(`${t.href}/`);
+        return (
+          <Link key={t.href} href={t.href} aria-current={active ? "page" : undefined}>
+            {t.label}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}

@@ -37,7 +37,7 @@ export const recommendationRunStatus = pgEnum("recommendation_run_status", [
  * uvoza istorije pokrenuo hiljade prolaza, a prvi koji bi se poklopio sa
  * polovinom uvoza dao bi preporuke nad nepotpunim podacima.
  */
-export const recommendationTrigger = pgEnum("recommendation_trigger", ["manual"]);
+export const recommendationTrigger = pgEnum("recommendation_trigger", ["manual", "ingest"]);
 
 export const recommendationStatus = pgEnum("recommendation_status", [
   "insufficient_history",

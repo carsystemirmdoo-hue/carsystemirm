@@ -1,4 +1,4 @@
-# Poslovni sistem — podešavanje (faza 1)
+# Poslovni sistem — podešavanje
 
 Uputstvo za pokretanje internog poslovnog sistema na `/portal`. Javni sajt radi
 nezavisno i ne zahteva nijedan od ovih koraka.
@@ -12,13 +12,19 @@ za početak i ne uvodi mesečni trošak (vidi `COST_CONTROL.md`).
 cp .env.example .env.local
 ```
 
-Popunite `DATABASE_URL` i generišite ključ sesije:
+Popunite `DATABASE_URL` i generišite ključeve (svaki posebno):
 
 ```bash
 openssl rand -base64 32
 ```
 
-Dobijenu vrednost upišite u `AUTH_SECRET`.
+- `AUTH_SECRET` — potpis sesije,
+- `PORTAL_MFA_MASTER_KEY_V1` — šifrovanje TOTP tajni, kodova za reset i
+  pozivnica (gubitak ključa = gubitak svih MFA vezivanja; čuvati i van servera),
+- `AUTH_RATE_LIMIT_HMAC_KEY` — ograničavanje pokušaja (u produkciji obavezan).
+
+Opis svake promenljive je u `.env.example`. Postupak za testnu bazu na
+provajderu je u `docs/b2b/33-test-baza-runbook.md`.
 
 ### Baza za razvoj, bez instalacije
 
@@ -40,14 +46,18 @@ Namenjeno isključivo razvoju — produkcija koristi pravi Postgres.
 npm run db:migrate
 ```
 
-Migracije su aditivne i ne brišu postojeće podatke.
+Migracije `0000`–`0032` su u `db/migrations/`, redosled je u
+`db/migrations/meta/_journal.json`. Pokreće ih nalog vlasnika šeme preko
+`MIGRATION_DATABASE_URL` (u produkciji obavezno; lokalno pada na
+`DATABASE_URL`). Nema „down" migracija, a neke menjaju podatke (npr. `0013`
+briše lozinke odobrenih kupčevih naloga) — povratak je moguć samo iz backup-a.
 
-| Migracija | Šta radi |
-|---|---|
-| `0000_init_portal_core.sql` | Tabele `users`, `permission_packages`, `user_permissions`, `customers`, `customer_assignments`, `audit_log`, `system_settings`, `user_preferences` i tip `user_role` |
-| `0001_audit_log_append_only.sql` | Okidači koji odbijaju `UPDATE` i `DELETE` nad `audit_log` |
+**Ne koristiti `npm run db:generate`.** Drizzle snapshot postoji samo do
+`0002`; migracije posle nje su pisane ručno, pa bi generator napravio
+pogrešnu migraciju. Nova migracija se piše ručno i dodaje u `_journal.json`.
 
-Nove migracije se prave sa `npm run db:generate` posle izmene `db/schema/`.
+Posle migracija aplikacija dobija sopstvenu, užu ulogu:
+`db/provisioning/runtime-role.sql` (vidi `docs/b2b/10-db-roles-runbook.md`).
 
 ## 3. Početni nalog
 
@@ -58,13 +68,19 @@ znakova), pa pokrenite:
 npm run db:seed
 ```
 
-Skripta upisuje osam paketa dozvola, podrazumevane pragove i **jedan** Gazda
-nalog. Ne upisuje nijednog kupca, fakturu, pošiljku ni iznos — vrednosti iz
+Skripta upisuje sve pakete dozvola, podrazumevane pragove i **jedan** nalog
+sa ulogom Vlasnik (interni ključ `gazda`). Ne upisuje nijednog kupca, fakturu, pošiljku ni iznos — vrednosti iz
 dizajn prototipa su prikaz rasporeda, a ne podaci.
 
-Posle prve prijave uklonite `BOOTSTRAP_ADMIN_PASSWORD` iz okruženja.
+Posle prve prijave uklonite sve `BOOTSTRAP_ADMIN_*` vrednosti iz okruženja.
+Drugi faktor (aplikacija za jednokratne kodove) je obavezan za sve interne
+naloge. U režimu `enforced` (podrazumevan na Vercel-u) nalog bez faktora može
+da se prijavi samo uz jednokratnu dozvolu za vezivanje; prvom Vlasniku je
+izdaje `MFA_GRANT_EMAIL=… node scripts/issue-mfa-enrollment-grant.mjs`
+(pokreće se lokalno, uz pristup bazi i `PORTAL_MFA_MASTER_KEY_V1`). Vidi
+`docs/b2b/12-mfa-policy-closeout.md`.
 
-Ostale korisnike Gazda otvara kroz **Korisnici i dozvole**. Uloge su:
+Ostale korisnike Vlasnik otvara kroz **Korisnici i dozvole**. Uloge su:
 `gazda`, `komercijalista`, `kancelarija`, `magacioner`. Uloga „Menadžer“ ne
 postoji — dublji pristup se dodeljuje paketom dozvola, ne novom ulogom.
 
@@ -88,10 +104,9 @@ npm run lint && npm run typecheck && npm run build && npm test
 Dva odvojena pojma:
 
 - **Uloga** — osnovni obim posla (4 uloge).
-- **Paket dozvola** — proširenje koje Gazda dodeljuje pojedinačnom korisniku.
+- **Paket dozvola** — proširenje koje Vlasnik dodeljuje pojedinačnom korisniku.
 
-Primer iz specifikacije: Miroslav Suljagić je **Komercijalista** sa paketom
-`analitika`. Time dobija analitiku cele firme, ali ne i odobravanje limita,
+Primer: **Komercijalista** sa paketom `analitika`. Time dobija analitiku cele firme, ali ne i odobravanje limita,
 poručivanje robe, administraciju korisnika ni globalno zatvaranje upozorenja.
 Nigde u kodu ne postoji provera po imenu korisnika — isti paket bilo kom drugom
 komercijalisti daje isti pristup, a oduzimanje paketa ga uklanja odmah, bez
@@ -99,6 +114,11 @@ ponovne prijave.
 
 Dozvole se čitaju iz baze pri **svakom** zahtevu. Token sesije nosi samo
 identitet korisnika, pa se oduzimanje dozvole ne može „preživeti“ starim tokenom.
+
+Pakete „Korisnici i dozvole" i „Bezbednost naloga" dodeljuje i oduzima samo
+Vlasnik, uz svež kod iz aplikacije; niko ne dodeljuje paket sam sebi ni
+pristup koji sam nema, i bezbednosne radnje nad nalogom Vlasnika izvodi samo
+Vlasnik (`lib/authz/owner-guard-policy.mjs`).
 
 Sakrivanje stavke iz navigacije je isključivo prikaz. Svaka ruta zove
 `requireCapability(...)` na serveru i vraća **403** kada dozvole nema, bez obzira
@@ -108,33 +128,31 @@ na to da li je link bio vidljiv.
 
 | Oblast | Stanje | Šta je potrebno |
 |---|---|---|
-| Promet, kupci, analitika | Ekrani postoje, podataka nema | Uvoz faktura iz BiznisSoft izvoza (faza 2) |
-| Dugovanja, kašnjenja, naplata | Namerno nedostupno | Fakture **ne sadrže** podatak o plaćanju. Potreban je odvojen proveren izvor uplata. Do tada stoji „Podatak nije dostupan iz trenutnog izvora“ |
-| Otprema, adresnice, BEX | Ekrani postoje, poziv nije povezan | `BEX_CLIENT_ID`, `BEX_API_KEY`, `BEX_BASE_URL`, `FEATURE_BEX=2` |
-| Zalihe, nabavka, porudžbine | Ekrani postoje, računa nema | Izvor stanja zaliha i istorija dana bez zalihe (faza 4) |
-| Obaveštenja, kreditni limiti | Ekrani postoje | Faza 5, nad proverenim podacima |
-| Globalna pretraga | Prikazana isključeno | Faza 2 |
+| Dugovanja, kašnjenja, naplata, limiti | Namerno nedostupno | Fakture **ne sadrže** podatak o plaćanju. Potreban je odvojen proveren izvor uplata |
+| Otprema, adresnice, BEX | Ekrani postoje, integracija nije napisana | BEX pristupni podaci i ugovor; kod još ne čita `BEX_*` |
+| Zalihe, nabavka, porudžbine dobavljaču | Ekrani postoje, računa nema | Izvor stanja zaliha |
+| CSV uvoz faktura | Isključen (`lib/import/csv-gate.mjs`) | Stvaran uzorak BizniSoft izvoza i usklađen parser |
+| Cene kupca na javnom katalogu | Samo demo režim | Cenovnik i rabati iz BizniSofta, potvrđene veze artikal ↔ katalog |
+| Samostalna promena zaboravljene lozinke kupca | Isključena | Slanje e-pošte; do tada nova pozivnica |
 
 Nijedan od ovih ekrana nema dugme koje izgleda upotrebljivo a ne radi ništa —
 umesto toga stoji šta tačno nedostaje.
 
-## Uvoz faktura (priprema za fazu 2)
+## Uvoz faktura
 
-Folder sa BiznisSoft izvozom je na računaru u kancelariji, a sistem radi u
-oblaku, pa server ne može da čita taj folder direktno. Predviđeno rešenje je
-mali lokalni konektor koji svakog radnog dana u 09:00 pregleda folder i šalje
-nove fajlove na zaštićenu adresu sistema.
+- **Ručno:** `/portal/importi`, PDF dokumenti iz BizniSofta (Račun-otpremnica),
+  najviše 4 MB po otpremanju (`lib/import/upload-limits.mjs`). Traži dozvolu
+  `imports:write` (Vlasnik, kancelarija). Original se ne čuva — samo otisak i
+  pročitane stavke.
+- **Automatski:** Windows konektor (`connector/`, `docs/b2b/21-windows-connector.md`)
+  čita PDF-ove iz foldera na kancelarijskom računaru i šalje potpisan JSON
+  (Ed25519, bez deljenog ključa). Uključuje se sa `FEATURE_SYNC_DEVICE_INGEST=1`
+  tek posle registracije uređaja.
 
-Uslovi pre uključivanja:
+Otisak fajla sprečava dvostruki uvoz; ista faktura iz drugog fajla ide na
+ručni pregled, ne u promet.
 
-- konektor instaliran na računaru gde se nalazi folder,
-- `INGEST_API_KEY` podešen sa obe strane,
-- `FEATURE_FOLDER_CONNECTOR=1`.
-
-Konektor čita isključivo za čitanje i nikada ne menja ni ne briše izvorne
-fajlove. Otisak fajla (hash) sprečava dvostruki uvoz.
-
-## BEX (priprema za fazu 3)
+## BEX (planirano)
 
 Potrebno od BEX-a:
 
@@ -144,7 +162,7 @@ Potrebno od BEX-a:
 3. adresa servisa (`BEX_BASE_URL`).
 
 Pristupni podaci se čuvaju isključivo u okruženju servera. Ne smeju se naći u
-frontend kodu ni u repozitorijumu. Uključivanje ide preko `FEATURE_BEX`.
+frontend kodu ni u repozitorijumu. Kod ih još ne čita.
 
 Procenjeni i fakturisani trošak isporuke se vode odvojeno; procena se nikada ne
 prikazuje kao potvrđeno dugovanje. Ništa se ne knjiži i nijedno plaćanje se ne
@@ -152,7 +170,8 @@ pokreće.
 
 ## Vraćanje unazad
 
-Migracije samo dodaju tabele i ne diraju postojeće podatke javnog sajta. Za
-povratak na stanje pre ovog rada dovoljno je vratiti granu — radna grana je
-`recovery/pre-claude-2026-08-07`. Ako je baza već migrirana, tabele mogu ostati
-prazne bez uticaja na javni sajt, jer ih koristi isključivo `/portal`.
+Kod se vraća granom; baza ne može samo granom. Migracije nemaju „down" korak
+i neke menjaju podatke, pa je jedini pouzdan povratak baze backup / povratak u
+tačku vremena (PITR) kod provajdera. Pre svake migracije nad bazom sa stvarnim
+podacima napraviti backup i proveriti da se može vratiti. Javni sajt ne zavisi
+od baze i radi i kada je portal isključen.

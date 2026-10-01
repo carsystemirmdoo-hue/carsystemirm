@@ -11,6 +11,7 @@ import {
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
 import type { PortalUser } from "@/lib/authz/session";
+import { effectiveInvoiceCondition } from "@/lib/ledger/effective-invoice";
 
 export interface SalesFilter {
   from?: string | null;
@@ -64,7 +65,8 @@ export async function loadSalesLines(
   const scope = await customerScope(user);
   if (scope !== null && scope.length === 0) return [];
 
-  const conditions = [];
+  // Samo dokumenti koji važe za promet — isto pravilo kao `effective_sales_ledger`.
+  const conditions = [effectiveInvoiceCondition()];
   if (scope !== null) conditions.push(inArray(invoices.customerId, scope));
   if (filter.from) conditions.push(gte(invoices.issuedOn, filter.from));
   if (filter.to) conditions.push(lte(invoices.issuedOn, filter.to));
@@ -98,7 +100,7 @@ export async function loadSalesLines(
     .innerJoin(customers, eq(customers.id, invoices.customerId))
     .leftJoin(salespeople, eq(salespeople.id, invoices.salespersonId))
     .leftJoin(articles, eq(articles.id, invoiceLines.articleId))
-    .where(conditions.length > 0 ? and(...conditions) : undefined)
+    .where(and(...conditions))
     .orderBy(desc(invoices.issuedOn), asc(invoices.number))
     .limit(limit);
 

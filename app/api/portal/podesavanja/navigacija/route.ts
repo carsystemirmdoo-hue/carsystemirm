@@ -5,6 +5,9 @@ import { writeUserPreference } from "@/lib/authz/user-repository";
 
 export const runtime = "nodejs";
 
+/** Odgovor je vezan za nalog; ne kešira se nigde. */
+const NO_STORE = { "Cache-Control": "private, no-store" };
+
 const bodySchema = z.object({
   key: z.literal(SIDEBAR_PREFERENCE_KEY),
   value: z.boolean(),
@@ -17,14 +20,14 @@ const bodySchema = z.object({
 export async function POST(request: Request) {
   const user = await getPortalUser();
   if (!user) {
-    return Response.json({ error: "Potrebna je prijava." }, { status: 401 });
+    return Response.json({ error: "Potrebna je prijava." }, { status: 401, headers: NO_STORE });
   }
 
   const parsed = bodySchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
-    return Response.json({ error: "Neispravan zahtev." }, { status: 400 });
+    return Response.json({ error: "Neispravan zahtev." }, { status: 400, headers: NO_STORE });
   }
 
   await writeUserPreference(user.id, parsed.data.key, parsed.data.value);
-  return Response.json({ ok: true });
+  return Response.json({ ok: true }, { headers: NO_STORE });
 }

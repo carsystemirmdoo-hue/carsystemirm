@@ -4,10 +4,24 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { importRows, importRuns } from "@/db/schema";
 import { ImportUpload } from "@/features/portal/ImportUpload";
+import {
+  CSV_INVOICE_UPLOAD_DISABLED_MESSAGE,
+  CSV_INVOICE_UPLOAD_ENABLED,
+} from "@/lib/import/csv-gate.mjs";
 import { PdfImportUpload } from "@/features/portal/PdfImportUpload";
+import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
+import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
 
 export const dynamic = "force-dynamic";
+/**
+ * Server akcije otpremanja sa ove strane rade u funkciji ove rute.
+ * Mora biti broj napisan ovde (Next ga čita statički); jednak je
+ * `UPLOAD_ROUTE_MAX_DURATION_S` iz `lib/import/upload-limits.mjs`, što
+ * proverava `lib/import/uploadLimits.test.mjs`.
+ */
+export const maxDuration = 60;
 
 const STATUS_LABELS: Record<string, string> = {
   u_toku: "u toku",
@@ -22,8 +36,9 @@ export default async function ImportsPage({
 }: {
   searchParams: Promise<{ uvoz?: string }>;
 }) {
-  await requireCapability("view:importi", "/portal/importi");
+  const user = await requireCapability("view:importi", "/portal/importi");
   const { uvoz } = await searchParams;
+  const recompute = await loadRecomputeStatus();
 
   const db = getDb();
   const runs = await db
@@ -52,9 +67,23 @@ export default async function ImportsPage({
         description="Svaki uvoz ostavlja trag: pročitani redovi, ispravni, upozorenja, greške i otisak fajla. Izvorni fajlovi se nikada ne menjaju."
       />
 
-      <PdfImportUpload />
+      <AutoRecomputeStatus status={recompute} canRetry={can(user, "recommendations:retry_auto")} />
 
-      <ImportUpload />
+      {/* Pregled uvoza je čitanje; otpremanje traži posebnu dozvolu (`imports:write`). */}
+      {can(user, "imports:write") ? (
+        <>
+          <PdfImportUpload />
+
+          {CSV_INVOICE_UPLOAD_ENABLED ? (
+            <ImportUpload />
+          ) : (
+            <section className="portal-panel">
+              <h2>Uvoz CSV izvoza</h2>
+              <p>{CSV_INVOICE_UPLOAD_DISABLED_MESSAGE}</p>
+            </section>
+          )}
+        </>
+      ) : null}
 
       <section className="portal-panel">
         <div className="portal-section-header">

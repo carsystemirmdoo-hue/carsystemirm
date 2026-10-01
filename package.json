@@ -250,7 +250,7 @@
     "content:check": "node scripts/check-content-copy.mjs",
     "content:check:html": "node scripts/check-rendered-contacts.mjs",
     "test:internal-routes": "node --test lib/internalDemoRoutes.test.mjs",
-    "test:content-copy": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/content-qa/contentCopyGuard.test.mjs lib/content-qa/companyContact.test.mts",
+    "test:content-copy": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/content-qa/contentCopyGuard.test.mjs lib/content-qa/companyContact.test.mts lib/content-qa/pdpCustomerCopy.test.mts",
     "test:commercial": "node --test lib/commercial/*.test.mjs",
     "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs",
     "test:pricing": "node --test lib/pricing/*.test.mjs",

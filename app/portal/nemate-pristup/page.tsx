@@ -14,7 +14,7 @@ export default async function NoAccessPage() {
     <PageHeader
       eyebrow="Pristup"
       title="Nalog još nema dodeljen pristup"
-      description={`Prijavljeni ste kao ${user.name}, ali Vaša uloga trenutno ne otvara nijedan ekran. Zatražite od Gazde dodelu odgovarajućeg paketa dozvola.`}
+      description={`Prijavljeni ste kao ${user.name}, ali Vaša uloga trenutno ne otvara nijedan ekran. Zatražite od Vlasnika dodelu odgovarajućeg paketa dozvola.`}
     />
   );
 }

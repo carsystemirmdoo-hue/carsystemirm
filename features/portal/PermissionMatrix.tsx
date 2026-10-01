@@ -130,7 +130,7 @@ export function PermissionMatrix({
           </label>
           {createNeedsToken ? (
             <label>
-              <span>Kod iz aplikacije (obavezno za ulogu „Gazda“)</span>
+              <span>Kod iz aplikacije (obavezno za ulogu „Vlasnik“)</span>
               <input
                 name="token"
                 value={createToken}
@@ -154,7 +154,7 @@ export function PermissionMatrix({
             disabled={pending || createTokenMissing}
             title={
               createTokenMissing
-                ? "Unesite kod iz aplikacije za ulogu „Gazda“"
+                ? "Unesite kod iz aplikacije za ulogu „Vlasnik“"
                 : "Otvorite nalog"
             }
           >
@@ -171,7 +171,7 @@ export function PermissionMatrix({
           <p>
             {canManage
               ? "Izmene važe odmah, bez ponovne prijave korisnika."
-              : "Pregled je dostupan, ali dozvole menja isključivo Gazda."}
+              : "Pregled je dostupan, ali dozvole menja isključivo Vlasnik."}
           </p>
         </div>
       </div>

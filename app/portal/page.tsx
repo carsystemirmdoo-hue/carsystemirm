@@ -39,7 +39,7 @@ export default async function PortalHomePage() {
             <h2>Vaš pristup</h2>
             <p>
               Uloga određuje osnovni pristup, a paketi dozvola ga proširuju.
-              Dodelu menja Gazda kroz Korisnike i dozvole.
+              Dodelu menja Vlasnik kroz Korisnike i dozvole.
             </p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default async function PortalHomePage() {
           "Prvi istorijski uvoz (nekoliko godina faktura) i zatim dnevni uvoz u 09:00.",
           "Za pokazatelje naplate je potreban odvojen, proveren izvor uplata — fakture ga ne sadrže.",
         ]}
-        phase="faza 2"
+        availability="Dostupno nakon povezivanja BiznisSoft izvoza"
       />
     </>
   );

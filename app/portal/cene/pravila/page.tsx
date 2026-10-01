@@ -61,7 +61,7 @@ export default async function PriceRulesPage() {
       <PageHeader
         eyebrow="Finansije"
         title="Pravila cene"
-        description="Komercijalista predlaže, gazda odobrava, kancelarija evidentira upis u BizniSoft. Nijedan korak ne zatvara krug sam."
+        description="Komercijalista predlaže, Vlasnik odobrava, kancelarija evidentira upis u BizniSoft. Nijedan korak ne zatvara krug sam."
       />
 
       {canPropose ? (

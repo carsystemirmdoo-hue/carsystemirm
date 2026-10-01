@@ -10,14 +10,15 @@ export function PhaseNotice({
   title,
   summary,
   requires,
-  phase,
+  availability,
 }: {
   icon?: PortalIconName;
   title: string;
   summary: string;
   /** Konkretni preduslovi: izvor podataka, pristupni podaci, uređaj. */
   requires: string[];
-  phase: string;
+  /** Kada ekran proradi, opisano preduslovom („Dostupno nakon …"), bez internih brojeva faza. */
+  availability: string;
 }) {
   return (
     <section className="portal-panel" data-accent="info">
@@ -35,7 +36,7 @@ export function PhaseNotice({
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="portal-phase-notice-tag">Planirano: {phase}</p>
+        <p className="portal-phase-notice-tag">{availability}</p>
       </div>
     </section>
   );

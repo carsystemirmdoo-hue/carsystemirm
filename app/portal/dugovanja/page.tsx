@@ -20,10 +20,10 @@ export default async function Page() {
         summary="Fakture ne sadrže podatak o plaćanju. Dok se ne poveže proveren izvor uplata, ovaj ekran ne prikazuje ni dugovanje, ni kašnjenje, ni procenat plaćenih na vreme — takve vrednosti bi bile izmišljene."
         requires={[
           "Proveren izvor uplata (izvod ili knjigovodstveni izvoz sa datumom plaćanja).",
-          "Uvoz faktura iz BiznisSoft izvoza (faza 2) — bez njega nema nijednog prodajnog podatka.",
+          "Uvoz faktura iz BiznisSoft izvoza — bez njega nema nijednog prodajnog podatka.",
           "Integracija sa bankom nije predviđena i nije uslov.",
         ]}
-        phase="kada izvor uplata bude dostupan"
+        availability="Dostupno nakon povezivanja statusa plaćanja"
       />
     </>
   );

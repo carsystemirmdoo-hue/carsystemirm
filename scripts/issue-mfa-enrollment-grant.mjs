@@ -58,7 +58,7 @@ try {
   if (!owner) {
     // Namerno ista poruka za „ne postoji", „nije gazda" i „nije aktivan":
     // alat se pokreće sa servera, ali ni tu nema razloga otkrivati stanje naloga.
-    console.error("Nije pronađen aktivan Gazda nalog sa tom e-poštom.");
+    console.error("Nije pronađen aktivan nalog sa ulogom Vlasnik i tom e-poštom.");
     process.exit(1);
   }
 

@@ -141,7 +141,7 @@ export function NoInvoicesYet({ screen }: { screen: string }) {
         "Kolone: pib, kupac, broj_dokumenta, datum, vrsta_dokumenta, sifra_artikla, kolicina, cena, iznos_stavke.",
         "Dozvola za uvoz — ekran Importi.",
       ]}
-      phase="uvoz je dostupan odmah"
+      availability="Uvoz je dostupan odmah, na ekranu Importi"
     />
   );
 }

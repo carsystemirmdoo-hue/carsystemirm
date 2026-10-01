@@ -42,7 +42,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             <i />
             Ovlašćeni pristup
           </span>
-          <small>Naloge otvara Gazda kroz Korisnike i dozvole</small>
+          <small>Naloge otvara Vlasnik kroz Korisnike i dozvole</small>
         </footer>
       </section>
 
@@ -152,7 +152,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
           <p className="portal-login-note">
             <PortalIcon name="lock" />
             <span>
-              Zaboravljenu lozinku menjate kodom koji izdaje Gazda —{" "}
+              Zaboravljenu lozinku menjate kodom koji izdaje Vlasnik —{" "}
               <Link href="/prijava/reset">unesite kod ovde</Link>. Posle više
               uzastopnih pogrešnih pokušaja nalog se privremeno zaključava.
             </span>

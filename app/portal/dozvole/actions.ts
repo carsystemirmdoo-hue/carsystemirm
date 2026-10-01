@@ -141,7 +141,7 @@ const createSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message:
-          "Otvaranje naloga sa ulogom „gazda“ traži svež kod iz aplikacije.",
+          "Otvaranje naloga sa ulogom „Vlasnik“ traži svež kod iz aplikacije.",
         path: ["token"],
       });
     }

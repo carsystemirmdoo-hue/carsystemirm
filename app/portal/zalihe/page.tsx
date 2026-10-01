@@ -19,11 +19,11 @@ export default async function Page() {
         title="Ekran čeka izvor podataka"
         summary="U postojećem sistemu ne postoji izvor stanja zaliha. Fakture ga ne sadrže i ne mogu ga zameniti."
         requires={[
-          "Izvor stanja zaliha — fakture ga ne sadrže, potreban je poseban uvoz (faza 4).",
+          "Izvor stanja zaliha — fakture ga ne sadrže, potreban je poseban uvoz.",
           "Datoteka sa trenutnim stanjem (XLSX ili CSV) ili pristup postojećoj evidenciji lagera.",
           "Istorija dana bez zalihe — bez nje preporuka nabavke ostaje označena kao nepouzdana.",
         ]}
-        phase="faza 4"
+        availability="Dostupno nakon uvoza podataka o zalihama"
       />
     </>
   );

@@ -17,12 +17,12 @@ export default async function Page() {
       <PhaseNotice
         icon="approval"
         title="Ekran čeka izvor podataka"
-        summary="Već poručene količine ulaze u sledeću preporuku nabavke da se ista roba ne bi poručila dvaput. Porudžbine kreira i potvrđuje isključivo Gazda."
+        summary="Već poručene količine ulaze u sledeću preporuku nabavke da se ista roba ne bi poručila dvaput. Porudžbine kreira i potvrđuje isključivo Vlasnik."
         requires={[
-          "Izvor stanja zaliha — fakture ga ne sadrže, potreban je poseban uvoz (faza 4).",
-          "Predlog nabavke iz faze 4.",
+          "Izvor stanja zaliha — fakture ga ne sadrže, potreban je poseban uvoz.",
+          "Predlog nabavke, koji zahteva podatke o zalihama.",
         ]}
-        phase="faza 4"
+        availability="Dostupno nakon uvoza podataka o zalihama"
       />
     </>
   );

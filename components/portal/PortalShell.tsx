@@ -288,7 +288,7 @@ export function PortalShell({
               className="portal-search-trigger"
               data-disabled="true"
               aria-disabled="true"
-              title="Pretraga se uključuje kada fakture budu uvezene (faza 2)"
+              title="Pretraga se uključuje kada fakture budu uvezene"
             >
               <PortalIcon name="search" />
               <span>Pretraga stiže sa uvozom faktura</span>

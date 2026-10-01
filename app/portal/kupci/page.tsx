@@ -103,7 +103,7 @@ export default async function CustomersPage() {
                 <tr>
                   <td colSpan={8}>
                     {scoped
-                      ? "Nemate dodeljenih kupaca. Dodelu radi Gazda."
+                      ? "Nemate dodeljenih kupaca. Dodelu radi Vlasnik."
                       : "Nema kupaca — uvezite fakture."}
                   </td>
                 </tr>

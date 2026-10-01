@@ -40,7 +40,7 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
         </div>
         <div className="portal-login-brand-copy">
           <span>PRISTUP ZA KUPCE</span>
-          <h1>Vaš nalog, vaši podaci.</h1>
+          <h1>Vaš nalog, Vaši podaci.</h1>
           <p>
             Nalog vidi isključivo podatke Vaše firme. Nalog otvara kancelarija —
             pristup se ne otvara samostalnom registracijom.

@@ -25,7 +25,7 @@ export async function importFileAction(
   _previous: ImportState,
   formData: FormData,
 ): Promise<ImportState> {
-  const user = await requireCapability("view:importi", "/portal/importi");
+  const user = await requireCapability("imports:write", "/portal/importi");
 
   const file = formData.get("fajl");
   if (!(file instanceof File) || file.size === 0) {

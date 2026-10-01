@@ -31,7 +31,7 @@ export async function importPdfAction(
   _previous: PdfImportState,
   formData: FormData,
 ): Promise<PdfImportState> {
-  const user = await requireCapability("view:importi", "/portal/importi");
+  const user = await requireCapability("imports:write", "/portal/importi");
 
   const issuerCode = String(formData.get("izdavalac") || "").trim();
   if (!issuerCode) {

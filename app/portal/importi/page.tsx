@@ -65,9 +65,14 @@ export default async function ImportsPage({
 
       <AutoRecomputeStatus status={recompute} canRetry={can(user, "recommendations:retry_auto")} />
 
-      <PdfImportUpload />
+      {/* Pregled uvoza je čitanje; otpremanje traži posebnu dozvolu (`imports:write`). */}
+      {can(user, "imports:write") ? (
+        <>
+          <PdfImportUpload />
 
-      <ImportUpload />
+          <ImportUpload />
+        </>
+      ) : null}
 
       <section className="portal-panel">
         <div className="portal-section-header">

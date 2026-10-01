@@ -10,7 +10,7 @@ import {
   loadConsentHistory,
   loadConsentState,
 } from "@/lib/customers/consent-service";
-import { CONSENT_PURPOSES } from "@/lib/customers/consent.mjs";
+import { CONSENT_LABELS, CONSENT_PURPOSES } from "@/lib/customers/consent.mjs";
 import { ConsentControls } from "./ConsentControls";
 import "../../portal/portal.css";
 
@@ -98,7 +98,9 @@ export default async function CustomerConsentsPage() {
                   <td>
                     {new Date(event.occurredAt).toLocaleString("sr-Latn-RS")}
                   </td>
-                  <td>{event.purpose}</td>
+                  <td>
+                    {CONSENT_LABELS[event.purpose as keyof typeof CONSENT_LABELS]?.title ?? event.purpose}
+                  </td>
                   <td>{ACTION_LABEL[event.action] ?? event.action}</td>
                   <td>{SOURCE_LABEL[event.source] ?? event.source}</td>
                   <td>{event.consentTextVersion}</td>

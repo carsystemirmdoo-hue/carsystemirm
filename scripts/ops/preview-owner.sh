@@ -4,8 +4,9 @@
 #   bash scripts/ops/preview-owner.sh "<e-adresa za prijavu>" "<ime i prezime>"
 #
 # - Lozinku kuca Vlasnik, skriveno, dvaput. Ne ide u fajl, istoriju ni ekran.
-# - Koristi postojeći `npm run db:seed` (tačno jedan nalog sa ulogom Vlasnik)
-#   i `scripts/issue-mfa-enrollment-grant.mjs` (jednokratna dozvola za drugi faktor).
+# - Koristi postojeći `npm run db:seed` (tačno jedan nalog sa ulogom Vlasnik).
+#   Dozvola za drugi faktor se izdaje posebno, kada je Preview dostupan:
+#   scripts/ops/preview-mfa-grant.sh (kod ide u lokalni fajl, ne na ekran).
 # - Adresa baze i MFA ključ se čitaju iz ~/.carsystem-secrets/preview-test.env;
 #   MFA ključ mora biti ISTI kao PORTAL_MFA_MASTER_KEY_V1 u Vercel Preview okruženju.
 set -euo pipefail
@@ -24,9 +25,7 @@ value() { grep -E "^$1=" "$FILE" | head -1 | cut -d= -f2-; }
 OWNER_URL="$(value NEON_OWNER_URL)"
 # postgres.js šalje nepoznate parametre adrese serveru; Neonov `channel_binding` bi oborio vezu.
 OWNER_URL="$(printf '%s' "$OWNER_URL" | sed -E 's/([?&])channel_binding=[^&]*&?/\1/; s/[?&]$//')"
-MFA_KEY="$(value PORTAL_MFA_MASTER_KEY_V1)"
 [ -n "$OWNER_URL" ] || { echo "NEON_OWNER_URL nije upisan u $FILE." >&2; exit 1; }
-[ -n "$MFA_KEY" ] || { echo "PORTAL_MFA_MASTER_KEY_V1 nije upisan u $FILE." >&2; exit 1; }
 case "$OWNER_URL" in
   *.eu-central-1.aws.neon.tech/*) ;;
   *) echo "NEON_OWNER_URL nije Neon u Frankfurtu — odbijeno." >&2; exit 1 ;;
@@ -49,8 +48,6 @@ BOOTSTRAP_ADMIN_NAME="$NAME" \
 unset PASSWORD
 
 echo
-echo "Jednokratna dozvola za vezivanje drugog faktora (prikazuje se samo sada):"
-DATABASE_URL="$OWNER_URL" \
-PORTAL_MFA_MASTER_KEY_V1="$MFA_KEY" \
-MFA_GRANT_EMAIL="$EMAIL" \
-  node scripts/issue-mfa-enrollment-grant.mjs
+echo "Nalog je napravljen. Dozvolu za drugi faktor izdajte tek kada je Preview dostupan"
+echo "(važi 30 minuta); kod se ne ispisuje, nego ide u lokalni fajl:"
+echo "  bash scripts/ops/preview-mfa-grant.sh issue \"$EMAIL\""

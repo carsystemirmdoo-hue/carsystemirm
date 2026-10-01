@@ -14,13 +14,13 @@ export default async function CustomerAccountsPage() {
   const canPropose = can(user, "customer_accounts:propose");
 
   /*
-   * Izbornik kupaca je skopiran na dodeljene.
+   * I spisak naloga i izbornik kupaca su skopirani na dodeljene.
    *
    * Komercijalista sme da predloži kontakt samo za svog kupca; obrazac zato ni
    * ne nudi tuđeg. Server to i sam proverava (`requireCustomerAccess`).
    */
   const [accounts, customerRows] = await Promise.all([
-    listCustomerAccounts(),
+    listCustomerAccounts(user),
     listScopedCustomers(user),
   ]);
   // Kapija se računa na serveru; ekran je samo prikazuje (i server je proverava ponovo).

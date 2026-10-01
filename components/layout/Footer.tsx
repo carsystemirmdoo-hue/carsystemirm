@@ -80,13 +80,15 @@ export function Footer() {
               <address className="mt-4 space-y-2 text-sm not-italic leading-6 text-muted-foreground">
                 <span className="block font-semibold text-foreground">{companyContact.name}</span>
                 <span className="block">{companyContact.locationLabel}</span>
-                <a
-                  className="cs-link-reveal block !text-muted-foreground transition-colors hover:!text-foreground"
-                  href={companyContact.phoneHref}
-                  data-cursor="link"
-                >
-                  {companyContact.phone}
-                </a>
+                {companyContact.phone && companyContact.phoneHref ? (
+                  <a
+                    className="cs-link-reveal block !text-muted-foreground transition-colors hover:!text-foreground"
+                    href={companyContact.phoneHref}
+                    data-cursor="link"
+                  >
+                    {companyContact.phone}
+                  </a>
+                ) : null}
                 <a
                   className="cs-link-reveal block !text-muted-foreground transition-colors hover:!text-foreground"
                   href={companyContact.emailHref}
@@ -94,7 +96,9 @@ export function Footer() {
                 >
                   {companyContact.email}
                 </a>
-                <span className="block">{companyContact.workingHours}</span>
+                {companyContact.workingHours ? (
+                  <span className="block">{companyContact.workingHours}</span>
+                ) : null}
               </address>
               <p className="mt-4 max-w-xs text-sm leading-6 text-muted-foreground">
                 {companyContact.editableNote}

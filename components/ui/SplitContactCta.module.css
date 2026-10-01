@@ -139,6 +139,18 @@
   }
 }
 
+/*
+ * Bez potvrđenog telefona nema reda za poziv: jedini red je upit, pa mreža ne
+ * sme da ga smesti u skupljeni `0fr` red niti da na hover doda razmak.
+ */
+.root[data-call="none"],
+.root[data-call="none"]:hover,
+.root[data-call="none"]:focus-within,
+.root[data-call="none"][data-pointer-active="true"] {
+  grid-template-rows: auto;
+  gap: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .root,
   .callSlot,

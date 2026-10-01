@@ -613,7 +613,7 @@ export function CarsystemHomePage() {
             <div className={styles.contactRows}>
               <span>
                 <b>Lokacija</b>
-                Inđija, Srbija
+                {companyContact.locationLabel}
               </span>
               <span>
                 <b>Upiti</b>
@@ -621,7 +621,11 @@ export function CarsystemHomePage() {
               </span>
               <span>
                 <b>Kontakt</b>
-                <a href={companyContact.phoneHref}>{companyContact.phone}</a>
+                {companyContact.phone && companyContact.phoneHref ? (
+                  <a href={companyContact.phoneHref}>{companyContact.phone}</a>
+                ) : (
+                  <a href={companyContact.emailHref}>{companyContact.email}</a>
+                )}
                 <small>ili pošaljite upit za prodavnicu, proizvode ili podršku</small>
               </span>
             </div>

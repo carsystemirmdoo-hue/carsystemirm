@@ -2,14 +2,15 @@ import type { CompanyContact } from "@/lib/company-contact";
 import styles from "./ContactPage.module.css";
 
 export function ContactInfoCard({ contact }: { contact: CompanyContact }) {
-  const rows = [
+  // Nepotvrđen podatak (null) se izostavlja — bez praznog reda i bez `tel:` linka.
+  const rows: Array<{ label: string; value: string | null; href?: string | null }> = [
     {
       label: "Telefon",
       value: contact.phone,
       href: contact.phoneHref,
     },
     {
-      label: "Email",
+      label: "E-pošta",
       value: contact.email,
       href: contact.emailHref,
     },
@@ -33,7 +34,7 @@ export function ContactInfoCard({ contact }: { contact: CompanyContact }) {
       </div>
 
       <dl className={styles.directoryGrid}>
-        {rows.map((row) => {
+        {rows.filter((row) => row.value).map((row) => {
           const value = row.href ? <a href={row.href}>{row.value}</a> : row.value;
 
           return (

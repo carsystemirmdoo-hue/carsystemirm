@@ -263,9 +263,11 @@ export function productGroupJsonLd(family: ProductFamily) {
       url: absoluteUrl(`/proizvodi/${variant.slug}`),
       // Interni ključ se ne emituje kao SKU (schema.org ga ne zahteva).
       sku: variant.catalogMetadata?.cosmosCode ?? publicSkuOf(variant) ?? undefined,
-      image: variant.productImage
-        ? absoluteUrl(variant.productImage.src)
-        : undefined,
+      // Isto pravilo kao `productJsonLd`: placeholder nije slika proizvoda.
+      image:
+        variant.productImage && !variant.productImage.src.includes("placeholder-product")
+          ? absoluteUrl(variant.productImage.src)
+          : undefined,
     })),
   };
 }

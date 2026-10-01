@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test, { after, before } from "node:test";
-import { initTestDatabase, QA_PREFIX, skipReason, type TestDatabase } from "./harness.mts";
+import { closeTestDatabase, initTestDatabase, QA_PREFIX, skipReason, type TestDatabase } from "./harness.mts";
 
 /**
  * `db/provisioning/runtime-role.sql` primenjen na stvarnu, migriranu bazu.
@@ -67,6 +67,11 @@ after(async () => {
   if (publicSchemaAcl.create) await db.sql.unsafe("GRANT CREATE ON SCHEMA public TO PUBLIC");
 });
 
+// Otvoren pool drži proces živim posle poslednjeg testa.
+after(async () => {
+  await closeTestDatabase();
+});
+
 test("skripta odbija nepostojeću ulogu", async (t) => {
   if (guard(t)) return;
   const missing = `${QA_PREFIX}_missing_${randomBytes(4).toString("hex")}`;
@@ -124,11 +129,15 @@ test("pod ulogom: čitanje radi, brisanje traga revizije je odbijeno", async (t)
     await tx.unsafe(`SET LOCAL ROLE "${role}"`);
     await tx.unsafe("SELECT count(*) FROM recommendation_results");
     await tx.unsafe("SELECT count(*) FROM effective_sales_ledger");
-    await tx.unsafe("SAVEPOINT s");
-    await assert.rejects(tx.unsafe("DELETE FROM audit_log WHERE false"), (error: { code?: string }) => {
-      assert.equal(error.code, "42501");
-      return true;
-    });
-    await tx.unsafe("ROLLBACK TO SAVEPOINT s");
+    // `savepoint` vraća transakciju u ispravno stanje posle odbijene naredbe.
+    await assert.rejects(
+      tx.savepoint((sp) => sp.unsafe("DELETE FROM audit_log WHERE false")),
+      (error: { code?: string }) => {
+        assert.equal(error.code, "42501");
+        return true;
+      },
+    );
+    // Posle odbijanja ista transakcija i dalje čita.
+    await tx.unsafe("SELECT count(*) FROM audit_log");
   });
 });

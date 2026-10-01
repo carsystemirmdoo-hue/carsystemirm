@@ -12,7 +12,7 @@ import { users } from "./users";
 
 /**
  * Paketi dozvola su podaci, a ne kod — Gazda ih dodeljuje pojedinačnim korisnicima
- * nezavisno od osnovne uloge. Miroslav Suljagić je Komercijalista sa paketom
+ * nezavisno od osnovne uloge. Primer Korisnik 2 je Komercijalista sa paketom
  * „analitika"; nigde ne postoji provera po imenu korisnika.
  */
 export const permissionPackages = pgTable("permission_packages", {

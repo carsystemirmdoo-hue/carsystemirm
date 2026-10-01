@@ -28,8 +28,8 @@ if (!password || password.length < 10) {
 /** @type {{email:string,name:string,role:string,packages:string[],note:string}[]} */
 const ACCOUNTS = [
   {
-    email: "aleksandar.novkovic@carsystem.local",
-    name: "Aleksandar Novković",
+    email: "korisnik1@carsystem.local",
+    name: "Primer Korisnik 1",
     role: "gazda",
     packages: [
       "analitika",
@@ -44,23 +44,23 @@ const ACCOUNTS = [
     note: "Vlasnik — potpun pristup, potvrda nabavke, limiti, administracija.",
   },
   {
-    email: "miroslav.suljagic@carsystem.local",
-    name: "Miroslav Suljagić",
+    email: "korisnik2@carsystem.local",
+    name: "Primer Korisnik 2",
     role: "komercijalista",
     // Bez „porucivanje“, „limiti“, „korisnici“, „pragovi“ i „zatvaranje“.
     packages: ["analitika", "nabavka_predlog"],
     note: "Komercijalista, region Jug + paket „Napredna analitika i izveštaji“.",
   },
   {
-    email: "aleksandar.s@carsystem.local",
-    name: "Aleksandar S.",
+    email: "korisnik3@carsystem.local",
+    name: "Primer Korisnik 3",
     role: "komercijalista",
     packages: [],
     note: "Komercijalista — samo dodeljeni kupci i sopstveni rezultati.",
   },
   {
-    email: "milan.vracar@carsystem.local",
-    name: "Milan Vračar",
+    email: "korisnik4@carsystem.local",
+    name: "Primer Korisnik 4",
     role: "komercijalista",
     packages: [],
     note: "Komercijalista — samo dodeljeni kupci i sopstveni rezultati.",
@@ -137,7 +137,7 @@ try {
   if (customers.length > 0) {
     const reps = await sql`
       SELECT id, email FROM users
-      WHERE email IN ('miroslav.suljagic@carsystem.local','aleksandar.s@carsystem.local','milan.vracar@carsystem.local')
+      WHERE email IN ('korisnik2@carsystem.local','korisnik3@carsystem.local','korisnik4@carsystem.local')
       ORDER BY email
     `;
     await sql`DELETE FROM customer_assignments WHERE user_id IN ${sql(reps.map((r) => r.id))}`;

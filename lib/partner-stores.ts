@@ -17,8 +17,19 @@ export function getAllPartnerStores() {
   return [...partnerStores];
 }
 
+/**
+ * Javni lokator prikazuje isključivo proverene lokacije (odluka vlasnika
+ * 2026-10-01, docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md GAP-003). Zapisi sa
+ * statusom `pending` su BEX kontakti za isporuku: ostaju u izvoru radi kasnije
+ * provere (docs/locations/UNVERIFIED_LOCATIONS_FOLLOW_UP.md), ali se ne
+ * predstavljaju kao prodavnice ni partneri.
+ */
+export function isPubliclyListedStore(store: PartnerStore) {
+  return store.isPublic && store.verificationStatus === "verified";
+}
+
 export function getPublicPartnerStores() {
-  return partnerStores.filter((store) => store.isPublic);
+  return partnerStores.filter(isPubliclyListedStore);
 }
 
 export function hasPartnerCoordinates(

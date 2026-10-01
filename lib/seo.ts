@@ -6,7 +6,7 @@ import type {
   PublicProgramGroup,
 } from "@/lib/carsystem-data";
 import { companyContact } from "@/lib/company-contact";
-import type { PartnerStore } from "@/lib/partner-stores";
+import { isPubliclyListedStore, type PartnerStore } from "@/lib/partner-stores";
 import type { ProductFamily } from "@/lib/product-families";
 import {
   buildPageMetadata,
@@ -412,7 +412,7 @@ export function productRelationshipJsonLd({
 
 export function localBusinessJsonLd(stores: PartnerStore[]) {
   const verifiedStores = stores.filter(
-    (store) => store.isPublic && store.verificationStatus === "verified",
+    (store) => isPubliclyListedStore(store),
   );
   const pageUrl = absoluteUrl("/prodavnice");
 

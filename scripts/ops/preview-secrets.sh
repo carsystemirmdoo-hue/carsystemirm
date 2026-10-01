@@ -4,6 +4,7 @@
 #   bash scripts/ops/preview-secrets.sh init     # napravi/dopuni fajl, ništa ne ispisuje
 #   bash scripts/ops/preview-secrets.sh status   # samo imena: postoji / nedostaje
 #   bash scripts/ops/preview-secrets.sh set NEON_OWNER_URL   # unos skriveno, bez ispisa
+#   bash scripts/ops/preview-secrets.sh copy DATABASE_URL    # vrednost za Vercel u clipboard, bez ispisa
 #
 # Fajl: ${CARSYSTEM_SECRETS_DIR:-~/.carsystem-secrets}/preview-test.env, prava 600.
 # Postojeća vrednost se nikad ne prepisuje. Vrednosti se nikad ne ispisuju.
@@ -64,6 +65,18 @@ case "${1:-status}" in
     unset value
     echo "$name upisan."
     ;;
+  copy)
+    # Ime je kako ga traži Vercel; vrednost se uzima iz fajla i ide samo u clipboard.
+    case "${2:-}" in
+      DATABASE_URL) src=PREVIEW_DATABASE_URL ;;
+      DATABASE_DIRECT_URL) src=PREVIEW_DATABASE_DIRECT_URL ;;
+      AUTH_SECRET|PORTAL_MFA_MASTER_KEY_V1|AUTH_RATE_LIMIT_HMAC_KEY) src="$2" ;;
+      *) echo "Dozvoljeno: DATABASE_URL DATABASE_DIRECT_URL AUTH_SECRET PORTAL_MFA_MASTER_KEY_V1 AUTH_RATE_LIMIT_HMAC_KEY" >&2; exit 2 ;;
+    esac
+    has "$src" || { echo "$src nije upisan u $FILE." >&2; exit 1; }
+    grep -E "^$src=" "$FILE" | head -1 | cut -d= -f2- | tr -d '\n' | pbcopy
+    echo "$2 je u clipboard-u (nije ispisan). Nalepite ga u Vercel, pa kopirajte nešto drugo."
+    ;;
   status)
     if [ ! -f "$FILE" ]; then echo "Fajl ne postoji: $FILE — pokrenite init."; exit 1; fi
     for name in "${GENERATED[@]}" "${MANUAL[@]}" "${DERIVED[@]}"; do
@@ -71,7 +84,7 @@ case "${1:-status}" in
     done
     ;;
   *)
-    echo "Upotreba: $0 init|status|set <IME>" >&2
+    echo "Upotreba: $0 init|status|set <IME>|copy <IME>" >&2
     exit 2
     ;;
 esac

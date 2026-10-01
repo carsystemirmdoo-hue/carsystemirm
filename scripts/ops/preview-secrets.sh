@@ -3,11 +3,13 @@
 #
 #   bash scripts/ops/preview-secrets.sh init     # napravi/dopuni fajl, ništa ne ispisuje
 #   bash scripts/ops/preview-secrets.sh status   # samo imena: postoji / nedostaje
+#   bash scripts/ops/preview-secrets.sh set NEON_OWNER_URL   # unos skriveno, bez ispisa
 #
 # Fajl: ${CARSYSTEM_SECRETS_DIR:-~/.carsystem-secrets}/preview-test.env, prava 600.
 # Postojeća vrednost se nikad ne prepisuje. Vrednosti se nikad ne ispisuju.
 # Ključevi su SAMO za Preview; produkcija dobija nove.
 set -euo pipefail
+umask 077
 
 DIR="${CARSYSTEM_SECRETS_DIR:-$HOME/.carsystem-secrets}"
 FILE="$DIR/preview-test.env"
@@ -48,6 +50,20 @@ case "${1:-status}" in
     echo "Fajl: $FILE (prava 600). Vrednosti nisu ispisane."
     "$0" status
     ;;
+  set)
+    name="${2:-}"
+    case " ${MANUAL[*]} " in *" $name "*) ;; *) echo "Dozvoljeno: ${MANUAL[*]}" >&2; exit 2 ;; esac
+    [ -f "$FILE" ] || { echo "Prvo: $0 init" >&2; exit 1; }
+    printf "Nalepite vrednost za %s (ne prikazuje se) i pritisnite Enter: " "$name"
+    read -rs value; echo
+    [ -n "$value" ] || { echo "Prazna vrednost — ništa nije upisano." >&2; exit 1; }
+    grep -v "^$name=" "$FILE" > "$FILE.tmp" || true
+    printf '%s=%s\n' "$name" "$value" >> "$FILE.tmp"
+    mv "$FILE.tmp" "$FILE"
+    chmod 600 "$FILE"
+    unset value
+    echo "$name upisan."
+    ;;
   status)
     if [ ! -f "$FILE" ]; then echo "Fajl ne postoji: $FILE — pokrenite init."; exit 1; fi
     for name in "${GENERATED[@]}" "${MANUAL[@]}" "${DERIVED[@]}"; do
@@ -55,7 +71,7 @@ case "${1:-status}" in
     done
     ;;
   *)
-    echo "Upotreba: $0 init|status" >&2
+    echo "Upotreba: $0 init|status|set <IME>" >&2
     exit 2
     ;;
 esac

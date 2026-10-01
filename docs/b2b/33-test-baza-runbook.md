@@ -88,16 +88,34 @@ sa vrednostima u okruženju terminala (ne u fajlu koji se commituje).
           has_table_privilege('carsystem_app','recommendation_results','INSERT'),
           has_table_privilege('carsystem_app','effective_sales_ledger','SELECT');
    ```
-4. **Prvi nalog Vlasnika** — jednom, pa obrisati vrednosti iz terminala:
+4. **Prvi nalog Vlasnika** — postojeći postupak (`db/seed.mjs`), jednom po bazi.
+   Ime i e-adresu za prijavu dostavila je firma (2026-10-01); **ne upisuju se u
+   repozitorijum**. Lozinku kuca **sam Vlasnik**, skriveno, u istom terminalu —
+   ne ide u chat, e-poštu, fajl ni istoriju komandi:
    ```bash
-   DATABASE_URL="<direktna adresa vlasnika>" BOOTSTRAP_ADMIN_EMAIL=… BOOTSTRAP_ADMIN_PASSWORD=… BOOTSTRAP_ADMIN_NAME=… npm run db:seed
+   read -rs BOOTSTRAP_ADMIN_PASSWORD && export BOOTSTRAP_ADMIN_PASSWORD
+   DATABASE_URL="<direktna adresa vlasnika šeme>" \
+   BOOTSTRAP_ADMIN_EMAIL="<e-adresa Vlasnika za prijavu>" \
+   BOOTSTRAP_ADMIN_NAME="<ime i prezime Vlasnika>" \
+   npm run db:seed
+   unset BOOTSTRAP_ADMIN_PASSWORD
    ```
-   Lozinku bira sam Vlasnik (najmanje 10 znakova; predlog 16+).
+   Lozinka najmanje 10 znakova (predlog 16+, iz menadžera lozinki). Seed pravi
+   tačno jedan nalog sa ulogom Vlasnik i sve pakete; ponovno pokretanje ne pravi
+   drugi nalog za istu adresu. Na Vercel se `BOOTSTRAP_ADMIN_*` **nikad** ne
+   upisuju.
 5. **Dozvola za vezivanje drugog faktora** (u režimu `enforced` nalog bez
-   faktora ne može da se prijavi bez nje):
+   faktora ne može da se prijavi bez nje); isti ključ kao u Vercel okruženju te
+   baze, unet skriveno:
    ```bash
-   DATABASE_URL="<direktna adresa vlasnika>" PORTAL_MFA_MASTER_KEY_V1="<isti ključ kao na Vercel-u>" MFA_GRANT_EMAIL=… node scripts/issue-mfa-enrollment-grant.mjs
+   read -rs PORTAL_MFA_MASTER_KEY_V1 && export PORTAL_MFA_MASTER_KEY_V1
+   DATABASE_URL="<direktna adresa vlasnika šeme>" \
+   MFA_GRANT_EMAIL="<e-adresa Vlasnika za prijavu>" \
+   node scripts/issue-mfa-enrollment-grant.mjs
+   unset PORTAL_MFA_MASTER_KEY_V1
    ```
+   Vlasnik se zatim prijavljuje na Preview adresi i vezuje aplikaciju za
+   jednokratne kodove; kodove za oporavak čuva van računara.
 6. **Vercel promenljive** (§6) — tek posle odobrenja za izmenu Vercel-a.
 7. **Provera** (§7).
 

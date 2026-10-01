@@ -1,13 +1,36 @@
 # 32 — Postavljanje na firmin Vercel nalog
 
-Status: **pripremljeno, ništa nije izvršeno.** Firma je otvorila Vercel nalog.
-Kod za izdanje je lokalna grana `release/portal-2026-10` (`28-…` A5); ništa
-nije poslato na GitHub niti postavljeno. Svaki korak ispod koji dira firmin
-nalog, bazu ili domen radi se tek posle vašeg odobrenja.
+Status (ažurirano 2026-10-01): **portal nije postavljen nigde.** Kod za izdanje
+je lokalna grana `integration/portal-on-main-2026-10` (main 2e67921 + portal
+F1–F10 + ispravke iz audita; sačuvana i kao proveren bundle van repoa). Ništa
+od nje nije poslato na GitHub. Svaki korak ispod koji dira firmin nalog, bazu,
+domen ili DNS radi se tek posle vašeg odobrenja.
 
-Zatečeno: postojeći projekat `carsystemirm` je na **ličnom** Vercel nalogu
-(`miles-projects`) i povezan sa GitHub repozitorijumom
-`posteriumin-ship-it/carsystemirm`; ima samo zaštitu pristupa, bez baze.
+Zatečeno prema podacima koje je dostavio vlasnik projekta (Vercel nije otvaran
+iz ove sesije):
+- Firmin Vercel tim **CARSYSTEM** (`vercel.com/carsystem1`), plan **Hobby**.
+- Projekat `carsystemirm` na firminom timu, povezan sa
+  `carsystemirmdoo-hue/carsystemirm`, deployment `main` 2e67921 uspešan;
+  `MAINTENANCE_MODE=true` i `SITE_ACCESS_PASSWORD` postavljeni; baze nema.
+- Domen `carsystemirm.com` prebačen na firmin Vercel nalog; povezivanje sa
+  projektom se još proverava. Stari projekat na ličnom nalogu ostaje kao rezerva.
+- Pristup DNS-u kod Burina.net ima vlasnik projekta.
+
+## Stanje podataka iz spiska A (2026-10-01)
+
+| # | Stanje |
+|---|---|
+| 1 Tim | ✅ CARSYSTEM, `vercel.com/carsystem1` |
+| 2 Plan i naplata | ⏳ Hobby; po uslovima Vercela Hobby je za nekomercijalnu upotrebu → odluka o Pro i vlasniku naplate |
+| 3 Poziv za naš nalog | nije potvrđeno |
+| 4 GitHub | ✅ `carsystemirmdoo-hue/carsystemirm` |
+| 5 Baza i backup | ⏳ odluka (vidi `33-test-baza-runbook.md`) |
+| 6 Domen | ✅ `carsystemirm.com` (da li i `www` — nije potvrđeno) |
+| 7 DNS / e-pošta na domenu | ✅ pristup DNS-u postoji; MX zapisi nisu provereni |
+| 8 Prvi nalog Vlasnika | ✅ ime i e-adresa za prijavu dostavljeni — čuvaju se **van repozitorijuma**; postupak u `33-…` §5 |
+| 9 Kontakt firme | ✅ primenjeno u `lib/company-contact.ts` (telefon, e-pošta, radno vreme, adresa, PIB, MB) |
+| 10 Slanje e-pošte | ⏳ odluka; do tada ručno predavanje iz `customer_message_outbox` |
+| 11 Računar za konektor | kasnije |
 
 ## A. Podaci koje firma treba da dostavi
 
@@ -30,8 +53,10 @@ pri postavljanju i upisujemo direktno u Vercel; ne idu u chat, e-poštu ni repoz
 
 ## B. Koraci postavljanja (posle A1–A8 i vašeg odobrenja)
 
-1. **Grana u repozitorijumu:** `release/portal-2026-10` se šalje na GitHub kao
-   jedan PR ka `main` (pregled, CI). Spajanje je vaša odluka.
+1. **Grana u repozitorijumu:** `integration/portal-on-main-2026-10` se šalje na
+   GitHub kao jedan PR ka `main` (pregled, CI). Pre slanja odlučiti kako se
+   sprečava Vercel Preview build grane (npr. `git.deploymentEnabled` u
+   `vercel.json` ili podešavanje projekta). Spajanje je vaša odluka.
 2. **Projekat u timu firme:** Import repozitorijuma → framework Next.js,
    build `npm run build`, Node 22+, region funkcija **fra1**.
 3. **Baza (Marketplace u timu):** kreirati bazu u Frankfurtu; Production i
@@ -44,11 +69,12 @@ pri postavljanju i upisujemo direktno u Vercel; ne idu u chat, e-poštu ni repoz
    `AUTH_URL`/`NEXT_PUBLIC_SITE_URL` = `*.vercel.app` adresa dok domen ne pređe.
 6. **Migracije 0000–0032** sa lokalnog računara nad praznom bazom:
    `MIGRATION_DATABASE_URL=… npm run db:migrate`, zatim runtime rola, zatim
-   jednokratni `npm run db:seed` sa `BOOTSTRAP_ADMIN_*` (A8) — pa te promenljive obrisati.
+   prvi nalog Vlasnika po `33-test-baza-runbook.md` §5 (lozinku kuca sam
+   Vlasnik, skriveno; zatim dozvola za vezivanje drugog faktora).
 7. **Prvi deploy** (zaključan). Provere iz `28-…` A6 na `*.vercel.app`:
    prijava gazde + drugi faktor, runtime rola bez brisanja traga, zaglavlja
    (`29-…`), `qa:pg` nad Preview bazom.
-8. **Kontakt podaci (A9)** u `lib/company-contact.ts` — izmena koda, novi deploy.
+8. **Kontakt podaci (A9)** — ✅ urađeno u kodu (2026-10-01); stiže sa granom.
 9. **Domen (poslednje):** dodati domen u projekat firme, DNS zapise kod
    Burina.net po uputstvu Vercela, **bez diranja MX zapisa**; zatim
    `AUTH_URL`/`NEXT_PUBLIC_SITE_URL` na produkcioni domen. Stari projekat na

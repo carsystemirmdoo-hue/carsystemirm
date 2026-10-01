@@ -2087,16 +2087,16 @@ const productRecords: CarsystemProduct[] = [
         content: {
           title: "Koristi se zajedno sa",
           description:
-            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom i lokalnim product zapisom.",
+            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom.",
           items: [
             {
               productSlug: "carsystem-interface-pad",
-              note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
+              note: "Zvanično preporučen uz F.23.",
               reviewStatus: "needs_confirmation",
             },
             {
               productSlug: "carsystem-excenter-back-pad-t-19",
-              note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
+              note: "Zvanično preporučen uz F.23.",
               reviewStatus: "needs_confirmation",
             },
           ],

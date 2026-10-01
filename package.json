@@ -207,7 +207,7 @@
     "test:integration": "tsx --test --test-concurrency=1 --tsconfig db/integration/tsconfig.test.json db/integration/*.integration.test.mts",
     "test:mfa-policy": "node --test lib/auth/mfaPolicy.test.mjs",
     "test:enrollment-isolation": "node --test lib/authz/enrollmentIsolation.test.mjs",
-    "test:db-safety": "node --test db/integration/safety.test.mjs",
+    "test:db-safety": "node --test db/integration/safety.test.mjs db/provisioning/runtimeRole.test.mjs",
     "test:qa-env": "node --test scripts/qa/qaEnv.test.mjs scripts/qa/browserQaContract.test.mjs",
     "qa:pg:migrate": "node scripts/qa/migrate-test-db.mjs",
     "qa:pg": "npm run qa:pg:preflight && npm run qa:pg:migrate && npm run qa:pg:reset && npm run test:integration && npm run qa:pg:browser",

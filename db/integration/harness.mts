@@ -125,6 +125,12 @@ export async function initTestDatabase(): Promise<TestDatabase> {
 
   // Tek sada produkcijski `getDb()` sme da gađa ovu bazu, i to samo ovde.
   process.env.DATABASE_URL = url;
+  /*
+   * `getDirectDb()` (zaštita Vlasnika) bi sa postavljenom DATABASE_DIRECT_URL
+   * otvorio vezu ka TOJ bazi, mimo svih provera iznad. U test procesu direktna
+   * veza ne postoji: brišemo je, pa i zaštićene radnje idu na test bazu.
+   */
+  delete process.env.DATABASE_DIRECT_URL;
   installInstrumentedDb(url);
 
   cached = {

@@ -1,6 +1,6 @@
 import "server-only";
 import { and, eq, ne, sql } from "drizzle-orm";
-import { getDb } from "@/db/client";
+import { getDb, getDirectDb } from "@/db/client";
 import { users } from "@/db/schema";
 import { clientIpFromRequest } from "@/lib/auth/client-ip";
 import { verifyTotpForUser } from "@/lib/auth/mfa-service";
@@ -212,6 +212,10 @@ export type Tx = Parameters<
  *
  * `mutate` se izvršava unutar iste transakcije — provera i upis ne mogu se
  * razdvojiti.
+ *
+ * Transakcija ide DIREKTNOM vezom (`getDirectDb`, `DATABASE_DIRECT_URL`), ne
+ * kroz spojnicu kojom ide ostatak aplikacije. Bez te promenljive koristi se
+ * glavna veza, a provera u `pg_locks` ispod odbija radnju ako brava ne drži.
  */
 export async function withOwnerGuard<T>(
   input: {
@@ -221,7 +225,7 @@ export async function withOwnerGuard<T>(
   },
   mutate: (tx: Tx) => Promise<T>,
 ): Promise<T> {
-  return getDb().transaction(async (tx) => {
+  return getDirectDb().transaction(async (tx) => {
     /*
      * Ključ se šalje kao `bigint`.
      *

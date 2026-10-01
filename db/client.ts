@@ -36,6 +36,8 @@ function createDatabase(client: PoolClient) {
 const globalForDb = globalThis as unknown as {
   carsystemDb?: Database;
   carsystemDbClient?: PoolClient;
+  carsystemDirectDb?: Database;
+  carsystemDirectDbClient?: PoolClient;
 };
 
 /**
@@ -60,6 +62,53 @@ export function getDb(): Database {
 }
 
 /**
+ * Adresa direktne veze, ili `null` kada je ne treba otvarati posebno.
+ *
+ * Čista funkcija nad promenljivim okruženja, da bi bila proveriva bez baze.
+ * `null` znači „koristi `getDb()`": promenljiva nije postavljena, ili je ista
+ * kao `DATABASE_URL` (tada je i glavna veza već direktna).
+ */
+export function directConnectionString(env: {
+  DATABASE_URL?: string;
+  DATABASE_DIRECT_URL?: string;
+}): string | null {
+  const direct = env.DATABASE_DIRECT_URL?.trim();
+  if (!direct) return null;
+  if (direct === env.DATABASE_URL?.trim()) return null;
+  return direct;
+}
+
+/**
+ * Direktna veza (bez spojnice/pooler-a) za radnje kojima transaction pooler
+ * nije dovoljan — danas samo zaštita poslednjeg naloga Vlasnika
+ * (`withOwnerGuard`, `pg_advisory_xact_lock` + provera u `pg_locks`).
+ *
+ * `DATABASE_URL` na Vercelu treba da bude pooled adresa (mnogo kratkih
+ * funkcija), a `DATABASE_DIRECT_URL` direktna adresa iste baze, sa istom
+ * runtime ulogom. Bez nje se koristi `getDb()`; ako je tada glavna veza
+ * pooled, `withOwnerGuard` to otkrije i ODBIJE radnju — nikad je ne izvrši bez
+ * zaštite. Pool je namerno mali: ove radnje su retke.
+ */
+export function getDirectDb(): Database {
+  const connectionString = directConnectionString({
+    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_DIRECT_URL: process.env.DATABASE_DIRECT_URL,
+  });
+  if (!connectionString) return getDb();
+  if (globalForDb.carsystemDirectDb) return globalForDb.carsystemDirectDb;
+
+  const client = postgres(connectionString, {
+    max: Number(process.env.DATABASE_DIRECT_POOL_MAX ?? 2),
+    idle_timeout: 20,
+    prepare: false,
+  });
+  const db = createDatabase(client);
+  globalForDb.carsystemDirectDb = db;
+  globalForDb.carsystemDirectDbClient = client;
+  return db;
+}
+
+/**
  * Zatvara pool i briše keš, pa sledeći `getDb()` pravi nov.
  *
  * Za skripte, testove i gašenje procesa. Aplikacija ga ne zove po zahtevu —
@@ -70,6 +119,12 @@ export function getDb(): Database {
  * otvorio, i njen vlasnik je zatvara sam.
  */
 export async function closeDb(timeoutSeconds = 5): Promise<void> {
+  const direct = globalForDb.carsystemDirectDbClient;
+  if (direct) {
+    delete globalForDb.carsystemDirectDb;
+    delete globalForDb.carsystemDirectDbClient;
+    await direct.end({ timeout: timeoutSeconds });
+  }
   const client = globalForDb.carsystemDbClient;
   if (!client) return;
   delete globalForDb.carsystemDb;

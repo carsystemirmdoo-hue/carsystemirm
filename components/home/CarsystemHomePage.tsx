@@ -152,7 +152,15 @@ export function CarsystemHomePage() {
     let scrollFrame = 0;
 
     function updateMobileLocator() {
-      setShowMobileLocator(window.scrollY > window.innerHeight * 0.72);
+      // Kada je futer na ekranu, traka bi prekrila njegov poslednji red
+      // (pravni podaci firme), pa se tada sklanja.
+      const footer = document.querySelector("footer.cs-animated-footer");
+      const footerInView =
+        footer !== null &&
+        footer.getBoundingClientRect().top < window.innerHeight;
+      setShowMobileLocator(
+        window.scrollY > window.innerHeight * 0.72 && !footerInView,
+      );
     }
 
     function requestMobileLocatorUpdate() {

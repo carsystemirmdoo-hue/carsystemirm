@@ -77,7 +77,7 @@ ne ispisuju.
 
 1. **Neon** (čovek): nalog firme → projekat po §3 → u „Connect" isključiti
    *Connection pooling* i kopirati adresu za `neondb_owner` / `neondb`.
-2. `preview-secrets.sh init`, pa nalepiti tu adresu u `NEON_OWNER_URL` u fajlu.
+2. `bash scripts/ops/preview-secrets.sh set NEON_OWNER_URL` — adresa se nalepi skriveno (fajl je već napravljen sa `init`).
 3. `preview-db.mts all` — mora se završiti bez ijednog ✖.
 4. `preview-owner.sh` — Vlasnik (prvi nalog), lozinka skriveno; zapiše
    jednokratni kod za drugi faktor.

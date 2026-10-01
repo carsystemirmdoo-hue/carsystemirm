@@ -297,7 +297,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                   <div className={styles.summaryActions}>
                     {selectedStore.phone ? (
                       <a className={styles.summaryCall} href={telHref(selectedStore.phone)}>
-                        Pozovi
+                        Pozovite
                       </a>
                     ) : null}
                     {routeHref(selectedStore) ? (
@@ -390,7 +390,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                           data-motion="theme-wipe"
                           href={telHref(store.phone)}
                         >
-                          <span>Pozovi</span>
+                          <span>Pozovite</span>
                         </a>
                       ) : null}
                       {routeHref(store) ? (

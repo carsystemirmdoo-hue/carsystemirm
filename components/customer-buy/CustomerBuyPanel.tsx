@@ -244,7 +244,12 @@ function Contacts({ data }: { data: OffersPayload }) {
           <br />
         </>
       ) : null}
-      Kancelarija: <a href={`tel:${data.contacts.office.phone.replace(/\s+/g, "")}`}>{data.contacts.office.phone}</a> ·{" "}
+      Kancelarija:{" "}
+      {data.contacts.office.phone && data.contacts.office.phoneHref ? (
+        <>
+          <a href={data.contacts.office.phoneHref}>{data.contacts.office.phone}</a> ·{" "}
+        </>
+      ) : null}
       <a href={`mailto:${data.contacts.office.email}`}>{data.contacts.office.email}</a>
     </p>
   );

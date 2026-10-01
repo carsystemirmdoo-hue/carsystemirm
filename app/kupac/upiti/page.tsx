@@ -45,7 +45,12 @@ export default async function CustomerPriceRequestsPage() {
             : "nije dodeljen"}
         </span>
         <span>
-          Kancelarija: <a href={companyContact.phoneHref}>{companyContact.phone}</a> ·{" "}
+          Kancelarija:{" "}
+          {companyContact.phone && companyContact.phoneHref ? (
+            <>
+              <a href={companyContact.phoneHref}>{companyContact.phone}</a> ·{" "}
+            </>
+          ) : null}
           <a href={companyContact.emailHref}>{companyContact.email}</a>
         </span>
       </div>

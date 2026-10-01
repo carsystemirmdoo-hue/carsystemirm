@@ -10,7 +10,7 @@ export type OffersPayload = {
   demo: boolean;
   ordering: { enabled: true; priceList: { name: string; kind: "demo" | "biznisoft"; currency: string } } | { enabled: false; reason: string };
   offers: CatalogOffer[];
-  contacts: { reps: { name: string; email: string }[]; office: { phone: string; email: string } };
+  contacts: { reps: { name: string; email: string }[]; office: { phone: string | null; phoneHref: string | null; email: string } };
 };
 
 /*

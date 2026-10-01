@@ -19,8 +19,11 @@ const baseArg = process.argv.indexOf("--base");
 const BASE = (baseArg > 0 ? process.argv[baseArg + 1] : secrets.PREVIEW_URL || "").replace(/\/$/, "");
 if (!BASE) throw new Error("PREVIEW_URL nije upisan (ili --base).");
 const bypass = secrets.VERCEL_BYPASS_TOKEN || "";
-const headers: Record<string, string> = bypass
-  ? { "x-vercel-protection-bypass": bypass, "x-vercel-set-bypass-cookie": "samesitenone" }
+// HTTP provere šalju samo ključ; zaglavlje za kolačić bi izazvalo 307 na istu adresu
+// (Vercel tako postavlja kolačić), pa ga dobija samo pregledač.
+const headers: Record<string, string> = bypass ? { "x-vercel-protection-bypass": bypass } : {};
+const browserHeaders: Record<string, string> = bypass
+  ? { ...headers, "x-vercel-set-bypass-cookie": "samesitenone" }
   : {};
 
 let failed = 0;
@@ -68,7 +71,7 @@ async function httpChecks() {
 /* ---------------------------------------------------------- browser */
 
 async function newPage(browser: Browser): Promise<Page> {
-  const context = await browser.newContext({ extraHTTPHeaders: headers, locale: "sr-RS" });
+  const context = await browser.newContext({ extraHTTPHeaders: browserHeaders, locale: "sr-RS" });
   return context.newPage();
 }
 

@@ -179,7 +179,7 @@ export function ContactForm({
       )}&body=${encodeURIComponent(body)}`;
       setSubmitState("blocked");
       setSubmitNotice(
-        "Otvoren je Vaš program za e-poštu sa pripremljenim upitom. Proverite poruku i pošaljite je iz tog programa — sajt je ne šalje automatski.",
+        `Poruka još nije poslata. U Vašem programu za e-poštu otvoren je pripremljen upit za ${contact.email} — proverite ga i pošaljite iz tog programa.`,
       );
     }, 140);
   }
@@ -376,8 +376,8 @@ export function ContactForm({
                 <span>{submitState === "submitting" ? "Priprema..." : "Pripremite upit"}</span>
               </button>
               <p>
-                Upit se otvara kao pripremljena poruka u Vašem programu za e-poštu,
-                odakle je šaljete.
+                Upit se otvara kao pripremljena poruka u Vašem programu za e-poštu.
+                Poruka nije poslata dok je ne pošaljete iz tog programa.
               </p>
             </div>
 

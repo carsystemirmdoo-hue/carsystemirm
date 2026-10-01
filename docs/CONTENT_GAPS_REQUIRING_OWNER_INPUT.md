@@ -11,11 +11,11 @@ izvorom ili bezbednim pravilom projekta; dokazi i istorija pitanja su sačuvani.
 
 | Status | Stavke |
 |---|---|
-| `RESOLVED_BY_OWNER_CONFIRMATION` | GAP-001, 002, 005, 012, 013, 014 |
+| `RESOLVED_BY_OWNER_CONFIRMATION` | GAP-001, 002, 005, 009 (prevodi i tri ispravke primenjeni 2026-10-01), 012, 013, 014 |
 | `RESOLVED_FROM_PUBLIC_SOURCES` | GAP-010, 011 |
 | `RESOLVED_BY_SAFE_PROJECT_POLICY` | GAP-003, 004 (`SAFE_DEFAULT_APPLIED`), 007, 008 |
 | `DEFERRED_NON_PUBLIC_DATA` | naknadna provera 82 neproverene lokacije (GAP-003) — `docs/locations/UNVERIFIED_LOCATIONS_FOLLOW_UP.md` |
-| `ADVISORY_REVIEW_RECOMMENDED` | GAP-006 (pravna revizija teksta saglasnosti), GAP-009 (stručni pregled prevoda; primena čeka pregled tabele) |
+| `ADVISORY_REVIEW_RECOMMENDED` | GAP-006 (pravna revizija teksta saglasnosti); GAP-009 — novi nalaz parsiranja baslac 40-440/40-450 (sušenje bez vremena) čeka odobrenje |
 
 Statusne oznake: `RESOLVED_BY_OWNER_CONFIRMATION` — direktna odluka ili potvrda
 firme; `RESOLVED_FROM_PUBLIC_SOURCES` — dva saglasna javna izvora ili zvaničan
@@ -35,7 +35,7 @@ blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni
 | GAP-006 Saglasnost | ADVISORY_REVIEW_RECOMMENDED | ZZPL čl. 15 (opoziv jednako jednostavan kao pristanak) | Ne — nova verzija teksta traži odobrenje |
 | GAP-007 Slanje forme | RESOLVED_BY_SAFE_PROJECT_POLICY | Nema API rute ni servisa; potvrđeno sanduče je Gmail | Ne — poslovna i troškovna odluka |
 | GAP-008 Demo rute | RESOLVED_BY_SAFE_PROJECT_POLICY | Produkcija danas: 307 → maintenance | Ne — odluka pre otvaranja sajta |
-| GAP-009 TDS na engleskom | ADVISORY_REVIEW_RECOMMENDED | Zvanični TDS samo EN (baslac i DE); srpska verzija ne postoji | Ne — prevod mora odobriti stručno lice |
+| GAP-009 TDS na engleskom | RESOLVED_BY_OWNER_CONFIRMATION | Zvanični TDS samo EN (baslac i DE); srpska verzija ne postoji | Ne — prevod mora odobriti stručno lice |
 | GAP-010 Video kartica | RESOLVED_FROM_PUBLIC_SOURCES | Zvaničan kanal `youtube.com/carsystem_refinish` (link sa carsystem.org) | Delimično — kandidat postoji, izbor je odluka |
 | GAP-011 Tačka na mapi | RESOLVED_FROM_PUBLIC_SOURCES | OSM zgrada (way 799359269) na 45.0496189, 20.0654391 = BEX geokod | Skoro — dva nezavisna izvora; potrebna potvrda ulaza |
 | GAP-012 „faza N" | RESOLVED_BY_OWNER_CONFIRMATION | — (interno) | Ne |
@@ -276,7 +276,7 @@ blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni
 
 ## GAP-009 — Neprevedena tehnička uputstva iz tehničkih listova (TDS)
 
-- Status: `ADVISORY_REVIEW_RECOMMENDED`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION` (primenjeno 2026-10-01)
 - Prioritet: `MEDIUM`
 - Oblast: `tekst`
 - Vidljivost: `javno`
@@ -301,9 +301,44 @@ blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni
 - Prvobitno pitanje (istorija): Da li ove rečenice treba prevesti na srpski (i ko odobrava prevod), ili ostaju na engleskom kao citat iz TDS-a?
 - Očekivani format odgovora: „prevesti — odobrava [ime/uloga]" ili „ostaje original".
 - Prvobitni predlog (istorija): „Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm."
-- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): konzervativan srpski prevod vidljivih tekstualnih polja kroz izvor istine sync-a, original sa izvorom u provenance-u, dva sync prolaza sa drugim 0-diff i oznaka za stručni pregled. **Primena čeka pregled tabele predloženih prevoda** (tražen pre primene) — vidi „Predlog prevoda" ispod. Ne blokira Production.
+- Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): konzervativan srpski prevod vidljivih tekstualnih polja kroz izvor istine sync-a, original sa izvorom u provenance-u, dva sync prolaza sa drugim 0-diff i oznaka za stručni pregled. Tabela odobrena 2026-10-01 i primenjena kroz izvor istine sync-a (vidi „Primena" ispod), zajedno sa tri ispravke parsiranja. Ne blokira Production.
 
-### Predlog prevoda (GAP-009) — čeka pregled pre primene
+### Primena (2026-10-01)
+
+Izvor istine: `data/norbin-sync/technical-localization.json`, `data/baslac-sync/technical-localization.json`,
+`data/rm-sync/technical-localization.json` (format i pravila: `scripts/lib/technical-localization.mjs`).
+Ključ je zvanična šifra; svaka stavka nosi doslovni original, srpski tekst, vrstu (`translation` /
+`parser-correction`) i TDS izvor (URL, strana, odeljak). Apply upisuje srpski tekst u `technical` i
+original sa izvorom u `technicalLocalization` zapisa (provenance, ne prikazuje se). Pravilo koje više ne
+pogađa izvor obara `<brend>:sync:apply`, pa se zastareo prevod nikad ne primeni tiho. Dva sync prolaza,
+drugi 0 diff, za sva tri brenda; promena generisanog kataloga ograničena je na pogođena polja 18 zapisa.
+Regresija: `lib/content-qa/releaseRegression.test.mts`.
+
+Pre primene je svaki red ponovo upoređen sa zvaničnim TDS PDF-om (preuzetim 2026-10-01). Razlike u odnosu
+na predlog ispod:
+
+- „suvo na prašinu" je zadržano kako je vlasnik naveo; u redu 6 i 15 oblik je „suvo na prašinu posle N".
+- Red 12: „45 Line" ostaje u zvaničnom obliku (naziv se ne prevodi): „Bez otparavanja pre nanošenja 45 Line."
+- Red 13: „20°C: 4 h · suvo na prašinu posle 2 h" (dve vrednosti, bez dvotačke unutar vrednosti).
+- Red 14: TDS kaže „Possibility to speed up the process with additional air flow" — parser je odsekao kraj;
+  prevod je veran celom iskazu: „(proces se može ubrzati dodatnim protokom vazduha)".
+- Red 17: TDS daje zapreminski odnos C 2A40 100 % : H 2A20 100 % + R 2A20/R 2A10 20 %; prikaz
+  „1:1 + 20% zapreminski (lak : učvršćivač + razređivač)".
+- Temperatura u obliku „20°C" (preovlađuje u katalogu), rasponi sa crticom kao u izvoru („2-3 min").
+- Dodatno pronađena 3 iskaza iste vrste pri ponovnoj proveri renderovanog HTML-a (nisu bila u tabeli),
+  prevedena po istim pravilima: Norbin N55-015 i baslac 21-10 „15 min before filler application" → „15 min
+  pre nanošenja punila"; baslac 21-20 „15 min,before applying baslac 20-24/34/94 filler" → „15 min pre
+  nanošenja baslac punila 20-24/34/94"; Norbin N60-V20 sušenje „20 - 30 minutes" → „20-30 min pri 20°C"
+  (TDS: „Drying time at 20°C: 20 – 30 minutes").
+
+#### Novi nalaz parsiranja — NIJE ispravljeno, čeka odobrenje
+
+| Proizvod | Šta sajt prikazuje | Šta kaže TDS | Uzrok |
+|---|---|---|---|
+| baslac 40-440 (`/proizvodi/baslac-40-440-2k-voc-clear`) | „Sušenje: 20°C: 50-415 · 60°C: 50-415 · …" (bez vremena) | str. 2, Drying: 20°C — 50-415: 10 h, 50-420: 16 h, 50-430: 16 h; 60°C — 50-415: 30 min, 50-420: 40 min, 50-430: 40 min | parser čuva samo prvi učvršćivač, a `dryingText` u `lib/baslac-catalog-products.ts` deli red na prvoj „: " i gubi vreme |
+| baslac 40-450 (`/proizvodi/baslac-40-450-universal-clear-voc`) | isto („20°C: 50-415 · 60°C: 50-415") | techinfo.baslac.com/en/40-450.pdf, str. 2, Drying (po učvršćivaču) | isti uzrok |
+
+### Predlog prevoda (GAP-009) — istorija, primenjeno uz izmene navedene iznad
 
 Pravila: brojevi, jedinice, temperature, vremena i ograničenja ostaju isti (decimalni
 zarez prema `data/*-sync/LOCALIZATION_GUIDE.md`); zvanične oznake (Line 45, wet-on-wet
@@ -334,7 +369,7 @@ Zvanični nazivi proizvoda i nazivi PDF dokumenata nisu predmet prevoda.
 Napomena: redovi 13, 16 i 17 ispravljaju i pogrešno pročitanu vrednost, ne samo jezik;
 zato su posebno istaknuti za pregled.
 
-#### Data-correctness (odvojeno od prevoda) — otvoreno, čeka odobrenje
+#### Data-correctness (odvojeno od prevoda) — ISPRAVLJENO 2026-10-01 (odobreno)
 
 Ovo nisu jezički problemi nego pogrešno pročitani podaci iz TDS-a; sajt danas prikazuje
 netačnu ili nepotpunu tehničku vrednost. Provereno direktno u PDF-ovima proizvođača.

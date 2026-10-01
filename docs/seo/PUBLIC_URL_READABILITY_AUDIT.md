@@ -1,6 +1,6 @@
 # Audit čitljivosti javnih URL-ova
 
-Provera: 2026-10-01, grana `chore/content-qa-2026-10`, produkcioni build (`.next`). Nijedan URL nije menjan — ovo je predlog. Svaka promena traži trajni 301, novu canonical adresu, sitemap i interne linkove.
+Provera: 2026-10-01, grana `chore/content-qa-2026-10`, produkcioni build (`.next`). Prvi prolaz je bio samo predlog; posle odluke vlasnika promenjena je **jedna** adresa (`carfit-clearcoar-matt` → `carfit-clearcoat-matt`, trajno preusmerenje) i uveden je kanonski `brend` parametar. Konačna klasifikacija svih 598 REVIEW adresa je u odeljku „Konačna klasifikacija" na kraju. Ostale promene adresa traže novo odobrenje.
 
 ## Sažetak
 
@@ -14,7 +14,7 @@ Provera: 2026-10-01, grana `chore/content-qa-2026-10`, produkcioni build (`.next
 | Interne demo strane (404 na Production/Preview, GAP-008) | 4 |
 | URL-ovi u sitemap-u | 1216 (svi postoje kao strane; 0 nepostojećih) |
 | Interni linkovi (jedinstveni ciljevi) | 2758 — **0 pokvarenih** |
-| Pravila preusmerenja (`next.config.ts` + sync) | 82 — 0 sa nepostojećim ciljem |
+| Pravila preusmerenja (`next.config.ts` + sync) | 83 (82 + `carfit-clearcoar-matt`) — 0 sa nepostojećim ciljem |
 | Varijantni ključevi `?varijanta=` | 1171 — 266 REVIEW |
 | Dinamičke javne rute iz `app/` (prijava, nalog, portal) | 79 — sve srpske, opisne (`/prijava/kupac`, `/kupac/saglasnosti`, `/portal/cene/odobravanje` …) |
 
@@ -39,7 +39,7 @@ Predlog sluga je polazna tačka (uklonjena ponavljanja; kod engleskih SATA slugo
 | # | Trenutni URL | Naslov / H1 | Razlog | Predlog novog sluga | Redirect | Canonical | SEO rizik |
 |---|---|---|---|---|---|---|---|
 | 1 | `/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease` | baslac 70-10 Silicone Remover for oil, silicone and grease | ponovljene reči: silicone | `/proizvodi/baslac-70-10-silicone-remover-for-oil-and-grease` | 301 `/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease` → novi | canonical na novi URL | srednji |
-| 2 | `/proizvodi/carfit-clearcoar-matt` | Car Fit Clearcoat matt | slovna greška u slugu („clearcoar" umesto „clearcoat") — pronađeno ručnim pregledom | `/proizvodi/carfit-clearcoat-matt` | 301 `/proizvodi/carfit-clearcoar-matt` → novi | canonical na novi URL | srednji |
+| 2 | `/proizvodi/carfit-clearcoar-matt` | Car Fit Clearcoat matt | slovna greška u slugu („clearcoar" umesto „clearcoat") — pronađeno ručnim pregledom | **ISPRAVLJENO:** `/proizvodi/carfit-clearcoat-matt` | 308 (trajno) `/proizvodi/carfit-clearcoar-matt` → novi, jednim skokom; `?varijanta=` se prenosi | canonical, sitemap, pretraga, JSON-LD, metadata i interni linkovi na novom URL-u | rešeno |
 | 3 | `/proizvodi/carfit-mixing-cups-and-mixing-lids` | Car Fit Mixing Cups & Mixing Lids | ponovljene reči: mixing | `/proizvodi/carfit-mixing-cups-and-lids` | 301 `/proizvodi/carfit-mixing-cups-and-mixing-lids` → novi | canonical na novi URL | srednji |
 | 4 | `/proizvodi/carfit-sanding-control-kit-and-sanding-powder` | Car Fit Sanding Control Kit and Sanding Powder | ponovljene reči: sanding | `/proizvodi/carfit-sanding-control-kit-and-powder` | 301 `/proizvodi/carfit-sanding-control-kit-and-sanding-powder` → novi | canonical na novi URL | srednji |
 | 5 | `/proizvodi/carfit-very-fine-and-ultra-fine-abrasive-fleece` | Car Fit Very Fine and Ultra Fine Abrasive Fleece | ponovljene reči: fine | `/proizvodi/carfit-very-fine-and-ultra-abrasive-fleece` | 301 `/proizvodi/carfit-very-fine-and-ultra-fine-abrasive-fleece` → novi | canonical na novi URL | srednji |
@@ -162,7 +162,7 @@ Ključ je deo canonical adrese varijante na strani porodice. Dugi ključevi sa p
 | `q` | 14 | 14 | PASS — pretraga |
 | `kategorija` | 12 | 12 | PASS |
 | `rm-kategorija` | 8 | 8 | PASS |
-| `brand` | 3 | 7 | REVIEW — engleski alias za `brend`; isti filter ima dva imena. Predlog: interni linkovi samo `brend` (katalog prihvata oba, pa se javna adresa strane ne menja). |
+| `brand` | 0 (bilo 3) | 0 (bilo 7) | REŠENO — kanonski je `brend`. Interni linkovi (4 × `/katalozi?brand=`, `/katalog?brand=carfit`, `/kontakt?…&brand=carfit`) prebačeni na `brend`; biblioteka dokumenata piše `brend`; stari `?brand=` na `/katalog`, `/katalog/strana/N` i `/katalozi` middleware trajno (308) preusmerava na isti URL sa `brend` (`lib/legacy-query-aliases.mjs`, test bez petlje). |
 | `faza` | 5 | 6 | PASS |
 | `oblast` | 4 | 5 | PASS |
 | `tema-saznanja` | 5 | 5 | PASS |
@@ -176,10 +176,120 @@ Strane `/katalog?…` i `/kontakt?…` sa parametrima šalju `noindex, follow` (
 
 - Svaka sadržajna strana ima canonical na postojeću rutu (0 canonical ka nepostojećoj ruti).
 - 785 starih varijantnih PDP adresa preusmerava jednim skokom na porodicu sa `?varijanta=`, čiji je canonical sama porodica (potvrđuje i `seo:validate`).
-- 82 pravila preusmerenja: svi ciljevi postoje.
+- 83 pravila preusmerenja: svi ciljevi postoje, nijedan cilj nije izvor drugog pravila (bez lanca), nijedno ne vodi samo na sebe.
 - Interne demo strane `/interaction-demo/*`, `/social-exports/*` (4 prerenderovane) vraćaju 404 na Production i Preview.
 
 ## Šta je ispravljeno automatski
 
-Ništa: nije pronađen interni link ka pogrešnoj postojećoj ruti (0 pokvarenih među 2758 ciljeva). Javni URL-ovi nisu menjani.
+Interni linkovi sa `?brand=` prebačeni su na kanonski `?brend=` (iste strane, isti filter). Nije pronađen interni link ka pogrešnoj ili nepostojećoj ruti (0 pokvarenih među 2758 ciljeva).
 
+## Konačna klasifikacija REVIEW adresa (2026-10-01, posle odluke vlasnika)
+
+Ponovljen audit nad novim buildom (posle preimenovanja): PASS 1413, REVIEW 597 + 1 ručno (`clearcoar`) = 598, FAIL 0.
+
+| Klasa | Broj | Značenje |
+|---|---:|---|
+| `REAL_PROBLEM` | 2 | stvaran problem adrese |
+| `LEGITIMATE_PRODUCT_CODE` | 17 | slug nosi zvaničnu šifru/oznaku i zvanični naziv; ponavljanje dolazi iz zvaničnog naziva |
+| `LEGACY_REDIRECT_ALIAS` | 527 | stara adresa varijante; samo preusmerava, nema sadržaj |
+| `INTERNAL_OR_NON_INDEXED` | 8 | canonical na drugu stranu ili interni (portal) cilj; ne indeksira se |
+| `FALSE_POSITIVE` | 44 | heuristika je pogrešno označila ispravnu adresu |
+
+**Stvarno promenjenih javnih URL-ova: 1** (`carfit-clearcoar-matt` → `carfit-clearcoat-matt`).
+
+### REAL_PROBLEM (2)
+
+| Adresa | Stanje |
+|---|---|
+| `/proizvodi/carfit-clearcoar-matt` | Ispravljeno (odobreno): 308 → `/proizvodi/carfit-clearcoat-matt`. Odluka je u `data/carfit-sync/manual-decisions.json` (`slugRenames`), stari red ostaje u registru sa `renamedTo`, sync piše `redirects`, `next.config.ts` ih učitava. Slika zadržava postojeću putanju fajla (`/products/carfit/catalog/carfit-clearcoar-matt.webp`) — slike nisu u opsegu ovog kruga. |
+| `/proizvodi/sata-coupling-with` | **Nije menjano — čeka odobrenje.** Nije slovna greška: zvanični SATA naziv „Coupling with G 1/8\" (female thread) for SATA BVD and Spray-Master\" je odsečen na navodniku, pa slug završava predlogom. Predlog: `/proizvodi/sata-coupling-g-1-8-bvd-spray-master` uz 308 sa stare adrese. SEO rizik promene: nizak (jedna strana, bez spoljnih linkova poznatih nama). |
+
+### LEGACY_REDIRECT_ALIAS (527)
+
+Sve stare adrese varijanti ispunjavaju svih pet uslova vlasnika — proverom nad buildom za svaku adresu: nije u sitemap-u, nijedna strana nema canonical na nju, 0 internih linkova, cilj (porodica) postoji, preusmerava jednim skokom (`307` iz `variant-pdp` sloja na `/proizvodi/grupa/<porodica>?varijanta=<ključ>`), nema sopstveni sadržaj pa ne pravi duplikat. Ostaju kao legacy compatibility alias-i; masovna migracija se ne radi. Raspodela po porodicama je u tabeli „REVIEW — adrese koje samo preusmeravaju na porodicu" iznad (528 u prvom prolazu uključuje `/korpa`, koji je ovde u INTERNAL_OR_NON_INDEXED).
+
+### INTERNAL_OR_NON_INDEXED (8)
+
+| Adresa | Razlog |
+|---|---|
+| `/korpa` | preusmerava u portal (/portal/korpa (307)); portal traži prijavu i nosi noindex |
+| `/proizvodi/cosmos-lac-master-mechanic-01-500-ml-master-mechanic-primer-01-grey` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-primer; nije u sitemap-u |
+| `/proizvodi/cosmos-lac-master-mechanic-01-500-ml-master-mechanic-primer-01-white` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-primer; nije u sitemap-u |
+| `/proizvodi/cosmos-lac-master-mechanic-02-500-ml-master-mechanic-filler-02-black` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-filler; nije u sitemap-u |
+| `/proizvodi/cosmos-lac-master-mechanic-02-500-ml-master-mechanic-filler-02-grey` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-filler; nije u sitemap-u |
+| `/proizvodi/cosmos-lac-master-mechanic-13-500-ml-master-mechanic-antigravel-paintable-13-black` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-antigravel-paintable; nije u sitemap-u |
+| `/proizvodi/cosmos-lac-master-mechanic-13-500-ml-master-mechanic-antigravel-paintable-13-grey` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-antigravel-paintable; nije u sitemap-u |
+| `/proizvodi/cosmos-lac-master-mechanic-13-500-ml-master-mechanic-antigravel-paintable-13-white` | canonical → /proizvodi/grupa/cosmos-lac-master-mechanic-antigravel-paintable; nije u sitemap-u |
+
+### LEGITIMATE_PRODUCT_CODE (17)
+
+| Adresa | Napomena audita |
+|---|---|
+| `/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease` | ponovljene reči: silicone |
+| `/proizvodi/cosmos-lac-effect-450-400-ml-chrome-effect-450` | ponovljene reči: effect |
+| `/proizvodi/cosmos-lac-effect-451-400-ml-gold-effect-451` | ponovljene reči: effect |
+| `/proizvodi/cosmos-lac-home-400-400-ml-white-smalto-400-white` | ponovljene reči: white |
+| `/proizvodi/cosmos-lac-master-mechanic-03-500-ml-master-mechanic-epoxy-primer-03-grey` | ponovljene reči: master, mechanic |
+| `/proizvodi/cosmos-lac-master-mechanic-04-500-ml-master-mechanic-wash-primer-04-light-yellow` | ponovljene reči: master, mechanic |
+| `/proizvodi/cosmos-lac-master-mechanic-05-providna-500-ml-master-mechanic-plastic-primer-05-transparent` | ponovljene reči: master, mechanic; predugačak slug (91 znakova) |
+| `/proizvodi/cosmos-lac-master-mechanic-06-500-ml-master-mechanic-control-guide-06-black` | ponovljene reči: master, mechanic |
+| `/proizvodi/cosmos-lac-master-mechanic-20-providna-500-ml-master-mechanic-clear-coat-20-transparent` | ponovljene reči: master, mechanic; predugačak slug (87 znakova) |
+| `/proizvodi/cosmos-lac-wheel-rim-229-mat-400-ml-wheel-rim-229-deluxe-silver-matte` | ponovljene reči: wheel |
+| `/proizvodi/cosmos-lac-zinc-500-400-ml-zinc-maximum-500` | ponovljene reči: zinc |
+| `/proizvodi/cosmos-lac-zinc-501-400-ml-alu-zinc-501` | ponovljene reči: zinc |
+| `/proizvodi/grupa/cosmos-lac-fluorescent-marking-fluorescent-paint` | ponovljene reči: fluorescent |
+| `/proizvodi/grupa/cosmos-lac-fluorescent-marking-forest-trail-marking` | ponovljene reči: marking |
+| `/proizvodi/grupa/cosmos-lac-fluorescent-marking-road-construction-marking` | ponovljene reči: marking |
+| `/proizvodi/grupa/cosmos-lac-metallic-metallic-effect` | ponovljene reči: metallic |
+| `/proizvodi/grupa/cosmos-lac-wood-putties-water-based-wood-putty` | ponovljene reči: wood |
+
+Ne menjaju se: slug sadrži zvaničnu šifru (`70-10`), zvaničnu oznaku linije i broj proizvoda iz Cosmos Lac Brand Kit-a (naziv fajla proizvođača je zvanični slug) i pakovanje.
+
+### FALSE_POSITIVE (44)
+
+| Adresa | Zašto je ispravno |
+|---|---|
+| `/proizvodi/carfit-mixing-cups-and-mixing-lids` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carfit-sanding-control-kit-and-sanding-powder` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carfit-very-fine-and-ultra-fine-abrasive-fleece` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carsystem-air-hose-air-hose-coil` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carsystem-air-hose-air-hose-complete` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carsystem-socks-carsystem-black-white` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carsystem-socks-carsystem-red-white` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carsystem-spray-filler-spray` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/carsystem-uniflex-adapter-nozzle-v-nozzle` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-1-0-l-aluminium-pressure-pot-max-pressure-10-bar-hrs` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-air-hose-one-connection-included-clean-rcs` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-air-hose` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-air-tester-atomisation-air-quick-tester` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-ball-tap-teflon-with-bilateral-thread-female-hose` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-care-set-spray-gun-care-bag-containing-1-large` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-cleaning-brush` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-cleaning-kit-with-2-cleaning-brushes-medium-and-12` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-door-wand-steel-with-flexible-guideway-hose` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-door-wand-steel` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-foam-inlay-with-pinched-inlay-truesun` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-intermediate-piece-and-for-material-connection` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-material-coupling-with-plug-in-nipple` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-material-hose` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-nozzle-cleaning-needles` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-nylon-wand-flexible` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-protective-sleeve` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-pvc-air-hose-with-mini-quick-coupling-nipple-with-minijet-4400-b` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-pvc-compressed-air-hose-with-mini-quick-coupling-jet-20-b` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-quick-coupling-nipple` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-quick-coupling-with-hose-olive-and-quick-coupling` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-quick-coupling-with-hose-olive` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-quick-coupling` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-spray-gun-holder-with-strainer-holder` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-spray-gun-holder` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-spray-mix-double-hose-material-connection-air` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-spray-mix-hose-pair-material-connection-air` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-storage-case-sata-truesun-incl-foam-inlay-truesun` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-suction-hose-cpl-vario-top-spray` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-turbo-blow-with-quick-coupling-nipple-blow-gun` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-universal-spray-gun-holder-foldable` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |
+| `/proizvodi/sata-vario-top-spray-f-double-diaphragm-pump-1-1-mobile-vario-top-spray` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-venturi-hook-wand-hook-nozzle-cpl-with-flexible` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-venturi-hook-wand-with-flexible-guide-hose-venturi` | ponovljena reč je deo zvaničnog naziva proizvoda (npr. „Mixing Cups & Mixing Lids", „Air hose – Air hose coil") |
+| `/proizvodi/sata-viscosity-cup` | slug je zvanični SATA engleski naziv; H1 je srpski prevod istog naziva — heuristika poredi različite jezike |

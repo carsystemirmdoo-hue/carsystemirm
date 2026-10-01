@@ -682,6 +682,16 @@ a.primaryButton,
   overflow-wrap: anywhere;
 }
 
+/*
+ * Telefoni i e-pošta su mete za dodir: vertikalni padding sa negativnom
+ * marginom daje 44 px visine bez promene rasporeda reda.
+ */
+.directoryRow dd a {
+  display: inline-block;
+  padding-block: 12px;
+  margin-block: -12px;
+}
+
 .directoryRow span:last-child {
   justify-self: end;
   color: var(--muted-foreground);

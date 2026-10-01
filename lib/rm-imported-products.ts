@@ -346,7 +346,7 @@ function getReviewedTechnicalFacts(
       reviewStatus: "confirmed",
     },
     {
-      label: "Pot life",
+      label: "Vreme upotrebe",
       value: "30 min pri 20 °C",
       reviewStatus: "confirmed",
     },

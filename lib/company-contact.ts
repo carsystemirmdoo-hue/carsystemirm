@@ -66,7 +66,7 @@ export const companyContact: CompanyContact = {
   // Nijedan izvor ne potvrđuje radno vreme (GAP-003).
   workingHours: null,
   partnerNetworkNote:
-    "Upiti se rutiraju ka centrali u Inđiji i partnerskoj mreži u Srbiji.",
+    "Upiti stižu u centralu u Inđiji, a po potrebi se prosleđuju partnerskoj mreži u Srbiji.",
   editableNote:
-    "Kontakt za upite i rutiranje partnerske mreže u Srbiji.",
+    "Kontakt za upite i preporuku partnerske prodavnice u Srbiji.",
 };

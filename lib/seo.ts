@@ -5,6 +5,7 @@ import type {
   CarsystemProduct,
   PublicProgramGroup,
 } from "@/lib/carsystem-data";
+import { companyContact } from "@/lib/company-contact";
 import type { PartnerStore } from "@/lib/partner-stores";
 import type { ProductFamily } from "@/lib/product-families";
 import {
@@ -77,6 +78,37 @@ export function organizationJsonLd() {
           "@type": "ImageObject",
           url: absoluteUrl(siteConfig.logo),
         },
+        // Isti potvrđeni podaci kao vidljiv kontakt (lib/company-contact.ts).
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: companyContact.streetAddress,
+          postalCode: companyContact.postalCode,
+          addressLocality: companyContact.city,
+          addressCountry: "RS",
+        },
+        telephone: companyContact.phoneInternational ?? undefined,
+        email: companyContact.email,
+        contactPoint: [
+          ...(companyContact.phoneInternational
+            ? [
+                {
+                  "@type": "ContactPoint",
+                  contactType: "customer service",
+                  telephone: companyContact.phoneInternational,
+                  email: companyContact.email,
+                  areaServed: "RS",
+                  availableLanguage: "sr",
+                },
+              ]
+            : []),
+          ...companyContact.salesContacts.map((sales) => ({
+            "@type": "ContactPoint",
+            contactType: "sales",
+            telephone: sales.phoneInternational,
+            areaServed: { "@type": "AdministrativeArea", name: sales.region },
+            availableLanguage: "sr",
+          })),
+        ],
       },
       {
         "@type": "WebSite",

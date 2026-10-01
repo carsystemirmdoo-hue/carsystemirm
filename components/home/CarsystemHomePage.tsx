@@ -26,7 +26,7 @@ import {
 } from "./BrandLogoPlate";
 import { HomeCampaignCarousel } from "./HomeCampaignCarousel";
 import { HomeSectionRail } from "./HomeSectionRail";
-import { companyContact } from "@/lib/company-contact";
+import { companyContact, toTelHref } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
   getPartnerCityLabel,
@@ -780,8 +780,7 @@ function LocatorCard({
 }
 
 function phoneHref(phone: string) {
-  const primaryNumber = phone.split("/")[0]?.trim() ?? phone;
-  return `tel:${primaryNumber.replace(/[^\d+]/g, "")}`;
+  return toTelHref(phone) ?? undefined;
 }
 
 function StorePreview({ store }: { store?: PartnerStore }) {

@@ -16,7 +16,7 @@ const limit = Math.min(200, Math.max(1, Number(limitArgument?.split("=")[1] ?? 1
 const endpoint = process.env.NOMINATIM_ENDPOINT ?? "https://nominatim.openstreetmap.org";
 const userAgent =
   process.env.NOMINATIM_USER_AGENT?.trim() ??
-  "CarsystemLocationPreview/1.0 (office@carsystemirm.com)";
+  "CarsystemLocationPreview/1.0 (carsystemirmdoo@gmail.com)";
 const minimumRequestIntervalMs = 1100;
 
 if (!allowNetwork) {

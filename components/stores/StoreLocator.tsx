@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PartnerMap } from "@/components/stores/PartnerMap";
+import { toTelHref } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
   getLocationTypeOptions,
@@ -25,7 +26,7 @@ function normalize(value: string) {
 }
 
 function telHref(phone: string) {
-  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+  return toTelHref(phone) ?? undefined;
 }
 
 function routeHref(store: PartnerStore) {

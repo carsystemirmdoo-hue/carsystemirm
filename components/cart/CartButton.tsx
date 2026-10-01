@@ -11,7 +11,7 @@ export function CartButton() {
       type="button"
       className={styles.button}
       onClick={openCart}
-      aria-label={count > 0 ? `Otvori korpu, ${count} stavki` : "Otvori korpu"}
+      aria-label={count > 0 ? `Otvorite korpu, ${count} stavki` : "Otvorite korpu"}
     >
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
         <path

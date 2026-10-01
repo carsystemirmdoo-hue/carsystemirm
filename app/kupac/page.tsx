@@ -46,11 +46,11 @@ export default async function CustomerHomePage() {
       <Panel>
         <SectionHeader
           title="Dokumenti"
-          description="Fakture i povrati vaše firme, iz knjigovodstvenog uvoza."
+          description="Fakture i povrati Vaše firme, iz knjigovodstvenog uvoza."
         />
         {summary.totalDocuments === 0 ? (
           <p>
-            Za vašu firmu još nema uvezenih dokumenata. Kada uvoz iz
+            Za Vašu firmu još nema uvezenih dokumenata. Kada uvoz iz
             knjigovodstva bude izvršen, spisak će se pojaviti ovde.
           </p>
         ) : (
@@ -104,7 +104,7 @@ export default async function CustomerHomePage() {
 
       <form action={customerSignOutAction}>
         <button className="portal-login-submit" type="submit">
-          Odjavi se
+          Odjavite se
         </button>
       </form>
     </main>

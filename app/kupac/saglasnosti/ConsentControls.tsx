@@ -78,7 +78,7 @@ export function ConsentControls({ rows }: { rows: ConsentRow[] }) {
                     variant={row.granted ? "ghost" : "primary"}
                     disabled={pending}
                   >
-                    {row.granted ? "Povuci saglasnost" : "Dajem saglasnost"}
+                    {row.granted ? "Povucite saglasnost" : "Dajem saglasnost"}
                   </PortalButton>
                 </form>
               </div>

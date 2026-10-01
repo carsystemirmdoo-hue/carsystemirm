@@ -119,7 +119,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
               />
             </div>
             <small id={secondFactorHintId} className="portal-login-hint">
-              Popunite samo ako je za vaš nalog uključena dvofaktorska prijava.
+              Popunite samo ako je za Vaš nalog uključena dvofaktorska prijava.
             </small>
           </label>
 
@@ -143,7 +143,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             ) : (
               <PortalIcon name="arrow" />
             )}
-            {pending ? "Provera pristupa…" : "Prijavi se"}
+            {pending ? "Provera pristupa…" : "Prijavite se"}
           </button>
 
           {/* Ikona i tekst su zasebne stavke u flex redu; bez omotača bi svaki

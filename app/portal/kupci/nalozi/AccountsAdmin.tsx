@@ -62,7 +62,7 @@ export function AccountsAdmin({
     <>
       {canPropose ? (
         <section className="portal-panel">
-          <h2>Predloži kontakt kupca</h2>
+          <h2>Predložite kontakt kupca</h2>
           <p>
             Kupčev nalog je odvojen identitet — ne dobija nijednu internu ulogu i
             vidi isključivo podatke svoje firme.{" "}
@@ -107,7 +107,7 @@ export function AccountsAdmin({
                 <input type="text" name="reason" minLength={3} maxLength={500} required />
               </Field>
               <PortalButton type="submit" variant="primary" disabled={creating}>
-                {creating ? "Slanje…" : "Predloži kontakt"}
+                {creating ? "Slanje…" : "Predložite kontakt"}
               </PortalButton>
             </form>
           )}
@@ -204,8 +204,8 @@ export function AccountsAdmin({
                             disabled={inviting}
                           >
                             {account.status === "requested"
-                              ? "Odobri i pozovi"
-                              : "Izdaj nov poziv"}
+                              ? "Odobrite i pozovite"
+                              : "Izdajte nov poziv"}
                           </PortalButton>
                         </form>
                         <PortalButton
@@ -214,7 +214,7 @@ export function AccountsAdmin({
                             setOpenId(openId === account.id ? null : account.id)
                           }
                         >
-                          {openId === account.id ? "Zatvori" : "Promeni stanje"}
+                          {openId === account.id ? "Zatvorite" : "Promenite stanje"}
                         </PortalButton>
                         <PortalButton
                           variant="ghost"
@@ -225,8 +225,8 @@ export function AccountsAdmin({
                           }
                         >
                           {consentId === account.id
-                            ? "Zatvori"
-                            : "Evidentiraj saglasnost"}
+                            ? "Zatvorite"
+                            : "Evidentirajte saglasnost"}
                         </PortalButton>
                       </td>
                     ) : null}
@@ -242,9 +242,9 @@ export function AccountsAdmin({
             <input type="hidden" name="accountId" value={openId} />
             <Field label="Novo stanje" required>
               <select name="status" defaultValue="suspended" required>
-                <option value="approved">Vrati u upotrebu</option>
-                <option value="suspended">Isključi</option>
-                <option value="rejected">Odbij</option>
+                <option value="approved">Vratite u upotrebu</option>
+                <option value="suspended">Isključite</option>
+                <option value="rejected">Odbijte</option>
               </select>
             </Field>
             <Field
@@ -255,7 +255,7 @@ export function AccountsAdmin({
               <input type="text" name="reason" minLength={3} maxLength={500} required />
             </Field>
             <PortalButton type="submit" variant="primary" disabled={changing}>
-              {changing ? "Čuvanje…" : "Sačuvaj"}
+              {changing ? "Čuvanje…" : "Sačuvajte"}
             </PortalButton>
           </form>
         ) : null}
@@ -266,7 +266,7 @@ export function AccountsAdmin({
             <h3>Odluka doneta van sistema</h3>
             <p>
               Zapisujete <strong>kupčevu</strong> odluku, ne svoju. Zapis nosi
-              vaš potpis i referencu na zahtev. Ovo ne utiče na nalog, cene,
+              Vaš potpis i referencu na zahtev. Ovo ne utiče na nalog, cene,
               dokumente ni prijavu.
             </p>
             {consentState.error ? (
@@ -312,7 +312,7 @@ export function AccountsAdmin({
               />
             </Field>
             <PortalButton type="submit" variant="primary" disabled={savingConsent}>
-              {savingConsent ? "Čuvanje…" : "Evidentiraj"}
+              {savingConsent ? "Čuvanje…" : "Evidentirajte"}
             </PortalButton>
           </form>
         ) : null}

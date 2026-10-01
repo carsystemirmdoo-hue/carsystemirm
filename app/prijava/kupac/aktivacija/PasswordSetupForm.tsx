@@ -41,7 +41,7 @@ export function PasswordSetupForm({
               {mode === "activation" ? "Aktivacija naloga" : "Nova lozinka"}
             </h2>
             <p>
-              Postavite lozinku koju znate samo vi. Niko iz firme je ne vidi i ne
+              Postavite lozinku koju znate samo Vi. Niko iz firme je ne vidi i ne
               može je pročitati.
             </p>
           </header>
@@ -84,7 +84,7 @@ export function PasswordSetupForm({
           ) : null}
 
           <PortalButton type="submit" variant="primary" disabled={pending}>
-            {pending ? "Čuvanje…" : "Sačuvaj lozinku"}
+            {pending ? "Čuvanje…" : "Sačuvajte lozinku"}
           </PortalButton>
         </form>
       </section>

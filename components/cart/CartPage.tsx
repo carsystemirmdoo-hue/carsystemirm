@@ -54,7 +54,7 @@ export function CartPage() {
                   />
                 </label>
                 <button type="button" onClick={() => remove(item.id)}>
-                  Ukloni
+                  Uklonite
                 </button>
               </li>
             ))}
@@ -72,13 +72,13 @@ export function CartPage() {
                 Pošaljite upit za odabrane proizvode
               </Link>
               <button type="button" className={styles.ghost} onClick={clear}>
-                Isprazni listu
+                Ispraznite listu
               </button>
             </div>
           </div>
           <p className={styles.note}>
             Pri slanju upita ponovo proveravamo šifru, aktivnost proizvoda,
-            dozvoljenu količinu i uslove za vaš nalog.
+            dozvoljenu količinu i uslove za Vaš nalog.
           </p>
         </>
       )}

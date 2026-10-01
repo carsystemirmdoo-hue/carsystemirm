@@ -287,7 +287,7 @@ export default async function RecommendationsPage({
           <SectionHeader
             title="Nemate nijednog dodeljenog kupca"
             description={
-              "Preporuke se prikazuju samo za kupce koji su vam dodeljeni. Dok dodela nema, " +
+              "Preporuke se prikazuju samo za kupce koji su Vam dodeljeni. Dok dodela nema, " +
               "ova strana je prazna — i to nije greška ni kvar podataka."
             }
           />
@@ -383,7 +383,7 @@ export default async function RecommendationsPage({
             </label>
           ) : null}
           <button type="submit" className="portal-button" data-variant="secondary">
-            Primeni
+            Primenite
           </button>
         </form>
       </section>

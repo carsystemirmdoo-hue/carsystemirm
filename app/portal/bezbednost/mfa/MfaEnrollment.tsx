@@ -149,7 +149,7 @@ export function MfaEnrollment({
             </p>
           ) : null}
           <PortalButton type="submit" disabled={confirming}>
-            {confirming ? "Provera…" : "Aktiviraj drugi faktor"}
+            {confirming ? "Provera…" : "Aktivirajte drugi faktor"}
           </PortalButton>
         </form>
       </section>
@@ -190,7 +190,7 @@ export function MfaEnrollment({
               aria-describedby={`${grantId}-hint`}
             />
             <small id={`${grantId}-hint`}>
-              Kod koji vam je dao vlasnik. Važi 30 minuta i koristi se jednom.
+              Kod koji Vam je dao vlasnik. Važi 30 minuta i koristi se jednom.
             </small>
           </>
         ) : null}
@@ -202,7 +202,7 @@ export function MfaEnrollment({
         ) : null}
 
         <PortalButton type="submit" disabled={starting}>
-          {starting ? "Priprema…" : "Nastavi"}
+          {starting ? "Priprema…" : "Nastavite"}
         </PortalButton>
       </form>
 
@@ -234,7 +234,7 @@ export function MfaEnrollment({
               </p>
             ) : null}
             <PortalButton type="submit" disabled={regenerating}>
-              {regenerating ? "Izdavanje…" : "Izdaj nove kodove"}
+              {regenerating ? "Izdavanje…" : "Izdajte nove kodove"}
             </PortalButton>
           </form>
         </details>
@@ -297,7 +297,7 @@ function RecoveryCodes({
             setCopied(true);
           }}
         >
-          {copied ? "Kopirano" : "Kopiraj"}
+          {copied ? "Kopirano" : "Kopirajte"}
         </PortalButton>
 
         <PortalButton
@@ -314,7 +314,7 @@ function RecoveryCodes({
             URL.revokeObjectURL(url);
           }}
         >
-          Preuzmi kao .txt
+          Preuzmite kao .txt
         </PortalButton>
       </div>
 

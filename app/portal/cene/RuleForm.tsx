@@ -203,7 +203,7 @@ export function RuleForm({
         </Field>
 
         <PortalButton type="submit" variant="primary" disabled={pending}>
-          {pending ? "Slanje…" : "Pošalji na odobrenje"}
+          {pending ? "Slanje…" : "Pošaljite na odobrenje"}
         </PortalButton>
       </form>
     </section>

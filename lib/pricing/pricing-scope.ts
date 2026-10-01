@@ -121,6 +121,6 @@ export async function assertPricingCustomerAccess(
   if ((scope.customerIds ?? []).includes(requestedCustomerId)) return;
 
   throw new PricingScopeError(
-    "Kupac nije u vašem opsegu. Cena se ne prikazuje.",
+    "Kupac nije u Vašem opsegu. Cena se ne prikazuje.",
   );
 }

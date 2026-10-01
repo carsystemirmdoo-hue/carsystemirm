@@ -92,7 +92,7 @@ export function ThresholdSettings({
               data-variant="primary"
               disabled={pending}
             >
-              {pending ? "Čuvanje…" : "Sačuvaj pragove"}
+              {pending ? "Čuvanje…" : "Sačuvajte pragove"}
             </button>
           </>
         ) : null}

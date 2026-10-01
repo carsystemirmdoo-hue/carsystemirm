@@ -111,7 +111,7 @@ export async function requestResetAction(
   const parsed = emailSchema.safeParse({ email: formData.get("email") });
   const generic = {
     error: null,
-    ok: "Ako nalog postoji, kancelarija će vam dostaviti link za promenu lozinke.",
+    ok: "Ako nalog postoji, kancelarija će Vam dostaviti link za promenu lozinke.",
   };
   if (!parsed.success) return generic;
 

@@ -112,7 +112,7 @@ export function DeviceAdmin() {
                 </small>
               </label>
             </div>
-            <Posalji tekst="Registruj uređaj" />
+            <Posalji tekst="Registrujte uređaj" />
           </form>
           <Poruka state={reg} />
         </section>
@@ -141,7 +141,7 @@ export function DeviceAdmin() {
                 <input name="expectedFingerprint" required placeholder="sha256:…" />
               </label>
             </div>
-            <Posalji tekst="Aktiviraj" />
+            <Posalji tekst="Aktivirajte" />
           </form>
           <Poruka state={akt} />
         </section>
@@ -162,7 +162,7 @@ export function DeviceAdmin() {
                 <input name="reason" required minLength={3} maxLength={500} />
               </label>
             </div>
-            <Posalji tekst="Opozovi" />
+            <Posalji tekst="Opozovite" />
           </form>
           <Poruka state={opo} />
         </section>

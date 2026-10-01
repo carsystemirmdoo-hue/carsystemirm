@@ -143,7 +143,7 @@ export function PermissionMatrix({
               />
               <small>
                 Otvaranje naloga sa punim vlasničkim pristupom traži svež kod
-                iz vaše aplikacije za jednokratne kodove.
+                iz Vaše aplikacije za jednokratne kodove.
               </small>
             </label>
           ) : null}
@@ -155,10 +155,10 @@ export function PermissionMatrix({
             title={
               createTokenMissing
                 ? "Unesite kod iz aplikacije za ulogu „Gazda“"
-                : "Otvori nalog"
+                : "Otvorite nalog"
             }
           >
-            {createPending ? "Otvaranje…" : "Otvori nalog"}
+            {createPending ? "Otvaranje…" : "Otvorite nalog"}
           </button>
         </form>
       </section>
@@ -203,7 +203,7 @@ export function PermissionMatrix({
           ) : null}
           {!reasonMissing && roleTokenMissing ? (
             <small>
-              Promena uloge traži i svež kod iz vaše aplikacije za jednokratne
+              Promena uloge traži i svež kod iz Vaše aplikacije za jednokratne
               kodove. Dodela paketa ga ne traži.
             </small>
           ) : null}
@@ -267,10 +267,10 @@ export function PermissionMatrix({
                             ? "Prvo unesite razlog izmene"
                             : roleTokenMissing
                               ? "Unesite kod iz aplikacije"
-                              : "Sačuvaj ulogu"
+                              : "Sačuvajte ulogu"
                         }
                       >
-                        Sačuvaj
+                        Sačuvajte
                       </button>
                     </form>
                   ) : (
@@ -307,7 +307,7 @@ export function PermissionMatrix({
                             title={
                               selfLockout
                                 ? "Ne možete sebi oduzeti administraciju korisnika"
-                                : `${granted ? "Oduzmi" : "Dodeli"}: ${item.description}`
+                                : `${granted ? "Oduzmite" : "Dodelite"}: ${item.description}`
                             }
                           >
                             {granted ? "ima" : "nema"}

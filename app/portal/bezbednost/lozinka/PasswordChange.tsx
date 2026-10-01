@@ -105,7 +105,7 @@ export function PasswordChange({ onSignOut }: { onSignOut: () => Promise<void> }
         ) : null}
 
         <PortalButton type="submit" disabled={pending}>
-          {pending ? "Menjanje…" : "Promeni lozinku"}
+          {pending ? "Menjanje…" : "Promenite lozinku"}
         </PortalButton>
       </form>
     </section>

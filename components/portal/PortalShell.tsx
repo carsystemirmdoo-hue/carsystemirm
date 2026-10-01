@@ -200,7 +200,7 @@ export function PortalShell({
             className="portal-icon-button portal-sidebar-collapse"
             onClick={toggleCollapsed}
             aria-expanded={!collapsed}
-            aria-label={collapsed ? "Proširi navigaciju" : "Skupi navigaciju"}
+            aria-label={collapsed ? "Proširite navigaciju" : "Skupite navigaciju"}
           >
             <PortalIcon name="panel" />
           </button>
@@ -263,7 +263,7 @@ export function PortalShell({
               className="portal-icon-button portal-mobile-menu"
               onClick={() => setMobileOpen(true)}
               aria-expanded={mobileOpen}
-              aria-label="Otvori navigaciju"
+              aria-label="Otvorite navigaciju"
             >
               <PortalIcon name="menu" />
             </button>

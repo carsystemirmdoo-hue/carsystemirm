@@ -90,7 +90,7 @@ export default async function DataReadinessPage({
     ...kupciMap,
     imenitelj: viditSve
       ? "uvezene šifre partnera iz izvora"
-      : "uvezene šifre partnera vaših kupaca",
+      : "uvezene šifre partnera Vaših kupaca",
   });
   const artikliPokrivenost = pokrivenost({
     ...artikliMap,
@@ -136,7 +136,7 @@ export default async function DataReadinessPage({
             <input type="date" name="do" defaultValue={period.do ?? ""} />
           </label>
           <button type="submit" className="portal-button" data-variant="secondary">
-            Primeni
+            Primenite
           </button>
         </form>
         {period.greske.length > 0 ? (
@@ -158,7 +158,7 @@ export default async function DataReadinessPage({
             title="Vaš opseg je prazan"
             description={
               "Nemate nijednog dodeljenog kupca, pa su sve metrike nula NAD NULA KUPACA. " +
-              "To nije tvrdnja o prometu firme — samo o tome šta vi smete da vidite."
+              "To nije tvrdnja o prometu firme — samo o tome šta Vi smete da vidite."
             }
           />
         </section>
@@ -354,7 +354,7 @@ export default async function DataReadinessPage({
         ) : null}
         {!problemi.obuhvataNepripisive ? (
           <p className="portal-readiness-note">
-            Brojevi obuhvataju samo dokumente koji su proknjiženi na vaše kupce. Dokument
+            Brojevi obuhvataju samo dokumente koji su proknjiženi na Vaše kupce. Dokument
             bez potvrđenog kupca nema opseg i namerno se ovde ne prikazuje — nemapiranost
             sama po sebi ne otvara vidljivost. Takve dokumente vidi kancelarija.
           </p>

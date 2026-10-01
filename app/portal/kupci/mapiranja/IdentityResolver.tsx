@@ -125,7 +125,7 @@ export function IdentityResolver({
                       variant="ghost"
                       onClick={() => setOpenId(openId === row.id ? null : row.id)}
                     >
-                      {openId === row.id ? "Zatvori" : "Razreši"}
+                      {openId === row.id ? "Zatvorite" : "Razrešite"}
                     </PortalButton>
                   </td>
                 ) : null}
@@ -140,9 +140,9 @@ export function IdentityResolver({
           <input type="hidden" name="id" value={openId} />
           <Field label="Stanje" required>
             <select name="status" defaultValue="mapped" required>
-              <option value="mapped">Poveži sa kupcem</option>
-              <option value="unmapped">Ostavi nepovezano</option>
-              <option value="disabled">Isključi šifru</option>
+              <option value="mapped">Povežite sa kupcem</option>
+              <option value="unmapped">Ostavite nepovezano</option>
+              <option value="disabled">Isključite šifru</option>
             </select>
           </Field>
           <Field
@@ -162,7 +162,7 @@ export function IdentityResolver({
             <input type="text" name="reason" minLength={3} maxLength={500} required />
           </Field>
           <PortalButton type="submit" disabled={pending}>
-            {pending ? "Čuvanje…" : "Sačuvaj razrešenje"}
+            {pending ? "Čuvanje…" : "Sačuvajte razrešenje"}
           </PortalButton>
         </form>
       ) : null}

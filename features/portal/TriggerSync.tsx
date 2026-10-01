@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom";
 import { triggerSyncAction, type SyncActionState } from "@/app/portal/importi/sinhronizacija/actions";
 
 /**
- * Dugme „Skeniraj i sinhronizuj“.
+ * Dugme „Skenirajte i sinhronizujte“.
  *
  * Ne prosleđuje nijedan parametar osim ID-a uređaja. Folder, server, raspored i
  * identitet ostaju u lokalnoj zaštićenoj konfiguraciji konektora — portal ih ne
@@ -31,7 +31,7 @@ function Dugme({ disabled }: { disabled: boolean }) {
        */
       disabled={disabled || pending}
     >
-      {pending ? "Šalje se…" : "Skeniraj i sinhronizuj"}
+      {pending ? "Šalje se…" : "Skenirajte i sinhronizujte"}
     </button>
   );
 }

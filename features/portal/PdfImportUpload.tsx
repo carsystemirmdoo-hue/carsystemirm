@@ -61,7 +61,7 @@ export function PdfImportUpload() {
           data-variant="primary"
           disabled={pending}
         >
-          {pending ? "Čitanje u toku…" : "Uvezi dokumente"}
+          {pending ? "Čitanje u toku…" : "Uvezite dokumente"}
         </button>
 
         {state.error ? (

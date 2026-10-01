@@ -30,7 +30,7 @@ export default async function PortalHomePage() {
       <PageHeader
         eyebrow="Pregled"
         title={`Dobar dan, ${user.name.split(" ")[0]}`}
-        description={`Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Ispod je tačan obim vašeg pristupa.`}
+        description={`Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Ispod je tačan obim Vašeg pristupa.`}
       />
 
       <section className="portal-panel">
@@ -55,7 +55,7 @@ export default async function PortalHomePage() {
             </ul>
           ) : (
             <p className="portal-phase-notice-tag">
-              Nemate dodatnih paketa — pristup je onaj koji nosi vaša uloga.
+              Nemate dodatnih paketa — pristup je onaj koji nosi Vaša uloga.
             </p>
           )}
           <h3>Ekrani koje možete da otvorite</h3>

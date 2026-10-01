@@ -15,7 +15,7 @@ export default function PortalForbidden() {
       <h2>Nemate dozvolu za ovaj ekran</h2>
       <p>
         Vaša uloga i dodeljeni paketi dozvola ne pokrivaju ovaj deo sistema. Ako
-        vam je pristup potreban, zatražite ga od Gazde — dodela se evidentira u
+        Vam je pristup potreban, zatražite ga od Gazde — dodela se evidentira u
         Aktivnostima.
       </p>
       <Link href="/portal" className="portal-button" data-variant="primary">

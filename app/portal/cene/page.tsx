@@ -154,7 +154,7 @@ export default async function PricesOverviewPage({
             <input type="date" name="datum" defaultValue={params.datum ?? ""} />
           </label>
           <button className="portal-button" type="submit" data-variant="primary">
-            <span>Proveri</span>
+            <span>Proverite</span>
           </button>
         </form>
 

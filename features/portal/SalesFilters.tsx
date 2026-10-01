@@ -103,7 +103,7 @@ export function SalesFilters({
           </label>
         ) : null}
         <button type="submit" className="portal-button" data-variant="primary">
-          Primeni filtere
+          Primenite filtere
         </button>
       </form>
 
@@ -121,7 +121,7 @@ export function SalesFilters({
           ))}
         </p>
         <p className="portal-phase-notice-tag">
-          Izvoz poštuje primenjene filtere i vaš opseg pristupa — sadrži tačno
+          Izvoz poštuje primenjene filtere i Vaš opseg pristupa — sadrži tačno
           ono što vidite na ekranu, sa vremenom nastanka u zaglavlju.
         </p>
       </div>

@@ -441,7 +441,7 @@ async function assertScopeAllowed(
     const assigned = await loadAssignedCustomerIds(actor.id);
     if (!canAccessCustomer(actor, assigned, draft.customerId!)) {
       throw new WorkflowError(
-        "Kupac nije u vašem opsegu — predlog nije moguć.",
+        "Kupac nije u Vašem opsegu — predlog nije moguć.",
         "out_of_scope",
       );
     }

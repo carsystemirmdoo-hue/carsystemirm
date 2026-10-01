@@ -161,7 +161,6 @@ const packLabel = (variant: CatalogVariant) => (variant.salesPack ? `${variant.s
 function variantSection(
   column: CatalogVariantColumn,
   variants: CatalogVariant[],
-  legacyPackages: string[] = [],
   manufacturer?: CatalogManufacturer,
 ): ProductVariantSection {
   return {
@@ -188,14 +187,9 @@ function variantSection(
       },
       reviewStatus: "confirmed" as const,
     })),
-    note: [
-      `Šifre i fabrička pakovanja: ${carsystemCatalogMeta.catalogue} i carsystem.org.`,
-      legacyPackages.length
-        ? `Pakovanje ${legacyPackages.join(" / ")} iz ranijeg lokalnog zapisa nije među aktuelnim šiframa proizvođača.`
-        : null,
-    ]
-      .filter(Boolean)
-      .join(" "),
+    // Ranija lokalna pakovanja (`legacyPackages`) ostaju u podacima sync-a;
+    // kupcu se prikazuje samo izvor aktuelnih šifara proizvođača.
+    note: `Šifre i fabrička pakovanja: ${carsystemCatalogMeta.catalogue} i carsystem.org.`,
   };
 }
 
@@ -245,7 +239,7 @@ const MANUFACTURER_STATUS_FACT: Partial<Record<CatalogManufacturer["manufacturer
   },
   CARSYSTEM_LISTED_RUPES_IDENTITY_OFFICIAL_PAGE_UNCONFIRMED: {
     value: "Naveden u Carsystem programu",
-    detail: "Proizvod kao RUPES artikal navodi Carsystem; zasebna stranica na zvaničnom sajtu proizvođača nije pronađena.",
+    detail: "Proizvod kao RUPES artikal navodi Carsystem u svom programu.",
   },
 };
 
@@ -308,7 +302,7 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
       lead: content.shortDescription,
     },
     ...(entry.variants.length > 1
-      ? { variants: { reviewStatus: "confirmed", content: variantSection(entry.variantColumn, entry.variants, [], manufacturer) } }
+      ? { variants: { reviewStatus: "confirmed", content: variantSection(entry.variantColumn, entry.variants, manufacturer) } }
       : {}),
     ...(content.benefits.length
       ? {
@@ -349,7 +343,7 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
         ...(entry.legacyArticleNumbers ?? []).map((legacy) => ({
           label: "Prethodna šifra artikla",
           value: legacy.articleNumber,
-          detail: `Pod ovom šifrom proizvod se vodi u izvoru: ${legacy.source}.`,
+          detail: `Šifra iz kataloga proizvođača: ${legacy.source}.`,
           reviewStatus: "confirmed" as const,
         })),
       ],
@@ -543,7 +537,7 @@ function enrichVariants(product: CarsystemProduct, enrichment: CatalogEnrichment
       ...carriedDetail,
       variants: {
         reviewStatus: "confirmed",
-        content: variantSection(enrichment.variantColumn, enrichment.variants, enrichment.legacyPackages),
+        content: variantSection(enrichment.variantColumn, enrichment.variants),
       },
     },
   };

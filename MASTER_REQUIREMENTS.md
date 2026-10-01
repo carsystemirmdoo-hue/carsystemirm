@@ -43,7 +43,7 @@ Ovo nije samo klijentski projekat. Ovo je i showcase projekat za Studio One. Diz
 
 Primarni CTA sajta:
 
-> Pronađi najbližu prodavnicu
+> Pronađite najbližu prodavnicu
 
 Ovo treba da postoji kao suptilan, ali stalno dostupan element: sticky sidebar, floating card, mini popup ili CTA modul. Ne sme biti napadno, ali mora biti očigledno.
 

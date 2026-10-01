@@ -138,7 +138,7 @@ export function SourceDocumentReview({
                       variant="ghost"
                       onClick={() => setOpenId(openId === row.id ? null : row.id)}
                     >
-                      {openId === row.id ? "Zatvori" : "Reši"}
+                      {openId === row.id ? "Zatvorite" : "Rešite"}
                     </PortalButton>
                   ) : null}
                 </td>
@@ -187,7 +187,7 @@ export function SourceDocumentReview({
                 <input type="text" name="note" required minLength={3} maxLength={500} />
               </Field>
               <PortalButton type="submit" variant="primary" disabled={reviewPending}>
-                {reviewPending ? "Upisujem…" : "Zatvori pregled"}
+                {reviewPending ? "Upisujem…" : "Zatvorite pregled"}
               </PortalButton>
             </form>
           )}

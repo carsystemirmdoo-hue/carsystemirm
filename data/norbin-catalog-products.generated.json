@@ -83,7 +83,7 @@
           {
             "field": "voc",
             "sourceLabel": "VOC per liter",
-            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "value": "Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -164,7 +164,7 @@
           {
             "field": "flashOffTime",
             "sourceLabel": "Flash off at 20°Cmin",
-            "value": "3 minutes flash off between coats",
+            "value": "3 min otparavanja između slojeva",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -182,7 +182,7 @@
           {
             "field": "voc",
             "sourceLabel": "VOC per liter",
-            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "value": "Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -191,9 +191,9 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying at 20°C",
-            "value": "5 hours ready for assembly",
+            "value": "5 h do montaže",
             "unit": "hours",
-            "condition": "at 20°C",
+            "condition": "pri 20°C",
             "equipment": null,
             "page": 2
           },
@@ -209,7 +209,7 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying Remark",
-            "value": "Total hardness: after 24 hours",
+            "value": "Potpuna tvrdoća: posle 24 h",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -217,6 +217,54 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "voc",
+          "original": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+          "value": "Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+            "page": 1,
+            "section": "VOC (2004/42/IIB(d)(420)419)"
+          }
+        },
+        {
+          "field": "flashOffTime",
+          "original": "3 minutes flash off between coats",
+          "value": "3 min otparavanja između slojeva",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "5 hours ready for assembly",
+          "originalCondition": "at 20°C",
+          "value": "5 h do montaže",
+          "condition": "pri 20°C",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "Total hardness: after 24 hours",
+          "value": "Potpuna tvrdoća: posle 24 h",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+            "page": 2,
+            "section": "Drying · Drying Remark"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -367,7 +415,7 @@
           {
             "field": "voc",
             "sourceLabel": "VOC per liter",
-            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "value": "Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -439,7 +487,7 @@
           {
             "field": "voc",
             "sourceLabel": "VOC per liter",
-            "value": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "value": "Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -502,9 +550,9 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying at 20°C",
-            "value": "2 hours dust free",
+            "value": "suvo na prašinu posle 2 h",
             "unit": "hours",
-            "condition": "at 20°C",
+            "condition": "pri 20°C",
             "equipment": null,
             "page": 2
           },
@@ -520,7 +568,7 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying Remark",
-            "value": "Total hardness: after 24 hours",
+            "value": "Potpuna tvrdoća: posle 24 h",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -537,6 +585,43 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "voc",
+          "original": "The VOC content of this product is 419 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+          "value": "Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+            "page": 1,
+            "section": "VOC (2004/42/IIB(d)(420)419)"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "2 hours dust free",
+          "originalCondition": "at 20°C",
+          "value": "suvo na prašinu posle 2 h",
+          "condition": "pri 20°C",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "Total hardness: after 24 hours",
+          "value": "Potpuna tvrdoća: posle 24 h",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N15-V25_Fast_Clear_VOC_2.pdf",
+            "page": 2,
+            "section": "Drying · Drying Remark"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -706,7 +791,7 @@
           {
             "field": "sprayCoats",
             "sourceLabel": "Number of spray coats",
-            "value": "1 - 2 thin coats",
+            "value": "1-2 tanka sloja",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -715,7 +800,7 @@
           {
             "field": "flashOffTime",
             "sourceLabel": "Flash off at 20°Cmin",
-            "value": "15 min before filler application",
+            "value": "15 min pre nanošenja punila",
             "unit": "min",
             "condition": null,
             "equipment": null,
@@ -741,6 +826,30 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "sprayCoats",
+          "original": "1 - 2 thin coats",
+          "value": "1-2 tanka sloja",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+            "page": 1,
+            "section": "Application · Number of spray coats"
+          }
+        },
+        {
+          "field": "flashOffTime",
+          "original": "15 min before filler application",
+          "value": "15 min pre nanošenja punila",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N55-015_1K_Plastic_Primer.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -1249,7 +1358,7 @@
           {
             "field": "flashOffTime",
             "sourceLabel": "Flash off at 20°Cmin",
-            "value": "3 minutes flash off between coats",
+            "value": "3 min otparavanja između slojeva",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -1302,6 +1411,19 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOffTime",
+          "original": "3 minutes flash off between coats",
+          "value": "3 min otparavanja između slojeva",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N55-V29_2K_Primer_Filler_black.pdf",
+            "page": 2,
+            "section": "Application · Flash off at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -1437,7 +1559,7 @@
           {
             "field": "voc",
             "sourceLabel": "VOC per liter",
-            "value": "The VOC content of this product is 249 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+            "value": "Sadržaj VOC ovog proizvoda je 249 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -1491,7 +1613,7 @@
           {
             "field": "potLife",
             "sourceLabel": "Potlife after mixing",
-            "value": "4 - 6 minutes at room temperature",
+            "value": "4-6 min na sobnoj temperaturi",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -1500,7 +1622,7 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying time at 20°C",
-            "value": "20 - 30 minutes",
+            "value": "20-30 min pri 20°C",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -1517,6 +1639,41 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "voc",
+          "original": "The VOC content of this product is 249 g/l. It cannot be ruled out that this product contains particles < 0.1 μm.",
+          "value": "Sadržaj VOC ovog proizvoda je 249 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+            "page": 1,
+            "section": "VOC (2004/42/IIB(b)(250)249)"
+          }
+        },
+        {
+          "field": "potLife",
+          "original": "4 - 6 minutes at room temperature",
+          "value": "4-6 min na sobnoj temperaturi",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+            "page": 1,
+            "section": "Potlife after mixing"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "20 - 30 minutes",
+          "value": "20-30 min pri 20°C",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/N60-V20_Multifunctional_Body_Filler_Hardener.pdf",
+            "page": 1,
+            "section": "Drying time at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -2269,7 +2426,7 @@
           {
             "field": "flashOffTime",
             "sourceLabel": "Flash off at 20°Cmin",
-            "value": "3 minutes flash off between coats",
+            "value": "3 min otparavanja između slojeva",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -2287,9 +2444,9 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying at 20°C",
-            "value": "5 hours ready for assembly",
+            "value": "5 h do montaže",
             "unit": "hours",
-            "condition": "at 20°C",
+            "condition": "pri 20°C",
             "equipment": null,
             "page": 2
           },
@@ -2305,7 +2462,7 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying Remark",
-            "value": "Total hardness: after 24 hours",
+            "value": "Potpuna tvrdoća: posle 24 h",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -2313,6 +2470,43 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOffTime",
+          "original": "3 minutes flash off between coats",
+          "value": "3 min otparavanja između slojeva",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "5 hours ready for assembly",
+          "originalCondition": "at 20°C",
+          "value": "5 h do montaže",
+          "condition": "pri 20°C",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "Total hardness: after 24 hours",
+          "value": "Potpuna tvrdoća: posle 24 h",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "page": 2,
+            "section": "Drying · Drying Remark"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -2487,7 +2681,7 @@
           {
             "field": "flashOffTime",
             "sourceLabel": "Flash off at 20°Cmin",
-            "value": "3 minutes flash off between coats",
+            "value": "3 min otparavanja između slojeva",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -2505,9 +2699,9 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying at 20°C",
-            "value": "5 hours ready for assembly",
+            "value": "5 h do montaže",
             "unit": "hours",
-            "condition": "at 20°C",
+            "condition": "pri 20°C",
             "equipment": null,
             "page": 2
           },
@@ -2523,7 +2717,7 @@
           {
             "field": "dryingTime",
             "sourceLabel": "Drying Remark",
-            "value": "Total hardness: after 24 hours",
+            "value": "Potpuna tvrdoća: posle 24 h",
             "unit": null,
             "condition": null,
             "equipment": null,
@@ -2531,6 +2725,43 @@
           }
         ]
       },
+      "technicalLocalization": [
+        {
+          "field": "flashOffTime",
+          "original": "3 minutes flash off between coats",
+          "value": "3 min otparavanja između slojeva",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "page": 1,
+            "section": "Application · Flash off at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "5 hours ready for assembly",
+          "originalCondition": "at 20°C",
+          "value": "5 h do montaže",
+          "condition": "pri 20°C",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        },
+        {
+          "field": "dryingTime",
+          "original": "Total hardness: after 24 hours",
+          "value": "Potpuna tvrdoća: posle 24 h",
+          "kind": "translation",
+          "tds": {
+            "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+            "page": 2,
+            "section": "Drying · Drying Remark"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",

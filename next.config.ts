@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import removedFromCustomerCatalog from "./data/catalog/removed-from-customer-catalog.json";
+import carfitSync from "./data/carfit-catalog-products.generated.json";
 import cosmosLacSync from "./data/cosmos-lac-catalog-products.generated.json";
 import {
   noStoreHeaders,
@@ -176,6 +177,12 @@ const nextConfig: NextConfig = {
         destination: "/proizvodi/baslac-35-m331",
         permanent: true,
       },
+      /*
+       * Car Fit: preimenovane adrese (`slugRenames` u `data/carfit-sync/manual-decisions.json`).
+       * Stari slug ostaje u registru sa `renamedTo`; sync odatle piše `redirects`. Trajno (308),
+       * query (`?varijanta=`) se prenosi.
+       */
+      ...carfitSync.redirects,
       /*
        * Cosmos Lac: porodične adrese kartica koje je sync podelio po zvaničnom proizvodu
        * (`npm run cosmos-lac:sync`). Izvor istine je `redirects` u generisanom datasetu — pravila sa

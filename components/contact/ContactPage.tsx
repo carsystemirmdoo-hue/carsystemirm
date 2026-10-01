@@ -58,9 +58,9 @@ export function ContactPage({
         <section className={styles.closing} aria-labelledby="contact-closing-title">
           <p className={styles.sectionKicker}>Partnerska mreža</p>
           <h2 id="contact-closing-title">
-            Jedan upit i tim vas usmerava na pravu adresu.
+            Jedan upit i tim Vas usmerava na pravu adresu.
           </h2>
-          <SplitContactCta inquiryHref="/prodavnice" inquiryLabel="Pronađi prodavnicu" />
+          <SplitContactCta inquiryHref="/prodavnice" inquiryLabel="Pronađite prodavnicu" />
         </section>
       </main>
       <Footer />

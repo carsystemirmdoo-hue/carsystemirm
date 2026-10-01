@@ -19,7 +19,7 @@ import "./portal.css";
 
 export const metadata: Metadata = {
   title: "Poslovni sistem · Carsystem i R-M",
-  description: "Interni poslovni sistem Carsystem i R-M Inđija d.o.o.",
+  description: "Interni poslovni sistem Carsystem i R-M",
   robots: { index: false, follow: false, noarchive: true },
 };
 

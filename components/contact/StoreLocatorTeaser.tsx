@@ -20,7 +20,7 @@ export function StoreLocatorTeaser({ stores }: { stores: PartnerStore[] }) {
       </p>
       <CompanyLocationMap className={styles.teaserMap} />
       <Link className={styles.teaserAction} href="/prodavnice">
-        Otvori mapu prodavnica →
+        Otvorite mapu prodavnica →
       </Link>
     </section>
   );

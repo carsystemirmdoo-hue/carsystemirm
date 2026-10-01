@@ -244,7 +244,7 @@ export function CarsystemHero({
               aria-pressed={manuallyPaused}
               onClick={() => setManuallyPaused((current) => !current)}
             >
-              {manuallyPaused ? "Pokreni" : "Pauziraj"}
+              {manuallyPaused ? "Pokrenite" : "Pauzirajte"}
             </button>
           ) : null}
         </div>

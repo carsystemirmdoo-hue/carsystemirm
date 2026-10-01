@@ -104,7 +104,7 @@ export default async function PartnerCodesPage({
                 />
               </label>
               <button className="portal-button" type="submit" data-variant="primary">
-                <span>Primeni</span>
+                <span>Primenite</span>
               </button>
             </form>
             <p className="portal-login-hint">

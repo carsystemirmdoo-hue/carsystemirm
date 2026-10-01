@@ -103,7 +103,7 @@ export function SalesFilters({
           </label>
         ) : null}
         <button type="submit" className="portal-button" data-variant="primary">
-          Primeni filtere
+          Primenite filtere
         </button>
       </form>
 
@@ -121,7 +121,7 @@ export function SalesFilters({
           ))}
         </p>
         <p className="portal-phase-notice-tag">
-          Izvoz poštuje primenjene filtere i vaš opseg pristupa — sadrži tačno
+          Izvoz poštuje primenjene filtere i Vaš opseg pristupa — sadrži tačno
           ono što vidite na ekranu, sa vremenom nastanka u zaglavlju.
         </p>
       </div>
@@ -141,7 +141,7 @@ export function NoInvoicesYet({ screen }: { screen: string }) {
         "Kolone: pib, kupac, broj_dokumenta, datum, vrsta_dokumenta, sifra_artikla, kolicina, cena, iznos_stavke.",
         "Dozvola za uvoz — ekran Importi.",
       ]}
-      phase="uvoz je dostupan odmah"
+      availability="Uvoz je dostupan odmah, na ekranu Importi"
     />
   );
 }

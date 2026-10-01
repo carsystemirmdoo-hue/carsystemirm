@@ -159,7 +159,7 @@ export function CatalogProductGrid({
             data-motion="theme-wipe"
             onClick={onSearchIndexRetry}
           >
-            <span>Pokušaj ponovo</span>
+            <span>Pokušajte ponovo</span>
           </button>
         </div>
       ) : (
@@ -169,7 +169,7 @@ export function CatalogProductGrid({
             {emptyStateNote ?? "Za izabranu kombinaciju filtera trenutno nema proizvoda."}
           </h3>
           <p className={styles.emptyStateHint}>
-            Promenite filtere ili pošaljite upit našem timu za materijal koji vam treba.
+            Promenite filtere ili pošaljite upit našem timu za materijal koji Vam treba.
           </p>
           <button
             className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
@@ -179,7 +179,7 @@ export function CatalogProductGrid({
             data-motion="theme-wipe"
             onClick={onReset}
           >
-            <span>Resetuj filtere</span>
+            <span>Resetujte filtere</span>
           </button>
         </div>
       )}

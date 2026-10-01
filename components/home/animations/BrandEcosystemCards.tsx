@@ -187,7 +187,7 @@ function ProgramBrandLogo({
       disabled={!isActive}
       tabIndex={isActive ? 0 : -1}
       aria-pressed={isSelected}
-      aria-label={`Prikaži proizvode brenda ${brand.name}`}
+      aria-label={`Prikažite proizvode brenda ${brand.name}`}
       data-selected={isSelected || undefined}
       onPointerEnter={(event) => {
         if (isActive && event.pointerType !== "touch") onBrandPreview(brandKey);

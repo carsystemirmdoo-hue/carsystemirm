@@ -175,7 +175,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
             ))}
           </div>
           <div className={styles.commerceFoot}>
-            <Link className={styles.documentsLink} href="/katalozi?brand=cosmos-lac">
+            <Link className={styles.documentsLink} href="/katalozi?brend=cosmos-lac">
               Svi COSMOS LAC dokumenti →
             </Link>
           </div>
@@ -197,18 +197,18 @@ export function CosmosBrandPage({ brand, products }: Props) {
       <section aria-labelledby="cosmos-cta-title" className={styles.finalCta}>
         <p className={styles.eyebrow}>Partnerska mreža</p>
         <h2 className={styles.display} id="cosmos-cta-title">
-          Pronađi najbližu prodavnicu
+          Pronađite najbližu prodavnicu
         </h2>
         <p className={styles.body}>
           Proverite dostupnost COSMOS LAC programa kod najbližeg partnera.
         </p>
         <div className={styles.heroCtas}>
           <Link className={styles.ctaPrimary} href="/prodavnice">
-            Pronađi prodavnicu
+            Pronađite prodavnicu
             <span aria-hidden="true">→</span>
           </Link>
           <Link className={styles.ctaSecondary} href="/kontakt">
-            Kontaktiraj tehničku podršku
+            Kontaktirajte tehničku podršku
           </Link>
         </div>
       </section>

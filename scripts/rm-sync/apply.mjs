@@ -20,6 +20,7 @@ import { existsSync, mkdirSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
+import { assertAllRulesUsed, loadTechnicalLocalization, localizeTechnical } from "../lib/technical-localization.mjs";
 import { BRAND, IMAGE_CACHE_DIR, PATHS, PUBLIC_IMAGE_URL_PREFIX, REPO_ROOT, SOURCES } from "./lib/config.mjs";
 import { isPortalPlaceholder } from "./lib/placeholders.mjs";
 
@@ -125,6 +126,23 @@ function documentsOf(record) {
   return [{ kind: "tds", title: `Tehnički list — ${record.officialName}`, href: record.tds.url, language: "en", version: record.tds.revision ?? null, note: `Zvanični dokument na ${new URL(record.tds.url).host}` }];
 }
 
+/** Srpski prikaz vrednosti iz lista; doslovna vrednost ostaje u `technicalLocalization` zapisa. */
+const technicalRules = loadTechnicalLocalization(PATHS.technicalLocalization);
+
+function technicalFields(code, tds) {
+  const raw = {
+    revision: tds.revision ?? null,
+    mixingRatio: tds.mixingRatio ?? null,
+    potLife: tds.potLife ?? null,
+    filmThickness: tds.filmThickness ?? null,
+    drying: tds.drying ?? [],
+    nozzle: tds.nozzle ?? null,
+    voc: tds.voc ?? null,
+  };
+  const { technical, localized } = localizeTechnical(code, raw, technicalRules);
+  return { technical, ...(localized.length ? { technicalLocalization: localized } : {}) };
+}
+
 function buildRecord(item) {
   const record = recordByKey.get(item.sourceKey);
   const sr = localization[item.sourceKey];
@@ -157,15 +175,7 @@ function buildRecord(item) {
     lineProducts: (record.lineProducts ?? []).map((code) => ({ code, slug: slugByCode.get(code) ?? null, name: byCode.get(code)?.officialName ?? code })),
     relations,
     usedBy,
-    technical: {
-      revision: tds.revision ?? null,
-      mixingRatio: tds.mixingRatio ?? null,
-      potLife: tds.potLife ?? null,
-      filmThickness: tds.filmThickness ?? null,
-      drying: tds.drying ?? [],
-      nozzle: tds.nozzle ?? null,
-      voc: tds.voc ?? null,
-    },
+    ...technicalFields(item.code, tds),
     documents: documentsOf(record),
     image: images[0] ? { src: images[0].src, width: entry?.width ?? null, height: entry?.height ?? null, hasAlpha: Boolean(entry?.hasAlpha), processing: entry?.mode ?? null } : null,
     missingOfficialAsset: !images.length,
@@ -207,10 +217,12 @@ for (const item of enrichments) {
     relations,
     usedBy,
     systemComponents: (record.systemComponents ?? []).map((code) => ({ code })),
-    technical: { revision: tds.revision ?? null, mixingRatio: tds.mixingRatio ?? null, potLife: tds.potLife ?? null, filmThickness: tds.filmThickness ?? null, drying: tds.drying ?? [], nozzle: tds.nozzle ?? null, voc: tds.voc ?? null },
+    ...technicalFields(item.code, tds),
     documents: documentsOf(record),
   };
 }
+
+assertAllRulesUsed(technicalRules, "rm");
 
 /* -- 5. Upis ------------------------------------------------------------------------------ */
 

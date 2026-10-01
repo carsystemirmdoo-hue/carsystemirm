@@ -91,7 +91,7 @@ function AccountActions({ account }: { account: AccountRow }) {
         account={account}
         title="Kod za promenu lozinke"
         description="Zaposleni sam postavlja novu lozinku na strani za oporavak. Vi novu lozinku ne saznajete. Izdavanje odmah gasi sve njegove otvorene prijave."
-        submitLabel="Izdaj kod"
+        submitLabel="Izdajte kod"
         busyLabel="Izdavanje…"
       />
 
@@ -101,7 +101,7 @@ function AccountActions({ account }: { account: AccountRow }) {
           account={account}
           title="Poništavanje drugog faktora"
           description="Za izgubljen ili zamenjen telefon. Briše tajnu, rezervne kodove i sve otvorene dozvole, pa odmah izdaje novu dozvolu za vezivanje."
-          submitLabel="Poništi faktor"
+          submitLabel="Poništite faktor"
           busyLabel="Poništavanje…"
           destructive
         />
@@ -111,7 +111,7 @@ function AccountActions({ account }: { account: AccountRow }) {
           account={account}
           title="Dozvola za vezivanje drugog faktora"
           description="Za nalog koji još nema drugi faktor. Kod važi 30 minuta i koristi se jednom."
-          submitLabel="Izdaj dozvolu"
+          submitLabel="Izdajte dozvolu"
           busyLabel="Izdavanje…"
         />
       )}
@@ -125,7 +125,7 @@ function AccountActions({ account }: { account: AccountRow }) {
             ? "Nalog prestaje da radi odmah, a sve otvorene prijave se gase. Podaci i trag revizije ostaju."
             : "Nalog ponovo može da se prijavi. Ranije izdati tokeni se ne oživljavaju."
         }
-        submitLabel={account.active ? "Isključi nalog" : "Vrati u rad"}
+        submitLabel={account.active ? "Isključite nalog" : "Vratite u rad"}
         busyLabel="Izvršavanje…"
         destructive={account.active}
         extra={<input type="hidden" name="active" value={account.active ? "0" : "1"} />}
@@ -271,10 +271,10 @@ function IssuedCode({ issued }: { issued: IssuedSecret }) {
             setCopied(true);
           }}
         >
-          {copied ? "Kopirano" : "Kopiraj"}
+          {copied ? "Kopirano" : "Kopirajte"}
         </PortalButton>
         <PortalButton type="button" onClick={clear}>
-          Ukloni sa ekrana
+          Uklonite sa ekrana
         </PortalButton>
       </div>
 

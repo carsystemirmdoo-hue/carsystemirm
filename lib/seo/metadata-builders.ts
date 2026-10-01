@@ -71,7 +71,11 @@ export function buildPageMetadata({
   // og:url follows the canonical, not the page path, so a shared variant link
   // resolves to the same entity the search index consolidates on.
   const canonicalUrl = absoluteSeoUrl(canonicalPath ?? path);
-  const socialImage = absoluteSeoUrl(image);
+  // `placeholder-product` je sistemski SVG „vizuel u pripremi", ne slika
+  // proizvoda — isto pravilo kao `productJsonLd`. Deljeni link tada nosi
+  // podrazumevanu sliku sajta, a ne prazan okvir.
+  const isPlaceholderImage = image.includes("placeholder-product");
+  const socialImage = absoluteSeoUrl(isPlaceholderImage ? seoSiteConfig.defaultOgImage : image);
   const shouldIndex = seoSiteConfig.indexingEnabled && index;
 
   return {
@@ -100,7 +104,7 @@ export function buildPageMetadata({
       images: [
         {
           url: socialImage,
-          alt: imageAlt ?? absoluteTitle,
+          alt: isPlaceholderImage ? absoluteTitle : (imageAlt ?? absoluteTitle),
         },
       ],
     },

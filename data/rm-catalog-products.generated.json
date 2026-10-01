@@ -4486,7 +4486,7 @@
         "potLife": "at 20°C 30 min",
         "filmThickness": "40 - 60 μm",
         "drying": [
-          "Drying at 20°C Dust free time: 35 min"
+          "20°C: suvo na prašinu posle 35 min"
         ],
         "nozzle": "1.3 - 1.4 1.3 - 1.5",
         "voc": {
@@ -4495,6 +4495,19 @@
           "content": 419
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "drying",
+          "original": "Drying at 20°C Dust free time: 35 min",
+          "value": "20°C: suvo na prašinu posle 35 min",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.rmpaint.com/unicorn/en/C%202P52%20-eSense%20clear%20coat%20ambient%20drying.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -9572,7 +9585,7 @@
         "potLife": null,
         "filmThickness": null,
         "drying": [
-          "Drying at 20°C 15 min Possibility to speed up the process",
+          "20°C: 15 min (proces se može ubrzati dodatnim protokom vazduha)",
           "Drying at 40°C 10 min"
         ],
         "nozzle": "1.3 -1.5",
@@ -9582,6 +9595,19 @@
           "content": 419
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "drying",
+          "original": "Drying at 20°C 15 min Possibility to speed up the process",
+          "value": "20°C: 15 min (proces se može ubrzati dodatnim protokom vazduha)",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.rmpaint.com/unicorn/en/ONYX%20HD-ONYX%20HD%20Waterborne%20basecoat%20line.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -9693,12 +9719,25 @@
         "potLife": null,
         "filmThickness": null,
         "drying": [
-          "Drying at 20°C 15 min Possibility to speed up the process",
+          "20°C: 15 min (proces se može ubrzati dodatnim protokom vazduha)",
           "Drying at 40°C 10 min"
         ],
         "nozzle": "1.4 -1.5",
         "voc": null
       },
+      "technicalLocalization": [
+        {
+          "field": "drying",
+          "original": "Drying at 20°C 15 min Possibility to speed up the process",
+          "value": "20°C: 15 min (proces se može ubrzati dodatnim protokom vazduha)",
+          "kind": "translation",
+          "tds": {
+            "url": "https://techinfo.rmpaint.com/unicorn/en/ONYX%20HD%20TROPICAL-Waterborne%20basecoat%20line%20TROPICAL.pdf",
+            "page": 2,
+            "section": "Drying · Drying at 20°C"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -13327,7 +13366,7 @@
       ],
       "technical": {
         "revision": "2026-07",
-        "mixingRatio": "100:25:25 100:25:25 by volume wet on wet",
+        "mixingRatio": "100:25:25 zapreminski, mokro na mokro · 100:20:20 zapreminski, za brušenje",
         "potLife": "at 20°C 1.5 h",
         "filmThickness": "50-70 μm",
         "drying": [],
@@ -13338,6 +13377,19 @@
           "content": 488
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "mixingRatio",
+          "original": "100:25:25 100:25:25 by volume wet on wet",
+          "value": "100:25:25 zapreminski, mokro na mokro · 100:20:20 zapreminski, za brušenje",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.rmpaint.com/unicorn/en/P%205540-GHD%20PROTECT%20PRIMER%20FILLER%20grey%20PUR.pdf",
+            "page": 2,
+            "section": "Mixing Ratio (100:25:25 by volume wet on wet; 100:20:20 by volume for sanding)"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",
@@ -13663,7 +13715,7 @@
         "benefits": [
           {
             "title": "Višenamensko čišćenje",
-            "description": "U izvoru označeno kao multi sredstvo za čišćenje unutar programa."
+            "description": "Proizvođač ga označava kao multi sredstvo za čišćenje unutar programa."
           },
           {
             "title": "Prvi korak pripreme",
@@ -13843,7 +13895,7 @@
         "benefits": [
           {
             "title": "Višenamensko čišćenje",
-            "description": "U izvoru označeno kao multi sredstvo za čišćenje unutar eSense programa."
+            "description": "Proizvođač ga označava kao multi sredstvo za čišćenje unutar eSense programa."
           },
           {
             "title": "eSense formulacija",
@@ -14017,7 +14069,7 @@
         "benefits": [
           {
             "title": "Univerzalna primena",
-            "description": "U izvoru označeno kao multi sredstvo za čišćenje na vodenoj bazi."
+            "description": "Proizvođač ga označava kao multi sredstvo za čišćenje na vodenoj bazi."
           },
           {
             "title": "Prvi korak pripreme",
@@ -14117,7 +14169,7 @@
         "benefits": [
           {
             "title": "Visok nivo učinka",
-            "description": "U izvoru označeno kao sredstvo za čišćenje visokog nivoa učinka."
+            "description": "Proizvođač ga označava kao sredstvo za čišćenje visokog nivoa učinka."
           },
           {
             "title": "Pre bazne i završne boje",
@@ -14404,7 +14456,7 @@
         "benefits": [
           {
             "title": "Višenamensko čišćenje",
-            "description": "U izvoru označeno kao multi sredstvo za čišćenje na vodenoj bazi."
+            "description": "Proizvođač ga označava kao multi sredstvo za čišćenje na vodenoj bazi."
           },
           {
             "title": "eSense formulacija",
@@ -14511,7 +14563,7 @@
         "benefits": [
           {
             "title": "Visok nivo učinka",
-            "description": "U izvoru označeno kao sredstvo za čišćenje najvišeg nivoa učinka."
+            "description": "Proizvođač ga označava kao sredstvo za čišćenje najvišeg nivoa učinka."
           },
           {
             "title": "Pre bazne i završne boje",
@@ -14737,7 +14789,7 @@
           },
           {
             "title": "Kvalitet površine",
-            "description": "U izvoru označeno kao rešenje za kvalitet pripremljene površine."
+            "description": "Proizvođač ga označava kao rešenje za kvalitet pripremljene površine."
           }
         ],
         "advice": null
@@ -18423,7 +18475,7 @@
       "systemComponents": [],
       "technical": {
         "revision": "2026-07",
-        "mixingRatio": "1:1 + 20% Clear coat Preparation",
+        "mixingRatio": "1:1 + 20% zapreminski (lak : učvršćivač + razređivač)",
         "potLife": "at 20°C 25 min",
         "filmThickness": "40-50 μm",
         "drying": [],
@@ -18434,6 +18486,19 @@
           "content": 419
         }
       },
+      "technicalLocalization": [
+        {
+          "field": "mixingRatio",
+          "original": "1:1 + 20% Clear coat Preparation",
+          "value": "1:1 + 20% zapreminski (lak : učvršćivač + razređivač)",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.rmpaint.com/unicorn/en/C%202A40-Clear%20coat%20air%20drying.pdf",
+            "page": 1,
+            "section": "Mixing Ratio (C 2A40 100 %, H 2A20 100 %, R 2A20/R 2A10 20 % by volume); „Clear coat Preparation\" je naslov sledećeg odeljka"
+          }
+        }
+      ],
       "documents": [
         {
           "kind": "tds",

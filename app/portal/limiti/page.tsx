@@ -17,12 +17,12 @@ export default async function Page() {
       <PhaseNotice
         icon="prices"
         title="Ekran čeka izvor podataka"
-        summary="Limit je savetodavan i ne blokira prodaju. Predlog se računa iz proverenih podataka o prometu; kašnjenje i procenat plaćanja se ne koriste dok ne postoji izvor uplata. Konačan limit odobrava Gazda."
+        summary="Limit je savetodavan i ne blokira prodaju. Predlog se računa iz proverenih podataka o prometu; kašnjenje i procenat plaćanja se ne koriste dok ne postoji izvor uplata. Konačan limit odobrava Vlasnik."
         requires={[
-          "Uvoz faktura iz BiznisSoft izvoza (faza 2) — bez njega nema nijednog prodajnog podatka.",
-          "Odluka Gazde je uvek poslednji korak — nijedan algoritam ne menja odobreni limit sam.",
+          "Uvoz faktura iz BiznisSoft izvoza — bez njega nema nijednog prodajnog podatka.",
+          "Odluka Vlasnika je uvek poslednji korak — nijedan algoritam ne menja odobreni limit sam.",
         ]}
-        phase="faza 5"
+        availability="Dostupno nakon povezivanja BiznisSoft izvoza i statusa plaćanja"
       />
     </>
   );

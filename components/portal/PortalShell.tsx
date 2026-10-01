@@ -62,7 +62,7 @@ const CRUMB_LABELS: Record<string, string> = {
 
 function CompanyMark() {
   return (
-    <span className="portal-company-mark" aria-label="Carsystem i R-M DOO">
+    <span className="portal-company-mark" aria-label="Carsystem i R-M">
       <span className="portal-company-symbol" aria-hidden="true">
         <i />
         <i />
@@ -200,7 +200,7 @@ export function PortalShell({
             className="portal-icon-button portal-sidebar-collapse"
             onClick={toggleCollapsed}
             aria-expanded={!collapsed}
-            aria-label={collapsed ? "Proširi navigaciju" : "Skupi navigaciju"}
+            aria-label={collapsed ? "Proširite navigaciju" : "Skupite navigaciju"}
           >
             <PortalIcon name="panel" />
           </button>
@@ -263,7 +263,7 @@ export function PortalShell({
               className="portal-icon-button portal-mobile-menu"
               onClick={() => setMobileOpen(true)}
               aria-expanded={mobileOpen}
-              aria-label="Otvori navigaciju"
+              aria-label="Otvorite navigaciju"
             >
               <PortalIcon name="menu" />
             </button>
@@ -288,7 +288,7 @@ export function PortalShell({
               className="portal-search-trigger"
               data-disabled="true"
               aria-disabled="true"
-              title="Pretraga se uključuje kada fakture budu uvezene (faza 2)"
+              title="Pretraga se uključuje kada fakture budu uvezene"
             >
               <PortalIcon name="search" />
               <span>Pretraga stiže sa uvozom faktura</span>

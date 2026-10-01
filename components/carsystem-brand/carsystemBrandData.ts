@@ -236,13 +236,13 @@ export const carsystemMetrics = [
     id: "programs",
     value: "program-count",
     label: "zastupljene programske celine",
-    detail: "Prema lokalnim product zapisima",
+    detail: "Prema proizvodima u katalogu",
   },
   {
     id: "support",
     value: "01",
     label: "lokalni kontakt za podršku",
-    detail: "Carsystem i R-M DOO, Inđija",
+    detail: "Carsystem i R-M, Inđija",
   },
 ] as const;
 
@@ -448,7 +448,7 @@ export const carsystemFamilies = [
     eyebrow: "Abrazivni program",
     title: "19 serija",
     description:
-      "P19 i F19 povezuju grubu i međufaznu obradu kroz potvrđene lokalne product zapise.",
+      "P19 i F19 povezuju grubu i međufaznu obradu.",
     productSlugs: [
       "carsystem-p19-brusni-diskovi",
       "carsystem-f19-brusni-diskovi",
@@ -670,7 +670,7 @@ export const carsystemProductFilters = [
 ] as const;
 
 export const carsystemDocumentation = {
-  title: "Tehnički podaci kada su vam potrebni",
+  title: "Tehnički podaci kada su Vam potrebni",
   description:
     "Dokumentacija je vezana za konkretan proizvod. Dostupni fajlovi otvaraju se direktno, a ostali se proveravaju kroz tehnički upit.",
   resources: [
@@ -705,8 +705,12 @@ export const carsystemDocumentation = {
     {
       id: "video",
       label: "Video materijali",
-      description: "Centralni javni video resurs još nije povezan.",
-      status: "U pripremi",
+      description:
+        "Pogledajte zvanične Carsystem video materijale, demonstracije proizvoda i postupke primene.",
+      status: "YouTube",
+      // Zvanični kanal koji linkuje carsystem.org (odluka vlasnika, GAP-010).
+      href: "https://www.youtube.com/carsystem_refinish",
+      external: true,
     },
     {
       id: "team",
@@ -784,7 +788,7 @@ export const carsystemFinishSystem = {
  * does not claim it proves full cure, and neither does this copy.
  */
 export const carsystemMultiChanger = {
-  title: "Git koji vam pokazuje gde je u procesu",
+  title: "Git koji Vam pokazuje gde je u procesu",
   description:
     "Multi Changer serija menja boju tokom sušenja/očvršćavanja — vizuelni signal toka rada, ne zamena za tehnički list.",
   variants: [
@@ -813,7 +817,7 @@ export const carsystemMultiChanger = {
 export const carsystemFinalCta = {
   title: "Napravite bolji proces, ne samo bolji rezultat",
   description:
-    "Povežite pripremu, reparaciju, lakiranje i završnu obradu kroz Carsystem program dostupan kod Carsystem i R-M DOO.",
+    "Povežite pripremu, reparaciju, lakiranje i završnu obradu kroz Carsystem program dostupan kod Carsystem i R-M.",
   primaryCta: {
     href: carsystemCatalogHref(),
     label: "Pogledajte Carsystem katalog",

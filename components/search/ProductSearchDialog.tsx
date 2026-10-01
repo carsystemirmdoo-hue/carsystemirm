@@ -346,7 +346,7 @@ export function ProductSearchDialog({
         className={styles.scrim}
         type="button"
         tabIndex={-1}
-        aria-label="Zatvori pretragu"
+        aria-label="Zatvorite pretragu"
         onClick={close}
       />
 
@@ -386,7 +386,7 @@ export function ProductSearchDialog({
           />
           <button className={styles.close} type="button" onClick={close}>
             <span aria-hidden="true">Esc</span>
-            <span className="sr-only">Zatvori pretragu</span>
+            <span className="sr-only">Zatvorite pretragu</span>
           </button>
         </div>
 
@@ -434,7 +434,7 @@ export function ProductSearchDialog({
                 Katalog, kategorije i brendovi rade normalno.
               </p>
               <button className={styles.retry} type="button" onClick={retry}>
-                Pokušaj ponovo
+                Pokušajte ponovo
               </button>
             </div>
           ) : showEmpty ? (
@@ -497,7 +497,7 @@ export function ProductSearchDialog({
                   onMouseMove={() => setActiveIndex(rows.length)}
                   onClick={close}
                 >
-                  <span>Prikaži sve rezultate za „{trimmed}“</span>
+                  <span>Prikažite sve rezultate za „{trimmed}“</span>
                   <span aria-hidden="true">→</span>
                 </Link>
               </li>
@@ -512,7 +512,7 @@ export function ProductSearchDialog({
         */}
         {trimmed && !tooShort && status !== "error" && rows.length === 0 && !isLoadingIndex ? (
           <Link className={styles.showAllStatic} href={catalogHref} onClick={close}>
-            <span>Otvori katalog sa upitom „{trimmed}“</span>
+            <span>Otvorite katalog sa upitom „{trimmed}“</span>
             <span aria-hidden="true">→</span>
           </Link>
         ) : null}

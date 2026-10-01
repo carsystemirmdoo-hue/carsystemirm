@@ -85,7 +85,7 @@ starts.forEach((start, index) => {
 });
 
 /**
- * True when the PDP renders this href as an "Otvori PDF" link.
+ * True when the PDP renders this href as an "Otvorite PDF" link.
  *
  * Two shapes carry an href: a document object literal (`status: "available"`
  * for the legacy list, `availability: "available"` for a reviewed

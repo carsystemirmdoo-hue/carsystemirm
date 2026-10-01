@@ -7,10 +7,10 @@ function cx(...classes: Array<string | false | null | undefined>) {
 }
 
 export function SplitContactCta({
-  callLabel = `Pozovi ${companyContact.phone}`,
+  callLabel = companyContact.phone ? `Pozovite ${companyContact.phone}` : undefined,
   className,
   inquiryHref = "/kontakt",
-  inquiryLabel = "Pošalji upit",
+  inquiryLabel = "Pošaljite upit",
   variant = "vertical",
 }: {
   callLabel?: string;
@@ -19,19 +19,26 @@ export function SplitContactCta({
   inquiryLabel?: string;
   variant?: "vertical";
 }) {
+  // Bez potvrđenog broja nema poziva: ostaje samo upit, bez praznog `tel:` linka.
+  const phoneHref = companyContact.phoneHref;
+  const showCall = Boolean(phoneHref && callLabel);
+
   return (
     <span
       className={cx(styles.root, "cs-magnetic-cta cs-theme-wipe-card", className)}
       data-variant={variant}
+      data-call={showCall ? undefined : "none"}
       data-cursor="button"
       data-motion-surface
       data-motion="theme-wipe"
     >
-      <span className={styles.callSlot}>
-        <a className={styles.callAction} href={companyContact.phoneHref}>
-          {callLabel}
-        </a>
-      </span>
+      {showCall ? (
+        <span className={styles.callSlot}>
+          <a className={styles.callAction} href={phoneHref ?? undefined}>
+            {callLabel}
+          </a>
+        </span>
+      ) : null}
       <Link className={styles.inquiryAction} href={inquiryHref}>
         {inquiryLabel}
       </Link>

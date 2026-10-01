@@ -90,7 +90,7 @@ export function NotificationList({
               </small>
               {item.actionHref ? (
                 <p>
-                  <Link href={item.actionHref}>Otvori ekran radnje</Link>
+                  <Link href={item.actionHref}>Otvorite ekran radnje</Link>
                 </p>
               ) : null}
             </div>
@@ -99,7 +99,7 @@ export function NotificationList({
                 <form action={readAction}>
                   <input type="hidden" name="id" value={item.id} />
                   <PortalButton type="submit" variant="ghost" disabled={marking}>
-                    Označi pročitanim
+                    Označite pročitanim
                   </PortalButton>
                 </form>
               ) : null}
@@ -108,7 +108,7 @@ export function NotificationList({
                   variant="ghost"
                   onClick={() => setOpenId(openId === item.id ? null : item.id)}
                 >
-                  {openId === item.id ? "Odustani" : "Zatvori"}
+                  {openId === item.id ? "Odustanite" : "Zatvorite"}
                 </PortalButton>
               ) : null}
             </div>
@@ -127,7 +127,7 @@ export function NotificationList({
             <input type="text" name="note" minLength={3} maxLength={500} required />
           </Field>
           <PortalButton type="submit" variant="primary" disabled={resolving}>
-            {resolving ? "Čuvanje…" : "Zatvori obaveštenje"}
+            {resolving ? "Čuvanje…" : "Zatvorite obaveštenje"}
           </PortalButton>
         </form>
       ) : null}

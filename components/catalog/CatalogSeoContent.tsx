@@ -30,7 +30,7 @@ export function CatalogHero({
         <p className={styles.subtitle}>
           Pregled programa za pripremu, bojenje, lakiranje i završnu obradu
           vozila. Izaberite kategoriju, uporedite proizvode i pošaljite upit za
-          materijal koji odgovara vašem poslu.
+          materijal koji odgovara Vašem poslu.
         </p>
       </div>
 
@@ -46,7 +46,7 @@ export function CatalogHero({
                   id="catalog-search-fallback"
                   className={styles.searchInput}
                   type="search"
-                  placeholder="Pretraži proizvode..."
+                  placeholder="Pretražite proizvode..."
                   disabled
                 />
               </>
@@ -55,7 +55,7 @@ export function CatalogHero({
             <CatalogHeroSearch />
           </Suspense>
         ) : (
-          <p className={styles.searchLabel}>Crawlable pregled kataloga</p>
+          <p className={styles.searchLabel}>Pregled kataloga</p>
         )}
         <div className={styles.quickStats} aria-label="Brzi pregled kataloga">
           <span>{brandCount} brendova</span>

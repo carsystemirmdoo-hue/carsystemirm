@@ -104,7 +104,7 @@ export default function BrandsIndexPage() {
                   </span>
                   <p>{brand.description}</p>
                   <span className={styles.brandCardFooter}>
-                    Pogledaj brend
+                    Pogledajte brend
                     <span aria-hidden="true">→</span>
                   </span>
                 </Link>

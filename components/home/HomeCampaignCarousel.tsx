@@ -188,8 +188,8 @@ export function HomeCampaignCarousel({
               type="button"
               aria-label={
                 userPaused
-                  ? "Pokreni automatsku promenu bannera"
-                  : "Zaustavi automatsku promenu bannera"
+                  ? "Pokrenite automatsku promenu bannera"
+                  : "Zaustavite automatsku promenu bannera"
               }
               aria-pressed={userPaused}
               data-user-paused={userPaused || undefined}
@@ -203,7 +203,7 @@ export function HomeCampaignCarousel({
             {homeCampaignSlides.map((slide, index) => (
               <button
                 type="button"
-                aria-label={`Prikaži banner ${index + 1}: ${slide.controlLabel}`}
+                aria-label={`Prikažite banner ${index + 1}: ${slide.controlLabel}`}
                 aria-current={index === activeIndex ? "true" : undefined}
                 aria-pressed={index === activeIndex}
                 disabled={controlsBusy}

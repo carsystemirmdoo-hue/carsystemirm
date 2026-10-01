@@ -52,6 +52,7 @@ export const PATHS = {
   decisions: data("manual-decisions.json"),
   taxonomyMap: data("taxonomy-map.json"),
   localizationDir: data("localization"),
+  technicalLocalization: data("technical-localization.json"),
   localizationInputDir: cache("localization-input"),
   plan: data("reports", "sync-plan.generated.json"),
   planMarkdown: data("reports", "SYNC_DRY_RUN.md"),

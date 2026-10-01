@@ -71,7 +71,7 @@ export function RmProductSystemGallery({
     >
       <div className={styles.systemGalleryIntro}>
         <div className={styles.sectionHeading}>
-          <p className={styles.rmKicker}>R-M Product System Gallery</p>
+          <p className={styles.rmKicker}>R-M sistem proizvoda</p>
           <h2 id="rm-system-gallery-title">
             Proizvod ima smisla tek unutar sistema.
           </h2>

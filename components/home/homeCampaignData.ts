@@ -89,7 +89,7 @@ export const homeCampaignSlides: HomeCampaignSlide[] = [
     gradientDirection: "to-right",
     backgroundColor: "#0b0e12",
     accentColor: "#e0242c",
-    eyebrow: "Carsystem i R-M Inđija, Srbija",
+    eyebrow: "Carsystem i R-M · Inđija, Srbija",
     // Kraci naslov kampanje; stabilan naslov strane stoji iznad carousela.
     title: "Boje, lakovi, priprema i oprema na jednom mestu.",
     description:

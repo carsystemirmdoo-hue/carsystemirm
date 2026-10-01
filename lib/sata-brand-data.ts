@@ -454,7 +454,7 @@ export const sataServices: SataServiceItem[] = [
     id: "izbor",
     title: "Izbor konfiguracije",
     body:
-      "Tehnologija, mlaz, veličina mlaznice i cup sistem zavise od materijala koji radite i od vazduha koji imate. Ako niste sigurni šta vam treba, pošaljite upit sa opisom posla.",
+      "Tehnologija, mlaz, veličina mlaznice i cup sistem zavise od materijala koji radite i od vazduha koji imate. Ako niste sigurni šta Vam treba, pošaljite upit sa opisom posla.",
   },
 ];
 

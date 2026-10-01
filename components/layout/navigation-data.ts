@@ -248,7 +248,7 @@ export const SUPPORT_LINKS: NavigationLink[] = [
   {
     href: "/kontakt",
     title: "Kontakt",
-    description: "Telefon, e-mail i obrazac za upit.",
+    description: "Adresa, e-pošta i obrazac za upit.",
     icon: "contact",
   },
 ];

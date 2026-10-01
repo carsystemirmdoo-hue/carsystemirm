@@ -697,7 +697,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               </CarfitReveal>
 
               <div className={styles.showcaseFoot}>
-                <Link className={`${styles.btn} ${styles.btnSecondary}`} href="/katalozi?brand=carfit">
+                <Link className={`${styles.btn} ${styles.btnSecondary}`} href="/katalozi?brend=carfit">
                   Svi C.A.R.FIT dokumenti
                 </Link>
               </div>

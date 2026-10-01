@@ -885,7 +885,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "R-M DIAMONT bazna boja",
     seoDescription:
-      "R-M DIAMONT bazna boja u katalogu Carsystem i R-M Inđija, sa upitom, dokumentacijom i refinish fazom.",
+      "R-M DIAMONT bazna boja u katalogu Carsystem i R-M, sa upitom, dokumentacijom i refinish fazom.",
   },
   {
     slug: "rm-diamont-bezbojni-lak",
@@ -1022,7 +1022,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "Carsystem Soft Plus git",
     seoDescription:
-      "Carsystem Soft Plus git u katalogu Carsystem i R-M Inđija, sa tehničkim specifikacijama i upitom.",
+      "Carsystem Soft Plus git u katalogu Carsystem i R-M, sa tehničkim specifikacijama i upitom.",
   },
   {
     slug: "carsystem-abraziv-p80-p2000",
@@ -1145,7 +1145,7 @@ const legacyProducts: CarsystemProduct[] = [
     ],
     seoTitle: "SATAjet X 5500",
     seoDescription:
-      "SATAjet X 5500 — premium pištolj sa X-nozzle sistemom, RP ili HVLP, mlaz I ili O. Konfiguracija i dostupnost na upit kod Carsystem i R-M Inđija.",
+      "SATAjet X 5500 — premium pištolj sa X-nozzle sistemom, RP ili HVLP, mlaz I ili O. Konfiguracija i dostupnost na upit kod Carsystem i R-M.",
   },
   {
     slug: "car-fit-prajmer",
@@ -1992,7 +1992,7 @@ const productRecords: CarsystemProduct[] = [
             { id: "159.225", values: { article: "159.225", grit: "P600", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
             { id: "159.226", values: { article: "159.226", grit: "P800", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
           ],
-          note: "Šifre i fabričko pakovanje preuzeti su iz Carsystem kataloga proizvoda 2025.",
+          note: "Šifre i fabričko pakovanje: Carsystem katalog proizvoda 2025.",
         },
       },
       benefits: {
@@ -2083,20 +2083,20 @@ const productRecords: CarsystemProduct[] = [
       compatibleProducts: {
         reviewStatus: "needs_confirmation",
         reviewerNote:
-          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19, ali odgovarajući lokalni product zapisi još nisu potvrđeni.",
+          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19; veza sa tim proizvodima u katalogu još nije potvrđena.",
         content: {
           title: "Koristi se zajedno sa",
           description:
-            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom i lokalnim product zapisom.",
+            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom.",
           items: [
             {
               productSlug: "carsystem-interface-pad",
-              note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
+              note: "Zvanično preporučen uz F.23.",
               reviewStatus: "needs_confirmation",
             },
             {
               productSlug: "carsystem-excenter-back-pad-t-19",
-              note: "Zvanično preporučen uz F.23; lokalni product zapis čeka potvrdu.",
+              note: "Zvanično preporučen uz F.23.",
               reviewStatus: "needs_confirmation",
             },
           ],
@@ -2114,11 +2114,11 @@ const productRecords: CarsystemProduct[] = [
         },
       },
       finalCta: {
-        title: "Niste sigurni koja granulacija odgovara vašem procesu?",
+        title: "Niste sigurni koja granulacija odgovara Vašem procesu?",
         description:
-          "Pošaljite nam podatke o podlozi i fazi rada. Pomoći ćemo vam da preciznije definišete izbor pre kupovine.",
-        inquiryLabel: "Zatraži savet za izbor",
-        storeLabel: "Pronađi prodavnicu",
+          "Pošaljite nam podatke o podlozi i fazi rada. Pomoći ćemo Vam da preciznije definišete izbor pre kupovine.",
+        inquiryLabel: "Zatražite savet za izbor",
+        storeLabel: "Pronađite prodavnicu",
       },
     },
   }),
@@ -2814,7 +2814,7 @@ function getFamilyVariantSelector(
 
   return {
     title: hasNamedColors ? "Dostupne boje" : "Dostupne varijante",
-    description: `${family.label} varijante iz potvrđenog lokalnog kataloga.`,
+    description: `${family.label}: sve varijante na jednom mestu.`,
     family,
     groups: [
       {
@@ -2886,8 +2886,6 @@ function getBefarVariantSelector(
 
   return {
     title: "Dostupne boje i dimenzije",
-    description:
-      "Boja je prikazana zajedno sa potvrđenom namenom, bez pretpostavljanja nepotvrđene tvrdoće sunđera.",
     family: product.family,
     groups: [
       {

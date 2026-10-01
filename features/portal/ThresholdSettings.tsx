@@ -51,7 +51,7 @@ export function ThresholdSettings({
           <p>
             {canManage
               ? "Vrednosti moraju rasti redom. Izmena važi za sve korisnike."
-              : "Pragove menja isključivo Gazda; ovde je prikaz trenutnih vrednosti."}
+              : "Pragove menja isključivo Vlasnik; ovde je prikaz trenutnih vrednosti."}
           </p>
         </div>
       </div>
@@ -92,7 +92,7 @@ export function ThresholdSettings({
               data-variant="primary"
               disabled={pending}
             >
-              {pending ? "Čuvanje…" : "Sačuvaj pragove"}
+              {pending ? "Čuvanje…" : "Sačuvajte pragove"}
             </button>
           </>
         ) : null}

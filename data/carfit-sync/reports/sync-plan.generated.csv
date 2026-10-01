@@ -60,7 +60,7 @@ sourceKey,officialName,classification,action,change,slug,localSlug,ourCategory,l
 "lifting-tape-gruen","Lifting Tape","WEBSITE_AND_CATALOGUE","IMPORT","EXISTING","carfit-lifting-tape","","maskiranje","9-160-5010","1","1","0",""
 "logo-klebestreifen","Logo Tape","WEBSITE_ONLY","IMPORT","EXISTING","carfit-logo-tape","","maskiranje","9-180-2110","1","1","0",""
 "manuelles-polier-und-schleifpad","Manual Polishing and Sanding Pad","WEBSITE_ONLY","IMPORT","EXISTING","carfit-manual-polishing-and-sanding-pad","","pribor","5-170-0004","1","1","0",""
-"matt-klarlack","Clearcoar matt","WEBSITE_AND_CATALOGUE","IMPORT","EXISTING","carfit-clearcoar-matt","","boje","7-440-1000","2","1","3",""
+"matt-klarlack","Clearcoar matt","WEBSITE_AND_CATALOGUE","IMPORT","RENAMED","carfit-clearcoat-matt","","boje","7-440-1000","2","1","3",""
 "metalltestkarten","Metal Test Cards","WEBSITE_AND_CATALOGUE","IMPORT","EXISTING","carfit-metal-test-cards","","pribor","7-700-0020","3","1","0",""
 "microfaser-reinigungstuch","Microfiber Cleaning Cloth","WEBSITE_ONLY","IMPORT","EXISTING","carfit-microfiber-cleaning-cloth","","ciscenje","8-803-0002","1","1","0",""
 "mischbecher-deckel","Mixing Cups & Mixing Lids","WEBSITE_AND_CATALOGUE","IMPORT","EXISTING","carfit-mixing-cups-and-mixing-lids","","pribor","3-200-0290","10","1","0",""

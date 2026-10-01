@@ -252,6 +252,11 @@
 }
 
 /* Na svetloj podlozi primarni CTA nosi punu plavu. */
+/* Jedan put do filtriranog kataloga umesto liste proizvoda na brend strani. */
+.localCatalogLink {
+  margin: 1.25rem 0 0;
+}
+
 .localCta .ctaPrimary {
   background: var(--sata-blue);
   color: #ffffff;

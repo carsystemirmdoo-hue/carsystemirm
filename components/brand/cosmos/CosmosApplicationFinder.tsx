@@ -111,7 +111,7 @@ export function CosmosApplicationFinder({
         </ul>
 
         <Link className={styles.finderLink} href={active.catalogueHref}>
-          Vidi sve u katalogu →
+          Pogledajte sve u katalogu →
         </Link>
       </div>
     </section>

@@ -48,6 +48,7 @@ export const PATHS = {
   decisions: data("manual-decisions.json"),
   taxonomyMap: data("taxonomy-map.json"),
   localizationDir: data("localization"),
+  technicalLocalization: data("technical-localization.json"),
   localizationInputDir: cache("localization-input"),
   imageManifest: data("image-manifest.generated.json"),
   publishedImages: data("published-images.generated.json"),

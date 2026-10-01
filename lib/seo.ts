@@ -5,7 +5,8 @@ import type {
   CarsystemProduct,
   PublicProgramGroup,
 } from "@/lib/carsystem-data";
-import type { PartnerStore } from "@/lib/partner-stores";
+import { companyContact } from "@/lib/company-contact";
+import { isPubliclyListedStore, type PartnerStore } from "@/lib/partner-stores";
 import type { ProductFamily } from "@/lib/product-families";
 import {
   buildPageMetadata,
@@ -71,12 +72,50 @@ export function organizationJsonLd() {
       {
         "@type": "Organization",
         "@id": `${absoluteUrl("/")}#organization`,
-        name: siteConfig.legalName,
+        name: siteConfig.name,
+        legalName: siteConfig.legalName,
+        taxID: companyContact.pib,
+        identifier: {
+          "@type": "PropertyValue",
+          propertyID: "Matični broj (RS)",
+          value: companyContact.mb,
+        },
         url: absoluteUrl("/"),
         logo: {
           "@type": "ImageObject",
           url: absoluteUrl(siteConfig.logo),
         },
+        // Isti potvrđeni podaci kao vidljiv kontakt (lib/company-contact.ts).
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: companyContact.streetAddress,
+          postalCode: companyContact.postalCode,
+          addressLocality: companyContact.city,
+          addressCountry: "RS",
+        },
+        telephone: companyContact.phoneInternational ?? undefined,
+        email: companyContact.email,
+        contactPoint: [
+          ...(companyContact.phoneInternational
+            ? [
+                {
+                  "@type": "ContactPoint",
+                  contactType: "customer service",
+                  telephone: companyContact.phoneInternational,
+                  email: companyContact.email,
+                  areaServed: "RS",
+                  availableLanguage: "sr",
+                },
+              ]
+            : []),
+          ...companyContact.salesContacts.map((sales) => ({
+            "@type": "ContactPoint",
+            contactType: "sales",
+            telephone: sales.phoneInternational,
+            areaServed: { "@type": "AdministrativeArea", name: sales.region },
+            availableLanguage: "sr",
+          })),
+        ],
       },
       {
         "@type": "WebSite",
@@ -263,9 +302,11 @@ export function productGroupJsonLd(family: ProductFamily) {
       url: absoluteUrl(`/proizvodi/${variant.slug}`),
       // Interni ključ se ne emituje kao SKU (schema.org ga ne zahteva).
       sku: variant.catalogMetadata?.cosmosCode ?? publicSkuOf(variant) ?? undefined,
-      image: variant.productImage
-        ? absoluteUrl(variant.productImage.src)
-        : undefined,
+      // Isto pravilo kao `productJsonLd`: placeholder nije slika proizvoda.
+      image:
+        variant.productImage && !variant.productImage.src.includes("placeholder-product")
+          ? absoluteUrl(variant.productImage.src)
+          : undefined,
     })),
   };
 }
@@ -378,7 +419,7 @@ export function productRelationshipJsonLd({
 
 export function localBusinessJsonLd(stores: PartnerStore[]) {
   const verifiedStores = stores.filter(
-    (store) => store.isPublic && store.verificationStatus === "verified",
+    (store) => isPubliclyListedStore(store),
   );
   const pageUrl = absoluteUrl("/prodavnice");
 

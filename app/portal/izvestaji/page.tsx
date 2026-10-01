@@ -19,9 +19,9 @@ export default async function Page() {
         title="Ekran čeka izvor podataka"
         summary="Izvoz nikada ne sme da sadrži redove koje korisnik ne sme da vidi, pa se gradi tek nad stvarnim podacima i proverenim opsegom."
         requires={[
-          "Uvoz faktura iz BiznisSoft izvoza (faza 2) — bez njega nema nijednog prodajnog podatka.",
+          "Uvoz faktura iz BiznisSoft izvoza — bez njega nema nijednog prodajnog podatka.",
         ]}
-        phase="faza 2"
+        availability="Dostupno nakon povezivanja BiznisSoft izvoza"
       />
     </>
   );

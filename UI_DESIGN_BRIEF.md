@@ -62,7 +62,7 @@ The first version may use static layered composition or mock 3D cards. Avoid ove
 - persistent but subtle,
 - premium card style,
 - location icon,
-- CTA text: “Pronađi najbližu prodavnicu”,
+- CTA text: “Pronađite najbližu prodavnicu”,
 - manual fallback: “Izaberi grad”.
 
 ### Brand Strip
@@ -150,7 +150,7 @@ Possible headline directions:
 
 CTA labels:
 
-- Pronađi najbližu prodavnicu
+- Pronađite najbližu prodavnicu
 - Pogledaj katalog
 - Pošalji upit
 - Postani partner

@@ -34,15 +34,15 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
             <i />
           </span>
           <span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
             <small>Inđija · Srbija</small>
           </span>
         </div>
         <div className="portal-login-brand-copy">
           <span>PRISTUP ZA KUPCE</span>
-          <h1>Vaš nalog, vaši podaci.</h1>
+          <h1>Vaš nalog, Vaši podaci.</h1>
           <p>
-            Nalog vidi isključivo podatke vaše firme. Nalog otvara kancelarija —
+            Nalog vidi isključivo podatke Vaše firme. Nalog otvara kancelarija —
             pristup se ne otvara samostalnom registracijom.
           </p>
         </div>
@@ -63,13 +63,13 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
               <i />
               <i />
             </span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
           </div>
 
           <header>
             <span>Pristup za kupce</span>
             <h2>Prijava kupca</h2>
-            <p>Prijavite se nalogom koji je otvoren za vašu firmu.</p>
+            <p>Prijavite se nalogom koji je otvoren za Vašu firmu.</p>
           </header>
 
           <input type="hidden" name="callbackUrl" value={callbackUrl} />
@@ -124,7 +124,7 @@ export function CustomerLoginForm({ callbackUrl }: { callbackUrl: string }) {
             ) : (
               <PortalIcon name="arrow" />
             )}
-            {pending ? "Provera pristupa…" : "Prijavi se"}
+            {pending ? "Provera pristupa…" : "Prijavite se"}
           </button>
 
           <p className="portal-login-note">

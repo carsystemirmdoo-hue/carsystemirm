@@ -43,7 +43,7 @@ export function ImportUpload() {
           data-variant="primary"
           disabled={pending}
         >
-          {pending ? "Uvoz u toku…" : "Uvezi fajl"}
+          {pending ? "Uvoz u toku…" : "Uvezite fajl"}
         </button>
 
         {state.error ? (

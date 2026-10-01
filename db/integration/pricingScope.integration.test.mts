@@ -269,7 +269,7 @@ test("customerId iz adrese ne zaobilazi opseg", async (t) => {
         onDate: "2026-06-15",
         viewer: asPortalUser(fx.rep, ["cene_predlog"]),
       }),
-    /nije u vašem opsegu/,
+    /nije u Vašem opsegu/,
     "preview je vratio cenu nedodeljenog kupca",
   );
 });
@@ -304,7 +304,7 @@ test("komercijalista bez dodela ne moze videti nijednu cenu", async (t) => {
         articleId: fx.articleId,
         viewer: asPortalUser(fx.repNoAssignments, ["cene_predlog"]),
       }),
-    /nije u vašem opsegu/,
+    /nije u Vašem opsegu/,
   );
 });
 

@@ -385,7 +385,7 @@ export function BulkToolbar({
           <div className="portal-bulk-actions">
             {children}
             <PortalButton variant="ghost" icon="close" onClick={onClear}>
-              Poništi izbor
+              Poništite izbor
             </PortalButton>
           </div>
         </div>
@@ -455,7 +455,7 @@ export function useDialogDismiss(onClose: () => void, active = true) {
       "header > .portal-icon-button",
     );
     if (closeButton && !closeButton.hasAttribute("aria-label"))
-      closeButton.setAttribute("aria-label", "Zatvori dijalog");
+      closeButton.setAttribute("aria-label", "Zatvorite dijalog");
 
     const focusableElements = () =>
       Array.from(

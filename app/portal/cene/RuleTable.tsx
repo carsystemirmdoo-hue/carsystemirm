@@ -46,9 +46,9 @@ export type RuleRow = {
 /** Prelazi ponuđeni iz datog stanja, sa nazivom radnje. */
 const ACTIONS: Record<string, { to: string; label: string; needsReason: boolean }[]> = {
   pending_approval: [
-    { to: "approved_pending_biznisoft", label: "Odobri", needsReason: false },
-    { to: "rejected", label: "Odbij", needsReason: true },
-    { to: "revoked", label: "Opozovi", needsReason: true },
+    { to: "approved_pending_biznisoft", label: "Odobrite", needsReason: false },
+    { to: "rejected", label: "Odbijte", needsReason: true },
+    { to: "revoked", label: "Opozovite", needsReason: true },
   ],
   /*
    * `confirmed` i `reconciliation_failed` NAMERNO nisu ponuđeni nigde.
@@ -60,15 +60,15 @@ const ACTIONS: Record<string, { to: string; label: string; needsReason: boolean 
   approved_pending_biznisoft: [
     {
       to: "office_recorded",
-      label: "Evidentiraj unos u BizniSoft",
+      label: "Evidentirajte unos u BizniSoft",
       needsReason: true,
     },
-    { to: "revoked", label: "Opozovi", needsReason: true },
-    { to: "expired", label: "Označi isteklim", needsReason: false },
+    { to: "revoked", label: "Opozovite", needsReason: true },
+    { to: "expired", label: "Označite isteklim", needsReason: false },
   ],
   office_recorded: [
-    { to: "revoked", label: "Opozovi", needsReason: true },
-    { to: "expired", label: "Označi isteklim", needsReason: false },
+    { to: "revoked", label: "Opozovite", needsReason: true },
+    { to: "expired", label: "Označite isteklim", needsReason: false },
   ],
   reconciliation_failed: [
     {
@@ -76,11 +76,11 @@ const ACTIONS: Record<string, { to: string; label: string; needsReason: boolean 
       label: "Ponovo evidentiraj unos u BizniSoft",
       needsReason: true,
     },
-    { to: "revoked", label: "Opozovi", needsReason: true },
+    { to: "revoked", label: "Opozovite", needsReason: true },
   ],
   confirmed: [
-    { to: "revoked", label: "Opozovi", needsReason: true },
-    { to: "expired", label: "Označi isteklim", needsReason: false },
+    { to: "revoked", label: "Opozovite", needsReason: true },
+    { to: "expired", label: "Označite isteklim", needsReason: false },
   ],
 };
 
@@ -183,7 +183,7 @@ export function RuleTable({
                         variant="ghost"
                         onClick={() => setOpenId(openId === row.id ? null : row.id)}
                       >
-                        {openId === row.id ? "Zatvori" : "Odluči"}
+                        {openId === row.id ? "Zatvorite" : "Odlučite"}
                       </PortalButton>
                     ) : (
                       <small>Nema dostupnih radnji</small>
@@ -224,7 +224,7 @@ export function RuleTable({
             <input type="text" name="officeRecordNote" maxLength={500} />
           </Field>
           <PortalButton type="submit" variant="primary" disabled={pending}>
-            {pending ? "Čuvanje…" : "Potvrdi radnju"}
+            {pending ? "Čuvanje…" : "Potvrdite radnju"}
           </PortalButton>
         </form>
       ) : null}

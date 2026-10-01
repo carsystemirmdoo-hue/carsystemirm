@@ -41,7 +41,7 @@ export function ReconciliationPanel({ pending }: { pending: number }) {
           Pravila koja čekaju proveru: <strong>{pending}</strong>
         </p>
         <PortalButton type="submit" variant="primary" disabled={running || pending === 0}>
-          {running ? "Proveravam…" : "Pokreni usaglašavanje"}
+          {running ? "Proveravam…" : "Pokrenite usaglašavanje"}
         </PortalButton>
 
         {state.error ? (

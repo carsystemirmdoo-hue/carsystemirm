@@ -42,7 +42,7 @@ export default async function MfaPage() {
         description={
           status.enabled
             ? "Drugi faktor je aktivan. Ovde menjate uređaj ili izdajete nove rezervne kodove."
-            : "Uz lozinku se traži i jednokratni kod iz aplikacije na vašem telefonu."
+            : "Uz lozinku se traži i jednokratni kod iz aplikacije na Vašem telefonu."
         }
       />
       <MfaEnrollment

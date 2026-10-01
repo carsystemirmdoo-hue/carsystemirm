@@ -45,12 +45,13 @@ export function DocumentLibraryExplorer({ documents }: { documents: BrandDocumen
   function selectBrand(brand: string) {
     setSelectedBrand(brand);
     const params = new URLSearchParams(searchParams.toString());
+    // Kanonski parametar je `brend`; stari `brand` se samo čita (alias).
     if (brand) {
-      params.set("brand", brand);
+      params.set("brend", brand);
     } else {
-      params.delete("brand");
+      params.delete("brend");
     }
-    params.delete("brend");
+    params.delete("brand");
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   }

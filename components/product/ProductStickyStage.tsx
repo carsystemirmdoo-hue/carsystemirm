@@ -208,8 +208,8 @@ export function ProductStickyStage({
             aria-pressed={isZoomed}
             aria-label={
               isZoomed
-                ? "Vrati prikaz proizvoda na osnovnu veličinu"
-                : "Uvećaj prikaz proizvoda"
+                ? "Vratite prikaz proizvoda na osnovnu veličinu"
+                : "Uvećajte prikaz proizvoda"
             }
             onClick={() => setIsZoomed((zoomed) => !zoomed)}
           >
@@ -235,7 +235,7 @@ export function ProductStickyStage({
                     : undefined
                 }
                 type="button"
-                aria-label={`Prikaži sliku ${index + 1}: ${image.alt}`}
+                aria-label={`Prikažite sliku ${index + 1}: ${image.alt}`}
                 aria-pressed={isActive}
                 onClick={() => setActiveIndex(index)}
                 key={image.src}

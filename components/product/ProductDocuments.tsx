@@ -46,7 +46,7 @@ export function ProductDocuments({ product }: { product: CarsystemProduct }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Otvori dokument
+                  Otvorite dokument
                 </a>
               ) : isDisabled ? (
                 <span className={styles.documentActionDisabled}>Nije javno</span>
@@ -55,7 +55,7 @@ export function ProductDocuments({ product }: { product: CarsystemProduct }) {
                   className={styles.documentAction}
                   href={`/kontakt?tema=dokument&proizvod=${product.slug}`}
                 >
-                  Zatraži dokument
+                  Zatražite dokument
                 </Link>
               )}
             </article>

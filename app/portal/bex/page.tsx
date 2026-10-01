@@ -21,7 +21,7 @@ export default async function Page() {
         requires={[
           "BEX pristupni podaci (BEX_CLIENT_ID, BEX_API_KEY) i uključen prekidač FEATURE_BEX.",
         ]}
-        phase="faza 3"
+        availability="Dostupno nakon povezivanja BEX naloga za otpremu"
       />
     </>
   );

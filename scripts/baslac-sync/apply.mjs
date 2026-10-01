@@ -25,6 +25,7 @@ import { existsSync, mkdirSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
+import { assertAllRulesUsed, loadTechnicalLocalization, localizeTechnical } from "../lib/technical-localization.mjs";
 import { BRAND, IMAGE_CACHE_DIR, PATHS, PUBLIC_IMAGE_URL_PREFIX, REPO_ROOT, SOURCES } from "./lib/config.mjs";
 
 const checkOnly = process.argv.includes("--check");
@@ -121,7 +122,20 @@ function documentsOf(tds, title) {
   }];
 }
 
-function technicalOf(tds) {
+/** Srpski prikaz vrednosti iz lista; doslovna vrednost ostaje u `technicalLocalization` zapisa. */
+const technicalRules = loadTechnicalLocalization(PATHS.technicalLocalization);
+
+function technicalOf(tds, code) {
+  return localizeTechnical(code, rawTechnicalOf(tds), technicalRules).technical;
+}
+
+/** `technical` zapisa + provenance prevedenih vrednosti (samo kad ih ima). */
+function technicalFields(record) {
+  const { technical, localized } = localizeTechnical(record.code, rawTechnicalOf(record.tds), technicalRules);
+  return { technical, ...(localized.length ? { technicalLocalization: localized } : {}) };
+}
+
+function rawTechnicalOf(tds) {
   return {
     revision: tds?.revision ?? null,
     mixingRatio: tds?.facts?.mixingRatio ?? null,
@@ -148,7 +162,7 @@ function buildSystem(item) {
     code: component.code,
     officialName: productByCode.get(component.code)?.officialName ?? component.officialName,
     tds: component.tds,
-    technical: technicalOf(productByCode.get(component.code)?.tds),
+    technical: technicalOf(productByCode.get(component.code)?.tds, component.code),
   }));
   return {
     slug: item.slug,
@@ -169,7 +183,7 @@ function buildSystem(item) {
     systemComponents: components,
     relations: [],
     usedBy: [],
-    technical: technicalOf(system.lineDocument ? productByCode.get(system.components[0])?.tds : null),
+    technical: technicalOf(system.lineDocument ? productByCode.get(system.components[0])?.tds : null, system.lineDocument ? system.components[0] : null),
     documents: [{
       kind: "tds",
       title: `Tehnički list — ${system.officialName}`,
@@ -222,7 +236,7 @@ function buildProduct(item) {
     systemComponents: [],
     relations,
     usedBy,
-    technical: technicalOf(record.tds),
+    ...technicalFields(record),
     documents: documentsOf(record.tds, record.officialName),
     image: publicPath ? { src: publicPath, width: entry?.width ?? null, height: entry?.height ?? null, hasAlpha: Boolean(entry?.hasAlpha), processing: entry?.mode ?? null } : null,
     missingOfficialAsset: !publicPath,
@@ -260,10 +274,12 @@ for (const item of enrichments) {
     taxonomy: item.taxonomy,
     relations,
     usedBy,
-    technical: technicalOf(record.tds),
+    ...technicalFields(record),
     documents: documentsOf(record.tds, record.officialName),
   };
 }
+
+assertAllRulesUsed(technicalRules, "baslac");
 
 /* -- 5. Upis ------------------------------------------------------------------------------ */
 

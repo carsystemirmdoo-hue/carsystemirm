@@ -118,8 +118,7 @@ function Families({
           <h2 id="carsystem-families-title">Sistemi koji nose radionicu</h2>
         </div>
         <p>
-          Četiri celine zasnovane su isključivo na postojećim lokalnim product
-          zapisima i mogu se širiti bez promene kompozicije.
+          Četiri celine obuhvataju Carsystem proizvode iz našeg kataloga.
         </p>
       </header>
 
@@ -221,7 +220,16 @@ function Documentation() {
               <p>{resource.description}</p>
             </div>
             <strong>{resource.status}</strong>
-            {"href" in resource ? (
+            {"href" in resource && "external" in resource ? (
+              <a
+                href={resource.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${resource.label}: ${resource.status} (otvara se u novom prozoru)`}
+              >
+                ↗
+              </a>
+            ) : "href" in resource ? (
               <Link href={resource.href} aria-label={`${resource.label}: ${resource.status}`}>
                 ↗
               </Link>
@@ -284,7 +292,7 @@ function DocumentLibrary() {
       </div>
 
       <div className={styles.documentLibraryActions}>
-        <Link className={styles.secondaryButton} href="/katalozi?brand=carsystem">
+        <Link className={styles.secondaryButton} href="/katalozi?brend=carsystem">
           Svi Carsystem katalozi i dokumenti
           <span aria-hidden="true">↗</span>
         </Link>

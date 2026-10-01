@@ -30,7 +30,7 @@ export default async function PortalHomePage() {
       <PageHeader
         eyebrow="Pregled"
         title={`Dobar dan, ${user.name.split(" ")[0]}`}
-        description={`Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Ispod je tačan obim vašeg pristupa.`}
+        description={`Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Ispod je tačan obim Vašeg pristupa.`}
       />
 
       <section className="portal-panel">
@@ -39,7 +39,7 @@ export default async function PortalHomePage() {
             <h2>Vaš pristup</h2>
             <p>
               Uloga određuje osnovni pristup, a paketi dozvola ga proširuju.
-              Dodelu menja Gazda kroz Korisnike i dozvole.
+              Dodelu menja Vlasnik kroz Korisnike i dozvole.
             </p>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default async function PortalHomePage() {
             </ul>
           ) : (
             <p className="portal-phase-notice-tag">
-              Nemate dodatnih paketa — pristup je onaj koji nosi vaša uloga.
+              Nemate dodatnih paketa — pristup je onaj koji nosi Vaša uloga.
             </p>
           )}
           <h3>Ekrani koje možete da otvorite</h3>
@@ -84,7 +84,7 @@ export default async function PortalHomePage() {
           "Prvi istorijski uvoz (nekoliko godina faktura) i zatim dnevni uvoz u 09:00.",
           "Za pokazatelje naplate je potreban odvojen, proveren izvor uplata — fakture ga ne sadrže.",
         ]}
-        phase="faza 2"
+        availability="Dostupno nakon povezivanja BiznisSoft izvoza"
       />
     </>
   );

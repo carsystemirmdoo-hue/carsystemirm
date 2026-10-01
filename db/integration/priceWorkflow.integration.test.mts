@@ -164,7 +164,7 @@ test("komercijalista ne moze predloziti za nedodeljenog kupca", async (t) => {
         },
         asPortalUser(fixture.rep, ["cene_predlog"]),
       ),
-    /nije u vašem opsegu/,
+    /nije u Vašem opsegu/,
   );
 });
 

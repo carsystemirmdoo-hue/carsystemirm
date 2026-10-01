@@ -254,8 +254,8 @@ function RmAgilisFeature({
 
       <div className={styles.agilisActions}>
         <p>
-          Potvrđene fotografije prikazujemo iz kataloga, a ostale komponente
-          ostaju jasni tehnički slotovi do odobrenja finalnih asseta.
+          Prikazujemo samo potvrđene fotografije iz kataloga; ostale komponente
+          dobijaju fotografiju kada bude odobrena.
         </p>
         <div>
           <Link

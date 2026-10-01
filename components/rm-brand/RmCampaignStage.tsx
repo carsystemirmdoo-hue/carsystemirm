@@ -143,8 +143,8 @@ export function RmCampaignStage() {
               type="button"
               aria-label={
                 userPaused
-                  ? "Pokreni automatsku promenu R-M bannera"
-                  : "Zaustavi automatsku promenu R-M bannera"
+                  ? "Pokrenite automatsku promenu R-M bannera"
+                  : "Zaustavite automatsku promenu R-M bannera"
               }
               aria-pressed={userPaused}
               data-user-paused={userPaused || undefined}
@@ -158,7 +158,7 @@ export function RmCampaignStage() {
             {rmCampaignSlides.map((slide, index) => (
               <button
                 type="button"
-                aria-label={`Prikaži banner ${index + 1}: ${slide.eyebrow}`}
+                aria-label={`Prikažite banner ${index + 1}: ${slide.eyebrow}`}
                 aria-current={index === activeIndex ? "true" : undefined}
                 aria-pressed={index === activeIndex}
                 disabled={controlsBusy}

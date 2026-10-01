@@ -46,9 +46,9 @@ export function ProgramPage({
         <SupportBand
           body="Katalog prikazuje proizvode po programu. Za izbor artikala, tehničku smernicu ili najbližu prodavnicu, pošaljite upit timu Carsystem i R-M."
           extraHref={`/katalog?program=${program.slug}`}
-          extraLabel="Pogledaj katalog"
+          extraLabel="Pogledajte katalog"
           primaryHref={`/kontakt?tema=proizvod&program=${program.slug}`}
-          primaryLabel="Pošalji upit"
+          primaryLabel="Pošaljite upit"
           title={`Pronađite proizvode za ${program.name}`}
         />
       </main>

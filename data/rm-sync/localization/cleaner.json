@@ -40,7 +40,7 @@
       "Priprema podloge u Advance Series programu"
     ],
     "benefits": [
-      { "title": "Višenamensko čišćenje", "description": "U izvoru označeno kao multi sredstvo za čišćenje unutar programa." },
+      { "title": "Višenamensko čišćenje", "description": "Proizvođač ga označava kao multi sredstvo za čišćenje unutar programa." },
       { "title": "Prvi korak pripreme", "description": "Namenjeno prvom koraku čišćenja, za uklanjanje katrana, masnoća i silikona." }
     ],
     "advice": null
@@ -64,7 +64,7 @@
       "Priprema podloge u eSense programu Pioneer Series"
     ],
     "benefits": [
-      { "title": "Višenamensko čišćenje", "description": "U izvoru označeno kao multi sredstvo za čišćenje unutar eSense programa." },
+      { "title": "Višenamensko čišćenje", "description": "Proizvođač ga označava kao multi sredstvo za čišćenje unutar eSense programa." },
       { "title": "eSense formulacija", "description": "Deo eSense programa Pioneer Series za pripremu podloge." }
     ],
     "advice": null
@@ -88,7 +88,7 @@
       "Priprema podloge u Advance Series programu"
     ],
     "benefits": [
-      { "title": "Univerzalna primena", "description": "U izvoru označeno kao multi sredstvo za čišćenje na vodenoj bazi." },
+      { "title": "Univerzalna primena", "description": "Proizvođač ga označava kao multi sredstvo za čišćenje na vodenoj bazi." },
       { "title": "Prvi korak pripreme", "description": "Namenjeno prvom koraku čišćenja, za uklanjanje ulja, masnoća i silikona." }
     ],
     "advice": null
@@ -111,7 +111,7 @@
       "Čišćenje površine pre nanošenja završne boje"
     ],
     "benefits": [
-      { "title": "Visok nivo učinka", "description": "U izvoru označeno kao sredstvo za čišćenje visokog nivoa učinka." },
+      { "title": "Visok nivo učinka", "description": "Proizvođač ga označava kao sredstvo za čišćenje visokog nivoa učinka." },
       { "title": "Pre bazne i završne boje", "description": "Primenjuje se neposredno pre nanošenja bazne i završne boje." }
     ],
     "advice": null
@@ -158,7 +158,7 @@
       "Priprema podloge u eSense programu Pioneer Series"
     ],
     "benefits": [
-      { "title": "Višenamensko čišćenje", "description": "U izvoru označeno kao multi sredstvo za čišćenje na vodenoj bazi." },
+      { "title": "Višenamensko čišćenje", "description": "Proizvođač ga označava kao multi sredstvo za čišćenje na vodenoj bazi." },
       { "title": "eSense formulacija", "description": "Deo eSense programa Pioneer Series za pripremu podloge." }
     ],
     "advice": null
@@ -181,7 +181,7 @@
       "Čišćenje površine pre nanošenja završne boje"
     ],
     "benefits": [
-      { "title": "Visok nivo učinka", "description": "U izvoru označeno kao sredstvo za čišćenje najvišeg nivoa učinka." },
+      { "title": "Visok nivo učinka", "description": "Proizvođač ga označava kao sredstvo za čišćenje najvišeg nivoa učinka." },
       { "title": "Pre bazne i završne boje", "description": "Primenjuje se neposredno pre nanošenja bazne i završne boje." }
     ],
     "advice": null
@@ -230,7 +230,7 @@
     "benefits": [
       { "title": "Bolja prionljivost", "description": "Hemijskom reakcijom sa metalnim površinama poboljšava prionljivost sistema boje." },
       { "title": "Otpornost na koroziju", "description": "Doprinosi otpornosti pripremljene metalne površine na koroziju." },
-      { "title": "Kvalitet površine", "description": "U izvoru označeno kao rešenje za kvalitet pripremljene površine." }
+      { "title": "Kvalitet površine", "description": "Proizvođač ga označava kao rešenje za kvalitet pripremljene površine." }
     ],
     "advice": null
   }

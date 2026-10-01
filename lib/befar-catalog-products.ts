@@ -116,7 +116,6 @@ const packLabel = (variant: CatalogVariant) => (variant.boxQuantity ? `${variant
 
 function variantSection(entry: CatalogProductEntry): ProductVariantSection {
   const column = entry.variantColumn;
-  const websiteOnly = entry.variants.filter((variant) => !variant.inCatalogue).length;
   return {
     title: "Varijante i šifre proizvoda",
     description:
@@ -142,14 +141,8 @@ function variantSection(entry: CatalogProductEntry): ProductVariantSection {
       ...(variant.image ? { image: variant.image } : {}),
       reviewStatus: "confirmed" as const,
     })),
-    note: [
-      `Šifre: befar.com.tr; fabrička pakovanja: ${befarCatalogMeta.catalogue}.`,
-      websiteOnly && websiteOnly < entry.variants.length
-        ? `${websiteOnly} šifara navodi samo aktuelni sajt proizvođača (u katalogu ih još nema).`
-        : null,
-    ]
-      .filter(Boolean)
-      .join(" "),
+    // Usklađivanje sajta i kataloga proizvođača (`inCatalogue`) ostaje u podacima sync-a.
+    note: `Šifre: befar.com.tr; fabrička pakovanja: ${befarCatalogMeta.catalogue}.`,
   };
 }
 
@@ -163,7 +156,7 @@ function hardnessFact(entry: CatalogProductEntry) {
     {
       label: "Tvrdoća po boji",
       value: [...byColour.entries()].map(([colour, stars]) => `${colour} ${stars}/5`).join(", "),
-      detail: `Legenda tvrdoće iz izvora: ${befarCatalogMeta.catalogue}.`,
+      detail: `Legenda tvrdoće prema katalogu ${befarCatalogMeta.catalogue}.`,
       reviewStatus: "confirmed" as const,
     },
   ];

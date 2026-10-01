@@ -98,7 +98,7 @@ export default async function SourceDocumentsPage({
             </select>
           </label>
           <button type="submit" className="portal-button" data-variant="secondary">
-            Primeni
+            Primenite
           </button>
         </form>
       </section>
@@ -157,7 +157,7 @@ export default async function SourceDocumentsPage({
               {corrective.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
-                    Nema nijednog korektivnog dokumenta u vašem opsegu.
+                    Nema nijednog korektivnog dokumenta u Vašem opsegu.
                   </td>
                 </tr>
               ) : null}

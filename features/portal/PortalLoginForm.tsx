@@ -25,7 +25,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             <i />
           </span>
           <span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
             <small>Inđija · Srbija</small>
           </span>
         </div>
@@ -42,7 +42,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             <i />
             Ovlašćeni pristup
           </span>
-          <small>Naloge otvara Gazda kroz Korisnike i dozvole</small>
+          <small>Naloge otvara Vlasnik kroz Korisnike i dozvole</small>
         </footer>
       </section>
 
@@ -54,7 +54,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
               <i />
               <i />
             </span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
           </div>
 
           <header>
@@ -119,7 +119,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
               />
             </div>
             <small id={secondFactorHintId} className="portal-login-hint">
-              Popunite samo ako je za vaš nalog uključena dvofaktorska prijava.
+              Popunite samo ako je za Vaš nalog uključena dvofaktorska prijava.
             </small>
           </label>
 
@@ -143,7 +143,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             ) : (
               <PortalIcon name="arrow" />
             )}
-            {pending ? "Provera pristupa…" : "Prijavi se"}
+            {pending ? "Provera pristupa…" : "Prijavite se"}
           </button>
 
           {/* Ikona i tekst su zasebne stavke u flex redu; bez omotača bi svaki
@@ -152,7 +152,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
           <p className="portal-login-note">
             <PortalIcon name="lock" />
             <span>
-              Zaboravljenu lozinku menjate kodom koji izdaje Gazda —{" "}
+              Zaboravljenu lozinku menjate kodom koji izdaje Vlasnik —{" "}
               <Link href="/prijava/reset">unesite kod ovde</Link>. Posle više
               uzastopnih pogrešnih pokušaja nalog se privremeno zaključava.
             </span>

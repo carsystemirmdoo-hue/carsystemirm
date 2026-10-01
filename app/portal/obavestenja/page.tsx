@@ -23,7 +23,7 @@ export default async function NotificationsPage() {
       <PageHeader
         eyebrow="Sistem"
         title="Obaveštenja"
-        description="Vidite isključivo obaveštenja koja odgovaraju vašim dozvolama. Vidljivost se vezuje za sposobnost, ne za ulogu."
+        description="Vidite isključivo obaveštenja koja odgovaraju Vašim dozvolama. Vidljivost se vezuje za sposobnost, ne za ulogu."
         meta={
           unread > 0 ? (
             <Badge tone="info">Nepročitanih: {unread}</Badge>

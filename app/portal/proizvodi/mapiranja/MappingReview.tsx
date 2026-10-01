@@ -131,7 +131,7 @@ export function MappingReview({
                     <form action={proposeAction} style={{ display: "inline" }}>
                       <input type="hidden" name="articleId" value={row.articleId} />
                       <PortalButton type="submit" variant="ghost" disabled={proposing}>
-                        Predloži po šifri
+                        Predložite po šifri
                       </PortalButton>
                     </form>
                     <PortalButton
@@ -140,7 +140,7 @@ export function MappingReview({
                         setOpenId(openId === row.articleId ? null : row.articleId)
                       }
                     >
-                      {openId === row.articleId ? "Zatvori" : "Odluči"}
+                      {openId === row.articleId ? "Zatvorite" : "Odlučite"}
                     </PortalButton>
                   </td>
                 ) : null}
@@ -158,7 +158,7 @@ export function MappingReview({
           </h3>
           <Field label="Odluka" required>
             <select name="status" defaultValue="mapped" required>
-              <option value="mapped">Potvrdi vezu</option>
+              <option value="mapped">Potvrdite vezu</option>
               {/*
                 * Odbijanje i poništavanje su različiti događaji i ne nude se
                 * zajedno: predlog se odbija, potvrđena veza se poništava.
@@ -166,11 +166,11 @@ export function MappingReview({
                 * toga šta je korisnik slučajno izabrao.
                 */}
               {open.status === "mapped" ? (
-                <option value="revoked">Poništi potvrđenu vezu</option>
+                <option value="revoked">Poništite potvrđenu vezu</option>
               ) : (
-                <option value="rejected">Odbij predlog</option>
+                <option value="rejected">Odbijte predlog</option>
               )}
-              <option value="unmapped">Vrati u nemapirano</option>
+              <option value="unmapped">Vratite u nemapirano</option>
             </select>
           </Field>
           <Field
@@ -196,7 +196,7 @@ export function MappingReview({
             <input type="text" name="note" minLength={3} maxLength={500} required />
           </Field>
           <PortalButton type="submit" disabled={deciding}>
-            {deciding ? "Čuvanje…" : "Sačuvaj odluku"}
+            {deciding ? "Čuvanje…" : "Sačuvajte odluku"}
           </PortalButton>
         </form>
       ) : null}

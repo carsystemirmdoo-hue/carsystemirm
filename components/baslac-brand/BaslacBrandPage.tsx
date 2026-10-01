@@ -740,7 +740,7 @@ function BaslacSystemsAndProducts({
 
       <div className={styles.catalogFooter}>
         <p>
-          Ne vidite artikal koji vam treba? Pošaljite oznaku sa etikete i
+          Ne vidite artikal koji Vam treba? Pošaljite oznaku sa etikete i
           potvrđujemo pakovanje, dokumentaciju i dostupnost.
         </p>
         <Link className={styles.outlineButton} href={baslacCatalogHref()}>
@@ -781,7 +781,7 @@ function DocumentLibrary() {
       </div>
 
       <div className={styles.catalogFooter}>
-        <Link className={styles.outlineButton} href="/katalozi?brand=baslac">
+        <Link className={styles.outlineButton} href="/katalozi?brend=baslac">
           Svi baslac dokumenti
           <span aria-hidden="true">↗</span>
         </Link>
@@ -797,7 +797,7 @@ function FinalCta() {
         45
       </span>
       <div>
-        <p>Potrebna vam je prava kombinacija proizvoda?</p>
+        <p>Potrebna Vam je prava kombinacija proizvoda?</p>
         <h2 id="baslac-final-title">
           Pošaljite nam vrstu popravke, podlogu i uslove rada.
         </h2>

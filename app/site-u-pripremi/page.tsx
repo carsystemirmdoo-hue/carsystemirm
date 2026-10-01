@@ -8,9 +8,9 @@ import {
 } from "@/lib/site-access";
 
 export const metadata: Metadata = {
-  title: "Sajt u pripremi | Carsystem i R-M Inđija",
+  title: "Sajt u pripremi | Carsystem i R-M",
   description:
-    "Carsystem i R-M Inđija javni sajt je u završnoj pripremi za katalog, lokator partnera i tehničku podršku.",
+    "Carsystem i R-M javni sajt je u završnoj pripremi za katalog, lokator partnera i tehničku podršku.",
   robots: {
     follow: false,
     index: false,
@@ -60,7 +60,7 @@ function accessMessage(status: string, passwordState: ReturnType<typeof getSiteA
   if (status === "not-configured") {
     return {
       tone: "danger",
-      text: "Pristup trenutno nije konfigurisan. Potrebna je SITE_ACCESS_PASSWORD env varijabla.",
+      text: "Pristup trenutno nije omogućen. Obratite se administratoru sajta.",
     };
   }
 
@@ -115,7 +115,7 @@ export default async function SiteInPreparationPage({
 
       <div className="content-shell">
         <header className="brand-header reveal reveal-1">
-          <span className="brand-mark" aria-label="Carsystem i R-M Inđija">
+          <span className="brand-mark" aria-label="Carsystem i R-M">
             <span className="brand-symbol" aria-hidden="true">
               <span />
             </span>

@@ -1088,7 +1088,7 @@ export function CatalogExplorer({
           >
             <span>Kategorija: {activeCategory.label}</span>
             <span aria-hidden="true">×</span>
-            <span className="sr-only">Ukloni filter kategorije</span>
+            <span className="sr-only">Uklonite filter kategorije</span>
           </button>
           <p className={styles.activeCategoryHint}>{activeCategory.description}</p>
         </section>
@@ -1186,7 +1186,7 @@ export function CatalogExplorer({
           <button
             className={`${styles.filtersExpandTab} cs-interactive-surface`}
             type="button"
-            aria-label="Prikaži filtere"
+            aria-label="Prikažite filtere"
             aria-controls="catalog-filters"
             data-cursor="button"
             data-motion-surface

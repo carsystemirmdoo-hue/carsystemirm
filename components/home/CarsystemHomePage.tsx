@@ -26,7 +26,7 @@ import {
 } from "./BrandLogoPlate";
 import { HomeCampaignCarousel } from "./HomeCampaignCarousel";
 import { HomeSectionRail } from "./HomeSectionRail";
-import { companyContact } from "@/lib/company-contact";
+import { companyContact, toTelHref } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
   getPartnerCityLabel,
@@ -294,7 +294,7 @@ export function CarsystemHomePage() {
 
               return href ? (
                 <Link
-                  aria-label={`Otvori stranicu brenda ${brandName}`}
+                  aria-label={`Otvorite stranicu brenda ${brandName}`}
                   className={styles.brandRailMonoLink}
                   href={href}
                   key={brandKey}
@@ -446,7 +446,7 @@ export function CarsystemHomePage() {
               <span className={styles.buttonIcon}>
                 <IconLocation />
               </span>
-              <span>Koristi moju lokaciju</span>
+              <span>Koristite svoju lokaciju</span>
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreviewList
@@ -484,7 +484,7 @@ export function CarsystemHomePage() {
                 <span>
                   {publicPartnerStores.length > 0
                     ? "Partnerska lista ostaje dostupna na stranici prodavnica."
-                    : "Demo i nepotpuni zapisi se ne prikazuju javno."}
+                    : "Lokacije se objavljuju kada podaci budu potvrđeni."}
                 </span>
               </div>
             )}
@@ -580,7 +580,7 @@ export function CarsystemHomePage() {
               tehničkom podrškom.
             </p>
             <Link className={styles.textLink} href="/kontakt?tema=tehnicka-podrska">
-              Zatraži tehnički savet
+              Zatražite tehnički savet
             </Link>
           </div>
           <div className={styles.educationIndexRows}>
@@ -609,11 +609,11 @@ export function CarsystemHomePage() {
         <div className={styles.contactGrid}>
           <div className={styles.contactPanel}>
             <p className={styles.sectionKicker}>Centrala, Inđija</p>
-            <h2 id="contact-title" data-cursor="headline">Carsystem i R-M Inđija d.o.o.</h2>
+            <h2 id="contact-title" data-cursor="headline">{companyContact.name}</h2>
             <div className={styles.contactRows}>
               <span>
                 <b>Lokacija</b>
-                Inđija, Srbija
+                {companyContact.locationLabel}
               </span>
               <span>
                 <b>Upiti</b>
@@ -621,7 +621,11 @@ export function CarsystemHomePage() {
               </span>
               <span>
                 <b>Kontakt</b>
-                <a href={companyContact.phoneHref}>{companyContact.phone}</a>
+                {companyContact.phone && companyContact.phoneHref ? (
+                  <a href={companyContact.phoneHref}>{companyContact.phone}</a>
+                ) : (
+                  <a href={companyContact.emailHref}>{companyContact.email}</a>
+                )}
                 <small>ili pošaljite upit za prodavnicu, proizvode ili podršku</small>
               </span>
             </div>
@@ -755,7 +759,7 @@ function LocatorCard({
           <span className={styles.buttonIcon}>
             <IconLocation />
           </span>
-          <span>Koristi moju lokaciju</span>
+          <span>Koristite svoju lokaciju</span>
         </button>
         <SearchableCombobox
           ariaLabel="Izaberite grad"
@@ -776,8 +780,7 @@ function LocatorCard({
 }
 
 function phoneHref(phone: string) {
-  const primaryNumber = phone.split("/")[0]?.trim() ?? phone;
-  return `tel:${primaryNumber.replace(/[^\d+]/g, "")}`;
+  return toTelHref(phone) ?? undefined;
 }
 
 function StorePreview({ store }: { store?: PartnerStore }) {
@@ -787,11 +790,10 @@ function StorePreview({ store }: { store?: PartnerStore }) {
         <span className={styles.availableDot} />
         <div>
           <header>
-            <strong>Nema javnih lokacija</strong>
+            <strong>Nema objavljenih lokacija</strong>
             <small>U pripremi</small>
           </header>
           <p>Potvrđene prodajne lokacije biće prikazane tek kada podaci budu uneti.</p>
-          <span>Bez demo adresa u public lokatoru</span>
         </div>
       </article>
     );

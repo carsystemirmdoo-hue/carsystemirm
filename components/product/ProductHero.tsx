@@ -85,7 +85,7 @@ export function ProductHero({
               data-cursor="button"
               data-motion-surface
             >
-              Pronađi prodavnicu
+              Pronađite prodavnicu
             </Link>
             <Link
               className={`${styles.tertiaryAction} cs-interactive-surface`}

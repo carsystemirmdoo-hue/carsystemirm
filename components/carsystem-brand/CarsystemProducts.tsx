@@ -51,8 +51,7 @@ export function CarsystemProducts({
           </h2>
         </div>
         <p>
-          Prikaz koristi postojeće javne product zapise. Cene i stanje nisu
-          javni i proveravaju se kroz upit.
+          Cene i stanje na lageru nisu javni — proveravaju se kroz upit.
         </p>
       </header>
 
@@ -101,7 +100,7 @@ export function CarsystemProducts({
 
       <div className={styles.productsFooter}>
         <p>
-          Potreban vam je artikal koji još nema javnu fotografiju? Pošaljite
+          Potreban Vam je artikal koji još nema javnu fotografiju? Pošaljite
           naziv ili šifru i proverićemo odgovarajući zapis.
         </p>
         <Link className={styles.primaryButton} href={carsystemCatalogHref()}>

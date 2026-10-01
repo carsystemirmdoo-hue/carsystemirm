@@ -31,7 +31,7 @@ function Dugme({ disabled }: { disabled: boolean }) {
        */
       disabled={disabled || pending}
     >
-      {pending ? "Računa se…" : "Preračunaj preporuke"}
+      {pending ? "Računa se…" : "Preračunajte preporuke"}
     </button>
   );
 }

@@ -29,7 +29,8 @@
       "REPRESENTED_BY_OWNER": 1
     },
     "newProducts": 0,
-    "existingProducts": 121,
+    "existingProducts": 120,
+    "renamedProducts": 1,
     "planErrors": {
       "duplicateSlugs": [],
       "slugCollidesWithExisting": [],
@@ -2831,8 +2832,11 @@
       "sourceConflict": false,
       "action": "IMPORT",
       "reason": null,
-      "slug": "carfit-clearcoar-matt",
-      "change": "EXISTING",
+      "slug": "carfit-clearcoat-matt",
+      "change": "RENAMED",
+      "renamedFrom": [
+        "carfit-clearcoar-matt"
+      ],
       "localSlug": null,
       "representedBySourceKey": null,
       "relatedLegacySlug": null,

@@ -41,7 +41,7 @@ const ACCOUNTS = [
       "pragovi",
       "zatvaranje",
     ],
-    note: "Gazda — potpun pristup, potvrda nabavke, limiti, administracija.",
+    note: "Vlasnik — potpun pristup, potvrda nabavke, limiti, administracija.",
   },
   {
     email: "miroslav.suljagic@carsystem.local",

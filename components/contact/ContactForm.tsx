@@ -58,18 +58,18 @@ const topicConfig: Record<
     panelHeading: "Upit za proizvod ili materijal",
     panelHelp:
       "Ako znate naziv ili šifru, upit stiže direktno do prave osobe. Katalog može da pomogne oko programa.",
-    primaryAction: { href: "/katalog", label: "Otvori katalog" },
+    primaryAction: { href: "/katalog", label: "Otvorite katalog" },
     title: "PROIZVOD / MATERIJAL",
   },
   "Najbliža prodavnica": {
     contextLabel: "Grad ili region",
     contextPlaceholder: "Na primer: Novi Sad",
-    formHeading: "Pronađimo vam najbližu lokaciju",
+    formHeading: "Pronađimo Vam najbližu lokaciju",
     formHelp: "Grad pomaže timu da preporuči odgovarajuće prodajno mesto.",
     panelHeading: "Najbrži put je mapa prodavnica",
     panelHelp:
       "Lokator prikazuje partnersku mrežu sa pretragom i filterima. Upit ostaje opcija ako želite preporuku tima.",
-    primaryAction: { href: "/prodavnice", label: "Otvori mapu prodavnica" },
+    primaryAction: { href: "/prodavnice", label: "Otvorite mapu prodavnica" },
     title: "PRODAJNO MESTO",
   },
   "Tehnička podrška": {
@@ -95,7 +95,7 @@ const topicConfig: Record<
   "Opšti upit": {
     contextLabel: "Kratak kontekst",
     contextPlaceholder: "Opciono",
-    formHeading: "Opišite vaš upit",
+    formHeading: "Opišite Vaš upit",
     formHelp: "Tim će proslediti poruku odgovarajućoj osobi.",
     panelHeading: "Poruka za Carsystem tim",
     panelHelp: "Za sve što ne spada u prethodne teme — poruka stiže do centrale.",
@@ -164,7 +164,7 @@ export function ContactForm({
       `Ime i prezime: ${fullName}`,
       company ? `Firma / servis: ${company}` : "",
       phone ? `Telefon: ${phone}` : "",
-      email ? `Email: ${email}` : "",
+      email ? `E-pošta: ${email}` : "",
       city ? `Grad: ${city}` : "",
       context ? `${copy.contextLabel}: ${context}` : "",
       "",
@@ -179,7 +179,7 @@ export function ContactForm({
       )}&body=${encodeURIComponent(body)}`;
       setSubmitState("blocked");
       setSubmitNotice(
-        "Otvoren je email klijent sa pripremljenim upitom. Poruka nije automatski poslata sa sajta jer backend za slanje još nije povezan.",
+        `Poruka još nije poslata. U Vašem programu za e-poštu otvoren je pripremljen upit za ${contact.email} — proverite ga i pošaljite iz tog programa.`,
       );
     }, 140);
   }
@@ -221,7 +221,7 @@ export function ContactForm({
             >
               <span>{copy.primaryAction.label} →</span>
             </Link>
-          ) : (
+          ) : contact.phone && contact.phoneHref ? (
             <a
               className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
               data-cursor="button"
@@ -229,11 +229,11 @@ export function ContactForm({
               data-motion="theme-wipe"
               href={contact.phoneHref}
             >
-              <span>Pozovi {contact.phone}</span>
+              <span>Pozovite {contact.phone}</span>
             </a>
-          )}
+          ) : null}
           <a className={styles.secondaryButton} href="#inquiry-form-title">
-            Popuni formu ispod
+            Popunite formu ispod
           </a>
         </div>
       </section>
@@ -246,7 +246,7 @@ export function ContactForm({
               <h2 id="inquiry-form-title">{copy.formHeading}</h2>
               <p>{copy.formHelp}</p>
             </div>
-            <span>{submitState === "submitting" ? "Priprema emaila" : "Priprema upita"}</span>
+            <span>{submitState === "submitting" ? "Priprema poruke" : "Priprema upita"}</span>
           </div>
 
           <form className={styles.formGrid} onSubmit={handleSubmit} noValidate>
@@ -288,7 +288,7 @@ export function ContactForm({
               />
             </Field>
 
-            <Field label="Email" htmlFor="contact-email">
+            <Field label="E-pošta" htmlFor="contact-email">
               <input
                 autoComplete="email"
                 aria-invalid={emailInvalid || contactInvalid || undefined}
@@ -306,12 +306,12 @@ export function ContactForm({
               />
               {emailInvalid ? (
                 <small className={styles.fieldError} id="contact-email-error">
-                  Unesite ispravan email.
+                  Unesite ispravnu adresu e-pošte.
                 </small>
               ) : null}
               {contactInvalid ? (
                 <small className={styles.fieldError} id="contact-contact-error">
-                  Unesite telefon ili email.
+                  Unesite telefon ili e-poštu.
                 </small>
               ) : null}
             </Field>
@@ -358,7 +358,7 @@ export function ContactForm({
               <textarea
                 id="contact-message"
                 onChange={(event) => setMessage(event.target.value)}
-                placeholder="Opišite šta vam je potrebno, koji grad pokrivate i kada je najbolje da vas tim kontaktira."
+                placeholder="Opišite šta Vam je potrebno, koji grad pokrivate i kada je najbolje da Vas tim kontaktira."
                 rows={7}
                 value={message}
               />
@@ -373,11 +373,11 @@ export function ContactForm({
                 data-motion-surface
                 data-motion="theme-wipe"
               >
-                <span>{submitState === "submitting" ? "Priprema..." : "Pripremi upit"}</span>
+                <span>{submitState === "submitting" ? "Priprema..." : "Pripremite upit"}</span>
               </button>
               <p>
-                Sajt trenutno priprema email poruku. Automatsko backend slanje nije
-                povezano.
+                Upit se otvara kao pripremljena poruka u Vašem programu za e-poštu.
+                Poruka nije poslata dok je ne pošaljete iz tog programa.
               </p>
             </div>
 

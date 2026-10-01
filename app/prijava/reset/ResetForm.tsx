@@ -38,7 +38,7 @@ export function ResetForm() {
             <i />
           </span>
           <span>
-            <strong>Carsystem i R-M DOO</strong>
+            <strong>Carsystem i R-M</strong>
             <small>Inđija · Srbija</small>
           </span>
         </div>
@@ -46,7 +46,7 @@ export function ResetForm() {
           <span>CS / RM · OPORAVAK PRISTUPA</span>
           <h1>Nova lozinka, u dva koraka.</h1>
           <p>
-            Vlasnik vam predaje kod lično ili telefonom. Vi birate novu lozinku —
+            Vlasnik Vam predaje kod lično ili telefonom. Vi birate novu lozinku —
             niko drugi je ne saznaje.
           </p>
         </div>
@@ -68,7 +68,7 @@ export function ResetForm() {
                 <i />
                 <i />
               </span>
-              <strong>Carsystem i R-M DOO</strong>
+              <strong>Carsystem i R-M</strong>
             </div>
             <header>
               <span>Gotovo</span>
@@ -80,7 +80,7 @@ export function ResetForm() {
             </header>
             <Link className="portal-login-submit" href="/prijava">
               <PortalIcon name="arrow" />
-              Idi na prijavu
+              Idite na prijavu
             </Link>
           </div>
         ) : (
@@ -91,7 +91,7 @@ export function ResetForm() {
                 <i />
                 <i />
               </span>
-              <strong>Carsystem i R-M DOO</strong>
+              <strong>Carsystem i R-M</strong>
             </div>
 
             {/* `h1` nosi bocni panel, kao i na prijavi; ovde ide `h2` da strana
@@ -99,7 +99,7 @@ export function ResetForm() {
             <header>
               <span>Oporavak pristupa</span>
               <h2>Nova lozinka</h2>
-              <p>Unesite kod koji vam je vlasnik predao.</p>
+              <p>Unesite kod koji Vam je vlasnik predao.</p>
             </header>
 
             <label className="portal-login-field">
@@ -187,7 +187,7 @@ export function ResetForm() {
               ) : (
                 <PortalIcon name="arrow" />
               )}
-              {pending ? "Postavljanje…" : "Postavi lozinku"}
+              {pending ? "Postavljanje…" : "Postavite lozinku"}
             </button>
 
             {/* Tekst i link u jednom omotaču: u flex redu bi svaki odlomak

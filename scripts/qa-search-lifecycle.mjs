@@ -335,7 +335,7 @@ const workerState = (page) =>
     `Posle neuspelog zahteva postoji ${afterFailure.searchWorkers} search workera (očekivano 0).`,
   );
 
-  await page.getByRole("button", { name: "Pokušaj ponovo" }).click();
+  await page.getByRole("button", { name: "Pokušajte ponovo" }).click();
   await page
     .locator('[role="dialog"] [role="option"]')
     .first()

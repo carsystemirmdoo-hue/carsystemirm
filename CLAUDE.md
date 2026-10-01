@@ -12,7 +12,7 @@ The website should not be treated as a generic catalog. It should communicate a 
 
 Primary public CTA:
 
-> Pronađi najbližu prodavnicu
+> Pronađite najbližu prodavnicu
 
 The public flow should guide end customers toward the nearest partner store in Serbia. Partner store success is a primary business objective.
 

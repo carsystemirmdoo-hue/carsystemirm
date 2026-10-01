@@ -57,7 +57,7 @@ export default async function SalesPage({
         title="Prodaja"
         description={
           scoped
-            ? "Promet vaših kupaca. Ograničenje važi i na izvoz i na direktno otvaranje adrese."
+            ? "Promet Vaših kupaca. Ograničenje važi i na izvoz i na direktno otvaranje adrese."
             : "Promet cele firme po kupcu, komercijalisti, artiklu i grupi proizvoda."
         }
       />

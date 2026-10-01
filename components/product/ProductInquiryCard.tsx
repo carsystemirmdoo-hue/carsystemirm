@@ -29,12 +29,14 @@ export function ProductInquiryCard({ product }: { product: CarsystemProduct }) {
           <dt>Odgovor</dt>
           <dd>Prodajna mreža</dd>
         </div>
-        <div>
-          <dt>Telefon</dt>
-          <dd>
-            <a href={companyContact.phoneHref}>{companyContact.phone}</a>
-          </dd>
-        </div>
+        {companyContact.phone && companyContact.phoneHref ? (
+          <div>
+            <dt>Telefon</dt>
+            <dd>
+              <a href={companyContact.phoneHref}>{companyContact.phone}</a>
+            </dd>
+          </div>
+        ) : null}
       </dl>
       <div className={styles.inquiryActions}>
         <SplitContactCta inquiryHref={`/kontakt?tema=proizvod&proizvod=${product.slug}`} />
@@ -44,7 +46,7 @@ export function ProductInquiryCard({ product }: { product: CarsystemProduct }) {
           data-cursor="button"
           data-motion-surface
         >
-          Pronađi prodavnicu
+          Pronađite prodavnicu
         </Link>
       </div>
     </aside>

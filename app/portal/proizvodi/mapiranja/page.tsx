@@ -98,11 +98,11 @@ export default async function ArticleMappingsPage({
                 />
               </label>
               <button className="portal-button" type="submit" data-variant="primary">
-                <span>Primeni</span>
+                <span>Primenite</span>
               </button>
             </form>
             <p className="portal-login-hint">
-              {"„Predloži po šifri"} traži tačno poklapanje interne šifre. Dva
+              {"„Predložite po šifri"} traži tačno poklapanje interne šifre. Dva
               kataloška proizvoda sa istom šifrom daju konflikt, ne izbor.
             </p>
           </section>

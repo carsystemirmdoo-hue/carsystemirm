@@ -19,7 +19,7 @@ export function ResetRequestForm() {
           <header>
             <span>Pristup za kupce</span>
             <h2>Zaboravljena lozinka</h2>
-            <p>Unesite e-poštu vašeg naloga.</p>
+            <p>Unesite e-poštu Vašeg naloga.</p>
           </header>
 
           <Field label="E-pošta" required>
@@ -44,7 +44,7 @@ export function ResetRequestForm() {
           ) : null}
 
           <PortalButton type="submit" variant="primary" disabled={pending}>
-            {pending ? "Slanje…" : "Zatraži promenu"}
+            {pending ? "Slanje…" : "Zatražite promenu"}
           </PortalButton>
         </form>
       </section>

@@ -3528,7 +3528,7 @@
       }
     },
     {
-      "slug": "carfit-clearcoar-matt",
+      "slug": "carfit-clearcoat-matt",
       "name": "Car Fit Clearcoat matt",
       "sourceKey": "matt-klarlack",
       "sourceUrl": "https://carfitrepair.com/en/matt-klarlack/",
@@ -17086,5 +17086,12 @@
         "decision": "Odobrio vlasnik 2026-09-19: zapis je HIGH_CONFIDENCE_MATCH sa porodicom „Masking film 7mm with electrostatic effect” (3 dimenzije), pa naziv više ne sme da sugeriše samo 4 x 5 m. Slug ostaje radi URL-a."
       }
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/proizvodi/carfit-clearcoar-matt",
+      "destination": "/proizvodi/carfit-clearcoat-matt",
+      "permanent": true
+    }
+  ]
 }

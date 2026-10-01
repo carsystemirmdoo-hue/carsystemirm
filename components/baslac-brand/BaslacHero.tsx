@@ -162,8 +162,8 @@ export function BaslacHero() {
               type="button"
               aria-label={
                 userPaused
-                  ? "Pokreni automatsku promenu Baslac bannera"
-                  : "Zaustavi automatsku promenu Baslac bannera"
+                  ? "Pokrenite automatsku promenu Baslac bannera"
+                  : "Zaustavite automatsku promenu Baslac bannera"
               }
               aria-pressed={userPaused}
               data-user-paused={userPaused || undefined}
@@ -180,7 +180,7 @@ export function BaslacHero() {
             {slides.map((slide, index) => (
               <button
                 type="button"
-                aria-label={`Prikaži banner ${index + 1}: ${slide.controlLabel}`}
+                aria-label={`Prikažite banner ${index + 1}: ${slide.controlLabel}`}
                 aria-current={index === activeIndex ? "true" : undefined}
                 aria-pressed={index === activeIndex}
                 disabled={controlsBusy}

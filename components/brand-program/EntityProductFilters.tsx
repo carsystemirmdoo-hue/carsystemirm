@@ -297,12 +297,12 @@ export function EntityProductFilters({
               <div className={styles.entityFilterActions}>
                 {hasActiveFilters ? (
                   <button type="button" onClick={clearFilters}>
-                    Resetuj
+                    Resetujte
                   </button>
                 ) : null}
                 <button
                   type="button"
-                  aria-label="Sakrij filtere"
+                  aria-label="Sakrijte filtere"
                   aria-controls={filtersId}
                   onClick={() => setDesktopCollapsed(true)}
                 >
@@ -482,7 +482,7 @@ export function EntityProductFilters({
           <button
             className={styles.entityFiltersExpand}
             type="button"
-            aria-label="Prikaži filtere"
+            aria-label="Prikažite filtere"
             aria-controls={filtersId}
             onClick={() => setDesktopCollapsed(false)}
           >
@@ -527,7 +527,7 @@ export function EntityProductFilters({
                       )
                     }
                   >
-                    Prikaži još proizvoda
+                    Prikažite još proizvoda
                   </button>
                 </div>
               )}
@@ -537,7 +537,7 @@ export function EntityProductFilters({
               <strong>Nema proizvoda za izabrane filtere.</strong>
               <p>Resetujte filtere ili pošaljite upit za tehničku preporuku.</p>
               <button className={styles.primaryButton} type="button" onClick={clearFilters}>
-                Resetuj filtere
+                Resetujte filtere
               </button>
             </div>
           )}

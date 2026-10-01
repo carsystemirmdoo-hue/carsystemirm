@@ -107,7 +107,7 @@ export function PartnerMap({
       const element = document.createElement("button");
       element.type = "button";
       element.className = mapStyles.mapMarker;
-      element.setAttribute("aria-label", `Izaberi lokaciju ${store.name}, ${store.city}`);
+      element.setAttribute("aria-label", `Izaberite lokaciju ${store.name}, ${store.city}`);
       element.addEventListener("click", (event) => {
         event.stopPropagation();
         onSelectRef.current(store.id);
@@ -155,7 +155,7 @@ export function PartnerMap({
             element.textContent = String(props.point_count);
             element.setAttribute(
               "aria-label",
-              `Grupa od ${props.point_count} lokacija, klikni za približavanje`,
+              `Grupa od ${props.point_count} lokacija, kliknite za približavanje`,
             );
             const clusterId = props.cluster_id as number;
             element.addEventListener("click", async (event) => {

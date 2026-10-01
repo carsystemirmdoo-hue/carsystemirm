@@ -57,13 +57,13 @@ export function ProgramHero({
               className={styles.primaryButton}
               href={`/kontakt?tema=proizvod&program=${program.slug}`}
             >
-              Pošalji upit
+              Pošaljite upit
             </Link>
             <Link className={styles.secondaryButton} href={`/katalog?program=${program.slug}`}>
-              Pregledaj proizvode
+              Pregledajte proizvode
             </Link>
             <Link className={styles.ghostButton} href="/prodavnice">
-              Pronađi prodavnicu
+              Pronađite prodavnicu
             </Link>
           </div>
         </div>

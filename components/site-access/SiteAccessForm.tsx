@@ -39,7 +39,7 @@ export function SiteAccessForm({
           type="password"
         />
         <button className="access-button" disabled={!canUnlock} type="submit">
-          Otključaj sajt
+          Otključajte sajt
         </button>
       </div>
       <p className="access-message" data-tone={message.tone}>

@@ -247,7 +247,7 @@ export async function withOwnerGuard<T>(
 
     if (!held || held.held < 1) {
       throw new SecurityActionError(
-        "Zaštita poslednjeg Gazda naloga ne može da se sprovede na ovoj vezi ka bazi. " +
+        "Zaštita poslednjeg naloga sa ulogom Vlasnik ne može da se sprovede na ovoj vezi ka bazi. " +
           "Radnja je odbijena. Ako aplikacija radi preko spojnice (pooler), " +
           "transakcije moraju ići direktnom vezom.",
       );
@@ -268,7 +268,7 @@ export async function withOwnerGuard<T>(
 
       if (!row || !ownerGuardAllows(row.remaining)) {
         throw new SecurityActionError(
-          "Ovo je poslednji aktivan Gazda nalog. Otvorite drugi pre nego što ovaj isključite ili mu promenite ulogu.",
+          "Ovo je poslednji aktivan nalog sa ulogom Vlasnik. Otvorite drugi pre nego što ovaj isključite ili mu promenite ulogu.",
         );
       }
     }

@@ -40,10 +40,10 @@ export default async function CustomerDetailPage({
         title="Profil kupca čeka uvezene fakture"
         summary="Kartice prometa, faktura, povrata i aktivnosti se popunjavaju iz uvoza. Pokazatelji naplate ostaju nedostupni dok ne postoji proveren izvor uplata."
         requires={[
-          "Uvoz faktura iz BiznisSoft izvoza (faza 2).",
+          "Uvoz faktura iz BiznisSoft izvoza.",
           "Proveren izvor uplata za sve što se tiče dugovanja i kašnjenja.",
         ]}
-        phase="faza 2"
+        availability="Dostupno nakon povezivanja BiznisSoft izvoza"
       />
     </>
   );

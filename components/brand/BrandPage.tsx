@@ -63,8 +63,8 @@ export function BrandPage({
         <SupportBand
           body="Pošaljite upit za izbor proizvoda, tehničku smernicu ili najbližu prodavnicu u partnerskoj mreži."
           primaryHref={brand.routes.contact}
-          primaryLabel="Pošalji upit"
-          title={`Treba vam proizvod iz ${brand.name} programa?`}
+          primaryLabel="Pošaljite upit"
+          title={`Treba Vam proizvod iz ${brand.name} programa?`}
         />
       </main>
       <Footer />

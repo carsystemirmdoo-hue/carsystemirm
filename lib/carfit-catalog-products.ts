@@ -157,7 +157,6 @@ const packLabel = (variant: CatalogVariant) =>
   variant.pieces ? `${variant.pieces} kom.` : variant.pcsPerPack ? `${variant.pcsPerPack} kom.` : "Na upit";
 
 function variantSection(column: CatalogVariantColumn, variants: CatalogVariant[]): ProductVariantSection {
-  const catalogueOnly = variants.filter((variant) => !variant.onWebsite).map((variant) => variant.articleNumber);
   return {
     title: "Varijante i šifre artikala",
     description:
@@ -182,13 +181,12 @@ function variantSection(column: CatalogVariantColumn, variants: CatalogVariant[]
     })),
     note: [
       `Šifre i fabrička pakovanja: carfitrepair.com i ${carfitCatalogMeta.catalogue}.`,
-      catalogueOnly.length
-        ? `Šifre ${catalogueOnly.join(", ")} navodi katalog proizvođača; na stranici proizvoda trenutno nisu upisane.`
-        : null,
+      // Ista varijanta pod drugom oznakom u katalogu proizvođača — korisno kupcu
+      // koji traži po bilo kojoj od njih. Usklađivanje sajt/katalog ostaje u podacima.
       ...variants.flatMap((variant) =>
         (variant.alternateArticleNumbers ?? []).map(
           (alternate) =>
-            `Šifra ${variant.articleNumber} je sa stranice proizvođača; ${alternate.source} istu varijantu vodi kao ${alternate.articleNumber} (verovatna slovna razlika kod proizvođača).`,
+            `Varijanta ${variant.articleNumber} u katalogu ${alternate.source} nosi oznaku ${alternate.articleNumber}.`,
         ),
       ),
     ]

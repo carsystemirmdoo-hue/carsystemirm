@@ -68,7 +68,7 @@ export function CartDrawer() {
                     onClick={() => remove(item.id)}
                     aria-label={`Uklonite ${item.sku}`}
                   >
-                    Ukloni
+                    Uklonite
                   </button>
                 </div>
               </li>
@@ -86,7 +86,7 @@ export function CartDrawer() {
             </Link>
             {items.length > 0 ? (
               <button type="button" className={styles.ghost} onClick={clear}>
-                Isprazni
+                Ispraznite
               </button>
             ) : null}
           </div>

@@ -62,9 +62,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO :runtime_
 --    Ovo je srž cele skripte. Okidači (0001, 0014, 0025, 0028) odbijaju
 --    izmenu i brisanje, ali ih vlasnik tabele može ukloniti sa `DROP TRIGGER`.
 --    Oduzimanjem prava na nivou uloge, aplikacija to ne može ni da pokuša.
-REVOKE UPDATE, DELETE, TRUNCATE ON
-  audit_log, customer_contact_consents, sync_command_events
-FROM :runtime_role;
+REVOKE UPDATE, DELETE, TRUNCATE ON audit_log, customer_contact_consents, sync_command_events FROM :runtime_role;
+GRANT SELECT, INSERT ON audit_log, customer_contact_consents, sync_command_events TO :runtime_role;
 
 --    Potvrda kontakta se ne briše; jedina dozvoljena izmena je opoziv
 --    (`revoked_at`, `revoked_by`, `revocation_reason`), koju okidač iz 0028

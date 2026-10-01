@@ -120,13 +120,13 @@ function createImportedProduct(
     programSlug: entry.taxonomy.programSlug,
     phaseSlug: entry.taxonomy.phaseSlug,
     shortDescription: entry.content.shortDescription,
-    longDescription: `${entry.content.shortDescription} Proizvod je povezan sa lokalno sačuvanim R-M product-information materijalom${entry.documents.technicalDataSheet ? " i tehničkim listom" : ""}. Komercijalna dostupnost, pakovanje i uslovi nabavke potvrđuju se kroz upit.`,
+    longDescription: `${entry.content.shortDescription} Komercijalna dostupnost, pakovanje i uslovi nabavke potvrđuju se kroz upit.`,
     sku: entry.productCode,
     externalSku: entry.productCode,
     packages: [
       {
         label: "Na upit",
-        detail: "Pakovanje i lokalna dostupnost nisu potvrđeni dostavljenom ZIP dokumentacijom.",
+        detail: "Pakovanje i dostupnost potvrđuju se kroz upit.",
       },
     ],
     purpose: entry.content.purpose,
@@ -156,7 +156,7 @@ function createImportedProduct(
       relationType: "same-brand",
       status: "confirmed",
       priority: index + 1,
-      internalReason: "Isti potvrđeni R-M sistem, serija ili produktna kategorija iz dostavljenog ZIP-a.",
+      internalReason: "Isti potvrđeni R-M sistem, serija ili produktna kategorija.",
     })),
     detail: getProductDetail(entry, categoryLabel, contextLabel),
   };
@@ -201,20 +201,14 @@ function getProductDetail(
     benefits: {
       reviewStatus: "confirmed",
       content: {
-        title: "Dokumentovana uloga proizvoda",
-        description:
-          "Sažetak se zasniva na zvaničnim R-M informacijama o proizvodu i, kada postoji, na tehničkom listu.",
+        // Kupcu se prikazuje samo namena proizvoda. Poreklo sažetka (zvanične
+        // R-M informacije i TDS) ostaje u podacima sync-a, ne na stranici;
+        // dokumenti su dugmad u sekciji „Dokumentacija".
+        title: "Namena proizvoda",
         items: [
           {
             title: "Uloga u procesu",
             description: entry.content.benefit,
-            reviewStatus: "confirmed",
-          },
-          {
-            title: "Dokumentacija",
-            description: entry.documents.technicalDataSheet
-              ? "Uz ovaj proizvod su dostupni zvanične informacije o proizvodu i tehnički list."
-              : "Uz ovaj proizvod su dostupne zvanične informacije o proizvodu; zaseban tehnički list trenutno nije dostupan.",
             reviewStatus: "confirmed",
           },
         ],
@@ -229,8 +223,7 @@ function getProductDetail(
       content: {
         kicker: "R-M sistemska arhitektura",
         title: `${contextLabel} · ${categoryLabel}`,
-        description:
-          "Tehnologija i kompatibilne komponente proveravaju se prema povezanom tehničkom listu. Stranica ne pretpostavlja pakovanje, mešanje ili lokalnu dostupnost.",
+        description: "Tehnologiju i kompatibilne komponente proverite u tehničkom listu.",
       },
     },
     technicalFacts: {
@@ -390,7 +383,7 @@ function getLegacyDocuments(entry: ImportedProductEntry): ProductDocument[] {
       kind: "PDF",
       href: entry.documents.productInformation,
       status: "available",
-      note: "Dostavljeno u potvrđenom R-M proizvodnom folderu.",
+      note: "Zvanične R-M informacije o proizvodu.",
     },
   ];
   if (entry.documents.technicalDataSheet) {
@@ -399,7 +392,7 @@ function getLegacyDocuments(entry: ImportedProductEntry): ProductDocument[] {
       kind: "PDF",
       href: entry.documents.technicalDataSheet,
       status: "available",
-      note: "Dostavljeno uz konkretan R-M proizvod.",
+      note: "Zvanični R-M tehnički list.",
     });
   }
   return documents;
@@ -411,9 +404,9 @@ function getSpecifications(entry: ImportedProductEntry): ProductSpecification[] 
     { label: "Sistem / serija", value: entry.content.context },
     { label: "Kategorija", value: getCategoryLabel(entry.taxonomy.category) },
     {
-      label: "Lokalna dostupnost",
+      label: "Dostupnost",
       value: "Na upit",
-      detail: "ZIP ne potvrđuje lager, cenu ni komercijalno pakovanje.",
+      detail: "Lager, cena i pakovanje potvrđuju se kroz upit.",
     },
   ];
 }

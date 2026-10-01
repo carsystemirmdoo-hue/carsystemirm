@@ -1992,7 +1992,7 @@ const productRecords: CarsystemProduct[] = [
             { id: "159.225", values: { article: "159.225", grit: "P600", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
             { id: "159.226", values: { article: "159.226", grit: "P800", pack: "50 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
           ],
-          note: "Šifre i fabričko pakovanje preuzeti su iz Carsystem kataloga proizvoda 2025.",
+          note: "Šifre i fabričko pakovanje: Carsystem katalog proizvoda 2025.",
         },
       },
       benefits: {
@@ -2083,7 +2083,7 @@ const productRecords: CarsystemProduct[] = [
       compatibleProducts: {
         reviewStatus: "needs_confirmation",
         reviewerNote:
-          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19, ali odgovarajući lokalni product zapisi još nisu potvrđeni.",
+          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19; veza sa tim proizvodima u katalogu još nije potvrđena.",
         content: {
           title: "Koristi se zajedno sa",
           description:
@@ -2814,7 +2814,7 @@ function getFamilyVariantSelector(
 
   return {
     title: hasNamedColors ? "Dostupne boje" : "Dostupne varijante",
-    description: `${family.label} varijante iz potvrđenog lokalnog kataloga.`,
+    description: `${family.label}: sve varijante na jednom mestu.`,
     family,
     groups: [
       {
@@ -2886,8 +2886,6 @@ function getBefarVariantSelector(
 
   return {
     title: "Dostupne boje i dimenzije",
-    description:
-      "Boja je prikazana zajedno sa potvrđenom namenom, bez pretpostavljanja nepotvrđene tvrdoće sunđera.",
     family: product.family,
     groups: [
       {

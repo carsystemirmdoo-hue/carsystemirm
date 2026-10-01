@@ -705,8 +705,12 @@ export const carsystemDocumentation = {
     {
       id: "video",
       label: "Video materijali",
-      description: "Video materijali za Carsystem program još nisu objavljeni.",
-      status: "U pripremi",
+      description:
+        "Pogledajte zvanične Carsystem video materijale, demonstracije proizvoda i postupke primene.",
+      status: "YouTube",
+      // Zvanični kanal koji linkuje carsystem.org (odluka vlasnika, GAP-010).
+      href: "https://www.youtube.com/carsystem_refinish",
+      external: true,
     },
     {
       id: "team",

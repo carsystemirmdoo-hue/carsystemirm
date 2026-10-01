@@ -220,7 +220,16 @@ function Documentation() {
               <p>{resource.description}</p>
             </div>
             <strong>{resource.status}</strong>
-            {"href" in resource ? (
+            {"href" in resource && "external" in resource ? (
+              <a
+                href={resource.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${resource.label}: ${resource.status} (otvara se u novom prozoru)`}
+              >
+                ↗
+              </a>
+            ) : "href" in resource ? (
               <Link href={resource.href} aria-label={`${resource.label}: ${resource.status}`}>
                 ↗
               </Link>

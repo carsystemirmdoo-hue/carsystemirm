@@ -40,7 +40,7 @@ pri postavljanju i upisujemo direktno u Vercel; ne idu u chat, e-poštu ni repoz
    (`MIGRATION_DATABASE_URL`, direktan URL) i runtime rola `carsystem_app`
    (`DATABASE_URL`, pooled) iz `db/provisioning/runtime-role.sql`.
 5. **Promenljive** po tabeli `28-…` A4 — sve funkcije isključene,
-   `MAINTENANCE_MODE=true` + `SITE_ACCESS_PASSWORD`, `NEXT_PUBLIC_SEO_INDEXING=0`,
+   `MAINTENANCE_MODE=true` + `SITE_ACCESS_PASSWORD`, `NEXT_PUBLIC_SEO_INDEXING=false` (kod gleda samo doslovno `false`; `0` NE isključuje indeksiranje),
    `AUTH_URL`/`NEXT_PUBLIC_SITE_URL` = `*.vercel.app` adresa dok domen ne pređe.
 6. **Migracije 0000–0032** sa lokalnog računara nad praznom bazom:
    `MIGRATION_DATABASE_URL=… npm run db:migrate`, zatim runtime rola, zatim
@@ -54,5 +54,5 @@ pri postavljanju i upisujemo direktno u Vercel; ne idu u chat, e-poštu ni repoz
    `AUTH_URL`/`NEXT_PUBLIC_SITE_URL` na produkcioni domen. Stari projekat na
    ličnom nalogu ostaje dok domen ne pređe; njegovo uklanjanje je posebna odluka.
 10. **Lansiranje** (posebna odluka): `MAINTENANCE_MODE=false`,
-    `NEXT_PUBLIC_SEO_INDEXING=1`, zatim funkcije jedna po jedna (nalozi kupaca,
+    ukloniti `NEXT_PUBLIC_SEO_INDEXING` (ili vrednost različita od `false`), zatim funkcije jedna po jedna (nalozi kupaca,
     preporuke, uvoz sa uređaja…), kako budu stizali podaci.

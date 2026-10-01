@@ -57,7 +57,7 @@ Pre produkcije: pun `npm run qa:pg` nad kopijom/granom iste baze (`13-…`).
 | `PORTAL_MFA_MASTER_KEY_V1`, `PORTAL_MFA_ACTIVE_KEY_VERSION=1` | ključ 32 B | drugi ključ | tajna; rotacija preko `_V2` |
 | `PORTAL_MFA_MODE` | `enforced` | `enforced` | udaljeno okruženje ionako prisiljava `enforced` |
 | `MAINTENANCE_MODE`, `SITE_ACCESS_PASSWORD` | `true` + lozinka | `true` + lozinka | skida se tek pri lansiranju |
-| `NEXT_PUBLIC_SEO_INDEXING` | `0` do lansiranja | `0` | build podešavanje |
+| `NEXT_PUBLIC_SEO_INDEXING` | `false` do lansiranja (`0` ne radi — kod poredi samo sa `false`) | `false` | build podešavanje |
 | `BOOTSTRAP_ADMIN_*` | samo za prvi seed, pa brisanje | — | tajna |
 | `FEATURE_SYNC_DEVICE_INGEST`, `FEATURE_SYNC_OPERATIONS` | `0` | `0` | uključiti tek sa registrovanim uređajem (B1) |
 | `FEATURE_RECOMMENDATIONS`, `FEATURE_PARTNER_REGISTRY` | `0` | po potrebi `1` | |

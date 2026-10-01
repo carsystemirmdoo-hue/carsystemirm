@@ -12,7 +12,11 @@ import {
   salespeople,
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
-import { validateInvoiceRow } from "@/lib/import/invoiceRow.mjs";
+import {
+  holdBackIncompleteInvoices,
+  missingRequiredColumns,
+  validateInvoiceRow,
+} from "@/lib/import/invoiceRow.mjs";
 import type { PortalUser } from "@/lib/authz/session";
 
 export interface ImportOutcome {
@@ -70,6 +74,22 @@ export async function importInvoiceFile(
   const db = getDb();
   const fileHash = fileFingerprint(content);
 
+  const missing = missingRequiredColumns(rows);
+  if (missing.length > 0) {
+    return {
+      runId: null,
+      status: "greska",
+      rowsRead: rows.length,
+      rowsValid: 0,
+      rowsDuplicate: 0,
+      rowsWarning: 0,
+      rowsInvalid: rows.length,
+      invoicesCreated: 0,
+      invoicesUpdated: 0,
+      message: `Fajl nije uvezen: nedostaju kolone ${missing.join(", ")}.`,
+    };
+  }
+
   const existing = await db
     .select({ id: importRuns.id, status: importRuns.status })
     .from(importRuns)
@@ -88,21 +108,13 @@ export async function importInvoiceFile(
       reason: `Fajl sa istim otiskom je već uvezen (uvoz #${existing[0].id}).`,
     });
 
-    return {
-      runId: existing[0].id,
-      status: "preskoceno_duplikat",
-      rowsRead: rows.length,
-      rowsValid: 0,
-      rowsDuplicate: rows.length,
-      rowsWarning: 0,
-      rowsInvalid: 0,
-      invoicesCreated: 0,
-      invoicesUpdated: 0,
-      message: `Preskočeno: isti fajl je već uvezen (uvoz #${existing[0].id}).`,
-    };
+    return duplicateOutcome(existing[0].id, rows.length);
   }
 
-  const validated = rows.map((row, index) => validateInvoiceRow(row, index + 1));
+  const { rows: validated, heldBack } = holdBackIncompleteInvoices(
+    rows.map((row, index) => validateInvoiceRow(row, index + 1)),
+    rows,
+  );
   const valid = validated.filter((row) => row.value !== null);
   const rowsInvalid = validated.filter((r) => r.status === "neispravan").length;
   const rowsWarning = validated.filter((r) => r.status === "upozorenje").length;
@@ -111,217 +123,231 @@ export async function importInvoiceFile(
   let invoicesUpdated = 0;
   let runId: number | null = null;
 
-  await db.transaction(async (tx) => {
-    const [run] = await tx
-      .insert(importRuns)
-      .values({
-        fileName,
-        sourcePath: sourcePath ?? null,
-        fileHash,
-        dataDate: dataDate ?? null,
-        status: "u_toku",
-        rowsRead: rows.length,
-        startedBy: actor.id,
-      })
-      .returning({ id: importRuns.id });
-    runId = run.id;
+  try {
+    await db.transaction(async (tx) => {
+      const [run] = await tx
+        .insert(importRuns)
+        .values({
+          fileName,
+          sourcePath: sourcePath ?? null,
+          fileHash,
+          dataDate: dataDate ?? null,
+          status: "u_toku",
+          rowsRead: rows.length,
+          startedBy: actor.id,
+        })
+        .returning({ id: importRuns.id });
+      runId = run.id;
 
-    // Svaki red — i ispravan i neispravan — ostavlja trag u privremenom sloju,
-    // da bi izveštaj o greškama mogao da se preuzme i posle uvoza.
-    type StagedRow = typeof importRows.$inferInsert;
-    const staged: StagedRow[] = validated.flatMap<StagedRow>((row) =>
-      row.problems.length === 0
-        ? [
-            {
+      // Svaki red — i ispravan i neispravan — ostavlja trag u privremenom sloju,
+      // da bi izveštaj o greškama mogao da se preuzme i posle uvoza.
+      type StagedRow = typeof importRows.$inferInsert;
+      const staged: StagedRow[] = validated.flatMap<StagedRow>((row) =>
+        row.problems.length === 0
+          ? [
+              {
+                runId: run.id,
+                rowNumber: row.rowNumber,
+                status: row.status as "ispravan",
+                field: null,
+                message: null,
+                raw: rows[row.rowNumber - 1] as Record<string, unknown>,
+              },
+            ]
+          : row.problems.map((problem) => ({
               runId: run.id,
               rowNumber: row.rowNumber,
-              status: row.status as "ispravan",
-              field: null,
-              message: null,
+              status: row.status as "upozorenje" | "neispravan",
+              field: problem.field,
+              message: problem.message,
               raw: rows[row.rowNumber - 1] as Record<string, unknown>,
-            },
-          ]
-        : row.problems.map((problem) => ({
-            runId: run.id,
-            rowNumber: row.rowNumber,
-            status: row.status as "upozorenje" | "neispravan",
-            field: problem.field,
-            message: problem.message,
-            raw: rows[row.rowNumber - 1] as Record<string, unknown>,
-          })),
-    );
-    if (staged.length > 0) await tx.insert(importRows).values(staged);
+            })),
+      );
+      if (staged.length > 0) await tx.insert(importRows).values(staged);
 
-    // Grupisanje stavki po fakturi prema poslovnom identitetu.
-    const grouped = new Map<string, ValidatedRow[]>();
-    for (const row of valid) {
-      const value = row.value as ValidatedRow;
-      const key = [
-        value.companyId,
-        value.documentKind,
-        value.number,
-        value.year,
-      ].join("|");
-      const bucket = grouped.get(key);
-      if (bucket) bucket.push(value);
-      else grouped.set(key, [value]);
-    }
-
-    for (const lines of grouped.values()) {
-      const head = lines[0];
-
-      const [customer] = await tx
-        .insert(customers)
-        .values({ pib: head.pib, name: head.customerName, city: head.city })
-        .onConflictDoUpdate({
-          target: customers.pib,
-          set: { name: head.customerName, updatedAt: sql`now()` },
-        })
-        .returning({ id: customers.id });
-
-      let salespersonId: string | null = null;
-      if (head.salespersonCode) {
-        const [person] = await tx
-          .insert(salespeople)
-          .values({
-            sourceCode: head.salespersonCode,
-            name: head.salespersonName ?? head.salespersonCode,
-          })
-          .onConflictDoUpdate({
-            target: salespeople.sourceCode,
-            set: { name: head.salespersonName ?? head.salespersonCode },
-          })
-          .returning({ id: salespeople.id });
-        salespersonId = person.id;
+      // Grupisanje stavki po fakturi prema poslovnom identitetu.
+      const grouped = new Map<string, ValidatedRow[]>();
+      for (const row of valid) {
+        const value = row.value as ValidatedRow;
+        const key = [
+          value.companyId,
+          value.documentKind,
+          value.number,
+          value.year,
+        ].join("|");
+        const bucket = grouped.get(key);
+        if (bucket) bucket.push(value);
+        else grouped.set(key, [value]);
       }
 
-      const netAmount = lines.reduce((sum, line) => sum + Number(line.lineAmount), 0);
-      const taxAmount = lines.reduce(
-        (sum, line) => sum + (Number(line.lineAmount) * Number(line.taxPercent)) / 100,
-        0,
-      );
+      for (const lines of grouped.values()) {
+        const head = lines[0];
 
-      const [invoice] = await tx
-        .insert(invoices)
-        .values({
-          companyId: head.companyId,
-          documentKind: head.documentKind as never,
-          sourceDocumentType: head.sourceDocumentType,
-          number: head.number,
-          year: head.year as number,
-          issuedOn: head.issuedOn as string,
-          customerId: customer.id,
-          salespersonId,
-          netAmount: netAmount.toFixed(2),
-          taxAmount: taxAmount.toFixed(2),
-          totalAmount: (netAmount + taxAmount).toFixed(2),
-          importRunId: run.id,
-        })
-        .onConflictDoUpdate({
-          target: [
-            invoices.companyId,
-            invoices.documentKind,
-            invoices.number,
-            invoices.year,
-          ],
-          set: {
+        const [customer] = await tx
+          .insert(customers)
+          .values({ pib: head.pib, name: head.customerName, city: head.city })
+          .onConflictDoUpdate({
+            target: customers.pib,
+            set: { name: head.customerName, updatedAt: sql`now()` },
+          })
+          .returning({ id: customers.id });
+
+        let salespersonId: string | null = null;
+        if (head.salespersonCode) {
+          const [person] = await tx
+            .insert(salespeople)
+            .values({
+              sourceCode: head.salespersonCode,
+              name: head.salespersonName ?? head.salespersonCode,
+            })
+            .onConflictDoUpdate({
+              target: salespeople.sourceCode,
+              set: { name: head.salespersonName ?? head.salespersonCode },
+            })
+            .returning({ id: salespeople.id });
+          salespersonId = person.id;
+        }
+
+        const netAmount = lines.reduce((sum, line) => sum + Number(line.lineAmount), 0);
+        const taxAmount = lines.reduce(
+          (sum, line) => sum + (Number(line.lineAmount) * Number(line.taxPercent)) / 100,
+          0,
+        );
+
+        const [invoice] = await tx
+          .insert(invoices)
+          .values({
+            companyId: head.companyId,
+            documentKind: head.documentKind as never,
+            sourceDocumentType: head.sourceDocumentType,
+            number: head.number,
+            year: head.year as number,
             issuedOn: head.issuedOn as string,
             customerId: customer.id,
             salespersonId,
             netAmount: netAmount.toFixed(2),
             taxAmount: taxAmount.toFixed(2),
             totalAmount: (netAmount + taxAmount).toFixed(2),
-            sourceDocumentType: head.sourceDocumentType,
             importRunId: run.id,
-            updatedAt: sql`now()`,
-          },
-        })
-        .returning({ id: invoices.id, createdAt: invoices.createdAt, updatedAt: invoices.updatedAt });
-
-      const isNew = invoice.createdAt.getTime() === invoice.updatedAt.getTime();
-      if (isNew) invoicesCreated += 1;
-      else invoicesUpdated += 1;
-
-      // Stavke se pišu iznova za tu fakturu: ponovni uvoz istog dokumenta ne
-      // sme da nagomila duple stavke.
-      await tx.delete(invoiceLines).where(eq(invoiceLines.invoiceId, invoice.id));
-
-      for (const line of lines) {
-        const [article] = await tx
-          .insert(articles)
-          .values({
-            code: line.articleCode,
-            name: line.articleName,
-            productGroup: line.productGroup,
-            brand: line.brand,
-            unit: line.unit,
           })
           .onConflictDoUpdate({
-            target: articles.code,
-            set: { name: line.articleName, updatedAt: sql`now()` },
+            target: [
+              invoices.companyId,
+              invoices.documentKind,
+              invoices.number,
+              invoices.year,
+            ],
+            set: {
+              issuedOn: head.issuedOn as string,
+              customerId: customer.id,
+              salespersonId,
+              netAmount: netAmount.toFixed(2),
+              taxAmount: taxAmount.toFixed(2),
+              totalAmount: (netAmount + taxAmount).toFixed(2),
+              sourceDocumentType: head.sourceDocumentType,
+              importRunId: run.id,
+              updatedAt: sql`now()`,
+            },
           })
-          .returning({ id: articles.id });
+          .returning({ id: invoices.id, createdAt: invoices.createdAt, updatedAt: invoices.updatedAt });
 
-        await tx.insert(invoiceLines).values({
-          invoiceId: invoice.id,
-          lineNumber: line.lineNumber,
-          articleId: article.id,
-          articleCode: line.articleCode,
-          description: line.articleName,
-          quantity: Number(line.quantity).toFixed(3),
-          unitPrice: Number(line.unitPrice).toFixed(4),
-          discountPercent: Number(line.discountPercent).toFixed(3),
-          taxPercent: Number(line.taxPercent).toFixed(3),
-          lineAmount: Number(line.lineAmount).toFixed(2),
-        });
+        const isNew = invoice.createdAt.getTime() === invoice.updatedAt.getTime();
+        if (isNew) invoicesCreated += 1;
+        else invoicesUpdated += 1;
+
+        // Stavke se pišu iznova za tu fakturu: ponovni uvoz istog dokumenta ne
+        // sme da nagomila duple stavke.
+        await tx.delete(invoiceLines).where(eq(invoiceLines.invoiceId, invoice.id));
+
+        for (const line of lines) {
+          const [article] = await tx
+            .insert(articles)
+            .values({
+              code: line.articleCode,
+              name: line.articleName,
+              productGroup: line.productGroup,
+              brand: line.brand,
+              unit: line.unit,
+            })
+            .onConflictDoUpdate({
+              target: articles.code,
+              set: { name: line.articleName, updatedAt: sql`now()` },
+            })
+            .returning({ id: articles.id });
+
+          await tx.insert(invoiceLines).values({
+            invoiceId: invoice.id,
+            lineNumber: line.lineNumber,
+            articleId: article.id,
+            articleCode: line.articleCode,
+            description: line.articleName,
+            quantity: Number(line.quantity).toFixed(3),
+            unitPrice: Number(line.unitPrice).toFixed(4),
+            discountPercent: Number(line.discountPercent).toFixed(3),
+            taxPercent: Number(line.taxPercent).toFixed(3),
+            lineAmount: Number(line.lineAmount).toFixed(2),
+          });
+        }
       }
-    }
 
-    const status =
-      rowsInvalid > 0
-        ? "greska"
-        : rowsWarning > 0
-          ? "uspesno_sa_upozorenjima"
-          : "uspesno";
+      const status =
+        rowsInvalid > 0
+          ? "greska"
+          : rowsWarning > 0
+            ? "uspesno_sa_upozorenjima"
+            : "uspesno";
 
-    await tx
-      .update(importRuns)
-      .set({
-        status,
-        rowsValid: valid.length,
-        rowsWarning,
-        rowsInvalid,
-        invoicesCreated,
-        invoicesUpdated,
-        finishedAt: sql`now()`,
-        message:
-          rowsInvalid > 0
-            ? `${rowsInvalid} redova nije uvezeno zbog grešaka.`
-            : null,
-      })
-      .where(eq(importRuns.id, run.id));
+      await tx
+        .update(importRuns)
+        .set({
+          status,
+          rowsValid: valid.length,
+          rowsWarning,
+          rowsInvalid,
+          invoicesCreated,
+          invoicesUpdated,
+          finishedAt: sql`now()`,
+          message:
+            rowsInvalid > 0
+              ? `${rowsInvalid} redova nije uvezeno zbog grešaka.`
+              : null,
+        })
+        .where(eq(importRuns.id, run.id));
 
-    await recordAudit(
-      {
-        actor: { id: actor.id, name: actor.name, role: actor.role },
-        action: AUDIT_ACTIONS.importCompleted,
-        entityType: "Uvoz",
-        entityId: String(run.id),
-        entityLabel: fileName,
-        after: {
-          procitano: rows.length,
-          ispravno: valid.length,
-          upozorenja: rowsWarning,
-          greske: rowsInvalid,
-          fakture_nove: invoicesCreated,
-          fakture_azurirane: invoicesUpdated,
+      await recordAudit(
+        {
+          actor: { id: actor.id, name: actor.name, role: actor.role },
+          action: AUDIT_ACTIONS.importCompleted,
+          entityType: "Uvoz",
+          entityId: String(run.id),
+          entityLabel: fileName,
+          after: {
+            procitano: rows.length,
+            ispravno: valid.length,
+            upozorenja: rowsWarning,
+            greske: rowsInvalid,
+            fakture_nove: invoicesCreated,
+            fakture_azurirane: invoicesUpdated,
+          },
+          reason: `Uvoz fajla ${fileName} (otisak ${fileHash.slice(0, 12)}…)`,
+          correlationId: `import-${run.id}`,
         },
-        reason: `Uvoz fajla ${fileName} (otisak ${fileHash.slice(0, 12)}…)`,
-        correlationId: `import-${run.id}`,
-      },
-      tx,
-    );
-  });
+        tx,
+      );
+    });
+  } catch (error) {
+    /*
+     * Dva istovremena otpremanja istog fajla: oba prođu proveru otiska iznad,
+     * a jedinstveni indeks pusti samo prvo. Drugo je duplikat, ne greška.
+     */
+    if (!isUniqueViolation(error, "import_runs_file_hash_key")) throw error;
+    const [winner] = await db
+      .select({ id: importRuns.id })
+      .from(importRuns)
+      .where(eq(importRuns.fileHash, fileHash))
+      .limit(1);
+    return duplicateOutcome(winner?.id ?? null, rows.length);
+  }
 
   return {
     runId,
@@ -340,9 +366,36 @@ export async function importInvoiceFile(
     invoicesUpdated,
     message:
       rowsInvalid > 0
-        ? `Uvezeno ${valid.length} od ${rows.length} redova. ${rowsInvalid} sa greškom.`
+        ? `Uvezeno ${valid.length} od ${rows.length} redova. ${rowsInvalid} sa greškom` +
+          (heldBack > 0 ? `, od toga ${heldBack} ispravnih stavki zadržano jer faktura nije potpuna.` : ".")
         : `Uvezeno ${valid.length} redova.`,
   };
+}
+
+function duplicateOutcome(runId: number | null, rowsRead: number): ImportOutcome {
+  return {
+    runId,
+    status: "preskoceno_duplikat",
+    rowsRead,
+    rowsValid: 0,
+    rowsDuplicate: rowsRead,
+    rowsWarning: 0,
+    rowsInvalid: 0,
+    invoicesCreated: 0,
+    invoicesUpdated: 0,
+    message: `Preskočeno: isti fajl je već uvezen${runId ? ` (uvoz #${runId})` : ""}.`,
+  };
+}
+
+/** Postgres 23505 nad datim indeksom, i kada ga Drizzle omota u `cause`. */
+function isUniqueViolation(error: unknown, constraint: string): boolean {
+  let current: unknown = error;
+  for (let depth = 0; current && depth < 5; depth += 1) {
+    const candidate = current as { code?: unknown; constraint_name?: unknown; cause?: unknown };
+    if (candidate.code === "23505" && candidate.constraint_name === constraint) return true;
+    current = candidate.cause;
+  }
+  return false;
 }
 
 /** Čita CSV sa `;` ili `,` razdvajačem i vraća redove kao objekte. */

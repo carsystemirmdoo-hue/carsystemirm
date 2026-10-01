@@ -4,6 +4,10 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { importRows, importRuns } from "@/db/schema";
 import { ImportUpload } from "@/features/portal/ImportUpload";
+import {
+  CSV_INVOICE_UPLOAD_DISABLED_MESSAGE,
+  CSV_INVOICE_UPLOAD_ENABLED,
+} from "@/lib/import/csv-gate.mjs";
 import { PdfImportUpload } from "@/features/portal/PdfImportUpload";
 import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
 import { can } from "@/lib/authz/permissions.mjs";
@@ -70,7 +74,14 @@ export default async function ImportsPage({
         <>
           <PdfImportUpload />
 
-          <ImportUpload />
+          {CSV_INVOICE_UPLOAD_ENABLED ? (
+            <ImportUpload />
+          ) : (
+            <section className="portal-panel">
+              <h2>Uvoz CSV izvoza</h2>
+              <p>{CSV_INVOICE_UPLOAD_DISABLED_MESSAGE}</p>
+            </section>
+          )}
         </>
       ) : null}
 

@@ -7,6 +7,10 @@ import {
 } from "@/lib/import/invoiceImport";
 import { requireCapability } from "@/lib/authz/session";
 import { formatMegabytes, MAX_UPLOAD_FILE_BYTES } from "@/lib/import/upload-limits.mjs";
+import {
+  CSV_INVOICE_UPLOAD_DISABLED_MESSAGE,
+  CSV_INVOICE_UPLOAD_ENABLED,
+} from "@/lib/import/csv-gate.mjs";
 
 export type ImportState = {
   error: string | null;
@@ -26,6 +30,11 @@ export async function importFileAction(
   formData: FormData,
 ): Promise<ImportState> {
   const user = await requireCapability("imports:write", "/portal/importi");
+
+  // Server odbija i kada obrazac nije prikazan: akcija se može pozvati i bez dugmeta.
+  if (!CSV_INVOICE_UPLOAD_ENABLED) {
+    return { error: CSV_INVOICE_UPLOAD_DISABLED_MESSAGE, ok: null, detail: null };
+  }
 
   const file = formData.get("fajl");
   if (!(file instanceof File) || file.size === 0) {

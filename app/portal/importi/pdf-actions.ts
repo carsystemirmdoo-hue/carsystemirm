@@ -5,6 +5,10 @@ import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
 import { fileHashOf } from "@/lib/pdf/extract";
 import { ingestBiznisoftPdf, openIngestionRun } from "@/lib/pdf/ingest";
+import {
+  UPLOAD_PROCESSING_BUDGET_MS,
+  uploadSelectionError,
+} from "@/lib/import/upload-limits.mjs";
 
 export type PdfImportState = {
   error: string | null;
@@ -13,23 +17,16 @@ export type PdfImportState = {
   summary: { label: string; count: number }[];
 };
 
-const MAX_BYTES = 20 * 1024 * 1024;
-const MAX_FILES = 200;
-
 /**
- * Budžet jednog prolaza.
+ * Granice otpremanja su u `lib/import/upload-limits.mjs` (telo zahteva,
+ * veličina fajla, broj dokumenata, budžet vremena) — iste brojeve koriste
+ * ekran i `next.config.ts`.
  *
- * Broj fajlova sam po sebi ne ograničava posao: dvesta fajlova po dvadeset
- * megabajta je četiri gigabajta čitanja u jednoj akciji. Ova dva broja
- * zaustavljaju prolaz kada je posao već obavljen dovoljno, umesto da server
- * radi dok ga platforma ne prekine — a operater ostane bez ijednog izveštaja.
- *
- * Prekid NIJE greška: sve što je do tada obrađeno je proknjiženo i prijavljeno,
- * a ostatak se otprema u sledećem prolazu.
+ * Budžet vremena zaustavlja prolaz kada je posao već obavljen dovoljno,
+ * umesto da server radi dok ga platforma ne prekine — a operater ostane bez
+ * ijednog izveštaja. Prekid NIJE greška: sve što je do tada obrađeno je
+ * proknjiženo i prijavljeno, a ostatak se otprema u sledećem prolazu.
  */
-const MAX_BATCH_BYTES = 200 * 1024 * 1024;
-const MAX_BATCH_MS = 90 * 1000;
-
 export async function importPdfAction(
   _previous: PdfImportState,
   formData: FormData,
@@ -48,12 +45,10 @@ export async function importPdfAction(
   if (files.length === 0) {
     return { error: "Izaberite bar jedan PDF.", ok: null, summary: [] };
   }
-  if (files.length > MAX_FILES) {
-    return {
-      error: `Najviše ${MAX_FILES} dokumenata po prolazu.`,
-      ok: null,
-      summary: [],
-    };
+  // Ista provera kao na ekranu; server ne veruje klijentu.
+  const selectionError = uploadSelectionError(files);
+  if (selectionError) {
+    return { error: selectionError, ok: null, summary: [] };
   }
 
   const actor = { id: user.id, name: user.name, role: user.role };
@@ -61,16 +56,11 @@ export async function importPdfAction(
   const bump = (key: string) => tally.set(key, (tally.get(key) ?? 0) + 1);
 
   const started = Date.now();
-  let bytesRead = 0;
   let obradjeno = 0;
 
   for (const file of files) {
-    if (bytesRead >= MAX_BATCH_BYTES || Date.now() - started >= MAX_BATCH_MS) {
+    if (Date.now() - started >= UPLOAD_PROCESSING_BUDGET_MS) {
       bump("prekinut_prolaz");
-      continue;
-    }
-    if (file.size > MAX_BYTES) {
-      bump("prevelik_fajl");
       continue;
     }
 
@@ -84,7 +74,6 @@ export async function importPdfAction(
      */
     try {
       const bytes = new Uint8Array(await file.arrayBuffer());
-      bytesRead += bytes.byteLength;
       obradjeno += 1;
 
       /*
@@ -145,7 +134,6 @@ const OUTCOME_LABELS: Record<string, string> = {
   already_imported_other_source: "već knjiženo iz drugog izvora — traži pregled",
   quarantined: "karantin — traži pregled",
   duplicate_file: "isti fajl, preskočeno",
-  prevelik_fajl: "odbijeno, prevelik fajl",
   neuspelo_citanje: "nije pročitano — fajl odbijen",
   prekinut_prolaz: "nije obrađeno — budžet prolaza iscrpljen",
 };

@@ -16,6 +16,13 @@ import {
 import { LinkPartnerForm, PlanApply, RepCodeForm, UploadForm } from "./RegistryForms";
 
 export const dynamic = "force-dynamic";
+/**
+ * Server akcije otpremanja sa ove strane rade u funkciji ove rute.
+ * Mora biti broj napisan ovde (Next ga čita statički); jednak je
+ * `UPLOAD_ROUTE_MAX_DURATION_S` iz `lib/import/upload-limits.mjs`, što
+ * proverava `lib/import/uploadLimits.test.mjs`.
+ */
+export const maxDuration = 60;
 
 const PIB_LABELS: Record<string, string> = {
   valid: "ispravan",

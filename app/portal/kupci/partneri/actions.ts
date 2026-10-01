@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { requireCapability } from "@/lib/authz/session";
+import { formatMegabytes } from "@/lib/import/upload-limits.mjs";
 import {
   AssignmentError,
   applyAssignmentPlan,
@@ -51,7 +52,9 @@ export async function uploadRegistryAction(
   const file = formData.get("file");
   const issuerCode = String(formData.get("issuerCode") ?? "").trim();
   if (!(file instanceof File) || file.size === 0) return { error: "Izaberite XLSX fajl.", ok: null };
-  if (file.size > PARTNER_FILE_MAX_BYTES) return { error: "Fajl je veći od 5 MB.", ok: null };
+  if (file.size > PARTNER_FILE_MAX_BYTES) {
+    return { error: `Fajl je veći od ${formatMegabytes(PARTNER_FILE_MAX_BYTES)}.`, ok: null };
+  }
   if (!/^[A-Za-z0-9._-]{1,64}$/.test(issuerCode)) return { error: "Unesite oznaku izdavaoca.", ok: null };
   try {
     const r = await recordPartnerImport(

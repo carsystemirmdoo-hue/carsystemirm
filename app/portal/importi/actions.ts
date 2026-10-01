@@ -6,14 +6,13 @@ import {
   parseDelimited,
 } from "@/lib/import/invoiceImport";
 import { requireCapability } from "@/lib/authz/session";
+import { formatMegabytes, MAX_UPLOAD_FILE_BYTES } from "@/lib/import/upload-limits.mjs";
 
 export type ImportState = {
   error: string | null;
   ok: string | null;
   detail: string | null;
 };
-
-const MAX_BYTES = 20 * 1024 * 1024;
 
 /**
  * Ručni uvoz jednog izvoznog fajla.
@@ -32,9 +31,9 @@ export async function importFileAction(
   if (!(file instanceof File) || file.size === 0) {
     return { error: "Izaberite fajl za uvoz.", ok: null, detail: null };
   }
-  if (file.size > MAX_BYTES) {
+  if (file.size > MAX_UPLOAD_FILE_BYTES) {
     return {
-      error: `Fajl je veći od ${MAX_BYTES / 1024 / 1024} MB.`,
+      error: `Fajl je veći od ${formatMegabytes(MAX_UPLOAD_FILE_BYTES)}.`,
       ok: null,
       detail: null,
     };

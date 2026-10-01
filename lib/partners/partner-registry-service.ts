@@ -11,6 +11,7 @@ import {
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { registerExternalIdentifier } from "@/lib/commercial/identity-service";
 import { readXlsx } from "@/lib/import/xlsx/readXlsx.mjs";
+import { formatMegabytes, MAX_UPLOAD_FILE_BYTES } from "@/lib/import/upload-limits.mjs";
 import {
   analyzePartners,
   diffPartnerSnapshots,
@@ -33,7 +34,8 @@ export class PartnerRegistryError extends Error {
 }
 
 /** Najveći prihvaćen fajl. Izvoz od ~600 partnera ima desetine kilobajta. */
-export const PARTNER_FILE_MAX_BYTES = 5 * 1024 * 1024;
+/** Ista granica kao za svako otpremanje kroz server akciju (`lib/import/upload-limits.mjs`). */
+export const PARTNER_FILE_MAX_BYTES = MAX_UPLOAD_FILE_BYTES;
 
 /**
  * Analiza bez upisa — isto što i uvoz, samo bez baze.
@@ -43,7 +45,7 @@ export const PARTNER_FILE_MAX_BYTES = 5 * 1024 * 1024;
  */
 export function analyzePartnerWorkbook(bytes: Buffer) {
   if (bytes.length > PARTNER_FILE_MAX_BYTES) {
-    throw new PartnerRegistryError("Fajl je veći od 5 MB.", "too_large");
+    throw new PartnerRegistryError(`Fajl je veći od ${formatMegabytes(PARTNER_FILE_MAX_BYTES)}.`, "too_large");
   }
   const parsed = parsePartnerWorkbook(readXlsx(bytes));
   const findings = analyzePartners(parsed.partners);

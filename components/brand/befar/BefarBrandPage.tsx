@@ -46,12 +46,6 @@ export function BefarBrandPage({ brand, products }: Props) {
   /** Mapa naših objavljenih proizvoda po slugu — koristi je Product discovery. */
   const bySlug = new Map(products.map((product) => [product.slug, product]));
 
-  /** Slugovi koje pokrivaju kartice po boji. */
-  const coveredSlugs = new Set(
-    befarDiscoveryGroups.flatMap((group) => group.variants.map((variant) => variant.slug)),
-  );
-  const uncoveredProducts = products.filter((product) => !coveredSlugs.has(product.slug));
-
   return (
     // `data-brand-page` uključuje stranicu u zajednički sistem sticky offseta —
     // `BrandSectionNav` na njega upisuje stvarnu visinu globalnog headera.
@@ -519,26 +513,6 @@ export function BefarBrandPage({ brand, products }: Props) {
                 );
               })}
             </ul>
-
-            {/* Proizvodi koji nisu pokriveni grupama po boji ostaju dostupni kao
-                lista, bez slike — bez generičkog rendera koji glumi fotografiju. */}
-            {uncoveredProducts.length > 0 ? (
-              <div className={styles.discoveryFamilies}>
-                <p className={styles.discoveryFamiliesLabel}>Ostali Befar proizvodi na sajtu</p>
-                <ul>
-                  {uncoveredProducts.map((product) => (
-                    <li key={product.slug}>
-                      <Link href={`/proizvodi/${product.slug}`}>
-                        <span>{product.name}</span>
-                        <span className={styles.discoveryFamilyDetail}>
-                          {product.packages?.[0]?.label ?? ""}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
 
             <div className={styles.discoveryFamilies}>
               <p className={styles.discoveryFamiliesLabel}>

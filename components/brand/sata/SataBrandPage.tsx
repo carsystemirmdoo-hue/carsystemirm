@@ -1,13 +1,7 @@
 import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
-import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
 import { Footer } from "@/components/layout/Footer";
-import {
-  type CarsystemBrand,
-  type CarsystemProduct,
-  programGroups,
-  refinishPhases,
-} from "@/lib/carsystem-data";
+import type { CarsystemBrand, CarsystemProduct } from "@/lib/carsystem-data";
 import {
   SATA_OFFICIAL,
   sataArguments,
@@ -50,9 +44,6 @@ const navItems = sataSections.map((section) => ({
  * a `SATAjet X 5500` i dalje aktuelna, ali starija premium porodica.
  */
 export function SataBrandPage({ brand, products }: Props) {
-  const programBySlug = new Map(programGroups.map((program) => [program.slug, program]));
-  const phaseBySlug = new Map(refinishPhases.map((phase) => [phase.slug, phase]));
-
   return (
     <main className={styles.page} data-brand-page="sata">
       <nav aria-label="Putanja" className={styles.breadcrumb}>
@@ -407,63 +398,23 @@ export function SataBrandPage({ brand, products }: Props) {
           smemo da iznesemo o našoj ulozi dok komercijalni status nije potvrđen
           (vidi docs/SATA_RESEARCH.md §5), pa stoji odmah ispod naslova.
         */}
+        {/*
+          Brend strana ne prikazuje listu proizvoda: SATA artikli su u katalogu
+          i pretrazi, a ovde ostaje samo broj i jedan put do filtriranog kataloga.
+        */}
+        <p className={styles.localLead}>
+          {products.length > 0
+            ? `U našem online katalogu je evidentirano ${products.length === 1 ? "1 SATA proizvod" : `${products.length} SATA proizvoda`}. Evidencija nije izjava o prodaji, zalihama ni ceni — za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M.`
+            : "Trenutno evidentirano u našem online katalogu: nijedan SATA proizvod. Za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M."}
+        </p>
         {products.length > 0 ? (
-          <p className={styles.localLead}>
-            Trenutno evidentirano u našem online katalogu:{" "}
-            {products.length === 1 ? "1 proizvod" : `${products.length} proizvoda`}. Za
-            dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M.
+          <p className={styles.localCatalogLink}>
+            <Link className={styles.ctaSecondary} href="/katalog?brend=sata">
+              Pogledajte SATA proizvode u katalogu
+              <span aria-hidden="true">→</span>
+            </Link>
           </p>
         ) : null}
-
-        {products.length > 0 ? (
-          <div className={styles.localBody}>
-            <div className={styles.localGrid}>
-              {products.map((product) => {
-                const phase = phaseBySlug.get(product.phaseSlug);
-                const program = programBySlug.get(product.programSlug);
-                if (!phase || !program) return null;
-                return (
-                  <CatalogProductCard
-                    brand={brand}
-                    key={product.slug}
-                    phase={phase}
-                    product={product}
-                    program={program}
-                  />
-                );
-              })}
-            </div>
-
-            <aside className={styles.localAside}>
-              <p className={styles.localCount}>
-                <span className={styles.localCountValue}>{products.length}</span>
-                <span>
-                  {products.length === 1
-                    ? "proizvod evidentiran"
-                    : "proizvoda evidentirano"}{" "}
-                  u online katalogu
-                </span>
-              </p>
-              <h3 className={styles.localAsideTitle}>Zašto je lista kratka</h3>
-              <p className={styles.localAsideBody}>
-                U katalog ulazi samo ono za šta imamo proverene tehničke podatke.
-                Evidencija u katalogu nije izjava o prodaji, zalihama ni ceni —
-                ceo program iznad je ponuda proizvođača SATA.
-              </p>
-              <p className={styles.localAsideBody}>
-                Nemamo objavljene SATA fotografije proizvoda ni tehničku
-                dokumentaciju, pa kartica prikazuje stanje „vizuel u pripremi“
-                umesto slike koja nije naša.
-              </p>
-            </aside>
-          </div>
-        ) : (
-          <p className={styles.localLead}>
-            Trenutno evidentirano u našem online katalogu: nijedan SATA proizvod.
-            Za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i
-            R-M.
-          </p>
-        )}
 
         <div className={styles.localCta}>
           <div>

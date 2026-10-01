@@ -24,7 +24,7 @@ Create a visually exceptional homepage and design system direction that communic
 
 The most important CTA is not “buy now”. The most important CTA is:
 
-**“Pronađi najbližu prodavnicu”**
+**“Pronađite najbližu prodavnicu”**
 
 The website should help end customers find the nearest partner store in Serbia. The partner network is central because if partner stores sell more, the company grows more.
 
@@ -102,7 +102,7 @@ Create these sections:
    - premium high-tech automotive visual,
    - headline in Serbian latinica,
    - short positioning text,
-   - primary CTA: “Pronađi najbližu prodavnicu”,
+   - primary CTA: “Pronađite najbližu prodavnicu”,
    - secondary CTA: “Pogledaj katalog” or “Postani partner”.
 
 2. Partner Store Locator Preview

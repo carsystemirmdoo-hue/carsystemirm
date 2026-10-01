@@ -1,8 +1,8 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, eq, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { customers, customerUsers } from "@/db/schema";
+import { customerAccountTokens, customers, customerUsers } from "@/db/schema";
 import type { CustomerAccountStatus } from "@/db/schema/customer-accounts";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { notify } from "@/lib/notifications/notification-service";
@@ -255,6 +255,23 @@ export async function setCustomerAccountStatus(
         updatedAt: sql`now()`,
       })
       .where(eq(customerUsers.id, input.accountId));
+
+    /*
+     * Isključen ili odbijen nalog ne sme ostaviti otvoren poziv ni reset.
+     * Ranije je token izdat pre isključenja i dalje mogao da aktivira nalog.
+     */
+    if (input.status === "suspended" || input.status === "rejected") {
+      await tx
+        .update(customerAccountTokens)
+        .set({ supersededAt: sql`now()` })
+        .where(
+          and(
+            eq(customerAccountTokens.customerUserId, input.accountId),
+            isNull(customerAccountTokens.usedAt),
+            isNull(customerAccountTokens.supersededAt),
+          ),
+        );
+    }
 
     await recordAudit(
       {

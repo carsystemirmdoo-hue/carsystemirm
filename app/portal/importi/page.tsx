@@ -5,7 +5,10 @@ import { getDb } from "@/db/client";
 import { importRows, importRuns } from "@/db/schema";
 import { ImportUpload } from "@/features/portal/ImportUpload";
 import { PdfImportUpload } from "@/features/portal/PdfImportUpload";
+import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
+import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
 
 export const dynamic = "force-dynamic";
 
@@ -22,8 +25,9 @@ export default async function ImportsPage({
 }: {
   searchParams: Promise<{ uvoz?: string }>;
 }) {
-  await requireCapability("view:importi", "/portal/importi");
+  const user = await requireCapability("view:importi", "/portal/importi");
   const { uvoz } = await searchParams;
+  const recompute = await loadRecomputeStatus();
 
   const db = getDb();
   const runs = await db
@@ -51,6 +55,8 @@ export default async function ImportsPage({
         title="Importi"
         description="Svaki uvoz ostavlja trag: pročitani redovi, ispravni, upozorenja, greške i otisak fajla. Izvorni fajlovi se nikada ne menjaju."
       />
+
+      <AutoRecomputeStatus status={recompute} canRetry={can(user, "recommendations:retry_auto")} />
 
       <PdfImportUpload />
 

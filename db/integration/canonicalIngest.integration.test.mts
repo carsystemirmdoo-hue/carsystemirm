@@ -451,6 +451,22 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "sync/commands/poll/route.ts",
     "sync/commands/update/route.ts",
+    /*
+     * F5: stanje kupčeve prijave za javno zaglavlje. Samo čita SOPSTVENU sesiju
+     * (naziv firme i ime), ne prima parametre, ne piše ništa i nikad se ne kešira.
+     */
+    "kupac/sesija/route.ts",
+    /*
+     * F6: „Poručite ponovo" u katalogu. Kupac isključivo iz SOPSTVENE sesije,
+     * ruta ne prima parametre, samo čita, bez cena, i nikad se ne kešira.
+     * Izolacija: customerReorder.integration.test.mts.
+     */
+    "kupac/poruci-ponovo/route.ts",
+    /*
+     * F8: ponude prijavljenog kupca za kartice i stranice proizvoda. Kupac
+     * isključivo iz sesije, bez parametara, samo čitanje, no-store; bez lagera.
+     */
+    "kupac/ponude/route.ts",
   ];
 
   const rute: string[] = [];

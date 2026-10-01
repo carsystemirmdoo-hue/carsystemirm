@@ -29,6 +29,12 @@ export interface CustomerSession {
   email: string;
   name: string;
   status: CustomerAccountStatus;
+  /**
+   * Čime je sesija izdata: `password` (prijava lozinkom) ili `remembered`
+   * (obnova sa zapamćenog uređaja). Porudžbina iz `remembered` sesije traži
+   * ponovni unos lozinke.
+   */
+  assurance?: "password" | "remembered";
 }
 
 /**
@@ -80,6 +86,7 @@ export async function getCustomerSession(): Promise<CustomerSession | null> {
     email: row.email,
     name: row.name,
     status: row.status,
+    assurance: session.user.assurance === "remembered" ? "remembered" : "password",
   };
 }
 
@@ -90,9 +97,19 @@ export async function getCustomerSession(): Promise<CustomerSession | null> {
  * odavde. Nema parametra kojim bi pozivalac mogao da traži drugog kupca — ne
  * zato što bi bio odbijen, nego zato što takav parametar ne postoji.
  */
-export async function requireCustomerSession(): Promise<CustomerSession> {
+/**
+ * Kupčeva sesija ili prijava. `returnTo` je putanja strane koja se otvarala —
+ * posle prijave kupac se vraća baš na nju (proverava `normalizeCustomerReturn`).
+ */
+export async function requireCustomerSession(returnTo?: string): Promise<CustomerSession> {
   const session = await getCustomerSession();
-  if (!session) redirect(CUSTOMER_LOGIN_ROUTE);
+  if (!session) {
+    redirect(
+      returnTo
+        ? `${CUSTOMER_LOGIN_ROUTE}?callbackUrl=${encodeURIComponent(returnTo)}`
+        : CUSTOMER_LOGIN_ROUTE,
+    );
+  }
   return session;
 }
 

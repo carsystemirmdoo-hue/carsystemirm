@@ -12,11 +12,11 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 
 | | Broj |
 |---|---|
-| Ukupno stavki | 13 |
+| Ukupno stavki | 14 |
 | Blokiraju produkciju (BLOCKER) | 3 |
-| HIGH / MEDIUM / LOW | 2 / 3 / 5 |
+| HIGH / MEDIUM / LOW | 2 / 4 / 5 |
 | Kontakt podaci koji nedostaju ili nisu potvrđeni | 3 (telefon, e-pošta, radno vreme) |
-| Tekstovi i prikazi za koje je potrebna poslovna odluka | 8 (GAP-003, 005, 006, 007, 009, 011, 012, 013) |
+| Tekstovi i prikazi za koje je potrebna poslovna odluka | 9 (GAP-003, 005, 006, 007, 008, 010, 012, 013, 014) |
 | Konflikti između izvora | 3 (GAP-001, GAP-002, GAP-005) |
 
 ### Šta je već ispravljeno bez Vašeg odgovora
@@ -153,21 +153,42 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `HIGH`
 - Oblast: `pravni podatak`
-- Vidljivost: `javno`
-- Putanja: `lib/company-contact.ts`, `components/home/CarsystemHomePage.tsx`, `lib/seo.ts`
-- Linija ili identifikator: `companyContact.name` (linija 50); naslov `components/home/CarsystemHomePage.tsx:612`; `organizationJsonLd()` `lib/seo.ts:67`
-- Ruta/strana: footer svih strana, `/` (blok „Centrala, Inđija"), JSON-LD početne
-- Komponenta ili polje: `components/layout/Footer.tsx:81`, naslov kontakt bloka na početnoj, schema.org `Organization`
-- Trenutni tekst/vrednost: footer „Carsystem i R-M Inđija"; početna „Carsystem i R-M Inđija d.o.o."; JSON-LD `name: "Carsystem i R-M Inđija"` bez adrese, telefona i e-pošte.
-- Zašto nije bezbedno automatski ispraviti: registar vodi naziv „CAR SYSTEM I R-M d.o.o. Inđija"; koji naziv se prikazuje i koje podatke pravnog lica (PIB, matični broj) treba objaviti je odluka firme. Telefon i e-pošta u schema.org čekaju GAP-001 i GAP-002.
-- Šta je provereno: registar (cubepartner/APR), BEX red firme, `docs/seo/SEO_LOCAL_BUSINESS_AUDIT.md` (već predviđa dopunu Organization schema posle potvrde).
-- Pronađeni izvori i konflikt: „Carsystem i R-M Inđija" (sajt) / „Carsystem i R-M Inđija d.o.o." (početna) / „CAR SYSTEM I R-M d.o.o. Inđija" (registar).
-- Tačno pitanje za vlasnika: Koji tačan naziv firme želite na sajtu, i da li u footeru treba prikazati pun pravni naziv sa PIB-om i matičnim brojem?
+- Vidljivost: `javno`, `kupac`, `komercijalista`, `vlasnik/admin`
+- Putanja i linija — svi potrošači (tri različita oblika naziva):
+  - „Carsystem i R-M Inđija": `lib/company-contact.ts:50` (`companyContact.name`, footer `components/layout/Footer.tsx:81`), `lib/seo.ts:67` (`organizationJsonLd`, bez adrese, telefona i e-pošte)
+  - „Carsystem i R-M Inđija d.o.o.": `components/home/CarsystemHomePage.tsx:612` (naslov bloka „Centrala, Inđija" na `/`), `app/portal/layout.tsx:22` (metadata portala), `lib/customers/consent.mjs:35` (tekst saglasnosti — vidi GAP-006)
+  - „Carsystem i R-M DOO": `features/portal/PortalLoginForm.tsx:28, 57` (`/prijava`), `app/prijava/kupac/CustomerLoginForm.tsx:37, 66` (`/prijava/kupac`), `app/prijava/reset/ResetForm.tsx:41, 71, 94` (`/prijava/reset`), `components/portal/PortalShell.tsx:65` (oznaka u portalu), `components/carsystem-brand/carsystemBrandData.ts:245, 816` (`/brendovi/carsystem`)
+- Ruta/strana: footer svih strana, `/`, `/brendovi/carsystem`, `/prijava`, `/prijava/kupac`, `/prijava/reset`, portal, JSON-LD početne
+- Komponenta ili polje: naziv firme u tekstu, oznakama i schema.org `Organization`
+- Trenutni tekst/vrednost: tri oblika navedena gore.
+- Zašto nije bezbedno automatski ispraviti: registar vodi naziv „CAR SYSTEM I R-M d.o.o. Inđija"; koji oblik se prikazuje i koje podatke pravnog lica (PIB, matični broj) treba objaviti je odluka firme. Telefon i e-pošta u schema.org čekaju GAP-001 i GAP-002.
+- Šta je provereno: registar (cubepartner/APR), BEX red firme, `docs/seo/SEO_LOCAL_BUSINESS_AUDIT.md` (već predviđa dopunu Organization schema posle potvrde), svih 13 pojavljivanja u kodu.
+- Pronađeni izvori i konflikt: „Carsystem i R-M Inđija" / „Carsystem i R-M Inđija d.o.o." / „Carsystem i R-M DOO" (sajt) vs. „CAR SYSTEM I R-M d.o.o. Inđija" (registar).
+- Tačno pitanje za vlasnika: Koji tačan naziv firme želite na sajtu i u portalu, i da li u footeru treba prikazati pun pravni naziv sa PIB-om i matičnim brojem?
 - Očekivani format odgovora: naziv za prikaz + pun pravni naziv + „da/ne" za PIB i MB u footeru.
-- Predlog (NEPOTVRĐENO): prikaz „Carsystem i R-M Inđija", a u footeru pun pravni naziv iz registra.
+- Predlog (NEPOTVRĐENO): prikaz „Carsystem i R-M Inđija" svuda, a pun pravni naziv iz registra u footeru i u tekstu saglasnosti.
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-006 — Kako forma za upit šalje poruku
+## GAP-006 — Tekst saglasnosti kupca za obaveštenja e-poštom
+
+- Status: `POTREBAN ODGOVOR VLASNIKA`
+- Prioritet: `MEDIUM`
+- Oblast: `pravni podatak`
+- Vidljivost: `kupac`
+- Putanja: `lib/customers/consent.mjs`
+- Linija ili identifikator: `CONSENT_LABELS.email_marketing.body` (linije 33–36), verzija `CURRENT_CONSENT_TEXT_VERSION = "2026-08-v1"` (linija 29)
+- Ruta/strana: `/kupac/saglasnosti`; evidentiranje saglasnosti u `/portal/kupci/nalozi`
+- Komponenta ili polje: `app/kupac/saglasnosti/ConsentControls.tsx`
+- Trenutni tekst/vrednost: „Pristajem da mi Carsystem i R-M Inđija d.o.o. šalje obaveštenja o proizvodima, akcijama i tehničkim novostima na moju poslovnu e-poštu. Saglasnost mogu povući u bilo kom trenutku, jednako lako kao što sam je dao."
+- Zašto nije bezbedno automatski ispraviti: tekst je verzionisan i evidentira se uz svaku datu saglasnost; svaka izmena traži novu verziju i pravnu proveru. Dva otvorena pitanja: tačan naziv pravnog lica (GAP-005) i rodno obeležen oblik „dao" u izjavi koju daje i korisnica.
+- Šta je provereno: konstanta verzije, potrošači teksta.
+- Pronađeni izvori i konflikt: naziv u tekstu se razlikuje od registra (GAP-005).
+- Tačno pitanje za vlasnika: Da li odobravate novu verziju teksta saglasnosti sa tačnim nazivom pravnog lica i rodno neutralnim završetkom?
+- Očekivani format odgovora: „da" uz konačan tekst, ili „ne".
+- Predlog (NEPOTVRĐENO): „Pristajem da mi CAR SYSTEM I R-M d.o.o. Inđija šalje obaveštenja o proizvodima, akcijama i tehničkim novostima na moju poslovnu e-poštu. Saglasnost mogu povući u bilo kom trenutku, jednako lako kao što je data." (verzija `2026-10-v2`)
+- ODGOVOR VLASNIKA: `[upišite ovde]`
+
+## GAP-007 — Kako forma za upit šalje poruku
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `MEDIUM`
@@ -186,7 +207,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): zadržati sadašnji način do otvaranja sajta.
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-007 — Interne demo strane dostupne na javnom domenu
+## GAP-008 — Interne demo strane dostupne na javnom domenu
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `MEDIUM`
@@ -205,7 +226,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): zatvoriti u produkciji (posebna izmena middleware-a).
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-008 — Neprevedena tehnička uputstva iz tehničkih listova (TDS)
+## GAP-009 — Neprevedena tehnička uputstva iz tehničkih listova (TDS)
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `MEDIUM`
@@ -233,7 +254,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): „Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm."
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-009 — Kartica „Video materijali" na Carsystem strani
+## GAP-010 — Kartica „Video materijali" na Carsystem strani
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `LOW`
@@ -252,7 +273,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): ukloniti karticu dok video ne postoji.
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-010 — Tačka centrale na mapi
+## GAP-011 — Tačka centrale na mapi
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `LOW`
@@ -271,14 +292,14 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): koristiti geokod adrese posle Vaše potvrde.
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-011 — Oznake projektnih faza („faza 2–5") na ekranima portala
+## GAP-012 — Oznake projektnih faza („faza 2–5") na ekranima portala
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `LOW`
 - Oblast: `portal`
 - Vidljivost: `komercijalista`, `vlasnik/admin`
 - Putanja (23 mesta): `app/portal/admin/page.tsx:41-45`, `app/portal/adresnice/page.tsx:24`, `app/portal/bex/page.tsx:24`, `app/portal/dugovanja/page.tsx:23`, `app/portal/izvestaji/page.tsx:22-24`, `app/portal/kupci/[id]/page.tsx:43-46`, `app/portal/limiti/page.tsx:22-25`, `app/portal/nabavka/page.tsx:22-25`, `app/portal/otprema/page.tsx:24-26`, `app/portal/page.tsx:87`, `app/portal/porudzbine/page.tsx:22-25`, `app/portal/zalihe/page.tsx:22-26`, `components/portal/PortalShell.tsx:291`
-- Linija ili identifikator: `phase="faza N"` i spiskovi preduslova „(faza N)"
+- Linija ili identifikator: `phase="faza N"` (prikazuje se kao „Planirano: faza N") i spiskovi preduslova „(faza N)"
 - Ruta/strana: ekrani portala za module koji još nisu povezani (Dugovanja, Limiti, Nabavka, Otprema, BEX, Zalihe…)
 - Komponenta ili polje: najava modula i spisak preduslova
 - Trenutni tekst/vrednost: npr. „Uvoz faktura iz BiznisSoft izvoza (faza 2) — bez njega nema nijednog prodajnog podatka."
@@ -290,7 +311,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): zameniti opisom preduslova.
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-012 — Naziv uloge „Gazda" u portalu
+## GAP-013 — Naziv uloge „Gazda" u portalu
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `LOW`
@@ -309,7 +330,7 @@ dokumenta nije pogađano: gde postoji kandidat iz javnog izvora, naveden je kao
 - Predlog (NEPOTVRĐENO): „Vlasnik".
 - ODGOVOR VLASNIKA: `[upišite ovde]`
 
-## GAP-013 — Formulacija glavnog CTA u CLAUDE.md
+## GAP-014 — Formulacija glavnog CTA u CLAUDE.md
 
 - Status: `POTREBAN ODGOVOR VLASNIKA`
 - Prioritet: `LOW`

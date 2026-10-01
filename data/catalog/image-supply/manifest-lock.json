@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
-  "createdFromMainSha": "e81779701549c7102245d43bf739299d2002386c",
-  "catalogIdentityFingerprint": "0a18053cf28c25d1e7d11aff6405fd7a77a07a8a34c9fac1010b45b104553bcf",
+  "createdFromMainSha": "f1bd38919954c183d6c78cb48b5e79d6b378121d",
+  "catalogIdentityFingerprint": "2ea429479193e598a4ac2d7aeea8ff51789f711daf4456dc201ff6cd343de2d8",
   "activeBrands": [
     "baslac",
     "befar",
@@ -78,14 +78,14 @@
     "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
-    "generatedOn": "2026-09-30",
+    "generatedOn": "2026-10-01",
     "approvedAt": null,
     "approvedBy": null,
     "previousLockMetadata": {
-      "generatedOn": "2026-09-28",
+      "generatedOn": "2026-09-30",
       "approvedAt": null,
       "approvedBy": null,
-      "createdFromMainSha": "96bf57f2a234b0758afdd3fb78b99569d416140c"
+      "createdFromMainSha": "e81779701549c7102245d43bf739299d2002386c"
     },
     "note": "generatedOn = datum kada je generator zapisao ovaj sadržaj. approvedAt i approvedBy upisuje čovek tek posle pregleda; generator ih ne popunjava (null = nije odobreno). Metapodaci nisu deo identiteta manifesta."
   }

@@ -1,15 +1,16 @@
-# 33 — Testna baza kod provajdera: runbook
+# 33 — Testna baza i zaštićen Preview: runbook
 
-**Status: pripremljeno, ništa nije kreirano.** Ovaj dokument opisuje postupak.
-Bazu kreira firma (ili mi uz izričito odobrenje), na nalogu u vlasništvu firme.
+**Status (2026-10-01): alati pripremljeni i probani nad lokalnim Postgres 17;
+Neon projekat i Preview još ne postoje.** Sve što dira Neon ili Vercel radi
+čovek sa pristupom firminim nalozima, korak po korak ispod.
 
-Cilj prve baze je **zatvoren tehnički test** sa izmišljenim i anonimizovanim
-podacima: migracije, uloge, prijava Vlasnika sa drugim faktorom, uvoz jedne
-anonimizovane fakture. Stvarni kupci i stvarne fakture u nju ne ulaze.
+Cilj: **zatvoren tehnički test** novog portala na Vercel **Preview**-u, nad
+zasebnom testnom bazom sa **isključivo sintetičkim podacima**. Produkcija
+(`main`, produkcioni projekat, domen) se ne dira.
 
 ---
 
-## 1. Šta kod traži od baze (provereno lokalno, 2026-10-01)
+## 1. Šta kod traži od baze
 
 | Uslov | Zašto |
 |---|---|
@@ -17,154 +18,122 @@ anonimizovane fakture. Stvarni kupci i stvarne fakture u nju ne ulaze.
 | Bez ekstenzija, bez superuser-a | migracije 0000–0032 ih ne traže |
 | Vlasnik šeme sme `CREATE` na bazi | Drizzle pravi šemu `drizzle` za evidenciju migracija |
 | `CREATE ROLE` i `ALTER DEFAULT PRIVILEGES` | runtime uloga iz `db/provisioning/runtime-role.sql` |
-| Pooled **i** direktna adresa | runtime ide kroz pooler; migracije i zaštita Vlasnika direktno |
-| TLS | `?sslmode=require` u adresi |
-| EU region | podaci kupaca; Vercel funkcije u istom regionu |
+| Pooled **i** direktna adresa | runtime kroz pooler; migracije i zaštita Vlasnika direktno |
+| TLS | `?sslmode=require` |
+| EU region | Vercel funkcije su u `fra1` (Frankfurt) |
 
-Lokalni dokaz: prazna baza → migracije 0000–0032 (33 unosa, 51 tabela) →
-`runtime-role.sql` → integracioni paket 492/492 (`npm run test:integration`).
+Lokalni dokaz: prazna baza → 33 migracije → `runtime-role.sql` → integracije
+492/492; alati iz §4 prođeni nad lokalnom bazom, smoke provera 30/30.
 
-## 2. Preporučeni izbor
+## 2. Izbor: Neon Free, Frankfurt (uslovi provereni 2026-10-01)
 
-**Neon, besplatni nivo, region Frankfurt (AWS eu-central-1)**, projekat na
-nalogu firme. Kod radi bez izmena: `prepare: false` u `db/client.ts` je
-kompatibilan sa Neon pooler-om.
+neon.com/pricing: Free je trajan (nije proba), **bez kartice**; po projektu
+100 CU-sati računanja, 1 GB prostora, 10 grana, istorija za povratak 6 sati,
+računanje se gasi posle 5 min mirovanja (prvi zahtev posle toga je sporiji).
+Za tehnički test je dovoljno. Za pilot sa stvarnim podacima Free nije dovoljan
+(nema dužeg povratka u tačku vremena ni zakazanih snimaka).
 
-Pre otvaranja proveriti na sajtu provajdera (nije potvrđeno u ovom repou):
-- trenutna ograničenja besplatnog nivoa (veličina, broj grana, gašenje u
-  mirovanju i hladan start);
-- koliko unazad besplatni nivo čuva istoriju za povratak (PITR) — za pilot sa
-  stvarnim podacima verovatno treba plaćeni plan;
-- da li se uloga može napraviti SQL-om (`CREATE ROLE`) ili samo u konzoli.
+**Važno — uloge na Neonu** (neon.com/docs/manage/roles): uloga napravljena u
+konzoli, CLI-ju ili API-ju automatski dobija `neon_superuser` (CREATEROLE,
+CREATEDB, BYPASSRLS, `pg_read_all_data`, `pg_write_all_data`). Runtime uloga
+`carsystem_app` se zato pravi **isključivo SQL-om** (skripta u §4 to radi i
+proverava da članstva nema). Lozinka uloge mora imati ≥ 60 bita entropije
+(generisana ima 256).
 
-Alternativa: Supabase (pauzira neaktivne besplatne projekte; direktna adresa
-je IPv6 — za migracije sa lokalnog računara proveriti dostupnost), ili
-Postgres na serveru firme (pun nadzor, ali backup i TLS su naš posao).
+**Važno — adresa:** Neonov connection string sadrži `channel_binding=require`.
+Drajver `postgres.js` nepoznate parametre adrese šalje serveru kao podešavanja
+i veza pada; alati iz §4 taj parametar uklanjaju, a adrese za Vercel prave bez
+njega.
+
+Ne koristiti Neon ↔ Vercel integraciju iz Marketplace-a: ona sama upisuje
+adrese baze u okruženja projekta (i u Production).
 
 ## 3. Struktura
 
-| Šta | Ime (predlog) | Namena |
+| Šta | Izbor |
+|---|---|
+| Neon nalog | na e-adresi firme (vlasništvo firme), plan Free |
+| Projekat | `carsystem-preview-test` — **ceo projekat je testni**; produkcija će biti poseban projekat |
+| Region | AWS Europe Central 1 (Frankfurt) — `aws-eu-central-1` |
+| Postgres | 17 |
+| Baza / vlasnik | podrazumevano `neondb` / `neondb_owner` |
+| Vercel | samo **Preview**, promenljive vezane za granu `preview/portal-test` |
+
+## 4. Alati (repozitorijum, `scripts/ops/`)
+
+Sve se pokreće iz korena repozitorijuma. Tajne su u
+`~/.carsystem-secrets/preview-test.env` (prava 600), van gita; alati ih nikad
+ne ispisuju.
+
+| Korak | Komanda | Šta radi |
 |---|---|---|
-| Projekat | `carsystem-portal` | nalog firme, Frankfurt |
-| Grana/baza | `test` | zatvoren tehnički test; povezuje se sa Vercel **Preview** |
-| Grana/baza | `qa` | samo za `npm run qa:pg` — testovi je **prazne i brišu** |
-| Produkcija | — | ne pravi se dok ne postoji odluka o planu sa backup-om |
+| tajne | `bash scripts/ops/preview-secrets.sh init` | generiše `AUTH_SECRET`, `PORTAL_MFA_MASTER_KEY_V1`, `AUTH_RATE_LIMIT_HMAC_KEY`, `CARSYSTEM_APP_PASSWORD`, `SITE_ACCESS_PASSWORD`; ostavlja prazna mesta za `NEON_OWNER_URL`, `PREVIEW_URL`, `VERCEL_BYPASS_TOKEN` |
+| baza | `npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/preview-db.mts all` | proveri metu (Neon Frankfurt, direktna adresa, bez stvarnih kupaca) → 33 migracije → `carsystem_app` SQL-om + `runtime-role.sql` → provera svih prava i članstava → upiše `PREVIEW_DATABASE_URL` (pooled) i `PREVIEW_DATABASE_DIRECT_URL` → proba obe kao `carsystem_app` |
+| Vlasnik | `bash scripts/ops/preview-owner.sh "<e-adresa>" "<ime i prezime>"` | pokreće **sam Vlasnik**: lozinku kuca skriveno; `db:seed` + jednokratna dozvola za drugi faktor |
+| sintetika | `npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/seed-synthetic-preview.mts` | demo oznaka, kupci A/B, nalozi, fakture, komercijalista (samo A), kancelarija, demo cenovnik, rabat 10 % za A; pristup u `preview-synthetic.env` (600) |
+| provera | `npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/preview-smoke.mts` | 30 provera: noindex, robots, zaštita privatnih strana, `/api/sync` isključen, zaglavlja, izolacija kupaca, cene i korpa (demo), uloge |
 
-`qa` i `test` se nikada ne mešaju: integracioni testovi brišu redove, a
-`db/integration/safety.mjs` pušta samo bazu čije ime sadrži `test`/`qa`/… i
-koja je prazna. Za `qa` granu ime baze mora sadržati `qa` ili `test`.
+## 5. Redosled
 
-## 4. Uloge
+1. **Neon** (čovek): nalog firme → projekat po §3 → u „Connect" isključiti
+   *Connection pooling* i kopirati adresu za `neondb_owner` / `neondb`.
+2. `preview-secrets.sh init`, pa nalepiti tu adresu u `NEON_OWNER_URL` u fajlu.
+3. `preview-db.mts all` — mora se završiti bez ijednog ✖.
+4. `preview-owner.sh` — Vlasnik (prvi nalog), lozinka skriveno; zapiše
+   jednokratni kod za drugi faktor.
+5. `seed-synthetic-preview.mts`.
+6. **Vercel** (čovek): promenljive iz §6, okruženje **Preview**, grana
+   `preview/portal-test`.
+7. Objava: commit sa PR #1 se pošalje na granu `preview/portal-test` (grane
+   `integration/**` se same ne objavljuju; ova se objavljuje kao Preview).
+8. **Vercel** (čovek): Deployment Protection → *Protection Bypass for
+   Automation* → napraviti ključ i upisati ga u `VERCEL_BYPASS_TOKEN`; adresu
+   grane upisati u `PREVIEW_URL`.
+9. `preview-smoke.mts`; Vlasnik se prijavljuje i vezuje drugi faktor.
 
-| Uloga | Ko je pravi | Koristi je | Adresa |
-|---|---|---|---|
-| vlasnik šeme (podrazumevani nalog projekta) | provajder | `npm run db:migrate`, `runtime-role.sql`, `db:seed` — **samo sa lokalnog računara** | direktna |
-| `carsystem_app` | mi, `CREATE ROLE … LOGIN PASSWORD …` | aplikacija na Vercel-u | pooled (`DATABASE_URL`) i direktna (`DATABASE_DIRECT_URL`) |
+## 6. Vercel → Settings → Environment Variables (samo Preview)
 
-Lozinke se generišu u menadžeru lozinki ili sa `openssl rand -base64 32`,
-upisuju se samo u konzolu provajdera i Vercel, nikad u repozitorijum, chat ni
-e-poštu.
+Za svaku: **Environments: samo Preview**, *Preview branch*: `preview/portal-test`.
+Vrednosti iz `~/.carsystem-secrets/preview-test.env` označene su sa (fajl).
 
-## 5. Postupak (posle odobrenja)
+| Promenljiva | Vrednost | Napomena |
+|---|---|---|
+| `DATABASE_URL` | (fajl) `PREVIEW_DATABASE_URL` | pooled, `carsystem_app` |
+| `DATABASE_DIRECT_URL` | (fajl) `PREVIEW_DATABASE_DIRECT_URL` | samo zaštita Vlasnika |
+| `DATABASE_POOL_MAX` | `2` | |
+| `AUTH_SECRET` | (fajl) | samo Preview |
+| `PORTAL_MFA_MASTER_KEY_V1` | (fajl) | isti ključ koristi `preview-owner.sh` |
+| `AUTH_RATE_LIMIT_HMAC_KEY` | (fajl) | |
+| `AUTH_URL` | `https://carsystemirm-git-preview-portal-test-carsystem1.vercel.app` | potvrditi posle prve objave (adresa grane) |
+| `PORTAL_MFA_MODE` | `enforced` | |
+| `NEXT_PUBLIC_SEO_INDEXING` | `false` | Preview je i inače noindex |
+| `MAINTENANCE_MODE` | `false` | Preview štiti Vercel Authentication; javni deo mora biti dostupan za proveru kupca |
+| `CUSTOMER_ORDERING` | `demo` | radi SAMO nad demo oznakom i demo cenovnikom iz §4; stvarni režim ne postoji |
+| `PORTAL_COMMERCE` | `off` | |
+| `FEATURE_SYNC_DEVICE_INGEST`, `FEATURE_SYNC_OPERATIONS`, `FEATURE_RECOMMENDATIONS`, `FEATURE_PARTNER_REGISTRY`, `CUSTOMER_REMEMBER_ME`, `RECOMMENDATIONS_AUTO_RECOMPUTE`, `NEXT_PUBLIC_CUSTOMER_LOGIN_LINK` | `0` | |
 
-Sve komande sa lokalnog računara, iz grane `integration/portal-on-main-2026-10`,
-sa vrednostima u okruženju terminala (ne u fajlu koji se commituje).
+Ne postavljati na Vercel: `NEON_OWNER_URL`, `MIGRATION_DATABASE_URL`,
+`BOOTSTRAP_ADMIN_*`, `CARSYSTEM_APP_PASSWORD`, `TEST_DATABASE_URL`.
 
-1. **Projekat i grana `test`** u Neon konzoli (Frankfurt).
-2. **Migracije** — vlasnik šeme, direktna adresa:
-   ```bash
-   MIGRATION_DATABASE_URL="<direktna adresa vlasnika>" NODE_ENV=production npm run db:migrate
-   ```
-   Očekivano: „Migracije su primenjene", 33 unosa u `drizzle.__drizzle_migrations`.
-3. **Runtime uloga** — prvo uloga sa lozinkom (konzola ili SQL), zatim:
-   ```bash
-   psql "<direktna adresa vlasnika>" -v runtime_role=carsystem_app -f db/provisioning/runtime-role.sql
-   ```
-   Skripta staje ako uloga ne postoji. Provera (sve `f` osim poslednje dve):
-   ```sql
-   SELECT has_table_privilege('carsystem_app','audit_log','DELETE'),
-          has_table_privilege('carsystem_app','customer_contact_consents','UPDATE'),
-          has_schema_privilege('carsystem_app','public','CREATE'),
-          has_table_privilege('carsystem_app','recommendation_results','INSERT'),
-          has_table_privilege('carsystem_app','effective_sales_ledger','SELECT');
-   ```
-4. **Prvi nalog Vlasnika** — postojeći postupak (`db/seed.mjs`), jednom po bazi.
-   Ime i e-adresu za prijavu dostavila je firma (2026-10-01); **ne upisuju se u
-   repozitorijum**. Lozinku kuca **sam Vlasnik**, skriveno, u istom terminalu —
-   ne ide u chat, e-poštu, fajl ni istoriju komandi:
-   ```bash
-   read -rs BOOTSTRAP_ADMIN_PASSWORD && export BOOTSTRAP_ADMIN_PASSWORD
-   DATABASE_URL="<direktna adresa vlasnika šeme>" \
-   BOOTSTRAP_ADMIN_EMAIL="<e-adresa Vlasnika za prijavu>" \
-   BOOTSTRAP_ADMIN_NAME="<ime i prezime Vlasnika>" \
-   npm run db:seed
-   unset BOOTSTRAP_ADMIN_PASSWORD
-   ```
-   Lozinka najmanje 10 znakova (predlog 16+, iz menadžera lozinki). Seed pravi
-   tačno jedan nalog sa ulogom Vlasnik i sve pakete; ponovno pokretanje ne pravi
-   drugi nalog za istu adresu. Na Vercel se `BOOTSTRAP_ADMIN_*` **nikad** ne
-   upisuju.
-5. **Dozvola za vezivanje drugog faktora** (u režimu `enforced` nalog bez
-   faktora ne može da se prijavi bez nje); isti ključ kao u Vercel okruženju te
-   baze, unet skriveno:
-   ```bash
-   read -rs PORTAL_MFA_MASTER_KEY_V1 && export PORTAL_MFA_MASTER_KEY_V1
-   DATABASE_URL="<direktna adresa vlasnika šeme>" \
-   MFA_GRANT_EMAIL="<e-adresa Vlasnika za prijavu>" \
-   node scripts/issue-mfa-enrollment-grant.mjs
-   unset PORTAL_MFA_MASTER_KEY_V1
-   ```
-   Vlasnik se zatim prijavljuje na Preview adresi i vezuje aplikaciju za
-   jednokratne kodove; kodove za oporavak čuva van računara.
-6. **Vercel promenljive** (§6) — tek posle odobrenja za izmenu Vercel-a.
-7. **Provera** (§7).
+## 7. Provera posle objave
 
-## 6. Promenljive za Vercel (Preview prvo)
-
-Region funkcija postaviti na **fra1** (podrazumevano je `iad1`, SAD).
-Svaka promena važi tek za novi deployment.
-
-| Promenljiva | Preview (test) | Production (kasnije) | Napomena |
-|---|---|---|---|
-| `DATABASE_URL` | pooled, `carsystem_app`, grana `test` | posebna baza | |
-| `DATABASE_DIRECT_URL` | direktna, `carsystem_app`, grana `test` | posebna baza | samo zaštita Vlasnika |
-| `DATABASE_POOL_MAX` | `2` | `2`–`3` | |
-| `AUTH_SECRET` | nov ključ | **drugi** ključ | `openssl rand -base64 32` |
-| `AUTH_URL` | adresa Preview deploymenta | `https://carsystemirm.com` | |
-| `PORTAL_MFA_MASTER_KEY_V1` | nov ključ | **drugi** ključ | čuvati i van Vercel-a |
-| `AUTH_RATE_LIMIT_HMAC_KEY` | nov ključ | **drugi** ključ | bez njega prijava se odbija |
-| `PORTAL_MFA_MODE` | `enforced` | `enforced` | nikad `off` |
-| `MAINTENANCE_MODE` | `true` | `true` do lansiranja | |
-| `SITE_ACCESS_PASSWORD` | postoji | postoji | |
-| `NEXT_PUBLIC_SEO_INDEXING` | `false` | `false` do lansiranja | `0` ne radi |
-| `FEATURE_*`, `CUSTOMER_*`, `PORTAL_COMMERCE`, `RECOMMENDATIONS_AUTO_RECOMPUTE` | isključeno | isključeno | uključuju se pojedinačno |
-| `MIGRATION_DATABASE_URL`, `BOOTSTRAP_ADMIN_*`, `TEST_DATABASE_URL` | **ne postavljati** | **ne postavljati** | samo lokalno |
-
-Vercel Hobby je po uslovima Vercela namenjen nekomercijalnoj upotrebi; za pilot
-sa stvarnim podacima firme računati na Pro (proveriti aktuelne uslove).
-
-## 7. Provera posle podizanja
-
-1. `npm run qa:pg` nad granom **`qa`** (direktna adresa u `TEST_DATABASE_URL`,
-   nikad grana `test`): migracije, integracije, browser QA.
-2. Na Preview adresi: prijava Vlasnika → vezivanje drugog faktora → odjava →
-   prijava sa kodom.
-3. Promena uloge drugog naloga prolazi (dokaz da `DATABASE_DIRECT_URL` radi);
-   bez nje bi akcija bila odbijena sa porukom o spojnici.
-4. Upload jedne **izmišljene** fakture iz `fixtures/dev/biznisoft/` (npr.
-   `jedna-stavka.pdf`), pa ponovni upload istog fajla → „isti fajl, preskočeno".
-5. U bazi: `SELECT count(*) FROM audit_log` raste; `DELETE FROM audit_log` kao
-   `carsystem_app` vraća `permission denied`.
+- `preview-smoke.mts`: 30/30 (sadržaj u §4).
+- Ručno, Vlasnik: prijava → vezivanje aplikacije za kodove sa jednokratnom
+  dozvolom → kodovi za oporavak sačuvani van računara → odjava → prijava sa kodom.
+- Ručno: promena uloge sintetičkog naloga kancelarije i nazad (dokaz da
+  `DATABASE_DIRECT_URL` drži zaštitu Vlasnika).
+- Upload jedne izmišljene fakture iz `fixtures/dev/biznisoft/` kao Vlasnik i
+  ponovni upload istog fajla → „isti fajl, preskočeno".
 
 ## 8. Brisanje
 
-Testna grana se briše u konzoli provajdera kada test završi; zatim se sa
-Vercel Preview-a uklanjaju `DATABASE_URL` i `DATABASE_DIRECT_URL`. Ključevi
-(`AUTH_SECRET`, MFA, rate limit) se ne prenose u produkciju — produkcija dobija
-nove.
+Ceo Neon projekat `carsystem-preview-test` se briše kada test završi; zatim se
+u Vercelu uklanjaju promenljive grane `preview/portal-test` i ključ za
+zaobilaženje zaštite, a lokalno `~/.carsystem-secrets/preview-*.env`. Ključevi
+se ne prenose u produkciju — produkcija dobija nove.
 
 ## 9. Trošak
 
-Tehnički test (§5–§7) ne bi trebalo da traži plaćanje (besplatni nivo
-provajdera, Vercel Preview). Plaćanje postaje realno pre **pilota sa stvarnim
-podacima**: plan baze sa backup-om/PITR i, po uslovima Vercela, Pro plan.
+Neon Free i Vercel Preview: bez plaćanja. Plaćanje postaje realno pre pilota
+sa stvarnim podacima (plan baze sa backup-om i povratkom u tačku vremena; po
+uslovima Vercela Pro plan za komercijalnu upotrebu).

@@ -52,6 +52,7 @@ export default async function CustomerPriceRequestsPage() {
             </>
           ) : null}
           <a href={companyContact.emailHref}>{companyContact.email}</a>
+          {companyContact.workingHours ? <> · {companyContact.workingHours}</> : null}
         </span>
       </div>
       {rows.length === 0 ? (

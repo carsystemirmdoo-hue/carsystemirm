@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { srDate, srDateTime, DOCUMENT_KIND_LABELS, srMoney } from "@/components/customer/account-format";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
+import { companyContact } from "@/lib/company-contact";
 import { loadCustomerInvoices, loadCustomerOverview } from "@/lib/customers/customer-queries";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
 
@@ -67,7 +68,17 @@ export default async function CustomerHomePage() {
         <h2>Porudžbine</h2>
         <p>
           Poručivanje kroz nalog još nije uključeno. Porudžbine i dalje šaljete kao do sada — svom
-          komercijalisti ili telefonom.
+          komercijalisti ili kancelariji.
+        </p>
+        <p className="portal-footnote">
+          Kancelarija:{" "}
+          {companyContact.phone && companyContact.phoneHref ? (
+            <>
+              <a href={companyContact.phoneHref}>{companyContact.phone}</a> ·{" "}
+            </>
+          ) : null}
+          <a href={companyContact.emailHref}>{companyContact.email}</a>
+          {companyContact.workingHours ? <> · {companyContact.workingHours}</> : null}
         </p>
         <Link href="/kupac/porudzbine" className="ka-more">Šta se ovde prikazuje →</Link>
       </section>

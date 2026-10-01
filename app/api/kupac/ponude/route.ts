@@ -32,7 +32,14 @@ export async function GET() {
         ? { enabled: true, priceList: { name: mode.priceList.name, kind: mode.priceList.kind, currency: mode.priceList.currency } }
         : { enabled: false, reason: mode.reason },
       offers,
-      contacts: { ...contacts, office: { phone: companyContact.phone, phoneHref: companyContact.phoneHref, email: companyContact.email } },
+      contacts: { ...contacts, office: {
+          phone: companyContact.phone,
+          phoneHref: companyContact.phoneHref,
+          email: companyContact.email,
+          emailHref: companyContact.emailHref,
+          workingHours: companyContact.workingHours,
+        },
+      },
     },
     { headers: NO_STORE },
   );

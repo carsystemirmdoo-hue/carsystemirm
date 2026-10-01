@@ -250,7 +250,8 @@ function Contacts({ data }: { data: OffersPayload }) {
           <a href={data.contacts.office.phoneHref}>{data.contacts.office.phone}</a> ·{" "}
         </>
       ) : null}
-      <a href={`mailto:${data.contacts.office.email}`}>{data.contacts.office.email}</a>
+      <a href={data.contacts.office.emailHref}>{data.contacts.office.email}</a>
+      {data.contacts.office.workingHours ? <> · {data.contacts.office.workingHours}</> : null}
     </p>
   );
 }

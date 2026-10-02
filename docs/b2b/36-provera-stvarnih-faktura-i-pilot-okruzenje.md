@@ -1,8 +1,8 @@
 # 36 — Provera stvarnih faktura bez upisa i okruženje za stvarne podatke
 
-**Status (2026-10-02): alat spreman i probran nad sintetičkim fajlovima;
-stvarne fakture nisu dostupne na razvojnom računaru; okruženje za stvarne
-podatke čeka odluku.** Ništa stvarno nije upisano. Nastavak na
+**Status (2026-10-02): provera bez upisa izvršena nad stvarnim fakturama;
+rezultati su samo u privatnom lokalnom izveštaju (javni repozitorijum ne nosi
+brojke o poslovanju); okruženje za stvarne podatke čeka odluku.** Ništa stvarno nije upisano. Nastavak na
 [34](34-prelazak-na-stvarne-podatke.md) i [35](35-zahtev-za-izvoze-biznisoft.md).
 
 ## 1. Koje fakture postoje
@@ -14,8 +14,19 @@ fajlova se ne ispisuju; lični folderi se ne otvaraju):
 - fajlova `Fak*.pdf` nema nigde u početnom folderu ni u kanti;
 - PDF-ovi u projektnom `_incoming/` (8) nisu BizniSoft fakture.
 
-**Zaključak: stvarnih faktura na ovom računaru nema.** Treba ih ponovo
-dostaviti u privatni folder van repozitorijuma (§5).
+Posle toga fakture su dostavljene u privatni folder van repozitorijuma i
+proverene bez upisa (§2, `BIZNISOFT_RECURSIVE=1`). Rezultat i spisak za ljudski
+pregled po kategorijama: `~/.carsystem-private/` (prava 600/700).
+
+**Nađena i ispravljena greška parsera:** u rasporedu stvarnih faktura posle
+oznake „Šifra partnera:" odmah sledi sledeća oznaka, a vrednost stoji ispred.
+Parser je tu oznaku čitao kao šifru, pa bi **svi kupci dobili istu šifru** i uvoz
+bi ih spojio u jednog. Sada se reč koja se završava dvotačkom ne prihvata kao
+šifra; posle ispravke šifre i PIB-ovi kupaca odgovaraju jedan prema jedan.
+Test: `lib/pdf/biznisoftLayout.test.mjs`. Oznaka verzije parsera
+(`biznisoft-pdf-1`) nije menjana jer nijedan stvaran dokument nije uvezen;
+pre prvog stvarnog uvoza odlučiti da li se podiže (dira ugovor konektora,
+`SUPPORTED_PARSER_VERSIONS`).
 
 ## 2. Provera bez upisa
 
@@ -107,8 +118,11 @@ vremenu nisam proverio u zvaničnim uslovima.
 
 ## 6. Šta nedostaje za prvi kontrolisani uvoz
 
-1. **Stvarni PDF-ovi** u privatnom folderu (§1), pa provera iz §2 bez greške u
-   aritmetici i zbiru.
+1. **Odluka o dokumentima koji nisu prošli proveru** (privatni spisak po
+   kategorijama): interni dokumenti (kalkulacije, nivelacije) se isključuju;
+   neprepoznat tip, faktura bez pročitanih stavki, tabela na više strana i
+   greške aritmetike traže uzorak i ljudsku proveru; prvi talas uvozi samo
+   ispravne.
 2. **Šifarnik partnera** (sirov izvoz, [35 §1](35-zahtev-za-izvoze-biznisoft.md))
    — bez njega fakture ostaju „čeka mapiranje".
 3. **Odluka o okruženju** (§5) i pravljenje projekta i grane — rade ljudi sa

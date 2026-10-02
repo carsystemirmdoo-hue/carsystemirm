@@ -51,9 +51,9 @@ repozitorijuma; bazu označenu kao demo kada talas ima stvarne PIB-ove.
 
 **Prvi talas:** predlog postoji za svakog partnera talasa (nad praznim
 stanjem: otvaranje kupca + veza), bez izdvojenih slučajeva. Tabela je privatna
-(`~/.carsystem-private/veze-talas-01.csv`). Oznaka izdavaoca u predlogu je
-privremena — mora biti **ista vrednost** koja se unosi kao „izdavalac" pri
-uploadu PDF-ova u pilotu; ako se promeni, `plan` se ponavlja.
+(`~/.carsystem-private/veze-talas-01.csv`). Oznaka izdavaoca je **`CSRM`**
+(odluka 2026-10-02, [40 §1](40-pilot-priprema-rabati-i-nalozi.md)) — ista
+vrednost u `plan` i kao „izdavalac" pri uploadu PDF-ova u pilotu.
 
 ## 2. Pilot: koraci
 

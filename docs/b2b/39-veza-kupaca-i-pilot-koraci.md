@@ -13,7 +13,8 @@ Problem: uvoz povezuje kupca samo po šifri tačno kako je na fakturi
 |---|---|
 | plan (čista logika) | `lib/commercial/customerLinkPlan.mjs` |
 | primena potvrđenih (server) | `lib/commercial/customerLinkApply.ts` |
-| komanda | `scripts/ops/customer-link.mts` (`plan`, `apply`) |
+| plan (komanda, bez upisa) | `scripts/ops/customer-link.mts plan` |
+| primena (portal, prijava + svež drugi faktor) | `/portal/kupci/veze` — [43](43-prvi-talas-uputstvo.md) |
 | testovi | `lib/commercial/customerLinkPlan.test.mjs`, `db/integration/customerLink.integration.test.mts` |
 
 **Pravila**
@@ -38,16 +39,19 @@ Problem: uvoz povezuje kupca samo po šifri tačno kako je na fakturi
    privatni spisak izdvojenih slučajeva. Bez `DATABASE_URL` radi nad praznim
    stanjem.
 2. Kancelarija u tabeli upisuje `potvrdi` ili `odbij` i svoje ime.
-3. `apply` (podrazumevano probni prolaz) ponovo računa plan nad ciljnom bazom
-   i primenjuje **samo** potvrđene redove čiji se otisak poklapa sa trenutnim
-   stanjem; ostalo je „zastarelo" i traži nov `plan`. `--upisi` tek posle
-   pregleda probnog prolaza.
+3. **Portal** `/portal/kupci/veze` (izmena 2026-10-02 — navođenje naloga u
+   komandi nije autentifikacija): „Proverite" (bez upisa), pa „Primenite
+   potvrđene" — traži `mappings:manage`, drugi faktor potvrđen u poslednjih 10
+   minuta, uključen `FEATURE_PARTNER_REGISTRY` i izričitu potvrdu. Plan se
+   ponovo računa nad bazom; primenjuju se **samo** potvrđeni redovi čiji se
+   otisak poklapa sa trenutnim stanjem; ostalo je „zastarelo". Akter je
+   prijavljen korisnik; ime iz kolone `potvrdio` ide samo u napomenu veze.
 4. Jedan partner = jedna transakcija (kupac + šifra + trag). Ponovno
    pokretanje ne pravi duplikate: već povezano je „bez radnje", stari otisci su
    „zastareli".
 
-`apply` odbija: nalog koji nije aktivan Vlasnik/kancelarija; fajlove unutar
-repozitorijuma; bazu označenu kao demo kada talas ima stvarne PIB-ove.
+Komanda `plan` ne prima ime naloga i ne upisuje ništa; `apply` je uklonjen.
+Fajlovi sa podacima kupaca ostaju van repozitorijuma.
 
 **Prvi talas:** predlog postoji za svakog partnera talasa (nad praznim
 stanjem: otvaranje kupca + veza), bez izdvojenih slučajeva. Tabela je privatna
@@ -85,8 +89,8 @@ Rade ljudi sa pristupom firminim nalozima; ništa od ovoga nije urađeno.
    **nije** uslov.
 9. **Nalog kancelarije** za uvoz kreira Vlasnik u portalu (drugi faktor
    obavezan).
-10. **Talas:** `customer-link.mts plan` nad pilot bazom → pregled → `apply`
-    probno → `apply --upisi`; zatim upload PDF-ova talasa i kontrole iz 38 §4.
+10. **Talas:** `customer-link.mts plan` nad pilot bazom → pregled kancelarije →
+    `/portal/kupci/veze` (provera, pa primena) → uvoz talasa i kontrole — [43](43-prvi-talas-uputstvo.md).
 
 ## 3. Vercel promenljive za `pilot/istorija` (samo Preview, samo ta grana)
 

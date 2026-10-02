@@ -142,7 +142,7 @@ sintetički testovi, nijedna ranije ispravna faktura nije promenjena):
 | Nalaz | Ispravka |
 |---|---|
 | fakture sa više od 99 stavki: tačka rednog broja prelazi u sledeći red („100", pa „.") | broj bez tačke prihvata se samo sa ≥ 3 cifre; red sa samom tačkom je nastavak naziva |
-| jedna stavka promašena za 2 pare | BizniSoft računa u binarnom zapisu (`osnovica × rabat / 100`), polovina od nule; model se poklapa sa svakom stavkom 2021–2026, uključujući storna — decimalno zaokruživanje promaši |
+| jedna stavka promašena za 2 pare | model računa u binarnom zapisu (`osnovica × rabat / 100`), polovina od nule; odgovara svakoj posmatranoj stavci 2021–2026, uključujući storna, dok decimalno zaokruživanje jednu promaši. To je model ponašanja posmatranih dokumenata, ne dokaz interne implementacije BizniSoft-a |
 | storno: veliki negativan PDV slepljen sa stopom („20%-19.366,09") | deli se samo taj oblik kada je kolona iznosa PDV-a prazna; presuđuje aritmetika |
 
 Raspored tabele je isti od 2021. do avgusta 2026; raspored bez kolone barkoda

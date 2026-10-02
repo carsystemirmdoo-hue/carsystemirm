@@ -1,8 +1,8 @@
 # 44 — Lokalni prikaz jednog kupca za komercijalistu i stvarna provera ekrana za veze
 
-**Status (2026-10-02): lokalna baza, test nalozi i server spremni; ekran za
-veze proveren u pregledaču; stvarni podaci kupca NISU upisani — čeka se
-potvrda obuhvata (§3).** Pilot (Neon) i njegovi nalozi nisu menjani.
+**Status (2026-10-02): obuhvat potvrđen i upisan SAMO u lokalnu bazu
+(§3); ekran za veze proveren u pregledaču; server za pregled radi na
+`127.0.0.1:3420`; nalazi pregleda u §6.** Pilot (Neon) i njegovi nalozi nisu menjani.
 
 ## 1. Lokalno okruženje
 
@@ -31,7 +31,7 @@ potvrda obuhvata (§3).** Pilot (Neon) i njegovi nalozi nisu menjani.
 | ponovna primena iste tabele | „zastarelo", bez duplikata |
 | nov plan posle primene | „već povezano", bez radnje |
 
-## 3. Predlog obuhvata za stvaran kupac (čeka potvrdu)
+## 3. Obuhvat za stvaran kupac (potvrđen i upisan lokalno)
 
 Kupac sa nedvosmislenim mapiranjem (šifra + PIB potvrđeni prema šifarniku,
 nije blokiran, ima komercijalistu) i istorijom kroz šest godina, bez ijednog
@@ -73,3 +73,36 @@ ako „DA" nema ime.
 
 Zbirovi iz PDF manifesta su **izvedeni iz iste arhive** i nisu nezavisna
 kontrola; nezavisna potvrda je samo BizniSoft izveštaj.
+
+**Rezultat upisa (kroz portal kao lokalni Vlasnik):** veza mapirana i
+potvrđena; 59 izvornih dokumenata, svih 59 knjiženo, nijedan na pregledu; 59
+faktura (izdavalac `CSRM`); 515 stavki; neto, PDV i bruto jednaki manifestu na
+paru; kupac dodeljen lokalnom komercijalisti. Komercijalista vidi svog kupca
+(200), nedodeljenog ne vidi (403), u spisku kupaca ima samo svog.
+
+## 6. Pregled kartice kupca — šta nedostaje ili nije pouzdano
+
+| Nalaz | Ocena |
+|---|---|
+| Bez obračuna preporuka svi artikli stoje u grupi „premalo istorije (1–2 kupovine)" — iako više od polovine ima tri ili više kupovina | **greška prikaza**: bez obračuna treba pisati „nije obračunato" (`customer-profile.ts`, rezervni status) |
+| Prvi obračun preporuka: polje „Na dan" je prazno i obavezno kada obračuna još nema, pa pregledač tiho blokira slanje | **greška**: podrazumevani datum treba da bude današnji (`preporuke/page.tsx`, `run?.asOfDate ?? ""`); lokalno je obračun pokrenut ručnim unosom datuma |
+| Svaki artikal: „Katalog: nije povezano" | nedostaje veza artikal → katalog (nikad po nazivu; čeka šifarnik artikala) |
+| „Predlozi za proširenje" nisu dostupni | traže ≥ 5 firmi sa potvrđenim kupovinama; lokalno je samo jedan stvaran kupac |
+| Privremene procene (artikal kupljen dva puta) | označene kao privremene; nisu ritam |
+| Dugovanja i uplate | izvor nije povezan — ekran to i kaže |
+| Cene | kartica i „Za razgovor" ne prikazuju cene; „Prodaja" prikazuje iznose sa faktura kao istoriju dokumenata, ne kao cenovnik |
+| Ritam kupca i artikala | iz datuma izdavanja potvrđenih računa; storna ovaj kupac nema |
+
+## 7. Pristup za pregled
+
+Server: `http://127.0.0.1:3420/prijava`. Pristup lokalnom test nalogu (u
+sopstvenom Terminal.app prozoru):
+
+```bash
+cd ~/carsystem-work/portal-integration && CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/lokalni-prikaz npx tsx --tsconfig db/integration/tsconfig.test.json scripts/ops/local-view-login.mts rep
+```
+
+(`owner` ili `office` umesto `rep` za druge uloge.) Lozinka ide u clipboard,
+kod drugog faktora se ispisuje u terminalu. Baza i pristupi ostaju do kraja
+pregleda; uklanjanje po §4.
+

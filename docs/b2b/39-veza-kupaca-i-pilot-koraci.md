@@ -112,7 +112,7 @@ Neon ↔ Vercel integraciju (upisuje adrese i u Production).
 
 | Stavka | A: bez troška | B: preporuka |
 |---|---|---|
-| Neon | Free: $0; 1 GB/projekat, 100 CU-h, povratak 6 h | Launch: bez minimuma, $0,106/CU-h, $0,35/GB-mesec, povratak do 7 dana; procena ≈ $5/mesec uz pretpostavku 0,25 CU × 8 h × 22 dana i < 1 GB — važi za ceo nalog, uključujući testni projekat |
+| Neon | Free: $0; 0,5 GB po konzoli za ovaj projekat (stranica cena navodi 1 GB), 100 CU-h, povratak 6 h; prekoračenje blokira upise | Launch: bez minimuma, $0,106/CU-h, $0,35/GB-mesec, povratak do 7 dana; procena ≈ $5/mesec uz pretpostavku 0,25 CU × 8 h × 22 dana i < 1 GB — važi za ceo nalog, uključujući testni projekat |
 | Vercel | Hobby: $0, ali po uslovima samo lična, nekomercijalna upotreba | Pro: $20 po razvojnom sedištu mesečno (uz $20 kredita); Vercel Authentication uključen, zaštita lozinkom ($20/projekat) nije potrebna |
 | Domen | nije potreban (adresa `*.vercel.app`) | isto |
 | Rezervne kopije | lokalno, šifrovano: $0 | isto |

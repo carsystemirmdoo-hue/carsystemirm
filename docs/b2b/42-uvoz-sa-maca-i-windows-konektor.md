@@ -43,7 +43,7 @@ Sve na Mac-u; lokalni server sluša **samo** na `127.0.0.1`.
    `next start -H 127.0.0.1 -p 3419`.
 2. Vlasnik u pilotu: `preview-owner.sh` (lozinku kuca sam) i drugi faktor
    (`preview-mfa-grant.sh issue` → vezivanje na
-   `http://127.0.0.1:3419/portal/bezbednost/mfa` → `clear`), sve sa
+   `http://localhost:3419/portal/bezbednost/mfa` (adresa mora biti ista kao `AUTH_URL`) → `clear`), sve sa
    `CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot`.
 3. Konektor na Mac-u: privatna fascikla stanja
    (`CS_CONNECTOR_STATE_DIR=~/.carsystem-private/konektor-mac`), `config.json`
@@ -131,7 +131,10 @@ objavljenom pilotu i registracija uređaja kancelarije (§5).
 **Unapred (bez firminog računara):**
 
 1. `npm run connector:build` iz pregledanog commita; ZIP (`dist/` +
-   `windows/*.ps1`) i SHA-256 — heš ide odvojenim kanalom
+   `windows/*.ps1`) i SHA-256 — heš ide odvojenim kanalom. Smoke paket:
+   `CS_SMOKE_OUT_DIR=~/.carsystem-private/paketi npm run connector:smoke:package`,
+   provera istom promenljivom: `… npm run connector:smoke:verify` (mora 9/9).
+   Važeći paketi i otisci: `~/.carsystem-private/paketi/SHA256SUMS.txt`
    ([OFFICE-INSTALL §1](../../connector/windows/OFFICE-INSTALL.md)).
 2. `config.json`: `serverOrigin` = adresa objavljenog pilota (HTTPS),
    `deviceCode` npr. `KANC-01`, `sourceSystem` `biznisoft`, `issuerCode`

@@ -37,7 +37,7 @@ i `FEATURE_PARTNER_REGISTRY=1` (samo lokalno, samo za ovaj rad).
 3. Vlasnik nalog: `CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot bash scripts/ops/preview-owner.sh "<e-adresa>" "<ime>"`
    — lozinku kuca Aleksandar.
 4. Drugi faktor: `… preview-mfa-grant.sh issue "<e-adresa>"` → Aleksandar
-   otvara fajl sam, vezuje aplikaciju na `http://127.0.0.1:3419/portal/bezbednost/mfa`,
+   otvara fajl sam, vezuje aplikaciju na `http://localhost:3419/portal/bezbednost/mfa` (adresa mora biti ista kao `AUTH_URL`),
    čuva kodove za oporavak van računara → `… clear` → odjava i ponovna prijava.
 5. Rezervna kopija: Neon grana `pre-talas-01` (konzola) + `pilot-backup.sh dump`
    + `verify`.

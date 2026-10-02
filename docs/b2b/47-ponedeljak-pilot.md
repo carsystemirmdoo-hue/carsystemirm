@@ -138,12 +138,32 @@ Koraci za operatera (Mac, sopstveni Terminal.app; lozinku kuca sam):
 2. Nalog: `CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot bash scripts/ops/preview-owner.sh "<vaša e-adresa>" "<ime i prezime>"`.
 3. Drugi faktor: `CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot bash scripts/ops/preview-mfa-grant.sh issue "<vaša e-adresa>"`,
    prijava na `http://localhost:3419/prijava`, vezivanje na
-   `/portal/bezbednost/mfa` (kod iz `~/.carsystem-secrets/owner-mfa-grant.txt`),
+   `/portal/bezbednost/mfa` (kod iz `~/.carsystem-secrets/pilot/owner-mfa-grant.txt`),
    kodovi za oporavak van računara, pa `… preview-mfa-grant.sh clear`.
 4. Konektor na Mac-u: `init` tačnom komandom iz [42 §2](42-uvoz-sa-maca-i-windows-konektor.md);
    registracija i aktivacija `MAC-ARHIVA` na `/portal/importi/sinhronizacija`
    (izbor sa liste + otisak iz `init`).
-5. Rezervna kopija posle ovih koraka (`pilot-backup.sh dump` + `verify`).
+5. Rezervna kopija posle ovih koraka (`pilot-backup.sh dump` + `verify`;
+   proba vraćanja na stalni lokalni klaster 55434 — privremena baza se posle
+   briše, baza lokalnog prikaza se ne dira).
+
+**Aleksandar u ponedeljak — kroz portal, ne ponovnim `db:seed`.** `preview-owner.sh`
+ne traži praznu bazu (preskače samo postojeću e-adresu), ali radi direktno
+vlasničkim pristupom bazi, mimo prijave i ovlašćenja u portalu; za drugog
+Vlasnika se koristi postojeći ekran:
+
+1. Operater (Vlasnik, prijavljen sa drugim faktorom) na `/portal/dozvole` →
+   otvaranje naloga: Aleksandrova e-adresa, ime, uloga **Vlasnik**; polje za
+   lozinku **kuca Aleksandar sam**; kod iz aplikacije za otvaranje Vlasnika
+   unosi operater (svež, svoj).
+   — Ako Aleksandar nije za tastaturom: nasumična privremena lozinka koju niko
+   ne zapisuje, pa `/portal/bezbednost/nalozi` → kod za promenu lozinke;
+   Aleksandar postavlja svoju na `/prijava/reset`.
+2. `/portal/bezbednost/nalozi` → dozvola za vezivanje drugog faktora za
+   Aleksandra (operaterov kod + razlog); kod se prikaže jednom — čita ga
+   Aleksandar.
+3. Aleksandar se prijavljuje i vezuje aplikaciju na `/portal/bezbednost/mfa`;
+   kodove za oporavak čuva sam.
 
 Tada u ponedeljak ostaje: potvrde kancelarije i BizniSoft zbir → Neon grana
 `pre-talas-01` → primena veza → `wave-control pre` → `run-once` (3 ciklusa) →

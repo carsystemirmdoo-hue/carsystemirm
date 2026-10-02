@@ -115,7 +115,60 @@ tabele; originalna tabela i list za kancelariju su nepromenjeni (otisak isti).
 ništa, posle roka završava bez duplikata; 429 bez vremena → 5 s, 10 s; stare
 odložene stavke se oslobađaju; trajna greška ostaje za pregled bez ponavljanja.
 
-## 7. Nije odobreno / čeka odluku
+## 7. Šta se može uraditi pre ponedeljka (provereno 2026-10-02)
+
+**Imenovani nalog operatera — postoji, ali samo kao Vlasnik.** U praznoj bazi
+prvi nalog pravi isključivo `db:seed` (`preview-owner.sh`), sa ulogom Vlasnik;
+registracija uređaja (`devices:manage`) je takođe samo za Vlasnika. Sistem
+dozvoljava više aktivnih Vlasnika (čuvar samo sprečava da firma ostane bez
+ijednog), pa Aleksandrov nalog ostaje nezavisan i pravi se u ponedeljak istim
+putem. Uloga operatera se kasnije može spustiti kada Aleksandar postane
+Vlasnik. Svaki korak beleži trag revizije pod imenom operatera.
+
+Koraci za operatera (Mac, sopstveni Terminal.app; lozinku kuca sam):
+
+1. Lokalni pilot server iz najnovijeg commita, samo za ovu sesiju:
+   ```bash
+   cd ~/carsystem-work/portal-integration && source ~/.nvm/nvm.sh && nvm use 24
+   set -a; . ~/.carsystem-secrets/pilot/local-build.env; set +a
+   export FEATURE_SYNC_DEVICE_INGEST=1 FEATURE_PARTNER_REGISTRY=1
+   NEXT_DIST_DIR=.next-pilot npx next build && NEXT_DIST_DIR=.next-pilot npx next start -H 127.0.0.1 -p 3419
+   ```
+   Adresa u pregledaču: **`http://localhost:3419`** (isto kao `AUTH_URL`).
+2. Nalog: `CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot bash scripts/ops/preview-owner.sh "<vaša e-adresa>" "<ime i prezime>"`.
+3. Drugi faktor: `CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot bash scripts/ops/preview-mfa-grant.sh issue "<vaša e-adresa>"`,
+   prijava na `http://localhost:3419/prijava`, vezivanje na
+   `/portal/bezbednost/mfa` (kod iz `~/.carsystem-secrets/owner-mfa-grant.txt`),
+   kodovi za oporavak van računara, pa `… preview-mfa-grant.sh clear`.
+4. Konektor na Mac-u: `init` tačnom komandom iz [42 §2](42-uvoz-sa-maca-i-windows-konektor.md);
+   registracija i aktivacija `MAC-ARHIVA` na `/portal/importi/sinhronizacija`
+   (izbor sa liste + otisak iz `init`).
+5. Rezervna kopija posle ovih koraka (`pilot-backup.sh dump` + `verify`).
+
+Tada u ponedeljak ostaje: potvrde kancelarije i BizniSoft zbir → Neon grana
+`pre-talas-01` → primena veza → `wave-control pre` → `run-once` (3 ciklusa) →
+`wave-control posle` → rezervna kopija; Aleksandar pravi svoj nalog.
+
+**Prijem 136 računa PRE potvrde veza — delimično postoji, ne pokretati.**
+
+| Deo | Stanje |
+|---|---|
+| Prijem i čuvanje bez knjiženja kada kupac nije potvrđen | postoji: izvorni dokument se čuva, ide na ručni pregled, šifra se beleži kao „nepovezana"; nema fakture, prometa, preporuka ni prikaza kupcu |
+| Knjiženje tih dokumenata posle **grupne** primene veza (`/portal/kupci/veze`) | **ne postoji** — grupna primena poveže šifru, ali ne proknjiži dokumente koji čekaju; knjiži samo ekran pojedinačnog mapiranja, šifru po šifru (68 ručnih koraka) |
+| Kontrole talasa za dvofazni tok | ne postoje: `wave-control pre` traži povezane partnere i prazan pregled, `posle` traži knjižene fakture |
+
+Procena izmene (ako se odobri): u grupnoj primeni veza posle svake povezane
+šifre pozvati postojeće knjiženje dokumenata koji čekaju (`postAwaitingMapping`)
+i prikazati broj proknjiženih — oko pola dana sa integracionim testovima i
+ponovljenom lokalnom probom; uz to faza `prijem` u `wave-control` (svih 136
+sačuvano, nijedna faktura, svi čekaju vezu) — 2–3 sata. Bez toga je bolji
+redosled iz §4: veze pa uvoz, u ponedeljak.
+
+**Windows paketi** su obnovljeni iz commita sa ovim uputstvom; otisci su u
+`~/.carsystem-private/paketi/SHA256SUMS.txt` i handoff fajlu, a stari su
+označeni kao nevažeći. Heš ide primaocu odvojenim kanalom.
+
+## 8. Nije odobreno / čeka odluku
 
 - Vercel plan i objava pilota (preduslov za Windows konektor).
 - Prepisivanje Git istorije (cena u 4fd2b09, LAN adresa u 35d1c05) — nije

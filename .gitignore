@@ -76,6 +76,7 @@ assets/manufacturer/
 
 # izlaz provere builda (npm run build:check)
 .next-verify
+.next-pilot
 
 # izolovani izlaz dev servera (npm run dev)
 .next-dev

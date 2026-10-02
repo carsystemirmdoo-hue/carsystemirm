@@ -89,11 +89,19 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
           <p>{s.change}</p>
           {s.mention.length ? (
             <ul className="zr-articles">
-              {s.mention.map((m) => (
+              {/* Najviše tri; ostatak rangirane liste je na kartici kupca. */}
+              {s.mention.slice(0, 3).map((m) => (
                 <li key={m.articleCode} data-tone={m.tone}>
                   <strong>{m.name}</strong> — {m.reason}
                 </li>
               ))}
+              {s.suggestionCounts.main > 3 ? (
+                <li className="zr-more">
+                  <Link href={`/portal/kupci/${item.id}`}>
+                    još {s.suggestionCounts.main - 3} na kartici kupca
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           ) : null}
         </div>

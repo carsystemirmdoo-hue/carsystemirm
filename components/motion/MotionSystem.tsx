@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { MotionConfigProvider } from "@/components/motion/MotionConfigProvider";
 import { PigmentCursor } from "@/components/motion/PigmentCursor";
 import { registerPointerConsumer } from "@/components/motion/pointerLifecycle";
+import { releasePortalRouteTransition } from "@/lib/portalRouteTransition.mjs";
 import {
   motionSurfaceSelector,
   resetLocalPointerVars,
@@ -14,9 +15,17 @@ import {
 export function MotionSystem({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/portal")) return <>{children}</>;
+  if (pathname.startsWith("/portal")) return <PortalNoMotion>{children}</PortalNoMotion>;
 
   return <PublicMotionSystem>{children}</PublicMotionSystem>;
+}
+
+/** Portal bez prelaza: stanje „booting“ iz korenog layouta se ne sme zadržati. */
+function PortalNoMotion({ children }: { children: ReactNode }) {
+  useEffect(() => {
+    releasePortalRouteTransition(document);
+  }, []);
+  return <>{children}</>;
 }
 
 function PublicMotionSystem({ children }: { children: ReactNode }) {

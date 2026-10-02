@@ -4,6 +4,13 @@ import type { CrossSell } from "@/lib/recommendations/cross-sell";
 import type { CustomerArticle, CustomerProfile } from "@/lib/recommendations/customer-profile";
 import { CONFIDENCE_LABELS } from "@/lib/recommendations/policy.mjs";
 import { ARTICLE_STATUS_LABELS, srDate } from "@/lib/recommendations/customerSummary.mjs";
+import {
+  CONFIDENCE_MEANING,
+  MAIN_LIMIT,
+  roughInterval,
+  suggestionReason,
+  suggestionTone,
+} from "@/lib/recommendations/suggestionRanking.mjs";
 
 type Tone = "success" | "warning" | "danger" | "neutral";
 
@@ -69,22 +76,6 @@ export function CustomerSummary({
           <h3>Šta se promenilo</h3>
           <p>{s.change}</p>
         </div>
-
-        {s.mention.length ? (
-          <div className="cs-block">
-            <h3>Vredi pomenuti</h3>
-            <ul className="cs-mentions">
-              {s.mention.map((m) => (
-                <li key={m.articleCode} data-tone={m.tone}>
-                  <a href={`#artikal-${encodeURIComponent(m.articleCode)}`}>
-                    <strong>{m.name}</strong>
-                    <span>{m.reason}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
 
         <div className="cs-block cs-next">
           <h3>Predlog za sledeći razgovor</h3>
@@ -196,6 +187,147 @@ function ArticleRow({ a, asOfDate, identity }: { a: CustomerArticle; asOfDate: s
   );
 }
 
+/** Šta za predlog nedostaje — kaže se izričito, umesto da se prećuti. */
+function suggestionLimits(id: ArticleIdentity | undefined): string[] {
+  if (!id) return ["artikal nije u registru artikala", "grupa nije potvrđena", "bez veze sa katalogom", "bez važeće cene"];
+  const out: string[] = [];
+  if (!id.productGroup) out.push("grupa nije potvrđena");
+  if (!id.catalog) out.push(id.mappingStatus === "suggested" ? "veza sa katalogom samo predložena" : "bez veze sa katalogom");
+  if (!id.hasCurrentPrice) out.push("bez važeće cene u cenovniku");
+  return out;
+}
+
+function SuggestionCard({
+  a,
+  identity,
+  common,
+}: {
+  a: CustomerArticle;
+  identity?: ArticleIdentity;
+  common: Set<string>;
+}) {
+  // Zajednička ograničenja stoje jednom iznad liste; ovde samo ono što je drugačije.
+  const limits = suggestionLimits(identity).filter((l) => !common.has(l));
+  const conf = (a.confidence ?? "low") as keyof typeof CONFIDENCE_MEANING;
+  return (
+    <li className="cs-sugg" data-tone={suggestionTone(a)}>
+      <div className="cs-sugg-head">
+        <strong>{a.articleName ?? a.articleCode}</strong>
+        <small>BizniSoft {a.articleCode}</small>
+      </div>
+      <p className="cs-sugg-reason">{suggestionReason(a)}</p>
+      <dl className="cs-sugg-facts">
+        <div>
+          <dt>Poslednja kupovina</dt>
+          <dd>
+            {srDate(a.lastPurchaseOn)} <small>pre {dana(a.daysSinceLastPurchase)}</small>
+          </dd>
+        </div>
+        <div>
+          <dt>Osnova</dt>
+          <dd>
+            {a.eventCount} kupovina od {srDate(a.firstPurchaseOn)}
+            {a.medianIntervalDays !== null ? (
+              <small>uobičajen razmak {roughInterval(a.medianIntervalDays)}</small>
+            ) : null}
+          </dd>
+        </div>
+        <div>
+          <dt>Pouzdanost</dt>
+          <dd>
+            {CONFIDENCE_LABELS[conf] ?? conf}
+            <small>{CONFIDENCE_MEANING[conf]}</small>
+          </dd>
+        </div>
+      </dl>
+      {limits.length ? <p className="cs-sugg-limits">Ograničenje: {limits.join(" · ")}</p> : null}
+      <a className="cs-sugg-basis" href={`#artikal-${encodeURIComponent(a.articleCode)}`}>
+        Osnov i svi datumi
+      </a>
+    </li>
+  );
+}
+
+/**
+ * Predlozi za razgovor: prvo najviše pet, zatim „Prikažite sve" i odvojeno
+ * slabiji signali. Pun spisak po grupama ostaje ispod (`CustomerArticles`).
+ */
+export function CustomerSuggestions({
+  profile,
+  identities = {},
+}: {
+  profile: CustomerProfile;
+  identities?: Record<string, ArticleIdentity>;
+}) {
+  if (profile.articles.length === 0) return null;
+  const { top, main, weak } = profile.suggestions;
+  const rest = main.slice(top.length);
+  const shown = [...main, ...weak];
+  const perArticle = shown.map((a) => suggestionLimits(identities[a.articleCode]));
+  const common = new Set(
+    perArticle.length ? perArticle[0].filter((l) => perArticle.every((x) => x.includes(l))) : [],
+  );
+  const card = (a: CustomerArticle) => (
+    <SuggestionCard key={a.articleCode} a={a} identity={identities[a.articleCode]} common={common} />
+  );
+  return (
+    <section className="portal-panel cs-suggestions" aria-labelledby="cs-sugg-title">
+      <div className="portal-section-header">
+        <div>
+          <h2 id="cs-sugg-title">
+            Predlozi za razgovor{main.length ? ` (${top.length} od ${main.length})` : ""}
+          </h2>
+          <p>
+            Do {MAIN_LIMIT} artikala, poređanih po tome koliko je termin sada aktuelan, po pouzdanosti i
+            po broju kupovina — ne samo po proteklom vremenu. Iz faktura se ne vidi lager ni potrošnja
+            kupca: termin je ritam ranijih kupovina, ne datum kada mu nešto treba.
+          </p>
+        </div>
+      </div>
+      <div className="portal-panel-body cs-sugg-body">
+        {common.size ? (
+          <p className="cs-sugg-common">
+            Za sve predloge: {[...common].join(" · ")}. Predlog je razgovor o artiklu, ne ponuda.
+          </p>
+        ) : null}
+        {!profile.hasActiveRun ? (
+          <p className="cs-sugg-empty">Predlozi se prikazuju posle obračuna preporuka.</p>
+        ) : profile.freshness.state === "new_documents" ? (
+          <p className="cs-sugg-empty">Posle obračuna su stigli novi dokumenti; predlozi se prikazuju posle novog obračuna.</p>
+        ) : top.length === 0 ? (
+          <p className="cs-sugg-empty">
+            Nema pouzdanog predloga: nijedan artikal sa srednjom ili visokom pouzdanošću nije sada u
+            terminu niti je nedavno prestao.
+          </p>
+        ) : (
+          <ol className="cs-sugg-list">{top.map(card)}</ol>
+        )}
+        {rest.length ? (
+          <details className="cs-sugg-more">
+            <summary>Prikažite sve ({main.length})</summary>
+            <ol className="cs-sugg-list" start={top.length + 1}>
+              {rest.map(card)}
+            </ol>
+          </details>
+        ) : null}
+        {weak.length ? (
+          <details className="cs-sugg-more cs-sugg-weak">
+            <summary>Slabiji signali ({weak.length})</summary>
+            <p>
+              Samo dve kupovine ili neujednačen ritam — procena je slaba. Nije predlog, samo podsetnik
+              ako razgovor ionako dođe do tog artikla.
+            </p>
+            <ol className="cs-sugg-list">{weak.map(card)}</ol>
+          </details>
+        ) : null}
+        <a className="cs-sugg-all" href="#artikli">
+          Svi artikli po grupama ({profile.articles.length})
+        </a>
+      </div>
+    </section>
+  );
+}
+
 /** Glavna lista: svaki artikal tačno jednom, grupe po važnosti. */
 export function CustomerArticles({
   profile,
@@ -206,7 +338,7 @@ export function CustomerArticles({
 }) {
   if (profile.articles.length === 0) return null;
   return (
-    <section className="portal-panel">
+    <section className="portal-panel" id="artikli">
       <div className="portal-section-header">
         <div>
           <h2>Artikli ({profile.articles.length})</h2>

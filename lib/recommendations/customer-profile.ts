@@ -15,6 +15,7 @@ import {
   uncomputedArticle,
 } from "@/lib/recommendations/customerSummary.mjs";
 import { freshnessOf } from "@/lib/recommendations/freshness.mjs";
+import { rankSuggestions } from "@/lib/recommendations/suggestionRanking.mjs";
 import { recommendationRows, type RecommendationRow } from "@/lib/recommendations/query";
 
 /**
@@ -172,6 +173,14 @@ function build(
     summary,
     articles,
     groups: groupArticles(articles),
+    /*
+     * Predlozi za razgovor: kratka lista + ostatak + slabiji signali. Prazno
+     * bez obračuna i dok obračun zastareva (status ne važi kao aktuelan).
+     */
+    suggestions:
+      run && freshness.state !== "new_documents"
+        ? rankSuggestions(articles)
+        : { top: [] as typeof articles, main: [] as typeof articles, weak: [] as typeof articles },
     /** Zadržano radi postojećih testova i ekrana preporuka. */
     signals: groupCustomerSignals(rows),
   };

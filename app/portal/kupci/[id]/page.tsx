@@ -11,7 +11,7 @@ import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { AssignmentPanel } from "./AssignmentPanel";
 import { loadArticleIdentities } from "@/lib/ordering/ordering-service";
 import { loadCrossSell } from "@/lib/recommendations/cross-sell";
-import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSummary } from "./CustomerCard";
+import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +46,10 @@ export default async function CustomerDetailPage({
     showSignals ? loadCrossSell([customer.id]).then((m) => m.get(customer.id) ?? null) : Promise.resolve(null),
   ]);
 
+  const identities = profile
+    ? Object.fromEntries(await loadArticleIdentities(profile.articles.map((a) => a.articleCode)))
+    : {};
+
   return (
     <>
       <CrumbLabel segment={customer.id} label={customer.name} />
@@ -57,12 +61,8 @@ export default async function CustomerDetailPage({
       {profile ? (
         <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} />
       ) : null}
-      {profile ? (
-        <CustomerArticles
-          profile={profile}
-          identities={Object.fromEntries(await loadArticleIdentities(profile.articles.map((a) => a.articleCode)))}
-        />
-      ) : null}
+      {profile ? <CustomerSuggestions profile={profile} identities={identities} /> : null}
+      {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
       {profile && crossSell ? (
         <CustomerCrossSell
           crossSell={crossSell}

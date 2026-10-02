@@ -233,6 +233,8 @@ const PREDUSLOVI: Record<string, () => string | null> = {
   "20": trebaPunuSesiju,
   // Preporuke traze vlasnikovu STVARNO uspelu prijavu, kao i spremnost i sync.
   "21": trebaPunuSesiju,
+  // Filter preporuka: ista prijava vlasnika kao korak 21.
+  "22": trebaPunuSesiju,
 };
 
 /** Redni broj koraka iz njegovog imena („5. prijava kodom…" → „5"). */
@@ -2612,6 +2614,93 @@ try {
     } finally {
       await w.zatvori();
     }
+  });
+
+  await tok("22. preporuke: filter (GET) ne zaključava skrol, desktop i telefon", async () => {
+    /*
+     * Regresija: koreni layout servira `html[data-route-transition="booting"]`,
+     * a globalni CSS u tom stanju drži `overflow: hidden` na `html` i `body`.
+     * Portal ne montira mašinu prelaza, pa je posle svakog PUNOG učitavanja
+     * (GET forma filtera) skrol bio zaključan dok rezervni tajmer od 6 s ne
+     * bi skinuo stanje. Meri se odmah posle učitavanja — pre tog tajmera.
+     */
+    const RUTA = "/portal/preporuke";
+    const nalazi: string[] = [];
+    for (const [ime, viewport] of [
+      ["desktop", { width: 1280, height: 900 }],
+      ["telefon", { width: 390, height: 844 }],
+    ] as const) {
+      const s = await svezaSesija();
+      try {
+        await s.page.setViewportSize(viewport);
+        const kod = await svezTotp(ownerSecret);
+        const url = await prijava(s.page, nalozi.owner.email, nalozi.owner.password, kod);
+        if (url.includes("/prijava")) {
+          throw new Error(await dokazi(s.page, `${ime}: prijava pred filter odbijena`, nalozi.owner.id));
+        }
+        await s.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
+        const status = s.page.locator('form.portal-filters select[name="status"]');
+        await status.waitFor();
+        // Otvaranje, Escape i klik van ne smeju ostaviti zaključan skrol.
+        await status.focus();
+        await s.page.keyboard.press("Escape");
+        await s.page.locator("h1").first().click();
+        await status.selectOption("overdue");
+        const t0 = Date.now();
+        await Promise.all([
+          s.page.waitForURL(/status=overdue/, { waitUntil: "domcontentloaded" }),
+          s.page.locator('form.portal-filters button[type="submit"]').click(),
+        ]);
+        await s.page.waitForLoadState("load");
+        await s.page.waitForTimeout(300);
+        const stanje = await s.page.evaluate(() => ({
+          faza: document.documentElement.dataset.routeTransition ?? null,
+          zauzeto: document.body.getAttribute("aria-busy"),
+          htmlOverflow: getComputedStyle(document.documentElement).overflowY,
+          bodyOverflow: getComputedStyle(document.body).overflowY,
+          visina: document.documentElement.scrollHeight,
+          prozor: window.innerHeight,
+        }));
+        const proteklo = Date.now() - t0;
+        const zakljucano =
+          stanje.faza !== null ||
+          stanje.zauzeto !== null ||
+          stanje.htmlOverflow === "hidden" ||
+          stanje.bodyOverflow === "hidden";
+        if (zakljucano) {
+          throw new Error(
+            await dokazi(
+              s.page,
+              `${ime}: posle filtera (${proteklo} ms) skrol je zaključan: faza=${stanje.faza} ` +
+                `aria-busy=${stanje.zauzeto} overflow html/body=${stanje.htmlOverflow}/${stanje.bodyOverflow}`,
+              nalozi.owner.id,
+            ),
+          );
+        }
+        let pomeraj = "strana kraća od prozora";
+        if (stanje.visina > stanje.prozor + 50) {
+          await s.page.mouse.move(viewport.width / 2, viewport.height / 2);
+          await s.page.mouse.wheel(0, 400);
+          await s.page.waitForTimeout(250);
+          const y = await s.page.evaluate(() => window.scrollY);
+          if (y <= 0) throw new Error(await dokazi(s.page, `${ime}: točkić ne pomera stranu posle filtera`));
+          pomeraj = `skrol ${y}px`;
+        }
+        // Ponovna promena filtera.
+        await s.page.locator('form.portal-filters select[name="status"]').selectOption("");
+        await Promise.all([
+          s.page.waitForURL((u) => !u.search.includes("status=overdue"), { waitUntil: "domcontentloaded" }),
+          s.page.locator('form.portal-filters button[type="submit"]').click(),
+        ]);
+        await s.page.waitForLoadState("load");
+        const ponovo = await s.page.evaluate(() => document.documentElement.dataset.routeTransition ?? null);
+        if (ponovo !== null) throw new Error(await dokazi(s.page, `${ime}: druga promena filtera ostavlja fazu ${ponovo}`));
+        nalazi.push(`${ime}: bez zaključavanja ${proteklo} ms posle filtera, ${pomeraj}`);
+      } finally {
+        await s.zatvori();
+      }
+    }
+    return nalazi.join("; ");
   });
 } catch (error) {
   zabelezi("runner", false, (error as Error).message);

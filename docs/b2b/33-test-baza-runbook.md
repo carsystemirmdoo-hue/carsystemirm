@@ -154,6 +154,7 @@ uslovima Vercela Pro plan za komercijalnu upotrebu).
   [35](35-zahtev-za-izvoze-biznisoft.md).
 - [ ] Storna, potvrda partnera prema šifarniku i fakture prethodnih godina
   (sa odvojenim završnim testom): [37](37-storna-partneri-i-prethodne-godine.md).
+- [ ] Prvi talas (januar 2025.) — uputstvo, stalna ulazna fascikla i zaduženja: [43](43-prvi-talas-uputstvo.md).
 - [ ] Uvoz arhive sa Mac-a (konektor kao uređaj, lokalni server) i Windows konektor 0.2.0 za ponedeljak: [42](42-uvoz-sa-maca-i-windows-konektor.md).
 - [ ] Lokalni pilot build, usklađene šifre, rezervna kopija, kontrole talasa i preostale prepreke: [41](41-pilot-build-kontrole-i-prepreke.md).
 - [ ] Odluke (Neon Free, `CSRM`), prvi korak za pilot bazu, uputstvo za kontrolni zbir, istorijski rabati, kandidati za nalog i tok aktivacije — spisak sledećih zadataka: [40 §7](40-pilot-priprema-rabati-i-nalozi.md).

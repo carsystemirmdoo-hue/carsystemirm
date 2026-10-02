@@ -93,10 +93,11 @@ objavljenom pilotu i registracija uređaja kancelarije (§5).
 
 ## 4. Veze kupaca: koji put
 
-- **Alat** (`customer-link.mts`, 39 §1): grupno, posle pregleda tabele.
-  `apply` upisuje nalog koji operater navede (`--nalog`) i **ne proverava
-  lozinku ni drugi faktor** — sme da ga pokrene samo osoba čiji je nalog, ili u
-  njenom prisustvu; trajno rešenje je ekran u portalu (nije napravljen).
+- **Pregledana tabela** (`customer-link.mts plan` lokalno, bez upisa) →
+  **portal** `/portal/kupci/veze`: grupna primena potvrđenih redova, samo za
+  prijavljenog korisnika sa `mappings:manage` i drugim faktorom potvrđenim u
+  poslednjih 10 minuta; akter je taj korisnik. (Ranije `apply` u komandi je
+  uklonjen — navođenje naloga nije autentifikacija.)
 - **Portal** (`/portal/kupci/partneri`, uz `FEATURE_PARTNER_REGISTRY=1`
   lokalno): uvoz `Kupci.xlsx`, pa „otvori kupca" po partneru — prijavljen
   korisnik sa drugim faktorom; registar sada upisuje i šifru sa fakture

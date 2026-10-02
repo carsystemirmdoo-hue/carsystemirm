@@ -83,7 +83,7 @@ test("primena potvrđenih, pa ponovno pokretanje bez duplikata i bez naloga za p
     SELECT external_partner_code AS code, status, customer_id, verified_by, note
     FROM customer_external_identifiers WHERE issuer_code = ${ISSUER} ORDER BY code`;
   assert.deepEqual(idents.map((i) => [i.code, i.status]), [["00028", "mapped"], ["00077", "mapped"], ["00394", "mapped"]]);
-  assert.ok(idents.every((i) => i.verified_by === actor.id && /Potvrdio: QA Kancelarija/.test(i.note)));
+  assert.ok(idents.every((i) => i.verified_by === actor.id && /Potvrdio u pregledu: QA Kancelarija/.test(i.note)));
   assert.equal(idents.find((i) => i.code === "00394")!.customer_id, existingB.id, "vezano za postojećeg kupca");
 
   // Stari otisci posle primene više ne važe — ponovna primena istih potvrda je zastarela, ne duplikat.

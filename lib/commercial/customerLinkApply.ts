@@ -108,7 +108,7 @@ async function applyOne(p: Proposal, confirmedBy: string, issuerCode: string, ac
   const db = getDb();
   const label = `${SOURCE_SYSTEM}/${issuerCode}/${p.invoiceCode}`;
   const reason =
-    `Potvrdio: ${confirmedBy}. Šifra sa fakture ${p.invoiceCode} = šifra ${p.registerCode} u šifarniku ` +
+    `Potvrdio u pregledu: ${confirmedBy}; primenio: ${actor.name}. Šifra sa fakture ${p.invoiceCode} = šifra ${p.registerCode} u šifarniku ` +
     `(jedinstvena bez vodećih nula), PIB sa fakture jednak PIB-u u šifarniku.`;
   const correlationId = randomUUID();
 

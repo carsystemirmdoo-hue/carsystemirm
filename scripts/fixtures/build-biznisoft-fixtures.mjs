@@ -53,6 +53,13 @@ const FIXTURES = {
     broj: "99-RN900000008", partner: "09008", datum: "08.01.2026",
     items: [ART(1), ART(2)], pages: 2, continuationOnPage2: "neprekidno",
   }),
+  // Storno sa izričitom vezom na original (oblik iz stvarnih storna) — prepoznat,
+  // ali ne ulazi u promet dok pravila ne potvrdi kancelarija.
+  "storno.pdf": document({
+    broj: "99-RN900000010", partner: "09001", datum: "10.01.2026",
+    items: [{ ...ART(1), kol: -ART(1).kol }],
+    napomena: "Ovim dokumentom se stornira dokument broj 99-RN900000001 od 01.01.2026 godine.",
+  }),
   // Negativne količine (povrat pod naslovom fakture) — nikad u promet.
   "negativne-stavke.pdf": document({
     broj: "99-RN900000009", partner: "09009", datum: "09.01.2026",

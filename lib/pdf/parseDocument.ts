@@ -293,14 +293,22 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
     (l) => (l.quantity ?? 0) < 0 || (l.grossAmount ?? 0) < 0,
   );
   if (negative) {
+    /*
+     * Storno se prepoznaje po DVA dokaza: negativne stavke i izričita veza na
+     * original u napomeni. Prepoznat storno i dalje ne ulazi u promet — pravila
+     * (delimično storno, uticaj na količine i preporuke) čekaju potvrdu
+     * kancelarije, a do tada analitika bez storna nije konačna.
+     */
+    const reverses = header.reversesDocumentNumber.status === "ok";
     return {
       ...base,
       lines,
       totals,
-      documentKind: kind.kind,
+      documentKind: reverses ? "storno" : kind.kind,
       validationStatus: "unsupported_requires_sample",
-      validationDetail:
-        "Dokument ima negativne stavke (povrat, odobrenje ili storno). Za taj oblik ne postoji potvrđen uzorak.",
+      validationDetail: reverses
+        ? "Storno: dokument poništava raniji račun. Uvoz storna čeka potvrdu pravila; do tada promet bez storna nije konačan."
+        : "Dokument ima negativne stavke bez navedenog originala (povrat, odobrenje ili storno). Za taj oblik ne postoji potvrđen uzorak.",
     };
   }
 

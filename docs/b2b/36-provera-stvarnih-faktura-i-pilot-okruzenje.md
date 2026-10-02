@@ -169,6 +169,10 @@ semantic hash (koji namerno ne sadrži verziju). Bez nove verzije, konektor sa
 starim parserom bi prolazio kao ispravan, a ponovni prijem istog fajla bi se
 prijavio kao sukob revizije umesto kao zastareo čitač.
 
+`biznisoft-pdf-2` još nije isporučen (ni server ni konektor), pa izmene do
+prve isporuke ostaju u v2 (npr. prepoznavanje storna, [37](37-storna-partneri-i-prethodne-godine.md)).
+Od prve isporuke svaka izmena izlaza je nova verzija.
+
 Pre prvog uvoza: server i konektor se isporučuju zajedno sa v2; `dry-run`
 konektora mora prijaviti `biznisoft-pdf-2`; v1 payload mora biti odbijen
 (test u `lib/sync/contract/contract.test.mjs`).

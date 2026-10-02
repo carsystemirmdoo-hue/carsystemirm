@@ -151,6 +151,8 @@ uslovima Vercela Pro plan za komercijalnu upotrebu).
   (§7) — tek kada Vlasnik ima vezan drugi faktor.
 - [ ] Spisak izvoza od kancelarije / BizniSoft-a:
   [35](35-zahtev-za-izvoze-biznisoft.md).
+- [ ] Storna, potvrda partnera prema šifarniku i fakture prethodnih godina
+  (sa odvojenim završnim testom): [37](37-storna-partneri-i-prethodne-godine.md).
 - [ ] Okruženje za stvarne podatke i prvi kontrolisani uvoz:
   [36](36-provera-stvarnih-faktura-i-pilot-okruzenje.md). Stvarni podaci nikad
   ne ulaze u ovu testnu bazu.

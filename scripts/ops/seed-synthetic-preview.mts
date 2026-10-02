@@ -32,6 +32,11 @@ const DOMAIN = "preview.carsystem.invalid";
 const MARKER = "Sintetički podaci — zaštićeni Preview";
 
 const secrets = readSecrets();
+// Pilot baza nosi stvarne podatke: sintetika (i demo oznaka) tamo nikad ne ide.
+if (secrets.DATASET_ROLE === "pilot") {
+  console.error("Fajl tajni je označen kao PILOT (DATASET_ROLE=pilot) — sintetički podaci se tu ne upisuju.");
+  process.exit(1);
+}
 const LOCAL_TEST = process.env.PREVIEW_DB_LOCAL_TEST === "1";
 
 const url = new URL(requireSecret(secrets, "NEON_OWNER_URL"));

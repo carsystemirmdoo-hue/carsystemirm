@@ -43,10 +43,20 @@ const FIXTURES = {
     broj: "99-RN900000005", partner: "09005", datum: "05.01.2026",
     items: [ART(1), ART(2)], totalOverride: 1,
   }),
-  // Tabela se NASTAVLJA na strani 2 — oblik koji realni uzorci NE dokazuju.
+  // Strana 2 počinje numeraciju ispočetka — nije jedna tabela, ide čoveku.
   "nastavak-tabele.pdf": document({
     broj: "99-RN900000006", partner: "09006", datum: "06.01.2026",
-    items: [ART(1), ART(2)], pages: 2, continuationOnPage2: true,
+    items: [ART(1), ART(2)], pages: 2, continuationOnPage2: "prekinuto",
+  }),
+  // Numeracija se nastavlja na strani 2 i zbir obuhvata obe strane — VALIDNO.
+  "nastavak-tabele-neprekidno.pdf": document({
+    broj: "99-RN900000008", partner: "09008", datum: "08.01.2026",
+    items: [ART(1), ART(2)], pages: 2, continuationOnPage2: "neprekidno",
+  }),
+  // Negativne količine (povrat pod naslovom fakture) — nikad u promet.
+  "negativne-stavke.pdf": document({
+    broj: "99-RN900000009", partner: "09009", datum: "09.01.2026",
+    items: [{ ...ART(1), kol: -2 }],
   }),
   // Bez zaglavlja dokumenta — neupotrebljiv ulaz.
   "neispravan-bez-zaglavlja.pdf": writePdf([[

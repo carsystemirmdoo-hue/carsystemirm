@@ -2,7 +2,8 @@
 
 **Status (2026-10-02): provera bez upisa izvršena nad stvarnim fakturama;
 rezultati su samo u privatnom lokalnom izveštaju (javni repozitorijum ne nosi
-brojke o poslovanju); okruženje za stvarne podatke čeka odluku.** Ništa stvarno nije upisano. Nastavak na
+brojke o poslovanju); parser podignut na `biznisoft-pdf-2`, konektor na 0.2.0;
+okruženje za stvarne podatke čeka odluku.** Ništa stvarno nije upisano. Nastavak na
 [34](34-prelazak-na-stvarne-podatke.md) i [35](35-zahtev-za-izvoze-biznisoft.md).
 
 ## 1. Koje fakture postoje
@@ -18,15 +19,34 @@ Posle toga fakture su dostavljene u privatni folder van repozitorijuma i
 proverene bez upisa (§2, `BIZNISOFT_RECURSIVE=1`). Rezultat i spisak za ljudski
 pregled po kategorijama: `~/.carsystem-private/` (prava 600/700).
 
-**Nađena i ispravljena greška parsera:** u rasporedu stvarnih faktura posle
-oznake „Šifra partnera:" odmah sledi sledeća oznaka, a vrednost stoji ispred.
-Parser je tu oznaku čitao kao šifru, pa bi **svi kupci dobili istu šifru** i uvoz
-bi ih spojio u jednog. Sada se reč koja se završava dvotačkom ne prihvata kao
-šifra; posle ispravke šifre i PIB-ovi kupaca odgovaraju jedan prema jedan.
-Test: `lib/pdf/biznisoftLayout.test.mjs`. Oznaka verzije parsera
-(`biznisoft-pdf-1`) nije menjana jer nijedan stvaran dokument nije uvezen;
-pre prvog stvarnog uvoza odlučiti da li se podiže (dira ugovor konektora,
-`SUPPORTED_PARSER_VERSIONS`).
+**Nalazi provere i ispravke parsera (2026-10-02).** Svaka ispravka je
+izmerena nad celim skupom, proverena ručnim poređenjem sa PDF-om, pokrivena
+sintetičkim regresionim testom, i nijedna ne menja ranije ispravno pročitan
+dokument (osim polja koja su bila pogrešna). Provere iznosa nisu oslabljene:
+tolerancija ostaje jedna para.
+
+| Greška | Uzrok | Ispravka |
+|---|---|---|
+| svi kupci dobijaju istu šifru partnera | posle oznake „Šifra partnera:" sledi druga oznaka, a vrednost stoji ispred | reč koja se završava dvotačkom nije šifra; šifra se poklapa sa šifarnikom za svaki dokument |
+| faktura bez ijedne stavke | drugi raspored (bez kolone barkoda): redni broj na x≈22 | kolona rednog broja od x=15 |
+| rabat i PDV u jednom elementu | isti raspored štampa „10,00 20%" | deli se samo taj oblik i samo kada je kolona PDV-a prazna; podelu potvrđuje aritmetika |
+| ukupan iznos nije pronađen | isti raspored koristi „Vrednost sa PDV:" | rezerva samo kada glavne oznake nema i oznaka je jedinstvena |
+| prva reč naziva zalepljena uz šifru artikla | isti raspored: naziv počinje na x≈78 | granica šifre i naziva na x=65 (šifra ≤ 50, naziv ≥ 78) |
+| odstupanje do 5 para na stavci | BizniSoft zaokružuje osnovicu, pa rabat zasebno | ista formula za portal i konektor; tačna za sve stavke |
+| polovina pare zaokružena nadole | binarni zapis (1,005 × 100 = 100,4999…) | zaokruživanje preko `toPrecision(15)` |
+| tabela na više strana odbijena | parser nije spajao strane | spaja se samo kada je numeracija 1…N neprekidna; zbir svih strana mora odgovarati |
+| drugi red naziva izgubljen | naziv se prelama 10 tačaka ispod stavke | red sa samo nazivom neposredno ispod stavke dopunjuje opis — nikad iznose |
+| negativne stavke pod naslovom fakture | storno dokumenti | `unsupported_requires_sample`, nikad u promet |
+
+Šifra partnera u PDF-u ima 5 cifara sa vodećim nulama, a pripremljeni
+šifarnik (`Kupci_BizniSoft_priprema.xlsx`) istu šifru bez nula. Poređenje u
+kodu je tačno po tekstu, pa se dokumenti ne bi povezali sa kupcima iz tog
+šifarnika — **otvoreno pitanje za kancelariju** (koji oblik je pravi, i da li
+sirov izvoz čuva nule), ne tiha normalizacija.
+
+Dokumenti koji nisu prodajne fakture razvrstani su po sadržaju (zbirni
+izveštaji, nivelacije, kalkulacije, kartice, reklamacije, samostalna
+otpremnica) i ostaju van uvoza; spisak je u privatnom izveštaju.
 
 ## 2. Provera bez upisa
 
@@ -133,3 +153,23 @@ vremenu nisam proverio u zvaničnim uslovima.
 6. Poznata ograničenja parsera ostaju: tabela koja prelazi na sledeću stranu i
    korektivni dokumenti idu na ručni pregled
    ([35 §6](35-zahtev-za-izvoze-biznisoft.md)).
+
+## 7. Verzionisanje parsera i konektora
+
+| Šta | Kada se menja | Sada |
+|---|---|---|
+| `PARSER_VERSION` (upisuje se uz svaki dokument, ide u canonical) | svaka izmena koja za iste bajtove PDF-a može dati drugačija polja, stavke ili status | `biznisoft-pdf-2` |
+| `SUPPORTED_PARSER_VERSIONS` (server) | nova verzija se dodaje; stara ostaje u prelaznom periodu, **osim ako je poznato da daje pogrešan sadržaj** | samo `biznisoft-pdf-2`; v1 se odbija (`parser_version_unsupported`) |
+| `CANONICALIZATION_VERSION` | samo promena pravila normalizacije/hash-a | `1`, nepromenjeno |
+| verzija konektora (`connector/package.json`, ulazi u paket) | svaka izmena koda koji paket nosi, uključujući parser | `0.2.0` |
+
+Zašto podizanje i bez uvezenih dokumenata: verzija opisuje **čitač**, ne
+bazu. Isti PDF pod v1 i v2 daje različitu šifru partnera i opis, pa i različit
+semantic hash (koji namerno ne sadrži verziju). Bez nove verzije, konektor sa
+starim parserom bi prolazio kao ispravan, a ponovni prijem istog fajla bi se
+prijavio kao sukob revizije umesto kao zastareo čitač.
+
+Pre prvog uvoza: server i konektor se isporučuju zajedno sa v2; `dry-run`
+konektora mora prijaviti `biznisoft-pdf-2`; v1 payload mora biti odbijen
+(test u `lib/sync/contract/contract.test.mjs`).
+

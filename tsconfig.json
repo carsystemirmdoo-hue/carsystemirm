@@ -44,6 +44,7 @@
     "tmp",
     "db/integration/**",
     "scripts/qa/**",
-    "scripts/ops/**"
+    "scripts/ops/**",
+    "scripts/local/**"
   ]
 }

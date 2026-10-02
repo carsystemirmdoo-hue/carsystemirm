@@ -188,7 +188,7 @@ export default async function TalkListPage({
   const attention = byKey(["dormant", "attention"]).sort((a, b) => urgency(b.profile) - urgency(a.profile));
   const stale = byKey(["stale"]);
   const due = byKey(["due"]);
-  const quiet = byKey(["steady", "thin", "none"]).sort((a, b) => a.name.localeCompare(b.name, "sr-Latn"));
+  const quiet = byKey(["steady", "not_computed", "thin", "none"]).sort((a, b) => a.name.localeCompare(b.name, "sr-Latn"));
 
   const canRecompute = can(user, "recommendations:recompute") && isRecommendationsEnabled();
   const lastIngest = items.reduce<Date | null>(
@@ -289,7 +289,7 @@ export default async function TalkListPage({
       {quiet.length || withoutData.length ? (
         <details className="portal-panel zr-quiet">
           <summary>
-            Bez potrebe za posebnim kontaktom ili bez dovoljno istorije · {quiet.length + withoutData.length}
+            Bez potrebe za posebnim kontaktom, nije obračunato ili premalo istorije · {quiet.length + withoutData.length}
           </summary>
           <ul className="zr-quiet-list">
             {quiet.map((i) => (

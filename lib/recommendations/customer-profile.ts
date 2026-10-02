@@ -12,6 +12,7 @@ import {
   groupArticles,
   monthlyRhythm,
   summarizeCustomer,
+  uncomputedArticle,
 } from "@/lib/recommendations/customerSummary.mjs";
 import { freshnessOf } from "@/lib/recommendations/freshness.mjs";
 import { recommendationRows, type RecommendationRow } from "@/lib/recommendations/query";
@@ -121,10 +122,11 @@ function build(
     const r = byCode.get(a.article_code);
     const last = a.dates[a.dates.length - 1];
     const boughtAfterRun = a.dates.some((d) => newDocDays.has(d));
+    const fallback = uncomputedArticle(a.dates.length);
     return {
       articleCode: a.article_code,
       articleName: r?.articleName ?? a.article_name,
-      status: r?.status ?? "insufficient_history",
+      status: r?.status ?? fallback.status,
       confidence: r?.confidence ?? null,
       eventCount: a.dates.length,
       documentCount: a.docs,
@@ -135,11 +137,7 @@ function build(
       expectedNextOn: r?.expectedNextOn ?? null,
       daysUntilExpected: r ? (r.expectedNextOn ? dayNumber(r.expectedNextOn) - asOf : null) : null,
       daysSinceLastPurchase: asOf - dayNumber(last),
-      explanation:
-        r?.explanation ??
-        (a.dates.length === 1
-          ? "Jedna potvrđena kupovina; ritam se ne procenjuje."
-          : "Premalo kupovina za procenu ritma."),
+      explanation: r?.explanation ?? fallback.explanation,
       purchaseDates: a.dates,
       newPurchaseDates: a.dates.filter((d) => newDocDays.has(d)),
       /** Status je iz obračuna koji ovu kupovinu nije video. */

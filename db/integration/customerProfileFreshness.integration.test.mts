@@ -82,6 +82,19 @@ after(async () => {
   await closeTestDatabase();
 });
 
+test("bez obračuna: artikal sa deset kupovina je „nije obračunato“, ne „premalo istorije“", async (t) => {
+  if (guard(t)) return;
+  const { loadCustomerProfile } = await import("@/lib/recommendations/customer-profile");
+  const p = await loadCustomerProfile(customerId, TODAY);
+  assert.equal(p.hasActiveRun, false);
+  assert.equal(p.articles[0].eventCount, 10);
+  assert.equal(p.articles[0].status, "not_computed");
+  assert.match(p.articles[0].explanation, /nije obračunat/);
+  assert.deepEqual(p.groups.map((g) => g.key), ["uncomputed"]);
+  assert.equal(p.summary.status.key, "not_computed");
+  assert.deepEqual(p.summary.mention, []);
+});
+
 test("pre nove kupovine: obračun je aktuelan i daje savet", async (t) => {
   if (guard(t)) return;
   const { recomputeRecommendations } = await import("@/lib/recommendations/recompute");

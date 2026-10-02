@@ -475,8 +475,15 @@ test("izgubljen odgovor: NOV proces, ISTI red, nov nonce → jedna faktura", asy
       lokalniDatum: "2026-03-10",
       dozvoliHttp: true,
       fetchImpl: izgubi,
+      cekaj: async () => {},
     });
-    assert.equal(pokusaj.odlozeno, 1, "izgubljen odgovor nije odložen");
+    /*
+     * Prekid veze je privremen: postepeno ponavljanje u ciklusu, pa zaustavljanje
+     * bez odlaganja za sutra — stavka ostaje `spremno` u istom redu.
+     */
+    assert.equal(pokusaj.zaustavljeno, "server_nedostupan", JSON.stringify(pokusaj));
+    assert.equal(pokusaj.odlozeno, 0);
+    assert.deepEqual(prvi.zbir(), { spremno: 1 });
     assert.equal(await brojFaktura(), 1, "preduslov: server je knjižio");
 
     // Konektor NE zna da je knjiženo — stavka je i dalje u redu.
@@ -493,8 +500,9 @@ test("izgubljen odgovor: NOV proces, ISTI red, nov nonce → jedna faktura", asy
         store: drugi,
         konfiguracija: k,
         kljuc: uredjaj.privateKeyPkcs8Der,
-        // Odloženo je do sledećeg radnog dana; ponavlja se tada.
-        lokalniDatum: "2026-03-20",
+        // Isti dan, posle isteka zabeležene pauze.
+        lokalniDatum: "2026-03-10",
+        sada: () => Date.now() + 10 * 60_000,
         dozvoliHttp: true,
       });
 
@@ -1127,6 +1135,179 @@ test("sa isključenim komandama `run-once` i termin u 09:00 rade kao pre", async
     assert.equal(odluka.akcija, "pokreni", JSON.stringify(odluka));
   } finally {
     process.env.FEATURE_SYNC_OPERATIONS = "1";
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+/* =========================================================================
+ * Oporavak posle privremenih grešaka — ISTI red, bez pomeranja queue.db
+ * ====================================================================== */
+
+/** Lažni odgovor 429 (server se ne dodiruje). `retryAfter` ide u zaglavlje. */
+const odgovor429 = (retryAfter: number | null) =>
+  new Response(JSON.stringify({ ok: false, code: "rate_limited", requestId: "x" }), {
+    status: 429,
+    headers: { "content-type": "application/json", ...(retryAfter === null ? {} : { "retry-after": String(retryAfter) }) },
+  });
+
+/** Propušta zahteve do pravog servera; zahteve sa rednim brojem iz `blokiraj` zamenjuje sa 429. */
+function sa429(blokiraj: Set<number>, retryAfter: number | null) {
+  let n = 0;
+  return (async (...args: Parameters<typeof fetch>) => {
+    n += 1;
+    if (blokiraj.has(n)) return odgovor429(retryAfter);
+    return fetch(...args);
+  }) as typeof fetch;
+}
+
+const TRI = ["vise-stavki.pdf", "jedna-stavka.pdf", "dve-strane-ponovljeno-zaglavlje.pdf"];
+/** Sintetički partneri ova tri računa (09002, 09001, 09003). */
+const mapirajTri = async () => {
+  for (const sifra of ["09002", "09001", "09003"]) await mapiranKupac(sifra);
+};
+const brojStavki = async () => {
+  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM invoice_lines`;
+  return n;
+};
+
+test("deo uspe, stigne 429 sa Retry-After, ostatak posle čekanja — u istom ciklusu", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const uredjaj = await aktivanUredjaj();
+  await mapirajTri();
+  const okr = await okruzenje(TRI);
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+  const cekanja: number[] = [];
+  try {
+    assert.equal((await skenirajURed({ store, konfiguracija: k })).novo, 3);
+    const rez = await posaljiIzReda({
+      store, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true,
+      fetchImpl: sa429(new Set([2]), 7), cekaj: async (ms: number) => { cekanja.push(ms); },
+    });
+    assert.deepEqual(cekanja, [7_000], "Retry-After nije poštovan");
+    assert.equal(rez.potvrdjeno, 3, `neočekivano: ${JSON.stringify(rez)}`);
+    assert.equal(rez.odlozeno, 0, "ništa ne sme ići na sledeći radni dan");
+    assert.equal(rez.zaustavljeno, null);
+    assert.equal(await brojFaktura(), 3);
+    const stavki = await brojStavki();
+    // Ponovo isti red: ništa novo za slanje.
+    const ponovo = await posaljiIzReda({ store, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true });
+    assert.equal(ponovo.poslato, 0);
+    assert.equal(await brojFaktura(), 3);
+    assert.equal(await brojStavki(), stavki, "stavke su udvostručene");
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("dug Retry-After: ciklus staje, novi proces sa ISTIM queue.db čeka pa nastavlja bez duplikata", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const uredjaj = await aktivanUredjaj();
+  await mapirajTri();
+  const okr = await okruzenje(TRI);
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const t0 = Date.parse("2026-03-10T10:00:00Z");
+  try {
+    /* --- Proces 1: jedan uspe, pa 429 sa 15 minuta čekanja. ------------- */
+    const prvi = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+    await skenirajURed({ store: prvi, konfiguracija: k });
+    const r1 = await posaljiIzReda({
+      store: prvi, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true,
+      fetchImpl: sa429(new Set([2]), 900), cekaj: async () => { throw new Error("ne sme da čeka 15 min u ciklusu"); },
+      sada: () => t0,
+    });
+    assert.equal(r1.potvrdjeno, 1);
+    assert.equal(r1.zaustavljeno, "rate_limited");
+    assert.equal(r1.nastaviPosle, new Date(t0 + 900_000).toISOString());
+    assert.equal(r1.odlozeno, 0);
+    assert.deepEqual(prvi.zbir(), { potvrdjeno: 1, spremno: 2 }, "stanje reda posle prekida");
+    prvi.zatvori(); // prekid talasa
+
+    /* --- Proces 2, isti fajl, pre isteka: ništa se ne šalje. ------------ */
+    const drugi = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+    try {
+      const rano = await posaljiIzReda({
+        store: drugi, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true,
+        sada: () => t0 + 60_000,
+      });
+      assert.equal(rano.zaustavljeno, "ceka_server");
+      assert.equal(rano.poslato, 0);
+      assert.equal(await brojFaktura(), 1);
+
+      /* --- Posle isteka, isti dan: preostala dva. ------------------------ */
+      const kasnije = await posaljiIzReda({
+        store: drugi, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true,
+        sada: () => t0 + 901_000,
+      });
+      assert.equal(kasnije.potvrdjeno, 2, `neočekivano: ${JSON.stringify(kasnije)}`);
+      assert.equal(kasnije.zaustavljeno, null);
+      assert.deepEqual(drugi.zbir(), { potvrdjeno: 3 });
+      assert.equal(await brojFaktura(), 3, "duplikat ili gubitak");
+      const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM source_documents`;
+      assert.equal(n, 3);
+    } finally {
+      drugi.zatvori();
+    }
+  } finally {
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("429 bez Retry-After: postepeno čekanje; stavke koje je stara verzija odložila do sutra se oslobađaju", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const uredjaj = await aktivanUredjaj();
+  await mapirajTri();
+  const okr = await okruzenje(TRI);
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+  const cekanja: number[] = [];
+  try {
+    await skenirajURed({ store, konfiguracija: k });
+    // Kao posle starije verzije: dve stavke odložene do sledećeg radnog dana zbog 429.
+    const [a, b] = store.zaSlanje({ lokalniDatum: "2026-03-10" });
+    store.odlozi({ id: a.id, odlozenoDo: "2026-03-11", razlog: "rate_limited" });
+    store.odlozi({ id: b.id, odlozenoDo: "2026-03-11", razlog: "transport:timeout" });
+    const rez = await posaljiIzReda({
+      store, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true,
+      fetchImpl: sa429(new Set([1, 2]), null), cekaj: async (ms: number) => { cekanja.push(ms); },
+    });
+    assert.equal(rez.oslobodjeno, 2, "stara odlaganja nisu oslobođena");
+    assert.deepEqual(cekanja, [5_000, 10_000], "postepeno čekanje");
+    assert.equal(rez.potvrdjeno, 3);
+    assert.equal(await brojFaktura(), 3);
+  } finally {
+    store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+test("trajna greška ostaje izdvojena i ne ponavlja se (za pregled)", async (t) => {
+  if (guard(t)) return;
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { skenirajURed, posaljiIzReda } = await import(D("pipeline.mjs"));
+  const uredjaj = await aktivanUredjaj();
+  // Bez mapiranja kupca: server čuva za pregled (`awaiting_customer_mapping`).
+  const okr = await okruzenje(["vise-stavki.pdf"]);
+  const k = konfiguracija(okr.izvor, uredjaj.deviceCode);
+  const store = otvoriStore({ putanja: okr.redPutanja, identitet: identitet(uredjaj.deviceCode) });
+  try {
+    await skenirajURed({ store, konfiguracija: k });
+    const rez = await posaljiIzReda({
+      store, konfiguracija: k, kljuc: uredjaj.privateKeyPkcs8Der, lokalniDatum: "2026-03-10", dozvoliHttp: true,
+      cekaj: async () => { throw new Error("trajna greška ne sme da čeka i ponavlja"); },
+    });
+    assert.equal(rez.zaPregled, 1);
+    assert.equal(rez.ponovljeno, 0);
+    assert.deepEqual(store.zbir(), { za_pregled: 1 });
+  } finally {
     store.zatvori();
     await rm(okr.baza, { recursive: true, force: true });
   }

@@ -81,10 +81,11 @@ Sve na Mac-u; lokalni server sluša **samo** na `127.0.0.1`.
 4. `wave-folder.mts` — fascikla talasa; `izvorniFolder` u `config.json` na nju.
 5. `connector run-once` dok `status` ne pokaže sve potvrđeno (najviše 50 po
    ciklusu; prekid je bezbedan — red se nastavlja, server odbija duplikat).
-   Stavka koja dobije privremenu grešku (429, prekid veze) konektor odlaže do
-   **sledećeg radnog dana u 9:00**. Ako talas treba završiti isti dan:
-   premestiti `queue.db` u stranu i ponovo `run-once` — svi fajlovi se šalju
-   ponovo, a server već uvezene vraća kao `duplicate_file` (provereno na probi).
+   Privremene greške (429, 5xx, prekid veze) konektor oporavlja sam, u toku
+   ciklusa: poštuje `Retry-After`, inače čeka postepeno (5–60 s, najviše 5
+   puta). Ako ciklus stane (`"zaustavljeno": "rate_limited"` ili
+   `"server_nedostupan"`), samo ponovo pokrenuti `run-once` — posle
+   `nastaviPosle` iz `status`-a. **`queue.db` se ne pomera i ne briše.**
 6. `wave-control.mts posle` sa BizniSoft zbirom — sve ✔.
 7. `pilot-backup.sh dump` posle talasa.
 

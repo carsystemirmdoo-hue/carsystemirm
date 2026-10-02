@@ -1,6 +1,6 @@
 import "server-only";
 import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
-import { isBucketBlocked, registerAttempt } from "@/lib/auth/rate-limit-service";
+import { blockedForSeconds, registerAttempt } from "@/lib/auth/rate-limit-service";
 import {
   authenticateDeviceRequest,
   DeviceAuthError,
@@ -36,15 +36,18 @@ export type SyncResponseBody = {
 };
 
 export function syncJson(status: number, body: SyncResponseBody): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-      // Odgovor se ne kešira i ne indeksira ni pod kojim uslovom.
-      "cache-control": "no-store",
-      "x-content-type-options": "nosniff",
-    },
-  });
+  const headers: Record<string, string> = {
+    "content-type": "application/json; charset=utf-8",
+    // Odgovor se ne kešira i ne indeksira ni pod kojim uslovom.
+    "cache-control": "no-store",
+    "x-content-type-options": "nosniff",
+  };
+  // Standardno zaglavlje uz 429: konektor (i bilo koji klijent) zna koliko da čeka.
+  const cekanje = (body as { retryAfterSeconds?: unknown }).retryAfterSeconds;
+  if (status === 429 && typeof cekanje === "number" && Number.isFinite(cekanje) && cekanje >= 0) {
+    headers["retry-after"] = String(Math.ceil(cekanje));
+  }
+  return new Response(JSON.stringify(body), { status, headers });
 }
 
 /**
@@ -128,8 +131,9 @@ export async function withAuthenticatedDevice(
    * satima, arhiva danima). Autentifikovan uređaj meri `sync_device`.
    * Nepoznat pozivalac i dalje dobija blokadu posle istog broja neuspeha.
    */
-  if (await isBucketBlocked({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp })) {
-    return syncJson(429, { ok: false, code: "rate_limited", requestId });
+  const blokiranoJos = await blockedForSeconds({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp });
+  if (blokiranoJos > 0) {
+    return syncJson(429, { ok: false, code: "rate_limited", requestId, retryAfterSeconds: blokiranoJos });
   }
   const neuspehNepoznatog = () =>
     registerAttempt({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp });

@@ -429,6 +429,23 @@ function napraviApi(db, putanja) {
       });
     },
 
+    /**
+     * Skida odlaganje „do sledećeg radnog dana" sa stavki koje su odložene
+     * zbog PRIVREMENIH razloga (429, prekid veze, 5xx) — po pravilima starije
+     * verzije. Oporavak od tih grešaka sada ide u toku ciklusa (`retry.mjs`).
+     * Iscrpljeni pokušaji (`iscrpljeno:*`) i nepoznati odgovori ostaju odloženi.
+     */
+    oslobodiPrivremenaOdlaganja() {
+      return db
+        .prepare(
+          `UPDATE stavke SET odlozeno_do = NULL, izmenjeno_u = ?
+            WHERE stanje = ? AND odlozeno_do IS NOT NULL
+              AND (razlog = 'rate_limited' OR razlog LIKE 'transport:%'
+                   OR razlog IN ('temporarily_unavailable', 'ingest_failed'))`,
+        )
+        .run(sada(), STANJA.SPREMNO).changes;
+    },
+
     /** Vraća stavku u `spremno` bez odlaganja (npr. posle `nonce_replayed`). */
     vratiUSpremno({ id, razlog }) {
       db.prepare(`UPDATE stavke SET stanje = ?, razlog = ?, izmenjeno_u = ? WHERE id = ?`).run(

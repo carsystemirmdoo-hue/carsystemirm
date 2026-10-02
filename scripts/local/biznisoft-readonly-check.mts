@@ -2,7 +2,8 @@
  * Provera stvarnih BizniSoft PDF faktura BEZ UPISA — pre prvog uvoza.
  *
  *   BIZNISOFT_SAMPLES=/privatni/folder [BIZNISOFT_PREFIX=Fak] \
- *   [BIZNISOFT_RECURSIVE=1] [BIZNISOFT_PRIVATE_REPORT=~/.carsystem-private/provera.json] \
+ *   [BIZNISOFT_RECURSIVE=1] [BIZNISOFT_HOLDOUT_MANIFEST=… [BIZNISOFT_HOLDOUT_MODE=samo]]
+ *   [BIZNISOFT_PRIVATE_REPORT=~/.carsystem-private/provera.json] \
  *     npx tsx --tsconfig db/integration/tsconfig.test.json \
  *       scripts/local/biznisoft-readonly-check.mts
  *
@@ -35,7 +36,9 @@ if (!process.env.BIZNISOFT_SAMPLES) {
   console.error("Postavite BIZNISOFT_SAMPLES na privatni folder sa fakturama. Podrazumevane putanje nema.");
   process.exit(1);
 }
-const dir = expand(process.env.BIZNISOFT_SAMPLES);
+// Više foldera razdvojenih sa „:" (npr. po godinama) — duplikati se traže preko svih.
+const dirs = process.env.BIZNISOFT_SAMPLES.split(path.delimiter).filter(Boolean).map(expand);
+const dir = dirs.length === 1 ? dirs[0] : path.dirname(dirs[0]);
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const report = process.env.BIZNISOFT_PRIVATE_REPORT ? expand(process.env.BIZNISOFT_PRIVATE_REPORT) : null;
 if (report && path.resolve(report).startsWith(repoRoot + path.sep)) {
@@ -56,7 +59,31 @@ async function collect(root: string): Promise<string[]> {
   }
   return found;
 }
-const files = (await collect(dir)).sort();
+const allFiles = (await Promise.all(dirs.map(collect))).flat().sort();
+
+/*
+ * Nezavisan završni uzorak (manifest sa putanjama i SHA-256 otiscima, izabran
+ * PRE čitanja sadržaja). Podrazumevano se njegovi fajlovi PRESKAČU pre
+ * parsiranja — i po putanji i po otisku, da ni kopija pod drugim imenom ne
+ * uđe u podešavanje. `BIZNISOFT_HOLDOUT_MODE=samo` je jednokratni završni prolaz.
+ */
+const holdoutPath = process.env.BIZNISOFT_HOLDOUT_MANIFEST ? expand(process.env.BIZNISOFT_HOLDOUT_MANIFEST) : null;
+const holdoutMode = process.env.BIZNISOFT_HOLDOUT_MODE === "samo" ? "samo" : "izuzmi";
+let files = allFiles;
+let heldOut = 0;
+if (holdoutPath) {
+  const manifest = JSON.parse(await readFile(holdoutPath, "utf8")) as { fajlovi: { putanja: string; sha256: string }[] };
+  const desktop = path.join(homedir(), "Desktop");
+  const paths = new Set(manifest.fajlovi.map((f) => path.join(desktop, f.putanja)));
+  const hashes = new Set(manifest.fajlovi.map((f) => f.sha256));
+  const keep: string[] = [];
+  for (const file of allFiles) {
+    const inHoldout = paths.has(file) || hashes.has(createHash("sha256").update(await readFile(file)).digest("hex"));
+    if (inHoldout) heldOut++;
+    if (inHoldout === (holdoutMode === "samo")) keep.push(file);
+  }
+  files = keep;
+}
 if (files.length === 0) {
   console.error("Nema PDF-ova u zadatom folderu.");
   process.exit(1);
@@ -86,14 +113,15 @@ const width = String(files.length).length;
 
 for (const [i, file] of files.entries()) {
   const label = `U${String(i + 1).padStart(width, "0")}`;
-  const rel = path.relative(dir, file);
+  const root = dirs.find((d) => file.startsWith(d + path.sep)) ?? dir;
+  const rel = path.join(path.basename(root), path.relative(root, file));
   let doc;
   try {
     doc = await parseBiznisoftPdf(new Uint8Array(await readFile(file)));
   } catch (error) {
     count(tally, "greska_citanja");
     rows.push({ ozn: label, status: "greska_citanja" });
-    privateRows.push({ label, file: rel, status: "greska_citanja", error: (error as Error).message });
+    privateRows.push({ label, file: rel, absolute: file, status: "greska_citanja", error: (error as Error).message });
     continue;
   }
   count(tally, doc.validationStatus);
@@ -152,7 +180,7 @@ for (const [i, file] of files.entries()) {
     view: { partnerCode: doc.header.partnerCode.value, total: doc.header.printedGrossTotal.value ?? doc.totals.computed ?? null,
       lines: doc.lines.map((l) => ({ articleCode: l.articleCode, quantity: l.quantity, unitPrice: l.unitPrice, discountPercent: l.discountPercent })) } });
   privateRows.push({ layout, year, fak, reversesDocumentNumber: doc.header.reversesDocumentNumber.value,
-    ...row, file: rel, detail: doc.validationDetail,
+    ...row, file: rel, absolute: file, detail: doc.validationDetail,
     documentNumber: number, partnerCode: doc.header.partnerCode.value, documentDate: doc.header.documentDate.value,
   });
 }
@@ -160,7 +188,9 @@ for (const [i, file] of files.entries()) {
 const show = (title: string, bucket: Record<string, number>) =>
   console.log(`  ${title}: ${Object.entries(bucket).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(" · ") || "-"}`);
 
-console.log(`PDF fajlova: ${files.length}`);
+console.log(`PDF fajlova: ${files.length}` + (holdoutPath
+  ? (holdoutMode === "samo" ? " (SAMO završni uzorak)" : ` (završni uzorak izuzet pre čitanja: ${heldOut})`)
+  : ""));
 // Tabela po dokumentu samo za mali skup; za veliki ide u privatni izveštaj.
 if (files.length <= 50) console.table(rows);
 console.log("--- zbirno ---");

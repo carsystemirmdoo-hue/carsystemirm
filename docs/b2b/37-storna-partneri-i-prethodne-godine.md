@@ -1,7 +1,9 @@
 # 37 — Storna, potvrda partnera i provera prethodnih godina
 
-**Status (2026-10-02): parser prepoznaje storna i vezu sa originalom; potvrda
-partnera prema šifarniku napisana i testirana; ništa nije uvezeno.** Detaljni
+**Status (2026-10-02): arhiva 2021–2026 proverena bez upisa; nezavisan
+završni uzorak izdvojen pre čitanja i nije korišćen; parser prepoznaje storna;
+potvrda partnera prema sirovom izvozu kupaca prolazi za svaki dokument; ništa
+nije uvezeno.** Detaljni
 rezultati nad stvarnim fakturama su samo u privatnom izveštaju
 (`~/.carsystem-private/`). Nastavak na [36](36-provera-stvarnih-faktura-i-pilot-okruzenje.md).
 
@@ -120,3 +122,62 @@ fakturama, pa starije godine mogu imati i drugačije rasporede.
 (godina, raspored); novi raspored ili godina sa drugačijim odnosom je signal
 za ručno poređenje sa PDF-om pre bilo kakve izmene parsera. Nejasni dokumenti
 ostaju odbijeni ili na ručnom pregledu.
+
+## 5. Arhiva 2021–2025: šta je urađeno (2026-10-02)
+
+**Završni uzorak izdvojen PRE čitanja sadržaja.** Po godini i grupi imena
+(„Fak", „Fak" sa ispravkom/stornom u imenu, ostalo) nasumično, sa zapisanim
+semenom: ≈8 % običnih „Fak", trećina posebnih, ≈5 % ostalih. Manifest
+(putanja, veličina, SHA-256 bajtova; bez parsiranja) je privatan:
+`~/.carsystem-private/zavrsni-test-2026-10-02.json`. Provera ga isključuje
+**pre parsiranja**, po putanji i po otisku (`BIZNISOFT_HOLDOUT_MANIFEST`);
+jednokratni završni prolaz: `BIZNISOFT_HOLDOUT_MODE=samo`.
+
+**Nije nezavisno:** skup iz 2026. (`Carsystem-fakture-provera`) je ceo pročitan
+i korišćen za podešavanje — ne može služiti kao završni test.
+
+**Ispravke parsera iz arhive** (izmerene nad celim skupom za podešavanje,
+sintetički testovi, nijedna ranije ispravna faktura nije promenjena):
+
+| Nalaz | Ispravka |
+|---|---|
+| fakture sa više od 99 stavki: tačka rednog broja prelazi u sledeći red („100", pa „.") | broj bez tačke prihvata se samo sa ≥ 3 cifre; red sa samom tačkom je nastavak naziva |
+| jedna stavka promašena za 2 pare | BizniSoft računa u binarnom zapisu (`osnovica × rabat / 100`), polovina od nule; model se poklapa sa svakom stavkom 2021–2026, uključujući storna — decimalno zaokruživanje promaši |
+| storno: veliki negativan PDV slepljen sa stopom („20%-19.366,09") | deli se samo taj oblik kada je kolona iznosa PDV-a prazna; presuđuje aritmetika |
+
+Raspored tabele je isti od 2021. do avgusta 2026; raspored bez kolone barkoda
+javlja se tek u najnovijim fakturama.
+
+**Ostaje na ručnom pregledu (pitanja za kancelariju):**
+
+- negativni dokumenti bez napomene o storniranju — uz svaki postoji potpuno
+  odgovarajuća faktura istog dana i još jedna, tri dana kasnije, sa istim
+  stavkama (verovatno ponovo izdata); veza se ne pogađa;
+- isti broj dokumenta sa različitim sadržajem (revizije), sa promenjenim
+  partnerom ili datumom — postojeći uvoz ih vodi kao sukob revizije;
+- storno čiji original nije u skupu za podešavanje (može biti u završnom
+  uzorku; ne proverava se otvaranjem uzorka);
+- fajlovi nazvani „Fak" koji nisu BizniSoft dokumenti.
+
+## 6. Šifarnici
+
+**Partneri — `Kupci.xlsx` (sirov BizniSoft izvoz kupaca).** Šifra bez vodećih
+nula, PIB/JMBG, matični broj, tip partnera (pravni oblik, ne kupac/dobavljač),
+komercijalista, aktivan, blokiran, vreme izmene. Nema kolizija posle uklanjanja
+nula; svaka faktura i svako storno iz arhive potvrđeni preko šifre i PIB-a
+(§3). Partner koji nema nijednu fakturu ostaje samo u šifarniku.
+
+**Artikli — privremeno `lager na dan 24.8.26.xlsx` (stanje zaliha).** Šifra je
+sačuvana kao broj (vodeće nule izgubljene), uz naziv, poresku stopu i cene.
+Faktura štampa šifru artikla sa 6 cifara i vodećim nulama; svaka šifra sa
+faktura postoji u lageru — tačno ili tek bez vodećih nula — bez kolizija.
+Deo naziva se razlikuje između fakture i lagera (istorijski naziv); to je za
+pregled, ne za automatsko povezivanje sa katalogom.
+
+**Traži se: sirov šifarnik svih artikala** — šifra **kao tekst** (sa vodećim
+nulama), naziv, jedinica mere, pakovanje i količina u pakovanju, grupa, brend
+ili dobavljač, šifra proizvođača, barkod, PDV, aktivan da/ne, datum izvoza.
+Pravila: istorijski i neaktivni artikli ostaju za tumačenje faktura, ne ulaze
+u aktivnu ponudu sajta; nema povezivanja sa katalogom po sličnom nazivu; cene
+sa faktura nisu važeći cenovnik.
+

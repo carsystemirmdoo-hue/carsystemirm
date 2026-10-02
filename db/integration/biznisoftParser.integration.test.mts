@@ -79,6 +79,21 @@ test("nastavak tabele sa neprekidnom numeracijom: stavke sa obe strane, zbir se 
   assert.equal(doc.totals.ok, true);
 });
 
+test("storno sa vezom na original: prepoznat, potpun, ali ne ulazi u promet", async () => {
+  const { compareStornoToOriginal } = await import("@/lib/pdf/storno.mjs");
+  const storno = await parse("storno.pdf");
+  const original = await parse("jedna-stavka.pdf");
+  assert.equal(storno.documentKind, "storno");
+  assert.equal(storno.validationStatus, "unsupported_requires_sample");
+  assert.equal(storno.header.reversesDocumentNumber.value, original.header.documentNumber.value);
+  assert.ok(storno.lines.every((l) => l.status === "ok"));
+  const view = (d: typeof storno) => ({
+    partnerCode: d.header.partnerCode.value, total: d.header.printedGrossTotal.value ?? d.totals.computed,
+    lines: d.lines.map((l) => ({ articleCode: l.articleCode, quantity: l.quantity!, unitPrice: l.unitPrice!, discountPercent: l.discountPercent })),
+  });
+  assert.equal(compareStornoToOriginal(view(storno), view(original)).kind, "full");
+});
+
 test("negativne stavke (povrat pod naslovom fakture) nikad ne postaju faktura", async () => {
   const doc = await parse("negativne-stavke.pdf");
   assert.equal(doc.validationStatus, "unsupported_requires_sample");

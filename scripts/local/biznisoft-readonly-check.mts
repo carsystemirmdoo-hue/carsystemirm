@@ -25,7 +25,9 @@ import { createHash } from "node:crypto";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
+import { getDocumentProxy } from "unpdf";
 import { parseBiznisoftPdf } from "../../lib/pdf/extract.ts";
+import { compareStornoToOriginal } from "../../lib/pdf/storno.mjs";
 import { classifyPib } from "../../lib/partners/pib.mjs";
 
 const expand = (p: string) => p.replace(/^~/, homedir());
@@ -77,6 +79,8 @@ const pibs: Record<string, number> = {};
 const dates: Record<string, number> = {};
 const taxRates: Record<string, number> = {};
 let lineTotal = 0;
+const docsForSummary: { label: string; year: string; layout: string; fak: boolean; status: string; kind: string;
+  number: string | null; reverses: string | null; view: Parameters<typeof compareStornoToOriginal>[0] }[] = [];
 let linesWithDiscount = 0;
 const width = String(files.length).length;
 
@@ -137,7 +141,17 @@ for (const [i, file] of files.entries()) {
     status: doc.validationStatus,
   };
   rows.push(row);
-  privateRows.push({
+  // Raspored: zaglavlje tabele sa kolonom „Barkod" ili bez nje.
+  const firstPage = await (await getDocumentProxy(new Uint8Array(await readFile(file)))).getPage(1);
+  const layout = (await firstPage.getTextContent()).items.some((it) => "str" in it && it.str.trim() === "Barkod")
+    ? "sa_barkodom" : "bez_barkoda";
+  const year = String(doc.header.documentDate.value ?? "").slice(0, 4) || "bez_datuma";
+  const fak = /^fak/i.test(path.basename(file));
+  docsForSummary.push({ label, year, layout, fak, status: doc.validationStatus, kind: doc.documentKind,
+    number, reverses: doc.header.reversesDocumentNumber.value,
+    view: { partnerCode: doc.header.partnerCode.value, total: doc.header.printedGrossTotal.value ?? doc.totals.computed ?? null,
+      lines: doc.lines.map((l) => ({ articleCode: l.articleCode, quantity: l.quantity, unitPrice: l.unitPrice, discountPercent: l.discountPercent })) } });
+  privateRows.push({ layout, year, fak, reversesDocumentNumber: doc.header.reversesDocumentNumber.value,
     ...row, file: rel, detail: doc.validationDetail,
     documentNumber: number, partnerCode: doc.header.partnerCode.value, documentDate: doc.header.documentDate.value,
   });
@@ -167,10 +181,50 @@ show("duplikati", dupByKind);
 for (const d of duplicates.slice(0, 20)) console.log(`    ${d.a} ↔ ${d.b} (${d.kind})`);
 if (duplicates.length > 20) console.log(`    … još ${duplicates.length - 20} u privatnom izveštaju`);
 
+// Naziv „Fak" je pomoć pri izboru, ne dokaz — poredi se sa sadržajem.
+const fakVsContent: Record<string, number> = {};
+for (const d of docsForSummary) {
+  const content = d.kind === "storno" ? "storno" : d.status === "valid" ? "prodajna_faktura" : "drugo";
+  count(fakVsContent, `${d.fak ? "Fak" : "bez Fak"} → ${content}`);
+}
+show("naziv fajla prema sadržaju", fakVsContent);
+
+// Storna: veza sa originalom i obim poništenja.
+const byNum = new Map(docsForSummary.filter((d) => d.status === "valid").map((d) => [d.number, d]));
+const storna = docsForSummary.filter((d) => d.kind === "storno");
+const stornoKinds: Record<string, number> = {};
+const cancelledOriginals = new Set<string>();
+const stornoPrivate: { storno: string; original: string | null; ishod: string; razlozi: string[] }[] = [];
+for (const s of storna) {
+  const orig = s.reverses ? byNum.get(s.reverses) : undefined;
+  if (!orig) { count(stornoKinds, "original_nije_u_skupu"); stornoPrivate.push({ storno: s.label, original: null, ishod: "original_nije_u_skupu", razlozi: [] }); continue; }
+  const r = compareStornoToOriginal(s.view, orig.view);
+  count(stornoKinds, r.kind);
+  cancelledOriginals.add(orig.label);
+  stornoPrivate.push({ storno: s.label, original: orig.label, ishod: r.kind, razlozi: r.reasons });
+}
+console.log(`  storna: ${storna.length}`);
+show("storno prema originalu", stornoKinds);
+if (storna.length > 0) {
+  console.log(`  UPOZORENJE: ${cancelledOriginals.size} ispravnih faktura je stornirano; dok uvoz storna nije podržan,`);
+  console.log("  promet, količine i preporuke izračunati bez storna NISU konačni.");
+}
+
+// Po godinama i rasporedima.
+const byYearLayout: Record<string, Record<string, number>> = {};
+for (const d of docsForSummary) {
+  const k = `${d.year} · ${d.layout}`;
+  byYearLayout[k] ??= {};
+  count(byYearLayout[k], d.kind === "storno" ? "storno" : d.status);
+}
+console.log("  po godini i rasporedu:");
+for (const k of Object.keys(byYearLayout).sort()) show(`    ${k}`, byYearLayout[k]);
+
 if (report) {
   await writeFile(
     report,
-    JSON.stringify({ folder: dir, generated: new Date().toISOString(), duplicates, rows: privateRows }, null, 2),
+    JSON.stringify({ folder: dir, generated: new Date().toISOString(), duplicates, storna: stornoPrivate,
+      stornirani_originali: [...cancelledOriginals], rows: privateRows }, null, 2),
     { mode: 0o600 },
   );
   console.log("Privatni izveštaj (oznaka → fajl i podaci dokumenta) upisan; putanja se ne ispisuje.");

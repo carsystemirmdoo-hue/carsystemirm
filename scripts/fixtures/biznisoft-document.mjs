@@ -99,7 +99,7 @@ const CONTINUATION_ITEM = {
 };
 
 export function document({ broj, partner, datum, items, pages = 1, totalOverride = null,
-                    continuationOnPage2 = false }) {
+                    continuationOnPage2 = false, napomena = null }) {
   const cells = [...header(803, { broj, partner, datum }), ...tableHead(574)];
   let y = 558, neto = 0, pdvUk = 0;
   items.forEach((it, i) => {
@@ -119,6 +119,7 @@ export function document({ broj, partner, datum, items, pages = 1, totalOverride
     { x: 413, y: y - 20, text: `Ukupan iznos sa PDV:    ${dec(ukupno)}` },
     { x: 58, y: y - 45, text: "Osnovica bez PDV:" }, { x: 169, y: y - 45, text: dec(neto) },
     { x: 88, y: y - 57, text: "Iznos PDV:" }, { x: 174, y: y - 57, text: dec(pdvUk) },
+    ...(napomena ? [{ x: 30, y: 120, text: `NAPOMENA: ${napomena}` }] : []),
     { x: 268, y: 40, text: `Strana 1 od ${pages}` },
     { x: 330, y: 40, text: "www.biznisoft.com" },
   );

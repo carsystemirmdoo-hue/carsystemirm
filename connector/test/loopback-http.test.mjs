@@ -11,7 +11,7 @@ test("loopback HTTP samo izričito, samo za isti računar, nikad u paketu", () =
   assert.equal(dozvoljenLoopbackHttp(u("http://localhost:3419"), ok), true);
   assert.equal(dozvoljenLoopbackHttp(u("http://[::1]:3419"), ok), true);
   assert.equal(dozvoljenLoopbackHttp(u("http://127.0.0.1:3419"), {}), false, "bez promenljive");
-  assert.equal(dozvoljenLoopbackHttp(u("http://192.168.0.24:3419"), ok), false, "mrežna adresa");
+  assert.equal(dozvoljenLoopbackHttp(u("http://192.0.2.10:3419"), ok), false, "mrežna adresa");
   assert.equal(dozvoljenLoopbackHttp(u("http://kancelarija.local"), ok), false);
   assert.equal(dozvoljenLoopbackHttp(u("http://127.0.0.1:3419"), { ...ok, CS_CONNECTOR_PACKAGED: "1" }), false, "spakovan konektor");
 });

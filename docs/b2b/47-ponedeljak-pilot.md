@@ -99,15 +99,21 @@ tabele; originalna tabela i list za kancelariju su nepromenjeni (otisak isti).
   `FEATURE_SYNC_DEVICE_INGEST=1` i `FEATURE_PARTNER_REGISTRY=1` samo za tu sesiju.
 - **Konektor na Mac-u se pokreće preko `node`**, ne `connector.sh` — tačna
   komanda u [42 §2](42-uvoz-sa-maca-i-windows-konektor.md).
-- Stavka sa privremenom greškom čeka **sledeći radni dan 9:00**; ako talas mora
-  da se završi isti dan — premestiti `queue.db` i ponovo `run-once` (server
-  vraća `duplicate_file` za već uvezeno).
+- Privremene greške se oporavljaju u toku ciklusa (Retry-After / postepeno
+  čekanje); prekinut talas se nastavlja istim `queue.db` — ponovo `run-once`
+  (posle `nastaviPosle` iz `status`-a ako je server tražio duže čekanje).
 - Fascikla stanja konektora (`~/.carsystem-private/konektor-mac`) mora biti
   700: `queue.db` sadrži tela dokumenata, a konektor ga pravi sa pravima 644.
 - `wave-control pre` upisuje stanje pored manifesta; za ponedeljak to je
   `~/.carsystem-private/talas-01-2025-01-kontrola-pre.json` (stari fajl se
   zamenjuje — očekivano).
 - Talas se ne prihvata bez BizniSoft zbira od kancelarije (§2.2).
+
+**Oporavak konektora (posle probe, sintetički podaci):** deo računa uspe, pa
+429 sa `Retry-After` → odčeka se i ostatak ide u istom ciklusu; dug
+`Retry-After` → ciklus staje, nov proces sa istim `queue.db` pre roka ne šalje
+ništa, posle roka završava bez duplikata; 429 bez vremena → 5 s, 10 s; stare
+odložene stavke se oslobađaju; trajna greška ostaje za pregled bez ponavljanja.
 
 ## 7. Nije odobreno / čeka odluku
 

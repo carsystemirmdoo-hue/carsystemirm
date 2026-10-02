@@ -849,7 +849,12 @@ test("autentifikovan uređaj NE troši brojač nepoznatih (serija od 45 zahteva)
   assert.ok(ograniceno, "neuspešni nepoznati zahtevi više ne aktiviraju ograničenje");
   // Blokada nepoznatih se proverava PRE tela i potpisa: i sledeći zahtev je 429.
   const { request } = await potpisanZahtev(lazni as Uredjaj, { body: {} });
-  assert.equal((await ing(request)).status, 429);
+  const blokiran = await ing(request);
+  assert.equal(blokiran.status, 429);
+  // Koliko da se čeka: zaglavlje i telo, ista vrednost (konektor poštuje Retry-After).
+  const sekundi = Number(blokiran.headers.get("retry-after"));
+  assert.ok(sekundi > 0 && sekundi <= 15 * 60, `Retry-After: ${blokiran.headers.get("retry-after")}`);
+  assert.equal((await telo(blokiran)).retryAfterSeconds, sekundi);
 });
 
 test("autentifikovan uređaj i dalje ima sopstveno ograničenje (sync_device)", async (t) => {

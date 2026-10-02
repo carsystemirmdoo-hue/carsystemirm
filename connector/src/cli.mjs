@@ -497,6 +497,8 @@ async function status(p, now = new Date()) {
       lokalnoVreme: lokalno,
       kalendar: opisiPokrivenost(Number(lokalno.datum.slice(0, 4))),
       red: store.zbir(),
+      // Server je tražio čekanje (429 sa dugim Retry-After): pre ovoga se ne šalje.
+      nastaviPosle: store.citajMetu("nastavi_posle") || null,
       poslednjiCiklus: store.citajMetu("poslednji_ciklus_datum"),
       sledeciTermin: sledeciTermin({
         now,

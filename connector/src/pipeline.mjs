@@ -7,6 +7,9 @@ import {
   nadjiKandidate, PODRAZUMEVANE_GRANICE, procitajStabilno, procitajZaOtisak, proveriIzvor,
 } from "./scanner.mjs";
 import { sledeciPokusajPosleNeuspeha } from "./schedule.mjs";
+import { cekanjeZa, PODRAZUMEVANA_POLITIKA, vrstaPrivremenog } from "./retry.mjs";
+
+const spavaj = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
  * Jedan ciklus: skeniraj → upiši u red → pošalji.
@@ -189,10 +192,17 @@ export async function skenirajURed({ store, konfiguracija, granice = PODRAZUMEVA
 /**
  * Šalje stavke iz reda.
  *
- * @param {{ store, konfiguracija, kljuc, lokalniDatum, fetchImpl?, dozvoliHttp?, log? }} ulaz
+ * Privremene greške (429, prekid veze, 5xx) se oporavljaju u toku ciklusa —
+ * vidi `retry.mjs`. `cekaj` i `sada` se mogu zameniti u testovima.
+ *
+ * @param {{ store, konfiguracija, kljuc, lokalniDatum, fetchImpl?, dozvoliHttp?, log?,
+ *           cekaj?: (ms: number) => Promise<void>, sada?: () => number, politika? }} ulaz
  */
 export async function posaljiIzReda(ulaz) {
   const { store, konfiguracija, kljuc, lokalniDatum } = ulaz;
+  const cekaj = ulaz.cekaj ?? spavaj;
+  const sada = ulaz.sada ?? (() => Date.now());
+  const politika = ulaz.politika ?? PODRAZUMEVANA_POLITIKA;
 
   /*
    * Oporavak PRE svega ostalog.
@@ -203,21 +213,49 @@ export async function posaljiIzReda(ulaz) {
    */
   const oporavljeno = store.oporaviZaglavljene();
 
+  /*
+   * Stavke koje je starija verzija zbog 429 ili prekida veze odložila do
+   * sledećeg radnog dana vraćaju se u red — prekinut talas se nastavlja istim
+   * `queue.db`, bez premeštanja ili brisanja.
+   */
+  const oslobodjeno = store.oslobodiPrivremenaOdlaganja();
+
   const zbir = {
     oporavljeno,
+    oslobodjeno,
     poslato: 0,
     potvrdjeno: 0,
     zaPregled: 0,
     odlozeno: 0,
     odbijeno: 0,
+    ponovljeno: 0,
+    cekanoMs: 0,
     zaustavljeno: null,
+    nastaviPosle: null,
   };
 
-  const stavke = store.zaSlanje({ limit: konfiguracija.maxPoCiklusu, lokalniDatum });
+  /*
+   * Server je tražio duže čekanje u prethodnom ciklusu: do tog trenutka se ne
+   * šalje ništa (ponovno pokretanje ne sme da tuče server).
+   */
+  const pauza = store.citajMetu("nastavi_posle");
+  if (pauza && Date.parse(pauza) > sada()) {
+    zbir.zaustavljeno = "ceka_server";
+    zbir.nastaviPosle = pauza;
+    return zbir;
+  }
+  if (pauza) store.postaviMetu("nastavi_posle", "");
 
-  for (const stavka of stavke) {
+  const stavke = store.zaSlanje({ limit: konfiguracija.maxPoCiklusu, lokalniDatum });
+  let uzastopno = 0;
+  /** Slanja u OVOM ciklusu po stavci; `stavka.pokusaja` je snimak sa početka. */
+  const ovajCiklus = new Map();
+
+  for (let i = 0; i < stavke.length; i += 1) {
+    const stavka = stavke[i];
     if (!store.oznaciSalje(stavka.id)) continue; // Neko drugi ju je preuzeo.
-    zbir.poslato += 1;
+    ovajCiklus.set(stavka.id, (ovajCiklus.get(stavka.id) ?? 0) + 1);
+    if (ovajCiklus.get(stavka.id) === 1) zbir.poslato += 1;
 
     const odgovor = await posaljiPotpisano({
       origin: konfiguracija.serverOrigin,
@@ -230,6 +268,49 @@ export async function posaljiIzReda(ulaz) {
       fetchImpl: ulaz.fetchImpl,
       dozvoliHttp: ulaz.dozvoliHttp,
     });
+
+    const privremeno = vrstaPrivremenog(odgovor);
+    if (privremeno) {
+      /*
+       * Odgovor nije stigao, ili server traži da se sačeka. O knjiženju se ne
+       * zaključuje ništa: ako je knjiženo, ponovno slanje dobija `duplicate_file`.
+       */
+      const ukupnoSlanja = (stavka.pokusaja ?? 0) + ovajCiklus.get(stavka.id);
+      if (ukupnoSlanja >= politika.maxPokusajaStavke) {
+        store.odlozi({
+          id: stavka.id,
+          odlozenoDo: sledeciPokusajPosleNeuspeha(lokalniDatum, {
+            dodatnaZatvaranja: konfiguracija.dodatnaZatvaranja,
+          }),
+          razlog: `iscrpljeno:${odgovor.code ?? odgovor.razlog ?? privremeno}`,
+        });
+        zbir.odlozeno += 1;
+        uzastopno = 0;
+        continue;
+      }
+      store.vratiUSpremno({ id: stavka.id, razlog: `privremeno:${odgovor.code ?? odgovor.razlog ?? privremeno}` });
+      uzastopno += 1;
+      const odluka = cekanjeZa({ vrsta: privremeno, retryAfterSec: odgovor.retryAfter ?? null, uzastopno, politika });
+      await ulaz.log?.zapisi("warn", "privremeno", {
+        ref: `sd:${stavka.source_hash.slice(0, 12)}`,
+        vrsta: privremeno,
+        http: odgovor.httpStatus,
+        retryAfter: odgovor.retryAfter ?? null,
+        uzastopno,
+      });
+      if ("stani" in odluka) {
+        zbir.zaustavljeno = odluka.razlog;
+        zbir.nastaviPosle = new Date(sada() + odluka.nastaviPosleMs).toISOString();
+        store.postaviMetu("nastavi_posle", zbir.nastaviPosle);
+        break;
+      }
+      await cekaj(odluka.cekajMs);
+      zbir.cekanoMs += odluka.cekajMs;
+      zbir.ponovljeno += 1;
+      i -= 1; // ista stavka ponovo, sa novim nonce-om
+      continue;
+    }
+    uzastopno = 0;
 
     if (odgovor.transport !== "ok") {
       /*

@@ -200,6 +200,13 @@ export async function posaljiPotpisano(ulaz) {
    * `odlukaZaOdgovor` to tretira kao nepoznat odgovor — nikad kao potvrdu.
    */
   const code = telo && typeof telo.code === "string" ? telo.code : null;
+  /*
+   * Vreme čekanja: zaglavlje `Retry-After`, a ako ga nema, `retryAfterSeconds`
+   * iz tela (server ga šalje uz 429). Isto ograničenje važi za oba izvora.
+   */
+  const cekanje =
+    retryAfter ??
+    (typeof telo?.retryAfterSeconds === "number" ? ogranicenRetryAfter(String(telo.retryAfterSeconds)) : null);
 
   return {
     transport: "ok",
@@ -219,7 +226,7 @@ export async function posaljiPotpisano(ulaz) {
      * komanda nosi samo ID, zatvoren tip, verziju i rok.
      */
     command: telo && typeof telo.command === "object" ? telo.command : null,
-    retryAfter,
+    retryAfter: cekanje,
     nonce,
   };
 }

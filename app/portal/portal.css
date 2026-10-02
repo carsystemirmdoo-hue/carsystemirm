@@ -7709,6 +7709,124 @@ body:has(.portal-login-root) {
 .cs-mentions strong { color: var(--p-ink); font-size: 13px; }
 .cs-mentions span { color: var(--p-muted); font-size: 12px; }
 
+/* Predlozi za razgovor na kartici kupca */
+.cs-sugg-body {
+  display: grid;
+  gap: 12px;
+}
+.cs-sugg-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cs-sugg {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--p-line);
+  border-left: 3px solid var(--p-line-strong);
+  border-radius: 8px;
+  background: var(--p-surface);
+}
+.cs-sugg[data-tone="danger"] { border-left-color: var(--p-red); }
+.cs-sugg[data-tone="warning"] { border-left-color: var(--p-amber); }
+.cs-sugg[data-tone="success"] { border-left-color: var(--p-green); }
+.cs-sugg-head {
+  display: grid;
+  gap: 1px;
+}
+.cs-sugg-head strong {
+  color: var(--p-ink);
+  font-size: 13.5px;
+  overflow-wrap: anywhere;
+}
+.cs-sugg-head small,
+.cs-sugg-facts small,
+.cs-sugg-limits {
+  color: var(--p-muted);
+  font-size: 11.5px;
+}
+.cs-sugg-reason::first-letter {
+  text-transform: uppercase;
+}
+.cs-sugg-common {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: var(--p-amber-soft, var(--p-surface));
+  color: var(--p-ink);
+  font-size: 12.5px;
+}
+.cs-sugg-reason {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+.cs-sugg-facts {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.cs-sugg-facts > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 8px;
+}
+.cs-sugg-facts dt {
+  color: var(--p-muted);
+  font-size: 11.5px;
+}
+.cs-sugg-facts dd {
+  display: grid;
+  margin: 0;
+  font-size: 12.5px;
+}
+.cs-sugg-limits {
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px dashed var(--p-line);
+}
+.cs-sugg-basis,
+.cs-sugg-all {
+  justify-self: start;
+  color: var(--p-blue);
+  font-size: 12px;
+  font-weight: 600;
+}
+.cs-sugg-empty {
+  margin: 0;
+  color: var(--p-muted);
+}
+.cs-sugg-more > summary {
+  cursor: pointer;
+  padding: 6px 0;
+  font-weight: 650;
+}
+.cs-sugg-more > p {
+  margin: 0 0 8px;
+  color: var(--p-muted);
+  font-size: 12.5px;
+}
+.cs-sugg-weak .cs-sugg {
+  border-left-color: var(--p-line-strong);
+  background: transparent;
+}
+@media (max-width: 560px) {
+  .cs-sugg-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cs-sugg-facts > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+  }
+}
+
 .cs-groups {
   gap: 18px;
 }

@@ -1074,6 +1074,10 @@ export type ArticleIdentity = {
   catalog: { name: string; href: string; variantLabel: string | null } | null;
   packLabel: string | null;
   unit: string | null;
+  /** Grupa iz registra artikala; `null` = grupa nije potvrđena. */
+  productGroup: string | null;
+  /** Da li aktivni cenovnik ima stavku za artikal. Sama cena se ovde NE nosi. */
+  hasCurrentPrice: boolean;
 };
 
 /**
@@ -1096,6 +1100,8 @@ export async function loadArticleIdentities(codes: string[]): Promise<Map<string
       catalog: facts?.link ? { name: facts.link.name, href: facts.link.href, variantLabel: facts.link.variantLabel } : null,
       packLabel: r.pack_label,
       unit: r.unit,
+      productGroup: r.product_group?.trim() ? r.product_group : null,
+      hasCurrentPrice: r.list_price !== null && r.list_price !== undefined,
     });
   }
   return out;

@@ -252,7 +252,11 @@ export default async function SyncOperationsPage() {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {smeUredjaje ? <DeviceAdmin /> : null}
+      {smeUredjaje ? (
+        <DeviceAdmin
+          devices={uredjaji.map((u) => ({ id: u.id, label: u.label, deviceCode: u.deviceCode, status: u.status }))}
+        />
+      ) : null}
     </>
   );
 }

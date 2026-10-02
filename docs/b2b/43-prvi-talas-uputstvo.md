@@ -44,11 +44,12 @@ i `FEATURE_PARTNER_REGISTRY=1` (samo lokalno, samo za ovaj rad).
 6. Veze: `/portal/kupci/veze` — šifarnik (`Kupci.xlsx`), pregledana tabela,
    `CSRM` → „Proverite" → „Primenite potvrđene" (u roku od 10 minuta od
    prijave). Zatim `wave-control.mts pre` mora pokazati sve ✔.
-7. Konektor na Mac-u (42 §2): `connector init`; Aleksandar registruje
-   `MAC-ARHIVA` (`biznisoft` / `CSRM`) na `/portal/importi/sinhronizacija` i
-   aktivira ga potvrdom otiska.
-8. `connector run-once` dok `status` ne pokaže svih 136 potvrđeno (najviše 50
-   po ciklusu; prekid je bezbedan).
+7. Konektor na Mac-u — **tačna komanda u 42 §2 korak 3** (preko `node`, ne
+   `connector.sh`): `init`; Aleksandar registruje `MAC-ARHIVA` (`biznisoft` /
+   `CSRM`) na `/portal/importi/sinhronizacija` i aktivira ga izborom sa liste i
+   potvrdom otiska.
+8. `run-once` dok `status` ne pokaže svih 136 potvrđeno (najviše 50 po ciklusu;
+   prekid je bezbedan). Na probi: 3 ciklusa, bez odbijanja.
 9. `wave-control.mts posle --bs-broj … --bs-neto … --bs-pdv … --bs-bruto …` —
    sve ✔. Ako nešto padne: ništa dalje; povratak na granu `pre-talas-01`.
 10. `pilot-backup.sh dump` posle talasa.

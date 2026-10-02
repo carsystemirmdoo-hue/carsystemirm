@@ -1,6 +1,6 @@
 import "server-only";
 import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
-import { registerAttempt } from "@/lib/auth/rate-limit-service";
+import { isBucketBlocked, registerAttempt } from "@/lib/auth/rate-limit-service";
 import {
   authenticateDeviceRequest,
   DeviceAuthError,
@@ -118,19 +118,21 @@ export async function withAuthenticatedDevice(
    */
   const tvrdjenaOznaka = (request.headers.get(HEADERS.device) ?? "").slice(0, 64) || null;
 
-  const nepoznat = await registerAttempt({
-    scope: "sync_unknown",
-    accountIdentifier: tvrdjenaOznaka,
-    clientIp,
-  });
-  if (!nepoznat.allowed) {
-    return syncJson(429, {
-      ok: false,
-      code: "rate_limited",
-      requestId,
-      retryAfterSeconds: nepoznat.retryAfterSeconds,
-    });
+  /*
+   * Brojač nepoznatih se PROVERAVA pre posla, a UVEĆAVA samo za zahtev koji
+   * ne prođe autentifikaciju (`neuspehNepoznatog` ispod).
+   *
+   * Ranije se uvećavao za svaki zahtev, pa i za uređaj koji je upravo dokazao
+   * identitet: posle 20 dokumenata u 5 minuta dolazila je blokada od 15
+   * minuta (otkriveno na generalnoj probi talasa 01 — 136 računa bi trajalo
+   * satima, arhiva danima). Autentifikovan uređaj meri `sync_device`.
+   * Nepoznat pozivalac i dalje dobija blokadu posle istog broja neuspeha.
+   */
+  if (await isBucketBlocked({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp })) {
+    return syncJson(429, { ok: false, code: "rate_limited", requestId });
   }
+  const neuspehNepoznatog = () =>
+    registerAttempt({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp });
 
   /* --- 3. Telo, uz tvrdu granicu. -------------------------------------- */
   let bodyBytes: Uint8Array;
@@ -138,6 +140,7 @@ export async function withAuthenticatedDevice(
     requireJsonContentType(request);
     bodyBytes = await readBoundedBody(request);
   } catch (error) {
+    await neuspehNepoznatog();
     if (error instanceof BodyError) {
       return syncJson(error.status, { ok: false, code: error.code, requestId });
     }
@@ -155,6 +158,7 @@ export async function withAuthenticatedDevice(
     });
   } catch (error) {
     if (error instanceof DeviceAuthError) {
+      await neuspehNepoznatog();
       return syncJson(error.status, { ok: false, code: error.code, requestId });
     }
     /*

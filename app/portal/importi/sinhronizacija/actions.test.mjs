@@ -107,3 +107,21 @@ test("greška baze se ne prosleđuje na ekran", () => {
   assert.ok(!/error\.message/.test(kod), "sirova poruka greške ide na ekran");
   assert.match(kod, /function porukaZa\(/);
 });
+
+test("registracija prima javni ključ u obliku koji ispisuje connector init", () => {
+  // Regresija (generalna proba talasa 01): stara provera je tražila sirov ključ
+  // od 44 znaka, a konektor i forma koriste Ed25519 SPKI (60 znakova).
+  assert.match(kod, /publicKeySpki:\s*z\.string\(\)\.trim\(\)\.refine\(isEd25519SpkiBase64\)/);
+  assert.doesNotMatch(kod, /\{43\}=\$/);
+});
+
+test("aktivacija i opoziv biraju uređaj sa liste, bez prepisivanja UUID-a", async () => {
+  // Regresija (generalna proba talasa 01): UUID se nigde ne prikazuje, a forma
+  // ga je tražila kao slobodan unos — aktivacija kroz portal nije bila moguća.
+  const forma = await readFile(`${ROOT}features/portal/DeviceAdmin.tsx`, "utf8");
+  assert.doesNotMatch(forma, /name="deviceId"[^>]*placeholder="uuid"/);
+  assert.match(forma, /<select name="deviceId" required/);
+  assert.match(forma, /d\.status === "registered"/);
+  const strana = await readFile(`${ROOT}app/portal/importi/sinhronizacija/page.tsx`, "utf8");
+  assert.match(strana, /<DeviceAdmin\s+devices=\{uredjaji\.map/);
+});

@@ -51,8 +51,26 @@ Sve na Mac-u; lokalni server sluša **samo** na `127.0.0.1`.
    `sourceSystem` `biznisoft`, `issuerCode` `CSRM`, `izvorniFolder` = fascikla
    talasa), `CS_CONNECTOR_MACOS_KEYCHAIN=1`, `CS_CONNECTOR_ALLOW_LOOPBACK_HTTP=1`;
    `connector init` ispisuje javni ključ i otisak.
+
+   **Tačna komanda (proverena na generalnoj probi 2026-10-02).** Na Mac-u se
+   konektor pokreće NESPAKOVAN, preko `node`. Pokretač `connector/dist/connector.sh`
+   postavlja `CS_CONNECTOR_PACKAGED=1` i tada s pravom odbija `http://127.0.0.1`
+   (`origin_not_https`) — za lokalni server ga ne koristiti.
+
+   ```bash
+   cd ~/carsystem-work/portal-integration && source ~/.nvm/nvm.sh && nvm use 24
+   npm run connector:build
+   mkdir -m 700 -p ~/.carsystem-private/konektor-mac   # ovde i config.json
+   export CS_CONNECTOR_STATE_DIR=~/.carsystem-private/konektor-mac CS_CONNECTOR_MACOS_KEYCHAIN=1 CS_CONNECTOR_ALLOW_LOOPBACK_HTTP=1
+   node --no-warnings connector/dist/connector/bin/connector.mjs init       # jednom
+   node --no-warnings connector/dist/connector/bin/connector.mjs run-once   # ponavljati
+   node --no-warnings connector/dist/connector/bin/connector.mjs status
+   ```
+
+   Bez `CS_CONNECTOR_KEYCHAIN` ključ ide u keychain prijavljenog korisnika.
 4. Aleksandar registruje `MAC-ARHIVA` (opseg `biznisoft` / `CSRM`) i aktivira
-   ga potvrdom otiska koji je konektor ispisao.
+   ga potvrdom otiska koji je konektor ispisao. Na koraku aktivacije uređaj se
+   **bira sa liste** (ranije se tražio UUID koji se nigde ne prikazuje).
 
 **Po talasu:**
 
@@ -63,6 +81,10 @@ Sve na Mac-u; lokalni server sluša **samo** na `127.0.0.1`.
 4. `wave-folder.mts` — fascikla talasa; `izvorniFolder` u `config.json` na nju.
 5. `connector run-once` dok `status` ne pokaže sve potvrđeno (najviše 50 po
    ciklusu; prekid je bezbedan — red se nastavlja, server odbija duplikat).
+   Stavka koja dobije privremenu grešku (429, prekid veze) konektor odlaže do
+   **sledećeg radnog dana u 9:00**. Ako talas treba završiti isti dan:
+   premestiti `queue.db` u stranu i ponovo `run-once` — svi fajlovi se šalju
+   ponovo, a server već uvezene vraća kao `duplicate_file` (provereno na probi).
 6. `wave-control.mts posle` sa BizniSoft zbirom — sve ✔.
 7. `pilot-backup.sh dump` posle talasa.
 

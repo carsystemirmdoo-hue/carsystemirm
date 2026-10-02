@@ -14,6 +14,7 @@ import {
 } from "@/lib/sync/device/registry";
 import { CommandError, zakaziKomandu } from "@/lib/sync/commands/service";
 import { isSyncOperationsEnabled } from "@/lib/sync/http/gate";
+import { isEd25519SpkiBase64 } from "@/lib/sync/device/signing.mjs";
 
 /**
  * Server akcije operativnog sync ekrana.
@@ -110,7 +111,8 @@ const registracijaSchema = z.object({
   sourceSystem: z.string().trim().min(1).max(64),
   issuerCode: z.string().trim().min(1).max(64),
   keyId: z.string().trim().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/),
-  publicKeySpki: z.string().trim().regex(/^[A-Za-z0-9+/]{43}=$/),
+  // Isti oblik koji `connector init` ispisuje (Ed25519 SPKI, base64).
+  publicKeySpki: z.string().trim().refine(isEd25519SpkiBase64),
 });
 
 /**
@@ -137,7 +139,13 @@ export async function registerDeviceAction(
     publicKeySpki: formData.get("publicKeySpki"),
   });
   if (!parsed.success) {
-    return { error: "Proverite unos: oznake i javni ključ nisu u očekivanom obliku.", ok: null };
+    const kljuc = parsed.error.issues.some((i) => i.path[0] === "publicKeySpki");
+    return {
+      error: kljuc
+        ? "Javni ključ nije u obliku koji ispisuje connector init (Ed25519, SPKI base64, počinje sa MCow…)."
+        : "Proverite unos: oznake uređaja i ključa smeju sadržati slova, brojeve, tačku, crtu i donju crtu.",
+      ok: null,
+    };
   }
 
   try {

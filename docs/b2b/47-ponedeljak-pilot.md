@@ -60,13 +60,57 @@ stvarnog poručivanja.** Uputstvo korak po korak: [43 §2](43-prvi-talas-uputstv
    kad je uvezena cela arhiva i uporediti sa [46](46-provera-r1-nad-arhivom.md).
    Ako smer nije isti, R1 ostaje iza prekidača.
 
-## 5. Nije odobreno / čeka odluku
+## 5. Generalna proba talasa 01 (2026-10-02, lokalno — urađena)
+
+Posebna privremena baza i server (`127.0.0.1:3421`), lokalni test nalozi sa
+drugim faktorom, privremeni keychain; posle probe sve uklonjeno. Neon pilot i
+lokalni prikaz (3420/55434) nisu dirani. Veze su primenjene nad **kopijom**
+tabele; originalna tabela i list za kancelariju su nepromenjeni (otisak isti).
+
+| Korak | Ishod |
+|---|---|
+| veze (Vlasnik, svež drugi faktor): „Proverite" pa „Primenite" | 68 / 68 povezano |
+| `wave-control pre` | 7 / 7 ✔ |
+| registracija i aktivacija uređaja kroz portal | uspelo **tek posle ispravki 1 i 2** |
+| slanje (posle ispravke 3) | 136 / 136 knjiženo, 0 za pregled, 0 odbijeno |
+| `wave-control posle` | 136/136 dokumenata, **895 stavki**, neto i bruto na paru prema manifestu; ✖ samo „BizniSoft zbir nije dostavljen" |
+| `posle` sa zbirom iz manifesta (samo probni podatak) | sve ✔ — nezavisna BizniSoft potvrda ostaje obaveza kancelarije |
+| ponovno slanje istim stanjem konektora | 0 poslato |
+| ponovno slanje sa praznim stanjem (sve 136) | 136 × `duplicate_file`; faktura, stavki, dokumenata i kupaca isto |
+| obračun preporuka | 843 para: 795 jedna kupovina, 46 privremeno, 2 „uspavano" — očekivano posle jednog meseca |
+
+**Ispravljeno na probi (sva tri bi zaustavila ponedeljak):**
+
+1. Registracija uređaja je odbijala javni ključ koji `connector init` ispisuje
+   (Ed25519 SPKI, 60 znakova) — provera je tražila sirov ključ od 44 znaka.
+2. Aktivacija i opoziv su tražili UUID uređaja koji se nigde ne prikazuje —
+   sada se uređaj bira sa liste.
+3. Svaki zahtev autentifikovanog uređaja trošio je i brojač nepoznatih
+   pozivalaca (20 / 5 min, blokada 15 min) — posle 20 računa konektor je
+   stajao. Sada se brojač nepoznatih proverava pre posla, a uvećava samo za
+   zahtev koji ne prođe autentifikaciju; uređaj meri svoj brojač (600 / 5 min).
+   Testovi: nepoznat pozivalac i dalje biva zaustavljen, uređaj ne troši
+   brojač nepoznatih, a sopstveno ograničenje uređaja važi tačno od 601. zahteva.
+
+## 6. Prepreke i napomene za ponedeljak
+
+- **Lokalni server za pilot mora biti napravljen iz commita sa ovim
+  ispravkama** (`next build` pre pokretanja na 3419), uz
+  `FEATURE_SYNC_DEVICE_INGEST=1` i `FEATURE_PARTNER_REGISTRY=1` samo za tu sesiju.
+- **Konektor na Mac-u se pokreće preko `node`**, ne `connector.sh` — tačna
+  komanda u [42 §2](42-uvoz-sa-maca-i-windows-konektor.md).
+- Stavka sa privremenom greškom čeka **sledeći radni dan 9:00**; ako talas mora
+  da se završi isti dan — premestiti `queue.db` i ponovo `run-once` (server
+  vraća `duplicate_file` za već uvezeno).
+- Fascikla stanja konektora (`~/.carsystem-private/konektor-mac`) mora biti
+  700: `queue.db` sadrži tela dokumenata, a konektor ga pravi sa pravima 644.
+- `wave-control pre` upisuje stanje pored manifesta; za ponedeljak to je
+  `~/.carsystem-private/talas-01-2025-01-kontrola-pre.json` (stari fajl se
+  zamenjuje — očekivano).
+- Talas se ne prihvata bez BizniSoft zbira od kancelarije (§2.2).
+
+## 7. Nije odobreno / čeka odluku
 
 - Vercel plan i objava pilota (preduslov za Windows konektor).
-- Generalna proba talasa 01 kroz uređaj na **lokalnoj** bazi pre ponedeljka:
-  obuhvat bi bio 136 stvarnih računa / 68 kupaca iz manifesta u zasebnu lokalnu
-  bazu (`carsystem_proba_talas_qa`, isti stalni klaster, posle se briše), test
-  Vlasnik sa test drugim faktorom, privremeni keychain. **Ne pokreće se bez
-  izričitog odobrenja**, jer proširuje lokalne podatke.
 - Prepisivanje Git istorije (cena u 4fd2b09, LAN adresa u 35d1c05) — nije
   odobreno.

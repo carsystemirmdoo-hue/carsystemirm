@@ -35,6 +35,26 @@ CARSYSTEM_SECRETS_DIR=~/.carsystem-secrets/pilot bash scripts/ops/preview-secret
 Posle toga, uz posebnu potvrdu: provera mete i migracije
 (`preview-db.mts`) — prazna šema, bez ijednog stvarnog reda.
 
+### Stanje (2026-10-02, posle odobrenja)
+
+Neon projekat `carsystem-pilot` napravljen (Free, Frankfurt). Pre upisa
+provereno samo čitanjem: zaseban endpoint (različit od testnog), AWS
+eu-central-1, direktna veza (bez poolinga), Postgres 17.11, nula tabela, bez
+šeme `drizzle` i bez uloge `carsystem_app`. Zatim: 33 migracije,
+`carsystem_app` SQL-om + `runtime-role.sql`, sve provere prava ✔ (bez
+superuser prava i članstava, append-only tabele zaštićene, bez `CREATE` nad
+`public`), pooled i direktna adresa probane kao `carsystem_app`. Podaci:
+0 naloga, kupaca, faktura, dokumenata i podešavanja (bez `dataset.kind`).
+Sintetički seed nije pokrenut; deploymenta nema.
+
+**Prostor:** konzola pri pravljenju projekta pokazuje **0,5 GB** za Free, a
+zvanična stranica cena i dokumentacija (2026-10-02) navode 1 GB po projektu.
+Za planiranje važi 0,5 GB dok se u konzoli (projekat → Settings/Usage) ne
+potvrdi drugačije. Prekoračenje blokira upise (podaci ostaju). Procena po
+modelu iz [34 §4](34-prelazak-na-stvarne-podatke.md) za celu dostupnu arhivu je
+privatna; pokazuje jasnu rezervu do 0,5 GB, ali se proverava stvarnim merenjem
+posle prvog talasa (veličina baze pre i posle).
+
 ## 3. Uputstvo za koleginicu: kontrolni zbir za januar 2025.
 
 Zbir koji izračunamo iz PDF arhive **nije** nezavisna potvrda — nastao je iz
@@ -127,8 +147,8 @@ poslatih poziva.
 
 | # | Zadatak | Zavisi od |
 |---|---|---|
-| 1 | Neon `carsystem-pilot` (Free) i upis adrese — §2 | vlasnik (konzola) |
-| 2 | Provera mete i migracije pilota | 1 + potvrda |
+| 1 | ~~Neon `carsystem-pilot` (Free) i upis adrese~~ — urađeno 2026-10-02 | — |
+| 2 | ~~Provera mete i migracije pilota~~ — urađeno; potvrditi limit prostora u konzoli | vlasnik |
 | 3 | Kontrolni zbir januar 2025. iz BizniSoft-a — §3 | kancelarija |
 | 4 | Vercel plan za poslovni pilot, pa zaštićena objava `pilot/istorija` | vlasnik (naplata) + odobrenje |
 | 5 | Aleksandrov Vlasnik nalog i MFA u pilotu | 4 + njegovo prisustvo |

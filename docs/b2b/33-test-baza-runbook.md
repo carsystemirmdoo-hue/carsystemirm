@@ -29,7 +29,8 @@ Lokalni dokaz: prazna baza → 33 migracije → `runtime-role.sql` → integraci
 ## 2. Izbor: Neon Free, Frankfurt (uslovi provereni 2026-10-01)
 
 neon.com/pricing: Free je trajan (nije proba), **bez kartice**; po projektu
-100 CU-sati računanja, 1 GB prostora, 10 grana, istorija za povratak 6 sati,
+100 CU-sati računanja, 1 GB prostora po stranici cena (konzola za pilot projekat
+pokazuje 0,5 GB — merodavna je strožija vrednost), 10 grana, istorija za povratak 6 sati,
 računanje se gasi posle 5 min mirovanja (prvi zahtev posle toga je sporiji).
 Za tehnički test je dovoljno. Za pilot sa stvarnim podacima Free nije dovoljan
 (nema dužeg povratka u tačku vremena ni zakazanih snimaka).

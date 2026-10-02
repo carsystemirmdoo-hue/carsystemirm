@@ -74,7 +74,8 @@ Pretpostavke: opis stavke ~45 znakova, šifra ~10, `raw_cells` ~12 ćelija
 (~200 znakova), jedan izvorni dokument po fakturi.
 
 Formula: **≈ 1,2 KB po fakturi + ≈ 0,8 KB po stavci** (izvor + knjiženo).
-Primer: 8 stavki ≈ 7,5 KB → oko 130.000 takvih faktura po 1 GB, bez
+Primer: 8 stavki ≈ 7,5 KB → oko 65.000 takvih faktura na 0,5 GB (granica
+koju Neon konzola pokazuje za pilot projekat, vidi §5), bez
 `audit_log`-a, porudžbina, preporuka i rezerve za rast indeksa.
 
 **Zaključak se ne donosi bez stvarnih brojeva:** broj faktura godišnje, prosečan
@@ -84,7 +85,9 @@ BizniSoft izvoz iz §2.
 ## 5. Uslovi (zvanične stranice, provereno 2026-10-02)
 
 **Neon** (neon.com/pricing):
-- Free: 1 GB po projektu (20 GB ukupno na nalogu), 100 CU-sati po projektu,
+- Free: zvanična stranica navodi 1 GB po projektu (20 GB ukupno na nalogu),
+  ali konzola je pri pravljenju pilot projekta (2026-10-02) pokazala **0,5 GB** —
+  za procene važi strožih 0,5 GB dok se u konzoli ne potvrdi drugačije; 100 CU-sati po projektu,
   10 grana, istorija 6 h, 5 GB prenosa po projektu, gašenje posle 5 min, bez
   kartice.
 - Launch: bez mesečnog minimuma; $0,106 po CU-satu, $0,35 po GB-mesecu;

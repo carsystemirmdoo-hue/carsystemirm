@@ -10,8 +10,9 @@ računar samo za buduću sinhronizaciju.
 | Šta | Gde (privatno, van repozitorijuma) |
 |---|---|
 | Manifest talasa (otisci, broj, datum, partner, iznosi) | `~/.carsystem-private/talas-01-2025-01.json` |
-| Zbirovi iz manifesta (broj računa, stavki, partnera, neto, PDV, bruto) — **nisu nezavisna potvrda** | `~/.carsystem-private/talas-01-kontrolni-zbirovi.md` |
+| Zbirovi **izvedeni iz iste PDF arhive** (broj računa, stavki, partnera, neto, PDV, bruto) — **nisu nezavisna kontrola**; nezavisna potvrda je samo BizniSoft izveštaj | `~/.carsystem-private/talas-01-kontrolni-zbirovi.md` |
 | Tabela predloga veza za pregled kancelarije | `~/.carsystem-private/veze-talas-01.csv` |
+| Jednostavan list za kancelariju (firma, PIB, šifra iz BizniSoft-a, DA/NE) i povratak u pregledanu tabelu (`scripts/ops/office-link-sheet.mts`) | `~/.carsystem-private/kancelarija-veze-talas-01.csv` |
 | Fascikla talasa (kopije, provereni otisci) | `~/.carsystem-private/talasi/2025-01/` |
 | Rezervna kopija prazne pilot baze + proba vraćanja | `~/.carsystem-private/rezervne-kopije/` |
 | Paketi konektora 0.2.0 (kancelarijski i probni Windows) + `SHA256SUMS.txt` | `~/.carsystem-private/paketi/` |

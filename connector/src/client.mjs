@@ -45,6 +45,21 @@ const PODRAZUMEVAN_TIMEOUT_MS = 30_000;
  * inače bi jedna pogrešna vrednost u konfiguraciji poslala potpisane zahteve i
  * poslovni sadržaj preko čistog HTTP-a.
  */
+const LOOPBACK = new Set(["127.0.0.1", "localhost", "[::1]"]);
+
+/**
+ * `http://` prema adresi istog računara — samo uz `CS_CONNECTOR_ALLOW_LOOPBACK_HTTP=1`
+ * i samo kada proces NIJE spakovan konektor (`CS_CONNECTOR_PACKAGED`). Spakovan
+ * konektor za kancelariju i dalje prima isključivo HTTPS.
+ */
+export function dozvoljenLoopbackHttp(u, env = process.env) {
+  return (
+    env.CS_CONNECTOR_ALLOW_LOOPBACK_HTTP === "1" &&
+    env.CS_CONNECTOR_PACKAGED !== "1" &&
+    LOOPBACK.has(u.hostname)
+  );
+}
+
 export function proveriOrigin(origin, { dozvoliHttp = false } = {}) {
   let u;
   try {
@@ -56,6 +71,9 @@ export function proveriOrigin(origin, { dozvoliHttp = false } = {}) {
     // U redu.
   } else if (u.protocol === "http:" && dozvoliHttp) {
     // Samo test režim.
+  } else if (u.protocol === "http:" && dozvoljenLoopbackHttp(u)) {
+    // Lokalni server na ISTOM računaru (uvoz arhive sa Mac-a): saobraćaj ne
+    // napušta mašinu. Samo izričito i nikad u spakovanom konektoru.
   } else {
     throw new ClientError("origin_not_https", "Serverski origin mora biti HTTPS.");
   }

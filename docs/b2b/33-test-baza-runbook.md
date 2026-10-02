@@ -154,6 +154,7 @@ uslovima Vercela Pro plan za komercijalnu upotrebu).
   [35](35-zahtev-za-izvoze-biznisoft.md).
 - [ ] Storna, potvrda partnera prema šifarniku i fakture prethodnih godina
   (sa odvojenim završnim testom): [37](37-storna-partneri-i-prethodne-godine.md).
+- [ ] Uvoz arhive sa Mac-a (konektor kao uređaj, lokalni server) i Windows konektor 0.2.0 za ponedeljak: [42](42-uvoz-sa-maca-i-windows-konektor.md).
 - [ ] Lokalni pilot build, usklađene šifre, rezervna kopija, kontrole talasa i preostale prepreke: [41](41-pilot-build-kontrole-i-prepreke.md).
 - [ ] Odluke (Neon Free, `CSRM`), prvi korak za pilot bazu, uputstvo za kontrolni zbir, istorijski rabati, kandidati za nalog i tok aktivacije — spisak sledećih zadataka: [40 §7](40-pilot-priprema-rabati-i-nalozi.md).
 - [ ] Veza kupaca za talas, koraci i promenljive za pilot, kontrolni zbir za januar 2025: [39](39-veza-kupaca-i-pilot-koraci.md). Aleksandrov MFA se vezuje u pilotu kada je prisutan (39 §2, korak 8).

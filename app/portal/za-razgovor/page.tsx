@@ -211,8 +211,8 @@ export default async function TalkListPage({
         title="Za razgovor"
         description={
           all
-            ? "Kupci poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca; osnov je na kartici kupca."
-            : "Vaši dodeljeni kupci, poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca."
+            ? "Kupci poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca; osnov je na kartici kupca. Artikli po kupcu su iz redosleda R1 (eksperiment)."
+            : "Vaši dodeljeni kupci, poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca. Artikli po kupcu su iz redosleda R1 (eksperiment)."
         }
       />
 

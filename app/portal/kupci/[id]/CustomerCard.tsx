@@ -6,6 +6,7 @@ import { CONFIDENCE_LABELS } from "@/lib/recommendations/policy.mjs";
 import { ARTICLE_STATUS_LABELS, srDate } from "@/lib/recommendations/customerSummary.mjs";
 import {
   CONFIDENCE_MEANING,
+  legacySuggestions,
   MAIN_LIMIT,
   roughInterval,
   suggestionReason,
@@ -255,12 +256,20 @@ function SuggestionCard({
 export function CustomerSuggestions({
   profile,
   identities = {},
+  order = "r1",
 }: {
   profile: CustomerProfile;
   identities?: Record<string, ArticleIdentity>;
+  /** „r1" = eksperimentalni redosled; „dosadasnji" = raniji, samo za poređenje. */
+  order?: "r1" | "dosadasnji";
 }) {
   if (profile.articles.length === 0) return null;
-  const { top, main, weak } = profile.suggestions;
+  const legacy = order === "dosadasnji";
+  // Isti artikli i isti `cadence_v1` rezultat; razlikuje se samo izbor i redosled.
+  const { top, main, weak } =
+    legacy && profile.hasActiveRun && profile.freshness.state !== "new_documents"
+      ? legacySuggestions(profile.articles)
+      : profile.suggestions;
   const rest = main.slice(top.length);
   const shown = [...main, ...weak];
   const perArticle = shown.map((a) => suggestionLimits(identities[a.articleCode]));
@@ -271,17 +280,36 @@ export function CustomerSuggestions({
     <SuggestionCard key={a.articleCode} a={a} identity={identities[a.articleCode]} common={common} />
   );
   return (
-    <section className="portal-panel cs-suggestions" aria-labelledby="cs-sugg-title">
+    <section className="portal-panel cs-suggestions" id="predlozi" aria-labelledby="cs-sugg-title">
       <div className="portal-section-header">
         <div>
           <h2 id="cs-sugg-title">
             Predlozi za razgovor{main.length ? ` (${top.length} od ${main.length})` : ""}
           </h2>
-          <p>
-            Do {MAIN_LIMIT} artikala, poređanih po tome koliko je termin sada aktuelan, po pouzdanosti i
-            po broju kupovina — ne samo po proteklom vremenu. Iz faktura se ne vidi lager ni potrošnja
-            kupca: termin je ritam ranijih kupovina, ne datum kada mu nešto treba.
-          </p>
+          {legacy ? (
+            <p>
+              Dosadašnji redosled, samo za poređenje: ranije redovni artikli, pa oni koji kasne, pa
+              oni u roku — bez obzira na pouzdanost i starost poslednje kupovine. Pouzdanost govori
+              koliko je ritam ujednačen, nije verovatnoća kupovine.
+            </p>
+          ) : (
+            <p>
+              Do {MAIN_LIMIT} artikala, poređanih po tome koliko je termin sada aktuelan, po pouzdanosti i
+              po broju kupovina — ne samo po proteklom vremenu. Iz faktura se ne vidi lager ni potrošnja
+              kupca: termin je ritam ranijih kupovina, ne datum kada mu nešto treba. Pouzdanost govori
+              koliko je ritam ujednačen, nije verovatnoća kupovine.
+            </p>
+          )}
+        </div>
+        <div className="cs-sugg-order">
+          <span className="cs-sugg-exp">
+            {legacy ? "Dosadašnji redosled" : "Redosled R1 · eksperiment"}
+          </span>
+          <a
+            href={`/portal/kupci/${encodeURIComponent(profile.customerId)}${legacy ? "" : "?redosled=dosadasnji"}#predlozi`}
+          >
+            {legacy ? "Vratite R1" : "Uporedite sa dosadašnjim"}
+          </a>
         </div>
       </div>
       <div className="portal-panel-body cs-sugg-body">

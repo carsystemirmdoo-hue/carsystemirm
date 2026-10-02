@@ -17,10 +17,14 @@ export const dynamic = "force-dynamic";
 
 export default async function CustomerDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ redosled?: string }>;
 }) {
   const { id } = await params;
+  // Poređenje sa dosadašnjim redosledom; sve ostalo (osim „dosadasnji") je R1.
+  const order = (await searchParams).redosled === "dosadasnji" ? "dosadasnji" : "r1";
   const user = await requireCapability("view:kupci", `/portal/kupci/${id}`);
 
   // Provera se radi pre bilo kakvog čitanja podataka: menjanje ID-a u adresi
@@ -61,7 +65,7 @@ export default async function CustomerDetailPage({
       {profile ? (
         <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} />
       ) : null}
-      {profile ? <CustomerSuggestions profile={profile} identities={identities} /> : null}
+      {profile ? <CustomerSuggestions profile={profile} identities={identities} order={order} /> : null}
       {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
       {profile && crossSell ? (
         <CustomerCrossSell

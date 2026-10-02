@@ -60,14 +60,29 @@ test("neuskladjen zbir NIKAD tiho ne postaje validna faktura", async () => {
   assert.ok(!/\d{3}/.test(doc.validationDetail ?? ""));
 });
 
-test("nastavak tabele ide u unsupported_requires_sample", async () => {
+test("nastavak tabele sa prekinutom numeracijom ide u unsupported_requires_sample", async () => {
   /*
-   * Nijedan stvaran uzorak ne dokazuje taj oblik, pa parser ne pokusava
-   * spajanje. Dokument ostaje vidljiv kancelariji.
+   * Strana 2 počinje numeraciju ispočetka — to nije jedna tabela, pa parser
+   * ne spaja strane. Dokument ostaje vidljiv kancelariji.
    */
   const doc = await parse("nastavak-tabele.pdf");
   assert.equal(doc.validationStatus, "unsupported_requires_sample");
   assert.match(doc.validationDetail ?? "", /nastavlja/);
+});
+
+test("nastavak tabele sa neprekidnom numeracijom: stavke sa obe strane, zbir se slaže", async () => {
+  // Oblik izmeren nad stvarnim višestraničnim fakturama (sintetičke vrednosti).
+  const doc = await parse("nastavak-tabele-neprekidno.pdf");
+  assert.equal(doc.validationStatus, "valid");
+  assert.equal(doc.lines.length, 3);
+  assert.deepEqual(doc.lines.map((l) => l.lineNumber), [1, 2, 3]);
+  assert.equal(doc.totals.ok, true);
+});
+
+test("negativne stavke (povrat pod naslovom fakture) nikad ne postaju faktura", async () => {
+  const doc = await parse("negativne-stavke.pdf");
+  assert.equal(doc.validationStatus, "unsupported_requires_sample");
+  assert.match(doc.validationDetail ?? "", /negativne/);
 });
 
 test("dokument koji nije BizniSoft je unparsable", async () => {

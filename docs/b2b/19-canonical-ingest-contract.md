@@ -77,10 +77,13 @@ tip ne može tiho odlutati.
 |---|---|---|
 | `schema_version` | `1` | Nepoznata → odbijena, ne tumači se |
 | `canonicalization_version` | `1` | Vezana u sam hash |
-| `parser_version` | `biznisoft-pdf-1` | **Izričita lista**, `SUPPORTED_PARSER_VERSIONS` |
+| `parser_version` | `biznisoft-pdf-2` | **Izričita lista**, `SUPPORTED_PARSER_VERSIONS` |
 
 Lista verzija čitača je **niz**, ne jedna vrednost: prelazni period u kome važe
-dve je normalan, ne izuzetak.
+dve je normalan, ne izuzetak. Izuzetak je verzija za koju se zna da daje
+pogrešan sadržaj — ona se uklanja odmah. Tako je `biznisoft-pdf-1` uklonjen
+(2026-10-02): na stvarnim fakturama je pogrešno čitao šifru partnera. Pravilo
+verzionisanja: [36 §7](36-provera-stvarnih-faktura-i-pilot-okruzenje.md).
 
 ### Decimale
 

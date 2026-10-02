@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "canonicalization_version": 1,
-  "parser_version": "biznisoft-pdf-1",
+  "parser_version": "biznisoft-pdf-2",
   "source_system": "biznisoft",
   "issuer": {
     "code": "QA01"

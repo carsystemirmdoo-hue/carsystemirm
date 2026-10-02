@@ -52,6 +52,7 @@ i `FEATURE_PARTNER_REGISTRY=1` (samo lokalno, samo za ovaj rad).
 9. `wave-control.mts posle --bs-broj … --bs-neto … --bs-pdv … --bs-bruto …` —
    sve ✔. Ako nešto padne: ništa dalje; povratak na granu `pre-talas-01`.
 10. `pilot-backup.sh dump` posle talasa.
+11. Preporuke i predlozi za razgovor posle talasa: [47 §4](47-ponedeljak-pilot.md).
 
 Sledeći talasi (mesec po mesec) ponavljaju 1–2, 5–6, 8–10; uređaj ostaje
 registrovan do kraja arhive, zatim opoziv i brisanje stavke iz keychain-a.

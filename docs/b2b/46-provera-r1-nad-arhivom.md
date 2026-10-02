@@ -1,6 +1,6 @@
 # 46 — Provera redosleda R1 nad celom arhivom (lokalno)
 
-**Status (2026-10-02): urađeno lokalno nad već dostavljenom arhivom; ništa
+**Status (2026-10-02): R1 prihvaćen kao početni redosled za pilot (uz poređenje sa dosadašnjim i odvojene slabije signale). Urađeno lokalno nad već dostavljenom arhivom; ništa
 nije upisano u bazu (ni lokalnu ni Neon), nema deploymenta. R1 ostaje
 eksperiment; `cadence_v1` nije menjan.** Prethodni korak: [45](45-predlozi-za-razgovor-i-filter.md).
 
@@ -22,9 +22,27 @@ Oba rade nad ISTIM rezultatom `cadence_v1`; razlikuju se samo izbor i redosled.
 - `lib/recommendations/rankingBacktest.mjs` (čista funkcija, sa testovima):
   na svakom preseku `cadence_v1` se računa **samo nad kupovinama do tog dana**;
   budući događaji ulaze samo u ocenu pogotka (test „presek ne vidi budućnost").
-- Preseci: prvi dan svakog meseca od 2022-01 do (poslednji datum u arhivi −
-  horizont) — 56 preseka za H = 45.
-- Pogodak: artikal iz prvih 5 kupljen u narednih H dana (30 / 45 / 60).
+- **Pun budući period:** poslednji potpuni dan arhive je **30. 9. 2026**
+  (arhiva je generisana 2. 10.; 1. 10. se ne smatra potpunim, iako je gustina
+  računa do kraja uobičajena). Presek ulazi u horizont H samo ako je ceo prozor
+  (presek, presek + H] ≤ 30. 9.; skripta to proverava za svaki presek i staje
+  ako nije. Preseci: prvi dan meseca od 2022-01 do 2026-08-01 — 56 za svaki
+  horizont (za H = 30 je time izuzet presek 2026-09-01, čiji je prozor zahvatao
+  1. 10.; za H = 60 poslednji prozor se završava tačno 30. 9.).
+- **Pogodak:** artikal sa liste kupac je kupio bar jednom u prozoru
+  (presek, presek + H] — na bilo kojoj važećoj fakturi, bilo koja pozitivna
+  količina, nikad stornirana (varijanta B). Isti artikal se broji jednom.
+  Pogodak meri samo da li je redosled stavio napred artikal koji je kupac
+  ponovo uzeo — ne da je razgovor pomogao, ni koliko je kupio.
+- **Stopa preseka** = pogodaka / **prikazanih** predloga (1–5). Kad pravilo
+  ima manje od pet predloga, delilac je stvaran broj prikazanih; presek bez
+  ijednog predloga nema stopu i ne ulazi u pareno poređenje (broji se posebno
+  kao „samo R0 / samo R1"). Na parenim presecima (H = 45) R1 je imao 1 predlog
+  u 1.188, a 5 u 3.658 preseka; R0 1 u 396, a 5 u 4.776.
+- **Prosek po kupcu — dva načina:** (a) prosek stopa preseka (svaki presek
+  ista težina; ovo je u tabeli); (b) zbirno: svi pogoci kupca / svi njegovi
+  prikazani predlozi. Rezultat je isti (H = 45: R0 16–17% → R1 32%); u (b) R1
+  je lošiji kod 11 kupaca umesto 4, za 1–4 procentna poena.
 - **Makro po kupcu:** prosek kupca preko njegovih preseka, pa prosek i medijana
   preko kupaca — svaki kupac ima jednu težinu. Upoređuju se **pareni** preseci
   (oba pravila imaju bar jedan predlog); kupac ulazi u poređenje sa ≥ 3 parena
@@ -60,7 +78,13 @@ Razlika A/B je najviše 2 procentna poena (medijana u grupi „novi", 8 kupaca),
 a u ukupnom proseku nula — 27 originala od 11.490 ne menja zaključak. Tabele
 ispod su varijanta A.
 
-## 4. Rezultati (H = 45, 265 kupaca, makro po kupcu)
+## 4. Rezultati (H = 45, makro po kupcu)
+
+**265 / 264 / 167:** u ulazu je 265 šifara partnera. Jedan kupac ima jedinu
+kupovinu 15. 9. 2026 — posle poslednjeg preseka (1. 8.), pa ni na jednom
+preseku nema istoriju i ne ulazi u tabelu (264). Od njih, 167 ima bar 3
+preseka na kojima oba pravila imaju predloge („uporedivo"); ostali su
+uglavnom mali, novi ili neaktivni kupci sa premalo procena.
 
 | Grupa | Kupaca (uporedivo / ukupno) | R0 prosek (med.) | R1 prosek (med.) | R1 bolji / isto / lošiji |
 |---|---|---|---|---|
@@ -75,7 +99,7 @@ ispod su varijanta A.
 | mali (< 10) | 26 / 121 | 9% (4%) | 10% (5%) | 3 / 21 / 2 |
 
 Osnovna stopa (bilo koji artikal sa ≥ 2 kupovine kupljen u prozoru): 16%.
-Isti smer na H = 30 (svi: 13% → 24%) i H = 60 (20% → 37%).
+Isti smer na H = 30 (svi: 12% → 24%) i H = 60 (20% → 37%), sa istih 56 preseka.
 
 **Kada R1 ćuti, a R0 predlaže** (2.333 preseka; 1.764 neaktivni, 463
 povremeni): R0 tamo pogađa 3%, slabiji signali R1 7%, osnovna stopa 2%. Tišina

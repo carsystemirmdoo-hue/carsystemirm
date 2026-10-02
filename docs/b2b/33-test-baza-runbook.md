@@ -153,6 +153,7 @@ uslovima Vercela Pro plan za komercijalnu upotrebu).
   [35](35-zahtev-za-izvoze-biznisoft.md).
 - [ ] Storna, potvrda partnera prema šifarniku i fakture prethodnih godina
   (sa odvojenim završnim testom): [37](37-storna-partneri-i-prethodne-godine.md).
+- [ ] Veza kupaca za talas, koraci i promenljive za pilot, kontrolni zbir za januar 2025: [39](39-veza-kupaca-i-pilot-koraci.md). Aleksandrov MFA se vezuje u pilotu kada je prisutan (39 §2, korak 8).
 - [ ] Prvi talas istorijskih faktura, blokeri i pilot baza: [38](38-zavrsni-test-prvi-talas-i-pilot-baza.md).
 - [ ] Okruženje za stvarne podatke i prvi kontrolisani uvoz:
   [36](36-provera-stvarnih-faktura-i-pilot-okruzenje.md). Stvarni podaci nikad

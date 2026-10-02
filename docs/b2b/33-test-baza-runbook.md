@@ -1,8 +1,9 @@
 # 33 — Testna baza i zaštićen Preview: runbook
 
-**Status (2026-10-01): alati pripremljeni i probani nad lokalnim Postgres 17;
-Neon projekat i Preview još ne postoje.** Sve što dira Neon ili Vercel radi
-čovek sa pristupom firminim nalozima, korak po korak ispod.
+**Status (2026-10-02): Neon test baza i zaštićen Preview rade nad
+sintetičkim podacima; smoke provera 30/30.** Sve što dira Neon ili Vercel radi
+čovek sa pristupom firminim nalozima, korak po korak ispod. Otvoreni zadaci su
+u §10.
 
 Cilj: **zatvoren tehnički test** novog portala na Vercel **Preview**-u, nad
 zasebnom testnom bazom sa **isključivo sintetičkim podacima**. Produkcija
@@ -138,3 +139,15 @@ se ne prenose u produkciju — produkcija dobija nove.
 Neon Free i Vercel Preview: bez plaćanja. Plaćanje postaje realno pre pilota
 sa stvarnim podacima (plan baze sa backup-om i povratkom u tačku vremena; po
 uslovima Vercela Pro plan za komercijalnu upotrebu).
+
+## 10. Otvoreno
+
+- [ ] **Aleksandar lično vezuje MFA, čuva kodove za oporavak i proverava
+  ponovnu prijavu — pre korišćenja vlasničkog naloga.** Postupak: §5 korak 9.
+  Stanje 2026-10-02: drugi faktor nije vezan, važećih dozvola 0. Dozvola se
+  izdaje tek kada je on za računarom (važi 30 min); obavezni drugi faktor
+  (`PORTAL_MFA_MODE=enforced`) ostaje uključen.
+- [ ] Ručna provera promene uloge sintetičkog naloga kancelarije na Preview-u
+  (§7) — tek kada Vlasnik ima vezan drugi faktor.
+- [ ] Spisak izvoza od kancelarije / BizniSoft-a:
+  [35](35-zahtev-za-izvoze-biznisoft.md).

@@ -25,7 +25,7 @@ pravi poseban projekat baze.
 |---|---|
 | Neon (test) | samo sintetika: 3 fakture, 5 stavki, 0 izvornih dokumenata, kupci A/B, demo cenovnik |
 | Lokalno, van gita | stvarni BizniSoft PDF-ovi u privatnom folderu (vidi [16](16-biznisoft-pdf-evidence-audit.md)); otisci i rezultati lokalne obrade |
-| Treba iz BizniSoft-a | šifarnik partnera (šifra, naziv, PIB, MB, adresa); šifarnik artikala; **cenovnik sa datumom važenja**; rabati po kupcu/grupi; istorija fakturisanja za ceo period; uzorci storna/povrata/knjižnog odobrenja ([18 §7](18-data-readiness.md)) |
+| Treba iz BizniSoft-a (spisak sa obaveznim poljima: [35](35-zahtev-za-izvoze-biznisoft.md)) | šifarnik partnera (šifra, naziv, PIB, MB, adresa); šifarnik artikala; **cenovnik sa datumom važenja**; rabati po kupcu/grupi; istorija fakturisanja za ceo period; uzorci storna/povrata/knjižnog odobrenja ([18 §7](18-data-readiness.md)) |
 
 ## 3. Postupak uvoza
 

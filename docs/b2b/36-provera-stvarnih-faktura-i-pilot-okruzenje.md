@@ -32,7 +32,7 @@ tolerancija ostaje jedna para.
 | rabat i PDV u jednom elementu | isti raspored štampa „10,00 20%" | deli se samo taj oblik i samo kada je kolona PDV-a prazna; podelu potvrđuje aritmetika |
 | ukupan iznos nije pronađen | isti raspored koristi „Vrednost sa PDV:" | rezerva samo kada glavne oznake nema i oznaka je jedinstvena |
 | prva reč naziva zalepljena uz šifru artikla | isti raspored: naziv počinje na x≈78 | granica šifre i naziva na x=65 (šifra ≤ 50, naziv ≥ 78) |
-| odstupanje do 5 para na stavci | BizniSoft zaokružuje osnovicu, pa rabat zasebno | ista formula za portal i konektor; tačna za sve stavke |
+| odstupanje do 5 para na stavci | posmatrani dokumenti odgovaraju modelu: osnovica se zaokruži, pa rabat zasebno | ista formula za portal i konektor; tačna za sve stavke |
 | polovina pare zaokružena nadole | binarni zapis (1,005 × 100 = 100,4999…) | zaokruživanje preko `toPrecision(15)` |
 | tabela na više strana odbijena | parser nije spajao strane | spaja se samo kada je numeracija 1…N neprekidna; zbir svih strana mora odgovarati |
 | drugi red naziva izgubljen | naziv se prelama 10 tačaka ispod stavke | red sa samo nazivom neposredno ispod stavke dopunjuje opis — nikad iznose |

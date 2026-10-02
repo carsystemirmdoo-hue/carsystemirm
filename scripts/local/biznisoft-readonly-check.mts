@@ -2,7 +2,7 @@
  * Provera stvarnih BizniSoft PDF faktura BEZ UPISA — pre prvog uvoza.
  *
  *   BIZNISOFT_SAMPLES=/privatni/folder [BIZNISOFT_PREFIX=Fak] \
- *   [BIZNISOFT_PRIVATE_REPORT=~/.carsystem-private/provera.json] \
+ *   [BIZNISOFT_RECURSIVE=1] [BIZNISOFT_PRIVATE_REPORT=~/.carsystem-private/provera.json] \
  *     npx tsx --tsconfig db/integration/tsconfig.test.json \
  *       scripts/local/biznisoft-readonly-check.mts
  *
@@ -42,7 +42,19 @@ if (report && path.resolve(report).startsWith(repoRoot + path.sep)) {
 }
 
 const prefix = process.env.BIZNISOFT_PREFIX ?? "";
-const files = (await readdir(dir)).filter((f) => /\.pdf$/i.test(f) && f.startsWith(prefix)).sort();
+const recursive = process.env.BIZNISOFT_RECURSIVE === "1";
+
+/** PDF-ovi u folderu (i potfolderima uz BIZNISOFT_RECURSIVE=1); simbolične veze se preskaču. */
+async function collect(root: string): Promise<string[]> {
+  const found: string[] = [];
+  for (const entry of await readdir(root, { withFileTypes: true })) {
+    const full = path.join(root, entry.name);
+    if (entry.isDirectory() && recursive) found.push(...(await collect(full)));
+    else if (entry.isFile() && /\.pdf$/i.test(entry.name) && entry.name.startsWith(prefix)) found.push(full);
+  }
+  return found;
+}
+const files = (await collect(dir)).sort();
 if (files.length === 0) {
   console.error("Nema PDF-ova u zadatom folderu.");
   process.exit(1);
@@ -53,34 +65,46 @@ const rows: Row[] = [];
 const privateRows: Record<string, unknown>[] = [];
 const byHash = new Map<string, string>();
 const byNumber = new Map<string, string>();
-const duplicates: string[] = [];
+const duplicates: { a: string; b: string; kind: "isti_bajtovi" | "isti_poslovni_broj" }[] = [];
+const count = (bucket: Record<string, number>, key: string) => { bucket[key] = (bucket[key] ?? 0) + 1; };
 const tally: Record<string, number> = {};
+const kinds: Record<string, number> = {};
+const totals: Record<string, number> = {};
+const docsWithLineIssue: Record<string, number> = {};
+const lineStatusAll: Record<string, number> = {};
+const partner: Record<string, number> = {};
+const pibs: Record<string, number> = {};
+const dates: Record<string, number> = {};
 const taxRates: Record<string, number> = {};
 let lineTotal = 0;
+let linesWithDiscount = 0;
+const width = String(files.length).length;
 
-for (const [i, name] of files.entries()) {
-  const label = `U${String(i + 1).padStart(2, "0")}`;
+for (const [i, file] of files.entries()) {
+  const label = `U${String(i + 1).padStart(width, "0")}`;
+  const rel = path.relative(dir, file);
   let doc;
   try {
-    doc = await parseBiznisoftPdf(new Uint8Array(await readFile(path.join(dir, name))));
-  } catch {
+    doc = await parseBiznisoftPdf(new Uint8Array(await readFile(file)));
+  } catch (error) {
+    count(tally, "greska_citanja");
     rows.push({ ozn: label, status: "greska_citanja" });
-    tally.greska_citanja = (tally.greska_citanja ?? 0) + 1;
-    privateRows.push({ label, file: name, status: "greska_citanja" });
+    privateRows.push({ label, file: rel, status: "greska_citanja", error: (error as Error).message });
     continue;
   }
-  tally[doc.validationStatus] = (tally[doc.validationStatus] ?? 0) + 1;
+  count(tally, doc.validationStatus);
+  count(kinds, doc.documentKind);
+  count(totals, doc.totals.ok ? "ok" : String(doc.totals.reason ?? "-"));
   lineTotal += doc.lines.length;
 
   const sameBytes = byHash.has(doc.fileHash);
-  if (sameBytes) duplicates.push(`${label} = ${byHash.get(doc.fileHash)} (isti bajtovi)`);
+  if (sameBytes) duplicates.push({ a: label, b: byHash.get(doc.fileHash)!, kind: "isti_bajtovi" });
   else byHash.set(doc.fileHash, label);
   const number = doc.header.documentNumber.value;
   if (number) {
-    // Poređenje po otisku broja — sam broj se ne čuva u memoriji izveštaja.
     const key = createHash("sha256").update(`${doc.documentKind}|${number}`).digest("hex");
     const prev = byNumber.get(key);
-    if (prev && !sameBytes) duplicates.push(`${label} ~ ${prev} (isti poslovni broj, drugi bajtovi)`);
+    if (prev && !sameBytes) duplicates.push({ a: label, b: prev, kind: "isti_poslovni_broj" });
     if (!prev) byNumber.set(key, label);
   }
 
@@ -88,12 +112,18 @@ for (const [i, name] of files.entries()) {
   let withDiscount = 0;
   for (const line of doc.lines) {
     const s = String(line.status).split(":")[0];
-    lineStatus[s] = (lineStatus[s] ?? 0) + 1;
+    count(lineStatus, s);
+    count(lineStatusAll, s);
     if (typeof line.discountPercent === "number" && line.discountPercent !== 0) withDiscount++;
-    if (typeof line.taxPercent === "number") taxRates[String(line.taxPercent)] = (taxRates[String(line.taxPercent)] ?? 0) + 1;
+    if (typeof line.taxPercent === "number") count(taxRates, String(line.taxPercent));
   }
+  linesWithDiscount += withDiscount;
+  for (const s of Object.keys(lineStatus)) if (s !== "ok") count(docsWithLineIssue, s);
   const pib = classifyPib(doc.header.customerPib.value).status;
-  rows.push({
+  count(partner, doc.header.partnerCode.status);
+  count(pibs, pib);
+  count(dates, doc.header.documentDate.status);
+  const row = {
     ozn: label,
     str: doc.pageCount,
     vrsta: doc.documentKind,
@@ -105,21 +135,43 @@ for (const [i, name] of files.entries()) {
     pib,
     datum: doc.header.documentDate.status,
     status: doc.validationStatus,
+  };
+  rows.push(row);
+  privateRows.push({
+    ...row, file: rel, detail: doc.validationDetail,
+    documentNumber: number, partnerCode: doc.header.partnerCode.value, documentDate: doc.header.documentDate.value,
   });
-  privateRows.push({ label, file: name, status: doc.validationStatus, detail: doc.validationDetail });
 }
 
-console.log(`dokumenata: ${files.length}`);
-console.table(rows);
+const show = (title: string, bucket: Record<string, number>) =>
+  console.log(`  ${title}: ${Object.entries(bucket).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(" · ") || "-"}`);
+
+console.log(`PDF fajlova: ${files.length}`);
+// Tabela po dokumentu samo za mali skup; za veliki ide u privatni izveštaj.
+if (files.length <= 50) console.table(rows);
 console.log("--- zbirno ---");
-for (const [k, v] of Object.entries(tally)) console.log(`  ${k}: ${v}`);
-console.log(`  stavki ukupno: ${lineTotal}`);
+show("status", tally);
+show("vrsta dokumenta", kinds);
+show("zbir prema odštampanom", totals);
+show("dokumenata sa problemom u stavkama", docsWithLineIssue);
+show("stavke po statusu", lineStatusAll);
+show("šifra partnera", partner);
+show("PIB kupca", pibs);
+show("datum", dates);
+console.log(`  stavki ukupno: ${lineTotal} · sa rabatom: ${linesWithDiscount}`);
 console.log(`  stope PDV-a (stavki po stopi): ${Object.entries(taxRates).map(([k, v]) => `${k}%:${v}`).join(", ") || "-"}`);
 console.log(`  jedinstvenih otisaka: ${byHash.size} / ${files.length}`);
-console.log(`  duplikati: ${duplicates.length ? "" : "nema"}`);
-for (const d of duplicates) console.log(`    ${d}`);
+const dupByKind: Record<string, number> = {};
+for (const d of duplicates) count(dupByKind, d.kind);
+show("duplikati", dupByKind);
+for (const d of duplicates.slice(0, 20)) console.log(`    ${d.a} ↔ ${d.b} (${d.kind})`);
+if (duplicates.length > 20) console.log(`    … još ${duplicates.length - 20} u privatnom izveštaju`);
 
 if (report) {
-  await writeFile(report, JSON.stringify({ folder: dir, generated: new Date().toISOString(), rows: privateRows }, null, 2), { mode: 0o600 });
-  console.log("Privatni izveštaj (oznaka → fajl) upisan; putanja se ne ispisuje.");
+  await writeFile(
+    report,
+    JSON.stringify({ folder: dir, generated: new Date().toISOString(), duplicates, rows: privateRows }, null, 2),
+    { mode: 0o600 },
+  );
+  console.log("Privatni izveštaj (oznaka → fajl i podaci dokumenta) upisan; putanja se ne ispisuje.");
 }

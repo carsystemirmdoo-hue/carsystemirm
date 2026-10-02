@@ -10,6 +10,8 @@ import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
+import { defaultAsOfDate } from "@/lib/recommendations/asOfDate.mjs";
+import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import {
   CONFIDENCE_LABELS,
   CONFIDENCE_LEVELS,
@@ -214,13 +216,12 @@ export default async function RecommendationsPage({
     statusi.reduce((s, k) => s + (brojaci[k] ?? 0), 0);
 
   /*
-   * Podrazumevani `as of` je dan poslednjeg uspešnog prolaza, ne „danas".
-   *
-   * Sutra u kancelariji se recompute pokreće za tačno određen dan i taj dan
-   * ulazi u izveštaj. Polje koje se samo puni današnjim datumom navelo bi na
-   * pokretanje bez razmišljanja o tome nad čime se računa.
+   * Podrazumevani `as of` je dan poslednjeg uspešnog prolaza, ne „danas" —
+   * obračun se ponavlja za tačno određen dan koji ulazi u izveštaj. Pre prvog
+   * obračuna polje dobija današnji dan (Beograd); prazno polje je ranije tiho
+   * blokiralo slanje. Datum se u polju može promeniti.
    */
-  const podrazumevaniDatum = run?.asOfDate ?? "";
+  const podrazumevaniDatum = defaultAsOfDate(run?.asOfDate, belgradeDate(new Date()));
 
   return (
     <>

@@ -2,8 +2,8 @@ import { Badge } from "@/components/portal/PortalPrimitives";
 import type { ArticleIdentity } from "@/lib/ordering/ordering-service";
 import type { CrossSell } from "@/lib/recommendations/cross-sell";
 import type { CustomerArticle, CustomerProfile } from "@/lib/recommendations/customer-profile";
-import { CONFIDENCE_LABELS, STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
-import { srDate } from "@/lib/recommendations/customerSummary.mjs";
+import { CONFIDENCE_LABELS } from "@/lib/recommendations/policy.mjs";
+import { ARTICLE_STATUS_LABELS, srDate } from "@/lib/recommendations/customerSummary.mjs";
 
 type Tone = "success" | "warning" | "danger" | "neutral";
 
@@ -15,6 +15,7 @@ const STATUS_TONE: Record<string, Tone> = {
   not_yet: "neutral",
   provisional: "neutral",
   insufficient_history: "neutral",
+  not_computed: "neutral",
 };
 
 function dana(n: number) {
@@ -23,7 +24,7 @@ function dana(n: number) {
 }
 
 function statusLabel(status: string) {
-  return STATUS_LABELS[status as keyof typeof STATUS_LABELS] ?? status;
+  return ARTICLE_STATUS_LABELS[status as keyof typeof ARTICLE_STATUS_LABELS] ?? status;
 }
 
 /**

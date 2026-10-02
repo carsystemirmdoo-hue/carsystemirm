@@ -6689,6 +6689,17 @@ body:has(.portal-login-root) {
   cursor: not-allowed;
   opacity: 0.55;
 }
+/* Obračun preporuka: polje i dugme u redu, poruka ispod — ne gura polje. */
+.portal-recompute-form {
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.portal-recompute-form .portal-field {
+  flex: 0 0 auto;
+}
+.portal-recompute-form small {
+  flex-basis: 100%;
+}
 
 /* ---- Sistemski pragovi ---- */
 .portal-settings-form {

@@ -10,6 +10,7 @@ import {
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { registerExternalIdentifier } from "@/lib/commercial/identity-service";
+import { buildPartnerRegister, invoiceFormPartnerCode } from "@/lib/commercial/partnerRegisterMatch.mjs";
 import { readXlsx } from "@/lib/import/xlsx/readXlsx.mjs";
 import { formatMegabytes, MAX_UPLOAD_FILE_BYTES } from "@/lib/import/upload-limits.mjs";
 import {
@@ -338,7 +339,13 @@ export async function linkPartnerToCustomer(
     | { issuerCode: string; partnerCode: string; mode: "create"; reason: string }
     | { issuerCode: string; partnerCode: string; mode: "attach"; customerId: string; reason: string },
   actor: PartnerActor,
-): Promise<{ customerId: string; identityStatus: string; conflict: string | null }> {
+): Promise<{
+  customerId: string;
+  identityStatus: string;
+  conflict: string | null;
+  invoiceCode: string | null;
+  invoiceFormStatus: "same_as_source" | "linked" | "already_linked" | "left_for_office" | "ambiguous";
+}> {
   const reason = input.reason.trim();
   if (reason.length < 3) {
     throw new PartnerRegistryError("Povezivanje traži razlog (najmanje 3 znaka).", "missing_reason");
@@ -427,18 +434,61 @@ export async function linkPartnerToCustomer(
     actor,
   );
 
+  /*
+   * Fakture štampaju šifru sa 5 cifara („00028"), registar je nosi bez nula
+   * („28"). Uvoz faktura povezuje kupca po TAČNOJ šifri sa fakture, pa se uz
+   * izvornu šifru upisuje i oblik sa fakture — samo kada je nedvosmislen
+   * (ključ bez nula jedinstven u ovom uvozu registra). Već povezan, sukobljen
+   * ili isključen oblik sa fakture se ne dira; to razrešava kancelarija.
+   */
+  const invoiceCode = invoiceFormPartnerCode(
+    partner.partnerCode,
+    buildPartnerRegister(current.map((p) => ({ code: p.partnerCode, pib: p.pib }))),
+  );
+  let invoiceFormStatus: "same_as_source" | "linked" | "already_linked" | "left_for_office" | "ambiguous" =
+    invoiceCode === null ? "ambiguous" : invoiceCode === partner.partnerCode ? "same_as_source" : "linked";
+  if (invoiceCode !== null && invoiceCode !== partner.partnerCode) {
+    const [existingInvoiceForm] = await db
+      .select({ customerId: customerExternalIdentifiers.customerId, status: customerExternalIdentifiers.status })
+      .from(customerExternalIdentifiers)
+      .where(
+        and(
+          eq(customerExternalIdentifiers.sourceSystem, PARTNER_SOURCE_SYSTEM),
+          eq(customerExternalIdentifiers.issuerCode, input.issuerCode),
+          eq(customerExternalIdentifiers.externalPartnerCode, invoiceCode),
+        ),
+      )
+      .limit(1);
+    if (existingInvoiceForm?.customerId === customerId) {
+      invoiceFormStatus = "already_linked";
+    } else if (existingInvoiceForm && (existingInvoiceForm.customerId || existingInvoiceForm.status !== "unmapped")) {
+      invoiceFormStatus = "left_for_office";
+    } else {
+      await registerExternalIdentifier(
+        {
+          sourceSystem: PARTNER_SOURCE_SYSTEM,
+          issuerCode: input.issuerCode,
+          externalPartnerCode: invoiceCode,
+          sourceName: partner.name,
+          customerId,
+        },
+        actor,
+      );
+    }
+  }
+
   await recordAudit({
     actor,
     action: AUDIT_ACTIONS.partnerPromotedToCustomer,
     entityType: "Šifra partnera",
     entityId: result.id,
     entityLabel: `${PARTNER_SOURCE_SYSTEM}/${input.issuerCode}/${partner.partnerCode}`,
-    after: { nacin: input.mode, customerId, stanjeVeze: result.status },
+    after: { nacin: input.mode, customerId, stanjeVeze: result.status, sifraSaFakture: invoiceCode, stanjeSifreSaFakture: invoiceFormStatus },
     reason,
     correlationId: randomUUID(),
   });
 
-  return { customerId, identityStatus: result.status, conflict: result.conflict };
+  return { customerId, identityStatus: result.status, conflict: result.conflict, invoiceCode, invoiceFormStatus };
 }
 
 /** Šifre partnera koje su već `mapped` na datog kupca (za izbor osnova potvrde). */

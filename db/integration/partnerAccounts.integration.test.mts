@@ -209,6 +209,18 @@ test("nov kupac traži ispravan PIB; isti PIB se ne spaja sam", async (t) => {
   assert.equal(n, 1, "isti PIB ne sme dati dva kupca");
 });
 
+test("uz šifru iz registra upisuje se i oblik sa fakture — samo kada je nedvosmislen", async (t) => {
+  if (guard(t)) return;
+  // „20" je jedinstven bez vodećih nula → i „00020" pokazuje na istog kupca.
+  assert.equal(await customerIdOf("00020"), await customerIdOf("20"));
+  assert.equal(await customerIdOf("00031"), await customerIdOf("30"), "poslovnica: oblik sa fakture ide na pripojenog kupca");
+  // „0012" i „12" su dva partnera: oblik „00012" bi bio dvosmislen i ne pravi se.
+  const [{ n }] = await db.sql<{ n: number }[]>`
+    SELECT count(*)::int AS n FROM customer_external_identifiers
+     WHERE issuer_code = ${ISSUER} AND external_partner_code = '00012'`;
+  assert.equal(n, 0);
+});
+
 /* -------------------------------------------------------------------------
  * 3. Kapija poziva
  * ---------------------------------------------------------------------- */

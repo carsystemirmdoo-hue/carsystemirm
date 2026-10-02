@@ -106,8 +106,8 @@ podešavane prema rezultatu.
 Čitanje:
 - kratka lista je bolja i od dosadašnjeg redosleda i od proteklog vremena;
 - slabiji signali su na nivou nasumičnog artikla — zato su odvojeni;
-- visoka i srednja pouzdanost se kod ovog kupca ne razlikuju — nivoi
-  pouzdanosti još nisu potvrđeni;
+- visoka i srednja pouzdanost se kod ovog kupca ne razlikuju; nad celom
+  arhivom razdvajaju (46% / 29%) — vidi [46](46-provera-r1-nad-arhivom.md);
 - **ograničenja:** jedan kupac; preseci nisu nezavisni; „pogodak" znači da je
   kupac kupio, ne da je razgovor pomogao; kupovina kod drugog dobavljača se ne
   vidi. Pre oslanjanja: ista provera nad celom arhivom (svi mapirani kupci), sa

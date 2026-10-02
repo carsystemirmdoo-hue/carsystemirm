@@ -7751,6 +7751,24 @@ body:has(.portal-login-root) {
   color: var(--p-muted);
   font-size: 11.5px;
 }
+.cs-sugg-order {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.cs-sugg-exp {
+  padding: 2px 8px;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 999px;
+  color: var(--p-muted);
+  font-weight: 650;
+}
+.cs-sugg-order a {
+  color: var(--p-blue);
+  font-weight: 600;
+}
 .cs-sugg-reason::first-letter {
   text-transform: uppercase;
 }

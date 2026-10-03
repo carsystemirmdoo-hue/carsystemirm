@@ -8003,6 +8003,7 @@ body:has(.portal-login-root) {
   font-size: 13px;
 }
 .zr-status strong { color: var(--p-ink); }
+.zr-inactive { margin: 8px 0 0; color: var(--p-muted); font-size: 13px; }
 .zr-warn { flex-basis: 100%; color: oklch(0.42 0.08 70); font-weight: 600; }
 .zr-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .zr-actions form.portal-inline-form { margin: 0; }

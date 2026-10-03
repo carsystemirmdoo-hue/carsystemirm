@@ -256,7 +256,7 @@
     "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs lib/customers/reorderRules.test.mjs",
     "test:ordering": "node --test lib/ordering/*.test.mjs",
     "test:private-caching": "node --test lib/security/*.test.mjs",
-    "test:partners": "node --test lib/partners/*.test.mjs lib/import/xlsx/*.test.mjs lib/customers/contactVerification.test.mjs",
+    "test:partners": "node --test lib/partners/*.test.mjs lib/import/xlsx/*.test.mjs lib/customers/contactVerification.test.mjs lib/customers/customerStatus.test.mjs app/portal/kupci/[id]/actions.test.mjs",
     "partners:report": "node scripts/partners/partner-registry-report.mjs",
     "test:pricing": "node --test lib/pricing/*.test.mjs",
     "test:consent": "node --test lib/customers/*.test.mjs",

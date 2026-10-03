@@ -482,3 +482,41 @@ test("oduzimanje dodele deluje odmah i ostavlja trag", async (t) => {
     ["Kupac dodeljen komercijalisti", "Kupac oduzet komercijalisti"],
   );
 });
+
+/* -------------------------------------------------------------------------
+ * Neaktivan kupac: bez poziva; istorija i veza ostaju; povratak vraća poziv.
+ * ---------------------------------------------------------------------- */
+
+test("neaktivan kupac ne dobija poziv; veza ostaje; vraćen u aktivne opet može", async (t) => {
+  if (guard(t)) return;
+  const { verifyCustomerContact } = await svc.verification();
+  const { issueInvitation, InvitationBlockedError } = await svc.invitations();
+  const { setCustomerActive, CustomerStatusError } = await import("@/lib/customers/customer-status-service");
+  const alfa = await customerIdOf("0012");
+  const acc = await propose(alfa, "alfa-neaktivan");
+  await verifyCustomerContact(verifyInput(acc.id, await identifierIdOf("0012")), fx.office);
+
+  await assert.rejects(setCustomerActive({ customerId: alfa, active: false, reason: "x" }, fx.office),
+    (e: unknown) => e instanceof CustomerStatusError && e.code === "reason_short");
+  await setCustomerActive({ customerId: alfa, active: false, reason: "Poslovna potvrda: više ne radi" }, fx.office);
+  await assert.rejects(setCustomerActive({ customerId: alfa, active: false, reason: "ponovo isto" }, fx.office),
+    (e: unknown) => e instanceof CustomerStatusError && e.code === "no_change");
+
+  await assert.rejects(
+    issueInvitation({ accountId: acc.id, reason: "QA poziv" }, fx.office),
+    (e: unknown) => e instanceof InvitationBlockedError && e.reasons.includes("customer_inactive"),
+  );
+  // Veza šifre i kupac ostaju; ništa nije obrisano.
+  const [{ n }] = await db.sql<{ n: number }[]>`
+    SELECT count(*)::int AS n FROM customer_external_identifiers WHERE customer_id = ${alfa} AND status = 'mapped'`;
+  assert.ok(n >= 1, "veza šifre je nestala");
+  const trag = await db.sql<{ action: string; reason: string; after: string }[]>`
+    SELECT action, reason, value_after::text AS after FROM audit_log
+     WHERE entity_id = ${alfa} AND action LIKE 'Kupac %aktiv%' ORDER BY created_at`;
+  assert.deepEqual(trag.map((x) => x.action), ["Kupac označen kao neaktivan"]);
+  assert.equal(trag[0].reason, "Poslovna potvrda: više ne radi");
+
+  await setCustomerActive({ customerId: alfa, active: true, reason: "QA: vraćen" }, fx.office);
+  const { token } = await issueInvitation({ accountId: acc.id, reason: "QA poziv" }, fx.office);
+  assert.ok(token);
+});

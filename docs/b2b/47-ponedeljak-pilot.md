@@ -188,7 +188,32 @@ redosled iz §4: veze pa uvoz, u ponedeljak.
 `~/.carsystem-private/paketi/SHA256SUMS.txt` i handoff fajlu, a stari su
 označeni kao nevažeći. Heš ide primaocu odvojenim kanalom.
 
-## 8. Nije odobreno / čeka odluku
+## 8. Neaktivan kupac i grupna potvrda veza (2026-10-03)
+
+**Neaktivan kupac** (poslovna odluka „više ne radi sa nama"): kartica kupca →
+„Status kupca" → „Označite kao neaktivnog", uz obavezan razlog; ovlašćenje
+`mappings:manage` (Vlasnik, ili kancelarija sa paketom „mapiranja"); trag
+revizije „Kupac označen kao neaktivan" / „vraćen u aktivne". Ništa se ne
+briše: fakture, veze šifara, dodele i kartica ostaju. Podrazumevano se
+izostavlja sa „Za razgovor" (sa brojem izostavljenih), iz predloga (redovi i
+brojači na `/portal/preporuke`) i iz poziva za nalog; pregled kroz filter
+„Kupci: neaktivni/svi" na „Za razgovor", predlozima i listi kupaca. Isto
+dugme ga vraća u aktivne.
+
+Jedan kupac iz talasa 01 je poslovno potvrđen kao neaktivan (privatna
+odluka u `~/.carsystem-private/odluke/`): veza i istorijske fakture se uvoze
+normalno, a status se menja na kartici **posle** uvoza; datum prestanka se
+ne upisuje dok nije potvrđen.
+
+**Grupna potvrda 68 veza:** pregled sa dokazima i izdvojenim slučajevima je u
+`~/.carsystem-private/veze-talas-01-konacni-spisak.md`; kopija tabele za
+portal `~/.carsystem-private/veze-talas-01-za-potvrdu.csv` ima iste kolone i
+ključeve kao original, napomenu samo kod izdvojenih slučajeva i **prazne
+kolone odobrenja** (`odluka`, `potvrdio`). Original i list kancelarije se ne
+menjaju. Posle potvrde: `/portal/kupci/veze` → „Proverite" → „Primenite
+potvrđene" (u roku od 10 minuta od prijave).
+
+## 9. Nije odobreno / čeka odluku
 
 - Vercel plan i objava pilota (preduslov za Windows konektor).
 - Prepisivanje Git istorije (cena u 4fd2b09, LAN adresa u 35d1c05) — nije

@@ -11,6 +11,7 @@ import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { AssignmentPanel } from "./AssignmentPanel";
 import { loadArticleIdentities } from "@/lib/ordering/ordering-service";
 import { loadCrossSell } from "@/lib/recommendations/cross-sell";
+import { CustomerStatusPanel } from "./CustomerStatusPanel";
 import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
@@ -60,19 +61,32 @@ export default async function CustomerDetailPage({
       <PageHeader
         eyebrow="Kupci"
         title={customer.name}
-        description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}`}
+        description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}${customer.active ? "" : " · neaktivan kupac"}`}
       />
-      {profile ? (
-        <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} />
+      {!customer.active ? (
+        <p className="portal-readiness-note" role="status">
+          Kupac je označen kao neaktivan. Istorija i veze su dostupne; predlozi za razgovor i proširenje se ne
+          prikazuju.
+        </p>
       ) : null}
-      {profile ? <CustomerSuggestions profile={profile} identities={identities} order={order} /> : null}
+      {profile ? (
+        <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} inactive={!customer.active} />
+      ) : null}
+      {profile && customer.active ? (
+        <CustomerSuggestions profile={profile} identities={identities} order={order} />
+      ) : null}
       {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
-      {profile && crossSell ? (
+      {profile && crossSell && customer.active ? (
         <CustomerCrossSell
           crossSell={crossSell}
           names={Object.fromEntries(profile.articles.map((a) => [a.articleCode, a.articleName ?? a.articleCode]))}
         />
       ) : null}
+      <CustomerStatusPanel
+        customerId={customer.id}
+        active={customer.active}
+        canManage={can(user, "mappings:manage")}
+      />
       <AssignmentPanel
         customerId={customer.id}
         assignees={assignees}

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { sql } from "drizzle-orm";
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
-import { getDb } from "@/db/client";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
 import { resolveLedgerScope, type LedgerScope } from "@/lib/ledger/effective-sales";
 import { listSalesReps } from "@/lib/partners/assignment-service";
+import { loadConversationCustomers } from "@/lib/customers/conversation-customers";
+import { parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 import { loadCustomerProfiles, type CustomerProfile } from "@/lib/recommendations/customer-profile";
 import { srDate } from "@/lib/recommendations/customerSummary.mjs";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
@@ -27,6 +27,7 @@ type Item = {
   name: string;
   city: string | null;
   reps: string[];
+  active: boolean;
   profile: CustomerProfile;
   crossSell: CrossSell | null;
 };
@@ -73,7 +74,11 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
         <Link href={`/portal/kupci/${item.id}`} className="zr-name">
           {item.name}
         </Link>
-        <Badge tone={s.status.tone as Tone}>{s.status.label}</Badge>
+        {item.active ? (
+          <Badge tone={s.status.tone as Tone}>{s.status.label}</Badge>
+        ) : (
+          <Badge tone="neutral">Neaktivan kupac</Badge>
+        )}
       </div>
       <div className="zr-meta">
         <span>
@@ -83,6 +88,7 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
         {item.city ? <span>{item.city}</span> : null}
         {showReps ? <span>Komercijalista: {item.reps.length ? item.reps.join(", ") : "nije dodeljen"}</span> : null}
       </div>
+      {item.active ? (
       <div className="zr-body">
         <div>
           <h3>Zašto</h3>
@@ -131,6 +137,9 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
           </Link>
         </div>
       </div>
+      ) : (
+        <p className="zr-inactive">Kupac je označen kao neaktivan — bez predloga; istorija i osnov su na kartici kupca.</p>
+      )}
     </li>
   );
 }
@@ -138,7 +147,7 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
 export default async function TalkListPage({
   searchParams,
 }: {
-  searchParams: Promise<{ komercijalista?: string }>;
+  searchParams: Promise<{ komercijalista?: string; kupci?: string }>;
 }) {
   const user = await requireCapability("view:preporuke", "/portal/za-razgovor");
   const params = await searchParams;
@@ -152,22 +161,10 @@ export default async function TalkListPage({
   const repFilter = all && params.komercijalista && UUID.test(params.komercijalista) ? params.komercijalista : null;
   if (repFilter) scope = { customerIds: await loadAssignedCustomerIds(repFilter) };
 
-  const db = getDb();
-  const [customerRows, reps, data] = await Promise.all([
-    db.execute<{ id: string; name: string; city: string | null; reps: string[] | null }>(sql`
-      SELECT c.id, c.name, c.city,
-             array_remove(array_agg(u.name ORDER BY u.name), NULL) AS reps
-        FROM customers c
-        LEFT JOIN customer_assignments ca ON ca.customer_id = c.id
-        LEFT JOIN users u ON u.id = ca.user_id
-       WHERE ${
-         scope.customerIds === null
-           ? sql`true`
-           : scope.customerIds.length === 0
-             ? sql`false`
-             : sql`c.id IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)})`
-       }
-       GROUP BY c.id, c.name, c.city`),
+  // Neaktivni kupci se podrazumevano izostavljaju; vide se kroz filter.
+  const statusKupaca = parseCustomerStatusFilter(params.kupci);
+  const [{ rows: customerRows, inactiveInScope }, reps, data] = await Promise.all([
+    loadConversationCustomers(scope, statusKupaca),
     all ? listSalesReps() : Promise.resolve([]),
     loadCustomerProfiles(scope),
   ]);
@@ -185,6 +182,7 @@ export default async function TalkListPage({
       name: c.name,
       city: c.city,
       reps: c.reps ?? [],
+      active: c.active,
       profile: data.profiles.get(c.id) ?? null,
       crossSell: crossSell.get(c.id) ?? null,
     }))
@@ -192,7 +190,9 @@ export default async function TalkListPage({
   // Kupci bez ijednog dokumenta nemaju profil iz podataka; prikazuju se u sklopljenoj grupi.
   const withoutData = [...customerRows].filter((c) => !data.profiles.has(c.id));
 
-  const byKey = (keys: string[]) => items.filter((i) => keys.includes(i.profile.summary.status.key));
+  const aktivni = items.filter((i) => i.active);
+  const neaktivni = items.filter((i) => !i.active);
+  const byKey = (keys: string[]) => aktivni.filter((i) => keys.includes(i.profile.summary.status.key));
   const attention = byKey(["dormant", "attention"]).sort((a, b) => urgency(b.profile) - urgency(a.profile));
   const stale = byKey(["stale"]);
   const due = byKey(["due"]);
@@ -238,6 +238,11 @@ export default async function TalkListPage({
                 <Link href="/portal/zahtevi/uslovi">Otvoreni upiti za cenu i uslove: {openRequests} →</Link>
               </span>
             ) : null}
+            {statusKupaca === "aktivni" && inactiveInScope > 0 ? (
+              <span>
+                Neaktivni kupci ({inactiveInScope}) se ne prikazuju — izaberite „Neaktivni kupci“ za pregled.
+              </span>
+            ) : null}
             {stale.length ? (
               <span className="zr-warn">
                 Za {stale.length} {stale.length === 1 ? "kupca" : "kupaca"} su posle obračuna stigli novi dokumenti — njihov savet se ne prikazuje dok se obračun ne ponovi.
@@ -245,8 +250,8 @@ export default async function TalkListPage({
             ) : null}
           </div>
           <div className="zr-actions">
-            {all ? (
-              <form method="get" className="portal-inline-form">
+            <form method="get" className="portal-inline-form">
+              {all ? (
                 <select name="komercijalista" defaultValue={repFilter ?? ""} aria-label="Komercijalista">
                   <option value="">Svi komercijalisti</option>
                   {reps.map((r) => (
@@ -255,9 +260,14 @@ export default async function TalkListPage({
                     </option>
                   ))}
                 </select>
-                <button type="submit">Prikažite</button>
-              </form>
-            ) : null}
+              ) : null}
+              <select name="kupci" defaultValue={statusKupaca} aria-label="Kupci po statusu">
+                <option value="aktivni">Aktivni kupci</option>
+                <option value="neaktivni">Neaktivni kupci</option>
+                <option value="svi">Svi kupci</option>
+              </select>
+              <button type="submit">Prikažite</button>
+            </form>
             {canRecompute ? <RecomputeButton label={stale.length ? "Preračunajte sada" : "Preračunajte"} /> : null}
           </div>
         </div>
@@ -266,7 +276,13 @@ export default async function TalkListPage({
       {items.length === 0 && withoutData.length === 0 ? (
         <section className="portal-panel">
           <h2>Nema kupaca u ovom prikazu</h2>
-          <p>{all ? "Izabrani komercijalista nema dodeljenih kupaca." : "Nemate dodeljenih kupaca."}</p>
+          <p>
+            {statusKupaca === "neaktivni"
+              ? "Nema neaktivnih kupaca u ovom prikazu."
+              : all
+                ? "Izabrani komercijalista nema dodeljenih kupaca."
+                : "Nemate dodeljenih kupaca."}
+          </p>
         </section>
       ) : null}
 
@@ -274,6 +290,7 @@ export default async function TalkListPage({
         { key: "attention", title: "Traže pažnju", hint: "Artikal van uobičajenog ritma, ili kupac koji je prestao da kupuje.", list: attention },
         { key: "stale", title: "Obračun zastareo — proveriti posle preračuna", hint: "Stigle su nove kupovine koje obračun još nije video.", list: stale },
         { key: "due", title: "Uskoro uobičajena porudžbina", hint: "Približava se uobičajeni termin.", list: due },
+        { key: "inactive", title: "Neaktivni kupci", hint: "Označeni kao neaktivni: bez predloga, istorija ostaje na kartici.", list: neaktivni },
       ]
         .filter((g) => g.list.length)
         .map((g) => (

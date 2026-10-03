@@ -42,9 +42,12 @@ function statusLabel(status: string) {
 export function CustomerSummary({
   profile,
   assignees,
+  inactive = false,
 }: {
   profile: CustomerProfile;
   assignees: string[];
+  /** Neaktivan kupac: bez predloga za razgovor. */
+  inactive?: boolean;
 }) {
   const s = profile.summary;
   return (
@@ -80,7 +83,7 @@ export function CustomerSummary({
 
         <div className="cs-block cs-next">
           <h3>Predlog za sledeći razgovor</h3>
-          <p>{s.nextStep}</p>
+          <p>{inactive ? "Kupac je neaktivan — predlog za razgovor se ne daje." : s.nextStep}</p>
           <small>Interna pomoć komercijalisti. Ne šalje se kupcu i ne menja cenu ni uslove.</small>
         </div>
       </div>

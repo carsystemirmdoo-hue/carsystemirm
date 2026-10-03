@@ -9,6 +9,7 @@ import {
   customerExists,
   removeAssignment,
 } from "@/lib/partners/assignment-service";
+import { CustomerStatusError, setCustomerActive } from "@/lib/customers/customer-status-service";
 
 export type AssignmentActionState = { error: string | null; ok: string | null };
 
@@ -61,6 +62,49 @@ export async function removeAssignmentAction(
     return { error: null, ok: r.removed ? "Dodela je uklonjena; važi odmah." : "Dodela nije postojala." };
   } catch (error) {
     if (error instanceof AssignmentError) return { error: error.message, ok: null };
+    throw error;
+  }
+}
+
+const statusSchema = z.object({
+  customerId: z.string().uuid(),
+  active: z.enum(["0", "1"]),
+  reason: z.string().max(500),
+});
+
+/**
+ * Kupac neaktivan / ponovo aktivan — poslovna odluka. Ista sposobnost kao
+ * odluke o identitetu i vezama kupca (`mappings:manage`: Vlasnik, ili
+ * kancelarija sa paketom „mapiranja"). Ne briše ništa.
+ */
+export async function setCustomerStatusAction(
+  _previous: AssignmentActionState,
+  formData: FormData,
+): Promise<AssignmentActionState> {
+  const actor = await requireCapability("mappings:manage", "/portal/kupci");
+  const parsed = statusSchema.safeParse({
+    customerId: formData.get("customerId"),
+    active: formData.get("active"),
+    reason: formData.get("reason") ?? "",
+  });
+  if (!parsed.success) return { error: "Neispravan zahtev.", ok: null };
+  try {
+    const r = await setCustomerActive(
+      { customerId: parsed.data.customerId, active: parsed.data.active === "1", reason: parsed.data.reason },
+      { id: actor.id, name: actor.name, role: actor.role },
+    );
+    revalidatePath(`/portal/kupci/${parsed.data.customerId}`);
+    revalidatePath("/portal/kupci");
+    revalidatePath("/portal/za-razgovor");
+    revalidatePath("/portal/preporuke");
+    return {
+      error: null,
+      ok: r.active
+        ? "Kupac je vraćen u aktivne."
+        : "Kupac je označen kao neaktivan. Istorija ostaje; izostavlja se sa „Za razgovor“, iz predloga i poziva.",
+    };
+  } catch (error) {
+    if (error instanceof CustomerStatusError) return { error: error.message, ok: null };
     throw error;
   }
 }

@@ -68,7 +68,7 @@ export async function loadCustomerProfiles(scope: LedgerScope, now: Date = new D
        WHERE ${inScope(sql`customer_id`, scope)}
          AND issued_on <= ${today}::date
        GROUP BY customer_id, article_code`),
-    run ? recommendationRows(scope, { limit: 20000 }) : Promise.resolve([] as RecommendationRow[]),
+    run ? recommendationRows(scope, { limit: 20000, customerStatus: "svi" }) : Promise.resolve([] as RecommendationRow[]),
   ]);
 
   const docsBy = new Map<string, { d: string; ingestedAt: Date | null }[]>();

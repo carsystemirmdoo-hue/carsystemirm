@@ -130,6 +130,7 @@ export async function loadScopedCustomers(user: PortalUser) {
       pib: customers.pib,
       name: customers.name,
       city: customers.city,
+      active: customers.active,
     })
     .from(customers)
     .where(scope !== null ? inArray(customers.id, scope) : undefined)

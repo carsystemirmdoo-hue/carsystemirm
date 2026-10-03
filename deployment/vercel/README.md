@@ -55,3 +55,17 @@ zavisi od Next middleware-a i route handlera.
 Kada je Vercel projekat spreman, domen/DNS sa Burina.net treba usmeriti prema Vercel uputstvu za custom domain.
 
 `.htaccess` se ne uploaduje i nema efekat na Vercel-u.
+
+## `vercel.json` (od 2026-10-01)
+
+- `regions: ["fra1"]` — Vercel funkcije rade u Frankfurtu, blizu EU baze.
+  Podrazumevani region novih projekata je `iad1` (SAD). Hobby dozvoljava jedan
+  region. Važi za deployment koji sadrži ovaj fajl; podešavanje u kontrolnoj
+  tabli (Settings → Functions → Function Regions) treba uskladiti na isto.
+- `git.deploymentEnabled: { "integration/**": false }` — push grane
+  `integration/…` ne pravi deployment ni Preview. `main` (produkcija) i ostale
+  grane rade kao do sada.
+- **Kontrolisan testni deployment:** isti commit se gurne na posebnu granu
+  (npr. `preview/portal-test`), ili član firminog tima pokrene `vercel deploy`
+  (Preview) iz te grane. Pre toga proveriti da Preview okruženje nema promenljive
+  stvarne baze — vidi `docs/b2b/33-test-baza-runbook.md` §6.

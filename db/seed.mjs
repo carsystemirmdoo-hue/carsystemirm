@@ -21,7 +21,7 @@ if (!connectionString) {
 
 const email = process.env.BOOTSTRAP_ADMIN_EMAIL?.trim().toLowerCase();
 const password = process.env.BOOTSTRAP_ADMIN_PASSWORD;
-const displayName = process.env.BOOTSTRAP_ADMIN_NAME?.trim() || "Gazda";
+const displayName = process.env.BOOTSTRAP_ADMIN_NAME?.trim() || "Vlasnik";
 
 const sql = postgres(connectionString, { max: 1 });
 

@@ -304,6 +304,39 @@ export async function isBucketBlocked(input: {
 }
 
 /**
+ * Koliko sekundi je brojač još blokiran (0 = nije) — bez uvećavanja.
+ *
+ * Za odgovor 429 kome treba `Retry-After`. Greška podešavanja u produkciji se
+ * tretira kao blokada od jednog prozora (isti smer kao `isBucketBlocked`).
+ */
+export async function blockedForSeconds(input: {
+  scope: RateLimitScope;
+  accountIdentifier: string | null;
+  clientIp: string | null;
+  now?: Date;
+}): Promise<number> {
+  const configuration = env();
+  const validity = validateRateLimitConfiguration(configuration);
+  if (!validity.ok) {
+    logConfigurationError(validity.reason ?? "nepoznata greška podešavanja");
+    return 60;
+  }
+  if (!isRateLimitConfigured(configuration)) return 0;
+  const now = input.now ?? new Date();
+  let max = 0;
+  const checks: { dimension: RateLimitDimension; value: string }[] = [];
+  if (input.accountIdentifier) checks.push({ dimension: "account", value: input.accountIdentifier });
+  if (input.clientIp) checks.push({ dimension: "ip", value: input.clientIp });
+  for (const { dimension, value } of checks) {
+    const bucket = await readBucket(input.scope, dimension, rateLimitSubjectKey(dimension, value, configuration));
+    if (bucket?.blockedUntil && bucket.blockedUntil > now) {
+      max = Math.max(max, Math.ceil((bucket.blockedUntil.getTime() - now.getTime()) / 1000));
+    }
+  }
+  return max;
+}
+
+/**
  * Poništava brojač po nalogu posle uspešne prijave.
  *
  * Namerno NE dira brojač po adresi: ako napadač sa jedne adrese probija više

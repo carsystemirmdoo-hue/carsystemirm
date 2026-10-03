@@ -317,10 +317,44 @@ test("429 i 5xx se odlažu", () => {
   }
 });
 
-test("`Retry-After` je ograničen i ne skraćuje poslovni raspored", () => {
+test("`Retry-After` je ograničen na 0–86400 s", () => {
   assert.equal(ishodi.ogranicenRetryAfter("120"), 120);
   assert.equal(ishodi.ogranicenRetryAfter("999999"), 86400); // ograničeno
   assert.equal(ishodi.ogranicenRetryAfter("-5"), null);
   assert.equal(ishodi.ogranicenRetryAfter("uskoro"), null);
   assert.equal(ishodi.ogranicenRetryAfter(null), null);
+});
+
+/* --- Oporavak od privremenih grešaka (retry.mjs) ------------------------ */
+const ponavljanje = await import(D("retry.mjs"));
+
+test("429 sa Retry-After: kratko se odčeka u ciklusu, dugo zaustavlja ciklus", () => {
+  const { cekanjeZa } = ponavljanje;
+  assert.deepEqual(cekanjeZa({ vrsta: "rate_limit", retryAfterSec: 30, uzastopno: 1 }), { cekajMs: 30_000, izvor: "retry_after" });
+  assert.deepEqual(cekanjeZa({ vrsta: "rate_limit", retryAfterSec: 0, uzastopno: 1 }), { cekajMs: 1_000, izvor: "retry_after" });
+  const dugo = cekanjeZa({ vrsta: "rate_limit", retryAfterSec: 900, uzastopno: 1 });
+  assert.equal(dugo.stani, true);
+  assert.equal(dugo.nastaviPosleMs, 900_000);
+  assert.equal(dugo.razlog, "rate_limited");
+});
+
+test("bez Retry-After: postepeno produžavanje, ograničen broj pokušaja", () => {
+  const { cekanjeZa } = ponavljanje;
+  const koraci = [1, 2, 3, 4, 5].map((u) => cekanjeZa({ vrsta: "rate_limit", retryAfterSec: null, uzastopno: u }).cekajMs);
+  assert.deepEqual(koraci, [5_000, 10_000, 20_000, 40_000, 60_000]);
+  const sesti = cekanjeZa({ vrsta: "rate_limit", retryAfterSec: null, uzastopno: 6 });
+  assert.equal(sesti.stani, true);
+  assert.equal(cekanjeZa({ vrsta: "transport", retryAfterSec: null, uzastopno: 6 }).razlog, "server_nedostupan");
+  assert.equal(cekanjeZa({ vrsta: "server", retryAfterSec: null, uzastopno: 6 }).razlog, "server_privremeno");
+});
+
+test("privremeno su samo 429, prekid veze i 5xx; trajne greške nisu", () => {
+  const { vrstaPrivremenog } = ponavljanje;
+  assert.equal(vrstaPrivremenog({ transport: "neuspeh", httpStatus: 0, code: null }), "transport");
+  assert.equal(vrstaPrivremenog({ transport: "ok", httpStatus: 429, code: "rate_limited" }), "rate_limit");
+  assert.equal(vrstaPrivremenog({ transport: "ok", httpStatus: 503, code: "temporarily_unavailable" }), "server");
+  assert.equal(vrstaPrivremenog({ transport: "ok", httpStatus: 502, code: null }), "server");
+  for (const [s, kod] of [[422, "totals_mismatch"], [409, "business_key_conflict"], [401, "signature_invalid"], [200, "ingested"], [200, "duplicate_file"]]) {
+    assert.equal(vrstaPrivremenog({ transport: "ok", httpStatus: s, code: kod }), null, kod);
+  }
 });

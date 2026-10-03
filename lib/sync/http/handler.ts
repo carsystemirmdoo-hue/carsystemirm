@@ -1,6 +1,6 @@
 import "server-only";
 import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
-import { registerAttempt } from "@/lib/auth/rate-limit-service";
+import { blockedForSeconds, registerAttempt } from "@/lib/auth/rate-limit-service";
 import {
   authenticateDeviceRequest,
   DeviceAuthError,
@@ -36,15 +36,18 @@ export type SyncResponseBody = {
 };
 
 export function syncJson(status: number, body: SyncResponseBody): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-      // Odgovor se ne kešira i ne indeksira ni pod kojim uslovom.
-      "cache-control": "no-store",
-      "x-content-type-options": "nosniff",
-    },
-  });
+  const headers: Record<string, string> = {
+    "content-type": "application/json; charset=utf-8",
+    // Odgovor se ne kešira i ne indeksira ni pod kojim uslovom.
+    "cache-control": "no-store",
+    "x-content-type-options": "nosniff",
+  };
+  // Standardno zaglavlje uz 429: konektor (i bilo koji klijent) zna koliko da čeka.
+  const cekanje = (body as { retryAfterSeconds?: unknown }).retryAfterSeconds;
+  if (status === 429 && typeof cekanje === "number" && Number.isFinite(cekanje) && cekanje >= 0) {
+    headers["retry-after"] = String(Math.ceil(cekanje));
+  }
+  return new Response(JSON.stringify(body), { status, headers });
 }
 
 /**
@@ -118,19 +121,22 @@ export async function withAuthenticatedDevice(
    */
   const tvrdjenaOznaka = (request.headers.get(HEADERS.device) ?? "").slice(0, 64) || null;
 
-  const nepoznat = await registerAttempt({
-    scope: "sync_unknown",
-    accountIdentifier: tvrdjenaOznaka,
-    clientIp,
-  });
-  if (!nepoznat.allowed) {
-    return syncJson(429, {
-      ok: false,
-      code: "rate_limited",
-      requestId,
-      retryAfterSeconds: nepoznat.retryAfterSeconds,
-    });
+  /*
+   * Brojač nepoznatih se PROVERAVA pre posla, a UVEĆAVA samo za zahtev koji
+   * ne prođe autentifikaciju (`neuspehNepoznatog` ispod).
+   *
+   * Ranije se uvećavao za svaki zahtev, pa i za uređaj koji je upravo dokazao
+   * identitet: posle 20 dokumenata u 5 minuta dolazila je blokada od 15
+   * minuta (otkriveno na generalnoj probi talasa 01 — 136 računa bi trajalo
+   * satima, arhiva danima). Autentifikovan uređaj meri `sync_device`.
+   * Nepoznat pozivalac i dalje dobija blokadu posle istog broja neuspeha.
+   */
+  const blokiranoJos = await blockedForSeconds({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp });
+  if (blokiranoJos > 0) {
+    return syncJson(429, { ok: false, code: "rate_limited", requestId, retryAfterSeconds: blokiranoJos });
   }
+  const neuspehNepoznatog = () =>
+    registerAttempt({ scope: "sync_unknown", accountIdentifier: tvrdjenaOznaka, clientIp });
 
   /* --- 3. Telo, uz tvrdu granicu. -------------------------------------- */
   let bodyBytes: Uint8Array;
@@ -138,6 +144,7 @@ export async function withAuthenticatedDevice(
     requireJsonContentType(request);
     bodyBytes = await readBoundedBody(request);
   } catch (error) {
+    await neuspehNepoznatog();
     if (error instanceof BodyError) {
       return syncJson(error.status, { ok: false, code: error.code, requestId });
     }
@@ -155,6 +162,7 @@ export async function withAuthenticatedDevice(
     });
   } catch (error) {
     if (error instanceof DeviceAuthError) {
+      await neuspehNepoznatog();
       return syncJson(error.status, { ok: false, code: error.code, requestId });
     }
     /*

@@ -49,7 +49,38 @@ function Poruka({ state }: { state: SyncActionState }) {
   return null;
 }
 
-export function DeviceAdmin() {
+export type DeviceChoice = { id: string; label: string; deviceCode: string; status: string };
+
+/**
+ * Izbor uređaja umesto ručnog upisa UUID-a.
+ *
+ * UUID se nigde na strani ne prikazuje; ranije je aktivacija tražila da se
+ * prepiše iz baze (otkriveno na generalnoj probi talasa 01). Server i dalje
+ * proverava i sposobnost i otisak — izbor je samo pomoć pri unosu.
+ */
+function DeviceSelect({ devices, empty }: { devices: DeviceChoice[]; empty: string }) {
+  if (devices.length === 0) {
+    return (
+      <select name="deviceId" required disabled defaultValue="">
+        <option value="">{empty}</option>
+      </select>
+    );
+  }
+  return (
+    <select name="deviceId" required defaultValue={devices.length === 1 ? devices[0].id : ""}>
+      {devices.length > 1 ? <option value="">izaberite uređaj</option> : null}
+      {devices.map((d) => (
+        <option key={d.id} value={d.id}>
+          {d.label} · {d.deviceCode} ({d.status})
+        </option>
+      ))}
+    </select>
+  );
+}
+
+export function DeviceAdmin({ devices = [] }: { devices?: DeviceChoice[] }) {
+  const zaAktivaciju = devices.filter((d) => d.status === "registered");
+  const zaOpoziv = devices.filter((d) => d.status !== "revoked");
   const [reg, registruj] = useActionState(registerDeviceAction, POCETNO);
   const [akt, aktiviraj] = useActionState(activateDeviceAction, POCETNO);
   const [opo, opozovi] = useActionState(revokeDeviceAction, POCETNO);
@@ -129,8 +160,8 @@ export function DeviceAdmin() {
           <form action={aktiviraj} className="portal-device-form">
             <div className="portal-form-grid" data-columns="3">
               <label className="portal-field">
-                <span>ID uređaja</span>
-                <input name="deviceId" required placeholder="uuid" />
+                <span>Uređaj</span>
+                <DeviceSelect devices={zaAktivaciju} empty="nema uređaja koji čeka aktivaciju" />
               </label>
               <label className="portal-field">
                 <span>Oznaka ključa</span>
@@ -154,8 +185,8 @@ export function DeviceAdmin() {
           <form action={opozovi} className="portal-device-form">
             <div className="portal-form-grid">
               <label className="portal-field">
-                <span>ID uređaja</span>
-                <input name="deviceId" required placeholder="uuid" />
+                <span>Uređaj</span>
+                <DeviceSelect devices={zaOpoziv} empty="nema uređaja za opoziv" />
               </label>
               <label className="portal-field">
                 <span>Razlog opoziva</span>

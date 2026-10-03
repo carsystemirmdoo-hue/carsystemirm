@@ -10,7 +10,13 @@ import { userRole } from "@/db/schema/users";
 import { hashPassword } from "@/lib/auth/password.mjs";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { PACKAGE_KEYS, ROLE_LABELS } from "@/lib/authz/permissions.mjs";
-import { canGrantOwnerRole, OWNER_ROLE } from "@/lib/authz/owner-guard-policy.mjs";
+import {
+  canGrantOwnerRole,
+  OWNER_ROLE,
+  packageChangeNeedsFreshMfa,
+  packageChangeRefusal,
+  roleChangeRefusal,
+} from "@/lib/authz/owner-guard-policy.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import {
   removesActiveOwner,
@@ -27,6 +33,8 @@ const toggleSchema = z.object({
   permissionKey: z.enum(PACKAGE_KEYS as [string, ...string[]]),
   grant: z.boolean(),
   reason: z.string().trim().min(3).max(500),
+  // Traži se samo za pakete koji vode do upravljanja nalozima — vidi ispod.
+  token: z.string().trim().max(8).optional().default(""),
 });
 
 const roleSchema = z.object({
@@ -54,12 +62,13 @@ export async function togglePermissionAction(
     permissionKey: formData.get("permissionKey"),
     grant: formData.get("grant") === "1",
     reason: formData.get("reason") ?? "",
+    token: formData.get("token") ?? "",
   });
   if (!parsed.success) {
     return { error: "Razlog izmene je obavezan (najmanje 3 znaka).", ok: null };
   }
 
-  const { userId, permissionKey, grant, reason } = parsed.data;
+  const { userId, permissionKey, grant, reason, token } = parsed.data;
 
   // Zaštita od zaključavanja sistema: poslednji nosilac paketa „korisnici“ ne
   // sme sam sebi da oduzme pristup administraciji korisnika.
@@ -78,6 +87,30 @@ export async function togglePermissionAction(
     .where(eq(users.id, userId))
     .limit(1);
   if (target.length === 0) return { error: "Korisnik ne postoji.", ok: null };
+
+  /*
+   * Eskalacija: sebi se paket ne dodeljuje, „Korisnici“ i „Bezbednost naloga“
+   * dodeljuje samo Vlasnik, i niko ne daje pristup koji sam nema. Bez ovoga je
+   * nosilac paketa „Korisnici“ mogao da dođe do uloge Vlasnika u dva koraka.
+   */
+  const refusal = packageChangeRefusal(actor, target[0], permissionKey, grant);
+  if (refusal) return { error: refusal, ok: null };
+
+  // Paketi koji otvaraju upravljanje nalozima traže i svež kod, kao promena uloge.
+  if (packageChangeNeedsFreshMfa(permissionKey)) {
+    if (token.length < 6) {
+      return {
+        error: "Za ovaj paket unesite i svež kod iz aplikacije (isto polje kao za promenu uloge).",
+        ok: null,
+      };
+    }
+    try {
+      await requireSecurityAdmin(token);
+    } catch (error) {
+      if (error instanceof SecurityActionError) return { error: error.message, ok: null };
+      throw error;
+    }
+  }
 
   const correlationId = randomUUID();
 
@@ -297,18 +330,15 @@ export async function changeRoleAction(
     };
   }
 
-  let actor;
-  try {
-    actor = await requireSecurityAdmin(parsed.data.token);
-  } catch (error) {
-    if (error instanceof SecurityActionError) {
-      return { error: error.message, ok: null };
-    }
-    throw error;
-  }
-
   const { userId, role, reason } = parsed.data;
   const db = getDb();
+
+  /*
+   * Pravilo eskalacije ide PRE provere koda, kao u `createUserAction`: odbijen
+   * pokušaj (sopstvena uloga, dodela ili oduzimanje uloge Vlasnika bez uloge
+   * Vlasnika) ne sme ni da stigne do TOTP provere.
+   */
+  const sessionActor = await requireCapability("users:manage_security", "/portal/dozvole");
   const target = await db
     .select({
       id: users.id,
@@ -322,6 +352,18 @@ export async function changeRoleAction(
   if (target.length === 0) return { error: "Korisnik ne postoji.", ok: null };
   if (target[0].role === role)
     return { error: null, ok: "Uloga je nepromenjena." };
+  const refusal = roleChangeRefusal(sessionActor, target[0], role);
+  if (refusal) return { error: refusal, ok: null };
+
+  let actor;
+  try {
+    actor = await requireSecurityAdmin(parsed.data.token);
+  } catch (error) {
+    if (error instanceof SecurityActionError) {
+      return { error: error.message, ok: null };
+    }
+    throw error;
+  }
 
   const correlationId = randomUUID();
 

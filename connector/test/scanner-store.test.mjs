@@ -656,6 +656,7 @@ test("spakovan konektor ODBIJA test skladište ključa", async () => {
 test("bez izričitog test režima nema plaintext fallback-a", async () => {
   const { izaberiAdapter } = await import(D("keystore/index.mjs"));
   if (process.platform === "win32") return; // Na Windowsu je DPAPI dostupan.
+  // Na macOS-u Keychain se bira samo izričito, pa bez promenljive i dalje nema skladišta.
   assert.throws(
     () => izaberiAdapter({}),
     (e) => e.code === "no_secure_keystore",

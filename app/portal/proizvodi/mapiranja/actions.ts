@@ -9,6 +9,11 @@ import {
 } from "@/lib/commercial/mapping-service";
 import { ProductMappingError } from "@/lib/commercial/productMapping.mjs";
 import { getAllCarsystemProducts } from "@/lib/carsystem-data";
+import {
+  catalogTargetProblem,
+  describeCatalogTarget,
+  type CatalogTarget,
+} from "@/lib/ordering/ordering-service";
 
 export type MappingActionState = { error: string | null; ok: string | null };
 
@@ -87,6 +92,15 @@ export async function decideMappingAction(
   if (!parsed.success) {
     return { error: "Izaberite stanje i unesite razlog (najmanje 3 znaka).", ok: null };
   }
+  /*
+   * Potvrda mora pokazivati na TAČAN proizvod i, kada proizvod ima više redova
+   * šifara, na tačnu varijantu. Postojeće potvrđene veze se ovim ne diraju —
+   * provera važi za novu odluku.
+   */
+  if (parsed.data.status === "mapped") {
+    const problem = catalogTargetProblem(parsed.data.catalogProductSlug, parsed.data.catalogVariantId);
+    if (problem) return { error: problem, ok: null };
+  }
 
   try {
     await decideMapping(parsed.data, {
@@ -101,4 +115,10 @@ export async function decideMappingAction(
 
   revalidatePath("/portal/proizvodi/mapiranja");
   return { error: null, ok: "Veza artikla je sačuvana." };
+}
+
+/** Pregled kataloškog cilja pre potvrde: naziv, slika i varijante-redovi. */
+export async function describeCatalogTargetAction(slug: string): Promise<CatalogTarget | null> {
+  await requireCapability("mappings:manage", "/portal/proizvodi/mapiranja");
+  return describeCatalogTarget(String(slug ?? "").slice(0, 200));
 }

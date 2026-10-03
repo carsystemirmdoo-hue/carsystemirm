@@ -54,6 +54,9 @@ out
 
 # private location imports and generated internal review artifacts
 /_incoming/*.csv
+# Radne liste registra partnera: adrese e-pošte i telefoni iz izvora (scripts/partners).
+/_incoming/partners/
+/_incoming/*.xlsx
 /data/internal/location-import-review.csv
 /data/internal/location-import-summary.json
 /data/internal/geocoding-cache.json
@@ -73,6 +76,7 @@ assets/manufacturer/
 
 # izlaz provere builda (npm run build:check)
 .next-verify
+.next-pilot
 
 # izolovani izlaz dev servera (npm run dev)
 .next-dev

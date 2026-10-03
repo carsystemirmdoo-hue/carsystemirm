@@ -122,9 +122,10 @@ Odluka se vezuje za `code` i HTTP status, **nikad za tekst poruke**.
 | `timestamp_out_of_window` | 401 | `blokirano` | ne — dijagnostika sata |
 | `unknown_device`, `device_not_active`, `signature_invalid`, `issuer_mismatch`, `not_found` | 401/404 | `blokirano` | ne — **zaustavlja ceo ciklus** |
 | `currency_unsupported`, `trade_date_unsupported`, `totals_mismatch`, `schema_invalid`, … | 422 | `odbijeno` | ne |
-| `rate_limited` | 429 | `odlozeno` | da, sledeći radni dan |
-| 5xx, `temporarily_unavailable` | 5xx | `odlozeno` | da |
-| timeout / prekid veze | — | `odlozeno` | da |
+| `rate_limited` | 429 | `spremno` | da — čeka se `Retry-After` (do 2 min u ciklusu; duže → ciklus staje do tog trenutka); bez vremena postepeno 5/10/20/40/60 s |
+| 5xx, `temporarily_unavailable`, `ingest_failed` | 5xx | `spremno` | da — postepeno 5/10/20/40/60 s, najviše 5 uzastopno, pa ciklus staje |
+| timeout / prekid veze | — | `spremno` | isto kao 5xx |
+| privremena greška posle 12 slanja iste stavke | — | `odlozeno` | sledeći radni dan |
 | **nepoznat kod ili nije JSON** | bilo koji | `odlozeno` | **da — nikad potvrda** |
 
 Dve zamke koje su lako promašive i zato imaju svoj test:
@@ -134,8 +135,14 @@ Dve zamke koje su lako promašive i zato imaju svoj test:
 - **HTTP 409 nosi dve različite stvari.** `nonce_replayed` traži ponavljanje;
   ishodi za pregled ga zabranjuju. Status sam po sebi nije dovoljan. 🟢
 
-`Retry-After` se poštuje i ograničava na 24 h, ali **ne skraćuje** poslovni
-raspored: server sme da traži duže čekanje, ne ranije slanje.
+Oporavak od privremenih grešaka ide **u toku ciklusa** (`connector/src/retry.mjs`,
+od 2026-10-02): `Retry-After` iz zaglavlja ili `retryAfterSeconds` iz tela
+(ograničeno na 24 h) se poštuje; kratko čekanje se odčeka, a duže zaustavlja
+ciklus i upisuje `nastavi_posle` — sledeći `run-once` pre tog trenutka ništa ne
+šalje (`status` prikazuje `nastaviPosle`). Red se ne pomera i ne briše: prekinut
+talas se nastavlja istim `queue.db`, a stavke koje je starija verzija odložila do
+sutra zbog 429 ili prekida veze vraćaju se u red pri sledećem pokretanju.
+Raspored `auto` (jednom po radnom danu) se ne menja.
 
 ---
 
@@ -283,8 +290,10 @@ Izvor: *Zakon o državnim i drugim praznicima u Republici Srbiji*
 Tri razdvojene situacije:
 
 1. **Redovan termin** — jedan logički ciklus po lokalnom radnom datumu.
-2. **Neuspeh** — najranije **sledećeg radnog dana** u 09:00. Nema ponavljanja na
-   svakih nekoliko sekundi, vikendom ni praznikom.
+2. **Neuspeh** — privremen (429, 5xx, prekid veze): ograničeno ponavljanje u
+   istom ciklusu (§3); nepoznat odgovor ili iscrpljenih 12 slanja iste stavke:
+   najranije **sledećeg radnog dana** u 09:00. Nema neograničenog ponavljanja,
+   ni novih ciklusa vikendom ili praznikom.
 3. **Propušten termin** — pri kasnijem pokretanju istog radnog dana izvršava se
    **najviše jedan** naknadni ciklus. Konektor ugašen nedelju dana **ne** izvršava
    pet ciklusa; preostali red i novo skeniranje idu u jednom ograničenom prolazu. 🟢

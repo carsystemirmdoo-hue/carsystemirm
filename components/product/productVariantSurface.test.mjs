@@ -321,7 +321,7 @@ test("javni PDP nema nijednu cart kontrolu", async () => {
   for (const source of sources) {
     assert.doesNotMatch(
       source,
-      /CartProvider|CartDrawer|CartButton|useCart|Dodaj u korpu|Quick ?Add|quickAdd|cartBadge/,
+      /CartProvider|CartDrawer|CartButton|useCart|Dodaj(?:te)? u korpu|Quick ?Add|quickAdd|cartBadge/,
     );
   }
 

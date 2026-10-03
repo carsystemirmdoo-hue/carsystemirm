@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { recomputeAction, type RecomputeState } from "@/app/portal/preporuke/actions";
 
@@ -44,17 +44,27 @@ export function RecomputeRecommendations({
   disabled: boolean;
 }) {
   const [state, action] = useActionState(recomputeAction, POCETNO);
+  /*
+   * Kontrolisano polje: posle slanja React vraća nekontrolisano polje na
+   * podrazumevanu vrednost, pa bi uz poruku „unesite datum" stajao datum.
+   * Ovako ostaje tačno ono što je poslato.
+   */
+  const [asOfDate, setAsOfDate] = useState(defaultAsOfDate);
 
   return (
-    <form action={action} className="portal-inline-form">
+    /*
+     * `noValidate`: pregledač bi prazno polje tiho zaustavio, bez poruke. Unos
+     * proverava server akcija i vraća jasnu poruku ispod polja.
+     */
+    <form action={action} className="portal-inline-form portal-recompute-form" noValidate>
       <label className="portal-field" style={{ margin: 0 }}>
         <span>Na dan</span>
         <input
           type="date"
           name="asOfDate"
-          defaultValue={defaultAsOfDate}
-          required
-          pattern="\d{4}-\d{2}-\d{2}"
+          value={asOfDate}
+          onChange={(e) => setAsOfDate(e.target.value)}
+          aria-invalid={state.error ? true : undefined}
         />
       </label>
       <Dugme disabled={disabled} />

@@ -147,11 +147,15 @@ korak("connector suite IZ Unicode putanje", () => {
    * `W15-win` imao sa rečenicom „9 od 10". Broj koji se menja ne sme biti
    * zapisan na dva mesta.
    */
-  const izvorWin = readFileSync(
-    join(PAKET, "connector", "test", "windows-smoke.test.mjs"),
-    "utf8",
-  );
-  const ocekivanoWin = (izvorWin.match(/^test\("\[WIN\]/gm) ?? []).length;
+  /*
+   * Iz SVIH spakovanih test fajlova: `[WIN]` testovi postoje i u
+   * `diagnose` i `windows-install-hardening`, a skipovi se broje kroz ceo
+   * suite. Brojanje samo iz `windows-smoke` je od tada uvek padalo (13 ≠ 30).
+   */
+  const ocekivanoWin = readdirSync(join(PAKET, "connector", "test"))
+    .filter((f) => f.endsWith(".test.mjs"))
+    .map((f) => readFileSync(join(PAKET, "connector", "test", f), "utf8"))
+    .reduce((n, izvor) => n + (izvor.match(/^test\("\[WIN\]/gm) ?? []).length, 0);
   if (ocekivanoWin === 0) throw new Error("spakovan [WIN] skup nema nijedan test");
   if (winSkip !== ocekivanoWin) {
     throw new Error(`očekivano ${ocekivanoWin} [WIN] skipova, nađeno ${winSkip}`);

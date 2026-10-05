@@ -180,6 +180,7 @@ Radna lista `radna-lista-kontakata.csv` ima jedan red po partneru. Generator pop
 |---|---|---|
 | `/portal/kupci/partneri` | `view:mapiranja` (+ `mappings:manage`, `assignments:manage`) | registar, povezivanje, šifre komercijalista, plan dodela; uvoz iza `FEATURE_PARTNER_REGISTRY=1` |
 | `/portal/kupci/nalozi` | `view:kupacki_nalozi` | kolona „Provera za poziv", potvrda osobe, opoziv |
+| `/portal/kupci/kontakti` | `customer_accounts:manage` (+ svež drugi faktor za upis) | grupni predlog kontakata iz pregledane tabele: firma samo po `mapped` šifri, PIB kao provera; nastaju samo nalozi `requested` bez lozinke — bez potvrde osobe i bez poziva; istovetni se preskaču, neslaganja izdvajaju |
 | `/portal/kupci/[id]` | `view:kupci` + opseg | komercijalisti, ritam i signali |
 
 ---

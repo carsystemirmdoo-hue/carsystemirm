@@ -45,7 +45,7 @@ export function PdfImportUpload() {
             name="izdavalac"
             required
             maxLength={16}
-            defaultValue="CS01"
+            defaultValue="CSRM"
             disabled={pending}
           />
           <small>

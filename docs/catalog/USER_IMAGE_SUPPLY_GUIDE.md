@@ -59,116 +59,56 @@ Importer još NIJE implementiran; ovaj paket ništa ne uvozi.
 | `PACKSHOT PAKOVANJA/VARIJANTE` | Potrebna je slika BAŠ tog pakovanja; slika drugog pakovanja iste kartice se ne koristi. |
 | `SLIKA REDA (boja/dimenzija)` | Potrebna je slika BAŠ te boje/dimenzije (BEFAR). |
 
-## baslac — 34 fotografija
+## baslac — 4 fotografija
 
 Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45, Basecoat 35, Topcoat 30, Topcoat 30 CV) imaju JEDNU sliku serije: limenke te linije izgledaju isto, razlikuje ih samo oznaka tonera na nalepnici, a zapremina se bira u kartici — ne traži se fotografija po toneru ni po pakovanju. Ostali zapisi su zasebni proizvodi sa svojom šifrom.
 
-### PACKSHOT PAKOVANJA/VARIJANTE (3)
+### PACKSHOT PROIZVODA (4)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
-| P3 | Baslac 20-24 2K Primerfiller Grey 4 L | — | 4 L | 1 | `baslac__baslac-20-24-2k-primerfiller-grey-4l.webp` |
-| P3 | Baslac 20-94 2K Primerfiller Black 1 L | 20-94 | 1 L | 1 | `baslac__baslac-20-94-2k-primerfiller-black-1l.webp` |
-| P3 | Baslac 27-10 2K Washprimer 1 L | 27-10 | 1 L | 1 | `baslac__baslac-27-10-2k-washprimer-1l.webp` |
-
-### PACKSHOT PROIZVODA (31)
-
-| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
-|---|---|---|---|---|---|
-| P2 | baslac 20-22 2K Primerfiller | 20-22 | Na upit | 1 | `baslac__baslac-20-22-2k-primerfiller.webp` |
-| P2 | Baslac 21-11 2K Plastic Primer VOC 1 L | 21-11 | 1 L | 1 | `baslac__baslac-21-11-2k-plastic-primer-voc-1l.webp` |
-| P2 | Baslac 21-20 Plastic Primer 400 ml | 21-20 | 400 ml | 1 | `baslac__baslac-21-20-plastic-primer-400ml.webp` |
 | P2 | Baslac 30-S510 | — | Na upit | 1 | `baslac__baslac-30-s510-s-serija.webp` |
-| P2 | baslac 45-W10 3-Stage Additive and Blending Clear | 45-W10 | 0,5 L | 1 | `baslac__baslac-45-w10.webp` |
 | P2 | baslac 50-05 2K Hardener Ambient UC | 50-05 | Na upit | 1 | `baslac__baslac-50-05-2k-hardener-ambient-uc.webp` |
-| P2 | baslac 50-10 2K Primerfiller Hardener Extra Fast | 50-10 | Na upit | 1 | `baslac__baslac-50-10-2k-primerfiller-hardener-extra-fast.webp` |
-| P2 | baslac 50-30 2K Hardener Slow | 50-30 | Na upit | 1 | `baslac__baslac-50-30-2k-hardener-slow.webp` |
-| P2 | baslac 50-415 2K Clear Hardener Fast VOC | 50-415 | Na upit | 1 | `baslac__baslac-50-415-2k-clear-hardener-fast-voc.webp` |
-| P2 | baslac 50-420 2K Clear Hardener Normal VOC | 50-420 | Na upit | 1 | `baslac__baslac-50-420-2k-clear-hardener-normal-voc.webp` |
-| P2 | baslac 50-430 2K Clear Hardener Slow VOC | 50-430 | Na upit | 1 | `baslac__baslac-50-430-2k-clear-hardener-slow-voc.webp` |
-| P2 | baslac 50-45 2K Activator | 50-45 | Na upit | 1 | `baslac__baslac-50-45-2k-activator.webp` |
-| P2 | baslac 50-510 Ambient Clear Hardener | 50-510 | Na upit | 1 | `baslac__baslac-50-510-ambient-clear-hardener.webp` |
 | P2 | baslac 50-530 Ambient Clear Hardener slow | 50-530 | Na upit | 1 | `baslac__baslac-50-530-ambient-clear-hardener-slow.webp` |
-| P2 | baslac 51-515 2K Hardener CV fast | 51-515 | Na upit | 1 | `baslac__baslac-51-515-2k-hardener-cv-fast.webp` |
-| P2 | baslac 51-520 2K Hardener CV Normal | 51-520 | Na upit | 1 | `baslac__baslac-51-520-2k-hardener-cv-normal.webp` |
-| P2 | baslac 51-530 2K Hardener CV slow | 51-530 | Na upit | 1 | `baslac__baslac-51-530-2k-hardener-cv-slow.webp` |
-| P2 | baslac 55-10 EP Hardener | 55-10 | Na upit | 1 | `baslac__baslac-55-10-ep-hardener.webp` |
-| P2 | baslac 56-20 Bodyfiller Hardener | 56-20 | Na upit | 1 | `baslac__baslac-56-20-bodyfiller-hardener.webp` |
-| P2 | baslac 57-10 Additive Washprimer | 57-10 | Na upit | 1 | `baslac__baslac-57-10-additive-washprimer.webp` |
-| P2 | baslac 57-30 Additive Washprimer slow | 57-30 | Na upit | 1 | `baslac__baslac-57-30-additive-washprimer-slow.webp` |
-| P2 | baslac 60-05 Speeding Reducer | 60-05 | Na upit | 1 | `baslac__baslac-60-05-speeding-reducer.webp` |
-| P2 | baslac 60-10 Reducer Universal Fast | 60-10 | Na upit | 1 | `baslac__baslac-60-10-reducer-universal-fast.webp` |
-| P2 | Baslac 60-20 razređivač | 60-20 | 5 L | 1 | `baslac__baslac-60-20-razredjivac.webp` |
-| P2 | baslac 60-30 Reducer Universal Slow | 60-30 | Na upit | 1 | `baslac__baslac-60-30-reducer-universal-slow.webp` |
-| P2 | baslac 60-40 Reducer Universal Extra Slow | 60-40 | Na upit | 1 | `baslac__baslac-60-40-reducer-universal-extra-slow.webp` |
-| P2 | baslac 65-10 Blending Reducer | 65-10 | Na upit | 1 | `baslac__baslac-65-10-blending-reducer.webp` |
-| P2 | baslac 70-10 Silicone Remover for oil, silicone and grease | 70-10 | Na upit | 1 | `baslac__baslac-70-10-silicone-remover-for-oil-silicone-and-grease.webp` |
-| P2 | baslac 70-45 Cleaner | 70-45 | Na upit | 1 | `baslac__baslac-70-45-cleaner.webp` |
 | P2 | baslac 80-30 Additive Plast | 80-30 | Na upit | 1 | `baslac__baslac-80-30-additive-plast.webp` |
-| P2 | baslac 81-30 Additive Chassis | 81-30 | Na upit | 1 | `baslac__baslac-81-30-additive-chassis.webp` |
 
-## R-M — 36 fotografija
+## R-M — 17 fotografija
 
 R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Izuzetak su dve grupe istog naziva (GHD THINNER i GHD HARDENER) gde se razlikuje samo oznaka brzine: za njih je dovoljna jedna reprezentativna slika grupe. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
 
-### PACKSHOT PROIZVODA (36)
+### PACKSHOT PROIZVODA (17)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
-| P2 | R-M BRIL 852 | A 2010 | Na upit | 1 | `rm__rm-a-2010-bril-852.webp` |
-| P2 | R-M AGILIS BLENDER X-TREME | A 2540 | Na upit | 1 | `rm__rm-a-2540-agilis-blender-x-treme.webp` |
-| P2 | R-M HYDROPURE | A 2810 | Na upit | 1 | `rm__rm-a-2810-hydropure.webp` |
-| P2 | R-M GHD DECO A | A 5200 | Na upit | 1 | `rm__rm-a-5200-ghd-deco-a.webp` |
-| P2 | R-M GHD TINTING PASTE | A 5700 | Na upit | 1 | `rm__rm-a-5700-ghd-tinting-paste.webp` |
 | P2 | R-M AGILIS X-TREME | AGILIS X-TREME | Na upit | 1 | `rm__rm-agilis-x-treme.webp` |
-| P2 | R-M BLENDING Thinn-R | AM 2P35 | Na upit | 1 | `rm__rm-am-2p35-blending-thinn-r.webp` |
-| P2 | R-M MatTOP | C 2A95 | Na upit | 1 | `rm__rm-c-2a95-mattop.webp` |
 | P2 | R-M WHEEL CLEAR COAT | C 2RM2 | Na upit | 1 | `rm__rm-c-2rm2-wheel-clear-coat.webp` |
-| P2 | R-M ULTRA FLASH FLAKE DIAMOND | D 121 | Na upit | 1 | `rm__rm-d-121-ultra-flash-flake-diamond.webp` |
-| P2 | R-M ONYX HD Deep Black | DB 403 | Na upit | 1 | `rm__rm-db-403-onyx-hd-deep-black.webp` |
 | P2 | R-M DIAMONT bezbojni lak | — | 1 L | 1 | `rm__rm-diamont-bezbojni-lak.webp` |
-| P2 | R-M GHD CV 12 | GHD CV 12 | Na upit | 1 | `rm__rm-ghd-cv-12.webp` |
-| P2 | R-M GHD CV 40M | GHD CV 40M | Na upit | 1 | `rm__rm-ghd-cv-40m.webp` |
-| P2 | R-M FillCURE Slow | H 2A31 | Na upit | 1 | `rm__rm-h-2a31-fillcure-slow.webp` |
 | P2 | R-M FillCURE Plus | H 2A80 | Na upit | 1 | `rm__rm-h-2a80-fillcure-plus.webp` |
 | P2 | R-M FillCURE Plus slow | H 2A81 | Na upit | 1 | `rm__rm-h-2a81-fillcure-plus-slow.webp` |
 | P2 | R-M FILLER Harden-R Plus | H 2P80 | Na upit | 1 | `rm__rm-h-2p80-filler-harden-r-plus.webp` |
 | P2 | R-M FILLER Harden-R Plus slow | H 2P81 | Na upit | 1 | `rm__rm-h-2p81-filler-harden-r-plus-slow.webp` |
-| P2 | R-M MATSHADE Harden-R | H 2P96 | Na upit | 1 | `rm__rm-h-2p96-matshade-harden-r.webp` |
 | P2 | R-M WHEEL CLEAR COAT, HARDENER | H 2RM2 | Na upit | 1 | `rm__rm-h-2rm2-wheel-clear-coat-hardener.webp` |
 | P2 | R-M GHD PROTECT FILLER HARDENER | H 340 | Na upit | 1 | `rm__rm-h-340-ghd-protect-filler-hardener.webp` |
 | P2 | R-M GHD SLOW ACTIVATOR | H 5430 | Na upit | 1 | `rm__rm-h-5430-ghd-slow-activator.webp` |
-| P2 | R-M AGILIS Minor Repair | HB 015 | Na upit | 1 | `rm__rm-hb-015-agilis-minor-repair.webp` |
 | P2 | R-M Gleam Silver ONYX HD | HB 10S | Na upit | 1 | `rm__rm-hb-10s-gleam-silver-onyx-hd.webp` |
 | P2 | R-M ONYX BLENDER PLUS | A 2525 | Na upit | 1 | `rm__rm-onyx-blender-plus.webp` |
 | P2 | R-M ONYX HD TROPICAL | ONYX HD TROPICAL | Na upit | 1 | `rm__rm-onyx-hd-tropical.webp` |
 | P2 | R-M SpeedFILLER White | P 2A81 | Na upit | 1 | `rm__rm-p-2a81-speedfiller-white.webp` |
 | P2 | R-M SpeedFILLER Black | P 2A85 | Na upit | 1 | `rm__rm-p-2a85-speedfiller-black.webp` |
-| P2 | R-M GHD SURFACER WHITE | P 5430W | Na upit | 1 | `rm__rm-p-5430w-ghd-surfacer-white.webp` |
-| P2 | R-M GHD CHASSISMIX | P 5433 | Na upit | 1 | `rm__rm-p-5433-ghd-chassismix.webp` |
-| P2 | R-M GHD MULTI PRIMER FILLER CF | P 5520 | Na upit | 1 | `rm__rm-p-5520-ghd-multi-primer-filler-cf.webp` |
 | P2 | R-M GHD PROTECT PRIMER FILLER | P 5540 | Na upit | 1 | `rm__rm-p-5540-ghd-protect-primer-filler.webp` |
-| P2 | R-M AirtopTHINN | R 2A20 | Na upit | 1 | `rm__rm-r-2a20-airtopthinn.webp` |
-| P2 | R-M CLEAR Thinn-R | R 2P45 | Na upit | 1 | `rm__rm-r-2p45-clear-thinn-r.webp` |
 | P2 | R-M AGILIS MIX | RA 040 | Na upit | 1 | `rm__rm-ra-040-agilis-mix.webp` |
 
-## Norbin — 10 fotografija
+## Norbin — 4 fotografija
 
 Norbin izvor nema slike ni stranice proizvoda. Jedna fotografija po proizvodu; pakovanje je navedeno u tabeli. `N15-020 5 L` je poseban identitet jer 1 L već ima sliku.
 
-### PACKSHOT PROIZVODA (10)
+### PACKSHOT PROIZVODA (4)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
-| P2 | Norbin N15-V20 Clear VOC | N15-V20 | 4 L | 1 | `norbin__norbin-n15-v20-clear-voc.webp` |
 | P2 | Norbin N15-V25 Fast Clear VOC | N15-V25 | 5 L | 1 | `norbin__norbin-n15-v25-fast-clear-voc.webp` |
-| P2 | Norbin N55-V20 2K Primer Filler grey | N55-V20 | 2,5 L | 1 | `norbin__norbin-n55-v20-2k-primer-filler-grey.webp` |
-| P2 | Norbin N55-V29 2K Primer Filler black | N55-V29 | 2,5 L | 1 | `norbin__norbin-n55-v29-2k-primer-filler-black.webp` |
 | P2 | Norbin N60-V20 Multifunctional Body Filler + Hardener | N60-V20 | 0,05 kg | 1 | `norbin__norbin-n60-v20-multifunctional-body-filler-hardener.webp` |
-| P2 | Norbin N75-020 Hardener Fast | N75-020 | 0,5 L | 1 | `norbin__norbin-n75-020-hardener-fast.webp` |
-| P2 | Norbin N75-021 Hardener Normal | N75-021 | 0,5 L | 1 | `norbin__norbin-n75-021-hardener-normal.webp` |
 | P2 | Norbin N75-022 Hardener Slow | N75-022 | 2,5 L | 1 | `norbin__norbin-n75-022-hardener-slow.webp` |
-| P2 | Norbin N75-V21 Clear Hardener VOC | N75-V21 | 1 L | 1 | `norbin__norbin-n75-v21-clear-hardener-voc.webp` |
 | P2 | Norbin N95-060 Silicone cleaner | N95-060 | 5 L | 1 | `norbin__norbin-n95-060-silicone-cleaner.webp` |
 
 ## SATA — 1 fotografija

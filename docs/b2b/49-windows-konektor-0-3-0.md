@@ -22,8 +22,9 @@ neuspeha u 429.
 - Konektor: 227 prošlo, 40 Windows testova preskočeno na Mac-u.
 - Integracioni (uređaj, konektor, sinhronizacija, storno, canonical): 97/97.
 - Smoke paket: lokalna provera 10/10; **Windows izvršenje nije urađeno**.
-- PowerShell skripte nisu izvršene ni sintaksno proverene (na Mac-u nema
-  PowerShell-a); pisane kao omotač oko već pregledanih skripti, ASCII + BOM.
+- Sintaksa svih `.ps1`: 0 grešaka parserom zvaničnog PowerShell 7.6.6
+  (macOS). Izvršenje na Windows PowerShell 5.1 NIJE provereno — to je
+  kancelarijski test.
 
 ## 3. Ponašanje u kancelariji
 
@@ -36,13 +37,27 @@ neuspeha u 429.
   namerno izostavljena storna i revizije.
 - Storno se ne šalje sa uređaja; vidi se kao upozorenje, komanda `storna`
   daje fajlove, ručni upload na `/portal/importi` (48).
-- Zadatak: radnim danima posle 09:00, dok je svakodnevni (standardni) nalog
-  prijavljen; propušten termin → jedan ciklus pri paljenju; bez mreže → red čeka.
+- Raspored (`ciklus` u konfiguraciji): radnim danima svakog sata 08:00–19:00
+  (okidač 08:02–19:02, najviše 55 min po pokretanju); posle 19:00 najviše
+  jedan naknadni ciklus; preklapanje sprečavaju brava reda i
+  `MultipleInstances IgnoreNew`. Radi dok je nalog prijavljen (zaključan ekran
+  ne smeta, pregledač nije potreban); bez mreže red čeka.
+- Jedan Windows nalog koji je administrator: `-JedanNalogSaUAC` — isti nalog
+  instalira iz „Run as administrator" prozora, UAC mora biti uključen, zadatak
+  radi sa ograničenim tokenom (RunLevel Limited). Nov nalog nije potreban.
+- Stariji račun čiji je fajl nastao posle `posaljiOdDatuma` (naknadni izvoz)
+  se ne šalje sam, nego izdvaja za ručnu proveru (komanda `rucno`).
 - Ažuriranje čuva `config.json`, DPAPI ključ i `queue.db`; prethodna verzija
   ostaje kao `CarsystemConnector.prethodna-*` (`vrati-prethodnu.ps1`).
 
 ## 4. HTTPS odredište — stanje i odluka
 
+- Firmin tim `carsystem1`, projekat `carsystemirm` (repo
+  `carsystemirmdoo-hue/carsystemirm`): Production = `main`; Preview
+  `preview/portal-test` je sintetički test portal na zasebnoj test bazi.
+  Pilot dobija sopstveni Preview (`pilot/istorija`) sa promenljivim samo za
+  tu granu; tajna zaštite projekta važi i za njega. (Ranija beleška o ličnom
+  timu ispod je zastarela.)
 - Projekat `carsystemirm` je u ličnom Vercel timu na **Hobby** planu; Preview
   deploymenti su iza Vercel Authentication; za Preview ne postoji nijedna
   promenljiva baze ni autentifikacije. Pilot je danas dostupan samo preko

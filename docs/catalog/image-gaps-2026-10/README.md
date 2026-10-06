@@ -1,70 +1,82 @@
-# Krug popune slika i pregled pozadina — 2026-10-06
+# Krug popune slika i pozadine iza slika — 2026-10-06
 
-Grana `fix/image-gaps-2026-10` (od `main` 2e67921). Ništa nije objavljeno na produkciju niti pushovano.
+Grana `fix/image-gaps-2026-10` (od `main` 2e67921). Ništa nije pushovano ni objavljeno na produkciju.
 
-## 1. Brojke
+## 1. Konačne brojke (jedan izvor: runtime inventar + pregled u browseru)
+
+Inventar = `npm run catalog:image-supply:generate` (`.cache/image-audit/IMAGE_IDENTITY_INVENTORY.csv`, isti generator kao canonical manifesti). Browser = tri kruga pregleda celog sajta na lokalnom `next start` buildu ove grane.
 
 | | Broj |
 |---|---|
-| Pregledanih stranica u browseru (sitemap + 10 dodatnih ruta) | **1226** (1167 PDP, 25 strana kataloga + 5 filtera po brendu, 10 brend stranica, 4 kategorije, 6 programa, ostale) |
-| Pregledanih URL-ova varijanti (`?varijanta=`), koje sitemap ne sadrži | **774** |
-| Kartica proizvoda u katalogu (pun infinite scroll `/katalog`) | **1167** |
-| Identiteta slika proizvoda (runtime katalog) | **1806** (1801 pre kruga; +5 jer su grupe GHD THINNER i GHD HARDENER dobile sliku po članu) |
-| Zatečeno nedostataka slika proizvoda (placeholder) | **246** identiteta |
-| Zatečeno ostalih nedostataka | 7 baslac slotova po zapremini (136 nijansi), 17 fotografija na brend stranicama u 6 grupa (Carsystem 13 fajlova, Norbin 2, R-M 2), 3 slučaja generičke/tuđe slike, 1 planiran slot |
-| **Popunjeno** | **62 slike** → 57 zatečenih identiteta + 5 članova GHD grupa (R-M 26, baslac 30, Norbin 6) |
-| **Nerešeno (spisak)** | **206 unosa**: 189 slika proizvoda (SATA 153, R-M 17, Cosmos Lac 11, baslac 4, Norbin 4), 7 slotova po zapremini, 6 grupa fotografija brend stranica, 3 generičke slike, 1 planiran slot |
-| Pokvarene slike / neuspela učitavanja / reference na nepostojeći fajl | **0** u browseru; 17 referenci na nepostojeće fajlove u kodu, sve obrađene fallback-om (Carsystem 13 → u spisku; baslac `primer-process` se više ne čita; 3 su šabloni putanja) |
+| Pregledane stranice (sitemap + 10 dodatnih ruta) | **1226** (1167 PDP, 25 strana kataloga + 5 filtera po brendu, 10 brend stranica, 4 kategorije, 6 programa, ostalo) |
+| Pregledani URL-ovi varijanti (`?varijanta=`, nisu u sitemap-u) | **774** |
+| Kartice u katalogu (pun infinite scroll `/katalog`) | **1167** |
+| Identiteti slika proizvoda | 1801 na početku → **1806** sada |
+| Nedostajuće slike proizvoda (placeholder), u repou | **246 → 189** |
+| Isto, kako bi izgledalo na Vercel Production | **195** (6 Norbin slika čeka potvrdu prava i tamo ostaje na placeholderu) |
+| Pokvarene slike / neuspela učitavanja u browseru | **0** u sva tri kruga |
 
-Posle uvoza, ponovljeni pregled celog sajta: pojave „Vizuel u pripremi” pale su sa 729 → 546 na stranama kataloga i 595 → 321 na PDP-ovima.
+### Zašto 62 dodate slike, a manjak pao samo za 57
 
-## 2. Fajlovi
+- 246 − 189 = **57 zatečenih identiteta je rešeno**: R-M 21, baslac 30, Norbin 6.
+- Među tih 21 R-M su i dve **grupe** koje su se brojale kao po JEDAN identitet: GHD THINNER (GV 100/200/300/400) i GHD HARDENER (H 700/750/770). Za svaku oznaku postoji poseban packshot, pa je dodato 7 fajlova umesto 2. Grupe su zato prešle u 7 zasebnih identiteta.
+- Odatle **+5** identiteta (1801 → 1806) i **62 = 57 + 5** dodate slike na mesto placeholdera.
+- Uz to je zamenjena **1 postojeća pogrešna slika**: sistem ONYX HD je prikazivao kanister komponente HB 002, a sada prikazuje generičku ONYX HD limenku. Ukupno je u evidenciji 63 slike (`ADDED_IMAGES`).
+- Bez novih fajlova, kroz Befar sync, ispravljene su **3 dodele** (jastučić za farove, jastučić za felne, M14 adapter).
 
-- `ADDED_IMAGES.md` / `.csv` — evidencija svake dodate slike: proizvod, stranica, lokalni fajl, izvor (portal asset / URL originala), osnov potvrde identiteta, obrada, SHA originala.
-- `UNRESOLVED_IMAGES.md` / `.csv` — jedan red po resursu, sa svim stranicama gde nedostaje, razlogom, proverenim izvorima i predlogom pretrage.
-- `browser-placeholder-pages.json` — gde je placeholder stvarno viđen u browseru (ulaz za kolonu „Stranice”).
-- `background-proposal/` — predlog pozadine iza slika (CSS + uporedni snimci).
-- Skripte: `scripts/catalog/build-image-gap-imports.py` (uvoz, `--check` za proveru), `scripts/catalog/build-image-gap-report.py` (izveštaj).
+### baslac nijanse: 136 (ranije su se pojavili i 135 i 136)
 
-## 3. Izvori i pravila
+- Izvor je isti spisak baza koji koristi birač na sistemskoj stranici (`baslacPublicBases`). 136 baza nema sliku tačne zapremine:
+  - Line 30: 1 L (17)
+  - Line 35: 1 L (17) i 0,5 L (32)
+  - Line 45: 5 L (2), 1 L (7), 0,5 L (49) i 0,1 L (12)
+- Broj 135 je bio broj **URL-ova** na kojima je crawl video poruku: 134 baze preko svoje `?varijanta=` adrese i 1 adresa lica porodice (`?varijanta=baslac-basecoat-45`, koja otvara prvu bazu).
+- Dve baze (45-R45, 45-W10) imaju sopstvene kartice proizvoda sa tačnom slikom. Na sistemskoj stranici se biraju samo klikom, pa ih crawl po adresama ne vidi. Konačan broj je **136**.
 
-- **R-M i baslac — Surventis Brand Portal** (hub 51 / hub 54), originali preko istog API-ja kao dugme „Download original” (veličina fajla = zapis asseta, ne CDN pregled). Dozvola dobavljača za upotrebu na sajtu je od ranije u evidenciji (2026-09-28). R-M: pored pretrage po nazivu, vizuelno je pregledano svih 808 neimenovanih „composite” packshotova — tako je nađeno 20 od 26 slika.
-- **Norbin — renderi proizvođača sa sajta distributera Väritikka Oy** (varitikka.fi), jer norbin-paint.com nema slike, a portal nema Norbin biblioteku. Sajt distributera nema zabranu upotrebe; render je delo proizvođača, pa je `rightsBasis: OWNER_CONFIRMATION_REQUIRED` — **pre objave na produkciju vlasnik potvrđuje pravo**.
-- Slika je dodata samo ako etiketa na originalu nosi tačnu šifru i naziv zapisa (i pakovanje kada je zapis vezan za pakovanje). Odbijeni su, između ostalog: „A 2540 BLENDING FLASH” (druga linija od AGILIS A 2540), A 2P35 limenka (zapis je AM 2P35 sprej), DIAMONT BC 105 za „DIAMONT bezbojni lak”, H 2P84 za H 2P80, GHD HARDENER H 5450 za H 700, HB 10S sa kineskom etiketom.
-- Obrada: samo obrezivanje praznog ruba (providnog ili belog) + skaliranje na ≤1600 px, WebP q90, sRGB profil zadržan. Pozadina sa belih originala (baslac, Norbin N75-021, N15-V20, N75-V21) **nije** uklanjana — izdvajanje alfe bi probušilo belu etiketu; u tamnoj temi se vide kao bela pločica, isto kao postojeći baslac packshotovi.
-- Molotow, 3M i sia nisu vraćeni. Identitet, šifre, cene, opisi, URL-ovi i asortiman nisu menjani. Postojeće ispravne slike nisu dirane.
-- SATA (sva prava zadržana, bez javne dozvole) i Cosmos Lac (uslovi zabranjuju komercijalnu upotrebu bez pisane dozvole) — ništa nije preuzeto; u spisku su sa razlogom. Napomena: URL-ovi SATA slika u manifestu su od 2026-09-24 zastareli (404).
+## 2. Šta je urađeno u ovom krugu
 
-## 4. Mreža iza slika („kockice”) — nalaz po slučaju
+1. **Pozadine (odobreno):** CSS mreža i pruge iza slika zamenjene su mirnom „studio” površinom sa veoma blagim prelazom. Tokeni su u `app/globals.css`, usklađeni sa površinom kartice u katalogu (`--surface-muted`). Primena:
+   - Carsystem kartice proizvoda;
+   - RUPES/brend logo pločica (uvek taman blok);
+   - R-M prazan slot (mreža uklonjena);
+   - Norbin kartica bez fotografije (uvek svetla stranica);
+   - Carfit prazan media slot (u uvek-tamnom hero bloku taman).
+   Dekor sekcija (Carfit hero, R-M Refinity) nije diran — proizvod tamo stoji na punoj ćeliji, ne na mreži. Snimci: `zavrsni-snimci/01-pozadine-iza-slika.jpg`.
+2. **ONYX HD:** generička ONYX HD limenka sa portala (asset 30819, bez šifre nijanse), po istom principu kao odobreni UNO HD.
+3. **Befar:** Befar-ov zvanični katalog (str. 31, natpisi i šifre) pokazuje da je konusni jastučić onaj za **felne** (97200), ravan cilindrični za **farove** (83424), a M14 adapter je zasebna fotografija (97400). Ranije su sva tri proizvoda imala konusni jastučić i istu galeriju. Ispravljeno kroz izvor istine `data/befar-sync/manual-decisions.json` → `images` i `befar:sync:apply`. Sync provera daje 0 promena.
+4. **baslac Line 30/35/45:**
+   - Kada za zapreminu izabrane baze nema slike, sistemska stranica prikazuje **primer ambalaže linije**: generičku limenku linije bez šifre nijanse („45-W Basecoat”, „35-M Basecoat”, „Line 30 Topcoat”).
+   - Uz sliku stoji natpis „Primer ambalaže linije — ne prikazuje izabranu nijansu ni zapreminu”, a alt tekst kaže isto.
+   - Line 45 je usklađen: umesto limenke konkretne nijanse 45-W1010 sada stoji generička „45-W” limenka koju je vlasnik dostavio (pravo potvrđeno), sa natpisom „Primer ambalaže”.
+   - Gde slika tačne zapremine postoji (Line 30/35, 3,5 L), ostaje ona.
+5. **Norbin — čeka potvrdu prava:** 6 slika ima `rightsBasis: OWNER_CONFIRMATION_REQUIRED`.
+   - `lib/supplied-image-rights.mjs` ih izostavlja kada je `VERCEL_ENV=production`, pa zapis tamo zadržava placeholder. Lokalno i na Preview-u se vide radi pregleda.
+   - Test: `lib/supplied-image-rights.test.mjs`, deo `npm test`.
+   - Kada potvrdite pravo, dovoljno je promeniti `rightsBasis` u `OWNER_CONFIRMED`.
+   - Napomena: fajlovi postoje u `public/` i dostupni su po direktnoj adresi, ali ih nijedna stranica na Production ne koristi.
+6. **GHD grupe:** u `shared-image-groups.json` status je sada `RESOLVED_PER_MEMBER_PACKSHOT`. Ranija odluka je sačuvana u `previousDecision`. Drugih odloženih grupa nema; odluke van ovog fajla nisu dirane.
+7. **SATA i Cosmos Lac:** nastavljena potraga, ništa nije preuzeto.
+   - SATA: za svih 153 artikla utvrđena je aktuelna stranica artikla na sata.com (`sata-current-official-urls.csv`). Za 133 postoji slika baš tog artikla, 7 ima samo sliku srodnog artikla, a 13 nema sliku. Prepreka je pravo upotrebe: SATA zadržava sva prava, a press/media dozvole nema.
+   - Cosmos Lac: uslovi korišćenja zabranjuju komercijalnu upotrebu bez pisane dozvole, a Brand Kit je zaštićen lozinkom. Lokalni folder `assets/manufacturer/cosmos-lac/images` je preuzet sa sajta i vodi se kao „REQUIRES RIGHTS CONFIRMATION”. Kandidati iz njega navedeni su po proizvodu, ali nisu upotrebljeni.
 
-Proverena su oba moguća izvora:
+## 3. Provere u browseru
 
-1. **Ugrađeno u fajl** — dva nezavisna detektora nad svih 2274 slika u `public/` i `assets/`: nijedna slika koja se servira nema ugrađenu šahovnicu. Jedini pogodak je `assets/cikica-spray/source/frame-01.png` (izvorni kadar, ne koristi se na sajtu). Najbliži „lažni” pogodak (`carsystem-2k-clear-voc-hs-sr.webp`) je mreža odštampana na samoj etiketi limenke. Ranije dostavljeni baslac PNG-ovi sa ugrađenom šahovnicom (content register) nikad nisu objavljeni.
-2. **CSS** — svi vidljivi slučajevi su CSS pozadine (linijska mreža / pruge), nijedan nije pomoćni prikaz providnosti:
+- **Dijalog pretrage** (`/`, upiti 50-415, MatTOP, N55-V20, ONYX HD, M14, satajet; svetla/tamna × desktop/telefon): rezultati prikazuju tačne nove slike, a nerešeni (SATA, ONYX HD TROPICAL, HB 10S) pošten placeholder. Snimak: `zavrsni-snimci/04-dijalog-pretrage.jpg`.
+- **Redovi tabele šifara** (`[data-variant-option]`): na Befar velcro i waffle jastučićima svaki klik menja `?varijanta=` i sliku u sliku tog reda, uključujući redove sa dostavljenim slikama (44805, 448031). SATA X 5500 (44 reda) ostaje na placeholderu. Snimak: `zavrsni-snimci/05-redovi-tabele-sifara.jpg`.
+- Snimci izmena u obe teme, na telefonu i desktopu: `zavrsni-snimci/01–03`.
 
-| Mesto | CSS | Vidljivost iza slike |
-|---|---|---|
-| `/brendovi/carsystem` — kartice proizvoda | `CarsystemBrandPage.module.css` `.productCardVisual` (mreža 48 px) | **jasno**, obe teme — najverovatniji uzrok utiska „transparentnosti” |
-| `/brendovi/rupes` (i druge strane na `BrandProgramPage`) — logo pločica | `BrandProgramPage.module.css` `.logoStage` (24 px) | vidljivo u tamnom hero bloku |
-| `/brendovi/rm` — slotovi bez fotografije, Refinity sekcija | `RmBrandPage.module.css` `.productSlotGrid`, `.refinitySection` (80 px) | slot: blago; Refinity: dekor sekcije iza fotografija |
-| `/brendovi/norbin` — kartice bez fotografije | `NorbinBrandPage.module.css` `.stockedNoImage` (dijagonalne pruge) | jasno (placeholder) |
-| `/brendovi/carfit` — hero | `CarfitBrandPage.module.css` `.hero` / `.gridSkin` (56 px) | dekor celog hero bloka, prolazi i iza packshota |
-| `/`, `/prodavnice` — učitavanje mape | `CarsystemMap.module.css` `.mapLoading` | samo dok se mapa učitava |
-| Katalog i PDP (`ProductVisualSurface`) | `.baseLayer` (10/34 px) | **nije vidljivo** — sloj je nulte veličine; ovo je već mirna površina i uzor za predlog |
+## 4. Fajlovi
 
-## 5. Predlog pozadine (nije primenjen na sajt)
+- `ADDED_IMAGES.md` / `.csv` — svaka dodata slika: proizvod, stranica, lokalni fajl, izvor, potvrda identiteta, obrada i kolona **Production** (da / ne — čeka potvrdu prava). Poseban odeljak navodi slike koje čekaju potvrdu prava i ispravljene dodele.
+- `UNRESOLVED_IMAGES.md` / `.csv` — 204 unosa, po jedan resurs: sve stranice, šta nedostaje, konkretan razlog, provereni izvori (za SATA tačna stranica i URL slike artikla) i predlog pretrage.
+- `browser-placeholder-pages.json` — gde je placeholder viđen u browseru (treći krug).
+- `sata-current-official-urls.csv` — aktuelne SATA stranice i slike po artiklu, bez cena.
+- `background-proposal/` — prvobitni predlog (pre/posle), `zavrsni-snimci/` — stanje posle primene.
+- Skripte: `scripts/catalog/build-image-gap-imports.py` (`--check`), `scripts/catalog/build-image-gap-report.py`.
 
-„Studio” površina: jedna mirna boja sa vrlo blagim vertikalnim prelazom i slabim svetlim jezgrom iza proizvoda, usklađena sa postojećom površinom kartice u katalogu (svetla ≈ `oklch(0.945 0.004 255)`, tamna `oklch(0.182 0.01 255)` → predlog `0.968→0.935` i `0.235→0.19`). Tamna varijanta je za nijansu svetlija od kataloga da crne i tamnoplave ambalaže ne utonu (vidi disk F.23 na snimku). Posebne boje se ne uvode: „roletna” boje proizvoda/serije u katalogu ostaje kako jeste (potvrđeni izvori boje). Površine koje stoje u uvek-tamnom (RUPES logo pločica) ili uvek-svetlom (Norbin) bloku zadržavaju svoju temu.
+## 5. Ograničenja
 
-Snimci (pre / posle, svetla / tamna): `background-proposal/predlog-desktop.jpg`, `predlog-telefon.jpg`; uzor: `referenca-katalog-pdp.jpg`. CSS predloga: `background-proposal/studio-surface-proposal.css` (ubacivan samo u snimke).
-
-**Preporuka:** primeniti studio površinu na `.productCardVisual` (Carsystem), `.logoStage`, `.productSlotGrid` i `.stockedNoImage`; Carfit i R-M Refinity mrežu zadržati kao dekor sekcije, ali iza samog packshota (Carfit hero kartica) staviti mirnu površinu. Primena čeka Vašu potvrdu.
-
-## 6. Provere i ograničenja
-
-Rezultati provera su u završnom izveštaju sesije. Ograničenja pregleda:
-- Pretraga (dijalog) nije posebno snimana — koristi istu karticu i isti izvor slike kao katalog, a sve kartice su pregledane kroz pun infinite scroll.
-- Snimci za dokaz su pravljeni na lokalnom `next start` buildu ove grane; produkcija je iza maintenance režima.
-- Redovi tabele šifara (ARTICLE, 38 identiteta) provereni su statički (fajl postoji, slika pripada redu), ne klikom na svaki red.
-- Norbin slike čekaju potvrdu prava vlasnika pre produkcije (`OWNER_CONFIRMATION_REQUIRED`).
-- Odluke vlasnika ostaju netaknute u `shared-image-groups.json` (GHD grupe su i dalje označene kao „odloženo”); inventar ih sada prepoznaje kao rešene jer svaki član ima sopstvenu sliku.
+- Snimci i pregled su urađeni na lokalnom `next start` buildu ove grane. Produkcija je iza maintenance režima.
+- U trećem krugu je lokalni optimizator slika posle velikog opterećenja zastao na AVIF kodiranju 12 slika (WebP je radio). Posle restarta servera iste slike se kodiraju za oko 1 s, a svih 1226 stranica je ponovo prošlo. Te slike nisu menjane u ovoj grani.
+- Redovi tabele šifara provereni su klikom na po prvih 9 redova kartica Befar velcro (od 15), Befar waffle (od 11) i SATA X 5500 (od 44), u obe teme i na oba ekrana. Ostale kartice sa redovima koriste istu komponentu i iste podatke, a statički su proverene (slika postoji i pripada redu).
+- Norbin slike čekaju potvrdu prava. SATA i Cosmos čekaju pisanu dozvolu proizvođača.

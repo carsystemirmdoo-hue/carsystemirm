@@ -44,8 +44,8 @@ COSMOS_CHECK = (
 # Razlog po (brend, missing_reason) iz manifesta; pojedinačne napomene dopunjuju ITEM_NOTES.
 REASONS = {
     ("sata", "OFFICIAL_IMAGE_RIGHTS_REVIEW"): "Zvanična slika postoji, ali SATA zadržava sva prava i ne objavljuje dozvolu za preprodavce; potrebna je pisana saglasnost SATA (ili slike iz SATA PSV dealer shop-a).",
-    ("sata", "PLACEHOLDER_ACCEPTED"): "SATA ne objavljuje sliku ovog pribora; vlasnik je ranije prihvatio placeholder (pribor faze 2).",
-    ("sata", "OFFICIAL_IMAGE_NOT_PUBLISHED"): "SATA za ovaj artikal ne objavljuje sliku.",
+    ("sata", "PLACEHOLDER_ACCEPTED"): "Vlasnik je ranije prihvatio placeholder za ovaj pribor (faza 2); i za njega važi da SATA ne daje javnu dozvolu za upotrebu slika.",
+    ("sata", "OFFICIAL_IMAGE_NOT_PUBLISHED"): "Ranije utvrđeno: SATA ne objavljuje sliku.",
     ("cosmos-lac", "OFFICIAL_IMAGE_AVAILABLE_NOT_IMPORTED"): "Slika postoji samo na cosmoslac.com (nema je u Brand Kit-u). Uslovi korišćenja cosmoslac.com zabranjuju komercijalnu upotrebu bez prethodne pisane dozvole.",
     ("rm", "OFFICIAL_IMAGE_NOT_PUBLISHED"): "Packshot ove šifre nije pronađen ni na Surventis portalu ni na info.rmpaint.com.",
     ("rm", "USER_SUPPLY_REQUIRED"): "Ručni zapis bez šifre proizvođača — identitet (koji DIAMONT lak) nije potvrđen, pa se slika ne može uparivati.",
@@ -154,19 +154,33 @@ BASLAC_VOLUME_SLOTS = [
     ("line-45", "0,1 L", 12, "12088 / 12068 (45-W1390 0,1 L), 12089 / 12071 (49-W463 0,1 L)"),
 ]
 SHARED = [
-    ("Befar", "Drill type wheel cleaning pad; M14 adapter", ["befar-drill-type-wheel-cleaning-pad", "befar-m14-adapter"],
-     "Oba zapisa prikazuju fotografiju jastučića za farove (befar-drill-type-headlight-cleaning-pad.webp) — slika drugog proizvoda prikriva nedostatak.",
-     "Befar zvanični sajt (Wix) koristi istu fotografiju za sva tri artikla; sopstvena slika nije objavljena.",
-     "befar.com.tr wheel cleaning pad / M14 adapter — zatražiti od Befar-a ili fotografisati"),
-    ("R-M", "ONYX HD (sistemska kartica)", ["rm-onyx-hd"],
-     "Kartica sistema prikazuje kanister komponente HB 002 (isti fajl kao rm-hb-002-onyx-hd) — komponenta predstavlja ceo sistem.",
-     "Slika dolazi sa info.rmpaint.com (zvanični sync). Na portalu postoji generička sistemska limenka „R-M_1L_ONYX HD” (asset 34852 / 30819), po istom principu kao odobreni UNO HD (30820). Nije zamenjeno bez odluke jer postojeća slika potiče od proizvođača.",
-     "Odobriti zamenu portalom 34852 (generička ONYX HD limenka, bez šifre)"),
     ("Cosmos Lac", "Parovi varijanti sa istom fotografijom", ["cosmos-lac-master-mechanic-10-sjaj / -10-mat (Black, White)", "cosmos-lac-flame-blue-fb-900 / fb-3000", "cosmos-lac-flame-blue-fb-904 / fb-3004", "cosmos-lac-flame-orange-fo-901 / fo-904"],
      "Sjaj i mat, odnosno puna i providna varijanta dele bajt-identičnu fotografiju iz zvaničnog Brand Kit-a.",
      "Brand Kit sadrži jednu sliku po paru; zvanični sajt takođe. Uslovi cosmoslac.com zabranjuju upotrebu drugih izvora bez dozvole.",
      "Zatražiti od Cosmos Lac posebne packshotove (support@cosmoslac.com)"),
 ]
+
+
+def read_sata() -> dict[str, dict]:
+    path = OUT / "sata-current-official-urls.csv"
+    return {row["image_id"]: row for row in csv.DictReader(path.open(encoding="utf8"))} if path.exists() else {}
+
+
+# Lokalni staging sa cosmoslac.com (assets/manufacturer/cosmos-lac/images, van Gita) — status prava:
+# REQUIRES RIGHTS CONFIRMATION (docs/CONTENT_PROCUREMENT_PLAN.md §2.5). Nije odobren izvor; navodi se kao kandidat.
+COSMOS_LOCAL = {
+    "cosmos-lac-acrylic-varnish-376-gloss": "acrylic-varnish-376-gloss.png (800×800) — bajt-identičan sa 377 i 378",
+    "cosmos-lac-acrylic-varnish-377-matt": "acrylic-varnish-377-matt.png — bajt-identičan sa 376 i 378",
+    "cosmos-lac-acrylic-varnish-378-satin": "acrylic-varnish-378-satin.png — bajt-identičan sa 376 i 377",
+    "cosmos-lac-chrome-effect-450-container": "chrome-effect-450-container-v2.png (isti fajl kao gold-451-container-v2) i chrome-effect-450.png (druga, sprej)",
+    "cosmos-lac-gold-effect-451-container": "gold-effect-451-container-v2.png (isti fajl kao chrome-450-container-v2)",
+    "cosmos-lac-high-heat-350-silver-container": "high-heat-350-silver-container-750-v2.png (800×800)",
+    "cosmos-lac-high-heat-351-black-container": "high-heat-351-black-container-175ml-v2.png — bajt-identičan sa 353-maroon-container",
+    "cosmos-lac-high-heat-353-maroon-container": "high-heat-353-maroon-container-175ml-v2.png — bajt-identičan sa 351-black-container",
+    "cosmos-lac-easy-max-glitter-912-multi": "easy-max-glitter-912-multi-1.png (800×800)",
+    "cosmos-lac-flame-orange-fo-314-piglet-pink-dark": "flame-orange-fo-314-piglet-pink-dark.png (800×800)",
+    "cosmos-lac-ral-9003-matt-signal-white": "ral-9003-matt-signal-white-v2.png",
+}
 
 
 def read_pages() -> dict[str, list[str]]:
@@ -207,12 +221,15 @@ def added() -> list[dict]:
             "identity_evidence": detail["identityEvidence"],
             "processing": detail["processingMethod"],
             "original_sha256": image["sourceSha256"],
+            "production": "DA" if image["rightsBasis"] == "OWNER_CONFIRMED" else "NE — čeka potvrdu prava vlasnika (lokalno i Preview: da)",
+            "replaces": "zamenjuje sliku komponente HB 002 (rm-hb-002-onyx-hd.webp) na kartici sistema" if image["slug"] == "rm-onyx-hd" else "placeholder",
         })
     return rows
 
 
 def unresolved() -> list[dict]:
     pages = read_pages()
+    sata = read_sata()
     rows = []
     for item in csv.DictReader((ROOT / "data/catalog/image-supply/MISSING_PRODUCT_IMAGES.csv").open(encoding="utf8")):
         brand, slug = item["brand"], item["slug"]
@@ -223,15 +240,30 @@ def unresolved() -> list[dict]:
         in_family = any(p.startswith("/proizvodi/grupa/") for p in seen)
         page_list = sorted(set(seen if in_family else [f"/proizvodi/{slug}"] + seen))
         note = ITEM_NOTES.get(slug, "")
+        checked = CHECKED[brand] + (f" ; zvanični URL iz manifesta: {item['official_image_url']}" if item["official_image_url"] else "")
+        code = " / ".join(x for x in [item["manufacturer_code"] or item["public_code"], item["package"] if item["package"] not in ("", "Na upit") else ""] if x)
+        if brand == "sata":
+            current = sata.get(item["image_id"], {})
+            code = f"glavni artikal {current.get('main_article', '?')}" + (f" (svi: {item['article_number']})" if " " in item["article_number"] else "")
+            if current.get("filename_article_matches") == "yes":
+                note = (note + " " if note else "") + "Zvanična slika TAČNOG artikla postoji (broj artikla u nazivu fajla) — jedina prepreka je pravo upotrebe."
+            elif current.get("current_image_url"):
+                note = (note + " " if note else "") + f"sata.com za glavni artikal objavljuje samo sliku srodnog artikla ({current.get('note', '')}) — ne koristi se kao zamena."
+            else:
+                note = (note + " " if note else "") + "sata.com na stranici artikla ne objavljuje sliku."
+            checked = (f"stranica artikla: {current.get('product_page_url', '')} ; aktuelna slika (2026-10-06): {current.get('current_image_url') or 'nema'} ; "
+                       "sata.com/en/legal-notice, /en/terms-conditions, /de-de/agb, /en/service/downloads (nema press/media dozvole); stari URL iz manifesta vraća 404")
+        if brand == "cosmos-lac" and slug in COSMOS_LOCAL:
+            checked += f" ; lokalni staging (sa cosmoslac.com, prava NEPOTVRĐENA): assets/manufacturer/cosmos-lac/images/{COSMOS_LOCAL[slug]}"
         rows.append({
             "group": "PRODUCT_IMAGE",
             "brand": {"rm": "R-M", "sata": "SATA", "baslac": "baslac", "norbin": "Norbin", "cosmos-lac": "Cosmos Lac"}[brand],
             "subject": item["product_name"],
-            "code_variant": " / ".join(x for x in [item["manufacturer_code"] or item["public_code"], item["article_number"] if brand == "sata" else "", item["package"] if item["package"] not in ("", "Na upit") else ""] if x),
+            "code_variant": code,
             "pages": " ; ".join(page_list) + " ; pretraga sajta (isti prikaz kartice)",
             "missing": "packshot proizvoda (kartica u katalogu, PDP, srodni proizvodi, pretraga)",
             "reason": " ".join(x for x in [REASONS.get((brand, item["missing_reason"]), item["missing_reason"]), note] if x),
-            "checked_sources": CHECKED[brand] + (f" ; zvanični URL iz manifesta: {item['official_image_url']}" if item["official_image_url"] else ""),
+            "checked_sources": checked,
             "search_term": SEARCH[brand](item),
             "image_id": item["image_id"],
         })
@@ -241,8 +273,8 @@ def unresolved() -> list[dict]:
             "group": "PACKAGE_SLOT", "brand": "baslac", "subject": f"Sistemska stranica {system} — packshot ambalaže {volume}",
             "code_variant": f"{count} baza u pakovanju {volume}",
             "pages": " ; ".join(pages.get(key, [f"/proizvodi/grupa/baslac-{system}?varijanta=…"])),
-            "missing": f"generička slika ambalaže {volume} za sistem {system} (prikazuje se „Zvanična fotografija ambalaže za ovo pakovanje je u pripremi.”)",
-            "reason": "Stranica namerno ne prikazuje limenku druge zapremine. Portal nema generičku limenku sistema za ovu zapreminu — samo limenke konkretnih šifri, koje bi uz drugu izabranu bazu prikazale pogrešnu šifru. Potrebna odluka: generički packshot ili „primer ambalaže” (kao na kartici Line 45).",
+            "missing": f"fotografija ambalaže tačne zapremine {volume} za sistem {system}. Od 2026-10-06 stranica umesto poruke „u pripremi” prikazuje PRIMER AMBALAŽE LINIJE (generička limenka linije bez šifre nijanse) sa natpisom „ne prikazuje izabranu nijansu ni zapreminu”; u dijalogu pretrage pojedinačne nijanse i dalje imaju placeholder",
+            "reason": "Portal nema generičku limenku sistema za ovu zapreminu — samo limenke konkretnih šifri, koje bi uz drugu izabranu bazu prikazale pogrešnu šifru.",
             "checked_sources": f"{BASLAC_PORTAL_CHECK} ; kandidati (primer ambalaže, NE generička): {candidates}",
             "search_term": f"baslac {system.replace('line-', 'Line ')} {volume} family packshot (generička limenka bez šifre nijanse)",
             "image_id": key,
@@ -268,7 +300,7 @@ def unresolved() -> list[dict]:
     return rows
 
 
-ADDED_COLUMNS = ["brand", "product_slug", "site_page", "local_file", "size_px", "source_url", "source_page", "source_basis", "rights_basis", "identity_evidence", "processing", "original_sha256"]
+ADDED_COLUMNS = ["brand", "product_slug", "site_page", "local_file", "size_px", "source_url", "source_page", "source_basis", "rights_basis", "production", "replaces", "identity_evidence", "processing", "original_sha256"]
 UNRESOLVED_COLUMNS = ["group", "brand", "subject", "code_variant", "pages", "missing", "reason", "checked_sources", "search_term", "image_id"]
 
 
@@ -278,14 +310,27 @@ def main() -> None:
     (OUT / "ADDED_IMAGES.csv").write_text(csv_text(ADDED_COLUMNS, add), encoding="utf8")
     (OUT / "UNRESOLVED_IMAGES.csv").write_text(csv_text(UNRESOLVED_COLUMNS, unr), encoding="utf8")
 
-    lines = ["# Dodate slike — krug 2026-10", "", f"Ukupno: **{len(add)}** slika. Originali su van Gita (`assets/manufacturer/…`); izvedeni WebP fajlovi su u `public/products/<brend>/supplied/`, a evidencija po slici u `data/catalog/image-supply/supplied-images.json`. Pravilo: slika je dodata samo kada je etiketa na originalu ručno pročitana i odgovara brendu, nazivu, šifri i (gde je zadato) pakovanju zapisa.", ""]
+    pending = [row for row in add if row["rights_basis"] != "OWNER_CONFIRMED"]
+    lines = ["# Dodate slike — krug 2026-10", "", f"Ukupno: **{len(add)}** slika ({len(add) - 1} na mesto placeholdera + 1 zamena pogrešne slike sistema ONYX HD). Originali su van Gita (`assets/manufacturer/…`); izvedeni WebP fajlovi su u `public/products/<brend>/supplied/`, a evidencija po slici u `data/catalog/image-supply/supplied-images.json`. Pravilo: slika je dodata samo kada je etiketa na originalu ručno pročitana i odgovara brendu, nazivu, šifri i (gde je zadato) pakovanju zapisa.", "",
+             f"## ⚠ Čeka potvrdu prava — NE ide u Production ({len(pending)})", "",
+             "Renderi proizvođača sa sajta distributera (Väritikka). `rightsBasis: OWNER_CONFIRMATION_REQUIRED`; `lib/supplied-image-rights.mjs` ih na Vercel Production izostavlja (zapis zadržava placeholder), a lokalno i na Preview-u se vide radi pregleda. Kada vlasnik potvrdi pravo, dovoljno je promeniti `rightsBasis` u `OWNER_CONFIRMED`.", "",
+             "| Proizvod | Lokalni fajl | Izvor | Potvrda identiteta |", "|---|---|---|---|"]
+    for row in pending:
+        lines.append(f"| [{row['product_slug']}]({SITE}{row['site_page']}) | `{row['local_file']}` | {md_cell(row['source_url'])} | {md_cell(row['identity_evidence'])} |")
+    decisions = json.loads((ROOT / "data/befar-sync/manual-decisions.json").read_text(encoding="utf8")).get("images", {})
+    lines += ["", "## Ispravljene dodele postojećih slika", "",
+              "- **R-M ONYX HD (sistem):** umesto kanistra komponente HB 002 — generička ONYX HD limenka sa portala (asset 30819), bez šifre nijanse; isti princip kao odobreni UNO HD.",
+              "- **Befar** (kroz sync izvor istine `data/befar-sync/manual-decisions.json` → `images`, pa `befar:sync:apply`; zvanični sajt prikazuje jednu galeriju za tri proizvoda, a sync je svima davao istu glavnu sliku):"]
+    for key, decision in decisions.items():
+        lines.append(f"  - `befar-{key}` → `{decision['mediaIds'][0]}` — {decision['evidence']}")
+    lines += ["  - Napomena: nazivi fajlova se ne menjaju (deduplikacija po sadržaju), pa jastučić za felne koristi fajl `befar-drill-type-headlight-cleaning-pad.webp`, a jastučić za farove `…-3.webp`. Sadržaj je proveren.", ""]
     by_brand = defaultdict(list)
     for row in add:
         by_brand[row["brand"]].append(row)
     for brand in ["rm", "baslac", "norbin"]:
-        lines += [f"## {dict(rm='R-M', baslac='baslac', norbin='Norbin')[brand]} ({len(by_brand[brand])})", "", "| Proizvod (stranica) | Lokalni fajl | Izvor | Potvrda identiteta | Pravo |", "|---|---|---|---|---|"]
+        lines += [f"## {dict(rm='R-M', baslac='baslac', norbin='Norbin')[brand]} ({len(by_brand[brand])})", "", "| Proizvod (stranica) | Lokalni fajl | Izvor | Potvrda identiteta | Pravo | Production |", "|---|---|---|---|---|---|"]
         for row in by_brand[brand]:
-            lines.append(f"| [{row['product_slug']}]({SITE}{row['site_page']}) | `{row['local_file']}` ({row['size_px']}) | {md_cell(row['source_url'])} | {md_cell(row['identity_evidence'])} | {row['rights_basis']} |")
+            lines.append(f"| [{row['product_slug']}]({SITE}{row['site_page']}) | `{row['local_file']}` ({row['size_px']}) | {md_cell(row['source_url'])} | {md_cell(row['identity_evidence'])} | {row['rights_basis']} | {'da' if row['production'] == 'DA' else '**ne**'} |")
         lines.append("")
     (OUT / "ADDED_IMAGES.md").write_text("\n".join(lines) + "\n", encoding="utf8")
 

@@ -43,7 +43,8 @@
   "/proizvodi/grupa/baslac-line-30?varijanta=30-S530",
   "/proizvodi/grupa/baslac-line-30?varijanta=30-S610",
   "/proizvodi/grupa/baslac-line-30?varijanta=30-S621",
-  "/proizvodi/grupa/baslac-line-30?varijanta=30-S910"
+  "/proizvodi/grupa/baslac-line-30?varijanta=30-S910",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "baslac-volume:line-35:0,5 L": [
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M1120",
@@ -77,7 +78,8 @@
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M381",
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M382",
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M391",
-  "/proizvodi/grupa/baslac-line-35?varijanta=35-M599"
+  "/proizvodi/grupa/baslac-line-35?varijanta=35-M599",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "baslac-volume:line-35:1 L": [
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M1021",
@@ -96,7 +98,8 @@
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M218",
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M302",
   "/proizvodi/grupa/baslac-line-35?varijanta=35-M311",
-  "/proizvodi/grupa/baslac-line-35?varijanta=35-M590"
+  "/proizvodi/grupa/baslac-line-35?varijanta=35-M590",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "baslac-volume:line-45:0,1 L": [
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W1390",
@@ -110,7 +113,8 @@
   "/proizvodi/grupa/baslac-line-45?varijanta=49-W443",
   "/proizvodi/grupa/baslac-line-45?varijanta=49-W448",
   "/proizvodi/grupa/baslac-line-45?varijanta=49-W469",
-  "/proizvodi/grupa/baslac-line-45?varijanta=49-W488"
+  "/proizvodi/grupa/baslac-line-45?varijanta=49-W488",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "baslac-volume:line-45:0,5 L": [
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W10",
@@ -161,7 +165,8 @@
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W435",
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W446",
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W485",
-  "/proizvodi/grupa/baslac-line-45?varijanta=45-W490"
+  "/proizvodi/grupa/baslac-line-45?varijanta=45-W490",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "baslac-volume:line-45:1 L": [
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W05",
@@ -170,11 +175,13 @@
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W1520",
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W1610",
   "/proizvodi/grupa/baslac-line-45?varijanta=45-W1920",
-  "/proizvodi/grupa/baslac-line-45?varijanta=45-W590"
+  "/proizvodi/grupa/baslac-line-45?varijanta=45-W590",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "baslac-volume:line-45:5 L": [
   "/proizvodi/grupa/baslac-line-45?varijanta=45-R45",
-  "/proizvodi/grupa/baslac-line-45?varijanta=45-W00"
+  "/proizvodi/grupa/baslac-line-45?varijanta=45-W00",
+  "dijalog pretrage (pojedinačne nijanse)"
  ],
  "cosmos-lac-acrylic-varnish": [
   "/katalog",

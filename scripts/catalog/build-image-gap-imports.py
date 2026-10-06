@@ -81,6 +81,7 @@ RM = [
     ("rm-a-2810-hydropure", 32662, "53236209_RM11A6_1_53236209_20230613135831_composite", "HYDROPURE · A 2810"),
     ("rm-h-2p96-matshade-harden-r", 32576, "50824795_RC3327_3_50824795_20231005125151_composite", "MATSHADE HARDEN-R · H 2P96 · eSense topcoat hardener, mat slow (Pioneer Series)"),
     ("rm-a-2540-agilis-blender-x-treme", 30620, "50814622_RA3122_0_50814622_20230605100314_composite", "AGILIS · A 2540 (linija AGILIS i šifra se poklapaju sa zapisom; NE „BLENDING FLASH A2540”, to je druga linija)"),
+    ("rm-onyx-hd", 30819, "R-M_1L_ONYX HD", "ONYX HD — generička sistemska limenka bez šifre nijanse (isti princip kao odobreni UNO HD 30820); zamenjuje kanister komponente HB 002 koji je pogrešno predstavljao ceo sistem"),
     ("rm-r-2p45-clear-thinn-r", 36379, "50675739_RC60B2_4_50675739_20231010154923_composite", "CLEAR THINN-R EXTRA SLOW · R 2P45 (Pioneer Series, eSense)"),
 ]
 

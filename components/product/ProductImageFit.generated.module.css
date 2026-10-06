@@ -19858,6 +19858,15 @@
   --product-content-offset-y: 0.0369;
 }
 
+.fit[data-product-fit="/products/rm/supplied/rm__rm-onyx-hd.webp"] {
+  --product-canvas-aspect: 0.7869;
+  --product-content-aspect: 0.7699;
+  --product-content-fill-x: 0.9063;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0469;
+  --product-content-offset-y: 0.0369;
+}
+
 .fit[data-product-fit="/products/rm/supplied/rm__rm-p-5430w-ghd-surfacer-white.webp"] {
   --product-canvas-aspect: 0.8;
   --product-content-aspect: 0.7841;

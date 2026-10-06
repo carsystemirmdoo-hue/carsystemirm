@@ -2041,6 +2041,35 @@
         "processingMethod": "obrezan samo providni rub + 4 % odstojanja, alfa i senka očuvane; skalirano LANCZOS na ≤ 1600 px; WebP q90; sRGB profil zadržan; sadržaj proizvoda nije menjan",
         "ownerPermission": "Vlasnik je 2026-09-28 potvrdio dozvolu dobavljača (Surventis) za upotrebu zvaničnih R-M i baslac materijala sa portala na sajtu."
       }
+    },
+    {
+      "imageId": "rm__rm-onyx-hd",
+      "brand": "rm",
+      "scope": "CARD",
+      "slug": "rm-onyx-hd",
+      "path": "/products/rm/supplied/rm__rm-onyx-hd.webp",
+      "sha256": "9f2a257c65b1b85d4c3fff5a3abbec22212071f3a4cdd75a6dbc5861d3190375",
+      "width": 1259,
+      "height": 1600,
+      "sourceFile": "R-M_1L_ONYX HD.png",
+      "sourceSha256": "49ef5ee66dfdb5213671bebd43807f8ddc5f3f8e6a0f866f93a364119d4c4117",
+      "batch": "SUPPLIER_PORTAL_RM_2026-10",
+      "sourceBasis": "SUPPLIER_BRAND_PORTAL",
+      "processing": "CROP_SCALE_ONLY",
+      "rightsBasis": "OWNER_CONFIRMED",
+      "sourceDetail": {
+        "portal": "Surventis Brand Portal — R-M hub 51, Media Library (document 392)",
+        "portalUrl": "https://brand.surventiscoatings.com/hub/51",
+        "collection": "All R-M Packshots",
+        "assetId": 30819,
+        "assetTitle": "R-M_1L_ONYX HD",
+        "originalFile": "R-M_1L_ONYX HD.png",
+        "downloadedOn": "2026-10-06",
+        "downloadMethod": "Portal API isti kao dugme „Download original” (/api/screen/download/<id>); veličina = file_size zapisa asseta, ne CDN pregled",
+        "identityEvidence": "Etiketa na originalu (ručno pročitano): ONYX HD — generička sistemska limenka bez šifre nijanse (isti princip kao odobreni UNO HD 30820); zamenjuje kanister komponente HB 002 koji je pogrešno predstavljao ceo sistem. Šifra i naziv odgovaraju zapisu `rm-onyx-hd`.",
+        "processingMethod": "obrezan samo providni rub + 4 % odstojanja, alfa i senka očuvane; skalirano LANCZOS na ≤ 1600 px; WebP q90; sRGB profil zadržan; sadržaj proizvoda nije menjan",
+        "ownerPermission": "Vlasnik je 2026-09-28 potvrdio dozvolu dobavljača (Surventis) za upotrebu zvaničnih R-M i baslac materijala sa portala na sajtu."
+      }
     }
   ]
 }

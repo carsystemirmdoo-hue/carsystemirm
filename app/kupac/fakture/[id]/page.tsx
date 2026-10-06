@@ -72,6 +72,7 @@ export default async function CustomerInvoicePage({ params }: { params: Promise<
         <p className="portal-footnote">
           Cene na ovoj fakturi su istorijske — važile su za ovu isporuku i nisu važeće cene u katalogu.
           {invoice.confirmed ? "" : " Ovaj dokument još nije potvrđen iz izvornog dokumenta."}
+          {invoice.reversed ? " Ova faktura je u potpunosti stornirana i ne računa se u kupovinu." : ""}
         </p>
       </div>
     </section>

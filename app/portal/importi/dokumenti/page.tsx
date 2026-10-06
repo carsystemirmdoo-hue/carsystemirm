@@ -119,6 +119,8 @@ export default async function SourceDocumentsPage({
           conflictReason: row.conflictReason,
           manualReview: row.manualReview,
           posted: row.invoiceId !== null,
+          stornoStatus: row.stornoStatus,
+          reversed: row.reversed,
         }))}
       />
 

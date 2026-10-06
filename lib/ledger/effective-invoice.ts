@@ -21,5 +21,19 @@ export function effectiveInvoiceCondition(): SQL {
     SELECT 1 FROM source_documents sd
      WHERE sd.invoice_id = ${invoices.id}
        AND NOT (sd.revision_status = 'original' AND sd.manual_review <> 'pending')
+  ) AND ${notReversedCondition()}`;
+}
+
+/**
+ * Faktura nije potpuno stornirana primenjenim stornom (0033, docs/b2b/48).
+ *
+ * Isto pravilo stoji u `effective_sales_ledger` i `recommendation_input_lines`;
+ * ovde je za upite koji fakture čitaju direktno (pokazatelji kupovine).
+ * Dokument ostaje vidljiv u istoriji — ovo ga samo izostavlja iz brojanja.
+ */
+export function notReversedCondition(alias?: string): SQL {
+  const id = alias ? sql.raw(`${alias}.id`) : sql`${invoices.id}`;
+  return sql`NOT EXISTS (
+    SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = ${id} AND r.status = 'applied'
   )`;
 }

@@ -232,6 +232,13 @@
       "when": 1787588098290,
       "tag": "0032_recompute_after_ingest",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1791295200000,
+      "tag": "0033_invoice_reversals",
+      "breakpoints": true
     }
   ]
 }

@@ -3,6 +3,7 @@ import {
   date,
   index,
   integer,
+  numeric,
   pgEnum,
   pgTable,
   text,
@@ -281,3 +282,46 @@ export const sourceDocumentLines = pgTable(
 );
 
 export type SourceDocumentLineRow = typeof sourceDocumentLines.$inferSelect;
+
+/**
+ * Naknadno pristiglo storno i njegov original (migracija 0033, docs/b2b/48).
+ *
+ * Veza postoji samo uz odštampanu referencu storna. `applied` isključuje
+ * original iz prometa, preporuka i pokazatelja kupovine; dokumenti ostaju.
+ */
+export const reversalStatus = pgEnum("reversal_status", ["waiting_original", "applied", "review"]);
+
+export const invoiceReversals = pgTable(
+  "invoice_reversals",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    stornoSourceDocumentId: uuid("storno_source_document_id")
+      .notNull()
+      .references(() => sourceDocuments.id, { onDelete: "restrict" }),
+    issuerCode: text("issuer_code").notNull(),
+    originalNumber: text("original_number").notNull(),
+    originalDate: date("original_date"),
+    originalSourceDocumentId: uuid("original_source_document_id").references(() => sourceDocuments.id, {
+      onDelete: "restrict",
+    }),
+    originalInvoiceId: uuid("original_invoice_id").references(() => invoices.id, { onDelete: "restrict" }),
+    status: reversalStatus("status").notNull(),
+    comparison: text("comparison"),
+    reasons: text("reasons").array().notNull().default(sql`'{}'::text[]`),
+    netEffect: numeric("net_effect", { precision: 14, scale: 2 }),
+    grossEffect: numeric("gross_effect", { precision: 14, scale: 2 }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("invoice_reversals_storno_key").on(table.stornoSourceDocumentId),
+    uniqueIndex("invoice_reversals_one_applied_key")
+      .on(table.originalInvoiceId)
+      .where(sql`${table.status} = 'applied'`),
+    index("invoice_reversals_waiting_idx")
+      .on(table.issuerCode, table.originalNumber)
+      .where(sql`${table.status} = 'waiting_original'`),
+  ],
+);
+
+export type InvoiceReversalRow = typeof invoiceReversals.$inferSelect;

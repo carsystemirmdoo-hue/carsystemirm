@@ -1,7 +1,8 @@
 import "server-only";
-import { count, desc, eq, sql } from "drizzle-orm";
+import { and, count, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { invoices } from "@/db/schema";
+import { notReversedCondition } from "@/lib/ledger/effective-invoice";
 
 /**
  * Upiti u kupčevoj putanji.
@@ -35,7 +36,8 @@ export async function loadCustomerDocumentSummary(
       last: sql<string | null>`max(${invoices.issuedOn})`,
     })
     .from(invoices)
-    .where(eq(invoices.customerId, customerId));
+    // Potpuno stornirana faktura nije kupovina (docs/b2b/48); dokument ostaje u listi.
+    .where(and(eq(invoices.customerId, customerId), notReversedCondition()));
 
   return {
     totalDocuments: rows[0]?.total ?? 0,
@@ -106,6 +108,8 @@ export type CustomerInvoiceListRow = {
   totalAmount: string;
   currency: string | null;
   confirmed: boolean;
+  /** Potpuno stornirana primenjenim stornom: ostaje u istoriji, ne računa se u kupovinu. */
+  reversed: boolean;
 };
 
 export const CUSTOMER_INVOICE_PAGE_SIZE = 25;
@@ -153,14 +157,15 @@ export async function loadCustomerInvoices(
     db.execute<{ n: number }>(sql`SELECT count(*)::int AS n FROM invoices i WHERE ${where}`),
     db.execute<{
       id: string; number: string; year: number; issued_on: string; document_kind: string;
-      line_count: number; total_amount: string; currency: string | null; confirmed: boolean;
+      line_count: number; total_amount: string; currency: string | null; confirmed: boolean; reversed: boolean;
     }>(sql`
       SELECT i.id, i.number, i.year, i.issued_on::text AS issued_on, i.document_kind::text AS document_kind,
              (SELECT count(*)::int FROM invoice_lines l WHERE l.invoice_id = i.id) AS line_count,
              i.total_amount::text AS total_amount, i.currency,
              EXISTS (SELECT 1 FROM source_documents sd
                       WHERE sd.invoice_id = i.id AND sd.validation_status = 'valid'
-                        AND sd.revision_status = 'original') AS confirmed
+                        AND sd.revision_status = 'original') AS confirmed,
+             EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = i.id AND r.status = 'applied') AS reversed
         FROM invoices i
        WHERE ${where}
        ORDER BY i.issued_on DESC, i.number DESC
@@ -180,6 +185,7 @@ export async function loadCustomerInvoices(
       totalAmount: r.total_amount,
       currency: r.currency,
       confirmed: r.confirmed,
+      reversed: r.reversed,
     })),
   };
 }
@@ -197,6 +203,8 @@ export type CustomerInvoiceDetail = {
   origin: string;
   ingestedAt: Date | null;
   confirmed: boolean;
+  /** Potpuno stornirana primenjenim stornom (docs/b2b/48). */
+  reversed: boolean;
   lines: {
     lineNumber: number;
     articleCode: string;
@@ -221,7 +229,7 @@ export async function loadCustomerInvoice(
     ...(await db.execute<{
       id: string; number: string; year: number; issued_on: string; document_kind: string;
       net_amount: string; tax_amount: string; total_amount: string; currency: string | null;
-      origin: string; ingested_at: Date | null; confirmed: boolean;
+      origin: string; ingested_at: Date | null; confirmed: boolean; reversed: boolean;
     }>(sql`
       SELECT i.id, i.number, i.year, i.issued_on::text AS issued_on, i.document_kind::text AS document_kind,
              i.net_amount::text AS net_amount, i.tax_amount::text AS tax_amount, i.total_amount::text AS total_amount,
@@ -229,7 +237,8 @@ export async function loadCustomerInvoice(
              (SELECT max(sd.created_at) FROM source_documents sd WHERE sd.invoice_id = i.id) AS ingested_at,
              EXISTS (SELECT 1 FROM source_documents sd
                       WHERE sd.invoice_id = i.id AND sd.validation_status = 'valid'
-                        AND sd.revision_status = 'original') AS confirmed
+                        AND sd.revision_status = 'original') AS confirmed,
+             EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = i.id AND r.status = 'applied') AS reversed
         FROM invoices i
        WHERE i.id = ${invoiceId}::uuid AND i.customer_id = ${customerId}`)),
   ];
@@ -258,6 +267,7 @@ export async function loadCustomerInvoice(
     origin: head.origin,
     ingestedAt: head.ingested_at ? new Date(head.ingested_at) : null,
     confirmed: head.confirmed,
+    reversed: head.reversed,
     lines: [...lines].map((l) => ({
       lineNumber: l.line_number,
       articleCode: l.article_code,
@@ -281,9 +291,12 @@ export async function loadCustomerOverview(customerId: string) {
       first_issued_on: string | null; last_ingested_at: Date | null; reps: string[] | null;
     }>(sql`
       SELECT c.name, c.pib, c.city,
-             (SELECT count(*)::int FROM invoices i WHERE i.customer_id = c.id) AS invoices,
-             (SELECT max(issued_on)::text FROM invoices i WHERE i.customer_id = c.id) AS last_issued_on,
-             (SELECT min(issued_on)::text FROM invoices i WHERE i.customer_id = c.id) AS first_issued_on,
+             (SELECT count(*)::int FROM invoices i WHERE i.customer_id = c.id
+                 AND NOT EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = i.id AND r.status = 'applied')) AS invoices,
+             (SELECT max(issued_on)::text FROM invoices i WHERE i.customer_id = c.id
+                 AND NOT EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = i.id AND r.status = 'applied')) AS last_issued_on,
+             (SELECT min(issued_on)::text FROM invoices i WHERE i.customer_id = c.id
+                 AND NOT EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = i.id AND r.status = 'applied')) AS first_issued_on,
              (SELECT max(sd.created_at) FROM source_documents sd JOIN invoices i ON i.id = sd.invoice_id
                WHERE i.customer_id = c.id) AS last_ingested_at,
              (SELECT array_agg(u.name ORDER BY u.name) FROM customer_assignments ca

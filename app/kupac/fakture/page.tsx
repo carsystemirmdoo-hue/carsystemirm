@@ -85,7 +85,7 @@ export default async function CustomerInvoicesPage({
             {result.rows.map((r) => (
               <li key={r.id}>
                 <Link href={`/kupac/fakture/${r.id}`}>
-                  <span className="ka-inv-number">{r.number}/{r.year}</span>
+                  <span className="ka-inv-number">{r.number}/{r.year}{r.reversed ? " · stornirano" : ""}</span>
                   <span>{srDate(r.issuedOn)}</span>
                   <span>{DOCUMENT_KIND_LABELS[r.documentKind] ?? r.documentKind}</span>
                   <span>{r.lineCount} {r.lineCount === 1 ? "stavka" : "stavki"}</span>

@@ -46,7 +46,7 @@ export default async function CustomerHomePage() {
                 <li key={r.id}>
                   <Link href={`/kupac/fakture/${r.id}`}>
                     <strong>{r.number}/{r.year}</strong>
-                    <span>{srDate(r.issuedOn)} · {DOCUMENT_KIND_LABELS[r.documentKind] ?? r.documentKind}</span>
+                    <span>{srDate(r.issuedOn)} · {DOCUMENT_KIND_LABELS[r.documentKind] ?? r.documentKind}{r.reversed ? " · stornirano" : ""}</span>
                     <span className="ka-amount">{srMoney(r.totalAmount, r.currency)}</span>
                   </Link>
                 </li>

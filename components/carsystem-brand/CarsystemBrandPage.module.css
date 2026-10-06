@@ -1784,19 +1784,8 @@
   flex: 0 0 20rem;
   overflow: hidden;
   place-items: center;
-  background:
-    linear-gradient(
-      to right,
-      color-mix(in oklch, var(--cs-line) 35%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklch, var(--cs-line) 35%, transparent) 1px,
-      transparent 1px
-    ),
-    var(--cs-paper-muted);
-  background-size: 3rem 3rem;
+  /* Mirna studio površina (prati temu sajta), bez mreže iza proizvoda. */
+  background: var(--surface-studio);
 }
 
 .productCardVisual > img {

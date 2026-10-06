@@ -682,8 +682,8 @@
   display: grid;
   place-items: center;
   gap: 0.5rem;
-  background:
-    repeating-linear-gradient(135deg, var(--nb-paper) 0 10px, #eef2f3 10px 20px);
+  /* Norbin stranica je svetla u obe teme: fiksna svetla studio površina, bez pruga. */
+  background: var(--surface-studio-fixed-light);
 }
 
 .stockedNoImageMark {

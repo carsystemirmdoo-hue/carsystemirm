@@ -907,11 +907,13 @@
   height: 100%;
   min-height: 8rem;
   padding: 1.25rem;
-  background-image:
-    linear-gradient(to right, var(--cf-gray-soft) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cf-gray-soft) 1px, transparent 1px);
-  background-size: 2.75rem 2.75rem;
+  background: var(--surface-studio);
   text-align: center;
+}
+
+/* Hero je uvek grafitni (taman) blok. */
+.hero .mediaFallback {
+  background: var(--surface-studio-fixed-dark);
 }
 
 .mediaFallbackCode {

@@ -3,6 +3,27 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  /*
+   * „Studio” površina iza fotografija proizvoda: jedna mirna boja sa vrlo blagim
+   * vertikalnim prelazom i slabim svetlim jezgrom iza proizvoda. Usklađena sa
+   * površinom kartice u katalogu (--surface-muted). Fiksne varijante služe blokovima
+   * koji su uvek tamni ili uvek svetli, nezavisno od teme sajta.
+   */
+  --surface-studio-light-top: oklch(0.968 0.003 255);
+  --surface-studio-light-bottom: oklch(0.935 0.005 255);
+  --surface-studio-light-glow: oklch(0.99 0.002 255 / 0.85);
+  /* Tamna varijanta je namerno svetlija od tamne kartice kataloga i ima jače svetlo jezgro: teget i
+     crni proizvodi (npr. Carsystem F.23, P2000 diskovi) inače se stapaju sa podlogom. */
+  --surface-studio-dark-top: oklch(0.3 0.01 255);
+  --surface-studio-dark-bottom: oklch(0.25 0.01 255);
+  --surface-studio-dark-glow: oklch(0.47 0.012 255 / 0.9);
+  --surface-studio-fixed-light:
+    radial-gradient(ellipse 70% 60% at 50% 46%, var(--surface-studio-light-glow), transparent 70%),
+    linear-gradient(180deg, var(--surface-studio-light-top), var(--surface-studio-light-bottom));
+  --surface-studio-fixed-dark:
+    radial-gradient(ellipse 62% 56% at 50% 46%, var(--surface-studio-dark-glow), transparent 72%),
+    linear-gradient(180deg, var(--surface-studio-dark-top), var(--surface-studio-dark-bottom));
+  --surface-studio: var(--surface-studio-fixed-light);
   --background: #f7f7f8;
   --foreground: #0b0b0d;
   --surface: #ffffff;
@@ -31,6 +52,7 @@
  * na --dk-0 i --dk-1. Linije su providna svetla, pa važe na svakom nivou.
  */
 .dark {
+  --surface-studio: var(--surface-studio-fixed-dark);
   --dk-0: oklch(0.145 0.008 255);
   --dk-1: oklch(0.182 0.01 255);
   --dk-2: oklch(0.215 0.011 255);

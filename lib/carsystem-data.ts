@@ -1,6 +1,7 @@
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
 import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
+import { suppliedImageAllowed } from "@/lib/supplied-image-rights.mjs";
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
 import { rmImportedProducts } from "@/lib/rm-imported-products";
 import {
@@ -2470,7 +2471,7 @@ const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => 
  *                    Tako 69 tonera deli jedan fajl umesto da se prave 69 kopija iste slike.
  */
 /** Vrednosti porekla definisane u `provenanceModel` registra (proverava `catalog:image-supply:check`). */
-export type SuppliedImageSourceBasis = "OWNER_SUPPLIED" | "SUPPLIER_BRAND_PORTAL";
+export type SuppliedImageSourceBasis = "OWNER_SUPPLIED" | "SUPPLIER_BRAND_PORTAL" | "DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER";
 
 type SuppliedImageEntry = {
   imageId: string;
@@ -2481,11 +2482,18 @@ type SuppliedImageEntry = {
   sharedAcrossFamily?: string;
   path: string;
   sourceBasis: SuppliedImageSourceBasis;
+  rightsBasis?: string;
   /** Opis konkretne slike; bez njega ostaje alt zapisa. */
   alt?: string;
 };
 
-const suppliedEntries = suppliedImages.images as SuppliedImageEntry[];
+/*
+ * Slika čije pravo objave još nije potvrđeno vidi se lokalno i na Preview-u, ali ne na Production
+ * (`lib/supplied-image-rights.mjs`); tamo zapis zadržava svoj placeholder.
+ */
+const suppliedEntries = (suppliedImages.images as SuppliedImageEntry[]).filter((entry) =>
+  suppliedImageAllowed(entry, process.env.VERCEL_ENV),
+);
 const suppliedByRecord = new Map(suppliedEntries.filter((entry) => !entry.rowId).map((entry) => [entry.slug, entry]));
 const suppliedByRow = new Map(suppliedEntries.filter((entry) => entry.rowId).map((entry) => [`${entry.slug} ${entry.rowId}`, entry]));
 const suppliedFamilyPackshot = new Map(

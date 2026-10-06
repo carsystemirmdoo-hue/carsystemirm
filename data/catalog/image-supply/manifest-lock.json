@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
-  "createdFromMainSha": "f1bd38919954c183d6c78cb48b5e79d6b378121d",
+  "createdFromMainSha": "2e6792130460ee53fd83bf5e073d256ce44efd01",
   "catalogIdentityFingerprint": "2ea429479193e598a4ac2d7aeea8ff51789f711daf4456dc201ff6cd343de2d8",
   "activeBrands": [
     "baslac",
@@ -26,30 +26,30 @@
     "rupes": 25,
     "sata": 155
   },
-  "totalImageIdentities": 1801,
-  "missingCount": 246,
-  "userSupplyCount": 81,
+  "totalImageIdentities": 1806,
+  "missingCount": 189,
+  "userSupplyCount": 26,
   "rightsReviewCount": 176,
   "userSupplyByBrand": {
-    "baslac": 34,
-    "norbin": 10,
-    "rm": 36,
+    "baslac": 4,
+    "norbin": 4,
+    "rm": 17,
     "sata": 1
   },
   "missingByAction": {
     "IMPORT_OFFICIAL_IF_APPROVED": 11,
-    "KEEP_PLACEHOLDER": 14,
+    "KEEP_PLACEHOLDER": 12,
     "RIGHTS_DECISION": 140,
-    "USER_SUPPLY": 81
+    "USER_SUPPLY": 26
   },
   "manifests": {
     "MISSING_PRODUCT_IMAGES.csv": {
-      "sha256": "5ba98d62a2322f6bcccff3f89b0362c8d790f9205da9ed20cdc9b2ae24524cf6",
-      "rows": 246
+      "sha256": "e2ad260d41f88dce37d201db1198b46471016e6ed508faa1f88f537c9316068b",
+      "rows": 189
     },
     "USER_IMAGE_SUPPLY_QUEUE.csv": {
-      "sha256": "9111e21831c8e3a88259b936602a57cb89d7701620c6e53896fac5610faaba20",
-      "rows": 81
+      "sha256": "845434f3d1841cc36694a942b23d9abe646a414dd2d198f3e08e932d650292e1",
+      "rows": 26
     },
     "IMAGE_RIGHTS_REVIEW.csv": {
       "sha256": "529e2101a3b624dcc0b865660c0e7f39c5cff726b71c995508c5a3e03b694ab7",
@@ -58,11 +58,11 @@
   },
   "imageIdentityInventory": {
     "tracked": false,
-    "sha256": "7cd6b8eb2f0f8772092a04e6647797a7f3015c232abb84cad2aef2bb36cfa84f",
-    "imageIdentityFingerprint": "97457124129710822279ae108b43a08b3e3b4747457fd3802fcfd1c93d975dfb",
+    "sha256": "af6639fd65386b1c3d814fa3aa3ff0f864f307879ce2a04ea696cf1e2a033e20",
+    "imageIdentityFingerprint": "98e838a0de981c0d5f194c3795e013a11f27ab789cff7ded4cf6fdecae55468d",
     "brokenReferences": 0,
     "wrongSibling": 0,
-    "rows": 1801
+    "rows": 1806
   },
   "sourceUpload": {
     "targetExtension": ".webp",
@@ -78,14 +78,14 @@
     "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
-    "generatedOn": "2026-10-01",
+    "generatedOn": "2026-10-06",
     "approvedAt": null,
     "approvedBy": null,
     "previousLockMetadata": {
-      "generatedOn": "2026-09-30",
+      "generatedOn": "2026-10-06",
       "approvedAt": null,
       "approvedBy": null,
-      "createdFromMainSha": "e81779701549c7102245d43bf739299d2002386c"
+      "createdFromMainSha": "2e6792130460ee53fd83bf5e073d256ce44efd01"
     },
     "note": "generatedOn = datum kada je generator zapisao ovaj sadržaj. approvedAt i approvedBy upisuje čovek tek posle pregleda; generator ih ne popunjava (null = nije odobreno). Metapodaci nisu deo identiteta manifesta."
   }

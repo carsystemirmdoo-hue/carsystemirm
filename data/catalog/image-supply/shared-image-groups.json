@@ -1,5 +1,8 @@
 {
-  "_comment": "Grupe zapisa koje dele JEDNU reprezentativnu sliku, iako su u katalogu odvojeni proizvodi. Deli se ISKLJUČIVO image identity: slug, naziv, šifra, SKU, pretraga, quick-add i PDP ostaju odvojeni, i ne nastaje nikakva porodica ni zajednička stranica. Slika je reprezentativna slika grupe — NIJE tvrdnja da etiketa sa slike prikazuje svaki pojedinačni SKU. Fajl čita generator image manifesta; runtime ga ne koristi.",
+  "_comment": [
+    "Grupe zapisa koje dele JEDNU reprezentativnu sliku, iako su u katalogu odvojeni proizvodi. Deli se ISKLJUČIVO image identity: slug, naziv, šifra, SKU, pretraga, quick-add i PDP ostaju odvojeni, i ne nastaje nikakva porodica ni zajednička stranica. Slika je reprezentativna slika grupe — NIJE tvrdnja da etiketa sa slike prikazuje svaki pojedinačni SKU. Fajl čita generator image manifesta; runtime ga ne koristi.",
+    "imageSupply.status RESOLVED_PER_MEMBER_PACKSHOT = svaki član ima sopstveni potvrđeni packshot; inventar tada broji člana kao zaseban identitet. Ranija odluka se čuva u previousDecision."
+  ],
   "decidedOn": "2026-09-22",
   "groups": [
     {
@@ -15,9 +18,14 @@
         "rm-gv-400-ghd-thinner"
       ],
       "imageSupply": {
-        "status": "DEFERRED_OWNER_IMAGE_SUPPLY",
-        "decidedOn": "2026-09-22",
-        "reason": "Vlasnik je odlučio da se slike za ovu grupu ne rade u skorijem periodu. Proizvodi OSTAJU u katalogu i u pretrazi; samo se ne traži fotografija. Do opoziva odluke identitet nosi placeholder i NIJE otvoren zahtev prema vlasniku."
+        "status": "RESOLVED_PER_MEMBER_PACKSHOT",
+        "resolvedOn": "2026-10-06",
+        "reason": "Na Surventis portalu (R-M hub 51) pronađen je zvanični packshot za SVAKU oznaku grupe, sa tom oznakom na etiketi; svaki član nosi sopstvenu sliku (data/catalog/image-supply/supplied-images.json, batch SUPPLIER_PORTAL_RM_2026-10). Reprezentativna slika grupe više nije potrebna; grupa ostaje kao zapis veze.",
+        "previousDecision": {
+          "status": "DEFERRED_OWNER_IMAGE_SUPPLY",
+          "decidedOn": "2026-09-22",
+          "reason": "Vlasnik je odlučio da se slike za ovu grupu ne rade u skorijem periodu. Proizvodi OSTAJU u katalogu i u pretrazi; samo se ne traži fotografija. Do opoziva odluke identitet nosi placeholder i NIJE otvoren zahtev prema vlasniku."
+        }
       }
     },
     {
@@ -32,9 +40,14 @@
         "rm-h-770-ghd-hardener"
       ],
       "imageSupply": {
-        "status": "DEFERRED_OWNER_IMAGE_SUPPLY",
-        "decidedOn": "2026-09-22",
-        "reason": "Vlasnik je odlučio da se slike za ovu grupu ne rade u skorijem periodu. Proizvodi OSTAJU u katalogu i u pretrazi; samo se ne traži fotografija. Do opoziva odluke identitet nosi placeholder i NIJE otvoren zahtev prema vlasniku."
+        "status": "RESOLVED_PER_MEMBER_PACKSHOT",
+        "resolvedOn": "2026-10-06",
+        "reason": "Na Surventis portalu (R-M hub 51) pronađen je zvanični packshot za SVAKU oznaku grupe, sa tom oznakom na etiketi; svaki član nosi sopstvenu sliku (data/catalog/image-supply/supplied-images.json, batch SUPPLIER_PORTAL_RM_2026-10). Reprezentativna slika grupe više nije potrebna; grupa ostaje kao zapis veze.",
+        "previousDecision": {
+          "status": "DEFERRED_OWNER_IMAGE_SUPPLY",
+          "decidedOn": "2026-09-22",
+          "reason": "Vlasnik je odlučio da se slike za ovu grupu ne rade u skorijem periodu. Proizvodi OSTAJU u katalogu i u pretrazi; samo se ne traži fotografija. Do opoziva odluke identitet nosi placeholder i NIJE otvoren zahtev prema vlasniku."
+        }
       }
     }
   ]

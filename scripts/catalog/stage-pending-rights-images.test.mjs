@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -44,4 +44,14 @@ test("lokalno i Preview: slike se postavljaju radi pregleda", () => {
     const result = stagePendingRightsImages({ root, vercelEnv: env });
     assert.equal(result.staged.length, pending.length);
   }
+});
+
+test("Production build briše i zaostale kopije koje više nisu u registru", () => {
+  const root = sandbox();
+  const stray = path.join(root, "public/products/norbin/pending-rights/stara-kopija.webp");
+  mkdirSync(path.dirname(stray), { recursive: true });
+  writeFileSync(stray, "x");
+  stagePendingRightsImages({ root, vercelEnv: "production" });
+  assert.equal(existsSync(stray), false);
+  assert.equal(existsSync(path.join(root, "public/products/norbin/pending-rights")), false);
 });

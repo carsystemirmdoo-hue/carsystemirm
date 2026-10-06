@@ -705,7 +705,7 @@
         "hasAlpha": false,
         "processing": "kept-background"
       },
-      "sharedGroupImages": true,
+      "sharedGroupImages": false,
       "missingOfficialAsset": false,
       "gallery": [],
       "content": {
@@ -789,7 +789,7 @@
         "hasAlpha": false,
         "processing": "kept-background"
       },
-      "sharedGroupImages": true,
+      "sharedGroupImages": false,
       "missingOfficialAsset": false,
       "gallery": [],
       "content": {
@@ -3369,7 +3369,7 @@
         "hasAlpha": false,
         "processing": "kept-background"
       },
-      "sharedGroupImages": true,
+      "sharedGroupImages": false,
       "missingOfficialAsset": false,
       "gallery": [],
       "content": {

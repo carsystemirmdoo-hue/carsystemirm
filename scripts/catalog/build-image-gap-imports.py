@@ -239,6 +239,11 @@ def build(check: bool) -> int:
                     "processingMethod": method,
                 },
             }
+        existing = by_id.get(image_id)
+        if pending and existing and existing.get("rightsBasis") == "OWNER_CONFIRMED":
+            # Vlasnik je u međuvremenu potvrdio pravo: zapis se više ne vraća u pending-rights.
+            print(f"SKIP {image_id}: pravo je potvrđeno (OWNER_CONFIRMED) — zapis se ne menja")
+            continue
         current = target.read_bytes() if target.exists() else None
         if current != data or by_id.get(image_id) != entry:
             stale.append(image_id)

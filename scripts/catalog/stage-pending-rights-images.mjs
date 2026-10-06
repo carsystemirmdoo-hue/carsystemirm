@@ -11,7 +11,7 @@
  *
  * Runtime (`lib/supplied-image-rights.mjs`) ih na Production dodatno ne koristi.
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -26,12 +26,23 @@ export function stagePendingRightsImages({ root = ROOT, vercelEnv = process.env.
   const pending = registry.images.filter((image) => image.rightsBasis !== RIGHTS_CONFIRMED);
   const production = vercelEnv === "production";
   const result = { production, staged: [], removed: [] };
+  if (production) {
+    // Briše se CEO `public/products/*/pending-rights/`, ne samo stavke sa spiska — i zaostala kopija
+    // zapisa koji je u međuvremenu preimenovan ili uklonjen iz registra ne sme da ode u Production.
+    const productsDir = path.join(root, "public/products");
+    for (const brand of existsSync(productsDir) ? readdirSync(productsDir) : []) {
+      const dir = path.join(productsDir, brand, "pending-rights");
+      if (!existsSync(dir)) continue;
+      result.removed.push(...readdirSync(dir).map((name) => `/products/${brand}/pending-rights/${name}`));
+      rmSync(dir, { recursive: true, force: true });
+      if (existsSync(dir)) throw new Error(`${dir} i dalje postoji za Production build`);
+    }
+  }
   for (const image of pending) {
     if (!image.path.includes(PENDING_PUBLIC_SEGMENT)) throw new Error(`${image.imageId}: slika bez potvrđenog prava mora imati putanju pod ${PENDING_PUBLIC_SEGMENT}`);
     if (!image.stagedSource || image.stagedSource.startsWith("public/")) throw new Error(`${image.imageId}: stagedSource mora biti van public/`);
     const target = path.join(root, "public", image.path);
     if (production) {
-      if (existsSync(target)) { rmSync(target); result.removed.push(image.path); }
       if (existsSync(target)) throw new Error(`${image.path} i dalje postoji u public/ za Production build`);
     } else {
       mkdirSync(path.dirname(target), { recursive: true });

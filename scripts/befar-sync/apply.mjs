@@ -54,6 +54,7 @@ for (const image of imageManifest.images) imagesBySource.set(image.sourceKey, [.
 const imageDecisions = readJson(PATHS.decisions, {}).images ?? {};
 for (const [sourceKey, decision] of Object.entries(imageDecisions)) {
   const available = imagesBySource.get(sourceKey) ?? [];
+  if (!Array.isArray(decision.mediaIds) || !decision.mediaIds.length || new Set(decision.mediaIds).size !== decision.mediaIds.length) throw new Error(`manual-decisions images.${sourceKey}: mediaIds mora biti neprazan niz bez ponavljanja`);
   const chosen = decision.mediaIds.map((mediaId) => available.find((image) => image.mediaId === mediaId));
   if (chosen.some((image) => !image)) throw new Error(`manual-decisions images.${sourceKey}: mediaId nije u galeriji izvora (${decision.mediaIds.join(", ")})`);
   imagesBySource.set(sourceKey, chosen);
@@ -215,7 +216,8 @@ const products = imports.map((item) => {
     variantColumn: variantColumn(product),
     variants,
     image: primary ? { src: primary.src, width: entry?.width ?? null, height: entry?.height ?? null, hasAlpha: Boolean(entry?.hasAlpha), processing: entry?.mode ?? null } : null,
-    sharedGroupImages: Boolean(product.sharedGroupImages),
+    // Ručna dodela fotografija znači da proizvod više ne prikazuje samo grupnu fotografiju.
+    sharedGroupImages: Boolean(product.sharedGroupImages) && !imageDecisions[item.sourceKey],
     missingOfficialAsset: !primary,
     // Slajd koji je postao slika varijante ne ponavlja se u galeriji; svaki drugi zvanični snimak
     // (i drugi snimak iste boje iz bloka druge dimenzije, i „Cream Cake” bez varijante boje) ostaje u njoj.

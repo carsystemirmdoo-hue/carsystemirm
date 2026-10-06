@@ -546,7 +546,8 @@ const LINE_NAMES: Record<BaslacSystemId, string> = {
   "line-45": "Baslac Line 45",
   "line-35": "Baslac Line 35",
   "line-30": "Baslac Line 30",
-  "line-30-cv": "Baslac Line 30 CV",
+  // Line 30 CV nema sopstvenu limenku; prikazuje se ambalaža linije Line 30.
+  "line-30-cv": "Baslac Line 30 (ambalaža linije Line 30, koju koristi i Line 30 CV)",
 };
 
 export function baslacLineExamplePackshot(system: BaslacSystemId): { src: string; alt: string } | null {

@@ -183,6 +183,25 @@ COSMOS_LOCAL = {
 }
 
 
+CANDIDATES = {
+    "rm-hb-10s-gleam-silver-onyx-hd": "Surventis portal R-M asset 33657 (ONYX HD HB 10S, etiketa za kinesko tržište)",
+    "rm-onyx-hd-tropical": "Surventis portal R-M asset 36415 i 33568 (komponenta ONYX-HYDROBASE HB 006 TROPIC — ne predstavlja ceo sistem)",
+    "rm-diamont-bezbojni-lak": "Surventis portal R-M: 10505 DIAMONTOP CP C 2410 1 L, 10508 DIAMONTCLEAR CP C 2450 5 L, 15740 DIAMONTOP MS C 1410 5 L (potrebna šifra zapisa)",
+    "rm-agilis-x-treme": "nema generičke limenke sistema; portal ima AGILIS limenke konkretnih šifri (npr. 29846 HB 040, 30620 A 2540)",
+    "rm-h-2p80-filler-harden-r-plus": "nema; najbliži je H 2P84 (portal 16224) — druga šifra, ne koristi se",
+    "rm-h-2p81-filler-harden-r-plus-slow": "nema; najbliži je H 2P84 (portal 16224) — druga šifra, ne koristi se",
+    "rm-h-2a80-fillcure-plus": "nema; portal ima FillCURE H 2A30 (17890) i H 2A31 — druge šifre",
+    "rm-h-2a81-fillcure-plus-slow": "nema; portal ima FillCURE H 2A30 (17890) i H 2A31 — druge šifre",
+    "rm-onyx-blender-plus": "nema; portal ima ONYX EASY BLENDER A 2520 (36810) — drugi proizvod",
+    "baslac-50-05-2k-hardener-ambient-uc": "Surventis portal baslac: samo video 41742 i 41741 (mp4), bez packshota",
+    "baslac-30-s510-s-serija": "nema; portal ima 30-S00 (12147), 30-S01 (12148), 30-S010 (12149), 30-S920 (12150), 30-S110 (12114) — druge šifre",
+    "norbin-n15-v25-fast-clear-voc": "isečak iz brošure NORBIN_Broch_EN_2024 str. 2 (377×735, dno zaklonjeno)",
+    "norbin-n60-v20-multifunctional-body-filler-hardener": "isečak iz brošure 2024 (352×210, bez učvršćivača)",
+    "norbin-n75-022-hardener-slow": "isečak iz brošure 2024 (376×395, delimično zaklonjen)",
+    "norbin-n95-060-silicone-cleaner": "isečak iz brošure 2024 (samo gornja polovina limenke)",
+}
+
+
 def read_pages() -> dict[str, list[str]]:
     path = OUT / "browser-placeholder-pages.json"
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else {}
@@ -212,7 +231,7 @@ def added() -> list[dict]:
             "brand": image["brand"],
             "product_slug": image["slug"],
             "site_page": f"/proizvodi/{image['slug']}",
-            "local_file": f"public{image['path']}",
+            "local_file": image.get("stagedSource") or f"public{image['path']}",
             "size_px": f"{image['width']}x{image['height']}",
             "source_url": f"{detail['portalUrl']} (asset {detail['assetId']}: {detail['assetTitle']})" if portal else detail["originalUrl"],
             "source_page": detail["portalUrl"] if portal else detail["productPage"],
@@ -225,6 +244,20 @@ def added() -> list[dict]:
             "replaces": "zamenjuje sliku komponente HB 002 (rm-hb-002-onyx-hd.webp) na kartici sistema" if image["slug"] == "rm-onyx-hd" else "placeholder",
         })
     return rows
+
+
+def candidate_for(brand: str, slug: str, item: dict, sata: dict) -> str:
+    if brand == "sata":
+        current = sata.get(item["image_id"], {})
+        if current.get("filename_article_matches") == "yes":
+            return f"zvanična slika tačnog artikla: {current['current_image_url']} (traži dozvolu SATA)"
+        if current.get("current_image_url"):
+            return f"samo slika srodnog artikla: {current['current_image_url']} — ne koristi se"
+        return "nema objavljene slike"
+    if brand == "cosmos-lac":
+        local = COSMOS_LOCAL.get(slug, "")
+        return f"zvanični sajt: {item['official_image_url']}" + (f" ; lokalni staging: {local}" if local else "") + " (traži dozvolu Cosmos Lac)"
+    return CANDIDATES.get(slug, "nije pronađen")
 
 
 def unresolved() -> list[dict]:
@@ -266,6 +299,8 @@ def unresolved() -> list[dict]:
             "checked_sources": checked,
             "search_term": SEARCH[brand](item),
             "image_id": item["image_id"],
+            "state": "lokalno/Preview i Production",
+            "candidates": candidate_for(brand, slug, item, sata),
         })
     for system, volume, count, candidates in BASLAC_VOLUME_SLOTS:
         key = f"baslac-volume:{system}:{volume}"
@@ -278,30 +313,55 @@ def unresolved() -> list[dict]:
             "checked_sources": f"{BASLAC_PORTAL_CHECK} ; kandidati (primer ambalaže, NE generička): {candidates}",
             "search_term": f"baslac {system.replace('line-', 'Line ')} {volume} family packshot (generička limenka bez šifre nijanse)",
             "image_id": key,
+            "state": "lokalno/Preview i Production",
+            "candidates": candidates + " — limenke konkretnih nijansi, ne generička ambalaža zapremine",
         })
     for item in NON_PRODUCT:
         rows.append({
             "group": item["group"], "brand": item["brand"], "subject": item["subject"], "code_variant": item["code"],
             "pages": " ; ".join(item["pages"]), "missing": item["missing"], "reason": item["reason"],
             "checked_sources": item["checked"], "search_term": item["search"], "image_id": "",
+            "state": "lokalno/Preview i Production", "candidates": item.get("candidates", "vidi razlog"),
         })
     for brand, subject, slugs, missing, reason, search in SHARED:
         rows.append({
             "group": "GENERIC_IMAGE_MASKS_GAP", "brand": brand, "subject": subject, "code_variant": "",
             "pages": " ; ".join(f"/proizvodi/{s}" if " " not in s else s for s in slugs),
             "missing": missing, "reason": reason, "checked_sources": "runtime katalog + SHA-256 poređenje svih slika", "search_term": search, "image_id": "",
+            "state": "lokalno/Preview i Production", "candidates": "nema posebnih packshotova",
         })
     rows.append({
         "group": "PLANNED_SLOT", "brand": "Cosmos Lac", "subject": "Početna — kampanjski slajd „Cosmos Spray” (planiran, nije implementiran)",
         "code_variant": "", "pages": "/", "missing": "banner 2400×1350 desktop + 1448×1086 mobilni (content-asset slot home.campaign.cosmos-spray)",
         "reason": "Nijedan zvanični banner ne ispunjava zahtev (3–5 limenki, fokus desno, mirna leva polovina); hero-placeholder.jpg 1920×1080 ima jednu limenku. Brand Kit je zaštićen lozinkom. Slajd se ne prikazuje, pa posetilac ne vidi prazno mesto.",
         "checked_sources": "cosmoslac.com (848 od 1878 media stavki, ostalo nedostupno), Brand Kit (lozinka)", "search_term": "Cosmos Lac Spray campaign key visual — zatražiti iz Brand Kit-a", "image_id": "home.campaign.cosmos-spray",
+        "state": "lokalno/Preview i Production", "candidates": "cosmoslac.com/wp-content/uploads/hero-placeholder.jpg (1920×1080, jedna limenka) — ne odgovara zahtevu",
     })
+    # Production: slike bez potvrđenog prava se tamo ne isporučuju → i to su nerešene stavke (189 + 6 = 195).
+    registry = json.loads((ROOT / "data/catalog/image-supply/supplied-images.json").read_text(encoding="utf8"))
+    inventory = ROOT / ".cache/image-audit/IMAGE_IDENTITY_INVENTORY.csv"
+    names = {row["slug"]: row["product_name"] for row in csv.DictReader(inventory.open(encoding="utf8"))} if inventory.exists() else {}
+    for image in registry["images"]:
+        if image["rightsBasis"] == "OWNER_CONFIRMED":
+            continue
+        detail = image.get("sourceDetail", {})
+        rows.append({
+            "group": "PRODUCTION_ONLY", "brand": "Norbin", "subject": names.get(image["slug"], image["slug"]),
+            "code_variant": detail.get("identityEvidence", "").split("Etiketa na slici (ručno pročitano): ")[-1].split(". Šifra")[0],
+            "pages": f"/proizvodi/{image['slug']} ; /katalog (kartica) ; /katalog?brend=norbin ; /brendovi/norbin ; srodni proizvodi na drugim Norbin stranicama ; pretraga sajta (sve na Production)",
+            "missing": "na Production: packshot proizvoda (placeholder); lokalno i na Preview-u slika postoji",
+            "reason": "Render proizvođača sa sajta distributera Väritikka; pravo objave nije potvrđeno (rightsBasis OWNER_CONFIRMATION_REQUIRED). Production build ga ne isporučuje (fajl nije u public/, URL vraća 404). Rešenje: potvrditi pravo → rightsBasis OWNER_CONFIRMED.",
+            "checked_sources": f"stranica distributera: {detail.get('productPage', '')} ; original: {detail.get('originalUrl', '')}",
+            "search_term": "potvrda prava (vlasnik / Surventis) — slika je već pripremljena",
+            "image_id": image["imageId"],
+            "state": "samo Production",
+            "candidates": f"pripremljen fajl: {image.get('stagedSource', '')} (izvor: {detail.get('originalUrl', '')})",
+        })
     return rows
 
 
 ADDED_COLUMNS = ["brand", "product_slug", "site_page", "local_file", "size_px", "source_url", "source_page", "source_basis", "rights_basis", "production", "replaces", "identity_evidence", "processing", "original_sha256"]
-UNRESOLVED_COLUMNS = ["group", "brand", "subject", "code_variant", "pages", "missing", "reason", "checked_sources", "search_term", "image_id"]
+UNRESOLVED_COLUMNS = ["state", "group", "brand", "subject", "code_variant", "pages", "missing", "candidates", "reason", "checked_sources", "search_term", "image_id"]
 
 
 def main() -> None:
@@ -313,7 +373,7 @@ def main() -> None:
     pending = [row for row in add if row["rights_basis"] != "OWNER_CONFIRMED"]
     lines = ["# Dodate slike — krug 2026-10", "", f"Ukupno: **{len(add)}** slika ({len(add) - 1} na mesto placeholdera + 1 zamena pogrešne slike sistema ONYX HD). Originali su van Gita (`assets/manufacturer/…`); izvedeni WebP fajlovi su u `public/products/<brend>/supplied/`, a evidencija po slici u `data/catalog/image-supply/supplied-images.json`. Pravilo: slika je dodata samo kada je etiketa na originalu ručno pročitana i odgovara brendu, nazivu, šifri i (gde je zadato) pakovanju zapisa.", "",
              f"## ⚠ Čeka potvrdu prava — NE ide u Production ({len(pending)})", "",
-             "Renderi proizvođača sa sajta distributera (Väritikka). `rightsBasis: OWNER_CONFIRMATION_REQUIRED`; `lib/supplied-image-rights.mjs` ih na Vercel Production izostavlja (zapis zadržava placeholder), a lokalno i na Preview-u se vide radi pregleda. Kada vlasnik potvrdi pravo, dovoljno je promeniti `rightsBasis` u `OWNER_CONFIRMED`.", "",
+             "Renderi proizvođača sa sajta distributera (Väritikka). `rightsBasis: OWNER_CONFIRMATION_REQUIRED`. Fajlovi NISU u `public/`: pripremljene verzije su u `review-assets/pending-rights/norbin/` (originali lokalno u `assets/manufacturer/norbin/distributor/`). `scripts/catalog/stage-pending-rights-images.mjs` ih pre builda kopira u `public/` samo za lokalni/Preview build, a za `VERCEL_ENV=production` ih uklanja i proverava da ih nema; runtime (`lib/supplied-image-rights.mjs`) ih na Production ni ne referencira. Proveren produkcioni build: direktan URL 404, stranica prikazuje placeholder. Kada vlasnik potvrdi pravo: `rightsBasis` → `OWNER_CONFIRMED` i fajl premestiti u `public/products/norbin/supplied/`.", "",
              "| Proizvod | Lokalni fajl | Izvor | Potvrda identiteta |", "|---|---|---|---|"]
     for row in pending:
         lines.append(f"| [{row['product_slug']}]({SITE}{row['site_page']}) | `{row['local_file']}` | {md_cell(row['source_url'])} | {md_cell(row['identity_evidence'])} |")
@@ -334,14 +394,22 @@ def main() -> None:
         lines.append("")
     (OUT / "ADDED_IMAGES.md").write_text("\n".join(lines) + "\n", encoding="utf8")
 
+    local_products = sum(1 for r in unr if r["group"] == "PRODUCT_IMAGE")
+    prod_only = sum(1 for r in unr if r["group"] == "PRODUCTION_ONLY")
     groups = [
-        ("PRODUCT_IMAGE", "Slike proizvoda (placeholder na sajtu)"),
+        ("PRODUCT_IMAGE", f"A. Slike proizvoda — lokalno/Preview {local_products} (iste nedostaju i na Production)"),
+        ("PRODUCTION_ONLY", f"B. Samo Production — dodatno {prod_only} (ukupno na Production {local_products + prod_only} slika proizvoda)"),
         ("PACKAGE_SLOT", "baslac sistemske stranice — slika po zapremini"),
         ("BRAND_PAGE_PHOTO", "Fotografije na brend stranicama"),
         ("GENERIC_IMAGE_MASKS_GAP", "Generička / tuđa slika prikriva nedostatak"),
         ("PLANNED_SLOT", "Planirani slot koji se još ne prikazuje"),
     ]
-    lines = ["# Nerešene slike — spisak za traženje jedne po jedne", "", "Svaki red je JEDAN resurs koji treba nabaviti; sva mesta gde se koristi navedena su u koloni „Stranice”. Mašinski čitljiva verzija: `UNRESOLVED_IMAGES.csv`.", ""]
+    lines = ["# Nerešene slike — spisak za traženje jedne po jedne", "",
+             "Svaki red je JEDAN resurs koji treba nabaviti; sva mesta gde se koristi navedena su u koloni „Stranice”. Mašinski čitljiva verzija: `UNRESOLVED_IMAGES.csv` (kolona `state`).", "",
+             "| Stanje | Slike proizvoda koje nedostaju |", "|---|---|",
+             f"| Lokalno / Preview | **{local_products}** |",
+             f"| Production | **{local_products + prod_only}** = {local_products} + {prod_only} Norbin slika koje čekaju potvrdu prava (odeljak B) |", "",
+             "Ostale stavke (slotovi zapremine, fotografije brend stranica, generička slika, planiran slot) važe jednako lokalno i na Production.", ""]
     for key, title in groups:
         subset = [r for r in unr if r["group"] == key]
         if not subset:
@@ -352,9 +420,9 @@ def main() -> None:
             part = [r for r in subset if r["brand"] == brand]
             if key == "PRODUCT_IMAGE":
                 lines += [f"### {brand} ({len(part)})", ""]
-            lines += ["| Brend | Proizvod / lokacija | Šifra / varijanta | Stranice | Šta nedostaje | Zašto nije popunjeno | Provereni izvori | Predlog pretrage |", "|---|---|---|---|---|---|---|---|"]
+            lines += ["| Brend | Proizvod / lokacija | Šifra / varijanta | Stranice | Šta nedostaje | Pronađeni kandidati | Zašto nije dodato | Provereni izvori | Predlog pretrage |", "|---|---|---|---|---|---|---|---|---|"]
             for r in part:
-                lines.append("| " + " | ".join(md_cell(r[c]) for c in ["brand", "subject", "code_variant", "pages", "missing", "reason", "checked_sources", "search_term"]) + " |")
+                lines.append("| " + " | ".join(md_cell(r[c]) for c in ["brand", "subject", "code_variant", "pages", "missing", "candidates", "reason", "checked_sources", "search_term"]) + " |")
             lines.append("")
     (OUT / "UNRESOLVED_IMAGES.md").write_text("\n".join(lines) + "\n", encoding="utf8")
     print(f"added {len(add)}, unresolved {len(unr)}")

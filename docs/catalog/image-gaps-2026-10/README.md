@@ -49,11 +49,20 @@ Inventar = `npm run catalog:image-supply:generate` (`.cache/image-audit/IMAGE_ID
    - Uz sliku stoji natpis „Primer ambalaže linije — ne prikazuje izabranu nijansu ni zapreminu”, a alt tekst kaže isto.
    - Line 45 je usklađen: umesto limenke konkretne nijanse 45-W1010 sada stoji generička „45-W” limenka koju je vlasnik dostavio (pravo potvrđeno), sa natpisom „Primer ambalaže”.
    - Gde slika tačne zapremine postoji (Line 30/35, 3,5 L), ostaje ona.
-5. **Norbin — čeka potvrdu prava:** 6 slika ima `rightsBasis: OWNER_CONFIRMATION_REQUIRED`.
-   - `lib/supplied-image-rights.mjs` ih izostavlja kada je `VERCEL_ENV=production`, pa zapis tamo zadržava placeholder. Lokalno i na Preview-u se vide radi pregleda.
-   - Test: `lib/supplied-image-rights.test.mjs`, deo `npm test`.
-   - Kada potvrdite pravo, dovoljno je promeniti `rightsBasis` u `OWNER_CONFIRMED`.
-   - Napomena: fajlovi postoje u `public/` i dostupni su po direktnoj adresi, ali ih nijedna stranica na Production ne koristi.
+5. **Norbin — čeka potvrdu prava (6 slika), van produkcije:**
+   - Fajlovi **nisu u `public/`**. Pripremljene WebP verzije su u `review-assets/pending-rights/norbin/` (prate se u Gitu, van javnog direktorijuma); originali su lokalno u `assets/manufacturer/norbin/distributor/` (van Gita).
+   - `scripts/catalog/stage-pending-rights-images.mjs` se pokreće pre `next build`, `build:check` i `dev`:
+     - za `VERCEL_ENV=production` uklanja kopije iz `public/` i proverava da ih nema;
+     - lokalno i na Preview-u kopira ih u `public/products/norbin/pending-rights/` (u `.gitignore`), radi pregleda.
+   - `lib/supplied-image-rights.mjs` ih na Production dodatno ni ne referencira, pa zapis zadržava placeholder.
+   - Proveren produkcioni build (`VERCEL_ENV=production npm run build:check`, 2026-10-06):
+     - korak postavljanja je uklonio 6 kopija;
+     - u `public/` i u izlazu builda nema tih fajlova, a trace provera daje 0 javnih fajlova;
+     - direktan URL vraća 404 (i nova i stara putanja), optimizator slika 400, stranica proizvoda prikazuje placeholder;
+     - kontrola: potvrđena Norbin slika vraća 200.
+   - Testovi: `lib/supplied-image-rights.test.mjs`, `scripts/catalog/stage-pending-rights-images.test.mjs`.
+   - Napomena: putanje i URL izvora ostaju kao tekst u registru `supplied-images.json`, koji ulazi u JS bundle. Same slike se ne isporučuju.
+   - Kada potvrdite pravo: `rightsBasis` → `OWNER_CONFIRMED` i fajl premestiti u `public/products/norbin/supplied/`.
 6. **GHD grupe:** u `shared-image-groups.json` status je sada `RESOLVED_PER_MEMBER_PACKSHOT`. Ranija odluka je sačuvana u `previousDecision`. Drugih odloženih grupa nema; odluke van ovog fajla nisu dirane.
 7. **SATA i Cosmos Lac:** nastavljena potraga, ništa nije preuzeto.
    - SATA: za svih 153 artikla utvrđena je aktuelna stranica artikla na sata.com (`sata-current-official-urls.csv`). Za 133 postoji slika baš tog artikla, 7 ima samo sliku srodnog artikla, a 13 nema sliku. Prepreka je pravo upotrebe: SATA zadržava sva prava, a press/media dozvole nema.
@@ -68,7 +77,7 @@ Inventar = `npm run catalog:image-supply:generate` (`.cache/image-audit/IMAGE_ID
 ## 4. Fajlovi
 
 - `ADDED_IMAGES.md` / `.csv` — svaka dodata slika: proizvod, stranica, lokalni fajl, izvor, potvrda identiteta, obrada i kolona **Production** (da / ne — čeka potvrdu prava). Poseban odeljak navodi slike koje čekaju potvrdu prava i ispravljene dodele.
-- `UNRESOLVED_IMAGES.md` / `.csv` — 204 unosa, po jedan resurs: sve stranice, šta nedostaje, konkretan razlog, provereni izvori (za SATA tačna stranica i URL slike artikla) i predlog pretrage.
+- `UNRESOLVED_IMAGES.md` / `.csv` — 210 unosa, po jedan resurs. Kolona `state` razdvaja „lokalno/Preview i Production” (204) od „samo Production” (6 Norbin). Za svaki: naziv, šifra, sve stranice, šta nedostaje, pronađeni kandidati, razlog zašto nije dodato, provereni izvori i predlog pretrage.
 - `browser-placeholder-pages.json` — gde je placeholder viđen u browseru (treći krug).
 - `sata-current-official-urls.csv` — aktuelne SATA stranice i slike po artiklu, bez cena.
 - `background-proposal/` — prvobitni predlog (pre/posle), `zavrsni-snimci/` — stanje posle primene.

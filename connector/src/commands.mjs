@@ -64,6 +64,7 @@ export function sledeciInterval({ neuspeha, random = Math.random }) {
 export async function preuzmiKomandu({ store, konfiguracija, kljuc, fetchImpl, dozvoliHttp }) {
   const odgovor = await posaljiPotpisano({
     origin: konfiguracija.serverOrigin,
+    zastitaPristupa: konfiguracija.vercelZastita ?? null,
     path: "/api/sync/commands/poll",
     bodyBytes: new TextEncoder().encode("{}"),
     deviceCode: konfiguracija.deviceCode,
@@ -143,6 +144,7 @@ export async function posaljiDogadjaj({
 
   const odgovor = await posaljiPotpisano({
     origin: konfiguracija.serverOrigin,
+    zastitaPristupa: konfiguracija.vercelZastita ?? null,
     path: "/api/sync/commands/update",
     bodyBytes: new TextEncoder().encode(telo),
     deviceCode: konfiguracija.deviceCode,

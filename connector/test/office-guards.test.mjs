@@ -81,3 +81,22 @@ test("folder nove godine pored izvora se prijavljuje, isti i stariji ne", async 
     await o.zatvori();
   }
 });
+
+test("zaštita pristupa (Vercel) ide kao zaglavlje samo kada je podešena; potpis ostaje", async () => {
+  const { generateKeyPairSync } = await import("node:crypto");
+  const client = await import(dist("client.mjs"));
+  const { privateKey } = generateKeyPairSync("ed25519");
+  const der = privateKey.export({ format: "der", type: "pkcs8" });
+  const viđeno = [];
+  const fetchImpl = async (_url, init) => {
+    viđeno.push(init.headers);
+    return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  const osnovno = { origin: "https://pilot.invalid", deviceCode: "KANC-01", keyId: "k1", privateKeyPkcs8Der: der, fetchImpl };
+  await client.posaljiHeartbeat({ ...osnovno, zastitaPristupa: "tajna-zastite" });
+  await client.posaljiHeartbeat(osnovno);
+  assert.equal(viđeno[0]["x-vercel-protection-bypass"], "tajna-zastite");
+  assert.ok(Object.values(viđeno[0]).some((v) => typeof v === "string" && v.length > 40), "nema potpisa");
+  assert.equal(viđeno[1]["x-vercel-protection-bypass"], undefined);
+  assert.equal(config.proveriKonfiguraciju({ serverOrigin: "https://x.invalid", deviceCode: "K", keyId: "k1", sourceSystem: "b", issuerCode: "C", izvorniFolder: "/x", vercelZastita: " t " }).vercelZastita, "t");
+});

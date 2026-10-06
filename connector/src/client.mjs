@@ -158,6 +158,12 @@ export async function posaljiPotpisano(ulaz) {
         [HEADERS.nonce]: nonce,
         [HEADERS.bodyHash]: otisak,
         [HEADERS.signature]: potpis,
+        /*
+         * Zaštita pristupa ispred aplikacije (Vercel Deployment Protection).
+         * NIJE autentifikacija prema portalu — tu ostaje potpis uređaja; samo
+         * propušta zahtev do aplikacije na zaštićenoj (preview) adresi.
+         */
+        ...(ulaz.zastitaPristupa ? { "x-vercel-protection-bypass": ulaz.zastitaPristupa } : {}),
       },
       body: ulaz.bodyBytes,
       signal: kontroler.signal,

@@ -622,6 +622,7 @@ async function heartbeat(p) {
     const kljuc = await (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc });
     const odgovor = await posaljiHeartbeat({
       origin: k.serverOrigin,
+      zastitaPristupa: k.vercelZastita ?? null,
       deviceCode: k.deviceCode,
       keyId: k.keyId,
       privateKeyPkcs8Der: kljuc,

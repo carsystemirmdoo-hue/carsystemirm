@@ -79,8 +79,12 @@ export function proveriKonfiguraciju(k) {
     throw new ConfigError("config_invalid", "`posaljiOdDatuma` mora biti ISO datum (GGGG-MM-DD).");
   }
 
+  /* Opciono: tajna za Vercel Deployment Protection (preview adresa pilota). */
+  const vercelZastita = typeof k.vercelZastita === "string" && k.vercelZastita.trim() ? k.vercelZastita.trim() : null;
+
   return {
     serverOrigin,
+    vercelZastita,
     posaljiOdDatuma: posaljiOdDatuma === null ? null : String(posaljiOdDatuma),
     deviceCode,
     keyId,

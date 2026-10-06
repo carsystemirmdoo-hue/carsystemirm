@@ -424,6 +424,7 @@ export async function posaljiIzReda(ulaz) {
 
     const odgovor = await posaljiPotpisano({
       origin: konfiguracija.serverOrigin,
+      zastitaPristupa: konfiguracija.vercelZastita ?? null,
       path: "/api/sync/ingest",
       bodyBytes: new Uint8Array(stavka.telo),
       deviceCode: konfiguracija.deviceCode,

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Deljene provere putanje i identiteta za Windows hardening skripte.
 

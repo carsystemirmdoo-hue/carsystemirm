@@ -27,11 +27,20 @@ export function jeProdukcioniPaket(env = process.env) {
 }
 
 /**
+ * `dpapiDostupan` se zadaje samo u testu, da bi se OBE grane proverile na
+ * svakoj platformi: na Windowsu je DPAPI uvek dostupan, pa se grana odbijanja
+ * inače nikad ne izvrši, a van Windowsa se nikad ne izvrši grana izbora DPAPI-ja.
+ *
  * @param {NodeJS.ProcessEnv} env
+ * @param {{ dpapiDostupan?: boolean }} [opcije]
  * @returns {{ adapter: object, ime: string }}
  */
-export function izaberiAdapter(env = process.env) {
-  if (dpapi.dostupan()) return { adapter: dpapi, ime: dpapi.adapterIme };
+export function izaberiAdapter(env = process.env, { dpapiDostupan = dpapi.dostupan() } = {}) {
+  /*
+   * DPAPI ima prednost nad svakom promenljivom okruženja: izričit
+   * `CS_CONNECTOR_INSECURE_KEYSTORE=1` na Windowsu ne bira plaintext ključ.
+   */
+  if (dpapiDostupan) return { adapter: dpapi, ime: dpapi.adapterIme };
 
   if (testAdapter.dostupan(env)) {
     if (jeProdukcioniPaket(env)) {

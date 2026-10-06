@@ -132,6 +132,29 @@ test("nijedan test konektora ne razrešava putanju kodiranim oblikom", async () 
   assert.deepEqual(krivci, [], `kodirana putanja u: ${krivci.join(", ")}`);
 });
 
+test("nijedan test konektora ne seče putanju samo po `/`", async () => {
+  const TEST_DIR = fileURLToPath(new URL("./", import.meta.url));
+  const { readFile } = await import("node:fs/promises");
+
+  /*
+   * Kancelarijski smoke 45a3460: deljenje putanje po kosoj crti na Windowsu vraća
+   * CELU putanju, jer je separator `\`. Test je pao, a skener je radio
+   * ispravno. Ime fajla se uzima kroz `basename` ili `split(/[\\/]/)`.
+   *
+   * Obrazac se i ovde sastavlja u vremenu izvršavanja, da čuvar ne nađe sebe.
+   */
+  const OBRAZAC = new RegExp("\\.split\\(\\s*[\"']" + "/" + "[\"']\\s*\\)\\.pop\\(");
+
+  const krivci = [];
+  for (const ime of await readdir(TEST_DIR)) {
+    if (!ime.endsWith(".mjs")) continue;
+    if (OBRAZAC.test(await readFile(join(TEST_DIR, ime), "utf8"))) krivci.push(ime);
+  }
+  assert.deepEqual(krivci, [], `putanja se seče samo po "/" u: ${krivci.join(", ")}`);
+  assert.ok(OBRAZAC.test('k.putanja.split("' + '/").pop()'), "čuvar ne prepoznaje obrazac");
+  assert.ok(!OBRAZAC.test("k.putanja.split(/[\\\\/]/).pop()"));
+});
+
 test("čuvar zaista hvata obrazac kada se vrati", async () => {
   /*
    * Kontrola čuvara.

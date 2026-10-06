@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   READ-ONLY audit — da li je BizniSoft folder sa fakturama bezbedno podešen
   za connector nalog, PRE nego što se konektor uperi na njega.

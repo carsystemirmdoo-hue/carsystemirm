@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Učvršćuje instalacioni (package) folder konektora na least-privilege ACL.
 

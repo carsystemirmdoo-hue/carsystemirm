@@ -69,8 +69,19 @@ export function proveriKonfiguraciju(k) {
     throw new ConfigError("config_invalid", "`dodatnaZatvaranja` mora biti lista ISO datuma.");
   }
 
+  /*
+   * Opciono: dokumenti izdati PRE ovog datuma se ne šalju (vidi pipeline).
+   * Bez njega konektor šalje sve što nađe — za novu instalaciju nad folderom
+   * sa istorijom to znači celu arhivu.
+   */
+  const posaljiOdDatuma = k.posaljiOdDatuma ?? null;
+  if (posaljiOdDatuma !== null && !ISO_DATUM.test(String(posaljiOdDatuma))) {
+    throw new ConfigError("config_invalid", "`posaljiOdDatuma` mora biti ISO datum (GGGG-MM-DD).");
+  }
+
   return {
     serverOrigin,
+    posaljiOdDatuma: posaljiOdDatuma === null ? null : String(posaljiOdDatuma),
     deviceCode,
     keyId,
     sourceSystem,

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Instalira, prikazuje ili uklanja imenovani Task Scheduler zadatak konektora.
 

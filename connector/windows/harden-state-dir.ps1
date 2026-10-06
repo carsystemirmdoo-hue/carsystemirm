@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Suzava pristup folderu lokalnog stanja na nalog konektora i administratore.
 

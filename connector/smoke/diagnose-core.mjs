@@ -56,7 +56,15 @@ const SUMNJIVO = [
  * Skripta se u izveštaj ne upisuje ni namerno ni slučajno: poruka izuzetka je
  * na nekim platformama nosi doslovno.
  */
-const SKRIPTA = /\$ErrorActionPreference|Add-Type|ProtectedData|\[Console\]|\$PSVersionTable|Get-ExecutionPolicy|\$ExecutionContext|__PSLockdownPolicy/g;
+/*
+ * `__PSLockdownPolicy` NIJE na ovom spisku.
+ *
+ * To je ime promenljive okruženja koje D07 namerno prijavljuje, ne deo programa.
+ * Dok je bilo ovde, bezbedan detalj `__PSLockdownPolicy = 0` je u kancelarijskom
+ * izveštaju postao `[skripta] = 0` — nečitljiv upravo tamo gde je trebalo da
+ * objasni nalaz.
+ */
+const SKRIPTA = /\$ErrorActionPreference|Add-Type|ProtectedData|\[Console\]|\$PSVersionTable|Get-ExecutionPolicy|\$ExecutionContext|EncodedCommand|SystemPolicy\]::/g;
 
 export function redigovan(tekst) {
   let t = String(tekst ?? "");
@@ -87,8 +95,18 @@ export function bezbedanKod(e) {
 /** Trivijalna skripta: jedan red, čist ASCII, bez navodnika i bez cevi. */
 export const PROBA_SKRIPTA = "'CS-OK'";
 export const PROBA_OCEKIVANO = "CS-OK";
-/** Ulaz za proveru stdin kanala; nikad ključ, nikad poslovni podatak. */
-export const STDIN_PROBA = "cs-stdin-proba";
+/**
+ * Ulaz za proveru stdin kanala; nikad ključ, nikad poslovni podatak.
+ *
+ * Base64, jer produkcijski DPAPI kanal prima ISKLJUČIVO jedan red base64 — proba
+ * koja bi ovde poslala drugi oblik merila bi drugačiji kanal od stvarnog.
+ */
+export const STDIN_PROBA = Buffer.from("cs-stdin-proba").toString("base64");
+
+/** Program za D06: čita tačno jedan red sa stdin-a i vraća ga. */
+export const STDIN_PROGRAM =
+  "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; " +
+  "[Console]::In.ReadLine()";
 
 /**
  * Pokreće dijagnostiku nad datim mehanizmima pokretanja PowerShell-a.
@@ -106,7 +124,7 @@ export const STDIN_PROBA = "cs-stdin-proba";
  *
  * @returns {Promise<{nalazi: object[], zakljucak: string, kod: string, radniMehanizam: string|null}>}
  */
-export async function izmeri({ mehanizmi, log = () => {} }) {
+export async function izmeri({ mehanizmi, kanalAdaptera = null, log = () => {} }) {
   const nalazi = [];
   const dodaj = (id, pitanje, ishod, detalj) => {
     const n = { id, pitanje, ishod, detalj: redigovan(detalj) };
@@ -233,26 +251,99 @@ export async function izmeri({ mehanizmi, log = () => {} }) {
     return { ishod: "OK", detalj: "šifrovanje i dešifrovanje vraćaju isti sadržaj" };
   });
 
-  await meri("D06", "stdin kanal — isti put kojim ide DPAPI adapter", async () => {
-    const r = await ps("[Console]::In.ReadLine()", STDIN_PROBA);
-    if (r.kod !== 0) return { ishod: "PAD", detalj: `izlaz ${r.kod}` };
-    return String(r.stdout ?? "").trim() === STDIN_PROBA
-      ? { ishod: "OK", detalj: "stdin kanal radi" }
-      : { ishod: "PAD", detalj: "stdin nije pročitan" };
+  await meri("D06", "stdin kanal — PRODUKCIJSKI kanal DPAPI adaptera", async () => {
+    /*
+     * D06 NE koristi mehanizme iznad nego `pokreniPowerShell` iz samog adaptera:
+     * isti argumenti, isti `-EncodedCommand`, isti stdin, ista ograničenja.
+     *
+     * Ranija verzija je ovde merila `-Command -` kopiju — i pala tačno kao
+     * adapter, jer je i adapter tada slao program i podatak kroz isti stdin.
+     * Sada meri ono što se isporučuje, a ne njegovu kopiju.
+     */
+    if (!kanalAdaptera) {
+      return { ishod: "PAD", detalj: "produkcijski kanal adaptera nije učitan" };
+    }
+    let izlaz;
+    try {
+      izlaz = await kanalAdaptera.pokreni(STDIN_PROGRAM, STDIN_PROBA);
+    } catch (e) {
+      return { ishod: "PAD", detalj: `kanal adaptera: ${bezbedanKod(e)}` };
+    }
+    return String(izlaz ?? "").trim() === STDIN_PROBA
+      ? { ishod: "OK", detalj: "program kroz -EncodedCommand, podatak kroz stdin — pročitan tačno" }
+      : { ishod: "PAD", detalj: "podatak sa stdin-a nije vraćen neizmenjen" };
   });
 
-  await meri("D07", "AppLocker/WDAC politika je aktivna", async () => {
+  await meri("D07", "AppLocker/WDAC sprovođenje (SystemPolicy + __PSLockdownPolicy)", async () => {
+    /*
+     * Merodavan je STVARAN režim sprovođenja, ne postojanje promenljive.
+     *
+     * `[SystemPolicy]::GetSystemLockdownPolicy()` vraća ono što PowerShell sam
+     * primenjuje: `None`, `Audit` ili `Enforce`. `__PSLockdownPolicy` se prijavljuje
+     * uz to, kao vrednost — ranija provera je `if ($env:__PSLockdownPolicy)`
+     * tumačila kao „aktivno", a u PowerShell-u je neprazan string `"0"` istinit.
+     */
     const r = await ps(
-      "if ($env:__PSLockdownPolicy) { $env:__PSLockdownPolicy } else { 'nije postavljeno' }",
+      "$ProgressPreference = 'SilentlyContinue'; " +
+        "$m = try { [System.Management.Automation.Security.SystemPolicy]::GetSystemLockdownPolicy().ToString() } catch { 'nepoznato' }; " +
+        "$v = if ($null -eq $env:__PSLockdownPolicy) { 'nije_postavljeno' } else { [string]$env:__PSLockdownPolicy }; " +
+        "'{0}|{1}' -f $m, $v",
     );
     if (r.kod !== 0) return { ishod: "PAD", detalj: `izlaz ${r.kod}` };
-    const v = String(r.stdout ?? "").trim();
-    return v === "nije postavljeno"
-      ? { ishod: "OK", detalj: "nije postavljeno" }
-      : { ishod: "PAŽNJA", detalj: `__PSLockdownPolicy = ${v}` };
+    const [rezim = "", vrednost = ""] = String(r.stdout ?? "").trim().split("|");
+    return oceniLockdown({ rezim: rezim.trim(), vrednost: vrednost.trim() });
+  });
+
+  await meri("D08", "DPAPI adapter proveri() — Protect/Unprotect kroz produkcijski kanal", async () => {
+    /*
+     * Isto što `doctor` radi: konstanta ide kroz stdin u Protect, rezultat kroz
+     * stdin u Unprotect. Nijedan ključ se ne pravi i ne čita.
+     */
+    if (!kanalAdaptera?.proveri) {
+      return { ishod: "PAD", detalj: "produkcijski kanal adaptera nije učitan" };
+    }
+    try {
+      await kanalAdaptera.proveri();
+    } catch (e) {
+      return { ishod: "PAD", detalj: `adapter: ${bezbedanKod(e)}` };
+    }
+    return { ishod: "OK", detalj: "adapter šifruje i dešifruje kroz stdin" };
   });
 
   return { nalazi, radniMehanizam: radni.id, kod: KODOVI.izmereno, zakljucak: zakljuci(nalazi) };
+}
+
+/**
+ * Tumačenje lockdown stanja — čista funkcija, testabilna bez Windowsa.
+ *
+ * Presuđuje `rezim` (ono što PowerShell stvarno sprovodi). `vrednost`
+ * promenljive `__PSLockdownPolicy` se samo prijavljuje: `0` i odsustvo ne
+ * uključuju sprovođenje, i nijedna vrednost sama po sebi nije dokaz da je
+ * AppLocker/WDAC aktivan.
+ */
+export function oceniLockdown({ rezim, vrednost }) {
+  const promenljiva =
+    vrednost === "" || vrednost === "nije_postavljeno"
+      ? "__PSLockdownPolicy nije postavljena"
+      : `__PSLockdownPolicy = ${vrednost}`;
+
+  if (rezim === "None") {
+    return { ishod: "OK", detalj: `sprovođenje: None; ${promenljiva}` };
+  }
+  if (rezim === "Enforce" || rezim === "Audit") {
+    return {
+      ishod: "PAŽNJA",
+      detalj: `sprovođenje: ${rezim} (AppLocker/WDAC); ${promenljiva}`,
+    };
+  }
+  /*
+   * Kada se režim ne može očitati, NE zaključuje se iz promenljive. Vrednost
+   * `0` tada i dalje znači „nije uključeno" — sve ostalo ostaje nepoznato.
+   */
+  if (vrednost === "0" || vrednost === "" || vrednost === "nije_postavljeno") {
+    return { ishod: "OK", detalj: `režim nije očitan; ${promenljiva} (ne uključuje sprovođenje)` };
+  }
+  return { ishod: "PAŽNJA", detalj: `režim nije očitan; ${promenljiva} — proveriti ručno` };
 }
 
 /** Jedna rečenica koja kaže gde dalje gledati. */
@@ -267,13 +358,13 @@ function zakljuci(nalazi) {
   if (po("D05")?.ishod === "PAD") {
     return "DPAPI Protect/Unprotect ne radi za ovaj nalog; W05/W06 su posledica.";
   }
-  if (po("D06")?.ishod === "PAD") {
-    return "stdin kanal ne radi; adapter skriptu šalje upravo tim putem.";
+  if (po("D06")?.ishod === "PAD" || po("D08")?.ishod === "PAD") {
+    return "Produkcijski kanal DPAPI adaptera ne radi; W05/W06 su njegova posledica.";
   }
   if (po("D03")?.ishod === "PAŽNJA") {
     return (
       "Politika izvršavanja je postavljena Group Policy-jem: pogađa -File pozive (W13), " +
-      "ali ne i DPAPI, koji skriptu šalje na stdin."
+      "ali ne i DPAPI, koji program šalje kroz -EncodedCommand, a ne iz .ps1 fajla."
     );
   }
   return nalazi.every((n) => n.ishod === "OK")

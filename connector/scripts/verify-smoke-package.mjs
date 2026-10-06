@@ -4,6 +4,7 @@ import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync } f
 import { tmpdir } from "node:os";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { oznaciRanijeNevazecim } from "./smoke-nevazeci.mjs";
 
 /**
  * Verifikacija smoke paketa — nad STVARNIM tokom, ne nad nizovima.
@@ -62,6 +63,15 @@ korak("ZIP postoji za tekući HEAD", () => {
   if (!statSync(ZIP).isFile()) throw new Error("nije fajl");
   const sha = createHash("sha256").update(readFileSync(ZIP)).digest("hex");
   return `${statSync(ZIP).size} bajtova, sha256=${sha}`;
+});
+
+const HANDOFF_IME = `WINDOWS-HANDOFF-${KRATKI}.md`;
+korak("handoff nosi SHA-256 i ime baš ovog ZIP-a", () => {
+  const tekst = readFileSync(join(IZLAZ, HANDOFF_IME), "utf8");
+  const sha = createHash("sha256").update(readFileSync(ZIP)).digest("hex");
+  if (!tekst.includes(sha)) throw new Error("SHA-256 u handoff-u se ne poklapa sa ZIP-om");
+  if (!tekst.includes(`${IME}.zip`)) throw new Error("handoff imenuje drugi ZIP");
+  return HANDOFF_IME;
 });
 
 /* --- 2. Raspakuj u Unicode putanju sa razmacima. ------------------------ */
@@ -146,6 +156,11 @@ korak("connector suite IZ Unicode putanje", () => {
    * verifikacija je pala nad ispravnim paketom — isti oblik greške koji je
    * `W15-win` imao sa rečenicom „9 od 10". Broj koji se menja ne sme biti
    * zapisan na dva mesta.
+   *
+   * Broji se nad ISTIM skupom fajlova koji se pokreće, ne samo nad
+   * `windows-smoke.test.mjs`: od WIN-INSTALL paketa i
+   * `windows-install-hardening.test.mjs` nosi `[WIN]` testove, pa je provera
+   * jednog fajla očekivala polovinu stvarnih skipova i odbijala ispravan paket.
    */
   /*
    * Iz SVIH spakovanih test fajlova: `[WIN]` testovi postoje i u
@@ -242,6 +257,12 @@ console.log("");
 console.log(`Ukupno: ${nalazi.length - palo}/${nalazi.length} prošlo.`);
 console.log("");
 if (palo === 0) {
+  /*
+   * Raniji paketi postaju NEVAŽEĆI tek OVDE — posle provere bez pada. Ako je
+   * provera pala, stari paket ostaje kakav je bio i ništa se ne proglašava.
+   */
+  const raniji = oznaciRanijeNevazecim({ izlaz: IZLAZ, zipIme: `${IME}.zip`, kratki: KRATKI, handoffIme: HANDOFF_IME });
+  if (raniji.length > 0) console.log(`Nevažeći: ${raniji.join(", ")} — označeni NEVAZECI-*.md`);
   console.log("Paket je lokalno potvrđen iz Unicode/space putanje.");
   console.log("Windows smoke NIJE izvršen — pokreće se na Windowsu, ručno.");
 } else {

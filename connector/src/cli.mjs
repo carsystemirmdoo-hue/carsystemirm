@@ -1,12 +1,12 @@
 import { generateKeyPairSync } from "node:crypto";
-import { access, mkdir } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { access, mkdir, readdir } from "node:fs/promises";
+import { basename, dirname, join } from "node:path";
 import { keyFingerprint, SIGNED_PATHS } from "../../lib/sync/device/signing.mjs";
 import { ucitajKonfiguraciju } from "./config.mjs";
 import { izaberiAdapter, KeystoreError } from "./keystore/index.mjs";
 import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
 import { STANJA } from "./outcomes.mjs";
-import { posaljiIzReda, skenirajURed } from "./pipeline.mjs";
+import { IZLAZ_NEPOTPUN_POPIS, izlazniKodCiklusa, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 import { opisiPokrivenost } from "./calendar.mjs";
 import { lokalnoVreme, odlukaOCiklusu, sledeciTermin } from "./schedule.mjs";
 import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
@@ -30,7 +30,7 @@ import {
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -65,6 +65,18 @@ async function postoji(p) {
   } catch {
     return false;
   }
+}
+
+/**
+ * Kod greške skladišta ključa — samo iz poznatog, zatvorenog oblika.
+ *
+ * Poruka se nikad ne koristi: ume da nosi putanju. Kod DPAPI kanala se prihvata
+ * samo ako odgovara obrascu, da slučajna vrednost iz izuzetka ne uđe u ispis.
+ */
+function bezbedanKodSkladista(greska) {
+  if (greska instanceof KeystoreError) return greska.code;
+  const kod = String(greska?.code ?? "");
+  return /^dpapi_[a-z0-9_]{1,40}$/.test(kod) ? kod : "keystore_error";
 }
 
 /* ========================================================================= */
@@ -120,7 +132,12 @@ async function doctor(p) {
     dodaj("skladiste_kljuca", rez.upozorenje ? "upozorenje" : "ok", { adapter: ime, ...rez });
   } catch (greska) {
     dodaj("skladiste_kljuca", "greska", {
-      kod: greska instanceof KeystoreError ? greska.code : "keystore_error",
+      /*
+       * Stabilan kod DPAPI kanala (`dpapi_process_failed`, `dpapi_timeout`, …)
+       * prolazi doslovno. Bez njega bi „PowerShell se nije pokrenuo" i
+       * „PowerShell je odbio podatak" u izveštaju izgledali isto.
+       */
+      kod: bezbedanKodSkladista(greska),
     });
   }
 
@@ -242,7 +259,8 @@ async function dryRun(p) {
      */
     const rez = await skenirajURed({ store, konfiguracija: k, log });
     ispisi({ komanda: "dry-run", poslato: 0, ...rez, napomena: "Nijedan zahtev nije poslat." });
-    return 0;
+    // Proba koja nije videla celu arhivu ne sme da izgleda kao čista proba.
+    return izlazniKodCiklusa({ skeniranje: rez });
   } finally {
     store.zatvori();
   }
@@ -308,15 +326,29 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       komanda: rucni ? "run-once" : "auto",
       uzrok: rucni ? "rucno_pokretanje" : "raspored",
       datum: lokalno.datum,
+      popis: skeniranje.popis,
+      kodPopisa: skeniranje.kodPopisa,
+      // Istorijski backfill: koliko novih dokumenata čeka i koliko je to serija.
+      preostalo: skeniranje.preostalo,
+      preostaloSerija: skeniranje.preostaloSerija,
+      ostaloURedu: slanje.ostaloURedu,
       skeniranje,
       slanje,
+      // Storno nije poslat: mora se videti u svakom izlazu, ne samo u statusu.
+      stornaZaRucniUpload: obavestenjeStorna(store),
+      upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
       sledeciTermin: sledeciTermin({
         now,
         poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
         dodatnaZatvaranja: k.dodatnaZatvaranja,
       }),
     });
-    return slanje.zaustavljeno ? 1 : 0;
+    /*
+     * Blokada ima prednost: ona zaustavlja slanje. Nepotpun popis nije
+     * zaustavio slanje viđenog, ali ciklus nije potpuno uspešan — i Task
+     * Scheduler to mora da vidi kao „Last Run Result“ različit od nule.
+     */
+    return izlazniKodCiklusa({ skeniranje, slanje });
   } finally {
     store.otpustiZakljucavanje(vlasnik);
     store.zatvori();
@@ -383,8 +415,14 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
         komanda: otvorena,
         lokalniDatum: lokalnoVreme(now).datum,
       });
-      reci({ komanda: "poll-once", status: "nastavljena", ishod: rez.stanje, zaostali });
-      return { kod: 0, zdravo: true };
+      reci({
+        komanda: "poll-once",
+        status: "nastavljena",
+        ishod: rez.stanje,
+        failureCode: rez.failureCode,
+        zaostali,
+      });
+      return { kod: rez.skeniranje?.kodPopisa ? IZLAZ_NEPOTPUN_POPIS : 0, zdravo: true };
     }
 
     const preuzeta = await preuzmiKomandu(ctx);
@@ -409,13 +447,18 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
       komanda: "poll-once",
       status: "izvrseno",
       ishod: rez.stanje,
+      failureCode: rez.failureCode,
       ackPoslat: rez.ackPoslat,
       // Bez ijednog podatka o dokumentu — samo zbirni brojevi.
       skeniranje: rez.skeniranje,
       slanje: rez.slanje,
     });
-    // Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne prašta.
-    return { kod: rez.stanje === "blocked" ? 1 : 0, zdravo: rez.stanje !== "blocked" };
+    /*
+     * Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne
+     * prašta. Nepotpun popis nije mrežni problem i ne traži backoff (`zdravo`
+     * ostaje), ali ga izlazni kod ne prećutkuje.
+     */
+    return { kod: izlazniKodCiklusa(rez), zdravo: rez.stanje !== "blocked" };
   } finally {
     store.otpustiZakljucavanje(vlasnik);
     store.zatvori();
@@ -488,6 +531,53 @@ export async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () 
 
 const cekaj = (ms) => new Promise((r) => setTimeout(r, ms));
 
+const UPUTSTVO_STORNO =
+  "Storno se ne šalje automatski. Otpremite ga ručno u portalu: Uvoz → /portal/importi (izdavalac CSRM). " +
+  "Komanda `storna` ispisuje tačne fajlove.";
+
+/**
+ * Folder sledeće godine pored izvornog („Fakture 2027" pored „Fakture 2026").
+ * Konektor ga NE uključuje sam — izvor je jedna godina, da prvi prolaz ne
+ * pošalje arhivu — ali to mora biti vidljivo u svakom izlazu.
+ */
+export async function noviGodisnjiFolder(izvorniFolder) {
+  const ime = basename(izvorniFolder);
+  const m = ime.match(/(20\d{2})/);
+  if (!m) return null;
+  let unosi = [];
+  try {
+    unosi = await readdir(dirname(izvorniFolder), { withFileTypes: true });
+  } catch {
+    return null;
+  }
+  const noviji = unosi
+    .filter((u) => u.isDirectory())
+    .map((u) => u.name)
+    .filter((n) => n.replace(/20\d{2}/, m[1]) === ime && Number(n.match(/20\d{2}/)?.[0]) > Number(m[1]))
+    .sort();
+  return noviji.length
+    ? { folder: noviji[noviji.length - 1], uputstvo: "Pojavio se folder nove godine: promenite izvor instalacionom skriptom (-IzvorniFolder)." }
+    : null;
+}
+
+/** Broj storna za ručni upload, za `status` i izlaz ciklusa — bez putanja. */
+function obavestenjeStorna(store) {
+  const n = store.stornaZaRucniUpload().length;
+  return n ? { broj: n, uputstvo: UPUTSTVO_STORNO } : null;
+}
+
+/** Lokalni spisak storna sa putanjama — samo za operatera ovog računara. */
+async function storna(p) {
+  const { store } = await otvori(p);
+  try {
+    const lista = store.stornaZaRucniUpload();
+    ispisi({ komanda: "storna", broj: lista.length, uputstvo: UPUTSTVO_STORNO, storna: lista });
+    return 0;
+  } finally {
+    store.zatvori();
+  }
+}
+
 async function status(p, now = new Date()) {
   const { k, store } = await otvori(p);
   try {
@@ -507,6 +597,9 @@ async function status(p, now = new Date()) {
       }),
       // Redigovano: bez putanja, imena fajlova i sadržaja.
       poslednjiIshodi: store.poslednjiIshodi(10),
+      stornaZaRucniUpload: obavestenjeStorna(store),
+      prePocetkaSlanja: { posaljiOdDatuma: k.posaljiOdDatuma, nijePoslato: store.brojPoRazlogu("pre_pocetka_slanja") },
+      upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
       // Bezbedno: samo ID, stanje i vreme — bez ijednog podatka o dokumentu.
       // Naziv NIJE `komanda`: taj ključ već nosi ime same CLI komande, pa bi
       // drugi isti ključ tiho pregazio oznaku i log bi izgubio identitet reda.
@@ -581,6 +674,8 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await ciklus(p, { rucni: false });
       case "status":
         return await status(p);
+      case "storna":
+        return await storna(p);
       case "heartbeat":
         return await heartbeat(p);
       default:

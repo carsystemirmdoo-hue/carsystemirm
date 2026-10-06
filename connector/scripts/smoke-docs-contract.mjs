@@ -171,7 +171,33 @@ export function proveriStartHere({ tekst, runnerIdevi }) {
     if (!runnerIdevi.includes(id)) nalazi.push(`pominje proveru \`${id}\` koju runner nema`);
   }
 
+  nalazi.push(...rucneProvere(tekst));
   nalazi.push(...razorneNaredbe(tekst));
+  return nalazi;
+}
+
+/**
+ * Ručne provere moraju biti imenovane kao neizvršene, a preskok `[WIN]` testa
+ * ne sme biti predstavljen kao očekivan.
+ *
+ * Kancelarijski smoke 45a3460: dokumenti su tvrdili „tačno jedan preskočen
+ * `[WIN]` test je očekivan", a paket je nosio dva bezuslovna preskoka — pa
+ * `SMOKE PASS` nije bio dostižan. Ručne provere su sada izvan `[WIN]` skupa.
+ *
+ * @param {string} tekst
+ * @returns {string[]}
+ */
+export function rucneProvere(tekst) {
+  const nalazi = [];
+  if (/(?:jedan|jednog|1)\s+preskočen\w*\s+`?\[WIN\]/i.test(tekst) || /prihvata tačno jedan preskočen/i.test(tekst)) {
+    nalazi.push("predstavlja preskočen `[WIN]` test kao očekivan; ručne provere su MANUAL_NOT_EXECUTED");
+  }
+  if (!tekst.includes("MANUAL_NOT_EXECUTED")) {
+    nalazi.push("ne kaže da se ručne provere prijavljuju kao `MANUAL_NOT_EXECUTED`");
+  }
+  for (const id of ["RUCNO-DPAPI-NALOG", "RUCNO-TASK-APPLY"]) {
+    if (!tekst.includes(id)) nalazi.push(`ne imenuje ručnu proveru \`${id}\``);
+  }
   return nalazi;
 }
 
@@ -186,8 +212,8 @@ export function proveriRunbook({ tekst, runnerIdevi }) {
 
   /*
    * „10/10" je bio pogrešan kriterijum: runner ima šesnaest provera, a
-   * `W15-win` očekuje devet od deset `[WIN]` testova, jer je jedan namerno
-   * ručan. Jedini ispravan kriterijum je ispis `SMOKE PASS`.
+   * broj `[WIN]` testova se menja. Jedini ispravan kriterijum je ispis
+   * `SMOKE PASS`.
    */
   if (/\b10\s*\/\s*10\b/.test(tekst)) {
     nalazi.push("traži `10/10` — jedini kriterijum je ispis SMOKE PASS");
@@ -198,6 +224,7 @@ export function proveriRunbook({ tekst, runnerIdevi }) {
   if (!tekst.includes("SMOKE PASS")) {
     nalazi.push("ne imenuje `SMOKE PASS` kao jedini kriterijum uspeha");
   }
+  nalazi.push(...rucneProvere(tekst));
   if (!tekst.includes("SMOKE INCOMPLETE")) {
     nalazi.push("ne kaže da `SMOKE INCOMPLETE` nije prolaz");
   }

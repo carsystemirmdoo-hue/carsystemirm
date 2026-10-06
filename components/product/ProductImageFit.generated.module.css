@@ -18450,19 +18450,6 @@
   --product-content-offset-y: 0.0414;
 }
 
-.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n15-v20-clear-voc.webp"] {
-  --product-canvas-aspect: 0.5453;
-  --product-content-aspect: 0.5088;
-  --product-content-fill-x: 0.8639;
-  --product-content-fill-y: 0.9258;
-  --product-content-offset-x: 0.0681;
-  --product-content-offset-y: 0.0371;
-  --product-image-dark-filter: none;
-  --product-image-dark-contact: 0;
-  --product-image-dark-plate: #ffffff;
-  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
-}
-
 .fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n55-015-1k-plastic-primer.webp"] {
   --product-canvas-aspect: 0.951;
   --product-content-aspect: 0.5784;
@@ -18470,59 +18457,6 @@
   --product-content-fill-y: 0.8577;
   --product-content-offset-x: 0.2396;
   --product-content-offset-y: 0.0521;
-}
-
-.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n55-v20-2k-primer-filler-grey.webp"] {
-  --product-canvas-aspect: 0.8;
-  --product-content-aspect: 0.7841;
-  --product-content-fill-x: 0.9078;
-  --product-content-fill-y: 0.9263;
-  --product-content-offset-x: 0.0461;
-  --product-content-offset-y: 0.0369;
-}
-
-.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n55-v29-2k-primer-filler-black.webp"] {
-  --product-canvas-aspect: 0.8;
-  --product-content-aspect: 0.7841;
-  --product-content-fill-x: 0.9078;
-  --product-content-fill-y: 0.9263;
-  --product-content-offset-x: 0.0461;
-  --product-content-offset-y: 0.0369;
-}
-
-.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n75-020-hardener-fast.webp"] {
-  --product-canvas-aspect: 0.9064;
-  --product-content-aspect: 0.8988;
-  --product-content-fill-x: 0.9177;
-  --product-content-fill-y: 0.9254;
-  --product-content-offset-x: 0.0412;
-  --product-content-offset-y: 0.0373;
-}
-
-.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n75-021-hardener-normal.webp"] {
-  --product-canvas-aspect: 0.9493;
-  --product-content-aspect: 0.9424;
-  --product-content-fill-x: 0.9148;
-  --product-content-fill-y: 0.9216;
-  --product-content-offset-x: 0.0404;
-  --product-content-offset-y: 0.0392;
-  --product-image-dark-filter: none;
-  --product-image-dark-contact: 0;
-  --product-image-dark-plate: #ffffff;
-  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
-}
-
-.fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n75-v21-clear-hardener-voc.webp"] {
-  --product-canvas-aspect: 0.6231;
-  --product-content-aspect: 0.5931;
-  --product-content-fill-x: 0.8816;
-  --product-content-fill-y: 0.9263;
-  --product-content-offset-x: 0.0592;
-  --product-content-offset-y: 0.0369;
-  --product-image-dark-filter: none;
-  --product-image-dark-contact: 0;
-  --product-image-dark-plate: #ffffff;
-  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
 }
 
 .fit[data-product-fit="/products/norbin/supplied/norbin__norbin-n85-021-thinner.webp"] {

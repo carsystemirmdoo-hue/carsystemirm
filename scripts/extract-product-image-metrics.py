@@ -135,6 +135,9 @@ def iter_source_files() -> list[Path]:
             path
             for path in root.rglob("*")
             if path.is_file() and path.suffix.lower() in RASTER_SUFFIXES
+            # Slike bez potvrđenog prava (`/pending-rights/`) su lokalna/Preview kopija iz
+            # review-assets/ — nisu deo repoa ni produkcije, pa ne ulaze u manifest metrika.
+            and "pending-rights" not in path.relative_to(PUBLIC_ROOT).parts
         )
     return sorted(set(files))
 

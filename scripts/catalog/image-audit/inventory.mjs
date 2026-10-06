@@ -71,7 +71,9 @@ const V6_UNKNOWN = new Set(["carsystem-glass-fibre-reinforced-putty"]);
 const fileInfo = new Map();
 function infoOf(src) {
   if (fileInfo.has(src)) return fileInfo.get(src);
-  const file = path.join(ROOT, "public", src ?? "");
+  // Slike bez potvrđenog prava nisu u public/ — izvor je review-assets/pending-rights/<brend>/.
+  const pendingMatch = /^\/products\/([^/]+)\/pending-rights\/([^/]+)$/.exec(src ?? "");
+  const file = pendingMatch ? path.join(ROOT, "review-assets/pending-rights", pendingMatch[1], pendingMatch[2]) : path.join(ROOT, "public", src ?? "");
   const exists = Boolean(src) && existsSync(file);
   const info = { exists, sha256: exists ? createHash("sha256").update(readFileSync(file)).digest("hex") : "", width: metrics[src]?.w ?? "", height: metrics[src]?.h ?? "", format: src ? path.extname(src).slice(1).toLowerCase() : "" };
   fileInfo.set(src, info);

@@ -198,10 +198,12 @@ def build(check: bool) -> int:
     stale = []
     for brand, slug, source, meta in entries():
         image_id = f"{brand}__{slug}"
-        rel = f"/products/{brand}/supplied/{image_id}.webp"
+        pending = meta["kind"] == "distributor"  # pravo objave nije potvrđeno → van public/
+        rel = f"/products/{brand}/pending-rights/{image_id}.webp" if pending else f"/products/{brand}/supplied/{image_id}.webp"
+        staged = f"review-assets/pending-rights/{brand}/{image_id}.webp" if pending else None
         derived, mode = derive(source)
         data = encode(derived)
-        target = ROOT / "public" / rel.lstrip("/")
+        target = ROOT / staged if staged else ROOT / "public" / rel.lstrip("/")
         source_bytes = source.read_bytes()
         method = (
             "obrezan samo providni rub + 4 % odstojanja, alfa i senka očuvane" if mode == "alpha"
@@ -213,6 +215,8 @@ def build(check: bool) -> int:
             "sourceFile": source.name.split("__", 1)[1] if meta["kind"] == "portal" else Path(meta["url"]).name,
             "sourceSha256": sha(source_bytes), "batch": meta["batch"],
         }
+        if staged:
+            entry["stagedSource"] = staged
         if meta["kind"] == "portal":
             entry |= {
                 "sourceBasis": "SUPPLIER_BRAND_PORTAL", "processing": "CROP_SCALE_ONLY", "rightsBasis": "OWNER_CONFIRMED",

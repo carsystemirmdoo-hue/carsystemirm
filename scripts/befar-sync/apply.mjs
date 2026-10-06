@@ -45,6 +45,20 @@ const imports = plan.items.filter((item) => item.action === "IMPORT").sort((a, b
 const imagesBySource = new Map();
 for (const image of imageManifest.images) imagesBySource.set(image.sourceKey, [...(imagesBySource.get(image.sourceKey) ?? []), image]);
 
+/*
+ * Ručna dodela fotografija (`manual-decisions.json` → `images.<sourceKey>.mediaIds`).
+ * Zvanični sajt ponekad prikazuje JEDNU galeriju za više proizvoda; tada vlasnička odluka,
+ * potkrepljena zvaničnim katalogom, kaže koja fotografija pripada kom proizvodu. Redosled
+ * `mediaIds` je redosled prikaza (prvi = glavna slika); ostale fotografije galerije se izostavljaju.
+ */
+const imageDecisions = readJson(PATHS.decisions, {}).images ?? {};
+for (const [sourceKey, decision] of Object.entries(imageDecisions)) {
+  const available = imagesBySource.get(sourceKey) ?? [];
+  const chosen = decision.mediaIds.map((mediaId) => available.find((image) => image.mediaId === mediaId));
+  if (chosen.some((image) => !image)) throw new Error(`manual-decisions images.${sourceKey}: mediaId nije u galeriji izvora (${decision.mediaIds.join(", ")})`);
+  imagesBySource.set(sourceKey, chosen);
+}
+
 const pathBySha = new Map(Object.entries(published.images).map(([publicPath, entry]) => [entry.sourceSha256, publicPath]));
 const nextPublished = {};
 const jobs = [];

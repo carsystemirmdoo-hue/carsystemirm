@@ -699,7 +699,7 @@
         }
       ],
       "image": {
-        "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad.webp",
+        "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-3.webp",
         "width": 799,
         "height": 1200,
         "hasAlpha": false,
@@ -707,14 +707,7 @@
       },
       "sharedGroupImages": true,
       "missingOfficialAsset": false,
-      "gallery": [
-        {
-          "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp"
-        },
-        {
-          "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-3.webp"
-        }
-      ],
+      "gallery": [],
       "content": {
         "productType": "Sunđer za čišćenje farova",
         "subtype": "sunđer za farove · za bušilicu · 80 mm",
@@ -798,14 +791,7 @@
       },
       "sharedGroupImages": true,
       "missingOfficialAsset": false,
-      "gallery": [
-        {
-          "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp"
-        },
-        {
-          "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-3.webp"
-        }
-      ],
+      "gallery": [],
       "content": {
         "productType": "Sunđer za čišćenje felni",
         "subtype": "sunđer za felne · za bušilicu · 80 mm",
@@ -3377,7 +3363,7 @@
         }
       ],
       "image": {
-        "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad.webp",
+        "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp",
         "width": 799,
         "height": 1200,
         "hasAlpha": false,
@@ -3385,14 +3371,7 @@
       },
       "sharedGroupImages": true,
       "missingOfficialAsset": false,
-      "gallery": [
-        {
-          "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp"
-        },
-        {
-          "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-3.webp"
-        }
-      ],
+      "gallery": [],
       "content": {
         "productType": "Adapter M14 za bušilicu",
         "subtype": "adapter · navoj M14 · za bušilicu",

@@ -114,6 +114,11 @@ if (-not $k.Contains('posaljiOdDatuma') -or -not $k.posaljiOdDatuma) {
   Info "posaljiOdDatuma nije bio podesen - postavljen na $($k.posaljiOdDatuma)."
 }
 if ($VercelZastita) { $k.vercelZastita = $VercelZastita }
+if (-not $k.Contains('ciklus') -or -not $k.ciklus) {
+  # Satni ciklus radnim danima 08-19 (docs/b2b/49); okidac zadatka je uskladjen sa ovim.
+  $k.ciklus = [ordered]@{ od = '08:00'; do = '19:00'; svakihMinuta = 60 }
+  Info 'Raspored: radnim danima svakog sata, 08:00-19:00.'
+}
 
 # --------------------------------------------- 2. prethodna verzija i kopija
 $zadatak = Get-ScheduledTask -TaskName $imeZadatka -ErrorAction SilentlyContinue

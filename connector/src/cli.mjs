@@ -8,7 +8,7 @@ import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
 import { STANJA } from "./outcomes.mjs";
 import { IZLAZ_NEPOTPUN_POPIS, izlazniKodCiklusa, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 import { opisiPokrivenost } from "./calendar.mjs";
-import { lokalnoVreme, odlukaOCiklusu, sledeciTermin } from "./schedule.mjs";
+import { lokalnoVreme, odlukaOCiklusu, sledeciTermin, sledeciTerminRadnoVreme } from "./schedule.mjs";
 import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
 import { proveriIzvor } from "./scanner.mjs";
 import { posaljiHeartbeat } from "./client.mjs";
@@ -294,6 +294,8 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       const odluka = odlukaOCiklusu({
         now,
         poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
+        ciklus: k.ciklus,
+        poslednjiCiklusVreme: store.citajMetu("poslednji_ciklus_vreme"),
         odlozenoDo: store.citajMetu("odlozeno_do"),
         dodatnaZatvaranja: k.dodatnaZatvaranja,
       });
@@ -321,6 +323,8 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
      * istog dana, i konektor koji se restartuje u petlji bi tukao server.
      */
     if (!rucni) store.postaviMetu("poslednji_ciklus_datum", lokalno.datum);
+    // Satni režim: i ručni ciklus se računa, da zadatak odmah posle njega ne ponavlja isto.
+    store.postaviMetu("poslednji_ciklus_vreme", now.toISOString());
 
     ispisi({
       komanda: rucni ? "run-once" : "auto",
@@ -338,11 +342,7 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       stornaZaRucniUpload: obavestenjeStorna(store),
       kasniIzvoz: obavestenjeKasni(store),
       upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
-      sledeciTermin: sledeciTermin({
-        now,
-        poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
-        dodatnaZatvaranja: k.dodatnaZatvaranja,
-      }),
+      sledeciTermin: terminZaPrikaz(k, store, now),
     });
     /*
      * Blokada ima prednost: ona zaustavlja slanje. Nepotpun popis nije
@@ -532,6 +532,14 @@ export async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () 
 
 const cekaj = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** Sledeći termin za prikaz: satni režim ako je `ciklus` podešen, inače stari dnevni. */
+function terminZaPrikaz(k, store, now) {
+  const zajednicko = { now, dodatnaZatvaranja: k.dodatnaZatvaranja };
+  return k.ciklus
+    ? sledeciTerminRadnoVreme({ ...zajednicko, ciklus: k.ciklus, poslednjiCiklusVreme: store.citajMetu("poslednji_ciklus_vreme") })
+    : sledeciTermin({ ...zajednicko, poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum") });
+}
+
 const UPUTSTVO_STORNO =
   "Storno se ne šalje automatski. Otpremite ga ručno u portalu: Uvoz → /portal/importi (izdavalac CSRM). " +
   "Komanda `storna` ispisuje tačne fajlove.";
@@ -613,11 +621,7 @@ async function status(p, now = new Date()) {
       // Server je tražio čekanje (429 sa dugim Retry-After): pre ovoga se ne šalje.
       nastaviPosle: store.citajMetu("nastavi_posle") || null,
       poslednjiCiklus: store.citajMetu("poslednji_ciklus_datum"),
-      sledeciTermin: sledeciTermin({
-        now,
-        poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
-        dodatnaZatvaranja: k.dodatnaZatvaranja,
-      }),
+      sledeciTermin: terminZaPrikaz(k, store, now),
       // Redigovano: bez putanja, imena fajlova i sadržaja.
       poslednjiIshodi: store.poslednjiIshodi(10),
       stornaZaRucniUpload: obavestenjeStorna(store),

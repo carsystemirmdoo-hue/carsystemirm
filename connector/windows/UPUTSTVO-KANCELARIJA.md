@@ -15,8 +15,12 @@ ne briše i ne premešta fajlove. Izvoz iz BizniSofta ostaje kao do sada.
   se pokreću sa **`-JedanNalogSaUAC`**, iz „Run as administrator" prozora
   **tog istog naloga**; zadatak i dalje radi sa ograničenim tokenom (bez
   povišenih prava). Nov nalog nije potreban.
-- Zadatak radi radnim danima posle 09:00, **dok je taj nalog prijavljen**.
-  Računar ugašen u 09:00 → jedan propušteni ciklus pri sledećem paljenju.
+- Zadatak radi **radnim danima svakog sata od 08:00 do 19:00** (poslednji
+  ciklus oko 19:02), **dok je taj nalog prijavljen** (zaključan ekran ne
+  smeta; pregledač nije potreban). Faktura izvezena u 10:20 stiže u portal u
+  ciklusu oko 11:02. Računar ugašen ili u snu → posle paljenja jedan
+  propušteni ciklus; posle 19:00 najviše jedan naknadni. Dva ciklusa se
+  nikad ne preklapaju (brava reda + zadatak ne pokreće drugu instancu).
   Bez interneta → dokumenti čekaju u lokalnom redu, ništa se ne gubi.
 - HTTPS adresa portala (pilot) i, ako je zaštićena, tajna zaštite pristupa.
 
@@ -71,7 +75,7 @@ rezultat zakazanog zadatka i **upozorenja**:
 - **Folder nove godine** (npr. „Fakture 2027") — konektor ga ne uključuje sam.
   U januaru: korak 1 sa `-IzvorniFolder '...\Fakture 2027'`.
 
-Ručno pokretanje odmah (bez čekanja 09:00):
+Ručno pokretanje odmah (bez čekanja sledećeg sata):
 `Start-ScheduledTask -TaskName CarsystemConnector`, pa `provera.ps1`.
 
 ## 4. Povratak na prethodnu verziju — kao Administrator

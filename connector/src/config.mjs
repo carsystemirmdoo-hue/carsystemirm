@@ -79,12 +79,28 @@ export function proveriKonfiguraciju(k) {
     throw new ConfigError("config_invalid", "`posaljiOdDatuma` mora biti ISO datum (GGGG-MM-DD).");
   }
 
+  /*
+   * Opciono: satni ciklus u radnom vremenu radnim danima (docs/b2b/49).
+   * Bez njega važi stari raspored: jedan ciklus radnim danom posle 09:00.
+   */
+  let ciklus = null;
+  if (k.ciklus !== undefined && k.ciklus !== null) {
+    const c = k.ciklus;
+    const sat = /^([01]\d|2[0-3]):[0-5]\d$/;
+    if (!sat.test(String(c.od)) || !sat.test(String(c.do)) || String(c.od) >= String(c.do) ||
+        !Number.isInteger(c.svakihMinuta) || c.svakihMinuta < 15 || c.svakihMinuta > 720) {
+      throw new ConfigError("config_invalid", "`ciklus` traži od/do u obliku HH:MM (od < do) i svakihMinuta 15–720.");
+    }
+    ciklus = { od: String(c.od), do: String(c.do), svakihMinuta: c.svakihMinuta };
+  }
+
   /* Opciono: tajna za Vercel Deployment Protection (preview adresa pilota). */
   const vercelZastita = typeof k.vercelZastita === "string" && k.vercelZastita.trim() ? k.vercelZastita.trim() : null;
 
   return {
     serverOrigin,
     vercelZastita,
+    ciklus,
     posaljiOdDatuma: posaljiOdDatuma === null ? null : String(posaljiOdDatuma),
     deviceCode,
     keyId,

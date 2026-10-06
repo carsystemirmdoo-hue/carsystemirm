@@ -118,6 +118,16 @@ export function odlukaOCiklusu(ulaz) {
     };
   }
 
+  /*
+   * Satni ciklus u radnom vremenu (`ciklus` u konfiguraciji, docs/b2b/49):
+   * fakture izdate tokom dana ne čekaju sledeće jutro. Odluka gleda VREME
+   * poslednjeg ciklusa; posle kraja radnog vremena najviše jedan naknadni
+   * ciklus (računar upaljen kasno). Preklapanje sprečava brava reda.
+   */
+  if (ulaz.ciklus) {
+    return odlukaUnutarRadnogVremena(ulaz, lokalno, pokrivenost);
+  }
+
   if (ulaz.poslednjiIzvrsenDatum === lokalno.datum) {
     return {
       akcija: "cekaj",
@@ -185,4 +195,59 @@ export function sledeciTermin(ulaz) {
     ? lokalno.datum
     : prviRadniDanOd(dodajDana(lokalno.datum, 1), opcije);
   return `${datum} 09:00`;
+}
+
+const minutaU = (hhmm) => {
+  const [h, m] = String(hhmm).split(":").map(Number);
+  return h * 60 + m;
+};
+const hhmm = (min) => `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
+/** Tolerancija: okidač u :02 i ciklus koji je trajao minut ne smeju da preskoče ceo sat. */
+const TOLERANCIJA_MIN = 5;
+
+/**
+ * @param {{ now: Date, ciklus: { od: string, do: string, svakihMinuta: number },
+ *           poslednjiCiklusVreme?: string | null }} ulaz
+ */
+function odlukaUnutarRadnogVremena(ulaz, lokalno, pokrivenost) {
+  const od = minutaU(ulaz.ciklus.od);
+  const doKraja = minutaU(ulaz.ciklus.do);
+  const sada = lokalno.sat * 60 + lokalno.minut;
+  const poslednji = ulaz.poslednjiCiklusVreme ? new Date(ulaz.poslednjiCiklusVreme) : null;
+  const poslednjiLokalno = poslednji ? lokalnoVreme(poslednji) : null;
+  const poslednjiDanas = poslednjiLokalno && poslednjiLokalno.datum === lokalno.datum;
+  const proteklo = poslednji ? (ulaz.now.getTime() - poslednji.getTime()) / 60000 : Infinity;
+
+  if (sada < od) {
+    return { akcija: "cekaj", razlog: "pre_radnog_vremena", sledeciTermin: `${lokalno.datum} ${ulaz.ciklus.od}`, lokalnoVreme: lokalno, pokrivenost };
+  }
+  if (sada <= doKraja) {
+    if (proteklo >= ulaz.ciklus.svakihMinuta - TOLERANCIJA_MIN) {
+      return { akcija: "pokreni", razlog: "radno_vreme", lokalnoVreme: lokalno, pokrivenost };
+    }
+    return { akcija: "cekaj", razlog: "ceka_sledeci_ciklus", lokalnoVreme: lokalno, pokrivenost };
+  }
+  // Posle kraja radnog vremena: jedan naknadni ciklus ako danas nije bilo ciklusa posle kraja.
+  const poslednjiMin = poslednjiDanas ? poslednjiLokalno.sat * 60 + poslednjiLokalno.minut : -1;
+  if (poslednjiMin < doKraja) {
+    return { akcija: "pokreni", razlog: "naknadni_kraj_dana", lokalnoVreme: lokalno, pokrivenost };
+  }
+  return { akcija: "cekaj", razlog: "posle_radnog_vremena", lokalnoVreme: lokalno, pokrivenost };
+}
+
+/** Sledeći termin u satnom režimu — za `status`; ne menja ništa. */
+export function sledeciTerminRadnoVreme(ulaz) {
+  const lokalno = lokalnoVreme(ulaz.now);
+  const opcije = { dodatnaZatvaranja: ulaz.dodatnaZatvaranja ?? [] };
+  const od = minutaU(ulaz.ciklus.od);
+  const doKraja = minutaU(ulaz.ciklus.do);
+  const sada = lokalno.sat * 60 + lokalno.minut;
+  if (jeRadniDan(lokalno.datum, opcije) && sada < od) return `${lokalno.datum} ${ulaz.ciklus.od}`;
+  if (jeRadniDan(lokalno.datum, opcije) && sada <= doKraja) {
+    const poslednji = ulaz.poslednjiCiklusVreme ? new Date(ulaz.poslednjiCiklusVreme) : null;
+    const pl = poslednji ? lokalnoVreme(poslednji) : null;
+    const sledeci = pl && pl.datum === lokalno.datum ? pl.sat * 60 + pl.minut + ulaz.ciklus.svakihMinuta : sada;
+    if (sledeci <= doKraja) return `${lokalno.datum} ${hhmm(Math.max(sledeci, sada))}`;
+  }
+  return `${prviRadniDanOd(dodajDana(lokalno.datum, 1), opcije)} ${ulaz.ciklus.od}`;
 }

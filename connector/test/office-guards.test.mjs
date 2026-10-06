@@ -123,3 +123,33 @@ test("stariji račun izvezen POSLE početka slanja se izdvaja za ručnu proveru;
     await o.zatvori();
   }
 });
+
+test("satni ciklus radnim danima 08–19: odluke po satu, bez ponavljanja u istom satu, jedan naknadni posle 19", async () => {
+  const schedule = await import(dist("schedule.mjs"));
+  const ciklus = { od: "08:00", do: "19:00", svakihMinuta: 60 };
+  const t = (s) => new Date(`${s}+02:00`);
+  const odluka = (sada, poslednji = null) =>
+    schedule.odlukaOCiklusu({ now: t(sada), ciklus, poslednjiCiklusVreme: poslednji ? t(poslednji).toISOString() : null });
+  const ak = (o) => `${o.akcija}:${o.razlog}`;
+  assert.equal(ak(odluka("2026-10-06T07:30:00")), "cekaj:pre_radnog_vremena");
+  assert.equal(ak(odluka("2026-10-06T08:02:00")), "pokreni:radno_vreme");
+  assert.equal(ak(odluka("2026-10-06T08:40:00", "2026-10-06T08:02:00")), "cekaj:ceka_sledeci_ciklus");
+  assert.equal(ak(odluka("2026-10-06T09:01:00", "2026-10-06T08:02:30")), "pokreni:radno_vreme");
+  assert.equal(ak(odluka("2026-10-06T19:02:00", "2026-10-06T18:02:00")), "pokreni:naknadni_kraj_dana");
+  assert.equal(ak(odluka("2026-10-06T20:00:00", "2026-10-06T19:02:00")), "cekaj:posle_radnog_vremena");
+  assert.equal(ak(odluka("2026-10-06T21:00:00", "2026-10-06T10:00:00")), "pokreni:naknadni_kraj_dana");
+  assert.equal(ak(odluka("2026-10-10T10:00:00")), "cekaj:neradni_dan");
+  // Bez `ciklus` ostaje stari dnevni raspored.
+  const staro = schedule.odlukaOCiklusu({ now: t("2026-10-06T09:30:00") });
+  assert.equal(staro.akcija, "pokreni");
+  assert.equal(schedule.sledeciTerminRadnoVreme({ now: t("2026-10-06T08:40:00"), ciklus, poslednjiCiklusVreme: t("2026-10-06T08:02:00").toISOString() }), "2026-10-06 09:02");
+  assert.equal(schedule.sledeciTerminRadnoVreme({ now: t("2026-10-09T19:30:00"), ciklus, poslednjiCiklusVreme: t("2026-10-09T19:02:00").toISOString() }), "2026-10-12 08:00");
+});
+
+test("ciklus u konfiguraciji se proverava", () => {
+  const osnovno = { serverOrigin: "https://x.invalid", deviceCode: "K", keyId: "k1", sourceSystem: "b", issuerCode: "C", izvorniFolder: "/x" };
+  assert.deepEqual(config.proveriKonfiguraciju({ ...osnovno, ciklus: { od: "08:00", do: "19:00", svakihMinuta: 60 } }).ciklus, { od: "08:00", do: "19:00", svakihMinuta: 60 });
+  assert.equal(config.proveriKonfiguraciju(osnovno).ciklus, null);
+  assert.throws(() => config.proveriKonfiguraciju({ ...osnovno, ciklus: { od: "19:00", do: "08:00", svakihMinuta: 60 } }), /ciklus/);
+  assert.throws(() => config.proveriKonfiguraciju({ ...osnovno, ciklus: { od: "08:00", do: "19:00", svakihMinuta: 5 } }), /ciklus/);
+});

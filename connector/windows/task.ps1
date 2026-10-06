@@ -296,7 +296,12 @@ switch ($Action) {
     }
 
     <#
-      Pokrece se u 09:05, pet minuta POSLE poslovnog termina.
+      Pokrece se radnim danima od 08:02, svakog sata do 19:02 (docs/b2b/49):
+      aplikacija sama odlucuje (config `ciklus`: 08:00-19:00, 60 min) i preskace
+      neradne dane, isti sat i ponavljanje posle kraja dana. Bez `ciklus` u
+      konfiguraciji aplikacija i dalje radi jednom dnevno posle 09:00.
+
+      (Ranije: jednom u 09:05, pet minuta POSLE poslovnog termina.)
 
       Razlog: aplikacija sama proverava da li je 09:00 proslo. Pokretanje tacno
       u 09:00 bi na sporom racunaru moglo da padne sekund ranije i ciklus bi
@@ -305,13 +310,16 @@ switch ($Action) {
       `-StartWhenAvailable` hvata slucaj kada je racunar bio ugasen; konektor
       tada izvrsi NAJVISE JEDAN naknadni ciklus, jer to proverava sam.
     #>
-    $trigger = New-ScheduledTaskTrigger -Daily -At '09:05'
+    $trigger = New-ScheduledTaskTrigger -Daily -At '08:02'
+    $trigger.Repetition = (New-ScheduledTaskTrigger -Once -At '08:02' `
+      -RepetitionInterval (New-TimeSpan -Hours 1) `
+      -RepetitionDuration (New-TimeSpan -Hours 11)).Repetition
     $settings = New-ScheduledTaskSettingsSet `
       -StartWhenAvailable `
       -DontStopIfGoingOnBatteries `
       -AllowStartIfOnBatteries `
       -MultipleInstances IgnoreNew `
-      -ExecutionTimeLimit (New-TimeSpan -Hours 2)
+      -ExecutionTimeLimit (New-TimeSpan -Minutes 55)
 
     <#
       ISTI nalog kao pri rucnom pokretanju.

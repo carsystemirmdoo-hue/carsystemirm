@@ -1,6 +1,19 @@
 # Krug popune slika i pozadine iza slika — 2026-10-06
 
-Grana `fix/image-gaps-2026-10` (od `main` 2e67921). Ništa nije pushovano ni objavljeno na produkciju.
+Grana `fix/image-gaps-2026-10` (od `main` 2e67921), spojena u firmin `main` (carsystemirmdoo-hue/carsystemirm) i objavljena na firminom Vercel-u (tim carsystem1, maintenance režim zadržan).
+
+## 0. Stanje na Production — tačna slika, primer ambalaže, placeholder
+
+| Vrsta prikaza | Broj na Production | Napomena |
+|---|---|---|
+| **Tačna slika** dodata u ovom krugu | **57** fajlova: R-M 27 (uklj. zamenu ONYX HD), baslac 30 | etiketa ručno pročitana; + 3 Befar ispravke dodele (bez novih fajlova) |
+| Tačna slika pripremljena, ali **NE na Production** | **6** Norbin | čeka potvrdu prava; fajl nije u deploymentu, URL vraća 404 |
+| **Primer ambalaže linije** (ne tvrdi nijansu ni zapreminu) | **136** baslac baza na sistemskim stranicama Line 30/35/45 + kartica Line 45 | tačna slika zapremine i dalje nedostaje (7 stavki u spisku) |
+| **Placeholder — slike proizvoda** | **195** = 189 (isto i lokalno) + 6 Norbin | SATA 153, R-M 17, Cosmos Lac 11, Norbin 10 (4 + 6), baslac 4 |
+| **Placeholder / šema — ostala vizuelna mesta** | **14** mesta (17 fajlova): Carsystem brend stranica 10 slotova (13 fajlova), Norbin brend stranica 2, R-M brend stranica 2 | + 1 planiran slajd na početnoj koji se ne prikazuje |
+| Ista slika za različite varijante | 4 Cosmos Lac para | Brand Kit nema posebne fotografije |
+
+Spisak nerešenih zato **nije prazan**: `UNRESOLVED_IMAGES.md` (210 unosa — 204 važe i lokalno i na Production, 6 samo na Production).
 
 ## 1. Konačne brojke (jedan izvor: runtime inventar + pregled u browseru)
 
@@ -64,7 +77,8 @@ Inventar = `npm run catalog:image-supply:generate` (`.cache/image-audit/IMAGE_ID
    - Napomena: putanje i URL izvora ostaju kao tekst u registru `supplied-images.json`, koji ulazi u JS bundle. Same slike se ne isporučuju.
    - Kada potvrdite pravo: `rightsBasis` → `OWNER_CONFIRMED` i fajl premestiti u `public/products/norbin/supplied/`.
 6. **GHD grupe:** u `shared-image-groups.json` status je sada `RESOLVED_PER_MEMBER_PACKSHOT`. Ranija odluka je sačuvana u `previousDecision`. Drugih odloženih grupa nema; odluke van ovog fajla nisu dirane.
-7. **SATA i Cosmos Lac:** nastavljena potraga, ništa nije preuzeto.
+7. **Tamna tema — F.23 i drugi tamni proizvodi (završni krug):** nijedan sloj ni filter nije zatamnjivao sliku (pikseli diska su isti kao u izvornom fajlu, ≈ RGB 32/15/112). Problem je bio kontrast prema podlozi (≈ 1,1 : 1). Tamna studio podloga je posvetljena (oklch 0,30 → 0,25) i ima jače svetlo jezgro iza proizvoda; slike nisu menjane. Provereni su i tamni P2000 disk, smeđi brusni disk i crno radno odelo na istim karticama (`zavrsni-snimci/06-tamna-tema-kartice.jpg`).
+8. **SATA i Cosmos Lac:** nastavljena potraga, ništa nije preuzeto.
    - SATA: za svih 153 artikla utvrđena je aktuelna stranica artikla na sata.com (`sata-current-official-urls.csv`). Za 133 postoji slika baš tog artikla, 7 ima samo sliku srodnog artikla, a 13 nema sliku. Prepreka je pravo upotrebe: SATA zadržava sva prava, a press/media dozvole nema.
    - Cosmos Lac: uslovi korišćenja zabranjuju komercijalnu upotrebu bez pisane dozvole, a Brand Kit je zaštićen lozinkom. Lokalni folder `assets/manufacturer/cosmos-lac/images` je preuzet sa sajta i vodi se kao „REQUIRES RIGHTS CONFIRMATION”. Kandidati iz njega navedeni su po proizvodu, ali nisu upotrebljeni.
 

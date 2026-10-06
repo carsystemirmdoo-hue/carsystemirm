@@ -41,7 +41,7 @@ import test from "node:test";
 const WIN_DIR = fileURLToPath(new URL("../windows/", import.meta.url));
 const p = (name) => join(WIN_DIR, name);
 
-const SKRIPTE = ["PathGuards.ps1", "harden-install-dir.ps1", "verify-invoice-folder.ps1", "task.ps1"];
+const SKRIPTE = ["PathGuards.ps1", "harden-install-dir.ps1", "verify-invoice-folder.ps1", "task.ps1", "instaliraj.ps1"];
 
 async function citajSve() {
   const sadrzaji = await Promise.all(SKRIPTE.map((s) => readFile(p(s), "utf8")));
@@ -249,6 +249,20 @@ test("[hardening] task.ps1: -JedanNalogSaUAC dozvoljava administratorski nalog S
   assert.equal((blok.match(/Write-Fail-Production/g) ?? []).length, 2);
   // Zadatak i dalje sa ograničenim tokenom.
   assert.match(tekst, /-LogonType Interactive -RunLevel Limited/);
+});
+
+test("[hardening] harden-install-dir i instaliraj: jedan nalog samo uz Test-JedanNalogSaUAC; ACL se proverava nezavisno od izlaznog koda", async () => {
+  const sve = await citajSve();
+  const harden = sve["harden-install-dir.ps1"];
+  const blok = harden.slice(harden.indexOf("if ($jeAdmin) {"), harden.indexOf("-Apply zahteva administratorska prava"));
+  assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
+  assert.equal((blok.match(/exit 1/g) ?? []).length, 2, "oba neispunjena slučaja moraju da prekinu");
+  assert.match(sve["PathGuards.ps1"], /EnableLUA -eq 1 -and \$politika\.ConsentPromptBehaviorAdmin -ne 0/);
+  const inst = sve["instaliraj.ps1"];
+  assert.match(inst, /-Apply -JedanNalogSaUAC/);
+  assert.match(inst, /\$global:LASTEXITCODE -ne 0/);
+  assert.doesNotMatch(inst, /^\$LASTEXITCODE = 0/m, "lokalna dodela zaklanja izlazni kod");
+  assert.ok(inst.indexOf("Test-PackageDirectoryHardened -Path $cilj") < inst.indexOf("Instalacioni folder je ucvrscen"), "ACL se proverava pre poruke o uspehu");
 });
 
 test("[hardening] task.ps1: Production zahteva config.json u INSTALACIONOM folderu, ne u folderu stanja", async () => {

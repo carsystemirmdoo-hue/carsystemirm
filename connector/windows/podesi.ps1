@@ -41,7 +41,7 @@ function Konektor([string[]]$argumenti) {
   # PS 5.1: stderr spoljnog programa uz 'Stop' bi prekinuo skriptu - zato 'Continue' ovde.
   $eap = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
   $izlaz = & $node --no-warnings $ulaz --packaged --config $konfiguracija @argumenti 2>$null
-  $kod = $LASTEXITCODE
+  $kod = $global:LASTEXITCODE
   $ErrorActionPreference = $eap
   $json = $null
   try { $json = ($izlaz -join "`n") | ConvertFrom-Json } catch { }
@@ -78,9 +78,9 @@ $kljuc = Konektor @('export-key')
 if (-not $kljuc.Json) { Stani "Javni kljuc nije procitan: $($kljuc.Tekst)" }
 
 # ------------------------------------------------- 3. folder faktura (citanje)
-$LASTEXITCODE = 0
+$global:LASTEXITCODE = 0
 & (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj
-if ($LASTEXITCODE -ne 0) { Stani 'Provera foldera faktura nije prosla (vidi [FAIL] iznad). Konektor ne sme da pise u taj folder.' }
+if ($global:LASTEXITCODE -ne 0) { Stani 'Provera foldera faktura nije prosla (vidi [FAIL] iznad). Konektor ne sme da pise u taj folder.' }
 Ok 'Folder faktura: konektor ga samo cita.'
 
 # ----------------------------------------------------------- 4. test veze

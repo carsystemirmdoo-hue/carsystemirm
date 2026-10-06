@@ -52,7 +52,9 @@
 param(
   [Parameter(Mandatory)] [string]$PackagePath,
   [Parameter(Mandatory)] [string]$RunAsAccount,
-  [switch]$Apply
+  [switch]$Apply,
+  # Jedini nalog je administrator (docs/b2b/49): dozvoljeno samo za isti nalog uz ukljucen UAC.
+  [switch]$JedanNalogSaUAC
 )
 
 $ErrorActionPreference = 'Stop'
@@ -96,10 +98,22 @@ catch {
   exit 1
 }
 if ($jeAdmin) {
-  Write-Result 'FAIL' "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — nalog za svakodnevni rad konektora ne sme biti."
-  exit 1
+  $jedan = if ($JedanNalogSaUAC) { Test-JedanNalogSaUAC -AccountName $RunAsAccount } else { $null }
+  if ($jedan -and $jedan.Dozvoljeno) {
+    Write-Result 'PASS' "RunAsAccount '$RunAsAccount' je administrator (jedini nalog); dozvoljeno uz -JedanNalogSaUAC: isti nalog, UAC ukljucen. Konektor ima samo Read & Execute nad ovim folderom (ogranicen token)."
+  }
+  elseif ($jedan) {
+    Write-Result 'FAIL' "-JedanNalogSaUAC nije ispunjen: $($jedan.Razlog)."
+    exit 1
+  }
+  else {
+    Write-Result 'FAIL' "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — nalog za svakodnevni rad konektora ne sme biti."
+    exit 1
+  }
 }
-Write-Result 'PASS' "RunAsAccount nije administrator ni SYSTEM."
+else {
+  Write-Result 'PASS' "RunAsAccount nije administrator ni SYSTEM."
+}
 
 if ($Apply -and -not (Test-CurrentProcessIsElevated)) {
   Write-Result 'FAIL' "-Apply zahteva administratorska prava. Pokrenite PowerShell kao administrator."

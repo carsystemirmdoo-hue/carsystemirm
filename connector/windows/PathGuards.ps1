@@ -370,3 +370,23 @@ function Protect-AdminOnlyFolder {
   }
   Set-Acl -LiteralPath $Path -AclObject $acl
 }
+
+
+<#
+.SYNOPSIS Kancelarija sa jednim Windows nalogom koji je administrator (docs/b2b/49).
+  Dozvoljeno je samo ako je RunAsAccount ISTI nalog koji pokrece skriptu i
+  ako je UAC ukljucen bez tihog podizanja prava (EnableLUA=1,
+  ConsentPromptBehaviorAdmin<>0). Konektor tada radi sa ogranicenim tokenom.
+#>
+function Test-JedanNalogSaUAC {
+  param([Parameter(Mandatory)] [string]$AccountName)
+  $politika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
+  $uac = [bool]($politika -and $politika.EnableLUA -eq 1 -and $politika.ConsentPromptBehaviorAdmin -ne 0)
+  $isti = $false
+  try {
+    $isti = (New-Object System.Security.Principal.NTAccount($AccountName)).Translate([System.Security.Principal.SecurityIdentifier]).Value -eq
+      [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+  } catch { }
+  $razlog = if (-not $isti) { 'RunAsAccount nije nalog koji pokrece skriptu' } elseif (-not $uac) { 'UAC nije ukljucen ili podize prava tiho' } else { '' }
+  return [pscustomobject]@{ Dozvoljeno = ($isti -and $uac); Razlog = $razlog }
+}

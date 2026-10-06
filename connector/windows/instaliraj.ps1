@@ -138,14 +138,23 @@ $utf8 = New-Object Text.UTF8Encoding($false)
 Ok "Instalirana verzija $novaVerzija u $cilj (config.json: izvor '$($k.izvorniFolder)', slanje od $($k.posaljiOdDatuma))."
 
 # ------------------------------------------------- 4. ucvrscivanje instalacije
-$LASTEXITCODE = 0
+# $global: - lokalna dodela bi zaklonila stvarni izlazni kod pomocne skripte (greska u 0be5a76).
+$global:LASTEXITCODE = 0
 try {
-  & (Join-Path $cilj 'windows\harden-install-dir.ps1') -PackagePath $cilj -RunAsAccount $RunAsAccount -Apply
+  if ($JedanNalogSaUAC) {
+    & (Join-Path $cilj 'windows\harden-install-dir.ps1') -PackagePath $cilj -RunAsAccount $RunAsAccount -Apply -JedanNalogSaUAC
+  } else {
+    & (Join-Path $cilj 'windows\harden-install-dir.ps1') -PackagePath $cilj -RunAsAccount $RunAsAccount -Apply
+  }
 } catch {
   Stani "harden-install-dir nije prosao: $($_.Exception.Message). Prethodnu verziju vratite sa .\windows\vrati-prethodnu.ps1."
 }
-if ($LASTEXITCODE -ne 0) { Stani "harden-install-dir nije prosao (kod $LASTEXITCODE). Prethodnu verziju vratite sa .\windows\vrati-prethodnu.ps1." }
-Ok 'Instalacioni folder je ucvrscen (nalog konektora ima samo citanje).'
+if ($global:LASTEXITCODE -ne 0) { Stani "harden-install-dir nije prosao (kod $global:LASTEXITCODE). Prethodnu verziju vratite sa .\windows\vrati-prethodnu.ps1." }
+# Nezavisna provera stvarnog ACL-a (ista funkcija kao u task.ps1) - ne oslanja se samo na izlazni kod.
+. (Join-Path $cilj 'windows\PathGuards.ps1')
+$aclProblem = Test-PackageDirectoryHardened -Path $cilj
+if ($aclProblem) { Stani "Instalacioni folder NIJE ucvrscen: $aclProblem. Ponovite instalaciju ili vratite prethodnu verziju (vrati-prethodnu.ps1)." }
+Ok 'Instalacioni folder je ucvrscen (provereno nad stvarnim ACL-om; nalog konektora ima samo citanje).'
 
 Write-Host ''
 if ($JedanNalogSaUAC) {

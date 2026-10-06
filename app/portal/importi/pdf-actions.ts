@@ -92,7 +92,8 @@ export async function importPdfAction(
         { bytes, fileName: file.name, issuerCode, runId: runId ?? undefined },
         actor,
       );
-      bump(outcome.result);
+      // Storno se ne knjiži; ishod veze sa originalom je ono što operater treba da vidi (docs/b2b/48).
+      bump(outcome.result === "quarantined" && outcome.reversal ? `storno_${outcome.reversal}` : outcome.result);
     } catch {
       /*
        * Greška se NE prosleđuje dalje ni u kom obliku.
@@ -133,6 +134,9 @@ const OUTCOME_LABELS: Record<string, string> = {
   business_key_conflict: "sudar sa postojećim dokumentom",
   already_imported_other_source: "već knjiženo iz drugog izvora — traži pregled",
   quarantined: "karantin — traži pregled",
+  storno_applied: "storno primenjen — original isključen iz prometa",
+  storno_waiting_original: "storno sačuvan — čeka original",
+  storno_review: "storno na ručnom pregledu — original ostaje u prometu",
   duplicate_file: "isti fajl, preskočeno",
   neuspelo_citanje: "nije pročitano — fajl odbijen",
   prekinut_prolaz: "nije obrađeno — budžet prolaza iscrpljen",

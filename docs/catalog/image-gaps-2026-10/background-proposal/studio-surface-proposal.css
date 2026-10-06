@@ -1,0 +1,18 @@
+/* PREDLOG „studio" podloge — ubacuje se samo u snimke za pregled */
+:root { --studio-top: oklch(0.968 0.003 255); --studio-bottom: oklch(0.935 0.005 255); --studio-glow: oklch(0.99 0.002 255 / 0.85); }
+:root.dark, html[data-theme="dark"] { --studio-top: oklch(0.235 0.010 255); --studio-bottom: oklch(0.19 0.010 255); --studio-glow: oklch(0.29 0.010 255 / 0.6); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not(.light) { --studio-top: oklch(0.235 0.010 255); --studio-bottom: oklch(0.19 0.010 255); --studio-glow: oklch(0.29 0.010 255 / 0.6); } }
+[class*="CarsystemBrandPage_productCardVisual"] {
+  background: radial-gradient(ellipse 70% 60% at 50% 46%, var(--studio-glow), transparent 70%), linear-gradient(180deg, var(--studio-top), var(--studio-bottom)) !important;
+  background-size: auto !important;
+}
+[class*="ProductVisualSurface_baseLayer"] {
+  background: radial-gradient(ellipse 70% 60% at 50% 46%, var(--studio-glow), transparent 70%), linear-gradient(180deg, var(--studio-top), var(--studio-bottom)) !important;
+  background-size: auto !important; opacity: 1 !important;
+}
+[class*="RmBrandPage_productSlotGrid"] { background: none !important; }
+/* Norbin stranica je svetla u obe teme — fiksne svetle vrednosti */
+[class*="NorbinBrandPage_stockedNoImage"] { background: linear-gradient(180deg, oklch(0.968 0.003 255), oklch(0.935 0.005 255)) !important; }
+/* Logo pločica stoji u uvek-tamnom hero bloku — fiksne tamne vrednosti */
+[class*="BrandProgramPage_logoStage"] { background: radial-gradient(ellipse 70% 60% at 50% 40%, oklch(0.29 0.010 255 / 0.6), transparent 70%), linear-gradient(180deg, oklch(0.235 0.010 255), oklch(0.19 0.010 255)) !important; background-size: auto !important; }
+[class*="CarfitBrandPage_hero"] [class*="gridSkin"]::before, [class*="CarfitBrandPage_hero"]::before { background-image: none !important; }

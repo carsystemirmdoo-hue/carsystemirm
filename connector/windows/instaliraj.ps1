@@ -28,12 +28,14 @@
 #>
 #Requires -Version 5.1
 param(
-  [Parameter(Mandatory)] [string]$RunAsAccount,
+  [string]$RunAsAccount = "$env:USERDOMAIN\$env:USERNAME",
   [string]$IzvorniFolder,
   [string]$ServerOrigin,
   [string]$DeviceCode = 'KANC-01',
   [string]$PosaljiOdDatuma,
-  [string]$VercelZastita
+  [string]$VercelZastita,
+  # Jedini Windows nalog je administrator: isti nalog, UAC ukljucen, zadatak sa ogranicenim tokenom (docs/b2b/49).
+  [switch]$JedanNalogSaUAC
 )
 
 $ErrorActionPreference = 'Stop'
@@ -66,16 +68,24 @@ try {
 }
 $adminSidovi = @()
 try { $adminSidovi = @(Get-LocalGroupMember -SID 'S-1-5-32-544' | ForEach-Object { $_.SID.Value }) } catch { }
+$uacPolitika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
+$uacUkljucen = $uacPolitika -and $uacPolitika.EnableLUA -eq 1 -and $uacPolitika.ConsentPromptBehaviorAdmin -ne 0
+$runAsJeTekuci = $runAsSid -eq $identitet.User.Value
 if ($adminSidovi -contains $runAsSid) {
-  Stani ("Nalog '$RunAsAccount' je administrator. Zakazani zadatak u Production rezimu namerno ne radi pod administratorskim nalogom. " +
-         'Vidi UPUTSTVO-KANCELARIJA.md, korak 0 (standardni nalog za svakodnevni rad).')
+  if (-not $JedanNalogSaUAC) {
+    Stani ("Nalog '$RunAsAccount' je administrator. Ako je to jedini nalog na racunaru, ponovite sa -JedanNalogSaUAC " +
+           '(zadatak ce raditi sa ogranicenim tokenom, bez povisenih prava). Vidi UPUTSTVO-KANCELARIJA.md, korak 0.')
+  }
+  if (-not $runAsJeTekuci) { Stani '-JedanNalogSaUAC: pokrenite ovu skriptu iz sesije istog naloga (Run as administrator), ne pod drugim administratorom.' }
+  if (-not $uacUkljucen) { Stani '-JedanNalogSaUAC trazi ukljucen UAC bez tihog podizanja prava (EnableLUA=1, ConsentPromptBehaviorAdmin<>0).' }
+  Info "Nalog '$RunAsAccount' je administrator (jedini nalog); UAC je ukljucen - zadatak ce raditi bez povisenih prava."
 }
 
 if ($ServerOrigin -and $ServerOrigin -notmatch '^https://') { Stani 'ServerOrigin mora poceti sa https://' }
 if ($PosaljiOdDatuma -and $PosaljiOdDatuma -notmatch '^\d{4}-\d{2}-\d{2}$') { Stani 'PosaljiOdDatuma mora biti u obliku GGGG-MM-DD.' }
 if ($IzvorniFolder -and -not (Test-Path -LiteralPath $IzvorniFolder -PathType Container)) { Stani "Folder '$IzvorniFolder' ne postoji." }
 if ($DeviceCode -notmatch '^[A-Za-z0-9._-]{1,64}$') { Stani 'DeviceCode sme da sadrzi samo slova, cifre, tacku, crticu i donju crtu.' }
-Ok "Preduslovi: Administrator, x64, Node $nodeVerzija, nalog $RunAsAccount nije administrator."
+Ok "Preduslovi: Administrator, x64, Node $nodeVerzija, nalog $RunAsAccount."
 
 $novaVerzija = (Get-Content -LiteralPath (Join-Path $izvorPaketa 'VERSION') -Raw).Trim()
 
@@ -133,5 +143,10 @@ if ($LASTEXITCODE -ne 0) { Stani "harden-install-dir nije prosao (kod $LASTEXITC
 Ok 'Instalacioni folder je ucvrscen (nalog konektora ima samo citanje).'
 
 Write-Host ''
-Write-Host "KORAK 2: prijavite se kao $RunAsAccount i u OBICNOM PowerShell-u (bez administratora) pokrenite:" -ForegroundColor Cyan
-Write-Host "  & '$cilj\windows\podesi.ps1'" -ForegroundColor Cyan
+if ($JedanNalogSaUAC) {
+  Write-Host 'KORAK 2: u ISTOJ administratorskoj sesiji pokrenite:' -ForegroundColor Cyan
+  Write-Host "  & '$cilj\windows\podesi.ps1' -JedanNalogSaUAC" -ForegroundColor Cyan
+} else {
+  Write-Host "KORAK 2: prijavite se kao $RunAsAccount i pokrenite:" -ForegroundColor Cyan
+  Write-Host "  & '$cilj\windows\podesi.ps1'" -ForegroundColor Cyan
+}

@@ -13,6 +13,18 @@ import { cekanjeZa, PODRAZUMEVANA_POLITIKA, vrstaPrivremenog } from "./retry.mjs
 export const RAZLOG_STORNO = "storno_rucni_upload";
 /** Dokument izdat pre `posaljiOdDatuma`: poznat, nikad poslat. */
 export const RAZLOG_PRE_POCETKA = "pre_pocetka_slanja";
+/**
+ * Dokument izdat pre `posaljiOdDatuma`, ali FAJL je nastao tog dana ili
+ * kasnije — naknadni izvoz starijeg računa (npr. dokument koji je nedostajao)
+ * ili kasno storno. Ne šalje se sam, ali se izdvaja za ručnu proveru.
+ */
+export const RAZLOG_KASNI_IZVOZ = "kasni_izvoz_rucna_provera";
+
+/** Lokalni datum (GGGG-MM-DD) iz `mtimeMs` — isti kalendar kao `posaljiOdDatuma`. */
+const lokalniDatumIz = (ms) => {
+  const d = new Date(ms);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
 
 const spavaj = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -260,7 +272,10 @@ export async function skenirajURed({
         sourceHash: citanje.sourceHash,
         putanja: k.putanja,
         velicina: citanje.velicina,
-        razlog: RAZLOG_PRE_POCETKA,
+        razlog:
+          Number.isFinite(k.mtimeMs) && lokalniDatumIz(k.mtimeMs) >= konfiguracija.posaljiOdDatuma
+            ? RAZLOG_KASNI_IZVOZ
+            : RAZLOG_PRE_POCETKA,
       });
       ubroji(k, "nepodrzano");
       continue;

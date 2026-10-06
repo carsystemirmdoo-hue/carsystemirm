@@ -100,3 +100,26 @@ test("zaštita pristupa (Vercel) ide kao zaglavlje samo kada je podešena; potpi
   assert.equal(viđeno[1]["x-vercel-protection-bypass"], undefined);
   assert.equal(config.proveriKonfiguraciju({ serverOrigin: "https://x.invalid", deviceCode: "K", keyId: "k1", sourceSystem: "b", issuerCode: "C", izvorniFolder: "/x", vercelZastita: " t " }).vercelZastita, "t");
 });
+
+test("stariji račun izvezen POSLE početka slanja se izdvaja za ručnu proveru; stari fajl iz arhive ne", async () => {
+  const { utimes } = await import("node:fs/promises");
+  const danas = new Date();
+  const iso = `${danas.getFullYear()}-${String(danas.getMonth() + 1).padStart(2, "0")}-${String(danas.getDate()).padStart(2, "0")}`;
+  const o = await okruzenje(iso);
+  try {
+    // Isti dokument (datum pre danas) dva puta: jednom kao stari fajl arhive, jednom kao današnji izvoz.
+    await cp(join(FIXTURES, "jedna-stavka.pdf"), join(o.izvor, "Fak.kasni.pdf"));
+    await cp(join(FIXTURES, "vise-stavki.pdf"), join(o.izvor, "Fak.arhiva.pdf"));
+    const staro = new Date("2020-01-15T10:00:00");
+    await utimes(join(o.izvor, "Fak.arhiva.pdf"), staro, staro);
+    await o.ciklus();
+    assert.equal(o.st.brojPoRazlogu(pipeline.RAZLOG_KASNI_IZVOZ), 1, "naknadni izvoz nije izdvojen");
+    assert.equal(o.st.brojPoRazlogu(pipeline.RAZLOG_PRE_POCETKA), 1, "stari fajl arhive nije tiho zabeležen");
+    const rucno = o.st.zaRucnuProveru();
+    assert.equal(rucno.length, 1);
+    assert.match(rucno[0].putanja, /Fak\.kasni\.pdf$/);
+    assert.equal(o.st.zaSlanje({ limit: 50, lokalniDatum: iso }).length, 0, "ništa od toga ne sme samo da ode");
+  } finally {
+    await o.zatvori();
+  }
+});

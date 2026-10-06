@@ -20,7 +20,9 @@
 #>
 #Requires -Version 5.1
 param(
-  [switch]$BezPrvogProlaza
+  [switch]$BezPrvogProlaza,
+  # Jedini nalog je administrator: pokrenuti u administratorskoj sesiji TOG naloga (docs/b2b/49).
+  [switch]$JedanNalogSaUAC
 )
 
 $ErrorActionPreference = 'Stop'
@@ -47,8 +49,12 @@ function Konektor([string[]]$argumenti) {
 }
 
 # ------------------------------------------------------------------ preduslovi
-if ((New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-  Stani 'Pokrenite OBICAN PowerShell (bez Run as administrator), prijavljeni kao nalog koji svakodnevno radi na racunaru.'
+$povisena = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+if ($JedanNalogSaUAC -and -not $povisena) {
+  Stani 'Sa -JedanNalogSaUAC pokrenite PowerShell kao Administrator iz sesije svakodnevnog naloga (registracija zadatka trazi povisenu sesiju).'
+}
+if (-not $JedanNalogSaUAC -and $povisena) {
+  Stani 'Pokrenite OBICAN PowerShell (bez Run as administrator) kao svakodnevni nalog; za jedini administratorski nalog koristite -JedanNalogSaUAC.'
 }
 if (-not (Test-Path -LiteralPath $konfiguracija)) { Stani "Nema $konfiguracija. Prvo KORAK 1: instaliraj.ps1 kao Administrator." }
 if (-not (Test-Path -LiteralPath $node)) { Stani "Node nije nadjen u $node." }
@@ -87,7 +93,7 @@ if (-not $hb.Json -or $hb.Json.http -ne 200) {
   Write-Host "    Oznaka uredjaja: $($k.deviceCode)   Opseg: biznisoft / $($k.issuerCode)"
   Write-Host "    Otisak (mora se poklopiti): $($kljuc.Json.fingerprint)"
   Write-Host "    Javni kljuc: $($kljuc.Json.javniKljucSpkiBase64)"
-  Write-Host '  Zatim ponovo pokrenite ovu skriptu.'
+  Write-Host '  Zatim ponovo pokrenite ovu skriptu (sa istim parametrima).'
   exit 3
 }
 Ok 'Veza sa serverom i uredjaj su ispravni (heartbeat 200).'
@@ -110,7 +116,11 @@ if (-not $BezPrvogProlaza) {
 
 # -------------------------------------------------------- 6. zakazani zadatak
 try {
-  & (Join-Path $cilj 'windows\task.ps1') -Action install -Mode Production -PackagePath $cilj -RunAsAccount $nalog -Apply
+  if ($JedanNalogSaUAC) {
+    & (Join-Path $cilj 'windows\task.ps1') -Action install -Mode Production -PackagePath $cilj -RunAsAccount $nalog -Apply -JedanNalogSaUAC
+  } else {
+    & (Join-Path $cilj 'windows\task.ps1') -Action install -Mode Production -PackagePath $cilj -RunAsAccount $nalog -Apply
+  }
 } catch {
   Stani "Zakazani zadatak nije registrovan: $($_.Exception.Message)"
 }

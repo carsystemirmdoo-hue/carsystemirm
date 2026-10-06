@@ -238,6 +238,19 @@ test("[hardening] task.ps1: SVAKA Production provera baca (throw) pre Register-S
   assert.doesNotMatch(blokProdukcije, /Write-Warn/, "Production blok ne sme koristiti Write-Warn — sve mora biti blokirajuće");
 });
 
+test("[hardening] task.ps1: -JedanNalogSaUAC dozvoljava administratorski nalog SAMO uz isti nalog i uključen UAC", async () => {
+  const tekst = (await citajSve())["task.ps1"];
+  const blok = tekst.slice(tekst.indexOf("if ($jeAdmin) {"), tekst.indexOf("if ($Apply -and -not (Test-CurrentProcessIsElevated))"));
+  assert.match(blok, /EnableLUA -eq 1/);
+  assert.match(blok, /ConsentPromptBehaviorAdmin -ne 0/);
+  assert.match(blok, /WindowsIdentity\]::GetCurrent\(\)\.User\.Value/);
+  assert.match(blok, /if \(\$JedanNalogSaUAC -and \$uacUkljucen -and \$runAsJeTekuci\)/);
+  // Bez prekidača, ili kada uslov ne važi, ostaje blokirajuće odbijanje.
+  assert.equal((blok.match(/Write-Fail-Production/g) ?? []).length, 2);
+  // Zadatak i dalje sa ograničenim tokenom.
+  assert.match(tekst, /-LogonType Interactive -RunLevel Limited/);
+});
+
 test("[hardening] task.ps1: Production zahteva config.json u INSTALACIONOM folderu, ne u folderu stanja", async () => {
   const tekst = (await citajSve())["task.ps1"];
   assert.match(tekst, /\$productionConfigPath\s*=\s*Join-Path\s+\$resolvedPackagePath\s+'config\.json'/);

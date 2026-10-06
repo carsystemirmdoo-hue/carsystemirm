@@ -586,6 +586,21 @@ function napraviApi(db, putanja) {
       return db.prepare("SELECT count(*) AS n FROM stavke WHERE razlog = ?").get(razlog).n;
     },
 
+    /**
+     * Stavke za ručnu proveru: storna (ručni upload) i naknadno izvezeni stariji
+     * dokumenti. NOSI PUTANJU — samo za lokalnog operatera (komanda `rucno`).
+     */
+    zaRucnuProveru() {
+      return db
+        .prepare(
+          `SELECT source_hash, putanja, razlog, dodato_u FROM stavke
+            WHERE stanje = 'nepodrzano' AND razlog IN ('storno_rucni_upload', 'kasni_izvoz_rucna_provera')
+            ORDER BY dodato_u`,
+        )
+        .all()
+        .map((r) => ({ ref: `sd:${String(r.source_hash).slice(0, 12)}`, putanja: r.putanja, razlog: r.razlog, dodato: r.dodato_u }));
+    },
+
     stornaZaRucniUpload() {
       return db
         .prepare(

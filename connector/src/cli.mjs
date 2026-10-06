@@ -30,7 +30,7 @@ import {
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -336,6 +336,7 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       slanje,
       // Storno nije poslat: mora se videti u svakom izlazu, ne samo u statusu.
       stornaZaRucniUpload: obavestenjeStorna(store),
+      kasniIzvoz: obavestenjeKasni(store),
       upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
       sledeciTermin: sledeciTermin({
         now,
@@ -566,6 +567,28 @@ function obavestenjeStorna(store) {
   return n ? { broj: n, uputstvo: UPUTSTVO_STORNO } : null;
 }
 
+const UPUTSTVO_KASNI =
+  "Stariji račun izvezen posle početka slanja — nije poslat automatski. Proveriti da li je u portalu; " +
+  "ako nije, otpremiti ručno na /portal/importi (izdavalac CSRM). Komanda `rucno` ispisuje fajlove.";
+
+/** Broj naknadno izvezenih starijih dokumenata — bez putanja. */
+function obavestenjeKasni(store) {
+  const n = store.brojPoRazlogu("kasni_izvoz_rucna_provera");
+  return n ? { broj: n, uputstvo: UPUTSTVO_KASNI } : null;
+}
+
+/** Sve što čeka ručnu proveru (storna + kasni izvoz), sa putanjama — samo lokalno. */
+async function rucno(p) {
+  const { store } = await otvori(p);
+  try {
+    const lista = store.zaRucnuProveru();
+    ispisi({ komanda: "rucno", broj: lista.length, storno: UPUTSTVO_STORNO, kasniIzvoz: UPUTSTVO_KASNI, stavke: lista });
+    return 0;
+  } finally {
+    store.zatvori();
+  }
+}
+
 /** Lokalni spisak storna sa putanjama — samo za operatera ovog računara. */
 async function storna(p) {
   const { store } = await otvori(p);
@@ -598,6 +621,7 @@ async function status(p, now = new Date()) {
       // Redigovano: bez putanja, imena fajlova i sadržaja.
       poslednjiIshodi: store.poslednjiIshodi(10),
       stornaZaRucniUpload: obavestenjeStorna(store),
+      kasniIzvoz: obavestenjeKasni(store),
       prePocetkaSlanja: { posaljiOdDatuma: k.posaljiOdDatuma, nijePoslato: store.brojPoRazlogu("pre_pocetka_slanja") },
       upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
       // Bezbedno: samo ID, stanje i vreme — bez ijednog podatka o dokumentu.
@@ -677,6 +701,8 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await status(p);
       case "storna":
         return await storna(p);
+      case "rucno":
+        return await rucno(p);
       case "heartbeat":
         return await heartbeat(p);
       default:

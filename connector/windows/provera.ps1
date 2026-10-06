@@ -30,7 +30,11 @@ else {
   if ($s.nastaviPosle) { Write-Host "Server je trazio pauzu do: $($s.nastaviPosle)" -ForegroundColor Yellow }
   if ($s.stornaZaRucniUpload) {
     Write-Host "[!!] STORNA ZA RUCNI UPLOAD: $($s.stornaZaRucniUpload.broj). $($s.stornaZaRucniUpload.uputstvo)" -ForegroundColor Yellow
-    Write-Host "     Spisak fajlova: node `"$ulaz`" --packaged --config `"$konfiguracija`" storna"
+    Write-Host "     Spisak fajlova: & `"$node`" `"$ulaz`" --packaged --config `"$konfiguracija`" rucno"
+  }
+  if ($s.kasniIzvoz) {
+    Write-Host "[!!] STARIJI RACUNI IZVEZENI NAKNADNO: $($s.kasniIzvoz.broj). $($s.kasniIzvoz.uputstvo)" -ForegroundColor Yellow
+    Write-Host "     Spisak fajlova: & `"$node`" `"$ulaz`" --packaged --config `"$konfiguracija`" rucno"
   }
   if ($s.upozorenjeGodina) { Write-Host "[!!] $($s.upozorenjeGodina.uputstvo) Novi folder: $($s.upozorenjeGodina.folder)" -ForegroundColor Yellow }
 }

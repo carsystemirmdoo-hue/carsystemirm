@@ -9,10 +9,12 @@ ne briše i ne premešta fajlove. Izvoz iz BizniSofta ostaje kao do sada.
 ## 0. Pre početka (jednom)
 
 - Node 24 LTS x64 sa nodejs.org, podrazumevana putanja (`C:\Program Files\nodejs`).
-- Nalog koji svakodnevno radi na računaru mora biti **standardni** (ne
-  administrator): zakazani zadatak namerno ne radi pod administratorom.
-  Provera: `net localgroup Administrators`. Ako je jedini nalog administrator,
-  javiti — to je odluka (drugi nalog ili drugačiji režim zadatka).
+- Tip naloga: `whoami /groups | findstr S-1-5-32-544`. Ako se red pojavi,
+  nalog je **administrator** (u običnom prozoru sa oznakom „Group used for
+  deny only" — UAC radi). Kancelarija sa jednim takvim nalogom: sve skripte
+  se pokreću sa **`-JedanNalogSaUAC`**, iz „Run as administrator" prozora
+  **tog istog naloga**; zadatak i dalje radi sa ograničenim tokenom (bez
+  povišenih prava). Nov nalog nije potreban.
 - Zadatak radi radnim danima posle 09:00, **dok je taj nalog prijavljen**.
   Računar ugašen u 09:00 → jedan propušteni ciklus pri sledećem paljenju.
   Bez interneta → dokumenti čekaju u lokalnom redu, ništa se ne gubi.
@@ -25,7 +27,7 @@ PowerShell-u „Run as administrator":
 
 ```powershell
 cd "$env:USERPROFILE\Downloads\carsystem-connector-<verzija>"
-.\windows\instaliraj.ps1 -RunAsAccount 'RACUNAR\nalog' `
+.\windows\instaliraj.ps1 -JedanNalogSaUAC `
   -IzvorniFolder 'C:\Users\nalog\Desktop\Fakture\Fakture 2026' `
   -ServerOrigin 'https://<adresa pilota>' -PosaljiOdDatuma '2026-10-06' `
   -VercelZastita '<tajna, ako je adresa zaštićena>'
@@ -39,13 +41,13 @@ cd "$env:USERPROFILE\Downloads\carsystem-connector-<verzija>"
 
 ## 2. Podešavanje naloga, prvi prolaz i zadatak — kao svakodnevni nalog
 
-Običan PowerShell (bez administratora), prijavljen kao nalog iz koraka 0:
+Isti administratorski prozor istog naloga (kancelarija sa jednim nalogom):
 
 ```powershell
-& 'C:\Program Files\CarsystemConnector\windows\podesi.ps1'
+& 'C:\Program Files\CarsystemConnector\windows\podesi.ps1' -JedanNalogSaUAC
 ```
 
-Prvi put staje sa porukom „Uređaj još nije aktiviran" i ispisuje **otisak**.
+(Za standardni nalog: običan prozor, bez `-JedanNalogSaUAC`.) Prvi put staje sa porukom „Uređaj još nije aktiviran" i ispisuje **otisak**.
 Vlasnik u portalu: **Uvoz → Sinhronizacija → registruj uređaj** (oznaka
 `KANC-01`, opseg `biznisoft / CSRM`) → **aktiviraj** uz potvrdu da se otisak
 poklapa. Zatim ponovo `podesi.ps1`: test veze, prvi prolaz (nove fakture se
@@ -60,10 +62,12 @@ poklapa. Zatim ponovo `podesi.ps1`: test veze, prvi prolaz (nove fakture se
 Prikazuje poslednji ciklus, sledeći termin, šta čeka slanje ili pregled,
 rezultat zakazanog zadatka i **upozorenja**:
 
-- **Storna za ručni upload** — storno se ne šalje automatski. Spisak fajlova:
-  komanda iz upozorenja (`… storna`). Otpremiti ih u portalu: **Uvoz**
-  (`/portal/importi`), izdavalac `CSRM`. Portal sam povezuje potpuno storno
-  sa originalom ili ga stavlja na pregled.
+- **Storna za ručni upload** i **stariji računi izvezeni naknadno** (datum
+  pre početka slanja, fajl nastao kasnije — npr. račun koji je nedostajao):
+  ne šalju se sami. Spisak fajlova: komanda `… rucno` iz upozorenja.
+  Proveriti u portalu i po potrebi otpremiti na **Uvoz** (`/portal/importi`),
+  izdavalac `CSRM`. Portal sam povezuje potpuno storno sa originalom ili ga
+  stavlja na pregled.
 - **Folder nove godine** (npr. „Fakture 2027") — konektor ga ne uključuje sam.
   U januaru: korak 1 sa `-IzvorniFolder '...\Fakture 2027'`.
 

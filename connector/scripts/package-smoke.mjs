@@ -86,6 +86,14 @@ const ULAZI = [
   { izvor: "connector/windows/harden-install-dir.ps1", cilj: "connector/windows/harden-install-dir.ps1", tip: "fajl" },
   { izvor: "connector/windows/verify-invoice-folder.ps1", cilj: "connector/windows/verify-invoice-folder.ps1", tip: "fajl" },
   /*
+   * Kancelarijska instalacija (docs/b2b/49). Smoke ih NE izvršava; nose se jer
+   * ih statički testovi (`windows-install-hardening.test.mjs`) čitaju.
+   */
+  { izvor: "connector/windows/instaliraj.ps1", cilj: "connector/windows/instaliraj.ps1", tip: "fajl" },
+  { izvor: "connector/windows/podesi.ps1", cilj: "connector/windows/podesi.ps1", tip: "fajl" },
+  { izvor: "connector/windows/provera.ps1", cilj: "connector/windows/provera.ps1", tip: "fajl" },
+  { izvor: "connector/windows/vrati-prethodnu.ps1", cilj: "connector/windows/vrati-prethodnu.ps1", tip: "fajl" },
+  /*
    * Referentni runbook za KASNIJU kancelarijsku instalaciju — ne za ovaj
    * kućni smoke. Nosi se radi pregleda, ne radi izvršavanja u ovoj fazi.
    */
@@ -195,6 +203,22 @@ const PREGLEDANO = [
   {
     fajl: "connector/windows/verify-invoice-folder.ps1",
     razlog: "`C:\\BizniSoft\\Izvoz\\Fakture` u `.EXAMPLE` bloku je izmišljen primer BizniSoft foldera, ne stvarna putanja.",
+  },
+  {
+    fajl: "connector/windows/instaliraj.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` i `C:\\Users\\nalog\\...` su primeri iz zaglavlja/uputstva skripte, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/podesi.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/provera.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/vrati-prethodnu.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` je primer u zaglavlju skripte, ne stvarna mašina.",
   },
   {
     fajl: "connector/windows/OFFICE-INSTALL.md",

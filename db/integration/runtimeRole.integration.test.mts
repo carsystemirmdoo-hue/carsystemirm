@@ -26,7 +26,8 @@ const guard = (t: { skip: (m?: string) => void }) => {
 };
 
 const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events"];
-const REVOCATION_ONLY = ["customer_contact_verifications"];
+/** Ograničena izmena (opoziv 0028, prelaz stanja storna 0033): UPDATE ostaje, DELETE ne. */
+const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals"];
 
 let db: TestDatabase;
 /** Prava PUBLIC nad šemom pre primene skripte (skripta ih oduzima). */

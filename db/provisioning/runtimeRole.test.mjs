@@ -22,8 +22,13 @@ const statements = script
   .filter((line) => !line.trimStart().startsWith("--"))
   .join("\n");
 
-/** Tabela čiji okidač odbija izmenu, ali dozvoljava opoziv određenih kolona. */
-const REVOCATION_ONLY = new Set(["customer_contact_verifications"]);
+/**
+ * Tabele čiji okidač dozvoljava OGRANIČENU izmenu, pa uloga zadržava UPDATE:
+ *  - potvrda kontakta: samo opoziv određenih kolona (0028);
+ *  - zapis naknadnog storna: prelaz stanja, bez promene odštampane reference (0033).
+ * DELETE im se i dalje oduzima.
+ */
+const REVOCATION_ONLY = new Set(["customer_contact_verifications", "invoice_reversals"]);
 
 function guardedTables() {
   /** @type {Map<string, Set<string>>} */

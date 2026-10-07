@@ -70,6 +70,11 @@ GRANT SELECT, INSERT ON audit_log, customer_contact_consents, sync_command_event
 --    sužava na te kolone.
 REVOKE DELETE, TRUNCATE ON customer_contact_verifications FROM :runtime_role;
 
+--    Zapis naknadnog storna (0033) se ne briše; aplikacija ga samo upisuje i
+--    menja stanje (`lib/pdf/reversal.ts`), a okidač čuva odštampanu referencu.
+--    UPDATE ostaje (prelaz stanja), DELETE i TRUNCATE se oduzimaju.
+REVOKE DELETE, TRUNCATE ON invoice_reversals FROM :runtime_role;
+
 -- 6. Sekvence — `nextval` za `bigserial` kolone.
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO :runtime_role;
 

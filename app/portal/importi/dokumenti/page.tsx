@@ -26,6 +26,8 @@ const FILTERS = [
  * kupca i broj računa se ne prenose na klijent — spisak se gleda i sa ekrana
  * koji nije nasamo, a otisak je dovoljan da se dokument pronađe.
  */
+const BROJ = new Intl.NumberFormat("sr-Latn-RS");
+
 export default async function SourceDocumentsPage({
   searchParams,
 }: {
@@ -57,30 +59,30 @@ export default async function SourceDocumentsPage({
       />
 
       <section className="portal-metrics">
-        <Metric label="Pročitano i provereno" value={String(counts["validation:valid"] ?? 0)} />
+        <Metric label="Pročitano i provereno" value={BROJ.format(counts["validation:valid"] ?? 0)} />
         <Metric
           label="Zbir se ne poklapa"
-          value={String(counts["validation:totals_mismatch"] ?? 0)}
+          value={BROJ.format(counts["validation:totals_mismatch"] ?? 0)}
           tone="danger"
         />
         <Metric
           label="Oblik bez uzorka"
-          value={String(counts["validation:unsupported_requires_sample"] ?? 0)}
+          value={BROJ.format(counts["validation:unsupported_requires_sample"] ?? 0)}
           tone="info"
         />
         <Metric
           label="Sudari verzija"
-          value={String(counts["revision:conflict"] ?? 0)}
+          value={BROJ.format(counts["revision:conflict"] ?? 0)}
           tone="danger"
         />
         <Metric
           label="Čeka ručni pregled"
-          value={String(counts["review:pending"] ?? 0)}
+          value={BROJ.format(counts["review:pending"] ?? 0)}
           tone="warning"
         />
         <Metric
           label="Provereno, čeka mapiranje"
-          value={String(counts["unposted"] ?? 0)}
+          value={BROJ.format(counts["unposted"] ?? 0)}
           tone="warning"
         />
       </section>

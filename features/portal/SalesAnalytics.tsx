@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
+import { SALES_LINES_LIMIT } from "@/lib/sales/limits";
 import {
   averageInvoice,
   concentration,
@@ -113,6 +114,7 @@ export function SalesTotals({
 
   return (
     <>
+      <SalesLimitNotice lines={lines} />
       <div className="portal-metrics">
         {cards.map((card) => (
           <div key={card.label} className="portal-metric" data-tone={card.tone}>
@@ -140,6 +142,35 @@ export function SalesTotals({
         </p>
       ) : null}
     </>
+  );
+}
+
+const BROJ = new Intl.NumberFormat("sr-Latn-RS");
+
+/**
+ * Upozorenje kada je upit dostigao granicu učitanih stavki.
+ *
+ * Tada zbirovi i liste na ekranu pokrivaju samo NAJNOVIJE stavke, ne ceo
+ * izabrani period. Ekran to mora da kaže, umesto da prikaže skraćen zbir kao
+ * da je potpun. Logika upita se ovde ne menja.
+ */
+export function SalesLimitNotice({
+  lines,
+  hint = "Izaberite kraći period da biste videli potpune iznose.",
+}: {
+  lines: SalesLine[];
+  /** Šta korisnik na tom ekranu može da uradi da vidi potpune iznose. */
+  hint?: string;
+}) {
+  if (lines.length < SALES_LINES_LIMIT) return null;
+  const datumi = lines.map((line) => String(line.issuedOn)).sort();
+  return (
+    <p className="portal-data-note" data-tone="warning" role="status">
+      <strong>Prikaz nije potpun.</strong> Učitano je najnovijih{" "}
+      {BROJ.format(SALES_LINES_LIMIT)} stavki ({datumi[0]} –{" "}
+      {datumi[datumi.length - 1]}).
+      Zbirovi i liste ne obuhvataju starije stavke. {hint}
+    </p>
   );
 }
 
@@ -235,58 +266,68 @@ export function SalesBreakdown({
 
 /** Poslednji nivo drill-down-a: pojedinačne stavke faktura. */
 export function SalesLines({ lines }: { lines: SalesLine[] }) {
+  const PRIKAZ = 500;
   return (
-    <div className="portal-table-wrap">
-      <table className="portal-table">
-        <thead>
-          <tr>
-            <th scope="col">Faktura</th>
-            <th scope="col">Datum</th>
-            <th scope="col">Vrsta</th>
-            <th scope="col">Kupac</th>
-            <th scope="col">Komercijalista</th>
-            <th scope="col">Artikal</th>
-            <th scope="col">Količina</th>
-            <th scope="col">Iznos</th>
-          </tr>
-        </thead>
-        <tbody>
-          {lines.slice(0, 500).map((line, index) => (
-            <tr key={`${line.invoiceId}-${line.articleCode}-${index}`}>
-              <th scope="row">
-                <Link href={`/portal/prodaja/faktura/${line.invoiceId}`}>
-                  {line.invoiceNumber}
-                </Link>
-              </th>
-              <td>{line.issuedOn}</td>
-              <td>
-                {line.documentKind === "nepoznato" && line.lineAmount < 0 ? (
-                  <span className="portal-unavailable">
-                    {UNKNOWN_NEGATIVE_LABEL}
-                  </span>
-                ) : (
-                  (line.sourceDocumentType ?? line.documentKind)
-                )}
-              </td>
-              <td>{line.customerName}</td>
-              <td>{line.salespersonName ?? "—"}</td>
-              <td>
-                <strong>{line.articleCode}</strong>
-                <small>{line.articleName ?? ""}</small>
-              </td>
-              <td className="portal-table-number">
-                {MONEY2.format(line.quantity)}
-              </td>
-              <td className="portal-table-number">{money(line.lineAmount)}</td>
-            </tr>
-          ))}
-          {lines.length === 0 ? (
+    <>
+      {lines.length > PRIKAZ ? (
+        <p className="portal-data-note">
+          Prikazano je najnovijih {BROJ.format(PRIKAZ)} od{" "}
+          {BROJ.format(lines.length)} učitanih stavki. Za ostale suzite filtere
+          ili preuzmite izvoz.
+        </p>
+      ) : null}
+      <div className="portal-table-wrap">
+        <table className="portal-table">
+          <thead>
             <tr>
-              <td colSpan={8}>Nema stavki za izabrane filtere.</td>
+              <th scope="col">Faktura</th>
+              <th scope="col">Datum</th>
+              <th scope="col">Vrsta</th>
+              <th scope="col">Kupac</th>
+              <th scope="col">Komercijalista</th>
+              <th scope="col">Artikal</th>
+              <th scope="col">Količina</th>
+              <th scope="col">Iznos</th>
             </tr>
-          ) : null}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {lines.slice(0, PRIKAZ).map((line, index) => (
+              <tr key={`${line.invoiceId}-${line.articleCode}-${index}`}>
+                <th scope="row">
+                  <Link href={`/portal/prodaja/faktura/${line.invoiceId}`}>
+                    {line.invoiceNumber}
+                  </Link>
+                </th>
+                <td className="portal-table-nowrap">{line.issuedOn}</td>
+                <td>
+                  {line.documentKind === "nepoznato" && line.lineAmount < 0 ? (
+                    <span className="portal-unavailable">
+                      {UNKNOWN_NEGATIVE_LABEL}
+                    </span>
+                  ) : (
+                    (line.sourceDocumentType ?? line.documentKind)
+                  )}
+                </td>
+                <td>{line.customerName}</td>
+                <td>{line.salespersonName ?? "—"}</td>
+                <td>
+                  <strong>{line.articleCode}</strong>
+                  <small>{line.articleName ?? ""}</small>
+                </td>
+                <td className="portal-table-number">
+                  {MONEY2.format(line.quantity)}
+                </td>
+                <td className="portal-table-number">{money(line.lineAmount)}</td>
+              </tr>
+            ))}
+            {lines.length === 0 ? (
+              <tr>
+                <td colSpan={8}>Nema stavki za izabrane filtere.</td>
+              </tr>
+            ) : null}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

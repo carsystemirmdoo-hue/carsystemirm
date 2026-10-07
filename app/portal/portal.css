@@ -1155,18 +1155,23 @@ body:has(.portal-login-root) {
   font-size: 0.94em;
 }
 
+/* Duga tabela se pomera unutar okvira, a zaglavlje kolona ostaje vidljivo
+   (sticky `th` je vezan za ovaj okvir). Bez granice visine su liste od 150–500
+   redova pravile strane od 30.000–48.000 px. */
 .portal-table-wrap {
   width: 100%;
+  max-height: min(72vh, 760px);
   overflow: auto;
   border-radius: 0 0 10px 10px;
   scrollbar-width: thin;
+  overscroll-behavior: contain;
 }
 .portal-table {
   width: 100%;
   min-width: 880px;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 11px;
+  font-size: 12.5px;
 }
 .portal-table th {
   position: sticky;
@@ -1177,7 +1182,7 @@ body:has(.portal-login-root) {
   color: var(--p-muted);
   border-bottom: 1px solid var(--p-line);
   background: var(--p-bg);
-  font-size: 9px;
+  font-size: 10.5px;
   font-weight: 750;
   letter-spacing: 0.045em;
   text-align: left;
@@ -1201,14 +1206,60 @@ body:has(.portal-login-root) {
 .portal-table td strong {
   display: block;
   color: var(--p-ink);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 650;
 }
 .portal-table td small {
   display: block;
   margin-top: 2px;
   color: var(--p-faint);
-  font-size: 9px;
+  font-size: 11px;
+}
+/* Zaglavlje REDA (`<th scope="row">`, npr. naziv kupca) je ćelija podataka, ne
+   zaglavlje kolone: bez velikih slova, bez lepljenja uz vrh i čitljive veličine.
+   Ostaje uz levu ivicu pri horizontalnom pomeranju. */
+.portal-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  height: auto;
+  min-width: 200px;
+  max-width: 340px;
+  padding: 10px;
+  color: var(--p-ink);
+  background: var(--p-surface);
+  border-bottom: 1px solid var(--p-line);
+  box-shadow: 1px 0 0 var(--p-line);
+  font-size: 12.5px;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+  vertical-align: middle;
+}
+.portal-table tbody th small {
+  display: block;
+  margin-top: 2px;
+  color: var(--p-faint);
+  font-size: 11px;
+  font-weight: 500;
+}
+.portal-table tbody tr:hover th {
+  background: oklch(0.976 0.004 255);
+}
+.portal-table tfoot th,
+.portal-table tfoot td {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: var(--p-bg);
+  border-top: 1px solid var(--p-line);
+  color: var(--p-ink);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
 }
 .portal-table .portal-sticky-cell {
   position: sticky;
@@ -1248,6 +1299,47 @@ body:has(.portal-login-root) {
   color: var(--p-red-dark) !important;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+.portal-table-nowrap {
+  white-space: nowrap;
+}
+/* Napomena o stanju podataka iznad ili unutar sekcije (npr. skraćen prikaz). */
+.portal-data-note {
+  margin: 12px 18px 0;
+  padding: 10px 12px;
+  color: var(--p-muted);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-bg);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.portal-data-note[data-tone="warning"] {
+  color: oklch(0.42 0.1 72);
+  border-color: oklch(0.85 0.08 80);
+  background: var(--p-amber-soft);
+}
+.portal-data-note strong {
+  color: inherit;
+  font-weight: 700;
+}
+.portal-section-header .portal-data-note {
+  margin: 8px 0 0;
+}
+.portal-panel > .portal-data-note {
+  max-width: none;
+  margin: 12px 18px 0;
+  font-size: 12.5px;
+}
+/* Pokazatelji kao samostalna sekcija strane poravnati su sa panelima ispod,
+   bez dodatnog uvlačenja koje imaju unutar panela. */
+section.portal-metrics {
+  padding-inline: 0;
+}
+.portal-unavailable[data-compact="true"] {
+  padding: 1px 6px;
+  font-size: 11px;
+  white-space: nowrap;
 }
 .portal-table-number {
   font-family: var(--font-technical), monospace;
@@ -1995,13 +2087,22 @@ body:has(.portal-login-root) {
 }
 
 @media (max-width: 900px) {
+  /* Zatvorena fioka ne baca senku preko sadržaja (siva traka uz levu ivicu)
+     i nije dostupna tastaturi; `visibility` se menja tek posle animacije. */
   .portal-sidebar {
     width: 252px !important;
     transform: translateX(-100%);
-    box-shadow: 24px 0 70px oklch(0.13 0.02 255 / 0.28);
+    box-shadow: none;
+    visibility: hidden;
+    transition:
+      transform 190ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 190ms;
   }
   .portal-sidebar[data-mobile-open="true"] {
     transform: translateX(0);
+    box-shadow: 24px 0 70px oklch(0.13 0.02 255 / 0.28);
+    visibility: visible;
+    transition: transform 190ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   /* Na telefonu je navigacija fioka, pa se skupljeno stanje sa desktopa
      poništava — fioka se uvek otvara u punom prikazu, sa nazivima stavki. */
@@ -6581,7 +6682,12 @@ body:has(.portal-login-root) {
 .portal-unavailable {
   display: inline-flex;
   align-items: center;
+  max-width: 100%;
   padding: 2px 7px;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
   color: oklch(0.47 0.105 72);
   border: 1px dashed oklch(0.85 0.08 80);
   border-radius: 6px;
@@ -6712,6 +6818,13 @@ body:has(.portal-login-root) {
   display: grid;
   gap: 5px;
   align-content: start;
+  min-width: 0;
+}
+/* Polje ne sme biti šire od svoje kolone (dug naziv kupca u listi). */
+.portal-settings-form input,
+.portal-settings-form select {
+  width: 100%;
+  min-width: 0;
 }
 .portal-settings-form span {
   color: var(--p-muted);
@@ -6727,14 +6840,25 @@ body:has(.portal-login-root) {
   background: var(--p-surface);
   font-size: 12px;
 }
-.portal-settings-form input:disabled {
+.portal-settings-form select {
+  height: 36px;
+  padding: 0 10px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background-color: var(--p-surface);
+  font-size: 12px;
+}
+.portal-settings-form input:disabled,
+.portal-settings-form select:disabled {
   color: var(--p-faint);
-  background: var(--p-bg);
+  background-color: var(--p-bg);
   cursor: not-allowed;
 }
 .portal-settings-form small {
   color: var(--p-faint);
-  font-size: 10.5px;
+  font-size: 11px;
+  line-height: 1.4;
 }
 .portal-settings-reason {
   grid-column: 1 / -1;

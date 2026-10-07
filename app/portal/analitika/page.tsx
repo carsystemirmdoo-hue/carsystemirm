@@ -96,6 +96,7 @@ export default async function AnalyticsPage({
         applied={params}
         views={VIEWS}
         exportView={view}
+        salespersonOnInvoices={lines.some((line) => line.salespersonId)}
       />
 
       <section className="portal-panel">

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
-import { money } from "@/features/portal/SalesAnalytics";
+import { money, SalesLimitNotice } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet } from "@/features/portal/SalesFilters";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -66,6 +66,10 @@ export default async function CustomersPage({
               </select>
               <button type="submit">Prikažite</button>
             </form>
+            <SalesLimitNotice
+              lines={lines}
+              hint="Zbirovi u tabeli važe samo za taj period. Za potpun promet jednog kupca otvorite Prodaju i izaberite kupca."
+            />
             <p>
               Iznosi su iz uvezenih faktura. Dugovanje i naplata nisu deo ovog
               izvora podataka.
@@ -112,7 +116,10 @@ export default async function CustomersPage({
                       {totals?.invoiceCount ?? 0}
                     </td>
                     <td>
-                      <UnavailableValue note="Fakture ne sadrže podatke o plaćanju." />
+                      <UnavailableValue
+                        compact
+                        note="Fakture ne sadrže podatke o plaćanju."
+                      />
                     </td>
                   </tr>
                 );

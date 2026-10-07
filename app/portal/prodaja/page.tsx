@@ -67,6 +67,7 @@ export default async function SalesPage({
         options={{ customers, salespeople, productGroups }}
         applied={params}
         exportView="kupci"
+        salespersonOnInvoices={lines.some((line) => line.salespersonId)}
       />
 
       <section className="portal-panel">

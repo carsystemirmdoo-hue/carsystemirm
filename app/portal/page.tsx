@@ -93,7 +93,7 @@ export default async function PortalHomePage() {
                     .map(([origin, n]) => `${ORIGIN_LABELS[origin as keyof typeof ORIGIN_LABELS] ?? origin}: ${formatCount(n ?? 0)}`)
                     .join(" · ")}
               {state.allInvoices > state.confirmedDocuments
-                ? ` Još ${formatCount(state.allInvoices - state.confirmedDocuments)} faktura postoji bez potvrđenog izvornog dokumenta i ne ulazi u kartice ni preporuke.`
+                ? `. Bez potvrđenog izvornog dokumenta: ${formatCount(state.allInvoices - state.confirmedDocuments)}; takve fakture ne ulaze u kartice ni preporuke.`
                 : ""}
             </p>
           ) : (

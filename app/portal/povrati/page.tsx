@@ -70,6 +70,7 @@ export default async function ReturnsPage({
         options={{ customers, salespeople, productGroups }}
         applied={params}
         exportView="stavke"
+        salespersonOnInvoices={lines.some((line) => line.salespersonId)}
       />
 
       <section className="portal-panel">

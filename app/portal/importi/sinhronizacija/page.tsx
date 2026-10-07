@@ -51,6 +51,22 @@ function proteklo(iso: string | null): string {
   return `pre ${Math.floor(sati / 24)} dana`;
 }
 
+/** Prikaz statusa — vrednosti iz baze ostaju iste, menja se samo natpis. */
+const STATUS_UREDJAJA: Record<string, { tekst: string; tone: "success" | "warning" | "danger" | "neutral" }> = {
+  registered: { tekst: "čeka aktivaciju", tone: "warning" },
+  active: { tekst: "aktivan", tone: "success" },
+  suspended: { tekst: "privremeno isključen", tone: "warning" },
+  revoked: { tekst: "opozvan", tone: "danger" },
+};
+
+const STATUS_UVOZA: Record<string, string> = {
+  u_toku: "u toku",
+  uspesno: "uspešno",
+  uspesno_sa_upozorenjima: "uspešno, sa upozorenjima",
+  greska: "greška",
+  preskoceno_duplikat: "preskočeno (već uvezeno)",
+};
+
 export default async function SyncOperationsPage() {
   const user = await requireCapability("sync:monitor", "/portal/importi/sinhronizacija");
 
@@ -157,7 +173,9 @@ export default async function SyncOperationsPage() {
                       <small>{u.deviceCode}</small>
                     </th>
                     <td>
-                      <Badge tone={u.status === "active" ? "success" : "danger"}>{u.status}</Badge>
+                      <Badge tone={STATUS_UREDJAJA[u.status]?.tone ?? "neutral"}>
+                        {STATUS_UREDJAJA[u.status]?.tekst ?? u.status}
+                      </Badge>
                     </td>
                     <td>
                       {u.sourceSystem}/{u.issuerCode}
@@ -235,7 +253,7 @@ export default async function SyncOperationsPage() {
                       timeStyle: "short",
                     }).format(r.startedAt)}
                   </th>
-                  <td>{r.status}</td>
+                  <td>{STATUS_UVOZA[r.status] ?? r.status}</td>
                   <td className="portal-table-number">{r.rowsRead}</td>
                   <td className="portal-table-number">{r.invoicesCreated}</td>
                   <td className="portal-table-number">{r.invoicesUpdated}</td>

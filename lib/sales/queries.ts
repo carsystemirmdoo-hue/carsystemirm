@@ -1,4 +1,5 @@
 import "server-only";
+import { SALES_LINES_LIMIT } from "@/lib/sales/limits";
 import { and, asc, desc, eq, gte, inArray, lte, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
@@ -60,7 +61,7 @@ export async function customerScope(user: PortalUser): Promise<string[] | null> 
 export async function loadSalesLines(
   user: PortalUser,
   filter: SalesFilter = {},
-  limit = 20000,
+  limit = SALES_LINES_LIMIT,
 ): Promise<SalesLine[]> {
   const scope = await customerScope(user);
   if (scope !== null && scope.length === 0) return [];

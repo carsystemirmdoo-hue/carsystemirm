@@ -2170,6 +2170,10 @@ section.portal-metrics {
   .portal-breadcrumb span:not(:last-child) {
     display: none;
   }
+  /* Ostaje samo tekuća strana — bez usamljene strelice ispred nje. */
+  .portal-breadcrumb span:last-child svg {
+    display: none;
+  }
   .portal-topbar {
     padding-inline: 14px;
   }
@@ -8143,6 +8147,16 @@ section.portal-metrics {
   padding: 16px 20px;
 }
 .zr-item + .zr-item { border-top: 1px solid var(--p-line); }
+.zr-rest { border-top: 1px solid var(--p-line); }
+.zr-rest > summary {
+  padding: 12px 20px;
+  color: var(--p-ink);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.zr-rest > summary:hover { color: var(--p-red-dark); }
+.zr-rest[open] > summary { border-bottom: 1px solid var(--p-line); }
 .zr-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .zr-name { color: var(--p-ink); font-size: 15px; font-weight: 700; text-decoration: none; }
 .zr-name:hover { color: var(--p-red); text-decoration: underline; }
@@ -8193,7 +8207,8 @@ section.portal-metrics {
 }
 @media (max-width: 720px) {
   .zr-item, .zr-status, .zr-quiet-list li { padding-inline: 14px; }
-  .zr-quiet > summary { padding-inline: 14px; }
+  .zr-quiet > summary,
+  .zr-rest > summary { padding-inline: 14px; }
 }
 
 /* =========================================================================

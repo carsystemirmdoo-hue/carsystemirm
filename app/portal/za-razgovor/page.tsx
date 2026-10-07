@@ -144,6 +144,9 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
   );
 }
 
+/** Koliko kupaca po grupi se prikazuje odmah; ostali su u otvorivom delu. */
+const ZR_ODMAH = 10;
+
 export default async function TalkListPage({
   searchParams,
 }: {
@@ -303,11 +306,25 @@ export default async function TalkListPage({
                 <p>{g.hint}</p>
               </div>
             </div>
+            {/* Prvih nekoliko kupaca odmah, ostatak na jedan klik — redosled
+                se ne menja (lista od 75 kupaca pravila je stranu od ~16.000 px). */}
             <ol className="zr-list">
-              {g.list.map((item) => (
+              {g.list.slice(0, ZR_ODMAH).map((item) => (
                 <CustomerItem key={item.id} item={item} showReps={all} />
               ))}
             </ol>
+            {g.list.length > ZR_ODMAH ? (
+              <details className="zr-rest">
+                <summary>
+                  Prikažite ostalih {g.list.length - ZR_ODMAH} ({g.title.toLowerCase()})
+                </summary>
+                <ol className="zr-list" start={ZR_ODMAH + 1}>
+                  {g.list.slice(ZR_ODMAH).map((item) => (
+                    <CustomerItem key={item.id} item={item} showReps={all} />
+                  ))}
+                </ol>
+              </details>
+            ) : null}
           </section>
         ))}
 

@@ -215,7 +215,8 @@ smoke\RUN-SMOKE.cmd diagnose
 ```
 
 To meri PowerShell okruženje — dostupnost, jezički režim, politiku izvršavanja
-po opsezima, `Add-Type`, i DPAPI probu nad konstantom (nikad nad ključem) — i
+po opsezima — i nativni DPAPI modul (učitavanje, proba nad konstantom, odbijanje
+izmenjenog bloba; nikad nad ključem, bez PowerShell-a) — i
 piše zaseban redigovan izveštaj `windows-smoke-diagnose-<shortHead>.md`.
 **Ništa ne menja na računaru** i bezbedan je za slanje.
 

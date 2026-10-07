@@ -4,7 +4,8 @@
 
 .DESCRIPTION
   WIN-INSTALL-01 (bezbednosni audit): instalacioni folder sadrži izvršni kod
-  konektora (`scanner.mjs`, `client.mjs`, `windows-dpapi.mjs`, `connector.cmd`).
+  konektora (`scanner.mjs`, `client.mjs`, `windows-dpapi.mjs`,
+  `native\dpapi-win32-x64.node` - nativni DPAPI modul, `connector.cmd`).
   `harden-state-dir.ps1` štiti SAMO folder stanja (ključ, red) — ništa dosad
   nije štitilo sam kod. Bez zaštite, bilo ko sa write pravom na tu putanju
   (drugi lokalni nalog na deljenom Desktop-u, malver pod istim nalogom, ili

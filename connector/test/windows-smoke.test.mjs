@@ -233,39 +233,54 @@ test("[WIN] DPAPI Protect/Unprotect vraća isti ključ", async (t) => {
   }
 });
 
-test("[WIN] tajna ne prolazi kroz komandnu liniju", async (t) => {
+test("[WIN] DPAPI bez procesa-deteta: nativni modul, tajna ne prolazi kroz komandnu liniju", async (t) => {
   if (guard(t)) return;
   const { readFile } = await import("node:fs/promises");
   const izvor = await readFile(
     new URL("../dist/connector/src/keystore/windows-dpapi.mjs", import.meta.url),
     "utf8",
   );
-  const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "");
+  const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
   /*
-   * Program je čitljiv `windows-dpapi.ps1` (`-File`, `RemoteSigned`); podatak
-   * ISKLJUČIVO kroz stdin. Bez `-EncodedCommand`/`Bypass` (antivirusna heuristika).
+   * DPAPI ide kroz nativni modul u procesu konektora (Avast blokira
+   * „PowerShell + ProtectedData"). Nema `powershell.exe`, nema stdin-a, nema
+   * argumenata sa podatkom — nema procesa-deteta uopšte.
    */
-  assert.match(kod, /"-File"/);
-  assert.match(kod, /"RemoteSigned"/);
-  assert.doesNotMatch(kod, /EncodedCommand|"Bypass"/);
-  assert.doesNotMatch(kod, /"-Command",\s*"-"/, "stari kanal program+podatak kroz stdin");
-  assert.match(kod, /stdin\.write\(`\$\{ulaz\}\\n`\)/, "podatak ne ide kroz stdin");
+  assert.match(kod, /process\.dlopen/);
+  assert.doesNotMatch(kod, /child_process|spawn|powershell|EncodedCommand|ProtectedData/i);
 });
 
-test("[WIN] produkcijski kanal: program kao fajl (-File), podatak kroz stdin", async (t) => {
+test("[WIN] nativni modul: SHA-256, učitavanje, zastiti/otkljucaj i odbijanje izmenjenog bloba", async (t) => {
   if (guard(t)) return;
   const dpapi = await import(D("keystore/windows-dpapi.mjs"));
-  /*
-   * Isto što D06 meri na kancelarijskom računaru, kroz stvarni `pokreniDpapi`:
-   * zastiti pa otkljucaj vraća isti podatak. Podatak je sintetička konstanta.
-   */
-  const podatak = Buffer.from("cs-kanal-proba-sinteticki").toString("base64");
-  const izlaz = await dpapi.pokreniDpapi("otkljucaj", await dpapi.pokreniDpapi("zastiti", podatak));
-  assert.equal(izlaz, podatak, "DPAPI nije vratio isti podatak");
+  const { createHash } = await import("node:crypto");
+  const { readFile } = await import("node:fs/promises");
+  const sha = createHash("sha256").update(await readFile(dpapi.NATIVNI_MODUL)).digest("hex");
+  assert.equal(sha, dpapi.NATIVNI_MODUL_SHA256, "modul u paketu nije isporučena verzija");
+  const v = await dpapi.ucitajNativni();
+  assert.equal(typeof v.protectData, "function");
 
-  // proveri() — Protect i Unprotect kroz isti kanal, nad konstantom.
+  /*
+   * Podatak je sintetička konstanta. Isto što D05/D06 mere na kancelarijskom
+   * računaru, kroz stvarni `dpapiOperacija`.
+   */
+  const podatak = Buffer.from("cs-kanal-proba-sinteticki");
+  const blob = Buffer.from(await dpapi.dpapiOperacija("zastiti", podatak));
+  assert.ok(!blob.includes(podatak), "blob sadrži čitljiv podatak");
+  const nazad = await dpapi.dpapiOperacija("otkljucaj", blob);
+  assert.deepEqual(Buffer.from(nazad), podatak, "DPAPI nije vratio isti podatak");
+
+  blob[blob.length - 1] ^= 0xff;
+  await assert.rejects(dpapi.dpapiOperacija("otkljucaj", blob), (e) => {
+    assert.match(e.code, /^dpapi_unprotect_failed(_[0-9a-f]{8})?$/);
+    assert.doesNotMatch(e.message, /[A-Za-z]:\\|Error code/);
+    return true;
+  });
+
+  // proveri() — Protect i Unprotect nad konstantom.
   const rez = await dpapi.proveri();
   assert.equal(rez.ok, true);
+  assert.equal(rez.kanal, "nativni");
 });
 
 test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
@@ -299,7 +314,7 @@ test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
     assert.equal(drugi.json.status, "vec_postoji", "ponovljen init je zamenio ključ");
     assert.equal(drugi.kod, 1);
 
-    // export-key čita ključ nazad kroz Unprotect — dakle kroz stdin kanal.
+    // export-key čita ključ nazad kroz Unprotect (nativni DPAPI).
     const izvoz = pokreni("export-key");
     const d3 = izvoz.json;
     assert.equal(izvoz.kod, 0, `export-key nije uspeo: kod=${d3.kod ?? "?"}`);

@@ -15,8 +15,8 @@
 
   Identitet se razrešava ISKLJUČIVO preko .NET/Windows API-ja
   (`NTAccount.Translate`, `Get-LocalGroupMember`) — nikad interpolacijom u
-  `-Command` string ili spoljni shell poziv. To je isti razlog zbog kog
-  `windows-dpapi.mjs` šalje materijal kroz `stdin`, ne kroz argumente: naziv
+  `-Command` string ili spoljni shell poziv. Isti princip kao kod kljuca:
+  materijal nikad ne ide kroz argumente procesa. Naziv
   naloga koji dolazi od operatera (potencijalno sa razmacima, navodnicima ili
   Unicode znakovima) ne sme nikad postati deo komande koja se parsira.
 #>

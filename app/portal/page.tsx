@@ -14,6 +14,8 @@ import {
   seesAllCustomers,
 } from "@/lib/authz/permissions.mjs";
 import { requireUser } from "@/lib/authz/session";
+import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
+import { loadBackupStatus } from "@/lib/backup/status-service";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +38,8 @@ export default async function PortalHomePage() {
   const accounts = can(user, "customer_accounts:manage") ? await accountCounts() : null;
   const hasDocs = state.confirmedDocuments > 0;
   const demo = state.dataset.kind === "demo";
+  // Upozorenje o kopijama vide oni koji prate sinhronizaciju (vlasnik, kancelarija).
+  const backups = can(user, "sync:monitor") ? await loadBackupStatus() : undefined;
 
   return (
     <>
@@ -48,6 +52,8 @@ export default async function PortalHomePage() {
             : `Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Brojke ispod se odnose na sve kupce.`
         }
       />
+
+      {backups !== undefined ? <BackupStatusPanel items={backups} compact /> : null}
 
       <section className="portal-panel">
         <div className="portal-section-header">

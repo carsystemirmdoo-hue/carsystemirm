@@ -75,6 +75,12 @@ REVOKE DELETE, TRUNCATE ON customer_contact_verifications FROM :runtime_role;
 --    UPDATE ostaje (prelaz stanja), DELETE i TRUNCATE se oduzimaju.
 REVOKE DELETE, TRUNCATE ON invoice_reversals FROM :runtime_role;
 
+--    Evidencija rezervnih kopija (0036): aplikacija je samo ČITA. Upisuje je
+--    posebna uloga iz backup-roles.sql; portal ne sme da proglasi kopiju
+--    uspešnom.
+REVOKE INSERT, UPDATE, DELETE, TRUNCATE ON backup_runs FROM :runtime_role;
+GRANT SELECT ON backup_runs TO :runtime_role;
+
 -- 6. Sekvence — `nextval` za `bigserial` kolone.
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO :runtime_role;
 

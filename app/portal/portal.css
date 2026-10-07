@@ -8956,3 +8956,15 @@ section.portal-metrics {
 .rr-propose-actions button:disabled { opacity: 0.6; cursor: progress; }
 .rr-propose-actions small { color: var(--p-muted); }
 @media (max-width: 720px) { .rr-propose { grid-template-columns: 1fr; } }
+
+/* Rezervne kopije (bk-) */
+.bk-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 14px 20px 20px; list-style: none; }
+.bk-item { display: grid; gap: 6px; align-content: start; padding: 14px; border: 1px solid var(--p-line); border-left: 4px solid var(--p-line); border-radius: 8px; background: var(--p-surface); font-size: 13px; }
+.bk-item[data-tone="success"] { border-left-color: oklch(0.6 0.13 150); }
+.bk-item[data-tone="warning"] { border-left-color: oklch(0.72 0.14 75); }
+.bk-item[data-tone="danger"] { border-left-color: oklch(0.58 0.18 27); }
+.bk-head { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; }
+.bk-when, .bk-msg { margin: 0; color: var(--p-ink); }
+.bk-msg { font-weight: 650; }
+.bk-item small { color: var(--p-muted); font-size: 12px; line-height: 1.45; }
+@media (max-width: 960px) { .bk-list { grid-template-columns: 1fr; padding: 12px 14px 16px; } }

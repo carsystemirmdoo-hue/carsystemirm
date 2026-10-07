@@ -28,6 +28,8 @@ const guard = (t: { skip: (m?: string) => void }) => {
 const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles"];
 /** Ograničena izmena (opoziv 0028, prelaz stanja storna 0033): UPDATE ostaje, DELETE ne. */
 const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals"];
+/** Samo čitanje (0036): evidenciju kopija upisuje posebna uloga, nikad aplikacija. */
+const READ_ONLY = ["backup_runs"];
 
 let db: TestDatabase;
 /** Prava PUBLIC nad šemom pre primene skripte (skripta ih oduzima). */
@@ -103,6 +105,10 @@ test("posle primene uloga ima prava nad SVAKOM tabelom i view-om šeme", async (
     if (!row.sel) missing.push(`${name}: SELECT`);
     assert.equal(row.trn, false, `${name}: TRUNCATE ne sme postojati`);
     if (kind !== "BASE TABLE") continue;
+    if (READ_ONLY.includes(name)) {
+      assert.deepEqual([row.ins, row.upd, row.del], [false, false, false], `${name}: aplikacija sme samo da čita`);
+      continue;
+    }
     if (!row.ins) missing.push(`${name}: INSERT`);
     if (APPEND_ONLY.includes(name)) {
       assert.equal(row.upd, false, `${name}: UPDATE mora biti oduzet`);

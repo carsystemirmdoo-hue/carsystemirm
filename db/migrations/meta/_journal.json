@@ -253,6 +253,13 @@
       "when": 1791468000000,
       "tag": "0035_price_rule_portal_scope",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1791554400000,
+      "tag": "0036_backup_runs",
+      "breakpoints": true
     }
   ]
 }

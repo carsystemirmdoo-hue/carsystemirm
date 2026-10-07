@@ -7,7 +7,9 @@ import { requireCapability } from "@/lib/authz/session";
 import { pregledUredjaja } from "@/lib/sync/commands/service";
 import { isDeviceIngestEnabled, isSyncOperationsEnabled } from "@/lib/sync/http/gate";
 import { opisStanja, stanjeUredjaja } from "@/lib/sync/device/cycle-status.mjs";
+import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { DeviceAdmin } from "@/features/portal/DeviceAdmin";
+import { loadBackupStatus } from "@/lib/backup/status-service";
 import { TriggerSync } from "@/features/portal/TriggerSync";
 
 export const dynamic = "force-dynamic";
@@ -140,6 +142,8 @@ export default async function SyncOperationsPage() {
           />
         </section>
       ) : null}
+
+      <BackupStatusPanel items={await loadBackupStatus()} />
 
       {/* ---------------------------------------------------------------- */}
       <section className="portal-metrics">

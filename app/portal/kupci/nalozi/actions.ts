@@ -17,6 +17,10 @@ import {
   markOutboxHandedOver,
 } from "@/lib/customers/invitation-service";
 import { requireCustomerAccess } from "@/lib/authz/session";
+import {
+  revokeCustomerAccess,
+  verifyCustomerContact,
+} from "@/lib/customers/verification-service";
 
 export type AccountActionState = { error: string | null; ok: string | null };
 
@@ -261,5 +265,89 @@ export async function recordOfflineConsentAction(
         ? "Povlačenje saglasnosti je evidentirano. Nalog, cene i prijava ostaju nepromenjeni."
         : "Pristanak je evidentiran."
       : (result.reason ?? "Stanje je već takvo."),
+  };
+}
+
+const verifySchema = z.object({
+  accountId: z.string().uuid(),
+  basisIdentifierId: z.string().uuid(),
+  method: z.enum(["callback_known_number", "signed_authorization", "in_person"]),
+  contactSource: z.enum([
+    "biznisoft_partner_record",
+    "provided_by_company",
+    "provided_by_sales_rep",
+    "public_business_listing",
+  ]),
+  sourceReference: z.string().trim().max(500).optional(),
+  personRole: z.string().trim().min(2).max(120),
+  evidenceNote: z.string().trim().min(15).max(1000),
+});
+
+/**
+ * Potvrda da osoba sme da vidi podatke firme — preduslov poziva (0028).
+ *
+ * Kapija je `customer_accounts:manage`: potvrdu beleži kancelarija ili gazda,
+ * ne komercijalista koji je kontakt predložio.
+ */
+export async function verifyContactAction(
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  const actor = await requireCapability("customer_accounts:manage", "/portal/kupci/nalozi");
+  const parsed = verifySchema.safeParse({
+    accountId: formData.get("accountId"),
+    basisIdentifierId: formData.get("basisIdentifierId"),
+    method: formData.get("method"),
+    contactSource: formData.get("contactSource"),
+    sourceReference: formData.get("sourceReference") || undefined,
+    personRole: formData.get("personRole") ?? "",
+    evidenceNote: formData.get("evidenceNote") ?? "",
+  });
+  if (!parsed.success) {
+    return {
+      error:
+        "Proverite unos: šifra partnera, način potvrde, izvor kontakta, funkcija osobe i beleška o dokazu (najmanje 15 znakova).",
+      ok: null,
+    };
+  }
+  try {
+    await verifyCustomerContact(parsed.data, { id: actor.id, name: actor.name, role: actor.role });
+  } catch (error) {
+    if (error instanceof CustomerAccountError) return { error: error.message, ok: null };
+    throw error;
+  }
+  revalidatePath("/portal/kupci/nalozi");
+  return { error: null, ok: "Osoba je potvrđena. Poziv se sada može izdati." };
+}
+
+const revokeSchema = z.object({
+  accountId: z.string().uuid(),
+  reason: z.string().trim().min(3).max(500),
+});
+
+/**
+ * Opoziv pristupa: potvrda, otvoreni pozivi i sesije padaju zajedno.
+ * Koristi se i pri promeni kontakt osobe.
+ */
+export async function revokeAccessAction(
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  const actor = await requireCapability("customer_accounts:manage", "/portal/kupci/nalozi");
+  const parsed = revokeSchema.safeParse({
+    accountId: formData.get("accountId"),
+    reason: formData.get("reason") ?? "",
+  });
+  if (!parsed.success) return { error: "Unesite razlog opoziva (najmanje 3 znaka).", ok: null };
+  try {
+    await revokeCustomerAccess(parsed.data, { id: actor.id, name: actor.name, role: actor.role });
+  } catch (error) {
+    if (error instanceof CustomerAccountError) return { error: error.message, ok: null };
+    throw error;
+  }
+  revalidatePath("/portal/kupci/nalozi");
+  return {
+    error: null,
+    ok: "Pristup je opozvan: potvrda i otvoreni pozivi su poništeni, sesije prekinute.",
   };
 }

@@ -12,7 +12,7 @@ import { users } from "./users";
 
 /**
  * Paketi dozvola su podaci, a ne kod — Gazda ih dodeljuje pojedinačnim korisnicima
- * nezavisno od osnovne uloge. Miroslav Suljagić je Komercijalista sa paketom
+ * nezavisno od osnovne uloge. Primer Korisnik 2 je Komercijalista sa paketom
  * „analitika"; nigde ne postoji provera po imenu korisnika.
  */
 export const permissionPackages = pgTable("permission_packages", {
@@ -85,6 +85,12 @@ export const customerAssignments = pgTable(
     assignedAt: timestamp("assigned_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
+    /**
+     * Zašto dodela postoji: `manual` ili `biznisoft_rep_code` (šifra
+     * komercijaliste sa kartice partnera, migracija 0028). Samo poreklo — obe
+     * vrste daju isti opseg.
+     */
+    basis: text("basis").notNull().default("manual"),
   },
   (table) => [
     primaryKey({ columns: [table.userId, table.customerId] }),

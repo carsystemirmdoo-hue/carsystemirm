@@ -2,6 +2,12 @@
 
 **Status: 🟡 kod je spreman, primena na produkciji je spoljni blocker.**
 
+> Dopuna 2026-10-01: skripta sada daje prava nad SVIM tabelama i view-ovima
+> (ranije samo 18 tabela iz 0000–0007) i štiti sve četiri tabele samo za
+> dodavanje. Primenjena je na lokalnu Postgres 17 bazu sa migracijama
+> 0000–0032 u integracionom testu `db/integration/runtimeRole.integration.test.mts`.
+> Na bazi kod provajdera još nije primenjena. Postupak: `33-test-baza-runbook.md`.
+
 ---
 
 ## Zašto

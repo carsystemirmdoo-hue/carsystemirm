@@ -249,11 +249,11 @@ export function odlukaZaOdgovor(odgovor) {
 }
 
 /**
- * `Retry-After` se poštuje, ali NE skraćuje poslovni raspored.
+ * `Retry-After` u sekundama, ograničeno.
  *
- * Server sme da traži duže čekanje; ne sme da izdejstvuje ranije slanje od
- * sledećeg radnog termina. Zato se vrednost samo evidentira i ograničava —
- * odluku o terminu i dalje donosi kalendar.
+ * Koristi ga oporavak u toku ciklusa (`retry.mjs`): kratko čekanje se odčeka,
+ * duže zaustavlja ciklus do zadatog trenutka. Raspored `auto` (jednom dnevno)
+ * se time ne menja — ciklus se ne pokreće češće, samo se ne odlaže ceo dan.
  *
  * @returns {number | null} sekunde, ograničeno na [0, 86400]
  */

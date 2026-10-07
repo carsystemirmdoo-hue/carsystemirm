@@ -823,6 +823,58 @@ test("rate limit za nepoznatog pozivaoca zaustavlja poplavu", async (t) => {
   assert.equal(await brojFaktura(), 0);
 });
 
+test("autentifikovan uređaj NE troši brojač nepoznatih (serija od 45 zahteva)", async (t) => {
+  if (guard(t)) return;
+  /*
+   * Regresija (generalna proba talasa 01): svaki zahtev se brojao i kao
+   * „nepoznat" (20 u 5 min, blokada 15 min), pa je konektor posle 20
+   * dokumenata stajao. Uređaj koji je dokazao identitet meri `sync_device`.
+   */
+  const uredjaj = await aktivanUredjaj();
+  const post = await heartbeat();
+  for (let i = 0; i < 45; i += 1) {
+    const { request } = await potpisanZahtev(uredjaj, { path: "/api/sync/heartbeat", body: {} });
+    const res = await post(request);
+    assert.equal(res.status, 200, `zahtev ${i + 1} odbijen: ${res.status} ${(await telo(res)).code}`);
+  }
+  // Nepoznat pozivalac sa iste adrese i dalje biva zaustavljen posle neuspeha.
+  const par = noviPar();
+  const lazni = { ...par, deviceId: "x", keyId: "k1", fingerprint: "x", deviceCode: "flood-posle-serije" };
+  const ing = await ingest();
+  let ograniceno = false;
+  for (let i = 0; i < 40 && !ograniceno; i += 1) {
+    const { request } = await potpisanZahtev(lazni as Uredjaj, { body: {} });
+    ograniceno = (await ing(request)).status === 429;
+  }
+  assert.ok(ograniceno, "neuspešni nepoznati zahtevi više ne aktiviraju ograničenje");
+  // Blokada nepoznatih se proverava PRE tela i potpisa: i sledeći zahtev je 429.
+  const { request } = await potpisanZahtev(lazni as Uredjaj, { body: {} });
+  const blokiran = await ing(request);
+  assert.equal(blokiran.status, 429);
+  // Koliko da se čeka: zaglavlje i telo, ista vrednost (konektor poštuje Retry-After).
+  const sekundi = Number(blokiran.headers.get("retry-after"));
+  assert.ok(sekundi > 0 && sekundi <= 15 * 60, `Retry-After: ${blokiran.headers.get("retry-after")}`);
+  assert.equal((await telo(blokiran)).retryAfterSeconds, sekundi);
+});
+
+test("autentifikovan uređaj i dalje ima sopstveno ograničenje (sync_device)", async (t) => {
+  if (guard(t)) return;
+  const { policyFor } = await import("@/lib/auth/rate-limit-policy.mjs");
+  const limit = policyFor("sync_device", "account").limit;
+  const uredjaj = await aktivanUredjaj();
+  const post = await heartbeat();
+  let prviOdbijen = 0;
+  for (let i = 1; i <= limit + 5 && !prviOdbijen; i += 1) {
+    const { request } = await potpisanZahtev(uredjaj, { path: "/api/sync/heartbeat", body: {} });
+    const res = await post(request);
+    if (res.status === 429) {
+      assert.equal((await telo(res)).code, "rate_limited");
+      prviOdbijen = i;
+    }
+  }
+  assert.equal(prviOdbijen, limit + 1, `ograničenje uređaja: prvi odbijen ${prviOdbijen}, očekivano ${limit + 1}`);
+});
+
 /* =========================================================================
  * Heartbeat
  * ====================================================================== */

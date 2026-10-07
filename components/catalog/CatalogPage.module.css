@@ -1039,6 +1039,9 @@
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  /* Reč duža od kartice (npr. „ACTIVATOR" u dve kolone na telefonu) prelazi u
+     novi red umesto da je `overflow: hidden` preseče usred slova. */
+  overflow-wrap: anywhere;
   margin: 0;
   color: var(--catalog-ink);
   font-size: 19px;

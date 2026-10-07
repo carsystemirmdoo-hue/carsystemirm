@@ -1,5 +1,6 @@
 import * as dpapi from "./windows-dpapi.mjs";
 import * as testAdapter from "./test-insecure.mjs";
+import * as macosKeychain from "./macos-keychain.mjs";
 
 /**
  * Bira skladište ključa — i odbija nebezbedno u produkciji.
@@ -47,6 +48,8 @@ export function izaberiAdapter(env = process.env) {
     }
     return { adapter: testAdapter, ime: testAdapter.adapterIme };
   }
+  // macOS Keychain — samo izričito (uvoz istorijske arhive sa Mac-a).
+  if (macosKeychain.dostupan(env)) return { adapter: macosKeychain, ime: macosKeychain.adapterIme };
 
   /*
    * Nema bezbednog skladišta i test nije izričito tražen.
@@ -58,6 +61,8 @@ export function izaberiAdapter(env = process.env) {
     "no_secure_keystore",
     process.platform === "win32"
       ? "Windows DPAPI nije dostupan."
-      : "Van Windows-a nema bezbednog skladišta ključa; ostatak se testira uz izričit test adapter.",
+      : process.platform === "darwin"
+        ? "Na macOS-u se ključ čuva u Keychain-u tek uz izričito CS_CONNECTOR_MACOS_KEYCHAIN=1."
+        : "Van Windows-a i macOS-a nema bezbednog skladišta ključa; ostatak se testira uz izričit test adapter.",
   );
 }

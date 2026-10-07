@@ -1,5 +1,6 @@
 "use server";
 
+import { requestRecomputeAfterIngest, scheduleRecomputeProcessing } from "@/lib/recommendations/auto-recompute";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import {
@@ -81,6 +82,11 @@ export async function resolveIdentityAction(
         role: actor.role,
       });
       posted = outcome.posted.length;
+      // Dokumenti koji su čekali mapiranje sada su promet → automatski obračun.
+      if (posted > 0) {
+        await requestRecomputeAfterIngest("customer_mapping", posted).catch(() => undefined);
+        scheduleRecomputeProcessing();
+      }
     }
   }
 

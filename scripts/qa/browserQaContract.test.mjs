@@ -56,7 +56,7 @@ function telo(naziv) {
 test("svi koraci su prisutni i jedinstveno numerisani", () => {
   /*
    * 13 koraka Faze 1B + 6 koraka korpe + spremnost podataka + sinhronizacija
-   * + preporuke.
+   * + preporuke + filter preporuka bez zaključanog skrola (22).
    *
    * Broj se drzi rucno namerno: nov korak mora da bude svesna odluka, a ne
    * nusprodukt copy-paste-a. Ovaj test je i uhvatio dodavanje koraka 20.
@@ -65,9 +65,9 @@ test("svi koraci su prisutni i jedinstveno numerisani", () => {
    * njegov roditelj, ali nad drugim delom stranice. Prenumerisanje svega iza
    * njega bi razbilo poklapanje sa ranijim QA izvestajima.
    */
-  assert.equal(koraci.length, 22, `ocekivano 22 koraka, nadjeno ${koraci.length}`);
+  assert.equal(koraci.length, 23, `ocekivano 23 koraka, nadjeno ${koraci.length}`);
   const brojevi = koraci.map(broj);
-  assert.equal(new Set(brojevi).size, 22, `duplirani brojevi: ${brojevi.join(", ")}`);
+  assert.equal(new Set(brojevi).size, 23, `duplirani brojevi: ${brojevi.join(", ")}`);
   for (const b of brojevi) {
     assert.match(b, /^\d+[a-z]?$/, `oznaka koraka „${b}" nije u dozvoljenom obliku`);
   }

@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- Approved brand and category assets are static public SVG files. */
 import Image from "next/image";
 import Link from "next/link";
+import { CustomerAccountMenu } from "./CustomerAccountMenu";
 import { usePathname } from "next/navigation";
 import {
   type KeyboardEvent as ReactKeyboardEvent,
@@ -1039,6 +1040,7 @@ export function Header() {
           <span className={styles.themeSlot}>
             <ThemeToggle />
           </span>
+          <CustomerAccountMenu />
           <Link
             href="/kontakt"
             className={cx(
@@ -1223,6 +1225,7 @@ export function Header() {
                 <SearchIcon />
                 Pretražite proizvode
               </button>
+              <CustomerAccountMenu variant="mobile" onNavigate={closeMobileForNavigation} />
               <Link
                 href="/kontakt"
                 replace

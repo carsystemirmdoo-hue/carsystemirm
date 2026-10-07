@@ -1,4 +1,5 @@
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { requestRecomputeAfterIngest, scheduleRecomputeProcessing } from "@/lib/recommendations/auto-recompute";
 import { ContractRejection, ingestCanonicalInvoice } from "@/lib/sync/ingestCanonical";
 import { BodyError, parseJsonBody } from "@/lib/sync/http/gate";
 import { syncJson, withAuthenticatedDevice } from "@/lib/sync/http/handler";
@@ -67,6 +68,16 @@ export async function POST(request: Request): Promise<Response> {
         },
         actor,
       );
+
+      /*
+       * Uspešno proknjižen dokument → zahtev za obračun preporuka. Uvoz je već
+       * uspeo i ne sme pasti zbog preporuka; zahtevi iz jednog skeniranja se
+       * spajaju u jedan obračun, koji se izvršava posle odgovora.
+       */
+      if (outcome.result === "ingested") {
+        await requestRecomputeAfterIngest("device").catch(() => undefined);
+        scheduleRecomputeProcessing();
+      }
 
       /*
        * Odgovor nosi ishod i INTERNE identifikatore, ne sadržaj.

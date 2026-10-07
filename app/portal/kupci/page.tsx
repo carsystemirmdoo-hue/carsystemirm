@@ -11,13 +11,22 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { summarizeBy } from "@/lib/sales/totals.mjs";
+import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 
 export const dynamic = "force-dynamic";
 
-export default async function CustomersPage() {
+export default async function CustomersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string }>;
+}) {
   const user = await requireCapability("view:kupci", "/portal/kupci");
   const scoped = !seesAllCustomers(user);
-  const customers = await loadScopedCustomers(user);
+  // Lista prometa podrazumevano prikazuje sve kupce; neaktivni nose oznaku.
+  const statusFilter = parseCustomerStatusFilter((await searchParams).status, "svi");
+  const allScoped = await loadScopedCustomers(user);
+  const customers = allScoped.filter((c) => matchesStatusFilter(c.active, statusFilter));
+  const neaktivnih = allScoped.filter((c) => !c.active).length;
 
   if (!(await hasImportedInvoices())) {
     return (
@@ -49,6 +58,14 @@ export default async function CustomersPage() {
         <div className="portal-section-header">
           <div>
             <h2>Promet po kupcu</h2>
+            <form method="get" className="portal-inline-form">
+              <select name="status" defaultValue={statusFilter} aria-label="Kupci po statusu">
+                <option value="svi">Svi kupci</option>
+                <option value="aktivni">Aktivni</option>
+                <option value="neaktivni">Neaktivni ({neaktivnih})</option>
+              </select>
+              <button type="submit">Prikažite</button>
+            </form>
             <p>
               Iznosi su iz uvezenih faktura. Dugovanje i naplata nisu deo ovog
               izvora podataka.
@@ -78,6 +95,7 @@ export default async function CustomersPage() {
                       <Link href={`/portal/kupci/${customer.id}`}>
                         {customer.name}
                       </Link>
+                      {customer.active ? null : <small> · neaktivan</small>}
                     </th>
                     <td>{customer.pib}</td>
                     <td>{customer.city ?? "—"}</td>
@@ -102,9 +120,11 @@ export default async function CustomersPage() {
               {customers.length === 0 ? (
                 <tr>
                   <td colSpan={8}>
-                    {scoped
-                      ? "Nemate dodeljenih kupaca. Dodelu radi Vlasnik."
-                      : "Nema kupaca — uvezite fakture."}
+                    {statusFilter !== "svi" && allScoped.length > 0
+                      ? `Nema ${statusFilter === "neaktivni" ? "neaktivnih" : "aktivnih"} kupaca u ovom prikazu.`
+                      : scoped
+                        ? "Nemate dodeljenih kupaca. Dodelu radi Vlasnik."
+                        : "Nema kupaca — uvezite fakture."}
                   </td>
                 </tr>
               ) : null}

@@ -1,6 +1,6 @@
 /*
  * Kontakt podaci koje je firma direktno potvrdila 2026-10-01
- * (docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md, GAP-001 i GAP-002).
+ * (docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md, GAP-001, GAP-002, GAP-004 i GAP-005).
  *
  *   npm run test:content-copy
  */
@@ -86,6 +86,50 @@ test("schema.org Organization nosi iste potvrđene kontakte", () => {
     ],
   );
   assert.doesNotMatch(JSON.stringify(organizationJsonLd()), /office@carsystemirm|info@carsystem-rm|000 000/);
+});
+
+test("pravni podaci i adresa centrale", () => {
+  assert.equal(companyContact.legalName, "CAR SYSTEM I R-M d.o.o. Inđija");
+  assert.equal(companyContact.pib, "105988852");
+  assert.equal(companyContact.mb, "20506610");
+  assert.equal(companyContact.locationLabel, "Ive Andrića 3, 22320 Inđija, Srbija");
+});
+
+test("radno vreme: prikaz i mašinski oblik se slažu (GAP-004)", () => {
+  assert.equal(companyContact.workingHours, "ponedeljak–petak, 08:00–16:00");
+  assert.deepEqual(companyContact.workingHoursSpec, {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "16:00",
+  });
+  const points = (organizationJsonLd()["@graph"][0] as Record<string, unknown>).contactPoint as Array<
+    Record<string, unknown>
+  >;
+  assert.deepEqual(points[0].hoursAvailable, {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "https://schema.org/Monday",
+      "https://schema.org/Tuesday",
+      "https://schema.org/Wednesday",
+      "https://schema.org/Thursday",
+      "https://schema.org/Friday",
+    ],
+    opens: "08:00",
+    closes: "16:00",
+  });
+});
+
+test("kupčev nalog čita kontakt kancelarije iz istog izvora", () => {
+  const root = path.resolve(process.cwd());
+  for (const file of ["app/kupac/page.tsx", "app/kupac/upiti/page.tsx"]) {
+    const source = fs.readFileSync(path.join(root, file), "utf8");
+    assert.match(source, /companyContact\.phoneHref/, file);
+    assert.match(source, /companyContact\.emailHref/, file);
+    assert.match(source, /companyContact\.workingHours/, file);
+  }
+  const api = fs.readFileSync(path.join(root, "app/api/kupac/ponude/route.ts"), "utf8");
+  assert.match(api, /emailHref: companyContact\.emailHref/);
+  assert.match(api, /workingHours: companyContact\.workingHours/);
 });
 
 // Stvarni prerenderovan HTML se proverava samo na zahtev, posle svežeg builda

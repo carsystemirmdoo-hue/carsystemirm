@@ -1,8 +1,9 @@
 /**
- * Najveći broj stavki koje prodajni ekrani učitavaju jednim upitom.
+ * Podrazumevana granica za DETALJNE stavke (`loadSalesLines`).
  *
- * Odvojeno od `queries.ts` da bi ekrani (i komponente bez pristupa bazi) mogli
- * da prepoznaju kada je granica dostignuta i to KAŽU korisniku — zbirovi nad
- * skraćenim skupom nisu zbirovi celog perioda.
+ * Zbirovi, broj faktura i agregati po kupcu/artiklu se NE računaju iz ovih
+ * stavki — za njih postoje `loadSalesSummary` i `loadSalesBreakdown`, koji
+ * rade nad celim filtriranim skupom u bazi. Ekrani stavke prikazuju samo kao
+ * listu (najviše `SALES_LINES_DISPLAY` redova).
  */
 export const SALES_LINES_LIMIT = 20000;

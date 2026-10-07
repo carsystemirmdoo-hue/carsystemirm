@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
-import { SALES_LINES_LIMIT } from "@/lib/sales/limits";
 import {
   averageInvoice,
   concentration,
   deltaPercent,
-  summarize,
-  summarizeBy,
   UNKNOWN_NEGATIVE_LABEL,
 } from "@/lib/sales/totals.mjs";
-import type { SalesLine } from "@/lib/sales/queries";
+import type {
+  SalesBreakdownRow,
+  SalesLine,
+  SalesSummary,
+} from "@/lib/sales/queries";
 
 const MONEY = new Intl.NumberFormat("sr-Latn-RS", {
   maximumFractionDigits: 0,
@@ -25,6 +26,9 @@ export function money(value: number | null) {
 
 export type GroupView = "kupci" | "komercijalisti" | "artikli" | "grupe";
 
+/** Najviše stavki u listi na ekranu; zbirovi se računaju nad svim stavkama. */
+export const SALES_LINES_DISPLAY = 500;
+
 const GROUP_LABELS: Record<GroupView, string> = {
   kupci: "Kupac",
   komercijalisti: "Komercijalista",
@@ -32,34 +36,23 @@ const GROUP_LABELS: Record<GroupView, string> = {
   grupe: "Grupa proizvoda",
 };
 
-function keyFor(view: GroupView) {
-  return (line: SalesLine) => {
-    if (view === "kupci") return line.customerName;
-    if (view === "komercijalisti") return line.salespersonName ?? "Bez komercijaliste";
-    if (view === "grupe") return line.productGroup ?? "Bez grupe";
-    return `${line.articleCode} · ${line.articleName ?? ""}`.trim();
-  };
-}
-
-/** Ključ kupca za drill-down; grupisanje po imenu, veza po ID-u. */
-function customerIdFor(lines: SalesLine[], label: string) {
-  return lines.find((line) => line.customerName === label)?.customerId ?? null;
-}
-
+/**
+ * Pokazatelji perioda. Svi brojevi dolaze iz agregata nad CELIM filtriranim
+ * skupom u bazi (`loadSalesSummary`), ne iz liste stavki prikazane na ekranu.
+ */
 export function SalesTotals({
-  lines,
+  totals,
   previous,
+  byCustomer,
 }: {
-  lines: SalesLine[];
-  previous?: SalesLine[];
+  totals: SalesSummary;
+  previous?: SalesSummary | null;
+  /** Zbirovi po kupcu (ceo skup) — za koncentraciju top 10. */
+  byCustomer: readonly SalesBreakdownRow[];
 }) {
-  const totals = summarize(lines);
-  const invoiceCount = new Set(lines.map((line) => line.invoiceId)).size;
-  const previousTotals = previous ? summarize(previous) : null;
-  const change = previousTotals
-    ? deltaPercent(totals.net, previousTotals.net)
-    : null;
-  const byCustomer = summarizeBy(lines, (line) => line.customerName);
+  const invoiceCount = totals.invoiceCount;
+  const change = previous ? deltaPercent(totals.net, previous.net) : null;
+  const udeo = concentration(byCustomer);
 
   const cards = [
     {
@@ -103,10 +96,7 @@ export function SalesTotals({
     },
     {
       label: "Koncentracija top 10",
-      value:
-        concentration(byCustomer) === null
-          ? "—"
-          : `${concentration(byCustomer)}%`,
+      value: udeo === null ? "—" : `${udeo}%`,
       context: "udeo najvećih kupaca",
       tone: "warning",
     },
@@ -114,7 +104,6 @@ export function SalesTotals({
 
   return (
     <>
-      <SalesLimitNotice lines={lines} />
       <div className="portal-metrics">
         {cards.map((card) => (
           <div key={card.label} className="portal-metric" data-tone={card.tone}>
@@ -147,45 +136,20 @@ export function SalesTotals({
 
 const BROJ = new Intl.NumberFormat("sr-Latn-RS");
 
-/**
- * Upozorenje kada je upit dostigao granicu učitanih stavki.
- *
- * Tada zbirovi i liste na ekranu pokrivaju samo NAJNOVIJE stavke, ne ceo
- * izabrani period. Ekran to mora da kaže, umesto da prikaže skraćen zbir kao
- * da je potpun. Logika upita se ovde ne menja.
- */
-export function SalesLimitNotice({
-  lines,
-  hint = "Izaberite kraći period da biste videli potpune iznose.",
-}: {
-  lines: SalesLine[];
-  /** Šta korisnik na tom ekranu može da uradi da vidi potpune iznose. */
-  hint?: string;
-}) {
-  if (lines.length < SALES_LINES_LIMIT) return null;
-  const datumi = lines.map((line) => String(line.issuedOn)).sort();
-  return (
-    <p className="portal-data-note" data-tone="warning" role="status">
-      <strong>Prikaz nije potpun.</strong> Učitano je najnovijih{" "}
-      {BROJ.format(SALES_LINES_LIMIT)} stavki ({datumi[0]} –{" "}
-      {datumi[datumi.length - 1]}).
-      Zbirovi i liste ne obuhvataju starije stavke. {hint}
-    </p>
-  );
-}
-
 export function SalesBreakdown({
-  lines,
+  rows,
+  totals,
   view,
   drillDownBase,
 }: {
-  lines: SalesLine[];
+  /** Zbirovi po grupi nad celim skupom (`loadSalesBreakdown`). */
+  rows: readonly SalesBreakdownRow[];
+  totals: SalesSummary;
   view: GroupView;
   /** Osnova za drill-down; kada je zadata, red vodi na fakture. */
   drillDownBase?: string;
 }) {
-  const grouped = summarizeBy(lines, keyFor(view));
-  const totals = summarize(lines);
+  const grouped = rows;
 
   return (
     <div className="portal-table-wrap">
@@ -204,9 +168,7 @@ export function SalesBreakdown({
         <tbody>
           {grouped.map((row) => {
             const customerId =
-              view === "kupci" && drillDownBase
-                ? customerIdFor(lines, row.label)
-                : null;
+              view === "kupci" && drillDownBase ? row.customerId : null;
             return (
               <tr key={row.key}>
                 <th scope="row">
@@ -253,9 +215,7 @@ export function SalesBreakdown({
               <td className="portal-table-number">
                 <strong>{money(totals.net)}</strong>
               </td>
-              <td className="portal-table-number">
-                {new Set(lines.map((line) => line.invoiceId)).size}
-              </td>
+              <td className="portal-table-number">{totals.invoiceCount}</td>
             </tr>
           )}
         </tbody>
@@ -265,15 +225,22 @@ export function SalesBreakdown({
 }
 
 /** Poslednji nivo drill-down-a: pojedinačne stavke faktura. */
-export function SalesLines({ lines }: { lines: SalesLine[] }) {
-  const PRIKAZ = 500;
+export function SalesLines({
+  lines,
+  totalLines,
+}: {
+  lines: SalesLine[];
+  /** Broj stavki u celom filtriranom skupu (iz agregata). */
+  totalLines: number;
+}) {
+  const PRIKAZ = SALES_LINES_DISPLAY;
   return (
     <>
-      {lines.length > PRIKAZ ? (
+      {totalLines > Math.min(lines.length, PRIKAZ) ? (
         <p className="portal-data-note">
-          Prikazano je najnovijih {BROJ.format(PRIKAZ)} od{" "}
-          {BROJ.format(lines.length)} učitanih stavki. Za ostale suzite filtere
-          ili preuzmite izvoz.
+          Lista prikazuje najnovijih {BROJ.format(Math.min(lines.length, PRIKAZ))}{" "}
+          od {BROJ.format(totalLines)} stavki. Zbirovi iznad obuhvataju sve
+          stavke; za ostale redove suzite filtere ili preuzmite izvoz.
         </p>
       ) : null}
       <div className="portal-table-wrap">

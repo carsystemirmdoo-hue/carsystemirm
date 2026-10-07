@@ -1,11 +1,17 @@
 import { PageHeader } from "@/components/portal/PortalPrimitives";
-import { money, SalesTotals } from "@/features/portal/SalesAnalytics";
+import {
+  money,
+  SALES_LINES_DISPLAY,
+  SalesTotals,
+} from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
 import { requireCapability } from "@/lib/authz/session";
 import {
   hasImportedInvoices,
   loadProductGroups,
+  loadSalesBreakdown,
   loadSalesLines,
+  loadSalesSummary,
   loadSalespeople,
   loadScopedCustomers,
 } from "@/lib/sales/queries";
@@ -47,15 +53,17 @@ export default async function ReturnsPage({
     productGroup: params.grupa || null,
   };
 
-  const [lines, customers, salespeople, productGroups] = await Promise.all([
-    loadSalesLines(user, filter),
-    loadScopedCustomers(user),
-    loadSalespeople(),
-    loadProductGroups(),
-  ]);
-
-  // Negativne stavke se zadržavaju u izvornom obliku; ovde se samo izdvajaju.
-  const negatives = lines.filter((line) => line.lineAmount < 0);
+  // Zbirovi nad CELIM filtriranim skupom u bazi. Negativne stavke se čitaju
+  // posebnim upitom (samo iznos < 0), pa ih granica liste ne može sakriti.
+  const [summary, byCustomer, negatives, customers, salespeople, productGroups] =
+    await Promise.all([
+      loadSalesSummary(user, filter),
+      loadSalesBreakdown(user, filter, "kupci"),
+      loadSalesLines(user, { ...filter, onlyNegative: true }, SALES_LINES_DISPLAY),
+      loadScopedCustomers(user),
+      loadSalespeople(),
+      loadProductGroups(),
+    ]);
 
   return (
     <>
@@ -70,7 +78,9 @@ export default async function ReturnsPage({
         options={{ customers, salespeople, productGroups }}
         applied={params}
         exportView="stavke"
-        salespersonOnInvoices={lines.some((line) => line.salespersonId)}
+        salespersonOnInvoices={
+          summary.lineCount === 0 || summary.linesWithSalesperson > 0
+        }
       />
 
       <section className="portal-panel">
@@ -79,16 +89,19 @@ export default async function ReturnsPage({
             <h2>Bruto, povrati i neto</h2>
           </div>
         </div>
-        <SalesTotals lines={lines} />
+        <SalesTotals totals={summary} byCustomer={byCustomer} />
       </section>
 
       <section className="portal-panel">
         <div className="portal-section-header">
           <div>
-            <h2>Negativne stavke ({negatives.length})</h2>
+            <h2>Negativne stavke ({summary.negativeLineCount})</h2>
             <p>
               Nijedan negativan iznos se ne proglašava automatski fizičkim
               povratom robe.
+              {summary.negativeLineCount > negatives.length
+                ? ` Lista prikazuje najnovijih ${negatives.length}; zbirovi iznad obuhvataju sve.`
+                : ""}
             </p>
           </div>
         </div>

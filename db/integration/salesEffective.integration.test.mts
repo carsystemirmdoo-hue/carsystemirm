@@ -119,3 +119,51 @@ test("zbir na ekranu prometa jednak je zbiru iz effective_sales_ledger", async (
     await db.sql`UPDATE source_documents SET manual_review = 'not_required'`;
   }
 });
+
+test("agregati u bazi su jednaki zbiru svih stavki i ne zavise od granice prikaza", async (t) => {
+  if (guard(t)) return;
+  const { loadSalesLines, loadSalesSummary, loadSalesBreakdown } = await import("@/lib/sales/queries");
+  const { summarize, summarizeBy } = await import("@/lib/sales/totals.mjs");
+
+  // Negativna stavka nepoznate vrste i jedna korekcija — razvrstavanje mora biti isto kao u summarize().
+  const [storno] = await db.sql<{ id: string }[]>`
+    INSERT INTO invoices (company_id, document_kind, number, year, issued_on, customer_id, net_amount, total_amount)
+    VALUES (${ISSUER}, 'storno', 'QA-ST-1', 2025, '2025-04-01', ${customerId}, '-40.00', '-48.00') RETURNING id`;
+  await db.sql`INSERT INTO invoice_lines (invoice_id, line_number, article_code, quantity, unit_price, line_amount)
+    VALUES (${storno.id}, 1, '900001', '-1.000', '40.0000', '-40.00')`;
+  try {
+    const viewer = asUser(office);
+    const filter = { customerId };
+    const sve = await loadSalesLines(viewer, filter);
+    const jedna = await loadSalesLines(viewer, filter, 1);
+    assert.equal(jedna.length, 1, "granica prikaza radi");
+
+    const zbir = await loadSalesSummary(viewer, filter);
+    const ocekivano = summarize(sve);
+    for (const k of ["gross", "returnValue", "correctionValue", "unknownNegativeValue", "unknownNegativeCount", "net"] as const) {
+      assert.equal(zbir[k], ocekivano[k], `${k}: baza ${zbir[k]} ≠ summarize ${ocekivano[k]}`);
+    }
+    assert.equal(zbir.lineCount, sve.length);
+    assert.equal(zbir.invoiceCount, new Set(sve.map((l) => l.invoiceId)).size);
+    assert.equal(zbir.negativeLineCount, sve.filter((l) => l.lineAmount < 0).length);
+    assert.equal(zbir.correctionValue, -40, "storno je korekcija");
+
+    const poKupcu = await loadSalesBreakdown(viewer, filter, "kupci");
+    const jsPoKupcu = summarizeBy(sve, (l) => l.customerId);
+    assert.equal(poKupcu.length, jsPoKupcu.length);
+    assert.equal(poKupcu[0].net, jsPoKupcu[0].net);
+    assert.equal(poKupcu[0].invoiceCount, jsPoKupcu[0].invoiceCount);
+    assert.equal(poKupcu[0].customerId, customerId);
+
+    const negativne = await loadSalesLines(viewer, { ...filter, onlyNegative: true });
+    assert.ok(negativne.length === 1 && negativne[0].lineAmount < 0);
+
+    // Kupac van opsega: komercijalista bez dodele ne vidi ni zbir.
+    const rep = asUser({ id: office.id, name: "QA komercijalista", role: "komercijalista" });
+    const tudji = await loadSalesSummary(rep, filter);
+    assert.equal(tudji.lineCount, 0, "opseg komercijaliste se primenjuje i na agregat");
+  } finally {
+    await db.sql`DELETE FROM invoice_lines WHERE invoice_id = ${storno.id}`;
+    await db.sql`DELETE FROM invoices WHERE id = ${storno.id}`;
+  }
+});

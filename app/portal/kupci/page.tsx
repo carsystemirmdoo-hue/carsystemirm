@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
-import { money, SalesLimitNotice } from "@/features/portal/SalesAnalytics";
+import { money } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet } from "@/features/portal/SalesFilters";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import {
   hasImportedInvoices,
-  loadSalesLines,
+  loadSalesBreakdown,
   loadScopedCustomers,
 } from "@/lib/sales/queries";
-import { summarizeBy } from "@/lib/sales/totals.mjs";
 import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 
 export const dynamic = "force-dynamic";
@@ -37,9 +36,9 @@ export default async function CustomersPage({
     );
   }
 
-  const lines = await loadSalesLines(user, {});
+  // Promet po kupcu nad CELOM istorijom, u bazi — bez granice broja stavki.
   const byCustomer = new Map(
-    summarizeBy(lines, (line) => line.customerId).map((row) => [row.key, row]),
+    (await loadSalesBreakdown(user, {}, "kupci")).map((row) => [row.key, row]),
   );
 
   return (
@@ -66,10 +65,6 @@ export default async function CustomersPage({
               </select>
               <button type="submit">Prikažite</button>
             </form>
-            <SalesLimitNotice
-              lines={lines}
-              hint="Zbirovi u tabeli važe samo za taj period. Za potpun promet jednog kupca otvorite Prodaju i izaberite kupca."
-            />
             <p>
               Iznosi su iz uvezenih faktura. Dugovanje i naplata nisu deo ovog
               izvora podataka.

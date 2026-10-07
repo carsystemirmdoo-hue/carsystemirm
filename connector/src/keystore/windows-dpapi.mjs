@@ -1,6 +1,8 @@
 import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import { chmod, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 /**
  * Privatni ključ pod Windows DPAPI, opseg `CurrentUser`.
@@ -19,24 +21,25 @@ import { dirname } from "node:path";
  * nalogom. Zadatak pokrenut kao `SYSTEM` ne bi mogao da otključa ključ, i
  * „rešenje“ tog problema prelaskom na `LocalMachine` bi poništilo celu zaštitu.
  *
- * Program i podatak idu kroz DVA RAZLIČITA kanala
- * ----------------------------------------------
- * PowerShell PROGRAM ide kao `-EncodedCommand` (UTF-16LE, base64). Program nije
- * tajna — isti je na svakoj mašini i stoji u ovom fajlu.
+ * Program je ČITLJIV FAJL, podatak ide kroz stdin
+ * ---------------------------------------------
+ * PowerShell program je `windows-dpapi.ps1` pored ovog modula, u zaštićenom
+ * instalacionom folderu, pokrenut sa `-File` i `-ExecutionPolicy RemoteSigned`.
+ * Jedini argument je režim (`zastiti` / `otkljucaj`). Pre svakog pokretanja se
+ * proverava SHA-256 fajla; izmenjen fajl se odbija (`dpapi_script_altered`).
+ *
+ * Ranije je program išao kao skriveni `-EncodedCommand` uz
+ * `-ExecutionPolicy Bypass`. To je ispravno odvajalo program od podatka, ali je
+ * isti obrazac koji antivirusna heuristika (Avast IDP.HELU.PSE92) blokira na
+ * kancelarijskom računaru. `-File` čuva isto odvajanje: program dolazi iz
+ * fajla, na stdin-u je samo podatak.
  *
  * PODATAK (materijal ključa) ide ISKLJUČIVO kroz `stdin`, kao jedan red. Nikad
  * kroz argumente (`Get-CimInstance Win32_Process`, istorija komandi, alati za
  * nadzor procesa), nikad kroz promenljive okruženja, nikad kroz privremeni fajl.
  *
- * Zašto ne `-Command -` kao ranije
- * --------------------------------
- * Ranija verzija je slala i program i podatak kroz ISTI `stdin`, sa
- * `-Command -`. Taj prekidač znači da PowerShell svoj program čita sa `stdin`-a,
- * pa je red sa ključem, umesto da ga pročita `[Console]::In.ReadLine()`, bio
- * parsiran kao naredba — nepoznata naredba, izlaz 1. Kancelarijska dijagnostika
- * je to izmerila: `D05` (DPAPI bez podatka na stdin-u) prolazi, `D06` (program +
- * podatak na stdin-u) pada. Sa `-EncodedCommand` na `stdin`-u ostaje samo
- * podatak, i `ReadLine()` dobija baš njega.
+ * Format fajla ključa (`cs-dpapi-v1` + DPAPI blob, `CurrentUser`) se NE menja:
+ * ključ napravljen ranijom verzijom otključava se i ovom.
  *
  * Izlaz se NE prikazuje
  * ---------------------
@@ -66,41 +69,62 @@ export class DpapiError extends Error {
   }
 }
 
+/** Program DPAPI adaptera: čitljiv fajl pored ovog modula (u paketu i u izvoru). */
+export const DPAPI_SKRIPTA = fileURLToPath(new URL("./windows-dpapi.ps1", import.meta.url));
+
+/** SHA-256 isporučenog `windows-dpapi.ps1`; test proverava da se poklapa sa fajlom. */
+export const DPAPI_SKRIPTA_SHA256 = "2ef582ebf3573d0f96c6dd2a09b7af9e93ddbe8a1b2ff6d02716cb4b782ea9ff";
+
+export const DPAPI_REZIMI = Object.freeze(["zastiti", "otkljucaj"]);
+
+/** Argumenti procesa. Sadrže SAMO putanju programa i režim — nikad podatak. */
+export function argumentiZaDpapi(putanjaSkripte, rezim) {
+  if (!DPAPI_REZIMI.includes(rezim)) throw new DpapiError("dpapi_mode_invalid", "Nepoznat DPAPI režim.");
+  return ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "RemoteSigned", "-File", putanjaSkripte, "-Rezim", rezim];
+}
+
+/** Fajl programa mora biti tačno isporučeni — izmenjen program bi video ključ. */
+async function proveriSkriptu(putanja, ocekivanSha, citaj = readFile) {
+  let bajtovi;
+  try {
+    bajtovi = await citaj(putanja);
+  } catch {
+    throw new DpapiError("dpapi_script_missing", "DPAPI program nije pronađen u paketu.");
+  }
+  if (createHash("sha256").update(bajtovi).digest("hex") !== ocekivanSha) {
+    throw new DpapiError("dpapi_script_altered", "DPAPI program u paketu nije isporučena verzija.");
+  }
+}
+
 /**
- * PowerShell program kao `-EncodedCommand` vrednost.
+ * DPAPI operacija kroz čitljiv `windows-dpapi.ps1`.
  *
- * `-EncodedCommand` po specifikaciji prima base64 UTF-16LE teksta. Tako program
- * prolazi kroz Windows komandnu liniju kao jedan ASCII token, bez navodnika,
- * novih redova i znakova koje bi `CreateProcess` morao da escape-uje.
+ * @param {"zastiti"|"otkljucaj"} rezim
+ * @param {string} ulaz jedan red base64 podatka
+ * @param {{spawnImpl?: Function, timeoutMs?: number, maxIzlaza?: number,
+ *          putanjaSkripte?: string, ocekivanSha?: string, citaj?: Function}} [opcije]
+ * @returns {Promise<string>}
  */
-export function kodiranaKomanda(skripta) {
-  return Buffer.from(String(skripta), "utf16le").toString("base64");
-}
-
-/** Argumenti procesa. Sadrže SAMO program — nikad podatak. */
-export function argumentiZa(skripta) {
-  return [
-    "-NoProfile",
-    "-NonInteractive",
-    "-ExecutionPolicy",
-    "Bypass",
-    "-EncodedCommand",
-    kodiranaKomanda(skripta),
-  ];
+export async function pokreniDpapi(rezim, ulaz, opcije = {}) {
+  const putanja = opcije.putanjaSkripte ?? DPAPI_SKRIPTA;
+  if (ulaz === undefined || !BASE64_RED.test(String(ulaz))) {
+    throw new DpapiError("dpapi_input_invalid", "Podatak za DPAPI nije jedan red base64.");
+  }
+  const argumenti = argumentiZaDpapi(putanja, rezim);
+  await proveriSkriptu(putanja, opcije.ocekivanSha ?? DPAPI_SKRIPTA_SHA256, opcije.citaj);
+  return pokreniProces(argumenti, ulaz, opcije);
 }
 
 /**
- * Pokreće PowerShell program i šalje mu (opciono) jedan red podatka na `stdin`.
+ * Pokreće `powershell.exe` sa datim argumentima i šalje (opciono) jedan red
+ * podatka na `stdin`. Isti kanal meri i kancelarijska dijagnostika (`D06`).
  *
- * Isti kanal koristi i kancelarijska dijagnostika (`D06`), pa ono što ona izmeri
- * jeste ponašanje ovog adaptera, a ne njegove kopije.
- *
- * @param {string} skripta PowerShell program
+ * @param {string[]} argumenti
  * @param {string} [ulaz] jedan red base64 podatka; ništa drugo
  * @param {{spawnImpl?: Function, timeoutMs?: number, maxIzlaza?: number}} [opcije]
  * @returns {Promise<string>} `stdout` deteta, bez okolnih belina
  */
-export function pokreniPowerShell(skripta, ulaz, opcije = {}) {
+function pokreniProces(argumenti, ulaz, opcije = {}) {
   const {
     spawnImpl = spawn,
     timeoutMs = TIMEOUT_MS,
@@ -121,7 +145,7 @@ export function pokreniPowerShell(skripta, ulaz, opcije = {}) {
 
     let dete;
     try {
-      dete = spawnImpl("powershell.exe", argumentiZa(skripta), {
+      dete = spawnImpl("powershell.exe", argumenti, {
         stdio: ["pipe", "pipe", "pipe"],
         windowsHide: true,
       });
@@ -199,33 +223,6 @@ function kodSpawnGreske(greska) {
   return kod ? `dpapi_spawn_${kod.toLowerCase()}` : "dpapi_spawn_failed";
 }
 
-/*
- * Skripte čitaju TAČNO JEDAN red podatka sa `stdin` i rade sa `ProtectedData`.
- * Sam program stiže kroz `-EncodedCommand`, ne kroz `stdin`.
- *
- * `$ErrorActionPreference = 'Stop'` da tiha greška ne prođe kao prazan izlaz —
- * prazan izlaz bi se lako pročitao kao „ključ je prazan“, a ne kao neuspeh.
- */
-const SKRIPTA_ZASTITI = `
-$ErrorActionPreference = 'Stop'
-$ProgressPreference = 'SilentlyContinue'
-Add-Type -AssemblyName System.Security
-$plain = [Console]::In.ReadLine()
-$bytes = [Convert]::FromBase64String($plain)
-$prot = [System.Security.Cryptography.ProtectedData]::Protect($bytes, $null, 'CurrentUser')
-[Convert]::ToBase64String($prot)
-`.trim();
-
-const SKRIPTA_OTKLJUCAJ = `
-$ErrorActionPreference = 'Stop'
-$ProgressPreference = 'SilentlyContinue'
-Add-Type -AssemblyName System.Security
-$enc = [Console]::In.ReadLine()
-$bytes = [Convert]::FromBase64String($enc)
-$plain = [System.Security.Cryptography.ProtectedData]::Unprotect($bytes, $null, 'CurrentUser')
-[Convert]::ToBase64String($plain)
-`.trim();
-
 export const adapterIme = "windows-dpapi-currentuser";
 
 export function dostupan() {
@@ -239,10 +236,7 @@ export function dostupan() {
  * plaintext fajla koji bi „samo nakratko“ postojao.
  */
 export async function sacuvaj({ putanja, privateKeyPkcs8Der }) {
-  const sifrovano = await pokreniPowerShell(
-    SKRIPTA_ZASTITI,
-    Buffer.from(privateKeyPkcs8Der).toString("base64"),
-  );
+  const sifrovano = await pokreniDpapi("zastiti", Buffer.from(privateKeyPkcs8Der).toString("base64"));
   if (!sifrovano) throw new Error("DPAPI nije vratio šifrovan sadržaj.");
 
   await mkdir(dirname(putanja), { recursive: true });
@@ -263,7 +257,7 @@ export async function ucitaj({ putanja }) {
   if (zaglavlje !== ZAGLAVLJE || !telo) {
     throw new Error("Fajl ključa nije u očekivanom DPAPI obliku.");
   }
-  const plain = await pokreniPowerShell(SKRIPTA_OTKLJUCAJ, telo.trim());
+  const plain = await pokreniDpapi("otkljucaj", telo.trim());
   if (!plain) throw new Error("DPAPI nije vratio ključ.");
   return new Uint8Array(Buffer.from(plain, "base64"));
 }
@@ -271,8 +265,8 @@ export async function ucitaj({ putanja }) {
 /** Provera bez trajnih posledica — za `doctor`. */
 export async function proveri() {
   const uzorak = Buffer.from("cs-dpapi-provera");
-  const sifrovano = await pokreniPowerShell(SKRIPTA_ZASTITI, uzorak.toString("base64"));
-  const nazad = await pokreniPowerShell(SKRIPTA_OTKLJUCAJ, sifrovano);
+  const sifrovano = await pokreniDpapi("zastiti", uzorak.toString("base64"));
+  const nazad = await pokreniDpapi("otkljucaj", sifrovano);
   const ok = Buffer.from(nazad, "base64").equals(uzorak);
   if (!ok) throw new Error("DPAPI provera nije vratila isti sadržaj.");
   return { adapter: adapterIme, ok: true };

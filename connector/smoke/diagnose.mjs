@@ -142,7 +142,8 @@ export async function ucitajKanalAdaptera() {
     if (!existsSync(put)) continue;
     const modul = await import(pathToFileURL(put).href);
     return {
-      pokreni: (skripta, ulaz) => modul.pokreniPowerShell(skripta, ulaz),
+      // Produkcijski kanal: čitljiv windows-dpapi.ps1 kroz -File, podatak kroz stdin (zastiti → otkljucaj).
+      pokreni: async (_skripta, ulaz) => modul.pokreniDpapi("otkljucaj", await modul.pokreniDpapi("zastiti", ulaz)),
       proveri: () => modul.proveri(),
     };
   }

@@ -150,6 +150,8 @@ if ($razlika.Count -gt 0) {
          'Pokrenite instalaciju ponovo; konfiguracija ostaje sacuvana u prethodnoj verziji.')
 }
 Ok 'Kopija je potpuna (svi fajlovi i velicine kao u paketu).'
+# DPAPI program se pokrece sa -ExecutionPolicy RemoteSigned: oznaka "preuzeto sa interneta" bi ga blokirala.
+Get-ChildItem -LiteralPath $cilj -Recurse -File | Unblock-File
 $utf8 = New-Object Text.UTF8Encoding($false)
 [IO.File]::WriteAllText((Join-Path $cilj 'config.json'), ($k | ConvertTo-Json), $utf8)
 Ok "Instalirana verzija $novaVerzija u $cilj (config.json: izvor '$($k.izvorniFolder)', slanje od $($k.posaljiOdDatuma))."

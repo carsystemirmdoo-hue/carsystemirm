@@ -242,29 +242,26 @@ test("[WIN] tajna ne prolazi kroz komandnu liniju", async (t) => {
   );
   const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "");
   /*
-   * Program ide kroz `-EncodedCommand`; podatak ISKLJUČIVO kroz stdin.
-   *
-   * Stari `-Command -` je slao oba kroz stdin, i PowerShell je red sa ključem
-   * parsirao kao naredbu (kancelarijski D06: izlaz 1).
+   * Program je čitljiv `windows-dpapi.ps1` (`-File`, `RemoteSigned`); podatak
+   * ISKLJUČIVO kroz stdin. Bez `-EncodedCommand`/`Bypass` (antivirusna heuristika).
    */
-  assert.match(kod, /"-EncodedCommand"/);
+  assert.match(kod, /"-File"/);
+  assert.match(kod, /"RemoteSigned"/);
+  assert.doesNotMatch(kod, /EncodedCommand|"Bypass"/);
   assert.doesNotMatch(kod, /"-Command",\s*"-"/, "stari kanal program+podatak kroz stdin");
   assert.match(kod, /stdin\.write\(`\$\{ulaz\}\\n`\)/, "podatak ne ide kroz stdin");
 });
 
-test("[WIN] produkcijski kanal: program kroz -EncodedCommand, podatak kroz stdin", async (t) => {
+test("[WIN] produkcijski kanal: program kao fajl (-File), podatak kroz stdin", async (t) => {
   if (guard(t)) return;
   const dpapi = await import(D("keystore/windows-dpapi.mjs"));
   /*
-   * Isto što D06 meri na kancelarijskom računaru, ali kroz stvarni
-   * `pokreniPowerShell`. Podatak je sintetička konstanta, ne ključ.
+   * Isto što D06 meri na kancelarijskom računaru, kroz stvarni `pokreniDpapi`:
+   * zastiti pa otkljucaj vraća isti podatak. Podatak je sintetička konstanta.
    */
   const podatak = Buffer.from("cs-kanal-proba-sinteticki").toString("base64");
-  const izlaz = await dpapi.pokreniPowerShell(
-    "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; [Console]::In.ReadLine()",
-    podatak,
-  );
-  assert.equal(izlaz, podatak, "red sa stdin-a nije vraćen neizmenjen");
+  const izlaz = await dpapi.pokreniDpapi("otkljucaj", await dpapi.pokreniDpapi("zastiti", podatak));
+  assert.equal(izlaz, podatak, "DPAPI nije vratio isti podatak");
 
   // proveri() — Protect i Unprotect kroz isti kanal, nad konstantom.
   const rez = await dpapi.proveri();

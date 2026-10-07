@@ -253,8 +253,8 @@ export async function izmeri({ mehanizmi, kanalAdaptera = null, log = () => {} }
 
   await meri("D06", "stdin kanal — PRODUKCIJSKI kanal DPAPI adaptera", async () => {
     /*
-     * D06 NE koristi mehanizme iznad nego `pokreniPowerShell` iz samog adaptera:
-     * isti argumenti, isti `-EncodedCommand`, isti stdin, ista ograničenja.
+     * D06 NE koristi mehanizme iznad nego `pokreniDpapi` iz samog adaptera:
+     * isti fajl programa (`-File`), isti stdin, ista ograničenja — zastiti pa otkljucaj.
      *
      * Ranija verzija je ovde merila `-Command -` kopiju — i pala tačno kao
      * adapter, jer je i adapter tada slao program i podatak kroz isti stdin.
@@ -270,7 +270,7 @@ export async function izmeri({ mehanizmi, kanalAdaptera = null, log = () => {} }
       return { ishod: "PAD", detalj: `kanal adaptera: ${bezbedanKod(e)}` };
     }
     return String(izlaz ?? "").trim() === STDIN_PROBA
-      ? { ishod: "OK", detalj: "program kroz -EncodedCommand, podatak kroz stdin — pročitan tačno" }
+      ? { ishod: "OK", detalj: "program kao fajl (-File), podatak kroz stdin — DPAPI zastiti/otkljucaj vratio isti podatak" }
       : { ishod: "PAD", detalj: "podatak sa stdin-a nije vraćen neizmenjen" };
   });
 
@@ -364,7 +364,7 @@ function zakljuci(nalazi) {
   if (po("D03")?.ishod === "PAŽNJA") {
     return (
       "Politika izvršavanja je postavljena Group Policy-jem: pogađa -File pozive (W13), " +
-      "ali ne i DPAPI, koji program šalje kroz -EncodedCommand, a ne iz .ps1 fajla."
+      "pa i DPAPI (windows-dpapi.ps1 kroz -File, RemoteSigned) i W13."
     );
   }
   return nalazi.every((n) => n.ishod === "OK")

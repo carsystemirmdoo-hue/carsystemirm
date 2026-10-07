@@ -190,3 +190,24 @@ su prošle, izlaz 0, bez registracije.
     `schtasks`-om (pwsh 7.6.6 na Mac-u);
   - statičko pravilo: nijedna `.ps1` skripta ne koristi `Get-ScheduledTask`,
     `Get-ScheduledTaskInfo`, `Start-ScheduledTask` ni `Unregister-ScheduledTask`.
+
+## 8. Prvi stvarni prolaz i sudar `$Action`/`$action` (0.3.8)
+
+- **Tajna zaštite.** Posle zamene `vercelZastita` (otisak `f64cd6f0633b`)
+  heartbeat vraća 200.
+- **Prvi prolaz:**
+  - pregledano 1453;
+  - poslato 1 i potvrđeno 1, jedna faktura od 06.10.2026;
+  - u pilotu postoji tačno jednom: jedan izvorni dokument, jedna faktura,
+    `origin = device`.
+- **Registracija zadatka je pala** sa „MSFT_TaskExecAction is not a valid value
+  for the Action variable":
+  - `task.ps1` ima parametar `[ValidateSet(...)] $Action`;
+  - lokalna `$action = New-ScheduledTaskAction` je ista promenljiva, jer
+    PowerShell ne razlikuje velika i mala slova;
+  - validacioni atribut važi i za svaku kasniju dodelu.
+- **Ispravka:** lokalna promenljiva je sada `$akcijaZadatka`.
+- **Novo statičko pravilo:** nijedna skripta ne dodeljuje vrednost promenljivoj
+  istog imena kao parametar skripte. Jedini nameran izuzetak je
+  `$PosaljiOdDatuma` u `instaliraj.ps1`, koji nema validaciju. Pravilo pada na
+  starom `task.ps1`.

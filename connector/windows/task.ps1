@@ -374,11 +374,17 @@ switch ($Action) {
     }
     Write-Plan "Registrujem '$TaskPath$TaskName' [$Mode]: izvršni $nodePathZaPrikaz, argumenti $argumentZaPrikaz, nalog $RunAsAccount, radni direktorijum $resolvedPackagePath."
     if ($Apply) {
-      $action = New-ScheduledTaskAction -Execute $nodeInfo.Path `
+      <#
+        NE `$action`: PowerShell ne razlikuje velika i mala slova, pa bi to bio
+        parametar `$Action` sa [ValidateSet] - dodela objekta akcije pada sa
+        "MSFT_TaskExecAction is not a valid value for the Action variable"
+        (kancelarija 0.3.7, posle prvog stvarnog prolaza).
+      #>
+      $akcijaZadatka = New-ScheduledTaskAction -Execute $nodeInfo.Path `
         -Argument $argumentZaPrikaz `
         -WorkingDirectory $resolvedPackagePath
       Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath `
-        -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
+        -Action $akcijaZadatka -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
       <#
         Registracija se POTVRDJUJE nezavisno od CIM-a (COM + schtasks): zadatak
         mora postojati, akcija mora biti bas ovaj node.exe i RunLevel Limited.

@@ -281,6 +281,30 @@ test("[hardening] harden-install-dir i instaliraj: jedan nalog samo uz Test-Jeda
   assert.ok(inst.indexOf("Test-PackageDirectoryHardened -Path $cilj") < inst.indexOf("Instalacioni folder je ucvrscen"), "ACL se proverava pre poruke o uspehu");
 });
 
+test("[hardening] nijedna skripta ne dodeljuje vrednost promenljivoj istog imena kao parametar (PowerShell ne razlikuje velika i mala slova)", async () => {
+  /*
+   * Kancelarija 0.3.7: `$action = New-ScheduledTaskAction ...` u task.ps1 je
+   * ISTA promenljiva kao parametar `[ValidateSet(...)] $Action`, pa je
+   * registracija pala sa „MSFT_TaskExecAction is not a valid value for the
+   * Action variable". Validacioni atribut parametra važi za svaku kasniju dodelu.
+   */
+  const { readdir } = await import("node:fs/promises");
+  const NAMERNO = new Set(["instaliraj.ps1:posaljiodDatuma".toLowerCase()]);
+  const nadjeno = [];
+  for (const ime of (await readdir(WIN_DIR)).filter((f) => f.endsWith(".ps1"))) {
+    const tekst = ukloniKomentare(await readFile(p(ime), "utf8"));
+    const blok = /^param\s*\(([\s\S]*?)^\)/m.exec(tekst);
+    if (!blok) continue;
+    const telo = tekst.slice(blok.index + blok[0].length);
+    for (const [, param] of blok[1].matchAll(/\$([A-Za-z_]\w*)/g)) {
+      if (NAMERNO.has(`${ime}:${param}`.toLowerCase())) continue;
+      const dodela = new RegExp(`\\$${param}\\s*=(?!=)`, "i");
+      if (dodela.test(telo)) nadjeno.push(`${ime}: $${param}`);
+    }
+  }
+  assert.deepEqual(nadjeno, [], `dodela parametru (sudar imena): ${nadjeno.join(", ")}`);
+});
+
 test("[hardening] proba-zadatka.ps1 dira SAMO CarsystemProba, akcija je --help, uklanjanje je u finally", async () => {
   const tekst = ukloniKomentare((await citajSve())["proba-zadatka.ps1"]);
   assert.match(tekst, /\$TaskName = 'CarsystemProba'/);

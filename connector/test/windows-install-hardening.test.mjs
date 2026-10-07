@@ -238,26 +238,42 @@ test("[hardening] task.ps1: SVAKA Production provera baca (throw) pre Register-S
   assert.doesNotMatch(blokProdukcije, /Write-Warn/, "Production blok ne sme koristiti Write-Warn — sve mora biti blokirajuće");
 });
 
-test("[hardening] task.ps1: -JedanNalogSaUAC dozvoljava administratorski nalog SAMO uz isti nalog i uključen UAC", async () => {
+test("[hardening] task.ps1: -JedanNalogSaUAC dozvoljava administratorski nalog SAMO kroz Test-JedanNalogSaUAC", async () => {
   const tekst = (await citajSve())["task.ps1"];
   const blok = tekst.slice(tekst.indexOf("if ($jeAdmin) {"), tekst.indexOf("if ($Apply -and -not (Test-CurrentProcessIsElevated))"));
-  assert.match(blok, /EnableLUA -eq 1/);
-  assert.match(blok, /ConsentPromptBehaviorAdmin -ne 0/);
-  assert.match(blok, /WindowsIdentity\]::GetCurrent\(\)\.User\.Value/);
-  assert.match(blok, /if \(\$JedanNalogSaUAC -and \$uacUkljucen -and \$runAsJeTekuci\)/);
-  // Bez prekidača, ili kada uslov ne važi, ostaje blokirajuće odbijanje.
+  assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
+  assert.match(blok, /if \(\$JedanNalogSaUAC -and \$jedan\.Dozvoljeno\)/);
   assert.equal((blok.match(/Write-Fail-Production/g) ?? []).length, 2);
-  // Zadatak i dalje sa ograničenim tokenom.
   assert.match(tekst, /-LogonType Interactive -RunLevel Limited/);
+});
+
+test("[hardening] PathGuards: UAC i jedan nalog — StrictMode-bezbedno čitanje registra", async () => {
+  const pg = (await citajSve())["PathGuards.ps1"];
+  assert.match(pg, /PSObject\.Properties\['EnableLUA'\]/);
+  assert.match(pg, /PSObject\.Properties\['ConsentPromptBehaviorAdmin'\]/);
+  assert.match(pg, /\(\$lua -eq 1\) -and \(\$null -ne \$saglasnost\) -and \(\$saglasnost -ne 0\)/);
+  assert.match(pg, /GetCurrent\(\)\.User\.Value/);
+});
+
+test("[hardening] rezultat funkcije čiji se .Count čita je uvek niz (@(...)) — StrictMode na 5.1", async () => {
+  const sve = await citajSve();
+  for (const [ime, tekst] of Object.entries(sve)) {
+    for (const m of tekst.matchAll(/\$(\w+)\.Count\b/g)) {
+      const dodele = [...tekst.matchAll(new RegExp(`\\$${m[1]}\\s*=\\s*(.+)`, "g"))].map((d) => d[1].trim());
+      for (const rhs of dodele) {
+        if (/^[A-Z][a-z]+-[A-Za-z]+/.test(rhs) && !/^New-Object\b/.test(rhs)) assert.fail(`${ime}: $${m[1]} = ${rhs} — poziv funkcije bez @(...), a čita se .Count`);
+      }
+    }
+  }
 });
 
 test("[hardening] harden-install-dir i instaliraj: jedan nalog samo uz Test-JedanNalogSaUAC; ACL se proverava nezavisno od izlaznog koda", async () => {
   const sve = await citajSve();
   const harden = sve["harden-install-dir.ps1"];
   const blok = harden.slice(harden.indexOf("if ($jeAdmin) {"), harden.indexOf("-Apply zahteva administratorska prava"));
+  assert.match(harden, /\$problemi = @\(Test-EffectivePermissions/);
   assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
   assert.equal((blok.match(/exit 1/g) ?? []).length, 2, "oba neispunjena slučaja moraju da prekinu");
-  assert.match(sve["PathGuards.ps1"], /EnableLUA -eq 1 -and \$politika\.ConsentPromptBehaviorAdmin -ne 0/);
   const inst = sve["instaliraj.ps1"];
   assert.match(inst, /-Apply -JedanNalogSaUAC/);
   assert.match(inst, /\$global:LASTEXITCODE -ne 0/);

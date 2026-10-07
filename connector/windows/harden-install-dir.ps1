@@ -247,7 +247,8 @@ try {
 
   Set-Acl -LiteralPath $full -AclObject $acl
 
-  $problemi = Test-EffectivePermissions -Path $full -RunAsSid $runAsSid
+  # @(...): pod StrictMode prazna lista postaje $null, a jedan rezultat obican string (pad 0.3.1 na 5.1).
+  $problemi = @(Test-EffectivePermissions -Path $full -RunAsSid $runAsSid)
   if ($problemi.Count -gt 0) {
     throw "Post-verifikacija nije prošla:`n - $($problemi -join "`n - ")"
   }

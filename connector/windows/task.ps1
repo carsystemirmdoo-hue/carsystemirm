@@ -226,18 +226,13 @@ switch ($Action) {
         Write-Fail-Production "provera administratorskog članstva za '$RunAsAccount' nije uspela: $($_.Exception.Message)"
       }
       if ($jeAdmin) {
-        $uacPolitika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
-        $uacUkljucen = $uacPolitika -and $uacPolitika.EnableLUA -eq 1 -and $uacPolitika.ConsentPromptBehaviorAdmin -ne 0
-        $runAsJeTekuci = $false
-        try {
-          $runAsJeTekuci = (New-Object System.Security.Principal.NTAccount($RunAsAccount)).Translate([System.Security.Principal.SecurityIdentifier]).Value -eq
-            [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
-        } catch { }
-        if ($JedanNalogSaUAC -and $uacUkljucen -and $runAsJeTekuci) {
+        # Zajednicka, StrictMode-bezbedna provera (PathGuards.ps1): isti nalog + UAC ukljucen.
+        $jedan = Test-JedanNalogSaUAC -AccountName $RunAsAccount
+        if ($JedanNalogSaUAC -and $jedan.Dozvoljeno) {
           Write-Host "[Production] RunAsAccount '$RunAsAccount' je administrator (jedini nalog); dozvoljeno uz -JedanNalogSaUAC: isti nalog, UAC ukljucen, zadatak radi sa ogranicenim tokenom (RunLevel Limited)."
         }
         elseif ($JedanNalogSaUAC) {
-          Write-Fail-Production "-JedanNalogSaUAC trazi da RunAsAccount bude isti nalog koji pokrece skriptu i da UAC bude ukljucen bez tihog podizanja prava (EnableLUA=1, ConsentPromptBehaviorAdmin<>0)."
+          Write-Fail-Production "-JedanNalogSaUAC nije ispunjen: $($jedan.Razlog) (potrebno: isti nalog, EnableLUA=1, ConsentPromptBehaviorAdmin<>0)."
         }
         else {
           Write-Fail-Production "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — Production zahteva poseban least-privilege nalog (ili -JedanNalogSaUAC za kancelariju sa jednim nalogom)."

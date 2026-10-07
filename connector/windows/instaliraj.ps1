@@ -68,16 +68,15 @@ try {
 }
 $adminSidovi = @()
 try { $adminSidovi = @(Get-LocalGroupMember -SID 'S-1-5-32-544' | ForEach-Object { $_.SID.Value }) } catch { }
-$uacPolitika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
-$uacUkljucen = $uacPolitika -and $uacPolitika.EnableLUA -eq 1 -and $uacPolitika.ConsentPromptBehaviorAdmin -ne 0
-$runAsJeTekuci = $runAsSid -eq $identitet.User.Value
+# Zajednicka, StrictMode-bezbedna provera iz paketa koji se instalira (isti nalog + UAC).
+. (Join-Path $izvorPaketa 'windows\PathGuards.ps1')
+$jedan = Test-JedanNalogSaUAC -AccountName $RunAsAccount
 if ($adminSidovi -contains $runAsSid) {
   if (-not $JedanNalogSaUAC) {
     Stani ("Nalog '$RunAsAccount' je administrator. Ako je to jedini nalog na racunaru, ponovite sa -JedanNalogSaUAC " +
            '(zadatak ce raditi sa ogranicenim tokenom, bez povisenih prava). Vidi UPUTSTVO-KANCELARIJA.md, korak 0.')
   }
-  if (-not $runAsJeTekuci) { Stani '-JedanNalogSaUAC: pokrenite ovu skriptu iz sesije istog naloga (Run as administrator), ne pod drugim administratorom.' }
-  if (-not $uacUkljucen) { Stani '-JedanNalogSaUAC trazi ukljucen UAC bez tihog podizanja prava (EnableLUA=1, ConsentPromptBehaviorAdmin<>0).' }
+  if (-not $jedan.Dozvoljeno) { Stani "-JedanNalogSaUAC nije ispunjen: $($jedan.Razlog). Pokrenite iz sesije istog naloga (Run as administrator), uz ukljucen UAC." }
   Info "Nalog '$RunAsAccount' je administrator (jedini nalog); UAC je ukljucen - zadatak ce raditi bez povisenih prava."
 }
 
@@ -91,8 +90,18 @@ $novaVerzija = (Get-Content -LiteralPath (Join-Path $izvorPaketa 'VERSION') -Raw
 
 # ------------------------------------------------------ konfiguracija unapred
 $staraKonfiguracija = $null
-if (Test-Path -LiteralPath (Join-Path $cilj 'config.json')) {
-  $staraKonfiguracija = Get-Content -LiteralPath (Join-Path $cilj 'config.json') -Raw | ConvertFrom-Json
+$izvorKonfiguracije = Join-Path $cilj 'config.json'
+if (-not (Test-Path -LiteralPath $izvorKonfiguracije)) {
+  # Prekinut raniji pokusaj (npr. antivirus zadrzao kopiju): konfiguracija je u poslednjoj sacuvanoj verziji.
+  $sacuvana = @(Get-ChildItem -LiteralPath $env:ProgramFiles -Directory -Filter 'CarsystemConnector.prethodna-*' -ErrorAction SilentlyContinue |
+    Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'config.json') } | Sort-Object Name)
+  if ($sacuvana.Count -gt 0) {
+    $izvorKonfiguracije = Join-Path $sacuvana[$sacuvana.Count - 1].FullName 'config.json'
+    Info "config.json preuzet iz sacuvane verzije: $($sacuvana[$sacuvana.Count - 1].Name)"
+  }
+}
+if (Test-Path -LiteralPath $izvorKonfiguracije) {
+  $staraKonfiguracija = Get-Content -LiteralPath $izvorKonfiguracije -Raw | ConvertFrom-Json
 }
 if (-not $staraKonfiguracija -and (-not $IzvorniFolder -or -not $ServerOrigin)) {
   Stani 'Prva instalacija trazi -IzvorniFolder i -ServerOrigin.'
@@ -133,6 +142,14 @@ if (Test-Path -LiteralPath $cilj) {
 }
 New-Item -ItemType Directory -Path $cilj | Out-Null
 Copy-Item -Path (Join-Path $izvorPaketa '*') -Destination $cilj -Recurse
+# Antivirus ume da zadrzi pojedinacan fajl pri kopiranju: instalacija mora biti potpuna i ista kao paket.
+$relativno = { param($koren) @(Get-ChildItem -LiteralPath $koren -Recurse -File | ForEach-Object { "{0}|{1}" -f $_.FullName.Substring($koren.Length).TrimStart('\'), $_.Length }) }
+$razlika = @(Compare-Object -ReferenceObject (& $relativno $izvorPaketa) -DifferenceObject (& $relativno $cilj))
+if ($razlika.Count -gt 0) {
+  Stani ("Kopija nije potpuna ($($razlika.Count) razlika, npr. $($razlika[0].InputObject)). Verovatno ju je zadrzao antivirus. " +
+         'Pokrenite instalaciju ponovo; konfiguracija ostaje sacuvana u prethodnoj verziji.')
+}
+Ok 'Kopija je potpuna (svi fajlovi i velicine kao u paketu).'
 $utf8 = New-Object Text.UTF8Encoding($false)
 [IO.File]::WriteAllText((Join-Path $cilj 'config.json'), ($k | ConvertTo-Json), $utf8)
 Ok "Instalirana verzija $novaVerzija u $cilj (config.json: izvor '$($k.izvorniFolder)', slanje od $($k.posaljiOdDatuma))."
@@ -151,7 +168,6 @@ try {
 }
 if ($global:LASTEXITCODE -ne 0) { Stani "harden-install-dir nije prosao (kod $global:LASTEXITCODE). Prethodnu verziju vratite sa .\windows\vrati-prethodnu.ps1." }
 # Nezavisna provera stvarnog ACL-a (ista funkcija kao u task.ps1) - ne oslanja se samo na izlazni kod.
-. (Join-Path $cilj 'windows\PathGuards.ps1')
 $aclProblem = Test-PackageDirectoryHardened -Path $cilj
 if ($aclProblem) { Stani "Instalacioni folder NIJE ucvrscen: $aclProblem. Ponovite instalaciju ili vratite prethodnu verziju (vrati-prethodnu.ps1)." }
 Ok 'Instalacioni folder je ucvrscen (provereno nad stvarnim ACL-om; nalog konektora ima samo citanje).'

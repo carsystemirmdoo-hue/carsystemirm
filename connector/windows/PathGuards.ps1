@@ -378,10 +378,18 @@ function Protect-AdminOnlyFolder {
   ako je UAC ukljucen bez tihog podizanja prava (EnableLUA=1,
   ConsentPromptBehaviorAdmin<>0). Konektor tada radi sa ogranicenim tokenom.
 #>
+function Get-UacUkljucen {
+  # StrictMode-bezbedno: nepostojece svojstvo registra nije greska nego "nije ukljuceno".
+  $politika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
+  if (-not $politika) { return $false }
+  $lua = if ($politika.PSObject.Properties['EnableLUA']) { $politika.EnableLUA } else { $null }
+  $saglasnost = if ($politika.PSObject.Properties['ConsentPromptBehaviorAdmin']) { $politika.ConsentPromptBehaviorAdmin } else { $null }
+  return [bool](($lua -eq 1) -and ($null -ne $saglasnost) -and ($saglasnost -ne 0))
+}
+
 function Test-JedanNalogSaUAC {
   param([Parameter(Mandatory)] [string]$AccountName)
-  $politika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
-  $uac = [bool]($politika -and $politika.EnableLUA -eq 1 -and $politika.ConsentPromptBehaviorAdmin -ne 0)
+  $uac = Get-UacUkljucen
   $isti = $false
   try {
     $isti = (New-Object System.Security.Principal.NTAccount($AccountName)).Translate([System.Security.Principal.SecurityIdentifier]).Value -eq

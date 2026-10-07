@@ -2,16 +2,42 @@ import Link from "next/link";
 import { forbidden, notFound } from "next/navigation";
 import { DOCUMENT_KIND_LABELS, srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
+import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
+import { evaluateRebateArticles } from "@/lib/pricing/rebate-application-service";
+import { OUTCOME_LABELS, REVIEW_OUTCOMES } from "@/lib/pricing/rebateApplication.mjs";
+import { CRITERIA_TEXT } from "@/lib/pricing/rebateCriteria.mjs";
 import { loadRebateReview } from "@/lib/pricing/rebate-review-service";
-import { EXCEPTION_LABELS, RECENT_DAYS, STATUS_LABELS } from "@/lib/pricing/rebateReview.mjs";
+import { EXCEPTION_LABELS, HIGH_DISCOUNT, RECENT_DAYS, STATUS_LABELS } from "@/lib/pricing/rebateReview.mjs";
 import { pct } from "../../format";
+import { ProposeChangeForm } from "./ProposeChangeForm";
 
 export const dynamic = "force-dynamic";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const EXCEPTIONS_SHOWN = 150;
 const TIMELINE_SHOWN = 30;
+const ARTICLES_SHOWN = 200;
+
+const OUTCOME_TONE: Record<string, string> = {
+  primeni: "success",
+  vec_vazi: "success",
+  sukob: "danger",
+  visok_rabat: "warning",
+  nejasno: "warning",
+  kratko: "warning",
+  vec_predlozeno: "info",
+};
+
+type Counts = Record<string, number>;
+const sum = (c: Counts, keys: readonly string[]) => keys.reduce((n, k) => n + (c[k] ?? 0), 0);
+const RULE_OUTCOMES = ["primeni", "vec_vazi", "vec_predlozeno"] as const;
+const ARTICLE_FILTERS = [
+  { key: "pregled", label: "Za pregled", match: (o: string) => REVIEW_OUTCOMES.includes(o), count: (c: Counts) => sum(c, REVIEW_OUTCOMES) },
+  { key: "dosledno", label: "Dosledno / pravilo", match: (o: string) => (RULE_OUTCOMES as readonly string[]).includes(o), count: (c: Counts) => sum(c, RULE_OUTCOMES) },
+  { key: "sve", label: "Svi artikli", match: () => true, count: (c: Counts) => sum(c, Object.keys(c)) },
+] as const;
 
 const BASIS_LABEL: Record<string, string> = {
   literal: "naziv počinje brendom",
@@ -35,17 +61,45 @@ export default async function RebateReviewCustomerPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ izuzetak?: string }>;
+  searchParams: Promise<{ izuzetak?: string; artikli?: string; predlog?: string }>;
 }) {
   const { id } = await params;
-  const user = await requireCapability("view:cene", `/portal/cene/rabati-iz-faktura/kupci/${id}`);
+  const user = await requireCapability("view:rabati", `/portal/cene/rabati-iz-faktura/kupci/${id}`);
   if (!UUID.test(id)) notFound();
   const data = await loadRebateReview(user, id);
   // Kupac postoji, ali nije u opsegu — ista poruka kao za ostale tuđe kupce.
   if (!data) forbidden();
 
   const { customer, salespeople, review: r, proposals, approvedRules, pendingRules, corrections } = data;
-  const kind = (await searchParams).izuzetak;
+  const sp = await searchParams;
+  const kind = sp.izuzetak;
+  const today = belgradeDate(new Date());
+  const canPropose = can(user, "prices:propose");
+  const articles = await evaluateRebateArticles(user, today, customer.id);
+  const articleCounts: Counts = {};
+  for (const a of articles) articleCounts[a.result.outcome] = (articleCounts[a.result.outcome] ?? 0) + 1;
+  const reviewCount = sum(articleCounts, REVIEW_OUTCOMES);
+  const articleFilter = ARTICLE_FILTERS.some((f) => f.key === sp.artikli) ? (sp.artikli as string) : reviewCount ? "pregled" : "dosledno";
+  const filterDef = ARTICLE_FILTERS.find((f) => f.key === articleFilter)!;
+  const ORDER = ["sukob", "visok_rabat", "nejasno", "kratko", "primeni", "vec_predlozeno", "vec_vazi", "zastarelo", "bez_rabata", "jednokratno"];
+  const shownArticles = articles
+    .filter((a) => filterDef.match(a.result.outcome))
+    .sort((x, y) => ORDER.indexOf(x.result.outcome) - ORDER.indexOf(y.result.outcome) || (y.result.lastOn ?? "").localeCompare(x.result.lastOn ?? ""));
+  const approvedByArticle = new Map(approvedRules.filter((p) => p.articleId).map((p) => [p.articleId as string, p]));
+  const portalOnlyCount = approvedRules.filter((p) => p.portalOnly).length;
+  const formArticles = [...articles]
+    .sort((x, y) => (y.result.lastOn ?? "").localeCompare(x.result.lastOn ?? ""))
+    .map((a) => {
+      const last = a.result.invoices[a.result.invoices.length - 1];
+      return {
+        articleId: a.articleId,
+        articleCode: a.articleCode,
+        articleName: a.articleName,
+        lastPercent: last?.percent ?? null,
+        suggestedPercent: a.result.outcome === "primeni" ? a.result.percent : (last?.percent ?? null),
+      };
+    });
+  const initialArticle = sp.predlog && articles.some((a) => a.articleId === sp.predlog) ? sp.predlog : null;
   const exceptionKind = kind && kind in EXCEPTION_LABELS ? kind : null;
   const exceptions = exceptionKind ? r.exceptions.filter((e) => e.kind === exceptionKind) : r.exceptions;
   const kindCount = (k: string) => r.exceptions.filter((e) => e.kind === k).length;
@@ -102,7 +156,7 @@ export default async function RebateReviewCustomerPage({
               <span className="portal-metric-label">Izuzeci</span>
               <strong className="portal-metric-value">{r.exceptions.length}</strong>
               <small className="portal-metric-context">
-                {kindCount("moguca_akcija")} akcija? · {kindCount("bez_rabata")} bez rabata · {r.articleDifferences.length} art. poseban
+                {kindCount("visok_rabat")} visok rabat · {kindCount("bez_rabata")} bez rabata · {r.articleDifferences.length} art. poseban
               </small>
             </div>
           </section>
@@ -176,15 +230,16 @@ export default async function RebateReviewCustomerPage({
             <section className="portal-panel rr-block" data-block="predlog">
               <div className="portal-section-header">
                 <div>
-                  <span className="rr-step">2 · Predlog uslova</span>
+                  <span className="rr-step">2 · Predlog</span>
                   <h2>Šta bi moglo postati pravilo</h2>
-                  <p>
-                    Samo grupe sa ustaljenim rabatom (≥ 85 % stavki, najmanje 2 fakture). Nije sačuvano i ne važi — postaje
-                    pravilo tek posle predloga i odobrenja vlasnika.
-                  </p>
+                  <p>Predlog ne važi dok ga vlasnik ne odobri. Grupe iz naziva su samo informacija, ne osnova pravila.</p>
                 </div>
               </div>
               <div className="portal-panel-body">
+                <p className="rr-count">
+                  Kupac–artikal: <strong>{articleCounts.primeni ?? 0}</strong> doslednih bez pravila ·{" "}
+                  <strong>{articleCounts.vec_vazi ?? 0}</strong> već pravilo · <strong>{reviewCount}</strong> za ručni pregled
+                </p>
                 {proposals.length ? (
                   <ul className="rr-plain">
                     {proposals.map((p) => (
@@ -192,22 +247,20 @@ export default async function RebateReviewCustomerPage({
                         <strong>
                           {p.group}: {pct(p.percent)}
                         </strong>{" "}
-                        <span className="kk-status" data-tone="info">predlog</span>
+                        <span className="kk-status" data-tone="info">grupa — predlog iz naziva</span>
                         <small>
                           {p.lines} stavki na {p.invoices} faktura ({Math.round(p.share * 100)} %)
-                          {p.changedRecently ? ` · rabat promenjen u poslednjih ${RECENT_DAYS} dana — proveriti pre predloga` : ""}
+                          {p.changedRecently ? ` · promenjeno u poslednjih ${RECENT_DAYS} dana` : ""}
                         </small>
                       </li>
                     ))}
                   </ul>
-                ) : (
-                  <p className="rb-note">Nijedna grupa nema dovoljno ustaljen rabat za predlog.</p>
-                )}
+                ) : null}
                 {pendingRules.length ? (
                   <>
-                    <h3 className="rr-sub">Već predloženo, čeka odluku</h3>
+                    <h3 className="rr-sub">Predlozi koji čekaju odluku · {pendingRules.length}</h3>
                     <ul className="rr-plain">
-                      {pendingRules.map((p) => (
+                      {pendingRules.slice(0, 20).map((p) => (
                         <li key={p.id}>
                           {p.target}: <strong>{p.value}</strong> <small>{RULE_STATUS[p.status] ?? p.status}, od {srDate(p.effectiveFrom)}</small>
                         </li>
@@ -222,32 +275,143 @@ export default async function RebateReviewCustomerPage({
               <div className="portal-section-header">
                 <div>
                   <span className="rr-step">3 · Odobreno</span>
-                  <h2>Važeće pravilo u portalu</h2>
-                  <p>Jedino ovo je odluka firme. Istorijski rabat se ovde ne prepisuje automatski.</p>
+                  <h2>Pravila koja važe u portalu</h2>
+                  <p>Jedino ovo je odluka firme. „Samo portal“ znači: nije nalog za unos u BizniSoft.</p>
                 </div>
               </div>
               <div className="portal-panel-body">
                 {approvedRules.length ? (
-                  <ul className="rr-plain">
-                    {approvedRules.map((p) => (
-                      <li key={p.id}>
-                        {p.target}: <strong>{p.value}</strong>{" "}
-                        <small>
-                          {RULE_STATUS[p.status] ?? p.status} · od {srDate(p.effectiveFrom)}
-                          {p.effectiveTo ? ` do ${srDate(p.effectiveTo)}` : ""}
-                          {p.via ? ` · ${p.via}` : ""}
-                        </small>
-                      </li>
-                    ))}
-                  </ul>
+                  <>
+                    <p className="rr-count">
+                      <strong>{approvedRules.length}</strong> odobrenih pravila
+                      {portalOnlyCount ? ` · ${portalOnlyCount} samo u portalu` : ""}
+                    </p>
+                    <ul className="rr-plain">
+                      {approvedRules.slice(0, 8).map((p) => (
+                        <li key={p.id}>
+                          {p.target}: <strong>{p.value}</strong>{" "}
+                          {p.portalOnly ? <span className="kk-status" data-tone="warning">samo portal</span> : null}
+                          <small>
+                            {p.portalOnly ? "Odobreno — važi samo u portalu" : (RULE_STATUS[p.status] ?? p.status)} · od {srDate(p.effectiveFrom)}
+                            {p.effectiveTo ? ` do ${srDate(p.effectiveTo)}` : ""}
+                            {p.via ? ` · ${p.via}` : ""}
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                    {approvedRules.length > 8 ? <small className="rb-note">Ostala pravila su u tabeli artikala ispod.</small> : null}
+                  </>
                 ) : (
-                  <p className="rb-note">
-                    Nema odobrenog pravila za ovog kupca. Važi ono što je u BizniSoftu; portal ne izvodi uslov iz istorije.
-                  </p>
+                  <p className="rb-note">Nema odobrenog pravila. Važi ono što je u BizniSoftu.</p>
                 )}
               </div>
             </section>
           </div>
+
+          <section className="portal-panel" id="artikli">
+            <div className="portal-section-header">
+              <div>
+                <h2>Artikli: istorija, ocena i pravilo</h2>
+                <p>
+                  Ocena po paru kupac–artikal (najuži obuhvat). Storna i povrati nisu uključeni. Kriterijumi su privremeni:{" "}
+                  {CRITERIA_TEXT[3]}.
+                </p>
+              </div>
+              <nav className="rr-chips" aria-label="Artikli">
+                {ARTICLE_FILTERS.map((f) => (
+                  <Link key={f.key} href={`?artikli=${f.key}#artikli`} aria-current={articleFilter === f.key ? "true" : undefined}>
+                    {f.label} ({f.count(articleCounts)})
+                  </Link>
+                ))}
+              </nav>
+            </div>
+            <div className="portal-table-wrap">
+              <table className="portal-table rr-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Artikal</th>
+                    <th scope="col">Istorija (poslednje)</th>
+                    <th scope="col">Ocena</th>
+                    <th scope="col">Odobreno pravilo</th>
+                    {canPropose ? <th scope="col">Predlog</th> : null}
+                  </tr>
+                </thead>
+                <tbody>
+                  {shownArticles.slice(0, ARTICLES_SHOWN).map((a) => {
+                    const last = a.result.invoices[a.result.invoices.length - 1];
+                    const rule = approvedByArticle.get(a.articleId);
+                    return (
+                      <tr key={a.articleId}>
+                        <th scope="row">
+                          {a.articleCode}
+                          <small>{a.articleName ?? ""}</small>
+                        </th>
+                        <td>
+                          <strong>{last.percent === null ? last.values.map((v) => pct(v)).join(" / ") : pct(last.percent)}</strong>
+                          <small>
+                            <Link href={invoiceHref(last.invoiceId)}>{last.documentLabel}</Link> · {srDate(last.issuedOn)} · {a.result.invoiceCount} fakt.
+                          </small>
+                        </td>
+                        <td>
+                          <span className="kk-status" data-tone={OUTCOME_TONE[a.result.outcome] ?? "neutral"}>
+                            {OUTCOME_LABELS[a.result.outcome as keyof typeof OUTCOME_LABELS]}
+                          </span>
+                          <small>{a.result.reason}</small>
+                        </td>
+                        <td>
+                          {rule ? (
+                            <>
+                              <strong>{rule.value}</strong>
+                              <small>
+                                {rule.portalOnly ? "samo portal · " : ""}od {srDate(rule.effectiveFrom)}
+                              </small>
+                            </>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                        {canPropose ? (
+                          <td>
+                            <Link className="rr-link rr-link-sm" href={`?artikli=${articleFilter}&predlog=${a.articleId}#predlog`}>
+                              Predložite promenu
+                            </Link>
+                          </td>
+                        ) : null}
+                      </tr>
+                    );
+                  })}
+                  {shownArticles.length === 0 ? (
+                    <tr>
+                      <td colSpan={canPropose ? 5 : 4}>Nema artikala za ovaj filter.</td>
+                    </tr>
+                  ) : null}
+                </tbody>
+              </table>
+            </div>
+            {shownArticles.length > ARTICLES_SHOWN ? (
+              <p className="portal-data-note">Prikazano {ARTICLES_SHOWN} od {shownArticles.length}.</p>
+            ) : null}
+          </section>
+
+          {canPropose ? (
+            <section className="portal-panel">
+              <div className="portal-section-header">
+                <div>
+                  <h2>Predložite promenu</h2>
+                  <p>Ide u postojeći tok: predlog → odobrenje vlasnika. Dok nije odobren, ne menja cenu.</p>
+                </div>
+              </div>
+              <div className="portal-panel-body">
+                <ProposeChangeForm
+                  customerId={customer.id}
+                  customerName={customer.name}
+                  today={today}
+                  initialArticleId={initialArticle}
+                  articles={formArticles}
+                />
+              </div>
+            </section>
+          ) : null}
 
           {r.articleDifferences.length ? (
             <section className="portal-panel">
@@ -304,7 +468,7 @@ export default async function RebateReviewCustomerPage({
               <div>
                 <h2>Izuzeci na stavkama · {r.exceptions.length}</h2>
                 <p>
-                  „Moguća akcija“ je pretpostavka (rabat ≥ 50 %), ne potvrda. Odstupanje se računa samo u grupi čiji je rabat
+                  „Visok rabat — proveriti“: rabat ≥ {HIGH_DISCOUNT} %; sam procenat ne dokazuje akciju. Odstupanje se računa samo u grupi čiji je rabat
                   ustaljen.
                 </p>
               </div>

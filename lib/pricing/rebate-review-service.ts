@@ -133,11 +133,12 @@ export async function loadRebateReview(viewer: PortalUser, customerId: string) {
       id: string; status: string; product_scope: string; product_group: string | null; brand: string | null;
       article_code: string | null; value_kind: string; discount_percent: string | null; net_price: string | null;
       effective_from: string; effective_to: string | null; group_name: string | null;
+      article_id: string | null; portal_only: boolean; source_batch: string | null;
     }>(sql`
       SELECT r.id, r.status::text AS status, r.product_scope::text AS product_scope, r.product_group, r.brand,
              a.code AS article_code, r.value_kind::text AS value_kind, r.discount_percent::text AS discount_percent,
              r.net_price::text AS net_price, r.effective_from::text AS effective_from, r.effective_to::text AS effective_to,
-             g.name AS group_name
+             g.name AS group_name, r.article_id, NOT r.biznisoft_entry_required AS portal_only, r.source_batch
         FROM price_rules r
         LEFT JOIN articles a ON a.id = r.article_id
         LEFT JOIN customer_groups g ON g.id = r.customer_group_id
@@ -166,6 +167,9 @@ export async function loadRebateReview(viewer: PortalUser, customerId: string) {
     value: r.value_kind === "discount_percent" ? `${Number(r.discount_percent)} %` : `${r.net_price} RSD`,
     effectiveFrom: r.effective_from,
     effectiveTo: r.effective_to,
+    articleId: r.article_id,
+    portalOnly: r.portal_only,
+    sourceBatch: r.source_batch,
   }));
 
   return {

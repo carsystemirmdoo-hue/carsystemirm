@@ -246,6 +246,13 @@
       "when": 1791381600000,
       "tag": "0034_sync_device_cycles",
       "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1791468000000,
+      "tag": "0035_price_rule_portal_scope",
+      "breakpoints": true
     }
   ]
 }

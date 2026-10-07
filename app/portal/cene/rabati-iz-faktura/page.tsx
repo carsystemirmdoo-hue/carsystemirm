@@ -65,7 +65,7 @@ function Item({ item, canPropose }: { item: RebateEvidenceItem; canPropose: bool
 }
 
 export default async function RebatesFromInvoicesPage() {
-  const user = await requireCapability("view:cene", "/portal/cene/rabati-iz-faktura");
+  const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura");
   const [{ items, lineCount, missingGroupLines }, dataset] = await Promise.all([loadRebateEvidence(user), loadDatasetInfo()]);
   const canPropose = can(user, "prices:propose");
   return (

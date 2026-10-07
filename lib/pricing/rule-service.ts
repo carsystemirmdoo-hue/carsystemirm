@@ -50,7 +50,20 @@ export type RuleDraft = {
   effectiveFrom: string;
   effectiveTo?: string | null;
   reason: string;
+  /** `false` = važi samo u portalu, nije nalog za unos u BizniSoft (0035). */
+  biznisoftEntryRequired?: boolean;
+  /** Oznaka serije upisa (0035), za opoziv tačno tog upisa. */
+  sourceBatch?: string | null;
 };
+
+/**
+ * Opcije za upis u seriji (npr. primena iz istorije faktura).
+ *
+ * `correlationId` vezuje sve zapise revizije jedne serije; `notify: false`
+ * gasi obaveštenje po pravilu — serija šalje jedno zbirno obaveštenje, umesto
+ * hiljada istih redova u listi.
+ */
+export type RuleWriteOptions = { correlationId?: string; notify?: boolean };
 
 /**
  * Predlaže pravilo cene.
@@ -63,6 +76,7 @@ export type RuleDraft = {
 export async function proposePriceRule(
   draft: RuleDraft,
   actor: PortalUser,
+  options: RuleWriteOptions = {},
 ): Promise<{ id: string; status: PriceRuleStatus }> {
   const capabilities = resolveCapabilities(actor.role, actor.permissions);
   if (!capabilities.has("prices:propose")) {
@@ -87,7 +101,7 @@ export async function proposePriceRule(
 
   const level = precedenceLevelFor(draft);
   const scopeKey = scopeKeyFor(draft);
-  const correlationId = randomUUID();
+  const correlationId = options.correlationId ?? randomUUID();
   const db = getDb();
 
   return db.transaction(async (tx) => {
@@ -118,6 +132,8 @@ export async function proposePriceRule(
         // nedovršenog unosa, koje ovaj tok ne koristi.
         status: "pending_approval",
         reason,
+        biznisoftEntryRequired: draft.biznisoftEntryRequired ?? true,
+        sourceBatch: draft.sourceBatch ?? null,
         proposedBy: actor.id,
         proposedAt: sql`now()`,
       })
@@ -139,6 +155,8 @@ export async function proposePriceRule(
           vrednost: draft.discountPercent ?? draft.netPrice,
           vaziOd: draft.effectiveFrom,
           vaziDo: draft.effectiveTo ?? null,
+          unosUBizniSoft: draft.biznisoftEntryRequired ?? true,
+          serija: draft.sourceBatch ?? null,
         },
         reason,
         correlationId,
@@ -146,7 +164,7 @@ export async function proposePriceRule(
       tx,
     );
 
-    await notify(
+    if (options.notify !== false) await notify(
       {
         kind: "price_rule_proposed",
         severity: "info",
@@ -183,6 +201,7 @@ export async function transitionPriceRule(
     officeRecordNote?: string | null;
   },
   actor: PortalUser,
+  options: RuleWriteOptions = {},
 ): Promise<void> {
   const db = getDb();
   const [rule] = await db
@@ -216,9 +235,20 @@ export async function transitionPriceRule(
     actorKind: ACTOR_HUMAN,
   });
   if (refusal) throw new WorkflowError(refusal, "bad_transition");
+  /*
+   * Pravilo „samo portal" nije nalog za BizniSoft: niko ne sme da evidentira
+   * da je upisano tamo. Ako vlasnik kasnije odluči da uslov ide u BizniSoft,
+   * to je nova odluka (novo pravilo), ne tiha promena značenja ovog.
+   */
+  if (input.to === "office_recorded" && !rule.biznisoftEntryRequired) {
+    throw new WorkflowError(
+      "Pravilo važi samo u portalu i nije predviđeno za unos u BizniSoft.",
+      "portal_only",
+    );
+  }
 
   const reason = transitionReason?.trim() || null;
-  const correlationId = randomUUID();
+  const correlationId = options.correlationId ?? randomUUID();
   const action = actionFor(rule.status, input.to);
 
   await db.transaction(async (tx) => {
@@ -268,7 +298,8 @@ export async function transitionPriceRule(
       tx,
     );
 
-    const notification = notificationForTransition(input.to, rule, actor, reason);
+    const notification =
+      options.notify === false ? null : notificationForTransition(input.to, rule, actor, reason);
     if (notification) {
       await notify({ ...notification, correlationId }, tx);
     }
@@ -345,6 +376,8 @@ function notificationForTransition(
 
   switch (to) {
     case "approved_pending_biznisoft":
+      // Pravilo samo za portal ne šalje kancelariji poziv na unos u BizniSoft.
+      if (!rule.biznisoftEntryRequired) return null;
       return {
         kind: "price_rule_approved" as const,
         severity: "info" as const,

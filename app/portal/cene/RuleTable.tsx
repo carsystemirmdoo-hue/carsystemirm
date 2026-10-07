@@ -41,7 +41,16 @@ export type RuleRow = {
   proposedByName: string | null;
   decidedByName: string | null;
   officeRecordedByName: string | null;
+  /** `false` = važi samo u portalu; nije nalog za unos u BizniSoft (0035). */
+  biznisoftEntryRequired?: boolean;
+  sourceBatch?: string | null;
 };
+
+/** Radnje za red; pravilo „samo portal" nema evidentiranje unosa u BizniSoft. */
+function actionsFor(row: RuleRow) {
+  const list = ACTIONS[row.status] ?? [];
+  return row.biznisoftEntryRequired === false ? list.filter((a) => a.to !== "office_recorded") : list;
+}
 
 /** Prelazi ponuđeni iz datog stanja, sa nazivom radnje. */
 const ACTIONS: Record<string, { to: string; label: string; needsReason: boolean }[]> = {
@@ -152,7 +161,12 @@ export function RuleTable({
                     * Razlika odobreno/potvrđeno se ispisuje uz svako pravilo,
                     * ne samo bojom. Boja se izgubi u štampi i u izvozu.
                     */}
-                  {row.status === "approved_pending_biznisoft" ? (
+                  {row.biznisoftEntryRequired === false ? (
+                    <small className="rr-portal-only">
+                      Važi samo u portalu — nije nalog za unos u BizniSoft.
+                      {row.sourceBatch ? ` Serija ${row.sourceBatch}.` : ""}
+                    </small>
+                  ) : row.status === "approved_pending_biznisoft" ? (
                     <small>Još nije uneto u BizniSoft.</small>
                   ) : null}
                   {row.status === "office_recorded" ? (
@@ -178,7 +192,7 @@ export function RuleTable({
                 </td>
                 {showActions ? (
                   <td>
-                    {(ACTIONS[row.status] ?? []).length > 0 ? (
+                    {actionsFor(row).length > 0 ? (
                       <PortalButton
                         variant="ghost"
                         onClick={() => setOpenId(openId === row.id ? null : row.id)}
@@ -201,7 +215,7 @@ export function RuleTable({
           <input type="hidden" name="ruleId" value={openId} />
           <Field label="Radnja" required>
             <select name="to" required>
-              {(ACTIONS[rows.find((row) => row.id === openId)?.status ?? ""] ?? []).map(
+              {(rows.find((row) => row.id === openId) ? actionsFor(rows.find((row) => row.id === openId)!) : []).map(
                 (action) => (
                   <option key={action.to} value={action.to}>
                     {action.label}

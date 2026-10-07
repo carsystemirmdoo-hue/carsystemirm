@@ -20,7 +20,7 @@ const STATUS_TONE: Record<string, string> = {
 const EXCEPTION_FILTERS = [
   { key: "sve", label: "Svi kupci" },
   { key: "bilo_koji", label: "Sa bilo kojim izuzetkom" },
-  { key: "akcija", label: "Moguća akcija ≥ 50 %" },
+  { key: "visok", label: "Visok rabat — proveriti" },
   { key: "bez_rabata", label: "Stavke bez rabata" },
   { key: "odstupanje", label: "Odstupanje od grupe" },
   { key: "artikli", label: "Poseban rabat na artikal" },
@@ -29,8 +29,8 @@ const EXCEPTION_FILTERS = [
 function matchesException(row: RebateReviewRow, filter: string) {
   const e = row.exceptions;
   switch (filter) {
-    case "bilo_koji": return e.promo + e.noDiscount + e.deviation + e.articles > 0;
-    case "akcija": return e.promo > 0;
+    case "bilo_koji": return e.high + e.noDiscount + e.deviation + e.articles > 0;
+    case "visok": return e.high > 0;
     case "bez_rabata": return e.noDiscount > 0;
     case "odstupanje": return e.deviation > 0;
     case "artikli": return e.articles > 0;
@@ -45,7 +45,7 @@ export default async function RebateReviewListPage({
 }: {
   searchParams: Promise<{ q?: string; stanje?: string; izuzetak?: string; komercijalista?: string }>;
 }) {
-  const user = await requireCapability("view:cene", "/portal/cene/rabati-iz-faktura/kupci");
+  const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura/kupci");
   const params = await searchParams;
   const q = (params.q ?? "").trim().slice(0, 80);
   const stanje = params.stanje && params.stanje in STATUS_LABELS ? params.stanje : "sva";
@@ -77,7 +77,12 @@ export default async function RebateReviewListPage({
             {lineCount.toLocaleString("sr-Latn-RS")} potvrđenih stavki.
           </span>
         }
-        actions={<Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>}
+        actions={
+          <>
+            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za ručni pregled →</Link>
+            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>
+          </>
+        }
       />
 
       <section className="portal-panel">
@@ -182,11 +187,11 @@ export default async function RebateReviewListPage({
                   </td>
                   <td>
                     <div className="rr-exc">
-                    {r.exceptions.promo ? <span data-kind="akcija">{r.exceptions.promo} akcija?</span> : null}
+                    {r.exceptions.high ? <span data-kind="visok">{r.exceptions.high} visok rabat</span> : null}
                     {r.exceptions.noDiscount ? <span data-kind="nula">{r.exceptions.noDiscount} bez rabata</span> : null}
                     {r.exceptions.deviation ? <span>{r.exceptions.deviation} odstupa</span> : null}
                     {r.exceptions.articles ? <span>{r.exceptions.articles} art. poseban</span> : null}
-                    {r.exceptions.promo + r.exceptions.noDiscount + r.exceptions.deviation + r.exceptions.articles === 0 ? "—" : null}
+                    {r.exceptions.high + r.exceptions.noDiscount + r.exceptions.deviation + r.exceptions.articles === 0 ? "—" : null}
                     </div>
                   </td>
                   <td>

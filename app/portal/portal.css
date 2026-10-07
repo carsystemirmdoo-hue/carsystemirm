@@ -8545,3 +8545,359 @@ section.portal-metrics {
 .dark .portal-customer-area .kk-reauth input,
 .dark .portal-customer-area .ka-filters input,
 .dark .portal-customer-area .portal-field input { background: var(--p-surface-raised); color: var(--p-ink); border-color: var(--p-line); }
+
+/* =========================================================================
+ * Izbor datuma (DateField / DateRangeField)
+ * Vidljivo dd/mm/gggg, interno ISO. Samo --p-* promenljive, pa važi i za
+ * tamnu temu dela za kupce (html.dark redefiniše iste promenljive).
+ * ====================================================================== */
+.pd-field {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  align-content: start;
+  min-width: 0;
+}
+.pd-label {
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+.pd-control {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-surface);
+  transition: border-color 120ms, box-shadow 120ms;
+}
+.pd-control:focus-within {
+  border-color: var(--p-ink);
+  box-shadow: 0 0 0 3px oklch(0.56 0.205 26 / 0.12);
+}
+.pd-control[data-invalid="true"] {
+  border-color: var(--p-red);
+}
+.pd-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0 10px;
+  color: var(--p-ink);
+  border: 0;
+  background: transparent;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  outline: none;
+}
+.pd-input::placeholder {
+  color: var(--p-faint);
+  letter-spacing: 0.04em;
+}
+.pd-input:disabled {
+  color: var(--p-faint);
+  cursor: not-allowed;
+}
+.pd-clear,
+.pd-btn {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 100%;
+  color: var(--p-muted);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.pd-clear {
+  font-size: 18px;
+  line-height: 1;
+}
+.pd-btn {
+  border-left: 1px solid var(--p-line);
+  border-radius: 0 8px 8px 0;
+}
+.pd-clear:hover,
+.pd-btn:hover,
+.pd-btn[aria-expanded="true"] {
+  color: var(--p-ink);
+  background: var(--p-surface-subtle);
+}
+.pd-clear:focus-visible,
+.pd-btn:focus-visible {
+  outline: 2px solid var(--p-ink);
+  outline-offset: -3px;
+}
+.pd-error,
+.pd-hint {
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+.pd-error {
+  color: var(--p-red-dark);
+  font-weight: 600;
+}
+.pd-hint {
+  color: var(--p-faint);
+}
+
+/* Kalendar */
+.pd-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 60;
+  width: 296px;
+  padding: 12px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  background: var(--p-surface-raised, var(--p-surface));
+  box-shadow: 0 18px 40px oklch(0.13 0.02 255 / 0.18), 0 2px 6px oklch(0.13 0.02 255 / 0.08);
+}
+.pd-pop[data-polozaj="gore"] {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+.pd-pop[data-desno="true"] {
+  left: auto;
+  right: 0;
+}
+/* Telefon: donji list preko cele širine, uvek na ekranu. */
+.pd-pop[data-polozaj="list"] {
+  position: fixed;
+  inset: auto 10px max(10px, env(safe-area-inset-bottom)) 10px;
+  top: auto;
+  width: auto;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 14px 14px 10px;
+  z-index: 81;
+}
+.pd-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: oklch(0.13 0.02 255 / 0.32);
+}
+.pd-head {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1.4fr) minmax(0, 1fr) 34px;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.pd-nav {
+  height: 34px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-surface);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+.pd-nav:hover {
+  background: var(--p-surface-subtle);
+}
+.pd-select {
+  height: 34px;
+  min-width: 0;
+  padding: 0 6px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background-color: var(--p-surface);
+  font-size: 13.5px;
+  font-weight: 650;
+}
+.pd-grid {
+  display: grid;
+  gap: 2px;
+}
+.pd-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+}
+.pd-wd {
+  padding: 4px 0;
+  color: var(--p-faint);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.pd-day {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: 40px;
+  color: var(--p-ink);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.pd-day[data-weekend="true"] {
+  color: var(--p-muted);
+}
+.pd-day:hover {
+  background: var(--p-surface-subtle);
+}
+.pd-day[data-today="true"] {
+  border-color: var(--p-red);
+  font-weight: 700;
+}
+.pd-day[data-selected="true"] {
+  color: #fff;
+  border-color: var(--p-red);
+  background: var(--p-red);
+  font-weight: 700;
+}
+.pd-day:focus-visible {
+  outline: 2px solid var(--p-ink);
+  outline-offset: 1px;
+}
+.pd-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--p-line);
+}
+.pd-link {
+  padding: 6px 8px;
+  color: var(--p-ink);
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.pd-link:hover {
+  background: var(--p-surface-subtle);
+}
+.pd-link:focus-visible {
+  outline: 2px solid var(--p-ink);
+}
+
+/* Period */
+.pd-range {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.pd-legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.pd-range-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) min-content minmax(0, 220px);
+  justify-content: start;
+  gap: 10px;
+  align-items: start;
+}
+.pd-range-sep {
+  padding-top: 28px;
+  color: var(--p-faint);
+}
+.pd-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pd-chip {
+  height: 30px;
+  padding: 0 12px;
+  color: var(--p-ink);
+  border: 1px solid var(--p-line);
+  border-radius: 999px;
+  background: var(--p-surface);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pd-chip:hover {
+  border-color: var(--p-line-strong, var(--p-line));
+  background: var(--p-surface-subtle);
+}
+.pd-chip[aria-pressed="true"] {
+  color: var(--p-surface);
+  border-color: var(--p-ink);
+  background: var(--p-ink);
+}
+.pd-chip:focus-visible {
+  outline: 2px solid var(--p-red);
+  outline-offset: 2px;
+}
+@media (max-width: 560px) {
+  /* Na telefonu jedno polje u redu — ceo datum uvek stane. */
+  .pd-range-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pd-range-sep {
+    display: none;
+  }
+  .pd-control {
+    height: 44px;
+  }
+  .pd-input {
+    font-size: 16px; /* iOS ne zumira polje od 16px */
+  }
+  .pd-clear,
+  .pd-btn {
+    width: 42px;
+  }
+  .pd-chip {
+    height: 36px;
+  }
+  .pd-day {
+    max-height: 46px;
+    font-size: 15px;
+  }
+}
+/* Forme portala stilizuju svaki `input`; unutar polja za datum okvir nosi .pd-control. */
+.pd-field .pd-control .pd-input,
+.portal-settings-form .pd-field .pd-input,
+.portal-filters .pd-field .pd-input {
+  width: auto;
+  height: 100%;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px 0 0 8px;
+  background: transparent;
+  box-shadow: none;
+}
+.pd-field .pd-input:invalid,
+.pd-field .pd-input:user-invalid {
+  background: transparent;
+  box-shadow: none;
+}
+/* Fokus prikazuje ceo okvir polja (.pd-control:focus-within), ne sam unos. */
+.pd-field .pd-input:focus,
+.pd-field .pd-input:focus-visible {
+  outline: none;
+}
+.portal-settings-form .pd-field .pd-error,
+.pd-field .pd-error {
+  font-size: 12px;
+}

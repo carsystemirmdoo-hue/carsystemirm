@@ -1,3 +1,4 @@
+import { DateRangeField } from "@/components/portal/DateRangeField";
 import { Badge, Metric, PageHeader, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { requireCapability } from "@/lib/authz/session";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
@@ -127,14 +128,7 @@ export default async function DataReadinessPage({
       {/* ---------------------------------------------------------------- */}
       <section className="portal-panel">
         <form className="portal-filters" method="get">
-          <label className="portal-field">
-            <span>Period od</span>
-            <input type="date" name="od" defaultValue={period.od ?? ""} />
-          </label>
-          <label className="portal-field">
-            <span>Period do</span>
-            <input type="date" name="do" defaultValue={period.do ?? ""} />
-          </label>
+          <DateRangeField nameOd="od" nameDo="do" defaultOd={period.od} defaultDo={period.do} />
           <button type="submit" className="portal-button" data-variant="secondary">
             Primenite
           </button>

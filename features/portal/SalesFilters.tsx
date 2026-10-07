@@ -1,3 +1,4 @@
+import { DateRangeField } from "@/components/portal/DateRangeField";
 import { PhaseNotice } from "@/components/portal/PhaseNotice";
 
 export interface FilterOptions {
@@ -55,14 +56,12 @@ export function SalesFilters({
   return (
     <section className="portal-panel">
       <form action={action} method="get" className="portal-settings-form">
-        <label>
-          <span>Period od</span>
-          <input type="date" name="from" defaultValue={applied.from ?? ""} />
-        </label>
-        <label>
-          <span>Period do</span>
-          <input type="date" name="to" defaultValue={applied.to ?? ""} />
-        </label>
+        <DateRangeField
+          nameOd="from"
+          nameDo="to"
+          defaultOd={applied.from}
+          defaultDo={applied.to}
+        />
         <label>
           <span>Kupac</span>
           <select name="kupac" defaultValue={applied.kupac ?? ""}>

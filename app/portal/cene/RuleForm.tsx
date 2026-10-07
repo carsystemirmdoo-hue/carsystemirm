@@ -1,5 +1,7 @@
 "use client";
 
+import { DateField } from "@/components/portal/DateField";
+
 import { useActionState, useState } from "react";
 import { Field, PortalButton } from "@/components/portal/PortalPrimitives";
 import {
@@ -188,15 +190,12 @@ export function RuleForm({
           </Field>
         )}
 
-        <Field label="Važi od" required>
-          <input type="date" name="effectiveFrom" required />
-        </Field>
-        <Field
+        <DateField name="effectiveFrom" label="Važi od" required />
+        <DateField
+          name="effectiveTo"
           label="Važi do"
           hint="Prazno = bez roka. Oba datuma su uključena u važenje."
-        >
-          <input type="date" name="effectiveTo" />
-        </Field>
+        />
 
         <Field label="Razlog predloga" required hint="Upisuje se u trag revizije.">
           <input type="text" name="reason" minLength={3} maxLength={500} required />

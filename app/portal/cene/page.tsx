@@ -1,3 +1,4 @@
+import { DateField } from "@/components/portal/DateField";
 import Link from "next/link";
 import { asc } from "drizzle-orm";
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
@@ -149,10 +150,7 @@ export default async function PricesOverviewPage({
               ))}
             </select>
           </label>
-          <label className="portal-field">
-            <span>Na dan</span>
-            <input type="date" name="datum" defaultValue={params.datum ?? ""} />
-          </label>
+          <DateField name="datum" label="Na dan" defaultValue={params.datum ?? ""} />
           <button className="portal-button" type="submit" data-variant="primary">
             <span>Proverite</span>
           </button>

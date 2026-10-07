@@ -1,3 +1,4 @@
+import { DateRangeField } from "@/components/portal/DateRangeField";
 import Link from "next/link";
 import { DOCUMENT_KIND_LABELS, srDate, srMoney } from "@/components/customer/account-format";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
@@ -55,14 +56,7 @@ export default async function CustomerInvoicesPage({
           <span>Pretraga</span>
           <input type="search" name="q" defaultValue={filter.q ?? ""} placeholder="Broj fakture, šifra ili naziv artikla" />
         </label>
-        <label>
-          <span>Od</span>
-          <input type="date" name="od" defaultValue={filter.from ?? ""} />
-        </label>
-        <label>
-          <span>Do</span>
-          <input type="date" name="do" defaultValue={filter.to ?? ""} />
-        </label>
+        <DateRangeField nameOd="od" nameDo="do" defaultOd={filter.from} defaultDo={filter.to} />
         <div className="ka-filter-actions">
           <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
           {filtered ? <Link href="/kupac/fakture" className="portal-button" data-variant="ghost">Poništite</Link> : null}

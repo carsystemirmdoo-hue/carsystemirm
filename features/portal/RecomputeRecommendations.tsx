@@ -1,5 +1,7 @@
 "use client";
 
+import { DateField } from "@/components/portal/DateField";
+
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { recomputeAction, type RecomputeState } from "@/app/portal/preporuke/actions";
@@ -57,16 +59,13 @@ export function RecomputeRecommendations({
      * proverava server akcija i vraća jasnu poruku ispod polja.
      */
     <form action={action} className="portal-inline-form portal-recompute-form" noValidate>
-      <label className="portal-field" style={{ margin: 0 }}>
-        <span>Na dan</span>
-        <input
-          type="date"
-          name="asOfDate"
-          value={asOfDate}
-          onChange={(e) => setAsOfDate(e.target.value)}
-          aria-invalid={state.error ? true : undefined}
-        />
-      </label>
+      <DateField
+        name="asOfDate"
+        label="Na dan"
+        value={asOfDate}
+        onChange={(v) => setAsOfDate(v)}
+        error={null}
+      />
       <Dugme disabled={disabled} />
       {state.error ? (
         <small role="alert" data-tone="danger">

@@ -39,7 +39,14 @@
 param(
   [Parameter(Mandatory)] [string]$InvoiceFolder,
   [Parameter(Mandatory)] [string]$RunAsAccount,
-  [string]$PackagePath
+  [string]$PackagePath,
+  <#
+    Jedini Windows nalog je i nalog pod kojim se fakture izvoze (docs/b2b/49).
+    Taj nalog MORA imati upis u folder. U ovom rezimu nalazi o upisu nisu
+    FAIL nego upozorenje — uz izricitu napomenu da Windows tada NE sprecava
+    konektor da pise; konektor samo cita po svom kodu.
+  #>
+  [switch]$JedanNalogSaUAC
 )
 
 $ErrorActionPreference = 'Stop'
@@ -242,16 +249,32 @@ function Get-EffectiveWriteVerdict {
 }
 
 $verdikt = Get-EffectiveWriteVerdict -Acl $acl -RunAsSid $runAsSid -RunAsAccountIme $RunAsAccount
-switch ($verdikt.Verdict) {
-  'has-write' {
-    foreach ($d in $verdikt.Detalji) { Write-Result 'FAIL' $d }
+$jedanNalog = $null
+if ($JedanNalogSaUAC -and $verdikt.Verdict -ne 'clean') {
+  $jedanNalog = Test-JedanNalogSaUAC -AccountName $RunAsAccount
+  if (-not $jedanNalog.Dozvoljeno) {
+    Write-Result 'FAIL' "-JedanNalogSaUAC nije ispunjen: $($jedanNalog.Razlog). Provera upisa ostaje stroga."
+    $jedanNalog = $null
   }
-  'not-verified' {
-    foreach ($d in $verdikt.Detalji) { Write-Result 'WARN' $d }
-    Write-Result 'FAIL' 'NOT VERIFIED / FAIL-CLOSED — efektivno odsustvo write prava se ne može pouzdano dokazati samo ACL inspekcijom (nerazrešivo grupno članstvo). Rezultat je FAIL, ne pokušaj upisa u pravi folder.'
-  }
-  'clean' {
-    Write-Result 'PASS' "'$RunAsAccount' nema Write/Modify/Delete/Create/ChangePermissions/TakeOwnership/FullControl (provereno uključujući poznata lokalna grupna članstva)."
+}
+if ($jedanNalog) {
+  foreach ($d in $verdikt.Detalji) { Write-Result 'WARN' "(rezim jednog naloga) $d" }
+  Write-Result 'WARN' ("REZIM JEDNOG NALOGA: '$RunAsAccount' je i nalog pod kojim se fakture izvoze, pa ima pravo upisa u ovaj folder. " +
+    'Windows u ovom rezimu NE sprecava konektor da pise. Konektor po svom kodu samo cita PDF-ove (ne menja, ne brise, ne premesta); ' +
+    'ACL foldera se ne menja i upis za svakodnevni rad ostaje.')
+}
+else {
+  switch ($verdikt.Verdict) {
+    'has-write' {
+      foreach ($d in $verdikt.Detalji) { Write-Result 'FAIL' $d }
+    }
+    'not-verified' {
+      foreach ($d in $verdikt.Detalji) { Write-Result 'WARN' $d }
+      Write-Result 'FAIL' 'NOT VERIFIED / FAIL-CLOSED — efektivno odsustvo write prava se ne može pouzdano dokazati samo ACL inspekcijom (nerazrešivo grupno članstvo). Rezultat je FAIL, ne pokušaj upisa u pravi folder.'
+    }
+    'clean' {
+      Write-Result 'PASS' "'$RunAsAccount' nema Write/Modify/Delete/Create/ChangePermissions/TakeOwnership/FullControl (provereno uključujući poznata lokalna grupna članstva)."
+    }
   }
 }
 

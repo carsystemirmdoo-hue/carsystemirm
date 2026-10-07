@@ -298,6 +298,20 @@ test("[hardening] bin/connector.mjs: --config i --packaged se skidaju pre main()
 
 /* --- Korekcija #3: probni upis je uklonjen iz production skripte. -------- */
 
+test("[hardening] verify-invoice-folder: režim jednog naloga samo kroz Test-JedanNalogSaUAC; poruka ne tvrdi da Windows sprečava upis", async () => {
+  const tekst = (await citajSve())["verify-invoice-folder.ps1"];
+  assert.match(tekst, /\[switch\]\$JedanNalogSaUAC/);
+  const blok = tekst.slice(tekst.indexOf("$jedanNalog = $null"), tekst.indexOf("Provera je isključivo"));
+  assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
+  assert.match(blok, /if \(-not \$jedanNalog\.Dozvoljeno\) \{\s*Write-Result 'FAIL'/);
+  assert.match(blok, /Windows u ovom rezimu NE sprecava konektor da pise/);
+  assert.doesNotMatch(blok, /ne mo(ž|z)e da pi(š|s)e|onemogu(ć|c)en upis/i, "ne sme se tvrditi da OS sprečava upis");
+  // Strogi put bez režima ostaje: upis je FAIL.
+  assert.match(blok, /'has-write' \{\s*foreach \(\$d in \$verdikt\.Detalji\) \{ Write-Result 'FAIL' \$d \}/);
+  const podesi = await readFile(p("podesi.ps1"), "utf8");
+  assert.match(podesi, /verify-invoice-folder\.ps1'\) -InvoiceFolder \$k\.izvorniFolder -RunAsAccount \$nalog -PackagePath \$cilj -JedanNalogSaUAC/);
+});
+
 test("[hardening] verify-invoice-folder.ps1 nikad ne otvara/prikazuje sadržaj fajla", async () => {
   const tekst = (await citajSve())["verify-invoice-folder.ps1"];
   assert.doesNotMatch(tekst, /Get-Content\s+-LiteralPath\s+\$(full|InvoiceFolder)\b/);

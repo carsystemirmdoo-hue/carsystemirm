@@ -14,7 +14,10 @@ ne briše i ne premešta fajlove. Izvoz iz BizniSofta ostaje kao do sada.
   deny only" — UAC radi). Kancelarija sa jednim takvim nalogom: sve skripte
   se pokreću sa **`-JedanNalogSaUAC`**, iz „Run as administrator" prozora
   **tog istog naloga**; zadatak i dalje radi sa ograničenim tokenom (bez
-  povišenih prava). Nov nalog nije potreban.
+  povišenih prava). Nov nalog nije potreban. Isti nalog ima i **pravo upisa**
+  u folder faktura (Tamara izvozi): provera foldera to prijavljuje kao
+  upozorenje. Konektor po svom kodu samo čita PDF-ove — Windows ga u ovom
+  režimu ne sprečava da piše; ACL foldera se ne menja.
 - Zadatak radi **radnim danima svakog sata od 08:00 do 19:00** (poslednji
   ciklus oko 19:02), **dok je taj nalog prijavljen** (zaključan ekran ne
   smeta; pregledač nije potreban). Faktura izvezena u 10:20 stiže u portal u

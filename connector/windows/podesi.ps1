@@ -10,7 +10,8 @@
   Koraci:
     1. folder stanja (%LOCALAPPDATA%\CarsystemConnector) - harden-state-dir.ps1;
     2. kljuc uredjaja kroz DPAPI (init) - ispisuje OTISAK za registraciju u portalu;
-    3. provera foldera faktura - verify-invoice-folder.ps1 (samo citanje);
+    3. provera foldera faktura - verify-invoice-folder.ps1 (samo citanje ACL-a;
+       u rezimu jednog naloga upis istog naloga je ocekivan i prijavljuje se kao upozorenje);
     4. test veze (heartbeat) - ako uredjaj jos nije aktiviran u portalu, staje
        ovde sa uputstvom; posle aktivacije pokrenuti podesi.ps1 ponovo;
     5. prvi prolaz (run-once dok ne ostane nista): dokumenti izdati pre
@@ -79,9 +80,14 @@ if (-not $kljuc.Json) { Stani "Javni kljuc nije procitan: $($kljuc.Tekst)" }
 
 # ------------------------------------------------- 3. folder faktura (citanje)
 $global:LASTEXITCODE = 0
-& (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj
+if ($JedanNalogSaUAC) {
+  & (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj -JedanNalogSaUAC
+} else {
+  & (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj
+}
 if ($global:LASTEXITCODE -ne 0) { Stani 'Provera foldera faktura nije prosla (vidi [FAIL] iznad). Konektor ne sme da pise u taj folder.' }
-Ok 'Folder faktura: konektor ga samo cita.'
+if ($JedanNalogSaUAC) { Ok 'Folder faktura: isti nalog ima upis (Tamarin rad); konektor po svom kodu samo cita - Windows to u ovom rezimu ne sprecava.' }
+else { Ok 'Folder faktura: nalog konektora nema pravo upisa; konektor samo cita.' }
 
 # ----------------------------------------------------------- 4. test veze
 $hb = Konektor @('heartbeat')

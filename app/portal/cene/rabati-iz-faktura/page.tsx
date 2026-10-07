@@ -74,6 +74,7 @@ export default async function RebatesFromInvoicesPage() {
         eyebrow="Finansije"
         title="Rabati po grupama iz faktura"
         description="Priprema uslova iz potvrđenih računa-otpremnica: samo procenat rabata na stavci, nikad istorijska cena. Rezultat je predlog sa dokazima — važi tek posle odobrenja i unosa u BizniSoft."
+        actions={<Link className="rr-link" href="/portal/cene/rabati-iz-faktura/kupci">Pregled po kupcu →</Link>}
       />
       <section className="portal-panel">
         <div className="kk-pricelist" data-kind={dataset.kind === "demo" ? "demo" : "off"}>

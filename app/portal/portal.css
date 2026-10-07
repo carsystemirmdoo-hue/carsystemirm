@@ -8901,3 +8901,42 @@ section.portal-metrics {
 .pd-field .pd-error {
   font-size: 12px;
 }
+
+/* Pregled rabata po kupcu (rr-) */
+.rr-link { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border: 1px solid var(--p-line); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font-size: 13px; font-weight: 650; text-decoration: none; }
+.rr-link:hover { border-color: var(--p-ink); }
+.rr-filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 14px 20px; border-bottom: 1px solid var(--p-line); }
+.rr-filters label { display: grid; gap: 4px; font-size: 12px; color: var(--p-muted); font-weight: 600; }
+.rr-filters input, .rr-filters select { height: 36px; min-width: 180px; padding: 0 10px; border: 1px solid var(--p-line); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font-size: 14px; }
+.rr-filters input { min-width: 240px; }
+.rr-filters button { height: 36px; padding: 0 16px; border: 1px solid var(--p-ink); border-radius: 6px; background: var(--p-ink); color: var(--p-surface); font-size: 13px; font-weight: 700; cursor: pointer; }
+.rr-table th small, .rr-table td small, .rr-block td small, .rr-block th small { display: block; margin-top: 2px; color: var(--p-muted); font-size: 12px; font-weight: 400; }
+.rr-table th a { color: var(--p-ink); font-weight: 650; }
+.rr-exc { display: flex; flex-wrap: wrap; gap: 4px; }
+.rr-exc span { padding: 2px 7px; border-radius: 999px; background: var(--p-bg); border: 1px solid var(--p-line); font-size: 12px; white-space: nowrap; }
+.rr-exc span[data-kind="akcija"] { background: oklch(0.95 0.06 85); border-color: oklch(0.88 0.08 85); }
+.rr-exc span[data-kind="nula"] { background: oklch(0.95 0.04 27); border-color: oklch(0.88 0.06 27); }
+.rr-metrics .portal-metric-context a { color: inherit; }
+.rr-status { font-size: 20px; }
+.rr-banner { padding: 10px 14px; border: 1px solid oklch(0.88 0.08 85); border-radius: 8px; background: oklch(0.97 0.04 85); }
+.rr-three { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.rr-three > [data-block="istorija"] { grid-column: 1 / -1; }
+.rr-three > .portal-panel { margin: 0; }
+.rr-block { border-top: 4px solid var(--p-line); }
+.rr-block[data-block="istorija"] { border-top-color: oklch(0.6 0.02 250); }
+.rr-block[data-block="predlog"] { border-top-color: oklch(0.65 0.12 250); }
+.rr-block[data-block="odobreno"] { border-top-color: oklch(0.6 0.13 150); }
+.rr-step { display: block; margin-bottom: 2px; color: var(--p-muted); font-size: 11px; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; }
+.rr-plain { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.rr-plain small { display: block; color: var(--p-muted); font-size: 12px; }
+.rr-sub { margin: 14px 0 6px; font-size: 13px; }
+.rr-change { color: oklch(0.45 0.12 60) !important; font-weight: 600 !important; }
+.rr-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.rr-chips a { padding: 5px 10px; border: 1px solid var(--p-line); border-radius: 999px; color: var(--p-ink); font-size: 12px; text-decoration: none; white-space: nowrap; }
+.rr-chips a[aria-current="true"] { border-color: var(--p-ink); background: var(--p-ink); color: var(--p-surface); }
+.rr-details summary { padding: 14px 20px; cursor: pointer; font-weight: 700; }
+@media (max-width: 860px) { .rr-three { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .rr-filters { padding: 12px 14px; }
+  .rr-filters label, .rr-filters input, .rr-filters select, .rr-filters button { width: 100%; min-width: 0; }
+}

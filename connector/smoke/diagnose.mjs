@@ -141,8 +141,25 @@ export async function ucitajKanalAdaptera() {
   for (const put of kandidati) {
     if (!existsSync(put)) continue;
     const modul = await import(pathToFileURL(put).href);
+    const uB64 = (x) => Buffer.from(x).toString("base64");
     return {
-      pokreni: (skripta, ulaz) => modul.pokreniPowerShell(skripta, ulaz),
+      // Produkcijski kanal: nativni DPAPI u ovom procesu (zastiti → otkljucaj), bez PowerShell-a.
+      pokreni: async (_program, ulaz) =>
+        uB64(await modul.dpapiOperacija("otkljucaj", await modul.dpapiOperacija("zastiti", Buffer.from(ulaz, "base64")))),
+      ucitaj: async () => {
+        await modul.ucitajNativni();
+      },
+      // Izmenjen blob mora biti odbijen; vraća se samo kod greške.
+      izmenjenBlob: async () => {
+        const blob = Buffer.from(await modul.dpapiOperacija("zastiti", Buffer.from("cs-dpapi-izmena")));
+        blob[blob.length - 1] ^= 0xff;
+        try {
+          await modul.dpapiOperacija("otkljucaj", blob);
+          return null;
+        } catch (e) {
+          return e?.code ?? null;
+        }
+      },
       proveri: () => modul.proveri(),
     };
   }
@@ -150,7 +167,7 @@ export async function ucitajKanalAdaptera() {
 }
 
 export const MEHANIZMI = [
-  { id: "spawn-stdin", opis: "spawn + stdin (put DPAPI adaptera)", pokreni: spawnStdin },
+  { id: "spawn-stdin", opis: "spawn + stdin", pokreni: spawnStdin },
   { id: "spawnSync-input", opis: "spawnSync + input (pao sa EINVAL)", pokreni: sinhroniInput },
   { id: "spawnSync-command", opis: "spawnSync + jednolinijski -Command", pokreni: bezStdina },
 ];

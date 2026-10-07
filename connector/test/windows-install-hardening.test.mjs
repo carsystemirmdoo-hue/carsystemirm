@@ -41,7 +41,7 @@ import test from "node:test";
 const WIN_DIR = fileURLToPath(new URL("../windows/", import.meta.url));
 const p = (name) => join(WIN_DIR, name);
 
-const SKRIPTE = ["PathGuards.ps1", "harden-install-dir.ps1", "verify-invoice-folder.ps1", "task.ps1"];
+const SKRIPTE = ["PathGuards.ps1", "harden-install-dir.ps1", "verify-invoice-folder.ps1", "task.ps1", "instaliraj.ps1", "proba-zadatka.ps1", "Zadaci.ps1"];
 
 async function citajSve() {
   const sadrzaji = await Promise.all(SKRIPTE.map((s) => readFile(p(s), "utf8")));
@@ -188,8 +188,8 @@ test("[hardening] task.ps1: -Mode je obavezan za install/uninstall, bez podrazum
   assert.match(tekst, /\[ValidateSet\('Production',\s*'Smoke'\)\]\s*\n\s*\[string\]\$Mode\s*,/, "Mode ne sme imati podrazumevanu vrednost");
   assert.match(
     tekst,
-    /if \(\$Action -in @\('install',\s*'uninstall'\)\s+-and\s+-not\s+\$Mode\)\s*\{\s*throw/,
-    "install/uninstall bez -Mode moraju baciti grešku PRE bilo koje provere",
+    /if \(\$Action -in @\('install',\s*'uninstall',\s*'run'\)\s+-and\s+-not\s+\$Mode\)\s*\{\s*throw/,
+    "install/uninstall/run bez -Mode moraju baciti grešku PRE bilo koje provere",
   );
 });
 
@@ -238,17 +238,97 @@ test("[hardening] task.ps1: SVAKA Production provera baca (throw) pre Register-S
   assert.doesNotMatch(blokProdukcije, /Write-Warn/, "Production blok ne sme koristiti Write-Warn — sve mora biti blokirajuće");
 });
 
-test("[hardening] task.ps1: -JedanNalogSaUAC dozvoljava administratorski nalog SAMO uz isti nalog i uključen UAC", async () => {
+test("[hardening] task.ps1: -JedanNalogSaUAC dozvoljava administratorski nalog SAMO kroz Test-JedanNalogSaUAC", async () => {
   const tekst = (await citajSve())["task.ps1"];
   const blok = tekst.slice(tekst.indexOf("if ($jeAdmin) {"), tekst.indexOf("if ($Apply -and -not (Test-CurrentProcessIsElevated))"));
-  assert.match(blok, /EnableLUA -eq 1/);
-  assert.match(blok, /ConsentPromptBehaviorAdmin -ne 0/);
-  assert.match(blok, /WindowsIdentity\]::GetCurrent\(\)\.User\.Value/);
-  assert.match(blok, /if \(\$JedanNalogSaUAC -and \$uacUkljucen -and \$runAsJeTekuci\)/);
-  // Bez prekidača, ili kada uslov ne važi, ostaje blokirajuće odbijanje.
+  assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
+  assert.match(blok, /if \(\$JedanNalogSaUAC -and \$jedan\.Dozvoljeno\)/);
   assert.equal((blok.match(/Write-Fail-Production/g) ?? []).length, 2);
-  // Zadatak i dalje sa ograničenim tokenom.
   assert.match(tekst, /-LogonType Interactive -RunLevel Limited/);
+});
+
+test("[hardening] PathGuards: UAC i jedan nalog — StrictMode-bezbedno čitanje registra", async () => {
+  const pg = (await citajSve())["PathGuards.ps1"];
+  assert.match(pg, /PSObject\.Properties\['EnableLUA'\]/);
+  assert.match(pg, /PSObject\.Properties\['ConsentPromptBehaviorAdmin'\]/);
+  assert.match(pg, /\(\$lua -eq 1\) -and \(\$null -ne \$saglasnost\) -and \(\$saglasnost -ne 0\)/);
+  assert.match(pg, /GetCurrent\(\)\.User\.Value/);
+});
+
+test("[hardening] rezultat funkcije čiji se .Count čita je uvek niz (@(...)) — StrictMode na 5.1", async () => {
+  const sve = await citajSve();
+  for (const [ime, tekst] of Object.entries(sve)) {
+    for (const m of tekst.matchAll(/\$(\w+)\.Count\b/g)) {
+      const dodele = [...tekst.matchAll(new RegExp(`\\$${m[1]}\\s*=\\s*(.+)`, "g"))].map((d) => d[1].trim());
+      for (const rhs of dodele) {
+        if (/^[A-Z][a-z]+-[A-Za-z]+/.test(rhs) && !/^New-Object\b/.test(rhs)) assert.fail(`${ime}: $${m[1]} = ${rhs} — poziv funkcije bez @(...), a čita se .Count`);
+      }
+    }
+  }
+});
+
+test("[hardening] harden-install-dir i instaliraj: jedan nalog samo uz Test-JedanNalogSaUAC; ACL se proverava nezavisno od izlaznog koda", async () => {
+  const sve = await citajSve();
+  const harden = sve["harden-install-dir.ps1"];
+  const blok = harden.slice(harden.indexOf("if ($jeAdmin) {"), harden.indexOf("-Apply zahteva administratorska prava"));
+  assert.match(harden, /\$problemi = @\(Test-EffectivePermissions/);
+  assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
+  assert.equal((blok.match(/exit 1/g) ?? []).length, 2, "oba neispunjena slučaja moraju da prekinu");
+  const inst = sve["instaliraj.ps1"];
+  assert.match(inst, /-Apply -JedanNalogSaUAC/);
+  assert.match(inst, /\$global:LASTEXITCODE -ne 0/);
+  assert.doesNotMatch(inst, /^\$LASTEXITCODE = 0/m, "lokalna dodela zaklanja izlazni kod");
+  assert.ok(inst.indexOf("Test-PackageDirectoryHardened -Path $cilj") < inst.indexOf("Instalacioni folder je ucvrscen"), "ACL se proverava pre poruke o uspehu");
+});
+
+test("[hardening] nijedna skripta ne dodeljuje vrednost promenljivoj istog imena kao parametar (PowerShell ne razlikuje velika i mala slova)", async () => {
+  /*
+   * Kancelarija 0.3.7: `$action = New-ScheduledTaskAction ...` u task.ps1 je
+   * ISTA promenljiva kao parametar `[ValidateSet(...)] $Action`, pa je
+   * registracija pala sa „MSFT_TaskExecAction is not a valid value for the
+   * Action variable". Validacioni atribut parametra važi za svaku kasniju dodelu.
+   */
+  const { readdir } = await import("node:fs/promises");
+  const NAMERNO = new Set(["instaliraj.ps1:posaljiodDatuma".toLowerCase()]);
+  const nadjeno = [];
+  for (const ime of (await readdir(WIN_DIR)).filter((f) => f.endsWith(".ps1"))) {
+    const tekst = ukloniKomentare(await readFile(p(ime), "utf8"));
+    const blok = /^param\s*\(([\s\S]*?)^\)/m.exec(tekst);
+    if (!blok) continue;
+    const telo = tekst.slice(blok.index + blok[0].length);
+    for (const [, param] of blok[1].matchAll(/\$([A-Za-z_]\w*)/g)) {
+      if (NAMERNO.has(`${ime}:${param}`.toLowerCase())) continue;
+      const dodela = new RegExp(`\\$${param}\\s*=(?!=)`, "i");
+      if (dodela.test(telo)) nadjeno.push(`${ime}: $${param}`);
+    }
+  }
+  assert.deepEqual(nadjeno, [], `dodela parametru (sudar imena): ${nadjeno.join(", ")}`);
+});
+
+test("[hardening] proba-zadatka.ps1 dira SAMO CarsystemProba, akcija je --help, uklanjanje je u finally", async () => {
+  const tekst = ukloniKomentare((await citajSve())["proba-zadatka.ps1"]);
+  assert.match(tekst, /\$TaskName = 'CarsystemProba'/);
+  // Pravi zadatak se samo čita (Get-ZadatakCs), nikad registruje, pokreće ni uklanja.
+  const praviRedovi = tekst.split("\n").filter((r) => /-TaskName 'CarsystemConnector'/.test(r));
+  assert.ok(praviRedovi.length > 0);
+  for (const red of praviRedovi) {
+    assert.match(red, /Get-ZadatakCs/, `pravi zadatak se ne sme menjati: ${red.trim()}`);
+  }
+  // Stanje, pokretanje i uklanjanje kroz Zadaci.ps1 (COM + schtasks), ne CIM.
+  assert.match(tekst, /\. \(Join-Path \$PSScriptRoot 'Zadaci\.ps1'\)/);
+  for (const cmdlet of ["Register-ScheduledTask", "Start-ZadatakCs", "Remove-ZadatakCs", "Get-ZadatakCs -TaskPath $TaskPath"]) {
+    const pozivi = tekst.split("\n").filter((r) => r.includes(cmdlet) && !/'CarsystemConnector'/.test(r));
+    assert.ok(pozivi.length > 0, `${cmdlet} nije pozvan`);
+    for (const red of pozivi) {
+      assert.match(red, /-TaskName \$TaskName/, `${cmdlet} mora ciljati $TaskName: ${red.trim()}`);
+    }
+  }
+  assert.match(tekst, /--packaged --help"/, "akcija mora biti --help");
+  assert.doesNotMatch(tekst, /run-once|heartbeat|\bauto\b|export-key|\binit\b/, "proba ne sme pokretati radne komande");
+  assert.match(tekst, /-RunLevel Limited/);
+  assert.doesNotMatch(tekst, /New-ScheduledTaskTrigger/, "proba nema okidač — ne pokreće se sama");
+  assert.match(tekst, /finally\s*\{[\s\S]*Ukloni-Probu/, "uklanjanje mora biti u finally");
+  assert.doesNotMatch(tekst, /powershell(\.exe)?\s+-|EncodedCommand|ExecutionPolicy/i, "proba ne pokreće novi PowerShell");
 });
 
 test("[hardening] task.ps1: Production zahteva config.json u INSTALACIONOM folderu, ne u folderu stanja", async () => {
@@ -267,6 +347,20 @@ test("[hardening] bin/connector.mjs: --config i --packaged se skidaju pre main()
 });
 
 /* --- Korekcija #3: probni upis je uklonjen iz production skripte. -------- */
+
+test("[hardening] verify-invoice-folder: režim jednog naloga samo kroz Test-JedanNalogSaUAC; poruka ne tvrdi da Windows sprečava upis", async () => {
+  const tekst = (await citajSve())["verify-invoice-folder.ps1"];
+  assert.match(tekst, /\[switch\]\$JedanNalogSaUAC/);
+  const blok = tekst.slice(tekst.indexOf("$jedanNalog = $null"), tekst.indexOf("Provera je isključivo"));
+  assert.match(blok, /Test-JedanNalogSaUAC -AccountName \$RunAsAccount/);
+  assert.match(blok, /if \(-not \$jedanNalog\.Dozvoljeno\) \{\s*Write-Result 'FAIL'/);
+  assert.match(blok, /Windows u ovom rezimu NE sprecava konektor da pise/);
+  assert.doesNotMatch(blok, /ne mo(ž|z)e da pi(š|s)e|onemogu(ć|c)en upis/i, "ne sme se tvrditi da OS sprečava upis");
+  // Strogi put bez režima ostaje: upis je FAIL.
+  assert.match(blok, /'has-write' \{\s*foreach \(\$d in \$verdikt\.Detalji\) \{ Write-Result 'FAIL' \$d \}/);
+  const podesi = await readFile(p("podesi.ps1"), "utf8");
+  assert.match(podesi, /verify-invoice-folder\.ps1'\) -InvoiceFolder \$k\.izvorniFolder -RunAsAccount \$nalog -PackagePath \$cilj -JedanNalogSaUAC/);
+});
 
 test("[hardening] verify-invoice-folder.ps1 nikad ne otvara/prikazuje sadržaj fajla", async () => {
   const tekst = (await citajSve())["verify-invoice-folder.ps1"];
@@ -408,6 +502,29 @@ function pokreniTask(args) {
   );
 }
 
+/**
+ * Poziv koji MORA biti odbijen — i to baš od same skripte.
+ *
+ * Golo `assert.throws` prolazi i kada proces prekine antivirus ili politika
+ * (kancelarija d5e03d1: Avast PSD11 na task.ps1 uz zeleni smoke). Ovde se traži
+ * izlaz TAČNO 1 (neuhvaćen `throw` u -File režimu) i oznaka iz poruke skripte.
+ */
+async function odbijeno(t, skripta, args, oznaka) {
+  const { oceniPozivSkripte } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+  const pocetak = new Date();
+  const r = spawnSync(
+    "powershell.exe",
+    ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", p(skripta), ...args],
+    { encoding: "utf8", timeout: 120_000 },
+  );
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 1, oznaka, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`${skripta} (očekivano odbijanje): ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `${skripta}: ${o.kod}; ${o.detalj}`);
+}
+
 async function napraviLazniPaket(baza) {
   const paket = join(baza, "paket");
   await mkdir(join(paket, "connector", "bin"), { recursive: true });
@@ -440,13 +557,11 @@ test("[WIN] 2/6 — task.ps1 dry-run (Smoke) ne registruje zadatak, izlaz nosi [
     const paket = await napraviLazniPaket(baza);
     const izlaz = pokreniTask(["-Action", "install", "-Mode", "Smoke", "-PackagePath", paket, "-RunAsAccount", process.env.USERNAME]);
     assert.match(izlaz, /\[dry-run\]/);
-    const postoji = execFileSync(
-      "powershell.exe",
-      ["-NoProfile", "-Command",
-       "if (Get-ScheduledTask -TaskName CarsystemConnectorSMOKE -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
-      { encoding: "utf8" },
-    ).trim();
-    assert.equal(postoji, "NE", "dry-run je registrovao zadatak");
+    // schtasks.exe, ne Get-ScheduledTask (CIM ume da vrati 0x80070002 = lažno „ne postoji").
+    const { zadatakPremaSchtasks } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+    const z = zadatakPremaSchtasks(spawnSync, "\\Carsystem\\CarsystemConnectorSMOKE");
+    assert.equal(z.greska, null, "schtasks.exe se nije pokrenuo");
+    assert.equal(z.postoji, false, "dry-run je registrovao zadatak");
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -458,10 +573,8 @@ test("[WIN] 3/6 — odbija koren diska, UNC i profil korisnika kao instalacioni 
   if (guard(t)) return;
   const zabranjene = ["C:\\", "\\\\server\\share\\pkg", process.env.USERPROFILE];
   for (const putanja of zabranjene) {
-    assert.throws(
-      () => pokreniHardening(["-PackagePath", putanja, "-RunAsAccount", process.env.USERNAME]),
-      `putanja '${putanja}' je trebalo da bude odbijena`,
-    );
+    await odbijeno(t, "harden-install-dir.ps1", ["-PackagePath", putanja, "-RunAsAccount", process.env.USERNAME],
+      /Instalacioni folder odbijen/);
   }
 });
 
@@ -472,7 +585,8 @@ test("[WIN] 3/6 — odbija reparse-point (junction) umesto pravog foldera", asyn
     const stvarni = await napraviLazniPaket(baza);
     const junction = join(baza, "precica");
     execFileSync("cmd.exe", ["/c", "mklink", "/J", junction, stvarni], { encoding: "utf8" });
-    assert.throws(() => pokreniHardening(["-PackagePath", junction, "-RunAsAccount", process.env.USERNAME]));
+    await odbijeno(t, "harden-install-dir.ps1", ["-PackagePath", junction, "-RunAsAccount", process.env.USERNAME],
+      /Instalacioni folder odbijen/);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -483,7 +597,7 @@ test("[WIN] 3/6 — task.ps1 install bez -Mode se odbija pre bilo koje provere",
   const baza = await mkdtemp(join(tmpdir(), "cs-task-nomode-"));
   try {
     const paket = await napraviLazniPaket(baza);
-    assert.throws(() => pokreniTask(["-Action", "install", "-PackagePath", paket]));
+    await odbijeno(t, "task.ps1", ["-Action", "install", "-PackagePath", paket], /-Mode je obavezan/);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -494,9 +608,8 @@ test("[WIN] 3/6 — task.ps1 -Mode Production odbija SYSTEM kao RunAsAccount", a
   const baza = await mkdtemp(join(tmpdir(), "cs-task-system-"));
   try {
     const paket = await napraviLazniPaket(baza);
-    assert.throws(() =>
-      pokreniTask(["-Action", "install", "-Mode", "Production", "-PackagePath", paket, "-RunAsAccount", "NT AUTHORITY\\SYSTEM"]),
-    );
+    // Prva stroga provera koja pukne nosi oznaku `[Production]` (temp folder je u profilu).
+    await odbijeno(t, "task.ps1", ["-Action", "install", "-Mode", "Production", "-PackagePath", paket, "-RunAsAccount", "NT AUTHORITY\\SYSTEM"], /\[Production\]/);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -509,9 +622,7 @@ test("[WIN] 3/6 — task.ps1 -Mode Production odbija neučvršćen (fresh) insta
     const paket = await napraviLazniPaket(baza);
     // Svež temp folder nasleđuje dozvole roditelja — Test-PackageDirectoryHardened
     // vraća FAIL PRE nego što se ijedan kasniji uslov (config.json, state dir) proveri.
-    assert.throws(() =>
-      pokreniTask(["-Action", "install", "-Mode", "Production", "-PackagePath", paket, "-RunAsAccount", process.env.USERNAME]),
-    );
+    await odbijeno(t, "task.ps1", ["-Action", "install", "-Mode", "Production", "-PackagePath", paket, "-RunAsAccount", process.env.USERNAME], /\[Production\]/);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -523,14 +634,9 @@ test("[WIN] 3/6 — verify-invoice-folder.ps1 nema -ProbeWrite (odbačen nepozna
   try {
     const folder = join(baza, "fakture");
     await mkdir(folder, { recursive: true });
-    assert.throws(() =>
-      execFileSync(
-        "powershell.exe",
-        ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", p("verify-invoice-folder.ps1"),
-         "-InvoiceFolder", folder, "-RunAsAccount", process.env.USERNAME, "-ProbeWrite"],
-        { encoding: "utf8" },
-      ),
-    );
+    await odbijeno(t, "verify-invoice-folder.ps1",
+      ["-InvoiceFolder", folder, "-RunAsAccount", process.env.USERNAME, "-ProbeWrite"],
+      /ProbeWrite|NamedParameterNotFound/);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }
@@ -610,7 +716,9 @@ test("[WIN] 5/6 — -Apply bez administratorskih prava se bezbedno odbija (harde
   const baza = await mkdtemp(join(tmpdir(), "cs-harden-noadmin-"));
   try {
     const paket = await napraviLazniPaket(baza);
-    assert.throws(() => pokreniHardening(["-PackagePath", paket, "-RunAsAccount", process.env.USERNAME, "-Apply"]));
+    // Odbijanje skripte (FAIL red), ne prekid procesa spolja.
+    await odbijeno(t, "harden-install-dir.ps1", ["-PackagePath", paket, "-RunAsAccount", process.env.USERNAME, "-Apply"],
+      /\[FAIL\]/);
   } finally {
     await rm(baza, { recursive: true, force: true });
   }

@@ -39,11 +39,16 @@ else {
   if ($s.upozorenjeGodina) { Write-Host "[!!] $($s.upozorenjeGodina.uputstvo) Novi folder: $($s.upozorenjeGodina.folder)" -ForegroundColor Yellow }
 }
 
-$zadatak = Get-ScheduledTask -TaskName 'CarsystemConnector' -ErrorAction SilentlyContinue
-if (-not $zadatak) { Write-Host '[!!] Zakazani zadatak CarsystemConnector nije registrovan.' -ForegroundColor Yellow }
-else {
-  $info = $zadatak | Get-ScheduledTaskInfo
-  $rezultat = if ($info.LastTaskResult -eq 0) { 'uspeh (0)' } else { "kod $($info.LastTaskResult)" }
-  Write-Host "Zakazani zadatak: poslednje pokretanje $($info.LastRunTime), rezultat $rezultat, sledece $($info.NextRunTime), nalog $($zadatak.Principal.UserId)"
+# Stanje zadatka kroz Task Scheduler COM + schtasks.exe, ne kroz Get-ScheduledTask (CIM):
+# na kancelarijskom racunaru CIM vraca 0x80070002, sto je ranije izgledalo kao "nije registrovan".
+. (Join-Path $PSScriptRoot 'Zadaci.ps1')
+$z = $null
+try { $z = Get-ZadatakCs -TaskPath '\Carsystem\' -TaskName 'CarsystemConnector' }
+catch { Write-Host "[!!] Stanje zakazanog zadatka NIJE MOGUCE UTVRDITI: $($_.Exception.Message)" -ForegroundColor Yellow }
+if ($z -and -not $z.Postoji) { Write-Host '[!!] Zakazani zadatak CarsystemConnector nije registrovan.' -ForegroundColor Yellow }
+elseif ($z -and $z.Izvor -ne 'com') { Write-Host "Zakazani zadatak postoji (potvrdio schtasks.exe); poslednji rezultat nije procitan." }
+elseif ($z) {
+  $rezultat = if ($z.LastTaskResult -eq 0) { 'uspeh (0)' } else { 'kod {0} (0x{1:X8})' -f $z.LastTaskResult, ([int64]$z.LastTaskResult -band [int64]4294967295) }
+  Write-Host "Zakazani zadatak: stanje $($z.Stanje), poslednje pokretanje $($z.LastRunTime), rezultat $rezultat, sledece $($z.NextRunTime), nalog $($z.UserId)"
 }
 Write-Host "Dnevnik: $env:LOCALAPPDATA\CarsystemConnector\ (connector.log)"

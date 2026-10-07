@@ -14,7 +14,10 @@ ne briše i ne premešta fajlove. Izvoz iz BizniSofta ostaje kao do sada.
   deny only" — UAC radi). Kancelarija sa jednim takvim nalogom: sve skripte
   se pokreću sa **`-JedanNalogSaUAC`**, iz „Run as administrator" prozora
   **tog istog naloga**; zadatak i dalje radi sa ograničenim tokenom (bez
-  povišenih prava). Nov nalog nije potreban.
+  povišenih prava). Nov nalog nije potreban. Isti nalog ima i **pravo upisa**
+  u folder faktura (Tamara izvozi): provera foldera to prijavljuje kao
+  upozorenje. Konektor po svom kodu samo čita PDF-ove — Windows ga u ovom
+  režimu ne sprečava da piše; ACL foldera se ne menja.
 - Zadatak radi **radnim danima svakog sata od 08:00 do 19:00** (poslednji
   ciklus oko 19:02), **dok je taj nalog prijavljen** (zaključan ekran ne
   smeta; pregledač nije potreban). Faktura izvezena u 10:20 stiže u portal u
@@ -57,6 +60,20 @@ Vlasnik u portalu: **Uvoz → Sinhronizacija → registruj uređaj** (oznaka
 poklapa. Zatim ponovo `podesi.ps1`: test veze, prvi prolaz (nove fakture se
 šalju, starije samo zabeleže), registracija zadatka i provera.
 
+## 2a. Proba zakazanog zadatka (pre pravog zadatka)
+
+Isti administratorski prozor. Registruje ZASEBAN zadatak `\Carsystem\CarsystemProba`
+(akcija `node.exe … --help`: bez ključa, mreže i faktura), pokreće ga, proverava
+rezultat 0 i uvek ga uklanja. Pravi zadatak `CarsystemConnector` ne dira.
+
+```powershell
+& 'C:\Program Files\CarsystemConnector\windows\proba-zadatka.ps1' -JedanNalogSaUAC
+```
+
+Očekivano `PROBA PROSLA` i izlaz 0. Svaki korak ima vreme — uporediti sa
+istorijom detekcija antivirusa. Ako je proba prekinuta pa zadatak ostao:
+isti poziv sa `-SamoUkloni`.
+
 ## 3. Svakodnevna provera
 
 ```powershell
@@ -76,7 +93,10 @@ rezultat zakazanog zadatka i **upozorenja**:
   U januaru: korak 1 sa `-IzvorniFolder '...\Fakture 2027'`.
 
 Ručno pokretanje odmah (bez čekanja sledećeg sata):
-`Start-ScheduledTask -TaskName CarsystemConnector`, pa `provera.ps1`.
+`& 'C:\Program Files\CarsystemConnector\windows\task.ps1' -Action run -Mode Production`,
+pa `provera.ps1`. (Ne `Start-ScheduledTask`/`Get-ScheduledTask`: na kancelarijskom
+računaru ti cmdleti idu kroz WMI i vraćaju 0x80070002; skripte koriste Task
+Scheduler COM i `schtasks.exe`. Ručna provera: `schtasks /Query /TN \Carsystem\CarsystemConnector /V /FO LIST`.)
 
 ## 4. Povratak na prethodnu verziju — kao Administrator
 

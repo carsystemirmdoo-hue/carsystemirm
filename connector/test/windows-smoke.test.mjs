@@ -34,6 +34,9 @@ const guard = (t) => {
   return false;
 };
 
+/** Ocena poziva .ps1: tačan izlaz + oznaka skripte, vreme za poređenje sa antivirusom. */
+const { oceniPozivSkripte, zadatakPremaSchtasks } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+
 const D = (p) => new URL(`../dist/connector/src/${p}`, import.meta.url).href;
 
 /**
@@ -233,42 +236,54 @@ test("[WIN] DPAPI Protect/Unprotect vraća isti ključ", async (t) => {
   }
 });
 
-test("[WIN] tajna ne prolazi kroz komandnu liniju", async (t) => {
+test("[WIN] DPAPI bez procesa-deteta: nativni modul, tajna ne prolazi kroz komandnu liniju", async (t) => {
   if (guard(t)) return;
   const { readFile } = await import("node:fs/promises");
   const izvor = await readFile(
     new URL("../dist/connector/src/keystore/windows-dpapi.mjs", import.meta.url),
     "utf8",
   );
-  const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "");
+  const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
   /*
-   * Program ide kroz `-EncodedCommand`; podatak ISKLJUČIVO kroz stdin.
-   *
-   * Stari `-Command -` je slao oba kroz stdin, i PowerShell je red sa ključem
-   * parsirao kao naredbu (kancelarijski D06: izlaz 1).
+   * DPAPI ide kroz nativni modul u procesu konektora (Avast blokira
+   * „PowerShell + ProtectedData"). Nema `powershell.exe`, nema stdin-a, nema
+   * argumenata sa podatkom — nema procesa-deteta uopšte.
    */
-  assert.match(kod, /"-EncodedCommand"/);
-  assert.doesNotMatch(kod, /"-Command",\s*"-"/, "stari kanal program+podatak kroz stdin");
-  assert.match(kod, /stdin\.write\(`\$\{ulaz\}\\n`\)/, "podatak ne ide kroz stdin");
+  assert.match(kod, /process\.dlopen/);
+  assert.doesNotMatch(kod, /child_process|spawn|powershell|EncodedCommand|ProtectedData/i);
 });
 
-test("[WIN] produkcijski kanal: program kroz -EncodedCommand, podatak kroz stdin", async (t) => {
+test("[WIN] nativni modul: SHA-256, učitavanje, zastiti/otkljucaj i odbijanje izmenjenog bloba", async (t) => {
   if (guard(t)) return;
   const dpapi = await import(D("keystore/windows-dpapi.mjs"));
-  /*
-   * Isto što D06 meri na kancelarijskom računaru, ali kroz stvarni
-   * `pokreniPowerShell`. Podatak je sintetička konstanta, ne ključ.
-   */
-  const podatak = Buffer.from("cs-kanal-proba-sinteticki").toString("base64");
-  const izlaz = await dpapi.pokreniPowerShell(
-    "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; [Console]::In.ReadLine()",
-    podatak,
-  );
-  assert.equal(izlaz, podatak, "red sa stdin-a nije vraćen neizmenjen");
+  const { createHash } = await import("node:crypto");
+  const { readFile } = await import("node:fs/promises");
+  const sha = createHash("sha256").update(await readFile(dpapi.NATIVNI_MODUL)).digest("hex");
+  assert.equal(sha, dpapi.NATIVNI_MODUL_SHA256, "modul u paketu nije isporučena verzija");
+  const v = await dpapi.ucitajNativni();
+  assert.equal(typeof v.protectData, "function");
 
-  // proveri() — Protect i Unprotect kroz isti kanal, nad konstantom.
+  /*
+   * Podatak je sintetička konstanta. Isto što D05/D06 mere na kancelarijskom
+   * računaru, kroz stvarni `dpapiOperacija`.
+   */
+  const podatak = Buffer.from("cs-kanal-proba-sinteticki");
+  const blob = Buffer.from(await dpapi.dpapiOperacija("zastiti", podatak));
+  assert.ok(!blob.includes(podatak), "blob sadrži čitljiv podatak");
+  const nazad = await dpapi.dpapiOperacija("otkljucaj", blob);
+  assert.deepEqual(Buffer.from(nazad), podatak, "DPAPI nije vratio isti podatak");
+
+  blob[blob.length - 1] ^= 0xff;
+  await assert.rejects(dpapi.dpapiOperacija("otkljucaj", blob), (e) => {
+    assert.match(e.code, /^dpapi_unprotect_failed(_[0-9a-f]{8})?$/);
+    assert.doesNotMatch(e.message, /[A-Za-z]:\\|Error code/);
+    return true;
+  });
+
+  // proveri() — Protect i Unprotect nad konstantom.
   const rez = await dpapi.proveri();
   assert.equal(rez.ok, true);
+  assert.equal(rez.kanal, "nativni");
 });
 
 test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
@@ -302,7 +317,7 @@ test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
     assert.equal(drugi.json.status, "vec_postoji", "ponovljen init je zamenio ključ");
     assert.equal(drugi.kod, 1);
 
-    // export-key čita ključ nazad kroz Unprotect — dakle kroz stdin kanal.
+    // export-key čita ključ nazad kroz Unprotect (nativni DPAPI).
     const izvoz = pokreni("export-key");
     const d3 = izvoz.json;
     assert.equal(izvoz.kod, 0, `export-key nije uspeo: kod=${d3.kod ?? "?"}`);
@@ -516,6 +531,7 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
    * `-Mode Smoke` je obavezan od WIN-INSTALL-01 korekcije — bez njega skripta
    * baca grešku pre bilo koje provere.
    */
+  const pocetak = new Date();
   const r = spawnSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
@@ -523,36 +539,43 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
     { encoding: "utf8", timeout: 120_000 },
   );
   /*
-   * Pad nosi PowerShell identifikator greške i broj reda — ne putanju ni
-   * poruku. Pre popravke kodiranja ovde je stajalo samo „izlaz 1".
+   * Izlaz TAČNO 0 i oznaka `[dry-run]` koju piše skripta. Vreme i izlazni kod
+   * idu u TAP dijagnostiku, da se prijava antivirusa poveže sa pozivom.
    */
-  assert.equal(r.status, 0, `task.ps1 dry-run: izlaz ${r.status}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
-  assert.match(r.stdout, /\[dry-run\]/);
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 0, oznaka: /\[dry-run\]/, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`task.ps1 dry-run: ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `task.ps1 dry-run: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 
-  const postoji = execFileSync(
-    "powershell.exe",
-    ["-NoProfile", "-NonInteractive", "-Command",
-     "if (Get-ScheduledTask -TaskName CarsystemConnectorSMOKE -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
-    { encoding: "utf8" },
-  ).trim();
-  assert.equal(postoji, "NE", "dry-run je registrovao zadatak");
+  // schtasks.exe, ne Get-ScheduledTask (CIM ume da vrati 0x80070002 = lažno „ne postoji").
+  const z = zadatakPremaSchtasks(spawnSync, "\\Carsystem\\CarsystemConnectorSMOKE");
+  assert.equal(z.greska, null, "schtasks.exe se nije pokrenuo");
+  assert.equal(z.postoji, false, "dry-run je registrovao zadatak");
 });
 
 test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {
   if (guard(t)) return;
   const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
+  const pocetak = new Date();
   const r = spawnSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
      "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
     { encoding: "utf8", timeout: 120_000 },
   );
-  assert.notEqual(r.status, 0);
   /*
-   * Odbijanje mora biti BAŠ ono zbog `-Mode`. Ranije je test tražio samo
-   * nenulti izlaz — i prolazio je dok je skripta padala na parsiranju.
+   * Odbijanje mora biti BAŠ ono zbog `-Mode`: izlaz TAČNO 1 (neuhvaćen
+   * `throw` u -File režimu) i poruka skripte. Golo „nenulti izlaz" bi prošlo
+   * i kada proces prekine antivirus (kancelarija d5e03d1).
    */
-  assert.match(`${r.stdout}${r.stderr}`, /-Mode je obavezan/, `drugi razlog: ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 1, oznaka: /-Mode je obavezan/, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`task.ps1 bez -Mode: ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `task.ps1 bez -Mode: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 });
 
 /* =========================================================================

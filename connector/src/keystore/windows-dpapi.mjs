@@ -1,6 +1,7 @@
-import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import { chmod, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 /**
  * Privatni ključ pod Windows DPAPI, opseg `CurrentUser`.
@@ -19,43 +20,46 @@ import { dirname } from "node:path";
  * nalogom. Zadatak pokrenut kao `SYSTEM` ne bi mogao da otključa ključ, i
  * „rešenje“ tog problema prelaskom na `LocalMachine` bi poništilo celu zaštitu.
  *
- * Program i podatak idu kroz DVA RAZLIČITA kanala
- * ----------------------------------------------
- * PowerShell PROGRAM ide kao `-EncodedCommand` (UTF-16LE, base64). Program nije
- * tajna — isti je na svakoj mašini i stoji u ovom fajlu.
+ * DPAPI se poziva u ISTOM procesu (nativni modul), bez PowerShell-a
+ * ----------------------------------------------------------------
+ * Ranije je DPAPI išao kroz `powershell.exe` (prvo `-EncodedCommand`, pa
+ * čitljiv `-File`). Antivirus na kancelarijskom računaru (Avast Behavior
+ * Shield, IDP.HELU.PSE92 i IDP.HELU.PSD11) blokira oba oblika: obrazac
+ * „PowerShell + ProtectedData“ je heuristika, ne propust u skripti.
  *
- * PODATAK (materijal ključa) ide ISKLJUČIVO kroz `stdin`, kao jedan red. Nikad
- * kroz argumente (`Get-CimInstance Win32_Process`, istorija komandi, alati za
- * nadzor procesa), nikad kroz promenljive okruženja, nikad kroz privremeni fajl.
+ * Sada `node.exe` sam poziva `CryptProtectData`/`CryptUnprotectData` iz
+ * `crypt32.dll`, kroz N-API modul `@primno/dpapi` 2.0.1 (MIT, izvor identičan
+ * tagu v2.0.1 na GitHub-u; pregled u docs/b2b/50). Modul je jedan fajl u
+ * paketu (`native/dpapi-win32-x64.node`), bez npm instalacije i bez skripti
+ * pri instalaciji. Pre učitavanja se proverava njegov SHA-256: izmenjen fajl
+ * se odbija (`dpapi_native_altered`) i nikad se ne učitava.
  *
- * Zašto ne `-Command -` kao ranije
- * --------------------------------
- * Ranija verzija je slala i program i podatak kroz ISTI `stdin`, sa
- * `-Command -`. Taj prekidač znači da PowerShell svoj program čita sa `stdin`-a,
- * pa je red sa ključem, umesto da ga pročita `[Console]::In.ReadLine()`, bio
- * parsiran kao naredba — nepoznata naredba, izlaz 1. Kancelarijska dijagnostika
- * je to izmerila: `D05` (DPAPI bez podatka na stdin-u) prolazi, `D06` (program +
- * podatak na stdin-u) pada. Sa `-EncodedCommand` na `stdin`-u ostaje samo
- * podatak, i `ReadLine()` dobija baš njega.
+ * Nema procesa-deteta, pa materijal ključa ne prolazi kroz argumente, stdin,
+ * promenljive okruženja ni privremeni fajl — ostaje u memoriji ovog procesa.
  *
- * Izlaz se NE prikazuje
- * ---------------------
- * `stdout` deteta je cev u memoriju ovog procesa, ograničena na
- * `MAX_IZLAZA_BAJTOVA`; nikad se ne nasleđuje na konzolu. `stderr` deteta se
- * prazni da cev ne bi zaustavila dete, ali se sadržaj ne čuva i ne prosleđuje.
- * Greška nosi isključivo stabilan kod.
+ * Format fajla ključa se NE menja
+ * -------------------------------
+ * `cs-dpapi-v1\n<base64 DPAPI bloba>\n`, opseg `CurrentUser`, bez dodatne
+ * entropije. Blob koji je napravio .NET `ProtectedData.Protect` (raniji
+ * PowerShell kanal) je isti DPAPI blob koji otključava `CryptUnprotectData`:
+ * postojeći ključ se otključava bez ponovnog pravljenja.
+ *
+ * Greške nose samo stabilan kod
+ * -----------------------------
+ * Poruka nativnog modula se ne prosleđuje. Jedino što iz nje prolazi je
+ * Windows kod greške (broj), kao deo koda (`dpapi_unprotect_failed_8009000b`).
  */
 
 /** Marker u fajlu, da se šifrovan sadržaj ne pomeša sa plaintext greškom. */
 const ZAGLAVLJE = "cs-dpapi-v1";
 
-/** Gornja granica `stdout`-a deteta; DPAPI izlaz ključa je daleko ispod. */
-export const MAX_IZLAZA_BAJTOVA = 64 * 1024;
+/** Opseg DPAPI-ja — jedini dozvoljen; vidi gore. */
+const OPSEG = "CurrentUser";
 
-/** Proces koji visi ne sme da zaustavi konektor zauvek. */
-export const TIMEOUT_MS = 60_000;
+/** Gornja granica podatka u oba smera; PKCS#8 Ed25519 je 48 bajtova, blob ispod 1 KB. */
+export const MAX_PODATKA_BAJTOVA = 64 * 1024;
 
-/** Jedini dozvoljen oblik podatka na `stdin`-u: jedan red standardnog base64. */
+/** Base64 bloba u fajlu: jedan red standardnog base64. */
 const BASE64_RED = /^[A-Za-z0-9+/]+={0,2}$/;
 
 export class DpapiError extends Error {
@@ -66,165 +70,131 @@ export class DpapiError extends Error {
   }
 }
 
-/**
- * PowerShell program kao `-EncodedCommand` vrednost.
- *
- * `-EncodedCommand` po specifikaciji prima base64 UTF-16LE teksta. Tako program
- * prolazi kroz Windows komandnu liniju kao jedan ASCII token, bez navodnika,
- * novih redova i znakova koje bi `CreateProcess` morao da escape-uje.
- */
-export function kodiranaKomanda(skripta) {
-  return Buffer.from(String(skripta), "utf16le").toString("base64");
-}
-
-/** Argumenti procesa. Sadrže SAMO program — nikad podatak. */
-export function argumentiZa(skripta) {
-  return [
-    "-NoProfile",
-    "-NonInteractive",
-    "-ExecutionPolicy",
-    "Bypass",
-    "-EncodedCommand",
-    kodiranaKomanda(skripta),
-  ];
-}
+/** Nativni modul: fajl pored ovog modula (u paketu i u izvoru). */
+export const NATIVNI_MODUL = fileURLToPath(new URL("./native/dpapi-win32-x64.node", import.meta.url));
 
 /**
- * Pokreće PowerShell program i šalje mu (opciono) jedan red podatka na `stdin`.
- *
- * Isti kanal koristi i kancelarijska dijagnostika (`D06`), pa ono što ona izmeri
- * jeste ponašanje ovog adaptera, a ne njegove kopije.
- *
- * @param {string} skripta PowerShell program
- * @param {string} [ulaz] jedan red base64 podatka; ništa drugo
- * @param {{spawnImpl?: Function, timeoutMs?: number, maxIzlaza?: number}} [opcije]
- * @returns {Promise<string>} `stdout` deteta, bez okolnih belina
+ * SHA-256 isporučenog `dpapi-win32-x64.node` = `prebuilds/win32-x64/@primno+dpapi.node`
+ * iz npm paketa `@primno/dpapi@2.0.1` (integritet paketa proveren prema registru).
+ * Test proverava da se poklapa sa fajlom.
  */
-export function pokreniPowerShell(skripta, ulaz, opcije = {}) {
+export const NATIVNI_MODUL_SHA256 = "386e7a520b143aa7b6fa1a28a0237391a938bbedd0b245733a3da3a215026a3f";
+
+/** Keš učitanog modula za podrazumevanu putanju; jedan `dlopen` po procesu. */
+let ucitanPodrazumevani = null;
+
+/**
+ * Učitava nativni modul posle provere platforme i SHA-256.
+ *
+ * Sve zavisnosti su parametri da bi se svaka grana proverila i van Windowsa.
+ *
+ * @param {{putanja?: string, ocekivanSha?: string, citaj?: Function, dlopen?: Function,
+ *          platforma?: string, arhitektura?: string}} [opcije]
+ * @returns {Promise<{protectData: Function, unprotectData: Function}>}
+ */
+export async function ucitajNativni(opcije = {}) {
+  const podrazumevano = Object.keys(opcije).length === 0;
+  if (podrazumevano && ucitanPodrazumevani) return ucitanPodrazumevani;
+
   const {
-    spawnImpl = spawn,
-    timeoutMs = TIMEOUT_MS,
-    maxIzlaza = MAX_IZLAZA_BAJTOVA,
+    putanja = NATIVNI_MODUL,
+    ocekivanSha = NATIVNI_MODUL_SHA256,
+    citaj = readFile,
+    dlopen = (modul, p) => process.dlopen(modul, p),
+    platforma = process.platform,
+    arhitektura = process.arch,
   } = opcije;
 
-  return new Promise((resolve, reject) => {
-    /*
-     * Podatak se proverava PRE pokretanja procesa.
-     *
-     * Novi red u podatku bi bio drugi red na `stdin`-u, a skripta čita tačno
-     * jedan — ostatak bi ostao nepročitan ili, u ranijem modelu, izvršen.
-     */
-    if (ulaz !== undefined && !BASE64_RED.test(String(ulaz))) {
-      reject(new DpapiError("dpapi_input_invalid", "Podatak za DPAPI nije jedan red base64."));
-      return;
-    }
+  if (platforma !== "win32" || arhitektura !== "x64") {
+    throw new DpapiError("dpapi_native_unsupported", "Nativni DPAPI modul postoji samo za Windows x64.");
+  }
 
-    let dete;
-    try {
-      dete = spawnImpl("powershell.exe", argumentiZa(skripta), {
-        stdio: ["pipe", "pipe", "pipe"],
-        windowsHide: true,
-      });
-    } catch (greska) {
-      reject(new DpapiError(kodSpawnGreske(greska), "PowerShell se nije pokrenuo."));
-      return;
-    }
+  let bajtovi;
+  try {
+    bajtovi = await citaj(putanja);
+  } catch {
+    throw new DpapiError("dpapi_native_missing", "Nativni DPAPI modul nije pronađen u paketu.");
+  }
+  if (createHash("sha256").update(bajtovi).digest("hex") !== ocekivanSha) {
+    throw new DpapiError("dpapi_native_altered", "Nativni DPAPI modul u paketu nije isporučena verzija.");
+  }
 
-    const delovi = [];
-    let bajtova = 0;
-    let gotovo = false;
+  /*
+   * Između provere i učitavanja fajl se ne kopira nigde: instalacioni folder je
+   * posle `harden-install-dir.ps1` upisiv samo administratoru, pa nalog koji
+   * pokreće konektor ne može da ga zameni između ta dva koraka.
+   */
+  const modul = { exports: {} };
+  try {
+    dlopen(modul, putanja);
+  } catch {
+    throw new DpapiError("dpapi_native_load_failed", "Nativni DPAPI modul se nije učitao.");
+  }
+  const { protectData, unprotectData } = modul.exports ?? {};
+  if (typeof protectData !== "function" || typeof unprotectData !== "function") {
+    throw new DpapiError("dpapi_native_invalid", "Nativni DPAPI modul nema očekivane funkcije.");
+  }
 
-    const zavrsi = (fn, vrednost) => {
-      if (gotovo) return;
-      gotovo = true;
-      clearTimeout(sat);
-      fn(vrednost);
-    };
-
-    const ubij = () => {
-      try {
-        dete.kill();
-      } catch {
-        /* proces je možda već završio */
-      }
-    };
-
-    const sat = setTimeout(() => {
-      ubij();
-      zavrsi(reject, new DpapiError("dpapi_timeout", "DPAPI operacija je prekoračila vreme."));
-    }, timeoutMs);
-
-    dete.stdout.on("data", (d) => {
-      bajtova += d.length;
-      if (bajtova > maxIzlaza) {
-        ubij();
-        zavrsi(reject, new DpapiError("dpapi_output_too_large", "DPAPI izlaz je prevelik."));
-        return;
-      }
-      delovi.push(d);
-    });
-    dete.stderr.on("data", () => {});
-
-    dete.on("error", (greska) =>
-      zavrsi(reject, new DpapiError(kodSpawnGreske(greska), "PowerShell se nije pokrenuo.")),
-    );
-    dete.on("close", (kod) => {
-      if (kod !== 0) {
-        zavrsi(
-          reject,
-          new DpapiError("dpapi_process_failed", `DPAPI operacija nije uspela (izlazni kod ${kod}).`),
-        );
-        return;
-      }
-      zavrsi(resolve, Buffer.concat(delovi).toString("utf8").trim());
-    });
-
-    /*
-     * `EPIPE` kada dete izađe pre nego što pročita ulaz ne sme da postane
-     * neuhvaćen izuzetak — on bi ispisao stack trace sa putanjama.
-     */
-    dete.stdin.on("error", () => {});
-    try {
-      if (ulaz !== undefined) dete.stdin.write(`${ulaz}\n`);
-      dete.stdin.end();
-    } catch {
-      /* `close` sa izlaznim kodom nosi pravi ishod */
-    }
-  });
+  const vezivanje = Object.freeze({ protectData, unprotectData });
+  if (podrazumevano) ucitanPodrazumevani = vezivanje;
+  return vezivanje;
 }
 
-/** Kod greške pokretanja — nikad poruka, koja nosi putanju izvršnog fajla. */
-function kodSpawnGreske(greska) {
-  const kod = String(greska?.code ?? "").replace(/[^A-Za-z0-9_]/g, "").slice(0, 32);
-  return kod ? `dpapi_spawn_${kod.toLowerCase()}` : "dpapi_spawn_failed";
+/** Windows kod iz poruke nativnog modula („… Error code: 2148073483“) → heks, ništa drugo. */
+function windowsKod(greska) {
+  const m = /Error code:\s*(-?\d{1,10})\b/.exec(String(greska?.message ?? ""));
+  if (!m) return null;
+  return (Number(m[1]) >>> 0).toString(16).padStart(8, "0");
 }
 
-/*
- * Skripte čitaju TAČNO JEDAN red podatka sa `stdin` i rade sa `ProtectedData`.
- * Sam program stiže kroz `-EncodedCommand`, ne kroz `stdin`.
+function proveriPodatak(podatak) {
+  if (!(podatak instanceof Uint8Array) || podatak.length === 0 || podatak.length > MAX_PODATKA_BAJTOVA) {
+    throw new DpapiError("dpapi_input_invalid", "Podatak za DPAPI nije ispravan niz bajtova.");
+  }
+}
+
+/**
+ * Jedna DPAPI operacija.
  *
- * `$ErrorActionPreference = 'Stop'` da tiha greška ne prođe kao prazan izlaz —
- * prazan izlaz bi se lako pročitao kao „ključ je prazan“, a ne kao neuspeh.
+ * @param {"zastiti"|"otkljucaj"} rezim
+ * @param {Uint8Array} podatak
+ * @param {{vezivanje?: {protectData: Function, unprotectData: Function}}} [opcije]
+ * @returns {Promise<Uint8Array>}
  */
-const SKRIPTA_ZASTITI = `
-$ErrorActionPreference = 'Stop'
-$ProgressPreference = 'SilentlyContinue'
-Add-Type -AssemblyName System.Security
-$plain = [Console]::In.ReadLine()
-$bytes = [Convert]::FromBase64String($plain)
-$prot = [System.Security.Cryptography.ProtectedData]::Protect($bytes, $null, 'CurrentUser')
-[Convert]::ToBase64String($prot)
-`.trim();
+export async function dpapiOperacija(rezim, podatak, opcije = {}) {
+  if (rezim !== "zastiti" && rezim !== "otkljucaj") {
+    throw new DpapiError("dpapi_mode_invalid", "Nepoznat DPAPI režim.");
+  }
+  proveriPodatak(podatak);
+  const vezivanje = opcije.vezivanje ?? (await ucitajNativni());
+  const osnova = rezim === "zastiti" ? "dpapi_protect_failed" : "dpapi_unprotect_failed";
 
-const SKRIPTA_OTKLJUCAJ = `
-$ErrorActionPreference = 'Stop'
-$ProgressPreference = 'SilentlyContinue'
-Add-Type -AssemblyName System.Security
-$enc = [Console]::In.ReadLine()
-$bytes = [Convert]::FromBase64String($enc)
-$plain = [System.Security.Cryptography.ProtectedData]::Unprotect($bytes, $null, 'CurrentUser')
-[Convert]::ToBase64String($plain)
-`.trim();
+  /*
+   * Sopstvena kopija bez deljenog `ArrayBuffer`-a (Buffer iz bazena ima pomak),
+   * obrisana posle poziva — da ulaz za šifrovanje ne ostaje u memoriji duže
+   * nego što mora.
+   */
+  const ulaz = new Uint8Array(podatak);
+  let izlaz;
+  try {
+    izlaz =
+      rezim === "zastiti"
+        ? vezivanje.protectData(ulaz, null, OPSEG)
+        : vezivanje.unprotectData(ulaz, null, OPSEG);
+  } catch (greska) {
+    const kod = windowsKod(greska);
+    throw new DpapiError(
+      kod ? `${osnova}_${kod}` : osnova,
+      rezim === "zastiti" ? "DPAPI šifrovanje nije uspelo." : "DPAPI otključavanje nije uspelo.",
+    );
+  } finally {
+    ulaz.fill(0);
+  }
+  if (!(izlaz instanceof Uint8Array) || izlaz.length === 0 || izlaz.length > MAX_PODATKA_BAJTOVA) {
+    throw new DpapiError(`${osnova.replace(/_failed$/, "")}_empty`, "DPAPI nije vratio sadržaj.");
+  }
+  return izlaz;
+}
 
 export const adapterIme = "windows-dpapi-currentuser";
 
@@ -238,15 +208,14 @@ export function dostupan() {
  * Plaintext NIKAD ne dodiruje disk: u fajl ide samo DPAPI izlaz. Nema privremenog
  * plaintext fajla koji bi „samo nakratko“ postojao.
  */
-export async function sacuvaj({ putanja, privateKeyPkcs8Der }) {
-  const sifrovano = await pokreniPowerShell(
-    SKRIPTA_ZASTITI,
-    Buffer.from(privateKeyPkcs8Der).toString("base64"),
-  );
-  if (!sifrovano) throw new Error("DPAPI nije vratio šifrovan sadržaj.");
+export async function sacuvaj({ putanja, privateKeyPkcs8Der }, opcije = {}) {
+  const sifrovano = await dpapiOperacija("zastiti", new Uint8Array(privateKeyPkcs8Der), opcije);
 
   await mkdir(dirname(putanja), { recursive: true });
-  await writeFile(putanja, `${ZAGLAVLJE}\n${sifrovano}\n`, { encoding: "utf8", mode: 0o600 });
+  await writeFile(putanja, `${ZAGLAVLJE}\n${Buffer.from(sifrovano).toString("base64")}\n`, {
+    encoding: "utf8",
+    mode: 0o600,
+  });
   /*
    * `mode` na Windowsu ne postavlja ACL — zato instalaciona skripta zasebno
    * sužava pristup folderu stanja. Ovde ostaje jer isti kod radi i u testu na
@@ -257,23 +226,23 @@ export async function sacuvaj({ putanja, privateKeyPkcs8Der }) {
 }
 
 /** Čita i otključava ključ. Neuspeh je greška, nikad tihi plaintext fallback. */
-export async function ucitaj({ putanja }) {
+export async function ucitaj({ putanja }, opcije = {}) {
   const sadrzaj = await readFile(putanja, "utf8");
   const [zaglavlje, telo] = sadrzaj.split("\n");
-  if (zaglavlje !== ZAGLAVLJE || !telo) {
-    throw new Error("Fajl ključa nije u očekivanom DPAPI obliku.");
+  const blob = String(telo ?? "").trim();
+  if (zaglavlje !== ZAGLAVLJE || !blob || !BASE64_RED.test(blob)) {
+    throw new DpapiError("dpapi_key_file_invalid", "Fajl ključa nije u očekivanom DPAPI obliku.");
   }
-  const plain = await pokreniPowerShell(SKRIPTA_OTKLJUCAJ, telo.trim());
-  if (!plain) throw new Error("DPAPI nije vratio ključ.");
-  return new Uint8Array(Buffer.from(plain, "base64"));
+  return new Uint8Array(await dpapiOperacija("otkljucaj", Buffer.from(blob, "base64"), opcije));
 }
 
 /** Provera bez trajnih posledica — za `doctor`. */
-export async function proveri() {
+export async function proveri(opcije = {}) {
   const uzorak = Buffer.from("cs-dpapi-provera");
-  const sifrovano = await pokreniPowerShell(SKRIPTA_ZASTITI, uzorak.toString("base64"));
-  const nazad = await pokreniPowerShell(SKRIPTA_OTKLJUCAJ, sifrovano);
-  const ok = Buffer.from(nazad, "base64").equals(uzorak);
-  if (!ok) throw new Error("DPAPI provera nije vratila isti sadržaj.");
-  return { adapter: adapterIme, ok: true };
+  const sifrovano = await dpapiOperacija("zastiti", uzorak, opcije);
+  const nazad = await dpapiOperacija("otkljucaj", sifrovano, opcije);
+  if (!Buffer.from(nazad).equals(uzorak)) {
+    throw new DpapiError("dpapi_roundtrip_mismatch", "DPAPI provera nije vratila isti sadržaj.");
+  }
+  return { adapter: adapterIme, ok: true, kanal: "nativni" };
 }

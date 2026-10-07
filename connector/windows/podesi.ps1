@@ -10,7 +10,8 @@
   Koraci:
     1. folder stanja (%LOCALAPPDATA%\CarsystemConnector) - harden-state-dir.ps1;
     2. kljuc uredjaja kroz DPAPI (init) - ispisuje OTISAK za registraciju u portalu;
-    3. provera foldera faktura - verify-invoice-folder.ps1 (samo citanje);
+    3. provera foldera faktura - verify-invoice-folder.ps1 (samo citanje ACL-a;
+       u rezimu jednog naloga upis istog naloga je ocekivan i prijavljuje se kao upozorenje);
     4. test veze (heartbeat) - ako uredjaj jos nije aktiviran u portalu, staje
        ovde sa uputstvom; posle aktivacije pokrenuti podesi.ps1 ponovo;
     5. prvi prolaz (run-once dok ne ostane nista): dokumenti izdati pre
@@ -41,7 +42,7 @@ function Konektor([string[]]$argumenti) {
   # PS 5.1: stderr spoljnog programa uz 'Stop' bi prekinuo skriptu - zato 'Continue' ovde.
   $eap = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
   $izlaz = & $node --no-warnings $ulaz --packaged --config $konfiguracija @argumenti 2>$null
-  $kod = $LASTEXITCODE
+  $kod = $global:LASTEXITCODE
   $ErrorActionPreference = $eap
   $json = $null
   try { $json = ($izlaz -join "`n") | ConvertFrom-Json } catch { }
@@ -78,10 +79,15 @@ $kljuc = Konektor @('export-key')
 if (-not $kljuc.Json) { Stani "Javni kljuc nije procitan: $($kljuc.Tekst)" }
 
 # ------------------------------------------------- 3. folder faktura (citanje)
-$LASTEXITCODE = 0
-& (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj
-if ($LASTEXITCODE -ne 0) { Stani 'Provera foldera faktura nije prosla (vidi [FAIL] iznad). Konektor ne sme da pise u taj folder.' }
-Ok 'Folder faktura: konektor ga samo cita.'
+$global:LASTEXITCODE = 0
+if ($JedanNalogSaUAC) {
+  & (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj -JedanNalogSaUAC
+} else {
+  & (Join-Path $cilj 'windows\verify-invoice-folder.ps1') -InvoiceFolder $k.izvorniFolder -RunAsAccount $nalog -PackagePath $cilj
+}
+if ($global:LASTEXITCODE -ne 0) { Stani 'Provera foldera faktura nije prosla (vidi [FAIL] iznad). Konektor ne sme da pise u taj folder.' }
+if ($JedanNalogSaUAC) { Ok 'Folder faktura: isti nalog ima upis (Tamarin rad); konektor po svom kodu samo cita - Windows to u ovom rezimu ne sprecava.' }
+else { Ok 'Folder faktura: nalog konektora nema pravo upisa; konektor samo cita.' }
 
 # ----------------------------------------------------------- 4. test veze
 $hb = Konektor @('heartbeat')
@@ -124,7 +130,7 @@ try {
 } catch {
   Stani "Zakazani zadatak nije registrovan: $($_.Exception.Message)"
 }
-Ok "Zakazani zadatak je registrovan pod nalogom $nalog (radnim danima posle 09:00, dok je nalog prijavljen)."
+Ok "Zakazani zadatak je registrovan i potvrdjen (COM/schtasks) pod nalogom $nalog (radnim danima svakog sata 08-19, dok je nalog prijavljen)."
 
 # ------------------------------------------------------------------ 7. provera
 & (Join-Path $cilj 'windows\provera.ps1')

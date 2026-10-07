@@ -193,7 +193,7 @@ test("D06 meri PRODUKCIJSKI kanal adaptera, ne mehanizme dijagnostike", async ()
   /*
    * Mehanizmi dijagnostike ovde nemaju stdin. Da D06 i dalje ide kroz njih,
    * pao bi sa ENOTSUP. Prolazi zato što ide kroz `kanalAdaptera` — isti
-   * `pokreniPowerShell` koji konektor koristi.
+   * nativni DPAPI koji konektor koristi.
    */
   const pozivi = [];
   const rezultat = await izmeri({
@@ -220,20 +220,20 @@ test("D06 pada sa kodom kanala, bez poruke i putanje", async () => {
     mehanizmi: [bezStdina],
     kanalAdaptera: {
       pokreni: async () => {
-        throw Object.assign(new Error("C:\\Users\\Vlasnik\\x.mjs"), { code: "dpapi_process_failed" });
+        throw Object.assign(new Error("C:\\Users\\Vlasnik\\x.mjs"), { code: "dpapi_unprotect_failed_0000000d" });
       },
       proveri: async () => {},
     },
   });
   const d06 = rezultat.nalazi.find((n) => n.id === "D06");
   assert.equal(d06.ishod, "PAD");
-  assert.match(d06.detalj, /dpapi_process_failed/);
+  assert.match(d06.detalj, /dpapi_unprotect_failed_0000000d/);
   proveriRedakciju(d06.detalj, "D06 detalj");
 });
 
-test("bez učitanog kanala adaptera D06 i D08 kažu to izričito", async () => {
+test("bez učitanog kanala adaptera D04, D05, D06 i D08 kažu to izričito", async () => {
   const rezultat = await izmeri({ mehanizmi: [bezStdina] });
-  for (const id of ["D06", "D08"]) {
+  for (const id of ["D04", "D05", "D06", "D08"]) {
     const n = rezultat.nalazi.find((x) => x.id === id);
     assert.equal(n.ishod, "PAD");
     assert.match(n.detalj, /nije učitan/);
@@ -254,6 +254,55 @@ test("D08 izvršava proveri() adaptera i prijavljuje samo kod", async () => {
   assert.equal(d08.ishod, "PAD");
   assert.match(d08.detalj, /dpapi_timeout/);
   assert.doesNotMatch(d08.detalj, /tajna/);
+});
+
+test("D04/D05 mere nativni modul kroz kanal adaptera, bez PowerShell-a", async () => {
+  const skripte = [];
+  const mehanizam = {
+    id: "m",
+    opis: "m",
+    pokreni: async (skripta, ulaz) => {
+      skripte.push(skripta);
+      return bezStdina.pokreni(skripta, ulaz);
+    },
+  };
+  const rezultat = await izmeri({
+    mehanizmi: [mehanizam],
+    kanalAdaptera: {
+      pokreni: async (_p, ulaz) => ulaz,
+      ucitaj: async () => {},
+      izmenjenBlob: async () => "dpapi_unprotect_failed_0000000d",
+      proveri: async () => {},
+    },
+  });
+  const po = (id) => rezultat.nalazi.find((n) => n.id === id);
+  assert.equal(po("D04").ishod, "OK", po("D04").detalj);
+  assert.equal(po("D05").ishod, "OK", po("D05").detalj);
+  assert.match(po("D05").detalj, /dpapi_unprotect_failed_0000000d/);
+  assert.ok(
+    skripte.every((s) => !/ProtectedData|Add-Type|System\.Security/.test(s)),
+    "dijagnostika i dalje šalje DPAPI kroz PowerShell",
+  );
+});
+
+test("D04 pada sa kodom modula; D05 pada kada izmenjen blob NIJE odbijen", async () => {
+  const rezultat = await izmeri({
+    mehanizmi: [bezStdina],
+    kanalAdaptera: {
+      pokreni: async (_p, ulaz) => ulaz,
+      ucitaj: async () => {
+        throw Object.assign(new Error("C:\\Program Files\\x.node nije validan"), { code: "dpapi_native_altered" });
+      },
+      izmenjenBlob: async () => null,
+      proveri: async () => {},
+    },
+  });
+  const po = (id) => rezultat.nalazi.find((n) => n.id === id);
+  assert.equal(po("D04").ishod, "PAD");
+  assert.match(po("D04").detalj, /dpapi_native_altered/);
+  proveriRedakciju(po("D04").detalj, "D04 detalj");
+  assert.equal(po("D05").ishod, "PAD");
+  assert.match(rezultat.zakljucak, /Nativni DPAPI modul se ne učitava/);
 });
 
 /* =========================================================================
@@ -343,7 +392,8 @@ test("[WIN] trivijalan PowerShell poziv i stdin kanal", async (t) => {
   const kanal = await ucitajKanalAdaptera();
   assert.ok(kanal, "produkcijski kanal adaptera nije nađen");
   const izlaz = await kanal.pokreni(STDIN_PROGRAM, STDIN_PROBA);
-  assert.equal(String(izlaz).trim(), STDIN_PROBA, "produkcijski stdin kanal ne vraća podatak");
+  assert.equal(String(izlaz).trim(), STDIN_PROBA, "produkcijski DPAPI kanal ne vraća podatak");
+  assert.match(String(await kanal.izmenjenBlob()), /^dpapi_unprotect_failed/, "izmenjen blob nije odbijen");
 });
 
 test("[WIN] pokretač dijagnostike ne ispisuje putanju ni stack trace", async (t) => {

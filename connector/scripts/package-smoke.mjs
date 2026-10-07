@@ -220,6 +220,10 @@ const PREGLEDANO = [
     razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
   },
   {
+    fajl: "connector/windows/proba-zadatka.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
+  },
+  {
     fajl: "connector/windows/vrati-prethodnu.ps1",
     razlog: "`C:\\Program Files\\CarsystemConnector` je primer u zaglavlju skripte, ne stvarna mašina.",
   },

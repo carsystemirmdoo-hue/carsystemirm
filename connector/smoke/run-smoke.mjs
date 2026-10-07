@@ -32,7 +32,7 @@ const META = JSON.parse(readFileSync(join(OVDE, "package-meta.json"), "utf8"));
 const { oceniRuntime, testiraniMajor } = await import("./runtime-contract.mjs");
 
 /** Ocena poziva .ps1 (vreme, izlaz, oznaka) — isti modul koriste i [WIN] testovi. */
-const { oceniPozivSkripte } = await import(pathToFileURL(join(TESTOVI, "task-poziv.mjs")).href);
+const { oceniPozivSkripte, zadatakPremaSchtasks } = await import(pathToFileURL(join(TESTOVI, "task-poziv.mjs")).href);
 
 /* =========================================================================
  * Izveštavanje
@@ -619,13 +619,14 @@ provera("W13", "task.ps1 ostaje dry-run i NE pravi zadatak", () => {
     ocekivanKod: 0, oznaka: /\[dry-run\]/, pocetak, kraj,
   });
 
-  // Zadatak se proverava uvek: `Get-ScheduledTask` ide kroz `-Command`.
-  const postoji = powershell([
-    "-Command",
-    "if (Get-ScheduledTask -TaskName CarsystemConnector -TaskPath '\\Carsystem\\' " +
-      "-ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }",
-  ]);
-  if (postoji.stdout.trim() === "DA") {
+  /*
+   * Zadatak se proverava uvek, kroz `schtasks.exe` — NE `Get-ScheduledTask`:
+   * na kancelarijskom računaru CIM vraća 0x80070002, a uz SilentlyContinue
+   * to je „ne postoji" i kada postoji.
+   */
+  const z = zadatakPremaSchtasks(spawnSync, "\\Carsystem\\CarsystemConnector");
+  if (z.greska) pad("schtasks_unavailable", `schtasks.exe se nije pokrenuo (${z.greska}); ${o.detalj}`);
+  if (z.postoji) {
     pad("scheduled_task_created", `zadatak CarsystemConnector postoji posle dry-run-a; ${o.detalj}`);
   }
 
@@ -644,7 +645,7 @@ provera("W13", "task.ps1 ostaje dry-run i NE pravi zadatak", () => {
      */
     pad(o.kod, `${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}; ${politikaOpis()}`);
   }
-  return { detalj: `plan ispisan, zadatak NIJE registrovan; ${o.detalj}` };
+  return { detalj: `plan ispisan, zadatak NIJE registrovan (schtasks izlaz ${z.kod}); ${o.detalj}` };
 });
 
 provera("W14", "spakovan konektor ne bira test skladište ključa", () => {

@@ -63,3 +63,22 @@ export function oceniPozivSkripte({ kod, signal = null, stdout = "", stderr = ""
   }
   return { ishod: "ok", kod: "ok", detalj: vreme };
 }
+
+/**
+ * Da li zadatak postoji — kroz `schtasks.exe`, NE kroz `Get-ScheduledTask`.
+ *
+ * Kancelarija 0.3.6: CIM (`Get-ScheduledTask`) je vraćao 0x80070002 i uz
+ * `-ErrorAction SilentlyContinue` svaki zadatak je „ne postojao". Smoke
+ * provera „dry-run NIJE registrovao zadatak" bi tada prolazila i kada zadatak
+ * postoji. `schtasks /Query` ide direktno u servis i na tom računaru radi.
+ *
+ * Izlaz 0 = postoji. Bilo šta drugo se prijavljuje kao „schtasks ne nalazi"
+ * sa izlaznim kodom — dovoljno za proveru da dry-run NIŠTA nije napravio.
+ *
+ * @param {Function} spawnSyncImpl
+ * @param {string} puno npr. `\\Carsystem\\CarsystemConnector`
+ */
+export function zadatakPremaSchtasks(spawnSyncImpl, puno) {
+  const r = spawnSyncImpl("schtasks.exe", ["/Query", "/TN", puno], { encoding: "utf8", windowsHide: true, timeout: 60_000 });
+  return { postoji: r.status === 0, kod: r.status, greska: r.error ? String(r.error.code ?? "spawn") : null };
+}

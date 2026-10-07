@@ -22,8 +22,11 @@ if (-not (New-Object Security.Principal.WindowsPrincipal([Security.Principal.Win
 $cilj = Join-Path $env:ProgramFiles 'CarsystemConnector'
 $prethodna = Get-ChildItem -LiteralPath $env:ProgramFiles -Directory -Filter 'CarsystemConnector.prethodna-*' | Sort-Object Name | Select-Object -Last 1
 if (-not $prethodna) { Stani 'Nema sacuvane prethodne verzije.' }
-$zadatak = Get-ScheduledTask -TaskName 'CarsystemConnector' -ErrorAction SilentlyContinue
-if ($zadatak -and $zadatak.State -eq 'Running') { Stani 'Zakazani zadatak trenutno radi; sacekajte da zavrsi.' }
+# Stanje kroz COM + schtasks (Zadaci.ps1), ne Get-ScheduledTask (CIM ume da vrati 0x80070002).
+. (Join-Path $PSScriptRoot 'Zadaci.ps1')
+try { $zadatak = Get-ZadatakCs -TaskPath '\Carsystem\' -TaskName 'CarsystemConnector' }
+catch { Stani "Stanje zakazanog zadatka nije moguce utvrditi ($($_.Exception.Message))." }
+if ($zadatak.Postoji -and $zadatak.Stanje -eq 'Running') { Stani 'Zakazani zadatak trenutno radi; sacekajte da zavrsi.' }
 if (Test-Path -LiteralPath $cilj) { Move-Item -LiteralPath $cilj -Destination "$cilj.vraceno-$(Get-Date -Format 'yyyyMMddHHmmss')" }
 Move-Item -LiteralPath $prethodna.FullName -Destination $cilj
 $global:LASTEXITCODE = 0

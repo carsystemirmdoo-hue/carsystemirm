@@ -130,7 +130,7 @@ try {
 } catch {
   Stani "Zakazani zadatak nije registrovan: $($_.Exception.Message)"
 }
-Ok "Zakazani zadatak je registrovan pod nalogom $nalog (radnim danima posle 09:00, dok je nalog prijavljen)."
+Ok "Zakazani zadatak je registrovan i potvrdjen (COM/schtasks) pod nalogom $nalog (radnim danima svakog sata 08-19, dok je nalog prijavljen)."
 
 # ------------------------------------------------------------------ 7. provera
 & (Join-Path $cilj 'windows\provera.ps1')

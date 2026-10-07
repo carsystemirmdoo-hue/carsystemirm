@@ -41,7 +41,7 @@ import test from "node:test";
 const WIN_DIR = fileURLToPath(new URL("../windows/", import.meta.url));
 const p = (name) => join(WIN_DIR, name);
 
-const SKRIPTE = ["PathGuards.ps1", "harden-install-dir.ps1", "verify-invoice-folder.ps1", "task.ps1", "instaliraj.ps1", "proba-zadatka.ps1"];
+const SKRIPTE = ["PathGuards.ps1", "harden-install-dir.ps1", "verify-invoice-folder.ps1", "task.ps1", "instaliraj.ps1", "proba-zadatka.ps1", "Zadaci.ps1"];
 
 async function citajSve() {
   const sadrzaji = await Promise.all(SKRIPTE.map((s) => readFile(p(s), "utf8")));
@@ -188,8 +188,8 @@ test("[hardening] task.ps1: -Mode je obavezan za install/uninstall, bez podrazum
   assert.match(tekst, /\[ValidateSet\('Production',\s*'Smoke'\)\]\s*\n\s*\[string\]\$Mode\s*,/, "Mode ne sme imati podrazumevanu vrednost");
   assert.match(
     tekst,
-    /if \(\$Action -in @\('install',\s*'uninstall'\)\s+-and\s+-not\s+\$Mode\)\s*\{\s*throw/,
-    "install/uninstall bez -Mode moraju baciti grešku PRE bilo koje provere",
+    /if \(\$Action -in @\('install',\s*'uninstall',\s*'run'\)\s+-and\s+-not\s+\$Mode\)\s*\{\s*throw/,
+    "install/uninstall/run bez -Mode moraju baciti grešku PRE bilo koje provere",
   );
 });
 
@@ -284,12 +284,16 @@ test("[hardening] harden-install-dir i instaliraj: jedan nalog samo uz Test-Jeda
 test("[hardening] proba-zadatka.ps1 dira SAMO CarsystemProba, akcija je --help, uklanjanje je u finally", async () => {
   const tekst = ukloniKomentare((await citajSve())["proba-zadatka.ps1"]);
   assert.match(tekst, /\$TaskName = 'CarsystemProba'/);
-  // Pravi zadatak se samo čita (Get-ScheduledTask), nikad registruje, pokreće ni uklanja.
-  for (const red of tekst.split("\n").filter((r) => /-TaskName 'CarsystemConnector'/.test(r))) {
-    assert.match(red, /Get-ScheduledTask/, `pravi zadatak se ne sme menjati: ${red.trim()}`);
+  // Pravi zadatak se samo čita (Get-ZadatakCs), nikad registruje, pokreće ni uklanja.
+  const praviRedovi = tekst.split("\n").filter((r) => /-TaskName 'CarsystemConnector'/.test(r));
+  assert.ok(praviRedovi.length > 0);
+  for (const red of praviRedovi) {
+    assert.match(red, /Get-ZadatakCs/, `pravi zadatak se ne sme menjati: ${red.trim()}`);
   }
-  for (const cmdlet of ["Register-ScheduledTask", "Start-ScheduledTask", "Unregister-ScheduledTask"]) {
-    const pozivi = tekst.split("\n").filter((r) => r.trim().startsWith(cmdlet));
+  // Stanje, pokretanje i uklanjanje kroz Zadaci.ps1 (COM + schtasks), ne CIM.
+  assert.match(tekst, /\. \(Join-Path \$PSScriptRoot 'Zadaci\.ps1'\)/);
+  for (const cmdlet of ["Register-ScheduledTask", "Start-ZadatakCs", "Remove-ZadatakCs", "Get-ZadatakCs -TaskPath $TaskPath"]) {
+    const pozivi = tekst.split("\n").filter((r) => r.includes(cmdlet) && !/'CarsystemConnector'/.test(r));
     assert.ok(pozivi.length > 0, `${cmdlet} nije pozvan`);
     for (const red of pozivi) {
       assert.match(red, /-TaskName \$TaskName/, `${cmdlet} mora ciljati $TaskName: ${red.trim()}`);
@@ -529,13 +533,11 @@ test("[WIN] 2/6 — task.ps1 dry-run (Smoke) ne registruje zadatak, izlaz nosi [
     const paket = await napraviLazniPaket(baza);
     const izlaz = pokreniTask(["-Action", "install", "-Mode", "Smoke", "-PackagePath", paket, "-RunAsAccount", process.env.USERNAME]);
     assert.match(izlaz, /\[dry-run\]/);
-    const postoji = execFileSync(
-      "powershell.exe",
-      ["-NoProfile", "-Command",
-       "if (Get-ScheduledTask -TaskName CarsystemConnectorSMOKE -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
-      { encoding: "utf8" },
-    ).trim();
-    assert.equal(postoji, "NE", "dry-run je registrovao zadatak");
+    // schtasks.exe, ne Get-ScheduledTask (CIM ume da vrati 0x80070002 = lažno „ne postoji").
+    const { zadatakPremaSchtasks } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+    const z = zadatakPremaSchtasks(spawnSync, "\\Carsystem\\CarsystemConnectorSMOKE");
+    assert.equal(z.greska, null, "schtasks.exe se nije pokrenuo");
+    assert.equal(z.postoji, false, "dry-run je registrovao zadatak");
   } finally {
     await rm(baza, { recursive: true, force: true });
   }

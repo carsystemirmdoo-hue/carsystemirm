@@ -60,7 +60,7 @@
 #>
 [CmdletBinding()]
 param(
-  [ValidateSet('install', 'status', 'uninstall')]
+  [ValidateSet('install', 'status', 'uninstall', 'run')]
   [string]$Action = 'status',
   [ValidateSet('Production', 'Smoke')]
   [string]$Mode,
@@ -78,6 +78,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'PathGuards.ps1')
+# Stanje zadatka kroz Task Scheduler COM + schtasks (ne kroz CIM/WMI; vidi Zadaci.ps1).
+. (Join-Path $PSScriptRoot 'Zadaci.ps1')
 
 # Imenovani zadaci — skripta dira ISKLJUCIVO ta dva, i nikad unakrsno.
 $TaskPath = '\Carsystem\'
@@ -86,7 +88,7 @@ $TaskNames = @{
   Smoke      = 'CarsystemConnectorSMOKE'
 }
 
-if ($Action -in @('install', 'uninstall') -and -not $Mode) {
+if ($Action -in @('install', 'uninstall', 'run') -and -not $Mode) {
   throw "-Mode je obavezan za -Action $Action (Production ili Smoke). Vidi OFFICE-INSTALL.md za Production, smoke/START-HERE.md za Smoke."
 }
 
@@ -124,25 +126,42 @@ if ($entryPointPostoji) {
 switch ($Action) {
   'status' {
     $imenaZaPrikaz = if ($Mode) { @($TaskNames[$Mode]) } else { $TaskNames.Values }
+    $nepoznato = $false
     foreach ($ime in $imenaZaPrikaz) {
-      $t = Get-ScheduledTask -TaskName $ime -TaskPath $TaskPath -ErrorAction SilentlyContinue
-      if ($null -eq $t) { Write-Host "Zadatak '$ime' nije registrovan." }
+      <#
+        NE Get-ScheduledTask: na kancelarijskom racunaru CIM vraca 0x80070002 i
+        uz SilentlyContinue izgleda kao "nije registrovan". Get-ZadatakCs kaze
+        "ne postoji" samo kada se COM i schtasks.exe slazu; inace baca.
+      #>
+      try { $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $ime }
+      catch { Write-Host "Zadatak '$ime': stanje NIJE MOGUCE UTVRDITI ($($_.Exception.Message))."; $nepoznato = $true; continue }
+      if (-not $z.Postoji) { Write-Host "Zadatak '$ime' nije registrovan (potvrdjeno: $($z.Izvor))." }
       else {
-        $info = Get-ScheduledTaskInfo -TaskName $ime -TaskPath $TaskPath
         [pscustomobject]@{
-          Zadatak        = $t.TaskName
-          Stanje         = $t.State
-          Nalog          = $t.Principal.UserId
-          RunLevel       = $t.Principal.RunLevel
-          Izvrsni        = $t.Actions[0].Execute
-          Argumenti      = $t.Actions[0].Arguments
-          RadniDirekt    = $t.Actions[0].WorkingDirectory
-          PoslednjeVreme = $info.LastRunTime
-          PoslednjiIshod = $info.LastTaskResult
-          SledeceVreme   = $info.NextRunTime
+          Zadatak        = $ime
+          Izvor          = $z.Izvor
+          Stanje         = $z.Stanje
+          Nalog          = $z.UserId
+          RunLevel       = $z.RunLevel
+          Izvrsni        = $z.Execute
+          Argumenti      = $z.Arguments
+          RadniDirekt    = $z.WorkingDirectory
+          PoslednjeVreme = $z.LastRunTime
+          PoslednjiIshod = $z.LastTaskResult
+          SledeceVreme   = $z.NextRunTime
         } | Format-List
       }
     }
+    if ($nepoznato) { exit 1 }
+  }
+
+  'run' {
+    $TaskName = $TaskNames[$Mode]
+    # Rucno pokretanje odmah (umesto Start-ScheduledTask, koji ide kroz CIM).
+    $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+    if (-not $z.Postoji) { throw "Zadatak '$TaskPath$TaskName' nije registrovan." }
+    $kanal = Start-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+    Write-Host "Zadatak '$TaskPath$TaskName' je pokrenut ($kanal). Rezultat: .\task.ps1 -Action status -Mode $Mode"
   }
 
   'install' {
@@ -360,7 +379,21 @@ switch ($Action) {
         -WorkingDirectory $resolvedPackagePath
       Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath `
         -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
-      Write-Host "Registrovano. Provera: .\task.ps1 -Action status -Mode $Mode"
+      <#
+        Registracija se POTVRDJUJE nezavisno od CIM-a (COM + schtasks): zadatak
+        mora postojati, akcija mora biti bas ovaj node.exe i RunLevel Limited.
+      #>
+      $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+      if (-not $z.Postoji) { throw "Registracija '$TaskPath$TaskName' nije potvrdjena: zadatak ne postoji posle Register-ScheduledTask." }
+      if ($z.Izvor -eq 'com') {
+        if ($z.Execute -ne $nodeInfo.Path) { throw "Registrovan zadatak ne pokrece ocekivani node.exe." }
+        if ($z.RunLevel -ne 'Limited') { throw "Registrovan zadatak nema RunLevel Limited." }
+        Write-Host "Registrovano i potvrdjeno (COM): akcija node.exe, RunLevel Limited, nalog $($z.UserId)."
+      }
+      else {
+        Write-Warn "Registrovano; postojanje potvrdio schtasks.exe, detalji (akcija, RunLevel) nisu procitani kroz COM."
+      }
+      Write-Host "Provera: .\task.ps1 -Action status -Mode $Mode"
     }
   }
 
@@ -374,8 +407,9 @@ switch ($Action) {
     #>
     Write-Plan "Uklanjam zadatak '$TaskPath$TaskName' [$Mode] (PDF-ovi, kljuc i red ostaju netaknuti)."
     if ($Apply) {
-      Unregister-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -Confirm:$false
-      Write-Host "Uklonjeno."
+      # Uklanjanje kroz COM/schtasks, uz POTVRDU da zadatka vise nema (ne CIM).
+      $null = Remove-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+      Write-Host "Uklonjeno (potvrdjeno: zadatak vise ne postoji)."
     }
   }
 }

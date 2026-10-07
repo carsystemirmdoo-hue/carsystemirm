@@ -80,6 +80,8 @@ const ULAZI = [
    * pokrene — otkriveno pri pripremi P0-WIN-02A paketa.
    */
   { izvor: "connector/windows/PathGuards.ps1", cilj: "connector/windows/PathGuards.ps1", tip: "fajl" },
+  // Stanje/pokretanje/uklanjanje zadatka kroz COM + schtasks (ne CIM); dot-source-uju ga task.ps1 i ostale.
+  { izvor: "connector/windows/Zadaci.ps1", cilj: "connector/windows/Zadaci.ps1", tip: "fajl" },
   /*
    * Kancelarijska (Production) strogost — nose se radi PowerShell parser
    * provere i radi kompletnosti korigovanog WIN-01 paketa. `-Apply` se u ovoj

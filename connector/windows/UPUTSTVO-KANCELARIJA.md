@@ -93,7 +93,10 @@ rezultat zakazanog zadatka i **upozorenja**:
   U januaru: korak 1 sa `-IzvorniFolder '...\Fakture 2027'`.
 
 Ručno pokretanje odmah (bez čekanja sledećeg sata):
-`Start-ScheduledTask -TaskName CarsystemConnector`, pa `provera.ps1`.
+`& 'C:\Program Files\CarsystemConnector\windows\task.ps1' -Action run -Mode Production`,
+pa `provera.ps1`. (Ne `Start-ScheduledTask`/`Get-ScheduledTask`: na kancelarijskom
+računaru ti cmdleti idu kroz WMI i vraćaju 0x80070002; skripte koriste Task
+Scheduler COM i `schtasks.exe`. Ručna provera: `schtasks /Query /TN \Carsystem\CarsystemConnector /V /FO LIST`.)
 
 ## 4. Povratak na prethodnu verziju — kao Administrator
 

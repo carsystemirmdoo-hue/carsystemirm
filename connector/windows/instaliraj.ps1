@@ -130,8 +130,11 @@ if (-not $k.Contains('ciklus') -or -not $k.ciklus) {
 }
 
 # --------------------------------------------- 2. prethodna verzija i kopija
-$zadatak = Get-ScheduledTask -TaskName $imeZadatka -ErrorAction SilentlyContinue
-if ($zadatak -and $zadatak.State -eq 'Running') { Stani 'Zakazani zadatak trenutno radi. Sacekajte da zavrsi, pa ponovite.' }
+# Stanje kroz COM + schtasks (Zadaci.ps1), ne Get-ScheduledTask: CIM ume da vrati 0x80070002 i sakrije zadatak koji radi.
+. (Join-Path $PSScriptRoot 'Zadaci.ps1')
+try { $zadatak = Get-ZadatakCs -TaskPath '\Carsystem\' -TaskName $imeZadatka }
+catch { Stani "Stanje zakazanog zadatka nije moguce utvrditi ($($_.Exception.Message)). Proverite: schtasks /Query /TN \Carsystem\$imeZadatka" }
+if ($zadatak.Postoji -and $zadatak.Stanje -eq 'Running') { Stani 'Zakazani zadatak trenutno radi. Sacekajte da zavrsi, pa ponovite.' }
 
 if (Test-Path -LiteralPath $cilj) {
   $staraVerzija = 'nepoznata'

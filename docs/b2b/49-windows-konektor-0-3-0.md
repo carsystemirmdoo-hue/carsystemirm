@@ -80,5 +80,5 @@ neuspeha u 429.
 
 Vlasnik prijavljen na Preview (drugi faktor) → `instaliraj.ps1` (admin) →
 `podesi.ps1` (otisak) → registracija i aktivacija `KANC-01` u portalu →
-`podesi.ps1` (test veze, prvi prolaz, zadatak) → `Start-ScheduledTask` →
+`podesi.ps1` (test veze, prvi prolaz, zadatak) → `task.ps1 -Action run -Mode Production` →
 `provera.ps1` → ponovno pokretanje bez novih slanja.

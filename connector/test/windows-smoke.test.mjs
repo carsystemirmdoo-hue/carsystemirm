@@ -35,7 +35,7 @@ const guard = (t) => {
 };
 
 /** Ocena poziva .ps1: tačan izlaz + oznaka skripte, vreme za poređenje sa antivirusom. */
-const { oceniPozivSkripte } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+const { oceniPozivSkripte, zadatakPremaSchtasks } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
 
 const D = (p) => new URL(`../dist/connector/src/${p}`, import.meta.url).href;
 
@@ -549,13 +549,10 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
   t.diagnostic(`task.ps1 dry-run: ${o.detalj}`);
   assert.equal(o.ishod, "ok", `task.ps1 dry-run: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 
-  const postoji = execFileSync(
-    "powershell.exe",
-    ["-NoProfile", "-NonInteractive", "-Command",
-     "if (Get-ScheduledTask -TaskName CarsystemConnectorSMOKE -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
-    { encoding: "utf8" },
-  ).trim();
-  assert.equal(postoji, "NE", "dry-run je registrovao zadatak");
+  // schtasks.exe, ne Get-ScheduledTask (CIM ume da vrati 0x80070002 = lažno „ne postoji").
+  const z = zadatakPremaSchtasks(spawnSync, "\\Carsystem\\CarsystemConnectorSMOKE");
+  assert.equal(z.greska, null, "schtasks.exe se nije pokrenuo");
+  assert.equal(z.postoji, false, "dry-run je registrovao zadatak");
 });
 
 test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {

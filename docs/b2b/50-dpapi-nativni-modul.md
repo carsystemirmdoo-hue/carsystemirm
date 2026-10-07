@@ -147,3 +147,46 @@ su prošle, izlaz 0, bez registracije.
   Ne pokreće novi PowerShell i ne dira pravi zadatak, ključ, konfiguraciju ni
   fakture. Ovo je dokaz registracije i izvršavanja kroz Task Scheduler uz
   uključen Avast.
+
+## 7. `Get-ScheduledTask` vraća 0x80070002 (0.3.7)
+
+**Nalaz (kancelarija, 0.3.6-880ba24):**
+
+- Prošli su smoke (W13 08:32:03–08:32:05, izlaz 0), instalacija i ACL.
+- Nativni DPAPI je otključao postojeći ključ: javni otisak i SHA-256 fajla
+  ključa su isti kao pre.
+- `proba-zadatka.ps1` nije prošla. `Get-ScheduledTask` (CIM/WMI) vraća
+  HRESULT 0x80070002 i za opšte listanje. Uz `-ErrorAction SilentlyContinue`
+  to je izgledalo kao „ne postoji", pa je proba pogrešno prijavila uklanjanje.
+- Servis Schedule radi, i `schtasks.exe` radi:
+  - zadatak je nađen, XML akcije je ispravan;
+  - `/Run` je dao Last Result 0 u 08:41:49;
+  - `/Delete` je uspeo i naknadni upit je potvrdio da zadatak ne postoji.
+
+**Ispravka:**
+
+- **`windows/Zadaci.ps1`** — stanje, pokretanje i uklanjanje kroz Task
+  Scheduler COM (`Schedule.Service`), sa `schtasks.exe` kao nezavisnom
+  potvrdom:
+  - „ne postoji" se prijavljuje samo kada COM to određeno kaže (0x80070002 ili
+    0x80070003 za folder ili zadatak) i `schtasks /Query` ne nađe zadatak;
+  - ako `schtasks` nađe zadatak, rezultat je „postoji";
+  - sve ostalo je izuzetak `zadatak_stanje_nepoznato`, nikad tiho „ne postoji";
+  - `Remove-ZadatakCs` posle brisanja potvrđuje da zadatak više ne postoji;
+  - registar i WMI se ne popravljaju.
+- **`task.ps1`:**
+  - `status` koristi `Get-ZadatakCs`;
+  - posle `Register-ScheduledTask` registracija se potvrđuje kroz COM (akcija
+    `node.exe`, `RunLevel Limited`);
+  - `uninstall` koristi `Remove-ZadatakCs`;
+  - nova akcija `-Action run` (`Start-ZadatakCs`) zamenjuje `Start-ScheduledTask`.
+- **`provera.ps1`, `instaliraj.ps1`, `vrati-prethodnu.ps1`, `proba-zadatka.ps1`:**
+  sve koriste `Zadaci.ps1`. Kada se stanje ne može utvrditi, `instaliraj` i
+  `vrati-prethodnu` staju umesto da pretpostave da zadatak ne radi.
+- **Smoke W13 i `[WIN]` testovi:** odsustvo zadatka proveravaju preko
+  `schtasks.exe` iz Node-a, bez PowerShell-a i bez CIM-a.
+- **Testovi:**
+  - `zadaci-ps.test.mjs` proverava logiku sa lažnim COM servisom i lažnim
+    `schtasks`-om (pwsh 7.6.6 na Mac-u);
+  - statičko pravilo: nijedna `.ps1` skripta ne koristi `Get-ScheduledTask`,
+    `Get-ScheduledTaskInfo`, `Start-ScheduledTask` ni `Unregister-ScheduledTask`.

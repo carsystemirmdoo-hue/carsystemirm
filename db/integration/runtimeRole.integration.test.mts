@@ -25,7 +25,7 @@ const guard = (t: { skip: (m?: string) => void }) => {
   return false;
 };
 
-const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events"];
+const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles"];
 /** Ograničena izmena (opoziv 0028, prelaz stanja storna 0033): UPDATE ostaje, DELETE ne. */
 const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals"];
 

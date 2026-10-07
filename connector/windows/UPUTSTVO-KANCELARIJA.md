@@ -98,6 +98,19 @@ pa `provera.ps1`. (Ne `Start-ScheduledTask`/`Get-ScheduledTask`: na kancelarijsk
 računaru ti cmdleti idu kroz WMI i vraćaju 0x80070002; skripte koriste Task
 Scheduler COM i `schtasks.exe`. Ručna provera: `schtasks /Query /TN \Carsystem\CarsystemConnector /V /FO LIST`.)
 
+## 3a. Izveštaj ciklusa (od 0.3.9)
+
+Posle svakog pokretanja zakazanog zadatka konektor šalje portalu kratak
+izveštaj: da li je ciklus obrađen, preskočen po rasporedu ili završen greškom,
+koliko je pregledano, novo i poslato, i kada očekuje sledeće pokretanje
+(Europe/Belgrade). Šalju se samo brojevi i vremena — bez imena fajlova i
+podataka o kupcima. Ako slanje izveštaja ne uspe, to se upisuje u dnevnik, a
+fakture i red ostaju netaknuti; ništa se ne šalje ponovo.
+
+U portalu (**Uvoz → Sinhronizacija**) se odvojeno vide poslednje javljanje,
+poslednji ciklus i poslednje uspešno skeniranje. Kada izostanu dva očekivana
+termina zaredom, portal upozorava da računar verovatno ne radi.
+
 ## 4. Povratak na prethodnu verziju — kao Administrator
 
 ```powershell

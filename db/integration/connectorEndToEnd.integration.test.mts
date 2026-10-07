@@ -68,6 +68,10 @@ let owner: { id: string; name: string; role: string };
 let office: { id: string; name: string; role: string };
 let server: Server;
 let origin: string;
+/** Tela heartbeat zahteva i brojač slanja dokumenata — za proveru ciklusa (0.3.9). */
+const heartbeatTela: string[] = [];
+let heartbeatPokvaren = false;
+let ingestZahteva = 0;
 
 const ISSUER = "QA01";
 const KOREN = new URL("../../", import.meta.url);
@@ -104,6 +108,17 @@ async function podigniServer(): Promise<{ server: Server; origin: string }> {
     });
 
     const putanja = new URL(zahtev.url).pathname;
+    /* Heartbeat: telo se beleži za proveru, a server se po potrebi „kvari". */
+    if (putanja === "/api/sync/heartbeat") {
+      heartbeatTela.push(telo.toString("utf8"));
+      if (heartbeatPokvaren) {
+        res.statusCode = 503;
+        res.setHeader("content-type", "application/json; charset=utf-8");
+        res.end(JSON.stringify({ ok: false, code: "temporarily_unavailable" }));
+        return;
+      }
+    }
+    if (putanja === "/api/sync/ingest") ingestZahteva += 1;
     const rute: Record<string, (r: Request) => Promise<Response>> = {
       "/api/sync/ingest": ingest,
       "/api/sync/heartbeat": heartbeat,
@@ -168,7 +183,7 @@ async function ocisti() {
    * po redu, a `TRUNCATE` ne pokreće okidače, pa se zaštita ne gasi.
    */
   await db.sql.unsafe(
-    `TRUNCATE TABLE "sync_command_events", "sync_commands", "audit_log"
+    `TRUNCATE TABLE "sync_command_events", "sync_commands", "sync_device_cycles", "audit_log"
      RESTART IDENTITY CASCADE`,
   );
 }
@@ -1383,6 +1398,187 @@ test("trajna greška ostaje izdvojena i ne ponavlja se (za pregled)", async (t) 
     assert.deepEqual(store.zbir(), { za_pregled: 1 });
   } finally {
     store.zatvori();
+    await rm(okr.baza, { recursive: true, force: true });
+  }
+});
+
+/* =========================================================================
+ * Izveštaj ciklusa u heartbeat-u (0034, konektor 0.3.9)
+ * ====================================================================== */
+
+const izvestaj = (o: Record<string, unknown>) => ({
+  ishod: "obradjeno",
+  razlog: "raspored",
+  skeniranjeZavrseno: true,
+  pocetak: "2026-10-07T13:02:00+02:00",
+  pregledano: 10,
+  novo: 0,
+  poslato: 0,
+  potvrdjeno: 0,
+  zaPregled: 0,
+  preostalo: 0,
+  trajanjeMs: 1200,
+  verzija: "0.3.9",
+  sledeciTermin: "2026-10-07T14:02:00+02:00",
+  ...o,
+});
+
+test("heartbeat: prazno telo (0.3.8) i izveštaj ciklusa (0.3.9) se beleže odvojeno", async (t) => {
+  if (guard(t)) return;
+  const { posaljiHeartbeat } = await import(D("client.mjs"));
+  const uredjaj = await aktivanUredjaj();
+  const posalji = (telo?: unknown) =>
+    posaljiHeartbeat({ origin, deviceCode: uredjaj.deviceCode, keyId: "k1", privateKeyPkcs8Der: uredjaj.privateKeyPkcs8Der, dozvoliHttp: true, telo });
+  const stanje = async () => (await db.sql<{ last_seen_at: Date | null; last_cycle_at: Date | null; last_cycle_outcome: string | null; last_scan_completed_at: Date | null; next_expected_cycle_at: Date | null }[]>`
+    SELECT last_seen_at, last_cycle_at, last_cycle_outcome::text, last_scan_completed_at, next_expected_cycle_at FROM sync_devices WHERE id = ${uredjaj.deviceId}`)[0];
+  const ciklusa = async () => (await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM sync_device_cycles WHERE device_id = ${uredjaj.deviceId}`)[0].n;
+
+  // 0.3.8: prazno telo — samo javljanje.
+  const prazno = await posalji();
+  assert.equal(prazno.httpStatus, 200);
+  let s = await stanje();
+  assert.ok(s.last_seen_at);
+  assert.equal(s.last_cycle_at, null, "prazno telo ne sme izmisliti ciklus");
+  assert.equal(await ciklusa(), 0);
+
+  // Preskočen ciklus: računar radi, skeniranja nije bilo.
+  const now = new Date();
+  const iso = (d: Date) => d.toISOString().replace("Z", "+00:00");
+  const t1 = new Date(now.getTime() - 60 * 60_000);
+  const r1 = await posalji({ ciklus: izvestaj({ ishod: "preskoceno", razlog: "ceka_sledeci_ciklus", skeniranjeZavrseno: false, pocetak: iso(t1), pregledano: undefined }) });
+  assert.equal(r1.httpStatus, 200);
+  s = await stanje();
+  assert.equal(s.last_cycle_outcome, "preskoceno");
+  assert.equal(s.last_scan_completed_at, null, "preskočen ciklus nije skeniranje");
+  assert.ok(s.next_expected_cycle_at);
+
+  // Obrađen ciklus sa punim popisom pomera i poslednje uspešno skeniranje.
+  const t2 = new Date(now.getTime() - 5 * 60_000);
+  assert.equal((await posalji({ ciklus: izvestaj({ pocetak: iso(t2) }) })).httpStatus, 200);
+  s = await stanje();
+  assert.equal(s.last_cycle_outcome, "obradjeno");
+  assert.equal(s.last_scan_completed_at?.getTime(), t2.getTime());
+
+  // Ponovljen isti izveštaj ne pravi drugi red; zakasneli stariji ne vraća stanje unazad.
+  assert.equal(await ciklusa(), 2);
+  await posalji({ ciklus: izvestaj({ pocetak: iso(t2) }) });
+  await posalji({ ciklus: izvestaj({ ishod: "greska", skeniranjeZavrseno: false, kodGreske: "mreza", pocetak: iso(new Date(now.getTime() - 30 * 60_000)) }) });
+  assert.equal(await ciklusa(), 3);
+  s = await stanje();
+  assert.equal(s.last_cycle_at?.getTime(), t2.getTime(), "stariji izveštaj je pomerio poslednji ciklus unazad");
+  assert.equal(s.last_cycle_outcome, "obradjeno");
+
+  // Neispravno: vreme bez zone, skeniranje uz preskočen ciklus, nepoznat ishod, putanja u kodu.
+  for (const los of [
+    izvestaj({ pocetak: "2026-10-07T13:02:00" }),
+    izvestaj({ ishod: "preskoceno", skeniranjeZavrseno: true, pocetak: iso(now) }),
+    izvestaj({ ishod: "uspeh", pocetak: iso(now) }),
+    izvestaj({ kodGreske: "C:\\Users\\x", pocetak: iso(now) }),
+    izvestaj({ pocetak: iso(new Date(now.getTime() + 60 * 60_000)) }),
+  ]) {
+    const r = await posalji({ ciklus: los });
+    assert.equal(r.httpStatus, 400, JSON.stringify(los));
+    assert.match(String(r.code), /^cycle_(invalid|time_out_of_range)$/);
+  }
+  assert.equal(await ciklusa(), 3, "neispravan izveštaj je upisan");
+  assert.equal(await brojFaktura(), 0, "izveštaj ciklusa ne sme da pravi dokumente");
+});
+
+/** Pokreće CLI konektora iz paketa, sa sopstvenim folderom stanja. */
+async function cli(argv: string[], env: Record<string, string>) {
+  const { main } = await import(D("cli.mjs"));
+  const izlaz: string[] = [];
+  const pisi = process.stdout.write.bind(process.stdout);
+  const stare: Record<string, string | undefined> = {};
+  for (const [k, v] of Object.entries(env)) { stare[k] = process.env[k]; process.env[k] = v; }
+  (process.stdout as unknown as { write: (c: unknown) => boolean }).write = (c: unknown) => { izlaz.push(String(c)); return true; };
+  try {
+    const kod = await main(argv, process.env);
+    return { kod, izlaz: izlaz.join("") };
+  } finally {
+    (process.stdout as unknown as { write: typeof pisi }).write = pisi;
+    for (const [k, v] of Object.entries(stare)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }
+  }
+}
+
+test("ciklus konektora šalje izveštaj; neuspeh heartbeat-a ne menja red i ne izaziva ponovno slanje", async (t) => {
+  if (guard(t)) return;
+  const { writeFile, readFile } = await import("node:fs/promises");
+  const { otvoriStore } = await import(D("store.mjs"));
+  const { registerDevice, activateDevice } = await import("@/lib/sync/device/registry");
+  await mapiranKupac();
+  const okr = await okruzenje(["vise-stavki.pdf"]);
+  const stanje = join(okr.baza, "stanje");
+  const deviceCode = `dev-${randomUUID().slice(0, 8)}`;
+  const konfig = join(okr.baza, "config.json");
+  await writeFile(konfig, JSON.stringify({ ...konfiguracija(okr.izvor, deviceCode), ciklus: { od: "08:00", do: "19:00", svakihMinuta: 60 } }));
+  const env = {
+    CS_CONNECTOR_STATE_DIR: stanje,
+    CS_CONNECTOR_CONFIG: konfig,
+    CS_CONNECTOR_INSECURE_KEYSTORE: "1",
+    CS_CONNECTOR_ALLOW_LOOPBACK_HTTP: "1",
+  };
+  heartbeatTela.length = 0;
+  heartbeatPokvaren = false;
+  try {
+    assert.equal((await cli(["init"], env)).kod, 0);
+    const javni = JSON.parse((await cli(["export-key"], env)).izlaz);
+    const out = await registerDevice({ deviceCode, label: "QA ciklus", sourceSystem: "biznisoft", issuerCode: ISSUER, keyId: "k1", publicKeySpki: javni.javniKljucSpkiBase64 }, owner);
+    await activateDevice({ deviceId: out.deviceId, keyId: "k1", expectedFingerprint: out.fingerprint }, owner);
+
+    // 1) Ručni ciklus: šalje fakturu i posle toga izveštaj „obrađen".
+    const prvi = await cli(["run-once"], env);
+    assert.equal(prvi.kod, 0, prvi.izlaz);
+    assert.equal(await brojFaktura(), 1);
+    const posleSlanja = ingestZahteva;
+    const [c1] = await db.sql<{ outcome: string; scan_completed: boolean; sent: number; next_expected_at: Date | null; connector_version: string }[]>`
+      SELECT outcome::text, scan_completed, sent, next_expected_at, connector_version FROM sync_device_cycles WHERE device_id = ${out.deviceId}`;
+    assert.equal(c1.outcome, "obradjeno");
+    assert.equal(c1.scan_completed, true);
+    assert.equal(c1.sent, 1);
+    assert.ok(c1.next_expected_at, "uređaj nije najavio sledeći ciklus");
+    assert.match(c1.connector_version, /^\d+\.\d+\.\d+$/);
+
+    // 2) Zakazani ciklus odmah posle: preskočen po rasporedu — računar radi.
+    const drugi = await cli(["auto"], env);
+    assert.equal(drugi.kod, 0, drugi.izlaz);
+    const ishodi = (await db.sql<{ outcome: string }[]>`SELECT outcome::text FROM sync_device_cycles WHERE device_id = ${out.deviceId} ORDER BY cycle_at`).map((r) => r.outcome);
+    assert.deepEqual(ishodi, ["obradjeno", "preskoceno"]);
+
+    // 3) Server odbija heartbeat dok ciklus šalje NOVU fakturu: slanje i potvrda
+    //    prolaze, izlazni kod ostaje 0, a sledeći ciklus ništa ne šalje ponovo.
+    await mapiranKupac("09001");
+    await cp(new URL("fixtures/dev/biznisoft/jedna-stavka.pdf", KOREN).pathname, join(okr.izvor, "Faktura jedna-stavka.pdf"));
+    heartbeatPokvaren = true;
+    const treci = await cli(["run-once"], env);
+    assert.equal(treci.kod, 0, `neuspeh heartbeat-a je promenio izlazni kod: ${treci.izlaz}`);
+    assert.equal(ingestZahteva, posleSlanja + 1, "nova faktura nije poslata tačno jednom");
+    assert.equal(await brojFaktura(), 2);
+    const store = otvoriStore({ putanja: join(stanje, "queue.db"), identitet: identitet(deviceCode) });
+    const zbirPosle = JSON.stringify(store.zbir());
+    store.zatvori();
+    assert.match(zbirPosle, /"potvrdjeno":2/, `stanje reda posle neuspelog heartbeat-a: ${zbirPosle}`);
+    const dnevnik = await readFile(join(stanje, "connector.log"), "utf8").catch(() => "");
+    assert.match(dnevnik, /heartbeat/, "neuspeh heartbeat-a nije zabeležen u dnevniku");
+
+    heartbeatPokvaren = false;
+    const cetvrti = await cli(["run-once"], env);
+    assert.equal(cetvrti.kod, 0, cetvrti.izlaz);
+    assert.equal(ingestZahteva, posleSlanja + 1, "posle neuspelog heartbeat-a faktura je poslata ponovo");
+    assert.equal(await brojFaktura(), 2);
+    const store3 = otvoriStore({ putanja: join(stanje, "queue.db"), identitet: identitet(deviceCode) });
+    assert.equal(JSON.stringify(store3.zbir()), zbirPosle, "drugi ciklus je promenio red");
+    store3.zatvori();
+
+    // Telo heartbeat-a nosi samo brojeve i vremena sa zonom — bez imena fajlova i putanja.
+    assert.ok(heartbeatTela.length >= 3);
+    for (const telo of heartbeatTela) {
+      assert.doesNotMatch(telo, /Faktura|\.pdf|Moj Folder|fakture/i);
+      const c = JSON.parse(telo).ciklus;
+      assert.match(c.pocetak, /[+-]\d{2}:\d{2}$/, "vreme bez zone");
+    }
+  } finally {
+    heartbeatPokvaren = false;
     await rm(okr.baza, { recursive: true, force: true });
   }
 });

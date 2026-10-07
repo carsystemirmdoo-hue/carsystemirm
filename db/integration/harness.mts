@@ -333,6 +333,8 @@ const RESETTABLE_TABLES = [
   "recommendation_runs",
 
   "sync_command_events",
+  /* Izveštaj ciklusa (0034) — append-only, isto kao događaji komandi. */
+  "sync_device_cycles",
   "sync_commands",
   "sync_request_nonces",
   "sync_device_keys",

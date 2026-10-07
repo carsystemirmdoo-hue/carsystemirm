@@ -239,15 +239,111 @@ function odlukaUnutarRadnogVremena(ulaz, lokalno, pokrivenost) {
 export function sledeciTerminRadnoVreme(ulaz) {
   const lokalno = lokalnoVreme(ulaz.now);
   const opcije = { dodatnaZatvaranja: ulaz.dodatnaZatvaranja ?? [] };
-  const od = minutaU(ulaz.ciklus.od);
-  const doKraja = minutaU(ulaz.ciklus.do);
-  const sada = lokalno.sat * 60 + lokalno.minut;
-  if (jeRadniDan(lokalno.datum, opcije) && sada < od) return `${lokalno.datum} ${ulaz.ciklus.od}`;
-  if (jeRadniDan(lokalno.datum, opcije) && sada <= doKraja) {
-    const poslednji = ulaz.poslednjiCiklusVreme ? new Date(ulaz.poslednjiCiklusVreme) : null;
-    const pl = poslednji ? lokalnoVreme(poslednji) : null;
-    const sledeci = pl && pl.datum === lokalno.datum ? pl.sat * 60 + pl.minut + ulaz.ciklus.svakihMinuta : sada;
-    if (sledeci <= doKraja) return `${lokalno.datum} ${hhmm(Math.max(sledeci, sada))}`;
+  /*
+   * Stvarni sledeći okidač (HH:02) na kome će ciklus raditi — isto što
+   * heartbeat šalje kao očekivano sledeće javljanje. Ranije je ovde stajalo
+   * „poslednji + 60 min" (npr. 12:32), a u to vreme okidača nema.
+   */
+  const okidac = sledeciOkidacSaRadom({ ...ulaz, dodatnaZatvaranja: opcije.dodatnaZatvaranja });
+  if (okidac) {
+    const l = lokalnoVreme(okidac);
+    return `${l.datum} ${hhmm(l.sat * 60 + l.minut)}`;
   }
   return `${prviRadniDanOd(dodajDana(lokalno.datum, 1), opcije)} ${ulaz.ciklus.od}`;
+}
+
+/* =========================================================================
+ * Sledeći stvarni okidač i vreme sa vremenskom zonom (heartbeat, 0.3.9)
+ * ====================================================================== */
+
+/**
+ * Pomak okidača zakazanog zadatka u odnosu na pun sat.
+ *
+ * `windows/task.ps1` registruje okidač u 08:02 sa ponavljanjem svakih sat
+ * vremena (08:02, 09:02 … 19:02). Ako se tamo promeni, menja se i ovde.
+ */
+export const OKIDAC_POMAK_MIN = 2;
+
+/** Pomak zone u minutama za dati trenutak (npr. +120 leti, +60 zimi). */
+function pomakZone(trenutak, zona = VREMENSKA_ZONA) {
+  const deo = new Intl.DateTimeFormat("en-US", { timeZone: zona, timeZoneName: "longOffset" })
+    .formatToParts(trenutak)
+    .find((d) => d.type === "timeZoneName")?.value ?? "GMT";
+  const m = /GMT([+-])(\d{2}):?(\d{2})?/.exec(deo);
+  if (!m) return 0;
+  return (m[1] === "-" ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3] ?? 0));
+}
+
+/**
+ * Apsolutni trenutak za beogradski zidni sat (`datum` GGGG-MM-DD, sat, minut).
+ * Dva prolaza dovoljna su i oko prelaska na letnje/zimsko vreme.
+ */
+export function beogradskiTrenutak(datum, sat, minut) {
+  const [g, m, d] = datum.split("-").map(Number);
+  const kaoUtc = Date.UTC(g, m - 1, d, sat, minut);
+  let t = kaoUtc - pomakZone(new Date(kaoUtc)) * 60_000;
+  t = kaoUtc - pomakZone(new Date(t)) * 60_000;
+  return new Date(t);
+}
+
+/**
+ * ISO 8601 sa pomakom zone, npr. `2026-10-07T15:02:00+02:00`.
+ * Vremena u heartbeat-u nose zonu — server ih čuva kao `timestamptz`.
+ */
+export function isoBeograd(trenutak) {
+  const l = lokalnoVreme(trenutak);
+  const sek = new Intl.DateTimeFormat("en-GB", { timeZone: VREMENSKA_ZONA, second: "2-digit" })
+    .format(trenutak)
+    .padStart(2, "0");
+  const p = pomakZone(trenutak);
+  const znak = p < 0 ? "-" : "+";
+  const a = Math.abs(p);
+  const hh = (n) => String(n).padStart(2, "0");
+  return `${l.datum}T${hh(l.sat)}:${hh(l.minut)}:${sek}${znak}${hh(Math.floor(a / 60))}:${hh(a % 60)}`;
+}
+
+/**
+ * Prvi sledeći okidač zadatka posle kog će ciklus STVARNO raditi.
+ *
+ * Okidači su u HH:02 od `ciklus.od` do `ciklus.do`, radnim danima. Okidač koji
+ * dođe pre isteka `svakihMinuta − tolerancija` od poslednjeg ciklusa konektor
+ * preskače (`ceka_sledeci_ciklus`), pa se ne računa kao očekivan rad.
+ * Primer: ručno pokretanje u 11:32 → 12:02 se preskače, sledeći rad je 13:02.
+ *
+ * @param {{ now: Date, ciklus: { od: string, do: string, svakihMinuta: number } | null,
+ *           poslednjiCiklusVreme?: string | null, dodatnaZatvaranja?: readonly string[] }} ulaz
+ * @returns {Date | null}  `null` kada satni raspored nije podešen
+ */
+export function sledeciOkidacSaRadom(ulaz) {
+  if (!ulaz.ciklus) return null;
+  const opcije = { dodatnaZatvaranja: ulaz.dodatnaZatvaranja ?? [] };
+  const [odSat] = ulaz.ciklus.od.split(":").map(Number);
+  const [doSat, doMin] = ulaz.ciklus.do.split(":").map(Number);
+  const poslednji = ulaz.poslednjiCiklusVreme ? new Date(ulaz.poslednjiCiklusVreme) : null;
+  const minRazmak = (ulaz.ciklus.svakihMinuta - TOLERANCIJA_MIN) * 60_000;
+
+  const doKraja = doSat * 60 + doMin;
+  const poslednjiLokalno = poslednji ? lokalnoVreme(poslednji) : null;
+
+  let datum = lokalnoVreme(ulaz.now).datum;
+  for (let dan = 0; dan < 40; dan += 1) {
+    if (jeRadniDan(datum, opcije)) {
+      for (let sat = odSat; sat <= doSat; sat += 1) {
+        const okidac = beogradskiTrenutak(datum, sat, OKIDAC_POMAK_MIN);
+        if (okidac <= ulaz.now) continue;
+        if (sat * 60 + OKIDAC_POMAK_MIN > doKraja) {
+          // Okidač posle kraja radnog vremena: isto pravilo kao `naknadni_kraj_dana`.
+          const vecPosleKraja =
+            poslednjiLokalno?.datum === datum &&
+            poslednjiLokalno.sat * 60 + poslednjiLokalno.minut >= doKraja;
+          if (vecPosleKraja) continue;
+        } else if (poslednji && okidac.getTime() - poslednji.getTime() < minRazmak) {
+          continue;
+        }
+        return okidac;
+      }
+    }
+    datum = dodajDana(datum, 1);
+  }
+  return null;
 }

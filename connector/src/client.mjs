@@ -259,11 +259,18 @@ async function procitajOgraniceno(odgovor) {
   return Buffer.concat(delovi.map((d) => Buffer.from(d))).toString("utf8");
 }
 
-/** Heartbeat — postojeći endpoint, prazno telo, isti ugovor. */
+/**
+ * Heartbeat — postojeći endpoint i isti potpis.
+ *
+ * Bez `telo` šalje prazan objekat, kao do 0.3.8. Sa `telo` (izveštaj ciklusa,
+ * samo brojevi i vremena — bez imena fajlova i podataka o kupcima) server
+ * beleži ciklus. Telo se serijalizuje jednom; otisak pokriva baš te bajtove.
+ */
 export async function posaljiHeartbeat(ulaz) {
+  const { telo, ...ostalo } = ulaz;
   return posaljiPotpisano({
-    ...ulaz,
+    ...ostalo,
     path: "/api/sync/heartbeat",
-    bodyBytes: new TextEncoder().encode("{}"),
+    bodyBytes: new TextEncoder().encode(telo === undefined ? "{}" : JSON.stringify(telo)),
   });
 }

@@ -211,3 +211,38 @@ su prošle, izlaz 0, bez registracije.
   istog imena kao parametar skripte. Jedini nameran izuzetak je
   `$PosaljiOdDatuma` u `instaliraj.ps1`, koji nema validaciju. Pravilo pada na
   starom `task.ps1`.
+
+## 9. Heartbeat posle svakog ciklusa (konektor 0.3.9, migracija 0034)
+
+- **Konektor:**
+  - posle svakog `auto` i `run-once` (obrađen, preskočen po rasporedu ili
+    greška) šalje potpisan `POST /api/sync/heartbeat` sa telom
+    `{ "ciklus": { ishod, razlog, skeniranjeZavrseno, pocetak, pregledano, novo,
+    poslato, potvrdjeno, zaPregled, preostalo, trajanjeMs, kodGreske, verzija,
+    sledeciTermin } }`;
+  - vremena su ISO 8601 sa pomakom zone (Europe/Belgrade);
+  - `sledeciTermin` je stvarni sledeći okidač u HH:02 na kome će ciklus
+    raditi (radni dani, praznici, pravilo 55 minuta).
+- **Bezbednost reda:**
+  - heartbeat se šalje posle oslobađanja brave i posle svih upisa u red;
+  - greške hvata sam i samo ih upisuje u dnevnik;
+  - ne menja izlazni kod, stanje stavki ni meta podatke ciklusa.
+
+  Integracioni test sa serverom koji odbija heartbeat potvrđuje da je nova
+  faktura poslata tačno jednom i da sledeći ciklus ništa ne šalje ponovo.
+- **Server:**
+  - prazno telo (0.3.8) pomera samo `last_seen_at`, kao ranije;
+  - izveštaj se strogo proverava (zod, vreme sa zonom, najviše 10 minuta u
+    budućnosti i 7 dana u prošlosti, kodovi `[a-z0-9_]`);
+  - upisuje se u `sync_device_cycles`, tabelu u koju se samo dodaje i koja je
+    idempotentna po (uređaj, početak);
+  - na uređaju se pomeraju `last_cycle_at`, `last_cycle_outcome`,
+    `last_scan_completed_at` i `next_expected_cycle_at`, i to samo unapred.
+- **Portal (Sinhronizacija):**
+  - poslednje javljanje, poslednji ciklus i poslednje uspešno skeniranje su
+    odvojeni, u Europe/Belgrade;
+  - upozorenje „nema ciklusa" se uključuje 75 minuta posle termina koji je
+    uređaj sam najavio;
+  - prikazuje se poslednjih 12 ciklusa.
+- **Rola:** `sync_device_cycles` je u `runtime-role.sql` među tabelama samo za
+  dodavanje (SELECT i INSERT).

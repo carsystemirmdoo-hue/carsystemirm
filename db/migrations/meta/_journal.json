@@ -239,6 +239,13 @@
       "when": 1791295200000,
       "tag": "0033_invoice_reversals",
       "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1791381600000,
+      "tag": "0034_sync_device_cycles",
+      "breakpoints": true
     }
   ]
 }

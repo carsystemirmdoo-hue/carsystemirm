@@ -1,6 +1,8 @@
 import {
   bigserial,
+  boolean,
   index,
+  integer,
   pgEnum,
   pgTable,
   text,
@@ -66,6 +68,15 @@ export const syncDeviceStatus = pgEnum("sync_device_status", [
 
 export type SyncDeviceStatus = (typeof syncDeviceStatus.enumValues)[number];
 
+/** Ishod ciklusa konektora (0034). */
+export const syncCycleOutcome = pgEnum("sync_cycle_outcome", [
+  "obradjeno",
+  "preskoceno",
+  "greska",
+]);
+
+export type SyncCycleOutcome = (typeof syncCycleOutcome.enumValues)[number];
+
 /**
  * Registrovan uređaj.
  *
@@ -100,6 +111,14 @@ export const syncDevices = pgTable(
      * „neko je pogodio adresu“.
      */
     lastSeenAt: timestamp("last_seen_at", { withTimezone: true }),
+    /*
+     * Izveštaj ciklusa (0034, konektor 0.3.9). Odvojeno od `lastSeenAt`:
+     * javljanje ≠ ciklus ≠ uspešno skeniranje. Konektor 0.3.8 ih ne puni.
+     */
+    lastCycleAt: timestamp("last_cycle_at", { withTimezone: true }),
+    lastCycleOutcome: syncCycleOutcome("last_cycle_outcome"),
+    lastScanCompletedAt: timestamp("last_scan_completed_at", { withTimezone: true }),
+    nextExpectedCycleAt: timestamp("next_expected_cycle_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -218,3 +237,38 @@ export type SyncRequestNonceRow = typeof syncRequestNonces.$inferSelect;
 export const auditActorKind = pgEnum("audit_actor_kind", ["user", "device", "system"]);
 
 export type AuditActorKind = (typeof auditActorKind.enumValues)[number];
+
+/**
+ * Izveštaj svakog ciklusa konektora — samo dodavanje (okidač u 0034).
+ * Brojevi i vremena; bez imena fajlova i podataka o kupcima.
+ */
+export const syncDeviceCycles = pgTable(
+  "sync_device_cycles",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    deviceId: uuid("device_id")
+      .notNull()
+      .references(() => syncDevices.id, { onDelete: "restrict" }),
+    receivedAt: timestamp("received_at", { withTimezone: true }).notNull().defaultNow(),
+    cycleAt: timestamp("cycle_at", { withTimezone: true }).notNull(),
+    outcome: syncCycleOutcome("outcome").notNull(),
+    reason: text("reason"),
+    scanCompleted: boolean("scan_completed").notNull(),
+    scanned: integer("scanned"),
+    newDocuments: integer("new_documents"),
+    sent: integer("sent"),
+    confirmed: integer("confirmed"),
+    forReview: integer("for_review"),
+    remaining: integer("remaining"),
+    durationMs: integer("duration_ms"),
+    errorCode: text("error_code"),
+    connectorVersion: text("connector_version"),
+    nextExpectedAt: timestamp("next_expected_at", { withTimezone: true }),
+  },
+  (table) => [
+    uniqueIndex("sync_device_cycles_device_cycle_key").on(table.deviceId, table.cycleAt),
+    index("sync_device_cycles_recent_idx").on(table.deviceId, table.receivedAt),
+  ],
+);
+
+export type SyncDeviceCycleRow = typeof syncDeviceCycles.$inferSelect;

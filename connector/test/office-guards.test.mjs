@@ -143,7 +143,7 @@ test("satni ciklus radnim danima 08–19: odluke po satu, bez ponavljanja u isto
   const staro = schedule.odlukaOCiklusu({ now: t("2026-10-06T09:30:00") });
   assert.equal(staro.akcija, "pokreni");
   assert.equal(schedule.sledeciTerminRadnoVreme({ now: t("2026-10-06T08:40:00"), ciklus, poslednjiCiklusVreme: t("2026-10-06T08:02:00").toISOString() }), "2026-10-06 09:02");
-  assert.equal(schedule.sledeciTerminRadnoVreme({ now: t("2026-10-09T19:30:00"), ciklus, poslednjiCiklusVreme: t("2026-10-09T19:02:00").toISOString() }), "2026-10-12 08:00");
+  assert.equal(schedule.sledeciTerminRadnoVreme({ now: t("2026-10-09T19:30:00"), ciklus, poslednjiCiklusVreme: t("2026-10-09T19:02:00").toISOString() }), "2026-10-12 08:02");
 });
 
 test("ciklus u konfiguraciji se proverava", () => {

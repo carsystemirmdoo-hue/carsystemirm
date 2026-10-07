@@ -8,10 +8,18 @@ import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
 import { STANJA } from "./outcomes.mjs";
 import { IZLAZ_NEPOTPUN_POPIS, izlazniKodCiklusa, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 import { opisiPokrivenost } from "./calendar.mjs";
-import { lokalnoVreme, odlukaOCiklusu, sledeciTermin, sledeciTerminRadnoVreme } from "./schedule.mjs";
+import {
+  isoBeograd,
+  lokalnoVreme,
+  odlukaOCiklusu,
+  sledeciOkidacSaRadom,
+  sledeciTermin,
+  sledeciTerminRadnoVreme,
+} from "./schedule.mjs";
 import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
 import { proveriIzvor } from "./scanner.mjs";
 import { posaljiHeartbeat } from "./client.mjs";
+import { readFileSync } from "node:fs";
 import {
   izvrsiKomandu,
   LOKALNA_ZAVRSNA,
@@ -287,6 +295,14 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
     return 0;
   }
 
+  /*
+   * Izveštaj ciklusa za heartbeat (0.3.9). Šalje se POSLE oslobađanja brave i
+   * POSLE svih upisa u red, kao zaseban zahtev: njegov neuspeh ne menja stanje
+   * nijedne stavke i ne izaziva ponovno slanje — samo se upisuje u dnevnik.
+   */
+  /** @type {Record<string, unknown> | null} */
+  let izvestaj = null;
+  const pocetak = Date.now();
   try {
     const lokalno = lokalnoVreme(now);
 
@@ -301,6 +317,11 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       });
       if (odluka.akcija !== "pokreni") {
         if (!tiho) ispisi({ komanda: "auto", status: odluka.akcija, ...odluka });
+        izvestaj = {
+          ishod: "preskoceno",
+          razlog: String(odluka.razlog ?? odluka.akcija),
+          skeniranjeZavrseno: false,
+        };
         return odluka.akcija === "blokirano" ? 1 : 0;
       }
     }
@@ -344,15 +365,110 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
       sledeciTermin: terminZaPrikaz(k, store, now),
     });
+
+    izvestaj = {
+      ishod: "obradjeno",
+      razlog: rucni ? "rucno_pokretanje" : "raspored",
+      // Pun popis = skeniranje je obišlo ceo izvor; nepotpun se javlja sa kodom.
+      skeniranjeZavrseno: !skeniranje.kodPopisa,
+      ...(skeniranje.kodPopisa || slanje.zaustavljeno
+        ? { kodGreske: bezbedanKodGreske({ code: skeniranje.kodPopisa ?? slanje.zaustavljeno }) }
+        : {}),
+      pregledano: brojIli0(skeniranje.pregledano),
+      novo: brojIli0(skeniranje.novo),
+      poslato: brojIli0(slanje.poslato),
+      potvrdjeno: brojIli0(slanje.potvrdjeno),
+      zaPregled: brojIli0(slanje.zaPregled),
+      preostalo: brojIli0(slanje.ostaloURedu ?? skeniranje.preostalo),
+    };
     /*
      * Blokada ima prednost: ona zaustavlja slanje. Nepotpun popis nije
      * zaustavio slanje viđenog, ali ciklus nije potpuno uspešan — i Task
      * Scheduler to mora da vidi kao „Last Run Result“ različit od nule.
      */
     return izlazniKodCiklusa({ skeniranje, slanje });
+  } catch (greska) {
+    izvestaj = {
+      ishod: "greska",
+      razlog: rucni ? "rucno_pokretanje" : "raspored",
+      skeniranjeZavrseno: false,
+      kodGreske: bezbedanKodGreske(greska),
+    };
+    throw greska;
   } finally {
     store.otpustiZakljucavanje(vlasnik);
+    if (izvestaj) {
+      await javiCiklus({ p, k, store, log, now, pocetak, izvestaj });
+    }
     store.zatvori();
+  }
+}
+
+/** Nenegativan ceo broj ili 0 — server prima samo takve brojače. */
+function brojIli0(v) {
+  const n = Number(v);
+  return Number.isInteger(n) && n >= 0 ? n : 0;
+}
+
+/** Kod greške za heartbeat: samo `[a-z0-9_]`, nikad poruka (ume da nosi putanju). */
+function bezbedanKodGreske(greska) {
+  const kod = String(greska?.code ?? "greska_ciklusa").toLowerCase().replace(/[^a-z0-9_]/g, "_").slice(0, 64);
+  return kod || "greska_ciklusa";
+}
+
+/** Verzija spakovanog konektora (`dist/package.json`), u izvoru `connector/package.json`. */
+function verzijaKonektora() {
+  for (const rel of ["../../package.json", "../package.json"]) {
+    try {
+      const m = JSON.parse(readFileSync(new URL(rel, import.meta.url), "utf8"));
+      if (m.name === "carsystem-connector" && typeof m.version === "string") return m.version.slice(0, 32);
+    } catch {
+      /* sledeći kandidat */
+    }
+  }
+  return "nepoznata";
+}
+
+/**
+ * Heartbeat posle ciklusa — best effort.
+ *
+ * Ne dira red, bravu ni meta podatke ciklusa; ne baca. Ishod se samo upisuje u
+ * dnevnik, da se vidi i kada server nije dostupan.
+ */
+async function javiCiklus({ p, k, store, log, now, pocetak, izvestaj }) {
+  try {
+    const sledeci = sledeciOkidacSaRadom({
+      now: new Date(),
+      ciklus: k.ciklus,
+      poslednjiCiklusVreme: store.citajMetu("poslednji_ciklus_vreme"),
+      dodatnaZatvaranja: k.dodatnaZatvaranja,
+    });
+    const telo = {
+      ciklus: {
+        ...izvestaj,
+        pocetak: isoBeograd(now),
+        trajanjeMs: Math.max(0, Date.now() - pocetak),
+        verzija: verzijaKonektora(),
+        sledeciTermin: sledeci ? isoBeograd(sledeci) : null,
+      },
+    };
+    const kljuc = await (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc });
+    const odgovor = await posaljiHeartbeat({
+      origin: k.serverOrigin,
+      zastitaPristupa: k.vercelZastita ?? null,
+      deviceCode: k.deviceCode,
+      keyId: k.keyId,
+      privateKeyPkcs8Der: kljuc,
+      timeoutMs: k.timeoutMs,
+      telo,
+    });
+    await log?.zapisi(odgovor.httpStatus === 200 ? "info" : "warn", "heartbeat", {
+      ishod: izvestaj.ishod,
+      http: odgovor.httpStatus,
+      kod: odgovor.code,
+    });
+  } catch (greska) {
+    await log?.zapisi("warn", "heartbeat", { ishod: izvestaj.ishod, kod: bezbedanKodGreske(greska) }).catch(() => {});
   }
 }
 

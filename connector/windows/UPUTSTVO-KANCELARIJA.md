@@ -60,6 +60,20 @@ Vlasnik u portalu: **Uvoz → Sinhronizacija → registruj uređaj** (oznaka
 poklapa. Zatim ponovo `podesi.ps1`: test veze, prvi prolaz (nove fakture se
 šalju, starije samo zabeleže), registracija zadatka i provera.
 
+## 2a. Proba zakazanog zadatka (pre pravog zadatka)
+
+Isti administratorski prozor. Registruje ZASEBAN zadatak `\Carsystem\CarsystemProba`
+(akcija `node.exe … --help`: bez ključa, mreže i faktura), pokreće ga, proverava
+rezultat 0 i uvek ga uklanja. Pravi zadatak `CarsystemConnector` ne dira.
+
+```powershell
+& 'C:\Program Files\CarsystemConnector\windows\proba-zadatka.ps1' -JedanNalogSaUAC
+```
+
+Očekivano `PROBA PROSLA` i izlaz 0. Svaki korak ima vreme — uporediti sa
+istorijom detekcija antivirusa. Ako je proba prekinuta pa zadatak ostao:
+isti poziv sa `-SamoUkloni`.
+
 ## 3. Svakodnevna provera
 
 ```powershell

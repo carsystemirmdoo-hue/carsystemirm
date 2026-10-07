@@ -18,7 +18,7 @@ import {
 } from "node:fs";
 import { arch, platform, release, tmpdir, version as osVersion } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const OVDE = dirname(fileURLToPath(import.meta.url));
 const PAKET = resolve(OVDE, "..");
@@ -30,6 +30,9 @@ const META = JSON.parse(readFileSync(join(OVDE, "package-meta.json"), "utf8"));
 
 /** Runtime ugovor živi u zasebnom modulu, da bi bio testabilan van Windows-a. */
 const { oceniRuntime, testiraniMajor } = await import("./runtime-contract.mjs");
+
+/** Ocena poziva .ps1 (vreme, izlaz, oznaka) — isti modul koriste i [WIN] testovi. */
+const { oceniPozivSkripte } = await import(pathToFileURL(join(TESTOVI, "task-poziv.mjs")).href);
 
 /* =========================================================================
  * Izveštavanje
@@ -225,7 +228,7 @@ function powershell(args, timeout = 120000) {
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", ...args],
     { encoding: "utf8", timeout },
   );
-  return { kod: r.status, stdout: r.stdout ?? "", stderr: r.stderr ?? "" };
+  return { kod: r.status, signal: r.signal ?? null, stdout: r.stdout ?? "", stderr: r.stderr ?? "" };
 }
 
 /* =========================================================================
@@ -582,8 +585,6 @@ provera("W12", "watch bez konfiguracije STAJE, bez tight loop-a", () => {
   return { detalj: `staje sa izlazom 1, kod=${d.kod ?? "?"}` };
 });
 
-/** Potpisi poruka kojima Windows odbija izvršavanje .ps1 fajla. */
-const POLITIKA_BLOKIRA = /UnauthorizedAccess|cannot be loaded because running scripts is disabled|execution of scripts is disabled|PSSecurityException|not digitally signed/i;
 
 /**
  * Jedini poziv `task.ps1` u smoke toku — namerno u imenovanoj, uskoj
@@ -599,56 +600,51 @@ const POLITIKA_BLOKIRA = /UnauthorizedAccess|cannot be loaded because running sc
 const W13_TASK_ARGS = ["-File", join(WINDOWS, "task.ps1"), "-Action", "install", "-Mode", "Smoke", "-PackagePath", DIST];
 
 provera("W13", "task.ps1 ostaje dry-run i NE pravi zadatak", () => {
+  const pocetak = new Date();
   const r = powershell(W13_TASK_ARGS);
+  const kraj = new Date();
 
   /*
-   * Execution policy je STANJE MAŠINE, ne kvar paketa.
+   * Ocena: izlaz MORA biti 0 i izlaz MORA nositi `[dry-run]` koji piše sama
+   * skripta. Detalj nosi vreme (HH:mm:ss) i izlazni kod, da se prijava
+   * antivirusa može povezati sa ovim pozivom (kancelarija d5e03d1: Avast
+   * PSD11 na task.ps1 uz SMOKE PASS, bez vremena u izveštaju).
    *
-   * Kada je politiku postavila Group Policy, `-ExecutionPolicy Bypass` se
-   * IGNORIŠE i `-File` nad nepotpisanom skriptom biva odbijen. To nije razlog
-   * da smoke padne, i nije razlog da iko globalno menja bezbednosno
-   * podešavanje računara — nego kontrolisan INCOMPLETE sa imenovanim uzrokom.
-   *
-   * Zadatak se i tada proverava: `Get-ScheduledTask` ide kroz `-Command`, na
-   * koji se politika izvršavanja skripti ne primenjuje.
+   * Execution policy je STANJE MAŠINE, ne kvar paketa: kada je politiku
+   * postavila Group Policy, `-ExecutionPolicy Bypass` se IGNORIŠE. To je
+   * kontrolisan SKIP sa imenovanim uzrokom, ne razlog za menjanje politike.
    */
-  const blokirano = r.kod !== 0 && POLITIKA_BLOKIRA.test(`${r.stdout}${r.stderr}`);
+  const o = oceniPozivSkripte({
+    kod: r.kod, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 0, oznaka: /\[dry-run\]/, pocetak, kraj,
+  });
 
+  // Zadatak se proverava uvek: `Get-ScheduledTask` ide kroz `-Command`.
   const postoji = powershell([
     "-Command",
     "if (Get-ScheduledTask -TaskName CarsystemConnector -TaskPath '\\Carsystem\\' " +
       "-ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }",
   ]);
-  const zadatakPostoji = postoji.stdout.trim() === "DA";
-  if (zadatakPostoji) {
-    pad("scheduled_task_created", "zadatak CarsystemConnector postoji posle dry-run-a");
+  if (postoji.stdout.trim() === "DA") {
+    pad("scheduled_task_created", `zadatak CarsystemConnector postoji posle dry-run-a; ${o.detalj}`);
   }
 
-  if (blokirano) {
+  if (o.ishod === "politika") {
     return {
       skip: true,
-      kod: "task_script_blocked_by_policy",
-      detalj:
-        `politika izvršavanja blokira .ps1 (izlaz ${r.kod}); ${politikaOpis()}. ` +
+      kod: o.kod,
+      detalj: `politika izvršavanja blokira .ps1 (${o.detalj}); ${politikaOpis()}. ` +
         "Zadatak NIJE registrovan. Ne menjati politiku zbog smoke-a.",
     };
   }
-  if (r.kod !== 0) {
+  if (o.ishod !== "ok") {
     /*
-     * Detalj nosi PowerShell identifikator greške, kategoriju i red skripte —
-     * ne poruku, koja može da sadrži putanju sa imenom naloga. Kancelarijski
-     * prolaz 45a3460 je ovde vratio samo „izašao sa 1", i uzrok (skripta bez
-     * BOM-a, pročitana kao cp1250) morao je da se izvodi iz izvora.
+     * Detalj nosi vreme, izlazni kod i PowerShell identifikator — ne poruku,
+     * koja može da sadrži putanju sa imenom naloga.
      */
-    pad(
-      "task_script_failed",
-      `powershell -File je izašao sa ${r.kod}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}; ${politikaOpis()}`,
-    );
+    pad(o.kod, `${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}; ${politikaOpis()}`);
   }
-  if (!/\[dry-run\]/.test(r.stdout)) {
-    pad("task_script_not_dry_run", "izlaz ne sadrži oznaku [dry-run]");
-  }
-  return { detalj: "plan ispisan, zadatak NIJE registrovan" };
+  return { detalj: `plan ispisan, zadatak NIJE registrovan; ${o.detalj}` };
 });
 
 provera("W14", "spakovan konektor ne bira test skladište ključa", () => {

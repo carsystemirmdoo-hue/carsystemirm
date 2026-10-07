@@ -104,3 +104,46 @@ Ništa od ovoga ne aktivira uređaj, ne registruje zadatak i ne šalje fakture.
 5. `podesi.ps1 -JedanNalogSaUAC` staje na „Uređaj još nije aktiviran“ sa istim
    otiskom. Dalje (aktivacija `KANC-01`, prvo slanje, zadatak) samo uz posebno
    odobrenje.
+
+## 6. Avast PSD11 na `task.ps1` (smoke d5e03d1) i proba zadatka (0.3.6)
+
+**Nalaz.** Smoke d5e03d1 je dao PASS, a Avast je u 08:13:51 prijavio
+IDP.HELU.PSD11 na `task.ps1`.
+
+- `RUN-SMOKE` poziva `task.ps1` tri puta, svaki put kao
+  `node` → `powershell -ExecutionPolicy Bypass -File`:
+  - W13 (dry-run);
+  - `[WIN]` dry-run test;
+  - `[WIN]` test „bez -Mode".
+- Sva tri su ispisala ono što test traži, pa skripta nije zaustavljena pre
+  svog posla. Zadatak nije registrovan.
+- Izveštaj nije imao vreme poziva, pa se prijava nije mogla povezati ni sa
+  jednim pozivom.
+- Test koji očekuje odbijanje prolazio je i kad proces prekine neko drugi.
+
+**Production dry-run** iz administratorskog PowerShell-a (instalirana 0.3.3,
+`&` poziv, bez novog `powershell.exe`): 08:20:33–08:20:34. Sve stroge provere
+su prošle, izlaz 0, bez registracije.
+
+**Izmene:**
+
+- **`connector/test/task-poziv.mjs`** — ocena poziva. Svaki poziv nosi vreme
+  (HH:mm:ss), trajanje i izlazni kod. Prolazi samo uz tačan izlaz i oznaku koju
+  piše sama skripta. Ostali ishodi su imenovani:
+  - `task_script_blocked_or_killed`;
+  - `task_script_blocked_by_antivirus`;
+  - `task_script_blocked_by_policy`;
+  - `task_script_wrong_exit`;
+  - `task_script_marker_missing`.
+- **Gde se koristi:**
+  - W13 i dva `[WIN]` testa (vreme ide u TAP dijagnostiku);
+  - negativni `[WIN]` testovi u `windows-install-hardening.test.mjs` (umesto
+    golog `assert.throws`).
+- **`windows/proba-zadatka.ps1`** — zaseban zadatak `\Carsystem\CarsystemProba`:
+  - bez okidača, `RunLevel Limited`, akcija `node.exe … --packaged --help`;
+  - `Start-ScheduledTask`, pa provera da je `LastTaskResult` 0;
+  - uklanjanje u `finally`.
+
+  Ne pokreće novi PowerShell i ne dira pravi zadatak, ključ, konfiguraciju ni
+  fakture. Ovo je dokaz registracije i izvršavanja kroz Task Scheduler uz
+  uključen Avast.

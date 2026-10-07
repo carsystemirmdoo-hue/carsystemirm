@@ -34,6 +34,9 @@ const guard = (t) => {
   return false;
 };
 
+/** Ocena poziva .ps1: tačan izlaz + oznaka skripte, vreme za poređenje sa antivirusom. */
+const { oceniPozivSkripte } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+
 const D = (p) => new URL(`../dist/connector/src/${p}`, import.meta.url).href;
 
 /**
@@ -528,6 +531,7 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
    * `-Mode Smoke` je obavezan od WIN-INSTALL-01 korekcije — bez njega skripta
    * baca grešku pre bilo koje provere.
    */
+  const pocetak = new Date();
   const r = spawnSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
@@ -535,11 +539,15 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
     { encoding: "utf8", timeout: 120_000 },
   );
   /*
-   * Pad nosi PowerShell identifikator greške i broj reda — ne putanju ni
-   * poruku. Pre popravke kodiranja ovde je stajalo samo „izlaz 1".
+   * Izlaz TAČNO 0 i oznaka `[dry-run]` koju piše skripta. Vreme i izlazni kod
+   * idu u TAP dijagnostiku, da se prijava antivirusa poveže sa pozivom.
    */
-  assert.equal(r.status, 0, `task.ps1 dry-run: izlaz ${r.status}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
-  assert.match(r.stdout, /\[dry-run\]/);
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 0, oznaka: /\[dry-run\]/, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`task.ps1 dry-run: ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `task.ps1 dry-run: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 
   const postoji = execFileSync(
     "powershell.exe",
@@ -553,18 +561,24 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
 test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {
   if (guard(t)) return;
   const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
+  const pocetak = new Date();
   const r = spawnSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
      "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
     { encoding: "utf8", timeout: 120_000 },
   );
-  assert.notEqual(r.status, 0);
   /*
-   * Odbijanje mora biti BAŠ ono zbog `-Mode`. Ranije je test tražio samo
-   * nenulti izlaz — i prolazio je dok je skripta padala na parsiranju.
+   * Odbijanje mora biti BAŠ ono zbog `-Mode`: izlaz TAČNO 1 (neuhvaćen
+   * `throw` u -File režimu) i poruka skripte. Golo „nenulti izlaz" bi prošlo
+   * i kada proces prekine antivirus (kancelarija d5e03d1).
    */
-  assert.match(`${r.stdout}${r.stderr}`, /-Mode je obavezan/, `drugi razlog: ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 1, oznaka: /-Mode je obavezan/, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`task.ps1 bez -Mode: ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `task.ps1 bez -Mode: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 });
 
 /* =========================================================================

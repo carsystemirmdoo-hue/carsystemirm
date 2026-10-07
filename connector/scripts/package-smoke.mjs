@@ -58,6 +58,8 @@ const ULAZI = [
   { izvor: "connector/test/scanner-store.test.mjs", cilj: "connector/test/scanner-store.test.mjs", tip: "fajl" },
   { izvor: "connector/test/commands.test.mjs", cilj: "connector/test/commands.test.mjs", tip: "fajl" },
   { izvor: "connector/test/windows-smoke.test.mjs", cilj: "connector/test/windows-smoke.test.mjs", tip: "fajl" },
+  // Ocena poziva .ps1 (vreme, izlaz, oznaka); uvoze je [WIN] testovi i runner (W13).
+  { izvor: "connector/test/task-poziv.mjs", cilj: "connector/test/task-poziv.mjs", tip: "fajl" },
   /*
    * WIN-INSTALL-01 korekcija: proverava iste skripte ispod, statički
    * (parsiranje, dry-run, forbidden-path, disposable-folder ACL) bez
@@ -93,6 +95,7 @@ const ULAZI = [
   { izvor: "connector/windows/podesi.ps1", cilj: "connector/windows/podesi.ps1", tip: "fajl" },
   { izvor: "connector/windows/provera.ps1", cilj: "connector/windows/provera.ps1", tip: "fajl" },
   { izvor: "connector/windows/vrati-prethodnu.ps1", cilj: "connector/windows/vrati-prethodnu.ps1", tip: "fajl" },
+  { izvor: "connector/windows/proba-zadatka.ps1", cilj: "connector/windows/proba-zadatka.ps1", tip: "fajl" },
   /*
    * Referentni runbook za KASNIJU kancelarijsku instalaciju — ne za ovaj
    * kućni smoke. Nosi se radi pregleda, ne radi izvršavanja u ovoj fazi.

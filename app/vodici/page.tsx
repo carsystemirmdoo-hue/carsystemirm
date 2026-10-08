@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
 import { SavetiExplorer } from "@/components/saveti/SavetiExplorer";
 import styles from "@/components/saveti/Saveti.module.css";
-import { getPublicKategorije, getPublicSaveti, toSazetak } from "@/lib/saveti";
+import { getPublicKategorije, getPublicNovosti, getPublicSaveti, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 /**
@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function SavetiIndexPage() {
   const published = getPublicSaveti();
-  const news = published.filter((clanak) => clanak.tip === "novost").slice(0, 3).map(toSazetak);
+  const news = getPublicNovosti(published).slice(0, 3).map(toSazetak);
   const guides = published.filter((clanak) => clanak.tip !== "novost");
   const categories = getPublicKategorije(guides);
   const breadcrumbs = [

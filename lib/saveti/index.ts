@@ -173,6 +173,21 @@ export function toSazetak(clanak: SavetiClanak): SavetiSazetak {
   };
 }
 
+/**
+ * Javne novosti, od najnovijeg DOGAĐAJA ka starijem. Na listi novosti se
+ * prikazuje datum događaja, pa i redosled mora da ga prati; datum objave na
+ * našem sajtu je drugi kriterijum.
+ */
+export function getPublicNovosti(publicArticles: SavetiClanak[]) {
+  return publicArticles
+    .filter((clanak) => clanak.tip === "novost")
+    .sort(
+      (a, b) =>
+        (b.datumDogadjaja ?? "").localeCompare(a.datumDogadjaja ?? "") ||
+        b.datumObjave.localeCompare(a.datumObjave),
+    );
+}
+
 /** Kategorije sa brojem javnih članaka (samo neprazne). */
 export function getPublicKategorije(publicArticles: SavetiClanak[]) {
   return SAVETI_KATEGORIJE.map((kategorija) => ({

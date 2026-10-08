@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
 import styles from "@/components/saveti/Saveti.module.css";
-import { getPublicSaveti, toSazetak } from "@/lib/saveti";
+import { getPublicNovosti, getPublicSaveti, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 /** Novosti proizvođača — ista kapija i isti ISR kao ostatak rubrike. */
@@ -26,9 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function NovostiPage() {
-  const news = getPublicSaveti()
-    .filter((clanak) => clanak.tip === "novost")
-    .map(toSazetak);
+  const news = getPublicNovosti(getPublicSaveti()).map(toSazetak);
   const breadcrumbs = [
     { name: "Početna", path: "/" },
     { name: "Saveti i vodiči", path: "/vodici" },

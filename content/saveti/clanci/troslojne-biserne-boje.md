@@ -12,7 +12,7 @@ publika:
 glavnoPitanje: Šta je troslojna biserna boja i po čemu se njena popravka razlikuje?
 namera: postupak
 dodatnaPitanja:
-  - Kako se pravi probni lim sa više broja slojeva?
+  - Kako se pravi probni lim sa različitim brojem slojeva?
   - Može li se troslojna boja utapati u susedni deo?
 poreklopitanja:
   tip: pronadjeno-u-izvoru
@@ -96,7 +96,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Troslojna biserna boja se sastoji od pokrivne bazne boje, preko nje providnog sloja sa bisernim ili drugim efektom i, na kraju, bezbojnog laka. Popravka se razlikuje zato što konačna nijansa zavisi od broja providnih slojeva: svaki sloj više menja utisak. Zato se pre posla pravi probni lim sa različitim brojem slojeva, a na delu se nanosi tačno onoliko koliko ima izabrani lim. baslac to u uputstvu za nijansu Mazda 51K, koja se nanosi u dva koraka bazne boje, piše izričito: završni sloj se ponavlja dok se ne dostigne broj slojeva sa izabranog probnog lima[^baslac-51k-standard].
+Troslojna biserna boja se sastoji od pokrivne bazne boje, preko nje providnog sloja sa bisernim ili drugim efektom i, na kraju, bezbojnog laka. Popravka se razlikuje zato što konačna nijansa zavisi od broja providnih slojeva: svaki sloj više menja utisak. Zato se pre posla pravi probni lim sa različitim brojem slojeva, a na delu se nanosi tačno onoliko koliko ima izabrani lim. baslac to u uputstvu za nijansu Mazda 51K, koja se nanosi u dva koraka bazne boje, piše izričito: poslednji sloj za efekat drugog koraka ponavlja se dok se ne dostigne broj slojeva sa izabranog probnog lima[^baslac-51k-standard].
 
 ## Kako je sastavljena
 
@@ -112,19 +112,19 @@ Proizvođači boje za drugi korak imaju posebne komponente. baslac 45-W10 tehni�
 
 - **Broj slojeva je deo nijanse.** Kod dvoslojnog sistema baza se nanosi do pokrivanja, a onda još jedan sloj za efekat. Kod drugog koraka troslojne boje sloj više ili manje vidljivo menja nijansu. U uputstvu za nijansu Mazda 51K baslac navodi da se drugi korak ponavlja do broja slojeva izabranog probnog lima, što je verovatno najmanje 2 do 4 sloja[^baslac-51k-repaired].
 - **Tanki, ujednačeni slojevi.** U istom uputstvu baslac drugi korak nanosi u laganim slojevima, sa pritiskom 1,5–2,0 bara, uz odzračivanje do mat izgleda posle svakog sloja i 10–15 minuta pre bezbojnog laka[^baslac-51k-standard].
-- **Ukupna debljina.** Više slojeva znači deblji sistem. Za rastvaračku DIAMONT R-M navodi da se pri debljini većoj od 35 µm, na primer kod višeslojnih boja sa više od 4 sloja, u baznu boju dodaje 5 % učvršćivača H 9000[^rm-diamont-tds]. Takav podatak važi samo za sistem za koji je naveden.
+- **Ukupna debljina.** Više slojeva znači deblji sistem. Za DIAMONT R-M navodi da se pri debljini većoj od 35 µm, na primer kod višeslojnih boja sa više od 4 sloja, u baznu boju dodaje 5 % učvršćivača H 9000[^rm-diamont-tds]. Takav podatak važi samo za sistem za koji je naveden.
 - **Utapanje se planira od početka.** Opšte objašnjenje: mala razlika u broju ili debljini slojeva vidi se kao razlika u nijansi, pa se prelaz u susedni deo predviđa pre nego što počne nanošenje.
 
 R-M ima poseban edukativni modul za troslojni postupak sa vodenom baznom bojom AGILIS, koji prema javnom opisu obrađuje popravku dela i utapanje u susedni deo[^inform-agilis-three-coat]. Sam modul traži prijavu, pa njegove korake ovde ne prenosimo.
 
-## Kako se pravi probni lim sa više broja slojeva
+## Kako se pravi probni lim sa različitim brojem slojeva
 
 Ovakav probni lim (engl. *let-down panel*, „stepenasti“ probni lim) pokazuje kako se nijansa menja sa svakim slojem drugog koraka. Sledi urednički opis opšteg toka, a ne postupak proizvođača; dopunjuje pravila iz vodiča [Probni lim: zašto se radi pre lakiranja](/vodici/probni-lim-pre-lakiranja):
 
-1. Na probnu pločicu se nanese prvi korak do pokrivanja, istim postupkom kao na delu.
-2. Pločica se podeli trakom na nekoliko polja.
+1. Na probni lim se nanese prvi korak do pokrivanja, istim postupkom kao na delu.
+2. Probni lim se podeli trakom na nekoliko polja.
 3. Drugi korak se nanosi sloj po sloj, a posle svakog sloja jedno polje više ostaje pokriveno trakom. Tako polja dobiju jedan, dva, tri i više slojeva.
-4. Cela pločica se prelakira bezbojnim lakom, jer lak menja utisak nijanse.
+4. Ceo probni lim se prelakira bezbojnim lakom, jer lak menja utisak nijanse.
 5. Na poleđinu se zapiše koliko slojeva ima koje polje.
 
 Polje koje najbolje odgovara vozilu određuje broj slojeva na delu. U našem programu za to postoje metalne [Carsystem Spray Out Cards Metal](/proizvodi/carsystem-spray-out-cards-metal).
@@ -135,7 +135,7 @@ Ovaj tekst opisuje princip. Broj slojeva, pritisak i vreme odzračivanja daju do
 
 ## Pitanja i odgovori
 
-### Kako se pravi probni lim sa više broja slojeva?
+### Kako se pravi probni lim sa različitim brojem slojeva?
 
 Prvi korak se nanese do pokrivanja, a drugi korak sloj po sloj, uz pokrivanje po jednog polja trakom posle svakog sloja. Posle bezbojnog laka uporedite polja sa vozilom i na delu nanesite broj slojeva sa polja koje odgovara, kako baslac navodi za nijansu 51K[^baslac-51k-standard].
 

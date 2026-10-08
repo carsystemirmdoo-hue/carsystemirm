@@ -123,7 +123,7 @@ Razliku dobro pokazuje jedan tehnički list. C.A.R.FIT za lak 2K Ultra HS na 20 
 
 Vrednosti se razlikuju i u okviru istog brenda, pa se podatak sa jednog laka ne prenosi na drugi. Tehnički listovi R-M i baslac bezbojnih lakova koje smo pregledali navode vremena do rukovanja, montaže i poliranja, ali ne i potpunu tvrdoću. Kada Vam taj podatak treba, pitajte tehničku podršku proizvođača.
 
-Ni noviji Carsystem listovi ne daju uvek taj red. Za 2K Clear VOC CC.26 ECO-X 15/60 navodi se da je lak spreman za poliranje posle 3–4 h na 20 °C ili posle 15 min na 60 °C[^cs-cc26-tds], bez posebnog podatka o potpunoj tvrdoći.
+Ni noviji Carsystem listovi ne daju uvek taj podatak. Za 2K Clear VOC CC.26 ECO-X 15/60 navodi se da je lak spreman za poliranje posle 3–4 h na 20 °C ili posle 15 min na 60 °C[^cs-cc26-tds], bez posebnog podatka o potpunoj tvrdoći.
 
 ## Da li kabina skraćuje otvrdnjavanje
 
@@ -135,7 +135,7 @@ Vremena iz tabele važe za temperaturu navedenu u listu. Za nižu temperaturu te
 
 Tehnički listovi koje smo pregledali ne daju spisak zabrana za taj period. Ovo je opšte objašnjenje, izvedeno iz toga da sloj još nema konačnu otpornost:
 
-- **Mehaničko opterećenje pre vremena iz lista.** Poliranje i brušenje rade se tek posle vremena koje tehnički list navodi za tu fazu, uz hlađenje kada se traži. Za lakove sušene na 60 °C Carsystem navodi da se pre poliranja čeka do 1 h da se lak ohladi[^cs-clear-420-tds]. O tome piše vodič [Poliranje posle lakiranja](/vodici/poliranje-posle-lakiranja-osnove).
+- **Mehaničko opterećenje pre vremena iz lista.** Poliranje i brušenje rade se tek posle vremena koje tehnički list navodi za tu fazu, uz hlađenje kada se traži. Za 2K Clear VOC 420 sušen na 60 °C Carsystem navodi da se pre poliranja čeka do 1 h da se lak ohladi[^cs-clear-420-tds]. O tome piše vodič [Poliranje posle lakiranja](/vodici/poliranje-posle-lakiranja-osnove).
 - **Jaka hemijska sredstva i agresivno pranje.** Pranje je posebna tema: [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).
 - **Hladan prostor posle rada.** Vreme do potpune tvrdoće dato je za 20 °C[^cs-clear-420-tds], pa vozilo ostavljeno na hladnom ne mora da prati te vrednosti.
 
@@ -153,4 +153,4 @@ Delimično. Lak brže stiže do poliranja i montaže, ali Carsystem i posle suš
 
 ### Važi li isto za lak u spreju?
 
-Ne može se pretpostaviti, jer sprej može biti drugačiji materijal. Cosmos Lac za 1K akrilni bezbojni lak u spreju Master Mechanic 20, za jedan sloj na 20 °C i vlažnosti ispod 65 %, navodi suvo na dodir posle 5–10 min i najveću tvrdoću posle 24 h[^cosmos-mm20-tds]. To je podatak za taj sprej, a ne pravilo za sve sprejeve. Za 2K sprej pogledajte vodič [2K sprej: kako radi i koliko traje](/vodici/2k-sprej).
+Ne može se pretpostaviti, jer sprej može biti drugačiji materijal. Cosmos Lac za akrilni bezbojni lak u spreju Master Mechanic 20, za jedan sloj na 20 °C i vlažnosti ispod 65 %, navodi suvo na dodir posle 5–10 min i najveću tvrdoću posle 24 h[^cosmos-mm20-tds]. To je podatak za taj sprej, a ne pravilo za sve sprejeve. Za 2K sprej pogledajte vodič [2K sprej: kako radi i koliko traje](/vodici/2k-sprej).

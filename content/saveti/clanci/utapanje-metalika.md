@@ -106,7 +106,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Metalik se utapa tako što se popravljeni deo pokrije punim slojevima, a bazna boja se zatim tanji preko dela susednog dela, uz niži pritisak, dok prelaz ne postane nevidljiv. Na kraju ide završni sloj za efekat preko cele zone, pa bezbojni lak. baslac za 35 Line taj tok opisuje kao dva sloja na blatobranu, utapanje u vrata sa pritiskom snižanim na 0,8 do najviše 1,5 bara i završni sloj sa razdaljine od oko 30 cm[^baslac-blend-adjacent]. Mnogi sistemi za zonu prelaza imaju i poseban blender, koji se nanosi pre baze.
+Metalik se utapa tako što se popravljeni deo pokrije punim slojevima, a bazna boja se zatim tanji preko dela susednog dela, uz niži pritisak, dok prelaz ne postane nevidljiv. Na kraju ide završni sloj za efekat preko cele zone, pa bezbojni lak. baslac za 35 Line taj tok opisuje kao dva sloja na blatobranu, utapanje u vrata sa pritiskom sniženim na 0,8 do najviše 1,5 bara i završni sloj sa razdaljine od oko 30 cm[^baslac-blend-adjacent]. Mnogi sistemi za zonu prelaza imaju i poseban blender, koji se nanosi pre baze.
 
 ## Zašto metalik traži utapanje
 
@@ -121,7 +121,7 @@ baslac u alatu za tehničku podršku navodi sledeće korake za utapanje u susedn
 3. prvi sloj na popravljenom delu, pištoljem HVLP ili RP 1.3, pritisak 2,0 bara, pa odzračivanje[^baslac-blend-adjacent];
 4. uklanjanje preprašivanja sa susednog dela krpom za prašinu;
 5. drugi sloj na popravljenom delu, bez odzračivanja;
-6. utapanje u susedni deo sa pritiskom snižanim na 0,8 do najviše 1,5 bara, pa odzračivanje[^baslac-blend-adjacent];
+6. utapanje u susedni deo sa pritiskom sniženim na 0,8 do najviše 1,5 bara, pa odzračivanje[^baslac-blend-adjacent];
 7. završni sloj preko cele popravljene zone sa razdaljine od oko 30 cm, pa odzračivanje i bezbojni lak[^baslac-blend-adjacent].
 
 Pre toga se zona utapanja fino matira. Kako, objašnjava vodič [Brušenje i matiranje zone utapanja](/vodici/priprema-zone-utapanja).

@@ -40,8 +40,18 @@ izvori:
     pristupljeno: 2026-10-08
     tip: sajt-proizvodjaca
   - id: inform-spectro-modules
-    naziv: "Info R-M, javni opisi modula Digital Color Retrieval with ScanR, ViewR i Kohinoor"
+    naziv: "Info R-M, Digital Color Retrieval with ScanR (javni opis modula)"
     url: https://info.rmpaint.com/processes/digital-color-retrieval-spectrophotometer
+    pristupljeno: 2026-10-08
+    tip: edukacija-proizvodjaca
+  - id: inform-viewr
+    naziv: "Info R-M, Digital Color Retrieval with ViewR (javni opis modula)"
+    url: https://info.rmpaint.com/processes/digital-color-retrieval-viewr
+    pristupljeno: 2026-10-08
+    tip: edukacija-proizvodjaca
+  - id: inform-kohinoor
+    naziv: "Info R-M, Digital Color Retrieval with Kohinoor (javni opis modula)"
+    url: https://info.rmpaint.com/processes/digital-color-retrieval-kohinoor
     pristupljeno: 2026-10-08
     tip: edukacija-proizvodjaca
   - id: inform-refinity-scan
@@ -94,7 +104,7 @@ Proizvođači iz našeg programa za svoje uređaje navode sledeće:
 - **R-M Colortronic 12/6** je spektrofotometar povezan sa R-M alatima za recepture; R-M ga navodi uz Color Explorer i platformu Refinity[^rm-color-competence]. Na stranici o digitalnoj pretrazi boje R-M navodi i prikaz spektralnih krivih iz više uglova, sa prebacivanjem između pogleda spreda i iskosa (engl. *face* i *flop*), vizuelni prikaz originalne, ciljne i prilagođene boje i čuvanje sopstvenih probnih limova u oblaku[^rm-digital-color-search].
 - **baslac e-finder star** je ručni uređaj povezan sa bazom baslac Formula Finder[^baslac-efinder-stranica]. baslac navodi merenje iz pet uglova za jednobojne, metalik i biserne boje, automatsku kalibraciju na crnoj pločici i posle svakog posla, povezivanje preko WiFi mreže i zeleno ili crveno svetlo koje pokazuje da li je merenje ispravno[^baslac-efinder-star].
 
-R-M ima i edukativne module za pronalaženje boje spektrofotometrom za više uređaja (ScanR, ViewR, Kohinoor) i za modul za merenje u platformi Refinity[^inform-spectro-modules][^inform-refinity-scan]. Moduli traže prijavu, pa ovde navodimo samo njihove javne opise. Novosti o Refinity platformi opisuju tekstovi [Refinity za baslac korisnike](/vodici/refinity-za-baslac-korisnike) i [R-M LightAssist u Refinity](/vodici/rm-lightassist-u-refinity).
+R-M ima i edukativne module za pronalaženje boje spektrofotometrom za više uređaja (ScanR, ViewR, Kohinoor), kao i za modul za merenje (Spectro Module) u platformi Refinity[^inform-spectro-modules][^inform-viewr][^inform-kohinoor][^inform-refinity-scan]. Moduli traže prijavu, pa ovde navodimo samo njihove javne opise. Novosti o Refinity platformi opisuju tekstovi [Refinity za baslac korisnike](/vodici/refinity-za-baslac-korisnike) i [R-M LightAssist u Refinity](/vodici/rm-lightassist-u-refinity).
 
 ## Šta uređaj ne radi
 

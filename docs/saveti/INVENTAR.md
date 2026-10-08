@@ -6,10 +6,10 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | Pokazatelj | Broj |
 | --- | ---: |
 | Teme | 224 |
-| Napisano | 151 |
+| Napisano | 189 |
 | Tehnički provereno | 90 |
 | Jezički provereno | 106 |
-| Čeka stručnu potvrdu | 24 |
+| Čeka stručnu potvrdu | 29 |
 | Odobreno (imenovana osoba) | 0 |
 | Novosti / trajni vodiči | 9 / 215 |
 
@@ -60,11 +60,11 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0043 | Konvertor rđe: kada pomaže, a kada ne | korozija | Rešavanje problema | hobista | pronađeno | 7 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0044 | Mehuri rđe ispod laka: može li se samo prelakirati | korozija | Rešavanje problema | pocetnik, hobista | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0045 | Može li kit preko rđe | korozija | Rešavanje problema | pocetnik, hobista | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0046 | Zaštita lima i šavova posle varenja | korozija | Postupak | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0047 | Zaštita šupljina karoserije od korozije | korozija | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0048 | Zaštita podvozja: priprema, nanošenje i održavanje | korozija | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0049 | Zašto goli lim brzo korodira posle brušenja | korozija | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0050 | Zaštita ivica, pragova i spojeva od korozije | korozija | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0046 | Zaštita lima i šavova posle varenja | korozija | Postupak | profesionalac | pronađeno | 11 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0047 | Zaštita šupljina karoserije od korozije | korozija | Postupak | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0048 | Zaštita podvozja: priprema, nanošenje i održavanje | korozija | Postupak | hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0049 | Zašto goli lim brzo korodira posle brušenja | korozija | Rešavanje problema | hobista, profesionalac | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0050 | Zaštita ivica, pragova i spojeva od korozije | korozija | Postupak | hobista, profesionalac | urednička procena | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0051 | Kit, prajmer i punilac: šta je šta i kada se koristi | kitovi-i-punioci | Osnovni vodič | pocetnik, hobista | pronađeno | 7 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0052 | Vrste kita i kada se koji koristi | kitovi-i-punioci | Osnovni vodič | hobista, profesionalac | urednička procena | 10 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0053 | Mešanje kita sa učvršćivačem: koliko i kako | kitovi-i-punioci | Postupak | hobista, profesionalac | pronađeno | 7 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
@@ -110,7 +110,7 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0093 | Nijansa na izbledelom vozilu | boje-i-nijanse | Rešavanje problema | profesionalac | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0094 | Razređivanje bazne boje: koliko i zašto | boje-i-nijanse | Postupak | hobista, profesionalac | pronađeno | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0095 | Vodena bazna boja i niske temperature skladištenja | boje-i-nijanse | Rešavanje problema | profesionalac, vlasnik-radionice | urednička procena | 8 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0096 | Digitalno merenje boje: šta spektrofotometar radi, a šta ne | boje-i-nijanse | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0096 | Digitalno merenje boje: šta spektrofotometar radi, a šta ne | boje-i-nijanse | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0097 | Kako se bira bezbojni lak | lakovi | Osnovni vodič | hobista, profesionalac | pronađeno | 9 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0098 | HS i MS lak: šta znače oznake | lakovi | Osnovni vodič | profesionalac | pronađeno | 7 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0099 | Koliko slojeva bezbojnog laka nanositi | lakovi | Postupak | hobista, profesionalac | pronađeno | 10 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
@@ -154,10 +154,10 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0137 | Kompresor i vazduh za lakiranje: voda, ulje i protok | oprema-i-pistolji | Osnovni vodič | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0138 | Crevo i spojnice za pištolj: zašto utiču na pritisak | oprema-i-pistolji | Rešavanje problema | hobista, profesionalac | urednička procena | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0139 | Jedan pištolj ili poseban za prajmer, bazu i lak | oprema-i-pistolji | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0140 | Sistemi čašica za jednokratnu upotrebu: prednosti i ograničenja | oprema-i-pistolji | Osnovni vodič | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0141 | Ceđenje materijala pre sipanja u pištolj | oprema-i-pistolji | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0142 | Pištolj za vodenu baznu boju: šta je drugačije | oprema-i-pistolji | Osnovni vodič | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0143 | Lak je neujednačen, a baza dobra: provera pištolja | oprema-i-pistolji | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0140 | Sistemi čašica za jednokratnu upotrebu: prednosti i ograničenja | oprema-i-pistolji | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0141 | Ceđenje materijala pre sipanja u pištolj | oprema-i-pistolji | Postupak | hobista, profesionalac | urednička procena | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0142 | Pištolj za vodenu baznu boju: šta je drugačije | oprema-i-pistolji | Osnovni vodič | profesionalac | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0143 | Lak je neujednačen, a baza dobra: provera pištolja | oprema-i-pistolji | Rešavanje problema | hobista, profesionalac | pronađeno | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0144 | Osnove maskiranja: materijali i redosled | maskiranje | Osnovni vodič | hobista, profesionalac | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0145 | Papir ili folija za maskiranje: kada šta | maskiranje | Osnovni vodič | hobista, profesionalac | pronađeno | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0146 | Trake za maskiranje i temperatura sušenja | maskiranje | Osnovni vodič | profesionalac | urednička procena | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
@@ -166,34 +166,34 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0149 | Mekana ivica pri maskiranju za manje vidljiv prelaz | maskiranje | Postupak | profesionalac | pronađeno | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0150 | Zaštita ostatka vozila od preprašivanja | maskiranje | Postupak | hobista, profesionalac | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0151 | Dvobojno lakiranje: maskiranje linije između boja | maskiranje | Postupak | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0152 | Greške pri lakiranju: kako se proverava uzrok pre sanacije | greske-pri-lakiranju | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0153 | Narandžina kora na laku: mogući uzroci i provera | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0154 | Curenje laka: zašto nastaje i kako se popravlja | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0155 | Krateri u laku: silikon, ulje i druge nečistoće | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0156 | Mehurići u laku (kuvanje): uzroci i prevencija | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0157 | Krater, rupica ili mehurić: kako se razlikuju | greske-pri-lakiranju | Rešavanje problema | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0158 | Podizanje i nabiranje boje preko stare podloge | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0159 | Tragovi brušenja vidljivi kroz boju | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0160 | Lak je posle nekoliko dana izgubio sjaj | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0161 | Suv, hrapav lak (suvo prskanje) | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0162 | Plikovi koji se pojave nedeljama posle lakiranja | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0163 | Vidljive ivice popravke posle nekoliko nedelja | greske-pri-lakiranju | Rešavanje problema | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0164 | Mlečan ili zamućen lak pri visokoj vlažnosti | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0165 | Lak se ljušti sa plastičnog dela | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0166 | Lak se sporo suši ili ostaje lepljiv | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0167 | Prašina i trunje u laku: odakle dolaze | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0168 | Paučinasto izvlačenje mlaza pri nanošenju | greske-pri-lakiranju | Rešavanje problema | hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0169 | Mrlje od vode na svežem laku | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0170 | Kredanje starog laka: uzroci i šta se može uraditi | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0171 | Sitne pukotine u laku: uzroci i sanacija | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0172 | Nijansa se promenila posle nanošenja bezbojnog laka | greske-pri-lakiranju | Rešavanje problema | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0152 | Greške pri lakiranju: kako se proverava uzrok pre sanacije | greske-pri-lakiranju | Osnovni vodič | hobista, profesionalac | urednička procena | 15 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0153 | Narandžina kora na laku: mogući uzroci i provera | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | urednička procena | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0154 | Curenje laka: zašto nastaje i kako se popravlja | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista, profesionalac | pronađeno | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0155 | Krateri u laku: silikon, ulje i druge nečistoće | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0156 | Mehurići u laku (kuvanje): uzroci i prevencija | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0157 | Krater, rupica ili mehurić: kako se razlikuju | greske-pri-lakiranju | Rešavanje problema | profesionalac | urednička procena | 7 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-10-08 |
+| SV-0158 | Podizanje i nabiranje boje preko stare podloge | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
+| SV-0159 | Tragovi brušenja vidljivi kroz boju | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 9 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0160 | Lak je posle nekoliko dana izgubio sjaj | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0161 | Suv, hrapav lak (suvo prskanje) | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | urednička procena | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0162 | Plikovi koji se pojave nedeljama posle lakiranja | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | urednička procena | 6 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0163 | Vidljive ivice popravke posle nekoliko nedelja | greske-pri-lakiranju | Rešavanje problema | profesionalac | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0164 | Mlečan ili zamućen lak pri visokoj vlažnosti | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0165 | Lak se ljušti sa plastičnog dela | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0166 | Lak se sporo suši ili ostaje lepljiv | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0167 | Prašina i trunje u laku: odakle dolaze | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0168 | Paučinasto izvlačenje mlaza pri nanošenju | greske-pri-lakiranju | Rešavanje problema | hobista | urednička procena | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0169 | Mrlje od vode na svežem laku | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista | urednička procena | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
+| SV-0170 | Kredanje starog laka: uzroci i šta se može uraditi | greske-pri-lakiranju | Rešavanje problema | pocetnik, hobista | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
+| SV-0171 | Sitne pukotine u laku: uzroci i sanacija | greske-pri-lakiranju | Rešavanje problema | hobista, profesionalac | urednička procena | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0172 | Nijansa se promenila posle nanošenja bezbojnog laka | greske-pri-lakiranju | Rešavanje problema | profesionalac | urednička procena | 7 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0173 | Poliranje posle lakiranja: kada i kako | poliranje | Osnovni vodič | hobista, profesionalac | pronađeno | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0174 | Mokro brušenje laka pre poliranja | poliranje | Postupak | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0175 | Uklanjanje trunja iz laka bez probijanja | poliranje | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0176 | Abrazivna i završna pasta za poliranje: razlike | poliranje | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0177 | Sunđeri za poliranje: tvrdoća, prečnik i namena | poliranje | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0178 | Rotaciona ili ekscentarska polir mašina | poliranje | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0179 | Hologrami i kružni tragovi posle poliranja | poliranje | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0174 | Mokro brušenje laka pre poliranja | poliranje | Postupak | profesionalac | pronađeno | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0175 | Uklanjanje trunja iz laka bez probijanja | poliranje | Postupak | hobista, profesionalac | pronađeno | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0176 | Abrazivna i završna pasta za poliranje: razlike | poliranje | Osnovni vodič | hobista, profesionalac | urednička procena | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0177 | Sunđeri za poliranje: tvrdoća, prečnik i namena | poliranje | Osnovni vodič | hobista, profesionalac | pronađeno | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0178 | Rotaciona ili ekscentarska polir mašina | poliranje | Osnovni vodič | hobista, profesionalac | pronađeno | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0179 | Hologrami i kružni tragovi posle poliranja | poliranje | Rešavanje problema | hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0180 | Poliranje ivica i rubova bez probijanja laka | poliranje | Postupak | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0181 | Pasta se lepi ili „gori“ na sunđeru | poliranje | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0182 | Čišćenje sunđera za poliranje i kada ih zameniti | poliranje | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
@@ -201,8 +201,8 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0184 | Glina za lak pre poliranja: kada je potrebna | poliranje | Postupak | hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0185 | Može li se mat lak polirati | poliranje | Rešavanje problema | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0186 | Poliranje zamućenih farova | poliranje | Postupak | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0187 | Lična zaštitna oprema autolakirera | zastita-na-radu | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0188 | Izocijanati u 2K materijalima: rizici i zaštita | zastita-na-radu | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0187 | Lična zaštitna oprema autolakirera: šta je potrebno pri brušenju, mešanju i lakiranju | zastita-na-radu | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | urednička procena | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0188 | Izocijanati u 2K materijalima: rizici, zaštita i obavezna obuka u EU | zastita-na-radu | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | urednička procena | 7 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0189 | Da li je obična maska sa filterom dovoljna za 2K lak | zastita-na-radu | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0190 | Rukavice za rad sa rastvaračima i 2K materijalima | zastita-na-radu | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0191 | Samozapaljenje krpa i otpada natopljenog rastvaračima | zastita-na-radu | Osnovni vodič | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |

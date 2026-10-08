@@ -86,7 +86,7 @@ Opšte objašnjenje: deo razlike je u samom površinskom sloju, koji postaje mut
 
 ## Kako se proverava i šta se radi
 
-1. **Očistite i ispolirajte mesto poređenja.** Mala površina pored mesta popravke se očisti i ispolira, da se vidi stvarna boja, a ne mutan površinski sloj[^baslac-color-chips].
+1. **Očistite i ispolirajte mesto poređenja.** baslac kartu nijanse proverava na očišćenom i ispoliranom delu vozila[^baslac-color-chips]. Opšte objašnjenje: dovoljno je malo mesto pored popravke, a polira se da bi se videla stvarna boja, a ne mutan površinski sloj.
 2. **Uporedite standard na dobrom svetlu.** baslac traži dnevno svetlo ili lampu dnevnog svetla[^baslac-color-chips]. Zbog metamerizma, kada dve boje izgledaju isto na dnevnom, a različito na veštačkom svetlu[^inform-metamerism], pogledajte i pod drugim izvorom, na primer lampom [Carsystem Colour Match Lamp](/proizvodi/carsystem-colour-match-lamp).
 3. **Potražite varijantu.** Ako standard odstupa, baslac upućuje na proveru varijanti u bazi recepata; varijante su opisane kao odstupanje od standarda, na primer tamnija ili sa sitnijim ili krupnijim česticama[^baslac-color-chips]. Kod izbledelog vozila tražite varijantu u smeru stvarnog odstupanja. Više u vodiču [Varijante nijanse iste šifre boje](/vodici/varijante-nijanse-iste-sifre).
 4. **Izmerite, ako imate uređaj.** Uređaj meri stvarnu površinu vozila, pa može da pomogne da se nađe najbliža receptura. Za Colortronic 12/6 R-M navodi i prikaz originalne, ciljne i prilagođene boje[^rm-digital-color-search]. Šta merenje može i ne može, objašnjava vodič [Digitalno merenje boje](/vodici/digitalno-merenje-boje).

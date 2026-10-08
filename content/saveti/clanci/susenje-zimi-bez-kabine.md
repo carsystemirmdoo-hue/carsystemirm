@@ -79,7 +79,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Zimi bez kabine prostor, deo i materijal treba zagrejati pre rada i držati na temperaturi iz tehničkog lista i tokom sušenja, ali bez izvora paljenja dok u prostoru ima para rastvarača. Bezbednosni listovi materijala za lakiranje to izričito traže: Norbin za bezbojni lak N15-V20 navodi da se pare rastvarača šire po podu i da sa vazduhom grade eksplozivne smeše, kao i da se izbegavaju toplota, varnice i otvoren plamen[^norbin-n15-v20-sds]. Grejač koji ima plamen, užarene delove ili vrele površine zato ne sme da radi u prostoru dok se lakira i dok pare nisu uklonjene.
+Zimi bez kabine prostor, deo i materijal treba zagrejati pre rada i držati na temperaturi iz tehničkog lista i tokom sušenja, ali bez izvora paljenja dok u prostoru ima para rastvarača. Taj drugi deo izričito traže bezbednosni listovi materijala za lakiranje: Norbin za bezbojni lak N15-V20 navodi da se pare rastvarača šire po podu i da sa vazduhom grade eksplozivne smeše, kao i da se izbegavaju toplota, varnice i otvoren plamen[^norbin-n15-v20-sds]. Grejač koji ima plamen, užarene delove ili vrele površine zato ne sme da radi u prostoru dok se lakira i dok pare nisu uklonjene.
 
 ## Šta traži tehnički list materijala
 
@@ -100,12 +100,12 @@ Kada je tačka paljenja ispod temperature u garaži, materijal i na hladnom daje
 
 ## Šta bezbednosni listovi traže za izvore paljenja
 
-Oba lista sadrže iste mere opreza:
+Oba lista sadrže iste mere opreza. Norbin ih navodi kao oznake obaveštenja P210, P241, P242 i P243[^norbin-n15-v20-sds], a C.A.R.FIT među oznakama navodi P210, a ostale mere u odeljku 7 o rukovanju i skladištenju[^carfit-express-clear-sds]:
 
-- **Dalje od toplote, vrelih površina, varnica i otvorenog plamena; zabranjeno pušenje** (P210)[^norbin-n15-v20-sds][^carfit-express-clear-sds].
-- **Električna oprema, ventilacija i rasveta u izvedbi zaštićenoj od eksplozije** (P241)[^norbin-n15-v20-sds][^carfit-express-clear-sds].
-- **Alat koji ne varniči i mere protiv statičkog elektriciteta** (P242, P243)[^norbin-n15-v20-sds][^carfit-express-clear-sds].
-- **Dovoljna ventilacija.** Norbin navodi i da se prati zaštita od požara koja važi za taj prostor[^norbin-n15-v20-sds].
+- **Dalje od toplote, vrelih površina, varnica i otvorenog plamena; zabranjeno pušenje**[^norbin-n15-v20-sds][^carfit-express-clear-sds].
+- **Električna oprema, ventilacija i rasveta u izvedbi zaštićenoj od eksplozije**[^norbin-n15-v20-sds][^carfit-express-clear-sds].
+- **Alat koji ne varniči i mere protiv statičkog elektriciteta**[^norbin-n15-v20-sds][^carfit-express-clear-sds].
+- **Dovoljna ventilacija**[^norbin-n15-v20-sds][^carfit-express-clear-sds]. Norbin navodi i da treba poštovati odgovarajuće mere zaštite od požara[^norbin-n15-v20-sds].
 
 Iz toga sledi da se pri lakiranju ne koristi grejač sa otvorenim plamenom, užarenim grejnim telom ili vrelom površinom, niti električni uređaj koji nije namenjen prostoru sa zapaljivim parama. Obaveze za Vaš prostor proverite prema važećim propisima o zaštiti od požara i bezbednosti na radu.
 
@@ -123,7 +123,7 @@ Infracrvena lampa je poseban slučaj: koristi se samo kako navode tehnički list
 
 ### Koji grejači su opasni uz rastvarače?
 
-Prema merama iz bezbednosnih listova, opasan je svaki uređaj koji je izvor toplote, vrele površine, varnice ili plamena[^norbin-n15-v20-sds]: grejači na gas ili tečno gorivo, peći na drva, uređaji sa užarenim grejnim telom i električni uređaji koji nisu u izvedbi zaštićenoj od eksplozije. Pare mogu da stignu do njih i kada su udaljeni od dela, jer se šire po podu[^norbin-n15-v20-sds].
+Prema merama iz bezbednosnih listova, opasan je svaki uređaj koji je izvor toplote, vrele površine, varnice ili plamena, kao i električna oprema koja nije u izvedbi zaštićenoj od eksplozije[^norbin-n15-v20-sds][^carfit-express-clear-sds]. To su, na primer, grejači sa otvorenim plamenom i uređaji sa užarenim grejnim telom ili vrelom površinom. Pare mogu da stignu do njih i kada su udaljeni od dela, jer se šire po podu[^norbin-n15-v20-sds].
 
 ### Može li grejalica da radi dok lak odzračuje?
 

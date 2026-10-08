@@ -287,7 +287,8 @@
     "saveti:build": "tsx --tsconfig tsconfig.json scripts/saveti/build-saveti.mts",
     "saveti:check": "tsx --tsconfig tsconfig.json scripts/saveti/build-saveti.mts --check",
     "saveti:plan": "tsx --tsconfig tsconfig.json scripts/saveti/plan-saveti.mts",
-    "saveti:odobri": "tsx --tsconfig tsconfig.json scripts/saveti/odobri-saveti.mts"
+    "saveti:odobri": "tsx --tsconfig tsconfig.json scripts/saveti/odobri-saveti.mts",
+    "saveti:e2e": "node scripts/saveti/e2e-objava.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0",

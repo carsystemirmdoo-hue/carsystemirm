@@ -8,7 +8,7 @@ Ovaj dokument važi za ljude i za AI pomoćnike. Pre pisanja obavezno pročitajt
 | --- | --- |
 | Lokalni tehnički listovi (R-M 117, baslac 102, Carsystem 6 PDF) | `public/documents/products/<brend>/…`; tekst za brzu pretragu: `python3 scripts/saveti/izvuci-tekst-pdf.py` → `tmp/saveti/pdftext/` |
 | Izvodi iz tehničkih listova (sa URL-om zvaničnog dokumenta) | `data/knowledge/*-tds-claims.generated.json`, `*-technical-extraction.generated.json` (`machine-extracted`: pre citiranja proveriti u samom dokumentu) |
-| Proizvodi koje stvarno imamo (kanonski slugovi, linkovi na TDS) | `npx tsx tmp/saveti/digest.mts` → `tmp/saveti/catalog-digest.json`; porodice → `families-digest.json` |
+| Proizvodi koje stvarno imamo (kanonski slugovi, linkovi na TDS) | `npx tsx --tsconfig tsconfig.json scripts/saveti/katalog-pregled.mts` → `tmp/saveti/catalog-digest.json`; porodice → `families-digest.json` |
 | Zvanični izvori po brendu | `data/knowledge/brand-sources.ts`, `docs/*_DOCUMENT_SOURCE_MAP.md`, `docs/*_RESEARCH.md` |
 | Novosti dobavljača (pregled od 2026-10-08) | `docs/saveti/istrazivanje/*-news.json` i `.md` |
 | Stvarna pitanja (dokaz porekla pitanja) | `docs/saveti/istrazivanje/questions.json` (`found-in-source` / `editorial-proposal`) |

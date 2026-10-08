@@ -8968,3 +8968,4 @@ section.portal-metrics {
 .bk-msg { font-weight: 650; }
 .bk-item small { color: var(--p-muted); font-size: 12px; line-height: 1.45; }
 @media (max-width: 960px) { .bk-list { grid-template-columns: 1fr; padding: 12px 14px 16px; } }
+.bk-missing { display: grid; gap: 6px; margin: 0; padding: 4px 20px 18px 38px; font-size: 13px; color: var(--p-ink); }

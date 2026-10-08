@@ -34,6 +34,23 @@ export function BackupStatusPanel({ items, compact = false }: { items: BackupSta
       </section>
     );
   }
+  if (items.every((i) => i.state === "nije_podesen")) {
+    return (
+      <section className="portal-panel" data-accent="warning">
+        <SectionHeader
+          title="Backup nije podešen"
+          description="Automatske rezervne kopije još nisu uključene. Do tada portal ne prikazuje nijednu kopiju kao uspešnu."
+        />
+        {!compact ? (
+          <ul className="bk-missing">
+            <li>{BACKUP_LABELS.db_verified}: nije uključeno (dnevna kopija iz privatnog GitHub repoa firme).</li>
+            <li>{BACKUP_LABELS.offsite_stored}: nije uključeno (preuzimanje na firmin računar i u oblak).</li>
+            <li>{BACKUP_LABELS.pdf_backup}: nije uključeno (dnevna šifrovana kopija izvornih PDF-ova).</li>
+          </ul>
+        ) : null}
+      </section>
+    );
+  }
   const shown = compact ? items.filter((i) => i.tone !== "success") : items;
   if (compact && shown.length === 0) return null;
   return (
@@ -48,11 +65,11 @@ export function BackupStatusPanel({ items, compact = false }: { items: BackupSta
             <div className="bk-head">
               <strong>{BACKUP_LABELS[i.kind as keyof typeof BACKUP_LABELS]}</strong>
               <span className="kk-status" data-tone={i.tone}>
-                {i.state === "nikad" ? "nema" : i.tone === "success" ? "u roku" : i.tone === "warning" ? "pažnja" : "kasni"}
+                {i.state === "nije_podesen" ? "nije podešeno" : i.state === "nikad" ? "nema" : i.tone === "success" ? "u roku" : i.tone === "warning" ? "pažnja" : "kasni"}
               </span>
             </div>
             <p className="bk-when">
-              {i.lastOk ? `Poslednja uspešna: ${DT.format(new Date(i.lastOk.finished_at))} (pre ${i.ageHours} h)` : "Nijedna uspešna još nije zabeležena."}
+              {i.state === "nije_podesen" ? "Automatika nije uključena." : i.lastOk ? `Poslednja uspešna: ${DT.format(new Date(i.lastOk.finished_at))} (pre ${i.ageHours} h)` : "Nijedna uspešna još nije zabeležena."}
               {i.lastOk?.source_label ? ` · ${i.lastOk.source_label}` : ""}
             </p>
             {i.tone !== "success" ? <p className="bk-msg">{i.message}</p> : null}

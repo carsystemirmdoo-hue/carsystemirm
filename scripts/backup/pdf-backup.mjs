@@ -18,6 +18,7 @@ import { spawn } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
 import { chmodSync, createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve, sep } from "node:path";
+import { installAbortHandlers, isAborting, killOnAbort, onAbort } from "../../lib/backup/abort.mjs";
 import { applyScan, emptyIndex, markStored, objectPath, planScan } from "../../lib/backup/pdfIndex.mjs";
 import { pathToFileURL } from "node:url";
 import { makeLogger, redact } from "../../lib/backup/redact.mjs";
@@ -38,6 +39,8 @@ function args() {
 function age(argv) {
   return new Promise((ok, fail) => {
     const p = spawn(AGE_BIN, argv, { stdio: ["ignore", "ignore", "pipe"] });
+    const off = killOnAbort(p);
+    p.on("close", () => off());
     let err = "";
     p.stderr.on("data", (d) => (err += d));
     p.on("error", fail);
@@ -68,6 +71,27 @@ export function scanPdfs(root) {
   return out.sort((a, b) => a.path.localeCompare(b.path));
 }
 
+/**
+ * Ostaci prekinutog prolaza: nepotpuni šifrovani objekti (`*.tmp`) i otvoren
+ * privremeni indeks (`.indeks-*.json`) pored stanja. Stanje se upisuje tek na
+ * kraju, pa prekinut prolaz sledeći put samo ponovi posao (objekti koji već
+ * postoje se ne prepisuju).
+ */
+export function cleanupStale(dest, statePath) {
+  let removed = 0;
+  const objects = join(dest, "objects");
+  if (existsSync(objects)) {
+    for (const f of readdirSync(objects, { recursive: true })) {
+      if (String(f).endsWith(".tmp")) { rmSync(join(objects, String(f)), { force: true }); removed += 1; }
+    }
+  }
+  const stateDir = dirname(resolve(statePath));
+  if (existsSync(stateDir)) {
+    for (const f of readdirSync(stateDir)) if (/^\.indeks-[0-9a-f]+\.json$/.test(f)) { rmSync(join(stateDir, f), { force: true }); removed += 1; }
+  }
+  return removed;
+}
+
 export async function runBackup(o) {
   for (const k of ["source", "dest", "state", "recipients"]) if (!o[k]) throw new Error(`run traži --${k}.`);
   const source = resolve(o.source);
@@ -75,6 +99,7 @@ export async function runBackup(o) {
   if (dest.startsWith(source + sep) || dest === source) throw new Error("Skladište ne sme biti unutar izvorne fascikle.");
   mkdirSync(join(dest, "objects"), { recursive: true });
   mkdirSync(join(dest, "index"), { recursive: true });
+  cleanupStale(dest, o.state);
   const now = new Date().toISOString();
   let index = existsSync(o.state) ? JSON.parse(readFileSync(o.state, "utf8")) : emptyIndex();
 
@@ -101,20 +126,26 @@ export async function runBackup(o) {
     }
     mkdirSync(dirname(target), { recursive: true });
     const tmp = `${target}.${randomBytes(4).toString("hex")}.tmp`;
+    const offTmp = onAbort(() => rmSync(tmp, { force: true }));
     await age(["--encrypt", "--recipients-file", o.recipients, "--output", tmp, join(source, src.path)]);
     renameSync(tmp, target);
+    offTmp();
     index = markStored(index, sha, { storedAt: now });
     stored += 1;
   }
 
   // Indeks: šifrovan u skladište, otvoren samo lokalno.
   const plainIndex = join(dirname(resolve(o.state)), `.indeks-${randomBytes(4).toString("hex")}.json`);
+  const offPlain = onAbort(() => rmSync(plainIndex, { force: true }));
   writeFileSync(plainIndex, JSON.stringify(index), { mode: 0o600 });
   const indexOut = join(dest, "index", `${now.replace(/[-:]/g, "").replace(/\..+/, "Z")}.json.age`);
+  const offIdx = onAbort(() => rmSync(indexOut, { force: true }));
   try {
     await age(["--encrypt", "--recipients-file", o.recipients, "--output", indexOut, plainIndex]);
   } finally {
     rmSync(plainIndex, { force: true });
+    offPlain();
+    offIdx();
   }
   writeFileSync(o.state, JSON.stringify(index, null, 1), { mode: 0o600 });
   chmodSync(o.state, 0o600);
@@ -146,9 +177,15 @@ export async function restorePdfs(o) {
   for (const k of ["dest", "index", "identity", "out"]) if (!o[k]) throw new Error(`restore traži --${k}.`);
   const tmpIndex = join(resolve(o.out), `.indeks-${randomBytes(4).toString("hex")}.json`);
   mkdirSync(resolve(o.out), { recursive: true });
-  await age(["--decrypt", "--identity", o.identity, "--output", tmpIndex, o.index]);
-  const index = JSON.parse(readFileSync(tmpIndex, "utf8"));
-  rmSync(tmpIndex, { force: true });
+  const offIdx = onAbort(() => rmSync(tmpIndex, { force: true }));
+  let index;
+  try {
+    await age(["--decrypt", "--identity", o.identity, "--output", tmpIndex, o.index]);
+    index = JSON.parse(readFileSync(tmpIndex, "utf8"));
+  } finally {
+    rmSync(tmpIndex, { force: true });
+    offIdx();
+  }
   let restored = 0;
   const problems = [];
   for (const [path, f] of Object.entries(index.files)) {
@@ -166,6 +203,7 @@ export async function restorePdfs(o) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  installAbortHandlers(log);
   const o = args();
   const fn = { run: runBackup, restore: restorePdfs }[o._];
   if (!fn) {
@@ -173,6 +211,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     process.exit(2);
   }
   fn(o).catch((e) => {
+    if (isAborting()) return; // čišćenje posle prekida samo završava proces (130/143)
     log(`GREŠKA: ${e?.message ?? e}`);
     process.exit(1);
   });

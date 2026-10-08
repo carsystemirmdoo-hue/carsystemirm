@@ -192,7 +192,7 @@
     "start:check": "NEXT_DIST_DIR=.next-verify next start --port 3220",
     "test:import": "node --test lib/import/*.test.mjs",
     "test:sales": "node --test lib/sales/*.test.mjs",
-    "test:backup": "node --test lib/backup/*.test.mjs scripts/backup/*.test.mjs",
+    "test:backup": "node --test lib/backup/*.test.mjs scripts/backup/*.test.mjs scripts/backup/windows/*.test.mjs",
     "test:dates": "node --test lib/dates/*.test.mjs",
     "test:export-safety": "node --test lib/export/exportSafety.test.mjs",
     "test:auth-hardening": "node --test lib/auth/credentialsLogin.test.mjs lib/auth/cookieAndHeaders.test.mjs",

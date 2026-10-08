@@ -20,6 +20,8 @@ import { createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, ren
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { installAbortHandlers, isAborting, onAbort } from "../../lib/backup/abort.mjs";
+import { publicStatusProblems } from "../../lib/backup/publicStatus.mjs";
 import { makeLogger } from "../../lib/backup/redact.mjs";
 import { planRetention } from "../../lib/backup/retention.mjs";
 
@@ -73,13 +75,18 @@ export async function pull(o) {
   if (!o.dest) throw new Error("--dest je obavezan.");
   const dest = resolve(o.dest);
   mkdirSync(dest, { recursive: true });
+  // Nedovršene fascikle prethodnog prekida se brišu (kopija u njima nije proverena do kraja).
+  for (const d of readdirSync(dest).filter((d) => d.endsWith(".delimicno"))) rmSync(join(dest, d), { recursive: true, force: true });
   const work = join(tmpdir(), `kopija-${randomBytes(4).toString("hex")}`);
   mkdirSync(work, { mode: 0o700 });
+  const offWork = onAbort(() => rmSync(work, { recursive: true, force: true }));
   try {
     const src = o["from-dir"] ? { dir: resolve(o["from-dir"]), artifact: "lokalno" } : await downloadLatest(work);
     const statusFile = readdirSync(src.dir).find((f) => f.endsWith(".status.json"));
     if (!statusFile) throw new Error("U artefaktu nema status.json.");
     const status = JSON.parse(readFileSync(join(src.dir, statusFile), "utf8"));
+    const problems = publicStatusProblems(status);
+    if (problems.length) throw new Error(`Status artefakta nije ispravan: ${problems.join("; ")}`);
     if (!status.verified) throw new Error("Artefakt nije označen kao proveren — ne čuva se kao važeća kopija.");
     const day = status.createdAt.slice(0, 10);
     const target = join(dest, `${status.createdAt.replace(/[-:]/g, "").replace(/\..+/, "Z")}`);
@@ -88,6 +95,7 @@ export async function pull(o) {
     } else {
       const stage = `${target}.delimicno`;
       mkdirSync(stage, { recursive: true, mode: 0o700 });
+      const offStage = onAbort(() => rmSync(stage, { recursive: true, force: true }));
       for (const f of status.encrypted) {
         const from = join(src.dir, f.name);
         if (!existsSync(from)) throw new Error(`U artefaktu nedostaje ${f.name}.`);
@@ -98,6 +106,7 @@ export async function pull(o) {
         writeFileSync(join(stage, extra), readFileSync(join(src.dir, extra)), { mode: 0o600 });
       }
       renameSync(stage, target);
+      offStage();
       log(`sačuvano van GitHub-a: ${status.encrypted.map((f) => f.name).join(", ")}`);
     }
 
@@ -125,11 +134,14 @@ export async function pull(o) {
     return { target, keep: plan.keep.length, removed: plan.remove.length };
   } finally {
     rmSync(work, { recursive: true, force: true });
+    offWork();
   }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  installAbortHandlers(log);
   pull(args()).catch((e) => {
+    if (isAborting()) return; // čišćenje posle prekida samo završava proces (130/143)
     log(`GREŠKA: ${e?.message ?? e}`);
     process.exit(1);
   });

@@ -18,18 +18,25 @@ PORT="${APP_PORT:-3432}"
 SERVER_PID=""
 cleanup() {
   [ -n "$SERVER_PID" ] && kill "$SERVER_PID" 2>/dev/null || true
+  [ -n "${VERIFY_PID:-}" ] && kill "$VERIFY_PID" 2>/dev/null && wait "$VERIFY_PID" 2>/dev/null || true
   if [ -f "$WORK/db" ]; then PG_BIN="${PG_BIN:-}" node -e '
     const p=require("postgres"); const s=p(process.env.RESTORE_ADMIN_URL,{max:1,onnotice:()=>{}});
     s.unsafe(`DROP DATABASE IF EXISTS "${require("fs").readFileSync(process.argv[1],"utf8").trim()}" WITH (FORCE)`).finally(()=>s.end());' "$WORK/db" || true; fi
   rm -rf "$WORK"
 }
 trap cleanup EXIT
+# Prekid (Ctrl+C, gašenje) takođe prolazi kroz cleanup: gasi server, briše vraćenu bazu i otvorene fajlove.
+trap 'exit 130' INT
+trap 'exit 143' TERM HUP
 cd "$REPO"
 age --decrypt --identity "$AGE_IDENTITY" --output "$WORK/kopija.dump" "$DUMP_AGE"
 age --decrypt --identity "$AGE_IDENTITY" --output "$WORK/kopija.manifest.json" "$MAN_AGE"
 [ "$(shasum -a 256 "$WORK/kopija.dump" | cut -d' ' -f1)" = "$DUMP_SHA" ] || { echo "Otisak dešifrovane kopije se ne poklapa." >&2; exit 1; }
 echo "dešifrovano i otisak proveren"
-node scripts/backup/db-backup.mjs verify --dump "$WORK/kopija.dump" --manifest "$WORK/kopija.manifest.json" --out "$WORK/verify.json" --keep
+node scripts/backup/db-backup.mjs verify --dump "$WORK/kopija.dump" --manifest "$WORK/kopija.manifest.json" --out "$WORK/verify.json" --keep &
+VERIFY_PID=$!
+wait "$VERIFY_PID"
+VERIFY_PID=""
 node -e 'process.stdout.write(require(process.argv[1]).restoredDb)' "$WORK/verify.json" > "$WORK/db"
 DB="$(cat "$WORK/db")"
 APP_URL_DB="$(node -e '

@@ -19,11 +19,13 @@
  */
 import { spawn } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
-import { chmodSync, createReadStream, existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { chmodSync, createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
 import postgres from "postgres";
 import { buildManifest, compareManifests, OWNED_SEQUENCES_SQL, publicSummary, sequenceCoverageSql } from "../../lib/backup/manifest.mjs";
 import { pathToFileURL } from "node:url";
+import { installAbortHandlers, isAborting, killOnAbort, onAbort } from "../../lib/backup/abort.mjs";
+import { LABEL_RE, publicShaLineOk, publicStatusProblems } from "../../lib/backup/publicStatus.mjs";
 import { makeLogger, redact } from "../../lib/backup/redact.mjs";
 
 const SECRET_ENVS = ["SOURCE_DATABASE_URL", "RESTORE_ADMIN_URL", "BACKUP_STATUS_URL"];
@@ -68,6 +70,8 @@ export function pgEnv(url) {
 function run(cmd, argv, { env = {}, stdinFile = null } = {}) {
   return new Promise((ok, fail) => {
     const p = spawn(cmd, argv, { env: { ...process.env, ...env }, stdio: [stdinFile ? "pipe" : "ignore", "pipe", "pipe"] });
+    const off = killOnAbort(p);
+    p.on("close", () => off());
     let err = "";
     p.stderr.on("data", (d) => (err += d));
     p.stdout.on("data", () => {});
@@ -88,10 +92,14 @@ const queryFn = (sql) => (text) => sql.unsafe(text);
 
 async function dump(o) {
   const url = need("SOURCE_DATABASE_URL");
+  const label = o.label ?? "db";
+  if (!LABEL_RE.test(label)) throw new Error("Oznaka (--label) sme da sadrži samo mala slova, cifre i crtu.");
   const out = resolve(o.out ?? ".");
   mkdirSync(out, { recursive: true, mode: 0o700 });
+  // Ostaci prethodnog prekida (nepotpune kopije) se brišu pre novog posla.
+  for (const f of readdirSync(out).filter((f) => f.endsWith(".dump.part"))) rmSync(join(out, f), { force: true });
   const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\..+/, "Z");
-  const base = join(out, `carsystem-${o.label ?? "db"}-${stamp}`);
+  const base = join(out, `carsystem-${label}-${stamp}`);
   const sql = postgres(url, { max: 1, onnotice: () => {} });
   const conn = await sql.reserve();
   try {
@@ -101,10 +109,15 @@ async function dump(o) {
     const manifest = await buildManifest(queryFn(conn), { snapshot: "exported" });
     log(`manifest: ${manifest.totals.tables} tabela, ${manifest.totals.rows} redova, migracija ${manifest.migrations.count}`);
     // Bez --no-privileges: dozvole se vraćaju i proveravaju.
-    await run(bin("pg_dump"), ["--format=custom", "--no-owner", `--snapshot=${snapshot}`, `--file=${base}.dump`], { env: pgEnv(url) });
-    manifest.dumpSha256 = await sha256File(`${base}.dump`);
-    manifest.dumpBytes = statSync(`${base}.dump`).size;
+    // Kopija se piše kao .part i dobija pravo ime tek kada je cela; prekid je briše.
+    const part = `${base}.dump.part`;
+    const offPart = onAbort(() => rmSync(part, { force: true }));
+    await run(bin("pg_dump"), ["--format=custom", "--no-owner", `--snapshot=${snapshot}`, `--file=${part}`], { env: pgEnv(url) });
+    manifest.dumpSha256 = await sha256File(part);
+    manifest.dumpBytes = statSync(part).size;
     writeFileSync(`${base}.manifest.json`, JSON.stringify(manifest, null, 1), { mode: 0o600 });
+    renameSync(part, `${base}.dump`);
+    offPart();
     await conn.unsafe("COMMIT");
     log(`kopija: ${basename(base)}.dump (${manifest.dumpBytes} B), sha256 ${manifest.dumpSha256}`);
     return base;
@@ -126,6 +139,11 @@ async function verify(o) {
   const dbName = `restore_check_${Date.now()}_${randomBytes(3).toString("hex")}`;
   const adminSql = postgres(admin, { max: 1, onnotice: () => {} });
   const report = { ok: false, restoredDb: dbName, diffs: [], sequenceProblems: [], startedAt: new Date(started).toISOString() };
+  const offDb = onAbort(async () => {
+    const s2 = postgres(admin, { max: 1, onnotice: () => {} });
+    await s2.unsafe(`DROP DATABASE IF EXISTS "${dbName}" WITH (FORCE)`).catch(() => {});
+    await s2.end();
+  });
   try {
     await adminSql.unsafe(`CREATE DATABASE "${dbName}"`);
     // Uloge iz dozvola moraju postojati da bi se GRANT vratio; prave se bez prijave.
@@ -149,8 +167,9 @@ async function verify(o) {
     }
     report.ok = report.diffs.length === 0 && report.sequenceProblems.length === 0;
   } finally {
-    if (!o.keep) await adminSql.unsafe(`DROP DATABASE IF EXISTS "${dbName}"`).catch(() => {});
+    if (!o.keep) await adminSql.unsafe(`DROP DATABASE IF EXISTS "${dbName}" WITH (FORCE)`).catch(() => {});
     await adminSql.end();
+    offDb();
   }
   report.durationMs = Date.now() - started;
   report.kept = Boolean(o.keep);
@@ -166,7 +185,9 @@ const quoteLit = (s) => `'${String(s).replace(/'/g, "''")}'`;
 async function encrypt(o) {
   if (!o.in || !o.recipients) throw new Error("encrypt traži --in i --recipients (fajl sa javnim ključem).");
   const out = `${o.in}.age`;
+  const offOut = onAbort(() => rmSync(out, { force: true }));
   await run(AGE_BIN, ["--encrypt", "--recipients-file", o.recipients, "--output", out, o.in]);
+  offOut();
   chmodSync(out, 0o600);
   const sha = await sha256File(out);
   writeFileSync(`${out}.sha256`, `${sha}  ${basename(out)}\n`, { mode: 0o600 });
@@ -178,6 +199,7 @@ async function encrypt(o) {
 async function decryptCheck(o) {
   if (!o.in || !o.identity || !o["expect-sha"]) throw new Error("decrypt-check traži --in, --identity i --expect-sha.");
   const tmp = join(dirname(resolve(o.in)), `.provera-${randomBytes(4).toString("hex")}`);
+  const offTmp = onAbort(() => rmSync(tmp, { force: true }));
   try {
     await run(AGE_BIN, ["--decrypt", "--identity", o.identity, "--output", tmp, o.in]);
     const sha = await sha256File(tmp);
@@ -188,6 +210,7 @@ async function decryptCheck(o) {
     log(`dešifrovanje provereno: ${basename(o.in)} → sha256 ${sha}`);
   } finally {
     if (existsSync(tmp)) rmSync(tmp);
+    offTmp();
   }
 }
 
@@ -209,6 +232,9 @@ async function status(o) {
     encrypted: files,
     githubRunId: process.env.GITHUB_RUN_ID ?? null,
   };
+  // Status je NEŠIFROVAN u artefaktu: sme samo ono što propušta bela lista.
+  const problems = publicStatusProblems(s);
+  if (problems.length) throw new Error(`Status bi otkrio nedozvoljen sadržaj: ${problems.join("; ")}`);
   writeFileSync(o.out, JSON.stringify(s, null, 1), { mode: 0o600 });
   log(`status: proverena=${s.verified}, šifrovanih fajlova ${files.length}`);
 }
@@ -229,6 +255,27 @@ async function record(o) {
   }
 }
 
+/** Fascikla artefakta sme da sadrži SAMO šifrovane fajlove, javni status i otiske. */
+async function checkArtifact(o) {
+  const dir = resolve(o.dir);
+  const problems = [];
+  for (const f of readdirSync(dir)) {
+    const p = join(dir, f);
+    if (f.endsWith(".age")) continue;
+    if (f.endsWith(".status.json")) {
+      problems.push(...publicStatusProblems(JSON.parse(readFileSync(p, "utf8"))).map((x) => `${f}: ${x}`));
+      continue;
+    }
+    if (f.endsWith(".sha256")) {
+      if (!readFileSync(p, "utf8").trim().split("\n").every(publicShaLineOk)) problems.push(`${f}: neispravan red otiska`);
+      continue;
+    }
+    problems.push(`nedozvoljen fajl: ${f}`);
+  }
+  if (problems.length) throw new Error(`Artefakt nije čist: ${problems.join("; ")}`);
+  log(`artefakt proveren: ${readdirSync(dir).length} fajlova, samo šifrovano, status i otisci`);
+}
+
 /** Neuspeh posla se takođe beleži, da portal ne prikaže staru zelenu kopiju kao jedinu istinu. */
 async function recordFailure(o) {
   const url = need("BACKUP_STATUS_URL");
@@ -242,9 +289,10 @@ async function recordFailure(o) {
   }
 }
 
-const COMMANDS = { dump, verify, encrypt, "decrypt-check": decryptCheck, status, record, "record-failure": recordFailure };
+const COMMANDS = { dump, verify, encrypt, "decrypt-check": decryptCheck, status, record, "record-failure": recordFailure, "check-artifact": checkArtifact };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  installAbortHandlers(log);
   const o = args();
   const fn = COMMANDS[o._];
   if (!fn) {
@@ -252,6 +300,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     process.exit(2);
   }
   fn(o).catch((e) => {
+    if (isAborting()) return; // čišćenje posle prekida samo završava proces (130/143)
     log(`GREŠKA: ${e?.message ?? e}`);
     process.exit(1);
   });

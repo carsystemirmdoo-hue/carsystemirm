@@ -89,15 +89,22 @@ test("servis portala: tri odvojene tvrdnje; neuspeh posle uspeha je upozorenje",
   const { loadBackupStatus } = await import("../../lib/backup/status-service.ts");
   await db.sql`INSERT INTO backup_runs (kind, ok, source_label, tables, rows, migrations) VALUES ('db_verified', true, ${label}, 55, 1000, 37)`;
   const now = new Date();
-  const items = (await loadBackupStatus(now))!;
+  // Bez uključene automatike: „nije podešen" iako u tabeli postoji uspešan zapis.
+  const off = (await loadBackupStatus(now, {}))!;
+  assert.ok(off.every((i) => i.state === "nije_podesen" && i.tone !== "success" && i.lastOk === null));
+  const ENV = { BACKUP_AUTOMATION: "db_verified,offsite_stored,pdf_backup" };
+  const items = (await loadBackupStatus(now, ENV))!;
   assert.deepEqual(items.map((i) => i.kind), ["db_verified", "offsite_stored", "pdf_backup"]);
   const db1 = items.find((i) => i.kind === "db_verified")!;
   assert.equal(db1.tone, "success");
   // Proverena kopija NE znači da je sačuvana van GitHub-a.
-  const off = items.find((i) => i.kind === "offsite_stored")!;
-  if (!off.lastOk) assert.equal(off.state, "nikad");
+  const offsite = items.find((i) => i.kind === "offsite_stored")!;
+  if (!offsite.lastOk) assert.equal(offsite.state, "nikad");
+  // Oznaka izvora: zapisi druge oznake (npr. lokalna proba) se ne računaju.
+  const other = (await loadBackupStatus(now, { ...ENV, BACKUP_SOURCE_LABEL: "nepostojeca-oznaka" }))!;
+  assert.equal(other.find((i) => i.kind === "db_verified")!.state, "nikad");
   await db.sql`INSERT INTO backup_runs (kind, ok, source_label, detail, finished_at) VALUES ('db_verified', false, ${label}, 'manifest se razlikuje', now() + interval '1 second')`;
-  const again = (await loadBackupStatus(new Date(now.getTime() + 5000)))!.find((i) => i.kind === "db_verified")!;
+  const again = (await loadBackupStatus(new Date(now.getTime() + 5000), ENV))!.find((i) => i.kind === "db_verified")!;
   assert.equal(again.state, "poslednji_neuspeo");
   assert.match(again.message, /manifest se razlikuje/);
 });

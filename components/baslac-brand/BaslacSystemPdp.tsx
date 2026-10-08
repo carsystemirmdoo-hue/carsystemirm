@@ -6,6 +6,7 @@ import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import {
   baslacAssetSlot,
   baslacFinishLabels,
+  baslacLineExamplePackshot,
   baslacMatchesQuery,
   baslacPublicBases,
   type BaslacBase,
@@ -123,6 +124,11 @@ export function BaslacSystemPdp({
   }, [bases]);
 
   const packshot = packshotFor(active, system);
+  /*
+   * Bez slike tačne zapremine prikazuje se primer ambalaže LINIJE (generička limenka bez šifre
+   * nijanse), uz natpis da ne prikazuje izabranu nijansu ni zapreminu.
+   */
+  const lineExample = packshot ? null : baslacLineExamplePackshot(system);
 
 
   return (
@@ -135,7 +141,7 @@ export function BaslacSystemPdp({
 
       {/* Leva strana — stabilan image stage, slika prati zapreminu. */}
       <div className={styles.stageColumn}>
-        <div className={styles.stage} data-pending={packshot ? undefined : "true"}>
+        <div className={styles.stage} data-pending={packshot || lineExample ? undefined : "true"} data-example={lineExample ? "line" : undefined}>
           {packshot ? (
             <Image
               src={packshot}
@@ -145,6 +151,20 @@ export function BaslacSystemPdp({
               priority
               sizes="(max-width: 60rem) 70vw, 26rem"
             />
+          ) : lineExample ? (
+            <figure className={styles.lineExample}>
+              <Image
+                src={lineExample.src}
+                alt={lineExample.alt}
+                width={520}
+                height={680}
+                priority
+                sizes="(max-width: 60rem) 70vw, 26rem"
+              />
+              <figcaption>
+                Primer ambalaže linije — ne prikazuje izabranu nijansu ni zapreminu.
+              </figcaption>
+            </figure>
           ) : (
             <div className={styles.stagePlaceholder}>
               <span aria-hidden="true">Baslac</span>

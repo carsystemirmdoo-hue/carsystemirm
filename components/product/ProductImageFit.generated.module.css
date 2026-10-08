@@ -841,6 +841,28 @@
   --product-content-offset-y: 0.142;
 }
 
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-20-22-2k-primerfiller.webp"] {
+  --product-canvas-aspect: 0.7863;
+  --product-content-aspect: 0.7692;
+  --product-content-fill-x: 0.9062;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0469;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-20-24-2k-primerfiller-grey-4l.webp"] {
+  --product-canvas-aspect: 0.7544;
+  --product-content-aspect: 0.734;
+  --product-content-fill-x: 0.9006;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0497;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
 .fit[data-product-fit="/products/baslac/supplied/baslac__baslac-20-34-2k-primerfiller-white-1l.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.7418;
@@ -850,6 +872,58 @@
   --product-content-offset-y: 0.0367;
 }
 
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-20-94-2k-primerfiller-black-1l.webp"] {
+  --product-canvas-aspect: 0.7881;
+  --product-content-aspect: 0.7704;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-21-11-2k-plastic-primer-voc-1l.webp"] {
+  --product-canvas-aspect: 0.7881;
+  --product-content-aspect: 0.7704;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-21-20-plastic-primer-400ml.webp"] {
+  --product-canvas-aspect: 0.3781;
+  --product-content-aspect: 0.3243;
+  --product-content-fill-x: 0.7941;
+  --product-content-fill-y: 0.9259;
+  --product-content-offset-x: 0.1005;
+  --product-content-offset-y: 0.0371;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-27-10-2k-washprimer-1l.webp"] {
+  --product-canvas-aspect: 0.7881;
+  --product-content-aspect: 0.7704;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
 .fit[data-product-fit="/products/baslac/supplied/baslac__baslac-45-r45.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.6324;
@@ -857,6 +931,318 @@
   --product-content-fill-y: 0.9545;
   --product-content-offset-x: 0.2026;
   --product-content-offset-y: 0.0239;
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-45-w10.webp"] {
+  --product-canvas-aspect: 0.3869;
+  --product-content-aspect: 0.3383;
+  --product-content-fill-x: 0.8094;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0953;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-10-2k-primerfiller-hardener-extra-fast.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5938;
+  --product-content-fill-x: 0.88;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-30-2k-hardener-slow.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5938;
+  --product-content-fill-x: 0.88;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-415-2k-clear-hardener-fast-voc.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9622;
+  --product-content-fill-x: 0.9194;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-420-2k-clear-hardener-normal-voc.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9622;
+  --product-content-fill-x: 0.9194;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-430-2k-clear-hardener-slow-voc.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9622;
+  --product-content-fill-x: 0.9194;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-45-2k-activator.webp"] {
+  --product-canvas-aspect: 0.9087;
+  --product-content-aspect: 0.9;
+  --product-content-fill-x: 0.9161;
+  --product-content-fill-y: 0.925;
+  --product-content-offset-x: 0.0413;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-50-510-ambient-clear-hardener.webp"] {
+  --product-canvas-aspect: 0.9087;
+  --product-content-aspect: 0.9001;
+  --product-content-fill-x: 0.9168;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0413;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-51-515-2k-hardener-cv-fast.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9622;
+  --product-content-fill-x: 0.9194;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-51-520-2k-hardener-cv-normal.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9622;
+  --product-content-fill-x: 0.9194;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-51-530-2k-hardener-cv-slow.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9622;
+  --product-content-fill-x: 0.9194;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-55-10-ep-hardener.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5931;
+  --product-content-fill-x: 0.879;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-56-20-bodyfiller-hardener.webp"] {
+  --product-canvas-aspect: 0.3819;
+  --product-content-aspect: 0.332;
+  --product-content-fill-x: 0.8036;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0982;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-57-10-additive-washprimer.webp"] {
+  --product-canvas-aspect: 0.3869;
+  --product-content-aspect: 0.3383;
+  --product-content-fill-x: 0.8094;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0953;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-57-30-additive-washprimer-slow.webp"] {
+  --product-canvas-aspect: 0.4969;
+  --product-content-aspect: 0.4541;
+  --product-content-fill-x: 0.8465;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.078;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-60-05-speeding-reducer.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5931;
+  --product-content-fill-x: 0.879;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-60-10-reducer-universal-fast.webp"] {
+  --product-canvas-aspect: 0.5456;
+  --product-content-aspect: 0.5098;
+  --product-content-fill-x: 0.8637;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0687;
+  --product-content-offset-y: 0.0381;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-60-20-razredjivac.webp"] {
+  --product-canvas-aspect: 0.5456;
+  --product-content-aspect: 0.5098;
+  --product-content-fill-x: 0.8637;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0687;
+  --product-content-offset-y: 0.0381;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-60-30-reducer-universal-slow.webp"] {
+  --product-canvas-aspect: 0.5456;
+  --product-content-aspect: 0.5098;
+  --product-content-fill-x: 0.8637;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0687;
+  --product-content-offset-y: 0.0381;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-60-40-reducer-universal-extra-slow.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5938;
+  --product-content-fill-x: 0.88;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-65-10-blending-reducer.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5938;
+  --product-content-fill-x: 0.88;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-70-10-silicone-remover-for-oil-silicone-and-grease.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5938;
+  --product-content-fill-x: 0.88;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-70-45-cleaner.webp"] {
+  --product-canvas-aspect: 0.6531;
+  --product-content-aspect: 0.6248;
+  --product-content-fill-x: 0.8861;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0565;
+  --product-content-offset-y: 0.0369;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/supplied/baslac__baslac-81-30-additive-chassis.webp"] {
+  --product-canvas-aspect: 0.7544;
+  --product-content-aspect: 0.734;
+  --product-content-fill-x: 0.9006;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0497;
+  --product-content-offset-y: 0.0375;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-plate: #ffffff;
+  --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
 }
 
 .fit[data-product-fit="/products/baslac/supplied/baslac__baslac-basecoat-45.webp"] {
@@ -19215,6 +19601,249 @@
   --product-content-fill-y: 0.9167;
   --product-content-offset-x: 0.1733;
   --product-content-offset-y: 0.0433;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-a-2010-bril-852.webp"] {
+  --product-canvas-aspect: 0.5994;
+  --product-content-aspect: 0.5675;
+  --product-content-fill-x: 0.877;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0615;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-a-2540-agilis-blender-x-treme.webp"] {
+  --product-canvas-aspect: 0.4519;
+  --product-content-aspect: 0.4082;
+  --product-content-fill-x: 0.8368;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0816;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-a-2810-hydropure.webp"] {
+  --product-canvas-aspect: 1.0617;
+  --product-content-aspect: 1.0662;
+  --product-content-fill-x: 0.9256;
+  --product-content-fill-y: 0.9217;
+  --product-content-offset-x: 0.0375;
+  --product-content-offset-y: 0.0392;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-a-5200-ghd-deco-a.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-a-5700-ghd-tinting-paste.webp"] {
+  --product-canvas-aspect: 0.8;
+  --product-content-aspect: 0.7841;
+  --product-content-fill-x: 0.9078;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0461;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-am-2p35-blending-thinn-r.webp"] {
+  --product-canvas-aspect: 0.3769;
+  --product-content-aspect: 0.3273;
+  --product-content-fill-x: 0.8043;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0978;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-c-2a95-mattop.webp"] {
+  --product-canvas-aspect: 0.7819;
+  --product-content-aspect: 0.7571;
+  --product-content-fill-x: 0.8897;
+  --product-content-fill-y: 0.9187;
+  --product-content-offset-x: 0.0552;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-d-121-ultra-flash-flake-diamond.webp"] {
+  --product-canvas-aspect: 1.2336;
+  --product-content-aspect: 1.257;
+  --product-content-fill-x: 0.9263;
+  --product-content-fill-y: 0.909;
+  --product-content-offset-x: 0.0369;
+  --product-content-offset-y: 0.0455;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-db-403-onyx-hd-deep-black.webp"] {
+  --product-canvas-aspect: 0.7831;
+  --product-content-aspect: 0.7652;
+  --product-content-fill-x: 0.905;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0471;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-ghd-cv-12.webp"] {
+  --product-canvas-aspect: 0.8;
+  --product-content-aspect: 0.7841;
+  --product-content-fill-x: 0.9078;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0461;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-ghd-cv-40m.webp"] {
+  --product-canvas-aspect: 0.7994;
+  --product-content-aspect: 0.7834;
+  --product-content-fill-x: 0.9077;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0461;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-gv-100-ghd-thinner.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-gv-200-ghd-thinner.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-gv-300-ghd-thinner.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-gv-400-ghd-thinner.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-h-2a31-fillcure-slow.webp"] {
+  --product-canvas-aspect: 0.6225;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.8815;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0592;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-h-2p96-matshade-harden-r.webp"] {
+  --product-canvas-aspect: 0.6225;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.8815;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0592;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-h-700-ghd-hardener.webp"] {
+  --product-canvas-aspect: 0.9644;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9235;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0382;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-h-750-ghd-hardener.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-h-770-ghd-hardener.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-hb-015-agilis-minor-repair.webp"] {
+  --product-canvas-aspect: 0.4519;
+  --product-content-aspect: 0.4082;
+  --product-content-fill-x: 0.8368;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0816;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-onyx-hd.webp"] {
+  --product-canvas-aspect: 0.7869;
+  --product-content-aspect: 0.7699;
+  --product-content-fill-x: 0.9063;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0469;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-p-5430w-ghd-surfacer-white.webp"] {
+  --product-canvas-aspect: 0.8;
+  --product-content-aspect: 0.7841;
+  --product-content-fill-x: 0.9078;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0461;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-p-5433-ghd-chassismix.webp"] {
+  --product-canvas-aspect: 0.7531;
+  --product-content-aspect: 0.7335;
+  --product-content-fill-x: 0.9021;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.049;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-p-5520-ghd-multi-primer-filler-cf.webp"] {
+  --product-canvas-aspect: 0.7531;
+  --product-content-aspect: 0.7335;
+  --product-content-fill-x: 0.9021;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.049;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-r-2a20-airtopthinn.webp"] {
+  --product-canvas-aspect: 0.6225;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.8815;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0592;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/products/rm/supplied/rm__rm-r-2p45-clear-thinn-r.webp"] {
+  --product-canvas-aspect: 0.545;
+  --product-content-aspect: 0.5088;
+  --product-content-fill-x: 0.8647;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0677;
+  --product-content-offset-y: 0.0369;
 }
 
 .fit[data-product-fit="/products/rm/supplied/rm__rm-uno-hd.webp"] {

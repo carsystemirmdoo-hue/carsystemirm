@@ -307,11 +307,8 @@
   place-items: center;
   border: 1px solid var(--entity-hero-border);
   border-radius: 18px;
-  background:
-    linear-gradient(90deg, oklch(0.95 0.006 250 / 0.045) 1px, transparent 1px),
-    linear-gradient(180deg, oklch(0.95 0.006 250 / 0.035) 1px, transparent 1px),
-    oklch(0.19 0.018 250 / 0.68);
-  background-size: 24px 24px, 24px 24px, auto;
+  /* Hero je uvek taman: fiksna tamna studio površina, bez mreže. */
+  background: var(--surface-studio-fixed-dark);
   padding: clamp(18px, 3vw, 28px);
   box-shadow: inset 0 1px 0 oklch(0.95 0.006 250 / 0.08);
 }
@@ -325,10 +322,7 @@
 }
 
 :global(.dark) .logoStage {
-  background:
-    linear-gradient(90deg, oklch(0.95 0.006 250 / 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, oklch(0.95 0.006 250 / 0.03) 1px, transparent 1px),
-    oklch(0.16 0.016 250 / 0.78);
+  background: var(--surface-studio-fixed-dark);
 }
 
 .logoChip {

@@ -472,11 +472,12 @@ export const baslacFamilyPackshots: Record<
     kind?: "family" | "example";
   }
 > = {
-  // Portal nema generičku „45-W“ limenku; primer je 45-W1010 White 1 L
-  // (Surventis Brand Portal, asset 12121 — docs/BASLAC_PORTAL_ASSETS.md).
+  // Generička „45-W Basecoat” limenka linije, bez šifre nijanse (dostavio vlasnik, pravo potvrđeno —
+  // `supplied-images.json`, baslac__baslac-basecoat-45). Ranije je ovde stajao packshot konkretne
+  // nijanse 45-W1010 (portal 12121), koji je prikazivao šifru koja nije izabrana.
   "line-45": {
-    src: "/products/baslac/baslac--line-45-1l-example-packshot.webp",
-    alt: "Baslac 45-W1010 White Basecoat, limenka od 1 L",
+    src: "/products/baslac/supplied/baslac__baslac-basecoat-45.webp",
+    alt: "Baslac Line 45 (45-W) Basecoat — primer ambalaže linije, bez šifre nijanse",
     kind: "example",
   },
   "line-35": {
@@ -534,6 +535,28 @@ export function baslacAssetSlot(
       (slot) => slot.system === system && slot.volumeL === volumeL,
     ) ?? null
   );
+}
+
+/**
+ * Primer ambalaže LINIJE za sistemsku stranicu kada za zapreminu izabrane baze ne postoji
+ * odobrena slika te zapremine. Slika predstavlja liniju (generička limenka bez šifre nijanse);
+ * NE tvrdi da prikazuje izabranu nijansu ni zapreminu — to UI mora i da kaže.
+ */
+const LINE_NAMES: Record<BaslacSystemId, string> = {
+  "line-45": "Baslac Line 45",
+  "line-35": "Baslac Line 35",
+  "line-30": "Baslac Line 30",
+  // Line 30 CV nema sopstvenu limenku; prikazuje se ambalaža linije Line 30.
+  "line-30-cv": "Baslac Line 30 (ambalaža linije Line 30, koju koristi i Line 30 CV)",
+};
+
+export function baslacLineExamplePackshot(system: BaslacSystemId): { src: string; alt: string } | null {
+  const packshot = baslacFamilyPackshots[system];
+  if (!packshot?.src) return null;
+  return {
+    src: packshot.src,
+    alt: `${LINE_NAMES[system]} — primer ambalaže linije; ne prikazuje izabranu nijansu ni zapreminu`,
+  };
 }
 
 export function baslacAssetSlots(): BaslacAssetSlot[] {

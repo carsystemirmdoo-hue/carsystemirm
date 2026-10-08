@@ -71,7 +71,9 @@ const V6_UNKNOWN = new Set(["carsystem-glass-fibre-reinforced-putty"]);
 const fileInfo = new Map();
 function infoOf(src) {
   if (fileInfo.has(src)) return fileInfo.get(src);
-  const file = path.join(ROOT, "public", src ?? "");
+  // Slike bez potvrđenog prava nisu u public/ — izvor je review-assets/pending-rights/<brend>/.
+  const pendingMatch = /^\/products\/([^/]+)\/pending-rights\/([^/]+)$/.exec(src ?? "");
+  const file = pendingMatch ? path.join(ROOT, "review-assets/pending-rights", pendingMatch[1], pendingMatch[2]) : path.join(ROOT, "public", src ?? "");
   const exists = Boolean(src) && existsSync(file);
   const info = { exists, sha256: exists ? createHash("sha256").update(readFileSync(file)).digest("hex") : "", width: metrics[src]?.w ?? "", height: metrics[src]?.h ?? "", format: src ? path.extname(src).slice(1).toLowerCase() : "" };
   fileInfo.set(src, info);
@@ -116,6 +118,19 @@ for (const card of runtime.listing.canonical) {
   const record = runtime.products.find((product) => product.slug === card.id);
   accountedRecords.add(record.slug);
   const group = sharedGroupOf.get(record.slug);
+  /*
+   * Grupa čiji SVAKI član nosi sopstvenu dostavljenu sliku (tačna ambalaža svoje oznake) više nije
+   * „jedna reprezentativna slika” — svaki zapis je svoj identitet, kao i svaka druga kartica.
+   */
+  const ownImageForEveryMember = group?.members.every((slug) => {
+    const member = runtime.products.find((product) => product.slug === slug);
+    return member && suppliedByPath.get(member.productImage?.src)?.slug === slug;
+  });
+  if (group && ownImageForEveryMember) {
+    push({ id: `${card.brandSlug}__${record.slug}`, brand: card.brandSlug, cardId: card.id, record, scope: "CARD", src: record.productImage?.src ?? null, pack: packOf(record), articleNumbers: [articleOf(record)].filter(Boolean), members: 1,
+      notes: [`član grupe ${group.id}; svaki član ima sopstvenu sliku svoje oznake`] });
+    continue;
+  }
   if (group) {
     groupedCardIds.add(card.id);
     // Identitet nosi PRVI član grupe; ostali su accountovani, ali ne traže svoju fotografiju.
@@ -161,7 +176,11 @@ function classify(identity) {
   }
 
   const supplied = suppliedByPath.get(src);
-  if (supplied) return { ...out, provenance: `${supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? "supplier-portal" : "owner-supplied"}:${supplied.batch ?? suppliedBatch} (obrada: ${supplied.processing ?? "UNDECLARED"})`, official: supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? `zvanični portal dobavljača (asset ${supplied.sourceDetail?.assetId ?? "?"})` : "N/A (slika vlasnika)", rights: supplied.rightsBasis ?? "OWNER_CONFIRMATION_REQUIRED", classification: "OWNER_SUPPLIED_IMAGE", action: "NONE", priority: "" };
+  if (supplied) {
+    const origin = { SUPPLIER_BRAND_PORTAL: "supplier-portal", DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER: "distributor-render" }[supplied.sourceBasis] ?? "owner-supplied";
+    const official = supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? `zvanični portal dobavljača (asset ${supplied.sourceDetail?.assetId ?? "?"})` : supplied.sourceBasis === "DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER" ? `render proizvođača sa sajta distributera (${supplied.sourceDetail?.originalUrl ?? "?"})` : "N/A (slika vlasnika)";
+    return { ...out, provenance: `${origin}:${supplied.batch ?? suppliedBatch} (obrada: ${supplied.processing ?? "UNDECLARED"})`, official, rights: supplied.rightsBasis ?? "OWNER_CONFIRMATION_REQUIRED", classification: "OWNER_SUPPLIED_IMAGE", action: "NONE", priority: "" };
+  }
 
   /* SATA — rights gate: nijedna slika ne ulazi u runtime; dostupnost je samo činjenica o izvoru. */
   if (brand === "sata") {

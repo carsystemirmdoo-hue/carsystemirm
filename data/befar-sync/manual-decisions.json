@@ -3,8 +3,29 @@
     "Ručne odluke vlasnika. Sync ih čita, nikad ih ne piše. Posle izmene: `npm run befar:sync:apply`.",
     "source.<sourceKey> = { \"decision\": \"skip\", \"note\": \"…\" }      → zvanični proizvod se ne uvozi (svesno ruši paritet za taj proizvod).",
     "local.<naš slug>   = { \"sourceKey\": \"…\", \"note\": \"…\" }            → ručni zapis JESTE taj zvanični proizvod (dopuna umesto uvoza).",
-    "Osam ručnih Befar zapisa (sunđeri po boji i dimenziji) su PROBABLE_MATCH: svaki odgovara dvema ili trima zvaničnim porodicama, pa nijedan NIJE spojen. Spajanje traži odluku ovde, sa zvaničnom šifrom kao dokazom."
+    "Osam ručnih Befar zapisa (sunđeri po boji i dimenziji) su PROBABLE_MATCH: svaki odgovara dvema ili trima zvaničnim porodicama, pa nijedan NIJE spojen. Spajanje traži odluku ovde, sa zvaničnom šifrom kao dokazom.",
+    "images.<sourceKey> = { \"mediaIds\": [\"…~mv2.jpg\"], \"evidence\": \"…\" } → koje fotografije iz zajedničke galerije zvaničnog sajta pripadaju tom proizvodu (prva = glavna)."
   ],
   "source": {},
-  "local": {}
+  "local": {},
+  "images": {
+    "drill-type-headlight-cleaning-pad": {
+      "mediaIds": [
+        "446a5e_def53463ee5f4f6ea6463f5757cb3be4~mv2.jpg"
+      ],
+      "evidence": "Befar katalog (en.befar.com.tr/_files/ugd/446a5e_9192e551cfa540ae95f10c5247f2587b.pdf), str. 31: ista fotografija sa natpisom „HEADLIGHT CLEANER FOAM DRILL STYLE” — ravan cilindrični jastučić, šifra 83424. Konusni jastučić je jastučić za felne."
+    },
+    "drill-type-wheel-cleaning-pad": {
+      "mediaIds": [
+        "446a5e_4ef60c88e143423fb5a085edca6ac04e~mv2.jpg"
+      ],
+      "evidence": "Befar katalog (en.befar.com.tr/_files/ugd/446a5e_9192e551cfa540ae95f10c5247f2587b.pdf), str. 31: ista fotografija sa natpisom „RIM CLEANER FOAM DRILL STYLE” — konusni jastučić, šifra 97200."
+    },
+    "m14-adapter": {
+      "mediaIds": [
+        "446a5e_32f913a56a5947efac5b15da173af54e~mv2.jpg"
+      ],
+      "evidence": "Befar katalog (en.befar.com.tr/_files/ugd/446a5e_9192e551cfa540ae95f10c5247f2587b.pdf), str. 31: ista fotografija sa natpisom „DRILL STYLE M14 ADAPTORE” — navojna glava M14 sa šestougaonom maticom, šifra 97400."
+    }
+  }
 }

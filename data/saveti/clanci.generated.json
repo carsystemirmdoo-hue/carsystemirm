@@ -19162,13 +19162,12 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": true,
-    "razlog": "Za proveru da li je sloj na novom delu pravi KTL ili samo transportna zaštita nije pronađen izvor proizvođača iz našeg programa; taj deo teksta upućuje na dobavljača dela i ne daje postupak. Ostatak (čišćenje, brušenje ili mokro-na-mokro, probijanje do metala) zasnovan je na R-M i baslac dokumentima.",
-    "status": "potrebno"
+    "potrebna": false,
+    "status": "nije-potrebno"
    },
    "poslednjaProvera": "2026-10-08",
    "ponovniPregled": "2027-04-08",
@@ -19177,8 +19176,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 629,
-   "otisak": "4e33fbee69bc35bc73a0",
+   "reci": 604,
+   "otisak": "0da624ca2c55333a152b",
    "blocks": [
     {
      "t": "p",
@@ -19205,7 +19204,7 @@
      "c": [
       {
        "t": "text",
-       "v": "KTL sloj nanosi se u fabrici potapanjem dela u kadu sa bojom i električnim taloženjem, pa pokriva i unutrašnje površine i ivice. Za reparaturni sistem to je podloga, a ne nečistoća: R-M i baslac u tehničkim listovima navode „OEM delove sa KTL slojem“ (OEM parts with e-coat) kao podlogu za svoje odmašćivače i punioce"
+       "v": "U opštem smislu, KTL sloj se u fabrici nanosi potapanjem dela u kadu sa bojom i električnim taloženjem, pa pokriva i unutrašnje površine i ivice. Za reparaturni sistem to je podloga, a ne nečistoća: R-M i baslac u tehničkim listovima navode „OEM delove sa KTL slojem“ (OEM parts with e-coat) kao podlogu za svoje odmašćivače i punioce"
       },
       {
        "t": "cite",
@@ -19306,7 +19305,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Cilj brušenja je da se sloj ravnomerno matira, a ne da se stanji. Ivice i ispupčenja se brišu pažljivo, jer se tu sloj najlakše probije. Više o tome piše vodič "
+       "v": "Cilj brušenja je da se sloj ravnomerno matira, a ne da se stanji. Ivice i ispupčenja se bruse pažljivo, jer se tu sloj najlakše probije. Više o tome piše vodič "
       },
       {
        "t": "link",
@@ -19514,21 +19513,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Za ovu proveru nismo pronašli postupak u dokumentima proizvođača iz našeg programa, pa ga ovde ne opisujemo. Neki rezervni delovi dolaze samo sa privremenom zaštitom za transport i skladištenje, koja nije podloga za lakiranje. Šta je na delu, pitajte dobavljača dela ili proizvođača vozila. Ako postoji sumnja u stabilnost sloja, test otpornosti na rastvarač opisan je u tekstu "
-      },
-      {
-       "t": "link",
-       "href": "/vodici/test-starog-laka-razredjivacem",
-       "c": [
-        {
-         "t": "text",
-         "v": "Test starog laka razređivačem"
-        }
-       ]
-      },
-      {
-       "t": "text",
-       "v": ", uz napomenu da je pisan za stari lak, a ne za nove delove."
+       "v": "Za ovu proveru nismo pronašli postupak u dokumentima proizvođača iz našeg programa, pa ga ovde ne opisujemo. Tehnički listovi koje navodimo odnose se na „OEM delove sa KTL slojem“. Ako niste sigurni šta je na delu, pitajte dobavljača dela ili proizvođača vozila pre nego što izaberete postupak."
       }
      ]
     },
@@ -19722,8 +19707,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -19736,8 +19721,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 687,
-   "otisak": "280046b12f50042933bb",
+   "reci": 694,
+   "otisak": "19d5bea8882dce5bb1ad",
    "blocks": [
     {
      "t": "p",
@@ -20018,7 +20003,7 @@
        [
         {
          "t": "text",
-         "v": "odzračivanje 10 min"
+         "v": "odzračivanje 10 min, rad na 18–25 °C"
         },
         {
          "t": "cite",
@@ -20042,7 +20027,7 @@
        [
         {
          "t": "text",
-         "v": "preko njega posle oko 10–15 min"
+         "v": "preko njega posle oko 10–15 min na 20 °C"
         },
         {
          "t": "cite",
@@ -32128,8 +32113,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -32142,8 +32127,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 817,
-   "otisak": "87032d990ce4a3c59027",
+   "reci": 871,
+   "otisak": "3f0956e0cfaac49669a1",
    "blocks": [
     {
      "t": "p",
@@ -32222,7 +32207,7 @@
       },
       {
        "t": "text",
-       "v": ". baslac za 27-10 piše da ne ide direktno ispod vodenih proizvoda i da se pri radu sa baznom bojom baslac 45 nanosi punilac (filer) 20-24, 20-34 ili 20-94"
+       "v": ". baslac za 27-10 piše da ne ide direktno ispod vodenih proizvoda i da se kod probijanja i manjih popravki pre bazne boje baslac 45 mora naneti punilac (filer) 20-24, 20-34 ili 20-94"
       },
       {
        "t": "cite",
@@ -32316,7 +32301,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Neki prajmeri-punioci su napravljeni tako da idu direktno na metal bez posebnog reaktivnog sloja. R-M MULTI Purpos-R Grey P 2P63 tehnički list opisuje kao DTM prajmer, prajmer-punilac i punilac, sa podlogama limeni čelik, pocinkovani lim, aluminijum, fabrički KTL sloj i stari lak"
+       "v": "Neki prajmeri-punioci su napravljeni tako da idu direktno na metal bez posebnog reaktivnog sloja. Za R-M MULTI Purpos-R Grey P 2P63 tehnički list navodi da služi kao DTM prajmer, prajmer-punilac i punilac, a kao podloge navodi limeni čelik, pocinkovani lim, aluminijum, fabrički KTL sloj i stari lak"
       },
       {
        "t": "cite",
@@ -32471,7 +32456,7 @@
       },
       {
        "t": "text",
-       "v": ". Taj proizvod je iz programa za komercijalna vozila i ovde služi samo kao primer takvog upozorenja. Priprema pocinkovanog lima i aluminijuma posebno je opisana u vodičima "
+       "v": ". Taj proizvod je iz R-M programa za komercijalna vozila (tehnički list kao primenu navodi autobuse, vatrogasna vozila i nadogradnje), pa se ovde navodi samo kao primer takvog upozorenja, a ne kao preporuka za putnička vozila. Priprema pocinkovanog lima i aluminijuma posebno je opisana u vodičima "
       },
       {
        "t": "link",
@@ -32544,7 +32529,35 @@
        },
        {
         "t": "text",
-        "v": " Ako posle prajmera ide poliesterski kit, reaktivni prajmeri iz ovog teksta otpadaju. Ako posle ide vodena bazna boja, između mora punilac."
+        "v": " Ako posle prajmera ide poliesterski kit, P 2A26 i Etch Primer otpadaju, jer tehnički listovi ne dozvoljavaju poliesterske proizvode preko njih"
+       },
+       {
+        "t": "cite",
+        "id": "rm-p2a26-tds"
+       },
+       {
+        "t": "cite",
+        "id": "cs-etch-primer-tds"
+       },
+       {
+        "t": "text",
+        "v": "; za 27-10 tehnički list o tome ništa ne navodi. Ako posle ide vodena bazna boja, za sva tri reaktivna prajmera iz ovog teksta između mora punilac"
+       },
+       {
+        "t": "cite",
+        "id": "rm-p2a26-tds"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-27-10-tds"
+       },
+       {
+        "t": "cite",
+        "id": "cs-etch-primer-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
        }
       ],
       [
@@ -32876,8 +32889,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -32890,8 +32903,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 625,
-   "otisak": "f52828e74d0a54decc90",
+   "reci": 661,
+   "otisak": "44778cedd08e2dc811a0",
    "blocks": [
     {
      "t": "p",
@@ -33029,7 +33042,7 @@
        [
         {
          "t": "text",
-         "v": "akrilni prajmer-punilac za brušenje"
+         "v": "2K prajmer-punilac za brušenje"
         }
        ],
        [
@@ -33063,7 +33076,7 @@
        [
         {
          "t": "text",
-         "v": "akrilni punilac za brušenje"
+         "v": "2K punilac za brušenje"
         }
        ],
        [
@@ -33097,7 +33110,7 @@
        [
         {
          "t": "text",
-         "v": "akrilni punilac"
+         "v": "2K akrilni punilac"
         }
        ],
        [
@@ -33128,7 +33141,23 @@
      "c": [
       {
        "t": "text",
-       "v": "Tabela ne poredi kvalitet. Pokazuje da su navedeni epoksidni proizvodi sporiji za sušenje na sobnoj temperaturi, a akrilni punioci napravljeni za deblje slojeve i brže brušenje. baslac 25-30 opisuje kao promotor prianjanja sa visokom antikorozivnom zaštitom"
+       "v": "Tabela ne poredi kvalitet. Pokazuje da se navedeni epoksidni proizvodi na sobnoj temperaturi duže suše, a da navedeni 2K punioci za brušenje imaju deblji propisani sloj i kraće sušenje do brušenja. Hemijsku osnovu kao akrilnu izričito navodi samo tehnički list za Air Plus; za P 2A41 i 20-22 tehnički listovi je ne navode"
+      },
+      {
+       "t": "cite",
+       "id": "cs-air-plus-tds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-p2a41-tds"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-20-22-tds"
+      },
+      {
+       "t": "text",
+       "v": ". baslac 25-30 opisuje kao promotor prianjanja sa visokom antikorozivnom zaštitom"
       },
       {
        "t": "cite",
@@ -33191,7 +33220,7 @@
        },
        {
         "t": "text",
-        "v": " Epoksid je napravljen za direktno prianjanje na metal. C.A.R.FIT za 2K Epoxy Primer 1:1 navodi čelik, aluminijum i pocinkovani lim, ali i stakloplastiku, kitove i stari lak u dobrom stanju"
+        "v": " Epoksidni proizvodi iz ovog teksta navode goli metal među podlogama. C.A.R.FIT za 2K Epoxy Primer 1:1 navodi čelik, aluminijum i pocinkovani lim, ali i stakloplastiku, kitove i stari lak u dobrom stanju"
        },
        {
         "t": "cite",
@@ -33229,7 +33258,7 @@
        },
        {
         "t": "text",
-        "v": " Reaktivni prajmeri opisani u vodiču "
+        "v": " Neki reaktivni prajmeri, kako je opisano u vodiču "
        },
        {
         "t": "link",
@@ -33243,7 +33272,7 @@
        },
        {
         "t": "text",
-        "v": " ne podnose poliesterski kit preko sebe, a neki epoksidni proizvodi ga podnose. Za EF.21 Carsystem dozvoljava poliesterski kit preko punioca i naglašava da se vremena sušenja strogo poštuju"
+        "v": ", prema tehničkim listovima ne podnose poliesterski kit preko sebe, a neki epoksidni proizvodi ga podnose. Za EF.21 Carsystem dozvoljava poliesterski kit preko punioca i naglašava da se vremena sušenja strogo poštuju"
        },
        {
         "t": "cite",
@@ -33622,8 +33651,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -33636,15 +33665,27 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 693,
-   "otisak": "33665a4c431f36ede198",
+   "reci": 748,
+   "otisak": "49a3fdcee896dee9f58b",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Punilac za brušenje se nanosi pištoljem sa većom diznom nego bazna boja i lak; kod R-M i baslac punilaca iz ovog teksta to su dva sloja, uz odzračivanje između slojeva dok sloj ne postane mat. Za R-M PerformFILLER P 2A41 tehnički list navodi diznu 1,6–1,8 mm za kompatibilni pištolj sa gornjom čašom i 1,7–1,9 mm za HVLP, dva sloja i ukupnu debljinu 50–70 µm"
+       "v": "Punilac za brušenje se nanosi pištoljem sa većom diznom nego bazna boja i lak. Kod R-M i baslac punilaca iz ovog teksta to su dva sloja, a R-M za svoje punioce traži odzračivanje između slojeva dok sloj ne postane mat"
+      },
+      {
+       "t": "cite",
+       "id": "rm-p2a41-tds"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-20-24-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Za R-M PerformFILLER P 2A41 tehnički list navodi diznu 1,6–1,8 mm za kompatibilni pištolj sa gornjom čašom i 1,7–1,9 mm za HVLP, dva sloja i ukupnu debljinu 50–70 µm"
       },
       {
        "t": "cite",
@@ -33915,7 +33956,7 @@
      "c": [
       {
        "t": "text",
-       "v": "baslac objavljuje i poseban spisak preporučenih pištolja za svoje materijale. Za punioce 20-24, 20-34 i 20-94 u njemu su, među ostalim, navedeni SATA jet 100 BF RP sa diznom 1,6 i SATA jet 100 BF HVLP sa diznom 1,7–1,8, oba na 2,0 bara"
+       "v": "baslac objavljuje i poseban spisak preporučenih pištolja za svoje materijale. Za punioce 20-24, 20-34 i 20-94 u njemu su, među ostalim, navedeni SATA jet 100 BF RP sa diznom 1,6 mm i SATA jet 100 BF HVLP sa diznom 1,7–1,8 mm, oba na 2,0 bara"
       },
       {
        "t": "cite",
@@ -33946,7 +33987,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Punioci za mokro-na-mokro rade sa manjom diznom i tanjim slojem, pa se ove vrednosti na njih ne prenose. O tome piše vodič "
+       "v": "Punioci za mokro-na-mokro rade sa manjom diznom i tanjim slojem, pa se ove vrednosti na njih ne prenose. U istoj baslac tabeli za punioce mokro-na-mokro 20-35 i 20-95 navedene su dizne od 1,3 do 1,4 mm"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-pistolji"
+      },
+      {
+       "t": "text",
+       "v": ". O tome piše vodič "
       },
       {
        "t": "link",
@@ -34040,6 +34089,10 @@
         "id": "rm-p2a41-tds"
        },
        {
+        "t": "cite",
+        "id": "rm-p2e23-tds"
+       },
+       {
         "t": "text",
         "v": ". Carsystem za Air Plus daje vreme od 5–7 minuta"
        },
@@ -34049,7 +34102,15 @@
        },
        {
         "t": "text",
-        "v": "."
+        "v": ". baslac tehnički list za 20-24 vreme odzračivanja ne navodi"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-20-24-tds"
+       },
+       {
+        "t": "text",
+        "v": ", pa ga proverite kod proizvođača."
        }
       ],
       [
@@ -34249,7 +34310,15 @@
        },
        {
         "t": "text",
-        "v": " Vrednosti iz tabele su znatno veće od onih za baznu boju i lak."
+        "v": " U baslac tabeli pištolja za baznu boju 45 Line navedene su dizne od 1,3 do 1,5 mm, a za punioce 20-24, 20-34 i 20-94 od 1,6 do 1,8 mm"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-pistolji"
+       },
+       {
+        "t": "text",
+        "v": "."
        }
       ]
      ]
@@ -34472,8 +34541,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -34486,15 +34555,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 720,
-   "otisak": "278284418831a0a2c51f",
+   "reci": 738,
+   "otisak": "aabb37cc3a0bc8a4b167",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Punilac mokro-na-mokro (engl. wet-on-wet) nanosi se u jednom tankom sloju, a bazna boja ide preko njega posle kratkog odzračivanja, bez sušenja i brušenja punioca. Ima smisla kada podloga ne traži ravnanje, na primer na novom delu sa fabričkim KTL slojem ili na dobro pripremljenom starom laku. Kada treba popuniti tragove brušenja kita ili neravnine, koristi se punilac za brušenje, jer je sloj mokro-na-mokro znatno tanji."
+       "v": "Punilac mokro-na-mokro (engl. wet-on-wet) nanosi se u tankom sloju, a bazna boja ide preko njega posle kratkog odzračivanja, bez sušenja i brušenja punioca. Ima smisla kada podloga ne traži ravnanje, na primer na novom delu sa fabričkim KTL slojem ili na dobro pripremljenom starom laku. Kada treba popuniti tragove brušenja kita ili neravnine, koristi se punilac za brušenje, jer je sloj mokro-na-mokro znatno tanji."
       }
      ]
     },
@@ -34859,7 +34928,7 @@
       },
       {
        "t": "text",
-       "v": ". Neki proizvodi rade u dva režima: Carsystem EF.21 EP Filler ima poseban odnos mešanja i postupak za mokro-na-mokro, sa jednim slojem od 20–35 µm, i standardni postupak sa brušenjem"
+       "v": ". Neki proizvodi rade u dva režima: Carsystem EF.21 EP Filler ima poseban postupak za mokro-na-mokro, sa diznom 1,3 mm i jednim slojem od 20–35 µm, i standardni postupak sa brušenjem"
       },
       {
        "t": "cite",
@@ -35155,7 +35224,7 @@
       },
       {
        "t": "text",
-       "v": ". Te vrednosti važe za 20 °C; za drugu temperaturu važi samo ono što proizvođač navodi. Carsystem za Wet on Wet Plus, na primer, navodi rad iznad 15 °C"
+       "v": ". Te vrednosti važe za 20 °C; za drugu temperaturu važi samo ono što proizvođač navodi. Carsystem za Wet on Wet Plus, na primer, u tabeli navodi rad iznad 15 °C, a u napomeni ne preporučuje upotrebu ispod 18 °C"
       },
       {
        "t": "cite",
@@ -35163,7 +35232,7 @@
       },
       {
        "t": "text",
-       "v": "."
+       "v": "; u takvom slučaju držite se strožeg podatka."
       }
      ]
     },
@@ -35347,8 +35416,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -35362,15 +35431,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 626,
-   "otisak": "e64bc5ff2e28cc3db693",
+   "reci": 657,
+   "otisak": "9bf5d6a79d25dc6a1fb0",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Proizvođači iz našeg programa nude punioce u beloj, sivoj i crnoj varijanti, ili kao parove bele i crne, da bi se njihovim mešanjem dobila siva nijansa podloge. To potvrđuju tabele mešanja baslac, R-M i Norbin. Koju nijansu treba izabrati za određenu boju vozila, tehnički listovi koje smo pregledali ne navode: tu informaciju treba tražiti od proizvođača bazne boje ili tehničke podrške."
+       "v": "Proizvođači iz našeg programa nude punioce u beloj, sivoj i crnoj varijanti, ili kao parove bele i crne, da bi se njihovim mešanjem dobila siva nijansa podloge. To potvrđuju tabele mešanja baslac i Norbin i tehnički listovi R-M. Koju nijansu treba izabrati za određenu boju vozila, tehnički listovi koje smo pregledali ne navode: tu informaciju treba tražiti od proizvođača bazne boje ili tehničke podrške."
       }
      ]
     },
@@ -35661,6 +35730,18 @@
       },
       {
        "t": "text",
+       "v": ". Na posterima su uz svaku nijansu podloge prikazani i uzorci boja, ali bez pisanog pravila koje bi povezalo nijansu podloge sa određenom bojom vozila"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-sive-20-24"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-sive-20-35"
+      },
+      {
+       "t": "text",
        "v": "."
       }
      ]
@@ -35750,7 +35831,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Norbin na posteru za punioce N55-V20 (tamnosiva) i N55-V29 (sivo-crna) prikazuje tri rešenja podloge: 100 % N55-V20, 100 % N55-V29 i mešavinu 50 % i 50 %"
+       "v": "Norbin na posteru za punioce N55-V20 (siva) i N55-V29 (crna) prikazuje tri rešenja podloge: siva (100 % N55-V20), tamnosiva (50 % N55-V20 i 50 % N55-V29) i crna (100 % N55-V29)"
       },
       {
        "t": "cite",
@@ -36027,8 +36108,7 @@
     "carsystem-af-25-primer-wet-on-wet",
     "rm-pm-2p10-plastic-prim-r",
     "baslac-21-20-plastic-primer-400ml",
-    "carsystem-hpp-primer",
-    "p-5480-ghd-universal-epoxy"
+    "carsystem-hpp-primer"
    ],
    "povezani": [
     "SV-0062",
@@ -36129,8 +36209,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -36143,8 +36223,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 596,
-   "otisak": "27a427de3564c363bc36",
+   "reci": 618,
+   "otisak": "440193a04835f4843aa5",
    "blocks": [
     {
      "t": "p",
@@ -36218,7 +36298,7 @@
       },
       {
        "t": "text",
-       "v": " (mokro-na-mokro, prajmer za plastiku) ima rok, jer sledeći sloj treba da se veže za još sveži sloj. Tu je podatak iz tehničkog lista presudan."
+       "v": " (mokro-na-mokro, prajmer za plastiku) obično ima rok u tehničkom listu, jer se sledeći sloj nanosi mokro-na-mokro ili bez međubrušenja. Tu je podatak iz tehničkog lista presudan."
       }
      ]
     },
@@ -36401,7 +36481,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Primer iz programa za komercijalna vozila pokazuje da rok zavisi i od sloja koji ide preko. Za epoksid GHD UNIVERSAL EPOXY P 5480 R-M navodi prelakiranje u roku od 1–72 h na 20 °C, a za određene završne sisteme najkasnije u toku jednog radnog dana"
+       "v": "Primer iz R-M programa za komercijalna vozila pokazuje da rok zavisi i od sloja koji ide preko. Taj proizvod nije preporuka za putnička vozila i ovde služi samo kao primer kako tehnički list može da navede rok. Za epoksid GHD UNIVERSAL EPOXY P 5480 R-M navodi prelakiranje u roku od 1–72 h na 20 °C, a za određene završne sisteme najkasnije u toku jednog radnog dana"
       },
       {
        "t": "cite",
@@ -36691,11 +36771,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Vrednosti iz tabele važe za temperaturu koju tehnički list navodi; za proizvode iz tabele to je 20 °C, osim za HpP Primer, gde je 25 °C"
+       "v": "Vrednosti iz tabele važe za uslove koje tehnički list navodi; vremena odzračivanja data su za 20 °C, osim za HpP Primer, gde je 25 °C"
       },
       {
        "t": "cite",
        "id": "rm-p2p71-tds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pm2p10-tds"
       },
       {
        "t": "cite",
@@ -36849,8 +36933,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -36864,7 +36948,7 @@
    "revizije": [],
    "imaTekst": true,
    "reci": 662,
-   "otisak": "a9ba5e4de3bff5148d32",
+   "otisak": "f4efeeaa6ecafcd33c03",
    "blocks": [
     {
      "t": "p",
@@ -37039,7 +37123,7 @@
        },
        {
         "t": "text",
-        "v": ". R-M PLASTIC Fill-R Grey P 2P43 ima u tehničkom listu kao podloge Pur-RIM, PP-EPDM, ABS, GRP/SMC, PC-PBTP, PA, PPO i tvrdi PVC"
+        "v": ". Za R-M PLASTIC Fill-R Grey P 2P43 tehnički list kao podloge navodi Pur-RIM, PP-EPDM, ABS, GRP/SMC, PC-PBTP, PA, PPO i tvrdi PVC"
        },
        {
         "t": "cite",
@@ -37562,8 +37646,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -37576,8 +37660,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 642,
-   "otisak": "3e95a1438f14ff9add4b",
+   "reci": 646,
+   "otisak": "41ca4dcbcae94bbff932",
    "blocks": [
     {
      "t": "p",
@@ -37770,7 +37854,7 @@
        },
        {
         "t": "text",
-        "v": " Kit i lepak trebaju čvrstu, mat podlogu. Carsystem za Plastic Pro navodi da se dobro prianjanje postiže samo na dobro prethodno izbrušenoj podlozi"
+        "v": " Kitu i lepku je potrebna čvrsta, mat podloga. Carsystem za Plastic Pro navodi da se dobro prianjanje postiže samo na dobro prethodno izbrušenoj podlozi"
        },
        {
         "t": "cite",
@@ -37810,7 +37894,7 @@
         "c": [
          {
           "t": "text",
-          "v": "Radite brzo i sačekajte brušenje."
+          "v": "Radite brzo, a brusite tek posle propisanog vremena."
          }
         ]
        },
@@ -49575,8 +49659,8 @@
    "id": "SV-0097",
    "slug": "izbor-bezbojnog-laka",
    "naslov": "Kako se bira bezbojni lak",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Kako se bira bezbojni lak za popravku",
+   "opis": "Prema čemu se bira bezbojni lak: sistem bazne boje, veličina popravke, način sušenja, stepen sjaja i VOC, uz primere iz tehničkih listova našeg programa.",
    "kategorija": "lakovi",
    "podtema": "izbor laka",
    "tip": "osnovni-vodic",
@@ -49590,16 +49674,109 @@
     "Šta znače oznake HS, MS i VOC?",
     "Zašto je brz lak praktičan za manje popravke?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Pitanje koji bezbojni lak izabrati postavlja se na forumu bhtuning.com (q044, početnik bez kompresora); opšte pitanje izbora prema popravci je urednička procena.",
+    "izvori": [
+     "https://bhtuning.com/threads/sve-o-lakiranju.84276/"
+    ]
+   },
    "brendovi": [
     "rm",
     "baslac",
     "carsystem",
     "norbin"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "c-2a40-airtop",
+    "c-2p45-speed-finish-r",
+    "baslac-40-10-2k-panel-clear",
+    "baslac-40-440-2k-voc-clear",
+    "carsystem-2k-clear-voc-cc-26-eco-x-15-60",
+    "grupa:norbin-n15-020",
+    "carsystem-clear-coat-spray"
+   ],
+   "povezani": [
+    "SV-0098",
+    "SV-0100",
+    "SV-0103",
+    "SV-0015",
+    "SV-0014"
+   ],
+   "izvori": [
+    {
+     "id": "rm-c2a40-tds",
+     "naziv": "R-M, Technical Information C 2A40 AirTOP, Clear coat, air drying",
+     "dokument": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-c2p45-tds",
+     "naziv": "R-M, Technical Information C 2P45 SPEED Finish-R, eSense clear coat, fast drying",
+     "dokument": "/documents/products/rm/c-2p45-speed-finish-r/rm-c-2p45-speed-finish-r-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-c2p85-tds",
+     "naziv": "R-M, Technical Information C 2P85 POWER Finish-R, eSense clear coat, scratch resistant",
+     "dokument": "/documents/products/rm/c-2p85-power-finish-r/rm-c-2p85-power-finish-r-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-40-10-tds",
+     "naziv": "baslac, Technical Information 40-10 2K Panel Clear",
+     "dokument": "/documents/products/baslac/40-10.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-40-440-tds",
+     "naziv": "baslac, Technical Information 40-440 2K VOC Clear",
+     "dokument": "/documents/products/baslac/40-440.pdf",
+     "verzija": "12/2025",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-40-510-tds",
+     "naziv": "baslac, Technical Information 40-510 Ambient clear",
+     "dokument": "/documents/products/baslac/40-510.pdf",
+     "verzija": "01/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-cc26-tds",
+     "naziv": "Carsystem, Technical Data Sheet 2K Clear VOC CC.26 ECO-X 15/60",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-CC.26-ECO_X-v01.pdf",
+     "verzija": "V01, 04/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "norbin-n15-020-tds",
+     "naziv": "Norbin, Technical Information N15-020 NORBIN Clear",
+     "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+     "verzija": "01/2022",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-klarlack-spray-tds",
+     "naziv": "Carsystem, Technical Data Sheet Klarlack-Spray (clear-coat spray)",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-klarlack-spray-clear-coat-spray.pdf",
+     "verzija": "v.02, 03/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -49609,7 +49786,7 @@
    "razlogPrioriteta": "Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se rano da bi kasniji tekstovi imali na šta da se oslone.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -49617,23 +49794,777 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "e9c186f747e34b5f05da",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 899,
+   "otisak": "98a404cfaca0e893df6e",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Bezbojni lak se bira prema pet stvari: kom sistemu pripada bazna boja, kolika je popravka, kako ćete sušiti, koji stepen sjaja i tvrdoće je potreban i koju VOC kategoriju lak ima. Nijedan lak nije „najbolji“ za sve. R-M C 2A40 je, prema tehničkom listu, lak za sušenje na vazduhu, od manjih oštećenja do cele strane vozila"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-tds"
+      },
+      {
+       "t": "text",
+       "v": ", baslac 40-10 je namenjen za jedan ili dva vertikalna dela"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-10-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a Carsystem CC.26 ECO-X za pojedinačne delove i veće celine, kao što je ceo prednji deo vozila"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-cc26-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Odluka se zato donosi iz tehničkog lista, a ne po nazivu ili ceni."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "1-kom-sistemu-pripada-bazna-boja",
+     "c": [
+      {
+       "t": "text",
+       "v": "1. Kom sistemu pripada bazna boja"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Lak i bazna boja rade kao par. Proizvođači to jasno pišu: R-M lakove serije C 2A navodi kao lakove posebno za ONYX HD baznu boju"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a baslac lak 40-10 kao lak za baslac baznu boju 35-"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-10-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Carsystem za CC.26 navodi da se može naneti preko rastvaračke i vodene bazne boje, ali izričito preporučuje rad unutar sistema, jer sa razređivačima i učvršćivačima iz drugog sistema ne mogu da se isključe problemi sa sušenjem i prianjanjem"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-cc26-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Norbin N15-020 je opisan kao 2K lak za sve bazne boje"
+      },
+      {
+       "t": "cite",
+       "id": "norbin-n15-020-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ponekad lak menja i pripremu baze. Za C 2A40 R-M propisuje da se u svaku vodenu baznu boju ispod tog laka doda 5 % aktivatora A 2210"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Zato se lak bira pre nego što se zameša baza. Zašto je bolje ostati u jednom sistemu, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/sistem-materijala-jednog-proizvodjaca",
+       "c": [
+        {
+         "t": "text",
+         "v": "Zašto materijale birati kao sistem jednog proizvođača"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "2-kolika-je-popravka",
+     "c": [
+      {
+       "t": "text",
+       "v": "2. Kolika je popravka"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Tehnički listovi u odeljku o nameni navode za koju veličinu posla je lak napravljen."
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Lak"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Namena prema tehničkom listu"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "R-M C 2A40 AirTOP"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "od manjih oštećenja do cele strane vozila, sušenje na vazduhu"
+        },
+        {
+         "t": "cite",
+         "id": "rm-c2a40-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "R-M C 2P45 SPEED Finish-R"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "više vertikalnih i horizontalnih delova, i manja oštećenja"
+        },
+        {
+         "t": "cite",
+         "id": "rm-c2p45-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "baslac 40-10 2K Panel Clear"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "jedan ili dva vertikalna dela, višebojni radovi, natpisi i plastični delovi"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-10-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Carsystem CC.26 ECO-X"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "pojedinačni delovi i veće celine, npr. ceo prednji deo"
+        },
+        {
+         "t": "cite",
+         "id": "carsystem-cc26-tds"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Za veliki deo ili ceo automobil važno je i vreme upotrebljivosti smeše i dovoljno vremena da se lak razlije. Za kraće popravke prednost ima brže sušenje. O tome više u tekstu "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/brzi-lakovi-za-manje-popravke",
+       "c": [
+        {
+         "t": "text",
+         "v": "Brzi lakovi za manje popravke"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "3-kako-cete-susiti",
+     "c": [
+      {
+       "t": "text",
+       "v": "3. Kako ćete sušiti"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ako nemate kabinu sa grejanjem, birajte lak čiji tehnički list daje podatke za sušenje na sobnoj temperaturi i proverite koliko dugo to traje. Razlike su velike. Za baslac 40-440 sa normalnim učvršćivačem 50-420 tehnički list navodi 16 h na 20 °C ili 40 min na 60 °C"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-440-tds"
+      },
+      {
+       "t": "text",
+       "v": ". baslac 40-510 je lak namenjen sušenju na vazduhu: sa učvršćivačem 50-510 suv je na prašinu posle 15 min, a polira se posle 120 min, s tim da list kaže da se ta vremena poliranja odnose na sitna zrnca prašine"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-510-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Važna je i najniža temperatura rada. Carsystem za CC.26 ne preporučuje nanošenje ispod 18 °C, jer niska temperatura menja svojstva sloja"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-cc26-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Kako temperatura deluje na izbor učvršćivača, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/izbor-ucvrscivaca-po-temperaturi",
+       "c": [
+        {
+         "t": "text",
+         "v": "Brzi, normalni ili spori učvršćivač"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "4-sjaj-tvrdoca-i-otpornost",
+     "c": [
+      {
+       "t": "text",
+       "v": "4. Sjaj, tvrdoća i otpornost"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Proizvođači razlikuju lakove i po završnom izgledu i po otpornosti. R-M, na primer, ima poseban lak otporan na ogrebotine, C 2P85 POWER Finish-R, opisan kao lak za visoku zaštitu površine"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2p85-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Za vozila sa fabričkim mat ili polumat završnim slojem potreban je mat lak; on se nanosi i popravlja drugačije, što objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/mat-i-polumat-lak",
+       "c": [
+        {
+         "t": "text",
+         "v": "Mat i polumat lak"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "5-oznake-hs-ms-i-voc",
+     "c": [
+      {
+       "t": "text",
+       "v": "5. Oznake HS, MS i VOC"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "HS i MS govore o udelu suvog ostatka u laku, a oznaka VOC o tome da li lak spremljen za nanošenje ostaje ispod granične vrednosti isparljivih organskih jedinjenja za svoju kategoriju. Za baslac 40-440 tehnički list navodi da je granica za kategoriju IIB.d 420 g/l, a da lak ima 419 g/l"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-440-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Detaljnije: "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/hs-i-ms-lak",
+       "c": [
+        {
+         "t": "text",
+         "v": "HS i MS lak: šta znače oznake"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": " i "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/voc-u-autolakirerstvu",
+       "c": [
+        {
+         "t": "text",
+         "v": "VOC u autolakirerstvu"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-proveriti-u-tehnickom-listu-pre-izbora",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta proveriti u tehničkom listu pre izbora"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Namena:"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " za koju baznu boju i za koju veličinu posla."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odnos mešanja:"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " sa kojim učvršćivačem i razređivačem, po zapremini ili težini. Vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/odnos-mesanja-iz-tehnickog-lista",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odnos mešanja"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Vreme upotrebljivosti smeše:"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " da li stižete da nanesete sve što zamešate. Vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/vreme-upotrebljivosti-smese",
+        "c": [
+         {
+          "t": "text",
+          "v": "Vreme upotrebljivosti smeše"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Sušenje:"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " na temperaturi koju stvarno možete da obezbedite."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Broj slojeva i debljina:"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/koliko-slojeva-laka",
+        "c": [
+         {
+          "t": "text",
+          "v": "Koliko slojeva bezbojnog laka nanositi"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ogranicenja",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ograničenja"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ovaj tekst pokazuje kriterijume i primere iz navedenih verzija tehničkih listova. Ne zamenjuje tehnički list laka koji koristite, a proizvođač ga može izmeniti. Kada niste sigurni da li lak odgovara Vašoj baznoj boji ili podlozi, pitajte tehničku podršku proizvođača ili prodavca. Proizvode iz našeg programa pogledajte u "
+      },
+      {
+       "t": "link",
+       "href": "/katalog?brend=rm",
+       "c": [
+        {
+         "t": "text",
+         "v": "katalogu"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": " ili u najbližoj "
+      },
+      {
+       "t": "link",
+       "href": "/prodavnice",
+       "c": [
+        {
+         "t": "text",
+         "v": "prodavnici"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-znace-oznake-hs-ms-i-voc",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znače oznake HS, MS i VOC?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "HS ("
+      },
+      {
+       "t": "em",
+       "c": [
+        {
+         "t": "text",
+         "v": "high solids"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ") i MS ("
+      },
+      {
+       "t": "em",
+       "c": [
+        {
+         "t": "text",
+         "v": "medium solids"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ") označavaju veći, odnosno srednji udeo suvog ostatka. baslac, na primer, 40-10 naziva MS lakom"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-10-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a 40-440 HS VOC lakom"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-440-tds"
+      },
+      {
+       "t": "text",
+       "v": ". VOC u nazivu znači da je lak napravljen da zadovolji granicu isparljivih organskih jedinjenja za svoju kategoriju."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "zasto-je-brz-lak-praktican-za-manje-popravke",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto je brz lak praktičan za manje popravke?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kraće sušenje znači da deo ranije ide na poliranje i montažu. Za C 2P45 R-M navodi sušenje od 10–15 min na 60 °C i 5–6 h na 20 °C"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2p45-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Brz lak ima i ograničenja, pre svega kraće vreme upotrebljivosti i osetljivost na temperaturu, o čemu piše tekst "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/brzi-lakovi-za-manje-popravke",
+       "c": [
+        {
+         "t": "text",
+         "v": "Brzi lakovi za manje popravke"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "koji-lak-ako-nemam-kompresor-ni-pistolj",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koji lak ako nemam kompresor ni pištolj?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Tada dolazi u obzir samo lak u spreju, i to za male površine. Carsystem Klarlack-Spray je akrilni sjajni lak u spreju; tehnički list navodi da 400 ml pokriva 1–2 m² i upozorava da nije pogodan za čisto bele površine"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-klarlack-spray-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Šta sprej može, a šta ne, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/popravka-sprejom-osnove",
+       "c": [
+        {
+         "t": "text",
+         "v": "Popravka sprejom: šta se može, a šta ne"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0098",
    "slug": "hs-i-ms-lak",
    "naslov": "HS i MS lak: šta znače oznake",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "HS i MS bezbojni lak: šta znače oznake",
+   "opis": "Šta znače oznake HS i MS na bezbojnom laku, kako se suvi ostatak vidi u tehničkom listu i šta se menja u mešanju i nanošenju, uz primere iz našeg programa.",
    "kategorija": "lakovi",
    "podtema": "suvi ostatak",
    "tip": "osnovni-vodic",
@@ -49643,17 +50574,95 @@
    "glavnoPitanje": "Šta znače oznake HS i MS na bezbojnim lakovima i šta to znači u radu?",
    "namera": "informativna",
    "dodatnaPitanja": [
-    "Da li HS lak traži drugačije nanošenje?"
+    "Da li HS lak traži drugačije nanošenje?",
+    "U kom odnosu se meša HS lak sa učvršćivačem?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Pitanje u kom odnosu se meša HS lak postavlja se na forumu samsvojmajstor.com (q025); razlika MS i HS laka je urednički predlog (q203).",
+    "izvori": [
+     "https://www.samsvojmajstor.com/portal/forums/uradi-sam/popravka-automobila/farbanje-auta?page=5"
+    ]
+   },
    "brendovi": [
     "rm",
     "baslac",
-    "carsystem"
+    "carsystem",
+    "norbin"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "baslac-40-40-2k-universal-clear",
+    "baslac-40-10-2k-panel-clear",
+    "baslac-40-440-2k-voc-clear",
+    "carsystem-2k-clear-voc-cc-25-hs-as",
+    "grupa:norbin-n15-020",
+    "c-5450-ghd-clear"
+   ],
+   "povezani": [
+    "SV-0097",
+    "SV-0014",
+    "SV-0099",
+    "SV-0108",
+    "SV-0210"
+   ],
+   "izvori": [
+    {
+     "id": "baslac-40-40-tds",
+     "naziv": "baslac, Technical Information 40-40 2K Universal Clear",
+     "dokument": "/documents/products/baslac/40-40.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-40-40-ms-tds",
+     "naziv": "baslac, Technical Information 40-40 variant MS clear",
+     "dokument": "/documents/products/baslac/40-40_variant_MS_Clear.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-40-10-tds",
+     "naziv": "baslac, Technical Information 40-10 2K Panel Clear",
+     "dokument": "/documents/products/baslac/40-10.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-40-440-tds",
+     "naziv": "baslac, Technical Information 40-440 2K VOC Clear",
+     "dokument": "/documents/products/baslac/40-440.pdf",
+     "verzija": "12/2025",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "norbin-n15-020-tds",
+     "naziv": "Norbin, Technical Information N15-020 NORBIN Clear",
+     "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
+     "verzija": "01/2022",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-cc25-tds",
+     "naziv": "Carsystem, Technical Data Sheet 2K Clear VOC CC.25 HS/AS",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-2K-Clear-VOC-CC.25-HS-AS-v02.pdf",
+     "verzija": "V02, 02/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-c5450-tds",
+     "naziv": "R-M, Technical Information C 5450 GRAPHITE HD CLEAR",
+     "dokument": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -49663,7 +50672,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -49671,16 +50680,658 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "5461f3523d950ac958c3",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 664,
+   "otisak": "72f89d26a08e07a1d84f",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "HS ("
+      },
+      {
+       "t": "em",
+       "c": [
+        {
+         "t": "text",
+         "v": "high solids"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ") znači da lak ima visok udeo suvog ostatka, a MS ("
+      },
+      {
+       "t": "em",
+       "c": [
+        {
+         "t": "text",
+         "v": "medium solids"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ") srednji. Suvi ostatak je deo laka koji ostaje na površini kada rastvarači ispare. U radu se razlika vidi u odnosu mešanja, broju slojeva i debljini sloja, ali samo onako kako to navodi tehnički list konkretnog laka. baslac to dobro pokazuje na istom laku 40-40: kao HS lak meša se 2:1 + 10 % razređivača, a u MS postupku 2:1 + 30 %"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-tds"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-ms-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-je-suvi-ostatak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta je suvi ostatak"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Lak u čaši sadrži vezivo, aditive i rastvarače. Rastvarači su potrebni da bi se materijal mogao raspršiti i razliti, a zatim isparavaju. Ono što ostane gradi sloj. Što je suvi ostatak veći, to je potrebno manje materijala za isti suvi sloj i manje rastvarača ispari u vazduh."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Tačan procenat retko piše u tehničkim listovima refinish lakova. Kada ga ima, čita se pažljivo: za R-M C 5450 GRAPHITE HD CLEAR tehnički list navodi suvi ostatak od oko 61 %, a za smešu spremnu za nanošenje oko 56 %"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c5450-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Razlika postoji zato što se dodaju učvršćivač i razređivač. U listovima koje smo pregledali nema zajedničke granice u procentima od koje se lak zove HS. Oznaka je zato opis proizvođača, a ne standardizovan broj."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "isti-lak-dva-postupka",
+     "c": [
+      {
+       "t": "text",
+       "v": "Isti lak, dva postupka"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac 40-40 je u tehničkom listu opisan kao HS lak sa visokim udelom suvog ostatka"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Za isti proizvod postoji i varijanta postupka za MS lak, sa srednjim udelom suvog ostatka"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-ms-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Razlike su vidljive u svakom redu:"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Podatak"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "40-40 kao HS lak"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "40-40 u MS postupku"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "Odnos mešanja (po zapremini)"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "2:1 + 10 % razređivača"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-tds"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "2:1 + 30 % razređivača"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-ms-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Viskozitet, DIN 4 na 20 °C"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "18–20 s"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-tds"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "14–16 s"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-ms-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Broj slojeva"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "2"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-tds"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "2–3"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-ms-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Debljina sloja"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "50–70 µm"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-tds"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "40–60 µm"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-ms-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Sušenje na 20 °C"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "8 h"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-tds"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "5 h"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-40-40-ms-tds"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Više razređivača znači ređi materijal, manje suvog ostatka u svakom prolazu i, u ovom primeru, tanji predviđeni sloj. Zato se postupci ne mešaju: ako ste lak razredili po MS postupku, broj slojeva i sušenje čitaju se iz MS varijante."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "oznake-u-nasem-programu",
+     "c": [
+      {
+       "t": "text",
+       "v": "Oznake u našem programu"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "baslac 40-10"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " je opisan kao MS lak, lak za sigurno nanošenje i brzo sušenje"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-40-10-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Norbin N15-020"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " tehnički list opisuje kao lak sa srednjim udelom suvog ostatka, dobrom tvrdoćom i brzim sušenjem"
+       },
+       {
+        "t": "cite",
+        "id": "norbin-n15-020-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "baslac 40-440"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " je HS VOC lak, sa visokim udelom suvog ostatka"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-40-440-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Carsystem CC.25 HS/AS"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " je opisan kao 2K HS akrilni lak, sa velikom otpornošću na ogrebotine"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-cc25-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "hs-ne-znaci-automatski-voc",
+     "c": [
+      {
+       "t": "text",
+       "v": "HS ne znači automatski VOC"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Visok suvi ostatak pomaže da se smanji količina rastvarača, ali oznaka HS sama ne govori u koju VOC kategoriju lak spada. Tehnički list to piše posebno. Za baslac 40-440 navodi kategoriju IIB.d sa granicom od 420 g/l"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-440-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a za Carsystem CC.25 HS/AS kategoriju IIB(e) sa granicom od 840 g/l"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-cc25-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Šta te oznake znače, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/voc-u-autolakirerstvu",
+       "c": [
+        {
+         "t": "text",
+         "v": "VOC u autolakirerstvu"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ogranicenja",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ograničenja"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Tekst objašnjava oznake na primerima iz navedenih verzija tehničkih listova. Ne poredi kvalitet lakova i ne tvrdi da je HS ili MS lak bolji za svaku popravku. Za izbor laka prema poslu vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/izbor-bezbojnog-laka",
+       "c": [
+        {
+         "t": "text",
+         "v": "Kako se bira bezbojni lak"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-hs-lak-trazi-drugacije-nanosenje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li HS lak traži drugačije nanošenje?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Traži onakvo nanošenje kakvo navodi njegov tehnički list. Za 40-40 kao HS lak baslac navodi 2 sloja i 2–3 min odzračivanja posle svakog"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Za Carsystem CC.25 HS/AS navedena su 2 ujednačena sloja, svaki oko 60 µm mokrog sloja, i 5–7 min odzračivanja između njih"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-cc25-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Gušći materijal ostavlja više materijala u jednom prolazu, pa je opšte pravilo da se sloj ne „puni“ preko debljine iz lista. Vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/debljina-suvog-sloja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Debljina suvog sloja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "u-kom-odnosu-se-mesa-hs-lak-sa-ucvrscivacem",
+     "c": [
+      {
+       "t": "text",
+       "v": "U kom odnosu se meša HS lak sa učvršćivačem?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ne postoji jedan odnos za sve HS lakove. baslac 40-40 se meša 2:1 + 10 % po zapremini"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-tds"
+      },
+      {
+       "t": "text",
+       "v": ", baslac 40-440 2:1 bez razređivača"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-440-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a Carsystem CC.25 HS/AS 2:1 po zapremini, odnosno 100 g laka i 49 g učvršćivača po težini"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-cc25-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Kako se odnos čita i meri, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/odnos-mesanja-iz-tehnickog-lista",
+       "c": [
+        {
+         "t": "text",
+         "v": "Odnos mešanja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "mogu-li-hs-lak-razrediti-vise-da-lakse-radim",
+     "c": [
+      {
+       "t": "text",
+       "v": "Mogu li HS lak razrediti više da lakše radim?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Samo u granicama koje dozvoljava tehnički list. Za 40-10 baslac navodi najviše 30 % razređivača"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-10-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Kada proizvođač predviđa drugi postupak sa više razređivača, kao MS varijantu laka 40-40, menjaju se i ostali podaci za nanošenje"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-40-ms-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0099",
@@ -60589,9 +62240,9 @@
   {
    "id": "SV-0129",
    "slug": "vrste-pistolja-za-lakiranje",
-   "naslov": "HVLP, RP i ostale tehnologije pištolja za lakiranje",
-   "metaNaslov": "",
-   "opis": "",
+   "naslov": "HVLP, RP i ostale tehnologije pištolja za lakiranje: razlike i izbor",
+   "metaNaslov": "HVLP ili RP pištolj za lakiranje: razlike i izbor",
+   "opis": "Šta znače oznake HVLP, RP i „compliant“, koliko vazduha troše, šta je prenos materijala i kako tehnički list boje pomaže u izboru pištolja.",
    "kategorija": "oprema-i-pistolji",
    "podtema": "tehnologije pištolja",
    "tip": "osnovni-vodic",
@@ -60602,15 +62253,91 @@
    "glavnoPitanje": "Po čemu se razlikuju HVLP, RP i drugi pištolji za lakiranje i kako se bira?",
    "namera": "izbor proizvoda",
    "dodatnaPitanja": [
-    "Šta znači prenos materijala?"
+    "Šta znači prenos materijala?",
+    "Šta znači oznaka „compliant“ u tehničkom listu?",
+    "Šta je sa LVLP i drugim oznakama?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "SATA u zvaničnim čestim pitanjima odgovara na pitanje da li se isplati zameniti stariji visokopritisni pištolj modelom sa većim prenosom materijala; pitanje o razlici HVLP, RP i LVLP je urednička procena.",
+    "izvori": [
+     "https://www.sata.com/en/service/professional-knowledge/faq/"
+    ]
+   },
    "brendovi": [
-    "sata"
+    "sata",
+    "rm",
+    "baslac"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "sata-jet-x",
+    "satajet-x-5500",
+    "sata-jet-k",
+    "satajet-1000-k",
+    "satajet-h"
+   ],
+   "povezani": [
+    "SV-0130",
+    "SV-0131",
+    "SV-0133",
+    "SV-0137",
+    "SV-0139"
+   ],
+   "izvori": [
+    {
+     "id": "sata-pistolji",
+     "naziv": "SATA, Spray guns (stranica kategorije, odeljak „Which nozzle technology is the right one?“)",
+     "url": "https://www.sata.com/en/spray-guns/",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "sata-jetx-uputstvo",
+     "naziv": "SATA, Operating manual jet X DIGITAL pro, DIGITAL, DIGITAL ready, BASIC (višejezično, engleski deo str. 91–109)",
+     "url": "https://www.sata.com/media/d2/3c/04/1790259009/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1790259009",
+     "verzija": "3266-240619-2",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "sata-x5500-uputstvo",
+     "naziv": "SATA, Operating Manual SATAjet X 5500 RP/HVLP (DIGITAL) (višejezično, engleski deo str. 109–125)",
+     "url": "https://www.sata.com/media/e1/ba/aa/1790259010/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1790259010",
+     "verzija": "3240-200610-1",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "sata-faq",
+     "naziv": "SATA, FAQ (Professional knowledge)",
+     "url": "https://www.sata.com/en/service/professional-knowledge/faq/",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "sata-saveti",
+     "naziv": "SATA, Practical advice on painting technology and SATA products",
+     "url": "https://www.sata.com/en/service/professional-knowledge/practical-advice/",
+     "pristupljeno": "2026-10-08",
+     "tip": "edukacija-proizvodjaca"
+    },
+    {
+     "id": "rm-c2a40-tds",
+     "naziv": "R-M, Technical Information C 2A40 AirTOP, Clear coat, air drying",
+     "dokument": "/documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-45-line-tds",
+     "naziv": "baslac, Technical Information 45 Line, 45- Basecoat",
+     "dokument": "/documents/products/baslac/45_Line.pdf",
+     "verzija": "03/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -60620,7 +62347,7 @@
    "razlogPrioriteta": "Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se rano da bi kasniji tekstovi imali na šta da se oslone.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -60628,16 +62355,698 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "30ae2ba088ccd35e30ba",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 854,
+   "otisak": "3ea44c0b51304e57c7cf",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "HVLP i RP su dve tehnologije raspršivanja kod pištolja na komprimovani vazduh. SATA opisuje HVLP („High Volume Low Pressure“) kao tehnologiju koja radi sa nižim pritiskom i postiže posebno visok prenos materijala, a RP („Reduced Pressure“) kao tehnologiju sa nešto višim pritiskom koja omogućava najveću brzinu rada"
+      },
+      {
+       "t": "cite",
+       "id": "sata-pistolji"
+      },
+      {
+       "t": "text",
+       "v": ". Nijedna nije „bolja“ sama po sebi. Izbor zavisi od toga šta tehnički list Vaše boje predviđa, koliko vazduha može da da Vaš kompresor i kakav rad Vam odgovara."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-se-zapravo-razlikuje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta se zapravo razlikuje"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Razlika se najbolje vidi u tehničkim podacima istog pištolja u dve izvedbe. Uputstvo za SATA jet X navodi za obe izvedbe isti radni opseg ulaznog pritiska, 0,5–2,4 bara, ali različitu potrošnju vazduha pri ulaznom pritisku od 2,0 bara: 325 Nl/min za RP i 430 Nl/min za HVLP"
+      },
+      {
+       "t": "cite",
+       "id": "sata-jetx-uputstvo"
+      },
+      {
+       "t": "text",
+       "v": ". To je i smisao naziva: HVLP pokreće veću količinu vazduha pod manjim pritiskom u vazdušnoj kapi."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kod HVLP izvedbe jet X uputstvo daje i granicu: do ulaznog pritiska od najviše 2,0 bara pištolj radi kao HVLP, a iznad 2,0 bara (pritisak u vazdušnoj kapi iznad 0,7 bara) svrstava se u kategoriju „compliant“"
+      },
+      {
+       "t": "cite",
+       "id": "sata-jetx-uputstvo"
+      },
+      {
+       "t": "text",
+       "v": ". Za SATAjet X 5500 uputstvo navodi slične granice i potrošnju vazduha od 290 Nl/min za RP i 430 Nl/min za HVLP"
+      },
+      {
+       "t": "cite",
+       "id": "sata-x5500-uputstvo"
+      },
+      {
+       "t": "text",
+       "v": ". Vrednosti važe za te modele, a za drugi pištolj čitaju se iz njegovog uputstva."
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [],
+      [
+       {
+        "t": "text",
+        "v": "RP"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "HVLP"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "Kako ga SATA opisuje"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "nešto viši pritisak, najveća brzina rada"
+        },
+        {
+         "t": "cite",
+         "id": "sata-pistolji"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "niži pritisak, posebno visok prenos materijala"
+        },
+        {
+         "t": "cite",
+         "id": "sata-pistolji"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Potrošnja vazduha, jet X, na 2,0 bara"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "325 Nl/min"
+        },
+        {
+         "t": "cite",
+         "id": "sata-jetx-uputstvo"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "430 Nl/min"
+        },
+        {
+         "t": "cite",
+         "id": "sata-jetx-uputstvo"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Preporučeno rastojanje, SATAjet X 5500"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "17–21 cm"
+        },
+        {
+         "t": "cite",
+         "id": "sata-x5500-uputstvo"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "10–15 cm"
+        },
+        {
+         "t": "cite",
+         "id": "sata-x5500-uputstvo"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Rastojanje se razlikuje i od modela do modela. Za jet X uputstvo ne deli preporuku po tehnologiji i navodi 15–19 cm"
+      },
+      {
+       "t": "cite",
+       "id": "sata-jetx-uputstvo"
+      },
+      {
+       "t": "text",
+       "v": ". Više o tome u vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/tehnika-vodjenja-pistolja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Tehnika vođenja pištolja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-se-oznake-pojavljuju-u-tehnickom-listu-boje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se oznake pojavljuju u tehničkom listu boje"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Proizvođači boja u tehničkom listu obično navode podatke za nanošenje posebno za svaku vrstu pištolja. R-M za bezbojni lak C 2A40 AirTOP daje dve kolone: za „Compliant Gravity Spray Gun“ ulazni pritisak 2 bara i diznu 1,2–1,4, a za „HVLP Spray Gun“ pritisak u vazdušnoj kapi 0,7 bara i diznu 1,3"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-tds"
+      },
+      {
+       "t": "text",
+       "v": ". baslac za vodenu baznu boju 45 Line navodi samo HVLP pištolj: ulazni pritisak 2 bara, pritisak u vazdušnoj kapi 0,7 bara i diznu 1,4"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-45-line-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Iz toga slede dve stvari. Prvo, ako tehnički list za Vaš materijal daje podatke samo za jednu tehnologiju, to je tehnologija za koju je proizvođač boje opisao rezultat. Drugo, dizna i pritisak se ne prenose sa jedne tehnologije na drugu. SATA i sama upućuje na tehnički list proizvođača materijala kao mesto gde se nalazi preporuka za tehnologiju i diznu"
+      },
+      {
+       "t": "cite",
+       "id": "sata-saveti"
+      },
+      {
+       "t": "text",
+       "v": ". Izbor dizne objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/izbor-dizne",
+       "c": [
+        {
+         "t": "text",
+         "v": "Izbor dizne prema materijalu"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pistolji-prema-nacinu-dovoda-materijala",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pištolji prema načinu dovoda materijala"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Oznake HVLP i RP govore o raspršivanju, a ne o tome kako materijal stiže do dizne. SATA svoje pištolje deli i prema dovodu materijala"
+      },
+      {
+       "t": "cite",
+       "id": "sata-pistolji"
+      },
+      {
+       "t": "text",
+       "v": ":"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "sa gornjom čašom"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (gravitacioni): materijal pada iz čaše u pištolj; u tu grupu spadaju "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/sata-jet-x",
+        "c": [
+         {
+          "t": "text",
+          "v": "SATA jet X"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " i "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/satajet-x-5500",
+        "c": [
+         {
+          "t": "text",
+          "v": "SATAjet X 5500"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ";"
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "sa dovodom pod pritiskom"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": materijal dolazi iz posude ili pumpe kroz crevo, na primer "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/sata-jet-k",
+        "c": [
+         {
+          "t": "text",
+          "v": "SATA jet K"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " i "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/satajet-1000-k",
+        "c": [
+         {
+          "t": "text",
+          "v": "SATAjet 1000 K"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ";"
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "sa donjom (visećom) čašom"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/satajet-h",
+        "c": [
+         {
+          "t": "text",
+          "v": "SATAjet H"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ";"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "automatski pištolji i pištolji za airbrush, za posebne namene."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Za popravke na vozilu u tekstovima proizvođača boja iz našeg programa navode se pištolji sa gornjom čašom, kao u primerima iz prethodnog odeljka"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-da-izaberete",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako da izaberete"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Krenite od materijala."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Pogledajte za koju vrstu pištolja i diznu tehnički list daje podatke."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Proverite vazduh."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " HVLP izvedba troši više vazduha, pa kompresor i razvod moraju da obezbede potrebnu količinu pri potrebnom pritisku na pištolju. SATA u uputstvu za jet X kao osnovni uslov navodi potrošnju i preporučeni ulazni pritisak iz tehničkih podataka, čist vazduh i crevo unutrašnjeg prečnika najmanje 9 mm"
+       },
+       {
+        "t": "cite",
+        "id": "sata-jetx-uputstvo"
+       },
+       {
+        "t": "text",
+        "v": ". Više u vodiču "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/kompresor-i-vazduh-za-lakiranje",
+        "c": [
+         {
+          "t": "text",
+          "v": "Kompresor i vazduh za lakiranje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Uzmite u obzir način rada."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " HVLP traži kraće rastojanje, a RP dozvoljava veću brzinu, prema opisu proizvođača pištolja"
+       },
+       {
+        "t": "cite",
+        "id": "sata-pistolji"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odlučite koliko pištolja Vam treba."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Da li jedan pištolj može za sve materijale, razmatra vodič "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/jedan-pistolj-ili-vise",
+        "c": [
+         {
+          "t": "text",
+          "v": "Jedan pištolj ili poseban za prajmer, bazu i lak"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "SATA pištolje iz našeg programa naći ćete na strani "
+      },
+      {
+       "t": "link",
+       "href": "/brendovi/sata",
+       "c": [
+        {
+         "t": "text",
+         "v": "SATA"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-znaci-prenos-materijala",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znači prenos materijala?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prenos materijala pokazuje koliki deo raspršenog materijala zaista završi na objektu, a koliki ode u vazduh kao preprašivanje. Što je veći, manje materijala se troši za isti sloj. SATA u čestim pitanjima navodi da savremeni HVLP i optimizovani RP pištolji imaju prenos materijala veći od 65 %"
+      },
+      {
+       "t": "cite",
+       "id": "sata-faq"
+      },
+      {
+       "t": "text",
+       "v": ". Prenos ne zavisi samo od pištolja: rastojanje, pritisak i način vođenja takođe utiču na to koliko materijala ostane na površini."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-znaci-oznaka-compliant-u-tehnickom-listu",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znači oznaka „compliant“ u tehničkom listu?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "U tehničkom listu R-M „Compliant Gravity Spray Gun“ je posebna kolona pored HVLP pištolja: za nju se navodi ulazni pritisak, a za HVLP pritisak u vazdušnoj kapi"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Kod SATA HVLP pištolja ista reč označava rad iznad granice za HVLP, kao što je opisano gore"
+      },
+      {
+       "t": "cite",
+       "id": "sata-jetx-uputstvo"
+      },
+      {
+       "t": "text",
+       "v": ". Zato se uvek čita u kontekstu dokumenta u kome stoji."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-je-sa-lvlp-i-drugim-oznakama",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta je sa LVLP i drugim oznakama?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "U izvorima koje navodimo SATA svoje pištolje za lakiranje vozila svrstava u RP i HVLP. Oznake drugih proizvođača ne opisujemo, jer za njih nemamo proveren izvor. Ako imate pištolj sa drugom oznakom, uporedite ulazni pritisak, potrošnju vazduha i preporučeno rastojanje iz njegovog uputstva sa podacima iz tehničkog lista boje."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0130",
@@ -64611,8 +67020,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -64625,8 +67034,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 811,
-   "otisak": "5200c90707ee07a552e5",
+   "reci": 816,
+   "otisak": "39268ce93325b918f282",
    "blocks": [
     {
      "t": "p",
@@ -64666,7 +67075,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Tehnički listovi R-M i baslac imaju gotovo isti raspored, a listovi drugih proizvođača se razlikuju po izgledu, ne po suštini. Tipični blokovi su:"
+       "v": "Tehnički listovi R-M i baslac imaju gotovo isti raspored, a listovi drugih proizvođača često se razlikuju više po izgledu nego po vrsti podataka. Tipični blokovi su:"
       }
      ]
     },
@@ -64839,6 +67248,19 @@
        "c": [
         {
          "t": "text",
+         "v": "Benefits"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ", "
+      },
+      {
+       "t": "em",
+       "c": [
+        {
+         "t": "text",
          "v": "Product Data"
         }
        ]
@@ -64865,13 +67287,13 @@
        "c": [
         {
          "t": "text",
-         "v": "Storage"
+         "v": "Safety issues"
         }
        ]
       },
       {
        "t": "text",
-       "v": "), ali iste vrste podataka. Odeljak o bezbednosti u njemu ne ponavlja mere zaštite. Upućuje na bezbednosni list proizvođača za rukovanje i odlaganje otpada"
+       "v": "), ali slične vrste podataka. Odeljak o bezbednosti u njemu ne ponavlja mere zaštite. Upućuje na bezbednosni list proizvođača za rukovanje i odlaganje otpada"
       },
       {
        "t": "cite",
@@ -65045,7 +67467,7 @@
        },
        {
         "t": "text",
-        "v": " Brušenje, prelakiranje i šta se nanosi preko proizvoda. Za Multi Green list navodi suvo brušenje granulacijama od P80 do P240 kada se koristi kao kit za popunjavanje"
+        "v": " Brušenje, prelakiranje i šta se nanosi preko proizvoda. Za Multi Green list navodi prvo suvo brušenje granulacijama od P80 do P240 kada se koristi kao kit za popunjavanje"
        },
        {
         "t": "cite",
@@ -65235,7 +67657,11 @@
        },
        {
         "t": "text",
-        "v": " R-M i baslac listovi napominju da se uz njih uvek poštuju i uputstva proizvođača vozila za popravke, naročito kada su u blizini ugrađeni senzori"
+        "v": " R-M i baslac listovi napominju da se uz njih uvek poštuju i uputstva proizvođača vozila za popravke, naročito kada su ugrađeni senzori"
+       },
+       {
+        "t": "cite",
+        "id": "rm-c2a40-tds"
        },
        {
         "t": "cite",
@@ -65275,7 +67701,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Tehnički listovi koje proizvođači iz našeg programa objavljuju uglavnom su na engleskom ili nemačkom. Izrazi se ponavljaju od lista do lista, pa je dovoljno naučiti dvadesetak osnovnih. Prevodi su u vodiču "
+       "v": "Tehnički listovi proizvođača iz našeg programa koje smo pregledali uglavnom su na engleskom ili nemačkom. Izrazi se ponavljaju od lista do lista, pa je dovoljno naučiti dvadesetak osnovnih. Prevodi su u vodiču "
       },
       {
        "t": "link",

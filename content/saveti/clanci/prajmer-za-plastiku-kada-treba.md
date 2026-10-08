@@ -105,8 +105,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 10 izvora upoređeno sa tekstom (baslac postupak 10/2024, 21-10/21-11/21-20, PM 2P10, P 2P43, Carsystem Plastic Primer, HpP, Plastic Pro, C.A.R.FIT 1K Plastic Primer Spray); vrednosti i spiskovi plastika se poklapaju; potvrđeno da tekst ne pominje proizvod drugog proizvođača iz baslac uputstva za nove delove; jedna jezička ispravka reda reči."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -124,7 +125,7 @@ Prajmer za plastiku (promotor prianjanja) je potreban kada sledeći sloj treba d
 ## Kada se koristi drugačije rešenje
 
 - **Nov plastični deo.** U baslac postupku za nove plastične delove nema posebnog prajmera: cela površina se matira, čisti, a nanosi se punilac 20-35 ili 20-95 sa aditivom 80-30 Additive Plast[^baslac-plastika-sistem]. Kako se priprema nov branik sa fabričkim prajmerom, opisuje vodič [Nov branik sa fabričkim prajmerom](/vodici/nov-branik-sa-fabrickim-prajmerom).
-- **Prajmer-punilac namenjen plastici.** baslac 21-11 se, prema tehničkom listu, koristi i kao promotor prianjanja i kao prajmer-punilac na svim plastikama koje se mogu lakirati[^baslac-21-11-tds]. R-M PLASTIC Fill-R Grey P 2P43 ima u tehničkom listu kao podloge Pur-RIM, PP-EPDM, ABS, GRP/SMC, PC-PBTP, PA, PPO i tvrdi PVC[^rm-p2p43-tds].
+- **Prajmer-punilac namenjen plastici.** baslac 21-11 se, prema tehničkom listu, koristi i kao promotor prianjanja i kao prajmer-punilac na svim plastikama koje se mogu lakirati[^baslac-21-11-tds]. Za R-M PLASTIC Fill-R Grey P 2P43 tehnički list kao podloge navodi Pur-RIM, PP-EPDM, ABS, GRP/SMC, PC-PBTP, PA, PPO i tvrdi PVC[^rm-p2p43-tds].
 
 Da li Vaš sistem traži poseban prajmer, proverite u tehničkom listu punioca. Ako on ne navodi plastiku kao podlogu, taj punilac nije predviđen za direktan rad na plastici, pa koristite prajmer ili drugi proizvod koji proizvođač propisuje.
 

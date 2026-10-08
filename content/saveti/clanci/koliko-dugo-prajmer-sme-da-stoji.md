@@ -32,7 +32,6 @@ proizvodi:
   - rm-pm-2p10-plastic-prim-r
   - baslac-21-20-plastic-primer-400ml
   - carsystem-hpp-primer
-  - p-5480-ghd-universal-epoxy
 povezani:
   - SV-0062
   - SV-0065
@@ -105,8 +104,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 10 izvora upoređeno sa tabelom rokova i koracima posle isteka roka; ispravljeno: P 5480 uklonjen iz proizvoda i u tekstu izričito označen kao proizvod za komercijalna vozila koji nije preporuka za putnička, mehanizam „veže se za sveži sloj“ zamenjen opisom iz tehničkih listova, odgovor o temperaturi preciziran."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -119,7 +119,7 @@ Ne postoji jedan rok koji važi za sve prajmere i punioce. Za neke proizvode teh
 
 **Punilac za brušenje** se posle sušenja brusi, pa se pitanje „koliko sme da stoji“ kod njega uglavnom ne postavlja kao rok. Za R-M PerformFILLER P 2A41 tehnički list daje sušenje i granulacije za brušenje, ali ne i najduže vreme do bazne boje[^rm-p2a41-tds]. Pre bazne boje izbrušena površina se ponovo čisti, jer je u međuvremenu mogla da se zaprlja.
 
-**Prajmer ili punilac koji se ne brusi** (mokro-na-mokro, prajmer za plastiku) ima rok, jer sledeći sloj treba da se veže za još sveži sloj. Tu je podatak iz tehničkog lista presudan.
+**Prajmer ili punilac koji se ne brusi** (mokro-na-mokro, prajmer za plastiku) obično ima rok u tehničkom listu, jer se sledeći sloj nanosi mokro-na-mokro ili bez međubrušenja. Tu je podatak iz tehničkog lista presudan.
 
 ## Primeri rokova iz tehničkih listova
 
@@ -134,7 +134,7 @@ Ne postoji jedan rok koji važi za sve prajmere i punioce. Za neke proizvode teh
 | R-M P 2P71 WET Fill-R White | bez međubrušenja do 5 dana[^rm-p2p71-tds] |
 | baslac 20-35 2K Primerfiller white | bez međubrušenja do 5 dana[^baslac-20-35-tds] |
 
-Primer iz programa za komercijalna vozila pokazuje da rok zavisi i od sloja koji ide preko. Za epoksid GHD UNIVERSAL EPOXY P 5480 R-M navodi prelakiranje u roku od 1–72 h na 20 °C, a za određene završne sisteme najkasnije u toku jednog radnog dana[^rm-p5480-tds].
+Primer iz R-M programa za komercijalna vozila pokazuje da rok zavisi i od sloja koji ide preko. Taj proizvod nije preporuka za putnička vozila i ovde služi samo kao primer kako tehnički list može da navede rok. Za epoksid GHD UNIVERSAL EPOXY P 5480 R-M navodi prelakiranje u roku od 1–72 h na 20 °C, a za određene završne sisteme najkasnije u toku jednog radnog dana[^rm-p5480-tds].
 
 ## Gde u tehničkom listu tražiti podatak
 
@@ -162,4 +162,4 @@ Ne, to je drugi par materijala sa svojim pravilima. Vidite vodič [Može li bezb
 
 ### Da li temperatura menja rok?
 
-Vrednosti iz tabele važe za temperaturu koju tehnički list navodi; za proizvode iz tabele to je 20 °C, osim za HpP Primer, gde je 25 °C[^rm-p2p71-tds][^cs-hpp-tds]. Za drugu temperaturu važi samo ono što proizvođač napiše.
+Vrednosti iz tabele važe za uslove koje tehnički list navodi; vremena odzračivanja data su za 20 °C, osim za HpP Primer, gde je 25 °C[^rm-p2p71-tds][^rm-pm2p10-tds][^cs-hpp-tds]. Za drugu temperaturu važi samo ono što proizvođač napiše.

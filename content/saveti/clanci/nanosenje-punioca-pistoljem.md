@@ -72,15 +72,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 5 izvora upoređeno sa tekstom; tabela preporučenih baslac pištolja (01/2026) proverena na renderovanoj strani PDF-a: SATA jet 100 BF RP 1,6 i HVLP 1,7–1,8 na 2,0 bara stoje u koloni 20-24/20-34/20-94; ispravljeno: odzračivanje „dok ne postane mat“ pripisano samo R-M (TDS 20-24 ga ne navodi), dodate jedinice za diznu, tvrdnje o manjoj dizni za mokro-na-mokro i baznu boju potkrepljene istom tabelom."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Punilac za brušenje se nanosi pištoljem sa većom diznom nego bazna boja i lak; kod R-M i baslac punilaca iz ovog teksta to su dva sloja, uz odzračivanje između slojeva dok sloj ne postane mat. Za R-M PerformFILLER P 2A41 tehnički list navodi diznu 1,6–1,8 mm za kompatibilni pištolj sa gornjom čašom i 1,7–1,9 mm za HVLP, dva sloja i ukupnu debljinu 50–70 µm[^rm-p2a41-tds]. Drugi punioci imaju drugačije vrednosti, pa se dizna, broj slojeva i odzračivanje uzimaju iz tehničkog lista proizvoda koji koristite.
+Punilac za brušenje se nanosi pištoljem sa većom diznom nego bazna boja i lak. Kod R-M i baslac punilaca iz ovog teksta to su dva sloja, a R-M za svoje punioce traži odzračivanje između slojeva dok sloj ne postane mat[^rm-p2a41-tds][^baslac-20-24-tds]. Za R-M PerformFILLER P 2A41 tehnički list navodi diznu 1,6–1,8 mm za kompatibilni pištolj sa gornjom čašom i 1,7–1,9 mm za HVLP, dva sloja i ukupnu debljinu 50–70 µm[^rm-p2a41-tds]. Drugi punioci imaju drugačije vrednosti, pa se dizna, broj slojeva i odzračivanje uzimaju iz tehničkog lista proizvoda koji koristite.
 
 ## Pre nanošenja
 
@@ -98,14 +99,14 @@ Punilac za brušenje se nanosi pištoljem sa većom diznom nego bazna boja i lak
 | baslac 20-24 2K Primerfiller | 1,6–1,8 mm[^baslac-20-24-tds] | 2 bara; HVLP 0,7 bara na kapi[^baslac-20-24-tds] |
 | Carsystem 2K Füller Air Plus | 1,6–2,2 mm[^cs-air-plus-tds] | prema preporuci proizvođača pištolja[^cs-air-plus-tds] |
 
-baslac objavljuje i poseban spisak preporučenih pištolja za svoje materijale. Za punioce 20-24, 20-34 i 20-94 u njemu su, među ostalim, navedeni SATA jet 100 BF RP sa diznom 1,6 i SATA jet 100 BF HVLP sa diznom 1,7–1,8, oba na 2,0 bara[^baslac-pistolji]. Ako radite drugim pištoljem, proverite preporuku za diznu u uputstvu proizvođača tog pištolja. SATA pištolje iz našeg programa naći ćete na strani [SATA](/brendovi/sata).
+baslac objavljuje i poseban spisak preporučenih pištolja za svoje materijale. Za punioce 20-24, 20-34 i 20-94 u njemu su, među ostalim, navedeni SATA jet 100 BF RP sa diznom 1,6 mm i SATA jet 100 BF HVLP sa diznom 1,7–1,8 mm, oba na 2,0 bara[^baslac-pistolji]. Ako radite drugim pištoljem, proverite preporuku za diznu u uputstvu proizvođača tog pištolja. SATA pištolje iz našeg programa naći ćete na strani [SATA](/brendovi/sata).
 
-Punioci za mokro-na-mokro rade sa manjom diznom i tanjim slojem, pa se ove vrednosti na njih ne prenose. O tome piše vodič [Punilac mokro-na-mokro](/vodici/mokro-na-mokro-punilac).
+Punioci za mokro-na-mokro rade sa manjom diznom i tanjim slojem, pa se ove vrednosti na njih ne prenose. U istoj baslac tabeli za punioce mokro-na-mokro 20-35 i 20-95 navedene su dizne od 1,3 do 1,4 mm[^baslac-pistolji]. O tome piše vodič [Punilac mokro-na-mokro](/vodici/mokro-na-mokro-punilac).
 
 ## Slojevi i odzračivanje
 
 - **Broj slojeva.** R-M za P 2A41 i P 2E23 navodi dva sloja[^rm-p2a41-tds][^rm-p2e23-tds], baslac za 20-24 takođe dva[^baslac-20-24-tds]. Carsystem za Air Plus navodi 1–3 nanošenja[^cs-air-plus-tds], prema tome koliko treba popuniti.
-- **Između slojeva.** Kod R-M punilaca odzračivanje između slojeva traje dok sloj ne postane mat[^rm-p2a41-tds]. Carsystem za Air Plus daje vreme od 5–7 minuta[^cs-air-plus-tds].
+- **Između slojeva.** Kod R-M punilaca odzračivanje između slojeva traje dok sloj ne postane mat[^rm-p2a41-tds][^rm-p2e23-tds]. Carsystem za Air Plus daje vreme od 5–7 minuta[^cs-air-plus-tds]. baslac tehnički list za 20-24 vreme odzračivanja ne navodi[^baslac-20-24-tds], pa ga proverite kod proizvođača.
 - **Pre sušenja.** R-M za P 2A41 i P 2E23 izričito navodi da posle poslednjeg sloja nema odzračivanja pre sušenja[^rm-p2a41-tds][^rm-p2e23-tds]. Carsystem za IR sušenje Air Plus traži da se odzračivanje pre sušenja ipak ispoštuje[^cs-air-plus-tds]. Ovo je jedan od primera zašto se pravila ne prenose sa proizvoda na proizvod.
 - **Debljina.** Za Air Plus tehnički list navodi 55–60 µm po sloju i ukupno 55–180 µm[^cs-air-plus-tds]. Ukupna debljina ima gornju granicu i punilac ne zamenjuje kit.
 
@@ -119,7 +120,7 @@ Ovo je urednički izbor, a ne statistika učestalosti.
 
 - **Sledeći sloj preko sjajnog, još mokrog sloja.** Pravilo „dok ne postane mat“ ili propisano vreme se preskače da bi se uštedelo vreme.
 - **Jedan debeo sloj umesto dva propisana.** Debljina iz tehničkog lista se postiže brojem slojeva koji proizvođač navodi.
-- **Dizna za baznu boju u pištolju za punilac.** Vrednosti iz tabele su znatno veće od onih za baznu boju i lak.
+- **Dizna za baznu boju u pištolju za punilac.** U baslac tabeli pištolja za baznu boju 45 Line navedene su dizne od 1,3 do 1,5 mm, a za punioce 20-24, 20-34 i 20-94 od 1,6 do 1,8 mm[^baslac-pistolji].
 
 ## Pitanja i odgovori
 

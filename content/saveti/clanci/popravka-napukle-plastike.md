@@ -79,8 +79,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 6 izvora upoređeno sa tekstom (Power PU Bond V01 08/2025, Plastic Pro, C.A.R.FIT Plastic Putty i Plastic Repair Kit, baslac postupak 10/2024, R-M P 2P43); vrednosti se poklapaju; potvrđeno da tekst ne pominje proizvod drugog proizvođača iz baslac uputstva; jedna jezička ispravka (kalk „trebaju podlogu“)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -101,9 +102,9 @@ Napukao plastični branik se popravlja u dve faze. Prvo se pukotina strukturno s
 
 1. **Očistite deo.** baslac u svom postupku za plastiku predviđa čišćenje celog dela sredstvom 70-20 Cleaner Plastic, uz jednu krpu za nanošenje i drugu za brisanje; sredstvo ne sme da se osuši na površini[^baslac-plastika-sistem].
 2. **Proverite vrstu plastike i vlagu.** baslac navodi da PU penu i poliamid (PA) treba zagrejati 60 min na 60 °C da bi se uklonila sredstva za odvajanje iz kalupa, odnosno vlaga[^baslac-plastika-sistem]. Kako se prepoznaje vrsta plastike, opisuje vodič [Kako prepoznati vrstu plastike na braniku](/vodici/vrsta-plastike-na-braniku).
-3. **Izbrusite zonu oko pukotine.** Kit i lepak trebaju čvrstu, mat podlogu. Carsystem za Plastic Pro navodi da se dobro prianjanje postiže samo na dobro prethodno izbrušenoj podlozi[^cs-plastic-pro-tds].
+3. **Izbrusite zonu oko pukotine.** Kitu i lepku je potrebna čvrsta, mat podloga. Carsystem za Plastic Pro navodi da se dobro prianjanje postiže samo na dobro prethodno izbrušenoj podlozi[^cs-plastic-pro-tds].
 4. **Spojite pukotinu lepkom.** Power PU Bond je, prema tehničkom listu, 2K poliuretanski lepak za strukturne i dekorativne popravke plastičnih delova kao što su branici i blatobrani. Meša se u odnosu 1:1 kroz statičku mešnu cev, popunjava zazor do 30 mm i ne traži prajmer za lepljenje[^cs-power-pu-bond-tds].
-5. **Radite brzo i sačekajte brušenje.** Za Power PU Bond tehnički list navodi vreme rada 1–1,5 min na 20 °C, nelepljivost posle oko 5 min i brušenje posle 15–20 min[^cs-power-pu-bond-tds]. Mešna cev se koristi samo jednom[^cs-power-pu-bond-tds].
+5. **Radite brzo, a brusite tek posle propisanog vremena.** Za Power PU Bond tehnički list navodi vreme rada 1–1,5 min na 20 °C, nelepljivost posle oko 5 min i brušenje posle 15–20 min[^cs-power-pu-bond-tds]. Mešna cev se koristi samo jednom[^cs-power-pu-bond-tds].
 6. **Izravnajte kitom za plastiku.** Plastic Pro se meša sa 2–3 % učvršćivača po težini, vreme upotrebljivosti je 3–4 min na 20 °C, a brusi se prvo P150–P180, pa P240–P360[^cs-plastic-pro-tds]. Za C.A.R.FIT Plastic Putty tehnički list navodi isti udeo učvršćivača, vreme upotrebljivosti 4–5 min na 20 °C i nanošenje na najmanje 10 °C[^carfit-plastic-putty-tds]. Na PP Carsystem traži prajmer pre kita Plastic Pro[^cs-plastic-pro-tds].
 7. **Nanesite prajmer za plastiku i punilac.** U baslac postupku na popravljenu plastiku ide prajmer 21-20, pa punilac; za fleksibilne plastike u punilac se dodaje 80-10 Additive FLEX u odnosu 4:1[^baslac-plastika-sistem]. Kada je prajmer potreban, opisuje vodič [Prajmer za plastiku: kada je potreban](/vodici/prajmer-za-plastiku-kada-treba).
 

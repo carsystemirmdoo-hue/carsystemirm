@@ -113,8 +113,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 11 izvora upoređeno sa tekstom; tabele baslac proverene na renderovanim posterima; ispravljeno: Norbin N55-V20 je siva, a N55-V29 crna (50/50 daje tamnosivu), R-M nema tabelu nego napomenu u TDS-u, dodat podatak da posteri prikazuju uzorke boja bez pisanog pravila. Stručna potvrda ostaje: izbor nijanse za boju vozila i uticaj na potrošnju bazne boje nemaju izvor."
 strucnaPotvrda:
   potrebna: true
   razlog: "Tehnički listovi iz našeg programa opisuju samo koje sive nijanse postoje i kako se mešaju. Nijedan pregledani dokument ne objašnjava zašto se nijansa bira, po kom pravilu se bira za određenu boju vozila, niti kako utiče na potrošnju bazne boje. R-M brošura o sivim nijansama (Directfiller) pronađena je u pretrazi, ali stranica vraća 404, pa nije citirana. Odeljak o izboru nijanse i odgovor o potrošnji treba da potvrdi stručna osoba ili zvaničan materijal proizvođača."
@@ -122,7 +123,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Proizvođači iz našeg programa nude punioce u beloj, sivoj i crnoj varijanti, ili kao parove bele i crne, da bi se njihovim mešanjem dobila siva nijansa podloge. To potvrđuju tabele mešanja baslac, R-M i Norbin. Koju nijansu treba izabrati za određenu boju vozila, tehnički listovi koje smo pregledali ne navode: tu informaciju treba tražiti od proizvođača bazne boje ili tehničke podrške.
+Proizvođači iz našeg programa nude punioce u beloj, sivoj i crnoj varijanti, ili kao parove bele i crne, da bi se njihovim mešanjem dobila siva nijansa podloge. To potvrđuju tabele mešanja baslac i Norbin i tehnički listovi R-M. Koju nijansu treba izabrati za određenu boju vozila, tehnički listovi koje smo pregledali ne navode: tu informaciju treba tražiti od proizvođača bazne boje ili tehničke podrške.
 
 ## Šta proizvođači stvarno pišu
 
@@ -148,7 +149,7 @@ Za par mokro-na-mokro 20-35 (bela) i 20-95 (crna) tabela je drugačija, jer nema
 | tamnosiva | 50 % 20-35 + 50 % 20-95[^baslac-sive-20-35] |
 | crna | 100 % 20-95[^baslac-sive-20-35] |
 
-Ista oznaka, na primer „svetlosiva“, dobija se različitim mešavinama u dva sistema, pa se tabela jednog sistema ne primenjuje na drugi. U tehničkom listu 20-24 baslac upućuje na svoj poster sivih nijansi[^baslac-20-24-tds].
+Ista oznaka, na primer „svetlosiva“, dobija se različitim mešavinama u dva sistema, pa se tabela jednog sistema ne primenjuje na drugi. U tehničkom listu 20-24 baslac upućuje na svoj poster sivih nijansi[^baslac-20-24-tds]. Na posterima su uz svaku nijansu podloge prikazani i uzorci boja, ali bez pisanog pravila koje bi povezalo nijansu podloge sa određenom bojom vozila[^baslac-sive-20-24][^baslac-sive-20-35].
 
 ### R-M: bela i crna u bilo kom odnosu
 
@@ -158,7 +159,7 @@ Kod UV punilaca R-M nudi gotove nijanse kao posebne proizvode, na primer P 2P92 
 
 ### Norbin i Carsystem
 
-Norbin na posteru za punioce N55-V20 (tamnosiva) i N55-V29 (sivo-crna) prikazuje tri rešenja podloge: 100 % N55-V20, 100 % N55-V29 i mešavinu 50 % i 50 %[^norbin-sive]. Carsystem 2K Füller Air Plus postoji u beloj, sivoj i crnoj boji[^cs-air-plus-tds]. Za svoje 1K i 2K punioce Carsystem nudi i pastu za toniranje u crnoj, plavoj, zelenoj i crvenoj boji, koja se dodaje u količini 1–5 % po težini; tehnički list upozorava da pasta može da skrati vreme upotrebljivosti punioca do najviše 20 %[^cs-tinting-tds].
+Norbin na posteru za punioce N55-V20 (siva) i N55-V29 (crna) prikazuje tri rešenja podloge: siva (100 % N55-V20), tamnosiva (50 % N55-V20 i 50 % N55-V29) i crna (100 % N55-V29)[^norbin-sive]. Carsystem 2K Füller Air Plus postoji u beloj, sivoj i crnoj boji[^cs-air-plus-tds]. Za svoje 1K i 2K punioce Carsystem nudi i pastu za toniranje u crnoj, plavoj, zelenoj i crvenoj boji, koja se dodaje u količini 1–5 % po težini; tehnički list upozorava da pasta može da skrati vreme upotrebljivosti punioca do najviše 20 %[^cs-tinting-tds].
 
 ## Kako se bira nijansa
 

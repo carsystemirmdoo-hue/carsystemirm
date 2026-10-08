@@ -83,12 +83,12 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Chart 2 (05/2024), Chart 1 (03/2024), 70-10 i 20-35 (06/2023), R-M P 2P81, P 2P63 i PK 1P10 (07/2026); P240/P320, 5 min na 20 °C, „nije potrebno brusiti nove KTL delove“, 27-10 za veća probijena mesta i dodatni tanak sloj kod P 2P81 odgovaraju izvorima. Ispravljeno: uklonjena necitirana tvrdnja o delovima sa samo transportnom zaštitom i upućivanje na test starog laka (izvor za nove delove ne postoji), opis KTL postupka označen kao opšte objašnjenje, jezička ispravka („bruse“ umesto „brišu“). Stručna potvrda koju je pisac predložio nije više potrebna: posle uklanjanja necitiranog dela suština odgovora je u celini pokrivena R-M i baslac dokumentima, a tekst za neizvestan sloj samo upućuje na dobavljača."
 strucnaPotvrda:
-  potrebna: true
-  razlog: "Za proveru da li je sloj na novom delu pravi KTL ili samo transportna zaštita nije pronađen izvor proizvođača iz našeg programa; taj deo teksta upućuje na dobavljača dela i ne daje postupak. Ostatak (čišćenje, brušenje ili mokro-na-mokro, probijanje do metala) zasnovan je na R-M i baslac dokumentima."
-  status: potrebno
+  potrebna: false
+  status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -96,7 +96,7 @@ Nov deo sa fabričkim KTL slojem (katoforetski, elektroforetski prajmer; engl. e
 
 ## Šta je KTL sloj i zašto se ne skida
 
-KTL sloj nanosi se u fabrici potapanjem dela u kadu sa bojom i električnim taloženjem, pa pokriva i unutrašnje površine i ivice. Za reparaturni sistem to je podloga, a ne nečistoća: R-M i baslac u tehničkim listovima navode „OEM delove sa KTL slojem“ (OEM parts with e-coat) kao podlogu za svoje odmašćivače i punioce[^rm-pk1p10-tds][^rm-p2p63-tds][^baslac-undercoats-chart]. Kada bi se sloj skinuo, na tom mestu ostao bi goli metal, koji bi se onda morao štititi kao svaki goli lim.
+U opštem smislu, KTL sloj se u fabrici nanosi potapanjem dela u kadu sa bojom i električnim taloženjem, pa pokriva i unutrašnje površine i ivice. Za reparaturni sistem to je podloga, a ne nečistoća: R-M i baslac u tehničkim listovima navode „OEM delove sa KTL slojem“ (OEM parts with e-coat) kao podlogu za svoje odmašćivače i punioce[^rm-pk1p10-tds][^rm-p2p63-tds][^baslac-undercoats-chart]. Kada bi se sloj skinuo, na tom mestu ostao bi goli metal, koji bi se onda morao štititi kao svaki goli lim.
 
 ## Postupak kod brušenja
 
@@ -108,7 +108,7 @@ Ako punilac koji koristite traži brušenu podlogu, baslac u tabeli za nove fabr
 
 baslac 70-10 je, prema tehničkom listu, namenjen i novim fabrički prajmerisanim delovima[^baslac-70-10-tds], a R-M SILICONE Remov-R navodi OEM delove sa KTL slojem među podlogama za prvi korak čišćenja[^rm-pk1p10-tds]. Granulacija važi za baslac sistem. Za drugi sistem proverite tehnički list punioca.
 
-Cilj brušenja je da se sloj ravnomerno matira, a ne da se stanji. Ivice i ispupčenja se brišu pažljivo, jer se tu sloj najlakše probije. Više o tome piše vodič [Brušenje ivica, uglova i profila bez probijanja](/vodici/brusenje-ivica-i-uglova).
+Cilj brušenja je da se sloj ravnomerno matira, a ne da se stanji. Ivice i ispupčenja se bruse pažljivo, jer se tu sloj najlakše probije. Više o tome piše vodič [Brušenje ivica, uglova i profila bez probijanja](/vodici/brusenje-ivica-i-uglova).
 
 ## Postupak bez brušenja: punilac mokro-na-mokro
 
@@ -131,7 +131,7 @@ Pravilo „malo“ ili „veće“ probijeno mesto proizvođači ne definišu u 
 
 ## Kako proveriti da li je sloj KTL ili samo transportna zaštita
 
-Za ovu proveru nismo pronašli postupak u dokumentima proizvođača iz našeg programa, pa ga ovde ne opisujemo. Neki rezervni delovi dolaze samo sa privremenom zaštitom za transport i skladištenje, koja nije podloga za lakiranje. Šta je na delu, pitajte dobavljača dela ili proizvođača vozila. Ako postoji sumnja u stabilnost sloja, test otpornosti na rastvarač opisan je u tekstu [Test starog laka razređivačem](/vodici/test-starog-laka-razredjivacem), uz napomenu da je pisan za stari lak, a ne za nove delove.
+Za ovu proveru nismo pronašli postupak u dokumentima proizvođača iz našeg programa, pa ga ovde ne opisujemo. Tehnički listovi koje navodimo odnose se na „OEM delove sa KTL slojem“. Ako niste sigurni šta je na delu, pitajte dobavljača dela ili proizvođača vozila pre nego što izaberete postupak.
 
 ## Pitanja i odgovori
 

@@ -58,8 +58,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40 (07/2026), baslac 40-100 (06/2026) i Carsystem Multi Green V08 11/2024; 5 % A 2210, MIXINGBASE W, 1:1 + 20 %, 25 min, 2 sloja, 3 min, 40–50 µm, 3 h / 25 min / 15 min sa 50-420 i P80–P240 odgovaraju izvorima. Ispravljeno: nazivi odeljaka Multi Green lista usklađeni sa dokumentom (nema zasebnog odeljka Storage), P80–P240 označeno kao prvo brušenje, napomena o senzorima citirana i za R-M, „ne po suštini“ i tvrdnja o jeziku listova ublažene."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -70,7 +71,7 @@ Tehnički list (TDS, engl. *technical data sheet*) je dokument proizvođača koj
 
 ## Šta se nalazi u tehničkom listu
 
-Tehnički listovi R-M i baslac imaju gotovo isti raspored, a listovi drugih proizvođača se razlikuju po izgledu, ne po suštini. Tipični blokovi su:
+Tehnički listovi R-M i baslac imaju gotovo isti raspored, a listovi drugih proizvođača često se razlikuju više po izgledu nego po vrsti podataka. Tipični blokovi su:
 
 | Blok (naziv na engleskom) | Šta sadrži |
 | --- | --- |
@@ -83,7 +84,7 @@ Tehnički listovi R-M i baslac imaju gotovo isti raspored, a listovi drugih proi
 | Drying, Sanding | vreme sušenja po temperaturi i granulacija za brušenje |
 | Safety Advice | bezbednosne napomene i podatak o VOC |
 
-Carsystem list za kit Multi Green ima drugačije naslove (*Description*, *Area of application*, *Product Data*, *Handling*, *Storage*), ali iste vrste podataka. Odeljak o bezbednosti u njemu ne ponavlja mere zaštite. Upućuje na bezbednosni list proizvođača za rukovanje i odlaganje otpada[^carsystem-multi-green-tds].
+Carsystem list za kit Multi Green ima drugačije naslove (*Description*, *Area of application*, *Benefits*, *Product Data*, *Handling*, *Safety issues*), ali slične vrste podataka. Odeljak o bezbednosti u njemu ne ponavlja mere zaštite. Upućuje na bezbednosni list proizvođača za rukovanje i odlaganje otpada[^carsystem-multi-green-tds].
 
 ## Kojim redom ga čitati pre rada
 
@@ -93,7 +94,7 @@ Carsystem list za kit Multi Green ima drugačije naslove (*Description*, *Area o
 4. **Mešanje.** Odnos mešanja, i to po zapremini ili po težini, kao i vreme upotrebljivosti. Za C 2A40 list daje odnos 1:1 + 20 % po zapremini i vreme upotrebljivosti od 25 minuta na 20 °C[^rm-c2a40-tds]. Više o zapisu odnosa mešanja: [Odnos mešanja: kako se čita i meri](/vodici/odnos-mesanja-iz-tehnickog-lista).
 5. **Nanošenje.** Pištolj, dizna, pritisak, broj slojeva i vreme između slojeva. Za baslac 40-100 list navodi dva sloja i najmanje 3 minuta odzračivanja između njih na 20 °C, kao i debljinu sloja od 40–50 µm[^baslac-40-100-tds].
 6. **Sušenje.** Vreme sušenja važi za navedenu temperaturu, a često i za određeni učvršćivač. Za 40-100 sa normalnim učvršćivačem 50-420 list navodi 3 h na 20 °C, 25 min na 40 °C i 15 min na 60 °C[^baslac-40-100-tds].
-7. **Dalja obrada.** Brušenje, prelakiranje i šta se nanosi preko proizvoda. Za Multi Green list navodi suvo brušenje granulacijama od P80 do P240 kada se koristi kao kit za popunjavanje[^carsystem-multi-green-tds].
+7. **Dalja obrada.** Brušenje, prelakiranje i šta se nanosi preko proizvoda. Za Multi Green list navodi prvo suvo brušenje granulacijama od P80 do P240 kada se koristi kao kit za popunjavanje[^carsystem-multi-green-tds].
 8. **Bezbednost.** Odeljak o bezbednosti u tehničkom listu je kratak. Za zaštitu, skladištenje i otpad čita se [bezbednosni list](/vodici/bezbednosni-list-16-odeljaka).
 
 Ako neki podatak nedostaje, to ne znači da ograničenje ne postoji. Pitajte prodavca ili proizvođača umesto da ga preuzmete iz lista za sličan proizvod.
@@ -108,13 +109,13 @@ R-M u napomeni na kraju lista piše da najnovija verzija zamenjuje sve prethodne
 
 - **Bezbednosni list.** Tehnički list opisuje rad sa proizvodom, a bezbednosni opasnosti, zaštitu i postupanje u nezgodi.
 - **Vlastitu proveru.** U napomeni R-M navodi da podaci ne oslobađaju korisnika obaveze da sam ispita i proveri proizvod za svoju primenu[^rm-c2a40-tds]. Probni lim pre većeg posla je zato deo dobre prakse.
-- **Uputstvo proizvođača vozila.** R-M i baslac listovi napominju da se uz njih uvek poštuju i uputstva proizvođača vozila za popravke, naročito kada su u blizini ugrađeni senzori[^baslac-40-100-tds].
+- **Uputstvo proizvođača vozila.** R-M i baslac listovi napominju da se uz njih uvek poštuju i uputstva proizvođača vozila za popravke, naročito kada su ugrađeni senzori[^rm-c2a40-tds][^baslac-40-100-tds].
 
 ## Pitanja i odgovori
 
 ### Šta ako tehnički list nije na srpskom?
 
-Tehnički listovi koje proizvođači iz našeg programa objavljuju uglavnom su na engleskom ili nemačkom. Izrazi se ponavljaju od lista do lista, pa je dovoljno naučiti dvadesetak osnovnih. Prevodi su u vodiču [Tehnički list na nemačkom ili engleskom: ključni izrazi](/vodici/tehnicki-list-na-stranom-jeziku). Ako niste sigurni šta neki podatak znači, pitajte prodavca pre rada.
+Tehnički listovi proizvođača iz našeg programa koje smo pregledali uglavnom su na engleskom ili nemačkom. Izrazi se ponavljaju od lista do lista, pa je dovoljno naučiti dvadesetak osnovnih. Prevodi su u vodiču [Tehnički list na nemačkom ili engleskom: ključni izrazi](/vodici/tehnicki-list-na-stranom-jeziku). Ako niste sigurni šta neki podatak znači, pitajte prodavca pre rada.
 
 ### Kako se proverava verzija dokumenta?
 

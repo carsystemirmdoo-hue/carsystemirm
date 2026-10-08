@@ -91,8 +91,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 8 izvora upoređeno sa tekstom (sušenje, debljina, podloge, brušenje); P 2A41 i 20-22 više nisu označeni kao akrilni jer TDS ne navodi osnovu, uz napomenu; uopštena tvrdnja o reaktivnim prajmerima i poliesterskom kitu sužena na „neki“; tvrdnja „epoksid je napravljen za…“ zamenjena navodom iz izvora."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -109,19 +110,19 @@ Primeri iz tehničkih listova iz našeg programa pokazuju tipičnu razliku u su�
 | --- | --- | --- | --- |
 | R-M EpoxyPROTECT P 2A23 | epoksidni prajmer-punilac | 8 h[^rm-p2a23-tds] | 40–50 µm[^rm-p2a23-tds] |
 | baslac 25-30 2K Primerfiller EP | epoksidni prajmer-punilac | 8 h[^baslac-25-30-tds] | 40–50 µm[^baslac-25-30-tds] |
-| R-M PerformFILLER P 2A41 | akrilni prajmer-punilac za brušenje | 3 h[^rm-p2a41-tds] | 50–70 µm[^rm-p2a41-tds] |
-| baslac 20-22 2K Primerfiller | akrilni punilac za brušenje | 3 h[^baslac-20-22-tds] | 50–70 µm[^baslac-20-22-tds] |
-| Carsystem 2K Füller Air Plus | akrilni punilac | 2,5–3 h[^cs-air-plus-tds] | 55–60 µm po sloju, ukupno 55–180 µm[^cs-air-plus-tds] |
+| R-M PerformFILLER P 2A41 | 2K prajmer-punilac za brušenje | 3 h[^rm-p2a41-tds] | 50–70 µm[^rm-p2a41-tds] |
+| baslac 20-22 2K Primerfiller | 2K punilac za brušenje | 3 h[^baslac-20-22-tds] | 50–70 µm[^baslac-20-22-tds] |
+| Carsystem 2K Füller Air Plus | 2K akrilni punilac | 2,5–3 h[^cs-air-plus-tds] | 55–60 µm po sloju, ukupno 55–180 µm[^cs-air-plus-tds] |
 
-Tabela ne poredi kvalitet. Pokazuje da su navedeni epoksidni proizvodi sporiji za sušenje na sobnoj temperaturi, a akrilni punioci napravljeni za deblje slojeve i brže brušenje. baslac 25-30 opisuje kao promotor prianjanja sa visokom antikorozivnom zaštitom[^baslac-25-30-tds], a R-M za P 2A41 ističe dobra svojstva brušenja[^rm-p2a41-tds].
+Tabela ne poredi kvalitet. Pokazuje da se navedeni epoksidni proizvodi na sobnoj temperaturi duže suše, a da navedeni 2K punioci za brušenje imaju deblji propisani sloj i kraće sušenje do brušenja. Hemijsku osnovu kao akrilnu izričito navodi samo tehnički list za Air Plus; za P 2A41 i 20-22 tehnički listovi je ne navode[^cs-air-plus-tds][^rm-p2a41-tds][^baslac-20-22-tds]. baslac 25-30 opisuje kao promotor prianjanja sa visokom antikorozivnom zaštitom[^baslac-25-30-tds], a R-M za P 2A41 ističe dobra svojstva brušenja[^rm-p2a41-tds].
 
 Postoje i hibridi. Carsystem EF.21 EP Filler je, prema tehničkom listu, 2K hibridni punilac na akrilnoj i epoksidnoj osnovi, sa prianjanjem na čelik, aluminijum, KTL, stare i nove slojeve laka, i na poliesterskim kitovima i ispod njih[^cs-ef21-tds].
 
 ## Kada ima smisla epoksidni prajmer
 
-- **Veće površine golog metala.** Epoksid je napravljen za direktno prianjanje na metal. C.A.R.FIT za 2K Epoxy Primer 1:1 navodi čelik, aluminijum i pocinkovani lim, ali i stakloplastiku, kitove i stari lak u dobrom stanju[^carfit-epoxy-tds].
+- **Veće površine golog metala.** Epoksidni proizvodi iz ovog teksta navode goli metal među podlogama. C.A.R.FIT za 2K Epoxy Primer 1:1 navodi čelik, aluminijum i pocinkovani lim, ali i stakloplastiku, kitove i stari lak u dobrom stanju[^carfit-epoxy-tds].
 - **Mešovita podloga.** Kada je na istom delu goli metal, kit i stari lak, korisno je da jedan sloj prihvata sve te podloge, ako to tehnički list navodi.
-- **Kada posle prajmera ide kit.** Reaktivni prajmeri opisani u vodiču [Izbor prajmera prema podlozi](/vodici/izbor-prajmera-po-podlozi) ne podnose poliesterski kit preko sebe, a neki epoksidni proizvodi ga podnose. Za EF.21 Carsystem dozvoljava poliesterski kit preko punioca i naglašava da se vremena sušenja strogo poštuju[^cs-ef21-tds].
+- **Kada posle prajmera ide kit.** Neki reaktivni prajmeri, kako je opisano u vodiču [Izbor prajmera prema podlozi](/vodici/izbor-prajmera-po-podlozi), prema tehničkim listovima ne podnose poliesterski kit preko sebe, a neki epoksidni proizvodi ga podnose. Za EF.21 Carsystem dozvoljava poliesterski kit preko punioca i naglašava da se vremena sušenja strogo poštuju[^cs-ef21-tds].
 
 ## Kada ima smisla akrilni punilac
 

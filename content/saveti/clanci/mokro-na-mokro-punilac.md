@@ -89,15 +89,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 8 izvora upoređeno sa tekstom (debljina, odzračivanje, rok bez brušenja, podloge, dizne); ispravljeno: „u jednom sloju“ (R-M i baslac navode 1–2 sloja), EF.21 nema poseban odnos mešanja za mokro-na-mokro (2:1 i 100:30 su zapremina i težina) nego posebnu diznu i debljinu, za Wet on Wet Plus navedena oba temperaturna podatka iz TDS-a (> 15 °C i ne ispod 18 °C). Preklapanje sa vešću SV-0002 provereno: RACE WET FILL-R se pominje jednom rečenicom uz link, bez ponavljanja podataka vesti."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Punilac mokro-na-mokro (engl. wet-on-wet) nanosi se u jednom tankom sloju, a bazna boja ide preko njega posle kratkog odzračivanja, bez sušenja i brušenja punioca. Ima smisla kada podloga ne traži ravnanje, na primer na novom delu sa fabričkim KTL slojem ili na dobro pripremljenom starom laku. Kada treba popuniti tragove brušenja kita ili neravnine, koristi se punilac za brušenje, jer je sloj mokro-na-mokro znatno tanji.
+Punilac mokro-na-mokro (engl. wet-on-wet) nanosi se u tankom sloju, a bazna boja ide preko njega posle kratkog odzračivanja, bez sušenja i brušenja punioca. Ima smisla kada podloga ne traži ravnanje, na primer na novom delu sa fabričkim KTL slojem ili na dobro pripremljenom starom laku. Kada treba popuniti tragove brušenja kita ili neravnine, koristi se punilac za brušenje, jer je sloj mokro-na-mokro znatno tanji.
 
 ## Po čemu se razlikuje od punioca za brušenje
 
@@ -118,7 +119,7 @@ Cena te uštede je debljina. Za punilac za brušenje R-M P 2A41 tehnički list n
 
 Tabela pokazuje dve stvari. Prvo, vremena se razlikuju od proizvoda do proizvoda i ne prenose se. Drugo, „bez brušenja“ nije neograničeno: posle roka iz tehničkog lista podloga se ponovo priprema. Šta tada tačno treba uraditi, za više proizvoda opisuje vodič [Koliko dugo prajmer sme da stoji pre baze](/vodici/koliko-dugo-prajmer-sme-da-stoji).
 
-Postoje i sistemi sa još kraćim odzračivanjem. Primer je R-M RACE WET FILL-R, opisan u posebnoj vesti [R-M RACE WET FILL-R: punilac mokro-na-mokro](/vodici/rm-race-wet-fill-r-mokro-na-mokro). Neki proizvodi rade u dva režima: Carsystem EF.21 EP Filler ima poseban odnos mešanja i postupak za mokro-na-mokro, sa jednim slojem od 20–35 µm, i standardni postupak sa brušenjem[^cs-ef21-tds]. Isto tako baslac za 25-30 ima posebnu varijantu tehničkog lista za mokro-na-mokro, sa diznom 1,3 mm umesto 1,6–1,8 mm[^baslac-25-30-mnm-tds].
+Postoje i sistemi sa još kraćim odzračivanjem. Primer je R-M RACE WET FILL-R, opisan u posebnoj vesti [R-M RACE WET FILL-R: punilac mokro-na-mokro](/vodici/rm-race-wet-fill-r-mokro-na-mokro). Neki proizvodi rade u dva režima: Carsystem EF.21 EP Filler ima poseban postupak za mokro-na-mokro, sa diznom 1,3 mm i jednim slojem od 20–35 µm, i standardni postupak sa brušenjem[^cs-ef21-tds]. Isto tako baslac za 25-30 ima posebnu varijantu tehničkog lista za mokro-na-mokro, sa diznom 1,3 mm umesto 1,6–1,8 mm[^baslac-25-30-mnm-tds].
 
 ## Na koje podloge ide
 
@@ -141,7 +142,7 @@ Tekst daje primere iz navedenih verzija tehničkih listova. Kombinaciju sa bazno
 
 ### Kada posle njega sme baza?
 
-Posle odzračivanja iz tehničkog lista, za proizvode iz tabele 10–20 minuta na 20 °C, zavisno od proizvoda[^rm-p2p71-tds][^baslac-25-30-mnm-tds][^cs-af25-tds]. Te vrednosti važe za 20 °C; za drugu temperaturu važi samo ono što proizvođač navodi. Carsystem za Wet on Wet Plus, na primer, navodi rad iznad 15 °C[^cs-wow-plus-tds].
+Posle odzračivanja iz tehničkog lista, za proizvode iz tabele 10–20 minuta na 20 °C, zavisno od proizvoda[^rm-p2p71-tds][^baslac-25-30-mnm-tds][^cs-af25-tds]. Te vrednosti važe za 20 °C; za drugu temperaturu važi samo ono što proizvođač navodi. Carsystem za Wet on Wet Plus, na primer, u tabeli navodi rad iznad 15 °C, a u napomeni ne preporučuje upotrebu ispod 18 °C[^cs-wow-plus-tds]; u takvom slučaju držite se strožeg podatka.
 
 ### Može li se isti punilac koristiti i za brušenje?
 

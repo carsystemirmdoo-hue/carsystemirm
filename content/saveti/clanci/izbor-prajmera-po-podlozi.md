@@ -105,8 +105,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: svih 10 izvora upoređeno sa tekstom (TDS R-M 07/2026, baslac 06/2023, Carsystem, C.A.R.FIT); preciziran uslov punioca za 27-10 (probijanja i manje popravke), ograničenje o poliesterskom kitu suženo na P 2A26 i Etch Primer jer TDS 27-10 o tome ćuti, jasnije naznačeno da je P 5480 iz programa za komercijalna vozila i nije preporuka za putnička; red reči za P 2P63."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -121,7 +122,7 @@ Prajmer se bira prema dve stvari: na kojoj podlozi tehnički list izričito dozv
 
 To je tanak sloj čiji je zadatak prianjanje na goli metal i zaštita od korozije. R-M za CorrosionPROTECT P 2A26 navodi limeni čelik, pocinkovani lim i aluminijum kao podloge[^rm-p2a26-tds]. baslac 27-10 opisuje kao prajmer za prianjanje na aluminijumu i pocinkovanom limu, sa dobrim antikorozivnim svojstvima na golom metalu[^baslac-27-10-tds]. Carsystem Etch Primer u spreju je, prema tehničkom listu, namenjen čeliku, cinku i aluminijumu, za manje i delimične popravke[^cs-etch-primer-tds].
 
-Reaktivni prajmer ima stroga ograničenja za sledeći sloj. R-M za P 2A26 navodi da se ne prekriva vodenim proizvodima ni poliesterskim kitom[^rm-p2a26-tds]. baslac za 27-10 piše da ne ide direktno ispod vodenih proizvoda i da se pri radu sa baznom bojom baslac 45 nanosi punilac (filer) 20-24, 20-34 ili 20-94[^baslac-27-10-tds]. Carsystem za Etch Primer navodi da ne daje potpuno prianjanje vodenoj boji, pa pre nje traži 1K ili 2K punilac, i zabranjuje poliesterske proizvode preko prajmera[^cs-etch-primer-tds].
+Reaktivni prajmer ima stroga ograničenja za sledeći sloj. R-M za P 2A26 navodi da se ne prekriva vodenim proizvodima ni poliesterskim kitom[^rm-p2a26-tds]. baslac za 27-10 piše da ne ide direktno ispod vodenih proizvoda i da se kod probijanja i manjih popravki pre bazne boje baslac 45 mora naneti punilac (filer) 20-24, 20-34 ili 20-94[^baslac-27-10-tds]. Carsystem za Etch Primer navodi da ne daje potpuno prianjanje vodenoj boji, pa pre nje traži 1K ili 2K punilac, i zabranjuje poliesterske proizvode preko prajmera[^cs-etch-primer-tds].
 
 ### Epoksidni prajmer
 
@@ -129,7 +130,7 @@ Epoksidni prajmer je dvokomponentni materijal za prianjanje i zaštitu podloge; 
 
 ### Prajmer-punilac za direktno nanošenje na metal (DTM)
 
-Neki prajmeri-punioci su napravljeni tako da idu direktno na metal bez posebnog reaktivnog sloja. R-M MULTI Purpos-R Grey P 2P63 tehnički list opisuje kao DTM prajmer, prajmer-punilac i punilac, sa podlogama limeni čelik, pocinkovani lim, aluminijum, fabrički KTL sloj i stari lak[^rm-p2p63-tds]. Takav proizvod skraćuje postupak, ali se i za njega poštuje propisano čišćenje: R-M za P 2P63 navodi čišćenje sredstvom MULTI Clean-R pre nanošenja[^rm-p2p63-tds].
+Neki prajmeri-punioci su napravljeni tako da idu direktno na metal bez posebnog reaktivnog sloja. Za R-M MULTI Purpos-R Grey P 2P63 tehnički list navodi da služi kao DTM prajmer, prajmer-punilac i punilac, a kao podloge navodi limeni čelik, pocinkovani lim, aluminijum, fabrički KTL sloj i stari lak[^rm-p2p63-tds]. Takav proizvod skraćuje postupak, ali se i za njega poštuje propisano čišćenje: R-M za P 2P63 navodi čišćenje sredstvom MULTI Clean-R pre nanošenja[^rm-p2p63-tds].
 
 ## Pregled po podlozi
 
@@ -140,12 +141,12 @@ Neki prajmeri-punioci su napravljeni tako da idu direktno na metal bez posebnog 
 | aluminijum | isti izbor kao za pocinkovani lim; Air Plus i ovde traži prethodno reaktivni prajmer[^baslac-27-10-tds][^cs-air-plus-tds] |
 | plastika | prajmer za plastiku; Carsystem Plastic Primer nije za PE i PC[^cs-plastic-primer-tds] |
 
-Napomena uz pocinkovani lim: „pocinkovano“ nije jedna podloga. R-M za epoksid GHD UNIVERSAL EPOXY P 5480 traži da se prianjanje na toplo pocinkovanom čeliku prethodno proveri[^rm-p5480-tds]. Taj proizvod je iz programa za komercijalna vozila i ovde služi samo kao primer takvog upozorenja. Priprema pocinkovanog lima i aluminijuma posebno je opisana u vodičima [Pocinkovani lim: priprema i izbor podloge](/vodici/pocinkovani-lim-priprema) i [Priprema aluminijumskih delova](/vodici/priprema-aluminijuma).
+Napomena uz pocinkovani lim: „pocinkovano“ nije jedna podloga. R-M za epoksid GHD UNIVERSAL EPOXY P 5480 traži da se prianjanje na toplo pocinkovanom čeliku prethodno proveri[^rm-p5480-tds]. Taj proizvod je iz R-M programa za komercijalna vozila (tehnički list kao primenu navodi autobuse, vatrogasna vozila i nadogradnje), pa se ovde navodi samo kao primer takvog upozorenja, a ne kao preporuka za putnička vozila. Priprema pocinkovanog lima i aluminijuma posebno je opisana u vodičima [Pocinkovani lim: priprema i izbor podloge](/vodici/pocinkovani-lim-priprema) i [Priprema aluminijumskih delova](/vodici/priprema-aluminijuma).
 
 ## Kako da izaberete u praksi
 
 1. **Utvrdite podlogu.** Goli metal posle brušenja, fabrički KTL sloj, stari lak ili plastika nisu isto. Na delu sa više podloga birajte proizvod čiji tehnički list navodi sve njih.
-2. **Proverite šta ide preko prajmera.** Ako posle prajmera ide poliesterski kit, reaktivni prajmeri iz ovog teksta otpadaju. Ako posle ide vodena bazna boja, između mora punilac.
+2. **Proverite šta ide preko prajmera.** Ako posle prajmera ide poliesterski kit, P 2A26 i Etch Primer otpadaju, jer tehnički listovi ne dozvoljavaju poliesterske proizvode preko njih[^rm-p2a26-tds][^cs-etch-primer-tds]; za 27-10 tehnički list o tome ništa ne navodi. Ako posle ide vodena bazna boja, za sva tri reaktivna prajmera iz ovog teksta između mora punilac[^rm-p2a26-tds][^baslac-27-10-tds][^cs-etch-primer-tds].
 3. **Proverite pripremu.** C.A.R.FIT za reaktivni prajmer 2K Wash Primer 2:1 opisuje da se čelik odmašćuje, suvo brusi i ponovo odmašćuje, a aluminijum i pocinkovani lim matiraju abrazivnom tkaninom[^carfit-wash-tds]. Opšti redosled za čelik je u vodiču [Priprema golog čeličnog lima](/vodici/priprema-golog-lima).
 4. **Ostanite u jednom sistemu.** Carsystem upozorava da sa razređivačima i učvršćivačima iz drugih sistema nisu isključeni problemi sa sušenjem i prianjanjem[^cs-air-plus-tds].
 

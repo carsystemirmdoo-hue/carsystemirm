@@ -82,8 +82,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Plastic Repair System VOC (10/2024) i 21-20 (06/2023), R-M PM 2P10 i PK 2P40 (07/2026), Carsystem Plastic Primer V03 06/2022 i C.A.R.FIT 1K Plastic Primer Spray; 60 min na 60 °C, P80–P600, slojevi, debljine, 15/30 min i ograničenja za PE/PC/PP odgovaraju izvorima. Ispravljeno: u tabeli dodati uslovi iz izvora (20 °C za C.A.R.FIT, 18–25 °C za Carsystem)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -118,8 +119,8 @@ Prajmer za plastiku obezbeđuje vezu između plastike i punioca. Nanosi se u tan
 | --- | --- | --- |
 | baslac 21-20 Plastic Primer | 1–2 sloja, 5 µm | 15 min na 20 °C; ponoviti ako prođe više od 30 min[^baslac-21-20-tds] |
 | R-M PM 2P10 PLASTIC Prim-R | 1–2 sloja, 5–10 µm | oko 15 min na 20 °C; ponoviti ako prođe više od 30 min[^rm-pm2p10-tds] |
-| Carsystem Plastic Primer | 1 sloj, oko 5–8 µm | odzračivanje 10 min[^carsystem-plastic-primer-tds] |
-| C.A.R.FIT 1K Plastic Primer Spray | najviše 2 tanka sloja | preko njega posle oko 10–15 min[^carfit-1k-plastic-primer-tds] |
+| Carsystem Plastic Primer | 1 sloj, oko 5–8 µm | odzračivanje 10 min, rad na 18–25 °C[^carsystem-plastic-primer-tds] |
+| C.A.R.FIT 1K Plastic Primer Spray | najviše 2 tanka sloja | preko njega posle oko 10–15 min na 20 °C[^carfit-1k-plastic-primer-tds] |
 
 Iz tabele se vidi i ograničenje u drugom smeru: kod baslac i R-M prajmera prekoračeno vreme ne znači „bolje osušeno“, nego da se prajmer nanosi ponovo. Kada je prajmer za plastiku potreban, a kada ga sistem ne traži, objašnjava vodič [Prajmer za plastiku: kada je potreban](/vodici/prajmer-za-plastiku-kada-treba).
 

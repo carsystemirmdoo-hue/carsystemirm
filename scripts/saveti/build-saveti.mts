@@ -314,7 +314,11 @@ for (const name of files) {
         if (!href.startsWith("https://")) err(file, `spoljni link mora biti https: ${href}`);
         continue;
       }
-      const [pathname] = href.split("#");
+      const [pathname] = href.split(/[?#]/);
+      const query = new URLSearchParams(href.includes("?") ? href.split("?")[1].split("#")[0] : "");
+      if (pathname === "/katalog" && query.has("brend") && !brandSlugs.has(query.get("brend") ?? "")) {
+        err(file, `interni link ka nepostojećem brendu: ${href}`);
+      }
       const parts = pathname.split("/").filter(Boolean);
       const ok =
         STATIC_ROUTES.has(pathname) ||
@@ -324,8 +328,7 @@ for (const name of files) {
         (parts[0] === "program" && parts.length === 2 && programSlugs.has(parts[1])) ||
         (parts[0] === "kategorije" && parts.length === 2 && categoryLandingSlugs.has(parts[1])) ||
         (parts[0] === "vodici" && parts[1] === "kategorije" && SAVETI_KATEGORIJA_SLUGS.includes(parts[2])) ||
-        (parts[0] === "vodici" && parts.length === 2) ||
-        (parts[0] === "katalog" && href.startsWith("/katalog?"));
+        (parts[0] === "vodici" && parts.length === 2);
       if (!ok) err(file, `interni link ne vodi na postojeću stranu: ${href}`);
     }
   }

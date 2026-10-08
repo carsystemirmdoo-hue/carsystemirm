@@ -58,6 +58,30 @@ export class StoreError extends Error {
 export function otvoriStore(ulaz) {
   mkdirSync(dirname(ulaz.putanja), { recursive: true });
   const db = new DatabaseSync(ulaz.putanja);
+  try {
+    pripremiRed(db, ulaz);
+  } catch (greska) {
+    /*
+     * Neuspelo otvaranje ZATVARA bazu pre nego što greška ode dalje.
+     *
+     * Noviji red, tuđi identitet i fajl koji nije SQLite su namerne greške —
+     * ali bez `close()` ručka ostaje otvorena do kraja procesa. Na Windowsu
+     * otvorenu bazu niko ne može da obriše ni zameni, pa bi `watch` koji
+     * ponavlja pokušaj držao `queue.db` zaključan, a operater ne bi mogao da
+     * uradi ni kontrolisano ponovno podešavanje koje poruka traži.
+     */
+    try {
+      db.close();
+    } catch {
+      /* baza možda nije ni otvorena do kraja; greška otvaranja je merodavna */
+    }
+    throw greska;
+  }
+  return napraviApi(db, ulaz.putanja);
+}
+
+/** Pragme, šema, verzija i identitet — sve što može odbiti postojeći red. */
+function pripremiRed(db, ulaz) {
 
   /*
    * WAL + `synchronous=FULL`.
@@ -223,8 +247,6 @@ export function otvoriStore(ulaz) {
         "(nova putanja stanja), a postojeći red ostaje netaknut.",
     );
   }
-
-  return napraviApi(db, ulaz.putanja);
 }
 
 function citajMetu(db) {
@@ -429,6 +451,23 @@ function napraviApi(db, putanja) {
       });
     },
 
+    /**
+     * Skida odlaganje „do sledećeg radnog dana" sa stavki koje su odložene
+     * zbog PRIVREMENIH razloga (429, prekid veze, 5xx) — po pravilima starije
+     * verzije. Oporavak od tih grešaka sada ide u toku ciklusa (`retry.mjs`).
+     * Iscrpljeni pokušaji (`iscrpljeno:*`) i nepoznati odgovori ostaju odloženi.
+     */
+    oslobodiPrivremenaOdlaganja() {
+      return db
+        .prepare(
+          `UPDATE stavke SET odlozeno_do = NULL, izmenjeno_u = ?
+            WHERE stanje = ? AND odlozeno_do IS NOT NULL
+              AND (razlog = 'rate_limited' OR razlog LIKE 'transport:%'
+                   OR razlog IN ('temporarily_unavailable', 'ingest_failed'))`,
+        )
+        .run(sada(), STANJA.SPREMNO).changes;
+    },
+
     /** Vraća stavku u `spremno` bez odlaganja (npr. posle `nonce_replayed`). */
     vratiUSpremno({ id, razlog }) {
       db.prepare(`UPDATE stavke SET stanje = ?, razlog = ?, izmenjeno_u = ? WHERE id = ?`).run(
@@ -536,6 +575,40 @@ function napraviApi(db, putanja) {
     zbir() {
       const redovi = db.prepare("SELECT stanje, count(*) AS n FROM stavke GROUP BY stanje").all();
       return Object.fromEntries(redovi.map((r) => [r.stanje, r.n]));
+    },
+
+    /**
+     * Storna koja čekaju ručni upload (razlog `storno_rucni_upload`).
+     * NOSI PUTANJU — samo za lokalnog operatera (komanda `storna`), ne za log.
+     */
+    /** Broj stavki sa datim razlogom (npr. `pre_pocetka_slanja`) — bez putanja. */
+    brojPoRazlogu(razlog) {
+      return db.prepare("SELECT count(*) AS n FROM stavke WHERE razlog = ?").get(razlog).n;
+    },
+
+    /**
+     * Stavke za ručnu proveru: storna (ručni upload) i naknadno izvezeni stariji
+     * dokumenti. NOSI PUTANJU — samo za lokalnog operatera (komanda `rucno`).
+     */
+    zaRucnuProveru() {
+      return db
+        .prepare(
+          `SELECT source_hash, putanja, razlog, dodato_u FROM stavke
+            WHERE stanje = 'nepodrzano' AND razlog IN ('storno_rucni_upload', 'kasni_izvoz_rucna_provera')
+            ORDER BY dodato_u`,
+        )
+        .all()
+        .map((r) => ({ ref: `sd:${String(r.source_hash).slice(0, 12)}`, putanja: r.putanja, razlog: r.razlog, dodato: r.dodato_u }));
+    },
+
+    stornaZaRucniUpload() {
+      return db
+        .prepare(
+          `SELECT source_hash, putanja, dodato_u FROM stavke
+            WHERE stanje = 'nepodrzano' AND razlog = 'storno_rucni_upload' ORDER BY dodato_u`,
+        )
+        .all()
+        .map((r) => ({ ref: `sd:${String(r.source_hash).slice(0, 12)}`, putanja: r.putanja, dodato: r.dodato_u }));
     },
 
     /** Poslednji ishodi, redigovano: bez putanje, imena fajla i sadržaja. */

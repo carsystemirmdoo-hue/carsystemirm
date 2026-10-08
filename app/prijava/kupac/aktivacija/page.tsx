@@ -26,7 +26,6 @@ export default async function ActivationPage({
   return (
     <PasswordSetupForm
       token={token ?? ""}
-      mode="activation"
       minLength={CUSTOMER_PASSWORD_MIN}
     />
   );

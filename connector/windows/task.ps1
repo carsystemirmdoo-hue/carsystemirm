@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Instalira, prikazuje ili uklanja imenovani Task Scheduler zadatak konektora.
 
@@ -60,17 +60,26 @@
 #>
 [CmdletBinding()]
 param(
-  [ValidateSet('install', 'status', 'uninstall')]
+  [ValidateSet('install', 'status', 'uninstall', 'run')]
   [string]$Action = 'status',
   [ValidateSet('Production', 'Smoke')]
   [string]$Mode,
   [string]$PackagePath = "$PSScriptRoot\..",
   [string]$RunAsAccount = $env:USERNAME,
-  [switch]$Apply
+  [switch]$Apply,
+  <#
+    Kancelarija sa JEDNIM Windows nalogom koji je administrator (docs/b2b/49).
+    Dozvoljava taj nalog u Production rezimu samo ako (1) je to isti nalog koji
+    pokrece ovu skriptu i (2) je UAC ukljucen i ne podize prava tiho. Zadatak i
+    dalje radi sa RunLevel Limited (ogranicen token, bez povisenih prava).
+  #>
+  [switch]$JedanNalogSaUAC
 )
 
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'PathGuards.ps1')
+# Stanje zadatka kroz Task Scheduler COM + schtasks (ne kroz CIM/WMI; vidi Zadaci.ps1).
+. (Join-Path $PSScriptRoot 'Zadaci.ps1')
 
 # Imenovani zadaci — skripta dira ISKLJUCIVO ta dva, i nikad unakrsno.
 $TaskPath = '\Carsystem\'
@@ -79,7 +88,7 @@ $TaskNames = @{
   Smoke      = 'CarsystemConnectorSMOKE'
 }
 
-if ($Action -in @('install', 'uninstall') -and -not $Mode) {
+if ($Action -in @('install', 'uninstall', 'run') -and -not $Mode) {
   throw "-Mode je obavezan za -Action $Action (Production ili Smoke). Vidi OFFICE-INSTALL.md za Production, smoke/START-HERE.md za Smoke."
 }
 
@@ -117,25 +126,42 @@ if ($entryPointPostoji) {
 switch ($Action) {
   'status' {
     $imenaZaPrikaz = if ($Mode) { @($TaskNames[$Mode]) } else { $TaskNames.Values }
+    $nepoznato = $false
     foreach ($ime in $imenaZaPrikaz) {
-      $t = Get-ScheduledTask -TaskName $ime -TaskPath $TaskPath -ErrorAction SilentlyContinue
-      if ($null -eq $t) { Write-Host "Zadatak '$ime' nije registrovan." }
+      <#
+        NE Get-ScheduledTask: na kancelarijskom racunaru CIM vraca 0x80070002 i
+        uz SilentlyContinue izgleda kao "nije registrovan". Get-ZadatakCs kaze
+        "ne postoji" samo kada se COM i schtasks.exe slazu; inace baca.
+      #>
+      try { $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $ime }
+      catch { Write-Host "Zadatak '$ime': stanje NIJE MOGUCE UTVRDITI ($($_.Exception.Message))."; $nepoznato = $true; continue }
+      if (-not $z.Postoji) { Write-Host "Zadatak '$ime' nije registrovan (potvrdjeno: $($z.Izvor))." }
       else {
-        $info = Get-ScheduledTaskInfo -TaskName $ime -TaskPath $TaskPath
         [pscustomobject]@{
-          Zadatak        = $t.TaskName
-          Stanje         = $t.State
-          Nalog          = $t.Principal.UserId
-          RunLevel       = $t.Principal.RunLevel
-          Izvrsni        = $t.Actions[0].Execute
-          Argumenti      = $t.Actions[0].Arguments
-          RadniDirekt    = $t.Actions[0].WorkingDirectory
-          PoslednjeVreme = $info.LastRunTime
-          PoslednjiIshod = $info.LastTaskResult
-          SledeceVreme   = $info.NextRunTime
+          Zadatak        = $ime
+          Izvor          = $z.Izvor
+          Stanje         = $z.Stanje
+          Nalog          = $z.UserId
+          RunLevel       = $z.RunLevel
+          Izvrsni        = $z.Execute
+          Argumenti      = $z.Arguments
+          RadniDirekt    = $z.WorkingDirectory
+          PoslednjeVreme = $z.LastRunTime
+          PoslednjiIshod = $z.LastTaskResult
+          SledeceVreme   = $z.NextRunTime
         } | Format-List
       }
     }
+    if ($nepoznato) { exit 1 }
+  }
+
+  'run' {
+    $TaskName = $TaskNames[$Mode]
+    # Rucno pokretanje odmah (umesto Start-ScheduledTask, koji ide kroz CIM).
+    $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+    if (-not $z.Postoji) { throw "Zadatak '$TaskPath$TaskName' nije registrovan." }
+    $kanal = Start-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+    Write-Host "Zadatak '$TaskPath$TaskName' je pokrenut ($kanal). Rezultat: .\task.ps1 -Action status -Mode $Mode"
   }
 
   'install' {
@@ -219,7 +245,17 @@ switch ($Action) {
         Write-Fail-Production "provera administratorskog članstva za '$RunAsAccount' nije uspela: $($_.Exception.Message)"
       }
       if ($jeAdmin) {
-        Write-Fail-Production "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — Production zahteva poseban least-privilege nalog."
+        # Zajednicka, StrictMode-bezbedna provera (PathGuards.ps1): isti nalog + UAC ukljucen.
+        $jedan = Test-JedanNalogSaUAC -AccountName $RunAsAccount
+        if ($JedanNalogSaUAC -and $jedan.Dozvoljeno) {
+          Write-Host "[Production] RunAsAccount '$RunAsAccount' je administrator (jedini nalog); dozvoljeno uz -JedanNalogSaUAC: isti nalog, UAC ukljucen, zadatak radi sa ogranicenim tokenom (RunLevel Limited)."
+        }
+        elseif ($JedanNalogSaUAC) {
+          Write-Fail-Production "-JedanNalogSaUAC nije ispunjen: $($jedan.Razlog) (potrebno: isti nalog, EnableLUA=1, ConsentPromptBehaviorAdmin<>0)."
+        }
+        else {
+          Write-Fail-Production "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — Production zahteva poseban least-privilege nalog (ili -JedanNalogSaUAC za kancelariju sa jednim nalogom)."
+        }
       }
 
       if ($Apply -and -not (Test-CurrentProcessIsElevated)) {
@@ -274,7 +310,12 @@ switch ($Action) {
     }
 
     <#
-      Pokrece se u 09:05, pet minuta POSLE poslovnog termina.
+      Pokrece se radnim danima od 08:02, svakog sata do 19:02 (docs/b2b/49):
+      aplikacija sama odlucuje (config `ciklus`: 08:00-19:00, 60 min) i preskace
+      neradne dane, isti sat i ponavljanje posle kraja dana. Bez `ciklus` u
+      konfiguraciji aplikacija i dalje radi jednom dnevno posle 09:00.
+
+      (Ranije: jednom u 09:05, pet minuta POSLE poslovnog termina.)
 
       Razlog: aplikacija sama proverava da li je 09:00 proslo. Pokretanje tacno
       u 09:00 bi na sporom racunaru moglo da padne sekund ranije i ciklus bi
@@ -283,13 +324,16 @@ switch ($Action) {
       `-StartWhenAvailable` hvata slucaj kada je racunar bio ugasen; konektor
       tada izvrsi NAJVISE JEDAN naknadni ciklus, jer to proverava sam.
     #>
-    $trigger = New-ScheduledTaskTrigger -Daily -At '09:05'
+    $trigger = New-ScheduledTaskTrigger -Daily -At '08:02'
+    $trigger.Repetition = (New-ScheduledTaskTrigger -Once -At '08:02' `
+      -RepetitionInterval (New-TimeSpan -Hours 1) `
+      -RepetitionDuration (New-TimeSpan -Hours 11)).Repetition
     $settings = New-ScheduledTaskSettingsSet `
       -StartWhenAvailable `
       -DontStopIfGoingOnBatteries `
       -AllowStartIfOnBatteries `
       -MultipleInstances IgnoreNew `
-      -ExecutionTimeLimit (New-TimeSpan -Hours 2)
+      -ExecutionTimeLimit (New-TimeSpan -Minutes 55)
 
     <#
       ISTI nalog kao pri rucnom pokretanju.
@@ -330,12 +374,32 @@ switch ($Action) {
     }
     Write-Plan "Registrujem '$TaskPath$TaskName' [$Mode]: izvršni $nodePathZaPrikaz, argumenti $argumentZaPrikaz, nalog $RunAsAccount, radni direktorijum $resolvedPackagePath."
     if ($Apply) {
-      $action = New-ScheduledTaskAction -Execute $nodeInfo.Path `
+      <#
+        NE `$action`: PowerShell ne razlikuje velika i mala slova, pa bi to bio
+        parametar `$Action` sa [ValidateSet] - dodela objekta akcije pada sa
+        "MSFT_TaskExecAction is not a valid value for the Action variable"
+        (kancelarija 0.3.7, posle prvog stvarnog prolaza).
+      #>
+      $akcijaZadatka = New-ScheduledTaskAction -Execute $nodeInfo.Path `
         -Argument $argumentZaPrikaz `
         -WorkingDirectory $resolvedPackagePath
       Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath `
-        -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
-      Write-Host "Registrovano. Provera: .\task.ps1 -Action status -Mode $Mode"
+        -Action $akcijaZadatka -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
+      <#
+        Registracija se POTVRDJUJE nezavisno od CIM-a (COM + schtasks): zadatak
+        mora postojati, akcija mora biti bas ovaj node.exe i RunLevel Limited.
+      #>
+      $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+      if (-not $z.Postoji) { throw "Registracija '$TaskPath$TaskName' nije potvrdjena: zadatak ne postoji posle Register-ScheduledTask." }
+      if ($z.Izvor -eq 'com') {
+        if ($z.Execute -ne $nodeInfo.Path) { throw "Registrovan zadatak ne pokrece ocekivani node.exe." }
+        if ($z.RunLevel -ne 'Limited') { throw "Registrovan zadatak nema RunLevel Limited." }
+        Write-Host "Registrovano i potvrdjeno (COM): akcija node.exe, RunLevel Limited, nalog $($z.UserId)."
+      }
+      else {
+        Write-Warn "Registrovano; postojanje potvrdio schtasks.exe, detalji (akcija, RunLevel) nisu procitani kroz COM."
+      }
+      Write-Host "Provera: .\task.ps1 -Action status -Mode $Mode"
     }
   }
 
@@ -349,8 +413,9 @@ switch ($Action) {
     #>
     Write-Plan "Uklanjam zadatak '$TaskPath$TaskName' [$Mode] (PDF-ovi, kljuc i red ostaju netaknuti)."
     if ($Apply) {
-      Unregister-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -Confirm:$false
-      Write-Host "Uklonjeno."
+      # Uklanjanje kroz COM/schtasks, uz POTVRDU da zadatka vise nema (ne CIM).
+      $null = Remove-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+      Write-Host "Uklonjeno (potvrdjeno: zadatak vise ne postoji)."
     }
   }
 }

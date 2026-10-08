@@ -36,6 +36,54 @@ function stabloCisto() {
 }
 
 /* =========================================================================
+ * NEVAZECI — tek posle uspešne verifikacije
+ * ====================================================================== */
+
+test("[paket] pakovanje NE označava ranije pakete; verifikacija to radi tek kad prođe", async () => {
+  const pakovanje = await readFile(PACKAGE_SCRIPT, "utf8");
+  const bezKomentara = (t) => t.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  assert.doesNotMatch(bezKomentara(pakovanje), /NEVAZECI-\$\{|oznaciRanijeNevazecim/, "package-smoke.mjs i dalje piše NEVAZECI");
+
+  const provera = bezKomentara(
+    await readFile(join(KOREN, "connector/scripts/verify-smoke-package.mjs"), "utf8"),
+  );
+  const poziv = provera.indexOf("oznaciRanijeNevazecim({");
+  assert.ok(poziv > 0, "verifikacija ne označava ranije pakete");
+  // Jedini poziv, unutar grane bez pada, posle svih koraka.
+  assert.equal(provera.split("oznaciRanijeNevazecim({").length, 2);
+  const grana = provera.lastIndexOf("if (palo === 0) {", poziv);
+  assert.ok(grana > 0 && grana > provera.lastIndexOf("korak(", poziv), "označavanje nije posle svih koraka, u grani bez pada");
+});
+
+test("[paket] oznaciRanijeNevazecim označava samo ranije ZIP-ove i ništa ne briše", async () => {
+  const { writeFile } = await import("node:fs/promises");
+  const { oznaciRanijeNevazecim } = await import("../scripts/smoke-nevazeci.mjs");
+  const izlaz = await mkdtemp(join(tmpdir(), "cs-nevazeci-"));
+  try {
+    for (const f of ["carsystem-windows-smoke-aaaaaaa.zip", "carsystem-windows-smoke-bbbbbbb.zip", "drugo.zip"]) {
+      await writeFile(join(izlaz, f), "x");
+    }
+    // Bez novog ZIP-a nema proglašavanja.
+    assert.throws(() =>
+      oznaciRanijeNevazecim({ izlaz, zipIme: "carsystem-windows-smoke-ccccccc.zip", kratki: "ccccccc", handoffIme: "H.md" }),
+    );
+    assert.deepEqual((await readdir(izlaz)).filter((f) => f.startsWith("NEVAZECI")), []);
+
+    const raniji = oznaciRanijeNevazecim({
+      izlaz, zipIme: "carsystem-windows-smoke-bbbbbbb.zip", kratki: "bbbbbbb", handoffIme: "WINDOWS-HANDOFF-bbbbbbb.md",
+    });
+    assert.deepEqual(raniji, ["carsystem-windows-smoke-aaaaaaa.zip"]);
+    const fajlovi = (await readdir(izlaz)).sort();
+    assert.ok(fajlovi.includes("NEVAZECI-aaaaaaa.md"));
+    assert.ok(!fajlovi.includes("NEVAZECI-bbbbbbb.md"), "novi paket je proglašen nevažećim");
+    assert.ok(fajlovi.includes("carsystem-windows-smoke-aaaaaaa.zip"), "stari ZIP je obrisan");
+    assert.match(await readFile(join(izlaz, "NEVAZECI-aaaaaaa.md"), "utf8"), /carsystem-windows-smoke-bbbbbbb\.zip/);
+  } finally {
+    await rm(izlaz, { recursive: true, force: true });
+  }
+});
+
+/* =========================================================================
  * Statička provera allowliste — brza, bez pakovanja, dokazuje da je fix TU.
  * ====================================================================== */
 
@@ -47,6 +95,10 @@ test("[paket] ULAZI allowlista sadrži sve WIN-01 fajlove i njihove zavisnosti",
     "connector/windows/PathGuards.ps1",
     "connector/windows/harden-install-dir.ps1",
     "connector/windows/verify-invoice-folder.ps1",
+    "connector/windows/instaliraj.ps1",
+    "connector/windows/podesi.ps1",
+    "connector/windows/provera.ps1",
+    "connector/windows/vrati-prethodnu.ps1",
     "connector/windows/OFFICE-INSTALL.md",
     "connector/test/windows-install-hardening.test.mjs",
     "connector/bin/connector.mjs",

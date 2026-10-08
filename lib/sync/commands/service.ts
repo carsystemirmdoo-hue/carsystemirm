@@ -5,6 +5,7 @@ import {
   OTVORENA_STANJA,
   syncCommandEvents,
   syncCommands,
+  syncDeviceCycles,
   syncDevices,
   TERMINALNA_STANJA,
   type SyncCommandStatus,
@@ -491,6 +492,22 @@ export async function pregledUredjaja(): Promise<
     sourceSystem: string;
     issuerCode: string;
     lastSeenAt: string | null;
+    /* Izveštaj ciklusa (0034); prazno za konektor pre 0.3.9. */
+    lastCycleAt: string | null;
+    lastCycleOutcome: "obradjeno" | "preskoceno" | "greska" | null;
+    lastScanCompletedAt: string | null;
+    nextExpectedCycleAt: string | null;
+    poslednjiCiklusi: {
+      cycleAt: string;
+      outcome: "obradjeno" | "preskoceno" | "greska";
+      reason: string | null;
+      scanCompleted: boolean;
+      scanned: number | null;
+      newDocuments: number | null;
+      sent: number | null;
+      errorCode: string | null;
+      connectorVersion: string | null;
+    }[];
     poslednjaKomanda: {
       id: string;
       status: SyncCommandStatus;
@@ -524,6 +541,28 @@ export async function pregledUredjaja(): Promise<
       sourceSystem: u.sourceSystem,
       issuerCode: u.issuerCode,
       lastSeenAt: u.lastSeenAt ? u.lastSeenAt.toISOString() : null,
+      lastCycleAt: u.lastCycleAt ? u.lastCycleAt.toISOString() : null,
+      lastCycleOutcome: u.lastCycleOutcome ?? null,
+      lastScanCompletedAt: u.lastScanCompletedAt ? u.lastScanCompletedAt.toISOString() : null,
+      nextExpectedCycleAt: u.nextExpectedCycleAt ? u.nextExpectedCycleAt.toISOString() : null,
+      poslednjiCiklusi: (
+        await db
+          .select()
+          .from(syncDeviceCycles)
+          .where(eq(syncDeviceCycles.deviceId, u.id))
+          .orderBy(desc(syncDeviceCycles.cycleAt))
+          .limit(12)
+      ).map((c) => ({
+        cycleAt: c.cycleAt.toISOString(),
+        outcome: c.outcome,
+        reason: c.reason,
+        scanCompleted: c.scanCompleted,
+        scanned: c.scanned,
+        newDocuments: c.newDocuments,
+        sent: c.sent,
+        errorCode: c.errorCode,
+        connectorVersion: c.connectorVersion,
+      })),
       poslednjaKomanda: k
         ? {
             id: k.id,

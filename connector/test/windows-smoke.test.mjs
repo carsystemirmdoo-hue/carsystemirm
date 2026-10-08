@@ -34,7 +34,28 @@ const guard = (t) => {
   return false;
 };
 
+/** Ocena poziva .ps1: tačan izlaz + oznaka skripte, vreme za poređenje sa antivirusom. */
+const { oceniPozivSkripte, zadatakPremaSchtasks } = await import(new URL("./task-poziv.mjs", import.meta.url).href);
+
 const D = (p) => new URL(`../dist/connector/src/${p}`, import.meta.url).href;
+
+/**
+ * Bezbedan sažetak PowerShell greške: identifikator, kategorija, skripta i red.
+ *
+ * Bez poruke i bez putanje — poruka može da nosi korisničko ime iz putanje
+ * paketa. Isti oblik koristi `run-smoke.mjs` u `W13`.
+ */
+function powershellSazetak(tekst) {
+  const id = /FullyQualifiedErrorId\s*:\s*([A-Za-z0-9_.,-]+)/.exec(tekst)?.[1];
+  const kategorija = /CategoryInfo\s*:\s*([A-Za-z]+)/.exec(tekst)?.[1];
+  const mesto = /[\\/]([A-Za-z0-9_-]+\.ps1):(\d+)\s+char:(\d+)/.exec(tekst);
+  const delovi = [
+    id && `id=${id}`,
+    kategorija && `kategorija=${kategorija}`,
+    mesto && `mesto=${mesto[1]}:${mesto[2]}:${mesto[3]}`,
+  ].filter(Boolean);
+  return delovi.length > 0 ? delovi.join(" ") : "bez PowerShell identifikatora greške";
+}
 
 /* =========================================================================
  * W13 poziv — statička provera IZVORNOG run-smoke.mjs, cross-platform.
@@ -91,6 +112,97 @@ test("W13 poziva task.ps1 sa -Action install i -Mode Smoke, nikad -Apply ili Pro
  * DPAPI
  * ====================================================================== */
 
+/* =========================================================================
+ * Ručne provere su IZVAN [WIN] skupa — statička provera, cross-platform.
+ *
+ * Kancelarijski smoke 45a3460 je imao dva `[WIN]` testa koji sami sebe
+ * bezuslovno preskaču, a `W15-win` je dozvoljavao najviše jedan preskok.
+ * Automatski prolaz tako nije mogao da bude `SMOKE PASS` ni na ispravnoj
+ * mašini. Ručne provere sada žive u runneru i prijavljuju se odvojeno.
+ * ====================================================================== */
+
+test("nijedan [WIN] test ne preskače sam sebe bezuslovno", async () => {
+  const tekst = await readFile(fileURLToPath(import.meta.url), "utf8");
+  const obrazac = new RegExp("if \\(guard\\(t\\)\\) return;\\s*t\\." + "skip\\(");
+  assert.doesNotMatch(tekst, obrazac, "ručna provera je ponovo maskirana kao [WIN] test");
+});
+
+test("runner prijavljuje ručne provere kao MANUAL_NOT_EXECUTED i ne dozvoljava [WIN] preskok", async () => {
+  const tekst = await readFile(pronadjiRunSmoke(), "utf8");
+  assert.match(tekst, /const RUCNO_NIJE_IZVRSENO = "MANUAL_NOT_EXECUTED";/);
+  for (const id of ["RUCNO-DPAPI-NALOG", "RUCNO-TASK-APPLY"]) {
+    assert.match(tekst, new RegExp(`id: "${id}"`), `nedostaje ručna provera ${id}`);
+  }
+  // Ručne provere se nikad ne izvršavaju kroz `provera(...)`.
+  assert.doesNotMatch(tekst, /^provera\("RUCNO-/m);
+
+  const w15win = tekst.slice(tekst.indexOf('provera("W15-win"'), tekst.indexOf("Rezultat\n"));
+  assert.match(w15win, /preskoceniWin > 0/, "W15-win ponovo toleriše preskočen [WIN] test");
+  assert.doesNotMatch(w15win, /preskoceniWin > 1/);
+  // Ručne provere su u oba izveštaja.
+  assert.match(tekst, /## Ručne provere — NISU izvršene/);
+  assert.match(tekst, /rucneProvere: RUCNE_PROVERE\.map/);
+});
+
+/* =========================================================================
+ * Kodiranje PowerShell skripti — statička provera, cross-platform.
+ *
+ * Kancelarijski smoke 45a3460: `task.ps1` je u PODRAZUMEVANOM dry-run režimu
+ * izlazio sa 1 na Windows PowerShell 5.1, uz ispravnu politiku izvršavanja.
+ *
+ * Uzrok: skripta je UTF-8 BEZ BOM-a, a sadrži `—`, `ž`, `č`. Windows PowerShell
+ * 5.1 takav fajl čita u ANSI kodnoj strani (cp1250/cp1252). Poslednji bajt
+ * crte `—` (E2 80 94) tamo postaje `”` (U+201D), koji PowerShell tokenizer
+ * prihvata kao ZAVRŠNI navodnik — pa `throw "Ne postoji $exe — proveri"`
+ * prekida string usred poruke i cela skripta pada na parsiranju, pre ijedne
+ * provere. PowerShell 7 čita UTF-8 podrazumevano, zato se ovo ne vidi van
+ * Windows PowerShell-a.
+ *
+ * Ugovor: svaka `.ps1` skripta počinje UTF-8 BOM-om. Tada i 5.1 i 7 čitaju isti
+ * tekst, bez obzira na jezik sistema.
+ * ====================================================================== */
+
+const SKRIPTE_DIR = fileURLToPath(new URL("../windows/", import.meta.url));
+const BOM = Buffer.from([0xef, 0xbb, 0xbf]);
+
+test("vektor je stvaran: `—` u ANSI kodnoj strani postaje navodnik", () => {
+  for (const kodna of ["windows-1250", "windows-1252"]) {
+    const tekst = new TextDecoder(kodna).decode(Buffer.from('"a — b"', "utf8"));
+    assert.ok(tekst.includes("\u201d"), `${kodna}: vektor nije reprodukovan`);
+  }
+});
+
+test("svaka .ps1 skripta počinje UTF-8 BOM-om", async () => {
+  const { readdir } = await import("node:fs/promises");
+  const skripte = (await readdir(SKRIPTE_DIR)).filter((f) => f.endsWith(".ps1"));
+  assert.ok(skripte.includes("task.ps1") && skripte.includes("PathGuards.ps1"));
+
+  const bezBoma = [];
+  for (const ime of skripte) {
+    const bajtovi = await readFile(join(SKRIPTE_DIR, ime));
+    if (!bajtovi.subarray(0, 3).equals(BOM)) bezBoma.push(ime);
+  }
+  assert.deepEqual(bezBoma, [], `bez BOM-a (5.1 ih čita kao ANSI): ${bezBoma.join(", ")}`);
+});
+
+test("bez BOM-a nijedna .ps1 skripta ne bi čitala isti tekst u ANSI kodnoj strani", async () => {
+  /*
+   * Kontrola ugovora iznad: pokazuje da BOM ovde NIJE kozmetika. Svaka skripta
+   * koja ima ne-ASCII znak menja značenje kada se pročita kao cp1250 — i bar
+   * `task.ps1` i `PathGuards.ps1` time dobijaju „pametne“ navodnike u kodu.
+   */
+  const { readdir } = await import("node:fs/promises");
+  const pogodjene = [];
+  for (const ime of (await readdir(SKRIPTE_DIR)).filter((f) => f.endsWith(".ps1"))) {
+    let bajtovi = await readFile(join(SKRIPTE_DIR, ime));
+    if (bajtovi.subarray(0, 3).equals(BOM)) bajtovi = bajtovi.subarray(3);
+    const ansi = new TextDecoder("windows-1250").decode(bajtovi);
+    if (/[\u201c\u201d\u201e]/.test(ansi)) pogodjene.push(ime);
+  }
+  assert.ok(pogodjene.includes("task.ps1"), "task.ps1 više nema vektor — proveriti da li je test i dalje potreban");
+  assert.ok(pogodjene.includes("PathGuards.ps1"));
+});
+
 test("[WIN] DPAPI Protect/Unprotect vraća isti ključ", async (t) => {
   if (guard(t)) return;
   const dpapi = await import(D("keystore/windows-dpapi.mjs"));
@@ -124,28 +236,111 @@ test("[WIN] DPAPI Protect/Unprotect vraća isti ključ", async (t) => {
   }
 });
 
-test("[WIN] tajna ne prolazi kroz komandnu liniju", async (t) => {
+test("[WIN] DPAPI bez procesa-deteta: nativni modul, tajna ne prolazi kroz komandnu liniju", async (t) => {
   if (guard(t)) return;
   const { readFile } = await import("node:fs/promises");
   const izvor = await readFile(
     new URL("../dist/connector/src/keystore/windows-dpapi.mjs", import.meta.url),
     "utf8",
   );
+  const kod = izvor.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
   /*
-   * Materijal ide kao red na `stdin`. Interpolacija u argumente bi ga ostavila
-   * u `Win32_Process` i u alatima za nadzor procesa.
+   * DPAPI ide kroz nativni modul u procesu konektora (Avast blokira
+   * „PowerShell + ProtectedData"). Nema `powershell.exe`, nema stdin-a, nema
+   * argumenata sa podatkom — nema procesa-deteta uopšte.
    */
-  assert.match(izvor, /stdin\.write/);
-  assert.match(izvor, /"-Command", "-"/);
-  assert.doesNotMatch(izvor, /-Command["']?\s*\+/, "komanda se sastavlja spajanjem stringova");
+  assert.match(kod, /process\.dlopen/);
+  assert.doesNotMatch(kod, /child_process|spawn|powershell|EncodedCommand|ProtectedData/i);
 });
 
-test("[WIN] DPAPI drugog naloga ne otključava ključ", async (t) => {
+test("[WIN] nativni modul: SHA-256, učitavanje, zastiti/otkljucaj i odbijanje izmenjenog bloba", async (t) => {
   if (guard(t)) return;
-  t.skip(
-    "Traži drugi Windows nalog i ručno pokretanje pod njim. " +
-      "Postupak je opisan u docs/b2b/21; automatski se ne izvršava.",
-  );
+  const dpapi = await import(D("keystore/windows-dpapi.mjs"));
+  const { createHash } = await import("node:crypto");
+  const { readFile } = await import("node:fs/promises");
+  const sha = createHash("sha256").update(await readFile(dpapi.NATIVNI_MODUL)).digest("hex");
+  assert.equal(sha, dpapi.NATIVNI_MODUL_SHA256, "modul u paketu nije isporučena verzija");
+  const v = await dpapi.ucitajNativni();
+  assert.equal(typeof v.protectData, "function");
+
+  /*
+   * Podatak je sintetička konstanta. Isto što D05/D06 mere na kancelarijskom
+   * računaru, kroz stvarni `dpapiOperacija`.
+   */
+  const podatak = Buffer.from("cs-kanal-proba-sinteticki");
+  const blob = Buffer.from(await dpapi.dpapiOperacija("zastiti", podatak));
+  assert.ok(!blob.includes(podatak), "blob sadrži čitljiv podatak");
+  const nazad = await dpapi.dpapiOperacija("otkljucaj", blob);
+  assert.deepEqual(Buffer.from(nazad), podatak, "DPAPI nije vratio isti podatak");
+
+  blob[blob.length - 1] ^= 0xff;
+  await assert.rejects(dpapi.dpapiOperacija("otkljucaj", blob), (e) => {
+    assert.match(e.code, /^dpapi_unprotect_failed(_[0-9a-f]{8})?$/);
+    assert.doesNotMatch(e.message, /[A-Za-z]:\\|Error code/);
+    return true;
+  });
+
+  // proveri() — Protect i Unprotect nad konstantom.
+  const rez = await dpapi.proveri();
+  assert.equal(rez.ok, true);
+  assert.equal(rez.kanal, "nativni");
+});
+
+test("[WIN] init dva puta: isti otisak, ključ nigde u izlazu", async (t) => {
+  if (guard(t)) return;
+  const cmd = fileURLToPath(new URL("../dist/connector.cmd", import.meta.url));
+  const baza = await mkdtemp(join(tmpdir(), "cs-win-init-"));
+  const env = {
+    ...process.env,
+    CS_CONNECTOR_STATE_DIR: join(baza, "stanje"),
+    CS_CONNECTOR_CONFIG: join(baza, "nema-konfiguracije.json"),
+  };
+  const pokreni = (...args) => {
+    const r = spawnSync("cmd.exe", ["/c", cmd, ...args], { encoding: "utf8", env, timeout: 120_000 });
+    let json = {};
+    try {
+      json = JSON.parse(r.stdout ?? "");
+    } catch {
+      /* izlaz se ne prepisuje u poruku testa — mogao bi da nosi putanju */
+    }
+    return { kod: r.status, izlaz: `${r.stdout ?? ""}${r.stderr ?? ""}`, json };
+  };
+
+  try {
+    const prvi = pokreni("init");
+    const d1 = prvi.json;
+    assert.equal(prvi.kod, 0, `init nije uspeo: kod=${d1.kod ?? "?"}`);
+    assert.equal(d1.status, "napravljen");
+    assert.match(d1.adapter, /dpapi/);
+
+    const drugi = pokreni("init");
+    assert.equal(drugi.json.status, "vec_postoji", "ponovljen init je zamenio ključ");
+    assert.equal(drugi.kod, 1);
+
+    // export-key čita ključ nazad kroz Unprotect (nativni DPAPI).
+    const izvoz = pokreni("export-key");
+    const d3 = izvoz.json;
+    assert.equal(izvoz.kod, 0, `export-key nije uspeo: kod=${d3.kod ?? "?"}`);
+    assert.equal(d3.fingerprint, d1.fingerprint, "otisak se promenio između poziva");
+
+    /*
+     * Nijedan izlaz ne nosi privatni materijal. Javni ključ (SPKI) sme da se
+     * pojavi — on se predaje za registraciju — i zato se izuzima po vrednosti.
+     */
+    for (const [ime, r] of [["init", prvi], ["init ponovo", drugi], ["export-key", izvoz]]) {
+      const bezJavnog = r.izlaz.split(d1.javniKljucSpkiBase64).join("").split(d1.fingerprint).join("");
+      assert.doesNotMatch(bezJavnog, /-----BEGIN/, `${ime}: PEM u izlazu`);
+      assert.doesNotMatch(bezJavnog, /[A-Za-z0-9+/]{40,}={0,2}/, `${ime}: dugačak base64 u izlazu`);
+      assert.doesNotMatch(bezJavnog, /[A-Za-z]:\\|file:[/]{3}/, `${ime}: putanja u izlazu`);
+      assert.doesNotMatch(bezJavnog, /\n\s+at\s/, `${ime}: stack trace u izlazu`);
+    }
+
+    const fajl = await readFile(join(baza, "stanje", "device-key.bin"), "utf8");
+    assert.match(fajl, /^cs-dpapi-v1\n/, "fajl ključa nije u DPAPI obliku");
+    assert.doesNotMatch(fajl, /BEGIN [A-Z ]*PRIVATE KEY/);
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
 });
 
 /* =========================================================================
@@ -163,12 +358,19 @@ test("[WIN] putanja sa razmacima, srpskim slovima i UNC oblikom", async (t) => {
     await mkdir(folder, { recursive: true });
     await cp(
       fileURLToPath(new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url)),
-      join(folder, "Račun 42.PDF"),
+      join(folder, "Faktura 42.PDF"),
+    );
+    // PDF bez oznake fakture u istom folderu — na Windowsu se takođe ne uzima.
+    await cp(
+      fileURLToPath(new URL("../../fixtures/dev/biznisoft/jedna-stavka.pdf", import.meta.url)),
+      join(folder, "Račun 43.PDF"),
     );
 
     const { koren } = await skener.proveriIzvor(folder);
-    const { kandidati } = await skener.nadjiKandidate(koren);
+    const { kandidati, folderi } = await skener.nadjiKandidate(koren);
     assert.equal(kandidati.length, 1);
+    assert.ok(kandidati[0].putanja.endsWith("Faktura 42.PDF"));
+    assert.equal(folderi[0].nijeFakturaPoNazivu, 1);
 
     /*
      * UNC / mrežni disk NIJE proglašen podržanim.
@@ -197,8 +399,8 @@ test("[WIN] junction ka putanji van korena NIJE praćen", async (t) => {
     const uzorak = fileURLToPath(
       new URL("../../fixtures/dev/biznisoft/vise-stavki.pdf", import.meta.url),
     );
-    await cp(uzorak, join(koren, "FAKTURE 2026", "nasa.pdf"));
-    await cp(uzorak, join(spolja, "tudja.pdf"));
+    await cp(uzorak, join(koren, "FAKTURE 2026", "FAK nasa.pdf"));
+    await cp(uzorak, join(spolja, "FAK tudja.pdf"));
 
     /*
      * `mklink /J` pravi junction — Windows reparse tačku koja ne traži
@@ -225,7 +427,7 @@ test("[WIN] junction ka putanji van korena NIJE praćen", async (t) => {
     const { kandidati, preskoceno } = await skener.nadjiKandidate(razresen);
     const imena = kandidati.map((k) => k.putanja.split("\\").pop());
 
-    assert.deepEqual(imena, ["nasa.pdf"], "junction je uvukao dokument van korena");
+    assert.deepEqual(imena, ["FAK nasa.pdf"], "junction je uvukao dokument van korena");
     assert.ok(
       preskoceno.some((x) => x.razlog === "podfolder_symlink" || x.razlog === "podfolder_van_korena"),
       "junction nije prijavljen kao preskočen",
@@ -329,45 +531,51 @@ test("[WIN] skripta zadatka je podrazumevano dry-run (Smoke)", async (t) => {
    * `-Mode Smoke` je obavezan od WIN-INSTALL-01 korekcije — bez njega skripta
    * baca grešku pre bilo koje provere.
    */
-  const izlaz = execFileSync(
+  const pocetak = new Date();
+  const r = spawnSync(
     "powershell.exe",
     ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
      "-Action", "install", "-Mode", "Smoke", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
-    { encoding: "utf8" },
+    { encoding: "utf8", timeout: 120_000 },
   );
-  assert.match(izlaz, /\[dry-run\]/);
+  /*
+   * Izlaz TAČNO 0 i oznaka `[dry-run]` koju piše skripta. Vreme i izlazni kod
+   * idu u TAP dijagnostiku, da se prijava antivirusa poveže sa pozivom.
+   */
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 0, oznaka: /\[dry-run\]/, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`task.ps1 dry-run: ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `task.ps1 dry-run: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 
-  const postoji = execFileSync(
-    "powershell.exe",
-    ["-NoProfile", "-NonInteractive", "-Command",
-     "if (Get-ScheduledTask -TaskName CarsystemConnectorSMOKE -TaskPath '\\Carsystem\\' -ErrorAction SilentlyContinue) { 'DA' } else { 'NE' }"],
-    { encoding: "utf8" },
-  ).trim();
-  assert.equal(postoji, "NE", "dry-run je registrovao zadatak");
+  // schtasks.exe, ne Get-ScheduledTask (CIM ume da vrati 0x80070002 = lažno „ne postoji").
+  const z = zadatakPremaSchtasks(spawnSync, "\\Carsystem\\CarsystemConnectorSMOKE");
+  assert.equal(z.greska, null, "schtasks.exe se nije pokrenuo");
+  assert.equal(z.postoji, false, "dry-run je registrovao zadatak");
 });
 
 test("[WIN] install bez -Mode se odbija pre bilo koje provere", async (t) => {
   if (guard(t)) return;
   const skripta = fileURLToPath(new URL("../windows/task.ps1", import.meta.url));
-  assert.throws(() =>
-    execFileSync(
-      "powershell.exe",
-      ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
-       "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
-      { encoding: "utf8" },
-    ),
+  const pocetak = new Date();
+  const r = spawnSync(
+    "powershell.exe",
+    ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", skripta,
+     "-Action", "install", "-PackagePath", fileURLToPath(new URL("../dist/", import.meta.url))],
+    { encoding: "utf8", timeout: 120_000 },
   );
-});
-
-test("[WIN] registracija i uklanjanje zadatka (Smoke i Production)", async (t) => {
-  if (guard(t)) return;
-  t.skip(
-    "Menja Task Scheduler na mašini; pokreće se ručno na izolovanom Windows " +
-      "okruženju: `task.ps1 -Action install -Mode Smoke -Apply` / `-Mode Production -Apply`, " +
-      "pa odgovarajući `-Action uninstall -Mode ... -Apply`. Potvrditi da su registrovana " +
-      "DVA različita imena zadatka (CarsystemConnectorSMOKE, CarsystemConnector) i da " +
-      "uklanjanje jednog ne dira drugi.",
-  );
+  /*
+   * Odbijanje mora biti BAŠ ono zbog `-Mode`: izlaz TAČNO 1 (neuhvaćen
+   * `throw` u -File režimu) i poruka skripte. Golo „nenulti izlaz" bi prošlo
+   * i kada proces prekine antivirus (kancelarija d5e03d1).
+   */
+  const o = oceniPozivSkripte({
+    kod: r.status, signal: r.signal, stdout: r.stdout, stderr: r.stderr,
+    ocekivanKod: 1, oznaka: /-Mode je obavezan/, pocetak, kraj: new Date(),
+  });
+  t.diagnostic(`task.ps1 bez -Mode: ${o.detalj}`);
+  assert.equal(o.ishod, "ok", `task.ps1 bez -Mode: ${o.kod}; ${o.detalj}; ${powershellSazetak(`${r.stdout}${r.stderr}`)}`);
 });
 
 /* =========================================================================
@@ -402,10 +610,42 @@ test("[WIN] spakovan konektor odbija test skladište ključa", async (t) => {
   /*
    * Na Windowsu je DPAPI dostupan, pa se test adapter ionako ne bira. Ovo
    * potvrđuje da ni izričita promenljiva ne menja izbor u paketu.
+   *
+   * Izolovano okruženje: ranije je `doctor` radio nad PRAVIM
+   * `%LOCALAPPDATA%\CarsystemConnector` naloga (i pravio taj folder), a bez
+   * konfiguracije izlazi sa 1 — `execFileSync` je to prijavio kao pad, iako
+   * adapter nije ni pogledan.
    */
-  const izlaz = execFileSync("cmd.exe", ["/c", cmd, "doctor"], {
-    encoding: "utf8",
-    env: { ...process.env, CS_CONNECTOR_INSECURE_KEYSTORE: "1" },
-  });
-  assert.doesNotMatch(izlaz, /test-insecure/, "paket je izabrao nebezbedno skladište");
+  const baza = await mkdtemp(join(tmpdir(), "cs-win-doctor-"));
+  try {
+    const r = spawnSync("cmd.exe", ["/c", cmd, "doctor"], {
+      encoding: "utf8",
+      timeout: 120_000,
+      env: {
+        ...process.env,
+        CS_CONNECTOR_INSECURE_KEYSTORE: "1",
+        CS_CONNECTOR_STATE_DIR: join(baza, "stanje"),
+        CS_CONNECTOR_CONFIG: join(baza, "nema-konfiguracije.json"),
+      },
+    });
+    let d = null;
+    try {
+      d = JSON.parse(r.stdout ?? "");
+    } catch {
+      /* izlaz se ne prepisuje u poruku — mogao bi da nosi putanju */
+    }
+    assert.ok(d, `doctor nije vratio JSON (izlaz ${r.status})`);
+    assert.doesNotMatch(r.stdout, /test-insecure/, "paket je izabrao nebezbedno skladište");
+
+    const skladiste = d.nalazi.find((n) => n.provera === "skladiste_kljuca");
+    assert.equal(skladiste?.status, "ok", `skladište: ${skladiste?.detalj?.kod ?? skladiste?.status}`);
+    assert.match(String(skladiste.detalj.adapter), /dpapi/i);
+
+    // Jedini očekivani problem je namerno odsutna konfiguracija.
+    const problemi = d.nalazi.filter((n) => n.status === "greska").map((n) => n.provera);
+    assert.deepEqual(problemi, ["konfiguracija"]);
+    assert.equal(r.status, 1);
+  } finally {
+    await rm(baza, { recursive: true, force: true });
+  }
 });

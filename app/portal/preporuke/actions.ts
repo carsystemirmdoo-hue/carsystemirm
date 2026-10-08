@@ -2,11 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
-import { z } from "zod";
 import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
 import { registerAttempt } from "@/lib/auth/rate-limit-service";
 import { requireCapability } from "@/lib/authz/session";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
+import { parseAsOfDate } from "@/lib/recommendations/asOfDate.mjs";
+import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
 import { RecomputeError, recomputeRecommendations } from "@/lib/recommendations/recompute";
 
@@ -32,9 +33,7 @@ const PUTANJA = "/portal/preporuke";
  * izveštaju. Da ga akcija uzima od `new Date()`, dva pokretanja u razmaku od
  * pola noći dala bi različite rezultate bez ijednog vidljivog razloga.
  */
-const shema = z.object({
-  asOfDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Datum mora biti u obliku GGGG-MM-DD."),
-});
+// Provera: `parseAsOfDate` (prazno, oblik, postojanje u kalendaru, ne posle danas).
 
 export async function recomputeAction(
   _previous: RecomputeState,
@@ -52,9 +51,9 @@ export async function recomputeAction(
     return { error: "Preporuke su isključene na serveru.", ok: null };
   }
 
-  const parsed = shema.safeParse({ asOfDate: formData.get("asOfDate") });
-  if (!parsed.success) {
-    return { error: "Datum mora biti u obliku GGGG-MM-DD.", ok: null };
+  const parsed = parseAsOfDate(formData.get("asOfDate"), belgradeDate(new Date()));
+  if (!parsed.ok) {
+    return { error: parsed.error, ok: null };
   }
 
   /*
@@ -81,7 +80,7 @@ export async function recomputeAction(
   try {
     const rezime = await recomputeRecommendations(
       scope,
-      { asOfDate: parsed.data.asOfDate },
+      { asOfDate: parsed.asOfDate },
       { id: actor.id, name: actor.name, role: actor.role },
     );
     revalidatePath(PUTANJA);

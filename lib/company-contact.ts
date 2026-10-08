@@ -4,8 +4,8 @@
  *
  * Telefon kancelarije, glavna e-pošta i regionalni brojevi komercijalista su
  * direktno potvrđeni od firme (2026-10-01, docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md
- * GAP-001 i GAP-002). Vrednost `null` znači „nije potvrđeno": potrošači tada
- * izostavljaju red, a ne prikazuju izmišljen podatak (GAP-004 radno vreme).
+ * GAP-001, GAP-002 i GAP-004 radno vreme). Vrednost `null` znači „nije
+ * potvrđeno": potrošači tada izostavljaju red, a ne prikazuju izmišljen podatak.
  *
  * Prikaz je u domaćem obliku („022 558 501"); `tel:` je uvek međunarodni
  * oblik bez razmaka („tel:+38122558501").
@@ -54,6 +54,11 @@ export type CompanyContact = {
   email: string;
   emailHref: string;
   workingHours: string | null;
+  /**
+   * Isto radno vreme u mašinskom obliku (schema.org `OpeningHoursSpecification`).
+   * Mora se slagati sa `workingHours`; proverava `lib/content-qa/companyContact.test.mts`.
+   */
+  workingHoursSpec: { days: string[]; opens: string; closes: string } | null;
   /** Regionalni komercijalisti — prikazuju se samo na /kontakt. */
   salesContacts: SalesContact[];
   partnerNetworkNote: string;
@@ -107,8 +112,13 @@ export const companyContact: CompanyContact = {
   // Direktna potvrda firme, 2026-10-01 (GAP-002).
   email: "carsystemirmdoo@gmail.com",
   emailHref: "mailto:carsystemirmdoo@gmail.com",
-  // Nijedan izvor ne potvrđuje radno vreme (GAP-004).
-  workingHours: null,
+  // Direktna potvrda firme, 2026-10-01 (GAP-004).
+  workingHours: "ponedeljak–petak, 08:00–16:00",
+  workingHoursSpec: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "16:00",
+  },
   // Direktna potvrda firme, 2026-10-01. Regioni nisu dodeljeni prodavnicama:
   // lokator nema proverenu regionalnu klasifikaciju.
   salesContacts: [

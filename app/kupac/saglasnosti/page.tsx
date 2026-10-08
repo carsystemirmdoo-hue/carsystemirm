@@ -38,7 +38,7 @@ const SOURCE_LABEL: Record<string, string> = {
  * isključivo iz sesije.
  */
 export default async function CustomerConsentsPage() {
-  const session = await requireCustomerSession();
+  const session = await requireCustomerSession("/kupac/saglasnosti");
 
   const [state, history] = await Promise.all([
     loadConsentState(session.accountId),
@@ -55,7 +55,7 @@ export default async function CustomerConsentsPage() {
   }));
 
   return (
-    <main className="portal-main">
+    <>
       <PageHeader
         eyebrow="Moj nalog"
         title="Saglasnosti"
@@ -67,11 +67,13 @@ export default async function CustomerConsentsPage() {
           title="Vaše odluke"
           description="Podrazumevano stanje je bez saglasnosti."
         />
+        <div className="portal-panel-body">
         <ConsentControls rows={rows} />
         <p className="portal-login-hint">
           Poruke o nalogu — poziv, promena lozinke i obaveštenja o bezbednosti —
           nisu marketing i stižu bez obzira na ove odluke.
         </p>
+        </div>
       </Panel>
 
       <Panel>
@@ -79,6 +81,7 @@ export default async function CustomerConsentsPage() {
           title="Istorija"
           description="Povlačenje ne briše raniji zapis; dodaje se nov događaj."
         />
+        <div className="portal-panel-body">
         {history.length === 0 ? (
           <p>Još nema nijedne zabeležene odluke.</p>
         ) : (
@@ -109,11 +112,12 @@ export default async function CustomerConsentsPage() {
             </tbody>
           </table>
         )}
+        </div>
       </Panel>
 
       <p>
         <Link href="/kupac">Nazad na nalog</Link>
       </p>
-    </main>
+    </>
   );
 }

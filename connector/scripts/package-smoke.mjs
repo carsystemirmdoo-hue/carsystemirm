@@ -58,6 +58,8 @@ const ULAZI = [
   { izvor: "connector/test/scanner-store.test.mjs", cilj: "connector/test/scanner-store.test.mjs", tip: "fajl" },
   { izvor: "connector/test/commands.test.mjs", cilj: "connector/test/commands.test.mjs", tip: "fajl" },
   { izvor: "connector/test/windows-smoke.test.mjs", cilj: "connector/test/windows-smoke.test.mjs", tip: "fajl" },
+  // Ocena poziva .ps1 (vreme, izlaz, oznaka); uvoze je [WIN] testovi i runner (W13).
+  { izvor: "connector/test/task-poziv.mjs", cilj: "connector/test/task-poziv.mjs", tip: "fajl" },
   /*
    * WIN-INSTALL-01 korekcija: proverava iste skripte ispod, statički
    * (parsiranje, dry-run, forbidden-path, disposable-folder ACL) bez
@@ -78,6 +80,8 @@ const ULAZI = [
    * pokrene — otkriveno pri pripremi P0-WIN-02A paketa.
    */
   { izvor: "connector/windows/PathGuards.ps1", cilj: "connector/windows/PathGuards.ps1", tip: "fajl" },
+  // Stanje/pokretanje/uklanjanje zadatka kroz COM + schtasks (ne CIM); dot-source-uju ga task.ps1 i ostale.
+  { izvor: "connector/windows/Zadaci.ps1", cilj: "connector/windows/Zadaci.ps1", tip: "fajl" },
   /*
    * Kancelarijska (Production) strogost — nose se radi PowerShell parser
    * provere i radi kompletnosti korigovanog WIN-01 paketa. `-Apply` se u ovoj
@@ -85,6 +89,15 @@ const ULAZI = [
    */
   { izvor: "connector/windows/harden-install-dir.ps1", cilj: "connector/windows/harden-install-dir.ps1", tip: "fajl" },
   { izvor: "connector/windows/verify-invoice-folder.ps1", cilj: "connector/windows/verify-invoice-folder.ps1", tip: "fajl" },
+  /*
+   * Kancelarijska instalacija (docs/b2b/49). Smoke ih NE izvršava; nose se jer
+   * ih statički testovi (`windows-install-hardening.test.mjs`) čitaju.
+   */
+  { izvor: "connector/windows/instaliraj.ps1", cilj: "connector/windows/instaliraj.ps1", tip: "fajl" },
+  { izvor: "connector/windows/podesi.ps1", cilj: "connector/windows/podesi.ps1", tip: "fajl" },
+  { izvor: "connector/windows/provera.ps1", cilj: "connector/windows/provera.ps1", tip: "fajl" },
+  { izvor: "connector/windows/vrati-prethodnu.ps1", cilj: "connector/windows/vrati-prethodnu.ps1", tip: "fajl" },
+  { izvor: "connector/windows/proba-zadatka.ps1", cilj: "connector/windows/proba-zadatka.ps1", tip: "fajl" },
   /*
    * Referentni runbook za KASNIJU kancelarijsku instalaciju — ne za ovaj
    * kućni smoke. Nosi se radi pregleda, ne radi izvršavanja u ovoj fazi.
@@ -195,6 +208,26 @@ const PREGLEDANO = [
   {
     fajl: "connector/windows/verify-invoice-folder.ps1",
     razlog: "`C:\\BizniSoft\\Izvoz\\Fakture` u `.EXAMPLE` bloku je izmišljen primer BizniSoft foldera, ne stvarna putanja.",
+  },
+  {
+    fajl: "connector/windows/instaliraj.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` i `C:\\Users\\nalog\\...` su primeri iz zaglavlja/uputstva skripte, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/podesi.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/provera.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/proba-zadatka.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` u zaglavlju je primer poziva, ne stvarna mašina.",
+  },
+  {
+    fajl: "connector/windows/vrati-prethodnu.ps1",
+    razlog: "`C:\\Program Files\\CarsystemConnector` je primer u zaglavlju skripte, ne stvarna mašina.",
   },
   {
     fajl: "connector/windows/OFFICE-INSTALL.md",
@@ -566,7 +599,9 @@ const handoffTekst = [
   "3. Pokreni `smoke\RUN-SMOKE.cmd`. **Ne kao Administrator.**",
   "4. Jedini prolaz je ispis **`SMOKE PASS`** (izlazni kod 0).",
   "   `SMOKE INCOMPLETE` (4) i `SMOKE FAIL` (1) nisu prolaz. **Ne broj testove** —",
-  "   „9 od 10 [WIN]“ je očekivano, jer je jedan test namerno ručan.",
+  "   nijedan [WIN] test ne sme biti preskočen. Ručne provere RUCNO-DPAPI-NALOG",
+  "   i RUCNO-TASK-APPLY se u rezultatu navode kao MANUAL_NOT_EXECUTED, ne",
+  "   pokreću se u ovom prolazu i ne ulaze u SMOKE PASS.",
   "5. Pošalji `windows-smoke-result-" + KRATKI + ".md` iz `%TEMP%\\Carsystem Smoke ČĆŽŠĐ\\`.",
   "   `testovi-tap.log` **ne šalji**.",
   "",
@@ -600,31 +635,12 @@ if (handoffNalazi.length > 0) {
   process.exit(1);
 }
 
-/* --- 9. Raniji paketi postaju NEVAŽEĆI za predaju. ---------------------- */
+/* --- 9. Raniji paketi se NE označavaju ovde. ---------------------------- */
 /*
- * Ništa se ne briše — stari paket može trebati za poređenje. Ali pored njega
- * ostaje pisan trag da se ne predaje, jer je upravo mešanje dva ZIP-a i bilo
- * uzrok neusklađenog uputstva.
+ * Tek `verify-smoke-package.mjs`, posle provere bez ijednog pada, označava
+ * ranije pakete kao NEVAZECI. Novi ZIP koji provera odbije ne sme da ostavi
+ * stari već proglašen nevažećim.
  */
-const raniji = readdirSync(IZLAZ)
-  .filter((f) => /^carsystem-windows-smoke-[0-9a-f]{7}\.zip$/.test(f) && f !== zipIme);
-for (const stari of raniji) {
-  const kratki = stari.slice("carsystem-windows-smoke-".length, -".zip".length);
-  writeFileSync(
-    join(IZLAZ, `NEVAZECI-${kratki}.md`),
-    [
-      `# NEVAŽEĆI paket — ne predavati`,
-      "",
-      `\`${stari}\``,
-      "",
-      `Zamenjuje ga **\`${zipIme}\`** (HEAD \`${KRATKI}\`), uz \`${HANDOFF_IME}\`.`,
-      "",
-      "Stari se čuva samo radi poređenja. Za predaju i za pokretanje na Windowsu",
-      "važi isključivo paket imenovan iznad.",
-      "",
-    ].join("\n"),
-  );
-}
 
 console.log("");
 console.log(`Paket:   ${ZIP}`);
@@ -633,8 +649,6 @@ console.log(`Fajlova: ${redovi.length}`);
 console.log(`Bajtova: ${zipBajtova}`);
 console.log(`SHA-256: ${zipSha}`);
 console.log(`Handoff: ${HANDOFF}`);
-if (raniji.length > 0) {
-  console.log(`Nevažeći: ${raniji.join(", ")} — označeni NEVAZECI-*.md`);
-}
+console.log("Raniji paketi NISU označeni — to radi `npm run connector:smoke:verify` tek kad prođe.");
 console.log("");
 console.log("Windows smoke se NE izvršava odavde — paket se prenosi i pokreće na Windowsu.");

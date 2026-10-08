@@ -1,10 +1,11 @@
-<#
+﻿<#
 .SYNOPSIS
   Učvršćuje instalacioni (package) folder konektora na least-privilege ACL.
 
 .DESCRIPTION
   WIN-INSTALL-01 (bezbednosni audit): instalacioni folder sadrži izvršni kod
-  konektora (`scanner.mjs`, `client.mjs`, `windows-dpapi.mjs`, `connector.cmd`).
+  konektora (`scanner.mjs`, `client.mjs`, `windows-dpapi.mjs`,
+  `native\dpapi-win32-x64.node` - nativni DPAPI modul, `connector.cmd`).
   `harden-state-dir.ps1` štiti SAMO folder stanja (ključ, red) — ništa dosad
   nije štitilo sam kod. Bez zaštite, bilo ko sa write pravom na tu putanju
   (drugi lokalni nalog na deljenom Desktop-u, malver pod istim nalogom, ili
@@ -52,7 +53,9 @@
 param(
   [Parameter(Mandatory)] [string]$PackagePath,
   [Parameter(Mandatory)] [string]$RunAsAccount,
-  [switch]$Apply
+  [switch]$Apply,
+  # Jedini nalog je administrator (docs/b2b/49): dozvoljeno samo za isti nalog uz ukljucen UAC.
+  [switch]$JedanNalogSaUAC
 )
 
 $ErrorActionPreference = 'Stop'
@@ -96,10 +99,22 @@ catch {
   exit 1
 }
 if ($jeAdmin) {
-  Write-Result 'FAIL' "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — nalog za svakodnevni rad konektora ne sme biti."
-  exit 1
+  $jedan = if ($JedanNalogSaUAC) { Test-JedanNalogSaUAC -AccountName $RunAsAccount } else { $null }
+  if ($jedan -and $jedan.Dozvoljeno) {
+    Write-Result 'PASS' "RunAsAccount '$RunAsAccount' je administrator (jedini nalog); dozvoljeno uz -JedanNalogSaUAC: isti nalog, UAC ukljucen. Konektor ima samo Read & Execute nad ovim folderom (ogranicen token)."
+  }
+  elseif ($jedan) {
+    Write-Result 'FAIL' "-JedanNalogSaUAC nije ispunjen: $($jedan.Razlog)."
+    exit 1
+  }
+  else {
+    Write-Result 'FAIL' "RunAsAccount '$RunAsAccount' je administrator ili SYSTEM — nalog za svakodnevni rad konektora ne sme biti."
+    exit 1
+  }
 }
-Write-Result 'PASS' "RunAsAccount nije administrator ni SYSTEM."
+else {
+  Write-Result 'PASS' "RunAsAccount nije administrator ni SYSTEM."
+}
 
 if ($Apply -and -not (Test-CurrentProcessIsElevated)) {
   Write-Result 'FAIL' "-Apply zahteva administratorska prava. Pokrenite PowerShell kao administrator."
@@ -233,7 +248,8 @@ try {
 
   Set-Acl -LiteralPath $full -AclObject $acl
 
-  $problemi = Test-EffectivePermissions -Path $full -RunAsSid $runAsSid
+  # @(...): pod StrictMode prazna lista postaje $null, a jedan rezultat obican string (pad 0.3.1 na 5.1).
+  $problemi = @(Test-EffectivePermissions -Path $full -RunAsSid $runAsSid)
   if ($problemi.Count -gt 0) {
     throw "Post-verifikacija nije prošla:`n - $($problemi -join "`n - ")"
   }

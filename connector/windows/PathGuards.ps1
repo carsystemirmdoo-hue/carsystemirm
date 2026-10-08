@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Deljene provere putanje i identiteta za Windows hardening skripte.
 
@@ -15,8 +15,8 @@
 
   Identitet se razrešava ISKLJUČIVO preko .NET/Windows API-ja
   (`NTAccount.Translate`, `Get-LocalGroupMember`) — nikad interpolacijom u
-  `-Command` string ili spoljni shell poziv. To je isti razlog zbog kog
-  `windows-dpapi.mjs` šalje materijal kroz `stdin`, ne kroz argumente: naziv
+  `-Command` string ili spoljni shell poziv. Isti princip kao kod kljuca:
+  materijal nikad ne ide kroz argumente procesa. Naziv
   naloga koji dolazi od operatera (potencijalno sa razmacima, navodnicima ili
   Unicode znakovima) ne sme nikad postati deo komande koja se parsira.
 #>
@@ -369,4 +369,32 @@ function Protect-AdminOnlyFolder {
     $acl.AddAccessRule($rule)
   }
   Set-Acl -LiteralPath $Path -AclObject $acl
+}
+
+
+<#
+.SYNOPSIS Kancelarija sa jednim Windows nalogom koji je administrator (docs/b2b/49).
+  Dozvoljeno je samo ako je RunAsAccount ISTI nalog koji pokrece skriptu i
+  ako je UAC ukljucen bez tihog podizanja prava (EnableLUA=1,
+  ConsentPromptBehaviorAdmin<>0). Konektor tada radi sa ogranicenim tokenom.
+#>
+function Get-UacUkljucen {
+  # StrictMode-bezbedno: nepostojece svojstvo registra nije greska nego "nije ukljuceno".
+  $politika = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -ErrorAction SilentlyContinue
+  if (-not $politika) { return $false }
+  $lua = if ($politika.PSObject.Properties['EnableLUA']) { $politika.EnableLUA } else { $null }
+  $saglasnost = if ($politika.PSObject.Properties['ConsentPromptBehaviorAdmin']) { $politika.ConsentPromptBehaviorAdmin } else { $null }
+  return [bool](($lua -eq 1) -and ($null -ne $saglasnost) -and ($saglasnost -ne 0))
+}
+
+function Test-JedanNalogSaUAC {
+  param([Parameter(Mandatory)] [string]$AccountName)
+  $uac = Get-UacUkljucen
+  $isti = $false
+  try {
+    $isti = (New-Object System.Security.Principal.NTAccount($AccountName)).Translate([System.Security.Principal.SecurityIdentifier]).Value -eq
+      [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+  } catch { }
+  $razlog = if (-not $isti) { 'RunAsAccount nije nalog koji pokrece skriptu' } elseif (-not $uac) { 'UAC nije ukljucen ili podize prava tiho' } else { '' }
+  return [pscustomobject]@{ Dozvoljeno = ($isti -and $uac); Razlog = $razlog }
 }

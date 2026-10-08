@@ -10,6 +10,8 @@ import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
+import { defaultAsOfDate } from "@/lib/recommendations/asOfDate.mjs";
+import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import {
   CONFIDENCE_LABELS,
   CONFIDENCE_LEVELS,
@@ -23,6 +25,7 @@ import {
   type RecommendationRow,
 } from "@/lib/recommendations/query";
 import { activeRun, recentRuns } from "@/lib/recommendations/recompute";
+import { parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 import type { RecommendationConfidence, RecommendationStatus } from "@/db/schema";
 
 export const dynamic = "force-dynamic";
@@ -151,6 +154,7 @@ function filterIz(params: {
   status?: string;
   pouzdanost?: string;
   komercijalista?: string;
+  kupci?: string;
 }): RecommendationFilter {
   const statusi = (params.status ?? "")
     .split(",")
@@ -171,6 +175,7 @@ function filterIz(params: {
     salespersonUserId: /^[0-9a-f-]{36}$/i.test(params.komercijalista ?? "")
       ? params.komercijalista
       : undefined,
+    customerStatus: parseCustomerStatusFilter(params.kupci),
   };
 }
 
@@ -182,6 +187,7 @@ export default async function RecommendationsPage({
     status?: string;
     pouzdanost?: string;
     komercijalista?: string;
+    kupci?: string;
   }>;
 }) {
   const user = await requireCapability("view:preporuke", "/portal/preporuke");
@@ -199,7 +205,7 @@ export default async function RecommendationsPage({
     activeRun(),
     recentRuns(5),
     recommendationRows(scope, filter),
-    recommendationStatusCounts(scope, {}),
+    recommendationStatusCounts(scope, { customerStatus: filter.customerStatus }),
     salespeopleInScope(scope),
   ]);
 
@@ -214,13 +220,12 @@ export default async function RecommendationsPage({
     statusi.reduce((s, k) => s + (brojaci[k] ?? 0), 0);
 
   /*
-   * Podrazumevani `as of` je dan poslednjeg uspešnog prolaza, ne „danas".
-   *
-   * Sutra u kancelariji se recompute pokreće za tačno određen dan i taj dan
-   * ulazi u izveštaj. Polje koje se samo puni današnjim datumom navelo bi na
-   * pokretanje bez razmišljanja o tome nad čime se računa.
+   * Podrazumevani `as of` je dan poslednjeg uspešnog prolaza, ne „danas" —
+   * obračun se ponavlja za tačno određen dan koji ulazi u izveštaj. Pre prvog
+   * obračuna polje dobija današnji dan (Beograd); prazno polje je ranije tiho
+   * blokiralo slanje. Datum se u polju može promeniti.
    */
-  const podrazumevaniDatum = run?.asOfDate ?? "";
+  const podrazumevaniDatum = defaultAsOfDate(run?.asOfDate, belgradeDate(new Date()));
 
   return (
     <>
@@ -367,6 +372,14 @@ export default async function RecommendationsPage({
                   {CONFIDENCE_LABELS[c]}
                 </option>
               ))}
+            </select>
+          </label>
+          <label className="portal-field">
+            <span>Kupci</span>
+            <select name="kupci" defaultValue={filter.customerStatus ?? "aktivni"}>
+              <option value="aktivni">aktivni</option>
+              <option value="neaktivni">neaktivni</option>
+              <option value="svi">svi</option>
             </select>
           </label>
           {viditSve && komercijalisti.length > 0 ? (

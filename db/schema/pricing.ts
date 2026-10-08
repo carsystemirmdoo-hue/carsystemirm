@@ -1,4 +1,5 @@
 import {
+  boolean,
   date,
   index,
   integer,
@@ -172,6 +173,13 @@ export const priceRules = pgTable(
     status: priceRuleStatus("status").notNull().default("draft"),
     /** Obavezan obrazložen razlog predloga. */
     reason: text("reason").notNull(),
+    /**
+     * `false` = pravilo važi samo u portalu (npr. primena iz istorije faktura na
+     * pilotu) i NIJE nalog za unos u BizniSoft. Migracija 0035.
+     */
+    biznisoftEntryRequired: boolean("biznisoft_entry_required").notNull().default(true),
+    /** Oznaka serije upisa; služi za opoziv tačno tog upisa. Migracija 0035. */
+    sourceBatch: text("source_batch"),
     proposedBy: uuid("proposed_by").references(() => users.id, {
       onDelete: "restrict",
     }),

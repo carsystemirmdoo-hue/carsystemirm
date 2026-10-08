@@ -11,6 +11,7 @@ import {
   pomenutiIdevi,
   proveriHandoff,
   proveriRunbook,
+  rucneProvere,
   proveriStartHere,
   razorneNaredbe,
   runnerProvere,
@@ -84,7 +85,9 @@ test("START-HERE: obična reč od heks slova NIJE hash", () => {
    * isključuje, pa više ništa ne hvata.
    */
   const nalazi = proveriStartHere({
-    tekst: "Nijedan fajl nije defaced.\nwindows-smoke-result-<shortHead>.md\nsmoke/package-meta.json",
+    tekst:
+      "Nijedan fajl nije defaced.\nwindows-smoke-result-<shortHead>.md\nsmoke/package-meta.json\n" +
+      "RUCNO-DPAPI-NALOG i RUCNO-TASK-APPLY su MANUAL_NOT_EXECUTED.",
     runnerIdevi,
   });
   assert.deepEqual(nalazi, []);
@@ -112,6 +115,29 @@ test("START-HERE: pomen provere koju runner nema se odbija", () => {
     runnerIdevi,
   });
   assert.ok(nalazi.some((n) => n.includes("W42")));
+});
+
+test("ručne provere: „jedan preskočen [WIN] je očekivan“ se odbija", () => {
+  /*
+   * Kancelarijski smoke 45a3460: tu rečenicu su nosili START-HERE, runbook i
+   * handoff, a paket je imao dva bezuslovna preskoka — `SMOKE PASS` nije bio
+   * dostižan ni na ispravnoj mašini.
+   */
+  for (const tekst of [
+    "tačno jedan preskočen [WIN] test je očekivan",
+    "W15-win zato prihvata tačno jedan preskočen test",
+    "ne brojati testove; jedan preskočen [WIN] je očekivan",
+  ]) {
+    const nalazi = rucneProvere(`${tekst}\nMANUAL_NOT_EXECUTED RUCNO-DPAPI-NALOG RUCNO-TASK-APPLY`);
+    assert.ok(nalazi.some((n) => n.includes("očekivan")), `prošlo: ${tekst}`);
+  }
+});
+
+test("ručne provere moraju biti imenovane kao MANUAL_NOT_EXECUTED", () => {
+  assert.equal(rucneProvere("RUCNO-DPAPI-NALOG RUCNO-TASK-APPLY MANUAL_NOT_EXECUTED").length, 0);
+  const nalazi = rucneProvere("Dve provere su ručne.");
+  assert.ok(nalazi.some((n) => n.includes("MANUAL_NOT_EXECUTED")));
+  assert.ok(nalazi.some((n) => n.includes("RUCNO-TASK-APPLY")));
 });
 
 test("runbook: `10/10` se odbija", () => {

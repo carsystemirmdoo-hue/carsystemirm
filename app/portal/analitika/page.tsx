@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import {
+  SALES_LINES_DISPLAY,
   SalesBreakdown,
   SalesLines,
   SalesTotals,
@@ -10,7 +11,9 @@ import { requireCapability } from "@/lib/authz/session";
 import {
   hasImportedInvoices,
   loadProductGroups,
+  loadSalesBreakdown,
   loadSalesLines,
+  loadSalesSummary,
   loadSalespeople,
   loadScopedCustomers,
 } from "@/lib/sales/queries";
@@ -70,17 +73,22 @@ export default async function AnalyticsPage({
   const view = (VIEWS.find((item) => item.key === params.prikaz)?.key ??
     "kupci") as GroupView;
 
-  const [lines, customers, salespeople, productGroups] = await Promise.all([
-    loadSalesLines(user, filter),
-    loadScopedCustomers(user),
-    loadSalespeople(),
-    loadProductGroups(),
-  ]);
-
   const previousWindow = previousRange(params.from, params.to);
-  const previous = previousWindow
-    ? await loadSalesLines(user, { ...filter, ...previousWindow })
-    : undefined;
+
+  // Zbirovi nad CELIM filtriranim skupom u bazi; lista stavki je samo prikaz.
+  const [summary, rows, byCustomer, lines, previous, customers, salespeople, productGroups] =
+    await Promise.all([
+      loadSalesSummary(user, filter),
+      loadSalesBreakdown(user, filter, view),
+      view === "kupci" ? null : loadSalesBreakdown(user, filter, "kupci"),
+      loadSalesLines(user, filter, SALES_LINES_DISPLAY),
+      previousWindow
+        ? loadSalesSummary(user, { ...filter, ...previousWindow })
+        : null,
+      loadScopedCustomers(user),
+      loadSalespeople(),
+      loadProductGroups(),
+    ]);
 
   return (
     <>
@@ -96,6 +104,9 @@ export default async function AnalyticsPage({
         applied={params}
         views={VIEWS}
         exportView={view}
+        salespersonOnInvoices={
+          summary.lineCount === 0 || summary.linesWithSalesperson > 0
+        }
       />
 
       <section className="portal-panel">
@@ -109,7 +120,11 @@ export default async function AnalyticsPage({
             </p>
           </div>
         </div>
-        <SalesTotals lines={lines} previous={previous} />
+        <SalesTotals
+          totals={summary}
+          previous={previous}
+          byCustomer={byCustomer ?? rows}
+        />
       </section>
 
       <section className="portal-panel">
@@ -119,7 +134,12 @@ export default async function AnalyticsPage({
             <p>Kliknite na kupca da otvorite njegove fakture.</p>
           </div>
         </div>
-        <SalesBreakdown lines={lines} view={view} drillDownBase="/portal/prodaja" />
+        <SalesBreakdown
+          rows={rows}
+          totals={summary}
+          view={view}
+          drillDownBase="/portal/prodaja"
+        />
       </section>
 
       <section className="portal-panel">
@@ -132,7 +152,7 @@ export default async function AnalyticsPage({
             </p>
           </div>
         </div>
-        <SalesLines lines={lines} />
+        <SalesLines lines={lines} totalLines={summary.lineCount} />
       </section>
     </>
   );

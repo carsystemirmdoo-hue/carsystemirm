@@ -5,8 +5,25 @@ import {
   requireApiCapability,
 } from "@/lib/authz/session";
 import { EXPORT_FORMATS } from "@/lib/export/serializers.mjs";
-import { loadSalesLines } from "@/lib/sales/queries";
-import { summarize, summarizeBy } from "@/lib/sales/totals.mjs";
+import {
+  loadSalesBreakdown,
+  loadSalesLines,
+  loadSalesSummary,
+  type SalesBreakdownRow,
+  type SalesLine,
+  type SalesSummary,
+} from "@/lib/sales/queries";
+
+/**
+ * Najviše stavki u izvozu „Stavke faktura" po formatu. Zbirni izvozi (po kupcu,
+ * artiklu…) nemaju granicu — računaju se u bazi nad celim filtriranim skupom.
+ * PDF je za štampu, pa je granica niža; kada je dostignuta, izveštaj to kaže.
+ */
+const STAVKE_GRANICA: Record<"csv" | "xlsx" | "pdf", number> = {
+  csv: 200000,
+  xlsx: 200000,
+  pdf: 5000,
+};
 
 export const runtime = "nodejs";
 
@@ -34,11 +51,18 @@ export async function GET(request: Request) {
       Object.fromEntries(url.searchParams.entries()),
     );
     if (!parsed.success) {
-      return Response.json({ error: "Neispravni parametri." }, { status: 400 });
+      return Response.json({ error: "Neispravni parametri." }, { status: 400, headers: { "Cache-Control": "private, no-store" } });
     }
 
     const { format, view, ...filter } = parsed.data;
-    const lines = await loadSalesLines(user, filter);
+    const summary = await loadSalesSummary(user, filter);
+    const lines =
+      view === "stavke"
+        ? await loadSalesLines(user, filter, STAVKE_GRANICA[format])
+        : [];
+    const breakdown =
+      view === "stavke" ? [] : await loadSalesBreakdown(user, filter, view);
+    const skraceno = view === "stavke" && summary.lineCount > lines.length;
 
     const generatedAt = new Intl.DateTimeFormat("sr-Latn-RS", {
       dateStyle: "medium",
@@ -56,10 +80,17 @@ export async function GET(request: Request) {
         { label: "Komercijalista", value: filter.salespersonId ?? "svi" },
         { label: "Grupa proizvoda", value: filter.productGroup ?? "sve" },
       ],
-      note: "Podaci o plaćanju nisu dostupni iz trenutnog izvora i nisu deo ovog izveštaja.",
+      note: [
+        "Podaci o plaćanju nisu dostupni iz trenutnog izvora i nisu deo ovog izveštaja.",
+        skraceno
+          ? `Izvoz sadrži najnovijih ${lines.length} od ${summary.lineCount} stavki (granica za ${format.toUpperCase()}). Za potpun spisak izaberite CSV ili XLSX ili kraći period.`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" "),
     };
 
-    const { columns, rows } = buildReport(view, lines);
+    const { columns, rows } = buildReport(view, lines, breakdown, summary);
     const serializer = EXPORT_FORMATS[format];
     const body = serializer.render(columns, rows, meta);
 
@@ -103,7 +134,12 @@ function describeScope(role: string, permissions: string[]) {
   return "samo dodeljeni kupci";
 }
 
-function buildReport(view: string, lines: Awaited<ReturnType<typeof loadSalesLines>>) {
+function buildReport(
+  view: string,
+  lines: SalesLine[],
+  breakdown: SalesBreakdownRow[],
+  total: SalesSummary,
+) {
   if (view === "stavke") {
     return {
       columns: [
@@ -133,16 +169,7 @@ function buildReport(view: string, lines: Awaited<ReturnType<typeof loadSalesLin
     };
   }
 
-  const keyOf: Record<string, (line: (typeof lines)[number]) => string> = {
-    kupci: (line) => line.customerName,
-    komercijalisti: (line) => line.salespersonName ?? "Bez komercijaliste",
-    artikli: (line) => `${line.articleCode} · ${line.articleName ?? ""}`.trim(),
-    grupe: (line) => line.productGroup ?? "Bez grupe",
-  };
-
-  const grouped = summarizeBy(lines, keyOf[view]);
-  const total = summarize(lines);
-
+  // Zbirovi po grupi i UKUPNO dolaze iz baze, nad celim filtriranim skupom.
   return {
     columns: [
       TITLES[view].replace("Promet po ", ""),
@@ -154,7 +181,7 @@ function buildReport(view: string, lines: Awaited<ReturnType<typeof loadSalesLin
       "Faktura",
     ],
     rows: [
-      ...grouped.map((row) => [
+      ...breakdown.map((row) => [
         row.label,
         row.gross,
         row.returnValue,
@@ -170,7 +197,7 @@ function buildReport(view: string, lines: Awaited<ReturnType<typeof loadSalesLin
         total.correctionValue,
         total.unknownNegativeValue,
         total.net,
-        new Set(lines.map((line) => line.invoiceId)).size,
+        total.invoiceCount,
       ],
     ],
   };

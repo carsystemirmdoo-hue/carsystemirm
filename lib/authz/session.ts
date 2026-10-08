@@ -265,7 +265,8 @@ export async function requireApiCapability(
 
 export function apiAuthResponse(error: unknown): Response | null {
   if (error instanceof ApiAuthError) {
-    return Response.json({ error: error.message }, { status: error.status });
+    // Odbijanje zavisi od sesije pozivaoca; ne sme se keširati ni deliti.
+    return Response.json({ error: error.message }, { status: error.status, headers: { "Cache-Control": "private, no-store" } });
   }
   return null;
 }

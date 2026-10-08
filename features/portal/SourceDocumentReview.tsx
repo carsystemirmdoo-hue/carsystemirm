@@ -32,6 +32,10 @@ export type DocumentRow = {
   conflictReason: string | null;
   manualReview: string;
   posted: boolean;
+  /** Storno: `waiting_original` | `applied` | `review`; `null` za ostale dokumente. */
+  stornoStatus?: string | null;
+  /** Original isključen iz prometa primenjenim stornom. */
+  reversed?: boolean;
 };
 
 /**
@@ -41,6 +45,12 @@ export type DocumentRow = {
  * nosi naziv kupca i broj računa, a ovaj ekran gleda i neko ko taj podatak ne
  * sme da vidi — pa se ni ne prenosi na klijent.
  */
+const STORNO_STATUS_LABELS: Record<string, string> = {
+  waiting_original: "čeka original",
+  applied: "primenjeno",
+  review: "na pregledu",
+};
+
 export function SourceDocumentReview({
   rows,
   canManage,
@@ -130,7 +140,11 @@ export function SourceDocumentReview({
                     {MANUAL_REVIEW_LABELS[row.manualReview] ?? row.manualReview}
                   </Badge>
                 </td>
-                <td>{row.posted ? "Proknjiženo" : "Nije proknjiženo"}</td>
+                <td>
+                  {row.posted ? "Proknjiženo" : "Nije proknjiženo"}
+                  {row.reversed ? " · stornirano, van prometa" : ""}
+                  {row.stornoStatus ? ` · storno: ${STORNO_STATUS_LABELS[row.stornoStatus] ?? row.stornoStatus}` : ""}
+                </td>
                 <td>
                   {canManage && row.manualReview === "pending" ? (
                     <PortalButton

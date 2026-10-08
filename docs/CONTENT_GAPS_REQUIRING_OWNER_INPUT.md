@@ -30,7 +30,7 @@ blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni
 | GAP-001 Telefon | RESOLVED_BY_OWNER_CONFIRMATION | Direktna potvrda firme: 022 558 501 + tri regionalna broja | Da — potvrda firme |
 | GAP-002 E-pošta | RESOLVED_BY_OWNER_CONFIRMATION | Direktna potvrda firme: carsystemirmdoo@gmail.com | Da — potvrda firme |
 | GAP-003 BEX lokacije | RESOLVED_BY_SAFE_PROJECT_POLICY | Nema javnog izvora za 82 `pending` lokacije | Ne — pristanak i status zna samo firma |
-| GAP-004 Radno vreme | RESOLVED_BY_SAFE_PROJECT_POLICY | Nijedan imenik ni registar ne navodi radno vreme | Ne |
+| GAP-004 Radno vreme | RESOLVED_BY_OWNER_CONFIRMATION | Firma potvrdila 2026-10-01: ponedeljak–petak, 08:00–16:00 | Ne |
 | GAP-005 Naziv firme | RESOLVED_BY_OWNER_CONFIRMATION | Registar: „CAR SYSTEM I R-M d.o.o. Inđija" (pun i skraćen naziv) | Delimično — pravni naziv je jasan; oblik za prikaz i objava PIB/MB su odluka |
 | GAP-006 Saglasnost | ADVISORY_REVIEW_RECOMMENDED | ZZPL čl. 15 (opoziv jednako jednostavan kao pristanak) | Ne — nova verzija teksta traži odobrenje |
 | GAP-007 Slanje forme | RESOLVED_BY_SAFE_PROJECT_POLICY | Nema API rute ni servisa; potvrđeno sanduče je Gmail | Ne — poslovna i troškovna odluka |
@@ -174,7 +174,7 @@ blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni
 
 ## GAP-004 — Radno vreme centrale
 
-- Status: `RESOLVED_BY_SAFE_PROJECT_POLICY`
+- Status: `RESOLVED_BY_OWNER_CONFIRMATION`
 - Prioritet: `HIGH`
 - Oblast: `kontakt`
 - Vidljivost: `javno`
@@ -191,6 +191,10 @@ blokira; `ADVISORY_REVIEW_RECOMMENDED` — urađeno, preporučen stručni/pravni
 - Očekivani format odgovora: npr. `Pon–Pet 08:00–16:00, Sub 08:00–13:00`.
 - Prvobitni predlog (istorija): nema.
 - Odluka i primena (2026-10-01): `SAFE_DEFAULT_APPLIED`: nijedan pouzdan javni izvor ne navodi radno vreme, pa `workingHours` ostaje `null` i radno vreme se nigde ne prikazuje; pretpostavljeno „Pon–Pet 08:00–16:00" se ne koristi. Kada firma dostavi radno vreme, upisuje se u `lib/company-contact.ts` i automatski se prikazuje u footeru i na `/kontakt`.
+- Potvrda firme (2026-10-01): **ponedeljak–petak, 08:00–16:00**. Primenjeno u
+  `companyContact.workingHours` i `workingHoursSpec` (footer, `/kontakt`,
+  kontakt kancelarije u kupčevom nalogu, schema.org `ContactPoint.hoursAvailable`);
+  proverava `lib/content-qa/companyContact.test.mts`. Subota i praznici nisu navedeni.
 
 ## GAP-005 — Zvaničan naziv firme i podaci o pravnom licu na sajtu
 

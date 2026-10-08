@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import {
+  SALES_LINES_DISPLAY,
   SalesBreakdown,
   SalesLines,
   SalesTotals,
@@ -10,7 +11,9 @@ import { requireCapability } from "@/lib/authz/session";
 import {
   hasImportedInvoices,
   loadProductGroups,
+  loadSalesBreakdown,
   loadSalesLines,
+  loadSalesSummary,
   loadSalespeople,
   loadScopedCustomers,
 } from "@/lib/sales/queries";
@@ -43,12 +46,16 @@ export default async function SalesPage({
     productGroup: params.grupa || null,
   };
 
-  const [lines, customers, salespeople, productGroups] = await Promise.all([
-    loadSalesLines(user, filter),
-    loadScopedCustomers(user),
-    loadSalespeople(),
-    loadProductGroups(),
-  ]);
+  // Zbirovi nad CELIM filtriranim skupom u bazi; lista stavki je samo prikaz.
+  const [summary, byCustomer, lines, customers, salespeople, productGroups] =
+    await Promise.all([
+      loadSalesSummary(user, filter),
+      loadSalesBreakdown(user, filter, "kupci"),
+      loadSalesLines(user, filter, SALES_LINES_DISPLAY),
+      loadScopedCustomers(user),
+      loadSalespeople(),
+      loadProductGroups(),
+    ]);
 
   return (
     <>
@@ -67,6 +74,9 @@ export default async function SalesPage({
         options={{ customers, salespeople, productGroups }}
         applied={params}
         exportView="kupci"
+        salespersonOnInvoices={
+          summary.lineCount === 0 || summary.linesWithSalesperson > 0
+        }
       />
 
       <section className="portal-panel">
@@ -75,7 +85,7 @@ export default async function SalesPage({
             <h2>Ukupno u periodu</h2>
           </div>
         </div>
-        <SalesTotals lines={lines} />
+        <SalesTotals totals={summary} byCustomer={byCustomer} />
       </section>
 
       <section className="portal-panel">
@@ -84,7 +94,7 @@ export default async function SalesPage({
             <h2>Po kupcu</h2>
           </div>
         </div>
-        <SalesBreakdown lines={lines} view="kupci" />
+        <SalesBreakdown rows={byCustomer} totals={summary} view="kupci" />
       </section>
 
       <section className="portal-panel">
@@ -93,7 +103,7 @@ export default async function SalesPage({
             <h2>Stavke faktura</h2>
           </div>
         </div>
-        <SalesLines lines={lines} />
+        <SalesLines lines={lines} totalLines={summary.lineCount} />
       </section>
     </>
   );

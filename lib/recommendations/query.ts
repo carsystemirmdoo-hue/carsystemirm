@@ -59,6 +59,11 @@ export type RecommendationFilter = {
    * ne može da kroz ovaj parametar dohvati tuđe kupce.
    */
   salespersonUserId?: string;
+  /**
+   * Status kupca. Podrazumevano `aktivni`: neaktivni kupci (više ne rade sa
+   * nama) se izostavljaju iz liste i brojača; vide se izborom `neaktivni`/`svi`.
+   */
+  customerStatus?: "aktivni" | "neaktivni" | "svi";
   limit?: number;
 };
 
@@ -74,6 +79,9 @@ function uOpsegu(scope: LedgerScope): SQL {
 
 function uslovi(scope: LedgerScope, filter: RecommendationFilter): SQL {
   const lista: SQL[] = [uOpsegu(scope)];
+  const statusKupca = filter.customerStatus ?? "aktivni";
+  if (statusKupca === "aktivni") lista.push(sql`c.active`);
+  else if (statusKupca === "neaktivni") lista.push(sql`NOT c.active`);
 
   if (filter.status?.length) {
     lista.push(

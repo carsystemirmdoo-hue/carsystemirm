@@ -16,6 +16,7 @@ import { parseBiznisoftPdf, type ParsedDocument } from "@/lib/pdf/extract";
 import { normalizePartnerCode } from "@/lib/commercial/externalIdentity.mjs";
 import type { DocumentOrigin, ValueProvenance } from "@/db/schema";
 import { canonicalFromParsedDocument } from "@/lib/sync/contract/fromParsedDocument.mjs";
+import { reevaluateReversalsForInvoice, registerStorno, settleWaitingReversals, type ReversalOutcome } from "@/lib/pdf/reversal";
 
 /**
  * Ko izvršava uvoz.
@@ -43,7 +44,13 @@ export type IngestOutcome =
   /** Drugi fajl tvrdi da je isti poslovni dokument. Obe verzije se čuvaju. */
   | { result: "business_key_conflict"; sourceDocumentId: string; conflictsWith: string }
   /** Dokument nije prošao proveru; vidljiv je kancelariji, prometa nema. */
-  | { result: "quarantined"; sourceDocumentId: string; status: string }
+  | {
+      result: "quarantined";
+      sourceDocumentId: string;
+      status: string;
+      /** Za storno sa odštampanom referencom: ishod veze sa originalom (docs/b2b/48). */
+      reversal?: ReversalOutcome["status"];
+    }
   /** Prošao, ali kupac nije mapiran — faktura još ne postoji. */
   | { result: "awaiting_customer_mapping"; sourceDocumentId: string; partnerCode: string }
   /**
@@ -484,10 +491,29 @@ export async function ingestParsedDocument(
     }
 
     if (parsed.validationStatus !== "valid" || !partnerCode) {
+      /*
+       * Storno se ne knjiži kao faktura. Ako nosi odštampanu referencu,
+       * beleži se veza sa originalom; potpuno storno sa dokazanom vezom
+       * isključuje original iz prometa (docs/b2b/48).
+       */
+      const reversal =
+        parsed.documentKind === "storno"
+          ? await registerStorno(
+              tx,
+              {
+                stornoSourceDocumentId: created.id,
+                issuerCode: input.issuerCode,
+                originalNumber: parsed.header.reversesDocumentNumber?.value ?? null,
+                originalDate: parsed.header.reversesDocumentDate?.value ?? null,
+              },
+              actor,
+            )
+          : null;
       return {
         result: "quarantined" as const,
         sourceDocumentId: created.id,
         status: parsed.validationStatus,
+        ...(reversal ? { reversal: reversal.status } : {}),
       };
     }
 
@@ -838,6 +864,9 @@ async function postSourceDocument(
     tx,
   );
 
+  // Storno koje je stiglo pre originala sada se ocenjuje (docs/b2b/48).
+  await settleWaitingReversals(tx, { issuerCode: doc.issuerCode, number: doc.businessDocumentNumber }, actor);
+
   return invoice.id;
 }
 
@@ -984,6 +1013,10 @@ export type SourceDocumentView = {
   manualReview: string;
   invoiceId: string | null;
   createdAt: Date;
+  /** Storno: stanje veze sa originalom (docs/b2b/48); `null` za ostale. */
+  stornoStatus: string | null;
+  /** Original isključen iz prometa primenjenim stornom. */
+  reversed: boolean;
 };
 
 export async function listSourceDocuments(filter?: {
@@ -1023,6 +1056,10 @@ export async function listSourceDocuments(filter?: {
       manualReview: sourceDocuments.manualReview,
       invoiceId: sourceDocuments.invoiceId,
       createdAt: sourceDocuments.createdAt,
+      /** Za storno: stanje veze sa originalom (docs/b2b/48); `null` za ostale. */
+      stornoStatus: sql<string | null>`(SELECT r.status::text FROM invoice_reversals r WHERE r.storno_source_document_id = ${sourceDocuments.id})`,
+      /** Original koji je primenjenim stornom isključen iz prometa. */
+      reversed: sql<boolean>`EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_source_document_id = ${sourceDocuments.id} AND r.status = 'applied')`,
     })
     .from(sourceDocuments)
     .where(conditions.length > 0 ? and(...conditions) : undefined)
@@ -1313,6 +1350,9 @@ async function retargetInvoice(
     },
     tx,
   );
+
+  // Original sada nosi stavke druge verzije — veza sa stornom se ocenjuje ponovo (docs/b2b/48).
+  await reevaluateReversalsForInvoice(tx, invoiceId, actor);
 }
 
 /**

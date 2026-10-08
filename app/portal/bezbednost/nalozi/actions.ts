@@ -87,7 +87,7 @@ export async function issueResetCodeAction(
   try {
     const { userId, token, reason } = parse(formData);
     const actor = await requireSecurityAdmin(token);
-    const target = await loadSecurityTarget(userId, { actorId: actor.id });
+    const target = await loadSecurityTarget(userId, { actorId: actor.id, actorRole: actor.role });
 
     if (!target.active) {
       throw new SecurityActionError(
@@ -164,7 +164,7 @@ export async function setAccountActiveAction(
     if (!parsed.success) throw new SecurityActionError("Neispravan zahtev.");
 
     const actor = await requireSecurityAdmin(base.token);
-    const target = await loadSecurityTarget(base.userId, { actorId: actor.id });
+    const target = await loadSecurityTarget(base.userId, { actorId: actor.id, actorRole: actor.role });
     const nextActive = parsed.data.active;
 
     if (target.active === nextActive) {
@@ -264,7 +264,7 @@ export async function resetUserMfaAction(
   try {
     const { userId, token, reason } = parse(formData);
     const actor = await requireSecurityAdmin(token);
-    const target = await loadSecurityTarget(userId, { actorId: actor.id });
+    const target = await loadSecurityTarget(userId, { actorId: actor.id, actorRole: actor.role });
 
     const correlationId = randomUUID();
 
@@ -342,7 +342,7 @@ export async function issueEnrollmentGrantAction(
   try {
     const { userId, token, reason } = parse(formData);
     const actor = await requireSecurityAdmin(token);
-    const target = await loadSecurityTarget(userId, { actorId: actor.id });
+    const target = await loadSecurityTarget(userId, { actorId: actor.id, actorRole: actor.role });
 
     const status = await readMfaStatus(target.id);
     if (status.enabled) {

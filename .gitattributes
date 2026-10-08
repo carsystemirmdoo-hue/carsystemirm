@@ -26,3 +26,6 @@ data/catalog/image-quality/evidence/*.csv -text whitespace=cr-at-eol
 # tvrdnja da je jedina razlika u telu jedan uklonjen razmak na kraju reda 91. Da bi ta tvrdnja
 # ostala tačna, razmak ovde mora da preživi.
 data/catalog/image-quality/evidence/*.md whitespace=-trailing-space
+
+# Nativni DPAPI modul (connector/src/keystore/native) — binarni, bez normalizacije.
+*.node binary

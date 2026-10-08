@@ -6,7 +6,10 @@ import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { pregledUredjaja } from "@/lib/sync/commands/service";
 import { isDeviceIngestEnabled, isSyncOperationsEnabled } from "@/lib/sync/http/gate";
+import { opisStanja, stanjeUredjaja } from "@/lib/sync/device/cycle-status.mjs";
+import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { DeviceAdmin } from "@/features/portal/DeviceAdmin";
+import { loadBackupStatus } from "@/lib/backup/status-service";
 import { TriggerSync } from "@/features/portal/TriggerSync";
 
 export const dynamic = "force-dynamic";
@@ -50,6 +53,42 @@ function proteklo(iso: string | null): string {
   if (sati < 24) return `pre ${sati} h`;
   return `pre ${Math.floor(sati / 24)} dana`;
 }
+
+/** Vreme u Europe/Belgrade, bez obzira na zonu servera (Vercel radi u UTC). */
+const VREME_BG = new Intl.DateTimeFormat("sr-Latn-RS", {
+  timeZone: "Europe/Belgrade",
+  day: "numeric",
+  month: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+function bg(iso: string | Date | null): string {
+  if (!iso) return "—";
+  const d = typeof iso === "string" ? new Date(iso) : iso;
+  return Number.isNaN(d.getTime()) ? "—" : VREME_BG.format(d);
+}
+
+const ISHOD: Record<string, { tekst: string; tone: "success" | "warning" | "danger" | "neutral" }> = {
+  obradjeno: { tekst: "obrađen", tone: "success" },
+  preskoceno: { tekst: "preskočen po rasporedu", tone: "neutral" },
+  greska: { tekst: "greška", tone: "danger" },
+};
+
+/** Prikaz statusa — vrednosti iz baze ostaju iste, menja se samo natpis. */
+const STATUS_UREDJAJA: Record<string, { tekst: string; tone: "success" | "warning" | "danger" | "neutral" }> = {
+  registered: { tekst: "čeka aktivaciju", tone: "warning" },
+  active: { tekst: "aktivan", tone: "success" },
+  suspended: { tekst: "privremeno isključen", tone: "warning" },
+  revoked: { tekst: "opozvan", tone: "danger" },
+};
+
+const STATUS_UVOZA: Record<string, string> = {
+  u_toku: "u toku",
+  uspesno: "uspešno",
+  uspesno_sa_upozorenjima: "uspešno, sa upozorenjima",
+  greska: "greška",
+  preskoceno_duplikat: "preskočeno (već uvezeno)",
+};
 
 export default async function SyncOperationsPage() {
   const user = await requireCapability("sync:monitor", "/portal/importi/sinhronizacija");
@@ -104,6 +143,8 @@ export default async function SyncOperationsPage() {
         </section>
       ) : null}
 
+      <BackupStatusPanel items={await loadBackupStatus()} />
+
       {/* ---------------------------------------------------------------- */}
       <section className="portal-metrics">
         <Metric
@@ -142,6 +183,8 @@ export default async function SyncOperationsPage() {
                 <th scope="col">Status</th>
                 <th scope="col">Opseg</th>
                 <th scope="col">Poslednje javljanje</th>
+                <th scope="col">Poslednji ciklus</th>
+                <th scope="col">Poslednje uspešno skeniranje</th>
                 <th scope="col">Poslednja komanda</th>
                 {smeKomandu ? <th scope="col">Radnja</th> : null}
               </tr>
@@ -157,14 +200,40 @@ export default async function SyncOperationsPage() {
                       <small>{u.deviceCode}</small>
                     </th>
                     <td>
-                      <Badge tone={u.status === "active" ? "success" : "danger"}>{u.status}</Badge>
+                      <Badge tone={STATUS_UREDJAJA[u.status]?.tone ?? "neutral"}>
+                        {STATUS_UREDJAJA[u.status]?.tekst ?? u.status}
+                      </Badge>
                     </td>
                     <td>
                       {u.sourceSystem}/{u.issuerCode}
                     </td>
                     <td>
                       {proteklo(u.lastSeenAt)}
-                      <small>samo kontakt, ne uspešan sync</small>
+                      <small>{bg(u.lastSeenAt)} · samo kontakt</small>
+                    </td>
+                    <td>
+                      {u.lastCycleAt ? (
+                        <>
+                          <Badge tone={ISHOD[u.lastCycleOutcome ?? ""]?.tone ?? "neutral"}>
+                            {ISHOD[u.lastCycleOutcome ?? ""]?.tekst ?? "—"}
+                          </Badge>
+                          <small>
+                            {bg(u.lastCycleAt)} · sledeći {bg(u.nextExpectedCycleAt)}
+                          </small>
+                        </>
+                      ) : (
+                        <small>nema izveštaja (konektor pre 0.3.9)</small>
+                      )}
+                    </td>
+                    <td>
+                      {u.lastScanCompletedAt ? (
+                        <>
+                          {bg(u.lastScanCompletedAt)}
+                          <small>ceo izvor faktura pregledan</small>
+                        </>
+                      ) : (
+                        "—"
+                      )}
                     </td>
                     <td>
                       {k && opis ? (
@@ -193,7 +262,7 @@ export default async function SyncOperationsPage() {
               })}
               {uredjaji.length === 0 ? (
                 <tr>
-                  <td colSpan={smeKomandu ? 6 : 5}>
+                  <td colSpan={smeKomandu ? 8 : 7}>
                     Nijedan uređaj nije registrovan. Dok ga nema, automatski uvoz sa kancelarijskog
                     računara ne postoji.
                   </td>
@@ -208,6 +277,66 @@ export default async function SyncOperationsPage() {
           to NIJE potpuno knjiženje. Pokrenut lokalni posao se ne prekida daljinski.
         </p>
       </section>
+
+      {uredjaji
+        .filter((u) => u.status === "active")
+        .map((u) => {
+          const ulaz = {
+            now: new Date(),
+            status: u.status,
+            lastSeenAt: u.lastSeenAt ? new Date(u.lastSeenAt) : null,
+            lastCycleAt: u.lastCycleAt ? new Date(u.lastCycleAt) : null,
+            lastCycleOutcome: u.lastCycleOutcome,
+            lastScanCompletedAt: u.lastScanCompletedAt ? new Date(u.lastScanCompletedAt) : null,
+            nextExpectedCycleAt: u.nextExpectedCycleAt ? new Date(u.nextExpectedCycleAt) : null,
+          };
+          const stanje = stanjeUredjaja(ulaz);
+          return (
+            <section key={`ciklusi-${u.id}`} className="portal-panel">
+              <SectionHeader
+                title={`Ciklusi — ${u.label}`}
+                description="Izveštaj posle svakog pokretanja zakazanog zadatka. Preskočen ciklus znači da računar radi, a po rasporedu nije bilo vreme za skeniranje."
+              />
+              <p className="portal-data-note" data-tone={stanje.ton === "warning" || stanje.ton === "danger" ? "warning" : undefined} role="status">
+                {opisStanja(stanje, ulaz, bg)}
+              </p>
+              {u.poslednjiCiklusi.length > 0 ? (
+                <div className="portal-table-wrap">
+                  <table className="portal-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Početak</th>
+                        <th scope="col">Ishod</th>
+                        <th scope="col">Razlog</th>
+                        <th scope="col">Pregledano</th>
+                        <th scope="col">Novo</th>
+                        <th scope="col">Poslato</th>
+                        <th scope="col">Skeniranje</th>
+                        <th scope="col">Verzija</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {u.poslednjiCiklusi.map((c) => (
+                        <tr key={c.cycleAt}>
+                          <th scope="row">{bg(c.cycleAt)}</th>
+                          <td>
+                            <Badge tone={ISHOD[c.outcome]?.tone ?? "neutral"}>{ISHOD[c.outcome]?.tekst ?? c.outcome}</Badge>
+                          </td>
+                          <td>{c.errorCode ?? c.reason ?? "—"}</td>
+                          <td className="portal-table-number">{c.scanned ?? "—"}</td>
+                          <td className="portal-table-number">{c.newDocuments ?? "—"}</td>
+                          <td className="portal-table-number">{c.sent ?? "—"}</td>
+                          <td>{c.scanCompleted ? "potpuno" : "—"}</td>
+                          <td>{c.connectorVersion ?? "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : null}
+            </section>
+          );
+        })}
 
       {/* ---------------------------------------------------------------- */}
       <section className="portal-panel">
@@ -235,7 +364,7 @@ export default async function SyncOperationsPage() {
                       timeStyle: "short",
                     }).format(r.startedAt)}
                   </th>
-                  <td>{r.status}</td>
+                  <td>{STATUS_UVOZA[r.status] ?? r.status}</td>
                   <td className="portal-table-number">{r.rowsRead}</td>
                   <td className="portal-table-number">{r.invoicesCreated}</td>
                   <td className="portal-table-number">{r.invoicesUpdated}</td>
@@ -252,7 +381,11 @@ export default async function SyncOperationsPage() {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {smeUredjaje ? <DeviceAdmin /> : null}
+      {smeUredjaje ? (
+        <DeviceAdmin
+          devices={uredjaji.map((u) => ({ id: u.id, label: u.label, deviceCode: u.deviceCode, status: u.status }))}
+        />
+      ) : null}
     </>
   );
 }

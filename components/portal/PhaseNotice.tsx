@@ -47,7 +47,26 @@ export function PhaseNotice({
  * Fakture ne nose podatak o plaćanju, pa se sve što iz njega sledi
  * prikazuje ovako — nikada kao nula ni kao procena predstavljena kao činjenica.
  */
-export function UnavailableValue({ note }: { note?: string }) {
+export function UnavailableValue({
+  note,
+  compact = false,
+}: {
+  note?: string;
+  /** Kratka oznaka za ćelije tabele koje se ponavljaju u svakom redu. */
+  compact?: boolean;
+}) {
+  if (compact) {
+    return (
+      <span
+        className="portal-unavailable"
+        data-compact="true"
+        title={note ?? "Podatak nije dostupan iz trenutnog izvora"}
+        aria-label={`Podatak nije dostupan iz trenutnog izvora${note ? `: ${note}` : ""}`}
+      >
+        nije dostupno
+      </span>
+    );
+  }
   return (
     <span className="portal-unavailable" title={note}>
       Podatak nije dostupan iz trenutnog izvora

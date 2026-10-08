@@ -26,10 +26,15 @@
 \set runtime_role :runtime_role
 
 -- 1. Nalog postoji, ali bez ijednog nasleđenog prava.
+--    psql promenljive se ne zamenjuju unutar `$$ … $$`, zato se ime uloge
+--    prvo upisuje u podešavanje sesije, pa ga DO blok čita odatle.
+SELECT set_config('my.runtime_role', :'runtime_role', false);
+
 DO $$
 BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = current_setting('my.runtime_role', true)) THEN
-    RAISE NOTICE 'Uloga % ne postoji — kreirajte je uz lozinku van ove skripte.', current_setting('my.runtime_role', true);
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = current_setting('my.runtime_role')) THEN
+    RAISE EXCEPTION 'Uloga % ne postoji — kreirajte je uz lozinku van ove skripte, pa ponovite.',
+      current_setting('my.runtime_role');
   END IF;
 END $$;
 
@@ -43,23 +48,38 @@ REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM :runtime_role;
 GRANT USAGE ON SCHEMA public TO :runtime_role;
 
 -- 4. Poslovne tabele — pun DML, bez DDL.
-GRANT SELECT, INSERT, UPDATE, DELETE ON
-  users, permission_packages, user_permissions,
-  customers, customer_assignments,
-  articles, salespeople, invoices, invoice_lines,
-  import_runs, import_rows,
-  system_settings, user_preferences,
-  auth_rate_limits, user_mfa, mfa_recovery_codes,
-  password_reset_codes, mfa_enrollment_grants
-TO :runtime_role;
-
--- 5. AUDIT: samo čitanje i dodavanje.
 --
---    Ovo je srž cele skripte. Okidač iz migracije 0001 odbija UPDATE i DELETE,
---    ali ga vlasnik tabele može ukloniti sa `DROP TRIGGER`. Oduzimanjem prava
---    na nivou uloge, aplikacija to ne može ni da pokuša.
-GRANT SELECT, INSERT ON audit_log TO :runtime_role;
-REVOKE UPDATE, DELETE, TRUNCATE ON audit_log FROM :runtime_role;
+--    `ALL TABLES` obuhvata i view-ove (`effective_sales_ledger`,
+--    `recommendation_input_lines`). Ranije je ovde stajao ručni spisak od 18
+--    tabela iz migracija 0000–0007; svaka kasnija tabela je ostajala bez prava,
+--    jer `ALTER DEFAULT PRIVILEGES` (korak 7) važi samo za tabele napravljene
+--    POSLE primene skripte. Ograničenja za tabele samo za dodavanje slede u
+--    koraku 5 i idu POSLE ovog koraka, da ga suze.
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO :runtime_role;
+
+-- 5. Tabele samo za dodavanje: čitanje i dodavanje, bez izmene i brisanja.
+--
+--    Ovo je srž cele skripte. Okidači (0001, 0014, 0025, 0028) odbijaju
+--    izmenu i brisanje, ali ih vlasnik tabele može ukloniti sa `DROP TRIGGER`.
+--    Oduzimanjem prava na nivou uloge, aplikacija to ne može ni da pokuša.
+REVOKE UPDATE, DELETE, TRUNCATE ON audit_log, customer_contact_consents, sync_command_events, sync_device_cycles FROM :runtime_role;
+GRANT SELECT, INSERT ON audit_log, customer_contact_consents, sync_command_events, sync_device_cycles TO :runtime_role;
+
+--    Potvrda kontakta se ne briše; jedina dozvoljena izmena je opoziv
+--    (`revoked_at`, `revoked_by`, `revocation_reason`), koju okidač iz 0028
+--    sužava na te kolone.
+REVOKE DELETE, TRUNCATE ON customer_contact_verifications FROM :runtime_role;
+
+--    Zapis naknadnog storna (0033) se ne briše; aplikacija ga samo upisuje i
+--    menja stanje (`lib/pdf/reversal.ts`), a okidač čuva odštampanu referencu.
+--    UPDATE ostaje (prelaz stanja), DELETE i TRUNCATE se oduzimaju.
+REVOKE DELETE, TRUNCATE ON invoice_reversals FROM :runtime_role;
+
+--    Evidencija rezervnih kopija (0036): aplikacija je samo ČITA. Upisuje je
+--    posebna uloga iz backup-roles.sql; portal ne sme da proglasi kopiju
+--    uspešnom.
+REVOKE INSERT, UPDATE, DELETE, TRUNCATE ON backup_runs FROM :runtime_role;
+GRANT SELECT ON backup_runs TO :runtime_role;
 
 -- 6. Sekvence — `nextval` za `bigserial` kolone.
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO :runtime_role;
@@ -80,9 +100,14 @@ REVOKE ALL ON SCHEMA information_schema FROM :runtime_role;
 --
 --   SELECT has_table_privilege(:'runtime_role', 'audit_log', 'UPDATE');
 --   SELECT has_table_privilege(:'runtime_role', 'audit_log', 'DELETE');
+--   SELECT has_table_privilege(:'runtime_role', 'customer_contact_consents', 'UPDATE');
+--   SELECT has_table_privilege(:'runtime_role', 'sync_command_events', 'DELETE');
+--   SELECT has_table_privilege(:'runtime_role', 'customer_contact_verifications', 'DELETE');
 --   SELECT has_schema_privilege(:'runtime_role', 'public', 'CREATE');
 --
 -- Očekivano `t` (true):
 --
 --   SELECT has_table_privilege(:'runtime_role', 'audit_log', 'INSERT');
 --   SELECT has_table_privilege(:'runtime_role', 'users', 'UPDATE');
+--   SELECT has_table_privilege(:'runtime_role', 'recommendation_results', 'INSERT');
+--   SELECT has_table_privilege(:'runtime_role', 'effective_sales_ledger', 'SELECT');

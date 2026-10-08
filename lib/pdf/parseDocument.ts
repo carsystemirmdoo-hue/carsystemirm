@@ -7,6 +7,8 @@ import {
   MAX_PAGES,
   MAX_QUANTITY_DECIMALS,
   hasTableContinuation,
+  lineNumbersContiguous,
+  isDescriptionContinuation,
   isLineRow,
   parseHeader,
   parseLine,
@@ -208,21 +210,34 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
     };
   }
 
-  if (hasTableContinuation(pages)) {
+  if (hasTableContinuation(pages) && !lineNumbersContiguous(pages)) {
     return {
       ...base,
       documentKind: kind.kind,
       validationStatus: "unsupported_requires_sample",
       validationDetail:
-        "Tabela se nastavlja na sledećoj strani. Nijedan stvaran uzorak ne dokazuje taj oblik.",
+        "Tabela se nastavlja na sledećoj strani, a redni brojevi stavki nisu neprekidni. Za taj oblik ne postoji potvrđen uzorak.",
     };
   }
 
   const lines: ParsedLine[] = [];
   for (const page of pages) {
+    let previous: { y: number; line: ParsedLine } | null = null;
     for (const row of page.rows) {
-      if (!isLineRow(row)) continue;
-      lines.push({ ...parseLine(row.cells), lineNumber: lines.length + 1, raw: row.raw });
+      if (isLineRow(row)) {
+        const line = { ...parseLine(row.cells), lineNumber: lines.length + 1, raw: row.raw };
+        lines.push(line);
+        previous = { y: row.y, line };
+        continue;
+      }
+      if (previous && isDescriptionContinuation(row, previous.y)) {
+        // Naziv prelomljen u drugi red: dopunjuje se samo opis, nikad iznosi.
+        previous.line.description = [previous.line.description, row.cells.description.trim()]
+          .filter(Boolean).join(" ");
+        previous = { y: row.y, line: previous.line };
+        continue;
+      }
+      previous = null;
     }
   }
 
@@ -267,6 +282,35 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
 
   const broken = lines.filter((l) => l.status !== "ok");
   const totals = validateTotals(lines, header.printedGrossTotal.value);
+
+  /*
+   * Negativna količina ili iznos znače povrat, odobrenje ili storno, i kada
+   * naslov glasi kao faktura. Za te vrste ne postoji potvrđen uzorak (veza sa
+   * originalom, efekat na promet), pa dokument ide čoveku — nikad u promet kao
+   * prodajna faktura.
+   */
+  const negative = lines.some(
+    (l) => (l.quantity ?? 0) < 0 || (l.grossAmount ?? 0) < 0,
+  );
+  if (negative) {
+    /*
+     * Storno se prepoznaje po DVA dokaza: negativne stavke i izričita veza na
+     * original u napomeni. Prepoznat storno i dalje ne ulazi u promet — pravila
+     * (delimično storno, uticaj na količine i preporuke) čekaju potvrdu
+     * kancelarije, a do tada analitika bez storna nije konačna.
+     */
+    const reverses = header.reversesDocumentNumber.status === "ok";
+    return {
+      ...base,
+      lines,
+      totals,
+      documentKind: reverses ? "storno" : kind.kind,
+      validationStatus: "unsupported_requires_sample",
+      validationDetail: reverses
+        ? "Storno: dokument poništava raniji račun. Uvoz storna čeka potvrdu pravila; do tada promet bez storna nije konačan."
+        : "Dokument ima negativne stavke bez navedenog originala (povrat, odobrenje ili storno). Za taj oblik ne postoji potvrđen uzorak.",
+    };
+  }
 
   if (broken.length > 0) {
     return {

@@ -1,0 +1,187 @@
+﻿<#
+  Carsystem konektor - instalacija ili azuriranje (KORAK 1, kao Administrator).
+
+  Pokretanje (PowerShell -> desni klik -> Run as administrator), iz foldera
+  raspakovanog paketa:
+
+    .\windows\instaliraj.ps1 -RunAsAccount 'RACUNAR\nalog' `
+      -IzvorniFolder 'C:\Users\nalog\Desktop\Fakture\Fakture 2026' `
+      -ServerOrigin 'https://...' -PosaljiOdDatuma '2026-10-06'
+
+  Azuriranje: isto, bez -IzvorniFolder/-ServerOrigin - postojeci config.json,
+  kljuc i red se cuvaju.
+
+  Sta radi (samo omotac oko vec pregledanih skripti; nijedno bezbednosno
+  pravilo se ne zaobilazi):
+    1. preduslovi: Administrator, x64, Node 24 u Program Files, RunAs nalog
+       postoji i NIJE administrator;
+    2. prethodna verzija -> C:\Program Files\CarsystemConnector.prethodna-<verzija>-<vreme>
+       (za vrati-prethodnu.ps1); config.json se prenosi;
+    3. config.json (prva instalacija) ili izmena samo zadatih polja;
+    4. harden-install-dir.ps1 -Apply;
+    Posle ovoga: KORAK 2, podesi.ps1 kao svakodnevni nalog (BEZ
+    administratora) - folder stanja, kljuc, provera foldera, test veze,
+    prvi prolaz i zakazani zadatak (task.ps1 proverava folder stanja u
+    profilu naloga koji ga pokrece, pa ga mora pokrenuti taj nalog).
+
+  Folder stanja (%LOCALAPPDATA%\CarsystemConnector: kljuc i queue.db) se NE dira.
+#>
+#Requires -Version 5.1
+param(
+  [string]$RunAsAccount = "$env:USERDOMAIN\$env:USERNAME",
+  [string]$IzvorniFolder,
+  [string]$ServerOrigin,
+  [string]$DeviceCode = 'KANC-01',
+  [string]$PosaljiOdDatuma,
+  [string]$VercelZastita,
+  # Jedini Windows nalog je administrator: isti nalog, UAC ukljucen, zadatak sa ogranicenim tokenom (docs/b2b/49).
+  [switch]$JedanNalogSaUAC
+)
+
+$ErrorActionPreference = 'Stop'
+function Stani([string]$poruka) { Write-Host "[STOP] $poruka" -ForegroundColor Red; exit 1 }
+function Ok([string]$poruka) { Write-Host "[OK]   $poruka" -ForegroundColor Green }
+function Info([string]$poruka) { Write-Host "[..]   $poruka" }
+
+$izvorPaketa = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$cilj = Join-Path $env:ProgramFiles 'CarsystemConnector'
+$imeZadatka = 'CarsystemConnector'
+
+# ---------------------------------------------------------------- 1. preduslovi
+$identitet = [Security.Principal.WindowsIdentity]::GetCurrent()
+if (-not (New-Object Security.Principal.WindowsPrincipal($identitet)).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+  Stani 'Pokrenite PowerShell kao Administrator (desni klik -> Run as administrator).'
+}
+if (-not [Environment]::Is64BitOperatingSystem) { Stani 'Potreban je 64-bitni Windows.' }
+
+$node = Join-Path $env:ProgramFiles 'nodejs\node.exe'
+if (-not (Test-Path -LiteralPath $node)) {
+  Stani "Node nije nadjen u $node. Instalirajte zvanicni Node 24 LTS x64 sa nodejs.org (podrazumevana putanja), pa ponovite."
+}
+$nodeVerzija = (& $node --version).Trim()
+if ($nodeVerzija -notmatch '^v24\.') { Stani "Potreban je Node 24 LTS; nadjen je $nodeVerzija." }
+
+try {
+  $runAsSid = (New-Object Security.Principal.NTAccount($RunAsAccount)).Translate([Security.Principal.SecurityIdentifier]).Value
+} catch {
+  Stani "Nalog '$RunAsAccount' ne postoji na ovom racunaru."
+}
+$adminSidovi = @()
+try { $adminSidovi = @(Get-LocalGroupMember -SID 'S-1-5-32-544' | ForEach-Object { $_.SID.Value }) } catch { }
+# Zajednicka, StrictMode-bezbedna provera iz paketa koji se instalira (isti nalog + UAC).
+. (Join-Path $izvorPaketa 'windows\PathGuards.ps1')
+$jedan = Test-JedanNalogSaUAC -AccountName $RunAsAccount
+if ($adminSidovi -contains $runAsSid) {
+  if (-not $JedanNalogSaUAC) {
+    Stani ("Nalog '$RunAsAccount' je administrator. Ako je to jedini nalog na racunaru, ponovite sa -JedanNalogSaUAC " +
+           '(zadatak ce raditi sa ogranicenim tokenom, bez povisenih prava). Vidi UPUTSTVO-KANCELARIJA.md, korak 0.')
+  }
+  if (-not $jedan.Dozvoljeno) { Stani "-JedanNalogSaUAC nije ispunjen: $($jedan.Razlog). Pokrenite iz sesije istog naloga (Run as administrator), uz ukljucen UAC." }
+  Info "Nalog '$RunAsAccount' je administrator (jedini nalog); UAC je ukljucen - zadatak ce raditi bez povisenih prava."
+}
+
+if ($ServerOrigin -and $ServerOrigin -notmatch '^https://') { Stani 'ServerOrigin mora poceti sa https://' }
+if ($PosaljiOdDatuma -and $PosaljiOdDatuma -notmatch '^\d{4}-\d{2}-\d{2}$') { Stani 'PosaljiOdDatuma mora biti u obliku GGGG-MM-DD.' }
+if ($IzvorniFolder -and -not (Test-Path -LiteralPath $IzvorniFolder -PathType Container)) { Stani "Folder '$IzvorniFolder' ne postoji." }
+if ($DeviceCode -notmatch '^[A-Za-z0-9._-]{1,64}$') { Stani 'DeviceCode sme da sadrzi samo slova, cifre, tacku, crticu i donju crtu.' }
+Ok "Preduslovi: Administrator, x64, Node $nodeVerzija, nalog $RunAsAccount."
+
+$novaVerzija = (Get-Content -LiteralPath (Join-Path $izvorPaketa 'VERSION') -Raw).Trim()
+
+# ------------------------------------------------------ konfiguracija unapred
+$staraKonfiguracija = $null
+$izvorKonfiguracije = Join-Path $cilj 'config.json'
+if (-not (Test-Path -LiteralPath $izvorKonfiguracije)) {
+  # Prekinut raniji pokusaj (npr. antivirus zadrzao kopiju): konfiguracija je u poslednjoj sacuvanoj verziji.
+  $sacuvana = @(Get-ChildItem -LiteralPath $env:ProgramFiles -Directory -Filter 'CarsystemConnector.prethodna-*' -ErrorAction SilentlyContinue |
+    Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'config.json') } | Sort-Object Name)
+  if ($sacuvana.Count -gt 0) {
+    $izvorKonfiguracije = Join-Path $sacuvana[$sacuvana.Count - 1].FullName 'config.json'
+    Info "config.json preuzet iz sacuvane verzije: $($sacuvana[$sacuvana.Count - 1].Name)"
+  }
+}
+if (Test-Path -LiteralPath $izvorKonfiguracije) {
+  $staraKonfiguracija = Get-Content -LiteralPath $izvorKonfiguracije -Raw | ConvertFrom-Json
+}
+if (-not $staraKonfiguracija -and (-not $IzvorniFolder -or -not $ServerOrigin)) {
+  Stani 'Prva instalacija trazi -IzvorniFolder i -ServerOrigin.'
+}
+$k = [ordered]@{}
+if ($staraKonfiguracija) { $staraKonfiguracija.PSObject.Properties | ForEach-Object { $k[$_.Name] = $_.Value } }
+else {
+  $k.serverOrigin = $ServerOrigin; $k.deviceCode = $DeviceCode; $k.keyId = 'k1'
+  $k.sourceSystem = 'biznisoft'; $k.issuerCode = 'CSRM'; $k.izvorniFolder = $IzvorniFolder; $k.maxPoCiklusu = 50
+  # Bez datuma pocetka nova instalacija bi poslala celu istoriju iz foldera.
+  if (-not $PosaljiOdDatuma) { $PosaljiOdDatuma = Get-Date -Format 'yyyy-MM-dd' }
+}
+if ($ServerOrigin) { $k.serverOrigin = $ServerOrigin }
+if ($IzvorniFolder) { $k.izvorniFolder = (Resolve-Path -LiteralPath $IzvorniFolder).Path }
+if ($PosaljiOdDatuma) { $k.posaljiOdDatuma = $PosaljiOdDatuma }
+if (-not $k.Contains('posaljiOdDatuma') -or -not $k.posaljiOdDatuma) {
+  # Ni azuriranje ne sme da otvori slanje istorije: bez datuma vazi danasnji.
+  $k.posaljiOdDatuma = Get-Date -Format 'yyyy-MM-dd'
+  Info "posaljiOdDatuma nije bio podesen - postavljen na $($k.posaljiOdDatuma)."
+}
+if ($VercelZastita) { $k.vercelZastita = $VercelZastita }
+if (-not $k.Contains('ciklus') -or -not $k.ciklus) {
+  # Satni ciklus radnim danima 08-19 (docs/b2b/49); okidac zadatka je uskladjen sa ovim.
+  $k.ciklus = [ordered]@{ od = '08:00'; do = '19:00'; svakihMinuta = 60 }
+  Info 'Raspored: radnim danima svakog sata, 08:00-19:00.'
+}
+
+# --------------------------------------------- 2. prethodna verzija i kopija
+# Stanje kroz COM + schtasks (Zadaci.ps1), ne Get-ScheduledTask: CIM ume da vrati 0x80070002 i sakrije zadatak koji radi.
+. (Join-Path $PSScriptRoot 'Zadaci.ps1')
+try { $zadatak = Get-ZadatakCs -TaskPath '\Carsystem\' -TaskName $imeZadatka }
+catch { Stani "Stanje zakazanog zadatka nije moguce utvrditi ($($_.Exception.Message)). Proverite: schtasks /Query /TN \Carsystem\$imeZadatka" }
+if ($zadatak.Postoji -and $zadatak.Stanje -eq 'Running') { Stani 'Zakazani zadatak trenutno radi. Sacekajte da zavrsi, pa ponovite.' }
+
+if (Test-Path -LiteralPath $cilj) {
+  $staraVerzija = 'nepoznata'
+  if (Test-Path -LiteralPath (Join-Path $cilj 'VERSION')) { $staraVerzija = (Get-Content -LiteralPath (Join-Path $cilj 'VERSION') -Raw).Trim() }
+  $rezerva = "$cilj.prethodna-$staraVerzija-$(Get-Date -Format 'yyyyMMddHHmmss')"
+  Move-Item -LiteralPath $cilj -Destination $rezerva
+  Ok "Prethodna verzija ($staraVerzija) sacuvana u: $rezerva"
+}
+New-Item -ItemType Directory -Path $cilj | Out-Null
+Copy-Item -Path (Join-Path $izvorPaketa '*') -Destination $cilj -Recurse
+# Antivirus ume da zadrzi pojedinacan fajl pri kopiranju: instalacija mora biti potpuna i ista kao paket.
+$relativno = { param($koren) @(Get-ChildItem -LiteralPath $koren -Recurse -File | ForEach-Object { "{0}|{1}" -f $_.FullName.Substring($koren.Length).TrimStart('\'), $_.Length }) }
+$razlika = @(Compare-Object -ReferenceObject (& $relativno $izvorPaketa) -DifferenceObject (& $relativno $cilj))
+if ($razlika.Count -gt 0) {
+  Stani ("Kopija nije potpuna ($($razlika.Count) razlika, npr. $($razlika[0].InputObject)). Verovatno ju je zadrzao antivirus. " +
+         'Pokrenite instalaciju ponovo; konfiguracija ostaje sacuvana u prethodnoj verziji.')
+}
+Ok 'Kopija je potpuna (svi fajlovi i velicine kao u paketu).'
+# DPAPI program se pokrece sa -ExecutionPolicy RemoteSigned: oznaka "preuzeto sa interneta" bi ga blokirala.
+Get-ChildItem -LiteralPath $cilj -Recurse -File | Unblock-File
+$utf8 = New-Object Text.UTF8Encoding($false)
+[IO.File]::WriteAllText((Join-Path $cilj 'config.json'), ($k | ConvertTo-Json), $utf8)
+Ok "Instalirana verzija $novaVerzija u $cilj (config.json: izvor '$($k.izvorniFolder)', slanje od $($k.posaljiOdDatuma))."
+
+# ------------------------------------------------- 4. ucvrscivanje instalacije
+# $global: - lokalna dodela bi zaklonila stvarni izlazni kod pomocne skripte (greska u 0be5a76).
+$global:LASTEXITCODE = 0
+try {
+  if ($JedanNalogSaUAC) {
+    & (Join-Path $cilj 'windows\harden-install-dir.ps1') -PackagePath $cilj -RunAsAccount $RunAsAccount -Apply -JedanNalogSaUAC
+  } else {
+    & (Join-Path $cilj 'windows\harden-install-dir.ps1') -PackagePath $cilj -RunAsAccount $RunAsAccount -Apply
+  }
+} catch {
+  Stani "harden-install-dir nije prosao: $($_.Exception.Message). Prethodnu verziju vratite sa .\windows\vrati-prethodnu.ps1."
+}
+if ($global:LASTEXITCODE -ne 0) { Stani "harden-install-dir nije prosao (kod $global:LASTEXITCODE). Prethodnu verziju vratite sa .\windows\vrati-prethodnu.ps1." }
+# Nezavisna provera stvarnog ACL-a (ista funkcija kao u task.ps1) - ne oslanja se samo na izlazni kod.
+$aclProblem = Test-PackageDirectoryHardened -Path $cilj
+if ($aclProblem) { Stani "Instalacioni folder NIJE ucvrscen: $aclProblem. Ponovite instalaciju ili vratite prethodnu verziju (vrati-prethodnu.ps1)." }
+Ok 'Instalacioni folder je ucvrscen (provereno nad stvarnim ACL-om; nalog konektora ima samo citanje).'
+
+Write-Host ''
+if ($JedanNalogSaUAC) {
+  Write-Host 'KORAK 2: u ISTOJ administratorskoj sesiji pokrenite:' -ForegroundColor Cyan
+  Write-Host "  & '$cilj\windows\podesi.ps1' -JedanNalogSaUAC" -ForegroundColor Cyan
+} else {
+  Write-Host "KORAK 2: prijavite se kao $RunAsAccount i pokrenite:" -ForegroundColor Cyan
+  Write-Host "  & '$cilj\windows\podesi.ps1'" -ForegroundColor Cyan
+}

@@ -1,19 +1,31 @@
 import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
-import { PhaseNotice } from "@/components/portal/PhaseNotice";
+import { CrumbLabel } from "@/components/portal/Breadcrumbs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { customers } from "@/db/schema";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability, requireCustomerAccess } from "@/lib/authz/session";
+import { listCustomerAssignees, listSalesReps } from "@/lib/partners/assignment-service";
+import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
+import { AssignmentPanel } from "./AssignmentPanel";
+import { loadArticleIdentities } from "@/lib/ordering/ordering-service";
+import { loadCrossSell } from "@/lib/recommendations/cross-sell";
+import { CustomerStatusPanel } from "./CustomerStatusPanel";
+import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
 
 export default async function CustomerDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ redosled?: string }>;
 }) {
   const { id } = await params;
+  // Poređenje sa dosadašnjim redosledom; sve ostalo (osim „dosadasnji") je R1.
+  const order = (await searchParams).redosled === "dosadasnji" ? "dosadasnji" : "r1";
   const user = await requireCapability("view:kupci", `/portal/kupci/${id}`);
 
   // Provera se radi pre bilo kakvog čitanja podataka: menjanje ID-a u adresi
@@ -28,23 +40,68 @@ export default async function CustomerDetailPage({
   const customer = rows[0];
   if (!customer) notFound();
 
+  const canManageAssignments = can(user, "assignments:manage");
+  // Isto pravilo kao ekran preporuka: prekidač blokira preračun, ne prikaz.
+  const showSignals = can(user, "view:preporuke");
+  const [assignees, reps, profile, crossSell] = await Promise.all([
+    listCustomerAssignees(customer.id),
+    canManageAssignments ? listSalesReps() : Promise.resolve([]),
+    showSignals ? loadCustomerProfile(customer.id) : Promise.resolve(null),
+    // Opseg je već proveren iznad (`requireCustomerAccess`); predlog je deo iste kartice.
+    showSignals ? loadCrossSell([customer.id]).then((m) => m.get(customer.id) ?? null) : Promise.resolve(null),
+  ]);
+
+  const identities = profile
+    ? Object.fromEntries(await loadArticleIdentities(profile.articles.map((a) => a.articleCode)))
+    : {};
+
   return (
     <>
+      <CrumbLabel segment={customer.id} label={customer.name} />
       <PageHeader
         eyebrow="Kupci"
         title={customer.name}
-        description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}`}
+        description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}${customer.active ? "" : " · neaktivan kupac"}`}
       />
-      <PhaseNotice
-        icon="customers"
-        title="Profil kupca čeka uvezene fakture"
-        summary="Kartice prometa, faktura, povrata i aktivnosti se popunjavaju iz uvoza. Pokazatelji naplate ostaju nedostupni dok ne postoji proveren izvor uplata."
-        requires={[
-          "Uvoz faktura iz BiznisSoft izvoza.",
-          "Proveren izvor uplata za sve što se tiče dugovanja i kašnjenja.",
-        ]}
-        availability="Dostupno nakon povezivanja BiznisSoft izvoza"
+      {!customer.active ? (
+        <p className="portal-readiness-note" role="status">
+          Kupac je označen kao neaktivan. Istorija i veze su dostupne; predlozi za razgovor i proširenje se ne
+          prikazuju.
+        </p>
+      ) : null}
+      {profile ? (
+        <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} inactive={!customer.active} />
+      ) : null}
+      {profile && customer.active ? (
+        <CustomerSuggestions profile={profile} identities={identities} order={order} />
+      ) : null}
+      {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
+      {profile && crossSell && customer.active ? (
+        <CustomerCrossSell
+          crossSell={crossSell}
+          names={Object.fromEntries(profile.articles.map((a) => [a.articleCode, a.articleName ?? a.articleCode]))}
+        />
+      ) : null}
+      <CustomerStatusPanel
+        customerId={customer.id}
+        active={customer.active}
+        canManage={can(user, "mappings:manage")}
       />
+      <AssignmentPanel
+        customerId={customer.id}
+        assignees={assignees}
+        reps={reps}
+        canManage={canManageAssignments}
+      />
+      {profile ? <CustomerMethod profile={profile} /> : null}
+      {/*
+       * Naplata se ne prikazuje: fakture ne nose ni dospeće ni uplatu. Ranija
+       * velika poruka „profil čeka uvezene fakture" stajala je i ispod stvarnih
+       * dokumenata; ovde ostaje samo tačna rečenica o onome što zaista fali.
+       */}
+      <p className="portal-footnote">
+        Naplata i dugovanja se ne prikazuju: izvor uplata i datuma dospeća nije povezan.
+      </p>
     </>
   );
 }

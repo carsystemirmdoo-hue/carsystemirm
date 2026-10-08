@@ -105,6 +105,18 @@ export function organizationJsonLd() {
                   email: companyContact.email,
                   areaServed: "RS",
                   availableLanguage: "sr",
+                  ...(companyContact.workingHoursSpec
+                    ? {
+                        hoursAvailable: {
+                          "@type": "OpeningHoursSpecification",
+                          dayOfWeek: companyContact.workingHoursSpec.days.map(
+                            (day) => `https://schema.org/${day}`,
+                          ),
+                          opens: companyContact.workingHoursSpec.opens,
+                          closes: companyContact.workingHoursSpec.closes,
+                        },
+                      }
+                    : {}),
                 },
               ]
             : []),

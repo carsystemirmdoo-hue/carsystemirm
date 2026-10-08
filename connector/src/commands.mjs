@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { posaljiPotpisano } from "./client.mjs";
 import { STANJA } from "./outcomes.mjs";
-import { posaljiIzReda, skenirajURed } from "./pipeline.mjs";
+import { KOD_POPIS_PREKINUT, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 
 /**
  * Ručne komande: preuzimanje, izvršenje i izveštaj napretka.
@@ -64,6 +64,7 @@ export function sledeciInterval({ neuspeha, random = Math.random }) {
 export async function preuzmiKomandu({ store, konfiguracija, kljuc, fetchImpl, dozvoliHttp }) {
   const odgovor = await posaljiPotpisano({
     origin: konfiguracija.serverOrigin,
+    zastitaPristupa: konfiguracija.vercelZastita ?? null,
     path: "/api/sync/commands/poll",
     bodyBytes: new TextEncoder().encode("{}"),
     deviceCode: konfiguracija.deviceCode,
@@ -143,6 +144,7 @@ export async function posaljiDogadjaj({
 
   const odgovor = await posaljiPotpisano({
     origin: konfiguracija.serverOrigin,
+    zastitaPristupa: konfiguracija.vercelZastita ?? null,
     path: "/api/sync/commands/update",
     bodyBytes: new TextEncoder().encode(telo),
     deviceCode: konfiguracija.deviceCode,
@@ -201,6 +203,10 @@ export async function posaljiNepotvrdjene(ctx) {
  * Razlika koja se lako izgubi: dokument koji je otišao na ručni pregled, ostao
  * nemapiran ili je lokalno nepodržan NIJE običan uspeh. Zato `completed` traži
  * da ničega od toga nema.
+ *
+ * Isto važi za nepotpun popis: poslato je sve što je VIĐENO, ali nije viđeno
+ * sve. Prekinut popis je `failed`; nedostupan folder je bar
+ * `completed_with_review`. Oba nose kod u `failureCode`.
  */
 export function stanjeZaIshod({ skeniranje, slanje }) {
   if (slanje.zaustavljeno) {
@@ -211,9 +217,21 @@ export function stanjeZaIshod({ skeniranje, slanje }) {
      */
     return { stanje: "blocked", failureCode: slanje.zaustavljeno };
   }
-  if (slanje.odlozeno > 0) {
-    // Ostalo je neslatih stavki — ponavljaju se sledećeg radnog dana.
-    return { stanje: "retry_pending", failureCode: null };
+  const kodPopisa = skeniranje.kodPopisa ?? null;
+  if (kodPopisa === KOD_POPIS_PREKINUT) {
+    return { stanje: "failed", failureCode: kodPopisa };
+  }
+  if (slanje.odlozeno > 0 || skeniranje.preostalo > 0 || slanje.ostaloURedu > 0) {
+    /*
+     * Ostalo je posla za sledeći ciklus: neslate stavke, dokumenti iznad
+     * budžeta ili red koji serija slanja nije ispraznila. Tokom backfill-a
+     * `completed` bi tvrdilo da je istorija gotova, a nije.
+     */
+    return { stanje: "retry_pending", failureCode: kodPopisa };
+  }
+  if (kodPopisa) {
+    // Ceo podfolder nije pročitan; „završeno“ bi tvrdilo da jeste.
+    return { stanje: "completed_with_review", failureCode: kodPopisa };
   }
   if (slanje.zaPregled > 0 || slanje.odbijeno > 0 || skeniranje.nepodrzano > 0) {
     /*
@@ -234,7 +252,11 @@ export function brojaciZa({ skeniranje, slanje }) {
     duplicateCount: 0,
     reviewCount: slanje.zaPregled ?? 0,
     unsupportedCount: skeniranje.nepodrzano ?? 0,
-    pendingCount: slanje.odlozeno ?? 0,
+    /*
+     * Sve što čeka sledeći ciklus: red posle slanja (on već sadrži odložene
+     * stavke) i novi dokumenti iznad budžeta, koji još nisu u redu.
+     */
+    pendingCount: (slanje.ostaloURedu ?? slanje.odlozeno ?? 0) + (skeniranje.preostalo ?? 0),
     blockedCount: slanje.zaustavljeno ? 1 : 0,
   };
 }
@@ -258,7 +280,13 @@ export async function izvrsiKomandu(ctx) {
   await posaljiDogadjaj({ ...ctx, dogadjaj: start });
 
   // 2. Isti P3 ciklus kao `run-once`.
-  const skeniranje = await skenirajURed({ store, konfiguracija, log: ctx.log });
+  const skeniranje = await skenirajURed({
+    store,
+    konfiguracija,
+    // Samo testovi prosleđuju granice; `undefined` znači podrazumevane.
+    granice: ctx.granice,
+    log: ctx.log,
+  });
   const slanje = await posaljiIzReda({
     store,
     konfiguracija,

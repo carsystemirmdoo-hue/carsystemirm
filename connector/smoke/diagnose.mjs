@@ -14,10 +14,10 @@
  */
 
 import { spawn, spawnSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { arch, release, tmpdir, version as osVersion } from "node:os";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { izmeri, KODOVI, redigovan, sastaviIzvestaj } from "./diagnose-core.mjs";
 
@@ -124,8 +124,50 @@ async function bezStdina(skripta, ulaz) {
   return { kod: r.status, stdout: r.stdout ?? "", stderr: r.stderr ?? "" };
 }
 
+/**
+ * PRODUKCIJSKI DPAPI adapter — isti fajl koji koristi konektor.
+ *
+ * Raspored se razlikuje po kontekstu: u paketu je `smoke/` pored
+ * `connector/dist/`, u izvornom stablu je `connector/smoke/` pored
+ * `connector/dist/` i `connector/src/`. Traži se prvi koji postoji; ne kopira se
+ * ništa, da D06 i D08 mere tačno ono što se isporučuje.
+ */
+export async function ucitajKanalAdaptera() {
+  const kandidati = [
+    join(OVDE, "..", "connector", "dist", "connector", "src", "keystore", "windows-dpapi.mjs"),
+    join(OVDE, "..", "dist", "connector", "src", "keystore", "windows-dpapi.mjs"),
+    join(OVDE, "..", "src", "keystore", "windows-dpapi.mjs"),
+  ];
+  for (const put of kandidati) {
+    if (!existsSync(put)) continue;
+    const modul = await import(pathToFileURL(put).href);
+    const uB64 = (x) => Buffer.from(x).toString("base64");
+    return {
+      // Produkcijski kanal: nativni DPAPI u ovom procesu (zastiti → otkljucaj), bez PowerShell-a.
+      pokreni: async (_program, ulaz) =>
+        uB64(await modul.dpapiOperacija("otkljucaj", await modul.dpapiOperacija("zastiti", Buffer.from(ulaz, "base64")))),
+      ucitaj: async () => {
+        await modul.ucitajNativni();
+      },
+      // Izmenjen blob mora biti odbijen; vraća se samo kod greške.
+      izmenjenBlob: async () => {
+        const blob = Buffer.from(await modul.dpapiOperacija("zastiti", Buffer.from("cs-dpapi-izmena")));
+        blob[blob.length - 1] ^= 0xff;
+        try {
+          await modul.dpapiOperacija("otkljucaj", blob);
+          return null;
+        } catch (e) {
+          return e?.code ?? null;
+        }
+      },
+      proveri: () => modul.proveri(),
+    };
+  }
+  return null;
+}
+
 export const MEHANIZMI = [
-  { id: "spawn-stdin", opis: "spawn + stdin (put DPAPI adaptera)", pokreni: spawnStdin },
+  { id: "spawn-stdin", opis: "spawn + stdin", pokreni: spawnStdin },
   { id: "spawnSync-input", opis: "spawnSync + input (pao sa EINVAL)", pokreni: sinhroniInput },
   { id: "spawnSync-command", opis: "spawnSync + jednolinijski -Command", pokreni: bezStdina },
 ];
@@ -168,7 +210,17 @@ async function glavna() {
 
   let rezultat;
   try {
-    rezultat = await izmeri({ mehanizmi: MEHANIZMI, log: (red) => console.log(red) });
+    let kanalAdaptera = null;
+    try {
+      kanalAdaptera = await ucitajKanalAdaptera();
+    } catch {
+      /* D06/D08 tada prijavljuju da kanal nije učitan — bez poruke i putanje. */
+    }
+    rezultat = await izmeri({
+      mehanizmi: MEHANIZMI,
+      kanalAdaptera,
+      log: (red) => console.log(red),
+    });
   } catch (e) {
     /*
      * Ni ovo ne sme da izađe kao stack trace.

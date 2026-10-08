@@ -12,6 +12,7 @@ import {
   ROLE_LABELS,
   ROLES,
 } from "@/lib/authz/permissions.mjs";
+import { ESCALATION_PACKAGES } from "@/lib/authz/owner-guard-policy.mjs";
 
 const INITIAL: AdminActionState = { error: null, ok: null };
 
@@ -203,8 +204,9 @@ export function PermissionMatrix({
           ) : null}
           {!reasonMissing && roleTokenMissing ? (
             <small>
-              Promena uloge traži i svež kod iz Vaše aplikacije za jednokratne
-              kodove. Dodela paketa ga ne traži.
+              Promena uloge i izmena paketa „Korisnici i dozvole“ i „Bezbednost
+              naloga“ traže i svež kod iz Vaše aplikacije za jednokratne kodove.
+              Ostali paketi ga ne traže.
             </small>
           ) : null}
         </div>
@@ -283,6 +285,9 @@ export function PermissionMatrix({
                   // postoji i na serveru, gde jedina i obavezuje.
                   const selfLockout =
                     item.key === "korisnici" && user.id === actorId && granted;
+                  // Sebi se paket ne dodeljuje; server odbija isto.
+                  const selfGrant = user.id === actorId && !granted;
+                  const needsToken = ESCALATION_PACKAGES.includes(item.key);
                   return (
                     <td key={item.key} data-granted={granted}>
                       {canManage ? (
@@ -299,15 +304,28 @@ export function PermissionMatrix({
                             value={granted ? "0" : "1"}
                           />
                           <input type="hidden" name="reason" value={reason} />
+                          {needsToken ? (
+                            <input type="hidden" name="token" value={roleToken} />
+                          ) : null}
                           <button
                             type="submit"
                             className="portal-permission-toggle"
                             data-on={granted}
-                            disabled={pending || reasonMissing || selfLockout}
+                            disabled={
+                              pending ||
+                              reasonMissing ||
+                              selfLockout ||
+                              selfGrant ||
+                              (needsToken && roleTokenMissing)
+                            }
                             title={
                               selfLockout
                                 ? "Ne možete sebi oduzeti administraciju korisnika"
-                                : `${granted ? "Oduzmite" : "Dodelite"}: ${item.description}`
+                                : selfGrant
+                                  ? "Paket ne možete dodeliti sami sebi"
+                                  : needsToken && roleTokenMissing
+                                    ? "Unesite kod iz aplikacije"
+                                    : `${granted ? "Oduzmite" : "Dodelite"}: ${item.description}`
                             }
                           >
                             {granted ? "ima" : "nema"}

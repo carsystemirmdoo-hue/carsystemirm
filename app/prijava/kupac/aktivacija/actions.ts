@@ -1,12 +1,13 @@
 "use server";
 
 import { z } from "zod";
+import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { clientIpFromRequest } from "@/lib/auth/client-ip";
+import { registerAttempt } from "@/lib/auth/rate-limit-service";
 import { CustomerAccountError } from "@/lib/customers/account-service";
 import {
   activateWithInvitation,
-  completePasswordReset,
   CUSTOMER_PASSWORD_MIN,
-  requestPasswordReset,
 } from "@/lib/customers/invitation-service";
 
 export type ActivationState = { error: string | null; ok: string | null };
@@ -50,6 +51,29 @@ export async function activateAccountAction(
     return { error: "Lozinke se ne poklapaju.", ok: null };
   }
 
+  /*
+   * Brojač se povećava PRE provere tokena, kao kod promene lozinke kodom:
+   * pogodak ne sme proći bez traga u brojaču.
+   */
+  const decision = await registerAttempt({
+    scope: "customer_activation",
+    accountIdentifier: parsed.data.token,
+    clientIp: await clientIpFromRequest(),
+  });
+  if (!decision.allowed) {
+    await recordAudit({
+      actor: { id: null, name: "Neprijavljen", role: "anon" },
+      action: AUDIT_ACTIONS.rateLimitBlocked,
+      entityType: "Aktivacija kupčevog naloga",
+      // Ni token ni lozinka ne ulaze u trag.
+      reason: "Previše pokušaja aktivacije naloga",
+    });
+    return {
+      error: "Previše pokušaja. Sačekajte nekoliko minuta pa pokušajte ponovo.",
+      ok: null,
+    };
+  }
+
   try {
     const { ok } = await activateWithInvitation(parsed.data);
     return ok
@@ -63,58 +87,14 @@ export async function activateAccountAction(
   }
 }
 
-export async function completeResetAction(
-  _previous: ActivationState,
-  formData: FormData,
-): Promise<ActivationState> {
-  const parsed = parse(formData);
-  if (!parsed.success) {
-    return {
-      error: `Lozinka mora imati najmanje ${CUSTOMER_PASSWORD_MIN} znakova.`,
-      ok: null,
-    };
-  }
-  if (parsed.data.password !== parsed.data.confirm) {
-    return { error: "Lozinke se ne poklapaju.", ok: null };
-  }
-
-  try {
-    const { ok } = await completePasswordReset(parsed.data);
-    return ok
-      ? { error: null, ok: "Lozinka je promenjena. Možete se prijaviti." }
-      : { error: GENERIC_TOKEN_ERROR, ok: null };
-  } catch (error) {
-    if (error instanceof CustomerAccountError) {
-      return { error: error.message, ok: null };
-    }
-    throw error;
-  }
-}
-
-const emailSchema = z.object({
-  email: z.string().trim().toLowerCase().email().max(254),
-});
-
-/**
- * „Zaboravljena lozinka".
+/*
+ * Samostalna promena zaboravljene lozinke je ISKLJUČENA (odluka 2026-10-01).
  *
- * Odgovor je UVEK isti, bez obzira na to da li nalog postoji. Razlika bi bila
- * enumeracija naloga — spisak kupaca jedne firme je poslovno osetljiv podatak.
- *
- * Token se NE vraća korisniku: upisuje se outbox red koji kancelarija vidi i
- * dalje isporučuje. Provajder e-pošte ne postoji i ne dodaje se.
+ * Bez slanja e-pošte token za reset nije imao kuda da ode: servis ga je
+ * pravio i odbacivao, a kancelarija nije mogla da ga preda. Dok ne postoji
+ * bezbedno slanje pošte, oporavak ide novom pozivnicom iz
+ * /portal/kupci/nalozi. Akcije `requestResetAction` i `completeResetAction`
+ * su zato uklonjene (ne samo sakrivene): server akcija je dostupna i bez
+ * dugmeta. Servisne funkcije u `lib/customers/invitation-service.ts` ostaju
+ * za trenutak kada se uključi pošta.
  */
-export async function requestResetAction(
-  _previous: ActivationState,
-  formData: FormData,
-): Promise<ActivationState> {
-  const parsed = emailSchema.safeParse({ email: formData.get("email") });
-  const generic = {
-    error: null,
-    ok: "Ako nalog postoji, kancelarija će Vam dostaviti link za promenu lozinke.",
-  };
-  if (!parsed.success) return generic;
-
-  await requestPasswordReset(parsed.data);
-  return generic;
-}

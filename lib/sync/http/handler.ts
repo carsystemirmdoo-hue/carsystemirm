@@ -1,6 +1,6 @@
 import "server-only";
 import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
-import { registerAttempt } from "@/lib/auth/rate-limit-service";
+import { blockedForSeconds, registerAttempt } from "@/lib/auth/rate-limit-service";
 import {
   authenticateDeviceRequest,
   DeviceAuthError,
@@ -36,15 +36,18 @@ export type SyncResponseBody = {
 };
 
 export function syncJson(status: number, body: SyncResponseBody): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-      // Odgovor se ne kešira i ne indeksira ni pod kojim uslovom.
-      "cache-control": "no-store",
-      "x-content-type-options": "nosniff",
-    },
-  });
+  const headers: Record<string, string> = {
+    "content-type": "application/json; charset=utf-8",
+    // Odgovor se ne kešira i ne indeksira ni pod kojim uslovom.
+    "cache-control": "no-store",
+    "x-content-type-options": "nosniff",
+  };
+  // Standardno zaglavlje uz 429: konektor (i bilo koji klijent) zna koliko da čeka.
+  const cekanje = (body as { retryAfterSeconds?: unknown }).retryAfterSeconds;
+  if (status === 429 && typeof cekanje === "number" && Number.isFinite(cekanje) && cekanje >= 0) {
+    headers["retry-after"] = String(Math.ceil(cekanje));
+  }
+  return new Response(JSON.stringify(body), { status, headers });
 }
 
 /**
@@ -118,19 +121,33 @@ export async function withAuthenticatedDevice(
    */
   const tvrdjenaOznaka = (request.headers.get(HEADERS.device) ?? "").slice(0, 64) || null;
 
-  const nepoznat = await registerAttempt({
-    scope: "sync_unknown",
+  /*
+   * Brojač nepoznatih pozivalaca broji NEUSPEHE, ne sve zahteve.
+   *
+   * Ranije se uvećavao za svaki zahtev, pa i za uređaj koji je upravo dokazao
+   * identitet (otkriveno i na kancelarijskom smoke-u i na generalnoj probi
+   * talasa 01). Pre posla se samo PROVERI da li blokada traje — sa tačnim
+   * vremenom za `Retry-After`, koje konektor poštuje — a pokušaj se broji tek
+   * kada odbijanje stvarno nastane; posle praga i samo odbijanje postaje 429.
+   * Autentifikovan uređaj meri `sync_device`.
+   */
+  const brojacNepoznatih = {
+    scope: "sync_unknown" as const,
     accountIdentifier: tvrdjenaOznaka,
     clientIp,
-  });
-  if (!nepoznat.allowed) {
-    return syncJson(429, {
-      ok: false,
-      code: "rate_limited",
-      requestId,
-      retryAfterSeconds: nepoznat.retryAfterSeconds,
-    });
-  }
+  };
+  const ogranicenje429 = (retryAfterSeconds?: number) =>
+    syncJson(429, { ok: false, code: "rate_limited", requestId, retryAfterSeconds });
+
+  const blokiranoJos = await blockedForSeconds(brojacNepoznatih);
+  if (blokiranoJos > 0) return ogranicenje429(blokiranoJos);
+
+  /** Odbijanje pre identiteta se broji; posle praga prelazi u 429. */
+  const odbijNepoznatog = async (status: number, code: string) => {
+    const odluka = await registerAttempt(brojacNepoznatih);
+    if (!odluka.allowed) return ogranicenje429(odluka.retryAfterSeconds);
+    return syncJson(status, { ok: false, code, requestId });
+  };
 
   /* --- 3. Telo, uz tvrdu granicu. -------------------------------------- */
   let bodyBytes: Uint8Array;
@@ -139,9 +156,9 @@ export async function withAuthenticatedDevice(
     bodyBytes = await readBoundedBody(request);
   } catch (error) {
     if (error instanceof BodyError) {
-      return syncJson(error.status, { ok: false, code: error.code, requestId });
+      return odbijNepoznatog(error.status, error.code);
     }
-    return syncJson(400, { ok: false, code: "body_unreadable", requestId });
+    return odbijNepoznatog(400, "body_unreadable");
   }
 
   /* --- 4. Autentifikacija. --------------------------------------------- */
@@ -155,7 +172,7 @@ export async function withAuthenticatedDevice(
     });
   } catch (error) {
     if (error instanceof DeviceAuthError) {
-      return syncJson(error.status, { ok: false, code: error.code, requestId });
+      return odbijNepoznatog(error.status, error.code);
     }
     /*
      * Greška baze pri autentifikaciji NE propušta zahtev.

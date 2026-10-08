@@ -1,5 +1,6 @@
 import * as dpapi from "./windows-dpapi.mjs";
 import * as testAdapter from "./test-insecure.mjs";
+import * as macosKeychain from "./macos-keychain.mjs";
 
 /**
  * Bira skladište ključa — i odbija nebezbedno u produkciji.
@@ -26,11 +27,20 @@ export function jeProdukcioniPaket(env = process.env) {
 }
 
 /**
+ * `dpapiDostupan` se zadaje samo u testu, da bi se OBE grane proverile na
+ * svakoj platformi: na Windowsu je DPAPI uvek dostupan, pa se grana odbijanja
+ * inače nikad ne izvrši, a van Windowsa se nikad ne izvrši grana izbora DPAPI-ja.
+ *
  * @param {NodeJS.ProcessEnv} env
+ * @param {{ dpapiDostupan?: boolean }} [opcije]
  * @returns {{ adapter: object, ime: string }}
  */
-export function izaberiAdapter(env = process.env) {
-  if (dpapi.dostupan()) return { adapter: dpapi, ime: dpapi.adapterIme };
+export function izaberiAdapter(env = process.env, { dpapiDostupan = dpapi.dostupan() } = {}) {
+  /*
+   * DPAPI ima prednost nad svakom promenljivom okruženja: izričit
+   * `CS_CONNECTOR_INSECURE_KEYSTORE=1` na Windowsu ne bira plaintext ključ.
+   */
+  if (dpapiDostupan) return { adapter: dpapi, ime: dpapi.adapterIme };
 
   if (testAdapter.dostupan(env)) {
     if (jeProdukcioniPaket(env)) {
@@ -47,6 +57,8 @@ export function izaberiAdapter(env = process.env) {
     }
     return { adapter: testAdapter, ime: testAdapter.adapterIme };
   }
+  // macOS Keychain — samo izričito (uvoz istorijske arhive sa Mac-a).
+  if (macosKeychain.dostupan(env)) return { adapter: macosKeychain, ime: macosKeychain.adapterIme };
 
   /*
    * Nema bezbednog skladišta i test nije izričito tražen.
@@ -58,6 +70,8 @@ export function izaberiAdapter(env = process.env) {
     "no_secure_keystore",
     process.platform === "win32"
       ? "Windows DPAPI nije dostupan."
-      : "Van Windows-a nema bezbednog skladišta ključa; ostatak se testira uz izričit test adapter.",
+      : process.platform === "darwin"
+        ? "Na macOS-u se ključ čuva u Keychain-u tek uz izričito CS_CONNECTOR_MACOS_KEYCHAIN=1."
+        : "Van Windows-a i macOS-a nema bezbednog skladišta ključa; ostatak se testira uz izričit test adapter.",
   );
 }

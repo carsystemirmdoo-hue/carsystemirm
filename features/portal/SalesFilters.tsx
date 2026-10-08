@@ -1,3 +1,4 @@
+import { DateRangeField } from "@/components/portal/DateRangeField";
 import { PhaseNotice } from "@/components/portal/PhaseNotice";
 
 export interface FilterOptions {
@@ -27,13 +28,22 @@ export function SalesFilters({
   applied,
   views,
   exportView,
+  salespersonOnInvoices,
 }: {
   action: string;
   options: FilterOptions;
   applied: AppliedFilter;
   views?: { key: string; label: string }[];
   exportView: string;
+  /**
+   * Da li učitane fakture uopšte nose komercijalistu. Fakture iz PDF uvoza ga
+   * nemaju, pa filter tada ne bi vratio ništa — ekran to kaže unapred.
+   */
+  salespersonOnInvoices?: boolean;
 }) {
+  const nemaGrupa = options.productGroups.length === 0;
+  const nemaKomercijaliste =
+    options.salespeople.length === 0 || salespersonOnInvoices === false;
   const exportParams = new URLSearchParams();
   exportParams.set("view", exportView);
   if (applied.from) exportParams.set("from", applied.from);
@@ -46,14 +56,12 @@ export function SalesFilters({
   return (
     <section className="portal-panel">
       <form action={action} method="get" className="portal-settings-form">
-        <label>
-          <span>Period od</span>
-          <input type="date" name="from" defaultValue={applied.from ?? ""} />
-        </label>
-        <label>
-          <span>Period do</span>
-          <input type="date" name="to" defaultValue={applied.to ?? ""} />
-        </label>
+        <DateRangeField
+          nameOd="from"
+          nameDo="to"
+          defaultOd={applied.from}
+          defaultDo={applied.to}
+        />
         <label>
           <span>Kupac</span>
           <select name="kupac" defaultValue={applied.kupac ?? ""}>
@@ -70,6 +78,10 @@ export function SalesFilters({
           <select
             name="komercijalista"
             defaultValue={applied.komercijalista ?? ""}
+            disabled={nemaKomercijaliste && !applied.komercijalista}
+            aria-describedby={
+              nemaKomercijaliste ? "filter-komercijalista-napomena" : undefined
+            }
           >
             <option value="">svi</option>
             {options.salespeople.map((person) => (
@@ -78,10 +90,21 @@ export function SalesFilters({
               </option>
             ))}
           </select>
+          {nemaKomercijaliste ? (
+            <small id="filter-komercijalista-napomena">
+              Fakture iz PDF uvoza nemaju upisanog komercijalistu, pa ovaj
+              filter za sada ne daje rezultate.
+            </small>
+          ) : null}
         </label>
         <label>
           <span>Grupa proizvoda</span>
-          <select name="grupa" defaultValue={applied.grupa ?? ""}>
+          <select
+            name="grupa"
+            defaultValue={applied.grupa ?? ""}
+            disabled={nemaGrupa && !applied.grupa}
+            aria-describedby={nemaGrupa ? "filter-grupa-napomena" : undefined}
+          >
             <option value="">sve grupe</option>
             {options.productGroups.map((group) => (
               <option key={group} value={group}>
@@ -89,6 +112,11 @@ export function SalesFilters({
               </option>
             ))}
           </select>
+          {nemaGrupa ? (
+            <small id="filter-grupa-napomena">
+              Grupe artikala još nisu uvezene iz BizniSoft šifarnika.
+            </small>
+          ) : null}
         </label>
         {views ? (
           <label>
@@ -121,8 +149,9 @@ export function SalesFilters({
           ))}
         </p>
         <p className="portal-phase-notice-tag">
-          Izvoz poštuje primenjene filtere i Vaš opseg pristupa — sadrži tačno
-          ono što vidite na ekranu, sa vremenom nastanka u zaglavlju.
+          Izvoz poštuje primenjene filtere i Vaš opseg pristupa, sa vremenom
+          nastanka u zaglavlju. Može sadržati više redova nego tabela na
+          ekranu.
         </p>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import "server-only";
 import { and, eq, ne, sql } from "drizzle-orm";
-import { getDb } from "@/db/client";
+import { getDb, getDirectDb } from "@/db/client";
 import { users } from "@/db/schema";
 import { clientIpFromRequest } from "@/lib/auth/client-ip";
 import { verifyTotpForUser } from "@/lib/auth/mfa-service";
@@ -13,6 +13,7 @@ import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import {
   ownerGuardAllows,
   removesActiveOwner,
+  securityTargetRefusal,
 } from "@/lib/authz/owner-guard-policy.mjs";
 import { requireCapability, requireFullPortalUser } from "@/lib/authz/session";
 import type { PortalUser } from "@/lib/authz/user-repository";
@@ -152,7 +153,7 @@ export type SecurityTarget = {
  */
 export async function loadSecurityTarget(
   targetId: string,
-  options: { allowSelf?: boolean; actorId: string },
+  options: { allowSelf?: boolean; actorId: string; actorRole: string },
 ): Promise<SecurityTarget> {
   if (!options.allowSelf && targetId === options.actorId) {
     throw new SecurityActionError(
@@ -173,6 +174,14 @@ export async function loadSecurityTarget(
     .limit(1);
 
   if (!target) throw new SecurityActionError(SECURITY_GENERIC_ERROR);
+
+  /*
+   * Nalog Vlasnika menja samo Vlasnik. Paket „Bezbednost naloga“ je delegabilan,
+   * a bez ovoga je njegov nosilac mogao da resetuje lozinku i MFA Vlasnika i
+   * preuzme njegov nalog. Važi za svaku radnju koja učitava cilj ovuda.
+   */
+  const refusal = securityTargetRefusal({ role: options.actorRole }, target);
+  if (refusal) throw new SecurityActionError(refusal);
   return target;
 }
 
@@ -203,6 +212,10 @@ export type Tx = Parameters<
  *
  * `mutate` se izvršava unutar iste transakcije — provera i upis ne mogu se
  * razdvojiti.
+ *
+ * Transakcija ide DIREKTNOM vezom (`getDirectDb`, `DATABASE_DIRECT_URL`), ne
+ * kroz spojnicu kojom ide ostatak aplikacije. Bez te promenljive koristi se
+ * glavna veza, a provera u `pg_locks` ispod odbija radnju ako brava ne drži.
  */
 export async function withOwnerGuard<T>(
   input: {
@@ -212,7 +225,7 @@ export async function withOwnerGuard<T>(
   },
   mutate: (tx: Tx) => Promise<T>,
 ): Promise<T> {
-  return getDb().transaction(async (tx) => {
+  return getDirectDb().transaction(async (tx) => {
     /*
      * Ključ se šalje kao `bigint`.
      *

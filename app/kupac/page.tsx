@@ -1,112 +1,87 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { customerSignOutAction } from "@/app/prijava/kupac/actions";
-import {
-  PageHeader,
-  Panel,
-  SectionHeader,
-} from "@/components/portal/PortalPrimitives";
+import { srDate, srDateTime, DOCUMENT_KIND_LABELS, srMoney } from "@/components/customer/account-format";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
-import {
-  loadCustomerDocumentSummary,
-  loadCustomerDocuments,
-} from "@/lib/customers/customer-queries";
-import "../portal/portal.css";
-
-export const metadata: Metadata = {
-  title: "Moj nalog · Carsystem i R-M",
-  robots: { index: false, follow: false, noarchive: true },
-};
+import { companyContact } from "@/lib/company-contact";
+import { loadCustomerInvoices, loadCustomerOverview } from "@/lib/customers/customer-queries";
+import { loadDatasetInfo } from "@/lib/data-state/dataset";
 
 export const dynamic = "force-dynamic";
 
-/**
- * Kupčev prostor.
- *
+/*
  * Nijedan podatak ne dolazi iz adrese. `customerId` je isključivo iz sesije, i
- * ova strana namerno NE prima `searchParams` ni `params` — ne zato što bi ih
- * ignorisala, nego da bi bilo očigledno da ih ni ne može pročitati.
+ * strana namerno nema parametre (lib/authz/customerIsolation.test.mjs).
  */
 export default async function CustomerHomePage() {
-  const session = await requireCustomerSession();
-
-  const [summary, documents] = await Promise.all([
-    loadCustomerDocumentSummary(session.customerId),
-    loadCustomerDocuments(session.customerId, 20),
+  const session = await requireCustomerSession("/kupac");
+  const [overview, recent, dataset] = await Promise.all([
+    loadCustomerOverview(session.customerId),
+    loadCustomerInvoices(session.customerId, { page: 1 }),
+    loadDatasetInfo(),
   ]);
+  const demo = dataset.kind === "demo";
 
   return (
-    <main className="portal-main">
-      <PageHeader
-        eyebrow="Pristup za kupce"
-        title={session.customerName}
-        description={`Prijavljeni ste kao ${session.name}. Nalog vidi isključivo podatke ove firme.`}
-      />
+    <div className="ka-grid">
+      <section className="portal-panel">
+        <h2>Firma</h2>
+        <dl className="ka-facts">
+          <div><dt>Naziv</dt><dd>{overview?.name}</dd></div>
+          <div><dt>PIB</dt><dd>{overview?.pib}</dd></div>
+          <div><dt>Mesto</dt><dd>{overview?.city ?? "—"}</dd></div>
+          <div><dt>Vaš komercijalista</dt><dd>{overview?.reps.length ? overview.reps.join(", ") : "—"}</dd></div>
+        </dl>
+      </section>
 
-      <Panel>
-        <SectionHeader
-          title="Dokumenti"
-          description="Fakture i povrati Vaše firme, iz knjigovodstvenog uvoza."
-        />
-        {summary.totalDocuments === 0 ? (
-          <p>
-            Za Vašu firmu još nema uvezenih dokumenata. Kada uvoz iz
-            knjigovodstva bude izvršen, spisak će se pojaviti ovde.
-          </p>
-        ) : (
+      <section className="portal-panel">
+        <h2>Fakture</h2>
+        {overview && overview.invoices > 0 ? (
           <>
-            <p>
-              Ukupno dokumenata: <strong>{summary.totalDocuments}</strong>
-              {summary.lastIssuedOn ? (
-                <> · poslednji izdat {summary.lastIssuedOn}</>
-              ) : null}
-            </p>
-            <table className="portal-table">
-              <thead>
-                <tr>
-                  <th scope="col">Broj</th>
-                  <th scope="col">Datum</th>
-                  <th scope="col">Vrsta</th>
-                </tr>
-              </thead>
-              <tbody>
-                {documents.map((document) => (
-                  <tr key={document.id}>
-                    <td>
-                      {document.number}/{document.year}
-                    </td>
-                    <td>{document.issuedOn}</td>
-                    <td>{document.documentKind}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <dl className="ka-facts">
+              <div><dt>Ukupno</dt><dd>{overview.invoices}</dd></div>
+              <div><dt>Poslednja</dt><dd>{srDate(overview.lastIssuedOn)}</dd></div>
+              <div><dt>Prva</dt><dd>{srDate(overview.firstIssuedOn)}</dd></div>
+            </dl>
+            <ul className="ka-recent">
+              {recent.rows.slice(0, 5).map((r) => (
+                <li key={r.id}>
+                  <Link href={`/kupac/fakture/${r.id}`}>
+                    <strong>{r.number}/{r.year}</strong>
+                    <span>{srDate(r.issuedOn)} · {DOCUMENT_KIND_LABELS[r.documentKind] ?? r.documentKind}{r.reversed ? " · stornirano" : ""}</span>
+                    <span className="ka-amount">{srMoney(r.totalAmount, r.currency)}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/kupac/fakture" className="ka-more">Sve fakture i pretraga →</Link>
           </>
+        ) : (
+          <p>Za Vašu firmu još nema uvezenih faktura.</p>
         )}
-        {/*
-         * Cene se ovde NE prikazuju.
-         *
-         * Jedina cena koju bismo danas mogli pokazati je istorijska, sa fakture.
-         * Prikazana bez ograde, ona se čita kao obećanje buduće cene — a portal
-         * još nema potvrdu iz BizniSofta da je bilo koja buduća cena stvarna.
-         * Vidi docs/b2b/01-target-architecture.md, AD-3.
-         */}
-        <p className="portal-login-hint">
-          Cene i uslovi se potvrđuju uz porudžbinu. Ovaj pregled ih ne prikazuje.
+        <p className="portal-footnote">
+          {demo
+            ? "Poreklo: lokalni demo — izmišljene fakture, nisu iz knjigovodstva."
+            : `Poreklo: fakture iz BizniSoft knjigovodstva, uvezene u portal. Poslednji uvoz: ${srDateTime(overview?.lastIngestedAt ?? null)}.`}
         </p>
-      </Panel>
+      </section>
 
-      <p>
-        <Link href="/kupac/saglasnosti">
-          Saglasnosti za obaveštenja i oglase
-        </Link>
-      </p>
-
-      <form action={customerSignOutAction}>
-        <button className="portal-login-submit" type="submit">
-          Odjavite se
-        </button>
-      </form>
-    </main>
+      <section className="portal-panel">
+        <h2>Porudžbine</h2>
+        <p>
+          Poručivanje kroz nalog još nije uključeno. Porudžbine i dalje šaljete kao do sada — svom
+          komercijalisti ili kancelariji.
+        </p>
+        <p className="portal-footnote">
+          Kancelarija:{" "}
+          {companyContact.phone && companyContact.phoneHref ? (
+            <>
+              <a href={companyContact.phoneHref}>{companyContact.phone}</a> ·{" "}
+            </>
+          ) : null}
+          <a href={companyContact.emailHref}>{companyContact.email}</a>
+          {companyContact.workingHours ? <> · {companyContact.workingHours}</> : null}
+        </p>
+        <Link href="/kupac/porudzbine" className="ka-more">Šta se ovde prikazuje →</Link>
+      </section>
+    </div>
   );
 }

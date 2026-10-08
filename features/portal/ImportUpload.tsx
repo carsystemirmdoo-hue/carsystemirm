@@ -1,5 +1,7 @@
 "use client";
 
+import { DateField } from "@/components/portal/DateField";
+
 import { useActionState } from "react";
 import { importFileAction, type ImportState } from "@/app/portal/importi/actions";
 
@@ -32,11 +34,12 @@ export function ImportUpload() {
           />
           <small>Razdvajač `;` ili `,`. Najviše 20 MB.</small>
         </label>
-        <label>
-          <span>Datum podataka (opciono)</span>
-          <input type="date" name="datum_podataka" disabled={pending} />
-          <small>Radni dan na koji se izvoz odnosi.</small>
-        </label>
+        <DateField
+          name="datum_podataka"
+          label="Datum podataka (opciono)"
+          hint="Radni dan na koji se izvoz odnosi."
+          disabled={pending}
+        />
         <button
           type="submit"
           className="portal-button"

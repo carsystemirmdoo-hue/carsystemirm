@@ -28,8 +28,12 @@ export function isRecommendationsEnabled(
  *
  *  - kupčev pogled na preporuke (ruta ne postoji u kupčevom portalu),
  *  - automatsko slanje poruke kupcu,
- *  - automatsku porudžbinu,
- *  - automatski recompute posle svakog dokumenta.
+ *  - automatsku porudžbinu.
+ *
+ * Automatski obračun posle uvoza POSTOJI od 0032, ali iza sopstvenog
+ * prekidača (`RECOMMENDATIONS_AUTO_RECOMPUTE`) i spojen po skeniranju — ne
+ * posle svakog dokumenta. Predlozi dodatnih proizvoda (F9) su zaseban,
+ * interni modul (`crossSell.mjs`), nisu deo `cadence_v1`.
  *
  * Ovo je spisak funkcija koje V1 NEMA — ne funkcija koje su isključene. Razlika
  * je važna: isključena funkcija se uključuje prekidačem, a nepostojeća traži
@@ -39,8 +43,16 @@ export const V1_NE_POSTOJI = Object.freeze([
   "customer_facing_recommendations",
   "automatic_order_creation",
   "automatic_customer_messaging",
-  "automatic_recompute_on_ingest",
   "quantity_forecast",
   "price_or_margin_claim",
-  "cross_sell",
 ]);
+
+/**
+ * Automatski obračun posle uspešnog uvoza — samo uz uključene preporuke I
+ * izričito uključen ovaj prekidač (samo tačno „1"). Podrazumevano isključeno.
+ */
+export const AUTO_RECOMPUTE_FLAG = "RECOMMENDATIONS_AUTO_RECOMPUTE";
+
+export function isAutoRecomputeEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  return isRecommendationsEnabled(env) && env[AUTO_RECOMPUTE_FLAG] === "1";
+}

@@ -7,6 +7,7 @@ import {
   NO_STORE_PATHS,
   securityHeaders,
 } from "./lib/security/http-headers.mjs";
+import { SERVER_ACTION_BODY_LIMIT } from "./lib/import/upload-limits.mjs";
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
@@ -61,6 +62,12 @@ const nextConfig: NextConfig = {
    */
   serverExternalPackages: ["unpdf"],
   experimental: {
+    /*
+     * Najveće telo server akcije. Podrazumevano je 1 MB, pa je otpremanje
+     * PDF-ova i XLSX-a padalo pre ijedne provere u kodu. Vrednost dolazi iz
+     * `lib/import/upload-limits.mjs` (ispod 4,5 MB koliko Vercel prima).
+     */
+    serverActions: { bodySizeLimit: SERVER_ACTION_BODY_LIMIT },
     // Omogućava `forbidden()` iz next/navigation, da zabranjena ruta portala
     // vrati pravi 403 status umesto preusmeravanja na stranicu sa porukom.
     authInterrupts: true,

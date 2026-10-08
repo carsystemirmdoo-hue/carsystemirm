@@ -1,7 +1,14 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { importPdfAction, type PdfImportState } from "@/app/portal/importi/pdf-actions";
+import {
+  formatMegabytes,
+  MAX_PDF_FILES_PER_UPLOAD,
+  MAX_UPLOAD_FILE_BYTES,
+  MAX_UPLOAD_REQUEST_BYTES,
+  uploadSelectionError,
+} from "@/lib/import/upload-limits.mjs";
 
 const INITIAL: PdfImportState = { error: null, ok: null, summary: [] };
 
@@ -14,6 +21,9 @@ const INITIAL: PdfImportState = { error: null, ok: null, summary: [] };
  */
 export function PdfImportUpload() {
   const [state, formAction, pending] = useActionState(importPdfAction, INITIAL);
+  // Provera izbora pre slanja: preveliko telo bi platforma odbila (413) pre
+  // nego što akcija stigne da vrati razumljivu poruku.
+  const [selectionError, setSelectionError] = useState<string | null>(null);
 
   return (
     <section className="portal-panel">
@@ -35,7 +45,7 @@ export function PdfImportUpload() {
             name="izdavalac"
             required
             maxLength={16}
-            defaultValue="CS01"
+            defaultValue="CSRM"
             disabled={pending}
           />
           <small>
@@ -52,14 +62,26 @@ export function PdfImportUpload() {
             multiple
             required
             disabled={pending}
+            onChange={(event) =>
+              setSelectionError(uploadSelectionError(Array.from(event.currentTarget.files ?? [])))
+            }
           />
-          <small>Najviše 200 dokumenata, po 20 MB.</small>
+          <small>
+            Najviše {MAX_PDF_FILES_PER_UPLOAD} dokumenata u jednom otpremanju, pojedinačno do{" "}
+            {formatMegabytes(MAX_UPLOAD_FILE_BYTES)} i ukupno do{" "}
+            {formatMegabytes(MAX_UPLOAD_REQUEST_BYTES)}.
+          </small>
+          {selectionError ? (
+            <small className="portal-login-error" role="alert">
+              {selectionError}
+            </small>
+          ) : null}
         </label>
         <button
           type="submit"
           className="portal-button"
           data-variant="primary"
-          disabled={pending}
+          disabled={pending || selectionError !== null}
         >
           {pending ? "Čitanje u toku…" : "Uvezite dokumente"}
         </button>

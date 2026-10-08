@@ -13,6 +13,7 @@ const eslintConfig = [
       ".next/**",
       ".next-verify/**",
       ".next-dev/**",
+      ".next-pilot/**",
       // Izlaz izolovanog dev servera za search QA (`npm run dev:search`).
       ".next-search-dev/**",
       "out/**",

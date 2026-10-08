@@ -86,8 +86,20 @@ function line(y, i, it) {
   };
 }
 
+/**
+ * `continuationOnPage2`:
+ *   - `false`        — bez stavki na strani 2;
+ *   - `"prekinuto"`  — strana 2 počinje numeraciju ispočetka (nije jedna tabela);
+ *   - `"neprekidno"` — numeracija se nastavlja, a ukupan iznos obuhvata i stranu 2
+ *                      (oblik izmeren nad stvarnim višestraničnim fakturama).
+ */
+const CONTINUATION_ITEM = {
+  sifra: "900001", naziv: "NASTAVAK STAVKE", jm: "KOM",
+  kol: 1, cena: 100, rabat: 0, pdv: 20,
+};
+
 export function document({ broj, partner, datum, items, pages = 1, totalOverride = null,
-                    continuationOnPage2 = false }) {
+                    continuationOnPage2 = false, napomena = null }) {
   const cells = [...header(803, { broj, partner, datum }), ...tableHead(574)];
   let y = 558, neto = 0, pdvUk = 0;
   items.forEach((it, i) => {
@@ -96,11 +108,18 @@ export function document({ broj, partner, datum, items, pages = 1, totalOverride
     neto += r.neto; pdvUk += r.pdvIznos;
     y -= 12;
   });
+  const continuation = pages === 2 && continuationOnPage2
+    ? line(558, continuationOnPage2 === "neprekidno" ? items.length + 1 : 1, CONTINUATION_ITEM)
+    : null;
+  if (continuation && continuationOnPage2 === "neprekidno") {
+    neto += continuation.neto; pdvUk += continuation.pdvIznos;
+  }
   const ukupno = totalOverride ?? neto + pdvUk;
   cells.push(
     { x: 413, y: y - 20, text: `Ukupan iznos sa PDV:    ${dec(ukupno)}` },
     { x: 58, y: y - 45, text: "Osnovica bez PDV:" }, { x: 169, y: y - 45, text: dec(neto) },
     { x: 88, y: y - 57, text: "Iznos PDV:" }, { x: 174, y: y - 57, text: dec(pdvUk) },
+    ...(napomena ? [{ x: 30, y: 120, text: `NAPOMENA: ${napomena}` }] : []),
     { x: 268, y: 40, text: `Strana 1 od ${pages}` },
     { x: 330, y: 40, text: "www.biznisoft.com" },
   );
@@ -108,13 +127,9 @@ export function document({ broj, partner, datum, items, pages = 1, totalOverride
   const out = [cells];
   if (pages === 2) {
     const p2 = [...header(803, { broj, partner, datum })];
-    if (continuationOnPage2) {
+    if (continuation) {
       p2.push(...tableHead(574));
-      const r = line(558, items.length + 1, {
-        sifra: "900001", naziv: "NASTAVAK STAVKE", jm: "KOM",
-        kol: 1, cena: 100, rabat: 0, pdv: 20,
-      });
-      p2.push(...r.cells);
+      p2.push(...continuation.cells);
     }
     p2.push({ x: 268, y: 40, text: `Strana 2 od ${pages}` },
             { x: 330, y: 40, text: "www.biznisoft.com" });

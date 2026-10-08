@@ -82,6 +82,41 @@ export async function proveriIzvor(putanja) {
 const jePdfIme = (ime) => /\.pdf$/i.test(ime);
 
 /**
+ * Oznaka fakture u imenu fajla — poslovno pravilo kancelarije.
+ *
+ * Arhiva `Fakture\<godina>\` sadrži i račune, otpremnice i kompenzacije. Kao
+ * kandidat za fakturu uzima se SAMO PDF čije ime nosi oznaku `faktura` ili
+ * `fak` kao SAMOSTALAN segment:
+ *
+ * - ispred oznake: početak imena, razmak, tačka, crtica ili donja crta;
+ * - posle oznake: kraj imena, razmak, tačka, crtica, donja crta ili cifra.
+ *
+ * Zato prolaze `FAK123`, `2026-FAK-123` i `storno faktura 123`, a ne prolaze
+ * `profaktura`, `nefaktura`, `faks` ni `faktor`. Cifra je dozvoljena samo POSLE
+ * oznake (`FAK123`); `123FAK` nije u pravilu i ne prolazi. Nijedan drugi znak
+ * (zagrada, zarez, neprelomni razmak) nije razdvajač.
+ *
+ * Ovo je PRVA kapija, ne jedina: sadržaj i dalje prolazi parser i validator,
+ * pa `FAK` fajl koji nije podržana faktura ide u nepodržano, ne u promet.
+ */
+export const OZNAKA_FAKTURE = /(?:^|[ ._-])(?:faktura|fak)(?=$|[ ._0-9-])/i;
+
+/**
+ * Da li je ime fajla kandidat za fakturu. Gleda SAMO ime — nikad sadržaj.
+ *
+ * Proverava se nad imenom bez završnog `.pdf`; tačka je ionako razdvajač, pa
+ * `FAK.pdf` i `FAK` daju isti ishod.
+ */
+export function jeFakturaPoNazivu(ime) {
+  const s = String(ime ?? "");
+  if (!jePdfIme(s)) return false;
+  return OZNAKA_FAKTURE.test(s.slice(0, -".pdf".length));
+}
+
+/** Oznaka korena u zbiru po folderima; podfolder nosi svoje ime, nikad putanju. */
+export const OZNAKA_KORENA = "(koren)";
+
+/**
  * Lista kandidata — koren i NEPOSREDNI podfolderi, tačno jedan nivo dublje.
  *
  * Zašto jedan nivo
@@ -110,6 +145,12 @@ const jePdfIme = (ime) => /\.pdf$/i.test(ime);
 export async function nadjiKandidate(koren, granice = PODRAZUMEVANE_GRANICE) {
   const kandidati = [];
   const preskoceno = [];
+  /*
+   * Zbir po folderu: koliko PDF-ova, koliko ih nosi oznaku fakture, koliko je
+   * odbijeno po imenu. Ključ je IME neposrednog podfoldera (npr. `2026`), nikad
+   * putanja, i nijedno ime fajla.
+   */
+  const folderi = [];
 
   const foldere = await neposredniFolderi(koren, preskoceno);
 
@@ -120,15 +161,24 @@ export async function nadjiKandidate(koren, granice = PODRAZUMEVANE_GRANICE) {
    * šta ulazi u obradu kad novih ima više od budžeta, a nasumičan redosled bi
    * značio da se dva uzastopna ciklusa ne mogu porediti.
    */
-  for (const folder of [koren, ...foldere]) {
+  for (const { putanja: folder, ime } of [{ putanja: koren, ime: OZNAKA_KORENA }, ...foldere]) {
     if (kandidati.length >= granice.maxPopisa) {
       preskoceno.push({ razlog: "popis_prekinut" });
       break;
     }
-    await pokupiPdfove(folder, koren, granice, kandidati, preskoceno);
+    const zbir = {
+      folder: ime,
+      ukupnoPdf: 0,
+      nijeFakturaPoNazivu: 0,
+      kandidata: 0,
+      preskocenoTehnicki: 0,
+      nedostupan: false,
+    };
+    folderi.push(zbir);
+    await pokupiPdfove(folder, koren, granice, kandidati, preskoceno, zbir);
   }
 
-  return { kandidati, preskoceno };
+  return { kandidati, preskoceno, folderi };
 }
 
 /**
@@ -182,15 +232,15 @@ async function neposredniFolderi(koren, preskoceno) {
       continue;
     }
 
-    folderi.push(stvarna);
+    folderi.push({ putanja: stvarna, ime: unos.name });
   }
 
-  folderi.sort();
+  folderi.sort((a, b) => (a.putanja < b.putanja ? -1 : a.putanja > b.putanja ? 1 : 0));
   return folderi;
 }
 
 /** Skuplja PDF-ove iz JEDNOG foldera. Ne silazi dublje. */
-async function pokupiPdfove(folder, koren, granice, kandidati, preskoceno) {
+async function pokupiPdfove(folder, koren, granice, kandidati, preskoceno, zbir) {
   let unosi;
   try {
     unosi = await readdir(folder, { withFileTypes: true });
@@ -202,14 +252,28 @@ async function pokupiPdfove(folder, koren, granice, kandidati, preskoceno) {
      * `preskoceno`, umesto da jedan pogrešan ACL zaustavi ceo dan.
      */
     preskoceno.push({ razlog: "folder_nedostupan" });
+    zbir.nedostupan = true;
     return;
   }
 
-  const imena = unosi
+  const pdfovi = unosi
     .filter((u) => !u.isDirectory())
     .map((u) => u.name)
     .filter(jePdfIme)
     .sort();
+
+  /*
+   * Filter po IMENU ide pre svega ostalog — pre `lstat`-a, čitanja, otiska,
+   * stabilnosti i parsiranja.
+   *
+   * PDF bez oznake fakture ne ulazi u listu kandidata, pa ga pipeline nikad ne
+   * vidi: ne otvara se, ne hešira se, ne ide u red i ne šalje se. Broji se, jer
+   * operater mora da vidi koliko je PDF-ova u arhivi ostalo po strani.
+   */
+  zbir.ukupnoPdf += pdfovi.length;
+  const imena = pdfovi.filter(jeFakturaPoNazivu);
+  zbir.nijeFakturaPoNazivu += pdfovi.length - imena.length;
+  zbir.kandidata += imena.length;
 
   /*
    * Folder DVA nivoa dublje se ne otvara i ne skenira.
@@ -234,15 +298,18 @@ async function pokupiPdfove(folder, koren, granice, kandidati, preskoceno) {
       st = await lstat(puna);
     } catch {
       preskoceno.push({ razlog: "nestao" });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
 
     if (st.isSymbolicLink()) {
       preskoceno.push({ razlog: "symlink" });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
     if (!st.isFile()) {
       preskoceno.push({ razlog: "nije_obican_fajl" });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
 
@@ -251,24 +318,28 @@ async function pokupiPdfove(folder, koren, granice, kandidati, preskoceno) {
       stvarna = await realpath(puna);
     } catch {
       preskoceno.push({ razlog: "nestao" });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
     if (!uKorenu(stvarna, koren)) {
       preskoceno.push({ razlog: "van_korena" });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
 
     if (st.size > granice.maxBajtova) {
       preskoceno.push({ razlog: "prevelik", putanja: puna, velicina: st.size });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
     if (st.size === 0) {
       // Nula bajtova je gotovo uvek fajl koji se upravo pravi.
       preskoceno.push({ razlog: "prazan", putanja: puna });
+      zbir.preskocenoTehnicki += 1;
       continue;
     }
 
-    kandidati.push({ putanja: puna, velicina: st.size, mtimeMs: st.mtimeMs });
+    kandidati.push({ putanja: puna, velicina: st.size, mtimeMs: st.mtimeMs, folder: zbir.folder });
   }
 }
 
@@ -353,8 +424,12 @@ async function procitajJednom(putanja, granice) {
  * Posle čitanja se veličina i `mtime` porede ponovo: ako se fajl menjao TOKOM
  * čitanja, bafer se odbacuje. Delimično zapisan fajl se ODLAŽE, ne proglašava
  * trajno neispravnim — sledeći ciklus ga zatiče gotovog.
+ *
+ * `cekaj` postoji samo za test: umesto da se utrkuje sa tajmerom (Windows
+ * tajmer ima rezoluciju ~15,6 ms, a metapodaci direktorijuma kasne za
+ * upisom), test u pauzi između dva očitanja DETERMINISTIČKI menja fajl.
  */
-export async function procitajStabilno(putanja, granice = PODRAZUMEVANE_GRANICE) {
+export async function procitajStabilno(putanja, granice = PODRAZUMEVANE_GRANICE, { cekaj: pauza = cekaj } = {}) {
   let prethodni = null;
 
   for (let pokusaj = 0; pokusaj < granice.stabilnostPokusaja; pokusaj += 1) {
@@ -372,7 +447,7 @@ export async function procitajStabilno(putanja, granice = PODRAZUMEVANE_GRANICE)
     }
 
     prethodni = otisakStanja;
-    if (pokusaj < granice.stabilnostPokusaja - 1) await cekaj(granice.stabilnostMs);
+    if (pokusaj < granice.stabilnostPokusaja - 1) await pauza(granice.stabilnostMs);
   }
 
   return { ok: false, razlog: "nestabilan" };

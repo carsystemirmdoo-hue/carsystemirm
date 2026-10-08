@@ -45,6 +45,21 @@ const PODRAZUMEVAN_TIMEOUT_MS = 30_000;
  * inače bi jedna pogrešna vrednost u konfiguraciji poslala potpisane zahteve i
  * poslovni sadržaj preko čistog HTTP-a.
  */
+const LOOPBACK = new Set(["127.0.0.1", "localhost", "[::1]"]);
+
+/**
+ * `http://` prema adresi istog računara — samo uz `CS_CONNECTOR_ALLOW_LOOPBACK_HTTP=1`
+ * i samo kada proces NIJE spakovan konektor (`CS_CONNECTOR_PACKAGED`). Spakovan
+ * konektor za kancelariju i dalje prima isključivo HTTPS.
+ */
+export function dozvoljenLoopbackHttp(u, env = process.env) {
+  return (
+    env.CS_CONNECTOR_ALLOW_LOOPBACK_HTTP === "1" &&
+    env.CS_CONNECTOR_PACKAGED !== "1" &&
+    LOOPBACK.has(u.hostname)
+  );
+}
+
 export function proveriOrigin(origin, { dozvoliHttp = false } = {}) {
   let u;
   try {
@@ -56,6 +71,9 @@ export function proveriOrigin(origin, { dozvoliHttp = false } = {}) {
     // U redu.
   } else if (u.protocol === "http:" && dozvoliHttp) {
     // Samo test režim.
+  } else if (u.protocol === "http:" && dozvoljenLoopbackHttp(u)) {
+    // Lokalni server na ISTOM računaru (uvoz arhive sa Mac-a): saobraćaj ne
+    // napušta mašinu. Samo izričito i nikad u spakovanom konektoru.
   } else {
     throw new ClientError("origin_not_https", "Serverski origin mora biti HTTPS.");
   }
@@ -140,6 +158,12 @@ export async function posaljiPotpisano(ulaz) {
         [HEADERS.nonce]: nonce,
         [HEADERS.bodyHash]: otisak,
         [HEADERS.signature]: potpis,
+        /*
+         * Zaštita pristupa ispred aplikacije (Vercel Deployment Protection).
+         * NIJE autentifikacija prema portalu — tu ostaje potpis uređaja; samo
+         * propušta zahtev do aplikacije na zaštićenoj (preview) adresi.
+         */
+        ...(ulaz.zastitaPristupa ? { "x-vercel-protection-bypass": ulaz.zastitaPristupa } : {}),
       },
       body: ulaz.bodyBytes,
       signal: kontroler.signal,
@@ -182,6 +206,13 @@ export async function posaljiPotpisano(ulaz) {
    * `odlukaZaOdgovor` to tretira kao nepoznat odgovor — nikad kao potvrdu.
    */
   const code = telo && typeof telo.code === "string" ? telo.code : null;
+  /*
+   * Vreme čekanja: zaglavlje `Retry-After`, a ako ga nema, `retryAfterSeconds`
+   * iz tela (server ga šalje uz 429). Isto ograničenje važi za oba izvora.
+   */
+  const cekanje =
+    retryAfter ??
+    (typeof telo?.retryAfterSeconds === "number" ? ogranicenRetryAfter(String(telo.retryAfterSeconds)) : null);
 
   return {
     transport: "ok",
@@ -201,7 +232,7 @@ export async function posaljiPotpisano(ulaz) {
      * komanda nosi samo ID, zatvoren tip, verziju i rok.
      */
     command: telo && typeof telo.command === "object" ? telo.command : null,
-    retryAfter,
+    retryAfter: cekanje,
     nonce,
   };
 }
@@ -228,11 +259,18 @@ async function procitajOgraniceno(odgovor) {
   return Buffer.concat(delovi.map((d) => Buffer.from(d))).toString("utf8");
 }
 
-/** Heartbeat — postojeći endpoint, prazno telo, isti ugovor. */
+/**
+ * Heartbeat — postojeći endpoint i isti potpis.
+ *
+ * Bez `telo` šalje prazan objekat, kao do 0.3.8. Sa `telo` (izveštaj ciklusa,
+ * samo brojevi i vremena — bez imena fajlova i podataka o kupcima) server
+ * beleži ciklus. Telo se serijalizuje jednom; otisak pokriva baš te bajtove.
+ */
 export async function posaljiHeartbeat(ulaz) {
+  const { telo, ...ostalo } = ulaz;
   return posaljiPotpisano({
-    ...ulaz,
+    ...ostalo,
     path: "/api/sync/heartbeat",
-    bodyBytes: new TextEncoder().encode("{}"),
+    bodyBytes: new TextEncoder().encode(telo === undefined ? "{}" : JSON.stringify(telo)),
   });
 }

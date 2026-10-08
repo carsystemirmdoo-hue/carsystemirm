@@ -58,10 +58,11 @@ test("uloga vlasnika se poredi preko `OWNER_ROLE`, ne preko sirovog literala „
    * uočena i sa strane P0-AUTH-01 zadatka, ne samo sa strane owner-guard
    * paketa testova.
    */
-  assert.match(
-    kod,
-    /import \{ canGrantOwnerRole, OWNER_ROLE \} from "@\/lib\/authz\/owner-guard-policy\.mjs";/,
-  );
+  // Uvoz nosi bar `canGrantOwnerRole` i `OWNER_ROLE` (B6 dodaje pravila eskalacije u isti uvoz).
+  const uvoz = kod.match(/import \{([^}]*)\} from "@\/lib\/authz\/owner-guard-policy\.mjs";/);
+  assert.ok(uvoz, "nema uvoza iz owner-guard-policy.mjs");
+  assert.match(uvoz[1], /\bcanGrantOwnerRole\b/);
+  assert.match(uvoz[1], /\bOWNER_ROLE\b/);
   assert.ok(!/role === "gazda"/.test(kod), "fajl i dalje sadrži sirov literal „gazda“");
 });
 

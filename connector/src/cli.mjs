@@ -1,17 +1,25 @@
 import { generateKeyPairSync } from "node:crypto";
-import { access, mkdir } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { access, mkdir, readdir } from "node:fs/promises";
+import { basename, dirname, join } from "node:path";
 import { keyFingerprint, SIGNED_PATHS } from "../../lib/sync/device/signing.mjs";
 import { ucitajKonfiguraciju } from "./config.mjs";
 import { izaberiAdapter, KeystoreError } from "./keystore/index.mjs";
 import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
 import { STANJA } from "./outcomes.mjs";
-import { posaljiIzReda, skenirajURed } from "./pipeline.mjs";
+import { IZLAZ_NEPOTPUN_POPIS, izlazniKodCiklusa, posaljiIzReda, skenirajURed } from "./pipeline.mjs";
 import { opisiPokrivenost } from "./calendar.mjs";
-import { lokalnoVreme, odlukaOCiklusu, sledeciTermin } from "./schedule.mjs";
+import {
+  isoBeograd,
+  lokalnoVreme,
+  odlukaOCiklusu,
+  sledeciOkidacSaRadom,
+  sledeciTermin,
+  sledeciTerminRadnoVreme,
+} from "./schedule.mjs";
 import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
 import { proveriIzvor } from "./scanner.mjs";
 import { posaljiHeartbeat } from "./client.mjs";
+import { readFileSync } from "node:fs";
 import {
   izvrsiKomandu,
   LOKALNA_ZAVRSNA,
@@ -30,7 +38,7 @@ import {
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -65,6 +73,18 @@ async function postoji(p) {
   } catch {
     return false;
   }
+}
+
+/**
+ * Kod greške skladišta ključa — samo iz poznatog, zatvorenog oblika.
+ *
+ * Poruka se nikad ne koristi: ume da nosi putanju. Kod DPAPI kanala se prihvata
+ * samo ako odgovara obrascu, da slučajna vrednost iz izuzetka ne uđe u ispis.
+ */
+function bezbedanKodSkladista(greska) {
+  if (greska instanceof KeystoreError) return greska.code;
+  const kod = String(greska?.code ?? "");
+  return /^dpapi_[a-z0-9_]{1,40}$/.test(kod) ? kod : "keystore_error";
 }
 
 /* ========================================================================= */
@@ -120,7 +140,12 @@ async function doctor(p) {
     dodaj("skladiste_kljuca", rez.upozorenje ? "upozorenje" : "ok", { adapter: ime, ...rez });
   } catch (greska) {
     dodaj("skladiste_kljuca", "greska", {
-      kod: greska instanceof KeystoreError ? greska.code : "keystore_error",
+      /*
+       * Stabilan kod DPAPI kanala (`dpapi_process_failed`, `dpapi_timeout`, …)
+       * prolazi doslovno. Bez njega bi „PowerShell se nije pokrenuo" i
+       * „PowerShell je odbio podatak" u izveštaju izgledali isto.
+       */
+      kod: bezbedanKodSkladista(greska),
     });
   }
 
@@ -242,7 +267,8 @@ async function dryRun(p) {
      */
     const rez = await skenirajURed({ store, konfiguracija: k, log });
     ispisi({ komanda: "dry-run", poslato: 0, ...rez, napomena: "Nijedan zahtev nije poslat." });
-    return 0;
+    // Proba koja nije videla celu arhivu ne sme da izgleda kao čista proba.
+    return izlazniKodCiklusa({ skeniranje: rez });
   } finally {
     store.zatvori();
   }
@@ -269,6 +295,14 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
     return 0;
   }
 
+  /*
+   * Izveštaj ciklusa za heartbeat (0.3.9). Šalje se POSLE oslobađanja brave i
+   * POSLE svih upisa u red, kao zaseban zahtev: njegov neuspeh ne menja stanje
+   * nijedne stavke i ne izaziva ponovno slanje — samo se upisuje u dnevnik.
+   */
+  /** @type {Record<string, unknown> | null} */
+  let izvestaj = null;
+  const pocetak = Date.now();
   try {
     const lokalno = lokalnoVreme(now);
 
@@ -276,11 +310,18 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
       const odluka = odlukaOCiklusu({
         now,
         poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
+        ciklus: k.ciklus,
+        poslednjiCiklusVreme: store.citajMetu("poslednji_ciklus_vreme"),
         odlozenoDo: store.citajMetu("odlozeno_do"),
         dodatnaZatvaranja: k.dodatnaZatvaranja,
       });
       if (odluka.akcija !== "pokreni") {
         if (!tiho) ispisi({ komanda: "auto", status: odluka.akcija, ...odluka });
+        izvestaj = {
+          ishod: "preskoceno",
+          razlog: String(odluka.razlog ?? odluka.akcija),
+          skeniranjeZavrseno: false,
+        };
         return odluka.akcija === "blokirano" ? 1 : 0;
       }
     }
@@ -303,23 +344,131 @@ async function ciklus(p, { rucni, now = new Date(), tiho = false }) {
      * istog dana, i konektor koji se restartuje u petlji bi tukao server.
      */
     if (!rucni) store.postaviMetu("poslednji_ciklus_datum", lokalno.datum);
+    // Satni režim: i ručni ciklus se računa, da zadatak odmah posle njega ne ponavlja isto.
+    store.postaviMetu("poslednji_ciklus_vreme", now.toISOString());
 
     ispisi({
       komanda: rucni ? "run-once" : "auto",
       uzrok: rucni ? "rucno_pokretanje" : "raspored",
       datum: lokalno.datum,
+      popis: skeniranje.popis,
+      kodPopisa: skeniranje.kodPopisa,
+      // Istorijski backfill: koliko novih dokumenata čeka i koliko je to serija.
+      preostalo: skeniranje.preostalo,
+      preostaloSerija: skeniranje.preostaloSerija,
+      ostaloURedu: slanje.ostaloURedu,
       skeniranje,
       slanje,
-      sledeciTermin: sledeciTermin({
-        now,
-        poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
-        dodatnaZatvaranja: k.dodatnaZatvaranja,
-      }),
+      // Storno nije poslat: mora se videti u svakom izlazu, ne samo u statusu.
+      stornaZaRucniUpload: obavestenjeStorna(store),
+      kasniIzvoz: obavestenjeKasni(store),
+      upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
+      sledeciTermin: terminZaPrikaz(k, store, now),
     });
-    return slanje.zaustavljeno ? 1 : 0;
+
+    izvestaj = {
+      ishod: "obradjeno",
+      razlog: rucni ? "rucno_pokretanje" : "raspored",
+      // Pun popis = skeniranje je obišlo ceo izvor; nepotpun se javlja sa kodom.
+      skeniranjeZavrseno: !skeniranje.kodPopisa,
+      ...(skeniranje.kodPopisa || slanje.zaustavljeno
+        ? { kodGreske: bezbedanKodGreske({ code: skeniranje.kodPopisa ?? slanje.zaustavljeno }) }
+        : {}),
+      pregledano: brojIli0(skeniranje.pregledano),
+      novo: brojIli0(skeniranje.novo),
+      poslato: brojIli0(slanje.poslato),
+      potvrdjeno: brojIli0(slanje.potvrdjeno),
+      zaPregled: brojIli0(slanje.zaPregled),
+      preostalo: brojIli0(slanje.ostaloURedu ?? skeniranje.preostalo),
+    };
+    /*
+     * Blokada ima prednost: ona zaustavlja slanje. Nepotpun popis nije
+     * zaustavio slanje viđenog, ali ciklus nije potpuno uspešan — i Task
+     * Scheduler to mora da vidi kao „Last Run Result“ različit od nule.
+     */
+    return izlazniKodCiklusa({ skeniranje, slanje });
+  } catch (greska) {
+    izvestaj = {
+      ishod: "greska",
+      razlog: rucni ? "rucno_pokretanje" : "raspored",
+      skeniranjeZavrseno: false,
+      kodGreske: bezbedanKodGreske(greska),
+    };
+    throw greska;
   } finally {
     store.otpustiZakljucavanje(vlasnik);
+    if (izvestaj) {
+      await javiCiklus({ p, k, store, log, now, pocetak, izvestaj });
+    }
     store.zatvori();
+  }
+}
+
+/** Nenegativan ceo broj ili 0 — server prima samo takve brojače. */
+function brojIli0(v) {
+  const n = Number(v);
+  return Number.isInteger(n) && n >= 0 ? n : 0;
+}
+
+/** Kod greške za heartbeat: samo `[a-z0-9_]`, nikad poruka (ume da nosi putanju). */
+function bezbedanKodGreske(greska) {
+  const kod = String(greska?.code ?? "greska_ciklusa").toLowerCase().replace(/[^a-z0-9_]/g, "_").slice(0, 64);
+  return kod || "greska_ciklusa";
+}
+
+/** Verzija spakovanog konektora (`dist/package.json`), u izvoru `connector/package.json`. */
+function verzijaKonektora() {
+  for (const rel of ["../../package.json", "../package.json"]) {
+    try {
+      const m = JSON.parse(readFileSync(new URL(rel, import.meta.url), "utf8"));
+      if (m.name === "carsystem-connector" && typeof m.version === "string") return m.version.slice(0, 32);
+    } catch {
+      /* sledeći kandidat */
+    }
+  }
+  return "nepoznata";
+}
+
+/**
+ * Heartbeat posle ciklusa — best effort.
+ *
+ * Ne dira red, bravu ni meta podatke ciklusa; ne baca. Ishod se samo upisuje u
+ * dnevnik, da se vidi i kada server nije dostupan.
+ */
+async function javiCiklus({ p, k, store, log, now, pocetak, izvestaj }) {
+  try {
+    const sledeci = sledeciOkidacSaRadom({
+      now: new Date(),
+      ciklus: k.ciklus,
+      poslednjiCiklusVreme: store.citajMetu("poslednji_ciklus_vreme"),
+      dodatnaZatvaranja: k.dodatnaZatvaranja,
+    });
+    const telo = {
+      ciklus: {
+        ...izvestaj,
+        pocetak: isoBeograd(now),
+        trajanjeMs: Math.max(0, Date.now() - pocetak),
+        verzija: verzijaKonektora(),
+        sledeciTermin: sledeci ? isoBeograd(sledeci) : null,
+      },
+    };
+    const kljuc = await (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc });
+    const odgovor = await posaljiHeartbeat({
+      origin: k.serverOrigin,
+      zastitaPristupa: k.vercelZastita ?? null,
+      deviceCode: k.deviceCode,
+      keyId: k.keyId,
+      privateKeyPkcs8Der: kljuc,
+      timeoutMs: k.timeoutMs,
+      telo,
+    });
+    await log?.zapisi(odgovor.httpStatus === 200 ? "info" : "warn", "heartbeat", {
+      ishod: izvestaj.ishod,
+      http: odgovor.httpStatus,
+      kod: odgovor.code,
+    });
+  } catch (greska) {
+    await log?.zapisi("warn", "heartbeat", { ishod: izvestaj.ishod, kod: bezbedanKodGreske(greska) }).catch(() => {});
   }
 }
 
@@ -383,8 +532,14 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
         komanda: otvorena,
         lokalniDatum: lokalnoVreme(now).datum,
       });
-      reci({ komanda: "poll-once", status: "nastavljena", ishod: rez.stanje, zaostali });
-      return { kod: 0, zdravo: true };
+      reci({
+        komanda: "poll-once",
+        status: "nastavljena",
+        ishod: rez.stanje,
+        failureCode: rez.failureCode,
+        zaostali,
+      });
+      return { kod: rez.skeniranje?.kodPopisa ? IZLAZ_NEPOTPUN_POPIS : 0, zdravo: true };
     }
 
     const preuzeta = await preuzmiKomandu(ctx);
@@ -409,13 +564,18 @@ async function pollOnce(p, { now = new Date(), fetchImpl, dozvoliHttp, tiho = fa
       komanda: "poll-once",
       status: "izvrseno",
       ishod: rez.stanje,
+      failureCode: rez.failureCode,
       ackPoslat: rez.ackPoslat,
       // Bez ijednog podatka o dokumentu — samo zbirni brojevi.
       skeniranje: rez.skeniranje,
       slanje: rez.slanje,
     });
-    // Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne prašta.
-    return { kod: rez.stanje === "blocked" ? 1 : 0, zdravo: rez.stanje !== "blocked" };
+    /*
+     * Blokada je stvarni problem podešavanja; ni izlazni kod ni ritam je ne
+     * prašta. Nepotpun popis nije mrežni problem i ne traži backoff (`zdravo`
+     * ostaje), ali ga izlazni kod ne prećutkuje.
+     */
+    return { kod: izlazniKodCiklusa(rez), zdravo: rez.stanje !== "blocked" };
   } finally {
     store.otpustiZakljucavanje(vlasnik);
     store.zatvori();
@@ -488,6 +648,83 @@ export async function watch(p, { maxProlaza = Infinity, sleep = cekaj, now = () 
 
 const cekaj = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** Sledeći termin za prikaz: satni režim ako je `ciklus` podešen, inače stari dnevni. */
+function terminZaPrikaz(k, store, now) {
+  const zajednicko = { now, dodatnaZatvaranja: k.dodatnaZatvaranja };
+  return k.ciklus
+    ? sledeciTerminRadnoVreme({ ...zajednicko, ciklus: k.ciklus, poslednjiCiklusVreme: store.citajMetu("poslednji_ciklus_vreme") })
+    : sledeciTermin({ ...zajednicko, poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum") });
+}
+
+const UPUTSTVO_STORNO =
+  "Storno se ne šalje automatski. Otpremite ga ručno u portalu: Uvoz → /portal/importi (izdavalac CSRM). " +
+  "Komanda `storna` ispisuje tačne fajlove.";
+
+/**
+ * Folder sledeće godine pored izvornog („Fakture 2027" pored „Fakture 2026").
+ * Konektor ga NE uključuje sam — izvor je jedna godina, da prvi prolaz ne
+ * pošalje arhivu — ali to mora biti vidljivo u svakom izlazu.
+ */
+export async function noviGodisnjiFolder(izvorniFolder) {
+  const ime = basename(izvorniFolder);
+  const m = ime.match(/(20\d{2})/);
+  if (!m) return null;
+  let unosi = [];
+  try {
+    unosi = await readdir(dirname(izvorniFolder), { withFileTypes: true });
+  } catch {
+    return null;
+  }
+  const noviji = unosi
+    .filter((u) => u.isDirectory())
+    .map((u) => u.name)
+    .filter((n) => n.replace(/20\d{2}/, m[1]) === ime && Number(n.match(/20\d{2}/)?.[0]) > Number(m[1]))
+    .sort();
+  return noviji.length
+    ? { folder: noviji[noviji.length - 1], uputstvo: "Pojavio se folder nove godine: promenite izvor instalacionom skriptom (-IzvorniFolder)." }
+    : null;
+}
+
+/** Broj storna za ručni upload, za `status` i izlaz ciklusa — bez putanja. */
+function obavestenjeStorna(store) {
+  const n = store.stornaZaRucniUpload().length;
+  return n ? { broj: n, uputstvo: UPUTSTVO_STORNO } : null;
+}
+
+const UPUTSTVO_KASNI =
+  "Stariji račun izvezen posle početka slanja — nije poslat automatski. Proveriti da li je u portalu; " +
+  "ako nije, otpremiti ručno na /portal/importi (izdavalac CSRM). Komanda `rucno` ispisuje fajlove.";
+
+/** Broj naknadno izvezenih starijih dokumenata — bez putanja. */
+function obavestenjeKasni(store) {
+  const n = store.brojPoRazlogu("kasni_izvoz_rucna_provera");
+  return n ? { broj: n, uputstvo: UPUTSTVO_KASNI } : null;
+}
+
+/** Sve što čeka ručnu proveru (storna + kasni izvoz), sa putanjama — samo lokalno. */
+async function rucno(p) {
+  const { store } = await otvori(p);
+  try {
+    const lista = store.zaRucnuProveru();
+    ispisi({ komanda: "rucno", broj: lista.length, storno: UPUTSTVO_STORNO, kasniIzvoz: UPUTSTVO_KASNI, stavke: lista });
+    return 0;
+  } finally {
+    store.zatvori();
+  }
+}
+
+/** Lokalni spisak storna sa putanjama — samo za operatera ovog računara. */
+async function storna(p) {
+  const { store } = await otvori(p);
+  try {
+    const lista = store.stornaZaRucniUpload();
+    ispisi({ komanda: "storna", broj: lista.length, uputstvo: UPUTSTVO_STORNO, storna: lista });
+    return 0;
+  } finally {
+    store.zatvori();
+  }
+}
+
 async function status(p, now = new Date()) {
   const { k, store } = await otvori(p);
   try {
@@ -497,14 +734,16 @@ async function status(p, now = new Date()) {
       lokalnoVreme: lokalno,
       kalendar: opisiPokrivenost(Number(lokalno.datum.slice(0, 4))),
       red: store.zbir(),
+      // Server je tražio čekanje (429 sa dugim Retry-After): pre ovoga se ne šalje.
+      nastaviPosle: store.citajMetu("nastavi_posle") || null,
       poslednjiCiklus: store.citajMetu("poslednji_ciklus_datum"),
-      sledeciTermin: sledeciTermin({
-        now,
-        poslednjiIzvrsenDatum: store.citajMetu("poslednji_ciklus_datum"),
-        dodatnaZatvaranja: k.dodatnaZatvaranja,
-      }),
+      sledeciTermin: terminZaPrikaz(k, store, now),
       // Redigovano: bez putanja, imena fajlova i sadržaja.
       poslednjiIshodi: store.poslednjiIshodi(10),
+      stornaZaRucniUpload: obavestenjeStorna(store),
+      kasniIzvoz: obavestenjeKasni(store),
+      prePocetkaSlanja: { posaljiOdDatuma: k.posaljiOdDatuma, nijePoslato: store.brojPoRazlogu("pre_pocetka_slanja") },
+      upozorenjeGodina: await noviGodisnjiFolder(k.izvorniFolder),
       // Bezbedno: samo ID, stanje i vreme — bez ijednog podatka o dokumentu.
       // Naziv NIJE `komanda`: taj ključ već nosi ime same CLI komande, pa bi
       // drugi isti ključ tiho pregazio oznaku i log bi izgubio identitet reda.
@@ -527,6 +766,7 @@ async function heartbeat(p) {
     const kljuc = await (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc });
     const odgovor = await posaljiHeartbeat({
       origin: k.serverOrigin,
+      zastitaPristupa: k.vercelZastita ?? null,
       deviceCode: k.deviceCode,
       keyId: k.keyId,
       privateKeyPkcs8Der: kljuc,
@@ -579,6 +819,10 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await ciklus(p, { rucni: false });
       case "status":
         return await status(p);
+      case "storna":
+        return await storna(p);
+      case "rucno":
+        return await rucno(p);
       case "heartbeat":
         return await heartbeat(p);
       default:

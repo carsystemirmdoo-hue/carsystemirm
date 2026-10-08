@@ -65,15 +65,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: Carsystem 2K High-Speed Clearcoat Spray V02 26.11.2012 (list je skeniran kao slike) pregledan vizuelno na svih 5 renderovanih strana: na strani 3 pod naslovom „POT LIFE“ piše „Approx 24 h at 20 °C“, uz napomenu da je kraće na višoj, a duže na nižoj temperaturi, odvojeno od sušenja (16 min, 3:10 h, 24 h za poliranje) i od roka skladištenja (12 meseci, strana 4); C.A.R.FIT 2K Clear Coat Spray (17. 2. 2020) na obe strane navodi „Pot-life: 24 hours“ na 20–25 °C. Podatak je dakle zaista vreme upotrebljivosti posle aktiviranja i nezavisno se poklapa u dva lista; Carsystem list je star, ali je to verzija koju proizvođač i danas objavljuje. Zaštita disanja proverena: Carsystem TDS A2/P2 i rukavice od lateksa ili nitrila; C.A.R.FIT TDS A2/P3; C.A.R.FIT SDS 1.0 (7. 7. 2024) odeljak 8: kombinovani filter A2P3 EN 14387, samostalni uređaj pri intenzivnom izlaganju, butil rukavice 0,4 mm, naočare EN 166. Ispravljeno (4): terminologija „vreme upotrebljivosti smeše (pot life)“; dodato da oba lista podatak izričito navode kao pot life; „tehnički i bezbednosni list“ ispravljeno jer za Carsystem nije citiran SDS; opšta objašnjenja označena."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-2K sprej u jednoj limenci nosi dve komponente: lak i učvršćivač u posebnom odeljku. Učvršćivač se pušta mehanizmom na dnu limenke, posle čega počinje hemijska reakcija i vreme upotrebe postaje ograničeno. Za Carsystem 2K High-Speed Clearcoat Spray tehnički list navodi oko 24 h na 20 °C[^cs-2k-hs-spray-tds], a za C.A.R.FIT 2K Clear Coat Spray 24 h na sobnoj temperaturi od 20–25 °C[^cf-2k-clear-tds]. Oba proizvoda sadrže izocijanate i namenjena su profesionalnoj upotrebi, uz masku za disanje koju propisuju tehnički i bezbednosni list.
+2K sprej u jednoj limenci nosi dve komponente: lak i učvršćivač u posebnom odeljku. Učvršćivač se pušta mehanizmom na dnu limenke, posle čega počinje hemijska reakcija i vreme upotrebljivosti smeše (engl. pot life) postaje ograničeno. Za Carsystem 2K High-Speed Clearcoat Spray tehnički list navodi oko 24 h na 20 °C[^cs-2k-hs-spray-tds], a za C.A.R.FIT 2K Clear Coat Spray 24 h na sobnoj temperaturi od 20–25 °C[^cf-2k-clear-tds]. Oba proizvoda sadrže izocijanate i prema svojim listovima namenjena su samo profesionalnoj upotrebi, uz masku za disanje koju ti listovi propisuju.
 
 ## Šta 2K sprej daje
 
@@ -94,7 +95,7 @@ Mehanizam nije isti kod svih proizvođača, zato se uputstvo čita sa ambalaže 
 
 ## Koliko traje posle aktiviranja
 
-Vreme upotrebe počinje u trenutku aktiviranja, a ne pri prvom prskanju. Carsystem navodi oko 24 h na 20 °C i dodaje da vreme zavisi od temperature okoline: na višoj temperaturi je kraće, a na nižoj duže[^cs-2k-hs-spray-tds]. C.A.R.FIT navodi 24 h na 20–25 °C[^cf-2k-clear-tds]. Zato se sprej aktivira tek kada je deo pripremljen, a posao se planira tako da se limenka iskoristi u tom roku. Pojam detaljnije objašnjava vodič [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese).
+Oba lista ovaj podatak navode izričito kao vreme upotrebljivosti (pot life), a ne kao vreme sušenja ili rok skladištenja. Opšte objašnjenje: to vreme teče od trenutka aktiviranja, a ne od prvog prskanja. Carsystem navodi oko 24 h na 20 °C i dodaje da vreme zavisi od temperature okoline: na višoj temperaturi je kraće, a na nižoj duže[^cs-2k-hs-spray-tds]. C.A.R.FIT navodi 24 h na 20–25 °C[^cf-2k-clear-tds]. Zato se sprej aktivira tek kada je deo pripremljen, a posao se planira tako da se limenka iskoristi u tom roku. Pojam detaljnije objašnjava vodič [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese).
 
 ## Nanošenje i sušenje
 
@@ -124,7 +125,7 @@ Carsystem navodi i da osobe sa problemima pluća ili disanja, kao i one koje su 
 
 ### Može li aktiviran sprej da se sačuva za kasnije?
 
-Samo u okviru vremena upotrebe iz lista. Posle toga materijal u limenci otvrdnjava i sprej više nije upotrebljiv. Neispražnjena limenka se ne baca sa običnim otpadom: C.A.R.FIT navodi da se limenke koje nisu prazne odlažu kao poseban otpad, a potpuno ispražnjene mogu u reciklažu[^cf-2k-clear-tds].
+Samo u okviru vremena upotrebljivosti iz lista. Opšte objašnjenje: posle toga materijal u limenci otvrdnjava i sprej više nije upotrebljiv. Neispražnjena limenka se ne baca sa običnim otpadom: C.A.R.FIT navodi da se limenke koje nisu prazne odlažu kao poseban otpad, a potpuno ispražnjene mogu u reciklažu[^cf-2k-clear-tds].
 
 ### Po čemu se 2K lak u spreju razlikuje od 1K laka?
 

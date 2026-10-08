@@ -90,8 +90,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac RAL i blog o zimskim uslovima (10 °C, 3 min mućkanja, 3–4 s), Carsystem Plastic Primer V03 (ispod 18 °C, prirodno temperiranje, +5 °C), C.A.R.FIT Black Paint, Silicone Remover, 2K Clear Coat Spray (20–25 °C) i SDS Clearcoat Spray 1.0 (H222/H229, P210, P251, P410+P412); provereno da tekst nigde ne savetuje zagrevanje plamenom, radijatorom ni vodom. Ispravljeno (2): rečenica o vodi preformulisana u izričito upozorenje uz navod Carsystem lista (bez naglog zagrevanja); „proizvođači iz našeg programa“ suženo na navedene listove."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

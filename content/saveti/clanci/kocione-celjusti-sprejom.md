@@ -71,8 +71,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac Brake Caliper & Engine Paint (renderovana strana), Master Mechanic 15, Brake Cleaner, High Heat 700 °C (izdanje na grčkom, renderovano: 250 °C, 30 λεπτά) i katalog 2022 (High Heat 45 min; boja za čeljusti „otporna na visoke temperature“ bez broja). Ispravljeno (1): u pitanju o boji za auspuh dodato neslaganje 30/45 min između lista i kataloga. Stručna potvrda je opravdana: nijedan list ne navodi brojčanu otpornost na toplotu ni na kočionu tečnost, a postupak oko kočionog sistema nije iz izvora proizvođača."
 strucnaPotvrda:
   potrebna: true
   razlog: "Glavno pitanje pominje otpornost na toplotu. Tehnički listovi boja za čeljusti iz našeg programa (Cosmos Lac Brake Caliper & Engine Paint, Master Mechanic 15) ne navode do koje temperature sloj izdržava ni otpornost na kočionu tečnost; katalog 2022 kaže samo da je boja otporna na visoke temperature. Listovi ne opisuju ni koje delove kočnice treba zaštititi niti da li se čeljust skida sa vozila; to je u tekstu opšte objašnjenje. Stručna osoba (automehaničar) ili proizvođač treba da potvrde otpornost i bezbedan postupak oko kočionog sistema."
@@ -133,4 +134,4 @@ Pokrivanjem trakom i papirom pre lakiranja, sa posebnom pažnjom na disk, ploči
 
 ### Može li se za čeljusti koristiti termootporna boja za auspuh?
 
-Boje za auspuh su predviđene za druge uslove. Za Cosmos Lac High Heat 700 °C list traži da se posle 24 h sušenja površina zagreje na 250 °C tokom 30 min, da bi boja dobila puna svojstva[^cosmos-high-heat-tds]. Urednička procena je da se takvo zagrevanje na čeljusti ne može kontrolisano izvesti. Za čeljusti koristite boju koju proizvođač za njih navodi. Termootporne boje opisuje vodič [Termootporne boje u spreju](/vodici/termootporne-boje-u-spreju).
+Boje za auspuh su predviđene za druge uslove. Za Cosmos Lac High Heat 700 °C tehnički list traži da se posle 24 h sušenja površina zagreje na 250 °C, da bi boja dobila puna svojstva; list (izdanje na grčkom) navodi 30 min[^cosmos-high-heat-tds], a katalog iz 2022. postepeno zagrevanje tokom 45 min[^cosmos-katalog-2022]. Urednička procena je da se takvo zagrevanje na čeljusti ne može kontrolisano izvesti. Za čeljusti koristite boju koju proizvođač za njih navodi. Termootporne boje opisuje vodič [Termootporne boje u spreju](/vodici/termootporne-boje-u-spreju).

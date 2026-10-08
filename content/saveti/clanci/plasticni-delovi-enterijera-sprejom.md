@@ -95,8 +95,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Peeling on plastic parts, Carsystem Plastic Primer V03 (nije za PE i PC, 5–8 µm, 18–25 °C, ISO-VE 7030) i Bumper Paint Spray, C.A.R.FIT 1K Plastic Primer (osim polietilena, 10–15 min) i Texture Paint (do 80 °C), Cosmos Lac Plastic Primer, Vinyl & Fabric, katalog 2022 i blog (Bumper Paint bez prajmera); sve se poklapa. Ispravljeno (1): tvrdnja o filmu sredstava za negu označena kao opšte objašnjenje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -113,7 +114,7 @@ Plastični deo se temeljno očisti od sredstava za negu i masnoće, izmatira, po
 
 ## Čišćenje
 
-baslac savetuje temeljno pranje blagim deterdžentom, čišćenje pre i posle svake radnje na delu i odgovarajuće sredstvo za plastiku[^baslac-peeling-plastic]. Na delovima enterijera to je posebno važno, jer se godinama brišu sredstvima za negu, čiji film ostaje na površini. Za plastiku Carsystem uz Plastic Primer navodi čišćenje sredstvom ISO-VE 7030 ili drugim odgovarajućim sredstvom za plastiku[^cs-plastic-primer-tds]. Više u vodiču [Priprema plastičnih delova pre lakiranja](/vodici/priprema-plastike-pre-lakiranja).
+baslac savetuje temeljno pranje blagim deterdžentom, čišćenje pre i posle svake radnje na delu i odgovarajuće sredstvo za plastiku[^baslac-peeling-plastic]. Opšte objašnjenje: na delovima enterijera to je posebno važno, jer se godinama brišu sredstvima za negu, čiji film može da ostane na površini. Za plastiku Carsystem uz Plastic Primer navodi čišćenje sredstvom ISO-VE 7030 ili drugim odgovarajućim sredstvom za plastiku[^cs-plastic-primer-tds]. Više u vodiču [Priprema plastičnih delova pre lakiranja](/vodici/priprema-plastike-pre-lakiranja).
 
 ## Matiranje
 

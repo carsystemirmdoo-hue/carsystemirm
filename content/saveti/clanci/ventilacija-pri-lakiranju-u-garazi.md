@@ -44,6 +44,19 @@ izvori:
     url: https://osha.europa.eu/en/legislation/directives/21
     pristupljeno: 2026-10-08
     tip: smernica
+  - id: rm-c2a40-sds
+    naziv: "R-M, Safety Data Sheet C 2A40 AirTOP 1L (UK, EN)"
+    url: https://msds.rmpaint.com/files/50760163_MSDS_GB_EN.PDF
+    verzija: "Version 4.0, Revision Date 15.05.2026"
+    pristupljeno: 2026-10-08
+    tip: bezbednosni-list
+  - id: eu-2020-1149
+    naziv: "Uredba Komisije (EU) 2020/1149 o izmeni Priloga XVII Uredbe (EZ) br. 1907/2006 (REACH) u pogledu diizocijanata"
+    url: https://publications.europa.eu/resource/celex/32020R1149
+    datumIzvora: 2020-08-03
+    pristupljeno: 2026-10-08
+    tip: propis
+    napomena: "Službeni list EU L 252, 4. 8. 2020; Prilog, stavka 74, tačka 4(c)."
   - id: rm-h2p15-sds
     naziv: "R-M, Safety Data Sheet H 2P15 CLEAR Harden-R 1L (UK, EN)"
     url: https://msds.rmpaint.com/files/50794093_MSDS_GB_EN.PDF
@@ -68,22 +81,23 @@ izvori:
     datumIzvora: 2023-04-29
     pristupljeno: 2026-10-08
     tip: propis
-    napomena: "Čl. 27: dozvola za rad u prostoru sa potencijalno eksplozivnim atmosferama."
+    napomena: "Čl. 27: dozvola za rad u prostoru sa potencijalno eksplozivnim atmosferama i pri korišćenju opasne hemijske materije."
 prioritet: 523
 razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
-  razlog: "Izvori (EU-OSHA, bezbednosni listovi) daju načela ventilacije i zaštite od eksplozije, ali ne i protok vazduha, raspored otvora ni opremu za garažu. Bezbednosni listovi učvršćivača zaštitu opisuju za rad u kabini. Da li je i pod kojim uslovima prskanje 2K materijala u određenoj garaži prihvatljivo, kao i izbor ventilatora i električne opreme, mora da proceni stručnjak za ventilaciju, zaštitu od požara i eksplozije, odnosno za bezbednost i zdravlje na radu."
+  razlog: "Izvori (EU-OSHA, bezbednosni listovi) daju načela ventilacije i zaštite od eksplozije, ali ne i protok vazduha, raspored otvora ni opremu za garažu. Bezbednosni listovi laka i učvršćivača posebno opisuju rad u kabini, a rad bez kabine ne opisuju. Da li je i pod kojim uslovima prskanje 2K materijala u određenoj garaži prihvatljivo, kao i izbor ventilatora i električne opreme, mora da proceni stručnjak za ventilaciju, zaštitu od požara i eksplozije, odnosno za bezbednost i zdravlje na radu."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni OSHwiki Hierarchy of controls (30. 5. 2017), OSHwiki Isocyanates, EU-OSHA pregled Direktive 99/92/EZ, SDS R-M H 2P15 i C 2A40 (4.0, 15.05.2026; odeljak 7), C.A.R.FIT Paint Remover Spray SDS (1,3–18,6 % v/v), Uredba (EU) 2020/1149 i Zakon o BZR čl. 27 u PIS-u. Ispravke: tvrdnja o prskanju „na otvorenom ili uz samo prirodnu ventilaciju“ nije iz OSHwiki nego iz stavke 74 REACH, pa je pripisana Uredbi; „mnogo delotvornije“ → „po pravilu bolje rešenje“ (izvor: preferred option); uređaj sa dovodom vazduha u kabini pripisan listovima i laka i učvršćivača; zaključak o garaži označen kao urednički; čl. 27 naveden tačno. Stručna potvrda ostaje opravdana."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Ventilacija pri lakiranju u garaži treba da odvodi pare rastvarača i maglu od prskanja, a da pri tome ne uvlači prašinu i ne pali pare. Samo otvaranje vrata to retko postiže: EU-OSHA navodi da je prirodno provetravanje dovoljno samo u retkim slučajevima i da opšta ventilacija pare samo razblažuje, a ne hvata ih na izvoru[^oshwiki-hierarchy]. Bezbednosni listovi traže dobro provetravanje, po potrebi lokalno odsisavanje, i opremu zaštićenu od eksplozije[^rm-h2p15-sds]. Za prskanje 2K materijala listovi učvršćivača zaštitu opisuju za rad u kabini[^rm-h2p15-sds], pa garaža ima jasne granice.
+Ventilacija pri lakiranju u garaži treba da odvodi pare rastvarača i maglu od prskanja, a da pri tome ne uvlači prašinu i ne pali pare. Samo otvaranje vrata to retko postiže: EU-OSHA navodi da je prirodno provetravanje dovoljno samo u retkim slučajevima i da opšta ventilacija pare samo razblažuje, a ne hvata ih na izvoru[^oshwiki-hierarchy]. Bezbednosni list R-M učvršćivača H 2P15 traži dobro provetravanje, po potrebi lokalno odsisavanje, i opremu zaštićenu od eksplozije[^rm-h2p15-sds]. R-M listovi i za lak i za učvršćivač uređaj za disanje sa dovodom vazduha traže već za rad u kabini, a rad bez kabine ne opisuju[^rm-c2a40-sds][^rm-h2p15-sds], pa garaža ima jasne granice.
 
 ## Šta ventilacija treba da postigne
 
@@ -93,7 +107,7 @@ Ventilacija u lakiranju ima tri zadatka, i oni se delimično sudaraju:
 2. **Da spreči zapaljivu smešu.** Pare rastvarača sa vazduhom grade eksplozivne smeše, a teže su od vazduha i šire se po podu[^rm-h2p15-sds].
 3. **Da ne pokvari površinu.** Svaka struja vazduha nosi i prašinu.
 
-EU-OSHA navodi da je lokalno odsisavanje na izvoru po pravilu mnogo delotvornije od opšte ventilacije prostorije. Opšta ventilacija je ipak potrebna, jer odsisavanje nikada ne uhvati sve[^oshwiki-hierarchy]. Kod kabina za lakiranje primenjuje se potiskivanje: čist vazduh potiskuje zaprljani ka odvodu, umesto da se samo meša sa njim[^oshwiki-hierarchy].
+EU-OSHA navodi da je lokalno odsisavanje na izvoru po pravilu bolje rešenje od opšte ventilacije prostorije. Opšta ventilacija je ipak potrebna, jer odsisavanje nikada ne uhvati sve[^oshwiki-hierarchy]. Kod kabina za lakiranje primenjuje se lokalno potiskivanje zaprljanog vazduha umesto razblaživanja, što može biti mnogo delotvornije[^oshwiki-hierarchy].
 
 ## Zašto otvorena vrata nisu dovoljna
 
@@ -111,7 +125,7 @@ U bezbednosnom listu učvršćivača R-M H 2P15, odeljak 7[^rm-h2p15-sds]:
 - opremu u izvedbi zaštićenoj od eksplozije;
 - napomenu da ni ventilacija u kabini verovatno neće u svim slučajevima biti dovoljna, pa se tokom prskanja nosi uređaj za disanje sa dovodom komprimovanog vazduha.
 
-Ako to traži list za rad u kabini, u garaži bez kabine zaštita disanja ne može da bude slabija. Više o tome piše vodič [Da li je obična maska sa filterom dovoljna za 2K lak](/vodici/maska-za-2k-lak). EU-OSHA dodaje da prskanje izocijanatnih materijala na otvorenom ili uz samo prirodnu ventilaciju spada u postupke sa velikom mogućnošću izlaganja[^oshwiki-isocyanates].
+Istu napomenu o kabini ima i list bezbojnog laka C 2A40[^rm-c2a40-sds]. Urednički zaključak: ako listovi uređaj sa dovodom vazduha traže već za rad u kabini, nema osnova da se u garaži bez kabine slabija zaštita smatra dovoljnom; koja je zaštita potrebna, procenjuje stručno lice. Više o tome piše vodič [Da li je obična maska sa filterom dovoljna za 2K lak](/vodici/maska-za-2k-lak). EU-OSHA za svako ručno prskanje boje sa izocijanatima kao poželjnu navodi zaštitu disanja sa dovodom vazduha[^oshwiki-isocyanates]. Uredba (EU) 2020/1149 prskanje na otvorenom, uz ograničenu ili samo prirodnu ventilaciju, svrstava među poslove za koje je u EU potreban i napredni nivo obuke za diizocijanate[^eu-2020-1149].
 
 ## Kakav ventilator sme da radi dok se lakira
 
@@ -119,7 +133,7 @@ Bezbednosni listovi traže opremu zaštićenu od eksplozije i uklanjanje izvora 
 
 ## Ograničenja
 
-Ovaj tekst ne daje protok vazduha ni šemu ventilacije za Vašu garažu, jer izvori takve vrednosti ne navode. Ako u garaži redovno prskate 2K materijale, posavetujte se sa stručnjakom za ventilaciju i zaštitu od požara. Kada se rad obavlja za poslodavca, rad u prostoru sa potencijalno eksplozivnom atmosferom traži i dozvolu za rad koju izdaje poslodavac[^zakon-bzr-rs].
+Ovaj tekst ne daje protok vazduha ni šemu ventilacije za Vašu garažu, jer izvori takve vrednosti ne navode. Ako u garaži redovno prskate 2K materijale, posavetujte se sa stručnjakom za ventilaciju i zaštitu od požara. Kada se rad obavlja za poslodavca, Zakon o bezbednosti i zdravlju na radu obavezuje poslodavca da pre rada u prostoru sa potencijalno eksplozivnim atmosferama, kao i pri korišćenju opasne hemijske materije, obezbedi izdavanje dozvole za rad[^zakon-bzr-rs].
 
 ## Pitanja i odgovori
 
@@ -129,7 +143,7 @@ Prema evropskoj direktivi o eksplozivnim atmosferama, to je smeša zapaljivih ga
 
 ### Da li su otvorena vrata garaže dovoljna?
 
-Za lakiranje po pravilu nisu. EU-OSHA navodi da je prirodno provetravanje dovoljno samo u retkim slučajevima[^oshwiki-hierarchy], a bezbednosni listovi učvršćivača i u kabini traže zaštitu disanja[^rm-h2p15-sds].
+Za lakiranje po pravilu nisu. EU-OSHA navodi da je prirodno provetravanje dovoljno samo u retkim slučajevima[^oshwiki-hierarchy], a bezbednosni listovi laka i učvršćivača i u kabini traže zaštitu disanja[^rm-c2a40-sds][^rm-h2p15-sds].
 
 ### Kada se može prestati sa provetravanjem?
 

@@ -58,8 +58,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem UV Clear V02 (11/2019) i Prefill-Spray v.04 i Carsystem Produktkatalog 2025 (strana 64: Touch Up 20 ml sa kuglicom od nerđajućeg čelika i brisačem, 50 ml sa staklenom kuglicom, Micro Tip); granulacije P1500–P3000, 30–60 s i 20 cm se poklapaju. Bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -129178,7 +129178,7 @@
    "glavnoPitanje": "Zašto krpe natopljene materijalima mogu da se zapale i kako se to sprečava?",
    "namera": "informativna",
    "dodatnaPitanja": [
-    "Gde se odlaže zauljeni otpad?",
+    "Gde se odlažu zaprljane krpe i ostaci materijala?",
     "Da li se krpe sa razređivačem same pale?",
     "Sme li ostatak učvršćivača u kantu sa drugim otpadom?"
    ],
@@ -129256,8 +129256,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -129271,15 +129271,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 707,
-   "otisak": "ba9015b77d10fc9d7d3f",
+   "reci": 752,
+   "otisak": "e1ee7463059d416838ac",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Krpa može sama da se zapali kada materijal na njoj reaguje sa vazduhom ili sa drugim materijalom i pri tome razvija toplotu koja ne može da se odvede, na primer u gomili ili u zatvorenoj kesi. EU-OSHA među materijama koje se mogu same zapaliti navodi tekstil natopljen mastima koje se razgrađuju"
+       "v": "Opšte objašnjenje: krpa može sama da se zapali kada materijal na njoj reaguje sa vazduhom ili sa drugim materijalom i razvija toplotu brže nego što se ona odvodi, na primer u gomili ili u zatvorenoj kesi. EU-OSHA među materijama koje se mogu same zapaliti navodi tekstil natopljen mastima koje se razgrađuju"
       },
       {
        "t": "cite",
@@ -129287,7 +129287,19 @@
       },
       {
        "t": "text",
-       "v": ". Za refinish materijale iz našeg programa bezbednosni listovi koje smo otvorili samozapaljenje ne opisuju, ali opisuju dva srodna rizika: zapaljive pare i reakciju učvršćivača sa drugim materijama uz oslobađanje toplote"
+       "v": ". Za refinish materijale iz našeg programa bezbednosni listovi koje smo otvorili samozapaljenje ne opisuju; u odeljku 9 R-M navodi da H 2P15 nije klasifikovan kao samozagrevajući, a Norbin da N85-021 nije materijal sklon samozagrevanju"
+      },
+      {
+       "t": "cite",
+       "id": "rm-h2p15-sds"
+      },
+      {
+       "t": "cite",
+       "id": "norbin-n85-021-sds"
+      },
+      {
+       "t": "text",
+       "v": ". Listovi opisuju dva srodna rizika: zapaljive pare i reakciju učvršćivača sa drugim materijama uz oslobađanje toplote"
       },
       {
        "t": "cite",
@@ -129657,11 +129669,11 @@
     {
      "t": "h",
      "level": 3,
-     "id": "gde-se-odlaze-zauljeni-otpad",
+     "id": "gde-se-odlazu-zaprljane-krpe-i-ostaci-materijala",
      "c": [
       {
        "t": "text",
-       "v": "Gde se odlaže zauljeni otpad?"
+       "v": "Gde se odlažu zaprljane krpe i ostaci materijala?"
       }
      ]
     },
@@ -129712,7 +129724,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Izvori koje smo otvorili to ne tvrde za razređivače iz našeg programa. Za njih je glavni rizik zapaljiva para koja se pali od spoljnog izvora"
+       "v": "Izvori koje smo otvorili to ne tvrde za razređivače iz našeg programa. Norbin za N85-021 u odeljku 9 navodi da nije materijal sklon samozagrevanju; ta oznaka se odnosi na sam proizvod, ne na krpu natopljenu njime. Glavni rizik je zapaljiva para koja se pali od spoljnog izvora"
       },
       {
        "t": "cite",
@@ -129834,6 +129846,23 @@
      "tip": "smernica"
     },
     {
+     "id": "rm-c2a40-sds",
+     "naziv": "R-M, Safety Data Sheet C 2A40 AirTOP 1L (UK, EN)",
+     "url": "https://msds.rmpaint.com/files/50760163_MSDS_GB_EN.PDF",
+     "verzija": "Version 4.0, Revision Date 15.05.2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "bezbednosni-list"
+    },
+    {
+     "id": "eu-2020-1149",
+     "naziv": "Uredba Komisije (EU) 2020/1149 o izmeni Priloga XVII Uredbe (EZ) br. 1907/2006 (REACH) u pogledu diizocijanata",
+     "url": "https://publications.europa.eu/resource/celex/32020R1149",
+     "datumIzvora": "2020-08-03",
+     "pristupljeno": "2026-10-08",
+     "tip": "propis",
+     "napomena": "Službeni list EU L 252, 4. 8. 2020; Prilog, stavka 74, tačka 4(c)."
+    },
+    {
      "id": "rm-h2p15-sds",
      "naziv": "R-M, Safety Data Sheet H 2P15 CLEAR Harden-R 1L (UK, EN)",
      "url": "https://msds.rmpaint.com/files/50794093_MSDS_GB_EN.PDF",
@@ -129864,7 +129893,7 @@
      "datumIzvora": "2023-04-29",
      "pristupljeno": "2026-10-08",
      "tip": "propis",
-     "napomena": "Čl. 27: dozvola za rad u prostoru sa potencijalno eksplozivnim atmosferama."
+     "napomena": "Čl. 27: dozvola za rad u prostoru sa potencijalno eksplozivnim atmosferama i pri korišćenju opasne hemijske materije."
     }
    ],
    "datumDogadjaja": null,
@@ -129877,12 +129906,12 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
-    "razlog": "Izvori (EU-OSHA, bezbednosni listovi) daju načela ventilacije i zaštite od eksplozije, ali ne i protok vazduha, raspored otvora ni opremu za garažu. Bezbednosni listovi učvršćivača zaštitu opisuju za rad u kabini. Da li je i pod kojim uslovima prskanje 2K materijala u određenoj garaži prihvatljivo, kao i izbor ventilatora i električne opreme, mora da proceni stručnjak za ventilaciju, zaštitu od požara i eksplozije, odnosno za bezbednost i zdravlje na radu.",
+    "razlog": "Izvori (EU-OSHA, bezbednosni listovi) daju načela ventilacije i zaštite od eksplozije, ali ne i protok vazduha, raspored otvora ni opremu za garažu. Bezbednosni listovi laka i učvršćivača posebno opisuju rad u kabini, a rad bez kabine ne opisuju. Da li je i pod kojim uslovima prskanje 2K materijala u određenoj garaži prihvatljivo, kao i izbor ventilatora i električne opreme, mora da proceni stručnjak za ventilaciju, zaštitu od požara i eksplozije, odnosno za bezbednost i zdravlje na radu.",
     "status": "potrebno"
    },
    "poslednjaProvera": "2026-10-08",
@@ -129892,8 +129921,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 748,
-   "otisak": "c7c9d7bd0262022776cf",
+   "reci": 828,
+   "otisak": "c4efcc78b3a3afa82e14",
    "blocks": [
     {
      "t": "p",
@@ -129908,7 +129937,7 @@
       },
       {
        "t": "text",
-       "v": ". Bezbednosni listovi traže dobro provetravanje, po potrebi lokalno odsisavanje, i opremu zaštićenu od eksplozije"
+       "v": ". Bezbednosni list R-M učvršćivača H 2P15 traži dobro provetravanje, po potrebi lokalno odsisavanje, i opremu zaštićenu od eksplozije"
       },
       {
        "t": "cite",
@@ -129916,7 +129945,11 @@
       },
       {
        "t": "text",
-       "v": ". Za prskanje 2K materijala listovi učvršćivača zaštitu opisuju za rad u kabini"
+       "v": ". R-M listovi i za lak i za učvršćivač uređaj za disanje sa dovodom vazduha traže već za rad u kabini, a rad bez kabine ne opisuju"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
       },
       {
        "t": "cite",
@@ -130011,7 +130044,7 @@
      "c": [
       {
        "t": "text",
-       "v": "EU-OSHA navodi da je lokalno odsisavanje na izvoru po pravilu mnogo delotvornije od opšte ventilacije prostorije. Opšta ventilacija je ipak potrebna, jer odsisavanje nikada ne uhvati sve"
+       "v": "EU-OSHA navodi da je lokalno odsisavanje na izvoru po pravilu bolje rešenje od opšte ventilacije prostorije. Opšta ventilacija je ipak potrebna, jer odsisavanje nikada ne uhvati sve"
       },
       {
        "t": "cite",
@@ -130019,7 +130052,7 @@
       },
       {
        "t": "text",
-       "v": ". Kod kabina za lakiranje primenjuje se potiskivanje: čist vazduh potiskuje zaprljani ka odvodu, umesto da se samo meša sa njim"
+       "v": ". Kod kabina za lakiranje primenjuje se lokalno potiskivanje zaprljanog vazduha umesto razblaživanja, što može biti mnogo delotvornije"
       },
       {
        "t": "cite",
@@ -130172,7 +130205,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Ako to traži list za rad u kabini, u garaži bez kabine zaštita disanja ne može da bude slabija. Više o tome piše vodič "
+       "v": "Istu napomenu o kabini ima i list bezbojnog laka C 2A40"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
+      },
+      {
+       "t": "text",
+       "v": ". Urednički zaključak: ako listovi uređaj sa dovodom vazduha traže već za rad u kabini, nema osnova da se u garaži bez kabine slabija zaštita smatra dovoljnom; koja je zaštita potrebna, procenjuje stručno lice. Više o tome piše vodič "
       },
       {
        "t": "link",
@@ -130186,11 +130227,19 @@
       },
       {
        "t": "text",
-       "v": ". EU-OSHA dodaje da prskanje izocijanatnih materijala na otvorenom ili uz samo prirodnu ventilaciju spada u postupke sa velikom mogućnošću izlaganja"
+       "v": ". EU-OSHA za svako ručno prskanje boje sa izocijanatima kao poželjnu navodi zaštitu disanja sa dovodom vazduha"
       },
       {
        "t": "cite",
        "id": "oshwiki-isocyanates"
+      },
+      {
+       "t": "text",
+       "v": ". Uredba (EU) 2020/1149 prskanje na otvorenom, uz ograničenu ili samo prirodnu ventilaciju, svrstava među poslove za koje je u EU potreban i napredni nivo obuke za diizocijanate"
+      },
+      {
+       "t": "cite",
+       "id": "eu-2020-1149"
       },
       {
        "t": "text",
@@ -130256,7 +130305,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Ovaj tekst ne daje protok vazduha ni šemu ventilacije za Vašu garažu, jer izvori takve vrednosti ne navode. Ako u garaži redovno prskate 2K materijale, posavetujte se sa stručnjakom za ventilaciju i zaštitu od požara. Kada se rad obavlja za poslodavca, rad u prostoru sa potencijalno eksplozivnom atmosferom traži i dozvolu za rad koju izdaje poslodavac"
+       "v": "Ovaj tekst ne daje protok vazduha ni šemu ventilacije za Vašu garažu, jer izvori takve vrednosti ne navode. Ako u garaži redovno prskate 2K materijale, posavetujte se sa stručnjakom za ventilaciju i zaštitu od požara. Kada se rad obavlja za poslodavca, Zakon o bezbednosti i zdravlju na radu obavezuje poslodavca da pre rada u prostoru sa potencijalno eksplozivnim atmosferama, kao i pri korišćenju opasne hemijske materije, obezbedi izdavanje dozvole za rad"
       },
       {
        "t": "cite",
@@ -130347,7 +130396,11 @@
       },
       {
        "t": "text",
-       "v": ", a bezbednosni listovi učvršćivača i u kabini traže zaštitu disanja"
+       "v": ", a bezbednosni listovi laka i učvršćivača i u kabini traže zaštitu disanja"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
       },
       {
        "t": "cite",
@@ -130394,12 +130447,13 @@
    "slug": "skidac-boje-i-zdravlje",
    "naslov": "Hemijski skidač boje: rizici i bezbedan rad",
    "metaNaslov": "Hemijski skidač boje: rizici po zdravlje i zaštita",
-   "opis": "Koliko je hemijski skidač boje opasan po zdravlje, gde su upozorenja i koju zaštitu traži bezbednosni list, na primeru skidača iz našeg programa.",
+   "opis": "Koliko je hemijski skidač boje opasan po zdravlje, gde su upozorenja i koju zaštitu traži bezbednosni list, na primeru skidača za profesionalne korisnike.",
    "kategorija": "zastita-na-radu",
    "podtema": "skidači boje",
    "tip": "resavanje-problema",
    "publika": [
-    "hobista"
+    "hobista",
+    "profesionalac"
    ],
    "glavnoPitanje": "Koliko je hemijski skidač boje opasan i kako se bezbedno koristi?",
    "namera": "rešavanje problema",
@@ -130467,8 +130521,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -130481,8 +130535,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 715,
-   "otisak": "681b9b925f8065da4c0a",
+   "reci": 787,
+   "otisak": "1d250a8ab0708a1590a4",
    "blocks": [
     {
      "t": "p",
@@ -130497,7 +130551,20 @@
       },
       {
        "t": "text",
-       "v": ". Isti list navodi i da je proizvod namenjen samo profesionalnim korisnicima"
+       "v": ". "
+      },
+      {
+       "t": "strong",
+       "c": [
+        {
+         "t": "text",
+         "v": "Bezbednosni list ovaj proizvod ograničava na profesionalne korisnike"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ", pa nije namenjen hobi upotrebi u kućnoj radionici"
       },
       {
        "t": "cite",
@@ -130505,7 +130572,7 @@
       },
       {
        "t": "text",
-       "v": ". Bezbedan rad zato počinje čitanjem etikete i lista, a nastavlja se provetravanjem, zaštitom očiju i ruku i radom dalje od izvora paljenja."
+       "v": ". Za profesionalnog korisnika bezbedan rad počinje čitanjem etikete i lista, a nastavlja se provetravanjem, zaštitom očiju i ruku i radom dalje od izvora paljenja."
       }
      ]
     },
@@ -130615,13 +130682,13 @@
         "c": [
          {
           "t": "text",
-          "v": "Trudnoća i dojenje."
+          "v": "Ko ne sme biti izložen."
          }
         ]
        },
        {
         "t": "text",
-        "v": " U odeljku 7 navodi da se dodir izbegava tokom trudnoće i dojenja"
+        "v": " U odeljku 15 list navodi da proizvodu ne smeju biti izložene osobe mlađe od 18 godina, kao ni trudnice i dojilje; odeljak 7 dodaje da se dodir izbegava tokom trudnoće i dojenja"
        },
        {
         "t": "cite",
@@ -130662,7 +130729,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Za Cosmos Lac Paint Remover tehnički list navodi da je izuzetno zapaljiv i upućuje da se pre upotrebe pročita bezbednosni list, koji se dobija na zahtev"
+       "v": "Za Cosmos Lac Paint Remover tehnički list navodi da je izuzetno zapaljiv, opisuje ga kao sprej za industrijsku upotrebu i za upotrebu „uradi sam“ i upućuje da se pre upotrebe pročita bezbednosni list, koji se dobija na zahtev"
       },
       {
        "t": "cite",
@@ -130670,7 +130737,7 @@
       },
       {
        "t": "text",
-       "v": ". Ostale opasnosti tog proizvoda zato ovde ne navodimo. Pravila za ranije skidače sa diklormetanom opisuje vodič "
+       "v": ". Taj bezbednosni list nismo otvorili, pa ostale opasnosti tog proizvoda ovde ne navodimo. Pravila za ranije skidače sa diklormetanom opisuje vodič "
       },
       {
        "t": "link",
@@ -130704,7 +130771,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Šta navodi odeljak 8 bezbednosnog lista C.A.R.FIT Paint Remover Spray"
+       "v": "Šta navode odeljci 7 i 8 bezbednosnog lista C.A.R.FIT Paint Remover Spray"
       },
       {
        "t": "cite",
@@ -130897,7 +130964,15 @@
        },
        {
         "t": "text",
-        "v": " Reakcija na koži može da se javi danima kasnije."
+        "v": " Alergijska reakcija na koži, prema listu, obično se javlja 12–72 sata posle izlaganja"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-paint-remover-sds"
+       },
+       {
+        "t": "text",
+        "v": "."
        }
       ],
       [
@@ -131069,7 +131144,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Samo uz dovoljno provetravanje i bez izvora paljenja, kako navode listovi"
+       "v": "C.A.R.FIT Paint Remover Spray je prema bezbednosnom listu namenjen samo profesionalnim korisnicima"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-paint-remover-sds"
+      },
+      {
+       "t": "text",
+       "v": ". I tada se koristi samo uz dovoljno provetravanje, posebno u skučenom prostoru, i bez izvora paljenja, kako navode listovi"
       },
       {
        "t": "cite",
@@ -143613,8 +143696,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -144309,8 +144392,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -145072,8 +145155,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -145860,8 +145943,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -146488,8 +146571,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -146502,8 +146585,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 688,
-   "otisak": "27fbfc5ec9b282093173",
+   "reci": 697,
+   "otisak": "7a458540e94cb802ce17",
    "blocks": [
     {
      "t": "p",
@@ -147016,7 +147099,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Ne nanosite nove slojeve preko nabranog mesta. Sačekajte da sve potpuno otvrdne, izbrusite do čvrste i ravne podloge i ponovite postupak sa kompatibilnim materijalom i dužim čekanjem. Kako se proverava da li podloga podnosi novi sloj, objašnjavaju vodiči "
+       "v": "Ne nanosite nove slojeve preko nabranog mesta. Opšte pravilo je da se sačeka da sve potpuno otvrdne, da se izbrusi do čvrste i ravne podloge i da se postupak ponovi sa kompatibilnim materijalom i dužim čekanjem. Kako se proverava da li podloga podnosi novi sloj, objašnjavaju vodiči "
       },
       {
        "t": "link",
@@ -147183,8 +147266,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -147197,8 +147280,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 581,
-   "otisak": "c7ba002a46f1b88eb71e",
+   "reci": 587,
+   "otisak": "92cf9744a9ddec5272e2",
    "blocks": [
     {
      "t": "p",
@@ -147387,7 +147470,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Ne pokušavajte da curenje obrišete prstom ili krpom: razmazaćete ga na veću površinu, a ostaće trag. Ne prskajte ni dodatni sloj preko njega da biste ga „poravnali“, jer se tako samo dodaje boja na mesto koje je već predebelo. Ostavite deo da se suši u položaju u kome jeste."
+       "v": "Opšte pravilo: ne pokušavajte da curenje obrišete prstom ili krpom: razmazaćete ga na veću površinu, a ostaće trag. Ne prskajte ni dodatni sloj preko njega da biste ga „poravnali“, jer se tako samo dodaje boja na mesto koje je već predebelo. Ostavite deo da se suši u položaju u kome jeste."
       }
      ]
     },
@@ -147512,7 +147595,7 @@
        },
        {
         "t": "text",
-        "v": ", ako je curenje bilo samo u gornjem sloju laka i nije probijeno brušenjem, dovoljno je poliranje"
+        "v": " baslac kao popravku curenja navodi brušenje i poliranje, a brušenje i ponovno lakiranje kada mesto ne može da se ispolira"
        },
        {
         "t": "cite",
@@ -147735,8 +147818,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -147749,15 +147832,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 754,
-   "otisak": "6af5890d602c5ba21bd9",
+   "reci": 783,
+   "otisak": "899f8182967b11057657",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "2K sprej u jednoj limenci nosi dve komponente: lak i učvršćivač u posebnom odeljku. Učvršćivač se pušta mehanizmom na dnu limenke, posle čega počinje hemijska reakcija i vreme upotrebe postaje ograničeno. Za Carsystem 2K High-Speed Clearcoat Spray tehnički list navodi oko 24 h na 20 °C"
+       "v": "2K sprej u jednoj limenci nosi dve komponente: lak i učvršćivač u posebnom odeljku. Učvršćivač se pušta mehanizmom na dnu limenke, posle čega počinje hemijska reakcija i vreme upotrebljivosti smeše (engl. pot life) postaje ograničeno. Za Carsystem 2K High-Speed Clearcoat Spray tehnički list navodi oko 24 h na 20 °C"
       },
       {
        "t": "cite",
@@ -147773,7 +147856,7 @@
       },
       {
        "t": "text",
-       "v": ". Oba proizvoda sadrže izocijanate i namenjena su profesionalnoj upotrebi, uz masku za disanje koju propisuju tehnički i bezbednosni list."
+       "v": ". Oba proizvoda sadrže izocijanate i prema svojim listovima namenjena su samo profesionalnoj upotrebi, uz masku za disanje koju ti listovi propisuju."
       }
      ]
     },
@@ -147952,7 +148035,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Vreme upotrebe počinje u trenutku aktiviranja, a ne pri prvom prskanju. Carsystem navodi oko 24 h na 20 °C i dodaje da vreme zavisi od temperature okoline: na višoj temperaturi je kraće, a na nižoj duže"
+       "v": "Oba lista ovaj podatak navode izričito kao vreme upotrebljivosti (pot life), a ne kao vreme sušenja ili rok skladištenja. Opšte objašnjenje: to vreme teče od trenutka aktiviranja, a ne od prvog prskanja. Carsystem navodi oko 24 h na 20 °C i dodaje da vreme zavisi od temperature okoline: na višoj temperaturi je kraće, a na nižoj duže"
       },
       {
        "t": "cite",
@@ -148342,7 +148425,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Samo u okviru vremena upotrebe iz lista. Posle toga materijal u limenci otvrdnjava i sprej više nije upotrebljiv. Neispražnjena limenka se ne baca sa običnim otpadom: C.A.R.FIT navodi da se limenke koje nisu prazne odlažu kao poseban otpad, a potpuno ispražnjene mogu u reciklažu"
+       "v": "Samo u okviru vremena upotrebljivosti iz lista. Opšte objašnjenje: posle toga materijal u limenci otvrdnjava i sprej više nije upotrebljiv. Neispražnjena limenka se ne baca sa običnim otpadom: C.A.R.FIT navodi da se limenke koje nisu prazne odlažu kao poseban otpad, a potpuno ispražnjene mogu u reciklažu"
       },
       {
        "t": "cite",
@@ -148463,8 +148546,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -149029,8 +149112,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -149044,8 +149127,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 648,
-   "otisak": "8f2125db112b8d6908ae",
+   "reci": 662,
+   "otisak": "97bbe6a0d9dbcc76d746",
    "blocks": [
     {
      "t": "p",
@@ -149576,11 +149659,19 @@
      "c": [
       {
        "t": "text",
-       "v": "Boje za auspuh su predviđene za druge uslove. Za Cosmos Lac High Heat 700 °C list traži da se posle 24 h sušenja površina zagreje na 250 °C tokom 30 min, da bi boja dobila puna svojstva"
+       "v": "Boje za auspuh su predviđene za druge uslove. Za Cosmos Lac High Heat 700 °C tehnički list traži da se posle 24 h sušenja površina zagreje na 250 °C, da bi boja dobila puna svojstva; list (izdanje na grčkom) navodi 30 min"
       },
       {
        "t": "cite",
        "id": "cosmos-high-heat-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a katalog iz 2022. postepeno zagrevanje tokom 45 min"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-katalog-2022"
       },
       {
        "t": "text",
@@ -149709,8 +149800,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -149723,8 +149814,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 702,
-   "otisak": "d94f182ec453be6f1731",
+   "reci": 704,
+   "otisak": "32c8e543f7db46666026",
    "blocks": [
     {
      "t": "p",
@@ -150092,7 +150183,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Tanki slojevi su ovde posebno važni, jer debeo sloj sporije otpušta rastvarač pre zagrevanja. Ostalo o tehnici je u vodiču "
+       "v": "Opšte objašnjenje: tanki slojevi su ovde posebno važni, jer debeo sloj sporije otpušta rastvarač pre zagrevanja. Ostalo o tehnici je u vodiču "
       },
       {
        "t": "link",
@@ -150485,8 +150576,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -150499,8 +150590,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 571,
-   "otisak": "5b1211c95d4cf2e4bce0",
+   "reci": 575,
+   "otisak": "f9c16e34f5bd6c9a75e6",
    "blocks": [
     {
      "t": "p",
@@ -150662,7 +150753,7 @@
       },
       {
        "t": "text",
-       "v": ". Na delovima enterijera to je posebno važno, jer se godinama brišu sredstvima za negu, čiji film ostaje na površini. Za plastiku Carsystem uz Plastic Primer navodi čišćenje sredstvom ISO-VE 7030 ili drugim odgovarajućim sredstvom za plastiku"
+       "v": ". Opšte objašnjenje: na delovima enterijera to je posebno važno, jer se godinama brišu sredstvima za negu, čiji film može da ostane na površini. Za plastiku Carsystem uz Plastic Primer navodi čišćenje sredstvom ISO-VE 7030 ili drugim odgovarajućim sredstvom za plastiku"
       },
       {
        "t": "cite",
@@ -151103,8 +151194,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -151682,8 +151773,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -151696,8 +151787,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 586,
-   "otisak": "db69e2be8463303dba9a",
+   "reci": 588,
+   "otisak": "c9754b527b0be4492c5c",
    "blocks": [
     {
      "t": "p",
@@ -151975,7 +152066,7 @@
       },
       {
        "t": "text",
-       "v": ". Većina listova ne kaže da li se izdašnost odnosi na jedan sloj ili na ceo preporučeni broj slojeva, pa vrednost tretirajte kao gornju granicu."
+       "v": ". Većina listova iz tabele ne kaže da li se izdašnost odnosi na jedan sloj ili na ceo preporučeni broj slojeva, pa vrednost tretirajte kao gornju granicu."
       }
      ]
     },
@@ -152335,8 +152426,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -152349,8 +152440,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 698,
-   "otisak": "2575cdd5f997c924f0b3",
+   "reci": 713,
+   "otisak": "3200d42c18fac86ac34a",
    "blocks": [
     {
      "t": "p",
@@ -152500,7 +152591,19 @@
      "c": [
       {
        "t": "text",
-       "v": "Cink sprejevi štite goli čelik od korozije, posebno posle varenja ili brušenja do metala. Nisu isti, pa se bira prema nameni:"
+       "v": "Cink sprejevi štite goli metal od korozije; Cosmos Lac i C.A.R.FIT ih navode i za zaštitu zavarenih površina, odnosno kao prajmer za tačkasto zavarivanje"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-zinc-maximum-tds"
+      },
+      {
+       "t": "cite",
+       "id": "cf-zinc-spray-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Nisu isti, pa se bira prema nameni:"
       }
      ]
     },
@@ -152681,7 +152784,7 @@
        },
        {
         "t": "text",
-        "v": " skida sve vrste boje sa metala, drveta, stakla i nekih plastika. List upozorava da može da ošteti prethodno obojene površine i da se ne koristi na toploj površini ni na suncu"
+        "v": " skida sve vrste boje sa metala, drveta, stakla, polietilena i polipropilena. List upozorava da može da ošteti prethodno obojene površine i da se ne koristi na toploj površini ni na suncu"
        },
        {
         "t": "cite",
@@ -152889,7 +152992,7 @@
       },
       {
        "t": "text",
-       "v": ". Svi ovi sprejevi su zapaljivi aerosoli: za Brake Cleaner list navodi da je izuzetno zapaljiv i da pre upotrebe treba pročitati bezbednosni list"
+       "v": ". Tehnički sprejevi su posude pod pritiskom, a mnogi su i zapaljivi: za Brake Cleaner list navodi da je izuzetno zapaljiv i da pre upotrebe treba pročitati bezbednosni list"
       },
       {
        "t": "cite",

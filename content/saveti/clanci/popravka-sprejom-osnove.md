@@ -94,8 +94,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Prefill-Spray v.04, Bumper Paint Spray v.01 i 2K High-Speed Clearcoat Spray V02 (2012, renderovane strane), C.A.R.FIT Fillable Spray Can, Cosmos Lac Prefilled, RAL, Bumper Paint i Effect (2026); izdašnosti, temperature i namene se poklapaju. Ispravljeno (4): „većina boja u spreju su 1K“ preformulisano kao opšte objašnjenje; Cosmos Prefilled dopunjen (rastvaračka boja); dva dodatna pitanja jezički ispravljena (persiranje, „Može li se sprejom lakirati ceo deo?“)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

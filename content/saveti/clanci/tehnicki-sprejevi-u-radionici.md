@@ -127,8 +127,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac Brake Cleaner, Contact Cleaner, Zinc Maximum, Alu-Zinc, Sticker & Glue Remover, Paint Remover i Silicone Oil, Carsystem Zink-Spray (490 °C) i Control-Spray, C.A.R.FIT Silicone Remover, Zinc Spray (350 °C, 24 h) i Paint Remover (20 min, opasan otpad), baslac Loss of adhesion. Ispravljeno (3): „neke plastike“ precizirano (polietilen i polipropilen); nepotvrđeno „svi ovi sprejevi su zapaljivi“ preformulisano; uvod o cink sprejevima dobio izvor."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -149,7 +150,7 @@ Odmašćivač za lakiranje se nanosi i briše čistom suvom maramicom, postupak 
 
 ## Cink sprejevi
 
-Cink sprejevi štite goli čelik od korozije, posebno posle varenja ili brušenja do metala. Nisu isti, pa se bira prema nameni:
+Cink sprejevi štite goli metal od korozije; Cosmos Lac i C.A.R.FIT ih navode i za zaštitu zavarenih površina, odnosno kao prajmer za tačkasto zavarivanje[^cosmos-zinc-maximum-tds][^cf-zinc-spray-tds]. Nisu isti, pa se bira prema nameni:
 
 | Proizvod | Šta list navodi |
 | --- | --- |
@@ -163,7 +164,7 @@ Koji cink sprej sme da ostane između limova koji se zavaruju, a koji ide tek po
 ## Uklanjanje nalepnica, lepka i stare boje
 
 - **Cosmos Lac Sticker & Glue Remover** je gel koji ne curi po vertikalnoj površini: nanese se, ostavi nekoliko minuta, pa se nalepnica ili lepak skinu krpom ili strugačem. List upozorava da može da ošteti obojene i plastične površine[^cosmos-sticker-remover-tds].
-- **Cosmos Lac Paint Remover** skida sve vrste boje sa metala, drveta, stakla i nekih plastika. List upozorava da može da ošteti prethodno obojene površine i da se ne koristi na toploj površini ni na suncu[^cosmos-paint-remover-tds].
+- **Cosmos Lac Paint Remover** skida sve vrste boje sa metala, drveta, stakla, polietilena i polipropilena. List upozorava da može da ošteti prethodno obojene površine i da se ne koristi na toploj površini ni na suncu[^cosmos-paint-remover-tds].
 - **C.A.R.FIT Paint Remover Spray** se nanosi u debelom sloju, a posle oko 20 min špahtlom se proveri koliko je boja omekšala. Proizvođač traži probu na malom, neupadljivom mestu, a skinutu boju odlaže kao opasan otpad[^cf-paint-remover-tds].
 
 Za uklanjanje nalepnice sa laka koji ostaje, sredstvo koje oštećuje boju nije pravi izbor; pre upotrebe proverite list i probajte na skrivenom mestu. Skidanje stare boje uopšte opisuje vodič [Skidanje stare boje](/vodici/skidanje-stare-boje), a uklanjanje smole i katrana vodič [Uklanjanje smole i katrana](/vodici/uklanjanje-smole-i-katrana).
@@ -180,4 +181,4 @@ Maziva u spreju, silikonski sprejevi, sredstva za negu i sve što ostavlja masni
 
 ### Može li sredstvo za čišćenje kočnica da zameni odmašćivač?
 
-Ne. Cosmos Lac Brake Cleaner je namenjen kočnicama i kvačilu, a list navodi da se ne prska po boji ni po plastici[^cosmos-brake-cleaner-tds]. Za površinu koja se lakira koristi se odmašćivač namenjen pripremi za lakiranje[^cf-silicone-remover-tds]. Svi ovi sprejevi su zapaljivi aerosoli: za Brake Cleaner list navodi da je izuzetno zapaljiv i da pre upotrebe treba pročitati bezbednosni list[^cosmos-brake-cleaner-tds]. Kako se čita bezbednosni list, objašnjava vodič [Bezbednosni list](/vodici/bezbednosni-list-16-odeljaka).
+Ne. Cosmos Lac Brake Cleaner je namenjen kočnicama i kvačilu, a list navodi da se ne prska po boji ni po plastici[^cosmos-brake-cleaner-tds]. Za površinu koja se lakira koristi se odmašćivač namenjen pripremi za lakiranje[^cf-silicone-remover-tds]. Tehnički sprejevi su posude pod pritiskom, a mnogi su i zapaljivi: za Brake Cleaner list navodi da je izuzetno zapaljiv i da pre upotrebe treba pročitati bezbednosni list[^cosmos-brake-cleaner-tds]. Kako se čita bezbednosni list, objašnjava vodič [Bezbednosni list](/vodici/bezbednosni-list-16-odeljaka).

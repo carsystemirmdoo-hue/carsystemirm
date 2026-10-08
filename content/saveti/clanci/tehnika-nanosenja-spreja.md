@@ -122,8 +122,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac RAL, Easy Max, Spray.Bike, Zinc Maximum, katalog 2022 (SMART CAP 8–10 umesto 25–30 prolaza) i tri bloga, Carsystem Rallye-Spray, Plastic Primer V03, Klarlack-Spray i 2K High-Speed Clearcoat Spray, C.A.R.FIT Black Paint; vremena mućkanja, rastojanja i pauze se poklapaju. Ispravljeno (4): netačno „kod većine sprejeva iz tabele 25–30 cm“ (to važi samo za 1 od 4) zamenjeno vrednostima po proizvodu; tvrdnja o taloženju pigmenta dobila izvor; „najmanje 2–3 min“ preciziran; glavno pitanje suženo da se ne preklapa sa SV-0216."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

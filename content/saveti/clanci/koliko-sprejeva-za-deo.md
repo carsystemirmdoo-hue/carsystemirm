@@ -98,8 +98,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene izdašnosti u listovima Cosmos Lac RAL (4 m²/L), Acrylic Primer & Filler (2 m²/400 ml), Acrylic Varnish (5 m²/L), Carsystem Rallye-Spray (1,3 m²), Klarlack-Spray (1–2 m²), 2K High-Speed (0,5–0,75 m², 30 µm), C.A.R.FIT Black Paint (1–1,5 m²), 2K Clear Coat (0,3–0,4 / 0,8–1,0 m²) i 1K Hi-Build; računica 0,4 L × 4 m²/L proverena. Ispravljeno (1): „većina listova“ suženo na listove iz tabele."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -129,7 +130,7 @@ Kada list daje izdašnost po litru, preračunajte je na limenku: za Cosmos Lac R
 
 ## Korak 3: uslovi pod kojima važi izdašnost
 
-Izdašnost iz lista je teorijska vrednost, za određenu debljinu sloja i dobro pripremljenu podlogu. Carsystem je za svoj 2K lak daje za suv sloj od oko 30 µm[^cs-2k-hs-spray-tds], što odgovara dva prolaza iz istog lista. C.A.R.FIT navodi da izdašnost 2K laka zavisi od konzistencije i boje podloge[^cf-2k-clear-tds]. Većina listova ne kaže da li se izdašnost odnosi na jedan sloj ili na ceo preporučeni broj slojeva, pa vrednost tretirajte kao gornju granicu.
+Izdašnost iz lista je teorijska vrednost, za određenu debljinu sloja i dobro pripremljenu podlogu. Carsystem je za svoj 2K lak daje za suv sloj od oko 30 µm[^cs-2k-hs-spray-tds], što odgovara dva prolaza iz istog lista. C.A.R.FIT navodi da izdašnost 2K laka zavisi od konzistencije i boje podloge[^cf-2k-clear-tds]. Većina listova iz tabele ne kaže da li se izdašnost odnosi na jedan sloj ili na ceo preporučeni broj slojeva, pa vrednost tretirajte kao gornju granicu.
 
 ## Korak 4: rezerva
 

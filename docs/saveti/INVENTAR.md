@@ -7,8 +7,8 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | --- | ---: |
 | Teme | 224 |
 | Napisano | 224 |
-| Tehnički provereno | 165 |
-| Jezički provereno | 198 |
+| Tehnički provereno | 179 |
+| Jezički provereno | 215 |
 | Čeka stručnu potvrdu | 40 |
 | Odobreno (imenovana osoba) | 0 |
 | Novosti / trajni vodiči | 9 / 215 |
@@ -205,9 +205,9 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0188 | Izocijanati u 2K materijalima: rizici, zaštita i obavezna obuka u EU | zastita-na-radu | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | urednička procena | 7 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0189 | Da li je obična maska sa filterom dovoljna za 2K lak | zastita-na-radu | Rešavanje problema | hobista, profesionalac | pronađeno | 7 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0190 | Rukavice za rad sa rastvaračima i 2K materijalima | zastita-na-radu | Osnovni vodič | hobista, profesionalac | urednička procena | 11 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0191 | Samozapaljenje krpa i otpada natopljenog rastvaračima | zastita-na-radu | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 5 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0192 | Ventilacija pri lakiranju u garaži | zastita-na-radu | Osnovni vodič | hobista | urednička procena | 6 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0193 | Hemijski skidač boje: rizici i bezbedan rad | zastita-na-radu | Rešavanje problema | hobista | pronađeno | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0191 | Samozapaljenje krpa i otpada natopljenog rastvaračima | zastita-na-radu | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 5 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0192 | Ventilacija pri lakiranju u garaži | zastita-na-radu | Osnovni vodič | hobista | urednička procena | 8 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0193 | Hemijski skidač boje: rizici i bezbedan rad | zastita-na-radu | Rešavanje problema | hobista, profesionalac | pronađeno | 3 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0194 | Organizacija mešaonice boje u maloj radionici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0195 | Kako smanjiti otpad pri mešanju materijala | radionica | Postupak | profesionalac, vlasnik-radionice | urednička procena | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0196 | Praćenje potrošnje materijala po popravci | radionica | Postupak | vlasnik-radionice | urednička procena | 4 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
@@ -225,17 +225,17 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0208 | Oznaka serije i rok upotrebe na ambalaži | tehnicka-dokumentacija | Osnovni vodič | hobista, profesionalac | pronađeno | 6 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0209 | Tehnički list na nemačkom ili engleskom: ključni izrazi | tehnicka-dokumentacija | Osnovni vodič | hobista, profesionalac | urednička procena | 7 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0210 | Debljina suvog sloja: šta znači i kako se meri | tehnicka-dokumentacija | Osnovni vodič | profesionalac | urednička procena | 10 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0211 | Popravka sprejom: šta se može, a šta ne | sprejevi | Osnovni vodič | pocetnik, hobista | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0212 | Priprema površine za lakiranje sprejom | sprejevi | Postupak | pocetnik, hobista | urednička procena | 13 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0213 | Tehnika nanošenja spreja: mućkanje, rastojanje i slojevi | sprejevi | Postupak | pocetnik, hobista | urednička procena | 13 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0214 | Rad sa sprejom po hladnom vremenu | sprejevi | Rešavanje problema | pocetnik, hobista | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0215 | Kompatibilnost boje i laka u spreju | sprejevi | Rešavanje problema | pocetnik, hobista | pronađeno | 13 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0216 | Curenje i kapljice od spreja: kako se popravljaju | sprejevi | Rešavanje problema | pocetnik, hobista | pronađeno | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0217 | 2K sprej: kako radi i koliko traje posle aktiviranja | sprejevi | Osnovni vodič | hobista | pronađeno | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0218 | Popravka udaraca kamenčića | sprejevi | Postupak | pocetnik, hobista | pronađeno | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0219 | Lakiranje kočionih čeljusti sprejom | sprejevi | Postupak | hobista | pronađeno | 5 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0220 | Termootporne boje u spreju: priprema i sušenje | sprejevi | Postupak | hobista | pronađeno | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0221 | Lakiranje plastičnih delova enterijera i lajsni sprejom | sprejevi | Postupak | pocetnik, hobista | urednička procena | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0222 | Zapušen ventil spreja: prevencija i čišćenje | sprejevi | Rešavanje problema | pocetnik, hobista | urednička procena | 11 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0223 | Koliko sprejeva treba za jedan deo | sprejevi | Postupak | pocetnik, hobista | pronađeno | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0224 | Tehnički sprejevi u radionici: šta koji radi | sprejevi | Osnovni vodič | hobista, profesionalac | urednička procena | 13 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0211 | Popravka sprejom: šta se može, a šta ne | sprejevi | Osnovni vodič | pocetnik, hobista | pronađeno | 8 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0212 | Priprema površine za lakiranje sprejom | sprejevi | Postupak | pocetnik, hobista | urednička procena | 13 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0213 | Tehnika nanošenja spreja: mućkanje, rastojanje i slojevi | sprejevi | Postupak | pocetnik, hobista | urednička procena | 13 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0214 | Rad sa sprejom po hladnom vremenu | sprejevi | Rešavanje problema | pocetnik, hobista | pronađeno | 8 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0215 | Kompatibilnost boje i laka u spreju | sprejevi | Rešavanje problema | pocetnik, hobista | pronađeno | 13 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0216 | Curenje i kapljice od spreja: kako se popravljaju | sprejevi | Rešavanje problema | pocetnik, hobista | pronađeno | 10 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0217 | 2K sprej: kako radi i koliko traje posle aktiviranja | sprejevi | Osnovni vodič | hobista | pronađeno | 4 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0218 | Popravka udaraca kamenčića | sprejevi | Postupak | pocetnik, hobista | pronađeno | 3 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0219 | Lakiranje kočionih čeljusti sprejom | sprejevi | Postupak | hobista | pronađeno | 5 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0220 | Termootporne boje u spreju: priprema i sušenje | sprejevi | Postupak | hobista | pronađeno | 6 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0221 | Lakiranje plastičnih delova enterijera i lajsni sprejom | sprejevi | Postupak | pocetnik, hobista | urednička procena | 9 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0222 | Zapušen ventil spreja: prevencija i čišćenje | sprejevi | Rešavanje problema | pocetnik, hobista | urednička procena | 11 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0223 | Koliko sprejeva treba za jedan deo | sprejevi | Postupak | pocetnik, hobista | pronađeno | 9 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0224 | Tehnički sprejevi u radionici: šta koji radi | sprejevi | Osnovni vodič | hobista, profesionalac | urednička procena | 13 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |

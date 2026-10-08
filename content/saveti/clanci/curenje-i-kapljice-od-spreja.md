@@ -98,8 +98,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Runs, Cosmos Lac RAL i Fast Acrylic TDS, katalog 2022, blogovi (Tips & Hacks, Shake it off, Summer Tips, zima) i Carsystem Rallye-Spray i 2K High-Speed Clearcoat Spray; vrednosti se poklapaju. Ispravljeno (2): popravka laka poliranjem preformulisana tačno prema baslac stranici (brušenje i poliranje, odnosno ponovno lakiranje); savet da se sveže curenje ne briše označen kao opšte pravilo."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -124,7 +125,7 @@ Za boje za pištolj baslac kao moguće uzroke curenja navodi i tehniku nanošenj
 
 ## Dok je boja sveža
 
-Ne pokušavajte da curenje obrišete prstom ili krpom: razmazaćete ga na veću površinu, a ostaće trag. Ne prskajte ni dodatni sloj preko njega da biste ga „poravnali“, jer se tako samo dodaje boja na mesto koje je već predebelo. Ostavite deo da se suši u položaju u kome jeste.
+Opšte pravilo: ne pokušavajte da curenje obrišete prstom ili krpom: razmazaćete ga na veću površinu, a ostaće trag. Ne prskajte ni dodatni sloj preko njega da biste ga „poravnali“, jer se tako samo dodaje boja na mesto koje je već predebelo. Ostavite deo da se suši u položaju u kome jeste.
 
 ## Kada se sme brusiti
 
@@ -135,7 +136,7 @@ Tek kada boja otvrdne u celoj debljini. Vremena iz lista su orijentir za normala
 1. **Poravnajte zadebljanje.** Curenje se brusi ravno sa okolinom, najbolje brusnim papirom na tvrdom bloku, da se ne napravi udubljenje. Granulaciju izaberite prema vodiču [Granulacije brusnog papira](/vodici/granulacije-brusnog-papira).
 2. **Očistite i odmastite** izbrušeno mesto.
 3. **Nanesite boju ponovo** u tankim slojevima, prema listu, preko celog izbrušenog mesta i malo šire.
-4. **Kod laka koji se polira**, ako je curenje bilo samo u gornjem sloju laka i nije probijeno brušenjem, dovoljno je poliranje[^baslac-runs]. Carsystem za Rallye-Spray navodi da se može polirati[^cs-rallye-tds].
+4. **Kod laka koji se polira** baslac kao popravku curenja navodi brušenje i poliranje, a brušenje i ponovno lakiranje kada mesto ne može da se ispolira[^baslac-runs]. Carsystem za Rallye-Spray navodi da se može polirati[^cs-rallye-tds].
 
 Ako se brušenjem probije boja do podloge, mesto se tretira kao nova mala popravka, uz prajmer ako je podloga ogoljena.
 

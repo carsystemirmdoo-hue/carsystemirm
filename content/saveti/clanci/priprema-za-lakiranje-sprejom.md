@@ -121,8 +121,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac RAL, Metal Primer, Special Metal Primer, Acrylic Primer & Filler (2026), C.A.R.FIT Silicone Remover (14. 3. 2024), 1K Hi-Build, 1K Etch Primer i Black Paint, Carsystem Rallye-Spray v.03, Primer Spray v.02, Lackiergrundierung v.03 i Bumper Paint Spray, baslac Loss of adhesion; granulacije, debljine slojeva i namene se poklapaju. Ispravljeno (2): neproverljiva tvrdnja „svi listovi koje smo pregledali“ zamenjena navodom iz lista Cosmos Lac RAL; nelogična stavka „Brušenje bez maskiranja“ preformulisana kao opšte objašnjenje o prašini na maski."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

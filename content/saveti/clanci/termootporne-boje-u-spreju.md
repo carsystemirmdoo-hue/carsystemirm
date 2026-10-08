@@ -78,8 +78,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac High Heat 700 °C (izdanje na grčkom, renderovana strana: 15–20 cm, 24 h, zatim 250 °C 30 min, beli dim normalan) i katalog 2022 (postepeno do 250 °C, 45 min, prvo zagrevanje napolju), Master Mechanic 12 (250 °C, 30 min), Carsystem Thermo-Spray v.05 (650 °C, 200 °C/20 min, 75/25–30 µm), C.A.R.FIT Thermo Paint 650 °C (160–200 °C ~30 min, ne na hrom) i C.A.R.FIT 2K Clear Coat (do 120 °C). Neslaganje 30/45 min prikazano je u tabeli kao dva izvora uz jasnu napomenu da važi novije izdanje lista. Ispravljeno (1): objašnjenje o tankim slojevima označeno kao opšte."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -114,7 +115,7 @@ Opšti redosled pripreme je u vodiču [Priprema površine za lakiranje sprejom](
 | Carsystem Thermo-Spray | najmanje 2 min mućkanja, 25–30 cm, 2–3 min između slojeva; preporučena debljina 75 µm mokro, odnosno 25–30 µm suvo[^cs-thermo-spray-tds] |
 | C.A.R.FIT Thermo Paint Spray 650 °C | najmanje 2 min mućkanja, 2 sloja, 25 cm, 3–5 min između slojeva; optimalno 15–25 °C[^cf-thermo-tds] |
 
-Tanki slojevi su ovde posebno važni, jer debeo sloj sporije otpušta rastvarač pre zagrevanja. Ostalo o tehnici je u vodiču [Tehnika nanošenja spreja](/vodici/tehnika-nanosenja-spreja).
+Opšte objašnjenje: tanki slojevi su ovde posebno važni, jer debeo sloj sporije otpušta rastvarač pre zagrevanja. Ostalo o tehnici je u vodiču [Tehnika nanošenja spreja](/vodici/tehnika-nanosenja-spreja).
 
 ## Sušenje i pečenje
 

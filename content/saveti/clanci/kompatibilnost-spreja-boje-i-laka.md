@@ -125,8 +125,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Info R-M Crinkling i Solvent test, Cosmos Lac katalog 2022 (Acrylic Varnish 24–48 h), Acrylic Varnish, RAL, Effect i Metal Primer TDS, blog o laku, Carsystem Klarlack-Spray, Primer Spray i 2K High-Speed Clearcoat Spray, C.A.R.FIT 2K Clear Coat Spray (30 min preko pre-fill) i Black Paint (2 h); sve vrednosti se poklapaju. Ispravljeno (1): postupak kod nabranog laka označen kao opšte pravilo."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -176,4 +177,4 @@ Samo ako to proizvođač potvrđuje. Carsystem 2K High-Speed Clearcoat Spray lis
 
 ### Šta ako se lak već nabrao?
 
-Ne nanosite nove slojeve preko nabranog mesta. Sačekajte da sve potpuno otvrdne, izbrusite do čvrste i ravne podloge i ponovite postupak sa kompatibilnim materijalom i dužim čekanjem. Kako se proverava da li podloga podnosi novi sloj, objašnjavaju vodiči [Podizanje i nabiranje boje](/vodici/podizanje-i-nabiranje-boje) i [Test starog laka razređivačem](/vodici/test-starog-laka-razredjivacem).
+Ne nanosite nove slojeve preko nabranog mesta. Opšte pravilo je da se sačeka da sve potpuno otvrdne, da se izbrusi do čvrste i ravne podloge i da se postupak ponovi sa kompatibilnim materijalom i dužim čekanjem. Kako se proverava da li podloga podnosi novi sloj, objašnjavaju vodiči [Podizanje i nabiranje boje](/vodici/podizanje-i-nabiranje-boje) i [Test starog laka razređivačem](/vodici/test-starog-laka-razredjivacem).

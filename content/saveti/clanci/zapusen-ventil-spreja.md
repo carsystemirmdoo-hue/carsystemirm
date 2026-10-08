@@ -103,8 +103,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Cosmos Lac RAL, Alu-Zinc, Spray.Bike i blogovi, Carsystem Plastic Primer V03, Prefill-Spray v.04, 1K Easy Primer v.2 (poseban otpad) i katalog 2025 (rezervne glave: crvena za Prefill-Spray i Prefill-Spray Water, podesiva za 1K Epoxy Primer, 1K Easy Primer i 1K Easy Filler), C.A.R.FIT Black Paint i SDS Clearcoat Spray 1.0; sve se poklapa. Bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

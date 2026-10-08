@@ -48,6 +48,7 @@ const OUTPUT = path.join(ROOT, "data/saveti/clanci.generated.json");
 const REPORT = path.join(ROOT, "docs/saveti/PROVERA_SADRZAJA.md");
 const INVENTORY = path.join(ROOT, "docs/saveti/INVENTAR.md");
 const STATUS = path.join(ROOT, "data/saveti/status.generated.json");
+const EXPERT = path.join(ROOT, "docs/saveti/STRUCNA_POTVRDA.md");
 const SCHEDULE_FILE = path.join(ROOT, "content/saveti/raspored.json");
 const CHECK = process.argv.includes("--check");
 
@@ -601,6 +602,22 @@ const inventory = [
   "",
 ].join("\n");
 
+const expertPending = records.filter((record) => record.strucnaPotvrda?.potrebna && record.strucnaPotvrda.status !== "potvrdjeno");
+const expertReport = [
+  "# Tekstovi koji čekaju stručnu potvrdu",
+  "",
+  "Generiše `npm run saveti:build`. Ovi tekstovi su napisani i jezički provereni, ali za suštinu odgovora nije pronađen pouzdan izvor ili su izvori protivrečni. Ne ulaze u raspored dok ih stručna osoba iz firme ne potvrdi.",
+  "",
+  "Postupak: stručna osoba pročita tekst i razlog. Ako potvrdi, u frontmatter-u postavlja `strucnaPotvrda.status: potvrdjeno` (uz ime i datum u `strucnaPotvrda.potvrdio` / `strucnaPotvrda.datum`), po potrebi ispravlja tekst, a zatim recenzent postavlja `tehnickaProvera: provereno`. Posle toga tekst može da se odobri i zakaže.",
+  "",
+  `Ukupno: ${expertPending.length}`,
+  "",
+  "| ID | Naslov | Kategorija | Razlog |",
+  "| --- | --- | --- | --- |",
+  ...expertPending.map((record) => `| ${record.id} | ${String(record.naslov).replace(/\|/g, "\\|")} | ${record.kategorija} | ${String(record.strucnaPotvrda.razlog ?? "").replace(/\|/g, "\\|").replace(/\n/g, " ")} |`),
+  "",
+].join("\n");
+
 const scheduleConfig = JSON.parse(readFileSync(SCHEDULE_FILE, "utf8")).podesavanja;
 const statusOutput = `${JSON.stringify({ rasporedAktivan: Boolean(scheduleConfig.aktivan) }, null, 1)}\n`;
 
@@ -616,6 +633,7 @@ if (CHECK) {
   writeFileSync(OUTPUT, output);
   writeFileSync(REPORT, report);
   writeFileSync(INVENTORY, inventory);
+  writeFileSync(EXPERT, expertReport);
 }
 
 console.log(JSON.stringify(counts));

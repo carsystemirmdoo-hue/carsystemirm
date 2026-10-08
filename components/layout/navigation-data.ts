@@ -1,5 +1,23 @@
 export type HeaderMenuKey = "proizvodi" | "brendovi" | "sistemi" | "podrska";
 
+import savetiStatus from "@/data/saveti/status.generated.json";
+
+/*
+ * Link ka rubrici „Saveti i vodiči“ ulazi u meni tek kada je raspored objave
+ * aktiviran. Status je mali generisani fajl (npm run saveti:build), da klijent
+ * ne bi dobio ceo raspored sa budućim terminima.
+ */
+const SAVETI_LINK: NavigationLink[] = savetiStatus.rasporedAktivan
+  ? [
+      {
+        href: "/vodici",
+        title: "Saveti i vodiči",
+        description: "Stručni vodiči i proverene novosti proizvođača.",
+        icon: "documents",
+      },
+    ]
+  : [];
+
 export type HeaderIconName =
   | "prepare"
   | "primer"
@@ -210,6 +228,7 @@ export const SYSTEM_GROUPS: NavigationGroup[] = [
   {
     title: "Digitalna, edukativna i tehnička podrška",
     links: [
+      ...SAVETI_LINK,
       {
         href: "/kontakt?tema=tehnicka-podrska",
         title: "Tehnička podrška",
@@ -233,6 +252,7 @@ export const SYSTEM_GROUPS: NavigationGroup[] = [
 ];
 
 export const SUPPORT_LINKS: NavigationLink[] = [
+  ...SAVETI_LINK,
   {
     href: "/kontakt?tema=tehnicka-podrska",
     title: "Tehnička podrška",

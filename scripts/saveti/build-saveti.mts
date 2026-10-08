@@ -47,6 +47,8 @@ const CONTENT_DIR = path.join(ROOT, "content/saveti/clanci");
 const OUTPUT = path.join(ROOT, "data/saveti/clanci.generated.json");
 const REPORT = path.join(ROOT, "docs/saveti/PROVERA_SADRZAJA.md");
 const INVENTORY = path.join(ROOT, "docs/saveti/INVENTAR.md");
+const STATUS = path.join(ROOT, "data/saveti/status.generated.json");
+const SCHEDULE_FILE = path.join(ROOT, "content/saveti/raspored.json");
 const CHECK = process.argv.includes("--check");
 
 const ID_PATTERN = /^SV-\d{4}$/;
@@ -596,10 +598,16 @@ const inventory = [
   "",
 ].join("\n");
 
+const scheduleConfig = JSON.parse(readFileSync(SCHEDULE_FILE, "utf8")).podesavanja;
+const statusOutput = `${JSON.stringify({ rasporedAktivan: Boolean(scheduleConfig.aktivan) }, null, 1)}\n`;
+
 if (CHECK) {
   const current = existsSync(OUTPUT) ? readFileSync(OUTPUT, "utf8") : "";
   if (current !== output) errors.push("data/saveti/clanci.generated.json nije ažuran — pokrenite npm run saveti:build");
+  const currentStatus = existsSync(STATUS) ? readFileSync(STATUS, "utf8") : "";
+  if (currentStatus !== statusOutput) errors.push("data/saveti/status.generated.json nije ažuran — pokrenite npm run saveti:build");
 } else {
+  writeFileSync(STATUS, statusOutput);
   mkdirSync(path.dirname(OUTPUT), { recursive: true });
   mkdirSync(path.dirname(REPORT), { recursive: true });
   writeFileSync(OUTPUT, output);

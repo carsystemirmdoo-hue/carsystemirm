@@ -6,37 +6,37 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | Pokazatelj | Broj |
 | --- | ---: |
 | Teme | 224 |
-| Napisano | 1 |
+| Napisano | 38 |
 | Tehnički provereno | 0 |
 | Jezički provereno | 0 |
-| Čeka stručnu potvrdu | 0 |
+| Čeka stručnu potvrdu | 4 |
 | Odobreno (imenovana osoba) | 0 |
 | Novosti / trajni vodiči | 9 / 215 |
 
 | ID | Naslov | Kategorija | Tip | Publika | Pitanje (poreklo) | Izvora | Pisanje | Tehn. | Jezik | Stručna potvrda | Odobreno | Poslednja provera | Ponovni pregled |
 | --- | --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
-| SV-0001 | BASF Coatings postaje Surventis: šta to znači za R-M, baslac i Norbin | novosti | Novost | hobista, profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0002 | R-M RACE WET FILL-R: punilac mokro-na-mokro | novosti | Novost | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0003 | baslac 40-100 i 40-620: novi brzi i mat bezbojni lak | novosti | Novost | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0004 | Refinity platforma dostupna i korisnicima baslac sistema | novosti | Novost | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0005 | R-M LightAssist u Refinity: digitalna pomoć pri izboru nijanse | novosti | Novost | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0006 | Carsystem katalog 2026/27: novi proizvodi u našem programu | novosti | Novost | hobista, profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0007 | Carsystem X serija za poliranje | novosti | Novost | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0008 | R-M i ugljenični otisak proizvoda (PCF): šta je objavljeno | novosti | Novost | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0009 | Automechanika Frankfurt 2026: proizvođači iz našeg programa | novosti | Novost | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0010 | Slojevi reparaturnog lakiranja: od lima do bezbojnog laka | osnove | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0011 | 1K i 2K materijali: šta znače oznake na ambalaži | osnove | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0012 | Fabrički i reparaturni lak: zašto se popravka radi drugačije | osnove | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0013 | Vodene i rastvaračke bazne boje: razlike u radu | osnove | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0014 | VOC u autolakirerstvu: šta oznaka znači za radionicu | osnove | Osnovni vodič | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0015 | Zašto materijale birati kao sistem jednog proizvođača | osnove | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0016 | Faze popravke jednog dela: od procene do poliranja | osnove | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0017 | Lokalna popravka ili lakiranje celog dela: kako se odlučuje | osnove | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0018 | Zašto popravka na suncu izgleda drugačije nego u radionici | osnove | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0019 | Kako proceniti autolakirersku radionicu pre popravke | osnove | Osnovni vodič | pocetnik | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0020 | Rečnik osnovnih pojmova u autolakiranju | osnove | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0021 | Koliko materijala treba za lakiranje dela ili celog automobila | osnove | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0022 | Gde se nalazi šifra boje na automobilu i šta ona znači | osnove | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0001 | BASF Coatings postaje Surventis: šta to znači za R-M, baslac i Norbin | novosti | Novost | hobista, profesionalac, vlasnik-radionice | urednička procena | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0002 | R-M RACE WET FILL-R: punilac mokro-na-mokro | novosti | Novost | profesionalac | urednička procena | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0003 | baslac 40-100 i 40-620: novi brzi i mat bezbojni lak | novosti | Novost | profesionalac | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0004 | Refinity platforma dostupna i korisnicima baslac sistema | novosti | Novost | profesionalac, vlasnik-radionice | urednička procena | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0005 | R-M LightAssist u Refinity: digitalna pomoć pri izboru nijanse | novosti | Novost | profesionalac | urednička procena | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0006 | Carsystem katalog 2026/27: novi proizvodi u našem programu | novosti | Novost | hobista, profesionalac, vlasnik-radionice | urednička procena | 2 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0007 | Carsystem X serija za poliranje: dve paste, tri sunđera i krpe | novosti | Novost | hobista, profesionalac | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0008 | R-M i ugljenični otisak proizvoda (PCF): šta je objavljeno | novosti | Novost | profesionalac, vlasnik-radionice | urednička procena | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0009 | Automechanika Frankfurt 2026: proizvođači iz našeg programa | novosti | Novost | profesionalac, vlasnik-radionice | urednička procena | 9 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2026-12-07 |
+| SV-0010 | Slojevi reparaturnog lakiranja: od lima do bezbojnog laka | osnove | Osnovni vodič | pocetnik, hobista | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0011 | 1K i 2K materijali: šta znače oznake na ambalaži | osnove | Osnovni vodič | pocetnik, hobista | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0012 | Fabrički i reparaturni lak: zašto se popravka radi drugačije | osnove | Osnovni vodič | pocetnik, hobista | urednička procena | 6 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0013 | Vodene i rastvaračke bazne boje: razlike u radu | osnove | Osnovni vodič | hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0014 | VOC u autolakirerstvu: šta oznaka znači za radionicu | osnove | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0015 | Zašto materijale birati kao sistem jednog proizvođača | osnove | Osnovni vodič | hobista, profesionalac | urednička procena | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0016 | Faze popravke jednog dela: od procene do poliranja | osnove | Osnovni vodič | pocetnik, hobista | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0017 | Lokalna popravka ili lakiranje celog dela: kako se odlučuje | osnove | Osnovni vodič | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0018 | Zašto popravka na suncu izgleda drugačije nego u radionici | osnove | Osnovni vodič | hobista, profesionalac | urednička procena | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
+| SV-0019 | Kako proceniti autolakirersku radionicu pre popravke | osnove | Osnovni vodič | pocetnik | pronađeno | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
+| SV-0020 | Rečnik osnovnih pojmova u autolakiranju | osnove | Osnovni vodič | pocetnik, hobista | urednička procena | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
+| SV-0021 | Koliko materijala treba za lakiranje dela ili celog automobila | osnove | Postupak | hobista, profesionalac | pronađeno | 6 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0022 | Gde se nalazi šifra boje na automobilu i šta ona znači | osnove | Osnovni vodič | pocetnik, hobista | pronađeno | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
 | SV-0023 | Priprema površine pre lakiranja: redosled koraka | priprema-povrsine | Osnovni vodič | pocetnik, hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0024 | Procena oštećenja pre popravke: šta se proverava | priprema-povrsine | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0025 | Odmašćivanje pre lakiranja: kada, čime i kako | priprema-povrsine | Osnovni vodič | pocetnik, hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
@@ -65,14 +65,14 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0048 | Zaštita podvozja: priprema, nanošenje i održavanje | korozija | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0049 | Zašto goli lim brzo korodira posle brušenja | korozija | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0050 | Zaštita ivica, pragova i spojeva od korozije | korozija | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0051 | Kit, prajmer i punilac: šta je šta i kada se koristi | kitovi-i-punioci | Osnovni vodič | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0052 | Vrste kita i kada se koji koristi | kitovi-i-punioci | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0053 | Mešanje kita sa učvršćivačem: koliko i kako | kitovi-i-punioci | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0054 | Nanošenje kita: slojevi, debljina i ravnanje | kitovi-i-punioci | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0055 | Kit na goli lim ili preko prajmera | kitovi-i-punioci | Postupak | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0056 | Pore i rupice u kitu: odakle dolaze i kako ih izbeći | kitovi-i-punioci | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0057 | Zašto kit puca ili se odvaja posle nekoliko meseci | kitovi-i-punioci | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0058 | Fleke iznad kita koje se vide kroz boju | kitovi-i-punioci | Rešavanje problema | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0051 | Kit, prajmer i punilac: šta je šta i kada se koristi | kitovi-i-punioci | Osnovni vodič | pocetnik, hobista | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0052 | Vrste kita i kada se koji koristi | kitovi-i-punioci | Osnovni vodič | hobista, profesionalac | urednička procena | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0053 | Mešanje kita sa učvršćivačem: koliko i kako | kitovi-i-punioci | Postupak | hobista, profesionalac | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0054 | Nanošenje kita: slojevi, debljina i ravnanje | kitovi-i-punioci | Postupak | hobista, profesionalac | pronađeno | 5 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0055 | Kit na goli lim ili preko prajmera | kitovi-i-punioci | Postupak | profesionalac | pronađeno | 10 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0056 | Pore i rupice u kitu: odakle dolaze i kako ih izbeći | kitovi-i-punioci | Rešavanje problema | hobista, profesionalac | pronađeno | 6 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0057 | Zašto kit puca ili se odvaja posle nekoliko meseci | kitovi-i-punioci | Rešavanje problema | hobista, profesionalac | urednička procena | 11 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0058 | Fleke iznad kita koje se vide kroz boju | kitovi-i-punioci | Rešavanje problema | profesionalac | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0059 | Izbor prajmera prema podlozi | kitovi-i-punioci | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0060 | Epoksidni prajmer ili akrilni punilac: šta ide gde | kitovi-i-punioci | Osnovni vodič | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0061 | Nanošenje punioca pištoljem: slojevi i odzračivanje | kitovi-i-punioci | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
@@ -122,14 +122,14 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0105 | Zašto bezbojni lak vremenom žuti ili gubi sjaj | lakovi | Rešavanje problema | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0106 | Bezbojni lak na plastičnim delovima | lakovi | Postupak | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0107 | Lakiranje felni: priprema i izbor materijala | lakovi | Postupak | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0108 | Odnos mešanja: kako se čita i meri | ucvrscivaci-i-razredjivaci | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0109 | Brzi, normalni ili spori učvršćivač: izbor po temperaturi | ucvrscivaci-i-razredjivaci | Osnovni vodič | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0110 | Više učvršćivača za brže sušenje: zašto to ne radi | ucvrscivaci-i-razredjivaci | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0108 | Odnos mešanja: kako se čita i meri | ucvrscivaci-i-razredjivaci | Osnovni vodič | hobista, profesionalac | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0109 | Brzi, normalni ili spori učvršćivač: izbor po temperaturi | ucvrscivaci-i-razredjivaci | Osnovni vodič | profesionalac | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0110 | Više učvršćivača za brže sušenje: zašto to ne radi | ucvrscivaci-i-razredjivaci | Rešavanje problema | hobista, profesionalac | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0111 | Vreme upotrebljivosti smeše: koliko vremena imate posle mešanja | ucvrscivaci-i-razredjivaci | Osnovni vodič | hobista, profesionalac | pronađeno | 3 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0112 | Zamućen ili kristalisan učvršćivač: sme li da se koristi | ucvrscivaci-i-razredjivaci | Rešavanje problema | profesionalac, vlasnik-radionice | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0113 | Nitro razređivač i 2K materijali | ucvrscivaci-i-razredjivaci | Rešavanje problema | pocetnik, hobista | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0114 | Razređivač za utapanje: kada se koristi | ucvrscivaci-i-razredjivaci | Postupak | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
-| SV-0115 | Aditivi: ubrzivači, elastifikatori i sredstva protiv kratera | ucvrscivaci-i-razredjivaci | Osnovni vodič | profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
+| SV-0112 | Zamućen ili kristalisan učvršćivač: sme li da se koristi | ucvrscivaci-i-razredjivaci | Rešavanje problema | profesionalac, vlasnik-radionice | urednička procena | 4 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0113 | Nitro razređivač i 2K materijali: zašto ne zajedno | ucvrscivaci-i-razredjivaci | Rešavanje problema | pocetnik, hobista | pronađeno | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0114 | Razređivač za utapanje: kada se koristi i kako se nanosi | ucvrscivaci-i-razredjivaci | Postupak | profesionalac | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0115 | Aditivi: ubrzivači, elastifikatori i drugi dodaci | ucvrscivaci-i-razredjivaci | Osnovni vodič | profesionalac | urednička procena | 13 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0116 | Temperatura i vlažnost pri lakiranju | uslovi-i-susenje | Osnovni vodič | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0117 | Lakiranje po hladnom vremenu | uslovi-i-susenje | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |
 | SV-0118 | Lakiranje po velikoj vrućini | uslovi-i-susenje | Rešavanje problema | hobista, profesionalac | — | 0 | nije-pocelo | nije-provereno | nije-provereno | nije potrebna | ne | — | — |

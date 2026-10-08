@@ -1,7 +1,7 @@
 ---
 id: SV-0026
 slug: kucna-sredstva-umesto-odmascivaca
-naslov: Mogu li kućna sredstva da zamene odmašćivač
+naslov: "Mogu li kućna sredstva da zamene odmašćivač?"
 metaNaslov: "Alkohol, deterdžent ili nitro umesto odmašćivača?"
 opis: "Zašto alkohol, deterdžent i nitro razređivač nisu zamena za odmašćivač pre lakiranja, šta navode tehnički listovi i zašto smetaju silikonski sprejevi."
 kategorija: priprema-povrsine
@@ -62,8 +62,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Silicone Remover Mild v.01 05/2021 i Water 2.0 V02 09/2025, C.A.R.FIT Silicone Remover „Strawberry“ i R-M STOP SILICONE 08/2023; navodi o proizvodima odgovaraju izvorima. Ispravljeno: uklonjena tvrdnja da su proizvodi „provereni“ na podlogama i da ne ostavljaju trag (nije u citiranim listovima), ispravljena protivrečnost „rastvarački/vodeni“ odmašćivač, odeljak o alkoholu, deterdžentu i nitro razređivaču potvrđen kao opšte objašnjenje uz oprezne formulacije („može“, „u opštem smislu“), naslovu dodat upitnik."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -80,15 +81,15 @@ Tehnički listovi odmašćivača iz našeg programa navode konkretnu namenu:
 - C.A.R.FIT Silicone Remover „Strawberry“ namenjen je početnom čišćenju starog i fabričkog laka, prajmerisanih i kitovanih površina i plastike od katrana, silikona, ulja, masnoće i prašine od brušenja[^carfit-silicone-remover-strawberry-tds].
 - Carsystem Silicone Remover Water 2.0 je vodeno sredstvo za plastiku, staklo, postojeći lak, kit i metale, takođe sa antistatičkim dejstvom[^carsystem-silicone-remover-water-tds].
 
-Ključno je to što su ovi proizvodi napravljeni da ne ostave trag koji bi smetao sledećem sloju, i što proizvođač navodi podloge na kojima su provereni. Kućno sredstvo nema takvu proveru za lakiranje.
+Ključno je to što proizvođač za ove proizvode navodi namenu, podloge na kojima se koriste i postupak rada. Za kućno sredstvo takvih podataka za lakiranje nema.
 
 ## Alkohol, deterdžent i nitro razređivač: šta je problem
 
 Za ova sredstva nismo pronašli tehnički list proizvođača iz našeg programa koji ih navodi kao odmašćivač pre lakiranja. Zato tekst ispod nije ocena konkretnog proizvoda, nego objašnjenje zašto se ne mogu izjednačiti sa odmašćivačem.
 
-- **Alkohol.** Sastav kućnog alkohola nije deklarisan za ovu namenu. Ne znate koliko vode i drugih dodataka sadrži, ni da li rastvara silikon i vosak. Isparava brzo, pa se nečistoća lako vrati na površinu pre nego što se obriše.
+- **Alkohol.** Sastav kućnog alkohola nije deklarisan za ovu namenu. Ne znate koliko vode i drugih dodataka sadrži, ni da li rastvara silikon i vosak. Ako brzo ispari pre brisanja, rastvorena nečistoća može da ostane na površini.
 - **Deterdžent.** Namenjen je pranju vodom, a sastav sredstava za domaćinstvo razlikuje se od proizvoda do proizvoda. Posle deterdženta površina mora da se dobro ispere i osuši. To je pranje, a odmašćivač se koristi tek posle toga.
-- **Nitro razređivač.** Jak je rastvarač i može da omekša ili nagrize osetljive podloge, stari lak, neke prajmere i plastiku. I namenski rastvarački odmašćivači imaju ograničenja: Carsystem za vodeni odmašćivač upozorava da može da rastvori neke 1K prajmere i traži probu na podlozi[^carsystem-silicone-remover-water-tds]. Zašto nitro razređivač ne ide ni u 2K materijale, objašnjava tekst [Nitro razređivač i 2K materijali](/vodici/nitro-razredjivac-i-2k-materijali).
+- **Nitro razređivač.** Jak je rastvarač i, u opštem smislu, može da omekša ili nagrize osetljive podloge, stari lak, neke prajmere i plastiku. Ograničenja imaju čak i namenski odmašćivači: Carsystem za vodeni odmašćivač upozorava da može da rastvori neke 1K prajmere i traži probu na podlozi[^carsystem-silicone-remover-water-tds]. Zašto nitro razređivač ne ide ni u 2K materijale, objašnjava tekst [Nitro razređivač i 2K materijali](/vodici/nitro-razredjivac-i-2k-materijali).
 
 ## Šta ostaje na površini posle kućnih sredstava
 

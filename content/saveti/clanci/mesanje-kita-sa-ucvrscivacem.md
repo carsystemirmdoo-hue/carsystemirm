@@ -95,7 +95,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-U poliesterske kitove iz našeg programa dodaje se mala količina učvršćivača u pasti, merena po težini: za većinu je to 2–3 %, za C.A.R.FIT Multi Putty 2 %, a za Carsystem Liquid Putty 3 %[^cs-multi-tds][^carfit-multi-putty-tds][^cs-liquid-putty-tds]. Proizvođači upozoravaju na obe greške. Za Multi Green Carsystem navodi da i previše i premalo učvršćivača može da izazove slabije prianjanje i promenu boje završnog sloja[^cs-multi-green-tds]. Tačna količina se zato uzima iz tehničkog lista kita koji koristite.
+U poliesterske kitove iz našeg programa dodaje se mala količina učvršćivača u pasti, merena po težini: za većinu kitova iz tabele ispod to je 2–3 %, za C.A.R.FIT Multi Putty 2 %, a za Carsystem Liquid Putty 3 %[^cs-multi-tds][^carfit-multi-putty-tds][^cs-liquid-putty-tds]. Proizvođači upozoravaju na obe greške. Za Multi Green Carsystem navodi da i previše i premalo učvršćivača može da izazove slabije prianjanje i promenu boje završnog sloja[^cs-multi-green-tds]. Tačna količina se zato uzima iz tehničkog lista kita koji koristite.
 
 ## Koliko učvršćivača navode tehnički listovi
 
@@ -139,6 +139,6 @@ Vrednosti važe za navedene verzije dokumenata. Kod nekih kitova postoje spore v
 
 Lopaticom, na glatkoj podlozi, dok kit i učvršćivač ne daju jednu ujednačenu boju bez pruga. Kit se ne vraća u pakovanje posle dodavanja učvršćivača; za Liquid Putty Carsystem to izričito navodi[^cs-liquid-putty-tds].
 
-### Koliko vremena ima za rad?
+### Koliko vremena imate za rad?
 
 Samo nekoliko minuta, prema tabeli iznad. Kod Carsystem kitova postoje i sporije varijante: za Multi slow tehnički list navodi 3–5 min, a za Multi very slow 7–8 min na 20 °C[^cs-multi-tds]. Za isti kit Carsystem navodi i najnižu temperaturu reakcije od +5 °C[^cs-multi-tds].

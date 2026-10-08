@@ -81,7 +81,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Ravna površina se dobija kada se kit nanese na čistu, izbrušenu podlogu u tankim slojevima uz čvrst pritisak lopatice, malo iznad nivoa okolne površine, a zatim izbrusi blokom uz kontrolni prah. Zato ravnina zavisi i od nanošenja i od brušenja. Brusi se tek posle vremena sušenja iz tehničkog lista, koje kod kitova iz našeg programa iznosi od 15 do 30 minuta na 20 °C[^cs-multi-green-tds][^rm-performbody-tds].
+Ravna površina se dobija kada se kit nanese na čistu, izbrušenu podlogu u tankim slojevima uz čvrst pritisak lopatice, malo iznad nivoa okolne površine, a zatim izbrusi blokom uz kontrolni prah. Zato ravnina zavisi i od nanošenja i od brušenja. Brusi se tek posle vremena sušenja iz tehničkog lista, koje kod kitova iz našeg programa iznosi od 15 do oko 30 minuta na 20 °C[^cs-multi-green-tds][^rm-performbody-tds][^cs-liquid-putty-tds].
 
 ## Pre nanošenja
 

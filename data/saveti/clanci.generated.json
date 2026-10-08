@@ -8593,6 +8593,14 @@
      "tip": "tehnicki-list"
     },
     {
+     "id": "rm-c5450-tds",
+     "naziv": "R-M, Technical Information C 5450 GRAPHITE HD CLEAR",
+     "dokument": "/documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
      "id": "rm-p2p63-tds",
      "naziv": "R-M, Technical Information MULTI Purpos-R Grey, P 2P63 eSense DTM, grey",
      "dokument": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
@@ -8633,8 +8641,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 830,
-   "otisak": "4138d00d84dede4a9281",
+   "reci": 841,
+   "otisak": "8c4c74e3028a282d260e",
    "blocks": [
     {
      "t": "p",
@@ -8787,7 +8795,15 @@
        },
        {
         "t": "text",
-        "v": ". Razređivač koji bi se uzeo po navici za ovaj proizvod nije predviđen."
+        "v": ". Razređivači GV navedeni su za druge proizvode iste GHD linije, na primer za GHD CLEAR C 5450"
+       },
+       {
+        "t": "cite",
+        "id": "rm-c5450-tds"
+       },
+       {
+        "t": "text",
+        "v": ", ali za P 5480 nisu predviđeni."
        }
       ]
      ]
@@ -13426,8 +13442,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -13441,8 +13457,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 671,
-   "otisak": "9d7b7f2bc753862b5a1a",
+   "reci": 704,
+   "otisak": "f8c9cc578871fa24272e",
    "blocks": [
     {
      "t": "p",
@@ -13582,7 +13598,7 @@
       [
        {
         "t": "text",
-        "v": "Teoretska računica"
+        "v": "Izvedena teoretska računica (naša, nije podatak iz tehničkog lista)"
        }
       ]
      ],
@@ -13642,7 +13658,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Računica je jednostavna: izdašnost pri sloju od jednog mikrometra podeli se debljinom sloja. Važno je razumeti njena ograničenja:"
+       "v": "Poslednja kolona nije podatak proizvođača, nego naša izvedena računica: izdašnost pri sloju od 1 µm podeljena je najvećom i najmanjom debljinom sloja iz istog tehničkog lista (na primer 505/60 ≈ 8,4 i 505/40 ≈ 12,6)"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c5450-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Ne uključuje gubitke pri nanošenju. Važno je razumeti i njena ograničenja:"
       }
      ]
     },
@@ -13652,7 +13676,7 @@
       [
        {
         "t": "text",
-        "v": "Tehnički list za C 5450 kao primene navodi autobuse, nadogradnje i slične namene"
+        "v": "Tehnički list za C 5450 kao primene navodi autobuse, natpise i nadogradnje (sanduke)"
        },
        {
         "t": "cite",
@@ -14084,8 +14108,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -14098,8 +14122,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 591,
-   "otisak": "e45d6b600a0c2d526a5b",
+   "reci": 603,
+   "otisak": "bcab3e3a105ac00485e1",
    "blocks": [
     {
      "t": "p",
@@ -14205,7 +14229,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Šifra označava boju u katalogu proizvođača vozila. Proizvođači reparaturnih boja na osnovu nje u svojim bazama traže formulu za mešanje. baslac za svoj alat Formula Finder navodi da se baza stalno dopunjuje novim bojama i varijantama"
+       "v": "Šifra označava boju u katalogu proizvođača vozila. Proizvođači reparaturnih boja na osnovu nje u svojim bazama traže formulu za mešanje. baslac za bazu boja povezanu sa alatom Formula Finder navodi da se stalno dopunjuje novim bojama i varijantama"
       },
       {
        "t": "cite",
@@ -14365,7 +14389,7 @@
        },
        {
         "t": "text",
-        "v": " baslac ima kartu sa više od 4.500 originalno nalakiranih uzoraka, poređanih po boji, koja pomaže da se izabere prava nijansa"
+        "v": " baslac ima kartu sa više od 4.500 originalno nalakiranih uzoraka, poređanih po tonovima, koja pomaže da se izabere prava nijansa"
        },
        {
         "t": "cite",
@@ -14382,17 +14406,21 @@
         "c": [
          {
           "t": "text",
-          "v": "Merenje boje uređajem."
+          "v": "Digitalna pretraga boje."
          }
         ]
        },
        {
         "t": "text",
-        "v": " Uređaji kao ručni baslac e-finder star ili R-M spektrofotometar Colortronic 12/6 mere boju na vozilu i povezuju se sa bazom formula"
+        "v": " baslac e-finder star je ručni uređaj za pretragu boje povezan sa alatom Formula Finder i bazom boja"
        },
        {
         "t": "cite",
         "id": "baslac-e-finder-star"
+       },
+       {
+        "t": "text",
+        "v": ", a R-M za digitalno usklađivanje boje nudi sistem Colortronic 12/6, povezan sa bazom formula"
        },
        {
         "t": "cite",
@@ -14716,8 +14744,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -15557,8 +15585,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -15572,8 +15600,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 660,
-   "otisak": "d4a5b2fbdee32b1cbae1",
+   "reci": 697,
+   "otisak": "1f73e65e3bb995fa2da8",
    "blocks": [
     {
      "t": "p",
@@ -15678,7 +15706,7 @@
        },
        {
         "t": "text",
-        "v": " Mehurići ispod laka i smeđi tragovi na ivicama znače da korozija ide ispod površine. Vidi "
+        "v": " Mehurići ispod laka i smeđi tragovi na ivicama mogu da ukažu na koroziju ispod površine. Vidi "
        },
        {
         "t": "link",
@@ -15744,7 +15772,7 @@
        },
        {
         "t": "text",
-        "v": ". Za branik iza kog je radar to može da ograniči broj slojeva i izbor materijala."
+        "v": ". Kod branika iza kog je radar zato treba proveriti da li uputstvo proizvođača vozila postavlja posebna ograničenja za popravku."
        }
       ]
      ]
@@ -15826,7 +15854,7 @@
      "c": [
       {
        "t": "text",
-       "v": "SATA, u stručnom tekstu zasnovanom na informativnom listu nemačke komisije za popravke laka i karoserije, navodi da se nedestruktivnim merenjem debljine laka ne može pouzdano utvrditi da li je deo ranije popravljan, niti oceniti kvalitet popravke koja nema vidljivih ili funkcionalnih nedostataka"
+       "v": "SATA, u stručnom tekstu zasnovanom na informativnom listu nemačke komisije za popravke laka i karoserije (DeKoLaKa), navodi da se na osnovu nedestruktivnog merenja debljine laka ne mogu doneti precizni i konačni zaključci o kvalitetu popravke. Isti tekst navodi i da debljina na novim vozilima može biti znatno veća od uobičajene zbog dorade pre isporuke, pa velika debljina sama po sebi ne dokazuje raniju popravku. Za pouzdanu ocenu mora da se zna stvarni sastav slojeva, a takva analiza po pravilu nije nedestruktivna: radi se brušenjem popravljenog mesta"
       },
       {
        "t": "cite",
@@ -15834,7 +15862,7 @@
       },
       {
        "t": "text",
-       "v": ". Stvarni sastav slojeva može se utvrditi samo razaranjem, na primer brušenjem uzorka."
+       "v": "."
       }
      ]
     },
@@ -16111,8 +16139,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -16125,8 +16153,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 661,
-   "otisak": "a59937b991632181bd26",
+   "reci": 666,
+   "otisak": "7f843bb92ed31d8ee666",
    "blocks": [
     {
      "t": "p",
@@ -16205,22 +16233,7 @@
        },
        {
         "t": "text",
-        "v": " Da brusni papir ne bi razmazao vosak i silikon po površini i utisnuo ih u tragove brušenja."
-       }
-      ],
-      [
-       {
-        "t": "strong",
-        "c": [
-         {
-          "t": "text",
-          "v": "Posle brušenja."
-         }
-        ]
-       },
-       {
-        "t": "text",
-        "v": " Da se uklone prašina, ostaci brusnog materijala i otisci prstiju. R-M za SILICONE Remov-R navodi namenu za prvi korak čišćenja, za uklanjanje katrana, masnoće i silikona, pre kita ili punioca"
+        "v": " Da brusni papir ne bi razmazao vosak i silikon po površini i utisnuo ih u tragove brušenja. R-M za SILICONE Remov-R navodi namenu za prvi korak čišćenja, za uklanjanje katrana, masnoće i silikona, pre kita ili punioca"
        },
        {
         "t": "cite",
@@ -16237,13 +16250,28 @@
         "c": [
          {
           "t": "text",
+          "v": "Posle brušenja."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Da se uklone prašina, ostaci brusnog materijala i otisci prstiju."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
           "v": "Pre bazne boje i laka."
          }
         ]
        },
        {
         "t": "text",
-        "v": " Neki sistemi za ovaj korak imaju posebno, blaže sredstvo. baslac 70-45 je, prema tehničkom listu, namenjen čišćenju površine i zone utapanja pre punioca i bazne boje"
+        "v": " Neki sistemi za ovaj korak imaju posebno sredstvo. baslac 70-45 je, prema tehničkom listu, namenjen čišćenju površine i zone utapanja pre punioca i bazne boje"
        },
        {
         "t": "cite",
@@ -16286,7 +16314,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Postupak je kod većine odmašćivača isti, a razlikuju se detalji. Carsystem za Silicone Remover Mild navodi ovaj redosled"
+       "v": "Kod odmašćivača čije smo tehničke listove pregledali postupak je sličan, a razlikuju se detalji. Carsystem za Silicone Remover Mild navodi ovaj redosled"
       },
       {
        "t": "cite",
@@ -16511,11 +16539,11 @@
     {
      "t": "h",
      "level": 3,
-     "id": "mogu-li-da-koristim-papirnu-ubrusu-umesto-krpe",
+     "id": "mogu-li-da-koristim-papirni-ubrus-umesto-krpe",
      "c": [
       {
        "t": "text",
-       "v": "Mogu li da koristim papirnu ubrusu umesto krpe?"
+       "v": "Mogu li da koristim papirni ubrus umesto krpe?"
       }
      ]
     },
@@ -16524,7 +16552,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Bitno je da krpa ne pušta vlakna i da je čista. Obični papir se pod rastvaračem može raspadati i ostavljati vlakna. Postoje krpe namenjene odmašćivanju, na primer "
+       "v": "Bitno je da krpa ne pušta vlakna i da je čista. Običan papirni ubrus pod rastvaračem može da se raspada i ostavlja vlakna. Postoje krpe namenjene odmašćivanju, na primer "
       },
       {
        "t": "link",
@@ -16581,7 +16609,7 @@
   {
    "id": "SV-0026",
    "slug": "kucna-sredstva-umesto-odmascivaca",
-   "naslov": "Mogu li kućna sredstva da zamene odmašćivač",
+   "naslov": "Mogu li kućna sredstva da zamene odmašćivač?",
    "metaNaslov": "Alkohol, deterdžent ili nitro umesto odmašćivača?",
    "opis": "Zašto alkohol, deterdžent i nitro razređivač nisu zamena za odmašćivač pre lakiranja, šta navode tehnički listovi i zašto smetaju silikonski sprejevi.",
    "kategorija": "priprema-povrsine",
@@ -16663,8 +16691,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -16677,8 +16705,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 648,
-   "otisak": "4fc8adeaad076b58fd80",
+   "reci": 642,
+   "otisak": "06e4843120e902bfbcfb",
    "blocks": [
     {
      "t": "p",
@@ -16761,7 +16789,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Ključno je to što su ovi proizvodi napravljeni da ne ostave trag koji bi smetao sledećem sloju, i što proizvođač navodi podloge na kojima su provereni. Kućno sredstvo nema takvu proveru za lakiranje."
+       "v": "Ključno je to što proizvođač za ove proizvode navodi namenu, podloge na kojima se koriste i postupak rada. Za kućno sredstvo takvih podataka za lakiranje nema."
       }
      ]
     },
@@ -16800,7 +16828,7 @@
        },
        {
         "t": "text",
-        "v": " Sastav kućnog alkohola nije deklarisan za ovu namenu. Ne znate koliko vode i drugih dodataka sadrži, ni da li rastvara silikon i vosak. Isparava brzo, pa se nečistoća lako vrati na površinu pre nego što se obriše."
+        "v": " Sastav kućnog alkohola nije deklarisan za ovu namenu. Ne znate koliko vode i drugih dodataka sadrži, ni da li rastvara silikon i vosak. Ako brzo ispari pre brisanja, rastvorena nečistoća može da ostane na površini."
        }
       ],
       [
@@ -16830,7 +16858,7 @@
        },
        {
         "t": "text",
-        "v": " Jak je rastvarač i može da omekša ili nagrize osetljive podloge, stari lak, neke prajmere i plastiku. I namenski rastvarački odmašćivači imaju ograničenja: Carsystem za vodeni odmašćivač upozorava da može da rastvori neke 1K prajmere i traži probu na podlozi"
+        "v": " Jak je rastvarač i, u opštem smislu, može da omekša ili nagrize osetljive podloge, stari lak, neke prajmere i plastiku. Ograničenja imaju čak i namenski odmašćivači: Carsystem za vodeni odmašćivač upozorava da može da rastvori neke 1K prajmere i traži probu na podlozi"
        },
        {
         "t": "cite",
@@ -17121,8 +17149,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -17135,15 +17163,51 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 678,
-   "otisak": "ba6d3e7ae103b4e583d2",
+   "reci": 704,
+   "otisak": "02d470ec00fd13996f28",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Rastvarački odmašćivač je na bazi organskih rastvarača i proizvođači ga obično namenjuju prvom, „grubom“ čišćenju: uklanjanju katrana, masnoće i silikona pre kita i punioca. Vodeni odmašćivač ima znatno manje isparljivih organskih jedinjenja, deluje blaže i kod više proizvođača je namenjen čišćenju pre bazne boje i laka, kao i plastici, jer smanjuje statički elektricitet. Naziv „vodeni“ ili „rastvarački“ ne određuje sam za koju je fazu sredstvo: to piše u tehničkom listu svakog odmašćivača."
+       "v": "Rastvarački odmašćivač je na bazi organskih rastvarača. R-M, na primer, svoj rastvarački odmašćivač namenjuje prvom, „grubom“ čišćenju: uklanjanju katrana, masnoće i silikona pre kita i punioca"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk1p10-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Vodeni odmašćivač ima znatno manje isparljivih organskih jedinjenja: u R-M programu 186 g/l i 198 g/l, naspram 840 g/l kod rastvaračkog"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p10-tds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p20-tds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk1p10-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Naziv „vodeni“ ili „rastvarački“ ipak ne određuje sam za koju je fazu sredstvo. R-M ima vodeno sredstvo i za prvi korak čišćenja i posebno vodeno sredstvo za korak pre bazne boje i laka, a to piše u tehničkom listu svakog odmašćivača"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p10-tds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p20-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
       }
      ]
     },
@@ -17491,7 +17555,7 @@
        },
        {
         "t": "text",
-        "v": " R-M za MULTI Clean-R i baslac za 70-45 navode antistatičko dejstvo, koje smanjuje taloženje prašine na plastičnim delovima"
+        "v": " R-M za vodeni MULTI Clean-R i baslac za 70-45 (za koji list ne navodi vrstu) navode antistatičko dejstvo, koje smanjuje taloženje prašine na plastičnim delovima"
        },
        {
         "t": "cite",
@@ -17657,7 +17721,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Neki proizvodi su tako zamišljeni. Carsystem Silicone Remover Mild je, prema tehničkom listu, sredstvo za čišćenje pre lakiranja na prajmerisanim i kitovanim površinama, metalu, starom i fabričkom laku"
+       "v": "Neki proizvodi su tako zamišljeni. Carsystem Silicone Remover Mild je, prema tehničkom listu, sredstvo za čišćenje pre lakiranja na prajmerisanim površinama i površinama sa puniocem, metalu, staklu, starom i fabričkom laku"
       },
       {
        "t": "cite",
@@ -17828,8 +17892,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -17842,8 +17906,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 625,
-   "otisak": "c55f711f888db480b196",
+   "reci": 641,
+   "otisak": "27d2b29b72c92b441201",
    "blocks": [
     {
      "t": "p",
@@ -17975,7 +18039,7 @@
       [
        {
         "t": "text",
-        "v": "Površina se prelazi laganim, ravnomernim potezima u jednom smeru, sa malim preklapanjem, odozgo nadole. Ovaj redosled opisuje i Contec"
+        "v": "Površina se prelazi laganim, ravnomernim potezima odozgo nadole, tako da se potezi delimično preklapaju. Contec opisuje rad odozgo nadole i preklapanje poteza od oko 20 %"
        },
        {
         "t": "cite",
@@ -18161,7 +18225,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Krpa je impregnirana smolom da bi zadržala prašinu. Kada se jako pritisne, smola se može preneti na površinu. Taj tanak lepljiv sloj se ne vidi uvek golim okom, ali može da utiče na razlivanje sledećeg sloja. Contec navodi upravo prenos lepljivog ostatka kao posledicu jakog pritiska"
+       "v": "Contec jak pritisak navodi kao čestu grešku i kaže da je dovoljna težina ruke"
       },
       {
        "t": "cite",
@@ -18169,7 +18233,7 @@
       },
       {
        "t": "text",
-       "v": "."
+       "v": ". Opšte objašnjenje je da je krpa impregnirana smolom da bi zadržala prašinu, pa se pri jakom pritisku deo smole može preneti na površinu. Takav tanak lepljiv trag ne vidi se uvek golim okom, ali može da utiče na razlivanje sledećeg sloja."
       }
      ]
     },
@@ -18189,7 +18253,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Može, ako se jako pritiska, ako se koristi na vlažnoj površini ili ako nije namenjena materijalu koji se nanosi. Proizvođači zato ističu da impregnacija ne ostavlja ostatke kada se krpa pravilno koristi: Carsystem za Staub Stop Water Black navodi da ne ostavlja lepljive ostatke na očišćenoj površini"
+       "v": "Moguće je, na primer ako se krpa jako pritiska, ako se koristi na vlažnoj površini ili ako nije namenjena materijalu koji se nanosi. Za pojedine proizvode proizvođač navodi da ne ostavljaju ostatke: Carsystem za Staub Stop Water Black navodi da ne ostavlja lepljive ostatke na očišćenoj površini"
       },
       {
        "t": "cite",
@@ -18197,7 +18261,7 @@
       },
       {
        "t": "text",
-       "v": ". Ako posle brisanja površina deluje lepljivo, obrišite je ponovo odmašćivačem, sačekajte da ispari i pređite je novom krpom, lakše."
+       "v": ". Ako posle brisanja površina deluje lepljivo, možete je ponovo odmastiti, sačekati da odmašćivač ispari i preći je novom krpom, lakše."
       }
      ]
     },
@@ -18416,8 +18480,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -18430,15 +18494,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 628,
-   "otisak": "e1d2ee95b54c409044c2",
+   "reci": 632,
+   "otisak": "8e6a4c7ce27911afba7b",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Goli čelični lim se priprema redom: uklanjanje rđe, odmašćivanje, brušenje, ponovno odmašćivanje i što skorije nanošenje prajmera koji je namenjen golom metalu. Granulaciju brušenja ne određuje lim, nego prajmer koji ide preko njega, i ona se razlikuje od proizvođača do proizvođača. Opšte pravilo je da goli lim ne stoji nezaštićen duže nego što je neophodno, jer na njemu brzo nastaje površinska rđa."
+       "v": "Goli čelični lim se priprema redom: uklanjanje rđe, odmašćivanje, brušenje, ponovno odmašćivanje i što skorije nanošenje prajmera koji je namenjen golom metalu. Granulaciju brušenja ne određuje sam lim, nego tehnički list prajmera ili sistema koji ide preko njega, pa se razlikuje od proizvođača do proizvođača. Opšte pravilo je da goli lim ne stoji nezaštićen duže nego što je neophodno, jer na njemu brzo nastaje površinska rđa."
       }
      ]
     },
@@ -20254,8 +20318,8 @@
    "id": "SV-0032",
    "slug": "vrsta-plastike-na-braniku",
    "naslov": "Kako prepoznati vrstu plastike na braniku",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Vrsta plastike na braniku: PP/EPDM, PUR, ABS",
+   "opis": "Gde se na braniku nalazi oznaka plastike, šta znače PP-EPDM, PUR, ABS, PPO i druge oznake i koje plastike proizvođači materijala navode kao teške za lakiranje.",
    "kategorija": "priprema-povrsine",
    "podtema": "identifikacija plastike",
    "tip": "postupak",
@@ -20269,11 +20333,98 @@
     "Šta znače oznake PP, PP/EPDM, PUR, ABS?",
     "Koje plastike se teško lakiraju?"
    ],
-   "poreklopitanja": null,
-   "brendovi": [],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Urednički predlog q146 u questions.json („Kako da prepoznam vrstu plastike na braniku?“); srodno pitanje da li za popravku branika treba prajmer za plastiku pronađeno je na forumu (q083)."
+   },
+   "brendovi": [
+    "baslac",
+    "rm",
+    "carsystem"
+   ],
+   "proizvodi": [
+    "baslac-70-20-cleaner-plastic",
+    "rm-pk-2p40-plastic-clean-r",
+    "rm-pm-2p10-plastic-prim-r",
+    "carsystem-plastic-primer",
+    "carsystem-hpp-primer"
+   ],
+   "povezani": [
+    "SV-0031",
+    "SV-0065",
+    "SV-0033",
+    "SV-0165",
+    "SV-0024"
+   ],
+   "izvori": [
+    {
+     "id": "eu-odluka-2003-138",
+     "naziv": "Odluka Komisije 2003/138/EZ od 27. februara 2003. o standardima za označavanje komponenti i materijala vozila (Službeni list EU L 53, 28. 2. 2003)",
+     "url": "https://publications.europa.eu/resource/celex/32003D0138",
+     "datumIzvora": "2003-02-27",
+     "pristupljeno": "2026-10-08",
+     "tip": "propis"
+    },
+    {
+     "id": "baslac-plastic-system",
+     "naziv": "baslac, Technical Information Plastic Repair System VOC (Painting of plastic parts)",
+     "url": "https://techinfo.baslac.com/en/Plastic_Repair_System_VOC.pdf",
+     "dokument": "/documents/products/baslac/Plastic_Repair_System_VOC.pdf",
+     "verzija": "10/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-undercoats-chart",
+     "naziv": "baslac, Technical Information Chart 1: Undercoats on metallic and plastic substrates",
+     "url": "https://techinfo.baslac.com/en/Plastic_metallic_repair.pdf",
+     "dokument": "/documents/products/baslac/Plastic_metallic_repair.pdf",
+     "verzija": "03/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-21-20-tds",
+     "naziv": "baslac, Technical Information 21-20 Plastic Primer",
+     "url": "https://techinfo.baslac.com/en/21-20.pdf",
+     "dokument": "/documents/products/baslac/21-20.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pm2p10-tds",
+     "naziv": "R-M, Technical Information PLASTIC Prim-R, PM 2P10 Primer",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PM%202P10-Primer.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-a2p40-tds",
+     "naziv": "R-M, Technical Information PLASTIC Tune-R, A 2P40 eSense plastic adhesion additive",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/A%202P40-eSense%20plastic%20adhesion%20additive.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-plastic-primer-tds",
+     "naziv": "Carsystem, Technical Data Sheet Plastic Primer V03",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-plastic-primer-V03.pdf",
+     "verzija": "V03, 06/2022",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-hpp-tds",
+     "naziv": "Carsystem, Technical Data Sheet CS HpP Primer, 1K Plastic Primer V04",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-hpp-primer.pdf",
+     "verzija": "V04, 09/2020",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20283,7 +20434,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -20291,23 +20442,630 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "4caecd89a975c58d87b8",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 692,
+   "otisak": "fe3e7d130eec14cc1f5f",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Vrsta plastike se najpouzdanije prepoznaje po utisnutoj oznaci na unutrašnjoj strani dela, na primer >PP-EPDM< ili >PUR<. Za plastične delove vozila teže od 100 grama EU propisuje oznake prema ISO standardima za skraćene nazive plastike"
+      },
+      {
+       "t": "cite",
+       "id": "eu-odluka-2003-138"
+      },
+      {
+       "t": "text",
+       "v": ". Kada pročitate oznaku, uporedite je sa spiskom podloga u tehničkom listu sredstva za čišćenje i prajmera koji nameravate da koristite. Ako oznake nema, vrsta plastike se ne pogađa: pitajte dobavljača dela ili proizvođača vozila."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "gde-se-oznaka-nalazi-i-kako-izgleda",
+     "c": [
+      {
+       "t": "text",
+       "v": "Gde se oznaka nalazi i kako izgleda"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Branik se obično skida ili se gleda sa unutrašnje strane, uz ivicu ili blizu nosača. Oznaka je utisnuta u materijal, obično između znakova > i <, ponekad u zagradama. Odluka Komisije 2003/138/EZ propisuje da se za plastične komponente vozila koriste skraćeni nazivi iz standarda ISO 1043-1, ISO 1043-2 i ISO 11469, i dozvoljava da se znaci „<“ i „>“ zamene zagradama"
+      },
+      {
+       "t": "cite",
+       "id": "eu-odluka-2003-138"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Iz toga proizlaze dve praktične stvari:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "među navedenim standardima je i deo o punilima i ojačanjima (ISO 1043-2), pa oznaka nije uvek samo dva ili tri slova;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "delovi starijih vozila ili delovi koji nisu originalni mogu biti bez oznake."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ovo je urednička napomena, a ne pravilo iz propisa: oznaka pokazuje materijal dela, ali ne govori da li je deo već prajmerisan ili ranije lakiran."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-znace-oznake-iz-tehnickih-listova",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znače oznake iz tehničkih listova"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac u uputstvu za lakiranje plastičnih delova navodi plastike koje se koriste na vozilima i primere delova"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-plastic-system"
+      },
+      {
+       "t": "text",
+       "v": ":"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Oznaka"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Naziv u uputstvu"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Primer dela prema uputstvu"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "PP-EPDM"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "polipropilen / etilen-propilen-dien monomer"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "branici"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "PUR"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "tvrda poliuretanska pena"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "branici"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "ABS"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "akrilonitril-butadien-stiren"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "maske hladnjaka, kućišta retrovizora"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "PPO"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "polifenilen-oksid"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "blatobrani"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "PE"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "polietilen"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "podblatnici"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "BMC"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "masa za presovanje (bulk moulding compound)"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "spojleri"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "U tehničkim listovima R-M i baslac sreću se i oznake Pur-RIM, GRP-SMC (u baslac tabeli GFK/SMC), PC-PBTP, PA (poliamid) i tvrdi PVC. R-M ih za PLASTIC Prim-R navodi kao podloge: Pur-RIM, PP-EPDM, ABS, GRP-SMC, PC-PBTP, PA, PPO i tvrdi PVC"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pm2p10-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Ista grupa oznaka stoji i u baslac tabeli podloga za punioce"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-undercoats-chart"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "koje-plastike-se-tesko-lakiraju",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koje plastike se teško lakiraju"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Proizvođači izdvajaju nekoliko vrsta:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Čisti PP i PE."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " baslac navodi da se nemodifikovani polipropilen (PP) i polietilen (PE) ne mogu lakirati, uz napomenu da su delovi označeni samo kao PP ili PE često modifikovani i mogu se lakirati"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-21-20-tds"
+       },
+       {
+        "t": "text",
+        "v": ". R-M za aditiv PLASTIC Tune-R navodi da ni on ne daje prianjanje na čist PP i PE"
+       },
+       {
+        "t": "cite",
+        "id": "rm-a2p40-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "PE i PC kod pojedinih prajmera."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Carsystem Plastic Primer nije pogodan za PE i PC"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-plastic-primer-tds"
+       },
+       {
+        "t": "text",
+        "v": ", a za HpP Primer Carsystem ne preporučuje upotrebu na PE"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-hpp-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "PU pena i poliamid."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " baslac navodi da se moraju pripremati vrlo pažljivo i da zagrevanje 60 minuta na 60 °C može da spreči probleme sa prianjanjem jer uklanja sredstvo za odvajanje iz kalupa i vlagu"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-plastic-system"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Plastike osetljive na rastvarače."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Isto uputstvo upozorava da neki prajmeri nisu pogodni za takve podloge, na primer polistiren (PS)"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-plastic-system"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Spiskovi se razlikuju od proizvoda do proizvoda. Carsystem Plastic Primer, na primer, navodi i PP i PP/EPDM među podlogama"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-plastic-primer-tds"
+      },
+      {
+       "t": "text",
+       "v": ", dok R-M PM 2P10 na spisku nema čist PP"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pm2p10-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Zato se proverava tehnički list baš onog prajmera koji imate."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-oznaku-koristite-u-pripremi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako oznaku koristite u pripremi"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "Pročitajte oznaku i zapišite je."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Proverite da li se ta oznaka nalazi na spisku podloga za sredstvo za čišćenje plastike, prajmer i punilac koje koristite."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Ako je deo od PU pene ili poliamida, proverite da li sistem traži zagrevanje."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Pripremite deo prema vodiču "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/priprema-plastike-pre-lakiranja",
+        "c": [
+         {
+          "t": "text",
+          "v": "Priprema plastičnih delova pre lakiranja"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li je za tu plastiku potreban poseban prajmer, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/prajmer-za-plastiku-kada-treba",
+       "c": [
+        {
+         "t": "text",
+         "v": "Prajmer za plastiku: kada je potreban"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-ako-na-delu-nema-nikakve-oznake",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta ako na delu nema nikakve oznake?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "U dokumentima proizvođača iz našeg programa nismo pronašli postupak za određivanje plastike bez oznake, pa ga ovde ne opisujemo. Podatak o materijalu može da da dobavljač dela ili proizvođač vozila. Kod nepoznate plastike probu prianjanja radite na skrivenom mestu ili na probnom komadu, a ne na vidljivoj površini."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-oznaka-pp-znaci-da-se-deo-ne-moze-lakirati",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li oznaka PP znači da se deo ne može lakirati?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ne obavezno. baslac navodi da su delovi označeni kao PP često modifikovani i da se mogu lakirati"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-21-20-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Odluku donosite prema tehničkom listu prajmera i, po potrebi, probi prianjanja."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "zasto-je-vazno-znati-vrstu-plastike-ako-se-lak-vec-ljusti",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto je važno znati vrstu plastike ako se lak već ljušti?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Plastika koja se ne može lakirati ili prajmer koji nije za nju su mogući uzroci ljuštenja. Kako se uzrok proverava, opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/lak-se-ljusti-sa-plastike",
+       "c": [
+        {
+         "t": "text",
+         "v": "Lak se ljušti sa plastičnog dela"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0033",
    "slug": "nov-branik-sa-fabrickim-prajmerom",
    "naslov": "Nov branik sa fabričkim prajmerom: kako se priprema",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Nov branik sa fabričkim prajmerom: priprema",
+   "opis": "Kako se priprema nov plastični branik sa fabričkim prajmerom: provera otpornosti sloja na rastvarač, čišćenje, matiranje i kada treba prajmer za plastiku.",
    "kategorija": "priprema-povrsine",
    "podtema": "novi plastični delovi",
    "tip": "postupak",
@@ -20320,14 +21078,74 @@
     "Kako se proverava prianjanje fabričkog sloja?",
     "Treba li dodatni prajmer za plastiku?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Na forumu samsvojmajstor.com pita se zašto se prajmer na novom plastičnom delu diže i nabira kada se nanese bazna boja (q014 u questions.json); pitanje da li se brusi fabrički prajmer na novom braniku je urednički predlog (q147).",
+    "izvori": [
+     "https://www.samsvojmajstor.com/portal/forums/uradi-sam/popravka-automobila/farbanje-auta?page=2"
+    ]
+   },
    "brendovi": [
-    "rm",
-    "baslac"
+    "baslac",
+    "rm"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "baslac-70-20-cleaner-plastic",
+    "baslac-80-30-additive-plast",
+    "rm-pk-2p40-plastic-clean-r",
+    "rm-pk-2p10-multi-clean-r"
+   ],
+   "povezani": [
+    "SV-0031",
+    "SV-0030",
+    "SV-0036",
+    "SV-0065",
+    "SV-0032"
+   ],
+   "izvori": [
+    {
+     "id": "baslac-plastic-system",
+     "naziv": "baslac, Technical Information Plastic Repair System VOC (Painting of plastic parts)",
+     "url": "https://techinfo.baslac.com/en/Plastic_Repair_System_VOC.pdf",
+     "dokument": "/documents/products/baslac/Plastic_Repair_System_VOC.pdf",
+     "verzija": "10/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-80-30-tds",
+     "naziv": "baslac, Technical Information 80-30 Additive Plast",
+     "url": "https://techinfo.baslac.com/en/80-30.pdf",
+     "dokument": "/documents/products/baslac/80-30.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk2p40-tds",
+     "naziv": "R-M, Technical Information PLASTIC Clean-R, PK 2P40 eSense solventborne cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P40-eSense%20solventborne%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk2p10-tds",
+     "naziv": "R-M, Technical Information MULTI Clean-R, PK 2P10 eSense waterborne multi cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P10-eSense%20waterborne%20multi%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "glasurit-prirucnik",
+     "naziv": "Glasurit (BASF), Technical Information AD3233G, tehnički priručnik za Severnu Ameriku, rev. 4/12/18 — brend koji nije u našem programu; kopija koju objavljuje Skills/Compétences Canada",
+     "url": "https://www.skillscompetencescanada.com/wp-content/uploads/2018/05/SCNC18-36-AD3233G-Glasurit-Manual_EN.17May18.pdf",
+     "verzija": "rev. 4/12/18",
+     "pristupljeno": "2026-10-08",
+     "tip": "strucni-izvor"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20337,31 +21155,474 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Tehnički listovi i uputstva proizvođača iz našeg programa (R-M, baslac, Carsystem, C.A.R.FIT) ne opisuju posebno pripremu plastičnog dela koji dolazi sa fabričkim prajmerom. Provera otpornosti fabričkog sloja na rastvarač (u izvoru pisana za KTL sloj na limu) i napomena o agresivnom sredstvu za čišćenje plastike oslanjaju se na Glasurit priručnik za Severnu Ameriku (brend van našeg programa, rev. 2009–2018). Potrebna je potvrda stručne osobe ili tehničke službe dobavljača.",
+    "status": "potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "79bca04ac3ad410170c3",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 746,
+   "otisak": "f6cb863dbddb832e5ffa",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Nov branik sa fabričkim prajmerom se ne priprema kao sirova plastika. Fabrički sloj se prvo proverava: ako omekša, nabubri ili postane lepljiv pod rastvaračem, ili se ne drži za plastiku, uklanja se. Ako je stabilan, deo se opere, očisti, ceo matira i ponovo očisti, a zatim se nastavlja sistemom koji proizvođač materijala propisuje. Tehnički listovi iz našeg programa ovaj slučaj ne opisuju posebno, pa tekst čeka stručnu potvrdu i ne zamenjuje uputstvo dobavljača dela."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "zasto-fabricki-prajmer-nije-isto-sto-i-sirova-plastika",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto fabrički prajmer nije isto što i sirova plastika"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Na sirovoj plastici prajmer za plastiku treba da se veže za sam materijal. Na prajmerisanom delu sledeći sloj se vezuje za fabrički prajmer, pa je pitanje drugačije: da li je taj sloj dovoljno čvrst i otporan na rastvarače iz materijala koji nanosite."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Sloj koji se razmekša pod rastvaračem može da nabubri kada se preko njega nanese punilac ili bazna boja. To je jedan od mogućih uzroka podizanja i nabiranja koje se primećuje tek pri lakiranju, o čemu piše vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/podizanje-i-nabiranje-boje",
+       "c": [
+        {
+         "t": "text",
+         "v": "Podizanje i nabiranje boje preko stare podloge"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak-korak-po-korak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak korak po korak"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Redosled ispod je urednički sastavljen od koraka koje proizvođači navode za plastiku i za fabrički prajmerisane delove. Nije uputstvo jednog proizvođača za ovaj slučaj."
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pranje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Deo se opere vodom i sredstvom za pranje, ispere i osuši. Glasurit u tabeli pripreme navodi pranje vodom i sapunom pre čišćenja plastike"
+       },
+       {
+        "t": "cite",
+        "id": "glasurit-prirucnik"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Provera otpornosti na rastvarač."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Na skrivenom mestu se izvede test opisan u odeljku ispod."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Čišćenje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Sredstvo za čišćenje bira se prema podlozi. R-M PLASTIC Clean-R je, prema tehničkom listu, sredstvo isključivo za plastične delove koje uklanja sredstva za odvajanje iz proizvodnje"
+       },
+       {
+        "t": "cite",
+        "id": "rm-pk2p40-tds"
+       },
+       {
+        "t": "text",
+        "v": ", dakle napravljeno za sirovu plastiku. R-M MULTI Clean-R ima širi spisak podloga i antistatičko dejstvo za plastiku"
+       },
+       {
+        "t": "cite",
+        "id": "rm-pk2p10-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Matiranje celog dela."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Fabrički sloj se ravnomerno matira sunđerom ili flisom za matiranje, bez probijanja do plastike. baslac i za nove plastične delove u svom postupku traži matiranje cele površine i ponovno čišćenje sredstvom 70-20"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-plastic-system"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Ponovno čišćenje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " i nastavak po sistemu."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ako se pri matiranju sloj probije do sirove plastike, to mesto se tretira kao sirova plastika, prema vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-plastike-pre-lakiranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Priprema plastičnih delova pre lakiranja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-se-proverava-fabricki-sloj",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se proverava fabrički sloj"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Za ovu proveru nismo pronašli postupak u dokumentima proizvođača iz našeg programa. Glasurit, brend koji nije u našem programu, u servisnom biltenu za nove limene delove sa fabričkim KTL slojem navodi test otpornosti na rastvarač i pravilo: ako fabrički prajmer nabubri, postane lepljiv ili omekša, mora da se ukloni"
+      },
+      {
+       "t": "cite",
+       "id": "glasurit-prirucnik"
+      },
+      {
+       "t": "text",
+       "v": ". Bilten je pisan za lim, ali isti princip se ovde primenjuje na fabrički sloj na plastici; to je urednička procena. Isti priručnik za svoje promotore prianjanja navodi da su pogodni za sirovu plastiku i za prajmerisanu plastiku koja se ne rastvara"
+      },
+      {
+       "t": "cite",
+       "id": "glasurit-prirucnik"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se test radi, opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/test-starog-laka-razredjivacem",
+       "c": [
+        {
+         "t": "text",
+         "v": "Test starog laka razređivačem"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ". Prianjanje fabričkog sloja na plastiku proverava se i vizuelno posle matiranja: sloj ne sme da se ljušti na ivicama ni da se diže pod sunđerom. Ako ste u nedoumici, pitajte dobavljača dela kakav je fabrički sloj i za šta je namenjen."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "treba-li-dodatni-prajmer-za-plastiku",
+     "c": [
+      {
+       "t": "text",
+       "v": "Treba li dodatni prajmer za plastiku?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Na mestima gde je fabrički prajmer netaknut, sledeći sloj se vezuje za njega, pa prajmer za plastiku tu nije namenjen podlozi. Potreban je tamo gde je otkrivena sirova plastika, a odluka zavisi od sistema. Kada je prajmer za plastiku deo postupka, a kada ga sistem zamenjuje drugim rešenjem, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/prajmer-za-plastiku-kada-treba",
+       "c": [
+        {
+         "t": "text",
+         "v": "Prajmer za plastiku: kada je potreban"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac za nove plastične delove u svom postupku ne koristi poseban prajmer, nego punilac 20-35 ili 20-95 sa aditivom 80-30 Additive Plast"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-plastic-system"
+      },
+      {
+       "t": "text",
+       "v": ". Za 80-30 tehnički list navodi da se po potrebi može naneti i na susedne delove sa KTL slojem, ali da na PP i PE ne daje dovoljno prianjanje"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-80-30-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Ovaj postupak se odnosi na baslac sistem."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ceste-greske",
+     "c": [
+      {
+       "t": "text",
+       "v": "Česte greške"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Urednički izbor, a ne statistika učestalosti:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "čišćenje prajmerisanog dela agresivnim sredstvom za sirovu plastiku bez provere; Glasurit za svoje univerzalno sredstvo za plastiku upozorava da se ne koristi na prajmerima jer može da izazove bubrenje i nabiranje fabričkog i reparaturnog prajmera"
+       },
+       {
+        "t": "cite",
+        "id": "glasurit-prirucnik"
+       },
+       {
+        "t": "text",
+        "v": ";"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "brušenje do sirove plastike na velikoj površini, pa se gubi prednost fabričkog sloja;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "nanošenje materijala bez ikakve provere sloja, pa se problem pokaže tek posle bazne boje."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-se-fabricki-prajmer-na-braniku-brusi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li se fabrički prajmer na braniku brusi?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Matira se, a ne skida. Cilj je ujednačeno matirana površina na koju sledeći sloj može da prione, bez probijanja do plastike. Ako se sloj pokaže nestabilnim u testu, uklanja se."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "vazi-li-isto-za-nov-limeni-deo-sa-ktl-slojem",
+     "c": [
+      {
+       "t": "text",
+       "v": "Važi li isto za nov limeni deo sa KTL slojem?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ne. Limeni deo sa fabričkim KTL slojem ima sopstvena pravila: vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/novi-deo-sa-fabrickim-ktl-slojem",
+       "c": [
+        {
+         "t": "text",
+         "v": "Nov deo sa fabričkim KTL slojem"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0034",
    "slug": "staticki-elektricitet-na-plastici",
    "naslov": "Statički elektricitet na plastici i prašina pri lakiranju",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Statički elektricitet na plastici i prašina u laku",
+   "opis": "Zašto se plastični delovi naelektrišu i privlače prašinu pri lakiranju i kako pomažu odmašćivači sa antistatičkim dejstvom.",
    "kategorija": "priprema-povrsine",
    "podtema": "antistatik",
    "tip": "resavanje-problema",
@@ -20374,13 +21635,88 @@
     "Pomaže li antistatička krpa?",
     "Kako se plastika pravilno odmašćuje?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Urednički predlog q150 u questions.json („Kako da odmastim plastiku bez statičkog naelektrisanja?“)."
+   },
    "brendovi": [
-    "carsystem"
+    "carsystem",
+    "rm",
+    "baslac"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "carsystem-silicone-remover-water-2-0",
+    "carsystem-silicone-remover-mild",
+    "rm-pk-2p10-multi-clean-r",
+    "baslac-70-45-cleaner"
+   ],
+   "povezani": [
+    "SV-0031",
+    "SV-0027",
+    "SV-0028",
+    "SV-0167",
+    "SV-0127"
+   ],
+   "izvori": [
+    {
+     "id": "carsystem-silicone-remover-water-tds",
+     "naziv": "Carsystem, Technical Data Sheet Silicone Remover Water 2.0, Silicone remover – water-based V02",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-water-2.0-v02.pdf",
+     "verzija": "V02, 09/2025",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-silicone-remover-mild-tds",
+     "naziv": "Carsystem, Technical Data Sheet Silicone Remover Mild, degreaser – mild",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-mild.pdf",
+     "verzija": "v.01, 05/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk2p10-tds",
+     "naziv": "R-M, Technical Information MULTI Clean-R, PK 2P10 eSense waterborne multi cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P10-eSense%20waterborne%20multi%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk2p40-tds",
+     "naziv": "R-M, Technical Information PLASTIC Clean-R, PK 2P40 eSense solventborne cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P40-eSense%20solventborne%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-70-45-tds",
+     "naziv": "baslac, Technical Information 70-45 Cleaner",
+     "url": "https://techinfo.baslac.com/en/70-45.pdf",
+     "dokument": "/documents/products/baslac/70-45.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-51k-standard",
+     "naziv": "baslac, Technical Information Mazda Rhodium White Met, Color 51K for Basecoat (standardni postupak)",
+     "dokument": "/documents/products/baslac/Mazda51K_chart_standard_process.pdf",
+     "verzija": "03/2025",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-plastic-system",
+     "naziv": "baslac, Technical Information Plastic Repair System VOC (Painting of plastic parts)",
+     "url": "https://techinfo.baslac.com/en/Plastic_Repair_System_VOC.pdf",
+     "dokument": "/documents/products/baslac/Plastic_Repair_System_VOC.pdf",
+     "verzija": "10/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20390,7 +21726,7 @@
    "razlogPrioriteta": "Rešava konkretan problem iz prakse; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -20398,23 +21734,516 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "8e7a2f83cb6e95d4cf95",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 633,
+   "otisak": "023b2402a67c7b63d01e",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Plastika slabo provodi elektricitet, pa se pri trljanju krpom ili pri brušenju naelektriše i privlači prašinu iz vazduha. Zato se poslednje čišćenje plastičnog dela pre bazne boje radi sredstvom za koje proizvođač navodi antistatičko dejstvo, a deo se posle toga ne trlja suvom krpom. Više proizvođača iz našeg programa ima takva sredstva: R-M MULTI Clean-R, baslac 70-45 i Carsystem Silicone Remover Water 2.0 i Mild"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p10-tds"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-70-45-tds"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-silicone-remover-water-tds"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-silicone-remover-mild-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "zasto-se-plastika-naelektrise",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto se plastika naelektriše"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kod metalnog dela naelektrisanje se odvodi kroz sam materijal i karoseriju. Plastični deo je izolator: naelektrisanje koje nastane trenjem ostaje na površini i privlači sitne čestice prašine i vlakana. Ovo je opšte objašnjenje pojave, a ne podatak iz tehničkog lista."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prema istom opštem principu, naelektrisanje pojačava svako trenje suve površine, na primer brisanje suvom krpom snažnim i brzim potezima ili skidanje folije za maskiranje sa plastičnog dela neposredno pre lakiranja. Ovo je urednička procena, a ne podatak proizvođača."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zato se prašina kod plastike ne rešava samo čistom kabinom. Kako se smanjuje prašina u prostoru za rad, opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/prasina-u-garazi-pre-lakiranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Kako smanjiti prašinu u prostoru za lakiranje"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-navode-tehnicki-listovi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta navode tehnički listovi"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Proizvod"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Šta proizvođač navodi"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "R-M MULTI Clean-R (PK 2P10)"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "vodeno sredstvo; antistatičko dejstvo pri lakiranju plastike; VOC 186 g/l"
+        },
+        {
+         "t": "cite",
+         "id": "rm-pk2p10-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "baslac 70-45 Cleaner"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "deluje kao antistatik i smanjuje taloženje prašine pri nanošenju završnog sloja na plastične delove; VOC 198 g/l"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-70-45-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Carsystem Silicone Remover Water 2.0"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "vodeno sredstvo; antistatičko dejstvo da se izbegnu uključci prašine; proba na podlozi se preporučuje"
+        },
+        {
+         "t": "cite",
+         "id": "carsystem-silicone-remover-water-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Carsystem Silicone Remover Mild"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "rastvarački odmašćivač; antistatičko dejstvo da se izbegnu uključci prašine"
+        },
+        {
+         "t": "cite",
+         "id": "carsystem-silicone-remover-mild-tds"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Antistatičko dejstvo ne navode svi odmašćivači. R-M PLASTIC Clean-R, sredstvo za uklanjanje sredstava za odvajanje sa plastike, u tehničkom listu ga ne pominje"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p40-tds"
+      },
+      {
+       "t": "text",
+       "v": ". To je sredstvo za prvo čišćenje sirove plastike, a ne za korak neposredno pre bazne boje."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-se-plastika-cisti-pred-lakiranje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se plastika čisti pred lakiranje"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Prvo čišćenje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " sredstvom za plastiku, pre brušenja i matiranja. Postupak opisuje vodič "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/priprema-plastike-pre-lakiranja",
+        "c": [
+         {
+          "t": "text",
+          "v": "Priprema plastičnih delova pre lakiranja"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Poslednje čišćenje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " pre bazne boje, sredstvom sa antistatičkim dejstvom. baslac za 70-45 opisuje postupak sa dve krpe: jednom se čisti, drugom se briše do suvog"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-70-45-tds"
+       },
+       {
+        "t": "text",
+        "v": ". R-M za MULTI Clean-R navodi bocu sa pumpicom i brisanje krpom"
+       },
+       {
+        "t": "cite",
+        "id": "rm-pk2p10-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Isparavanje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Carsystem za vodeno sredstvo traži dovoljno vremena za isparavanje na svim podlogama, da ispod sledećeg sloja ne ostane vlaga"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-silicone-remover-water-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Uklanjanje prašine"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " neposredno pre nanošenja, laganim potezima, bez trljanja."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kod plastike važi i opšte pravilo za odmašćivače: sredstvo se ne ostavlja da se osuši na površini. baslac to izričito navodi za 70-20 Cleaner Plastic"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-plastic-system"
+      },
+      {
+       "t": "text",
+       "v": ". Razliku između vodenih i rastvaračkih sredstava objašnjava tekst "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/odmascivac-za-vodene-i-rastvaracke-sisteme",
+       "c": [
+        {
+         "t": "text",
+         "v": "Odmašćivač za vodene i za rastvaračke sisteme"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "moguci-uzroci-ako-se-prasina-i-dalje-lepi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Mogući uzroci ako se prašina i dalje lepi"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prašina u laku na plastičnom delu ne mora da potiče od statičkog elektriciteta. Mogući izvori su i vazduh u kabini, odeća, pištolj i sam materijal. Proverite:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "da li je poslednje čišćenje rađeno sredstvom sa antistatičkim dejstvom ili samo suvom krpom;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "da li se trunje javlja samo na plastičnim delovima ili i na limu; ako je i na limu, uzrok je verovatnije u prostoru ili opremi;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "da li je deo posle antistatičkog čišćenja ponovo trljan suvom krpom."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Opšti pregled izvora trunja daje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/prasina-i-trunje-u-laku",
+       "c": [
+        {
+         "t": "text",
+         "v": "Prašina i trunje u laku"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": ". Konačan uzrok zavisi od uslova rada, pa se proverava korak po korak."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "pomaze-li-antistaticka-krpa",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pomaže li antistatička krpa?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac u postupku za baznu boju 51K navodi da se prašina sa dela ukloni komprimovanim vazduhom i da se deo obriše antistatičkom krpom"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-51k-standard"
+      },
+      {
+       "t": "text",
+       "v": ". Tehnički listovi Carsystem krpa za prašinu koje smo pregledali ne navode antistatičko dejstvo, nego impregnaciju koja zadržava prašinu. Krpa za prašinu ne zamenjuje antistatičko čišćenje, nego ide posle njega; o njoj piše vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/krpa-za-prasinu-pre-lakiranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Krpa za prašinu pre lakiranja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "moze-li-vodeno-sredstvo-na-svaku-plastiku",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može li vodeno sredstvo na svaku plastiku?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Carsystem za Silicone Remover Water 2.0 preporučuje probu kompatibilnosti na svakoj podlozi i upozorava da sredstvo može da rastvori neke 1K prajmere"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-silicone-remover-water-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Na delu koji je već prajmerisan zato prvo uradite probu na skrivenom mestu."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0035",
    "slug": "priprema-starog-laka",
    "naslov": "Priprema starog laka za novo lakiranje",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Priprema starog laka za novo lakiranje",
+   "opis": "Kako se priprema postojeći lak za novi sloj: procena stanja, čišćenje, matiranje i kada stari lak ipak treba skinuti, prema tehničkim listovima.",
    "kategorija": "priprema-povrsine",
    "podtema": "prethodno lakirane površine",
    "tip": "osnovni-vodic",
@@ -20428,14 +22257,98 @@
     "Da li stari lak treba skinuti do lima?",
     "Kada je dovoljno matiranje?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Na forumu samsvojmajstor.com pita se da li stari lak treba skinuti do lima ili je dovoljno izbrusiti ga (q021), a na poljoprivredni-forum.com da li vodeno brušenje skida lak pre nove boje (q038).",
+    "izvori": [
+     "https://www.samsvojmajstor.com/portal/forums/uradi-sam/popravka-automobila/farbanje-auta?page=5",
+     "https://poljoprivredni-forum.com/threads/auto-limarija-i-priprema-za-farbanje.27833/page-15"
+    ]
+   },
    "brendovi": [
     "carsystem",
-    "carfit"
+    "carfit",
+    "rm",
+    "baslac"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "carsystem-silicone-remover-mild",
+    "carsystem-prep-scuff",
+    "carfit-silicone-remover",
+    "rm-pk-1p10-silicone-remov-r",
+    "p-2p63-multi-purpos-r-grey"
+   ],
+   "povezani": [
+    "SV-0036",
+    "SV-0037",
+    "SV-0072",
+    "SV-0023",
+    "SV-0025"
+   ],
+   "izvori": [
+    {
+     "id": "carfit-2k-epoxy-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet 2K Epoxy Primer 1:1",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-epoxy-primer-11-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-etch-primer-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet 1K Etch Primer Spray",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-1k-etch-primer-spray-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-silicone-remover-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet Silicone Remover",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-silicone-remover-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-silicone-remover-mild-tds",
+     "naziv": "Carsystem, Technical Data Sheet Silicone Remover Mild, degreaser – mild",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-mild.pdf",
+     "verzija": "v.01, 05/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-prep-scuff-tds",
+     "naziv": "Carsystem, Technical Data Sheet Prep & Scuff, matting gel",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-prep-scuff.pdf",
+     "verzija": "v.02, 03/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk1p10-tds",
+     "naziv": "R-M, Technical Information SILICONE Remov-R, PK 1P10 eSense solventborne cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%201P10-eSense%20solventborne%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-p2p63-tds",
+     "naziv": "R-M, Technical Information MULTI Purpos-R Grey, P 2P63 eSense DTM, grey",
+     "dokument": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-undercoats-chart",
+     "naziv": "baslac, Technical Information Chart 1: Undercoats on metallic and plastic substrates",
+     "url": "https://techinfo.baslac.com/en/Plastic_metallic_repair.pdf",
+     "dokument": "/documents/products/baslac/Plastic_metallic_repair.pdf",
+     "verzija": "03/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20445,7 +22358,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -20453,23 +22366,617 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "a4c0c8c90085723668e7",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 701,
+   "otisak": "6384d3698a2dcfa9bb9d",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zdrav stari lak se ne skida do lima: opere se, odmasti, matira brušenjem ili sunđerom za matiranje i ponovno odmasti, pa postaje podloga za punilac, baznu boju ili bezbojni lak. Do lima se ide samo tamo gde stari lak više nije dobra podloga: gde se ljušti, puca, ima rđu ispod sebe ili ne podnosi rastvarače. Granulacija matiranja se ne bira napamet, nego prema tehničkom listu materijala koji ide preko starog laka."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-znaci-zdrav-stari-lak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znači „zdrav“ stari lak"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Proizvođači stari lak navode kao redovnu podlogu, ali uz uslov. C.A.R.FIT za 2K Epoxy Primer 1:1 navodi stare završne slojeve „u dobrom stanju“ među podlogama"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-2k-epoxy-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a za Silicone Remover potpuno očvrsle stare ili sveže slojeve, uz upozorenje da se ne koristi na podlogama osetljivim na rastvarače, na primer termoplastičnim slojevima"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-silicone-remover-tds"
+      },
+      {
+       "t": "text",
+       "v": ". R-M za SILICONE Remov-R stari lak navodi kao podlogu, ali ne i podloge osetljive na rastvarače"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk1p10-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pre pripreme zato proverite, kao urednički spisak:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "da li se lak drži za podlogu, bez ljuštenja na ivicama i oko oštećenja;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "da li ima sitne pukotine ili mrežu pukotina;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "da li ispod njega ima mehurića od rđe;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "da li omekšava pod rastvaračem, prema testu iz teksta "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/test-starog-laka-razredjivacem",
+        "c": [
+         {
+          "t": "text",
+          "v": "Test starog laka razređivačem"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Detaljnija procena pre popravke opisana je u vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/procena-ostecenja-pre-popravke",
+       "c": [
+        {
+         "t": "text",
+         "v": "Procena oštećenja pre popravke"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak-za-zdrav-stari-lak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak za zdrav stari lak"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pranje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " vodom i sredstvom za pranje, ispiranje i sušenje."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Prvo odmašćivanje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " sredstvom koje je navedeno za stari lak. Carsystem Silicone Remover Mild navodi stare i fabričke lakove među podlogama"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-silicone-remover-mild-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Matiranje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Cela površina koja dobija novi sloj mora da izgubi sjaj, bez sjajnih mesta."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Drugo odmašćivanje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " posle matiranja."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Nanošenje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " materijala koji tehnički list navodi za stari lak."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Redosled „odmastiti – suvo brusiti – ponovo odmastiti“ za stare slojeve C.A.R.FIT navodi izričito"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-2k-epoxy-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Opšta pravila odmašćivanja opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/odmascivanje-pre-lakiranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Odmašćivanje pre lakiranja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kojom-granulacijom-se-matira-stari-lak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kojom granulacijom se matira stari lak"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Granulaciju određuje materijal koji ide preko starog laka. Primeri iz tehničkih listova pokazuju koliko se vrednosti razlikuju:"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Materijal preko starog laka"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Priprema starog laka prema tehničkom listu"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "C.A.R.FIT 2K Epoxy Primer 1:1"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "ručno P280–P320, mašinski suvo P180–P220"
+        },
+        {
+         "t": "cite",
+         "id": "carfit-2k-epoxy-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "C.A.R.FIT 1K Etch Primer Spray"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "P220–P320 suvo ili P400 mokro"
+        },
+        {
+         "t": "cite",
+         "id": "carfit-etch-primer-tds"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ako preko starog laka ide samo bazna boja ili bezbojni lak, na primer u zoni utapanja, matira se znatno finije. To je posebna tema: vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-zone-utapanja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Brušenje i matiranje zone utapanja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Brušenje ovde služi da se površina matira i da se novi sloj mehanički veže, a ne da se lak skine. Kod mokrog brušenja važi isto: cilj je mat površina, a koliko materijala se skida zavisi od granulacije i pritiska."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "matiranje-gelom",
+     "c": [
+      {
+       "t": "text",
+       "v": "Matiranje gelom"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Neki proizvodi spajaju čišćenje i matiranje. Carsystem Prep & Scuff je gel sa abrazivom i sredstvom za odmašćivanje koji se nanosi na sunđer za matiranje ili direktno na deo; površina ne sme da se osuši, a posle matiranja deo se temeljno ispira vodom"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-prep-scuff-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Carsystem navodi da gel omogućava matiranje teško dostupnih mesta oko brava i lajsni i da je napravljen tako da zameni početno odmašćivanje panela"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-prep-scuff-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Posle ispiranja deo se osuši i nastavlja se po sistemu."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se biraju sunđeri, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/sunderi-za-matiranje",
+       "c": [
+        {
+         "t": "text",
+         "v": "Sunđeri i flis za matiranje"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "koji-materijali-smeju-direktno-na-stari-lak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koji materijali smeju direktno na stari lak"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "To piše u listi podloga svakog proizvoda. Na primer:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "R-M P 2P63 MULTI Purpos-R navodi stari lak među podlogama, uz čišćenje sredstvom MULTI Clean-R pre nanošenja"
+       },
+       {
+        "t": "cite",
+        "id": "rm-p2p63-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "U baslac tabeli podloga punioci 20-24, 20-34, 20-94 i 20-35/95, kit 12-20 i prajmeri 25-30 i 27-10 označeni su kao pogodni za stari lak"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-undercoats-chart"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ako materijal na mestima gde je matiranjem probijeno do metala traži poseban prajmer, to se radi prema njegovom tehničkom listu. Takva mesta su goli lim, o čemu piše vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-golog-lima",
+       "c": [
+        {
+         "t": "text",
+         "v": "Priprema golog čeličnog lima"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-stari-lak-treba-skinuti-do-lima",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li stari lak treba skinuti do lima?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Samo ako nije dobra podloga: ljušti se, puca, ima rđu ispod sebe ili se rastvara u testu. Tada se skida do zdravog sloja ili do metala. Postupke skidanja upoređuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/skidanje-stare-boje",
+       "c": [
+        {
+         "t": "text",
+         "v": "Skidanje stare boje"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "kada-je-dovoljno-matiranje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada je dovoljno matiranje?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada je stari lak čvrst, bez pukotina i rđe i ne omekšava pod rastvaračem. Tada je matiranje do potpuno mat površine, uz odmašćivanje pre i posle, redovan postupak prema tehničkim listovima koji stari lak navode kao podlogu"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-2k-epoxy-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "moze-li-se-preko-starog-laka-samo-naneti-bezbojni-lak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može li se preko starog laka samo naneti bezbojni lak?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može samo ako sistem to predviđa i ako je stari lak matiran i čist. Za konkretan lak pogledajte njegov tehnički list."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0036",
    "slug": "test-starog-laka-razredjivacem",
    "naslov": "Test starog laka razređivačem: da li podloga podnosi novi sloj",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Test starog laka razređivačem pre lakiranja",
+   "opis": "Kako se proverava da li stara, nepoznata boja podnosi rastvarače novog sistema: test na probrušenom mestu, omekšavanje i kada se sloj uklanja.",
    "kategorija": "priprema-povrsine",
    "podtema": "provera podloge",
    "tip": "postupak",
@@ -20482,13 +22989,68 @@
     "Šta znači ako stari lak omekša?",
     "Kada je potrebna izolacija?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Pitanje zašto se boja nabira kada se prska preko stare boje postavlja se u FAQ proizvođača aerosola koji nije naš brend (q084, služi samo kao dokaz pitanja); pitanje o testu razređivačem je urednički predlog (q152).",
+    "izvori": [
+     "https://faq.edding.com/What-causes-the-paint-to-wrinkle-(%22lift%22)-when-I-use-edding-5200-permanent-spray%3F"
+    ]
+   },
    "brendovi": [
-    "rm"
+    "rm",
+    "carfit"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "rm-pk-1p10-silicone-remov-r",
+    "carfit-silicone-remover"
+   ],
+   "povezani": [
+    "SV-0035",
+    "SV-0158",
+    "SV-0037",
+    "SV-0030",
+    "SV-0024"
+   ],
+   "izvori": [
+    {
+     "id": "glasurit-prirucnik",
+     "naziv": "Glasurit (BASF), Technical Information AD3233G, tehnički priručnik za Severnu Ameriku, rev. 4/12/18 — brend koji nije u našem programu; kopija koju objavljuje Skills/Compétences Canada",
+     "url": "https://www.skillscompetencescanada.com/wp-content/uploads/2018/05/SCNC18-36-AD3233G-Glasurit-Manual_EN.17May18.pdf",
+     "verzija": "rev. 4/12/18",
+     "pristupljeno": "2026-10-08",
+     "tip": "strucni-izvor"
+    },
+    {
+     "id": "rm-pk1p10-tds",
+     "naziv": "R-M, Technical Information SILICONE Remov-R, PK 1P10 eSense solventborne cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%201P10-eSense%20solventborne%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-silicone-remover-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet Silicone Remover",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-silicone-remover-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-2k-epoxy-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet 2K Epoxy Primer 1:1",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-epoxy-primer-11-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-silicone-remover-water-tds",
+     "naziv": "Carsystem, Technical Data Sheet Silicone Remover Water 2.0, Silicone remover – water-based V02",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-water-2.0-v02.pdf",
+     "verzija": "V02, 09/2025",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20498,31 +23060,482 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Postupak testa (krpa natopljena razređivačem na probrušenom mestu; bubrenje, lepljivost ili omekšavanje znače da se sloj uklanja) nije opisan u dokumentima proizvođača iz našeg programa. Oslanja se na Glasurit priručnik za Severnu Ameriku (brend van našeg programa; bilten iz 2009. pisan za fabrički KTL sloj, rečnik pojmova) i na upozorenja R-M i C.A.R.FIT o podlogama osetljivim na rastvarače. Koji razređivač se koristi za test u sistemima iz našeg programa nije potvrđeno. Odgovor na pitanje o izolaciji nema izvor iz našeg programa.",
+    "status": "potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "1ae25a490562d3e365e2",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 653,
+   "otisak": "f804721cb137c22a2877",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Test se radi na mestu gde je stari lak probrušen kroz sve slojeve: krpa natopljena razređivačem prevuče se preko tog mesta i posmatra se da li neki sloj nabubri, postane lepljiv ili omekša. Ako se to desi, taj sloj je osetljiv na rastvarače i preko njega se ne nanosi nov sistem bez uklanjanja. Ako svi slojevi ostanu tvrdi, stari lak se dalje priprema kao zdrava podloga. Tumačenje rezultata zasnovano je na dokumentima brenda Glasurit, koji nije u našem programu, pa tekst čeka stručnu potvrdu."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "zasto-se-radi-test",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto se radi test"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Neke boje se suše samo isparavanjem rastvarača i posle toga se mogu ponovo rastvoriti u istom ili sličnom rastvaraču. Glasurit u rečniku pojmova takve slojeve naziva reverzibilnim i kao primer navodi nitro i termoplastične akrilne boje, za razliku od alkidnih i drugih sintetičkih boja koje se ne mogu vratiti u tečno stanje"
+      },
+      {
+       "t": "cite",
+       "id": "glasurit-prirucnik"
+      },
+      {
+       "t": "text",
+       "v": ". Na vozilu koje je ranije lakirano ne znate uvek šta je ispod."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada se preko takvog sloja nanese materijal sa jakim rastvaračima, stari sloj može da nabubri i podigne nov. Glasurit to opisuje kao podizanje (lifting) i kao primer navodi nanošenje nitro materijala preko sintetičke boje koja se suši na vazduhu"
+      },
+      {
+       "t": "cite",
+       "id": "glasurit-prirucnik"
+      },
+      {
+       "t": "text",
+       "v": ". Mogući uzroci i izgled te greške opisani su u vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/podizanje-i-nabiranje-boje",
+       "c": [
+        {
+         "t": "text",
+         "v": "Podizanje i nabiranje boje preko stare podloge"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Proizvođači iz našeg programa takve podloge izdvajaju u tehničkim listovima. R-M za SILICONE Remov-R navodi da se ne koristi na podlogama osetljivim na rastvarače"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk1p10-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a C.A.R.FIT za Silicone Remover kao primer takve podloge navodi termoplastične slojeve"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-silicone-remover-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-se-test-radi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se test radi"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Izbor mesta."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Mesto na delu koji se popravlja, po mogućnosti manje vidljivo."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Probrušavanje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Urednička preporuka: stari lak se na malom mestu probrusi kroz sve slojeve, tako da se na ivici vide svi slojevi, od laka do podloge. Tako se proverava svaki sloj, ne samo gornji."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Čišćenje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " mesta od prašine."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Test."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Čista krpa se natopi razređivačem i prevuče preko probrušenog mesta. Glasurit u servisnom biltenu za fabrički KTL sloj koristi razređivač iz sopstvenog sistema"
+       },
+       {
+        "t": "cite",
+        "id": "glasurit-prirucnik"
+       },
+       {
+        "t": "text",
+        "v": ". Koji razređivač je odgovarajući za sistem u kome Vi radite, proverite kod proizvođača ili dobavljača tog sistema."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Posmatranje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Prati se da li neki sloj nabubri, postane lepljiv ili omekša, odnosno da li se boja skida na krpu."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-znace-rezultati",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znače rezultati"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Svi slojevi ostaju tvrdi."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Stari lak se priprema kao zdrava podloga, prema vodiču "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/priprema-starog-laka",
+        "c": [
+         {
+          "t": "text",
+          "v": "Priprema starog laka za novo lakiranje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Neki sloj nabubri, postane lepljiv ili omekša."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Glasurit za fabrički sloj navodi da se tada mora ukloniti"
+       },
+       {
+        "t": "cite",
+        "id": "glasurit-prirucnik"
+       },
+       {
+        "t": "text",
+        "v": ". Uklanjanje opisuje vodič "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/skidanje-stare-boje",
+        "c": [
+         {
+          "t": "text",
+          "v": "Skidanje stare boje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Rezultat nije jasan."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Ponovite test na drugom mestu ili napravite probu sistema na manjoj površini pre lakiranja celog dela."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Test pokazuje osetljivost na rastvarač, a ne prianjanje. Stari lak koji ne omekšava i dalje može da se ljušti od podloge, pa se i to proverava pre izbora postupka."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ogranicenja",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ograničenja"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ovaj test ne zamenjuje tehnički list. Odmašćivači i materijali iz našeg programa navode podloge na kojima su provereni: C.A.R.FIT, na primer, za 2K Epoxy Primer 1:1 navodi stare završne slojeve u dobrom stanju"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-2k-epoxy-tds"
+      },
+      {
+       "t": "text",
+       "v": ". I blaga sredstva mogu da reaguju sa nekim slojevima: Carsystem za vodeni odmašćivač upozorava da može da rastvori neke 1K prajmere i preporučuje probu na podlozi"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-silicone-remover-water-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-znaci-ako-stari-lak-omeksa",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta znači ako stari lak omekša?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da je bar jedan sloj osetljiv na rastvarač i da može da nabubri kada se preko njega nanese novi materijal. Takav sloj se ne ostavlja ispod novog sistema, nego se uklanja do čvrste podloge."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "kada-je-potrebna-izolacija",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada je potrebna izolacija?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "U tehničkim listovima iz našeg programa nismo pronašli izolacioni sloj namenjen za nanošenje preko starog laka osetljivog na rastvarače, pa ovde ne dajemo postupak izolacije. Glasurit izolaciju (sealer) opisuje kao sredstvo koje zatvara upojne i porozne površine"
+      },
+      {
+       "t": "cite",
+       "id": "glasurit-prirucnik"
+      },
+      {
+       "t": "text",
+       "v": ", a za omekšali fabrički sloj navodi uklanjanje, ne izolaciju"
+      },
+      {
+       "t": "cite",
+       "id": "glasurit-prirucnik"
+      },
+      {
+       "t": "text",
+       "v": ". Ako sistem koji koristite ima proizvod za ovu namenu, postupite po njegovom tehničkom listu."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "radi-li-se-test-i-na-novim-delovima",
+     "c": [
+      {
+       "t": "text",
+       "v": "Radi li se test i na novim delovima?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može da pomogne kod fabričkog sloja na novom delu, ali tamo važe posebna pravila: vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/novi-deo-sa-fabrickim-ktl-slojem",
+       "c": [
+        {
+         "t": "text",
+         "v": "Nov deo sa fabričkim KTL slojem"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": " i "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/nov-branik-sa-fabrickim-prajmerom",
+       "c": [
+        {
+         "t": "text",
+         "v": "Nov branik sa fabričkim prajmerom"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0037",
    "slug": "skidanje-stare-boje",
    "naslov": "Skidanje stare boje: brušenje, peskarenje ili hemijski skidač",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Skidanje stare boje: brušenje, peskarenje, skidač",
+   "opis": "Kako se bira postupak skidanja stare boje sa karoserije: brušenje i diskovi, peskarenje i hemijski skidač, uz ograničenja iz listova i EU propisa.",
    "kategorija": "priprema-povrsine",
    "podtema": "uklanjanje starih slojeva",
    "tip": "postupak",
@@ -20536,11 +23549,79 @@
     "Koliko je hemijski skidač opasan?",
     "Kada peskarenje oštećuje lim?"
    ],
-   "poreklopitanja": null,
-   "brendovi": [],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Pitanja kako ukloniti staru boju bez brušenja i koliko je skidač boje štetan postavljaju se u FAQ prodavca koji nije naš brend (q128, q129; samo dokaz pitanja); izbor između peskarenja i brušenja je urednički predlog (q143).",
+    "izvori": [
+     "https://www.nonpaints.com/en/faq"
+    ]
+   },
+   "brendovi": [
+    "carsystem",
+    "carfit",
+    "cosmos-lac",
+    "rm"
+   ],
+   "proizvodi": [
+    "carsystem-stripping-disc",
+    "cosmos-lac-cleaners-733-400-ml-paint-remover-733"
+   ],
+   "povezani": [
+    "SV-0193",
+    "SV-0042",
+    "SV-0029",
+    "SV-0035",
+    "SV-0036"
+   ],
+   "izvori": [
+    {
+     "id": "carsystem-stripping-disc",
+     "naziv": "Carsystem, Stripping Disc – Raw cleaning disc (stranica proizvoda)",
+     "url": "https://www.carsystem.org/en/products/detail/abrasives/stripping-disc-raw-cleaning-disc",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "carfit-zinc-spray-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet Zinc Spray",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-zinc-spray-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "cosmos-paint-remover-tds",
+     "naziv": "Cosmos Lac, TDS Paint Remover",
+     "url": "https://cosmoslac.com/pdfs/products/en/Paint-Remover_tds.pdf",
+     "verzija": "01, 16. 9. 2025",
+     "datumIzvora": "2025-09-16",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "eu-reach-dcm",
+     "naziv": "Uredba Komisije (EU) br. 276/2010 od 31. marta 2010. o izmeni Priloga XVII Uredbe REACH (diklormetan), Službeni list EU L 86, 1. 4. 2010",
+     "url": "https://publications.europa.eu/resource/celex/32010R0276",
+     "datumIzvora": "2010-03-31",
+     "pristupljeno": "2026-10-08",
+     "tip": "propis"
+    },
+    {
+     "id": "rm-p5530-tds",
+     "naziv": "R-M, Technical Information GHD UNI WASH, P 5530",
+     "dokument": "/documents/products/rm/p-5530-ghd-uni-wash/rm-p-5530-ghd-uni-wash-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-p5480-tds",
+     "naziv": "R-M, Technical Information GHD UNIVERSAL EPOXY, P 5480",
+     "dokument": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20550,31 +23631,469 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Za peskarenje karoserije (oštećenje i deformacija tankog lima, izbor abraziva i pritiska) nije pronađen izvor proizvođača iz našeg programa; tekst o tome samo upućuje na uputstvo opreme i proizvođača vozila. Bezbednosni list za Cosmos Lac Paint Remover nije javno dostupan (prema TDS-u dobija se na zahtev), pa su bezbednosni podaci ograničeni na TDS. Primena REACH ograničenja u Srbiji nije proverena.",
+    "status": "potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "ee5ac234aac02300364e",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 701,
+   "otisak": "b3087e7685b751333c03",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ne postoji jedan postupak koji je najbolji za svaki deo. Za manju površinu i lokalnu popravku stara boja se obično skida brušenjem ili diskom za skidanje boje, jer se tako najlakše kontroliše koliko se skida. Hemijski skidač je opcija za veće površine i teško dostupna mesta, ali je zapaljiv, traži zaštitu i ne sme na susedne lakirane površine. Peskarenje je postupak za koji u dokumentima iz našeg programa nismo našli uputstvo za tanki lim karoserije, pa ga ovde samo pominjemo."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pre-izbora-da-li-boju-treba-skidati",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pre izbora: da li boju treba skidati"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zdrav stari lak se matira, a ne skida. Skida se kada se ljušti, puca, ima rđu ispod sebe ili ne podnosi rastvarače. Kako se to proverava, opisuju vodiči "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-starog-laka",
+       "c": [
+        {
+         "t": "text",
+         "v": "Priprema starog laka za novo lakiranje"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": " i "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/test-starog-laka-razredjivacem",
+       "c": [
+        {
+         "t": "text",
+         "v": "Test starog laka razređivačem"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "brusenje-i-diskovi-za-skidanje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Brušenje i diskovi za skidanje"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Brušenjem se slojevi skidaju postepeno, a posle skidanja površina je već spremna za dalju pripremu. C.A.R.FIT u tehničkom listu za Zinc Spray, na primer, traži da se stari sloj ukloni i da se mesta sa korozijom izbruse granulacijom P80–P240"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-zinc-spray-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Za skidanje boje mašinom postoje i posebni diskovi. Carsystem Stripping Disc je, prema stranici proizvoda, disk za mašinsko uklanjanje polumekih materijala kao što su zaštita podvozja, zaštita od udara kamenčića, zaptivne mase, boja i rđa; Carsystem navodi da podloga ostaje neoštećena"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-stripping-disc"
+      },
+      {
+       "t": "text",
+       "v": ". Proizvođač daje i najveći dozvoljeni broj obrtaja: 6.000 o/min za prečnik 100 mm i 4.000 o/min za prečnik 150 mm"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-stripping-disc"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prednosti i ograničenja, kao urednički pregled:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Dobra kontrola."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Skida se samo koliko treba, i lokalno."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Toplota."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Dugo zadržavanje na jednom mestu zagreva lim i boju; zato se radi kratkim prelazima."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Prašina."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Suvo brušenje traži usisavanje i zaštitu disanja; vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/usisavanje-prasine-pri-brusenju",
+        "c": [
+         {
+          "t": "text",
+          "v": "Usisavanje prašine pri suvom brušenju"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "peskarenje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Peskarenje"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Peskarenje skida boju i rđu mlazom abraziva i ostavlja hrapavu površinu. Ta hrapavost utiče i na materijal koji ide posle: R-M za epoksidni prajmer P 5480 navodi da se na peskarenoj podlozi vodi računa o dubini hrapavosti"
+      },
+      {
+       "t": "cite",
+       "id": "rm-p5480-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a reaktivni prajmer P 5530 se na peskarene podloge ne nanosi"
+      },
+      {
+       "t": "cite",
+       "id": "rm-p5530-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Oba proizvoda su iz R-M programa za komercijalna vozila i navode se ovde samo kao primer da tehnički list prajmera mora da dozvoljava peskarenu podlogu."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada peskarenje oštećuje lim, u dokumentima proizvođača iz našeg programa nismo pronašli. Tanki paneli karoserije nisu isto što i debeli delovi šasije ili felne, pa vrstu abraziva, pritisak i udaljenost birajte prema uputstvu proizvođača opreme, a za delove vozila prema uputstvu proizvođača vozila."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "hemijski-skidac-boje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Hemijski skidač boje"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Skidač se nanosi u debljem sloju, ostavi da prodre kroz boju, pa se omekšala boja skida špahtlom ili krpom. Tako za Cosmos Lac Paint Remover navodi tehnički list, uz napomenu da se ne koristi na toplim površinama ni na suncu"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-paint-remover-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Isti list upozorava da skidač može da ošteti lakirane površine"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-paint-remover-tds"
+      },
+      {
+       "t": "text",
+       "v": ", pa se susedni delovi koji se ne skidaju zaštite."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Posle skidanja ostaje goli metal, koji se dalje priprema prema vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-golog-lima",
+       "c": [
+        {
+         "t": "text",
+         "v": "Priprema golog čeličnog lima"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "koliko-je-hemijski-skidac-opasan",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koliko je hemijski skidač opasan"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Opasnost zavisi od sastava konkretnog proizvoda, pa se procenjuje prema njegovom bezbednosnom listu. Za Cosmos Lac Paint Remover tehnički list navodi da je izuzetno zapaljiv, sa tačkom paljenja ispod 0 °C, i da ne sadrži hlorovane rastvarače; pre upotrebe upućuje na bezbednosni list, koji se dobija na zahtev"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-paint-remover-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Neki skidači su ranije sadržali diklormetan. U EU su skidači boje sa 0,1 % ili više diklormetana po masi ograničeni Prilogom XVII Uredbe REACH: prema izvornom tekstu Uredbe 276/2010 ne smeju se stavljati na tržište za opštu javnost ni za profesionalce posle 6. decembra 2011, a profesionalci ih ne smeju koristiti posle 6. juna 2012"
+      },
+      {
+       "t": "cite",
+       "id": "eu-reach-dcm"
+      },
+      {
+       "t": "text",
+       "v": ". Ista odredba dozvoljava državama članicama izuzetak za posebno obučene profesionalce i propisuje uslove za industrijska postrojenja"
+      },
+      {
+       "t": "cite",
+       "id": "eu-reach-dcm"
+      },
+      {
+       "t": "text",
+       "v": ". Koja pravila važe u Srbiji, proverite prema važećim propisima."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Rizici po zdravlje i zaštita pri radu obrađeni su posebno u tekstu "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/skidac-boje-i-zdravlje",
+       "c": [
+        {
+         "t": "text",
+         "v": "Hemijski skidač boje: rizici i bezbedan rad"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "moze-li-hemijski-skidac-na-plasticne-delove",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može li hemijski skidač na plastične delove?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zavisi od proizvoda i plastike. Tehnički list Cosmos Lac Paint Remover navodi da skida boju i sa polietilena i polipropilena"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-paint-remover-tds"
+      },
+      {
+       "t": "text",
+       "v": ", ali za druge plastike to ne tvrdi. Za ostale materijale proverite tehnički list svog skidača i uradite probu na skrivenom mestu."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-posle-skidanja-do-metala",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta posle skidanja do metala?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Golom metalu treba zaštita što pre. Ako je ispod boje bila rđa, uklanja se do zdravog metala prema vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/uklanjanje-rdje-sa-karoserije",
+       "c": [
+        {
+         "t": "text",
+         "v": "Uklanjanje rđe sa karoserije pre lakiranja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0038",
    "slug": "priprema-aluminijuma",
    "naslov": "Priprema aluminijumskih delova za lakiranje",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Priprema aluminijumskih delova za lakiranje",
+   "opis": "Priprema aluminijumskog dela karoserije: zaseban alat i abrazivi, čišćenje, matiranje i prajmer za prianjanje, uz primere iz tehničkih listova.",
    "kategorija": "priprema-povrsine",
    "podtema": "aluminijum",
    "tip": "postupak",
@@ -20587,14 +24106,114 @@
     "Zašto se za aluminijum koristi poseban alat?",
     "Kada se nanosi prajmer na aluminijum?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Urednički predlozi q140 („Kako se priprema aluminijumski deo za lakiranje?“) i q178 (reaktivni ili epoksidni prajmer na aluminijumu) u questions.json."
+   },
    "brendovi": [
     "rm",
-    "baslac"
+    "baslac",
+    "carsystem",
+    "carfit"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "rm-pk-1a05-metalprep",
+    "rm-pk-2p50-pro-prep-r",
+    "p-2p63-multi-purpos-r-grey",
+    "carsystem-etch-primer",
+    "carfit-2k-washprimer-2-1"
+   ],
+   "povezani": [
+    "SV-0029",
+    "SV-0039",
+    "SV-0059",
+    "SV-0023",
+    "SV-0055"
+   ],
+   "izvori": [
+    {
+     "id": "stellantis-tsb-aluminijum",
+     "naziv": "FCA US (Stellantis), Collision Service Bulletin 31-001-23 Aluminum Body Panel Corrosion Repair, objavljen u bazi NHTSA — proizvođač vozila, uputstvo za određene modele",
+     "url": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10247995-9999.pdf",
+     "datumIzvora": "2023-02-03",
+     "pristupljeno": "2026-10-08",
+     "tip": "strucni-izvor"
+    },
+    {
+     "id": "baslac-cleaners-chart",
+     "naziv": "baslac, Technical Information Chart 2: Pre-treatment of substrates and old paintwork",
+     "url": "https://techinfo.baslac.com/en/Cleaners.pdf",
+     "dokument": "/documents/products/baslac/Cleaners.pdf",
+     "verzija": "05/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-undercoats-chart",
+     "naziv": "baslac, Technical Information Chart 1: Undercoats on metallic and plastic substrates",
+     "url": "https://techinfo.baslac.com/en/Plastic_metallic_repair.pdf",
+     "dokument": "/documents/products/baslac/Plastic_metallic_repair.pdf",
+     "verzija": "03/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-27-10-tds",
+     "naziv": "baslac, Technical Information 27-10 2K Washprimer",
+     "url": "https://techinfo.baslac.com/en/27-10.pdf",
+     "dokument": "/documents/products/baslac/27-10.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk1a05-tds",
+     "naziv": "R-M, Technical Information MetalPREP, PK 1A05 Solventborne cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%201A05-Solventborne%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk2p50-tds",
+     "naziv": "R-M, Technical Information PRO Prep-R, PK 2P50 Wipes",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P50-Wipes.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-p2p63-tds",
+     "naziv": "R-M, Technical Information MULTI Purpos-R Grey, P 2P63 eSense DTM, grey",
+     "dokument": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-wash-primer-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet 2K Wash Primer 2:1",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-washprimer-21-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-etch-primer-tds",
+     "naziv": "Carsystem, Technical Data Sheet Etch Primer",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-etch-primer-grundierung_v03.pdf",
+     "verzija": "v.03, 05/2022",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-1k-epoxy-tds",
+     "naziv": "Carsystem, Technical Data Sheet 1K Epoxy Primer",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-1k-epoxy-primer.pdf",
+     "verzija": "v.01, 03/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20604,7 +24223,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -20612,23 +24231,551 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "b988767121b4647323fe",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 632,
+   "otisak": "fca509ab6c52edbbc095",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Aluminijumski deo se priprema redom: odmašćivanje, matiranje ili brušenje alatom i abrazivom koji nisu korišćeni na čeliku, ponovno odmašćivanje i, gde je otkriven goli aluminijum, materijal koji tehnički list izričito navodi za aluminijum. Kod mnogih sistema to je reaktivni prajmer ili prajmer-punilac za direktno nanošenje na metal, a kod nekih proizvoda hemijska priprema maramicama. Granulaciju i prajmer određuje sistem u kome radite."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "zasto-se-za-aluminijum-koristi-poseban-alat",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto se za aluminijum koristi poseban alat"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Čelična prašina i sitni opiljci sa alata ili brusnog papira mogu da ostanu utisnuti u aluminijum. Proizvođač vozila FCA US (Stellantis) u servisnom biltenu za popravku korozije aluminijumskih panela traži da se brušenje i priprema rade čistim brusnim podlogama i u prostoriji odvojenoj od radova na čeliku, jer unakrsna kontaminacija dovodi do galvanske korozije"
+      },
+      {
+       "t": "cite",
+       "id": "stellantis-tsb-aluminijum"
+      },
+      {
+       "t": "text",
+       "v": ". Bilten važi za određene modele tog proizvođača, ali princip objašnjava zašto se za aluminijum drži poseban komplet abraziva i alata."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "U praksi to znači, kao urednička preporuka:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "posebni brusni diskovi, papiri i sunđeri, obeleženi samo za aluminijum;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "alat koji je korišćen na čeliku očisti se pre rada na aluminijumu;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "ako je moguće, aluminijum se ne obrađuje pored mesta gde se brusi ili seče čelik."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Za uputstvo konkretnog vozila važi uputstvo njegovog proizvođača za popravku."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak-korak-po-korak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak korak po korak"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pranje i prvo odmašćivanje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " R-M MetalPREP je, prema tehničkom listu, sredstvo za čišćenje golih metalnih površina, uključujući aluminijum"
+       },
+       {
+        "t": "cite",
+        "id": "rm-pk1a05-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Brušenje ili matiranje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " baslac u tabeli pripreme za goli čelik i aluminijum daje isti postupak: čišćenje odmašćivačem 70-10, brušenje P80/P150, ponovno čišćenje"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-cleaners-chart"
+       },
+       {
+        "t": "text",
+        "v": ". C.A.R.FIT za aluminijum pod 2K Wash Primer 2:1 navodi odmašćivanje, matiranje abrazivnom tkaninom i ponovno odmašćivanje"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-wash-primer-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Drugo odmašćivanje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " i sušenje. Posle toga se površina ne dodiruje golom rukom."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Prajmer"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " na goli aluminijum, što pre posle čišćenja."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Granulacije iz tabele baslac važe za baslac sistem. Za drugi sistem pročitajte tehnički list prajmera; opšte objašnjenje daje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/granulacije-brusnog-papira",
+       "c": [
+        {
+         "t": "text",
+         "v": "Granulacije brusnog papira"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kada-se-nanosi-prajmer-na-aluminijum",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada se nanosi prajmer na aluminijum"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada je otkriven goli aluminijum, a materijal koji sledi nije namenjen direktnom nanošenju na metal. Primeri iz našeg programa:"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Proizvod"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Šta tehnički list navodi za aluminijum"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "baslac 27-10 2K Washprimer"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "prajmer za prianjanje na aluminijumu i pocinkovanom limu; ne nanosi se direktno ispod vodenih materijala, na primer bazne boje 45"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-27-10-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "R-M P 2P63 MULTI Purpos-R"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "DTM prajmer-punilac; aluminijum među podlogama, uz čišćenje sredstvom MULTI Clean-R"
+        },
+        {
+         "t": "cite",
+         "id": "rm-p2p63-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Carsystem Etch Primer"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "prajmer za prianjanje na čeliku, cinku i aluminijumu; ne nanosi se poliesterski materijal preko njega; za vodenu boju prvo 1K ili 2K punilac"
+        },
+        {
+         "t": "cite",
+         "id": "carsystem-etch-primer-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Carsystem 1K Epoxy Primer"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "prianjanje i zaštita na aluminijumu i eloksiranom aluminijumu"
+        },
+        {
+         "t": "cite",
+         "id": "carsystem-1k-epoxy-tds"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac u tabeli podloga za punioce 20-24, 20-34, 20-94 i 20-35/95 navodi da se veća probrušena mesta i goli metal, uključujući aluminijum, prvo prajmerišu sa 27-10, dok se kit 12-20 i prajmer-punilac 25-30 mogu nanositi direktno"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-undercoats-chart"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "hemijska-priprema-maramicama",
+     "c": [
+      {
+       "t": "text",
+       "v": "Hemijska priprema maramicama"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "R-M PRO Prep-R su maramice za očišćen goli metal, uključujući aluminijum. Prema tehničkom listu, površina mora ostati vlažna najmanje 1 minut da bi se završila hemijska reakcija i stvorio pasivizirajući sloj, a preko njih se ne nanose direktno poliesterski kit, vodeni punilac, bazna boja ni boja sa direktnim sjajem"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p50-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Ovo važi za taj proizvod."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ceste-greske",
+     "c": [
+      {
+       "t": "text",
+       "v": "Česte greške"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Urednički izbor, a ne statistika učestalosti:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "isti brusni disk za čelik i za aluminijum;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "predugo čekanje između čišćenja i prajmera;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "poliesterski kit ili materijal koji ne podnosi reaktivni prajmer, nanet preko njega suprotno tehničkom listu;"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "prajmer koji tehnički list ne navodi za aluminijum."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "moze-li-kit-direktno-na-aluminijum",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može li kit direktno na aluminijum?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zavisi od kita. baslac 12-20 je, prema tabeli, pogodan i za aluminijum"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-undercoats-chart"
+      },
+      {
+       "t": "text",
+       "v": ". Za druge kitove proverite listu podloga; više u vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/kit-na-goli-lim-ili-preko-prajmera",
+       "c": [
+        {
+         "t": "text",
+         "v": "Kit na goli lim ili preko prajmera"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "reaktivni-ili-epoksidni-prajmer-na-aluminijumu",
+     "c": [
+      {
+       "t": "text",
+       "v": "Reaktivni ili epoksidni prajmer na aluminijumu?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Oba tipa postoje u programima za aluminijum. Izbor zavisi od sistema i od toga šta ide preko prajmera; vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/izbor-prajmera-po-podlozi",
+       "c": [
+        {
+         "t": "text",
+         "v": "Izbor prajmera prema podlozi"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "vazi-li-isto-za-pocinkovani-lim",
+     "c": [
+      {
+       "t": "text",
+       "v": "Važi li isto za pocinkovani lim?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak je sličan, ali ima svoja pravila: vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/pocinkovani-lim-priprema",
+       "c": [
+        {
+         "t": "text",
+         "v": "Pocinkovani lim: priprema i izbor podloge"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0039",
    "slug": "pocinkovani-lim-priprema",
    "naslov": "Pocinkovani lim: priprema i izbor podloge",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Pocinkovani lim: priprema, prajmer i kit",
+   "opis": "Kako se priprema pocinkovani lim pre lakiranja, koji prajmeri i kitovi ga u tehničkim listovima navode kao podlogu i zašto se cinkani sloj ne brusi bez potrebe.",
    "kategorija": "priprema-povrsine",
    "podtema": "pocinkovani lim",
    "tip": "postupak",
@@ -20641,14 +24788,121 @@
     "Sme li kit direktno na pocinkovani lim?",
     "Kako se prepoznaje pocinkovani lim?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Urednički predlozi q141 („Kako lakirati pocinkovani lim?“) i q169 („Može li kit da se nanese na pocinkovani lim?“) u questions.json; srodno pitanje o cink prajmeru na zavarenom limu pronađeno je na forumu (q032)."
+   },
    "brendovi": [
     "rm",
-    "baslac"
+    "baslac",
+    "carsystem",
+    "carfit"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "p-2p63-multi-purpos-r-grey",
+    "rm-pk-2p50-pro-prep-r",
+    "carsystem-git-multi-green",
+    "carsystem-etch-primer",
+    "carfit-2k-washprimer-2-1"
+   ],
+   "povezani": [
+    "SV-0029",
+    "SV-0038",
+    "SV-0055",
+    "SV-0059",
+    "SV-0046"
+   ],
+   "izvori": [
+    {
+     "id": "baslac-undercoats-chart",
+     "naziv": "baslac, Technical Information Chart 1: Undercoats on metallic and plastic substrates",
+     "url": "https://techinfo.baslac.com/en/Plastic_metallic_repair.pdf",
+     "dokument": "/documents/products/baslac/Plastic_metallic_repair.pdf",
+     "verzija": "03/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "baslac-27-10-tds",
+     "naziv": "baslac, Technical Information 27-10 2K Washprimer",
+     "url": "https://techinfo.baslac.com/en/27-10.pdf",
+     "dokument": "/documents/products/baslac/27-10.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-12-20-tds",
+     "naziv": "baslac, Technical Information 12-20 Bodyfiller Universal",
+     "url": "https://techinfo.baslac.com/en/12-20.pdf",
+     "dokument": "/documents/products/baslac/12-20.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-p2p63-tds",
+     "naziv": "R-M, Technical Information MULTI Purpos-R Grey, P 2P63 eSense DTM, grey",
+     "dokument": "/documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk2p50-tds",
+     "naziv": "R-M, Technical Information PRO Prep-R, PK 2P50 Wipes",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P50-Wipes.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-p5480-tds",
+     "naziv": "R-M, Technical Information GHD UNIVERSAL EPOXY, P 5480",
+     "dokument": "/documents/products/rm/p-5480-ghd-universal-epoxy/rm-p-5480-ghd-universal-epoxy-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-wash-primer-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet 2K Wash Primer 2:1",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-washprimer-21-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-2k-epoxy-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet 2K Epoxy Primer 1:1",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-epoxy-primer-11-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-etch-primer-tds",
+     "naziv": "Carsystem, Technical Data Sheet Etch Primer",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-etch-primer-grundierung_v03.pdf",
+     "verzija": "v.03, 05/2022",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-multi-green-tds",
+     "naziv": "Carsystem, Technical Data Sheet Multi Green, Polyester multifunctional putty V08",
+     "dokument": "/documents/products/carsystem/carsystem-git-multi-green-tds.pdf",
+     "verzija": "V08, 11/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-elastic-weiss-tds",
+     "naziv": "Carsystem, Technical Data Sheet Elastic weiss, polyester fine putty white",
+     "dokument": "/documents/products/carsystem/carsystem-git-elastic-weiss-tds.pdf",
+     "verzija": "v.04, 03/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20658,7 +24912,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -20666,23 +24920,507 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "f217db0bfc946a86ef83",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 578,
+   "otisak": "c0facc43aa1f45e095b1",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pocinkovani lim se odmasti, blago matira tako da cinkani sloj ostane sačuvan, ponovo odmasti i zatim temelji materijalom koji u tehničkom listu izričito navodi pocinkovani lim kao podlogu. Kod mnogih sistema to su reaktivni prajmeri (wash primer) i prajmeri ili prajmer-punioci za direktno nanošenje na metal; neki kitovi se mogu nanositi direktno, a neki ne. Da li proizvod sme na cink, ne pretpostavlja se: piše u listi podloga."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "zasto-pocinkovani-lim-trazi-posebnu-paznju",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto pocinkovani lim traži posebnu pažnju"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Cinkani sloj štiti čelik od korozije. Materijal koji nije napravljen za cink može na njemu slabije da prione, pa proizvođači pocinkovani lim navode kao posebnu podlogu. baslac u tabeli podloga, na primer, razdvaja čelični lim, pocinkovani lim, aluminijum, fabrički KTL sloj i stari lak"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-undercoats-chart"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zato je cilj pripreme da se površina očisti i matira, a ne da se cinkani sloj izbrusi do čelika. Mesto na kome se probije do čelika ponaša se kao goli čelik."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak-korak-po-korak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak korak po korak"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odmašćivanje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Sredstvom koje je navedeno za metal."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Matiranje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " C.A.R.FIT za pocinkovani lim pod 2K Wash Primer 2:1 navodi odmašćivanje, matiranje abrazivnom tkaninom i ponovno odmašćivanje"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-wash-primer-tds"
+       },
+       {
+        "t": "text",
+        "v": ". Za 2K Epoxy Primer 1:1 isti proizvođač za pocinkovani lim navodi odmašćivanje, brušenje i ponovno odmašćivanje"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-2k-epoxy-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Drugo odmašćivanje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " i sušenje."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Prajmer"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " koji navodi pocinkovani lim, ili hemijska priprema ako je sistem predviđa."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "koji-prajmeri-navode-pocinkovani-lim",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koji prajmeri navode pocinkovani lim"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Proizvod"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Šta tehnički list navodi"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "baslac 27-10 2K Washprimer"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "prajmer za prianjanje na aluminijumu i pocinkovanom limu; ne nanosi se direktno ispod vodenih materijala"
+        },
+        {
+         "t": "cite",
+         "id": "baslac-27-10-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "R-M P 2P63 MULTI Purpos-R"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "DTM prajmer-punilac; pocinkovani lim među podlogama"
+        },
+        {
+         "t": "cite",
+         "id": "rm-p2p63-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "Carsystem Etch Primer"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "prajmer za prianjanje na čeliku, cinku i aluminijumu; preko njega se ne nanose poliesterski proizvodi"
+        },
+        {
+         "t": "cite",
+         "id": "carsystem-etch-primer-tds"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "C.A.R.FIT 2K Wash Primer 2:1"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "čelik, aluminijum i pocinkovani čelik; preko njega se ne nanose direktno poliesterski kit ni akrilne završne boje"
+        },
+        {
+         "t": "cite",
+         "id": "carfit-wash-primer-tds"
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac u tabeli podloga navodi da se pre punilaca 20-24, 20-34, 20-94 i 20-35/95 veća probrušena mesta i goli metal prajmerišu reaktivnim prajmerom 27-10, dok se prajmer-punilac 25-30 nanosi direktno"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-undercoats-chart"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "R-M PRO Prep-R maramice su, prema tehničkom listu, za očišćen goli metal, uključujući pocinkovani lim, i preko njih se ne nanose direktno poliesterski kit ni vodeni punilac"
+      },
+      {
+       "t": "cite",
+       "id": "rm-pk2p50-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Kako se one koriste, opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-golog-lima",
+       "c": [
+        {
+         "t": "text",
+         "v": "Priprema golog čeličnog lima"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sme-li-kit-direktno-na-pocinkovani-lim",
+     "c": [
+      {
+       "t": "text",
+       "v": "Sme li kit direktno na pocinkovani lim?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zavisi od kita, a tehnički listovi to jasno razlikuju:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "baslac 12-20 Bodyfiller Universal je, prema tehničkom listu, univerzalni kit za čelik, pocinkovani čelik i aluminijum"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-12-20-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Carsystem Multi Green u tabeli prianjanja ima označen pocinkovani lim"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-multi-green-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Carsystem Elastic weiss je, prema tehničkom listu, samo za čelik i nije za cink i aluminijum"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-elastic-weiss-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kit se ne nanosi preko reaktivnog prajmera kada to tehnički list prajmera zabranjuje, kao kod Carsystem Etch Primer i C.A.R.FIT 2K Wash Primer 2:1"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-etch-primer-tds"
+      },
+      {
+       "t": "cite",
+       "id": "carfit-wash-primer-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Redosled kita i prajmera objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/kit-na-goli-lim-ili-preko-prajmera",
+       "c": [
+        {
+         "t": "text",
+         "v": "Kit na goli lim ili preko prajmera"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-se-prepoznaje-pocinkovani-lim",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako se prepoznaje pocinkovani lim"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pouzdan postupak prepoznavanja nismo pronašli u dokumentima proizvođača iz našeg programa, pa ga ovde ne opisujemo. Podatak o materijalu dela daje proizvođač vozila u uputstvu za popravku. Ako podatak nemate, sigurnije je izabrati materijal koji pocinkovani lim navodi kao podlogu; ovo je urednička procena."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-ako-je-lim-vruce-pocinkovan",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta ako je lim vruće pocinkovan?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Neki tehnički listovi to izdvajaju. R-M za epoksidni prajmer P 5480, iz programa za komercijalna vozila, navodi da se prianjanje na vruće pocinkovanom čeliku prethodno proverava"
+      },
+      {
+       "t": "cite",
+       "id": "rm-p5480-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Na takvoj podlozi uradite probu prianjanja pre rada na celom delu."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-cink-sprej-zamenjuje-pocinkovani-sloj",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li cink sprej zamenjuje pocinkovani sloj?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Cink sprej je zaštita za mesta gde je zaštita uništena, na primer posle varenja. O tome piše vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/zastita-lima-posle-varenja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Zaštita lima i šavova posle varenja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0040",
    "slug": "uklanjanje-smole-i-katrana",
    "naslov": "Uklanjanje smole, katrana i insekata pre pripreme",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Uklanjanje smole, katrana i insekata sa laka",
+   "opis": "Kako se sa laka uklanjaju katran, smola drveća i ostaci insekata pre brušenja ili poliranja: pranje, odmašćivač, glina za lak i šta ne treba koristiti.",
    "kategorija": "priprema-povrsine",
    "podtema": "čišćenje kontaminacije",
    "tip": "postupak",
@@ -20696,13 +25434,73 @@
     "Može li glina za lak da pomogne?",
     "Šta ne treba koristiti?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Pitanje kako ukloniti smolu i katran sa laka pre pripreme postavlja se u FAQ prodavca koji nije naš brend (q130; samo dokaz pitanja), a pitanje o glini pre poliranja u istom izvoru (q127).",
+    "izvori": [
+     "https://www.nonpaints.com/en/faq"
+    ]
+   },
    "brendovi": [
-    "carsystem"
+    "carsystem",
+    "carfit",
+    "rm",
+    "cosmos-lac"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "carsystem-finish-clay",
+    "carsystem-silicone-remover-mild",
+    "carfit-silicone-remover-strawberry",
+    "rm-pk-1p10-silicone-remov-r"
+   ],
+   "povezani": [
+    "SV-0023",
+    "SV-0025",
+    "SV-0184",
+    "SV-0026",
+    "SV-0173"
+   ],
+   "izvori": [
+    {
+     "id": "carsystem-finish-clay",
+     "naziv": "Carsystem, Finish Clay – Cleaning clay (stranica proizvoda)",
+     "url": "https://www.carsystem.org/en/products/detail/cleaning/finish-clay-cleaning-clay",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "carsystem-silicone-remover-mild-tds",
+     "naziv": "Carsystem, Technical Data Sheet Silicone Remover Mild, degreaser – mild",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-mild.pdf",
+     "verzija": "v.01, 05/2021",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-silicone-remover-strawberry-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet Silicone Remover „Strawberry“",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-silicone-remover-strawberry-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "rm-pk1p10-tds",
+     "naziv": "R-M, Technical Information SILICONE Remov-R, PK 1P10 eSense solventborne cleaning agent",
+     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%201P10-eSense%20solventborne%20cleaning%20agent.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "cosmos-glue-remover-tds",
+     "naziv": "Cosmos Lac, TDS Sticker and Glue Remover",
+     "url": "https://cosmoslac.com/pdfs/products/en/sticker-glue-remover.pdf",
+     "verzija": "02, 18. 6. 2026",
+     "datumIzvora": "2026-06-18",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -20712,7 +25510,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -20720,16 +25518,455 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "b63b0379f874b20a3cb3",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 603,
+   "otisak": "699f6ad5664b50eafc6c",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Katran, smola drveća i ostaci insekata uklanjaju se pre brušenja i pre poliranja, posle pranja: prvo se deo opere, zatim se katran i lepljivi ostaci rastvore odmašćivačem koji ih u tehničkom listu navodi, a ono što ostane na laku skida se glinom za lak. Ne struže se i ne trlja suvom krpom, jer se tako lak ogrebe. Ako se uklanjanje preskoči, brusni papir ili sunđer za poliranje razmažu nečistoću po većoj površini."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "zasto-se-ovo-radi-pre-brusenja-i-poliranja",
+     "c": [
+      {
+       "t": "text",
+       "v": "Zašto se ovo radi pre brušenja i poliranja"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Katran i smola su lepljivi i delimično rastvorljivi. Kada preko njih pređe brusni papir ili sunđer za poliranje, nečistoća se razmaže i utisne u tragove brušenja, pa se kasnije teže uklanja. Zato je ovo deo prvog čišćenja, pre nego što abraziv dođe na površinu. Ceo redosled pripreme opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/priprema-povrsine-pre-lakiranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Priprema površine pre lakiranja: redosled koraka"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak-korak-po-korak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak korak po korak"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pranje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Deo se opere vodom i sredstvom za pranje, ispere i osuši. Tako se uklanjaju pesak i prašina koji bi pri brisanju izgrebali lak."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Katran i lepljivi ostaci."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Nanosi se odmašćivač čiji tehnički list navodi uklanjanje katrana. Primeri iz našeg programa: - Carsystem Silicone Remover Mild uklanja prljavštinu, masnoću, ulje, silikon, vosak, katran i ostatke lepka"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-silicone-remover-mild-tds"
+       },
+       {
+        "t": "text",
+        "v": "; - C.A.R.FIT Silicone Remover „Strawberry“ je rastvarački odmašćivač za početno čišćenje od katrana, silikona, ulja i masnoće"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-silicone-remover-strawberry-tds"
+       },
+       {
+        "t": "text",
+        "v": "; - R-M SILICONE Remov-R je rastvarački odmašćivač za prvi korak čišćenja, za uklanjanje katrana, masnoće i silikona"
+       },
+       {
+        "t": "cite",
+        "id": "rm-pk1p10-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Brisanje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Sredstvo se ne ostavlja da se osuši: Carsystem traži da se površina čisti u malim delovima i odmah briše drugom čistom krpom"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-silicone-remover-mild-tds"
+       },
+       {
+        "t": "text",
+        "v": ". Tvrdokorna mesta se ponavljaju, umesto da se jače trljaju."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Glina za lak"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " za ono što je ostalo, na primer sitne tačke smole, insekte i preprašenu boju."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odmašćivanje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " pre brušenja ili poliranja, prema vodiču "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/odmascivanje-pre-lakiranja",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odmašćivanje pre lakiranja"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "moze-li-glina-za-lak-da-pomogne",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može li glina za lak da pomogne?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može, za ono što ostane na površini posle pranja i rastvarača. Carsystem za Finish Clay navodi da bez ostataka i ogrebotina uklanja preprašenu boju, površinsku rđu (flash rust), insekte i smolu drveća sa lakiranih površina, bez agresivnih sredstava za čišćenje"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-finish-clay"
+      },
+      {
+       "t": "text",
+       "v": ". Stranica proizvoda ne opisuje postupak rada ni sredstvo za podmazivanje, pa sledite uputstvo sa pakovanja."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Glina ne zamenjuje pranje: ako se njome pređe preko peska, pesak može da izgrebe lak. Kada je glina korisna i pred poliranje, opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/glina-za-lak-pre-poliranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Glina za lak pre poliranja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "insekti",
+     "c": [
+      {
+       "t": "text",
+       "v": "Insekti"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ostaci insekata se prvo omekšaju pranjem, a ono što ostane uklanja se glinom za lak, za šta Carsystem Finish Clay ima navedenu namenu"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-finish-clay"
+      },
+      {
+       "t": "text",
+       "v": ". Kod starih, zapečenih ostataka na laku može ostati trag i posle čišćenja. Da li se on uklanja poliranjem, procenjuje se posle čišćenja, prema vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/poliranje-posle-lakiranja-osnove",
+       "c": [
+        {
+         "t": "text",
+         "v": "Poliranje posle lakiranja: kada i kako"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-ne-treba-koristiti",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta ne treba koristiti"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Strugalicu, nož ili žičanu četku"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " na laku. Lak se ogrebe, a ogrebotina ostaje i posle lakiranja ako se ne izbrusi."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Jake rastvarače bez provere podloge."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " C.A.R.FIT upozorava da se njegov Silicone Remover „Strawberry“ ne koristi na podlogama osetljivim na rastvarače, na primer na termoplastičnim slojevima"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-silicone-remover-strawberry-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Sredstva za skidanje nalepnica i lepka na laku bez probe."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Cosmos Lac za Sticker and Glue Remover u tehničkom listu navodi da može da ošteti lakirane i plastične površine"
+       },
+       {
+        "t": "cite",
+        "id": "cosmos-glue-remover-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Kućna sredstva umesto odmašćivača."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Zašto, objašnjava tekst "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/kucna-sredstva-umesto-odmascivaca",
+        "c": [
+         {
+          "t": "text",
+          "v": "Mogu li kućna sredstva da zamene odmašćivač"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-se-smola-uklanja-isto-kao-katran",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li se smola uklanja isto kao katran?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prvo probajte odmašćivačem koji navodi lepljive ostatke, a sitne, stvrdnute tačke uklonite glinom za lak. Za smolu drveća Carsystem navodi Finish Clay"
+      },
+      {
+       "t": "cite",
+       "id": "carsystem-finish-clay"
+      },
+      {
+       "t": "text",
+       "v": ". Ako se ni posle toga ne skine, ne grebite je: pitajte stručnu radionicu."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "treba-li-ovo-raditi-i-ako-se-deo-ionako-brusi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Treba li ovo raditi i ako se deo ionako brusi?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da. Brušenje ne uklanja katran i smolu čisto, nego ih razmazuje. Zato se kontaminacija uklanja pre brušenja, a odmašćuje se i pre i posle brušenja."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0041",
@@ -21381,8 +26618,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -22119,8 +27356,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -22133,8 +27370,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 636,
-   "otisak": "b2520d506a09971271e2",
+   "reci": 642,
+   "otisak": "2d3900938b7e7d09ad3c",
    "blocks": [
     {
      "t": "p",
@@ -22256,7 +27493,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Za C.A.R.FIT Glas Plus proizvođač veliku mehaničku čvrstoću pripisuje ojačanju staklenim vlaknima"
+       "v": "Za C.A.R.FIT Glas Plus proizvođač veliku mehaničku čvrstoću pripisuje ojačanju staklenim vlaknima i navodi namenu za pukotine, male rupe i mesta oštećena korozijom"
       },
       {
        "t": "cite",
@@ -22277,14 +27514,6 @@
       {
        "t": "cite",
        "id": "rm-flexbody-tds"
-      },
-      {
-       "t": "text",
-       "v": ". Glas Plus je opisan kao kit za pukotine, male rupe i mesta oštećena korozijom"
-      },
-      {
-       "t": "cite",
-       "id": "carfit-glas-plus-tds"
       },
       {
        "t": "text",
@@ -22386,7 +27615,7 @@
       },
       {
        "t": "text",
-       "v": ". Kit za prskanje se nanosi pištoljem preko većih površina; za Spray Plus tabela u tehničkom listu navodi diznu veličine 2,5 i vreme upotrebljivosti od 25–30 min na 20 °C"
+       "v": ". Kit za prskanje se nanosi pištoljem. Za Spray Plus Carsystem navodi popunjavanje dubljih nepravilnosti, ulegnuća i ogrebotina u vrlo debelom sloju, a tabela u tehničkom listu diznu veličine 2,5 i vreme upotrebljivosti od 25–30 min na 20 °C"
       },
       {
        "t": "cite",
@@ -22754,15 +27983,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 562,
-   "otisak": "67abd1edc6a1922a8200",
+   "reci": 566,
+   "otisak": "c06063c1b0cae4a0e4e1",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "U poliesterske kitove iz našeg programa dodaje se mala količina učvršćivača u pasti, merena po težini: za većinu je to 2–3 %, za C.A.R.FIT Multi Putty 2 %, a za Carsystem Liquid Putty 3 %"
+       "v": "U poliesterske kitove iz našeg programa dodaje se mala količina učvršćivača u pasti, merena po težini: za većinu kitova iz tabele ispod to je 2–3 %, za C.A.R.FIT Multi Putty 2 %, a za Carsystem Liquid Putty 3 %"
       },
       {
        "t": "cite",
@@ -23359,11 +28588,11 @@
     {
      "t": "h",
      "level": 3,
-     "id": "koliko-vremena-ima-za-rad",
+     "id": "koliko-vremena-imate-za-rad",
      "c": [
       {
        "t": "text",
-       "v": "Koliko vremena ima za rad?"
+       "v": "Koliko vremena imate za rad?"
       }
      ]
     },
@@ -23506,15 +28735,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 581,
-   "otisak": "0f34b748dbeeb779b3c7",
+   "reci": 582,
+   "otisak": "e76dfc2bfb74d5394494",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Ravna površina se dobija kada se kit nanese na čistu, izbrušenu podlogu u tankim slojevima uz čvrst pritisak lopatice, malo iznad nivoa okolne površine, a zatim izbrusi blokom uz kontrolni prah. Zato ravnina zavisi i od nanošenja i od brušenja. Brusi se tek posle vremena sušenja iz tehničkog lista, koje kod kitova iz našeg programa iznosi od 15 do 30 minuta na 20 °C"
+       "v": "Ravna površina se dobija kada se kit nanese na čistu, izbrušenu podlogu u tankim slojevima uz čvrst pritisak lopatice, malo iznad nivoa okolne površine, a zatim izbrusi blokom uz kontrolni prah. Zato ravnina zavisi i od nanošenja i od brušenja. Brusi se tek posle vremena sušenja iz tehničkog lista, koje kod kitova iz našeg programa iznosi od 15 do oko 30 minuta na 20 °C"
       },
       {
        "t": "cite",
@@ -23523,6 +28752,10 @@
       {
        "t": "cite",
        "id": "rm-performbody-tds"
+      },
+      {
+       "t": "cite",
+       "id": "cs-liquid-putty-tds"
       },
       {
        "t": "text",
@@ -24262,8 +29495,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 549,
-   "otisak": "a8262d2b7bf142f6ca7a",
+   "reci": 547,
+   "otisak": "8c1c54d69848832d7d7b",
    "blocks": [
     {
      "t": "p",
@@ -24321,7 +29554,7 @@
        [
         {
          "t": "text",
-         "v": "čelik, aluminijum, pocinkovani lim, stakloplastika, 2K slojevi, poliesterski kit i drvo; ne plastika"
+         "v": "čelik, aluminijum, pocinkovani lim, stakloplastika, 2K poliesterski kit i drvo; ne plastika"
         }
        ]
       ],
@@ -24749,7 +29982,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Obično u odeljku o rukovanju ili u tabeli prianjanja: na koje materijale kit sme, na koje ne sme i kako podloga mora biti pripremljena. Kod nekih Carsystem kitova, na primer Multi Green, tabela pokazuje čelik, aluminijum, pocinkovani lim, stakloplastiku, plastiku, 2K slojeve, poliesterski kit i drvo, svaki sa oznakom da ili ne"
+       "v": "Obično u odeljku o rukovanju ili u tabeli prianjanja: na koje materijale kit sme, na koje ne sme i kako podloga mora biti pripremljena. Kod nekih Carsystem kitova, na primer Multi Green, tabela pokazuje čelik, aluminijum, pocinkovani lim, stakloplastiku, plastiku, 2K poliesterski kit i drvo, svaki sa oznakom da ili ne"
       },
       {
        "t": "cite",
@@ -24814,7 +30047,7 @@
      "id": "cs-elastic-weiss-tds",
      "naziv": "Carsystem, Elastic weiss, polyester fine putty white",
      "dokument": "/documents/products/carsystem/carsystem-git-elastic-weiss-tds.pdf",
-     "verzija": "v.04, 03/2021",
+     "verzija": "v.04, 08-06-2010 (stranice 03/2021)",
      "pristupljeno": "2026-10-08",
      "tip": "tehnicki-list"
     },
@@ -24882,8 +30115,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 598,
-   "otisak": "058a62a61725c2247527",
+   "reci": 606,
+   "otisak": "d660adba1e33409fd652",
    "blocks": [
     {
      "t": "p",
@@ -25200,7 +30433,7 @@
        [
         {
          "t": "text",
-         "v": "služi za popunjavanje pora u zoni kita za punjenje i osnovnog kita"
+         "v": "služi za popunjavanje pora u zoni kita za punjenje i osnovnog kita; samo na čeliku, ne na cinku i aluminijumu"
         },
         {
          "t": "cite",
@@ -26156,8 +31389,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,

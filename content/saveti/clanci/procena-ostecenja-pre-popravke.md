@@ -46,8 +46,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SATA „Paint layer thickness“ (20. 8. 2025, prema DeKoLaKa listu 010, 03/2025) i R-M P 2P63 07/2026; ispravljeno: SATA tvrdnja suzena prema izvoru (izvor govori o oceni kvaliteta popravke, ne o otkrivanju ranije popravke; dodat citat za razaranje uzorka), uklonjena necitirana tvrdnja da radar ograničava broj slojeva, rđa formulisana kao mogući znak. Stručna potvrda opravdana: spisak provera pre popravke i znaci ranije popravke i dalje su urednička procena bez izvora proizvođača."
 strucnaPotvrda:
   potrebna: true
   razlog: "Spisak provera (vizuelni pregled, deformacija, rđa, znaci ranije popravke) je urednička procena opšte prakse; za njega nije pronađen izvor proizvođača iz našeg programa. Izvorom je pokriven samo deo o merenju debljine laka (SATA) i obaveza poštovanja uputstava proizvođača vozila (R-M)."
@@ -64,9 +65,9 @@ Spisak ispod je urednički pregled provera koje se rade pre izbora postupka. Ne 
 1. **Materijal dela.** Čelični lim, pocinkovani lim, aluminijum i plastika pripremaju se različito. Magnet se ne lepi za aluminijum i plastiku, što je brz prvi znak. Vrsta plastike se proverava posebno, prema vodiču [Kako prepoznati vrstu plastike na braniku](/vodici/vrsta-plastike-na-braniku).
 2. **Dubina oštećenja.** Ogrebotina koja je ostala u bezbojnom laku rešava se drugačije od one koja je prošla do baze, prajmera ili metala. Pod kosim svetlom vidi se da li je u dnu ogrebotine boja, siva podloga ili goli metal.
 3. **Deformacija.** Udubljenje se proverava dlanom i pod svetlom. Deformisan lim prvo ispravlja limar, a tek posle toga se određuje koliko kita treba.
-4. **Rđa.** Mehurići ispod laka i smeđi tragovi na ivicama znače da korozija ide ispod površine. Vidi [Mehuri rđe ispod laka](/vodici/mehuri-rdje-ispod-laka).
+4. **Rđa.** Mehurići ispod laka i smeđi tragovi na ivicama mogu da ukažu na koroziju ispod površine. Vidi [Mehuri rđe ispod laka](/vodici/mehuri-rdje-ispod-laka).
 5. **Stanje starog laka.** Ljuštenje, sitne pukotine i kredanje traže drugačiju pripremu nego zdrav lak. Da li stara podloga podnosi nov sloj, proverava se testom opisanim u tekstu [Test starog laka razređivačem](/vodici/test-starog-laka-razredjivacem).
-6. **Senzori i uputstva proizvođača vozila.** R-M u tehničkim listovima napominje da se, pored uputstava za proizvod, uvek moraju poštovati i uputstva proizvođača vozila za popravku, posebno kada su ugrađeni senzori[^rm-p2p63-tds]. Za branik iza kog je radar to može da ograniči broj slojeva i izbor materijala.
+6. **Senzori i uputstva proizvođača vozila.** R-M u tehničkim listovima napominje da se, pored uputstava za proizvod, uvek moraju poštovati i uputstva proizvođača vozila za popravku, posebno kada su ugrađeni senzori[^rm-p2p63-tds]. Kod branika iza kog je radar zato treba proveriti da li uputstvo proizvođača vozila postavlja posebna ograničenja za popravku.
 
 Na osnovu ovih provera bira se postupak. Kako se odlučuje između lokalne popravke i lakiranja celog dela, objašnjava vodič [Lokalna popravka ili lakiranje celog dela](/vodici/lokalna-popravka-ili-ceo-deo).
 
@@ -79,7 +80,7 @@ Pouzdanog jednostavnog testa nema. Na raniju popravku mogu da ukažu znaci koji 
 - ivica trake za maskiranje na prelazu između delova;
 - talasasta površina ili tragovi brušenja koji se vide kroz lak.
 
-SATA, u stručnom tekstu zasnovanom na informativnom listu nemačke komisije za popravke laka i karoserije, navodi da se nedestruktivnim merenjem debljine laka ne može pouzdano utvrditi da li je deo ranije popravljan, niti oceniti kvalitet popravke koja nema vidljivih ili funkcionalnih nedostataka[^sata-debljina-sloja]. Stvarni sastav slojeva može se utvrditi samo razaranjem, na primer brušenjem uzorka.
+SATA, u stručnom tekstu zasnovanom na informativnom listu nemačke komisije za popravke laka i karoserije (DeKoLaKa), navodi da se na osnovu nedestruktivnog merenja debljine laka ne mogu doneti precizni i konačni zaključci o kvalitetu popravke. Isti tekst navodi i da debljina na novim vozilima može biti znatno veća od uobičajene zbog dorade pre isporuke, pa velika debljina sama po sebi ne dokazuje raniju popravku. Za pouzdanu ocenu mora da se zna stvarni sastav slojeva, a takva analiza po pravilu nije nedestruktivna: radi se brušenjem popravljenog mesta[^sata-debljina-sloja].
 
 ## Merenje debljine postojećeg laka
 

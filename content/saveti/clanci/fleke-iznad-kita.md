@@ -75,8 +75,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena baslac stranica Bleeding (uzroci, prevencija, popravka), tehnički listovi 12-20 06/2023 (baslac), Multi V06, Multi Light V07, Multi Green V08 (Carsystem) i C.A.R.FIT Glas Plus; svi navodi o višku peroksida/učvršćivača, žuto-smeđoj mrlji, plavim i zelenim bojama i popravci se poklapaju; uzroci su predstavljeni kao mogući; ispravke nisu bile potrebne."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -73,8 +73,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Staub Stop v.02 05/2021, Super Wave V01 10/2023, Water V03 01/2025, Water Black V02 11/2021, C.A.R.FIT stranica Staubbindetuch i Contec „Proper Tack-Off Procedures“ (6. 7. 2023); impregnacije, procenti, trajnost i 5–45 °C odgovaraju izvorima. Contec je jasno pripisan kao proizvođač van programa i služi samo kao opšta pozadina, bez preporuke proizvoda. Ispravljeno: Contec tvrdnja o prenosu lepljivog ostatka uklonjena (izvor to ne navodi; ostavljeno kao opšte objašnjenje), tehnika brisanja usklađena sa Contec tekstom (odozgo nadole, preklapanje oko 20 %), „proizvođači ističu“ suženo na Staub Stop Water Black."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -95,7 +96,7 @@ Krpa nije zamena za odmašćivač. Ulje i masnoću ne uklanja. Contec, proizvođ
 
 1. Krpa se izvadi iz pakovanja neposredno pre upotrebe i razmota.
 2. Složi se u jastučić koji odgovara dlanu, tako da se kasnije može okrenuti na čistu stranu.
-3. Površina se prelazi laganim, ravnomernim potezima u jednom smeru, sa malim preklapanjem, odozgo nadole. Ovaj redosled opisuje i Contec[^contec-tack-off].
+3. Površina se prelazi laganim, ravnomernim potezima odozgo nadole, tako da se potezi delimično preklapaju. Contec opisuje rad odozgo nadole i preklapanje poteza od oko 20 %[^contec-tack-off].
 4. Kada se strana zaprlja, krpa se preklopi na čistu stranu.
 5. Posle upotrebe krpa se vraća u pakovanje ili odbacuje, prema uputstvu proizvođača.
 
@@ -116,11 +117,11 @@ Kada radite sa vodenom baznom bojom, birajte krpu koju proizvođač navodi za vo
 
 ## Zašto se ne pritiska jako
 
-Krpa je impregnirana smolom da bi zadržala prašinu. Kada se jako pritisne, smola se može preneti na površinu. Taj tanak lepljiv sloj se ne vidi uvek golim okom, ali može da utiče na razlivanje sledećeg sloja. Contec navodi upravo prenos lepljivog ostatka kao posledicu jakog pritiska[^contec-tack-off].
+Contec jak pritisak navodi kao čestu grešku i kaže da je dovoljna težina ruke[^contec-tack-off]. Opšte objašnjenje je da je krpa impregnirana smolom da bi zadržala prašinu, pa se pri jakom pritisku deo smole može preneti na površinu. Takav tanak lepljiv trag ne vidi se uvek golim okom, ali može da utiče na razlivanje sledećeg sloja.
 
 ## Može li krpa da ostavi trag na površini
 
-Može, ako se jako pritiska, ako se koristi na vlažnoj površini ili ako nije namenjena materijalu koji se nanosi. Proizvođači zato ističu da impregnacija ne ostavlja ostatke kada se krpa pravilno koristi: Carsystem za Staub Stop Water Black navodi da ne ostavlja lepljive ostatke na očišćenoj površini[^carsystem-staub-stop-water-black-tds]. Ako posle brisanja površina deluje lepljivo, obrišite je ponovo odmašćivačem, sačekajte da ispari i pređite je novom krpom, lakše.
+Moguće je, na primer ako se krpa jako pritiska, ako se koristi na vlažnoj površini ili ako nije namenjena materijalu koji se nanosi. Za pojedine proizvode proizvođač navodi da ne ostavljaju ostatke: Carsystem za Staub Stop Water Black navodi da ne ostavlja lepljive ostatke na očišćenoj površini[^carsystem-staub-stop-water-black-tds]. Ako posle brisanja površina deluje lepljivo, možete je ponovo odmastiti, sačekati da odmašćivač ispari i preći je novom krpom, lakše.
 
 Ako se trunje ipak pojavi u laku, mogući izvori nisu samo površina. O tome piše vodič [Prašina i trunje u laku](/vodici/prasina-i-trunje-u-laku).
 

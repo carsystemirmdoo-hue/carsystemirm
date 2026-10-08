@@ -92,15 +92,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Chart 2 (05/2024) i 27-10 (06/2023), Carsystem 2K Epoxy Fill Primer V03 03/2024 i 1K Epoxy Primer v.01 03/2021, C.A.R.FIT 2K Epoxy Primer 1:1, R-M PK 2P50, P 2P63 i P 2P51 (07/2026); granulacije, 1 min, 8 h na 20 °C i ograničenja preslojavanja odgovaraju izvorima. Ispravljeno: jedna rečenica u uvodu precizirana (granulaciju određuje tehnički list prajmera ili sistema)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Goli čelični lim se priprema redom: uklanjanje rđe, odmašćivanje, brušenje, ponovno odmašćivanje i što skorije nanošenje prajmera koji je namenjen golom metalu. Granulaciju brušenja ne određuje lim, nego prajmer koji ide preko njega, i ona se razlikuje od proizvođača do proizvođača. Opšte pravilo je da goli lim ne stoji nezaštićen duže nego što je neophodno, jer na njemu brzo nastaje površinska rđa.
+Goli čelični lim se priprema redom: uklanjanje rđe, odmašćivanje, brušenje, ponovno odmašćivanje i što skorije nanošenje prajmera koji je namenjen golom metalu. Granulaciju brušenja ne određuje sam lim, nego tehnički list prajmera ili sistema koji ide preko njega, pa se razlikuje od proizvođača do proizvođača. Opšte pravilo je da goli lim ne stoji nezaštićen duže nego što je neophodno, jer na njemu brzo nastaje površinska rđa.
 
 ## Postupak korak po korak
 

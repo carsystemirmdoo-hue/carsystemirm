@@ -118,7 +118,7 @@ Kit nije univerzalan za sve metale. Primeri iz istog programa pokazuju koliko se
 
 | Kit | Šta tehnički list navodi |
 | --- | --- |
-| Carsystem Multi Green | čelik, aluminijum, pocinkovani lim, stakloplastika, 2K slojevi, poliesterski kit i drvo; ne plastika |
+| Carsystem Multi Green | čelik, aluminijum, pocinkovani lim, stakloplastika, 2K poliesterski kit i drvo; ne plastika |
 | Carsystem Feinspachtel | samo čelik; ne cink i aluminijum |
 | C.A.R.FIT Glas Plus | čelik, aluminijum, stakloplastika, drvo; sme i na 2K antikorozivne i epoksidne prajmere |
 | Carsystem Multi Super Flex | ne nanositi na wash primer, epoksid i 1K akrilne proizvode |
@@ -153,4 +153,4 @@ Tekst pokazuje šta piše u navedenim verzijama tehničkih listova. Kombinacije 
 
 ### Šta proizvođač kita navodi o podlogama?
 
-Obično u odeljku o rukovanju ili u tabeli prianjanja: na koje materijale kit sme, na koje ne sme i kako podloga mora biti pripremljena. Kod nekih Carsystem kitova, na primer Multi Green, tabela pokazuje čelik, aluminijum, pocinkovani lim, stakloplastiku, plastiku, 2K slojeve, poliesterski kit i drvo, svaki sa oznakom da ili ne[^cs-multi-green-tds].
+Obično u odeljku o rukovanju ili u tabeli prianjanja: na koje materijale kit sme, na koje ne sme i kako podloga mora biti pripremljena. Kod nekih Carsystem kitova, na primer Multi Green, tabela pokazuje čelik, aluminijum, pocinkovani lim, stakloplastiku, plastiku, 2K poliesterski kit i drvo, svaki sa oznakom da ili ne[^cs-multi-green-tds].

@@ -65,4 +65,5 @@ Vidi odeljak „Stanje“ na dnu ovog dokumenta. Ažurira se posle svake serije.
 
 ## Stanje
 
+- 2026-10-08 (checkpoint): pogledajte `INVENTAR.md` za tačne brojeve. U toku su serije pisanja i recenzije: lakovi, pištolji (deo 1), brušenje (deo 2), boje (deo 2), uslovi (deo 2), recenzije pripreme (deo 1), tehničke dokumentacije i prajmera. Nenapisane teme: maskiranje, greške, poliranje, zaštita na radu, radionica, sprejevi, korozija i pištolji (deo 2). Sledeće: dovršiti pisanje i recenzije po `PROCES_PISANJA.md` (uputstva za pisca i recenzenta su u `tmp/saveti/brief-*.md`, van git-a), zatim `saveti:plan` i odobrenje.
 - 2026-10-08: postoji infrastruktura, inventar od 224 teme i 1 pilot-tekst. Pisanje teče u serijama (vidi `INVENTAR.md`). Ništa nije odobreno. Raspored je **probni** (`aktivan: false`, pretpostavljeni početak 2026-11-02 u 09:00).

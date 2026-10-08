@@ -41,7 +41,7 @@ izvori:
   - id: cs-elastic-weiss-tds
     naziv: "Carsystem, Elastic weiss, polyester fine putty white"
     dokument: /documents/products/carsystem/carsystem-git-elastic-weiss-tds.pdf
-    verzija: "v.04, 03/2021"
+    verzija: "v.04, 08-06-2010 (stranice 03/2021)"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
   - id: cs-liquid-putty-tds
@@ -117,7 +117,7 @@ Proizvođači iz programa navode tri vrste materijala za to:
 
 | Materijal | Šta tehnički list navodi |
 | --- | --- |
-| fini kit, Carsystem Elastic weiss | služi za popunjavanje pora u zoni kita za punjenje i osnovnog kita[^cs-elastic-weiss-tds] |
+| fini kit, Carsystem Elastic weiss | služi za popunjavanje pora u zoni kita za punjenje i osnovnog kita; samo na čeliku, ne na cinku i aluminijumu[^cs-elastic-weiss-tds] |
 | tečni kit, Carsystem Liquid Putty | sitne nepravilnosti kao ogrebotine i rupice; na kit i katalizovane prajmere[^cs-liquid-putty-tds] |
 | kit za prskanje, C.A.R.FIT Spray Putty | popunjava neravnine, tragove brušenja i rupice na većim površinama, pre punioca[^carfit-spray-putty-tds] |
 

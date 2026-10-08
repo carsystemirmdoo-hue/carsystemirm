@@ -105,8 +105,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Carsystem Multi V06/09-2026, Füllspachtel i Feinspachtel v.02 (03-09-2026), Glas V05 09/2026, Alu Spezial v.01, Plastic Pro v.02, Liquid Putty V02, Spray Plus V09 05/2024, R-M B 2A36 07/2026 i C.A.R.FIT Glas Plus; namene, podloge, granulacije i dalja obrada se poklapaju; ispravljeno: uklonjena nepotvrđena tvrdnja da se kit za prskanje nanosi „preko većih površina“ (zamenjeno namenom iz tehničkog lista Spray Plus), objedinjen opis Glas Plus."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -131,7 +132,7 @@ Fini kit služi za završno ravnanje, sitne ogrebotine i pore u prethodnom kitu.
 
 ### Kit sa staklenim vlaknima
 
-Za C.A.R.FIT Glas Plus proizvođač veliku mehaničku čvrstoću pripisuje ojačanju staklenim vlaknima[^carfit-glas-plus-tds]. Za Carsystem Glas proizvođač navodi duge staklene niti, popravku stakloplastike, dubokih udubljenja i manjih mesta oštećenih rđom, uz tabelu prianjanja: čelik da, aluminijum i pocinkovani lim ne[^cs-glas-tds]. R-M FlexBODY B 2A36 je takođe kit sa staklenim vlaknima, namenjen popravci oštećenih GRP delova[^rm-flexbody-tds]. Glas Plus je opisan kao kit za pukotine, male rupe i mesta oštećena korozijom[^carfit-glas-plus-tds].
+Za C.A.R.FIT Glas Plus proizvođač veliku mehaničku čvrstoću pripisuje ojačanju staklenim vlaknima i navodi namenu za pukotine, male rupe i mesta oštećena korozijom[^carfit-glas-plus-tds]. Za Carsystem Glas proizvođač navodi duge staklene niti, popravku stakloplastike, dubokih udubljenja i manjih mesta oštećenih rđom, uz tabelu prianjanja: čelik da, aluminijum i pocinkovani lim ne[^cs-glas-tds]. R-M FlexBODY B 2A36 je takođe kit sa staklenim vlaknima, namenjen popravci oštećenih GRP delova[^rm-flexbody-tds].
 
 ### Tvrdi kit za posebne popravke
 
@@ -143,7 +144,7 @@ Kit za plastiku je elastičniji. Za Plastic Pro Carsystem navodi popravku plasti
 
 ### Tečni kit i kit za prskanje
 
-Tečni kit se razliva lakše od klasičnog i služi za sitne nepravilnosti. Carsystem Liquid Putty je namenjen ogrebotinama i porama, za oštećenja do oko 3 mm dubine[^cs-liquid-putty-tds]. Kit za prskanje se nanosi pištoljem preko većih površina; za Spray Plus tabela u tehničkom listu navodi diznu veličine 2,5 i vreme upotrebljivosti od 25–30 min na 20 °C[^cs-spray-plus-tds].
+Tečni kit se razliva lakše od klasičnog i služi za sitne nepravilnosti. Carsystem Liquid Putty je namenjen ogrebotinama i porama, za oštećenja do oko 3 mm dubine[^cs-liquid-putty-tds]. Kit za prskanje se nanosi pištoljem. Za Spray Plus Carsystem navodi popunjavanje dubljih nepravilnosti, ulegnuća i ogrebotina u vrlo debelom sloju, a tabela u tehničkom listu diznu veličine 2,5 i vreme upotrebljivosti od 25–30 min na 20 °C[^cs-spray-plus-tds].
 
 ## Kako izabrati: tri pitanja
 

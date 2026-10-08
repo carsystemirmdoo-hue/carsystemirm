@@ -57,8 +57,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene stranice baslac e-finder star, baslac Effective Color Finder (više od 4.500 uzoraka, hromatski poređani), R-M Color Competence (milioni boja) i R-M Digital color search (Colortronic 12/6, rangiranje varijanti); ispravljeno: uklonjena nepotvrđena oznaka „spektrofotometar“ i tvrdnja da oba uređaja mere na vozilu, preciziran opis baze baslac. Konkretna mesta pločice se namerno ne navode."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -79,7 +80,7 @@ Kada pločicu nađete, imajte na umu da šifra boje ne mora biti označena istim
 
 ## Šta šifra znači, a šta ne
 
-Šifra označava boju u katalogu proizvođača vozila. Proizvođači reparaturnih boja na osnovu nje u svojim bazama traže formulu za mešanje. baslac za svoj alat Formula Finder navodi da se baza stalno dopunjuje novim bojama i varijantama[^baslac-e-finder-star], a R-M opisuje bazu sa podacima za milione boja i formulama za mešanje[^rm-color-competence].
+Šifra označava boju u katalogu proizvođača vozila. Proizvođači reparaturnih boja na osnovu nje u svojim bazama traže formulu za mešanje. baslac za bazu boja povezanu sa alatom Formula Finder navodi da se stalno dopunjuje novim bojama i varijantama[^baslac-e-finder-star], a R-M opisuje bazu sa podacima za milione boja i formulama za mešanje[^rm-color-competence].
 
 Šifra, međutim, ne govori:
 
@@ -95,8 +96,8 @@ Boja iste šifre na različitim vozilima ne mora izgledati potpuno isto. Zato pr
 
 Šifra suzi izbor, a nijansa se potvrđuje na vozilu:
 
-- **Karta sa uzorcima boje.** baslac ima kartu sa više od 4.500 originalno nalakiranih uzoraka, poređanih po boji, koja pomaže da se izabere prava nijansa[^baslac-color-finder].
-- **Merenje boje uređajem.** Uređaji kao ručni baslac e-finder star ili R-M spektrofotometar Colortronic 12/6 mere boju na vozilu i povezuju se sa bazom formula[^baslac-e-finder-star][^rm-digital-color-search]. Šta takvi uređaji mogu, a šta ne, objašnjava vodič [Digitalno merenje boje](/vodici/digitalno-merenje-boje).
+- **Karta sa uzorcima boje.** baslac ima kartu sa više od 4.500 originalno nalakiranih uzoraka, poređanih po tonovima, koja pomaže da se izabere prava nijansa[^baslac-color-finder].
+- **Digitalna pretraga boje.** baslac e-finder star je ručni uređaj za pretragu boje povezan sa alatom Formula Finder i bazom boja[^baslac-e-finder-star], a R-M za digitalno usklađivanje boje nudi sistem Colortronic 12/6, povezan sa bazom formula[^rm-digital-color-search]. Šta takvi uređaji mogu, a šta ne, objašnjava vodič [Digitalno merenje boje](/vodici/digitalno-merenje-boje).
 - **Probni lim.** Izabrana mešavina se nanese na probni lim i uporedi sa vozilom. Vidi [Probni lim: zašto se radi pre lakiranja](/vodici/probni-lim-pre-lakiranja).
 
 Ceo postupak, od šifre do probnog lima, opisuje vodič [Utvrđivanje nijanse](/vodici/utvrdjivanje-nijanse).

@@ -82,8 +82,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Silicone Remover Mild v.01 05/2021 i Water 2.0 V02 09/2025, C.A.R.FIT Silicone Remover i „Strawberry“ Spray (14. 3. 2024), R-M PK 1P10 07/2026 i STOP SILICONE 08/2023, baslac 70-45 06/2023; vrednosti (0,5 m², 25–30 cm) i postupci odgovaraju izvorima. Ispravljeno: R-M PK 1P10 (prvi korak čišćenja) premešten iz koraka posle brušenja u korak pre brušenja, uklonjeno necitirano „blaže sredstvo“ za baslac 70-45, „kod većine odmašćivača“ suženo na pregledane listove, jezička ispravka (papirni ubrus)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -98,13 +99,13 @@ Masnoća, vosak i silikon na površini ometaju prianjanje i razlivanje materijal
 
 ## Kada se odmašćuje
 
-- **Pre brušenja.** Da brusni papir ne bi razmazao vosak i silikon po površini i utisnuo ih u tragove brušenja.
-- **Posle brušenja.** Da se uklone prašina, ostaci brusnog materijala i otisci prstiju. R-M za SILICONE Remov-R navodi namenu za prvi korak čišćenja, za uklanjanje katrana, masnoće i silikona, pre kita ili punioca[^rm-pk1p10-tds].
-- **Pre bazne boje i laka.** Neki sistemi za ovaj korak imaju posebno, blaže sredstvo. baslac 70-45 je, prema tehničkom listu, namenjen čišćenju površine i zone utapanja pre punioca i bazne boje[^baslac-70-45-tds]. O razlici između sredstava za pojedine faze piše tekst [Odmašćivač za vodene i za rastvaračke sisteme](/vodici/odmascivac-za-vodene-i-rastvaracke-sisteme).
+- **Pre brušenja.** Da brusni papir ne bi razmazao vosak i silikon po površini i utisnuo ih u tragove brušenja. R-M za SILICONE Remov-R navodi namenu za prvi korak čišćenja, za uklanjanje katrana, masnoće i silikona, pre kita ili punioca[^rm-pk1p10-tds].
+- **Posle brušenja.** Da se uklone prašina, ostaci brusnog materijala i otisci prstiju.
+- **Pre bazne boje i laka.** Neki sistemi za ovaj korak imaju posebno sredstvo. baslac 70-45 je, prema tehničkom listu, namenjen čišćenju površine i zone utapanja pre punioca i bazne boje[^baslac-70-45-tds]. O razlici između sredstava za pojedine faze piše tekst [Odmašćivač za vodene i za rastvaračke sisteme](/vodici/odmascivac-za-vodene-i-rastvaracke-sisteme).
 
 ## Kako se odmašćuje: tehnika sa dve krpe
 
-Postupak je kod većine odmašćivača isti, a razlikuju se detalji. Carsystem za Silicone Remover Mild navodi ovaj redosled[^carsystem-silicone-remover-mild-tds]:
+Kod odmašćivača čije smo tehničke listove pregledali postupak je sličan, a razlikuju se detalji. Carsystem za Silicone Remover Mild navodi ovaj redosled[^carsystem-silicone-remover-mild-tds]:
 
 1. Suva, čista krpa koja ne pušta vlakna natopi se odmašćivačem.
 2. Površina se čisti u malim delovima, od oko 0,5 m².
@@ -133,9 +134,9 @@ Odmašćivač nije pogodan za svaku podlogu. C.A.R.FIT upozorava da se njegov Si
 
 ## Pitanja i odgovori
 
-### Mogu li da koristim papirnu ubrusu umesto krpe?
+### Mogu li da koristim papirni ubrus umesto krpe?
 
-Bitno je da krpa ne pušta vlakna i da je čista. Obični papir se pod rastvaračem može raspadati i ostavljati vlakna. Postoje krpe namenjene odmašćivanju, na primer [C.A.R.FIT SONTARA krpa za odmašćivanje i čišćenje](/proizvodi/carfit-sontara-degreasing-and-cleaning-cloth).
+Bitno je da krpa ne pušta vlakna i da je čista. Običan papirni ubrus pod rastvaračem može da se raspada i ostavlja vlakna. Postoje krpe namenjene odmašćivanju, na primer [C.A.R.FIT SONTARA krpa za odmašćivanje i čišćenje](/proizvodi/carfit-sontara-degreasing-and-cleaning-cloth).
 
 ### Može li se umesto odmašćivača koristiti alkohol ili deterdžent?
 

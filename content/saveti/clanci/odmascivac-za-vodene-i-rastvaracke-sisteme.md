@@ -81,15 +81,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M PK 1P10, PK 2P10 i PK 2P20 (07/2026), baslac 70-10 i 70-45 (06/2023), Carsystem Silicone Remover Water 2.0 V02 09/2025 i Mild v.01 05/2021; VOC vrednosti i namene u tabeli odgovaraju izvorima. Ispravljeno: uvodni pasus više ne uopštava („proizvođači obično“, „deluje blaže“, „kod više proizvođača“) nego navodi R-M primer uz citate, jer R-M ima vodeno sredstvo i za prvi korak; baslac 70-45 kod antistatičkog dejstva označen kao nesvrstan; podloge za Silicone Remover Mild usklađene sa listom (punilac umesto kita, dodato staklo)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Rastvarački odmašćivač je na bazi organskih rastvarača i proizvođači ga obično namenjuju prvom, „grubom“ čišćenju: uklanjanju katrana, masnoće i silikona pre kita i punioca. Vodeni odmašćivač ima znatno manje isparljivih organskih jedinjenja, deluje blaže i kod više proizvođača je namenjen čišćenju pre bazne boje i laka, kao i plastici, jer smanjuje statički elektricitet. Naziv „vodeni“ ili „rastvarački“ ne određuje sam za koju je fazu sredstvo: to piše u tehničkom listu svakog odmašćivača.
+Rastvarački odmašćivač je na bazi organskih rastvarača. R-M, na primer, svoj rastvarački odmašćivač namenjuje prvom, „grubom“ čišćenju: uklanjanju katrana, masnoće i silikona pre kita i punioca[^rm-pk1p10-tds]. Vodeni odmašćivač ima znatno manje isparljivih organskih jedinjenja: u R-M programu 186 g/l i 198 g/l, naspram 840 g/l kod rastvaračkog[^rm-pk2p10-tds][^rm-pk2p20-tds][^rm-pk1p10-tds]. Naziv „vodeni“ ili „rastvarački“ ipak ne određuje sam za koju je fazu sredstvo. R-M ima vodeno sredstvo i za prvi korak čišćenja i posebno vodeno sredstvo za korak pre bazne boje i laka, a to piše u tehničkom listu svakog odmašćivača[^rm-pk2p10-tds][^rm-pk2p20-tds].
 
 ## Kako se razlikuju prema tehničkim listovima
 
@@ -116,7 +117,7 @@ Rastvarački odmašćivač nije za svaku podlogu. R-M za PK 1P10 navodi da se ne
 ## Kada se koristi vodeni odmašćivač
 
 - **Neposredno pre bazne boje i laka.** R-M za ovaj korak ima posebno vodeno sredstvo, PRE Clean-R, namenjeno nanošenju preko punioca i starog laka[^rm-pk2p20-tds].
-- **Na plastici.** R-M za MULTI Clean-R i baslac za 70-45 navode antistatičko dejstvo, koje smanjuje taloženje prašine na plastičnim delovima[^rm-pk2p10-tds][^baslac-70-45-tds]. Više o tome piše u tekstu [Statički elektricitet na plastici](/vodici/staticki-elektricitet-na-plastici).
+- **Na plastici.** R-M za vodeni MULTI Clean-R i baslac za 70-45 (za koji list ne navodi vrstu) navode antistatičko dejstvo, koje smanjuje taloženje prašine na plastičnim delovima[^rm-pk2p10-tds][^baslac-70-45-tds]. Više o tome piše u tekstu [Statički elektricitet na plastici](/vodici/staticki-elektricitet-na-plastici).
 - **Kada je važno smanjiti emisiju rastvarača.** Razlika u VOC vrednostima u tabeli je velika. Šta oznaka VOC znači za radionicu, objašnjava vodič [VOC u autolakirerstvu](/vodici/voc-u-autolakirerstvu).
 
 Vodeni odmašćivač se nanosi raspršivačem ili krpom i briše suvom krpom. R-M za oba vodena sredstva navodi bocu sa pumpicom i brisanje krpom[^rm-pk2p10-tds][^rm-pk2p20-tds]. Vodenim sredstvima treba ostaviti dovoljno vremena da ispare: Carsystem upozorava da se tako izbegava zadržavanje vlage ili rastvarača ispod sledećeg sloja[^carsystem-silicone-remover-water-tds].
@@ -129,7 +130,7 @@ Tehnički listovi koje smo pregledali vezuju izbor odmašćivača za fazu rada i
 
 ### Može li jedan odmašćivač za sve faze?
 
-Neki proizvodi su tako zamišljeni. Carsystem Silicone Remover Mild je, prema tehničkom listu, sredstvo za čišćenje pre lakiranja na prajmerisanim i kitovanim površinama, metalu, starom i fabričkom laku[^carsystem-silicone-remover-mild-tds], a R-M MULTI Clean-R se koristi i pre i posle brušenja na metalu, kitu, puniocu, starom laku i plastici[^rm-pk2p10-tds]. Isti proizvođač ipak za korak pre bazne boje i laka ima posebno sredstvo[^rm-pk2p20-tds]. Ako radite u jednom sistemu, pratite podelu iz njegovih tehničkih listova.
+Neki proizvodi su tako zamišljeni. Carsystem Silicone Remover Mild je, prema tehničkom listu, sredstvo za čišćenje pre lakiranja na prajmerisanim površinama i površinama sa puniocem, metalu, staklu, starom i fabričkom laku[^carsystem-silicone-remover-mild-tds], a R-M MULTI Clean-R se koristi i pre i posle brušenja na metalu, kitu, puniocu, starom laku i plastici[^rm-pk2p10-tds]. Isti proizvođač ipak za korak pre bazne boje i laka ima posebno sredstvo[^rm-pk2p20-tds]. Ako radite u jednom sistemu, pratite podelu iz njegovih tehničkih listova.
 
 ### Može li vodeni odmašćivač na goli lim?
 

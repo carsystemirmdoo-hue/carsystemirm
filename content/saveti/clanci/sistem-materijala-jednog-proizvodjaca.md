@@ -55,6 +55,12 @@ izvori:
     verzija: "07/2026"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
+  - id: rm-c5450-tds
+    naziv: "R-M, Technical Information C 5450 GRAPHITE HD CLEAR"
+    dokument: /documents/products/rm/c-5450-ghd-clear/rm-c-5450-ghd-clear-technical-data-sheet.pdf
+    verzija: "07/2026"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
   - id: rm-p2p63-tds
     naziv: "R-M, Technical Information MULTI Purpos-R Grey, P 2P63 eSense DTM, grey"
     dokument: /documents/products/rm/p-2p63-multi-purpos-r-grey/rm-p-2p63-multi-purpos-r-grey-technical-data-sheet.pdf
@@ -74,7 +80,7 @@ status:
   pisanje: napisano
   tehnickaProvera: provereno
   jezickaProvera: provereno
-napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi 40-100 06/2026 (baslac), C 2A40, P 5480 i P 2P63 07/2026 (R-M), Multi Green V08 (Carsystem); vrednosti i šifre se poklapaju; ispravljeno: P 2P63 označen kao prajmer-punilac (DTM), uklonjena nepotvrđena tvrdnja da je razređivač GV iz iste linije, ublažene dve uopštene tvrdnje (nije proverio / izmereno), dopunjene linije za prelakiranje P 5480."
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi 40-100 06/2026 (baslac), C 2A40, P 5480 i P 2P63 07/2026 (R-M), Multi Green V08 (Carsystem); vrednosti i šifre se poklapaju; ispravljeno: P 2P63 označen kao prajmer-punilac (DTM), tvrdnja o razređivaču GV dobila izvor (GV je u C 5450 iste GHD linije), ublažene dve uopštene tvrdnje (nije proverio / izmereno), dopunjene linije za prelakiranje P 5480."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -95,7 +101,7 @@ Veze između slojeva mogu biti i složenije:
 
 - **Bazna boja i lak.** Za R-M C 2A40 tehnički list traži da se u vodenu baznu boju ispod tog laka doda 5 % aktivatora A 2210, uključujući sive nijanse baze i sve slojeve troslojne boje[^rm-c2a40-tds]. Isti dokument navodi i da se mešavine koje sadrže MIXINGBASE W ne mogu koristiti sa tim aktivatorom[^rm-c2a40-tds]. Lak, dakle, postavlja uslov sloju ispod sebe.
 - **Prajmer i završni sloj.** Za R-M P 5480 GHD Universal Epoxy tehnički list imenuje linije kojima se prajmer može prelakirati (GRAPHITE HD, ONYX HD, DIAMONT) i navodi da je pre nanošenja ONYX HD ili DIAMONT obavezno odzračivanje od 1 h na 20 °C[^rm-p5480-tds].
-- **Podešavanje viskoziteta.** Isti tehnički list za P 5480 upozorava da se proizvod ne podešava razređivačem GV, nego samo predviđenim aditivom A 5480[^rm-p5480-tds]. Razređivač koji bi se uzeo po navici za ovaj proizvod nije predviđen.
+- **Podešavanje viskoziteta.** Isti tehnički list za P 5480 upozorava da se proizvod ne podešava razređivačem GV, nego samo predviđenim aditivom A 5480[^rm-p5480-tds]. Razređivači GV navedeni su za druge proizvode iste GHD linije, na primer za GHD CLEAR C 5450[^rm-c5450-tds], ali za P 5480 nisu predviđeni.
 
 Ovi primeri pokazuju da ni „isti proizvođač“ nije dovoljan uslov. Odlučuje ono što piše u tehničkom listu konkretnog proizvoda.
 

@@ -77,8 +77,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi C 5450 GHD CLEAR i GHD TOPCOAT (07/2026; izdašnost 505 i 536 m²/l pri 1 µm, sloj 40–60 µm), C 2A40 07/2026 i 40-100 06/2026 (izdašnost nije navedena), SATA FAQ (prenos materijala preko 65 %), R-M Digital color search (procena zapremine po delu); računica 8,4–12,6 i 8,9–13,4 m²/l proverena i tačna; ispravljeno: kolona i pasus jasno označavaju računicu kao našu izvedenu (ne podatak proizvođača, bez gubitaka), tačnije navedene primene C 5450. Stručna potvrda opravdana: za praktičnu potrošnju za automobil nema izvora, a primer je iz linije za komercijalna vozila."
 strucnaPotvrda:
   potrebna: true
   razlog: "Za praktičnu potrošnju po delu ili celom automobilu (litri bazne boje i laka) nije pronađen izvor proizvođača iz našeg programa; tekst daje samo postupak procene i teoretsku računicu iz tehničkih listova R-M GHD linije, koja je namenjena komercijalnim vozilima. Potrebna je potvrda stručne osobe da li i kakve orijentacione količine navesti."
@@ -100,14 +101,14 @@ Svaki tehnički list navodi debljinu suvog sloja za koju je proizvod predviđen.
 
 Neki tehnički listovi navode teoretsku izdašnost (engl. *spreading rate*): koliko kvadratnih metara pokriva jedan litar pri sloju od 1 µm, kao kod R-M GHD proizvoda[^rm-c5450-tds]. Iz nje se računa koliko materijala treba za propisanu debljinu.
 
-| Proizvod | Izdašnost i debljina sloja prema tehničkom listu | Teoretska računica |
+| Proizvod | Izdašnost i debljina sloja prema tehničkom listu | Izvedena teoretska računica (naša, nije podatak iz tehničkog lista) |
 | --- | --- | --- |
 | R-M C 5450 GHD CLEAR (bezbojni lak) | 505 m²/l pri 1 µm; sloj 40–60 µm[^rm-c5450-tds] | oko 8,4–12,6 m² po litru |
 | R-M GHD TOPCOAT (boja sa direktnim sjajem) | 536 m²/l pri 1 µm; sloj 40–60 µm[^rm-ghd-topcoat-tds] | oko 8,9–13,4 m² po litru |
 
-Računica je jednostavna: izdašnost pri sloju od jednog mikrometra podeli se debljinom sloja. Važno je razumeti njena ograničenja:
+Poslednja kolona nije podatak proizvođača, nego naša izvedena računica: izdašnost pri sloju od 1 µm podeljena je najvećom i najmanjom debljinom sloja iz istog tehničkog lista (na primer 505/60 ≈ 8,4 i 505/40 ≈ 12,6)[^rm-c5450-tds]. Ne uključuje gubitke pri nanošenju. Važno je razumeti i njena ograničenja:
 
-- Tehnički list za C 5450 kao primene navodi autobuse, nadogradnje i slične namene[^rm-c5450-tds], a GHD TOPCOAT je predviđen za nanošenje preko R-M CV prajmer-punilaca i punilaca[^rm-ghd-topcoat-tds]. Primer zato služi da pokaže kako se podatak koristi, a ne kao vrednost za automobilske lakove.
+- Tehnički list za C 5450 kao primene navodi autobuse, natpise i nadogradnje (sanduke)[^rm-c5450-tds], a GHD TOPCOAT je predviđen za nanošenje preko R-M CV prajmer-punilaca i punilaca[^rm-ghd-topcoat-tds]. Primer zato služi da pokaže kako se podatak koristi, a ne kao vrednost za automobilske lakove.
 - Tehnički listovi ne navode da li se izdašnost odnosi na proizvod pre ili posle mešanja sa učvršćivačem i razređivačem[^rm-c5450-tds]. Računica je zato samo orijentaciona.
 - Za lakove za automobile iz našeg programa koje smo pregledali, C 2A40 i 40-100, tehnički list ne navodi izdašnost[^rm-c2a40-tds][^baslac-40-100-tds].
 

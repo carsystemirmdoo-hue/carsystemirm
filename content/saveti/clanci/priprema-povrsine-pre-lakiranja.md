@@ -79,8 +79,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Chart 2 (05/2024), Carsystem 2K Epoxy Fill Primer V03 03/2024, C.A.R.FIT 2K Epoxy Primer 1:1, R-M PK 2P10 07/2026, Carsystem Silicone Remover Mild v.01 05/2021 i Staub Stop v.02 05/2021; sve vrednosti i redosledi odgovaraju izvorima, proizvodi i povezani postoje; bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

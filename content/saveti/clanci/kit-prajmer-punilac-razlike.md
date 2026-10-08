@@ -85,8 +85,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Multi Green V08, Liquid Putty V02 (27.03.2024), 2K Füller Air Plus V02 01/2026, EF.21 V05, Etch Primer v.03 (Carsystem), P 2A26 07/2026 (R-M) i C.A.R.FIT Glas Plus Putty (bez oznake verzije); sve vrednosti (3 mm, 10–15 µm, 55–60 i 55–180 µm, 2–3 %) i zabrane poliesterskog kita preko Etch Primer i P 2A26 se poklapaju; ispravke nisu bile potrebne."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

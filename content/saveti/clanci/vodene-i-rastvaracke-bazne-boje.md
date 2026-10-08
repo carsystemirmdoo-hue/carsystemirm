@@ -83,8 +83,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi ONYX HD, DIAMONT i RA 050X (07/2026, R-M), 45 Line 03/2026, 35 Line 08/2023, lista pištolja 01/2026 (baslac) i SATA FAQ; sve vrednosti u tabeli, VOC oznake, skladištenje i podešavanja pištolja se poklapaju; ispravljene dve jezičke formulacije."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -104,7 +105,7 @@ Primeri iz dva para proizvoda istog proizvođača:
 | baslac 45 Line | vodena | 70 % 45-R45[^baslac-45-line-tds] | oko 5 min posle svakog sloja[^baslac-45-line-tds] | 10–15 µm[^baslac-45-line-tds] |
 | baslac 35 Line | rastvaračka | 2:1 sa razređivačem 60-10 do 60-40[^baslac-35-line-tds] | 10 min, do mat izgleda[^baslac-35-line-tds] | 15–20 µm[^baslac-35-line-tds] |
 
-Tabela ne poredi kvalitet. Pokazuje samo da razlika između vodene i rastvaračke baze ne staje u jedno pravilo: odzračivanje do mat izgleda navodi i rastvarački 35 Line, a fiksno vreme i vodeni 45 Line. Kako se razređivanje baze meri objašnjava vodič [Razređivanje bazne boje](/vodici/viskozitet-i-razredjivanje-baze).
+Tabela ne poredi kvalitet. Pokazuje samo da razlika između vodene i rastvaračke baze ne može da se svede na jedno pravilo: odzračivanje do mat izgleda navodi i rastvarački 35 Line, a fiksno vreme i vodeni 45 Line. Kako se razređivanje baze meri objašnjava vodič [Razređivanje bazne boje](/vodici/viskozitet-i-razredjivanje-baze).
 
 ## Sušenje i strujanje vazduha
 
@@ -128,4 +129,4 @@ Voda iz sloja isparava sporije kada je vazduh već zasićen vlagom. Proizvođač
 
 ### Da li vodena baza traži drugačiju opremu?
 
-Ne nužno nov pištolj, ali traži opremu koja je za nju predviđena: odgovarajuću diznu i podešavanje, posude za čuvanje kakve navodi proizvođač i, prema SATA, po mogućstvu poseban pištolj[^sata-faq][^baslac-pistolji]. Pre kupovine opreme proverite listu preporučenih pištolja za sistem boje koji koristite.
+Ne mora da znači nov pištolj, ali traži opremu koja je za nju predviđena: odgovarajuću diznu i podešavanje, posude za čuvanje kakve navodi proizvođač i, prema SATA, po mogućstvu poseban pištolj[^sata-faq][^baslac-pistolji]. Pre kupovine opreme proverite listu preporučenih pištolja za sistem boje koji koristite.

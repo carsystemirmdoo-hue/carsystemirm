@@ -34,7 +34,7 @@ izvori:
     pristupljeno: 2026-10-08
     tip: tehnicki-list
   - id: eu-direktiva-2004-42
-    naziv: "Direktiva 2004/42/EZ Evropskog parlamenta i Saveta od 21. aprila 2004. (izvorni tekst, legislation.gov.uk)"
+    naziv: "Direktiva 2004/42/EZ Evropskog parlamenta i Saveta od 21. aprila 2004. (tekst sa izmenama objavljen na legislation.gov.uk; zvanični izvor je EUR-Lex)"
     url: https://www.legislation.gov.uk/eudr/2004/42/data.html
     datumIzvora: 2004-04-21
     pristupljeno: 2026-10-08
@@ -49,8 +49,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički list C 2A40 07/2026 (Potlife, DIN 4, bez odzračivanja između slojeva), Direktiva 2004/42/EZ (legislation.gov.uk) i CIE e-ILV 17-23-006; definicije usklađene sa rečnikom TERMINOLOGIJA.md; ispravljeno: 1K „po pravilu“ (UV izuzetak), izocijanati u „mnogim“ 2K učvršćivačima, VOC ograničenje vezano za Direktivu u EU, naziv izvora Direktive."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -72,7 +73,7 @@ Kako slojevi idu jedan na drugi, pokazuje vodič [Slojevi reparaturnog lakiranja
 
 ## Mešanje
 
-- **1K i 2K**: jednokomponentni materijal suši se isparavanjem, a dvokomponentni otvrdnjava hemijskom reakcijom posle dodavanja učvršćivača. Vidi [1K i 2K materijali](/vodici/1k-i-2k-materijali).
+- **1K i 2K**: jednokomponentni materijal se po pravilu suši isparavanjem, a dvokomponentni otvrdnjava hemijskom reakcijom posle dodavanja učvršćivača. Vidi [1K i 2K materijali](/vodici/1k-i-2k-materijali).
 - **Učvršćivač** (katalizator, otvrđivač; engl. *hardener*): komponenta koja pokreće otvrdnjavanje 2K materijala.
 - **Razređivač** (tiner; engl. *thinner*, *reducer*): podešava viskozitet za nanošenje. Uvek onaj koji navodi tehnički list proizvoda.
 - **Odnos mešanja** (engl. *mixing ratio*): koliko delova osnovnog materijala, učvršćivača i razređivača ide u smešu, po zapremini ili po težini. Vidi [Odnos mešanja](/vodici/odnos-mesanja-iz-tehnickog-lista).
@@ -106,8 +107,8 @@ Kako slojevi idu jedan na drugi, pokazuje vodič [Slojevi reparaturnog lakiranja
 
 - **Tehnički list** (TDS; engl. *technical data sheet*): dokument proizvođača sa podacima za rad. Vidi [Kako se čita tehnički list](/vodici/kako-procitati-tehnicki-list).
 - **Bezbednosni list** (SDS; engl. *safety data sheet*): dokument o opasnostima, zaštiti i rukovanju. Vidi [Bezbednosni list](/vodici/bezbednosni-list-16-odeljaka).
-- **VOC** (isparljiva organska jedinjenja): organske materije koje lako isparavaju; njihov sadržaj u materijalima za vozila ograničen je propisima[^eu-direktiva-2004-42]. Vidi [VOC u autolakirerstvu](/vodici/voc-u-autolakirerstvu).
-- **Izocijanati**: sastojci 2K učvršćivača zbog kojih je pri radu potrebna zaštita disanja. Vidi [Izocijanati u 2K materijalima](/vodici/izocijanati-i-2k-materijali).
+- **VOC** (isparljiva organska jedinjenja): organske materije koje lako isparavaju; njihov sadržaj u materijalima za reparaturno lakiranje vozila ograničen je u EU Direktivom 2004/42/EZ[^eu-direktiva-2004-42]. Vidi [VOC u autolakirerstvu](/vodici/voc-u-autolakirerstvu).
+- **Izocijanati**: sastojci mnogih 2K učvršćivača zbog kojih je pri radu potrebna zaštita disanja. Vidi [Izocijanati u 2K materijalima](/vodici/izocijanati-i-2k-materijali).
 
 ## Pitanja i odgovori
 

@@ -13,9 +13,9 @@ publika:
 glavnoPitanje: Koliko dugo se 2K materijal može koristiti posle mešanja i od čega to zavisi?
 namera: informativna
 dodatnaPitanja:
-  - Zašto se smeša zgušnjava?
-  - Može li se vreme upotrebljivosti produžiti razređivanjem?
   - Da li je vreme upotrebljivosti isto što i rok trajanja?
+  - Važi li isto pravilo za 2K sprejeve?
+  - Kako da znam koliko smeše da zamešam?
 poreklopitanja:
   tip: pronadjeno-u-izvoru
   napomena: "Pitanje o vremenu upotrebe 2K materijala posle aktivacije postavlja se uz edukativni materijal proizvođača aerosola (nije naš brend, služi samo kao dokaz pitanja); pitanje za lak u pištolju je urednička procena."
@@ -60,11 +60,12 @@ razlogPrioriteta: "Dopunjuje vodič o odnosu mešanja; pitanje se postavlja i za
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40 (07/2026; 25 min, A 2210 5 % i najviše 30 min), baslac 40-100 (06/2026; 30 min) i Carsystem Multi Green (V08; 4–5, 7–8, 12–13 min, skladištenje 6–8 meseci); sve vrednosti se poklapaju. Ispravke: dodatnaPitanja usklađena sa stvarnim podnaslovima odgovora, objašnjenje reakcije označeno kao opšte, preformulisana stavka o količini smeše."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -72,7 +73,7 @@ Vreme upotrebljivosti smeše je period posle dodavanja učvršćivača u kome se
 
 ## Šta se dešava u smeši posle mešanja
 
-Kod dvokomponentnih materijala učvršćivač hemijski reaguje sa vezivom. Reakcija počinje odmah po mešanju, a ne tek na površini. Smeša zato postepeno postaje gušća i teže se razliva. Na kraju više ne može da se nanese tako da napravi ravan i ujednačen sloj, čak i ako je u čaši još tečna.
+Opšte objašnjenje: kod dvokomponentnih materijala učvršćivač hemijski reaguje sa vezivom. Reakcija počinje odmah po mešanju, a ne tek na površini. Smeša zato postepeno postaje gušća i teže se razliva. Na kraju više ne može da se nanese tako da napravi ravan i ujednačen sloj, čak i ako je u čaši još tečna.
 
 Vreme upotrebljivosti je granica koju proizvođač daje za taj proizvod. Posle nje kvalitet sloja više nije onakav kakav je opisan u tehničkom listu, iako materijal možda još „izgleda upotrebljivo“.
 
@@ -88,13 +89,13 @@ U tehničkim listovima na engleskom podatak se obično zove *pot life* ili *potl
 
 Tabela ne služi za poređenje kvaliteta. Pokazuje samo da se vrednosti razlikuju i po vrsti materijala i od proizvoda do proizvoda.
 
-Kod nekih sistema rok važi i za pripremu bazne boje, ne samo za lak. Za C 2A40 R-M navodi da se u vodenu baznu boju ispod tog laka dodaje 5 % aktivatora A 2210 i da tako pripremljena baza ima vreme upotrebljivosti od najviše 30 minuta[^rm-c2a40-tds]. Ko radi sa tim sistemom mora da prati dva roka: za baznu boju i za lak.
+Kod nekih sistema rok važi i za pripremu bazne boje, ne samo za lak. Za C 2A40 R-M navodi da se u vodenu baznu boju ispod tog laka dodaje 5 % aktivatora A 2210 i da tako pripremljena baza ima vreme upotrebljivosti od najviše 30 minuta[^rm-c2a40-tds]. Ko radi sa tim sistemom prati dva roka: za baznu boju i za lak.
 
 ## Od čega zavisi koliko vremena stvarno imate
 
 - **Temperatura.** Vrednosti u tabeli važe za navedenu temperaturu. Na višoj temperaturi reakcija je po pravilu brža, pa ostaje manje vremena. Tačne vrednosti za druge temperature daje samo proizvođač, ako ih navodi.
 - **Izbor učvršćivača.** Mnogi sistemi imaju brz, normalan i spor učvršćivač. baslac za 40-100 upućuje da se učvršćivač bira prema temperaturi okoline i veličini objekta[^baslac-40-100-tds]. O tome više u vodiču [Brzi, normalni ili spori učvršćivač](/vodici/izbor-ucvrscivaca-po-temperaturi).
-- **Količina smeše.** Veća količina zamešanog materijala ostaje dugo u čaši ili posudi. Zato se meša onoliko koliko se može naneti u roku.
+- **Količina smeše.** Rok važi za ceo zamešani materijal, pa veća količina duže stoji u čaši ili posudi pre nego što se potroši. Zato se meša onoliko koliko se može naneti u roku.
 
 ## Greške koje se lako naprave
 

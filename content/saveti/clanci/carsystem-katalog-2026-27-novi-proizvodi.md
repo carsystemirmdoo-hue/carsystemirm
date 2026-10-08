@@ -50,6 +50,11 @@ izvori:
     url: https://www.carsystem.org/en/catalogues
     pristupljeno: 2026-10-08
     tip: sajt-proizvodjaca
+  - id: cs-sajt-merch
+    naziv: "Carsystem, Merchandising Materials (kategorija proizvoda na sajtu)"
+    url: https://www.carsystem.org/en/products/category/merchandising-materials
+    pristupljeno: 2026-10-08
+    tip: sajt-proizvodjaca
 datumDogadjaja: "2026-09-09"
 datumObjaveIzvora: "2026-09-09"
 trziste: Međunarodno izdanje na engleskom (Carsystem)
@@ -61,11 +66,12 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: PDF kataloga (110 str., CreationDate i Last-Modified 2026-09-09) prebrojan po oznaci NEW — 33 oznake, 30 artikala u programu (X-serija 5 preko dve dvostrane) i 6 van programa, svi slugovi postoje; datum i 62 partnera / 64 zemlje potvrđeni. Ispravke: opis kitova (bez stirena je samo Multi Blue), „druga strana“ → uvodna dvostrana, dodat izvor za oznake „New“ na sajtu."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2026-12-07
 ---
@@ -76,7 +82,7 @@ Carsystem, robna marka firme VOSSCHEMIE GmbH iz Uetersena, objavio je katalog pr
 Spisak prati poglavlja kataloga. Uz svaki proizvod je link na njegovu stranu kod nas.
 
 - **Abrazivi i brušenje:** [Sanding Disc P.25 Ceramic](/proizvodi/carsystem-sanding-disc-p-25-ceramic) i [Sanding Strips P.25 Ceramic](/proizvodi/carsystem-sanding-strips-p-25-ceramic), ručni blokovi [Sanding Block 300 + 100](/proizvodi/carsystem-sanding-block-300-100) i [Sanding Block 100 2.0](/proizvodi/carsystem-sanding-block-100-2-0)[^cs-katalog-2026-27]. Šta znači keramičko zrno objašnjava vodič [Keramički abrazivi](/vodici/keramicki-abrazivi).
-- **Kitovi:** [Multi Flow](/proizvodi/carsystem-multi-flow) i [Multi Blue Rapid Changer SF](/proizvodi/carsystem-multi-blue-rapid-changer-sf), poliesterski kit bez stirena[^cs-katalog-2026-27].
+- **Kitovi:** lagani poliesterski kit [Multi Flow](/proizvodi/carsystem-multi-flow) i poliesterski kit bez stirena [Multi Blue Rapid Changer SF](/proizvodi/carsystem-multi-blue-rapid-changer-sf)[^cs-katalog-2026-27].
 - **Maskiranje:** [Red Tape](/proizvodi/carsystem-red-tape), [Easy Mask II](/proizvodi/carsystem-easy-mask-ii) i samolepljiva zaštitna folija [Crash Film](/proizvodi/carsystem-crash-film)[^cs-katalog-2026-27].
 - **Lakiranje:** bezbojni lakovi [2K Clear VOC CC.25 HS-AS](/proizvodi/carsystem-2k-clear-voc-cc-25-hs-as) i [CC.26 ECO-X 15/60](/proizvodi/carsystem-2k-clear-voc-cc-26-eco-x-15-60), punilac za rad mokro na mokro [AF.25 Primer Wet on Wet](/proizvodi/carsystem-af-25-primer-wet-on-wet), sistem čašica [Paint System CPS 3.0](/proizvodi/carsystem-paint-system-cps-3-0) sa [adapterima za pištolje](/proizvodi/carsystem-adapter-for-cps-paint-cup-systems), štapići [Mixing Stick Fast](/proizvodi/carsystem-mixing-stick-fast) i [Can Scraper](/proizvodi/carsystem-can-scraper)[^cs-katalog-2026-27].
 - **Poliranje i mašine:** X-serija za poliranje ([Compound X1500 HC](/proizvodi/carsystem-compound-x1500-hc), [Polish X8000 AH](/proizvodi/carsystem-polish-x8000-ah), sunđeri [X1500](/proizvodi/carsystem-polishing-pad-x1500) i [X8000](/proizvodi/carsystem-polishing-pad-x8000), krpe [Microfiber X300 Duo](/proizvodi/carsystem-microfiber-x300-duo)), akumulatorska brusilica [CSH-COS01](/proizvodi/carsystem-cordless-sander-csh-cos01), [rezervna baterija](/proizvodi/carsystem-spare-battery-5-0ah) i [punjač](/proizvodi/carsystem-rapid-charger-for-csh-battery-powered)[^cs-katalog-2026-27]. X-seriju detaljnije opisuje tekst [Carsystem X serija za poliranje](/vodici/carsystem-x-serija-za-poliranje).
@@ -89,10 +95,10 @@ Spisak prati poglavlja kataloga. Uz svaki proizvod je link na njegovu stranu kod
 
 ## Kako smo brojali
 
-Brojali smo samo oznaku NEW u samom PDF-u. Na sajtu carsystem.org oznaku „New“ nose i neki proizvodi koji je u katalogu nemaju, na primer odevni predmeti sa logotipom brenda. Oni ovde nisu uračunati. Kod X-serije oznaka stoji na dvostranicama 130–131 i 132–133, a ne uz svaki artikal, pa smo svih pet proizvoda te serije računali kao nove[^cs-katalog-2026-27].
+Brojali smo samo oznaku NEW u samom PDF-u. Na sajtu carsystem.org oznaku „New“ nose i neki proizvodi koji je u katalogu nemaju, na primer odevni predmeti sa logotipom brenda[^cs-sajt-merch]. Oni ovde nisu uračunati. Kod X-serije oznaka stoji na dvostranicama 130–131 i 132–133, a ne uz svaki artikal, pa smo svih pet proizvoda te serije računali kao nove[^cs-katalog-2026-27].
 
 ## Pitanja i odgovori
 
 ### Da li je ceo katalog 2026/27 dostupan u Srbiji?
 
-Katalog to ne navodi. Na drugoj strani piše samo da Carsystem radi sa 62 partnera u 64 zemlje[^cs-katalog-2026-27]. Da li je određeni artikal trenutno dostupan, proverite u [partnerskoj prodavnici](/prodavnice) ili nam pišite preko strane [Kontakt](/kontakt).
+Katalog to ne navodi. Na uvodnoj dvostrani piše samo da Carsystem radi sa 62 partnera u 64 zemlje[^cs-katalog-2026-27]. Da li je određeni artikal trenutno dostupan, proverite u [partnerskoj prodavnici](/prodavnice) ili nam pišite preko strane [Kontakt](/kontakt).

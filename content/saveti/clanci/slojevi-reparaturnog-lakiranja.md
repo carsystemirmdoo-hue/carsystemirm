@@ -86,8 +86,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Multi Green V08, EF.21 V05, AF.25 V02 (Carsystem), ONYX HD, DIAMONT i C 2A40 (07/2026, R-M) i 30 Line (12/2025, baslac); sve vrednosti se poklapaju; ispravljeno: podloga za ONYX HD dopunjena starim lakom (P400) i alternativom, 30 Line debljina navedena uz dva sloja, preformulisane tri rečenice (C 2A40, namena sloja, neopisane kombinacije)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -119,26 +120,26 @@ Bazna boja nosi nijansu, ali sama nema završni sjaj ni otpornost. Zato se preko
 
 - Za vodenu baznu boju ONYX HD R-M navodi odzračivanje do mat izgleda posle svakog sloja i sušenje od 15 min na 20 °C, posle čega ide jedan od preporučenih R-M lakova[^rm-onyx-hd-tds].
 - Za rastvaračku baznu boju DIAMONT R-M navodi odzračivanje od 5 min na 20 °C, a zatim nanošenje R-M laka mokro na mokro[^rm-diamont-tds].
-- Lak C 2A40 R-M vezuje za ONYX HD i traži dodatak 5 % aktivatora A 2210 u slojeve vodene bazne boje ispod njega[^rm-c2a40-tds].
+- Bezbojni lak C 2A40 R-M navodi kao lak namenjen posebno za ONYX HD i traži dodatak 5 % aktivatora A 2210 u sve slojeve vodene bazne boje ispod njega[^rm-c2a40-tds].
 
 Poslednji primer pokazuje zašto se baza i lak ne biraju odvojeno: lak može da postavlja uslove sloju ispod sebe.
 
-Ako tehnički list baze dozvoljava više podloga, i to piše. Za ONYX HD R-M navodi dve: punilac izbrušen papirom P400 ili R-M punilac mokro na mokro, odnosno izolator (sealer)[^rm-onyx-hd-tds]. Kako se bira lak opisuje vodič [Kako se bira bezbojni lak](/vodici/izbor-bezbojnog-laka).
+I podloga za baznu boju je propisana. Za ONYX HD R-M navodi punilac ili dobro osušen stari lak otporan na rastvarače, izbrušen papirom P400, a kao alternativu R-M punilac mokro na mokro ili izolator (sealer)[^rm-onyx-hd-tds]. Kako se bira lak opisuje vodič [Kako se bira bezbojni lak](/vodici/izbor-bezbojnog-laka).
 
 ## Može li neki sloj da se preskoči
 
 Može samo kada to predviđa sistem, a ne da bi se uštedelo vreme. U našem programu postoje dva dokumentovana primera:
 
-1. **Boja sa direktnim sjajem umesto baze i laka.** baslac 30 Line je jednoslojna boja sa direktnim sjajem, sa debljinom sloja od 50–70 µm[^baslac-30-line-tds]. Tu ne postoji odvojen bezbojni lak.
+1. **Boja sa direktnim sjajem umesto baze i laka.** baslac 30 Line je jednoslojna boja sa direktnim sjajem; tehnički list navodi dva sloja i debljinu sloja od 50–70 µm[^baslac-30-line-tds]. Tu ne postoji odvojen bezbojni lak.
 2. **Punilac mokro na mokro.** Za AF.25 Carsystem navodi da se preko njega može nanositi posle 20 min na 20 °C, bez brušenja, najviše do tri dana[^cs-af25-tds]. Izostaje brušenje punioca, ali ne i sam punilac. Više o tome u vodiču [Punilac mokro-na-mokro](/vodici/mokro-na-mokro-punilac).
 
-Ono što tehnički listovi iz primera ne dozvoljavaju je kombinacija koja tamo nije opisana. Ako bazna boja ide direktno na kit, ili lak preko baze bez propisanog odzračivanja, rezultat nije onaj koji je proizvođač ispitao.
+Kombinacija koja u tehničkom listu nije opisana nije ni predviđena. Ako bazna boja ide direktno na kit ili lak preko baze bez propisanog odzračivanja, rezultat nije onaj koji je proizvođač ispitao.
 
 ## Pitanja i odgovori
 
 ### Šta radi svaki sloj?
 
-Prajmer daje prianjanje i zaštitu metala, kit popunjava udubljenja, punilac ravna površinu i izoluje je od boje, bazna boja daje nijansu, a bezbojni lak sjaj i otpornost. Tačnu namenu konkretnog proizvoda piše u odeljku o primeni u njegovom tehničkom listu.
+Prajmer daje prianjanje i zaštitu metala, kit popunjava udubljenja, punilac ravna površinu i izoluje je od boje, bazna boja daje nijansu, a bezbojni lak sjaj i otpornost. Tačna namena konkretnog proizvoda navedena je u odeljku o primeni u njegovom tehničkom listu.
 
 ### Gde se u redosledu nalaze kit, prajmer i punilac?
 

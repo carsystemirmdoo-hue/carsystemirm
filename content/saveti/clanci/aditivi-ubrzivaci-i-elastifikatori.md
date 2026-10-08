@@ -121,15 +121,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M A 2P05, A 2P15, A 2P17, A 2P40 (07/2026), baslac 80-10, 80-30, 40-450 i varijante 60-05, 80-10, 80-20, Carsystem Activator, High Gloss Additive i 2K Clear VOC 420; sve količine i uslovi se poklapaju. Ispravke: tvrdnja o „loše pripremljenoj podlozi“ suzena na ono što izvori kažu (PP/PE), „gotovo uvek“ ublaženo, „punioci“ → prajmer-punioci (primerfiller), nazivi stepena sjaja 80-20 usklađeni sa izvorom, napomena da High Gloss list ne navodi osnovu procenta, „po zapremini“ za Activator."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Aditiv se dodaje samo kada ga tehnički list osnovnog proizvoda ili samog aditiva predviđa, i to u količini iz tog lista. Menja jedno svojstvo smeše: elastičnost, brzinu sušenja, prianjanje na plastiku ili stepen sjaja. Za elastifikator R-M A 2P05 tehnički list navodi dodatak od 25 % po zapremini[^rm-a2p05-tds], a baslac za lak 40-450 sa elastifikatorom 80-10 propisuje predmešavinu od 100 delova laka i 25 delova aditiva po zapremini[^baslac-40-450-80-10-tds]. Aditiv ne ispravlja loše pripremljenu podlogu, i to proizvođači za neke aditive pišu izričito.
+Aditiv se dodaje samo kada ga tehnički list osnovnog proizvoda ili samog aditiva predviđa, i to u količini iz tog lista. Menja jedno svojstvo smeše: elastičnost, brzinu sušenja, prianjanje na plastiku ili stepen sjaja. Za elastifikator R-M A 2P05 tehnički list navodi dodatak od 25 % po zapremini[^rm-a2p05-tds], a baslac za lak 40-450 sa elastifikatorom 80-10 propisuje predmešavinu od 100 delova laka i 25 delova aditiva po zapremini[^baslac-40-450-80-10-tds]. Aditiv ne pretvara neodgovarajuću podlogu u pogodnu: za aditive za plastiku R-M i baslac izričito pišu da ne daju dovoljno prianjanje na PP i PE[^rm-a2p40-tds][^baslac-80-30-tds].
 
 ## Vrste aditiva i šta proizvođači navode
 
@@ -137,27 +138,27 @@ Aditiv se dodaje samo kada ga tehnički list osnovnog proizvoda ili samog aditiv
 
 Dodaju se kada se lakiraju savitljivi plastični delovi, da sloj prati savijanje podloge.
 
-- **baslac 80-10 Additive FLEX:** za popravku plastike, u kombinaciji sa baslac 2K puniocima, bezbojnim lakovima i bojama sa direktnim sjajem[^baslac-80-10-tds].
-- **R-M A 2P05 FLEX Tune-R:** za bezbojne lakove Pioneer Series, 25 % po zapremini; sušenje na 20 °C 16 h, na 60 °C 45 min[^rm-a2p05-tds].
+- **baslac 80-10 Additive FLEX:** za popravku plastike, u kombinaciji sa baslac 2K prajmer-puniocima, bezbojnim lakovima i bojama sa direktnim sjajem[^baslac-80-10-tds].
+- **R-M A 2P05 FLEX Tune-R:** za bezbojne lakove Pioneer Series, 25 % po zapremini; tehnički list aditiva navodi sušenje na 20 °C 16 h, na 60 °C 45 min[^rm-a2p05-tds].
 
 ### Ubrzivači
 
-Skraćuju vreme sušenja, ali gotovo uvek uz uslov.
+Skraćuju vreme sušenja, a u pregledanim tehničkim listovima većina ima i uslove upotrebe.
 
-- **baslac 60-05 Speeding Reducer:** za 40-450 dodaje se 10 % umesto običnog razređivača, uz brzi učvršćivač 50-415; vreme upotrebljivosti tada je 45 min, a sušenje na 20 °C 4 h[^baslac-40-450-60-05-tds]. U punilac se ne dodaje iznad 25 °C[^baslac-40-450-60-05-tds].
+- **baslac 60-05 Speeding Reducer (ubrzavajući razređivač):** za 40-450 dodaje se 10 % umesto običnog razređivača, uz brzi učvršćivač 50-415; vreme upotrebljivosti tada je 45 min, a sušenje na 20 °C 4 h[^baslac-40-450-60-05-tds]. U punilac se ne dodaje iznad 25 °C[^baslac-40-450-60-05-tds].
 - **R-M A 2P17 FAST Tune-R:** povećava hemijsku reaktivnost materijala, pa se ranije može brusiti, polirati ili montirati; količina je u tehničkom listu proizvoda u koji se dodaje[^rm-a2p17-tds].
 - **R-M A 2P15 AIR Tune-R:** brže suvo na prašinu i bolja spremnost za brušenje, poliranje i montažu, ali samo na temperaturi prostorije iznad 20 °C[^rm-a2p15-tds].
-- **Carsystem Activator:** u laku 2 %, u puniocu 10 %; sme samo uz standardni ili spori učvršćivač, nikako uz brzi[^carsystem-activator-tds].
+- **Carsystem Activator:** u laku 2 %, u puniocu 10 % (po zapremini); sme samo uz standardni ili spori učvršćivač, nikako uz brzi[^carsystem-activator-tds].
 
 ### Aditivi za prianjanje na plastiku
 
 - **R-M A 2P40 PLASTIC Tune-R:** omogućava da se navedeni R-M punioci Pioneer Series nanose direktno na plastiku pogodnu za lakiranje[^rm-a2p40-tds].
-- **baslac 80-30 Additive Plast:** za plastiku pogodnu za lakiranje, uz baslac punioce mokro-na-mokro[^baslac-80-30-tds].
+- **baslac 80-30 Additive Plast:** za plastiku pogodnu za lakiranje, uz baslac prajmer-punioce mokro-na-mokro[^baslac-80-30-tds].
 
 ### Aditivi za sjaj i matiranje
 
-- **baslac 80-20:** sredstvo za matiranje bezbojnih lakova 40-; za polusjaj 25 %, za saten-mat 50 %, za svilenkasti mat 70 % po težini na lak[^baslac-80-20-tds]. Više o mat lakovima u vodiču [Mat i polumat lak](/vodici/mat-i-polumat-lak).
-- **Carsystem High Gloss Additive:** za HS lak 7 %, za MS lak 5 %[^carsystem-high-gloss-tds]. U tehničkom listu za 2K Clear VOC 420 Carsystem ga navodi sa 5–8 % po zapremini na komponentu A[^carsystem-clear-420-tds].
+- **baslac 80-20:** sredstvo za matiranje bezbojnih lakova 40-; za polusjaj (semi gloss) 25 %, za satenski sjaj (satin gloss) 50 %, za svilenkasti mat (silky mat) 70 % po težini na lak[^baslac-80-20-tds]. Više o mat lakovima u vodiču [Mat i polumat lak](/vodici/mat-i-polumat-lak).
+- **Carsystem High Gloss Additive:** za HS lak 7 %, za MS lak 5 %, bez navedene osnove (zapremina ili težina)[^carsystem-high-gloss-tds]. U tehničkom listu za 2K Clear VOC 420 Carsystem ga navodi sa 5–8 % po zapremini na komponentu A[^carsystem-clear-420-tds].
 
 ## Aditiv menja i ostatak recepta
 
@@ -173,7 +174,7 @@ Ovaj tekst pokazuje primere iz navedenih tehničkih listova i verzija. Količine
 
 ### Može li aditiv da reši grešku podloge?
 
-Ne, i proizvođači to za neke aditive pišu izričito. R-M navodi da A 2P40 ne daje prianjanje na čist polipropilen (PP) i polietilen (PE) koji nisu pogodni za lakiranje[^rm-a2p40-tds], a baslac za 80-30 da na PP i PE ne daje dovoljno prianjanje i da se tamo ne preporučuje[^baslac-80-30-tds]. Priprema plastike opisana je u tekstu [Prajmer za plastiku: kada je potreban, a kada nije](/vodici/prajmer-za-plastiku-kada-treba).
+Pregledani tehnički listovi to ne predviđaju, a za aditive za plastiku proizvođači izričito pišu suprotno. R-M navodi da A 2P40 ne daje prianjanje na čist polipropilen (PP) i polietilen (PE) koji nisu pogodni za lakiranje[^rm-a2p40-tds], a baslac za 80-30 da na PP i PE ne daje dovoljno prianjanje i da se tamo ne preporučuje[^baslac-80-30-tds]. Priprema plastike opisana je u tekstu [Prajmer za plastiku: kada je potreban, a kada nije](/vodici/prajmer-za-plastiku-kada-treba).
 
 ### Postoji li aditiv protiv kratera?
 

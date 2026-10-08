@@ -72,29 +72,30 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi 40-100 06/2026 (baslac), C 2A40, P 5480 i P 2P63 07/2026 (R-M), Multi Green V08 (Carsystem); vrednosti i šifre se poklapaju; ispravljeno: P 2P63 označen kao prajmer-punilac (DTM), uklonjena nepotvrđena tvrdnja da je razređivač GV iz iste linije, ublažene dve uopštene tvrdnje (nije proverio / izmereno), dopunjene linije za prelakiranje P 5480."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Proizvođač ispituje i opisuje materijale kao celinu: tehnički list za lak ili punilac imenuje tačno određene učvršćivače i razređivače, a često i podloge i slojeve sa kojima je proizvod proveren. Kada se uzme komponenta iz drugog sistema, vrednosti iz tehničkog lista (odnos mešanja, vreme upotrebljivosti, sušenje) više ne važe, jer niko nije proverio tu kombinaciju. Zato je sistem jednog proizvođača najsigurniji put da se dobije rezultat koji tehnički list opisuje.
+Proizvođač ispituje i opisuje materijale kao celinu: tehnički list za lak ili punilac imenuje tačno određene učvršćivače i razređivače, a često i podloge i slojeve sa kojima je proizvod proveren. Kada se uzme komponenta iz drugog sistema, vrednosti iz tehničkog lista (odnos mešanja, vreme upotrebljivosti, sušenje) više ne moraju da važe, jer proizvođač tu kombinaciju nije opisao. Zato je sistem jednog proizvođača najsigurniji put da se dobije rezultat koji tehnički list opisuje.
 
 ## Šta „sistem“ znači u tehničkom listu
 
-Sistem se vidi već u odeljku za mešanje. Za bezbojni lak baslac 40-100 tehnički list navodi odnos mešanja 2:1 po zapremini i tri učvršćivača iz iste linije: brzi, normalni i spori, uz napomenu da se spori koristi samo po vrlo toplom vremenu[^baslac-40-100-tds]. Za R-M punilac P 2P63 navedeni su jedan učvršćivač i nekoliko razređivača iz iste eSense linije[^rm-p2p63-tds].
+Sistem se vidi već u odeljku za mešanje. Za bezbojni lak baslac 40-100 tehnički list navodi odnos mešanja 2:1 po zapremini i tri učvršćivača iz iste linije: brzi, normalni i spori, uz napomenu da se spori koristi samo po vrlo toplom vremenu[^baslac-40-100-tds]. Za R-M prajmer-punilac P 2P63 navedeni su jedan učvršćivač i nekoliko razređivača iz iste eSense linije[^rm-p2p63-tds].
 
-Tehnički list ne kaže „bilo koji učvršćivač“. Imenuje šifre. Sve vrednosti koje slede u dokumentu (viskozitet, vreme upotrebljivosti, sušenje) izmerene su sa tim komponentama.
+Tehnički list ne kaže „bilo koji učvršćivač“. Imenuje šifre. Vrednosti koje slede u dokumentu (viskozitet, vreme upotrebljivosti, sušenje) odnose se na smešu sa tim komponentama.
 
 ## Sistem nije samo lak i učvršćivač
 
 Veze između slojeva mogu biti i složenije:
 
 - **Bazna boja i lak.** Za R-M C 2A40 tehnički list traži da se u vodenu baznu boju ispod tog laka doda 5 % aktivatora A 2210, uključujući sive nijanse baze i sve slojeve troslojne boje[^rm-c2a40-tds]. Isti dokument navodi i da se mešavine koje sadrže MIXINGBASE W ne mogu koristiti sa tim aktivatorom[^rm-c2a40-tds]. Lak, dakle, postavlja uslov sloju ispod sebe.
-- **Prajmer i završni sloj.** Za R-M P 5480 GHD Universal Epoxy tehnički list imenuje linije kojima se prajmer može prelakirati i navodi da je pre nanošenja ONYX HD ili DIAMONT obavezno odzračivanje od 1 h na 20 °C[^rm-p5480-tds].
-- **Podešavanje viskoziteta.** Isti tehnički list za P 5480 upozorava da se proizvod ne podešava razređivačem GV, nego samo predviđenim aditivom A 5480[^rm-p5480-tds]. Razređivač koji je u istoj liniji za druge proizvode, za ovaj nije predviđen.
+- **Prajmer i završni sloj.** Za R-M P 5480 GHD Universal Epoxy tehnički list imenuje linije kojima se prajmer može prelakirati (GRAPHITE HD, ONYX HD, DIAMONT) i navodi da je pre nanošenja ONYX HD ili DIAMONT obavezno odzračivanje od 1 h na 20 °C[^rm-p5480-tds].
+- **Podešavanje viskoziteta.** Isti tehnički list za P 5480 upozorava da se proizvod ne podešava razređivačem GV, nego samo predviđenim aditivom A 5480[^rm-p5480-tds]. Razređivač koji bi se uzeo po navici za ovaj proizvod nije predviđen.
 
 Ovi primeri pokazuju da ni „isti proizvođač“ nije dovoljan uslov. Odlučuje ono što piše u tehničkom listu konkretnog proizvoda.
 

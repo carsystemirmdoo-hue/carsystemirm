@@ -62,7 +62,7 @@ izvori:
     tip: tehnicki-list
 datumDogadjaja: "2025-10-24"
 datumObjaveIzvora: "2025-10-24"
-trziste: Globalno (R-M); prema objavi prvo Evropa
+trziste: Evropa (prema objavi, proizvod je prvo dostupan u Evropi; pojedinačna tržišta nisu navedena)
 dostupnostUSrbiji: nije-potvrdjena
 istorijska: false
 proveraVaziDo: 2026-12-07
@@ -71,22 +71,23 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: ponovo otvorene R-M objave od 24. 10. 2025 i 11. 9. 2026 (datum potvrđen i kroz datePublished, format dan/mesec), stranica o hemijskom recikliranju i lokalni tehnički listovi P 2P81 i P 2P85 (07/2026, vrednosti identične); ispravljeno: tržište (Evropa, prema objavi), oznaka C 2P42 dobila izvor, opis demonstracije (obuka na jednom vozilu, alati ScanR/Refinity/ImagePLUS), objašnjenje Ccycled i REDcert pripisano tačno onako kako R-M navodi, jezičke sitnice."
 ponovniPregled: 2026-12-07
 ---
-R-M je 24. oktobra 2025, dok je brend pripadao kompaniji BASF Coatings, predstavio RACE WET FILL-R, punilac iz serije Pioneer za rad mokro-na-mokro. Prema objavi, bazna boja se nanosi posle odzračivanja punioca od samo 5 minuta, a proizvod nosi oznaku Ccycled[^rm-race-wet-vest]. Punilac je u našem programu u dve varijante, kao [P 2P81 Race WET Fill-R White](/proizvodi/p-2p81-race-wet-fill-r-white) i [P 2P85 Race WET Fill-R Black](/proizvodi/p-2p85-race-wet-fill-r-black).
+R-M je 24. oktobra 2025, dok je brend pripadao kompaniji BASF Coatings, predstavio RACE WET FILL-R, punilac iz serije Pioneer za rad mokro-na-mokro. Prema objavi, bazna boja se nanosi direktno na sveži sloj punioca posle odzračivanja od svega 5 minuta, a punilac nosi sertifikat Ccycled[^rm-race-wet-vest]. Punilac je u našem programu u dve varijante, kao [P 2P81 Race WET Fill-R White](/proizvodi/p-2p81-race-wet-fill-r-white) i [P 2P85 Race WET Fill-R Black](/proizvodi/p-2p85-race-wet-fill-r-black).
 
 ## Šta je R-M objavio
 
 - RACE WET FILL-R je deo serije Pioneer i, prema R-M, kompatibilan je sa R-M linijama bazne boje i sa bezbojnim lakom RACE Finish-R[^rm-race-wet-vest].
-- Proces je zamišljen kao kombinacija punioca, bazne boje [AGILIS](/proizvodi/rm-agilis) i laka [C 2P42 RACE Finish-R](/proizvodi/c-2p42-race-finish-r)[^rm-race-wet-vest].
+- Postupak je zamišljen kao kombinacija punioca, bazne boje [AGILIS](/proizvodi/rm-agilis) i bezbojnog laka RACE Finish-R[^rm-race-wet-vest], koji R-M na stranici o hemijskom recikliranju označava kao [C 2P42](/proizvodi/c-2p42-race-finish-r)[^rm-ccycled].
 - Objava navodi da će proizvod prvo biti dostupan u Evropi i ne navodi pojedinačna tržišta[^rm-race-wet-vest].
-- R-M je 11. septembra 2026. objavio prikaz celog postupka u svom trening centru u Francuskoj: bazna boja se nanosi direktno na sveži sloj punioca, a nijansa je tražena digitalnim alatima[^rm-wow-demonstracija].
+- R-M je 11. septembra 2026. objavio prikaz obuke u svom centru za obuku u Francuskoj, na popravci jednog vozila Fiat: bazna boja je naneta direktno na sveži sloj punioca, a nijansa je utvrđena digitalnim alatima ScanR, Refinity i ImagePLUS[^rm-wow-demonstracija].
 
 ## Šta navode tehnički listovi
 
@@ -96,12 +97,12 @@ Tehnički listovi P 2P81 i P 2P85 (oba u verziji 07/2026) daju iste vrednosti za
 | --- | --- |
 | Odnos mešanja | 3:1:1 po zapremini: punilac, učvršćivač H 2P80, razređivač R 2P25, R 2P35 ili R 2P45[^rm-p2p81-tds][^rm-p2p85-tds] |
 | Vreme upotrebljivosti | 60 min na 20 °C[^rm-p2p81-tds][^rm-p2p85-tds] |
-| Broj slojeva | 1, uz mogući jedan tanak dodatni sloj preko mesta proboja[^rm-p2p81-tds][^rm-p2p85-tds] |
+| Broj slojeva | 1; preko mesta proboja se prethodno može naneti jedan tanak sloj[^rm-p2p81-tds][^rm-p2p85-tds] |
 | Debljina sloja | 20–35 µm[^rm-p2p81-tds][^rm-p2p85-tds] |
 | Odzračivanje pre bazne boje | 5 min na 20 °C[^rm-p2p81-tds][^rm-p2p85-tds] |
 | Nanošenje bez međubrušenja | u roku od 3 h; posle toga brušenje granulacijom P800–P1200[^rm-p2p81-tds][^rm-p2p85-tds] |
 
-Prema tehničkim listovima, punilac se nanosi na nove delove sa fabričkim KTL slojem (e-coat) bez brušenja, na stari lak i na GRP/SMC. Na čelik, pocinkovani lim i aluminijum ide samo ako su gola mesta prethodno prajmerisana[^rm-p2p81-tds]. Mešanjem bele i crne varijante dobijaju se različite sive nijanse[^rm-p2p81-tds][^rm-p2p85-tds]. Razređivač se bira prema R-M temperaturnoj tabeli za podloge[^rm-p2p81-tds].
+Prema tehničkim listovima, punilac se nanosi na nove delove sa fabričkim KTL slojem (e-coat) bez brušenja, na stari lak i na GRP/SMC. Na čelik, pocinkovani lim i aluminijum nanosi se samo ako je na gola mesta prethodno nanet prajmer[^rm-p2p81-tds]. Mešanjem bele i crne varijante dobijaju se različite sive nijanse[^rm-p2p81-tds][^rm-p2p85-tds]. Razređivač uz učvršćivač H 2P80 bira se prema R-M temperaturnoj tabeli za proizvode za podlogu[^rm-p2p81-tds].
 
 Opšte objašnjenje postupka mokro-na-mokro biće u vodiču [Punilac mokro-na-mokro: kada se koristi i šta dobijate](/vodici/mokro-na-mokro-punilac).
 
@@ -109,7 +110,7 @@ Opšte objašnjenje postupka mokro-na-mokro biće u vodiču [Punilac mokro-na-mo
 
 ### Šta znači oznaka Ccycled?
 
-R-M pod tim nazivom opisuje sirovine dobijene hemijskim recikliranjem otpadnih guma. One se proizvodima pripisuju po principu masenog bilansa, a postupak je nezavisno sertifikovan po standardu REDcert²[^rm-ccycled]. Maseni bilans znači da se udeo takvih sirovina pripisuje određenim proizvodima računski, po sertifikovanoj metodi[^rm-ccycled].
+Pod nazivom Ccycled R-M predstavlja proizvode za koje se koriste sirovine dobijene hemijskim recikliranjem otpadnih guma. Te sirovine se proizvodima pripisuju po principu masenog bilansa: ulaze u proizvodni lanac, a zatim se računski, po sertifikovanoj metodi, pripisuju određenim proizvodima[^rm-ccycled]. R-M navodi da je postupak nezavisno sertifikovan kod organizacije REDcert[^rm-ccycled].
 
 ### Da li se preko punioca uvek nanosi bez brušenja?
 

@@ -61,8 +61,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Multi Green V08 i F.19 Finish V01 (Carsystem), P 2P63 i C 2A40 07/2026 (R-M); sve vrednosti se poklapaju; ispravljeno: red za C 2A40 u tabeli jasno označen kao rok za nanošenje (nije vreme sušenja), dopunjena namena F.19 Finish, ublažena jedna posledica (može da se vidi)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -105,17 +106,17 @@ Lak daje sjaj i štiti baznu boju. Nanosi se tek kada je baza dovoljno suva: za 
 
 ### 8. Poliranje
 
-Kada je lak otvrdnuo, sitne greške kao što je zrnce prašine bruse se vrlo finim brusnim diskom i poliraju. Carsystem, na primer, za disk F.19 Finish navodi namenu brušenja grešaka u završnom sloju i zona utapanja, u granulacijama od P1000 do P2000[^carsystem-f19-finish-tds]. Kada se i kako polira, objašnjava vodič [Poliranje posle lakiranja](/vodici/poliranje-posle-lakiranja-osnove).
+Kada je lak otvrdnuo, sitne greške kao što je zrnce prašine bruse se vrlo finim brusnim diskom i poliraju. Carsystem, na primer, za disk F.19 Finish navodi namenu brušenja grešaka u završnom sloju, zona utapanja i matiranja površine, u granulacijama od P1000 do P2000[^carsystem-f19-finish-tds]. Kada se i kako polira, objašnjava vodič [Poliranje posle lakiranja](/vodici/poliranje-posle-lakiranja-osnove).
 
 ## Koliko vremena traže pojedine faze
 
-Ne postoji jedno vreme za celu popravku. Primeri iz tri tehnička lista pokazuju koliko se vremena razlikuju:
+Ne postoji jedno vreme za celu popravku. Primeri iz tri tehnička lista pokazuju koliko se vremena razlikuju i da se ne odnose uvek na isto (sušenje ili rok za nanošenje):
 
 | Faza | Proizvod | Vreme prema tehničkom listu |
 | --- | --- | --- |
 | kit | Carsystem Multi Green | otvrdnjavanje 15 min na 20 °C[^carsystem-multi-green-tds] |
 | punilac | R-M P 2P63 | sušenje 16 h na 20 °C ili 35 min na 60 °C[^rm-p2p63-tds] |
-| bezbojni lak | R-M C 2A40 | vreme upotrebljivosti smeše 25 min na 20 °C[^rm-c2a40-tds] |
+| bezbojni lak | R-M C 2A40 | rok za nanošenje zamešane smeše (vreme upotrebljivosti) 25 min na 20 °C[^rm-c2a40-tds] |
 
 Na ukupno vreme utiču i temperatura u prostoru, temperatura samog dela i to da li radionica ima kabinu sa grejanjem ili infracrveno sušenje.
 
@@ -124,7 +125,7 @@ Na ukupno vreme utiču i temperatura u prostoru, temperatura samog dela i to da 
 Ovo je urednički izbor faza u kojima žurba najviše utiče na rezultat, a ne statistika grešaka.
 
 - **Odmašćivanje.** Nečistoća koja ostane ispod sloja može da izazove kratere ili slabo prianjanje.
-- **Sušenje pre brušenja.** Kit ili punilac koji se brusi pre propisanog vremena može kasnije da se slegne, pa se tragovi vide kroz boju.
+- **Sušenje pre brušenja.** Kit ili punilac koji se brusi pre propisanog vremena može kasnije da se slegne, pa tragovi mogu da se vide kroz boju.
 - **Probni lim.** Bez njega se razlika u nijansi otkrije tek na vozilu.
 - **Sušenje između baze i laka.** Lak preko nedovoljno suve baze može da utiče na izgled i prianjanje.
 

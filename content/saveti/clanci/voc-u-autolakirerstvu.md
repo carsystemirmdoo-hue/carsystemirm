@@ -36,7 +36,7 @@ povezani:
   - SV-0205
 izvori:
   - id: eu-direktiva-2004-42
-    naziv: "Direktiva 2004/42/EZ Evropskog parlamenta i Saveta od 21. aprila 2004. o ograničenju emisija isparljivih organskih jedinjenja (izvorni tekst, legislation.gov.uk)"
+    naziv: "Direktiva 2004/42/EZ Evropskog parlamenta i Saveta od 21. aprila 2004. o ograničenju emisija isparljivih organskih jedinjenja (tekst sa izmenama objavljen na legislation.gov.uk; zvanični izvor je EUR-Lex)"
     url: https://www.legislation.gov.uk/eudr/2004/42/data.html
     datumIzvora: 2004-04-21
     pristupljeno: 2026-10-08
@@ -82,19 +82,20 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: tekst Direktive 2004/42/EZ (legislation.gov.uk, sa izmenama; čl. 1–4, Prilog I i II deo B), tekst srpskog Pravilnika (sanitarna inspekcija APV; čl. 10–13, bez vrednosti iz Priloga 3, brojke za Srbiju se ne navode), tehnički listovi C 2A40 07/2026, 40-100 06/2026, 21-11 i 70-45 06/2023, Multi Green V08; sve granice i oznake se poklapaju; ispravljeno: etiketa navodi najveći (ne stvarni) sadržaj, netačna tvrdnja o podeli vodene/rastvaračke za reparaturu (važi samo deo A) zamenjena, aerosoli dodati u potkategoriju e prema Direktivi uz razliku prema srpskom pravilniku, naziv izvora precizira da je tekst sa izmenama."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-VOC (isparljiva organska jedinjenja) su organske materije koje lako isparavaju, uglavnom rastvarači u bojama, lakovima, razređivačima i sredstvima za čišćenje. Evropska direktiva 2004/42/EZ ograničava koliko ih sme biti u materijalu za reparaturno lakiranje i traži da etiketa navede potkategoriju proizvoda, graničnu vrednost i stvarni sadržaj VOC u gramima po litru[^eu-direktiva-2004-42]. Zato tehnički listovi iz našeg programa imaju red poput „2004/42/IIB(d)(420)419“: za bezbojni lak R-M C 2A40 to znači granicu od 420 g/l i sadržaj od 419 g/l u stanju spremnom za nanošenje[^rm-c2a40-tds].
+VOC (isparljiva organska jedinjenja) su organske materije koje lako isparavaju, uglavnom rastvarači u bojama, lakovima, razređivačima i sredstvima za čišćenje. Evropska direktiva 2004/42/EZ ograničava koliko ih sme biti u materijalu za reparaturno lakiranje i traži da etiketa navede potkategoriju proizvoda, graničnu vrednost i najveći sadržaj VOC u gramima po litru proizvoda spremnog za upotrebu[^eu-direktiva-2004-42]. Zato tehnički listovi iz našeg programa imaju red poput „2004/42/IIB(d)(420)419“: za bezbojni lak R-M C 2A40 to znači granicu od 420 g/l i sadržaj od 419 g/l u stanju spremnom za nanošenje[^rm-c2a40-tds].
 
 ## Zašto se VOC ograničava
 
-Direktiva navodi da je njen cilj smanjenje zagađenja vazduha, jer VOC doprinose stvaranju prizemnog ozona[^eu-direktiva-2004-42]. Ograničenje se zato odnosi na sastav proizvoda koji se stavlja u promet, a ne na to kako ga pojedinac koristi.
+Direktiva navodi da je njen cilj smanjenje zagađenja vazduha, jer VOC doprinose stvaranju prizemnog ozona[^eu-direktiva-2004-42]. Ograničenje se odnosi na sastav proizvoda koji se stavlja u promet, a ne na to kako ga pojedinac koristi[^eu-direktiva-2004-42].
 
 Isti propis definiše VOC kao organsko jedinjenje sa početnom tačkom ključanja do 250 °C pri standardnom pritisku od 101,3 kPa, a sadržaj VOC kao masu tih jedinjenja u gramima po litru proizvoda spremnog za upotrebu[^eu-direktiva-2004-42]. Jedinjenja koja tokom sušenja hemijski reaguju i postanu deo sloja ne računaju se u taj sadržaj[^eu-direktiva-2004-42].
 
@@ -115,7 +116,7 @@ Oznaka ima četiri dela: broj direktive, potkategoriju, graničnu vrednost i stv
 | b | kitovi | 250 g/l[^eu-direktiva-2004-42] |
 | c | prajmeri i punioci; posebno reaktivni prajmer | 540 g/l; za reaktivni prajmer 780 g/l[^eu-direktiva-2004-42] |
 | d | završni slojevi: bazna boja i bezbojni lak | 420 g/l[^eu-direktiva-2004-42] |
-| e | posebni završni slojevi (npr. jednoslojni metalik, teksturisani slojevi) | 840 g/l[^eu-direktiva-2004-42] |
+| e | posebni završni slojevi (npr. jednoslojni metalik, teksturisani slojevi) i aerosoli | 840 g/l[^eu-direktiva-2004-42] |
 
 Za sve potkategorije osim „a“ voda u proizvodu se ne računa pri izražavanju sadržaja[^eu-direktiva-2004-42].
 
@@ -138,7 +139,7 @@ Kod R-M i baslac tehničkih listova VOC red je obično u odeljku „Safety Advic
 
 - **Važi stanje spremno za nanošenje.** Granica se odnosi na pripremljenu smešu, a ne na jednu komponentu iz limenke[^eu-direktiva-2004-42]. Zato je važno pridržavati se odnosa mešanja i razređivača koje navodi tehnički list.
 - **Niska VOC vrednost ne znači da je proizvod bezopasan.** VOC oznaka govori o isparljivim jedinjenjima u odnosu na zagađenje vazduha. Opasnosti po zdravlje, zaštitna oprema i rukovanje čitaju se iz bezbednosnog lista i oznaka na ambalaži. Više u vodičima [Bezbednosni list](/vodici/bezbednosni-list-16-odeljaka) i [Oznake opasnosti na ambalaži](/vodici/oznake-opasnosti-na-ambalazi).
-- **Vodene i rastvaračke bazne boje.** Direktiva razlikuje premaze kojima se viskozitet podešava vodom i one kojima se podešava organskim rastvaračem[^eu-direktiva-2004-42]. Kako se te dve vrste baznih boja razlikuju u radu, objašnjava tekst [Vodene i rastvaračke bazne boje](/vodici/vodene-i-rastvaracke-bazne-boje).
+- **Vodene i rastvaračke bazne boje.** Za materijale za reparaturno lakiranje Direktiva ne daje posebne granice za vodene i rastvaračke premaze; tu podelu ima samo deo A, za boje i lakove za zgrade. Za sve završne slojeve u reparaturi važi ista granica, a voda se ne računa u sadržaj[^eu-direktiva-2004-42]. Kako se te dve vrste baznih boja razlikuju u radu, objašnjava tekst [Vodene i rastvaračke bazne boje](/vodici/vodene-i-rastvaracke-bazne-boje).
 
 ## Propisi u Srbiji
 
@@ -156,4 +157,4 @@ Granica se proverava za proizvod u stanju spremnom za upotrebu, uključujući ra
 
 ### Važe li ista pravila za sprejeve?
 
-Prema tekstu srpskog pravilnika koji smo otvorili, ograničenja sadržaja VOC ne primenjuju se na aerosole[^rs-pravilnik-hemikalije]. To ne znači da sprej nema rastvarače: sastav, opasnosti i zaštitu za konkretan sprej proverite na ambalaži i u bezbednosnom listu.
+Direktiva 2004/42/EZ aerosole za reparaturno lakiranje svrstava u posebne završne slojeve (potkategorija e)[^eu-direktiva-2004-42]. Prema tekstu srpskog pravilnika koji smo otvorili, ograničenja sadržaja VOC iz tog pravilnika ne primenjuju se na aerosole[^rs-pravilnik-hemikalije]. To ne znači da sprej nema rastvarače: sastav, opasnosti i zaštitu za konkretan sprej proverite na ambalaži i u bezbednosnom listu.

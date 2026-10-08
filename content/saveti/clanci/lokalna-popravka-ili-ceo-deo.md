@@ -71,8 +71,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi A 2520 i C 2A40 07/2026 (R-M), 65-10 i 45-W10 06/2023 (baslac), F.19 Finish V01 (Carsystem); namene proizvoda za utapanje se poklapaju; kriterijumi odluke jasno označeni kao opšti; jedna jezička ispravka."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -92,7 +93,7 @@ Lokalna popravka ima smisla kada je oštećenje malo, kada oko njega ima dovoljn
 Ovo su opšti kriterijumi, a ne pravilo proizvođača. Konačna odluka zavisi od vozila, boje i opreme.
 
 1. **Veličina i dubina oštećenja.** Mala ogrebotina i ulubljenje preko pola dela nisu isti posao. Što je zona kita i punioca veća, to je potrebna veća zona boje.
-2. **Mesto na delu.** Oštećenje na sredini velike površine (hauba, krov) teže se popravlja lokalno, jer je prelaz dobro vidljiv. Oštećenje blizu ivice, lajsne ili prirodnog prekida lakše se zatvara.
+2. **Mesto na delu.** Oštećenje na sredini velike površine (hauba, krov) teže se popravlja lokalno, jer je prelaz dobro vidljiv. Oštećenje blizu ivice, lajsne ili prirodnog prekida lakše se popravlja lokalno.
 3. **Vrsta boje.** Jednobojne (solid) boje se po pravilu lakše utapaju od metalik, biserne i troslojne boje.
 4. **Stanje starog laka.** Izbledeo, ispucao ili ranije popravljan lak ne prima utapanje jednako kao nov.
 5. **Zahtevi proizvođača vozila.** R-M u tehničkim listovima napominje da se uz uputstva za proizvod moraju poštovati i uputstva proizvođača vozila za popravku, posebno kada su ugrađeni senzori[^rm-c2a40-tds].

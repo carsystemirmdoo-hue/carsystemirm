@@ -71,8 +71,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi AF.21 1K Filler V02, AF.25 V02, EF.21 V05, Multi Green V08 (Carsystem) i C 2A40 07/2026 (R-M); svi odnosi mešanja i vremena upotrebljivosti se poklapaju; ispravljeno: namena AF.21 za plastiku dopunjena izuzetkom PE i PP, jedna jezička ispravka."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -98,7 +99,7 @@ Postoje i 1K materijali koji ne suše samo isparavanjem, na primer proizvodi koj
 | Carsystem EF.21 EP Filler | 2K punilac | 2:1 sa učvršćivačem[^cs-ef21-tds] | 3 h[^cs-ef21-tds] |
 | R-M C 2A40 AirTOP | 2K bezbojni lak | 1:1 + 20 % razređivača[^rm-c2a40-tds] | 25 min[^rm-c2a40-tds] |
 
-Tabela ne poredi kvalitet. Pokazuje da se i među 2K materijalima vreme upotrebljivosti razlikuje više puta, pa se uvek čita za proizvod koji koristite. Kako se odnos mešanja tačno meri objašnjava vodič [Odnos mešanja](/vodici/odnos-mesanja-iz-tehnickog-lista).
+Tabela ne poredi kvalitet. Pokazuje da se i među 2K materijalima vreme upotrebljivosti razlikuje višestruko, pa se uvek čita za proizvod koji koristite. Kako se odnos mešanja tačno meri objašnjava vodič [Odnos mešanja](/vodici/odnos-mesanja-iz-tehnickog-lista).
 
 ## 2K nisu samo lakovi
 
@@ -119,7 +120,7 @@ Zato što hemijska reakcija sa učvršćivačem ne čeka da materijal stigne na 
 
 ### Može li 1K materijal da zameni 2K?
 
-Samo onda kada tehnički list sistema predviđa 1K proizvod za tu namenu. Namena se razlikuje i u okviru istog brenda. Za AF.21 1K Filler Carsystem navodi izolovanje mesta sa kitom, lakiranje novih delova i plastiku[^cs-af21-1k-tds], a 2K punilac EF.21 opisuje za sve uobičajene primene, od malih delova do celih vozila[^cs-ef21-tds]. Ako tehnički list sistema za neki sloj traži 2K materijal, 1K materijal ga ne zamenjuje.
+Samo onda kada tehnički list sistema predviđa 1K proizvod za tu namenu. Namena se razlikuje i u okviru istog brenda. Za AF.21 1K Filler Carsystem navodi izolovanje mesta sa kitom, lakiranje novih delova i plastične delove bez prethodnog prajmera, osim PE i PP[^cs-af21-1k-tds], a 2K punilac EF.21 opisuje za sve uobičajene primene, od malih delova do celih vozila[^cs-ef21-tds]. Ako tehnički list sistema za neki sloj traži 2K materijal, 1K materijal ga ne zamenjuje.
 
 ### Da li važi isto i za sprejeve?
 

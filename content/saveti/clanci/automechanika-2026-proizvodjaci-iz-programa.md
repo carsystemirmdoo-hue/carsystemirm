@@ -92,11 +92,12 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni završni izveštaj Messe Frankfurt (12. 9. 2026; 4.400 izlagača, 80 zemalja), stranica SATA sa datumima 08.–12. 09. 2026, četiri stranice izlagača (hale i štandovi se poklapaju), objave Surventis (5. 8.) i R-M (29. 7.) i članak AUTOHAUS (7. 9.). Ispravke: štand C53 potiče iz potpisa fotografije uz objavu, a ne iz teksta; „ograničeno izdanje“ → posebno izdanje (izvor ne navodi ograničenje); jetstream kao najava, ne kao opis viđenog; preciziran navod da Carsystem i Befar nisu objavili tekst o nastupu."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2026-12-07
 ---
@@ -115,12 +116,12 @@ Stranice izlagača su i dalje dostupne, ali u zaglavlju već prikazuju datume sl
 
 ## Šta su proizvođači sami objavili
 
-- **Surventis i R-M.** Surventis je 5. avgusta 2026. najavio da će na štandu C53 u hali 11.1 predstaviti povezana rešenja za lakirnice: premaze, digitalne alate, savetovanje i automatizaciju, kao i nove funkcije platforme Refinity[^surventis-am-2026]. R-M je istu najavu objavio 29. jula 2026[^rm-am-2026]. Objava pominje brendove Glasurit i R-M. baslac i Norbin se u njoj ne pominju[^surventis-am-2026]. Pozadinu promene imena opisuje tekst [BASF Coatings postaje Surventis](/vodici/basf-coatings-postaje-surventis).
-- **Carsystem i Befar.** Na svojim sajtovima nisu objavili tekst o nastupu. Na spisku izlagača se ne navodi šta su izlagali, pa to ni mi ne navodimo[^am-vosschemie][^am-befar].
+- **Surventis i R-M.** Surventis je 5. avgusta 2026. najavio da će na sajmu predstaviti povezana rešenja za lakirnice: premaze, digitalne alate, savetovanje i nove funkcije platforme Refinity, uz uvid u koncepte automatizacije. Uz objavu je fotografija sa oznakom hala 11.1, štand C53[^surventis-am-2026]. R-M je istu najavu objavio 29. jula 2026[^rm-am-2026]. Od refinish brendova objava imenuje Glasurit i R-M, a baslac i Norbin se u njoj ne pominju[^surventis-am-2026]. Pozadinu promene imena opisuje tekst [BASF Coatings postaje Surventis](/vodici/basf-coatings-postaje-surventis).
+- **Carsystem i Befar.** Na stranicama vesti na njihovim sajtovima, pregledanim 8. oktobra 2026, nismo našli tekst o nastupu. Na spisku izlagača se ne navodi šta su izlagali, pa to ni mi ne navodimo[^am-vosschemie][^am-befar].
 
 ## SATA: noviteti prema stručnoj štampi
 
-Na sopstvenom sajtu SATA navodi samo datume sajma, bez spiska novih proizvoda[^sata-sajmovi]. Nemački stručni portal AUTOHAUS je 7. septembra 2026. objavio da SATA na sajmu predstavlja dva namenska izdanja pištolja jet X, za baznu boju i za bezbojni lak, i ograničeno izdanje jet X by Stilbruch, rađeno sa umetnikom Alexom Blochom. Prema istom članku, na posebnom štandu D13 firma SATA Automation pokazivala je robotski sistem jetstream[^autohaus-sata]. Ovi podaci potiču iz stručne štampe, a ne iz zvanične objave proizvođača.
+Na sopstvenom sajtu SATA navodi samo datume sajma, bez spiska novih proizvoda[^sata-sajmovi]. Nemački stručni portal AUTOHAUS je 7. septembra 2026, dan pred otvaranje sajma, objavio da SATA na sajmu predstavlja dva namenska izdanja pištolja jet X, za baznu boju i za bezbojni lak, i posebno izdanje jet X by Stilbruch, rađeno sa umetnikom Alexom Blochom. Prema istom članku, na posebnom štandu D13 u hali 11.1 firma SATA Automation najavila je prikaz robotskog sistema jetstream uživo[^autohaus-sata]. Ovi podaci potiču iz stručne štampe, a ne iz zvanične objave proizvođača.
 
 Sva tri izdanja pištolja imamo u katalogu: [SATA jet X basecoat Edition](/proizvodi/sata-jet-x-basecoat-edition), [SATA jet X clearcoat Edition](/proizvodi/sata-jet-x-clearcoat-edition) i [SATA jet X by Stilbruch Edition](/proizvodi/sata-jet-x-by-stilbruch-edition). Robotski sistem jetstream nije u našem programu.
 

@@ -15,6 +15,7 @@ namera: rešavanje problema
 dodatnaPitanja:
   - Šta se dešava sa premalo učvršćivača?
   - Šta da radim ako sam već pogrešio u odnosu?
+  - Da li isto važi za učvršćivač u 2K spreju?
 poreklopitanja:
   tip: pronadjeno-u-izvoru
   napomena: "Pitanje koliko učvršćivača staviti i šta se dešava sa viškom postavlja se na forumima u vezi sa kitom; za lak je urednička procena. Forum služi samo kao dokaz pitanja."
@@ -90,11 +91,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem 2K Clear VOC 420 (V09), Activator (v.01), Elastic weiss (v.04), Multi Green (V08), baslac 40-450 i varijanta 60-05, R-M C 2P55 i A 2P17; sve vrednosti i upozorenja se poklapaju („nur über die verschiedenen Härter“, nije za brze učvršćivače, 60-05 ne u punilac iznad 25 °C). Ispravke: uklonjena nepotkrepljena tvrdnja da proizvođač „ispituje“ odnos, 60-05 dopunjen učvršćivačem 50-415 i nazivom Speeding Reducer, „po zapremini“ za Activator, odgovor o ispravci smeše preformulisan kao preporuka bez tvrdnje o hemiji."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -102,7 +104,7 @@ Ne. Odnos mešanja je deo formule, a ne regulator brzine. Proizvođači brzinu p
 
 ## Zašto višak učvršćivača ne pomaže
 
-Osnovni materijal i učvršćivač su formulisani tako da zajedno daju sloj sa svojstvima iz tehničkog lista. Proizvođač ih ispituje u tom odnosu i u njemu daje vreme sušenja, tvrdoću i prianjanje. Smeša sa drugačijim odnosom je materijal za koji ti podaci više ne važe, pa ni brzina sušenja nije predvidiva.
+Osnovni materijal i učvršćivač su formulisani tako da zajedno daju sloj sa svojstvima iz tehničkog lista. Vreme sušenja i ostali podaci u tehničkom listu navedeni su za propisani odnos. Smeša sa drugačijim odnosom je materijal za koji ti podaci više ne važe, pa ni brzina sušenja nije predvidiva.
 
 Šta tačno biva sa bezbojnim lakom kome je dodato previše učvršćivača, tehnički listovi koje smo pregledali ne opisuju. Nijedan od njih, međutim, ne dozvoljava odstupanje od odnosa radi bržeg sušenja. Za poliesterski kit posledice su navedene:
 
@@ -116,8 +118,8 @@ Fleke koje se posle vide kroz boju obrađuje tekst [Fleke iznad kita koje se vid
 | Način | Primer iz tehničkog lista |
 | --- | --- |
 | Brži učvršćivač, isti odnos | Carsystem 2K Clear VOC 420 na 20 °C: dalji rad posle 10 h sa standardnim i 6 h sa „very fast“ učvršćivačem[^carsystem-clear-420-tds] |
-| Propisani ubrzivač u tačnoj količini | baslac 40-450 sa 10 % ubrzivača 60-05 umesto običnog razređivača: sušenje na 20 °C 4 h, uz vreme upotrebljivosti od 45 min[^baslac-40-450-60-05-tds] |
-| Ubrzivač u laku | Carsystem Activator: u laku 2 % (3 dela na 100 delova laka i 50 delova učvršćivača), sušenje kraće u proseku za oko 15 %[^carsystem-activator-tds] |
+| Propisani ubrzivač u tačnoj količini | baslac 40-450 sa brzim učvršćivačem 50-415 i 10 % ubrzavajućeg razređivača 60-05 (Speeding Reducer) umesto običnog razređivača: sušenje na 20 °C 4 h, uz vreme upotrebljivosti od 45 min[^baslac-40-450-60-05-tds] |
+| Ubrzivač u laku | Carsystem Activator: u laku 2 % (3 dela na 100 delova laka i 50 delova učvršćivača, po zapremini), sušenje kraće u proseku za oko 15 %[^carsystem-activator-tds] |
 | Aditiv prema tehničkom listu laka | R-M za C 2P55 navodi da aditivi AIR Tune-R ili FAST Tune-R mogu da skrate sušenje[^rm-c2p55-tds] |
 | Viša temperatura sušenja | baslac 40-450 sa 50-415: 6 h na 20 °C, 20 min na 60 °C[^baslac-40-450-tds] |
 
@@ -140,7 +142,7 @@ Za poliesterski kit Multi Green Carsystem navodi da i premalo učvršćivača mo
 
 ### Šta da radim ako sam već pogrešio u odnosu?
 
-Smeša kod koje je reakcija već počela ne može pouzdano da se „ispravi“ naknadnim dodavanjem komponente. Ako je smeša pogrešno odmerena, napravite novu. Ako je takav materijal već nanet, obratite se tehničkoj podršci proizvođača pre dalje obrade, jer odluka zavisi od proizvoda i stanja sloja.
+Tehnički listovi koje smo pregledali ne predviđaju naknadno ispravljanje odnosa dodavanjem komponente. Ako je smeša pogrešno odmerena, sigurnije je napraviti novu. Ako je takav materijal već nanet, obratite se tehničkoj podršci proizvođača pre dalje obrade, jer odluka zavisi od proizvoda i stanja sloja.
 
 ### Da li isto važi za učvršćivač u 2K spreju?
 

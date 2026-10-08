@@ -67,30 +67,31 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni YouTube video (uploadDate 30. 6. 2026, kanal carsystem_refinish, opis), brošura Polish X-Serie (7 str., izrada 5. 5. 2026), katalog 2026/27 str. 130–133 i stranica Compound X1500 HC; sve vrednosti (600–1500 o/min, 145/85 mm po 2 kom., 40 × 40 cm, 300 g/m², 30 °C) se poklapaju. Ispravke: „predstavio“ → objavio video (brošura postoji od maja), „najtvrđi u seriji“ zamenjeno opisom iz brošure, prestrukturisan odgovor o X1500 bez X8000."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2026-12-07
 ---
-Carsystem je 30. juna 2026. na svom YouTube kanalu predstavio novu X seriju za poliranje[^cs-x-video]. Sistem ima dva koraka: abrazivnu pastu Compound X1500 HC i završnu pastu protiv holograma Polish X8000 AH. Uz svaku pastu ide namenski sunđer, a uz sistem i dvobojne krpe od mikrofibera Microfiber X300 Duo[^cs-x-brosura]. U katalogu 2026/27 serija je označena kao nova[^cs-katalog-2026-27]. Svih pet proizvoda je u našem programu. Dostupnost u Srbiji nije potvrđena.
+Carsystem je 30. juna 2026. na svom YouTube kanalu objavio video u kome predstavlja novu X seriju za poliranje[^cs-x-video]. Sistem ima dva koraka: abrazivnu pastu Compound X1500 HC i završnu pastu protiv holograma Polish X8000 AH. Uz svaku pastu ide namenski sunđer, a uz sistem i dvobojne krpe od mikrofibera Microfiber X300 Duo[^cs-x-brosura]. U katalogu 2026/27 serija je označena kao nova[^cs-katalog-2026-27]. Svih pet proizvoda je u našem programu. Dostupnost u Srbiji nije potvrđena.
 
 ## Šta je objavljeno
 
-Video polazi od problema iz svakodnevnog rada: uključenja prašine, pasta koje se leti brzo suše i holograma na tamnim lakovima. Carsystem navodi da želi jednostavan, siguran i pre svega brz postupak završne obrade[^cs-x-video]. Brošuru na nemačkom je izdala VOSSCHEMIE GmbH, firma čija je Carsystem robna marka[^cs-x-brosura].
+Video polazi od problema iz svakodnevnog rada: uključenja prašine, pasta koje se leti brzo suše i holograma na tamnim lakovima. Carsystem navodi da želi jednostavan, siguran i pre svega brz postupak završne obrade[^cs-x-video]. Brošuru na nemačkom je izdala VOSSCHEMIE GmbH, firma čija je Carsystem robna marka; PDF nosi datum izrade 5. maja 2026[^cs-x-brosura].
 
 ## Kako su paste i sunđeri upareni
 
 | Korak | Pasta | Sunđer | Namena prema proizvođaču |
 | --- | --- | --- | --- |
-| 1 | [Compound X1500 HC](/proizvodi/carsystem-compound-x1500-hc) | [Polishing Pad HC X1500](/proizvodi/carsystem-polishing-pad-x1500) (heavy cut) ili MC X1500 (medium cut) | brzo uklanjanje tragova brušenja iz završnog sloja[^cs-x-brosura] |
+| 1 | [Compound X1500 HC](/proizvodi/carsystem-compound-x1500-hc) | [Polishing Pad HC X1500](/proizvodi/carsystem-polishing-pad-x1500) (engl. heavy cut) ili MC X1500 (engl. medium cut) | brzo uklanjanje tragova brušenja iz završnog sloja[^cs-x-brosura] |
 | 2 | [Polish X8000 AH](/proizvodi/carsystem-polish-x8000-ah) | [Polishing Pad AH X8000](/proizvodi/carsystem-polishing-pad-x8000) | uklanjanje najfinijih ogrebotina i holograma, poslednji korak[^cs-x-brosura] |
 
 Sunđeri su u prečnicima od 145 mm i 85 mm, a pakuju se po dva komada[^cs-x-brosura][^cs-katalog-2026-27].
 
-- **HC X1500** je najtvrđi u seriji i daje najveći skid materijala. MC X1500 ima nešto manju tvrdoću i manji skid, pa ga Carsystem opisuje kao univerzalan sunđer za svaku podlogu i svakog korisnika[^cs-x-brosura].
+- **HC X1500** proizvođač opisuje kao sunđer za najjači skid (nem. „Maximaler Cut“). MC X1500 ima nešto manju tvrdoću i manji skid, pa ga Carsystem opisuje kao univerzalan sunđer za svaku podlogu i svakog korisnika[^cs-x-brosura].
 - **AH X8000** je mek sunđer fine strukture pora, namenjen samo završnom koraku sa X8000[^cs-x-brosura].
 - Prema katalogu, HC X1500 je crven, a MC X1500 beo[^cs-katalog-2026-27].
 - Za sva tri sunđera proizvođač navodi da se čiste izduvavanjem komprimovanim vazduhom, bez vode, sapuna i sredstava za čišćenje[^cs-x-brosura]. Opšta pravila za održavanje sunđera su u vodiču [Čišćenje sunđera za poliranje](/vodici/ciscenje-i-vek-sundjera).
@@ -111,7 +112,7 @@ U kutiji su crvene i bele krpe od mikrofibera, dimenzija 40 × 40 cm i gramature
 
 ### Da li se X1500 može koristiti bez X8000?
 
-Prema Carsystemu, na svetlim lakovima je moguće poliranje u jednom koraku sa X1500[^cs-x-brosura]. Kada posle prvog koraka ostanu hologrami, a Carsystem rizik od holograma posebno vezuje za tamne lakove[^cs-x-video], za to je u sistemu namenjen završni korak sa X8000[^cs-x-brosura].
+Prema Carsystemu, na svetlim lakovima je moguće poliranje u jednom koraku sa X1500[^cs-x-brosura]. Rizik od holograma Carsystem posebno vezuje za tamne lakove[^cs-x-video]. Ako posle prvog koraka ostanu hologrami, sistem za to predviđa završni korak sa X8000[^cs-x-brosura].
 
 ### Kojom mašinom se radi?
 

@@ -58,8 +58,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi 40-100 06/2026 i C 2A40 07/2026, R-M stranice Color expertise (radar) i Technical training (InfoR-M); tvrdnje se poklapaju; ispravljeno: napomena o uputstvima proizvođača vozila pripisana tehničkim listovima R-M umesto uopštenim „proizvođačima boja“. Tekst ne ocenjuje radionice i ne navodi propise bez izvora."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -80,7 +81,7 @@ Dobru radionicu najlakše ćete prepoznati po tome kako objašnjava posao pre ne
 2. **Kako će se utvrditi nijansa?** Ozbiljan odgovor uključuje šifru boje kao polaznu tačku i proveru na probnom limu ili merenje boje na vozilu. Postupak opisuje vodič [Utvrđivanje nijanse](/vodici/utvrdjivanje-nijanse).
 3. **Čime se radi?** Pitajte koji se materijali koriste. Radionica koja radi sa sistemom jednog proizvođača može da kaže i u kom redosledu idu slojevi.
 4. **Gde se lakira i kako se suši?** Mnogi bezbojni lakovi se brže i pod kontrolisanim uslovima suše na povišenoj temperaturi. Za baslac 40-100, na primer, tehnički list navodi sušenje od 3 h na 20 °C, a 10–20 minuta na 60 °C, zavisno od učvršćivača[^baslac-40-100-tds]. Zato je korisno pitati da li radionica ima kabinu za lakiranje ili drugi način kontrolisanog sušenja.
-5. **Da li se poštuju uputstva proizvođača vozila?** Proizvođači boja napominju da se uz njihova uputstva moraju poštovati i uputstva proizvođača vozila za popravku, posebno kada su u delu ugrađeni senzori[^rm-c2a40-tds]. Kod branika i delova sa radarima ili parking-senzorima pitajte kako će se to uzeti u obzir. R-M, na primer, navodi da ima rešenja za boju koja omogućavaju ispravan rad radara u skladu sa zahtevima proizvođača vozila[^rm-color-expertise].
+5. **Da li se poštuju uputstva proizvođača vozila?** Proizvođači boja, na primer R-M, u tehničkim listovima napominju da se uz njihova uputstva moraju poštovati i uputstva proizvođača vozila za popravku, posebno kada su u delu ugrađeni senzori[^rm-c2a40-tds]. Kod branika i delova sa radarima ili parking-senzorima pitajte kako će se to uzeti u obzir. R-M, na primer, navodi da ima rešenja za boju koja omogućavaju ispravan rad radara u skladu sa zahtevima proizvođača vozila[^rm-color-expertise].
 6. **Koliko traje posao i kada smete da koristite i perete vozilo?** Odgovor zavisi od materijala i sušenja. Vidi [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).
 7. **Šta ako nijansa ili kvalitet ne budu kakvi su dogovoreni?** Pitajte unapred kako radionica rešava reklamacije i da li daje garanciju na rad. Šta tačno pokriva, neka bude napisano.
 

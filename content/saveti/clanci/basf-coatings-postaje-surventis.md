@@ -93,15 +93,16 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: ponovo otvorena saopštenja BASF P-25-203 (10. 10. 2025) i P-26-113 (1. 7. 2026), Surventis i R-M objava od 1. 7. 2026 (datePublished potvrđen), stranica Surventis Refinish, baslac i Norbin sajt (podnožje i dalje BASF Coatings GmbH), lokalni tehnički listovi 40-100 (06/2026) i P 2P81 (07/2026); ispravljeno: nastavak razvoja/proizvodnje pripisan Surventisu, a ne brendu R-M; vlasništvo Carlyle/QIA dobilo tačan izvor (Surventis); uklonjeno nepotvrđeno „pravno završena“."
 ponovniPregled: 2026-12-07
 ---
-Od 1. jula 2026. kompanija koja je do tada poslovala kao BASF Coatings radi kao samostalna kompanija pod imenom Surventis, sa sedištem u Minsteru (Münster) u Nemačkoj[^surventis-pokretanje]. Prodaja poslovanja je pravno završena dan ranije, 30. juna 2026[^basf-zatvaranje-2026]. Za R-M, baslac i Norbin to je promena vlasnika i korporativnog imena iza brenda, a ne promena samih brendova: Surventis navodi da portfolio sva tri poslovna područja ostaje nepromenjen[^surventis-pokretanje].
+Od 1. jula 2026. kompanija koja je do tada poslovala kao BASF Coatings radi kao samostalna kompanija pod imenom Surventis, sa sedištem u Minsteru (Münster) u Nemačkoj[^surventis-pokretanje]. Transakcija je završena dan ranije, 30. juna 2026[^basf-zatvaranje-2026]. Za R-M, baslac i Norbin to je promena vlasnika i korporativnog imena iza brenda, a ne promena samih brendova: Surventis navodi da portfolio sva tri poslovna područja ostaje nepromenjen[^surventis-pokretanje].
 
 ## Kako je došlo do promene
 
@@ -111,7 +112,7 @@ Od 1. jula 2026. kompanija koja je do tada poslovala kao BASF Coatings radi kao 
 
 ## Šta to znači za brendove u našem programu
 
-- **[R-M](/brendovi/rm).** R-M navodi da brend nastavlja razvoj, proizvodnju i prodaju premaza i da je od sada vidljiv sa novom oznakom „by Surventis“[^rm-surventis-vest].
+- **[R-M](/brendovi/rm).** R-M je na svom sajtu preneo saopštenje Surventisa: kompanija nastavlja da razvija, proizvodi i prodaje premaze, a R-M je od sada vidljiv sa novim logotipom „by Surventis“[^rm-surventis-vest].
 - **[baslac](/brendovi/baslac).** Početna strana baslac sajta kaže da je Surventis (ranije BASF Coatings) sada samostalna kompanija, a da baslac ostaje brend za isplativa rešenja u reparaturi[^baslac-sajt].
 - **[Norbin](/brendovi/norbin).** Surventis navodi NORBIN među svojim reparaturnim brendovima[^surventis-refinish]. Ipak, Norbin sajt na dan naše provere, 8. oktobra 2026, u podnožju i dalje navodi BASF Coatings GmbH kao nosioca prava na robnu marku[^norbin-sajt]. Zato Norbin i dalje predstavljamo onako kako ga proizvođač označava, dok to on sam ne promeni.
 
@@ -125,7 +126,7 @@ Saopštenja su globalna i ne govore ništa posebno o tržištu Srbije. Proizvode
 
 ### Da li je Surventis isto što i BASF?
 
-Ne. Surventis je samostalna kompanija čiji su većinski vlasnik fondovi kojima upravlja Carlyle, u partnerstvu sa QIA. BASF u njoj zadržava 40 % udela[^basf-zatvaranje-2026].
+Ne. Surventis je samostalna kompanija čiji su većinski vlasnik fondovi kojima upravlja Carlyle, u partnerstvu sa QIA[^surventis-pokretanje]. BASF u njoj zadržava 40 % udela[^basf-zatvaranje-2026].
 
 ### Da li tehnički listovi sa imenom BASF Coatings i dalje važe?
 

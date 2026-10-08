@@ -15,6 +15,7 @@ namera: rešavanje problema
 dodatnaPitanja:
   - Za šta se nitro razređivač koristi u radionici?
   - Šta ako je smeša već razređena pogrešnim razređivačem?
+  - Da li „univerzalni“ razređivač rešava problem?
 poreklopitanja:
   tip: pronadjeno-u-izvoru
   napomena: "Razlika između nitro razređivača i razređivača za 2K materijale pominje se na domaćem forumu u vezi sa pranjem pištolja posle 2K materijala; pitanje o razređivanju 2K materijala je urednička procena. Forum služi samo kao dokaz pitanja."
@@ -85,15 +86,16 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem 2K Clear VOC 420 (V09; preporuka rada u sistemu i upozorenje o sušenju i prianjanju), Acryl Thinner (v.4), Spraygun Cleaner (V01; „unmittelbar nach dem Lackieren“), R-M C 2P55 i C 2E50 (07/2026; R 2P15/25/35 i R 2E10/20/30), baslac 60-10 (06/2023) i Norbin SDS N75-021 odeljak 10 (nespojivo sa alkoholima, aminima i vodom; nekontrolisana egzotermna reakcija sa aminima i alkoholima; CO2 sa vodom). Izvori podržavaju odgovor „zašto ne nitro“ u obimu u kome je napisan: nitro nije propisan ni u jednom listu, a Carsystem upozorava na materijale iz drugog sistema; hemijski mehanizam za nitro razređivač nijedan izvor ne navodi i tekst ga ne tvrdi. Ispravke: osetljivost učvršćivača vezana za Norbin izvor umesto uopštavanja, uklonjeno pripisivanje motiva proizvođaču, „boja 30-“ → boja sa direktnim sjajem, savet o pogrešnoj smeši označen kao preporuka."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Zato što se 2K materijal razređuje onim razređivačem koji navodi njegov tehnički list, a nitro razređivač nije naveden ni u jednom tehničkom listu 2K laka ili punioca koji smo pregledali. Carsystem za 2K Clear VOC 420 izričito preporučuje rad u sistemu i upozorava da sa razređivačima i učvršćivačima iz drugog sistema ne mogu da se isključe problemi sa sušenjem i prianjanjem[^carsystem-clear-420-tds]. Učvršćivač u 2K materijalu je, uz to, osetljiv na neke grupe rastvarača i na vodu, pa sastav razređivača nije svejedno.
+Zato što se 2K materijal razređuje onim razređivačem koji navodi njegov tehnički list, a nitro razređivač nije naveden ni u jednom tehničkom listu 2K laka ili punioca koji smo pregledali. Carsystem za 2K Clear VOC 420 izričito preporučuje rad u sistemu i upozorava da sa razređivačima i učvršćivačima iz drugog sistema ne mogu da se isključe problemi sa sušenjem i prianjanjem[^carsystem-clear-420-tds]. Uz to, bezbednosni list Norbin učvršćivača N75-021 navodi da se proizvod drži dalje od alkohola i vode[^norbin-n75-021-sds], pa sastav rastvarača u smeši nije svejedno.
 
 ## Šta tehnički listovi navode kao razređivač
 
@@ -101,14 +103,14 @@ Svaki tehnički list 2K materijala imenuje razređivače koji idu uz taj proizvo
 
 - **R-M C 2P55 MULTI Finish-R:** razređivači R 2P15, R 2P25 i R 2P35[^rm-c2p55-tds].
 - **R-M C 2E50:** razređivači R 2E10, R 2E20 i R 2E30[^rm-c2e50-tds].
-- **baslac:** razređivač 60-10 namenjen je baslac materijalima za podlogu, baznoj boji 35-, boji 30- i bezbojnim lakovima, uz napomenu da se gleda tehnički list materijala u koji se dodaje[^baslac-60-10-tds].
+- **baslac:** razređivač 60-10 namenjen je baslac materijalima za podlogu, baznoj boji 35-, boji sa direktnim sjajem 30- i bezbojnim lakovima, uz napomenu da se gleda tehnički list materijala u koji se dodaje[^baslac-60-10-tds].
 - **Carsystem:** Acryl Thinner je mešavina organskih rastvarača za razređivanje akrilnih punilaca i bezbojnih lakova, u tri brzine prema temperaturi i veličini površine[^carsystem-acryl-thinner-tds].
 
 Brzine razređivača su deo tog izbora. Kako se biraju prema temperaturi, objašnjava vodič [Brzi, normalni ili spori učvršćivač](/vodici/izbor-ucvrscivaca-po-temperaturi).
 
 ## Zašto je sastav razređivača važan za učvršćivač
 
-Bezbednosni list Norbin učvršćivača N75-021 navodi da proizvod treba držati dalje od alkohola, amina i vode, da sa aminima i alkoholima može doći do nekontrolisane reakcije uz oslobađanje toplote i da sa vodom reaguje uz izdvajanje ugljen-dioksida[^norbin-n75-021-sds]. Zato proizvođač u tehničkom listu imenuje razređivač koji se koristi uz njegov učvršćivač, umesto da dozvoli bilo koji rastvarač.
+Bezbednosni list Norbin učvršćivača N75-021 navodi da proizvod treba držati dalje od alkohola, amina i vode, da sa aminima i alkoholima može doći do nekontrolisane reakcije uz oslobađanje toplote i da sa vodom reaguje uz izdvajanje ugljen-dioksida[^norbin-n75-021-sds]. Tehnički listovi ne objašnjavaju zašto je propisan baš određeni razređivač. Podatak iz bezbednosnog lista pokazuje samo da za učvršćivač nije svejedno sa kojim materijama dolazi u dodir.
 
 Za univerzalni ili nitro razređivač iz prodavnice nemate takvu potvrdu. Šta sadrži, piše u odeljku 3 njegovog bezbednosnog lista. Ako se tamo navode alkoholi, to je grupa materija koju bezbednosni list učvršćivača navodi kao nespojivu. Ako sastav nije poznat, ne znate ni kako će se smeša ponašati. Kako se čita bezbednosni list, objašnjava vodič [Bezbednosni list: šta je u kom od 16 odeljaka](/vodici/bezbednosni-list-16-odeljaka).
 
@@ -130,7 +132,7 @@ Za ono što piše na njegovoj ambalaži i u njegovom tehničkom listu. U našem 
 
 ### Šta ako je smeša već razređena pogrešnim razređivačem?
 
-Takvu smešu ne pokušavajte da „ispravite“ dodavanjem propisanog razređivača ili više učvršćivača. Napravite novu, a za već naneti sloj pitajte tehničku podršku.
+Tehnički listovi koje smo pregledali ne predviđaju ispravljanje takve smeše dodavanjem propisanog razređivača ili više učvršćivača. Naša preporuka je da napravite novu smešu, a za već naneti sloj pitajte tehničku podršku.
 
 ### Da li „univerzalni“ razređivač rešava problem?
 

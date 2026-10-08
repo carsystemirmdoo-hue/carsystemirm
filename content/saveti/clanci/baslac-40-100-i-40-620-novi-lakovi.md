@@ -58,7 +58,7 @@ izvori:
     tip: tehnicki-list
 datumDogadjaja: "2025-11-18"
 datumObjaveIzvora: "2025-11-18"
-trziste: EMEA (baslac)
+trziste: EMEA (objava na baslac EMEA sajtu; pojedinačna tržišta nisu navedena)
 dostupnostUSrbiji: nije-potvrdjena
 istorijska: false
 proveraVaziDo: 2026-12-07
@@ -67,15 +67,16 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: ponovo otvorene obe baslac objave (datePublished 18. 11. 2025, format dan/mesec potvrđen), lokalni tehnički listovi 40-100 (06/2026) i 40-620 (11/2024) upoređeni bajt po bajt sa trenutnim PDF-ovima na techinfo.baslac.com (isti); sve vrednosti u tabelama odgovaraju izvoru; ispravke: tržište precizirano, jezičke sitnice („mešalica“, „pravi stepen sjaja“)."
 ponovniPregled: 2026-12-07
 ---
-baslac je 18. novembra 2025, dok je brend pripadao kompaniji BASF Coatings, na svom EMEA sajtu objavio dva bezbojna laka: brzi [40-100 High Speed 2K Clear VOC](/proizvodi/baslac-40-100-high-speed-2k-clear-voc) i mat [40-620 2K Clear mat VOC](/proizvodi/baslac-40-620-2k-clear-mat-voc)[^baslac-40-100-vest][^baslac-40-620-vest]. Prvi je namenjen bržem sušenju sjajnog laka, a drugi popravci vozila sa mat i polumat završnim slojem. Oba laka su u našem programu. Objave ne navode pojedinačna tržišta, pa dostupnost u Srbiji nije potvrđena tim izvorom.
+baslac je 18. novembra 2025, dok je brend pripadao kompaniji BASF Coatings, na svom EMEA sajtu objavio dva bezbojna laka: brzi [40-100 High Speed 2K Clear VOC](/proizvodi/baslac-40-100-high-speed-2k-clear-voc) i mat [40-620 2K Clear mat VOC](/proizvodi/baslac-40-620-2k-clear-mat-voc)[^baslac-40-100-vest][^baslac-40-620-vest]. Prvi je sjajni lak za brže sušenje, a drugi je namenjen popravci vozila sa mat i polumat završnim slojem. Oba laka su u našem programu. Objave ne navode pojedinačna tržišta, pa dostupnost u Srbiji nije potvrđena tim izvorom.
 
 ## 40-100: brzi sjajni lak
 
@@ -101,7 +102,7 @@ Prema objavi, 40-620 se meša ručno i nanosi u dva puna sloja, a radi sa postoj
 | Odzračivanje | posle prvog sloja dok potpuno ne postane mat, najviše 25 min[^baslac-40-620-tds] |
 | Sušenje | 7 h na 20 °C ili 30 min na 60 °C[^baslac-40-620-tds] |
 
-Tehnički list upozorava da se 40-620 ne sme držati na mešalici sa policama (*mixing shelves*), već se dobro meša ručno[^baslac-40-620-tds]. Konačan stepen sjaja postiže se tek posle 24 h ako je lak sušen 30 min na 60 °C, odnosno posle 72 h pri sušenju na vazduhu[^baslac-40-620-tds]. Opšte o radu sa ovim lakovima biće u vodiču [Mat i polumat lak: nanošenje i popravka](/vodici/mat-i-polumat-lak).
+Tehnički list upozorava da se 40-620 ne sme držati na mešalici (*mixing shelves*), već se dobro meša ručno[^baslac-40-620-tds]. Pravi stepen sjaja postiže se tek posle 24 h ako je lak sušen 30 min na 60 °C, odnosno posle 72 h pri sušenju na vazduhu[^baslac-40-620-tds]. Opšte o radu sa ovim lakovima biće u vodiču [Mat i polumat lak: nanošenje i popravka](/vodici/mat-i-polumat-lak).
 
 ## Pitanja i odgovori
 

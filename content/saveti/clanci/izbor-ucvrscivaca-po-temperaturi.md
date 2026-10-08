@@ -14,6 +14,7 @@ namera: izbor proizvoda
 dodatnaPitanja:
   - Šta se dešava sa sporim učvršćivačem na hladnom?
   - Šta ako se tabela i tehnički list ne slažu?
+  - Da li brzina razređivača mora da prati brzinu učvršćivača?
 poreklopitanja:
   tip: urednicka-procena
   napomena: "Izbor brzog, normalnog ili sporog razređivača prema temperaturi pojavljuje se u forumskim nitima, ali bez izvora koji bi se mogao navesti; pitanje je urednička procena."
@@ -76,19 +77,20 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: baslac tabela TempChart VOC proverena vizuelno (sve ćelije za 40-450 i 40-100 tačne), tehnički listovi 40-450 (12/2025), 40-100 (06/2026; isti kao PDF na techinfo.baslac.com), Carsystem 2K Clear VOC 420 (V09) i Acryl Thinner (v.4), R-M C 2P55 (07/2026); sve vrednosti se poklapaju. Protivrečnost 40-100: list kaže „50-430 only in very hot conditions“ bez broja i upućuje na tabelu, tabela daje 50-430 od 25 °C za više od dva dela — tekst sada navodi obe strane i da granica nije definisana. Ispravke: uopštavanje „kod drugih proizvođača“ vezano za Carsystem izvor, uzročno „zato“ ublaženo, opšte objašnjenje označeno kao takvo."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Brzina učvršćivača i razređivača bira se prema temperaturi na kojoj radite i prema veličini površine, i to iz tabele ili tehničkog lista sistema koji koristite. Kod baslac 40-450 tabela proizvođača za popravku do jednog dela na 15 °C predviđa brzi učvršćivač 50-415, a za više od dva dela na 30 °C spori 50-430 sa razređivačem 60-30[^baslac-tempchart-voc]. Princip je isti i kod drugih proizvođača: manja površina i niža temperatura traže brži materijal, a veća površina i viša temperatura sporiji. Tačne granice daje samo dokument tog proizvođača.
+Brzina učvršćivača i razređivača bira se prema temperaturi na kojoj radite i prema veličini površine, i to iz tabele ili tehničkog lista sistema koji koristite. Kod baslac 40-450 tabela proizvođača za popravku do jednog dela na 15 °C predviđa brzi učvršćivač 50-415, a za više od dva dela na 30 °C spori 50-430 sa razređivačem 60-30[^baslac-tempchart-voc]. Isti princip vidi se i u Carsystem listu za Acryl Thinner: manja površina i niža temperatura traže brži materijal, a veća površina i viša temperatura sporiji[^carsystem-acryl-thinner-tds]. Tačne granice daje samo dokument proizvođača materijala koji koristite.
 
 ## Zašto postoje različite brzine
 
-Učvršćivač određuje koliko brzo se odvija hemijska reakcija u smeši i na površini, a razređivač koliko brzo rastvarači isparavaju. Na većem objektu lak mora duže da ostane dovoljno vlažan da se slojevi i prelazi između prolaza spoje. Na hladnom se reakcija usporava, pa brži materijal nadoknađuje deo tog usporavanja.
+Opšte objašnjenje: učvršćivač utiče na to koliko brzo se odvija hemijska reakcija u smeši i na površini, a razređivač na to koliko brzo rastvarači isparavaju. Na većem objektu lak mora duže da ostane dovoljno vlažan da se slojevi i prelazi između prolaza spoje. Na hladnom se reakcija usporava, pa brži materijal nadoknađuje deo tog usporavanja.
 
 Proizvođači to pišu i u tehničkim listovima. Za baslac 40-450 i R-M C 2P55 navode da se učvršćivač i razređivač biraju prema temperaturi okoline i veličini objekta[^baslac-40-450-tds][^rm-c2p55-tds]. Carsystem za svoje razređivače za akrilne punioce i lakove daje i okvirne temperature[^carsystem-acryl-thinner-tds]:
 
@@ -135,11 +137,11 @@ R-M u tehničkom listu za C 2P55 navodi četiri učvršćivača i tri razređiva
 
 ### Šta se dešava sa sporim učvršćivačem na hladnom?
 
-Sušenje se znatno produžava. Već na 20 °C baslac za 40-450 sa sporim 50-430 navodi 16 h, prema 6 h sa brzim 50-415[^baslac-40-450-tds], a na nižoj temperaturi reakcija je po pravilu još sporija. Zato tabela za 15 °C ne predviđa spori učvršćivač ni za veće površine[^baslac-tempchart-voc]. Dok se lak suši, površina duže ostaje osetljiva na prašinu i dodir.
+Sušenje se znatno produžava. Već na 20 °C baslac za 40-450 sa sporim 50-430 navodi 16 h, prema 6 h sa brzim 50-415[^baslac-40-450-tds], a na nižoj temperaturi reakcija je po pravilu još sporija. U skladu s tim, tabela za 15 °C ne predviđa spori učvršćivač ni za veće površine[^baslac-tempchart-voc]. Dok se lak suši, površina duže ostaje osetljiva na prašinu i dodir.
 
 ### Šta ako se tabela i tehnički list ne slažu?
 
-Za lak 40-100 noviji tehnički list navodi da se spori 50-430 koristi samo na vrlo visokim temperaturama[^baslac-40-100-tds], dok starija tabela za više od dva dela predviđa 50-430 već od 25 °C[^baslac-tempchart-voc]. U takvom slučaju proverite sa tehničkom podrškom koja preporuka važi za Vaše uslove.
+Za lak 40-100 noviji tehnički list (06/2026) navodi da se spori 50-430 koristi samo u vrlo toplim uslovima, bez brojčane granice, a za izbor učvršćivača istovremeno upućuje na tabelu[^baslac-40-100-tds]. Starija tabela za više od dva dela predviđa 50-430 već od 25 °C[^baslac-tempchart-voc]. Iz dokumenata se ne vidi da li 25 °C spada u „vrlo topao“ uslov, pa ih ne treba tumačiti napamet. U takvom slučaju proverite sa tehničkom podrškom koja preporuka važi za Vaše uslove.
 
 ### Da li brzina razređivača mora da prati brzinu učvršćivača?
 

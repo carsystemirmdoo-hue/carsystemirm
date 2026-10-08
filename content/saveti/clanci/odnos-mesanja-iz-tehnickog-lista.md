@@ -93,11 +93,12 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi C 2P55, C 2A40 i RA 050X (07/2026), baslac 40-450 i varijanta 80-20 (12/2025), Norbin N15-V20 (01/2022), Carsystem 2K Clear VOC 420 (V09) i Elastic weiss (v.04); svi odnosi, gustine i grami se poklapaju. Ispravke: 52 g važi za brzi i vrlo brzi učvršćivač, „saten-mat“ → satenski sjaj (satin gloss), uklonjena nepotkrepljena tvrdnja o skali „za tipične odnose“ i o vagi kao „preciznijem načinu“."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -119,17 +120,17 @@ Iz tabele se vidi da isti zapis ne znači isto kod svih proizvoda. Kod Norbin la
 
 ## Po zapremini ili po težini
 
-Zapremina i težina daju različite brojeve jer komponente nemaju istu gustinu. Za Carsystem 2K Clear VOC 420 tehnički list navodi gustinu laka 0,98–0,99 g/cm³, a učvršćivača 1,00–1,05 g/cm³[^carsystem-clear-420-tds]. Zato isti list za mešanje po težini ne piše „100:50“, nego 100 g laka na 51 g standardnog, 52 g brzog ili 53 g sporog učvršćivača[^carsystem-clear-420-tds]. Slično je kod R-M C 2A40: po zapremini je 1:1, a po težini 100 g laka na 102 g učvršćivača[^rm-c2a40-tds].
+Zapremina i težina daju različite brojeve jer komponente nemaju istu gustinu. Za Carsystem 2K Clear VOC 420 tehnički list navodi gustinu laka 0,98–0,99 g/cm³, a učvršćivača 1,00–1,05 g/cm³[^carsystem-clear-420-tds]. Zato isti list za mešanje po težini ne piše „100:50“, nego 100 g laka na 51 g standardnog, 52 g brzog ili vrlo brzog, odnosno 53 g sporog učvršćivača[^carsystem-clear-420-tds]. Slično je kod R-M C 2A40: po zapremini je 1:1, a po težini 100 g laka na 102 g učvršćivača[^rm-c2a40-tds].
 
 Pravilo je jednostavno: kada merite merilom za zapreminu (čaša sa skalom, lenjir), koristite zapis po zapremini. Kada merite na vagi, koristite samo podatke po težini, i to za tačan učvršćivač koji koristite. Broj po zapremini se ne prenosi na vagu.
 
-Neki postupci kombinuju obe jedinice. Za mat varijantu baslac 40-450 sa aditivom 80-20 predmešavina se pravi po težini (za saten-mat 100 % laka i 50 % aditiva), a zatim se ta predmešavina meša sa učvršćivačem i razređivačem po zapremini, 2:1 + 10 %[^baslac-40-450-80-20-tds]. Tu se korak po korak prati jedinica koju list navodi za taj korak.
+Neki postupci kombinuju obe jedinice. Za mat varijantu baslac 40-450 sa aditivom 80-20 predmešavina se pravi po težini (za satenski sjaj 100 % laka i 50 % aditiva), a zatim se ta predmešavina meša sa učvršćivačem i razređivačem po zapremini, 2:1 + 10 %[^baslac-40-450-80-20-tds]. Tu se korak po korak prati jedinica koju list navodi za taj korak.
 
 ## Kako se meri u praksi
 
-- **Čaša sa odštampanom skalom.** Posude za mešanje kao što je [Carsystem Multi-Mix Cup](/proizvodi/carsystem-multi-mix-cup) imaju skalu za tipične odnose. Materijal se sipa do oznake za osnovnu komponentu, pa do sledeće oznake za učvršćivač i dalje za razređivač, u koloni koja odgovara zapisu iz tehničkog lista. Skala važi za zapreminu.
+- **Čaša sa odštampanom skalom.** Posude za mešanje kao što je [Carsystem Multi-Mix Cup](/proizvodi/carsystem-multi-mix-cup) imaju odštampanu skalu. Materijal se sipa do oznake za osnovnu komponentu, pa do sledeće oznake za učvršćivač i dalje za razređivač, u koloni koja odgovara zapisu iz tehničkog lista. Skala važi za zapreminu.
 - **Merni lenjir ili štapić.** Radi na isti način kao skala, ali samo u posudi sa ravnim dnom i ravnim zidovima, jer podela pretpostavlja da je presek posude isti po celoj visini.
-- **Vaga.** Kod mešanja po recepturi vaga je precizniji način, ali samo uz podatke po težini. R-M, na primer, za razređivač RA 050X navodi odnos 2:1 po zapremini, uz mogućnost da se materijal podešava po težini preko računarske vage i programa za recepture[^rm-ra050x-tds].
+- **Vaga.** Vaga se koristi kada tehnički list ili receptura daju podatke po težini. R-M, na primer, za razređivač RA 050X navodi odnos 2:1 po zapremini, uz mogućnost da se materijal podešava po težini preko računarske vage i programa za recepture[^rm-ra050x-tds].
 - **Mešanje posle doziranja.** Za C 2P55 R-M navodi da se smeša dobro promeša i procedi pre nanošenja[^rm-c2p55-tds]. Komponente koje nisu dobro izmešane ne reaguju ravnomerno, bez obzira na to koliko je tačno odmereno.
 
 ## Greške koje se lako naprave

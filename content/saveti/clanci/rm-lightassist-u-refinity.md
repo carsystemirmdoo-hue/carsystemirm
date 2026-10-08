@@ -44,7 +44,7 @@ izvori:
     tip: sajt-proizvodjaca
 datumDogadjaja: "2026-09-09"
 datumObjaveIzvora: "2026-09-10"
-trziste: Globalno (Surventis, R-M)
+trziste: Nije navedeno (objave Surventisa i globalnog R-M sajta ne navode tržišta)
 dostupnostUSrbiji: nije-potvrdjena
 istorijska: false
 proveraVaziDo: 2026-12-07
@@ -53,12 +53,13 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: ponovo otvorene objava Surventisa (9. 9. 2026) i R-M (datePublished 10. 9. 2026, format dan/mesec potvrđen) i sajt Refinity platforme; ispravljeno: tvrdnja da LightAssist ne zamenjuje postupak pripisana samo Surventisu (R-M kaže da dopunjuje stručnost lakirera); tržište nije navedeno u objavama; dodato da je ImagePLUS prema sajtu Refinity za sada samo za Glasurit i R-M."
 ponovniPregled: 2026-12-07
 ---
 Surventis je 9. septembra 2026. objavio novu funkciju LightAssist u digitalnoj platformi Refinity, a R-M je istu vest preneo 10. septembra 2026[^surventis-lightassist][^rm-lightassist]. LightAssist je dodatni režim prikaza u modulu ImagePLUS: jasnije pokazuje sitne razlike u nijansi, teksturi i efektu između predloženih receptura na ekranu. Prema Surventisu, funkcija je predstavljena na sajmu Automechanika Frankfurt 2026[^surventis-lightassist]. Refinity je digitalna platforma proizvođača, a ne proizvod iz našeg kataloga. Dostupnost i uslovi korišćenja u Srbiji nisu potvrđeni.
@@ -70,11 +71,11 @@ Surventis je 9. septembra 2026. objavio novu funkciju LightAssist u digitalnoj p
 - **Gde najviše pomaže.** Obe objave posebno ističu crne i tamne efektne boje, kod kojih je procena podudaranja teška[^surventis-lightassist][^rm-lightassist].
 - **Šta se očekuje.** Surventis navodi da funkcija može da smanji broj nepotrebnih probnih prskanja, potrošnju materijala i vreme rada[^surventis-lightassist].
 
-Obe objave naglašavaju da LightAssist ne zamenjuje postojeći postupak niti iskustvo lakirera, već dodaje još jednu mogućnost procene[^surventis-lightassist][^rm-lightassist].
+Surventis naglašava da LightAssist ne zamenjuje postojeći postupak niti iskustvo lakirera, već dodaje još jednu mogućnost procene[^surventis-lightassist]. R-M navodi da funkcija dopunjuje stručnost lakirera[^rm-lightassist].
 
 ## Šta objave ne navode
 
-Objave ne navode koja je oprema potrebna, da li je funkcija uključena u postojeću pretplatu, od kada je dostupna ni da li važi i za korisnike baslac sistema. Sajt Refinity platforme za uslove upućuje na lokalnog predstavnika za Refinity[^refinity-sajt]. Pre nego što računate na ovu funkciju, proverite dostupnost i uslove za Vašu zemlju. Pitanja nam možete poslati preko strane [Kontakt](/kontakt).
+Objave ne navode koja je oprema potrebna, da li je funkcija uključena u postojeću pretplatu ni od kada je dostupna. Sajt Refinity platforme na dan naše provere, 8. oktobra 2026, navodi da je ImagePLUS, u kome se LightAssist nalazi, za sada dostupan samo korisnicima Glasurit i R-M sistema, a za uslove upućuje na lokalnog predstavnika za Refinity[^refinity-sajt]. Pre nego što računate na ovu funkciju, proverite dostupnost i uslove za Vašu zemlju. Pitanja nam možete poslati preko strane [Kontakt](/kontakt).
 
 ## Pitanja i odgovori
 

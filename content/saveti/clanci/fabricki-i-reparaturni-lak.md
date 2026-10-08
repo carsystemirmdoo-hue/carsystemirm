@@ -45,6 +45,12 @@ izvori:
     datumIzvora: 2025-02-17
     pristupljeno: 2026-10-08
     tip: vest-proizvodjaca
+  - id: basf-ecoat-2022
+    naziv: "BASF Coatings, BASF Coatings inaugurates new electrocoat research center"
+    url: https://www.basf.com/global/en/media/news-releases/2022/09/p-22-357
+    datumIzvora: 2022-09-22
+    pristupljeno: 2026-10-08
+    tip: vest-proizvodjaca
   - id: rm-c2a40-tds
     naziv: "R-M, Technical Information C 2A40 AirTOP, Clear coat, air drying"
     dokument: /documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf
@@ -74,8 +80,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni BASF 2015 (R-M/Porsche), Glasurit NEV 17. 2. 2025, BASF Coatings 2022 (e-coat), tehnički listovi C 2A40 i ONYX HD 07/2026, 30 Line 12/2025, AF.21 V02; ispravljeno: Glasurit tvrdnja preformulisana prema izvoru (svojstvo njihovih rešenja, ne opšte pravilo), napomena o senzorima vezana samo za R-M i baslac listove, dodat izvor za KTL, jezičke ispravke. Stručna potvrda opravdana: opis fabričkog toka (pečenje karoserije pre ugradnje delova osetljivih na toplotu) i dalje nema zvaničan izvor."
 strucnaPotvrda:
   potrebna: true
   razlog: "Za tok i temperature fabričkog lakiranja (pečenje u pećima na liniji) nije pronađen zvaničan izvor proizvođača iz našeg programa. Tekst zato ne navodi brojeve za fabrički postupak; opis fabričkog postupka treba da potvrdi stručnjak."
@@ -83,18 +90,18 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Fabrički lak nanosi se na liniji u fabrici, na karoseriju koja još nije sklopljena, i stvrdnjava u pećima. Reparaturni lak nanosi se na gotovo vozilo, sa plastičnim delovima, elektronikom i, kod električnih vozila, baterijom. Zato je napravljen tako da se suši na sobnoj ili umereno povišenoj temperaturi. R-M, na primer, bezbojni lak C 2A40 AirTOP opisuje kao lak koji se suši na vazduhu[^rm-c2a40-tds], a za baslac 30 Line tehnički list navodi sušenje na 20 °C ili na 60 °C[^baslac-30-line-tds]. Razlika nije u tome da je jedan lak „pravi“, a drugi ne, već u uslovima pod kojima svaki mora da očvrsne.
+Fabrički lak nanosi se na liniji u fabrici, na karoseriju koja još nije sklopljena, i očvršćava u pećima. Reparaturni lak nanosi se na gotovo vozilo, sa plastičnim delovima, elektronikom i, kod električnih vozila, baterijom. Zato je napravljen tako da se suši na sobnoj ili umereno povišenoj temperaturi. R-M, na primer, bezbojni lak C 2A40 AirTOP opisuje kao lak koji se suši na vazduhu[^rm-c2a40-tds], a za baslac 30 Line tehnički list navodi sušenje na 20 °C ili na 60 °C[^baslac-30-line-tds]. Razlika nije u tome da je jedan lak „pravi“, a drugi ne, već u uslovima pod kojima svaki mora da očvrsne.
 
 ## Kako nastaje fabrički lak
 
-Fabrički sistem ima više slojeva, od kataforetskog sloja (KTL, e-coat) preko punioca i bazne boje do bezbojnog laka. U objavi BASF-a iz 2015. R-M je opisan kao reparaturni brend koji je ujedno isporučilac cele tehnologije fabričkog lakiranja za Porsche, od kataforetskih slojeva do baznih boja i bezbojnih lakova[^basf-rm-porsche]. Isti proizvođač, dakle, može da pravi i fabrički i reparaturni lak, ali to su različiti proizvodi, jer su različiti uslovi rada.
+Fabrički sistem ima više slojeva, od kataforetskog sloja (KTL, e-coat) preko punioca i bazne boje do bezbojnog laka. Kataforetski sloj, prema opisu BASF Coatings iz 2022, štiti površine, ivice i šupljine karoserije od korozije i služi kao osnova za sledeće slojeve[^basf-ecoat-2022]. U objavi BASF-a iz 2015. R-M je opisan kao reparaturni brend koji je ujedno isporučilac cele tehnologije fabričkog lakiranja za Porsche, od kataforetskih slojeva do baznih boja i bezbojnih lakova[^basf-rm-porsche]. Isti proizvođač, dakle, može da pravi i fabrički i reparaturni lak, ali to su različiti proizvodi, jer su različiti uslovi rada.
 
 Na liniji se cela karoserija lakira odjednom, u kontrolisanim uslovima, i peče se pre nego što se ugrade delovi osetljivi na toplotu. U radionici toga nema: lakira se jedan deo ili zona, na vozilu koje se posle popravke vraća vlasniku.
 
 ## Zašto popravka ne može na fabričkoj temperaturi
 
-- **Delovi osetljivi na toplotu.** Na sklopljenom vozilu su plastika, zaptivke, kablovi i senzori. Svi tehnički listovi iz primera zato napominju da se uz uputstvo za materijal moraju poštovati i uputstva proizvođača vozila za popravku, posebno zbog ugrađenih senzora[^baslac-30-line-tds][^rm-onyx-hd-tds].
-- **Električna vozila.** Glasurit, brend koji je 2025. pripadao BASF Coatings i nije u našem programu, objavio je u februaru 2025. da pri popravci električnih vozila temperatura sušenja mora ostati ispod 60 °C, najduže 45 minuta, da bi se zaštitila baterija[^glasurit-nev]. Na šta još treba paziti opisuje vodič [Lakiranje električnih i hibridnih vozila](/vodici/lakiranje-elektricnih-vozila).
+- **Delovi osetljivi na toplotu.** Na sklopljenom vozilu su plastika, zaptivke, kablovi i senzori. Tehnički listovi R-M i baslac iz primera zato napominju da se uz uputstvo za materijal moraju poštovati i uputstva proizvođača vozila za popravku, posebno zbog ugrađenih senzora[^baslac-30-line-tds][^rm-onyx-hd-tds].
+- **Električna vozila.** Glasurit, brend koji je 2025. pripadao BASF Coatings i nije u našem programu, objavio je u februaru 2025. da njegova rešenja za popravku električnih vozila, radi zaštite baterije, omogućavaju sušenje na temperaturi ispod 60 °C, najduže 45 minuta, i podsetio lakirere da strogo poštuju standarde popravke proizvođača vozila[^glasurit-nev]. Na šta još treba paziti opisuje vodič [Lakiranje električnih i hibridnih vozila](/vodici/lakiranje-elektricnih-vozila).
 - **Oprema radionice.** Kabina za lakiranje greje vazduh i objekat do temperature koju navodi tehnički list, a ne do temperature fabričke peći.
 
 ## Šta to menja u radu
@@ -105,7 +112,7 @@ Reparaturni materijali su prilagođeni tim uslovima, pa im se i vremena razlikuj
 | --- | --- | --- |
 | baslac 30 Line sa učvršćivačem 50-20 | boja sa direktnim sjajem | 8 h na 20 °C ili 30 min na 60 °C[^baslac-30-line-tds] |
 | R-M ONYX HD | vodena bazna boja | 15 min na 20 °C ili 10 min na 40 °C[^rm-onyx-hd-tds] |
-| Carsystem AF.21 1K Filler | 1K punilac | 20–25 min na 20 °C ili 5–10 min na 60 °C temperature objekta[^cs-af21-1k-tds] |
+| Carsystem AF.21 1K Filler | 1K punilac | 20–25 min ili 5–10 min, pri temperaturi objekta od 20 °C, odnosno 60 °C[^cs-af21-1k-tds] |
 
 Vrednosti važe za navedene uslove i verzije dokumenata. Sušenje na nižoj temperaturi traje duže, pa je u radionici važno poštovati vremena pre brušenja, poliranja i montaže. Šta znače izrazi kao „suvo na prašinu“ i „suvo za montažu“ objašnjava vodič [Faze sušenja iz tehničkog lista](/vodici/faze-susenja-iz-tehnickog-lista), a koliko traje potpuno očvršćavanje tekst [Potpuno otvrdnjavanje laka](/vodici/potpuno-otvrdnjavanje-laka).
 

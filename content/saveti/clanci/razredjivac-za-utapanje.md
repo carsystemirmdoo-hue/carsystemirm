@@ -14,6 +14,7 @@ namera: postupak
 dodatnaPitanja:
   - Može li običan razređivač umesto njega?
   - Da li je to isto što i blender za baznu boju?
+  - Postoji li razređivač za utapanje u spreju?
 poreklopitanja:
   tip: urednicka-procena
   napomena: "Pitanje kako se lak utapa u postojeći lak i čemu služi razređivač za utapanje je urednička procena iz pregleda tema; nije pronađeno u javnom izvoru koji bi se mogao navesti."
@@ -75,15 +76,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac 65-10 (06/2023), R-M A 2P35 i A 2530 (07/2026), Carsystem Spotblender (v.02) i Acryl Thinner (v.4), C.A.R.FIT Fade Out Thinner (Ausgabe 2 / 1024); dizne, pritisci, broj slojeva, 10 °C i 80 % se poklapaju. Ispravke: Spotblender je prema listu „Beispritzlack“, a ne razređivač, i nanosi se i posle boje sa direktnim sjajem; list Spotblendera ne navodi pritisak (bilo „prema proizvođaču pištolja“); „ne meša se sa drugim komponentama“ svedeno na „spreman za upotrebu“."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Razređivač za utapanje (blend-in, fade-out) nanosi se na rub popravke odmah posle bezbojnog laka, da rastvori suvu maglu preprašenog laka i izravna prelaz prema postojećem laku. Tehnički listovi iz našeg programa opisuju isti tok: baslac 65-10 u 2–3 sloja na zonu prelaza[^baslac-65-10-tds], R-M A 2P35 u 2–3 sloja na rubove laka[^rm-a2p35-tds], a Carsystem Spotblender odmah posle laka, u 2–3 lagana prolaza, bez odzračivanja[^carsystem-spotblender-tds]. Koristi se samo uz bezbojni lak sistema za koji je namenjen.
+Razređivač za utapanje (blend-in, fade-out) nanosi se na rub popravke odmah posle bezbojnog laka, da rastvori suvu maglu preprašenog laka i izravna prelaz prema postojećem laku. Tehnički listovi iz našeg programa opisuju sličan tok: baslac 65-10 se nanosi u 2–3 sloja na zonu prelaza[^baslac-65-10-tds], R-M A 2P35 u 2–3 sloja na rubove laka[^rm-a2p35-tds], a Carsystem Spotblender odmah posle laka, u 2–3 lagana prolaza, bez odzračivanja[^carsystem-spotblender-tds]. Koristi se samo uz bezbojni lak sistema za koji je namenjen.
 
 ## Kada se koristi
 
@@ -91,7 +93,7 @@ Kod spot popravke i utapanja lak se ne nanosi do ivice dela, nego se završava u
 
 - baslac 65-10 je namenjen bezbojnim lakovima grupe 40-, za stapanje preprašenih zona i zona preklapanja[^baslac-65-10-tds].
 - R-M A 2P35 je namenjen eSense bezbojnim lakovima Pioneer Series i izglađuje prelaze pri utapanju[^rm-a2p35-tds].
-- Carsystem Spotblender je proizvod za spot popravke i dolakiravanje[^carsystem-spotblender-tds].
+- Carsystem Spotblender je proizvod za spot popravke i dolakiravanje; tehnički list ga naziva „Beispritzlack“, sredstvo za utapanje spremno za nanošenje, a ne razređivač[^carsystem-spotblender-tds].
 - C.A.R.FIT Fade Out Thinner je mešavina rastvarača za rastvaranje rubova preprašivanja pri spot popravkama i dolakiravanju[^carfit-fade-out-tds].
 
 Kada se utapanje uopšte isplati i kako se planira zona prelaza za bezbojni lak, objašnjava vodič [Utapanje bezbojnog laka u postojeći lak](/vodici/utapanje-bezbojnog-laka).
@@ -100,11 +102,11 @@ Kada se utapanje uopšte isplati i kako se planira zona prelaza za bezbojni lak,
 
 1. **Priprema zone prelaza.** Za Spotblender Carsystem navodi da podloga u zoni prelaza mora prethodno da se matira[^carsystem-spotblender-tds]. Kako, objašnjava tekst [Brušenje i matiranje zone utapanja](/vodici/priprema-zone-utapanja).
 2. **Bezbojni lak.** Nanosi se prema tehničkom listu laka.
-3. **Odmah zatim razređivač za utapanje.** Spotblender se nanosi neposredno posle laka[^carsystem-spotblender-tds], a za Fade Out Thinner C.A.R.FIT navodi da se zone preprašivanja prelakiraju odmah posle lakiranja[^carfit-fade-out-tds].
+3. **Odmah zatim razređivač za utapanje.** Spotblender se nanosi neposredno posle bezbojnog laka ili boje sa direktnim sjajem[^carsystem-spotblender-tds], a za Fade Out Thinner C.A.R.FIT navodi da se zone preprašivanja prelakiraju odmah posle lakiranja[^carfit-fade-out-tds].
 4. **Tanki slojevi.** Nanosi se u lakim prolazima dok se hrapava zona vidljivo ne izravna. C.A.R.FIT upozorava da preobilno nanošenje može da izazove curenje i neravnomerno rastvaranje[^carfit-fade-out-tds].
 5. **Sušenje.** Za 65-10 i A 2P35 važi vreme sušenja upotrebljenog bezbojnog laka[^baslac-65-10-tds][^rm-a2p35-tds].
 
-Proizvod je spreman za upotrebu i ne meša se sa drugim komponentama: to navode baslac za 65-10 i R-M za A 2P35, uz napomenu da se A 2P35 dobro promućka pre upotrebe[^baslac-65-10-tds][^rm-a2p35-tds]. Spotblender se, prema tehničkom listu, može sipati u pištolj kojim je nanet lak ili u posebnu čašu[^carsystem-spotblender-tds].
+baslac za 65-10 i R-M za A 2P35 navode da je proizvod spreman za upotrebu, a za A 2P35 i da se pre upotrebe dobro promućka[^baslac-65-10-tds][^rm-a2p35-tds]. Spotblender se, prema tehničkom listu, može sipati u pištolj kojim je nanet lak ili u posebnu čašu, uz dobro mućkanje[^carsystem-spotblender-tds].
 
 ## Oprema i uslovi
 
@@ -112,7 +114,7 @@ Proizvod je spreman za upotrebu i ne meša se sa drugim komponentama: to navode 
 | --- | --- | --- |
 | baslac 65-10 | HVLP, dizna 1,3 mm | 2 bara na ulazu, 0,7 bara na dizni[^baslac-65-10-tds] |
 | R-M A 2P35 | HVLP, dizna 1–1,2 | HVLP minijet: 0,5–0,7 bara na dizni[^rm-a2p35-tds] |
-| Carsystem Spotblender | HVLP minijet 0,8–1,0 mm ili pištolj sa gornjom čašom 1,2–1,3 mm | prema proizvođaču pištolja[^carsystem-spotblender-tds] |
+| Carsystem Spotblender | HVLP minijet 0,8–1,0 mm ili pištolj sa gornjom čašom 1,2–1,3 mm | list ne navodi[^carsystem-spotblender-tds] |
 
 Za Fade Out Thinner C.A.R.FIT navodi temperaturu rada od najmanje 10 °C, najveću vlažnost vazduha od 80 % i dovoljnu ventilaciju, i upozorava da se ne koristi na termoplastičnim podlogama[^carfit-fade-out-tds].
 

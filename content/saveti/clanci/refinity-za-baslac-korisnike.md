@@ -46,7 +46,7 @@ izvori:
     tip: sajt-proizvodjaca
 datumDogadjaja: "2026-02-10"
 datumObjaveIzvora: "2026-02-10"
-trziste: Globalno; objava pominje Evropu, Australiju, Japan, Koreju i Latinsku Ameriku
+trziste: Globalno (objava najavljuje globalno uvođenje; pojedinačne zemlje nisu navedene)
 dostupnostUSrbiji: nije-potvrdjena
 istorijska: false
 proveraVaziDo: 2026-12-07
@@ -55,12 +55,13 @@ razlogPrioriteta: Aktuelna novost proizvođača iz našeg programa (događaj u p
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: ponovo otvorena baslac objava (datePublished 10. 2. 2026, format dan/mesec potvrđen), sajt Refinity platforme i stranica Surventis Refinish; ispravljeno: Evropa, Australija, Japan, Koreja i Latinska Amerika su u objavi regioni u kojima su radionice testirale rešenje, a ne tržišta (tekst i polje trziste); dodato da sajt Refinity navodi ImagePLUS samo za Glasurit i R-M i da i dalje najavljuje baslac kao „uskoro“."
 ponovniPregled: 2026-12-07
 ---
 baslac je 10. februara 2026, dok je brend pripadao kompaniji BASF Coatings, objavio da je digitalna platforma Refinity dostupna i korisnicima baslac sistema širom sveta[^baslac-refinity-vest]. Refinity je softver proizvođača za lakirerske radionice, a ne proizvod iz našeg kataloga. Objava ne pominje Srbiju, pa dostupnost i uslovi korišćenja kod nas nisu potvrđeni.
@@ -79,17 +80,17 @@ Prema objavi, baslac korisnici preko platforme dobijaju[^baslac-refinity-vest]:
 - povezivanje sa sistemima za upravljanje radionicom i distributerom;
 - materijale za obuku i redovna ažuriranja podataka i sistema.
 
-Objava kao tržišta pominje Evropu, Australiju, Japan, Koreju i Latinsku Ameriku[^baslac-refinity-vest].
+Prema objavi, novo rešenje su već testirale radionice baslac korisnika iz Evrope, Australije, Japana, Koreje i Latinske Amerike[^baslac-refinity-vest]. To je spisak regiona u kojima je rešenje testirano, a ne spisak tržišta na kojima se nudi.
 
 ## Šta nije potvrđeno
 
-Ni objava ni sajt Refinity platforme ne navode cenu, uslove pretplate ni spisak zemalja u kojima se platforma nudi. Za takve informacije sajt upućuje na lokalnog predstavnika za Refinity[^refinity-sajt]. Pre nego što računate na neku od funkcija, proverite da li je dostupna u Vašoj zemlji i pod kojim uslovima. Za baslac proizvode iz naše ponude pogledajte stranu brenda [baslac](/brendovi/baslac), a pitanja možete poslati preko strane [Kontakt](/kontakt).
+Ni objava ni sajt Refinity platforme ne navode cenu, uslove pretplate ni spisak zemalja u kojima se platforma nudi. Za takve informacije sajt upućuje na lokalnog predstavnika za Refinity[^refinity-sajt]. Isti sajt na dan naše provere, 8. oktobra 2026, navodi da je modul ImagePLUS za sada dostupan samo korisnicima Glasurit i R-M sistema, da su moduli obuke namenjeni za Glasurit i R-M, a u odeljku o brendovima i dalje piše da će baslac korisnici „uskoro“ moći da koriste platformu[^refinity-sajt]. Obim funkcija za baslac korisnike zato nije sasvim jasan. Pre nego što računate na neku od funkcija, proverite da li je dostupna u Vašoj zemlji i pod kojim uslovima. Za baslac proizvode iz naše ponude pogledajte stranu brenda [baslac](/brendovi/baslac), a pitanja možete poslati preko strane [Kontakt](/kontakt).
 
 ## Pitanja i odgovori
 
 ### Da li je Refinity dostupan u Srbiji?
 
-To nije potvrđeno. Objava navodi globalnu dostupnost i nekoliko regiona, ali Srbiju ne pominje[^baslac-refinity-vest].
+To nije potvrđeno. Objava najavljuje globalno uvođenje, ali ne navodi pojedinačne zemlje i ne pominje Srbiju[^baslac-refinity-vest].
 
 ### Treba li za Refinity posebna oprema?
 

@@ -60,8 +60,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni CIE e-ILV 17-23-006, opis CIE 080-1989, R-M stranica Digital color search, R-M vest LightAssist (10. 9. 2026) i baslac Effective Color Finder (više od 4.500 uzoraka); tvrdnje se poklapaju; ispravljeno: definicija metamerije približena izvoru (tristimulusne vrednosti), dve rečenice o pigmentima preformulisane, pravopis „nijedan“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -72,9 +73,9 @@ Dve boje mogu izgledati isto pod jednim svetlom, a različito pod drugim, jer se
 
 ## Šta je metamerija
 
-Međunarodna komisija za osvetljenje (CIE) definiše metameriju kao svojstvo boja koje se spektralno razlikuju, a imaju iste kolorimetrijske vrednosti u određenom sistemu[^cie-metamerija]. Jednostavnije: dve površine mogu „dati isti utisak“ oku pod jednim svetlom, iako hemijski i optički nisu iste.
+Međunarodna komisija za osvetljenje (CIE) definiše metameriju kao svojstvo boja koje se spektralno razlikuju, a imaju iste tristimulusne vrednosti u određenom kolorimetrijskom sistemu[^cie-metamerija]. Jednostavnije: dve površine mogu „dati isti utisak“ oku pod jednim svetlom, iako ne odbijaju svetlost na isti način.
 
-Kod popravke to se dešava ovako. Fabrička boja i reparaturna mešavina nastaju u različitim uslovima i ne moraju imati iste pigmente. Mešavina može biti podešena tako da pod jednim svetlom izgleda isto kao original. Pod svetlom drugačijeg sastava pigmenti reaguju drugačije, pa se razlika pojavi.
+Kod popravke to se dešava ovako. Fabrička boja i reparaturna mešavina nastaju u različitim uslovima i ne moraju imati iste pigmente. Mešavina može biti podešena tako da pod jednim svetlom izgleda isto kao original. Pod svetlom drugačijeg sastava različiti pigmenti drugačije odbijaju svetlost, pa se razlika pojavi.
 
 CIE razlikuje i dva uzroka takve razlike: promenu izvora svetla i promenu posmatrača[^cie-080-1989]. Drugim rečima, nije samo svetlo u pitanju: dva čoveka sa normalnim vidom boja mogu malo drugačije da vide isti par boja.
 
@@ -104,7 +105,7 @@ Koji je uzrok u konkretnom slučaju, ne može se zaključiti bez provere na samo
 
 ## Ograničenja
 
-Ni jedan postupak ne garantuje da će razlika biti nula pod svakim svetlom, jer reparaturna mešavina i fabrička boja ne moraju biti isti materijal. Cilj je da razlika pod uobičajenim uslovima gledanja ne bude primetna. Zato se u praksi koristi i utapanje u susedni deo, o čemu piše tekst [Lokalna popravka ili lakiranje celog dela](/vodici/lokalna-popravka-ili-ceo-deo).
+Nijedan postupak ne garantuje da će razlika biti nula pod svakim svetlom, jer reparaturna mešavina i fabrička boja ne moraju biti isti materijal. Cilj je da razlika pod uobičajenim uslovima gledanja ne bude primetna. Zato se u praksi koristi i utapanje u susedni deo, o čemu piše tekst [Lokalna popravka ili lakiranje celog dela](/vodici/lokalna-popravka-ili-ceo-deo).
 
 ## Pitanja i odgovori
 

@@ -15,6 +15,7 @@ namera: rešavanje problema
 dodatnaPitanja:
   - Kako se učvršćivač pravilno čuva?
   - Zašto se limenka učvršćivača naduvala?
+  - Koliko dugo traje otvoren učvršćivač?
 poreklopitanja:
   tip: urednicka-procena
   napomena: "Pitanje o zamućenom ili kristalisanom učvršćivaču je urednička procena; u istraživanju se javlja samo posredno, uz pitanja o roku trajanja otvorenih materijala."
@@ -62,13 +63,14 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Nijedan dokument proizvođača iz našeg programa koji smo pregledali (R-M i baslac tehnički listovi učvršćivača, Norbin bezbednosni list N75-021, Carsystem tehnički list laka) ne opisuje izgled zamućenog ili kristalisanog učvršćivača niti kaže da li se takav sme koristiti. Tekst zato navodi samo ono što proizvođači pišu o vlazi i skladištenju; odgovor na glavno pitanje treba da potvrdi stručna osoba ili tehnička podrška proizvođača."
   status: potrebno
 poslednjaProvera: 2026-10-08
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M H 2E20 i H 2P15 (07/2026; „Hardeners are sensitive to humidity“, „Seal cans… carefully“), Norbin SDS N75-021 v3.1 (odeljci 7 i 10: voda, alkoholi, amini, CO2, pritisak do rasprsnuća, 5–35 °C, uspravno, ne vraćati ostatke) i Carsystem 2K Clear VOC 420 (skladištenje 10–30 °C, ne ispod 5 °C); provereno i da baslac listovi 50-415/-420/-430/50-45 nemaju napomenu o vlazi. Sve citirane tvrdnje se poklapaju; dodat navod SDS-a o oprezu pri ponovnom otvaranju. Stručna potvrda je opravdana: nijedan dokument ne kaže da li se zamućen ili kristalisan učvršćivač sme koristiti, pa suština odgovora nema izvor proizvođača."
 ponovniPregled: 2027-04-08
 ---
 Proizvođači iz našeg programa u dokumentima koje smo pregledali ne opisuju kako izgleda učvršćivač koji se zamutio ili ima kristale, niti da li se takav sme koristiti. Ono što navode jeste da su učvršćivači osetljivi na vlagu: R-M to piše u tehničkim listovima svojih učvršćivača[^rm-h2e20-tds], a bezbednosni list Norbin učvršćivača N75-021 kaže da proizvod reaguje sa vodom[^norbin-n75-021-sds]. Zato učvršćivač koji ne izgleda kao inače ne koristite za posao dok proizvođač ili dobavljač ne potvrdi da je ispravan. To je preporuka redakcije, a ne podatak proizvođača.
@@ -90,7 +92,7 @@ Sledeći koraci su urednička preporuka za slučaj kada izgled sadržaja odstupa
 3. Proverite kako je pakovanje čuvano: da li je bilo otvoreno, kako je zatvoreno i na kojoj temperaturi je stajalo.
 4. Obratite se dobavljaču ili tehničkoj podršci proizvođača sa tim podacima.
 
-Ako je limenka naduvana ili deformisana, otvarajte je oprezno i uz zaštitnu opremu. Bezbednosni list Norbin učvršćivača objašnjava da pritisak u zatvorenoj posudi nastaje kada proizvod reaguje sa vodom[^norbin-n75-021-sds]. Rizike rada sa izocijanatima obrađuje tekst [Izocijanati u 2K materijalima](/vodici/izocijanati-i-2k-materijali).
+Ako je limenka naduvana ili deformisana, otvarajte je oprezno i uz zaštitnu opremu. Bezbednosni list Norbin učvršćivača upozorava na oprez pri ponovnom otvaranju započetih posuda zbog pritiska i objašnjava da pritisak u zatvorenoj posudi nastaje kada proizvod reaguje sa vodom[^norbin-n75-021-sds]. Rizike rada sa izocijanatima obrađuje tekst [Izocijanati u 2K materijalima](/vodici/izocijanati-i-2k-materijali).
 
 ## Zašto ovde nema sigurnog odgovora
 

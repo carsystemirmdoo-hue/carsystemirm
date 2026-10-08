@@ -29,7 +29,7 @@ const WINDOW_DAYS = 4;
 
 function authorized(request: Request) {
   const secret = process.env.CRON_SECRET;
-  if (!secret || secret.length < 16) return { ok: false as const, status: 503, razlog: "CRON_SECRET nije podešen" };
+  if (!secret || secret.length < 16) return { ok: false as const, status: 503, razlog: "tajna zakazanog posla nije podešena" };
   const header = request.headers.get("authorization") ?? "";
   const expected = Buffer.from(`Bearer ${secret}`);
   const received = Buffer.from(header);

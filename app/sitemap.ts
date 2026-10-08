@@ -10,8 +10,7 @@ import {
 } from "@/lib/product-families";
 import { absoluteUrl } from "@/lib/seo";
 import { seoCategoryLandings } from "@/lib/seo/category-landings";
-import { publishedGuides } from "@/lib/knowledge/guides";
-import { guides } from "@/data/knowledge/guides";
+import { getPublicSaveti, MIN_CLANAKA_ZA_INDEKS_KATEGORIJE } from "@/lib/saveti";
 import { CATALOG_BATCH_SIZE } from "@/components/catalog/catalogInfiniteScroll.mjs";
 import { getCatalogListingData } from "@/lib/catalog-listing";
 
@@ -24,6 +23,13 @@ const staticRoutes = [
   "/prodavnice",
   "/kontakt",
 ];
+
+/*
+ * Sitemap se obnavlja najkasnije na sat vremena, kao i strane rubrike
+ * „Saveti i vodiči“: članak ulazi u sitemap tek kada ga kapija objave smatra
+ * javnim, a zakazani posao (`/api/saveti/objava`) ga osvežava u terminu.
+ */
+export const revalidate = 3600;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const brandRoutes = getAllCarsystemBrands().map((brand) => `/brendovi/${brand.slug}`);
@@ -45,9 +51,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (category) => `/kategorije/${category.slug}`,
   );
 
-  // Guides enter the sitemap only once they pass the publication gate. A draft
-  // or unverified guide produces no route, so it must produce no entry.
-  const guideRoutes = publishedGuides(guides).map((guide) => `/vodici/${guide.slug}`);
+  // Saveti i vodiči: samo javni članci (kapija objave u ovom trenutku), sa
+  // stvarnim datumom poslednje izmene. Indeks rubrike, novosti i kategorije
+  // ulaze tek kada imaju sadržaj — prazan spisak nije strana za indeks.
+  const saveti = getPublicSaveti();
+  const savetiEntries: MetadataRoute.Sitemap = saveti.map((clanak) => ({
+    url: absoluteUrl(`/vodici/${clanak.slug}`),
+    lastModified: clanak.datumIzmene,
+  }));
+  const savetiGuides = saveti.filter((clanak) => clanak.tip !== "novost");
+  const savetiCategoryCounts = new Map<string, number>();
+  for (const clanak of savetiGuides) {
+    savetiCategoryCounts.set(clanak.kategorija, (savetiCategoryCounts.get(clanak.kategorija) ?? 0) + 1);
+  }
+  const savetiListRoutes = [
+    ...(saveti.length ? ["/vodici"] : []),
+    ...(saveti.some((clanak) => clanak.tip === "novost") ? ["/vodici/novosti"] : []),
+    ...[...savetiCategoryCounts]
+      .filter(([, count]) => count >= MIN_CLANAKA_ZA_INDEKS_KATEGORIJE)
+      .map(([slug]) => `/vodici/kategorije/${slug}`),
+  ];
 
   /*
    * Paginacija hoda kanonskim entitetima, isto kao ruta koja je renderuje —
@@ -67,15 +90,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   return [
-    ...staticRoutes,
-    ...categoryRoutes,
-    ...brandRoutes,
-    ...programRoutes,
-    ...guideRoutes,
-    ...paginationRoutes,
-    ...familyRoutes,
-    ...productRoutes,
-  ].map((route) => ({
-    url: absoluteUrl(route),
-  }));
+    ...[
+      ...staticRoutes,
+      ...categoryRoutes,
+      ...brandRoutes,
+      ...programRoutes,
+      ...savetiListRoutes,
+      ...paginationRoutes,
+      ...familyRoutes,
+      ...productRoutes,
+    ].map((route) => ({
+      url: absoluteUrl(route),
+    })),
+    ...savetiEntries,
+  ];
 }

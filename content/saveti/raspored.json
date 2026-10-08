@@ -1,0 +1,13 @@
+{
+  "podesavanja": {
+    "aktivan": false,
+    "pocetakPretpostavljen": true,
+    "pocetniDatum": "2026-11-02",
+    "vremeObjave": "09:00",
+    "vremenskaZona": "Europe/Belgrade",
+    "razmakDana": 3,
+    "pauzaOd": null,
+    "napomena": "Probni kalendar. Početni datum 2026-11-02 u 09:00 je pretpostavka urednika, ne odluka firme. Aktivacija: postaviti pravi pocetniDatum i aktivan: true (vidi docs/saveti/README.md)."
+  },
+  "termini": []
+}

@@ -1,0 +1,772 @@
+[
+  {
+    "id": "cs-catalogue-2026-27",
+    "brand": "carsystem",
+    "title": "CARSYSTEM Product Catalogue 26/27 (EN)",
+    "url": "https://www.carsystem.org/fileadmin/CS-Kataloge-2026/Carsystem-product-catalogue-HQ-2026-27-EN.pdf",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international (EN izdanje; stranica /en/catalogues)",
+    "productOrSystem": "ceo Carsystem program; 42 stavke označene kao NEW (36 u našem katalogu)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-sanding-block-100-2-0",
+        "carsystem-sanding-block-300-100",
+        "carsystem-sanding-disc-p-25-ceramic",
+        "carsystem-sanding-strips-p-25-ceramic",
+        "carsystem-ks-4000-2",
+        "carsystem-ks-500-2",
+        "carsystem-power-pu-bond",
+        "carsystem-power-pu-bond-mixer",
+        "carsystem-multi-cleaning-wipes",
+        "carsystem-silicone-remover-water-2-0",
+        "carsystem-compound-x1500-hc",
+        "carsystem-cordless-sander-csh-cos01",
+        "carsystem-microfiber-x300-duo",
+        "carsystem-polish-x8000-ah",
+        "carsystem-polishing-pad-x1500",
+        "carsystem-polishing-pad-x8000",
+        "carsystem-rapid-charger-for-csh-battery-powered",
+        "carsystem-spare-battery-5-0ah",
+        "carsystem-crash-film",
+        "carsystem-easy-mask-ii",
+        "carsystem-red-tape",
+        "carsystem-cap-camouflage",
+        "carsystem-padded-jacket-black-2025",
+        "carsystem-padded-vest-black-2025",
+        "carsystem-socks-carsystem-black-white",
+        "carsystem-sweatshirt-black-teamcarsystem",
+        "carsystem-zip-hoodie-black",
+        "carsystem-2k-clear-voc-cc-25-hs-as",
+        "carsystem-2k-clear-voc-cc-26-eco-x-15-60",
+        "carsystem-adapter-for-cps-paint-cup-systems",
+        "carsystem-af-25-primer-wet-on-wet",
+        "carsystem-can-scraper",
+        "carsystem-mixing-stick-fast",
+        "carsystem-paint-system-cps-3-0",
+        "carsystem-multi-blue-rapid-changer-sf",
+        "carsystem-multi-flow"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Carsystem je objavio novi katalog proizvoda za 2026/27. godinu na engleskom jeziku, sa 110 strana i preko 2.000 artikala raspoređenih u deset grupa. U katalogu je oko 42 proizvoda označeno kao novo: od keramičkih brusnih diskova P.25 i nove X-serije za poliranje, do lakova CC.25 i CC.26 i gitova Multi Flow i Multi Blue Rapid Changer SF. Sajt ne prikazuje datum objave. PDF je napravljen 9. septembra 2026, nedelju dana pre sajma Automechanika.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan na stranici; PDF CreationDate 2026-09-09, HTTP Last-Modified 2026-09-09. NEW-oznake iz našeg sync-a (data/carsystem-sync/source-products isNew=true, 42). Van našeg kataloga: Paint Arrestor II, Star Dust 2.0 FFP2/FFP3 (respiratorne maske su uklonjene odlukom vlasnika), Car Clean Multi II, Classic Coverall Pants Kneepadfit i Erlking Ltd. coverall (postoje samo u PDF-u)."
+  },
+  {
+    "id": "cs-automechanika-2026",
+    "brand": "carsystem",
+    "title": "Vosschemie GmbH | Exhibitor Automechanika Frankfurt 2026",
+    "url": "https://automechanika.messefrankfurt.com/frankfurt/en/exhibitor-search.detail.html/vosschemie-gmbh.html",
+    "publishedAt": null,
+    "eventDate": "2026-09-08/2026-09-12",
+    "market": "međunarodni sajam, Frankfurt (DE)",
+    "productOrSystem": "Carsystem (Vosschemie GmbH), Hala 11.1, štand C23",
+    "inOurCatalog": {
+      "status": "unclear",
+      "slugs": []
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Vosschemie GmbH, kompanija kojoj pripada brend Carsystem, nalazi se na zvaničnoj listi izlagača sajma Automechanika Frankfurt 2026, u hali 11.1 na štandu C23. Sajam je trajao pet dana i završen je 12. septembra 2026. Ni carsystem.org ni Carsystemov YouTube kanal nisu objavili poseban tekst o nastupu, pa ne znamo koji su proizvodi tamo predstavljeni.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Izvor je organizator sajma (Messe Frankfurt), a ne sam brend. Datum završetka i trajanje od pet dana potvrđuje zvanični završni izveštaj https://www.messefrankfurt.com/frankfurt/en/press/press-releases/2026/automechanika-frankfurt-final-report-2026.html (12 Sep 2026; otvoren 2026-10-08). Početak 8. septembra je izračunat iz tih podataka. Stranica izlagača sada u zaglavlju prikazuje datume izdanja 2028. Učešće na Automechanici 2024 nije provereno."
+  },
+  {
+    "id": "cs-yt-x-serie-2026-06",
+    "brand": "carsystem",
+    "title": "Maximale Performance im Finish | CARSYSTEM",
+    "url": "https://www.youtube.com/watch?v=fK6wuS7TRts",
+    "publishedAt": "2026-06-30",
+    "eventDate": null,
+    "market": "DE (video na nemačkom)",
+    "productOrSystem": "Polish X-Serie: Compound X1500 HC, Polish X8000 AH, Polishing Pad X1500/X8000, Microfiber X300 Duo",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-compound-x1500-hc",
+        "carsystem-polish-x8000-ah",
+        "carsystem-polishing-pad-x1500",
+        "carsystem-polishing-pad-x8000",
+        "carsystem-microfiber-x300-duo"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Video predstavlja novu X-seriju za poliranje kao odgovor na svakodnevne probleme u lakirnici: uključenja prašine, politure koje se leti brzo suše i hologramе na tamnim lakovima. Sistem ima dva koraka. Compound X1500 HC skida materijal i sam se finije razgrađuje, a Polish X8000 AH je završni korak protiv holograma. Uz njih idu odgovarajući padovi i dvobojne krpe X300 Duo.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum iz zvaničnog YouTube RSS feeda kanala carsystem_refinish (UC_nE69BcrEUaTNm1mVLSg-w). Prateća brošura carsystem-politursystem-x1500-x8000-x300.pdf ima HTTP Last-Modified 2026-07-15. Proizvodne stranice nose oznaku NEW."
+  },
+  {
+    "id": "cs-flyer-cc26-eco-x",
+    "brand": "carsystem",
+    "title": "CARSYSTEM CC.26 ECO-X 15/60 (flyer) / homepage teaser \"Brilliance that lasts. Performance that delivers.\"",
+    "url": "https://www.carsystem.org/fileadmin/user_upload/productflyer-2k-clear-voc-cc.26-eco-x.pdf",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "2K Clear VOC CC.26 ECO-X 15/60",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-2k-clear-voc-cc-26-eco-x-15-60"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Novi 2K akrilni bezbojni lak CC.26 ECO-X 15/60 istaknut je na početnoj strani carsystem.org i ima sopstveni letak. Prema letku, meša se u odnosu 2:1, ne traži razređivač i suši se 15 minuta na 60 °C ili 3–4 sata na 20 °C. U katalogu 2026/27 vodi se kao nov proizvod.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan; HTTP Last-Modified letka je 2026-07-22. Tehnički podaci su preuzeti iz postojeće docs/CARSYSTEM_DOCUMENT_SOURCE_MAP.md i nisu ponovo čitani."
+  },
+  {
+    "id": "cs-homepage-af25",
+    "brand": "carsystem",
+    "title": "AF.25 Primer Wet on Wet – homepage teaser \"For a flawless result. Without compromise.\"",
+    "url": "https://www.carsystem.org/en/products/detail/painting/af25-primer-wet-on-wet-2k-acryl-filler",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "AF.25 Primer Wet on Wet (2K akrilni filer)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-af-25-primer-wet-on-wet"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Na početnoj strani carsystem.org istaknut je AF.25 Primer Wet on Wet, novi 2K akrilni filer za nanošenje mokro na mokro. Proizvodna stranica nosi oznaku „New“, a proizvod je u katalogu 2026/27 označen kao nov. Datum objave nije naveden.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Pozicija na početnoj strani zabeležena 2026-10-08."
+  },
+  {
+    "id": "cs-p25-ceramic",
+    "brand": "carsystem",
+    "title": "Neues Schleifmittel P.25 CERAMIC",
+    "url": "https://www.youtube.com/shorts/jmMJfbV6P8o",
+    "publishedAt": "2025-07-18",
+    "eventDate": null,
+    "market": "DE/EN (dvojezičan opis)",
+    "productOrSystem": "Sanding Disc P.25 Ceramic, Sanding Strips P.25 Ceramic",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-sanding-disc-p-25-ceramic",
+        "carsystem-sanding-strips-p-25-ceramic"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Carsystem je predstavio P.25 Ceramic, papirni brusni disk sa keramičkim zrnom, Carsystemovim rasporedom od 25 rupa i ovalnom središnjom rupom. Keramičko zrno treba da daje jak skidanje materijala i dug vek trajanja. Proizvod je i dalje istaknut kao novitet na početnoj strani sajta, a u katalogu 2026/27 su i diskovi i trake označeni kao novi.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "Datum je iz RSS feeda. Sam short nije otvaran pojedinačno; otvoreni su feed i proizvodna stranica (oznaka NEW). URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-af21-xpert",
+    "brand": "carsystem",
+    "title": "Ein Füller für alle Fälle | CARSYSTEM",
+    "url": "https://www.youtube.com/watch?v=fI-whVLMQLE",
+    "publishedAt": "2025-11-03",
+    "eventDate": null,
+    "market": "DE",
+    "productOrSystem": "AF.21 X-PERT (1K filer)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-af-21-x-pert"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Carsystem predstavlja AF.21 X-PERT kao jedan filer za više vrsta podloga. Time želi da smanji broj proizvoda u radionici i rizik od pogrešnog izbora. Video ističe dobru moć popunjavanja, direktno prianjanje i jednostavnu upotrebu.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "Video nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda (otvoren 2026-10-08). AF.21 X-pert nije označen kao NEW u 2026/27. URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-csh-cos01",
+    "brand": "carsystem",
+    "title": "Feinschliff ohne Kabel – ergonomisch & präzise!",
+    "url": "https://www.youtube.com/shorts/RlzkoPuKu08",
+    "publishedAt": "2025-09-09",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Cordless Sander CSH-COS01 (+ Rapid Charger, Spare Battery 5,0Ah)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-cordless-sander-csh-cos01",
+        "carsystem-rapid-charger-for-csh-battery-powered",
+        "carsystem-spare-battery-5-0ah"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Kratki video prikazuje akumulatorsku ekscentričnu brusilicu CSH-COS01 za fino brušenje bez kabla i creva za vazduh. Naglasak je na ergonomiji i radu bez zamora. Brusilica, punjač i rezervna baterija od 5,0 Ah su u katalogu 2026/27 označeni kao novi.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "Objavljeno pre oko 13 meseci, ali je i dalje označeno kao NEW na carsystem.org (sync 2026-09-18), pa je svrstano u aktuelno. Datum je iz RSS feeda. URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-v19",
+    "brand": "carsystem",
+    "title": "V.19 – Das Schleifvlies, das in 2025 immer noch Maßstäbe setzt!",
+    "url": "https://www.youtube.com/shorts/Q7LHPVpbcgI",
+    "publishedAt": "2025-09-05",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Sanding Fleece V.19",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-sanding-fleece-v-19-disc",
+        "carsystem-sanding-fleece-v-19-pad-115-x-230-mm",
+        "carsystem-sanding-fleece-v-19-roll-115-mm-x-10-m"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Video prikazuje brusni flis V.19 u obliku diska za mašinsko matiranje i otprašivanje velikih površina pre filera ili završnog laka. Disk se može koristiti suv ili mokar. Ovo nije novitet, već podsetnik na postojeći proizvod, pa je pogodniji za edukativni tekst nego za vest.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "Datum je iz RSS feeda. URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-f23c-vs-multi-black-rapid",
+    "brand": "carsystem",
+    "title": "Weniger Aufwand, besseres Ergebnis – das Geheimnis liegt im richtigen Produkt!",
+    "url": "https://www.youtube.com/watch?v=wgz-MoCSV_Q",
+    "publishedAt": "2025-04-28",
+    "eventDate": null,
+    "market": "DE",
+    "productOrSystem": "F.23 C keramička abrazivna sredstva; Multi i Multi Black Rapid gitovi",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-sanding-strips-f-23-ceramic",
+        "carsystem-f23-brusni-diskovi",
+        "carsystem-multi-black-rapid"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Praktično poređenje keramičkog abrazivnog sredstva F.23 C sa klasičnim alternativama i test dva gita, Multi i Multi Black Rapid. Poruka videa je da pravi izbor proizvoda štedi vreme i materijal. Dobar je izvor za vodič o izboru abraziva i gitova.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "Opis ne navodi tačan naziv klasičnog „Multi“ gita, pa nije povezan nijedan Multi slug osim Multi Black Rapid. URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-multi-black-rapid-mix",
+    "brand": "carsystem",
+    "title": "Multi Black Rapid – wirklich schwer zu mischen?",
+    "url": "https://www.youtube.com/shorts/vD-SW1hetKY",
+    "publishedAt": "2025-05-16",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Multi Black Rapid",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-multi-black-rapid"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "U kratkom videu Carsystem odgovara na komentar gledaoca da li se crni git Multi Black Rapid teže meša, i to pokazuje u praksi. Sadržaj je edukativan i nije vezan za novi proizvod.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-multi-black-rapid",
+    "brand": "carsystem",
+    "title": "Multi Black Rapid: Alles, was du über unseren schwarzen Spachtel wissen musst!",
+    "url": "https://www.youtube.com/shorts/QTqm1FEB_-U",
+    "publishedAt": "2025-01-17",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Multi Black Rapid",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-multi-black-rapid"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Predstavljanje poliesterskog višenamenskog gita Multi Black Rapid. Na 20 °C suši se za 10 minuta, posle stvrdnjavanja nema lepljivu površinu, a novi punioci olakšavaju brušenje.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-mixing-stick-fast",
+    "brand": "carsystem",
+    "title": "Mix it like a pro – mit dem Mixing Stick Fast! | CARSYSTEM",
+    "url": "https://www.youtube.com/shorts/RlAGbb-kFnI",
+    "publishedAt": "2025-03-07",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Mixing Stick Fast",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-mixing-stick-fast"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Mixing Stick Fast je štapić za mešanje u obliku slova S, otporan na rastvarače. Namenjen je brzom i ravnomernom mešanju lakova, filera i drugih premaza. U katalogu 2026/27 vodi se kao nov.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-can-scraper",
+    "brand": "carsystem",
+    "title": "Mehr rausholen, weniger verschwenden: Can Scraper | Carsystem #shorts",
+    "url": "https://www.youtube.com/shorts/84dLdLmyfII",
+    "publishedAt": "2025-02-25",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Can Scraper",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-can-scraper"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Can Scraper je plastični štapić otporan na rastvarače, za mešanje i izvlačenje ostatka lakova, filera i viskoznih materijala iz limenke. Tako se manje materijala baca. U katalogu 2026/27 vodi se kao nov.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-proflex-styx",
+    "brand": "carsystem",
+    "title": "Das neue ProFlex STYX | Carsystem #shorts",
+    "url": "https://www.youtube.com/shorts/lHCry8j8Vc4",
+    "publishedAt": "2025-02-18",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "ProFlex Styx (samolepljivi abrazivni film Ø32 mm)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-proflex-styx"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Carsystem je predstavio ProFlex STYX, samolepljivi abrazivni film prečnika 32 mm. Namenjen je preciznim korekcijama, kao što su uključenja u laku i sitne ogrebotine. Samolepljiva poleđina drži ga tačno na mestu greške.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-imagefilm-2024",
+    "brand": "carsystem",
+    "title": "Carsystem Imagefilm English | 2024",
+    "url": "https://www.youtube.com/watch?v=RFnJ9J5QqAo",
+    "publishedAt": "2024-09-18",
+    "eventDate": null,
+    "market": "international (EN; DE verzija https://www.youtube.com/watch?v=_L4GyE3gWag)",
+    "productOrSystem": "brend Carsystem (Vosschemie GmbH)",
+    "inOurCatalog": {
+      "status": "unclear",
+      "slugs": []
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Promotivni film o brendu Carsystem kompanije Vosschemie GmbH. Prikazuje oblasti automobilske reparature koje brend pokriva, proizvodnju iza scene i vrednosti kompanije. Može da posluži kao pozadinski materijal za predstavljanje brenda.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "Objavljen u vreme sajma Automechanika 2024 (10–14. 9. 2024), ali učešće na sajmu 2024 nije potvrđeno. URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-f23c-strips",
+    "brand": "carsystem",
+    "title": "Keramikschleifstreifen F.23 C | Carsystem #shorts",
+    "url": "https://www.youtube.com/watch?v=krFeNfldGgc",
+    "publishedAt": "2024-07-10",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "Sanding Strips F.23 Ceramic",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-sanding-strips-f-23-ceramic"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Predstavljanje keramičkih brusnih traka F.23 C. Prema opisu, trake se same oštre tokom brušenja i dugo traju bez obzira na pritisak. Stearatni sloj smanjuje prašinu i zapušavanje, a perforacija omogućava prilagođavanje trake poslu.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-yt-all-in-one-covers",
+    "brand": "carsystem",
+    "title": "Schonbezug 5-in-1 | Carsystem #shorts",
+    "url": "https://www.youtube.com/watch?v=61Ljtb9cmmM",
+    "publishedAt": "2024-05-02",
+    "eventDate": null,
+    "market": "DE/EN",
+    "productOrSystem": "All In One Covers (zaštitni set 5-u-1)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-all-in-one-covers"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Komplet 5-u-1 štiti unutrašnjost vozila u radionici: sedište, prostor za noge, volan, menjač i ručnu kočnicu. Neklizajuća donja strana drži navlake na mestu.",
+    "sourceType": "official",
+    "accessedAt": null,
+    "notes": "URL videa nije otvaran pojedinačno; naslov, datum i opis su iz zvaničnog RSS feeda https://www.youtube.com/feeds/videos.xml?channel_id=UC_nE69BcrEUaTNm1mVLSg-w (otvoren 2026-10-08)."
+  },
+  {
+    "id": "cs-brochure-sanding-blocks",
+    "brand": "carsystem",
+    "title": "CARSYSTEM Sanding Blocks (folder)",
+    "url": "https://www.carsystem.org/fileadmin/user_upload/sanding_block-a4-quer-v4.pdf",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "Sanding Block 100 2.0 / 198 2.0 / 300 / 400 2.0, Sanding Block 300 + 100",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-sanding-block-100-2-0",
+        "carsystem-sanding-block-300-100"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Ažurirani letak za ručne brusne blokove povezuje svaki blok sa odgovarajućim tipom brusne trake. Sanding Block 100 2.0 i 300 + 100 su u katalogu 2026/27 označeni kao novi. Letak je koristan kao osnova za vodič o izboru alata za ručno brušenje.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan; HTTP Last-Modified je 2026-07-15. Nisu proverene sve slug-ove za blokove 198/400 2.0."
+  },
+  {
+    "id": "cs-news-oem",
+    "brand": "carsystem",
+    "title": "CARSYSTEM PARTNER IN THE OEM SECTOR",
+    "url": "https://www.carsystem.org/en/news/detail/carsystem-partner-in-the-oem-sector",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "DE / OEM proizvođači vozila",
+    "productOrSystem": "OEM linija (posebni proizvodi na upit)",
+    "inOurCatalog": {
+      "status": "no",
+      "slugs": []
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "nerelevantno",
+    "summarySr": "Vosschemie nudi proizvođačima vozila (OEM) posebnu liniju proizvoda koja se razlikuje od standardnog Carsystem programa, uz posebno savetovanje. Upiti idu preko OEM Key Account tima u Nemačkoj. Tekst nije namenjen radionicama i krajnjim kupcima u Srbiji.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Stranica ne prikazuje datum; sitemap lastmod je 2025-11-11 (to nije datum objave). Tekst je i dalje istaknut na početnoj strani."
+  },
+  {
+    "id": "cs-news-proflex-callisto",
+    "brand": "carsystem",
+    "title": "Flexible sanding with ProFlex CALLISTO",
+    "url": "https://www.carsystem.org/en/news/detail/flexible-sanding-with-proflex-callisto",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "ProFlex Callisto",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-proflex-callisto-150-mm",
+        "carsystem-proflex-callisto-77-mm",
+        "carsystem-proflex-callisto-33-mm"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "ProFlex Callisto je fleksibilni disk za fino mokro brušenje sa penastom podlogom, namenjen pripremi površine pre poliranja. Tragovi brušenja se brzo uklanjaju, pa poliranje kraće traje. Vest je starija od 2024.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan; sitemap lastmod DE verzije je 2023-05-22."
+  },
+  {
+    "id": "cs-news-multi-flow",
+    "brand": "carsystem",
+    "title": "Go with the FLOW! (our latest putty)",
+    "url": "https://www.carsystem.org/en/news/detail/go-with-the-flow-our-latest-putty",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "Multi Flow (lagani poliesterski git)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-multi-flow"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Multi Flow je lagani višenamenski git kremaste konzistencije. Sam se razliva i zatvara pore, pa se lako brusi. Vest je starija od 2024, ali je Multi Flow i u katalogu 2026/27 označen kao nov.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan; sitemap lastmod DE verzije je 2023-05-25. NEW oznaka u katalogu 2026/27 se ne slaže sa vešću iz 2023."
+  },
+  {
+    "id": "cs-news-explorer-ltd",
+    "brand": "carsystem",
+    "title": "THE NEW EXPLORER LTD. 2-PIECE COVERALL",
+    "url": "https://www.carsystem.org/en/news/detail/the-new-explorer-ltd-2-piece-coverall",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "Explorer Ltd. 2-Piece Coverall (ograničena serija)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-explorer-ltd-2-piece-coverall"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Ograničena serija dvodelnog antistatičkog zaštitnog odela za lakirere, u sivoj boji sa crvenim Carsystem detaljima. Odelo ne pušta prašinu i vlakna i ne sadrži silikon. Vest je iz 2023, a proizvod je bio najavljen kao strogo ograničena serija.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan; sitemap lastmod je 2023-07-12. Proizvod je i dalje istaknut na početnoj strani."
+  },
+  {
+    "id": "cf-catalogue-2026",
+    "brand": "carfit",
+    "title": "C.A.R.FIT Catalogue 2026",
+    "url": "https://carfitrepair.com/wp-content/uploads/2025/09/CARFIT-FINAL-2026.pdf",
+    "publishedAt": null,
+    "eventDate": null,
+    "market": "international (EN/DE/FR)",
+    "productOrSystem": "ceo C.A.R.FIT program (108 porodica, 294 šifre)",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": []
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "Trojezični katalog C.A.R.FIT za 2026. godinu, na engleskom, nemačkom i francuskom, ima 48 strana. Obuhvata maskiranje, aerosole, filere, lakove, politure, abrazive, gitove, zaštitu podvozja i pribor. Ovo je i dalje aktuelni katalog na stranici /en/katalog/.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum nije prikazan; HTTP Last-Modified i PDF CreationDate su 2025-09-25. Ceo program je uvezen (vidi docs/CARFIT_CATALOG_SYNC.md), pa slugovi nisu pojedinačno navedeni. NEW oznake u PDF-u nisu analizirane."
+  },
+  {
+    "id": "cf-masking-tape-crepe",
+    "brand": "carfit",
+    "title": "Masking Tape (Crepe)",
+    "url": "https://carfitrepair.com/en/abdeckband-kreppband/",
+    "publishedAt": "2026-10-01",
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "Masking Tape (Crepe), šifre 9-100-0019/0025/0038/0050, 40 m",
+    "inOurCatalog": {
+      "status": "unclear",
+      "slugs": [
+        "carfit-cover-tape-up-to-80c"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "aktuelno",
+    "summarySr": "C.A.R.FIT je objavio stranicu za novu univerzalnu krep traku za maskiranje, sa krep papirom i lepkom od prirodnog kaučuka. Radna temperatura je od 0 do 60 °C, a namenjena je unutrašnjem krečenju, maskiranju pri farbanju, izradi signalizacije i elektronici. Šifre artikala su iste kao kod postojeće trake „Cover tape up to 80°C“, ali sa dužinom 40 m umesto 45 m.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum je iz WP REST API polja date; stranica ne prikazuje datum. KONFLIKT: iste četiri šifre stoje i na https://carfitrepair.com/en/abdeckklebeband-80c/ (45 m, do 80 °C), koja je i dalje aktivna. Stranica je nastala posle našeg sync-a od 2026-09-18 i potrebna je provera pri sledećem carfit:sync."
+  },
+  {
+    "id": "cf-sponge-cut",
+    "brand": "carfit",
+    "title": "Sponge Cut",
+    "url": "https://carfitrepair.com/en/sehr-feines-und-ultra-feines-schleifvlies-2/",
+    "publishedAt": "2024-11-25",
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "Sponge Cut",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carfit-sponge-cut"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Stranica proizvoda Sponge Cut dodata je na carfitrepair.com u novembru 2024. Proizvod je već u našem katalogu. Sajt nema poseban tekst vesti o njemu.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum je iz WP REST API polja date; stranica ne prikazuje datum. Sadržaj stranice nije detaljno čitan."
+  },
+  {
+    "id": "cf-silicone-remover-strawberry-spray",
+    "brand": "carfit",
+    "title": "Silikone Remover \"Strawberry\" Spray",
+    "url": "https://carfitrepair.com/en/silikonentferner-spray-erdbeere/",
+    "publishedAt": "2024-07-09",
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "Silicone Remover \"Strawberry\" Spray",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carfit-silikone-remover-strawberry-spray",
+        "carfit-silicone-remover-strawberry"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Odmašćivač „Strawberry“ dodat je u obliku spreja u julu 2024, kao dopuna postojećem pakovanju. Oba oblika su već u našem katalogu.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum iz WP REST API (date 2024-07-09, modified 2025-09-03)."
+  },
+  {
+    "id": "cf-2k-clearcoat-spray",
+    "brand": "carfit",
+    "title": "2K Clearcoat Spray",
+    "url": "https://carfitrepair.com/en/2k-klarlack-spray/",
+    "publishedAt": "2024-07-09",
+    "eventDate": null,
+    "market": "international",
+    "productOrSystem": "2K Clearcoat Spray",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carfit-2k-clearcoat-spray"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Dvokomponentni bezbojni lak u spreju dodat je u program C.A.R.FIT u julu 2024. Proizvod je već u našem katalogu.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Datum iz WP REST API polja date."
+  },
+  {
+    "id": "cf-purple-ceramic-film",
+    "brand": "carfit",
+    "title": "Purple Ceramic Film",
+    "url": "https://carfitrepair.com/en/gold-paper-disc-2/",
+    "publishedAt": "2023-09-04",
+    "eventDate": "2024-11-26",
+    "market": "international",
+    "productOrSystem": "Purple Ceramic Film",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carfit-purple-ceramic-film"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "Keramički abrazivni film ljubičaste boje. Stranica postoji od 2023, a poslednji put je menjana u novembru 2024. Proizvod je već u našem katalogu.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "eventDate ovde označava WP polje modified (poslednja izmena stranice), a ne događaj."
+  },
+  {
+    "id": "rupes-ibrid-nano-lux-kits-2025",
+    "brand": "rupes",
+    "title": "iBrid Nano LUX Kits Update",
+    "url": "https://www.rupes.com/news/ibrid-nano-lux-kits-update/",
+    "publishedAt": "2025-01-22",
+    "eventDate": null,
+    "market": "global (rupes.com)",
+    "productOrSystem": "iBrid Nano HR81M/LUX i HR81ML/LUX kompleti",
+    "inOurCatalog": {
+      "status": "yes",
+      "slugs": [
+        "carsystem-rupes-ibrid-nano"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "RUPES je objavio da od proizvodnje 2025. kompleti HR81M/LUX i HR81ML/LUX za poliranje iBrid Nano više neće sadržati dve četke: od konjske dlake (9.BF3000) i najlonsku (9.BF3030). Ovo je važno ako opisujemo sadržaj kompleta, jer stariji opisi mogu navoditi te četke.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Treba proveriti da li naš zapis carsystem-rupes-ibrid-nano navodi četke u sadržaju kompleta."
+  },
+  {
+    "id": "rupes-lhr15-markv-2024",
+    "brand": "rupes",
+    "title": "New LHR15 & LHR21 MarkV Polishers",
+    "url": "https://www.rupes.com/news/new-lhr15-lhr21-markv-polishers/",
+    "publishedAt": "2024-10-08",
+    "eventDate": null,
+    "market": "global (rupes.com)",
+    "productOrSystem": "BigFoot LHR15 MarkV (naslednik LHR15 Mark III)",
+    "inOurCatalog": {
+      "status": "no",
+      "slugs": [
+        "carsystem-rupes-polishing-machine-lhr15"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "RUPES je predstavio novu generaciju polirki BigFoot LHR15 i LHR21 MarkV. Prema proizvođaču, buka je manja za 47 %, težina za 10 %, vibracije su smanjene, a garancija je produžena na pet godina. Naš program preko Carsystema vodi LHR15 Mark III (LHR15III), a ne MarkV, pa ova vest govori o novijoj verziji našeg modela.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Status je „no“ jer MarkV nije u programu. Navedeni slug je povezani Mark III zapis, nije podudaranje. Ne objavljivati kao novitet iz našeg programa."
+  },
+  {
+    "id": "rupes-da-intermediate-ibrid-nano-2024",
+    "brand": "rupes",
+    "title": "New D-A INTERMEDIATE Pads for iBrid Nano",
+    "url": "https://www.rupes.com/news/new-d-a-intermediate-pads-for-ibrid-nano-polishers/",
+    "publishedAt": "2024-03-04",
+    "eventDate": null,
+    "market": "global (rupes.com)",
+    "productOrSystem": "D-A INTERMEDIATE padovi 9.DA40B / 9.DA70B za iBrid Nano",
+    "inOurCatalog": {
+      "status": "no",
+      "slugs": [
+        "carsystem-rupes-ibrid-nano"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "RUPES je proširio D-A seriju penastih padova na iBrid Nano polirke, sa šiframa 9.DA40B i 9.DA70B. Novi pad je po agresivnosti između žutog D-A FINE i plavog D-A COARSE. Padovi nisu u našem programu, a mašina iBrid Nano jeste.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Pad nije u programu. Navedeni slug je mašina za koju je pad namenjen."
+  },
+  {
+    "id": "rupes-paint-correction-web-app-2024",
+    "brand": "rupes",
+    "title": "RUPES Paint Correction Web App – Updated",
+    "url": "https://www.rupes.com/news/rupes-paint-correction-web-app-updated/",
+    "publishedAt": "2024-01-31",
+    "eventDate": null,
+    "market": "global (rupes.com/web-app)",
+    "productOrSystem": "BigFoot Paint Correction Web App (izbor mašine, pada i paste)",
+    "inOurCatalog": {
+      "status": "unclear",
+      "slugs": [
+        "carsystem-rupes-ibrid-nano",
+        "carsystem-rupes-mini-polishing-machine-hlr75stb",
+        "carsystem-rupes-polishing-machine-lhr15"
+      ]
+    },
+    "serbiaAvailability": "not-confirmed",
+    "classification": "istorijsko",
+    "summarySr": "RUPES je ažurirao besplatnu veb aplikaciju koja preporučuje kombinaciju mašine, pada i paste za određenu grešku i tip laka. Dodate su iBrid polirke i D-A INTERMEDIATE padovi. Može da posluži kao edukativni link uz RUPES polirke iz našeg programa, ali preporučuje i proizvode van našeg programa.",
+    "sourceType": "official",
+    "accessedAt": "2026-10-08",
+    "notes": "Aplikacija https://www.rupes.com/web-app/ je odgovorila sa HTTP 200 (Last-Modified 2026-10-07)."
+  }
+]

@@ -89,8 +89,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SATA FAQ, uputstva jet X i SATAjet X 5500 (CCS, pogl. 9.5 i 14), stranica jet X, baslac Spray guns 01/2026, TDS P 2A41 i C 2A40; ispravljeno 3: baslac preporuka više ne tumači se kao „jedan fizički pištolj za bazu i lak“, nego kao isto podešavanje, uz naglašenu SATA preporuku o odvojenim pištoljima za vodene i rastvaračke materijale; uvod potkrepljen citatima."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

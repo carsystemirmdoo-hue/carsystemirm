@@ -100,8 +100,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem katalog 2026/27 (tvrdoće i namene sunđera, LHR15 III), listovi Quadra Pad C-10 i Sandwich Pad C-30 V01 (09/2014), Finish Foam i Finish Waffle Pad V01 (08/2016), Lambswool Pad White S Edge V01 (03/2020), Finish Back Pad M-14 V01 (03/2021), BEFAR katalog (strane 4, 10, 15 i 24 sa zvezdicama tvrdoće i tanjirima) i stranica RUPES LHR15 Mark III. Vrednosti >30 kPa, 8–11 kPa, 7–11 / 2,5–4,5 kPa pri 65 %, 140/145 i 125/130 mm, 123 mm, 24 mm i 6400 o/min su tekstualne i poklapaju se; zvezdice BEFAR pregledane na renderovanoj strani. BEFAR Opencell se u tekstu ne pominje. Ispravljeno (4): BEFAR „pravilo“ za tanjire preformulisano u navod uz konkretne sunđere; prečnici Finish Foam vezani za narandžasti sunđer; red RUPES dopunjen napomenom da je komplet sa sajta proizvođača i da se sastav može razlikovati od onoga što je u našem programu; centriranje sunđera i ostaci paste u sunđeru označeni kao opšte objašnjenje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -138,11 +139,11 @@ Opšte objašnjenje: sunđer treba da bude nešto veći od tanjira (podloške) n
 
 | Primer iz našeg programa | Sunđer | Tanjir |
 | --- | --- | --- |
-| BEFAR, pravilo iz kataloga | 150 mm | 125 mm[^befar-katalog] |
-| BEFAR, pravilo iz kataloga | 180 mm | 150 mm[^befar-katalog] |
-| BEFAR, pravilo iz kataloga | 220 mm | 170 mm[^befar-katalog] |
-| Carsystem Finish Foam | spoljni prečnik 140/145 mm, čičak 125/130 mm[^cs-foam-orange-tds] | Finish Back Pad M-14, 123 mm[^cs-fbp-tds] |
-| RUPES LHR15 Mark III, komplet | D-A FINE sunđer 130–150 mm | tanjir 125 mm[^rupes-lhr15] |
+| BEFAR, navod uz sunđere u katalogu | 150 mm | 125 mm[^befar-katalog] |
+| BEFAR, navod uz sunđere u katalogu | 180 mm | 150 mm[^befar-katalog] |
+| BEFAR, navod uz sunđere u katalogu | 220 mm | 170 mm[^befar-katalog] |
+| Carsystem Finish Foam, narandžasti | spoljni prečnik 140/145 mm, čičak 125/130 mm[^cs-foam-orange-tds] | Finish Back Pad M-14, 123 mm[^cs-fbp-tds] |
+| RUPES LHR15 Mark III, komplet sa sajta proizvođača (sastav kompleta u našem programu može biti drugačiji) | D-A FINE sunđer 130–150 mm | tanjir 125 mm[^rupes-lhr15] |
 
 BEFAR uz svaku veličinu tanjira nudi tri tvrdoće: meki, srednje tvrdi i tvrdi[^befar-katalog]. Carsystem Finish Back Pad M-14 je mek, sa sunđerom debljine 24 mm, i prema proizvođaču se bolje prilagođava neravnim površinama i ravnomernije raspoređuje pritisak[^cs-fbp-tds]. Za isti tanjir važi i najveća brzina iz njegovog tehničkog lista: za Finish Back Pad M-14 to je 6400 o/min[^cs-fbp-tds].
 
@@ -164,8 +165,8 @@ Kod svakog proizvođača nešto drugo. U BEFAR osnovnoj liniji redosled od najtv
 
 ### Kako se prečnik uparuje sa tanjirom?
 
-Sunđer je nešto veći od tanjira. BEFAR to navodi kao pravilo: sunđer od 150 mm ide na tanjir od 125 mm, od 180 mm na 150 mm, a od 220 mm na 170 mm[^befar-katalog]. Sunđer na čičak treba da bude centriran, jer pomeren sunđer vibrira i neravnomerno skida.
+Sunđer je nešto veći od tanjira. BEFAR uz svoje sunđere navodi odgovarajući tanjir: sunđer od 150 mm ide na tanjir od 125 mm, od 180 mm na 150 mm, a od 220 mm na 170 mm[^befar-katalog]. Opšte objašnjenje: sunđer na čičak treba da bude centriran, jer pomeren sunđer vibrira i neravnomerno skida.
 
 ### Može li isti sunđer za abrazivnu i završnu pastu?
 
-Ne preporučuje se. Ostaci abrazivne paste u sunđeru ostavljaju tragove u završnom koraku. Za svaku pastu se drži poseban sunđer, a kako se sunđeri čiste i kada se menjaju, opisuje tekst [Čišćenje sunđera za poliranje](/vodici/ciscenje-i-vek-sundjera).
+Ne preporučuje se. Opšte objašnjenje: ostaci abrazivne paste u sunđeru ostavljaju tragove u završnom koraku. Za svaku pastu se drži poseban sunđer, a kako se sunđeri čiste i kada se menjaju, opisuje tekst [Čišćenje sunđera za poliranje](/vodici/ciscenje-i-vek-sundjera).

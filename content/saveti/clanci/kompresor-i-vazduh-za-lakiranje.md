@@ -67,8 +67,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva jet X i SATAjet X 5500, SATA saveti, Little Helper (air tester) i stranica Filter Technology; potrošnja vazduha i zahtevi se poklapaju; filteri nisu linkovani ni preporučeni kao naši proizvodi (jasno navedeno da nisu u programu); ispravljeno 5: opšta objašnjenja označena."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

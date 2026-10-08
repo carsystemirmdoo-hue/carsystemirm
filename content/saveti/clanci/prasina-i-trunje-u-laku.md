@@ -74,7 +74,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Prašina i trunje u laku dolaze sa površine koja nije dovoljno očišćena, sa odeće i krpa, iz vazduha u prostoru i iz samog materijala. baslac kao moguće uzroke navodi loše očišćenu podlogu, odeću koja pušta vlakna, prljave filtere kabine i vazduh koji u kabinu ulazi iz prostora gde se brusi ili polira[^baslac-dust]. Posle sušenja manje čestice se uklanjaju finim brušenjem i poliranjem, a veće i brojnije traže ponovno lakiranje.
+Prašina i trunje u laku mogu da dođu sa površine koja nije dovoljno očišćena, sa odeće i krpa, iz vazduha u prostoru i iz samog materijala. baslac kao moguće uzroke navodi loše očišćenu podlogu, odeću koja pušta vlakna, prljave filtere kabine i vazduh koji u kabinu ulazi iz prostora gde se brusi ili polira[^baslac-dust]. Za sanaciju baslac navodi poliranje, a za veća oštećenja brušenje i ponovno lakiranje[^baslac-dust].
 
 Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako se proverava uzrok pre sanacije](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
@@ -87,7 +87,7 @@ R-M grešku opisuje kao uglavnom sitne, nepravilne čestice u sloju boje, razli�
 - **Čestice samo na jednom delu ili uz ivicu**: moguće iz spojeva, lajsni ili otvora tog dela.
 - **Grudvice iste boje kao lak ili baza**: moguće iz samog materijala, na primer iz zasušenih ostataka u posudi ili pištolju.
 
-Ako ste umesto zrnca našli malu udubinu sa prstenom, to nije trunje nego krater. Razlike opisuje vodič [Krater, rupica ili mehurić: kako se razlikuju](/vodici/razlika-kratera-rupica-i-mehurica).
+Ako ste umesto zrnca našli malu udubinu sa prstenom, to verovatno nije trunje, nego može biti krater. Razlike opisuje vodič [Krater, rupica ili mehurić: kako se razlikuju](/vodici/razlika-kratera-rupica-i-mehurica).
 
 ## Mogući izvori i kako se proveravaju
 
@@ -120,4 +120,4 @@ Kada lak dovoljno otvrdne, zrnce se lokalno izbrusi finim abrazivom i mesto se i
 
 ### Sme li se trunje vaditi iz mokrog laka?
 
-Izvori koje smo pregledali ne opisuju vađenje trunja iz mokrog laka; i baslac i PPG predviđaju uklanjanje tek posle sušenja[^baslac-dust][^ppg-dirt]. Opšte objašnjenje: diranje mokrog sloja lako ostavi trag veći od samog zrnca.
+Izvori koje smo pregledali ne opisuju vađenje trunja iz mokrog laka. PPG predviđa uklanjanje tek kada lak potpuno otvrdne[^ppg-dirt], a baslac kao popravku navodi poliranje, odnosno brušenje i ponovno lakiranje[^baslac-dust]. Opšte objašnjenje: diranje mokrog sloja lako ostavi trag veći od samog zrnca.

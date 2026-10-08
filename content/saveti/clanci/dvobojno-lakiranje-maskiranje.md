@@ -70,8 +70,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M GHD TOPCOAT 07/2026, GHD DECO A A 5200 07/2026, TDS Fine Line Tape Blue V03, Slim Tape i stranica C.A.R.FIT Fine Line Tape; ispravljeno: uz 30 min na 60 °C naveden učvršćivač H 750 (H 770: 45–60 min), „two-tone“ preveden opreznije, dodata napomena o nejednoznačnim temperaturama na stranici C.A.R.FIT. Postupak za putnička vozila (bazna boja + bezbojni lak) nema izvor u dokumentaciji iz našeg programa, pa stručna potvrda ostaje potrebna."
 strucnaPotvrda:
   potrebna: true
   razlog: "Za dvobojno lakiranje putničkih vozila u sistemu bazna boja + bezbojni lak (npr. da li se prva boja pre maskiranja lakira bezbojnim lakom, koliko dugo se suši i da li se pre druge boje matira) nije pronađen opis postupka u dokumentaciji proizvođača iz našeg programa. Jedini otvoreni postupak sa vremenima za višebojno lakiranje je R-M GHD (linija za komercijalna vozila), pa tekst daje samo taj primer i postupak sa trakom; redosled za putnička vozila treba da potvrdi stručnjak ili tehnička podrška proizvođača boje."
@@ -79,13 +80,13 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Deo u drugoj boji lakira se u dva prolaza: prvo se nanese prva boja i ostavi da se osuši do faze u kojoj sme da se oblepi, zatim se linija između boja postavi trakom za oštru liniju (fine line), ostatak se pokrije papirom ili folijom i nanese se druga boja. Kada prva boja sme da se maskira, piše u tehničkom listu boje. Za R-M GHD TOPCOAT, na primer, tehnički list navodi da je boja spremna za maskiranje posle 16 h na 20 °C ili posle 30 minuta na 60 °C[^rm-ghd-topcoat-tds]. Za putnička vozila u sistemu bazna boja i bezbojni lak tačan redosled zavisi od sistema i treba ga proveriti kod proizvođača boje.
+Deo u drugoj boji lakira se u dva prolaza: prvo se nanese prva boja i ostavi da se osuši do faze u kojoj sme da se oblepi, zatim se linija između boja postavi trakom za oštru liniju (fine line), ostatak se pokrije papirom ili folijom i nanese se druga boja. Kada prva boja sme da se maskira, piše u tehničkom listu boje. Za R-M GHD TOPCOAT, na primer, tehnički list navodi da je boja spremna za maskiranje posle 16 h na 20 °C ili posle 30 minuta na 60 °C (sušenje na 60 °C sa učvršćivačem H 750; sa H 770 list navodi 45–60 minuta)[^rm-ghd-topcoat-tds]. Za putnička vozila u sistemu bazna boja i bezbojni lak tačan redosled zavisi od sistema i treba ga proveriti kod proizvođača boje.
 
 ## Redosled koraka
 
 1. **Prva boja.** Nanosi se na celu površinu koja će je nositi. Opšte objašnjenje: prva boja se obično nanese malo preko buduće linije, da bi traka i druga boja legle na nju, a ne na podlogu.
 2. **Sušenje do faze za maskiranje.** Ovaj podatak navode tehnički listovi kao posebnu fazu sušenja (engl. *ready for masking*). Kako se čitaju faze, objašnjeno je u tekstu [Faze sušenja iz tehničkog lista](/vodici/faze-susenja-iz-tehnickog-lista).
-3. **Linija trakom.** Linija se postavlja trakom od PVC folije. Carsystem za Fine Line Tape Blue navodi da je namenjena višebojnom i dizajnerskom lakiranju i da dobro prianja i na krivine i na duge ravne linije[^cs-fine-line-tds]. C.A.R.FIT za svoju traku navodi lepljenje kontura i oštrih ivica, na primer kod dvobojnog lakiranja[^carfit-fine-line-sajt].
+3. **Linija trakom.** Linija se postavlja trakom od PVC folije. Carsystem za Fine Line Tape Blue navodi da je namenjena višebojnom i dizajnerskom lakiranju i da dobro prianja i na krivine i na duge ravne linije[^cs-fine-line-tds]. C.A.R.FIT za svoju traku navodi lepljenje kontura i oštrih ivica, na primer kod dvobojne izvedbe (u originalu „two-tone“)[^carfit-fine-line-sajt].
 4. **Prianjanje trake.** Za Fine Line Tape Blue tehnički list traži čistu, odmašćenu površinu, nanošenje na +15 °C do +30 °C i jak početni pritisak; ne dodirujte lepljivu stranu[^cs-fine-line-tds].
 5. **Ostatak prve boje.** Uz liniju se lepi krep traka sa papirom ili folijom, tako da je prva boja potpuno pokrivena. Redosled i materijali su u vodiču [Osnove maskiranja](/vodici/osnove-maskiranja).
 6. **Druga boja.** Nanosi se prema tehničkom listu tog proizvoda. Proverite da li proizvođač traži međusloj ili brušenje kada je prva boja duže sušena (vidi primer R-M ispod).
@@ -97,7 +98,7 @@ R-M GHD je linija za komercijalna vozila, ali je to jedini primer iz našeg prog
 
 | Podatak | GHD TOPCOAT prema tehničkom listu |
 | --- | --- |
-| spremno za maskiranje | 16 h na 20 °C; 30 min na 60 °C[^rm-ghd-topcoat-tds] |
+| spremno za maskiranje | 16 h na 20 °C; 30 min na 60 °C, uz napomenu o sušenju 30 min na 60 °C sa H 750, odnosno 45–60 min sa H 770[^rm-ghd-topcoat-tds] |
 | prelakiranje samim sobom bez međubrušenja | do 16 h od nanošenja prvog sloja[^rm-ghd-topcoat-tds] |
 | pre višebojnog lakiranja | ako je površina pečena ili je odzračivala 16 h, prethodno se nanosi promotor prianjanja TRANSPARENT SEALER CP[^rm-ghd-topcoat-tds] |
 
@@ -108,7 +109,7 @@ Za brže višebojno lakiranje sa GHD TOPCOAT R-M ima aditiv GHD DECO A (A 5200).
 | Traka | Šta proizvođač navodi |
 | --- | --- |
 | [Carsystem Fine Line Tape Blue](/proizvodi/carsystem-fine-line-tape-blue) | PVC folija, niska i čista ivica boje, do 155 °C[^cs-fine-line-tds] |
-| [C.A.R.FIT Fine Line Tape](/proizvodi/carfit-fine-line-tape) | PVC osnova, jasna linija bez ostatka pri skidanju[^carfit-fine-line-sajt] |
+| [C.A.R.FIT Fine Line Tape](/proizvodi/carfit-fine-line-tape) | PVC osnova, jasna linija bez ostatka pri skidanju; podaci o toplotnoj otpornosti na stranici nisu jednoznačni (navedeno je i do 138 °C i 38 °C / 45 min), pa granicu proverite kod proizvođača[^carfit-fine-line-sajt] |
 | [Carsystem Slim Tape](/proizvodi/carsystem-slim-tape) | tanka krep traka za višebojno lakiranje i posebne dizajne, do 100 °C[^cs-slim-tape-tds] |
 
 Temperaturu sušenja druge boje uporedite sa granicom trake; više u tekstu [Trake za maskiranje i temperatura sušenja](/vodici/trake-za-maskiranje-i-temperatura).
@@ -121,4 +122,4 @@ Za putnička vozila u sistemu bazna boja i bezbojni lak u dokumentaciji proizvo�
 
 ### Kada se nanosi druga boja?
 
-Kada je prva boja dostigla fazu u kojoj sme da se maskira, prema tehničkom listu tog proizvoda, i kada je linija postavljena i pritisnuta. Za R-M GHD TOPCOAT to je posle 16 h na 20 °C ili 30 minuta na 60 °C[^rm-ghd-topcoat-tds]. Kod drugih sistema vreme je drugačije, a za neke proizvođač ne navodi posebnu fazu za maskiranje; tada je potrebna potvrda proizvođača.
+Kada je prva boja dostigla fazu u kojoj sme da se maskira, prema tehničkom listu tog proizvoda, i kada je linija postavljena i pritisnuta. Za R-M GHD TOPCOAT to je posle 16 h na 20 °C ili 30 minuta na 60 °C sa učvršćivačem H 750[^rm-ghd-topcoat-tds]. Kod drugih sistema vreme je drugačije, a za neke proizvođač ne navodi posebnu fazu za maskiranje; tada je potrebna potvrda proizvođača.

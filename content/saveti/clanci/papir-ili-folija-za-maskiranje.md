@@ -106,8 +106,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Masking Paper Master II V03 i Top II v.01, Masking Film green/blue/yellow V01, Easy Mask II V01, Auto Mask v.1, katalog Carsystem 2026/27, C.A.R.FIT katalog 2026 (str. 66–68) i stranica Coverpaper; vrednosti se poklapaju; ispravljena uopštena tvrdnja da papir „ne propušta vodu i rastvarač“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

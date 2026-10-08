@@ -77,8 +77,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS N20 V01, F.19 V01, P.25 Ceramic V01, katalog Carsystem 2026/27 (str. 8–11, 18–19, 32–35), C.A.R.FIT katalog 2026 i stranica Color Net Disc; sve vrednosti i namene se poklapaju; 2 jezičke/formulacione ispravke (naneto, opšte pravilo o zapunjavanju označeno kao opšte)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

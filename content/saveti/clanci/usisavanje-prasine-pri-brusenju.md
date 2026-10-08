@@ -79,8 +79,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS F.19, katalog Carsystem 2026/27, stranica RUPES S145, SDS Norbin N60-V20 (1.1) i N55-V20 (3.1) i EU-OSHA pregled 98/24/EZ; ispravljeno: klasa M (RUPES navodi 0,1 mg/m³, ne „do“), pogrešne strane kataloga za maske, uklonjeni nazivi Star Mask/Star Dust i preporuka zamene maske — ostalo samo objašnjenje oznaka uz napomenu da dostupnost nije potvrđena. Izbor zaštite disanja i klase usisivača i dalje traži stručnu potvrdu (BZR)."
 strucnaPotvrda:
   potrebna: true
   razlog: "Bezbednosni listovi iz našeg programa (Norbin N60-V20, N55-V20) navode zaštitu disanja i lokalno odsisavanje za proizvod uopšte, ali ne posebno za prašinu od brušenja. Izbor zaštite disanja i klase usisivača za konkretnu radionicu treba da potvrdi lice za bezbednost i zdravlje na radu prema proceni rizika i važećim propisima u Srbiji, koji nisu provereni za ovaj tekst."

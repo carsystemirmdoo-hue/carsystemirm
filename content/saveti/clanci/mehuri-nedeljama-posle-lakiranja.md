@@ -80,7 +80,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Plikovi koji se pojave nedeljama posle popravke, posle vlažnog vremena, mogući su znak da su ispod laka ostale vlaga ili soli rastvorljive u vodi. R-M objašnjava da boja u vlažnom vremenu upija malo vodene pare i u suvom je ponovo otpušta, što dobro izvedenom sistemu ne škodi. Ako su zbog loše obrade prajmera ispod ostale higroskopne ili u vodi rastvorljive materije (soli), na tom mestu nastaje rastvor soli koji podiže sloj u plikove[^rm-help-blistering]. Uzrok je ispod laka, pa se plikovi ne uklanjaju samo poliranjem.
+Plikovi koji se pojave nedeljama posle popravke, posle vlažnog vremena, mogući su znak da su ispod laka ostale vlaga ili soli rastvorljive u vodi. R-M objašnjava da boja u vlažnom vremenu upija malo vodene pare i u suvom je ponovo otpušta, što dobro izvedenom sistemu ne škodi. Ako su zbog loše obrade prajmera ispod ostale higroskopne ili u vodi rastvorljive materije (soli), na tom mestu nastaje rastvor soli koji podiže sloj u plikove[^rm-help-blistering]. Prema tom opisu uzrok je ispod laka, pa se plikovi ne uklanjaju samo poliranjem.
 
 ## Kako izgleda
 
@@ -102,7 +102,7 @@ Proizvođači iz našeg programa vodu na podlozi navode i među uzrocima gubitka
 
 ## Kako se proverava na vozilu
 
-1. **Gde su plikovi.** Samo na popravljenom mestu ili i van njega. Ako su samo na popravci, uzrok je verovatnije u pripremi te popravke.
+1. **Gde su plikovi.** Samo na popravljenom mestu ili i van njega. Urednička procena: plikovi samo na popravci mogu da ukažu na pripremu te popravke.
 2. **U kom sloju.** Pažljivo otvorite jedan plik i pogledajte da li je sloj odvojen od podloge ili od sloja ispod i da li je ispod vlažno. R-M navodi da plikovi mogu biti između slojeva ili ispod celog sistema[^rm-help-blistering].
 3. **Kada su se pojavili.** Zapišite vreme od popravke i vremenske uslove pre pojave.
 
@@ -122,4 +122,4 @@ Prema R-M, rastvorljive materije zaostale pri lošoj obradi prajmera, zajedno sa
 
 ### Hoće li plikovi nestati kada se vreme osuši?
 
-Izvori to ne navode. Čak i ako se plik u suvom vremenu smanji, uzrok ostaje ispod sloja.
+Izvori to ne navode. Opšte objašnjenje: čak i ako se plik u suvom vremenu smanji, uzrok ostaje ispod sloja.

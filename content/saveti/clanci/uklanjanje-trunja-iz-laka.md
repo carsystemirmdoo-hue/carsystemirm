@@ -80,8 +80,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem ProFlex Mercury V02 (12/2019) i Pluto V01 (12/2019), UV Clear V02 (11/2019), CC.26 V01 (04/2026), katalog 2026/27 (Mercury, Pluto, Styx, blokovi soft/hard, CSH-CMS01) i R-M C 2A93 (07/2026); dimenzije, granulacije, tvrdoće blokova, hod 3 mm, P2000/P3000 i redosled C-10 → C-30 se poklapaju. Ispravljeno (4): znak izravnate izbočine (nestanak sjajnog prstena) i ponašanje paste oko izbočine označeni kao opšte objašnjenje; „proizvođači iz našeg programa predviđaju“ suženo na ono što navodi list za Mercury; rešenje za trunje u bazi označeno kao opšte pravilo."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -108,7 +109,7 @@ Za Mercury i Pluto Carsystem navodi da suv rad odmah pokazuje napredak brušenja
 
 1. **Pronađite trunje pod jakim svetlom** i obeležite ga pogledom ili rukom u rukavici. Trunje je izbočina. Udubljenje, krater ili rupica su druga greška i ne rešavaju se ovako; razlike opisuje tekst [Razlika između kratera, rupica i mehurića](/vodici/razlika-kratera-rupica-i-mehurica).
 2. **Izaberite tvrdoću bloka.** Carsystem za Mercury i Pluto blok navodi da tvrda varijanta služi za ravnanje trunja, a meka, fleksibilnija, za ravnanje drugih nepravilnosti[^cs-katalog].
-3. **Brusite kratko, sa malo pritiska,** samo vrh čestice. Posle nekoliko poteza obrišite mesto i pogledajte. Kada se oko mat tačke više ne vidi sjajan prsten, izbočina je izravnata.
+3. **Brusite kratko, sa malo pritiska,** samo vrh čestice. Posle nekoliko poteza obrišite mesto i pogledajte. Opšte objašnjenje: kada se oko mat tačke više ne vidi sjajan prsten, izbočina je izravnata.
 4. **Pređite na finiju granulaciju** ako je trag grub. Primer iz Carsystem tehničkog lista za UV Clear: tačka se završno brusi sa P2000 i P3000, u dva koraka, Mercury listićem na tvrdom bloku[^cs-uv-clear-tds].
 5. **Ispolirajte mesto.** Isti list navodi da se posle toga polira pastom Polish C-10, a zatim Polish C-30 da bi se uklonili preostali hologrami[^cs-uv-clear-tds]. Kako se paste biraju, objašnjava vodič [Abrazivna i završna pasta za poliranje](/vodici/abrazivna-i-zavrsna-pasta).
 
@@ -135,8 +136,8 @@ Da se brusi samo greška, a ne površina oko nje. Mali listić na tvrdom bloku d
 
 ### Može li se trunje skinuti samo pastom?
 
-Sitna izbočina se ponekad izgubi poliranjem, ali pasta radi po celoj površini sunđera i zaobljava okolinu umesto da izravna vrh. Za izraženo trunje proizvođači iz našeg programa predviđaju brušenje finim abrazivom pre poliranja[^cs-mercury-tds].
+Opšte objašnjenje: sitna izbočina se ponekad izgubi poliranjem, ali pasta radi po celoj površini sunđera i zaobljava okolinu umesto da izravna vrh. Za brušenje trunja Carsystem nudi ProFlex Mercury i navodi ga kao poslednji korak brušenja pre poliranja[^cs-mercury-tds].
 
 ### Šta ako je trunje u bazi, ispod laka?
 
-Tada ga brušenje laka ne uklanja bez rizika da se probije do baze. Takva greška se po pravilu rešava ponovnim lakiranjem dela, a ne poliranjem. Ako niste sigurni u kom je sloju, posavetujte se sa lakirerom ili [tehničkom podrškom](/kontakt).
+Tada ga brušenje laka ne uklanja bez rizika da se probije do baze. Prema opštem pravilu, takva greška se rešava ponovnim lakiranjem dela, a ne poliranjem. Ako niste sigurni u kom je sloju, posavetujte se sa lakirerom ili [tehničkom podrškom](/kontakt).

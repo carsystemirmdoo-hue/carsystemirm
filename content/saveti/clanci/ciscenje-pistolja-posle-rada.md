@@ -90,8 +90,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva jet X (uklj. slike čišćenja str. 550–563, redosled igla–kapa–dizna potvrđen) i SATAjet X 5500, SATA FAQ, saveti i Little Helper, TDS Carsystem Spraygun Cleaner V01 i H₂O Cleaner v.02; postupak sastavljen samo prema SATA izvorima; ispravljeno 3: rečenica o SATA videu svedena na naslov videa bez opisa sadržaja, citati dodati u uvod, preformulisana izvedena tvrdnja o razređivaču preko noći."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

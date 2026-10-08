@@ -84,8 +84,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS WR-Lifting Tape V02, WR-Lifting Tape Premium V03, Slim Tape, Auto Mask, katalog Carsystem 2026/27 i C.A.R.FIT katalog i stranica Lifting Tape; ispravljeno: navedena razlika katalog 120 °C / 1 h vs TDS kratkotrajno 110 °C za WR-Lifting Premium, dodat citat kataloga za Slim Tape, preformulisan korak skidanja i opšte objašnjenje o foliji."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -100,8 +101,8 @@ Gumice oko stakla i zaptivke koje ne mogu da se skinu maskiraju se trakom za pod
 2. **Traka za podizanje gumice.** Traka se otkine po perforaciji na potrebnu dužinu, a plastični deo se uredno postavi ispod ivice gumice ili svetla[^cs-wr-lifting-premium-tds]. Carsystem za ovu traku preporučuje kidanje sa plastične strane ka strani trake[^cs-katalog-2026].
 3. **Provera ivice.** Opšte objašnjenje: plastični deo treba da bude podvučen ravnomerno celom dužinom. Gde iskače, ivica boje se vidi na gumici.
 4. **Lajsne, hrom i plastika.** Za teške podloge Carsystem preporučuje Slim Tape, koju katalog opisuje kao „poslednju traku“ pred lakiranje[^cs-katalog-2026]. Tehnički list navodi da je vrlo tanka, savitljiva i da izuzetno dobro prianja na plastične delove i gumene zaptivke[^cs-slim-tape-tds].
-5. **Staklo i svetla.** Za brzo pokrivanje stakala i branika služe folije sa ugrađenom trakom, kao Carsystem Auto Mask[^cs-auto-mask-tds] ili C.A.R.FIT folija sa trakom[^carfit-katalog-2026]. Ivica folije se lepi uz gumicu, a ne preko traka za podizanje.
-6. **Posle lakiranja.** Traku za podizanje gumica Carsystem uklanja posle lakiranja i sušenja, po mogućstvu bez ostatka lepka i uz ravnu ivicu[^cs-wr-lifting-premium-tds]. Više u tekstu [Kada se skida traka posle lakiranja](/vodici/skidanje-trake-posle-lakiranja).
+5. **Staklo i svetla.** Za brzo pokrivanje stakala i branika služe folije sa ugrađenom trakom, kao Carsystem Auto Mask[^cs-auto-mask-tds] ili C.A.R.FIT folija sa trakom[^carfit-katalog-2026]. Opšte objašnjenje: foliju lepite tako da ne pomeri već postavljenu traku za podizanje gumice.
+6. **Posle lakiranja.** Prema tehničkom listu WR-Lifting Tape Premium, traka se skida posle lakiranja i sušenja, po mogućstvu bez ostatka lepka i uz ravnu ivicu[^cs-wr-lifting-premium-tds]. Više u tekstu [Kada se skida traka posle lakiranja](/vodici/skidanje-trake-posle-lakiranja).
 
 ## Koju traku za šta
 
@@ -110,9 +111,9 @@ Gumice oko stakla i zaptivke koje ne mogu da se skinu maskiraju se trakom za pod
 | zaptivke stakla, vrata, krova, haube | [Carsystem WR-Lifting Tape](/proizvodi/carsystem-wr-lifting-tape) | krep deo i providan plastični deo u jednom proizvodu, za teška mesta, naročito zaptivke[^cs-wr-lifting-tds] |
 | zaptivke stakla, prednja i zadnja svetla, migavci | [Carsystem WR-Lifting Tape Premium](/proizvodi/carsystem-wr-lifting-tape-premium) | perforirana traka sa plastičnom ivicom; ivica boje nestaje ispod zaptivke; kratkotrajno do 110 °C[^cs-wr-lifting-premium-tds] |
 | gume, staklo, hrom | [C.A.R.FIT Lifting Tape](/proizvodi/carfit-lifting-tape) | perforirana krep traka sa plastičnim umetkom, prati konture i oštre krivine[^carfit-katalog-2026] |
-| plastika, gumene zaptivke, kvake, hrom | [Carsystem Slim Tape](/proizvodi/carsystem-slim-tape) | vrlo tanka krep traka, bez ostatka lepka[^cs-slim-tape-tds] |
+| plastika, gumene zaptivke, kvake, hrom | [Carsystem Slim Tape](/proizvodi/carsystem-slim-tape) | vrlo tanka krep traka, bez ostatka lepka[^cs-slim-tape-tds]; katalog navodi i kvake i hromirane delove[^cs-katalog-2026] |
 
-Temperaturu sušenja uporedite sa tehničkim listom svake trake; vrednosti i način čitanja su u tekstu [Trake za maskiranje i temperatura sušenja](/vodici/trake-za-maskiranje-i-temperatura).
+Za WR-Lifting Tape Premium katalog 2026/27 navodi otpornost do 120 °C / 1 h, a tehnički list V03 kratkotrajno do 110 °C[^cs-katalog-2026][^cs-wr-lifting-premium-tds]; dok proizvođač ne razjasni razliku, računajte sa nižom vrednošću. Temperaturu sušenja uporedite sa tehničkim listom svake trake; vrednosti i način čitanja su u tekstu [Trake za maskiranje i temperatura sušenja](/vodici/trake-za-maskiranje-i-temperatura).
 
 ## Greške koje se lako naprave
 

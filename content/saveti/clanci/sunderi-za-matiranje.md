@@ -68,8 +68,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS V.19 Pad i Disc V01, katalog Carsystem 2026/27 (str. 16–25) i C.A.R.FIT katalog 2026 (str. 83, 86–87); oznake i namene se poklapaju; ispravljeno: Topline oznake prema katalogu (fine i ultra fine pre boje), dodat citat kataloga za rolnu V.19, sužena tvrdnja o P-oznakama na Carsystem sunđere, 2 jezičke ispravke."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

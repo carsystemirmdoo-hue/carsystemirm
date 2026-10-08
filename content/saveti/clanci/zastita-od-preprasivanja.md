@@ -81,8 +81,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Easy Mask II V01, Masking Film yellow V01, Foam Tape T-Soft V01, Liquid Masking V06, katalog Carsystem 2026/27 (PDF str. 43–45, 90–91) i C.A.R.FIT katalog 2026; sve tvrdnje se poklapaju, bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -93,8 +93,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Easy Mask II V01, Master Tape II v.02, Foam Tape v.01, Auto Mask v.1, Red Tape V01, Liquid Masking V06, katalog Carsystem 2026/27 (PDF str. 40–45) i C.A.R.FIT katalog 2026 (str. 64–65); sve tvrdnje se poklapaju, bez ispravki; dužina krep trake se ne navodi."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

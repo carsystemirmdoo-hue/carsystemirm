@@ -90,9 +90,11 @@ Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako
 
 ## Kako izgleda greška
 
-- Ravnomerna mlečna ili sivkasta izmaglica, a ne pojedinačne tačke.
-- Javlja se tokom sušenja ili ubrzo posle, obično na celoj površini koja je lakirana u istim uslovima.
-- Kod tamnih boja se vidi jasnije nego kod svetlih.
+PPG grešku opisuje kao mlečnobelu izmaglicu na površini sloja[^ppg-blushing]. Ostali znaci su urednički opis za proveru:
+
+- izmaglica je ravnomerna, a ne u pojedinačnim tačkama;
+- javlja se tokom sušenja ili ubrzo posle, na površini koja je lakirana u istim uslovima;
+- na tamnim bojama se obično lakše uočava nego na svetlim.
 
 Ako lak nije zamućen nego je posle nekoliko dana postao mat, to je druga greška. Vidi [Lak je posle nekoliko dana izgubio sjaj](/vodici/gubitak-sjaja-posle-nekoliko-dana).
 
@@ -112,19 +114,19 @@ Tabela pokazuje samo da se granice razlikuju. Vrednost iz jednog lista ne važi 
 
 1. **Vlažnost i temperatura u vreme rada.** Ako ste ih merili, uporedite ih sa tehničkim listom. Ako niste, zabeležite bar vreme napolju (kiša, magla, hladno jutro).
 2. **Hladan deo u toplijem prostoru.** Opšte objašnjenje: deo unet spolja može biti hladniji od vazduha, pa se vlaga kondenzuje baš na njegovoj površini. Izmerite temperaturu dela, a ne samo vazduha.
-3. **Razređivač.** PPG navodi prebrz ili neodgovarajući razređivač kao mogući uzrok[^ppg-blushing]. Proverite da li razređivač odgovara temperaturi prema tabeli proizvođača; vidi [Brzi, normalni ili spori učvršćivač](/vodici/izbor-ucvrscivaca-po-temperaturi).
+3. **Razređivač.** PPG navodi prebrz ili nekvalitetan razređivač kao mogući uzrok[^ppg-blushing]. Proverite da li razređivač odgovara temperaturi prema tabeli proizvođača; vidi [Brzi, normalni ili spori učvršćivač](/vodici/izbor-ucvrscivaca-po-temperaturi).
 4. **Duvanje vazduhom.** Ako je sušenje ubrzavano pištoljem ili crevom, PPG preporučuje manji pritisak i prirodno odzračivanje, jer struja vazduha hladi sloj[^ppg-blushing].
-5. **Učvršćivač.** R-M upozorava da su učvršćivači osetljivi na vlagu i da se posude sa ostatkom pažljivo zatvaraju[^rm-h2p05-tds]. Zamućen učvršćivač je posebna tema: [Zamućen ili kristalisan učvršćivač](/vodici/ucvrscivac-zamucen-ili-kristalisan).
+5. **Učvršćivač.** R-M u tehničkom listu za H 2P05 upozorava da su učvršćivači osetljivi na vlagu i da se posude sa ostatkom pažljivo zatvaraju[^rm-h2p05-tds]. Zamućen učvršćivač je posebna tema: [Zamućen ili kristalisan učvršćivač](/vodici/ucvrscivac-zamucen-ili-kristalisan).
 
 ## Ograničenja
 
-PPG napominje da zamućenje gornjeg sloja može značiti da je vlaga uticala i na slojeve ispod, što se na mat podlozi ne vidi, a kasnije može dovesti do plikova ili slabijeg prianjanja između slojeva[^ppg-blushing]. Zato poliranje rešava samo površinski slučaj. Postupak proizvođača iz našeg programa za ovu grešku nismo pronašli u javnim izvorima, pa se sanacija ovde oslanja na PPG vodič uz opšte savete proizvođača laka.
+PPG napominje da zamućenje gornjeg sloja može značiti da je vlaga uticala i na slojeve ispod, što se na mat podlozi ne vidi, a kasnije može dovesti do plikova ili slabijeg prianjanja između slojeva[^ppg-blushing]. Zato poliranje može da reši samo površinski slučaj. Postupak proizvođača iz našeg programa za ovu grešku nismo pronašli u javnim izvorima, pa se sanacija ovde oslanja na PPG vodič uz opšte savete proizvođača laka.
 
 ## Pitanja i odgovori
 
 ### Kako se to ispravlja?
 
-Prema PPG vodiču, blago zamućenje se može ukloniti pastom za poliranje kada lak otvrdne, a u težim slučajevima površina se izbrusi i ponovo lakira u odgovarajućim uslovima[^ppg-blushing]. Kada je lak dovoljno tvrd za poliranje, piše u njegovom tehničkom listu. baslac za sličan problem, gubitak sjaja, takođe predviđa prvo poliranje, a ponovno lakiranje ako sjaj ne može da se vrati[^baslac-loss-gloss]. Pre ponovnog lakiranja uklonite uzrok, inače se greška ponavlja.
+Prema PPG vodiču, blago zamućenje se može ukloniti pastom za poliranje kada lak otvrdne, a u težim slučajevima površina se izbrusi i ponovo lakira u odgovarajućim uslovima[^ppg-blushing]. Kada je lak dovoljno tvrd za poliranje, piše u njegovom tehničkom listu. baslac za sličan problem, gubitak sjaja, takođe predviđa prvo poliranje, a ponovno lakiranje ako sjaj ne može da se vrati[^baslac-loss-gloss]. Pre ponovnog lakiranja uklonite uzrok, inače se greška može ponoviti.
 
 ### Može li i sprej da se zamuti?
 

@@ -105,15 +105,16 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem CC.26 ECO-X V01 (04/2026), 2K Carbo Clear Plus V02 (02/2018), Speed Plus V06 (01/2025), ProFlex Jupiter Soft H2O V02 (07/2020), Polish C-10 i C-30 V01 (09/2014), Finish Control Foam C-99 V01 (03/2021), katalog 2026/27 (Mercury, Pluto, C-30 za tamne boje) i R-M C 2P42 i C 2A93 (07/2026); sva vremena do poliranja, 50–60 µm, P1500/P2500 i granulacije se poklapaju. Ispravljeno (5): hlađenje do 1 h vezano za Carbo Clear Plus (list ga ne navodi za sve lakove); potpuna tvrdoća Carbo Clear Plus dopunjena uslovom 20 °C; odgovor „Koliko treba čekati?“ usklađen sa izvorima po laku; „redosled je uvek isti“ ublaženo, a završna pasta C-30 vezana za tamne boje prema katalogu; napomena o suncu vezana za listove C-10 i C-30."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Novi bezbojni lak se polira tek kada prođe vreme koje tehnički list tog laka navodi za poliranje, a posle sušenja u kabini i kada se deo ohladi. Za Carsystem 2K Clear VOC CC.26 ECO-X 15/60 to je 3–4 h na temperaturi objekta od 20 °C ili 15 min na 60 °C[^cs-cc26-tds]. Redosled je uvek isti: najpre se lokalno ili mokro izbrusi ono što pasta ne može da skine, zatim se radi abrazivnom pastom, proverava se površina i završava se finom pastom protiv holograma.
+Novi bezbojni lak se polira tek kada prođe vreme koje tehnički list tog laka navodi za poliranje, a posle sušenja u kabini i kada se deo ohladi. Za Carsystem 2K Clear VOC CC.26 ECO-X 15/60 to je 3–4 h na temperaturi objekta od 20 °C ili 15 min na 60 °C[^cs-cc26-tds]. Redosled je po pravilu isti: najpre se lokalno ili mokro izbrusi ono što pasta ne može da skine, zatim se radi abrazivnom pastom, proverava se površina i, gde je potrebno, završava se finom pastom protiv holograma.
 
 ## Kada lak sme da se polira
 
@@ -126,7 +127,7 @@ Podatak se u tehničkim listovima zove *dry to polish*, *polishable after* ili s
 | Carsystem 2K Clear VOC Speed Plus | suvo za poliranje posle 25–30 min na 40 °C ili posle 15 min na 60 °C[^cs-speed-plus-tds] |
 | R-M C 2P42 RACE Finish-R | sušenje 2–3 h na 20 °C, 20 min na 40 °C ili 10 min na 60 °C; poliranje posle navedenog vremena sušenja i hlađenja[^rm-c2p42-tds] |
 
-Za lakove sušene na 60 °C Carsystem navodi da se pre poliranja čeka do 1 h da se lak ohladi[^cs-carbo-clear-tds]. Lak koji sme da se polira još nije potpuno otvrdnuo: za Carbo Clear Plus isti list navodi potpunu tvrdoću tek posle 4 dana[^cs-carbo-clear-tds]. Razliku objašnjava vodič [Potpuno otvrdnjavanje laka](/vodici/potpuno-otvrdnjavanje-laka), a kada vozilo sme na pranje i vosak, tekst [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).
+Za 2K Carbo Clear Plus sušen na 60 °C Carsystem navodi da se pre poliranja čeka do 1 h da se lak ohladi[^cs-carbo-clear-tds]. Lak koji sme da se polira još nije potpuno otvrdnuo: za Carbo Clear Plus isti list navodi potpunu tvrdoću tek posle 4 dana na 20 °C[^cs-carbo-clear-tds]. Razliku objašnjava vodič [Potpuno otvrdnjavanje laka](/vodici/potpuno-otvrdnjavanje-laka), a kada vozilo sme na pranje i vosak, tekst [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).
 
 ## Redosled rada
 
@@ -135,7 +136,7 @@ Za lakove sušene na 60 °C Carsystem navodi da se pre poliranja čeka do 1 h da
 3. **Mokro brušenje većih površina,** kada se ravna narandžina kora ili kada je grešaka mnogo. Za to Carsystem nudi ProFlex Jupiter Soft H₂O u granulacijama P2500, P3000 i P4000 i preporučuje ga uz vodu za brušenje SW20[^cs-jupiter-h2o-tds]. Vidi [Mokro brušenje laka pre poliranja](/vodici/mokro-brusenje-laka-pre-poliranja).
 4. **Abrazivna pasta.** Uklanja tragove brušenja. Za Polish C-10 strong tehnički list navodi trag brusnog papira P1500 i sunđer Finish Quadra Pad C-10[^cs-c10-tds].
 5. **Provera.** Ostaci paste mogu da prikriju tragove. Finish Control Foam C-99 prema proizvođaču uklanja masne i voštane ostatke i čini preostale tragove brušenja vidljivim[^cs-c99-tds].
-6. **Završna pasta.** Uklanja fine ogrebotine i holograme. Polish C-30 finish radi uz Finish Sandwich Pad C-30[^cs-c30-tds], a u katalogu Carsystem navodi C-30 kao naredni korak posle abrazivnih pasta na tamnim bojama[^cs-katalog].
+6. **Završna pasta.** Uklanja fine ogrebotine i holograme. Polish C-30 finish radi uz Finish Sandwich Pad C-30[^cs-c30-tds], a u katalogu Carsystem navodi C-30 kao naredni korak posle abrazivnih pasta na tamnim bojama[^cs-katalog]. Da li je ovaj korak potreban i na svetlim bojama, procenjuje se pod svetlom posle provere.
 7. **Brisanje** čistom mikrofiber krpom i završna kontrola pod svetlom.
 
 Kako se biraju paste i sunđeri, objašnjavaju vodiči [Abrazivna i završna pasta za poliranje](/vodici/abrazivna-i-zavrsna-pasta) i [Sunđeri za poliranje](/vodici/sunderi-za-poliranje-izbor). Novi sistem sa dve paste i namenskim sunđerima opisan je u vesti [Carsystem X serija za poliranje](/vodici/carsystem-x-serija-za-poliranje).
@@ -146,7 +147,7 @@ Ovo je urednički izbor, a ne statistika učestalosti.
 
 - **Poliranje pre vremena ili toplog dela.** Vreme iz tabele važi samo za navedenu temperaturu i postupak sušenja.
 - **Preskakanje koraka.** Završna pasta nije namenjena da ukloni grub trag brušenja; za C-30 tehnički list navodi trag P2500[^cs-c30-tds].
-- **Rad na suncu.** Tehnički listovi Carsystem pasta navode da se izbegava rad na direktnoj sunčevoj svetlosti[^cs-c30-tds].
+- **Rad na suncu.** Tehnički listovi pasta C-10 strong i C-30 finish navode da se izbegava rad na direktnoj sunčevoj svetlosti[^cs-c10-tds][^cs-c30-tds].
 - **Previše brušenja na jednom mestu.** Ceo sloj laka je tanak: za CC.26 tehnički list navodi debljinu suvog sloja od 50–60 µm[^cs-cc26-tds]. Na ivicama i rebrima rizik je veći.
 
 ## Ograničenja
@@ -157,7 +158,7 @@ Tekst opisuje opšti redosled i primere iz tehničkih listova navedenih verzija.
 
 ### Koliko treba čekati?
 
-Onoliko koliko navodi tehnički list laka za poliranje, na temperaturi na kojoj se lak sušio. U primerima iz našeg programa raspon je od 15 min na 60 °C do 3–4 h na 20 °C[^cs-cc26-tds], uz hlađenje posle sušenja na 60 °C[^cs-carbo-clear-tds]. Ako ne znate koji je lak nanet, pitajte radionicu ili tehničku podršku.
+Onoliko koliko navodi tehnički list laka za poliranje, na temperaturi na kojoj se lak sušio. Za CC.26 ECO-X to je 3–4 h na 20 °C ili 15 min na 60 °C[^cs-cc26-tds], a za Carbo Clear Plus 3,5–4 h na 20 °C ili 15 min na 60 °C, uz hlađenje do 1 h posle sušenja na 60 °C[^cs-carbo-clear-tds]. Ako ne znate koji je lak nanet, pitajte radionicu ili tehničku podršku.
 
 ### Kada se mokro brusi pre poliranja?
 

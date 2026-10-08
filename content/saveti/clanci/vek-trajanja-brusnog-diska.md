@@ -89,8 +89,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS F.19, F.23 Ceramic, P.25 Ceramic, SW20 V02, Neptune Soft V01, katalog Carsystem 2026/27 i stranica Color Net Disc; citirane tvrdnje se poklapaju; ispravljeno: „proizvođači ne daju“ suženo na pregledane dokumente, tvrdnja o suvom brušenju kita vezana za TDS Elastic weiss (dodat izvor). Znaci istrošenosti i procena troška ostaju bez izvora proizvođača, pa stručna potvrda ostaje potrebna."
 strucnaPotvrda:
   potrebna: true
   razlog: "Tehnički listovi i katalozi iz našeg programa navode šta produžava vek diska (usisavanje, stearatni sloj, keramičko zrno, voda za brušenje), ali nijedan pregledani dokument ne navodi znake istrošenosti ni kada disk treba zameniti. Znaci istrošenosti i procena troška u tekstu su opšte objašnjenje i urednička procena i traže potvrdu stručne osobe."

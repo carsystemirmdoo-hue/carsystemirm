@@ -67,8 +67,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva SATAjet X 5500 (pogl. 7, 9, 14) i jet X, SATA saveti, Little Helper, FAQ; vrednosti (11 Nm, 1 Nm, zamena creva jednom godišnje) se poklapaju; ispravljeno 6: „SATA menja“ → „SATA prodaje samo cele setove“, uklonjen „ključ“ uz 11 Nm, preciziran deo o podmazivanju, iz garancije uklonjeni filteri i oprema za disanje (nisu u programu), uklonjena nepotkrepljena tvrdnja o kanalima."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

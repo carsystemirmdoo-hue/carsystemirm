@@ -88,8 +88,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS F.23 disk i trake V01, P.25 Ceramic V01, F.19, P.19, katalog Carsystem 2026/27, C.A.R.FIT katalog 2026 (str. 84–85) i FEPA; vrednosti se poklapaju; ispravljeno: razlika P40–P600 (katalog) i P80–P600 (TDS) prikazana kao razlika dva dokumenta uz napomenu da dostupnost P40/P60 nije potvrđena, prednost keramike preformulisana kao navod proizvođača, dodat citat TDS traka, kataforeza → elektroforetski premazi, dopunjena napomena o stranama."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

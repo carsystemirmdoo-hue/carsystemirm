@@ -82,7 +82,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Bazna boja se suši mat, a nijansa se procenjuje tek kada je preko nje bezbojni lak, jer lak menja način na koji svetlo pada na boju i odbija se od nje. Zato baza pre laka i posle laka ne izgleda isto, i to samo po sebi nije greška. Greška je kada nijansa ne odgovara vozilu ni posle laka, a probni lim to nije pokazao. PPG (proizvođač koji nije u našem programu) u svom postupku za probni lim navodi da se boja procenjuje tek kada su slojevi baze potpuno suvi i preko njih naneta dva sloja bezbojnog laka[^ppg-sprayout].
+Bazna boja se suši mat, a nijansa se procenjuje tek kada je preko nje bezbojni lak. Opšte objašnjenje: lak menja način na koji se svetlo odbija od površine, pa baza pre laka i posle laka ne izgleda isto, i to samo po sebi nije greška. Greška je kada nijansa ne odgovara vozilu ni posle laka, a probni lim to nije pokazao. PPG (proizvođač koji nije u našem programu) u svom postupku za probni lim navodi da se boja procenjuje tek kada su slojevi baze potpuno suvi i preko njih naneta dva sloja bezbojnog laka[^ppg-sprayout].
 
 Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako se proverava uzrok pre sanacije](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
@@ -90,7 +90,7 @@ Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako
 
 Opšte objašnjenje: mat površina baze rasipa svetlo na sve strane, pa boja izgleda svetlije i „praškasto“. Glatki, sjajni sloj laka preko nje daje dubinu i zasićenost, pa ista boja posle laka može izgledati tamnije i punije. Kod metalik i bisernih boja lak utiče i na to kako se efekat vidi iz različitih uglova. Koliko je promena izražena, zavisi od nijanse; izvori koje smo pregledali ne daju meru te promene.
 
-Zbog toga se nijansa nikada ne upoređuje sa vozilom dok je baza još bez laka.
+Zbog toga se nijansa ne upoređuje sa vozilom dok je baza još bez laka; i PPG postupak za probni lim predviđa procenu tek posle bezbojnog laka[^ppg-sprayout].
 
 ## Mogući uzroci kada nijansa ne odgovara ni posle laka
 

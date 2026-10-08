@@ -97,15 +97,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Master Tape II, Master Tape Green, WR-Lifting Premium V03, Red Tape V01, Auto Mask, Fine Line Tape Blue V03, katalog Carsystem 2026/27, C.A.R.FIT katalog 2026 i baslac Mazda 51K (03/2025); ispravljeno: baslac korak skidanja maske tačno opisan (posle prvog koraka bazne boje u troslojnom postupku, ne „pre bezbojnog laka“); tehnika skidanja jasno označena kao opšte objašnjenje bez izvora proizvođača, uz prednost tehničkog lista i opreznije uputstvo za zasecanje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Proizvođači traka iz našeg programa uklanjanje opisuju posle sušenja: Carsystem za Master Tape II navodi da se traka čisto skida kada vozilo izađe iz kabine za sušenje[^cs-master-tape-ii-tds], a C.A.R.FIT za krep traku da se lako skida kada se reparaturni sloj osuši[^carfit-katalog-2026]. Postoje i izuzeci koje navodi sam proizvođač: maska oko zone utapanja ili poklopac senzora skidaju se dok je sloj još svež. Zato odgovor zavisi od proizvoda i faze rada, a traka ne treba da ostane na vozilu duže nego što proizvođač dozvoljava.
+Proizvođači traka iz našeg programa uklanjanje opisuju posle sušenja: Carsystem za Master Tape II navodi da se traka čisto skida kada vozilo izađe iz kabine za sušenje[^cs-master-tape-ii-tds], a C.A.R.FIT za krep traku da se lako skida kada se reparaturni sloj osuši[^carfit-katalog-2026]. Postoje i izuzeci koje navodi sam proizvođač: poklopac senzora skida se dok je boja još tečna, a maska sa susednog dela pri utapanju, u jednom primeru, već u toku nanošenja bazne boje. Zato odgovor zavisi od proizvoda i faze rada, a traka ne treba da ostane na vozilu duže nego što proizvođač dozvoljava.
 
 ## Šta navode tehnički listovi
 
@@ -117,7 +118,7 @@ Proizvođači traka iz našeg programa uklanjanje opisuju posle sušenja: Carsys
 | C.A.R.FIT krep traka 9-100-00xx | kada se reparaturni sloj osuši, bez ostatka[^carfit-katalog-2026] |
 | Carsystem Tec Line Stick (poklopac senzora) | dok je boja još tečna, da ne nastane ivica boje[^cs-katalog-2026] |
 
-Kod utapanja u susedni deo baslac u uputstvu za jednu nijansu navodi da se maska sa susednog dela skida posle odzračivanja poslednjeg sloja bazne boje, a deo se zatim očisti krpom za prašinu[^baslac-blend-51k]. To je korak pre bezbojnog laka i ne važi automatski za druge sisteme. O utapanju više u tekstu [Utapanje metalika u susedni deo](/vodici/utapanje-metalika).
+Kod utapanja u susedni deo baslac u uputstvu za jednu nijansu (troslojni postupak) navodi da se maska sa susednog dela skida kada se posle poslednjeg sloja prvog koraka bazne boje završi odzračivanje, a deo se zatim očisti krpom za prašinu, pre nego što se nastavi utapanje u taj deo[^baslac-blend-51k]. To važi za taj postupak i ne prenosi se automatski na druge nijanse i sisteme. O utapanju više u tekstu [Utapanje metalika u susedni deo](/vodici/utapanje-metalika).
 
 ## Koliko dugo traka sme da ostane
 
@@ -125,11 +126,11 @@ Svaka traka ima granicu posle koje se više ne skida čisto. Za traku na Carsyst
 
 ## Kako se skida
 
-Opšte objašnjenje, ne uputstvo određenog proizvođača:
+Ovo je opšte objašnjenje iz prakse, a ne uputstvo proizvođača: tehnički listovi traka koje smo pregledali ne opisuju tehniku skidanja. Ako tehnički list trake, boje ili laka koji koristite navodi drugačije, važi taj dokument.
 
 1. **Proverite da je sloj dovoljno suv** za fazu u kojoj ste, prema tehničkom listu boje ili laka. Izrazi za faze sušenja objašnjeni su u tekstu [Faze sušenja iz tehničkog lista](/vodici/faze-susenja-iz-tehnickog-lista).
-2. **Vucite traku polako i pod oštrim uglom**, unazad preko same sebe i u pravcu od nove ivice, a ne nagore od površine. Tako se ivica laka manje opterećuje.
-3. **Ako se sloj laka vidno nastavlja preko trake**, pre skidanja ga pažljivo zasecite oštrim sečivom uz ivicu trake, da se ne bi otkinuo zajedno sa trakom.
+2. **Vucite traku polako, savijenu unazad preko same sebe**, tako da se odvaja od nove ivice laka, a ne da je podižete naglo uvis. Na taj način se ivica laka po pravilu manje opterećuje.
+3. **Ako se sloj laka vidno nastavlja preko trake**, traka može da povuče i deo laka. U praksi se taj sloj uz ivicu trake pažljivo zaseče oštrim sečivom, bez pritiska u podlogu; ako niste sigurni, prvo probajte na manje vidljivom mestu.
 4. **Traku za podizanje gumica** skinite tako da plastični deo izađe ispod gumice bez povlačenja preko svežeg laka.
 
 ## Pitanja i odgovori

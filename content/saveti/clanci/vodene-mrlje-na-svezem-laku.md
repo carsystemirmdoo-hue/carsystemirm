@@ -56,9 +56,11 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---
-Mrlje od vode na tek lakiranom vozilu nastaju kada kapi kiše ili vode od pranja padnu na lak koji još nije potpuno otvrdnuo i na njemu se osuše. PPG (proizvođač koji nije u našem programu) kao mogući uzrok navodi upravo izlaganje laka kiši ili prskanju vode pre nego što je potpuno otvrdnuo, kao i vodu na predebelom sloju voska[^ppg-water-spotting]. Za blage mrlje PPG kao sanaciju navodi poliranje, ali to je posao za radionicu, pa je prvi korak da se javite onima koji su vozilo lakirali.
+Mrlje od vode na tek lakiranom vozilu mogu da nastanu kada kapi kiše ili vode od pranja padnu na lak koji još nije potpuno otvrdnuo i na njemu se osuše. PPG (proizvođač koji nije u našem programu) kao mogući uzrok navodi upravo izlaganje laka kiši ili prskanju vode pre nego što je potpuno otvrdnuo, kao i vodu na predebelom sloju voska[^ppg-water-spotting]. Za blage mrlje PPG kao sanaciju navodi poliranje, ali to je posao za radionicu, pa je prvi korak da se javite onima koji su vozilo lakirali.
 
 ## Kako izgleda greška
+
+Urednički opis znakova:
 
 - Okrugli tragovi veličine kapi, svetliji ili mutniji od okoline.
 - Najviše ih je na vodoravnim površinama: haubi, krovu, poklopcu prtljažnika.
@@ -68,7 +70,7 @@ R-M ovakve tragove svrstava u mrlje izazvane spoljnim uticajima i opisuje ih kao
 
 ## Zašto svež lak reaguje na vodu
 
-Kada preuzmete vozilo, lak je suv i ispoliran, ali ne mora još da ima punu tvrdoću. Opšte objašnjenje: dok lak otvrdnjava, površina je osetljivija, pa kap koja se suši na njoj može da ostavi trag. Koliko traje potpuno otvrdnjavanje zavisi od laka i načina sušenja; to objašnjava vodič [Potpuno otvrdnjavanje laka: koliko traje](/vodici/potpuno-otvrdnjavanje-laka).
+Lak na preuzetom vozilu može biti suv i ispoliran, a da još nema punu tvrdoću. Opšte objašnjenje: dok lak otvrdnjava, površina je osetljivija, pa kap koja se suši na njoj može da ostavi trag. Koliko traje potpuno otvrdnjavanje zavisi od laka i načina sušenja; to objašnjava vodič [Potpuno otvrdnjavanje laka: koliko traje](/vodici/potpuno-otvrdnjavanje-laka).
 
 ## Šta možete da proverite sami
 
@@ -80,7 +82,7 @@ Zapišite odgovore i fotografišite mrlje pri dnevnom svetlu. To će pomoći rad
 
 ## Ograničenja
 
-Ne pokušavajte da mrlje uklonite jakim sredstvima za čišćenje, abrazivnim pastama ili mašinom ako to ne radite inače. Na svežem laku je lako napraviti veću štetu od same mrlje. Izvori koje smo pregledali ne daju preporuku o sredstvima za pranje svežeg laka, pa je ovde i ne dajemo. R-M u uvodu o nezi laka navodi da i deterdženti i samo trljanje pri pranju utiču na stanje laka[^inform-after-care].
+Ne pokušavajte da mrlje uklonite jakim sredstvima za čišćenje, abrazivnim pastama ili mašinom ako to ne radite inače. Opšte objašnjenje: na svežem laku je lako napraviti veću štetu od same mrlje. Izvori koje smo pregledali ne daju preporuku o sredstvima za pranje svežeg laka, pa je ovde i ne dajemo. R-M u uvodu o nezi laka navodi da i deterdženti i samo trljanje pri pranju utiču na stanje laka[^inform-after-care].
 
 ## Pitanja i odgovori
 
@@ -90,4 +92,4 @@ Kod blagih mrlja može da pomogne. PPG kao sanaciju navodi uklanjanje voska sa m
 
 ### Kako da sprečim mrlje dok lak ne otvrdne?
 
-PPG kao meru sprečavanja navodi zaštitu laka od vode dok potpuno ne otvrdne i izbegavanje debelih slojeva voska[^ppg-water-spotting]. U praksi: kada možete, parkirajte vozilo pod krovom i ne perite ga pre roka koji Vam navede radionica. Kada smete da operete vozilo i nanesete vosak, objašnjava vodič [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).
+PPG kao meru sprečavanja navodi zaštitu laka od vode dok potpuno ne otvrdne i izbegavanje debelih slojeva voska[^ppg-water-spotting]. Opšte objašnjenje: kada možete, parkirajte vozilo pod krovom i ne perite ga pre roka koji Vam navede radionica. Kada smete da operete vozilo i nanesete vosak, objašnjava vodič [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).

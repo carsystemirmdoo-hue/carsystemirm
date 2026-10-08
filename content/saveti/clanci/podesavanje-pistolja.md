@@ -90,8 +90,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva jet X i SATAjet X 5500 (uklj. pogl. 7.1–7.4), SATA saveti i Little Helper, stranica jet X, TDS AGILIS 07/2026, C 2A40 07/2026, 45 Line 03/2026; vrednosti se poklapaju; ispravljeno 10: izvor za vrednost pritiska iz TDS-a (sata-saveti umesto uputstva pištolja), „većina pištolja“ i „tehnički listovi često“ preformulisani, odnos HVLP granice i ulaznog pritiska dopunjen izvorom, opšta objašnjenja označena."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

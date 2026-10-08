@@ -92,14 +92,14 @@ Proizvođači sprejeva iz našeg programa ne opisuju ovu grešku u tehničkim li
 1. **Temperatura.** Cosmos Lac za Prefilled Spray i Metal Varnish navodi najbolju temperaturu nanošenja od 10–25 °C[^cosmos-prefilled-tds][^cosmos-metal-varnish-tds]. Hladna limenka, na primer iz automobila ili negrejane garaže, može biti hladnija od vazduha u prostoriji. Cosmos Lac navodi i da se proizvod čuva na 5–35 °C i da se nikada ne ostavlja u vozilu[^cosmos-prefilled-tds].
 2. **Mućkanje.** Za Carsystem Clear Coat Spray navodi se mućkanje od najmanje 3 minuta pre upotrebe[^cs-clear-spray-tds]. Cosmos Lac navodi temeljno mućkanje[^cosmos-prefilled-tds].
 3. **Razmak.** Cosmos Lac navodi 25–30 cm od površine[^cosmos-prefilled-tds], a Carsystem za svoj sprej oko 20–30 cm[^cs-clear-spray-tds]. Razmak važi za taj proizvod, ne za sve sprejeve.
-4. **Proba.** Cosmos Lac preporučuje da se sprej prvo isproba na probnoj površini[^cosmos-prefilled-tds]. Ako niti izlaze i na probi, ne nastavljajte na delu.
+4. **Proba.** Cosmos Lac preporučuje da se sprej prvo isproba na probnoj površini[^cosmos-prefilled-tds]. Urednička preporuka: ako niti izlaze i na probi, ne nastavljajte na delu.
 5. **Ventil i kapica.** Opšte objašnjenje: delimično zapušena kapica takođe kvari mlaz. Kako se ventil čisti posle rada, opisuje vodič [Zapušen ventil spreja](/vodici/zapusen-ventil-spreja).
 
 Ako je limenka bila hladna, ostavite je da se postepeno izjednači sa temperaturom prostorije. O radu sa sprejom kada je hladno piše vodič [Sprej po hladnom vremenu](/vodici/sprej-po-hladnom-vremenu).
 
 ## Kod pištolja: šta proveriti
 
-PPG kao sanaciju navodi smanjenje pritiska vazduha i/ili viskoziteta dok niti ne nestanu[^ppg-cobwebbing]. U praksi to znači proveru tri stvari prema tehničkom listu materijala:
+PPG kao sanaciju navodi smanjenje pritiska vazduha i/ili viskoziteta dok niti ne nestanu[^ppg-cobwebbing]. Opšte objašnjenje: to znači proveru tri stvari prema tehničkom listu materijala:
 
 - **Viskozitet.** Tehnički list daje viskozitet za nanošenje uz temperaturu. Za Carsystem 2K Clear VOC Speed Plus to je 16–18 sekundi u DIN 4 čaši na 20 °C[^cs-speed-plus-tds]. Kako se meri, objašnjava vodič [Viskozitet i DIN 4 čaša](/vodici/viskozitet-din4).
 - **Razređivač.** Da li je dodat razređivač iz istog sistema, u propisanoj količini.
@@ -113,7 +113,7 @@ PPG napominje da se neki specijalni materijali teško raspršuju i traže posebn
 
 ### Pojavljuje li se i kod spreja?
 
-Može. Kod spreja se pritisak i sastav ne podešavaju, pa ostaju uslovi nanošenja koje tehnički list navodi: temperatura, mućkanje i razmak. Cosmos Lac za svoje sprejeve daje opseg temperature i razmak od površine[^cosmos-prefilled-tds], pa je to prvo što treba uporediti.
+Opšte objašnjenje: može. Kod spreja se pritisak i sastav ne podešavaju, pa ostaju uslovi nanošenja koje tehnički list navodi: temperatura, mućkanje i razmak. Cosmos Lac za svoje sprejeve daje opseg temperature i razmak od površine[^cosmos-prefilled-tds], pa je to prvo što treba uporediti.
 
 ### Šta da radim sa delom na koji su već pale niti?
 

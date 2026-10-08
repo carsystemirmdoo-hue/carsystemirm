@@ -62,7 +62,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---
-Kredanje je stanje kada površina boje postane bleda, mat i praškasta, pa na prstu ili krpi ostane trag boje. PPG (proizvođač koji nije u našem programu) ga opisuje kao kredasti prah na površini, tipičan za staru boju izloženu vremenskim uslovima, i kao moguće uzroke navodi razgradnju veziva ili pigmenta i neodgovarajuće materijale[^ppg-chalking]. Blago kredanje se može ublažiti poliranjem, a kada je boja jako istrošena, potrebno je novo lakiranje.
+Kredanje je stanje kada površina boje postane bleda, mat i praškasta, pa na prstu ili krpi ostane trag boje. PPG (proizvođač koji nije u našem programu) ga opisuje kao kredasti prah na površini, tipičan za staru boju izloženu vremenskim uslovima, i kao moguće uzroke navodi razgradnju veziva ili pigmenta i neodgovarajuće materijale[^ppg-chalking]. Prema istom izvoru, blago kredanje se može ublažiti brušenjem i poliranjem, a u težim slučajevima se ponovo lakira završni sloj[^ppg-chalking].
 
 ## Kako izgleda i kako se prepoznaje
 
@@ -72,7 +72,7 @@ Sledeći znaci su urednički opis koji pomaže da se pojava prepozna; nisu dijag
 - Kada pređete čistom belom krpom ili prstom preko čiste površine, na njoj ostane prah u boji vozila.
 - Dok je mokra, boja može izgledati bolje, a kada se osuši, opet je mutna.
 
-Ako je boja samo prljava, posle pažljivog pranja vraća se u prvobitno stanje i ne ostavlja trag boje na krpi. Ako se boja ljušti u listićima, to nije kredanje nego gubitak prianjanja, i to procenjuje radionica.
+Ako je boja samo prljava, posle pažljivog pranja vraća se u prvobitno stanje i ne ostavlja trag boje na krpi. Ako se boja ljušti u listićima, to verovatno nije kredanje nego gubitak prianjanja, i to procenjuje radionica.
 
 ## Zašto se to dešava
 

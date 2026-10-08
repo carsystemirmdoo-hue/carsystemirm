@@ -78,7 +78,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Bezbojni lak koji dugo ostaje lepljiv obično nije „loš lak“, nego znak da sušenje nije teklo onako kako tehnički list pretpostavlja. Mogući razlozi su pogrešan odnos mešanja ili učvršćivač, preniska temperatura, predebeo sloj i loši uslovi sušenja. Pre nego što bilo šta preduzmete, uporedite šta ste uradili sa tehničkim listom laka, korak po korak.
+Bezbojni lak koji dugo ostaje lepljiv ne znači nužno da je lak loš; može biti znak da sušenje nije teklo onako kako tehnički list pretpostavlja. Mogući razlozi, prema izvorima navedenim u nastavku, su pogrešan odnos mešanja ili učvršćivač, preniska temperatura, predebeo sloj i loši uslovi sušenja. Pre nego što bilo šta preduzmete, uporedite šta ste uradili sa tehničkim listom laka, korak po korak.
 
 Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako se proverava uzrok pre sanacije](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
@@ -92,12 +92,12 @@ Konačan uzrok zavisi od materijala i uslova rada. Redosled je urednički.
 
 ### Odnos mešanja
 
-Proverite koliko ste učvršćivača stvarno dodali i da li ste merili po zapremini ili po težini. Odnosi se razlikuju: za baslac 40-440 je 2:1 po zapremini[^baslac-40-440-tds], za Carsystem Speed Plus 2:1 po zapremini, odnosno 100 g laka i 50 g učvršćivača po težini[^cs-speed-plus-tds], a za R-M C 2A40 1:1 uz 20 % razređivača po zapremini[^rm-c2a40-tds]. Premalo učvršćivača je mogući uzrok mekog laka, ali ni više učvršćivača ne ubrzava sušenje; to objašnjava vodič [Više učvršćivača za brže sušenje: zašto to ne radi](/vodici/vise-ucvrscivaca-brze-susenje).
+Proverite koliko ste učvršćivača stvarno dodali i da li ste merili po zapremini ili po težini. Odnosi se razlikuju: za baslac 40-440 je 2:1 po zapremini[^baslac-40-440-tds], za Carsystem Speed Plus 2:1 po zapremini, odnosno 100 g laka i 50 g učvršćivača po težini[^cs-speed-plus-tds], a za R-M C 2A40 1:1 uz 20 % razređivača po zapremini[^rm-c2a40-tds]. Opšte objašnjenje: premalo učvršćivača je mogući uzrok mekog laka, ali ni više učvršćivača ne ubrzava sušenje; to objašnjava vodič [Više učvršćivača za brže sušenje: zašto to ne radi](/vodici/vise-ucvrscivaca-brze-susenje).
 
 ### Učvršćivač
 
 - **Iz drugog sistema.** Carsystem za Speed Plus izričito upozorava da se uz razređivače i učvršćivače iz drugih sistema ne mogu isključiti problemi sa sušenjem i prianjanjem[^cs-speed-plus-tds].
-- **Ostavljen otvoren.** R-M upozorava da su učvršćivači osetljivi na vlagu i da posude sa ostatkom treba pažljivo zatvoriti[^rm-h2p05-tds]. Ako je učvršćivač zamućen ili ima kristale, vidi [Zamućen ili kristalisan učvršćivač](/vodici/ucvrscivac-zamucen-ili-kristalisan).
+- **Ostavljen otvoren.** R-M u tehničkom listu za H 2P05 upozorava da su učvršćivači osetljivi na vlagu i da posude sa ostatkom treba pažljivo zatvoriti[^rm-h2p05-tds]. Ako je učvršćivač zamućen ili ima kristale, vidi [Zamućen ili kristalisan učvršćivač](/vodici/ucvrscivac-zamucen-ili-kristalisan).
 - **Pogrešna brzina.** baslac navodi da se učvršćivač bira prema temperaturi okoline i veličini objekta, po tabeli[^baslac-40-440-tds].
 
 ### Temperatura
@@ -120,8 +120,8 @@ Ovaj tekst se odnosi na 2K bezbojni lak. Vrednosti važe samo za navedene proizv
 
 ### Može li pogrešan učvršćivač biti uzrok?
 
-Može. Učvršćivač iz drugog sistema, učvršćivač koji je upio vlagu ili pogrešna količina menjaju reakciju u laku. Carsystem upozorava na probleme sa sušenjem uz materijale drugih sistema[^cs-speed-plus-tds]. Zato se uz lak koristi učvršćivač naveden u njegovom tehničkom listu, u navedenom odnosu.
+Može. Opšte objašnjenje: učvršćivač iz drugog sistema, učvršćivač koji je upio vlagu ili pogrešna količina menjaju reakciju u laku. Carsystem upozorava na probleme sa sušenjem uz materijale drugih sistema[^cs-speed-plus-tds]. Zato se uz lak koristi učvršćivač naveden u njegovom tehničkom listu, u navedenom odnosu.
 
 ### Da li grejanje pomaže lepljivom laku?
 
-Pomaže samo ako je uzrok bio hladnoća ili sporo isparavanje, a materijal je pravilno zamešan. Grejte prema vrednostima iz tehničkog lista i postepeno. Ako lak ni posle toga ne otvrdne, uzrok je verovatnije u smeši ili materijalu; tada je razumno konsultovati tehničku podršku proizvođača pre uklanjanja i ponovnog lakiranja.
+Opšte objašnjenje: pomaže samo ako je uzrok bio hladnoća ili sporo isparavanje, a materijal je pravilno zamešan. PPG navodi blago zagrevanje, uz oprez da se površina ne nabere[^ppg-slow-drying]; temperaturu i trajanje uzmite iz tehničkog lista Vašeg laka. Ako lak ni posle toga ne otvrdne, uzrok može biti u smeši ili materijalu; tada je razumno konsultovati tehničku podršku proizvođača pre uklanjanja i ponovnog lakiranja.

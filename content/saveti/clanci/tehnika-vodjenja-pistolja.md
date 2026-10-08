@@ -84,11 +84,12 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva jet X i SATAjet X 5500 (slika [6] pregledana: 90° i paralelno vođenje), stranica jet X, SATA saveti, TDS C 2A40, AGILIS, 45 Line; dodat izvor R-M Help Centre „Clouding“ za preklapanje; razlika 15–19 cm (uputstvo jet X) i 17–21 cm (stranica, uz SATA napomenu da podaci važe za celu liniju) navedena pošteno; ispravljeno 7. Stručna potvrda zadržana za brzinu i preklapanje."
 strucnaPotvrda:
   potrebna: true
-  razlog: "Za rastojanje postoje zvanični podaci SATA, ali za brzinu prolaza i procenat preklapanja nije pronađen zvaničan izvor proizvođača pištolja ili boje iz našeg programa. Tekst zato ne navodi brojeve za brzinu i preklapanje; stručnjak treba da potvrdi opšte objašnjenje ili da dostavi izvor (npr. R-M modul „BASIC KNOWLEDGE – BODYSHOP EQUIPMENT“ na koji upućuje tehnički list AGILIS)."
+  razlog: "Rastojanje je provereno prema zvaničnim SATA izvorima (uputstva jet X i SATAjet X 5500, praktični saveti), a razlika između uputstva jet X (15–19 cm) i stranice proizvoda (17–21 cm) navedena je u tekstu. Za brzinu prolaza i preklapanje izvori proizvođača iz našeg programa ne daju brojčanu vrednost ni postupak; R-M (Help Centre, Clouding) traži samo „pravilno“ preklapanje. Delovi o brzini i preklapanju su označena opšta objašnjenja i stručnjak treba da ih potvrdi ili dostavi izvor (npr. R-M modul BASIC KNOWLEDGE – BODYSHOP EQUIPMENT)."
   status: potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08

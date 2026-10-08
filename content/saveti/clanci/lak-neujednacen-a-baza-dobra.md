@@ -98,15 +98,16 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS AGILIS, C 2P62, C 2A40, 45 Line, 40-100, SATA saveti, uputstva jet X i SATAjet X 5500, SATA QMR vest (21. 8. 2025); sve vrednosti se poklapaju; ispravljeno 3: uopštavanje u uvodu suženo na primere, savet o vraćanju protoka vezan za tehnički list laka, preciziran SATA opis grešaka istrošenog seta."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Bazna boja i bezbojni lak ne nanose se na isti način, pa podešavanje koje daje dobru bazu ne mora da odgovara laku. Lak se nanosi u znatno debljem sloju, često drugom diznom, drugim brojem slojeva i mora da se razlije u ravnu površinu: za vodenu baznu boju R-M AGILIS tehnički list navodi debljinu sloja 10–15 µm[^rm-agilis-tds], a za bezbojni lak C 2P62 40–60 µm[^rm-c2p62-tds]. Mogući uzroci neujednačenog laka su podešavanje zadržano od baze, pritisak na pištolju, protok materijala, viskozitet i izbor učvršćivača i razređivača, broj slojeva, istrošen set dizni i tehnika vođenja. Proverite ih redom; konačan uzrok zavisi i od materijala i uslova rada.
+Bazna boja i bezbojni lak ne nanose se na isti način, pa podešavanje koje daje dobru bazu ne mora da odgovara laku. U primerima iz tehničkih listova lak se nanosi u znatno debljem sloju, ponekad drugom diznom i drugim brojem slojeva, i mora da se razlije u ravnu površinu: za vodenu baznu boju R-M AGILIS tehnički list navodi debljinu sloja 10–15 µm[^rm-agilis-tds], a za bezbojni lak C 2P62 40–60 µm[^rm-c2p62-tds]. Mogući uzroci neujednačenog laka su podešavanje zadržano od baze, pritisak na pištolju, protok materijala, viskozitet i izbor učvršćivača i razređivača, broj slojeva, istrošen set dizni i tehnika vođenja. Proverite ih redom; konačan uzrok zavisi i od materijala i uslova rada.
 
 ## Zašto lak traži drugo podešavanje
 
@@ -149,11 +150,11 @@ Tabela daje moguće uzroke, a ne sigurnu dijagnozu. Više uzroka može da deluje
 
 ### Koje podešavanje se menja za lak?
 
-Ono koje tehnički list laka navodi drugačije od tehničkog lista baze; u primerima iz tabele to su dizna, broj slojeva i odzračivanje. Ulazni pritisak u primerima iz tabele ostaje 2 bara za pištolj compliant i kod AGILIS i kod C 2P62[^rm-agilis-tds][^rm-c2p62-tds], ali se dizna i slojevi razlikuju. Ako ste za baznu boju smanjili protok materijala da biste dobili efekat, za lak ga vratite. SATA za takve namene nudi dodatak [SATA QMR](/proizvodi/sata-qmr-quick-material-regulator), kojim se unapred podešena smanjena količina materijala uključuje pritiskom na dugme, a potpuno otvoren položaj vraća za nekoliko sekundi; kao primere upotrebe proizvođač navodi efekte metalik bazne boje, obojeni bezbojni lak i teško dostupne delove[^sata-qmr].
+Ono koje tehnički list laka navodi drugačije od tehničkog lista baze; u primerima iz tabele to su dizna, broj slojeva i odzračivanje. Ulazni pritisak u primerima iz tabele ostaje 2 bara za pištolj compliant i kod AGILIS i kod C 2P62[^rm-agilis-tds][^rm-c2p62-tds], ali se dizna i slojevi razlikuju. Ako ste za baznu boju smanjili protok materijala da biste dobili efekat, za lak ga vratite na podešavanje koje odgovara tehničkom listu laka. SATA za takve namene nudi dodatak [SATA QMR](/proizvodi/sata-qmr-quick-material-regulator), kojim se unapred podešena smanjena količina materijala uključuje pritiskom na dugme, a potpuno otvoren položaj vraća za nekoliko sekundi; kao primere upotrebe proizvođač navodi efekte metalik bazne boje, obojeni bezbojni lak i teško dostupne delove[^sata-qmr].
 
 ### Može li istrošen set dizni da se vidi tek na laku?
 
-Može. SATA objašnjava da se kod istrošenog seta odnos materijala i vazduha za raspršivanje promeni, pa se mogu pojaviti oblaci u metalik i bisernoj baznoj boji, tamnija nijansa i narandžina kora na bezbojnom laku[^sata-saveti]. Opšte objašnjenje: pošto se lak nanosi u debljem sloju, slabije raspršivanje na njemu može da bude uočljivije nego na bazi.
+Može. SATA objašnjava da se kod istrošenog seta odnos materijala i vazduha za raspršivanje promeni, pa se mogu pojaviti oblaci i tamnija nijansa kod metalik i biserne bazne boje, a narandžina kora na bezbojnom laku[^sata-saveti]. Opšte objašnjenje: pošto se lak nanosi u debljem sloju, slabije raspršivanje na njemu može da bude uočljivije nego na bazi.
 
 ### Da li je za lak potreban poseban pištolj?
 

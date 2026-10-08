@@ -68,8 +68,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Little Helper, SATA saveti, uputstva jet X i SATAjet X 5500, Carsystem katalog 2026/27 str. 103 (9 × 16 mm, 12,5 m, 12 bara potvrđeno); ispravljeno 6: opšta objašnjenja i urednički redosled provere označeni, zaključak o crevu ublažen."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

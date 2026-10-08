@@ -64,6 +64,11 @@ izvori:
     url: https://www.sata.com/en/service/professional-knowledge/practical-advice/
     pristupljeno: 2026-10-08
     tip: edukacija-proizvodjaca
+  - id: sata-mali-pomocnici
+    naziv: "SATA, Little Helper (odeljak „SATA dry jet 2 – dry blow spray gun“)"
+    url: https://www.sata.com/en/service/professional-knowledge/little-helper/
+    pristupljeno: 2026-10-08
+    tip: edukacija-proizvodjaca
   - id: rm-agilis-tds
     naziv: "R-M, Technical Information AGILIS, Waterborne basecoat"
     url: https://techinfo.rmpaint.com/unicorn/en/AGILIS-Waterborne%20basecoat.pdf
@@ -87,15 +92,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SATA FAQ, stranica jet X, uputstva jet X i SATAjet X 5500, SATA saveti, Little Helper (dry jet 2), TDS AGILIS, 45 Line, baslac Spray guns; ispravljeno 5: korozija vezana za vodeno sredstvo za čišćenje kako navodi SATA, uzročna tvrdnja o posudama preformulisana, dodat izvor za dry jet 2 i za međučišćenje, opšta objašnjenja označena."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Ne bilo kojim, nego pištoljem koji proizvođač predviđa za vodene materijale. Za svoje pištolje SATA navodi da su oni iz aktuelne proizvodnje bez ograničenja pogodni za vodene boje, da postoje i dizne posebno za vodene boje i da preporučuje odvojene pištolje za rastvaračke i vodene materijale[^sata-faq]. Za stariji pištolj ili pištolj drugog proizvođača pogodnost za vodene materijale proverite u njegovom uputstvu. Razlika se ne vidi samo u nanošenju: vodeni materijal i vodena sredstva za čišćenje mogu da izazovu koroziju metalnih delova, pa se pištolj posle rada odmah čisti i suši.
+Ne bilo kojim, nego pištoljem koji proizvođač predviđa za vodene materijale. Za svoje pištolje SATA navodi da su oni iz aktuelne proizvodnje bez ograničenja pogodni za vodene boje, da postoje i dizne posebno za vodene boje i da preporučuje odvojene pištolje za rastvaračke i vodene materijale[^sata-faq]. Za stariji pištolj ili pištolj drugog proizvođača pogodnost za vodene materijale proverite u njegovom uputstvu. Razlika se ne vidi samo u nanošenju: SATA navodi da vodeno sredstvo za čišćenje koje predugo ostane u pištolju ili na njemu može da izazove koroziju[^sata-jetx-uputstvo], pa se pištolj posle rada odmah čisti i suši.
 
 ## Šta je drugačije u odnosu na rastvaračke materijale
 
@@ -118,7 +124,7 @@ Uputstvo za jet X traži neutralna sredstva za čišćenje, pH 6–8, i zabranju
 
 ### Vazduh
 
-SATA za rad sa vodenim sistemima boja navodi da je potreban tehnički potpuno čist komprimovani vazduh, uz trostepenu filtraciju sa aktivnim ugljem[^sata-saveti]. Šta to znači za kompresor i razvod, objašnjava vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje). Isti vazduh se koristi i za ubrzavanje odzračivanja: R-M za AGILIS i baslac za 45 Line navode da se vreme odzračivanja može znatno skratiti odgovarajućom opremom za duvanje vazduha[^rm-agilis-tds][^baslac-45-line-tds]. Primer takve opreme je [SATA dry jet 2](/proizvodi/sata-dry-jet-2), a postupak je opisan u vodiču [Ubrzavanje sušenja vodene baze strujom vazduha](/vodici/ubrzavanje-susenja-vodene-baze).
+SATA za rad sa vodenim sistemima boja navodi da je potreban tehnički potpuno čist komprimovani vazduh, uz trostepenu filtraciju sa aktivnim ugljem[^sata-saveti]. Šta to znači za kompresor i razvod, objašnjava vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje). Isti vazduh se koristi i za ubrzavanje odzračivanja: R-M za AGILIS i baslac za 45 Line navode da se vreme odzračivanja može znatno skratiti odgovarajućom opremom za duvanje vazduha[^rm-agilis-tds][^baslac-45-line-tds]. Primer takve opreme je [SATA dry jet 2](/proizvodi/sata-dry-jet-2), koji SATA opisuje kao pištolj za brzo sušenje vodenih boja[^sata-mali-pomocnici], a postupak je opisan u vodiču [Ubrzavanje sušenja vodene baze strujom vazduha](/vodici/ubrzavanje-susenja-vodene-baze).
 
 ## Šta proveriti pre rada sa vodenom bazom
 
@@ -133,11 +139,11 @@ Razlike između vodenih i rastvaračkih baznih boja u razređivanju, odzračivan
 
 ### Zašto su bitni delovi otporni na koroziju?
 
-Zato što voda iz materijala ili iz sredstva za čišćenje, kada ostane na metalu koji nije otporan na nju, izaziva rđu. U pištolju se to vidi na navoju vazdušne kape, u kanalima za materijal i na telu pištolja, kako navodi SATA u uputstvu za jet X[^sata-jetx-uputstvo]. Isti razlog stoji i iza zahteva za posude: R-M navodi da se AGILIS smeše čuvaju u zatvorenim posudama otpornim na koroziju, plastičnim ili sa unutrašnjim premazom[^rm-agilis-tds], a baslac za 45 Line plastične posude ili limenke sa unutrašnjim premazom[^baslac-45-line-tds]. Opšte objašnjenje: rđa iz posude ili pištolja može da se pojavi kao čestice u sloju.
+Opšte objašnjenje: voda iz materijala ili iz sredstva za čišćenje, kada ostane na metalu koji nije otporan na nju, izaziva rđu. U pištolju se korozija od vodenog sredstva za čišćenje vidi na navoju vazdušne kape, u kanalima za materijal i na telu pištolja, kako navodi SATA u uputstvu za jet X[^sata-jetx-uputstvo]. Na otpornost na koroziju upućuju i zahtevi za posude: R-M navodi da se AGILIS smeše čuvaju u zatvorenim posudama otpornim na koroziju, plastičnim ili sa unutrašnjim premazom[^rm-agilis-tds], a baslac za 45 Line plastične posude ili limenke sa unutrašnjim premazom[^baslac-45-line-tds]. Opšte objašnjenje: rđa iz posude ili pištolja može da se pojavi kao čestice u sloju.
 
 ### Treba li poseban pištolj samo za vodenu bazu?
 
-SATA to preporučuje: odvojeni pištolji za rastvaračke i vodene materijale, da bi se izbegle greške u laku i skupa popravka[^sata-faq]. Ako to nije moguće, pištolj se pri promeni materijala temeljno čisti sredstvom koje odgovara materijalu. Kada se isplati više pištolja, razmatra vodič [Jedan pištolj ili poseban za prajmer, bazu i lak](/vodici/jedan-pistolj-ili-vise).
+SATA to preporučuje: odvojeni pištolji za rastvaračke i vodene materijale, da bi se izbegle greške u laku i skupa popravka[^sata-faq]. Ako to nije moguće, posle promene materijala uputstvo za jet X predviđa međučišćenje u odgovarajućoj mašini za pranje[^sata-jetx-uputstvo], sredstvom koje preporučuje proizvođač boje[^sata-saveti]. Kada se isplati više pištolja, razmatra vodič [Jedan pištolj ili poseban za prajmer, bazu i lak](/vodici/jedan-pistolj-ili-vise).
 
 ### Da li vodena baza traži drugačiju diznu?
 

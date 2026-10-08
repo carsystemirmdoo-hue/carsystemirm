@@ -69,8 +69,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Foam Tape v.01 i Foam Tape T-Soft V01, katalog Carsystem 2026/27 (PDF str. 44–45) i C.A.R.FIT katalog 2026 (str. 64–65); URL-ovi porekla pitanja postoje u questions.json; 1 formulaciona ispravka."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -90,7 +91,7 @@ Mekana ivica se dobija trakom koja ne pravi oštru granicu: umesto ravne krep tr
 1. **Očistite i osušite** ivicu otvora i zaptivku; traka na prašnjavoj ili vlažnoj površini lošije drži.
 2. **Postavite traku u zazor ili uz ivicu otvora.** Carsystem Foam Tape ima zaobljen presek, koji prema tehničkom listu olakšava postavljanje[^cs-foam-tape-tds]. Opšte objašnjenje: traka se postavlja malo uvučeno od spoljne ivice dela, tako da magla boje postepeno izbledi na penastom delu umesto da se zaustavi na oštroj liniji.
 3. **Zatvorite vrata, haubu ili poklopac** pažljivo, bez gnječenja trake toliko da iskoči iz zazora.
-4. **Proverite temperaturu sušenja.** Za Foam Tape i Foam Tape T-Soft Carsystem navodi otpornost do 80 °C, za T-Soft uz trajanje od 1 h[^cs-foam-tape-t-soft-tds][^cs-foam-tape-tds]. Ako ciklus sušenja ide iznad toga, traku ne izlažite višoj temperaturi.
+4. **Proverite temperaturu sušenja.** Za Foam Tape i Foam Tape T-Soft Carsystem navodi otpornost do 80 °C, za T-Soft uz trajanje od 1 h[^cs-foam-tape-t-soft-tds][^cs-foam-tape-tds]. Ako ciklus sušenja ide iznad toga, ova traka za taj ciklus nije pogodna.
 5. **Posle sušenja** uklonite traku; za T-Soft proizvođač navodi da ne ostavlja ostatke lepka[^cs-foam-tape-t-soft-tds].
 
 ## Greške koje se lako naprave

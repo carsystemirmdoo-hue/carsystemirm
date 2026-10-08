@@ -89,19 +89,19 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kada se boja i lak posle nekoliko meseci odvajaju sa plastike u celim listovima, to ukazuje na slabo prianjanje prvog sloja na plastiku, a ne na grešku samog laka. baslac kao moguće uzroke navodi loše očišćenu plastiku, neodgovarajuće ili nedovoljno sredstvo za čišćenje, deo koji nije zagrejan pre lakiranja, izostavljen prajmer za plastiku i plastiku koja se uopšte ne može lakirati[^baslac-peeling-plastic]. Koji je od tih razloga bio presudan, utvrđuje se proverom dela i postupka.
+Kada se boja i lak posle nekoliko meseci odvajaju sa plastike u celim listovima, to može da ukaže na slabo prianjanje prvog sloja na plastiku, a ne na grešku samog laka. baslac kao moguće uzroke navodi loše očišćenu plastiku, neodgovarajuće ili nedovoljno sredstvo za čišćenje, deo koji nije zagrejan pre lakiranja, izostavljen prajmer za plastiku i plastiku koja se uopšte ne može lakirati[^baslac-peeling-plastic]. Koji je od tih razloga mogao da bude presudan, proverava se na delu i u postupku rada.
 
 Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako se proverava uzrok pre sanacije](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
 ## Kako izgleda greška
 
-R-M grešku opisuje kao lako odvajanje celog sistema boje sa plastične podloge[^inform-plastics-flaking]. U praksi se vidi ovako:
+R-M grešku opisuje kao lako odvajanje celog sistema boje sa plastične podloge[^inform-plastics-flaking]. Znaci koje vredi zabeležiti (urednički opis):
 
 - boja se diže na ivicama, oko oštećenja od kamenčića ili posle pranja pod pritiskom;
 - odvaja se u većim komadima;
-- ako je ispod odvojenog komada glatka plastika bez ostataka prajmera, slaba je veza između plastike i prvog sloja.
+- ako je ispod odvojenog komada glatka plastika bez ostataka prajmera, to upućuje na vezu između plastike i prvog sloja.
 
-Ako se boja odvaja između dva sloja (na primer lak od baze), a prajmer ostaje na plastici, uzrok je drugačiji i proverava se kao gubitak prianjanja između slojeva.
+Ako se boja odvaja između dva sloja (na primer lak od baze), a prajmer ostaje na plastici, uzrok je verovatno drugačiji i proverava se kao gubitak prianjanja između slojeva.
 
 ## Mogući uzroci i kako se proveravaju
 

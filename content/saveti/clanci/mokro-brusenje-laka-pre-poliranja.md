@@ -104,8 +104,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem ProFlex Jupiter Soft H2O V02 (07/2020), SW20 V02 (01/2022), Topline WP S v.03 (11/2021), Polish C-05 V02 (11/2020), C-30 V01 (09/2014), Step 1 V01 (06/2019), UV Clear V02 (11/2019), CC.26 V01 (04/2026), katalog 2026/27 (Jupiter Soft H₂O 77 i 152 mm, Hydra, Callisto, Mercury, Pluto) i R-M C 2P42 (07/2026). Ocene „Cut“ i „Gloss“ u listovima pasta su samo sličice i u tekstu se ne navode; navedene su samo tekstualno pročitane vrednosti traga (P1200–P1500, P1500–P2000, P2500). Ispravljeno (4): R-M C 2P42 „film thickness“ 40–50 µm više se ne predstavlja kao debljina suvog sloja (list to ne kaže); red Jupiter Soft H₂O dopunjen citatom kataloga za 77 mm; stanjivanje na ivicama i sjajne tačke posle brušenja označeni kao opšte objašnjenje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -124,7 +125,7 @@ Bezbojni lak se pre poliranja mokro brusi finim filmskim ili sunđerastim abrazi
 
 | Abraziv iz našeg programa | Granulacija | Šta navodi proizvođač |
 | --- | --- | --- |
-| ProFlex Jupiter Soft H₂O, 152 mm i 77 mm | P2500, P3000, P4000 | filmski disk sa fleksibilnom sunđerastom podlogom, za finiš i mokro brušenje, uz SW20[^cs-jupiter-h2o-tds] |
+| ProFlex Jupiter Soft H₂O, 152 mm i 77 mm | P2500, P3000, P4000 | filmski disk sa fleksibilnom sunđerastom podlogom, za finiš i mokro brušenje, uz SW20[^cs-jupiter-h2o-tds][^cs-katalog] |
 | ProFlex Hydra, 152 mm i 75 mm | 3000 | sunđerasti abraziv za fino brušenje neposredno pred poliranje, posebno pogodan za mokro brušenje[^cs-katalog] |
 | ProFlex Callisto, 150 mm, 77 mm i 33 mm | 3000 i 6000+ | sunđerasti abraziv za fino brušenje neposredno pred poliranje i uklanjanje tragova brušenja[^cs-katalog] |
 | Topline WP S, list 230 × 280 mm | do P2000 | vodobrusni papir sa zrnom silicijum-karbida za mokro brušenje lakiranih površina[^cs-topline-tds] |
@@ -134,9 +135,9 @@ Hydra i Callisto su u katalogu označeni brojem bez slova P[^cs-katalog], pa se 
 ## Postupak
 
 1. **Navlažite abraziv i površinu.** Carsystem za SW20 navodi da produžava vek abraziva i poboljšava kvašenje, a da pena sprečava da se prašina od brušenja veže sa vodom[^cs-sw20-tds].
-2. **Brusite ravnomerno i bez pritiska na ivicama,** mašinom sa mekom podloškom ili ručno na bloku. Na rebrima i ivicama sloj se brže stanji, pa se ta mesta ostavljaju za kraj ili rade ručno.
+2. **Brusite ravnomerno i bez pritiska na ivicama,** mašinom sa mekom podloškom ili ručno na bloku. Opšte objašnjenje: na rebrima i ivicama sloj se brže stanji, pa se ta mesta ostavljaju za kraj ili rade ručno.
 3. **Prelazite na finiju granulaciju** dok trag ne bude onaj koji pasta uklanja. Primer iz Carsystem tehničkog lista za UV Clear: posle popravke tačke završno brušenje se radi sa P2000 i P3000, u dva koraka[^cs-uv-clear-tds]. Granulacije se ne preskaču, jer svaki korak treba da ukloni trag prethodnog.
-4. **Obrišite i pregledajte.** Brušena zona treba da bude ujednačeno mat, bez sjajnih tačaka. Sjajno mesto znači da tu greška još nije izravnata.
+4. **Obrišite i pregledajte.** Brušena zona treba da bude ujednačeno mat, bez sjajnih tačaka. Sjajno mesto obično znači udubljenje do kog abraziv još nije stigao, pa tu površina još nije izravnata; ovo je opšte objašnjenje.
 5. **Pređite na poliranje** pastom čiji tehnički list odgovara završnoj granulaciji. Za Polish Step 1 coarse Carsystem navodi trag P1500–P2000[^cs-step1-tds].
 
 ## Greške koje se lako naprave
@@ -155,7 +156,7 @@ Tekst ne zamenjuje tehnički list abraziva i paste koje koristite. Proizvođači
 
 ### Koliko laka se skida?
 
-Nijedan tehnički list iz našeg programa koji smo pregledali ne navodi koliko laka skida mokro brušenje određenom granulacijom. Poznato je koliko laka ima: za Carsystem CC.26 ECO-X debljina suvog sloja je 50–60 µm[^cs-cc26-tds], a za R-M C 2P42 40–50 µm[^rm-c2p42-tds]. Brušenje i poliranje troše deo tog sloja, pa se brusi samo koliko je potrebno da se greška izravna. Ako želite da znate koliko je ostalo, debljina se meri meračem debljine sloja pre i posle rada.
+Nijedan tehnički list iz našeg programa koji smo pregledali ne navodi koliko laka skida mokro brušenje određenom granulacijom. Poznato je koliko laka ima: za Carsystem CC.26 ECO-X debljina suvog sloja je 50–60 µm[^cs-cc26-tds], a R-M za C 2P42 navodi debljinu sloja („film thickness“) od 40–50 µm, bez oznake da li je reč o suvom sloju[^rm-c2p42-tds]. Brušenje i poliranje troše deo tog sloja, pa se brusi samo koliko je potrebno da se greška izravna. Ako želite da znate koliko je ostalo, debljina se meri meračem debljine sloja pre i posle rada.
 
 ### Da li se može brusiti i suvo?
 

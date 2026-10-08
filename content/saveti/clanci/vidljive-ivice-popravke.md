@@ -35,6 +35,11 @@ izvori:
     url: https://info.rmpaint.com/help/edge-marking
     pristupljeno: 2026-10-08
     tip: edukacija-proizvodjaca
+  - id: rm-help-swelling
+    naziv: "Info R-M, Help Centre: Swelling (javni opis greške)"
+    url: https://info.rmpaint.com/help/swelling
+    pristupljeno: 2026-10-08
+    tip: edukacija-proizvodjaca
   - id: ppg-mapping
     naziv: "PPG Refinish, Common Paint Defects Guide: Mapping (proizvođač koji nije u našem programu)"
     url: https://www.ppg.com/en-AE/automotive-refinish/common-paint-defects-guide/mapping
@@ -65,7 +70,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kada se posle nekoliko nedelja na laku pojave obrisi brušene zone, kao „mapa“ oko popravke, to obično znači da je nešto ispod laka nabubrelo ili se naknadno slegnulo. R-M ovu grešku (engl. *edge marking*) opisuje kao nabubrele ivice koje se ocrtavaju u završnom sloju oko stare boje izbrušene na prelaz[^inform-edge-marking]. Uzrok se ne vidi na prvi pogled: proverava se postupak pripreme, podloga i sušenje slojeva ispod laka.
+Kada se posle nekoliko nedelja na laku pojave obrisi brušene zone, kao „mapa“ oko popravke, mogući uzrok je sloj ispod laka koji je nabubreo ili se naknadno slegao. R-M ovu grešku (engl. *edge marking*) opisuje kao nabubrele ivice koje se ocrtavaju u završnom sloju oko stare boje izbrušene na prelaz[^inform-edge-marking]. U opisu bubrenja R-M navodi da veoma sporo isparavanje zaostalog rastvarača iz sveže nanesene boje na manjim površinama može da dovede do ocrtavanja ivica zone[^rm-help-swelling]. Uzrok se ne vidi na prvi pogled: proverava se postupak pripreme, podloga i sušenje slojeva ispod laka.
 
 Ovaj tekst se bavi samo ovom greškom. Opšti redosled provere bilo koje greške (šta zabeležiti, zašto isti simptom može imati više uzroka) opisan je u vodiču [Greške pri lakiranju: kako se proverava uzrok pre sanacije](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
@@ -73,13 +78,13 @@ Ovaj tekst se bavi samo ovom greškom. Opšti redosled provere bilo koje greške
 
 - Tanke linije ili blago uzdignuti prstenovi na mestu gde je stara boja bila izbrušena na prelaz.
 - Zona unutar granice može imati drugačiju strukturu ili sjaj od okoline. PPG (proizvođač koji nije u našem programu) grešku opisuje upravo tako: površine različite strukture ili sjaja, oivičene jasnim linijama[^ppg-mapping].
-- Greška se često ne vidi odmah posle sušenja, nego tek posle nekoliko dana ili nedelja, najbolje pod kosim svetlom.
+- Greška se ne mora videti odmah posle sušenja; može se pojaviti i posle nekoliko dana ili nedelja. Najbolje se vidi pod kosim svetlom.
 
 Treba je razlikovati od tragova brušenja koji se vide kroz boju. Tamo se vide pojedinačne ogrebotine od papira, a ne obris cele zone. To je tema vodiča [Tragovi brušenja vidljivi kroz boju](/vodici/tragovi-brusenja-kroz-boju).
 
 ## Mogući uzroci i kako se proveravaju
 
-Spisak mogućih uzroka preuzet je iz PPG vodiča o grešci[^ppg-mapping]. R-M javno objavljuje samo opis greške, a uzroke i postupak daje u delu stranice za prijavljene korisnike, koji nismo otvarali. Konačan uzrok zavisi od podloge, materijala i uslova rada.
+Spisak mogućih uzroka preuzet je iz PPG vodiča o grešci[^ppg-mapping]; PPG je ovde samo opšta stručna pozadina, a ne preporuka njegovih proizvoda. Red „Osetljiva stara boja“ je urednička dopuna: PPG u prevenciji traži pažnju da se pri brušenju ne probije kroz meku ili osetljivu podlogu. R-M javno objavljuje samo opis greške, a uzroke i postupak daje u delu stranice za prijavljene korisnike, koji nismo otvarali. Konačan uzrok zavisi od podloge, materijala i uslova rada.
 
 | Mogući uzrok | Šta proveriti |
 | --- | --- |
@@ -98,7 +103,7 @@ Isti Carsystem list upozorava i da razređivači i učvršćivači iz drugih sis
 
 Kada je lak već otvrdnuo, greška se ne ispravlja poliranjem, jer nije na površini laka nego ispod njega. PPG kao sanaciju navodi da se podloga pusti da potpuno otvrdne, zatim da se zona izbrusi i izoluje pre završnog sloja[^ppg-mapping]. Koji materijal služi kao izolacioni sloj i kako se nanosi preko osetljive stare boje, određuje tehnički list sistema koji koristite. Ako niste sigurni, pitajte tehničku podršku proizvođača pre ponovnog rada.
 
-Opšte objašnjenje: ponovno lakiranje preko istog obrisa bez provere uzroka obično ponovi grešku, jer se ista podloga ponovo izlaže istim rastvaračima.
+Opšte objašnjenje: ponovno lakiranje preko istog obrisa bez provere uzroka može da ponovi grešku, jer se ista podloga ponovo izlaže istim rastvaračima.
 
 ## Ograničenja
 
@@ -110,7 +115,7 @@ Opšte objašnjenje: ponovno lakiranje preko istog obrisa bez provere uzroka obi
 
 ### Kako se to sprečava pri pripremi?
 
-PPG kao mere sprečavanja navodi odgovarajuću granulaciju papira, uz pažnju da se ne probije kroz meku ili osetljivu podlogu, razređivač prilagođen uslovima rada, punilac bez preteranih debljina i kompatibilan sistem[^ppg-mapping]. U praksi to znači: prelaz stare boje izbrusiti fino i široko, punilac naneti i sušiti prema tehničkom listu i ne skraćivati sušenje pre brušenja. Postupak pripreme stare boje opisuje vodič [Priprema starog laka za novo lakiranje](/vodici/priprema-starog-laka).
+PPG kao mere sprečavanja navodi odgovarajuću granulaciju papira, uz pažnju da se ne probije kroz meku ili osetljivu podlogu, razređivač prilagođen uslovima rada, punilac bez preteranih debljina i kompatibilan sistem[^ppg-mapping]. Opšte objašnjenje: prelaz stare boje se brusi fino i široko, punilac se nanosi i suši prema tehničkom listu, a sušenje pre brušenja se ne skraćuje. Postupak pripreme stare boje opisuje vodič [Priprema starog laka za novo lakiranje](/vodici/priprema-starog-laka).
 
 ### Da li se ocrtavanje može izbrusiti i polirati?
 

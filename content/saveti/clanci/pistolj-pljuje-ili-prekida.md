@@ -59,8 +59,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena tabela otklanjanja smetnji u uputstvima jet X i SATAjet X 5500 i spisak SATA video materijala; ispravljeno 11: uzroci razdvojeni po simptomu kako ih SATA navodi (nemiran mlaz vs. mehurići u čaši, nova kolona u tabeli), dijagnostičke tvrdnje ublažene i označene kao opšte objašnjenje, video naveden samo po naslovu, redosled provere označen kao urednički."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

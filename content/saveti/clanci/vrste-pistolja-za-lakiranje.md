@@ -82,8 +82,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva jet X 3266-240619-2 i SATAjet X 5500 3240-200610-1, SATA stranica pištolja, FAQ i praktični saveti, TDS C 2A40 07/2026 i 45 Line 03/2026; sve vrednosti (pritisci, potrošnja vazduha, rastojanja, dizne, >65 %) se poklapaju; ispravljeno 6: tvrdnja o „pištoljima sa gornjom čašom u tekstovima proizvođača“ suzena na C 2A40, rastojanje HVLP/RP prebačeno na izvor sata-saveti, uopštavanja i opšta objašnjenja označena, LVLP odgovor vezan za izvor."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

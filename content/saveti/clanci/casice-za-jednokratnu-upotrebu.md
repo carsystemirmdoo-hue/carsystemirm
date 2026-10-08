@@ -70,8 +70,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SATA RPS stranica, uputstvo SATAjet X 5500 (mase 548 g / 668 g), TDS CPS 3.0 V01 09/2025 i CPS 2.0 V01 03/2024, AGILIS 07/2026; podaci se poklapaju; ispravljeno 3: uklonjena nepotkrepljena oznaka „stariji sistem“ za CPS 2.0, opšte objašnjenje označeno, dopunjena CPS 2.0 prednost."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -87,8 +87,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Top Tape, Slim Tape, Master Tape Green, Master Tape II, Red Tape V01, Fine Line Tape Blue V03, Auto Mask i C.A.R.FIT Waterproof Masking Tape; sve temperature se poklapaju; dopunjeno: Master Tape Green je takođe za vodene i rastvaračke boje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

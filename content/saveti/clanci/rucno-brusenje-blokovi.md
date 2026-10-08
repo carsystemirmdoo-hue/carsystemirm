@@ -76,8 +76,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni katalog Carsystem 2026/27 (str. 18–19, 24–25, 34–41), brošura Sanding Blocks, TDS F.23 trake V01 i Neptune v.1 i C.A.R.FIT katalog 2026 (str. 86–87); dimenzije i namene se poklapaju; ispravljeno: „većina blokova ima čičak“ suženo na brošuru, odgovor o listovima bez čička preformulisan, ocena ručnog brušenja označena kao urednička procena, 1 jezička ispravka."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -75,8 +75,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni katalog Carsystem 2026/27 (str. 8–9, 20–23, 32–33, 36–39, 202–203), TDS V.19 Roll, Neptune Soft, Interface Pad 150/25 i C.A.R.FIT katalog 2026; ispravljeno: uklonjen C.A.R.FIT Radius Flex Longboard (nije u našem katalogu), ublažen odgovor o probijenoj ivici."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

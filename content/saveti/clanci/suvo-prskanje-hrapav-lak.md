@@ -86,13 +86,13 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Lak ostaje suv i hrapav kada kapljice stignu na površinu već delimično osušene, pa se ne spoje u ravan, sjajan sloj. Glasurit, brend koji nije u našem programu, suvo prskanje u rečniku pojmova vezuje za smanjen dovod materijala, previsok pritisak, pregust materijal i preveliko rastojanje pištolja[^glasurit-prirucnik]. Pre popravke proverite podešavanje pištolja, rastojanje i viskozitet, a zatim i uslove u prostoru. Ako je lak dovoljno debeo, hrapavost se može brusiti i polirati, a ako nije, lak se nanosi ponovo.
+Opšte objašnjenje: lak ostaje suv i hrapav kada kapljice stignu na površinu već delimično osušene, pa se ne spoje u ravan, sjajan sloj. Glasurit, brend koji nije u našem programu, suvo prskanje u rečniku pojmova vezuje za smanjen dovod materijala, previsok pritisak, pregust materijal i preveliko rastojanje pištolja[^glasurit-prirucnik]. Pre popravke proverite podešavanje pištolja, rastojanje i viskozitet, a zatim i uslove u prostoru. Kao opšte pravilo, ako je lak dovoljno debeo, hrapavost se može brusiti i polirati, a ako nije, lak se nanosi ponovo.
 
 ## Kako izgleda
 
 Površina je hrapava na dodir, slična finom šmirgl papiru, i bez sjaja ili sa mutnim sjajem. Može biti po celom delu ili samo na pojedinim mestima, na primer na ivicama ili na mestima koja su prskana sa veće udaljenosti ili pod uglom.
 
-Sličnu, ali drugačiju pojavu R-M opisuje kao preprašivanje: sitne, suve, raspršene kapljice zalepljene za površinu ili kapljice koje sloj nije upio[^rm-help-overspray]. Grudvice preprašenog materijala zarobljene u svežem laku R-M opisuje kao posebnu grešku[^rm-help-spraydust]. Kod suvog prskanja ceo sloj je hrapav, a kod preprašivanja su suve kapljice na inače dobrom sloju, često pored mesta koje se lakiralo. Zaštitu susednih delova opisuje tekst [Zaštita ostatka vozila od preprašivanja](/vodici/zastita-od-preprasivanja).
+Sličnu, ali drugačiju pojavu R-M opisuje kao preprašivanje: sitne, suve, raspršene kapljice zalepljene za površinu ili kapljice koje sloj nije upio[^rm-help-overspray]. Grudvice preprašenog materijala zarobljene u svežem laku R-M opisuje kao posebnu grešku[^rm-help-spraydust]. Urednička razlika za proveru: kod suvog prskanja hrapav je sam sloj, a kod preprašivanja su suve kapljice na inače dobrom sloju, obično pored mesta koje se lakiralo. Zaštitu susednih delova opisuje tekst [Zaštita ostatka vozila od preprašivanja](/vodici/zastita-od-preprasivanja).
 
 ## Mogući uzroci i kako se proveravaju
 

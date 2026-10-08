@@ -90,7 +90,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Sitne pukotine u laku znače da je sistem slojeva pod naponom koji ne može da izdrži, a uzrok može biti i u slojevima ispod laka. baslac kao moguće uzroke navodi neodgovarajući sistem na termoplastičnoj podlozi i prekratko odzračivanje između slojeva kod nanošenja mokro na mokro[^baslac-cracking]. Preko pukotina se ne lakira: proizvođači predviđaju brušenje do zdrave podloge i novo nanošenje[^baslac-cracking].
+Opšte objašnjenje: sitne pukotine u laku mogu da znače da je sistem slojeva pod naponom koji ne može da izdrži, a uzrok može biti i u slojevima ispod laka. baslac kao moguće uzroke navodi neodgovarajući sistem na termoplastičnoj podlozi i prekratko odzračivanje između slojeva kod nanošenja mokro na mokro[^baslac-cracking]. Preko pukotina se ne lakira: baslac kao popravku navodi brušenje do zdrave podloge i novo nanošenje[^baslac-cracking].
 
 Opšti redosled provere greške opisan je u vodiču [Greške pri lakiranju: kako se proverava uzrok pre sanacije](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
@@ -113,7 +113,7 @@ Konačan uzrok zavisi od podloge, materijala i uslova rada.
 | Mogući uzrok | Šta proveriti |
 | --- | --- |
 | Osetljiva stara podloga | Da li je ispod fabrička termoplastična boja. baslac navodi da direktno nanošenje poliesterskog kita ili punioca, reaktivnog prajmera ili materijala na bazi sintetičke smole na takvu podlogu može da izazove pucanje[^baslac-cracking]. Vidi [Priprema starog laka za novo lakiranje](/vodici/priprema-starog-laka). |
-| Prekratko odzračivanje | Da li su poštovana vremena između slojeva, naročito mokro na mokro[^baslac-cracking]. |
+| Prekratko odzračivanje | Da li su poštovana vremena između slojeva; baslac to navodi za nanošenje mokro na mokro[^baslac-cracking]. |
 | Predebeli slojevi | Ukupna debljina i broj slojeva u odnosu na tehnički list (primeri ispod). |
 | Loša priprema | PPG navodi pregrube abrazive, loše čišćenje i loše popunjene spojeve[^ppg-cracking]. |
 | Voda ili ulje u vazduhu | PPG navodi i nečistoću iz vazdušnog voda[^ppg-cracking]. |

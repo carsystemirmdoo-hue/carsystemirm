@@ -117,8 +117,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS 21-11 06/2023, 20-22 06/2023, 40-100 06/2026, 45 Line 03/2026, P 2A41 07/2026, C 2A40 07/2026, AGILIS 07/2026, baslac Spray guns 01/2026 (kolone tabele provereno), SATA tabela R-M i stranica jet X; sve dizne se poklapaju; ispravljeno 5: „datum jul 2023“ označen kao podatak iz PDF fajla, tvrdnja o puniocu mokro-na-mokro vezana za baslac tabelu, baslac preporuka za jet X ograničena na baslac materijale, uopštavanje u uvodu suženo."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

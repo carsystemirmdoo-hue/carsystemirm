@@ -64,8 +64,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorena uputstva jet X i SATAjet X 5500 (troubleshooting), Little Helper (SATA cert), FAQ i praktični saveti; uzroci i rešenja se poklapaju; ispravljeno 8: opšti postupak i urednička preporuka jasno označeni, zaključak „problem verovatno nije u pištolju“ ublažen, „lepeza u obliku banane“ označena kao izraz koji SATA ne koristi, ispravljen smer zavisnosti lepeze i vazdušne kape."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

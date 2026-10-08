@@ -59,8 +59,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni engleski deo uputstva SATA multi clean 2 (3649-220713-2: 4 bara, cev najmanje 9 mm, 140 Nl/min, Dn 75 mm, 140 ml po pranju, zone 1 do 3 m i 2 od 3 do 5 m van kabine, odobrenje za zone 1 i 2, zabranjena sredstva, samo vodena ili samo rastvaračka sredstva, pražnjenje pištolja, provera vazdušne kape, filter-podmetač), uputstvo SATA clean RCS (3444-250407-1), prospekt 1140-190306-1 i SATA FAQ; sve vrednosti odgovaraju izvorima. Ispravljeno: nedoslednost uputstva (bezbednosni deo: samo rastvaračka sredstva; nega: vodena ili rastvaračka bez naizmeničnog rada) opisana kao takva, preciziran tekst o pražnjenju sabirnih rezervoara. Brojke o uštedi se ne navode jer ih izvori ne daju."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -94,13 +95,13 @@ Uputstvo za multi clean 2 navodi ove uslove za postavljanje[^sata-multi-clean-2-
 
 Kada se mašina sa sredstvom na bazi rastvarača postavi van kabine za lakiranje, uputstva za multi clean 2 i clean RCS navode zonu opasnosti od eksplozije: zona 1 do 3 m oko uređaja i zona 2 od 3 do 5 m[^sata-multi-clean-2-uputstvo][^sata-clean-rcs-uputstvo]. U toj zoni ne sme biti izvora paljenja, kao što su otvoren plamen, cigarete i električni uređaji koji nisu u protiveksplozivnoj izvedbi[^sata-multi-clean-2-uputstvo]. Uređaji su odobreni za rad i skladištenje u zonama 1 i 2[^sata-multi-clean-2-uputstvo].
 
-Zato mašina obično ne može da stoji bilo gde. Pre kupovine proverite da li prostor (mešaonica, predprostor kabine) to dozvoljava prema propisima o zaštiti od eksplozije i požara; kako se organizuje mešaonica, piše u vodiču [Organizacija mešaonice boje](/vodici/organizacija-mesaonice-boje).
+Zato mašina obično ne može da stoji bilo gde. Pre kupovine proverite da li prostor (mešaonica, pretprostor kabine) to dozvoljava prema propisima o zaštiti od eksplozije i požara; kako se organizuje mešaonica, piše u vodiču [Organizacija mešaonice boje](/vodici/organizacija-mesaonice-boje).
 
 ## Sredstva za čišćenje
 
 Uputstvo za multi clean 2 zabranjuje kisela i bazna sredstva, sredstva sa benzinom i sredstva na bazi halogenovanih ugljovodonika. Uz 1,1,1-trihloretan i metilen-hlorid navodi da mogu da izazovu hemijsku reakciju sa aluminijumom i pocinkovanim delovima, u krajnjem slučaju i eksplozivnu[^sata-multi-clean-2-uputstvo]. Sredstvo za čišćenje bira se prema preporuci proizvođača boje, kao i kod ručnog pranja; vidi [Čišćenje pištolja posle rada](/vodici/ciscenje-pistolja-posle-rada).
 
-Prljavo sredstvo iz rezervoara je otpad. Uputstvo traži da se nivo u rezervoarima redovno proverava i prazni kada treba, a pri svakom punjenju i pražnjenju menja filter-podmetač[^sata-multi-clean-2-uputstvo]. Kako se predaje otpad od razređivača, objašnjava vodič [Otpad od boja i razređivača](/vodici/otpad-od-boja-i-razredjivaca).
+Prljavo sredstvo iz rezervoara je otpad. Uputstvo traži da se nivo u sabirnim rezervoarima redovno proverava i da se prazne kada treba, a da se pri svakom punjenju i pražnjenju rezervoara sredstva menja filter-podmetač[^sata-multi-clean-2-uputstvo]. Kako se predaje otpad od razređivača, objašnjava vodič [Otpad od boja i razređivača](/vodici/otpad-od-boja-i-razredjivaca).
 
 ## Kako da procenite da li Vam treba
 
@@ -116,7 +117,7 @@ Ovo je urednička lista pitanja, a ne računica proizvođača:
 
 ### Može li jedna mašina za vodene i rastvaračke materijale?
 
-Za multi clean 2 uputstvo navodi da se mašina koristi ili samo sa vodenim ili samo sa rastvaračkim sredstvima za čišćenje, bez naizmeničnog rada[^sata-multi-clean-2-uputstvo]. U delu o bezbednosti isto uputstvo navodi samo sredstva sa rastvaračima[^sata-multi-clean-2-uputstvo]. Pre kupovine za rad sa oba tipa materijala pitajte prodavca SATA opreme kako da organizujete pranje. SATA uz to preporučuje odvojene pištolje za rastvaračke i vodene boje[^sata-faq]; vidi [Pištolj za vodenu baznu boju](/vodici/vodena-baza-i-pistolj).
+Za multi clean 2 uputstvo navodi da se mašina koristi ili samo sa vodenim ili samo sa rastvaračkim sredstvima za čišćenje, bez naizmeničnog rada[^sata-multi-clean-2-uputstvo]. U delu o bezbednosti, međutim, isto uputstvo kaže da se koriste samo sredstva za čišćenje sa rastvaračima, pa u tom pogledu nije jednoznačno[^sata-multi-clean-2-uputstvo]. Pre kupovine za rad sa oba tipa materijala pitajte prodavca SATA opreme kako da organizujete pranje. SATA uz to preporučuje odvojene pištolje za rastvaračke i vodene boje[^sata-faq]; vidi [Pištolj za vodenu baznu boju](/vodici/vodena-baza-i-pistolj).
 
 ### Da li mašina zamenjuje ručno čišćenje?
 

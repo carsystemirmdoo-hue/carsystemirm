@@ -91,15 +91,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni odeljci 7 bezbednosnih listova Norbin N85-021 (4.0) i N75-021 (3.1), baslac 40-100 (5.0), R-M H 2P15 (4.0), C.A.R.FIT Gun Cleaner (1.0, 2017-06-23), Beispritzverdünnung (4.0) i Perfekt Füller 4:1 (1.0); temperature 5–35 °C i 18–23 °C, zaključavanje, peroksidi i skladišna klasa 3 po TRGS 510 odgovaraju izvorima. Ispravljeno: „originalno pakovanje“ zamenjeno sa „posuda od istog materijala kao originalna“ (tako piše u listovima), uklonjeno „suvo“ iz opšteg okvira jer ga ne navode svi listovi, upozorenje o otvaranju pod pritiskom i nespojivim aminima/alkoholima/vodi pripisano i Norbin N75-021 (ne samo R-M), tvrdnja o bezbojnom laku suzena na baslac 40-100."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Boje, lakovi, učvršćivači i razređivači čuvaju se onako kako piše u odeljku 7 bezbednosnog lista tog proizvoda. Listovi koje smo pregledali ponavljaju isti okvir: hladno, suvo i provetreno mesto, daleko od izvora paljenja i direktnog sunca, posude dobro zatvorene i uspravne, u originalnom pakovanju. Razlikuju se u detaljima, najviše u temperaturnom rasponu i u posebnim zahtevima za učvršćivače. Zato se pravila za svaki proizvod čitaju iz njegovog lista, a ne prenose sa drugog.
+Boje, lakovi, učvršćivači i razređivači čuvaju se onako kako piše u odeljku 7 bezbednosnog lista tog proizvoda. Listovi koje smo pregledali ponavljaju isti okvir: hladno i provetreno mesto, daleko od izvora paljenja i direktnog sunca, posude dobro zatvorene i uspravne, a proizvod u posudi od istog materijala kao originalna. Razlikuju se u detaljima, najviše u temperaturnom rasponu i u posebnim zahtevima za učvršćivače. Zato se pravila za svaki proizvod čitaju iz njegovog lista, a ne prenose sa drugog.
 
 ## Šta piše u odeljku 7 bezbednosnog lista
 
@@ -126,7 +127,7 @@ Tabela ne služi za poređenje proizvoda. Pokazuje da se raspon razlikuje od lis
 
 ## Učvršćivači traže dodatnu pažnju
 
-Učvršćivači za 2K materijale reaguju sa vlagom. R-M za H 2P15 i Norbin za N75-021 navode da izloženost vlazi ili vodi stvara ugljen-dioksid, od čega u zatvorenoj posudi raste pritisak[^rm-h2p15-sds][^norbin-n75-021-sds]. R-M dodaje da posudu treba otvarati oprezno, jer sadržaj može biti pod pritiskom, i da učvršćivač treba držati dalje od amina, alkohola i vode[^rm-h2p15-sds].
+Učvršćivači za 2K materijale reaguju sa vlagom. R-M za H 2P15 i Norbin za N75-021 navode da izloženost vlazi ili vodi stvara ugljen-dioksid, od čega u zatvorenoj posudi raste pritisak[^rm-h2p15-sds][^norbin-n75-021-sds]. Oba lista navode i da se delimično potrošena posuda otvara oprezno, jer sadržaj može biti pod pritiskom, i da se učvršćivač drži dalje od amina, alkohola i vode[^rm-h2p15-sds][^norbin-n75-021-sds].
 
 U praksi to znači: učvršćivač se zatvara odmah posle uzimanja potrebne količine, a delimično potrošena limenka ne ostavlja se otvorena u vlažnom prostoru.
 
@@ -146,7 +147,7 @@ Ovaj tekst prikazuje šta navode pregledani bezbednosni listovi. Ne zamenjuje pr
 
 ### Zašto se učvršćivač čuva drugačije od laka?
 
-Zato što reaguje sa vlagom iz vazduha. Kod učvršćivača R-M H 2P15 i Norbin N75-021 ta reakcija stvara gas i pritisak u zatvorenoj posudi[^rm-h2p15-sds][^norbin-n75-021-sds]. Bezbojni lak u listovima koje smo videli nema takvo upozorenje, ali ima svoje uslove, na primer zaštitu od smrzavanja kod baslac 40-100[^baslac-40-100-sds].
+Zato što reaguje sa vlagom iz vazduha. Kod učvršćivača R-M H 2P15 i Norbin N75-021 ta reakcija stvara gas i pritisak u zatvorenoj posudi[^rm-h2p15-sds][^norbin-n75-021-sds]. List bezbojnog laka baslac 40-100 takvo upozorenje nema, ali ima svoje uslove, na primer zaštitu od smrzavanja[^baslac-40-100-sds].
 
 ### Sme li ostatak iz čaše nazad u originalno pakovanje?
 

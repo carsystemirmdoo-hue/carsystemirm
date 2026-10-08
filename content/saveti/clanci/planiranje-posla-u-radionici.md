@@ -67,8 +67,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SATA FAQ (odvojeni pištolji za rastvaračke i vodene boje), uputstvo SATA clean RCS (3444-250407-1: međučišćenje pri promeni boje), prospekt 1140-190306-1 (RCS u kabini, uz višenamenske čaše kao SATA RPS), HSE 2-pack isocyanate paints (vreme provetravanja), baslac Dust particles i baslac 45 Line (03/2026: mešavine do 6 meseci); pojedinačne tvrdnje odgovaraju izvorima. Ispravljeno: „ne sme“ ublaženo u „ne treba“ (izvor ne propisuje zabranu) i dodata prevencija iz baslac stranice. Stručna potvrda opravdana: redosled i grupisanje poslova su urednička procena bez izvora proizvođača."
 strucnaPotvrda:
   potrebna: true
   razlog: "Proizvođači iz našeg programa ne objavljuju javno postupak planiranja redosleda poslova u lakirnici. Izvori potkrepljuju samo pojedinačne činjenice (odvojeni pištolji za vodene i rastvaračke materijale, međučišćenje pri promeni boje, vreme provetravanja kabine, čuvanje zamešane baze); sam redosled i grupisanje poslova su urednička procena i treba da ih potvrdi iskusan lakirer ili šef lakirnice."
@@ -117,4 +118,4 @@ Prvo po vrsti materijala (vodeni ili rastvarački sistem), zatim po nijansi, pa 
 
 ### Šta raditi dok se deo suši?
 
-Pripremati sledeće delove van kabine: brušenje, čišćenje, maskiranje i utvrđivanje nijanse. Prašina od brušenja ne sme da dospe u kabinu ni u prostor gde se lakira, jer baslac među uzrocima prašine u laku navodi i usisavanje zaprljanog vazduha spolja, na primer fine prašine i ostataka od poliranja[^baslac-dust-particles].
+Pripremati sledeće delove van kabine: brušenje, čišćenje, maskiranje i utvrđivanje nijanse. Prašina od brušenja ne treba da dospe u kabinu ni u prostor gde se lakira, jer baslac među uzrocima prašine u laku navodi i usisavanje zaprljanog vazduha spolja, na primer fine prašine i ostataka od poliranja, a kao prevenciju odvajanje prostora za poliranje od lakirnice[^baslac-dust-particles].

@@ -7,8 +7,8 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | --- | ---: |
 | Teme | 224 |
 | Napisano | 224 |
-| Tehnički provereno | 179 |
-| Jezički provereno | 215 |
+| Tehnički provereno | 184 |
+| Jezički provereno | 224 |
 | Čeka stručnu potvrdu | 40 |
 | Odobreno (imenovana osoba) | 0 |
 | Novosti / trajni vodiči | 9 / 215 |
@@ -208,15 +208,15 @@ Spisak tema nije isto što i gotov sadržaj: kolone pokazuju stanje svake teme p
 | SV-0191 | Samozapaljenje krpa i otpada natopljenog rastvaračima | zastita-na-radu | Osnovni vodič | profesionalac, vlasnik-radionice | urednička procena | 5 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0192 | Ventilacija pri lakiranju u garaži | zastita-na-radu | Osnovni vodič | hobista | urednička procena | 8 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
 | SV-0193 | Hemijski skidač boje: rizici i bezbedan rad | zastita-na-radu | Rešavanje problema | hobista, profesionalac | pronađeno | 3 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0194 | Organizacija mešaonice boje u maloj radionici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 6 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0195 | Kako smanjiti otpad pri mešanju materijala | radionica | Postupak | profesionalac, vlasnik-radionice | urednička procena | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0196 | Praćenje potrošnje materijala po popravci | radionica | Postupak | vlasnik-radionice | urednička procena | 4 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0197 | Skladištenje zapaljivih materijala u radionici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 7 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0198 | Rok trajanja otvorenih i zatvorenih materijala | radionica | Rešavanje problema | hobista, profesionalac, vlasnik-radionice | pronađeno | 8 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
-| SV-0199 | Otpad od boja i razređivača: šta se radi sa njim | radionica | Osnovni vodič | hobista, vlasnik-radionice | pronađeno | 8 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0200 | Mašina za pranje pištolja: kada se isplati | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 4 | napisano | nije-provereno | nije-provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
-| SV-0201 | Održavanje kabine za lakiranje i filteri | radionica | Osnovni vodič | vlasnik-radionice | pronađeno | 5 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-10-08 |
-| SV-0202 | Planiranje redosleda poslova u lakirnici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 6 | napisano | nije-provereno | nije-provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-10-08 |
+| SV-0194 | Organizacija mešaonice boje u maloj radionici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 7 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0195 | Kako smanjiti otpad pri mešanju materijala | radionica | Postupak | profesionalac, vlasnik-radionice | urednička procena | 8 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0196 | Praćenje potrošnje materijala po popravci | radionica | Postupak | vlasnik-radionice | urednička procena | 4 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0197 | Skladištenje zapaljivih materijala u radionici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 7 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0198 | Rok trajanja otvorenih i zatvorenih materijala | radionica | Rešavanje problema | hobista, profesionalac, vlasnik-radionice | pronađeno | 8 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-04-08 |
+| SV-0199 | Otpad od boja i razređivača: šta se radi sa njim | radionica | Osnovni vodič | hobista, vlasnik-radionice | pronađeno | 8 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0200 | Mašina za pranje pištolja: kada se isplati | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 4 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
+| SV-0201 | Održavanje kabine za lakiranje i filteri | radionica | Osnovni vodič | vlasnik-radionice | pronađeno | 5 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-10-08 |
+| SV-0202 | Planiranje redosleda poslova u lakirnici | radionica | Osnovni vodič | vlasnik-radionice | urednička procena | 6 | napisano | ispravke-potrebne | provereno | potrebna (potrebno) | ne | 2026-10-08 | 2027-10-08 |
 | SV-0203 | Kako se čita tehnički list proizvoda | tehnicka-dokumentacija | Osnovni vodič | hobista, profesionalac | urednička procena | 3 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-04-08 |
 | SV-0204 | Bezbednosni list: šta je u kom od 16 odeljaka | tehnicka-dokumentacija | Osnovni vodič | hobista, profesionalac, vlasnik-radionice | urednička procena | 5 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |
 | SV-0205 | Oznake opasnosti na ambalaži: piktogrami, H i P oznake | tehnicka-dokumentacija | Osnovni vodič | pocetnik, hobista | urednička procena | 4 | napisano | provereno | provereno | nije potrebna | ne | 2026-10-08 | 2027-10-08 |

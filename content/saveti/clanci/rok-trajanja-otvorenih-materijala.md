@@ -97,22 +97,23 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Norbin N15-V20 (01/2022: 24 meseca, 5–40 °C), Carsystem 2K Clear VOC 420 (V09, 11/2019: 18 meseci u zatvorenom originalnom pakovanju na 20 °C, +10 do +30 °C, ne ispod +5 °C), Carsystem Acryl Thinner (03/2021: 24 meseca u neotvorenom pakovanju), baslac 45 Line (03/2026), R-M A 2560 (07/2026), baslac 80-20 (06/2023) i bezbednosni listovi Norbin N15-V20 (3.0, 0–35 °C) i R-M H 2P15 (4.0). Neslaganje N15-V20 potvrđeno. Ispravljeno: opšta tvrdnja da rok važi za zatvoreno pakovanje vezana za Carsystem listove koji to navode (Norbin list to ne piše), A 2560 opisan kao pojačivač koji se tonira bojom AGILIS, neslaganje N15-V20 prikazano i u tabeli, a preklapanje 5–35 °C označeno kao urednička napomena. Stručna potvrda opravdana: suština pitanja (rok otvorenog pakovanja) nema izvor, a za N15-V20 izvori su protivrečni."
 strucnaPotvrda:
   potrebna: true
-  razlog: "Nijedan pregledani tehnički ni bezbednosni list ne daje rok za otvoreno, delimično potrošeno pakovanje laka, učvršćivača ili razređivača; rok se odnosi na zatvoreno originalno pakovanje. Rokovi postoje samo za zamešanu baznu boju (baslac 45 Line, R-M A 2560). Šta firma preporučuje kupcu za otvorena pakovanja i kako se proverava star materijal treba da potvrdi stručnjak ili tehnička podrška proizvođača."
+  razlog: "Nijedan pregledani tehnički ni bezbednosni list ne daje rok za otvoreno, delimično potrošeno pakovanje laka, učvršćivača ili razređivača; rok se odnosi na zatvoreno originalno pakovanje. Za Norbin N15-V20 tehnički list (5–40 °C) i bezbednosni list (0–35 °C) navode različitu temperaturu skladištenja. Rokovi postoje samo za zamešanu baznu boju (baslac 45 Line, R-M A 2560). Šta firma preporučuje kupcu za otvorena pakovanja i kako se proverava star materijal treba da potvrdi stručnjak ili tehnička podrška proizvođača."
   status: potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Rok iz tehničkog lista važi za zatvoreno originalno pakovanje, čuvano pod uslovima koje list navodi. Za otvorena, delimično potrošena pakovanja laka, učvršćivača i razređivača u listovima koje smo pregledali nema posebnog roka. Rok postoji samo za neke zamešane bazne boje: za baslac 45 Line do 6 meseci, za R-M A 2560 do 3 meseca, u odgovarajućim zatvorenim posudama[^baslac-45-line-tds][^rm-a2560-tds]. Kada je pakovanje otvoreno, najvažnije je kako je čuvano, a ne samo datum.
+Rok iz tehničkog lista odnosi se na neotvoreno originalno pakovanje, čuvano pod uslovima koje list navodi; Carsystem to izričito piše za bezbojni lak 2K Clear VOC 420 i za Acryl Thinner[^carsystem-clear-420-tds][^carsystem-acryl-thinner-tds]. Za otvorena, delimično potrošena pakovanja laka, učvršćivača i razređivača u listovima koje smo pregledali nema posebnog roka. Rok postoji samo za neke mešavine: za baznu boju baslac 45 Line do 6 meseci, za mešavine R-M AGILIS AMPLIFIER A 2560 (pojačivač koji se tonira bojom AGILIS) do 3 meseca, u odgovarajućim zatvorenim posudama[^baslac-45-line-tds][^rm-a2560-tds]. Kada je pakovanje otvoreno, najvažnije je kako je čuvano, a ne samo datum.
 
 ## Rokovi za zatvoreno pakovanje: primeri
 
 | Proizvod | Šta tehnički list navodi |
 | --- | --- |
-| Norbin N15-V20 Clear VOC (bezbojni lak) | rok 24 meseca, skladištenje 5–40 °C[^norbin-n15-v20-tds] |
+| Norbin N15-V20 Clear VOC (bezbojni lak) | rok 24 meseca, skladištenje 5–40 °C[^norbin-n15-v20-tds]; bezbednosni list za isti lak navodi 0–35 °C[^norbin-n15-v20-sds], vidi pitanje na kraju teksta |
 | Carsystem 2K Clear VOC 420 (bezbojni lak) | 18 meseci u zatvorenom originalnom pakovanju na 20 °C; skladištenje i transport +10 do +30 °C, ne ispod +5 °C[^carsystem-clear-420-tds] |
 | Carsystem Acryl Thinner (razređivač) | 24 meseca u neotvorenom originalnom pakovanju[^carsystem-acryl-thinner-tds] |
 
@@ -141,8 +142,8 @@ Na etiketi pakovanja, zajedno sa oznakom serije, a uslovi za taj rok su u tehni�
 
 ### Koliko traje zamešana bazna boja?
 
-Zavisi od sistema. baslac za 45 Line navodi da mešavine traju do 6 meseci u plastičnim posudama ili limenkama sa unutrašnjim premazom[^baslac-45-line-tds]. R-M za A 2560 navodi do 3 meseca u zatvorenim limenkama otpornim na koroziju, plastičnim ili sa unutrašnjim premazom[^rm-a2560-tds]. Za neke aditive važi kraće: za baslac 80-20 list traži da se pripremi samo količina koja će se potrošiti istog dana, jer stajanjem smeše može da se promeni stepen sjaja[^baslac-80-20-tds]. Ovo se odnosi na zamešanu boju bez učvršćivača; posle dodavanja učvršćivača važi vreme upotrebljivosti, vidi [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese).
+Zavisi od sistema. baslac za 45 Line navodi da mešavine traju do 6 meseci u plastičnim posudama ili limenkama sa unutrašnjim premazom[^baslac-45-line-tds]. R-M za mešavine pojačivača A 2560 sa bojom AGILIS navodi do 3 meseca u zatvorenim limenkama otpornim na koroziju, plastičnim ili sa unutrašnjim premazom[^rm-a2560-tds]. Za neke aditive važi kraće: za baslac 80-20 list traži da se pripremi samo količina koja će se potrošiti istog dana, jer stajanjem smeše može da se promeni stepen sjaja[^baslac-80-20-tds]. Ovo se odnosi na zamešanu boju bez učvršćivača; posle dodavanja učvršćivača važi vreme upotrebljivosti, vidi [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese).
 
 ### Šta ako tehnički i bezbednosni list navode različitu temperaturu?
 
-Dešava se. Za Norbin N15-V20 tehnički list navodi skladištenje na 5–40 °C[^norbin-n15-v20-tds], a bezbednosni list 0–35 °C[^norbin-n15-v20-sds]. Uslovi u kojima se oba raspona poklapaju zadovoljavaju oba dokumenta. Ako to nije moguće, pitajte proizvođača koji podatak važi.
+Dešava se. Za Norbin N15-V20 tehnički list (01/2022) navodi skladištenje na 5–40 °C[^norbin-n15-v20-tds], a bezbednosni list (verzija 3.0, 24.06.2021) 0–35 °C[^norbin-n15-v20-sds]. Koji podatak važi, nismo mogli da utvrdimo iz dokumenata. Urednička napomena: temperatura u kojoj se oba raspona preklapaju, 5–35 °C, ne odstupa ni od jednog dokumenta[^norbin-n15-v20-tds][^norbin-n15-v20-sds]. Ako magacin ne može da je obezbedi, pitajte proizvođača koji podatak važi.

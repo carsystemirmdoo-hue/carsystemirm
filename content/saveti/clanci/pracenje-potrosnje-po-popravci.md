@@ -45,18 +45,20 @@ izvori:
     pristupljeno: 2026-10-08
     tip: sajt-proizvodjaca
   - id: zakon-otpad-rs
-    naziv: "Zakon o upravljanju otpadom („Službeni glasnik RS“, br. 36/2009, 88/2010, 14/2016, 95/2018 – dr. zakon i 35/2023)"
-    url: https://pravno-informacioni-sistem.rs/eli/rep/sgrs/skupstina/zakon/2009/36/14/reg
+    naziv: "Zakon o upravljanju otpadom („Službeni glasnik RS“, br. 109/2025)"
+    url: https://pravno-informacioni-sistem.rs/eli/rep/sgrs/skupstina/zakon/2025/109/35/reg
+    datumIzvora: 2025-12-04
     pristupljeno: 2026-10-08
     tip: propis
-    napomena: "Prečišćen tekst otvoren u Pravno-informacionom sistemu RS; čl. 22 (Agencija za zaštitu životne sredine), čl. 26 tač. 8 (evidencija o otpadu), čl. 75 st. 1 (dnevna evidencija i godišnji izveštaj Agenciji)."
+    napomena: "Tekst otvoren u Pravno-informacionom sistemu RS; zakon je stupio na snagu 12. 12. 2025. i zamenio Zakon 36/2009…35/2023. Korišćeni članovi: čl. 35 st. 1 tač. 7 (evidencija o otpadu), čl. 94 st. 1 (dnevna evidencija i godišnji izveštaj Agenciji za zaštitu životne sredine)."
 prioritet: 224
 razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene R-M stranice Brand offering (Refinity: zalihe i radni nalozi), Digital color search i vest od 26. 5. 2025; Zakon o upravljanju otpadom 36/2009…35/2023 je na Pravno-informacionom sistemu označen kao nevažeći, pa je izvor prevezan na Zakon 109/2025 (čl. 35 st. 1 tač. 7, čl. 94 st. 1; obaveza je sada formulisana za držaoca otpada). Ispravljeno: Eco Impact Assessment pripisan BASF Coatings po vremenu objave (26. 5. 2025), uz izričito da dostupnost u Srbiji nije potvrđena. Stručna potvrda opravdana: spisak podataka i postupak beleženja su urednička procena bez izvora proizvođača."
 strucnaPotvrda:
   potrebna: true
   razlog: "Proizvođači iz našeg programa ne objavljuju javno postupak za praćenje potrošnje po nalogu; R-M samo opisuje da Refinity ima upravljanje zalihama i nalozima. Spisak podataka i način beleženja u tekstu su urednička procena i treba da ih potvrdi neko ko vodi obračun u radionici ili tehnička podrška dobavljača."
@@ -99,8 +101,8 @@ Ovo su pokazatelji za razgovor u radionici, a ne dijagnoza. Uzrok odstupanja mo�
 
 ### Postoje li programi koji to rade?
 
-Proizvođači boja imaju digitalne platforme. R-M za Refinity navodi, između ostalog, upravljanje zalihama i radnim nalozima[^rm-brand-offering], a alat Eco Impact Assessment u okviru Refinity opisuje kao procenu tokova materijala u radionici, uključujući upotrebu proizvoda i upravljanje otpadom; uveden je prvo u Švajcarskoj, Austriji, Belgiji i Holandiji[^rm-eco-impact-2025]. R-M navodi i povezivanje digitalnog utvrđivanja nijanse sa mešaonicom[^rm-digital-color-search]. Da li su ovi alati dostupni u Srbiji i šta tačno beleže, proverite kod dobavljača; za početak je dovoljna i tabela.
+Proizvođači boja imaju digitalne platforme. R-M za Refinity navodi, između ostalog, upravljanje zalihama i radnim nalozima[^rm-brand-offering], BASF Coatings je 26. maja 2025. predstavio alat Eco Impact Assessment u okviru Refinity, opisan kao procena tokova materijala u radionici, uključujući upotrebu proizvoda i upravljanje otpadom; uvođenje je najavljeno najpre za kupce u Švajcarskoj, Austriji, Belgiji i Holandiji[^rm-eco-impact-2025]. R-M navodi i povezivanje digitalnog utvrđivanja nijanse sa mešaonicom[^rm-digital-color-search]. Dostupnost ovih alata u Srbiji nije potvrđena; šta tačno beleže i da li se mogu koristiti kod nas, proverite kod dobavljača. Za početak je dovoljna i tabela.
 
 ### Da li je evidencija otpada isto što i evidencija potrošnje?
 
-Ne, ali se dopunjuju. Zakon o upravljanju otpadom traži od proizvođača otpada, osim domaćinstava, da vodi dnevnu evidenciju o otpadu i dostavlja godišnji izveštaj Agenciji za zaštitu životne sredine[^zakon-otpad-rs]. Evidencija potrošnje je interna i služi radionici. Ako u zapisu potrošnje beležite i šta je otišlo u otpad, lakše je i voditi evidenciju otpada. Šta se sa otpadom radi, piše u vodiču [Otpad od boja i razređivača](/vodici/otpad-od-boja-i-razredjivaca).
+Ne, ali se dopunjuju. Zakon o upravljanju otpadom traži od držaoca otpada, osim za otpad iz domaćinstava, da vodi dnevnu evidenciju o otpadu i dostavlja godišnji izveštaj Agenciji za zaštitu životne sredine[^zakon-otpad-rs]. Evidencija potrošnje je interna i služi radionici. Ako u zapisu potrošnje beležite i šta je otišlo u otpad, lakše je i voditi evidenciju otpada. Šta se sa otpadom radi, piše u vodiču [Otpad od boja i razređivača](/vodici/otpad-od-boja-i-razredjivaca).

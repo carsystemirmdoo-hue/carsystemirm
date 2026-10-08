@@ -89,8 +89,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Digital color search (procena zapremine po delu, bez ponovnog mešanja zbog prelivanja), tehnički listovi R-M A 2560 (07/2026), baslac 45 Line (03/2026) i 80-20 (06/2023), Carsystem CPS 2.0 (V01, 03/2024), C.A.R.FIT FPS, SATA RPS stranica i baslac 40-100 SDS (5.0); sve tvrdnje odgovaraju izvorima. Ispravljeno: A 2560 opisan kao pojačivač koji se tonira bojom AGILIS (nije bazna boja), dopunjena vrsta limenki iz lista. Preklapanje sa SV-0194 i SV-0198 ograničeno na kratke primere uz linkove."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -105,7 +106,7 @@ Otpad pri mešanju se smanjuje na dva načina: zameša se manje viška, a višak
 2. **Merite na vagi.** Bazna boja po recepturi meri se po težini; tako se lakše zameša mala količina bez greške u nijansi. Vidi [Zašto se bazna boja meša na vagi](/vodici/mesanje-baze-na-vagi).
 3. **Učvršćivač dodajte tek kada ćete nanositi.** Posle dodavanja učvršćivača počinje vreme upotrebljivosti smeše, posle koga se materijal više ne može pravilno naneti. Ako posao traje duže, mešajte u više navrata; vidi [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese).
 4. **Proverite pravila za aditive.** Neki aditivi traže da se zameša samo dnevna količina. baslac za aditiv za matiranje 80-20 navodi da se pripremi samo količina koja će se potrošiti istog dana, jer stajanjem smeše može da se promeni stepen sjaja[^baslac-80-20-tds].
-5. **Sačuvajte zamešanu baznu boju kada list to dozvoljava.** Za baslac 45 Line mešavine traju do 6 meseci u plastičnim posudama ili limenkama sa unutrašnjim premazom[^baslac-45-line-tds]. Za R-M A 2560 mešavine traju do 3 meseca u zatvorenim limenkama otpornim na koroziju, a R-M navodi i da se ostaci mešavina mogu iskoristiti da se izbegne dodatni otpad[^rm-a2560-tds]. Posudu označite nazivom nijanse, recepturom i datumom.
+5. **Sačuvajte zamešanu baznu boju kada list to dozvoljava.** Za baslac 45 Line mešavine traju do 6 meseci u plastičnim posudama ili limenkama sa unutrašnjim premazom[^baslac-45-line-tds]. Za R-M AGILIS AMPLIFIER A 2560, pojačivač koji se tonira bojom AGILIS, mešavine traju do 3 meseca u zatvorenim limenkama otpornim na koroziju (plastičnim ili sa unutrašnjim premazom), a R-M navodi i da se ostaci mešavina mogu iskoristiti da se izbegne dodatni otpad[^rm-a2560-tds]. Posudu označite nazivom nijanse, recepturom i datumom.
 6. **Ne vraćajte ostatak u originalno pakovanje.** Bezbednosni listovi to izričito zabranjuju[^baslac-40-100-sds].
 7. **Ostatak koji se ne može iskoristiti predajte kao otpad.** Vidi [Otpad od boja i razređivača](/vodici/otpad-od-boja-i-razredjivaca).
 

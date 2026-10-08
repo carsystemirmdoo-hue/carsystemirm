@@ -66,8 +66,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Paint Defects: Dust particles (uzroci i prevencija), HSE Measuring clearance times i 2-pack isocyanate paints (potpritisak, dnevne i nedeljne provere, vreme provetravanja na vratima), bezbednosni listovi baslac 40-100 (5.0) i R-M C 2A40 (4.0); tvrdnje odgovaraju izvorima. Ispravljeno: zaključak da merenje pre zamene pokazuje uticaj zaprljanih filtera označen kao urednička napomena (HSE ga ne navodi), upozorenje iz bezbednosnih listova vraćeno na uslov iz izvora (tokom lakiranja i dok koncentracija ne padne), dva uzroka iz baslac stranice razdvojena. Filteri i kabine nisu u programu: proizvodi se ne navode i ne preporučuju. Stručna potvrda opravdana: intervali i domaće obaveze ispitivanja ventilacije nemaju izvor za Srbiju."
 strucnaPotvrda:
   potrebna: true
   razlog: "Filteri i kabine nisu u našem programu, a uputstvo proizvođača kabine nije pregledano. Intervali zamene, granične vrednosti pritiska i plan održavanja zavise od proizvođača kabine i filtera; tekst ih namerno ne navodi. Tekst se oslanja na baslac (prašina) i britanski HSE (vreme provetravanja), pa domaće obaveze (pregled i ispitivanje ventilacije) treba da potvrdi stručno lice za bezbednost na radu."
@@ -79,7 +80,7 @@ Kabina za lakiranje radi ispravno samo kada vazduh ulazi i izlazi onako kako je 
 
 ## Kako prljavi filteri utiču na lak
 
-baslac među uzrocima prašine u laku navodi i problem u kabini kada prljavi filteri izazovu nepravilan dovod vazduha, odsis i pritisak, kao i usisavanje zaprljanog vazduha spolja, na primer ostataka od poliranja i fine prašine[^baslac-dust-particles]. Kao prevenciju navodi redovno održavanje i zamenu filtera kabine i odvajanje prostora za poliranje od lakirnice filtriranim i provetravanim sistemima[^baslac-dust-particles].
+baslac među uzrocima prašine u laku navodi problem u kabini kada prljavi filteri izazovu nepravilan dovod vazduha, odsis i pritisak, a kao poseban uzrok usisavanje zaprljanog vazduha spolja, na primer ostataka od poliranja i fine prašine[^baslac-dust-particles]. Kao prevenciju navodi redovno održavanje i zamenu filtera kabine i odvajanje prostora za poliranje od lakirnice filtriranim i provetravanim sistemima[^baslac-dust-particles].
 
 Prašina u laku ima i druge moguće uzroke: loše očišćenu podlogu i kombinezon ili krpe koje puštaju vlakna[^baslac-dust-particles]. Zato se pri prašini u laku ne zaključuje odmah da su krivi filteri. Kako se proverava uzrok i šta se radi sa trunjem, objašnjava vodič [Prašina i trunje u laku](/vodici/prasina-i-trunje-u-laku).
 
@@ -88,16 +89,16 @@ Prašina u laku ima i druge moguće uzroke: loše očišćenu podlogu i kombinez
 Ovo je opšti pregled; tačan spisak i intervale daje uputstvo Vaše kabine.
 
 - **Filteri na ulazu, na plafonu i na izlazu.** Svaki ima svoju namenu i svoj tempo zaprljanja. Menjaju se prema uputstvu proizvođača kabine i prema pokazivaču pritiska ako ga kabina ima.
-- **Podpritisak u kabini.** Britanski regulator HSE savetuje da kabina radi u blagom podpritisku, da bi kroz eventualne propuste vazduh ulazio u kabinu, a ne da magla od boje izlazi u radionicu[^hse-isocyanates].
+- **Potpritisak u kabini.** Britanski regulator HSE savetuje da kabina radi u blagom potpritisku, da bi kroz eventualne propuste vazduh ulazio u kabinu, a ne da magla od boje izlazi u radionicu[^hse-isocyanates].
 - **Dnevne i nedeljne provere.** HSE predlaže spisak jednostavnih dnevnih i nedeljnih provera, osobu koja ih obavlja i zapis nalaza[^hse-isocyanates].
 - **Čistoća kabine i okoline.** Kabina nije magacin; prašina sa poda, sa zidova i sa delova koji se unose ulazi u vazdušni tok.
 - **Ciklus sušenja.** Ako kabina i suši, i taj deo ima svoja podešavanja; vidi [Sušenje u kabini](/vodici/susenje-u-kabini).
 
 ## Vreme provetravanja kabine
 
-HSE objašnjava da kabini treba vremena da se očisti od magle boje i preporučuje da se to vreme izmeri dimom ili generatorom magle, istakne na vratima i da ga zna svako ko koristi kabinu[^hse-isocyanates]. Prema HSE, vreme provetravanja proverava se neposredno pre zamene filtera[^hse-clearance-time]. Tako se vidi koliko zaprljani filteri usporavaju provetravanje.
+HSE objašnjava da kabini treba vremena da se očisti od magle boje i preporučuje da se to vreme izmeri dimom ili generatorom magle, istakne na vratima i da ga zna svako ko koristi kabinu[^hse-isocyanates]. Prema HSE, vreme provetravanja proverava se neposredno pre zamene filtera[^hse-clearance-time]. Urednička napomena: filteri su tada najviše zaprljani, pa merenje pokazuje vreme u najnepovoljnijem stanju.
 
-Ovo je bitno i za zaštitu lakirera. Bezbednosni listovi R-M i baslac upozoravaju da ventilacija u kabini verovatno nije dovoljna da u svim slučajevima kontroliše čestice i pare rastvarača, pa ko radi u kabini, i kada ne lakira, treba da nosi zaštitu disanja sa dovodom vazduha dok koncentracija ne padne ispod graničnih vrednosti[^baslac-40-100-sds][^rm-c2a40-sds].
+Ovo je bitno i za zaštitu lakirera. Bezbednosni listovi R-M i baslac upozoravaju da ventilacija u kabini verovatno nije dovoljna da u svim slučajevima kontroliše čestice i pare rastvarača, pa ko mora da radi u kabini, i kada sam ne lakira, treba da nosi zaštitu disanja sa dovodom vazduha tokom lakiranja i dok koncentracija čestica i para ne padne ispod graničnih vrednosti[^baslac-40-100-sds][^rm-c2a40-sds].
 
 ## Ograničenja
 

@@ -65,5 +65,19 @@ Vidi odeljak „Stanje“ na dnu ovog dokumenta. Ažurira se posle svake serije.
 
 ## Stanje
 
-- 2026-10-08 (checkpoint): pogledajte `INVENTAR.md` za tačne brojeve. U toku su serije pisanja i recenzije: lakovi, pištolji (deo 1), brušenje (deo 2), boje (deo 2), uslovi (deo 2), recenzije pripreme (deo 1), tehničke dokumentacije i prajmera. Nenapisane teme: maskiranje, greške, poliranje, zaštita na radu, radionica, sprejevi, korozija i pištolji (deo 2). Sledeće: dovršiti pisanje i recenzije po `PROCES_PISANJA.md` (uputstva za pisca i recenzenta su u `tmp/saveti/brief-*.md`, van git-a), zatim `saveti:plan` i odobrenje.
-- 2026-10-08: postoji infrastruktura, inventar od 224 teme i 1 pilot-tekst. Pisanje teče u serijama (vidi `INVENTAR.md`). Ništa nije odobreno. Raspored je **probni** (`aktivan: false`, pretpostavljeni početak 2026-11-02 u 09:00).
+**2026-10-08 — sadržaj završen do nivoa „čeka odobrenje“.**
+
+| Pokazatelj | Broj |
+| --- | ---: |
+| Teme u inventaru | 224 (9 novosti, 215 trajnih vodiča) |
+| Napisano | 224 |
+| Jezički provereno | 224 |
+| Tehnički provereno (urednička, AI-asistirana provera prema izvorima) | 184 |
+| Čeka stručnu potvrdu (van rasporeda) | 40 — spisak i razlozi u [STRUCNA_POTVRDA.md](STRUCNA_POTVRDA.md) |
+| Odobreno od imenovane osobe | 0 |
+| U probnom kalendaru | 184 termina, 2026-11-02 09:00 → 2028-05-04 09:00 |
+
+- Raspored je **probni** (`aktivan: false`); početni datum je pretpostavka. Ništa se ne objavljuje dok imenovana osoba ne odobri tekstove i dok se raspored ne aktivira (vidi „Aktivacija“).
+- Novosti imaju `proveraVaziDo: 2026-12-07`. Ako se aktivacija odloži posle tog datuma, novosti treba ponovo proveriti (planer ih inače izostavlja).
+- Srpski propisi citirani u tekstovima provereni su 2026-10-08 u Pravno-informacionom sistemu (novi Zakon o upravljanju otpadom 109/2025, Pravilnik 95/2024, Zakon o zaštiti potrošača 35/2026, VOC pravilnik do 82/2026).
+- Sledeći koraci: (1) stručna osoba prolazi `STRUCNA_POTVRDA.md`; (2) imenovana osoba čita i odobrava tekstove (`saveti:odobri`); (3) aktivacija rasporeda i `CRON_SECRET`; (4) deployment uz odobrenje vlasnika.

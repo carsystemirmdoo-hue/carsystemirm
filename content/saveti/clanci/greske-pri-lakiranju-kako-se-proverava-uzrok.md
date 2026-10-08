@@ -116,11 +116,12 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene baslac stranice Loss of gloss, Orange peel, Solvent boil i Loss of adhesion, javni deo R-M Help Centre (Cratering, Crinkling, Solvent boils, Pinhole marks, Blistering, Solvent test, Sand through), SATA Practical advice, R-M C 2A40 (lokalno 07/2026; na techinfo je 09/2026 sa istim vrednostima), baslac 40-100 (06/2026) i Glasurit tabela rose (1,8 °C pri 20 °C i 90 %); vrednosti se poklapaju. Ispravljeno: za 40-100 dodato da je pola sloja i pun sloj bez odzračivanja drugi način nanošenja, da poređenje sa C 2A40 ne bi bilo jednostrano."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

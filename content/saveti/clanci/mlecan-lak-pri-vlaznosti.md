@@ -76,11 +76,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni PPG Blushing (keš, potvrđen), C 2A40, Speed Plus (V06), R-M H 2P05 (07/2026), baslac Loss of gloss i Cosmos Lac Metal Varnish (02, 17/06/2026); vrednosti se poklapaju. Ispravljeno: znaci greške dobili PPG opis i oznaku uredničkog opisa, „neodgovarajući“ → „nekvalitetan“ razređivač prema PPG, upozorenje o vlazi vezano za list H 2P05, „ponavlja se“ ublaženo."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

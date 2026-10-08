@@ -108,7 +108,7 @@ Sprej se koristi samo kada su vazduh, deo i limenka u temperaturnom opsegu iz te
 
 ## Kako se limenka bezbedno temperira
 
-Proizvođači iz našeg programa navode isti princip: limenka treba da bude na sobnoj temperaturi, a do nje treba da dođe postepeno.
+Proizvođači čiji su listovi navedeni u tabeli opisuju isti princip: limenka treba da bude na sobnoj temperaturi, a do nje treba da dođe postepeno.
 
 | Izvor | Šta navodi |
 | --- | --- |
@@ -131,7 +131,7 @@ Cosmos Lac za hladno vreme savetuje mućkanje najmanje 3 min posle trenutka kada
 
 ### Zašto se sprej ne greje na plamenu ili radijatoru?
 
-Zato što je limenka posuda pod pritiskom sa zapaljivim sadržajem. Bezbednosni list C.A.R.FIT laka u spreju navodi da je reč o izuzetno zapaljivom aerosolu i da posuda pod pritiskom može da pukne ako se zagreje, da se drži dalje od toplote, vrelih površina, varnica i otvorenog plamena i da se ne izlaže temperaturi iznad 50 °C[^cf-clearcoat-sds]. Carsystem navodi da se limenka ne čuva na temperaturi iznad 50 °C[^cs-rallye-tds], a C.A.R.FIT u tehničkim listovima sprejeva da se ne čuva iznad 35 °C[^cf-black-paint-tds]. Na radijatoru ili pored grejalice temperatura limenke se ne može kontrolisati, a zagrevanje je neravnomerno. Proizvođači koje smo pregledali ne navode ni zagrevanje u vodi; navode samo postepeno dovođenje na sobnu temperaturu.
+Zato što je limenka posuda pod pritiskom sa zapaljivim sadržajem. Bezbednosni list C.A.R.FIT laka u spreju navodi da je reč o izuzetno zapaljivom aerosolu i da posuda pod pritiskom može da pukne ako se zagreje, da se drži dalje od toplote, vrelih površina, varnica i otvorenog plamena i da se ne izlaže temperaturi iznad 50 °C[^cf-clearcoat-sds]. Carsystem navodi da se limenka ne čuva na temperaturi iznad 50 °C[^cs-rallye-tds], a C.A.R.FIT u tehničkim listovima sprejeva da se ne čuva iznad 35 °C[^cf-black-paint-tds]. Opšte objašnjenje: na radijatoru ili pored grejalice temperatura limenke se ne može kontrolisati, a zagrevanje je neravnomerno. Ni potapanje u toplu vodu nije zamena: nijedan od navedenih listova ga ne predviđa, a Carsystem traži da proizvod do temperature nanošenja dođe prirodno, bez naglog zagrevanja[^cs-plastic-primer-tds]. Limenka se zato samo unese u toplu prostoriju i ostavi da se postepeno ugreje.
 
 ### Sme li sprej da prezimi u garaži?
 

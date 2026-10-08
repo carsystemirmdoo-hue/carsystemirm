@@ -78,11 +78,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Glasurit rečnik (Dry Spraying) i odeljak o brzini vazduha u kabini, R-M Overspray i Spraydust (javni opis), SATA Practical advice (10–15 / 17–21 cm, redosled podešavanja), SATAjet X 5500 (opseg 10–21 cm), 40-100 i TempChart VOC; vrednosti se poklapaju. Ispravljeno: mehanizam, razlika prema preprašivanju i pravilo o brušenju označeni kao opšte objašnjenje ili urednička razlika."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

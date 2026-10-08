@@ -65,11 +65,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni PPG Cobwebbing (keš, potvrđen), Cosmos Lac Prefilled Spray (02, 18/06/2026) i Metal Varnish, Carsystem Clear Coat Spray (v.02: mućkanje 3 min, 20–30 cm) i Speed Plus (16–18 s DIN 4); vrednosti se poklapaju. Ispravljeno: „u praksi“ i odgovor o spreju označeni kao opšte objašnjenje, savet o probi označen kao urednički."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

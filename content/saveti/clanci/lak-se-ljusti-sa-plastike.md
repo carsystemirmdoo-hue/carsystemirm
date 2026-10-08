@@ -3,7 +3,7 @@ id: SV-0165
 slug: lak-se-ljusti-sa-plastike
 naslov: Lak se ljušti sa plastičnog dela
 metaNaslov: "Lak se ljušti sa plastičnog branika: uzroci"
-opis: "Mogući uzroci ljuštenja boje i laka sa plastičnih delova posle nekoliko meseci, kako se uzrok proverava i šta baslac, R-M i Carsystem navode o sanaciji."
+opis: "Mogući uzroci ljuštenja boje i laka sa plastičnih delova posle nekoliko meseci, kako se uzrok proverava i šta baslac i R-M navode o sanaciji."
 kategorija: greske-pri-lakiranju
 podtema: prianjanje na plastiku
 tip: resavanje-problema
@@ -81,11 +81,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Peeling of plastic parts, Plastic Repair System VOC (10/2024), 21-20 (06/2023), 80-10 (06/2023), R-M Plastics flaking (javni opis) i Plastics cracking (javna stranica), Carsystem Plastic Primer (V03: nije za PE i PC); vrednosti se poklapaju. Ispravljeno: „ukazuje“ → „može da ukaže“, „u praksi se vidi“ zamenjeno uredničkim opisom znakova, zaključci ublaženi, iz opisa uklonjen Carsystem kao izvor sanacije."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

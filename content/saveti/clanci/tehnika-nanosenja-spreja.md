@@ -10,7 +10,7 @@ tip: postupak
 publika:
   - pocetnik
   - hobista
-glavnoPitanje: Kako se pravilno nanosi boja iz spreja da ne bi curila i ostala fleka?
+glavnoPitanje: "Kako se pravilno nanosi boja iz spreja: koliko se mućka, na kom rastojanju i u koliko slojeva?"
 namera: postupak
 dodatnaPitanja:
   - Koliko dugo se mućka?
@@ -134,7 +134,7 @@ Sprej se mućka onoliko koliko navodi njegov tehnički list, proba se na probnoj
 
 ## Mućkanje
 
-Limenka sadrži boju i potisni gas. Cosmos Lac objašnjava da se mućka da bi se boja dobro izmešala sa gasom, jer se u suprotnom ventil zapuši i sprej prestane da radi[^cosmos-blog-shake]. Pigmenti se tokom stajanja talože, pa nepromućkan sprej daje neujednačenu boju.
+Limenka sadrži boju i potisni gas. Cosmos Lac objašnjava da se mućka da bi se boja dobro izmešala sa gasom, jer se u suprotnom ventil zapuši i sprej prestane da radi[^cosmos-blog-shake]. Pigmenti moraju dobro da se izmešaju, jer nepromućkan sprej daje neujednačenu pokrivnost i curenje[^cosmos-blog-shake].
 
 | Proizvod | Koliko dugo prema izvoru |
 | --- | --- |
@@ -176,11 +176,11 @@ Vremena sušenja u listu Cosmos Lac RAL važe za jedan sloj na 20 °C i vlažnos
 
 ### Koliko dugo se mućka?
 
-Koliko navodi list. U listovima koje smo pregledali to je najmanje 2–3 min[^cosmos-easy-max-tds][^cf-black-paint-tds], a kod nekih proizvoda vreme se računa od trenutka kada se čuje kuglica[^cs-plastic-primer-tds]. Za gušće proizvode, kao što je cink sprej, list posebno naglašava duže mućkanje[^cosmos-zinc-maximum-tds].
+Koliko navodi list. U listovima iz tabele to je 2–3 min[^cosmos-easy-max-tds] ili najmanje 2 min[^cf-black-paint-tds], a kod nekih proizvoda vreme se računa od trenutka kada se čuje kuglica[^cs-plastic-primer-tds]. Za gušće proizvode, kao što je cink sprej, list posebno naglašava duže mućkanje[^cosmos-zinc-maximum-tds].
 
 ### Na kom rastojanju se drži?
 
-Kod većine sprejeva iz tabele 25–30 cm[^cosmos-ral-tds], ali sprejevi sa posebnim kapicama i 2K sprejevi traže manje rastojanje. Proverite list ili ambalažu.
+Za Cosmos Lac RAL 25–30 cm[^cosmos-ral-tds], dok sprejevi sa posebnim kapicama iz tabele traže 4–10 cm[^cosmos-easy-max-tds][^cosmos-spray-bike-tds], a Carsystem 2K High-Speed Clearcoat Spray 15–20 cm[^cs-2k-hs-spray-tds]. Proverite list ili ambalažu Vašeg spreja.
 
 ### Čemu služe različite kapice?
 

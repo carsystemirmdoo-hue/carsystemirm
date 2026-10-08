@@ -77,11 +77,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Runs, R-M Runs (javni opis), CC.26 (4–6 min, 90–100 µm, ispod 18 °C, poliranje 3–4 h / 15 min), C 2P42 i C 2A40 (07/2026) i Carsystem Finish (V01, 05/2020); vrednosti se poklapaju. Ispravljeno: urednička procena o mestu curenja ublažena, za C 2P42 dodat drugi način (1½ sloja bez odzračivanja), „obično ošteti“ → „može da ošteti“."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

@@ -49,6 +49,12 @@ izvori:
     datumIzvora: 2026-09-09
     pristupljeno: 2026-10-08
     tip: katalog-proizvodjaca
+  - id: cs-c10-tds
+    naziv: "Carsystem, Technical Datasheet CS Polish C-10 strong"
+    url: https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-c-10-strong.pdf
+    verzija: "V01, 09/2014"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
   - id: cs-c30-tds
     naziv: "Carsystem, Technical Datasheet CS Polish C-30 finish"
     url: https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-c-30-finish.pdf
@@ -83,15 +89,16 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem katalog 2026/27 (C-30, Finish Foam White/Black AH), Polish C-30 V01 (09/2014), Step 2 V01 (06/2019), Finish Control Foam C-99 V01 (03/2021), Refinish 1 v.02 (03/2021), brošura X serije i RUPES stranica LH19E; navodi se poklapaju, uzroci su dati kao mogući, sa koracima provere. Ispravljeno (3): rad na zagrejanom delu odvojen od navoda iz listova (listovi C-10 i C-30 navode samo direktno sunce), uz dodat citat C-10; preporuka ekscentarske mašine za završni korak označena kao urednička procena; uvodni opis holograma označen kao opšte objašnjenje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Hologrami su fini kružni tragovi koje u laku ostavljaju abrazivna pasta, sunđer i pokret mašine. Najbolje se vide na tamnim bojama, pod suncem ili jakim tačkastim svetlom. Uklanjaju se završnim korakom: finom pastom protiv holograma i mekim sunđerom. Carsystem Polish C-30 finish, na primer, namenjuje uklanjanju najfinijih ogrebotina, kružnih tragova i holograma na tamnim bojama, kao poslednji korak[^cs-katalog].
+Opšte objašnjenje: hologrami su fini kružni tragovi koje u laku ostavljaju abrazivna pasta, sunđer i pokret mašine. Najbolje se vide na tamnim bojama, pod suncem ili jakim tačkastim svetlom. Uklanjaju se završnim korakom: finom pastom protiv holograma i mekim sunđerom. Carsystem Polish C-30 finish, na primer, namenjuje uklanjanju najfinijih ogrebotina, kružnih tragova i holograma na tamnim bojama, kao poslednji korak[^cs-katalog].
 
 ## Mogući uzroci i kako se proveravaju
 
@@ -112,13 +119,13 @@ Konačan uzrok zavisi od laka, paste, sunđera i načina rada, pa je ovo spisak 
 2. **Izaberite završnu pastu.** Za Polish Step 2 fine Carsystem navodi da uklanja holograme[^cs-step2-tds], a za C-30 finish da lake do srednje ogrebotine uklanja bez holograma[^cs-c30-tds].
 3. **Uzmite mek, čist sunđer.** C-30 radi uz Finish Sandwich Pad C-30, a u katalogu se preporučuju i Finish Foam White AH i Finish Foam Black AH[^cs-katalog].
 4. **Radite smireno,** sa malim pritiskom na kraju, dok se površina ne očisti od zamućenja. Brzinu uzmite iz tehničkog lista paste.
-5. **Proverite ponovo** posle brisanja. Ako tragovi ostaju na tamnoj boji, ekscentarska mašina u završnom koraku je blaža opcija; razlike opisuje vodič [Rotaciona ili ekscentarska polir mašina](/vodici/rotaciona-ili-ekscentarska-polir-masina).
+5. **Proverite ponovo** posle brisanja. Ako tragovi ostaju na tamnoj boji, ekscentarska mašina u završnom koraku je, prema uredničkoj proceni zasnovanoj na opisu pokreta kod RUPES-a, blaža opcija; razlike opisuje vodič [Rotaciona ili ekscentarska polir mašina](/vodici/rotaciona-ili-ekscentarska-polir-masina).
 
 Kako se završna pasta razlikuje od abrazivne, objašnjava vodič [Abrazivna i završna pasta za poliranje](/vodici/abrazivna-i-zavrsna-pasta). Carsystem X serija ima poseban završni korak protiv holograma, opisan u vesti [Carsystem X serija za poliranje](/vodici/carsystem-x-serija-za-poliranje).
 
 ## Ograničenja
 
-Izbegavajte rad na direktnom suncu i na zagrejanom delu; tehnički listovi Carsystem pasta to izričito navode[^cs-c30-tds]. Ako su tragovi duboki ili se ponavljaju i posle završnog koraka, uzrok je verovatno u ranijoj fazi, pa se vraća korak unazad.
+Izbegavajte rad na direktnom suncu; tehnički listovi pasta C-10 strong i C-30 finish to izričito navode[^cs-c10-tds][^cs-c30-tds]. Ni zagrejan deo nije dobra podloga za završni korak; ovo je opšte objašnjenje. Ako su tragovi duboki ili se ponavljaju i posle završnog koraka, uzrok je verovatno u ranijoj fazi, pa se vraća korak unazad.
 
 ## Pitanja i odgovori
 

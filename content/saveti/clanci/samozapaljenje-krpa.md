@@ -13,7 +13,7 @@ publika:
 glavnoPitanje: Zašto krpe natopljene materijalima mogu da se zapale i kako se to sprečava?
 namera: informativna
 dodatnaPitanja:
-  - Gde se odlaže zauljeni otpad?
+  - Gde se odlažu zaprljane krpe i ostaci materijala?
   - Da li se krpe sa razređivačem same pale?
   - Sme li ostatak učvršćivača u kantu sa drugim otpadom?
 poreklopitanja:
@@ -70,16 +70,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Bezbednosni listovi iz našeg programa koje smo otvorili ne opisuju samozapaljenje krpa natopljenih tim proizvodima; EU-OSHA samozapaljenje pominje samo uopšteno (tekstil sa mastima koje se razgrađuju). Vrstu posude za zaprljane krpe, način čuvanja do predaje i obaveze prema propisima o zaštiti od požara i upravljanju otpadom u Srbiji treba da potvrdi stručnjak za zaštitu od požara, odnosno za bezbednost i zdravlje na radu."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni EU-OSHA OSHwiki Prevention of fires and explosions (tekstil sa mastima koje se razgrađuju, hemijska energija kao izvor paljenja, bezbedno odlaganje otpada i skladištenje), SDS R-M H 2P15 (4.0, 15.05.2026; odeljci 6, 7, 9, 10 i 13), Norbin N85-021 (3.0, 13.06.2024; H226, P210, odeljci 9 i 13), C.A.R.FIT Paint Remover Spray SDS (1.0, 05/08/2025; 08 01 11*) i TDS (EN - 1/0121); poklapa se. Ispravke: mehanizam samozapaljenja označen kao opšte objašnjenje, dodato da H 2P15 i N85-021 u odeljku 9 nisu klasifikovani kao samozagrevajući (uz napomenu da to važi za proizvod, ne za krpu), pitanje o „zauljenom otpadu“ preformulisano jer odgovor govori o krpama i ostacima materijala. Stručna potvrda ostaje opravdana: posuda za krpe i obaveze prema propisima o zaštiti od požara i otpadu u Srbiji nisu u izvorima."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Krpa može sama da se zapali kada materijal na njoj reaguje sa vazduhom ili sa drugim materijalom i pri tome razvija toplotu koja ne može da se odvede, na primer u gomili ili u zatvorenoj kesi. EU-OSHA među materijama koje se mogu same zapaliti navodi tekstil natopljen mastima koje se razgrađuju[^oshwiki-fires]. Za refinish materijale iz našeg programa bezbednosni listovi koje smo otvorili samozapaljenje ne opisuju, ali opisuju dva srodna rizika: zapaljive pare i reakciju učvršćivača sa drugim materijama uz oslobađanje toplote[^rm-h2p15-sds]. Zato se zaprljane krpe ne gomilaju, drže se dalje od izvora paljenja, a izocijanatni otpad se ne meša sa drugim otpadom.
+Opšte objašnjenje: krpa može sama da se zapali kada materijal na njoj reaguje sa vazduhom ili sa drugim materijalom i razvija toplotu brže nego što se ona odvodi, na primer u gomili ili u zatvorenoj kesi. EU-OSHA među materijama koje se mogu same zapaliti navodi tekstil natopljen mastima koje se razgrađuju[^oshwiki-fires]. Za refinish materijale iz našeg programa bezbednosni listovi koje smo otvorili samozapaljenje ne opisuju; R-M H 2P15 i Norbin N85-021 u odeljku 9 navode da proizvod nije samozagrevajući[^rm-h2p15-sds][^norbin-n85-021-sds]. Listovi opisuju dva srodna rizika: zapaljive pare i reakciju učvršćivača sa drugim materijama uz oslobađanje toplote[^rm-h2p15-sds]. Zato se zaprljane krpe ne gomilaju, drže se dalje od izvora paljenja, a izocijanatni otpad se ne meša sa drugim otpadom.
 
 ## Kako krpa dolazi do požara
 
@@ -113,13 +114,13 @@ Ovaj tekst ne zamenjuje procenu rizika od požara ni propise o upravljanju otpad
 
 ## Pitanja i odgovori
 
-### Gde se odlaže zauljeni otpad?
+### Gde se odlažu zaprljane krpe i ostaci materijala?
 
 Prema odeljku 13 bezbednosnog lista i propisima o upravljanju otpadom. Norbin za razređivač N85-021 navodi da otpad ne sme u kanalizaciju i površinske vode i da se poštuju nacionalni i lokalni propisi[^norbin-n85-021-sds]. Kako se otpad od boja i razređivača razvrstava, opisuje vodič [Otpad od boja i razređivača](/vodici/otpad-od-boja-i-razredjivaca).
 
 ### Da li se krpe sa razređivačem same pale?
 
-Izvori koje smo otvorili to ne tvrde za razređivače iz našeg programa. Za njih je glavni rizik zapaljiva para koja se pali od spoljnog izvora[^norbin-n85-021-sds]. Učvršćivač je drugi slučaj: prema R-M, sa aminima i alkoholima reaguje uz oslobađanje toplote[^rm-h2p15-sds], pa se krpe sa učvršćivačem ne mešaju sa krpama natopljenim drugim materijalima.
+Izvori koje smo otvorili to ne tvrde za razređivače iz našeg programa. Norbin za N85-021 u odeljku 9 navodi da nije materijal sklon samozagrevanju; ta oznaka se odnosi na sam proizvod, ne na krpu natopljenu njime. Glavni rizik je zapaljiva para koja se pali od spoljnog izvora[^norbin-n85-021-sds]. Učvršćivač je drugi slučaj: prema R-M, sa aminima i alkoholima reaguje uz oslobađanje toplote[^rm-h2p15-sds], pa se krpe sa učvršćivačem ne mešaju sa krpama natopljenim drugim materijalima.
 
 ### Sme li ostatak učvršćivača u kantu sa drugim otpadom?
 

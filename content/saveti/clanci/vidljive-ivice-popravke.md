@@ -62,11 +62,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Edge marking i Swelling (javni opis), PPG Mapping (keš stranice, sadržaj potvrđen u HTML-u), R-M P 2P63 (16 h / 35 min, 50–70 µm) i Carsystem Filler 540 (V11: 5–8 h / 35–45 min, 50–80 µm, upozorenje o drugim sistemima); vrednosti se poklapaju. Ispravljeno: „obično znači“ ublaženo, dodat R-M izvor iz našeg programa (Swelling: ocrtavanje ivica zone), red „Osetljiva stara boja“ označen kao urednička dopuna jer ga PPG ne navodi kao uzrok, PPG jasno označen kao pozadina, „u praksi“ i „obično ponovi“ preformulisani."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

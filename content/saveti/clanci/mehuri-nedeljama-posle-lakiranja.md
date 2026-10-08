@@ -71,12 +71,13 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Javni izvori proizvođača iz našeg programa objašnjavaju mehanizam (R-M Blistering), ali ne i postupak sanacije; R-M savete za popravku daje samo prijavljenim korisnicima. Odeljak o sanaciji je opšte objašnjenje i traži stručnu potvrdu."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Blistering (javni deo), Glasurit rečnik (Salt/Blistering, Hygroscopic, Dew Point), baslac Loss of adhesion i Cleaners, Carsystem Water 2.0 (V02) i SATAjet X 5500; navodi se poklapaju (zadržana ranija preciznija formulacija „loša obrada prajmera“). Ispravljeno: zaključak o uzroku vezan za opis R-M, urednička procena o mestu plikova ublažena, odgovor o suvom vremenu označen kao opšte objašnjenje. Stručna potvrda opravdana: postupak sanacije nema javni izvor proizvođača iz našeg programa."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

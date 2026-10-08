@@ -77,11 +77,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Crinkling, Solvent test i Edge marking (javni deo), baslac Cracking, Glasurit rečnik (Lifting), R-M PK 1P10 i Carsystem Water 2.0; navodi se poklapaju. Ispravljeno: mehanizam i izgled označeni kao opšte objašnjenje, baslac uzroci izričito pripisani grešci pucanja (ne nabiranju) i uklonjen navod o mokro-na-mokro koji se odnosi samo na pucanje."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---

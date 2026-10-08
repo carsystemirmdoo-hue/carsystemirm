@@ -13,8 +13,8 @@ publika:
 glavnoPitanje: Kada je boja u spreju dobar izbor za popravku, a kada je bolji materijal za pištolj?
 namera: informativna
 dodatnaPitanja:
-  - Može li sprejom ceo deo?
-  - Kako se dobija sprej u nijansi mog automobila?
+  - Može li se sprejom lakirati ceo deo?
+  - Kako se dobija sprej u nijansi Vašeg automobila?
 poreklopitanja:
   tip: pronadjeno-u-izvoru
   napomena: "Pitanje kako farbati bez kompresora, sa sprejom kao alternativom, postavlja se na forumu poljoprivredni-forum.com (q033); pitanje o celom delu (q285) je urednička procena."
@@ -120,7 +120,7 @@ U našem programu sprejevi se dele u nekoliko grupa, i od grupe zavisi šta mož
 
 **Ujednačenost.** Opšte objašnjenje: na velikoj površini teško je sprejom održati isti razmak, brzinu i preklapanje od početka do kraja, pa se razlike u debljini sloja lakše vide, posebno kod metalika. Pištolj omogućava da se lepeza i količina materijala podese, a sprej ne.
 
-**Otpornost.** Većina boja u spreju su 1K materijali, koji se suše isparavanjem rastvarača. 2K sprej daje otporniji sloj: za 2K High-Speed Clearcoat Spray Carsystem navodi visoku otpornost na vremenske uticaje, hemikalije i gorivo[^cs-2k-hs-spray-tds]. Isti list ga navodi samo za profesionalnu upotrebu, uz obaveznu masku za disanje[^cs-2k-hs-spray-tds]. Više u vodiču [2K sprej](/vodici/2k-sprej).
+**Otpornost.** Opšte objašnjenje: obična boja u spreju je 1K materijal, koji se suši isparavanjem rastvarača. 2K sprej daje otporniji sloj: za 2K High-Speed Clearcoat Spray Carsystem navodi visoku otpornost na vremenske uticaje, hemikalije i gorivo[^cs-2k-hs-spray-tds]. Isti list ga navodi samo za profesionalnu upotrebu, uz obaveznu masku za disanje[^cs-2k-hs-spray-tds]. Više u vodiču [2K sprej](/vodici/2k-sprej).
 
 **Uslovi rada.** Za Cosmos Lac RAL najbolja temperatura nanošenja je 10–25 °C[^cosmos-ral-tds]. Po hladnom vremenu važe posebna pravila; vidi [Rad sa sprejom po hladnom vremenu](/vodici/sprej-po-hladnom-vremenu).
 
@@ -134,10 +134,10 @@ Kako se donosi ta odluka, opisuje vodič [Lokalna popravka ili lakiranje celog d
 
 ## Pitanja i odgovori
 
-### Može li sprejom ceo deo?
+### Može li se sprejom lakirati ceo deo?
 
 Manji deo, kao što je kućište retrovizora, lajsna ili branik u crnoj strukturnoj boji, može. Za haubu ili vrata u nijansi vozila to je teže izvesti: potrebno je više limenki iste serije, ujednačeni slojevi na velikoj površini i lak preko boje. Urednička procena je da rezultat tada retko odgovara lakiranju pištoljem, pa je za takav posao bolje pitati radionicu.
 
-### Kako se dobija sprej u nijansi mog automobila?
+### Kako se dobija sprej u nijansi Vašeg automobila?
 
-Nijansa se određuje prema šifri boje vozila, a boja se puni u posebnu limenku. Cosmos Lac Prefilled Spray je napunjen rastvaračima i potisnim gasom, a boju za vozila dodaje stručno lice; postoji u 1K i 2K izvedbi[^cosmos-prefilled-tds]. Carsystem Prefill-Spray se puni mašinom sa do 100 ml boje[^cs-prefill-tds]. Gde se nalazi šifra, objašnjava vodič [Šifra boje na automobilu](/vodici/sifra-boje-na-automobilu), a punjenje možete proveriti u nekoj od [prodavnica](/prodavnice).
+Nijansa se određuje prema šifri boje vozila, a boja se puni u posebnu limenku. Cosmos Lac Prefilled Spray je napunjen rastvaračima i potisnim gasom, a rastvaračku boju za vozila dodaje stručno lice; postoji u 1K i 2K izvedbi[^cosmos-prefilled-tds]. Carsystem Prefill-Spray se puni mašinom sa do 100 ml boje[^cs-prefill-tds]. Gde se nalazi šifra, objašnjava vodič [Šifra boje na automobilu](/vodici/sifra-boje-na-automobilu), a punjenje možete proveriti u nekoj od [prodavnica](/prodavnice).

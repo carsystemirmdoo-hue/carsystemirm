@@ -87,12 +87,13 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
-  razlog: "Za pojavu tragova tek posle nekoliko dana javni izvori proizvođača ne daju objašnjenje; R-M opisuje samo srodno bubrenje od zaostalog rastvarača (detalji iza prijave). Veza između bubrenja i tragova brušenja je urednička i traži stručnu potvrdu."
+  razlog: "Javni izvori proizvođača iz našeg programa ne daju ni listu uzroka tragova brušenja (R-M daje samo opis, detalji su iza prijave) ni objašnjenje zašto se tragovi pojave tek posle nekoliko dana; R-M opisuje samo srodno bubrenje od zaostalog rastvarača. Lista uzroka (granulacija, kit bez punioca, preskočen korak) je opšte objašnjenje, a veza bubrenja i tragova brušenja urednička; oboje treba stručno potvrditi."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Sanding marks, Swelling i Edge marking (javni deo), P 2P51 i P 2A41 (07/2026), baslac 20-22 (06/2023), Carsystem Multi Green (V08) i Glasurit postupak 90-Line (500 → 1000, kontrolni prah); granulacije se poklapaju. Ispravljeno: uvodni mehanizam i lista uzroka označeni kao opšte objašnjenje, urednička procena o rasporedu ublažena, uklonjen odeljak koji je baslac uzrok narandžine kore prenosio na tragove brušenja (i izvor baslac-orange-peel). Stručna potvrda opravdana."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

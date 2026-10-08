@@ -80,11 +80,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Loss of gloss, R-M Loss of gloss i Swelling (javni opis), Glasurit HVLP preporuke, 40-100 (50-420: 3 h / 25 min / 15 min), C 2P42 (2–3 h, 10 min na 60 °C) i CC.26 (50–60 µm, 3–4 h / 15 min); vrednosti se poklapaju. Ispravljeno: „a ne u starenju laka“ ublaženo, urednička procena o ponovnom gubitku sjaja ublažena i uklonjen savet „sačekajte“ bez izvora."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

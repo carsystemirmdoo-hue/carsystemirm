@@ -3,7 +3,7 @@ id: SV-0194
 slug: organizacija-mesaonice-boje
 naslov: Organizacija mešaonice boje u maloj radionici
 metaNaslov: "Mešaonica boje u maloj radionici: kako je urediti"
-opis: "Kako urediti mešaonicu boje da bude manje grešaka i rasipanja: šta bezbednosni i tehnički listovi traže od prostora, šta mora biti pri ruci i kojim redom se radi."
+opis: "Kako urediti mešaonicu boje da bude manje grešaka i rasipanja: šta bezbednosni i tehnički listovi traže od prostora, šta treba imati pri ruci i kojim redom."
 kategorija: radionica
 podtema: mešaonica
 tip: osnovni-vodic

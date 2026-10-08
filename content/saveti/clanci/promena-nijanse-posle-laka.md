@@ -73,12 +73,13 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Objašnjenje zašto bezbojni lak menja izgled bazne boje (odeljak „Zašto lak menja izgled baze“) je opšte optičko objašnjenje bez izvora proizvođača iz našeg programa; R-M, baslac i Carsystem materijali koje smo otvorili ne opisuju smer i meru promene. Javni izvor (PPG SOP) potvrđuje samo da se nijansa procenjuje posle laka."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni PPG SOP PD-0632 i Poor color match (keš, potvrđen), baslac Color chips, C 2A40 (potpuno suva baza, 5 % A 2210), R-M Metamerism (javni opis), SATA Practical advice (tamnija nijansa kod istrošene dizne) i Carsystem Clear Coat Spray (nije za čisto bele površine); navodi se poklapaju. Ispravljeno: optičko objašnjenje iz uvoda označeno kao opšte, „nikada“ zamenjeno pozivom na PPG postupak. Stručna potvrda opravdana: zašto i koliko lak menja izgled baze nema izvor proizvođača iz našeg programa."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

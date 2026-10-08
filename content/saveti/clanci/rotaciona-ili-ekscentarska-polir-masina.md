@@ -75,19 +75,20 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni RUPES stranice LH19E i LHR15 Mark III, Carsystem katalog 2026/27 (LH19E, RC 166, CSH-CRP01, LHR15 III, HLR75STB, CSH-CMS01), Polish C-05 V02 (11/2020), C-07 V01 (09/2020) i brošura X serije; opisi pokreta, tanjiri, navoji, brzine i hod se poklapaju. Deo „Koja je pogodnija za koga“ je jasno označen kao urednička procena. Ispravljeno (5): preporuka za početnika u uvodu označena kao urednička procena; navod o najmanjim vibracijama rotacione mašine dopunjen uslovom iz izvora (u rukama veštog majstora); tvrdnja o većem hodu polir mašina potkrepljena primerom iz kataloga (CSH-CMS01, 3 mm); „Često da“ zamenjeno navodom za proverene paste; mini mašine usklađene sa katalogom (74–77 mm)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Rotaciona mašina okreće tanjir oko jedne ose, pa brzo skida, ali i jako greje površinu i lako ostavlja tragove ako se ne vodi pravilno. Ekscentarska mašina tanjir vodi po maloj orbiti, a on se pri tome slobodno okreće, pa je rad blaži i sigurniji. RUPES za rotacioni pokret navodi da traži dosta vremena da se nauči[^rupes-lh19e], a slučajni orbitalni (ekscentarski) pokret opisuje kao trenutno najbolji kompromis između učinka i kvaliteta površine[^rupes-lhr15]. Za početnika je zato pogodnija ekscentarska mašina; rotaciona ima smisla u rukama iskusnog lakirera.
+Rotaciona mašina okreće tanjir oko jedne ose, pa brzo skida, ali i jako greje površinu i lako ostavlja tragove ako se ne vodi pravilno. Ekscentarska mašina tanjir vodi po maloj orbiti, a on se pri tome slobodno okreće, pa je rad blaži i sigurniji. RUPES za rotacioni pokret navodi da traži dosta vremena da se nauči[^rupes-lh19e], a slučajni orbitalni (ekscentarski) pokret opisuje kao trenutno najbolji kompromis između učinka i kvaliteta površine[^rupes-lhr15]. Prema uredničkoj proceni, za početnika je zato pogodnija ekscentarska mašina, a rotaciona ima smisla u rukama iskusnog lakirera.
 
 ## Kako radi rotaciona mašina
 
-Prema RUPES-u, kod rotacione mašine tanjir se okreće oko središnje ose i najveća brzina je na ivici sunđera. To je pokret koji najjače deluje na površinu: stvara mnogo trenja i toplote, a pri nepravilnoj upotrebi može da izazove pregrevanje, probijanje laka i kružne tragove (hologrami). Istovremeno, rotaciona mašina ima najmanje vibracija[^rupes-lh19e].
+Prema RUPES-u, kod rotacione mašine tanjir se okreće oko središnje ose i najveća brzina je na ivici sunđera. To je pokret koji najjače deluje na površinu: stvara mnogo trenja i toplote, a pri nepravilnoj upotrebi može da izazove pregrevanje, probijanje laka i kružne tragove (hologrami). Istovremeno, u rukama veštog majstora rotaciona mašina ima najmanje vibracija od svih vrsta pokreta[^rupes-lh19e].
 
 Opšte objašnjenje: zato se rotaciona mašina vodi stalno u pokretu, sa umerenim pritiskom i bez zadržavanja na ivicama, gde je lak tanji i gde je brzina sunđera najveća.
 
@@ -113,7 +114,7 @@ Ovo je urednička procena zasnovana na opisima proizvođača.
 
 - **Hobista i početnik:** ekscentarska mašina. Greške u vođenju se manje vide na laku, a isti rad se može obaviti sa više prolaza.
 - **Radionica:** obe. Rotaciona za brzo uklanjanje tragova brušenja abrazivnom pastom, ekscentarska za završni korak i rad na tamnim lakovima, gde se hologrami lako vide.
-- **Male popravke i uska mesta:** mini mašine sa tanjirom od 75 mm[^cs-katalog].
+- **Male popravke i uska mesta:** mini mašine sa tanjirom od 74–77 mm[^cs-katalog].
 
 Bez obzira na mašinu, hologrami se uklanjaju dobrim završnim korakom; o tome piše tekst [Hologrami i kružni tragovi posle poliranja](/vodici/hologrami-posle-poliranja).
 
@@ -121,8 +122,8 @@ Bez obzira na mašinu, hologrami se uklanjaju dobrim završnim korakom; o tome p
 
 ### Šta znači hod ekscentra kod polir mašine?
 
-To je veličina orbite po kojoj se kreće tanjir. RUPES objašnjava da njena amplituda zavisi od rastojanja između ose pogonskog vratila i središnje ose tanjira[^rupes-lhr15]. Carsystem je u katalogu navodi kao prečnik orbite: 15 mm za LHR15 i 12 mm za HLR75STB[^cs-katalog]. Za LHR15 RUPES navodi da manji tanjir i orbita, uz veći broj obrtaja, bolje odgovaraju zakrivljenim i raznolikim površinama od većeg modela iste serije[^rupes-lhr15]. Polir mašine imaju znatno veći hod od ekscentarskih brusilica; o hodu kod brušenja piše vodič [Hod ekscentarske brusilice](/vodici/ekscentarska-brusilica-hod).
+To je veličina orbite po kojoj se kreće tanjir. RUPES objašnjava da njena amplituda zavisi od rastojanja između ose pogonskog vratila i središnje ose tanjira[^rupes-lhr15]. Carsystem je u katalogu navodi kao prečnik orbite: 15 mm za LHR15 i 12 mm za HLR75STB[^cs-katalog]. Za LHR15 RUPES navodi da manji tanjir i orbita, uz veći broj obrtaja, bolje odgovaraju zakrivljenim i raznolikim površinama od većeg modela iste serije[^rupes-lhr15]. Ovi hodovi su znatno veći od hoda brusilice za tačke, na primer 3 mm kod Carsystem CSH-CMS01[^cs-katalog]; o hodu kod brušenja piše vodič [Hod ekscentarske brusilice](/vodici/ekscentarska-brusilica-hod).
 
 ### Da li se iste paste koriste na obe mašine?
 
-Često da, ali sa drugim brzinama. Za Carsystem Polish C-05 cut tehnički list navodi 1500–2000 o/min za rotacionu i 2000–10 000 o/min za ekscentarsku mašinu[^cs-c05-tds], a za C-07 cut 700–1700 o/min rotaciono i 700–4000 o/min ekscentarski[^cs-c07-tds]. Za paste i sunđere X serije Carsystem navodi da se mogu koristiti i rotaciono i ekscentarski[^cs-x-brosura]. Brzinu uvek proverite u listu paste i uskladite je sa opsegom mašine.
+Kod pasta iz našeg programa čije smo listove proverili, da, ali sa drugim brzinama. Za Carsystem Polish C-05 cut tehnički list navodi 1500–2000 o/min za rotacionu i 2000–10 000 o/min za ekscentarsku mašinu[^cs-c05-tds], a za C-07 cut 700–1700 o/min rotaciono i 700–4000 o/min ekscentarski[^cs-c07-tds]. Za paste i sunđere X serije Carsystem navodi da se mogu koristiti i rotaciono i ekscentarski[^cs-x-brosura]. Brzinu uvek proverite u listu paste i uskladite je sa opsegom mašine.

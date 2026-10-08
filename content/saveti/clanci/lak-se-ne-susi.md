@@ -70,11 +70,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni PPG Slow drying (keš, potvrđen), baslac 40-440 (12/2025: 10 h / 16 h, 2:1, 40–60 µm), Speed Plus (V06), C 2A40 i H 2P05; vrednosti se poklapaju. Ispravljeno: „obično nije loš lak“ ublaženo, opšta objašnjenja označena, upozorenje o vlazi vezano za list H 2P05, savet o „postepenom“ grejanju zamenjen PPG navodom o blagom zagrevanju."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

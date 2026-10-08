@@ -54,11 +54,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni PPG Chalking (keš, potvrđen), R-M After care i Loss of gloss (javni deo) i baslac Loss of gloss; navodi se poklapaju. Ispravljeno: sanacija u uvodu pripisana PPG i usklađena sa izvorom (brušenje, pasta, poliranje; u težim slučajevima završni sloj), „to nije kredanje“ ublaženo."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---

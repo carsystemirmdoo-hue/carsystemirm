@@ -82,11 +82,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Cracking, R-M Cracking (javni opis) i Plastics cracking (javna stranica), PPG Cracking (keš, potvrđen), C 2A40, 40-440, Speed Plus i 80-10; vrednosti se poklapaju. Ispravljeno: uvodni mehanizam označen kao opšte objašnjenje, „proizvođači predviđaju“ → baslac, odzračivanje vezano za mokro-na-mokro kako piše baslac."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

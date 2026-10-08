@@ -80,11 +80,12 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni RUPES stranica LH19E (brzina najveća na obodu, rizik pregorevanja i probijanja), D-A letak, CC.26 V01 04/2026 (50–60 µm), Finish Foam orange V01, Lambswool Pad White S Edge V01, Refinish 1 v.02 i Carsystem katalog 2026/27 (Silver/Black Tape, Tec Line Stick, Liquid Masking, Ibrid Nano, HLR75STB); ispravljen opis Ibrid Nano (tanjiri od 30 i 50 mm su za brusne diskove, za poliranje katalog navodi sunđere 9.DA 40), RUPES D-A vezan za RUPES Polish Pad, opšta pravila označena."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -105,9 +106,9 @@ Rezerva nije velika ni na ravnom delu. Za Carsystem 2K Clear VOC CC.26 ECO-X 15/
 ## Postupak
 
 1. **Prvo ravni delovi, ivica na kraju.** Mašinu vodite paralelno sa ivicom i zaustavite se nekoliko centimetara pre nje, umesto da sunđer „pada“ preko pregiba. Tako ivica ne dobija svaki prolaz sa ravnog dela.
-2. **Na ivicu manji sunđer ili manja mašina.** U programu su RUPES Ibrid Nano, mala baterijska mašina sa tanjirima od 30 mm i 50 mm, i RUPES HLR75STB, ekscentarska mašina sa tanjirom od 75 mm[^cs-katalog]. Manja površina sunđera lakše prati oblik.
-3. **Sunđer koji štiti ivicu.** Carsystem Finish Foam ima uvučenu čičak oblogu radi zaštite ivica i teško dostupnih mesta[^cs-foam-orange-tds]. Lambswool Pad White S Edge, prečnika 80 mm, ima podvijenu ivicu od krzna koja sprečava dodir tanjira i oštrih ivica sa površinom i namenjen je jakim zakrivljenjima i uskim ivicama[^cs-lambswool-tds]. Za RUPES D-A sunđere proizvođač navodi profil ivice oblikovan za bezbedan rad blizu ivica[^rupes-da-pads].
-4. **Manje pritiska, kraće zadržavanje.** Na pregibu se ne radi do „potpunog“ sjaja jednim dugim prolazom, nego kratkim prolazima uz proveru. Ako se deo previše zagreje, prekinite i sačekajte da se ohladi. Za Refinish 1 Carsystem navodi da se, kada se površina previše zagreva, može naprskati malo vode, ali ne više nego što je neophodno[^cs-refinish1-tds].
+2. **Na ivicu manji sunđer ili manja mašina.** U programu su RUPES Ibrid Nano, mala baterijska mašina za brušenje i poliranje uz koju katalog navodi i male sunđere za poliranje 9.DA 40, i RUPES HLR75STB, ekscentarska mašina sa tanjirom od 75 mm[^cs-katalog]. Manja površina sunđera lakše prati oblik.
+3. **Sunđer koji štiti ivicu.** Carsystem Finish Foam ima uvučenu čičak oblogu radi zaštite ivica i teško dostupnih mesta[^cs-foam-orange-tds]. Lambswool Pad White S Edge, prečnika 80 mm, ima podvijenu ivicu od krzna koja sprečava dodir tanjira i oštrih ivica sa površinom i namenjen je jakim zakrivljenjima i uskim ivicama[^cs-lambswool-tds]. Za D-A sunđere, koji su u Carsystem programu kao RUPES Polish Pad, proizvođač navodi profil ivice oblikovan za bezbedan rad blizu ivica[^rupes-da-pads].
+4. **Manje pritiska, kraće zadržavanje.** Opšte pravilo: na pregibu se ne radi do „potpunog“ sjaja jednim dugim prolazom, nego kratkim prolazima uz proveru. Ako se deo previše zagreje, prekinite i sačekajte da se ohladi. Za Refinish 1 Carsystem navodi da se, kada se površina previše zagreva, može naprskati malo vode, ali ne više nego što je neophodno[^cs-refinish1-tds].
 5. **Provera pod svetlom.** Zamućenje ili promena nijanse na samom grebenu znak je da treba stati.
 
 Razliku u ponašanju rotacione i ekscentarske mašine objašnjava vodič [Rotaciona ili ekscentarska polir mašina](/vodici/rotaciona-ili-ekscentarska-polir-masina), a brušenje istih mesta pre poliranja vodič [Brušenje ivica, uglova i profila](/vodici/brusenje-ivica-i-uglova).

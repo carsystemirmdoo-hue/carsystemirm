@@ -129,7 +129,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Pre boje u spreju površina se opere, odmasti, izbrusi, ponovo odmasti i zaštiti se okolina; prajmer se nanosi kada podloga to traži, na primer goli metal ili plastika. Svi tehnički listovi sprejeva iz našeg programa koje smo pregledali traže površinu bez prašine, rđe i masnoće; Cosmos Lac uz to navodi da se zaštiti sve što ne treba da bude obojeno i da se sprej prvo proba na probnoj površini[^cosmos-ral-tds]. Sprej ne prekriva loše pripremljenu podlogu, nego je tanak sloj čini još vidljivijom.
+Pre boje u spreju površina se opere, odmasti, izbrusi, ponovo odmasti i zaštiti se okolina; prajmer se nanosi kada podloga to traži, na primer goli metal ili plastika. Tehnički listovi sprejeva traže čistu površinu bez masnoće. Za Cosmos Lac RAL list traži da se uklone prašina, rđa i ulje, da se zaštiti sve što ne treba da bude obojeno i da se sprej prvo proba na probnoj površini[^cosmos-ral-tds]. Sprej ne prekriva loše pripremljenu podlogu, nego je tanak sloj čini još vidljivijom.
 
 ## Koraci
 
@@ -158,7 +158,7 @@ Urednički izbor, ne statistika učestalosti.
 
 - **Preskočeno odmašćivanje.** baslac kao moguće uzroke gubitka prianjanja navodi silikon, ulje, vosak, vodu i koroziju zaostale na podlozi, kao i nedovoljno brušenje[^baslac-loss-adhesion].
 - **Prajmer koji ne podnosi završni sloj.** Carsystem za Primer Spray savetuje da se proizvod prvo isproba ako će se preko njega nanositi dvokomponentni materijali[^cs-primer-spray-tds].
-- **Brušenje bez maskiranja.** Prašina od brušenja se lepi za maskirane delove i kasnije pada u svežu boju; maskiranje se proverava posle čišćenja.
+- **Prašina zaostala na maski.** Opšte objašnjenje: prašina od brušenja ostaje na traci i papiru za maskiranje i kasnije može da padne u svežu boju, zato se maskirani deo očisti i proveri pre nanošenja.
 
 ## Pitanja i odgovori
 

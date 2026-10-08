@@ -48,15 +48,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem stranica Finish Clay (preprašena boja, flash rust, insekti, smola, bez ogrebotina; bez navoda o sredstvu za klizanje) i katalog 2026/27 (Finish Clay ostaje vlažna u kutiji, Micro Fiber Cloth Fluffy, Nano Easy Cleaner samo sa vodom); sve se poklapa. Proveren odnos sa SV-0040: SV-0040 obrađuje uklanjanje katrana i smole pre pripreme, ovaj tekst samo glinu pred poliranje, uz međusobne linkove, bez preklapanja glavnog pitanja. Opšta pravila označena."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Glina za lak skida nečistoću koja je prionula na površinu laka i ne odlazi pranjem: preprašenu boju, sitne tačke površinske rđe (engl. *flash rust*), ostatke insekata i smolu drveća. Za Carsystem Finish Clay proizvođač navodi upravo tu namenu, uz uklanjanje bez ostataka i bez ogrebotina[^carsystem-finish-clay]. Pre poliranja je potrebna kada se oprana i suva površina pod prstima oseća hrapavo ili kada se na njoj vide sitne tačke. Ako je površina glatka, glina nije obavezan korak.
+Glina za lak skida nečistoću koja je prionula na površinu laka i ne odlazi pranjem: preprašenu boju, sitne tačke površinske rđe (engl. *flash rust*), ostatke insekata i smolu drveća. Za Carsystem Finish Clay proizvođač navodi upravo tu namenu, uz uklanjanje bez ostataka i bez ogrebotina[^carsystem-finish-clay]. Opšte pravilo: pre poliranja je potrebna kada se oprana i suva površina pod prstima oseća hrapavo ili kada se na njoj vide sitne tačke. Ako je površina glatka, glina nije obavezan korak.
 
 ## Zašto pre poliranja
 
@@ -75,7 +76,7 @@ Katran i veće naslage smole prvo se rastvaraju odgovarajućim sredstvom, a glin
 ## Postupak
 
 1. **Pranje.** Glina ne zamenjuje pranje: pesak i prašina koji ostanu na površini pod glinom bi grebali.
-2. **Mali deo po deo.** Radite na površini koju možete da pregledate, otprilike pola haube, a ne na celom vozilu odjednom.
+2. **Mali deo po deo.** Opšte pravilo: radite na površini koju možete da pregledate, otprilike pola haube, a ne na celom vozilu odjednom.
 3. **Klizanje bez pritiska.** Opšte objašnjenje: glina treba da klizi po površini, a ne da se vuče po suvom laku. Carsystem na stranici proizvoda ne navodi posebno sredstvo za klizanje, pa pitajte prodavca ili tehničku podršku šta da koristite sa Finish Clay.
 4. **Preklapanje gline.** Kada se na delu gline koji dodiruje lak vidi nečistoća, preklopite je tako da radi čista strana.
 5. **Brisanje i provera.** Obrišite deo mekom mikrofiber krpom i ponovo proverite prstima. Carsystem za krpu Micro Fiber Cloth Fluffy navodi da je veoma nežna prema površini i namenjena završnom brisanju[^cs-katalog].

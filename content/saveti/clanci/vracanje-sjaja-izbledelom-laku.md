@@ -84,20 +84,21 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Refinish 1 v.02 (1500–2400 o/min, Finish Foam White, istrošene i oksidisane površine), Polish Step 1 coarse V01 (P1500–P2000, svež i korišćen lak), C.A.R.FIT BLACK LABEL Finishing Compound 01.12.2020 (P3000, korišćen lak da / svež ne, srednje tvrd sunđer), Finish Control Foam C-99 V01, C-Wax C-80 V01 (ispod 30 °C, 3–5 min), CC.26 V01 (50–60 µm) i Carsystem katalog 2026/27 str. 128–129 i 138–139; sve se poklapa. Uklonjena neproverena reč „često“, ublažena dijagnoza kredanja."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Sjaj izbledelog laka često može da se vrati poliranjem, ako je oštećen samo tanak površinski sloj i ako laka ima dovoljno. Radi se redom: pranje i čišćenje, abrazivna pasta, provera, završna pasta i na kraju zaštita. Carsystem za Refinish 1 navodi da je pogodan i za jako istrošene i oksidisane površine[^cs-refinish1-tds]. Poliranje ne pomaže kada lak puca, ljušti se, duboko kreči ili je već probijen; tada je potrebno novo lakiranje.
+Sjaj izbledelog laka može da se vrati poliranjem ako je oštećen samo tanak površinski sloj i ako laka ima dovoljno. Radi se redom: pranje i čišćenje, abrazivna pasta, provera, završna pasta i na kraju zaštita. Carsystem za Refinish 1 navodi da je pogodan i za jako istrošene i oksidisane površine[^cs-refinish1-tds]. Poliranje ne pomaže kada lak puca, ljušti se, duboko kreči ili je već probijen; tada je potrebno novo lakiranje.
 
 ## Prvo procenite stanje
 
 - **Operite i očistite deo.** Prljavština i film sa površine izgledaju kao izbledeo lak. Ako se posle pranja površina oseća hrapavo, prvo ide glina; vidi [Glina za lak pre poliranja](/vodici/glina-za-lak-pre-poliranja).
-- **Prepoznajte pojavu.** Beličast prah na prstu je kredanje, a žuta nijansa na svetlim bojama je druga pojava. Razlike objašnjavaju vodiči [Kredanje starog laka](/vodici/kredanje-starog-laka) i [Zašto bezbojni lak vremenom žuti ili gubi sjaj](/vodici/lak-zuti-vremenom).
+- **Prepoznajte pojavu.** Beličast prah na prstu obično ukazuje na kredanje, a žuta nijansa na svetlim bojama je druga pojava. Razlike objašnjavaju vodiči [Kredanje starog laka](/vodici/kredanje-starog-laka) i [Zašto bezbojni lak vremenom žuti ili gubi sjaj](/vodici/lak-zuti-vremenom).
 - **Probna površina.** Ispolirajte prvo mali deo, na primer polovinu poklopca rezervoara ili kvadrat na haubi, i pogledajte rezultat pod jakim svetlom. Tako vidite da li sjaj uopšte može da se vrati i koliko je koraka potrebno.
 
 ## Paste namenjene starom laku

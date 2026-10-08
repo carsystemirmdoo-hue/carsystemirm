@@ -86,29 +86,30 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem katalog 2026/27 (X serija str. 132–133, krpe i krzno str. 136–143; RUPES Polish Pad = 9.DA FINE/ULTRA FINE), brošura X serije, RUPES D-A FINE tehnički list i D-A letak, Refinish 1 v.02, Wax Puck v.01, Micro Fiber Cloth Polish Extreme V01 i BEFAR katalog; vrednosti se poklapaju. Navodi RUPES suženi na D-A FINE (tehnički list važi za taj sunđer), znaci zamene i pravila bez izvora jasno označeni kao opšta pravila."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Sunđer za poliranje se čisti često tokom rada i temeljno posle rada, i to na način koji navodi njegov proizvođač, jer se on razlikuje. Za sunđere X serije Carsystem navodi da im za čišćenje ne trebaju voda, sapun ni sredstvo za čišćenje, već se izduvaju komprimovanim vazduhom[^cs-katalog]. RUPES za svoje D-A sunđere preporučuje čišćenje tokom rada komprimovanim vazduhom, usisivačem ili namenskim alatom i upozorava da se ne koriste paste i sredstva za čišćenje na bazi rastvarača, jer oštećuju strukturu pene[^rupes-da-fine-ts]. Sunđer se menja kada se pena cepa, mrvi ili odvaja od čička, ili kada posle čišćenja više ne radi ujednačeno.
+Sunđer za poliranje se čisti često tokom rada i temeljno posle rada, i to na način koji navodi njegov proizvođač, jer se on razlikuje. Za sunđere X serije Carsystem navodi da im za čišćenje ne trebaju voda, sapun ni sredstvo za čišćenje, već se izduvaju komprimovanim vazduhom[^cs-katalog]. RUPES za D-A FINE sunđer (u Carsystem programu RUPES Polish Pad, fine) preporučuje čišćenje tokom rada komprimovanim vazduhom, usisivačem ili namenskim alatom i upozorava da se ne koriste paste i sredstva za čišćenje na bazi rastvarača, jer oštećuju strukturu pene[^rupes-da-fine-ts]. Kada sunđer treba zameniti, proizvođači iz našeg programa ne navode; opšti znaci su pocepana ili izmrvljena pena, čičak koji se odvaja i sunđer koji ni posle čišćenja ne radi ujednačeno.
 
 ## Zašto je čist sunđer važan
 
-Opšte objašnjenje: u porama sunđera ostaju osušena pasta i skinute čestice laka. Takav sunđer postaje tvrđi, jače greje i može da ostavi tragove koje ste upravo uklanjali. Za Refinish 1 Carsystem izričito navodi da sunđer mora biti čist da se uklone pruge[^cs-refinish1-tds]. Kako zasićen sunđer utiče na zagrevanje, opisuje tekst [Pasta se lepi ili „gori“ na sunđeru](/vodici/pasta-gori-ili-se-lepi).
+Opšte objašnjenje: u porama sunđera ostaju osušena pasta i skinute čestice laka. Takav sunđer postaje tvrđi, jače greje i može da ostavi tragove koje ste upravo uklanjali. Za Refinish 1 Carsystem izričito navodi da sunđer mora biti čist da bi se uklonile pruge[^cs-refinish1-tds]. Kako zasićen sunđer utiče na zagrevanje, opisuje tekst [Pasta se lepi ili „gori“ na sunđeru](/vodici/pasta-gori-ili-se-lepi).
 
 ## Tokom rada
 
-1. **Posle svakog dela ili kada se pasta nakupi,** očistite sunđer na način koji navodi proizvođač. Za Carsystem X sunđere to je izduvavanje komprimovanim vazduhom[^cs-x-brosura]; za RUPES D-A sunđere komprimovani vazduh, usisivač ili namenski alat[^rupes-da-fine-ts].
-2. **Ne dodajte pastu na zasićen sunđer.** RUPES navodi da previše paste smanjuje učinak sunđera[^rupes-da-fine-ts].
-3. **Jedan sunđer, jedna pasta.** Sunđer korišćen sa abrazivnom pastom ne prelazi na završnu pastu. Vodič [Sunđeri za poliranje](/vodici/sunderi-za-poliranje-izbor) objašnjava zašto.
+1. **Posle svakog dela ili kada se pasta nakupi,** očistite sunđer na način koji navodi proizvođač. Za Carsystem X sunđere to je izduvavanje komprimovanim vazduhom[^cs-x-brosura]; za RUPES D-A FINE komprimovani vazduh, usisivač ili namenski alat[^rupes-da-fine-ts].
+2. **Ne dodajte pastu na zasićen sunđer.** Za D-A FINE RUPES navodi da previše paste smanjuje učinak sunđera[^rupes-da-fine-ts].
+3. **Jedan sunđer, jedna pasta.** Opšte pravilo: sunđer korišćen sa abrazivnom pastom ne prelazi na završnu pastu. Vodič [Sunđeri za poliranje](/vodici/sunderi-za-poliranje-izbor) objašnjava zašto.
 
 ## Posle rada
 
-- **Sunđeri sa posebnim uputstvom.** X serija se izduvava vazduhom, bez vode i sredstava[^cs-katalog]. RUPES D-A se ne čisti rastvaračima[^rupes-da-fine-ts].
+- **Sunđeri sa posebnim uputstvom.** X serija se izduvava vazduhom, bez vode i sredstava[^cs-katalog]. Za RUPES D-A FINE proizvođač upozorava na sredstva za čišćenje na bazi rastvarača[^rupes-da-fine-ts].
 - **Aplikator za vosak.** Za Wax Puck Carsystem navodi da se posle upotrebe ispere i ponovo koristi[^cs-wax-puck-tds].
 - **Mikrofiber krpe.** Za Micro Fiber Cloth Polish Extreme Carsystem navodi pranje do 30 °C bez dodataka za pranje[^cs-microfiber-polish-extreme-tds]. Ista napomena stoji uz ostale mikrofiber krpe u katalogu[^cs-katalog].
 - **BEFAR sunđeri.** BEFAR katalog daje tvrdoću, prečnik i namenu sunđera, ali ne opisuje pranje ni čišćenje[^befar-katalog]. Za te sunđere pitajte prodavca ili tehničku podršku pre nego što ih perete vodom i sredstvom.
@@ -119,7 +120,7 @@ Opšte objašnjenje: sunđer se suši na vazduhu, čičkom nagore ili na boku, d
 
 ## Kada zameniti sunđer
 
-Proizvođači iz našeg programa ne navode broj upotreba ni rok trajanja sunđera, pa je ovo opšti spisak znakova:
+Proizvođači iz našeg programa ne navode broj upotreba ni rok trajanja sunđera. Znaci ispod su opšta pravila iz prakse, a ne navod proizvođača:
 
 - pena je pocepana, mrvi se ili ima izgrizen obod;
 - čičak se odvaja od pene ili sunđer više ne stoji centrirano na tanjiru;
@@ -127,7 +128,7 @@ Proizvođači iz našeg programa ne navode broj upotreba ni rok trajanja sunđer
 - sunđer je izgubio oblik, pa pri radu vibrira ili skida neravnomerno;
 - sunđer je pao na pod; pesak u porama može da izgrebe lak.
 
-Krzno se troši sporije. Za Lambswool Pad White S Edge Carsystem navodi veoma dug vek[^cs-katalog], ali i ono se menja kada se dlaka sabije ili počne da opada.
+Krzno se troši sporije. Za Lambswool Pad White S Edge Carsystem navodi veoma dug vek[^cs-katalog]. Opšte pravilo: i krzno se menja kada se dlaka sabije ili počne da opada.
 
 ## Pitanja i odgovori
 
@@ -137,4 +138,4 @@ Najmanje po jedan za svaku pastu, a za veću površinu i rezervni za svaki korak
 
 ### Sme li sunđer da se pere rastvaračem?
 
-RUPES za svoje D-A sunđere to izričito ne preporučuje, jer rastvarači oštećuju ćelije pene[^rupes-da-fine-ts]. Za ostale sunđere pratite uputstvo njihovog proizvođača; kada ga nema, rastvarač nije dobar izbor.
+RUPES za D-A FINE sunđer upozorava na sredstva na bazi rastvarača, jer oštećuju ćelije pene[^rupes-da-fine-ts]. Za ostale sunđere pratite uputstvo njihovog proizvođača. Kada uputstva nema, opšte pravilo je da se rastvarač ne koristi.

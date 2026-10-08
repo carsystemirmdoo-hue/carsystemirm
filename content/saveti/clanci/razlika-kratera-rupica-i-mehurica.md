@@ -67,12 +67,13 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Javni izvori proizvođača daju samo opise grešaka (R-M Help Centre); detaljni R-M sadržaj i postupak probrušavanja su iza prijave. Kriterijumi razlikovanja pod lupom i tumačenje probrušavanja su urednički izvedeni i treba ih potvrditi stručno."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoren javni deo R-M Help Centre (Cratering, Pinhole marks, Solvent boils, Plastics pinholes, Blistering, Sand through) i baslac Solvent boil; opisi se poklapaju. Ispravljeno: uklonjeni navodi koji nisu u R-M opisima („boja se razmakla“, „često“, „ponavljaju se u svakom sloju“), kolona „Gde počinje“ usklađena sa izvorom, naslov „najpouzdaniji korak“ uklonjen, tumačenje probrušavanja označeno kao urednička procena i ublaženo. Sadržaj ostaje na pitanju razlikovanja; uzroci i sanacija su samo kratko, uz linkove na SV-0155 i SV-0156. Stručna potvrda opravdana: kriterijumi pod lupom i tumačenje probrušavanja nemaju javni izvor proizvođača."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---

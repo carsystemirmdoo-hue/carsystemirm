@@ -66,11 +66,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Dust particles, R-M Dust/dirt (javni opis), PPG Dirt (keš, potvrđen), Carsystem Staub Stop (v.02) i Polish C-30 finish (V01, 09/2014: P2500, i svež lak); navodi se poklapaju. Ispravljeno: uvod ublažen i sanacija pripisana baslac stranici, krater kao alternativa ublažen, netačna tvrdnja da i baslac predviđa uklanjanje tek posle sušenja razdvojena (to piše samo PPG). Postupak uklanjanja je prepušten SV-0175."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

@@ -57,16 +57,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
-  razlog: "Proizvođač seta iz našeg programa (BEFAR) navodi samo sastav seta, bez uputstva, brzine, vremena rada i zaštite posle poliranja. Objašnjenje zašto se zamućenje vraća i preporuka o zaštiti fara nemaju izvor proizvođača iz programa; potrebna je stručna potvrda ili uputstvo uz set."
+  razlog: "Proizvođač seta iz našeg programa (BEFAR) navodi samo sastav seta, bez uputstva, brzine, vremena rada i zaštite posle poliranja. Redosled rada (mokro brušenje 1000 → 2000, No:1 sa krznom, No:2 sa crnim sunđerom) urednički je izveden iz sastava seta, a objašnjenje zašto se zamućenje vraća i pitanje zaštite fara nemaju izvor proizvođača iz programa; potrebna je stručna potvrda ili uputstvo iz pakovanja seta."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni BEFAR katalog str. 31–32 (Headlight Cleaning Set 05812, 12 delova, sastav se poklapa; sunđer za farove za bušilicu 80 mm i adapter M14), BEFAR stranica Sets (05812, 12 pieces) i Carsystem katalog 2026/27 str. 178–179 (Nano Easy Cleaner samo sa vodom). Sastav seta je proveren; redosled rada sada je jasno označen kao urednički izveden iz sastava seta, uključujući mokro brušenje i uparivanje sredstava sa krznom i sunđerom. Ostaje stručna potvrda za redosled, objašnjenje vraćanja zamućenja i zaštitu fara."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Zamućen plastični far se obnavlja brušenjem vodenim papirom od grubljeg ka finijem, pa poliranjem abrazivnom i završnom pastom, dok providnost ne bude ujednačena. U našem programu za to postoji BEFAR Headlight Cleaning Set od 12 delova, sa vodobrusnim papirima, krznom, sunđerom za poliranje i dva sredstva[^befar-katalog]. Proizvođač seta u katalogu ne daje uputstvo za rad ni za zaštitu fara posle poliranja, pa se postupak ispod oslanja na sastav seta i na opšta pravila poliranja.
+Zamućen plastični far se obnavlja brušenjem vodenim papirom od grubljeg ka finijem, pa poliranjem abrazivnom i završnom pastom, dok providnost ne bude ujednačena. U našem programu za to postoji BEFAR Headlight Cleaning Set od 12 delova, sa vodobrusnim papirima, krznom, sunđerom za poliranje i dva sredstva[^befar-katalog]. Proizvođač seta u katalogu ne daje uputstvo za rad ni za zaštitu fara posle poliranja. Redosled ispod je zato urednički izveden iz sastava seta i opštih pravila poliranja, a nije uputstvo proizvođača.
 
 ## Šta sadrži set za farove
 
@@ -85,9 +86,9 @@ Prema BEFAR katalogu, Headlight Cleaning Set (šifra 05812) sadrži[^befar-katal
 
 U istom katalogu postoji i zaseban sunđer za čišćenje farova za bušilicu, prečnika 80 mm, uz adapter M14[^befar-katalog].
 
-## Redosled rada
+## Redosled rada (izveden iz sastava seta)
 
-Redosled sledi iz sastava seta: od grubljeg papira ka finijem, pa od abrazivnog sredstva ka završnom. Tačno vreme, brzinu bušilice i količinu sredstva proizvođač ne navodi, pa ih ne izmišljamo.
+Ovaj redosled nije uputstvo BEFAR-a. Izveden je iz sastava seta: od grubljeg papira ka finijem, pa od abrazivnog sredstva („Scratch Remover Compound“) ka završnom („Polish“). Da se brusi mokro, zaključeno je iz toga što su papiri u setu označeni kao vodobrusni. Uparivanje sredstva No:1 sa krznom i sredstva No:2 sa crnim sunđerom takođe je izvedeno: katalog za crni sunđer osnovne linije navodi namenu za polir ili zaštitu laka[^befar-katalog], a za set ne navodi koji deo ide uz koje sredstvo. Tačno vreme, brzinu bušilice i količinu sredstva proizvođač ne navodi, pa ih ovde nema.
 
 1. **Operite far i okolinu.** Prašina i pesak pod papirom ili sunđerom ostavljaju dublje ogrebotine.
 2. **Zaštitite lak oko fara** trakom za maskiranje, jer papir i pasta lako zahvate ivicu branika ili haube. Opšte o tome u vodiču [Osnove maskiranja](/vodici/osnove-maskiranja).

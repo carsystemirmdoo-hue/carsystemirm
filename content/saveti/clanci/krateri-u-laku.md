@@ -92,11 +92,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Cratering (javni opis 0,5–3 mm), Glasurit rečnik (Silicones, 580-100 najviše 5 %), baslac Loss of adhesion i pregled aditiva (nema aditiva protiv kratera), baslac Cleaners (05/2024), R-M PK 1P10 (07/2026), Carsystem Silicone Remover Mild (v.01) i Water 2.0 (V02); baslac nema javnu stranicu o kraterima. Ispravljeno: „najpre silikon“ → „posebno“, zaključak sa probnog lima označen kao urednička procena i ublažen, odgovor o odmašćivaču usklađen sa listom Mild (brisanje drugom krpom pre nego što se osuši) uz citat. Sanacija je jasno označena kao opšte objašnjenje."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

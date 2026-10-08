@@ -99,15 +99,16 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Refinish 1 v.02, C-05 V02, C-07 V01, C-10 V01, Quadra Pad C10 V01, Waffle Pad orange V01, Carsystem katalog 2026/27 i brošura X serije (Compound X1500 600–1500 o/min, rotaciono i ekscentrično, ne suši se), BEFAR katalog str. 4–7, RUPES D-A FINE tehnički list i stranica LH19E; brzine se poklapaju. Ispravljeno: Refinish 1 tehnički list ne navodi vrstu mašine (brzina više nije pripisana rotacionoj), red Compound X1500 dopunjen, citati za sunčevu svetlost dopunjeni na C-05/C-07/C-10, uklonjena neproverena tvrdnja „obično“."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kada se pasta lepi, brzo suši u prah ili lak postaje vreo pod sunđerom, uzrok je obično u kombinaciji količine paste, toplote i načina rada, a ne u samoj pasti. Mogući uzroci su previše ili premalo paste, rad na zagrejanom delu, prevelika brzina ili pritisak, zasićen sunđer i pogrešan par paste i sunđera. Carsystem za Refinish 1 izričito traži da se pasta nanosi štedljivo, bez jakog pritiska i čistim sunđerom[^cs-refinish1-tds].
+Kada se pasta lepi, brzo suši u prah ili lak postaje vreo pod sunđerom, uzrok se traži u količini paste, temperaturi dela, načinu rada i paru paste i sunđera, pre nego što se posumnja u samu pastu. Mogući uzroci su previše ili premalo paste, rad na zagrejanom delu, prevelika brzina ili pritisak, zasićen sunđer i pogrešan par paste i sunđera. Carsystem za Refinish 1 izričito traži da se pasta nanosi štedljivo, bez jakog pritiska i čistim sunđerom[^cs-refinish1-tds].
 
 ## Mogući uzroci i kako se proveravaju
 
@@ -117,7 +118,7 @@ Konačan uzrok zavisi od paste, sunđera, laka i uslova rada, pa je ovo spisak z
 | --- | --- |
 | Previše paste | Da li pasta ostaje kao masna mrlja koja se razmazuje umesto da radi? RUPES za svoje D-A sunđere navodi da previše paste smanjuje učinak i da sunđer ne treba prezasititi[^rupes-da-fine-ts]. |
 | Premalo paste ili predugo na istom mestu | Da li se pasta posle kratkog rada pretvara u prah i sunđer počinje da „vuče“? |
-| Zagrejan deo ili rad na suncu | Tehnički listovi Carsystem pasta navode da se izbegava rad na direktnoj sunčevoj svetlosti[^cs-c10-tds]. Proverite rukom deo pre rada i posle prvog prolaza. |
+| Zagrejan deo ili rad na suncu | Tehnički listovi Carsystem pasta C-05, C-07 i C-10 navode da se izbegava rad na direktnoj sunčevoj svetlosti[^cs-c05-tds][^cs-c07-tds][^cs-c10-tds]. Proverite rukom deo pre rada i posle prvog prolaza. |
 | Previsoka brzina ili jak pritisak | Uporedite podešavanje mašine sa opsegom iz tehničkog lista paste (tabela ispod). |
 | Rotaciona mašina zadržana na jednom mestu | RUPES navodi da rotacioni pokret stvara znatno trenje i toplotu i da pri nepravilnoj upotrebi može da „spali“ ili probije lak[^rupes-lh19e]. |
 | Zasićen ili prljav sunđer | Da li je sunđer težak, sjajan od osušene paste ili korišćen za drugu pastu? Vidi [Čišćenje sunđera za poliranje](/vodici/ciscenje-i-vek-sundjera). |
@@ -131,15 +132,15 @@ Opseg brzine nije isti za sve paste, pa se uzima iz lista paste koju koristite:
 | --- | --- | --- |
 | Carsystem Polish C-05 cut | 1500–2000 o/min | 2000–10 000 o/min[^cs-c05-tds] |
 | Carsystem Polish C-07 cut | 700–1700 o/min | 700–4000 o/min[^cs-c07-tds] |
-| Carsystem Refinish 1 | 1500–2400 o/min, najbolje oko 1800 o/min | tehnički list ne navodi[^cs-refinish1-tds] |
-| Carsystem Compound X1500 | 600–1500 o/min, za obe vrste mašina[^cs-katalog] | |
+| Carsystem Refinish 1 | 1500–2400 o/min, najbolje oko 1800 o/min; list ne navodi vrstu mašine[^cs-refinish1-tds] | list ne razlikuje vrstu mašine[^cs-refinish1-tds] |
+| Carsystem Compound X1500 | 600–1500 o/min[^cs-katalog] | 600–1500 o/min, isti opseg za obe vrste mašina[^cs-katalog] |
 
 Pritisak nijedan od ovih listova ne izražava brojem. Za Refinish 1 Carsystem opisuje postupak: pasta se rasporedi u tanak, ravnomeran sloj, a čim površina prestane da bude mutna, pritisak se smanjuje i mašina se dalje vodi bez pritiskanja[^cs-refinish1-tds].
 
 ## Šta smanjuje zagrevanje
 
 - **Sunđer građen da se manje greje.** Za Finish Quadra Pad C-10 Carsystem navodi urezanu površinu koja daje veći skid i manje zagrevanje[^cs-quadra-tds], a za Finish Waffle Pad orange posebnu penu i vafl oblik koji omogućavaju duže poliranje bez pregrevanja površine[^cs-waffle-orange-tds].
-- **Pasta predviđena za rad na nižoj temperaturi.** U katalogu Carsystem za Polish C-10 strong i za krzno Lamb Wool Pad Gold S navodi poliranje na nižem temperaturnom nivou[^cs-katalog].
+- **Pasta ili krzno predviđeni za rad na nižoj temperaturi.** U katalogu Carsystem za Polish C-10 strong i za krzno Lamb Wool Pad Gold S navodi poliranje na nižem temperaturnom nivou[^cs-katalog].
 - **Pasta koja se ne suši.** Za Compound X1500 proizvođač navodi da se pasta ne suši i ne praši tokom poliranja[^cs-katalog]. Ako pasta koju koristite brzo prelazi u prah, proverite pre svega količinu i temperaturu dela.
 - **Manji deo površine po prolazu.** Opšte objašnjenje: kada se pasta razvlači preko velike površine, sloj postaje pretanak i brže se suši.
 

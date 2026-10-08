@@ -5,16 +5,16 @@ Generiše `npm run saveti:build`. Ne menjati ručno.
 | Pokazatelj | Broj |
 | --- | ---: |
 | Teme u inventaru | 224 |
-| Napisano | 220 |
-| Tehnička provera prošla | 140 |
-| Jezička provera prošla | 164 |
-| Čeka stručnu potvrdu | 36 |
+| Napisano | 224 |
+| Tehnička provera prošla | 165 |
+| Jezička provera prošla | 198 |
+| Čeka stručnu potvrdu | 40 |
 | Odobreno za objavu (imenovana osoba) | 0 |
 | Od toga novosti | 9 |
 
-## Greške (1)
+## Greške (0)
 
-- content/saveti/clanci/organizacija-mesaonice-boje.md: „opis“ ima 162 znakova, maksimum 160
+Nema.
 
 ## Upozorenja (0)
 

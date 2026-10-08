@@ -103017,8 +103017,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -103906,8 +103906,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -104591,8 +104591,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -105254,8 +105254,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -105945,12 +105945,13 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Izvori su protivrečni: baslac stranica o grešci (sve jezičke verzije) kao uzrok navodi predugo odzračivanje pre sušenja, što se ne slaže sa prevencijom na istoj stranici ni sa Glasurit biltenom. Po uredničkom pravilu tema sa protivrečnim izvorima čeka stručnu potvrdu.",
+    "status": "potrebno"
    },
    "poslednjaProvera": "2026-10-08",
    "ponovniPregled": "2027-04-08",
@@ -106586,8 +106587,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -107296,8 +107297,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -107864,12 +107865,12 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
-    "razlog": "Za pojavu tragova tek posle nekoliko dana javni izvori proizvođača ne daju objašnjenje; R-M opisuje samo srodno bubrenje od zaostalog rastvarača (detalji iza prijave). Veza između bubrenja i tragova brušenja je urednička i traži stručnu potvrdu.",
+    "razlog": "Javni izvori proizvođača iz našeg programa ne daju ni listu uzroka tragova brušenja (R-M daje samo opis, detalji su iza prijave) ni objašnjenje zašto se tragovi pojave tek posle nekoliko dana; R-M opisuje samo srodno bubrenje od zaostalog rastvarača. Lista uzroka (granulacija, kit bez punioca, preskočen korak) je opšte objašnjenje, a veza bubrenja i tragova brušenja urednička; oboje treba stručno potvrditi.",
     "status": "potrebno"
    },
    "poslednjaProvera": "2026-10-08",
@@ -108404,8 +108405,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -109097,8 +109098,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -109673,8 +109674,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -110262,8 +110263,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -110863,8 +110864,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -111368,7 +111369,7 @@
    "slug": "lak-se-ljusti-sa-plastike",
    "naslov": "Lak se ljušti sa plastičnog dela",
    "metaNaslov": "Lak se ljušti sa plastičnog branika: uzroci",
-   "opis": "Mogući uzroci ljuštenja boje i laka sa plastičnih delova posle nekoliko meseci, kako se uzrok proverava i šta baslac, R-M i Carsystem navode o sanaciji.",
+   "opis": "Mogući uzroci ljuštenja boje i laka sa plastičnih delova posle nekoliko meseci, kako se uzrok proverava i šta baslac i R-M navode o sanaciji.",
    "kategorija": "greske-pri-lakiranju",
    "podtema": "prianjanje na plastiku",
    "tip": "resavanje-problema",
@@ -111473,8 +111474,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -111488,7 +111489,7 @@
    "revizije": [],
    "imaTekst": true,
    "reci": 737,
-   "otisak": "063b0c627bd0b7df3c5d",
+   "otisak": "aadd4385f18ac59f59bf",
    "blocks": [
     {
      "t": "p",
@@ -112063,8 +112064,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -112633,8 +112634,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -113300,8 +113301,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -113902,8 +113903,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -114308,8 +114309,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -114824,8 +114825,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -115482,8 +115483,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -120140,8 +120141,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -120154,8 +120155,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 606,
-   "otisak": "2b6e95d54212d8479bd9",
+   "reci": 634,
+   "otisak": "1e30fae7b57829f51c79",
    "blocks": [
     {
      "t": "p",
@@ -120178,7 +120179,7 @@
       },
       {
        "t": "text",
-       "v": ". Za početnika je zato pogodnija ekscentarska mašina; rotaciona ima smisla u rukama iskusnog lakirera."
+       "v": ". Prema uredničkoj proceni, za početnika je zato pogodnija ekscentarska mašina, a rotaciona ima smisla u rukama iskusnog lakirera."
       }
      ]
     },
@@ -120198,7 +120199,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Prema RUPES-u, kod rotacione mašine tanjir se okreće oko središnje ose i najveća brzina je na ivici sunđera. To je pokret koji najjače deluje na površinu: stvara mnogo trenja i toplote, a pri nepravilnoj upotrebi može da izazove pregrevanje, probijanje laka i kružne tragove (hologrami). Istovremeno, rotaciona mašina ima najmanje vibracija"
+       "v": "Prema RUPES-u, kod rotacione mašine tanjir se okreće oko središnje ose i najveća brzina je na ivici sunđera. To je pokret koji najjače deluje na površinu: stvara mnogo trenja i toplote, a pri nepravilnoj upotrebi može da izazove pregrevanje, probijanje laka i kružne tragove (hologrami). Istovremeno, u rukama veštog majstora rotaciona mašina ima najmanje vibracija od svih vrsta pokreta"
       },
       {
        "t": "cite",
@@ -120543,7 +120544,7 @@
        },
        {
         "t": "text",
-        "v": " mini mašine sa tanjirom od 75 mm"
+        "v": " mini mašine sa tanjirom od 74–77 mm"
        },
        {
         "t": "cite",
@@ -120630,7 +120631,15 @@
       },
       {
        "t": "text",
-       "v": ". Polir mašine imaju znatno veći hod od ekscentarskih brusilica; o hodu kod brušenja piše vodič "
+       "v": ". Ovi hodovi su znatno veći od hoda brusilice za tačke, na primer 3 mm kod Carsystem CSH-CMS01"
+      },
+      {
+       "t": "cite",
+       "id": "cs-katalog"
+      },
+      {
+       "t": "text",
+       "v": "; o hodu kod brušenja piše vodič "
       },
       {
        "t": "link",
@@ -120664,7 +120673,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Često da, ali sa drugim brzinama. Za Carsystem Polish C-05 cut tehnički list navodi 1500–2000 o/min za rotacionu i 2000–10 000 o/min za ekscentarsku mašinu"
+       "v": "Kod pasta iz našeg programa čije smo listove proverili, da, ali sa drugim brzinama. Za Carsystem Polish C-05 cut tehnički list navodi 1500–2000 o/min za rotacionu i 2000–10 000 o/min za ekscentarsku mašinu"
       },
       {
        "t": "cite",
@@ -120757,6 +120766,14 @@
      "tip": "katalog-proizvodjaca"
     },
     {
+     "id": "cs-c10-tds",
+     "naziv": "Carsystem, Technical Datasheet CS Polish C-10 strong",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-c-10-strong.pdf",
+     "verzija": "V01, 09/2014",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
      "id": "cs-c30-tds",
      "naziv": "Carsystem, Technical Datasheet CS Polish C-30 finish",
      "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-c-30-finish.pdf",
@@ -120806,8 +120823,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -120820,15 +120837,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 529,
-   "otisak": "87775455c43373504dd0",
+   "reci": 553,
+   "otisak": "c142668d1ff36fd91346",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Hologrami su fini kružni tragovi koje u laku ostavljaju abrazivna pasta, sunđer i pokret mašine. Najbolje se vide na tamnim bojama, pod suncem ili jakim tačkastim svetlom. Uklanjaju se završnim korakom: finom pastom protiv holograma i mekim sunđerom. Carsystem Polish C-30 finish, na primer, namenjuje uklanjanju najfinijih ogrebotina, kružnih tragova i holograma na tamnim bojama, kao poslednji korak"
+       "v": "Opšte objašnjenje: hologrami su fini kružni tragovi koje u laku ostavljaju abrazivna pasta, sunđer i pokret mašine. Najbolje se vide na tamnim bojama, pod suncem ili jakim tačkastim svetlom. Uklanjaju se završnim korakom: finom pastom protiv holograma i mekim sunđerom. Carsystem Polish C-30 finish, na primer, namenjuje uklanjanju najfinijih ogrebotina, kružnih tragova i holograma na tamnim bojama, kao poslednji korak"
       },
       {
        "t": "cite",
@@ -121089,7 +121106,7 @@
        },
        {
         "t": "text",
-        "v": " posle brisanja. Ako tragovi ostaju na tamnoj boji, ekscentarska mašina u završnom koraku je blaža opcija; razlike opisuje vodič "
+        "v": " posle brisanja. Ako tragovi ostaju na tamnoj boji, ekscentarska mašina u završnom koraku je, prema uredničkoj proceni zasnovanoj na opisu pokreta kod RUPES-a, blaža opcija; razlike opisuje vodič "
        },
        {
         "t": "link",
@@ -121161,7 +121178,11 @@
      "c": [
       {
        "t": "text",
-       "v": "Izbegavajte rad na direktnom suncu i na zagrejanom delu; tehnički listovi Carsystem pasta to izričito navode"
+       "v": "Izbegavajte rad na direktnom suncu; tehnički listovi pasta C-10 strong i C-30 finish to izričito navode"
+      },
+      {
+       "t": "cite",
+       "id": "cs-c10-tds"
       },
       {
        "t": "cite",
@@ -121169,7 +121190,7 @@
       },
       {
        "t": "text",
-       "v": ". Ako su tragovi duboki ili se ponavljaju i posle završnog koraka, uzrok je verovatno u ranijoj fazi, pa se vraća korak unazad."
+       "v": ". Ni zagrejan deo nije dobra podloga za završni korak; ovo je opšte objašnjenje. Ako su tragovi duboki ili se ponavljaju i posle završnog koraka, uzrok je verovatno u ranijoj fazi, pa se vraća korak unazad."
       }
      ]
     },
@@ -121364,8 +121385,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -121378,8 +121399,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 703,
-   "otisak": "f3782c798ff33e5ef6f8",
+   "reci": 720,
+   "otisak": "ac49dcc3cc6919058d9b",
    "blocks": [
     {
      "t": "p",
@@ -121589,7 +121610,7 @@
        },
        {
         "t": "text",
-        "v": " U programu su RUPES Ibrid Nano, mala baterijska mašina sa tanjirima od 30 mm i 50 mm, i RUPES HLR75STB, ekscentarska mašina sa tanjirom od 75 mm"
+        "v": " U programu su RUPES Ibrid Nano, mala baterijska mašina za brušenje i poliranje uz koju katalog navodi i male sunđere za poliranje 9.DA 40, i RUPES HLR75STB, ekscentarska mašina sa tanjirom od 75 mm"
        },
        {
         "t": "cite",
@@ -121628,7 +121649,7 @@
        },
        {
         "t": "text",
-        "v": ". Za RUPES D-A sunđere proizvođač navodi profil ivice oblikovan za bezbedan rad blizu ivica"
+        "v": ". Za D-A sunđere, koji su u Carsystem programu kao RUPES Polish Pad, proizvođač navodi profil ivice oblikovan za bezbedan rad blizu ivica"
        },
        {
         "t": "cite",
@@ -121651,7 +121672,7 @@
        },
        {
         "t": "text",
-        "v": " Na pregibu se ne radi do „potpunog“ sjaja jednim dugim prolazom, nego kratkim prolazima uz proveru. Ako se deo previše zagreje, prekinite i sačekajte da se ohladi. Za Refinish 1 Carsystem navodi da se, kada se površina previše zagreva, može naprskati malo vode, ali ne više nego što je neophodno"
+        "v": " Opšte pravilo: na pregibu se ne radi do „potpunog“ sjaja jednim dugim prolazom, nego kratkim prolazima uz proveru. Ako se deo previše zagreje, prekinite i sačekajte da se ohladi. Za Refinish 1 Carsystem navodi da se, kada se površina previše zagreva, može naprskati malo vode, ali ne više nego što je neophodno"
        },
        {
         "t": "cite",
@@ -122020,8 +122041,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -122034,15 +122055,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 691,
-   "otisak": "50626978755a4d56a0d1",
+   "reci": 714,
+   "otisak": "04aed1398102f2a02c5b",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Kada se pasta lepi, brzo suši u prah ili lak postaje vreo pod sunđerom, uzrok je obično u kombinaciji količine paste, toplote i načina rada, a ne u samoj pasti. Mogući uzroci su previše ili premalo paste, rad na zagrejanom delu, prevelika brzina ili pritisak, zasićen sunđer i pogrešan par paste i sunđera. Carsystem za Refinish 1 izričito traži da se pasta nanosi štedljivo, bez jakog pritiska i čistim sunđerom"
+       "v": "Kada se pasta lepi, brzo suši u prah ili lak postaje vreo pod sunđerom, uzrok se traži u količini paste, temperaturi dela, načinu rada i paru paste i sunđera, pre nego što se posumnja u samu pastu. Mogući uzroci su previše ili premalo paste, rad na zagrejanom delu, prevelika brzina ili pritisak, zasićen sunđer i pogrešan par paste i sunđera. Carsystem za Refinish 1 izričito traži da se pasta nanosi štedljivo, bez jakog pritiska i čistim sunđerom"
       },
       {
        "t": "cite",
@@ -122137,7 +122158,15 @@
        [
         {
          "t": "text",
-         "v": "Tehnički listovi Carsystem pasta navode da se izbegava rad na direktnoj sunčevoj svetlosti"
+         "v": "Tehnički listovi Carsystem pasta C-05, C-07 i C-10 navode da se izbegava rad na direktnoj sunčevoj svetlosti"
+        },
+        {
+         "t": "cite",
+         "id": "cs-c05-tds"
+        },
+        {
+         "t": "cite",
+         "id": "cs-c07-tds"
         },
         {
          "t": "cite",
@@ -122338,13 +122367,17 @@
        [
         {
          "t": "text",
-         "v": "1500–2400 o/min, najbolje oko 1800 o/min"
+         "v": "1500–2400 o/min, najbolje oko 1800 o/min; list ne navodi vrstu mašine"
+        },
+        {
+         "t": "cite",
+         "id": "cs-refinish1-tds"
         }
        ],
        [
         {
          "t": "text",
-         "v": "tehnički list ne navodi"
+         "v": "list ne razlikuje vrstu mašine"
         },
         {
          "t": "cite",
@@ -122362,14 +122395,23 @@
        [
         {
          "t": "text",
-         "v": "600–1500 o/min, za obe vrste mašina"
+         "v": "600–1500 o/min"
         },
         {
          "t": "cite",
          "id": "cs-katalog"
         }
        ],
-       []
+       [
+        {
+         "t": "text",
+         "v": "600–1500 o/min, isti opseg za obe vrste mašina"
+        },
+        {
+         "t": "cite",
+         "id": "cs-katalog"
+        }
+       ]
       ]
      ]
     },
@@ -122441,7 +122483,7 @@
         "c": [
          {
           "t": "text",
-          "v": "Pasta predviđena za rad na nižoj temperaturi."
+          "v": "Pasta ili krzno predviđeni za rad na nižoj temperaturi."
          }
         ]
        },
@@ -122755,8 +122797,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -122769,8 +122811,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 595,
-   "otisak": "b6d0340276312b67df8f",
+   "reci": 636,
+   "otisak": "6540586f7af1ecc66a09",
    "blocks": [
     {
      "t": "p",
@@ -122785,7 +122827,7 @@
       },
       {
        "t": "text",
-       "v": ". RUPES za svoje D-A sunđere preporučuje čišćenje tokom rada komprimovanim vazduhom, usisivačem ili namenskim alatom i upozorava da se ne koriste paste i sredstva za čišćenje na bazi rastvarača, jer oštećuju strukturu pene"
+       "v": ". RUPES za D-A FINE sunđer (u Carsystem programu RUPES Polish Pad, fine) preporučuje čišćenje tokom rada komprimovanim vazduhom, usisivačem ili namenskim alatom i upozorava da se ne koriste paste i sredstva za čišćenje na bazi rastvarača, jer oštećuju strukturu pene"
       },
       {
        "t": "cite",
@@ -122793,7 +122835,7 @@
       },
       {
        "t": "text",
-       "v": ". Sunđer se menja kada se pena cepa, mrvi ili odvaja od čička, ili kada posle čišćenja više ne radi ujednačeno."
+       "v": ". Kada sunđer treba zameniti, proizvođači iz našeg programa ne navode; opšti znaci su pocepana ili izmrvljena pena, čičak koji se odvaja i sunđer koji ni posle čišćenja ne radi ujednačeno."
       }
      ]
     },
@@ -122813,7 +122855,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Opšte objašnjenje: u porama sunđera ostaju osušena pasta i skinute čestice laka. Takav sunđer postaje tvrđi, jače greje i može da ostavi tragove koje ste upravo uklanjali. Za Refinish 1 Carsystem izričito navodi da sunđer mora biti čist da se uklone pruge"
+       "v": "Opšte objašnjenje: u porama sunđera ostaju osušena pasta i skinute čestice laka. Takav sunđer postaje tvrđi, jače greje i može da ostavi tragove koje ste upravo uklanjali. Za Refinish 1 Carsystem izričito navodi da sunđer mora biti čist da bi se uklonile pruge"
       },
       {
        "t": "cite",
@@ -122873,7 +122915,7 @@
        },
        {
         "t": "text",
-        "v": "; za RUPES D-A sunđere komprimovani vazduh, usisivač ili namenski alat"
+        "v": "; za RUPES D-A FINE komprimovani vazduh, usisivač ili namenski alat"
        },
        {
         "t": "cite",
@@ -122896,7 +122938,7 @@
        },
        {
         "t": "text",
-        "v": " RUPES navodi da previše paste smanjuje učinak sunđera"
+        "v": " Za D-A FINE RUPES navodi da previše paste smanjuje učinak sunđera"
        },
        {
         "t": "cite",
@@ -122919,7 +122961,7 @@
        },
        {
         "t": "text",
-        "v": " Sunđer korišćen sa abrazivnom pastom ne prelazi na završnu pastu. Vodič "
+        "v": " Opšte pravilo: sunđer korišćen sa abrazivnom pastom ne prelazi na završnu pastu. Vodič "
        },
        {
         "t": "link",
@@ -122972,7 +123014,7 @@
        },
        {
         "t": "text",
-        "v": ". RUPES D-A se ne čisti rastvaračima"
+        "v": ". Za RUPES D-A FINE proizvođač upozorava na sredstva za čišćenje na bazi rastvarača"
        },
        {
         "t": "cite",
@@ -123106,7 +123148,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Proizvođači iz našeg programa ne navode broj upotreba ni rok trajanja sunđera, pa je ovo opšti spisak znakova:"
+       "v": "Proizvođači iz našeg programa ne navode broj upotreba ni rok trajanja sunđera. Znaci ispod su opšta pravila iz prakse, a ne navod proizvođača:"
       }
      ]
     },
@@ -123158,7 +123200,7 @@
       },
       {
        "t": "text",
-       "v": ", ali i ono se menja kada se dlaka sabije ili počne da opada."
+       "v": ". Opšte pravilo: i krzno se menja kada se dlaka sabije ili počne da opada."
       }
      ]
     },
@@ -123209,7 +123251,7 @@
      "c": [
       {
        "t": "text",
-       "v": "RUPES za svoje D-A sunđere to izričito ne preporučuje, jer rastvarači oštećuju ćelije pene"
+       "v": "RUPES za D-A FINE sunđer upozorava na sredstva na bazi rastvarača, jer oštećuju ćelije pene"
       },
       {
        "t": "cite",
@@ -123217,7 +123259,7 @@
       },
       {
        "t": "text",
-       "v": ". Za ostale sunđere pratite uputstvo njihovog proizvođača; kada ga nema, rastvarač nije dobar izbor."
+       "v": ". Za ostale sunđere pratite uputstvo njihovog proizvođača. Kada uputstva nema, opšte pravilo je da se rastvarač ne koristi."
       }
      ]
     }
@@ -123336,8 +123378,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -123350,15 +123392,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 661,
-   "otisak": "72a0ab7d984436df79b3",
+   "reci": 662,
+   "otisak": "59a3ad0c9387045de40a",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Sjaj izbledelog laka često može da se vrati poliranjem, ako je oštećen samo tanak površinski sloj i ako laka ima dovoljno. Radi se redom: pranje i čišćenje, abrazivna pasta, provera, završna pasta i na kraju zaštita. Carsystem za Refinish 1 navodi da je pogodan i za jako istrošene i oksidisane površine"
+       "v": "Sjaj izbledelog laka može da se vrati poliranjem ako je oštećen samo tanak površinski sloj i ako laka ima dovoljno. Radi se redom: pranje i čišćenje, abrazivna pasta, provera, završna pasta i na kraju zaštita. Carsystem za Refinish 1 navodi da je pogodan i za jako istrošene i oksidisane površine"
       },
       {
        "t": "cite",
@@ -123425,7 +123467,7 @@
        },
        {
         "t": "text",
-        "v": " Beličast prah na prstu je kredanje, a žuta nijansa na svetlim bojama je druga pojava. Razlike objašnjavaju vodiči "
+        "v": " Beličast prah na prstu obično ukazuje na kredanje, a žuta nijansa na svetlim bojama je druga pojava. Razlike objašnjavaju vodiči "
        },
        {
         "t": "link",
@@ -123999,8 +124041,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -124013,8 +124055,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 554,
-   "otisak": "9cce12d8bc2fae03c03c",
+   "reci": 558,
+   "otisak": "312029c83e56b97f8ea0",
    "blocks": [
     {
      "t": "p",
@@ -124042,7 +124084,7 @@
       },
       {
        "t": "text",
-       "v": ". Pre poliranja je potrebna kada se oprana i suva površina pod prstima oseća hrapavo ili kada se na njoj vide sitne tačke. Ako je površina glatka, glina nije obavezan korak."
+       "v": ". Opšte pravilo: pre poliranja je potrebna kada se oprana i suva površina pod prstima oseća hrapavo ili kada se na njoj vide sitne tačke. Ako je površina glatka, glina nije obavezan korak."
       }
      ]
     },
@@ -124173,7 +124215,7 @@
        },
        {
         "t": "text",
-        "v": " Radite na površini koju možete da pregledate, otprilike pola haube, a ne na celom vozilu odjednom."
+        "v": " Opšte pravilo: radite na površini koju možete da pregledate, otprilike pola haube, a ne na celom vozilu odjednom."
        }
       ],
       [
@@ -124409,6 +124451,7 @@
     "baslac"
    ],
    "proizvodi": [
+    "carsystem-2k-clear-voc-matt",
     "c-2a93-mattop",
     "baslac-40-620-2k-clear-mat-voc"
    ],
@@ -124470,8 +124513,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -124484,8 +124527,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 629,
-   "otisak": "75c1e3b91ba09eb43fea",
+   "reci": 670,
+   "otisak": "443cdf0a7e4a662630c0",
    "blocks": [
     {
      "t": "p",
@@ -124718,7 +124761,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Tehnički listovi mat lakova iz našeg programa ne daju program nege, pa ovde navodimo samo ono što iz njih proizlazi i opšta pravila:"
+       "v": "Tehnički listovi mat lakova iz našeg programa ne daju program nege. Zato ovde stoji samo ono što proizlazi iz njihovog navoda da poliranje menja stepen sjaja, uz opšta pravila koja nisu navod proizvođača:"
       }
      ]
     },
@@ -124737,7 +124780,7 @@
        },
        {
         "t": "text",
-        "v": " Paste za poliranje, abrazivni čistači i „polir“ sredstva menjaju stepen sjaja, isto kao poliranje mašinom."
+        "v": " Izvedeno iz tehničkih listova: ako poliranje menja stepen sjaja, isto se može očekivati od pasta za poliranje, abrazivnih čistača i „polir“ sredstava i kada se nanose ručno."
        }
       ],
       [
@@ -124767,7 +124810,7 @@
        },
        {
         "t": "text",
-        "v": " Insekte, ptičji izmet i smolu treba ukloniti što pre, jer kasnije traže jače trljanje. Postupak sa takvim ostacima opisuje vodič "
+        "v": " Opšte pravilo: insekte, ptičji izmet i smolu treba ukloniti što pre, jer kasnije traže jače trljanje. Postupak sa takvim ostacima opisuje vodič "
        },
        {
         "t": "link",
@@ -124879,7 +124922,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Ne polira se. Sitna, jedva vidljiva greška se obično ostavlja, jer bi pokušaj uklanjanja napravio vidljiviju sjajnu mrlju. Ako greška mora da se ukloni, deo se brusi i ponovo laki celom površinom, istim receptom i stepenom sjaja, kako navodi baslac za 40-620"
+       "v": "Ne polira se. Da li se sitna, jedva vidljiva greška ostavlja, procenjuje se u radionici; pokušaj lokalnog uklanjanja ostavio bi vidljiviju sjajnu mrlju. Ako greška mora da se ukloni, lakira se ceo deo: baslac za 40-620 navodi da je lakiranje celog dela obavezno i preporučuje probni lim pre popravke, da se stepen sjaja uporedi sa delom koji se popravlja"
       },
       {
        "t": "cite",
@@ -125007,12 +125050,12 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
-    "razlog": "Proizvođač seta iz našeg programa (BEFAR) navodi samo sastav seta, bez uputstva, brzine, vremena rada i zaštite posle poliranja. Objašnjenje zašto se zamućenje vraća i preporuka o zaštiti fara nemaju izvor proizvođača iz programa; potrebna je stručna potvrda ili uputstvo uz set.",
+    "razlog": "Proizvođač seta iz našeg programa (BEFAR) navodi samo sastav seta, bez uputstva, brzine, vremena rada i zaštite posle poliranja. Redosled rada (mokro brušenje 1000 → 2000, No:1 sa krznom, No:2 sa crnim sunđerom) urednički je izveden iz sastava seta, a objašnjenje zašto se zamućenje vraća i pitanje zaštite fara nemaju izvor proizvođača iz programa; potrebna je stručna potvrda ili uputstvo iz pakovanja seta.",
     "status": "potrebno"
    },
    "poslednjaProvera": "2026-10-08",
@@ -125022,8 +125065,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 619,
-   "otisak": "db3ff7c8b0d2581e0366",
+   "reci": 690,
+   "otisak": "b3f6b691ea94d56bc4df",
    "blocks": [
     {
      "t": "p",
@@ -125038,7 +125081,7 @@
       },
       {
        "t": "text",
-       "v": ". Proizvođač seta u katalogu ne daje uputstvo za rad ni za zaštitu fara posle poliranja, pa se postupak ispod oslanja na sastav seta i na opšta pravila poliranja."
+       "v": ". Proizvođač seta u katalogu ne daje uputstvo za rad ni za zaštitu fara posle poliranja. Redosled ispod je zato urednički izveden iz sastava seta i opštih pravila poliranja, a nije uputstvo proizvođača."
       }
      ]
     },
@@ -125257,11 +125300,11 @@
     {
      "t": "h",
      "level": 2,
-     "id": "redosled-rada",
+     "id": "redosled-rada-izveden-iz-sastava-seta",
      "c": [
       {
        "t": "text",
-       "v": "Redosled rada"
+       "v": "Redosled rada (izveden iz sastava seta)"
       }
      ]
     },
@@ -125270,7 +125313,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Redosled sledi iz sastava seta: od grubljeg papira ka finijem, pa od abrazivnog sredstva ka završnom. Tačno vreme, brzinu bušilice i količinu sredstva proizvođač ne navodi, pa ih ne izmišljamo."
+       "v": "Ovaj redosled nije uputstvo BEFAR-a. Izveden je iz sastava seta: od grubljeg papira ka finijem, pa od abrazivnog sredstva („Scratch Remover Compound“) ka završnom („Polish“). Da se brusi mokro, zaključeno je iz toga što su papiri u setu označeni kao vodobrusni. Uparivanje sredstva No:1 sa krznom i sredstva No:2 sa crnim sunđerom takođe je izvedeno: katalog za crni sunđer osnovne linije navodi namenu za polir ili zaštitu laka"
+      },
+      {
+       "t": "cite",
+       "id": "befar-katalog"
+      },
+      {
+       "t": "text",
+       "v": ", a za set ne navodi koji deo ide uz koje sredstvo. Tačno vreme, brzinu bušilice i količinu sredstva proizvođač ne navodi, pa ih ovde nema."
       }
      ]
     },
@@ -125612,7 +125663,7 @@
      "datumIzvora": "2023-04-29",
      "pristupljeno": "2026-10-08",
      "tip": "propis",
-     "napomena": "Tekst otvoren u Pravno-informacionom sistemu RS; čl. 11, čl. 15 (tačke 4, 5 i 6), čl. 28, čl. 29, čl. 30 i čl. 41."
+     "napomena": "Tekst otvoren u Pravno-informacionom sistemu RS; čl. 11, čl. 15 (tačke 4, 5 i 6), čl. 28, čl. 30 i čl. 41."
     },
     {
      "id": "euosha-89-656",
@@ -125673,8 +125724,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "provereno",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": false,
@@ -125687,15 +125738,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 958,
-   "otisak": "74e028e106a8e051dfb4",
+   "reci": 1030,
+   "otisak": "eee466689a7e7c702732",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Lična zaštitna oprema autolakirera zavisi od faze rada i od materijala, a konkretnu opremu za proizvod propisuje odeljak 8 njegovog bezbednosnog lista. U listovima iz našeg programa za brušenje i mešanje to su po pravilu rukavice, zaštitne naočare i zaštitna odeća, a za prskanje 2K materijala i zaštita disanja. Oprema je poslednja linija zaštite: koristi se kada se rizik ne može dovoljno smanjiti tehničkim merama i organizacijom rada"
+       "v": "Lična zaštitna oprema autolakirera zavisi od faze rada i od materijala, a konkretnu opremu za proizvod propisuje odeljak 8 njegovog bezbednosnog lista. U tri lista iz našeg programa koja prikazujemo niže to su rukavice, zaštitne naočare, zaštitna odeća i zaštita disanja, ali se vrsta zaštite razlikuje od proizvoda do proizvoda. Oprema dolazi posle tehničkih mera: koristi se kada se rizik ne može dovoljno smanjiti tehničkim merama i organizacijom rada"
       },
       {
        "t": "cite",
@@ -125784,7 +125835,7 @@
       },
       {
        "t": "text",
-       "v": ". Maska koja ne prianja uz lice zbog naočara ne štiti kako bi trebalo."
+       "v": ". Opšte objašnjenje: maska koja zbog naočara ne prianja uz lice ne štiti kako bi trebalo."
       }
      ]
     },
@@ -125826,7 +125877,7 @@
       [
        {
         "t": "text",
-        "v": "Šta navodi odeljak 8"
+        "v": "Šta navodi bezbednosni list"
        }
       ]
      ],
@@ -125847,7 +125898,7 @@
        [
         {
          "t": "text",
-         "v": "zaštitne naočare sa bočnom zaštitom (EN 166), rukavice i zaštitna odeća; upozorenje da se prašina ne udiše"
+         "v": "odeljak 8: zaštitne naočare sa bočnom zaštitom (EN 166), rukavice prema EN ISO 374-1, antistatička zaštitna odeća, polumaska sa filterom A1P2 pri dodiru sa aerosolima; odeljak 2: upozorenje da se prašina i magla ne udišu"
         },
         {
          "t": "cite",
@@ -125871,7 +125922,7 @@
        [
         {
          "t": "text",
-         "v": "dobro prianjajuće zaštitne naočare (EN 166), rukavice prema EN ISO 374-1, antistatička odeća i jednokratni kombinezon otporan na hemikalije, polumaska sa filterom A1P2"
+         "v": "odeljak 8: dobro prianjajuće zaštitne naočare (EN 166), rukavice prema EN ISO 374-1, antistatička odeća i jednokratni kombinezon otporan na hemikalije, polumaska sa filterom A1P2"
         },
         {
          "t": "cite",
@@ -125895,7 +125946,7 @@
        [
         {
          "t": "text",
-         "v": "naočare sa bočnom zaštitom (EN 166), hemijski otporne rukavice, jednokratni kombinezon, maska za celo lice sa filterom AB2P3; u kabini, tokom prskanja, uređaj za disanje sa dovodom komprimovanog vazduha"
+         "v": "odeljak 8: naočare sa bočnom zaštitom (EN 166), rukavice prema EN ISO 374-1, antistatička odeća i jednokratni kombinezon otporan na hemikalije, maska za celo lice sa filterom AB2P3"
         },
         {
          "t": "cite",
@@ -125910,7 +125961,28 @@
      "c": [
       {
        "t": "text",
-       "v": "Razlika između laka i učvršćivača iz istog programa pokazuje zašto se čitaju listovi obe komponente. Učvršćivač sadrži izocijanate, pa njegov list traži strožu zaštitu disanja"
+       "v": "Oba R-M lista u odeljku 7 dodaju da u kabini za lakiranje ventilacija verovatno neće u svim slučajevima biti dovoljna, pa radnik tokom prskanja nosi uređaj za disanje sa dovodom komprimovanog vazduha"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-h2p15-sds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Razlika između laka i učvršćivača iz istog programa pokazuje zašto se čitaju listovi obe komponente. Učvršćivač sadrži izocijanate, a njegov list u odeljku 8 umesto polumaske navodi masku za celo lice"
       },
       {
        "t": "cite",
@@ -126020,11 +126092,15 @@
        },
        {
         "t": "text",
-        "v": " Listovi iz tabele traže naočare prema EN 166, za lak i za kit sa bočnom zaštitom ili dobro prianjajuće"
+        "v": " Listovi iz tabele traže naočare prema EN 166: za kit i za učvršćivač sa bočnom zaštitom, za lak dobro prianjajuće"
        },
        {
         "t": "cite",
         "id": "norbin-n60-v20-sds"
+       },
+       {
+        "t": "cite",
+        "id": "rm-h2p15-sds"
        },
        {
         "t": "cite",
@@ -126074,7 +126150,11 @@
        },
        {
         "t": "text",
-        "v": " Isti listovi traže da se zaprljana odeća odmah skine i da se ruke operu pre pauze i na kraju rada"
+        "v": " R-M listovi traže da se zaprljana odeća odmah skine i da se ruke operu pre pauze i na kraju rada"
+       },
+       {
+        "t": "cite",
+        "id": "rm-c2a40-sds"
        },
        {
         "t": "cite",
@@ -126128,7 +126208,7 @@
        },
        {
         "t": "text",
-        "v": " je jednokratni zaštitni kombinezon kategorije III, tip 5 i 6, sa antistatičkom oblogom prema EN 1149-5; namenjen je zaštiti od prskanja hemikalija i suvih čestica"
+        "v": " je jednokratni zaštitni kombinezon kategorije III, tip 5 i 6, sa antistatičkim premazom prema EN 1149-5; namenjen je zaštiti od prskanja hemikalija i suvih čestica"
        },
        {
         "t": "cite",
@@ -126330,7 +126410,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Zaposleni je dužan da opremu pravilno koristi i pažljivo čuva, i da je pre rada pregleda i prijavi nedostatke"
+       "v": "Zaposleni je dužan da opremu pravilno koristi, da njom pažljivo rukuje i vraća je na mesto za čuvanje, i da je pre početka rada pregleda i poslodavcu prijavi uočene nedostatke"
       },
       {
        "t": "cite",
@@ -126583,7 +126663,7 @@
      "id": "baslac-50-420-sds-hr",
      "naziv": "baslac, Sigurnosno-tehnički list 50-420 0,5L VOC Hardener Normal (HR)",
      "url": "https://msds.baslac.com/files/50400597_MSDS_HR_HR.PDF",
-     "verzija": "Verzija 5.0",
+     "verzija": "Verzija 5.0, datum revizije 15.05.2026",
      "pristupljeno": "2026-10-08",
      "tip": "bezbednosni-list",
      "napomena": "Odeljak 2: H317, H332, H335, H336, diizocijanati među sastojcima na etiketi; odeljak 15: ograničenja iz Priloga XVII, stavke 3 i 75."
@@ -126608,8 +126688,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -126623,15 +126703,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 1101,
-   "otisak": "2f3b990dfd4b55140700",
+   "reci": 1127,
+   "otisak": "ba4172c4fbd902c1483e",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Izocijanati su reaktivne materije u većini 2K učvršćivača. Opasni su jer mogu da izazovu preosetljivost disajnih puteva i kože: kod osobe koja je postala preosetljiva, kasnije i vrlo male koncentracije mogu da izazovu simptome astme"
+       "v": "Izocijanati su reaktivne materije u mnogim 2K učvršćivačima. Opasni su jer mogu da izazovu preosetljivost disajnih puteva i kože: kod osobe koja je postala preosetljiva, kasnije i vrlo male koncentracije mogu da izazovu simptome astme"
       },
       {
        "t": "cite",
@@ -126639,7 +126719,7 @@
       },
       {
        "t": "text",
-       "v": ". Radnik se štiti redom mera: prvo kabina i provetravanje, zatim zaštita disanja i kože prema bezbednosnom listu. U EU od 24. 8. 2023. za profesionalnu upotrebu proizvoda sa više od 0,1 % diizocijanata važi i obavezna obuka"
+       "v": ". Radnik se štiti redom mera: prvo kabina i provetravanje, zatim zaštita disanja i kože prema bezbednosnom listu. U EU od 24. 8. 2023. za industrijsku i profesionalnu upotrebu proizvoda sa 0,1 % ili više diizocijanata važi i obavezna obuka"
       },
       {
        "t": "cite",
@@ -127072,7 +127152,7 @@
        },
        {
         "t": "text",
-        "v": " prskanje u ventilisanoj kabini traži opšti i srednji nivo, a prskanje na otvorenom ili uz samo prirodnu ventilaciju i napredni nivo."
+        "v": " prskanje u ventilisanoj kabini traži opšti i srednji nivo, a prskanje na otvorenom, uz ograničenu ili samo prirodnu ventilaciju, sva tri nivoa: opšti, srednji i napredni."
        }
       ],
       [
@@ -127231,7 +127311,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Uredba 2020/1149 je propis EU. Da li i kako je ova obaveza preneta u propise Srbije, za ovaj tekst nije provereno, pa obaveze radionice proverite prema važećim propisima i sa licem za bezbednost i zdravlje na radu. Tekst ne daje medicinske savete: ako tokom ili posle rada primetite kašalj, gušenje, stezanje u grudima ili promene na koži, prekinite izlaganje, postupite prema odeljku 4 bezbednosnog lista i javite se lekaru medicine rada."
+       "v": "Uredba 2020/1149 je propis EU. Da li i kako je ova obaveza preneta u propise Srbije, za ovaj tekst nije provereno, pa obaveze radionice proverite prema važećim propisima i sa licem za bezbednost i zdravlje na radu. Tekst ne daje medicinske savete. Bezbednosni list H 2P15 u odeljku 11 kao moguće posledice navodi stanje slično astmi, zviždanje i stezanje u grudima"
+      },
+      {
+       "t": "cite",
+       "id": "rm-h2p15-sds"
+      },
+      {
+       "t": "text",
+       "v": ". Ako tokom ili posle rada primetite tegobe sa disanjem ili promene na koži, prekinite rad sa materijalom, postupite prema odeljku 4 bezbednosnog lista i javite se lekaru medicine rada."
       }
      ]
     },
@@ -127483,12 +127571,12 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
-    "razlog": "Bezbednosni listovi navode različitu zaštitu za lak (polumaska A1P2) i za učvršćivač (maska za celo lice AB2P3, u kabini dovod vazduha), a EU-OSHA za ručno prskanje izocijanata kao poželjnu navodi zaštitu sa dovodom vazduha. Koja zaštita je dovoljna za konkretan prostor, posebno za garažu bez kabine, mora da proceni lice za bezbednost i zdravlje na radu.",
+    "razlog": "Bezbednosni listovi u odeljku 8 navode različitu zaštitu za lak (polumaska A1P2) i za učvršćivač (maska za celo lice AB2P3), u odeljku 7 i za lak i za učvršćivač uređaj sa dovodom vazduha pri radu u kabini, a EU-OSHA za ručno prskanje izocijanata kao poželjnu navodi zaštitu sa dovodom vazduha. Koja zaštita je dovoljna za konkretan prostor, posebno za garažu bez kabine, mora da proceni lice za bezbednost i zdravlje na radu.",
     "status": "potrebno"
    },
    "poslednjaProvera": "2026-10-08",
@@ -127498,15 +127586,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 782,
-   "otisak": "da8f79e212e54ff1ff58",
+   "reci": 819,
+   "otisak": "4cc269499e3cc4684d5c",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Za prskanje 2K laka obična maska protiv prašine nije dovoljna, a ni polumaska sa filterom nije uvek dovoljna. Bezbednosni list laka R-M C 2A40 navodi polumasku sa kombinovanim filterom A1P2"
+       "v": "Za prskanje 2K laka obična maska protiv prašine nije dovoljna, a ni polumaska sa filterom nije uvek dovoljna. U odeljku 8 bezbednosni list laka R-M C 2A40 navodi polumasku sa kombinovanim filterom A1P2"
       },
       {
        "t": "cite",
@@ -127514,7 +127602,19 @@
       },
       {
        "t": "text",
-       "v": ", ali list učvršćivača koji se sa njim meša, H 2P15, navodi masku za celo lice sa filterom AB2P3, a za rad u kabini tokom prskanja uređaj sa dovodom komprimovanog vazduha"
+       "v": ", a list učvršćivača koji se sa njim meša, H 2P15, masku za celo lice sa filterom AB2P3"
+      },
+      {
+       "t": "cite",
+       "id": "rm-h2p15-sds"
+      },
+      {
+       "t": "text",
+       "v": ". Oba lista u odeljku 7 dodaju da se pri radu u kabini tokom prskanja nosi uređaj sa dovodom komprimovanog vazduha"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
       },
       {
        "t": "cite",
@@ -127622,7 +127722,7 @@
        [
         {
          "t": "text",
-         "v": "maska za celo lice, kombinovani filter AB2P3; u kabini, tokom prskanja, uređaj sa dovodom komprimovanog vazduha"
+         "v": "maska za celo lice, kombinovani filter AB2P3"
         },
         {
          "t": "cite",
@@ -127705,15 +127805,27 @@
       },
       {
        "t": "text",
-       "v": ". List H 2P15 navodi i da ventilacija u kabini verovatno neće u svim slučajevima biti dovoljna da drži čestice i pare rastvarača pod kontrolom, pa radnik u kabini nosi uređaj sa dovodom vazduha dok koncentracija ne padne ispod graničnih vrednosti"
+       "v": ". Sva četiri lista u odeljku 7 navode i da ventilacija u kabini verovatno neće u svim slučajevima biti dovoljna da drži čestice i pare rastvarača pod kontrolom, pa radnik u kabini tokom prskanja nosi uređaj sa dovodom komprimovanog vazduha dok koncentracija ne padne ispod graničnih vrednosti"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
       },
       {
        "t": "cite",
        "id": "rm-h2p15-sds"
       },
       {
+       "t": "cite",
+       "id": "baslac-40-100-sds"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-50-420-sds"
+      },
+      {
        "t": "text",
-       "v": "."
+       "v": ". To važi i za lak, ne samo za učvršćivač."
       }
      ]
     },
@@ -127752,7 +127864,7 @@
        },
        {
         "t": "text",
-        "v": " označava filter za čestice: prašinu, dim i aerosole, pa i maglu od prskanja. Carsystem tako opisuje klasu P2 u svom katalogu"
+        "v": " označava filter za čestice, na primer prašinu, dim i aerosole. Carsystem tako opisuje klasu P2 u svom katalogu"
        },
        {
         "t": "cite",
@@ -127821,7 +127933,7 @@
        },
        {
         "t": "text",
-        "v": " (A1P2, A2P3, AB2P3) štiti istovremeno od para i od čestica."
+        "v": " (A1P2, A2P3, AB2P3) objedinjuje filter za pare i filter za čestice (opšte objašnjenje)."
        }
       ]
      ]
@@ -127923,7 +128035,7 @@
        },
        {
         "t": "text",
-        "v": " Za lak piše A1P2, ali učvršćivač traži više. Smeša nosi opasnosti obe komponente."
+        "v": " U odeljku 8 za lak piše A1P2, a za učvršćivač maska za celo lice sa AB2P3. Smeša nosi opasnosti obe komponente."
        }
       ],
       [
@@ -128013,7 +128125,11 @@
      "c": [
       {
        "t": "text",
-       "v": "Ovaj tekst ne određuje koja je zaštita dovoljna u Vašem prostoru. To zavisi od materijala, količine, kabine, ventilacije i trajanja rada, i to procenjuje lice za bezbednost i zdravlje na radu. Ko prska u garaži bez kabine, treba da zna da bezbednosni listovi učvršćivača zaštitu opisuju za rad u kabini"
+       "v": "Ovaj tekst ne određuje koja je zaštita dovoljna u Vašem prostoru. To zavisi od materijala, količine, kabine, ventilacije i trajanja rada, i to procenjuje lice za bezbednost i zdravlje na radu. Ko prska u garaži bez kabine, treba da zna da listovi iz tabele uređaj sa dovodom vazduha traže već za rad u kabini, a za prskanje bez kabine ne daju posebna uputstva"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
       },
       {
        "t": "cite",
@@ -128347,8 +128463,8 @@
    "status": {
     "istrazivanje": "zavrseno",
     "pisanje": "napisano",
-    "tehnickaProvera": "nije-provereno",
-    "jezickaProvera": "nije-provereno"
+    "tehnickaProvera": "ispravke-potrebne",
+    "jezickaProvera": "provereno"
    },
    "strucnaPotvrda": {
     "potrebna": true,
@@ -128362,8 +128478,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 777,
-   "otisak": "7c99e9ee22339d757df9",
+   "reci": 811,
+   "otisak": "418bf8890def1e925577",
    "blocks": [
     {
      "t": "p",
@@ -128390,7 +128506,23 @@
       },
       {
        "t": "text",
-       "v": ". Tanke jednokratne rukavice su zaštita od kapi i prskanja, ne od dužeg potapanja, i menjaju se čim se zaprljaju ili oštete."
+       "v": ". EU-OSHA za izocijanate navodi da hemijski otporne rukavice služe kao zaštita od prskanja"
+      },
+      {
+       "t": "cite",
+       "id": "oshwiki-isocyanates"
+      },
+      {
+       "t": "text",
+       "v": ", a bezbednosni listovi traže da se rukavica zameni čim pokaže znake oštećenja ili proboja hemikalije"
+      },
+      {
+       "t": "cite",
+       "id": "rm-h2p15-sds"
+      },
+      {
+       "t": "text",
+       "v": "."
       }
      ]
     },
@@ -128705,7 +128837,7 @@
        },
        {
         "t": "text",
-        "v": " rukavice od prirodnog lateksa, sa napomenom o kratkotrajnoj otpornosti na rastvarače"
+        "v": " rukavice od prirodnog lateksa, prema EN 455 i EN 374-1:1994, sa napomenom o kratkotrajnoj otpornosti na rastvarače"
        },
        {
         "t": "cite",
@@ -128738,7 +128870,7 @@
        },
        {
         "t": "text",
-        "v": " C.A.R.FIT navodi veću otpornost na hemikalije nego kod lateksa iste debljine i standard EN 455"
+        "v": " C.A.R.FIT navodi veću otpornost na hemikalije nego kod lateksa iste debljine i standard EN 455; stranica ne navodi standard za zaštitu od hemikalija EN ISO 374-1"
        },
        {
         "t": "cite",
@@ -128864,7 +128996,7 @@
       [
        {
         "t": "text",
-        "v": "za pranje pištolja i rad sa razređivačem bira se deblja rukavica nego za maskiranje;"
+        "v": "za pranje pištolja i duži rad sa razređivačem rukavica se bira prema odeljku 8 lista tog razređivača, a ne po tome šta je pri ruci;"
        }
       ],
       [
@@ -128913,7 +129045,7 @@
       },
       {
        "t": "text",
-       "v": ". Isto važi ako se posle rada sa 2K materijalima pojave promene na koži; vidi odeljak 4 bezbednosnog lista."
+       "v": ". Ako se posle rada sa 2K materijalima pojave promene na koži, postupite prema odeljku 4 bezbednosnog lista materijala i javite se lekaru medicine rada."
       }
      ]
     },
@@ -128944,7 +129076,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Zato što su namenjene zaštiti od kapi i kratkog dodira, a ne dužem kontaktu"
+       "v": "Zato što hemijski otporne rukavice, prema EU-OSHA, služe kao zaštita od prskanja, a ne kao glavna prepreka pri neposrednom dodiru sa materijalom"
       },
       {
        "t": "cite",
@@ -128952,7 +129084,7 @@
       },
       {
        "t": "text",
-       "v": ". Kada se natope ili oštete, menjaju se odmah"
+       "v": ". Čim pokažu znake oštećenja ili proboja, menjaju se"
       },
       {
        "t": "cite",
@@ -129021,20 +129153,6 @@
       {
        "t": "cite",
        "id": "rm-h2p15-sds"
-      },
-      {
-       "t": "text",
-       "v": ". Kako se skladište zapaljivi materijali sa kojima radite, opisuje vodič "
-      },
-      {
-       "t": "link",
-       "href": "/vodici/skladistenje-zapaljivih-materijala",
-       "c": [
-        {
-         "t": "text",
-         "v": "Skladištenje zapaljivih materijala u radionici"
-        }
-       ]
       },
       {
        "t": "text",
@@ -131016,7 +131134,7 @@
    "slug": "organizacija-mesaonice-boje",
    "naslov": "Organizacija mešaonice boje u maloj radionici",
    "metaNaslov": "Mešaonica boje u maloj radionici: kako je urediti",
-   "opis": "Kako urediti mešaonicu boje da bude manje grešaka i rasipanja: šta bezbednosni i tehnički listovi traže od prostora, šta mora biti pri ruci i kojim redom se radi.",
+   "opis": "Kako urediti mešaonicu boje da bude manje grešaka i rasipanja: šta bezbednosni i tehnički listovi traže od prostora, šta treba imati pri ruci i kojim redom.",
    "kategorija": "radionica",
    "podtema": "mešaonica",
    "tip": "osnovni-vodic",
@@ -131129,7 +131247,7 @@
    "revizije": [],
    "imaTekst": true,
    "reci": 655,
-   "otisak": "eba25adb237692a3f6f2",
+   "otisak": "b7346fead6d0491e8825",
    "blocks": [
     {
      "t": "p",
@@ -131804,8 +131922,8 @@
    "id": "SV-0195",
    "slug": "manje-otpada-pri-mesanju",
    "naslov": "Kako smanjiti otpad pri mešanju materijala",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Manje otpada pri mešanju boje i laka",
+   "opis": "Postupak za mešanje tačne količine boje i laka: procena količine, mešanje u delovima, čuvanje zamešane bazne boje i čaše za ostatke, prema listovima.",
    "kategorija": "radionica",
    "podtema": "smanjenje rasipanja",
    "tip": "postupak",
@@ -131816,16 +131934,99 @@
    "glavnoPitanje": "Kako se meša tačno onoliko materijala koliko posao traži?",
    "namera": "postupak",
    "dodatnaPitanja": [
-    "Kako pomaže beleženje potrošnje?"
+    "Kako pomaže beleženje potrošnje?",
+    "Može li ostatak 2K laka da se sačuva za sutra?"
    ],
-   "poreklopitanja": null,
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Pitanje kako smanjiti otpad boje pri mešanju je urednička procena iz pregleda tema (questions.json, q270); nije pronađeno u javnom izvoru koji bi se mogao navesti."
+   },
    "brendovi": [
     "rm",
-    "baslac"
+    "baslac",
+    "carsystem",
+    "carfit",
+    "sata"
    ],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "proizvodi": [
+    "2560-agilis-amplifier",
+    "grupa:baslac-line-45",
+    "baslac-80-20-additive-mat",
+    "carsystem-paint-system-cps-2-0",
+    "carfit-fast-paint-system",
+    "sata-rps-the-original"
+   ],
+   "povezani": [
+    "SV-0021",
+    "SV-0111",
+    "SV-0085",
+    "SV-0140",
+    "SV-0196"
+   ],
+   "izvori": [
+    {
+     "id": "rm-digital-color-search",
+     "naziv": "R-M, Digital color search (Colortronic 12/6, Mix & Scan u Refinity)",
+     "url": "https://www.rmpaint.com/en-int/digital-color-search",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "rm-a2560-tds",
+     "naziv": "R-M, Technical Information AGILIS AMPLIFIER A 2560, Tintable Amplifier for AGILIS",
+     "dokument": "/documents/products/rm/2560-agilis-amplifier/rm-2560-agilis-amplifier-technical-data-sheet.pdf",
+     "verzija": "07/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-45-line-tds",
+     "naziv": "baslac, Technical Information 45 Line, 45- Basecoat",
+     "dokument": "/documents/products/baslac/45_Line.pdf",
+     "verzija": "03/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "baslac-80-20-tds",
+     "naziv": "baslac, Technical Information 80-20 Additive Mat",
+     "dokument": "/documents/products/baslac/80-20.pdf",
+     "verzija": "06/2023",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carsystem-cps-tds",
+     "naziv": "Carsystem, Technical Data Sheet Paint System CPS 2.0",
+     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-paint-system-cps-2.0-v01.pdf",
+     "verzija": "V01, 03/2024",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "carfit-fps-tds",
+     "naziv": "C.A.R.FIT, Technical Data Sheet Fast Paint System (FPS)",
+     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-fast-paint-system-technical-data-sheet.pdf",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    },
+    {
+     "id": "sata-rps-stranica",
+     "naziv": "SATA, Multi-purpose cup system RPS (stranica proizvoda, opis i tehnički podaci)",
+     "url": "https://www.sata.com/en/multi-purpose-cup-system-rps-0.6l-200-m-plug-in-sieve-qcc-vpe-50-for-mixing-spraying-reusing-and-storing-water-and-solvent-based-coating-systems/1202134",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "baslac-40-100-sds",
+     "naziv": "baslac, Safety Data Sheet 40-100 5L High Speed 2K Clear VOC (UK, EN)",
+     "url": "https://msds.baslac.com/files/2050002227_MSDS_GB_EN.PDF",
+     "verzija": "Version 5.0, Revision Date 15.05.2026",
+     "datumIzvora": "2026-05-15",
+     "pristupljeno": "2026-10-08",
+     "tip": "bezbednosni-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -131835,7 +132036,7 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
@@ -131843,23 +132044,517 @@
     "potrebna": false,
     "status": "nije-potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "a1d4a34393e35a2de14f",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 558,
+   "otisak": "e68979c1e20296375e4f",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Otpad pri mešanju se smanjuje na dva načina: zameša se manje viška, a višak koji ostane iskoristi se kasnije kada to proizvođač dozvoljava. Za prvo služe procena količine pre mešanja i mešanje u delovima. Za drugo služe pravila iz tehničkog lista: zamešana bazna boja bez učvršćivača kod nekih sistema može da se čuva mesecima, a smeša sa učvršćivačem ne može. Ispod je postupak korak po korak."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Procenite količinu pre mešanja."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Polazi se od površine delova i debljine sloja iz tehničkog lista, uz rezervu za gubitke pri nanošenju. Postupak ima vodič "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/koliko-materijala-za-lakiranje",
+        "c": [
+         {
+          "t": "text",
+          "v": "Koliko materijala treba za lakiranje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". R-M za svoje digitalne alate navodi procenu zapremine po delu, uz prednost da se mešavina ne mora ponavljati zbog prelivanja"
+       },
+       {
+        "t": "cite",
+        "id": "rm-digital-color-search"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Merite na vagi."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Bazna boja po recepturi meri se po težini; tako se lakše zameša mala količina bez greške u nijansi. Vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/mesanje-baze-na-vagi",
+        "c": [
+         {
+          "t": "text",
+          "v": "Zašto se bazna boja meša na vagi"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Učvršćivač dodajte tek kada ćete nanositi."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Posle dodavanja učvršćivača počinje vreme upotrebljivosti smeše, posle koga se materijal više ne može pravilno naneti. Ako posao traje duže, mešajte u više navrata; vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/vreme-upotrebljivosti-smese",
+        "c": [
+         {
+          "t": "text",
+          "v": "Vreme upotrebljivosti smeše"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Proverite pravila za aditive."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Neki aditivi traže da se zameša samo dnevna količina. baslac za aditiv za matiranje 80-20 navodi da se pripremi samo količina koja će se potrošiti istog dana, jer stajanjem smeše može da se promeni stepen sjaja"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-80-20-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Sačuvajte zamešanu baznu boju kada list to dozvoljava."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Za baslac 45 Line mešavine traju do 6 meseci u plastičnim posudama ili limenkama sa unutrašnjim premazom"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-45-line-tds"
+       },
+       {
+        "t": "text",
+        "v": ". Za R-M A 2560 mešavine traju do 3 meseca u zatvorenim limenkama otpornim na koroziju, a R-M navodi i da se ostaci mešavina mogu iskoristiti da se izbegne dodatni otpad"
+       },
+       {
+        "t": "cite",
+        "id": "rm-a2560-tds"
+       },
+       {
+        "t": "text",
+        "v": ". Posudu označite nazivom nijanse, recepturom i datumom."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Ne vraćajte ostatak u originalno pakovanje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Bezbednosni listovi to izričito zabranjuju"
+       },
+       {
+        "t": "cite",
+        "id": "baslac-40-100-sds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Ostatak koji se ne može iskoristiti predajte kao otpad."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/otpad-od-boja-i-razredjivaca",
+        "c": [
+         {
+          "t": "text",
+          "v": "Otpad od boja i razređivača"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "case-u-kojima-se-mesa-lakira-i-cuva",
+     "c": [
+      {
+       "t": "text",
+       "v": "Čaše u kojima se meša, lakira i čuva"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Sistemi čaša za jednokratnu upotrebu smanjuju broj posuda koje se peru i omogućavaju da ostatak ostane u istoj čaši:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "SATA za "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/sata-rps-the-original",
+        "c": [
+         {
+          "t": "text",
+          "v": "RPS"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " navodi četiri funkcije: mešanje, lakiranje, dopunjavanje i čuvanje, uz univerzalnu skalu za mešanje"
+       },
+       {
+        "t": "cite",
+        "id": "sata-rps-stranica"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Carsystem za "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/carsystem-paint-system-cps-2-0",
+        "c": [
+         {
+          "t": "text",
+          "v": "CPS 2.0"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " navodi mešanje u čaši za lakiranje i mogućnost čuvanja ostatka materijala"
+       },
+       {
+        "t": "cite",
+        "id": "carsystem-cps-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "C.A.R.FIT za "
+       },
+       {
+        "t": "link",
+        "href": "/proizvodi/carfit-fast-paint-system",
+        "c": [
+         {
+          "t": "text",
+          "v": "Fast Paint System"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " navodi mešanje, punjenje i privremeno čuvanje premaza, kao i kasniju upotrebu ostatka"
+       },
+       {
+        "t": "cite",
+        "id": "carfit-fps-tds"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta je od toga primenljivo zavisi od materijala: ostatak smeše sa učvršćivačem ne može da se sačuva, bez obzira na čašu. Prednosti i ograničenja ovih sistema obrađuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/casice-za-jednokratnu-upotrebu",
+       "c": [
+        {
+         "t": "text",
+         "v": "Sistemi čašica za jednokratnu upotrebu"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ceste-greske",
+     "c": [
+      {
+       "t": "text",
+       "v": "Česte greške"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Urednički izbor, bez statistike učestalosti:"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Mešanje „za svaki slučaj“."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Rezerva je potrebna, ali kada je uvek ista, a ne prema delu, višak se ponavlja na svakom poslu."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "2K smeša za ceo dan odjednom."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Deo smeše istekne pre nanošenja."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Neoznačen ostatak."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Sačuvana bazna boja bez naziva nijanse i datuma kasnije se ne može pouzdano upotrebiti."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "kako-pomaze-belezenje-potrosnje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako pomaže beleženje potrošnje?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada za svaki posao zapišete koliko je zamešano, koliko je ostalo i zašto, posle nekoliko nedelja vidite gde se višak ponavlja: na istoj vrsti dela, kod iste nijanse ili kod ponovnog mešanja. Kako se to beleži, opisuje vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/pracenje-potrosnje-po-popravci",
+       "c": [
+        {
+         "t": "text",
+         "v": "Praćenje potrošnje materijala po popravci"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "moze-li-ostatak-2k-laka-da-se-sacuva-za-sutra",
+     "c": [
+      {
+       "t": "text",
+       "v": "Može li ostatak 2K laka da se sačuva za sutra?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ne. Kada je učvršćivač dodat, smeša se koristi u okviru vremena upotrebljivosti iz tehničkog lista. Zato se učvršćivač dodaje u onoliko materijala koliko će se odmah naneti."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0196",
    "slug": "pracenje-potrosnje-po-popravci",
    "naslov": "Praćenje potrošnje materijala po popravci",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Praćenje potrošnje materijala po popravci",
+   "opis": "Koje podatke o boji, laku i pomoćnom materijalu beležiti za svaku popravku, kako ih povezati sa nalogom i evidencijom otpada i šta iz njih radionica vidi.",
    "kategorija": "radionica",
    "podtema": "troškovi",
    "tip": "postupak",
@@ -131869,13 +132564,57 @@
    "glavnoPitanje": "Kako se prati potrošnja materijala po popravci i šta to pokazuje o radu radionice?",
    "namera": "postupak",
    "dodatnaPitanja": [
-    "Koje podatke beležiti?"
+    "Koje podatke beležiti?",
+    "Postoje li programi koji to rade?",
+    "Da li je evidencija otpada isto što i evidencija potrošnje?"
    ],
-   "poreklopitanja": null,
-   "brendovi": [],
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Pitanje kako pratiti potrošnju materijala po popravci (evidencija i obračun) je urednička procena iz pregleda tema (questions.json, q268); nije pronađeno u javnom izvoru koji bi se mogao navesti."
+   },
+   "brendovi": [
+    "rm"
+   ],
    "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "povezani": [
+    "SV-0195",
+    "SV-0021",
+    "SV-0085",
+    "SV-0208",
+    "SV-0199"
+   ],
+   "izvori": [
+    {
+     "id": "rm-brand-offering",
+     "naziv": "R-M, Brand offering (opis platforme Refinity)",
+     "url": "https://www.rmpaint.com/en-int/brand-offering",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "rm-eco-impact-2025",
+     "naziv": "R-M, vest „New tool by BASF Coatings helps body shops improve their ecological and economic performance“ (26. 5. 2025)",
+     "url": "https://www.rmpaint.com/en-int/news/new-tool-basf-coatings-helps-body-shops-improve-their-ecological-and-economic-performance",
+     "datumIzvora": "2025-05-26",
+     "pristupljeno": "2026-10-08",
+     "tip": "vest-proizvodjaca"
+    },
+    {
+     "id": "rm-digital-color-search",
+     "naziv": "R-M, Digital color search (Colortronic 12/6, Mix & Scan u Refinity)",
+     "url": "https://www.rmpaint.com/en-int/digital-color-search",
+     "pristupljeno": "2026-10-08",
+     "tip": "sajt-proizvodjaca"
+    },
+    {
+     "id": "zakon-otpad-rs",
+     "naziv": "Zakon o upravljanju otpadom („Službeni glasnik RS“, br. 36/2009, 88/2010, 14/2016, 95/2018 – dr. zakon i 35/2023)",
+     "url": "https://pravno-informacioni-sistem.rs/eli/rep/sgrs/skupstina/zakon/2009/36/14/reg",
+     "pristupljeno": "2026-10-08",
+     "tip": "propis",
+     "napomena": "Prečišćen tekst otvoren u Pravno-informacionom sistemu RS; čl. 22 (Agencija za zaštitu životne sredine), čl. 26 tač. 8 (evidencija o otpadu), čl. 75 st. 1 (dnevna evidencija i godišnji izveštaj Agenciji)."
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -131885,24 +132624,468 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Proizvođači iz našeg programa ne objavljuju javno postupak za praćenje potrošnje po nalogu; R-M samo opisuje da Refinity ima upravljanje zalihama i nalozima. Spisak podataka i način beleženja u tekstu su urednička procena i treba da ih potvrdi neko ko vodi obračun u radionici ili tehnička podrška dobavljača.",
+    "status": "potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-04-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "245edfd70b78937dc6b0",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 555,
+   "otisak": "5d947ae863280b58e163",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Potrošnja materijala po popravci prati se tako što se za svaki radni nalog beleži šta je stvarno zamešano i potrošeno, a ne samo šta je kupljeno. Najlakše je beležiti u trenutku mešanja, sa vage. Posle nekoliko nedelja takvi zapisi pokazuju koliko materijala zaista ide na određenu vrstu posla, gde se ponavlja višak i da li se procena pre mešanja poklapa sa stvarnošću. Spisak podataka ispod je urednički predlog, a ne propis ili uputstvo proizvođača."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "postupak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postupak"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Povežite zapis sa nalogom."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Svaka popravka ima broj naloga ili drugu oznaku pod kojom se vode i rad i materijal."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Beležite pri mešanju."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Kada se materijal meri na vagi, količina je već poznata; zapišite je odmah, pre nego što se pređe na sledeći deo. Zašto se meri na vagi, objašnjava vodič "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/mesanje-baze-na-vagi",
+        "c": [
+         {
+          "t": "text",
+          "v": "Zašto se bazna boja meša na vagi"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Zapišite i ostatak."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Na kraju posla zabeležite koliko je ostalo u čaši, šta je sačuvano za kasnije i šta je otišlo u otpad."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Upišite ponovljena mešanja i razlog."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Na primer: nijansa nije odgovarala, smeši je istekao rok, količina je bila premala."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Jednom mesečno saberite i uporedite."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Uporedite stvarnu potrošnju sa procenom pre posla i sa sličnim poslovima."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "koje-podatke-beleziti",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koje podatke beležiti"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      [
+       {
+        "t": "text",
+        "v": "Podatak"
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Zašto je koristan"
+       }
+      ]
+     ],
+     "rows": [
+      [
+       [
+        {
+         "t": "text",
+         "v": "broj naloga, vozilo, delovi koji se lakiraju"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "poređenje istih vrsta poslova"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "šifra boje i receptura"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "ponavljanje nijanse i provera viška po nijansi"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "zamešana količina po materijalu (prajmer, punilac, bazna boja, bezbojni lak, učvršćivač, razređivač)"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "stvarna potrošnja po poslu"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "ostatak: sačuvan ili otpad"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "koliko se baca, a koliko ponovo koristi"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "ponovljena mešanja i razlog"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "gde nastaje višak koji se može izbeći"
+        }
+       ]
+      ],
+      [
+       [
+        {
+         "t": "text",
+         "v": "oznaka serije materijala"
+        }
+       ],
+       [
+        {
+         "t": "text",
+         "v": "provera u slučaju reklamacije, vidi "
+        },
+        {
+         "t": "link",
+         "href": "/vodici/serija-i-rok-upotrebe-na-ambalazi",
+         "c": [
+          {
+           "t": "text",
+           "v": "Oznaka serije i rok upotrebe"
+          }
+         ]
+        }
+       ]
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pomoćni materijal (abrazivi, folija i traka za maskiranje, krpe) može da se vodi zbirno po danu ako ga je teško razdvojiti po nalogu."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-zapisi-pokazuju",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta zapisi pokazuju"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odstupanje od procene."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Ako je stvarna potrošnja stalno veća od procene, proverite procenu po koracima iz vodiča "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/koliko-materijala-za-lakiranje",
+        "c": [
+         {
+          "t": "text",
+          "v": "Koliko materijala treba za lakiranje"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " i podešavanje pištolja."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Višak koji se ponavlja."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Isti višak na istoj vrsti dela znači da se rezerva ne prilagođava poslu; vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/manje-otpada-pri-mesanju",
+        "c": [
+         {
+          "t": "text",
+          "v": "Kako smanjiti otpad pri mešanju materijala"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Ponovljena mešanja."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Ako se mešanje često ponavlja zbog nijanse, to može da ukazuje da treba proveriti postupak utvrđivanja nijanse i probni lim, a ne samo potrošnju."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ovo su pokazatelji za razgovor u radionici, a ne dijagnoza. Uzrok odstupanja može biti i u vrsti posla koji je tog meseca preovladao."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "postoje-li-programi-koji-to-rade",
+     "c": [
+      {
+       "t": "text",
+       "v": "Postoje li programi koji to rade?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Proizvođači boja imaju digitalne platforme. R-M za Refinity navodi, između ostalog, upravljanje zalihama i radnim nalozima"
+      },
+      {
+       "t": "cite",
+       "id": "rm-brand-offering"
+      },
+      {
+       "t": "text",
+       "v": ", a alat Eco Impact Assessment u okviru Refinity opisuje kao procenu tokova materijala u radionici, uključujući upotrebu proizvoda i upravljanje otpadom; uveden je prvo u Švajcarskoj, Austriji, Belgiji i Holandiji"
+      },
+      {
+       "t": "cite",
+       "id": "rm-eco-impact-2025"
+      },
+      {
+       "t": "text",
+       "v": ". R-M navodi i povezivanje digitalnog utvrđivanja nijanse sa mešaonicom"
+      },
+      {
+       "t": "cite",
+       "id": "rm-digital-color-search"
+      },
+      {
+       "t": "text",
+       "v": ". Da li su ovi alati dostupni u Srbiji i šta tačno beleže, proverite kod dobavljača; za početak je dovoljna i tabela."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-je-evidencija-otpada-isto-sto-i-evidencija-potrosnje",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li je evidencija otpada isto što i evidencija potrošnje?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ne, ali se dopunjuju. Zakon o upravljanju otpadom traži od proizvođača otpada, osim domaćinstava, da vodi dnevnu evidenciju o otpadu i dostavlja godišnji izveštaj Agenciji za zaštitu životne sredine"
+      },
+      {
+       "t": "cite",
+       "id": "zakon-otpad-rs"
+      },
+      {
+       "t": "text",
+       "v": ". Evidencija potrošnje je interna i služi radionici. Ako u zapisu potrošnje beležite i šta je otišlo u otpad, lakše je i voditi evidenciju otpada. Šta se sa otpadom radi, piše u vodiču "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/otpad-od-boja-i-razredjivaca",
+       "c": [
+        {
+         "t": "text",
+         "v": "Otpad od boja i razređivača"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0197",
@@ -134573,8 +135756,8 @@
    "id": "SV-0201",
    "slug": "filteri-kabine-odrzavanje",
    "naslov": "Održavanje kabine za lakiranje i filteri",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Održavanje kabine za lakiranje i zamena filtera",
+   "opis": "Kako se održava kabina za lakiranje, od čega zavisi zamena filtera, kako prljavi filteri utiču na prašinu u laku i šta je vreme provetravanja kabine.",
    "kategorija": "radionica",
    "podtema": "kabina",
    "tip": "osnovni-vodic",
@@ -134584,13 +135767,71 @@
    "glavnoPitanje": "Kako se održava kabina za lakiranje i od čega zavisi zamena filtera?",
    "namera": "informativna",
    "dodatnaPitanja": [
-    "Kako zaprljani filteri utiču na prašinu u laku?"
+    "Kako zaprljani filteri utiču na prašinu u laku?",
+    "Koliko često se menjaju filteri?",
+    "Kada lakirer sme da skine masku u kabini?"
    ],
-   "poreklopitanja": null,
-   "brendovi": [],
+   "poreklopitanja": {
+    "tip": "pronadjeno-u-izvoru",
+    "napomena": "Pitanje koliko često menjati filtere u kabini za lakiranje postavlja se u rezultatima pretrage i na stranicama proizvođača kabina (nije naš program; služi samo kao dokaz pitanja, ne kao izvor odgovora).",
+    "izvori": [
+     "https://www.paintbooth.com/how-often-should-you-replace-paint-booth-filters/"
+    ]
+   },
+   "brendovi": [
+    "baslac",
+    "rm"
+   ],
    "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "povezani": [
+    "SV-0121",
+    "SV-0167",
+    "SV-0127",
+    "SV-0202",
+    "SV-0194"
+   ],
+   "izvori": [
+    {
+     "id": "baslac-dust-particles",
+     "naziv": "baslac, Paint Defects: Dust particles",
+     "url": "https://www.baslac.com/en-emea/dust-particles",
+     "pristupljeno": "2026-10-08",
+     "tip": "edukacija-proizvodjaca"
+    },
+    {
+     "id": "hse-clearance-time",
+     "naziv": "HSE (Health and Safety Executive, UK), Measuring clearance times in spray booths",
+     "url": "https://www.hse.gov.uk/mvr/bodyshop/cleartime.htm",
+     "pristupljeno": "2026-10-08",
+     "tip": "smernica",
+     "napomena": "Smernica britanskog regulatora; obaveza ispitivanja na 14 meseci važi u Ujedinjenom Kraljevstvu."
+    },
+    {
+     "id": "hse-isocyanates",
+     "naziv": "HSE (Health and Safety Executive, UK), 2-pack isocyanate paints",
+     "url": "https://www.hse.gov.uk/MVR/bodyshop/isocyanates.htm",
+     "pristupljeno": "2026-10-08",
+     "tip": "smernica"
+    },
+    {
+     "id": "baslac-40-100-sds",
+     "naziv": "baslac, Safety Data Sheet 40-100 5L High Speed 2K Clear VOC (UK, EN)",
+     "url": "https://msds.baslac.com/files/2050002227_MSDS_GB_EN.PDF",
+     "verzija": "Version 5.0, Revision Date 15.05.2026",
+     "datumIzvora": "2026-05-15",
+     "pristupljeno": "2026-10-08",
+     "tip": "bezbednosni-list"
+    },
+    {
+     "id": "rm-c2a40-sds",
+     "naziv": "R-M, Safety Data Sheet C 2A40 AirTOP 1L (UK, EN)",
+     "url": "https://msds.rmpaint.com/files/50760163_MSDS_GB_EN.PDF",
+     "verzija": "Version 4.0, Revision Date 15.05.2026",
+     "datumIzvora": "2026-05-15",
+     "pristupljeno": "2026-10-08",
+     "tip": "bezbednosni-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -134600,31 +135841,417 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Filteri i kabine nisu u našem programu, a uputstvo proizvođača kabine nije pregledano. Intervali zamene, granične vrednosti pritiska i plan održavanja zavise od proizvođača kabine i filtera; tekst ih namerno ne navodi. Tekst se oslanja na baslac (prašina) i britanski HSE (vreme provetravanja), pa domaće obaveze (pregled i ispitivanje ventilacije) treba da potvrdi stručno lice za bezbednost na radu.",
+    "status": "potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-10-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "bc2414956314923883f8",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 592,
+   "otisak": "52e074143d915ec85490",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kabina za lakiranje radi ispravno samo kada vazduh ulazi i izlazi onako kako je projektovano, a u tome važnu ulogu imaju filteri. Kada se filteri menjaju i pri kojem pritisku, određuje proizvođač kabine i filtera, a ne opšte pravilo: koliko brzo se filter zaprlja zavisi od broja ciklusa, materijala i prašine u okolini. Zato se intervali zamene čitaju iz uputstva kabine, a stanje filtera prati redovnim proverama."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-prljavi-filteri-uticu-na-lak",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako prljavi filteri utiču na lak"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "baslac među uzrocima prašine u laku navodi i problem u kabini kada prljavi filteri izazovu nepravilan dovod vazduha, odsis i pritisak, kao i usisavanje zaprljanog vazduha spolja, na primer ostataka od poliranja i fine prašine"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-dust-particles"
+      },
+      {
+       "t": "text",
+       "v": ". Kao prevenciju navodi redovno održavanje i zamenu filtera kabine i odvajanje prostora za poliranje od lakirnice filtriranim i provetravanim sistemima"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-dust-particles"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prašina u laku ima i druge moguće uzroke: loše očišćenu podlogu i kombinezon ili krpe koje puštaju vlakna"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-dust-particles"
+      },
+      {
+       "t": "text",
+       "v": ". Zato se pri prašini u laku ne zaključuje odmah da su krivi filteri. Kako se proverava uzrok i šta se radi sa trunjem, objašnjava vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/prasina-i-trunje-u-laku",
+       "c": [
+        {
+         "t": "text",
+         "v": "Prašina i trunje u laku"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "sta-se-odrzava",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta se održava"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ovo je opšti pregled; tačan spisak i intervale daje uputstvo Vaše kabine."
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Filteri na ulazu, na plafonu i na izlazu."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Svaki ima svoju namenu i svoj tempo zaprljanja. Menjaju se prema uputstvu proizvođača kabine i prema pokazivaču pritiska ako ga kabina ima."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Podpritisak u kabini."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Britanski regulator HSE savetuje da kabina radi u blagom podpritisku, da bi kroz eventualne propuste vazduh ulazio u kabinu, a ne da magla od boje izlazi u radionicu"
+       },
+       {
+        "t": "cite",
+        "id": "hse-isocyanates"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Dnevne i nedeljne provere."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " HSE predlaže spisak jednostavnih dnevnih i nedeljnih provera, osobu koja ih obavlja i zapis nalaza"
+       },
+       {
+        "t": "cite",
+        "id": "hse-isocyanates"
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Čistoća kabine i okoline."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Kabina nije magacin; prašina sa poda, sa zidova i sa delova koji se unose ulazi u vazdušni tok."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Ciklus sušenja."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Ako kabina i suši, i taj deo ima svoja podešavanja; vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/susenje-u-kabini",
+        "c": [
+         {
+          "t": "text",
+          "v": "Sušenje u kabini"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "vreme-provetravanja-kabine",
+     "c": [
+      {
+       "t": "text",
+       "v": "Vreme provetravanja kabine"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "HSE objašnjava da kabini treba vremena da se očisti od magle boje i preporučuje da se to vreme izmeri dimom ili generatorom magle, istakne na vratima i da ga zna svako ko koristi kabinu"
+      },
+      {
+       "t": "cite",
+       "id": "hse-isocyanates"
+      },
+      {
+       "t": "text",
+       "v": ". Prema HSE, vreme provetravanja proverava se neposredno pre zamene filtera"
+      },
+      {
+       "t": "cite",
+       "id": "hse-clearance-time"
+      },
+      {
+       "t": "text",
+       "v": ". Tako se vidi koliko zaprljani filteri usporavaju provetravanje."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ovo je bitno i za zaštitu lakirera. Bezbednosni listovi R-M i baslac upozoravaju da ventilacija u kabini verovatno nije dovoljna da u svim slučajevima kontroliše čestice i pare rastvarača, pa ko radi u kabini, i kada ne lakira, treba da nosi zaštitu disanja sa dovodom vazduha dok koncentracija ne padne ispod graničnih vrednosti"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-40-100-sds"
+      },
+      {
+       "t": "cite",
+       "id": "rm-c2a40-sds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "ogranicenja",
+     "c": [
+      {
+       "t": "text",
+       "v": "Ograničenja"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "HSE je britanski regulator, a njegove smernice važe u Ujedinjenom Kraljevstvu; navodimo ih kao stručnu pozadinu. Obaveze pregleda i ispitivanja ventilacije u Srbiji proverite prema važećim propisima o bezbednosti i zdravlju na radu i sa ovlašćenim licem. Filteri i kabine nisu deo našeg programa, pa ovde ne preporučujemo proizvode."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "koliko-cesto-se-menjaju-filteri",
+     "c": [
+      {
+       "t": "text",
+       "v": "Koliko često se menjaju filteri?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Onoliko često koliko navodi proizvođač kabine i filtera za Vaš način rada. Jedinstven interval koji bi važio za svaku kabinu ne postoji u izvorima koje smo pregledali. Pomažu pokazivač pritiska na kabini, ako ga ima, i promena vremena provetravanja."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "kada-lakirer-sme-da-skine-masku-u-kabini",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada lakirer sme da skine masku u kabini?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Tek kada istekne izmereno vreme provetravanja. HSE navodi da je smisao tog vremena da se kabina očisti pre nego što neko uđe ili lakirer skine zaštitu disanja"
+      },
+      {
+       "t": "cite",
+       "id": "hse-clearance-time"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "da-li-kabina-resava-prasinu-ako-je-okolina-prasnjava",
+     "c": [
+      {
+       "t": "text",
+       "v": "Da li kabina rešava prašinu ako je okolina prašnjava?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Samo delimično. baslac kao uzrok navodi i usisavanje zaprljanog vazduha spolja"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-dust-particles"
+      },
+      {
+       "t": "text",
+       "v": ", pa red i čistoća u radionici oko kabine utiču na rezultat. Za rad bez kabine vidi "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/prasina-u-garazi-pre-lakiranja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Kako smanjiti prašinu u prostoru za lakiranje"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0202",
    "slug": "planiranje-posla-u-radionici",
    "naslov": "Planiranje redosleda poslova u lakirnici",
-   "metaNaslov": "",
-   "opis": "",
+   "metaNaslov": "Redosled poslova u lakirnici: manje čekanja i pranja",
+   "opis": "Kako planirati redosled poslova u lakirnici da bude manje čekanja i pranja opreme: grupisanje po materijalu i nijansi, vreme sušenja i provetravanja kabine.",
    "kategorija": "radionica",
    "podtema": "planiranje",
    "tip": "osnovni-vodic",
@@ -134634,13 +136261,74 @@
    "glavnoPitanje": "Kako se redosled poslova u lakirnici planira da se smanji čekanje i ponovno čišćenje opreme?",
    "namera": "informativna",
    "dodatnaPitanja": [
-    "Kako grupisati poslove po boji?"
+    "Kako grupisati poslove po boji?",
+    "Šta raditi dok se deo suši?"
    ],
-   "poreklopitanja": null,
-   "brendovi": [],
-   "proizvodi": [],
-   "povezani": [],
-   "izvori": [],
+   "poreklopitanja": {
+    "tip": "urednicka-procena",
+    "napomena": "Pitanje o redosledu poslova u lakirnici je urednička procena iz pregleda tema; nije pronađeno u javnom izvoru koji bi se mogao navesti."
+   },
+   "brendovi": [
+    "sata",
+    "baslac"
+   ],
+   "proizvodi": [
+    "sata-clean-rcs"
+   ],
+   "povezani": [
+    "SV-0200",
+    "SV-0201",
+    "SV-0111",
+    "SV-0139",
+    "SV-0121"
+   ],
+   "izvori": [
+    {
+     "id": "sata-faq",
+     "naziv": "SATA, Professional knowledge: FAQ",
+     "url": "https://www.sata.com/en/service/professional-knowledge/faq/",
+     "pristupljeno": "2026-10-08",
+     "tip": "edukacija-proizvodjaca"
+    },
+    {
+     "id": "sata-clean-rcs-uputstvo",
+     "naziv": "SATA, Operating Instructions SATA clean RCS (višejezično; engleski deo od str. 93)",
+     "url": "https://www.sata.com/media/4b/g0/c5/1790259016/BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1790259016",
+     "verzija": "3444-250407-1",
+     "pristupljeno": "2026-10-08",
+     "tip": "uputstvo-proizvodjaca"
+    },
+    {
+     "id": "sata-prospekt-ciscenje",
+     "naziv": "SATA, prospekt „Optimale Lackierpistolen-Reinigung – SATA Reinigungsgeräte“ (nemački)",
+     "url": "https://www.sata.com/media/0d/62/06/1776086106/DE_PROSPEKT_SATA_MULTI_CLEAN_2.PDF.PDF?ts=1776086106",
+     "verzija": "1140-190306-1",
+     "pristupljeno": "2026-10-08",
+     "tip": "katalog-proizvodjaca"
+    },
+    {
+     "id": "hse-isocyanates",
+     "naziv": "HSE (Health and Safety Executive, UK), 2-pack isocyanate paints",
+     "url": "https://www.hse.gov.uk/MVR/bodyshop/isocyanates.htm",
+     "pristupljeno": "2026-10-08",
+     "tip": "smernica"
+    },
+    {
+     "id": "baslac-dust-particles",
+     "naziv": "baslac, Paint Defects: Dust particles",
+     "url": "https://www.baslac.com/en-emea/dust-particles",
+     "pristupljeno": "2026-10-08",
+     "tip": "edukacija-proizvodjaca"
+    },
+    {
+     "id": "baslac-45-line-tds",
+     "naziv": "baslac, Technical Information 45 Line, 45- Basecoat",
+     "dokument": "/documents/products/baslac/45_Line.pdf",
+     "verzija": "03/2026",
+     "pristupljeno": "2026-10-08",
+     "tip": "tehnicki-list"
+    }
+   ],
    "datumDogadjaja": null,
    "datumObjaveIzvora": null,
    "trziste": null,
@@ -134650,24 +136338,411 @@
    "razlogPrioriteta": "Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.",
    "status": {
     "istrazivanje": "zavrseno",
-    "pisanje": "nije-pocelo",
+    "pisanje": "napisano",
     "tehnickaProvera": "nije-provereno",
     "jezickaProvera": "nije-provereno"
    },
    "strucnaPotvrda": {
-    "potrebna": false,
-    "status": "nije-potrebno"
+    "potrebna": true,
+    "razlog": "Proizvođači iz našeg programa ne objavljuju javno postupak planiranja redosleda poslova u lakirnici. Izvori potkrepljuju samo pojedinačne činjenice (odvojeni pištolji za vodene i rastvaračke materijale, međučišćenje pri promeni boje, vreme provetravanja kabine, čuvanje zamešane baze); sam redosled i grupisanje poslova su urednička procena i treba da ih potvrdi iskusan lakirer ili šef lakirnice.",
+    "status": "potrebno"
    },
-   "poslednjaProvera": null,
-   "ponovniPregled": null,
+   "poslednjaProvera": "2026-10-08",
+   "ponovniPregled": "2027-10-08",
    "proveraVaziDo": null,
    "odobrenje": null,
    "povucen": null,
    "revizije": [],
-   "imaTekst": false,
-   "reci": 0,
-   "otisak": "97a8b830ab5341ac4a85",
-   "blocks": []
+   "imaTekst": true,
+   "reci": 555,
+   "otisak": "efce6d82aa85a619fb7b",
+   "blocks": [
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Redosled poslova u lakirnici planira se tako da se oprema što ređe pere bez potrebe, da kabina što manje stoji prazna i da se materijal sa ograničenim vremenom upotrebe ne zameša pre nego što je deo spreman. U praksi to znači grupisanje poslova po vrsti materijala i nijansi i raspored koji uzima u obzir vreme sušenja i provetravanja kabine. Ovo je urednički pregled načela; konkretan raspored zavisi od Vaše opreme, broja lakirera i vrste poslova."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "nacela-za-raspored",
+     "c": [
+      {
+       "t": "text",
+       "v": "Načela za raspored"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "grupisanje-po-vrsti-materijala",
+     "c": [
+      {
+       "t": "text",
+       "v": "Grupisanje po vrsti materijala"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Vodeni i rastvarački materijali traže različita sredstva za čišćenje, a SATA preporučuje i odvojene pištolje za rastvaračke i vodene boje, da bi se izbegle greške u laku"
+      },
+      {
+       "t": "cite",
+       "id": "sata-faq"
+      },
+      {
+       "t": "text",
+       "v": ". Kada se poslovi sa istom vrstom materijala rade jedan za drugim, ređe se menja pištolj ili sredstvo za čišćenje. Da li je bolje imati jedan pištolj ili više, razmatra vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/jedan-pistolj-ili-vise",
+       "c": [
+        {
+         "t": "text",
+         "v": "Jedan pištolj ili poseban za prajmer, bazu i lak"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "grupisanje-po-nijansi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Grupisanje po nijansi"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Delovi u istoj nijansi lakiraju se u istom ciklusu kada je to moguće: zameša se jednom, pištolj se pere jednom, a provera nijanse na probnom limu važi za sve delove. Ako se ista nijansa ipak radi u dva dana, zamešana bazna boja bez učvršćivača kod nekih sistema može da se sačuva; za baslac 45 Line mešavine traju do 6 meseci u odgovarajućim posudama"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-45-line-tds"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "promena-boje-u-kabini",
+     "c": [
+      {
+       "t": "text",
+       "v": "Promena boje u kabini"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada promena nijanse ne može da se izbegne, pomaže brzo međučišćenje. SATA za clean RCS navodi da je namenjen brzom međučišćenju pištolja pri promeni boje"
+      },
+      {
+       "t": "cite",
+       "id": "sata-clean-rcs-uputstvo"
+      },
+      {
+       "t": "text",
+       "v": " i da postavljen u kabinu omogućava više uzastopnih promena boje sa kratkim prekidima"
+      },
+      {
+       "t": "cite",
+       "id": "sata-prospekt-ciscenje"
+      },
+      {
+       "t": "text",
+       "v": ". Kada se mašina isplati, razmatra vodič "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/masina-za-pranje-pistolja",
+       "c": [
+        {
+         "t": "text",
+         "v": "Mašina za pranje pištolja"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "vreme-koje-se-ne-moze-skratiti",
+     "c": [
+      {
+       "t": "text",
+       "v": "Vreme koje se ne može skratiti"
+      }
+     ]
+    },
+    {
+     "t": "ul",
+     "items": [
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Vreme upotrebljivosti smeše."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " 2K materijal se meša tek kada je deo spreman i lakirer slobodan; vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/vreme-upotrebljivosti-smese",
+        "c": [
+         {
+          "t": "text",
+          "v": "Vreme upotrebljivosti smeše"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Odzračivanje i sušenje."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " Ova vremena daje tehnički list svakog materijala i ona određuju koliko dugo deo zauzima kabinu; vidi "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/susenje-u-kabini",
+        "c": [
+         {
+          "t": "text",
+          "v": "Sušenje u kabini"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ],
+      [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Provetravanje kabine."
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " HSE preporučuje da se izmeri vreme za koje se kabina očisti od magle boje i da ga zna svako ko koristi kabinu"
+       },
+       {
+        "t": "cite",
+        "id": "hse-isocyanates"
+       },
+       {
+        "t": "text",
+        "v": ". To vreme se planira između ciklusa. Više o tome u vodiču "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/filteri-kabine-odrzavanje",
+        "c": [
+         {
+          "t": "text",
+          "v": "Održavanje kabine za lakiranje i filteri"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "kako-da-napravite-dnevni-plan",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako da napravite dnevni plan"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Urednički predlog koraka:"
+      }
+     ]
+    },
+    {
+     "t": "ol",
+     "items": [
+      [
+       {
+        "t": "text",
+        "v": "Ujutro napravite spisak delova koji su spremni za lakiranje (pripremljeni, maskirani, sa utvrđenom nijansom)."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Podelite ih po vrsti materijala, pa po nijansi."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Za svaku grupu procenite trajanje: nanošenje, odzračivanje, sušenje i provetravanje kabine."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Postavite redosled tako da se pranje opreme i promena materijala dese što ređe."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Pripremu sledećih delova (brušenje, maskiranje) planirajte za vreme dok se prethodni suše, ali van kabine."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Na kraju dana uporedite plan i stvarnost; zapisi potrošnje iz vodiča "
+       },
+       {
+        "t": "link",
+        "href": "/vodici/pracenje-potrosnje-po-popravci",
+        "c": [
+         {
+          "t": "text",
+          "v": "Praćenje potrošnje materijala po popravci"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " pomažu da se vidi gde je bilo ponovnog mešanja."
+       }
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "level": 2,
+     "id": "pitanja-i-odgovori",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pitanja i odgovori"
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "kako-grupisati-poslove-po-boji",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kako grupisati poslove po boji?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Prvo po vrsti materijala (vodeni ili rastvarački sistem), zatim po nijansi, pa unutar iste nijanse po vremenu kada su delovi spremni. Delovi iste nijanse lakiraju se zajedno kada su spremni u isto vreme; ne zadržavajte gotov deo dugo samo zbog grupisanja ako time kasni ceo posao."
+      }
+     ]
+    },
+    {
+     "t": "h",
+     "level": 3,
+     "id": "sta-raditi-dok-se-deo-susi",
+     "c": [
+      {
+       "t": "text",
+       "v": "Šta raditi dok se deo suši?"
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Pripremati sledeće delove van kabine: brušenje, čišćenje, maskiranje i utvrđivanje nijanse. Prašina od brušenja ne sme da dospe u kabinu ni u prostor gde se lakira, jer baslac među uzrocima prašine u laku navodi i usisavanje zaprljanog vazduha spolja, na primer fine prašine i ostataka od poliranja"
+      },
+      {
+       "t": "cite",
+       "id": "baslac-dust-particles"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "SV-0203",
@@ -141429,8 +143504,8 @@
    "glavnoPitanje": "Kada je boja u spreju dobar izbor za popravku, a kada je bolji materijal za pištolj?",
    "namera": "informativna",
    "dodatnaPitanja": [
-    "Može li sprejom ceo deo?",
-    "Kako se dobija sprej u nijansi mog automobila?"
+    "Može li se sprejom lakirati ceo deo?",
+    "Kako se dobija sprej u nijansi Vašeg automobila?"
    ],
    "poreklopitanja": {
     "tip": "pronadjeno-u-izvoru",
@@ -141552,8 +143627,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 629,
-   "otisak": "48cf14ef317259d733ba",
+   "reci": 634,
+   "otisak": "f5a02469c5ed77505953",
    "blocks": [
     {
      "t": "p",
@@ -141845,7 +143920,7 @@
       },
       {
        "t": "text",
-       "v": " Većina boja u spreju su 1K materijali, koji se suše isparavanjem rastvarača. 2K sprej daje otporniji sloj: za 2K High-Speed Clearcoat Spray Carsystem navodi visoku otpornost na vremenske uticaje, hemikalije i gorivo"
+       "v": " Opšte objašnjenje: obična boja u spreju je 1K materijal, koji se suši isparavanjem rastvarača. 2K sprej daje otporniji sloj: za 2K High-Speed Clearcoat Spray Carsystem navodi visoku otpornost na vremenske uticaje, hemikalije i gorivo"
       },
       {
        "t": "cite",
@@ -141990,11 +144065,11 @@
     {
      "t": "h",
      "level": 3,
-     "id": "moze-li-sprejom-ceo-deo",
+     "id": "moze-li-se-sprejom-lakirati-ceo-deo",
      "c": [
       {
        "t": "text",
-       "v": "Može li sprejom ceo deo?"
+       "v": "Može li se sprejom lakirati ceo deo?"
       }
      ]
     },
@@ -142010,11 +144085,11 @@
     {
      "t": "h",
      "level": 3,
-     "id": "kako-se-dobija-sprej-u-nijansi-mog-automobila",
+     "id": "kako-se-dobija-sprej-u-nijansi-vaseg-automobila",
      "c": [
       {
        "t": "text",
-       "v": "Kako se dobija sprej u nijansi mog automobila?"
+       "v": "Kako se dobija sprej u nijansi Vašeg automobila?"
       }
      ]
     },
@@ -142023,7 +144098,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Nijansa se određuje prema šifri boje vozila, a boja se puni u posebnu limenku. Cosmos Lac Prefilled Spray je napunjen rastvaračima i potisnim gasom, a boju za vozila dodaje stručno lice; postoji u 1K i 2K izvedbi"
+       "v": "Nijansa se određuje prema šifri boje vozila, a boja se puni u posebnu limenku. Cosmos Lac Prefilled Spray je napunjen rastvaračima i potisnim gasom, a rastvaračku boju za vozila dodaje stručno lice; postoji u 1K i 2K izvedbi"
       },
       {
        "t": "cite",
@@ -142248,15 +144323,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 672,
-   "otisak": "337eb077767c40e54be6",
+   "reci": 682,
+   "otisak": "1e42a82c05ce76455b2e",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Pre boje u spreju površina se opere, odmasti, izbrusi, ponovo odmasti i zaštiti se okolina; prajmer se nanosi kada podloga to traži, na primer goli metal ili plastika. Svi tehnički listovi sprejeva iz našeg programa koje smo pregledali traže površinu bez prašine, rđe i masnoće; Cosmos Lac uz to navodi da se zaštiti sve što ne treba da bude obojeno i da se sprej prvo proba na probnoj površini"
+       "v": "Pre boje u spreju površina se opere, odmasti, izbrusi, ponovo odmasti i zaštiti se okolina; prajmer se nanosi kada podloga to traži, na primer goli metal ili plastika. Tehnički listovi sprejeva traže čistu površinu bez masnoće. Za Cosmos Lac RAL list traži da se uklone prašina, rđa i ulje, da se zaštiti sve što ne treba da bude obojeno i da se sprej prvo proba na probnoj površini"
       },
       {
        "t": "cite",
@@ -142733,13 +144808,13 @@
         "c": [
          {
           "t": "text",
-          "v": "Brušenje bez maskiranja."
+          "v": "Prašina zaostala na maski."
          }
         ]
        },
        {
         "t": "text",
-        "v": " Prašina od brušenja se lepi za maskirane delove i kasnije pada u svežu boju; maskiranje se proverava posle čišćenja."
+        "v": " Opšte objašnjenje: prašina od brušenja ostaje na traci i papiru za maskiranje i kasnije može da padne u svežu boju, zato se maskirani deo očisti i proveri pre nanošenja."
        }
       ]
      ]
@@ -142848,7 +144923,7 @@
     "pocetnik",
     "hobista"
    ],
-   "glavnoPitanje": "Kako se pravilno nanosi boja iz spreja da ne bi curila i ostala fleka?",
+   "glavnoPitanje": "Kako se pravilno nanosi boja iz spreja: koliko se mućka, na kom rastojanju i u koliko slojeva?",
    "namera": "postupak",
    "dodatnaPitanja": [
     "Koliko dugo se mućka?",
@@ -143011,8 +145086,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 616,
-   "otisak": "d6d137fe26f637248950",
+   "reci": 629,
+   "otisak": "79d375698ab6d547fba9",
    "blocks": [
     {
      "t": "p",
@@ -143063,7 +145138,15 @@
       },
       {
        "t": "text",
-       "v": ". Pigmenti se tokom stajanja talože, pa nepromućkan sprej daje neujednačenu boju."
+       "v": ". Pigmenti moraju dobro da se izmešaju, jer nepromućkan sprej daje neujednačenu pokrivnost i curenje"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-blog-shake"
+      },
+      {
+       "t": "text",
+       "v": "."
       }
      ]
     },
@@ -143534,11 +145617,15 @@
      "c": [
       {
        "t": "text",
-       "v": "Koliko navodi list. U listovima koje smo pregledali to je najmanje 2–3 min"
+       "v": "Koliko navodi list. U listovima iz tabele to je 2–3 min"
       },
       {
        "t": "cite",
        "id": "cosmos-easy-max-tds"
+      },
+      {
+       "t": "text",
+       "v": " ili najmanje 2 min"
       },
       {
        "t": "cite",
@@ -143582,7 +145669,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Kod većine sprejeva iz tabele 25–30 cm"
+       "v": "Za Cosmos Lac RAL 25–30 cm"
       },
       {
        "t": "cite",
@@ -143590,7 +145677,27 @@
       },
       {
        "t": "text",
-       "v": ", ali sprejevi sa posebnim kapicama i 2K sprejevi traže manje rastojanje. Proverite list ili ambalažu."
+       "v": ", dok sprejevi sa posebnim kapicama iz tabele traže 4–10 cm"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-easy-max-tds"
+      },
+      {
+       "t": "cite",
+       "id": "cosmos-spray-bike-tds"
+      },
+      {
+       "t": "text",
+       "v": ", a Carsystem 2K High-Speed Clearcoat Spray 15–20 cm"
+      },
+      {
+       "t": "cite",
+       "id": "cs-2k-hs-spray-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Proverite list ili ambalažu Vašeg spreja."
       }
      ]
     },
@@ -143767,8 +145874,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 571,
-   "otisak": "8026b949e0800e8ed931",
+   "reci": 600,
+   "otisak": "ebf44dd6a2f0820cc4e9",
    "blocks": [
     {
      "t": "p",
@@ -143912,7 +146019,7 @@
      "c": [
       {
        "t": "text",
-       "v": "Proizvođači iz našeg programa navode isti princip: limenka treba da bude na sobnoj temperaturi, a do nje treba da dođe postepeno."
+       "v": "Proizvođači čiji su listovi navedeni u tabeli opisuju isti princip: limenka treba da bude na sobnoj temperaturi, a do nje treba da dođe postepeno."
       }
      ]
     },
@@ -144151,7 +146258,15 @@
       },
       {
        "t": "text",
-       "v": ". Na radijatoru ili pored grejalice temperatura limenke se ne može kontrolisati, a zagrevanje je neravnomerno. Proizvođači koje smo pregledali ne navode ni zagrevanje u vodi; navode samo postepeno dovođenje na sobnu temperaturu."
+       "v": ". Opšte objašnjenje: na radijatoru ili pored grejalice temperatura limenke se ne može kontrolisati, a zagrevanje je neravnomerno. Ni potapanje u toplu vodu nije zamena: nijedan od navedenih listova ga ne predviđa, a Carsystem traži da proizvod do temperature nanošenja dođe prirodno, bez naglog zagrevanja"
+      },
+      {
+       "t": "cite",
+       "id": "cs-plastic-primer-tds"
+      },
+      {
+       "t": "text",
+       "v": ". Limenka se zato samo unese u toplu prostoriju i ostavi da se postepeno ugreje."
       }
      ]
     },

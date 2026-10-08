@@ -25,6 +25,7 @@ brendovi:
   - rm
   - baslac
 proizvodi:
+  - carsystem-2k-clear-voc-matt
   - c-2a93-mattop
   - baslac-40-620-2k-clear-mat-voc
 povezani:
@@ -68,11 +69,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem 2K Clear VOC Matt/Silkmatt V01 07/2021 (ne može se polirati), R-M C 2A93 MatTOP+ 07/2026 (prašina se ne uklanja poliranjem, pažljiv rad, uputstva proizvođača vozila) i baslac 40-620 11/2024 (utapanje nije moguće, lakiranje celog dela obavezno, probni lim), C-Wax C-80 V01 i Nano Carnauba Wax v.01; sve se poklapa. Ispravljen odgovor o trunju (baslac ne navodi „isti recept“, nego obavezno lakiranje celog dela i probni lim), dodat proizvod Carsystem 2K Clear VOC Matt. Procena nege: suština (mat se ne polira, popravka = ceo deo) ima izvor za sva tri laka; deo o nezi daje samo zabrane izvedene iz tog navoda i opšta pravila, jasno označene, bez preporuke proizvoda ili postupka, uz upućivanje na proizvođača vozila i sredstva, pa stručna potvrda nije potrebna. R-M stranica o nezi laka je iza prijave i nije korišćena."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -96,11 +98,11 @@ Zbog toga i R-M i baslac naglašavaju veoma pažljiv rad pri čišćenju i nano�
 
 ## Čišćenje i nega mat površine
 
-Tehnički listovi mat lakova iz našeg programa ne daju program nege, pa ovde navodimo samo ono što iz njih proizlazi i opšta pravila:
+Tehnički listovi mat lakova iz našeg programa ne daju program nege. Zato ovde stoji samo ono što proizlazi iz njihovog navoda da poliranje menja stepen sjaja, uz opšta pravila koja nisu navod proizvođača:
 
-- **Bez abrazivnih sredstava.** Paste za poliranje, abrazivni čistači i „polir“ sredstva menjaju stepen sjaja, isto kao poliranje mašinom.
+- **Bez abrazivnih sredstava.** Izvedeno iz tehničkih listova: ako poliranje menja stepen sjaja, isto se može očekivati od pasta za poliranje, abrazivnih čistača i „polir“ sredstava i kada se nanose ručno.
 - **Bez trljanja i jakog pritiska.** Opšte objašnjenje: snažno trljanje na jednom mestu može da izravna površinu i napravi sjajniju fleku. Nečistoća se omekša vodom i sredstvom za pranje, pa se skida bez pritiska.
-- **Ostatke ne ostavljajte dugo.** Insekte, ptičji izmet i smolu treba ukloniti što pre, jer kasnije traže jače trljanje. Postupak sa takvim ostacima opisuje vodič [Uklanjanje smole, katrana i insekata](/vodici/uklanjanje-smole-i-katrana).
+- **Ostatke ne ostavljajte dugo.** Opšte pravilo: insekte, ptičji izmet i smolu treba ukloniti što pre, jer kasnije traže jače trljanje. Postupak sa takvim ostacima opisuje vodič [Uklanjanje smole, katrana i insekata](/vodici/uklanjanje-smole-i-katrana).
 - **Uputstvo proizvođača vozila.** Ako za fabrički mat lak postoji uputstvo za negu proizvođača vozila, ono ima prednost nad opštim savetima. I za popravku R-M uz C 2A93 navodi da se, pored tehničkog lista, uvek poštuju uputstva proizvođača vozila za popravku[^rm-c2a93-tds].
 
 Kada novi mat lak sme na prvo pranje, zavisi od otvrdnjavanja laka, kao i kod sjajnog; vidi [Kada smete da operete automobil posle lakiranja](/vodici/kada-oprati-auto-posle-lakiranja).
@@ -113,7 +115,7 @@ Tekst se oslanja na tehničke listove mat lakova navedenih verzija i na opšte o
 
 ### Šta se radi sa trunjem ili ogrebotinom na mat laku?
 
-Ne polira se. Sitna, jedva vidljiva greška se obično ostavlja, jer bi pokušaj uklanjanja napravio vidljiviju sjajnu mrlju. Ako greška mora da se ukloni, deo se brusi i ponovo laki celom površinom, istim receptom i stepenom sjaja, kako navodi baslac za 40-620[^baslac-40-620-tds].
+Ne polira se. Da li se sitna, jedva vidljiva greška ostavlja, procenjuje se u radionici; pokušaj lokalnog uklanjanja ostavio bi vidljiviju sjajnu mrlju. Ako greška mora da se ukloni, lakira se ceo deo: baslac za 40-620 navodi da je lakiranje celog dela obavezno i preporučuje probni lim pre popravke, da se stepen sjaja uporedi sa delom koji se popravlja[^baslac-40-620-tds].
 
 ### Sme li se na mat lak naneti vosak?
 

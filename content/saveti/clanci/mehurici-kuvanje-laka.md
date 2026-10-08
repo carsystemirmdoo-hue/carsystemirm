@@ -87,11 +87,13 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
-  potrebna: false
-  status: nije-potrebno
+  potrebna: true
+  razlog: "Izvori su protivrečni: baslac stranica o grešci (sve jezičke verzije) kao uzrok navodi predugo odzračivanje pre sušenja, što se ne slaže sa prevencijom na istoj stranici ni sa Glasurit biltenom. Po uredničkom pravilu tema sa protivrečnim izvorima čeka stručnu potvrdu."
+  status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Solvent boil (i verzije fr, es, pt, pl), R-M Solvent boils i Pinhole marks (javni opis), Glasurit bilten GENBUL4168-E i odeljak o HVLP, 40-100, C 2P42, CC.26 i Speed Plus (V06); vrednosti odzračivanja se poklapaju. baslac stranica (sve jezičke verzije) kao uzrok navodi predugo odzračivanje pre sušenja u kabini/IR, što je u suprotnosti sa prevencijom iste stranice i sa Glasurit biltenom; tekst sada to izričito kaže i upućuje na vreme iz tehničkog lista, bez tumačenja kao saveta. Dodati drugi načini nanošenja za 40-100 i C 2P42, opšta objašnjenja označena."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

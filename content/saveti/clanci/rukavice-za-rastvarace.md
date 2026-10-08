@@ -107,16 +107,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Bezbednosni listovi učvršćivača (R-M H 2P15, Carsystem Power PU Bond B) kao primer navode butil-gumu debljine 0,5 mm, a tehnički listovi rukavica iz našeg programa ne navode vreme proboja za te materijale. Da li su i koliko dugo jednokratne nitrilne rukavice iz programa dovoljne za konkretan rad, mora da potvrdi proizvođač rukavica ili lice za bezbednost i zdravlje na radu."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SDS R-M C 2A40 i H 2P15 (4.0, 15.05.2026), baslac 50-20 (3.0, 31.03.2026), Carsystem Power Mix 2.0 Transparent B (1.1, 30.04.2026), TDS Nitril Hand Premium Schwarz (V02 08/2023), Super Nitril Hand I (V01 01/2025), CS Latex gloves (V01 06/2021), Carsystem katalog str. 192, stranice C.A.R.FIT rukavica i OSHwiki Isocyanates; materijali, debljine, indeksi 1/2/6 i vremena proboja se poklapaju. Ispravke: tvrdnje o menjanju rukavica vezane za izvore (zaštita od prskanja, zamena pri oštećenju ili proboju), uklonjen nepotkrepljen savet o „debljoj rukavici“, za C.A.R.FIT Palm Textured navedeno da stranica ne navodi EN ISO 374-1, kod lateks rukavica dodat EN 374-1:1994, uklonjen nepovezan link o skladištenju. Stručna potvrda ostaje opravdana: vreme proboja rukavica iz programa za konkretne materijale nije navedeno."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Rukavica štiti samo ako je od materijala koji izabrani hemijski proizvod ne probija u vremenu rada. Bezbednosni listovi iz našeg programa ne navode isto za sve proizvode: za bezbojni lak R-M C 2A40 i učvršćivač baslac 50-20 kao primer daju nitrilne rukavice debljine 0,35 mm[^rm-c2a40-sds][^baslac-50-20-sds], a za učvršćivač R-M H 2P15 butil-gumu debljine 0,5 mm[^rm-h2p15-sds]. Tanke jednokratne rukavice su zaštita od kapi i prskanja, ne od dužeg potapanja, i menjaju se čim se zaprljaju ili oštete.
+Rukavica štiti samo ako je od materijala koji izabrani hemijski proizvod ne probija u vremenu rada. Bezbednosni listovi iz našeg programa ne navode isto za sve proizvode: za bezbojni lak R-M C 2A40 i učvršćivač baslac 50-20 kao primer daju nitrilne rukavice debljine 0,35 mm[^rm-c2a40-sds][^baslac-50-20-sds], a za učvršćivač R-M H 2P15 butil-gumu debljine 0,5 mm[^rm-h2p15-sds]. EU-OSHA za izocijanate navodi da hemijski otporne rukavice služe kao zaštita od prskanja[^oshwiki-isocyanates], a bezbednosni listovi traže da se rukavica zameni čim pokaže znake oštećenja ili proboja hemikalije[^rm-h2p15-sds].
 
 ## Šta bezbednosni list kaže o rukavicama
 
@@ -139,8 +140,8 @@ U programu su jednokratne i višekratne rukavice. Za njih proizvođači navode:
 
 - **[Carsystem Nitril Hand Premium black](/proizvodi/carsystem-nitril-hand-premium-black):** jednokratne nitrilne rukavice za pripremu, mešanje i prskanje, prema EN ISO 374-1:2016 (tip B), EN 374-4 i EN ISO 374-5[^cs-nitril-premium-tds]; katalog navodi kratkotrajnu otpornost na rastvarače[^cs-katalog-2026].
 - **[Carsystem Super Nitril Hand I](/proizvodi/carsystem-super-nitril-hand-i):** nitrilne rukavice za zaštitu od hemikalija, dužine 30 cm, sa postavom od pamučnog velura, prema EN ISO 374-1 i EN 388[^cs-super-nitril-tds].
-- **[Carsystem Latex gloves](/proizvodi/carsystem-latex-gloves):** rukavice od prirodnog lateksa, sa napomenom o kratkotrajnoj otpornosti na rastvarače[^cs-latex-tds].
-- **[C.A.R.FIT Nitrile Gloves Palm Textured](/proizvodi/carfit-nitrile-gloves-palm-textured):** C.A.R.FIT navodi veću otpornost na hemikalije nego kod lateksa iste debljine i standard EN 455[^carfit-nitrile-palm].
+- **[Carsystem Latex gloves](/proizvodi/carsystem-latex-gloves):** rukavice od prirodnog lateksa, prema EN 455 i EN 374-1:1994, sa napomenom o kratkotrajnoj otpornosti na rastvarače[^cs-latex-tds].
+- **[C.A.R.FIT Nitrile Gloves Palm Textured](/proizvodi/carfit-nitrile-gloves-palm-textured):** C.A.R.FIT navodi veću otpornost na hemikalije nego kod lateksa iste debljine i standard EN 455; stranica ne navodi standard za zaštitu od hemikalija EN ISO 374-1[^carfit-nitrile-palm].
 - **[C.A.R.FIT Professional Nitrile Gloves](/proizvodi/carfit-professional-nitrile-gloves):** prema proizvođaču, otporne na ulje, mast, lužine i mnoge druge hemikalije[^carfit-nitrile-professional].
 
 Tehnički listovi ovih rukavica koje smo otvorili ne navode vreme proboja za konkretne razređivače ili učvršćivače. Zato ne tvrdimo koja od njih odgovara kom proizvodu. Za učvršćivač kome bezbednosni list traži butil-gumu, a posao uključuje duži dodir, potrebna je rukavica za koju proizvođač potvrđuje odgovarajuće vreme proboja. Pitajte proizvođača rukavica ili [našu tehničku podršku](/kontakt).
@@ -152,19 +153,19 @@ EU-OSHA za izocijanate navodi da hemijski otporne rukavice služe kao zaštita o
 Bezbednosni listovi zato traže da se rukavica baci i zameni čim pokaže znake oštećenja, promene ili proboja hemikalije[^rm-h2p15-sds]. Urednička primena tog pravila u radu:
 
 - rukavica se menja odmah posle polivanja, a ne na kraju posla;
-- za pranje pištolja i rad sa razređivačem bira se deblja rukavica nego za maskiranje;
+- za pranje pištolja i duži rad sa razređivačem rukavica se bira prema odeljku 8 lista tog razređivača, a ne po tome šta je pri ruci;
 - skida se tako da spoljna strana ne dodirne kožu, i baca se kao zaprljan otpad;
 - ruke se peru pre pauze i na kraju rada[^rm-h2p15-sds].
 
 ## Ograničenja
 
-Ovaj tekst ne određuje rukavicu za Vaš materijal. To rade odeljak 8 bezbednosnog lista i podaci proizvođača rukavica o vremenu proboja. Neke rukavice mogu da sadrže alergene: Carsystem za svoje nitrilne rukavice navodi da u slučaju iritacije ili alergijske reakcije treba potražiti lekarski savet[^cs-nitril-premium-tds]. Isto važi ako se posle rada sa 2K materijalima pojave promene na koži; vidi odeljak 4 bezbednosnog lista.
+Ovaj tekst ne određuje rukavicu za Vaš materijal. To rade odeljak 8 bezbednosnog lista i podaci proizvođača rukavica o vremenu proboja. Neke rukavice mogu da sadrže alergene: Carsystem za svoje nitrilne rukavice navodi da u slučaju iritacije ili alergijske reakcije treba potražiti lekarski savet[^cs-nitril-premium-tds]. Ako se posle rada sa 2K materijalima pojave promene na koži, postupite prema odeljku 4 bezbednosnog lista materijala i javite se lekaru medicine rada.
 
 ## Pitanja i odgovori
 
 ### Zašto tanke rukavice treba menjati često?
 
-Zato što su namenjene zaštiti od kapi i kratkog dodira, a ne dužem kontaktu[^oshwiki-isocyanates]. Kada se natope ili oštete, menjaju se odmah[^rm-h2p15-sds].
+Zato što hemijski otporne rukavice, prema EU-OSHA, služe kao zaštita od prskanja, a ne kao glavna prepreka pri neposrednom dodiru sa materijalom[^oshwiki-isocyanates]. Čim pokažu znake oštećenja ili proboja, menjaju se[^rm-h2p15-sds].
 
 ### Da li su lateks rukavice dobre za rad sa rastvaračima?
 
@@ -172,4 +173,4 @@ Carsystem za svoje lateks rukavice navodi samo kratkotrajnu otpornost na rastvar
 
 ### Šta znači oznaka EN ISO 374 na rukavici?
 
-EN ISO 374-1 je standard za rukavice za zaštitu od hemikalija, a bezbednosni listovi iz našeg programa ga navode kao zahtev[^rm-h2p15-sds]. Indeks zaštite iz tog standarda govori o vremenu do proboja, kako je opisano gore[^rm-h2p15-sds]. Kako se skladište zapaljivi materijali sa kojima radite, opisuje vodič [Skladištenje zapaljivih materijala u radionici](/vodici/skladistenje-zapaljivih-materijala).
+EN ISO 374-1 je standard za rukavice za zaštitu od hemikalija, a bezbednosni listovi iz našeg programa ga navode kao zahtev[^rm-h2p15-sds]. Indeks zaštite iz tog standarda govori o vremenu do proboja, kako je opisano gore[^rm-h2p15-sds].

@@ -69,7 +69,7 @@ izvori:
   - id: baslac-50-420-sds-hr
     naziv: "baslac, Sigurnosno-tehnički list 50-420 0,5L VOC Hardener Normal (HR)"
     url: https://msds.baslac.com/files/50400597_MSDS_HR_HR.PDF
-    verzija: "Verzija 5.0"
+    verzija: "Verzija 5.0, datum revizije 15.05.2026"
     pristupljeno: 2026-10-08
     tip: bezbednosni-list
     napomena: "Odeljak 2: H317, H332, H335, H336, diizocijanati među sastojcima na etiketi; odeljak 15: ograničenja iz Priloga XVII, stavke 3 i 75."
@@ -85,16 +85,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Nije provereno da li je i kako stavka 74 Priloga XVII REACH (obavezna obuka za diizocijanate) preneta u propise Srbije; za to i za izbor zaštite disanja u konkretnoj radionici potrebna je potvrda lica za bezbednost i zdravlje na radu. Zaključak o tome koji proizvodi iz našeg programa podležu obuci zasnovan je samo na odeljku 15 nekoliko otvorenih bezbednosnih listova."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: Uredba (EU) 2020/1149 otvorena preko Kancelarije za publikacije EU (SL L 252, 4. 8. 2020; stavka 74: 24. 8. 2023, prag 0,1 % pojedinačno i ukupno, obuka pre upotrebe, stručnjak za BZR, nivoi obuke, izjava na ambalaži, dokumentovanje i obnova najmanje svakih pet godina) — poklapa se; otvoreni SDS R-M H 2P15 (EN i HR, 4.0, 15.05.2026), baslac 50-420 HR (5.0, 15.05.2026; odeljak 15: stavke 3 i 75, bez 74), Carsystem Power Mix 2.0 Transparent B (1.1, 30.04.2026; izjava o obuci u odeljku 2, stavka 74 u odeljku 15, H334), EU-OSHA OSHwiki Isocyanates (30. 9. 2024) i stranica Vosschemie. Ispravke: „više od 0,1 %“ → „0,1 % ili više“, „u većini“ → „u mnogim“ (izvor kaže many), nivoi obuke za prskanje na otvorenom navedeni kao sva tri nivoa, simptomi u ograničenjima svedeni na one iz odeljka 11 lista. Stručna potvrda ostaje opravdana: prenos stavke 74 u propise Srbije nije proveren, a izbor zaštite disanja za konkretnu radionicu traži lice za BZR."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Izocijanati su reaktivne materije u većini 2K učvršćivača. Opasni su jer mogu da izazovu preosetljivost disajnih puteva i kože: kod osobe koja je postala preosetljiva, kasnije i vrlo male koncentracije mogu da izazovu simptome astme[^oshwiki-isocyanates]. Radnik se štiti redom mera: prvo kabina i provetravanje, zatim zaštita disanja i kože prema bezbednosnom listu. U EU od 24. 8. 2023. za profesionalnu upotrebu proizvoda sa više od 0,1 % diizocijanata važi i obavezna obuka[^eu-2020-1149].
+Izocijanati su reaktivne materije u mnogim 2K učvršćivačima. Opasni su jer mogu da izazovu preosetljivost disajnih puteva i kože: kod osobe koja je postala preosetljiva, kasnije i vrlo male koncentracije mogu da izazovu simptome astme[^oshwiki-isocyanates]. Radnik se štiti redom mera: prvo kabina i provetravanje, zatim zaštita disanja i kože prema bezbednosnom listu. U EU od 24. 8. 2023. za industrijsku i profesionalnu upotrebu proizvoda sa 0,1 % ili više diizocijanata važi i obavezna obuka[^eu-2020-1149].
 
 ## Zašto su izocijanati opasni
 
@@ -132,7 +133,7 @@ Uredbom Komisije (EU) 2020/1149 u Prilog XVII Uredbe REACH dodata je stavka 74. 
 
 - **Ko se obučava:** svaki radnik ili samozaposleni koji rukuje takvim proizvodima, kao i onaj ko nadzire te poslove.
 - **Ko drži obuku:** stručnjak za bezbednost i zdravlje na radu sa odgovarajućim stručnim osposobljavanjem.
-- **Nivo obuke zavisi od posla:** prskanje u ventilisanoj kabini traži opšti i srednji nivo, a prskanje na otvorenom ili uz samo prirodnu ventilaciju i napredni nivo.
+- **Nivo obuke zavisi od posla:** prskanje u ventilisanoj kabini traži opšti i srednji nivo, a prskanje na otvorenom, uz ograničenu ili samo prirodnu ventilaciju, sva tri nivoa: opšti, srednji i napredni.
 - **Ambalaža:** proizvod na koji se ograničenje odnosi nosi izjavu da je od 24. 8. 2023. pre industrijske ili profesionalne upotrebe potrebna odgovarajuća obuka.
 - **Trajanje:** poslodavac dokumentuje obuku i obnavlja je najmanje svakih pet godina.
 
@@ -146,7 +147,7 @@ Kod učvršćivača za bezbojni lak R-M H 2P15 i baslac 50-420, u hrvatskim verz
 
 ## Ograničenja
 
-Uredba 2020/1149 je propis EU. Da li i kako je ova obaveza preneta u propise Srbije, za ovaj tekst nije provereno, pa obaveze radionice proverite prema važećim propisima i sa licem za bezbednost i zdravlje na radu. Tekst ne daje medicinske savete: ako tokom ili posle rada primetite kašalj, gušenje, stezanje u grudima ili promene na koži, prekinite izlaganje, postupite prema odeljku 4 bezbednosnog lista i javite se lekaru medicine rada.
+Uredba 2020/1149 je propis EU. Da li i kako je ova obaveza preneta u propise Srbije, za ovaj tekst nije provereno, pa obaveze radionice proverite prema važećim propisima i sa licem za bezbednost i zdravlje na radu. Tekst ne daje medicinske savete. Bezbednosni list H 2P15 u odeljku 11 kao moguće posledice navodi stanje slično astmi, zviždanje i stezanje u grudima[^rm-h2p15-sds]. Ako tokom ili posle rada primetite tegobe sa disanjem ili promene na koži, prekinite rad sa materijalom, postupite prema odeljku 4 bezbednosnog lista i javite se lekaru medicine rada.
 
 ## Pitanja i odgovori
 

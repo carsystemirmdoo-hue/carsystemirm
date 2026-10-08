@@ -91,11 +91,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Orange peel, R-M Orange peel (javni opis), SATA Practical advice (redosled podešavanja, istrošen komplet dizne), uputstvo SATAjet X 5500 (pritisak pri potpuno povučenom okidaču, regulacija na razvodu najmanje tačna), C 2A40, 40-100, CC.26 (17–19 s), baslac Spray guns (01/2026) i TempChart VOC; vrednosti se poklapaju. Ispravljeno: zaključak o rasporedu teksture preformulisan u proveru, za 40-100 dodat drugi način nanošenja (½ + 1), opšte pravilo o brušenju označeno kao opšte."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---

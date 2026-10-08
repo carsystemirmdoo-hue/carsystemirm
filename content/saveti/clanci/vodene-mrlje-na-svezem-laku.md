@@ -48,11 +48,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni PPG Water spotting (keš, potvrđen; opis na stranici je pogrešno preuzet iz plikova, pa ga tekst ne koristi), R-M Spotting i After care (javni deo); navodi se poklapaju. Ispravljeno: uvod ublažen („mogu da nastanu“), znaci označeni kao urednički opis, „u praksi“ i upozorenje o šteti označeni kao opšte objašnjenje."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---

@@ -8,7 +8,7 @@ Generiše `npm run saveti:plan`. Ne menjati ručno; izmene idu kroz `content/sav
 - Termina u kalendaru: 184
 - Prvi termin: 2026-11-02T09:00:00+01:00 — SV-0005
 - Poslednji termin: 2028-05-04T09:00:00+02:00 — SV-0171
-- Stanje izračunato za trenutak: 2026-10-08T12:47:11+02:00
+- Stanje izračunato za trenutak: 2026-10-08T12:56:47+02:00
 
 Napomena: kolona „stanje“ je ishod kapije u tom trenutku. „ceka-odobrenje“ znači da tekst postoji i proveren je, ali ga imenovana osoba još nije odobrila; takav termin se pri dolasku preskače, a planer članak premešta u sledeći slobodan termin.
 

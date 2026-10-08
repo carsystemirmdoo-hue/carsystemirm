@@ -7641,10 +7641,11 @@
     },
     {
      "id": "rs-pravilnik-hemikalije",
-     "naziv": "Pravilnik o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija („Sl. glasnik RS“, br. 90/2013 … 9/2020), tekst objavljen na sajtu sanitarne inspekcije AP Vojvodine",
-     "url": "https://sanitarnaapv.vojvodina.gov.rs/9-6-pravilnik-o-ogranicenjima-i-zabranama-proizvodnje-stavljanja-u-promet-i-koriscenja-hemikalija-sl-glasnik-rs-br-90-2013-25-2015-2-2016-44-2017-36-2018-i-9-2020",
+     "naziv": "Pravilnik o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija („Službeni glasnik RS“, br. 90/2013, 25/2015, 2/2016, 44/2017, 36/2018, 9/2020, 57/2022, 29/2024, 90/2025 i 82/2026)",
+     "url": "https://pravno-informacioni-sistem.rs/eli/rep/sgrs/ministarstva/pravilnik/2013/90/1/reg",
      "pristupljeno": "2026-10-08",
-     "tip": "propis"
+     "tip": "propis",
+     "napomena": "Prečišćen tekst u Pravno-informacionom sistemu RS; čl. 10 (Lista B u Prilogu 3), čl. 12 (izuzetak za aerosole), čl. 13 (podaci na etiketi). Prema napomeni izdavača, izmene 57/2022, 29/2024, 90/2025 i 82/2026 menjaju Prilog 1 i Prilog 2, ne odredbe o VOC. Prilog 3 nije prikazan u tekstu na portalu."
     },
     {
      "id": "rm-c2a40-tds",
@@ -7712,8 +7713,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 912,
-   "otisak": "6c024b681b01f131b86f",
+   "reci": 913,
+   "otisak": "aa75a1f6f213e6a13f94",
    "blocks": [
     {
      "t": "p",
@@ -8406,7 +8407,7 @@
      "c": [
       {
        "t": "text",
-       "v": "U Srbiji je ograničenje sadržaja VOC u sredstvima i premazima za reparaciju drumskih vozila uređeno Pravilnikom o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija. Prema tekstu sa izmenama zaključno sa „Sl. glasnikom RS“ br. 9/2020, granične vrednosti su date u Listi B u Prilogu 3, a etiketa mora da navede potkategoriju, graničnu vrednost i ukupan sadržaj VOC u smeši pripremljenoj za korišćenje"
+       "v": "U Srbiji je ograničenje sadržaja VOC u sredstvima i premazima za reparaciju drumskih vozila uređeno Pravilnikom o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija. Prema prečišćenom tekstu sa izmenama zaključno sa „Službenim glasnikom RS“ br. 82/2026, granične vrednosti su date u Listi B u Prilogu 3, a etiketa mora da navede potkategoriju, graničnu vrednost i ukupan sadržaj VOC u smeši pripremljenoj za korišćenje"
       },
       {
        "t": "cite",

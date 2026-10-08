@@ -42,10 +42,11 @@ izvori:
     pristupljeno: 2026-10-08
     tip: propis
   - id: rs-pravilnik-hemikalije
-    naziv: "Pravilnik o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija („Sl. glasnik RS“, br. 90/2013 … 9/2020), tekst objavljen na sajtu sanitarne inspekcije AP Vojvodine"
-    url: https://sanitarnaapv.vojvodina.gov.rs/9-6-pravilnik-o-ogranicenjima-i-zabranama-proizvodnje-stavljanja-u-promet-i-koriscenja-hemikalija-sl-glasnik-rs-br-90-2013-25-2015-2-2016-44-2017-36-2018-i-9-2020
+    naziv: "Pravilnik o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija („Službeni glasnik RS“, br. 90/2013, 25/2015, 2/2016, 44/2017, 36/2018, 9/2020, 57/2022, 29/2024, 90/2025 i 82/2026)"
+    url: https://pravno-informacioni-sistem.rs/eli/rep/sgrs/ministarstva/pravilnik/2013/90/1/reg
     pristupljeno: 2026-10-08
     tip: propis
+    napomena: "Prečišćen tekst u Pravno-informacionom sistemu RS; čl. 10 (Lista B u Prilogu 3), čl. 12 (izuzetak za aerosole), čl. 13 (podaci na etiketi). Prema napomeni izdavača, izmene 57/2022, 29/2024, 90/2025 i 82/2026 menjaju Prilog 1 i Prilog 2, ne odredbe o VOC. Prilog 3 nije prikazan u tekstu na portalu."
   - id: rm-c2a40-tds
     naziv: "R-M, Technical Information C 2A40 AirTOP, Clear coat, air drying"
     dokument: /documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf
@@ -84,7 +85,7 @@ status:
   pisanje: napisano
   tehnickaProvera: provereno
   jezickaProvera: provereno
-napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: tekst Direktive 2004/42/EZ (legislation.gov.uk, sa izmenama; čl. 1–4, Prilog I i II deo B), tekst srpskog Pravilnika (sanitarna inspekcija APV; čl. 10–13, bez vrednosti iz Priloga 3, brojke za Srbiju se ne navode), tehnički listovi C 2A40 07/2026, 40-100 06/2026, 21-11 i 70-45 06/2023, Multi Green V08; sve granice i oznake se poklapaju; ispravljeno: etiketa navodi najveći (ne stvarni) sadržaj, netačna tvrdnja o podeli vodene/rastvaračke za reparaturu (važi samo deo A) zamenjena, aerosoli dodati u potkategoriju e prema Direktivi uz razliku prema srpskom pravilniku, naziv izvora precizira da je tekst sa izmenama."
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: tekst Direktive 2004/42/EZ (legislation.gov.uk, sa izmenama; čl. 1–4, Prilog I i II deo B), tekst srpskog Pravilnika (sanitarna inspekcija APV; čl. 10–13, bez vrednosti iz Priloga 3, brojke za Srbiju se ne navode; dopunska provera istog dana u Pravno-informacionom sistemu: prečišćen tekst ima i izmene 57/2022, 29/2024, 90/2025 i 82/2026, koje ne menjaju čl. 10–13 ni Prilog 3, pa je izvor prebačen na PIS, a broj poslednje izmene u tekstu ispravljen sa 9/2020 na 82/2026), tehnički listovi C 2A40 07/2026, 40-100 06/2026, 21-11 i 70-45 06/2023, Multi Green V08; sve granice i oznake se poklapaju; ispravljeno: etiketa navodi najveći (ne stvarni) sadržaj, netačna tvrdnja o podeli vodene/rastvaračke za reparaturu (važi samo deo A) zamenjena, aerosoli dodati u potkategoriju e prema Direktivi uz razliku prema srpskom pravilniku, naziv izvora precizira da je tekst sa izmenama."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -143,7 +144,7 @@ Kod R-M i baslac tehničkih listova VOC red je obično u odeljku „Safety Advic
 
 ## Propisi u Srbiji
 
-U Srbiji je ograničenje sadržaja VOC u sredstvima i premazima za reparaciju drumskih vozila uređeno Pravilnikom o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija. Prema tekstu sa izmenama zaključno sa „Sl. glasnikom RS“ br. 9/2020, granične vrednosti su date u Listi B u Prilogu 3, a etiketa mora da navede potkategoriju, graničnu vrednost i ukupan sadržaj VOC u smeši pripremljenoj za korišćenje[^rs-pravilnik-hemikalije]. Vrednosti iz Priloga 3 nismo preneli jer prilog nije bio dostupan u tekstu koji smo otvorili. Važeću verziju propisa i obaveze Vaše radionice proverite u Pravno-informacionom sistemu Republike Srbije ili kod nadležnog organa.
+U Srbiji je ograničenje sadržaja VOC u sredstvima i premazima za reparaciju drumskih vozila uređeno Pravilnikom o ograničenjima i zabranama proizvodnje, stavljanja u promet i korišćenja hemikalija. Prema prečišćenom tekstu sa izmenama zaključno sa „Službenim glasnikom RS“ br. 82/2026, granične vrednosti su date u Listi B u Prilogu 3, a etiketa mora da navede potkategoriju, graničnu vrednost i ukupan sadržaj VOC u smeši pripremljenoj za korišćenje[^rs-pravilnik-hemikalije]. Vrednosti iz Priloga 3 nismo preneli jer prilog nije bio dostupan u tekstu koji smo otvorili. Važeću verziju propisa i obaveze Vaše radionice proverite u Pravno-informacionom sistemu Republike Srbije ili kod nadležnog organa.
 
 ## Pitanja i odgovori
 
